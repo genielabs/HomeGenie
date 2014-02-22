@@ -16,6 +16,11 @@ HomeGenie_VS10/HomeGenie_VS10.sln
 **Windows, Mac, Linux and Raspberry Pi**:
 http://homegenie.it/download.php
 
+## Related projects
+
+- http://github.com/genielabs/HomeGenie-Android
+- http://github.com/genielabs/HomeGenie-WindowsPhone
+
 ===============
 
 ### License Information
