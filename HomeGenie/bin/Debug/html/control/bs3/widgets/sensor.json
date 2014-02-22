@@ -1,0 +1,53 @@
+﻿[{
+    Name: "Generic Sensor",
+    Author: "Generoso Martello",
+    Version: "2013-09-09",
+    //
+    GroupName : '',
+    Context : null,
+    UiElement : null,
+    Initialized : false,
+    //
+    RenderView: function()
+    {
+        var _this = this;
+        var module = this.Context;
+        //
+        var field_title = this.UiElement.find('[data-hg-uifield=name]');
+        var image_icon = this.UiElement.find('[data-hg-uifield=icon]');
+        var properties = this.UiElement.find('[data-hg-uifield=properties]');
+        //
+        if (!this.Initialized)
+        {
+            this.Initialized = true;
+        }
+        //
+        // update ui elements
+        //
+        // name field
+        //
+        var name = module.Name;
+        if (name == '') name = module.Domain.substring(module.Domain.lastIndexOf('.') + 1) + ' ' + module.Address;
+        field_title.html(name);
+        //
+        // image icon
+        //
+        image_icon.attr('src', '../../pages/control/widgets/homegenie/generic/images/sensor.png');
+        //
+        // Sensor's properties
+        //
+        properties.empty();
+        for (var p = 0; p < module.Properties.length; p++)
+        {
+            var prop = module.Properties[p];
+            if (prop.Name.substring(0, 7) == 'Sensor.')
+            {
+                var displayname = prop.Name.substring(7, 10);
+                var displayvalue = parseFloat(prop.Value.replace(',', '.'));
+                displayvalue = parseFloat(Math.round(displayvalue * 100) / 100).toFixed(2);
+                properties.append('<div style="float:left;margin-right:10px;width:50px"><strong>' + displayname + '</strong> ' + displayvalue + '</div>');
+            }
+        }
+        properties.append('<br clear="all" />');
+    }
+}]

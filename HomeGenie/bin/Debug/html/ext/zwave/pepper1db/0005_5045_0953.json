@@ -1,0 +1,134 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0005"
+      },
+      "productType": {
+        "@value": "5045"
+      },
+      "productId": {
+        "@value": "0953"
+      },
+      "libType": {
+        "@value": "00"
+      },
+      "protoVersion": {
+        "@value": "02"
+      },
+      "protoSubVersion": {
+        "@value": "4e"
+      },
+      "appVersion": {
+        "@value": "00"
+      },
+      "appSubVersion": {
+        "@value": "00"
+      },
+      "basicClass": {
+        "@value": "01"
+      },
+      "genericClass": {
+        "@value": "01"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "false"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "rfFrequency": "US",
+      "certId": "14473",
+      "certNumber": "ZC08-11110011"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Remote Controller for Pool and Spa"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "productName": "Five Channel Wireless Remote Controller",
+      "brandName": "MultiWave",
+      "productLine": "Pool and Spa Controls",
+      "productCode": "PE953",
+      "productVersion": "3.1"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0085",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0025",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0081",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0021",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0091",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0060",
+          "@version": "2",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0088"
+        },
+        {
+          "@id": "0043",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0070",
+          "@controlled": "true"
+        }
+      ]
+    }
+  }
+}

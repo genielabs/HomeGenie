@@ -1,0 +1,30 @@
+﻿{
+	"Commands" : [
+		{
+			"Command": "Control.On",
+			"Aliases": [ "slå på", "på" ]
+		},
+		{
+			"Command": "Control.Off",
+			"Aliases": [ "stäng av", "stänga av", "av" ]
+		},
+		{
+			"Command": "Control.Level",
+			"Aliases": [ "nivå" ]
+		},
+		{
+			"Command": "Control.Toggle",
+			"Aliases": [ "växla" ]
+		}
+	],
+	"Types" : [
+		{
+			"Type": "Light,Dimmer",
+			"Aliases": [ "alla ljus", "ljus", "varje ljus", "alla lampor", "lampa", "varje lampa" ]
+		},
+		{
+			"Type": "Switch",
+			"Aliases": [ "alla omkopplare", "omkopplare", "varje omkopplare", "alla strömbrytare", "strömbrytare", "varje strömbrytare" ]
+		}
+	]
+}

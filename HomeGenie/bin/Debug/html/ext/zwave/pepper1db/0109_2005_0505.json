@@ -1,0 +1,155 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0109"
+      },
+      "productType": {
+        "@value": "2005"
+      },
+      "productId": {
+        "@value": "0505"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "53"
+      },
+      "appVersion": {
+        "@value": "0e"
+      },
+      "appSubVersion": {
+        "@value": "01"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "false"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "1000"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Überflutungssensor"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Flood Sensor"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "internen Taster drücken"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Push Tamper Switch"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "internen Taster mindestens 1 Sekunde drücken"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Keep Tamper Switch Pushed for > 1 sec."
+          }
+        ]
+      },
+      "productName": "ZF5201",
+      "brandName": "ZF5201",
+      "productLine": "ZF5201",
+      "productCode": "ZF5201",
+      "batteryType": "CR123A",
+      "batteryCount": "1"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0080"
+        },
+        {
+          "@id": "0020",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071",
+          "@version": "4"
+        },
+        {
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "007a",
+          "@version": "2"
+        },
+        {
+          "@id": "0025"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "5",
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de",
+              "#text": "Überflutung erkannt"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Flood detected"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

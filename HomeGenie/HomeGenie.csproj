@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BFD3C868-1F62-43FF-8771-CF21825F0C0A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HomeGenie</RootNamespace>
+    <AssemblyName>HomeGenie</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ReleaseVersion>0.84</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="" workingdir="" />
+      </CustomCommands>
+    </CustomCommands>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>HomeGenie.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>
+    </TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UPnP">
+      <HintPath>Externals\upnp\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="Raspberry.System">
+      <HintPath>Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Externals\json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Automation\MacroRecorder.cs" />
+    <Compile Include="Automation\ProgramFeature.cs" />
+    <Compile Include="Automation\Scripting\AutomationStatesManager.cs" />
+    <Compile Include="Automation\Scripting\ModuleHelper.cs" />
+    <Compile Include="Automation\Scripting\ModulesManager.cs" />
+    <Compile Include="Automation\Scripting\NetHelper.cs" />
+    <Compile Include="Automation\Scripting\ProgramHelper.cs" />
+    <Compile Include="Automation\Scripting\ScriptingHost.cs" />
+    <Compile Include="Automation\Scripting\EventsHelper.cs" />
+    <Compile Include="Automation\Scripting\TcpClientHelper.cs" />
+    <Compile Include="Automation\Scripting\SerialPortHelper.cs" />
+    <Compile Include="Data\LogEntry.cs" />
+    <Compile Include="Data\ModuleEvent.cs" />
+    <Compile Include="Data\ValueStatistics.cs" />
+    <Compile Include="Data\VirtualModule.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Constants\Commands.cs" />
+    <Compile Include="Service\Constants\Domains.cs" />
+    <Compile Include="Service\Constants\Properties.cs" />
+    <Compile Include="Service\Handlers\Automation.cs" />
+    <Compile Include="Service\Handlers\Config.cs" />
+    <Compile Include="Service\Handlers\Interconnection.cs" />
+    <Compile Include="Service\Handlers\Logging.cs" />
+    <Compile Include="Service\Handlers\Statistics.cs" />
+    <Compile Include="Service\Logging\SystemLogger.cs" />
+    <Compile Include="Service\Logging\StatisticsLogger.cs" />
+    <Compile Include="Service\UpdateChecker.cs" />
+    <Compile Include="Service\Utility.cs" />
+    <Compile Include="Data\Group.cs" />
+    <Compile Include="Data\ModuleReference.cs" />
+    <Compile Include="Data\Module.cs" />
+    <Compile Include="Data\ModuleParameter.cs" />
+    <Compile Include="Service\HomeGenieService.cs" />
+    <Compile Include="Automation\ComparisonOperator.cs" />
+    <Compile Include="Automation\ProgramEngine.cs" />
+    <Compile Include="Automation\ProgramBlock.cs" />
+    <Compile Include="Automation\ProgramCommand.cs" />
+    <Compile Include="Automation\ProgramCondition.cs" />
+    <Compile Include="Service\VirtualMeter.cs" />
+    <Compile Include="Data\SystemConfiguration.cs" />
+    <Compile Include="Automation\Scripting\SettingsHelper.cs" />
+    <Compile Include="Service\StringCipher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENCE.TXT">
+      <Link>LICENCE.TXT</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\README.TXT">
+      <Link>README.TXT</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MIG\MIG\MIG.csproj">
+      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
+      <Name>MIG</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIG\Support Libraries\TcpClientLib\TcpClientLib.csproj">
+      <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
+      <Name>TcpClientLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIG\Support Libraries\XTenLib\XTenLib.csproj">
+      <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
+      <Name>XTenLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIG\Support Libraries\ZWaveLib\ZWaveLib.csproj">
+      <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
+      <Name>ZWaveLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIG\Support Libraries\SerialPortLib\SerialPortLib.csproj">
+      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
+      <Name>SerialPortLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="release_info.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <VersionControlPolicy inheritsSet="Mono">
+            <CommitMessageStyle LastFilePostfix=":&#xA;  " IncludeDirectoryPaths="True" />
+          </VersionControlPolicy>
+          <ChangeLogPolicy UpdateMode="None" inheritsSet="Mono">
+            <MessageStyle LastFilePostfix=":&#xA;  " IncludeDirectoryPaths="True" />
+          </ChangeLogPolicy>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

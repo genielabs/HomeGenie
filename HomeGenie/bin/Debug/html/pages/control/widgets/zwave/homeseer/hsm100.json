@@ -1,0 +1,45 @@
+﻿[{
+    Name: "HomeSeer HSM100 Widget",
+    Author: "Generoso Martello",
+    Version: "2013-03-31",
+
+	GroupName : '',
+	IconImage : 'pages/control/widgets/zwave/homeseer/images/hsm100.png',
+	StatusText : '',
+	Description : '',
+
+    RenderView: function (cuid, module) {
+		var container = $(cuid);
+		var widget = container.find('[data-ui-field=widget]');
+
+        widget.find('[data-ui-field=name]').html(module.Name);
+        widget.find('[data-ui-field=description]').html('z-wave node <strong>' + module.Address + '</strong>');
+        //
+        if (module.Properties != null) {
+            var status = '';
+            for (p = 0; p < module.Properties.length; p++) {
+                if (module.Properties[p].Name == 'Status.Battery') {
+                    var blevel = 0;
+                    blevel = parseFloat(module.Properties[p].Value);
+                    if (blevel == 255) blevel = 0;
+                    else if (blevel > 80 && blevel <= 100) blevel = 100;
+                    else if (blevel > 60) blevel = 80;
+                    else if (blevel > 40) blevel = 60;
+                    else if (blevel > 20) blevel = 40;
+                    else if (blevel > 10) blevel = 20;
+                    else if (blevel > 0) blevel = 10;
+                    widget.find('[data-ui-field=battery_image]').attr('src', 'pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png');
+                    widget.find('[data-ui-field=battery_value]').html(module.Properties[p].Value + '%');
+                }
+                else if (module.Properties[p].Name == "Sensor.Temperature") {
+                    temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+                    widget.find('[data-ui-field=temperature_value]').html(temp + '&#8451;');
+                }
+                else if (module.Properties[p].Name == 'Sensor.Luminance') {
+                    widget.find('[data-ui-field=luminance_value]').html(module.Properties[p].Value + '%');
+                }
+            }
+        }
+    }
+
+}]

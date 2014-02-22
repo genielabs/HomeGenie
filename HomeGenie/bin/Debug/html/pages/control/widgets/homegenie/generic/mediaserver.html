@@ -1,0 +1,53 @@
+﻿<a data-ui-field="widget">
+
+    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" height="48" src="pages/control/widgets/homegenie/generic/images/media.png" />
+
+    <span data-ui-field="name"></span><br />
+
+    <p style="margin:0">
+        <span data-ui-field="description" style="color:gray">loading...</span><br />
+        <span data-ui-field="deviceinfo" style="color:gray"></span>
+	</p>
+
+</a>
+
+
+<!-- widget popups and other ui elements follow -->
+
+<div data-ui-field="controlpopup" data-position-to="window" style="width:280px;" data-transition="pop" style="display:none">
+    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+    <div style="margin:10px">
+
+        <!-- BEGIN - COMMON UI PART --->
+        <table>
+            <tr>
+                <td>
+                    <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/media.png" />
+                </td>
+                <td>
+                    <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+                    <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+                </td>
+            </tr>
+        </table>
+
+        <div align="center">
+
+            <div data-role="content" class="ui-corner-bottom ui-content" style="border:1px solid gray;height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+
+                <ul data-ui-field="browsecontent" data-role="listview" data-filter="false" data-filter-placeholder="search..."></ul>
+
+            </div>
+
+            <br />
+            <label>Send selected media to...</label>
+            <select data-ui-field="sendto">
+                <option>Send to Media Receiver</option>
+                <option>Open in browser</option>
+            </select>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿{
+	"Commands" : [
+		{
+			"Command": "Control.On",
+			"Aliases": [ "accendi", "on", "apri" ]
+		},
+		{
+			"Command": "Control.Off",
+			"Aliases": [ "spegni", "off", "chiudi" ]
+		},
+		{
+			"Command": "Control.Level",
+			"Aliases": [ "livello" ]
+		},
+		{
+			"Command": "Control.Toggle",
+			"Aliases": [ "inverti", "cambia" ]
+		}
+	],
+	"Types" : [
+		{
+			"Type": "Light,Dimmer",
+			"Aliases": [ "tutte le luci", "le luci" ]
+		},
+		{
+			"Type": "Switch",
+			"Aliases": [ "tutte le prese", "le prese" ]
+		}
+	]
+}

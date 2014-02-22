@@ -1,0 +1,3442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>6</Address>
+    <Name>Group Lights ON</Name>
+    <Description>Turn on all the lights in the current group.</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6331872Z</ActivationTime>
+    <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;
+{                  
+  // set the widget "program"
+  Program.AddControlWidget("homegenie/generic/program");
+});
+return false;</ScriptCondition>
+    <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
+// ^^^^^^^
+// the line above is a special line that tells homegenie
+// to ask for options input (to enter a group name in this specific case)
+// when program is manually run by user
+// NOTE: no white space allowed for OPTIONS_STRING_PROMPT line
+// that must be the FIRST line of code.
+Modules
+  .InGroup( PROGRAM_OPTIONS_STRING )
+  .OfDeviceType("Light,Dimmer")
+  .IterationDelay(0.25)
+  .On();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>7</Address>
+    <Name>Group Lights OFF</Name>
+    <Description>Turn off all the lights in the current group.</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6331872Z</ActivationTime>
+    <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;
+{                  
+  // set the widget "program"
+  Program.AddControlWidget("homegenie/generic/program");
+});
+
+return false;</ScriptCondition>
+    <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
+// ^^^^^^^
+// the line above is a special line that tells homegenie
+// to ask for options input (to enter a group name in this specific case)
+// when program is manually run by user
+// NOTE: no white space allowed for OPTIONS_STRING_PROMPT line
+// that must be the FIRST line of code.
+
+Modules
+  .InGroup( PROGRAM_OPTIONS_STRING )
+  .OfDeviceType("Light,Dimmer")
+  .IterationDelay(0.2)
+  .Off();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>16</Address>
+    <Name>Level Memory</Name>
+    <Description>Store and recall last dimmer level when device is switched on.</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.1940431Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
+});
+// this program will be running in background
+return true;
+</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+	// stores the Status.MemoryLevel value for recalling last light dimmer level
+	// when switched on
+  	if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
+	{
+  		var level = module.Parameter("Status.Level");
+  		var lastlevel = module.Parameter("Status.LastLevel");
+		var memory = module.Parameter("Status.MemoryLevel");
+		//
+	  	lock(this)
+        if (level.DecimalValue != lastlevel.DecimalValue)
+        {
+            bool justswitchedon = (lastlevel.DecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+          	if (justswitchedon)
+            {
+                // set current level to memory level if different
+                if (level.DecimalValue != memory.DecimalValue &amp;&amp; memory.DecimalValue &gt; 0)
+                {
+                    var newlevel = (memory.DecimalValue * 100);
+                    Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
+                    module.Level = newlevel;
+                    // returning false, prevent from routing event to other listeners                  
+                    return false;
+                }
+            }
+            if (level.DecimalValue &gt; 0) 
+            {
+                memory.Value = level.Value;
+            } 
+        }
+        // store last level, that is used to determine if module has been switched on/off
+		lastlevel.Value = level.Value;
+    }
+  	// returning true, will route event to other listeners
+    return true; 
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory</Property>
+        <Description>Recall last light level when switched on</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>26</Address>
+    <Name>Philips Hue Bridge</Name>
+    <Description>Adds Philips Hue lights control capability to HomeGenie. 
+In order for this to work, you must register "homegenie" username
+(default is "newdeveloper") with your Philips Hue Bridge first.
+For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.9069301Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+Program.Setup(()=&gt;{
+
+  	Program.AddInputField("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address");
+  	Program.AddInputField("BridgeUsername","newdeveloper", "Philips Hue Bridge API username");
+  	//
+  	// Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
+  	// "Dimmer" is the type and "GenericColorLight" is the widget to be used to display the virtual module
+  	// See directory "html/pages/control/widgets/" for widget list
+  	Program.AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5);
+  
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
+{
+	string webserviceurl = "http://" + 
+  			Program.InputField("BridgeAddress").Value + "/api/" + 
+  			Program.InputField("BridgeUsername").Value + "/lights/" + lightnum + "/state";
+	Net.WebService(webserviceurl).Put( jsonargs ).Call();
+  	return true;
+};
+
+// - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
+When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+    try
+    {
+      string lightnumber = reqs[1];
+      string command = reqs[2];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      //
+      var module = Modules.InDomain("HomeAutomation.PhilipsHue").WithAddress(lightnumber).Get();
+      //
+      switch(command)
+      {
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+        case "Control.On":
+	        bridgeapicall(lightnumber, "{ \"on\" : true }");
+        	Program.RaiseEvent(module, "Status.Level", "1", "Hue Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+        case "Control.Off":
+    	    bridgeapicall(lightnumber, "{ \"on\" : false }");
+        	Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+        	break;
+        case "Control.Toggle":
+        	if (module.Parameter("Status.Level").DecimalValue == 0)
+            {
+              	bridgeapicall(lightnumber, "{ \"on\" : true }");
+              	Program.RaiseEvent(module, "Status.Level", "1", "Hue Light");
+            }
+        	else
+            {
+              	bridgeapicall(lightnumber, "{ \"on\" : false }");
+	        	Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+            }
+        	break;
+        case "Control.Level":
+    	    bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString() + " }");
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Hue Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+        case "Control.ColorHsb":
+        	string[] values = parameter.Split(',');
+    	    bridgeapicall(lightnumber, "{ \"on\" : true" + 
+                          ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
+                          ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
+                          ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + " }");
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+            Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
+        	break; 
+      }
+      //
+      return "{ 'ResponseValue' : 'OK' }";    
+    } catch (Exception e) { 
+      
+    	Program.Notify("Philips Hue ERROR!", e.Message);
+                       
+    }
+    return "{ 'ResponseValue' : 'ERROR' }";
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Name>Weather Underground</Name>
+    <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
+It can be used for "Sunrise/Sunset" feature. 
+User must create an account at wunderground.com in order to obtain a service key.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.2960476Z</TriggerTime>
+    <ScriptCondition>//    
+// this Setup delegate will be executed once, when program become active
+Program.Setup(()=&gt;
+{
+	// list the program as custom weather widget
+	Program.AddControlWidget( "weather/wunderground/conditions" );
+    // set input fields parameters
+    // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+    Program.AddInputField("Location", "autoip", "City name");
+    Program.AddInputField("Language", "EN", "Language");
+    Program.AddInputField("ApiKey", "?", "Weather Underground Key");
+    Program.AddInputField("UpdateInterval", "30", "Update interval (minutes)");
+  
+    // 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
+    Program.AddInputField("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE");
+    
+    // initialize widget program parameters
+    Program.Parameter("Astronomy.Sunset").Value = "";
+    Program.Parameter("Astronomy.Sunrise").Value = "";
+    Program.Parameter("Conditions.City").Value = "";
+    Program.Parameter("Conditions.TemperatureC").Value = "";
+    Program.Parameter("Conditions.TemperatureF").Value = "";
+    Program.Parameter("Conditions.DisplayLocation").Value = "";
+    Program.Parameter("Conditions.IconUrl").Value = "";
+    Program.Parameter("Conditions.Description").Value = "";    
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  string location = Program.InputField("Location").Value;
+  string language = Program.InputField("Language").Value;
+  string apikey = Program.InputField("ApiKey").Value;
+ 
+  // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature. by lancebooth
+  string display_celsius = Program.InputField("InputDisplayCelsius").Value;
+
+  //
+  if (!apikey.Contains("?"))
+  {
+      try
+      {
+        
+        string webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/astronomy/lang:" + language + "/q/" + location + ".json";
+        var astronomydata = Net.WebService(webserviceurl).GetData();
+        
+        int sunrise_hour = int.Parse(astronomydata.moon_phase.sunrise.hour.ToString());
+        int sunrise_minute = int.Parse(astronomydata.moon_phase.sunrise.minute.ToString());
+        int sunset_hour = int.Parse(astronomydata.moon_phase.sunset.hour.ToString());
+        int sunset_minute = int.Parse(astronomydata.moon_phase.sunset.minute.ToString());
+        
+        Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
+        Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
+        
+        webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
+        var weatherdata = Net.WebService(webserviceurl).GetData();
+        
+        string city = weatherdata.location.city;
+        string country = weatherdata.location.country;
+        string country_iso3166 = weatherdata.location.country_iso3166; // eg. IT,US,NL,UK,AU,CH,DE...
+        string temperaturec = weatherdata.current_observation.temp_c;
+        string temperaturef = weatherdata.current_observation.temp_f;
+        string display_location = weatherdata.current_observation.display_location.full;
+        string weather_text = weatherdata.current_observation.weather;
+        string icon = weatherdata.current_observation.icon;
+        string icon_url = weatherdata.current_observation.icon_url;
+        string wind_dir = weatherdata.current_observation.wind_dir;
+        string wind_kph = weatherdata.current_observation.wind_kph;
+        string pressure_mb = weatherdata.current_observation.pressure_mb;
+        string feelslike_c = weatherdata.current_observation.feelslike_c;
+        string feelslike_f = weatherdata.current_observation.feelslike_f;
+        string UV = weatherdata.current_observation.UV;
+        string precip_1hr_metric = weatherdata.current_observation.precip_1hr_metric;
+
+        // 2014-01-22 - Added to allow the widget to display the date/time.
+        string last_updated = DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
+        
+        Program.Parameter("Conditions.City").Value = city;
+        Program.Parameter("Conditions.Country").Value = country;
+        Program.Parameter("Conditions.CountryCode").Value = country_iso3166;
+        Program.Parameter("Conditions.TemperatureC").Value = temperaturec;
+        Program.Parameter("Conditions.TemperatureF").Value = temperaturef;
+        Program.Parameter("Conditions.DisplayLocation").Value = display_location;
+        Program.Parameter("Conditions.Description").Value = weather_text;
+        Program.Parameter("Conditions.IconUrl").Value = icon_url;
+        Program.Parameter("Conditions.Status").Value = icon; // eg. cloudy, sunny, etc..
+        Program.Parameter("Conditions.WindDirection").Value = wind_dir;
+        Program.Parameter("Conditions.WindKph").Value = wind_kph;
+        Program.Parameter("Conditions.PressureMb").Value = pressure_mb;
+        Program.Parameter("Conditions.FeelsLikeC").Value = feelslike_c;
+        Program.Parameter("Conditions.FeelsLikeF").Value = feelslike_f;
+        Program.Parameter("Conditions.UV").Value = UV;
+        Program.Parameter("Conditions.PrecipitationHourMetric").Value = precip_1hr_metric;
+        
+        // 2014-01-22 - Added to allow the widget to display the date/time.
+        Program.Parameter("Conditions.LastUpdated").Value = last_updated;
+
+	    // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
+        Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
+        
+      } 
+      catch (Exception e) 
+      {
+        
+        Program.Notify("Weather Underground ERROR!", "Unable to get data from service.");
+        //Program.Parameter("Conditions.City").Value = "ERROR: " + e.Message;
+        Console.WriteLine( e.Message );
+        Pause(10);
+        
+      }
+  }
+  //
+  Pause(Program.InputField("UpdateInterval").DecimalValue * 60); // pause 1 hour before next check
+  Pause(10);
+}</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>35</Address>
+    <Name>Sunrise/Sunset Lights Control</Name>
+    <Description>Turn on/off a device when the sun set/rise.</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:17:06.8167731Z</TriggerTime>
+    <ScriptCondition>// this Setup delegate will be executed once, when program become active
+Program.Setup(()=&gt;
+{
+	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.SunSetOn", "Toggle On when the Sun sets");
+	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.SunRiseOff", "Toggle Off when the Sun rises");
+});
+//
+Pause(60); // pause a minute before next check
+//
+return true; // execute the "Code To Run"
+</ScriptCondition>
+    <ScriptSource>string sunrise = Program.WithName("Weather Underground").Parameter("Astronomy.Sunrise").Value;
+string sunset = Program.WithName("Weather Underground").Parameter("Astronomy.Sunset").Value;
+
+if (DateTime.Now.ToString("HH:mm") == sunrise)
+{
+	Modules.WithFeature("HomeGenie.SunRiseOff").Off();
+}
+else if (DateTime.Now.ToString("HH:mm") == sunset)
+{
+	Modules.WithFeature("HomeGenie.SunSetOn").On();
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SunSetOn</Property>
+        <Description>Toggle On when the Sun sets</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SunRiseOff</Property>
+        <Description>Toggle Off when the Sun rises</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>37</Address>
+    <Name>HCSR04 - Ultrasonic Ranging Module</Name>
+    <Description>Ultrasonic Ranging Module sensor </Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2013-12-07T01:38:37.454915Z</ActivationTime>
+    <TriggerTime>2013-12-07T01:38:48.349238Z</TriggerTime>
+    <ScriptCondition>// this Setup delegate will be executed once, when the program is enabled
+Program.Setup(()=&gt;
+{
+  // set the widget that will display this program data (the distance).
+  // the builtin 'homegenie/generic/sensor' widget, 
+  // will display all parameters starting with Sensor.*
+  Program.AddControlWidget("homegenie/generic/sensor");
+  
+  // initialize program parameters
+  Program.Parameter("Sensor.Distance").Value = "";
+  Program.Parameter("Sensor.StatusMessage").Value = "";
+
+}); // end program setup
+return true; // execute the 'Code to Run'</ScriptCondition>
+    <ScriptSource>// example code adapted from https://github.com/raspberry-sharp/
+//
+
+Func&lt;bool&gt; readdistance = new Func&lt;bool&gt;(() =&gt; {
+    var triggerPin = ConnectorPin.P1Pin03.ToProcessor();
+    var echoPin = ConnectorPin.P1Pin07.ToProcessor();
+    var success = false;
+    
+    using (var connection = new HcSr04Connection(triggerPin, echoPin))
+    {
+        try
+        {
+            var distance = connection.GetDistance() * 100;
+            Program.Parameter("Sensor.Distance").Value = String.Format("{0:0.0}", distance);
+            success = true;
+        }
+        catch (Exception e)
+        {
+//        Console.WriteLine(e.Message + "\n" + e.StackTrace);
+            Program.Notify("HCSR04 Error", e.Message);
+            Program.Parameter("Sensor.Distance").Value = "-1";
+            success = false;
+        }
+    }
+	return success;
+});
+  
+// it makes program to respond to webservices calls:
+//     http:///api/Components.HCSR04/0/Sensor.Distance
+When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt; 
+{
+  	var res = "ERROR";
+	if (readdistance())
+    {
+      	res = Program.Parameter("Sensor.Distance").Value;
+    }
+	return "{ 'ResponseValue' : '" + res + "' }";
+}); 
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>38</Address>
+    <Name>MCP3008 - Temperature and Luminance</Name>
+    <Description>Analog Inputs SPI application using the MCP3008 ADC. 
+For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2013-12-09T19:29:38.557717Z</ActivationTime>
+    <TriggerTime>2013-12-09T19:29:38.67913Z</TriggerTime>
+    <ScriptCondition>// this Setup delegate will be executed once, when program become active
+Program.Setup(()=&gt;
+{
+  
+  // set the widget that will display this program data (the temperature,luminance).
+  Program.AddControlWidget("homegenie/generic/temperature");
+  
+  // set a configuration parameter
+  Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
+  
+  // initialize program parameters
+  Program.Parameter("Sensor.Temperature").Value = "";
+  Program.Parameter("Sensor.Luminance").Value = "";
+  
+}); // end program setup
+
+return true;
+</ScriptCondition>
+    <ScriptSource>//
+// adapted from https://github.com/raspberry-sharp/raspberry-sharp-io/blob/master/Test.Gpio.MCP3008/Program.cs
+// see also http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview
+// Connected pins are the same as in the original sample.
+
+const decimal voltage = 3.3m;
+//
+Func&lt;decimal, decimal&gt; 
+ConvertToCelsius = (volts) =&gt; {
+	return 100 * volts - 50;
+};
+Func&lt;decimal, decimal, decimal&gt;
+ConvertToLux = (volts, referenceVoltage) =&gt; {
+    // See http://learn.adafruit.com/photocells/using-a-photocell
+    // and http://www.emant.com/316002.page    
+    decimal resistor = 10000;
+    decimal luxRatio = 500000;
+    return volts != 0 ? luxRatio * volts / (resistor * (referenceVoltage - volts)) : 0;
+};
+
+var adcClock = ConnectorPin.P1Pin12.ToProcessor();
+var adcMiso = ConnectorPin.P1Pin16.ToProcessor();
+var adcMosi = ConnectorPin.P1Pin18.ToProcessor();
+var adcCs = ConnectorPin.P1Pin22.ToProcessor();
+
+  
+// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Temperature", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Luminance
+When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Luminance", ( args ) =&gt; 
+{
+	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Luminance").Value + "' }";
+});
+
+
+using (var adcConnection = new Mcp3008SpiConnection(adcClock, adcCs, adcMiso, adcMosi, voltage))
+{
+  // MCP3008 Sample: Reading temperature on Channel 0 and luminosity on Channel 1
+  
+  while (Program.IsEnabled)
+  {
+    
+    var temperature = String.Format("{0,5:0.0}", ConvertToCelsius( adcConnection.Read(Mcp3008Channel.Channel0) ));
+    var lux = String.Format("{0,5:0.0}", ConvertToLux( adcConnection.Read(Mcp3008Channel.Channel1), voltage ));
+
+    if (temperature != "-50.0")
+    {
+        if (temperature != Program.Parameter("Sensor.Temperature").Value)
+        {
+            Program.RaiseEvent("Sensor.Temperature",  temperature, "MCP3008 Sensor");
+        }
+        if (lux != Program.Parameter("Sensor.Luminance").Value)
+        {
+            Program.RaiseEvent("Sensor.Luminance", lux, "MCP3008 Sensor");
+        }
+    }
+    else
+    {
+      	Program.Notify("MCP3008 Error", "Could not read sensor data.");
+    }
+    
+    double pauseseconds = double.Parse(Program.InputField("PollFrequency").Value);
+    Pause( pauseseconds * 60 ); // pause 
+    
+  }
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>39</Address>
+    <Name>Z-Wave - Lights/Switches Level Poll</Name>
+    <Description>Periodically query lights and switches level.</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-01-03T16:48:44.015841Z</ActivationTime>
+    <TriggerTime>2014-01-03T16:48:48.784129Z</TriggerTime>
+    <ScriptCondition>// this is a background app
+// so we just put initialization code here and a return true
+// to activate the background task loop
+
+// ...
+Program.Setup(()=&gt;
+{              
+	Program.AddInputField("PollInterval", "15", "Poll Interval (seconds)");
+	Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch", "HomeGenie.ZWaveLevelPoll", "Poll module level");
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  	// basic get will returns current device level 
+  	Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
+  		Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+      	module.Command("Basic.Get").Execute();
+		Pause(Program.InputField("PollInterval").DecimalValue);
+      	return false; // do not break, continue iterating...
+  	});
+	// pause between each poll
+    Pause(Program.InputField("PollInterval").DecimalValue);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>50</Address>
+    <Name>HomeGenie Touchless Toggle</Name>
+    <Description>All lights with the flag "Touchless Toggle" active, 
+will be toggled whenever HomeGenie touchless sensor is activated.
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-09T17:48:39.636378Z</ActivationTime>
+    <TriggerTime>2014-02-09T17:48:43.974331Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+	Program.AddFeature("Dimmer,Light,Switch", "HomeGenie.TouchlessToggle", "Control by HomeGenie Touchless Toggle");
+});
+// this program will be running in background
+return true;</ScriptCondition>
+    <ScriptSource>var irpin = ConnectorPin.P1Pin18.ToProcessor();
+var driver = new MemoryGpioConnectionDriver();
+
+var LastPulse = DateTime.Now;
+var state = "WAIT";
+//var low = 0D;
+
+while (Program.IsEnabled)
+{
+    driver.Allocate(irpin, PinDirection.Input);
+    driver.Write(irpin, true);
+    
+    var startts = DateTime.Now.Ticks;
+
+    if (state == "WAIT") 
+    {  
+        LastPulse = DateTime.Now;
+        // wait for first high
+        while (driver.Read(irpin))
+        {
+            Raspberry.Timers.HighResolutionTimer.Sleep(50m);
+        }
+        while (!driver.Read(irpin))
+        {
+            Raspberry.Timers.HighResolutionTimer.Sleep(50m);
+        }
+        state = "SWITCH";
+    }
+  
+  	// high
+    startts = DateTime.Now.Ticks;
+    while (driver.Read(irpin))
+    {
+        Raspberry.Timers.HighResolutionTimer.Sleep(0.001m);
+    }
+
+  	// low
+  	startts = DateTime.Now.Ticks;
+    while (!driver.Read(irpin))
+    {
+        //Raspberry.Timers.HighResolutionTimer.Sleep(0.25m);
+    }
+  	//low = ((DateTime.Now.Ticks - startts) / 10000D );
+    //Console.WriteLine("LOW  " + low.ToString());
+  
+  	TimeSpan elapsedfrominput = new TimeSpan(DateTime.Now.Ticks - LastPulse.Ticks);
+  	switch (state)
+    {
+      	case "SWITCH":
+            if (elapsedfrominput.TotalMilliseconds &gt; 300)
+            {
+              Modules.WithFeature("HomeGenie.TouchlessToggle").Toggle();
+              Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").On();
+              Pause(.5); 
+              Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").Off();
+              LastPulse = DateTime.Now;
+              state = "WAIT";
+            }
+      		break;
+      	default:
+      		break;
+    }
+
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer,Light,Switch</ForTypes>
+        <Property>HomeGenie.TouchlessToggle</Property>
+        <Description>Control by HomeGenie Touchless Toggle</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>70</Address>
+    <Name>DHT-11 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-11. 
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-09T17:48:39.644331Z</ActivationTime>
+    <TriggerTime>2014-02-09T17:48:50.174189Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+Program.Setup(()=&gt;
+{
+  
+  // set the widget that will display this program data (the temperature,luminance).
+  Program.AddControlWidget("homegenie/generic/temperature");
+  
+  // set a configuration parameter
+  //Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
+  
+  // initialize program parameters
+  Program.Parameter("Sensor.Humidity").Value = "";
+  Program.Parameter("Sensor.Temperature").Value = "";
+  Program.Parameter("Sensor.TemperatureF").Value = "";
+
+  Program.AddInputField("UpdateInterval", "600", "Update Interval (seconds)");
+  
+  // it makes program to respond to webservices calls:
+  // - http://&lt;hg_address&gt;/api/EmbeddedSystems.Raspberry/DHT11/Sensor.Temperature
+  When.WebServiceCallReceived("EmbeddedSystems.Raspberry/DHT11/Sensor.Temperature", ( args ) =&gt; 
+  {
+    return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+  });
+  // - http://&lt;hg_address&gt;/api/EmbeddedSystems.Raspberry/DHT11/Sensor.Humidity
+  When.WebServiceCallReceived("EmbeddedSystems.Raspberry/DHT11/Sensor.Humidity", ( args ) =&gt; 
+  {
+    return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+  });
+  
+}); // end program setup
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.DHT11/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.DHT11/0/Sensor.Temperature", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.DHT11/0/Sensor.Humidity
+When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+});
+
+int[] data = new int[5];
+
+while (Program.IsEnabled)
+{
+  	for(int a = 0; a &lt; 30; a++)
+    {
+        var irpin = ConnectorPin.P1Pin7.ToProcessor();
+        MemoryGpioConnectionDriver driver = new MemoryGpioConnectionDriver();
+        //
+        driver.Allocate(irpin, PinDirection.Output);
+        driver.Write(irpin, false);
+        Pause(0.0141);
+        driver.Write(irpin, true);
+        //  
+        driver.Allocate(irpin, PinDirection.Input);
+        //
+        int i = 0;
+        data = new int[5];
+        int j = 0;
+        int counter = 0;
+        bool laststate = true;  
+        //
+        // detect change and read data
+        for ( i=0; i&lt; 85; i++) {
+          counter = 0;
+          while (driver.Read(irpin) == laststate) {
+            counter++;
+            //Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
+            if (counter == 255) {
+              break;
+            }
+          }
+          laststate = driver.Read(irpin);
+      
+          if (counter == 255) break;
+      
+          // ignore first 3 transitions
+          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) {
+            // shove each bit into the storage bytes
+            data[j/8] &lt;&lt;= 1;
+            if (counter &gt; 40)
+              data[j/8] |= 1;
+            j++;
+          }
+        }
+        // 
+        if ((j &gt;= 40) &amp;&amp; (data[4] == ((data[0] + data[1] + data[2] + data[3]) &amp; 0xFF)) ) 
+        {
+            data[2] = data[2] - 3; // temperature adjustment, due to heat excess inside the HG box
+            double f = data[2] * 9D / 5D + 32;
+            //Console.WriteLine("\n\nHumidity = {0}.{1} %\nTemperature = {2}.{3} *C ({4} *F)\n\n", 
+            //      			data[0], data[1], data[2], data[3], f);
+          
+          	var hum = data[0] + "." + data[1];
+          	var tempc = data[2] + "." + data[3];
+          	var tempf = f.ToString();
+          	//if (hum != Program.Parameter("Sensor.Humidity").Value)
+            {
+              	Program.RaiseEvent("Sensor.Humidity", hum, "DHT-11 Sensor");
+            }
+          	//if (tempc != Program.Parameter("Sensor.Temperature").Value)
+            {
+                Program.RaiseEvent("Sensor.TemperatureF", tempf, "DHT-11 Sensor");
+                Program.RaiseEvent("Sensor.Temperature", tempc, "DHT-11 Sensor");
+            }
+            break;
+        }
+        else
+        {
+            //Console.WriteLine(j + ") Data not good, skip\n");
+          	Pause(2);
+        }
+    }
+    //
+    //Console.WriteLine(data[0]);
+    //Console.WriteLine(data[1]);
+    //Console.WriteLine(data[2]);
+    //Console.WriteLine(data[3]);
+    //Console.WriteLine(data[4]);
+  	//
+  	var pause = Program.InputField("UpdateInterval").DecimalValue;
+  	if (pause == 0) pause = 600; // default pause is 10 minutes
+  	Pause(pause);
+
+}</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>71</Address>
+    <Name>Example MCP23017</Name>
+    <Description>Interfacing an I2C GPIO expander.
+For wirings see http://www.skpang.co.uk/blog/archives/454 .</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;
+{
+	// register 2 virtual modules using the "switch" widget    
+	Program.AddVirtualModules("Components.MCP23017", "Switch", "homegenie/generic/switch", 1, 16);                  
+});
+// returning true will execute the "Code to Run"
+return true;
+</ScriptCondition>
+    <ScriptSource>// This examples will add 16 modules of type "Switch"
+// corresponding to A0-A7 and B0-B7 pins, configured as OUTPUT
+//
+// Change SDA and SCL pins to match your current setup
+//
+var sdaPin = ConnectorPin.P1Pin03.ToProcessor();
+var sclPin = ConnectorPin.P1Pin05.ToProcessor();
+
+//
+
+// implement Control.On, Control.Off, Control.Toggle serice API
+// for the domain Components.MCP23017
+When.WebServiceCallReceived("Components.MCP23017", ( args ) =&gt; 
+{
+	string[] reqs = ((string)args).Split('/');
+  	var errormessage = "";
+	try
+	{
+		string pinid = reqs[1];
+      	string command = reqs[2];
+        //
+        var module = Modules.InDomain("Components.MCP23017").WithAddress(pinid).Get();
+      	//module.Parameter("Status.Level").Value = "0";
+        //
+      	// modules with id from 1 to 8 are mapped as A0-A7
+      	// modules with id from 9 to 16 as B0-B7
+      	var pinname = "";
+      	var i = int.Parse(pinid); 
+      	if (i &lt;= 8) 
+        {
+          	pinname = "A" + (i - 1).ToString();
+        }
+      	else
+        {
+          	pinname = "B" + (i - 9).ToString();
+        }      
+      	//
+		var mcppin = (Mcp23017Pin)Enum.Parse(typeof(Mcp23017Pin), pinname);
+        using (var driver = new I2cDriver(sdaPin, sclPin))
+        {
+            var deviceConnection =  new Mcp23017I2cConnection(driver.Connect(0x20));
+            deviceConnection.SetDirection(mcppin, Mcp23017PinDirection.Output);
+            //
+            switch(command)
+            {
+                // eg. http://hg_address/api/Expanders.MCP23017/1/Control.On
+                case "Control.On":
+					deviceConnection.SetPinStatus(mcppin, true);
+                break;
+                // eg. http://hg_address/api/Expanders.MCP23017/3/Control.Off
+                case "Control.Off":
+					deviceConnection.SetPinStatus(mcppin, false);
+                break;
+                // eg. http://hg_address/api/Expanders.MCP23017/9/Control.Toggle
+              	case "Control.Toggle":
+					deviceConnection.Toogle(mcppin);
+              	break;
+            }
+			Program.RaiseEvent(module, "Status.Level", 
+                               deviceConnection.GetPinStatus(mcppin) ? "1" : "0", "MCP23017 " + pinname);
+        }        
+      	//
+        return "{ 'ResponseValue' : 'OK' }";    
+    } 
+  	catch (Exception ex) 
+    { 
+	    errormessage = ex.Message + " " + ex.StackTrace;
+    }
+    // unable to process request
+    return "{ 'ResponseValue' : 'ERROR " + errormessage + "' }";
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions>
+      <ProgramCondition>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>37</Target>
+        <Property>Sensor.DoorWindow</Property>
+        <ComparisonOperator>Equals</ComparisonOperator>
+        <ComparisonValue>255</ComparisonValue>
+      </ProgramCondition>
+    </Conditions>
+    <Commands>
+      <ProgramCommand>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>4</Target>
+        <CommandString>Control.Off</CommandString>
+        <CommandArguments />
+      </ProgramCommand>
+    </Commands>
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>72</Address>
+    <Name>Earth Tools</Name>
+    <Description>Gather from http://www.earthtools.org/ service all data about sun rise/set. 
+It can be used for "Sunrise/Sunset" feature.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.8306727Z</TriggerTime>
+    <ScriptCondition>// this Setup delegate will be executed once, when program become active
+Program.Setup(()=&gt;
+{
+  
+    // list the program as custom weather widget
+    Program.AddControlWidget( "weather/earthtools/sundata" );
+    
+    // set input fields parameters
+    // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+    Program.AddInputField("Latitude", "42.50", "Location latitude");
+    Program.AddInputField("Longitude", "12.50", "Location longitude");
+    
+    // initialize widget program parameters
+    // initialize widget program parameters
+    Program.Parameter("Astronomy.Sunset").Value = "";
+    Program.Parameter("Astronomy.Sunrise").Value = "";
+    // We also initialize the following parameters, even if unused,
+    // so we can use weather/wunderground/conditions for displaying data.
+    // A more generic widget should be written
+    
+    Program.Parameter("EarthTool.Morning.Sunrise").Value = "";
+    Program.Parameter("EarthTool.Morning.Twilight.Civil").Value = "";
+    Program.Parameter("EarthTool.Morning.Twilight.Nautical").Value = "";
+    Program.Parameter("EarthTool.Morning.Twilight.Astronomical").Value = "";
+    
+    Program.Parameter("EarthTool.Evening.Sunset").Value = "";
+    Program.Parameter("EarthTool.Evening.Twilight.Civil").Value = "";
+    Program.Parameter("EarthTool.Evening.Twilight.Nautical").Value = "";
+    Program.Parameter("EarthTool.Evening.Twilight.Astronomical").Value = "";
+  
+});
+//
+return true;
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+    var month = DateTime.Now.Month;
+    var day = DateTime.Now.Day;
+    //
+    var latitude = Program.InputField("Latitude").Value;
+    var longitude = Program.InputField("Longitude").Value;
+    //
+    try
+    {
+      
+        var serviceurl = "http://www.earthtools.org/sun/" + latitude + "/" + longitude + "/" + day + "/" + month + "/99/1";
+        dynamic geodata = Net.WebService(serviceurl).GetData();
+        //
+        Program.Parameter("Astronomy.Sunset").Value = geodata.sun.evening.sunset;
+        Program.Parameter("Astronomy.Sunrise").Value = geodata.sun.morning.sunrise;
+        //
+        Program.Parameter("EarthTool.Morning.Sunrise").Value = geodata.sun.morning.sunrise;
+        Program.Parameter("EarthTool.Morning.Twilight.Civil").Value = geodata.sun.morning.twilight.civil;
+        Program.Parameter("EarthTool.Morning.Twilight.Nautical").Value = geodata.sun.morning.twilight.nautical;
+        Program.Parameter("EarthTool.Morning.Twilight.Astronomical").Value = geodata.sun.morning.twilight.astronomical;
+        //
+        Program.Parameter("EarthTool.Evening.Sunset").Value = geodata.sun.evening.sunset;
+        Program.Parameter("EarthTool.Evening.Twilight.Civil").Value = geodata.sun.evening.twilight.civil;
+        Program.Parameter("EarthTool.Evening.Twilight.Nautical").Value = geodata.sun.evening.twilight.nautical;
+        Program.Parameter("EarthTool.Evening.Twilight.Astronomical").Value = geodata.sun.evening.twilight.astronomical;      
+        
+    } 
+    catch (Exception ex) 
+    { 
+      
+      	Program.Notify("Earth Tools Error!", "Unable to get data from service.");
+      	Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
+    
+    }
+    //
+    Pause(24 * 60 * 60); // pause 24 hours before next check
+}</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>73</Address>
+    <Name>IR/RF remote control events forwarding</Name>
+    <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+  	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
+  	Program.AddInputField("CellUsername", "", "2. Username");
+  	Program.AddInputField("CellPassword", "", "3. Password");
+  
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  	var celladdress  = Program.InputField("CellAddress").Value;
+  	var cellusername = Program.InputField("CellUsername").Value;
+  	var cellpassword = Program.InputField("CellPassword").Value;
+  	// ROUTE IR/RF EVENT TO REMOTE HG CELL
+  	if (!celladdress.Contains("?") &amp;&amp; property.Name == "Receiver.RawData")
+    {
+  		Net
+          .WithCredentials(cellusername, cellpassword)
+          .SignalModuleEvent(celladdress, module, property);
+    }
+  	// returning true, will route event to other listeners
+	return true;  
+});
+//
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>74</Address>
+    <Name>Meter.Watts events forwarding</Name>
+    <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+  	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
+  	Program.AddInputField("CellUsername", "", "2. Username");
+  	Program.AddInputField("CellPassword", "", "3. Password");
+  
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  	var celladdress  = Program.InputField("CellAddress").Value;
+  	var cellusername = Program.InputField("CellUsername").Value;
+  	var cellpassword = Program.InputField("CellPassword").Value;
+  	// ROUTE IR/RF EVENT TO REMOTE HG CELL
+  	if (!celladdress.Contains("?") &amp;&amp; property.Name == "Meter.Watts")
+    {
+  		Net
+          .WithCredentials(cellusername, cellpassword)
+          .SignalModuleEvent(celladdress, module, property);
+    }
+  	// returning true, will route event to other listeners
+	return true;
+});
+//
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>75</Address>
+    <Name>Status.Level events forwarding</Name>
+    <Description>Forwards devices' Level changes to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+  	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
+  	Program.AddInputField("CellUsername", "", "2. Username");
+  	Program.AddInputField("CellPassword", "", "3. Password");
+  
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  	var celladdress  = Program.InputField("CellAddress").Value;
+  	var cellusername = Program.InputField("CellUsername").Value;
+  	var cellpassword = Program.InputField("CellPassword").Value;
+  	// ROUTE METERING EVENT TO REMOTE HG CELL
+  	if (!celladdress.Contains("?") &amp;&amp; property.Name == "Status.Level")
+    {
+  		Net
+          .WithCredentials(cellusername, cellpassword)
+          .SignalModuleEvent(celladdress, module, property);
+    }
+  	// returning true, will route event to other listeners
+	return true;
+});
+//
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>82</Address>
+    <Name>Energy Saving Mode</Name>
+    <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
+    <Group>Energy Management</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.7296674Z</TriggerTime>
+    <ScriptCondition>// this is a background app
+// so we just put initialization code here and a return true
+// to activate the background task loop
+
+// ...
+Program.Setup(()=&gt;
+{              
+	Program.AddInputField("MaxLevel", "40", "Keep level below the following value");
+	Program.AddFeature("Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light");
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  
+  	if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
+	{
+            var level = module.Parameter("Status.Level");
+            var newlevel = Program.InputField("MaxLevel").DecimalValue;
+      		//
+  			lock(this)
+            if (level.DecimalValue &gt; (newlevel / 100D)) 
+            {
+                Program.Notify("Energy Saving Mode", module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
+                module.Level = newlevel;
+                return false;
+            }
+    }
+  	// returning true, will route event to other listeners
+  	return true;
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>EnergyManagement.EnergySavingMode</Property>
+        <Description>Energy Saving Mode enabled light</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>83</Address>
+    <Name>nRF24L01</Name>
+    <Description>(just testing)</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+return false;
+</ScriptCondition>
+    <ScriptSource>var adcClock = ConnectorPin.P1Pin23.ToProcessor();
+var adcMiso = ConnectorPin.P1Pin21.ToProcessor();
+var adcMosi = ConnectorPin.P1Pin19.ToProcessor();
+var adcCs = ConnectorPin.P1Pin22.ToProcessor();
+
+var spiConnection = new Raspberry.IO.SerialPeripheralInterface.SpiConnection(adcClock, adcCs, adcMiso, adcMosi, 0 /*Endianness.LittleEndian*/);
+
+using(spiConnection.SelectSlave())
+{
+  
+  // Start bit
+  spiConnection.Write(true);
+  
+  // Channel is single-ended
+  spiConnection.Write(true);
+  
+  // Channel Id
+  spiConnection.Write((byte)2, 3);
+
+  // Let one clock to sample
+  spiConnection.Synchronize();
+  
+  while (true)
+  {
+    //Program.RunAsyncTask(()=&gt;{
+    //  // Let one clock to sample
+     // spiConnection.Synchronize();
+	//  spiConnection.Write((byte)255, 8);
+    //});
+    
+    // Read 8 bits
+    for (int i = 0; i &lt; 8; i++)
+    {
+      var data = spiConnection.Read(8);
+      Console.Write( data.ToString("X2") + " ");  
+    }
+    Console.WriteLine("");
+  }
+}</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>84</Address>
+    <Name>X10 - Dimmer Bright 100% when switched on</Name>
+    <Description>Brighten a light to 100% when switched on.</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.5206545Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+	Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on");
+});
+// this program will be running in background
+return true;
+</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterIsChanging( (module, property) =&gt; {
+
+  	if (module.HasFeature("X10.LevelFix") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
+	{
+        lock(this)
+        {
+            var level = module.Parameter("Status.Level");
+            var lastlevel = module.Parameter("Status.LastLevel");
+            //
+            bool justswitchedon = (level.DecimalValue &gt; 0 &amp;&amp; lastlevel.DecimalValue == 0);
+            lastlevel.Value = level.Value;
+            if (justswitchedon)
+            {
+                Program.Notify("X10 Auto Bright", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to 100%");
+                module.Command("Control.Bright").Set("100");
+                return false; // &lt;-- prevent ModuleParameterChange event from being fired
+            }
+        }
+    }
+
+    return true;
+  
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.X10</ForDomains>
+        <ForTypes>Dimmer</ForTypes>
+        <Property>X10.LevelFix</Property>
+        <Description>Set level to 100% when switched on</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>88</Address>
+    <Name>Generic IP Camera</Name>
+    <Description>Generic IP Camera driver.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.6256604Z</TriggerTime>
+    <ScriptCondition>
+Program.Setup(()=&gt;{
+
+  	Program.AddVirtualModules("Media.IpCamera", "Sensor", "homegenie/generic/camerainput", 1, 10);
+    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)");
+    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)");
+    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)");
+
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>for (int cam = 1; cam &lt; 10; cam++)
+{
+  	var module = Modules.InDomain("Media.IpCamera").WithAddress(cam.ToString()).Get();
+  	module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
+}
+
+// - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/...
+When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+  	object data = "{ 'ResponseValue' : 'ERROR' }";
+    try
+    {
+        string cameraaddress = reqs[1];
+        string command = reqs[2];
+        //string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+		var module = Modules.InDomain("Media.IpCamera").WithAddress(cameraaddress).Get();
+        //
+        switch(command)
+        {
+            // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;program_address&gt;/Camera.GetPicture
+            case "Camera.GetPicture":
+            data = Net
+              .WebService(module.Parameter("IpCamera.ImageURL").Value)
+              .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
+              .GetBytes();
+            break;
+            case "Camera.MotionDetected":
+            data = "{ 'ResponseValue' : 'OK' }";
+            // blink Sensor.MotionDetect parameter
+            Program.RaiseEvent(module, "Sensor.MotionDetect", "255", "Generic IP Camera");
+            Pause(1);
+            Program.RaiseEvent(module, "Sensor.MotionDetect", "0", "Generic IP Camera");
+            break;
+        }
+    } catch (Exception e) { 
+      
+    	Program.Notify("IpCamera ERROR!", e.Message);
+                       
+    }
+    return data;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.ImageURL</Property>
+        <Description>Camera image API URL (see your camera docs)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.Username</Property>
+        <Description>Username (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.IpCamera</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>IpCamera.Password</Property>
+        <Description>Password (optional)</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>90</Address>
+    <Name>Security Alarm System</Name>
+    <Description>Basic Security Alarm System</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.4196475Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+  
+  	Program.AddControlWidget("homegenie/generic/securitysystem");
+  
+	Program.AddFeature("Sensor,DoorWindow", "HomeGenie.SecuritySensor", "Use as Security Sensor");
+	Program.AddFeature("Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm");
+  	//
+    Program.AddInputField("System.ArmDelay", "10", "1. Arm Delay (seconds)");
+    Program.AddInputField("System.SirenMaxTime", "30", "2. Sirens Max Time (seconds, 0=infinite)");
+  
+    Program.AddInputField("Email.Recipients", "", "3. Comma separated list of recipients e-mails for alarm notifications");  
+});
+// this program will be running in background
+return true;</ScriptCondition>
+    <ScriptSource>//
+// init program parameters
+//
+Program.RaiseEvent("HomeGenie.SecurityArmed", "0", "Security System");
+Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
+Program.Parameter("Status.Level").Value = "0";
+//
+Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
+  	Program.RunAsyncTask(()=&gt;
+	{
+        if (Program.Parameter("Status.Level").Value == "0")
+        {
+          	// disarming
+          	Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
+        }
+      	else
+        {
+          	// arming
+        	Pause( Program.InputField("System.ArmDelay").DecimalValue );
+        }
+        Program.RaiseEvent("HomeGenie.SecurityArmed", Program.Parameter("Status.Level").Value, "Security System");
+    });
+  	return true;
+});
+//
+// module events handling
+//
+When.ModuleParameterChange((module, parameter)=&gt;
+{
+  	if (Program.Parameter("HomeGenie.SecurityArmed").Value == "1")
+    {
+        if (module.HasFeature("HomeGenie.SecuritySensor") 
+            &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
+            &amp;&amp; (   parameter.Name == "Status.Level"
+              	|| parameter.Name == "Sensor.Generic"
+                || parameter.Name == "Sensor.Tamper" 
+                || parameter.Name == "Sensor.MotionDetect" 
+				|| parameter.Name == "Sensor.DoorWindow"
+                || parameter.Name == "Sensor.Flood" 
+                || parameter.Name == "Sensor.Smoke" 
+                || parameter.Name == "Sensor.Heat" 
+                || parameter.Name == "Sensor.CarbonMonoxide" 
+                || parameter.Name == "Sensor.CarbonDioxide" ) 
+            &amp;&amp; parameter.DecimalValue &gt; 0)
+        {
+            Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
+			Program.Parameter("HomeGenie.SecurityTriggerSource").Value = 
+              	module.Instance.Domain + "." +
+              	module.Instance.Address + " " +
+              	module.Instance.Name + " (" + parameter.Name + ")";
+  			return false;
+        }
+    }
+  	return true;
+});
+//
+// web service calls handling
+//
+When.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", (args) =&gt; //"HomeGenie.SecuritySystem", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    var res = "";
+    
+    try
+    {
+      string command = reqs[2];
+      string pid = reqs[1];
+      if (pid == Program.Module.Address)
+      {
+
+        switch(command)
+        {
+          case "Control.On":
+			Program.RaiseEvent("Status.Level", "1", "Security System");
+          	_armdisarm();
+            res = "{ 'ResponseValue' : 'ARMED' }";
+            break;
+          case "Control.Off":
+			Program.RaiseEvent("Status.Level", "0", "Security System");
+          	_armdisarm();
+            res = "{ 'ResponseValue' : 'DISARMED' }";
+            break;
+        }
+
+      }
+    } 
+    catch (Exception ex) 
+    { 
+      res = "{ 'ResponseValue' : 'ERROR: " + ex.Message + " " + ex.StackTrace + "' }";
+    }
+    // unable to process request
+    return res;
+
+});
+//
+// main program loop
+//
+while (Program.IsEnabled)
+{
+  	if (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+    {
+        Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").On();
+      	//
+      	var alarmstart = DateTime.Now;
+      	//
+      	// send email
+      	//
+      	var subject = "HomeGenie Security System Alarmed";
+      	var messagetext = "Security System Alarm triggered by " + Program.Parameter("HomeGenie.SecurityTriggerSource").Value;
+      	var recipients = Program.InputField("Email.Recipients").Value;
+      	if (recipients != "")
+        {
+          	Program.RunAsyncTask(()=&gt;{
+      			Net.SendMessage(recipients, subject, messagetext);
+            });
+        }
+        //
+      	var sirenstopped = false;
+        while (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+        {
+            // flashing SecurityAlarm lights 
+            Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light").Toggle();
+            Pause(1);
+            Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light").Toggle();
+            Pause(1);
+          	//
+          	var elapsed = new TimeSpan(DateTime.Now.Ticks - alarmstart.Ticks);
+          	if (!sirenstopped &amp;&amp; Program.InputField("System.SirenMaxTime").DecimalValue &gt; 0 &amp;&amp; elapsed.TotalSeconds &gt; Program.InputField("System.SirenMaxTime").DecimalValue)
+            {
+				Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").Off();
+              	sirenstopped = true;
+            }
+        }
+	  	//Pause(1);
+        Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").Off();
+    }
+  	Pause(1);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Sensor,DoorWindow</ForTypes>
+        <Property>HomeGenie.SecuritySensor</Property>
+        <Description>Use as Security Sensor</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.SecurityAlarm</Property>
+        <Description>Use as Security Alarm</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>91</Address>
+    <Name>Z-Wave - Wake Up Notify</Name>
+    <Description>Query sensors' data and battery level when a device wakes up.</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.3186422Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+return true;
+</ScriptCondition>
+    <ScriptSource>When.ModuleParameterChange((module, parameter) =&gt; {
+
+  	if (parameter.Name == "ZWaveNode.WakeUpNotify")
+    {     
+      	var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
+      	if (nodeinfo != null)
+        {
+          	// nif contains all command classes supported by this module
+          	string nif = " " + nodeinfo.Value + " ";
+          	if (nif.Contains(" 84 ")) // does the device support WakeUp ?
+            {
+                if (nif.Contains(" 60 ")) // MultiInstance
+                {
+                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
+                    // query first 4 instances
+                    for (int instance = 1; instance &lt; 4; instance ++)
+                    {
+                        if (nif.Contains(" 30 ")) // Sensor Binary
+                        {
+                            module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
+                        }
+                        else if (nif.Contains(" 31 ")) // Sensor MultiLevel
+                        {
+                            module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
+                        }
+                        else if (nif.Contains(" 25 ")) // Switch Binary
+                        {
+                            module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
+                        }
+                        else if (nif.Contains(" 26 ")) // Switch MultiLevel
+                        {
+                            module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
+                        }
+                        //Pause(.5);
+                    }
+                }
+                //
+                // query battery level
+                if (nif.Contains(" 80 ")) // Battery
+                {
+                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
+                    module.Command("Battery.Get").Execute();
+                    //Pause(.5);
+                }
+                //
+                Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
+                module.Command("Basic.Get").Execute();
+                //Pause(.5);
+            }
+        }
+      	//
+      	return false; // do not process this event any further
+    }
+
+  	return true; // continue processing event
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>92</Address>
+    <Name>HomeGenie Buzzer</Name>
+    <Description>GPIO controlled Buzzer</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-09T17:48:39.745183Z</ActivationTime>
+    <TriggerTime>2014-02-09T17:49:11.260434Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;
+{
+	// register 2 virtual modules using the "switch" widget    
+	Program.AddVirtualModules("HomeGenie.Buzzer", "Switch", "homegenie/generic/switch", 1, 1);                  
+});
+// returning true will execute the "Code to Run"
+return true;
+</ScriptCondition>
+    <ScriptSource>// Initially turn the leds off
+var systembuzzer = new PinConfiguration[] { 	ConnectorPin.P1Pin16.Output().Name("Buzzer").Disable()  };
+// 
+using (var connection = new GpioConnection(systembuzzer))
+{  
+    
+    When.WebServiceCallReceived("HomeGenie.Buzzer", ( args ) =&gt; 
+    {
+        string[] reqs = ((string)args).Split('/');
+        var res = "{ 'ResponseValue' : 'ERROR' }";
+    
+        try
+        {
+            string command = reqs[2];
+    		//string buzid = reqs[1];
+            var module = Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").Get();
+          	//
+            switch(command)
+            {
+              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.On
+              case "Control.On":
+              	connection["Buzzer"] = true;
+                Program.RaiseEvent(module, "Status.Level", "1", "Buzzer");
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Off
+              case "Control.Off":
+              	connection["Buzzer"] = false;
+                Program.RaiseEvent(module, "Status.Level", "0", "Buzzer");
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Toggle
+              case "Control.Toggle":
+              	connection["Buzzer"] = !connection["Buzzer"];
+                Program.RaiseEvent(module, "Status.Level", connection["Buzzer"] ? "1" : "0", "Buzzer");
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+            }
+        } 
+        catch (Exception ex) 
+        { 
+            res = ex.Message + " " + ex.StackTrace;
+        }
+        // unable to process request
+        return res;
+    });
+  
+  
+	Program.GoBackground();
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>112</Address>
+    <Name>Turn Off Delay</Name>
+    <Description>When device is turned on, automatically turn it off after a given delay.</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.212636Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)");
+
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>When.ModuleParameterIsChanging((module, parameter) =&gt; {
+    // check if the module has just been turned on
+	if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
+    {
+      	if (parameter.Name == "Status.Level")
+        {
+            var level = module.Parameter("Status.Level");
+            var lastlevel = module.Parameter("Status.LastLevel");
+            var turnonticks = level.UpdateTime.Ticks;
+            //
+          	lock(this)
+            if (level.DecimalValue != lastlevel.DecimalValue)
+            {
+                bool justswitchedon = (lastlevel.DecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+                if (justswitchedon)
+                {
+                    var pausedelay = module.Parameter("HomeGenie.TurnOffDelay").DecimalValue;
+                    var targetmodule = module;
+                    Program.RunAsyncTask(()=&gt;{
+                        Pause(pausedelay);
+                      	// ensures that no manual action has been taken on the module in the meantime
+                      	if (turnonticks == level.UpdateTime.Ticks)
+                        {
+                        	Program.Notify("Turn Off Delay", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " switched off.");
+                        	targetmodule.Off();
+                        }
+                    });
+                }
+            }
+        }
+      
+    }
+    return true;
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.TurnOffDelay</Property>
+        <Description>Automatic turn off delay (seconds)</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>122</Address>
+    <Name>X10 SC9000 RF Vitual Modules</Name>
+    <Description>SC9000 Security Console driver (experimental)</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.1096564Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+Program.Setup(()=&gt;{
+	Program.AddVirtualModules("HomeAutomation.X10.SC9000", "Sensor", "homegenie/generic/sensor", 1, 16);
+    Modules.InDomain("HomeAutomation.X10.SC9000").Each((m)=&gt;{
+      m.Parameter("X10Security.Address").Value = "";
+      return false;
+    });
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// X10 RF Security protocol specifications from
+// https://sourceforge.net/apps/mediawiki/mochad/index.php?title=X10_RF_Security_Extended_Address
+
+var RF_SECURITY = "5D 29";
+
+var security_events = new Dictionary&lt;string, string&gt;() {
+    { "0C", "Motion_alert_MS10A" },
+    { "8C", "Motion_normal_MS10A" },
+    { "0D", "Motion_alert_low_MS10A" },     /* MS10 does not emit this */
+    { "8D", "Motion_normal_low_MS10A" },    /* MS10 does not emit this */
+    { "4C", "Motion_normal_min_tamper_MS90" },    /* MS10 does not emit this */
+    { "04", "Contact_alert_min_DS10A" },
+    { "84", "Contact_normal_min_DS10A" },
+    { "44", "Contact_alert_min_tamper_DS12A" },
+    { "C4", "Contact_normal_min_tamper_DS12A" },
+    { "00", "Contact_alert_max_DS10A" },
+    { "80", "Contact_normal_max_DS10A" },
+    { "40", "Contact_alert_max_tamper_DS12A" },
+    { "C0", "Contact_normal_max_tamper_DS12A" },
+    { "01", "Contact_alert_min_low_DS10A" },    /* _low = low battery */
+    { "81", "Contact_normal_min_low_DS10A" },
+    { "05", "Contact_alert_max_low_DS10A" },
+    { "85", "Contact_normal_max_low_DS10A" },
+    { "06", "Arm_KR10A" },
+    { "86", "Disarm_KR10A" },
+    { "46", "Lights_On_KR10A" },
+    { "C6", "Lights_Off_KR10A" },
+    { "26", "Panic_KR10A" },
+    { "03", "Panic_KR15A" }                   /* Big red button */
+};
+
+// We want to do further processing whenever a module prop changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+	
+  	if (property.Name == "Receiver.RawData" &amp;&amp; property.Value.StartsWith(RF_SECURITY))
+    {
+      	/*
+       	// 5D 29 B9 B6 04 FB B5 00
+      	*        |  |  |  |  |  |
+        *        |  |  |  |  |  check (0x80 || 0x00)
+        *        |  |  |  |  addr2
+        *        |  |  |  XOR with prev byte=0xff
+        *        |  |  function/key
+        *        |  XOR with prev byte==0x0f
+        *        addr1
+        */
+      	var address1 = property.Value.Substring(6, 2);
+      	//var address2 = property.Value.Substring(18, 2);
+      	//var address3 = property.Value.Substring(21, 2);
+      	//
+      	var address  = address1; // + ":" + address2; // + ":" + address3;
+      	var function = property.Value.Substring(12, 2);
+      	//
+      	var fnvalue = "";
+      	if (security_events.ContainsKey(function))
+        {
+          	fnvalue = security_events[function];
+        }
+      
+      	var binaddress = Convert
+                          .ToString(int.Parse(address, System.Globalization.NumberStyles.HexNumber), 2)
+                          .PadLeft(8, '0')
+                          .Substring(4, 3)
+          				  .ToCharArray();
+      	Array.Reverse(binaddress);
+      	var straddress = new string(binaddress);
+//Program.Notify("X10 RF debug", "a=" + straddress.ToString() + " fn=" + function + "\n" + fnvalue);      
+      
+      	address = Convert.ToInt32(straddress, 2).ToString();
+		module = Modules.InDomain("HomeAutomation.X10.SC9000").WithAddress(address).Get();
+
+      	if (fnvalue.StartsWith("Motion_alert"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
+          	Program.RaiseEvent(module, "Sensor.MotionDetect", "1", "X10 Motion Sensor");
+        }
+      	else if (fnvalue.StartsWith("Motion_normal_min_tamper"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
+          	Program.RaiseEvent(module, "Sensor.Tamper", "1", "X10 Motion Sensor");
+        }
+      	else if (fnvalue.StartsWith("Motion_normal"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
+          	Program.RaiseEvent(module, "Sensor.MotionDetect", "0", "X10 Motion Sensor");
+          	Program.RaiseEvent(module, "Sensor.Tamper", "0", "X10 Motion Sensor");
+        }
+      	else if (fnvalue.StartsWith("Contact_alert"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
+          	Program.RaiseEvent(module, "Sensor.DoorWindow", "1", "X10 DoorWindow Sensor");
+        }
+      	else if (fnvalue.StartsWith("Contact_normal_min_tamper"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
+          	Program.RaiseEvent(module, "Sensor.Tamper", "1", "X10 DoorWindow Sensor");
+        }
+      	else if (fnvalue.StartsWith("Contact_normal"))
+        {
+          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
+          	Program.RaiseEvent(module, "Sensor.DoorWindow", "0", "X10 DoorWindow Sensor");
+          	Program.RaiseEvent(module, "Sensor.Tamper", "0", "X10 DoorWindow Sensor");
+        }
+      
+//Program.Notify("Security Module", module.Instance.Address + " " + fnvalue);
+      
+      	switch (property.Value.Substring(0, 5))
+        {
+          	case ".,,,":
+      		break;
+      		case "kikk":
+      		break;
+    	}
+    }
+  
+    return true;
+  
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>132</Address>
+    <Name>Serial Port I/O Test</Name>
+    <Description>Example of using SerialPort helper class for communicating with serial devices.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+return false;
+</ScriptCondition>
+    <ScriptSource>var portname = "/dev/ttyUSB0";
+
+  
+Action&lt;string&gt; 
+HandleStringReceived = (string message) =&gt; {
+  
+  	// this will be called every time a message is received from serial port
+	Program.Notify("SerialPort String", message);
+  
+};
+
+Action&lt;byte[]&gt; 
+HandleMessageReceived = (byte[] message) =&gt; {
+  
+  	// this will be called every time a message is received from serial port
+	Program.Notify("SerialPort Bytes", BitConverter.ToString(message));
+  
+};
+
+Action&lt;bool&gt;
+HandleStatusChanged = (bool connected) =&gt; {
+  	
+  	// this will be called every time the connection status changes
+  	Program.Notify("SerialPort Status", connected ? "CONNECTED!" : "DISCONNECTED!");
+  
+};
+
+// open the serial port channel and register handlers
+SerialPort
+  	.WithName( portname )
+  	.OnStatusChanged( HandleStatusChanged )
+  	.OnMessageReceived( HandleMessageReceived )
+  	.OnStringReceived( HandleStringReceived )
+  	.Connect( 9600 ); // change baud rate if needed
+
+while (Program.IsEnabled)
+{
+  // send a test message through serial port every 10 seconds
+  //
+  byte[] message = { 0x00, 0x00, 0x00, 0x00, 0x00 };
+  SerialPort.SendMessage(message);
+  //
+  Pause(5);
+  SerialPort.SendMessage("Hello Things!");
+  //
+  Pause(10);
+}
+
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Name>E-Mail Account</Name>
+    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Group>Messaging and Social</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:07.0083767Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+
+    Program.AddInputField("Email.Sender", "", "1. E-Mail address");
+    Program.AddInputField("Email.SmtpServer", "", "2. SMTP Mail Server address");
+  	Program.AddInputField("Email.SmtpUserName", "", "3. SMTP username (optional)");
+    Program.AddInputField("Email.SmtpPassword", "", "4. SMTP password (optional)");
+    Program.AddInputField("Email.SmtpPort", "25", "5. SMTP Mail Server port");
+    Program.AddInputField("Email.SmtpUseSsl", "FALSE", "6. SMTP Mail Server use SSL (TRUE or FALSE)");
+  
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  	Settings.Parameter("Messaging.Email.Sender").Value = Program.InputField("Email.Sender").Value;
+  	Settings.Parameter("Messaging.Email.SmtpServer").Value = Program.InputField("Email.SmtpServer").Value;
+  	Settings.Parameter("Messaging.Email.SmtpPort").Value = Program.InputField("Email.SmtpPort").Value;
+  	Settings.Parameter("Messaging.Email.SmtpUseSsl").Value = Program.InputField("Email.SmtpUseSsl").Value;
+  	Settings.Parameter("Messaging.Email.SmtpUserName").Value = Program.InputField("Email.SmtpUserName").Value;
+  	Settings.Parameter("Messaging.Email.SmtpPassword").Value = Program.InputField("Email.SmtpPassword").Value;
+
+  	Pause(10);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>143</Address>
+    <Name>Pushing Box</Name>
+    <Description>http://www.pushingbox.com/ integration</Description>
+    <Group>Messaging and Social</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2013-11-05T16:45:50.005883Z</ActivationTime>
+    <TriggerTime>2013-11-05T16:45:50.485284Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+	Program.AddFeatureTextInput("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "PushingBox.DeviceId", "PushingBox Notifications DeviceID");
+});
+// this program will be running in background
+return true;
+</ScriptCondition>
+    <ScriptSource>var serviceurl = "http://api.pushingbox.com/pushingbox";
+
+// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  
+	// store the Status.MemoryLevel value for recalling last light dimmer level
+	// when switched on
+  	if (module.HasFeature("PushingBox.DeviceId") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
+	{
+      	var serviceparams = "?devid=" + module.Parameter("PushingBox.DeviceId").Value;
+      	//
+      	serviceparams += "&amp;module=" + module.Instance.Name;
+      	serviceparams += "&amp;parameter=" + property.Name;
+      	serviceparams += "&amp;value=" + property.Value;
+      	//
+      	Net.WebService(serviceurl + serviceparams).Call();
+    }
+
+  	// returning true, will route event to other listeners
+    return true; 
+  
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>144</Address>
+    <Name>Presence Simulator</Name>
+    <Description>Simulate presence in the house by looping a program during a given interval time.
+The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;{
+  
+  	Program.AddInputField("StartTime", "", "1. Start 'Presence' program at time:");
+  	Program.AddInputField("EndTime", "", "2. Stop 'Presence' program at time:");
+  	Program.AddInputField("ProgramToRun", "", "3. Enter the Name or ID of the program to run:");
+  	Program.AddInputField("Pause", "30", "4. Pause between each run (seconds):");
+  
+});
+
+if (Program.InputField("StartTime").Value != "" 
+    &amp;&amp; Program.InputField("EndTime").Value != ""
+   	&amp;&amp; Program.InputField("ProgramToRun").Value != "")
+{
+    try
+    {
+      
+        var time_now = DateTime.Now; //String.Format("{H:mm:ss}", DateTime.Now);DateTime.ParseExact("124510", "hhmmss", CultureInfo.InvariantCulture);
+    
+        var time_start = DateTime.ParseExact(Program.InputField("StartTime").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+        var time_end = DateTime.ParseExact(Program.InputField("EndTime").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+        
+        var duration = new TimeSpan(time_end.Ticks - time_start.Ticks).TotalMinutes;
+        var distance = new TimeSpan(time_now.Ticks - time_start.Ticks).TotalMinutes;
+    
+        if (distance &gt; 0 &amp;&amp; distance &lt; duration &amp;&amp; Program.InputField("ProgramToRun").Value != "")
+        {
+            // execute the program
+            return true;
+        }
+        
+    }
+    catch (Exception ex) 
+    { 
+        Program.Notify("Presence Simulator", Program.InputField("StartTime").Value + "&lt;br&gt;ERROR:" + ex.Message);
+    }
+}
+
+Pause(30);
+
+return false;</ScriptCondition>
+    <ScriptSource>var programtorun = Program.InputField("ProgramToRun").Value;
+var pause = Program.InputField("Pause").DecimalValue;
+if (pause &lt; 1) pause = 1;
+//
+Program.Notify( "Presence Simulator", "Running 'Presence' program:&lt;br&gt;" + programtorun );
+// this is a blocking call and it will wait for the program to end
+//
+try
+{
+	Program.Run( programtorun ); 
+}
+catch (Exception e)
+{
+	Program.Notify("Presence Simulator", "ERROR running program:&lt;br&gt;" + e.Message);
+}
+//
+//
+Pause( pause ); 
+
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>154</Address>
+    <Name>Ping Me at Home</Name>
+    <Description>If security system is armed, pings your mobile device to determine
+when you're getting close to home.
+The program exposes the parameter &lt;b&gt;PingMe.AtHome&lt;/b&gt;
+that can be used both in Wizard Scripts or C# APPs to
+trigger actions when you get home.</Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-01-03T16:48:44.452645Z</ActivationTime>
+    <TriggerTime>2014-01-03T16:48:50.192687Z</TriggerTime>
+    <ScriptCondition>Program.Setup( () =&gt; {
+  
+//	Program.AddFeature("Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Security Alarm");
+  	//
+    Program.AddInputField("PingMe.Address1", "", "IP address to ping #1");
+    Program.AddInputField("PingMe.Address2", "", "IP address to ping #2");
+    Program.AddInputField("PingMe.Address3", "", "IP address to ping #3");
+  	//
+  	Program.Parameter("PingMe.AtHome").Value = "1";
+});
+// this program will be running in background
+return true;</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  
+  	Pause(10);
+  
+  	var isarmed = (Program.WithName("Security Alarm System").Parameter("HomeGenie.SecurityArmed").Value == "1");
+  	//
+  	if (!isarmed) 
+    {
+      	Pause(50);
+      	continue;
+    }
+  	//
+    int pinging_buddies = 0;
+    if (Program.InputField("PingMe.Address1").Value != "" &amp;&amp; Net.Ping(Program.InputField("PingMe.Address1").Value))
+    {
+          pinging_buddies++;
+    }
+    if (Program.InputField("PingMe.Address2").Value != "" &amp;&amp; Net.Ping(Program.InputField("PingMe.Address2").Value))
+    {
+          pinging_buddies++;
+    }
+    if (Program.InputField("PingMe.Address3").Value != "" &amp;&amp; Net.Ping(Program.InputField("PingMe.Address3").Value))
+    {
+          pinging_buddies++;
+    }
+    //
+    if (pinging_buddies &gt; 0 &amp;&amp; Program.Parameter("PingMe.AtHome").Value != "1")
+    {
+        Program.RaiseEvent("PingMe.AtHome", "1", "Ping Me At Home");      
+    }
+    else if (pinging_buddies == 0 &amp;&amp; Program.Parameter("PingMe.AtHome").Value != "0")
+    {
+        Program.RaiseEvent("PingMe.AtHome", "0", "Ping Me At Home");
+    }
+  
+}</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>168</Address>
+    <Name>Arduino Switches</Name>
+    <Description>Arduino controlled Switches.</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;
+{
+	// register 3 virtual modules using the "switch" widget for the domain "Arduino.Switches" 
+	Program.AddVirtualModules("Arduino.Switches", "Switch", "homegenie/generic/switch", 1, 3);                  
+});
+// returning true will execute the "Code to Run"
+return true;
+
+</ScriptCondition>
+    <ScriptSource>// 
+// TODO: Initialize serial port here...
+// 
+When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt; 
+{
+	string[] reqs = ((string)args).Split('/');
+	var res = "{ 'ResponseValue' : 'ERROR' }";
+	//
+	try
+	{
+		string switchid = reqs[1];
+	    string command = reqs[2];
+	    // get reference to the virtual module 
+	    var module = Modules.InDomain("Arduino.Switches").WithAddress(switchid).Get();
+	  	//
+	    switch(command)
+	    {
+	      	// eg. http://hg_address/api/Arduino.Switches/1/Control.On
+	      	case "Control.On":
+	      		// TODO: Send command by serial port to the arduino to turn on the switchid
+				Program.RaiseEvent(module, "Status.Level", "1", "Switch " + switchid);
+				res = "{ 'ResponseValue' : 'OK' }";
+				break;
+          	// eg. http://hg_address/api/Arduino.Switches/2/Control.Off
+	      	case "Control.Off":
+	      		// TODO: Send command by serial port to the arduino to turn off the switchid
+				Program.RaiseEvent(module, "Status.Level", "0", "Switch " + switchid);
+				res = "{ 'ResponseValue' : 'OK' }";
+				break;
+	    }
+	} 
+	catch (Exception ex) 
+	{ 
+	    res = ex.Message + " " + ex.StackTrace;
+	}
+	// unable to process request
+	return res;
+});
+//
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>180</Address>
+    <Name>Favourites Links</Name>
+    <Description>Add 5 virtual modules with customizable url link.
+These can be added to  groups and are then
+shown as hyperlink buttons in the control page.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup(()=&gt;{
+	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
+    Program.AddFeatureTextInput("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link");
+});
+
+return false;</ScriptCondition>
+    <ScriptSource />
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Favourites.Link</ForDomains>
+        <ForTypes>Generic</ForTypes>
+        <Property>FavouritesLink.Url</Property>
+        <Description>Favourites link</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>200</Address>
+    <Name>Windows Phone Push Notification Service</Name>
+    <Description>Windows Phone push notification service. 
+It sends toast and tile updates to Windows Phone client.
+Currently limited to one client channel.</Description>
+    <Group>Messaging and Social</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:17:28.550793Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <ScriptCondition>Program.Setup( () =&gt; {
+	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
+                       "MobileNotification.SendChanges", 
+                       "Push notifications to Windows Phone client");
+});
+// this program will be running in background
+return true;
+</ScriptCondition>
+    <ScriptSource>string notificationurl = "";
+var monitor = Program.WithName("Energy Monitor");
+
+Func&lt;bool&gt; updateTileData = ()=&gt;{
+  
+  	var devs = monitor.Parameter("EnergyMonitor.OperatingDevices").DecimalValue;
+    // Create the Tile message.
+    string tileMessage = "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;" +
+        "&lt;wp:Notification xmlns:wp=\"WPNotification\"&gt;" +
+        "&lt;wp:Tile&gt;" +
+        "&lt;wp:Count&gt;0&lt;/wp:Count&gt;" +
+        //          "&lt;wp:BackgroundImage&gt;&lt;/wp:BackgroundImage&gt;" +
+        //          "&lt;wp:Count&gt;" + (notificationcount++).ToString() + "&lt;/wp:Count&gt;" +
+        //          "&lt;wp:Title&gt;HomeGenie Beta&lt;/wp:Title&gt;" +
+        "&lt;wp:BackBackgroundImage&gt;&lt;/wp:BackBackgroundImage&gt;" +
+		"&lt;wp:BackTitle&gt;Counter " + monitor.Parameter("EnergyMonitor.KwCounter").Value + " Kw&lt;/wp:BackTitle&gt;";
+    if (devs &gt; 0)
+    {
+        tileMessage += "&lt;wp:BackContent&gt;" + devs + " device" + (devs &gt; 1 ? "s" : "") +
+          	"\nLoad\n" + monitor.Parameter("EnergyMonitor.KwLoad").Value + " Kw&lt;/wp:BackContent&gt;";
+    }
+  	else
+    {
+        tileMessage += "&lt;wp:BackContent&gt;&lt;/wp:BackContent&gt;";
+    }
+    tileMessage += "&lt;/wp:Tile&gt; " + "&lt;/wp:Notification&gt;";
+      
+  	//var response = 
+    Net.WebService(notificationurl)
+        .AddHeader("Content-type", "text/xml")
+        .AddHeader("X-WindowsPhone-Target", "token")
+        .AddHeader("X-NotificationClass", "1")
+        .Post(tileMessage)
+        .Call();
+  
+  	return true;
+  
+};
+
+When.WebServiceCallReceived("HomeAutomaion.HomeGenie/Messaging", ( args ) =&gt; 
+{
+  	var notificationdata = ((string)args).Substring(("HomeAutomaion.HomeGenie/Messaging/WindowsPhone.RegisterNotificationUrl/").Length);
+  	//var deviceid = notificationdata.Substring(0, notificationdata.IndexOf('/'));
+  	notificationurl = notificationdata.Substring(notificationdata.IndexOf('/') + 1);
+  	//
+  	if (notificationurl != "") updateTileData();
+  	//
+    return "{ 'ResponseValue' : 'OK' }";
+});
+
+When.ModuleParameterChange( (module, property) =&gt; {
+
+  	if (notificationurl != "" &amp;&amp; module.HasFeature("MobileNotification.SendChanges") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
+	{
+      	if (property.Value != property.LastValue) // TODO: check time from lastvalue as well to prevent flooding
+        {
+            var pname = property.Name;
+            if (pname.IndexOf('.') &gt; 0)
+            {
+                  pname = pname.Substring(pname.IndexOf('.') + 1);
+            }
+            // Create the Tile message.
+            string toastMessage = "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;" +
+                    "&lt;wp:Notification xmlns:wp=\"WPNotification\"&gt;" +
+                       "&lt;wp:Toast&gt;" +
+                            "&lt;wp:Text1&gt;" + module.Instance.Name + "&lt;/wp:Text1&gt;" +
+                            "&lt;wp:Text2&gt;" + pname + " = " + property.Value + "&lt;/wp:Text2&gt;" +
+                            "&lt;wp:Param&gt;/GroupsPage.xaml?NavigatedFrom=Toast Notification&lt;/wp:Param&gt;" +
+                       "&lt;/wp:Toast&gt; " +
+                    "&lt;/wp:Notification&gt;";
+          
+            //var response = 
+            Net.WebService(notificationurl)
+              .AddHeader("Content-type", "text/xml")
+              .AddHeader("X-WindowsPhone-Target", "toast")
+              .AddHeader("X-NotificationClass", "2")
+              .Post(toastMessage)
+              .Call();
+        }
+      
+    }
+
+  	// returning true, will route event to other listeners
+    return true; 
+  
+});
+
+while(Program.IsEnabled)
+{
+	if (notificationurl != "")
+    {
+		updateTileData();
+        Pause(300);
+    }
+  	Pause(5);
+}
+
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow</ForTypes>
+        <Property>MobileNotification.SendChanges</Property>
+        <Description>Push notifications to Windows Phone client</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>81</Address>
+    <Name>Energy Monitor</Name>
+    <Description>Collects and stores real-time information about
+energy consumption.</Description>
+    <Group>Energy Management</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.5993447Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+return true;
+</ScriptCondition>
+    <ScriptSource>Program.Parameter("EnergyMonitor.KwCounter").Value = "0";
+Program.Parameter("EnergyMonitor.KwLoad").Value = "0";
+Program.Parameter("EnergyMonitor.OperatingDevices").Value = "0";
+//
+while (Program.IsEnabled)
+{
+  	Pause(60);
+  	//
+    var loadkw = 0d;
+    var devcount = 0;
+    Modules.WithParameter("Meter.Watts").Each((mod)=&gt;{
+      if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
+      {
+        loadkw += mod.Parameter("Meter.Watts").DecimalValue;
+        devcount++;
+      }
+      return false;
+    });
+  	//
+  	Program.Parameter("EnergyMonitor.KwCounter").Value = Program.EnergyUseCounter.ToString("0.000");
+  	Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
+  	Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>93</Address>
+    <Name>Z-Wave - Multi Instance/Channel </Name>
+    <Description>Adds a virtual module for each instance of a multi instance node.
+It requires that a manufacturer specific get has been issued on the node.</Description>
+    <Group>Features</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.7006319Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+return true;
+</ScriptCondition>
+    <ScriptSource>When.ModuleParameterChange((module, parameter) =&gt; {
+	var nif = (" " + parameter.Value + " "); // node information frame
+  	switch (parameter.Name)
+    {
+      case "ZWaveNode.NodeInfo":
+      	if (nif.Contains(" 60 ")) // MultiInstance/Channel
+        {
+          	// ReQUEST instances count
+          	if (nif.Contains(" 25 ")) // 0x25 Switch Binary
+            {
+              	module.Command("MultiInstance.GetCount").Execute("Switch.Binary");
+            }
+          	if (nif.Contains(" 26 ")) // 0x26 Switch MultiLevel
+            {
+              	module.Command("MultiInstance.GetCount").Execute("Switch.MultiLevel");
+            }          	
+        }
+      	break;
+      case "ZWaveNode.MultiInstance.SwitchBinary.Count":
+        // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+        for (int m = 1; m &lt;= parameter.DecimalValue; m++)
+        {
+          	string address = module.Instance.Address + "." + m.ToString();
+            Program.AddVirtualModule(module.Instance.Domain, address, "Switch", "homegenie/generic/switch");
+          	Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
+        }
+      	break;
+      case "ZWaveNode.MultiInstance.SwitchMultiLevel.Count":
+        // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+        for (int m = 1; m &lt;= parameter.DecimalValue; m++)
+        {
+          	string address = module.Instance.Address + "." + m.ToString();
+            Program.AddVirtualModule(module.Instance.Domain, address, "Dimmer", "homegenie/generic/dimmer");
+        }
+    	break;
+    }
+
+  	return true; // continue processing event
+});
+
+When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
+  
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+    try
+    {
+      string nodeid = reqs[1];
+      string instance = "";
+      string command = reqs[2];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      //
+      // Check if it's a node supporting MultiInstance/Channel
+      // if the node address is in the form &lt;mainnode_id&gt;.&lt;instance&gt;
+      // then this is a command for a multiinstance virtual module
+      if (nodeid.IndexOf('.') &gt; 0)
+      {
+        	instance = nodeid.Substring(nodeid.IndexOf('.') + 1);
+        	nodeid = nodeid.Substring(0, nodeid.IndexOf('.'));
+      }
+      if (instance != "")
+      {
+          var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
+          var parentmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid).Get();
+          //
+          switch(command)
+          {
+            // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+            case "Control.On":
+                parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
+                Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+                break;
+            // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+            case "Control.Off":
+                parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+                Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+                break;
+            case "Control.Toggle":
+                if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
+                {
+                  parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
+                  Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+                }
+                else
+                {
+                  parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+                  Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+                }
+                break;
+            case "Control.Level":
+                parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
+                Program.RaiseEvent(virtualmodule, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
+                break;
+            //case "Control.ColorHsb":
+            //    string[] values = parameter.Split(',');
+            //    bridgeapicall(lightnumber, "{ \"on\" : true" + 
+            //                  ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
+            //                  ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
+            //                  ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + " }");
+            //    Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+            //    Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
+            //    break; 
+          }
+          //
+          return "{ 'ResponseValue' : 'OK' }";    
+      }
+    } catch (Exception e) { 
+      
+    	Program.Notify("ZWave MultiInstance module ERROR!", e.Message);
+                       
+    }  	
+  	
+  	return "";
+});
+
+// setup multi channel virtual modules at startup
+Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
+  	var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
+  	if (parameter.DecimalValue == 0)
+    {
+      	// if not SwitchBinary, try SwitchMultilevel
+      	parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchMultiLevel.Count");
+    }
+    // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+    for (int m = 1; m &lt;= parameter.DecimalValue; m++)
+    {
+        string address = module.Instance.Address + "." + m.ToString();
+        Program.AddVirtualModule(module.Instance.Domain, address, "Switch", "homegenie/generic/switch");
+        Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
+    }
+  	return false;
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>76</Address>
+    <Name>Sensor.* events forwarding</Name>
+    <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2013-12-21T23:39:04.212865Z</ActivationTime>
+    <TriggerTime>2013-12-21T23:39:04.589769Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+  	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
+  	Program.AddInputField("CellUsername", "", "2. Username");
+  	Program.AddInputField("CellPassword", "", "3. Password");
+  
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  	var celladdress  = Program.InputField("CellAddress").Value;
+  	var cellusername = Program.InputField("CellUsername").Value;
+  	var cellpassword = Program.InputField("CellPassword").Value;
+  	// ROUTE METERING EVENT TO REMOTE HG CELL
+  	if (!celladdress.Contains("?") &amp;&amp; property.Name.StartsWith("Sensor."))
+    {
+  		Net
+          .WithCredentials(cellusername, cellpassword)
+          .SignalModuleEvent(celladdress, module, property);
+    }
+  	// returning true, will route event to other listeners
+	return true;
+});
+//
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>121</Address>
+    <Name>X10 RF Virtual Modules Mapper</Name>
+    <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.3970755Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+Program.Setup(()=&gt;{
+  	Program.AddFeatureTextInput("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event");
+  	Program.AddFeatureTextInput("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event");
+	Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// We want to do further processing whenever a module prop changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+	
+  	if (property.Name == "Receiver.RawData" &amp;&amp; module.Instance.Domain == "HomeAutomation.X10")
+    {
+      
+      	Modules.InDomain("HomeAutomation.X10.RF").Each((m)=&gt;{
+          
+            var rfon = m.Parameter("X10RFString.LevelOn").Value;
+          	var rfoff = m.Parameter("X10RFString.LevelOff").Value;
+          	if (rfon != "" &amp;&amp; rfon == property.Value)
+            {
+              	Program.RaiseEvent(m, "Status.Level", "1", "X10 Virtual RF Module");
+              	return true;
+            }
+          	else if (rfoff != "" &amp;&amp; rfoff == property.Value)
+            {
+              	Program.RaiseEvent(m, "Status.Level", "0", "X10 Virtual RF Module");
+              	return true;
+            }
+          
+          	return false;
+        });
+      
+    }
+  
+    return true;
+  
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.X10.RF</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>X10RFString.LevelOn</Property>
+        <Description>Raw RF string for ON event</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.X10.RF</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>X10RFString.LevelOff</Property>
+        <Description>Raw RF string for OFF event</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>40</Address>
+    <Name>HomeGenie Leds</Name>
+    <Description>Staus and Activity leds for HomeGenie.
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-09T17:48:39.846061Z</ActivationTime>
+    <TriggerTime>2014-02-09T17:49:07.941184Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;
+{
+	// register 2 virtual modules using the "switch" widget    
+	Program.AddVirtualModules("HomeGenie.Leds", "Light", "homegenie/generic/light", 1, 2);                  
+});
+// returning true will execute the "Code to Run"
+return true;
+
+</ScriptCondition>
+    <ScriptSource>// Initially turn the leds off
+var systemleds = new PinConfiguration[] { 	ConnectorPin.P1Pin15.Output().Name("ActivityLed").Disable(), 
+                                         	ConnectorPin.P1Pin13.Output().Name("ReadyLed").Disable() };
+// 
+var ledsname = new Dictionary&lt;string, string&gt;() { {"1", "ReadyLed"}, {"2", "ActivityLed"} };
+var ledbusy = false;
+using (var connection = new GpioConnection(systemleds))
+{  
+	When.ModuleParameterChange( (module, parameter) =&gt; {
+      	if (!ledbusy &amp;&amp; module.Instance.Domain != "HomeGenie.Leds")
+        {
+          	ledbusy = true;
+            connection.Blink("ActivityLed", 10); // 10 ms
+            ledbusy = false;
+        }
+      	return true;
+	});
+  
+    
+    When.WebServiceCallReceived("HomeGenie.Leds", ( args ) =&gt; 
+    {
+        string[] reqs = ((string)args).Split('/');
+        var res = "{ 'ResponseValue' : 'ERROR' }";
+    
+      	//Command cmd = new Command((string)args);
+        try
+        {
+            string command = reqs[2];
+    		string ledid = reqs[1];
+            var module = Modules.InDomain("HomeGenie.Leds").WithAddress(ledid).Get();
+          	//
+            switch(command)
+            {
+              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.On
+              case "Control.On":
+              	connection[ledsname[ledid]] = true;
+                Program.RaiseEvent(module, "Status.Level", "1", "Led " + ledid);
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+              // eg. http://hg_address/api/HomeGenie.Leds/2/Control.Off
+              case "Control.Off":
+              	connection[ledsname[ledid]] = false;
+                Program.RaiseEvent(module, "Status.Level", "0", "Led " + ledid);
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.Toggle
+              case "Control.Toggle":
+              	connection[ledsname[ledid]] = !connection[ledsname[ledid]];
+                Program.RaiseEvent(module, "Status.Level", connection[ledsname[ledid]] ? "1" : "0", "Led " + ledid);
+                res = "{ 'ResponseValue' : 'OK' }";
+                break;
+            }
+        } 
+        catch (Exception ex) 
+        { 
+            res = ex.Message + " " + ex.StackTrace;
+        }
+        // unable to process request
+        return res;
+    });
+  
+  
+  
+  	while(Program.IsEnabled) 
+    {
+      	// HomeGenie heart beat
+      	connection.Blink("ReadyLed", 10);
+	    Pause(0.060);
+      	connection.Blink("ReadyLed", 230);
+	    Pause(0.700);
+    }
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>145</Address>
+    <Name>Smart Lights</Name>
+    <Description>Control device by motion detection and enviroment lumosity </Description>
+    <Group>Scenes</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-18T21:15:05.644188Z</ActivationTime>
+    <TriggerTime>2014-02-18T21:15:06.4980729Z</TriggerTime>
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+    Program.AddFeature("Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");
+    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (enter name)");
+    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (enter name)");
+    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)");
+
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
+var MOT_SENSOR_NAME = "HomeGenie.SmartLights.OnMotionDetect";
+var LUM_SENSOR_NAME = "HomeGenie.SmartLights.CheckLuminosity";
+var TURNOFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffTimeout";
+var LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
+var LUM_TRIGGER_VALUE = 10;
+//
+var smart_devices = Modules.WithFeature(SMART_LIGHT_ENABLE);
+//
+When.ModuleParameterIsChanging((module, parameter) =&gt; {
+    
+  	if (module.IsOfDeviceType("Sensor"))
+    {
+      	if (parameter.Name == "Sensor.MotionDetect" || parameter.Name == "Status.Level")
+        {
+            var motionlevel = parameter.DecimalValue;
+            if (motionlevel &gt; 0)
+            {
+                smart_devices.Each((mod)=&gt;
+                {
+                    if (mod.Parameter(MOT_SENSOR_NAME).Value == module.Instance.Name)
+                    {
+						mod.Parameter(LAST_EVENT).Value = DateTime.UtcNow.Ticks.ToString();
+  						if (mod.Level == 0)
+                        {
+                            Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
+                          	//
+                            var lumsensor = Modules.WithName(mod.Parameter(LUM_SENSOR_NAME).Value).Get();
+                            if (lumsensor.Instance != null)
+                            {
+                                var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
+                                if (luminosity &lt; LUM_TRIGGER_VALUE)
+                                {
+                                    mod.On();
+                                }
+                            }
+                            else	
+                            {
+                                mod.On();
+                            }
+                        }
+                    }
+                  	//
+	              	return false;
+                });
+            }
+            else
+            {
+                // timeout before turning it off
+            }
+        }
+      	if (module.HasParameter("Sensor.Luminance"))
+        {
+      		var luminosity = module.Parameter("Sensor.Luminance").DecimalValue;
+            smart_devices.Each((mod)=&gt;
+            {
+            	if (mod.Parameter(LUM_SENSOR_NAME).Value == module.Instance.Name &amp;&amp; mod.Level &gt; 0)
+				{
+                    if (luminosity &gt;= LUM_TRIGGER_VALUE)
+                    {
+                        Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched OFF " + mod.Instance.Address + " " + mod.Instance.Name);
+                      	mod.Off();
+                    }
+                    else	
+                    {
+                        //if (luminosity &lt; 10) mod.Level = 100;
+                        //else mod.Level = 50;
+                    }
+				}
+              	return false;
+			});
+		}
+    }
+    return true;
+});
+//
+while (Program.IsEnabled)
+{
+	smart_devices.Each((mod)=&gt;
+	{
+      	var timeout = mod.Parameter(TURNOFF_TIMEOUT).DecimalValue;
+      	if (timeout == 0) timeout = 120; // default timeout is 2 minutes
+//		Program.Notify("Smart Lights", mod.Instance.Address + " - " + mod.Instance.Name + " : " + mod.IsOn);
+//		Pause(1);
+      	if (mod.IsOn)
+        {
+            var lastevent = mod.Parameter(LAST_EVENT).UpdateTime;
+          	var lastupdate = mod.Parameter("Status.Level").UpdateTime;
+          	var checktime = lastevent.Ticks;
+          	if (checktime &lt; lastupdate.Ticks) checktime = lastupdate.Ticks;
+            var elapsed = new TimeSpan(DateTime.UtcNow.Ticks - checktime);
+          	if (elapsed.TotalSeconds &gt; timeout) {
+                Program.Notify("Smart Lights", mod.Instance.Address + " " + mod.Instance.Name + "&lt;br&gt;switched OFF.");
+            	mod.Off();
+            }
+        }
+      	return false;
+	});
+  	Pause(2);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.Enable</Property>
+        <Description>Enable Smart Light Control</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
+        <Description>Controlled by motion sensor (enter name)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
+        <Description>Controlled by luminance sensor (enter name)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Light,Dimmer</ForTypes>
+        <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
+        <Description>Turn off after inactivity timeout (seconds)</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>300</Address>
+    <Name>Fibaro RGBW</Name>
+    <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
+</Description>
+    <Group>Devices and Things</Group>
+    <Type>CSharp</Type>
+    <ActivationTime>2014-02-06T21:17:33.041155Z</ActivationTime>
+    <TriggerTime>2014-02-06T21:17:33.428467Z</TriggerTime>
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+
+/*
+	Knowledge of Controller Fibaro RGWM-441
+	---------------------------------------
+Version 1.0
+Date : 06/02/2014
+Author : DaniMail
+
+MultiLevel Switch (Dimmer) :
+4 channels MultiLevel -&gt; R G B W
+4 channels MultiSensor attached to each MultiLevel Dimmer
+
+Principal Instance :
+	     Control.Level 0 to 99 of the last color adjusted.
+	     Control.On Control.Off accepted
+
+It as 5 other Instances :
+Instance 1 : Control.Level 0 to 99 of the last color adjusted. 
+	     Control.On Control.Off not accepted
+Instance 2 : Control.Level 0 to 99 for Red Channel. 
+	     Control.On Control.Off not accepted
+Instance 3 : Control.Level 0 to 99 for Green Channel. 
+	     Control.On Control.Off not accepted
+Instance 4 : Control.Level 0 to 99 for Blue Channel. 
+	     Control.On Control.Off not accepted
+Instance 5 : Control.Level 0 to 99 for White Channel. 
+	     Control.On Control.Off not accepted
+
+Is as 2 principaly parameters that affect the outputs :
+Parameter 14 :
+	     This parameter affect the action of the 4 input sensor
+	     Default value : 4369 (Momentary Normal Mode) -&gt; With this value each input 
+		is attached to manually switch on color R G B W
+	     For exemple, if the value is 13107 (Momentary Rainbow)-&gt; If any switch is On, 
+		it's generate a graduated variation of the color until is Off.   
+
+Parameter 72 :
+	     This parameter set the automatic program running on the module.
+	     Default value : 1
+	     Value 1 to 5 : User programs to define
+	     Value 6 to 10 : Programs predefined on the module
+		6 : -&gt; Fast brigtness variation of clear green color
+		7 : -&gt; Hard blue with spaced white flashes
+		8 : -&gt; Slow color variation of R G B spectrum
+		9 : -&gt; Slow color variation of pastel colors spectrum
+		10 : -&gt; Fast flashes between Red and Blue
+
+Actually I don't have any specs on how to set User program.
+I think it's actually possible only with "Fibaro Home Center 2".
+*/
+
+Program.Setup(()=&gt;{
+
+	Modules.InDomain("HomeAutomation.ZWave").WithParameter("ZWaveNode.ManufacturerSpecific").Each((m)=&gt;
+	{
+	   	if( m.Parameter("ZWaveNode.ManufacturerSpecific").Value == "010F:0900:1000" )
+        {
+		 	Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","zwave/fibaro/rgbw");
+	    }
+      	return false ;
+	});
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>//	Program.InputField("ZWaveModule").Value  
+// - http://&lt;hg_address&gt;/api/HomeAutomation.FibaroRGBW/...
+// - Version : 1.0
+// - Date : 06/02/2014
+// - Author : DaniMail
+
+When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+  	try
+    {
+      string lightnumber = reqs[1];
+      string command = reqs[2];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      //
+      var module = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber).Get();
+      //
+      switch(command)
+      {
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.On
+        case "Control.On":
+			module.On();
+        	Program.RaiseEvent(module, "Status.Level", "1", "Fibaro RGBW");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.Off
+        case "Control.Off":
+			module.Off();
+        	Program.RaiseEvent(module, "Status.Level", "0", "Fibaro RGBW");
+        	break;
+        case "Control.Toggle":
+        	if (module.Parameter("Status.Level").DecimalValue == 0)
+            {
+				module.On();
+              	Program.RaiseEvent(module, "Status.Level", "1", "Fibaro RGBW");
+            }
+        	else
+            {
+	 			module.Off();
+ 	        	Program.RaiseEvent(module, "Status.Level", "0", "Fibaro RGBW");
+            }
+        	break;
+        case "Control.Level":
+        	module.Command("Control.Level").Set((double.Parse(parameter)).ToString()) ;
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Fibaro RGBW");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+        case "Control.ColorHsb":
+        	string[] values = parameter.Split(',');
+        	double level = (double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
+        	int iRed = (int)Math.Truncate(level) ;
+        	var moduleRed = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".2").Get();
+   		 	moduleRed.Command("Control.Level").Set( ((int)iRed).ToString() ) ;
+        	level = (double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
+        	int iGreen = (int)Math.Truncate(level) ;
+        	var moduleGreen = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".3").Get();
+    	 	moduleGreen.Command("Control.Level").Set( ((int)iGreen).ToString() ) ;
+        	level = (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
+        	int iBlue = (int)Math.Truncate(level) ;
+        	var moduleBlue = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".4").Get();
+    	 	moduleBlue.Command("Control.Level").Set( ((int)iBlue).ToString() ) ;
+ 	        Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Fibaro RGBW");
+        	break; 
+        case "Control.ProgramRGB" :
+			module.Command("Config.ParameterSet").Set("72/" + parameter);
+			Program.Notify("Program RGB", "N° " + parameter + " running" );
+            break;
+      }
+      //
+      return "{ 'ResponseValue' : 'OK' }";    
+    } catch (Exception e) { 
+      
+    	Program.Notify("Fibaro RGBW ERROR!", e.Message);
+                       
+    }
+    return "{ 'ResponseValue' : 'ERROR' }";
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

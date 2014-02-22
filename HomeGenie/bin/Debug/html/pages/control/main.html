@@ -1,0 +1,122 @@
+
+
+<!-- Control -->
+<div data-role="page" id="page_control">
+
+
+    {include pages/header.html}
+
+    <div data-role="content">                
+                        
+        <img src="images/control.png" style="position:absolute;top:63px;left:20px;" width="64" />
+        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="control_groups_and_modules">Control Groups<br /> and Modules</h3></div>
+
+        <div id="control_groupslist" data-role="collapsible-set">
+        </div>
+
+    </div> 
+
+
+
+
+    <div data-role="popup" id="control_actionmenu">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h5 align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;" data-iconpos="right">
+	        <li id="control_actionmenu_macrorecord" data-icon="edit"><a href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
+	        <li data-icon="refresh"><a href="javascript:HG.WebApp.Control.Refresh();HG.WebApp.Control.SetAutoRefresh(true);">Refresh list</a></li>
+        </ul>
+    </div>
+
+
+
+
+    <div data-role="popup" id="control_macrorecord_optionspopup" style="min-width:280px">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <div data-role="header"><h1>Options</h1></div>
+        <div data-role="content">
+
+            <h4>Pause Between commands</h4>
+            <div align="center">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <label for="macrorecord_delay_none">None</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_none" type="radio" data-icon="gear" data-iconpos="left" data-mini="true" />
+                    <label for="macrorecord_delay_mimic">Mimic</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_mimic" type="radio" data-icon="gear" data-iconpos="left" data-mini="true"/>
+                    <label for="macrorecord_delay_fixed">Fixed</label>
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_fixed" type="radio" data-icon="gear" data-iconpos="left" data-mini="true" />
+                </fieldset>
+            </div>
+            <fieldset data-role="controlgroup">
+                <label for="macrorecord_delay_seconds">Fixed pause seconds</label>
+                <input id="macrorecord_delay_seconds" type="number" step="0.1" min="0" value="0" />
+            </fieldset>
+                    
+        </div>
+    </div>
+
+
+
+    <!--div id="cotrol_macrorecord_panel" style="position:absolute; margin-left:10%; margin-right:10%; width:80%; height: auto; border:solird 3px white;display:block;">
+        test
+    </div-->
+
+
+    <div id="toolbar_control" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a data-locale-id="home_menu_configure" data-role="button" data-transition="slide" href="#page_configure" data-icon="gear" data-iconpos="left">
+                        Configure
+                    </a>
+                </li>
+                <li>
+                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                        Home
+                    </a>
+                </li>
+                <li>
+		            <a data-locale-id="configure_program_bbaractions" data-role="button" href="#control_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left">
+			            Actions
+		            </a>
+                </li>
+            </ul>
+    	</div><!-- /navbar -->
+
+    </div>
+
+    <div id="toolbar_macrorecord" data-role="footer" data-position="fixed" data-tap-toggle="false" class="ui-screen-hidden">
+        
+        <div data-role="navbar" data-iconpos="right">
+
+            <ul>
+                <li>
+                    <a href="javascript:HG.WebApp.Control.RecordMacroDiscard()" data-locale-id="control_macrorecord_discard" data-role="button" href="#" data-icon="delete" data-iconpos="left">
+                        Discard
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save" data-role="button" data-transition="slide" data-direction="reverse" data-icon="check" data-iconpos="left">
+                        Save
+                    </a>
+                </li>
+                <li>
+                    <a data-role="button" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-transition="slideup" data-icon="gear" data-mini="true" __style="max-width:100px;">
+                        Options
+                    </a>
+                </li>
+            </ul>
+                
+        </div>
+
+    </div>
+
+    
+</div>
+    
+<!-- hg page init script  -->	
+<script type="text/javascript">
+	HG.WebApp.Control.InitializePage();
+</script>
+

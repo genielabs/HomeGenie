@@ -1,0 +1,30 @@
+﻿{
+    "Commands" : [
+        {
+            "Command": "Control.On",
+            "Aliases": [ "inschakelen", "aan", "on" ] 
+        },
+        {
+            "Command": "Control.Off",
+            "Aliases": [ "uitschakelen", "uit", "off" ]
+        },
+        {
+            "Command": "Control.Level",
+            "Aliases": [ "waarde", "nivo", "niveau" ]
+        },
+        {
+            "Command": "Control.Toggle",
+            "Aliases": [ "wissel", "wisselen", "omwisselen", "omkeren" ]
+        }
+    ],
+    "Types" : [
+        {
+            "Type": "Light,Dimmer",
+            "Aliases": [ "alle lichten", "alle lampen", "iedere lamp", "lampen", "alle dimmers", "iedere dimmer", "dimmers"]
+        },
+        {
+            "Type": "Switch",
+            "Aliases": [ "alle schakelaars", "schakelaars", "iedere schakelaar" ]
+        }
+    ]
+}

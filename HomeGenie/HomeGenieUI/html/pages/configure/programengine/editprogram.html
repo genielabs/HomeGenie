@@ -1,0 +1,311 @@
+
+<!-- ProgramEngine - Program Edit -->
+<div data-role="page" id="page_automation_editprogram">
+
+
+
+    {include pages/header.html}
+		
+    <div data-role="content" style="padding: 15px">
+
+        
+        <img src="images/program.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:20px"><h3 id="page_automation_program_title" style="position:absolute;bottom:40px;left:90px;"></h3></div>
+
+
+		<ul data-split-icon="delete" data-role="listview" data-inset="false">
+			<li data-locale-id="configure_program_programgroup" data-role="list-divider">Program Group</li>
+			<li>
+				<select id="automation_programgroup">
+                </select>
+            </li>
+			<li data-locale-id="configure_program_programname" data-role="list-divider">Program Name</li>
+			<li>
+                <input id="automation_programname" type="text" />
+            </li>
+			<li data-locale-id="configure_program_programdescription" data-role="list-divider">Program Description</li>
+			<li>
+                <textarea id="automation_programdescription" cols="40" rows="3"></textarea>
+            </li>
+			<li data-locale-id="configure_program_programtype" data-role="list-divider">Program Type</li>
+			<li>
+            <div class="ui-grid-a">
+				<div class="ui-block-a" style="width:70%">
+					<select id="automation_programtype" onchange="HG.WebApp.ProgramsList.ChangeProgramType(this.value)">
+						<option _data-locale-id="configure_program_typewizard" value="Wizard">Wizard Script</option>
+						<option _data-locale-id="configure_program_typecsharp" value="CSharp">C# Program</option>
+					</select>
+				</div>
+				<div class="ui-block-b" style="width:30%">
+				    <a href="http://generoso.info/homegenie/automationguide.html" target="_hgmanual" data-role="button">Help</a>
+                </div>
+            </div>
+            <br />				
+			</li>
+		</ul>
+
+		<ul data-role="listview" data-inset="false">
+			<li data-locale-id="configure_program_trigger" data-role="list-divider">Program Trigger</li>
+            <li>
+		        <div align="center">
+			        <select id="automation_conditiontype">
+				        <option data-locale-id="configure_program_conditionswitchestrue" value="OnSwitchTrue">when condition evaluation switches to 'true'</option>
+				        <option data-locale-id="configure_program_conditionswitchesfalse" value="OnSwitchFalse">when condition evaluation switches to 'false'</option>
+				        <option data-locale-id="configure_program_runonceconditiontrue" value="Once">run once, when condition evaluation returns 'true'</option>
+				        <option data-locale-id="configure_program_conditionistrue" value="OnTrue">when condition evaluation returns 'true'</option>
+				        <option data-locale-id="configure_program_conditionisfalse" value="OnFalse">when condition evaluation returns 'false'</option>
+			        </select>
+		        </div>
+            </li>
+		</ul>			
+		<br clear="all" />					
+
+		
+		<div id="configure_program_editfortypewizard" data-role="fieldcontain">
+	
+
+			<ul data-role="listview" data-inset="false">
+				<li data-locale-id="configure_program_programconditions" data-role="list-divider">Program Conditions</li>
+			</ul>			
+			<hr style="margin-top:16px">
+			<ul id="automation_program_conditions" data-split-icon="delete" data-role="listview" data-inset="false">
+			</ul>			
+			<br clear="all" />			
+			<div>
+                <a data-locale-id="configure_program_conditionadd" href="#automation_domain" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Add Condition</a>
+                <a data-locale-id="configure_program_conditioncapture" href="#automation_capture_condition_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Capture</a>
+            </div>
+			{include pages/configure/programengine/conditionwizard.html}
+		
+			<br clear="all" />			
+			<br clear="all" />
+			
+			<ul data-role="listview" data-inset="false">
+				<li data-locale-id="configure_program_instructions" data-role="list-divider">Program Instructions</li>
+			</ul>			
+			<ul style="margin-top:14px" id="automation_program_instructions" data-split-icon="delete" data-role="listview" data-inset="false">
+			</ul>			
+			<br clear="all" />			
+			<div>
+                <a data-locale-id="configure_program_instructionadd" href="#automation_command_domain_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Add Instruction</a>
+                <a data-locale-id="configure_program_commamdcapture" href="#automation_capture_command_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Capture</a>
+            </div>
+			{include pages/configure/programengine/commandwizard.html}
+			
+		</div>
+		
+		<div id="configure_program_editfortypecsharp" data-role="fieldcontain" style="display:none">
+		
+
+
+		    <ul data-role="listview" data-inset="false">
+			    <li data-locale-id="configure_program_csharpprogram" data-role="list-divider">C# Program</li>
+            </ul>		
+			<br clear="all" />			
+			<div><a href="#page_automation_editprogram_code" data-role="button" data-icon="edit" data-transition="slide" data-inline="true">Edit / Compile</a></div>
+
+			<!--br clear="all" />
+
+			<ul data-split-icon="delete" data-role="listview" data-inset="false">
+				<li data-locale-id="configure_program_csharpcode" data-role="list-divider">C# Program - Code To Run</li>
+			</ul>			
+			<br clear="all" />
+
+
+
+			
+			<br clear="all" />			
+			<br clear="all" / -->
+			
+		</div>
+		
+
+    </div> 
+
+
+
+	<div data-role="popup" id="automation_program_saving" class="ui-corner-all">
+		<div data-role="header" class="ui-corner-top">
+			<h1 data-locale-id="configure_program_savingtitle">Saving Program</h1>
+		</div>
+		<div data-role="content" class="ui-corner-bottom ui-content">
+			<h3 data-locale-id="configure_program_savingwait" class="ui-title">Please wait...</h3>
+		</div>
+	</div>				
+
+
+
+
+	<div data-role="popup" id="automation_program_switchtype" class="ui-corner-all">
+		<div data-role="header" class="ui-corner-top">
+			<h1 data-locale-id="configure_program_switchtypetitle">Change Type?</h1>
+		</div>
+		<div data-role="content" class="ui-corner-bottom ui-content">
+			<h3 data-locale-id="configure_program_switchtypeprompt" class="ui-title">Are you sure you want to change program type?</h3>
+			<p data-locale-id="configure_program_switchtypeadvice">Current program data will be cleared.</p>
+			<a data-locale-id="configure_program_switchtypecancel" id="program_switchtypecancel_button" data-role="button" data-inline="true" data-rel="back">Cancel</a>    
+			<a data-locale-id="configure_program_switchtypeconfirm" id="program_switchtype_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Change</a>  
+		</div>
+	</div>				
+	
+		
+				
+
+	<div data-role="popup" id="automation_program_delete" class="ui-corner-all">
+		<div data-role="header" class="ui-corner-top">
+			<h1 data-locale-id="configure_program_deletetitle">Delete Program?</h1>
+		</div>
+		<div data-role="content" class="ui-corner-bottom ui-content">
+			<h3 data-locale-id="configure_program_deleteprompt" class="ui-title">Are you sure you want to delete this program?</h3>
+			<p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
+			<a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>    
+			<a data-locale-id="configure_program_deleteconfirm" id="program_delete_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Delete</a>  
+		</div>
+	</div>				
+				
+
+
+	<a href="#" id="simplestringdialog" data-role="button" style="display:none" data-theme="a" data-content-theme="a">Run Options Prompt</a>	
+
+
+
+
+    <div data-role="popup" id="editprograms_actionmenu">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h5 align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+	        <li data-icon="minus" data-iconpos="left"><a href="#automation_program_delete" data-position-to="window" data-rel="popup" data-transition="pop">Delete program</a></li>
+	        <li id="editprograms_actionmenu_run" data-icon="gear" data-iconpos="left"><a data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
+	        <li id="editprograms_actionmenu_break" data-icon="minus" data-iconpos="left"><a data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
+            <li data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_save" href="javascript:HG.WebApp.ProgramEdit.SaveProgram();history.back();">Save</a>
+        </ul>
+    </div>
+
+
+
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>    
+		            <a data-locale-id="bottombar_button_back" id="editprograms_backbutton" data-role="button"  data-transition="slide" data-direction="reverse" href="#page_automation_programs" data-icon="back" data-iconpos="left" data-mini="true">
+			            Back
+		            </a>
+                </li>
+                <li>    
+                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                        Home
+                    </a>
+                </li>
+                <li>    
+		            <a data-locale-id="configure_program_bbaractions" data-role="button" href="#editprograms_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left" data-mini="true">
+			            Actions
+		            </a>
+                </li>
+            </ul>
+    	</div><!-- /navbar -->
+
+    </div>
+	
+</div>
+
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+    position:absolute;top:140px;bottom:60px;left:20px;right:20px;border solid 1px red;display:block;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+</style>
+
+<div data-role="page" id="page_automation_editprogram_code">
+
+    {include pages/header.html}
+		
+    <div data-role="content" style="padding: 15px">
+
+        
+        <img src="images/program.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:20px"><h3 id="page_automation_programcode_title" style="position:absolute;bottom:40px;left:90px;"></h3></div>
+        <div style="position:absolute;top:80px; right:20px;font-weight:bolder;"><a id="program_error_button" href="#program_error_message" data-rel="popup" data-role="button">ERRORS!</a></div>
+
+    </div>
+
+
+	<textarea id="automation_program_scriptcondition" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="font-family:monospace;resize:none;display:none;">// HomeGenie C# Automation Program
+// a "return true;" instruction, at any point of this code block, will trigger "Code to Run" execution
+// for manually activated program, just leave a "return false" instruction here.
+return false;
+	</textarea>
+
+	<textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="font-family:monospace;resize:none;display:none;"></textarea>
+	
+
+
+
+
+	<div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;">
+        <a href="javascript:$('#program_error_message').popup('close')" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		<div data-role="header" class="ui-corner-top">
+			<h1 data-locale-id="configure_program_errorstitle">Errors</h1>
+		</div>
+		<div data-role="content" class="ui-corner-bottom ui-content">
+            <p id="program_error_message_text"></p>
+		</div>
+    </div>
+
+
+
+
+    <div data-role="popup" id="editprograms_code_actionmenu">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h5 align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+	        <li id="editprograms_actionmenu_run" data-icon="gear" data-iconpos="left"><a data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
+	        <li id="editprograms_actionmenu_break" data-icon="minus" data-iconpos="left"><a data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
+            <li id="editprograms_actionmenu_compile" data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_compile" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Compile</a>
+        </ul>
+    </div>
+
+
+
+
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>    
+		            <a data-locale-id="bottombar_button_back" data-role="button" data-transition="slide" data-direction="reverse" href="#page_automation_editprogram" data-icon="back" data-iconpos="left" data-mini="true">
+			            Back
+		            </a>
+                </li>
+                <li>    
+		            <a id="editprograms_code_codeblockstoggle" data-locale-id="configure_program_bbar_programeditruncode" data-role="button" data-icon="gear" data-iconpos="left" data-mini="true">
+			            Edit Trigger Code
+		            </a>
+                </li>
+                <li>    
+		            <a data-locale-id="configure_program_bbaractions" data-role="button" href="#editprograms_code_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left" data-mini="true">
+			            Actions
+		            </a>
+                </li>
+            </ul>
+    	</div><!-- /navbar -->
+
+    </div>
+
+
+</div>
+ 
+
+
+<!-- hg page init script -->	
+<script type="text/javascript">
+	HG.WebApp.ProgramEdit.InitializePage();
+</script>
+	

@@ -1,0 +1,1212 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0086"
+      },
+      "productType": {
+        "@value": "0000"
+      },
+      "productId": {
+        "@value": "0000"
+      },
+      "libType": {
+        "@value": "06"
+      },
+      "protoVersion": {
+        "@value": "02"
+      },
+      "protoSubVersion": {
+        "@value": "4a"
+      },
+      "appVersion": {
+        "@value": "01"
+      },
+      "appSubVersion": {
+        "@value": "00"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "beamSensor": "0"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "4 Button Remote Control"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Press Learn for 3 seconds"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Learn Mode Button"
+          }
+        ]
+      },
+      "productName": "Minimote ",
+      "brandName": "Aeon Labs",
+      "productLine": "Remote Control",
+      "productCode": "MINIMOTE",
+      "batteryType": "Recharchable"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0070",
+          "@version": "0"
+        },
+        {
+          "@id": "0032",
+          "@version": "2"
+        },
+        {
+          "@id": "0025"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Szene 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Scene 1"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Szene 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Scene 2"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Szene 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Scene 3"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "4",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Szene 4"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Scene 4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "241",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 1 (oben links)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 1 (upper left)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 1"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "242",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 2 (oben rechts)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 2 (upper right)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 2"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "243",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 3 (unten links)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 3 (lower left)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 3"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "244",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 4 (unten rechts)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 4 (lower right)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 4"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 4"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "245",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 5 (Include)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 5 (marked as Include)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 5"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 5"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "246",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 6 (Exclude)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 6 (marked as Exclude)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 6"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 6"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "247",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 7 (Association)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 7 (marked as Association)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 7"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 7"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "als Szenenumschalter"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Scene Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "248",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Modus der Taste 8 (Learn)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Mode of Button 8 (marked as LEARN)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert den Funktionsmode des Tasters 8"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the switching mode of Button 8"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Standardmode lt Hersteller"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Factory Default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Include-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Add Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Exclude-Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Remove Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Associationsmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Association Mode"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Taste des Lernmodus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Learn Mode"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/cc7406e88bfb5c544ad0791e59dfae0bd2adbe25.gif"
+      }
+    }
+  }
+}

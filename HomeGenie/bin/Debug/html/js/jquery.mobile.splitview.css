@@ -1,0 +1,130 @@
+body {
+  visibility: hidden;
+}
+
+.ui-panel {
+  -moz-box-shadow: 0 0 12px rgba(0,0,0,.6);
+  -webkit-box-shadow: 0 0 12px rgba(0,0,0,.6);
+  box-shadow: 0 0 12px rgba(0,0,0,.6);
+}
+
+div[data-id="main"] {
+  z-index: 9999;
+}
+
+.ui-mobile body {
+  visibility: visible;
+}
+
+.ui-panel-left {
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+}
+
+.ui-panel-right {
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+}
+
+.ui-crumbs {
+  max-width: 25%;
+}
+
+.splitview .ui-splitview-hidden {
+  display:none;
+}
+
+@media (min-width:480px) {
+  .splitview body {
+    margin: 0;
+  }
+
+  .splitview .ui-page{
+    bottom: 0;
+  }
+
+  .splitview .ui-header {
+    position:absolute;
+    top:0;
+    bottom:auto; 
+    left:0;
+    right:0;
+    z-index: 1000;
+  }
+
+  .splitview .ui-footer {
+    position:absolute;
+    top:auto;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:1000;
+  }
+
+  .splitview .ui-content {
+    position:absolute;
+    top:40px;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    z-index:1;
+  }
+}
+
+/************************************************************************************************************
+popover css for portrait orientation, modified from 
+http://www.cagintranet.com/archive/create-an-ipad-like-dropdown-popover/
+************************************************************************************************************/
+.panel-popover .popover_triangle {left:7px;}
+.panel-popover {
+  color: black;
+  display:none;
+  font-weight: normal;
+  line-height: 1;
+  cursor: auto;
+  position: absolute;
+  top:55px;
+  left:10px;
+  background-color: white;
+  z-index:5000000;
+  border: 3px solid black;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -webkit-transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+  transition: opacity 0.25s linear; 
+  overflow-x:visible;
+  height:80%;
+}
+
+.panel-popover > .popover_triangle {
+  position: absolute;
+  top: -34px;
+  font-size: 0px;
+  line-height: 0%;
+  width: 0px;
+  border-top: 16px solid rgba(0,0,0,0);
+  border-left: 16px solid rgba(0,0,0,0);
+  border-right: 16px solid rgba(0,0,0,0);
+  border-bottom: 16px solid black; 
+}
+
+.panel-popover div[data-role="page"] {
+  height: inherit;
+  overflow-y:auto;
+}
+
+/**********************************************************************************************************
+CSS animations for panel resize using new data-width attribute.
+**********************************************************************************************************/

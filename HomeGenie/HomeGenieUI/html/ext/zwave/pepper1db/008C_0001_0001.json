@@ -1,0 +1,132 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "008c"
+      },
+      "productType": {
+        "@value": "0001"
+      },
+      "productId": {
+        "@value": "0001"
+      },
+      "libType": {
+        "@value": "00"
+      },
+      "protoVersion": {
+        "@value": "00"
+      },
+      "protoSubVersion": {
+        "@value": "00"
+      },
+      "appVersion": {
+        "@value": "00"
+      },
+      "appSubVersion": {
+        "@value": "00"
+      },
+      "basicClass": {
+        "@value": "02"
+      },
+      "genericClass": {
+        "@value": "02"
+      },
+      "specificClass": {
+        "@value": "00"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "US",
+      "certId": "13989",
+      "certNumber": "ZC08-10090001"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Home Gateway"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Go to 192.168.81.1, then slect \"ZWave device\", \"Advanced\" and click on \"Copy Z-Wave network from a foreign master\""
+        }
+      },
+      "productName": "Vera",
+      "brandName": "Vera",
+      "productLine": "Vera",
+      "productCode": "Vera",
+      "productVersion": "1.0"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0062",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0044",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0040",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0043",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0063",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0086",
+          "@secure": "true"
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c9239b3b9ba5155e081565dbdfc321068393ebfc.jpg"
+      }
+    }
+  }
+}

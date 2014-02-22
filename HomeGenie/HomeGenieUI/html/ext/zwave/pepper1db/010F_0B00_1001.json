@@ -1,0 +1,1350 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "010f"
+      },
+      "productType": {
+        "@value": "0b00"
+      },
+      "productId": {
+        "@value": "1001"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "34"
+      },
+      "appVersion": {
+        "@value": "17"
+      },
+      "appSubVersion": {
+        "@value": "17"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "a1"
+      },
+      "specificClass": {
+        "@value": "02"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "false"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Überflutungssensor mit Neigungssensor und Manipulationsschutz"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Flood Sensor with Temp and Tilt"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "productName": "Flood Sensor FGFS-101",
+      "productCode": "FGFS-101",
+      "batteryType": "CR123A",
+      "batteryCount": "1"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0060",
+          "@version": "2"
+        },
+        {
+          "@id": "0020",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0084"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0030"
+        },
+        {
+          "@id": "0080"
+        },
+        {
+          "@id": "008e",
+          "@version": "2"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "007a"
+        },
+        {
+          "@id": "009c"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Flut Alarm mit BASIC Set Kommando"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Flood Alarm with BASIC SET"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Neigungssensor und Programmiertaster"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Tilt Sensor alarm and TMP button events"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "1",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "allgemeiner Statusreport"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "reports device status"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Alarm Abschalt-Verzögerung"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm cancellation delay"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert wird die Verzögerungszeit, nach der der Alarm abgeschaltet wird, wenn das Flut wieder weg ist"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Delays flood alarm cancelation for the device after flooding has ceased"
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "0e10",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Verzögerung in Sekunden (jeweils 1s); 0 (keine Verzögerung, direkte Beendigung des Alarms)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "delay in seconds (each 1s);\r\n0 (no delay, immediate alarm cancelation)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "2",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "03",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Akustische und Optische Signale An/Aus bei Flut"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Acoustic and visual signals On / Off in case of flooding"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "legt fest, ob akustisches und/oder optisches Signal bei Flut aktiviert oder deaktiviert ist"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter allows for LED indicator and acoustic alarm deactivation in case of\r\nflooding detection"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "akustischer und optischer Alarm inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "acoustic and visual alarms inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "akustischer Alarm inaktiv, optischer Alarm aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "acoustic alarm inactive, visual alarm active"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "akustischer Alarm aktiv, optischer Alarm inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "acoustic alarm active, visual alarm inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "akustischer und optischer Alarm aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "acoustic and visual alarms active"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "5",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "81",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Typ des Alarms für die 1. Assoziationsgruppe (Flut)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Type of alarm frame sent to 1-st association group (FLOOD)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "legt fest, welches Kommando vom Sensor bei Flut oder Flutende gesendet wird"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter determines a type of command frame sent by the Sensor in case\r\nflooding has been detected or cancelled"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "ALARM WATER command frame"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "ALARM WATER command frame"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "81",
+              "@to": "81",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "BASIC SET command frame"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "BASIC SET command frame"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "7",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "63",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "prozentuales Niveau beim Senden an erste Assoziationsgruppe"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Forced dimming level sent to 1-st association group devices"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "legt fest, welches Niveau ein Dimmer oder eine Jalousie beim Senden die erste Assoziationsgruppe erhält"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Forced dimming level / roller blind opening level, when sending turn on /\r\nopen"
+              }
+            ]
+          },
+          "value": {
+            "@from": "01",
+            "@to": "63",
+            "@unit": "%",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "1-99 (oder 255)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "1-99 (or 255)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "9",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktivieren oder deaktivieren der Alarmmeldung nach Ende der Flut"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm cancelling or turning a device off (Basic) command frame deactivation"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Blockiert oder lässt zu, dass die Alarmmeldung nach Flutende abgeschaltet wird"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Allows for deactivating device turn off and alarm cancellation functions for the\r\ndevices assigned to 1-st association group"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Alarmbeendigung (Flut) inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "alarm (flooding) cancellation inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Alarmbeendigung (Flut) aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "alarm (flooding) cancellation active"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "10",
+          "@type": "range",
+          "@size": "2",
+          "@default": "012c",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur Mess-Intervalle"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature measurement interval"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Zeit-Intervalle, in Sekunden, zwischen den Temperaturmessungen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Time interval, in seconds, between consecutive temperature measurements"
+              }
+            ]
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "7fff",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Zeitintervall in Sekunden"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Time interval in seconds"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "12",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0032",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur Mess-Schaltschwelle"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature measurement hysteresis"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "definiert den Temperaturunterschied, bei dem ein Temperaturreport gesendet wird"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Determines a minimum temperature change value (insensitivity level), resulting in\r\na temperature report being sent"
+              }
+            ]
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "03e8",
+            "@unit": "°C",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "alle 0,01°C;\r\n(standard 50 = 0,5°C)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "each 0,01°C;\r\n(default 50 = 0,5°C)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "13",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Alarm BROADCAST"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm BROADCAST"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Werte außer 0 führen zum Aussenden eines BROADCAST (mit höherer Priorität als alle anderen Sendungen) an alle Geräte in direkter Reichweite des Senders"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Value other than 0 means alarms are sent in BROADCAST mode (with a priority\r\nover other communicates), to all devices within the Sensor’s range"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "broadcasts inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "broadcasts inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Flut (1. Assoziationsgruppe) broadcast aktiv; Schutzschalter (2. Assoziationsgruppe) broadcast inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "flood (1-st Association Group) broadcast active; tamper (2-nd Association\r\nGroup) broadcast inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Flut broadcast inaktiv; Schutzschalter broadcast aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "flood broadcast inactive; tamper broadcast active"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Flut broadcast aktiv; Schutzschalter broadcast aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "flood broadcast active; tamper broadcast active"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "50",
+          "@type": "range",
+          "@size": "2",
+          "@default": "05dc",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "untere Temperatur-Alarm-Grenze"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Low temperature alarm threshold"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur-Wert unter dem die Anzeige LED mit einstellbarer Farbe blinkt"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter stores a temperature value, below which LED indicator blinks with\r\na definable colour"
+              }
+            ]
+          },
+          "value": {
+            "@from": "d8f0",
+            "@to": "2710",
+            "@unit": "0,01°C",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Wert 1500 (15,00°C)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "value 1500 (15,00°C)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "51",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "0dac",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "obere Temperatur-Alarm-Grenze"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "High temperature alarm threshold"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur-Wert über dem die Anzeige LED mit einstellbarer Farbe blinkt"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter stores a temperature value, above which LED indicator blinks with\r\na definable colour"
+              }
+            ]
+          },
+          "value": {
+            "@from": "d8f0",
+            "@to": "2710",
+            "@unit": "0,01°C",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Wert 3500 (35°C)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "value 3500 (35°C)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "61",
+          "@type": "range",
+          "@size": "4",
+          "@default": "000000ff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "untere Temperatur-Alarm-Grenze LED Farbe"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Low temperature alarm indicator LED colour"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter speichert RGB Farbwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Parameter stores RGB colour value"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "00ffffff",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "255 (Blau 0x000000FF)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "255 (blue 0x000000FF)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "62",
+          "@type": "range",
+          "@size": "4",
+          "@default": "00ff0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "obere Temperatur-Alarm-Grenze LED Farbe"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "High temperature alarm indicator LED colour"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter speichert RGB Farbwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Parameter stores RGB colour value"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "00ffffff",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "16711680 (Rot 0x00FF0000)"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "16711680 (red 0x00FF0000)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "63",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "02",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Festlegen der Anzeige LED Einstellungen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Managing a LED indicator under standard operation"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter legt die Funktion der Anzeige LED fest. Wert 0 deaktiviert die LED um Strom zu sparen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Parameter determines LED indicator’s operation. Set to 0 turns the indicator off,\r\nsaving a battery life"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "LED Anzeige zeigt keine Temperatur an"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "LED indicator doesn’t indicate the temperature"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "LED Anzeige zeigt die Temperatur und blinkt bei jeder Temperatur-Messung (Parameter 10, Netzbetrieb und Batteriebetrieb) oder Wake Up Interval (Batteriebetrieb)"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "LED indicator indicates the temperature (blink) every Temperature\r\nMeasurement Interval (Parameter 10, constant current and battery) or Wake\r\nUp Interval (battery mode)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "LED Anzeige zeigt die Temperatur fortlaufend an, nur im Batteriebetrieb"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "LED indicator indicates the temperature continuously, only in constant power\r\nmode"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "73",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperatur Messungs-Ausgleich"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature measurement compensation"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter speichert Temperaturwert, der vom Messwert addiert oder subtrahiert wird, um Messabweichungen auszugleichen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Parameter stores a temperature value to be added to or deducted from the current\r\ntemperature measured to compensate temperature deflection"
+              }
+            ]
+          },
+          "value": {
+            "@from": "d8f0",
+            "@to": "2710",
+            "@unit": "0,00°C",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "74",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "02",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Alarm Frame für die 2. Assoziationsgruppe"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm frame sent to 2-nd Association Group activation"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter legt fest, welche Sensoren einen Alarm an die 2. Assoziationsgruppe senden"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter to device wich sensors send Alarm to 2. association group"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Schutzschalter-Alarme inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "tamper alarms inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Manipulationsschutzschalter-Alarm aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "button tamper alarm active"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bewegungsschutzschalter-Alarm aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "movement tamper alarm active"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Manipulations- und Bewegungsschutzschalter aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "button and movement tampers alarm active"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "75",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "optische und akustische Alarmdauer"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Visual and audible alarms duration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter legt fest, nach welcher Dauer der optische und akustische Alarm endet"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter determines a time period after which visual and audible alarm will become “quiet”"
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "7fff",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Wert 0 bedeutet optischer und akustischer Alarm werden nicht beendet"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "value of 0 means visual and acoustic alarms are active indefinitely"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "76",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Alarm Frame/Basic Set Frame Zeit für erneutes Aussenden bei anhaltender Flut"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm frame / Basic Set frame retransmission time when retaining flood alarm"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Parameter legt fest, nach welcher Zeit ein Alarm Frame erneut ausgesendet wird"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Parameter determines a time period after which an alarm frame will be retransmitted"
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "7fff",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Wert 0 deaktiviert das erneute Aussenden des Alarms"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "value of 0 cancels an alarm frame retransmission"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "77",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Flutsensor Funktion deaktivieren"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Flood sensor functionality turned off"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktivieren/Deaktivieren des internen Flutsensors. Schutzschalter und Temperatursensor bleiben aktiv"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Allows for turning off the internal flood sensor. Tamper and built in temperature\r\nsensor will remain active."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Normale Funktion des Flutsensors (Flut-Erkennung, Reaktionen)"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Default flood sensor operation (flood detection, reactions)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Flutsensor deaktiviert (Status im Controller ändert sich nicht, sendet keine Alarme und Basic Set Frames mit Änderungen des Flutstatus. Anzeige im Controller immer \"Aus\")"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Built in flood sensor TURNED OFF (doesn’t change its state in the main\r\ncontroller, doesn’t send Alarms and Basic Set frames with flood state changes.\r\nAlways visible in the main controller as turned off)"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "endpoints": {
+      "endpoint": [
+        {
+          "@number": "2",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "genericClass": {
+            "@value": "21"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": [
+            {
+              "@id": "0020"
+            },
+            {
+              "@id": "0031"
+            }
+          ]
+        },
+        {
+          "@number": "1",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "genericClass": {
+            "@value": "20"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": [
+            {
+              "@id": "0030"
+            },
+            {
+              "@id": "0020"
+            }
+          ]
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f79b4f7a9cdb77704b9903d483062e79b3628cb0.png"
+      }
+    }
+  }
+}

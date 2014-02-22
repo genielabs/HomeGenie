@@ -1,0 +1,49 @@
+
+<!-- Configure -->
+<div data-role="page" id="page_configure">
+
+    {include pages/header.html}
+		
+    <div data-role="content">                
+
+        
+        <img src="images/configure.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="configure_menu_title">Configure</h3></div>
+        
+        
+        <ul data-role="listview" data-inset="true">
+            <li data-locale-id="configure_menu_heading" data-role="list-divider">Configure Menu</li>
+            <li><a data-locale-id="configure_menu_groups_modules" href="#page_configure_groups" data-transition="slide">Groups and Modules</a></li>
+            <li><a data-locale-id="configure_menu_automation" href="#page_configure_automationgroups" data-transition="slide">Automation</a></li>
+            <li><a data-locale-id="configure_menu_system" href="#page_configure_interfaces" data-transition="slide">Interfaces</a></li>
+            <li><a data-locale-id="configure_menu_maintenance" href="#page_configure_maintenance" data-transition="slide">Maintenance and Updates</a></li>
+        </ul>
+
+    </div> 
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+        <div data-role="navbar" data-iconpos="right">
+            <ul>
+                <li>
+                    <a data-locale-id="home_menu_control" data-role="button" data-transition="slide" href="#page_control" data-icon="grid" data-iconpos="left">
+                        Control
+                    </a>
+                </li>
+                <li>    
+                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a data-locale-id="home_menu_analyze" data-role="button" data-transition="slide" href="#page_analyze" data-icon="search" data-iconpos="left">
+                        Analyze
+                    </a>
+                </li>
+            </ul>
+    	</div><!-- /navbar -->
+
+    </div>
+
+</div>
+

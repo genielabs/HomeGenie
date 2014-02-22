@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>HomeGenie</Name>
+  <Version>1.00 beta r336</Version>
+  <Description>Latest public release.</Description>
+  <ReleaseNote>  - ZWaveLib: fixed bug in Scene Activation command class
+  - Main source code refactoring</ReleaseNote>
+  <ReleaseDate>2014-02-20T22:02:01.0000Z</ReleaseDate>
+</ReleaseInfo>
