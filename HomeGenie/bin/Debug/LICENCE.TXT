@@ -1,7 +1,7 @@
 LICENSE INFORMATION
 
-HomeGenie Project and all of its components (eg. compiled distributable and 
-media, site content, documentation), exception made only and solely for its
+HomeGenie Project and all of its components (eg. precompiled distributables,
+home site, documentation), exception made only and solely for its
 source code, are licensed under the terms and conditions of the 
 "Creative Commons Attribution-NonCommercial 3.0 Generic License".
 You should have received a copy of the CC-BY-NC License along with this program. 
@@ -11,6 +11,10 @@ HomeGenie Source Code is licensed under the terms and conditions of the
 "GNU General Public License GPLv3".
 You should have received a copy of the GNU General Public License along with 
 this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Please referer to the github repository for source code and development contribution:
+http://github.com/genielabs/HomeGenie
+
 
 DISCLAIMER
 

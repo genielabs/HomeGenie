@@ -7,7 +7,7 @@
     <Description>Turn on all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6331872Z</ActivationTime>
+    <ActivationTime>2014-02-23T16:41:47.782738Z</ActivationTime>
     <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
@@ -44,7 +44,7 @@ Modules
     <Description>Turn off all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6331872Z</ActivationTime>
+    <ActivationTime>2014-02-23T16:41:47.782738Z</ActivationTime>
     <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
@@ -83,8 +83,8 @@ Modules
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.1940431Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:57:35.6434011Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:57:35.6954044Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
 });
@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -158,8 +158,8 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.9069301Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7847383Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.9521193Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -269,8 +269,8 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.2960476Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7847383Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.4256176Z</TriggerTime>
     <ScriptCondition>//    
 // this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
@@ -325,6 +325,14 @@ return true; // execute "Code To Run"
         
         Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
         Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
+        
+        // Update Scheduler entries
+        Scheduler
+          .WithName("Sunset")
+          .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
+        Scheduler
+          .WithName("Sunrise")
+          .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
         
         webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
         var weatherdata = Net.WebService(webserviceurl).GetData();
@@ -400,34 +408,42 @@ return true; // execute "Code To Run"
   <ProgramBlock>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>35</Address>
-    <Name>Sunrise/Sunset Lights Control</Name>
-    <Description>Turn on/off a device when the sun set/rise.</Description>
+    <Name>Scheduled ON/OFF</Name>
+    <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6361871Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:17:06.8167731Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:55:56.2487585Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:57:58.3510649Z</TriggerTime>
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
-	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.SunSetOn", "Toggle On when the Sun sets");
-	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.SunRiseOff", "Toggle Off when the Sun rises");
+	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.ScheduleControl", "Control device on a given schedule");
+	Program.AddFeatureTextInput("Light,Dimmer,Switch", "HomeGenie.ScheduleOn", "Turn On (enter scheduler expression)");
+	Program.AddFeatureTextInput("Light,Dimmer,Switch", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
 });
 //
-Pause(60); // pause a minute before next check
+Pause(30); // pause a minute before next check
 //
 return true; // execute the "Code To Run"
 </ScriptCondition>
-    <ScriptSource>string sunrise = Program.WithName("Weather Underground").Parameter("Astronomy.Sunrise").Value;
-string sunset = Program.WithName("Weather Underground").Parameter("Astronomy.Sunset").Value;
-
-if (DateTime.Now.ToString("HH:mm") == sunrise)
-{
-	Modules.WithFeature("HomeGenie.SunRiseOff").Off();
-}
-else if (DateTime.Now.ToString("HH:mm") == sunset)
-{
-	Modules.WithFeature("HomeGenie.SunSetOn").On();
-}
+    <ScriptSource>Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
+  var schedexpr = module.Parameter("HomeGenie.ScheduleOn").Value;
+  if (module.IsOff &amp;&amp; Scheduler.IsScheduling(schedexpr))
+  {
+  	Program.Notify("Scheduled Control", module.Instance.Name + " ON");
+    module.On();
+  }
+  return false;
+});
+Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
+  var schedexpr = module.Parameter("HomeGenie.ScheduleOff").Value;
+  if (module.IsOn &amp;&amp; Scheduler.IsScheduling(schedexpr))
+  {
+  	Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
+    module.Off();
+  }
+  return false;
+});
 </ScriptSource>
     <ScriptErrors />
     <ConditionType>OnTrue</ConditionType>
@@ -440,15 +456,22 @@ else if (DateTime.Now.ToString("HH:mm") == sunset)
         <FieldType>checkbox</FieldType>
         <ForDomains />
         <ForTypes>Light,Dimmer,Switch</ForTypes>
-        <Property>HomeGenie.SunSetOn</Property>
-        <Description>Toggle On when the Sun sets</Description>
+        <Property>HomeGenie.ScheduleControl</Property>
+        <Description>Control device on a given schedule</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>checkbox</FieldType>
+        <FieldType>text</FieldType>
         <ForDomains />
         <ForTypes>Light,Dimmer,Switch</ForTypes>
-        <Property>HomeGenie.SunRiseOff</Property>
-        <Description>Toggle Off when the Sun rises</Description>
+        <Property>HomeGenie.ScheduleOn</Property>
+        <Description>Turn On (enter scheduler expression)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <Property>HomeGenie.ScheduleOff</Property>
+        <Description>Turn Off (enter scheduler expression)</Description>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -1054,8 +1077,8 @@ Program.GoBackground();</ScriptSource>
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.8306727Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.8507394Z</TriggerTime>
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -1280,8 +1303,8 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.7296674Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.7471672Z</TriggerTime>
     <ScriptCondition>// this is a background app
 // so we just put initialization code here and a return true
 // to activate the background task loop
@@ -1404,8 +1427,8 @@ using(spiConnection.SelectSlave())
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.5206545Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:57:51.6097427Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:57:51.714763Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on");
 });
@@ -1443,7 +1466,7 @@ Program.GoBackground();</ScriptSource>
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1463,8 +1486,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.6256604Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.5439983Z</TriggerTime>
     <ScriptCondition>
 Program.Setup(()=&gt;{
 
@@ -1562,8 +1585,8 @@ Program.GoBackground();
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.4196475Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:57:43.7892531Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:57:44.2065433Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
   
   	Program.AddControlWidget("homegenie/generic/securitysystem");
@@ -1722,7 +1745,7 @@ while (Program.IsEnabled)
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1749,8 +1772,8 @@ while (Program.IsEnabled)
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.3186422Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.3417698Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -1909,8 +1932,8 @@ using (var connection = new GpioConnection(systembuzzer))
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6421884Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.212636Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.240747Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)");
@@ -1980,8 +2003,8 @@ Program.GoBackground();</ScriptSource>
     <Description>SC9000 Security Console driver (experimental)</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.1096564Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.139607Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2205,8 +2228,8 @@ while (Program.IsEnabled)
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:07.0083767Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.5270824Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 
     Program.AddInputField("Email.Sender", "", "1. E-Mail address");
@@ -2298,7 +2321,7 @@ Program.GoBackground();</ScriptSource>
 The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
     <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
   
@@ -2519,7 +2542,7 @@ These can be added to  groups and are then
 shown as hyperlink buttons in the control page.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <ScriptCondition>Program.Setup(()=&gt;{
 	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
@@ -2555,8 +2578,8 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:17:28.550793Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:49.0365011Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
                        "MobileNotification.SendChanges", 
@@ -2668,8 +2691,8 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -2690,8 +2713,8 @@ Program.GoBackground();</ScriptSource>
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.5993447Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.9323088Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2739,8 +2762,8 @@ while (Program.IsEnabled)
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.7006319Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:58:01.1659018Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.8309271Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2883,8 +2906,8 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <IsEnabled>true</IsEnabled>
@@ -2941,8 +2964,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.6432017Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.3970755Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.7298531Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -3119,8 +3142,8 @@ using (var connection = new GpioConnection(systemleds))
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-18T21:15:05.644188Z</ActivationTime>
-    <TriggerTime>2014-02-18T21:15:06.4980729Z</TriggerTime>
+    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <TriggerTime>2014-02-23T16:41:48.6286145Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeature("Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");

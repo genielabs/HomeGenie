@@ -165,6 +165,13 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+23/02/2014 1.00 beta rev 339
+	- Deprecated "Sunrise/Sunset Lights Control" in flavour of new "Scheduled ON/OFF" APP
+	- Added SchedulerHelper class 
+	- Added HG Scheduler supporting crontab expressions
+	- Fixed cleanup of program features on APP re-compile
+	- Disabled module Status.Level reset on restart
+
 20/02/2014 1.00 beta rev 336
 	- ZWaveLib: fixed bug in Scene Activation command class
 	- Main source code refactoring

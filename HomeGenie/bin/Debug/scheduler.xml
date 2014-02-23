@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSchedulerItem xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SchedulerItem>
+    <Name>Sunset</Name>
+    <CronExpression>48 17 * * *</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>-</LastOccurrence>
+    <NextOccurrence>2014-02-23 17.48</NextOccurrence>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Sunrise</Name>
+    <CronExpression>59 6 * * *</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>-</LastOccurrence>
+    <NextOccurrence>2014-02-24 06.59</NextOccurrence>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Weekend</Name>
+    <CronExpression>* * * * 0,6</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>2014-02-23 16.52</LastOccurrence>
+    <NextOccurrence>2014-02-23 16.53</NextOccurrence>
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Weekdays</Name>
+    <CronExpression>* * * * 1-5</CronExpression>
+    <ProgramId />
+    <IsEnabled>true</IsEnabled>
+    <LastOccurrence>-</LastOccurrence>
+    <NextOccurrence>2014-02-24 00.00</NextOccurrence>
+  </SchedulerItem>
+</ArrayOfSchedulerItem>

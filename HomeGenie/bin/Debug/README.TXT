@@ -1,6 +1,19 @@
 LICENSE INFORMATION
 
-Please read the LICENCE.TXT document.
+HomeGenie Project and all of its components (eg. precompiled distributables,
+home site, documentation), exception made only and solely for its
+source code, are licensed under the terms and conditions of the 
+"Creative Commons Attribution-NonCommercial 3.0 Generic License".
+You should have received a copy of the CC-BY-NC License along with this program. 
+If not, see <http://creativecommons.org/licenses/by-nc/3.0/>.
+
+HomeGenie Source Code is licensed under the terms and conditions of the 
+"GNU General Public License GPLv3".
+You should have received a copy of the GNU General Public License along with 
+this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Please referer to the github repository for source code and development contribution:
+http://github.com/genielabs/HomeGenie
 
 
 
@@ -151,6 +164,13 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 
 RELEASE HISTORY
+
+23/02/2014 1.00 beta rev 339
+	- Deprecated "Sunrise/Sunset Lights Control" in flavour of new "Scheduled ON/OFF" APP
+	- Added SchedulerHelper class 
+	- Added HG Scheduler supporting crontab expressions
+	- Fixed cleanup of program features on APP re-compile
+	- Disabled module Status.Level reset on restart
 
 20/02/2014 1.00 beta rev 336
 	- ZWaveLib: fixed bug in Scene Activation command class

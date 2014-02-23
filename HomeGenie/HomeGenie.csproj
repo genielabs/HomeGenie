@@ -98,6 +98,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NCrontab">
+      <HintPath>Externals\NCrontab\NCrontab.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -123,11 +126,14 @@
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
     <Compile Include="Automation\ProgramFeature.cs" />
+    <Compile Include="Automation\Scheduler\SchedulerItem.cs" />
+    <Compile Include="Automation\Scheduler\SchedulerService.cs" />
     <Compile Include="Automation\Scripting\AutomationStatesManager.cs" />
     <Compile Include="Automation\Scripting\ModuleHelper.cs" />
     <Compile Include="Automation\Scripting\ModulesManager.cs" />
     <Compile Include="Automation\Scripting\NetHelper.cs" />
     <Compile Include="Automation\Scripting\ProgramHelper.cs" />
+    <Compile Include="Automation\Scripting\SchedulerHelper.cs" />
     <Compile Include="Automation\Scripting\ScriptingHost.cs" />
     <Compile Include="Automation\Scripting\EventsHelper.cs" />
     <Compile Include="Automation\Scripting\TcpClientHelper.cs" />

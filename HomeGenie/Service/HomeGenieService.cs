@@ -44,6 +44,7 @@ using OpenSource.UPnP;
 using HomeGenie.Service.Constants;
 using MIG.Interfaces.HomeAutomation;
 using HomeGenie.Service.Logging;
+using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Service
 {
@@ -967,6 +968,34 @@ namespace HomeGenie.Service
         }
 
 
+        public bool UpdateSchedulerDatabase()
+        {
+            bool success = false;
+            try
+            {
+                //lock (_dblock)
+                {
+                    string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml");
+                    if (File.Exists(fname))
+                    {
+                        File.Delete(fname);
+                    }
+                    System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
+                    ws.Indent = true;
+                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_mastercontrolprogram.SchedulerService.Items.GetType());
+                    System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
+                    x.Serialize(wri, _mastercontrolprogram.SchedulerService.Items);
+                    wri.Close();
+                }
+                success = true;
+            }
+            catch
+            {
+            }
+            return success;
+        }
+
+
         public void LoadConfiguration()
         {
             _loadsystemconfig();
@@ -1037,6 +1066,21 @@ namespace HomeGenie.Service
                     }
                     _mastercontrolprogram.ProgramAdd(pb);
                 }
+                preader.Close();
+            }
+            catch
+            {
+                //TODO: log error
+            }
+            //
+            // load last saved scheduler items data into _mastercontrolprogram.SchedulerService.Items list
+            //
+            try
+            {
+                XmlSerializer pserializer = new XmlSerializer(typeof(List<SchedulerItem>));
+                StreamReader preader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"));
+                List<SchedulerItem> si = (List<SchedulerItem>)pserializer.Deserialize(preader);
+                _mastercontrolprogram.SchedulerService.Items.AddRange(si);
                 preader.Close();
             }
             catch
@@ -1834,7 +1878,7 @@ namespace HomeGenie.Service
                     ModuleParameter parameter = null;
                     parameter = _modules[m].Properties.Find(delegate(ModuleParameter mp)
                     {
-                        return mp.Name == ModuleParameters.MODPAR_METER_WATTS || mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL || mp.Name == ModuleParameters.MODPAR_SENSOR_GENERIC;
+                        return mp.Name == ModuleParameters.MODPAR_METER_WATTS /*|| mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL*/ || mp.Name == ModuleParameters.MODPAR_SENSOR_GENERIC;
                     });
                     if (parameter != null)
                     {
@@ -1902,6 +1946,7 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archivename, "automationgroups.xml");
             Utility.AddFileToZip(archivename, "modules.xml");
             Utility.AddFileToZip(archivename, "programs.xml");
+            Utility.AddFileToZip(archivename, "scheduler.xml");
             Utility.AddFileToZip(archivename, "groups.xml");
             if (File.Exists("lircconfig.xml"))
             {

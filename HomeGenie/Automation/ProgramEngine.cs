@@ -31,6 +31,7 @@ using HomeGenie.Data;
 using HomeGenie.Service;
 using MIG;
 using HomeGenie.Service.Constants;
+using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation
 {
@@ -40,6 +41,7 @@ namespace HomeGenie.Automation
 
         private HomeGenie.Service.TsList<ProgramBlock> _programblocks = new HomeGenie.Service.TsList<ProgramBlock>();
 		
+        //TODO: deprecate Automation States
         private Dictionary<string, bool> _automationstates = new Dictionary<string, bool>() { 
                 { "Security.Armed", false},
                 { "Security.Away", false},
@@ -47,6 +49,7 @@ namespace HomeGenie.Automation
         };
 
         private HomeGenieService _homegenie = null;
+        private SchedulerService _schedulersvc = null;
         private ScriptingHost _scriptinghost = null;
 
         private MacroRecorder _macrorecorder = null;
@@ -62,42 +65,9 @@ namespace HomeGenie.Automation
 			_homegenie = homegenie;
             _scriptinghost = new ScriptingHost(_homegenie);
             _macrorecorder = new MacroRecorder(this);
-            /*
-			_mastercontrolprogram = new Thread (new ThreadStart (delegate() {
-				
-				while (_enginerunning) 
-                {
-                    Thread.Sleep(1000);
-                    //
-                    if (!_engineenabled)
-                    {
-                        continue;
-                    }
-                    //
-					for (int p = 0; p < _programblocks.Count; p++) 
-                    {
-                        // low level looping preveinting
-                        if (_programblocks[p].IsActive && !_programblocks[p].IsEvaluatingConditionBlock && !_programblocks[p].IsRunning)
-                        {
-                            EvaluateProgramConditionAsync(_programblocks[p], (ProgramBlock pb, bool conditionsatisfied) =>
-                            {
-                                if (conditionsatisfied && pb.IsActive)
-                                {
-                                    Run(pb, null); // that goes async too
-                                }
-                            });
-                        }
-                        Thread.Sleep(5);
-                    }
-				}
-				
-			}));
-
-            _mastercontrolprogram.Priority = ThreadPriority.Highest;
-			_mastercontrolprogram.Start ();
-            */
-
-		}
+            _schedulersvc = new SchedulerService(this);
+            _schedulersvc.Start();
+        }
 
         public void EvaluateProgramConditionAsync(ProgramBlock p, ConditionEvaluationCallback callback)
         {
@@ -180,7 +150,7 @@ namespace HomeGenie.Automation
                 }   
                 p.IsEvaluatingConditionBlock = false;
             }));
-            evaluatorthread.Priority = ThreadPriority.AboveNormal;
+            //evaluatorthread.Priority = ThreadPriority.AboveNormal;
             evaluatorthread.Start();
         }
 
@@ -203,6 +173,11 @@ namespace HomeGenie.Automation
         public MacroRecorder MacroRecorder
         {
             get { return _macrorecorder; }
+        }
+
+        public SchedulerService SchedulerService
+        {
+            get { return _schedulersvc; }
         }
 
         public System.CodeDom.Compiler.CompilerResults CompileScript(ProgramBlock pb)
@@ -323,6 +298,7 @@ namespace HomeGenie.Automation
 		public void StopEngine ()
 		{
             _enginerunning = false;
+            _schedulersvc.Stop();
             //lock (_programblocks)
             {
                 foreach (ProgramBlock pb in _programblocks)

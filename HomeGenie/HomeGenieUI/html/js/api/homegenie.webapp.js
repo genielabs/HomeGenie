@@ -119,6 +119,10 @@ HG.WebApp.InitializePage = function ()
     	        HG.WebApp.AutomationGroupsList.LoadGroups();
             });
         }
+        else if (this.id == 'page_configure_scherulerservice')
+        {
+            HG.WebApp.Scheduler.LoadScheduling();
+        }
         else if (this.id == 'page_automation_programs') 
         {
 	        HG.WebApp.ProgramsList.LoadPrograms();
@@ -225,6 +229,11 @@ HG.WebApp.InitializePage = function ()
 // info      : -
 //
 {include pages/configure/programengine/_programedit.js}	
+//
+// namespace : HG.WebApp.Scheduler 
+// info      : -
+//
+{include pages/configure/scheduler/_scheduler.js}	
 //
 // namespace : HG.WebApp.Apps.NetPlay.SlideShow 
 // info      : -

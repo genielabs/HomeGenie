@@ -92,6 +92,7 @@ namespace HomeGenie.Automation.Scripting
         private HomeGenie.Automation.Scripting.EventsHelper _eventshelper;
         private HomeGenie.Automation.Scripting.SerialPortHelper _serialporthelper;
         private HomeGenie.Automation.Scripting.TcpClientHelper _tcpclienthelper;
+        private HomeGenie.Automation.Scripting.SchedulerHelper _schedulerhelper;
 
         public void SetHost(HomeGenie.Service.HomeGenieService hg, int programid)
         {
@@ -102,6 +103,7 @@ namespace HomeGenie.Automation.Scripting
             _eventshelper = new EventsHelper(_homegenie, programid);
             _serialporthelper = new SerialPortHelper();
             _tcpclienthelper = new TcpClientHelper();
+            _schedulerhelper = new SchedulerHelper(_homegenie);
         }
 
         public ModulesManager Modules
@@ -165,6 +167,14 @@ namespace HomeGenie.Automation.Scripting
             get
             {
                 return _tcpclienthelper;
+            }
+        }
+
+        public SchedulerHelper Scheduler
+        {
+            get
+            {
+                return _schedulerhelper;
             }
         }
 

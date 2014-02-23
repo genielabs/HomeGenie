@@ -44,7 +44,8 @@ HG.WebApp.ProgramsList.InitializePage = function ()
             //
             $('#automationprograms_delete_button').bind('click', function (event) {
                 HG.WebApp.ProgramsList.DeleteGroup(HG.WebApp.AutomationGroupsList._CurrentGroup);
-            }); 		//	
+            });
+		    //	
 			$('#program_new_button').bind('click', function (event) {
 			    HG.WebApp.ProgramsList.AddProgram($('#program_new_name').val());
 			});	

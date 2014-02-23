@@ -57,6 +57,8 @@ namespace HomeGenie.Automation.Scripting
             {
                 AddControlWidget(""); // no control widget --> not visible
             }
+            // reset features and other values
+            Reset();
         }
 		
 		/// <summary>
