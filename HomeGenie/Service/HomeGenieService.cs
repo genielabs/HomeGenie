@@ -20,6 +20,12 @@
  *     Project Homepage: http://homegenie.it
  */
 
+/* 
+ * 2014-02-24:
+ *      Weecoboard-4M module     
+ *      Author: Luciano Neri <l.neri@nerinformatica.it>
+*/
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -1469,7 +1475,75 @@ namespace HomeGenie.Service
                 {
                     Modules.RemoveAll(m => m.Domain == Domains.EmbeddedSystems_RaspiGPIO && m.RoutingNode == "");
                 }
+                //
+                // Weecoboard-4m GPIO
+                //
+                if (_systemconfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled && ((MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO)_migservice.Interfaces[Domains.EmbeddedSystems_Weeco4mGPIO]).IsConnected)
+                {
+                    foreach (KeyValuePair<string, string> rv in ((MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO)_migservice.Interfaces[Domains.EmbeddedSystems_Weeco4mGPIO]).REGPins)
+                    {
+                        Module m = null;
+                        try
+                        {
+                            m = Modules.Find(delegate(Module o)
+                            {
+                                return o.Domain == Domains.EmbeddedSystems_Weeco4mGPIO && o.Address == rv.Key;
+                            });
+                        }
+                        catch
+                        {
+                        }
+                        // add new module
+                        if (m == null)
+                        {
+                            m = new Module();
+                            m.Domain = Domains.EmbeddedSystems_Weeco4mGPIO;
+                            m.Description = "Weecoboard GPIO";
+                            m.DeviceType = Module.DeviceTypes.Sensor;
+                            Modules.Add(m);
+                        }
+                        //
+                        m.Address = rv.Key;
+                        m.Description = "Weeco-4M Register";
+                        //
+                        Utility.ModuleParameterSet(m, ModuleParameters.MODPAR_STATUS_LEVEL, rv.Value);
+                    }
 
+                    // digital in/out
+                    foreach (KeyValuePair<string, bool> rv in ((MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO)_migservice.Interfaces[Domains.EmbeddedSystems_Weeco4mGPIO]).GPIOPins)
+                    {
+                        Module m = null;
+                        try
+                        {
+                            m = Modules.Find(delegate(Module o)
+                            {
+                                return o.Domain == Domains.EmbeddedSystems_Weeco4mGPIO && o.Address == rv.Key;
+                            });
+                        }
+                        catch
+                        {
+                        }
+                        // add new module
+                        if (m == null)
+                        {
+                            m = new Module();
+                            m.Domain = Domains.EmbeddedSystems_Weeco4mGPIO;
+                            m.Description = "Weecoboard GPIO";
+                            m.DeviceType = Module.DeviceTypes.Switch;
+                            Modules.Add(m);
+                        }
+                        //
+                        m.Address = rv.Key;
+                        m.Description = "Weeco-4M GPIO";
+                        //
+                        Utility.ModuleParameterSet(m, ModuleParameters.MODPAR_STATUS_LEVEL, (((bool)rv.Value) ? "1" : "0"));
+                    }
+                }
+                else
+                {
+                    Modules.RemoveAll(m => m.Domain == Domains.EmbeddedSystems_Weeco4mGPIO && m.RoutingNode == "");
+                }
+                //
                 //
                 if (_systemconfiguration.GetInterface(Domains.Media_CameraInput) != null && _systemconfiguration.GetInterface(Domains.Media_CameraInput).IsEnabled && ((MIG.Interfaces.Media.CameraInput)_migservice.Interfaces[Domains.Media_CameraInput]).IsConnected)
                 {

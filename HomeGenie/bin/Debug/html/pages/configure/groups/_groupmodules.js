@@ -342,6 +342,9 @@ HG.WebApp.GroupModules.LoadGroupModules = function ()
 	        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.RaspiGPIO') {
 	            address_label = "GPIO";
 	        }
+	        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.Weeco4mGPIO') {
+	            address_label = "GPIO";
+	        }
 	        else if (groupmodules.Modules[m].Domain == 'HomeAutomation.HomeGenie.Automation') {
 	            address_label = "Program";
 	        }

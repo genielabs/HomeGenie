@@ -81,6 +81,13 @@ HG.WebApp.SystemSettings.InitializePage = function()
 		        });
 			});
 		    //
+			$("#configure_interfaces_flip_weeco4mgpio").on('slidestop', function (event) {
+			    HG.Configure.Interfaces.ServiceCall("Weeco4mGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_weeco4mgpio").val(), function (data) {
+			        $('#control_groupslist').empty(); // forces control menu rebuild
+			        $.mobile.hidePageLoadingMsg();
+			    });
+			});
+		    //
 			$("#configure_interfaces_flip_upnp").on('slidestop', function (event) {
 			    HG.Configure.Interfaces.ServiceCall("UPnP.SetIsEnabled/" + $("#configure_interfaces_flip_upnp").val(), function (data) {
 			        $.mobile.hidePageLoadingMsg();
@@ -264,6 +271,10 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             });
             HG.Configure.Interfaces.ServiceCall("RaspiGPIO.GetIsEnabled", function (data) {
                 $('#configure_interfaces_flip_raspigpio').val(data).slider('refresh');
+                $.mobile.hidePageLoadingMsg();
+            });
+            HG.Configure.Interfaces.ServiceCall("Weeco4mGPIO.GetIsEnabled", function (data) {
+                $('#configure_interfaces_flip_weeco4mgpio').val(data).slider('refresh');
                 $.mobile.hidePageLoadingMsg();
             });
             HG.Configure.Interfaces.ServiceCall("UPnP.GetIsEnabled", function (data) {

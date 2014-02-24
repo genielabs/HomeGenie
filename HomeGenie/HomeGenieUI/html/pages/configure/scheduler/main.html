@@ -17,7 +17,7 @@
     <div data-role="popup" data-position-to="window" id="schedulerservice_item_edit" class="ui-corner-all" style="min-width:300px">
         <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
-            <h1 data-locale-id="configure_schedulerservice_scheduleritem">Scheduler Item</h1>
+            <h1 data-locale-id="configure_schedulerservice_schedulerevent">Scheduler Event</h1>
         </div>
         <div data-role="content" class="ui-corner-bottom ui-content">
             <h3 data-locale-id="configure_schedulerservice_itemname" class="ui-title">Name</h3>
@@ -26,7 +26,7 @@
             <h3 data-locale-id="configure_schedulerservice_itemcronexp" class="ui-title">Cron Expression</h3>
             <input id="schedulerservice_item_cronexp" type="text" />
 
-            <h3 data-locale-id="configure_schedulerservice_itemprogramid" class="ui-title">Program Id or Name</h3>
+            <h3 data-locale-id="configure_schedulerservice_itemprogramid" class="ui-title">Program Id or Name (optional)</h3>
             <input id="schedulerservice_item_programid" type="text" />
         </div>
 
@@ -54,8 +54,8 @@
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_schedulerservice_bottombar_schedule_add" id="scheduleritem_add_button" data-role="button" data-rel="popup" data-transition="pop" href="#schedulerservice_item_edit" data-icon="plus" data-iconpos="left" data-mini="true">
-                        Add Schedule
+                    <a data-locale-id="configure_schedulerservice_bottombar_event_add" id="scheduleritem_add_button" data-role="button" data-rel="popup" data-transition="pop" href="#schedulerservice_item_edit" data-icon="plus" data-iconpos="left" data-mini="true">
+                        Add Event
                     </a>
                 </li>
             </ul>

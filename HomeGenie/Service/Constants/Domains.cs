@@ -50,6 +50,9 @@ namespace HomeGenie.Service.Constants
         //
         public const string EmbeddedSystems_RaspiGPIO
             = "EmbeddedSystems.RaspiGPIO";
+		//
+        public const string EmbeddedSystems_Weeco4mGPIO
+            = "EmbeddedSystems.Weeco4mGPIO";
         //
         public const string Media_CameraInput
             = "Media.CameraInput";

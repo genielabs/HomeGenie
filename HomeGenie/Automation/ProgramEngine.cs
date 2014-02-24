@@ -403,6 +403,12 @@ namespace HomeGenie.Automation
 		{
 			bool retval = false;
 			string comparisonvalue = c.ComparisonValue;
+            //
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && c.Property == "Scheduler.TimeEvent")
+            {
+                return _homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
+            }
+            //
 			try {
 				//
 				// if the comparison value starts with ":", then the value is read from another module property
@@ -434,8 +440,11 @@ namespace HomeGenie.Automation
 					}
 				}
 				//
+                // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
+                //
 				ModuleParameter parameter = null;
-				if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation") {
+				if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation") 
+                {
 					parameter = new ModuleParameter ();
 					parameter.Name = c.Property;
 					switch (parameter.Name) {
@@ -474,7 +483,8 @@ namespace HomeGenie.Automation
 					});
 				}
 				//
-				if (parameter != null) {
+				if (parameter != null) 
+                {
 					IComparable lvalue = parameter.Value;
 					IComparable rvalue = comparisonvalue;
 					//

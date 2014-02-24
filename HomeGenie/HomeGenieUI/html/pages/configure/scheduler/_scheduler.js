@@ -1,12 +1,12 @@
 ﻿HG.WebApp.Scheduler = HG.WebApp.Scheduler || {};
 HG.WebApp.Scheduler._ScheduleList = {};
-HG.WebApp.Scheduler._CurrentScheduleName = "";
-HG.WebApp.Scheduler._CurrentScheduleIndex = -1;
+HG.WebApp.Scheduler._CurrentEventName = "";
+HG.WebApp.Scheduler._CurrentEventIndex = -1;
 
 HG.WebApp.Scheduler.InitializePage = function () {
 
     $('#schedulerservice_item_edit').on('popupbeforeposition', function (event) {
-        HG.WebApp.Scheduler.RefreshScheduleDetails();
+        HG.WebApp.Scheduler.RefreshEventDetails();
     });
     //
     $('#scheduleritem_update_button').bind('click', function (event) {
@@ -23,13 +23,13 @@ HG.WebApp.Scheduler.InitializePage = function () {
         HG.Automation.Scheduling.Delete(name, function () {
             HG.WebApp.Scheduler.LoadScheduling();
         });
-        HG.WebApp.Scheduler._CurrentScheduleName = "";
-        HG.WebApp.Scheduler._CurrentScheduleIndex = -1;
+        HG.WebApp.Scheduler._CurrentEventName = "";
+        HG.WebApp.Scheduler._CurrentEventIndex = -1;
     });
     //
     $('#scheduleritem_add_button').bind('click', function (event) {
-        HG.WebApp.Scheduler._CurrentScheduleName = "";
-        HG.WebApp.Scheduler._CurrentScheduleIndex = -1;
+        HG.WebApp.Scheduler._CurrentEventName = "";
+        HG.WebApp.Scheduler._CurrentEventIndex = -1;
     });
 
 };
@@ -42,7 +42,7 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
         $.mobile.hidePageLoadingMsg();
         //
         $('#configure_schedulerservice_list').empty();
-        $('#configure_schedulerservice_list').append('<li data-theme="a" data-icon="false" data-role="list-divider">Scheduler Items</li>');
+        $('#configure_schedulerservice_list').append('<li data-theme="a" data-icon="false" data-role="list-divider">Scheduler Events</li>');
         //
         for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++)
         {
@@ -69,22 +69,22 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
         $('#configure_schedulerservice_list').listview('refresh');
         //
         $("#configure_schedulerservice_list li").bind("click", function () {
-            HG.WebApp.Scheduler._CurrentScheduleName = $(this).attr('data-schedule-name');
-            HG.WebApp.Scheduler._CurrentScheduleIndex = $(this).attr('data-schedule-index')
+            HG.WebApp.Scheduler._CurrentEventName = $(this).attr('data-schedule-name');
+            HG.WebApp.Scheduler._CurrentEventIndex = $(this).attr('data-schedule-index')
         });
         //
         if (callback) callback();
     });
 };
 
-HG.WebApp.Scheduler.RefreshScheduleDetails = function () {
+HG.WebApp.Scheduler.RefreshEventDetails = function () {
 
     var schedule = null;
     var name = '';
     var expr = '';
     var prid = '';
-    if (HG.WebApp.Scheduler._CurrentScheduleIndex != -1) {
-        schedule = HG.WebApp.Scheduler._ScheduleList[HG.WebApp.Scheduler._CurrentScheduleIndex];
+    if (HG.WebApp.Scheduler._CurrentEventIndex != -1) {
+        schedule = HG.WebApp.Scheduler._ScheduleList[HG.WebApp.Scheduler._CurrentEventIndex];
         name = schedule.Name;
         expr = schedule.CronExpression;
         prid = schedule.ProgramId;

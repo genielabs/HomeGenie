@@ -120,6 +120,9 @@
       <Interface Domain="EmbeddedSystems.RaspiGPIO" IsEnabled="false">
         <Options />
       </Interface>
+      <Interface Domain="EmbeddedSystems.Weeco4mGPIO" IsEnabled="false">
+        <Options />
+      </Interface>
     </Interfaces>
   </MIGService>
 </SystemConfiguration>

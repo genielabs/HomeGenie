@@ -165,6 +165,11 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+24/02/2014 1.00 beta rev 340
+	- Added Weeco4m GPIO module (http://www.weecoboard.eu) contributed by L.Neri
+	- Added Scheduler.TimeEvent to Wizard Script conditions
+	- Update Newtonsoft.Json.dll to latest version
+
 23/02/2014 1.00 beta rev 339
 	- Deprecated "Sunrise/Sunset Lights Control" in flavour of new "Scheduled ON/OFF" APP
 	- Added SchedulerHelper class 

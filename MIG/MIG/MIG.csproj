@@ -58,6 +58,7 @@
     <Compile Include="Gateways\ProtocolAdapters\MIRIA\MiriaAdapter.cs" />
     <Compile Include="Gateways\TcpSocketGateway.cs" />
     <Compile Include="Gateways\WebServiceGateway.cs" />
+    <Compile Include="Interfaces\EmbeddedSystems\Weeco4mGPIO.cs" />
     <Compile Include="Interfaces\HomeAutomation\X10.cs" />
     <Compile Include="Interfaces\HomeAutomation\ZWave.cs" />
     <Compile Include="Interfaces\Media\CameraInput.cs" />

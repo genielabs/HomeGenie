@@ -138,6 +138,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 _hg.GetInterface(Domains.Media_CameraInput).Disconnect();
                             }
+                            _hg._modules_refresh_misc();
                             break;
 
                         case "ZWave.GetIsEnabled":
@@ -278,7 +279,27 @@ namespace HomeGenie.Service.Handlers
                             {
                                 _hg.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).Disconnect();
                             }
+                            _hg._modules_refresh_misc();
                             break;
+
+                        case "Weeco4mGPIO.GetIsEnabled":
+                            migcmd.response = JsonHelper.GetSimpleResponse((_hg.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled ? "1" : "0"));
+                            break;
+
+                        case "Weeco4mGPIO.SetIsEnabled":
+                            _hg.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled = (migcmd.GetOption(1) == "1" ? true : false);
+                            _hg.SystemConfiguration.Update();
+                            //
+                            if (_hg.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled)
+                            {
+                                _hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).Connect();
+                            }
+                            else
+                            {
+                                _hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).Disconnect();
+                            }
+                            _hg._modules_refresh_misc();
+                            break;			
 
                         case "UPnP.GetIsEnabled":
                             migcmd.response = JsonHelper.GetSimpleResponse((_hg.SystemConfiguration.GetInterface(Domains.Protocols_UPnP).IsEnabled ? "1" : "0"));

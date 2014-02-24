@@ -97,9 +97,9 @@
         </div>    
 
 		<ul data-role="listview" data-inset="false" style="height:180px;max-height:180px;">
-			<li data-context-value="LessThan"><a data-locale-id="configure_program_operatorless" data-rel="popup" href="#automation_condition_value">Less Than</a></li>
+			<li data-context-value="LessThan" id="configure_program_conditionlessthan"><a data-locale-id="configure_program_operatorless" data-rel="popup" href="#automation_condition_value">Less Than</a></li>
 			<li data-context-value="Equals"><a data-locale-id="configure_program_operatorequal" data-rel="popup" href="#automation_condition_value">Equals</a></li>
-			<li data-context-value="GreaterThan"><a data-locale-id="configure_program_operatorgreaterthan" data-rel="popup" href="#automation_condition_value">Greater Than</a></li>
+            <li data-context-value="GreaterThan" id="configure_program_conditiongreaterthan"><a data-locale-id="configure_program_operatorgreaterthan" data-rel="popup" href="#automation_condition_value">Greater Than</a></li>
 		</ul>
 		
 	</div>
@@ -383,7 +383,9 @@ $(document).ready(function (e) {
 			    case 'HomeAutomation.HomeGenie':
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsCounter"><a data-rel="popup" href="#automation_condition_type">Meter.WattsCounter</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsLoad"><a data-rel="popup" href="#automation_condition_type">Meter.WattsLoad</a></li>');
-			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Date"><a data-rel="popup" href="#automation_condition_type">Programs.Date</a></li>');
+			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.TimeEvent"><a data-rel="popup" href="#automation_condition_type">Scheduler.TimeEvent</a></li>');
+			        /*
+                    $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Date"><a data-rel="popup" href="#automation_condition_type">Programs.Date</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Time"><a data-rel="popup" href="#automation_condition_type">Programs.Time</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateTime"><a data-rel="popup" href="#automation_condition_type">Programs.DateTime</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDay"><a data-rel="popup" href="#automation_condition_type">Programs.DateDay</a></li>');
@@ -392,6 +394,7 @@ $(document).ready(function (e) {
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDayOfWeek"><a data-rel="popup" href="#automation_condition_type">Programs.DateDayOfWeek</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateHour"><a data-rel="popup" href="#automation_condition_type">Programs.DateHour</a></li>');
 			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateMinute"><a data-rel="popup" href="#automation_condition_type">Programs.DateMinute</a></li>');
+                    */
 //			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Security.ArmedStatus"><a data-rel="popup" href="#automation_condition_type">Security.ArmedStatus</a></li>');
 			        break;
 			    default:
@@ -413,7 +416,17 @@ $(document).ready(function (e) {
 	});
 
 	$('#automation_target_homegenie_parameter').on('click', 'li', function() {
-		condition_targetparameter = $(this).attr('data-context-value')
+	    condition_targetparameter = $(this).attr('data-context-value')
+	    if (condition_targetparameter == 'Scheduler.TimeEvent' || condition_targetparameter == 'Receiver.RawData')
+	    {
+	        $('#configure_program_conditionlessthan').hide();
+	        $('#configure_program_conditiongreaterthan').hide();
+	    }
+	    else
+	    {
+	        $('#configure_program_conditionlessthan').show();
+	        $('#configure_program_conditiongreaterthan').show();
+	    }
 		build_condition();
 	});
 
