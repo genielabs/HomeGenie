@@ -165,7 +165,8 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-26/02/2014 1.00 beta rev 342
+26/02/2014 1.00 beta rev 343
+	- ZWaveLib: added fallback to Generic.Sensor handler when GenericType is not directly supported
 	- Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
 	- Updated "FibaroRGBW" plugin
 	- Updated Weeco4m GPIO module

@@ -518,17 +518,11 @@ Console.WriteLine( "ZWaveLib UNHANDLED message: " + zp.ByteArrayToString(receive
                     case (byte)ZWaveLib.GenericType.THERMOSTAT:
                         devhandler = new ProductHandlers.Generic.Thermostat();
                         break;
-                    case (byte)ZWaveLib.GenericType.SENSOR_ALARM:
-                    case (byte)ZWaveLib.GenericType.SENSOR_BINARY:
-                    case (byte)ZWaveLib.GenericType.SENSOR_MULTILEVEL:
-                    case (byte)ZWaveLib.GenericType.METER:
-                    case (byte)ZWaveLib.GenericType.METER_PULSE:
+                    // Fallback to generic Sensor driver if type is not directly supported.
+                    // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
+                    default:
                         devhandler = new ProductHandlers.Generic.Sensor();
-                        //Console.WriteLine("    * NODE " + this.NodeId + " associated to Generic.Sensor handler");
                         break;
-                    //                    case (byte)ZWaveLib.GenericType.METER_PULSE:
-                    //                        devhandler = new ProductHandlers.Generic.Meter();
-                    //                        break;
                 }
                 if (devhandler != null)
                 {

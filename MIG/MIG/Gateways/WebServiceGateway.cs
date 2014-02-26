@@ -75,7 +75,6 @@ namespace MIG.Gateways
         public event Action<object> ProcessRequest;
         //
         private ManualResetEvent _stopevent = new ManualResetEvent(false);
-        private int _requestcounter = 0;
         //
         private string _servicepassword;
         private string _homepath;
@@ -247,18 +246,13 @@ namespace MIG.Gateways
 
         }
 
-        // finally a well working HttpListener implementation
-        // from: http://stackoverflow.com/questions/5895063/asynchronous-httplistener-problem-each-request-is-received-twice
-
         private void ListenAsynchronously(IEnumerable<string> prefixes)
         {
             HttpListener listener = new HttpListener();
-
             foreach (string s in prefixes)
             {
                 listener.Prefixes.Add(s);
             }
-
             listener.Start();
             HttpListenerCallbackState state = new HttpListenerCallbackState(listener);
             ThreadPool.QueueUserWorkItem(Listen, state);
@@ -275,8 +269,7 @@ namespace MIG.Gateways
             while (callbackState.Listener.IsListening)
             {
                 callbackState.Listener.BeginGetContext(new AsyncCallback(ListenerCallback), callbackState);
-                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, _stopevent });
-
+                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, _stopevent }, 10000);
                 if (n == 1)
                 {
                     // stopEvent was signalled 
@@ -290,23 +283,21 @@ namespace MIG.Gateways
         {
             HttpListenerCallbackState callbackState = (HttpListenerCallbackState)ar.AsyncState;
             HttpListenerContext context = null;
-
-            int requestNumber = Interlocked.Increment(ref _requestcounter);
-
+            //
             try
             {
                 context = callbackState.Listener.EndGetContext(ar);
             }
             catch (Exception ex)
             {
-                return;
+                Console.WriteLine("WebServiceGateway: " + ex.Message + "\n" + ex.StackTrace);
             }
             finally
             {
                 callbackState.ListenForNextRequest.Set();
             }
             if (context == null) return;
-
+            //
             Worker(context);
         }
 

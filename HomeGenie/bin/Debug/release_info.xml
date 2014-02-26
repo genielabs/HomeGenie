@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r342</Version>
+  <Version>1.00 beta r343</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
+  <ReleaseNote>  - ZWaveLib: added fallback to Generic.Sensor handler when GenericType is not directly supported
+  - Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
   - Updated "FibaroRGBW" plugin
-  - Updated Weeco4m GPIO module</ReleaseNote>
-  <ReleaseDate>2014-02-26T17:06:55.0000Z</ReleaseDate>
+  - Updated Weeco4m GPIO module
+  </ReleaseNote>
+  <ReleaseDate>2014-02-26T21:35:27.0000Z</ReleaseDate>
 </ReleaseInfo>
