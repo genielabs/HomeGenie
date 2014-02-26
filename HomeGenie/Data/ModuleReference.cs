@@ -24,11 +24,11 @@ using System;
 
 namespace HomeGenie.Data
 {
-	[Serializable()]
-	public class ModuleReference
-	{
-		public string Address { get; set; }
-		public string Domain { get; set; }
-	}
+    [Serializable()]
+    public class ModuleReference
+    {
+        public string Address { get; set; }
+        public string Domain { get; set; }
+    }
 }
 

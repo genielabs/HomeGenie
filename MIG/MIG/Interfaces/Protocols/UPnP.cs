@@ -234,7 +234,7 @@ namespace MIG.Interfaces.Protocols
             //
             UPnPDevice device = _upnpDeviceGet(request.nodeid);
 
-//////////////////// Commands: SwitchPower, Dimming
+            //////////////////// Commands: SwitchPower, Dimming
             if (request.command == Command.CONTROL_ON || request.command == Command.CONTROL_OFF)
             {
                 bool cmdval = (request.command == Command.CONTROL_ON ? true : false);
@@ -263,7 +263,7 @@ namespace MIG.Interfaces.Protocols
             else if (request.command == Command.CONTROL_TOGGLE)
             {
             }
-//////////////////// Commands: Browse, AVTransport
+            //////////////////// Commands: Browse, AVTransport
             else if (request.command == Command.AVMEDIA_GETURI)
             {
                 string devid = request.nodeid;
@@ -570,7 +570,7 @@ namespace MIG.Interfaces.Protocols
             }
 
 
-			// signal event
+            // signal event
             if (raisepropchanged && InterfacePropertyChangedAction != null)
             {
                 try
@@ -587,7 +587,7 @@ namespace MIG.Interfaces.Protocols
         #endregion
 
 
-        
+
         #region non-MIGInterface public members
 
         public UpnpSmartControlPoint UpnpControlPoint
@@ -679,19 +679,19 @@ namespace MIG.Interfaces.Protocols
             }
         }
 
-//        private void _subscribe_sink(UPnPService sender, bool SubscribeOK)
-//        {
-//Console.WriteLine("\n\n\n" + sender.ServiceURN + "\n\n\n");
-//            if (SubscribeOK)
-//            {
-//                sender.OnUPnPEvent += sender_OnUPnPEvent;
-//            }
-//        }
+        //        private void _subscribe_sink(UPnPService sender, bool SubscribeOK)
+        //        {
+        //Console.WriteLine("\n\n\n" + sender.ServiceURN + "\n\n\n");
+        //            if (SubscribeOK)
+        //            {
+        //                sender.OnUPnPEvent += sender_OnUPnPEvent;
+        //            }
+        //        }
 
-//        void sender_OnUPnPEvent(UPnPService sender, long SEQ)
-//        {
-//Console.WriteLine("\n\n\n" + sender.ServiceURN + " - " + SEQ + "\n\n\n");
-//        }
+        //        void sender_OnUPnPEvent(UPnPService sender, long SEQ)
+        //        {
+        //Console.WriteLine("\n\n\n" + sender.ServiceURN + " - " + SEQ + "\n\n\n");
+        //        }
 
 
     }
@@ -731,7 +731,7 @@ namespace MIG.Interfaces.Protocols
 
         public ArrayList DeviceTable
         {
-            get { return activeDeviceList;  }
+            get { return activeDeviceList; }
         }
 
         public event DeviceHandler OnAddedDevice
@@ -797,7 +797,7 @@ namespace MIG.Interfaces.Protocols
 
         private void DeviceFactoryCreationSink(UPnPDeviceFactory sender, UPnPDevice device, Uri locationURL)
         {
-//Console.WriteLine("UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "]");
+            //Console.WriteLine("UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "]");
             if (!this.deviceTable.Contains(device.UniqueDeviceName))
             {
                 EventLogger.Log(this, EventLogEntryType.Error, "UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "] in xml but not in SSDP");

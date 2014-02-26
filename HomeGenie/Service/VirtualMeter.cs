@@ -33,19 +33,19 @@ using HomeGenie.Data;
 namespace HomeGenie.Service
 {
 
-	public class VirtualMeter
-	{
-		Thread _meterthread;
+    public class VirtualMeter
+    {
+        Thread _meterthread;
 
-		HomeGenieService _homegenie;
+        HomeGenieService _homegenie;
 
         private bool _vmrunning = true;
 
-		public VirtualMeter (HomeGenieService hg)
-		{
-			_homegenie = hg;
+        public VirtualMeter(HomeGenieService hg)
+        {
+            _homegenie = hg;
             Start();
-		}
+        }
 
         public void Start()
         {
@@ -58,10 +58,10 @@ namespace HomeGenie.Service
             _vmrunning = false;
         }
 
-		private void _virtualmeterloop()
-		{
+        private void _virtualmeterloop()
+        {
             while (_vmrunning)
-			{
+            {
                 try
                 {
                     foreach (Module module in _homegenie.Modules)
@@ -97,9 +97,9 @@ namespace HomeGenie.Service
                 catch { } // TODO: this should use locking instead of try cactch
                 //
                 Thread.Sleep(30000);
-			}
-		}
+            }
+        }
 
-	}
+    }
 }
 

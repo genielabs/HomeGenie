@@ -34,65 +34,65 @@ using HomeGenie.Service;
 
 namespace HomeGenie.Data
 {
-	[Serializable()]
-	public class Module : ICloneable
-	{
-		public string Name { get; set; }
-		public string Description { get; set; }
+    [Serializable()]
+    public class Module : ICloneable
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public Types Type { get; set; } //physical control type (on/off, 0-100, Hot/Cold, InputSensor, etc.)
         [JsonConverter(typeof(StringEnumConverter))]
         public DeviceTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
 
-		// location in actual physical Control-topology
-		public string Domain { get; set; } // only Domain is used. Interface should be used instead?
-		//public string Interface { get; set; }
-		public string Address { get; set; }
-		//
-		public TsList<ModuleParameter> Properties { get; set; }
+        // location in actual physical Control-topology
+        public string Domain { get; set; } // only Domain is used. Interface should be used instead?
+        //public string Interface { get; set; }
+        public string Address { get; set; }
+        //
+        public TsList<ModuleParameter> Properties { get; set; }
         //
         public string RoutingNode { get; set; } // "<ip>:<port>" || ""
-		//
-		public Module ()
-		{
-			Name = "";
+        //
+        public Module()
+        {
+            Name = "";
             Address = "";
             Description = "";
             Type = Types.Generic;
             DeviceType = DeviceTypes.Generic;
-			Properties = new TsList<ModuleParameter> ();
+            Properties = new TsList<ModuleParameter>();
             RoutingNode = "";
-		}
-		
-		public object Clone()
-	    {
-	        MemoryStream ms = new MemoryStream();
-	        BinaryFormatter bf = new BinaryFormatter();
-	
-	        bf.Serialize(ms, this);
-	
-	        ms.Position = 0;
-	        object obj = bf.Deserialize(ms);
-	        ms.Close();
-	
-	        return obj;
-	    }		
-		
-		public enum Types
-		{
+        }
+
+        public object Clone()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+
+            bf.Serialize(ms, this);
+
+            ms.Position = 0;
+            object obj = bf.Deserialize(ms);
+            ms.Close();
+
+            return obj;
+        }
+
+        public enum Types
+        {
             Generic = -1,
-			BinarySwitch,
-			MultiLevelSwitch,
-			Thermostat,
-			InputSensor
-		}
+            BinarySwitch,
+            MultiLevelSwitch,
+            Thermostat,
+            InputSensor
+        }
 
         public enum DeviceTypes
-		{
+        {
             Generic = -1,
             Program,
             Switch,
-			Light,
+            Light,
             Dimmer,
             Sensor,
             Temperature,
@@ -102,8 +102,8 @@ namespace HomeGenie.Data
             Shutter,
             DoorWindow
             //siren, alarm, motion sensor, door sensor, thermal sensor, etc.
-		}
+        }
 
-	}
+    }
 }
 

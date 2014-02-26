@@ -35,12 +35,12 @@ using HomeGenie.Automation.Scheduler;
 
 namespace HomeGenie.Automation
 {
-	public class ProgramEngine
-	{
+    public class ProgramEngine
+    {
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
 
         private HomeGenie.Service.TsList<ProgramBlock> _programblocks = new HomeGenie.Service.TsList<ProgramBlock>();
-		
+
         //TODO: deprecate Automation States
         private Dictionary<string, bool> _automationstates = new Dictionary<string, bool>() { 
                 { "Security.Armed", false},
@@ -54,15 +54,15 @@ namespace HomeGenie.Automation
 
         private MacroRecorder _macrorecorder = null;
 
-		private object _lock = new object ();
+        private object _lock = new object();
 
-		private bool _enginerunning = true;
+        private bool _enginerunning = true;
         private bool _engineenabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
 
-		public ProgramEngine (HomeGenieService homegenie)
-		{
-			_homegenie = homegenie;
+        public ProgramEngine(HomeGenieService homegenie)
+        {
+            _homegenie = homegenie;
             _scriptinghost = new ScriptingHost(_homegenie);
             _macrorecorder = new MacroRecorder(this);
             _schedulersvc = new SchedulerService(this);
@@ -147,7 +147,7 @@ namespace HomeGenie.Automation
                     if (delaynext > 500) delaynext = 500;
                     //
                     Thread.Sleep(delaynext);
-                }   
+                }
                 p.IsEvaluatingConditionBlock = false;
             }));
             //evaluatorthread.Priority = ThreadPriority.AboveNormal;
@@ -216,25 +216,26 @@ namespace HomeGenie.Automation
             return cres;
         }
 
-		public void Run (ProgramBlock pb, string options)
-		{
-			if (pb.IsRunning)
-				return;
-			//
+        public void Run(ProgramBlock pb, string options)
+        {
+            if (pb.IsRunning)
+                return;
+            //
             if (pb.ProgramThread != null)
             {
                 pb.Stop();
                 pb.IsRunning = false;
             }
             //
-			lock (_lock) {
-				pb.IsRunning = true;
-				//
+            lock (_lock)
+            {
+                pb.IsRunning = true;
+                //
                 if (pb.Type.ToLower() == "csharp")
                 {
                     if (pb.ScriptAssembly != null)
                     {
-						pb.TriggerTime = DateTime.UtcNow;
+                        pb.TriggerTime = DateTime.UtcNow;
                         pb.ProgramThread = new Thread(new ThreadStart(delegate()
                         {
                             MethodRunResult res = pb.RunScript(_homegenie, options);
@@ -252,7 +253,7 @@ namespace HomeGenie.Automation
                         {
                             pb.ProgramThread.Start();
                         }
-                        catch 
+                        catch
                         {
                             pb.Stop();
                             pb.IsRunning = false;
@@ -265,7 +266,7 @@ namespace HomeGenie.Automation
                 }
                 else
                 {
-					pb.TriggerTime = DateTime.UtcNow;
+                    pb.TriggerTime = DateTime.UtcNow;
                     if (pb.ConditionType == ConditionType.Once)
                     {
                         pb.IsEnabled = false;
@@ -289,14 +290,14 @@ namespace HomeGenie.Automation
                     pb.ProgramThread.Priority = ThreadPriority.Lowest;
                     pb.ProgramThread.Start();
                 }
-				//
-				Thread.Sleep (100);
-			}
+                //
+                Thread.Sleep(100);
+            }
 
-		}
+        }
 
-		public void StopEngine ()
-		{
+        public void StopEngine()
+        {
             _enginerunning = false;
             _schedulersvc.Stop();
             //lock (_programblocks)
@@ -306,7 +307,7 @@ namespace HomeGenie.Automation
                     pb.Stop();
                 }
             }
-		}
+        }
 
         public TsList<ProgramBlock> Programs { get { lock (_programblocks) return _programblocks; } }
 
@@ -399,110 +400,115 @@ namespace HomeGenie.Automation
             }
         }
 
-		private bool _mcp_verifyCondition (ProgramCondition c)
-		{
-			bool retval = false;
-			string comparisonvalue = c.ComparisonValue;
+        private bool _mcp_verifyCondition(ProgramCondition c)
+        {
+            bool retval = false;
+            string comparisonvalue = c.ComparisonValue;
             //
             if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && c.Property == "Scheduler.TimeEvent")
             {
                 return _homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
             }
             //
-			try {
-				//
-				// if the comparison value starts with ":", then the value is read from another module property
-				// eg: ":HomeAutomation.X10/B3/Level"
-				if (comparisonvalue.StartsWith(":"))
-				{
-					string[] proppath = comparisonvalue.Substring(1).Split('/');
-					comparisonvalue = "";
-					if (proppath.Length >= 3)
-					{
-						string domain = proppath[0];
-						string address = proppath[1];
-						string pname = proppath[2];
-						var mtarget = _homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
-						if (mtarget == null)
-						{
-							// abbreviated path, eg: ":X10/B3/Level"
-							mtarget = _homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
-						}
-						//
-						if (mtarget != null)
-						{
-							var mprop = Utility.ModuleParameterGet(mtarget, pname);
-							if (mprop != null)
-							{
-								comparisonvalue = mprop.Value; 
-							}
-						}
-					}
-				}
-				//
+            try
+            {
+                //
+                // if the comparison value starts with ":", then the value is read from another module property
+                // eg: ":HomeAutomation.X10/B3/Level"
+                if (comparisonvalue.StartsWith(":"))
+                {
+                    string[] proppath = comparisonvalue.Substring(1).Split('/');
+                    comparisonvalue = "";
+                    if (proppath.Length >= 3)
+                    {
+                        string domain = proppath[0];
+                        string address = proppath[1];
+                        string pname = proppath[2];
+                        var mtarget = _homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
+                        if (mtarget == null)
+                        {
+                            // abbreviated path, eg: ":X10/B3/Level"
+                            mtarget = _homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
+                        }
+                        //
+                        if (mtarget != null)
+                        {
+                            var mprop = Utility.ModuleParameterGet(mtarget, pname);
+                            if (mprop != null)
+                            {
+                                comparisonvalue = mprop.Value;
+                            }
+                        }
+                    }
+                }
+                //
                 // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
                 //
-				ModuleParameter parameter = null;
-				if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation") 
+                ModuleParameter parameter = null;
+                if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation")
                 {
-					parameter = new ModuleParameter ();
-					parameter.Name = c.Property;
-					switch (parameter.Name) {
-					case "Programs.DateDay":
-						parameter.Value = DateTime.Now.Day.ToString();
-						break;
-					case "Programs.DateMonth":
-						parameter.Value = DateTime.Now.Month.ToString();
-						break;
-					case "Programs.DateDayOfWeek":
-						parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
-						break;
-					case "Programs.DateYear":
-						parameter.Value = DateTime.Now.Year.ToString();
-						break;
-					case "Programs.DateHour":
-						parameter.Value = DateTime.Now.Hour.ToString();
-						break;
-					case "Programs.DateMinute":
-						parameter.Value = DateTime.Now.Minute.ToString();
-						break;
-					case "Programs.Date":
-						parameter.Value = DateTime.Now.ToString("YY-MM-dd");
-						break;
-					case "Programs.Time":
-						parameter.Value = DateTime.Now.ToString("HH:mm:ss");
-						break;
-					case "Programs.DateTime":
-						parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
-						break;
-					}
-				} else {
-					Module mod = _homegenie.Modules.Find (m => m.Address == c.Target && m.Domain == c.Domain);
-					parameter = mod.Properties.Find(delegate(ModuleParameter mp) {
-						return mp.Name == c.Property;
-					});
-				}
-				//
-				if (parameter != null) 
+                    parameter = new ModuleParameter();
+                    parameter.Name = c.Property;
+                    switch (parameter.Name)
+                    {
+                        case "Programs.DateDay":
+                            parameter.Value = DateTime.Now.Day.ToString();
+                            break;
+                        case "Programs.DateMonth":
+                            parameter.Value = DateTime.Now.Month.ToString();
+                            break;
+                        case "Programs.DateDayOfWeek":
+                            parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
+                            break;
+                        case "Programs.DateYear":
+                            parameter.Value = DateTime.Now.Year.ToString();
+                            break;
+                        case "Programs.DateHour":
+                            parameter.Value = DateTime.Now.Hour.ToString();
+                            break;
+                        case "Programs.DateMinute":
+                            parameter.Value = DateTime.Now.Minute.ToString();
+                            break;
+                        case "Programs.Date":
+                            parameter.Value = DateTime.Now.ToString("YY-MM-dd");
+                            break;
+                        case "Programs.Time":
+                            parameter.Value = DateTime.Now.ToString("HH:mm:ss");
+                            break;
+                        case "Programs.DateTime":
+                            parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
+                            break;
+                    }
+                }
+                else
                 {
-					IComparable lvalue = parameter.Value;
-					IComparable rvalue = comparisonvalue;
-					//
+                    Module mod = _homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                    parameter = mod.Properties.Find(delegate(ModuleParameter mp)
+                    {
+                        return mp.Name == c.Property;
+                    });
+                }
+                //
+                if (parameter != null)
+                {
+                    IComparable lvalue = parameter.Value;
+                    IComparable rvalue = comparisonvalue;
+                    //
                     double dval = 0;
-					DateTime dtval = new DateTime();
-					//
-					if (DateTime.TryParse(parameter.Value, out dtval))
-					{
-						lvalue = dtval;
-						rvalue = DateTime.Parse(comparisonvalue);
-					}
+                    DateTime dtval = new DateTime();
+                    //
+                    if (DateTime.TryParse(parameter.Value, out dtval))
+                    {
+                        lvalue = dtval;
+                        rvalue = DateTime.Parse(comparisonvalue);
+                    }
                     else if (double.TryParse(parameter.Value, out dval))
                     {
-						lvalue = dval;
-						rvalue = double.Parse(comparisonvalue);
+                        lvalue = dval;
+                        rvalue = double.Parse(comparisonvalue);
                     }
-					//
-					int comparisonresult = lvalue.CompareTo(rvalue);
+                    //
+                    int comparisonresult = lvalue.CompareTo(rvalue);
                     if (c.ComparisonOperator == ComparisonOperator.LessThan && comparisonresult < 0)
                     {
                         retval = true;
@@ -514,20 +520,22 @@ namespace HomeGenie.Automation
                     else if (c.ComparisonOperator == ComparisonOperator.GreaterThan && comparisonresult > 0)
                     {
                         retval = true;
-                    }						
-				}
-			} catch {
-			}
-			return retval;
-		}
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return retval;
+        }
 
-		private void _mcp_executeCommand (ProgramCommand c)
-		{
-            string wrequest = c.Domain + "/" + c.Target + "/" + c.CommandString + "/" + c.CommandArguments; 
+        private void _mcp_executeCommand(ProgramCommand c)
+        {
+            string wrequest = c.Domain + "/" + c.Target + "/" + c.CommandString + "/" + c.CommandArguments;
             MIGInterfaceCommand cmd = new MIGInterfaceCommand(wrequest);
-			_homegenie.InterfaceControl (cmd);
-			_homegenie.WaitOnPending (c.Domain);
-		}
+            _homegenie.InterfaceControl(cmd);
+            _homegenie.WaitOnPending(c.Domain);
+        }
 
-	}
+    }
 }

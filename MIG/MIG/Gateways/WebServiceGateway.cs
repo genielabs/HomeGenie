@@ -96,13 +96,13 @@ namespace MIG.Gateways
                 String.Format(@"http://+:{0}/", cnf.Port),
                 String.Format(@"https://+:{0}/", cnf.SslPort)
             };
-			//
-			SetPasswordHash(cnf.Password);
+            //
+            SetPasswordHash(cnf.Password);
         }
 
-		public void SetPasswordHash (string password)
-		{
-			_servicepassword = password;
+        public void SetPasswordHash(string password)
+        {
+            _servicepassword = password;
         }
 
         public void Start()
@@ -246,7 +246,7 @@ namespace MIG.Gateways
             }
 
         }
-        
+
         // finally a well working HttpListener implementation
         // from: http://stackoverflow.com/questions/5895063/asynchronous-httplistener-problem-each-request-is-received-twice
 
@@ -309,7 +309,7 @@ namespace MIG.Gateways
 
             Worker(context);
         }
- 
+
 
     }
 

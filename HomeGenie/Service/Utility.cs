@@ -45,10 +45,10 @@ using HomeGenie.Service.Constants;
 namespace HomeGenie.Service
 {
 
-	static class Extensions
-	{
-	    public static IList<T> Clone<T>(this IList<T> listToClone) where T: ICloneable
-	    {
+    static class Extensions
+    {
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
             IList<T> retlist = null;
             if (listToClone.GetType() == typeof(TsList<T>))
             {
@@ -59,9 +59,9 @@ namespace HomeGenie.Service
             {
                 retlist = listToClone.Select(item => (T)item.Clone()).ToList();
             }
-	        return retlist;
-	    }
-	}
+            return retlist;
+        }
+    }
 
     //// source: http://msdn.microsoft.com/en-us/library/ee722116(v=vs.110).aspx
     //public class Latch
@@ -201,7 +201,7 @@ namespace HomeGenie.Service
         {
 
             lock (_sync)
-            base.Clear();
+                base.Clear();
         }
         new public void Add(T value)
         {
@@ -240,8 +240,8 @@ namespace HomeGenie.Service
 
     public static class Utility
     {
-		[DllImport("winmm.dll", SetLastError = true)]
-		static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
+        [DllImport("winmm.dll", SetLastError = true)]
+        static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
 
 
         public static void Say(string sentence, string locale, bool async = false)
@@ -313,7 +313,8 @@ namespace HomeGenie.Service
 
                 Play(filewav);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 // TODO: add error logging 
             }
         }
@@ -361,7 +362,7 @@ namespace HomeGenie.Service
                 {
                     zip.DeletePart(uri);
                 }
-                PackagePart part = zip.CreatePart(uri, "",CompressionOption.Normal);
+                PackagePart part = zip.CreatePart(uri, "", CompressionOption.Normal);
                 using (FileStream fileStream = new FileStream(fileToAdd, FileMode.Open, FileAccess.Read))
                 {
                     using (Stream dest = part.GetStream())
@@ -423,10 +424,10 @@ namespace HomeGenie.Service
 
 
 
-		public static ModuleParameter ModuleParameterGet(Module module, string prop)
-		{
-			return module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == prop; });
-		}
+        public static ModuleParameter ModuleParameterGet(Module module, string prop)
+        {
+            return module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == prop; });
+        }
 
         public static ModuleParameter ModuleParameterSet(Module m, string prop, string value)
         {

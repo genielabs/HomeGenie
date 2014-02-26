@@ -1,69 +1,65 @@
-
 <!-- Configure -->
 <div data-role="page" id="page_configure_automationgroups">
 
 
     {include pages/header.html}
-		
+
     <div data-role="content" style="padding: 15px">
 
-        
+
         <img src="images/automation.png" style="position:absolute;top:65px;left:20px;" width="64" />
         <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="configure_automation_heading"><font style="color:gray">Automation</font><br />Groups</h3></div>
 
-		
-		<ul id="configure_automationgroupslist" data-role="listview" data-inset="true">
 
-		</ul>
+        <ul id="configure_automationgroupslist" data-role="listview" data-inset="true"></ul>
 
 
-	</div> 
+    </div>
 
 
 
-			
 
-	<div data-role="popup" data-position-to="window" id="automationgroup_add" style="max-width:400px;" class="ui-corner-all">
-		<div data-role="header" class="ui-corner-top">
-			<h1 data-locale-id="configure_automationgroup_newgroup">New Group</h1>
-		</div>
-		<div data-role="content" class="ui-corner-bottom ui-content">
-			<h3 data-locale-id="configure_automationgroup_entergroupname" class="ui-title">Enter new group name:</h3>
-			<input id="automationgroup_new_name" type="text" />
-			<a data-locale-id="configure_automationgroup_newgroupcancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>    
-			<a id="automationgroup_new_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Ok</a>  
-		</div>
-	</div>				
-				
+
+    <div data-role="popup" data-position-to="window" id="automationgroup_add" style="max-width:400px;" class="ui-corner-all">
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_automationgroup_newgroup">New Group</h1>
+        </div>
+        <div data-role="content" class="ui-corner-bottom ui-content">
+            <h3 data-locale-id="configure_automationgroup_entergroupname" class="ui-title">Enter new group name:</h3>
+            <input id="automationgroup_new_name" type="text" />
+            <a data-locale-id="configure_automationgroup_newgroupcancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
+            <a id="automationgroup_new_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Ok</a>
+        </div>
+    </div>
+
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
         <div data-role="navbar" data-iconpos="right">
             <ul>
-                <li>    
-		            <a data-locale-id="bottombar_button_back" data-role="button"  data-transition="slide" data-direction="reverse" href="#page_configure" data-icon="back" data-iconpos="left" data-mini="true">
-			            Back
-		            </a>
+                <li>
+                    <a data-locale-id="bottombar_button_back" data-role="button" data-transition="slide" data-direction="reverse" href="#page_configure" data-icon="back" data-iconpos="left" data-mini="true">
+                        Back
+                    </a>
                 </li>
-                <li>    
+                <li>
                     <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
                         Home
                     </a>
                 </li>
-                <li>    
-		            <a data-locale-id="configure_automationgroup_bottombar_group_add" data-role="button" data-rel="popup" data-transition="pop"  href="#automationgroup_add" data-icon="plus" data-iconpos="left" data-mini="true">
-			            Add Group
-		            </a>
+                <li>
+                    <a data-locale-id="configure_automationgroup_bottombar_group_add" data-role="button" data-rel="popup" data-transition="pop" href="#automationgroup_add" data-icon="plus" data-iconpos="left" data-mini="true">
+                        Add Group
+                    </a>
                 </li>
             </ul>
-    	</div><!-- /navbar -->
-	
+        </div><!-- /navbar -->
+
     </div>
 
 </div>
-		
-<!-- hg page init script -->	
+
+<!-- hg page init script -->
 <script type="text/javascript">
-	HG.WebApp.AutomationGroupsList.InitializePage();
+    HG.WebApp.AutomationGroupsList.InitializePage();
 </script>
-	

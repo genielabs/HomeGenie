@@ -25,17 +25,17 @@ using System.Collections.Generic;
 
 namespace HomeGenie.Data
 {
-	[Serializable()]
-	public class Group
-	{
-		public string Name { get; set; }
-		//
-		public List<ModuleReference> Modules { get; set; }
-		//
-		public Group()
-		{
-			Modules = new List<ModuleReference>();
-		}
-	}
+    [Serializable()]
+    public class Group
+    {
+        public string Name { get; set; }
+        //
+        public List<ModuleReference> Modules { get; set; }
+        //
+        public Group()
+        {
+            Modules = new List<ModuleReference>();
+        }
+    }
 }
 

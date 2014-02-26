@@ -49,7 +49,7 @@ namespace HomeGenie.Service.Logging
         /// <summary>
         /// Private constructor to prevent instance creation
         /// </summary>
-        public SystemLogger() 
+        public SystemLogger()
         {
         }
 
@@ -86,7 +86,7 @@ namespace HomeGenie.Service.Logging
                 {
                     FlushLog();
                 }
-            }            
+            }
         }
 
         private bool DoPeriodicFlush()

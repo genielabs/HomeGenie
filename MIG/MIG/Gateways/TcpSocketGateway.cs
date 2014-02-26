@@ -70,7 +70,7 @@ namespace MIG.Gateways
             //_server.DataSent += 
             //_server.ExceptionOccurred += 
             _server.ExceptionOccurred += new System.IO.ErrorEventHandler(_server_ExceptionOccurred);
-            _server.Connect(_serviceport); 
+            _server.Connect(_serviceport);
         }
 
         public void Configure(object gwconfiguration)
@@ -90,10 +90,10 @@ namespace MIG.Gateways
 
             if (ProcessRequest != null)
             {
-                ProcessRequest(new TcpSocketGateyRequest( args.ClientId, args.Data )); // '\0's ending byte array
+                ProcessRequest(new TcpSocketGateyRequest(args.ClientId, args.Data)); // '\0's ending byte array
             }
-            
-            _server.Receive(256, (int)args.ClientId); 
+
+            _server.Receive(256, (int)args.ClientId);
 
         }
 
@@ -107,33 +107,33 @@ namespace MIG.Gateways
 
         }
 
-/*
+        /*
 
-        internal bool _silverlightsend(string message)
-        {
-            bool sent = false;
-            //lock (this)
-            {
-                //Console.WriteLine(message);
-                try
+                internal bool _silverlightsend(string message)
                 {
-                    System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-                    if (message.Length < 256)
+                    bool sent = false;
+                    //lock (this)
                     {
-                        String sf = new String(' ', 256 - message.Length);
-                        message += sf;
+                        //Console.WriteLine(message);
+                        try
+                        {
+                            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+                            if (message.Length < 256)
+                            {
+                                String sf = new String(' ', 256 - message.Length);
+                                message += sf;
+                            }
+                            sent = _server.SendAll(encoding.GetBytes(message));
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(_pluginname + " unexpected error while sending data: " + e.Message);
+                        }
                     }
-                    sent = _server.SendAll(encoding.GetBytes(message));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(_pluginname + " unexpected error while sending data: " + e.Message);
-                }
-            }
-            return sent;
-        } 
+                    return sent;
+                } 
 
-*/
+        */
 
 
     }

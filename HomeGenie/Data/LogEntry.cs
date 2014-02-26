@@ -34,7 +34,7 @@ namespace HomeGenie.Data
         private DateTime _unixtimestamp;
         public double UnixTimestamp
         {
-            get 
+            get
             {
                 TimeSpan uts = (Timestamp - new DateTime(1970, 1, 1, 0, 0, 0));
                 return uts.TotalMilliseconds;

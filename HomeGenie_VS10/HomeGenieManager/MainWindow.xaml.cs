@@ -57,11 +57,11 @@ namespace HomeGenieManager
     {
         private WinForms.NotifyIcon _notifiericon = new WinForms.NotifyIcon();
         private ServiceController _servicecontroller = null;
-        
+
         private InstanceContext _instancecontext = null;
 
         private bool _apprunning = true;
-        
+
         private MenuItem _startstopitem;
 
         public MainWindow()
@@ -180,7 +180,7 @@ namespace HomeGenieManager
                 {
                     _servicecontroller.Start();
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 _notifiericon.BalloonTipTitle = "HomeGenie Message";

@@ -299,7 +299,7 @@ namespace HomeGenie.Service.Handlers
                                 _hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).Disconnect();
                             }
                             _hg._modules_refresh_misc();
-                            break;			
+                            break;
 
                         case "UPnP.GetIsEnabled":
                             migcmd.response = JsonHelper.GetSimpleResponse((_hg.SystemConfiguration.GetInterface(Domains.Protocols_UPnP).IsEnabled ? "1" : "0"));

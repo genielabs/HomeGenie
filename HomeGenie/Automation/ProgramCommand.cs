@@ -25,14 +25,14 @@ using System;
 namespace HomeGenie.Automation
 {
 
-	[Serializable()]
-	public class ProgramCommand
-	{
-		public string Domain;
-		public string Target;
-		public string CommandString;
-		public string CommandArguments;
-	}
+    [Serializable()]
+    public class ProgramCommand
+    {
+        public string Domain;
+        public string Target;
+        public string CommandString;
+        public string CommandArguments;
+    }
 
 }
 

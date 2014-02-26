@@ -49,8 +49,8 @@ namespace HomeGenie.Automation.Scripting
         {
             _homegenie = hgref;
             _mastercontrolprogram = _homegenie.ProgramEngine;
-//            AppDomain currentDomain = AppDomain.CurrentDomain;
-//            currentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyLookup);
+            //            AppDomain currentDomain = AppDomain.CurrentDomain;
+            //            currentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyLookup);
         }
 
         public CompilerResults CompileScript(string condition, string statement, string outdllfile)
@@ -242,7 +242,7 @@ namespace HomeGenie.Automation.Scripting
             //
             Dictionary<string, string> providerOptions = new Dictionary<string, string>
                 {
-//                    { "CompilerVersion", "v4.0" }
+                    //                    { "CompilerVersion", "v4.0" }
                 };
             CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
             CompilerParameters compilerParams = new CompilerParameters
@@ -251,7 +251,7 @@ namespace HomeGenie.Automation.Scripting
                     GenerateExecutable = false,
                     IncludeDebugInformation = true,
                     TreatWarningsAsErrors = true,
-                    OutputAssembly = outdllfile 
+                    OutputAssembly = outdllfile
                 };
             //
             // Mono runtime 2/3 compatibility fix 

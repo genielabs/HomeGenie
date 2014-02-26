@@ -53,7 +53,7 @@ namespace HomeGenie.Service.Handlers
             //
             if (migcmd.command.StartsWith("Macro."))
             {
-                switch(migcmd.command)
+                switch (migcmd.command)
                 {
                     case "Macro.Record":
                         _hg.ProgramEngine.MacroRecorder.RecordingEnable();
@@ -354,6 +354,6 @@ namespace HomeGenie.Service.Handlers
 
             }
         }
-    
+
     }
 }

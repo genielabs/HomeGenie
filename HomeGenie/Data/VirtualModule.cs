@@ -32,7 +32,8 @@ namespace HomeGenie.Data
         public string ParentId { get; set; }
         public bool Visible { get; set; }
 
-        public VirtualModule() : base()
+        public VirtualModule()
+            : base()
         {
             ParentId = "";
             Visible = false;

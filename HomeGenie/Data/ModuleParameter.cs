@@ -30,9 +30,9 @@ using HomeGenie.Service.Logging;
 namespace HomeGenie.Data
 {
 
-	[Serializable()]
-	public class ModuleParameter
-	{
+    [Serializable()]
+    public class ModuleParameter
+    {
         [NonSerialized]
         private ValueStatistics _statistics;
         private string _value;
@@ -50,14 +50,18 @@ namespace HomeGenie.Data
         }
         //
         [XmlIgnore]
-        public ValueStatistics Statistics { get {
-            if (_statistics == null) _statistics = new ValueStatistics();
-            return _statistics; 
-        } }
+        public ValueStatistics Statistics
+        {
+            get
+            {
+                if (_statistics == null) _statistics = new ValueStatistics();
+                return _statistics;
+            }
+        }
         //
-		public string Name { get; set; }
-		public string Value 
-        { 
+        public string Name { get; set; }
+        public string Value
+        {
             get
             {
                 return _value;
@@ -88,7 +92,7 @@ namespace HomeGenie.Data
         public DateTime UpdateTime { get; /* protected */ set; }
         public bool NeedsUpdate { get; set; }
         //
-        public double ValueIncrement 
+        public double ValueIncrement
         {
             get
             {
@@ -101,23 +105,23 @@ namespace HomeGenie.Data
 
         public double DecimalValue
         {
-          get
-          {
+            get
+            {
 
-            double v = 0;
-            if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v)) v = 0;
-            return v;
-          }
+                double v = 0;
+                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v)) v = 0;
+                return v;
+            }
         }
 
         public double LastDecimalValue
         {
-          get
-          {
-            double v;
-            if (!double.TryParse(this.LastValue, out v)) v = 0;
-            return v;
-          }
+            get
+            {
+                double v;
+                if (!double.TryParse(this.LastValue, out v)) v = 0;
+                return v;
+            }
         }
 
         public bool Is(string name)

@@ -24,8 +24,8 @@ using System;
 
 namespace MIG
 {
-	public interface MIGInterface
-	{
+    public interface MIGInterface
+    {
         /// <summary>
         /// interface identifier domain (eg. HomeAutomation.ZWave, Controllers.Kinect)
         /// that should be usually automatically calculated from namespace
@@ -42,45 +42,45 @@ namespace MIG
         /// </summary>
         /// <param name="command">MIG interface command</param>
         /// <returns></returns>
-        object InterfaceControl(MIGInterfaceCommand command); 
-		/// <summary>
-		/// wait for completition of all queued interface commands 
-		/// </summary>
-        void WaitOnPending ();
+        object InterfaceControl(MIGInterfaceCommand command);
+        /// <summary>
+        /// wait for completition of all queued interface commands 
+        /// </summary>
+        void WaitOnPending();
         /// <summary>
         /// this value can be actively polled to detect
         /// current interface connection state
         /// </summary>
-		bool IsConnected { get; }
+        bool IsConnected { get; }
         /// <summary>
         /// connect to the device interface / perform all setup
         /// </summary>
         /// <returns>a boolean indicating if the connection was succesful</returns>
-		bool Connect ();
+        bool Connect();
         /// <summary>
         /// disconnect the device interface / perform everything needed for shutdown/cleanup
         /// </summary>
-		void Disconnect ();
+        void Disconnect();
         /// <summary>
         /// this return true if the device has been found in the system (probing)
         /// </summary>
         /// <returns></returns>
-        bool IsDevicePresent ();
-	}
+        bool IsDevicePresent();
+    }
 
-	public class InterfacePropertyChangedAction
-	{
-		public string Domain { get; set; }
-		public string SourceId { get; set; }
-		public string SourceType { get; set; }
-		public string Path { get; set; }
-		public object Value { get; set; }
-	}
-	
-	public class InterfaceConnectedStateChangedAction
-	{
-		public bool Connected { get; internal set; }
-	}
-	
+    public class InterfacePropertyChangedAction
+    {
+        public string Domain { get; set; }
+        public string SourceId { get; set; }
+        public string SourceType { get; set; }
+        public string Path { get; set; }
+        public object Value { get; set; }
+    }
+
+    public class InterfaceConnectedStateChangedAction
+    {
+        public bool Connected { get; internal set; }
+    }
+
 }
 

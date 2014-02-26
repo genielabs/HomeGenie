@@ -31,43 +31,43 @@ using HomeGenie.Service;
 
 namespace HomeGenie.Data
 {
-	[Serializable()]
-	public class SystemConfiguration : ICloneable
-	{
+    [Serializable()]
+    public class SystemConfiguration : ICloneable
+    {
         public event Action<bool> OnUpdate;
 
         public HomeGenieConfiguration HomeGenie { get; set; }
         public MIGServiceConfiguration MIGService { get; set; }
 
-		public SystemConfiguration()
-		{
-			OperatingSystem os = Environment.OSVersion;
-			PlatformID pid = os.Platform;
-			//
+        public SystemConfiguration()
+        {
+            OperatingSystem os = Environment.OSVersion;
+            PlatformID pid = os.Platform;
+            //
             HomeGenie = new HomeGenieConfiguration();
             MIGService = new MIGServiceConfiguration();
-			//
-			HomeGenie.SystemName = "HAL";
+            //
+            HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
             HomeGenie.ServicePort = 80;
-			HomeGenie.UserLogin = "admin";
-			HomeGenie.UserPassword = ""; // password auth disabled by default
+            HomeGenie.UserLogin = "admin";
+            HomeGenie.UserPassword = ""; // password auth disabled by default
             HomeGenie.EnableLogFile = "false";
-		}
-		
-		public object Clone()
-	    {
-	        MemoryStream ms = new MemoryStream();
-	        BinaryFormatter bf = new BinaryFormatter();
-	
-	        bf.Serialize(ms, this);
-	
-	        ms.Position = 0;
-	        object obj = bf.Deserialize(ms);
-	        ms.Close();
-	
-	        return obj;
-	    }				
+        }
+
+        public object Clone()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
+
+            bf.Serialize(ms, this);
+
+            ms.Position = 0;
+            object obj = bf.Deserialize(ms);
+            ms.Close();
+
+            return obj;
+        }
 
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
@@ -138,9 +138,9 @@ namespace HomeGenie.Data
         public string SystemName { get; set; }
         public string Location { get; set; }
         public int ServicePort { get; set; }
-		public string UserLogin { get; set; }
-		public string UserPassword { get; set; }
-		public List<ModuleParameter> Settings = new List<ModuleParameter>();
+        public string UserLogin { get; set; }
+        public string UserPassword { get; set; }
+        public List<ModuleParameter> Settings = new List<ModuleParameter>();
 
         public string GUID { get; set; }
 

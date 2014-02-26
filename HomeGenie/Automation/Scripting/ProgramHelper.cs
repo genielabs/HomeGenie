@@ -34,7 +34,7 @@ using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation.Scripting
 {
-    
+
     public class ProgramHelper
     {
         private HomeGenieService _homegenie;
@@ -60,18 +60,18 @@ namespace HomeGenie.Automation.Scripting
             // reset features and other values
             Reset();
         }
-		
-		/// <summary>
-		/// Run an Automation Program
-		/// </summary>
-		/// <param name='programid'>
-		/// Name or ID of program to run
-		/// </param>
+
+        /// <summary>
+        /// Run an Automation Program
+        /// </summary>
+        /// <param name='programid'>
+        /// Name or ID of program to run
+        /// </param>
         public void Run(string programid)
-        { 
+        {
             Run(programid, "");
         }
-		
+
         public void Run(string programid, string optionstring)
         {
             //TODO: improve locking for single instance run only
@@ -88,26 +88,26 @@ namespace HomeGenie.Automation.Scripting
             pb.IsRunning = false;
         }
 
-		/// <summary>
-		/// Run a given function in the background
-		/// </summary>
-		/// <returns>
-		/// The Thread for this background task
-		/// </returns>
-		/// <param name='fnblock'>
-		/// Function name or inline delegate
-		/// </param>
+        /// <summary>
+        /// Run a given function in the background
+        /// </summary>
+        /// <returns>
+        /// The Thread for this background task
+        /// </returns>
+        /// <param name='fnblock'>
+        /// Function name or inline delegate
+        /// </param>
         public Thread RunAsyncTask(Utility.AsyncFunction fnblock)
         {
             return Utility.RunAsyncTask(fnblock);
         }
 
-		/// <summary>
-		/// Gets a value indicating whether the current program is running.
-		/// </summary>
-		/// <value>
-		/// <c>true</c> if this program is running; otherwise, <c>false</c>.
-		/// </value>
+        /// <summary>
+        /// Gets a value indicating whether the current program is running.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this program is running; otherwise, <c>false</c>.
+        /// </value>
         public bool IsRunning
         {
             get
@@ -116,13 +116,13 @@ namespace HomeGenie.Automation.Scripting
                 return pb.IsRunning;
             }
         }
-		
-		/// <summary>
-		/// Gets a value indicating whether this program is enabled.
-		/// </summary>
-		/// <value>
-		/// <c>true</c> if this program is enabled; otherwise, <c>false</c>.
-		/// </value>
+
+        /// <summary>
+        /// Gets a value indicating whether this program is enabled.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this program is enabled; otherwise, <c>false</c>.
+        /// </value>
         public bool IsEnabled
         {
             get
@@ -131,7 +131,7 @@ namespace HomeGenie.Automation.Scripting
                 return pb.IsEnabled;
             }
         }
-		
+
         public void GoBackground()
         {
             while (this.IsEnabled)
@@ -140,21 +140,21 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-		/// <summary>
-		/// Adds an input field to the program options dialog.
-		/// </summary>
-		/// <returns>
-		/// ProgramHelper
-		/// </returns>
-		/// <param name='field'>
-		/// Name of this input field
-		/// </param>
-		/// <param name='defaultvalue'>
-		/// Default value for this input field
-		/// </param>
-		/// <param name='description'>
-		/// Description for this input field
-		/// </param>
+        /// <summary>
+        /// Adds an input field to the program options dialog.
+        /// </summary>
+        /// <returns>
+        /// ProgramHelper
+        /// </returns>
+        /// <param name='field'>
+        /// Name of this input field
+        /// </param>
+        /// <param name='defaultvalue'>
+        /// Default value for this input field
+        /// </param>
+        /// <param name='description'>
+        /// Description for this input field
+        /// </param>
         public ProgramHelper AddInputField(string field, string defaultvalue, string description)
         {
             var par = this.Parameter("ConfigureOptions." + field);
@@ -162,27 +162,27 @@ namespace HomeGenie.Automation.Scripting
             par.Description = description;
             return this;
         }
-		
-		/// <summary>
-		/// Get a program input field.
-		/// </summary>
-		/// <returns>
-		/// The input field.
-		/// </returns>
-		/// <param name='field'>
-		/// Name of the input field to get.
-		/// </param>
+
+        /// <summary>
+        /// Get a program input field.
+        /// </summary>
+        /// <returns>
+        /// The input field.
+        /// </returns>
+        /// <param name='field'>
+        /// Name of the input field to get.
+        /// </param>
         public ModuleParameter InputField(string field)
         {
             return this.Parameter("ConfigureOptions." + field);
         }
-		
-		/// <summary>
-		/// Get a reference to the Module associated to this program
-		/// </summary>
-		/// <value>
-		/// Program module.
-		/// </value>
+
+        /// <summary>
+        /// Get a reference to the Module associated to this program
+        /// </summary>
+        /// <value>
+        /// Program module.
+        /// </value>
         public Module Module
         {
             get
@@ -218,29 +218,30 @@ namespace HomeGenie.Automation.Scripting
             ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == _myprogramid.ToString());
             ProgramFeature pf = null;
             //
-            try { pf = pb.Features.Find(f => f.Property == propname); } catch { }
+            try { pf = pb.Features.Find(f => f.Property == propname); }
+            catch { }
             //
             return pf;
         }
-		
-		/// <summary>
-		/// Adds a checkbox option to modules' option popup. 
-		/// </summary>
-		/// <returns>
-		/// ProgramHelper
-		/// </returns>
-		/// <param name='fordomains'>
-		/// A string with comma separated list of the module's domains that will show this checkbox
-		/// </param>
-		/// <param name='formoduletypes'>
-		/// A string with comma separated list of the module's types that will show this checkbox
-		/// </param>
-		/// <param name='propname'>
-		/// Name for this checkbox option
-		/// </param>
-		/// <param name='description'>
-		/// Description for this checkbox option
-		/// </param>
+
+        /// <summary>
+        /// Adds a checkbox option to modules' option popup. 
+        /// </summary>
+        /// <returns>
+        /// ProgramHelper
+        /// </returns>
+        /// <param name='fordomains'>
+        /// A string with comma separated list of the module's domains that will show this checkbox
+        /// </param>
+        /// <param name='formoduletypes'>
+        /// A string with comma separated list of the module's types that will show this checkbox
+        /// </param>
+        /// <param name='propname'>
+        /// Name for this checkbox option
+        /// </param>
+        /// <param name='description'>
+        /// Description for this checkbox option
+        /// </param>
         public ProgramHelper AddFeature(string fordomains, string formoduletypes, string propname, string description)
         {
             return AddFeature(fordomains, formoduletypes, propname, description, "checkbox");
@@ -250,32 +251,32 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature("", formoduletypes, propname, description, "checkbox");
         }
-		
-		
-		/// <summary>
-		/// Adds an input field to modules' option popup. 
-		/// </summary>
-		/// <returns>
-		/// ProgramHelper
-		/// </returns>
-		/// <param name='fordomains'>
-		/// A string with comma separated list of the module's domains that will show this input field
-		/// </param>
-		/// <param name='formoduletypes'>
-		/// A string with comma separated list of the module's types that will show this input field
-		/// </param>
-		/// <param name='propname'>
-		/// Name for this input field
-		/// </param>
-		/// <param name='description'>
-		/// Description for this input field
-		/// </param>
+
+
+        /// <summary>
+        /// Adds an input field to modules' option popup. 
+        /// </summary>
+        /// <returns>
+        /// ProgramHelper
+        /// </returns>
+        /// <param name='fordomains'>
+        /// A string with comma separated list of the module's domains that will show this input field
+        /// </param>
+        /// <param name='formoduletypes'>
+        /// A string with comma separated list of the module's types that will show this input field
+        /// </param>
+        /// <param name='propname'>
+        /// Name for this input field
+        /// </param>
+        /// <param name='description'>
+        /// Description for this input field
+        /// </param>
         public ProgramHelper AddFeatureTextInput(string fordomain, string formoduletypes, string propname, string description)
         {
             return AddFeature(fordomain, formoduletypes, propname, description, "text");
         }
 
-        public ProgramHelper AddFeatureTextInput(string formoduletypes, string propname, string description) 
+        public ProgramHelper AddFeatureTextInput(string formoduletypes, string propname, string description)
         {
             return AddFeature("", formoduletypes, propname, description, "text");
         }
@@ -325,7 +326,8 @@ namespace HomeGenie.Automation.Scripting
             {
 
                 VirtualModule oldmodule = null;
-                try { oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == x.ToString()); } catch { }
+                try { oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == x.ToString()); }
+                catch { }
                 //
                 if (oldmodule == null)
                 {
@@ -424,9 +426,9 @@ namespace HomeGenie.Automation.Scripting
                 }
             }
             catch (Exception e)
-            { 
+            {
                 //TODO: report error
-                throw ( new Exception(e.StackTrace) );
+                throw (new Exception(e.StackTrace));
             }
         }
 
@@ -504,7 +506,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 _homegenie.SignalModulePropertyChange(this, _programmodule, mact);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 HomeGenieService.LogEvent(_programmodule.Domain, _programmodule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
@@ -536,55 +538,55 @@ namespace HomeGenie.Automation.Scripting
             get { return _homegenie.Statistics != null ? _homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0; }
         }
 
-/*
+        /*
 
-        public ProgramHelper Set(string value)
-        {
-            this.value = value;
-            //if (_programmodule != null)
-            {
-                ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
-                if (parameter == null)
+                public ProgramHelper Set(string value)
                 {
-                    _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value });
-                }
-                else
-                {
-                    parameter.Value = value;
-                }
-            }
-            return this;
-        }
-
-        public ProgramHelper Set(string value, string description)
-        {
-            this.value = value;
-            //if (_programmodule != null)
-            {
-                ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
-                if (parameter == null)
-                {
-                    _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value, Description = description });
-                }
-                else
-                {
-                    if (initialized || parameter.Value == "")
+                    this.value = value;
+                    //if (_programmodule != null)
                     {
-                        parameter.Value = value;
+                        ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
+                        if (parameter == null)
+                        {
+                            _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value });
+                        }
+                        else
+                        {
+                            parameter.Value = value;
+                        }
                     }
-                    parameter.Description = description;
+                    return this;
                 }
-            }
-            return this;
-        }
-*/
+
+                public ProgramHelper Set(string value, string description)
+                {
+                    this.value = value;
+                    //if (_programmodule != null)
+                    {
+                        ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
+                        if (parameter == null)
+                        {
+                            _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value, Description = description });
+                        }
+                        else
+                        {
+                            if (initialized || parameter.Value == "")
+                            {
+                                parameter.Value = value;
+                            }
+                            parameter.Description = description;
+                        }
+                    }
+                    return this;
+                }
+        */
 
         // that isn't of any use here.. .anyway... =)
         public ProgramHelper Reset()
         {
             this.parameter = "";
             this.value = "";
-//            this.initialized = false;
+            //            this.initialized = false;
             //
             if (_programmodule == null) _relocateprogrammodule();
             //

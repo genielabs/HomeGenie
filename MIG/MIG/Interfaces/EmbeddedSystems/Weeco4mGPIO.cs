@@ -33,8 +33,8 @@ using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace MIG.Interfaces.EmbeddedSystems
 {
-	public class Weeco4mGPIO : MIGInterface
-	{
+    public class Weeco4mGPIO : MIGInterface
+    {
 
         #region Implemented MIG Commands
 
@@ -56,11 +56,11 @@ namespace MIG.Interfaces.EmbeddedSystems
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
             public static readonly Command PARAMETER_STATUS = new Command(203);
-			public static readonly Command PARAMETER_COUNTER = new Command(204);
+            public static readonly Command PARAMETER_COUNTER = new Command(204);
             public static readonly Command PARAMETER_PERIODE = new Command(205);
             public static readonly Command PARAMETER_RESET = new Command(231);
 
-			
+
             public static readonly Command CONTROL_ON = new Command(701);
             public static readonly Command CONTROL_OFF = new Command(702);
             public static readonly Command CONTROL_RESET = new Command(731);
@@ -101,7 +101,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
             public static explicit operator Command(string str)
             {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command " + str);
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command " + str);
 
                 if (CommandsList.ContainsValue(str))
                 {
@@ -122,15 +122,15 @@ namespace MIG.Interfaces.EmbeddedSystems
                 return a.value != b.value;
             }
         }
-		
-		#endregion
 
-		private const string GPIO_LED_PATH ="/sys/class/leds/";
-		private const string GPIO_INOUT_PATH = "/sys/kernel/lgw4m-8di/";
-		
-		
-#if TEST		
-		private Dictionary<string, string> CrossRefPins = new Dictionary<string, string>()		
+        #endregion
+
+        private const string GPIO_LED_PATH = "/sys/class/leds/";
+        private const string GPIO_INOUT_PATH = "/sys/kernel/lgw4m-8di/";
+
+
+#if TEST
+        private Dictionary<string, string> CrossRefPins = new Dictionary<string, string>()		
         {
         	{ "0", GPIO_INOUT_PATH + "in0_value" },
         	{ "1", GPIO_INOUT_PATH + "in1_value" },
@@ -165,10 +165,10 @@ namespace MIG.Interfaces.EmbeddedSystems
         	{ "39", GPIO_INOUT_PATH + "in7_periode" }			
 			
 		};
-		
-		
-		
-    	public Dictionary<string, bool> GPIOPins = new Dictionary<string, bool>()
+
+
+
+        public Dictionary<string, bool> GPIOPins = new Dictionary<string, bool>()
 		{
             { "0", false },
             { "1", false },
@@ -185,8 +185,8 @@ namespace MIG.Interfaces.EmbeddedSystems
             { "10", false },
             { "11", false }
 		};
-		
-    	public Dictionary<string, string> REGPins = new Dictionary<string, string>()
+
+        public Dictionary<string, string> REGPins = new Dictionary<string, string>()
 		{			
             { "16", "0" },
             { "17", "0" },
@@ -205,9 +205,9 @@ namespace MIG.Interfaces.EmbeddedSystems
             { "37", "0" },
             { "38", "0" },
             { "39", "0" }			
-        };	
-		
-		
+        };
+
+
 #else
 		private Dictionary<string, string> CrossRefPins = new Dictionary<string, string>()		{
         	{ "input0", GPIO_INOUT_PATH + "in0_value" },
@@ -286,66 +286,69 @@ namespace MIG.Interfaces.EmbeddedSystems
         };
 #endif
         bool isconnected = false;
-		bool isDesktopEmulation = false;
+        bool isDesktopEmulation = false;
 
-		public Weeco4mGPIO()
-		{
+        public Weeco4mGPIO()
+        {
             isconnected = Directory.Exists(GPIO_INOUT_PATH) && Directory.Exists(GPIO_LED_PATH);
-			//if (!isconnected)
-			//{
-			//	isconnected = true;
-			//	isDesktopEmulation = true;	
-			//}
-		}
+            //if (!isconnected)
+            //{
+            //	isconnected = true;
+            //	isDesktopEmulation = true;	
+            //}
+        }
 
         #region MIG Interface members
 
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
-		public string Domain {
-			get {
-				string ifacedomain = this.GetType().Namespace.ToString ();
-				ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf (".") + 1) + "." + this.GetType ().Name.ToString ();
-				return ifacedomain;
-			}
-		}
-		
-		public bool Connect()
-		{
-			return isconnected;
-		}
-		public void Disconnect()
-		{
+        public string Domain
+        {
+            get
+            {
+                string ifacedomain = this.GetType().Namespace.ToString();
+                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return ifacedomain;
+            }
+        }
+
+        public bool Connect()
+        {
+            return isconnected;
+        }
+        public void Disconnect()
+        {
             CleanUpAllPins();
-		}
+        }
         public bool IsDevicePresent()
         {
             return isconnected;
         }
         public bool IsConnected
         {
-			get { return isconnected; }
-		}
+            get { return isconnected; }
+        }
 
-		public void WaitOnPending()
-		{
-		}
+        public void WaitOnPending()
+        {
+        }
 
-		public object InterfaceControl(MIGInterfaceCommand request)
-		{
-			if (DEBUG) Console.WriteLine("Weeco4mGPIO Command : " + request);
+        public object InterfaceControl(MIGInterfaceCommand request)
+        {
+            if (DEBUG) Console.WriteLine("Weeco4mGPIO Command : " + request);
 
             Command command = (Command)request.command;
             string returnvalue = "";
-			//
-			if (command == Command.CONTROL_ON) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_ON ");
+            //
+            if (command == Command.CONTROL_ON)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_ON ");
 
                 this.OutputPin(request.nodeid, "1");
-				if (IsRegister(request.nodeid))
-					REGPins[request.nodeid] = "1";
-				else
-					GPIOPins[request.nodeid] = true;
+                if (IsRegister(request.nodeid))
+                    REGPins[request.nodeid] = "1";
+                else
+                    GPIOPins[request.nodeid] = true;
                 if (InterfacePropertyChangedAction != null)
                 {
                     try
@@ -354,18 +357,19 @@ namespace MIG.Interfaces.EmbeddedSystems
                     }
                     catch { }
                 }
-			}
-			//
-			if (command == Command.CONTROL_OFF) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_OFF ");
+            }
+            //
+            if (command == Command.CONTROL_OFF)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_OFF ");
 
                 this.OutputPin(request.nodeid, "0");
-				if (IsRegister(request.nodeid))
-					REGPins[request.nodeid] = "0";                
-				else
-					GPIOPins[request.nodeid] = false;
-				
-				if (InterfacePropertyChangedAction != null)
+                if (IsRegister(request.nodeid))
+                    REGPins[request.nodeid] = "0";
+                else
+                    GPIOPins[request.nodeid] = false;
+
+                if (InterfacePropertyChangedAction != null)
                 {
                     try
                     {
@@ -374,17 +378,19 @@ namespace MIG.Interfaces.EmbeddedSystems
                     catch { }
                 }
             }
-			//
-			if (command == Command.PARAMETER_STATUS) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_STATUS ");				
-				if (!IsRegister(request.nodeid))
-					GPIOPins[request.nodeid] = this.InputPin(request.nodeid).CompareTo("0") == 0 ? false : true;
-				else
-					REGPins[request.nodeid] = this.InputPin(request.nodeid);
-			}
-			//
-			if (command == Command.CONTROL_RESET) {
-				this.CleanUpAllPins();
+            //
+            if (command == Command.PARAMETER_STATUS)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_STATUS ");
+                if (!IsRegister(request.nodeid))
+                    GPIOPins[request.nodeid] = this.InputPin(request.nodeid).CompareTo("0") == 0 ? false : true;
+                else
+                    REGPins[request.nodeid] = this.InputPin(request.nodeid);
+            }
+            //
+            if (command == Command.CONTROL_RESET)
+            {
+                this.CleanUpAllPins();
                 foreach (KeyValuePair<string, bool> kv in GPIOPins)
                 {
                     GPIOPins[kv.Key] = false;
@@ -394,84 +400,90 @@ namespace MIG.Interfaces.EmbeddedSystems
                     REGPins[kv.Key] = "0";
                 }
             }
-			//			
-			if (command == Command.PARAMETER_COUNTER) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_COUNTER ");
+            //			
+            if (command == Command.PARAMETER_COUNTER)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_COUNTER ");
 
-			}
-			//			
-			if (command == Command.PARAMETER_PERIODE) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_PERIOD ");
+            }
+            //			
+            if (command == Command.PARAMETER_PERIODE)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_PERIOD ");
 
-			
-			}
-			//			
-			if (command == Command.PARAMETER_RESET) {
-				if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_RESET " );
-			
-			}
-			
-			
-			return returnvalue;
-		}
+
+            }
+            //			
+            if (command == Command.PARAMETER_RESET)
+            {
+                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_RESET ");
+
+            }
+
+
+            return returnvalue;
+        }
 
         #endregion
 
 
-		public enum enumPIN { gpio0 = 0, gpio1 = 1, gpio2 = 2, gpio3 = 3, gpio4 = 4, gpio5 = 5, gpio6 = 6, gpio7= 7,	// input
-							  gpio16 = 16, gpio17 = 17, gpio18 = 18, gpio19 = 19, gpio20 = 20, gpio21 = 21, gpio22 = 22, gpio23 = 23,	// counters
-							  gpio24 = 32, gpio25 = 33, gpio26 = 34, gpio27 = 35, gpio28 = 36, gpio29 = 37, gpio30 = 38, gpio31 = 39,	// periode
-							  gpio8 = 8, gpio9 = 9, gpio10 = 10, gpio11=11};	// output (leds and out)
-		
-		public enum enumDirection { IN, OUT };
-		
+        public enum enumPIN
+        {
+            gpio0 = 0, gpio1 = 1, gpio2 = 2, gpio3 = 3, gpio4 = 4, gpio5 = 5, gpio6 = 6, gpio7 = 7,	// input
+            gpio16 = 16, gpio17 = 17, gpio18 = 18, gpio19 = 19, gpio20 = 20, gpio21 = 21, gpio22 = 22, gpio23 = 23,	// counters
+            gpio24 = 32, gpio25 = 33, gpio26 = 34, gpio27 = 35, gpio28 = 36, gpio29 = 37, gpio30 = 38, gpio31 = 39,	// periode
+            gpio8 = 8, gpio9 = 9, gpio10 = 10, gpio11 = 11
+        };	// output (leds and out)
 
-		
-		//set to true to write whats happening to the screen
-		private const bool DEBUG = true; 
-		
-		private bool IsRegister(string nodeid)
-		{
-			return nodeid.StartsWith("counter") || nodeid.StartsWith("periode");
-		}
-		
-		//no need to setup pin this is done for you
-		public void OutputPin(string pin, string value)
-		{	
-			if (!isDesktopEmulation)
-				File.WriteAllText(CrossRefPins[pin], value);
-			
-			if (DEBUG) Console.WriteLine("Weeco4mGPIO  output to pin " + CrossRefPins[pin] + ", value was " + value);
-		}
-		
-		//no need to setup pin this is done for you
-		public string InputPin(string pin)
-		{
-			string returnValue = "0";
-			
-			string filename = CrossRefPins[pin];
-			
-			if (!isDesktopEmulation)
-			{
-				if (File.Exists(filename))
-				{
-					returnValue = File.ReadAllText(filename);
-				}
-				else
-					throw new Exception(string.Format("Cannot read from {0}. File does not exist", pin));
-			}
-			else
-				returnValue="-1";
-			
-			if (DEBUG) Console.WriteLine("Weeco4mGPIO  input from pin " + CrossRefPins[pin] + ", value was " + returnValue);
-			
-			return returnValue;
-		}
-		
-		public void CleanUpAllPins()
-		{
-			
-		}
-	}
+        public enum enumDirection { IN, OUT };
+
+
+
+        //set to true to write whats happening to the screen
+        private const bool DEBUG = true;
+
+        private bool IsRegister(string nodeid)
+        {
+            return nodeid.StartsWith("counter") || nodeid.StartsWith("periode");
+        }
+
+        //no need to setup pin this is done for you
+        public void OutputPin(string pin, string value)
+        {
+            if (!isDesktopEmulation)
+                File.WriteAllText(CrossRefPins[pin], value);
+
+            if (DEBUG) Console.WriteLine("Weeco4mGPIO  output to pin " + CrossRefPins[pin] + ", value was " + value);
+        }
+
+        //no need to setup pin this is done for you
+        public string InputPin(string pin)
+        {
+            string returnValue = "0";
+
+            string filename = CrossRefPins[pin];
+
+            if (!isDesktopEmulation)
+            {
+                if (File.Exists(filename))
+                {
+                    returnValue = File.ReadAllText(filename);
+                }
+                else
+                    throw new Exception(string.Format("Cannot read from {0}. File does not exist", pin));
+            }
+            else
+                returnValue = "-1";
+
+            if (DEBUG) Console.WriteLine("Weeco4mGPIO  input from pin " + CrossRefPins[pin] + ", value was " + returnValue);
+
+            return returnValue;
+        }
+
+        public void CleanUpAllPins()
+        {
+
+        }
+    }
 }
 

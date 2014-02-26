@@ -39,16 +39,16 @@ using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace MIG.Interfaces.HomeAutomation
 {
-	public class X10 : MIGInterface
+    public class X10 : MIGInterface
     {
 
         #region Implemented MIG Commands
 
         // typesafe enum
-		public sealed class Command : GatewayCommand
-		{
+        public sealed class Command : GatewayCommand
+        {
 
-			public static Dictionary<int, string> CommandsList = new Dictionary<int, string> ()
+            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>()
             {
                 {203, "Parameter.Status"},
                 {701, "Control.On"},
@@ -61,81 +61,85 @@ namespace MIG.Interfaces.HomeAutomation
                 {722, "Control.AllLightsOff"}
             };
 
-			// <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
-			public static readonly Command PARAMETER_STATUS = new Command (203);
-			public static readonly Command CONTROL_ON = new Command (701);
-			public static readonly Command CONTROL_OFF = new Command (702);
-			public static readonly Command CONTROL_BRIGHT = new Command (703);
-			public static readonly Command CONTROL_DIM = new Command (704);
-			public static readonly Command CONTROL_LEVEL = new Command (705);
+            // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
+            public static readonly Command PARAMETER_STATUS = new Command(203);
+            public static readonly Command CONTROL_ON = new Command(701);
+            public static readonly Command CONTROL_OFF = new Command(702);
+            public static readonly Command CONTROL_BRIGHT = new Command(703);
+            public static readonly Command CONTROL_DIM = new Command(704);
+            public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
             public static readonly Command CONTROL_ALLLIGHTSON = new Command(721);
-			public static readonly Command CONTROL_ALLLIGHTSOFF = new Command (722);
+            public static readonly Command CONTROL_ALLLIGHTSOFF = new Command(722);
 
             private readonly String name;
             private readonly int value;
 
             private Command(int value)
-			{
-				this.name = CommandsList [value];
-				this.value = value;
-			}
+            {
+                this.name = CommandsList[value];
+                this.value = value;
+            }
 
-			public Dictionary<int, string> ListCommands ()
-			{
-				return Command.CommandsList;
-			}
+            public Dictionary<int, string> ListCommands()
+            {
+                return Command.CommandsList;
+            }
 
-			public int Value {
-				get { return this.value; }
-			}
+            public int Value
+            {
+                get { return this.value; }
+            }
 
-			public override String ToString ()
-			{
-				return name;
-			}
+            public override String ToString()
+            {
+                return name;
+            }
 
             public static implicit operator String(Command a)
             {
                 return a.ToString();
             }
-            
-			public static explicit operator Command (int idx)
-			{
-				return new Command (idx);
-			}
 
-			public static explicit operator Command (string str)
-			{
-				if (CommandsList.ContainsValue (str)) {
-					var cmd = from c in CommandsList where c.Value == str select c.Key;
-					return new Command (cmd.First ());
-				} else {
-					throw new InvalidCastException ();
-				}
-			}
-			public static bool operator == (Command a, Command b)
-			{
-				return a.value == b.value;
-			}
-			public static bool operator != (Command a, Command b)
-			{
-				return a.value != b.value;
-			}
-		}
+            public static explicit operator Command(int idx)
+            {
+                return new Command(idx);
+            }
+
+            public static explicit operator Command(string str)
+            {
+                if (CommandsList.ContainsValue(str))
+                {
+                    var cmd = from c in CommandsList where c.Value == str select c.Key;
+                    return new Command(cmd.First());
+                }
+                else
+                {
+                    throw new InvalidCastException();
+                }
+            }
+            public static bool operator ==(Command a, Command b)
+            {
+                return a.value == b.value;
+            }
+            public static bool operator !=(Command a, Command b)
+            {
+                return a.value != b.value;
+            }
+        }
 
         #endregion
 
 
         private XTenManager x10lib;
-		private string _portname;
+        private string _portname;
 
-		public X10 ()
-		{
-			x10lib = new XTenManager ();
-			x10lib.PropertyChanged += HandlePropertyChanged;
+        public X10()
+        {
+            x10lib = new XTenManager();
+            x10lib.PropertyChanged += HandlePropertyChanged;
             x10lib.RfDataReceived += new Action<RfDataReceivedAction>(x10lib_RfDataReceived);
-		}
+        }
 
         private Timer _rfpulsetimer;
         private string _rfprevstringdata = "";
@@ -177,17 +181,22 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
-		void HandlePropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == "Level") {
-				if (InterfacePropertyChangedAction != null) {
-					try {
-						InterfacePropertyChangedAction (new InterfacePropertyChangedAction () { Domain = this.Domain, SourceId = (sender as X10Module).Code, SourceType = (sender as X10Module).Description, Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = (sender as X10Module).Level.ToString() });
-					} catch {
-					}
-				}
-			}
-		}
+        void HandlePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Level")
+            {
+                if (InterfacePropertyChangedAction != null)
+                {
+                    try
+                    {
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (sender as X10Module).Code, SourceType = (sender as X10Module).Description, Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = (sender as X10Module).Level.ToString() });
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
 
 
         #region MIG Interface members
@@ -196,24 +205,26 @@ namespace MIG.Interfaces.HomeAutomation
 
         public string Domain
         {
-			get {
-				string ifacedomain = this.GetType ().Namespace.ToString ();
-				ifacedomain = ifacedomain.Substring (ifacedomain.LastIndexOf (".") + 1) + "." + this.GetType ().Name.ToString ();
-				return ifacedomain;
-			}
-		}
+            get
+            {
+                string ifacedomain = this.GetType().Namespace.ToString();
+                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return ifacedomain;
+            }
+        }
 
-		public bool Connect ()
-		{
-			return x10lib.Connect ();
-		}
-		public void Disconnect ()
-		{
-			x10lib.Disconnect ();
-		}
-		public bool IsConnected {
-			get { return x10lib.IsConnected; }
-		}
+        public bool Connect()
+        {
+            return x10lib.Connect();
+        }
+        public void Disconnect()
+        {
+            x10lib.Disconnect();
+        }
+        public bool IsConnected
+        {
+            get { return x10lib.IsConnected; }
+        }
         public bool IsDevicePresent()
         {
             //bool present = false;
@@ -349,18 +360,19 @@ namespace MIG.Interfaces.HomeAutomation
         #endregion
 
 
-		public XTenManager X10Controller {
-			get { return x10lib; }
-		}
+        public XTenManager X10Controller
+        {
+            get { return x10lib; }
+        }
 
 
-		public string GetPortName ()
-		{
-			return _portname;
-		}
-		
-		public void SetPortName (string portname)
-		{
+        public string GetPortName()
+        {
+            return _portname;
+        }
+
+        public void SetPortName(string portname)
+        {
             if (x10lib != null)
             {
                 x10lib.PortName = portname;
@@ -369,17 +381,17 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
 
-		public string GetHouseCodes ()
-		{
-			return x10lib.HouseCode;
-		}
+        public string GetHouseCodes()
+        {
+            return x10lib.HouseCode;
+        }
 
-		public void SetHouseCodes (string hcodes)
-		{
-			x10lib.HouseCode = hcodes;
-		}
+        public void SetHouseCodes(string hcodes)
+        {
+            x10lib.HouseCode = hcodes;
+        }
 
 
 
-	}
+    }
 }

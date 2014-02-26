@@ -26,72 +26,75 @@ using TUIOLib;
 
 namespace MIG.Interfaces.MultiTouch
 {
-	public class TUIO : MIGInterface
-	{
-		public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
+    public class TUIO : MIGInterface
+    {
+        public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
-		public TUIO ()
-		{
-			TUIOReceiver tuioreceiver = new TUIOReceiver ();
-			tuioreceiver.CursorUpdate += new EventHandler<CursorUpdateEventArgs> (tuioreceiver_CursorUpdate);
-		}
+        public TUIO()
+        {
+            TUIOReceiver tuioreceiver = new TUIOReceiver();
+            tuioreceiver.CursorUpdate += new EventHandler<CursorUpdateEventArgs>(tuioreceiver_CursorUpdate);
+        }
 
 
-		public string Domain {
-			get {
-				string ifacedomain = this.GetType ().Namespace.ToString ();
-				ifacedomain = ifacedomain.Substring (ifacedomain.LastIndexOf (".") + 1) + "." + this.GetType ().Name.ToString ();
-				return ifacedomain;
-			}
-		}
+        public string Domain
+        {
+            get
+            {
+                string ifacedomain = this.GetType().Namespace.ToString();
+                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return ifacedomain;
+            }
+        }
 
-		public bool Connect ()
-		{
-			return true;
-		}
-		public void Disconnect ()
-		{
+        public bool Connect()
+        {
+            return true;
+        }
+        public void Disconnect()
+        {
 
-		}
+        }
         public bool IsDevicePresent()
         {
             return true;
         }
         public bool IsConnected
         {
-			get { return true; }
-		}
+            get { return true; }
+        }
 
-		public void WaitOnPending ()
-		{
+        public void WaitOnPending()
+        {
 
-		}
+        }
 
-		public object InterfaceControl (MIGInterfaceCommand request)
-		{
-			return "";
-		}
-
-
-
-		void tuioreceiver_CursorUpdate (object sender, CursorUpdateEventArgs e)
-		{
-			//Console.WriteLine("TUIO: " + e.Command.ToString() + " " + e.CursorData.f_id + ") " + e.CursorData.X + "," + e.CursorData.Y + "," + e.CursorData.Angle);
-
-			InterfacePropertyChangedAction intact = new InterfacePropertyChangedAction ();
-			intact.Domain = this.Domain;
-			intact.Path = e.Command.ToString ();
-			intact.Value = e.CursorData;
-			intact.SourceId = e.CursorData.f_id.ToString ();
-			intact.SourceType = "TUIO.2dCursor"; // TUIO.2dObject
-			//
-			if (InterfacePropertyChangedAction != null) {
-				InterfacePropertyChangedAction (intact);
-			}
-
-		}
+        public object InterfaceControl(MIGInterfaceCommand request)
+        {
+            return "";
+        }
 
 
-	}
+
+        void tuioreceiver_CursorUpdate(object sender, CursorUpdateEventArgs e)
+        {
+            //Console.WriteLine("TUIO: " + e.Command.ToString() + " " + e.CursorData.f_id + ") " + e.CursorData.X + "," + e.CursorData.Y + "," + e.CursorData.Angle);
+
+            InterfacePropertyChangedAction intact = new InterfacePropertyChangedAction();
+            intact.Domain = this.Domain;
+            intact.Path = e.Command.ToString();
+            intact.Value = e.CursorData;
+            intact.SourceId = e.CursorData.f_id.ToString();
+            intact.SourceType = "TUIO.2dCursor"; // TUIO.2dObject
+            //
+            if (InterfacePropertyChangedAction != null)
+            {
+                InterfacePropertyChangedAction(intact);
+            }
+
+        }
+
+
+    }
 }
 

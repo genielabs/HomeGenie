@@ -25,13 +25,13 @@ using System.Collections.Generic;
 
 namespace HomeGenie.Automation
 {
-	[Serializable()]
-	public enum ComparisonOperator
-	{
-		LessThan = -1,
-		Equals = 0,
-		GreaterThan = 1
-	}
+    [Serializable()]
+    public enum ComparisonOperator
+    {
+        LessThan = -1,
+        Equals = 0,
+        GreaterThan = 1
+    }
 
 }
 

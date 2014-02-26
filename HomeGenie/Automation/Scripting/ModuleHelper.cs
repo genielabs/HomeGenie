@@ -35,7 +35,8 @@ namespace HomeGenie.Automation.Scripting
         private HomeGenie.Data.Module _module = null;
 
 
-        public ModuleHelper(HomeGenieService hg, Module module) : base(hg)
+        public ModuleHelper(HomeGenieService hg, Module module)
+            : base(hg)
         {
             this._module = module;
         }

@@ -32,13 +32,13 @@ namespace HomeGenie.Automation.Scripting
     public class SchedulerHelper
     {
 
-		private HomeGenieService _homegenie;
+        private HomeGenieService _homegenie;
         private string _schedulename;
 
         public SchedulerHelper(HomeGenieService hg)
-		{
-			_homegenie = hg;
-		}
+        {
+            _homegenie = hg;
+        }
 
         public SchedulerHelper WithName(string name)
         {

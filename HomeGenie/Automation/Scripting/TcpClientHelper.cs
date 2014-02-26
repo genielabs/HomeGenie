@@ -66,7 +66,7 @@ namespace HomeGenie.Automation.Scripting
             _statuschanged = statuschangeaction;
             return this;
         }
-        
+
         public bool Connect(int port)
         {
             _tcpclient.MessageReceived += _tcpclient_MessageReceived;

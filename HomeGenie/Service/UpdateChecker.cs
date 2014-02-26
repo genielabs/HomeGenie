@@ -94,7 +94,7 @@ namespace HomeGenie.Service
 
         private string _endpointurl = "http://generoso.info/homegenie/release_updates.php";
         private ReleaseInfo _currentrelease;
-        private List<ReleaseInfo > _remoteupdates;
+        private List<ReleaseInfo> _remoteupdates;
         private Timer _interval;
         private const string _updatefolder = "_update";
 
@@ -170,7 +170,8 @@ namespace HomeGenie.Service
                 StreamReader oreader = new StreamReader("release_info.xml");
                 _currentrelease = (ReleaseInfo)oserializer.Deserialize(oreader);
                 oreader.Close();
-            } catch { }
+            }
+            catch { }
             return _currentrelease;
         }
 
@@ -208,11 +209,12 @@ namespace HomeGenie.Service
 
         public bool IsUpdateAvailable
         {
-            get {
+            get
+            {
                 bool update = false;
                 if (_remoteupdates != null)
                 {
-                    foreach(ReleaseInfo ri in _remoteupdates)
+                    foreach (ReleaseInfo ri in _remoteupdates)
                     {
                         if (_currentrelease != null && _currentrelease.ReleaseDate < ri.ReleaseDate)
                         {
@@ -221,7 +223,7 @@ namespace HomeGenie.Service
                         }
                     }
                 }
-                return update; 
+                return update;
             }
         }
 
@@ -273,7 +275,7 @@ namespace HomeGenie.Service
             {
                 if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.ERROR));
                 return null;
-//                throw;
+                //                throw;
             }
 
             // Unarchive (unzip)
@@ -348,14 +350,14 @@ namespace HomeGenie.Service
         }
 
 
-        public bool IsRestartRequired 
-        { 
+        public bool IsRestartRequired
+        {
             get
             {
                 bool restartrequired = false;
                 if (_remoteupdates != null)
                 {
-                    foreach(ReleaseInfo ri in _remoteupdates)
+                    foreach (ReleaseInfo ri in _remoteupdates)
                     {
                         if (ri.RequireRestart)
                         {

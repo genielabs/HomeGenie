@@ -41,8 +41,8 @@ namespace HomeGenie
         private static bool _isrunning = true;
         private static bool _startupdater = false;
 
-        static void Main (string[] args)
-		{
+        static void Main(string[] args)
+        {
 
             Console.OutputEncoding = Encoding.UTF8;
             /* Change current culture
@@ -50,24 +50,27 @@ namespace HomeGenie
             System.Threading.Thread.CurrentThread.CurrentCulture = culture;
             System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
             */
-			OperatingSystem os = Environment.OSVersion;
-			PlatformID pid = os.Platform;
+            OperatingSystem os = Environment.OSVersion;
+            PlatformID pid = os.Platform;
 
-			// TODO: run "uname" to determine OS type
-			if (pid == PlatformID.Unix) {
+            // TODO: run "uname" to determine OS type
+            if (pid == PlatformID.Unix)
+            {
 
-				string libusblink = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "libusb-1.0.so");
+                string libusblink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libusb-1.0.so");
 
                 // RaspBerry Pi armel dependency check and needed symlink
                 // TODO: check for armhf version
-				if (File.Exists ("/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0") && !File.Exists (libusblink)) {
-					ShellCommand ("ln", " -s \"/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0\" \"" + libusblink + "\"");
-				}
+                if (File.Exists("/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0") && !File.Exists(libusblink))
+                {
+                    ShellCommand("ln", " -s \"/lib/arm-linux-gnueabi/libusb-1.0.so.0.1.0\" \"" + libusblink + "\"");
+                }
 
-				// Debian/Ubuntu 64bit dependency and needed symlink check
-				if (File.Exists ("/lib/x86_64-linux-gnu/libusb-1.0.so.0") && !File.Exists (libusblink)) {
-					ShellCommand ("ln", " -s \"/lib/x86_64-linux-gnu/libusb-1.0.so.0\" \"" + libusblink + "\"");
-				}
+                // Debian/Ubuntu 64bit dependency and needed symlink check
+                if (File.Exists("/lib/x86_64-linux-gnu/libusb-1.0.so.0") && !File.Exists(libusblink))
+                {
+                    ShellCommand("ln", " -s \"/lib/x86_64-linux-gnu/libusb-1.0.so.0\" \"" + libusblink + "\"");
+                }
 
                 // lirc
                 string liblirclink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "liblirc_client.so");
@@ -79,7 +82,7 @@ namespace HomeGenie
                 {
                     ShellCommand("ln", " -s \"/usr/lib/liblirc_client.so.0\" \"" + liblirclink + "\"");
                 }
-                
+
                 // video 4 linux interop
                 if (Raspberry.Board.Current.IsRaspberryPi)
                 {
@@ -108,7 +111,7 @@ namespace HomeGenie
                 {
                     ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/debian64_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
                 }
-			}
+            }
             //
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
             //
@@ -157,20 +160,20 @@ namespace HomeGenie
             _isrunning = false;
         }
 
-		static void ShellCommand(string command, string args)
-		{
-			try
-			{
-				System.Diagnostics.ProcessStartInfo psinfo = new System.Diagnostics.ProcessStartInfo(command, args);
-				psinfo.RedirectStandardOutput = false;
-				psinfo.UseShellExecute = false;
-				psinfo.CreateNoWindow = true;
-				System.Diagnostics.Process process = new System.Diagnostics.Process();
-				process.StartInfo = psinfo;
-				process.Start();
-			}
-			catch { }
-		}
+        static void ShellCommand(string command, string args)
+        {
+            try
+            {
+                System.Diagnostics.ProcessStartInfo psinfo = new System.Diagnostics.ProcessStartInfo(command, args);
+                psinfo.RedirectStandardOutput = false;
+                psinfo.UseShellExecute = false;
+                psinfo.CreateNoWindow = true;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo = psinfo;
+                process.Start();
+            }
+            catch { }
+        }
 
     }
 }

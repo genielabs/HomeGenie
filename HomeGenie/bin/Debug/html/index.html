@@ -1,213 +1,192 @@
-﻿<!DOCTYPE html> 
-<html> 
-<head> 
-	
+﻿<!DOCTYPE html>
+<html>
+<head>
 
     <meta name="robots" content="noindex">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-    	HomeGenie
+        HomeGenie
     </title>
 
-
-
     <!-- jquery & jquery mobile css's -->
-	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
-	<link rel="stylesheet" href="css/homegenie.min.css" />
-	<link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
-
-
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="css/homegenie.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
 
     <!-- jquery & co framework includes -->
-	<script src="js/jquery-2.0.2.min.js"></script>
+    <script src="js/jquery-2.0.2.min.js"></script>
     <!-- jquery-ui used for sortable -->
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-	<script src="js/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
 
 
-    
     <!-- jquery & co css includes -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" /> 
-    
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />
 
     <link rel="stylesheet" href="css/my.css" />
-    
 
     <!--script type="text/javascript" src="js/jquery.mousewheel.min.js"></script -->
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-
     <script type="text/javascript" src="js/jquery.mobile.simpledialog2.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile.simpledialog.min.js"></script>
-
-    <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>	
+    <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
-	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
-	<script language="javascript" type="text/javascript" src="js/json2.js"></script>	
+    <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
+    <script language="javascript" type="text/javascript" src="js/json2.js"></script>
     <script language="javascript" type="text/javascript" src="js/moment.min.js"></script>
 
     <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
-    
+
     <!-- Code Mirror -->
-	<script src="js/codemirror-3.13/lib/codemirror.js"></script>
-	<link rel="stylesheet" href="js/codemirror-3.13/lib/codemirror.css">
-	<link rel="stylesheet" href="js/codemirror-3.13/theme/ambiance.css">
-	<script src="js/codemirror-3.13/mode/clike/clike.js"></script>
+    <script src="js/codemirror-3.13/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="js/codemirror-3.13/lib/codemirror.css">
+    <link rel="stylesheet" href="js/codemirror-3.13/theme/ambiance.css">
+    <script src="js/codemirror-3.13/mode/clike/clike.js"></script>
 
+    <script src="js/raphael-min.js"></script>
+    <script src="js/colorwheel.js"></script>
+    <script src="js/sessvars.js"></script>
 
+    <script type="text/javascript">
+        var uitheme = 'a'; // TODO: move this code as part of HG js api
 
-	<script src="js/raphael-min.js"></script>
-	<script src="js/colorwheel.js"></script>
+        sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
 
-	<script src="js/sessvars.js"></script>
-
-
-	<script type="text/javascript">
-		var uitheme = 'a'; // TODO: move this code as part of HG js api
-
-		sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
-
-		function setTheme(theme) {
-		    sessvars.UserSettings.UiTheme = uitheme = theme;
+        function setTheme(theme) {
+            sessvars.UserSettings.UiTheme = uitheme = theme;
             //
-		    $.mobile.activePage.find('.ui-li')
+            $.mobile.activePage.find('.ui-li')
                        .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
                         .addClass('ui-btn-up-' + theme).attr('data-theme', theme);
 
-		    $.mobile.activePage.find('.ui-btn').not('.ui-li-divider')
+            $.mobile.activePage.find('.ui-btn').not('.ui-li-divider')
                        .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
                        .addClass('ui-btn-up-' + theme)
                        .attr('data-theme', theme);
 
-		    $.mobile.activePage.find('.ui-header, .ui-footer')
+            $.mobile.activePage.find('.ui-header, .ui-footer')
                        .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
                        .addClass('ui-bar-' + theme)
                        .attr('data-theme', theme);
 
-		    $(document).find('.ui-input-text, .ui-popup, .ui-dialog, .ui-page').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
+            $(document).find('.ui-input-text, .ui-popup, .ui-dialog, .ui-page').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
                        .addClass('ui-body-' + theme)
                        .attr('data-theme', theme);
 
-		    $.mobile.activePage.find('.ui-popup').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
+            $.mobile.activePage.find('.ui-popup').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
                        .addClass('ui-body-' + theme)
                        .attr('data-theme', theme);
 
-		    $.mobile.activePage.find('.ui-li-divider').each(function (index, obj) {
-		        //if ($(this).parent().attr('data-divider-theme') == 'undefined') {
-		        $(this).removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
+            $.mobile.activePage.find('.ui-li-divider').each(function (index, obj) {
+                //if ($(this).parent().attr('data-divider-theme') == 'undefined') {
+                $(this).removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
                     .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
                     .addClass('ui-bar-a')
                     .attr('data-theme', 'a');
-		        //}
-		    })
+                //}
+            })
 
-			if ($.mobile.activePage.attr('id') == 'page_control')
- 			{			
-			    $.mobile.activePage.find('a[data-ui-field="widget"]').each(function (index, obj) {
-			        $(this).parent().parent().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z'); ;
-			        $(this).parent().parent().next().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z'); ;
-			    });
-			}
-			
-		}
+            if ($.mobile.activePage.attr('id') == 'page_control') {
+                $.mobile.activePage.find('a[data-ui-field="widget"]').each(function (index, obj) {
+                    $(this).parent().parent().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
+                    $(this).parent().parent().next().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
+                });
+            }
+
+        }
 
 
 
     </script>
-
     {include js/api/homegenie.inc.js}
 
-	<script type="text/javascript">
-		var editor1 = null;
-		var editor2 = null;
+    <script type="text/javascript">
+        var editor1 = null;
+        var editor2 = null;
 
-		$(document).ready(function (e) {
+        $(document).ready(function (e) {
 
-		    var t = sessvars.UserSettings.UiTheme;
-		    if (t < 'a' || t > 'e') {
+            var t = sessvars.UserSettings.UiTheme;
+            if (t < 'a' || t > 'e') {
 
-		        sessvars.UserSettings.UiTheme = 'a';
-		    }
-		    //
-		    Raphael.fn.ball = function (x, y, r, color) {
-		        return this.set(
+                sessvars.UserSettings.UiTheme = 'a';
+            }
+            //
+            Raphael.fn.ball = function (x, y, r, color) {
+                return this.set(
                     this.ellipse(x, y + r - r / 5, r, r / 2).attr({ fill: "rhsb(" + color.h + ", 1, .25)-hsb(" + color.h + ", 1, .25)", stroke: "none", opacity: 0 }),
                     this.ellipse(x, y, r, r).attr({ fill: "r(.5,.9)hsb(" + color.h + ", " + color.s + ", .75)-hsb(" + color.h + ", " + color.s + ", " + color.v + ")", stroke: "none", opacity: 0.8 }),
                     this.ellipse(x, y, r - r / 5, r - r / 20).attr({ stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0 })
                 );
-		    };
-		    //
-		    //HG.WebApp.Locales.GenerateTemplate();
+            };
             //
-		    HG.WebApp.InitializePage();
-		    //
-		    editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
-		        lineNumbers: true,
-		        matchBrackets: true,
-		        mode: 'text/x-csharp',
-		        theme: 'ambiance'
-		    });
-		    editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
-		        lineNumbers: true,
-		        matchBrackets: true,
-		        mode: 'text/x-csharp',
-		        theme: 'ambiance'
-		    });
-		});
+            //HG.WebApp.Locales.GenerateTemplate();
+            //
+            HG.WebApp.InitializePage();
+            //
+            editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
+                lineNumbers: true,
+                matchBrackets: true,
+                mode: 'text/x-csharp',
+                theme: 'ambiance'
+            });
+            editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
+                lineNumbers: true,
+                matchBrackets: true,
+                mode: 'text/x-csharp',
+                theme: 'ambiance'
+            });
+        });
 
 
     </script>
 
 
+</head>
+<body>
+
+    <!-- Home -->
+    {include pages/home.html}
+
+    <!-- Control -->
+    {include pages/control/main.html}
+
+    <!-- Analyze -->
+    {include pages/analyze/main.html}
+
+    <!-- Configure / Main -->
+    {include pages/configure/main.html}
+
+    <!-- Configure / Groups -->
+    {include pages/configure/groups/listgroups.html}
+    {include pages/configure/groups/listmodules.html}
+
+    <!-- Configure / Automation -->
+    {include pages/configure/programengine/listprograms.html}
+    {include pages/configure/programengine/editprogram.html}
+    {include pages/configure/programengine/listgroups.html}
+
+    <!-- Configure / Scheduler -->
+    {include pages/configure/scheduler/main.html}
+
+    <!-- Configure / System -->
+    {include pages/configure/interfaces/main.html}
+    {include ext/zwave/setupnode.html}
+
+    <!-- Configure / Maintenance -->
+    {include pages/configure/maintenance/main.html}
+
+    <!-- Applications / NetPlay -->
+    {include pages/apps/netplay/slideshow.html}
 
 
-</head> 
-<body> 
+    <div data-position="fixed" style="position:fixed;top:5px;right:10px;z-index:1000" id="interfaces_status"></div>
+    <!--div id="watts_hour" style="position:absolute;right:10px;top:5px"></div-->
+    <div style="font-family:monospace;font-size:10pt;display:none;border-radius: 10px;background-color:black;color:white;border:solid 2px yellow;position:absolute;padding:10px;margin-top:6px;right:-400px; width:285px; max-height:120px; opacity:0.0;z-index:1973" id="statuspopup">
+        <p></p>
+    </div>
 
-
-        <!-- Home -->
-        {include pages/home.html}
-
-        <!-- Control -->
-        {include pages/control/main.html}
-
-        <!-- Analyze -->
-        {include pages/analyze/main.html}
-
-        <!-- Configure / Main -->
-        {include pages/configure/main.html}
-
-        <!-- Configure / Groups -->
-        {include pages/configure/groups/listgroups.html}
-        {include pages/configure/groups/listmodules.html}
-
-        <!-- Configure / Automation -->
-        {include pages/configure/programengine/listprograms.html}
-        {include pages/configure/programengine/editprogram.html}
-        {include pages/configure/programengine/listgroups.html}
-
-        <!-- Configure / Scheduler -->
-        {include pages/configure/scheduler/main.html}
-
-        <!-- Configure / System -->
-        {include pages/configure/interfaces/main.html}
-        {include ext/zwave/setupnode.html}
-
-        <!-- Configure / Maintenance -->
-        {include pages/configure/maintenance/main.html}
-
-        <!-- Applications / NetPlay -->
-        {include pages/apps/netplay/slideshow.html}
-
-
-        <div data-position="fixed" style="position:fixed;top:5px;right:10px;z-index:1000" id="interfaces_status"></div>
-        <!--div id="watts_hour" style="position:absolute;right:10px;top:5px"></div-->     
-
-		<div style="font-family:monospace;font-size:10pt;display:none;border-radius: 10px;background-color:black;color:white;border:solid 2px yellow;position:absolute;padding:10px;margin-top:6px;right:-400px; width:285px; max-height:120px; opacity:0.0;z-index:1973" id="statuspopup">
-              <p></p>
-	    </div>
-
-		
 </body>
 </html>

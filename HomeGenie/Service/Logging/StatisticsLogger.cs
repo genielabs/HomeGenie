@@ -289,7 +289,7 @@ namespace HomeGenie.Service.Logging
             }
             return values;
         }
-        
+
         public List<StatisticsEntry> GetHourlyStats(string domain, string address, string param, string aggregator)
         {
             List<StatisticsEntry> values = new List<StatisticsEntry>();

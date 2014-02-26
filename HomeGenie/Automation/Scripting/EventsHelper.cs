@@ -54,7 +54,7 @@ namespace HomeGenie.Automation.Scripting
             ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == _myprogramid.ToString());
             pb.ModuleChangedHandler = handler;
             return this;
-            
+
         }
 
         public EventsHelper WebServiceCallReceived(string apicall, Func<object, string> handler)

@@ -61,7 +61,7 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        public SerialPortHelper OnStatusChanged(Action<bool> statuschangeaction )
+        public SerialPortHelper OnStatusChanged(Action<bool> statuschangeaction)
         {
             _statuschanged = statuschangeaction;
             return this;

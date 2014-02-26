@@ -41,7 +41,7 @@ namespace MIG.Gateways.ProtocolAdapters.MIRIA
     class MiriaAdapter
     {
 
-   
+
 
         /*
         private void _tcpgateway_ProcessRequest(int clientid, byte[] data)

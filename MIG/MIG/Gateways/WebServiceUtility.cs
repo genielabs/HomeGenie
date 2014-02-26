@@ -189,7 +189,7 @@ namespace MIG.Gateways
             }
 
             return -1;
-        }    
+        }
 
     }
 }

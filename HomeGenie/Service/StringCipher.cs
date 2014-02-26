@@ -11,7 +11,7 @@ using System.IO;
 
 namespace HomeGenie.Service
 {
-public static class StringCipher
+    public static class StringCipher
     {
         // This constant string is used as a "salt" value for the PasswordDeriveBytes function calls.
         // This size of the IV (in bytes) must = (keysize / 8).  Default keysize is 256, so the IV must be

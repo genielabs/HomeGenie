@@ -109,11 +109,11 @@ namespace HomeGenieManager
         private void upnpcontrol_OnCreateDevice(UPnPDevice Device, Uri DescriptionURL)
         {
             //Console.WriteLine(DescriptionURL + "\n" + Device.PresentationURL);
-            lock(upnpservice)
-            if (!upnpservice.ContainsKey(DescriptionURL.ToString()))
-            {
-                upnpservice.Add(DescriptionURL.ToString(), Device);
-            }
+            lock (upnpservice)
+                if (!upnpservice.ContainsKey(DescriptionURL.ToString()))
+                {
+                    upnpservice.Add(DescriptionURL.ToString(), Device);
+                }
         }
 
         public Dictionary<string, UPnPDevice> UPnPDevices

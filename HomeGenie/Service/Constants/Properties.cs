@@ -29,12 +29,12 @@ namespace HomeGenie.Service.Constants
 {
     // Modules's properties are to be considered as metadata fields
     // these are untyped, thouhg the consumer know how to handle these
-    public static class Properties 
+    public static class Properties
     {
         // commonly used parameters
         public const string STATUS_LEVEL
             = "Status.Level";
-        public const string METER_WATTS 
+        public const string METER_WATTS
             = "Meter.Watts";
         public const string WIDGET_DISPLAYMODULE
             = "Widget.DisplayModule";
@@ -42,23 +42,23 @@ namespace HomeGenie.Service.Constants
             = "VirtualModule.ParentId";
 
         // z-wave specific parameters
-        public const string ZWAVENODE_BASIC 
+        public const string ZWAVENODE_BASIC
             = "ZWaveNode.Basic";
-        public const string ZWAVENODE_WAKEUPINTERVAL 
+        public const string ZWAVENODE_WAKEUPINTERVAL
             = "ZWaveNode.WakeUpInterval";
         public const string ZWAVENODE_BATTERY
             = "ZWaveNode.Battery";
-        public const string ZWAVENODE_MULTIINSTANCE 
+        public const string ZWAVENODE_MULTIINSTANCE
             = "ZWaveNode.MultiInstance";
-        public const string ZWAVENODE_ASSOCIATIONS 
+        public const string ZWAVENODE_ASSOCIATIONS
             = "ZWaveNode.Associations";
-        public const string ZWAVENODE_CONFIGVARIABLES 
+        public const string ZWAVENODE_CONFIGVARIABLES
             = "ZWaveNode.Variables";
-        public const string ZWAVENODE_NODEINFO 
+        public const string ZWAVENODE_NODEINFO
             = "ZWaveNode.NodeInfo";
-        public const string ZWAVENODE_MANUFACTURERSPECIFIC 
+        public const string ZWAVENODE_MANUFACTURERSPECIFIC
             = "ZWaveNode.ManufacturerSpecific";
-        public const string ZWAVENODE_DEVICEHANDLER 
+        public const string ZWAVENODE_DEVICEHANDLER
             = "ZWaveNode.DeviceHandler";
     }
 }

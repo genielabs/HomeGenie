@@ -34,7 +34,7 @@ namespace HomeGenie.Automation.Scripting
 {
     public class ModulesManager
     {
-//        private Dictionary<string, List<Module>> _cachedselections;
+        //        private Dictionary<string, List<Module>> _cachedselections;
 
         private string command = "Command.NotSelected";
         private string commandvalue = "0";
@@ -55,7 +55,7 @@ namespace HomeGenie.Automation.Scripting
         public ModulesManager(HomeGenieService hg)
         {
             _homegenie = hg;
-//            _cachedselections = new Dictionary<string, List<Module>>();
+            //            _cachedselections = new Dictionary<string, List<Module>>();
         }
 
         public virtual List<Module> SelectedModules
@@ -87,7 +87,7 @@ namespace HomeGenie.Automation.Scripting
                     }
                     if (selected && this.withparameter != null && this.withparameter != "")
                     {
-                        if (module.Properties.Find( p => _getArgumentsList(this.withparameter).Contains(p.Name)) == null)
+                        if (module.Properties.Find(p => _getArgumentsList(this.withparameter).Contains(p.Name)) == null)
                         {
                             selected = false;
                         }
@@ -145,7 +145,7 @@ namespace HomeGenie.Automation.Scripting
                     {
                         selected = false;
                         List<string> devtypes = _getArgumentsList(this.ofdevicetype);
-                        foreach(string dtype in devtypes)
+                        foreach (string dtype in devtypes)
                         {
                             if (module.DeviceType.ToString().ToLower() == dtype.Trim().ToLower())
                             {
@@ -169,23 +169,23 @@ namespace HomeGenie.Automation.Scripting
                 return modules;
             }
         }
-		
-		public List<string> Groups
-		{
-			get 
-			{ 
-				List<string> groups = new List<string>();
-				foreach(Group g in _homegenie.Groups)
-				{
-					groups.Add(g.Name);
-				}
-				return groups; 
-			}
-		}
-		
+
+        public List<string> Groups
+        {
+            get
+            {
+                List<string> groups = new List<string>();
+                foreach (Group g in _homegenie.Groups)
+                {
+                    groups.Add(g.Name);
+                }
+                return groups;
+            }
+        }
+
         public ModulesManager Each(Func<ModuleHelper, bool> callback)
         {
-            foreach(Module m in SelectedModules)
+            foreach (Module m in SelectedModules)
             {
                 if (callback(new ModuleHelper(_homegenie, m))) break;
             }

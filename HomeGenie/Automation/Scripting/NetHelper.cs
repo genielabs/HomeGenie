@@ -65,7 +65,7 @@ namespace HomeGenie.Automation.Scripting
 
         public NetHelper(HomeGenieService hg)
         {
-            ServicePointManager.ServerCertificateValidationCallback = Validator; 
+            ServicePointManager.ServerCertificateValidationCallback = Validator;
             _homegenie = hg;
         }
 
@@ -125,14 +125,14 @@ namespace HomeGenie.Automation.Scripting
         //
         public bool SendMessage(string recipients, string subject, string messagetext)
         {
-			this.mailfrom = "";
-			ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.Sender"; });
-			if (systemparam != null && systemparam.Value != "")
-			{
-				this.mailfrom = systemparam.Value;
-			}
-			return SendMessage(this.mailfrom, recipients, subject, messagetext);
-		}
+            this.mailfrom = "";
+            ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.Sender"; });
+            if (systemparam != null && systemparam.Value != "")
+            {
+                this.mailfrom = systemparam.Value;
+            }
+            return SendMessage(this.mailfrom, recipients, subject, messagetext);
+        }
         public bool SendMessage(string from, string recipients, string subject, string messagetext)
         {
             try
@@ -152,20 +152,20 @@ namespace HomeGenie.Automation.Scripting
                 message.From = new MailAddress(this.mailfrom);
                 message.Body = this.mailbody;
                 //
-                for (int a = 0; a < attachments.Count; a++ )
+                for (int a = 0; a < attachments.Count; a++)
                 {
                     Attachment att = new Attachment(new MemoryStream(attachments.ElementAt(a).Value), attachments.ElementAt(a).Key);
                     message.Attachments.Add(att);
                 }
                 //
-				if (this.mailservice == "")
-				{
-					ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpServer"; });
-					if (systemparam != null)
-					{
-						this.mailservice = systemparam.Value;
-					}
-				}
+                if (this.mailservice == "")
+                {
+                    ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpServer"; });
+                    if (systemparam != null)
+                    {
+                        this.mailservice = systemparam.Value;
+                    }
+                }
                 if (this.mailport == -1)
                 {
                     ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPort"; });
@@ -183,25 +183,25 @@ namespace HomeGenie.Automation.Scripting
                     }
                 }
                 if (this.networkcredential == null)
-				{
-					var username = "";
-					ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUserName"; });
-					if (systemparam != null)
-					{
-						username = systemparam.Value;
-					}
-					if (username != "")
-					{
-						var password = "";
-						systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPassword"; });
-						if (systemparam != null)
-						{
-							password = systemparam.Value;
-						}
-						this.networkcredential = new NetworkCredential(username, password);
-					}
-				}
-				//
+                {
+                    var username = "";
+                    ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUserName"; });
+                    if (systemparam != null)
+                    {
+                        username = systemparam.Value;
+                    }
+                    if (username != "")
+                    {
+                        var password = "";
+                        systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPassword"; });
+                        if (systemparam != null)
+                        {
+                            password = systemparam.Value;
+                        }
+                        this.networkcredential = new NetworkCredential(username, password);
+                    }
+                }
+                //
                 SmtpClient smtp = new SmtpClient(this.mailservice);
                 smtp.Credentials = this.networkcredential;
                 if (this.mailport > 0)
@@ -300,12 +300,12 @@ namespace HomeGenie.Automation.Scripting
             }
             else
             {
-                string json = "[" + response +"]";
+                string json = "[" + response + "]";
                 try
                 {
                     returnvalue = (JsonConvert.DeserializeObject(json) as JArray)[0];
                 }
-                catch 
+                catch
                 {
                     returnvalue = response;
                 }
@@ -325,7 +325,8 @@ namespace HomeGenie.Automation.Scripting
                 }
                 webcli.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                 responsebytes = webcli.DownloadData(this.webserviceurl);
-            } catch { }
+            }
+            catch { }
             return responsebytes;
         }
 

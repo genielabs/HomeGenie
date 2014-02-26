@@ -103,7 +103,7 @@ namespace HomeGenie.Service
         public HomeGenieService()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-			//
+            //
             // initialize recent log list
             _recenteventslog = new TsList<LogEntry>();
 
@@ -163,7 +163,7 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(Domains.HomeAutomation_HomeGenie, "SystemInfo", "Http port bind failed.", "HTTP.PORT", port.ToString());
             }
-            
+
             _updatechecker = new UpdateChecker();
             _updatechecker.ArchiveDownloadUpdate += delegate(object sender, ArchiveDownloadEventArgs args)
             {
@@ -243,7 +243,7 @@ namespace HomeGenie.Service
         // Reference to UpdateChecked
         public UpdateChecker UpdateChecker
         {
-            get { return _updatechecker;  }
+            get { return _updatechecker; }
         }
 
         // Reference to Recent Events Log
@@ -399,7 +399,7 @@ namespace HomeGenie.Service
             }
             return grp;
         }
-        
+
         public string GetJsonSerializedModules(bool hideprops)
         {
             string jsonmodules = "";
@@ -719,7 +719,7 @@ namespace HomeGenie.Service
 
         public void SignalModulePropertyChange(object sender, Module mod, InterfacePropertyChangedAction propertychangedaction)
         {
-            
+
             // update module parameter value
             ModuleParameter parameter = null;
             try
@@ -736,7 +736,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-//                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                //                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             //
             LogBroadcastEvent(propertychangedaction.Domain, propertychangedaction.SourceId, propertychangedaction.SourceType, propertychangedaction.Path, JsonConvert.SerializeObject(propertychangedaction.Value));
@@ -822,7 +822,8 @@ namespace HomeGenie.Service
                     LogEventAction(logentry);
                 }
             }
-            catch {
+            catch
+            {
                 System.Diagnostics.Debugger.Break();
             }
             //

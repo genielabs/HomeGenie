@@ -81,7 +81,7 @@ namespace HomeGenieUpdater
                     {
                         File.Copy(file, destfile, true);
                     }
-                    catch (Exception e) 
+                    catch (Exception e)
                     {
                         Console.WriteLine("! Error copying file '" + destfile + "'");
                     }
@@ -99,7 +99,7 @@ namespace HomeGenieUpdater
             if (restart)
             {
 
-			    // TODO: run "uname" to determine OS type
+                // TODO: run "uname" to determine OS type
                 if (pid == PlatformID.Win32NT)
                 {
                     try

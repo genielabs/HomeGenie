@@ -201,30 +201,33 @@ namespace MIG.Interfaces.Controllers
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         /// <summary>
-		/// Gets the domain.
-		/// ** Do not modify this function. **
-		/// </summary>
-		/// <value>
-		/// The domain.
-		/// </value>
-		public string Domain {
-			get {
-				string ifacedomain = this.GetType ().Namespace.ToString ();
-				ifacedomain = ifacedomain.Substring (ifacedomain.LastIndexOf (".") + 1) + "." + this.GetType ().Name.ToString ();
-				return ifacedomain;
-			}
-		}
+        /// Gets the domain.
+        /// ** Do not modify this function. **
+        /// </summary>
+        /// <value>
+        /// The domain.
+        /// </value>
+        public string Domain
+        {
+            get
+            {
+                string ifacedomain = this.GetType().Namespace.ToString();
+                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return ifacedomain;
+            }
+        }
 
 
-		/// <summary>
-		/// Gets a value indicating whether the interface/controller device is connected or not.
-		/// </summary>
-		/// <value>
-		/// <c>true</c> if it is connected; otherwise, <c>false</c>.
-		/// </value>
-		public bool IsConnected {
+        /// <summary>
+        /// Gets a value indicating whether the interface/controller device is connected or not.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if it is connected; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsConnected
+        {
             get { return isconnected; }
-		}
+        }
         /// <summary>
         /// Returns true if the device has been found in the system
         /// </summary>
@@ -235,15 +238,15 @@ namespace MIG.Interfaces.Controllers
             return true;
         }
 
-		/// <summary>
-		/// This method is used by ProgramEngine to synchronize with
-		/// asyncronously executed commands.
-		/// You can ignore this if commands to interface device are already executed synchronously
-		/// </summary>
-		public void WaitOnPending ()
-		{
-			// Pause the thread until all issued interface commands are effectively completed. 
-		}
+        /// <summary>
+        /// This method is used by ProgramEngine to synchronize with
+        /// asyncronously executed commands.
+        /// You can ignore this if commands to interface device are already executed synchronously
+        /// </summary>
+        public void WaitOnPending()
+        {
+            // Pause the thread until all issued interface commands are effectively completed. 
+        }
 
         public bool Connect()
         {
@@ -354,9 +357,9 @@ namespace MIG.Interfaces.Controllers
             }
         }
 
-		public object InterfaceControl (MIGInterfaceCommand request)
-		{
-			request.response = ""; //default success value
+        public object InterfaceControl(MIGInterfaceCommand request)
+        {
+            request.response = ""; //default success value
             //
             if (request.command == Command.REMOTES_SEARCH)
             {
@@ -398,15 +401,15 @@ namespace MIG.Interfaces.Controllers
                 }
                 ShellCommand("irsend", "SEND_ONCE " + commands);
             }
-			//
-			return request.response;
-		}
-		
+            //
+            return request.response;
+        }
+
         #endregion
 
 
 
-        public void Dispose() 
+        public void Dispose()
         {
             Disconnect();
         }

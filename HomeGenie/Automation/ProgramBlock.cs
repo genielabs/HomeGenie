@@ -35,26 +35,26 @@ using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation
 {
-	[Serializable()]
-	public class ProgramBlock
-	{
-		private bool _isenabled = false;
+    [Serializable()]
+    public class ProgramBlock
+    {
+        private bool _isenabled = false;
 
-		public ProgramBlock ()
-		{
+        public ProgramBlock()
+        {
             // init stuff
             Type = "";
             ScriptCondition = "";
             ScriptSource = "";
             ScriptErrors = "";
             ScriptAssembly = null;
-			Commands = new List<ProgramCommand>();
-			Conditions = new List<ProgramCondition>();
-			ConditionType = ConditionType.None;
-			_isenabled = true;
-			IsRunning = false;
+            Commands = new List<ProgramCommand>();
+            Conditions = new List<ProgramCondition>();
+            ConditionType = ConditionType.None;
+            _isenabled = true;
+            IsRunning = false;
             IsEvaluatingConditionBlock = false;
-		}
+        }
 
         public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
         public int Address = 0;
@@ -64,20 +64,20 @@ namespace HomeGenie.Automation
         public string Group;
         public string Type;
         public bool IsEnabled
-		{
-			get { return _isenabled; }
-			set 
-			{
-				if (value)
-				{
-					ActivationTime = DateTime.UtcNow;
-				}
-				_isenabled = value;
-			}
-		}
+        {
+            get { return _isenabled; }
+            set
+            {
+                if (value)
+                {
+                    ActivationTime = DateTime.UtcNow;
+                }
+                _isenabled = value;
+            }
+        }
 
-		public DateTime? ActivationTime;
-		public DateTime? TriggerTime;
+        public DateTime? ActivationTime;
+        public DateTime? TriggerTime;
 
         // these two are used when Type == "CSharp"
         public string ScriptCondition;
@@ -89,20 +89,20 @@ namespace HomeGenie.Automation
         {
             get
             {
-                return _scriptassembly; 
+                return _scriptassembly;
             }
             set
             {
-				ActivationTime = null;
-				TriggerTime = null;
-				try
-				{
-                	Stop();
-				}
-				catch (Exception)
-				{
-					// TODO: handle this...
-				}
+                ActivationTime = null;
+                TriggerTime = null;
+                try
+                {
+                    Stop();
+                }
+                catch (Exception)
+                {
+                    // TODO: handle this...
+                }
                 //
                 if (_program_appdomain != null)
                 {
@@ -125,7 +125,7 @@ namespace HomeGenie.Automation
                 IsRunning = false;
                 //
                 _scriptassembly = value;
-                
+
             }
         }
 
@@ -134,25 +134,25 @@ namespace HomeGenie.Automation
         // cond: Equals, GreaterThan, LessThan 
         //  val: <value>
         public ConditionType ConditionType;
-		public List<ProgramCondition> Conditions;
-		public List<ProgramCommand> Commands;
+        public List<ProgramCondition> Conditions;
+        public List<ProgramCommand> Commands;
 
         // common members 
-		public bool IsRunning;
+        public bool IsRunning;
         public bool IsEvaluatingConditionBlock;
         public List<ProgramFeature> Features = new List<ProgramFeature>();
 
-		[NonSerialized]
-		public bool LastConditionEvaluationResult;
-//        [NonSerialized]
+        [NonSerialized]
+        public bool LastConditionEvaluationResult;
+        //        [NonSerialized]
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
-//        [NonSerialized]
+        //        [NonSerialized]
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
-//        [NonSerialized]
+        //        [NonSerialized]
         internal List<string> _registeredapicalls = new List<string>();
 
 
-/////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
 
 
         internal Thread ProgramThread;
@@ -187,7 +187,8 @@ namespace HomeGenie.Automation
                         _scriptassembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
                         succeed = true;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
 
                         this.ScriptErrors = e.Message + "\n" + e.StackTrace;
                     }
@@ -288,7 +289,7 @@ namespace HomeGenie.Automation
                         miSetHost.Invoke(_program_assembly, new object[2] { homegenieref, this.Address });
                         success = true;
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
                         HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
                     }
@@ -303,6 +304,6 @@ namespace HomeGenie.Automation
             return true;
         }
 
-	}
+    }
 }
 

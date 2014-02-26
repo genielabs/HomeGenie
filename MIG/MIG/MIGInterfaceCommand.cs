@@ -24,21 +24,21 @@ using System;
 
 namespace MIG
 {
-	public class MIGInterfaceCommand
-	{
+    public class MIGInterfaceCommand
+    {
         private string[] _options = new string[0];
 
-		public string domain { get; set; }
-		public string nodeid { get; set; }
-		public string command { get; set; }
-		//public string option { get; set; }
-		//public string option1 { get; set; }
-		
-		public string response { get; set; }
-		public string originalRequest { get; set; }
+        public string domain { get; set; }
+        public string nodeid { get; set; }
+        public string command { get; set; }
+        //public string option { get; set; }
+        //public string option1 { get; set; }
 
-		public MIGInterfaceCommand (string request)
-		{
+        public string response { get; set; }
+        public string originalRequest { get; set; }
+
+        public MIGInterfaceCommand(string request)
+        {
             originalRequest = request;
             try
             {
@@ -72,10 +72,10 @@ namespace MIG
             }
             catch (Exception ex)
             {
-//Console.WriteLine("\n\nError parsing interface command request (" + request + ") : " + ex.Message + "\n" + ex.StackTrace);
+                //Console.WriteLine("\n\nError parsing interface command request (" + request + ") : " + ex.Message + "\n" + ex.StackTrace);
             }
-			response = null;
-		}
+            response = null;
+        }
 
         public string GetOption(int index)
         {
@@ -84,9 +84,9 @@ namespace MIG
             {
                 option = Uri.UnescapeDataString(_options[index]);
             }
-//Console.ForegroundColor = ConsoleColor.DarkMagenta;
-//Console.WriteLine("OPTION " + index + " = " + option);
-//Console.ForegroundColor = ConsoleColor.White;
+            //Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            //Console.WriteLine("OPTION " + index + " = " + option);
+            //Console.ForegroundColor = ConsoleColor.White;
             return option;
         }
 
@@ -103,6 +103,6 @@ namespace MIG
             }
         }
 
-	}
+    }
 }
 

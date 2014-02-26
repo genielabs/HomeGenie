@@ -25,26 +25,26 @@ using System;
 namespace HomeGenie.Automation
 {
 
-	[Serializable()]
-	public enum ConditionType
-	{
-		None = 0, // unused
-		OnSwitchTrue,
-		OnSwitchFalse,
-		Once,
-		OnTrue,
-		OnFalse
-	}
+    [Serializable()]
+    public enum ConditionType
+    {
+        None = 0, // unused
+        OnSwitchTrue,
+        OnSwitchFalse,
+        Once,
+        OnTrue,
+        OnFalse
+    }
 
-	[Serializable()]
-	public class ProgramCondition
-	{
-		public string Domain { get; set; }
-		public string Target { get; set; }
-		public string Property { get; set; }
-		public ComparisonOperator ComparisonOperator { get; set; }
-		public string ComparisonValue { get; set; }
-	}
+    [Serializable()]
+    public class ProgramCondition
+    {
+        public string Domain { get; set; }
+        public string Target { get; set; }
+        public string Property { get; set; }
+        public ComparisonOperator ComparisonOperator { get; set; }
+        public string ComparisonValue { get; set; }
+    }
 
 }
 

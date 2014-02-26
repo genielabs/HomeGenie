@@ -82,7 +82,7 @@ namespace HomeGenieService
         {
             if (hgmanagerservice != null)
             {
-                (hgmanagerservice.SingletonInstance as ManagerService).RaiseOnEventLogged(new LogEntry(){ Description = obj.Description, Domain = obj.Domain, Property = obj.Property, Source = obj.Source, Value = obj.Value });
+                (hgmanagerservice.SingletonInstance as ManagerService).RaiseOnEventLogged(new LogEntry() { Description = obj.Description, Domain = obj.Domain, Property = obj.Property, Source = obj.Source, Value = obj.Value });
             }
         }
 

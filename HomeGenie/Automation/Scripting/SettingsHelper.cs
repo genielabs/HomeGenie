@@ -29,27 +29,27 @@ using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scripting
 {
-	public class SettingsHelper
-	{
-		private HomeGenieService _homegenie;
-		
-		public SettingsHelper(HomeGenieService hg)
-		{
-			_homegenie = hg;
-		}
-		
+    public class SettingsHelper
+    {
+        private HomeGenieService _homegenie;
+
+        public SettingsHelper(HomeGenieService hg)
+        {
+            _homegenie = hg;
+        }
+
         public ModuleParameter Parameter(string parameter)
         {
             ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == parameter; });
             // create parameter if does not exists
             if (systemparam == null)
             {
-				systemparam = new ModuleParameter(){ Name = parameter };
+                systemparam = new ModuleParameter() { Name = parameter };
                 _homegenie.Parameters.Add(systemparam);
             }
 
             return systemparam;
         }
-	}
+    }
 }
 

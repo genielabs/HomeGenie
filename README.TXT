@@ -165,6 +165,9 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+25/02/2014 1.00 beta rev 341
+	- just some code cleanup and reformatting
+
 24/02/2014 1.00 beta rev 340
 	- Added Weeco4m GPIO module (http://www.weecoboard.eu) contributed by L.Neri
 	- Added Scheduler.TimeEvent to Wizard Script conditions
