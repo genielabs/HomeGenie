@@ -165,6 +165,14 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+26/02/2014 1.00 beta rev 342
+	- Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
+	- Updated "FibaroRGBW" plugin
+	- Updated Weeco4m GPIO module
+
+25/02/2014 1.00 beta rev 341
+	- just some code cleanup and reformatting
+
 24/02/2014 1.00 beta rev 340
 	- Added Weeco4m GPIO module (http://www.weecoboard.eu) contributed by L.Neri
 	- Added Scheduler.TimeEvent to Wizard Script conditions

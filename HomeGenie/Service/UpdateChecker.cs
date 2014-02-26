@@ -92,7 +92,7 @@ namespace HomeGenie.Service
         public delegate void UpdateProgressEvent(object sender, UpdateProgressEventArgs args);
         public UpdateProgressEvent UpdateProgress;
 
-        private string _endpointurl = "http://generoso.info/homegenie/release_updates.php";
+        private string _endpointurl = "http://www.homegenie.it/release_updates.php";
         private ReleaseInfo _currentrelease;
         private List<ReleaseInfo> _remoteupdates;
         private Timer _interval;
@@ -141,20 +141,6 @@ namespace HomeGenie.Service
         {
             Check();
             _interval.Start();
-            //
-            /*
-            string destfolder = @"C:\Users\Gene\Desktop\HomeGenie_1_00_beta_r318_update\";
-            Directory.SetCurrentDirectory(destfolder);
-            foreach (string file in Directory.EnumerateFiles(
-                    ".", "*.*", SearchOption.AllDirectories))
-            {
-                Console.WriteLine(file);
-                Utility.AddFileToZip("hgupdate.zip", file);
-            }
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            Directory.GetDirectoryRoot(Directory.GetCurrentDirectory());
-            */
-
         }
 
         public void Stop()

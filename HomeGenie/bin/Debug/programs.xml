@@ -7,7 +7,7 @@
     <Description>Turn on all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.782738Z</ActivationTime>
+    <ActivationTime>2014-02-26T16:43:19.2761007Z</ActivationTime>
     <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
@@ -44,7 +44,7 @@ Modules
     <Description>Turn off all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.782738Z</ActivationTime>
+    <ActivationTime>2014-02-26T16:43:19.2761007Z</ActivationTime>
     <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
@@ -83,8 +83,8 @@ Modules
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:57:35.6434011Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:57:35.6954044Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:22.215919Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
 });
@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -158,8 +158,8 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7847383Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.9521193Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:22.1107766Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -269,8 +269,8 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7847383Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.4256176Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.0997187Z</TriggerTime>
     <ScriptCondition>//    
 // this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
@@ -412,8 +412,8 @@ return true; // execute "Code To Run"
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:55:56.2487585Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:57:58.3510649Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:45:53.4319463Z</TriggerTime>
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -1077,8 +1077,8 @@ Program.GoBackground();</ScriptSource>
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.8507394Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2851009Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:20.6934419Z</TriggerTime>
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -1303,8 +1303,8 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.7471672Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:22.009613Z</TriggerTime>
     <ScriptCondition>// this is a background app
 // so we just put initialization code here and a return true
 // to activate the background task loop
@@ -1427,8 +1427,8 @@ using(spiConnection.SelectSlave())
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:57:51.6097427Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:57:51.714763Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.9084515Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on");
 });
@@ -1466,7 +1466,7 @@ Program.GoBackground();</ScriptSource>
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1486,8 +1486,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.5439983Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.8073505Z</TriggerTime>
     <ScriptCondition>
 Program.Setup(()=&gt;{
 
@@ -1585,8 +1585,8 @@ Program.GoBackground();
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:57:43.7892531Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:57:44.2065433Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.7063049Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
   
   	Program.AddControlWidget("homegenie/generic/securitysystem");
@@ -1745,7 +1745,7 @@ while (Program.IsEnabled)
     <Conditions />
     <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1772,8 +1772,8 @@ while (Program.IsEnabled)
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7907393Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.3417698Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.6052179Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -1932,8 +1932,8 @@ using (var connection = new GpioConnection(systembuzzer))
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.240747Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.5042263Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)");
@@ -2003,8 +2003,8 @@ Program.GoBackground();</ScriptSource>
     <Description>SC9000 Security Console driver (experimental)</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.139607Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.4029748Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2228,8 +2228,8 @@ while (Program.IsEnabled)
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.5270824Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:20.5923505Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 
     Program.AddInputField("Email.Sender", "", "1. E-Mail address");
@@ -2321,7 +2321,7 @@ Program.GoBackground();</ScriptSource>
 The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
     <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
   
@@ -2542,7 +2542,7 @@ These can be added to  groups and are then
 shown as hyperlink buttons in the control page.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <ScriptCondition>Program.Setup(()=&gt;{
 	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
@@ -2578,8 +2578,8 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:49.0365011Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:20.7945737Z</TriggerTime>
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
                        "MobileNotification.SendChanges", 
@@ -2713,8 +2713,8 @@ Program.GoBackground();</ScriptSource>
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.9323088Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.3018502Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2762,8 +2762,8 @@ while (Program.IsEnabled)
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:58:01.1659018Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.8309271Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:20.8956289Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2906,8 +2906,8 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsRunning>true</IsRunning>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <IsEnabled>true</IsEnabled>
@@ -2964,8 +2964,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.7298531Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:21.2007146Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -3142,8 +3142,8 @@ using (var connection = new GpioConnection(systemleds))
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-23T16:41:47.7917386Z</ActivationTime>
-    <TriggerTime>2014-02-23T16:41:48.6286145Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:43:20.9966529Z</TriggerTime>
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeature("Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");
@@ -3303,8 +3303,8 @@ while (Program.IsEnabled)
 </Description>
     <Group>Devices and Things</Group>
     <Type>CSharp</Type>
-    <ActivationTime>2014-02-06T21:17:33.041155Z</ActivationTime>
-    <TriggerTime>2014-02-06T21:17:33.428467Z</TriggerTime>
+    <ActivationTime>2014-02-26T16:45:32.1890094Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:45:32.676852Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -3365,6 +3365,13 @@ Program.Setup(()=&gt;{
 	   	if( m.Parameter("ZWaveNode.ManufacturerSpecific").Value == "010F:0900:1000" )
         {
 		 	Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","zwave/fibaro/rgbw");
+          	// Added temporary until Switch.MultiLevel.GetCount works properly 
+            for (int i = 1; i &lt;= 5 ; i++)
+            {
+                string address = m.Instance.Address + "." + i.ToString();
+                Program.AddVirtualModule(m.Instance.Domain, address, "Dimmer", "homegenie/generic/dimmer");
+            }
+          	// End of Added
 	    }
       	return false ;
 	});
@@ -3389,38 +3396,40 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt;
       string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
       //
       var module = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber).Get();
+      var moduleRaise = Modules.InDomain("HomeAutomation.FibaroRGBW").WithAddress(lightnumber).Get();
       //
       switch(command)
       {
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.On
         case "Control.On":
 			module.On();
-        	Program.RaiseEvent(module, "Status.Level", "1", "Fibaro RGBW");
+        	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.Off
         case "Control.Off":
 			module.Off();
-        	Program.RaiseEvent(module, "Status.Level", "0", "Fibaro RGBW");
+        	Program.RaiseEvent(moduleRaise, "Status.Level", "0", "Fibaro RGBW");
         	break;
         case "Control.Toggle":
         	if (module.Parameter("Status.Level").DecimalValue == 0)
             {
 				module.On();
-              	Program.RaiseEvent(module, "Status.Level", "1", "Fibaro RGBW");
+              	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
             }
         	else
             {
 	 			module.Off();
- 	        	Program.RaiseEvent(module, "Status.Level", "0", "Fibaro RGBW");
+ 	        	Program.RaiseEvent(moduleRaise, "Status.Level", "0", "Fibaro RGBW");
             }
         	break;
         case "Control.Level":
         	module.Command("Control.Level").Set((double.Parse(parameter)).ToString()) ;
-            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Fibaro RGBW");
+            Program.RaiseEvent(moduleRaise, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Fibaro RGBW");
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.fibarorgbw/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
         case "Control.ColorHsb":
         	string[] values = parameter.Split(',');
+ 	        Program.RaiseEvent(moduleRaise, "Status.ColorHsb", parameter, "Fibaro RGBW");
         	double level = (double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture)/255D)*99D ;
         	int iRed = (int)Math.Truncate(level) ;
         	var moduleRed = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".2").Get();
@@ -3433,11 +3442,12 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt;
         	int iBlue = (int)Math.Truncate(level) ;
         	var moduleBlue = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber+".4").Get();
     	 	moduleBlue.Command("Control.Level").Set( ((int)iBlue).ToString() ) ;
- 	        Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Fibaro RGBW");
+        	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
         	break; 
         case "Control.ProgramRGB" :
 			module.Command("Config.ParameterSet").Set("72/" + parameter);
-			Program.Notify("Program RGB", "N° " + parameter + " running" );
+           	Program.RaiseEvent(moduleRaise, "Status.Level", "1", "Fibaro RGBW");
+//			Program.Notify("Program RGB", "N° " + parameter + " running" );
             break;
       }
       //
@@ -3457,7 +3467,7 @@ Program.GoBackground();
     <Conditions />
     <Commands />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <IsEnabled>false</IsEnabled>

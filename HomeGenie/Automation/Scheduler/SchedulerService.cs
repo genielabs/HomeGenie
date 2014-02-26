@@ -173,7 +173,7 @@ namespace HomeGenie.Automation.Scheduler
         {
             if (checkedstack == null) checkedstack = new List<string>();
             //
-            string[] exprs = cronexp.Split(','); // <-- ',' is OR operator
+            string[] exprs = cronexp.Split(':'); // <-- ':' is OR operator
             for (int e = 0; e < exprs.Length; e++)
             {
                 string currentexpr = exprs[e].Trim();
