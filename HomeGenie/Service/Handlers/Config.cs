@@ -302,21 +302,21 @@ namespace HomeGenie.Service.Handlers
                             break;
 
                         case "Weeco4mGPIO.SetInputPin":
-                            (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(migcmd.GetOption(1)));
+                            (_hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(migcmd.GetOption(1)));
                             _hg.SystemConfiguration.Update();
                             break;
 
                         case "Weeco4mGPIO.GetInputPin":
-                            migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetInputPin().ToString();
+                            migcmd.response = (_hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetInputPin().ToString();
                             break;
 
                         case "Weeco4mGPIO.SetPulsePerWatt":
-                            (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(migcmd.GetOption(1)));
+                            (_hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(migcmd.GetOption(1)));
                             _hg.SystemConfiguration.Update();
                             break;
 
                         case "Weeco4mGPIO.GetPulsePerWatt":
-                            migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetPulsePerWatt().ToString();
+                            migcmd.response = (_hg.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetPulsePerWatt().ToString();
                             break;
 
                         case "UPnP.GetIsEnabled":
