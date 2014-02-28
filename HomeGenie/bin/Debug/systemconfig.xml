@@ -121,7 +121,10 @@
         <Options />
       </Interface>
       <Interface Domain="EmbeddedSystems.Weeco4mGPIO" IsEnabled="false">
-        <Options />
+        <Options>
+          <Option Name="InputPin" Value="7" />
+          <Option Name="PulsePerWatt" Value="1.0" />
+        </Options>
       </Interface>
     </Interfaces>
   </MIGService>
