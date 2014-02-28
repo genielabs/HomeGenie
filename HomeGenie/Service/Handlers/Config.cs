@@ -301,24 +301,24 @@ namespace HomeGenie.Service.Handlers
                             _hg._modules_refresh_misc();
                             break;
 
-                        case "Weeco4mGPIO.SetInputPin":					
-							(_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(migcmd.GetOption(1)));
+                        case "Weeco4mGPIO.SetInputPin":
+                            (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(migcmd.GetOption(1)));
                             _hg.SystemConfiguration.Update();
                             break;
 
                         case "Weeco4mGPIO.GetInputPin":
-							migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetInputPin().ToString();
+                            migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetInputPin().ToString();
                             break;
-					
+
                         case "Weeco4mGPIO.SetPulsePerWatt":
-							(_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(migcmd.GetOption(1)));
+                            (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(migcmd.GetOption(1)));
                             _hg.SystemConfiguration.Update();
                             break;
 
                         case "Weeco4mGPIO.GetPulsePerWatt":
-							migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetPulsePerWatt().ToString();
-							break;
-					
+                            migcmd.response = (_hg.GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).GetPulsePerWatt().ToString();
+                            break;
+
                         case "UPnP.GetIsEnabled":
                             migcmd.response = JsonHelper.GetSimpleResponse((_hg.SystemConfiguration.GetInterface(Domains.Protocols_UPnP).IsEnabled ? "1" : "0"));
                             break;

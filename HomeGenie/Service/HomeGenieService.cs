@@ -1863,12 +1863,12 @@ namespace HomeGenie.Service
                 (GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.HomeAutomation.W800RF).SetPortName(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_W800RF, "Port").Value);
                 try
                 {
-                	(GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value));
-                	(GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value));
-                } 
+                    (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value));
+                    (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value));
+                }
                 catch (Exception ex)
                 {
-                	HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "_loadsystemconfig()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "_loadsystemconfig()", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
                 //
                 // get direct reference to XTenLib and ZWaveLib interface drivers
