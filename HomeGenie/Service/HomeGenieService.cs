@@ -1861,12 +1861,15 @@ namespace HomeGenie.Service
                 (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetPortName(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "Port").Value.Replace("|", "/"));
                 (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetHouseCodes(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "HouseCodes").Value);
                 (GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.HomeAutomation.W800RF).SetPortName(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_W800RF, "Port").Value);
-                
-                (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value.Replace("|", "/")));
-                (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value.Replace("|", "/")));
-
-				
-				
+                try
+                {
+                	(GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value));
+                	(GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value));
+                } 
+                catch (Exception ex)
+                {
+                	HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "_loadsystemconfig()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                }
                 //
                 // get direct reference to XTenLib and ZWaveLib interface drivers
                 //
