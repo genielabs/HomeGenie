@@ -38,6 +38,8 @@ namespace MIG.Interfaces.EmbeddedSystems
         // echo 10000 > /sys/kernel/lgw4m-8di/counter_limit_value
         // echo gpio > /sys/class/leds/led_green/trigger
 
+
+			
         #region Implemented MIG Commands
 
         // typesafe enum
@@ -47,15 +49,13 @@ namespace MIG.Interfaces.EmbeddedSystems
             public static Dictionary<int, string> CommandsList = new Dictionary<int, string>()
             {
                 {203, "Parameter.Status"},
-				{204, "Parameter.Counter"},
-				{205, "Parameter.Periode"},
-				{231, "Parameter.Reset"},
 
                 {701, "Control.On"},
                 {702, "Control.Off"},
                 {731, "Control.Reset"},
             };
 
+			
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
             public static readonly Command PARAMETER_STATUS = new Command(203);
 
@@ -99,7 +99,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
             public static explicit operator Command(string str)
             {
-                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command " + str);
+				if (DEBUG_API) Console.WriteLine("Weeco4mGPIO Command " + str);
 
                 if (CommandsList.ContainsValue(str))
                 {
@@ -119,12 +119,11 @@ namespace MIG.Interfaces.EmbeddedSystems
             {
                 return a.value != b.value;
             }
-
         }
 
         #endregion
 
-        private const string GPIO_LED_PATH = "/sys/class/leds/";
+		private const string GPIO_LED_PATH ="/sys/class/leds/";
         private const string GPIO_INOUT_PATH = "/sys/kernel/lgw4m-8di/";
 
         private Dictionary<string, string> CrossRefPins = new Dictionary<string, string>()		
@@ -160,8 +159,11 @@ namespace MIG.Interfaces.EmbeddedSystems
         	{ "37", GPIO_INOUT_PATH + "in5_periode" },				
         	{ "38", GPIO_INOUT_PATH + "in6_periode" },			
         	{ "39", GPIO_INOUT_PATH + "in7_periode" }			
+			
 		};
 
+		
+		
         public Dictionary<string, bool> GPIOPins = new Dictionary<string, bool>()
 		{
             { "0", false },
@@ -201,27 +203,38 @@ namespace MIG.Interfaces.EmbeddedSystems
             { "39", "0" }			
         };
 
-        bool isconnected = false;
-        bool isDesktopEmulation = false;
-        Thread myThread = null;
+		
+		private const int REGSTORAGE_IDX_STATUS = 0;
+		private const int REGSTORAGE_IDX_COUNTER = 1;
+		private const int REGSTORAGE_IDX_PERIODE = 2;
+		private const int REGSTORAGE_IDX_LAST_COUNTER = 3;
+		private const int REGSTORAGE_IDX_LAST_PERIODE = 4;
+		private const int REGSTORAGE_IDX_LAST_PERIODE_TIME = 5;
+		private const int REGSTORAGE_NUMOF_INDEX = 6;
+		private const int REGSTORAGE_NUMOF_REGS = 64;	
+
+		
+        private bool isconnected = false;
+		private bool isDesktopEmulation = false;
+		private Thread myThread = null;
         private UInt32[,] regsStorage;
-        private const int MAX_REGS = 64;
         private uint NumOfInputPin = 6;						// which pin, from 0, will be used as input, the remaining will be used as power counter
         private Double Pulse4Watt = 1.0;					// pulse for watt
+		private const int ThreadPeriodeMs = 1000;
+		private const int PeriodeToSendCountersMs = 60000;
 
         public Weeco4mGPIO()
         {
-            regsStorage = new UInt32[5, MAX_REGS];
+			regsStorage = new UInt32[REGSTORAGE_NUMOF_INDEX,REGSTORAGE_NUMOF_REGS];
             isconnected = Directory.Exists(GPIO_INOUT_PATH) && Directory.Exists(GPIO_LED_PATH);
-            if (DEBUG)
+			if (DEBUG_API)
             {
                 isconnected = true;
                 isDesktopEmulation = true;
             }
-
             if (isconnected)
             {
-                myThread = new System.Threading.Thread(new System.Threading.ThreadStart(RegisterThread));
+				myThread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadSendData));
                 myThread.Start();
             }
         }
@@ -230,29 +243,23 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
-        public string Domain
-        {
-            get
-            {
 
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+		public string Domain {
+			get {
+				string ifacedomain = this.GetType().Namespace.ToString ();
+				ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf (".") + 1) + "." + this.GetType ().Name.ToString ();
                 return ifacedomain;
             }
         }
 
         public bool Connect()
         {
-
             return isconnected;
         }
-
         public void Disconnect()
         {
-
             CleanUpAllPins();
         }
-
         public bool IsDevicePresent()
         {
             return isconnected;
@@ -266,18 +273,38 @@ namespace MIG.Interfaces.EmbeddedSystems
         {
         }
 
-        public object InterfaceControl(MIGInterfaceCommand request)
+		public void SetInputPin(uint pin)
+		{
+			if (pin >=0 && pin <=7)
+				NumOfInputPin = pin;
+		}
+		
+		public uint GetInputPin()
+		{
+			return NumOfInputPin;
+		}
+		
+		public double GetPulsePerWatt()
+		{
+			return Pulse4Watt;
+		}
+		
+		public void SetPulsePerWatt(double pulseXwatt)
         {
+			if (pulseXwatt >= 0.0)
+				Pulse4Watt=pulseXwatt;
+		}
+		
 
-            if (DEBUG) Console.WriteLine("Weeco4mGPIO Command : " + request);
+		public object InterfaceControl(MIGInterfaceCommand request)
+		{
+			if (DEBUG_API) Console.WriteLine("Weeco4mGPIO Command : " + request.command);
 
             Command command = (Command)request.command;
             string returnvalue = "";
             //
-            if (command == Command.CONTROL_ON)
-            {
-
-                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_ON ");
+			if (command == Command.CONTROL_ON) {
+				if (DEBUG_API) Console.WriteLine("Weeco4mGPIO Command.CONTROL_ON ");
 
                 this.OutputPin(request.nodeid, "1");
                 if (IsRegister(request.nodeid))
@@ -292,11 +319,8 @@ namespace MIG.Interfaces.EmbeddedSystems
                     }
                     catch { }
                 }
-            }
-            //
-            if (command == Command.CONTROL_OFF)
-            {
-                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.CONTROL_OFF ");
+			}else if (command == Command.CONTROL_OFF) {
+				if (DEBUG_API) Console.WriteLine("Weeco4mGPIO Command.CONTROL_OFF ");
 
                 this.OutputPin(request.nodeid, "0");
                 if (IsRegister(request.nodeid))
@@ -312,21 +336,13 @@ namespace MIG.Interfaces.EmbeddedSystems
                     }
                     catch { }
                 }
-            }
-            //
-            if (command == Command.PARAMETER_STATUS)
-            {
-
-                if (DEBUG) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_STATUS ");
+            }else if (command == Command.PARAMETER_STATUS) {
+				if (DEBUG_API) Console.WriteLine("Weeco4mGPIO Command.PARAMETER_STATUS ");				
                 if (!IsRegister(request.nodeid))
                     GPIOPins[request.nodeid] = this.InputPin(request.nodeid).CompareTo("0") == 0 ? false : true;
                 else
                     REGPins[request.nodeid] = this.InputPin(request.nodeid);
-            }
-            //
-            if (command == Command.CONTROL_RESET)
-            {
-
+			}else if (command == Command.CONTROL_RESET) {
                 this.CleanUpAllPins();
                 foreach (KeyValuePair<string, bool> kv in GPIOPins)
                 {
@@ -344,18 +360,20 @@ namespace MIG.Interfaces.EmbeddedSystems
         #endregion
 
 
-        public enum enumPIN
-        {
-            gpio0 = 0, gpio1 = 1, gpio2 = 2, gpio3 = 3, gpio4 = 4, gpio5 = 5, gpio6 = 6, gpio7 = 7,	// input
+		public enum enumPIN { gpio0 = 0, gpio1 = 1, gpio2 = 2, gpio3 = 3, gpio4 = 4, gpio5 = 5, gpio6 = 6, gpio7= 7,	// input
             gpio16 = 16, gpio17 = 17, gpio18 = 18, gpio19 = 19, gpio20 = 20, gpio21 = 21, gpio22 = 22, gpio23 = 23,	// counters
             gpio24 = 32, gpio25 = 33, gpio26 = 34, gpio27 = 35, gpio28 = 36, gpio29 = 37, gpio30 = 38, gpio31 = 39,	// periode
-            gpio8 = 8, gpio9 = 9, gpio10 = 10, gpio11 = 11
-        };	// output (leds and out)
+							  gpio8 = 8, gpio9 = 9, gpio10 = 10, gpio11=11};	// output (leds and out)
 
         public enum enumDirection { IN, OUT };
 
+
+		
         //set to true to write whats happening to the screen
-        private const bool DEBUG = false;
+		private const bool DEBUG_MEAS = false; 
+		private const bool DEBUG_API = false; 
+		private const bool DESKTOP = false; 
+		
 
         private bool IsRegister(string nodeid)
         {
@@ -365,10 +383,10 @@ namespace MIG.Interfaces.EmbeddedSystems
         //no need to setup pin this is done for you
         public void OutputPin(string pin, string value)
         {
-            if (!isDesktopEmulation && isconnected)
+			if (!isDesktopEmulation)
                 File.WriteAllText(CrossRefPins[pin], value);
 
-            if (DEBUG) Console.WriteLine("Weeco4mGPIO  output to pin " + CrossRefPins[pin] + ", value was " + value);
+			if (DEBUG_API) Console.WriteLine("Weeco4mGPIO  output to pin " + CrossRefPins[pin] + ", value was " + value);
         }
 
         //no need to setup pin this is done for you
@@ -378,7 +396,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
             string filename = CrossRefPins[pin];
 
-            if (!isDesktopEmulation && isconnected)
+			if (!isDesktopEmulation)
             {
                 if (File.Exists(filename))
                 {
@@ -388,9 +406,9 @@ namespace MIG.Interfaces.EmbeddedSystems
                     throw new Exception(string.Format("Cannot read from {0}. File does not exist", pin));
             }
             else
-                returnValue = "-1";
+				returnValue="-1";
 
-            if (DEBUG) Console.WriteLine("Weeco4mGPIO  input from pin " + CrossRefPins[pin] + ", value was " + returnValue);
+			if (DEBUG_API) Console.WriteLine("Weeco4mGPIO  input from pin " + CrossRefPins[pin] + ", value was " + returnValue);
 
             return returnValue;
         }
@@ -401,65 +419,122 @@ namespace MIG.Interfaces.EmbeddedSystems
             OutputPin("9", "0");
             OutputPin("10", "0");
             OutputPin("11", "0");
-        }
 
-        private void ReadAndStoreInputStatus()
-        {
-            Double currWatt;
-            for (int currIdx = 0; currIdx < 8; currIdx++)
-            {
-                if (DEBUG)
-                {
-                    regsStorage[0, currIdx] = (regsStorage[0, currIdx] == 0) ? (uint)1 : (uint)0;
-                    regsStorage[1, currIdx] += 1;		// read counter
-                    regsStorage[2, currIdx] += 4;
+			OutputPin("16", "0");
+            OutputPin("17", "0");
+            OutputPin("18", "0");
+            OutputPin("19", "0");
+            OutputPin("20", "0");
+            OutputPin("21", "0");
+            OutputPin("22", "0");
+            OutputPin("23", "0");
+		
+            OutputPin("32", "0");
+            OutputPin("33", "0");
+            OutputPin("34", "0");
+            OutputPin("35", "0");
+            OutputPin("36", "0");
+            OutputPin("37", "0");
+            OutputPin("38", "0");
+            OutputPin("39", "0");
+		}
+		
+		private void ReadAndSendValues(bool sendCounters)
+		{
+			Double currWatt, diffMeas, deltaMeasPerc;
+			if(Pulse4Watt == 0)
+				Pulse4Watt = 1.0;
+			
+			for (int currIdx=0;currIdx<8;currIdx++)
+			{
+				if (DESKTOP)
+				{
+					regsStorage[REGSTORAGE_IDX_STATUS,currIdx] = (regsStorage[REGSTORAGE_IDX_STATUS,currIdx] == 0) ? (uint)1 : (uint)0;
+					regsStorage[REGSTORAGE_IDX_COUNTER,currIdx] +=1;		// read counter
+					regsStorage[REGSTORAGE_IDX_PERIODE,currIdx] +=4;
                 }
                 else
                 {
-                    regsStorage[0, currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[currIdx.ToString()]));			// read input
-                    regsStorage[1, currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[(currIdx + 16).ToString()]));		// read counter
-                    regsStorage[2, currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[(currIdx + 32).ToString()])) / 1000;	// read pulse
+					regsStorage[REGSTORAGE_IDX_STATUS,currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[currIdx.ToString()]));			// read input
+					regsStorage[REGSTORAGE_IDX_COUNTER,currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[(currIdx+16).ToString()]));		// read counter
+					regsStorage[REGSTORAGE_IDX_PERIODE,currIdx] = UInt32.Parse(File.ReadAllText(CrossRefPins[(currIdx+32).ToString()]))/1000;	// read pulse
                 }
                 if (currIdx < NumOfInputPin)
                 {
                     // analyse only input pin	
-                    if (regsStorage[1, currIdx] != regsStorage[3, currIdx])
+					if (regsStorage[REGSTORAGE_IDX_COUNTER,currIdx] != regsStorage[REGSTORAGE_IDX_LAST_COUNTER,currIdx])
                     {
                         // is different, send event
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = currIdx.ToString(), SourceType = "Weeco-4M GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = regsStorage[0, currIdx].ToString() });
-                        regsStorage[3, currIdx] = regsStorage[1, currIdx];
+						InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = currIdx.ToString(), SourceType = "Weeco-4M GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = regsStorage[REGSTORAGE_IDX_STATUS,currIdx].ToString() });
+						regsStorage[REGSTORAGE_IDX_LAST_COUNTER,currIdx] = regsStorage[REGSTORAGE_IDX_COUNTER,currIdx];
                     }
                 }
                 else
                 {
                     // analyse energy meter counters and periode
-                    if (regsStorage[1, currIdx] != regsStorage[3, currIdx])
+					if (regsStorage[REGSTORAGE_IDX_COUNTER,currIdx] != regsStorage[REGSTORAGE_IDX_LAST_COUNTER,currIdx])
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx + 16).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = regsStorage[1, currIdx].ToString() });
-                        if ((regsStorage[2, currIdx] * Pulse4Watt) != 0)
-                            currWatt = (3600 * 1000) / (regsStorage[2, currIdx] * Pulse4Watt);
+						if (sendCounters)
+							InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx+16).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = regsStorage[REGSTORAGE_IDX_COUNTER,currIdx].ToString() });
+						if ((regsStorage[REGSTORAGE_IDX_PERIODE,currIdx] * Pulse4Watt) != 0)
+							currWatt = (3600 * 1000) / (regsStorage[REGSTORAGE_IDX_PERIODE,currIdx] * Pulse4Watt);
                         else
                             currWatt = 0.0;
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx + 32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = currWatt.ToString() });
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx + 32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_METER_WATTS, Value = currWatt });
+						// check if measure changed enought to be sent
+						diffMeas = Math.Abs((int)regsStorage[REGSTORAGE_IDX_LAST_PERIODE,currIdx] - (int)regsStorage[REGSTORAGE_IDX_PERIODE,currIdx]);
+						deltaMeasPerc =  ((double)diffMeas / (double)regsStorage[REGSTORAGE_IDX_LAST_PERIODE,currIdx]) * 100;
+						if (deltaMeasPerc > 7.5)
+						{
+							InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx+32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = currWatt.ToString() });
+			            	InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx+32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_METER_WATTS, Value = currWatt });
+							regsStorage[REGSTORAGE_IDX_LAST_PERIODE,currIdx] = regsStorage[REGSTORAGE_IDX_PERIODE,currIdx];
+						}
+						regsStorage[REGSTORAGE_IDX_LAST_COUNTER,currIdx] = regsStorage[REGSTORAGE_IDX_COUNTER,currIdx];
+						regsStorage[REGSTORAGE_IDX_LAST_PERIODE_TIME,currIdx]=0;
+						if (DEBUG_MEAS) 
+						{
+							Console.WriteLine("Weeco4mGPIO reg:" + currIdx + " watt:" + currWatt + " diff:" + diffMeas + " diff%:" + deltaMeasPerc);
+						}
+					}
+					else
+					{						
+						// estimate the power meter value when no pulse is coming
+						regsStorage[REGSTORAGE_IDX_LAST_PERIODE_TIME,currIdx]+=ThreadPeriodeMs;
+						if ((regsStorage[REGSTORAGE_IDX_LAST_PERIODE_TIME,currIdx] %  (ThreadPeriodeMs*5)) == 0 &&
+						    regsStorage[REGSTORAGE_IDX_LAST_PERIODE_TIME,currIdx] > regsStorage[REGSTORAGE_IDX_PERIODE,currIdx] && 
+						    regsStorage[REGSTORAGE_IDX_LAST_PERIODE,currIdx] > 0)
+						{
+							// ok, I need to estimate the new value because no new pulse arrived .. may be the power consumption will be decreased from 2KW to 100W ??
+							currWatt = (3600 * 1000) / (regsStorage[REGSTORAGE_IDX_LAST_PERIODE_TIME,currIdx] * Pulse4Watt);
 
-                        regsStorage[3, currIdx] = regsStorage[1, currIdx];
+							InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx+32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = currWatt.ToString() });
+			            	InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (currIdx+32).ToString(), SourceType = "Weeco-4M Register", Path = ModuleParameters.MODPAR_METER_WATTS, Value = currWatt });
+
+							if (DEBUG_MEAS) 
+							{
+								Console.WriteLine("Weeco4mGPIO reg:" + currIdx + " est.watt:" + currWatt);
+							}
+						}	
                     }
                 }
             }
         }
 
-
-        public void RegisterThread()
+		public void ThreadSendData()
         {
-            while (IsConnected)
+			int cntCounters=PeriodeToSendCountersMs;
+			while(IsConnected)
             {
-                ReadAndStoreInputStatus();
-                // TODO : make a named pipe on weeco sysfs to lock the read until something change
-                Thread.Sleep(1000);
+				ReadAndSendValues(PeriodeToSendCountersMs <= 0);
+				Thread.Sleep(ThreadPeriodeMs);
+				if (cntCounters > 0)
+					cntCounters-=ThreadPeriodeMs;
+				else
+					cntCounters=PeriodeToSendCountersMs;
             }
         }
 
 
     }
 }
+
