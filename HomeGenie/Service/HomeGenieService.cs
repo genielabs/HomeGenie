@@ -1499,7 +1499,7 @@ namespace HomeGenie.Service
                         {
                             m = new Module();
                             m.Domain = Domains.EmbeddedSystems_Weeco4mGPIO;
-                            m.Description = "Weecoboard GPIO";
+                            m.Description = "Weecoboard Register";
                             m.DeviceType = Module.DeviceTypes.Sensor;
                             Modules.Add(m);
                         }
@@ -1861,6 +1861,12 @@ namespace HomeGenie.Service
                 (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetPortName(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "Port").Value.Replace("|", "/"));
                 (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetHouseCodes(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "HouseCodes").Value);
                 (GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.HomeAutomation.W800RF).SetPortName(_systemconfiguration.GetInterfaceOption(Domains.HomeAutomation_W800RF, "Port").Value);
+                
+                (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value.Replace("|", "/")));
+                (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(_systemconfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value.Replace("|", "/")));
+
+				
+				
                 //
                 // get direct reference to XTenLib and ZWaveLib interface drivers
                 //
