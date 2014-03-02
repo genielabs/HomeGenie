@@ -165,8 +165,17 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+02/03/2014 1.00 beta rev 345
+	- MIG: added basic flood protection to WebServiceGateway
+	- MIG: added html memory files caching to WebServiceGateway
+	- MIG: reverted code of WebServiceGateway to older stable version, ThreadPool was not well performing on ARM
+
+28/02/2014 1.00 beta rev 344
+	- MIG: optmized Weeco4m GPIO module (by L.Neri)
+	- MIG: Weeco4m modue, added new parameters on "systemconfig.xml" to set the split point of the digital input used as ON/OFF or Energy Meter S0 Pulse (by L.Neri)
+
 26/02/2014 1.00 beta rev 343
-	- ZWaveLib: added fallback to Generic.Sensor handler when GenericType is not directly supported
+	- ZWaveLib: added fallback to Generic.Sensor handler when GenericType is not directly supported; removed Interlocked.Increment that was possibly causing server hang
 	- Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
 	- Updated "FibaroRGBW" plugin
 	- Updated Weeco4m GPIO module

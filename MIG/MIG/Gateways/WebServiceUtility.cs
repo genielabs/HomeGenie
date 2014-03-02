@@ -32,6 +32,26 @@ namespace MIG.Gateways
     {
 
 
+        public static void WriteStringToContext(System.Net.HttpListenerContext context, string returnvalue)
+        {
+            WriteBytesToContext(context, System.Text.Encoding.UTF8.GetBytes(returnvalue));
+        }
+        public static void WriteBytesToContext(System.Net.HttpListenerContext context, byte[] buffer)
+        {
+            try
+            {
+                context.Response.ContentLength64 = buffer.Length;
+                System.IO.Stream output = context.Response.OutputStream;
+                output.Write(buffer, 0, buffer.Length);
+                output.Close();
+            }
+            catch (Exception pe)
+            {
+                // TODO: add error logging 
+            }
+        }
+
+
         // code adapted from
         // http://stackoverflow.com/questions/8466703/httplistener-and-file-upload
 
@@ -190,6 +210,7 @@ namespace MIG.Gateways
 
             return -1;
         }
+
 
     }
 }

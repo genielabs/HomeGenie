@@ -79,6 +79,13 @@ namespace MIG
         }
     }
 
+    class WebFileCache
+    {
+        public DateTime Timestamp = DateTime.Now;
+        public string FilePath = "";
+        public string Content = "";
+    }
+
     public class MIGService
     {
         //public event Action<object> ServiceStarted;
@@ -99,6 +106,7 @@ namespace MIG
         private int _tcpgateway_port = 4502;
 
         private WebServiceGatewayConfiguration _webserviceconfig;
+        private List<WebFileCache> _webfilecache = new List<WebFileCache>();
 
         #region Lifecycle
         public MIGService()
@@ -202,6 +210,7 @@ namespace MIG
         #endregion
 
         #region TcpGateway
+
         public void ConfigureTcpGateway(int port)
         {
             _tcpgateway_port = port;
@@ -272,7 +281,7 @@ namespace MIG
                         context.Response.ContentType = "application/json";
                         context.Response.ContentEncoding = Encoding.UTF8;
                     }
-                    WriteStringToContext(context, cmd.response);
+                    WebServiceUtility.WriteStringToContext(context, cmd.response);
                     return;
                 }
             }
@@ -336,7 +345,7 @@ namespace MIG
                     {
                         try
                         {
-                            string body = System.IO.File.ReadAllText(requestedfile);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                            string body = GetWebFileCache(requestedfile); 
                             //
                             bool pp_tagfound;
                             do
@@ -369,7 +378,10 @@ namespace MIG
                                     }
                                 }
                             } while (pp_tagfound); // pre processor tag found
-                            WriteStringToContext(context, body);
+                            //
+                            PutWebFileCache(requestedfile, body);
+                            //
+                            WebServiceUtility.WriteStringToContext(context, body);
                         }
                         catch
                         {
@@ -377,7 +389,7 @@ namespace MIG
                     }
                     else
                     {
-                        WriteBytesToContext(context, System.IO.File.ReadAllBytes(requestedfile));
+                        WebServiceUtility.WriteBytesToContext(context, System.IO.File.ReadAllBytes(requestedfile));
                     }
                 }
             }
@@ -422,7 +434,7 @@ namespace MIG
             }
             else
             {
-                WriteBytesToContext(context, (Byte[])resobj);
+                WebServiceUtility.WriteBytesToContext(context, (Byte[])resobj);
                 _wrotebytes = true;
             }
             //
@@ -433,13 +445,10 @@ namespace MIG
                 if (!string.IsNullOrEmpty(cmd.response) && !_wrotebytes)
                 {
                     // request was handled by postprocess listener
-                    WriteStringToContext(context, cmd.response);
+                    WebServiceUtility.WriteStringToContext(context, cmd.response);
                     return;
                 }
             }
-
-
-
 
         }
 
@@ -463,23 +472,36 @@ namespace MIG
             return response;
         }
 
-        private void WriteStringToContext(System.Net.HttpListenerContext context, string returnvalue)
+        #endregion
+
+
+        #region Web Service File Management
+
+        private string GetWebFileCache(string file)
         {
-            WriteBytesToContext(context, System.Text.Encoding.UTF8.GetBytes(returnvalue));
+            string content = "";
+            WebFileCache item = _webfilecache.Find(wfc => wfc.FilePath == file);
+            if (item != null && (DateTime.Now - item.Timestamp).TotalSeconds < 600)
+            {
+                content = item.Content;
+            }
+            else
+            {
+                content = System.IO.File.ReadAllText(file);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+            }
+            return content;
         }
-        private void WriteBytesToContext(System.Net.HttpListenerContext context, byte[] buffer)
+
+        private void PutWebFileCache(string file, string content)
         {
-            try
+            WebFileCache item = _webfilecache.Find(wfc => wfc.FilePath == file);
+            if (item == null)
             {
-                context.Response.ContentLength64 = buffer.Length;
-                System.IO.Stream output = context.Response.OutputStream;
-                output.Write(buffer, 0, buffer.Length);
-                output.Close();
+                item = new WebFileCache();
+                _webfilecache.Add(item);
             }
-            catch (Exception pe)
-            {
-                // TODO: add error logging 
-            }
+            item.FilePath = file;
+            item.Content = content;
         }
 
         private string GetWebFilePath(string file)

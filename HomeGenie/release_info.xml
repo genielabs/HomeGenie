@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r343</Version>
+  <Version>1.00 beta r345</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - ZWaveLib: added fallback to Generic.Sensor handler when GenericType is not directly supported
-  - Scheduler: replaced ',' (OR operator) with ':' symbol due to conflicts with regular cron expression
-  - Updated "FibaroRGBW" plugin
-  - Updated Weeco4m GPIO module
-  </ReleaseNote>
-  <ReleaseDate>2014-02-26T21:35:27.0000Z</ReleaseDate>
+  <ReleaseNote>  - MIG: added basic flood protection to WebServiceGateway
+  - MIG: added html memory files caching to WebServiceGateway
+  - MIG: reverted code of WebServiceGateway to older stable version, ThreadPool was not well performing on ARM
+  - MIG: optmized Weeco4m GPIO module (by L.Neri)
+  - MIG: Weeco4m modue, added new parameters on "systemconfig.xml" to set the split point of the digital input used as ON/OFF or Energy Meter S0 Pulse (by L.Neri)</ReleaseNote>
+  <ReleaseDate>2014-03-02T16:55:08.0000Z</ReleaseDate>
 </ReleaseInfo>
