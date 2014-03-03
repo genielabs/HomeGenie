@@ -488,6 +488,10 @@ namespace MIG
             else
             {
                 content = System.IO.File.ReadAllText(file);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                if (item != null)
+                {
+                    _webfilecache.Remove(item);
+                }
             }
             return content;
         }
