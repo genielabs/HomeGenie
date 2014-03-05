@@ -42,18 +42,18 @@ namespace HomeGenie.Automation.Scripting
     public class ScriptingHost
     {
 
-        private ProgramEngine _mastercontrolprogram = null;
-        private HomeGenieService _homegenie = null;
+        private ProgramEngine masterControlProgram = null;
+        private HomeGenieService homegenie = null;
 
-        public ScriptingHost(HomeGenieService hgref)
+        public ScriptingHost(HomeGenieService hg)
         {
-            _homegenie = hgref;
-            _mastercontrolprogram = _homegenie.ProgramEngine;
-            //            AppDomain currentDomain = AppDomain.CurrentDomain;
-            //            currentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyLookup);
+            homegenie = hg;
+            masterControlProgram = homegenie.ProgramEngine;
+            //AppDomain currentDomain = AppDomain.CurrentDomain;
+            //currentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyLookup);
         }
 
-        public CompilerResults CompileScript(string condition, string statement, string outdllfile)
+        public CompilerResults CompileScript(string condition, string statement, string outputDllFile)
         {
             List<string> errors = new List<string>();
             string source = @"using System;
@@ -84,33 +84,31 @@ namespace HomeGenie.Automation.Scripting
 //////////////////////////////////////////////////////////////////
         }
 
-		private HomeGenie.Service.HomeGenieService _homegenie = null;
-		private HomeGenie.Automation.ProgramEngine _mastercontrolprogram = null;
+		private HomeGenie.Service.HomeGenieService homegenie = null;
 		//
-        private HomeGenie.Automation.Scripting.NetHelper _nethelper;
-        private HomeGenie.Automation.Scripting.ProgramHelper _programhelper;
-        private HomeGenie.Automation.Scripting.EventsHelper _eventshelper;
-        private HomeGenie.Automation.Scripting.SerialPortHelper _serialporthelper;
-        private HomeGenie.Automation.Scripting.TcpClientHelper _tcpclienthelper;
-        private HomeGenie.Automation.Scripting.SchedulerHelper _schedulerhelper;
+        private HomeGenie.Automation.Scripting.NetHelper netHelper;
+        private HomeGenie.Automation.Scripting.ProgramHelper programHelper;
+        private HomeGenie.Automation.Scripting.EventsHelper eventsHelper;
+        private HomeGenie.Automation.Scripting.SerialPortHelper serialPortHelper;
+        private HomeGenie.Automation.Scripting.TcpClientHelper tcpClientHelper;
+        private HomeGenie.Automation.Scripting.SchedulerHelper schedulerHelper;
 
-        public void SetHost(HomeGenie.Service.HomeGenieService hg, int programid)
+        public void SetHost(HomeGenie.Service.HomeGenieService hg, int programId)
         {
-            _homegenie = hg;
-            _mastercontrolprogram = hg.ProgramEngine;
-            _nethelper = new NetHelper(_homegenie);
-            _programhelper = new ProgramHelper(_homegenie, programid);
-            _eventshelper = new EventsHelper(_homegenie, programid);
-            _serialporthelper = new SerialPortHelper();
-            _tcpclienthelper = new TcpClientHelper();
-            _schedulerhelper = new SchedulerHelper(_homegenie);
+            homegenie = hg;
+            netHelper = new NetHelper(homegenie);
+            programHelper = new ProgramHelper(homegenie, programId);
+            eventsHelper = new EventsHelper(homegenie, programId);
+            serialPortHelper = new SerialPortHelper();
+            tcpClientHelper = new TcpClientHelper();
+            schedulerHelper = new SchedulerHelper(homegenie);
         }
 
         public ModulesManager Modules
         {
             get
             {
-                return new ModulesManager(_homegenie);
+                return new ModulesManager(homegenie);
             }
         }
 
@@ -118,7 +116,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return new SettingsHelper(_homegenie);
+                return new SettingsHelper(homegenie);
             }
         }
 
@@ -126,7 +124,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _nethelper;
+                return netHelper;
             }
         }
 
@@ -134,7 +132,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _programhelper;
+                return programHelper;
             }
         }
 
@@ -142,7 +140,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _eventshelper;
+                return eventsHelper;
             }
         }
 
@@ -150,7 +148,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _eventshelper;
+                return eventsHelper;
             }
         }
 
@@ -158,7 +156,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _serialporthelper;
+                return serialPortHelper;
             }
         }
 
@@ -166,7 +164,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _tcpclienthelper;
+                return tcpClientHelper;
             }
         }
 
@@ -174,13 +172,8 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _schedulerhelper;
+                return schedulerHelper;
             }
-        }
-
-        public AutomationStatesManager AutomationStates
-        {
-            get { return _mastercontrolprogram.AutomationStates; }
         }
 
         public void Pause(double seconds)
@@ -230,8 +223,9 @@ namespace HomeGenie.Automation.Scripting
 
         public void Reset()
         {
-            _programhelper.Reset();
-            _serialporthelper.Disconnect();
+            programHelper.Reset();
+            serialPortHelper.Disconnect();
+            tcpClientHelper.Disconnect();
         }
 
     }
@@ -249,13 +243,13 @@ namespace HomeGenie.Automation.Scripting
                 {
                     GenerateInMemory = true,
                     GenerateExecutable = false,
-                    IncludeDebugInformation = true,
+                    IncludeDebugInformation = false,
                     TreatWarningsAsErrors = true,
-                    OutputAssembly = outdllfile
+                    OutputAssembly = outputDllFile
                 };
             //
             // Mono runtime 2/3 compatibility fix 
-            bool relocatesystemasm = false;
+            bool relocateSystemAsm = false;
             Type type = Type.GetType("Mono.Runtime");
             if (type != null)
             {
@@ -265,27 +259,27 @@ namespace HomeGenie.Automation.Scripting
                     int major = 0;
                     if (int.TryParse(displayName.Invoke(null, null).ToString().Substring(0, 1), out major) && major > 2)
                     {
-                        relocatesystemasm = true;
+                        relocateSystemAsm = true;
                     }
                 }
             }
-            if (relocatesystemasm)
+            if (relocateSystemAsm)
             {
                 Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                foreach (Assembly a in assemblies)
+                foreach (var assembly in assemblies)
                 {
-                    AssemblyName an = a.GetName();
-                    if (an.Name.ToLower() == "system")
+                    var name = assembly.GetName();
+                    if (name.Name.ToLower() == "system")
                     {
-                        compilerParams.ReferencedAssemblies.Add(a.Location);
+                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
                     }
-                    else if (an.Name.ToLower() == "system.core")
+                    else if (name.Name.ToLower() == "system.core")
                     {
-                        compilerParams.ReferencedAssemblies.Add(a.Location);
+                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
                     }
-                    else if (an.Name.ToLower() == "microsoft.csharp")
+                    else if (name.Name.ToLower() == "microsoft.csharp")
                     {
-                        compilerParams.ReferencedAssemblies.Add(a.Location);
+                        compilerParams.ReferencedAssemblies.Add(assembly.Location);
                     }
                 }
             }

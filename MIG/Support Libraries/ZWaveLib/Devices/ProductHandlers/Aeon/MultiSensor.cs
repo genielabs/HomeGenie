@@ -36,25 +36,25 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
         {
-            return  (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "0005");
+            return (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "0005");
         }
 
         public override bool HandleBasicReport(byte[] message)
         {
             bool handled = false;
             //
-            byte cmd_length = message[6];
-            byte cmd_class = message[7];
-            byte cmd_type = message[8];
+            byte cmdLength = message[6];
+            byte cmdClass = message[7];
+            byte cmdType = message[8];
             //
-            if (cmd_class == (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL && cmd_type == 0x05)
+            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL && cmdType == 0x05)
             {
                 SensorValue sensorval = Sensor.ParseSensorValue(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)
                 {
                     // thanks to Zed for reporting this: http://www.homegenie.it/forum/index.php?topic=29.msg140
                     sensorval.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);
-                    _nodehost._raiseUpdateParameterEvent(_nodehost, 0, sensorval.EventType, sensorval.Value);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, sensorval.EventType, sensorval.Value);
                     handled = true;
                 }
             }

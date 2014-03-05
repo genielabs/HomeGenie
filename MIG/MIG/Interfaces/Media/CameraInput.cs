@@ -131,7 +131,7 @@ namespace MIG.Interfaces.Media
             #endregion
         }
 
-        private IntPtr _camerasource = IntPtr.Zero;
+        private IntPtr cameraSource = IntPtr.Zero;
 
 
         #region MIG Interface members
@@ -149,9 +149,9 @@ namespace MIG.Interfaces.Media
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
@@ -162,24 +162,24 @@ namespace MIG.Interfaces.Media
         /// </summary>
         public bool Connect()
         {
-            if (_camerasource != IntPtr.Zero)
+            if (cameraSource != IntPtr.Zero)
             {
 
                 Disconnect();
 
             }
-            _camerasource = CameraCaptureV4LInterop.OpenCameraStream("/dev/video0", 320, 240, 3);
-            return (_camerasource != IntPtr.Zero);
+            cameraSource = CameraCaptureV4LInterop.OpenCameraStream("/dev/video0", 320, 240, 3);
+            return (cameraSource != IntPtr.Zero);
         }
         /// <summary>
         /// Disconnect the automation interface/controller device.
         /// </summary>
         public void Disconnect()
         {
-            if (_camerasource != IntPtr.Zero)
+            if (cameraSource != IntPtr.Zero)
             {
-                CameraCaptureV4LInterop.CloseCameraStream(_camerasource);
-                _camerasource = IntPtr.Zero;
+                CameraCaptureV4LInterop.CloseCameraStream(cameraSource);
+                cameraSource = IntPtr.Zero;
             }
         }
         /// <summary>
@@ -190,7 +190,7 @@ namespace MIG.Interfaces.Media
         /// </value>
         public bool IsConnected
         {
-            get { return (_camerasource != IntPtr.Zero); }
+            get { return (cameraSource != IntPtr.Zero); }
         }
         /// <summary>
         /// Returns true if the device has been found in the system
@@ -215,31 +215,31 @@ namespace MIG.Interfaces.Media
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            request.response = ""; //default success value
+            request.Response = ""; //default success value
             //
-            if (request.command == Command.CAMERA_GETPICTURE)
+            if (request.Command == Command.CAMERA_GETPICTURE)
             {
                 // get picture from camera <nodeid>
                 // there is actually only single camera support though
 
                 // TODO: check if file exists before opening it ("/dev/video0")
-                if (_camerasource != IntPtr.Zero)
+                if (cameraSource != IntPtr.Zero)
                 {
 
-                    PictureBuffer pb = CameraCaptureV4LInterop.GetFrame(_camerasource);
-                    var data = new byte[pb.Size];
-                    Marshal.Copy(pb.Data, data, 0, pb.Size);
+                    var pictureBuffer = CameraCaptureV4LInterop.GetFrame(cameraSource);
+                    var data = new byte[pictureBuffer.Size];
+                    Marshal.Copy(pictureBuffer.Data, data, 0, pictureBuffer.Size);
                     //System.IO.File.WriteAllBytes("html/test.jpg", data);
                     return data;
 
                 }
             }
-            else if (request.command == Command.CAMERA_GETLUMINANCE)
+            else if (request.Command == Command.CAMERA_GETLUMINANCE)
             {
                 // TODO: ....
             }
             //
-            return request.response;
+            return request.Response;
         }
 
         #endregion

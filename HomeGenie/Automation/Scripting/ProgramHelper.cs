@@ -37,23 +37,23 @@ namespace HomeGenie.Automation.Scripting
 
     public class ProgramHelper
     {
-        private HomeGenieService _homegenie;
-        private Module _programmodule;
-        private int _myprogramid = -1;
-        private string _myprogramdomain = Domains.HomeAutomation_HomeGenie_Automation;
+        private HomeGenieService homegenie;
+        private Module programModule;
+        private int myProgramId = -1;
+        private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
 
         private string parameter = "";
         private string value = "";
 
         private bool initialized = false; // if setup has been done
 
-        public ProgramHelper(HomeGenieService hg, int programid)
+        public ProgramHelper(HomeGenieService hg, int programId)
         {
-            _homegenie = hg;
-            _myprogramid = programid;
+            homegenie = hg;
+            myProgramId = programId;
             //
-            VirtualModule oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == _myprogramid.ToString());
-            if (oldmodule == null)
+            var oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == myProgramId.ToString());
+            if (oldModule == null)
             {
                 AddControlWidget(""); // no control widget --> not visible
             }
@@ -64,28 +64,28 @@ namespace HomeGenie.Automation.Scripting
         /// <summary>
         /// Run an Automation Program
         /// </summary>
-        /// <param name='programid'>
+        /// <param name='programId'>
         /// Name or ID of program to run
         /// </param>
-        public void Run(string programid)
+        public void Run(string programId)
         {
-            Run(programid, "");
+            Run(programId, "");
         }
 
-        public void Run(string programid, string optionstring)
+        public void Run(string programId, string options)
         {
             //TODO: improve locking for single instance run only
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programid || p.Name == programid);
-            pb.IsRunning = true;
-            if (pb.Type.ToLower() == "csharp")
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+            program.IsRunning = true;
+            if (program.Type.ToLower() == "csharp")
             {
-                pb.RunScript(_homegenie, optionstring);
+                program.RunScript(homegenie, options);
             }
             else
             {
-                _homegenie.ProgramEngine.ExecuteWizardScript(pb);
+                homegenie.ProgramEngine.ExecuteWizardScript(program);
             }
-            pb.IsRunning = false;
+            program.IsRunning = false;
         }
 
         /// <summary>
@@ -94,12 +94,12 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>
         /// The Thread for this background task
         /// </returns>
-        /// <param name='fnblock'>
+        /// <param name='functionBlock'>
         /// Function name or inline delegate
         /// </param>
-        public Thread RunAsyncTask(Utility.AsyncFunction fnblock)
+        public Thread RunAsyncTask(Utility.AsyncFunction functionBlock)
         {
-            return Utility.RunAsyncTask(fnblock);
+            return Utility.RunAsyncTask(functionBlock);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address == _myprogramid);
-                return pb.IsRunning;
+                var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+                return program.IsRunning;
             }
         }
 
@@ -127,8 +127,8 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address == _myprogramid);
-                return pb.IsEnabled;
+                var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+                return program.IsEnabled;
             }
         }
 
@@ -136,7 +136,7 @@ namespace HomeGenie.Automation.Scripting
         {
             while (this.IsEnabled)
             {
-                System.Threading.Thread.Sleep(5000);
+                Thread.Sleep(5000);
             }
         }
 
@@ -149,17 +149,17 @@ namespace HomeGenie.Automation.Scripting
         /// <param name='field'>
         /// Name of this input field
         /// </param>
-        /// <param name='defaultvalue'>
+        /// <param name='defaultValue'>
         /// Default value for this input field
         /// </param>
         /// <param name='description'>
         /// Description for this input field
         /// </param>
-        public ProgramHelper AddInputField(string field, string defaultvalue, string description)
+        public ProgramHelper AddInputField(string field, string defaultValue, string description)
         {
-            var par = this.Parameter("ConfigureOptions." + field);
-            if (par.Value == "") par.Value = defaultvalue;
-            par.Description = description;
+            var parameter = this.Parameter("ConfigureOptions." + field);
+            if (parameter.Value == "") parameter.Value = defaultValue;
+            parameter.Description = description;
             return this;
         }
 
@@ -187,41 +187,41 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                _relocateprogrammodule();
-                return _programmodule;
+                RelocateProgramModule();
+                return programModule;
             }
         }
 
-        public ProgramHelper AddFeature(string fordomains, string formoduletypes, string propname, string description, string type) // default type = checkbox
+        public ProgramHelper AddFeature(string forDomains, string forModuleTypes, string propertyName, string description, string type) // default type = checkbox
         {
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == _myprogramid.ToString());
-            ProgramFeature pf = null;
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            ProgramFeature feature = null;
             //
-            try { pf = pb.Features.Find(f => f.Property == propname); }
+            try { feature = program.Features.Find(f => f.Property == propertyName); }
             catch { }
             //
-            if (pf == null)
+            if (feature == null)
             {
-                pf = new ProgramFeature();
-                pb.Features.Add(pf);
+                feature = new ProgramFeature();
+                program.Features.Add(feature);
             }
-            pf.FieldType = type;
-            pf.Property = propname;
-            pf.Description = description;
-            pf.ForDomains = fordomains;
-            pf.ForTypes = formoduletypes;
+            feature.FieldType = type;
+            feature.Property = propertyName;
+            feature.Description = description;
+            feature.ForDomains = forDomains;
+            feature.ForTypes = forModuleTypes;
             return this;
         }
 
-        public ProgramFeature Feature(string propname)
+        public ProgramFeature Feature(string propertyName)
         {
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == _myprogramid.ToString());
-            ProgramFeature pf = null;
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            ProgramFeature feature = null;
             //
-            try { pf = pb.Features.Find(f => f.Property == propname); }
+            try { feature = program.Features.Find(f => f.Property == propertyName); }
             catch { }
             //
-            return pf;
+            return feature;
         }
 
         /// <summary>
@@ -230,26 +230,26 @@ namespace HomeGenie.Automation.Scripting
         /// <returns>
         /// ProgramHelper
         /// </returns>
-        /// <param name='fordomains'>
+        /// <param name='forDomains'>
         /// A string with comma separated list of the module's domains that will show this checkbox
         /// </param>
-        /// <param name='formoduletypes'>
+        /// <param name='forModuleTypes'>
         /// A string with comma separated list of the module's types that will show this checkbox
         /// </param>
-        /// <param name='propname'>
+        /// <param name='propertyName'>
         /// Name for this checkbox option
         /// </param>
         /// <param name='description'>
         /// Description for this checkbox option
         /// </param>
-        public ProgramHelper AddFeature(string fordomains, string formoduletypes, string propname, string description)
+        public ProgramHelper AddFeature(string forDomains, string forModuleTypes, string propertyName, string description)
         {
-            return AddFeature(fordomains, formoduletypes, propname, description, "checkbox");
+            return AddFeature(forDomains, forModuleTypes, propertyName, description, "checkbox");
         }
 
-        public ProgramHelper AddFeature(string formoduletypes, string propname, string description) // default type = checkbox
+        public ProgramHelper AddFeature(string forModuleTypes, string propertyName, string description) // default type = checkbox
         {
-            return AddFeature("", formoduletypes, propname, description, "checkbox");
+            return AddFeature("", forModuleTypes, propertyName, description, "checkbox");
         }
 
 
@@ -262,78 +262,78 @@ namespace HomeGenie.Automation.Scripting
         /// <param name='fordomains'>
         /// A string with comma separated list of the module's domains that will show this input field
         /// </param>
-        /// <param name='formoduletypes'>
+        /// <param name='forModuleTypes'>
         /// A string with comma separated list of the module's types that will show this input field
         /// </param>
-        /// <param name='propname'>
+        /// <param name='propertyName'>
         /// Name for this input field
         /// </param>
         /// <param name='description'>
         /// Description for this input field
         /// </param>
-        public ProgramHelper AddFeatureTextInput(string fordomain, string formoduletypes, string propname, string description)
+        public ProgramHelper AddFeatureTextInput(string forDomain, string forModuleTypes, string propertyName, string description)
         {
-            return AddFeature(fordomain, formoduletypes, propname, description, "text");
+            return AddFeature(forDomain, forModuleTypes, propertyName, description, "text");
         }
 
-        public ProgramHelper AddFeatureTextInput(string formoduletypes, string propname, string description)
+        public ProgramHelper AddFeatureTextInput(string forModuleTypes, string propertyName, string description)
         {
-            return AddFeature("", formoduletypes, propname, description, "text");
+            return AddFeature("", forModuleTypes, propertyName, description, "text");
         }
 
         public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
         {
-            VirtualModule oldmodule = null;
-            try { oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == address); }
+            VirtualModule oldModule = null;
+            try { oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
             catch { }
             //
-            if (oldmodule == null)
+            if (oldModule == null)
             {
-                VirtualModule m = new VirtualModule() { ParentId = _myprogramid.ToString(), Domain = domain, Address = address, DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                m.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
-                _homegenie.VirtualModules.Add(m);
+                var module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = address, DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
+                module.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                homegenie.VirtualModules.Add(module);
             }
             else
             {
-                oldmodule.Domain = domain;
-                oldmodule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
-                Utility.ModuleParameterSet(oldmodule, Properties.WIDGET_DISPLAYMODULE, widget);
+                oldModule.Domain = domain;
+                oldModule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
+                Utility.ModuleParameterSet(oldModule, Properties.WIDGET_DISPLAYMODULE, widget);
             }
             //
-            _homegenie._modules_refresh_virtualmods();
-            _homegenie._modules_sort();
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
             return this;
         }
 
         public ProgramHelper RemoveVirtualModule(string domain, string address)
         {
-            VirtualModule oldmodule = null;
-            try { oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == address); }
+            VirtualModule oldModule = null;
+            try { oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
             catch { }
-            if (oldmodule != null)
+            if (oldModule != null)
             {
-                _homegenie.VirtualModules.Remove(oldmodule);
+                homegenie.VirtualModules.Remove(oldModule);
             }
             //
-            _homegenie._modules_refresh_virtualmods();
-            _homegenie._modules_sort();
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
             return this;
         }
 
-        public ProgramHelper AddVirtualModules(string domain, string type, string widget, int startaddress, int endaddress)
+        public ProgramHelper AddVirtualModules(string domain, string type, string widget, int startAddress, int endAddress)
         {
-            for (int x = startaddress; x <= endaddress; x++)
+            for (int x = startAddress; x <= endAddress; x++)
             {
 
                 VirtualModule oldmodule = null;
-                try { oldmodule = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Address == x.ToString()); }
+                try { oldmodule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString()); }
                 catch { }
                 //
                 if (oldmodule == null)
                 {
-                    VirtualModule m = new VirtualModule() { ParentId = _myprogramid.ToString(), Domain = domain, Address = x.ToString(), DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                    m.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
-                    _homegenie.VirtualModules.Add(m);
+                    var module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = x.ToString(), DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
+                    module.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                    homegenie.VirtualModules.Add(module);
                 }
                 else
                 {
@@ -343,86 +343,86 @@ namespace HomeGenie.Automation.Scripting
                 }
 
             }
-            _homegenie._modules_refresh_virtualmods();
-            _homegenie._modules_sort();
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
             return this;
         }
 
         public ProgramHelper AddControlWidget(string widget)
         {
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address == _myprogramid);
-            VirtualModule m = _homegenie.VirtualModules.Find(rm => rm.ParentId == _myprogramid.ToString() && rm.Domain == _myprogramdomain && rm.Address == _myprogramid.ToString());
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+            var module = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
             //
-            if (m == null)
+            if (module == null)
             {
-                m = new VirtualModule() { ParentId = _myprogramid.ToString(), Visible = (widget != ""), Domain = _myprogramdomain, Address = _myprogramid.ToString(), Name = pb.Name, DeviceType = Module.DeviceTypes.Program };
-                _homegenie.VirtualModules.Add(m);
+                module = new VirtualModule() { ParentId = myProgramId.ToString(), Visible = (widget != ""), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = program.Name, DeviceType = Module.DeviceTypes.Program };
+                homegenie.VirtualModules.Add(module);
             }
             //
-            m.Name = pb.Name;
-            m.Domain = _myprogramdomain;
-            m.Visible = (widget != "");
-            Utility.ModuleParameterSet(m, Properties.WIDGET_DISPLAYMODULE, widget);
+            module.Name = program.Name;
+            module.Domain = myProgramDomain;
+            module.Visible = (widget != "");
+            Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
             //
-            _relocateprogrammodule();
+            RelocateProgramModule();
             //
             return this;
         }
 
-        private void _relocateprogrammodule()
+        private void RelocateProgramModule()
         {
             // force automation modules regeneration
-            _homegenie._modules_refresh_programs();
+            homegenie.modules_RefreshPrograms();
             //
             try
             {
-                _programmodule = _homegenie.Modules.Find(rm => rm.Domain == _myprogramdomain && rm.Address == _myprogramid.ToString());
+                programModule = homegenie.Modules.Find(rm => rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(_myprogramdomain, _myprogramid.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
         }
 
-        public void Setup(Action fn)
+        public void Setup(Action functionBlock)
         {
             try
             {
                 if (!this.initialized)
                 {
                     //
-                    if (_programmodule == null) _relocateprogrammodule();
+                    if (programModule == null) RelocateProgramModule();
                     //
                     // mark config options to determine unused ones
-                    if (_programmodule != null)
+                    if (programModule != null)
                     {
-                        foreach (ModuleParameter p in _programmodule.Properties)
+                        foreach (var parameter in programModule.Properties)
                         {
-                            if (p.Name.StartsWith("ConfigureOptions."))
+                            if (parameter.Name.StartsWith("ConfigureOptions."))
                             {
-                                p.Description = null;
+                                parameter.Description = null;
                             }
                         }
                     }
                     //
-                    fn();
+                    functionBlock();
                     //
                     // remove deprecated config options
-                    if (_programmodule != null)
+                    if (programModule != null)
                     {
-                        List<ModuleParameter> plist = _programmodule.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
-                        foreach (ModuleParameter p in plist)
+                        var parameterList = programModule.Properties.FindAll(mp => mp.Name.StartsWith("ConfigureOptions."));
+                        foreach (var parameter in parameterList)
                         {
-                            if (p.Name.StartsWith("ConfigureOptions.") && p.Description == null)
+                            if (parameter.Name.StartsWith("ConfigureOptions.") && parameter.Description == null)
                             {
-                                _programmodule.Properties.Remove(p);
+                                programModule.Properties.Remove(parameter);
                             }
                         }
                     }
                     this.initialized = true;
                     //
-                    _homegenie._modules_refresh_programs();
-                    _homegenie._modules_refresh_virtualmods();
+                    homegenie.modules_RefreshPrograms();
+                    homegenie.modules_RefreshVirtualModules();
                 }
             }
             catch (Exception e)
@@ -432,56 +432,56 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        public ProgramHelper WithName(string programname)
+        public ProgramHelper WithName(string programName)
         {
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Name.ToLower() == programname.ToLower());
-            ProgramHelper ph = null;
-            if (pb != null)
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Name.ToLower() == programName.ToLower());
+            ProgramHelper programHelper = null;
+            if (program != null)
             {
-                ph = new ProgramHelper(_homegenie, pb.Address);
+                programHelper = new ProgramHelper(homegenie, program.Address);
             }
-            return ph;
+            return programHelper;
         }
 
-        public ModuleParameter Parameter(string parameter)
+        public ModuleParameter Parameter(string parameterName)
         {
             //
-            if (_programmodule == null) _relocateprogrammodule();
+            if (programModule == null) RelocateProgramModule();
             //
-            ModuleParameter value = null;
+            ModuleParameter parameter = null;
             try
             {
-                value = Service.Utility.ModuleParameterGet(_programmodule, parameter);
+                parameter = Service.Utility.ModuleParameterGet(programModule, parameterName);
             }
             catch { }
             // create parameter if does not exists
-            if (value == null)
+            if (parameter == null)
             {
-                value = Service.Utility.ModuleParameterSet(_programmodule, parameter, "");
+                parameter = Service.Utility.ModuleParameterSet(programModule, parameterName, "");
             }
-            return value;
+            return parameter;
         }
 
 
-        public void Say(string sentence, string locale, bool goasync = false)
+        public void Say(string sentence, string locale, bool goAsync = false)
         {
-            Utility.Say(sentence, locale, goasync);
+            Utility.Say(sentence, locale, goAsync);
         }
 
-        public void Play(string waveurl)
+        public void Play(string waveUrl)
         {
-            WebClient wc = new WebClient();
-            byte[] audiodata = wc.DownloadData(waveurl);
-            wc.Dispose();
+            var webClient = new WebClient();
+            byte[] audiodata = webClient.DownloadData(waveUrl);
+            webClient.Dispose();
 
-            string outdir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-            if (!Directory.Exists(outdir)) Directory.CreateDirectory(outdir);
-            string file = Path.Combine(outdir, "_wave_tmp." + Path.GetExtension(waveurl));
+            string outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
+            if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+            string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
             if (File.Exists(file)) File.Delete(file);
 
-            FileStream fs = File.OpenWrite(file);
-            fs.Write(audiodata, 0, audiodata.Length);
-            fs.Close();
+            var stream = File.OpenWrite(file);
+            stream.Write(audiodata, 0, audiodata.Length);
+            stream.Close();
 
             Utility.Play(file);
 
@@ -490,44 +490,44 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper Notify(string title, string message)
         {
-            _homegenie.LogBroadcastEvent("HomeGenie.Automation", _myprogramid.ToString(), "Automation Program", title, message);
+            homegenie.LogBroadcastEvent("HomeGenie.Automation", myProgramId.ToString(), "Automation Program", title, message);
             return this;
         }
 
         public ProgramHelper RaiseEvent(string parameter, string value, string description)
         {
-            MIG.InterfacePropertyChangedAction mact = new MIG.InterfacePropertyChangedAction();
-            mact.Domain = _programmodule.Domain;
-            mact.Path = parameter;
-            mact.Value = value;
-            mact.SourceId = _programmodule.Address;
-            mact.SourceType = "Automation Program";
+            var actionEvent = new MIG.InterfacePropertyChangedAction();
+            actionEvent.Domain = programModule.Domain;
+            actionEvent.Path = parameter;
+            actionEvent.Value = value;
+            actionEvent.SourceId = programModule.Address;
+            actionEvent.SourceType = "Automation Program";
             try
             {
-                _homegenie.SignalModulePropertyChange(this, _programmodule, mact);
+                homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(_programmodule.Domain, _programmodule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(programModule.Domain, programModule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             return this;
         }
 
         public ProgramHelper RaiseEvent(ModuleHelper module, string parameter, string value, string description)
         {
-            MIG.InterfacePropertyChangedAction mact = new MIG.InterfacePropertyChangedAction();
-            mact.Domain = module.Instance.Domain;
-            mact.Path = parameter;
-            mact.Value = value;
-            mact.SourceId = module.Instance.Address;
-            mact.SourceType = "Virtual Module";
+            var actionEvent = new MIG.InterfacePropertyChangedAction();
+            actionEvent.Domain = module.Instance.Domain;
+            actionEvent.Path = parameter;
+            actionEvent.Value = value;
+            actionEvent.SourceId = module.Instance.Address;
+            actionEvent.SourceType = "Virtual Module";
             try
             {
-                _homegenie.SignalModulePropertyChange(this, module.Instance, mact);
+                homegenie.SignalModulePropertyChange(this, module.Instance, actionEvent);
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(_programmodule.Domain, _programmodule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(programModule.Domain, programModule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             return this;
         }
@@ -535,65 +535,21 @@ namespace HomeGenie.Automation.Scripting
         // TODO: find a better place for this
         public double EnergyUseCounter
         {
-            get { return _homegenie.Statistics != null ? _homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0; }
+            get { return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0; }
         }
-
-        /*
-
-                public ProgramHelper Set(string value)
-                {
-                    this.value = value;
-                    //if (_programmodule != null)
-                    {
-                        ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
-                        if (parameter == null)
-                        {
-                            _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value });
-                        }
-                        else
-                        {
-                            parameter.Value = value;
-                        }
-                    }
-                    return this;
-                }
-
-                public ProgramHelper Set(string value, string description)
-                {
-                    this.value = value;
-                    //if (_programmodule != null)
-                    {
-                        ModuleParameter parameter = Utility.ModuleParameterGet(_programmodule, this.parameter);
-                        if (parameter == null)
-                        {
-                            _programmodule.Properties.Add(new ModuleParameter() { Name = this.parameter, Value = value, Description = description });
-                        }
-                        else
-                        {
-                            if (initialized || parameter.Value == "")
-                            {
-                                parameter.Value = value;
-                            }
-                            parameter.Description = description;
-                        }
-                    }
-                    return this;
-                }
-        */
 
         // that isn't of any use here.. .anyway... =)
         public ProgramHelper Reset()
         {
             this.parameter = "";
             this.value = "";
-            //            this.initialized = false;
             //
-            if (_programmodule == null) _relocateprogrammodule();
+            if (programModule == null) RelocateProgramModule();
             //
             // remove all features 
             //
-            ProgramBlock pb = _homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == _myprogramid.ToString());
-            pb.Features.Clear();
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Features.Clear();
             //
             initialized = false;
             //

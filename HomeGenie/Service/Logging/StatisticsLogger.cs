@@ -48,87 +48,87 @@ namespace HomeGenie.Service.Logging
         public static List<string> StatisticsFields = new List<string>() { "Conditions.", "Sensor.", "Meter.", "PowerMonitor.", "Statistics." };
         public static bool IsValidField(string field)
         {
-            bool valid = false;
+            bool isValid = false;
             foreach (string f in StatisticsFields)
             {
                 if (field.StartsWith(f))
                 {
-                    valid = true;
+                    isValid = true;
                     break;
                 }
             }
-            return valid;
+            return isValid;
         }
 
-        private Timer _loginterval;
-        private HomeGenieService _homegenie;
-        private SQLiteConnection _dbconnection;
+        private Timer logInterval;
+        private HomeGenieService homegenie;
+        private SQLiteConnection dbConnection;
 
-        private object _dblock = new object();
-        private long _dbsizelimit = 5242880 * 2;
+        private object dbLock = new object();
+        private long dbSizeLimit = 5242880 * 2;
 
         private static int STATISTICS_TIME_RESOLUTION_MINUTES = 5;
 
         public StatisticsLogger(HomeGenieService hg)
         {
-            _homegenie = hg;
-            _loginterval = new Timer(TimeSpan.FromMinutes(STATISTICS_TIME_RESOLUTION_MINUTES).TotalMilliseconds);
-            _loginterval.Elapsed += _loginterval_Elapsed;
+            homegenie = hg;
+            logInterval = new Timer(TimeSpan.FromMinutes(STATISTICS_TIME_RESOLUTION_MINUTES).TotalMilliseconds);
+            logInterval.Elapsed += logInterval_Elapsed;
         }
 
         public void Start()
         {
-            _loginterval.Start();
-            _openStatisticsDatabase();
+            logInterval.Start();
+            OpenStatisticsDatabase();
         }
 
         public void Stop()
         {
-            _loginterval.Stop();
-            _closeStatisticsDatabase();
+            logInterval.Stop();
+            CloseStatisticsDatabase();
         }
 
         public void DatabaseReset()
         {
-            _resetStatisticsDatabase();
+            ResetStatisticsDatabase();
         }
 
         public List<string> GetParametersList(string domain, string address)
         {
             string filter = "";
             if (domain != "" && address != "") filter = " where Domain ='" + domain + "' and Address = '" + address + "'";
-            List<string> plist = new List<string>();
-            lock (_dblock)
+            var parameterList = new List<string>();
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
-                string q = "select distinct Parameter from ValuesHist" + filter;
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                var dbCommand = dbConnection.CreateCommand();
+                string query = "select distinct Parameter from ValuesHist" + filter;
+                dbCommand.CommandText = query;
+                var reader = dbCommand.ExecuteReader();
                 while (reader.Read())
                 {
-                    plist.Add(reader.GetString(0));
+                    parameterList.Add(reader.GetString(0));
                 }
                 reader.Close();
             }
-            return plist;
+            return parameterList;
         }
 
         public StatisticsEntry GetStartDate()
         {
-            DateTime startdate = DateTime.UtcNow;
-            DateTime enddate = DateTime.UtcNow;
-            lock (_dblock)
+            var start = DateTime.UtcNow;
+            var end = DateTime.UtcNow;
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
-                string q = "select min(TimeStart),max(TimeEnd) from ValuesHist";
-                dbcmd.CommandText = q;
+                var dbCommand = dbConnection.CreateCommand();
+                string query = "select min(TimeStart),max(TimeEnd) from ValuesHist";
+                dbCommand.CommandText = query;
                 try
                 {
-                    SQLiteDataReader reader = dbcmd.ExecuteReader();
+                    var reader = dbCommand.ExecuteReader();
                     if (reader.Read())
                     {
-                        startdate = DateTime.Parse(reader.GetString(0));
-                        enddate = DateTime.Parse(reader.GetString(1));
+                        start = DateTime.Parse(reader.GetString(0));
+                        end = DateTime.Parse(reader.GetString(1));
                     }
                     reader.Close();
                 }
@@ -138,19 +138,19 @@ namespace HomeGenie.Service.Logging
                 }
 
             }
-            return new StatisticsEntry() { TimeStart = startdate, TimeEnd = enddate };
+            return new StatisticsEntry() { TimeStart = start, TimeEnd = end };
         }
 
-        public double GetTotalCounter(string param, double timescaleseconds)
+        public double GetTotalCounter(string parameterName, double timeScaleSeconds)
         {
             double value = 0;
-            lock (_dblock)
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
+                var dbCommand = dbConnection.CreateCommand();
                 // TODO: protect against sqlinjection ?
-                string q = "select Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where Parameter = '" + param + "';";
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                string query = "select Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timeScaleSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where Parameter = '" + parameterName + "';";
+                dbCommand.CommandText = query;
+                var reader = dbCommand.ExecuteReader();
                 //
                 if (reader.Read())
                 {
@@ -166,37 +166,37 @@ namespace HomeGenie.Service.Logging
             return value;
         }
 
-        public List<StatisticsEntry> GetHourlyCounter(string domain, string address, string param, double timescaleseconds)
+        public List<StatisticsEntry> GetHourlyCounter(string domain, string address, string parameterName, double timescaleseconds)
         {
-            List<StatisticsEntry> values = new List<StatisticsEntry>();
-            lock (_dblock)
+            var values = new List<StatisticsEntry>();
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
+                var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
-                string q = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + "Parameter = '" + param + "' group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                string query = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + "Parameter = '" + parameterName + "' group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
+                dbCommand.CommandText = query;
+                var reader = dbCommand.ExecuteReader();
                 //
                 while (reader.Read())
                 {
-                    StatisticsEntry se = new StatisticsEntry();
-                    se.TimeStart = DateTime.Parse(reader.GetString(0));
-                    se.TimeEnd = DateTime.Parse(reader.GetString(1));
-                    se.Domain = reader.GetString(2);
-                    se.Address = reader.GetString(3);
-                    se.Value = 0;
+                    var entry = new StatisticsEntry();
+                    entry.TimeStart = DateTime.Parse(reader.GetString(0));
+                    entry.TimeEnd = DateTime.Parse(reader.GetString(1));
+                    entry.Domain = reader.GetString(2);
+                    entry.Address = reader.GetString(3);
+                    entry.Value = 0;
                     try
                     {
-                        se.Value = (double)reader.GetFloat(4);
+                        entry.Value = (double)reader.GetFloat(4);
                     }
                     catch
                     {
-                        var val = reader.GetValue(4);
-                        if (val != DBNull.Value && val != null) double.TryParse(reader.GetString(4), out se.Value);
+                        var value = reader.GetValue(4);
+                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
                     }
                     //
-                    values.Add(se);
+                    values.Add(entry);
                 }
                 //
                 reader.Close();
@@ -204,39 +204,39 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        public List<StatisticsEntry> GetHourlyStats24(string domain, string address, string param, string aggregator)
+        public List<StatisticsEntry> GetHourlyStats24(string domain, string address, string parameterName, string aggregator)
         {
-            List<StatisticsEntry> values = new List<StatisticsEntry>();
-            lock (_dblock)
+            var values = new List<StatisticsEntry>();
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
+                var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
-                DateTime startdate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00.000000");
+                var start = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00.000000");
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
                 // aggregated averages by hour
-                string q = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + param + "' and TimeStart >= '" + startdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' and TimeStart >= '" + start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                dbCommand.CommandText = query;
+                SQLiteDataReader reader = dbCommand.ExecuteReader();
                 //
                 while (reader.Read())
                 {
-                    StatisticsEntry se = new StatisticsEntry();
-                    se.TimeStart = DateTime.Parse(reader.GetString(0));
-                    se.TimeEnd = DateTime.Parse(reader.GetString(1));
-                    se.Domain = reader.GetString(2);
-                    se.Address = reader.GetString(3);
-                    se.Value = 0;
+                    var entry = new StatisticsEntry();
+                    entry.TimeStart = DateTime.Parse(reader.GetString(0));
+                    entry.TimeEnd = DateTime.Parse(reader.GetString(1));
+                    entry.Domain = reader.GetString(2);
+                    entry.Address = reader.GetString(3);
+                    entry.Value = 0;
                     try
                     {
-                        se.Value = (double)reader.GetFloat(4);
+                        entry.Value = (double)reader.GetFloat(4);
                     }
                     catch
                     {
-                        var val = reader.GetValue(4);
-                        if (val != DBNull.Value && val != null) double.TryParse(reader.GetString(4), out se.Value);
+                        var value = reader.GetValue(4);
+                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
                     }
                     //
-                    values.Add(se);
+                    values.Add(entry);
                 }
                 //
                 reader.Close();
@@ -245,44 +245,44 @@ namespace HomeGenie.Service.Logging
         }
 
 
-        public List<StatisticsEntry> GetTodayDetail(string domain, string address, string param, string aggregator = "Avg")
+        public List<StatisticsEntry> GetTodayDetail(string domain, string address, string parameterName, string aggregator = "Avg")
         {
-            List<StatisticsEntry> values = new List<StatisticsEntry>();
-            lock (_dblock)
+            var values = new List<StatisticsEntry>();
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
+                var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
-                DateTime startdate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00.000000");
+                var start = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00.000000");
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
                 // aggregated averages by hour
-                string q = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + param + "' and TimeStart >= '" + startdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' group by TimeStart order by TimeStart asc;";
+                string q = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' and TimeStart >= '" + start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' group by TimeStart order by TimeStart asc;";
                 // detailed module stats
                 if (domain != "" && address != "")
                 {
-                    q = "select TimeStart,TimeEnd,Domain,Address,AverageValue as Value from ValuesHist where " + filter + "Parameter = '" + param + "' and TimeStart >= '" + startdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' order by TimeStart asc;";
+                    q = "select TimeStart,TimeEnd,Domain,Address,AverageValue as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' and TimeStart >= '" + start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' order by TimeStart asc;";
                 }
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                dbCommand.CommandText = q;
+                var reader = dbCommand.ExecuteReader();
                 //
                 while (reader.Read())
                 {
-                    StatisticsEntry se = new StatisticsEntry();
-                    se.TimeStart = DateTime.Parse(reader.GetString(0));
-                    se.TimeEnd = DateTime.Parse(reader.GetString(1));
-                    se.Domain = reader.GetString(2);
-                    se.Address = reader.GetString(3);
-                    se.Value = 0;
+                    var entry = new StatisticsEntry();
+                    entry.TimeStart = DateTime.Parse(reader.GetString(0));
+                    entry.TimeEnd = DateTime.Parse(reader.GetString(1));
+                    entry.Domain = reader.GetString(2);
+                    entry.Address = reader.GetString(3);
+                    entry.Value = 0;
                     try
                     {
-                        se.Value = (double)reader.GetFloat(4);
+                        entry.Value = (double)reader.GetFloat(4);
                     }
                     catch
                     {
-                        var val = reader.GetValue(4);
-                        if (val != DBNull.Value && val != null) double.TryParse(reader.GetString(4), out se.Value);
+                        var value = reader.GetValue(4);
+                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
                     }
                     //
-                    values.Add(se);
+                    values.Add(entry);
                 }
                 //
                 reader.Close();
@@ -290,37 +290,37 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        public List<StatisticsEntry> GetHourlyStats(string domain, string address, string param, string aggregator)
+        public List<StatisticsEntry> GetHourlyStats(string domain, string address, string parameterName, string aggregator)
         {
-            List<StatisticsEntry> values = new List<StatisticsEntry>();
-            lock (_dblock)
+            var values = new List<StatisticsEntry>();
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
+                var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
-                string q = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + param + "' group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
-                dbcmd.CommandText = q;
-                SQLiteDataReader reader = dbcmd.ExecuteReader();
+                string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                dbCommand.CommandText = query;
+                var reader = dbCommand.ExecuteReader();
                 //
                 while (reader.Read())
                 {
-                    StatisticsEntry se = new StatisticsEntry();
-                    se.TimeStart = DateTime.Parse(reader.GetString(0));
-                    se.TimeEnd = DateTime.Parse(reader.GetString(1));
-                    se.Domain = reader.GetString(2);
-                    se.Address = reader.GetString(3);
-                    se.Value = 0;
+                    var entry = new StatisticsEntry();
+                    entry.TimeStart = DateTime.Parse(reader.GetString(0));
+                    entry.TimeEnd = DateTime.Parse(reader.GetString(1));
+                    entry.Domain = reader.GetString(2);
+                    entry.Address = reader.GetString(3);
+                    entry.Value = 0;
                     try
                     {
-                        se.Value = (double)reader.GetFloat(4);
+                        entry.Value = (double)reader.GetFloat(4);
                     }
                     catch
                     {
-                        var val = reader.GetValue(4);
-                        if (val != DBNull.Value && val != null) double.TryParse(reader.GetString(4), out se.Value);
+                        var value = reader.GetValue(4);
+                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
                     }
                     //
-                    values.Add(se);
+                    values.Add(entry);
                 }
                 //
                 reader.Close();
@@ -328,15 +328,15 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        private bool _openStatisticsDatabase()
+        private bool OpenStatisticsDatabase()
         {
             bool success = false;
-            lock (_dblock)
+            lock (dbLock)
             {
                 try
                 {
-                    _dbconnection = new SQLiteConnection("URI=file:" + _getStatisticsDatabaseName());
-                    _dbconnection.Open();
+                    dbConnection = new SQLiteConnection("URI=file:" + GetStatisticsDatabaseName());
+                    dbConnection.Open();
                     success = true;
                 }
                 catch (Exception)
@@ -347,74 +347,72 @@ namespace HomeGenie.Service.Logging
             return success;
         }
 
-        private void _resetStatisticsDatabase()
+        private void ResetStatisticsDatabase()
         {
-            lock (_dblock)
+            lock (dbLock)
             {
-                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
-                dbcmd.CommandText = "DELETE FROM ValuesHist";
-                dbcmd.ExecuteNonQuery();
-                dbcmd.CommandText = "VACUUM";
-                dbcmd.ExecuteNonQuery();
+                var dbCommand = dbConnection.CreateCommand();
+                dbCommand.CommandText = "DELETE FROM ValuesHist";
+                dbCommand.ExecuteNonQuery();
+                dbCommand.CommandText = "VACUUM";
+                dbCommand.ExecuteNonQuery();
             }
         }
 
-        private void _closeStatisticsDatabase()
+        private void CloseStatisticsDatabase()
         {
-            lock (_dblock)
+            lock (dbLock)
             {
-                _dbconnection.Close();
+                dbConnection.Close();
             }
         }
 
 
-        private string _getStatisticsDatabaseName()
+        private string GetStatisticsDatabaseName()
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "homegenie_stats.db");
         }
 
-        private string _dateTimeSQLite(DateTime datetime)
+        private string DateTimeToSQLite(DateTime datetime)
         {
             return datetime.ToString("yyyy-MM-dd HH:mm:ss.ffffff");
         }
 
 
-        private void _loginterval_Elapsed(object sender, ElapsedEventArgs e)
+        private void logInterval_Elapsed(object sender, ElapsedEventArgs eventArgs)
         {
-            DateTime logend = DateTime.UtcNow;
-            TsList<Module> modules = (TsList<Module>)_homegenie.Modules; //.Clone();
-            foreach (Module m in modules)
+            var end = DateTime.UtcNow;
+            var modules = (TsList<Module>)homegenie.Modules; //.Clone();
+            foreach (var module in modules)
             {
-                foreach (ModuleParameter mp in m.Properties)
+                foreach (var parameter in module.Properties)
                 {
                     // enntry counter
-                    if (mp.Statistics.Values.Count > 0)
+                    if (parameter.Statistics.Values.Count > 0)
                     {
 
-                        List<ValueStatistics.StatValue> values = mp.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= logend.Ticks && sv.Timestamp.Ticks > mp.Statistics.LastProcessedTimestap.Ticks));
+                        var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestap.Ticks));
                         //
                         if (values.Count > 0)
                         {
-                            TimeSpan trange = new TimeSpan(logend.Ticks - mp.Statistics.LastProcessedTimestap.Ticks);
+                            var range = new TimeSpan(end.Ticks - parameter.Statistics.LastProcessedTimestap.Ticks);
                             double average = (values.Sum(d => d.Value) / values.Count);
                             //
                             //TODO: check db file age/size for archiving old data
                             //
-                            string dbname = _getStatisticsDatabaseName();
-                            FileInfo fi = new FileInfo(dbname);
-                            if (fi.Length > _dbsizelimit) // 5Mb limit for stats - temporary limitations to get rid of in the future
+                            string dbName = GetStatisticsDatabaseName();
+                            var fileInfo = new FileInfo(dbName);
+                            if (fileInfo.Length > dbSizeLimit) // 5Mb limit for stats - temporary limitations to get rid of in the future
                             {
-                                _resetStatisticsDatabase();
+                                ResetStatisticsDatabase();
                             }
                             //
                             try
                             {
-
-                                SQLiteCommand dbcmd = _dbconnection.CreateCommand();
-
+                                var dbCommand = dbConnection.CreateCommand();
                                 // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue"
-                                dbcmd.CommandText = "INSERT INTO ValuesHist VALUES ('" + _dateTimeSQLite(mp.Statistics.LastProcessedTimestap) + "','" + _dateTimeSQLite(logend) + "','" + m.Domain + "','" + m.Address + "','" + mp.Name + "'," + average.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")";
-                                dbcmd.ExecuteNonQuery();
+                                dbCommand.CommandText = "INSERT INTO ValuesHist VALUES ('" + DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap) + "','" + DateTimeToSQLite(end) + "','" + module.Domain + "','" + module.Address + "','" + parameter.Name + "'," + average.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")";
+                                dbCommand.ExecuteNonQuery();
 
                             }
                             catch (Exception ex)
@@ -422,10 +420,8 @@ namespace HomeGenie.Service.Logging
                                 HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.StatisticsLogger", ex.Message, "Exception.StackTrace", ex.StackTrace);
                             }
                             //
-                            mp.Statistics.LastProcessedTimestap = logend;
-                            //Console.WriteLine("Average value: " + average);
-                            //Console.WriteLine("Time range: " + trange.TotalSeconds);
-                            mp.Statistics.Values.Clear();
+                            parameter.Statistics.LastProcessedTimestap = end;
+                            parameter.Statistics.Values.Clear();
 
                         }
 

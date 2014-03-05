@@ -32,57 +32,56 @@ namespace HomeGenie.Automation.Scripting
 {
     public class ModuleHelper : ModulesManager
     {
-        private HomeGenie.Data.Module _module = null;
-
+        private HomeGenie.Data.Module module = null;
 
         public ModuleHelper(HomeGenieService hg, Module module)
             : base(hg)
         {
-            this._module = module;
+            this.module = module;
         }
 
         public override List<HomeGenie.Data.Module> SelectedModules
         {
             get
             {
-                List<Data.Module> ls = new List<Data.Module>();
-                ls.Add(_module);
-                return ls;
+                var selectedModules = new List<Data.Module>();
+                selectedModules.Add(module);
+                return selectedModules;
             }
         }
+
         public bool Is(string name)
         {
-            return (_module.Name.ToLower() == name.ToLower());
+            return (module.Name.ToLower() == name.ToLower());
         }
+
         public bool WasFound
         {
-            get { return _module != null; }
+            get { return module != null; }
         }
 
         public bool IsInDomain(string domain)
         {
-            return _module.Domain.ToLower() == domain.ToLower();
+            return module.Domain.ToLower() == domain.ToLower();
         }
 
         public Module Instance
         {
-            get { return _module; }
+            get { return module; }
         }
 
-
-
-        public bool IsInGroup(string ingroup)
+        public bool IsInGroup(string groupList)
         {
             bool retval = false;
-            List<string> groups = _getArgumentsList(ingroup);
-            foreach (string grp in groups)
+            var groups = GetArgumentsList(groupList);
+            foreach (string group in groups)
             {
-                Group theGroup = _homegenie.Groups.Find(z => z.Name.ToLower() == grp.Trim().ToLower());
+                var theGroup = homegenie.Groups.Find(z => z.Name.ToLower() == group.Trim().ToLower());
                 if (theGroup != null)
                 {
                     for (int m = 0; m < theGroup.Modules.Count; m++)
                     {
-                        if (_module.Domain == theGroup.Modules[m].Domain && _module.Address == theGroup.Modules[m].Address)
+                        if (module.Domain == theGroup.Modules[m].Domain && module.Address == theGroup.Modules[m].Address)
                         {
                             retval = true;
                             break;
@@ -92,13 +91,14 @@ namespace HomeGenie.Automation.Scripting
             }
             return retval;
         }
-        public bool IsOfDeviceType(string type)
+
+        public bool IsOfDeviceType(string typeList)
         {
             bool retval = false;
-            List<string> types = ModulesManager._getArgumentsList(type);
+            var types = ModulesManager.GetArgumentsList(typeList);
             foreach (var t in types)
             {
-                if (t.ToLower() == _module.DeviceType.ToString().ToLower())
+                if (t.ToLower() == module.DeviceType.ToString().ToLower())
                 {
                     retval = true;
                     break;
@@ -107,21 +107,15 @@ namespace HomeGenie.Automation.Scripting
             return retval;
         }
 
-
-
-
-
-
-
         public bool HasFeature(string feature)
         {
-            ModuleParameter f = Service.Utility.ModuleParameterGet(_module, feature);
-            return (f != null && f.Value != null && f.Value != "");
+            var parameter = Service.Utility.ModuleParameterGet(module, feature);
+            return (parameter != null && parameter.Value != null && parameter.Value != "");
         }
 
         public bool HasParameter(string parameter)
         {
-            return (Service.Utility.ModuleParameterGet(_module, parameter) != null);
+            return (Service.Utility.ModuleParameterGet(module, parameter) != null);
         }
 
 
@@ -132,13 +126,13 @@ namespace HomeGenie.Automation.Scripting
             {
                 try
                 {
-                    value = Service.Utility.ModuleParameterGet(_module, parameter);
+                    value = Service.Utility.ModuleParameterGet(module, parameter);
                 }
                 catch { }
                 // create parameter if does not exists
                 if (value == null)
                 {
-                    value = Service.Utility.ModuleParameterSet(_module, parameter, "");
+                    value = Service.Utility.ModuleParameterSet(module, parameter, "");
                 }
             }
             return value;

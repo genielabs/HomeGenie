@@ -32,45 +32,45 @@ namespace HomeGenie.Automation.Scripting
     public class SchedulerHelper
     {
 
-        private HomeGenieService _homegenie;
-        private string _schedulename;
+        private HomeGenieService homegenie;
+        private string scheduleName;
 
         public SchedulerHelper(HomeGenieService hg)
         {
-            _homegenie = hg;
+            homegenie = hg;
         }
 
         public SchedulerHelper WithName(string name)
         {
-            _schedulename = name;
+            scheduleName = name;
             return this;
         }
 
-        public SchedulerHelper SetSchedule(string cronexpr)
+        public SchedulerHelper SetSchedule(string cronExpression)
         {
-            _homegenie.ProgramEngine.SchedulerService.AddOrUpdate(_schedulename, cronexpr);
+            homegenie.ProgramEngine.SchedulerService.AddOrUpdate(scheduleName, cronExpression);
             return this;
         }
 
-        public SchedulerHelper SetProgram(string pid)
+        public SchedulerHelper SetProgram(string programId)
         {
-            _homegenie.ProgramEngine.SchedulerService.SetProgram(_schedulename, pid);
+            homegenie.ProgramEngine.SchedulerService.SetProgram(scheduleName, programId);
             return this;
         }
 
         public bool IsScheduling()
         {
-            SchedulerItem item = _homegenie.ProgramEngine.SchedulerService.Get(_schedulename);
-            if (item != null)
+            var eventItem = homegenie.ProgramEngine.SchedulerService.Get(scheduleName);
+            if (eventItem != null)
             {
-                return _homegenie.ProgramEngine.SchedulerService.IsScheduling(item.CronExpression);
+                return homegenie.ProgramEngine.SchedulerService.IsScheduling(eventItem.CronExpression);
             }
             return false;
         }
 
-        public bool IsScheduling(string expr)
+        public bool IsScheduling(string cronExpression)
         {
-            return _homegenie.ProgramEngine.SchedulerService.IsScheduling(expr);
+            return homegenie.ProgramEngine.SchedulerService.IsScheduling(cronExpression);
         }
 
     }

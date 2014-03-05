@@ -49,145 +49,24 @@ namespace HomeGenie.Service
     {
         public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
         {
-            IList<T> retlist = null;
+            IList<T> list = null;
             if (listToClone.GetType() == typeof(TsList<T>))
             {
-                TsList<T> tslist = ((TsList<T>)listToClone);
-                retlist = listToClone.Select(item => (T)item.Clone()).ToList();
+                var tslist = ((TsList<T>)listToClone);
+                list = listToClone.Select(item => (T)item.Clone()).ToList();
             }
             else
             {
-                retlist = listToClone.Select(item => (T)item.Clone()).ToList();
+                list = listToClone.Select(item => (T)item.Clone()).ToList();
             }
-            return retlist;
+            return list;
         }
     }
-
-    //// source: http://msdn.microsoft.com/en-us/library/ee722116(v=vs.110).aspx
-    //public class Latch
-    //{
-    //    // 0 = unset, 1 = set 
-    //    private volatile int m_state = 0;
-    //    private ManualResetEvent m_ev = new ManualResetEvent(false);
-
-    //    public void Set()
-    //    {
-    //        m_state = 1;
-    //        m_ev.Set();
-    //    }
-
-    //    public void Wait()
-    //    {
-    //        Wait(Timeout.Infinite);
-    //    }
-
-    //    public bool Wait(int timeout)
-    //    {
-    //        // Allocated on the stack.
-    //        SpinWait spinner = new SpinWait();
-    //        Stopwatch watch;
-
-    //        while (m_state == 0)
-    //        {
-
-    //            // Lazily allocate and start stopwatch to track timeout.
-    //            watch = Stopwatch.StartNew();
-
-    //            // Spin only until the SpinWait is ready 
-    //            // to initiate its own context switch. 
-    //            if (!spinner.NextSpinWillYield)
-    //            {
-    //                spinner.SpinOnce();
-
-    //            }
-    //            // Rather than let SpinWait do a context switch now, 
-    //            //  we initiate the kernel Wait operation, because 
-    //            // we plan on doing this anyway. 
-    //            else if (timeout != Timeout.Infinite)
-    //            {
-    //                //totalKernelWaits++;
-    //                // Account for elapsed time. 
-    //                int realTimeout = timeout - (int)watch.ElapsedMilliseconds;
-
-    //                // Do the wait. 
-    //                if (realTimeout <= 0 || !m_ev.WaitOne(realTimeout))
-    //                {
-    //                    return false;
-    //                }
-    //            }
-    //        }
-
-    //        // Take the latch.
-    //        m_state = 0;
-
-    //        return true;
-    //    }
-    //}
-
-
-    //[Serializable()]
-    //public class TsList<T> : System.Collections.Generic.List<T>
-    //{
-    //    [NonSerialized]
-    //    private Latch _latch = new Latch();
-    //    //private List<T> _list = new List<T>();
-    //    private object _sync = new object();
-
-    //    public TsList()
-    //    {
-    //        _latch.Set();
-    //    }
-
-    //    [XmlIgnore]
-    //    public Latch ConcurrentLock
-    //    {
-    //        get { return _latch; }
-    //    }
-
-    //    new public void Add(T value)
-    //    {
-
-    //        _latch.Wait();
-    //        base.Add(value);
-    //        _latch.Set();
-    //    }
-    //    new public void RemoveAll(Predicate<T> predicate)
-    //    {
-    //        _latch.Wait();
-    //        base.RemoveAll(predicate);
-    //        _latch.Set();
-    //    }
-    //    new public void Remove(T item)
-    //    {
-    //        _latch.Wait();
-    //        base.Remove(item);
-    //        _latch.Set();
-    //    }
-
-    //    //new public T Find(Predicate<T> predicate)
-    //    //{
-    //    //    T retobj = default(T);
-    //    //    _latch.Wait();
-    //    //    retobj = base.Find(predicate);
-    //    //    _latch.Set();
-    //    //    return retobj;
-    //    //}
-
-    //    new public void Sort(Comparison<T> comparison)
-    //    {
-    //        _latch.Wait();
-    //        base.Sort(comparison);
-    //        _latch.Set();
-    //    }
-
-    //}
-
-
 
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
-        private object _sync = new object();
+        private object syncLock = new object();
 
         public TsList()
         {
@@ -195,34 +74,34 @@ namespace HomeGenie.Service
 
         public object LockObject
         {
-            get { return _sync; }
+            get { return syncLock; }
         }
         new public void Clear()
         {
 
-            lock (_sync)
+            lock (syncLock)
                 base.Clear();
         }
         new public void Add(T value)
         {
 
-            lock (_sync)
+            lock (syncLock)
                 base.Add(value);
         }
         new public void RemoveAll(Predicate<T> predicate)
         {
-            lock (_sync)
+            lock (syncLock)
                 base.RemoveAll(predicate);
         }
         new public void Remove(T item)
         {
-            lock (_sync)
+            lock (syncLock)
                 base.Remove(item);
         }
 
         new public void Sort(Comparison<T> comparison)
         {
-            lock (_sync)
+            lock (syncLock)
                 base.Sort(comparison);
         }
 
@@ -243,15 +122,19 @@ namespace HomeGenie.Service
         [DllImport("winmm.dll", SetLastError = true)]
         static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
 
+        // buffer size for AddFileToZip
+        private const long BUFFER_SIZE = 4096;
+        // delegate used by RunAsyncTask
+        public delegate void AsyncFunction();
 
         public static void Say(string sentence, string locale, bool async = false)
         {
             if (async)
             {
-                Thread t = new Thread(new ThreadStart(delegate()
+                var t = new Thread(() =>
                 {
                     Say(sentence, locale);
-                }));
+                });
                 t.Start();
             }
             else
@@ -263,7 +146,7 @@ namespace HomeGenie.Service
         public static Process StartUpdater(bool restart)
         {
             File.Copy("HomeGenieUpdater.exe", "HomeGenieUpdaterC.exe", true);
-            Process updater = new Process();
+            var updater = new Process();
             if (Environment.OSVersion.Platform == PlatformID.Win32NT || Environment.OSVersion.Platform == PlatformID.Win32Windows)
             {
                 updater.StartInfo.FileName = "HomeGenieUpdaterC.exe";
@@ -288,22 +171,22 @@ namespace HomeGenie.Service
         {
             try
             {
-                WebClient wc = new WebClient();
-                wc.Headers.Add("Referer", "http://translate.google.com");
-                byte[] audiodata = wc.DownloadData("http://translate.google.com/translate_tts?tl=" + locale + "&q=" + sentence);
-                wc.Dispose();
+                var client = new WebClient();
+                client.Headers.Add("Referer", "http://translate.google.com");
+                var audioData = client.DownloadData("http://translate.google.com/translate_tts?tl=" + locale + "&q=" + sentence);
+                client.Dispose();
 
-                string outdir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-                if (!Directory.Exists(outdir)) Directory.CreateDirectory(outdir);
-                string file = Path.Combine(outdir, "_synthesis_tmp.mp3");
+                var outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
+                if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+                var file = Path.Combine(outputDirectory, "_synthesis_tmp.mp3");
 
                 if (File.Exists(file)) File.Delete(file);
-                FileStream fs = File.OpenWrite(file);
-                fs.Write(audiodata, 0, audiodata.Length);
-                fs.Close();
+                var stream = File.OpenWrite(file);
+                stream.Write(audioData, 0, audioData.Length);
+                stream.Close();
 
-                string filewav = file.Replace(".mp3", ".wav");
-                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + filewav + "\"")
+                var wavFile = file.Replace(".mp3", ".wav");
+                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + wavFile + "\"")
                 {
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden,
@@ -311,7 +194,7 @@ namespace HomeGenie.Service
                     UseShellExecute = false
                 }).WaitForExit();
 
-                Play(filewav);
+                Play(wavFile);
             }
             catch (Exception)
             {
@@ -319,55 +202,47 @@ namespace HomeGenie.Service
             }
         }
 
-        public static void Play(string filewav)
+        public static void Play(string wavFile)
         {
 
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            var os = Environment.OSVersion;
+            var platform = os.Platform;
             //
-            switch (pid)
+            switch (platform)
             {
                 case PlatformID.Win32NT:
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                 case PlatformID.WinCE:
-                    PlaySound(filewav, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
+                    PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
                     break;
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
                 default:
-                    System.Media.SoundPlayer p = new System.Media.SoundPlayer();
-                    p.SoundLocation = filewav;
-                    p.Play();
+                    var player = new System.Media.SoundPlayer();
+                    player.SoundLocation = wavFile;
+                    player.Play();
                     break;
             }
 
         }
 
-
-
-
-
-
-
-        private const long BUFFER_SIZE = 4096;
-
         public static void AddFileToZip(string zipFilename, string fileToAdd)
         {
-            using (Package zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
+            using (var zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
             {
                 string destFilename = fileToAdd;
-                Uri uri = PackUriHelper.CreatePartUri(new Uri(destFilename, UriKind.Relative));
+                var uri = PackUriHelper.CreatePartUri(new Uri(destFilename, UriKind.Relative));
                 if (zip.PartExists(uri))
                 {
                     zip.DeletePart(uri);
                 }
-                PackagePart part = zip.CreatePart(uri, "", CompressionOption.Normal);
-                using (FileStream fileStream = new FileStream(fileToAdd, FileMode.Open, FileAccess.Read))
+                var part = zip.CreatePart(uri, "", CompressionOption.Normal);
+                using (var fileStream = new FileStream(fileToAdd, FileMode.Open, FileAccess.Read))
                 {
-                    using (Stream dest = part.GetStream())
+                    using (var outputStream = part.GetStream())
                     {
-                        CopyStream(fileStream, dest);
+                        CopyStream(fileStream, outputStream);
                     }
                 }
             }
@@ -376,9 +251,9 @@ namespace HomeGenie.Service
         private static void CopyStream(System.IO.FileStream inputStream, System.IO.Stream outputStream)
         {
             long bufferSize = inputStream.Length < BUFFER_SIZE ? inputStream.Length : BUFFER_SIZE;
-            byte[] buffer = new byte[bufferSize];
-            int bytesRead = 0;
             long bytesWritten = 0;
+            int bytesRead = 0;
+            byte[] buffer = new byte[bufferSize];
             while ((bytesRead = inputStream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 outputStream.Write(buffer, 0, bytesRead);
@@ -386,177 +261,154 @@ namespace HomeGenie.Service
             }
         }
 
-
-
-
-
-
-        public static dynamic XmlParseToDynamic(string xml)
+        public static dynamic ParseXmlToDynamic(string xml)
         {
-            var xDoc = XDocument.Load(new StringReader(xml));
+            var document = XDocument.Load(new StringReader(xml));
             dynamic root = new ExpandoObject();
-            XmlToDynamic.Parse(root, xDoc.Elements().First());
+            XmlToDynamic.Parse(root, document.Elements().First());
             return root;
         }
 
-
-
-
-
-
-        public delegate void AsyncFunction();
-        public static Thread RunAsyncTask(AsyncFunction fnblock)
+        public static Thread RunAsyncTask(AsyncFunction functionBlock)
         {
-            Thread at = new Thread(new ThreadStart(() =>
+            var asyncTask = new Thread(() =>
             {
                 try
                 {
-                    fnblock();
+                    functionBlock();
                 }
                 catch (Exception ex)
                 {
                     HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
-            }));
-            at.Start();
-            return at;
+            });
+            asyncTask.Start();
+            return asyncTask;
         }
 
-
-
-        public static ModuleParameter ModuleParameterGet(Module module, string prop)
+        public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
-            return module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == prop; });
+            return module.Properties.Find(delegate(ModuleParameter parameter) { return parameter.Name == propertyName; });
         }
 
-        public static ModuleParameter ModuleParameterSet(Module m, string prop, string value)
+        public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
         {
-            if (m == null) return null;
+            if (module == null) return null;
             //
-            ModuleParameter mp = m.Properties.Find(mpar => mpar.Name == prop);
-            if (mp == null)
+            var parameter = module.Properties.Find(mpar => mpar.Name == propertyName);
+            if (parameter == null)
             {
-                mp = new ModuleParameter() { Name = prop, Value = value };
-                m.Properties.Add(mp);
+                parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
+                module.Properties.Add(parameter);
             }
-            mp.Value = value;
-            return mp;
+            parameter.Value = propertyValue;
+            return parameter;
         }
 
-        public static string WaitModuleParameterChange(Module mod, string parameter)
+        public static string WaitModuleParameterChange(Module module, string parameterName)
         {
-            string val = "";
+            string value = "";
             // TODO make it as a function _waitModuleParameterChange(mod, parname, timeout)
-            ModuleParameter p = Service.Utility.ModuleParameterGet(mod, parameter);
-            if (p != null)
+            ModuleParameter parameter = Service.Utility.ModuleParameterGet(module, parameterName);
+            if (parameter != null)
             {
-                long updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
+                var updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
                 //
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(500);
                 //
                 int timeout = 0;
-                int maxwait = 50; //(50 * 100ms ticks = 5000 ms)
-                int tickfreq = 100;
+                int maxWait = 50; //(50 * 100ms ticks = 5000 ms)
+                int tickFrequency = 100;
                 //
-                while ((TimeSpan.FromTicks(p.UpdateTime.Ticks - updated).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxwait)
+                while ((TimeSpan.FromTicks(parameter.UpdateTime.Ticks - updated).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
                 {
-                    System.Threading.Thread.Sleep(tickfreq);
+                    Thread.Sleep(tickFrequency);
                 }
                 //
-                if (timeout < maxwait)
+                if (timeout < maxWait)
                 {
-                    val = p.Value;
+                    value = parameter.Value;
                 }
             }
-            return val;
+            return value;
         }
-
-
-
-
 
         public class StringValueAttribute : System.Attribute
         {
 
-            private string _value;
+            private string attributeValue;
 
             public StringValueAttribute(string value)
             {
-                _value = value;
+                attributeValue = value;
             }
 
             public string Value
             {
-                get { return _value; }
+                get { return attributeValue; }
             }
 
         }
 
-        public static DateTime JavaTimeStampToDateTime(double javaTimeStamp)
+        public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
         {
             // Java timestamp is millisecods past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddMilliseconds(javaTimeStamp);
-            return dtDateTime;
+            var timestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            timestamp = timestamp.AddMilliseconds(javaTimestamp);
+            return timestamp;
         }
 
-
-
-        public static string Module2Json(Module m, bool hideprops)
+        public static string Module2Json(Module module, bool hideProperties)
         {
             string json = "{\n" +
-                        "   \"Name\": \"" + XmlEncode(m.Name) + "\",\n" +
-                        "   \"Description\": \"" + XmlEncode(m.Description) + "\",\n" +
-                        "   \"Type\": \"" + m.Type + "\",\n" +
-                        "   \"DeviceType\": \"" + m.DeviceType + "\",\n" +
-                        "   \"Domain\": \"" + m.Domain + "\",\n" +
-                        "   \"Address\": \"" + m.Address + "\",\n";
-            if (!hideprops)
+                        "   \"Name\": \"" + XmlEncode(module.Name) + "\",\n" +
+                        "   \"Description\": \"" + XmlEncode(module.Description) + "\",\n" +
+                        "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
+                        "   \"Domain\": \"" + module.Domain + "\",\n" +
+                        "   \"Address\": \"" + module.Address + "\",\n";
+            if (!hideProperties)
             {
                 json += "   \"Properties\": [ \n";
                 //
-                for (int i = 0; i < m.Properties.Count; i++)
+                for (int i = 0; i < module.Properties.Count; i++)
                 {
-                    ModuleParameter p = m.Properties[i];
-                    // if (p.Name == Properties.VirtualModule_ParentId) continue;
+                    var parameter = module.Properties[i];
                     json += "       {\n" +
-                            "           \"Name\": \"" + XmlEncode(p.Name) + "\",\n" +
-                            "           \"Description\": \"" + XmlEncode(p.Description) + "\",\n" +
-                            "           \"Value\": \"" + XmlEncode(p.Value) + "\",\n" +
-                            "           \"UpdateTime\": \"" + p.UpdateTime.ToString("u") + "\",\n" +
-                            "           \"ValueIncrement\": \"" + p.ValueIncrement.ToString() + "\",\n" +
-                            "           \"LastValue\": \"" + XmlEncode(p.LastValue) + "\",\n" +
-                            "           \"LastUpdateTime\": \"" + p.LastUpdateTime.ToString("u") + "\"\n" +
+                            "           \"Name\": \"" + XmlEncode(parameter.Name) + "\",\n" +
+                            "           \"Description\": \"" + XmlEncode(parameter.Description) + "\",\n" +
+                            "           \"Value\": \"" + XmlEncode(parameter.Value) + "\",\n" +
+                            "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
+                            "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
+                            "           \"LastValue\": \"" + XmlEncode(parameter.LastValue) + "\",\n" +
+                            "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
                             "       },\n";
-                    //System.Threading.Thread.Sleep(1);
                 }
                 json = json.TrimEnd(',', '\n');
                 //
                 json += "   ],\n";
             }
-            json += "   \"RoutingNode\": \"" + (m.RoutingNode != null ? m.RoutingNode : "") + "\"\n";
+            json += "   \"RoutingNode\": \"" + (module.RoutingNode != null ? module.RoutingNode : "") + "\"\n";
             json += "}";
             //
             return json;
         }
 
-        public static string XmlEncode(string s)
+        public static string XmlEncode(string fieldValue)
         {
-            if (s == null)
+            if (fieldValue == null)
             {
-                s = "";
+                fieldValue = "";
             }
             else //if (s.IndexOf("&") >= 0 && s.IndexOf("\"") >= 0)
             {
-                s = s.Replace("&", "&amp;");
-                s = s.Replace("\"", "&quot;");
+                fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "&quot;");
             }
-            return s;
+            return fieldValue;
         }
 
     }
-
-
+    
     public class XmlToDynamic
     {
         public static void Parse(dynamic parent, XElement node)

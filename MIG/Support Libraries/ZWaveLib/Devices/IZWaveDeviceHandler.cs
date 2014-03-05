@@ -29,7 +29,7 @@ namespace ZWaveLib.Devices
     public interface IZWaveDeviceHandler
     {
         void SetNodeHost(ZWaveNode node);
-        bool CanHandleProduct(ManufacturerSpecific productspecs);
+        bool CanHandleProduct(ManufacturerSpecific productSpecs);
         bool HandleBasicReport(byte[] message);
         bool HandleMultiInstanceReport(byte[] message);
         bool HandleRawMessageRequest(byte[] message);

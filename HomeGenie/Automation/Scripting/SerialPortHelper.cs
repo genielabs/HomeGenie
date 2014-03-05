@@ -32,38 +32,38 @@ namespace HomeGenie.Automation.Scripting
 
     public class SerialPortHelper
     {
-        private SerialPortInput _serialport;
-        private Action<byte[]> _datareceived;
-        private Action<string> _stringreceived;
-        private Action<bool> _statuschanged;
-        private string _portname = "/dev/ttyUSB0";
+        private SerialPortInput serialPort;
+        private Action<byte[]> dataReceived;
+        private Action<string> stringReceived;
+        private Action<bool> statusChanged;
+        private string portName = "/dev/ttyUSB0";
 
         public SerialPortHelper()
         {
-            _serialport = new SerialPortInput();
+            serialPort = new SerialPortInput();
         }
 
-        public SerialPortHelper WithName(string portname)
+        public SerialPortHelper WithName(string port)
         {
-            _portname = portname;
+            portName = port;
             return this;
         }
 
-        public SerialPortHelper OnStringReceived(Action<string> receivedaction)
+        public SerialPortHelper OnStringReceived(Action<string> receivedAction)
         {
-            _stringreceived = receivedaction;
+            stringReceived = receivedAction;
             return this;
         }
 
-        public SerialPortHelper OnMessageReceived(Action<byte[]> receivedaction)
+        public SerialPortHelper OnMessageReceived(Action<byte[]> receivedAction)
         {
-            _datareceived = receivedaction;
+            dataReceived = receivedAction;
             return this;
         }
 
-        public SerialPortHelper OnStatusChanged(Action<bool> statuschangeaction)
+        public SerialPortHelper OnStatusChanged(Action<bool> statusChangeAction)
         {
-            _statuschanged = statuschangeaction;
+            statusChanged = statusChangeAction;
             return this;
         }
 
@@ -72,67 +72,67 @@ namespace HomeGenie.Automation.Scripting
             return Connect(115200);
         }
 
-        public bool Connect(int baudrate)
+        public bool Connect(int baudRate)
         {
-            _serialport.MessageReceived += _serialport_MessageReceived;
-            _serialport.ConnectedStateChanged += _serialport_ConnectedStateChanged;
+            serialPort.MessageReceived += serialPort_MessageReceived;
+            serialPort.ConnectedStateChanged += serialPort_ConnectedStateChanged;
             //
-            _serialport.SetPort(_portname, baudrate);
-            return _serialport.Connect();
+            serialPort.SetPort(portName, baudRate);
+            return serialPort.Connect();
         }
 
         public SerialPortHelper Disconnect()
         {
-            _serialport.Disconnect();
-            _serialport.MessageReceived -= _serialport_MessageReceived;
-            _serialport.ConnectedStateChanged -= _serialport_ConnectedStateChanged;
+            serialPort.Disconnect();
+            serialPort.MessageReceived -= serialPort_MessageReceived;
+            serialPort.ConnectedStateChanged -= serialPort_ConnectedStateChanged;
             return this;
         }
 
         public void SendMessage(string message)
         {
-            if (_serialport.IsConnected)
+            if (serialPort.IsConnected)
             {
                 byte[] msg = Encoding.UTF8.GetBytes(message);
-                _serialport.SendMessage(msg);
+                serialPort.SendMessage(msg);
             }
         }
 
         public void SendMessage(byte[] message)
         {
-            if (_serialport.IsConnected)
+            if (serialPort.IsConnected)
             {
-                _serialport.SendMessage(message);
+                serialPort.SendMessage(message);
             }
         }
 
         public bool IsConnected
         {
-            get { return _serialport.IsConnected; }
+            get { return serialPort.IsConnected; }
         }
 
 
-        private void _serialport_MessageReceived(byte[] message)
+        private void serialPort_MessageReceived(byte[] message)
         {
-            if (_datareceived != null)
+            if (dataReceived != null)
             {
-                _datareceived(message);
+                dataReceived(message);
             }
-            if (_stringreceived != null)
+            if (stringReceived != null)
             {
                 try
                 {
-                    _stringreceived(Encoding.UTF8.GetString(message));
+                    stringReceived(Encoding.UTF8.GetString(message));
                 }
                 catch { }
             }
         }
 
-        private void _serialport_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        private void serialPort_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
         {
-            if (_statuschanged != null)
+            if (statusChanged != null)
             {
-                _statuschanged(statusargs.Connected);
+                statusChanged(statusargs.Connected);
             }
         }
 

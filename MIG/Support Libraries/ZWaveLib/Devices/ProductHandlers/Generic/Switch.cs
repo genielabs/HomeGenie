@@ -28,19 +28,19 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
     public class Switch : Sensor
     {
 
-        internal double _level = 0;
+        internal double levelValue = 0;
 
         public override bool HandleBasicReport(byte[] message)
         {
             bool handled = false;
-            byte cmd_class = message[7];
+            byte cmdClass = message[7];
             //
-            _level = (int)message[9];
+            levelValue = (int)message[9];
             //
-            if (cmd_class == (byte)CommandClass.COMMAND_CLASS_BASIC || cmd_class == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || cmd_class == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL)
+            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_BASIC || cmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || cmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL)
             {
                 // TODO: implement as SWITCH_BINARY and SWITCH_MULTILEVEL too
-                _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_BASIC, _level);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_BASIC, levelValue);
                 handled = true;
             }
             else
@@ -52,63 +52,63 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 
 
         public override bool HandleMultiInstanceReport(byte[] message)
-		{
-			if (message.Length < 12) return false; // we need at least 15 bytes long message for further processing
-			//
-			bool processed = false;
-			//
-			byte cmd_length = message[6];
-			byte cmd_class = message[7];
-			byte cmd_type = message[8];
-            byte inst_cmd_class = message[9];
+        {
+            if (message.Length < 12) return false; // we need at least 15 bytes long message for further processing
             //
-            if ((inst_cmd_class == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || inst_cmd_class == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL) && cmd_type == (byte)Command.COMMAND_MULTIINSTANCE_COUNT_REPORT)
+            bool processed = false;
+            //
+            byte cmdLength = message[6];
+            byte cmdClass = message[7];
+            byte cmdType = message[8];
+            byte instanceCmdClass = message[9];
+            //
+            if ((instanceCmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || instanceCmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL) && cmdType == (byte)Command.COMMAND_MULTIINSTANCE_COUNT_REPORT)
             {
                 // 01 0A 00 04 00 30 04 60 05 25 02 87
                 byte inst_count = message[10];
-                if (inst_cmd_class == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY)
+                if (instanceCmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY)
                 {
-                    _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT, inst_count);
                 }
                 else
                 {
-                    _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT, inst_count);
                 }
                 processed = true;
             }
-            else if (cmd_class == (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE && message.Length > 12)
-			{
-				//01 0D 00 04 00 2F 07 60 0D 01 00 25 03 FF 6B
-				//                     mi ?  in    sb rp vl
-				byte instance = message[9];
-				byte cmd = message[11];
-				byte type = message[12];
-				//
-				if ((cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL) && type == (byte)Command.COMMAND_BASIC_REPORT) // 0x03 ??
-				{
-					byte value = message[13];
-					//
+            else if (cmdClass == (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE && message.Length > 12)
+            {
+                //01 0D 00 04 00 2F 07 60 0D 01 00 25 03 FF 6B
+                //                     mi ?  in    sb rp vl
+                byte instance = message[9];
+                byte cmd = message[11];
+                byte type = message[12];
+                //
+                if ((cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY || cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL) && type == (byte)Command.COMMAND_BASIC_REPORT) // 0x03 ??
+                {
+                    byte value = message[13];
+                    //
                     if (cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY)
                     {
-                        _nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY, (double)value);
                     }
                     else
                     {
-                        _nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL, (double)value);
                     }
-					//_nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_BASIC, (double)value);
-					//
-					processed = true;
-				}
+                    //_nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_BASIC, (double)value);
+                    //
+                    processed = true;
+                }
 
-			}
-			//
-			if (!processed) 
-			{
-				processed = base.HandleMultiInstanceReport(message);
-			}
-			return processed;
-		}
+            }
+            //
+            if (!processed)
+            {
+                processed = base.HandleMultiInstanceReport(message);
+            }
+            return processed;
+        }
 
         public virtual void On()
         {
@@ -124,12 +124,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             get
             {
-                return (int)_level;
+                return (int)levelValue;
             }
             set
             {
-                _level = value;
-                _nodehost.Basic_Set((int)_level);
+                levelValue = value;
+                nodeHost.Basic_Set((int)levelValue);
             }
         }
 

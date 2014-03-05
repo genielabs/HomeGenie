@@ -38,7 +38,57 @@ namespace HomeGenie.Automation
     [Serializable()]
     public class ProgramBlock
     {
-        private bool _isenabled = false;
+        private HomeGenieService homegenie = null;
+        private bool isProgramEnabled = false;
+
+        // c# program fields
+        private AppDomain programDomain = null;
+        private Type assemblyType = null;
+        private Object assembly = null;
+        private MethodInfo methodRun = null;
+        private MethodInfo methodReset = null;
+        private MethodInfo methodEvaluateCondition = null;
+        private static object instanceObject = new object();
+        private System.Reflection.Assembly scriptAssembly;
+
+        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
+        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
+        internal List<string> registeredApiCalls = new List<string>();
+        internal Thread ProgramThread;
+
+        // wizard script public members
+        //
+        // Type = "Wizard" program data
+        // subj: Domain, TargetNode, Property (eg. Domains.HomeAutomation_ZWave, "4", Globals.MODPAR_METER_WATTS ) , Date, Time
+        // cond: Equals, GreaterThan, LessThan 
+        //  val: <value>
+        public ConditionType ConditionType;
+        public List<ProgramCondition> Conditions;
+        public List<ProgramCommand> Commands;
+
+        // c# program public members
+        public string ScriptCondition;
+        public string ScriptSource;
+        public string ScriptErrors;
+
+        // common public members 
+        public bool IsRunning;
+        public bool IsEvaluatingConditionBlock;
+        public List<ProgramFeature> Features = new List<ProgramFeature>();
+
+        [NonSerialized]
+        public bool LastConditionEvaluationResult;
+
+        public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
+        public int Address = 0;
+
+        public string Name;
+        public string Description;
+        public string Group;
+        public string Type;
+
+        public DateTime? ActivationTime;
+        public DateTime? TriggerTime;
 
         public ProgramBlock()
         {
@@ -51,45 +101,29 @@ namespace HomeGenie.Automation
             Commands = new List<ProgramCommand>();
             Conditions = new List<ProgramCondition>();
             ConditionType = ConditionType.None;
-            _isenabled = true;
+            isProgramEnabled = true;
             IsRunning = false;
             IsEvaluatingConditionBlock = false;
         }
 
-        public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
-        public int Address = 0;
-
-        public string Name;
-        public string Description;
-        public string Group;
-        public string Type;
         public bool IsEnabled
         {
-            get { return _isenabled; }
+            get { return isProgramEnabled; }
             set
             {
                 if (value)
                 {
                     ActivationTime = DateTime.UtcNow;
                 }
-                _isenabled = value;
+                isProgramEnabled = value;
             }
         }
 
-        public DateTime? ActivationTime;
-        public DateTime? TriggerTime;
-
-        // these two are used when Type == "CSharp"
-        public string ScriptCondition;
-        public string ScriptSource;
-        public string ScriptErrors;
-        //
-        private System.Reflection.Assembly _scriptassembly;
         internal System.Reflection.Assembly ScriptAssembly
         {
             get
             {
-                return _scriptassembly;
+                return scriptAssembly;
             }
             set
             {
@@ -104,15 +138,15 @@ namespace HomeGenie.Automation
                     // TODO: handle this...
                 }
                 //
-                if (_program_appdomain != null)
+                if (programDomain != null)
                 {
                     // Unloading program app domain...
                     try
                     {
-                        AppDomain.Unload(_program_appdomain);
+                        AppDomain.Unload(programDomain);
                     }
                     catch { }
-                    _program_appdomain = null;
+                    programDomain = null;
                     //
                     try
                     {
@@ -124,47 +158,13 @@ namespace HomeGenie.Automation
                 //
                 IsRunning = false;
                 //
-                _scriptassembly = value;
+                scriptAssembly = value;
 
             }
         }
 
-        // Type = "Wizard" program data
-        // subj: Domain, TargetNode, Property (eg. Domains.HomeAutomation_ZWave, "4", Globals.MODPAR_METER_WATTS ) , Date, Time
-        // cond: Equals, GreaterThan, LessThan 
-        //  val: <value>
-        public ConditionType ConditionType;
-        public List<ProgramCondition> Conditions;
-        public List<ProgramCommand> Commands;
-
-        // common members 
-        public bool IsRunning;
-        public bool IsEvaluatingConditionBlock;
-        public List<ProgramFeature> Features = new List<ProgramFeature>();
-
-        [NonSerialized]
-        public bool LastConditionEvaluationResult;
-        //        [NonSerialized]
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
-        //        [NonSerialized]
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
-        //        [NonSerialized]
-        internal List<string> _registeredapicalls = new List<string>();
-
-
-        /////////////////////////////////////////////////////////////////////////////////
-
-
-        internal Thread ProgramThread;
-        private AppDomain _program_appdomain = null;
-        private Type _program_assembly_type = null;
-        private Object _program_assembly = null;
-        private MethodInfo _program_method_run = null;
-        private MethodInfo _program_method_reset = null;
-        private MethodInfo _program_method_evaluatecondition = null;
-        private static object _instobj = new object();
-        private HomeGenieService _homegenie = null;
-        //
+        
+        
         internal string AssemblyFile
         {
             get
@@ -176,15 +176,15 @@ namespace HomeGenie.Automation
         }
         internal bool AssemblyLoad(HomeGenieService homegenieref)
         {
-            _homegenie = homegenieref;
+            homegenie = homegenieref;
             // TODO: deprecate all other "homegenieref" parameters in other funcs
             bool succeed = false;
-            lock (_instobj)
+            lock (instanceObject)
                 if (this.Type.ToLower() == "csharp")
                 {
                     try
                     {
-                        _scriptassembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
+                        scriptAssembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
                         succeed = true;
                     }
                     catch (Exception e)
@@ -197,29 +197,29 @@ namespace HomeGenie.Automation
         }
         internal MethodRunResult RunScript(HomeGenieService homegenieref, string options)
         {
-            if (_scriptassembly == null) return null;
+            if (scriptAssembly == null) return null;
             //
-            MethodRunResult res = null;
+            MethodRunResult result = null;
             //
-            if (_checkinstance(homegenieref))
+            if (CheckInstance(homegenieref))
             {
-                res = (MethodRunResult)_program_method_run.Invoke(_program_assembly, new object[1] { options });
+                result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
             }
             //
-            return res;
+            return result;
         }
         internal MethodRunResult EvaluateConditionStatement(HomeGenieService homegenieref)
         {
-            if (_scriptassembly == null) return null;
+            if (scriptAssembly == null) return null;
             //
-            MethodRunResult res = null;
+            MethodRunResult result = null;
             //
-            if (_checkinstance(homegenieref))
+            if (CheckInstance(homegenieref))
             {
-                res = (MethodRunResult)_program_method_evaluatecondition.Invoke(_program_assembly, null);
+                result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
             }
             //
-            return res;
+            return result;
         }
         internal void Stop()
         {
@@ -243,50 +243,39 @@ namespace HomeGenie.Automation
             ModuleIsChangingHandler = null;
             ModuleChangedHandler = null;
             //
-            foreach (string apicall in _registeredapicalls)
+            foreach (string apiCall in registeredApiCalls)
             {
-                _homegenie.UnRegisterDynamicApi(apicall);
+                homegenie.UnRegisterDynamicApi(apiCall);
             }
-            _registeredapicalls.Clear();
+            registeredApiCalls.Clear();
         }
         internal void Reset()
         {
-            if (_scriptassembly != null && _program_method_reset != null)
+            if (scriptAssembly != null && methodReset != null)
             {
-                _program_method_reset.Invoke(_program_assembly, null);
+                methodReset.Invoke(assembly, null);
             }
         }
 
-        private bool _checkinstance(HomeGenieService homegenieref)
+        private bool CheckInstance(HomeGenieService homegenieref)
         {
-            lock (_instobj)
+            lock (instanceObject)
             {
-                if (_program_appdomain == null)
+                if (programDomain == null)
                 {
-                    DateTime starttime = DateTime.Now;
-
                     bool success = false;
 
                     // Creating script app domain
-                    _program_appdomain = AppDomain.CurrentDomain; //AppDomain.CreateDomain("HomeGenieScriptDomain-" + this.Address);
+                    programDomain = AppDomain.CurrentDomain; //AppDomain.CreateDomain("HomeGenieScriptDomain-" + this.Address);
 
+                    assemblyType = scriptAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
+                    assembly = Activator.CreateInstance(assemblyType);
 
-                    TimeSpan ts1 = new TimeSpan(DateTime.Now.Ticks - starttime.Ticks);
-
-
-                    starttime = DateTime.Now;
-                    _program_assembly_type = _scriptassembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
-                    _program_assembly = Activator.CreateInstance(_program_assembly_type);
-
-
-                    TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks - starttime.Ticks);
-
-
-                    MethodInfo miSetHost = _program_assembly_type.GetMethod("SetHost");
+                    MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
                     //
                     try
                     {
-                        miSetHost.Invoke(_program_assembly, new object[2] { homegenieref, this.Address });
+                        miSetHost.Invoke(assembly, new object[2] { homegenieref, this.Address });
                         success = true;
                     }
                     catch (Exception ex)
@@ -294,9 +283,9 @@ namespace HomeGenie.Automation
                         HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
                     }
                     //
-                    _program_method_run = _program_assembly_type.GetMethod("Run");
-                    _program_method_evaluatecondition = _program_assembly_type.GetMethod("EvaluateCondition");
-                    _program_method_reset = _program_assembly_type.GetMethod("Reset");
+                    methodRun = assemblyType.GetMethod("Run");
+                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
+                    methodReset = assemblyType.GetMethod("Reset");
                     //
                     return success;
                 }

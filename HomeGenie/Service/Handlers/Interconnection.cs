@@ -33,39 +33,39 @@ namespace HomeGenie.Service.Handlers
 {
     public class Interconnection
     {
-        private HomeGenieService _hg;
+        private HomeGenieService homegenie;
         public Interconnection(HomeGenieService hg)
         {
-            _hg = hg;
+            homegenie = hg;
         }
 
-        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migcmd)
+        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
         {
-            switch (migcmd.command)
+            switch (migCommand.Command)
             {
                 case "Events.Push":
                     //TODO: implemet security and trust mechanism 
-                    string objstream = new StreamReader(request.InputStream).ReadToEnd();
-                    ModuleEvent mev = JsonConvert.DeserializeObject<ModuleEvent>(objstream);
+                    var stream = new StreamReader(request.InputStream).ReadToEnd();
+                    var moduleEvent = JsonConvert.DeserializeObject<ModuleEvent>(stream);
                     //
-                    Module mod = _hg.Modules.Find(delegate(Module o)
+                    var module = homegenie.Modules.Find(delegate(Module o)
                     {
-                        return o.Domain == mev.Module.Domain && o.Address == mev.Module.Address;
+                        return o.Domain == moduleEvent.Module.Domain && o.Address == moduleEvent.Module.Address;
                     });
-                    if (mod == null)
+                    if (module == null)
                     {
-                        mod = mev.Module;
-                        _hg.Modules.Add(mod);
+                        module = moduleEvent.Module;
+                        homegenie.Modules.Add(module);
                     }
                     else
                     {
-                        Utility.ModuleParameterSet(mod, mev.Parameter.Name, mev.Parameter.Value);
+                        Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
                     }
                     // "<ip>:<port>" remote endpoint port is passed as the first argument from the remote point itself
-                    mod.RoutingNode = request.RequestOrigin + (migcmd.GetOption(0) != "" ? ":" + migcmd.GetOption(0) : "");
+                    module.RoutingNode = request.RequestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
                     //
-                    _hg.LogBroadcastEvent(mev.Module.Domain, mev.Module.Address, request.RequestOrigin, mev.Parameter.Name, mev.Parameter.Value);
-                    _hg.RouteParameterChangedEvent(request.RequestOrigin, mod, mev.Parameter);
+                    homegenie.LogBroadcastEvent(moduleEvent.Module.Domain, moduleEvent.Module.Address, request.RequestOrigin, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
+                    homegenie.RouteParameterChangedEvent(request.RequestOrigin, module, moduleEvent.Parameter);
                     break;
             }
         }

@@ -34,87 +34,77 @@ namespace HomeGenie.Automation.Scripting
 {
     public class ModulesManager
     {
-        //        private Dictionary<string, List<Module>> _cachedselections;
-
         private string command = "Command.NotSelected";
-        private string commandvalue = "0";
+        private string commandValue = "0";
         private string parameter = "Parameter.NotSelected";
-        private string withname = "";
-        private string oftype = "";
-        private string ofdevicetype = "";
-        private string ingroup = "";
-        private string indomain = "";
-        private string withaddress = "";
-        private string withparameter = "";
-        private string withfeature = "";
-        private string withoutfeature = "";
-        private double iterationdelay = 0;
+        private string withName = "";
+        private string ofDeviceType = "";
+        private string inGroup = "";
+        private string inDomain = "";
+        private string withAddress = "";
+        private string withParameter = "";
+        private string withFeature = "";
+        private string withoutFeature = "";
+        private double iterationDelay = 0;
 
-        internal HomeGenieService _homegenie;
+        internal HomeGenieService homegenie;
 
         public ModulesManager(HomeGenieService hg)
         {
-            _homegenie = hg;
-            //            _cachedselections = new Dictionary<string, List<Module>>();
+            homegenie = hg;
         }
 
         public virtual List<Module> SelectedModules
         {
             get
             {
-                //string cachekey = command + "|" + commandvalue + "|" + parameter + "|" + withname + "|" + oftype + "|" + ofdevicetype + "|" + ingroup + "|" + indomain + "|" + withaddress + "|" + withparameter;
-                //if (_cachedselections.ContainsKey(cachekey))
-                //{
-                //    return _cachedselections[cachekey];
-                //}
-                //
-                List<Module> modules = new List<Module>();
+                var modules = new List<Module>();
                 // select modules in current command context
-                foreach (Module module in _homegenie.Modules.ToList<Module>())
+                foreach (var module in homegenie.Modules.ToList<Module>())
                 {
                     bool selected = true;
-                    if (selected && this.indomain != null && this.indomain != "" && _getArgumentsList(this.indomain.ToLower()).Contains(module.Domain.ToLower()) == false)
+                    if (selected && this.inDomain != null && this.inDomain != "" && GetArgumentsList(this.inDomain.ToLower()).Contains(module.Domain.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withaddress != null && this.withaddress != "" && _getArgumentsList(this.withaddress.ToLower()).Contains(module.Address.ToLower()) == false)
+                    if (selected && this.withAddress != null && this.withAddress != "" && GetArgumentsList(this.withAddress.ToLower()).Contains(module.Address.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withname != null && this.withname != "" && _getArgumentsList(this.withname.ToLower()).Contains(module.Name.ToLower()) == false)
+                    if (selected && this.withName != null && this.withName != "" && GetArgumentsList(this.withName.ToLower()).Contains(module.Name.ToLower()) == false)
                     {
                         selected = false;
                     }
-                    if (selected && this.withparameter != null && this.withparameter != "")
+                    if (selected && this.withParameter != null && this.withParameter != "")
                     {
-                        if (module.Properties.Find(p => _getArgumentsList(this.withparameter).Contains(p.Name)) == null)
+                        if (module.Properties.Find(p => GetArgumentsList(this.withParameter).Contains(p.Name)) == null)
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.withfeature != null && this.withfeature != "")
+                    if (selected && this.withFeature != null && this.withFeature != "")
                     {
-                        ModuleParameter mp = module.Properties.Find(p => _getArgumentsList(this.withfeature).Contains(p.Name));
-                        if (mp == null || mp.Value != "On")
+                        var parameter = module.Properties.Find(p => GetArgumentsList(this.withFeature).Contains(p.Name));
+                        if (parameter == null || parameter.Value != "On")
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.withoutfeature != null && this.withoutfeature != "")
+                    if (selected && this.withoutFeature != null && this.withoutFeature != "")
                     {
-                        ModuleParameter mp = module.Properties.Find(p => _getArgumentsList(this.withoutfeature).Contains(p.Name));
-                        if (mp != null && mp.Value == "On")
+                        var parameter = module.Properties.Find(p => GetArgumentsList(this.withoutFeature).Contains(p.Name));
+                        if (parameter != null && parameter.Value == "On")
                         {
                             selected = false;
                         }
                     }
-                    if (selected && this.ingroup != null && this.ingroup != "")
+                    if (selected && this.inGroup != null && this.inGroup != "")
                     {
                         selected = false;
-                        List<string> groups = _getArgumentsList(this.ingroup);
-                        foreach (string grp in groups)
+                        var groups = GetArgumentsList(this.inGroup);
+                        foreach (string group in groups)
                         {
-                            Group theGroup = _homegenie.Groups.Find(z => z.Name.ToLower() == grp.Trim().ToLower());
+                            var theGroup = homegenie.Groups.Find(z => z.Name.ToLower() == group.Trim().ToLower());
                             if (theGroup != null)
                             {
                                 for (int m = 0; m < theGroup.Modules.Count; m++)
@@ -128,24 +118,11 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
-                    if (selected && this.oftype != null && this.oftype != "")
+                    if (selected && this.ofDeviceType != null && this.ofDeviceType != "")
                     {
                         selected = false;
-                        List<string> types = _getArgumentsList(this.oftype);
-                        foreach (string mtype in types)
-                        {
-                            if (module.Type.ToString().ToLower() == mtype.Trim().ToLower())
-                            {
-                                selected = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (selected && this.ofdevicetype != null && this.ofdevicetype != "")
-                    {
-                        selected = false;
-                        List<string> devtypes = _getArgumentsList(this.ofdevicetype);
-                        foreach (string dtype in devtypes)
+                        var deviceTypes = GetArgumentsList(this.ofDeviceType);
+                        foreach (string dtype in deviceTypes)
                         {
                             if (module.DeviceType.ToString().ToLower() == dtype.Trim().ToLower())
                             {
@@ -160,12 +137,7 @@ namespace HomeGenie.Automation.Scripting
                         modules.Add(module);
                     }
                 }
-                //
-                //if (!_cachedselections.ContainsKey(cachekey))
-                //{
-                //    _cachedselections.Add(cachekey, modules);
-                //}
-                //
+
                 return modules;
             }
         }
@@ -174,10 +146,10 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                List<string> groups = new List<string>();
-                foreach (Group g in _homegenie.Groups)
+                var groups = new List<string>();
+                foreach (var group in homegenie.Groups)
                 {
-                    groups.Add(g.Name);
+                    groups.Add(group.Name);
                 }
                 return groups;
             }
@@ -185,46 +157,46 @@ namespace HomeGenie.Automation.Scripting
 
         public ModulesManager Each(Func<ModuleHelper, bool> callback)
         {
-            foreach (Module m in SelectedModules)
+            foreach (var module in SelectedModules)
             {
-                if (callback(new ModuleHelper(_homegenie, m))) break;
+                if (callback(new ModuleHelper(homegenie, module))) break;
             }
             return this;
         }
 
         public ModuleHelper Get()
         {
-            return new ModuleHelper(_homegenie, SelectedModules.Count > 0 ? SelectedModules.First() : null);
+            return new ModuleHelper(homegenie, SelectedModules.Count > 0 ? SelectedModules.First() : null);
         }
 
-        public ModulesManager IterationDelay(double delayseconds)
+        public ModulesManager IterationDelay(double delaySeconds)
         {
-            this.iterationdelay = delayseconds;
+            this.iterationDelay = delaySeconds;
             return this;
         }
 
         public ModulesManager WithParameter(string parameter)
         {
-            this.withparameter = parameter;
+            this.withParameter = parameter;
             return this;
         }
 
 
         public ModulesManager WithFeature(string feature)
         {
-            this.withfeature = feature;
+            this.withFeature = feature;
             return this;
         }
 
         public ModulesManager WithoutFeature(string feature)
         {
-            this.withoutfeature = feature;
+            this.withoutFeature = feature;
             return this;
         }
 
         public ModuleHelper FromInstance(Module module)
         {
-            return new ModuleHelper(_homegenie, module);
+            return new ModuleHelper(homegenie, module);
         }
 
         public ModulesManager Command(string command)
@@ -235,37 +207,31 @@ namespace HomeGenie.Automation.Scripting
 
         public ModulesManager InGroup(string group)
         {
-            this.ingroup = group;
+            this.inGroup = group;
             return this;
         }
 
         public ModulesManager WithName(string modulename)
         {
-            this.withname = modulename;
+            this.withName = modulename;
             return this;
         }
 
         public ModulesManager InDomain(string domain)
         {
-            this.indomain = domain;
+            this.inDomain = domain;
             return this;
         }
 
         public ModulesManager WithAddress(string moduleaddr)
         {
-            this.withaddress = moduleaddr;
+            this.withAddress = moduleaddr;
             return this;
         }
 
         public ModulesManager OfDeviceType(string devicetype)
         {
-            this.ofdevicetype = devicetype;
-            return this;
-        }
-
-        public ModulesManager OfType(string type)
-        {
-            this.oftype = type;
+            this.ofDeviceType = devicetype;
             return this;
         }
 
@@ -279,19 +245,19 @@ namespace HomeGenie.Automation.Scripting
         }
         public ModulesManager Set()
         {
-            this.commandvalue = "0";
-            return Set(this.commandvalue);
+            this.commandValue = "0";
+            return Set(this.commandValue);
         }
-        public ModulesManager Set(string valueto)
+        public ModulesManager Set(string valueToSet)
         {
-            this.commandvalue = valueto;
+            this.commandValue = valueToSet;
             // execute this command context
             if (command != "")
             {
-                foreach (Module module in SelectedModules)
+                foreach (var module in SelectedModules)
                 {
-                    _interfacecontrol(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandvalue + "/"));
-                    _delayiteration();
+                    InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/"));
+                    DelayIteration();
                 }
             }
             return this;
@@ -300,41 +266,41 @@ namespace HomeGenie.Automation.Scripting
         ////////////////////////////////////////////////////////////
         public ModulesManager On()
         {
-            foreach (Module module in SelectedModules)
+            foreach (var module in SelectedModules)
             {
-                _interfacecontrol(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
-                _delayiteration();
+                InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
+                DelayIteration();
             }
             return this;
         }
 
         public ModulesManager Off()
         {
-            foreach (Module module in SelectedModules)
+            foreach (var module in SelectedModules)
             {
-                _interfacecontrol(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
-                _delayiteration();
+                InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
+                DelayIteration();
             }
             return this;
         }
 
         public ModulesManager Toggle()
         {
-            foreach (Module module in SelectedModules)
+            foreach (var module in SelectedModules)
             {
-                ModuleParameter level = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
-                if (level != null)
+                var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                if (levelParameter != null)
                 {
-                    if (level.Value == "0")
+                    if (levelParameter.Value == "0")
                     {
-                        _interfacecontrol(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
+                        InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
                     }
                     else
                     {
-                        _interfacecontrol(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
+                        InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
                     }
                 }
-                _delayiteration();
+                DelayIteration();
             }
             return this;
         }
@@ -344,18 +310,18 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                double avglevel = 0;
+                double averageLevel = 0;
                 if (SelectedModules.Count > 0)
                 {
-                    foreach (Module module in SelectedModules)
+                    foreach (var module in SelectedModules)
                     {
                         double level = Service.Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL).DecimalValue;
                         level = (level * 100D);
-                        avglevel += level;
+                        averageLevel += level;
                     }
-                    avglevel = avglevel / SelectedModules.Count;
+                    averageLevel = averageLevel / SelectedModules.Count;
                 }
-                return avglevel;
+                return averageLevel;
             }
             set
             {
@@ -369,17 +335,17 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                bool ison = false;
+                bool isOn = false;
                 if (SelectedModules.Count > 0)
                 {
-                    foreach (Module module in SelectedModules)
+                    foreach (var module in SelectedModules)
                     {
                         double dvalue = Service.Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL).DecimalValue;
-                        ison = ison || (dvalue * 100D > 0D); // if at least one of the selected modules are on it returns true
-                        if (ison) break;
+                        isOn = isOn || (dvalue * 100D > 0D); // if at least one of the selected modules are on it returns true
+                        if (isOn) break;
                     }
                 }
-                return ison;
+                return isOn;
             }
         }
 
@@ -396,7 +362,7 @@ namespace HomeGenie.Automation.Scripting
             get
             {
                 bool alarmed = false;
-                foreach (Module module in SelectedModules)
+                foreach (var module in SelectedModules)
                 {
                     double intvalue = Service.Utility.ModuleParameterGet(module, "Sensor.Alarm").DecimalValue;
                     alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules are alarmed it returns true
@@ -411,7 +377,7 @@ namespace HomeGenie.Automation.Scripting
             get
             {
                 bool alarmed = false;
-                foreach (Module module in SelectedModules)
+                foreach (var module in SelectedModules)
                 {
                     double intvalue = Service.Utility.ModuleParameterGet(module, "Sensor.MotionDetect").DecimalValue;
                     alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules detected motion it returns true
@@ -425,7 +391,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _getAverageParameterValue("Sensor.Temperature");
+                return GetAverageParameterValue("Sensor.Temperature");
             }
         }
 
@@ -433,7 +399,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _getAverageParameterValue("Sensor.Luminance");
+                return GetAverageParameterValue("Sensor.Luminance");
             }
         }
 
@@ -441,7 +407,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return _getAverageParameterValue("Sensor.Humidity");
+                return GetAverageParameterValue("Sensor.Humidity");
             }
         }
 
@@ -456,34 +422,34 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                string rfdata = "";
-                Module rfmod = _homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_X10 && m.Address == "RF"));
-                if (rfmod != null)
+                string rfData = "";
+                var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_X10 && m.Address == "RF"));
+                if (rfModule != null)
                 {
                     try
                     {
-                        rfdata = Service.Utility.ModuleParameterGet(rfmod, "Receiver.RawData").Value;
+                        rfData = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData").Value;
                     }
                     catch { }
                 }
-                return rfdata;
+                return rfData;
             }
         }
         public string RfRemoteDataW800
         {
             get
             {
-                string rfdata = "";
-                Module rfmod = _homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_W800RF && m.Address == "RF"));
-                if (rfmod != null)
+                string rfData = "";
+                var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_W800RF && m.Address == "RF"));
+                if (rfModule != null)
                 {
                     try
                     {
-                        rfdata = Service.Utility.ModuleParameterGet(rfmod, "Receiver.RawData").Value;
+                        rfData = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData").Value;
                     }
                     catch { }
                 }
-                return rfdata;
+                return rfData;
             }
         }
         #endregion
@@ -491,69 +457,63 @@ namespace HomeGenie.Automation.Scripting
         public ModulesManager Reset()
         {
             command = "Command.NotSelected";
-            commandvalue = "0";
+            commandValue = "0";
             parameter = "Parameter.NotSelected";
-            withname = "";
-            oftype = "";
-            ofdevicetype = "";
-            ingroup = "";
-            indomain = "";
-            withaddress = "";
-            withparameter = "";
-            withfeature = "";
-            iterationdelay = 0;
+            withName = "";
+            ofDeviceType = "";
+            inGroup = "";
+            inDomain = "";
+            withAddress = "";
+            withParameter = "";
+            withFeature = "";
+            iterationDelay = 0;
             //
             return this;
         }
 
-        private double _getAverageParameterValue(string parameter)
+        private double GetAverageParameterValue(string parameter)
         {
-            double avgvalue = 0;
+            double averageValue = 0;
             if (SelectedModules.Count > 0)
             {
-                foreach (Module module in SelectedModules)
+                foreach (var module in SelectedModules)
                 {
                     double value = Service.Utility.ModuleParameterGet(module, parameter).DecimalValue;
-                    avgvalue += value; ;
+                    averageValue += value; ;
                 }
-                avgvalue = avgvalue / SelectedModules.Count;
+                averageValue = averageValue / SelectedModules.Count;
             }
-            return avgvalue;
+            return averageValue;
         }
 
-        internal static List<string> _getArgumentsList(string csargs)
+        internal static List<string> GetArgumentsList(string csArgumentList)
         {
-            List<string> retval = new List<string>();
-            if (csargs.IndexOf('|') > 0)
+            var returnValue = new List<string>();
+            if (csArgumentList.IndexOf('|') > 0)
             {
-                retval = csargs.Split('|').ToList<string>();
+                returnValue = csArgumentList.Split('|').ToList<string>();
             }
             else
             {
-                retval = csargs.Split(',').ToList<string>();
+                returnValue = csArgumentList.Split(',').ToList<string>();
             }
-            return retval;
+            return returnValue;
         }
 
-        private void _delayiteration()
+        private void DelayIteration()
         {
-            if (this.iterationdelay > 0)
+            if (this.iterationDelay > 0)
             {
-                System.Threading.Thread.Sleep((int)(this.iterationdelay * 1000D));
+                System.Threading.Thread.Sleep((int)(this.iterationDelay * 1000D));
             }
         }
 
-        private void _interfacecontrol(Module module, MIGInterfaceCommand cmd)
+        private void InterfaceControl(Module module, MIGInterfaceCommand migCommand)
         {
-            cmd.domain = module.Domain;
-            cmd.nodeid = module.Address;
-            //string options = "";
-            //for (int o = 0; o < cmd.options.Length; o++ )
-            //{
-            //    options += cmd.options[o] + "/";
-            //}
-            _homegenie.InterfaceControl(cmd); //new Command("/" + module.Domain + "/" + module.Address + "/" + cmd.command + "/" + options));
-            _homegenie.WaitOnPending(module.Domain);
+            migCommand.Domain = module.Domain;
+            migCommand.NodeId = module.Address;
+            homegenie.InterfaceControl(migCommand);
+            homegenie.WaitOnPending(module.Domain);
         }
     }
 }

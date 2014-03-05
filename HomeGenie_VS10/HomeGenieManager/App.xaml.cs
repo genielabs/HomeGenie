@@ -43,8 +43,8 @@ namespace HomeGenieManager
         static bool createdNew;
         static Mutex m_Mutex;
 
-        private UPnPControlPoint upnpcontrol;
-        private Dictionary<string, UPnPDevice> upnpservice;
+        private UPnPControlPoint upnpControl;
+        private Dictionary<string, UPnPDevice> upnpService;
 
         //Add this method override
         protected override void OnStartup(StartupEventArgs e)
@@ -52,14 +52,14 @@ namespace HomeGenieManager
             m_Mutex = new Mutex(true, "HomeGenieManagerMutex", out createdNew);
             //e.Args is the string[] of command line argruments
             //
-            upnpservice = new Dictionary<string, UPnPDevice>();
-            upnpcontrol = new UPnPControlPoint();
-            upnpcontrol.OnSearch += upnpcontrol_OnSearch;
-            upnpcontrol.OnCreateDevice += upnpcontrol_OnCreateDevice;
-            upnpcontrol.FindDeviceAsync("urn:schemas-upnp-org:device:HomeAutomationServer:1");
+            upnpService = new Dictionary<string, UPnPDevice>();
+            upnpControl = new UPnPControlPoint();
+            upnpControl.OnSearch += upnpcontrol_OnSearch;
+            upnpControl.OnCreateDevice += upnpcontrol_OnCreateDevice;
+            upnpControl.FindDeviceAsync("urn:schemas-upnp-org:device:HomeAutomationServer:1");
             //
             Application.Current.ShutdownMode = System.Windows.ShutdownMode.OnLastWindowClose;
-            LoadingDialog myDialogWindow = new LoadingDialog();
+            var myDialogWindow = new LoadingDialog();
             myDialogWindow.Show();
             //
             Task loader = new Task(() =>
@@ -67,7 +67,7 @@ namespace HomeGenieManager
                 int t = 0;
                 while (t < 10)
                 {
-                    if (upnpservice.Count > 0)
+                    if (upnpService.Count > 0)
                     {
                         Thread.Sleep(2000);
                         System.Diagnostics.Process.Start(UPnPDevices[UPnPDevices.Keys.ElementAt(0)].PresentationURL);
@@ -91,8 +91,8 @@ namespace HomeGenieManager
                     }
                     else
                     {
-                        MainWindow m = new MainWindow();
-                        m.Show();
+                        var window = new MainWindow();
+                        window.Show();
                         myDialogWindow.Close();
                     }
                 }), null);
@@ -100,25 +100,25 @@ namespace HomeGenieManager
             loader.Start();
         }
 
-        private void upnpcontrol_OnSearch(System.Net.IPEndPoint ResponseFromEndPoint, System.Net.IPEndPoint ResponseReceivedOnEndPoint, Uri DescriptionLocation, string USN, string SearchTarget, int MaxAge)
+        private void upnpcontrol_OnSearch(System.Net.IPEndPoint ResponseFromEndPoint, System.Net.IPEndPoint responseReceivedOnEndPoint, Uri descriptionLocation, string usn, string searchTarget, int maxAge)
         {
-            upnpcontrol.CreateDeviceAsync(DescriptionLocation, MaxAge);
+            upnpControl.CreateDeviceAsync(descriptionLocation, maxAge);
             //Console.WriteLine(USN + "\n" + SearchTarget);
         }
 
-        private void upnpcontrol_OnCreateDevice(UPnPDevice Device, Uri DescriptionURL)
+        private void upnpcontrol_OnCreateDevice(UPnPDevice device, Uri descriptionURL)
         {
             //Console.WriteLine(DescriptionURL + "\n" + Device.PresentationURL);
-            lock (upnpservice)
-                if (!upnpservice.ContainsKey(DescriptionURL.ToString()))
+            lock (upnpService)
+                if (!upnpService.ContainsKey(descriptionURL.ToString()))
                 {
-                    upnpservice.Add(DescriptionURL.ToString(), Device);
+                    upnpService.Add(descriptionURL.ToString(), device);
                 }
         }
 
         public Dictionary<string, UPnPDevice> UPnPDevices
         {
-            get { return upnpservice; }
+            get { return upnpService; }
         }
 
     }

@@ -26,113 +26,115 @@ using System.IO.Ports;
 
 namespace XTenLib.Drivers
 {
-	public class CM11 : XTenInterface
-	{
-		private SerialPort _serialport;
+    public class CM11 : XTenInterface
+    {
+        private SerialPort serialPort;
 
-		private object _commlock = new object();
-		private string _portname = "COM6"; //"/dev/ttyUSB1";
-		private bool _isconnected = false;
+        private object commLock = new object();
+        private string portName = "COM6"; //"/dev/ttyUSB1";
+        private bool isConnected = false;
 
-		public CM11 (string portname)
-		{
-			_portname = portname;
-		}
+        public CM11(string port)
+        {
+            portName = port;
+        }
 
-		public void Close ()
-		{
-			if (_serialport != null)
-			{
-//////-->				_serialport.ErrorReceived -= HanldeErrorReceived;
-				try
-				{
-//					_serialport.Dispose();
-					_serialport.Close();
-				} catch { }
-				_serialport = null;
-			}
-		}
-		public bool Open ()
-		{
-			bool success = false;
-			//
-			try
-			{
-                bool tryopen = (_serialport == null);
+        public void Close()
+        {
+            if (serialPort != null)
+            {
+                //////-->				_serialport.ErrorReceived -= HanldeErrorReceived;
+                try
+                {
+                    //					_serialport.Dispose();
+                    serialPort.Close();
+                }
+                catch { }
+                serialPort = null;
+            }
+        }
+        public bool Open()
+        {
+            bool success = false;
+            //
+            try
+            {
+                bool tryOpen = (serialPort == null);
                 if (Environment.OSVersion.Platform.ToString().StartsWith("Win") == false)
                 {
-                    tryopen = (tryopen && System.IO.File.Exists(_portname));
+                    tryOpen = (tryOpen && System.IO.File.Exists(portName));
                 }
-				if (tryopen) {
-					_serialport = new SerialPort();
-					_serialport.PortName = _portname;
-					_serialport.BaudRate = 4800;
-					_serialport.Parity = Parity.None;
-					_serialport.DataBits = 8;
-					_serialport.StopBits = StopBits.One;
-					_serialport.ReadTimeout = 150;
-					_serialport.WriteTimeout = 150;
+                if (tryOpen)
+                {
+                    serialPort = new SerialPort();
+                    serialPort.PortName = portName;
+                    serialPort.BaudRate = 4800;
+                    serialPort.Parity = Parity.None;
+                    serialPort.DataBits = 8;
+                    serialPort.StopBits = StopBits.One;
+                    serialPort.ReadTimeout = 150;
+                    serialPort.WriteTimeout = 150;
                     //_serialport.RtsEnable = true;
-					//
-////////-->					_serialport.ErrorReceived += HanldeErrorReceived;
-					// DataReceived event won't work under Linux / Mono
-					//sp.DataReceived += HandleDataReceived;
-				}
-				if (_serialport.IsOpen == false)
-				{
-					_serialport.Open();
-				}
+                    //
+                    ////////-->					_serialport.ErrorReceived += HanldeErrorReceived;
+                    // DataReceived event won't work under Linux / Mono
+                    //sp.DataReceived += HandleDataReceived;
+                }
+                if (serialPort.IsOpen == false)
+                {
+                    serialPort.Open();
+                }
                 //
                 this.WriteData(new byte[] { 0x8B }); // status request
-				success = true;
-			}
-			catch (Exception ex)
-			{
-			}
-			//
-			return success;
-		}
+                success = true;
+            }
+            catch (Exception ex)
+            {
+            }
+            //
+            return success;
+        }
 
-		public byte[] ReadData ()
-		{
-			int buflen = 32;
-			int length = 0;
-			int readbytes = 0;
-			byte[] buffer = new byte[buflen];
-			//
+        public byte[] ReadData()
+        {
+            int buflen = 32;
+            int length = 0;
+            int readBytes = 0;
+            byte[] buffer = new byte[buflen];
+            //
             do
             {
-                readbytes = _serialport.Read(buffer, length, buflen - length);
-                length += readbytes;
+                readBytes = serialPort.Read(buffer, length, buflen - length);
+                length += readBytes;
                 //
-                if (length > 1 && buffer[0] < length) 
+                if (length > 1 && buffer[0] < length)
                     break;
-                else if (buffer[0] > 0x10 && _serialport.BytesToRead == 0) 
+                else if (buffer[0] > 0x10 && serialPort.BytesToRead == 0)
                     break;
-            } while (readbytes > 0 && (buflen - length > 0));
+            } while (readBytes > 0 && (buflen - length > 0));
             //
-			byte[] readdata = new byte[length + 1];
+            byte[] readData = new byte[length + 1];
             if (length > 1 && length < 13)
             {
-                readdata[0] = (int)X10CommandType.PLC_Poll;
-                Array.Copy(buffer, 0, readdata, 1, length);
+                readData[0] = (int)X10CommandType.PLC_Poll;
+                Array.Copy(buffer, 0, readData, 1, length);
             }
             else
             {
-                Array.Copy(buffer, readdata, length);
+                Array.Copy(buffer, readData, length);
             }
-                //
-			return readdata;
-		}
+            //
+            return readData;
+        }
 
-		public void WriteData(byte[] bytesToSend)
-		{
-			if ( _serialport != null && _serialport.IsOpen)
-			{
-				_serialport.Write(bytesToSend, 0, bytesToSend.Length);
+        public void WriteData(byte[] bytesToSend)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.Write(bytesToSend, 0, bytesToSend.Length);
             }
-		}
+        }
 
-	}
+    }
 }
 

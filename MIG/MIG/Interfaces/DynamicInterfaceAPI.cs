@@ -29,25 +29,25 @@ namespace MIG.Interfaces
 {
     public static class DynamicInterfaceAPI
     {
-        private static Dictionary<string, Func<object, object>> _dynamicapi = new Dictionary<string, Func<object, object>>();
+        private static Dictionary<string, Func<object, object>> dynamicApi = new Dictionary<string, Func<object, object>>();
 
         public static Func<object, object> Find(string request)
         {
             Func<object, object> handler = null;
-            if (_dynamicapi.ContainsKey(request))
+            if (dynamicApi.ContainsKey(request))
             {
-                handler = _dynamicapi[request];
+                handler = dynamicApi[request];
             }
             return handler;
         }
         public static Func<object, object> FindMatching(string request)
         {
             Func<object, object> handler = null;
-            for (int i = 0; i < _dynamicapi.Keys.Count; i++)
+            for (int i = 0; i < dynamicApi.Keys.Count; i++)
             {
-                if (request.StartsWith(_dynamicapi.Keys.ElementAt(i)))
+                if (request.StartsWith(dynamicApi.Keys.ElementAt(i)))
                 {
-                    handler = _dynamicapi[_dynamicapi.Keys.ElementAt(i)];
+                    handler = dynamicApi[dynamicApi.Keys.ElementAt(i)];
                     break;
                 }
             }
@@ -55,20 +55,20 @@ namespace MIG.Interfaces
         }
         public static void Register(string request, Func<object, object> handlerfn)
         {
-            if (_dynamicapi.ContainsKey(request))
+            if (dynamicApi.ContainsKey(request))
             {
-                _dynamicapi[request] = handlerfn;
+                dynamicApi[request] = handlerfn;
             }
             else
             {
-                _dynamicapi.Add(request, handlerfn);
+                dynamicApi.Add(request, handlerfn);
             }
         }
         public static void UnRegister(string request)
         {
-            if (_dynamicapi.ContainsKey(request))
+            if (dynamicApi.ContainsKey(request))
             {
-                _dynamicapi.Remove(request);
+                dynamicApi.Remove(request);
             }
         }
 

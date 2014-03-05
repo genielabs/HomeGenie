@@ -43,29 +43,29 @@ namespace HomeGenie.Data
 
         public DateTime LastProcessedTimestap;
 
-        private List<StatValue> _values;
+        private List<StatValue> statValues;
 
         public ValueStatistics()
         {
             LastProcessedTimestap = DateTime.UtcNow;
-            _values = new List<StatValue>();
-            _values.Add(new StatValue(0, LastProcessedTimestap));
+            statValues = new List<StatValue>();
+            statValues.Add(new StatValue(0, LastProcessedTimestap));
         }
 
         public void AddValue(double value, DateTime timestamp)
         {
-            _values.Add(new StatValue(value, timestamp));
+            statValues.Add(new StatValue(value, timestamp));
         }
 
         public List<StatValue> Values
         {
-            get { return _values; }
+            get { return statValues; }
         }
 
         /// <summary>
         /// Get resampled statistic values by averaging values for a given time range increment (eg 60 minutes)
         /// </summary>
-        public List<StatValue> GetResampledValues(int samplewidth) // in minutes
+        public List<StatValue> GetResampledValues(int sampleWidth) // in minutes
         {
             return null;
         }

@@ -32,9 +32,9 @@ namespace MIG.Gateways
     {
 
 
-        public static void WriteStringToContext(System.Net.HttpListenerContext context, string returnvalue)
+        public static void WriteStringToContext(System.Net.HttpListenerContext context, string returnValue)
         {
-            WriteBytesToContext(context, System.Text.Encoding.UTF8.GetBytes(returnvalue));
+            WriteBytesToContext(context, System.Text.Encoding.UTF8.GetBytes(returnValue));
         }
         public static void WriteBytesToContext(System.Net.HttpListenerContext context, byte[] buffer)
         {
@@ -55,15 +55,15 @@ namespace MIG.Gateways
         // code adapted from
         // http://stackoverflow.com/questions/8466703/httplistener-and-file-upload
 
-        public static String GetBoundary(String ctype)
+        public static String GetBoundary(String contentType)
         {
-            if (ctype == null) return "";
-            return /*"--" + */ ctype.Split(';')[1].Split('=')[1];
+            if (contentType == null) return "";
+            return /*"--" + */ contentType.Split(';')[1].Split('=')[1];
         }
 
-        public static void SaveFile(Encoding enc, String boundary, Stream input, string outfile)
+        public static void SaveFile(Encoding encoding, String boundary, Stream input, string outputFile)
         {
-            Byte[] boundaryBytes = new byte[] { }; if (boundary != null) boundaryBytes = enc.GetBytes(boundary);
+            Byte[] boundaryBytes = new byte[] { }; if (boundary != null) boundaryBytes = encoding.GetBytes(boundary);
             Int32 boundaryLen = boundaryBytes.Length;
 
             using (MemoryStream output = new MemoryStream())
@@ -102,7 +102,7 @@ namespace MIG.Gateways
                             throw new Exception("Preamble not Found.");
                         }
 
-                        startPos = Array.IndexOf(buffer, enc.GetBytes("\n")[0], startPos);
+                        startPos = Array.IndexOf(buffer, encoding.GetBytes("\n")[0], startPos);
                         if (startPos >= 0)
                         {
                             startPos++;
@@ -138,12 +138,12 @@ namespace MIG.Gateways
                     }
                 }
                 output.Seek(0, SeekOrigin.Begin);
-                long ps = FindPosition(output, enc.GetBytes("\n--"));
+                long ps = FindPosition(output, encoding.GetBytes("\n--"));
                 //startPos = Array.IndexOf(output.ToArray(), enc.GetBytes("\n---"), 0);
                 if (ps > 0)
                 {
                     byte[] b = output.ToArray();
-                    FileStream fs = new FileStream(outfile, FileMode.Create);
+                    FileStream fs = new FileStream(outputFile, FileMode.Create);
                     fs.Write(b, 0, (int)ps - 1);
                     fs.Close();
                     //Array.Resize(

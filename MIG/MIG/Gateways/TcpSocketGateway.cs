@@ -34,12 +34,12 @@ namespace MIG.Gateways
         public int Port;
     }
 
-    class TcpSocketGateyRequest
+    class TcpSocketGatewayRequest
     {
         public int ClientId;
         public byte[] Request;
 
-        public TcpSocketGateyRequest(int clientid, byte[] request)
+        public TcpSocketGatewayRequest(int clientid, byte[] request)
         {
             this.ClientId = clientid;
             this.Request = request;
@@ -50,8 +50,8 @@ namespace MIG.Gateways
     {
         public event Action<object> ProcessRequest;
 
-        private TCPServerChannel _server;
-        private int _serviceport = 4502;
+        private TCPServerChannel server;
+        private int servicePort = 4502;
 
         public TcpSocketGateway()
         {
@@ -61,48 +61,48 @@ namespace MIG.Gateways
 
         public void Start()
         {
-            _server = NetworkConnectivity.CreateTCPServerChannel("server");
-            _server.ChannelClientConnected += new ServerConnectionEventHandler(_server_ChannelClientConnected);
-            _server.ChannelClientDisconnected += new ServerConnectionEventHandler(_server_ChannelClientDisconnected);
+            server = NetworkConnectivity.CreateTCPServerChannel("server");
+            server.ChannelClientConnected += new ServerConnectionEventHandler(server_ChannelClientConnected);
+            server.ChannelClientDisconnected += new ServerConnectionEventHandler(server_ChannelClientDisconnected);
             //_server.ChannelConnected += 
             //_server.ChannelDisconnected += 
-            _server.DataReceived += new ServerDataEventHandler(_server_DataReceived);
+            server.DataReceived += new ServerDataEventHandler(server_DataReceived);
             //_server.DataSent += 
             //_server.ExceptionOccurred += 
-            _server.ExceptionOccurred += new System.IO.ErrorEventHandler(_server_ExceptionOccurred);
-            _server.Connect(_serviceport);
+            server.ExceptionOccurred += new System.IO.ErrorEventHandler(server_ExceptionOccurred);
+            server.Connect(servicePort);
         }
 
-        public void Configure(object gwconfiguration)
+        public void Configure(object gwConfiguration)
         {
-            TcpSocketGatewayConfiguration cnf = (TcpSocketGatewayConfiguration)gwconfiguration;
-            _serviceport = cnf.Port;
+            var config = (TcpSocketGatewayConfiguration)gwConfiguration;
+            servicePort = config.Port;
         }
 
 
-        private void _server_ChannelClientConnected(object sender, ServerConnectionEventArgs args)
+        private void server_ChannelClientConnected(object sender, ServerConnectionEventArgs args)
         {
-            _server.Receive(256, args.ClientId);
+            server.Receive(256, args.ClientId);
         }
 
-        private void _server_DataReceived(object sender, ServerDataEventArgs args)
+        private void server_DataReceived(object sender, ServerDataEventArgs args)
         {
 
             if (ProcessRequest != null)
             {
-                ProcessRequest(new TcpSocketGateyRequest(args.ClientId, args.Data)); // '\0's ending byte array
+                ProcessRequest(new TcpSocketGatewayRequest(args.ClientId, args.Data)); // '\0's ending byte array
             }
 
-            _server.Receive(256, (int)args.ClientId);
+            server.Receive(256, (int)args.ClientId);
 
         }
 
-        private void _server_ChannelClientDisconnected(object sender, ServerConnectionEventArgs args)
+        private void server_ChannelClientDisconnected(object sender, ServerConnectionEventArgs args)
         {
 
         }
 
-        private void _server_ExceptionOccurred(object sender, System.IO.ErrorEventArgs e)
+        private void server_ExceptionOccurred(object sender, System.IO.ErrorEventArgs e)
         {
 
         }

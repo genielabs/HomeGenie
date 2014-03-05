@@ -38,110 +38,110 @@ namespace HomeGenie.Automation
     public class MacroRecorder
     {
         // vars for macro record fn
-        private bool _ismacrorecordingenabled = false;
-        private List<MIGInterfaceCommand> _macrocommands = new List<MIGInterfaceCommand>();
-        private DateTime _macrorecordcurrentts = DateTime.Now;
-        private double _macrorecorddelayseconds = 1;
-        private MacroDelayType _macrorecorddelaytype = MacroDelayType.Fixed;
-        private DateTime _macrorecordstartts = DateTime.Now;
+        private bool isMacroRecordingEnabled = false;
+        private List<MIGInterfaceCommand> macroCommands = new List<MIGInterfaceCommand>();
+        private DateTime currentTimestamp = DateTime.Now;
+        private double delaySeconds = 1;
+        private MacroDelayType delayType = MacroDelayType.Fixed;
+        private DateTime startTimestamp = DateTime.Now;
 
-        private ProgramEngine _mastercontrolprogram;
+        private ProgramEngine masterControlProgram;
 
         public MacroRecorder(ProgramEngine mcp)
         {
-            _mastercontrolprogram = mcp;
+            masterControlProgram = mcp;
         }
 
         public void RecordingDisable()
         {
             // stop recording
-            _ismacrorecordingenabled = false;
+            isMacroRecordingEnabled = false;
         }
 
         public void RecordingEnable()
         {
             // start recording
-            _macrocommands.Clear();
-            _macrorecordstartts = _macrorecordcurrentts = DateTime.Now;
-            _ismacrorecordingenabled = true;
+            macroCommands.Clear();
+            startTimestamp = currentTimestamp = DateTime.Now;
+            isMacroRecordingEnabled = true;
         }
 
         public ProgramBlock SaveMacro(string options)
         {
             RecordingDisable();
             //
-            ProgramBlock pb = new ProgramBlock();
-            pb.Name = "New Macro";
-            pb.Address = _mastercontrolprogram.GeneratePid();
-            pb.Type = "Wizard";
-            foreach (MIGInterfaceCommand mc in _macrocommands)
+            var program = new ProgramBlock();
+            program.Name = "New Macro";
+            program.Address = masterControlProgram.GeneratePid();
+            program.Type = "Wizard";
+            foreach (var migCommand in macroCommands)
             {
-                ProgramCommand pc = new ProgramCommand();
-                pc.Domain = mc.domain;
-                pc.Target = mc.nodeid;
-                pc.CommandString = mc.command;
-                pc.CommandArguments = "";
-                if (!string.IsNullOrEmpty(mc.GetOption(0)) && mc.GetOption(0) != "null")
+                var command = new ProgramCommand();
+                command.Domain = migCommand.Domain;
+                command.Target = migCommand.NodeId;
+                command.CommandString = migCommand.Command;
+                command.CommandArguments = "";
+                if (!string.IsNullOrEmpty(migCommand.GetOption(0)) && migCommand.GetOption(0) != "null")
                 {
                     //TODO: should we pass entire command option string? migCmd.OptionsString
-                    pc.CommandArguments = mc.GetOption(0) + (options != "" && options != "null" ? "/" + options : "");
+                    command.CommandArguments = migCommand.GetOption(0) + (options != "" && options != "null" ? "/" + options : "");
                 }
-                pb.Commands.Add(pc);
+                program.Commands.Add(command);
             }
-            _mastercontrolprogram.ProgramAdd(pb);
+            masterControlProgram.ProgramAdd(program);
             //
-            return pb;
+            return program;
         }
 
         public void AddCommand(MIGInterfaceCommand cmd)
         {
-            double delaypause = 0;
-            switch (_macrorecorddelaytype)
+            double delay = 0;
+            switch (delayType)
             {
                 case MacroDelayType.Mimic:
                     // calculate pause between current and previous command
-                    delaypause = new TimeSpan(DateTime.Now.Ticks - _macrorecordcurrentts.Ticks).TotalSeconds;
+                    delay = new TimeSpan(DateTime.Now.Ticks - currentTimestamp.Ticks).TotalSeconds;
                     break;
 
                 case MacroDelayType.Fixed:
                     // put a fixed pause
-                    delaypause = _macrorecorddelayseconds;
+                    delay = delaySeconds;
                     break;
             }
             //
             try
             {
-                if (delaypause > 0 && _macrocommands.Count > 0)
+                if (delay > 0 && macroCommands.Count > 0)
                 {
                     // add a pause command to the macro
-                    _macrocommands.Add(new MIGInterfaceCommand("HomeAutomation.HomeGenie/Automation/Program.Pause/" + delaypause.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+                    macroCommands.Add(new MIGInterfaceCommand("HomeAutomation.HomeGenie/Automation/Program.Pause/" + delay.ToString(System.Globalization.CultureInfo.InvariantCulture)));
                 }
-                _macrocommands.Add(cmd);
+                macroCommands.Add(cmd);
             }
             catch (Exception ex)
             {
                 //HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "migservice_ServiceRequestPostProcess(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             //
-            _macrorecordcurrentts = DateTime.Now;
+            currentTimestamp = DateTime.Now;
 
         }
 
         public bool IsRecordingEnabled
         {
-            get { return _ismacrorecordingenabled; }
+            get { return isMacroRecordingEnabled; }
         }
 
         public MacroDelayType DelayType
         {
-            get { return _macrorecorddelaytype; }
-            set { _macrorecorddelaytype = value; }
+            get { return delayType; }
+            set { delayType = value; }
         }
 
         public double DelaySeconds
         {
-            get { return _macrorecorddelayseconds; }
-            set { _macrorecorddelayseconds = value; }
+            get { return delaySeconds; }
+            set { delaySeconds = value; }
         }
 
     }

@@ -33,7 +33,8 @@ using System.Collections.Generic;
 namespace TcpClientLib
 {
     // State object for receiving data from remote device.
-    public class StateObject {
+    public class StateObject
+    {
         // Client socket.
         public Socket workSocket = null;
         // Size of receive buffer.
@@ -71,15 +72,15 @@ namespace TcpClientLib
         private ManualResetEvent receiveDone =
             new ManualResetEvent(false);
 
-        private bool _debug = false;
+        private bool debug = false;
 
         // The response from the remote device.
-        private byte[] rawresponse = null;
+        private byte[] rawResponse = null;
         private Socket client = null;
 
-        private Thread _receiverthread;
+        private Thread receiverTask;
 
-        public bool Connect(string remoteserver, int remoteport)
+        public bool Connect(string remoteServer, int remotePort)
         {
             connectDone.Reset();
             receiveDone.Reset();
@@ -91,12 +92,12 @@ namespace TcpClientLib
                 // The name of the 
                 // remote device is "host.contoso.com".
                 IPAddress ipAddress;
-                if (!IPAddress.TryParse(remoteserver, out ipAddress))
+                if (!IPAddress.TryParse(remoteServer, out ipAddress))
                 {
-                    IPHostEntry ipHostInfo = Dns.GetHostEntry(remoteserver);
+                    IPHostEntry ipHostInfo = Dns.GetHostEntry(remoteServer);
                     ipAddress = ipHostInfo.AddressList[0];
                 }
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, remoteport);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, remotePort);
 
                 // Create a TCP/IP socket.
                 client = new Socket(AddressFamily.InterNetwork,
@@ -120,9 +121,9 @@ namespace TcpClientLib
 
         public void Disconnect()
         {
-            try { _receiverthread.Abort(); }
+            try { receiverTask.Abort(); }
             catch { }
-            _receiverthread = null;
+            receiverTask = null;
             try
             {
                 // Release the socket.
@@ -138,18 +139,18 @@ namespace TcpClientLib
 
         public bool Debug
         {
-            get { return _debug; }
-            set { _debug = value; }
+            get { return debug; }
+            set { debug = value; }
         }
 
         public byte[] ReceiveMessage()
         {
-            rawresponse = null;
+            rawResponse = null;
 
             // Receive the response from the remote device.
             if (Receive(client)) receiveDone.WaitOne(10000);
 
-            return rawresponse;
+            return rawResponse;
         }
 
         public void SendMessage(byte[] byteData)
@@ -163,7 +164,7 @@ namespace TcpClientLib
             try
             {
                 // Retrieve the socket from the state object.
-                Socket client = (Socket)ar.AsyncState;
+                var client = (Socket)ar.AsyncState;
 
                 // Complete the connection.
                 client.EndConnect(ar);
@@ -176,8 +177,8 @@ namespace TcpClientLib
 
                 if (ConnectedStateChanged != null) ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(true));
 
-                _receiverthread = new Thread(_receiverloop);
-                _receiverthread.Start();
+                receiverTask = new Thread(ReceiverLoop);
+                receiverTask.Start();
                 //
 
                 // Signal that the connection has been made.
@@ -191,7 +192,7 @@ namespace TcpClientLib
             }
         }
 
-        private void _receiverloop(object obj)
+        private void ReceiverLoop(object obj)
         {
             while (client != null && client.Connected)
             {
@@ -241,8 +242,8 @@ namespace TcpClientLib
             {
                 // Retrieve the state object and the client socket 
                 // from the asynchronous state object.
-                StateObject state = (StateObject)ar.AsyncState;
-                Socket client = state.workSocket;
+                var state = (StateObject)ar.AsyncState;
+                var client = state.workSocket;
 
                 // Read data from the remote device.
                 int bytesRead = client.EndReceive(ar);
@@ -261,10 +262,10 @@ namespace TcpClientLib
                     // All the data has arrived; put it in response.
                     if (state.message.Count > 1)
                     {
-                        rawresponse = new byte[state.message.Count];
-                        Array.Copy(state.message.ToArray(), 0, rawresponse, 0, state.message.Count);
+                        rawResponse = new byte[state.message.Count];
+                        Array.Copy(state.message.ToArray(), 0, rawResponse, 0, state.message.Count);
                         //
-                        if (MessageReceived != null) MessageReceived(rawresponse);
+                        if (MessageReceived != null) MessageReceived(rawResponse);
                     }
                     // Signal that all bytes have been received.
                     receiveDone.Set();
@@ -291,7 +292,7 @@ namespace TcpClientLib
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 success = false;
                 Console.WriteLine(ex.ToString());
@@ -328,7 +329,7 @@ namespace TcpClientLib
             try
             {
                 // Retrieve the socket from the state object.
-                Socket client = (Socket)ar.AsyncState;
+                var client = (Socket)ar.AsyncState;
 
                 // Complete sending the data to the remote device.
                 int bytesSent = client.EndSend(ar);
@@ -346,22 +347,22 @@ namespace TcpClientLib
             }
         }
 
-        private String ByteArrayToString(byte[] message)
+        private string ByteArrayToString(byte[] message)
         {
-            String ret = String.Empty;
+            string returnValue = String.Empty;
             foreach (byte b in message)
             {
-                ret += b.ToString("X2") + " ";
+                returnValue += b.ToString("X2") + " ";
             }
-            return ret.Trim();
+            return returnValue.Trim();
         }
 
-        public bool IsConnected 
-        { 
-            get 
+        public bool IsConnected
+        {
+            get
             {
-                return (client != null && client.Connected ? true : false);  
-            } 
+                return (client != null && client.Connected ? true : false);
+            }
         }
     }
 }

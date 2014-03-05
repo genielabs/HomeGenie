@@ -32,48 +32,48 @@ namespace HomeGenie.Automation.Scheduler
 {
     public class SchedulerService
     {
-        private List<SchedulerItem> _scheduleditems = new List<SchedulerItem>();
-        private Timer _servicechecker;
-        private ProgramEngine _mastercontrolprogram;
+        private List<SchedulerItem> events = new List<SchedulerItem>();
+        private Timer serviceChecker;
+        private ProgramEngine masterControlProgram;
 
-        public SchedulerService(ProgramEngine mcp)
+        public SchedulerService(ProgramEngine programEngine)
         {
-            _mastercontrolprogram = mcp;
+            masterControlProgram = programEngine;
         }
 
         public void Start()
         {
             Stop();
-            _servicechecker = new Timer(_checkscheduleditems, null, 1000, 1000);
+            serviceChecker = new Timer(CheckScheduledEvents, null, 1000, 1000);
         }
 
         public void Stop()
         {
-            if (_servicechecker != null)
+            if (serviceChecker != null)
             {
-                _servicechecker.Dispose();
+                serviceChecker.Dispose();
             }
         }
 
-        private void _checkscheduleditems(object state)
+        private void CheckScheduledEvents(object state)
         {
-            for (int i = 0; i < _scheduleditems.Count; i++)
+            for (int i = 0; i < events.Count; i++)
             {
-                SchedulerItem item = _scheduleditems[i];
+                var eventItem = events[i];
                 // TODO: execute items only once instead of repeating for the whole minute
                 string currentoccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                if (item.IsEnabled && item.LastOccurrence != currentoccurrence && IsScheduling(item.CronExpression))
+                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentoccurrence && IsScheduling(eventItem.CronExpression))
                 {
                     // update last/next occurrence values
-                    item.LastOccurrence = currentoccurrence;
-                    item.NextOccurrence = _getnextoccurrence(item.CronExpression);
+                    eventItem.LastOccurrence = currentoccurrence;
+                    eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
                     // execute associated task if any
-                    if (!String.IsNullOrEmpty(item.ProgramId))
+                    if (!String.IsNullOrEmpty(eventItem.ProgramId))
                     {
-                        ProgramBlock pb = _mastercontrolprogram.Programs.Find(p => p.Address.ToString() == item.ProgramId || p.Name == item.ProgramId);
-                        if (pb != null)
+                        var program = masterControlProgram.Programs.Find(p => p.Address.ToString() == eventItem.ProgramId || p.Name == eventItem.ProgramId);
+                        if (program != null)
                         {
-                            _mastercontrolprogram.Run(pb, "");
+                            masterControlProgram.Run(program, "");
                         }
                     }
                 }
@@ -82,33 +82,33 @@ namespace HomeGenie.Automation.Scheduler
 
         public SchedulerItem Get(string name)
         {
-            SchedulerItem item = _scheduleditems.Find(e => e.Name.ToLower() == name.ToLower());
-            return item;
+            var eventItem = events.Find(e => e.Name.ToLower() == name.ToLower());
+            return eventItem;
         }
 
-        public SchedulerItem AddOrUpdate(string name, string cronexp)
+        public SchedulerItem AddOrUpdate(string name, string cronExpression)
         {
             if (String.IsNullOrEmpty(name)) return null;
             //
-            SchedulerItem item = Get(name);
-            if (item == null)
+            var eventItem = Get(name);
+            if (eventItem == null)
             {
-                item = new SchedulerItem();
-                item.Name = name;
-                _scheduleditems.Add(item);
+                eventItem = new SchedulerItem();
+                eventItem.Name = name;
+                events.Add(eventItem);
             }
-            item.CronExpression = cronexp;
-            item.LastOccurrence = "-";
-            item.NextOccurrence = _getnextoccurrence(item.CronExpression);
-            return item;
+            eventItem.CronExpression = cronExpression;
+            eventItem.LastOccurrence = "-";
+            eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
+            return eventItem;
         }
 
         public bool SetProgram(string name, string pid)
         {
-            SchedulerItem item = Get(name);
-            if (item != null)
+            var eventItem = Get(name);
+            if (eventItem != null)
             {
-                item.ProgramId = pid;
+                eventItem.ProgramId = pid;
                 return true;
             }
             return false;
@@ -116,11 +116,11 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool Enable(string name)
         {
-            SchedulerItem item = Get(name);
-            if (item != null)
+            var eventItem = Get(name);
+            if (eventItem != null)
             {
-                item.IsEnabled = true;
-                item.NextOccurrence = _getnextoccurrence(item.CronExpression);
+                eventItem.IsEnabled = true;
+                eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
                 return true;
             }
             return false;
@@ -128,12 +128,12 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool Disable(string name)
         {
-            SchedulerItem item = Get(name);
-            if (item != null)
+            var eventItem = Get(name);
+            if (eventItem != null)
             {
-                item.IsEnabled = false;
-                item.LastOccurrence = "-";
-                item.NextOccurrence = "-";
+                eventItem.IsEnabled = false;
+                eventItem.LastOccurrence = "-";
+                eventItem.NextOccurrence = "-";
                 return true;
             }
             return false;
@@ -141,23 +141,23 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool Remove(string name)
         {
-            SchedulerItem item = Get(name);
-            if (item == null)
+            var eventItem = Get(name);
+            if (eventItem == null)
             {
                 return false;
             }
-            _scheduleditems.Remove(item);
+            events.Remove(eventItem);
             return true;
         }
 
-        public bool IsScheduling(string cronexp)
+        public bool IsScheduling(string cronExpression)
         {
             bool success = true;
-            string[] exprs = cronexp.Split(';'); // <-- ';' is AND operator
+            string[] exprs = cronExpression.Split(';'); // <-- ';' is AND operator
             for (int e = 0; e < exprs.Length; e++)
             {
                 string currentexpr = exprs[e].Trim();
-                success = success && _matchexpression(currentexpr);
+                success = success && IsEventActive(currentexpr);
                 if (!success) break;
             }
             return success;
@@ -165,29 +165,29 @@ namespace HomeGenie.Automation.Scheduler
 
         public List<SchedulerItem> Items
         {
-            get { return _scheduleditems; }
+            get { return events; }
         }
 
 
-        private bool _matchexpression(string cronexp, List<string> checkedstack = null)
+        private bool IsEventActive(string cronExpression, List<string> checkedStack = null)
         {
-            if (checkedstack == null) checkedstack = new List<string>();
+            if (checkedStack == null) checkedStack = new List<string>();
             //
-            string[] exprs = cronexp.Split(':'); // <-- ':' is OR operator
-            for (int e = 0; e < exprs.Length; e++)
+            string[] expressionList = cronExpression.Split(':'); // <-- ':' is OR operator
+            for (int e = 0; e < expressionList.Length; e++)
             {
-                string currentexpr = exprs[e].Trim();
+                string currentExpression = expressionList[e].Trim();
                 // avoid loops
-                if (checkedstack.Contains(currentexpr))
+                if (checkedStack.Contains(currentExpression))
                 {
                     continue;
                 }
-                checkedstack.Add(currentexpr);
-                if (currentexpr.StartsWith("@"))
+                checkedStack.Add(currentExpression);
+                if (currentExpression.StartsWith("@"))
                 {
                     // Check expresion from scheduled item with a given name
-                    SchedulerItem itemref = Get(currentexpr.Substring(1));
-                    if (itemref.IsEnabled && _matchexpression(itemref.CronExpression, checkedstack))
+                    var eventItem = Get(currentExpression.Substring(1));
+                    if (eventItem.IsEnabled && IsEventActive(eventItem.CronExpression, checkedStack))
                     {
                         return true;
                     }
@@ -195,10 +195,10 @@ namespace HomeGenie.Automation.Scheduler
                 else
                 {
                     // Check current expression
-                    ValueOrError<CrontabSchedule> cts = NCrontab.CrontabSchedule.TryParse(currentexpr);
-                    if (!cts.IsError)
+                    var cronSchedule = NCrontab.CrontabSchedule.TryParse(currentExpression);
+                    if (!cronSchedule.IsError)
                     {
-                        DateTime occurrence = cts.Value.GetNextOccurrence(DateTime.Now.AddMinutes(-1));
+                        var occurrence = cronSchedule.Value.GetNextOccurrence(DateTime.Now.AddMinutes(-1));
                         string d1 = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
                         string d2 = occurrence.ToString("yyyy-MM-dd HH:mm");
                         if (d1 == d2)
@@ -212,12 +212,12 @@ namespace HomeGenie.Automation.Scheduler
             return false;
         }
 
-        private string _getnextoccurrence(string expr)
+        private string GetNextEventOccurrence(string cronExpression)
         {
-            ValueOrError<CrontabSchedule> cts = NCrontab.CrontabSchedule.TryParse(expr);
-            if (!cts.IsError)
+            var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
+            if (!cronSchedule.IsError)
             {
-                DateTime occurrence = cts.Value.GetNextOccurrence(DateTime.Now);
+                var occurrence = cronSchedule.Value.GetNextOccurrence(DateTime.Now);
                 return occurrence.ToString("yyyy-MM-dd HH:mm");
             }
             return "-";

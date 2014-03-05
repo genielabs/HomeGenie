@@ -134,7 +134,7 @@ namespace MIG.Interfaces.Controllers
         private extern static int lirc_init(string prog, int verbose);
 
         [DllImport("lirc_client")]
-        private extern static int lirc_deinit();
+        private extern static int LircDeinit();
 
         [DllImport("lirc_client")]
         private extern static int lirc_nextcode(out string code);
@@ -143,53 +143,53 @@ namespace MIG.Interfaces.Controllers
         private extern static int lirc_readconfig(IntPtr file, out IntPtr config, IntPtr check);
 
         [DllImport("lirc_client")]
-        private extern static int lirc_freeconfig(IntPtr config);
+        private extern static int LircFreeConfig(IntPtr config);
 
         [DllImport("lirc_client")]
         private extern static int lirc_code2char(IntPtr config, string code, out string str);
         #endregion
 
-        private string programname = "homegenie";
-        private bool isconnected;
-        private Thread lirclistener;
-        private IntPtr lircconfig;
-        List<LircRemoteData> _remotesdata = null;
-        List<LircRemoteData> _remotesconfig = null;
-        private Timer _rfpulsetimer;
+        private string programName = "homegenie";
+        private bool isConnected;
+        private Thread lircListener;
+        private IntPtr lircConfig;
+        List<LircRemoteData> remotesData = null;
+        List<LircRemoteData> remotesConfig = null;
+        private Timer rfPulseTimer;
 
         public LircRemote()
         {
-            _remotesconfig = new List<LircRemoteData>();
+            remotesConfig = new List<LircRemoteData>();
             string configfile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml");
             if (File.Exists(configfile))
             {
-                XmlSerializer mserializer = new XmlSerializer(typeof(List<LircRemoteData>));
-                StreamReader mreader = new StreamReader(configfile);
-                _remotesconfig = (List<LircRemoteData>)mserializer.Deserialize(mreader);
-                mreader.Close();
+                var serializer = new XmlSerializer(typeof(List<LircRemoteData>));
+                var reader = new StreamReader(configfile);
+                remotesConfig = (List<LircRemoteData>)serializer.Deserialize(reader);
+                reader.Close();
             }
             //
             string remotesdb = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircremotes.xml");
             if (File.Exists(remotesdb))
             {
-                XmlSerializer mserializer = new XmlSerializer(typeof(List<LircRemoteData>));
-                StreamReader mreader = new StreamReader(remotesdb);
-                _remotesdata = (List<LircRemoteData>)mserializer.Deserialize(mreader);
-                mreader.Close();
+                var serializer = new XmlSerializer(typeof(List<LircRemoteData>));
+                var reader = new StreamReader(remotesdb);
+                remotesData = (List<LircRemoteData>)serializer.Deserialize(reader);
+                reader.Close();
             }
 
         }
 
 
-        public List<LircRemoteData> SearchRemotes(string searchstring)
+        public List<LircRemoteData> SearchRemotes(string searchString)
         {
-            List<LircRemoteData> filtered = new List<LircRemoteData>();
-            searchstring = searchstring.ToLower();
-            foreach (LircRemoteData lrd in _remotesdata)
+            var filtered = new List<LircRemoteData>();
+            searchString = searchString.ToLower();
+            foreach (var remote in remotesData)
             {
-                if (lrd.Manufacturer.ToLower().StartsWith(searchstring) || lrd.Model.ToLower().StartsWith(searchstring))
+                if (remote.Manufacturer.ToLower().StartsWith(searchString) || remote.Model.ToLower().StartsWith(searchString))
                 {
-                    filtered.Add(lrd);
+                    filtered.Add(remote);
                 }
             }
             return filtered;
@@ -211,9 +211,9 @@ namespace MIG.Interfaces.Controllers
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
@@ -226,7 +226,7 @@ namespace MIG.Interfaces.Controllers
         /// </value>
         public bool IsConnected
         {
-            get { return isconnected; }
+            get { return isConnected; }
         }
         /// <summary>
         /// Returns true if the device has been found in the system
@@ -250,24 +250,24 @@ namespace MIG.Interfaces.Controllers
 
         public bool Connect()
         {
-            if (!isconnected)
+            if (!isConnected)
             {
                 try
                 {
-                    if (lirc_init(programname, 1) == -1)
+                    if (lirc_init(programName, 1) == -1)
                     {
                         return false;
                     }
-                    if (lirc_readconfig(IntPtr.Zero, out lircconfig, IntPtr.Zero) != 0)
+                    if (lirc_readconfig(IntPtr.Zero, out lircConfig, IntPtr.Zero) != 0)
                     {
                         return false;
                     }
                     //
-                    isconnected = true;
+                    isConnected = true;
                     //
-                    lirclistener = new Thread(new ThreadStart(() =>
+                    lircListener = new Thread(new ThreadStart(() =>
                     {
-                        while (isconnected)
+                        while (isConnected)
                         {
                             string code = null;
                             try
@@ -279,7 +279,7 @@ namespace MIG.Interfaces.Controllers
                             if (code == null)
                             {
                                 // TODO: reconnect??
-                                isconnected = false;
+                                isConnected = false;
                                 break;
                             }
                             //
@@ -299,9 +299,9 @@ namespace MIG.Interfaces.Controllers
                                             Value = codeparts[3].TrimEnd(new char[] { '\n', '\r' }) + "/" + codeparts[2]
                                         });
                                         //
-                                        if (_rfpulsetimer == null)
+                                        if (rfPulseTimer == null)
                                         {
-                                            _rfpulsetimer = new Timer(delegate(object target)
+                                            rfPulseTimer = new Timer(delegate(object target)
                                             {
                                                 try
                                                 {
@@ -321,7 +321,7 @@ namespace MIG.Interfaces.Controllers
                                                 }
                                             });
                                         }
-                                        _rfpulsetimer.Change(1000, Timeout.Infinite);
+                                        rfPulseTimer.Change(1000, Timeout.Infinite);
                                     }
                                 }
                                 catch { } // TODO: handle exception
@@ -329,7 +329,7 @@ namespace MIG.Interfaces.Controllers
                             Thread.Sleep(100);
                         }
                     }));
-                    lirclistener.Start();
+                    lircListener.Start();
                 }
                 catch { }
             }
@@ -338,59 +338,59 @@ namespace MIG.Interfaces.Controllers
 
         public void Disconnect()
         {
-            if (isconnected)
+            if (isConnected)
             {
-                lirclistener.Abort();
-                lirclistener = null;
+                lircListener.Abort();
+                lircListener = null;
                 //
                 try
                 {
-                    lirc_freeconfig(lircconfig);
-                    lirc_deinit();
+                    LircFreeConfig(lircConfig);
+                    LircDeinit();
                 }
                 catch (System.Exception ex)
                 {
 
                 }
                 //
-                isconnected = false;
+                isConnected = false;
             }
         }
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            request.response = ""; //default success value
+            request.Response = ""; //default success value
             //
-            if (request.command == Command.REMOTES_SEARCH)
+            if (request.Command == Command.REMOTES_SEARCH)
             {
-                request.response = JsonConvert.SerializeObject(SearchRemotes(request.GetOption(0)), Formatting.Indented);
+                request.Response = JsonConvert.SerializeObject(SearchRemotes(request.GetOption(0)), Formatting.Indented);
             }
-            else if (request.command == Command.REMOTES_ADD)
+            else if (request.Command == Command.REMOTES_ADD)
             {
-                LircRemoteData lrd = _remotesdata.Find(r => r.Manufacturer.ToLower() == request.GetOption(0).ToLower() && r.Model.ToLower() == request.GetOption(1).ToLower());
-                if (lrd != null && _remotesconfig.Find(r => r.Model.ToLower() == lrd.Model.ToLower() && r.Manufacturer.ToLower() == lrd.Manufacturer.ToLower()) == null)
+                var remote = remotesData.Find(r => r.Manufacturer.ToLower() == request.GetOption(0).ToLower() && r.Model.ToLower() == request.GetOption(1).ToLower());
+                if (remote != null && remotesConfig.Find(r => r.Model.ToLower() == remote.Model.ToLower() && r.Manufacturer.ToLower() == remote.Manufacturer.ToLower()) == null)
                 {
-                    WebClient wb = new WebClient();
-                    string config = wb.DownloadString("http://lirc.sourceforge.net/remotes/" + lrd.Manufacturer + "/" + lrd.Model);
-                    lrd.Configuration = GetBytes(config);
-                    _remotesconfig.Add(lrd);
-                    _configsave();
+                    var webClient = new WebClient();
+                    string config = webClient.DownloadString("http://lirc.sourceforge.net/remotes/" + remote.Manufacturer + "/" + remote.Model);
+                    remote.Configuration = GetBytes(config);
+                    remotesConfig.Add(remote);
+                    SaveConfig();
                 }
             }
-            else if (request.command == Command.REMOTES_REMOVE)
+            else if (request.Command == Command.REMOTES_REMOVE)
             {
-                LircRemoteData lrd1 = _remotesconfig.Find(r => r.Manufacturer.ToLower() == request.GetOption(0).ToLower() && r.Model.ToLower() == request.GetOption(1).ToLower());
-                if (lrd1 != null)
+                var remote = remotesConfig.Find(r => r.Manufacturer.ToLower() == request.GetOption(0).ToLower() && r.Model.ToLower() == request.GetOption(1).ToLower());
+                if (remote != null)
                 {
-                    _remotesconfig.Remove(lrd1);
-                    _configsave();
+                    remotesConfig.Remove(remote);
+                    SaveConfig();
                 }
             }
-            else if (request.command == Command.REMOTES_LIST)
+            else if (request.Command == Command.REMOTES_LIST)
             {
-                request.response = JsonConvert.SerializeObject(_remotesconfig, Formatting.Indented);
+                request.Response = JsonConvert.SerializeObject(remotesConfig, Formatting.Indented);
             }
-            else if (request.command == Command.CONTROL_IRSEND)
+            else if (request.Command == Command.CONTROL_IRSEND)
             {
                 string commands = "";
                 int c = 0;
@@ -402,7 +402,7 @@ namespace MIG.Interfaces.Controllers
                 ShellCommand("irsend", "SEND_ONCE " + commands);
             }
             //
-            return request.response;
+            return request.Response;
         }
 
         #endregion
@@ -416,28 +416,28 @@ namespace MIG.Interfaces.Controllers
 
 
 
-        private void _configsave()
+        private void SaveConfig()
         {
-            string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml");
-            if (File.Exists(fname))
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml");
+            if (File.Exists(fileName))
             {
-                File.Delete(fname);
+                File.Delete(fileName);
             }
-            System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
-            ws.Indent = true;
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_remotesconfig.GetType());
-            System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
-            x.Serialize(wri, _remotesconfig);
-            wri.Close();
+            var settings = new System.Xml.XmlWriterSettings();
+            settings.Indent = true;
+            var serializer = new System.Xml.Serialization.XmlSerializer(remotesConfig.GetType());
+            var writer = System.Xml.XmlWriter.Create(fileName, settings);
+            serializer.Serialize(writer, remotesConfig);
+            writer.Close();
             //
             try
             {
-                string lircconfig = "";
-                foreach (LircRemoteData r in _remotesconfig)
+                string lircConfiguration = "";
+                foreach (var remote in remotesConfig)
                 {
-                    lircconfig += GetString(r.Configuration) + "\n";
+                    lircConfiguration += GetString(remote.Configuration) + "\n";
                 }
-                File.WriteAllText("/etc/lirc/lircd.conf", lircconfig);
+                File.WriteAllText("/etc/lirc/lircd.conf", lircConfiguration);
                 ShellCommand("/etc/init.d/lirc", " force-reload");
             }
             catch { }
@@ -461,12 +461,12 @@ namespace MIG.Interfaces.Controllers
 
         static void ShellCommand(string command, string args)
         {
-            System.Diagnostics.ProcessStartInfo psinfo = new System.Diagnostics.ProcessStartInfo(command, args);
-            psinfo.RedirectStandardOutput = false;
-            psinfo.UseShellExecute = false;
-            psinfo.CreateNoWindow = true;
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo = psinfo;
+            var processInfo = new System.Diagnostics.ProcessStartInfo(command, args);
+            processInfo.RedirectStandardOutput = false;
+            processInfo.UseShellExecute = false;
+            processInfo.CreateNoWindow = true;
+            var process = new System.Diagnostics.Process();
+            process.StartInfo = processInfo;
             process.Start();
         }
 

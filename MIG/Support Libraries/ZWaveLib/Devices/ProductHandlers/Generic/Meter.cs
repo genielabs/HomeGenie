@@ -29,12 +29,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
     public class Meter : IZWaveDeviceHandler
     {
-        protected ZWaveNode _nodehost;
+        protected ZWaveNode nodeHost;
 
         public void SetNodeHost(ZWaveNode node)
         {
-            _nodehost = node;
-            _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_WATTS, 0);
+            nodeHost = node;
+            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, 0);
         }
 
 
@@ -63,19 +63,19 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //                       ^^
             bool processed = false;
             //
-            byte command_class = message[7];
+            byte commandClass = message[7];
             //
-            if (command_class == (byte)CommandClass.COMMAND_CLASS_METER)
+            if (commandClass == (byte)CommandClass.COMMAND_CLASS_METER)
             {
                 if (message.Length > 14 && message[4] == 0x00)
                 {
                     // CLASS METER
                     //
-                    double watts_read = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
-                    _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_WATTS, watts_read);
+                    double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
                     //
-                    Logger.Log(LogLevel.REPORT, " * Received METER report from node " + _nodehost.NodeId); // + " (" + _nodehost.Description + ")");
-                    Logger.Log(LogLevel.REPORT, " * " + _nodehost.NodeId + ">   kW " + Math.Round(watts_read, 3) /*+ "    Counter kW " + Math.Round(meter_count, 10)*/ );
+                    Logger.Log(LogLevel.REPORT, " * Received METER report from node " + nodeHost.NodeId); // + " (" + _nodehost.Description + ")");
+                    Logger.Log(LogLevel.REPORT, " * " + nodeHost.NodeId + ">   kW " + Math.Round(wattsRead, 3) /*+ "    Counter kW " + Math.Round(meter_count, 10)*/ );
                     //
                     processed = true;
                 }

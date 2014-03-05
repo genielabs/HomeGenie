@@ -67,7 +67,7 @@ namespace ZWaveLib
             }
             */
             //Console.WriteLine(DateTime.Now.ToLongTimeString() + " " + level.ToString() + " " + message);
-            
+
             //
             if (LogEventReceivedCallback != null) LogEventReceivedCallback(level, message);
         }

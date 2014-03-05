@@ -36,8 +36,8 @@ namespace HomeGenieUpdater
     {
         static void Main(string[] args)
         {
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            var os = Environment.OSVersion;
+            var platformId = os.Platform;
 
             bool restart = false;
             if (args.Length > 1)
@@ -100,31 +100,31 @@ namespace HomeGenieUpdater
             {
 
                 // TODO: run "uname" to determine OS type
-                if (pid == PlatformID.Win32NT)
+                if (platformId == PlatformID.Win32NT)
                 {
                     try
                     {
                         ServiceController service = new ServiceController("HomeGenieService");
                         service.Start();
                     }
-                    catch { _restarthomgenie_net(); }
+                    catch { StartHomeGenie(); }
                 }
-                else if (pid == PlatformID.Win32Windows)
+                else if (platformId == PlatformID.Win32Windows)
                 {
-                    _restarthomgenie_net();
+                    StartHomeGenie();
                 }
                 else
                 {
-                    _restarthomgenie_mono();
+                    StartMonoHomeGenie();
                 }
 
             }
 
         }
 
-        private static void _restarthomgenie_net()
+        private static void StartHomeGenie()
         {
-            Process homegenie = new Process();
+            var homegenie = new Process();
             homegenie.StartInfo.FileName = "HomeGenie.exe";
             homegenie.StartInfo.Arguments = "-u";
             //updater.StartInfo.UseShellExecute = true;
@@ -133,9 +133,9 @@ namespace HomeGenieUpdater
             homegenie.Start();
         }
 
-        private static void _restarthomgenie_mono()
+        private static void StartMonoHomeGenie()
         {
-            Process homegenie = new Process();
+            var homegenie = new Process();
             homegenie.StartInfo.FileName = "mono";
             homegenie.StartInfo.Arguments = "HomeGenie.exe -u";
             homegenie.StartInfo.UseShellExecute = false;

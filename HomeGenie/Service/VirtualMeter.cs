@@ -35,68 +35,66 @@ namespace HomeGenie.Service
 
     public class VirtualMeter
     {
-        Thread _meterthread;
-
-        HomeGenieService _homegenie;
-
-        private bool _vmrunning = true;
+        private HomeGenieService homegenie;
+        private Thread meterThread;
+        private bool isRunning = true;
+        private int reportFrequency = 30000;
 
         public VirtualMeter(HomeGenieService hg)
         {
-            _homegenie = hg;
+            homegenie = hg;
             Start();
         }
 
         public void Start()
         {
-            _meterthread = new Thread(new ThreadStart(_virtualmeterloop));
-            _meterthread.Start();
+            meterThread = new Thread(virtualMeterTask);
+            meterThread.Start();
         }
 
         public void Stop()
         {
-            _vmrunning = false;
+            isRunning = false;
         }
 
-        private void _virtualmeterloop()
+        private void virtualMeterTask()
         {
-            while (_vmrunning)
+            while (isRunning)
             {
-                try
+                foreach (var module in homegenie.Modules)
                 {
-                    foreach (Module module in _homegenie.Modules)
+                    ModuleParameter parameter = null;
+                    parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS; });
+                    if (parameter == null)
                     {
-                        ModuleParameter parameter = null;
-                        parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS; });
-                        if (parameter == null)
+                        continue;
+                    }
+                    else
+                    {
+                        try
                         {
-                            continue;
-                        }
-                        else
-                        {
-                            double vmwatts = 0;
-                            //
-                            try
+                            double watts = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                            if (watts > 0)
                             {
-                                vmwatts = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-                                if (vmwatts > 0)
+                                parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL; });
+                                double level = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                                //
+                                homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction()
                                 {
-                                    parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL; });
-                                    double level = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-                                    //
-                                    //_homegenie.migservice_InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = module.Domain, SourceId = module.Address, SourceType = module.Description, Path = Globals.MODPAR_STATUS_LEVEL, Value = level.ToString() });
-                                    _homegenie.migservice_InterfacePropertyChanged(new InterfacePropertyChangedAction() { Domain = module.Domain, SourceId = module.Address, SourceType = module.Description, Path = ModuleParameters.MODPAR_METER_WATTS, Value = level == 0 ? "0" : (vmwatts * level).ToString(/* System.Globalization.CultureInfo.InvariantCulture */) });
-                                    //
-                                    Thread.Sleep(100);
-                                }
+                                    Domain = module.Domain,
+                                    SourceId = module.Address,
+                                    SourceType = module.Description,
+                                    Path = ModuleParameters.MODPAR_METER_WATTS,
+                                    Value = level == 0 ? "0" : (watts * level).ToString(/* System.Globalization.CultureInfo.InvariantCulture */)
+                                });
+                                //
+                                Thread.Sleep(100);
                             }
-                            catch { }
                         }
+                        catch { }
                     }
                 }
-                catch { } // TODO: this should use locking instead of try cactch
-                //
-                Thread.Sleep(30000);
+                Thread.Sleep(reportFrequency);
             }
         }
 

@@ -40,8 +40,8 @@ namespace HomeGenieService
 {
     class HomeGenieService : ServiceBase
     {
-        private HomeGenie.Service.HomeGenieService hg = null;
-        private ServiceHost hgmanagerservice = null;
+        private HomeGenie.Service.HomeGenieService homegenie = null;
+        private ServiceHost serviceManager = null;
         //
         public HomeGenieService()
         {
@@ -58,31 +58,31 @@ namespace HomeGenieService
         {
             base.OnStart(args);
             //
-            hg = new HomeGenie.Service.HomeGenieService();
-            hg.LogEventAction += new Action<HomeGenie.Data.LogEntry>(hg_LogEventAction);
-            hg.Start();
+            homegenie = new HomeGenie.Service.HomeGenieService();
+            homegenie.LogEventAction += new Action<HomeGenie.Data.LogEntry>(homegenie_LogEventAction);
+            homegenie.Start();
 
-            if (hgmanagerservice != null)
+            if (serviceManager != null)
             {
-                hgmanagerservice.Close();
+                serviceManager.Close();
             }
             // Create a ServiceHost for the CalculatorService type and 
             // provide the base address.
-            ManagerService mgs = new ManagerService();
-            hgmanagerservice = new ServiceHost(mgs);
+            var manager = new ManagerService();
+            serviceManager = new ServiceHost(manager);
 
             // Open the ServiceHostBase to create listeners and start 
             // listening for messages.
-            hgmanagerservice.Open();
+            serviceManager.Open();
             //
-            mgs.SetHomeGenieHost(hg);
+            manager.SetHomeGenieHost(homegenie);
         }
 
-        void hg_LogEventAction(HomeGenie.Data.LogEntry obj)
+        void homegenie_LogEventAction(HomeGenie.Data.LogEntry obj)
         {
-            if (hgmanagerservice != null)
+            if (serviceManager != null)
             {
-                (hgmanagerservice.SingletonInstance as ManagerService).RaiseOnEventLogged(new LogEntry() { Description = obj.Description, Domain = obj.Domain, Property = obj.Property, Source = obj.Source, Value = obj.Value });
+                (serviceManager.SingletonInstance as ManagerService).RaiseOnEventLogged(new LogEntry() { Description = obj.Description, Domain = obj.Domain, Property = obj.Property, Source = obj.Source, Value = obj.Value });
             }
         }
 
@@ -90,13 +90,13 @@ namespace HomeGenieService
         {
             base.OnStop();
             //
-            hg.Stop();
+            homegenie.Stop();
             //
-            if (hgmanagerservice != null)
+            if (serviceManager != null)
             {
-                hgmanagerservice.Close();
+                serviceManager.Close();
             }
-            hgmanagerservice = null;
+            serviceManager = null;
         }
 
 

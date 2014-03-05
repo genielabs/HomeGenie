@@ -63,22 +63,22 @@ namespace TUIOLib
         // Cursor2dUpdateEventArgs
         // AccelerometerUpdateEventArgs
 
-        private int _currentframe = 0;
-        private int _lastframe = 0;
-        private TUIOClient _tuioclient = null;
-        private bool _accelerationenable = false;
+        private int currentFrame = 0;
+        private int lastFrame = 0;
+        private TUIOClient tuioClient = null;
+        private bool accelerationEnable = false;
 
         public TUIOReceiver()
         {
-            _tuioclient = new TUIOClient(3333);
-            _tuioclient.addListener(this);
+            tuioClient = new TUIOClient(3333);
+            tuioClient.addListener(this);
         }
 
         public TUIOReceiver(int port)
         {
-            _tuioclient = new TUIOClient(port);
-            _tuioclient.addListener(this);
-        }        
+            tuioClient = new TUIOClient(port);
+            tuioClient.addListener(this);
+        }
 
         public bool processMessage(OSCMessage message)
         {
@@ -91,7 +91,7 @@ namespace TUIOLib
 
             if (address == "/acceleration/xyz")
             {
-                if (!_accelerationenable)
+                if (!accelerationEnable)
                     return false;
 
                 float x = (float)args[0];
@@ -193,7 +193,7 @@ namespace TUIOLib
             {
                 string command = (string)args[0];
 
-                if ((command == "set") && (_currentframe >= _lastframe))
+                if ((command == "set") && (currentFrame >= lastFrame))
                 {
                     int s_id = (int)args[1];
                     float x = (float)args[2];
@@ -209,7 +209,7 @@ namespace TUIOLib
                     }
 
                 }
-                else if ((command == "alive") && (_currentframe >= _lastframe))
+                else if ((command == "alive") && (currentFrame >= lastFrame))
                 {
                     CursorUpdateEventArgs eventargs = new CursorUpdateEventArgs() { Command = TuioCursorCommand.Alive, CursorData = new TUIOData(args) };
                     CursorUpdate(this, eventargs);

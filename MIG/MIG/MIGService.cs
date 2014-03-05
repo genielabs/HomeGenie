@@ -100,23 +100,23 @@ namespace MIG
 
         public Dictionary<string, MIGInterface> Interfaces; // TODO: this should be read-only, so implement pvt member _interfaces
 
-        private WebServiceGateway _webgateway;
-        private TcpSocketGateway _tcpgateway;
+        private WebServiceGateway webGateway;
+        private TcpSocketGateway tcpGateway;
 
-        private int _tcpgateway_port = 4502;
+        private int tcpGatewayPort = 4502;
 
-        private WebServiceGatewayConfiguration _webserviceconfig;
-        private List<WebFileCache> _webfilecache = new List<WebFileCache>();
+        private WebServiceGatewayConfiguration webServiceConfig;
+        private List<WebFileCache> webFileCache = new List<WebFileCache>();
 
         #region Lifecycle
         public MIGService()
         {
-            _webgateway = new WebServiceGateway();
-            _tcpgateway = new TcpSocketGateway();
+            webGateway = new WebServiceGateway();
+            tcpGateway = new TcpSocketGateway();
             //
             Interfaces = new Dictionary<string, MIGInterface>();
             //
-            _webserviceconfig = new WebServiceGatewayConfiguration()
+            webServiceConfig = new WebServiceGatewayConfiguration()
             {
                 Port = 80,
                 SslPort = 443,
@@ -126,27 +126,27 @@ namespace MIG
             };
         }
 
-        public bool IsInterfacePresent(string intfdomain)
+        public bool IsInterfacePresent(string domain)
         {
-            bool ispresent = false;
-            MIGInterface migintf = null;
+            bool isPresent = false;
+            MIGInterface migInterface = null;
             try
             {
-                Type type = Type.GetType("MIG.Interfaces." + intfdomain);
-                migintf = (MIGInterface)Activator.CreateInstance(type);
-                ispresent = migintf.IsDevicePresent();
+                var type = Type.GetType("MIG.Interfaces." + domain);
+                migInterface = (MIGInterface)Activator.CreateInstance(type);
+                isPresent = migInterface.IsDevicePresent();
             }
             catch { }
-            return ispresent;
+            return isPresent;
         }
 
-        public void AddInterface(string intfdomain)
+        public void AddInterface(string domain)
         {
-            MIGInterface migintf = null;
-            Type type = Type.GetType("MIG.Interfaces." + intfdomain);
-            migintf = (MIGInterface)Activator.CreateInstance(type);
-            Interfaces.Add(intfdomain, migintf);
-            migintf.InterfacePropertyChangedAction += new Action<InterfacePropertyChangedAction>(MIGService_InterfacePropertyChanged);
+            MIGInterface migInterface = null;
+            var type = Type.GetType("MIG.Interfaces." + domain);
+            migInterface = (MIGInterface)Activator.CreateInstance(type);
+            Interfaces.Add(domain, migInterface);
+            migInterface.InterfacePropertyChangedAction += new Action<InterfacePropertyChangedAction>(MigService_InterfacePropertyChanged);
             //TODO: implement eventually a RemoveInterface method containing code:
             //			mif.InterfacePropertyChangedAction -= MIGService_InterfacePropertyChangedAction;
         }
@@ -159,16 +159,16 @@ namespace MIG
             {
                 // TODO: collects gateways to a List<MIGGateway> and expose it by public member Gateways
                 //
-                _webgateway.Configure(_webserviceconfig);
-                _webgateway.ProcessRequest += _webgateway_ProcessRequest;
-                _webgateway.Start();
+                webGateway.Configure(webServiceConfig);
+                webGateway.ProcessRequest += webGateway_ProcessRequest;
+                webGateway.Start();
                 //
-                _tcpgateway.Configure(new TcpSocketGatewayConfiguration()
+                tcpGateway.Configure(new TcpSocketGatewayConfiguration()
                 {
-                    Port = _tcpgateway_port
+                    Port = tcpGatewayPort
                 });
-                _tcpgateway.ProcessRequest += _tcpgateway_ProcessRequest;
-                _tcpgateway.Start();
+                tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
+                tcpGateway.Start();
                 //
                 success = true;
             }
@@ -180,30 +180,30 @@ namespace MIG
         }
 
         //TODO: temporary specific method, get rid of it later
-        public void SetWebServicePassword(string passwordhash)
+        public void SetWebServicePassword(string passwordHash)
         {
-            _webgateway.SetPasswordHash(passwordhash);
+            webGateway.SetPasswordHash(passwordHash);
         }
 
         public void StopService()
         {
-            _webgateway.Stop();
+            webGateway.Stop();
             //_tcpgateway.Stop();
-            foreach (MIGInterface mif in Interfaces.Values)
+            foreach (var migInterface in Interfaces.Values)
             {
-                mif.Disconnect();
+                migInterface.Disconnect();
             }
         }
         #endregion
 
         #region MigInterface events
 
-        void MIGService_InterfacePropertyChanged(InterfacePropertyChangedAction propertychangedaction)
+        private void MigService_InterfacePropertyChanged(InterfacePropertyChangedAction propertyChangedAction)
         {
             // TODO: route event to MIG.ProtocolAdapters
             if (InterfacePropertyChanged != null)
             {
-                InterfacePropertyChanged(propertychangedaction);
+                InterfacePropertyChanged(propertyChangedAction);
             }
         }
 
@@ -213,17 +213,17 @@ namespace MIG
 
         public void ConfigureTcpGateway(int port)
         {
-            _tcpgateway_port = port;
+            tcpGatewayPort = port;
         }
 
-        private void _tcpgateway_ProcessRequest(object request)
+        private void tcpGateway_ProcessRequest(object gwRequest)
         {
-            TcpSocketGateyRequest req = (TcpSocketGateyRequest)request;
-            int clientid = req.ClientId;
-            byte[] data = req.Request;
+            var request = (TcpSocketGatewayRequest)gwRequest;
+            int clientId = request.ClientId;
+            byte[] data = request.Request;
 
-            System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-            string cmdline = enc.GetString(data).Trim(new char[] { '\0', ' ' });
+            var encoding = new System.Text.UTF8Encoding();
+            string commandLine = encoding.GetString(data).Trim(new char[] { '\0', ' ' });
             // TODO: 
             // parse command line as <domain>/<target>/<command>/<parameter>[/<parameter>]
             // or as XML serialized instance of GatewayClientRequest
@@ -235,26 +235,26 @@ namespace MIG
 
         #region WebGateway
 
-        public void ConfigureWebGateway(int port, int sslport, string homepath, string baseurl, string adminpasswordhash)
+        public void ConfigureWebGateway(int port, int sslPort, string homePath, string baseUrl, string adminPasswordHash)
         {
-            _webserviceconfig.Port = port;
-            _webserviceconfig.SslPort = sslport;
-            _webserviceconfig.HomePath = homepath;
-            _webserviceconfig.BaseUrl = baseurl.TrimStart('/');
-            _webserviceconfig.Password = adminpasswordhash;
+            webServiceConfig.Port = port;
+            webServiceConfig.SslPort = sslPort;
+            webServiceConfig.HomePath = homePath;
+            webServiceConfig.BaseUrl = baseUrl.TrimStart('/');
+            webServiceConfig.Password = adminPasswordHash;
         }
 
-        private void _webgateway_ProcessRequest(object gwrequest)
+        private void webGateway_ProcessRequest(object gwRequest)
         {
-            WebServiceGatewayRequest req = (WebServiceGatewayRequest)gwrequest;
-            HttpListenerContext context = req.Context;
-            string requestedurl = req.UrlRequest;
+            var request = (WebServiceGatewayRequest)gwRequest;
+            var context = request.Context;
+            string requestedUrl = request.UrlRequest;
 
-            MIGClientRequest migrequest = new MIGClientRequest()
+            var migRequest = new MIGClientRequest()
             {
                 Context = context,
                 RequestOrigin = context.Request.RemoteEndPoint.Address.ToString(),
-                RequestMessage = requestedurl,
+                RequestMessage = requestedUrl,
                 SubjectName = "HTTP",
                 SubjectValue = context.Request.HttpMethod,
                 InputStream = context.Request.InputStream,
@@ -263,25 +263,25 @@ namespace MIG
 
             // we are expecting url in the forms http://<hgserver>/<hgservicekey>/<servicedomain>/<servicegroup>/<command>/<opt1>/.../<optn>
             // arguments up to <command> are mandatory. CHANGED, CHECK COMMAND IMPLEMENTATION
-            string no_hg_request = requestedurl.Substring(requestedurl.IndexOf('/', 1) + 1);
+            string migCommand = requestedUrl.Substring(requestedUrl.IndexOf('/', 1) + 1);
             //string section = requestedurl.Substring (0, requestedurl.IndexOf ('/', 1) - 1); TODO: "api" section keyword, ignored for now
             //TODO: implement "api" keyword in MIGInterfaceCommand?
-            MIGInterfaceCommand cmd = new MIGInterfaceCommand(no_hg_request);
+            var command = new MIGInterfaceCommand(migCommand);
 
             //PREPROCESS request: if domain != html, execute command
             if (ServiceRequestPreProcess != null)
             {
-                ServiceRequestPreProcess(migrequest, cmd);
+                ServiceRequestPreProcess(migRequest, command);
                 // request was handled by preprocess listener
-                if (!string.IsNullOrEmpty(cmd.response))
+                if (!string.IsNullOrEmpty(command.Response))
                 {
                     // simple automatic json response type detection
-                    if (cmd.response.StartsWith("[") && cmd.response.EndsWith("]") || (cmd.response.StartsWith("{") && cmd.response.EndsWith("}")))
+                    if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                     {
                         context.Response.ContentType = "application/json";
                         context.Response.ContentEncoding = Encoding.UTF8;
                     }
-                    WebServiceUtility.WriteStringToContext(context, cmd.response);
+                    WebServiceUtility.WriteStringToContext(context, command.Response);
                     return;
                 }
             }
@@ -289,10 +289,10 @@ namespace MIG
             // TODO: move dupe code to WebServiceUtility
 
             //if request begins /hg/html, process
-            if (requestedurl.StartsWith(_webserviceconfig.BaseUrl))
+            if (requestedUrl.StartsWith(webServiceConfig.BaseUrl))
             {
-                string requestedfile = GetWebFilePath(requestedurl);
-                if (!System.IO.File.Exists(requestedfile))
+                string requestedFile = GetWebFilePath(requestedUrl);
+                if (!System.IO.File.Exists(requestedFile))
                 {
                     context.Response.StatusCode = 404;
                     //context.Response.OutputStream.WriteByte();
@@ -300,33 +300,33 @@ namespace MIG
                 else
                 {
                     bool isText = false;
-                    if (requestedurl.EndsWith(".js")) // || requestedurl.EndsWith(".json"))
+                    if (requestedUrl.EndsWith(".js")) // || requestedurl.EndsWith(".json"))
                     {
                         context.Response.ContentType = "text/javascript";
                         isText = true;
                     }
-                    else if (requestedurl.EndsWith(".css"))
+                    else if (requestedUrl.EndsWith(".css"))
                     {
                         context.Response.ContentType = "text/css";
                         isText = true;
                     }
-                    else if (requestedurl.EndsWith(".zip"))
+                    else if (requestedUrl.EndsWith(".zip"))
                     {
                         context.Response.ContentType = "application/zip";
                     }
-                    else if (requestedurl.EndsWith(".png"))
+                    else if (requestedUrl.EndsWith(".png"))
                     {
                         context.Response.ContentType = "image/png";
                     }
-                    else if (requestedurl.EndsWith(".jpg"))
+                    else if (requestedUrl.EndsWith(".jpg"))
                     {
                         context.Response.ContentType = "image/jpeg";
                     }
-                    else if (requestedurl.EndsWith(".gif"))
+                    else if (requestedUrl.EndsWith(".gif"))
                     {
                         context.Response.ContentType = "image/gif";
                     }
-                    else if (requestedurl.EndsWith(".mp3"))
+                    else if (requestedUrl.EndsWith(".mp3"))
                     {
                         context.Response.ContentType = "audio/mp3";
                     }
@@ -336,21 +336,21 @@ namespace MIG
                         isText = true;
                     }
 
-                    System.IO.FileInfo fi = new System.IO.FileInfo(requestedfile);
-                    context.Response.AddHeader("Last-Modified", fi.LastWriteTimeUtc.ToString("r"));
-                    context.Response.Headers.Set(HttpResponseHeader.LastModified, fi.LastWriteTimeUtc.ToString("r"));
+                    var file = new System.IO.FileInfo(requestedFile);
+                    context.Response.AddHeader("Last-Modified", file.LastWriteTimeUtc.ToString("r"));
+                    context.Response.Headers.Set(HttpResponseHeader.LastModified, file.LastWriteTimeUtc.ToString("r"));
                     // PRE PROCESS text output
                     //TODO: add callback for handling caching (eg. function that returns true or false with requestdfile as input and that will return false for widget path)
-                    if (isText && !requestedfile.Contains("/widgets/"))
+                    if (isText && !requestedFile.Contains("/widgets/"))
                     {
                         try
                         {
-                            string body = GetWebFileCache(requestedfile); 
+                            string body = GetWebFileCache(requestedFile);
                             //
-                            bool pp_tagfound;
+                            bool tagFound;
                             do
                             {
-                                pp_tagfound = false;
+                                tagFound = false;
                                 int ts = body.IndexOf("{include ");
                                 if (ts > 0)
                                 {
@@ -365,21 +365,21 @@ namespace MIG
                                         {
                                             if (cs.StartsWith("{include "))
                                             {
-                                                string file = cs.Substring(9).TrimEnd('}').Trim();
-                                                file = GetWebFilePath(file);
-                                                body = ls + System.IO.File.ReadAllText(file) + rs;
+                                                string fileName = cs.Substring(9).TrimEnd('}').Trim();
+                                                fileName = GetWebFilePath(fileName);
+                                                body = ls + System.IO.File.ReadAllText(fileName) + rs;
                                             }
                                         }
                                         catch (Exception e)
                                         {
                                             body = ls + "<h5 style=\"color:red\">Error processing '" + cs.Replace("{", "[").Replace("}", "]") + "'</h5>" + rs;
                                         }
-                                        pp_tagfound = true;
+                                        tagFound = true;
                                     }
                                 }
-                            } while (pp_tagfound); // pre processor tag found
+                            } while (tagFound); // pre processor tag found
                             //
-                            PutWebFileCache(requestedfile, body);
+                            PutWebFileCache(requestedFile, body);
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }
@@ -389,44 +389,44 @@ namespace MIG
                     }
                     else
                     {
-                        WebServiceUtility.WriteBytesToContext(context, System.IO.File.ReadAllBytes(requestedfile));
+                        WebServiceUtility.WriteBytesToContext(context, System.IO.File.ReadAllBytes(requestedFile));
                     }
                 }
             }
 
-            object resobj = null;
-            bool _wrotebytes = false;
+            object responseObject = null;
+            bool wroteBytes = false;
             //domain == HomeAutomation._Interface_ call InterfaceControl
             var result = (from miginterface in Interfaces.Values
                           let ns = miginterface.GetType().Namespace
                           let domain = ns.Substring(ns.LastIndexOf(".") + 1) + "." + miginterface.GetType().Name
-                          where (cmd.domain != null && cmd.domain.StartsWith(domain))
+                          where (command.Domain != null && command.Domain.StartsWith(domain))
                           select miginterface).FirstOrDefault();
             if (result != null)
             {
                 try
                 {
-                    resobj = result.InterfaceControl(cmd);
+                    responseObject = result.InterfaceControl(command);
                 }
                 catch (Exception ex)
                 {
                     // TODO: report internal mig interface  error
                     context.Response.StatusCode = 500;
-                    resobj = ex.Message + "\n" + ex.StackTrace;
+                    responseObject = ex.Message + "\n" + ex.StackTrace;
                 }
             }
             //
-            if (resobj == null || resobj.Equals(String.Empty))
+            if (responseObject == null || responseObject.Equals(String.Empty))
             {
-                resobj = WebServiceDynamicApiCall(cmd);
+                responseObject = WebServiceDynamicApiCall(command);
             }
             //
-            if (resobj != null && resobj.GetType().Equals(typeof(string)))
+            if (responseObject != null && responseObject.GetType().Equals(typeof(string)))
             {
-                cmd.response = (string)resobj;
+                command.Response = (string)responseObject;
                 //
                 // simple automatic json response type detection
-                if (cmd.response.StartsWith("[") && cmd.response.EndsWith("]") || (cmd.response.StartsWith("{") && cmd.response.EndsWith("}")))
+                if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                 {
                     context.Response.ContentType = "application/json";
                     context.Response.ContentEncoding = Encoding.UTF8;
@@ -434,39 +434,39 @@ namespace MIG
             }
             else
             {
-                WebServiceUtility.WriteBytesToContext(context, (Byte[])resobj);
-                _wrotebytes = true;
+                WebServiceUtility.WriteBytesToContext(context, (Byte[])responseObject);
+                wroteBytes = true;
             }
             //
             //POSTPROCESS 
             if (ServiceRequestPostProcess != null)
             {
-                ServiceRequestPostProcess(migrequest, cmd);
-                if (!string.IsNullOrEmpty(cmd.response) && !_wrotebytes)
+                ServiceRequestPostProcess(migRequest, command);
+                if (!string.IsNullOrEmpty(command.Response) && !wroteBytes)
                 {
                     // request was handled by postprocess listener
-                    WebServiceUtility.WriteStringToContext(context, cmd.response);
+                    WebServiceUtility.WriteStringToContext(context, command.Response);
                     return;
                 }
             }
 
         }
 
-        public object WebServiceDynamicApiCall(MIGInterfaceCommand cmd)
+        public object WebServiceDynamicApiCall(MIGInterfaceCommand command)
         {
             object response = "";
             // Dynamic Interface API 
-            Func<object, object> handler = MIG.Interfaces.DynamicInterfaceAPI.Find(cmd.domain + "/" + cmd.nodeid + "/" + cmd.command);
+            var handler = MIG.Interfaces.DynamicInterfaceAPI.Find(command.Domain + "/" + command.NodeId + "/" + command.Command);
             if (handler != null)
             {
-                response = handler(cmd.GetOption(0) + (cmd.GetOption(1) != "" ? "/" + cmd.GetOption(1) : ""));
+                response = handler(command.GetOption(0) + (command.GetOption(1) != "" ? "/" + command.GetOption(1) : ""));
             }
             else
             {
-                handler = MIG.Interfaces.DynamicInterfaceAPI.FindMatching(cmd.originalRequest.Trim('/'));
+                handler = MIG.Interfaces.DynamicInterfaceAPI.FindMatching(command.OriginalRequest.Trim('/'));
                 if (handler != null)
                 {
-                    response = handler(cmd.originalRequest.Trim('/'));
+                    response = handler(command.OriginalRequest.Trim('/'));
                 }
             }
             return response;
@@ -480,17 +480,17 @@ namespace MIG
         private string GetWebFileCache(string file)
         {
             string content = "";
-            WebFileCache item = _webfilecache.Find(wfc => wfc.FilePath == file);
-            if (item != null && (DateTime.Now - item.Timestamp).TotalSeconds < 600)
+            var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
+            if (cachedItem != null && (DateTime.Now - cachedItem.Timestamp).TotalSeconds < 600)
             {
-                content = item.Content;
+                content = cachedItem.Content;
             }
             else
             {
                 content = System.IO.File.ReadAllText(file);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-                if (item != null)
+                if (cachedItem != null)
                 {
-                    _webfilecache.Remove(item);
+                    webFileCache.Remove(cachedItem);
                 }
             }
             return content;
@@ -498,25 +498,25 @@ namespace MIG
 
         private void PutWebFileCache(string file, string content)
         {
-            WebFileCache item = _webfilecache.Find(wfc => wfc.FilePath == file);
-            if (item == null)
+            var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
+            if (cachedItem == null)
             {
-                item = new WebFileCache();
-                _webfilecache.Add(item);
+                cachedItem = new WebFileCache();
+                webFileCache.Add(cachedItem);
             }
-            item.FilePath = file;
-            item.Content = content;
+            cachedItem.FilePath = file;
+            cachedItem.Content = content;
         }
 
         private string GetWebFilePath(string file)
         {
-            string path = _webserviceconfig.HomePath;
-            file = file.Replace(_webserviceconfig.BaseUrl, "");
+            string path = webServiceConfig.HomePath;
+            file = file.Replace(webServiceConfig.BaseUrl, "");
             //
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            var os = Environment.OSVersion;
+            var platformId = os.Platform;
             //
-            switch (pid)
+            switch (platformId)
             {
                 case PlatformID.Win32NT:
                 case PlatformID.Win32S:

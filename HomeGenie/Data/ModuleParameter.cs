@@ -34,8 +34,8 @@ namespace HomeGenie.Data
     public class ModuleParameter
     {
         [NonSerialized]
-        private ValueStatistics _statistics;
-        private string _value;
+        private ValueStatistics statistics;
+        private string parameterValue;
         //
         public ModuleParameter()
         {
@@ -54,8 +54,8 @@ namespace HomeGenie.Data
         {
             get
             {
-                if (_statistics == null) _statistics = new ValueStatistics();
-                return _statistics;
+                if (statistics == null) statistics = new ValueStatistics();
+                return statistics;
             }
         }
         //
@@ -64,20 +64,20 @@ namespace HomeGenie.Data
         {
             get
             {
-                return _value;
+                return parameterValue;
             }
             set
             {
                 //TODO: find a better solution for "Meter.Watts" case
                 //if (_value != value || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
                 {
-                    if ((!string.IsNullOrEmpty(_value) && _value != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
+                    if ((!string.IsNullOrEmpty(parameterValue) && parameterValue != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
                     {
-                        LastValue = _value;
+                        LastValue = parameterValue;
                         LastUpdateTime = UpdateTime.ToUniversalTime();
                     }
                     UpdateTime = DateTime.UtcNow;
-                    _value = value;
+                    parameterValue = value;
                     //
                     // can we add this value for statistics?
                     double v;

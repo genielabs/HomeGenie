@@ -58,76 +58,76 @@ namespace MIG.Gateways
     {
         public event Action<object> ProcessRequest;
         //
-        private string _servicepassword;
-        private string _homepath;
-        private string _baseurl;
-        private string[] _bindingprefixes;
+        private string servicePassword;
+        private string homePath;
+        private string baseUrl;
+        private string[] bindingPrefixes;
         //
-        private const int _httpthreads = 10;
-        private const int _maxqueuable = 30;
+        private const int httpThreads = 10;
+        private const int maxQueuable = 30;
         //
-        private HttpListener _listener;
-        private Thread _listenerThread;
-        private Thread[] _workers;
-        private ManualResetEvent _stop, _ready;
-        private Queue<HttpListenerContext> _queue;
+        private HttpListener listener;
+        private Thread listenerThread;
+        private Thread[] workers;
+        private ManualResetEvent stop, ready;
+        private Queue<HttpListenerContext> queue;
 
         public WebServiceGateway()
         {
-            _queue = new Queue<HttpListenerContext>();
+            queue = new Queue<HttpListenerContext>();
         }
 
-        public void Configure(object gwconfiguration)
+        public void Configure(object gwConfiguration)
         {
-            WebServiceGatewayConfiguration cnf = (WebServiceGatewayConfiguration)gwconfiguration;
-            _homepath = cnf.HomePath;
-            _baseurl = cnf.BaseUrl;
-            _bindingprefixes = new string[2] { 
-                String.Format(@"http://+:{0}/", cnf.Port),
-                String.Format(@"https://+:{0}/", cnf.SslPort)
+            var config = (WebServiceGatewayConfiguration)gwConfiguration;
+            homePath = config.HomePath;
+            baseUrl = config.BaseUrl;
+            bindingPrefixes = new string[2] { 
+                String.Format(@"http://+:{0}/", config.Port),
+                String.Format(@"https://+:{0}/", config.SslPort)
             };
             //
-            SetPasswordHash(cnf.Password);
+            SetPasswordHash(config.Password);
         }
 
         public void SetPasswordHash(string password)
         {
-            _servicepassword = password;
+            servicePassword = password;
         }
 
         public void Start()
         {
-            _stop = new ManualResetEvent(false);
-            _ready = new ManualResetEvent(false);
+            stop = new ManualResetEvent(false);
+            ready = new ManualResetEvent(false);
             //
-            _listener = new HttpListener();
-            _listenerThread = new Thread(HandleRequests);
-            _workers = new Thread[_httpthreads];
+            listener = new HttpListener();
+            listenerThread = new Thread(HandleRequests);
+            workers = new Thread[httpThreads];
             //
-            string[] bindprefixes = _bindingprefixes;
+            string[] bindprefixes = bindingPrefixes;
             foreach (string prefix in bindprefixes)
             {
-                _listener.Prefixes.Add(prefix);
+                listener.Prefixes.Add(prefix);
             }
-            _listener.Start();
-            _listenerThread.Start();
-            for (int i = 0; i < _workers.Length; i++)
+            listener.Start();
+            listenerThread.Start();
+            for (int i = 0; i < workers.Length; i++)
             {
-                _workers[i] = new Thread(Worker);
-                _workers[i].Start();
+                workers[i] = new Thread(Worker);
+                workers[i].Start();
             }
         }
 
         public void Stop()
         {
-            foreach (Thread worker in _workers)
+            foreach (Thread worker in workers)
             {
                 worker.Abort();
             }
-            _stop.Set();
-            _listener.Stop();
-            _listenerThread.Join();
-            _queue.Clear();
+            stop.Set();
+            listener.Stop();
+            listenerThread.Join();
+            queue.Clear();
         }
 
         public void Dispose()
@@ -137,86 +137,82 @@ namespace MIG.Gateways
 
 
 
-
-
-
-
         private void HandleRequests()
         {
             int shutdown = -1;
-            while (_listener.IsListening && shutdown != 0)
+            while (listener.IsListening && shutdown != 0)
             {
-                var context = _listener.BeginGetContext(ContextReady, null);
-                shutdown = WaitHandle.WaitAny(new[] { _stop, context.AsyncWaitHandle });
+                var context = listener.BeginGetContext(ContextReady, null);
+                shutdown = WaitHandle.WaitAny(new[] { stop, context.AsyncWaitHandle });
             }
         }
 
         private void ContextReady(IAsyncResult ar)
         {
-            HttpListenerContext ctx = null;
+            HttpListenerContext context = null;
             try
             {
-                ctx = _listener.EndGetContext(ar);
+                context = listener.EndGetContext(ar);
                 //
                 // Basic flooding prevention
                 //
-                if (_queue.Count >= _maxqueuable)
+                if (queue.Count >= maxQueuable)
                 {
-                    ctx.Response.Abort();
-                    ctx = null;
+                    context.Response.Abort();
+                    context = null;
                 }
             }
             catch { }
             //
-            if (ctx == null) return;
+            if (context == null) return;
             ///
-            lock (_queue)
+            lock (queue)
             {
                 //
                 // Enqueue new request
                 //
-                _queue.Enqueue(ctx);
-                _ready.Set();
+                queue.Enqueue(context);
+                ready.Set();
             }
         }
 
         private void Worker()
         {
-            WaitHandle[] wait = new[] { _ready, _stop };
-            while (0 == WaitHandle.WaitAny(wait) && _listener.IsListening)
+            WaitHandle[] wait = new[] { ready, stop };
+            while (0 == WaitHandle.WaitAny(wait) && listener.IsListening)
             {
                 HttpListenerContext context;
-                lock (_queue)
+                lock (queue)
                 {
-                    if (_queue.Count > 0)
+                    if (queue.Count > 0)
                     {
-                        context = _queue.Dequeue();
+                        context = queue.Dequeue();
                     }
                     else
                     {
-                        _ready.Reset();
+                        ready.Reset();
                         continue;
                     }
                 }
                 //
-                _processrequest(context);
+                ProcessWebRequest(context);
             }
         }
 
 
-        private void _processrequest(object o)
+        private void ProcessWebRequest(object o)
         {
             try
             {
                 var context = o as HttpListenerContext;
                 //
-                HttpListenerRequest request = context.Request;
-                HttpListenerResponse response = context.Response;
+                var request = context.Request;
+                var response = context.Response;
                 //
                 if (request.IsSecureConnection)
                 {
                     var clientCertificate = context.Request.GetClientCertificate();
-                    X509Chain chain = new X509Chain();
+                    var chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                     chain.Build(clientCertificate);
                     if (chain.ChainStatus.Length != 0)
@@ -238,12 +234,12 @@ namespace MIG.Gateways
                 //
                 bool isauthenticated = (request.Headers["Authorization"] != null);
                 //
-                if (_servicepassword == "" || isauthenticated) //request.IsAuthenticated)
+                if (servicePassword == "" || isauthenticated) //request.IsAuthenticated)
                 {
                     bool verified = false;
                     //
-                    string authuser = "";
-                    string authpass = "";
+                    string authUser = "";
+                    string authPassword = "";
                     //
                     //NOTE: context.User.Identity and request.IsAuthenticated
                     //aren't working under MONO with this code =/
@@ -257,14 +253,14 @@ namespace MIG.Gateways
                         // authuser = identity.Name;
                         // authpass = identity.Password;
                         byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers["Authorization"].Split(' ')[1]);
-                        string authtoken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
-                        authuser = authtoken.Split(':')[0];
-                        authpass = authtoken.Split(':')[1];
+                        string authToken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
+                        authUser = authToken.Split(':')[0];
+                        authPassword = authToken.Split(':')[1];
                     }
                     //
                     //TODO: complete authorization (for now with one fixed user 'admin', add multiuser support)
                     //
-                    if (_servicepassword == "" || (authuser == "admin" && Utility.Encryption.SHA1.GenerateHashString(authpass) == _servicepassword))
+                    if (servicePassword == "" || (authUser == "admin" && Utility.Encryption.SHA1.GenerateHashString(authPassword) == servicePassword))
                     {
                         verified = true;
                     }
@@ -275,10 +271,10 @@ namespace MIG.Gateways
                         if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
                         //
                         // url aliasing check
-                        if (url == "" || url.TrimEnd('/') == _baseurl.TrimEnd('/'))
+                        if (url == "" || url.TrimEnd('/') == baseUrl.TrimEnd('/'))
                         {
                             // default home redirect
-                            response.Redirect("/" + _baseurl.TrimEnd('/') + "/index.html");
+                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html");
                             response.Close();
                         }
                         else

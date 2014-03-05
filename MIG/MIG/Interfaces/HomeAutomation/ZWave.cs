@@ -183,30 +183,30 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-        private ZWavePort _zwaveport;
-        private Controller _controller;
-        private string _portname = "";
+        private ZWavePort zwavePort;
+        private Controller controller;
+        private string portName = "";
 
-        private byte _lastnoderemoved = 0;
-        private byte _lastnodeadded = 0;
+        private byte lastRemovedNode = 0;
+        private byte lastAddedNode = 0;
 
         public ZWave()
         {
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            var os = Environment.OSVersion;
+            var platformId = os.Platform;
             //
-            switch (pid)
+            switch (platformId)
             {
                 case PlatformID.Win32NT:
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                 case PlatformID.WinCE:
-                    _portname = "COM7";
+                    portName = "COM7";
                     break;
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
                 default:
-                    _portname = "/dev/ttyUSB0";
+                    portName = "/dev/ttyUSB0";
                     break;
             }
         }
@@ -219,9 +219,9 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
@@ -229,8 +229,8 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                if (_zwaveport != null)
-                    return _zwaveport.IsConnected;
+                if (zwavePort != null)
+                    return zwavePort.IsConnected;
                 else return false;
             }
         }
@@ -242,19 +242,19 @@ namespace MIG.Interfaces.HomeAutomation
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            string returnvalue = "";
-            bool raisepropchanged = false;
-            string parampath = "Status.Level";
-            string raiseparam = "";
+            string returnValue = "";
+            bool raisePropertyChanged = false;
+            string parameterPath = "Status.Level";
+            string raiseParameter = "";
             //
-            string nodeid = request.nodeid;
-            Command command = (Command)request.command;
+            string nodeId = request.NodeId;
+            Command command = (Command)request.Command;
             ////----------------------
             try
             {
                 if (command == Command.CONTROLLER_DISCOVERY)
                 {
-                    _controller.Discovery();
+                    controller.Discovery();
                 }
 
 
@@ -266,12 +266,12 @@ namespace MIG.Interfaces.HomeAutomation
                 //else 
                 if (command == Command.BASIC_REPORT || command.ToString() == "Meter.Get") // TODO .. FIX: this is not basic report, it's a meter get
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.RequestMeterReport();
                 }
                 else if (command == Command.MULTILEVEL_REPORT) // TODO this one call for having SwitchMultiLevel and SensorMultiLevel reports
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.RequestMultiLevelReport();
                 }
                 //--------------////--------------------------------------------------------------------
@@ -279,56 +279,56 @@ namespace MIG.Interfaces.HomeAutomation
 
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
-                    _lastnodeadded = 0;
-                    byte addcid = _controller.BeginNodeAdd();
+                    lastAddedNode = 0;
+                    byte addedId = controller.BeginNodeAdd();
                     for (int i = 0; i < 20; i++)
                     {
-                        if (_lastnodeadded > 0)
+                        if (lastAddedNode > 0)
                         {
                             break;
                         }
                         Thread.Sleep(500);
                     }
-                    _controller.StopNodeAdd();
+                    controller.StopNodeAdd();
                     //
-                    returnvalue = _lastnodeadded.ToString();
+                    returnValue = lastAddedNode.ToString();
                 }
                 else if (command == Command.CONTROLLER_NODEREMOVE)
                 {
-                    _lastnoderemoved = 0;
-                    byte remcid = _controller.BeginNodeRemove();
+                    lastRemovedNode = 0;
+                    byte remcid = controller.BeginNodeRemove();
                     for (int i = 0; i < 20; i++)
                     {
-                        if (_lastnoderemoved > 0)
+                        if (lastRemovedNode > 0)
                         {
                             break;
                         }
                         Thread.Sleep(500);
                     }
-                    _controller.StopNodeRemove();
+                    controller.StopNodeRemove();
                     //
-                    returnvalue = _lastnoderemoved.ToString();
+                    returnValue = lastRemovedNode.ToString();
                 }
                 ////----------------------
                 else if (command == Command.BASIC_SET)
                 {
-                    raisepropchanged = true;
-                    double raiseval = double.Parse(request.GetOption(0)) / 100;
-                    if (raiseval > 1) raiseval = 1;
-                    raiseparam = raiseval.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    raisePropertyChanged = true;
+                    double raiseValue = double.Parse(request.GetOption(0)) / 100;
+                    if (raiseValue > 1) raiseValue = 1;
+                    raiseParameter = raiseValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
                     //
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Basic_Set((byte)int.Parse(request.GetOption(0)));
                 }
                 else if (command == Command.BASIC_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Basic_Get();
                 }
                 ////-----------------------
                 else if (command == Command.MULTIINSTANCE_GETCOUNT)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     //
                     switch (request.GetOption(0))
                     {
@@ -348,7 +348,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.MULTIINSTANCE_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     byte instance = (byte)int.Parse(request.GetOption(1)); // parameter index
                     //
                     switch (request.GetOption(0))
@@ -369,7 +369,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.MULTIINSTANCE_SET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     byte instance = (byte)int.Parse(request.GetOption(1)); // parameter index
                     int value = int.Parse(request.GetOption(2));
                     //
@@ -390,102 +390,102 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.NODEINFO_GET)
                 {
-                    ZWaveController.GetNodeInformationFrame((byte)int.Parse(nodeid));
+                    ZWaveController.GetNodeInformationFrame((byte)int.Parse(nodeId));
                 }
                 ////-----------------------
                 else if (command == Command.BATTERY_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Battery_Get();
                 }
                 ////-----------------------
                 else if (command == Command.ASSOCIATION_SET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Association_Set((byte)int.Parse(request.GetOption(0)), (byte)int.Parse(request.GetOption(1)));
                 }
                 else if (command == Command.ASSOCIATION_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Association_Get((byte)int.Parse(request.GetOption(0))); // groupid
                 }
                 else if (command == Command.ASSOCIATION_REMOVE)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Association_Remove((byte)int.Parse(request.GetOption(0)), (byte)int.Parse(request.GetOption(1))); // groupid
                 }
                 ////-----------------------
                 else if (command == Command.MANUFACTURERSPECIFIC_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.ManufacturerSpecific_Get();
                 }
                 ////------------------
                 else if (command == Command.CONFIG_PARAMETERSET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     //byte[] value = new byte[] { (byte)int.Parse(option1) };//BitConverter.GetBytes(Int16.Parse(option1));
                     //Array.Reverse(value);
                     node.ConfigParameterSet((byte)int.Parse(request.GetOption(0)), int.Parse(request.GetOption(1)));
                 }
                 else if (command == Command.CONFIG_PARAMETERGET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.ConfigParameterGet((byte)int.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.WAKEUP_GET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.WakeUpGetInterval();
                 }
                 else if (command == Command.WAKEUP_SET)
                 {
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.WakeUpSetInterval(uint.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.CONTROL_ON)
                 {
-                    raisepropchanged = true;
-                    raiseparam = "1";
+                    raisePropertyChanged = true;
+                    raiseParameter = "1";
                     //
                     // Basic.Set 0xFF
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).On();
                 }
                 else if (command == Command.CONTROL_OFF)
                 {
-                    raisepropchanged = true;
-                    raiseparam = "0";
+                    raisePropertyChanged = true;
+                    raiseParameter = "0";
                     //
                     // Basic.Set 0x00
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Off();
                 }
                 else if (command == Command.CONTROL_LEVEL)
                 {
-                    raisepropchanged = true;
-                    raiseparam = (double.Parse(request.GetOption(0)) / 100).ToString();
+                    raisePropertyChanged = true;
+                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
                     //
                     // Basic.Set <level>
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((ZWaveLib.Devices.ProductHandlers.Generic.Dimmer)node.DeviceHandler).Level = int.Parse(request.GetOption(0));
                 }
                 else if (command == Command.CONTROL_TOGGLE)
                 {
-                    raisepropchanged = true;
+                    raisePropertyChanged = true;
                     //
-                    ZWaveNode node = _controller.GetDevice((byte)int.Parse(nodeid));
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
                     if (((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Level == 0)
                     {
-                        raiseparam = "1";
+                        raiseParameter = "1";
                         // Basic.Set 0xFF
                         ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).On();
                     }
                     else
                     {
-                        raiseparam = "0";
+                        raiseParameter = "0";
                         // Basic.Set 0x00
                         ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Off();
                     }
@@ -493,22 +493,22 @@ namespace MIG.Interfaces.HomeAutomation
             }
             catch
             {
-                if (raiseparam != "") raisepropchanged = true;
+                if (raiseParameter != "") raisePropertyChanged = true;
             }
             //
-            if (raisepropchanged && InterfacePropertyChangedAction != null)
+            if (raisePropertyChanged && InterfacePropertyChangedAction != null)
             {
                 try
                 {
                     //ZWaveNode node = _controller.GetDevice ((byte)int.Parse (nodeid));
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = nodeid, SourceType = "ZWave Node", Path = parampath, Value = raiseparam });
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = nodeId, SourceType = "ZWave Node", Path = parameterPath, Value = raiseParameter });
                 }
                 catch
                 {
                 }
             }
             //
-            return returnvalue;
+            return returnValue;
         }
 
 
@@ -518,9 +518,9 @@ namespace MIG.Interfaces.HomeAutomation
             //
             try
             {
-                _loadZWavePort();
+                LoadZwavePort();
                 //         
-                success = _zwaveport.Connect();
+                success = zwavePort.Connect();
             }
             catch
             {
@@ -532,7 +532,7 @@ namespace MIG.Interfaces.HomeAutomation
         public void Disconnect()
         {
 
-            _unloadZWavePort();
+            UnloadZwavePort();
 
         }
 
@@ -577,18 +577,18 @@ namespace MIG.Interfaces.HomeAutomation
 
         public Controller ZWaveController
         {
-            get { return _controller; }
+            get { return controller; }
         }
 
 
         public string GetPortName()
         {
-            return _portname;
+            return portName;
         }
 
-        public void SetPortName(string portname)
+        public void SetPortName(string name)
         {
-            _portname = portname;
+            portName = name;
             Disconnect();
             Connect();
         }
@@ -600,9 +600,9 @@ namespace MIG.Interfaces.HomeAutomation
             //_unloadZWavePort();
             try
             {
-                _controller.DiscoveryEvent -= DiscoveryEvent;
-                _controller.UpdateNodeParameter -= controller_UpdateNodeParameter;
-                _controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
+                controller.DiscoveryEvent -= DiscoveryEvent;
+                controller.UpdateNodeParameter -= controller_UpdateNodeParameter;
+                controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
             }
             catch
             {
@@ -610,33 +610,33 @@ namespace MIG.Interfaces.HomeAutomation
             //
             try
             {
-                _zwaveport.Disconnect();
+                zwavePort.Disconnect();
             }
             catch
             {
             }
-            _zwaveport = null;
-            _controller = null;
+            zwavePort = null;
+            controller = null;
 
         }
 
 
-        private void _loadZWavePort()
+        private void LoadZwavePort()
         {
-            if (_zwaveport == null)
+            if (zwavePort == null)
             {
-                _zwaveport = new ZWavePort();
+                zwavePort = new ZWavePort();
                 //
-                _controller = new Controller(_zwaveport);
+                controller = new Controller(zwavePort);
                 //
-                _controller.DiscoveryEvent += DiscoveryEvent;
-                _controller.UpdateNodeParameter += controller_UpdateNodeParameter;
-                _controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
+                controller.DiscoveryEvent += DiscoveryEvent;
+                controller.UpdateNodeParameter += controller_UpdateNodeParameter;
+                controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
-            _zwaveport.PortName = _portname;
+            zwavePort.PortName = portName;
         }
 
-        private void _unloadZWavePort()
+        private void UnloadZwavePort()
         {
             try
             {
@@ -650,7 +650,7 @@ namespace MIG.Interfaces.HomeAutomation
             //
             try
             {
-                _zwaveport.Disconnect();
+                zwavePort.Disconnect();
             }
             catch
             {
@@ -680,11 +680,11 @@ namespace MIG.Interfaces.HomeAutomation
             //
             if (e.Status == DISCOVERY_STATUS.NODE_REMOVED)
             {
-                _lastnoderemoved = e.NodeId;
+                lastRemovedNode = e.NodeId;
             }
             else if (e.Status == DISCOVERY_STATUS.NODE_ADDED)
             {
-                _lastnodeadded = e.NodeId;
+                lastAddedNode = e.NodeId;
             }
         }
 
@@ -700,7 +700,7 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case ParameterType.PARAMETER_BATTERY:
                     //
-                    _raisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = "ZWaveNode.Battery", Value = value });
+                    RaisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = "ZWaveNode.Battery", Value = value });
                     //
                     path = ModuleParameters.MODPAR_STATUS_BATTERY;
                     break;
@@ -805,7 +805,7 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case ParameterType.PARAMETER_BASIC:
                     //
-                    _raisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = "ZWaveNode.Basic", Value = value });
+                    RaisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = "ZWaveNode.Basic", Value = value });
                     //
                     double normalizedval = (Math.Round((double)value / 99D, 2));
                     if (normalizedval > 1.0) normalizedval = 1.0; // binary switches have [0/255], while multilevel switches [0-99]
@@ -826,10 +826,10 @@ namespace MIG.Interfaces.HomeAutomation
             }
             //string type = upargs.ParameterType.ToString ();
             //
-            _raisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = path, Value = value });
+            RaisePropertyChanged(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = upargs.NodeId.ToString(), SourceType = "ZWave Node", Path = path, Value = value });
         }
 
-        private void _raisePropertyChanged(InterfacePropertyChangedAction ifaceaction)
+        private void RaisePropertyChanged(InterfacePropertyChangedAction ifaceaction)
         {
             if (InterfacePropertyChangedAction != null)
             {

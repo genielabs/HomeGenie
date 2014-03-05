@@ -28,15 +28,15 @@ using System.Threading;
 
 namespace SerialPortLib
 {
-	public class ConnectedStateChangedEventArgs
-	{
-		public bool Connected;
+    public class ConnectedStateChangedEventArgs
+    {
+        public bool Connected;
 
-		public ConnectedStateChangedEventArgs (bool state)
-		{
-			Connected = state;
-		}
-	}
+        public ConnectedStateChangedEventArgs(bool state)
+        {
+            Connected = state;
+        }
+    }
 
     public class SerialPortInput
     {
@@ -46,107 +46,110 @@ namespace SerialPortLib
         public delegate void MessageReceivedEvent(byte[] message);
         public event MessageReceivedEvent MessageReceived;
 
-        private SerialPort _serialport;
-        private string _portname = "/dev/ttyUSB0";
-        private int _baudrate = 115200;
-        
+        private SerialPort serialPort;
+        private string portName = "/dev/ttyUSB0";
+        private int baudRate = 115200;
+
         private bool gotReadWriteError = true;
-        private bool keepconnectionalive = false;
-        private Thread _connectionwatcher;
+        private bool keepConnectionAlive = false;
+        private Thread connectionWatcher;
 
-        private bool _isconnected = false;
-        private bool _isrunning = true;
+        private bool isConnected = false;
+        private bool isRunning = true;
 
-        private object _writelock = new object();
+        private object writeLock = new object();
 
-        private Thread _receiverthread;
-        private Thread _senderthread;
+        private Thread receiverTask;
+        private Thread senderTask;
 
+        private Queue<byte[]> messageQueue = new Queue<byte[]>();
 
-        private bool _debug = false;
+        private bool debug = false;
 
 
         public SerialPortInput()
         {
         }
 
-        public SerialPortInput(string portname)
+        public SerialPortInput(string portName)
         {
-			// reset connection if new portname is set
-			try {
-				_serialport.Close ();
-			} catch { }
-			//
-			gotReadWriteError = true;
+            // reset connection if new portname is set
+            try
+            {
+                serialPort.Close();
+            }
+            catch { }
+            //
+            gotReadWriteError = true;
         }
         public bool IsConnected
         {
-            get { return _isconnected && !gotReadWriteError; }
+            get { return isConnected && !gotReadWriteError; }
         }
 
         public bool Debug
         {
-            get { return _debug; }
-            set { _debug = value; }
+            get { return debug; }
+            set { debug = value; }
         }
 
         public void SetPort(string portname, int baudrate)
         {
-            if (_portname != portname && _serialport != null)
+            if (portName != portname && serialPort != null)
             {
-                _close();
+                Close();
             }
-            _portname = portname;
-            _baudrate = baudrate;
+            portName = portname;
+            baudRate = baudrate;
         }
 
 
         public bool Connect()
         {
-            bool success = _open();
+            bool success = Open();
             //
             //
             // we use reader loop for Linux/Mono compatibility
             //
-            if (_connectionwatcher != null)
+            if (connectionWatcher != null)
             {
                 try
                 {
-                    keepconnectionalive = false;
-                    _connectionwatcher.Abort();
+                    keepConnectionAlive = false;
+                    connectionWatcher.Abort();
                 }
                 catch { }
             }
             //
-            keepconnectionalive = true;
+            keepConnectionAlive = true;
             //
-            _connectionwatcher = new Thread(new ThreadStart(delegate()
+            connectionWatcher = new Thread(new ThreadStart(delegate()
             {
                 gotReadWriteError = !success;
                 //
-                while (keepconnectionalive)
+                while (keepConnectionAlive)
                 {
                     if (gotReadWriteError)
                     {
                         try
                         {
-                            _close();
+                            Close();
                             //
                         }
                         catch (Exception unex)
                         {
-//							Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
+                            //							Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
                         }
                         Thread.Sleep(5000);
-                        if (keepconnectionalive)
+                        if (keepConnectionAlive)
                         {
                             try
                             {
-                                gotReadWriteError = !_open();
+                                gotReadWriteError = !Open();
                             }
                             catch (Exception unex)
                             {
-//                                Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
+                                //                                Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
                             }
                         }
                     }
@@ -154,27 +157,29 @@ namespace SerialPortLib
                     Thread.Sleep(1000);
                 }
             }));
-            _connectionwatcher.Start();
+            connectionWatcher.Start();
             //
             return success;
         }
 
         public void Disconnect()
         {
-            keepconnectionalive = false;
+            keepConnectionAlive = false;
             //
-            try { _senderthread.Abort(); } catch { }
-            _senderthread = null;
-            try { _receiverthread.Abort(); } catch { }
-            _receiverthread = null;
+            try { senderTask.Abort(); }
+            catch { }
+            senderTask = null;
+            try { receiverTask.Abort(); }
+            catch { }
+            receiverTask = null;
             //
-            _close();
+            Close();
         }
 
 
         public void SendMessage(byte[] message)
         {
-            _messagequeue.Enqueue(message);
+            messageQueue.Enqueue(message);
         }
 
 
@@ -194,34 +199,34 @@ namespace SerialPortLib
             }
         }
         */
-		
-		
 
 
 
 
 
-        private bool _open()
+
+
+        private bool Open()
         {
             bool success = false;
             try
             {
-                bool tryopen = (_serialport == null);
+                bool tryOpen = (serialPort == null);
                 if (Environment.OSVersion.Platform.ToString().StartsWith("Win") == false)
                 {
-                    tryopen = (tryopen && System.IO.File.Exists(_portname));
+                    tryOpen = (tryOpen && System.IO.File.Exists(portName));
                 }
-                if (tryopen)
+                if (tryOpen)
                 {
-                    _serialport = new SerialPort();
-                    _serialport.PortName = _portname;
-                    _serialport.BaudRate = _baudrate;
+                    serialPort = new SerialPort();
+                    serialPort.PortName = portName;
+                    serialPort.BaudRate = baudRate;
                     //
-                    _serialport.ErrorReceived += HanldeErrorReceived;
+                    serialPort.ErrorReceived += HanldeErrorReceived;
                 }
-                if (_serialport.IsOpen == false)
+                if (serialPort.IsOpen == false)
                 {
-                    _serialport.Open();
+                    serialPort.Open();
                 }
                 success = true;
             }
@@ -233,42 +238,42 @@ namespace SerialPortLib
             {
                 ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(success));
             }
-            _isconnected = success;
+            isConnected = success;
             //
-            if (success && _receiverthread == null)
+            if (success && receiverTask == null)
             {
-                _receiverthread = new Thread(_receiverloop);
+                receiverTask = new Thread(ReceiverLoop);
                 //_receiverthread.Priority = ThreadPriority.Highest;
-                _receiverthread.Start();
+                receiverTask.Start();
                 //
-                _senderthread = new Thread(_senderLoop);
+                senderTask = new Thread(SenderLoop);
                 //_senderthread.Priority = ThreadPriority.Highest;
-                _senderthread.Start();
+                senderTask.Start();
             }
             return success;
         }
 
 
-        private void _close()
+        private void Close()
         {
-            if (_serialport != null)
+            if (serialPort != null)
             {
                 try
                 {
-                    _serialport.Close();
-                    _serialport.ErrorReceived -= HanldeErrorReceived;
+                    serialPort.Close();
+                    serialPort.ErrorReceived -= HanldeErrorReceived;
                 }
                 catch
                 {
                 }
-                _serialport = null;
+                serialPort = null;
                 //
-                if (_isconnected && ConnectedStateChanged != null)
+                if (isConnected && ConnectedStateChanged != null)
                 {
                     ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(false));
                 }
                 //
-                _isconnected = false;
+                isConnected = false;
             }
         }
 
@@ -277,39 +282,38 @@ namespace SerialPortLib
             Console.WriteLine("SerialPortInput ERROR: " + e.EventType.ToString() + " => " + e.ToString());
         }
 
-        private Queue<byte[]> _messagequeue = new Queue<byte[]>();
-        private void _senderLoop(object obj)
+        private void SenderLoop(object obj)
         {
-            _messagequeue.Clear();
-            while (_isrunning)
+            messageQueue.Clear();
+            while (isRunning)
             {
-                if (_serialport != null)
+                if (serialPort != null)
                 {
                     try
                     {
-                        while (_messagequeue.Count > 0)
+                        while (messageQueue.Count > 0)
                         {
-                            byte[] message = _messagequeue.Dequeue();
+                            byte[] message = messageQueue.Dequeue();
                             //lock (_writelock)
-			                try
-			                {
+                            try
+                            {
                                 if (Debug)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     Console.WriteLine("SPO < " + ByteArrayToString(message));
                                     Console.ForegroundColor = ConsoleColor.White;
                                 }
-                                _serialport.Write(message, 0, message.Length);
-			                } 
+                                serialPort.Write(message, 0, message.Length);
+                            }
                             catch (Exception e)
-			                {
+                            {
                                 if (Debug)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("SPO ! ERROR: " + e.Message);
                                     Console.ForegroundColor = ConsoleColor.White;
                                 }
-			                }
+                            }
                         }
                     }
                     catch
@@ -326,24 +330,24 @@ namespace SerialPortLib
         }
 
 
-        private void _receiverloop()
+        private void ReceiverLoop()
         {
-            while (_isrunning)
+            while (isRunning)
             {
                 int msglen = 0;
                 //
-                if (_serialport != null)
+                if (serialPort != null)
                 {
                     try
                     {
-                        msglen = _serialport.BytesToRead;
+                        msglen = serialPort.BytesToRead;
                         //
                         if (msglen > 0)
                         {
                             byte[] message = new byte[msglen];
                             //
                             int readbytes = 0;
-                            while (_serialport.Read(message, readbytes, msglen - readbytes) <= 0)
+                            while (serialPort.Read(message, readbytes, msglen - readbytes) <= 0)
                                 ; // noop
                             if (Debug)
                             {
@@ -353,7 +357,7 @@ namespace SerialPortLib
                             }
                             if (MessageReceived != null)
                             {
-                                _runAsync(() =>
+                                RunAsync(() =>
                                 {
                                     MessageReceived(message);
                                 });
@@ -386,10 +390,10 @@ namespace SerialPortLib
                 ret += b.ToString("X2") + " ";
             }
             return ret.Trim();
-        }   		
+        }
 
 
-        private void _runAsync(Action action)
+        private void RunAsync(Action action)
         {
             Thread t = new Thread(delegate()
             {
@@ -397,15 +401,16 @@ namespace SerialPortLib
                 {
                     action();
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
 
-Console.WriteLine("SerialPortLib ERROR!!!!!! " + e.Message + "\n" + e.StackTrace);
-                
+                    Console.WriteLine("SerialPortLib ERROR!!!!!! " + e.Message + "\n" + e.StackTrace);
+
                 }
             });
             t.Start();
         }
-		
+
 
 
     }

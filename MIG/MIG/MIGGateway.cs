@@ -30,7 +30,7 @@ namespace MIG
     public interface MIGGateway
     {
         event Action<object> ProcessRequest;
-        void Configure(object gwconfiguration);
+        void Configure(object gwConfiguration);
         void Start();
         // void Stop();
     }

@@ -40,8 +40,6 @@ namespace HomeGenie.Data
         public string Name { get; set; }
         public string Description { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public Types Type { get; set; } //physical control type (on/off, 0-100, Hot/Cold, InputSensor, etc.)
-        [JsonConverter(typeof(StringEnumConverter))]
         public DeviceTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
 
         // location in actual physical Control-topology
@@ -58,7 +56,6 @@ namespace HomeGenie.Data
             Name = "";
             Address = "";
             Description = "";
-            Type = Types.Generic;
             DeviceType = DeviceTypes.Generic;
             Properties = new TsList<ModuleParameter>();
             RoutingNode = "";
@@ -66,25 +63,16 @@ namespace HomeGenie.Data
 
         public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
+            var stream = new MemoryStream();
+            var formatter = new BinaryFormatter();
 
-            bf.Serialize(ms, this);
+            formatter.Serialize(stream, this);
 
-            ms.Position = 0;
-            object obj = bf.Deserialize(ms);
-            ms.Close();
+            stream.Position = 0;
+            object obj = formatter.Deserialize(stream);
+            stream.Close();
 
             return obj;
-        }
-
-        public enum Types
-        {
-            Generic = -1,
-            BinarySwitch,
-            MultiLevelSwitch,
-            Thermostat,
-            InputSensor
         }
 
         public enum DeviceTypes

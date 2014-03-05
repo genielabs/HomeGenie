@@ -42,7 +42,7 @@ namespace HomeGenie.Data
         public SystemConfiguration()
         {
             OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            PlatformID platform = os.Platform;
             //
             HomeGenie = new HomeGenieConfiguration();
             MIGService = new MIGServiceConfiguration();
@@ -57,14 +57,14 @@ namespace HomeGenie.Data
 
         public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
+            var stream = new MemoryStream();
+            var formatter = new BinaryFormatter();
 
-            bf.Serialize(ms, this);
+            formatter.Serialize(stream, this);
 
-            ms.Position = 0;
-            object obj = bf.Deserialize(ms);
-            ms.Close();
+            stream.Position = 0;
+            object obj = formatter.Deserialize(stream);
+            stream.Close();
 
             return obj;
         }

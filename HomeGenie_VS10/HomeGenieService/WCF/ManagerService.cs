@@ -102,20 +102,20 @@ namespace HomeGenie.WCF
             }
         }
 
-        private HomeGenie.Service.HomeGenieService _hghost;
-        internal void SetHomeGenieHost(HomeGenie.Service.HomeGenieService hghost)
+        private HomeGenie.Service.HomeGenieService homegenie;
+        internal void SetHomeGenieHost(HomeGenie.Service.HomeGenieService hg)
         {
-            _hghost = hghost;
+            homegenie = hg;
         }
 
         public int GetHttpServicePort()
         {
-            return _hghost.GetHttpServicePort();
+            return homegenie.GetHttpServicePort();
         }
 
-        public void RaiseOnEventLogged(LogEntry msg)
+        public void RaiseOnEventLogged(LogEntry logMessage)
         {
-            Thread t = new Thread(new ThreadStart(() =>
+            var t = new Thread(() =>
             {
                 Thread.Sleep(100);
                 subscribers.ForEach(delegate(IManagerCallbacks callback)
@@ -124,7 +124,7 @@ namespace HomeGenie.WCF
                     {
                         if (((ICommunicationObject)callback).State == CommunicationState.Opened)
                         {
-                            callback.OnEventLogged(msg, DateTime.Now);
+                            callback.OnEventLogged(logMessage, DateTime.Now);
                         }
                         else
                         {
@@ -133,7 +133,7 @@ namespace HomeGenie.WCF
                     }
                     catch { }
                 });
-            }));
+            });
             t.Start();
         }
 

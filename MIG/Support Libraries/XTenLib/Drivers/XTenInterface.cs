@@ -24,12 +24,12 @@ using System;
 
 namespace XTenLib.Drivers
 {
-	public interface XTenInterface
-	{
-		bool Open();
-		void Close();
-		byte[] ReadData();
-		void WriteData(byte[] bytesToSend);
-	}
+    public interface XTenInterface
+    {
+        bool Open();
+        void Close();
+        byte[] ReadData();
+        void WriteData(byte[] bytesToSend);
+    }
 }
 

@@ -128,7 +128,6 @@
     <Compile Include="Automation\ProgramFeature.cs" />
     <Compile Include="Automation\Scheduler\SchedulerItem.cs" />
     <Compile Include="Automation\Scheduler\SchedulerService.cs" />
-    <Compile Include="Automation\Scripting\AutomationStatesManager.cs" />
     <Compile Include="Automation\Scripting\ModuleHelper.cs" />
     <Compile Include="Automation\Scripting\ModulesManager.cs" />
     <Compile Include="Automation\Scripting\NetHelper.cs" />

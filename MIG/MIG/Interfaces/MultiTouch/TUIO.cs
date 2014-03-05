@@ -32,8 +32,8 @@ namespace MIG.Interfaces.MultiTouch
 
         public TUIO()
         {
-            TUIOReceiver tuioreceiver = new TUIOReceiver();
-            tuioreceiver.CursorUpdate += new EventHandler<CursorUpdateEventArgs>(tuioreceiver_CursorUpdate);
+            TUIOReceiver tuioReceiver = new TUIOReceiver();
+            tuioReceiver.CursorUpdate += new EventHandler<CursorUpdateEventArgs>(tuioReceiver_CursorUpdate);
         }
 
 
@@ -74,9 +74,7 @@ namespace MIG.Interfaces.MultiTouch
             return "";
         }
 
-
-
-        void tuioreceiver_CursorUpdate(object sender, CursorUpdateEventArgs e)
+        private void tuioReceiver_CursorUpdate(object sender, CursorUpdateEventArgs e)
         {
             //Console.WriteLine("TUIO: " + e.Command.ToString() + " " + e.CursorData.f_id + ") " + e.CursorData.X + "," + e.CursorData.Y + "," + e.CursorData.Angle);
 

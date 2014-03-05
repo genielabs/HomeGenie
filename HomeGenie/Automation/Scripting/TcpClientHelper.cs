@@ -32,101 +32,101 @@ namespace HomeGenie.Automation.Scripting
 
     public class TcpClientHelper
     {
-        private TcpClient _tcpclient;
-        private Action<byte[]> _datareceived;
-        private Action<string> _stringreceived;
-        private Action<bool> _statuschanged;
-        private string _serverip = "127.0.0.1";
+        private TcpClient tcpClient;
+        private Action<byte[]> dataReceived;
+        private Action<string> stringReceived;
+        private Action<bool> statusChanged;
+        private string serverAddress = "127.0.0.1";
 
         public TcpClientHelper()
         {
-            _tcpclient = new TcpClient();
+            tcpClient = new TcpClient();
         }
 
-        public TcpClientHelper Service(string ipaddress)
+        public TcpClientHelper Service(string address)
         {
-            _serverip = ipaddress;
+            serverAddress = address;
             return this;
         }
 
-        public TcpClientHelper OnStringReceived(Action<string> receivedaction)
+        public TcpClientHelper OnStringReceived(Action<string> receivedAction)
         {
-            _stringreceived = receivedaction;
+            stringReceived = receivedAction;
             return this;
         }
 
-        public TcpClientHelper OnMessageReceived(Action<byte[]> receivedaction)
+        public TcpClientHelper OnMessageReceived(Action<byte[]> receivedAction)
         {
-            _datareceived = receivedaction;
+            dataReceived = receivedAction;
             return this;
         }
 
-        public TcpClientHelper OnStatusChanged(Action<bool> statuschangeaction)
+        public TcpClientHelper OnStatusChanged(Action<bool> statusChangeAction)
         {
-            _statuschanged = statuschangeaction;
+            statusChanged = statusChangeAction;
             return this;
         }
 
         public bool Connect(int port)
         {
-            _tcpclient.MessageReceived += _tcpclient_MessageReceived;
-            _tcpclient.ConnectedStateChanged += _tcpclient_ConnectedStateChanged;
+            tcpClient.MessageReceived += tcpClient_MessageReceived;
+            tcpClient.ConnectedStateChanged += tcpClient_ConnectedStateChanged;
             //
-            return _tcpclient.Connect(this._serverip, port);
+            return tcpClient.Connect(this.serverAddress, port);
         }
 
         public TcpClientHelper Disconnect()
         {
-            _tcpclient.Disconnect();
-            _tcpclient.MessageReceived -= _tcpclient_MessageReceived;
-            _tcpclient.ConnectedStateChanged -= _tcpclient_ConnectedStateChanged;
+            tcpClient.Disconnect();
+            tcpClient.MessageReceived -= tcpClient_MessageReceived;
+            tcpClient.ConnectedStateChanged -= tcpClient_ConnectedStateChanged;
             return this;
         }
 
         public void SendMessage(string message)
         {
-            if (_tcpclient.IsConnected)
+            if (tcpClient.IsConnected)
             {
                 byte[] msg = Encoding.UTF8.GetBytes(message);
-                _tcpclient.SendMessage(msg);
+                tcpClient.SendMessage(msg);
             }
         }
 
         public void SendMessage(byte[] message)
         {
-            if (_tcpclient.IsConnected)
+            if (tcpClient.IsConnected)
             {
-                _tcpclient.SendMessage(message);
+                tcpClient.SendMessage(message);
             }
         }
 
         public bool IsConnected
         {
-            get { return _tcpclient.IsConnected; }
+            get { return tcpClient.IsConnected; }
         }
 
 
-        private void _tcpclient_MessageReceived(byte[] message)
+        private void tcpClient_MessageReceived(byte[] message)
         {
-            if (_datareceived != null)
+            if (dataReceived != null)
             {
-                _datareceived(message);
+                dataReceived(message);
             }
-            if (_stringreceived != null)
+            if (stringReceived != null)
             {
                 try
                 {
-                    _stringreceived(Encoding.UTF8.GetString(message));
+                    stringReceived(Encoding.UTF8.GetString(message));
                 }
                 catch { }
             }
         }
 
-        private void _tcpclient_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        private void tcpClient_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
         {
-            if (_statuschanged != null)
+            if (statusChanged != null)
             {
-                _statuschanged(statusargs.Connected);
+                statusChanged(statusargs.Connected);
             }
         }
 

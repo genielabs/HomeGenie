@@ -50,14 +50,14 @@ namespace HomeGenie
             System.Threading.Thread.CurrentThread.CurrentCulture = culture;
             System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
             */
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
+            var os = Environment.OSVersion;
+            var platform = os.Platform;
 
             // TODO: run "uname" to determine OS type
-            if (pid == PlatformID.Unix)
+            if (platform == PlatformID.Unix)
             {
 
-                string libusblink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libusb-1.0.so");
+                var libusblink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libusb-1.0.so");
 
                 // RaspBerry Pi armel dependency check and needed symlink
                 // TODO: check for armhf version
@@ -73,7 +73,7 @@ namespace HomeGenie
                 }
 
                 // lirc
-                string liblirclink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "liblirc_client.so");
+                var liblirclink = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "liblirc_client.so");
                 if (File.Exists("/usr/lib/liblirc_client.so") && !File.Exists(liblirclink))
                 {
                     ShellCommand("ln", " -s \"/usr/lib/liblirc_client.so\" \"" + liblirclink + "\"");
@@ -89,7 +89,7 @@ namespace HomeGenie
                     ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/raspbian_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
                     if (!File.Exists("/root/.lircrc"))
                     {
-                        string lircrc = "begin\n" +
+                        var lircrc = "begin\n" +
                                         "        prog = homegenie\n" +
                                         "        button = KEY_1\n" +
                                         "        repeat = 3\n" +
@@ -123,17 +123,17 @@ namespace HomeGenie
             //
             System.Threading.Thread.Sleep(2000);
             //
-            _shutdown();
+            ShutDown();
         }
 
-        internal static void Quit(bool startupdater)
+        internal static void Quit(bool startUpdater)
         {
-            _startupdater = startupdater;
+            _startupdater = startUpdater;
             _isrunning = false;
-            _shutdown();
+            ShutDown();
         }
 
-        static void _shutdown()
+        private static void ShutDown()
         {
             Console.Write("HomeGenie is now exiting...");
             //
@@ -153,23 +153,23 @@ namespace HomeGenie
             System.Environment.Exit(0);
         }
 
-        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             Console.WriteLine("\n\nProgram interrupted!\n");
-            _shutdown();
+            ShutDown();
             _isrunning = false;
         }
 
-        static void ShellCommand(string command, string args)
+        private static void ShellCommand(string command, string args)
         {
             try
             {
-                System.Diagnostics.ProcessStartInfo psinfo = new System.Diagnostics.ProcessStartInfo(command, args);
-                psinfo.RedirectStandardOutput = false;
-                psinfo.UseShellExecute = false;
-                psinfo.CreateNoWindow = true;
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                process.StartInfo = psinfo;
+                var processInfo = new System.Diagnostics.ProcessStartInfo(command, args);
+                processInfo.RedirectStandardOutput = false;
+                processInfo.UseShellExecute = false;
+                processInfo.CreateNoWindow = true;
+                var process = new System.Diagnostics.Process();
+                process.StartInfo = processInfo;
                 process.Start();
             }
             catch { }

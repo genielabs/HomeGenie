@@ -36,7 +36,7 @@ namespace MIG.Interfaces.HomeAutomation
         /// <summary>
         // used if your interface driver requires port selection
         /// </summary>
-        private string _portname;
+        private string portName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MIG.Interfaces.HomeAutomation.ExampleDriver"/> class.
@@ -91,9 +91,9 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
@@ -190,12 +190,12 @@ namespace MIG.Interfaces.HomeAutomation
         /// 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            request.response = ""; //default success value
+            request.Response = ""; //default success value
             // this is an example set of commands:
             // for each received command
             // add the needed code to perform 
             // the desired action on the <nodeid> device
-            switch (request.command)
+            switch (request.Command)
             {
                 case "Control.On":
 
@@ -220,7 +220,7 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
             }
             //
-            return request.response;
+            return request.Response;
         }
 
         #endregion
@@ -236,19 +236,19 @@ namespace MIG.Interfaces.HomeAutomation
         /// INFO: You can ignore/delete this method if the device doesn't require port selection.
         public string GetPortName()
         {
-            return _portname;
+            return portName;
         }
 
         /// <summary>
         /// Sets the name of the port.
         /// </summary>
-        /// <param name='portname'>
+        /// <param name='name'>
         /// Portname.
         /// </param>
         /// INFO: You can ignore/delete this method if the device doesn't require port selection.
-        public void SetPortName(string portname)
+        public void SetPortName(string name)
         {
-            _portname = portname;
+            portName = name;
         }
 
 

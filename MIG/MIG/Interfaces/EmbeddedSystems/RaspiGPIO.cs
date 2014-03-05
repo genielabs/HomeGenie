@@ -117,7 +117,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         #endregion
 
-        public Dictionary<string, bool> GPIOPins = new Dictionary<string, bool>()
+        public Dictionary<string, bool> GpioPins = new Dictionary<string, bool>()
         {
             { "4", false },
             { "17", false },
@@ -129,11 +129,11 @@ namespace MIG.Interfaces.EmbeddedSystems
             { "25", false }
         };
 
-        bool isconnected = false;
+        bool isConnected = false;
 
         public RaspiGPIO()
         {
-            isconnected = Directory.Exists(GPIO_PATH);
+            isConnected = Directory.Exists(GPIO_PATH);
             CleanUpAllPins();
             //foreach (KeyValuePair<string, bool> kv in GPIOPins)
             //{
@@ -149,15 +149,15 @@ namespace MIG.Interfaces.EmbeddedSystems
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
         public bool Connect()
         {
-            return isconnected;
+            return isConnected;
         }
         public void Disconnect()
         {
@@ -165,11 +165,11 @@ namespace MIG.Interfaces.EmbeddedSystems
         }
         public bool IsDevicePresent()
         {
-            return isconnected;
+            return isConnected;
         }
         public bool IsConnected
         {
-            get { return isconnected; }
+            get { return isConnected; }
         }
 
         public void WaitOnPending()
@@ -178,18 +178,18 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            Command command = (Command)request.command;
+            var command = (Command)request.Command;
             string returnvalue = "";
             //
             if (command == Command.CONTROL_ON)
             {
-                this.OutputPin((enumPIN)int.Parse(request.nodeid), true);
-                GPIOPins[request.nodeid] = true;
+                this.OutputPin((RaspiGpio)int.Parse(request.NodeId), true);
+                GpioPins[request.NodeId] = true;
                 if (InterfacePropertyChangedAction != null)
                 {
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = request.nodeid, SourceType = "Raspberry Pi GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = 1 });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = request.NodeId, SourceType = "Raspberry Pi GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = 1 });
                     }
                     catch { }
                 }
@@ -197,13 +197,13 @@ namespace MIG.Interfaces.EmbeddedSystems
             //
             if (command == Command.CONTROL_OFF)
             {
-                this.OutputPin((enumPIN)int.Parse(request.nodeid), false);
-                GPIOPins[request.nodeid] = false;
+                this.OutputPin((RaspiGpio)int.Parse(request.NodeId), false);
+                GpioPins[request.NodeId] = false;
                 if (InterfacePropertyChangedAction != null)
                 {
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = request.nodeid, SourceType = "Raspberry Pi GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = 0 });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = request.NodeId, SourceType = "Raspberry Pi GPIO", Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = 0 });
                     }
                     catch { }
                 }
@@ -211,15 +211,15 @@ namespace MIG.Interfaces.EmbeddedSystems
             //
             if (command == Command.PARAMETER_STATUS)
             {
-                GPIOPins[request.nodeid] = this.InputPin((enumPIN)int.Parse(request.nodeid));
+                GpioPins[request.NodeId] = this.InputPin((RaspiGpio)int.Parse(request.NodeId));
             }
             //
             if (command == Command.CONTROL_RESET)
             {
                 this.CleanUpAllPins();
-                foreach (KeyValuePair<string, bool> kv in GPIOPins)
+                foreach (KeyValuePair<string, bool> kv in GpioPins)
                 {
-                    GPIOPins[kv.Key] = false;
+                    GpioPins[kv.Key] = false;
                 }
             }
             //
@@ -242,10 +242,10 @@ namespace MIG.Interfaces.EmbeddedSystems
         //                  P1-18 = GPIO24  = GP5
         //                  P1-22 = GPIO25  = GP6
         //So to turn on Pin7 on the GPIO connector, pass in enumGPIOPIN.gpio4 as the pin parameter
-        public enum enumPIN
+        public enum RaspiGpio
         {
-            gpio0 = 0, gpio1 = 1, gpio4 = 4, gpio7 = 7, gpio8 = 8, gpio9 = 9, gpio10 = 10, gpio11 = 11,
-            gpio14 = 14, gpio15 = 15, gpio17 = 17, gpio18 = 18, gpio21 = 21, gpio22 = 22, gpio23 = 23, gpio24 = 24, gpio25 = 25
+            Gpio0 = 0, Gpio1 = 1, Gpio4 = 4, Gpio7 = 7, Gpio8 = 8, Gpio9 = 9, Gpio10 = 10, Gpio11 = 11,
+            Gpio14 = 14, Gpio15 = 15, Gpio17 = 17, Gpio18 = 18, Gpio21 = 21, Gpio22 = 22, Gpio23 = 23, Gpio24 = 24, Gpio25 = 25
         };
 
         public enum enumDirection { IN, OUT };
@@ -253,19 +253,19 @@ namespace MIG.Interfaces.EmbeddedSystems
         private const string GPIO_PATH = "/sys/class/gpio/";
 
         //contains list of pins exported with an OUT direction
-        List<enumPIN> _OutExported = new List<enumPIN>();
+        List<RaspiGpio> outExported = new List<RaspiGpio>();
 
         //contains list of pins exported with an IN direction
-        List<enumPIN> _InExported = new List<enumPIN>();
+        List<RaspiGpio> inExported = new List<RaspiGpio>();
 
         //set to true to write whats happening to the screen
         private const bool DEBUG = false;
 
         //this gets called automatically when we try and output to, or input from, a pin
-        private void SetupPin(enumPIN pin, enumDirection direction)
+        private void SetupPin(RaspiGpio pin, enumDirection direction)
         {
             //unexport if it we're using it already
-            if (_OutExported.Contains(pin) || _InExported.Contains(pin)) UnexportPin(pin);
+            if (outExported.Contains(pin) || inExported.Contains(pin)) UnexportPin(pin);
 
             //export
             File.WriteAllText(GPIO_PATH + "export", GetPinNumber(pin));
@@ -277,16 +277,16 @@ namespace MIG.Interfaces.EmbeddedSystems
 
             //record the fact that we've setup that pin
             if (direction == enumDirection.OUT)
-                _OutExported.Add(pin);
+                outExported.Add(pin);
             else
-                _InExported.Add(pin);
+                inExported.Add(pin);
         }
 
         //no need to setup pin this is done for you
-        public void OutputPin(enumPIN pin, bool value)
+        public void OutputPin(RaspiGpio pin, bool value)
         {
             //if we havent used the pin before,  or if we used it as an input before, set it up
-            if (!_OutExported.Contains(pin) || _InExported.Contains(pin)) SetupPin(pin, enumDirection.OUT);
+            if (!outExported.Contains(pin) || inExported.Contains(pin)) SetupPin(pin, enumDirection.OUT);
 
             string writeValue = "0";
             if (value) writeValue = "1";
@@ -296,12 +296,12 @@ namespace MIG.Interfaces.EmbeddedSystems
         }
 
         //no need to setup pin this is done for you
-        public bool InputPin(enumPIN pin)
+        public bool InputPin(RaspiGpio pin)
         {
             bool returnValue = false;
 
             //if we havent used the pin before, or if we used it as an output before, set it up
-            if (!_InExported.Contains(pin) || _OutExported.Contains(pin)) SetupPin(pin, enumDirection.IN);
+            if (!inExported.Contains(pin) || outExported.Contains(pin)) SetupPin(pin, enumDirection.IN);
 
             string filename = GPIO_PATH + pin.ToString() + "/value";
             if (File.Exists(filename))
@@ -318,18 +318,18 @@ namespace MIG.Interfaces.EmbeddedSystems
         }
 
         //if for any reason you want to unexport a particular pin use this, otherwise just call CleanUpAllPins when you're done
-        public void UnexportPin(enumPIN pin)
+        public void UnexportPin(RaspiGpio pin)
         {
             bool found = false;
-            if (_OutExported.Contains(pin))
+            if (outExported.Contains(pin))
             {
                 found = true;
-                _OutExported.Remove(pin);
+                outExported.Remove(pin);
             }
-            if (_InExported.Contains(pin))
+            if (inExported.Contains(pin))
             {
                 found = true;
-                _InExported.Remove(pin);
+                inExported.Remove(pin);
             }
 
             if (found)
@@ -341,11 +341,11 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         public void CleanUpAllPins()
         {
-            for (int p = _OutExported.Count - 1; p >= 0; p--) UnexportPin(_OutExported[p]); //unexport in reverse order
-            for (int p = _InExported.Count - 1; p >= 0; p--) UnexportPin(_InExported[p]);
+            for (int p = outExported.Count - 1; p >= 0; p--) UnexportPin(outExported[p]); //unexport in reverse order
+            for (int p = inExported.Count - 1; p >= 0; p--) UnexportPin(inExported[p]);
         }
 
-        private string GetPinNumber(enumPIN pin)
+        private string GetPinNumber(RaspiGpio pin)
         {
             return ((int)pin).ToString(); //e.g. returns 17 for enum value of gpio17
         }

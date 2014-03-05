@@ -32,21 +32,21 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
         {
-            return  (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "0004") ||
+            return (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "0004") ||
                     (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "001D");
         }
 
 
         public override bool HandleRawMessageRequest(byte[] message)
         {
-            byte cmd_length = message[6];
-            byte cmd_class = message[7];
-            byte cmd_type = message[8];
+            byte cmdLength = message[6];
+            byte cmdClass = message[7];
+            byte cmdType = message[8];
             //
-            if (message.Length > 10 && cmd_length == 0x04 && cmd_class == (byte)CommandClass.COMMAND_CLASS_ALARM && cmd_type == 0x05 && message[9] == 0x00)
+            if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.COMMAND_CLASS_ALARM && cmdType == 0x05 && message[9] == 0x00)
             {
                 // tampered status
-                _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_ALARM_TAMPERED, message[10]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_ALARM_TAMPERED, message[10]);
                 return true;
             }
             return false;
@@ -59,7 +59,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             if (message[8] == 0x01)
             {
                 // door / window status
-                _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_ALARM_DOORWINDOW, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_ALARM_DOORWINDOW, message[9]);
                 handled = true;
             }
             else

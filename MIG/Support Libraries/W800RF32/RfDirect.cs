@@ -27,117 +27,118 @@ using System.IO.Ports;
 
 namespace W800RF32
 {
-	public class RfDirect
-	{
-		public RfDirect (string portname)
-		{
-			_portname = portname;
-		}
+    public class RfDirect
+    {
+        
+        private SerialPort serialPort;
 
+        private object commLock = new object();
+        private string portName = "COM1"; //"/dev/ttyUSB0";
+        private bool isConnected = false;
 
-		private SerialPort _serialport;
-		
-		private object _commlock = new object();
-		private string _portname = "COM1"; //"/dev/ttyUSB0";
-		private bool _isconnected = false;
-		
+        
+        public RfDirect(string portname)
+        {
+            portName = portname;
+        }
 
-		
-		public void Close ()
-		{
-			if (_serialport != null)
-			{
-				try
-				{
-					_serialport.Close();
-				} catch { }
-				_serialport = null;
-			}
-		}
-		public bool Open ()
-		{
-			bool success = false;
-			//
-			try
-			{
-                bool tryopen = (_serialport == null);
+        public void Close()
+        {
+            if (serialPort != null)
+            {
+                try
+                {
+                    serialPort.Close();
+                }
+                catch { }
+                serialPort = null;
+            }
+        }
+        public bool Open()
+        {
+            bool success = false;
+            //
+            try
+            {
+                bool tryOpen = (serialPort == null);
                 if (Environment.OSVersion.Platform.ToString().StartsWith("Win") == false)
                 {
-                    tryopen = (tryopen && System.IO.File.Exists(_portname));
+                    tryOpen = (tryOpen && System.IO.File.Exists(portName));
                 }
-				if (tryopen) {
-					_serialport = new SerialPort();
-					_serialport.PortName = _portname;
-					_serialport.BaudRate = 4800;
-					_serialport.Parity = Parity.None;
-					_serialport.DataBits = 8;
-					_serialport.StopBits = StopBits.One;
-					_serialport.ReadTimeout = 150;
-					_serialport.WriteTimeout = 150;
-					//_serialport.RtsEnable = true;
-					//
-					////////-->					_serialport.ErrorReceived += HanldeErrorReceived;
-					// DataReceived event won't work under Linux / Mono
-					//sp.DataReceived += HandleDataReceived;
-				}
-				if (_serialport.IsOpen == false)
-				{
-					_serialport.Open();
-				}
-//				this.WriteData(new byte[] { 0x8B }); // status request
-				success = true;
-//Console.WriteLine("OK");
-			}
-			catch (Exception ex)
-			{
+                if (tryOpen)
+                {
+                    serialPort = new SerialPort();
+                    serialPort.PortName = portName;
+                    serialPort.BaudRate = 4800;
+                    serialPort.Parity = Parity.None;
+                    serialPort.DataBits = 8;
+                    serialPort.StopBits = StopBits.One;
+                    serialPort.ReadTimeout = 150;
+                    serialPort.WriteTimeout = 150;
+                    //_serialport.RtsEnable = true;
+                    //
+                    ////////-->					_serialport.ErrorReceived += HanldeErrorReceived;
+                    // DataReceived event won't work under Linux / Mono
+                    //sp.DataReceived += HandleDataReceived;
+                }
+                if (serialPort.IsOpen == false)
+                {
+                    serialPort.Open();
+                }
+                //				this.WriteData(new byte[] { 0x8B }); // status request
+                success = true;
+                //Console.WriteLine("OK");
+            }
+            catch (Exception ex)
+            {
                 // TODO: add error logging 
             }
-			//
-			return success;
-		}
-		
-		public byte[] ReadData ()
-		{
-			int buflen = 4;
-			int length = 0;
-			int readbytes = 0;
-			byte[] buffer = new byte[buflen];
-			//
-			do
-			{
-				readbytes = _serialport.Read(buffer, length, buflen - length);
-				length += readbytes;
-				//
-				//if (length > 1 && buffer[0] < length) 
-				//	break;
-				//else if (buffer[0] > 0x10 && _serialport.BytesToRead == 0) 
-				//	break;
-				//if (_serialport.BytesToRead == 0) break;
-				System.Threading.Thread.Sleep(5);
-			} while (readbytes > 0 && (buflen - length > 0));
-			//
-			byte[] readdata = new byte[length];
-//			if (length > 1)
-//			{
-//				readdata[0] = (int)X10CommandType.PLC_Poll;
-//				Array.Copy(buffer, 0, readdata, 1, length);
-//			}
-//			else
-			{
-				Array.Copy(buffer, readdata, length);
-			}
-			//
-			return readdata;
-		}
-		
-		public void WriteData(byte[] bytesToSend)
-		{
-			if ( _serialport != null && _serialport.IsOpen)
-			{
-				_serialport.Write(bytesToSend, 0, bytesToSend.Length);
-			}
-		}
+            //
+            return success;
+        }
 
-	}
+        public byte[] ReadData()
+        {
+            int buflen = 4;
+            int length = 0;
+            int readBytes = 0;
+            byte[] buffer = new byte[buflen];
+            //
+            do
+            {
+                readBytes = serialPort.Read(buffer, length, buflen - length);
+                length += readBytes;
+                //
+                //if (length > 1 && buffer[0] < length) 
+                //	break;
+                //else if (buffer[0] > 0x10 && _serialport.BytesToRead == 0) 
+                //	break;
+                //if (_serialport.BytesToRead == 0) break;
+                System.Threading.Thread.Sleep(5);
+            } while (readBytes > 0 && (buflen - length > 0));
+            //
+            byte[] readData = new byte[length];
+            //			if (length > 1)
+            //			{
+            //				readdata[0] = (int)X10CommandType.PLC_Poll;
+            //				Array.Copy(buffer, 0, readdata, 1, length);
+            //			}
+            //			else
+            {
+                Array.Copy(buffer, readData, length);
+            }
+            //
+            return readData;
+        }
+
+        public void WriteData(byte[] bytesToSend)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.Write(bytesToSend, 0, bytesToSend.Length);
+            }
+        }
+
+    }
 }
 

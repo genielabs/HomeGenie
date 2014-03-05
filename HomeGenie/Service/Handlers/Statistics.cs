@@ -32,205 +32,198 @@ namespace HomeGenie.Service.Handlers
 {
     public class Statistics
     {
-        private HomeGenieService _hg;
+        private HomeGenieService homegenie;
         public Statistics(HomeGenieService hg)
         {
-            _hg = hg;
+            homegenie = hg;
         }
 
-        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migcmd)
+        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
         {
+            string domain = "";
+            string address = "";
+            string[] filterList;
 
-            //SQLiteCommand dbcmd = _dbconnection.CreateCommand();
-            switch (migcmd.command)
+            switch (migCommand.Command)
             {
                 case "Global.CounterTotal":
-                    migcmd.response = JsonHelper.GetSimpleResponse(_hg.Statistics.GetTotalCounter(migcmd.GetOption(0), 3600).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture));
+                    migCommand.Response = JsonHelper.GetSimpleResponse(homegenie.Statistics.GetTotalCounter(migCommand.GetOption(0), 3600).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture));
                     break;
 
                 case "Global.TimeRange":
-                    StatisticsEntry totalrange = _hg.Statistics.GetStartDate();
-                    migcmd.response = "[{ StartTime : '" + ((totalrange.TimeStart.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "', EndTime : '" + ((totalrange.TimeEnd.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "' }]";
+                    var totalRange = homegenie.Statistics.GetStartDate();
+                    migCommand.Response = "[{ StartTime : '" + ((totalRange.TimeStart.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "', EndTime : '" + ((totalRange.TimeEnd.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "' }]";
                     break;
 
                 case "Database.Reset":
-                    _hg.Statistics.DatabaseReset();
+                    homegenie.Statistics.DatabaseReset();
                     break;
 
                 case "Parameter.List":
-                    var pdomain = "";
-                    var paddress = "";
-                    var pfilter = migcmd.GetOption(0).Split(':');
-                    if (pfilter.Length == 2)
+                    filterList = migCommand.GetOption(0).Split(':');
+                    if (filterList.Length == 2)
                     {
-                        pdomain = pfilter[0];
-                        paddress = pfilter[1];
+                        domain = filterList[0];
+                        address = filterList[1];
                     }
-                    migcmd.response = "[";
-                    foreach (string sp in _hg.Statistics.GetParametersList(pdomain, paddress))
+                    migCommand.Response = "[";
+                    foreach (string statParameter in homegenie.Statistics.GetParametersList(domain, address))
                     {
-                        migcmd.response += "	'" + sp + "',\n";
+                        migCommand.Response += "	'" + statParameter + "',\n";
                     }
-                    migcmd.response = migcmd.response.TrimEnd(',', '\n');
-                    migcmd.response += "\n]";
+                    migCommand.Response = migCommand.Response.TrimEnd(',', '\n');
+                    migCommand.Response += "\n]";
                     break;
 
                 case "Parameter.Counter":
-                    var cdomain = "";
-                    var caddress = "";
-                    var cfilter = migcmd.GetOption(1).Split(':');
-                    if (cfilter.Length == 2)
+                    filterList = migCommand.GetOption(1).Split(':');
+                    if (filterList.Length == 2)
                     {
-                        cdomain = cfilter[0];
-                        caddress = cfilter[1];
+                        domain = filterList[0];
+                        address = filterList[1];
                     }
                     //
-                    migcmd.response = "[";
-                    migcmd.response += "[ ";
+                    migCommand.Response = "[";
+                    migCommand.Response += "[ ";
                     //
-                    List<StatisticsEntry> hoursaverage = new List<StatisticsEntry>();
-                    hoursaverage = _hg.Statistics.GetHourlyCounter(cdomain, caddress, migcmd.GetOption(0), 3600); ;
+                    var hoursAverage = new List<StatisticsEntry>();
+                    hoursAverage = homegenie.Statistics.GetHourlyCounter(domain, address, migCommand.GetOption(0), 3600); ;
                     //
                     for (int h = 0; h < 24; h++)
                     {
-                        StatisticsEntry firstentry = null;
-                        if (hoursaverage != null && hoursaverage.Count > 0)
+                        StatisticsEntry firstEntry = null;
+                        if (hoursAverage != null && hoursAverage.Count > 0)
                         {
-                            firstentry = hoursaverage.Find(se => se.TimeStart.ToLocalTime().Hour == h);
+                            firstEntry = hoursAverage.Find(se => se.TimeStart.ToLocalTime().Hour == h);
                         }
                         //
-                        if (firstentry != null)
+                        if (firstEntry != null)
                         {
                             double sum = 0;
-                            sum = (double)(hoursaverage.FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Sum(se => se.Value));
+                            sum = (double)(hoursAverage.FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Sum(se => se.Value));
                             // date is normalized to the current date, time info is preserved from original data entry
-                            DateTime d = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                            migcmd.response += "[" + ((d.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                            var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
+                            migCommand.Response += "[" + ((date.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                         }
                         else
                         {
-                            DateTime d = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                            migcmd.response += "[" + ((d.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
+                            var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
+                            migCommand.Response += "[" + ((date.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
                         }
                     }
-                    migcmd.response = migcmd.response.TrimEnd(',');
-                    migcmd.response += " ]";
-                    migcmd.response += "]";
+                    migCommand.Response = migCommand.Response.TrimEnd(',');
+                    migCommand.Response += " ]";
+                    migCommand.Response += "]";
                     break;
 
                 case "Parameter.StatsHour":
-                    var domain = "";
-                    var address = "";
-                    var filter = migcmd.GetOption(1).Split(':');
-                    if (filter.Length == 2)
+                    filterList = migCommand.GetOption(1).Split(':');
+                    if (filterList.Length == 2)
                     {
-                        domain = filter[0];
-                        address = filter[1];
+                        domain = filterList[0];
+                        address = filterList[1];
                     }
                     //
-                    migcmd.response = "[";
+                    migCommand.Response = "[";
                     //
-                    List<StatisticsEntry>[] hoursaverages = new List<StatisticsEntry>[5];
-                    hoursaverages[0] = _hg.Statistics.GetHourlyStats(domain, address, migcmd.GetOption(0), "Min");
-                    hoursaverages[1] = _hg.Statistics.GetHourlyStats(domain, address, migcmd.GetOption(0), "Max");
-                    hoursaverages[2] = _hg.Statistics.GetHourlyStats(domain, address, migcmd.GetOption(0), "Avg");
-                    hoursaverages[3] = _hg.Statistics.GetHourlyStats24(domain, address, migcmd.GetOption(0), "Avg");
-                    if (migcmd.GetOption(0) == Properties.METER_WATTS)
+                    var hoursAverages = new List<StatisticsEntry>[5];
+                    hoursAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Min");
+                    hoursAverages[1] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Max");
+                    hoursAverages[2] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Avg");
+                    hoursAverages[3] = homegenie.Statistics.GetHourlyStats24(domain, address, migCommand.GetOption(0), "Avg");
+                    if (migCommand.GetOption(0) == Properties.METER_WATTS)
                     {
-                        hoursaverages[4] = _hg.Statistics.GetTodayDetail(domain, address, migcmd.GetOption(0), "Sum");
+                        hoursAverages[4] = homegenie.Statistics.GetTodayDetail(domain, address, migCommand.GetOption(0), "Sum");
                     }
                     else
                     {
-                        hoursaverages[4] = _hg.Statistics.GetTodayDetail(domain, address, migcmd.GetOption(0), "Avg");
+                        hoursAverages[4] = homegenie.Statistics.GetTodayDetail(domain, address, migCommand.GetOption(0), "Avg");
                     }
                     //
                     for (int x = 0; x < 4; x++)
                     {
-                        migcmd.response += "[ ";
+                        migCommand.Response += "[ ";
                         for (int h = 0; h < 24; h++)
                         {
-                            StatisticsEntry firstentry = null;
-                            if (hoursaverages[x] != null && hoursaverages[x].Count > 0)
+                            StatisticsEntry firstEntry = null;
+                            if (hoursAverages[x] != null && hoursAverages[x].Count > 0)
                             {
-                                if (migcmd.GetOption(0) == Properties.METER_WATTS)
+                                if (migCommand.GetOption(0) == Properties.METER_WATTS)
                                 {
-                                    firstentry = hoursaverages[x].Find(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0);
+                                    firstEntry = hoursAverages[x].Find(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0);
                                 }
                                 else
                                 {
-                                    firstentry = hoursaverages[x].Find(se => se.TimeStart.ToLocalTime().Hour == h);
+                                    firstEntry = hoursAverages[x].Find(se => se.TimeStart.ToLocalTime().Hour == h);
                                 }
                             }
                             //
-                            if (firstentry != null)
+                            if (firstEntry != null)
                             {
                                 double sum = 0;
                                 switch (x)
                                 {
                                     case 0:
-                                        if (migcmd.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Min(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Min(se => se.Value));
                                         }
                                         else
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Min(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Min(se => se.Value));
                                         }
                                         break;
                                     case 1:
-                                        sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Max(se => se.Value));
+                                        sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Max(se => se.Value));
                                         break;
                                     case 2:
-                                        if (migcmd.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
                                         }
                                         else
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
                                         }
                                         break;
                                     case 3:
-                                        if (migcmd.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
                                         }
                                         else
                                         {
-                                            sum = (double)(hoursaverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
+                                            sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Average(se => se.Value));
                                         }
                                         break;
                                 }
                                 // date is normalized to the current date, time info is preserved from original data entry
-                                DateTime d = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                                migcmd.response += "[" + ((d.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                                var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
+                                migCommand.Response += "[" + ((date.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + sum.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                             }
                             else
                             {
-                                DateTime d = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
-                                migcmd.response += "[" + ((d.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
+                                var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + h.ToString("00") + ":00:00");
+                                migCommand.Response += "[" + ((date.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + ",0.000],";
                             }
                         }
-                        migcmd.response = migcmd.response.TrimEnd(',');
-                        migcmd.response += " ],";
+                        migCommand.Response = migCommand.Response.TrimEnd(',');
+                        migCommand.Response += " ],";
 
                     }
                     //
-                    migcmd.response += "[ ";
-                    foreach (StatisticsEntry se in hoursaverages[4])
+                    migCommand.Response += "[ ";
+                    foreach (var entry in hoursAverages[4])
                     {
-                        DateTime d = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + se.TimeStart.ToLocalTime().ToString("HH:mm:ss.ffffff"));
-                        migcmd.response += "[" + ((d.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + se.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                        var date = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + entry.TimeStart.ToLocalTime().ToString("HH:mm:ss.ffffff"));
+                        migCommand.Response += "[" + ((date.Ticks - 621355968000000000) / 10000D).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                     }
-                    migcmd.response = migcmd.response.TrimEnd(',');
-                    migcmd.response += " ]";
+                    migCommand.Response = migCommand.Response.TrimEnd(',');
+                    migCommand.Response += " ]";
                     //
-                    migcmd.response += "]";
+                    migCommand.Response += "]";
                     break;
             }
-
-
-
 
         }
 

@@ -26,43 +26,43 @@ namespace MIG
 {
     public class MIGInterfaceCommand
     {
-        private string[] _options = new string[0];
+        private string[] options = new string[0];
 
-        public string domain { get; set; }
-        public string nodeid { get; set; }
-        public string command { get; set; }
+        public string Domain { get; set; }
+        public string NodeId { get; set; }
+        public string Command { get; set; }
         //public string option { get; set; }
         //public string option1 { get; set; }
 
-        public string response { get; set; }
-        public string originalRequest { get; set; }
+        public string Response { get; set; }
+        public string OriginalRequest { get; set; }
 
         public MIGInterfaceCommand(string request)
         {
-            originalRequest = request;
+            OriginalRequest = request;
             try
             {
-                string[] requests = request.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var requests = request.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                 if (requests.Length > 0)
                 {
-                    domain = requests[0];
-                    if (domain == "html")
+                    Domain = requests[0];
+                    if (Domain == "html")
                     {
                         return;
                     }
 
                     if (requests.Length > 2)
                     {
-                        nodeid = requests[1];
-                        command = requests[2];
+                        NodeId = requests[1];
+                        Command = requests[2];
                     }
                     //                option = string.Empty;
                     //                option1 = string.Empty;
                     if (requests.Length > 3)
                     {
                         //                    option = requests[3];
-                        _options = new string[requests.Length - 3];
-                        Array.Copy(requests, 3, _options, 0, requests.Length - 3);
+                        options = new string[requests.Length - 3];
+                        Array.Copy(requests, 3, options, 0, requests.Length - 3);
                     }
                     if (requests.Length > 4)
                     {
@@ -74,15 +74,15 @@ namespace MIG
             {
                 //Console.WriteLine("\n\nError parsing interface command request (" + request + ") : " + ex.Message + "\n" + ex.StackTrace);
             }
-            response = null;
+            Response = null;
         }
 
         public string GetOption(int index)
         {
-            string option = "";
-            if (index < _options.Length)
+            var option = "";
+            if (index < options.Length)
             {
-                option = Uri.UnescapeDataString(_options[index]);
+                option = Uri.UnescapeDataString(options[index]);
             }
             //Console.ForegroundColor = ConsoleColor.DarkMagenta;
             //Console.WriteLine("OPTION " + index + " = " + option);
@@ -94,12 +94,12 @@ namespace MIG
         {
             get
             {
-                string opts = "";
-                for (int o = 0; o < _options.Length; o++)
+                var options = "";
+                for (var o = 0; o < options.Length; o++)
                 {
-                    opts += _options[o] + "/";
+                    options += options[o] + "/";
                 }
-                return opts;
+                return options;
             }
         }
 

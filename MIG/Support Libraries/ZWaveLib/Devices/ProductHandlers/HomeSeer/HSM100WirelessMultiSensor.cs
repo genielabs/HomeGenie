@@ -44,12 +44,12 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
                 // message[9] == 0xFF (or > 0x00)             --> MOTION ON
                 // message[9] == 0x00                         --> MOTION OFF
                 //
-                _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_MOTION, (double)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_MOTION, (double)message[9]);
                 return true;
             }
             else if (message[8] == 0x03)
             {
-                _nodehost._raiseUpdateParameterEvent(_nodehost, 0, ParameterType.PARAMETER_ALARM_GENERIC, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_ALARM_GENERIC, message[9]);
                 return true;
             }
             //else if (message[8] == 0x01 && message[9] == 0x00) // MOTION OFF

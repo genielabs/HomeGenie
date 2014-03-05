@@ -23,35 +23,35 @@
 using System;
 namespace ZWaveLib
 {
-	public enum Command : byte
-	{
-		COMMAND_BASIC_SET = 0x01,
-		COMMAND_BASIC_GET = 0x02,
-		COMMAND_BASIC_REPORT = 0x03,
+    public enum Command : byte
+    {
+        COMMAND_BASIC_SET = 0x01,
+        COMMAND_BASIC_GET = 0x02,
+        COMMAND_BASIC_REPORT = 0x03,
         //
         COMMAND_MULTIINSTANCE_SET = 0x01,
         COMMAND_MULTIINSTANCE_GET = 0x02,
         COMMAND_MULTIINSTANCE_COUNT_GET = 0x04,
         COMMAND_MULTIINSTANCE_COUNT_REPORT = 0x05,
         COMMAND_MULTIINSTANCE_REPORT = 0x06,
-		//
+        //
         COMMAND_MULTIINSTANCEV2_ENCAP = 0x0D,
         //
         COMMAND_ASSOCIATION_SET = 0x01,
         COMMAND_ASSOCIATION_GET = 0x02,
-		COMMAND_ASSOCIATION_REPORT = 0x03,
+        COMMAND_ASSOCIATION_REPORT = 0x03,
         COMMAND_ASSOCIATION_REMOVE = 0x04,
         //
         COMMAND_CONFIG_SET = 0x04,
         COMMAND_CONFIG_GET = 0x05,
         COMMAND_CONFIG_REPORT = 0x06,
-		//
-		COMMAND_WAKEUP_REPORT = 0x06,
-		COMMAND_WAKEUP_NOTIFICATION = 0x07
-	}
-	
-	public enum CommandClass : byte
-	{
+        //
+        COMMAND_WAKEUP_REPORT = 0x06,
+        COMMAND_WAKEUP_NOTIFICATION = 0x07
+    }
+
+    public enum CommandClass : byte
+    {
         COMMAND_CLASS_BASIC = 0x20,
         //
         COMMAND_CLASS_SWITCH_BINARY = 0x25,
@@ -71,15 +71,15 @@ namespace ZWaveLib
         COMMAND_CLASS_MANUFACTURER_SPECIFIC = 0x72,
         COMMAND_CLASS_NODE_NAMING = 0x77,
         //
-		COMMAND_CLASS_BATTERY = 0x80,
-		COMMAND_CLASS_WAKE_UP = 0x84,
-		COMMAND_CLASS_ASSOCIATION = 0x85,
+        COMMAND_CLASS_BATTERY = 0x80,
+        COMMAND_CLASS_WAKE_UP = 0x84,
+        COMMAND_CLASS_ASSOCIATION = 0x85,
         COMMAND_CLASS_VERSION = 0x86,
         //
         COMMAND_CLASS_SENSOR_ALARM = 0x9C,
         COMMAND_CLASS_SILENCE_ALARM = 0x9D
-	}
-	
+    }
+
     public enum GenericType : byte
     {
         GENERIC_CONTROLLER = 0x01,

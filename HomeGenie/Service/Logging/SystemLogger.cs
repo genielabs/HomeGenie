@@ -44,7 +44,7 @@ namespace HomeGenie.Service.Logging
         private static int queueSize = 50;
         private static FileStream logStream;
         private static StreamWriter logWriter;
-        private static DateTime LastFlushed = DateTime.Now;
+        private static DateTime lastFlushed = DateTime.Now;
 
         /// <summary>
         /// Private constructor to prevent instance creation
@@ -91,15 +91,15 @@ namespace HomeGenie.Service.Logging
 
         private bool DoPeriodicFlush()
         {
-            TimeSpan logAge = DateTime.Now - LastFlushed;
+            var logAge = DateTime.Now - lastFlushed;
             if (logAge.TotalSeconds >= maxLogAge)
             {
-                LastFlushed = DateTime.Now;
+                lastFlushed = DateTime.Now;
                 //TODO: rename file with timestamp, compress it and open a new one
                 // or simply keep max 2 days renaming old one to <logfile>.old
                 CloseLog();
                 //
-                Assembly assembly = Assembly.GetExecutingAssembly();
+                var assembly = Assembly.GetExecutingAssembly();
                 string logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
                 string logFile = assembly.ManifestModule.Name.ToLower().Replace(".exe", ".log");
                 string logPath = Path.Combine(logDir, logFile);
@@ -128,7 +128,7 @@ namespace HomeGenie.Service.Logging
             {
                 while (logQueue.Count > 0)
                 {
-                    LogEntry entry = logQueue.Dequeue();
+                    var entry = logQueue.Dequeue();
                     logWriter.WriteLine(entry.ToString());
                 }
             }
@@ -142,9 +142,9 @@ namespace HomeGenie.Service.Logging
         {
             CloseLog();
             //
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;
+            var assembly = Assembly.GetExecutingAssembly();
+            var versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = versionInfo.FileVersion;
             string logDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
             string logFile = assembly.ManifestModule.Name.ToLower().Replace(".exe", ".log");
             string logPath = Path.Combine(logDir, logFile);

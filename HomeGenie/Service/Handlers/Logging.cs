@@ -32,32 +32,32 @@ namespace HomeGenie.Service.Handlers
 {
     public class Logging
     {
-        private HomeGenieService _hg;
+        private HomeGenieService homegenie;
         public Logging(HomeGenieService hg)
         {
-            _hg = hg;
+            homegenie = hg;
         }
 
-        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migcmd)
+        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
         {
-            List<LogEntry> logs = new List<LogEntry>();
+            var logData = new List<LogEntry>();
             try
             {
-                switch (migcmd.command)
+                switch (migCommand.Command)
                 {
                     case "Recent.From":
-                        logs = _hg.RecentEventsLog.ToList().FindAll(le => le != null && le.Domain.StartsWith("MIG.") == false && (le.UnixTimestamp >= double.Parse(migcmd.GetOption(0))));
+                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null && le.Domain.StartsWith("MIG.") == false && (le.UnixTimestamp >= double.Parse(migCommand.GetOption(0))));
                         break;
 
                     case "Recent.Last":
-                        logs = _hg.RecentEventsLog.ToList().FindAll(le => le != null && le.Domain.StartsWith("MIG.") == false &&
-                             le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migcmd.GetOption(0))));
-                        //                            (DateTime.UtcNow - le.Timestamp.AddMilliseconds(int.Parse(cmd.option))).TotalMilliseconds >= 0);
+                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null 
+                            && le.Domain.StartsWith("MIG.") == false 
+                            && le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migCommand.GetOption(0))));
                         break;
                 }
             }
             catch { }
-            migcmd.response = JsonConvert.SerializeObject(logs); //, Formatting.Indented);
+            migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
         }
 
     }

@@ -55,76 +55,76 @@ namespace HomeGenieManager
     [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single)]
     public partial class MainWindow : Window, IManagerCallback
     {
-        private WinForms.NotifyIcon _notifiericon = new WinForms.NotifyIcon();
-        private ServiceController _servicecontroller = null;
+        private WinForms.NotifyIcon notifierIcon = new WinForms.NotifyIcon();
+        private ServiceController serviceController = null;
 
-        private InstanceContext _instancecontext = null;
+        private InstanceContext instanceContext = null;
 
-        private bool _apprunning = true;
+        private bool isAppRunning = true;
 
-        private MenuItem _startstopitem;
+        private MenuItem startStopItem;
 
         public MainWindow()
         {
             InitializeComponent();
             //
-            _initialize();
+            Initialize();
         }
 
         public void OnEventLogged(HomeGenie.WCF.LogEntry message, DateTime timestamp)
         {
-            string s = timestamp.ToString() + " " + timestamp.ToString() + " " + message.Domain + " " + message.Description + " " + message.Source + " " + message.Property + " " + message.Value;
-            Console.WriteLine(s);
+            string logMessage = timestamp.ToString() + " " + timestamp.ToString() + " " + message.Domain + " " + message.Description + " " + message.Source + " " + message.Property + " " + message.Value;
+            Console.WriteLine(logMessage);
             //log.Text = s + "\n" + log.Text;
             //
             if (message.Property == "Status.Level" || message.Property.StartsWith("Sensor."))
             {
-                _notifiericon.BalloonTipTitle = "HomeGenie Message";
-                _notifiericon.BalloonTipText = message.Description + "\n[" + message.Domain.Split('.')[1] + "] " + message.Source + " --> " + message.Property.Split('.')[1] + " = " + message.Value;
-                _notifiericon.ShowBalloonTip(1000);
+                notifierIcon.BalloonTipTitle = "HomeGenie Message";
+                notifierIcon.BalloonTipText = message.Description + "\n[" + message.Domain.Split('.')[1] + "] " + message.Source + " --> " + message.Property.Split('.')[1] + " = " + message.Value;
+                notifierIcon.ShowBalloonTip(1000);
             }
         }
 
-        private void _initialize()
+        private void Initialize()
         {
             this.Visibility = System.Windows.Visibility.Hidden;
             this.Left = System.Windows.SystemParameters.PrimaryScreenWidth - this.Width;
             this.Top = System.Windows.SystemParameters.PrimaryScreenHeight - 30 - this.Height;
             //
-            _servicecontroller = new ServiceController();
-            _notifiericon.MouseDown += new WinForms.MouseEventHandler(_notifier_MouseDown);
-            _notifiericon.Icon = HomeGenieManager.Properties.Resources.TrayIcon;
-            _notifiericon.Visible = true;
-            _notifiericon.Text = "HomeGenie Automation Server";
+            serviceController = new ServiceController();
+            notifierIcon.MouseDown += new WinForms.MouseEventHandler(_notifier_MouseDown);
+            notifierIcon.Icon = HomeGenieManager.Properties.Resources.TrayIcon;
+            notifierIcon.Visible = true;
+            notifierIcon.Text = "HomeGenie Automation Server";
             //
-            ContextMenu menu = (ContextMenu)this.FindResource("NotifierContextMenu");
-            _startstopitem = (MenuItem)menu.Items[4];
+            var menu = (ContextMenu)this.FindResource("NotifierContextMenu");
+            startStopItem = (MenuItem)menu.Items[4];
             //
-            _servicecontroller.ServiceName = "HomeGenieService";
-            Thread _servicechecker = new Thread(_checkServiceStatus);
-            _servicechecker.Start();
+            serviceController.ServiceName = "HomeGenieService";
+            var serviceChecker = new Thread(checkServiceStatus);
+            serviceChecker.Start();
             //
-            _instancecontext = new InstanceContext(this);
+            instanceContext = new InstanceContext(this);
         }
 
-        private void _checkServiceStatus()
+        private void checkServiceStatus()
         {
             //
-            while (_apprunning)
+            while (isAppRunning)
             {
                 string status = "HomeGenie Service not installed on local host.";
-                _servicecontroller.Refresh();
+                serviceController.Refresh();
                 try
                 {
-                    status = "HomeGenie Service - " + _servicecontroller.Status;
-                    if (_servicecontroller.Status != ServiceControllerStatus.Running)
+                    status = "HomeGenie Service - " + serviceController.Status;
+                    if (serviceController.Status != ServiceControllerStatus.Running)
                     {
-                        if (_servicecontroller.Status == ServiceControllerStatus.Stopped)
+                        if (serviceController.Status == ServiceControllerStatus.Stopped)
                         {
                             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, new ThreadStart(() =>
                             {
-                                _startstopitem.Header = "Start Local Service";
-                                _startstopitem.IsEnabled = true;
+                                startStopItem.Header = "Start Local Service";
+                                startStopItem.IsEnabled = true;
                             }));
                         }
                         else
@@ -132,7 +132,7 @@ namespace HomeGenieManager
                             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, new ThreadStart(() =>
                             {
                                 //_startstopitem.Header = "Start Service";
-                                _startstopitem.IsEnabled = false;
+                                startStopItem.IsEnabled = false;
                             }));
                         }
                     }
@@ -140,19 +140,19 @@ namespace HomeGenieManager
                     {
                         this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, new ThreadStart(() =>
                         {
-                            _startstopitem.Header = "Stop Local Service";
-                            _startstopitem.IsEnabled = true;
+                            startStopItem.Header = "Stop Local Service";
+                            startStopItem.IsEnabled = true;
                         }));
                     }
                 }
                 catch { }
-                if (_notifiericon.Text != status)
+                if (notifierIcon.Text != status)
                 {
-                    _notifiericon.BalloonTipTitle = "HomeGenie Message";
-                    _notifiericon.BalloonTipText = status;
-                    _notifiericon.ShowBalloonTip(1000);
+                    notifierIcon.BalloonTipTitle = "HomeGenie Message";
+                    notifierIcon.BalloonTipText = status;
+                    notifierIcon.ShowBalloonTip(1000);
                 }
-                _notifiericon.Text = status;
+                notifierIcon.Text = status;
                 Thread.Sleep(5000);
             }
         }
@@ -162,7 +162,7 @@ namespace HomeGenieManager
         {
             if (e.Button == WinForms.MouseButtons.Right)
             {
-                ContextMenu menu = (ContextMenu)this.FindResource("NotifierContextMenu");
+                var menu = (ContextMenu)this.FindResource("NotifierContextMenu");
                 menu.IsOpen = true;
             }
         }
@@ -172,46 +172,46 @@ namespace HomeGenieManager
         {
             try
             {
-                if (_startstopitem.Header.ToString().StartsWith("Stop"))
+                if (startStopItem.Header.ToString().StartsWith("Stop"))
                 {
-                    _servicecontroller.Stop();
+                    serviceController.Stop();
                 }
                 else
                 {
-                    _servicecontroller.Start();
+                    serviceController.Start();
                 }
             }
             catch (Exception ex)
             {
-                _notifiericon.BalloonTipTitle = "HomeGenie Message";
-                _notifiericon.BalloonTipText = ex.Message;
-                _notifiericon.ShowBalloonTip(3000);
+                notifierIcon.BalloonTipTitle = "HomeGenie Message";
+                notifierIcon.BalloonTipText = ex.Message;
+                notifierIcon.ShowBalloonTip(3000);
             }
         }
 
         private void MenuOpenHomeGenie_Click(object sender, RoutedEventArgs e)
         {
-            bool serviceup = false;
+            bool serviceUp = false;
             try
             {
-                ManagerClient managerclient = null;
-                if (_servicecontroller != null && _servicecontroller.Status == ServiceControllerStatus.Running)
+                ManagerClient managerClient = null;
+                if (serviceController != null && serviceController.Status == ServiceControllerStatus.Running)
                 {
-                    managerclient = new ManagerClient(_instancecontext);
-                    managerclient.Subscribe();
-                    if (managerclient != null)
+                    managerClient = new ManagerClient(instanceContext);
+                    managerClient.Subscribe();
+                    if (managerClient != null)
                     {
-                        string port = managerclient.GetHttpServicePort().ToString();
+                        string port = managerClient.GetHttpServicePort().ToString();
                         System.Diagnostics.Process.Start("http://localhost:" + port + "/");
-                        managerclient.Close();
-                        serviceup = true;
+                        managerClient.Close();
+                        serviceUp = true;
                     }
                 }
             }
             catch (Exception ex)
             {
             }
-            if (!serviceup)
+            if (!serviceUp)
             {
                 if ((App.Current as HomeGenieManager.App).UPnPDevices.Count > 0)
                 {
@@ -237,8 +237,8 @@ namespace HomeGenieManager
 
         public void Quit()
         {
-            _notifiericon.Dispose();
-            _apprunning = false;
+            notifierIcon.Dispose();
+            isAppRunning = false;
             Application.Current.Shutdown();
         }
 

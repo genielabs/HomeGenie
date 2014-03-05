@@ -30,10 +30,10 @@ namespace HomeGenie.Data
     [Serializable()]
     public class ModuleEvent
     {
-        public ModuleEvent(Module m, ModuleParameter p)
+        public ModuleEvent(Module module, ModuleParameter parameter)
         {
-            this.Module = m;
-            this.Parameter = p;
+            this.Module = module;
+            this.Parameter = parameter;
         }
         public Module Module { get; set; }
         public ModuleParameter Parameter { get; set; }

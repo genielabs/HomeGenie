@@ -31,12 +31,11 @@ namespace HomeGenie.Data
     public class LogEntry
     {
         public DateTime Timestamp;
-        private DateTime _unixtimestamp;
         public double UnixTimestamp
         {
             get
             {
-                TimeSpan uts = (Timestamp - new DateTime(1970, 1, 1, 0, 0, 0));
+                var uts = (Timestamp - new DateTime(1970, 1, 1, 0, 0, 0));
                 return uts.TotalMilliseconds;
             }
         }

@@ -27,7 +27,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
     public class Dimmer : Switch
     {
-		/*
+        /*
         public override bool HandleMultiLevelReport(byte[] message)
         {
             bool handled = base.HandleMultiLevelReport(message);
@@ -44,8 +44,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             }
             return handled;
         }
-		*/
-		
+        */
+
         public override void On()
         {
             Level = 0x63; // On
@@ -60,13 +60,13 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             get
             {
-                return (int)_level;
+                return (int)levelValue;
             }
             set
             {
-                _level = value;
-                if (_level > 0x63) _level = 0x63; // 0 to 99 for dimmer type 
-                _nodehost.Basic_Set((int)_level);
+                levelValue = value;
+                if (levelValue > 0x63) levelValue = 0x63; // 0 to 99 for dimmer type 
+                nodeHost.Basic_Set((int)levelValue);
             }
         }
 

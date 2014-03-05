@@ -29,42 +29,42 @@ namespace MIG.Interfaces.HomeAutomation
 {
     public class W800RF : MIGInterface
     {
-        private W800RF32.Transreceiver _w800rf32;
-        private string _portname;
+        private W800RF32.Transceiver w800Rf32;
+        private string portName;
 
         public W800RF()
         {
-            _w800rf32 = new Transreceiver();
-            _w800rf32.RfDataReceived += HandleRfDataReceived;
+            w800Rf32 = new Transceiver();
+            w800Rf32.RfDataReceived += HandleRfDataReceived;
         }
 
-        private Timer _rfpulsetimer;
-        private string _rfprevstringdata = "";
+        private Timer rfPulseTimer;
+        private string rfLastStringData = "";
         void HandleRfDataReceived(RfDataReceivedAction eventdata)
         {
             string data = XTenLib.Utility.ByteArrayToString(eventdata.RawData);
             if (InterfacePropertyChangedAction != null)
             {
                 // flood protection =) - discard dupes
-                if (_rfprevstringdata != data)
+                if (rfLastStringData != data)
                 {
-                    _rfprevstringdata = data;
+                    rfLastStringData = data;
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "W800RF32 RF Receiver", Path = "Receiver.RawData", Value = _rfprevstringdata });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "W800RF32 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
                     }
                     catch (Exception ex)
                     {
                         // TODO: add error logging 
                     }
                     //
-                    if (_rfpulsetimer == null)
+                    if (rfPulseTimer == null)
                     {
-                        _rfpulsetimer = new Timer(delegate(object target)
+                        rfPulseTimer = new Timer(delegate(object target)
                                                   {
                                                       try
                                                       {
-                                                          _rfprevstringdata = "";
+                                                          rfLastStringData = "";
                                                           InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "W800RF32 RF Receiver", Path = "Receiver.RawData", Value = "" });
                                                       }
                                                       catch (Exception ex)
@@ -73,7 +73,7 @@ namespace MIG.Interfaces.HomeAutomation
                                                       }
                                                   });
                     }
-                    _rfpulsetimer.Change(1000, Timeout.Infinite);
+                    rfPulseTimer.Change(1000, Timeout.Infinite);
                 }
             }
         }
@@ -88,23 +88,23 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
         public bool Connect()
         {
-            return _w800rf32.Connect();
+            return w800Rf32.Connect();
         }
         public void Disconnect()
         {
-            _w800rf32.Disconnect();
+            w800Rf32.Disconnect();
         }
         public bool IsConnected
         {
-            get { return _w800rf32.IsConnected; }
+            get { return w800Rf32.IsConnected; }
         }
         public bool IsDevicePresent()
         {
@@ -127,15 +127,15 @@ namespace MIG.Interfaces.HomeAutomation
 
         public string GetPortName()
         {
-            return _portname;
+            return portName;
         }
 
         public void SetPortName(string portname)
         {
-            if (_w800rf32 != null)
+            if (w800Rf32 != null)
             {
-                _portname = portname;
-                _w800rf32.PortName = _portname;
+                portName = portname;
+                w800Rf32.PortName = portName;
             }
         }
 

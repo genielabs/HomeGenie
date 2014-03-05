@@ -32,83 +32,87 @@ using ZWaveLib.Devices;
 namespace ZWaveLib
 {
 
-	public enum ZWaveMessageHeader
-	{
-		SOF = 0x01,
-		ACK = 0x06,
-		NAK = 0x15,
-		CAN = 0x18
-	}
+    public enum ZWaveMessageHeader
+    {
+        SOF = 0x01,
+        ACK = 0x06,
+        NAK = 0x15,
+        CAN = 0x18
+    }
 
-	public enum ZWaveMessageType
-	{
-		REQUEST = 0x00,
-		RESPONSE = 0x01
-	}
+    public enum ZWaveMessageType
+    {
+        REQUEST = 0x00,
+        RESPONSE = 0x01
+    }
 
-	public class ZWaveMessageReceivedEventArgs
-	{
-		public byte[] Message;
+    public class ZWaveMessageReceivedEventArgs
+    {
+        public byte[] Message;
 
-		public ZWaveMessageReceivedEventArgs (byte[] msg)
-		{
-			Message = msg;
-		}
-	}
+        public ZWaveMessageReceivedEventArgs(byte[] msg)
+        {
+            Message = msg;
+        }
+    }
 
-	public class ZWavePort
-	{      
-		public delegate void ZWaveMessageReceivedEvent (object sender, ZWaveMessageReceivedEventArgs zwaveargs);
-		public ZWaveMessageReceivedEvent ZWaveMessageReceived;
+    public class ZWavePort
+    {
+        public delegate void ZWaveMessageReceivedEvent(object sender, ZWaveMessageReceivedEventArgs zwaveargs);
+        public ZWaveMessageReceivedEvent ZWaveMessageReceived;
 
-        private byte _callbackidseq = 1;
-		private object _callbacklock = new object ();
+        private byte callbackIdSeq = 1;
+        private object callbackLock = new object();
 
-		private Logger _logger = new Logger ();
+        private Logger logger = new Logger();
 
-        private SerialPortInput _serialport;
-        private string _portname = "/dev/ttyUSB0";
+        private SerialPortInput serialPort;
+        private string portName = "/dev/ttyUSB0";
 
-        private List<ZWaveMessage> _pendingmsgs = new List<ZWaveMessage>();
-        private bool _initialized;
+        private List<ZWaveMessage> pendingMessages = new List<ZWaveMessage>();
+        private bool isInitialized;
 
-        private Timer _discoverytimer;
+        private Timer discoveryTimer;
 
-        private ManualResetEvent _ackwait = new ManualResetEvent(true);
+        private ManualResetEvent ackWait = new ManualResetEvent(true);
 
 
         public ZWavePort()
-		{
-            _serialport = new SerialPortInput();
-            _serialport.Debug = true;
-            _serialport.MessageReceived += ReceiveMessage;
-            _serialport.ConnectedStateChanged += new SerialPortInput.ConnectedStateChangedEvent(_serialport_ConnectedStateChanged);
-            _discoverytimer = new Timer((object state) => {
+        {
+            serialPort = new SerialPortInput();
+            serialPort.Debug = true;
+            serialPort.MessageReceived += ReceiveMessage;
+            serialPort.ConnectedStateChanged += new SerialPortInput.ConnectedStateChangedEvent(serialport_ConnectedStateChanged);
+            discoveryTimer = new Timer((object state) =>
+            {
                 Discovery();
             });
-		}
+        }
 
-		public string PortName {
-			get { return _portname; }
-			set {
-                _portname = value;
-                _serialport.SetPort(value, 115200);
-			}
-		}
+        public string PortName
+        {
+            get { return portName; }
+            set
+            {
+                portName = value;
+                serialPort.SetPort(value, 115200);
+            }
+        }
 
-		public bool IsConnected {
-            get { return _serialport.IsConnected; }
-		}
+        public bool IsConnected
+        {
+            get { return serialPort.IsConnected; }
+        }
 
-		public bool Connect ()
-		{
-            return _serialport.Connect();
-		}
+        public bool Connect()
+        {
+            return serialPort.Connect();
+        }
 
-		public void Disconnect ()
-		{
-            _serialport.Disconnect();
-		}
+        public void Disconnect()
+        {
+            serialPort.Disconnect();
+        }
 
         //public void Dispose ()
         //{
@@ -117,29 +121,29 @@ namespace ZWaveLib
 
         public void Discovery()
         {
-            _serialport.SendMessage(new byte[] { 0x01, 0x03, 0x00, 0x02, 0xFE });
+            serialPort.SendMessage(new byte[] { 0x01, 0x03, 0x00, 0x02, 0xFE });
         }
 
         public List<ZWaveMessage> PendingMessages
         {
-            get { return _pendingmsgs; }
+            get { return pendingMessages; }
         }
 
-        
+
         public void SendAck()
         {
             byte[] MSG_ACKNOWLEDGE = new byte[] { (byte)ZWaveMessageHeader.ACK };
-            _serialport.SendMessage(MSG_ACKNOWLEDGE);
+            serialPort.SendMessage(MSG_ACKNOWLEDGE);
         }
 
-        public byte SendMessage(ZWaveMessage msg, bool disablecallback = false)
-		{
-            byte callbackid = 0x00;
+        public byte SendMessage(ZWaveMessage message, bool disableCallback = false)
+        {
+            byte callbackId = 0x00;
             //
-            if (!disablecallback)
+            if (!disableCallback)
             {
-                _ackwait.WaitOne();
-                _ackwait.Reset();
+                ackWait.WaitOne();
+                ackWait.Reset();
                 ////
                 //// discard timed-out messages (prevent flooding)
                 ////
@@ -149,32 +153,32 @@ namespace ZWaveLib
                 //    return 0;
                 //}
                 //
-                if (msg.ResendCount == 0)
+                if (message.ResendCount == 0)
                 {
                     // Insert the callback id into the message
-                    callbackid = GetCallbackId();
-                    msg.Message[msg.Message.Length - 2] = callbackid;
-                    msg.CallbackId = callbackid;
+                    callbackId = GetCallbackId();
+                    message.Message[message.Message.Length - 2] = callbackId;
+                    message.CallbackId = callbackId;
                 }
             }
             // Insert checksum
-            msg.Message[msg.Message.Length - 1] = GenerateChecksum(msg.Message); 
-            _pendingmsgs.Add(msg);
+            message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
+            pendingMessages.Add(message);
             //
-            _serialport.SendMessage(msg.Message);
+            serialPort.SendMessage(message.Message);
             //
             // wait for any previous message callback response
-            int maxwait = 50; // 5 seconds max wait
-            while (_pendingmsgs.Contains(msg) && maxwait > 0)
+            int maxWait = 50; // 5 seconds max wait
+            while (pendingMessages.Contains(message) && maxWait > 0)
             {
                 Thread.Sleep(100);
-                maxwait--;
+                maxWait--;
             }
-            _pendingmsgs.Remove(msg);
+            pendingMessages.Remove(message);
             //
             // remove timed out messages (requeued messages after failure)
             //
-            _pendingmsgs.RemoveAll(zm =>
+            pendingMessages.RemoveAll(zm =>
             {
                 TimeSpan ttl = new TimeSpan(DateTime.UtcNow.Ticks - zm.Timestamp.Ticks);
                 if (ttl.TotalSeconds >= 5)
@@ -185,107 +189,108 @@ namespace ZWaveLib
             });
             //
             Thread.Sleep(300);
-            _ackwait.Set();
+            ackWait.Set();
             //
-            return callbackid;
+            return callbackId;
         }
 
-        public void ResendLastMessage(byte callbackid)
+        public void ResendLastMessage(byte callbackId)
         {
-            ZWaveMessage msg = _pendingmsgs.Find(zm => zm.CallbackId == callbackid);
-            if (msg != null)
+            var message = pendingMessages.Find(zm => zm.CallbackId == callbackId);
+            if (message != null)
             {
-                _pendingmsgs.Remove(msg);
-                if (msg.ResendCount < 3)
+                pendingMessages.Remove(message);
+                if (message.ResendCount < 3)
                 {
-                    msg.ResendCount++;
-                    SendMessage(msg);
+                    message.ResendCount++;
+                    SendMessage(message);
                 }
             }
         }
 
         public void ResendLastMessage()
         {
-            if (_pendingmsgs.Count > 0)
+            if (pendingMessages.Count > 0)
             {
-                ZWaveMessage msg = _pendingmsgs[_pendingmsgs.Count - 1];
-                _pendingmsgs.Remove(msg);
-                if (msg.ResendCount < 3)
+                var message = pendingMessages[pendingMessages.Count - 1];
+                pendingMessages.Remove(message);
+                if (message.ResendCount < 3)
                 {
-                    msg.ResendCount++;
-                    SendMessage(msg);
+                    message.ResendCount++;
+                    SendMessage(message);
                 }
             }
         }
 
-		
-		public byte GetCallbackId ()
-		{
-			lock (this._callbacklock) 
+
+        public byte GetCallbackId()
+        {
+            lock (this.callbackLock)
             {
-				if (++this._callbackidseq > 0xFF) 
+                if (++this.callbackIdSeq > 0xFF)
                 {
-					this._callbackidseq = 1;
-				}
-				return this._callbackidseq;
-			}
-		}
+                    this.callbackIdSeq = 1;
+                }
+                return this.callbackIdSeq;
+            }
+        }
 
         public ManualResetEvent CallbackAckEvent
         {
-            get { return _ackwait; }
+            get { return ackWait; }
         }
 
-		public String ByteArrayToString (byte[] message)
-		{
-			String ret = String.Empty;
-			foreach (byte b in message) 
+        public String ByteArrayToString(byte[] message)
+        {
+            String returnValue = String.Empty;
+            foreach (byte b in message)
             {
-				ret += b.ToString ("X2") + " ";
-			}
-			return ret.Trim ();
-		}   		
+                returnValue += b.ToString("X2") + " ";
+            }
+            return returnValue.Trim();
+        }
 
 
- 
-		private void HanldeErrorReceived (object sender, SerialErrorReceivedEventArgs e)
-		{
-Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToString());
-		}
+
+        private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToString());
+        }
 
 
-		private static byte GenerateChecksum (byte[] data)
-		{
-			int offset = 1;
-			byte ret = data [offset];
-			for (int i = offset + 1; i < data.Length - 1; i++) {
-				// Xor bytes
-				ret ^= data [i];
-			}
-			// Not result
-			ret = (byte)(~ret);
-			return ret;
-		}
+        private static byte GenerateChecksum(byte[] data)
+        {
+            int offset = 1;
+            byte returnValue = data[offset];
+            for (int i = offset + 1; i < data.Length - 1; i++)
+            {
+                // Xor bytes
+                returnValue ^= data[i];
+            }
+            // Not result
+            returnValue = (byte)(~returnValue);
+            return returnValue;
+        }
 
         private static bool VerifyChecksum(byte[] data)
         {
             //byte[] data = { 0x01, 0x0F, 0x00, 0x04, 0x00, 0x32, 0x09, 0x60, 0x06, 0x03, 0x31, 0x05, 0x01, 0x2A, 0x02, 0xC0, 0x77, 0x18 };
             //{ 0x01, 0x0E, 0x00, 0x04, 0x00, 0x30, 0x08, 0x32, 0x02, 0x21, 0x74, 0x00, 0x00, 0x18, 0x6F, 0xDF };
             int offset = 1;
-            byte ret = data[offset];
+            byte returnValue = data[offset];
             for (int i = offset + 1; i < data.Length - 1; i++)
             {
                 // Xor bytes
-                ret ^= data[i];
+                returnValue ^= data[i];
             }
             // Not result
-            ret = (byte)(~ret);
+            returnValue = (byte)(~returnValue);
 
-            return (ret == data[data.Length - 1]);
+            return (returnValue == data[data.Length - 1]);
         }
 
-		private void ReceiveMessage (byte[] message)
-		{
+        private void ReceiveMessage(byte[] message)
+        {
             ZWaveMessageHeader header = (ZWaveMessageHeader)((int)message[0]);
             //
             if (header == ZWaveMessageHeader.ACK)
@@ -302,29 +307,30 @@ Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToStr
                 return;
             }
             //
-            int msglen = 0;
-            byte[] nextmessage = null;
+            int msgLength = 0;
+            byte[] nextMessage = null;
             if (message.Length > 1)
             {
-                msglen = (int)message[1];
-                if (message.Length > msglen + 3)
+                msgLength = (int)message[1];
+                if (message.Length > msgLength + 3)
                 {
-                    nextmessage = new byte[message.Length - msglen - 2];
-                    Array.Copy(message, msglen + 2, nextmessage, 0, nextmessage.Length);
-                    byte[] tmpmsg = new byte[msglen + 2];
-                    Array.Copy(message, 0, tmpmsg, 0, msglen + 2);
+                    nextMessage = new byte[message.Length - msgLength - 2];
+                    Array.Copy(message, msgLength + 2, nextMessage, 0, nextMessage.Length);
+                    byte[] tmpmsg = new byte[msgLength + 2];
+                    Array.Copy(message, 0, tmpmsg, 0, msgLength + 2);
                     message = tmpmsg;
                 }
             }
             //
             //Console.WriteLine("=== > " + ByteArrayToString(message));
             //
-			if (header == ZWaveMessageHeader.SOF) { // found SOF
-				//
+            if (header == ZWaveMessageHeader.SOF)
+            { // found SOF
+                //
                 Logger.Log(LogLevel.DEBUG_IN, ByteArrayToString(message));
-				//
-                byte[] cmdack = new byte[]{ 0x01, 0x04, 0x01, 0x13, 0x01, 0xE8 };
-                if (message.SequenceEqual(cmdack))
+                //
+                byte[] cmdAck = new byte[] { 0x01, 0x04, 0x01, 0x13, 0x01, 0xE8 };
+                if (message.SequenceEqual(cmdAck))
                 {
                     //_ackwait.Set();
                 }
@@ -334,38 +340,42 @@ Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToStr
                 }
                 else
                 {
-Console.WriteLine("\nZWaveLib: bad checksum message " + ByteArrayToString(message) + "\n");
+                    Console.WriteLine("\nZWaveLib: bad checksum message " + ByteArrayToString(message) + "\n");
                 }
-			} else if (header == ZWaveMessageHeader.CAN) {
+            }
+            else if (header == ZWaveMessageHeader.CAN)
+            {
                 // RESEND
                 ResendLastMessage();
                 //
-				Logger.Log (LogLevel.WARNING, ByteArrayToString (message));
-				//
+                Logger.Log(LogLevel.WARNING, ByteArrayToString(message));
+                //
                 ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.CAN }));
-			} else {
-Console.WriteLine("ZWaveLib: unhandled message " + ByteArrayToString(message));
-                Logger.Log(LogLevel.ERROR, ByteArrayToString(message));
-//                ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
-			}
-
-            if (nextmessage != null)
-            {
-                ReceiveMessage(nextmessage);
-            }
-		}
-
-        private void _serialport_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
-        {
-            if (statusargs.Connected && !_initialized)
-            {
-                _discoverytimer.Change(5000, Timeout.Infinite);
             }
             else
             {
-                _initialized = false;
+                Console.WriteLine("ZWaveLib: unhandled message " + ByteArrayToString(message));
+                Logger.Log(LogLevel.ERROR, ByteArrayToString(message));
+                //                ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
+            }
+
+            if (nextMessage != null)
+            {
+                ReceiveMessage(nextMessage);
             }
         }
 
-	}
+        private void serialport_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        {
+            if (statusargs.Connected && !isInitialized)
+            {
+                discoveryTimer.Change(5000, Timeout.Infinite);
+            }
+            else
+            {
+                isInitialized = false;
+            }
+        }
+
+    }
 }

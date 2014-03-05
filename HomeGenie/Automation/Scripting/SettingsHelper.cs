@@ -31,24 +31,24 @@ namespace HomeGenie.Automation.Scripting
 {
     public class SettingsHelper
     {
-        private HomeGenieService _homegenie;
+        private HomeGenieService homegenie;
 
         public SettingsHelper(HomeGenieService hg)
         {
-            _homegenie = hg;
+            homegenie = hg;
         }
 
         public ModuleParameter Parameter(string parameter)
         {
-            ModuleParameter systemparam = _homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == parameter; });
+            var systemParameter = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == parameter; });
             // create parameter if does not exists
-            if (systemparam == null)
+            if (systemParameter == null)
             {
-                systemparam = new ModuleParameter() { Name = parameter };
-                _homegenie.Parameters.Add(systemparam);
+                systemParameter = new ModuleParameter() { Name = parameter };
+                homegenie.Parameters.Add(systemParameter);
             }
 
-            return systemparam;
+            return systemParameter;
         }
     }
 }

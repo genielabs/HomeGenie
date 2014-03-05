@@ -39,256 +39,243 @@ namespace HomeGenie.Automation
     {
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
 
-        private HomeGenie.Service.TsList<ProgramBlock> _programblocks = new HomeGenie.Service.TsList<ProgramBlock>();
+        private HomeGenie.Service.TsList<ProgramBlock> automationPrograms = new HomeGenie.Service.TsList<ProgramBlock>();
 
-        //TODO: deprecate Automation States
-        private Dictionary<string, bool> _automationstates = new Dictionary<string, bool>() { 
-                { "Security.Armed", false},
-                { "Security.Away", false},
-                { "Security.Home", false}
-        };
+        private HomeGenieService homegenie = null;
+        private SchedulerService scheduler = null;
+        private ScriptingHost scriptingHost = null;
 
-        private HomeGenieService _homegenie = null;
-        private SchedulerService _schedulersvc = null;
-        private ScriptingHost _scriptinghost = null;
+        private MacroRecorder macroRecorder = null;
 
-        private MacroRecorder _macrorecorder = null;
+        private object lockoObject = new object();
 
-        private object _lock = new object();
-
-        private bool _enginerunning = true;
-        private bool _engineenabled = false;
+        private bool isEngineRunning = true;
+        private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
 
-        public ProgramEngine(HomeGenieService homegenie)
+        public ProgramEngine(HomeGenieService hg)
         {
-            _homegenie = homegenie;
-            _scriptinghost = new ScriptingHost(_homegenie);
-            _macrorecorder = new MacroRecorder(this);
-            _schedulersvc = new SchedulerService(this);
-            _schedulersvc.Start();
+            homegenie = hg;
+            scriptingHost = new ScriptingHost(homegenie);
+            macroRecorder = new MacroRecorder(this);
+            scheduler = new SchedulerService(this);
+            scheduler.Start();
         }
 
-        public void EvaluateProgramConditionAsync(ProgramBlock p, ConditionEvaluationCallback callback)
+        public void EvaluateProgramConditionAsync(ProgramBlock program, ConditionEvaluationCallback callback)
         {
-            p.IsEvaluatingConditionBlock = true;
-            Thread evaluatorthread = new Thread(new ThreadStart(delegate()
+            program.IsEvaluatingConditionBlock = true;
+            var evaluatorTask = new Thread(() =>
             {
-                bool conditionsatisfied = false;
+                bool isConditionSatisfied = false;
                 //
-                while (_enginerunning)
+                while (isEngineRunning)
                 {
-                    if (p.IsRunning || !p.IsEnabled || !_engineenabled) { Thread.Sleep(500); continue; }
+                    if (program.IsRunning || !program.IsEnabled || !isEngineEnabled) { Thread.Sleep(500); continue; }
                     //
-                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                    sw.Start();
+                    var stopWatch = new System.Diagnostics.Stopwatch();
+                    stopWatch.Start();
                     try
                     {
-                        conditionsatisfied = false;
+                        isConditionSatisfied = false;
                         //
-                        if (p.Type.ToLower() == "csharp")
+                        if (program.Type.ToLower() == "csharp")
                         {
-                            MethodRunResult res = p.EvaluateConditionStatement(_homegenie);
-                            if (res != null && res.Exception != null)
+                            var result = program.EvaluateConditionStatement(homegenie);
+                            if (result != null && result.Exception != null)
                             {
                                 // runtime error occurred, script is being disabled
                                 // so user can notice and fix it
-                                p.ScriptErrors = res.Exception.Message + "\n" + res.Exception.StackTrace;
-                                p.IsEnabled = false;
+                                program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                                program.IsEnabled = false;
                             }
                             else
                             {
-                                conditionsatisfied = (bool)res.ReturnValue;
+                                isConditionSatisfied = (bool)result.ReturnValue;
                             }
                         }
                         else
                         {
                             // it is a Wizard Script
-                            conditionsatisfied = (p.Conditions.Count > 0);
-                            for (int c = 0; c < p.Conditions.Count; c++)
+                            isConditionSatisfied = (program.Conditions.Count > 0);
+                            for (int c = 0; c < program.Conditions.Count; c++)
                             {
-                                bool res = _mcp_verifyCondition(p.Conditions[c]);
-                                conditionsatisfied = (conditionsatisfied && res);
+                                bool res = VerifyProgramCondition(program.Conditions[c]);
+                                isConditionSatisfied = (isConditionSatisfied && res);
                             }
                         }
                         //
-                        bool lasteval = p.LastConditionEvaluationResult;
-                        p.LastConditionEvaluationResult = conditionsatisfied;
+                        bool lastResult = program.LastConditionEvaluationResult;
+                        program.LastConditionEvaluationResult = isConditionSatisfied;
                         //
-                        if (p.ConditionType == ConditionType.OnSwitchTrue)
+                        if (program.ConditionType == ConditionType.OnSwitchTrue)
                         {
-                            conditionsatisfied = (conditionsatisfied == true && conditionsatisfied != lasteval);
+                            isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
                         }
-                        else if (p.ConditionType == ConditionType.OnSwitchFalse)
+                        else if (program.ConditionType == ConditionType.OnSwitchFalse)
                         {
-                            conditionsatisfied = (conditionsatisfied == false && conditionsatisfied != lasteval);
+                            isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
                         }
-                        else if (p.ConditionType == ConditionType.OnTrue || p.ConditionType == ConditionType.Once)
+                        else if (program.ConditionType == ConditionType.OnTrue || program.ConditionType == ConditionType.Once)
                         {
                             // noop
                         }
-                        else if (p.ConditionType == ConditionType.OnFalse)
+                        else if (program.ConditionType == ConditionType.OnFalse)
                         {
-                            conditionsatisfied = !conditionsatisfied;
+                            isConditionSatisfied = !isConditionSatisfied;
                         }
                     }
                     catch (Exception ex)
                     {
                         // a runtime error occured
-                        p.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
-                        p.IsEnabled = false;
+                        program.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
+                        program.IsEnabled = false;
                     }
                     //
-                    sw.Stop();
+                    stopWatch.Stop();
                     //
-                    callback(p, conditionsatisfied);
+                    callback(program, isConditionSatisfied);
                     //
-                    int delaynext = (int)(400 + (sw.ElapsedMilliseconds > 400 ? sw.ElapsedMilliseconds - 400 : 0));
-                    if (delaynext > 500) delaynext = 500;
+                    int nextDelay = (int)(400 + (stopWatch.ElapsedMilliseconds > 400 ? stopWatch.ElapsedMilliseconds - 400 : 0));
+                    if (nextDelay > 500) nextDelay = 500;
                     //
-                    Thread.Sleep(delaynext);
+                    Thread.Sleep(nextDelay);
                 }
-                p.IsEvaluatingConditionBlock = false;
-            }));
-            //evaluatorthread.Priority = ThreadPriority.AboveNormal;
-            evaluatorthread.Start();
+                program.IsEvaluatingConditionBlock = false;
+            });
+            evaluatorTask.Start();
         }
 
         public bool Enabled
         {
-            get { return _engineenabled; }
-            set { _engineenabled = value; }
-        }
-
-        public AutomationStatesManager AutomationStates
-        {
-            get { return new AutomationStatesManager(_automationstates); }
+            get { return isEngineEnabled; }
+            set { isEngineEnabled = value; }
         }
 
         public HomeGenieService HomeGenie
         {
-            get { return _homegenie; }
+            get { return homegenie; }
         }
 
         public MacroRecorder MacroRecorder
         {
-            get { return _macrorecorder; }
+            get { return macroRecorder; }
         }
 
         public SchedulerService SchedulerService
         {
-            get { return _schedulersvc; }
+            get { return scheduler; }
         }
 
-        public System.CodeDom.Compiler.CompilerResults CompileScript(ProgramBlock pb)
+        public System.CodeDom.Compiler.CompilerResults CompileScript(ProgramBlock program)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(pb.AssemblyFile)))
+            if (!Directory.Exists(Path.GetDirectoryName(program.AssemblyFile)))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(pb.AssemblyFile));
+                Directory.CreateDirectory(Path.GetDirectoryName(program.AssemblyFile));
             }
             // DO NOT CHANGE THE FOLLOWING LINES OF CODE
             // it is a lil' trick for mono compatibility
             // since it was caching the assembly when using the same name
             string tmpfile = Guid.NewGuid().ToString() + ".dll";
-            System.CodeDom.Compiler.CompilerResults cres = _scriptinghost.CompileScript(pb.ScriptCondition, pb.ScriptSource, tmpfile);
+            var result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
             // delete old assembly
             try
             {
 
-                if (File.Exists(pb.AssemblyFile))
+                if (File.Exists(program.AssemblyFile))
                 {
                     // delete old assebly
-                    File.Delete(pb.AssemblyFile);
+                    File.Delete(program.AssemblyFile);
                 }
                 // move newly compiled assembly to programs folder
-                if (cres.Errors.Count == 0)
+                if (result.Errors.Count == 0)
                 {
                     // submitting new assembly
-                    File.Move(tmpfile, pb.AssemblyFile);
+                    File.Move(tmpfile, program.AssemblyFile);
                 }
             }
             catch (Exception ex)
             {
                 // report errors during post-compilation process
                 //pb.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
-                cres.Errors.Add(new System.CodeDom.Compiler.CompilerError(pb.Name, 0, 0, "0", ex.Message + "\n" + ex.StackTrace));
+                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "0", ex.Message + "\n" + ex.StackTrace));
             }
-            return cres;
+            return result;
         }
 
-        public void Run(ProgramBlock pb, string options)
+        public void Run(ProgramBlock program, string options)
         {
-            if (pb.IsRunning)
+            if (program.IsRunning)
                 return;
             //
-            if (pb.ProgramThread != null)
+            if (program.ProgramThread != null)
             {
-                pb.Stop();
-                pb.IsRunning = false;
+                program.Stop();
+                program.IsRunning = false;
             }
             //
-            lock (_lock)
+            lock (lockoObject)
             {
-                pb.IsRunning = true;
+                program.IsRunning = true;
                 //
-                if (pb.Type.ToLower() == "csharp")
+                if (program.Type.ToLower() == "csharp")
                 {
-                    if (pb.ScriptAssembly != null)
+                    if (program.ScriptAssembly != null)
                     {
-                        pb.TriggerTime = DateTime.UtcNow;
-                        pb.ProgramThread = new Thread(new ThreadStart(delegate()
+                        program.TriggerTime = DateTime.UtcNow;
+                        program.ProgramThread = new Thread(() =>
                         {
-                            MethodRunResult res = pb.RunScript(_homegenie, options);
-                            if (res != null && res.Exception != null)
+                            var result = program.RunScript(homegenie, options);
+                            if (result != null && result.Exception != null)
                             {
                                 // runtime error occurred, script is being disabled
                                 // so user can notice and fix it
-                                pb.ScriptErrors = res.Exception.Message + "\n" + res.Exception.StackTrace;
-                                pb.IsEnabled = false;
+                                program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                                program.IsEnabled = false;
                             }
-                            pb.IsRunning = false;
-                        }));
-                        pb.ProgramThread.Priority = ThreadPriority.BelowNormal;
+                            program.IsRunning = false;
+                        });
+                        program.ProgramThread.Priority = ThreadPriority.BelowNormal;
                         try
                         {
-                            pb.ProgramThread.Start();
+                            program.ProgramThread.Start();
                         }
                         catch
                         {
-                            pb.Stop();
-                            pb.IsRunning = false;
+                            program.Stop();
+                            program.IsRunning = false;
                         }
                     }
                     else
                     {
-                        pb.IsRunning = false;
+                        program.IsRunning = false;
                     }
                 }
                 else
                 {
-                    pb.TriggerTime = DateTime.UtcNow;
-                    if (pb.ConditionType == ConditionType.Once)
+                    program.TriggerTime = DateTime.UtcNow;
+                    if (program.ConditionType == ConditionType.Once)
                     {
-                        pb.IsEnabled = false;
+                        program.IsEnabled = false;
                     }
                     //
-                    pb.ProgramThread = new Thread(new ThreadStart(delegate()
+                    program.ProgramThread = new Thread(() =>
                     {
                         try
                         {
-                            ExecuteWizardScript(pb);
+                            ExecuteWizardScript(program);
                         }
                         catch (ThreadAbortException)
                         {
-                            pb.IsRunning = false;
+                            program.IsRunning = false;
                         }
                         finally
                         {
-                            pb.IsRunning = false;
+                            program.IsRunning = false;
                         }
-                    }));
-                    pb.ProgramThread.Priority = ThreadPriority.Lowest;
-                    pb.ProgramThread.Start();
+                    });
+                    program.ProgramThread.Priority = ThreadPriority.Lowest;
+                    program.ProgramThread.Start();
                 }
                 //
                 Thread.Sleep(100);
@@ -298,38 +285,38 @@ namespace HomeGenie.Automation
 
         public void StopEngine()
         {
-            _enginerunning = false;
-            _schedulersvc.Stop();
+            isEngineRunning = false;
+            scheduler.Stop();
             //lock (_programblocks)
             {
-                foreach (ProgramBlock pb in _programblocks)
+                foreach (ProgramBlock program in automationPrograms)
                 {
-                    pb.Stop();
+                    program.Stop();
                 }
             }
         }
 
-        public TsList<ProgramBlock> Programs { get { lock (_programblocks) return _programblocks; } }
+        public TsList<ProgramBlock> Programs { get { lock (automationPrograms) return automationPrograms; } }
 
 
         public int GeneratePid()
         {
             int pid = USER_SPACE_PROGRAMS_START;
-            foreach (ProgramBlock pb in _programblocks)
+            foreach (ProgramBlock program in automationPrograms)
             {
-                if (pid <= pb.Address) pid = pb.Address + 1;
+                if (pid <= program.Address) pid = program.Address + 1;
             }
             return pid;
         }
 
 
-        public void ProgramAdd(ProgramBlock pb)
+        public void ProgramAdd(ProgramBlock program)
         {
-            lock (_programblocks)
+            lock (automationPrograms)
             {
-                _programblocks.Add(pb);
+                automationPrograms.Add(program);
             }
-            EvaluateProgramConditionAsync(pb, (ProgramBlock p, bool conditionsatisfied) =>
+            EvaluateProgramConditionAsync(program, (ProgramBlock p, bool conditionsatisfied) =>
             {
                 if (conditionsatisfied && p.IsEnabled)
                 {
@@ -337,54 +324,54 @@ namespace HomeGenie.Automation
                 }
             });
         }
-        public void ProgramRemove(ProgramBlock pb)
+        public void ProgramRemove(ProgramBlock program)
         {
-            pb.Stop();
-            pb.IsEnabled = false;
-            lock (_programblocks)
+            program.Stop();
+            program.IsEnabled = false;
+            lock (automationPrograms)
             {
-                _programblocks.Remove(pb);
+                automationPrograms.Remove(program);
             }
         }
 
         // TODO: find a better solution to this...
-        public void ExecuteWizardScript(ProgramBlock pb)
+        public void ExecuteWizardScript(ProgramBlock program)
         {
-            int repeatstartline = 0;
-            int repeatcount = 0;
-            for (int x = 0; x < pb.Commands.Count; x++)
+            int repeatStartLine = 0;
+            int repeatCount = 0;
+            for (int x = 0; x < program.Commands.Count; x++)
             {
-                if (pb.Commands[x].Domain == Domains.HomeAutomation_HomeGenie)
+                if (program.Commands[x].Domain == Domains.HomeAutomation_HomeGenie)
                 {
-                    switch (pb.Commands[x].Target)
+                    switch (program.Commands[x].Target)
                     {
                         case "Automation":
                             //
-                            string cs = pb.Commands[x].CommandString;
+                            string cs = program.Commands[x].CommandString;
                             switch (cs)
                             {
                                 case "Program.Pause":
-                                    Thread.Sleep((int)(double.Parse(pb.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
+                                    Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
                                     break;
                                 case "Program.Repeat":
                                     // TODO: implement check for contiguous repeat statements
-                                    if (repeatcount <= 0)
+                                    if (repeatCount <= 0)
                                     {
-                                        repeatcount = (int)(double.Parse(pb.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
+                                        repeatCount = (int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
                                     }
-                                    if (--repeatcount == 0)
+                                    if (--repeatCount == 0)
                                     {
-                                        repeatstartline = x + 1;
+                                        repeatStartLine = x + 1;
                                     }
                                     else
                                     {
-                                        x = repeatstartline - 1;
+                                        x = repeatStartLine - 1;
                                     }
                                     break;
                                 default:
-                                    ProgramCommand c = pb.Commands[x];
-                                    string wrequest = c.Domain + "/" + c.Target + "/" + c.CommandString + "/" + c.CommandArguments;
-                                    _homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
+                                    var programCommand = program.Commands[x];
+                                    string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
+                                    homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
                                     break;
                             }
                             //
@@ -393,21 +380,21 @@ namespace HomeGenie.Automation
                 }
                 else
                 {
-                    _mcp_executeCommand(pb.Commands[x]);
+                    ExecuteProgramCommand(program.Commands[x]);
                 }
                 //
                 Thread.Sleep(10);
             }
         }
 
-        private bool _mcp_verifyCondition(ProgramCondition c)
+        private bool VerifyProgramCondition(ProgramCondition c)
         {
-            bool retval = false;
-            string comparisonvalue = c.ComparisonValue;
+            bool returnValue = false;
+            string comparisonValue = c.ComparisonValue;
             //
             if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && c.Property == "Scheduler.TimeEvent")
             {
-                return _homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
+                return homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
             }
             //
             try
@@ -415,28 +402,28 @@ namespace HomeGenie.Automation
                 //
                 // if the comparison value starts with ":", then the value is read from another module property
                 // eg: ":HomeAutomation.X10/B3/Level"
-                if (comparisonvalue.StartsWith(":"))
+                if (comparisonValue.StartsWith(":"))
                 {
-                    string[] proppath = comparisonvalue.Substring(1).Split('/');
-                    comparisonvalue = "";
-                    if (proppath.Length >= 3)
+                    string[] propertyPath = comparisonValue.Substring(1).Split('/');
+                    comparisonValue = "";
+                    if (propertyPath.Length >= 3)
                     {
-                        string domain = proppath[0];
-                        string address = proppath[1];
-                        string pname = proppath[2];
-                        var mtarget = _homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
-                        if (mtarget == null)
+                        string domain = propertyPath[0];
+                        string address = propertyPath[1];
+                        string propertyName = propertyPath[2];
+                        var targetModule = homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
+                        if (targetModule == null)
                         {
                             // abbreviated path, eg: ":X10/B3/Level"
-                            mtarget = _homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
+                            targetModule = homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
                         }
                         //
-                        if (mtarget != null)
+                        if (targetModule != null)
                         {
-                            var mprop = Utility.ModuleParameterGet(mtarget, pname);
+                            var mprop = Utility.ModuleParameterGet(targetModule, propertyName);
                             if (mprop != null)
                             {
-                                comparisonvalue = mprop.Value;
+                                comparisonValue = mprop.Value;
                             }
                         }
                     }
@@ -482,8 +469,8 @@ namespace HomeGenie.Automation
                 }
                 else
                 {
-                    Module mod = _homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
-                    parameter = mod.Properties.Find(delegate(ModuleParameter mp)
+                    Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                    parameter = module.Properties.Find(delegate(ModuleParameter mp)
                     {
                         return mp.Name == c.Property;
                     });
@@ -492,7 +479,7 @@ namespace HomeGenie.Automation
                 if (parameter != null)
                 {
                     IComparable lvalue = parameter.Value;
-                    IComparable rvalue = comparisonvalue;
+                    IComparable rvalue = comparisonValue;
                     //
                     double dval = 0;
                     DateTime dtval = new DateTime();
@@ -500,41 +487,41 @@ namespace HomeGenie.Automation
                     if (DateTime.TryParse(parameter.Value, out dtval))
                     {
                         lvalue = dtval;
-                        rvalue = DateTime.Parse(comparisonvalue);
+                        rvalue = DateTime.Parse(comparisonValue);
                     }
                     else if (double.TryParse(parameter.Value, out dval))
                     {
                         lvalue = dval;
-                        rvalue = double.Parse(comparisonvalue);
+                        rvalue = double.Parse(comparisonValue);
                     }
                     //
                     int comparisonresult = lvalue.CompareTo(rvalue);
                     if (c.ComparisonOperator == ComparisonOperator.LessThan && comparisonresult < 0)
                     {
-                        retval = true;
+                        returnValue = true;
                     }
                     else if (c.ComparisonOperator == ComparisonOperator.Equals && comparisonresult == 0)
                     {
-                        retval = true;
+                        returnValue = true;
                     }
                     else if (c.ComparisonOperator == ComparisonOperator.GreaterThan && comparisonresult > 0)
                     {
-                        retval = true;
+                        returnValue = true;
                     }
                 }
             }
             catch
             {
             }
-            return retval;
+            return returnValue;
         }
 
-        private void _mcp_executeCommand(ProgramCommand c)
+        private void ExecuteProgramCommand(ProgramCommand programCommand)
         {
-            string wrequest = c.Domain + "/" + c.Target + "/" + c.CommandString + "/" + c.CommandArguments;
-            MIGInterfaceCommand cmd = new MIGInterfaceCommand(wrequest);
-            _homegenie.InterfaceControl(cmd);
-            _homegenie.WaitOnPending(c.Domain);
+            string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
+            var interfaceCommand = new MIGInterfaceCommand(command);
+            homegenie.InterfaceControl(interfaceCommand);
+            homegenie.WaitOnPending(programCommand.Domain);
         }
 
     }

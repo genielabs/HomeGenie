@@ -160,9 +160,9 @@ namespace MIG.Interfaces.Protocols
         #endregion
 
 
-        private UpnpSmartControlPoint _contropoint;
-        private bool _isconnected = false;
-        private UPnPDevice _localdevice;
+        private UpnpSmartControlPoint controPoint;
+        private bool isConnected = false;
+        private UPnPDevice localDevice;
 
         public UPnP()
         {
@@ -190,16 +190,16 @@ namespace MIG.Interfaces.Protocols
 
         public bool IsConnected
         {
-            get { return _isconnected; }
+            get { return isConnected; }
         }
 
         public bool Connect()
         {
-            if (_contropoint == null)
+            if (controPoint == null)
             {
-                _contropoint = new UpnpSmartControlPoint();
-                _contropoint.OnAddedDevice += _contropoint_OnAddedDevice;
-                _isconnected = true;
+                controPoint = new UpnpSmartControlPoint();
+                controPoint.OnAddedDevice += controPoint_OnAddedDevice;
+                isConnected = true;
             }
             return true;
 
@@ -207,17 +207,17 @@ namespace MIG.Interfaces.Protocols
 
         public void Disconnect()
         {
-            if (_localdevice != null)
+            if (localDevice != null)
             {
-                _localdevice.StopDevice();
-                _localdevice = null;
+                localDevice.StopDevice();
+                localDevice = null;
             }
-            if (_contropoint != null)
+            if (controPoint != null)
             {
-                _contropoint.OnAddedDevice -= _contropoint_OnAddedDevice;
-                _contropoint = null;
+                controPoint.OnAddedDevice -= controPoint_OnAddedDevice;
+                controPoint = null;
             }
-            _isconnected = false;
+            isConnected = false;
         }
 
         public bool IsDevicePresent()
@@ -227,84 +227,84 @@ namespace MIG.Interfaces.Protocols
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            string returnvalue = "";
-            bool raisepropchanged = false;
-            string parampath = "Status.Unhandled";
-            string raiseparam = "";
+            string returnValue = "";
+            bool raisePropertyChanged = false;
+            string parameterPath = "Status.Unhandled";
+            string raiseParameter = "";
             //
-            UPnPDevice device = _upnpDeviceGet(request.nodeid);
+            var device = GetUpnpDevice(request.NodeId);
 
             //////////////////// Commands: SwitchPower, Dimming
-            if (request.command == Command.CONTROL_ON || request.command == Command.CONTROL_OFF)
+            if (request.Command == Command.CONTROL_ON || request.Command == Command.CONTROL_OFF)
             {
-                bool cmdval = (request.command == Command.CONTROL_ON ? true : false);
-                UPnPArgument newvalue = new UPnPArgument("newTargetValue", cmdval);
-                UPnPArgument[] args = new UPnPArgument[] { 
+                bool commandValue = (request.Command == Command.CONTROL_ON ? true : false);
+                var newValue = new UPnPArgument("newTargetValue", commandValue);
+                var args = new UPnPArgument[] { 
+                                    newValue
+                                };
+                InvokeUpnpDeviceService(device, "SwitchPower", "SetTarget", args);
+                //
+                raisePropertyChanged = true;
+                parameterPath = "Status.Level";
+                raiseParameter = (commandValue ? "1" : "0");
+            }
+            else if (request.Command == Command.CONTROL_LEVEL)
+            {
+                var newvalue = new UPnPArgument("NewLoadLevelTarget", (byte)uint.Parse(request.GetOption(0)));
+                var args = new UPnPArgument[] { 
                                     newvalue
                                 };
-                _upnpDeviceServiceInvoke(device, "SwitchPower", "SetTarget", args);
+                InvokeUpnpDeviceService(device, "Dimming", "SetLoadLevelTarget", args);
                 //
-                raisepropchanged = true;
-                parampath = "Status.Level";
-                raiseparam = (cmdval ? "1" : "0");
+                raisePropertyChanged = true;
+                parameterPath = "Status.Level";
+                raiseParameter = (double.Parse(request.GetOption(0)) / 100d).ToString(System.Globalization.CultureInfo.InvariantCulture);
             }
-            else if (request.command == Command.CONTROL_LEVEL)
-            {
-                UPnPArgument newvalue = new UPnPArgument("NewLoadLevelTarget", (byte)uint.Parse(request.GetOption(0)));
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    newvalue
-                                };
-                _upnpDeviceServiceInvoke(device, "Dimming", "SetLoadLevelTarget", args);
-                //
-                raisepropchanged = true;
-                parampath = "Status.Level";
-                raiseparam = (double.Parse(request.GetOption(0)) / 100d).ToString(System.Globalization.CultureInfo.InvariantCulture);
-            }
-            else if (request.command == Command.CONTROL_TOGGLE)
+            else if (request.Command == Command.CONTROL_TOGGLE)
             {
             }
             //////////////////// Commands: Browse, AVTransport
-            else if (request.command == Command.AVMEDIA_GETURI)
+            else if (request.Command == Command.AVMEDIA_GETURI)
             {
-                string devid = request.nodeid;
-                string objid = request.GetOption(0);
+                string deviceId = request.NodeId;
+                string id = request.GetOption(0);
                 //
-                UPnPArgument objectid = new UPnPArgument("ObjectID", objid);
-                UPnPArgument flags = new UPnPArgument("BrowseFlag", "BrowseMetadata");
-                UPnPArgument filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
-                UPnPArgument startindex = new UPnPArgument("StartingIndex", (uint)0);
-                UPnPArgument reqcount = new UPnPArgument("RequestedCount", (uint)1);
-                UPnPArgument sortcriteria = new UPnPArgument("SortCriteria", "");
+                var objectId = new UPnPArgument("ObjectID", id);
+                var flags = new UPnPArgument("BrowseFlag", "BrowseMetadata");
+                var filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
+                var startIndex = new UPnPArgument("StartingIndex", (uint)0);
+                var requestedCount = new UPnPArgument("RequestedCount", (uint)1);
+                var sortCriteria = new UPnPArgument("SortCriteria", "");
                 //
-                UPnPArgument result = new UPnPArgument("Result", "");
-                UPnPArgument numreturned = new UPnPArgument("NumberReturned", "");
-                UPnPArgument totalmatches = new UPnPArgument("TotalMatches", "");
-                UPnPArgument updateid = new UPnPArgument("UpdateID", "");
+                var result = new UPnPArgument("Result", "");
+                var returnedNumber = new UPnPArgument("NumberReturned", "");
+                var totalMatches = new UPnPArgument("TotalMatches", "");
+                var updateId = new UPnPArgument("UpdateID", "");
                 //
-                _upnpDeviceServiceInvoke(device, "ContentDirectory", "Browse", new UPnPArgument[] { 
-                    objectid,
+                InvokeUpnpDeviceService(device, "ContentDirectory", "Browse", new UPnPArgument[] { 
+                    objectId,
                     flags,
                     filter,
-                    startindex,
-                    reqcount,
-                    sortcriteria,
+                    startIndex,
+                    requestedCount,
+                    sortCriteria,
                     result,
-                    numreturned,
-                    totalmatches,
-                    updateid
+                    returnedNumber,
+                    totalMatches,
+                    updateId
                 });
                 //
                 try
                 {
                     string ss = result.DataValue.ToString();
-                    XElement item = XDocument.Parse(ss, LoadOptions.SetBaseUri).Descendants().Where(ii => ii.Name.LocalName == "item").First();
+                    var item = XDocument.Parse(ss, LoadOptions.SetBaseUri).Descendants().Where(ii => ii.Name.LocalName == "item").First();
                     //
-                    foreach (XElement i in item.Elements())
+                    foreach (var i in item.Elements())
                     {
-                        XAttribute item_protocoluri = i.Attribute("protocolInfo");
-                        if (item_protocoluri != null)
+                        var protocolUri = i.Attribute("protocolInfo");
+                        if (protocolUri != null)
                         {
-                            returnvalue = i.Value;
+                            returnValue = i.Value;
                             break;
                         }
                     }
@@ -312,276 +312,276 @@ namespace MIG.Interfaces.Protocols
                 catch { }
 
             }
-            else if (request.command == Command.AVMEDIA_BROWSE)
+            else if (request.Command == Command.AVMEDIA_BROWSE)
             {
-                string devid = request.nodeid;
-                string objid = request.GetOption(0);
+                string deviceId = request.NodeId;
+                string id = request.GetOption(0);
                 //
-                UPnPArgument objectid = new UPnPArgument("ObjectID", objid);
-                UPnPArgument flags = new UPnPArgument("BrowseFlag", "BrowseDirectChildren");
-                UPnPArgument filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
-                UPnPArgument startindex = new UPnPArgument("StartingIndex", (uint)0);
-                UPnPArgument reqcount = new UPnPArgument("RequestedCount", (uint)0);
-                UPnPArgument sortcriteria = new UPnPArgument("SortCriteria", "");
+                var objectId = new UPnPArgument("ObjectID", id);
+                var flags = new UPnPArgument("BrowseFlag", "BrowseDirectChildren");
+                var filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
+                var startIndex = new UPnPArgument("StartingIndex", (uint)0);
+                var requestedCount = new UPnPArgument("RequestedCount", (uint)0);
+                var sortCriteria = new UPnPArgument("SortCriteria", "");
                 //
-                UPnPArgument result = new UPnPArgument("Result", "");
-                UPnPArgument numreturned = new UPnPArgument("NumberReturned", "");
-                UPnPArgument totalmatches = new UPnPArgument("TotalMatches", "");
-                UPnPArgument updateid = new UPnPArgument("UpdateID", "");
+                var result = new UPnPArgument("Result", "");
+                var returnedNumber = new UPnPArgument("NumberReturned", "");
+                var totalMatches = new UPnPArgument("TotalMatches", "");
+                var updateId = new UPnPArgument("UpdateID", "");
                 //
-                _upnpDeviceServiceInvoke(device, "ContentDirectory", "Browse", new UPnPArgument[] { 
-                    objectid,
+                InvokeUpnpDeviceService(device, "ContentDirectory", "Browse", new UPnPArgument[] { 
+                    objectId,
                     flags,
                     filter,
-                    startindex,
-                    reqcount,
-                    sortcriteria,
+                    startIndex,
+                    requestedCount,
+                    sortCriteria,
                     result,
-                    numreturned,
-                    totalmatches,
-                    updateid
+                    returnedNumber,
+                    totalMatches,
+                    updateId
                 });
                 //
                 try
                 {
                     string ss = result.DataValue.ToString();
-                    IEnumerable<XElement> root = XDocument.Parse(ss, LoadOptions.SetBaseUri).Elements();
+                    var root = XDocument.Parse(ss, LoadOptions.SetBaseUri).Elements();
                     //
                     string jsonres = "[";
-                    foreach (XElement i in root.Elements())
+                    foreach (var i in root.Elements())
                     {
-                        string item_id = i.Attribute("id").Value;
-                        string item_title = i.Descendants().Where(n => n.Name.LocalName == "title").First().Value;
-                        string item_class = i.Descendants().Where(n => n.Name.LocalName == "class").First().Value;
-                        jsonres += "{ \"Id\" : \"" + item_id + "\", \"Title\" : \"" + item_title + "\", \"Class\" : \"" + item_class + "\" },\n";
+                        string itemId = i.Attribute("id").Value;
+                        string itemTitle = i.Descendants().Where(n => n.Name.LocalName == "title").First().Value;
+                        string itemClass = i.Descendants().Where(n => n.Name.LocalName == "class").First().Value;
+                        jsonres += "{ \"Id\" : \"" + itemId + "\", \"Title\" : \"" + itemTitle + "\", \"Class\" : \"" + itemClass + "\" },\n";
                     }
                     jsonres = jsonres.TrimEnd(',', '\n') + "]";
                     //
-                    returnvalue = jsonres;
+                    returnValue = jsonres;
                 }
                 catch { }
 
             }
-            else if (request.command == Command.AVMEDIA_GETTRANSPORTINFO)
+            else if (request.Command == Command.AVMEDIA_GETTRANSPORTINFO)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument transportstate = new UPnPArgument("CurrentTransportState", "");
-                UPnPArgument transportstatus = new UPnPArgument("CurrentTransportStatus", "");
-                UPnPArgument currentspeed = new UPnPArgument("CurrentSpeed", "");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
-                                    transportstate,
-                                    transportstatus,
-                                    currentspeed
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var transportState = new UPnPArgument("CurrentTransportState", "");
+                var transportStatus = new UPnPArgument("CurrentTransportStatus", "");
+                var currentSpeed = new UPnPArgument("CurrentSpeed", "");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
+                                    transportState,
+                                    transportStatus,
+                                    currentSpeed
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "GetTransportInfo", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "GetTransportInfo", args);
                 //
                 string jsonres = "[{ ";
-                jsonres += "\"CurrentTransportState\" : \"" + transportstate.DataValue + "\", ";
-                jsonres += "\"CurrentTransportStatus\" : \"" + transportstatus.DataValue + "\", ";
-                jsonres += "\"CurrentSpeed\" : \"" + currentspeed.DataValue + "\"";
+                jsonres += "\"CurrentTransportState\" : \"" + transportState.DataValue + "\", ";
+                jsonres += "\"CurrentTransportStatus\" : \"" + transportStatus.DataValue + "\", ";
+                jsonres += "\"CurrentSpeed\" : \"" + currentSpeed.DataValue + "\"";
                 jsonres += " }]";
                 //
-                returnvalue = jsonres;
+                returnValue = jsonres;
             }
-            else if (request.command == Command.AVMEDIA_GETMEDIAINFO)
+            else if (request.Command == Command.AVMEDIA_GETMEDIAINFO)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument nrtracks = new UPnPArgument("NrTracks", (uint)0);
-                UPnPArgument mediaduration = new UPnPArgument("MediaDuration", "");
-                UPnPArgument currenturi = new UPnPArgument("CurrentURI", "");
-                UPnPArgument currenturimetadata = new UPnPArgument("CurrentURIMetaData", "");
-                UPnPArgument nexturi = new UPnPArgument("NextURI", "");
-                UPnPArgument nexturimetadata = new UPnPArgument("NextURIMetaData", "");
-                UPnPArgument playmedium = new UPnPArgument("PlayMedium", "");
-                UPnPArgument recordmedium = new UPnPArgument("RecordMedium", "");
-                UPnPArgument writestatus = new UPnPArgument("WriteStatus", "");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
-                                    nrtracks,
-                                    mediaduration,
-                                    currenturi,
-                                    currenturimetadata,
-                                    nexturi,
-                                    nexturimetadata,
-                                    playmedium,
-                                    recordmedium,
-                                    writestatus
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var nrTracks = new UPnPArgument("NrTracks", (uint)0);
+                var mediaDuration = new UPnPArgument("MediaDuration", "");
+                var currentUri = new UPnPArgument("CurrentURI", "");
+                var currentUriMetadata = new UPnPArgument("CurrentURIMetaData", "");
+                var nextUri = new UPnPArgument("NextURI", "");
+                var nextUriMetadata = new UPnPArgument("NextURIMetaData", "");
+                var playMedium = new UPnPArgument("PlayMedium", "");
+                var recordMedium = new UPnPArgument("RecordMedium", "");
+                var writeStatus = new UPnPArgument("WriteStatus", "");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
+                                    nrTracks,
+                                    mediaDuration,
+                                    currentUri,
+                                    currentUriMetadata,
+                                    nextUri,
+                                    nextUriMetadata,
+                                    playMedium,
+                                    recordMedium,
+                                    writeStatus
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "GetMediaInfo", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "GetMediaInfo", args);
                 //
                 string jsonres = "[{ ";
-                jsonres += "\"NrTracks\" : \"" + nrtracks.DataValue + "\", ";
-                jsonres += "\"MediaDuration\" : \"" + mediaduration.DataValue + "\", ";
-                jsonres += "\"CurrentURI\" : \"" + currenturi.DataValue + "\", ";
-                jsonres += "\"CurrentURIMetaData\" : \"" + currenturimetadata.DataValue + "\", ";
-                jsonres += "\"NextURI\" : \"" + nexturi.DataValue + "\", ";
-                jsonres += "\"NextURIMetaData\" : \"" + nexturimetadata.DataValue + "\", ";
-                jsonres += "\"PlayMedium\" : \"" + playmedium.DataValue + "\", ";
-                jsonres += "\"RecordMedium\" : \"" + recordmedium.DataValue + "\", ";
-                jsonres += "\"WriteStatus\" : \"" + writestatus.DataValue + "\"";
+                jsonres += "\"NrTracks\" : \"" + nrTracks.DataValue + "\", ";
+                jsonres += "\"MediaDuration\" : \"" + mediaDuration.DataValue + "\", ";
+                jsonres += "\"CurrentURI\" : \"" + currentUri.DataValue + "\", ";
+                jsonres += "\"CurrentURIMetaData\" : \"" + currentUriMetadata.DataValue + "\", ";
+                jsonres += "\"NextURI\" : \"" + nextUri.DataValue + "\", ";
+                jsonres += "\"NextURIMetaData\" : \"" + nextUriMetadata.DataValue + "\", ";
+                jsonres += "\"PlayMedium\" : \"" + playMedium.DataValue + "\", ";
+                jsonres += "\"RecordMedium\" : \"" + recordMedium.DataValue + "\", ";
+                jsonres += "\"WriteStatus\" : \"" + writeStatus.DataValue + "\"";
                 jsonres += " }]";
                 //
-                returnvalue = jsonres;
+                returnValue = jsonres;
             }
-            else if (request.command == Command.AVMEDIA_GETPOSITIONINFO)
+            else if (request.Command == Command.AVMEDIA_GETPOSITIONINFO)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument currenttrack = new UPnPArgument("Track", (uint)0);
-                UPnPArgument trackduration = new UPnPArgument("TrackDuration", "");
-                UPnPArgument trackmetadata = new UPnPArgument("TrackMetaData", "");
-                UPnPArgument trackuri = new UPnPArgument("TrackURI", "");
-                UPnPArgument reltime = new UPnPArgument("RelTime", "");
-                UPnPArgument abstime = new UPnPArgument("AbsTime", "");
-                UPnPArgument relcount = new UPnPArgument("RelCount", (uint)0);
-                UPnPArgument abscount = new UPnPArgument("AbsCount", (uint)0);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
-                                    currenttrack,
-                                    trackduration,
-                                    trackmetadata,
-                                    trackuri,
-                                    reltime,
-                                    abstime,
-                                    relcount,
-                                    abscount
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var currentTrack = new UPnPArgument("Track", (uint)0);
+                var trackDuration = new UPnPArgument("TrackDuration", "");
+                var trackMetadata = new UPnPArgument("TrackMetaData", "");
+                var trackUri = new UPnPArgument("TrackURI", "");
+                var relativeTime = new UPnPArgument("RelTime", "");
+                var absoluteTime = new UPnPArgument("AbsTime", "");
+                var relativeCount = new UPnPArgument("RelCount", (uint)0);
+                var absoluteCount = new UPnPArgument("AbsCount", (uint)0);
+                var args = new UPnPArgument[] { 
+                                    instanceId,
+                                    currentTrack,
+                                    trackDuration,
+                                    trackMetadata,
+                                    trackUri,
+                                    relativeTime,
+                                    absoluteTime,
+                                    relativeCount,
+                                    absoluteCount
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "GetPositionInfo", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "GetPositionInfo", args);
                 //
                 string jsonres = "[{";
-                jsonres += "\"Track\" : \"" + currenttrack.DataValue + "\",";
-                jsonres += "\"TrackDuration\" : \"" + trackduration.DataValue + "\",";
-                jsonres += "\"TrackMetaData\" : \"" + trackmetadata.DataValue + "\",";
-                jsonres += "\"TrackURI\" : \"" + trackuri.DataValue + "\",";
-                jsonres += "\"RelTime\" : \"" + reltime.DataValue + "\",";
-                jsonres += "\"AbsTime\" : \"" + abstime.DataValue + "\",";
-                jsonres += "\"RelCount\" : \"" + relcount.DataValue + "\",";
-                jsonres += "\"AbsCount\" : \"" + abscount.DataValue + "\"";
+                jsonres += "\"Track\" : \"" + currentTrack.DataValue + "\",";
+                jsonres += "\"TrackDuration\" : \"" + trackDuration.DataValue + "\",";
+                jsonres += "\"TrackMetaData\" : \"" + trackMetadata.DataValue + "\",";
+                jsonres += "\"TrackURI\" : \"" + trackUri.DataValue + "\",";
+                jsonres += "\"RelTime\" : \"" + relativeTime.DataValue + "\",";
+                jsonres += "\"AbsTime\" : \"" + absoluteTime.DataValue + "\",";
+                jsonres += "\"RelCount\" : \"" + relativeCount.DataValue + "\",";
+                jsonres += "\"AbsCount\" : \"" + absoluteCount.DataValue + "\"";
                 jsonres += "}]";
                 //
-                returnvalue = jsonres;
+                returnValue = jsonres;
             }
-            else if (request.command == Command.AVMEDIA_SETURI)
+            else if (request.Command == Command.AVMEDIA_SETURI)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument currenturi = new UPnPArgument("CurrentURI", request.GetOption(0));
-                UPnPArgument urimetadata = new UPnPArgument("CurrentURIMetaData", "");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
-                                    currenturi,
-                                    urimetadata
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var currentUri = new UPnPArgument("CurrentURI", request.GetOption(0));
+                var uriMetadata = new UPnPArgument("CurrentURIMetaData", "");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
+                                    currentUri,
+                                    uriMetadata
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "SetAVTransportURI", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "SetAVTransportURI", args);
             }
-            else if (request.command == Command.AVMEDIA_PLAY)
+            else if (request.Command == Command.AVMEDIA_PLAY)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument speed = new UPnPArgument("Speed", "1");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var speed = new UPnPArgument("Speed", "1");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
                                     speed
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "Play", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "Play", args);
             }
-            else if (request.command == Command.AVMEDIA_PAUSE)
+            else if (request.Command == Command.AVMEDIA_PAUSE)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var args = new UPnPArgument[] { 
+                                    instanceId
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "Pause", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "Pause", args);
             }
-            else if (request.command == Command.AVMEDIA_STOP)
+            else if (request.Command == Command.AVMEDIA_STOP)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var args = new UPnPArgument[] { 
+                                    instanceId
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "Stop", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "Stop", args);
             }
-            else if (request.command == Command.AVMEDIA_PREVIOUS)
+            else if (request.Command == Command.AVMEDIA_PREVIOUS)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var args = new UPnPArgument[] { 
+                                    instanceId
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "Previous", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "Previous", args);
             }
-            else if (request.command == Command.AVMEDIA_NEXT)
+            else if (request.Command == Command.AVMEDIA_NEXT)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var args = new UPnPArgument[] { 
+                                    instanceId
                                 };
-                _upnpDeviceServiceInvoke(device, "AVTransport", "Next", args);
+                InvokeUpnpDeviceService(device, "AVTransport", "Next", args);
             }
-            else if (request.command == Command.AVMEDIA_SETNEXT)
+            else if (request.Command == Command.AVMEDIA_SETNEXT)
             {
             }
-            else if (request.command == Command.AVMEDIA_GETMUTE)
+            else if (request.Command == Command.AVMEDIA_GETMUTE)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument channel = new UPnPArgument("Channel", "Master");
-                UPnPArgument currentmute = new UPnPArgument("CurrentMute", "");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var channel = new UPnPArgument("Channel", "Master");
+                var currentMute = new UPnPArgument("CurrentMute", "");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
                                     channel,
-                                    currentmute
+                                    currentMute
                                 };
-                _upnpDeviceServiceInvoke(device, "RenderingControl", "GetMute", args);
-                returnvalue = currentmute.DataValue.ToString();
+                InvokeUpnpDeviceService(device, "RenderingControl", "GetMute", args);
+                returnValue = currentMute.DataValue.ToString();
             }
-            else if (request.command == Command.AVMEDIA_SETMUTE)
+            else if (request.Command == Command.AVMEDIA_SETMUTE)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument channel = new UPnPArgument("Channel", "Master");
-                UPnPArgument mute = new UPnPArgument("DesiredMute", request.GetOption(0) == "1" ? true : false);
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var channel = new UPnPArgument("Channel", "Master");
+                var mute = new UPnPArgument("DesiredMute", request.GetOption(0) == "1" ? true : false);
+                var args = new UPnPArgument[] { 
+                                    instanceId,
                                     channel,
                                     mute
                                 };
-                _upnpDeviceServiceInvoke(device, "RenderingControl", "SetMute", args);
+                InvokeUpnpDeviceService(device, "RenderingControl", "SetMute", args);
             }
-            else if (request.command == Command.AVMEDIA_GETVOLUME)
+            else if (request.Command == Command.AVMEDIA_GETVOLUME)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument channel = new UPnPArgument("Channel", "Master");
-                UPnPArgument currentvolume = new UPnPArgument("CurrentVolume", "");
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var channel = new UPnPArgument("Channel", "Master");
+                var currentVolume = new UPnPArgument("CurrentVolume", "");
+                var args = new UPnPArgument[] { 
+                                    instanceId,
                                     channel,
-                                    currentvolume
+                                    currentVolume
                                 };
-                _upnpDeviceServiceInvoke(device, "RenderingControl", "GetVolume", args);
-                returnvalue = currentvolume.DataValue.ToString();
+                InvokeUpnpDeviceService(device, "RenderingControl", "GetVolume", args);
+                returnValue = currentVolume.DataValue.ToString();
             }
-            else if (request.command == Command.AVMEDIA_SETVOLUME)
+            else if (request.Command == Command.AVMEDIA_SETVOLUME)
             {
-                UPnPArgument instanceid = new UPnPArgument("InstanceID", (uint)0);
-                UPnPArgument channel = new UPnPArgument("Channel", "Master");
-                UPnPArgument volume = new UPnPArgument("DesiredVolume", UInt16.Parse(request.GetOption(0)));
-                UPnPArgument[] args = new UPnPArgument[] { 
-                                    instanceid,
+                var instanceId = new UPnPArgument("InstanceID", (uint)0);
+                var channel = new UPnPArgument("Channel", "Master");
+                var volume = new UPnPArgument("DesiredVolume", UInt16.Parse(request.GetOption(0)));
+                var args = new UPnPArgument[] { 
+                                    instanceId,
                                     channel,
                                     volume
                                 };
-                _upnpDeviceServiceInvoke(device, "RenderingControl", "SetVolume", args);
+                InvokeUpnpDeviceService(device, "RenderingControl", "SetVolume", args);
             }
 
 
             // signal event
-            if (raisepropchanged && InterfacePropertyChangedAction != null)
+            if (raisePropertyChanged && InterfacePropertyChangedAction != null)
             {
                 try
                 {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = device.UniqueDeviceName, SourceType = "UPnP " + (device != null ? device.StandardDeviceType : "device"), Path = parampath, Value = raiseparam });
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = device.UniqueDeviceName, SourceType = "UPnP " + (device != null ? device.StandardDeviceType : "device"), Path = parameterPath, Value = raiseParameter });
                 }
                 catch { }
             }
 
 
-            return returnvalue;
+            return returnValue;
         }
 
         #endregion
@@ -592,21 +592,21 @@ namespace MIG.Interfaces.Protocols
 
         public UpnpSmartControlPoint UpnpControlPoint
         {
-            get { return _contropoint; }
+            get { return controPoint; }
         }
 
-        public void CreateLocalDevice(string deviceguid, string devicetype, string presentationurl, string rootdir, string modelname, string modeldescription, string modelurl, string modelnumber, string manufacturer, string manufacturerurl)
+        public void CreateLocalDevice(string deviceGuid, string deviceType, string presentationUrl, string rootDirectory, string modelName, string modelDescription, string modelUrl, string modelNumber, string manufacturer, string manufacturerUrl)
         {
-            if (_localdevice != null)
+            if (localDevice != null)
             {
-                _localdevice.StopDevice();
-                _localdevice = null;
+                localDevice.StopDevice();
+                localDevice = null;
             }
             //
             IPHostEntry host;
             string localIP = "";
             host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
+            foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
@@ -614,26 +614,26 @@ namespace MIG.Interfaces.Protocols
                     break;
                 }
             }
-            _localdevice = UPnPDevice.CreateRootDevice(900, 1, rootdir);
+            localDevice = UPnPDevice.CreateRootDevice(900, 1, rootDirectory);
             //hgdevice.Icon = null;
-            if (presentationurl != "")
+            if (presentationUrl != "")
             {
-                _localdevice.HasPresentation = true;
-                _localdevice.PresentationURL = presentationurl;
+                localDevice.HasPresentation = true;
+                localDevice.PresentationURL = presentationUrl;
             }
-            _localdevice.FriendlyName = modelname + ": " + Environment.MachineName;
-            _localdevice.Manufacturer = manufacturer;
-            _localdevice.ManufacturerURL = manufacturerurl;
-            _localdevice.ModelName = modelname;
-            _localdevice.ModelDescription = modeldescription;
-            if (Uri.IsWellFormedUriString(manufacturerurl, UriKind.Absolute))
+            localDevice.FriendlyName = modelName + ": " + Environment.MachineName;
+            localDevice.Manufacturer = manufacturer;
+            localDevice.ManufacturerURL = manufacturerUrl;
+            localDevice.ModelName = modelName;
+            localDevice.ModelDescription = modelDescription;
+            if (Uri.IsWellFormedUriString(manufacturerUrl, UriKind.Absolute))
             {
-                _localdevice.ModelURL = new Uri(manufacturerurl);
+                localDevice.ModelURL = new Uri(manufacturerUrl);
             }
-            _localdevice.ModelNumber = modelnumber;
-            _localdevice.StandardDeviceType = devicetype;
-            _localdevice.UniqueDeviceName = deviceguid;
-            _localdevice.StartDevice();
+            localDevice.ModelNumber = modelNumber;
+            localDevice.StandardDeviceType = deviceType;
+            localDevice.UniqueDeviceName = deviceGuid;
+            localDevice.StartDevice();
 
         }
 
@@ -642,32 +642,32 @@ namespace MIG.Interfaces.Protocols
 
 
 
-        private UPnPDevice _upnpDeviceGet(string devid)
+        private UPnPDevice GetUpnpDevice(string deviceId)
         {
-            UPnPDevice dev = null;
-            foreach (UPnPDevice d in _contropoint.DeviceTable)
+            UPnPDevice device = null;
+            foreach (UPnPDevice d in controPoint.DeviceTable)
             {
-                if (d.UniqueDeviceName == devid)
+                if (d.UniqueDeviceName == deviceId)
                 {
-                    dev = d;
+                    device = d;
                     break;
                 }
             }
-            return dev;
+            return device;
         }
 
-        private void _upnpDeviceServiceInvoke(UPnPDevice d, string serviceid, string methodname, params UPnPArgument[] args)
+        private void InvokeUpnpDeviceService(UPnPDevice device, string serviceId, string methodName, params UPnPArgument[] args)
         {
-            foreach (UPnPService s in d.Services)
+            foreach (UPnPService s in device.Services)
             {
-                if (s.ServiceID.StartsWith("urn:upnp-org:serviceId:" + serviceid))
+                if (s.ServiceID.StartsWith("urn:upnp-org:serviceId:" + serviceId))
                 {
-                    s.InvokeSync(methodname, args);
+                    s.InvokeSync(methodName, args);
                 }
             }
         }
 
-        private void _contropoint_OnAddedDevice(UpnpSmartControlPoint sender, UPnPDevice device)
+        private void controPoint_OnAddedDevice(UpnpSmartControlPoint sender, UPnPDevice device)
         {
             if (InterfacePropertyChangedAction != null)
             {
@@ -726,7 +726,7 @@ namespace MIG.Interfaces.Protocols
         private WeakEvent OnDeviceExpiredEvent = new WeakEvent();
         private WeakEvent OnRemovedDeviceEvent = new WeakEvent();
         private WeakEvent OnUpdatedDeviceEvent = new WeakEvent();
-        private string _searchfilter = "upnp:rootdevice"; //"ssdp:all"; //
+        private string searchFilter = "upnp:rootdevice"; //"ssdp:all"; //
 
 
         public ArrayList DeviceTable
@@ -792,7 +792,7 @@ namespace MIG.Interfaces.Protocols
             this.genericControlPoint = new UPnPControlPoint(this.hostNetworkInfo);
             this.genericControlPoint.OnSearch += new UPnPControlPoint.SearchHandler(this.UPnPControlPointSearchSink);
             this.genericControlPoint.OnNotify += new SSDP.NotifyHandler(this.SSDPNotifySink);
-            this.genericControlPoint.FindDeviceAsync(_searchfilter);
+            this.genericControlPoint.FindDeviceAsync(searchFilter);
         }
 
         private void DeviceFactoryCreationSink(UPnPDeviceFactory sender, UPnPDevice device, Uri locationURL)
@@ -885,7 +885,7 @@ namespace MIG.Interfaces.Protocols
         {
             if (this.genericControlPoint != null)
             {
-                this.genericControlPoint.FindDeviceAsync(_searchfilter);
+                this.genericControlPoint.FindDeviceAsync(searchFilter);
             }
         }
 
@@ -907,7 +907,7 @@ namespace MIG.Interfaces.Protocols
                 //device2.Removed();
                 this.OnRemovedDeviceEvent.Fire(this, device2);
             }
-            this.genericControlPoint.FindDeviceAsync(_searchfilter);
+            this.genericControlPoint.FindDeviceAsync(searchFilter);
         }
 
         internal void RemoveMe(UPnPDevice _d)
@@ -947,13 +947,13 @@ namespace MIG.Interfaces.Protocols
                     this.deviceLifeTimeClock.Add(key, 20);
                 }
             }
-            this.genericControlPoint.FindDeviceAsync(_searchfilter);
+            this.genericControlPoint.FindDeviceAsync(searchFilter);
         }
 
         internal void SSDPNotifySink(IPEndPoint source, IPEndPoint local, Uri LocationURL, bool IsAlive, string USN, string SearchTarget, int MaxAge, HTTPMessage Packet)
         {
             UPnPDevice device = null;
-            if (SearchTarget == _searchfilter)
+            if (SearchTarget == searchFilter)
             {
                 if (!IsAlive)
                 {

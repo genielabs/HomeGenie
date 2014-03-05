@@ -132,7 +132,10 @@ namespace MIG.Interfaces.HomeAutomation
 
 
         private XTenManager x10lib;
-        private string _portname;
+        private string portName;
+
+        private Timer rfPulseTimer;
+        private string rfLastStringData = "";
 
         public X10()
         {
@@ -141,33 +144,31 @@ namespace MIG.Interfaces.HomeAutomation
             x10lib.RfDataReceived += new Action<RfDataReceivedAction>(x10lib_RfDataReceived);
         }
 
-        private Timer _rfpulsetimer;
-        private string _rfprevstringdata = "";
-        void x10lib_RfDataReceived(RfDataReceivedAction eventdata)
+        private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
         {
             if (InterfacePropertyChangedAction != null)
             {
-                string data = XTenLib.Utility.ByteArrayToString(eventdata.RawData);
+                string data = XTenLib.Utility.ByteArrayToString(eventData.RawData);
                 // flood protection =) - discard dupes
-                if (_rfprevstringdata != data)
+                if (rfLastStringData != data)
                 {
-                    _rfprevstringdata = data;
+                    rfLastStringData = data;
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = _rfprevstringdata });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
                     }
                     catch (Exception ex)
                     {
                         // TODO: add error logging 
                     }
                     //
-                    if (_rfpulsetimer == null)
+                    if (rfPulseTimer == null)
                     {
-                        _rfpulsetimer = new Timer(delegate(object target)
+                        rfPulseTimer = new Timer(delegate(object target)
                         {
                             try
                             {
-                                _rfprevstringdata = "";
+                                rfLastStringData = "";
                                 InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = "" });
                             }
                             catch (Exception ex)
@@ -176,7 +177,7 @@ namespace MIG.Interfaces.HomeAutomation
                             }
                         });
                     }
-                    _rfpulsetimer.Change(1000, Timeout.Infinite);
+                    rfPulseTimer.Change(1000, Timeout.Infinite);
                 }
             }
         }
@@ -207,9 +208,9 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                string ifacedomain = this.GetType().Namespace.ToString();
-                ifacedomain = ifacedomain.Substring(ifacedomain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
-                return ifacedomain;
+                string domain = this.GetType().Namespace.ToString();
+                domain = domain.Substring(domain.LastIndexOf(".") + 1) + "." + this.GetType().Name.ToString();
+                return domain;
             }
         }
 
@@ -250,48 +251,48 @@ namespace MIG.Interfaces.HomeAutomation
 
         public object InterfaceControl(MIGInterfaceCommand request)
         {
-            string nodeid = request.nodeid;
-            Command command = (Command)request.command;
+            string nodeId = request.NodeId;
+            var command = (Command)request.Command;
             string option = request.GetOption(0);
 
             //process command
             #region X10HAL-commands compatibility !!! <-- DEPRECATE THIS
-            if (nodeid.ToUpper() == "STATUS")
+            if (nodeId.ToUpper() == "STATUS")
             {
-                List<X10Module> tempdataitems = new List<X10Module>(x10lib.ModulesStatus.Count);
+                var tmpDataItems = new List<X10Module>(x10lib.ModulesStatus.Count);
                 foreach (string key in x10lib.ModulesStatus.Keys)
                 {
-                    tempdataitems.Add(x10lib.ModulesStatus[key]);
+                    tmpDataItems.Add(x10lib.ModulesStatus[key]);
                 }
 
-                XmlSerializer serializer = new XmlSerializer(typeof(List<X10Module>));
-                StringWriter sw = new StringWriter();
-                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                var serializer = new XmlSerializer(typeof(List<X10Module>));
+                var writer = new StringWriter();
+                var ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
-                serializer.Serialize(sw, tempdataitems, ns);
+                serializer.Serialize(writer, tmpDataItems, ns);
 
-                StringBuilder sb = new StringBuilder();
-                sb.Append(sw.ToString());
+                var sb = new StringBuilder();
+                sb.Append(writer.ToString());
                 //byte[] b = Encoding.UTF8.GetBytes(sb.ToString());
                 //response.ContentLength64 = b.Length;
                 //response.OutputStream.Write(b, 0, b.Length);
                 return sb.ToString();
             }
-            else if (nodeid.ToUpper() == "CONFIG")
+            else if (nodeId.ToUpper() == "CONFIG")
             {
-                string configpath = @"C:\Program Files\ActiveHome Pro\HAL.ahx";
+                string configPath = @"C:\Program Files\ActiveHome Pro\HAL.ahx";
                 string config = "";
                 //
                 try
                 {
-                    config = System.IO.File.ReadAllText(configpath);
+                    config = System.IO.File.ReadAllText(configPath);
                     //
                     if (config.IndexOf("&amp;") <= 0)
                     {
                         config = config.Replace("&", "&amp;");
                     }
                     //
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     sb.Append(config);
                     return sb.ToString();
                 }
@@ -300,59 +301,59 @@ namespace MIG.Interfaces.HomeAutomation
                 }
             }
             #endregion
-            X10HouseCodes housecode = XTenLib.Utility.HouseCodeFromString(nodeid);
-            X10UnitCodes unitcode = XTenLib.Utility.UnitCodeFromString(nodeid);
+            var houseCode = XTenLib.Utility.HouseCodeFromString(nodeId);
+            var unitCode = XTenLib.Utility.UnitCodeFromString(nodeId);
             if (command == Command.PARAMETER_STATUS)
             {
-                x10lib.StatusRequest(housecode, unitcode);
+                x10lib.StatusRequest(houseCode, unitCode);
             }
             else if (command == Command.CONTROL_ON)
             {
-                x10lib.LightOn(housecode, unitcode);
+                x10lib.LightOn(houseCode, unitCode);
             }
             else if (command == Command.CONTROL_OFF)
             {
-                x10lib.LightOff(housecode, unitcode);
+                x10lib.LightOff(houseCode, unitCode);
             }
             else if (command == Command.CONTROL_BRIGHT)
             {
-                x10lib.Bright(housecode, unitcode, int.Parse(option));
+                x10lib.Bright(houseCode, unitCode, int.Parse(option));
             }
             else if (command == Command.CONTROL_DIM)
             {
-                x10lib.Dim(housecode, unitcode, int.Parse(option));
+                x10lib.Dim(houseCode, unitCode, int.Parse(option));
             }
             else if (command == Command.CONTROL_LEVEL)
             {
-                int dimvalue = int.Parse(option) - (int)(x10lib.ModulesStatus[nodeid].Level * 100.0);
+                int dimvalue = int.Parse(option) - (int)(x10lib.ModulesStatus[nodeId].Level * 100.0);
                 if (dimvalue > 0)
                 {
-                    x10lib.Bright(housecode, unitcode, dimvalue);
+                    x10lib.Bright(houseCode, unitCode, dimvalue);
                 }
                 else if (dimvalue < 0)
                 {
-                    x10lib.Dim(housecode, unitcode, -dimvalue);
+                    x10lib.Dim(houseCode, unitCode, -dimvalue);
                 }
             }
             else if (command == Command.CONTROL_TOGGLE)
             {
-                string huc = XTenLib.Utility.HouseUnitCodeFromEnum(housecode, unitcode);
+                string huc = XTenLib.Utility.HouseUnitCodeFromEnum(houseCode, unitCode);
                 if (x10lib.ModulesStatus[huc].Level == 0)
                 {
-                    x10lib.LightOn(housecode, unitcode);
+                    x10lib.LightOn(houseCode, unitCode);
                 }
                 else
                 {
-                    x10lib.LightOff(housecode, unitcode);
+                    x10lib.LightOff(houseCode, unitCode);
                 }
             }
             else if (command == Command.CONTROL_ALLLIGHTSON)
             {
-                x10lib.AllLightsOn(housecode);
+                x10lib.AllLightsOn(houseCode);
             }
             else if (command == Command.CONTROL_ALLLIGHTSOFF)
             {
-                x10lib.AllUnitsOff(housecode);
+                x10lib.AllUnitsOff(houseCode);
             }//
             return "";
         }
@@ -368,16 +369,16 @@ namespace MIG.Interfaces.HomeAutomation
 
         public string GetPortName()
         {
-            return _portname;
+            return portName;
         }
 
-        public void SetPortName(string portname)
+        public void SetPortName(string name)
         {
             if (x10lib != null)
             {
-                x10lib.PortName = portname;
+                x10lib.PortName = name;
             }
-            _portname = portname;
+            portName = name;
         }
 
 

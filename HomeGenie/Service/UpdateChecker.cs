@@ -51,9 +51,9 @@ namespace HomeGenie.Service
         public ArchiveDownloadStatus Status;
         public ReleaseInfo ReleaseInfo;
 
-        public ArchiveDownloadEventArgs(ReleaseInfo ri, ArchiveDownloadStatus status)
+        public ArchiveDownloadEventArgs(ReleaseInfo releaseInfo, ArchiveDownloadStatus status)
         {
-            this.ReleaseInfo = ri;
+            this.ReleaseInfo = releaseInfo;
             this.Status = status;
         }
     }
@@ -92,21 +92,21 @@ namespace HomeGenie.Service
         public delegate void UpdateProgressEvent(object sender, UpdateProgressEventArgs args);
         public UpdateProgressEvent UpdateProgress;
 
-        private string _endpointurl = "http://www.homegenie.it/release_updates.php";
-        private ReleaseInfo _currentrelease;
-        private List<ReleaseInfo> _remoteupdates;
-        private Timer _interval;
-        private const string _updatefolder = "_update";
+        private string endpointUrl = "http://www.homegenie.it/release_updates.php";
+        private ReleaseInfo currentRelease;
+        private List<ReleaseInfo> remoteUpdates;
+        private Timer checkInterval;
+        private const string updateFolder = "_update";
 
         // TODO: add automatic interval check and "UpdateAvailable", "UpdateChecking" events
 
         public UpdateChecker()
         {
-            _interval = new Timer(1000 * 60 * 60 * 24); // 24 hours interval between update checks
-            _interval.AutoReset = true;
-            _interval.Elapsed += _interval_Elapsed;
+            checkInterval = new Timer(1000 * 60 * 60 * 24); // 24 hours interval between update checks
+            checkInterval.AutoReset = true;
+            checkInterval.Elapsed += checkInterval_Elapsed;
             //
-            _remoteupdates = new List<ReleaseInfo>();
+            remoteUpdates = new List<ReleaseInfo>();
         }
 
         public void Check()
@@ -114,7 +114,7 @@ namespace HomeGenie.Service
             if (UpdateProgress != null) UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.STARTED));
             GetCurrentRelease();
             GetRemoteUpdates();
-            if (_currentrelease != null && _remoteupdates != null && UpdateProgress != null)
+            if (currentRelease != null && remoteUpdates != null && UpdateProgress != null)
             {
                 UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.COMPLETED));
             }
@@ -124,14 +124,14 @@ namespace HomeGenie.Service
             }
             //
             // TODO: remove the following lines at some point... 
-            string newupdater = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdaterNew.exe");
-            string currentupdater = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdater.exe");
-            if (File.Exists(newupdater))
+            string newUpdaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdaterNew.exe");
+            string currentUpdaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdater.exe");
+            if (File.Exists(newUpdaterPath))
             {
                 try
                 {
-                    File.Copy(newupdater, currentupdater, true);
-                    File.Delete(newupdater);
+                    File.Copy(newUpdaterPath, currentUpdaterPath, true);
+                    File.Delete(newUpdaterPath);
                 }
                 catch { }
             }
@@ -140,57 +140,57 @@ namespace HomeGenie.Service
         public void Start()
         {
             Check();
-            _interval.Start();
+            checkInterval.Start();
         }
 
         public void Stop()
         {
-            _interval.Stop();
+            checkInterval.Stop();
         }
 
         public ReleaseInfo GetCurrentRelease()
         {
             try
             {
-                XmlSerializer oserializer = new XmlSerializer(typeof(ReleaseInfo));
-                StreamReader oreader = new StreamReader("release_info.xml");
-                _currentrelease = (ReleaseInfo)oserializer.Deserialize(oreader);
-                oreader.Close();
+                var serializer = new XmlSerializer(typeof(ReleaseInfo));
+                var reader = new StreamReader("release_info.xml");
+                currentRelease = (ReleaseInfo)serializer.Deserialize(reader);
+                reader.Close();
             }
             catch { }
-            return _currentrelease;
+            return currentRelease;
         }
 
         public List<ReleaseInfo> RemoteUpdates
         {
-            get { return _remoteupdates; }
+            get { return remoteUpdates; }
         }
 
         public List<ReleaseInfo> GetRemoteUpdates()
         {
-            WebClient webcli = new WebClient();
-            webcli.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+            var client = new WebClient();
+            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
             try
             {
-                string relxml = webcli.DownloadString(_endpointurl);
+                string releaseXml = client.DownloadString(endpointUrl);
                 var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
-                using (TextReader reader = new StringReader(relxml))
+                using (TextReader reader = new StringReader(releaseXml))
                 {
-                    _remoteupdates.Clear();
-                    List<ReleaseInfo> rupdates = (List<ReleaseInfo>)serializer.Deserialize(reader);
-                    rupdates.Sort(delegate(ReleaseInfo a, ReleaseInfo b) { return a.ReleaseDate.CompareTo(b.ReleaseDate); });
-                    foreach (ReleaseInfo ri in rupdates)
+                    remoteUpdates.Clear();
+                    var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
+                    updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b) { return a.ReleaseDate.CompareTo(b.ReleaseDate); });
+                    foreach (var releaseInfo in updates)
                     {
-                        if (_currentrelease != null && _currentrelease.ReleaseDate < ri.ReleaseDate)
+                        if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
                         {
-                            _remoteupdates.Add(ri);
-                            if (ri.UpdateBreak) break;
+                            remoteUpdates.Add(releaseInfo);
+                            if (releaseInfo.UpdateBreak) break;
                         }
                     }
                 }
             }
             catch (Exception) { }
-            return _remoteupdates;
+            return remoteUpdates;
         }
 
         public bool IsUpdateAvailable
@@ -198,11 +198,11 @@ namespace HomeGenie.Service
             get
             {
                 bool update = false;
-                if (_remoteupdates != null)
+                if (remoteUpdates != null)
                 {
-                    foreach (ReleaseInfo ri in _remoteupdates)
+                    foreach (var releaseInfo in remoteUpdates)
                     {
-                        if (_currentrelease != null && _currentrelease.ReleaseDate < ri.ReleaseDate)
+                        if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
                         {
                             update = true;
                             break;
@@ -222,15 +222,15 @@ namespace HomeGenie.Service
         {
             bool success = true;
             //
-            if (Directory.Exists(_updatefolder)) Directory.Delete(_updatefolder, true);
+            if (Directory.Exists(updateFolder)) Directory.Delete(updateFolder, true);
             //
-            if (_remoteupdates != null)
+            if (remoteUpdates != null)
             {
-                foreach (ReleaseInfo ri in _remoteupdates)
+                foreach (var releaseInfo in remoteUpdates)
                 {
-                    if (_currentrelease != null && _currentrelease.ReleaseDate < ri.ReleaseDate)
+                    if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
                     {
-                        List<string> files = DownloadAndUncompress(ri);
+                        var files = DownloadAndUncompress(releaseInfo);
                         if (files == null) // || files.Count == 0)
                         {
                             success = false;
@@ -241,41 +241,41 @@ namespace HomeGenie.Service
             return success;
         }
 
-        public List<string> DownloadAndUncompress(ReleaseInfo ri)
+        public List<string> DownloadAndUncompress(ReleaseInfo releaseInfo)
         {
-            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.STARTED));
+            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.STARTED));
             //
-            string destfolder = Path.Combine(_updatefolder, "files");
-            string archivename = Path.Combine(_updatefolder, "archives", "hg_update_" + ri.Version.Replace(" ", "_").Replace(".", "_") + ".zip");
-            if (!Directory.Exists(Path.GetDirectoryName(archivename)))
+            string destinationFolder = Path.Combine(updateFolder, "files");
+            string archiveName = Path.Combine(updateFolder, "archives", "hg_update_" + releaseInfo.Version.Replace(" ", "_").Replace(".", "_") + ".zip");
+            if (!Directory.Exists(Path.GetDirectoryName(archiveName)))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(archivename));
+                Directory.CreateDirectory(Path.GetDirectoryName(archiveName));
             }
-            WebClient webcli = new WebClient();
-            webcli.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+            var client = new WebClient();
+            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
             try
             {
-                webcli.DownloadFile(ri.DownloadUrl, archivename);
+                client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
             }
             catch (Exception)
             {
-                if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.ERROR));
+                if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
                 return null;
                 //                throw;
             }
 
             // Unarchive (unzip)
-            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.DECOMPRESSING));
+            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 
-            bool decompresserror = false;
-            List<string> files = new List<string>();
+            bool errorOccurred = false;
+            var files = new List<string>();
             try
             {
-                using (ZipPackage package = (ZipPackage)Package.Open(archivename, FileMode.Open, FileAccess.Read))
+                using (ZipPackage package = (ZipPackage)Package.Open(archiveName, FileMode.Open, FileAccess.Read))
                 {
                     foreach (PackagePart part in package.GetParts())
                     {
-                        string target = Path.Combine(destfolder, part.Uri.OriginalString.Substring(1)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
+                        string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
                         if (!Directory.Exists(Path.GetDirectoryName(target)))
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(target));
@@ -301,32 +301,21 @@ namespace HomeGenie.Service
             }
             catch (Exception)
             {
-                decompresserror = true;
+                errorOccurred = true;
             }
 
             if (ArchiveDownloadUpdate != null)
             {
-                if (decompresserror)
-                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.ERROR));
+                if (errorOccurred)
+                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
                 else
-                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(ri, ArchiveDownloadStatus.COMPLETED));
+                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.COMPLETED));
             }
 
             return files;
         }
 
-        public void Upgrade()
-        {
-            // - restart only if any *.dll *.exe *.so file
-            // - copy all files
-            // - update current_release.xml file
-            // - delete _updates folder
-        }
-
-
-        //
-
-        void _interval_Elapsed(object sender, ElapsedEventArgs e)
+        void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
         {
             Check();
             if (IsUpdateAvailable)
@@ -340,19 +329,19 @@ namespace HomeGenie.Service
         {
             get
             {
-                bool restartrequired = false;
-                if (_remoteupdates != null)
+                bool restartRequired = false;
+                if (remoteUpdates != null)
                 {
-                    foreach (ReleaseInfo ri in _remoteupdates)
+                    foreach (var releaseInfo in remoteUpdates)
                     {
-                        if (ri.RequireRestart)
+                        if (releaseInfo.RequireRestart)
                         {
-                            restartrequired = true;
+                            restartRequired = true;
                             break;
                         }
                     }
                 }
-                return restartrequired;
+                return restartRequired;
             }
         }
     }
