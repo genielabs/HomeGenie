@@ -72,6 +72,7 @@ namespace ZWaveLib
         COMMAND_CLASS_NODE_NAMING = 0x77,
         //
         COMMAND_CLASS_BATTERY = 0x80,
+        COMMAND_CLASS_HAIL = 0x82,
         COMMAND_CLASS_WAKE_UP = 0x84,
         COMMAND_CLASS_ASSOCIATION = 0x85,
         COMMAND_CLASS_VERSION = 0x86,
