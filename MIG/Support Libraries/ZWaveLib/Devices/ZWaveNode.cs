@@ -358,6 +358,12 @@ namespace ZWaveLib.Devices
                         }
 
                         break;
+                        
+                       	case (byte)CommandClass.COMMAND_CLASS_HAIL:
+
+				this.Basic_Get ();
+				
+			break;
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
