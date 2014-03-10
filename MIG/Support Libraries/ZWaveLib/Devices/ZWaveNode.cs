@@ -238,7 +238,6 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_COONFIGURATION:
 
                         if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
@@ -271,7 +270,6 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_ASSOCIATION:
 
                         if (messageLength > 12 && commandType == (byte)Command.COMMAND_ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
@@ -299,7 +297,6 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_WAKE_UP:
 
                         if (messageLength > 11 && commandType == (byte)Command.COMMAND_WAKEUP_REPORT) // WAKE UP REPORT 0x06
@@ -322,7 +319,6 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_BATTERY:
 
                         if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
