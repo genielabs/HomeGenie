@@ -359,11 +359,11 @@ namespace ZWaveLib.Devices
 
                         break;
                         
-                       	case (byte)CommandClass.COMMAND_CLASS_HAIL:
+                    case (byte)CommandClass.COMMAND_CLASS_HAIL:
 
 				this.Basic_Get ();
-				
-			break;
+				handled=true;
+		    	break;
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
