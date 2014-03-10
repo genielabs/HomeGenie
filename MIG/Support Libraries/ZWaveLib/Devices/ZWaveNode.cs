@@ -221,7 +221,7 @@ namespace ZWaveLib.Devices
                 //
                 switch (commandClass)
                 {
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                     case (byte)CommandClass.COMMAND_CLASS_BASIC:
                     case (byte)CommandClass.COMMAND_CLASS_ALARM:
                     case (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY:
@@ -230,21 +230,16 @@ namespace ZWaveLib.Devices
                     case (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY:
                     case (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL:
                     case (byte)CommandClass.COMMAND_CLASS_SCENE_ACTIVATION:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        //if (command_type == (byte)Command.COMMAND_BASIC_REPORT || command_type == (byte)Command.COMMAND_BASIC_GET) // command_type should be PayLoad length !?!?
-                        //{
                         if (this.DeviceHandler != null)
                         {
                             handled = this.DeviceHandler.HandleBasicReport(receivedMessage);
                         }
-                        //}
+
                         break;
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_COONFIGURATION:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //                        01 0B 00 04 00 2B 05 70 06 02 01 01 AA
 
                         if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
                         {
@@ -278,8 +273,6 @@ namespace ZWaveLib.Devices
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_ASSOCIATION:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //01 0C 00 04 00 2B 06 85 03 01 04 00 01 58
 
                         if (messageLength > 12 && commandType == (byte)Command.COMMAND_ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
                         {
@@ -308,8 +301,6 @@ namespace ZWaveLib.Devices
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_WAKE_UP:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //01 0C 00 04 00 2B 06 84 06 00 01 68 65 54
 
                         if (messageLength > 11 && commandType == (byte)Command.COMMAND_WAKEUP_REPORT) // WAKE UP REPORT 0x06
                         {
@@ -333,8 +324,7 @@ namespace ZWaveLib.Devices
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_BATTERY:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // 01 0F 00 04 00 2B 09 80 03 64 31 05 01 2A 03 0B 26
+
                         if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
                         {
                             RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_BATTERY, receivedMessage[9]);
@@ -344,10 +334,8 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
                     case (byte)CommandClass.COMMAND_CLASS_METER:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                         if (messageLength > 10)
                         {
@@ -361,13 +349,13 @@ namespace ZWaveLib.Devices
                         
                     case (byte)CommandClass.COMMAND_CLASS_HAIL:
 
-				this.Basic_Get ();
-				handled=true;
+			this.Basic_Get();
+			handled = true;
+			
 		    	break;
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
-                        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                         if (messageLength > 14)
                         {
                             byte[] manufacturerId = new byte[2] { receivedMessage[9], receivedMessage[10] };
@@ -440,12 +428,6 @@ namespace ZWaveLib.Devices
 
             return false;
         }
-
-
-
-
-
-
 
 
         #region private methods
