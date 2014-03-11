@@ -127,85 +127,89 @@ namespace HomeGenie.Automation.Scripting
                 this.mailSubject = subject;
                 this.mailBody = messageText;
                 //
-                var message = new System.Net.Mail.MailMessage();
-                string[] mailRecipients = recipients.Split(';');
-                for (int e = 0; e < mailRecipients.Length; e++)
+                using (var message = new System.Net.Mail.MailMessage())
                 {
-                    message.To.Add(mailRecipients[e]);
-                }
-                message.Subject = this.mailSubject;
-                message.From = new MailAddress(this.mailFrom);
-                message.Body = this.mailBody;
-                //
-                for (int a = 0; a < attachments.Count; a++)
-                {
-                    var attachment = new Attachment(new MemoryStream(attachments.ElementAt(a).Value), attachments.ElementAt(a).Key);
-                    message.Attachments.Add(attachment);
-                }
-                //
-                if (this.mailService == "")
-                {
-                    // this is a System Parameter
-                    var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpServer"; });
-                    if (spSmtpServer != null)
+                    string[] mailRecipients = recipients.Split(';');
+                    for (int e = 0; e < mailRecipients.Length; e++)
                     {
-                        this.mailService = spSmtpServer.Value;
+                        message.To.Add(mailRecipients[e]);
                     }
-                }
-                if (this.mailPort == -1)
-                {
-                    // this is a System Parameter
-                    var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPort"; });
-                    if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
+                    message.Subject = this.mailSubject;
+                    message.From = new MailAddress(this.mailFrom);
+                    message.Body = this.mailBody;
+                    //
+                    for (int a = 0; a < attachments.Count; a++)
                     {
-                        this.mailPort = (int)spSmtpPort.DecimalValue;
+                        var attachment = new Attachment(new MemoryStream(attachments.ElementAt(a).Value), attachments.ElementAt(a).Key);
+                        message.Attachments.Add(attachment);
                     }
-                }
-                if (this.mailSsl == -1)
-                {
-                    // this is a System Parameter
-                    var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUseSsl"; });
-                    if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
+                    //
+                    if (this.mailService == "")
                     {
-                        this.mailSsl = 1;
-                    }
-                }
-                if (this.networkCredential == null)
-                {
-                    var username = "";
-                    // this is a System Parameter
-                    var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUserName"; });
-                    if (spSmtpUserName != null)
-                    {
-                        username = spSmtpUserName.Value;
-                    }
-                    if (username != "")
-                    {
-                        var password = "";
                         // this is a System Parameter
-                        var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPassword"; });
-                        if (spSmtpPassword != null)
+                        var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpServer"; });
+                        if (spSmtpServer != null)
                         {
-                            password = spSmtpPassword.Value;
+                            this.mailService = spSmtpServer.Value;
                         }
-                        this.networkCredential = new NetworkCredential(username, password);
+                    }
+                    if (this.mailPort == -1)
+                    {
+                        // this is a System Parameter
+                        var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPort"; });
+                        if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
+                        {
+                            this.mailPort = (int)spSmtpPort.DecimalValue;
+                        }
+                    }
+                    if (this.mailSsl == -1)
+                    {
+                        // this is a System Parameter
+                        var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUseSsl"; });
+                        if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
+                        {
+                            this.mailSsl = 1;
+                        }
+                    }
+                    if (this.networkCredential == null)
+                    {
+                        var username = "";
+                        // this is a System Parameter
+                        var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUserName"; });
+                        if (spSmtpUserName != null)
+                        {
+                            username = spSmtpUserName.Value;
+                        }
+                        if (username != "")
+                        {
+                            var password = "";
+                            // this is a System Parameter
+                            var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPassword"; });
+                            if (spSmtpPassword != null)
+                            {
+                                password = spSmtpPassword.Value;
+                            }
+                            this.networkCredential = new NetworkCredential(username, password);
+                        }
+                    }
+                    //
+                    using (var smtpClient = new SmtpClient(this.mailService))
+                    {
+                        smtpClient.Credentials = this.networkCredential;
+                        if (this.mailPort > 0)
+                        {
+                            smtpClient.Port = this.mailPort;
+                        }
+                        if (this.mailSsl > 0)
+                        {
+                            smtpClient.EnableSsl = (this.mailSsl == 1);
+                        }
+                        smtpClient.Send(message);
+                        smtpClient.Dispose();
+                        //
+                        attachments.Clear();
                     }
                 }
-                //
-                var smtpClient = new SmtpClient(this.mailService);
-                smtpClient.Credentials = this.networkCredential;
-                if (this.mailPort > 0)
-                {
-                    smtpClient.Port = this.mailPort;
-                }
-                if (this.mailSsl > 0)
-                {
-                    smtpClient.EnableSsl = (this.mailSsl == 1);
-                }
-                smtpClient.Send(message);
-                smtpClient.Dispose();
-                //
-                attachments.Clear();
             }
             catch (Exception ex)
             {
@@ -245,22 +249,24 @@ namespace HomeGenie.Automation.Scripting
             string returnvalue = "";
             try
             {
-                var webClient = new WebClient();
-                if (this.networkCredential != null)
+                using (var webClient = new WebClient())
                 {
-                    webClient.Credentials = networkCredential;
-                }
-                webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                webClient.Headers.Add(customHeaders);
-                if (this.method == "")
-                {
-                    returnvalue = webClient.DownloadString(this.webServiceUrl);
-                }
-                else
-                {
-                    byte[] data = Encoding.ASCII.GetBytes(this.putData);
-                    byte[] responsebytes = webClient.UploadData(this.webServiceUrl, this.method, data);
-                    returnvalue = Encoding.ASCII.GetString(responsebytes);
+                    if (this.networkCredential != null)
+                    {
+                        webClient.Credentials = networkCredential;
+                    }
+                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                    webClient.Headers.Add(customHeaders);
+                    if (this.method == "")
+                    {
+                        returnvalue = webClient.DownloadString(this.webServiceUrl);
+                    }
+                    else
+                    {
+                        byte[] data = Encoding.ASCII.GetBytes(this.putData);
+                        byte[] responsebytes = webClient.UploadData(this.webServiceUrl, this.method, data);
+                        returnvalue = Encoding.ASCII.GetString(responsebytes);
+                    }
                 }
             }
             catch (Exception ex)
@@ -307,13 +313,15 @@ namespace HomeGenie.Automation.Scripting
             byte[] responseBytes = null;
             try
             {
-                var webClient = new WebClient();
-                if (this.networkCredential != null)
+                using (var webClient = new WebClient())
                 {
-                    webClient.Credentials = networkCredential;
+                    if (this.networkCredential != null)
+                    {
+                        webClient.Credentials = networkCredential;
+                    }
+                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                    responseBytes = webClient.DownloadData(this.webServiceUrl);
                 }
-                webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                responseBytes = webClient.DownloadData(this.webServiceUrl);
             }
             catch { }
             return responseBytes;
@@ -322,21 +330,23 @@ namespace HomeGenie.Automation.Scripting
         public bool Ping(string ipAddress)
         {
             bool success = false;
-            var pingClient = new Ping();
-            var options = new PingOptions();
-            //
-            // Use the default Ttl value which is 128,
-            // but change the fragmentation behavior.
-            options.DontFragment = true;
-            //
-            // Create a buffer of 32 bytes of data to be transmitted.
-            string data = "01010101010101010101010101010101";
-            byte[] buffer = Encoding.ASCII.GetBytes(data);
-            int timeout = 1000;
-            var reply = pingClient.Send(ipAddress, timeout, buffer, options);
-            if (reply.Status == IPStatus.Success)
+            using (var pingClient = new Ping())
             {
-                success = true;
+                var options = new PingOptions();
+                //
+                // Use the default Ttl value which is 128,
+                // but change the fragmentation behavior.
+                options.DontFragment = true;
+                //
+                // Create a buffer of 32 bytes of data to be transmitted.
+                string data = "01010101010101010101010101010101";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 1000;
+                var reply = pingClient.Send(ipAddress, timeout, buffer, options);
+                if (reply.Status == IPStatus.Success)
+                {
+                    success = true;
+                }
             }
             return success;
         }

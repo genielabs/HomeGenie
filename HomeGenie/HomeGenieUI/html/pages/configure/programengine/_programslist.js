@@ -57,11 +57,27 @@ HG.WebApp.ProgramsList.InitializePage = function ()
 			//
 			$('#program_switchtype_button').bind('click', function (event) {
 			    HG.WebApp.ProgramEdit._CurrentProgram.Type = $('#automation_programtype').select().val();
-			    if (HG.WebApp.ProgramEdit._CurrentProgram.Type == 'CSharp') {
+			    if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard') {
 			        $('#automation_conditiontype').val('OnTrue');
 			        $('#automation_conditiontype').selectmenu().selectmenu('refresh');
-			    }
-			    else {
+                    // set a valid trigger code for the current programming language
+			        if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
+			            editor1.setValue('"""\nPut your trigger code logic here\nSet the special variable \'TriggerCode = True\' when you want the Code To Run to be executed.\n"""\nTriggerCode = True');
+			            editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nHG.Modules.WithName(\'Light 1\').On()\n"""\n')
+                    }
+			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
+			            editor1.setValue('# Put your trigger code logic here\n# Set the special variable \'TriggerCode = true\' when you want the Code To Run to be executed.\nTriggerCode = true');
+			            editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# HG.Modules.WithName(\'Light 1\').On()\n');
+                    }
+			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
+			            editor1.setValue('// Put your trigger code logic here\n// Set the special variable \'TriggerCode = true\' when you want the Code To Run to be executed.\nTriggerCode = true;\n');
+			            editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// HG.Modules.WithName(\'Light 1\').On();\n');
+                    }
+			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
+			            editor1.setValue('// Put your trigger code logic here\n// To execute the Code To Run,\n// use a \'return true\' or \'return false\' otherwise.\nreturn true;\n');
+			            editor2.setValue('// CSharp Automation Program Plugin\n// Example for using Helper Classes:\n// Modules.WithName("Light 1").On();\n');
+                    }
+                } else {
 			        $('#automation_conditiontype').val('OnSwitchTrue');
 			        $('#automation_conditiontype').selectmenu().selectmenu('refresh');
 			    }
@@ -321,7 +337,7 @@ HG.WebApp.ProgramsList.RefreshProgramType = function ()
 	{
 		HG.WebApp.ProgramEdit._CurrentProgram.Type = $('#automation_programtype').select().val();
         //
-		if (HG.WebApp.ProgramEdit._CurrentProgram.Type == 'CSharp')
+		if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard')
 		{
 			$('#configure_program_editfortypewizard').css('display', 'none');
 			$('#configure_program_editfortypecsharp').css('display', '');
@@ -417,7 +433,7 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog)
         else {
             status = 'black';
         }
-        if (prog.Type.toLowerCase() == 'csharp' && prog.ScriptErrors != '') {
+        if (prog.Type.toLowerCase() != 'wizard' && prog.ScriptErrors != '') {
             if (prog.IsEnabled) {
                 status = 'red';
             }

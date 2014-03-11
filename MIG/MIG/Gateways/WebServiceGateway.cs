@@ -135,8 +135,7 @@ namespace MIG.Gateways
             Stop();
         }
 
-
-
+        
         private void HandleRequests()
         {
             int shutdown = -1;

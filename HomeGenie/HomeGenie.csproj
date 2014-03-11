@@ -97,7 +97,34 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IronPython">
+      <HintPath>Externals\Scripting\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>Externals\Scripting\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby">
+      <HintPath>Externals\Scripting\IronRuby.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries">
+      <HintPath>Externals\Scripting\IronRuby.Libraries.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries.Yaml">
+      <HintPath>Externals\Scripting\IronRuby.Libraries.Yaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint">
+      <HintPath>Externals\Scripting\Jint.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>Externals\Scripting\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>Externals\Scripting\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata">
+      <HintPath>Externals\Scripting\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="NCrontab">
       <HintPath>Externals\NCrontab\NCrontab.dll</HintPath>
     </Reference>
@@ -128,12 +155,13 @@
     <Compile Include="Automation\ProgramFeature.cs" />
     <Compile Include="Automation\Scheduler\SchedulerItem.cs" />
     <Compile Include="Automation\Scheduler\SchedulerService.cs" />
+    <Compile Include="Automation\ScriptingHelper.cs" />
     <Compile Include="Automation\Scripting\ModuleHelper.cs" />
     <Compile Include="Automation\Scripting\ModulesManager.cs" />
     <Compile Include="Automation\Scripting\NetHelper.cs" />
     <Compile Include="Automation\Scripting\ProgramHelper.cs" />
     <Compile Include="Automation\Scripting\SchedulerHelper.cs" />
-    <Compile Include="Automation\Scripting\ScriptingHost.cs" />
+    <Compile Include="Automation\CSharpAppFactory.cs" />
     <Compile Include="Automation\Scripting\EventsHelper.cs" />
     <Compile Include="Automation\Scripting\TcpClientHelper.cs" />
     <Compile Include="Automation\Scripting\SerialPortHelper.cs" />

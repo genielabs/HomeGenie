@@ -165,6 +165,10 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+11/03/2014 1.00 beta rev 349
+	- Automation: Added Python, Ruby and Javascript languages for scripting HG Automation Engine
+	- ZWaveLib: added support for Hail Command Class (contributed by miket)
+
 02/03/2014 1.00 beta rev 345
 	- MIG: added basic flood protection to WebServiceGateway
 	- MIG: added html memory files caching to WebServiceGateway

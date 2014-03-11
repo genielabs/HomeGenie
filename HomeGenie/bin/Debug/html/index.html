@@ -44,6 +44,9 @@
     <link rel="stylesheet" href="js/codemirror-3.13/lib/codemirror.css">
     <link rel="stylesheet" href="js/codemirror-3.13/theme/ambiance.css">
     <script src="js/codemirror-3.13/mode/clike/clike.js"></script>
+    <script src="js/codemirror-3.13/mode/javascript/javascript.js"></script>
+    <script src="js/codemirror-3.13/mode/python/python.js"></script>
+    <script src="js/codemirror-3.13/mode/ruby/ruby.js"></script>
 
     <script src="js/raphael-min.js"></script>
     <script src="js/colorwheel.js"></script>
@@ -129,13 +132,11 @@
             editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
                 lineNumbers: true,
                 matchBrackets: true,
-                mode: 'text/x-csharp',
                 theme: 'ambiance'
             });
             editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
                 lineNumbers: true,
                 matchBrackets: true,
-                mode: 'text/x-csharp',
                 theme: 'ambiance'
             });
         });

@@ -149,7 +149,7 @@ namespace HomeGenie.Service.Handlers
                         //TODO: move program compilation into an method of ProgramEngine and also apply to Programs.Update
                         newProgram.IsEnabled = false;
                         newProgram.ScriptErrors = "";
-                        newProgram.ScriptAssembly = null;
+                        newProgram.AppAssembly = null;
                         //
                         homegenie.UpdateProgramsDatabase();
                         //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
@@ -217,7 +217,7 @@ namespace HomeGenie.Service.Handlers
                         {
                             if (currentProgram.Type.ToLower() != newProgram.Type.ToLower())
                             {
-                                currentProgram.ScriptAssembly = null; // dispose assembly and interrupt current task
+                                currentProgram.AppAssembly = null; // dispose assembly and interrupt current task
                             }
                             currentProgram.Type = newProgram.Type;
                             currentProgram.Group = newProgram.Group;
@@ -233,41 +233,47 @@ namespace HomeGenie.Service.Handlers
                             currentProgram.LastConditionEvaluationResult = false;
                         }
 
-                        if (migCommand.Command == "Programs.Compile" && currentProgram.Type.ToLower() == "csharp") // && programblock.IsEnabled)
+                        if (migCommand.Command == "Programs.Compile")
                         {
-                            currentProgram.ScriptAssembly = null; // dispose assembly and interrupt current task
-                            currentProgram.IsEnabled = false;
+                            // reset previous error status
                             currentProgram.ScriptErrors = "";
                             //
-                            System.CodeDom.Compiler.CompilerResults res = homegenie.ProgramEngine.CompileScript(currentProgram);
-                            //
-                            if (res.Errors.Count == 0)
+                            if (currentProgram.Type.ToLower() == "csharp")
                             {
-                                currentProgram.ScriptAssembly = res.CompiledAssembly;
-                            }
-                            else
-                            {
-                                int sourcelines = currentProgram.ScriptSource.Split('\n').Length;
-                                foreach (System.CodeDom.Compiler.CompilerError error in res.Errors)
+                                // dispose assembly and interrupt current task
+                                currentProgram.AppAssembly = null; 
+                                currentProgram.IsEnabled = false;
+                                //
+                                System.CodeDom.Compiler.CompilerResults res = homegenie.ProgramEngine.CompileScript(currentProgram);
+                                //
+                                if (res.Errors.Count == 0)
                                 {
-                                    //if (!ce.IsWarning)
+                                    currentProgram.AppAssembly = res.CompiledAssembly;
+                                }
+                                else
+                                {
+                                    int sourcelines = currentProgram.ScriptSource.Split('\n').Length;
+                                    foreach (System.CodeDom.Compiler.CompilerError error in res.Errors)
                                     {
-                                        int errline = (error.Line - 16);
-                                        string blocktype = "Code";
-                                        if (errline >= sourcelines + 7)
+                                        //if (!ce.IsWarning)
                                         {
-                                            errline -= (sourcelines + 7);
-                                            blocktype = "Condition";
+                                            int errline = (error.Line - 16);
+                                            string blocktype = "Code";
+                                            if (errline >= sourcelines + 7)
+                                            {
+                                                errline -= (sourcelines + 7);
+                                                blocktype = "Condition";
+                                            }
+                                            string errmsg = "Line " + errline + ", Column " + error.Column + " " + error.ErrorText + " (" + error.ErrorNumber + ")";
+                                            currentProgram.ScriptErrors += errmsg + " (" + blocktype + ")" + "\n";
                                         }
-                                        string errmsg = "Line " + errline + ", Column " + error.Column + " " + error.ErrorText + " (" + error.ErrorNumber + ")";
-                                        currentProgram.ScriptErrors += errmsg + " (" + blocktype + ")" + "\n";
                                     }
                                 }
+                                //
+                                currentProgram.IsEnabled = newProgram.IsEnabled;
+                                //
+                                migCommand.Response = currentProgram.ScriptErrors;
                             }
-                            //
-                            currentProgram.IsEnabled = newProgram.IsEnabled;
-                            //
-                            migCommand.Response = currentProgram.ScriptErrors;
                         }
 
                         homegenie.UpdateProgramsDatabase();
@@ -288,6 +294,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                         if (currentProgram != null)
                         {
+                            currentProgram.IsEnabled = false;
                             currentProgram.Stop();
                             homegenie.UpdateProgramsDatabase();
                         }

@@ -31,7 +31,7 @@ using System.CodeDom.Compiler;
 using HomeGenie.Service;
 using System.IO;
 
-namespace HomeGenie.Automation.Scripting
+namespace HomeGenie.Automation
 {
     public class MethodRunResult
     {
@@ -39,13 +39,13 @@ namespace HomeGenie.Automation.Scripting
         public object ReturnValue = null;
     }
 
-    public class ScriptingHost
+    public class CSharpAppFactory
     {
 
         private ProgramEngine masterControlProgram = null;
         private HomeGenieService homegenie = null;
 
-        public ScriptingHost(HomeGenieService hg)
+        public CSharpAppFactory(HomeGenieService hg)
         {
             homegenie = hg;
             masterControlProgram = homegenie.ProgramEngine;
@@ -68,7 +68,7 @@ namespace HomeGenie.Automation.Scripting
 {
     public class ScriptingInstance
     {
-        private void RunScript(string PROGRAM_OPTIONS_STRING)
+        private void RunCode(string PROGRAM_OPTIONS_STRING)
         {
 //////////////////////////////////////////////////////////////////
 // NOTE: user code start line is 16 *** please add new code after this method, do not alter start line! ***
@@ -76,7 +76,7 @@ namespace HomeGenie.Automation.Scripting
 //////////////////////////////////////////////////////////////////
         }
 
-        private bool EvaluateConditionScript()
+        private bool EvaluateConditionBlock()
         {
 //////////////////////////////////////////////////////////////////
 // NOTE: user code start line is ??? *** please add new code after this method, do not alter start line! ***
@@ -196,7 +196,7 @@ namespace HomeGenie.Automation.Scripting
             Exception ex = null;
             try
             {
-                RunScript(PROGRAM_OPTIONS_STRING);
+                RunCode(PROGRAM_OPTIONS_STRING);
             }
             catch (Exception e)
             {
@@ -212,7 +212,7 @@ namespace HomeGenie.Automation.Scripting
             //
             try
             {
-                    retval = EvaluateConditionScript();
+                    retval = EvaluateConditionBlock();
             }
             catch (Exception e)
             {

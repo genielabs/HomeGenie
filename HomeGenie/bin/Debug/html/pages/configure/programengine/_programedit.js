@@ -195,23 +195,6 @@ HG.WebApp.ProgramEdit.GetModuleComparableProperties = function (module)
 
 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () 
     {
-        if ($('#automation_program_scriptcondition').next().css('display') == 'none')
-        {
-            $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>CODE TO RUN</b></span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-            $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Trigger Code');
-            setTimeout(function(){
-			    editor2.refresh();
-            }, 500);
-        }
-        else
-        {
-            $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b></span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-            $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Code to Run');
-            setTimeout(function(){
-			    editor1.refresh();
-            }, 500);
-        }
-		//
 		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors != '')
 		{
             $('#program_error_button').show(100);
@@ -219,8 +202,39 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
         else
         {
             $('#program_error_button').hide(100);
-        }
-
+		}
+        // update editor mode
+		if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
+		    editor1.setOption('mode', 'text/x-python');
+		    editor2.setOption('mode', 'text/x-python');
+		}
+		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
+		    editor1.setOption('mode', 'text/x-ruby');
+		    editor2.setOption('mode', 'text/x-ruby');
+		}
+		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
+		    editor1.setOption('mode', 'text/javascript');
+		    editor2.setOption('mode', 'text/javascript');
+		}
+		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
+		    editor1.setOption('mode', 'text/x-csharp');
+		    editor2.setOption('mode', 'text/x-csharp');
+		}
+        //
+		if ($('#automation_program_scriptcondition').next().css('display') == 'none') {
+		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>CODE TO RUN</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
+		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Trigger Code');
+		    setTimeout(function () {
+		        editor2.refresh();
+		    }, 500);
+		}
+		else {
+		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
+		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Code to Run');
+		    setTimeout(function () {
+		        editor1.refresh();
+		    }, 500);
+		}
     };
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () 

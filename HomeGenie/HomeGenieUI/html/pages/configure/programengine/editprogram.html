@@ -32,10 +32,13 @@
                         <select id="automation_programtype" onchange="HG.WebApp.ProgramsList.ChangeProgramType(this.value)">
                             <option _data-locale-id="configure_program_typewizard" value="Wizard">Wizard Script</option>
                             <option _data-locale-id="configure_program_typecsharp" value="CSharp">C# Program</option>
+                            <option _data-locale-id="configure_program_typecsharp" value="Javascript">Javascript Script</option>
+                            <option _data-locale-id="configure_program_typecsharp" value="Python">Python Script</option>
+                            <option _data-locale-id="configure_program_typecsharp" value="Ruby">Ruby Script</option>
                         </select>
                     </div>
                     <div class="ui-block-b" style="width:30%">
-                        <a href="http://generoso.info/homegenie/automationguide.html" target="_hgmanual" data-role="button">Help</a>
+                        <a href="http://www.homegenie.it/docs/" target="_hgmanual" data-role="button">Help</a>
                     </div>
                 </div>
                 <br />
@@ -98,7 +101,7 @@
                 <li data-locale-id="configure_program_csharpprogram" data-role="list-divider">C# Program</li>
             </ul>
             <br clear="all" />
-            <div><a href="#page_automation_editprogram_code" data-role="button" data-icon="edit" data-transition="slide" data-inline="true">Edit / Compile</a></div>
+            <div><a href="#page_automation_editprogram_code" data-role="button" data-icon="edit" data-transition="slide" data-inline="true">Edit Source Code</a></div>
 
             <!--br clear="all" />
 
@@ -239,17 +242,8 @@
     </div>
 
 
-    <textarea id="automation_program_scriptcondition" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="font-family:monospace;resize:none;display:none;">
-        // HomeGenie C# Automation Program
-        // a "return true;" instruction, at any point of this code block, will trigger "Code to Run" execution
-        // for manually activated program, just leave a "return false" instruction here.
-        return false;
-    </textarea>
-
-    <textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="font-family:monospace;resize:none;display:none;"></textarea>
-
-
-
+    <textarea id="automation_program_scriptcondition" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+    <textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
 
 
     <div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;">
@@ -271,7 +265,7 @@
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
             <li id="editprograms_actionmenu_run" data-icon="gear" data-iconpos="left"><a data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
             <li id="editprograms_actionmenu_break" data-icon="minus" data-iconpos="left"><a data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
-            <li id="editprograms_actionmenu_compile" data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_compile" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Compile</a>
+            <li id="editprograms_actionmenu_compile" data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_update" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Update</a>
         </ul>
     </div>
 

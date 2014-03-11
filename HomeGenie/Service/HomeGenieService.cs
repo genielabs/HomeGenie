@@ -1055,7 +1055,7 @@ namespace HomeGenie.Service
                         program.Address = masterControlProgram.GeneratePid();
                     }
                     // in case of c# script preload assembly from generated .dll
-                    if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad(this))
+                    if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
                     {
                         program.ScriptErrors = "Programm not compiled (save it to compile)";
                     }
@@ -1104,7 +1104,7 @@ namespace HomeGenie.Service
                 // delete old programs assemblies
                 foreach (var program in masterControlProgram.Programs)
                 {
-                    program.ScriptAssembly = null;
+                    program.AppAssembly = null;
                 }
                 masterControlProgram = null;
             }

@@ -79,11 +79,15 @@ namespace HomeGenie.Automation.Scripting
             program.IsRunning = true;
             if (program.Type.ToLower() == "csharp")
             {
-                program.RunScript(homegenie, options);
+                program.Run(options);
+            }
+            else if (program.Type.ToLower() == "wizard")
+            {
+                homegenie.ProgramEngine.ExecuteWizardScript(program);
             }
             else
             {
-                homegenie.ProgramEngine.ExecuteWizardScript(program);
+                // Run IronScript
             }
             program.IsRunning = false;
         }

@@ -43,7 +43,7 @@ namespace HomeGenie.Automation
 
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
-        private ScriptingHost scriptingHost = null;
+        private CSharpAppFactory scriptingHost = null;
 
         private MacroRecorder macroRecorder = null;
 
@@ -56,7 +56,7 @@ namespace HomeGenie.Automation
         public ProgramEngine(HomeGenieService hg)
         {
             homegenie = hg;
-            scriptingHost = new ScriptingHost(homegenie);
+            scriptingHost = new CSharpAppFactory(homegenie);
             macroRecorder = new MacroRecorder(this);
             scheduler = new SchedulerService(this);
             scheduler.Start();
@@ -79,9 +79,9 @@ namespace HomeGenie.Automation
                     {
                         isConditionSatisfied = false;
                         //
-                        if (program.Type.ToLower() == "csharp")
+                        if (program.Type.ToLower() != "wizard")
                         {
-                            var result = program.EvaluateConditionStatement(homegenie);
+                            var result = program.EvaluateCondition();
                             if (result != null && result.Exception != null)
                             {
                                 // runtime error occurred, script is being disabled
@@ -94,7 +94,7 @@ namespace HomeGenie.Automation
                                 isConditionSatisfied = (bool)result.ReturnValue;
                             }
                         }
-                        else
+                        else 
                         {
                             // it is a Wizard Script
                             isConditionSatisfied = (program.Conditions.Count > 0);
@@ -218,14 +218,18 @@ namespace HomeGenie.Automation
             {
                 program.IsRunning = true;
                 //
-                if (program.Type.ToLower() == "csharp")
+                if (program.Type.ToLower() != "wizard")
                 {
-                    if (program.ScriptAssembly != null)
+                    if (program.Type.ToLower() == "csharp" && program.AppAssembly == null)
+                    {
+                        program.IsRunning = false;
+                    }
+                    else
                     {
                         program.TriggerTime = DateTime.UtcNow;
                         program.ProgramThread = new Thread(() =>
                         {
-                            var result = program.RunScript(homegenie, options);
+                            var result = program.Run(options);
                             if (result != null && result.Exception != null)
                             {
                                 // runtime error occurred, script is being disabled
@@ -235,7 +239,7 @@ namespace HomeGenie.Automation
                             }
                             program.IsRunning = false;
                         });
-                        program.ProgramThread.Priority = ThreadPriority.BelowNormal;
+                        //
                         try
                         {
                             program.ProgramThread.Start();
@@ -246,12 +250,8 @@ namespace HomeGenie.Automation
                             program.IsRunning = false;
                         }
                     }
-                    else
-                    {
-                        program.IsRunning = false;
-                    }
                 }
-                else
+                else 
                 {
                     program.TriggerTime = DateTime.UtcNow;
                     if (program.ConditionType == ConditionType.Once)
@@ -274,7 +274,7 @@ namespace HomeGenie.Automation
                             program.IsRunning = false;
                         }
                     });
-                    program.ProgramThread.Priority = ThreadPriority.Lowest;
+                    //
                     program.ProgramThread.Start();
                 }
                 //
@@ -314,6 +314,7 @@ namespace HomeGenie.Automation
         {
             lock (automationPrograms)
             {
+                program.SetHost(homegenie);
                 automationPrograms.Add(program);
             }
             EvaluateProgramConditionAsync(program, (ProgramBlock p, bool conditionsatisfied) =>

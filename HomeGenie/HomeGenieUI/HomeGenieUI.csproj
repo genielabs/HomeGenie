@@ -1146,7 +1146,9 @@
     <None Include="html\js\codemirror-3.13\mode\livescript\livescript.ls" />
     <None Include="html\js\codemirror-3.13\mode\pascal\LICENSE" />
     <None Include="html\js\codemirror-3.13\mode\perl\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\ruby\LICENSE" />
+    <None Include="html\js\codemirror-3.13\mode\ruby\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="html\js\codemirror-3.13\mode\r\LICENSE" />
     <None Include="html\js\codemirror-3.13\mode\sieve\LICENSE" />
     <None Include="html\js\codemirror-3.13\mode\xquery\LICENSE" />
@@ -1772,9 +1774,15 @@
     <Content Include="html\js\codemirror-3.13\mode\htmlmixed\index.html" />
     <Content Include="html\js\codemirror-3.13\mode\http\http.js" />
     <Content Include="html\js\codemirror-3.13\mode\http\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\javascript\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\javascript\javascript.js" />
-    <Content Include="html\js\codemirror-3.13\mode\javascript\typescript.html" />
+    <Content Include="html\js\codemirror-3.13\mode\javascript\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-3.13\mode\javascript\javascript.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-3.13\mode\javascript\typescript.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\js\codemirror-3.13\mode\jinja2\index.html" />
     <Content Include="html\js\codemirror-3.13\mode\jinja2\jinja2.js" />
     <Content Include="html\js\codemirror-3.13\mode\less\index.html" />
@@ -1807,9 +1815,15 @@
     <Content Include="html\js\codemirror-3.13\mode\properties\properties.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-3.13\mode\python\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\python\LICENSE.txt" />
-    <Content Include="html\js\codemirror-3.13\mode\python\python.js" />
+    <Content Include="html\js\codemirror-3.13\mode\python\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-3.13\mode\python\LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-3.13\mode\python\python.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\js\codemirror-3.13\mode\q\index.html" />
     <Content Include="html\js\codemirror-3.13\mode\q\q.js" />
     <Content Include="html\js\codemirror-3.13\mode\rpm\changes\changes.js" />
@@ -1820,8 +1834,12 @@
     <Content Include="html\js\codemirror-3.13\mode\rst\index.html" />
     <Content Include="html\js\codemirror-3.13\mode\rst\LICENSE.txt" />
     <Content Include="html\js\codemirror-3.13\mode\rst\rst.js" />
-    <Content Include="html\js\codemirror-3.13\mode\ruby\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\ruby\ruby.js" />
+    <Content Include="html\js\codemirror-3.13\mode\ruby\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-3.13\mode\ruby\ruby.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\js\codemirror-3.13\mode\rust\index.html" />
     <Content Include="html\js\codemirror-3.13\mode\rust\rust.js" />
     <Content Include="html\js\codemirror-3.13\mode\r\index.html" />
