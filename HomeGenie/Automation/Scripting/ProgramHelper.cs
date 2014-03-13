@@ -52,11 +52,11 @@ namespace HomeGenie.Automation.Scripting
             homegenie = hg;
             myProgramId = programId;
             //
-            var oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == myProgramId.ToString());
-            if (oldModule == null)
-            {
-                AddControlWidget(""); // no control widget --> not visible
-            }
+            //var oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == myProgramId.ToString());
+            //if (oldModule == null)
+            //{
+            //    AddControlWidget(""); // no control widget --> not visible
+            //}
             // reset features and other values
             Reset();
         }
@@ -359,11 +359,11 @@ namespace HomeGenie.Automation.Scripting
             //
             if (module == null)
             {
-                module = new VirtualModule() { ParentId = myProgramId.ToString(), Visible = (widget != ""), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = program.Name, DeviceType = Module.DeviceTypes.Program };
+                module = new VirtualModule() { ParentId = myProgramId.ToString(), Visible = (widget != ""), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = (program != null ? program.Name : ""), DeviceType = Module.DeviceTypes.Program };
                 homegenie.VirtualModules.Add(module);
             }
             //
-            module.Name = program.Name;
+            module.Name = (program != null ? program.Name : "");
             module.Domain = myProgramDomain;
             module.Visible = (widget != "");
             Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
@@ -553,7 +553,10 @@ namespace HomeGenie.Automation.Scripting
             // remove all features 
             //
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.Features.Clear();
+            if (program != null)
+            {
+                program.Features.Clear();
+            }
             //
             initialized = false;
             //

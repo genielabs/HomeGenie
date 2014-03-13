@@ -33,11 +33,6 @@ using System.IO;
 
 namespace HomeGenie.Automation
 {
-    public class MethodRunResult
-    {
-        public Exception Exception = null;
-        public object ReturnValue = null;
-    }
 
     public class CSharpAppFactory
     {
@@ -66,7 +61,7 @@ using HomeGenie.Automation; using HomeGenie.Data;
 using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
 namespace HomeGenie.Automation.Scripting
 {
-    public class ScriptingInstance
+    public class ScriptingInstance : ScriptingHost
     {
         private void RunCode(string PROGRAM_OPTIONS_STRING)
         {
@@ -83,113 +78,6 @@ namespace HomeGenie.Automation.Scripting
 {condition}
 //////////////////////////////////////////////////////////////////
         }
-
-		private HomeGenie.Service.HomeGenieService homegenie = null;
-		//
-        private HomeGenie.Automation.Scripting.NetHelper netHelper;
-        private HomeGenie.Automation.Scripting.ProgramHelper programHelper;
-        private HomeGenie.Automation.Scripting.EventsHelper eventsHelper;
-        private HomeGenie.Automation.Scripting.SerialPortHelper serialPortHelper;
-        private HomeGenie.Automation.Scripting.TcpClientHelper tcpClientHelper;
-        private HomeGenie.Automation.Scripting.SchedulerHelper schedulerHelper;
-
-        public void SetHost(HomeGenie.Service.HomeGenieService hg, int programId)
-        {
-            homegenie = hg;
-            netHelper = new NetHelper(homegenie);
-            programHelper = new ProgramHelper(homegenie, programId);
-            eventsHelper = new EventsHelper(homegenie, programId);
-            serialPortHelper = new SerialPortHelper();
-            tcpClientHelper = new TcpClientHelper();
-            schedulerHelper = new SchedulerHelper(homegenie);
-        }
-
-        public ModulesManager Modules
-        {
-            get
-            {
-                return new ModulesManager(homegenie);
-            }
-        }
-
-        public SettingsHelper Settings
-        {
-            get
-            {
-                return new SettingsHelper(homegenie);
-            }
-        }
-
-        public NetHelper Net
-        {
-            get
-            {
-                return netHelper;
-            }
-        }
-
-        public ProgramHelper Program
-        {
-            get
-            {
-                return programHelper;
-            }
-        }
-
-        public EventsHelper Events
-        {
-            get
-            {
-                return eventsHelper;
-            }
-        }
-
-        public EventsHelper When
-        {
-            get
-            {
-                return eventsHelper;
-            }
-        }
-
-        public SerialPortHelper SerialPort
-        {
-            get
-            {
-                return serialPortHelper;
-            }
-        }
-
-        public TcpClientHelper TcpClient
-        {
-            get
-            {
-                return tcpClientHelper;
-            }
-        }
-
-        public SchedulerHelper Scheduler
-        {
-            get
-            {
-                return schedulerHelper;
-            }
-        }
-
-        public void Pause(double seconds)
-        {
-            System.Threading.Thread.Sleep( (int)(seconds * 1000) );
-        }
-
-        public void Delay(double seconds)
-        {
-            Pause(seconds);
-        }
-
-        //public void Say(string s)
-        //{
-        //    
-        //}
 
         public MethodRunResult Run(string PROGRAM_OPTIONS_STRING)
         {
@@ -219,13 +107,6 @@ namespace HomeGenie.Automation.Scripting
                 ex = e;
             }
             return new MethodRunResult(){ Exception = ex, ReturnValue = retval };
-        }
-
-        public void Reset()
-        {
-            programHelper.Reset();
-            serialPortHelper.Disconnect();
-            tcpClientHelper.Disconnect();
         }
 
     }

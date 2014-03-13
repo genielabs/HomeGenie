@@ -171,22 +171,20 @@ namespace HomeGenie.Automation
 
         private void SetupScriptingScope()
         {
-            ScriptingHelper hgScriptingHost = new ScriptingHelper();
+            ScriptingHost hgScriptingHost = new ScriptingHost();
             hgScriptingHost.SetHost(homegenie, this.Address);
             if (scriptEngine.GetType() == typeof(ScriptEngine))
             {
                 // IronPyton and IronRuby engines
                 ScriptEngine currentEngine = (scriptEngine as ScriptEngine);
                 dynamic scope = scriptScope = currentEngine.CreateScope();
-                scope.HG = hgScriptingHost;
-                scope.TriggerCode = false;
+                scope.hg = hgScriptingHost;
             }
             else if (scriptEngine.GetType() == typeof(Jint.Engine))
             {
                 // Jint Javascript engine
                 Jint.Engine javascriptEngine = (scriptEngine as Jint.Engine);
-                javascriptEngine.SetValue("HG", hgScriptingHost);
-                javascriptEngine.SetValue("TriggerCode", false);
+                javascriptEngine.SetValue("hg", hgScriptingHost);
             }
         }
 
@@ -386,7 +384,7 @@ namespace HomeGenie.Automation
                     try
                     {
                         pythonEngine.Execute(pythonScript, scriptScope);
-                        result.ReturnValue = (scriptScope as dynamic).TriggerCode;
+                        result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
                     }
                     catch (Exception e)
                     {
@@ -400,7 +398,7 @@ namespace HomeGenie.Automation
                     try
                     {
                         rubyEngine.Execute(rubyScript, scriptScope);
-                        result.ReturnValue = (scriptScope as dynamic).TriggerCode;
+                        result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
                     }
                     catch (Exception e)
                     {
@@ -415,7 +413,7 @@ namespace HomeGenie.Automation
                     try
                     {
                         engine.Execute(jsScript);
-                        result.ReturnValue = engine.GetGlobalValue("TriggerCode").AsBoolean();
+                        result.ReturnValue = (engine.GetGlobalValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
                     }
                     catch (Exception e)
                     {

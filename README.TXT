@@ -165,6 +165,10 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+13/03/2014 1.00 beta rev 350
+	- Fixed "Unsupported Encoding 51932" bug in IronRuby engine under mono platforms
+	- Fixed bug in loading new automation programs after hg restart 
+
 11/03/2014 1.00 beta rev 349
 	- Automation: Added Python, Ruby and Javascript languages for scripting HG Automation Engine
 	- ZWaveLib: added support for Hail Command Class (contributed by miket)

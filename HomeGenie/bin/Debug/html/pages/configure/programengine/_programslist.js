@@ -62,19 +62,19 @@ HG.WebApp.ProgramsList.InitializePage = function ()
 			        $('#automation_conditiontype').selectmenu().selectmenu('refresh');
                     // set a valid trigger code for the current programming language
 			        if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
-			            editor1.setValue('"""\nPut your trigger code logic here\nSet the special variable \'TriggerCode = True\' when you want the Code To Run to be executed.\n"""\nTriggerCode = True');
-			            editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nHG.Modules.WithName(\'Light 1\').On()\n"""\n')
+			            editor1.setValue('"""\nPut your trigger code logic here.\nCall \'hg.SetConditionTrue()\' when you want\nthe \'Code To Run\' to be executed.\n"""\nhg.SetConditionFalse()\n');
+			            editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nhg.Modules.WithName(\'Light 1\').On()\n"""\n')
                     }
 			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
-			            editor1.setValue('# Put your trigger code logic here\n# Set the special variable \'TriggerCode = true\' when you want the Code To Run to be executed.\nTriggerCode = true');
-			            editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# HG.Modules.WithName(\'Light 1\').On()\n');
+			            editor1.setValue('# Put your trigger code logic here.\n# Call \'hg.SetConditionTrue()\' when you want\n# the \'Code To Run\' to be executed.\nhg.SetConditionFalse()\n');
+			            editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# hg.Modules.WithName(\'Light 1\').On()\n');
                     }
 			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
-			            editor1.setValue('// Put your trigger code logic here\n// Set the special variable \'TriggerCode = true\' when you want the Code To Run to be executed.\nTriggerCode = true;\n');
-			            editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// HG.Modules.WithName(\'Light 1\').On();\n');
+			            editor1.setValue('// Put your trigger code logic here.\n// Call \'hg.SetConditionTrue()\' when you want\n// the \'Code To Run\' to be executed.\nhg.SetConditionFalse();\n');
+			            editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.Modules.WithName(\'Light 1\').On();\n');
                     }
 			        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
-			            editor1.setValue('// Put your trigger code logic here\n// To execute the Code To Run,\n// use a \'return true\' or \'return false\' otherwise.\nreturn true;\n');
+			            editor1.setValue('// Put your trigger code logic here.\n// To execute the Code To Run,\n// use a \'return true\' or \'return false\' otherwise.\nreturn false;\n');
 			            editor2.setValue('// CSharp Automation Program Plugin\n// Example for using Helper Classes:\n// Modules.WithName("Light 1").On();\n');
                     }
                 } else {
@@ -120,10 +120,7 @@ HG.WebApp.ProgramsList._CurrentOptionsTab = 0;
 
 HG.WebApp.ProgramsList.SetOptionsTab = function (tabid)
 	{
-//	alert(tabid);
 		HG.WebApp.ProgramsList._CurrentOptionsTab = tabid;
-//		$('#automationprograms_program_options_list').find('li a').each(function(){$(this).removeClass('ui-btn-active')});
-//		alert($('#automationprograms_program_options_tab' + tabid).html());
         //
 		$('#automationprograms_program_options_tab0 a').removeClass('ui-btn-active');
 		$('#automationprograms_program_options_tab0 a').trigger('create');
@@ -372,10 +369,11 @@ HG.WebApp.ProgramsList.LoadPrograms = function (callback)
 	    //
 	    for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
 	    	var progrm = HG.WebApp.Data.Programs[i];
-	        var pgroup = progrm.Group; // Name.substring(0, progrm.Name.lastIndexOf('|'));
+	        var pgroup = progrm.Group;
 	        if (pgroup == null || pgroup == 'undefined') pgroup = '';
 	        if (pgroup != HG.WebApp.AutomationGroupsList._CurrentGroup) continue;
-	        var pname = progrm.Name; //.substring(progrm.Name.lastIndexOf('|') + 1);
+            //
+	        var pname = progrm.Name;
 	        var item = '<li data-theme="' + uitheme + '" data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '" data-program-domain="' + progrm.Domain + '"  data-program-address="' + progrm.Address + '" data-program-index="' + i + '">';
 	        item += '<a href="#automationprograms_program_options" data-rel="popup" data-position-to="window" data-transition="slidedown">';
 	        //
@@ -402,10 +400,7 @@ HG.WebApp.ProgramsList.LoadPrograms = function (callback)
 	    $("#configure_programslist li").bind("click", function () {
 	        HG.WebApp.ProgramEdit._CurrentProgram.Domain = $(this).attr('data-program-domain');
 	        HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
-	        //HG.WebApp.ProgramsList.EditProgram();
 	    });
-
-	    //$("#configure_programslist").listview("refresh");
 	};
 
 HG.WebApp.ProgramsList.GetProgramByAddress = function(pid)
@@ -484,9 +479,6 @@ HG.WebApp.ProgramsList.EditProgram = function ()
 					editor1.refresh();
 					editor2.refresh();
 				}, 500);
-				//
-				//$('#automation_program_scriptcondition').val(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition);
-				//$('#automation_program_scriptsource').val(HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource);
 				//
 				HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = HG.WebApp.Data.Programs[i].ConditionType;
 				//

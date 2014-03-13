@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r349</Version>
+  <Version>1.00 beta r350</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - Automation: Added Python, Ruby and Javascript languages for scripting HG Automation Engine
+  <ReleaseNote>  - Fixed "Unsupported Encoding 51932" bug in IronRuby engine under mono platforms
+  - Fixed bug in loading new automation programs after hg restart
+  - Automation: Added Python, Ruby and Javascript languages for scripting HG Automation Engine
   - ZWaveLib: added support for Hail Command Class (contributed by miket)</ReleaseNote>
-  <ReleaseDate>2014-03-11T22:49:27.0000Z</ReleaseDate>
+  <ReleaseDate>2014-03-13T03:13:37.0000Z</ReleaseDate>
 </ReleaseInfo>

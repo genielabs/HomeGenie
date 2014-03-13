@@ -1,25 +1,33 @@
-﻿using HomeGenie.Automation.Scripting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HomeGenie.Automation
+using HomeGenie.Service;
+
+namespace HomeGenie.Automation.Scripting
 {
 
-    public class ScriptingHelper
+    public class MethodRunResult
+    {
+        public Exception Exception = null;
+        public object ReturnValue = null;
+    }
+
+    public class ScriptingHost
     {
 
-        private HomeGenie.Service.HomeGenieService homegenie = null;
+        private HomeGenieService homegenie = null;
+        internal bool executeCodeToRun = false;
         //
-        private HomeGenie.Automation.Scripting.NetHelper netHelper;
-        private HomeGenie.Automation.Scripting.ProgramHelper programHelper;
-        private HomeGenie.Automation.Scripting.EventsHelper eventsHelper;
-        private HomeGenie.Automation.Scripting.SerialPortHelper serialPortHelper;
-        private HomeGenie.Automation.Scripting.TcpClientHelper tcpClientHelper;
-        private HomeGenie.Automation.Scripting.SchedulerHelper schedulerHelper;
+        private NetHelper netHelper;
+        private ProgramHelper programHelper;
+        private EventsHelper eventsHelper;
+        private SerialPortHelper serialPortHelper;
+        private TcpClientHelper tcpClientHelper;
+        private SchedulerHelper schedulerHelper;
 
-        internal void SetHost(HomeGenie.Service.HomeGenieService hg, int programId)
+        public void SetHost(HomeGenieService hg, int programId)
         {
             homegenie = hg;
             netHelper = new NetHelper(homegenie);
@@ -30,7 +38,7 @@ namespace HomeGenie.Automation
             schedulerHelper = new SchedulerHelper(homegenie);
         }
 
-        public dynamic Modules
+        public ModulesManager Modules
         {
             get
             {
@@ -38,7 +46,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic Settings
+        public SettingsHelper Settings
         {
             get
             {
@@ -46,7 +54,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic Net
+        public NetHelper Net
         {
             get
             {
@@ -54,7 +62,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic Program
+        public ProgramHelper Program
         {
             get
             {
@@ -62,7 +70,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic Events
+        public EventsHelper Events
         {
             get
             {
@@ -70,7 +78,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic When
+        public EventsHelper When
         {
             get
             {
@@ -78,7 +86,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic SerialPort
+        public SerialPortHelper SerialPort
         {
             get
             {
@@ -86,7 +94,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic TcpClient
+        public TcpClientHelper TcpClient
         {
             get
             {
@@ -94,7 +102,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        public dynamic Scheduler
+        public SchedulerHelper Scheduler
         {
             get
             {
@@ -112,6 +120,16 @@ namespace HomeGenie.Automation
             Pause(seconds);
         }
 
+        public void SetConditionTrue()
+        {
+            executeCodeToRun = true;
+        }
+
+        public void SetConditionFalse()
+        {
+            executeCodeToRun = false;
+        }
+
         public void Reset()
         {
             programHelper.Reset();
@@ -119,6 +137,6 @@ namespace HomeGenie.Automation
             tcpClientHelper.Disconnect();
         }
 
-
     }
+
 }
