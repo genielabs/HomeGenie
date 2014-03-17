@@ -53,6 +53,12 @@ namespace HomeGenie.Automation
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
 
+        public class EvaluateProgramConditionArgs
+        {
+            public ProgramBlock Program;
+            public ConditionEvaluationCallback Callback;
+        }
+
         public ProgramEngine(HomeGenieService hg)
         {
             homegenie = hg;
@@ -62,88 +68,87 @@ namespace HomeGenie.Automation
             scheduler.Start();
         }
 
-        public void EvaluateProgramConditionAsync(ProgramBlock program, ConditionEvaluationCallback callback)
+        public void EvaluateProgramCondition(object evalArguments)
         {
+            ProgramBlock program = (evalArguments as EvaluateProgramConditionArgs).Program;
+            ConditionEvaluationCallback callback = (evalArguments as EvaluateProgramConditionArgs).Callback;
             program.IsEvaluatingConditionBlock = true;
-            var evaluatorTask = new Thread(() =>
+            //
+            bool isConditionSatisfied = false;
+            //
+            while (isEngineRunning)
             {
-                bool isConditionSatisfied = false;
+                if (program.IsRunning || !program.IsEnabled || !isEngineEnabled) { Thread.Sleep(500); continue; }
                 //
-                while (isEngineRunning)
+                var stopWatch = new System.Diagnostics.Stopwatch();
+                stopWatch.Start();
+                try
                 {
-                    if (program.IsRunning || !program.IsEnabled || !isEngineEnabled) { Thread.Sleep(500); continue; }
+                    isConditionSatisfied = false;
                     //
-                    var stopWatch = new System.Diagnostics.Stopwatch();
-                    stopWatch.Start();
-                    try
+                    if (program.Type.ToLower() != "wizard")
                     {
-                        isConditionSatisfied = false;
-                        //
-                        if (program.Type.ToLower() != "wizard")
+                        var result = program.EvaluateCondition();
+                        if (result != null && result.Exception != null)
                         {
-                            var result = program.EvaluateCondition();
-                            if (result != null && result.Exception != null)
-                            {
-                                // runtime error occurred, script is being disabled
-                                // so user can notice and fix it
-                                program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
-                                program.IsEnabled = false;
-                            }
-                            else
-                            {
-                                isConditionSatisfied = (bool)result.ReturnValue;
-                            }
+                            // runtime error occurred, script is being disabled
+                            // so user can notice and fix it
+                            program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                            program.IsEnabled = false;
                         }
-                        else 
+                        else
                         {
-                            // it is a Wizard Script
-                            isConditionSatisfied = (program.Conditions.Count > 0);
-                            for (int c = 0; c < program.Conditions.Count; c++)
-                            {
-                                bool res = VerifyProgramCondition(program.Conditions[c]);
-                                isConditionSatisfied = (isConditionSatisfied && res);
-                            }
-                        }
-                        //
-                        bool lastResult = program.LastConditionEvaluationResult;
-                        program.LastConditionEvaluationResult = isConditionSatisfied;
-                        //
-                        if (program.ConditionType == ConditionType.OnSwitchTrue)
-                        {
-                            isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
-                        }
-                        else if (program.ConditionType == ConditionType.OnSwitchFalse)
-                        {
-                            isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
-                        }
-                        else if (program.ConditionType == ConditionType.OnTrue || program.ConditionType == ConditionType.Once)
-                        {
-                            // noop
-                        }
-                        else if (program.ConditionType == ConditionType.OnFalse)
-                        {
-                            isConditionSatisfied = !isConditionSatisfied;
+                            isConditionSatisfied = (bool)result.ReturnValue;
                         }
                     }
-                    catch (Exception ex)
+                    else 
                     {
-                        // a runtime error occured
-                        program.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
-                        program.IsEnabled = false;
+                        // it is a Wizard Script
+                        isConditionSatisfied = (program.Conditions.Count > 0);
+                        for (int c = 0; c < program.Conditions.Count; c++)
+                        {
+                            bool res = VerifyProgramCondition(program.Conditions[c]);
+                            isConditionSatisfied = (isConditionSatisfied && res);
+                        }
                     }
                     //
-                    stopWatch.Stop();
+                    bool lastResult = program.LastConditionEvaluationResult;
+                    program.LastConditionEvaluationResult = isConditionSatisfied;
                     //
-                    callback(program, isConditionSatisfied);
-                    //
-                    int nextDelay = (int)(400 + (stopWatch.ElapsedMilliseconds > 400 ? stopWatch.ElapsedMilliseconds - 400 : 0));
-                    if (nextDelay > 500) nextDelay = 500;
-                    //
-                    Thread.Sleep(nextDelay);
+                    if (program.ConditionType == ConditionType.OnSwitchTrue)
+                    {
+                        isConditionSatisfied = (isConditionSatisfied == true && isConditionSatisfied != lastResult);
+                    }
+                    else if (program.ConditionType == ConditionType.OnSwitchFalse)
+                    {
+                        isConditionSatisfied = (isConditionSatisfied == false && isConditionSatisfied != lastResult);
+                    }
+                    else if (program.ConditionType == ConditionType.OnTrue || program.ConditionType == ConditionType.Once)
+                    {
+                        // noop
+                    }
+                    else if (program.ConditionType == ConditionType.OnFalse)
+                    {
+                        isConditionSatisfied = !isConditionSatisfied;
+                    }
                 }
-                program.IsEvaluatingConditionBlock = false;
-            });
-            evaluatorTask.Start();
+                catch (Exception ex)
+                {
+                    // a runtime error occured
+                    program.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
+                    program.IsEnabled = false;
+                }
+                //
+                stopWatch.Stop();
+                //
+                callback(program, isConditionSatisfied);
+                //
+                int nextDelay = (int)(400 + (stopWatch.ElapsedMilliseconds > 400 ? stopWatch.ElapsedMilliseconds - 400 : 0));
+                if (nextDelay > 500) nextDelay = 500;
+                //
+                Thread.Sleep(nextDelay);
+            }
+            program.IsEvaluatingConditionBlock = false;
         }
 
         public bool Enabled
@@ -297,8 +302,7 @@ namespace HomeGenie.Automation
         }
 
         public TsList<ProgramBlock> Programs { get { lock (automationPrograms) return automationPrograms; } }
-
-
+        
         public int GeneratePid()
         {
             int pid = USER_SPACE_PROGRAMS_START;
@@ -308,8 +312,7 @@ namespace HomeGenie.Automation
             }
             return pid;
         }
-
-
+        
         public void ProgramAdd(ProgramBlock program)
         {
             lock (automationPrograms)
@@ -317,14 +320,21 @@ namespace HomeGenie.Automation
                 program.SetHost(homegenie);
                 automationPrograms.Add(program);
             }
-            EvaluateProgramConditionAsync(program, (ProgramBlock p, bool conditionsatisfied) =>
+            //
+            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs()
             {
-                if (conditionsatisfied && p.IsEnabled)
+                Program = program,
+                Callback = (ProgramBlock p, bool conditionsatisfied) =>
                 {
-                    Run(p, null); // that goes async too
+                    if (conditionsatisfied && p.IsEnabled)
+                    {
+                        Run(p, null); // that goes async too
+                    }
                 }
-            });
+            };
+            ThreadPool.QueueUserWorkItem(new WaitCallback(EvaluateProgramCondition), evalArgs);
         }
+
         public void ProgramRemove(ProgramBlock program)
         {
             program.Stop();

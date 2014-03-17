@@ -54,32 +54,40 @@ namespace MIG.Gateways
         }
     }
 
+    public class HttpListenerCallbackState
+    {
+        private readonly HttpListener listener;
+        private readonly AutoResetEvent listenForNextRequest;
+
+        public HttpListenerCallbackState(HttpListener listener)
+        {
+            if (listener == null) throw new ArgumentNullException("listener");
+            this.listener = listener;
+            listenForNextRequest = new AutoResetEvent(false);
+        }
+
+        public HttpListener Listener { get { return listener; } }
+        public AutoResetEvent ListenForNextRequest { get { return listenForNextRequest; } }
+    }
+
     public class WebServiceGateway : MIGGateway, IDisposable
     {
         public event Action<object> ProcessRequest;
+        //
+        private ManualResetEvent stopEvent = new ManualResetEvent(false);
         //
         private string servicePassword;
         private string homePath;
         private string baseUrl;
         private string[] bindingPrefixes;
-        //
-        private const int httpThreads = 10;
-        private const int maxQueuable = 30;
-        //
-        private HttpListener listener;
-        private Thread listenerThread;
-        private Thread[] workers;
-        private ManualResetEvent stop, ready;
-        private Queue<HttpListenerContext> queue;
 
         public WebServiceGateway()
         {
-            queue = new Queue<HttpListenerContext>();
         }
 
         public void Configure(object gwConfiguration)
         {
-            var config = (WebServiceGatewayConfiguration)gwConfiguration;
+            WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
             homePath = config.HomePath;
             baseUrl = config.BaseUrl;
             bindingPrefixes = new string[2] { 
@@ -93,41 +101,17 @@ namespace MIG.Gateways
         public void SetPasswordHash(string password)
         {
             servicePassword = password;
+
         }
 
         public void Start()
         {
-            stop = new ManualResetEvent(false);
-            ready = new ManualResetEvent(false);
-            //
-            listener = new HttpListener();
-            listenerThread = new Thread(HandleRequests);
-            workers = new Thread[httpThreads];
-            //
-            string[] bindprefixes = bindingPrefixes;
-            foreach (string prefix in bindprefixes)
-            {
-                listener.Prefixes.Add(prefix);
-            }
-            listener.Start();
-            listenerThread.Start();
-            for (int i = 0; i < workers.Length; i++)
-            {
-                workers[i] = new Thread(Worker);
-                workers[i].Start();
-            }
+            ListenAsynchronously(bindingPrefixes);
         }
 
         public void Stop()
         {
-            foreach (Thread worker in workers)
-            {
-                worker.Abort();
-            }
-            stop.Set();
-            listener.Stop();
-            listenerThread.Join();
-            queue.Clear();
+            StopListening();
         }
 
         public void Dispose()
@@ -135,83 +119,19 @@ namespace MIG.Gateways
             Stop();
         }
 
-        
-        private void HandleRequests()
-        {
-            int shutdown = -1;
-            while (listener.IsListening && shutdown != 0)
-            {
-                var context = listener.BeginGetContext(ContextReady, null);
-                shutdown = WaitHandle.WaitAny(new[] { stop, context.AsyncWaitHandle });
-            }
-        }
-
-        private void ContextReady(IAsyncResult ar)
-        {
-            HttpListenerContext context = null;
-            try
-            {
-                context = listener.EndGetContext(ar);
-                //
-                // Basic flooding prevention
-                //
-                if (queue.Count >= maxQueuable)
-                {
-                    context.Response.Abort();
-                    context = null;
-                }
-            }
-            catch { }
-            //
-            if (context == null) return;
-            ///
-            lock (queue)
-            {
-                //
-                // Enqueue new request
-                //
-                queue.Enqueue(context);
-                ready.Set();
-            }
-        }
-
-        private void Worker()
-        {
-            WaitHandle[] wait = new[] { ready, stop };
-            while (0 == WaitHandle.WaitAny(wait) && listener.IsListening)
-            {
-                HttpListenerContext context;
-                lock (queue)
-                {
-                    if (queue.Count > 0)
-                    {
-                        context = queue.Dequeue();
-                    }
-                    else
-                    {
-                        ready.Reset();
-                        continue;
-                    }
-                }
-                //
-                ProcessWebRequest(context);
-            }
-        }
-
-
-        private void ProcessWebRequest(object o)
+        private void Worker(object state)
         {
             try
             {
-                var context = o as HttpListenerContext;
+                var context = state as HttpListenerContext;
                 //
-                var request = context.Request;
-                var response = context.Response;
+                HttpListenerRequest request = context.Request;
+                HttpListenerResponse response = context.Response;
                 //
                 if (request.IsSecureConnection)
                 {
                     var clientCertificate = context.Request.GetClientCertificate();
-                    var chain = new X509Chain();
+                    X509Chain chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                     chain.Build(clientCertificate);
                     if (chain.ChainStatus.Length != 0)
@@ -223,22 +143,22 @@ namespace MIG.Gateways
                     }
                 }
                 //
-                // TODO: why AddHeader is issued twice???
+                // TODO: why AddHeader is issued two times???
                 context.Response.AddHeader("Server", "MIG WebService Gateway");
                 //context.Response.Headers.Remove(HttpResponseHeader.Server);
-                //context.Response.AddHeader("Server", "MIG WebService Gateway");
+                context.Response.AddHeader("Server", "MIG WebService Gateway");
                 //context.Response.Headers.Set(HttpResponseHeader.Server, "MIG WebService Gateway");
                 //
                 response.KeepAlive = false;
                 //
-                bool isauthenticated = (request.Headers["Authorization"] != null);
+                bool isAuthenticated = (request.Headers["Authorization"] != null);
                 //
-                if (servicePassword == "" || isauthenticated) //request.IsAuthenticated)
+                if (servicePassword == "" || isAuthenticated) //request.IsAuthenticated)
                 {
                     bool verified = false;
                     //
                     string authUser = "";
-                    string authPassword = "";
+                    string authPass = "";
                     //
                     //NOTE: context.User.Identity and request.IsAuthenticated
                     //aren't working under MONO with this code =/
@@ -246,20 +166,20 @@ namespace MIG.Gateways
                     //
                     //HttpListenerBasicIdentity identity = null;
                     //
-                    if (isauthenticated)
+                    if (isAuthenticated)
                     {
                         //identity = (HttpListenerBasicIdentity)context.User.Identity;
                         // authuser = identity.Name;
                         // authpass = identity.Password;
                         byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers["Authorization"].Split(' ')[1]);
-                        string authToken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
-                        authUser = authToken.Split(':')[0];
-                        authPassword = authToken.Split(':')[1];
+                        string authtoken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
+                        authUser = authtoken.Split(':')[0];
+                        authPass = authtoken.Split(':')[1];
                     }
                     //
                     //TODO: complete authorization (for now with one fixed user 'admin', add multiuser support)
                     //
-                    if (servicePassword == "" || (authUser == "admin" && Utility.Encryption.SHA1.GenerateHashString(authPassword) == servicePassword))
+                    if (servicePassword == "" || (authUser == "admin" && Utility.Encryption.SHA1.GenerateHashString(authPass) == servicePassword))
                     {
                         verified = true;
                     }
@@ -320,12 +240,66 @@ namespace MIG.Gateways
             }
             catch (Exception ex)
             {
-                if (ex.GetType() != typeof(ObjectDisposedException))
+                // TODO: add error logging 
+                Console.WriteLine("WEBGATEWAY ERROR: " + ex.Message + "\n" + ex.StackTrace);
+            }
+
+        }
+
+        private void ListenAsynchronously(IEnumerable<string> prefixes)
+        {
+            HttpListener listener = new HttpListener();
+            foreach (string s in prefixes)
+            {
+                listener.Prefixes.Add(s);
+            }
+            listener.Start();
+            HttpListenerCallbackState state = new HttpListenerCallbackState(listener);
+            ThreadPool.QueueUserWorkItem(Listen, state);
+        }
+
+        private void StopListening()
+        {
+            stopEvent.Set();
+        }
+
+        private void Listen(object state)
+        {
+            HttpListenerCallbackState callbackState = (HttpListenerCallbackState)state;
+            while (callbackState.Listener.IsListening)
+            {
+                callbackState.Listener.BeginGetContext(new AsyncCallback(ListenerCallback), callbackState);
+                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, stopEvent }, 10000);
+                if (n == 1)
+
                 {
-                    // TODO: add error logging 
-                    Console.WriteLine("WEBGATEWAY ERROR: " + ex.Message + "\n" + ex.StackTrace);
+                    // stopEvent was signalled 
+                    callbackState.Listener.Stop();
+                    break;
                 }
             }
+        }
+
+        private void ListenerCallback(IAsyncResult result)
+        {
+            HttpListenerCallbackState callbackState = (HttpListenerCallbackState)result.AsyncState;
+            HttpListenerContext context = null;
+            //
+            try
+            {
+                context = callbackState.Listener.EndGetContext(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("WebServiceGateway: " + ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                callbackState.ListenForNextRequest.Set();
+            }
+            if (context == null) return;
+            //
+            Worker(context);
         }
 
 

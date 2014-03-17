@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>6</Address>
-    <Name>Group Lights ON</Name>
-    <Description>Turn on all the lights in the current group.</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2761007Z</ActivationTime>
-    <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
   // set the widget "program"
@@ -28,24 +23,24 @@ Modules
   .IterationDelay(0.25)
   .On();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>6</Address>
+    <Name>Group Lights ON</Name>
+    <Description>Turn on all the lights in the current group.</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T00:19:29.805325Z</ActivationTime>
+    <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>7</Address>
-    <Name>Group Lights OFF</Name>
-    <Description>Turn off all the lights in the current group.</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2761007Z</ActivationTime>
-    <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
   // set the widget "program"
@@ -67,24 +62,24 @@ Modules
   .IterationDelay(0.2)
   .Off();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>7</Address>
+    <Name>Group Lights OFF</Name>
+    <Description>Turn off all the lights in the current group.</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T00:19:29.831029Z</ActivationTime>
+    <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>16</Address>
-    <Name>Level Memory</Name>
-    <Description>Store and recall last dimmer level when device is switched on.</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:22.215919Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
 });
@@ -131,9 +126,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -146,20 +138,20 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>16</Address>
+    <Name>Level Memory</Name>
+    <Description>Store and recall last dimmer level when device is switched on.</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-03-17T00:19:29.852998Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:45.180358Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>26</Address>
-    <Name>Philips Hue Bridge</Name>
-    <Description>Adds Philips Hue lights control capability to HomeGenie. 
-In order for this to work, you must register "homegenie" username
-(default is "newdeveloper") with your Philips Hue Bridge first.
-For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:22.1107766Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -186,6 +178,7 @@ return true;
   	return true;
 };
 
+var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
 // - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
 When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; 
 {
@@ -197,7 +190,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
       string command = reqs[2];
       string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
       //
-      var module = Modules.InDomain("HomeAutomation.PhilipsHue").WithAddress(lightnumber).Get();
+      var module = hueModules.WithAddress(lightnumber).Get();
       //
       switch(command)
       {
@@ -251,26 +244,27 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>26</Address>
+    <Name>Philips Hue Bridge</Name>
+    <Description>Adds Philips Hue lights control capability to HomeGenie. 
+In order for this to work, you must register "homegenie" username
+(default is "newdeveloper") with your Philips Hue Bridge first.
+For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T08:53:39.350043Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:53:41.001098Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>34</Address>
-    <Name>Weather Underground</Name>
-    <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
-It can be used for "Sunrise/Sunset" feature. 
-User must create an account at wunderground.com in order to obtain a service key.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.0997187Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>//    
 // this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
@@ -396,24 +390,26 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>34</Address>
+    <Name>Weather Underground</Name>
+    <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
+It can be used for "Sunrise/Sunset" feature. 
+User must create an account at wunderground.com in order to obtain a service key.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T00:19:29.951254Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:45.553664Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>35</Address>
-    <Name>Scheduled ON/OFF</Name>
-    <Description>Turn on/off a device using HG scheduler.</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2790788Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:45:53.4319463Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -426,7 +422,8 @@ Pause(30); // pause a minute before next check
 //
 return true; // execute the "Code To Run"
 </ScriptCondition>
-    <ScriptSource>Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
+    <ScriptSource>var controlModules = Modules.WithFeature("HomeGenie.ScheduleControl");
+controlModules.Each((module)=&gt;{
   var schedexpr = module.Parameter("HomeGenie.ScheduleOn").Value;
   if (module.IsOff &amp;&amp; Scheduler.IsScheduling(schedexpr))
   {
@@ -435,7 +432,7 @@ return true; // execute the "Code To Run"
   }
   return false;
 });
-Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
+controlModules.Each((module)=&gt;{
   var schedexpr = module.Parameter("HomeGenie.ScheduleOff").Value;
   if (module.IsOn &amp;&amp; Scheduler.IsScheduling(schedexpr))
   {
@@ -446,9 +443,6 @@ Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
 });
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
@@ -475,17 +469,20 @@ Modules.WithFeature("HomeGenie.ScheduleControl").Each((module)=&gt;{
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>35</Address>
+    <Name>Scheduled ON/OFF</Name>
+    <Description>Turn on/off a device using HG scheduler.</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T08:59:27.088243Z</ActivationTime>
+    <TriggerTime>2014-03-17T09:03:04.897769Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>37</Address>
-    <Name>HCSR04 - Ultrasonic Ranging Module</Name>
-    <Description>Ultrasonic Ranging Module sensor </Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2013-12-07T01:38:37.454915Z</ActivationTime>
-    <TriggerTime>2013-12-07T01:38:48.349238Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this Setup delegate will be executed once, when the program is enabled
 Program.Setup(()=&gt;
 {
@@ -540,25 +537,24 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
 }); 
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>37</Address>
+    <Name>HCSR04 - Ultrasonic Ranging Module</Name>
+    <Description>Ultrasonic Ranging Module sensor </Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2013-12-07T01:38:37.454915Z</ActivationTime>
+    <TriggerTime>2013-12-07T01:38:48.349238Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>38</Address>
-    <Name>MCP3008 - Temperature and Luminance</Name>
-    <Description>Analog Inputs SPI application using the MCP3008 ADC. 
-For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2013-12-09T19:29:38.557717Z</ActivationTime>
-    <TriggerTime>2013-12-09T19:29:38.67913Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -649,24 +645,25 @@ using (var adcConnection = new Mcp3008SpiConnection(adcClock, adcCs, adcMiso, ad
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>38</Address>
+    <Name>MCP3008 - Temperature and Luminance</Name>
+    <Description>Analog Inputs SPI application using the MCP3008 ADC. 
+For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2013-12-09T19:29:38.557717Z</ActivationTime>
+    <TriggerTime>2013-12-09T19:29:38.67913Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>39</Address>
-    <Name>Z-Wave - Lights/Switches Level Poll</Name>
-    <Description>Periodically query lights and switches level.</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-01-03T16:48:44.015841Z</ActivationTime>
-    <TriggerTime>2014-01-03T16:48:48.784129Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this is a background app
 // so we just put initialization code here and a return true
 // to activate the background task loop
@@ -694,26 +691,24 @@ return true; // execute "Code To Run"
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>39</Address>
+    <Name>Z-Wave - Lights/Switches Level Poll</Name>
+    <Description>Periodically query lights and switches level.</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-01-03T16:48:44.015841Z</ActivationTime>
+    <TriggerTime>2014-01-03T16:48:48.784129Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>50</Address>
-    <Name>HomeGenie Touchless Toggle</Name>
-    <Description>All lights with the flag "Touchless Toggle" active, 
-will be toggled whenever HomeGenie touchless sensor is activated.
-For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-09T17:48:39.636378Z</ActivationTime>
-    <TriggerTime>2014-02-09T17:48:43.974331Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer,Light,Switch", "HomeGenie.TouchlessToggle", "Control by HomeGenie Touchless Toggle");
 });
@@ -725,7 +720,8 @@ var driver = new MemoryGpioConnectionDriver();
 var LastPulse = DateTime.Now;
 var state = "WAIT";
 //var low = 0D;
-
+var toggleModules = Modules.WithFeature("HomeGenie.TouchlessToggle");
+var buzzer = Modules.InDomain("HomeGenie.Buzzer").WithAddress("1");
 while (Program.IsEnabled)
 {
     driver.Allocate(irpin, PinDirection.Input);
@@ -770,10 +766,10 @@ while (Program.IsEnabled)
       	case "SWITCH":
             if (elapsedfrominput.TotalMilliseconds &gt; 300)
             {
-              Modules.WithFeature("HomeGenie.TouchlessToggle").Toggle();
-              Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").On();
+              toggleModules.Toggle();
+              buzzer.On();
               Pause(.5); 
-              Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").Off();
+              buzzer.Off();
               LastPulse = DateTime.Now;
               state = "WAIT";
             }
@@ -785,33 +781,26 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>50</Address>
+    <Name>HomeGenie Touchless Toggle</Name>
+    <Description>All lights with the flag "Touchless Toggle" active, 
+will be toggled whenever HomeGenie touchless sensor is activated.
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2014-03-17T09:03:32.653461Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer,Light,Switch</ForTypes>
-        <Property>HomeGenie.TouchlessToggle</Property>
-        <Description>Control by HomeGenie Touchless Toggle</Description>
-      </ProgramFeature>
-    </Features>
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>70</Address>
-    <Name>DHT-11 Sensor</Name>
-    <Description>Temperature and Humidity sensing using DHT-11. 
-For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-09T17:48:39.644331Z</ActivationTime>
-    <TriggerTime>2014-02-09T17:48:50.174189Z</TriggerTime>
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 Program.Setup(()=&gt;
@@ -944,25 +933,40 @@ while (Program.IsEnabled)
 
 }</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <IsEnabled>false</IsEnabled>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>70</Address>
+    <Name>DHT-11 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-11. 
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2014-03-17T00:19:30.07005Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:45.79043Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>71</Address>
-    <Name>Example MCP23017</Name>
-    <Description>Interfacing an I2C GPIO expander.
-For wirings see http://www.skpang.co.uk/blog/archives/454 .</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions>
+      <ProgramCondition>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>37</Target>
+        <Property>Sensor.DoorWindow</Property>
+        <ComparisonOperator>Equals</ComparisonOperator>
+        <ComparisonValue>255</ComparisonValue>
+      </ProgramCondition>
+    </Conditions>
+    <Commands>
+      <ProgramCommand>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>4</Target>
+        <CommandString>Control.Off</CommandString>
+        <CommandArguments />
+      </ProgramCommand>
+    </Commands>
     <ScriptCondition>Program.Setup(()=&gt;
 {
 	// register 2 virtual modules using the "switch" widget    
@@ -1045,40 +1049,25 @@ When.WebServiceCallReceived("Components.MCP23017", ( args ) =&gt;
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions>
-      <ProgramCondition>
-        <Domain>HomeAutomation.ZWave</Domain>
-        <Target>37</Target>
-        <Property>Sensor.DoorWindow</Property>
-        <ComparisonOperator>Equals</ComparisonOperator>
-        <ComparisonValue>255</ComparisonValue>
-      </ProgramCondition>
-    </Conditions>
-    <Commands>
-      <ProgramCommand>
-        <Domain>HomeAutomation.ZWave</Domain>
-        <Target>4</Target>
-        <CommandString>Control.Off</CommandString>
-        <CommandArguments />
-      </ProgramCommand>
-    </Commands>
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>71</Address>
+    <Name>Example MCP23017</Name>
+    <Description>Interfacing an I2C GPIO expander.
+For wirings see http://www.skpang.co.uk/blog/archives/454 .</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>72</Address>
-    <Name>Earth Tools</Name>
-    <Description>Gather from http://www.earthtools.org/ service all data about sun rise/set. 
-It can be used for "Sunrise/Sunset" feature.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2851009Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:20.6934419Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
@@ -1152,24 +1141,25 @@ return true;
     Pause(24 * 60 * 60); // pause 24 hours before next check
 }</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <IsEnabled>true</IsEnabled>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>72</Address>
+    <Name>Earth Tools</Name>
+    <Description>Gather from http://www.earthtools.org/ service all data about sun rise/set. 
+It can be used for "Sunrise/Sunset" feature.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-03T01:09:28.269763Z</ActivationTime>
+    <TriggerTime>2014-03-03T01:09:51.698315Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>73</Address>
-    <Name>IR/RF remote control events forwarding</Name>
-    <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
   	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
@@ -1197,24 +1187,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 //
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>73</Address>
+    <Name>IR/RF remote control events forwarding</Name>
+    <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>74</Address>
-    <Name>Meter.Watts events forwarding</Name>
-    <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
   	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
@@ -1242,24 +1232,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 //
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>74</Address>
+    <Name>Meter.Watts events forwarding</Name>
+    <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>75</Address>
-    <Name>Status.Level events forwarding</Name>
-    <Description>Forwards devices' Level changes to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
   	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
@@ -1287,24 +1277,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 //
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>75</Address>
+    <Name>Status.Level events forwarding</Name>
+    <Description>Forwards devices' Level changes to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>82</Address>
-    <Name>Energy Saving Mode</Name>
-    <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
-    <Group>Energy Management</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:22.009613Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// this is a background app
 // so we just put initialization code here and a return true
 // to activate the background task loop
@@ -1340,9 +1330,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -1355,17 +1342,20 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>82</Address>
+    <Name>Energy Saving Mode</Name>
+    <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
+    <Group>Energy Management</Group>
+    <ActivationTime>2014-03-17T00:19:30.250728Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:46.917438Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>83</Address>
-    <Name>nRF24L01</Name>
-    <Description>(just testing)</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -1411,24 +1401,24 @@ using(spiConnection.SelectSlave())
   }
 }</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>83</Address>
+    <Name>nRF24L01</Name>
+    <Description>(just testing)</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>84</Address>
-    <Name>X10 - Dimmer Bright 100% when switched on</Name>
-    <Description>Brighten a light to 100% when switched on.</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.9084515Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on");
 });
@@ -1462,9 +1452,6 @@ When.ModuleParameterIsChanging( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -1477,17 +1464,20 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>84</Address>
+    <Name>X10 - Dimmer Bright 100% when switched on</Name>
+    <Description>Brighten a light to 100% when switched on.</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-03-17T00:19:30.32692Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:47.861858Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>88</Address>
-    <Name>Generic IP Camera</Name>
-    <Description>Generic IP Camera driver.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.8073505Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>
 Program.Setup(()=&gt;{
 
@@ -1500,9 +1490,10 @@ Program.Setup(()=&gt;{
 
 return true;
 </ScriptCondition>
-    <ScriptSource>for (int cam = 1; cam &lt; 10; cam++)
+    <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
+for (int cam = 1; cam &lt; 10; cam++)
 {
-  	var module = Modules.InDomain("Media.IpCamera").WithAddress(cam.ToString()).Get();
+  	var module = cameraModules.WithAddress(cam.ToString()).Get();
   	module.Parameter("Image.URL").Value = "/api/Media.IpCamera/" + cam.ToString() + "/Camera.GetPicture/";
 }
 
@@ -1517,7 +1508,7 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt;
         string cameraaddress = reqs[1];
         string command = reqs[2];
         //string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
-		var module = Modules.InDomain("Media.IpCamera").WithAddress(cameraaddress).Get();
+		var module = cameraModules.WithAddress(cameraaddress).Get();
         //
         switch(command)
         {
@@ -1547,11 +1538,8 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt;
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -1576,17 +1564,20 @@ Program.GoBackground();
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>88</Address>
+    <Name>Generic IP Camera</Name>
+    <Description>Generic IP Camera driver.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T08:52:25.501722Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:52:27.049416Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>90</Address>
-    <Name>Security Alarm System</Name>
-    <Description>Basic Security Alarm System</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.7063049Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
   
   	Program.AddControlWidget("homegenie/generic/securitysystem");
@@ -1698,11 +1689,13 @@ When.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", (args) =&gt; 
 //
 // main program loop
 //
+var sirenModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren");
+var alarmModules = Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light");
 while (Program.IsEnabled)
 {
   	if (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
     {
-        Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").On();
+        sirenModules.On();
       	//
       	var alarmstart = DateTime.Now;
       	//
@@ -1722,30 +1715,27 @@ while (Program.IsEnabled)
         while (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
         {
             // flashing SecurityAlarm lights 
-            Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light").Toggle();
+            alarmModules.Toggle();
             Pause(1);
-            Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Dimmer,Switch,Light").Toggle();
+            alarmModules.Toggle();
             Pause(1);
           	//
           	var elapsed = new TimeSpan(DateTime.Now.Ticks - alarmstart.Ticks);
           	if (!sirenstopped &amp;&amp; Program.InputField("System.SirenMaxTime").DecimalValue &gt; 0 &amp;&amp; elapsed.TotalSeconds &gt; Program.InputField("System.SirenMaxTime").DecimalValue)
             {
-				Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").Off();
+				sirenModules.Off();
               	sirenstopped = true;
             }
         }
 	  	//Pause(1);
-        Modules.WithFeature("HomeGenie.SecurityAlarm").OfDeviceType("Siren").Off();
+        alarmModules.Off();
     }
   	Pause(1);
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1763,17 +1753,20 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>90</Address>
+    <Name>Security Alarm System</Name>
+    <Description>Basic Security Alarm System</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-03-17T08:47:20.089291Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:47:20.61195Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>91</Address>
-    <Name>Z-Wave - Wake Up Notify</Name>
-    <Description>Query sensors' data and battery level when a device wakes up.</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.6052179Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -1838,24 +1831,24 @@ return true;
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>91</Address>
+    <Name>Z-Wave - Wake Up Notify</Name>
+    <Description>Query sensors' data and battery level when a device wakes up.</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-03-17T00:19:30.440327Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:49.928224Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>92</Address>
-    <Name>HomeGenie Buzzer</Name>
-    <Description>GPIO controlled Buzzer</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-09T17:48:39.745183Z</ActivationTime>
-    <TriggerTime>2014-02-09T17:49:11.260434Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;
 {
 	// register 2 virtual modules using the "switch" widget    
@@ -1916,24 +1909,24 @@ using (var connection = new GpioConnection(systembuzzer))
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <IsEnabled>false</IsEnabled>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>92</Address>
+    <Name>HomeGenie Buzzer</Name>
+    <Description>GPIO controlled Buzzer</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2014-03-17T00:19:30.475555Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:51.259516Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>112</Address>
-    <Name>Turn Off Delay</Name>
-    <Description>When device is turned on, automatically turn it off after a given delay.</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.5042263Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)");
@@ -1979,9 +1972,6 @@ return true;
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -1994,17 +1984,20 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>112</Address>
+    <Name>Turn Off Delay</Name>
+    <Description>When device is turned on, automatically turn it off after a given delay.</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T00:19:30.503678Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:50.995295Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>122</Address>
-    <Name>X10 SC9000 RF Vitual Modules</Name>
-    <Description>SC9000 Security Console driver (experimental)</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.4029748Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2049,6 +2042,7 @@ var security_events = new Dictionary&lt;string, string&gt;() {
     { "03", "Panic_KR15A" }                   /* Big red button */
 };
 
+var sc9000Modules = Modules.InDomain("HomeAutomation.X10.SC9000");
 // We want to do further processing whenever a module prop changes 
 When.ModuleParameterChange( (module, property) =&gt; {
 	
@@ -2087,7 +2081,7 @@ When.ModuleParameterChange( (module, property) =&gt; {
 //Program.Notify("X10 RF debug", "a=" + straddress.ToString() + " fn=" + function + "\n" + fnvalue);      
       
       	address = Convert.ToInt32(straddress, 2).ToString();
-		module = Modules.InDomain("HomeAutomation.X10.SC9000").WithAddress(address).Get();
+		module = sc9000Modules.WithAddress(address).Get();
 
       	if (fnvalue.StartsWith("Motion_alert"))
         {
@@ -2139,24 +2133,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>122</Address>
+    <Name>X10 SC9000 RF Vitual Modules</Name>
+    <Description>SC9000 Security Console driver (experimental)</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T08:56:43.346384Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:56:45.829288Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>132</Address>
-    <Name>Serial Port I/O Test</Name>
-    <Description>Example of using SerialPort helper class for communicating with serial devices.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnSwitchTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2212,24 +2206,24 @@ while (Program.IsEnabled)
 
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>132</Address>
+    <Name>Serial Port I/O Test</Name>
+    <Description>Example of using SerialPort helper class for communicating with serial devices.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>142</Address>
-    <Name>E-Mail Account</Name>
-    <Description>Store e-mail account information for sending/receiving emails.</Description>
-    <Group>Messaging and Social</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:20.5923505Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 
     Program.AddInputField("Email.Sender", "", "1. E-Mail address");
@@ -2255,24 +2249,24 @@ return true;</ScriptCondition>
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>142</Address>
+    <Name>E-Mail Account</Name>
+    <Description>Store e-mail account information for sending/receiving emails.</Description>
+    <Group>Messaging and Social</Group>
+    <ActivationTime>2014-03-17T00:19:30.579041Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:52.97184Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>143</Address>
-    <Name>Pushing Box</Name>
-    <Description>http://www.pushingbox.com/ integration</Description>
-    <Group>Messaging and Social</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2013-11-05T16:45:50.005883Z</ActivationTime>
-    <TriggerTime>2013-11-05T16:45:50.485284Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeatureTextInput("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "PushingBox.DeviceId", "PushingBox Notifications DeviceID");
 });
@@ -2304,25 +2298,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>143</Address>
+    <Name>Pushing Box</Name>
+    <Description>http://www.pushingbox.com/ integration</Description>
+    <Group>Messaging and Social</Group>
+    <ActivationTime>2013-11-05T16:45:50.005883Z</ActivationTime>
+    <TriggerTime>2013-11-05T16:45:50.485284Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>144</Address>
-    <Name>Presence Simulator</Name>
-    <Description>Simulate presence in the house by looping a program during a given interval time.
-The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
   
   	Program.AddInputField("StartTime", "", "1. Start 'Presence' program at time:");
@@ -2384,28 +2377,25 @@ Pause( pause );
 
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>144</Address>
+    <Name>Presence Simulator</Name>
+    <Description>Simulate presence in the house by looping a program during a given interval time.
+The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T00:19:30.664063Z</ActivationTime>
+    <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>154</Address>
-    <Name>Ping Me at Home</Name>
-    <Description>If security system is armed, pings your mobile device to determine
-when you're getting close to home.
-The program exposes the parameter &lt;b&gt;PingMe.AtHome&lt;/b&gt;
-that can be used both in Wizard Scripts or C# APPs to
-trigger actions when you get home.</Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-01-03T16:48:44.452645Z</ActivationTime>
-    <TriggerTime>2014-01-03T16:48:50.192687Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
   
 //	Program.AddFeature("Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Security Alarm");
@@ -2456,24 +2446,28 @@ return true;</ScriptCondition>
   
 }</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>154</Address>
+    <Name>Ping Me at Home</Name>
+    <Description>If security system is armed, pings your mobile device to determine
+when you're getting close to home.
+The program exposes the parameter &lt;b&gt;PingMe.AtHome&lt;/b&gt;
+that can be used both in Wizard Scripts or C# APPs to
+trigger actions when you get home.</Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-01-03T16:48:44.452645Z</ActivationTime>
+    <TriggerTime>2014-01-03T16:48:50.192687Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>168</Address>
-    <Name>Arduino Switches</Name>
-    <Description>Arduino controlled Switches.</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;
 {
 	// register 3 virtual modules using the "switch" widget for the domain "Arduino.Switches" 
@@ -2524,26 +2518,24 @@ When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt;
 //
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>168</Address>
+    <Name>Arduino Switches</Name>
+    <Description>Arduino controlled Switches.</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>180</Address>
-    <Name>Favourites Links</Name>
-    <Description>Add 5 virtual modules with customizable url link.
-These can be added to  groups and are then
-shown as hyperlink buttons in the control page.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
     Program.AddFeatureTextInput("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link");
@@ -2552,9 +2544,6 @@ shown as hyperlink buttons in the control page.</Description>
 return false;</ScriptCondition>
     <ScriptSource />
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -2567,19 +2556,22 @@ return false;</ScriptCondition>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>180</Address>
+    <Name>Favourites Links</Name>
+    <Description>Add 5 virtual modules with customizable url link.
+These can be added to  groups and are then
+shown as hyperlink buttons in the control page.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T00:19:30.729401Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>200</Address>
-    <Name>Windows Phone Push Notification Service</Name>
-    <Description>Windows Phone push notification service. 
-It sends toast and tile updates to Windows Phone client.
-Currently limited to one client channel.</Description>
-    <Group>Messaging and Social</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:20.7945737Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
                        "MobileNotification.SendChanges", 
@@ -2688,9 +2680,6 @@ while(Program.IsEnabled)
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -2703,18 +2692,22 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>200</Address>
+    <Name>Windows Phone Push Notification Service</Name>
+    <Description>Windows Phone push notification service. 
+It sends toast and tile updates to Windows Phone client.
+Currently limited to one client channel.</Description>
+    <Group>Messaging and Social</Group>
+    <ActivationTime>2014-03-17T00:19:30.771584Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:56.075158Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>81</Address>
-    <Name>Energy Monitor</Name>
-    <Description>Collects and stores real-time information about
-energy consumption.</Description>
-    <Group>Energy Management</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.3018502Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2724,13 +2717,14 @@ return true;
 Program.Parameter("EnergyMonitor.KwLoad").Value = "0";
 Program.Parameter("EnergyMonitor.OperatingDevices").Value = "0";
 //
+var meterModules = Modules.WithParameter("Meter.Watts");
 while (Program.IsEnabled)
 {
   	Pause(60);
   	//
     var loadkw = 0d;
     var devcount = 0;
-    Modules.WithParameter("Meter.Watts").Each((mod)=&gt;{
+    meterModules.Each((mod)=&gt;{
       if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
       {
         loadkw += mod.Parameter("Meter.Watts").DecimalValue;
@@ -2745,25 +2739,25 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>81</Address>
+    <Name>Energy Monitor</Name>
+    <Description>Collects and stores real-time information about
+energy consumption.</Description>
+    <Group>Energy Management</Group>
+    <ActivationTime>2014-03-17T08:49:32.922716Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:49:33.092901Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>93</Address>
-    <Name>Z-Wave - Multi Instance/Channel </Name>
-    <Description>Adds a virtual module for each instance of a multi instance node.
-It requires that a manufacturer specific get has been issued on the node.</Description>
-    <Group>Features</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:20.8956289Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2903,24 +2897,25 @@ Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>93</Address>
+    <Name>Z-Wave - Multi Instance/Channel </Name>
+    <Description>Adds a virtual module for each instance of a multi instance node.
+It requires that a manufacturer specific get has been issued on the node.</Description>
+    <Group>Features</Group>
+    <ActivationTime>2014-03-17T00:19:30.830723Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:56.994047Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>76</Address>
-    <Name>Sensor.* events forwarding</Name>
-    <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
-    <Group>Interconnections</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2013-12-21T23:39:04.212865Z</ActivationTime>
-    <TriggerTime>2013-12-21T23:39:04.589769Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
   	Program.AddInputField("CellAddress", "192.168.0.?", "1. Remote HG server address");
@@ -2948,24 +2943,24 @@ When.ModuleParameterChange( (module, property) =&gt; {
 //
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>76</Address>
+    <Name>Sensor.* events forwarding</Name>
+    <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
+    <Group>Interconnections</Group>
+    <ActivationTime>2013-12-21T23:39:04.212865Z</ActivationTime>
+    <TriggerTime>2013-12-21T23:39:04.589769Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>121</Address>
-    <Name>X10 RF Virtual Modules Mapper</Name>
-    <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:21.2007146Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -2977,13 +2972,14 @@ Program.Setup(()=&gt;{
 
 return true;
 </ScriptCondition>
-    <ScriptSource>// We want to do further processing whenever a module prop changes 
+    <ScriptSource>var x10rfModules = Modules.InDomain("HomeAutomation.X10.RF");
+// We want to do further processing whenever a module prop changes 
 When.ModuleParameterChange( (module, property) =&gt; {
 	
   	if (property.Name == "Receiver.RawData" &amp;&amp; module.Instance.Domain == "HomeAutomation.X10")
     {
       
-      	Modules.InDomain("HomeAutomation.X10.RF").Each((m)=&gt;{
+      	x10rfModules.Each((m)=&gt;{
           
             var rfon = m.Parameter("X10RFString.LevelOn").Value;
           	var rfoff = m.Parameter("X10RFString.LevelOff").Value;
@@ -3009,11 +3005,8 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -3031,18 +3024,20 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>121</Address>
+    <Name>X10 RF Virtual Modules Mapper</Name>
+    <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-03-17T08:55:06.277188Z</ActivationTime>
+    <TriggerTime>2014-03-17T08:55:08.268812Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>40</Address>
-    <Name>HomeGenie Leds</Name>
-    <Description>Staus and Activity leds for HomeGenie.
-For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
-    <Group>Raspberry Sharp</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-09T17:48:39.846061Z</ActivationTime>
-    <TriggerTime>2014-02-09T17:49:07.941184Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;
 {
 	// register 2 virtual modules using the "switch" widget    
@@ -3126,24 +3121,25 @@ using (var connection = new GpioConnection(systemleds))
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <IsEnabled>false</IsEnabled>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>40</Address>
+    <Name>HomeGenie Leds</Name>
+    <Description>Staus and Activity leds for HomeGenie.
+For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
+    <Group>Raspberry Sharp</Group>
+    <ActivationTime>2014-03-17T00:19:30.959208Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:59.802357Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>145</Address>
-    <Name>Smart Lights</Name>
-    <Description>Control device by motion detection and enviroment lumosity </Description>
-    <Group>Scenes</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:43:19.2861002Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:43:20.9966529Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
     Program.AddFeature("Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");
@@ -3257,9 +3253,6 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>true</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
@@ -3293,18 +3286,20 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>145</Address>
+    <Name>Smart Lights</Name>
+    <Description>Control device by motion detection and enviroment lumosity </Description>
+    <Group>Scenes</Group>
+    <ActivationTime>2014-03-17T00:19:31.000206Z</ActivationTime>
+    <TriggerTime>2014-03-17T00:19:59.690364Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>300</Address>
-    <Name>Fibaro RGBW</Name>
-    <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
-</Description>
-    <Group>Devices and Things</Group>
-    <Type>CSharp</Type>
-    <ActivationTime>2014-02-26T16:45:32.1890094Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:45:32.676852Z</TriggerTime>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
 // For manually activated program, just leave a "return false" statement here.
 
@@ -3463,13 +3458,19 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt;
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>300</Address>
+    <Name>Fibaro RGBW</Name>
+    <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
+</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-02-26T16:45:32.1890094Z</ActivationTime>
+    <TriggerTime>2014-02-26T16:45:32.676852Z</TriggerTime>
+    <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

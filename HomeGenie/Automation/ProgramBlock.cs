@@ -62,6 +62,7 @@ namespace HomeGenie.Automation
         // IronScript fields for Python, Ruby, Javascript
         private object scriptEngine = null;
         private ScriptScope scriptScope = null;
+        private ScriptingHost hgScriptingHost = null;
         
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
@@ -171,7 +172,7 @@ namespace HomeGenie.Automation
 
         private void SetupScriptingScope()
         {
-            ScriptingHost hgScriptingHost = new ScriptingHost();
+            hgScriptingHost = new ScriptingHost();
             hgScriptingHost.SetHost(homegenie, this.Address);
             if (scriptEngine.GetType() == typeof(ScriptEngine))
             {
@@ -269,9 +270,16 @@ namespace HomeGenie.Automation
 
         internal void Reset()
         {
+            // CSharp App
             if (appAssembly != null && methodReset != null)
             {
                 methodReset.Invoke(assembly, null);
+            }
+            // Python, Ruby, Javascript
+            else if (hgScriptingHost != null)
+            {
+                hgScriptingHost.Reset();
+                hgScriptingHost = null;
             }
         }
 
@@ -437,6 +445,7 @@ namespace HomeGenie.Automation
             //
             this.IsRunning = false;
             this.IsEvaluatingConditionBlock = false;
+            this.Reset();
             //
             if (ProgramThread != null)
             {

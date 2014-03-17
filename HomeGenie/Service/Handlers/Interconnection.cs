@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -65,7 +66,13 @@ namespace HomeGenie.Service.Handlers
                     module.RoutingNode = request.RequestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
                     //
                     homegenie.LogBroadcastEvent(moduleEvent.Module.Domain, moduleEvent.Module.Address, request.RequestOrigin, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
-                    homegenie.RouteParameterChangedEvent(request.RequestOrigin, module, moduleEvent.Parameter);
+                    HomeGenie.Service.HomeGenieService.RoutedEvent eventData = new HomeGenie.Service.HomeGenieService.RoutedEvent()
+                    {
+                        Sender = request.RequestOrigin,
+                        Module = module,
+                        Parameter = moduleEvent.Parameter
+                    };
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.RouteParameterChangedEvent), eventData);
                     break;
             }
         }

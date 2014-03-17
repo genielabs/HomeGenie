@@ -165,6 +165,10 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+17/03/2014 1.00 beta rev 351
+	- General better memory and multi-threading management using ThreadPool
+	- Fixed: enabling a program after disable was not executing Program.Setup delegate
+
 13/03/2014 1.00 beta rev 350
 	- Fixed "Unsupported Encoding 51932" bug in IronRuby engine under mono platforms
 	- Fixed bug in loading new automation programs after hg restart 

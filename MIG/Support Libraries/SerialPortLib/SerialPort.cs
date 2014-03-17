@@ -357,10 +357,7 @@ namespace SerialPortLib
                             }
                             if (MessageReceived != null)
                             {
-                                RunAsync(() =>
-                                {
-                                    MessageReceived(message);
-                                });
+                                ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveMessage), message);
                             }
                         }
                         else
@@ -381,7 +378,6 @@ namespace SerialPortLib
             }
         }
 
-
         public String ByteArrayToString(byte[] message)
         {
             String ret = String.Empty;
@@ -393,24 +389,13 @@ namespace SerialPortLib
         }
 
 
-        private void RunAsync(Action action)
+        private void ReceiveMessage(object message)
         {
-            Thread t = new Thread(delegate()
+            if (MessageReceived != null)
             {
-                try
-                {
-                    action();
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine("SerialPortLib ERROR!!!!!! " + e.Message + "\n" + e.StackTrace);
-
-                }
-            });
-            t.Start();
+                MessageReceived((byte[])message);
+            }
         }
-
 
 
     }

@@ -51,6 +51,7 @@ using HomeGenie.Service.Constants;
 using MIG.Interfaces.HomeAutomation;
 using HomeGenie.Service.Logging;
 using HomeGenie.Automation.Scheduler;
+using System.Threading;
 
 namespace HomeGenie.Service
 {
@@ -83,6 +84,13 @@ namespace HomeGenie.Service
 
         // public events
         public event Action<LogEntry> LogEventAction;
+
+        public class RoutedEvent
+        {
+            public object Sender;
+            public Module Module;
+            public ModuleParameter Parameter;
+        }
 
         #endregion
 
@@ -741,63 +749,66 @@ namespace HomeGenie.Service
             //
             LogBroadcastEvent(propertyChangedAction.Domain, propertyChangedAction.SourceId, propertyChangedAction.SourceType, propertyChangedAction.Path, JsonConvert.SerializeObject(propertyChangedAction.Value));
             //
-            RouteParameterChangedEvent(sender, module, parameter);
-
-        }
-
-        public void RouteParameterChangedEvent(object sender, Module sourceModule, ModuleParameter sourceParameter)
-        {
             ///// ROUTE EVENT TO LISTENING AutomationPrograms
             if (masterControlProgram != null)
             {
-                Utility.RunAsyncTask(() =>
+                RoutedEvent eventData = new RoutedEvent()
                 {
-                    bool proceed = true;
-                    foreach (var program in masterControlProgram.Programs)
+                    Sender = sender,
+                    Module = module,
+                    Parameter = parameter
+                };
+                ThreadPool.QueueUserWorkItem(new WaitCallback(RouteParameterChangedEvent), eventData);
+            }
+        }
+
+        public void RouteParameterChangedEvent(object eventData)
+        {
+            bool proceed = true;
+            RoutedEvent moduleEvent = (RoutedEvent)eventData;
+            foreach (var program in masterControlProgram.Programs)
+            {
+                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                {
+                    try
                     {
-                        if ((sender == null || !sender.Equals(program)))
+                        if (program.ModuleIsChangingHandler != null)
                         {
-                            try
+                            if (!program.ModuleIsChangingHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
                             {
-                                if (program.ModuleIsChangingHandler != null)
-                                {
-                                    if (!program.ModuleIsChangingHandler(new Automation.Scripting.ModuleHelper(this, sourceModule), sourceParameter))
-                                    {
-                                        proceed = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            catch (System.Exception ex)
-                            {
-                                HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                                proceed = false;
+                                break;
                             }
                         }
                     }
-                    if (proceed)
+                    catch (System.Exception ex)
                     {
-                        foreach (ProgramBlock program in masterControlProgram.Programs)
+                        HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    }
+                }
+            }
+            if (proceed)
+            {
+                foreach (ProgramBlock program in masterControlProgram.Programs)
+                {
+                    if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                    {
+                        try
                         {
-                            if ((sender == null || !sender.Equals(program)))
+                            if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                             {
-                                try
+                                if (!program.ModuleChangedHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
                                 {
-                                    if (program.ModuleChangedHandler != null && sourceParameter != null) // && proceed)
-                                    {
-                                        if (!program.ModuleChangedHandler(new Automation.Scripting.ModuleHelper(this, sourceModule), sourceParameter))
-                                        {
-                                            break;
-                                        }
-                                    }
-                                }
-                                catch (System.Exception ex)
-                                {
-                                    HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                                    break;
                                 }
                             }
                         }
+                        catch (System.Exception ex)
+                        {
+                            HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                        }
                     }
-                });
+                }
             }
         }
 
@@ -918,7 +929,6 @@ namespace HomeGenie.Service
                         }
                     }
 
-
                     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml");
                     if (File.Exists(filePath))
                     {
@@ -999,11 +1009,11 @@ namespace HomeGenie.Service
         {
             LoadSystemConfig();
             //
-            // load last saved modules data into _modules list
+            // load last saved modules data into modules list
             //
             LoadModules();
             //
-            // load last saved groups data into _controlgroups list
+            // load last saved groups data into controlGroups list
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
@@ -1016,7 +1026,7 @@ namespace HomeGenie.Service
                 //TODO: log error
             }
             //
-            // load last saved automation groups data into _automationgroups list
+            // load last saved automation groups data into automationGroups list
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
@@ -1029,7 +1039,7 @@ namespace HomeGenie.Service
                 //TODO: log error
             }
             //
-            // load last saved programs data into _mastercontrolprogram.Programs list
+            // load last saved programs data into masterControlProgram.Programs list
             //
             if (masterControlProgram != null)
             {
@@ -1072,7 +1082,7 @@ namespace HomeGenie.Service
                 //TODO: log error
             }
             //
-            // load last saved scheduler items data into _mastercontrolprogram.SchedulerService.Items list
+            // load last saved scheduler items data into masterControlProgram.SchedulerService.Items list
             //
             try
             {
@@ -1252,7 +1262,7 @@ namespace HomeGenie.Service
                         module.Address = node.NodeId.ToString();
                         if (module.Description == null || module.Description == "")
                         {
-                            module.Description = "ZWave Node"; //_zwavecontroller.GetDevice(zn.Value.NodeId).Description;
+                            module.Description = "ZWave Node";
                         }
                         // 
                         UpdateZWaveNodeDeviceHandler(node.NodeId, module);
@@ -1661,9 +1671,9 @@ namespace HomeGenie.Service
                         }
 
                         // TODO: improve modules dispose mechanism
-                        if ((program == null || !program.IsEnabled) && module.RoutingNode == "")
+                        if ((program == null || !program.IsEnabled) && module != null && module.RoutingNode == "")
                         {
-                            if (module != null && module.Domain != Domains.HomeAutomation_HomeGenie_Automation)
+                            if (module.Domain != Domains.HomeAutomation_HomeGenie_Automation)
                             {
                                 // copy properties to virtualmodules before removing
                                 virtualModule.Properties.Clear();
@@ -1713,7 +1723,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "_modules_refresh_virtualmods()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_RefreshVirtualModules()", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
         }
 
@@ -1771,7 +1781,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "_modules_refresh_programs()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_RefreshPrograms()", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
         }
 
