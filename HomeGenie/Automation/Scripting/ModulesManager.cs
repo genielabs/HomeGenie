@@ -411,6 +411,7 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+		// TODO: deprecate this
         public string X10RfData
         {
             get
@@ -418,6 +419,7 @@ namespace HomeGenie.Automation.Scripting
                 return RfRemoteData;
             }
         }
+
         public string RfRemoteData
         {
             get
@@ -435,6 +437,8 @@ namespace HomeGenie.Automation.Scripting
                 return rfData;
             }
         }
+
+		// TODO: deprecate this
         public string RfRemoteDataW800
         {
             get

@@ -269,9 +269,8 @@ namespace MIG.Gateways
             while (callbackState.Listener.IsListening)
             {
                 callbackState.Listener.BeginGetContext(new AsyncCallback(ListenerCallback), callbackState);
-                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, stopEvent }, 10000);
+                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, stopEvent });
                 if (n == 1)
-
                 {
                     // stopEvent was signalled 
                     callbackState.Listener.Stop();
@@ -284,7 +283,7 @@ namespace MIG.Gateways
         {
             HttpListenerCallbackState callbackState = (HttpListenerCallbackState)result.AsyncState;
             HttpListenerContext context = null;
-            //
+            callbackState.ListenForNextRequest.Set();
             try
             {
                 context = callbackState.Listener.EndGetContext(result);
@@ -293,12 +292,11 @@ namespace MIG.Gateways
             {
                 Console.WriteLine("WebServiceGateway: " + ex.Message + "\n" + ex.StackTrace);
             }
-            finally
-            {
-                callbackState.ListenForNextRequest.Set();
-            }
+            //finally
+            //{
+            //    callbackState.ListenForNextRequest.Set();
+            //}
             if (context == null) return;
-            //
             Worker(context);
         }
 

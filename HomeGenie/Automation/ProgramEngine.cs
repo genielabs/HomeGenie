@@ -47,7 +47,7 @@ namespace HomeGenie.Automation
 
         private MacroRecorder macroRecorder = null;
 
-        private object lockoObject = new object();
+		private object lockObject = new object();
 
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
@@ -219,7 +219,7 @@ namespace HomeGenie.Automation
                 program.IsRunning = false;
             }
             //
-            lock (lockoObject)
+            lock (lockObject)
             {
                 program.IsRunning = true;
                 //

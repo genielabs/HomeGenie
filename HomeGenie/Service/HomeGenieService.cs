@@ -913,7 +913,7 @@ namespace HomeGenie.Service
             {
                 // Due to encrypted values, we must clone modules before encrypting and saving
                 var clonedModules = (List<Module>)systemModules.Clone();
-                lock (systemModules.LockObject)
+				//lock (systemModules.LockObject)
                 {
 
                     foreach (var module in clonedModules)
@@ -1644,7 +1644,7 @@ namespace HomeGenie.Service
                 //
                 // Virtual Modules
                 //
-                lock (virtualModules.LockObject)
+				//lock (virtualModules.LockObject)
                 {
                     foreach (var virtualModule in virtualModules)
                     {

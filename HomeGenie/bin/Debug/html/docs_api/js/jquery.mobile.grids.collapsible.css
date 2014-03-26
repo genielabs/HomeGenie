@@ -1,0 +1,122 @@
+/* my addition to supply convertible grids based on www.cssgrid.net by Andy Taylor */
+/* ==================================================================================================================== */
+/* ! The 1140px Grid V2 by Andy Taylor \ http://cssgrid.net \ http://www.twitter.com/andytlr \ http://www.andytlr.com   */
+/* ==================================================================================================================== */
+.row, .fixedrow {
+width: 100%;
+margin: 0 auto;
+overflow: hidden;
+}
+
+.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11 {
+margin-right: 3.8%;
+float: left;
+min-height: 1px;
+}
+
+.row .span1, .fixedrow .span1 {
+width: 4.85%;
+}
+
+.row .span2, .fixedrow .span2 {
+width: 13.45%;
+}
+
+.row .span3, .fixedrow .span3 {
+width: 22.05%;
+}
+
+.row .span4, .fixedrow .span4 {
+width: 30.75%;
+}
+
+.row .span5, .fixedrow .span5 {
+width: 39.45%;
+}
+
+.row .span6, .fixedrow .span6 {
+width: 48%;
+}
+
+.row .span7, .fixedrow .span7 {
+width: 56.75%;
+}
+
+.row .span8, .fixedrow .span8 {
+width: 65.4%;
+}
+
+.row .span9, .fixedrow .span9 {
+width: 74.05%;
+}
+
+.row .span10, .fixedrow .span10 {
+width: 82.7%;
+}
+
+.row .span11, .fixedrow .span11 {
+width: 91.35%;
+}
+
+.row .span12, .fixedrow .span12 {
+width: 100%;
+float: left;
+}
+
+.row .prepend1, .fixedrow .prepend1 {
+  
+}
+
+.last {
+margin-right: 0px;
+}
+
+img, object, embed {
+max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+
+/* touchscreens */
+@media (min-width:768px) {
+.touch body {
+  font-size: 1em;
+  line-height: normal;
+  }
+
+
+/* Smaller screens */
+body {
+  font-size: 0.9em;
+  line-height: normal;
+  }
+}
+
+/* Mobile */
+@media (max-width:480px) {
+body {
+  font-size: 1em;
+  -webkit-text-size-adjust: none;
+  }
+  
+.row, body {
+  width: 100%;
+  min-width: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  }
+  
+.row .span1, .row .span2, .row .span3, .row .span4, .row .span5, .row .span6, .row .span7, .row .span8, .row .span9, .row .span10, .row .span11, .row .span12 {
+  width: auto;
+  float: none;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  }
+}

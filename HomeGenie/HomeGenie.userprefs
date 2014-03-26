@@ -2,7 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="..\README.TXT">
     <Files>
-      <File FileName="..\README.TXT" Line="13" Column="9" />
+      <File FileName="..\README.TXT" Line="167" Column="3" />
+      <File FileName="release_info.xml" Line="6" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

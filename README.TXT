@@ -165,6 +165,11 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+26/03/2014 1.00 beta rev 352
+  	- removed locking in TsList collection (going to be replaced by standard List)
+  	- removed unused OpenKinectLib
+  	- Fixed errors in building HG solution under Xamarin Studio and Monodevelop
+
 17/03/2014 1.00 beta rev 351
 	- General better memory and multi-threading management using ThreadPool
 	- Fixed: enabling a program after disable was not executing Program.Setup delegate

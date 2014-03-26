@@ -66,6 +66,7 @@ namespace HomeGenie.Service
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
+		/*
         private object syncLock = new object();
 
         public TsList()
@@ -76,6 +77,7 @@ namespace HomeGenie.Service
         {
             get { return syncLock; }
         }
+
         new public void Clear()
         {
 
@@ -104,7 +106,7 @@ namespace HomeGenie.Service
             lock (syncLock)
                 base.Sort(comparison);
         }
-
+		*/
     }
 
 
