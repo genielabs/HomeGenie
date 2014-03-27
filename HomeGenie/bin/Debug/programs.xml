@@ -795,7 +795,7 @@ For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
     <ActivationTime>2014-03-17T09:03:32.653461Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -946,7 +946,7 @@ For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
     <ActivationTime>2014-03-17T00:19:30.07005Z</ActivationTime>
     <TriggerTime>2014-03-17T00:19:45.79043Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1154,7 +1154,7 @@ It can be used for "Sunrise/Sunset" feature.</Description>
     <ActivationTime>2014-03-03T01:09:28.269763Z</ActivationTime>
     <TriggerTime>2014-03-03T01:09:51.698315Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1921,7 +1921,7 @@ using (var connection = new GpioConnection(systembuzzer))
     <ActivationTime>2014-03-17T00:19:30.475555Z</ActivationTime>
     <TriggerTime>2014-03-17T00:19:51.259516Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -3134,7 +3134,7 @@ For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
     <ActivationTime>2014-03-17T00:19:30.959208Z</ActivationTime>
     <TriggerTime>2014-03-17T00:19:59.802357Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>

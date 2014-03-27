@@ -40,7 +40,7 @@
 	"configure_menu_maintenance": 
 		 "Maintenance and Updates",
 	"configure_automation_heading": 
-		 "Automation<br>Groups",
+		 "<font style='color:gray'>Automation</font><br>Groups",
 	"configure_group_newgroup": 
 		 "New Group",
 	"configure_group_entergroupname": 

@@ -32,6 +32,14 @@
         <Address>3</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>
       </ModuleReference>
+      <ModuleReference>
+        <Address>6</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>7</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
     </Modules>
   </Group>
 </ArrayOfGroup>
