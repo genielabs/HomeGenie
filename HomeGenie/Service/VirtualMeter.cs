@@ -36,7 +36,6 @@ namespace HomeGenie.Service
     public class VirtualMeter
     {
         private HomeGenieService homegenie;
-        private Thread meterThread;
         private bool isRunning = true;
         private int reportFrequency = 30000;
 
@@ -48,8 +47,7 @@ namespace HomeGenie.Service
 
         public void Start()
         {
-            meterThread = new Thread(virtualMeterTask);
-            meterThread.Start();
+			ThreadPool.QueueUserWorkItem(new WaitCallback(virtualMeterTask));
         }
 
         public void Stop()
@@ -57,12 +55,13 @@ namespace HomeGenie.Service
             isRunning = false;
         }
 
-        private void virtualMeterTask()
+		private void virtualMeterTask(object state)
         {
             while (isRunning)
             {
-                foreach (var module in homegenie.Modules)
+				for (int m = 0; m < homegenie.Modules.Count; m++)
                 {
+					var module = homegenie.Modules[m];
                     ModuleParameter parameter = null;
                     parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS; });
                     if (parameter == null)

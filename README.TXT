@@ -165,7 +165,8 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-26/03/2014 1.00 beta rev 352
+28/03/2014 1.00 beta rev 352
+  	- fixed "Collection Modified" error in VirtualMeter that was causing HG to stop
   	- removed locking in TsList collection (going to be replaced by standard List)
   	- removed unused OpenKinectLib
   	- Fixed errors in building HG solution under Xamarin Studio and Monodevelop
