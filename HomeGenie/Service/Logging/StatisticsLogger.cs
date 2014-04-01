@@ -98,7 +98,7 @@ namespace HomeGenie.Service.Logging
             string filter = "";
             if (domain != "" && address != "") filter = " where Domain ='" + domain + "' and Address = '" + address + "'";
             var parameterList = new List<string>();
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string query = "select distinct Parameter from ValuesHist" + filter;
@@ -117,7 +117,7 @@ namespace HomeGenie.Service.Logging
         {
             var start = DateTime.UtcNow;
             var end = DateTime.UtcNow;
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string query = "select min(TimeStart),max(TimeEnd) from ValuesHist";
@@ -144,7 +144,7 @@ namespace HomeGenie.Service.Logging
         public double GetTotalCounter(string parameterName, double timeScaleSeconds)
         {
             double value = 0;
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 // TODO: protect against sqlinjection ?
@@ -169,7 +169,7 @@ namespace HomeGenie.Service.Logging
         public List<StatisticsEntry> GetHourlyCounter(string domain, string address, string parameterName, double timescaleseconds)
         {
             var values = new List<StatisticsEntry>();
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
@@ -207,7 +207,7 @@ namespace HomeGenie.Service.Logging
         public List<StatisticsEntry> GetHourlyStats24(string domain, string address, string parameterName, string aggregator)
         {
             var values = new List<StatisticsEntry>();
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
@@ -248,7 +248,7 @@ namespace HomeGenie.Service.Logging
         public List<StatisticsEntry> GetTodayDetail(string domain, string address, string parameterName, string aggregator = "Avg")
         {
             var values = new List<StatisticsEntry>();
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
@@ -293,7 +293,7 @@ namespace HomeGenie.Service.Logging
         public List<StatisticsEntry> GetHourlyStats(string domain, string address, string parameterName, string aggregator)
         {
             var values = new List<StatisticsEntry>();
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
@@ -331,7 +331,7 @@ namespace HomeGenie.Service.Logging
         private bool OpenStatisticsDatabase()
         {
             bool success = false;
-            lock (dbLock)
+            //lock (dbLock)
             {
                 try
                 {
@@ -349,7 +349,7 @@ namespace HomeGenie.Service.Logging
 
         private void ResetStatisticsDatabase()
         {
-            lock (dbLock)
+            //lock (dbLock)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 dbCommand.CommandText = "DELETE FROM ValuesHist";
@@ -361,7 +361,7 @@ namespace HomeGenie.Service.Logging
 
         private void CloseStatisticsDatabase()
         {
-            lock (dbLock)
+            //lock (dbLock)
             {
                 dbConnection.Close();
             }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Group>
     <Name>Features</Name>
     <Modules />
@@ -21,11 +21,19 @@
     <Modules />
   </Group>
   <Group>
+    <Name>Weather and Enviroment</Name>
+    <Modules />
+  </Group>
+  <Group>
     <Name>Interconnections</Name>
     <Modules />
   </Group>
   <Group>
     <Name>Raspberry Sharp</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Contrib</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>

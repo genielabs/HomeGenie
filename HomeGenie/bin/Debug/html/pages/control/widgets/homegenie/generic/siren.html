@@ -7,7 +7,7 @@
     <p style="margin:0">
         <span data-ui-field="description" style="color:gray">loading...</span><br />
         <div data-ui-field="status" style="font-family:Monospace;font-size:12pt;color:green"></div>
-        <div data-ui-field="updatetime" style="position:absolute;right:50px;top:44%;bottom:55%;color:lightgray;font-size:8pt;font-weight:normal;"></div>
+        <div data-ui-field="updatetime" style="position:absolute;right:50px;top:32%;bottom:67%;color:gray;font-size:8pt;font-weight:normal;text-align:right"></div>
     </p>
 </a>
 <a data-ui-field="toggle" href="#" data-icon="refresh" data-corners="false" data-shadow="false" data-iconshadow="true" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px">Toggle</a>
@@ -42,8 +42,8 @@
         <div align="center">
             <br />
             <div data-role="controlgroup" data-type="horizontal">
-                <a data-locale-id="control_module_off" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.Off', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { HG.WebApp.Control.Refresh(); });">OFF</a>
-                <a data-locale-id="control_module_on" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.On', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { HG.WebApp.Control.Refresh(); });">ON</a>
+                <a data-locale-id="control_module_off" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.Off', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">OFF</a>
+                <a data-locale-id="control_module_on" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.On', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">ON</a>
             </div>
         </div>
 

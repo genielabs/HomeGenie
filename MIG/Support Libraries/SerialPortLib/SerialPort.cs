@@ -294,7 +294,6 @@ namespace SerialPortLib
                         while (messageQueue.Count > 0)
                         {
                             byte[] message = messageQueue.Dequeue();
-                            //lock (_writelock)
                             try
                             {
                                 if (Debug)
@@ -357,7 +356,13 @@ namespace SerialPortLib
                             }
                             if (MessageReceived != null)
                             {
-                                ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveMessage), message);
+                                //ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveMessage), message);
+                                Thread deliver = new Thread(() =>
+                                {
+                                    ReceiveMessage(message);
+                                });
+                                //deliver.Priority = ThreadPriority.AboveNormal;
+                                deliver.Start();
                             }
                         }
                         else

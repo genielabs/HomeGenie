@@ -42,12 +42,12 @@
             controlpopup.find('[data-ui-field=command_on]').on('click', function() {
                 if (_this.CurrentInstance == 0)
                 {
-                    HG.Control.Modules.ServiceCall('Control.On', module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
+                    HG.Control.Modules.ServiceCall('Control.On', module.Domain, module.Address, '', function (data) { });
                 }
                 else
                 {
-                    HG.Control.Modules.ServiceCall('MultiInstance.Set/Switch.Binary/' + _this.CurrentInstance + '/255', module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
-                    HG.Control.Modules.ServiceCall('MultiInstance.Get/Switch.Binary/' + _this.CurrentInstance, module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
+                    HG.Control.Modules.ServiceCall('MultiInstance.Set/Switch.Binary/' + _this.CurrentInstance + '/255', module.Domain, module.Address, '', function (data) { });
+                    HG.Control.Modules.ServiceCall('MultiInstance.Get/Switch.Binary/' + _this.CurrentInstance, module.Domain, module.Address, '', function (data) { });
                 }
             });
             //
@@ -58,8 +58,8 @@
                 }
                 else
                 {
-                    HG.Control.Modules.ServiceCall('MultiInstance.Set/Switch.Binary/' + _this.CurrentInstance + '/0', module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
-                    HG.Control.Modules.ServiceCall('MultiInstance.Get/Switch.Binary/' + _this.CurrentInstance, module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
+                    HG.Control.Modules.ServiceCall('MultiInstance.Set/Switch.Binary/' + _this.CurrentInstance + '/0', module.Domain, module.Address, '', function (data) { });
+                    HG.Control.Modules.ServiceCall('MultiInstance.Get/Switch.Binary/' + _this.CurrentInstance, module.Domain, module.Address, '', function (data) { });
                 }
             });
             //
@@ -105,7 +105,7 @@
             var updatetime = level.UpdateTime;
             updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.GetElapsedTimeText(d);
+            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             //
             level = this.GetLevel(level);
 		} else level = '';

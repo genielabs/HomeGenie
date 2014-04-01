@@ -47,7 +47,7 @@ namespace HomeGenie.Service
 
         public void Start()
         {
-			ThreadPool.QueueUserWorkItem(new WaitCallback(virtualMeterTask));
+            ThreadPool.QueueUserWorkItem(new WaitCallback(virtualMeterTask));
         }
 
         public void Stop()
@@ -55,13 +55,13 @@ namespace HomeGenie.Service
             isRunning = false;
         }
 
-		private void virtualMeterTask(object state)
+        private void virtualMeterTask(object state)
         {
             while (isRunning)
             {
-				for (int m = 0; m < homegenie.Modules.Count; m++)
+                for (int m = 0; m < homegenie.Modules.Count; m++)
                 {
-					var module = homegenie.Modules[m];
+                    var module = homegenie.Modules[m];
                     ModuleParameter parameter = null;
                     parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS; });
                     if (parameter == null)

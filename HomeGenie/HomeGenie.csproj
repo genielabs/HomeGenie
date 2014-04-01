@@ -11,8 +11,7 @@
     <RootNamespace>HomeGenie</RootNamespace>
     <AssemblyName>HomeGenie</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>0.84</ReleaseVersion>
-    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <ReleaseVersion>1.0 beta</ReleaseVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -130,9 +129,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UPnP">

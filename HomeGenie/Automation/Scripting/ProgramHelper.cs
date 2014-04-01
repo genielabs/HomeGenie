@@ -494,7 +494,7 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper Notify(string title, string message)
         {
-            homegenie.LogBroadcastEvent("HomeGenie.Automation", myProgramId.ToString(), "Automation Program", title, message);
+            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, myProgramId.ToString(), "Automation Program", title, message);
             return this;
         }
 

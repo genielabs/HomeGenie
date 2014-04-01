@@ -77,15 +77,11 @@ namespace HomeGenie.Service.Logging
         public void WriteToLog(LogEntry logEntry)
         {
             // Lock the queue while writing to prevent contention for the log file
-            lock (logQueue)
+            logQueue.Enqueue(logEntry);
+            // If we have reached the Queue Size then flush the Queue
+            if (logQueue.Count >= queueSize || DoPeriodicFlush())
             {
-                logQueue.Enqueue(logEntry);
-
-                // If we have reached the Queue Size then flush the Queue
-                if (logQueue.Count >= queueSize || DoPeriodicFlush())
-                {
-                    FlushLog();
-                }
+                FlushLog();
             }
         }
 

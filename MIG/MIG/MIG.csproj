@@ -11,7 +11,7 @@
     <RootNamespace>MIG</RootNamespace>
     <AssemblyName>MIG</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>0.9 beta</ReleaseVersion>
+    <ReleaseVersion>1.0 beta</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +35,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="LibUsbDotNet">
       <HintPath>..\Support Libraries\XTenLib\LibUsbDotNet.dll</HintPath>

@@ -143,7 +143,7 @@ HG.WebApp.Control.RenderGroupsCollapsibleItems = function ()
 	        if (i == 0) {
 	            HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
 	        }
-	        var el = $('#control_groupslist').append('<span id="group_load_info_' + i + '" style="z-index:100;position:absolute;right:50px;margin-top:14px;font-size:9pt;"></span><img id="group_load_icon_' + i + '" src="images/led-green-off.png" style="z-index:100;position:absolute;right:20px;margin-top:10px"><div data-role="collapsible" data-inset="false" id="groupdiv_' + i + '" data-collapsed="true" onclick="HG.WebApp.Data._CurrentGroup = \'' + HG.WebApp.Data.Groups[i].Name + '\'; HG.WebApp.Control.Refresh();"><h3>' + HG.WebApp.Data.Groups[i].Name + '</h3><ul id="groupdiv_modules_' + i + '" data-theme="c" data-content-theme="c" data-inset="false" /></div>');        
+	        var el = $('#control_groupslist').append('<span id="group_load_info_' + i + '" style="z-index:100;position:absolute;right:50px;margin-top:14px;font-size:9pt;"></span><img id="group_load_icon_' + i + '" src="images/led-green-off.png" style="z-index:100;position:absolute;right:20px;margin-top:10px"><div data-role="collapsible" data-inset="false" id="groupdiv_' + i + '" data-collapsed="true" onclick="HG.WebApp.Data._CurrentGroup = \'' + HG.WebApp.Data.Groups[i].Name + '\'; "><h3>' + HG.WebApp.Data.Groups[i].Name + '</h3><ul id="groupdiv_modules_' + i + '" data-theme="c" data-content-theme="c" data-inset="false" /></div>');        
 	    }
 	    //
 	    $('#control_groupslist a[data-role="button"]').button();
@@ -271,6 +271,27 @@ HG.WebApp.Control.RenderModule = function () {
 
 	};
 
+HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
+    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+        for (var m = 0; m < groupmodules.Modules.length; m++) {
+            var module = groupmodules.Modules[m];
+            if (module.Domain == domain && module.Address == address) {
+                var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + module.Domain.substring(module.Domain.lastIndexOf('.') + 1) + '_' + module.Address.replace('.', '_'));
+                var cuid = '#' + uid;
+                var modui = $(cuid);
+                var type = module.DeviceType + ''; type = type.toLowerCase();
+                if (modui.length != 0) {
+                    if (modui.data('homegenie.widget')) {
+                        module.WidgetInstance = modui.data('homegenie.widget');
+                        module.WidgetInstance.RenderView(cuid, module);
+                    }
+                }
+            }
+        }
+    }
+};
+
 var rendermodulesdelay = null;
 var rendermodulesbusy = false;
 HG.WebApp.Control.RenderGroupModules = function () {
@@ -370,7 +391,7 @@ HG.WebApp.Control.LoadGroups = function ()
 //
 HG.WebApp.Control.ModuleSetLevel = function (pv)
 	{
-        HG.Control.Modules.ServiceCall('Control.Level', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, pv, function (data) { HG.WebApp.Control.Refresh(); });
+        HG.Control.Modules.ServiceCall('Control.Level', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, pv, function (data) { });
 	};
 //
 HG.WebApp.Control.GroupLightsOn = function (group)
@@ -384,5 +405,5 @@ HG.WebApp.Control.GroupLightsOff = function (group)
 	};
 
 HG.WebApp.Control.Toggle = function (domain, address) {
-    HG.Control.Modules.ServiceCall('Control.Toggle', domain, address, '', function (data) { HG.WebApp.Control.Refresh(); });
+    HG.Control.Modules.ServiceCall('Control.Toggle', domain, address, '', function (data) { });
 };

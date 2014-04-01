@@ -116,6 +116,10 @@ namespace HomeGenie.Service.Handlers
                         migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Get(migCommand.GetOption(0)));
                         break;
                     case "Scheduling.List":
+                        homegenie.ProgramEngine.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
+                        {
+                            return s1.Name.CompareTo(s2.Name);
+                        });
                         migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Items);
                         break;
                 }
@@ -236,6 +240,8 @@ namespace HomeGenie.Service.Handlers
                         if (migCommand.Command == "Programs.Compile")
                         {
                             // reset previous error status
+                            currentProgram.IsEnabled = false;
+                            currentProgram.Stop();
                             currentProgram.ScriptErrors = "";
                             //
                             if (currentProgram.Type.ToLower() == "csharp")
@@ -270,10 +276,10 @@ namespace HomeGenie.Service.Handlers
                                     }
                                 }
                                 //
-                                currentProgram.IsEnabled = newProgram.IsEnabled;
-                                //
                                 migCommand.Response = currentProgram.ScriptErrors;
                             }
+                            //
+                            currentProgram.IsEnabled = newProgram.IsEnabled;
                         }
 
                         homegenie.UpdateProgramsDatabase();

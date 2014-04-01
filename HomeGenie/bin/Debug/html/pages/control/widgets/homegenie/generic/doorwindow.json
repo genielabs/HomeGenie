@@ -39,7 +39,7 @@
             var updatetime = dwstate.UpdateTime;
             updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.GetElapsedTimeText(d);
+            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             doorstate = dwstate.Value;
         }
         else if (generic != null && (level == null || generic.UpdateTime >= level.UpdateTime))
@@ -47,7 +47,7 @@
             var updatetime = generic.UpdateTime;
             updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.GetElapsedTimeText(d);
+            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             doorstate = generic.Value;
         }
         else if (level != null)

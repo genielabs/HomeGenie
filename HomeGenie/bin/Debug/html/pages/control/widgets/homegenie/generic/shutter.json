@@ -50,7 +50,7 @@
             var updatetime = status.UpdateTime;
             updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.GetElapsedTimeText(d);
+            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             //
             if (status.Value != '0') 
             {

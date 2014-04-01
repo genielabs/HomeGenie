@@ -701,10 +701,22 @@ namespace HomeGenie.Service.Handlers
                     }
                     break;
 
+                case "Modules.Get":
+                    try
+                    {
+                        var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                        migCommand.Response = Utility.Module2Json(module, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    }
+                    break;
+
                 case "Modules.List":
                     try
                     {
-                        //_modules_sort();
+                        homegenie.modules_Sort();
                         migCommand.Response = homegenie.GetJsonSerializedModules(migCommand.GetOption(0).ToLower() == "short");
                     }
                     catch (Exception ex)

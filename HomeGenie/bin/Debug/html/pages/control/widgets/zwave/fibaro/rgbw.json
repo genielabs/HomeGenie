@@ -55,51 +55,51 @@
 				//
 				if (level != "0")
 				{
-					HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { HG.WebApp.Control.Refresh(); });
+					HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
 					HG.WebApp.Utility.SetModulePropertyByName(module, "Status.Level", "0");
 				}
 				else
 				{
-					HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { HG.WebApp.Control.Refresh(); });
+					HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
 					HG.WebApp.Utility.SetModulePropertyByName(module, "Status.Level", "1");
 				}
 			});			
 			//
 			controlpopup.find('[data-ui-field=on]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
 			});
 			controlpopup.find('[data-ui-field=off]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg1]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "1", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "1", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg2]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "2", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "2", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg3]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "3", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "3", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg4]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "4", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "4", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg5]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "5", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "5", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg6]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "6", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "6", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg7]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "7", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "7", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg8]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "8", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "8", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg9]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "9", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "9", function (data) { });
 			});
 			controlpopup.find('[data-ui-field=prg10]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "10", function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "10", function (data) { });
 			});
 			//
 			this.ColorWheel = Raphael.colorwheel(controlpopup.find('[data-ui-field=colors]'), 200, 80);
@@ -114,7 +114,7 @@
 				var blue = color.b;
 				var srgbcolor = red + "," + green + "," + blue ;
 				//
-				HG.Control.Modules.ServiceCall("Control.ColorHsb", "HomeAutomation.FibaroRGBW", module.Address, srgbcolor, function (data) { HG.WebApp.Control.Refresh(); });
+				HG.Control.Modules.ServiceCall("Control.ColorHsb", "HomeAutomation.FibaroRGBW", module.Address, srgbcolor, function (data) { });
 			});
 		}
 		//
@@ -142,7 +142,7 @@
             var updatetime = level.UpdateTime;
             updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.GetElapsedTimeText(d);
+            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             //
 			level = level.Value.replace(',', '.') * 100;
         	if (level >= 99 || level == 0)

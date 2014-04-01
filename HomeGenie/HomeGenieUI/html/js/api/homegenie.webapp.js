@@ -35,9 +35,9 @@ HG.WebApp.InitializePage = function ()
 	HG.Configure.LoadData();
     //
     window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
-    window.setInterval('HG.WebApp.Home.LoggingPoll();', 5000);
+    //window.setInterval('HG.WebApp.Home.LoggingPoll();', 5000);
     //
-    HG.WebApp.SystemSettings.CheckConfigureStatus();
+    //HG.WebApp.SystemSettings.CheckConfigureStatus();
 	//
 	// page open - init stuff
 	//
@@ -52,18 +52,22 @@ HG.WebApp.InitializePage = function ()
     {
 		setTheme(uitheme);
         //
-        if (this.id == "page_control" && HG.WebApp.Control._RefreshIntervalObject == null) 
+        if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
         {
             // init "Control" page
 	        HG.Automation.Programs.List(function () {
-	            if ($('#control_groupslist').children().length == 0) 
+	            //if ($('#control_groupslist').children().length == 0) 
 	            {
 				    $.mobile.showPageLoadingMsg();
 				    HG.Configure.Groups.List('Control', function () 
 				    {
-				        HG.WebApp.Control.RenderGroupsCollapsibleItems();
-			            HG.WebApp.Control.Refresh();
-			            HG.WebApp.Control.SetAutoRefresh( true );
+				        if ($('#control_groupslist').children().length == 0) 
+				        {
+				            HG.WebApp.Control.RenderGroupsCollapsibleItems();
+				        }
+				        HG.WebApp.Control._RefreshFn();
+			            //HG.WebApp.Control.Refresh();
+			            // HG.WebApp.Control.SetAutoRefresh( true );
 				    });    
 	            }
 	        });
@@ -78,7 +82,7 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == "page_home")
         {
-            HG.WebApp.SystemSettings.CheckConfigureStatus();
+            //HG.WebApp.SystemSettings.CheckConfigureStatus();
         }
         else if (this.id == "page_analyze") 
         {
@@ -246,204 +250,242 @@ HG.WebApp.InitializePage = function ()
 HG.WebApp.Home = HG.WebApp.Home || {};
 HG.WebApp.Home.UpdateHeaderStatus = function()
 {
-//    HG.Statistics.Global.GetWattsCounter(function (data) {
-//        HG.WebApp.Home.FxAnimateNumber('[id=watts_hour]', parseFloat(data.replace(',', '.')) / 1000);
-		HG.WebApp.Home.UpdateInterfacesStatus();
-//    });
+	HG.WebApp.Home.UpdateInterfacesStatus();
+};
+//
+HG.WebApp.Home.PopupEvent = function(eventLog)
+{
+    var module = HG.WebApp.Utility.GetModuleByDomainAddress(eventLog.Domain, eventLog.Source);
+    if (module != null)
+    {
+        var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, eventLog.Property);
+        // discard dupes if event is not a automation program event
+        if (module.Domain != 'HomeAutomation.HomeGenie.Automation' && curprop !== null && curprop.Value == eventLog.Value) return; 
+        // when event is an automation program event, we update the whole module
+        if (module.Domain == 'HomeAutomation.HomeGenie.Automation')
+        {
+            HG.Configure.Modules.Get(module.Domain, module.Address, function (data) {
+                try
+                {
+                    var mod = eval('[' + data + ']')[0];
+                    var idx = HG.WebApp.Utility.GetModuleIndexByDomainAddress(mod.Domain, mod.Address);
+                    HG.WebApp.Data.Modules[idx] = mod;
+                    HG.WebApp.Control.UpdateModuleWidget(mod.Domain, mod.Address);
+                } catch (e) { }
+            });
+        }
+        else
+        {
+            // update just current event property 
+            HG.WebApp.Utility.SetModulePropertyByName(module, eventLog.Property, eventLog.Value, eventLog.Timestamp);
+            HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
+        }
+    }
+    //
+	var ts = -1;
+	var now = new Date();
+    var s = '';
+    //
+    if (eventLog.UnixTimestamp >= HG.WebApp.Data.LoggingFrom)
+    {
+        //
+        if (ts == -1) ts = eventLog.UnixTimestamp;
+        switch (eventLog.Domain)
+    	{
+            case 'HomeGenie.System':
+                if (eventLog.Value == 'STARTED')
+                {
+                    $('#configure_system_updateinstall_status').html('Update install complete. HomeGenie started.');
+                    setTimeout(function(){
+                        document.location.href = '/';
+                    }, 3000);
+                }
+            case 'HomeGenie.UpdateChecker':
+                $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
+            case 'HomeGenie.Automation':
+        	case 'HomeAutomation.HomeGenie.Automation':
+        		if (eventLog.Property != 'Meter.Watts')
+        		{
+	            	//
+        			//var icon = '<img src="' + configurepage_GetModuleIcon(module, null) + '" width="48" height="48">';
+	            	//s += '<table><tr><td>';
+	            	//s += icon;
+	            	//s += '</td><td valign="top">';
+	            	//s += '' + eventLog.Property + '<br>' + eventLog.Value + '<br>';
+        		    //s += '</tr></table>';
+                    var iconImage = configurepage_GetModuleIcon(module, null);
+                    $('#content').notify("create", "notifypopup", {
+                        icon: iconImage,
+                        title: eventLog.Property,
+                        text: eventLog.Value,
+                    });
+        		}
+        	break;
+        	default:
+        		//var module = HG.WebApp.Utility.GetModuleByDomainAddress(eventLog.Domain, eventLog.Source);
+        		if (module != null && eventLog.Property != 'Meter.Watts')
+        		{
+                    //var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, eventLog.Property);
+                    //if (curprop !== null && curprop.Value == eventLog.Value) break; // discard dupes
+                    //
+        			// update current module prop
+	            	//HG.WebApp.Utility.SetModulePropertyByName(module, eventLog.Property, eventLog.Value);
+	            	//
+        			var iconImage = configurepage_GetModuleIcon(module, null);
+            		if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '')
+            		{
+            			iconImage = 'images/remote.png';
+            			$('#content').notify("create", "notifypopup", {
+            			    icon: iconImage,
+            			    title: module.Address + ' ' + eventLog.Property,
+            			    text: eventLog.Value,
+            			});
+                        //
+                        //$('#comparison_value_input').val(eventLog.Value);
+            		}
+            		else if (eventLog.Property.substring(0, 7) == 'Sensor.')
+            		{
+		            	var group = HG.WebApp.GroupsList.GetModuleGroup(module);
+		            	if (group != null) group = group.Name;
+		            	var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
+		            	var logdate = new Date(eventLog.UnixTimestamp);
+		            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
+		            	var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
+		            	//
+		            	switch (propname)
+		            	{
+		            	case 'Temperature':
+	            			iconImage = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+	            			break;
+		            	case 'Luminance':
+	            			iconImage = 'pages/control/widgets/homegenie/generic/images/luminance.png';
+	            			break;
+		            	default:
+	            			iconImage = 'pages/control/widgets/homegenie/generic/images/sensor.png';
+	            			break;
+		            	}
+		            	//
+		            	if (module.Name != '') name = module.Name;
+		            	if (group == null) group = '';
+		            	//
+		            	$('#content').notify("create", "notifypopup", {
+		            	    icon: iconImage,
+		            	    title: '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname,
+		            	    text: parseFloat(eventLog.Value.replace(',', '.')).toFixed(2)
+		            	});
+		            	//s += '<table width="100%"><tr><td width="48" rowspan="2">';
+		            	//s += icon;
+		            	//s += '</td><td valign="top" align="left">';
+		            	//s += '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname;
+		            	//s += '</td><td align="right" style="color:lime;font-size:12pt">' + parseFloat(eventLog.Value.replace(',', '.')).toFixed(2) + '</td></tr>';
+            			//s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
+            			//s += '</td></tr></table>';
+            			
+            		}
+		            else if (eventLog.Property.substring(0, 7) == 'Status.')
+		            {
+		            	var group = HG.WebApp.GroupsList.GetModuleGroup(module);
+		            	if (group != null) group = group.Name;
+		            	var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
+		            	var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
+		            	var value = (parseFloat(eventLog.Value.replace(',', '.')));
+                        if (propname == 'Level')
+                        {
+                            value = value * 100;
+                            if (value > 98) value = 100;
+                        }
+                        value += '%'; 
+		            	var logdate = new Date(eventLog.UnixTimestamp);
+		            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
+		            	//
+		            	if (module.Name != '') name = module.Name;
+		            	if (group == null) group = '';
+		            	//
+		            	$('#content').notify("create", "notifypopup", {
+		            	    icon: iconImage,
+		            	    title: '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b>',
+		            	    text: propname + ' ' + value
+		            	});
+                        //
+		            	//s += '<table width="100%"><tr><td width="48" rowspan="2">';
+		            	//s += icon;
+		            	//s += '</td><td valign="top" align="left">';
+		            	//s += '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b>';
+		            	//s += '</td><td align="right" style="color:lime;font-size:12pt">' + propname + ' ' + value + '</td></tr>';
+            			//s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
+            			//s += '</td></tr></table>';
+		        	}
+                    //
+                    if (HG.WebApp.ProgramEdit._IsCapturingConditions && eventLog.Value != '')
+                    {
+                        var conditionobj = { 
+                            'Domain' : module.Domain, 
+                            'Target' : module.Address,
+                            'Property' : eventLog.Property, 
+                            'ComparisonOperator' : 'Equals', 
+                            'ComparisonValue' : eventLog.Value
+                        };
+                        HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push( conditionobj );
+                        automationpage_ConditionsRefresh();                                        
+                    }
+                    else if (HG.WebApp.ProgramEdit._IsCapturingCommands && eventLog.Value != '')
+                    {
+                        var command = HG.WebApp.Utility.GetCommandFromEvent(module, eventLog);
+                        if (command != null)
+                        {
+                            HG.WebApp.ProgramEdit._CurrentProgram.Commands.push( command );
+                            automationpage_CommandsRefresh();
+                        }
+                    }
+	        	}
+	        	else
+	        	{
+	        		if (eventLog.Domain == 'Protocols.AirPlay' && eventLog.Property == 'PlayControl.DisplayImage')
+	        		{
+		            	var logdate = new Date(eventLog.UnixTimestamp);
+		            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
+		            	
+		            	s += '<table width="100%"><tr><td width="48" rowspan="2">';
+		            	s += '<a _href="#dialog_netplay_show_popup" -data-rel="popup"><img src="images/playcontrol.png" width="48" height="48"></a>';
+		            	s += '</td><td valign="top" align="left">';
+		            	s += '<span style="color:gray;font-size:8pt;">AirPlay Service</span><br><b>Remote image display reuqest</b>';
+		            	s += '</td><td align="right" style="color:lime;font-size:12pt">    </td></tr>';
+            			s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
+            			s += '</td></tr></table>';
+
+						var displayid = eventLog.Value;
+						var cts = eventLog.UnixTimestamp;
+						
+						HG.WebApp.Apps.NetPlay.SlideShow.DisplayImage(displayid, cts);
+
+	        		}
+	        	}
+        	break;
+        }
+    }
+    //
+    if (s != '')
+    {
+        var delay = 1000;
+        try { delay = eventLog.UnixTimestamp - ts; } catch (e) { }
+        HG.WebApp.Home.ShowEventPopup( s, delay + 500 );
+    	popupopen = true;
+    }
+    //
+    try { HG.WebApp.Data.LoggingFrom = eventLog.UnixTimestamp; } catch (e) { }
 };
 //
 HG.WebApp.Home.LoggingPoll = function()
 {
-//TODO: put all the html code in js in separate html files!!
-	var ts = -1;
-	var now = new Date();
 //    HG.WebApp.Data.LoggingFrom = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds()));
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Logging/Recent.Last/5000/' + (new Date().getTime()), function (data) {
 //    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Logging/Recent.From/' + ts + '/' + (new Date().getTime()), function (data) {
-        //
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Logging/Recent.Last/5000/' + (new Date().getTime()), function (data) {
         var logs = eval(arguments[2].responseText);
-        //
         if ( logs && typeof logs != 'undefined')
         {
         	var popupopen = false;
 	        for (var i = 0; i < logs.length; i++) {
-	            var s = '';
-	            //
-	            if (logs[i].UnixTimestamp >= HG.WebApp.Data.LoggingFrom)
-	            {
-	            	if (ts == -1) ts = logs[i].UnixTimestamp;
-		            switch (logs[i].Domain)
-	            	{
-		                case 'HomeGenie.System':
-		                    if (logs[i].Value == 'STARTED')
-		                    {
-		                        $('#configure_system_updateinstall_status').html('Update install complete. HomeGenie started.');
-		                        setTimeout(function(){
-		                            document.location.href = '/';
-		                        }, 3000);
-		                    }
-		                case 'HomeGenie.UpdateChecker':
-		                    $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + logs[i].Property + '</strong><br/>&nbsp;&nbsp;' + logs[i].Value + '<br/>');
-		                case 'HomeGenie.Automation':
-		            	case 'HomeAutomation.HomeGenie.Automation':
-		            		if (logs[i].Property != 'Meter.Watts')
-		            		{
-		            		    var module = HG.WebApp.Utility.GetModuleByDomainAddress(logs[i].Domain, logs[i].Source);
-                                if (module != null)
-                                {
-    		            			// update current module prop
-	    			            	HG.WebApp.Utility.SetModulePropertyByName(module, logs[i].Property, logs[i].Value);
-                                }
-				            	//
-		            			var icon = '<img src="' + configurepage_GetModuleIcon(module, null) + '" width="48" height="48">';
-				            	s += '<table><tr><td>';
-				            	s += icon;
-				            	s += '</td><td valign="top">';
-				            	s += '' + logs[i].Property + '<br>' + logs[i].Value + '<br>';
-		            			s += '</tr></table>';
-		            		}
-		            	break;
-		            	default:
-		            		var module = HG.WebApp.Utility.GetModuleByDomainAddress(logs[i].Domain, logs[i].Source);
-		            		if (module != null && logs[i].Property != 'Meter.Watts')
-		            		{
-                                var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, logs[i].Property);
-                                if (curprop !== null && curprop.Value == logs[i].Value) break; // discard dupes
-                                //
-		            			// update current module prop
-				            	HG.WebApp.Utility.SetModulePropertyByName(module, logs[i].Property, logs[i].Value);
-				            	//
-		            			var icon = '<img src="' + configurepage_GetModuleIcon(module, null) + '" width="48" height="48">';
-			            		if ((module.Address == 'RF' || module.Address == 'IR') && logs[i].Value != '')
-			            		{
-			            			icon = '<img src="images/remote.png" width="48" height="48">';
-					            	s += '<table><tr><td>';
-					            	s += icon;
-					            	s += '</td><td valign="top">';
-					            	s += module.Address + ' ' + logs[i].Property + '<br>' + logs[i].Value + '<br>';
-			            			s += '</tr></table>';
-                                    //
-                                    //$('#comparison_value_input').val(logs[i].Value);
-			            		}
-			            		else if (logs[i].Property.substring(0, 7) == 'Sensor.')
-			            		{
-					            	var group = HG.WebApp.GroupsList.GetModuleGroup(module);
-					            	if (group != null) group = group.Name;
-					            	var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
-					            	var logdate = new Date(logs[i].UnixTimestamp);
-					            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
-					            	var propname = logs[i].Property.substring(logs[i].Property.indexOf('.') + 1);
-					            	//
-					            	switch (propname)
-					            	{
-					            	case 'Temperature':
-				            			icon = '<img src="pages/control/widgets/homegenie/generic/images/temperature.png" width="48" height="48">';
-				            			break;
-					            	case 'Luminance':
-				            			icon = '<img src="pages/control/widgets/homegenie/generic/images/luminance.png" width="48" height="48">';
-				            			break;
-					            	default:
-				            			icon = '<img src="pages/control/widgets/homegenie/generic/images/sensor.png" width="48" height="48">';
-				            			break;
-					            	}
-					            	//
-					            	if (module.Name != '') name = module.Name;
-					            	if (group == null) group = '';
-					            	//
-					            	s += '<table width="100%"><tr><td width="48" rowspan="2">';
-					            	s += icon;
-					            	s += '</td><td valign="top" align="left">';
-					            	s += '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname;
-					            	s += '</td><td align="right" style="color:lime;font-size:12pt">' + parseFloat(logs[i].Value.replace(',', '.')).toFixed(2) + '</td></tr>';
-			            			s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
-			            			s += '</td></tr></table>';
-			            			
-			            		}
-					            else if (logs[i].Property.substring(0, 7) == 'Status.')
-					            {
-					            	var group = HG.WebApp.GroupsList.GetModuleGroup(module);
-					            	if (group != null) group = group.Name;
-					            	var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
-					            	var propname = logs[i].Property.substring(logs[i].Property.indexOf('.') + 1);
-					            	var value = (parseFloat(logs[i].Value.replace(',', '.')));
-                                    if (propname == 'Level')
-                                    {
-                                        value = value * 100;
-                                        if (value > 98) value = 100;
-                                    }
-                                    value += '%'; 
-					            	var logdate = new Date(logs[i].UnixTimestamp);
-					            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
-					            	//
-					            	if (module.Name != '') name = module.Name;
-					            	if (group == null) group = '';
-					            	//
-					            	s += '<table width="100%"><tr><td width="48" rowspan="2">';
-					            	s += icon;
-					            	s += '</td><td valign="top" align="left">';
-					            	s += '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b>';
-					            	s += '</td><td align="right" style="color:lime;font-size:12pt">' + propname + ' ' + value + '</td></tr>';
-			            			s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
-			            			s += '</td></tr></table>';
-					        	}
-                                //
-                                if (HG.WebApp.ProgramEdit._IsCapturingConditions && logs[i].Value != '')
-                                {
-		                            var conditionobj = { 
-			                            'Domain' : module.Domain, 
-			                            'Target' : module.Address,
-			                            'Property' : logs[i].Property, 
-			                            'ComparisonOperator' : 'Equals', 
-			                            'ComparisonValue' : logs[i].Value
-		                            };
-		                            HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push( conditionobj );
-		                            automationpage_ConditionsRefresh();                                        
-                                }
-                                else if (HG.WebApp.ProgramEdit._IsCapturingCommands && logs[i].Value != '')
-                                {
-                                    var command = HG.WebApp.Utility.GetCommandFromEvent(module, logs[i]);
-                                    if (command != null)
-                                    {
-                                        HG.WebApp.ProgramEdit._CurrentProgram.Commands.push( command );
-                                        automationpage_CommandsRefresh();
-                                    }
-                                }
-				        	}
-				        	else
-				        	{
-				        		if (logs[i].Domain == 'Protocols.AirPlay' && logs[i].Property == 'PlayControl.DisplayImage')
-				        		{
-					            	var logdate = new Date(logs[i].UnixTimestamp);
-					            	var date = HG.WebApp.Utility.FormatDateTime(logdate);
-					            	
-					            	s += '<table width="100%"><tr><td width="48" rowspan="2">';
-					            	s += '<a _href="#dialog_netplay_show_popup" -data-rel="popup"><img src="images/playcontrol.png" width="48" height="48"></a>';
-					            	s += '</td><td valign="top" align="left">';
-					            	s += '<span style="color:gray;font-size:8pt;">AirPlay Service</span><br><b>Remote image display reuqest</b>';
-					            	s += '</td><td align="right" style="color:lime;font-size:12pt">    </td></tr>';
-			            			s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
-			            			s += '</td></tr></table>';
-
-									var displayid = logs[i].Value;
-									var cts = logs[i].UnixTimestamp;
-									
-									HG.WebApp.Apps.NetPlay.SlideShow.DisplayImage(displayid, cts);
-    		
-				        		}
-				        	}
-		            	break;
-		            }
-	            }
-	            //
-	            if (s != '')
-	            {
-			        var delay = 1000;
-                    try { delay = logs[i].UnixTimestamp - ts; } catch (e) { }
-			        HG.WebApp.Home.ShowEventPopup( s, delay + 500 );
-	            	popupopen = true;
-	            }
-	            //
-	            try { HG.WebApp.Data.LoggingFrom = logs[i].UnixTimestamp; } catch (e) { }
+				HG.WebApp.Home.PopupEvent(logs[i]);
 	        }
 	        if (!popupopen) HG.WebApp.Home.ShowEventPopup( '' );
         }
@@ -452,7 +494,6 @@ HG.WebApp.Home.LoggingPoll = function()
 	        HG.WebApp.Home.ShowEventPopup( '' );
             alert(arguments[2].responseText);
         }
-        
     });	
 };
 //
@@ -589,13 +630,17 @@ HG.WebApp.Utility.GetModulePropertyByName = function (module, prop) {
     }
     return value;
 };
-HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value) {
+HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, timestamp) {
     var found = false;
     if (module.Properties != null) {
         for (var p = 0; p < module.Properties.length; p++) {
             if (module.Properties[p].Name == prop) {
                 module.Properties[p].LastValue = module.Properties[p].Value;
                 module.Properties[p].Value = value;
+                if (typeof timestamp != 'undefined')
+                {
+                    module.Properties[p].UpdateTime = timestamp;
+                }
                 found = true;
                 break;
             }
@@ -656,13 +701,18 @@ HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
     return commandobj;
 };
 
+HG.WebApp.Utility.FormatDate = function (date)
+{
+    var dt = $.datepicker.formatDate('D, dd/mm/yy', date);
+    return dt; 
+};
+
 HG.WebApp.Utility.FormatDateTime = function (date)
 {
-	var dt = $.datepicker.formatDate('DD dd/mm/yy', date) + ' ';
 	var hh = date.getHours().toString(); if (hh.length == 1) hh = '0' + hh;
 	var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
 	var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
-	dt = hh + ':' + mm + ':' + ss; // + '.' + date.getMilliseconds();
+	var dt = hh + ':' + mm + ':' + ss; // + '.' + date.getMilliseconds();
 	return dt; 
 };
 	

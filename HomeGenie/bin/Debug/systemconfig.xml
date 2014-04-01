@@ -6,7 +6,7 @@
         <Name>Messaging.Email.Sender</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-02-23T17:10:39.9186575Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:21:59.1127605Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T19:44:43.926698Z</LastUpdateTime>
@@ -15,7 +15,7 @@
         <Name>Messaging.Email.SmtpServer</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-02-23T17:10:39.9186575Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:21:59.1127605Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T19:44:54.129667Z</LastUpdateTime>
@@ -24,7 +24,7 @@
         <Name>Messaging.Email.SmtpUserName</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-02-23T17:10:39.9186575Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:21:59.1127605Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T19:45:15.149807Z</LastUpdateTime>
@@ -33,7 +33,7 @@
         <Name>Messaging.Email.SmtpPassword</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-02-23T17:10:39.9186575Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:21:59.1127605Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T19:45:36.203948Z</LastUpdateTime>
@@ -67,27 +67,28 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpPort</Name>
-        <Value />
+        <Value>eJbaQytfgHp7xJPm8Z/eJA==</Value>
         <Description />
-        <UpdateTime>2014-02-23T17:10:42.6388849Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:22:03.7701093Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-23T17:10:39.9186575Z</LastUpdateTime>
+        <LastValue>eJbaQytfgHp7xJPm8Z/eJA==</LastValue>
+        <LastUpdateTime>2014-04-01T11:21:59.1127605Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpUseSsl</Name>
-        <Value />
+        <Value>0FQhG1EsSLkRkn9SBGrHmw==</Value>
         <Description />
-        <UpdateTime>2014-02-23T17:10:42.6398856Z</UpdateTime>
+        <UpdateTime>2014-04-01T11:22:03.7711086Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-23T17:10:39.9186575Z</LastUpdateTime>
+        <LastValue>0FQhG1EsSLkRkn9SBGrHmw==</LastValue>
+        <LastUpdateTime>2014-04-01T11:21:59.1127605Z</LastUpdateTime>
       </ModuleParameter>
     </Settings>
     <SystemName>HAL</SystemName>
     <Location />
     <ServicePort>80</ServicePort>
     <UserPassword />
+    <GUID>e4caac62-1729-4fd5-b007-981890ecf040</GUID>
     <EnableLogFile>false</EnableLogFile>
   </HomeGenie>
   <MIGService>
@@ -114,7 +115,7 @@
       <Interface Domain="Media.CameraInput" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="Protocols.UPnP" IsEnabled="true">
+      <Interface Domain="Protocols.UPnP" IsEnabled="false">
         <Options />
       </Interface>
       <Interface Domain="EmbeddedSystems.RaspiGPIO" IsEnabled="false">

@@ -18,7 +18,7 @@
             widget.find('[data-ui-field=armdisarm]').slider().slider('refresh');
             widget.find('[data-ui-field=armdisarm]').on('change', function()
             {
-                HG.Control.Modules.ServiceCall('Control.' + ($(this).val() == 'on' ? 'On' : 'Off'), module.Domain, module.Address, '', function (data) { HG.WebApp.Control.Refresh(); });
+                HG.Control.Modules.ServiceCall('Control.' + ($(this).val() == 'on' ? 'On' : 'Off'), module.Domain, module.Address, '', function (data) { });
             });
             this.Initialized = true;
         }

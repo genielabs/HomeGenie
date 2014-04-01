@@ -240,6 +240,9 @@
     <None Include="html\control\bs3\widgets\sensor.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\css\ui.notify.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\ext\zwave\pepper1db\0000_0000_0000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1192,6 +1195,10 @@
     <Content Include="html\images\scheduler.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="html\js\eventsource.js" />
+    <Content Include="html\js\jquery.notify.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\pages\configure\scheduler\main.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1303,6 +1310,12 @@
     <None Include="html\pages\control\widgets\homegenie\generic\colorlight.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\locales\de.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\suncalc.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="html\pages\control\widgets\weather\earthtools\sundata.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2401,6 +2414,48 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\pages\control\widgets\homegenie\generic\colorlight.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Day.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.Astronomical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.Civil.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.GoldenHour.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.Nautical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.Night.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Evening.Sunset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Morning.Astronomical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Morning.Civil.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Morning.GoldenHour.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Morning.Nautical.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\Morning.Sunrise.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\images\SunCalcDashboard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\jkUtils\suncalc\suncalc.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\pages\control\widgets\weather\earthtools\images\earthtools.png">

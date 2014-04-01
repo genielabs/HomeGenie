@@ -165,6 +165,16 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+01/04/2014 1.00 beta rev 357
+	- UI: added jkUtils SunCalc widget (contributed by Jan)
+	- UI: new stacked events popup
+	- UI: added real time events via persistent http connection using EventSource
+	- UI: deprecated event and modules polling
+	- UPnP interface is now disabled on factory settings due to suspect UPnP library instability
+	- Updated Jint engine library to 2.1.0
+	- added RealTime.EventStream api call to Logging handler
+	- SerialPortLib: wrapped MessageReceived event in an high priority thread (perhaps solving rpi general hang issues?)
+
 28/03/2014 1.00 beta rev 352
   	- fixed "Collection Modified" error in VirtualMeter that was causing HG to stop
   	- removed locking in TsList collection (going to be replaced by standard List)

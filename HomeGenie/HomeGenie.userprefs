@@ -1,11 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\README.TXT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Service\HomeGenieService.cs">
     <Files>
-      <File FileName="..\README.TXT" Line="156" Column="20" />
+      <File FileName="..\README.TXT" Line="1" Column="1" />
       <File FileName="release_info.xml" Line="1" Column="1" />
-      <File FileName="Service\VirtualMeter.cs" Line="36" Column="30" />
-      <File FileName="Automation\ProgramEngine.cs" Line="335" Column="96" />
+      <File FileName="Service\VirtualMeter.cs" Line="1" Column="1" />
+      <File FileName="Automation\ProgramEngine.cs" Line="1" Column="1" />
+      <File FileName="Service\Handlers\Logging.cs" Line="1" Column="1" />
+      <File FileName="..\MIG\MIG\MIGService.cs" Line="1" Column="1" />
+      <File FileName="..\MIG\MIG\Gateways\WebServiceUtility.cs" Line="1" Column="1" />
+      <File FileName="..\MIG\MIG\Gateways\WebServiceGateway.cs" Line="1" Column="1" />
+      <File FileName="HomeGenieUI\html\js\api\homegenie.webapp.js" Line="1" Column="1" />
+      <File FileName="Service\HomeGenieService.cs" Line="1538" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -16,5 +22,5 @@
     <Watch file="..\MIG\MIG\Gateways\WebServiceGateway.cs" line="82" offsetX="798" offsetY="1458" expression="httpRequest" liveUpdate="False" />
     <Watch file="..\MIG\MIG\MIGService.cs" line="105" offsetX="611" offsetY="1600" expression="type" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <AuthorInfo Name="Generoso Martello" Email="generoso@martello.com" Copyright="2011-2013 Generoso Martello" Company="GenieLabs" Trademark="" />
+  <AuthorInfo Name="Generoso Martello" Email="gene@homegenie.it" Copyright="2011-2014 G-Labs" Company="G-Labs" Trademark="" />
 </Properties>

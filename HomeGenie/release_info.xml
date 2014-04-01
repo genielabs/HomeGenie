@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r352</Version>
+  <Version>1.00 beta r357</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - removed locking in TsList collection (going to be replaced by standard List)
-  - removed unused OpenKinectLib
-  - Fixed errors in building HG solution under Xamarin Studio and Monodevelop</ReleaseNote>
-  <ReleaseDate>2014-03-26T22:25:02.0000Z</ReleaseDate>
+  <ReleaseNote>  - UI: added jkUtils SunCalc widget (contributed by Jan)
+  - UI: new stacked events popup
+  - UI: added real time events via persistent http connection using EventSource
+  - UI: deprecated event and modules polling
+  - UPnP interface is now disabled on factory settings
+  - Updated Jint engine library to 2.1.0
+  - added RealTime.EventStream api call to Logging handler
+  - SerialPortLib: wrapped MessageReceived event in an high priority thread (perhaps solving rpi general hang issues?)</ReleaseNote>
+  <ReleaseDate>2014-03-31T18:12:33.0000Z</ReleaseDate>
 </ReleaseInfo>

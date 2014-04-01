@@ -1,0 +1,92 @@
+{
+	"jkUtils.SunCalc.Daylight":
+		 "Tageslicht",
+	"jkUtils.SunCalc.Civil":
+		 "B&uuml;rgerlich",
+	"jkUtils.SunCalc.Nautical":
+		 "Nautisch",
+	"jkUtils.SunCalc.Astronomic":
+		 "Astronomisch",
+	"jkUtils.SunCalc.Night":
+		 "Nacht",
+	"jkUtils.SunCalc.Moon":
+		 "Mond",
+	"jkUtils.SunCalc.Moon.Illumination":
+		 "Sichtb.:",
+	"jkUtils.SunCalc.Moon.Waxing":
+		 "zunehmend",
+	"jkUtils.SunCalc.Moon.Waning":
+		 "abnehmend",
+	"jkUtils.SunCalc.Night.Nadir":
+		 "Max. Dunkelh.:",
+	"jkUtils.SunCalc.LastUpdate":
+		 "Letzte Aktualisierung:",
+	"jkUtils.SunCalc.Current.TimePrefix":
+		 "bis",
+	"jkUtils.SunCalc.Current.TimeSuffix":
+		 "Uhr",
+
+
+	"jkUtils.SunCalc.Morning.Astronomical.Start":
+		 "Astronomische D&auml;mmerung",
+	"jkUtils.SunCalc.Morning.Nautical.Start":
+		 "Nautische D&auml;mmerung",
+	"jkUtils.SunCalc.Morning.Civil.Start":
+		 "B&uuml;rgerliche D&auml;mmerung",
+	"jkUtils.SunCalc.Morning.Sunrise.Start":
+		 "Sonnenaufgang",
+	"jkUtils.SunCalc.Morning.GoldenHour.End":
+		 "Goldene Stunde",
+	"jkUtils.SunCalc.Day.Noon":
+		 "Tag",
+	"jkUtils.SunCalc.Evening.GoldenHour.Start":
+		 "Goldene Stunde",
+	"jkUtils.SunCalc.Evening.Sunset.Start":
+		 "Sonnenuntergang",
+	"jkUtils.SunCalc.Evening.Civil.Start":
+		 "B&uuml;rgerliche D&auml;mmerung",
+	"jkUtils.SunCalc.Evening.Nautical.Start":
+		 "Nautische D&auml;mmerung",
+	"jkUtils.SunCalc.Evening.Astronomical.Start":
+		 "Astronomische D&auml;mmerung",
+	"jkUtils.SunCalc.Evening.Night.Start":
+		 "Nacht",
+
+
+	"jkUtils.SunCalc.Morning.Civil.Start.Tooltip":
+		 "Start der b&uuml;rgerlichen D&auml;mmerung. &#013;Das menschliche Auge kann schon ohne extra Licht lesen. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Civil_Start",
+	"jkUtils.SunCalc.Morning.Nautical.Start.Tooltip":
+		 "Start der nautischen D&auml;mmerung. &#013;Das menschliche Auge kann Sternenbilder noch erkennen. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Nautical_Start",
+	"jkUtils.SunCalc.Morning.Astronomical.Start.Tooltip":
+		 "Start der astronomischen D&auml;mmerung. &#013;Der Himmel beginnt sich aufzuhellen. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Astronomical_Start",
+	"jkUtils.SunCalc.Morning.Night.End.Tooltip":
+		 "Offizielles Ende der Nacht &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Night_End",
+	"jkUtils.SunCalc.Morning.Sunrise.Start.Tooltip":
+		 "Beginn des Sonnenaufgangs. &#013;Erste Teile der Sonne tauchen am Horizont auf. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Sunrise_Start",
+	"jkUtils.SunCalc.Evening.Sunset.End.Tooltip":
+		 "Ende des Sonnenuntergangs. &#013;Die Sonne ist vollst&auml;ndig hinter dem Horizont verschwunden. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_Sunset_End",
+	"jkUtils.SunCalc.Morning.Sunrise.End.Tooltip":
+		 "Ende des Sonnenaufgangs. &#013;Die Sonne ist vollst&auml;ndig &uuml;ber dem Horizont sichtbar. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_Sunrise_End",
+	"jkUtils.SunCalc.Evening.Sunset.Start.Tooltip":
+		 "Beginn des Sonnenuntergangs. &#013;Erste Teile der Sonne verschwinden hinter dem Horizont. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_Sunset_Start",
+	"jkUtils.SunCalc.Morning.GoldenHour.End.Tooltip":
+		 "Ende der morgendlichen goldenen Stunde. &#013;Das Tageslicht ist r&ouml;ter und sanfter als am Rest des Tages. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Morning_GoldenHour_End",
+	"jkUtils.SunCalc.Evening.GoldenHour.Start.Tooltip":
+		 "Start der abendlichen goldenen Stunde. &#013;Das Tageslicht ist r&ouml;ter und sanfter als am Rest des Tages. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_GoldenHour_Start",
+	"jkUtils.SunCalc.Day.Noon.Tooltip":
+		 "Mittag. &#013;Die Sonne erreicht ihren h&ouml;chsten Punkt. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Day_Noon",
+	"jkUtils.SunCalc.Evening.Civil.Start.Tooltip":
+		 "Start der b&uuml;rgerlichen D&auml;mmerung. &#013;Das menschliche Auge kann noch ohne extra Licht lesen. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_Civil_Start",
+	"jkUtils.SunCalc.Evening.Nautical.Start.Tooltip":
+		 "Start der nautischen D&auml;mmerung. &#013;Das menschliche Auge kann erste Sternnbilder erkennen. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_Nautical_Start",
+	"jkUtils.SunCalc.Evening.Astronomical.Start.Tooltip":
+		 "Start der astronomischen D&auml;mmerung. &#013;Auch der Himmel wird nun dunkel. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Evening_Astronomical_Start",
+	"jkUtils.SunCalc.Evening.Night.Start.Tooltip":
+		 "Offizieller Start der Nacht. &#013;&#013;Zur Zeitsteuerung verwendbar &uuml;ber: &#64;SunCalc_Night_Start",
+	"jkUtils.SunCalc.Moon.Illumination.Tooltip":
+		 "Prozentuale Beleuchtung des Mondes",
+	"jkUtils.SunCalc.Moon.Waxing.Tooltip":
+		 "Zunehmende oder abnehmende Mondphase",
+	"jkUtils.SunCalc.Night.Nadir.Tooltip":
+         "Der dunkelste Moment der Nacht"
+}

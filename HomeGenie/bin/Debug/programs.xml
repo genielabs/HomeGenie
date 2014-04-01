@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfProgramBlock xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
     <Conditions />
@@ -32,8 +32,8 @@ Modules
     <Name>Group Lights ON</Name>
     <Description>Turn on all the lights in the current group.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T00:19:29.805325Z</ActivationTime>
-    <TriggerTime>2014-01-24T00:44:54.627764Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9381386Z</ActivationTime>
+    <TriggerTime>2014-03-31T22:45:54.4882025Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -71,8 +71,8 @@ Modules
     <Name>Group Lights OFF</Name>
     <Description>Turn off all the lights in the current group.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T00:19:29.831029Z</ActivationTime>
-    <TriggerTime>2014-02-09T02:32:10.204295Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9381386Z</ActivationTime>
+    <TriggerTime>2014-03-31T22:44:07.8724859Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -143,8 +143,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-17T00:19:29.852998Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:45.180358Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:17.5418276Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -171,6 +171,10 @@ return true;
 </ScriptCondition>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
+  	if (Program.InputField("BridgeAddress").Value == "" || Program.InputField("BridgeAddress").Value.EndsWith("?"))
+    {
+      	return false;
+    }
 	string webserviceurl = "http://" + 
   			Program.InputField("BridgeAddress").Value + "/api/" + 
   			Program.InputField("BridgeUsername").Value + "/lights/" + lightnum + "/state";
@@ -245,7 +249,7 @@ Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -256,8 +260,8 @@ In order for this to work, you must register "homegenie" username
 (default is "newdeveloper") with your Philips Hue Bridge first.
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T08:53:39.350043Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:53:41.001098Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:18.0567398Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -322,10 +326,10 @@ return true; // execute "Code To Run"
         
         // Update Scheduler entries
         Scheduler
-          .WithName("Sunset")
+          .WithName("WeatherUnderground.Sunset")
           .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
         Scheduler
-          .WithName("Sunrise")
+          .WithName("WeatherUnderground.Sunrise")
           .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
         
         webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
@@ -374,6 +378,8 @@ return true; // execute "Code To Run"
 	    // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
         Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
         
+        Program.Notify("Weather Underground", "Updated.");
+
       } 
       catch (Exception e) 
       {
@@ -390,7 +396,7 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -400,11 +406,11 @@ return true; // execute "Code To Run"
     <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
 It can be used for "Sunrise/Sunset" feature. 
 User must create an account at wunderground.com in order to obtain a service key.</Description>
-    <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T00:19:29.951254Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:45.553664Z</TriggerTime>
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2014-03-31T23:06:13.6896738Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:06:14.126451Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -474,8 +480,8 @@ controlModules.Each((module)=&gt;{
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T08:59:27.088243Z</ActivationTime>
-    <TriggerTime>2014-03-17T09:03:04.897769Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9411388Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:27:53.067883Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -782,7 +788,7 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -933,7 +939,7 @@ while (Program.IsEnabled)
 
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -1129,6 +1135,7 @@ return true;
         Program.Parameter("EarthTool.Evening.Twilight.Nautical").Value = geodata.sun.evening.twilight.nautical;
         Program.Parameter("EarthTool.Evening.Twilight.Astronomical").Value = geodata.sun.evening.twilight.astronomical;      
         
+      	Program.Notify("Earth Tools", "Updated.");
     } 
     catch (Exception ex) 
     { 
@@ -1150,11 +1157,11 @@ return true;
     <Name>Earth Tools</Name>
     <Description>Gather from http://www.earthtools.org/ service all data about sun rise/set. 
 It can be used for "Sunrise/Sunset" feature.</Description>
-    <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-03T01:09:28.269763Z</ActivationTime>
-    <TriggerTime>2014-03-03T01:09:51.698315Z</TriggerTime>
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2014-03-31T13:40:53.6211929Z</ActivationTime>
+    <TriggerTime>2014-03-31T13:40:54.0886057Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1347,8 +1354,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Energy Saving Mode</Name>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-03-17T00:19:30.250728Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:46.917438Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:31.5312712Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1469,8 +1476,8 @@ Program.GoBackground();</ScriptSource>
     <Name>X10 - Dimmer Bright 100% when switched on</Name>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-17T00:19:30.32692Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:47.861858Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:33.53212Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1539,7 +1546,7 @@ Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -1569,8 +1576,8 @@ Program.GoBackground();
     <Name>Generic IP Camera</Name>
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T08:52:25.501722Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:52:27.049416Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:34.533278Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1735,7 +1742,7 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1758,8 +1765,8 @@ while (Program.IsEnabled)
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-17T08:47:20.089291Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:47:20.61195Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:35.5358616Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1840,8 +1847,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Z-Wave - Wake Up Notify</Name>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-17T00:19:30.440327Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:49.928224Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:36.5297245Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1909,7 +1916,7 @@ using (var connection = new GpioConnection(systembuzzer))
 }
 </ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -1989,8 +1996,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Turn Off Delay</Name>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T00:19:30.503678Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:50.995295Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:39.0325548Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2134,7 +2141,7 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2142,8 +2149,8 @@ Program.GoBackground();</ScriptSource>
     <Name>X10 SC9000 RF Vitual Modules</Name>
     <Description>SC9000 Security Console driver (experimental)</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T08:56:43.346384Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:56:45.829288Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:40.0379882Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2258,8 +2265,8 @@ return true;</ScriptCondition>
     <Name>E-Mail Account</Name>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2014-03-17T00:19:30.579041Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:52.97184Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:42.0343793Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2387,10 +2394,10 @@ Pause( pause );
     <Description>Simulate presence in the house by looping a program during a given interval time.
 The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T00:19:30.664063Z</ActivationTime>
+    <ActivationTime>2014-03-31T13:24:47.3307681Z</ActivationTime>
     <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2563,7 +2570,7 @@ return false;</ScriptCondition>
 These can be added to  groups and are then
 shown as hyperlink buttons in the control page.</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T00:19:30.729401Z</ActivationTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -2699,8 +2706,8 @@ Program.GoBackground();</ScriptSource>
 It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2014-03-17T00:19:30.771584Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:56.075158Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:48.0344631Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2717,10 +2724,13 @@ return true;
 Program.Parameter("EnergyMonitor.KwLoad").Value = "0";
 Program.Parameter("EnergyMonitor.OperatingDevices").Value = "0";
 //
+var notifyTicks = 0; // minutes
+//
 var meterModules = Modules.WithParameter("Meter.Watts");
 while (Program.IsEnabled)
 {
   	Pause(60);
+  	notifyTicks++;
   	//
     var loadkw = 0d;
     var devcount = 0;
@@ -2733,14 +2743,25 @@ while (Program.IsEnabled)
       return false;
     });
   	//
-  	Program.Parameter("EnergyMonitor.KwCounter").Value = Program.EnergyUseCounter.ToString("0.000");
+  	var energyUse = Program.EnergyUseCounter;
+  	Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
   	Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
   	Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
+  	//
+  	// notify every 5 minutes
+  	if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+    {
+      	notifyTicks = 0;
+      	Program.Notify("Energy Monitor", 
+                       "kW load = " + loadkw.ToString("0.000") + ", " +
+                       "Counter = " + energyUse.ToString("0.000") + "&lt;br&gt;" + 
+                       "Devices = " + devcount.ToString("0"));
+    }
 }
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2749,8 +2770,8 @@ while (Program.IsEnabled)
     <Description>Collects and stores real-time information about
 energy consumption.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-03-17T08:49:32.922716Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:49:33.092901Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:49.0357911Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2907,8 +2928,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Adds a virtual module for each instance of a multi instance node.
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-17T00:19:30.830723Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:56.994047Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:50.0417281Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3006,7 +3027,7 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -3029,8 +3050,8 @@ Program.GoBackground();</ScriptSource>
     <Name>X10 RF Virtual Modules Mapper</Name>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-17T08:55:06.277188Z</ActivationTime>
-    <TriggerTime>2014-03-17T08:55:08.268812Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:52.0397805Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3121,7 +3142,7 @@ using (var connection = new GpioConnection(systemleds))
 }
 </ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -3291,8 +3312,8 @@ while (Program.IsEnabled)
     <Name>Smart Lights</Name>
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-17T00:19:31.000206Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:59.690364Z</TriggerTime>
+    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:25:54.0347067Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3463,14 +3484,427 @@ Program.GoBackground();
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>300</Address>
+    <Address>502</Address>
     <Name>Fibaro RGBW</Name>
     <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
 </Description>
-    <Group>Devices and Things</Group>
-    <ActivationTime>2014-02-26T16:45:32.1890094Z</ActivationTime>
-    <TriggerTime>2014-02-26T16:45:32.676852Z</TriggerTime>
+    <Group>Contrib</Group>
+    <ActivationTime>2014-03-31T13:33:57.3698243Z</ActivationTime>
+    <TriggerTime>2014-03-31T13:33:57.539835Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
+// the 'Code To Run' to be executed.
+hg.SetConditionTrue();
+
+// list the program as custom widget
+hg.Program.AddControlWidget( "jkUtils/suncalc/suncalc" );
+
+if(hg.Program.InputField("jkUtils.SunCalc.Latitude").Value == "")
+  hg.Program.AddInputField("jkUtils.SunCalc.Latitude", "52.30", "mandatory: Location Latitude");
+if(hg.Program.InputField("jkUtils.SunCalc.Longitude").Value == "") 
+  hg.Program.AddInputField("jkUtils.SunCalc.Longitude", "13.25", "mandatory: Location Longitude");    
+if(hg.Program.InputField("jkUtils.SunCalc.Label").Value == "")
+  hg.Program.AddInputField("jkUtils.SunCalc.Label", "SunCalc - Berlin", "optional: Allows for manual label in visualization");    
+
+if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Astronomical.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Morning.Astronomical.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Nautical.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Morning.Nautical.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Civil.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Morning.Civil.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Sunrise.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Morning.Sunrise.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Sunset.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Evening.Sunset.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Civil.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Evening.Civil.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Nautical.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Evening.Nautical.Start").Value = "";
+if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Astronomical.Start").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.Evening.Astronomical.Start").Value = "";
+
+if(hg.Program.Parameter("jkUtils.SunCalc.LastUpdatedValue").value == "")
+  hg.Program.Parameter("jkUtils.SunCalc.LastUpdatedValue").Value = "";</ScriptCondition>
+    <ScriptSource>
+// jkUtils - SunCalc Ver 1.0 2014-03-26
+// ------------------------------------
+// A HomeGenie script to locally calculate sunrise/sunset with civil, nautical and astronomical timings.
+// This script also sets and automatically updates timers for the scheduler service.
+// Requires local longitude and latitude values to be set within programm options.
+// Localization implemented for: US-en and DE-de. Feel free to add your own localization in /locales dir analogous to HomeGenie .json files.
+// All used Icons/Graphics make full use of png-transparency to be able to place them over any colored background.
+
+// Released under BSD-licensed.
+// (c) 2014 Jan Koch, Berlin
+
+// Acknowledgements:
+
+// This program makes use of the original SunCalc which is a JavaScript library for calculating sun/mooon position and light phases.
+// For more info see https://github.com/mourner/suncalc (c) 2011-2014, Vladimir Agafonkin. BSD-licensed.
+
+// calculations for illumination parameters of the moon, based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
+// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+
+
+// setup default values if values are empty
+
+if(hg.Program.InputField("jkUtils.SunCalc.Latitude").Value == "")
+  hg.Program.InputField("jkUtils.SunCalc.Latitude").Value = "52.30";
+if(hg.Program.InputField("jkUtils.SunCalc.Longitude").Value == "") 
+  hg.Program.InputField("jkUtils.SunCalc.Longitude").Value = "13.25";   
+if(hg.Program.InputField("jkUtils.SunCalc.Label").Value == "")
+  hg.Program.InputField("jkUtils.SunCalc.Label").Value = "SunCalc - Berlin"; 
+
+// shortcuts for easier to read formulas
+
+var PI = Math.PI,
+    sin = Math.sin,
+    cos = Math.cos,
+    tan = Math.tan,
+    asin = Math.asin,
+    atan = Math.atan2,
+    acos = Math.acos,
+    rad = PI / 180;
+
+// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
+
+
+// date/time constants and conversions
+
+var dayMs = 1000 * 60 * 60 * 24,
+    J1970 = 2440588,
+    J2000 = 2451545;
+
+function toJulian(date) {
+    return date.valueOf() / dayMs - 0.5 + J1970;
+}
+function fromJulian(j) {
+    return new Date((j + 0.5 - J1970) * dayMs);
+}
+function toDays(date) {
+    return toJulian(date) - J2000;
+}
+
+
+// general calculations for position
+
+var e = rad * 23.4397; // obliquity of the Earth
+
+function getRightAscension(l, b) {
+    return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l));
+}
+function getDeclination(l, b) {
+    return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
+}
+function getAzimuth(H, phi, dec) {
+    return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi));
+}
+function getAltitude(H, phi, dec) {
+    return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H));
+}
+function getSiderealTime(d, lw) {
+    return rad * (280.16 + 360.9856235 * d) - lw;
+}
+
+
+// general sun calculations
+
+function getSolarMeanAnomaly(d) {
+    return rad * (357.5291 + 0.98560028 * d);
+}
+function getEquationOfCenter(M) {
+    return rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M));
+}
+function getEclipticLongitude(M, C) {
+    var P = rad * 102.9372; // perihelion of the Earth
+    return M + C + P + PI;
+}
+function getSunCoords(d) {
+
+    var M = getSolarMeanAnomaly(d),
+        C = getEquationOfCenter(M),
+        L = getEclipticLongitude(M, C);
+
+    return {
+        dec: getDeclination(L, 0),
+        ra: getRightAscension(L, 0)
+    };
+}
+
+
+var SunCalc = {};
+
+
+// calculates sun position for a given date and latitude/longitude
+
+SunCalc.getPosition = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        c = getSunCoords(d),
+        H = getSiderealTime(d, lw) - c.ra;
+
+    return {
+        azimuth: getAzimuth(H, phi, c.dec),
+        altitude: getAltitude(H, phi, c.dec)
+    };
+};
+
+
+// sun times configuration (angle, morning name, evening name)
+
+var times = [
+    [ -0.83,'sunrise', 'sunset' ],
+    [ -0.3, 'sunriseEnd', 'sunsetStart' ],
+    [ -6,   'dawn', 'dusk' ],                     //nautical twilight angle
+    [ -12,  'nauticalDawn', 'nauticalDusk'],     //astronomical twilight angle
+    [ -18,  'nightEnd', 'night' ],               //darkness angle
+    [ 6,    'goldenHourEnd', 'goldenHour' ]
+];
+
+// adds a custom time to the times config
+
+SunCalc.addTime = function (angle, riseName, setName) {
+    times.push([angle, riseName, setName]);
+};
+
+
+// calculations for sun times
+
+var J0 = 0.0009;
+
+function getJulianCycle(d, lw) {
+    return Math.round(d - J0 - lw / (2 * PI));
+}
+function getApproxTransit(Ht, lw, n) {
+    return J0 + (Ht + lw) / (2 * PI) + n;
+}
+function getSolarTransitJ(ds, M, L) {
+    return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
+}
+function getHourAngle(h, phi, d) {
+    return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+}
+
+
+// calculates sun times for a given date and latitude/longitude
+
+SunCalc.getTimes = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        n = getJulianCycle(d, lw),
+        ds = getApproxTransit(0, lw, n),
+
+        M = getSolarMeanAnomaly(ds),
+        C = getEquationOfCenter(M),
+        L = getEclipticLongitude(M, C),
+
+        dec = getDeclination(L, 0),
+
+        Jnoon = getSolarTransitJ(ds, M, L);
+
+
+    // returns set time for the given sun altitude
+    function getSetJ(h) {
+        var w = getHourAngle(h, phi, dec),
+            a = getApproxTransit(w, lw, n);
+
+        return getSolarTransitJ(a, M, L);
+    }
+
+
+    var result = {
+        solarNoon: fromJulian(Jnoon),
+        nadir: fromJulian(Jnoon - 0.5)
+    };
+
+    var i, len, time, angle, morningName, eveningName, Jset, Jrise;
+
+    for (i = 0, len = times.length; i &lt; len; i += 1) {
+        time = times[i];
+
+        Jset = getSetJ(time[0] * rad);
+        Jrise = Jnoon - (Jset - Jnoon);
+
+        result[time[1]] = fromJulian(Jrise);
+        result[time[2]] = fromJulian(Jset);
+    }
+
+    return result;
+};
+
+
+// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+
+function getMoonCoords(d) { // geocentric ecliptic coordinates of the moon
+
+    var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
+        M = rad * (134.963 + 13.064993 * d), // mean anomaly
+        F = rad * (93.272 + 13.229350 * d), // mean distance
+
+        l = L + rad * 6.289 * sin(M), // longitude
+        b = rad * 5.128 * sin(F), // latitude
+        dt = 385001 - 20905 * cos(M); // distance to the moon in km
+
+    return {
+        ra: getRightAscension(l, b),
+        dec: getDeclination(l, b),
+        dist: dt
+    };
+}
+
+SunCalc.getMoonPosition = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        c = getMoonCoords(d),
+        H = getSiderealTime(d, lw) - c.ra,
+        h = getAltitude(H, phi, c.dec);
+
+    // altitude correction for refraction
+    h = h + rad * 0.017 / tan(h + rad * 10.26 / (h + rad * 5.10));
+
+    return {
+        azimuth: getAzimuth(H, phi, c.dec),
+        altitude: h,
+        distance: c.dist
+    };
+};
+
+SunCalc.getMoonIllumination = function (date) {
+
+    var d = toDays(date),
+        s = getSunCoords(d),
+        m = getMoonCoords(d),
+
+        sdist = 149598000, // distance from Earth to Sun in km
+
+        phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
+        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi));
+
+    return {
+        fraction: (1 + cos(inc)) / 2,
+        angle: atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec)
+            - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra))
+    };
+};
+
+SunCalc.printTime = function (d,m){
+	var newd = new Date(d.valueOf() + m * 60000);
+  	var min = newd.getMinutes();
+    var hour = newd.getHours();
+    if (min &lt; 10) min = "0" + min;
+  	if (hour &lt; 10) hour = "0" + hour;
+    return hour+":"+min;
+};
+
+SunCalc.saveTimer = function (timer,d,m){
+	var str = 'hg.Program.Parameter("'+ timer + '").Value = SunCalc.printTime(d,m);';
+	eval(str);
+  	var str = 'var savedTimer = hg.Program.Parameter("'+ timer + '").Value';
+  	eval(str);
+    var spiltTimer = savedTimer.split(":");
+    timer = timer.substring(timer.indexOf(".")+1);
+  	hg.Scheduler.WithName(timer).SetSchedule(""+ spiltTimer[1] +" "+ spiltTimer[0] +" * * *");
+};
+
+
+// HomeGenie Script Logic starts here ------- 
+
+var currentTime = new Date();
+var latitude = hg.Program.InputField("jkUtils.SunCalc.Latitude").Value;
+var longitude = hg.Program.InputField("jkUtils.SunCalc.Longitude").Value;    
+var sun = SunCalc.getTimes(currentTime, latitude, longitude);
+var moon = SunCalc.getMoonIllumination(currentTime);
+
+var timeFormat = {hour: "numeric", minute: "numeric"};
+
+
+SunCalc.saveTimer("jkUtils.SunCalc.Day.Start",sun.nightEnd,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Day.Noon",sun.solarNoon,0);
+
+SunCalc.saveTimer("jkUtils.SunCalc.Night.Start",sun.night,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Night.Nadir",sun.nadir,0);
+
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Night.End",sun.nightEnd,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Astronomical.Start",sun.nightEnd,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Astronomical.End",sun.nauticalDawn,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Nautical.Start",sun.nauticalDawn,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Nautical.End",sun.dawn,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Civil.Start",sun.dawn,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Civil.End",sun.sunrise,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Sunrise.Start",sun.sunrise,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.Sunrise.End",sun.sunriseEnd,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Morning.GoldenHour.End",sun.goldenHourEnd,0);
+
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.GoldenHour.Start",sun.goldenHour,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Sunset.Start",sun.sunsetStart,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Sunset.End",sun.sunset,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Civil.Start",sun.sunset,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Civil.End",sun.dusk,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Nautical.Start",sun.dusk,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Nautical.End",sun.nauticalDusk,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Astronomical.Start",sun.nauticalDusk,0);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Astronomical.End",sun.night,-1);
+SunCalc.saveTimer("jkUtils.SunCalc.Evening.Night.Start",sun.night,0);
+
+hg.Program.Parameter("jkUtils.SunCalc.Moon.Fraction").Value = moon.fraction;
+
+moon.fraction = moon.fraction * 100;
+
+hg.Program.Parameter("jkUtils.SunCalc.Moon.Precent").Value = Math.round(moon.fraction) + "%";
+hg.Program.Parameter("jkUtils.SunCalc.Moon.Angle").Value = moon.angle;
+hg.Program.Parameter("jkUtils.SunCalc.Moon.Waxing").Value = (moon.angle &lt; 0 ? "1" : "0");
+
+hg.Program.Parameter("jkUtils.SunCalc.LastUpdated").Value = SunCalc.printTime(currentTime,0);
+
+hg.Program.Notify("SunCalc", "Sun data updated.");
+
+// Update every 12 hours
+hg.Pause(12*60*60);
+
+
+// For your convenience:
+//   If you should need a way to parse the saved times within you own scripts, you can use the following function.
+//   It is able to parse all kind of notations e.g.: '1:00 pm','1:00 p.m.', ...
+   
+//   function parseTime(timestring) {
+//     var d = new Date();
+//     var time = timestring.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+//     d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
+//     d.setMinutes( parseInt(time[2]) || 0 );
+     
+//    return d;
+//   }
+   
+</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>501</Address>
+    <Name>jkUtils - SunCalc</Name>
+    <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
+  Please set your local longitude/latitude in program options (Default is Berlin, Germany).</Description>
+    <Group>Contrib</Group>
+    <ActivationTime>2014-03-31T23:28:06.7160408Z</ActivationTime>
+    <TriggerTime>2014-03-31T23:27:56.3409943Z</TriggerTime>
+    <Type>Javascript</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

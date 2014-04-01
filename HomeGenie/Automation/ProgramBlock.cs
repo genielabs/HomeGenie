@@ -63,7 +63,7 @@ namespace HomeGenie.Automation
         private object scriptEngine = null;
         private ScriptScope scriptScope = null;
         private ScriptingHost hgScriptingHost = null;
-        
+
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
         internal List<string> registeredApiCalls = new List<string>();
@@ -101,8 +101,8 @@ namespace HomeGenie.Automation
         public string Type
         {
             get { return codeType; }
-            set 
-            { 
+            set
+            {
                 codeType = value;
                 scriptEngine = null;
                 scriptScope = null;
@@ -236,7 +236,7 @@ namespace HomeGenie.Automation
                 appAssembly = value;
 
             }
-        }      
+        }
 
         internal string AssemblyFile
         {
@@ -251,20 +251,19 @@ namespace HomeGenie.Automation
         internal bool AssemblyLoad()
         {
             bool succeed = false;
-            lock (instanceObject)
-                if (this.Type.ToLower() == "csharp")
+            if (this.Type.ToLower() == "csharp")
+            {
+                try
                 {
-                    try
-                    {
-                        appAssembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
-                        succeed = true;
-                    }
-                    catch (Exception e)
-                    {
-
-                        this.ScriptErrors = e.Message + "\n" + e.StackTrace;
-                    }
+                    appAssembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
+                    succeed = true;
                 }
+                catch (Exception e)
+                {
+
+                    this.ScriptErrors = e.Message + "\n" + e.StackTrace;
+                }
+            }
             return succeed;
         }
 
@@ -285,36 +284,33 @@ namespace HomeGenie.Automation
 
         private bool CheckAppInstance()
         {
-            lock (instanceObject)
+            if (programDomain == null)
             {
-                if (programDomain == null)
+                bool success = false;
+
+                // Creating app domain
+                programDomain = AppDomain.CurrentDomain;
+
+                assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
+                assembly = Activator.CreateInstance(assemblyType);
+
+                MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
+                //
+                try
                 {
-                    bool success = false;
-
-                    // Creating app domain
-                    programDomain = AppDomain.CurrentDomain;
-
-                    assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
-                    assembly = Activator.CreateInstance(assemblyType);
-
-                    MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
-                    //
-                    try
-                    {
-                        miSetHost.Invoke(assembly, new object[2] { homegenie, this.Address });
-                        success = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
-                    }
-                    //
-                    methodRun = assemblyType.GetMethod("Run");
-                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
-                    methodReset = assemblyType.GetMethod("Reset");
-                    //
-                    return success;
+                    miSetHost.Invoke(assembly, new object[2] { homegenie, this.Address });
+                    success = true;
                 }
+                catch (Exception ex)
+                {
+                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                }
+                //
+                methodRun = assemblyType.GetMethod("Run");
+                methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
+                methodReset = assemblyType.GetMethod("Reset");
+                //
+                return success;
             }
             return true;
         }
@@ -358,7 +354,7 @@ namespace HomeGenie.Automation
                 case "javascript":
                     string jsScript = this.ScriptSource;
                     Jint.Engine engine = (scriptEngine as Jint.Engine);
-                    engine.Options.AllowClr(false);
+                    //engine.Options.AllowClr(false);
                     result = new MethodRunResult();
                     try
                     {
@@ -416,12 +412,11 @@ namespace HomeGenie.Automation
                 case "javascript":
                     string jsScript = this.ScriptCondition;
                     Jint.Engine engine = (scriptEngine as Jint.Engine);
-                    engine.Options.AllowClr(false);
                     result = new MethodRunResult();
                     try
                     {
                         engine.Execute(jsScript);
-                        result.ReturnValue = (engine.GetGlobalValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
+                        result.ReturnValue = (engine.GetValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
                     }
                     catch (Exception e)
                     {

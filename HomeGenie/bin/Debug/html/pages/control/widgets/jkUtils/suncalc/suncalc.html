@@ -1,0 +1,229 @@
+<style>
+.suncalc .table,
+.suncalc .headline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-shadow: none;
+}
+.suncalc .table > div > div {
+	text-align: left;
+	height: 15px;
+	margin: 0;
+	position: absolute;
+}
+.suncalc .labels > div {
+	padding: 0 0 0 2px;
+	overflow: hidden;
+}
+.suncalc .evening span {
+	position: relative;
+	left: -30px;
+	display:block;
+	top: 0px;
+	width: 30px;
+	color: #333;
+}
+.suncalc .morning span {
+	position: relative;
+	right: -32px;
+	display:block;
+	float: right;
+	top: 0px;
+	width: 30px;
+	color: #333;
+}
+.suncalc .night > div > div {
+	position: absolute;
+	left: 1px;
+	width: 70px;
+	text-align: center;
+}
+.suncalc .day span {
+	position: relative;
+}
+.suncalc .table {
+	position: absolute;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: 58px;
+	width: 650px;
+}
+.suncalc #jkUtils_SunCalc_iconlabel {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	width: 70px;
+	text-align: center;
+
+	/*position: absolute;
+	left: 4px;
+	float: left;
+	clear: left;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	width: 65px;
+	text-align: center;
+	margin-top: 58px;
+	font-weight: bold;
+	margin: 57px 0 0 0;*/
+
+}
+.suncalc .light {
+	color: white;
+}
+.suncalc .right {
+	text-align:right;
+}
+.suncalc .b {
+	font-weight: bold;
+}
+.suncalc .y1 {
+	background-color: #FFEAAE;
+}
+.suncalc .y2 {
+	background-color: #FBE086;
+}
+.suncalc .y3 {
+	background-color: #FEDA4D;
+}
+.suncalc .y4 {
+	background-color: #FFCA38;
+}
+
+.suncalc .b1 {
+	background-color: #D7DFEC;
+}
+.suncalc .b2 {
+	background-color: #7F92B3;
+	color: white;
+}
+.suncalc .b3 {
+	background-color: #646E81;
+	color: white;
+}
+.suncalc .b4 {
+	background-color: #5B616B;
+	color: white;
+}
+.suncalc .b5 {
+	background-color: #F8F9FC;
+}
+</style>
+
+<a data-ui-field="widget" data-rel="popup" class="suncalc" style="height: 140px;">
+ <div>
+  <img class="ui-li-thumb" data-ui-field="icon" style="width:54px; margin-left:8px; height:54px; margin-top:16px; float: left;" src="pages/control/widgets/jkUtils/suncalc/images/noon.png" />
+
+	<div id="jkUtils_SunCalc_iconlabel" style="top: 69px; left: 2px; position: absolute;">
+	  <span id="jkUtils_SunCalc_Current_Label" style="white-space: pre-wrap; width: 70px; display: block;">jkUtils<br/>SunCalc</span>
+		<span data-locale-id="jkUtils.SunCalc.Current.TimePrefix" class="time" style="margin-top: 10px; width: 70px; display: block;">until</span>
+		<span class="time" id="jkUtils_SunCalc_Current_Till">xx:xx</span>
+		<span class="time" data-locale-id="jkUtils.SunCalc.Current.TimeSuffix"></span>
+	</div>
+
+	<div style="position: relative; float: left; left: 65px;">
+		<!-- <img src="images/SunCalcDashboard.png" style="postion: relative; float: left; z-index: 0; margin: 0; padding: 0;" /> -->
+		<img src="pages/control/widgets/jkUtils/suncalc/images/SunCalcDashboard.png" style="postion: relative; float: left; z-index: 0; margin: 0; padding: 0;" />
+		<div class="table">
+			<div class="labels">
+				<div class="y1" style="width: 70px; left: 0px; top: 0px;" data-locale-id="jkUtils.SunCalc.Daylight">Daylight</div>
+				<div class="b1 " style="width: 70px; left: 0px; top: 17px;" data-locale-id="jkUtils.SunCalc.Civil">Civil</div>
+				<div class="b2 light" style="width: 70px; left: 0px; top: 34px;" data-locale-id="jkUtils.SunCalc.Nautical">Nautical</div>
+				<div class="b3 light" style="width: 70px; left: 0px; top: 51px;" data-locale-id="jkUtils.SunCalc.Astronomic">Astronomical</div>
+				<div class="b4 light" style="width: 70px; left: 0px; top: 68px;" data-locale-id="jkUtils.SunCalc.Night">Night</div>
+			</div>
+
+			<div class="morning">
+				<div class="b1" style="width: 45px; left: 74px; top: 17px;"><span data-ui-field="jkUtils.SunCalc.Morning.Civil.Start">xx:xx</span></div>
+				<div class="b2" style="width: 31px; left: 74px; top: 34px;"><span data-ui-field="jkUtils.SunCalc.Morning.Nautical.Start">xx:xx</span></div>
+				<div class="b3" style="width: 17px; left: 74px; top: 51px;"><span data-ui-field="jkUtils.SunCalc.Morning.Astronomical.Start">xx:xx</span></div>
+				<div class="b4" style="width: 3px; left: 74px; top: 68px;"><span data-ui-field="jkUtils.SunCalc.Morning.Night.End">xx:xx</span></div>
+			</div>
+
+			<div class="day">
+				<div class="y1" style="width: 410px; left: 120px; top: 0px;">
+					<span style="float: left; margin: 0 2px;" data-ui-field="jkUtils.SunCalc.Morning.Sunrise.Start">xx:xx</span>
+					<span style="float: right; margin: 0 2px;" data-ui-field="jkUtils.SunCalc.Evening.Sunset.End">xx:xx</span>
+				</div>
+				<div class="y2" style="width: 313px; left: 170px; top: 0px;">
+					<span style="float: left; margin: 0 8px;" data-ui-field="jkUtils.SunCalc.Morning.Sunrise.End">xx:xx</span>
+					<span style="float: right; margin: 0 8px;" data-ui-field="jkUtils.SunCalc.Evening.Sunset.Start">xx:xx</span>
+				</div>
+				<div class="y3" style="width: 216px; left: 219px; top: 0px;">
+					<span style="float: left; margin: 0 7px;" data-ui-field="jkUtils.SunCalc.Morning.GoldenHour.End">xx:xx</span>
+					<span style="float: right; margin: 0 7px;" data-ui-field="jkUtils.SunCalc.Evening.GoldenHour.Start">xx:xx</span>
+				</div>
+				<div class="y4" style="width: 115px; left: 269px; top: 0px;">
+					<span style="display:block; width: 100%; text-align: center;" data-ui-field="jkUtils.SunCalc.Day.Noon">xx:xx</span>
+				</div>
+			</div>
+
+			<div class="evening">
+				<div class="b1" style="width: 45px; left: 531px; top: 17px;"><span data-ui-field="jkUtils.SunCalc.Evening.Civil.Start">xx:xx</span></div>
+				<div class="b2" style="width: 31px; left: 545px; top: 34px;"><span data-ui-field="jkUtils.SunCalc.Evening.Nautical.Start">xx:xx</span></div>
+				<div class="b3" style="width: 17px; left: 559px; top: 51px;"><span data-ui-field="jkUtils.SunCalc.Evening.Astronomical.Start">xx:xx</span></div>
+				<div class="b4" style="width: 3px; left: 573px; top: 68px;"><span data-ui-field="jkUtils.SunCalc.Evening.Night.Start">xx:xx</span></div>
+			</div>
+
+			<div class="night light">
+				<div class="b4" style="width: 72px; height: 83px; left: 578px; top: 0px;">
+					<div style="top: 2px;" class=" b" data-locale-id="jkUtils.SunCalc.Moon">Moon</div>
+					<div style="top: 18px;"><span data-locale-id="jkUtils.SunCalc.Moon.Illumination" data-ui-field="jkUtils.SunCalc.Moon.Illumination">Illumin.:</span> <span data-ui-field="jkUtils.SunCalc.Moon.Precent" /></div>
+					<div style="top: 34px;"><span data-ui-field="jkUtils.SunCalc.Moon.Waxing" /></div>
+					<div style="top: 51px;" data-locale-id="jkUtils.SunCalc.Night.Nadir">Max. Darkn.:</div>
+					<div style="top: 68px;" data-ui-field="jkUtils.SunCalc.Night.Nadir" />
+				</div>
+			</div>
+
+			<div class="status">
+				<div style="text-align:center; color:gray; left: 200px; top: 68px; width: 250px;"><span data-locale-id="jkUtils.SunCalc.LastUpdate">Last Updated:</span> <span data-ui-field="jkUtils.SunCalc.LastUpdated">xx:xx</span></div>
+			</div>
+
+		</div>
+	</div>
+
+  <div class="headline b" style="font-size: 16px; position: absolute; top: 30px; left: 82px;" data-ui-field="ConfigureOptions.jkUtils.SunCalc.Label">SunCalc</div>
+
+  <div class="settings" style="display: none">
+    <div class="labels">
+	  <div class="icons">
+        <span data-locale-id="jkUtils.SunCalc.Morning.Astronomical.Start">Astronomical Dawn</span>
+        <span data-locale-id="jkUtils.SunCalc.Morning.Nautical.Start">Nautical Dawn</span>
+        <span data-locale-id="jkUtils.SunCalc.Morning.Civil.Start">Civil Sunset</span>
+        <span data-locale-id="jkUtils.SunCalc.Morning.Sunrise.Start">Morning Sunrise</span>
+        <span data-locale-id="jkUtils.SunCalc.Morning.GoldenHour.End">Golden Hour</span>
+        <span data-locale-id="jkUtils.SunCalc.Day.Noon">Day</span>
+        <span data-locale-id="jkUtils.SunCalc.Evening.GoldenHour.Start">Golden Hour</span>
+        <span data-locale-id="jkUtils.SunCalc.Evening.Sunset.Start">Evening Sunset</span>
+        <span data-locale-id="jkUtils.SunCalc.Evening.Civil.Start">Civil Dusk</span>
+        <span data-locale-id="jkUtils.SunCalc.Evening.Nautical.Start">Nautical Dusk</span>
+        <span data-locale-id="jkUtils.SunCalc.Evening.Astronomical.Start">Astronomical Dusk</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Night.Start">Night</span>
+	  </div>
+        <span data-locale-id="jkUtils.SunCalc.Moon.Waxing">waxing</span>
+        <span data-locale-id="jkUtils.SunCalc.Moon.Waning">waning</span>
+    </div>
+    <div class="tooltips">
+        <span data-locale-id="jkUtils.SunCalc.Morning.Civil.Start.Tooltip">Start of morning civil twilight. &#013;The human eye can already read text with no extra light. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Civil_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.Nautical.Start.Tooltip">Start of morning nautical twilight. &#013;The human eye can still spot constellation. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Nautical_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.Astronomical.Start.Tooltip">Start of morning astronomical twilight. &#013;The sky starts to lighten. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Astronomical_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.Night.End.Tooltip">Official end of night &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Night_End</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.Sunrise.Start.Tooltip">Start of Sunrise. &#013;First parts of the sun appear on the horizon. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Sunrise_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Sunset.End.Tooltip">End of Sunset. &#013;The sun is fully below the horizon. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_Sunset_End</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.Sunrise.End.Tooltip">End of Sunrise. &#013;The sun is fully above the horizon. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_Sunrise_End</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Sunset.Start.Tooltip">Start of Sunset. &#013;First parts of the sun disappear behind the horizon. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_Sunset_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Morning.GoldenHour.End.Tooltip">End of morning golden hour. &#013;Daylight is redder and softer compared to when the sun is higher in the sky. &#013;&#013;For scheduling use: &#64;SunCalc_Morning_GoldenHour_End</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.GoldenHour.Start.Tooltip">Start of evening golden hour. &#013;Daylight is redder and softer compared to when the sun is higher in the sky. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_GoldenHour_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Day.Noon.Tooltip">Noon. &#013;The sun is at its highest peak. &#013;&#013;For scheduling use: &#64;SunCalc_Day_Noon</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Civil.Start.Tooltip">Start of evening civil twilight. &#013;The human eye can still read text with no extra light. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_Civil_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Nautical.Start.Tooltip">Start of evening nautical twilight. &#013;The human eye can already spot constellation. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_Nautical_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Astronomical.Start.Tooltip">Start of evening astronomical twilight. &#013;The sky turns dark. &#013;&#013;For scheduling use: &#64;SunCalc_Evening_Astronomical_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Evening.Night.Start.Tooltip">Official start of night &#013;&#013;For scheduling use: &#64;SunCalc_Night_Start</span>
+		<span data-locale-id="jkUtils.SunCalc.Moon.Illumination.Tooltip">Percent of the Moon which is illuminated</span>
+		<span data-locale-id="jkUtils.SunCalc.Moon.Waxing.Tooltip">Waxing or waning moon phases</span>
+		<span data-locale-id="jkUtils.SunCalc.Night.Nadir.Tooltip">The darkest time of the night</span>
+    </div>
+  </div>
+ </div>
+</a>

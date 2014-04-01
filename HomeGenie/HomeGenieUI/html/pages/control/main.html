@@ -22,7 +22,7 @@
         <h5 align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;" data-iconpos="right">
             <li id="control_actionmenu_macrorecord" data-icon="edit"><a href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
-            <li data-icon="refresh"><a href="javascript:HG.WebApp.Control.Refresh();HG.WebApp.Control.SetAutoRefresh(true);">Refresh list</a></li>
+            <li data-icon="refresh"><a href="javascript:$.mobile.showPageLoadingMsg();HG.WebApp.Control._RefreshFn();">Refresh list</a></li>
         </ul>
     </div>
 

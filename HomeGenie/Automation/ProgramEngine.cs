@@ -95,6 +95,7 @@ namespace HomeGenie.Automation
                             // so user can notice and fix it
                             program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
                             program.IsEnabled = false;
+                            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, program.Address.ToString(), "Automation Error", "TC Runtime Error", result.Exception.Message);
                         }
                         else
                         {
@@ -219,89 +220,83 @@ namespace HomeGenie.Automation
                 program.IsRunning = false;
             }
             //
-            lock (lockObject)
+            program.IsRunning = true;
+            //
+            if (program.Type.ToLower() != "wizard")
             {
-                program.IsRunning = true;
-                //
-                if (program.Type.ToLower() != "wizard")
+                if (program.Type.ToLower() == "csharp" && program.AppAssembly == null)
                 {
-                    if (program.Type.ToLower() == "csharp" && program.AppAssembly == null)
+                    program.IsRunning = false;
+                }
+                else
+                {
+                    program.TriggerTime = DateTime.UtcNow;
+                    program.ProgramThread = new Thread(() =>
+                    {
+                        var result = program.Run(options);
+                        if (result != null && result.Exception != null)
+                        {
+                            // runtime error occurred, script is being disabled
+                            // so user can notice and fix it
+                            program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                            program.IsEnabled = false;
+                            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, program.Address.ToString(), "Automation Error", "CR Runtime Error", result.Exception.Message);
+                        }
+                        program.IsRunning = false;
+                    });
+                    //
+                    try
+                    {
+                        program.ProgramThread.Start();
+                    }
+                    catch
+                    {
+                        program.Stop();
+                        program.IsRunning = false;
+                    }
+                }
+            }
+            else 
+            {
+                program.TriggerTime = DateTime.UtcNow;
+                if (program.ConditionType == ConditionType.Once)
+                {
+                    program.IsEnabled = false;
+                }
+                //
+                program.ProgramThread = new Thread(() =>
+                {
+                    try
+                    {
+                        ExecuteWizardScript(program);
+                    }
+                    catch (ThreadAbortException)
                     {
                         program.IsRunning = false;
                     }
-                    else
+                    finally
                     {
-                        program.TriggerTime = DateTime.UtcNow;
-                        program.ProgramThread = new Thread(() =>
-                        {
-                            var result = program.Run(options);
-                            if (result != null && result.Exception != null)
-                            {
-                                // runtime error occurred, script is being disabled
-                                // so user can notice and fix it
-                                program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
-                                program.IsEnabled = false;
-                            }
-                            program.IsRunning = false;
-                        });
-                        //
-                        try
-                        {
-                            program.ProgramThread.Start();
-                        }
-                        catch
-                        {
-                            program.Stop();
-                            program.IsRunning = false;
-                        }
+                        program.IsRunning = false;
                     }
-                }
-                else 
-                {
-                    program.TriggerTime = DateTime.UtcNow;
-                    if (program.ConditionType == ConditionType.Once)
-                    {
-                        program.IsEnabled = false;
-                    }
-                    //
-                    program.ProgramThread = new Thread(() =>
-                    {
-                        try
-                        {
-                            ExecuteWizardScript(program);
-                        }
-                        catch (ThreadAbortException)
-                        {
-                            program.IsRunning = false;
-                        }
-                        finally
-                        {
-                            program.IsRunning = false;
-                        }
-                    });
-                    //
-                    program.ProgramThread.Start();
-                }
+                });
                 //
-                Thread.Sleep(100);
+                program.ProgramThread.Start();
             }
-
+            //
+            Thread.Sleep(100);
         }
 
         public void StopEngine()
         {
             isEngineRunning = false;
             scheduler.Stop();
-            //lock (_programblocks)
+            foreach (ProgramBlock program in automationPrograms)
             {
-                foreach (ProgramBlock program in automationPrograms)
-                {
-                    program.Stop();
-                }
+                program.Stop();
             }
         }
 
-        public TsList<ProgramBlock> Programs { get { lock (automationPrograms) return automationPrograms; } }
+        public TsList<ProgramBlock> Programs { get { return automationPrograms; } }
         
         public int GeneratePid()
         {
@@ -315,12 +310,8 @@ namespace HomeGenie.Automation
         
         public void ProgramAdd(ProgramBlock program)
         {
-            lock (automationPrograms)
-            {
-                program.SetHost(homegenie);
-                automationPrograms.Add(program);
-            }
-            //
+            program.SetHost(homegenie);
+            automationPrograms.Add(program);
             EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs()
             {
                 Program = program,
@@ -339,10 +330,7 @@ namespace HomeGenie.Automation
         {
             program.Stop();
             program.IsEnabled = false;
-            lock (automationPrograms)
-            {
-                automationPrograms.Remove(program);
-            }
+            automationPrograms.Remove(program);
         }
 
         // TODO: find a better solution to this...

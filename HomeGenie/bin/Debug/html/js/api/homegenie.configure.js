@@ -188,6 +188,17 @@ HG.Configure.Modules.List = function(callback)
 	        }
 	    });
 	};
+HG.Configure.Modules.Get = function(domain, address, callback) 
+	{
+	    $.ajax({
+	        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Get/' + domain + "/" + address + "/" + (new Date().getTime()),
+	        type: "POST",
+	        dataType: "text",
+	        success: function (data) {
+	            if (typeof callback != 'undefined' && callback != null) callback(data);
+	        }
+	    });
+	};
 HG.Configure.Modules.Delete = function(domain, address, callback) 
 	{
 	    $.ajax({

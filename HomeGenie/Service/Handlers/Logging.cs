@@ -27,12 +27,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 
 namespace HomeGenie.Service.Handlers
 {
     public class Logging
     {
         private HomeGenieService homegenie;
+
         public Logging(HomeGenieService hg)
         {
             homegenie = hg;
@@ -47,18 +49,47 @@ namespace HomeGenie.Service.Handlers
                 {
                     case "Recent.From":
                         logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null && le.Domain.StartsWith("MIG.") == false && (le.UnixTimestamp >= double.Parse(migCommand.GetOption(0))));
+                        migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
                         break;
 
                     case "Recent.Last":
-                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null 
-                            && le.Domain.StartsWith("MIG.") == false 
-                            && le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migCommand.GetOption(0))));
+                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null
+                        && le.Domain.StartsWith("MIG.") == false
+                        && le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migCommand.GetOption(0))));
+                        migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
+                        break;
+
+                    case "RealTime.EventStream":
+                        HttpListenerContext context = (HttpListenerContext)request.Context;
+                        context.Response.KeepAlive = true;
+                        context.Response.ContentType = "text/event-stream";
+                        context.Response.ContentEncoding = Encoding.UTF8;
+                        DateTime lastEvent = DateTime.UtcNow.AddSeconds(-3);
+                        int looped = 0;
+                        while (looped < 10)
+                        {
+                            logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null
+                            && le.Domain.StartsWith("MIG.") == false
+                            && le.Timestamp > lastEvent);
+                            if (logData.Count > 0)
+                            {
+                                lastEvent = DateTime.UtcNow;
+                                foreach (LogEntry entry in logData)
+                                {
+                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("data: " + JsonConvert.SerializeObject(entry) + "\n\n");
+                                    context.Response.OutputStream.Write(data, 0, data.Length);
+                                    context.Response.OutputStream.Flush();
+                                }
+                            }
+                            System.Threading.Thread.Sleep(1000);
+                            looped++;
+                        }
                         break;
                 }
             }
-            catch { }
-            migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
+            catch
+            {
+            }
         }
-
     }
 }
