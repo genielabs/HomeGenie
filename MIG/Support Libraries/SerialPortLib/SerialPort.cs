@@ -361,7 +361,7 @@ namespace SerialPortLib
                                 {
                                     ReceiveMessage(message);
                                 });
-                                //deliver.Priority = ThreadPriority.AboveNormal;
+                                deliver.Priority = ThreadPriority.AboveNormal;
                                 deliver.Start();
                             }
                         }

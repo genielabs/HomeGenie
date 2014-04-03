@@ -187,7 +187,7 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     // Check expresion from scheduled item with a given name
                     var eventItem = Get(currentExpression.Substring(1));
-                    if (eventItem.IsEnabled && IsEventActive(eventItem.CronExpression, checkedStack))
+                    if (eventItem != null && eventItem.IsEnabled && IsEventActive(eventItem.CronExpression, checkedStack))
                     {
                         return true;
                     }

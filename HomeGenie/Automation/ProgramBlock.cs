@@ -49,6 +49,10 @@ namespace HomeGenie.Automation
         private bool isProgramEnabled = false;
         private string codeType = "";
 
+        // event delegates
+        public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
+        public event EnabledStateChangedEventHandler EnabledStateChanged;
+
         // c# program fields
         private AppDomain programDomain = null;
         private Type assemblyType = null;
@@ -86,7 +90,6 @@ namespace HomeGenie.Automation
 
         // common public members 
         public bool IsRunning;
-        public bool IsEvaluatingConditionBlock;
         public List<ProgramFeature> Features = new List<ProgramFeature>();
 
         [NonSerialized]
@@ -144,7 +147,6 @@ namespace HomeGenie.Automation
             //
             isProgramEnabled = true;
             IsRunning = false;
-            IsEvaluatingConditionBlock = false;
         }
 
         public bool IsEnabled
@@ -152,11 +154,12 @@ namespace HomeGenie.Automation
             get { return isProgramEnabled; }
             set
             {
-                if (value)
+                if (isProgramEnabled != value)
                 {
-                    ActivationTime = DateTime.UtcNow;
+                    isProgramEnabled = value;
+                    if (isProgramEnabled) ActivationTime = DateTime.UtcNow;
+                    if (EnabledStateChanged != null) EnabledStateChanged(this, value);
                 }
-                isProgramEnabled = value;
             }
         }
 
@@ -439,7 +442,6 @@ namespace HomeGenie.Automation
             //this.Reset();
             //
             this.IsRunning = false;
-            this.IsEvaluatingConditionBlock = false;
             this.Reset();
             //
             if (ProgramThread != null)
@@ -462,6 +464,16 @@ namespace HomeGenie.Automation
                 homegenie.UnRegisterDynamicApi(apiCall);
             }
             registeredApiCalls.Clear();
+            //
+            switch (codeType.ToLower())
+            {
+                case "python":
+                case "ruby":
+                    (scriptEngine as ScriptEngine).Runtime.Shutdown();
+                    break;
+                //case "javascript":
+                //case "csharp":
+            }
         }
 
         #endregion

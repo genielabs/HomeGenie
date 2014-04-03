@@ -72,16 +72,13 @@ namespace HomeGenie.Automation
         {
             ProgramBlock program = (evalArguments as EvaluateProgramConditionArgs).Program;
             ConditionEvaluationCallback callback = (evalArguments as EvaluateProgramConditionArgs).Callback;
-            program.IsEvaluatingConditionBlock = true;
             //
             bool isConditionSatisfied = false;
             //
-            while (isEngineRunning)
+            while (isEngineRunning && program.IsEnabled)
             {
-                if (program.IsRunning || !program.IsEnabled || !isEngineEnabled) { Thread.Sleep(500); continue; }
+                if (program.IsRunning || !isEngineEnabled) { Thread.Sleep(1000); continue; }
                 //
-                var stopWatch = new System.Diagnostics.Stopwatch();
-                stopWatch.Start();
                 try
                 {
                     isConditionSatisfied = false;
@@ -140,16 +137,10 @@ namespace HomeGenie.Automation
                     program.IsEnabled = false;
                 }
                 //
-                stopWatch.Stop();
-                //
                 callback(program, isConditionSatisfied);
                 //
-                int nextDelay = (int)(400 + (stopWatch.ElapsedMilliseconds > 400 ? stopWatch.ElapsedMilliseconds - 400 : 0));
-                if (nextDelay > 500) nextDelay = 500;
-                //
-                Thread.Sleep(nextDelay);
+                Thread.Sleep(750);
             }
-            program.IsEvaluatingConditionBlock = false;
         }
 
         public bool Enabled
@@ -312,18 +303,11 @@ namespace HomeGenie.Automation
         {
             program.SetHost(homegenie);
             automationPrograms.Add(program);
-            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs()
+            program.EnabledStateChanged += program_EnabledStateChanged;
+            if (program.IsEnabled)
             {
-                Program = program,
-                Callback = (ProgramBlock p, bool conditionsatisfied) =>
-                {
-                    if (conditionsatisfied && p.IsEnabled)
-                    {
-                        Run(p, null); // that goes async too
-                    }
-                }
-            };
-            ThreadPool.QueueUserWorkItem(new WaitCallback(EvaluateProgramCondition), evalArgs);
+                StartProgramEvaluator(program);
+            }
         }
 
         public void ProgramRemove(ProgramBlock program)
@@ -523,5 +507,29 @@ namespace HomeGenie.Automation
             homegenie.WaitOnPending(programCommand.Domain);
         }
 
+        private void StartProgramEvaluator(ProgramBlock program)
+        {
+            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs()
+            {
+                Program = program,
+                Callback = (ProgramBlock p, bool conditionsatisfied) =>
+                {
+                    if (conditionsatisfied && p.IsEnabled)
+                    {
+                        Run(p, null); // that goes async too
+                    }
+                }
+            };
+            ThreadPool.QueueUserWorkItem(new WaitCallback(EvaluateProgramCondition), evalArgs);
+        }
+        
+        private void program_EnabledStateChanged(object sender, bool isEnabled)
+        {
+            ProgramBlock program = (ProgramBlock)sender;
+            if (isEnabled)
+            {
+                StartProgramEvaluator(program);
+            }
+        }
     }
 }

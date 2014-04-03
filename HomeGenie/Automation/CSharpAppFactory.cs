@@ -58,7 +58,7 @@ using HomeGenie;
 using HomeGenie.Service;
 using HomeGenie.Automation; using HomeGenie.Data;
 
-using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
+using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Controllers.Pca9685; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
 namespace HomeGenie.Automation.Scripting
 {
     public class ScriptingInstance : ScriptingHost
@@ -180,6 +180,7 @@ namespace HomeGenie.Automation.Scripting
             //
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {
+                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.GeneralPurpose.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");

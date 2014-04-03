@@ -123,7 +123,7 @@ HG.WebApp.InitializePage = function ()
     	        HG.WebApp.AutomationGroupsList.LoadGroups();
             });
         }
-        else if (this.id == 'page_configure_scherulerservice')
+        else if (this.id == 'page_configure_schedulerservice')
         {
             HG.WebApp.Scheduler.LoadScheduling();
         }

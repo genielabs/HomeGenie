@@ -1,204 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfSchedulerItem xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SchedulerItem>
-    <Name>SunCalc.Day.Noon</Name>
-    <CronExpression>12 13 * * *</CronExpression>
+    <Name>Sunrise</Name>
+    <CronExpression>30 6 * * *</CronExpression>
     <ProgramId />
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
     <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 13.12</NextOccurrence>
+    <NextOccurrence>2014-04-03 06.30</NextOccurrence>
   </SchedulerItem>
   <SchedulerItem>
-    <Name>SunCalc.Day.Start</Name>
-    <CronExpression>44 04 * * *</CronExpression>
+    <Name>Sunset</Name>
+    <CronExpression>30 18 * * *</CronExpression>
     <ProgramId />
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
     <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 04.44</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Astronomical.End</Name>
-    <CronExpression>38 21 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 21.38</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Astronomical.Start</Name>
-    <CronExpression>55 20 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 20.55</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Civil.End</Name>
-    <CronExpression>12 20 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 20.12</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Civil.Start</Name>
-    <CronExpression>39 19 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 19.39</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.GoldenHour.Start</Name>
-    <CronExpression>54 18 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 18.54</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Nautical.End</Name>
-    <CronExpression>54 20 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 20.54</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Nautical.Start</Name>
-    <CronExpression>13 20 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 20.13</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Night.Start</Name>
-    <CronExpression>39 21 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 21.39</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Sunset.End</Name>
-    <CronExpression>38 19 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 19.38</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Evening.Sunset.Start</Name>
-    <CronExpression>35 19 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 19.35</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Astronomical.End</Name>
-    <CronExpression>28 05 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 05.28</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Astronomical.Start</Name>
-    <CronExpression>44 04 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 04.44</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Civil.End</Name>
-    <CronExpression>44 06 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 06.44</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Civil.Start</Name>
-    <CronExpression>10 06 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 06.10</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.GoldenHour.End</Name>
-    <CronExpression>30 07 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 07.30</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Nautical.End</Name>
-    <CronExpression>09 06 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 06.09</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Nautical.Start</Name>
-    <CronExpression>29 05 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 05.29</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Night.End</Name>
-    <CronExpression>43 04 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 04.43</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Sunrise.End</Name>
-    <CronExpression>48 06 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 06.48</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Morning.Sunrise.Start</Name>
-    <CronExpression>45 06 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 06.45</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Night.Nadir</Name>
-    <CronExpression>12 01 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 01.12</NextOccurrence>
-  </SchedulerItem>
-  <SchedulerItem>
-    <Name>SunCalc.Night.Start</Name>
-    <CronExpression>39 21 * * *</CronExpression>
-    <ProgramId />
-    <IsEnabled>false</IsEnabled>
-    <LastOccurrence>-</LastOccurrence>
-    <NextOccurrence>2014-04-01 21.39</NextOccurrence>
+    <NextOccurrence>2014-04-02 18.30</NextOccurrence>
   </SchedulerItem>
   <SchedulerItem>
     <Name>Weekdays</Name>
     <CronExpression>* * * * 1-5</CronExpression>
     <ProgramId />
     <IsEnabled>true</IsEnabled>
-    <LastOccurrence>2014-04-01 01.06</LastOccurrence>
-    <NextOccurrence>2014-04-01 01.07</NextOccurrence>
+    <LastOccurrence>2014-04-02 17.14</LastOccurrence>
+    <NextOccurrence>2014-04-02 17.15</NextOccurrence>
   </SchedulerItem>
   <SchedulerItem>
     <Name>Weekend</Name>

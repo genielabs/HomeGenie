@@ -903,6 +903,7 @@ namespace HomeGenie.Service
         {
             bool success = false;
             //
+            lock(systemModules.LockObject)
             try
             {
                 // Due to encrypted values, we must clone modules before encrypting and saving
@@ -1043,7 +1044,7 @@ namespace HomeGenie.Service
                 foreach (var program in programs)
                 {
                     program.IsRunning = false;
-                    program.IsEvaluatingConditionBlock = false;
+                    //program.IsEvaluatingConditionBlock = false;
                     program.ScriptErrors = "";
                     // backward compatibility with hg < 0.91
                     if (program.Address == 0)
@@ -1178,6 +1179,7 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshZwave()
         {
+            lock(systemModules.LockObject)
             try
             {
                 //
@@ -1273,6 +1275,7 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshX10()
         {
+            lock(systemModules.LockObject)
             try
             {
                 //
@@ -1337,6 +1340,7 @@ namespace HomeGenie.Service
         {
             // TODO: create method MIGInterface.GetModules() and abstract this draft code
             string currentDomain = "";
+            lock(systemModules.LockObject)
             try
             {
                 //
@@ -1562,80 +1566,10 @@ namespace HomeGenie.Service
             }
         }
 
-        internal void modules_Sort()
-        {
-            try
-            {
-
-                // sort modules properties by name
-                foreach (var module in systemModules)
-                {
-                    // various normalization stuff
-                    module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
-                    {
-                        return p1.Name.CompareTo(p2.Name);
-                    });
-                }
-                //
-                // sort modules
-                //
-                systemModules.Sort((Module m1, Module m2) =>
-                {
-                    string l1 = "";
-                    int n1 = 0;
-                    if (m1.Domain.EndsWith(".X10"))
-                    {
-                        l1 = m1.Address.Substring(0, 1);
-                        int.TryParse(m1.Address.Substring(1), out n1);
-                    }
-                    else
-                    {
-                        int.TryParse(m1.Address, out n1);
-                    }
-                    string l2 = "";
-                    int n2 = 0;
-                    if (m2.Domain.EndsWith(".X10"))
-                    {
-                        l2 = m2.Address.Substring(0, 1);
-                        int.TryParse(m2.Address.Substring(1), out n2);
-                    }
-                    else
-                    {
-                        int.TryParse(m2.Address, out n2);
-                    }
-                    string d1 = m1.Domain;
-                    if (d1.StartsWith("EmbeddedSystems."))
-                    {
-                        d1 = "z|" + d1;
-                    }
-                    string d2 = m2.Domain;
-                    if (d2.StartsWith("EmbeddedSystems."))
-                    {
-                        d2 = "z|" + d2;
-                    }
-                    return ((d1 + "|" + l1 + n1.ToString("00000")).CompareTo(d2 + "|" + l2 + n2.ToString("00000")));
-                });
-
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_Sort()", ex.Message, "Exception.StackTrace", ex.StackTrace);
-            }
-        }
-
-        internal void modules_RefreshAll()
-        {
-            systemModules.RemoveAll(m => m == null); // dunno why but sometimes it happen to have null entries causing exceptions
-            modules_RefreshZwave();
-            modules_RefreshX10();
-            modules_RefreshMisc();
-            modules_RefreshPrograms();
-            modules_RefreshVirtualModules();
-            modules_Sort();
-        }
-
         internal void modules_RefreshVirtualModules()
         {
+            lock(systemModules.LockObject)
+            lock(virtualModules.LockObject)
             try
             {
                 //
@@ -1727,60 +1661,134 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshPrograms()
         {
-            try
-            {
-                //
-                // ProgramEngine programs (modules)
-                //
-                if (masterControlProgram != null)
+            lock(systemModules.LockObject)
+                try
                 {
-                    foreach (var program in masterControlProgram.Programs)
+                    //
+                    // ProgramEngine programs (modules)
+                    //
+                    if (masterControlProgram != null)
                     {
-                        Module module = null;
-                        try
+                        foreach (var program in masterControlProgram.Programs)
                         {
-                            module = systemModules.Find(delegate(Module o)
+                            Module module = null;
+                            try
                             {
-                                return o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString();
-                            });
-                        }
-                        catch
-                        {
-                        }
-                        //
-                        if (module != null && program.Type.ToLower() == "wizard" && !program.IsEnabled && module.RoutingNode == "")
-                        {
-                            systemModules.Remove(module);
-                            continue;
-                        }
-                        else if (!program.IsEnabled)
-                        {
-                            continue;
-                        }
-                        //
-                        // add new module
-                        if (module == null)
-                        {
-                            module = new Module();
-                            module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
-                            if (program.Type.ToLower() == "wizard")
-                            {
-                                Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, "homegenie/generic/program");
+                                module = systemModules.Find(delegate(Module o)
+                                {
+                                    return o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString();
+                                });
                             }
-                            systemModules.Add(module);
+                            catch
+                            {
+                            }
+                            //
+                            if (module != null && program.Type.ToLower() == "wizard" && !program.IsEnabled && module.RoutingNode == "")
+                            {
+                                systemModules.Remove(module);
+                                continue;
+                            }
+                            else if (!program.IsEnabled)
+                            {
+                                continue;
+                            }
+                            //
+                            // add new module
+                            if (module == null)
+                            {
+                                module = new Module();
+                                module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
+                                if (program.Type.ToLower() == "wizard")
+                                {
+                                    Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, "homegenie/generic/program");
+                                }
+                                systemModules.Add(module);
+                            }
+                            //
+                            module.Address = program.Address.ToString();
+                            module.DeviceType = Module.DeviceTypes.Program;
+                            module.Name = program.Name;
+                            module.Description = "Wizard Script";
                         }
-                        //
-                        module.Address = program.Address.ToString();
-                        module.DeviceType = Module.DeviceTypes.Program;
-                        module.Name = program.Name;
-                        module.Description = "Wizard Script";
                     }
                 }
+                catch (Exception ex)
+                {
+                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_RefreshPrograms()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                }
+        }
+
+        internal void modules_Sort()
+        {
+            lock(systemModules.LockObject)
+            try
+            {
+
+                // sort modules properties by name
+                foreach (var module in systemModules)
+                {
+                    // various normalization stuff
+                    module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
+                    {
+                        return p1.Name.CompareTo(p2.Name);
+                    });
+                }
+                //
+                // sort modules
+                //
+                systemModules.Sort((Module m1, Module m2) =>
+                {
+                    string l1 = "";
+                    int n1 = 0;
+                    if (m1.Domain.EndsWith(".X10"))
+                    {
+                        l1 = m1.Address.Substring(0, 1);
+                        int.TryParse(m1.Address.Substring(1), out n1);
+                    }
+                    else
+                    {
+                        int.TryParse(m1.Address, out n1);
+                    }
+                    string l2 = "";
+                    int n2 = 0;
+                    if (m2.Domain.EndsWith(".X10"))
+                    {
+                        l2 = m2.Address.Substring(0, 1);
+                        int.TryParse(m2.Address.Substring(1), out n2);
+                    }
+                    else
+                    {
+                        int.TryParse(m2.Address, out n2);
+                    }
+                    string d1 = m1.Domain;
+                    if (d1.StartsWith("EmbeddedSystems."))
+                    {
+                        d1 = "z|" + d1;
+                    }
+                    string d2 = m2.Domain;
+                    if (d2.StartsWith("EmbeddedSystems."))
+                    {
+                        d2 = "z|" + d2;
+                    }
+                    return ((d1 + "|" + l1 + n1.ToString("00000")).CompareTo(d2 + "|" + l2 + n2.ToString("00000")));
+                });
+
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_RefreshPrograms()", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "modules_Sort()", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
+        }
+
+        internal void modules_RefreshAll()
+        {
+            systemModules.RemoveAll(m => m == null); // dunno why but sometimes it happen to have null entries causing exceptions
+            modules_RefreshZwave();
+            modules_RefreshX10();
+            modules_RefreshMisc();
+            modules_RefreshPrograms();
+            modules_RefreshVirtualModules();
+            modules_Sort();
         }
 
         #endregion

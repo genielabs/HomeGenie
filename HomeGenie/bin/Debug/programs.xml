@@ -24,7 +24,6 @@ Modules
   .On();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -63,7 +62,6 @@ Modules
   .Off();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -127,7 +125,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -144,7 +141,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:17.5418276Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:29.2842417Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -249,7 +246,6 @@ Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -261,7 +257,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:18.0567398Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:29.2102371Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -326,10 +322,10 @@ return true; // execute "Code To Run"
         
         // Update Scheduler entries
         Scheduler
-          .WithName("WeatherUnderground.Sunset")
+          .WithName("Sunset")
           .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
         Scheduler
-          .WithName("WeatherUnderground.Sunrise")
+          .WithName("Sunrise")
           .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
         
         webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
@@ -396,8 +392,7 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -407,10 +402,10 @@ return true; // execute "Code To Run"
 It can be used for "Sunrise/Sunset" feature. 
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2014-03-31T23:06:13.6896738Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:06:14.126451Z</TriggerTime>
+    <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
+    <TriggerTime>2014-04-03T13:22:30.1741183Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -450,7 +445,6 @@ controlModules.Each((module)=&gt;{
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -481,7 +475,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9411388Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:27:53.067883Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:12:58.890118Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -544,7 +538,6 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -652,7 +645,6 @@ using (var adcConnection = new Mcp3008SpiConnection(adcClock, adcCs, adcMiso, ad
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -698,7 +690,6 @@ return true; // execute "Code To Run"
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -788,7 +779,6 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -864,7 +854,7 @@ while (Program.IsEnabled)
         //
         driver.Allocate(irpin, PinDirection.Output);
         driver.Write(irpin, false);
-        Pause(0.0141);
+        Pause(0.0095);
         driver.Write(irpin, true);
         //  
         driver.Allocate(irpin, PinDirection.Input);
@@ -940,7 +930,6 @@ while (Program.IsEnabled)
 }</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -949,8 +938,8 @@ while (Program.IsEnabled)
     <Description>Temperature and Humidity sensing using DHT-11. 
 For wirings see http://generoso.info/homegenie/doityourself.html .</Description>
     <Group>Raspberry Sharp</Group>
-    <ActivationTime>2014-03-17T00:19:30.07005Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:45.79043Z</TriggerTime>
+    <ActivationTime>2014-04-02T21:34:34.533267Z</ActivationTime>
+    <TriggerTime>2014-04-02T21:34:34.5352673Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1056,7 +1045,6 @@ When.WebServiceCallReceived("Components.MCP23017", ( args ) =&gt;
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1148,8 +1136,7 @@ return true;
     Pause(24 * 60 * 60); // pause 24 hours before next check
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1158,10 +1145,10 @@ return true;
     <Description>Gather from http://www.earthtools.org/ service all data about sun rise/set. 
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2014-03-31T13:40:53.6211929Z</ActivationTime>
-    <TriggerTime>2014-03-31T13:40:54.0886057Z</TriggerTime>
+    <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
+    <TriggerTime>2014-04-03T13:22:32.1725336Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1195,7 +1182,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1240,7 +1226,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1285,7 +1270,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1338,7 +1322,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1355,7 +1338,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:31.5312712Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:33.1721108Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1409,7 +1392,6 @@ using(spiConnection.SelectSlave())
 }</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1460,7 +1442,6 @@ When.ModuleParameterIsChanging( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1477,7 +1458,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:33.53212Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:34.6726297Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1545,31 +1526,8 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt;
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.ImageURL</Property>
-        <Description>Camera image API URL (see your camera docs)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.Username</Property>
-        <Description>Username (optional)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>IpCamera.Password</Property>
-        <Description>Password (optional)</Description>
-      </ProgramFeature>
-    </Features>
+    <IsRunning>false</IsRunning>
+    <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
@@ -1577,9 +1535,9 @@ Program.GoBackground();
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:34.533278Z</TriggerTime>
+    <TriggerTime>2014-04-02T14:04:04.6857473Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1742,7 +1700,6 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -1766,7 +1723,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:35.5358616Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:35.6720512Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1839,7 +1796,6 @@ return true;
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1848,7 +1804,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:36.5297245Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:36.6737105Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1917,7 +1873,6 @@ using (var connection = new GpioConnection(systembuzzer))
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1980,7 +1935,6 @@ return true;
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -1997,7 +1951,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:39.0325548Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:37.6858413Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2140,8 +2094,7 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2150,9 +2103,9 @@ Program.GoBackground();</ScriptSource>
     <Description>SC9000 Security Console driver (experimental)</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:40.0379882Z</TriggerTime>
+    <TriggerTime>2014-04-02T14:04:08.6876241Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
@@ -2214,7 +2167,6 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2257,7 +2209,6 @@ return true;</ScriptCondition>
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2266,7 +2217,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:42.0343793Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:38.6732818Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2306,7 +2257,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2385,7 +2335,6 @@ Pause( pause );
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2454,7 +2403,6 @@ return true;</ScriptCondition>
 }</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2526,7 +2474,6 @@ When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt;
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2552,16 +2499,7 @@ return false;</ScriptCondition>
     <ScriptSource />
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Favourites.Link</ForDomains>
-        <ForTypes>Generic</ForTypes>
-        <Property>FavouritesLink.Url</Property>
-        <Description>Favourites link</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>180</Address>
@@ -2573,7 +2511,7 @@ shown as hyperlink buttons in the control page.</Description>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2688,7 +2626,6 @@ while(Program.IsEnabled)
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -2707,7 +2644,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:48.0344631Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:22:39.6729756Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2753,15 +2690,13 @@ while (Program.IsEnabled)
     {
       	notifyTicks = 0;
       	Program.Notify("Energy Monitor", 
-                       "kW load = " + loadkw.ToString("0.000") + ", " +
-                       "Counter = " + energyUse.ToString("0.000") + "&lt;br&gt;" + 
-                       "Devices = " + devcount.ToString("0"));
+                       "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
+                       "Counter = " + energyUse.ToString("0.000"));
     }
 }
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2770,8 +2705,8 @@ while (Program.IsEnabled)
     <Description>Collects and stores real-time information about
 energy consumption.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:49.0357911Z</TriggerTime>
+    <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
+    <TriggerTime>2014-04-03T13:22:40.6718956Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2918,8 +2853,7 @@ Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2929,7 +2863,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:50.0417281Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:10:04.5011364Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2965,7 +2899,6 @@ When.ModuleParameterChange( (module, property) =&gt; {
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -3026,8 +2959,7 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>false</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
@@ -3051,7 +2983,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:52.0397805Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:10:05.5075533Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3143,7 +3075,6 @@ using (var connection = new GpioConnection(systemleds))
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -3274,8 +3205,7 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
+    <IsRunning>false</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -3313,7 +3243,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:25:54.0347067Z</TriggerTime>
+    <TriggerTime>2014-04-03T13:10:06.5104985Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3480,7 +3410,6 @@ Program.GoBackground();
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>true</IsEvaluatingConditionBlock>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -3489,8 +3418,8 @@ Program.GoBackground();
     <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
 </Description>
     <Group>Contrib</Group>
-    <ActivationTime>2014-03-31T13:33:57.3698243Z</ActivationTime>
-    <TriggerTime>2014-03-31T13:33:57.539835Z</TriggerTime>
+    <ActivationTime>2014-04-02T12:47:22.3256647Z</ActivationTime>
+    <TriggerTime>2014-04-02T12:49:38.4555809Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3503,7 +3432,7 @@ Program.GoBackground();
 hg.SetConditionTrue();
 
 // list the program as custom widget
-hg.Program.AddControlWidget( "jkUtils/suncalc/suncalc" );
+hg.Program.AddControlWidget( "weather/suncalc/suncalc" );
 
 if(hg.Program.InputField("jkUtils.SunCalc.Latitude").Value == "")
   hg.Program.AddInputField("jkUtils.SunCalc.Latitude", "52.30", "mandatory: Location Latitude");
@@ -3893,18 +3822,17 @@ hg.Pause(12*60*60);
 </ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <IsEvaluatingConditionBlock>false</IsEvaluatingConditionBlock>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>501</Address>
     <Name>jkUtils - SunCalc</Name>
     <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
   Please set your local longitude/latitude in program options (Default is Berlin, Germany).</Description>
     <Group>Contrib</Group>
-    <ActivationTime>2014-03-31T23:28:06.7160408Z</ActivationTime>
-    <TriggerTime>2014-03-31T23:27:56.3409943Z</TriggerTime>
+    <ActivationTime>2014-04-03T13:13:23.15672Z</ActivationTime>
+    <TriggerTime>2014-04-03T13:13:23.1597216Z</TriggerTime>
     <Type>Javascript</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

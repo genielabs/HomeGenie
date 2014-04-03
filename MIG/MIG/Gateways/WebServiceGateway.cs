@@ -90,9 +90,12 @@ namespace MIG.Gateways
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
             homePath = config.HomePath;
             baseUrl = config.BaseUrl;
-            bindingPrefixes = new string[2] { 
-                String.Format(@"http://+:{0}/", config.Port),
-                String.Format(@"https://+:{0}/", config.SslPort)
+            //bindingPrefixes = new string[2] { 
+            //    String.Format(@"http://+:{0}/", config.Port),
+            //    String.Format(@"https://+:{0}/", config.SslPort)
+            //};
+            bindingPrefixes = new string[1] { 
+                String.Format(@"http://+:{0}/", config.Port)
             };
             //
             SetPasswordHash(config.Password);

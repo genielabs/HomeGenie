@@ -103,9 +103,12 @@
 		if (level != null)
 		{
             var updatetime = level.UpdateTime;
-            updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-            var d = new Date(updatetime);
-            this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+			if (typeof updatetime != 'undefined')
+			{
+				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+				var d = new Date(updatetime);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+			}
             //
             level = this.GetLevel(level);
 		} else level = '';

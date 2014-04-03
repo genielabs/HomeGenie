@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r357</Version>
+  <Version>1.00 beta r358</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>  - UI: added jkUtils SunCalc widget (contributed by Jan)
   - UI: new stacked events popup
   - UI: added real time events via persistent http connection using EventSource
   - UI: deprecated event and modules polling
-  - UPnP interface is now disabled on factory settings
+  - APE: optimized automation program threads management
+  - UPnP interface is now disabled on factory settings due to suspect UPnP library instability
   - Updated Jint engine library to 2.1.0
   - added RealTime.EventStream api call to Logging handler
-  - SerialPortLib: wrapped MessageReceived event in an high priority thread (perhaps solving rpi general hang issues?)</ReleaseNote>
-  <ReleaseDate>2014-03-31T18:12:33.0000Z</ReleaseDate>
+  - SerialPortLib: wrapped MessageReceived event in an high priority thread</ReleaseNote>
+  <ReleaseDate>2014-04-02T15:08:39.0000Z</ReleaseDate>
 </ReleaseInfo>

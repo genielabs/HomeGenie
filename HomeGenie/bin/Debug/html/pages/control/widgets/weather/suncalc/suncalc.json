@@ -4,8 +4,8 @@
     Version: "v1.1 2014-03-29",
 
 	GroupName : '',
-	IconImage : 'pages/control/widgets/jkUtils/suncalc/images/noon.png',
-    IconPath : 'pages/control/widgets/jkUtils/suncalc/images/',
+	IconImage : 'pages/control/widgets/weather/suncalc/images/sundata.png',
+    IconPath : 'pages/control/widgets/weather/suncalc/images/',
 	StatusText : '',
 	Description : '',
 	Initialized : false,
@@ -40,7 +40,7 @@
 
 		//-- Apply Localisation
 		var userLang = window.navigator.userLanguage || window.navigator.language;
-		HG.WebApp.Locales.Localize('./pages/control/widgets/jkUtils/suncalc/locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
+		HG.WebApp.Locales.Localize('./pages/control/widgets/weather/suncalc/locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
 
 		this.Initialized = true;
 
