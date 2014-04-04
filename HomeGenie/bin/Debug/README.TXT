@@ -165,6 +165,9 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+04/04/2014 1.00 beta rev 359
+	- Fixed bug in Toggle functionality that was causing desync in Status.Level event
+
 02/04/2014 1.00 beta rev 358
 	- Updated RaspberrySharp-IO library that is now including support for PCA9685 (http://www.adafruit.com/products/815)
 	- UI: added jkUtils SunCalc widget (contributed by Jan)

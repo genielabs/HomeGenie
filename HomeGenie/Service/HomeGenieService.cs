@@ -551,29 +551,6 @@ namespace HomeGenie.Service
 
                 if (module != null)
                 {
-                    var parameter = Service.Utility.ModuleParameterGet(module, ModuleParameters.MODPAR_STATUS_LEVEL);
-                    if (parameter != null)
-                    {
-                        if (command.Command == Commands.Control.CONTROL_ON)
-                        {
-                            parameter.Value = "1";
-                        }
-                        else if (command.Command == Commands.Control.CONTROL_OFF)
-                        {
-                            parameter.Value = "0";
-                        }
-                        else if (command.Command == Commands.Control.CONTROL_LEVEL)
-                        {
-                            parameter.Value = (double.Parse(command.GetOption(0)) / 100D).ToString();
-                        }
-                        else if (command.Command == Commands.Control.CONTROL_TOGGLE)
-                        {
-                            double cv = 0;
-                            double.TryParse(parameter.Value, out cv);
-                            parameter.Value = (cv == 0 ? "1" : "0");
-                        }
-                    }
-                    //
                     // wait for ZWaveLib asynchronous response from node and raise the proper "parameter changed" event
                     if (command.Domain == Domains.HomeAutomation_ZWave)  //  && (context != null && !context.Request.IsLocal)
                     {

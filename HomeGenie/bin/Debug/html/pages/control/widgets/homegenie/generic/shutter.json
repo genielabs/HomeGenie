@@ -35,7 +35,9 @@
 			// ui events handlers
 			//
 			// toggle button action
-			container.find('[data-ui-field=toggle]').attr('href', 'javascript:HG.WebApp.Control.Toggle(\'' + module.Domain + '\', \'' + module.Address + '\')');
+			container.find('[data-ui-field=toggle]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
+			});			
 		}
 		//
 		// read some context data

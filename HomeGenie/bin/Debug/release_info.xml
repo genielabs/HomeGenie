@@ -1,16 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r358</Version>
+  <Version>1.00 beta r359</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - UI: added jkUtils SunCalc widget (contributed by Jan)
-  - UI: new stacked events popup
-  - UI: added real time events via persistent http connection using EventSource
-  - UI: deprecated event and modules polling
-  - APE: optimized automation program threads management
-  - UPnP interface is now disabled on factory settings due to suspect UPnP library instability
-  - Updated Jint engine library to 2.1.0
-  - added RealTime.EventStream api call to Logging handler
-  - SerialPortLib: wrapped MessageReceived event in an high priority thread</ReleaseNote>
-  <ReleaseDate>2014-04-02T15:08:39.0000Z</ReleaseDate>
+  <ReleaseNote>  - Fixed bug in Toggle functionality that was causing desync in Status.Level event</ReleaseNote>
+  <ReleaseDate>2014-04-04T17:28:02.0000Z</ReleaseDate>
 </ReleaseInfo>
