@@ -315,9 +315,13 @@ namespace HomeGenie.Automation.Scripting
                 {
                     foreach (var module in SelectedModules)
                     {
-                        double level = Service.Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL).DecimalValue;
-                        level = (level * 100D);
-                        averageLevel += level;
+                        var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                        if (levelParameter != null)
+                        {
+                            double level = levelParameter.DecimalValue;
+                            level = (level * 100D);
+                            averageLevel += level;
+                        }
                     }
                     averageLevel = averageLevel / SelectedModules.Count;
                 }
@@ -340,9 +344,14 @@ namespace HomeGenie.Automation.Scripting
                 {
                     foreach (var module in SelectedModules)
                     {
-                        double dvalue = Service.Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL).DecimalValue;
-                        isOn = isOn || (dvalue * 100D > 0D); // if at least one of the selected modules are on it returns true
-                        if (isOn) break;
+                        var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                        if (levelParameter != null)
+                        {
+                            double dvalue = levelParameter.DecimalValue;
+                            isOn = isOn || (dvalue * 100D > 0D); // if at least one of the selected modules are on it returns true
+                            if (isOn) break;
+                        }
+
                     }
                 }
                 return isOn;
@@ -364,9 +373,13 @@ namespace HomeGenie.Automation.Scripting
                 bool alarmed = false;
                 foreach (var module in SelectedModules)
                 {
-                    double intvalue = Service.Utility.ModuleParameterGet(module, "Sensor.Alarm").DecimalValue;
-                    alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules are alarmed it returns true
-                    if (alarmed) break;
+                    var alarmParameter = Utility.ModuleParameterGet(module, "Sensor.Alarm");
+                    if (alarmParameter != null)
+                    {
+                        double intvalue = alarmParameter.DecimalValue;
+                        alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules are alarmed it returns true
+                        if (alarmed) break;
+                    }
                 }
                 return alarmed;
             }
@@ -379,9 +392,13 @@ namespace HomeGenie.Automation.Scripting
                 bool alarmed = false;
                 foreach (var module in SelectedModules)
                 {
-                    double intvalue = Service.Utility.ModuleParameterGet(module, "Sensor.MotionDetect").DecimalValue;
-                    alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules detected motion it returns true
-                    if (alarmed) break;
+                    var motionParameter = Service.Utility.ModuleParameterGet(module, "Sensor.MotionDetect");
+                    if (motionParameter != null)
+                    {
+                        double intvalue = motionParameter.DecimalValue;
+                        alarmed = alarmed || (intvalue > 0); // if at least one of the selected modules detected motion it returns true
+                        if (alarmed) break;
+                    }
                 }
                 return alarmed;
             }
@@ -428,11 +445,11 @@ namespace HomeGenie.Automation.Scripting
                 var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_X10 && m.Address == "RF"));
                 if (rfModule != null)
                 {
-                    try
+                    var rawdataParameter = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData");
+                    if (rawdataParameter != null)
                     {
-                        rfData = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData").Value;
+                        rfData = rawdataParameter.Value;
                     }
-                    catch { }
                 }
                 return rfData;
             }
@@ -447,11 +464,11 @@ namespace HomeGenie.Automation.Scripting
                 var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_W800RF && m.Address == "RF"));
                 if (rfModule != null)
                 {
-                    try
+                    var rawdataParameter = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData");
+                    if (rawdataParameter != null)
                     {
-                        rfData = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData").Value;
+                        rfData = rawdataParameter.Value;
                     }
-                    catch { }
                 }
                 return rfData;
             }

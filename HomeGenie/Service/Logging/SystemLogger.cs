@@ -161,11 +161,15 @@ namespace HomeGenie.Service.Logging
         {
             if (IsLogEnabled)
             {
-                FlushLog();
-                logWriter.Close();
-                logWriter = null;
-                logStream.Close();
-                logStream = null;
+                try
+                {
+                    FlushLog();
+                    logWriter.Close();
+                    logWriter = null;
+                    logStream.Close();
+                    logStream = null;
+                }
+                catch { }
             }
         }
 

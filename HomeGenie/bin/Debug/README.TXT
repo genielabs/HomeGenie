@@ -165,8 +165,10 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-04/04/2014 1.00 beta rev 359
+04/04/2014 1.00 beta rev 360
 	- Fixed bug in Toggle functionality that was causing desync in Status.Level event
+	- Fixed bug in Automatic Update system (if logging was enabled, it was crashing the update process)
+	- Fixed bug in ModulesManager.IsOn/IsOff
 
 02/04/2014 1.00 beta rev 358
 	- Updated RaspberrySharp-IO library that is now including support for PCA9685 (http://www.adafruit.com/products/815)
