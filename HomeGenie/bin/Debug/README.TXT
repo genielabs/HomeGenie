@@ -165,6 +165,12 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+06/04/2014 1.00 beta rev 361
+	- XTenLib: some lil' performance improvement
+	- Program Editor: added autocompletition (CTRL+SPACE), folding and errors gutter
+	- Program Editor: fixed mouse wheel scrolling
+	- Program Editor: updated CodeMirror to 4.03
+
 04/04/2014 1.00 beta rev 360
 	- Fixed bug in Toggle functionality that was causing desync in Status.Level event
 	- Fixed bug in Automatic Update system (if logging was enabled, it was crashing the update process)

@@ -259,21 +259,24 @@ namespace HomeGenie.Service.Handlers
                                 else
                                 {
                                     int sourcelines = currentProgram.ScriptSource.Split('\n').Length;
+                                    string errmsg = "[\n";
                                     foreach (System.CodeDom.Compiler.CompilerError error in res.Errors)
                                     {
                                         //if (!ce.IsWarning)
                                         {
                                             int errline = (error.Line - 16);
-                                            string blocktype = "Code";
+                                            string blocktype = "CR";
                                             if (errline >= sourcelines + 7)
                                             {
                                                 errline -= (sourcelines + 7);
-                                                blocktype = "Condition";
+                                                blocktype = "TC";
                                             }
-                                            string errmsg = "Line " + errline + ", Column " + error.Column + " " + error.ErrorText + " (" + error.ErrorNumber + ")";
-                                            currentProgram.ScriptErrors += errmsg + " (" + blocktype + ")" + "\n";
+                                            // TODO: use Json.Serialize and convert from c# CompileError class instance to json object
+                                            errmsg += " { \"Line\" : " + errline + ", \"Column\" : " + error.Column + ", \"ErrorMessage\" : \"" + error.ErrorText + "\", \"ErrorNumber\" : \"" + error.ErrorNumber + "\", \"CodeBlock\" : \"" + blocktype + "\" },\n";
                                         }
                                     }
+                                    errmsg = errmsg.TrimEnd(new char[]{',', '\n'}) + "\n]";
+                                    currentProgram.ScriptErrors = errmsg;
                                 }
                                 //
                                 migCommand.Response = currentProgram.ScriptErrors;

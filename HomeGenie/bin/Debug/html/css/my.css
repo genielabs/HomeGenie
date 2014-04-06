@@ -217,3 +217,11 @@ input:-ms-input-placeholder {
 	    font-family: Lucida Sans, Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
+
+/* Code Mirror */
+.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+.CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}

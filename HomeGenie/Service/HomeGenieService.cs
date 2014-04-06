@@ -1032,7 +1032,7 @@ namespace HomeGenie.Service
                     // in case of c# script preload assembly from generated .dll
                     if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
                     {
-                        program.ScriptErrors = "Programm not compiled (save it to compile)";
+                        program.ScriptErrors = "Program update is required.";
                     }
                     else
                     {

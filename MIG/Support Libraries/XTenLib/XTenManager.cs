@@ -392,10 +392,13 @@ namespace XTenLib
                                     RfDataReceived(new RfDataReceivedAction() { RawData = readData });
                                 }
                             }
-                            else if ((readData[0] == (int)X10CommandType.PLC_Poll)) // && readdata.Length > 2)
+                            else if ((readData[0] == (int)X10CommandType.PLC_Poll) && readData.Length == 1)
                             {
                                 statusRequestOk = true;
                                 sendQueue.Enqueue(new byte[] { 0xC3 }); // reply to poll
+                            }
+                            else if ((readData[0] == (int)X10CommandType.PLC_Poll))
+                            {
                                 //Console.WriteLine("PLC     ==> " + Utility.ByteArrayToString(readdata));
                                 if (readData.Length > 2)
                                 {

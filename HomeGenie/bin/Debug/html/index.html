@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/homegenie.min.css" />
     <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
     <link rel="stylesheet" href="css/ui.notify.css" />
+    <link rel="stylesheet" href="css/jquery.qtip.min.css" />
 
     <!-- jquery & co framework includes -->
     <script src="js/jquery-2.0.2.min.js"></script>
@@ -21,6 +22,7 @@
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
     <script src="js/jquery.notify.min.js"></script>
+    <script src="js/jquery.qtip.min.js"></script>
 
 
     <!-- jquery & co css includes -->
@@ -44,13 +46,31 @@
     <script src="js/my.js"></script>
 
     <!-- Code Mirror -->
-    <script src="js/codemirror-3.13/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="js/codemirror-3.13/lib/codemirror.css">
-    <link rel="stylesheet" href="js/codemirror-3.13/theme/ambiance.css">
-    <script src="js/codemirror-3.13/mode/clike/clike.js"></script>
-    <script src="js/codemirror-3.13/mode/javascript/javascript.js"></script>
-    <script src="js/codemirror-3.13/mode/python/python.js"></script>
-    <script src="js/codemirror-3.13/mode/ruby/ruby.js"></script>
+    <link rel="stylesheet" href="js/codemirror-4.03/lib/codemirror.css">
+    <link rel="stylesheet" href="js/codemirror-4.03/theme/ambiance.css">
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/fold/foldgutter.css" />
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/lint/lint.css" />
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/hint/show-hint.css" />
+    <script src="js/codemirror-4.03/lib/codemirror.js"></script>
+    <script src="js/codemirror-4.03/mode/clike/clike.js"></script>
+    <script src="js/codemirror-4.03/mode/javascript/javascript.js"></script>
+    <script src="js/codemirror-4.03/mode/python/python.js"></script>
+    <script src="js/codemirror-4.03/mode/ruby/ruby.js"></script>
+    <!-- Code Mirror Add-Ons -->
+    <script src="js/codemirror-4.03/addon/lint/lint.js"></script>
+    <script src="js/codemirror-4.03/addon/lint/javascript-lint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/show-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/anyword-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/javascript-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/python-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/currentmode-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/edit/closebrackets.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/foldcode.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/foldgutter.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/brace-fold.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/comment-fold.js"></script>
+    <script src="js/codemirror-4.03/addon/search/searchcursor.js"></script>
+    <script src="js/codemirror-4.03/addon/search/match-highlighter.js"></script>
 
     <script src="js/raphael-min.js"></script>
     <script src="js/colorwheel.js"></script>
@@ -136,11 +156,29 @@
             editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
                 lineNumbers: true,
                 matchBrackets: true,
+                autoCloseBrackets: true,
+                extraKeys: {
+                    "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                    "Ctrl-Space": "autocomplete"
+                },
+                foldGutter: true,
+                gutters: ["CodeMirror-lint-markers-1", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                highlightSelectionMatches: { showToken: /\w/ },
+                mode: { globalVars: true},
                 theme: 'ambiance'
             });
             editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
                 lineNumbers: true,
                 matchBrackets: true,
+                autoCloseBrackets: true,
+                extraKeys: {
+                    "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                    "Ctrl-Space": "autocomplete"
+                },
+                foldGutter: true,
+                gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                highlightSelectionMatches: { showToken: /\w/ },
+                mode: { globalVars: true },
                 theme: 'ambiance'
             });
 

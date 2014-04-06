@@ -96,7 +96,7 @@ namespace HomeGenie.Automation
                         }
                         else
                         {
-                            isConditionSatisfied = (bool)result.ReturnValue;
+                            isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
                         }
                     }
                     else 

@@ -221,7 +221,6 @@
     }
 
     .CodeMirror-scroll {
-        overflow-y: hidden;
         overflow-x: auto;
     }
 </style>
@@ -244,7 +243,7 @@
     <textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
 
 
-    <div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;">
+    <div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;" data-transition="slidedown">
         <a href="javascript:$('#program_error_message').popup('close')" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_errorstitle">Errors</h1>

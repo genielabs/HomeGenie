@@ -197,7 +197,7 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
     {
 		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors != '')
 		{
-            $('#program_error_button').show(100);
+		    $('#program_error_button').show(100);
 		}
         else
         {
@@ -297,7 +297,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 		$.ajax({
 			type: 'POST',
 			url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.' + (compile ? 'Compile' : 'Update')  + '/',
-			//                        dataType: 'json',
+			dataType: 'text',
 			data: JSON.stringify(programblock),
 			success: function (response) {
 				$('#automation_program_saving').popup('close'); 
@@ -306,7 +306,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 				{
 					//$('#program_barbutton_run').attr('disabled', 'disabled');
 					//$('#program_barbutton_run').button().button('refresh');
-					$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, 'Error compiling program!', true );
+					$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, 'Error updating program!', true );
 					setTimeout( $.mobile.hidePageLoadingMsg, 2000 );
 					HG.WebApp.ProgramEdit.ShowProgramErrors( response );
 				}
@@ -356,6 +356,7 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
             }
         }
         //
+        /*
 		var errs = message.split('\n');
 		var msgs = '';
 		for (x = 0; x < errs.length; x++)
@@ -364,15 +365,72 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 			{
 				msgs += '<b>' + (x + 1) + '.</b> ' + errs[x] + '<br/>';
 			}
-		}
-		$('#program_error_message_text').html('<h3>Errors:</h3><i>' + msgs + '</i><h3 style="color:red;font-weight:bold">Program disabled, fix errors first.</h3>');
-		$('#program_error_message').popup().popup('open');
-        $('#program_error_button').show(100);
+		}*/
+		$('#program_error_message_text').html('<h3>Errors:</h3><i>' + message.replace(/\n/g, '</br>') + '</i><h3 style="color:red;font-weight:bold">Program disabled, fix errors first.</h3>');
+		setTimeout(function () {
+		    $('#program_error_message').popup().popup('open');
+		    $('#program_error_button').show(100);
+		}, 1000);
+		//
+		var errors = null;
+		try
+		{
+		    errors = eval(message);
+		} catch (e) { }
+        //
+		if (errors != null)
+		{
+		    var currentLine = 0, currentBlock = '', marker = null, message = '';
+		    for (var e = 0; e < errors.length; e++)
+		    {
+		        var err = errors[e];
+		        if (currentLine != err.Line || currentBlock != err.CodeBlock)
+		        {
+		            if (marker != null)
+		            {
+		                $(marker).qtip({
+		                    content: { title: 'Error', text: message },
+		                    show: { event: 'mouseover', solo: true },
+		                    hide: 'mouseout',
+		                    style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+		                    button: true
+		                });
+		                message = '';
+		            }
+		            marker = document.createElement('div');
+		            marker.className = 'CodeMirror-lint-marker-error';
+		            if (err.CodeBlock == 'TC') // TC = Trigger Code
+		            {
+		                editor1.setGutterMarker(err.Line - 1, 'CodeMirror-lint-markers-1', marker);
+		            }
+		            else // CR = Code to Run
+		            {
+		                editor2.setGutterMarker(err.Line - 1, 'CodeMirror-lint-markers-2', marker);
+		            }
+		            currentLine = err.Line;
+		            currentBlock = err.CodeBlock;
+		        }
+		        message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '</br>';
+            }
+		    if (marker != null) {
+		        $(marker).qtip({
+		            content: { title: 'Error', text: message },
+		            show: { event: 'mouseover', solo: true },
+		            hide: 'mouseout',
+		            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+		            button: true
+		        });
+		    }
+        }
+
+
 	};
 
 HG.WebApp.ProgramEdit.HideProgramErrors = function ()
 	{
-		$('#program_error_message_text').html('');
+        editor1.clearGutter('CodeMirror-lint-markers-1');
+        editor2.clearGutter('CodeMirror-lint-markers-2');
+        $('#program_error_message_text').html('');
         $('#program_error_button').hide();
 	};
 

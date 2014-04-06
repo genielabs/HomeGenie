@@ -134,9 +134,12 @@
             </h3>
             When using CSharp automation program there are some difference: there is no <em>hg</em> object and we can call a <em>Helper Class</em> directly using its name. So, as the previous example, for turning on the porch light, we'll write:&nbsp; <br>
             <pre class="csharp">Modules.WithName("Porch Light").On();               </pre>
-            Also, as an extra feature, a CSharp program can use the <em>Raspberry-IO</em> helper class for programming Raspberry GPIO, SPI, I2C.<br>
+            <br>
+            <h3>Raspberry-IO<br>
+            </h3>
+            If you have got HomeGenie running on a Raspberry Pi, you can also easily program GPIO, I2C, SPI by using the <em>Raspberry-IO</em> helper class.<br>
             See <a title="Having fun with HG and Raspberry Pi" href="raspberrypi.html"><em>Having fun with HG and Raspberry Pi</em></a> for more details on Raspberry Pi programming with HG.<br>
-            With Javascript, Phyton and Ruby only simple GPIO programming is currently possible.<br>
+            For getting help or examples about using this class from Python and Ruby see also this <a href="http://www.homegenie.it/forum/index.php?topic=133.0" target="_blank">forum post</a>.<br>
             <br>
             <h3><span style="font-weight: bold;">Automation Program Module</span></h3>
             Each automation program have a module associated to it. The program module is used to store program's data and it is threated by HG just as a standard module.<br>

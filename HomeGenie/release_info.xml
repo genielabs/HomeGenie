@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r360</Version>
+  <Version>1.00 beta r361</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - Fixed bug in Toggle functionality that was causing desync in Status.Level event
-  - Fixed bug in Automatic Update system (if logging was enabled, it was crashing the update process)
-  - Fixed bug in ModulesManager.IsOn/IsOff</ReleaseNote>
+  <ReleaseNote>  - XTenLib: some lil' performance improvement
+  - Program Editor: added autocompletition (CTRL+SPACE), folding and errors gutter
+  - Program Editor: fixed mouse wheel scrolling
+  - Program Editor: updated CodeMirror to 4.03</ReleaseNote>
   <ReleaseDate>2014-04-04T18:00:49.0000Z</ReleaseDate>
 </ReleaseInfo>

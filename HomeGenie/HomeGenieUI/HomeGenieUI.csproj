@@ -240,6 +240,9 @@
     <None Include="html\control\bs3\widgets\sensor.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\css\jquery.qtip.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\css\ui.notify.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1134,31 +1137,7 @@
     <Content Include="html\ext\zwave\pepper1db\5254_8201_8120.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="html\js\codemirror-3.13\.gitattributes" />
-    <None Include="html\js\codemirror-3.13\.gitignore" />
-    <None Include="html\js\codemirror-3.13\.travis.yml" />
-    <None Include="html\js\codemirror-3.13\bin\compress" />
-    <None Include="html\js\codemirror-3.13\bin\lint" />
-    <None Include="html\js\codemirror-3.13\bin\source-highlight" />
-    <None Include="html\js\codemirror-3.13\CONTRIBUTING.md" />
-    <None Include="html\js\codemirror-3.13\LICENSE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\codemirror-3.13\mode\coffeescript\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\livescript\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\livescript\livescript.ls" />
-    <None Include="html\js\codemirror-3.13\mode\pascal\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\perl\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\ruby\LICENSE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\js\codemirror-3.13\mode\r\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\sieve\LICENSE" />
-    <None Include="html\js\codemirror-3.13\mode\xquery\LICENSE" />
-    <None Include="html\js\codemirror-3.13\package.json" />
-    <None Include="html\js\codemirror-3.13\README.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="html\js\codemirror-4.03\mode\livescript\livescript.ls" />
     <None Include="html\js\jquery-2.0.2.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1195,8 +1174,499 @@
     <Content Include="html\images\scheduler.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="html\js\codemirror-4.03\addon\comment\comment.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\comment\continuecomment.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\dialog\dialog.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\dialog\dialog.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\display\fullscreen.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\display\fullscreen.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\display\placeholder.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\display\rulers.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\closebrackets.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\closetag.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\continuelist.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\matchbrackets.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\matchtags.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\edit\trailingspace.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\brace-fold.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\comment-fold.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\foldcode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\foldgutter.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\foldgutter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\indent-fold.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\markdown-fold.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\fold\xml-fold.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\anyword-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\css-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\currentmode-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\html-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\javascript-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\python-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\show-hint.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\show-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\sql-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\hint\xml-hint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\coffeescript-lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\css-lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\javascript-lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\json-lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\lint.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\lint\yaml-lint.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\merge\dep\diff_match_patch.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\merge\merge.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\merge\merge.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\mode\loadmode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\mode\multiplex.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\mode\multiplex_test.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\mode\overlay.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\runmode\colorize.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\runmode\runmode-standalone.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\runmode\runmode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\runmode\runmode.node.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\scroll\scrollpastend.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\search\match-highlighter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\search\search.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\search\searchcursor.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\selection\active-line.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\selection\mark-selection.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\tern\tern.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\tern\tern.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\tern\worker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\addon\wrap\hardwrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\keymap\emacs.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\keymap\sublime.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\keymap\vim.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\lib\codemirror.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\lib\codemirror.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\apl\apl.js" />
+    <Content Include="html\js\codemirror-4.03\mode\apl\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\asterisk\asterisk.js" />
+    <Content Include="html\js\codemirror-4.03\mode\asterisk\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\clike\clike.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\clike\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\clike\scala.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\clojure\clojure.js" />
+    <Content Include="html\js\codemirror-4.03\mode\clojure\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\cobol\cobol.js" />
+    <Content Include="html\js\codemirror-4.03\mode\cobol\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\coffeescript\coffeescript.js" />
+    <Content Include="html\js\codemirror-4.03\mode\coffeescript\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\commonlisp\commonlisp.js" />
+    <Content Include="html\js\codemirror-4.03\mode\commonlisp\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\css\css.js" />
+    <Content Include="html\js\codemirror-4.03\mode\css\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\css\less.html" />
+    <Content Include="html\js\codemirror-4.03\mode\css\less_test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\css\scss.html" />
+    <Content Include="html\js\codemirror-4.03\mode\css\scss_test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\css\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\diff\diff.js" />
+    <Content Include="html\js\codemirror-4.03\mode\diff\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\django\django.js" />
+    <Content Include="html\js\codemirror-4.03\mode\django\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\dtd\dtd.js" />
+    <Content Include="html\js\codemirror-4.03\mode\dtd\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\dylan\dylan.js" />
+    <Content Include="html\js\codemirror-4.03\mode\dylan\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\d\d.js" />
+    <Content Include="html\js\codemirror-4.03\mode\d\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\ecl\ecl.js" />
+    <Content Include="html\js\codemirror-4.03\mode\ecl\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\eiffel\eiffel.js" />
+    <Content Include="html\js\codemirror-4.03\mode\eiffel\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\erlang\erlang.js" />
+    <Content Include="html\js\codemirror-4.03\mode\erlang\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\fortran\fortran.js" />
+    <Content Include="html\js\codemirror-4.03\mode\fortran\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\gas\gas.js" />
+    <Content Include="html\js\codemirror-4.03\mode\gas\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\gfm\gfm.js" />
+    <Content Include="html\js\codemirror-4.03\mode\gfm\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\gfm\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\gherkin\gherkin.js" />
+    <Content Include="html\js\codemirror-4.03\mode\gherkin\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\go\go.js" />
+    <Content Include="html\js\codemirror-4.03\mode\go\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\groovy\groovy.js" />
+    <Content Include="html\js\codemirror-4.03\mode\groovy\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\haml\haml.js" />
+    <Content Include="html\js\codemirror-4.03\mode\haml\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\haml\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\haskell\haskell.js" />
+    <Content Include="html\js\codemirror-4.03\mode\haskell\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\haxe\haxe.js" />
+    <Content Include="html\js\codemirror-4.03\mode\haxe\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="html\js\codemirror-4.03\mode\htmlembedded\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="html\js\codemirror-4.03\mode\htmlmixed\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\http\http.js" />
+    <Content Include="html\js\codemirror-4.03\mode\http\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\jade\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\jade\jade.js" />
+    <Content Include="html\js\codemirror-4.03\mode\javascript\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\javascript\javascript.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\javascript\json-ld.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\javascript\test.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\javascript\typescript.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\jinja2\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\jinja2\jinja2.js" />
+    <Content Include="html\js\codemirror-4.03\mode\julia\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\julia\julia.js" />
+    <Content Include="html\js\codemirror-4.03\mode\livescript\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\livescript\livescript.js" />
+    <Content Include="html\js\codemirror-4.03\mode\lua\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\lua\lua.js" />
+    <Content Include="html\js\codemirror-4.03\mode\markdown\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\markdown\markdown.js" />
+    <Content Include="html\js\codemirror-4.03\mode\markdown\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\meta.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\mirc\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\mirc\mirc.js" />
+    <Content Include="html\js\codemirror-4.03\mode\mllike\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\mllike\mllike.js" />
+    <Content Include="html\js\codemirror-4.03\mode\nginx\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\nginx\nginx.js" />
+    <Content Include="html\js\codemirror-4.03\mode\ntriples\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\ntriples\ntriples.js" />
+    <Content Include="html\js\codemirror-4.03\mode\octave\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\octave\octave.js" />
+    <Content Include="html\js\codemirror-4.03\mode\pascal\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\pascal\pascal.js" />
+    <Content Include="html\js\codemirror-4.03\mode\pegjs\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\pegjs\pegjs.js" />
+    <Content Include="html\js\codemirror-4.03\mode\perl\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\perl\perl.js" />
+    <Content Include="html\js\codemirror-4.03\mode\php\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\php\php.js" />
+    <Content Include="html\js\codemirror-4.03\mode\pig\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\pig\pig.js" />
+    <Content Include="html\js\codemirror-4.03\mode\properties\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\properties\properties.js" />
+    <Content Include="html\js\codemirror-4.03\mode\puppet\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\puppet\puppet.js" />
+    <Content Include="html\js\codemirror-4.03\mode\python\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\python\python.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\q\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\q\q.js" />
+    <Content Include="html\js\codemirror-4.03\mode\rpm\changes\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\rpm\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\rpm\rpm.js" />
+    <Content Include="html\js\codemirror-4.03\mode\rst\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\rst\rst.js" />
+    <Content Include="html\js\codemirror-4.03\mode\ruby\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\ruby\ruby.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\ruby\test.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\mode\rust\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\rust\rust.js" />
+    <Content Include="html\js\codemirror-4.03\mode\r\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\r\r.js" />
+    <Content Include="html\js\codemirror-4.03\mode\sass\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\sass\sass.js" />
+    <Content Include="html\js\codemirror-4.03\mode\scheme\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\scheme\scheme.js" />
+    <Content Include="html\js\codemirror-4.03\mode\shell\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\shell\shell.js" />
+    <Content Include="html\js\codemirror-4.03\mode\sieve\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\sieve\sieve.js" />
+    <Content Include="html\js\codemirror-4.03\mode\smalltalk\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\smalltalk\smalltalk.js" />
+    <Content Include="html\js\codemirror-4.03\mode\smartymixed\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\smartymixed\smartymixed.js" />
+    <Content Include="html\js\codemirror-4.03\mode\smarty\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\smarty\smarty.js" />
+    <Content Include="html\js\codemirror-4.03\mode\solr\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\solr\solr.js" />
+    <Content Include="html\js\codemirror-4.03\mode\sparql\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\sparql\sparql.js" />
+    <Content Include="html\js\codemirror-4.03\mode\sql\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\sql\sql.js" />
+    <Content Include="html\js\codemirror-4.03\mode\stex\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\stex\stex.js" />
+    <Content Include="html\js\codemirror-4.03\mode\stex\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\tcl\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\tcl\tcl.js" />
+    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="html\js\codemirror-4.03\mode\tiki\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\tiki\tiki.css" />
+    <Content Include="html\js\codemirror-4.03\mode\tiki\tiki.js" />
+    <Content Include="html\js\codemirror-4.03\mode\toml\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\toml\toml.js" />
+    <Content Include="html\js\codemirror-4.03\mode\turtle\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\turtle\turtle.js" />
+    <Content Include="html\js\codemirror-4.03\mode\vbscript\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\vbscript\vbscript.js" />
+    <Content Include="html\js\codemirror-4.03\mode\vb\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\vb\vb.js" />
+    <Content Include="html\js\codemirror-4.03\mode\velocity\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\velocity\velocity.js" />
+    <Content Include="html\js\codemirror-4.03\mode\verilog\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\verilog\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\verilog\verilog.js" />
+    <Content Include="html\js\codemirror-4.03\mode\xml\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\xml\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\xml\xml.js" />
+    <Content Include="html\js\codemirror-4.03\mode\xquery\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\xquery\test.js" />
+    <Content Include="html\js\codemirror-4.03\mode\xquery\xquery.js" />
+    <Content Include="html\js\codemirror-4.03\mode\yaml\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\yaml\yaml.js" />
+    <Content Include="html\js\codemirror-4.03\mode\z80\index.html" />
+    <Content Include="html\js\codemirror-4.03\mode\z80\z80.js" />
+    <Content Include="html\js\codemirror-4.03\theme\3024-day.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\3024-night.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\ambiance-mobile.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\ambiance.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\base16-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\base16-light.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\blackboard.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\cobalt.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\eclipse.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\elegant.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\erlang-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\lesser-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\mbo.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\mdn-like.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\midnight.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\monokai.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\neat.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\night.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\paraiso-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\paraiso-light.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\pastel-on-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\rubyblue.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\solarized.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\the-matrix.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\tomorrow-night-eighties.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\twilight.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\vibrant-ink.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\xq-dark.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\theme\xq-light.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\js\eventsource.js" />
     <Content Include="html\js\jquery.notify.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\jquery.qtip.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\pages\configure\scheduler\main.html">
@@ -1567,412 +2037,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\js\api\homegenie.voicecontrol.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\comment\comment.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\dialog\dialog.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\dialog\dialog.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\display\placeholder.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\edit\closebrackets.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\edit\closetag.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\edit\continuecomment.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\edit\continuelist.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\edit\matchbrackets.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\fold\brace-fold.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\fold\foldcode.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\fold\indent-fold.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\fold\xml-fold.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\html-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\javascript-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\pig-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\python-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\show-hint.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\show-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\hint\xml-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\lint\javascript-lint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\lint\json-lint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\lint\lint.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\lint\lint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\mode\loadmode.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\mode\multiplex.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\mode\overlay.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\runmode\colorize.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\runmode\runmode-standalone.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\runmode\runmode.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\runmode\runmode.node.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\search\match-highlighter.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\search\search.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\search\searchcursor.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\selection\active-line.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\addon\selection\mark-selection.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\demo\activeline.html" />
-    <Content Include="html\js\codemirror-3.13\demo\bidi.html" />
-    <Content Include="html\js\codemirror-3.13\demo\btree.html" />
-    <Content Include="html\js\codemirror-3.13\demo\buffers.html" />
-    <Content Include="html\js\codemirror-3.13\demo\changemode.html" />
-    <Content Include="html\js\codemirror-3.13\demo\closebrackets.html" />
-    <Content Include="html\js\codemirror-3.13\demo\closetag.html" />
-    <Content Include="html\js\codemirror-3.13\demo\complete.html" />
-    <Content Include="html\js\codemirror-3.13\demo\emacs.html" />
-    <Content Include="html\js\codemirror-3.13\demo\folding.html" />
-    <Content Include="html\js\codemirror-3.13\demo\fullscreen.html" />
-    <Content Include="html\js\codemirror-3.13\demo\html5complete.html" />
-    <Content Include="html\js\codemirror-3.13\demo\indentwrap.html" />
-    <Content Include="html\js\codemirror-3.13\demo\lint.html" />
-    <Content Include="html\js\codemirror-3.13\demo\loadmode.html" />
-    <Content Include="html\js\codemirror-3.13\demo\marker.html" />
-    <Content Include="html\js\codemirror-3.13\demo\markselection.html" />
-    <Content Include="html\js\codemirror-3.13\demo\matchhighlighter.html" />
-    <Content Include="html\js\codemirror-3.13\demo\multiplex.html" />
-    <Content Include="html\js\codemirror-3.13\demo\mustache.html" />
-    <Content Include="html\js\codemirror-3.13\demo\placeholder.html" />
-    <Content Include="html\js\codemirror-3.13\demo\preview.html" />
-    <Content Include="html\js\codemirror-3.13\demo\resize.html" />
-    <Content Include="html\js\codemirror-3.13\demo\runmode.html" />
-    <Content Include="html\js\codemirror-3.13\demo\search.html" />
-    <Content Include="html\js\codemirror-3.13\demo\spanaffectswrapping_shim.html" />
-    <Content Include="html\js\codemirror-3.13\demo\theme.html" />
-    <Content Include="html\js\codemirror-3.13\demo\variableheight.html" />
-    <Content Include="html\js\codemirror-3.13\demo\vim.html" />
-    <Content Include="html\js\codemirror-3.13\demo\visibletabs.html" />
-    <Content Include="html\js\codemirror-3.13\demo\widget.html" />
-    <Content Include="html\js\codemirror-3.13\demo\xmlcomplete.html" />
-    <Content Include="html\js\codemirror-3.13\doc\baboon.png" />
-    <Content Include="html\js\codemirror-3.13\doc\baboon_vector.svg" />
-    <Content Include="html\js\codemirror-3.13\doc\compress.html" />
-    <Content Include="html\js\codemirror-3.13\doc\docs.css" />
-    <Content Include="html\js\codemirror-3.13\doc\internals.html" />
-    <Content Include="html\js\codemirror-3.13\doc\manual.html" />
-    <Content Include="html\js\codemirror-3.13\doc\modes.html" />
-    <Content Include="html\js\codemirror-3.13\doc\oldrelease.html" />
-    <Content Include="html\js\codemirror-3.13\doc\realworld.html" />
-    <Content Include="html\js\codemirror-3.13\doc\reporting.html" />
-    <Content Include="html\js\codemirror-3.13\doc\upgrade_v2.2.html" />
-    <Content Include="html\js\codemirror-3.13\doc\upgrade_v3.html" />
-    <Content Include="html\js\codemirror-3.13\index.html" />
-    <Content Include="html\js\codemirror-3.13\keymap\emacs.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\keymap\vim.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\lib\codemirror.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\lib\codemirror.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\apl\apl.js" />
-    <Content Include="html\js\codemirror-3.13\mode\apl\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\asterisk\asterisk.js" />
-    <Content Include="html\js\codemirror-3.13\mode\asterisk\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\clike\clike.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\clike\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\clike\scala.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\clojure\clojure.js" />
-    <Content Include="html\js\codemirror-3.13\mode\clojure\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\cobol\cobol.js" />
-    <Content Include="html\js\codemirror-3.13\mode\cobol\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\coffeescript\coffeescript.js" />
-    <Content Include="html\js\codemirror-3.13\mode\coffeescript\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\commonlisp\commonlisp.js" />
-    <Content Include="html\js\codemirror-3.13\mode\commonlisp\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\css\css.js" />
-    <Content Include="html\js\codemirror-3.13\mode\css\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\css\scss.html" />
-    <Content Include="html\js\codemirror-3.13\mode\css\scss_test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\css\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\diff\diff.js" />
-    <Content Include="html\js\codemirror-3.13\mode\diff\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\d\d.js" />
-    <Content Include="html\js\codemirror-3.13\mode\d\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\ecl\ecl.js" />
-    <Content Include="html\js\codemirror-3.13\mode\ecl\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\erlang\erlang.js" />
-    <Content Include="html\js\codemirror-3.13\mode\erlang\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\gas\gas.js" />
-    <Content Include="html\js\codemirror-3.13\mode\gas\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\gfm\gfm.js" />
-    <Content Include="html\js\codemirror-3.13\mode\gfm\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\gfm\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\go\go.js" />
-    <Content Include="html\js\codemirror-3.13\mode\go\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\groovy\groovy.js" />
-    <Content Include="html\js\codemirror-3.13\mode\groovy\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\haml\haml.js" />
-    <Content Include="html\js\codemirror-3.13\mode\haml\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\haml\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\haskell\haskell.js" />
-    <Content Include="html\js\codemirror-3.13\mode\haskell\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\haxe\haxe.js" />
-    <Content Include="html\js\codemirror-3.13\mode\haxe\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\htmlembedded\htmlembedded.js" />
-    <Content Include="html\js\codemirror-3.13\mode\htmlembedded\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\htmlmixed\htmlmixed.js" />
-    <Content Include="html\js\codemirror-3.13\mode\htmlmixed\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\http\http.js" />
-    <Content Include="html\js\codemirror-3.13\mode\http\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\javascript\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\javascript\javascript.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\javascript\typescript.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\jinja2\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\jinja2\jinja2.js" />
-    <Content Include="html\js\codemirror-3.13\mode\less\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\less\less.js" />
-    <Content Include="html\js\codemirror-3.13\mode\livescript\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\livescript\livescript.js" />
-    <Content Include="html\js\codemirror-3.13\mode\lua\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\lua\lua.js" />
-    <Content Include="html\js\codemirror-3.13\mode\markdown\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\markdown\markdown.js" />
-    <Content Include="html\js\codemirror-3.13\mode\markdown\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\meta.js" />
-    <Content Include="html\js\codemirror-3.13\mode\mirc\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\mirc\mirc.js" />
-    <Content Include="html\js\codemirror-3.13\mode\ntriples\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\ntriples\ntriples.js" />
-    <Content Include="html\js\codemirror-3.13\mode\ocaml\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\ocaml\ocaml.js" />
-    <Content Include="html\js\codemirror-3.13\mode\pascal\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\pascal\pascal.js" />
-    <Content Include="html\js\codemirror-3.13\mode\perl\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\perl\perl.js" />
-    <Content Include="html\js\codemirror-3.13\mode\php\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\php\php.js" />
-    <Content Include="html\js\codemirror-3.13\mode\pig\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\pig\pig.js" />
-    <Content Include="html\js\codemirror-3.13\mode\properties\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\properties\properties.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\python\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\python\LICENSE.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\python\python.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\q\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\q\q.js" />
-    <Content Include="html\js\codemirror-3.13\mode\rpm\changes\changes.js" />
-    <Content Include="html\js\codemirror-3.13\mode\rpm\changes\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\rpm\spec\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\rpm\spec\spec.css" />
-    <Content Include="html\js\codemirror-3.13\mode\rpm\spec\spec.js" />
-    <Content Include="html\js\codemirror-3.13\mode\rst\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\rst\LICENSE.txt" />
-    <Content Include="html\js\codemirror-3.13\mode\rst\rst.js" />
-    <Content Include="html\js\codemirror-3.13\mode\ruby\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\ruby\ruby.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\mode\rust\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\rust\rust.js" />
-    <Content Include="html\js\codemirror-3.13\mode\r\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\r\r.js" />
-    <Content Include="html\js\codemirror-3.13\mode\sass\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\sass\sass.js" />
-    <Content Include="html\js\codemirror-3.13\mode\scheme\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\scheme\scheme.js" />
-    <Content Include="html\js\codemirror-3.13\mode\shell\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\shell\shell.js" />
-    <Content Include="html\js\codemirror-3.13\mode\sieve\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\sieve\sieve.js" />
-    <Content Include="html\js\codemirror-3.13\mode\smalltalk\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\smalltalk\smalltalk.js" />
-    <Content Include="html\js\codemirror-3.13\mode\smarty\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\smarty\smarty.js" />
-    <Content Include="html\js\codemirror-3.13\mode\sparql\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\sparql\sparql.js" />
-    <Content Include="html\js\codemirror-3.13\mode\sql\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\sql\sql.js" />
-    <Content Include="html\js\codemirror-3.13\mode\stex\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\stex\stex.js" />
-    <Content Include="html\js\codemirror-3.13\mode\stex\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\tcl\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\tcl\tcl.js" />
-    <Content Include="html\js\codemirror-3.13\mode\tiddlywiki\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\tiddlywiki\tiddlywiki.css" />
-    <Content Include="html\js\codemirror-3.13\mode\tiddlywiki\tiddlywiki.js" />
-    <Content Include="html\js\codemirror-3.13\mode\tiki\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\tiki\tiki.css" />
-    <Content Include="html\js\codemirror-3.13\mode\tiki\tiki.js" />
-    <Content Include="html\js\codemirror-3.13\mode\turtle\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\turtle\turtle.js" />
-    <Content Include="html\js\codemirror-3.13\mode\vbscript\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\vbscript\vbscript.js" />
-    <Content Include="html\js\codemirror-3.13\mode\vb\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\vb\LICENSE.txt" />
-    <Content Include="html\js\codemirror-3.13\mode\vb\vb.js" />
-    <Content Include="html\js\codemirror-3.13\mode\velocity\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\velocity\velocity.js" />
-    <Content Include="html\js\codemirror-3.13\mode\verilog\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\verilog\verilog.js" />
-    <Content Include="html\js\codemirror-3.13\mode\xml\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\xml\xml.js" />
-    <Content Include="html\js\codemirror-3.13\mode\xquery\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\xquery\test.js" />
-    <Content Include="html\js\codemirror-3.13\mode\xquery\xquery.js" />
-    <Content Include="html\js\codemirror-3.13\mode\yaml\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\yaml\yaml.js" />
-    <Content Include="html\js\codemirror-3.13\mode\z80\index.html" />
-    <Content Include="html\js\codemirror-3.13\mode\z80\z80.js" />
-    <Content Include="html\js\codemirror-3.13\test\comment_test.js" />
-    <Content Include="html\js\codemirror-3.13\test\doc_test.js" />
-    <Content Include="html\js\codemirror-3.13\test\driver.js" />
-    <Content Include="html\js\codemirror-3.13\test\index.html" />
-    <Content Include="html\js\codemirror-3.13\test\lint\acorn.js" />
-    <Content Include="html\js\codemirror-3.13\test\lint\lint.js" />
-    <Content Include="html\js\codemirror-3.13\test\lint\parse-js.js" />
-    <Content Include="html\js\codemirror-3.13\test\lint\walk.js" />
-    <Content Include="html\js\codemirror-3.13\test\mode_test.css" />
-    <Content Include="html\js\codemirror-3.13\test\mode_test.js" />
-    <Content Include="html\js\codemirror-3.13\test\phantom_driver.js" />
-    <Content Include="html\js\codemirror-3.13\test\run.js" />
-    <Content Include="html\js\codemirror-3.13\test\test.js" />
-    <Content Include="html\js\codemirror-3.13\test\vim_test.js" />
-    <Content Include="html\js\codemirror-3.13\theme\ambiance-mobile.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\ambiance.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\blackboard.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\cobalt.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\eclipse.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\elegant.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\erlang-dark.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\lesser-dark.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\midnight.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\monokai.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\neat.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\night.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\rubyblue.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\solarized.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\twilight.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\vibrant-ink.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\xq-dark.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-3.13\theme\xq-light.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\js\colorwheel.js">
