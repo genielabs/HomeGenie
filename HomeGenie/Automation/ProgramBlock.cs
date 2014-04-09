@@ -64,7 +64,7 @@ namespace HomeGenie.Automation
         private System.Reflection.Assembly appAssembly;
 
         // IronScript fields for Python, Ruby, Javascript
-        private object scriptEngine = null;
+        internal object scriptEngine = null;
         private ScriptScope scriptScope = null;
         private ScriptingHost hgScriptingHost = null;
 

@@ -34,9 +34,12 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
+using Microsoft.Scripting.Hosting;
+using Microsoft.Scripting;
 
 namespace HomeGenie.Service.Handlers
 {
+    
     public class Automation
     {
         private HomeGenieService homegenie;
@@ -150,10 +153,11 @@ namespace HomeGenie.Service.Handlers
                         newProgram.Group = migCommand.GetOption(0);
                         homegenie.ProgramEngine.ProgramAdd(newProgram);
                         //
-                        //TODO: move program compilation into an method of ProgramEngine and also apply to Programs.Update
                         newProgram.IsEnabled = false;
                         newProgram.ScriptErrors = "";
                         newProgram.AppAssembly = null;
+                        //
+                        homegenie.ProgramEngine.CompileScript(newProgram);
                         //
                         homegenie.UpdateProgramsDatabase();
                         //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
@@ -236,7 +240,7 @@ namespace HomeGenie.Service.Handlers
                             // reset last condition evaluation status
                             currentProgram.LastConditionEvaluationResult = false;
                         }
-
+                        //
                         if (migCommand.Command == "Programs.Compile")
                         {
                             // reset previous error status
@@ -244,49 +248,16 @@ namespace HomeGenie.Service.Handlers
                             currentProgram.Stop();
                             currentProgram.ScriptErrors = "";
                             //
-                            if (currentProgram.Type.ToLower() == "csharp")
-                            {
-                                // dispose assembly and interrupt current task
-                                currentProgram.AppAssembly = null; 
-                                currentProgram.IsEnabled = false;
-                                //
-                                System.CodeDom.Compiler.CompilerResults res = homegenie.ProgramEngine.CompileScript(currentProgram);
-                                //
-                                if (res.Errors.Count == 0)
-                                {
-                                    currentProgram.AppAssembly = res.CompiledAssembly;
-                                }
-                                else
-                                {
-                                    int sourcelines = currentProgram.ScriptSource.Split('\n').Length;
-                                    string errmsg = "[\n";
-                                    foreach (System.CodeDom.Compiler.CompilerError error in res.Errors)
-                                    {
-                                        //if (!ce.IsWarning)
-                                        {
-                                            int errline = (error.Line - 16);
-                                            string blocktype = "CR";
-                                            if (errline >= sourcelines + 7)
-                                            {
-                                                errline -= (sourcelines + 7);
-                                                blocktype = "TC";
-                                            }
-                                            // TODO: use Json.Serialize and convert from c# CompileError class instance to json object
-                                            errmsg += " { \"Line\" : " + errline + ", \"Column\" : " + error.Column + ", \"ErrorMessage\" : \"" + error.ErrorText + "\", \"ErrorNumber\" : \"" + error.ErrorNumber + "\", \"CodeBlock\" : \"" + blocktype + "\" },\n";
-                                        }
-                                    }
-                                    errmsg = errmsg.TrimEnd(new char[]{',', '\n'}) + "\n]";
-                                    currentProgram.ScriptErrors = errmsg;
-                                }
-                                //
-                                migCommand.Response = currentProgram.ScriptErrors;
-                            }
+                            List<ProgramError> errors = homegenie.ProgramEngine.CompileScript(currentProgram);
                             //
                             currentProgram.IsEnabled = newProgram.IsEnabled;
+                            currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
+                            migCommand.Response = currentProgram.ScriptErrors;
                         }
-
+                        //
                         homegenie.UpdateProgramsDatabase();
                         //
+                        homegenie.modules_RefreshPrograms();
                         homegenie.modules_RefreshVirtualModules();
                         homegenie.modules_Sort();
                         break;

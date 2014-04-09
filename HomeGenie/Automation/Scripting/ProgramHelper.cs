@@ -74,22 +74,11 @@ namespace HomeGenie.Automation.Scripting
 
         public void Run(string programId, string options)
         {
-            //TODO: improve locking for single instance run only
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
-            program.IsRunning = true;
-            if (program.Type.ToLower() == "csharp")
+            if (program != null && program.Address != myProgramId && !program.IsRunning)
             {
-                program.Run(options);
+                homegenie.ProgramEngine.Run(program, options);
             }
-            else if (program.Type.ToLower() == "wizard")
-            {
-                homegenie.ProgramEngine.ExecuteWizardScript(program);
-            }
-            else
-            {
-                // Run IronScript
-            }
-            program.IsRunning = false;
         }
 
         /// <summary>
@@ -500,14 +489,14 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper RaiseEvent(string parameter, string value, string description)
         {
-            var actionEvent = new MIG.InterfacePropertyChangedAction();
-            actionEvent.Domain = programModule.Domain;
-            actionEvent.Path = parameter;
-            actionEvent.Value = value;
-            actionEvent.SourceId = programModule.Address;
-            actionEvent.SourceType = "Automation Program";
             try
             {
+                var actionEvent = new MIG.InterfacePropertyChangedAction();
+                actionEvent.Domain = programModule.Domain;
+                actionEvent.Path = parameter;
+                actionEvent.Value = value;
+                actionEvent.SourceId = programModule.Address;
+                actionEvent.SourceType = "Automation Program";
                 homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
             catch (Exception ex)
@@ -519,14 +508,14 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper RaiseEvent(ModuleHelper module, string parameter, string value, string description)
         {
-            var actionEvent = new MIG.InterfacePropertyChangedAction();
-            actionEvent.Domain = module.Instance.Domain;
-            actionEvent.Path = parameter;
-            actionEvent.Value = value;
-            actionEvent.SourceId = module.Instance.Address;
-            actionEvent.SourceType = "Virtual Module";
             try
             {
+                var actionEvent = new MIG.InterfacePropertyChangedAction();
+                actionEvent.Domain = module.Instance.Domain;
+                actionEvent.Path = parameter;
+                actionEvent.Value = value;
+                actionEvent.SourceId = module.Instance.Address;
+                actionEvent.SourceType = "Virtual Module";
                 homegenie.SignalModulePropertyChange(this, module.Instance, actionEvent);
             }
             catch (Exception ex)

@@ -1022,7 +1022,7 @@ namespace HomeGenie.Service
                 {
                     program.IsRunning = false;
                     //program.IsEvaluatingConditionBlock = false;
-                    program.ScriptErrors = "";
+                    //program.ScriptErrors = "";
                     // backward compatibility with hg < 0.91
                     if (program.Address == 0)
                     {
@@ -1034,10 +1034,10 @@ namespace HomeGenie.Service
                     {
                         program.ScriptErrors = "Program update is required.";
                     }
-                    else
-                    {
-                        program.ScriptErrors = "";
-                    }
+                    //else
+                    //{
+                    //    program.ScriptErrors = "";
+                    //}
                     masterControlProgram.ProgramAdd(program);
                 }
                 reader.Close();

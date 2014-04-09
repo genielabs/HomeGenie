@@ -504,6 +504,7 @@ namespace HomeGenie.Service.Handlers
                                 var updater = Utility.StartUpdater(false);
                                 // wait for HomeGenieUpdater.exe to exit
                                 updater.WaitForExit();
+                                homegenie.MigService.ResetWebFileCache();
                                 homegenie.UpdateChecker.Check();
                             }
                         }

@@ -547,6 +547,8 @@
       updateSelection(cm);
       setDocumentHeight(cm, barMeasure);
       updateScrollbars(cm, barMeasure);
+      if (webkit && cm.options.lineWrapping)
+        checkForWebkitWidthBug(cm, barMeasure); // (Issue #2420)
       if (first && cm.options.lineWrapping && oldWidth != cm.display.scroller.clientWidth) {
         forced = true;
         continue;
@@ -652,10 +654,13 @@
   function setDocumentHeight(cm, measure) {
     cm.display.sizer.style.minHeight = cm.display.heightForcer.style.top = measure.docHeight + "px";
     cm.display.gutters.style.height = Math.max(measure.docHeight, measure.clientHeight - scrollerCutOff) + "px";
+  }
+
+
+  function checkForWebkitWidthBug(cm, measure) {
     // Work around Webkit bug where it sometimes reserves space for a
     // non-existing phantom scrollbar in the scroller (Issue #2420)
-    if (webkit && cm.options.lineWrapping &&
-        cm.display.sizer.offsetWidth + cm.display.gutters.offsetWidth < cm.display.scroller.clientWidth - 1) {
+    if (cm.display.sizer.offsetWidth + cm.display.gutters.offsetWidth < cm.display.scroller.clientWidth - 1) {
       cm.display.sizer.style.minHeight = cm.display.heightForcer.style.top = "0px";
       cm.display.gutters.style.height = measure.docHeight + "px";
     }
@@ -3669,7 +3674,6 @@
     else no = lineNo(handle);
     if (no == null) return null;
     if (op(line, no)) regLineChange(cm, no, changeType);
-    else return null;
     return line;
   }
 
@@ -3882,7 +3886,7 @@
       var stream = new StringStream(line.text, this.options.tabSize);
       while (stream.pos < pos.ch && !stream.eol()) {
         stream.start = stream.pos;
-        var style = mode.token(stream, state);
+        var style = readToken(mode, stream, state);
       }
       return {start: stream.start,
               end: stream.pos,
@@ -5548,6 +5552,13 @@
     if (inner.mode.blankLine) return inner.mode.blankLine(inner.state);
   }
 
+  function readToken(mode, stream, state) {
+    var style = mode.token(stream, state);
+    if (stream.pos <= stream.start)
+      throw new Error("Mode " + mode.name + " failed to advance stream.");
+    return style;
+  }
+
   // Run the given mode's parser over a line, calling f for each token.
   function runMode(cm, text, mode, state, f, lineClasses, forceToEnd) {
     var flattenSpans = mode.flattenSpans;
@@ -5562,7 +5573,7 @@
         stream.pos = text.length;
         style = null;
       } else {
-        style = extractLineClasses(mode.token(stream, state), lineClasses);
+        style = extractLineClasses(readToken(mode, stream, state), lineClasses);
       }
       if (cm.options.addModeClass) {
         var mName = CodeMirror.innerMode(mode, state).mode.name;
@@ -5643,7 +5654,7 @@
     stream.start = stream.pos = startAt || 0;
     if (text == "") callBlankLine(mode, state);
     while (!stream.eol() && stream.pos <= cm.options.maxHighlightLength) {
-      mode.token(stream, state);
+      readToken(mode, stream, state);
       stream.start = stream.pos;
     }
   }

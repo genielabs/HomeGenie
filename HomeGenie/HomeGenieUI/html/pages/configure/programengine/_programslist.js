@@ -428,7 +428,7 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog)
         else {
             status = 'black';
         }
-        if (prog.Type.toLowerCase() != 'wizard' && prog.ScriptErrors != '') {
+        if (prog.Type.toLowerCase() != 'wizard' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]') {
             if (prog.IsEnabled) {
                 status = 'red';
             }
@@ -457,6 +457,7 @@ HG.WebApp.ProgramsList.EditProgram = function ()
 			    HG.WebApp.ProgramEdit._CurrentProgram.Description = HG.WebApp.Data.Programs[i].Description;
 			    HG.WebApp.ProgramEdit._CurrentProgram.Address = HG.WebApp.Data.Programs[i].Address;
 				HG.WebApp.ProgramEdit._CurrentProgram.Domain = HG.WebApp.Data.Programs[i].Domain;
+				HG.WebApp.ProgramEdit._CurrentProgram.IsEnabled = HG.WebApp.Data.Programs[i].IsEnabled;
 				HG.WebApp.ProgramEdit._CurrentProgram.Conditions = HG.WebApp.Data.Programs[i].Conditions;
 				HG.WebApp.ProgramEdit._CurrentProgram.Commands = HG.WebApp.Data.Programs[i].Commands;
                 //

@@ -32,9 +32,19 @@ using HomeGenie.Service;
 using MIG;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
+using Microsoft.Scripting.Hosting;
 
 namespace HomeGenie.Automation
 {
+    public class ProgramError
+    {
+        public int Line = 0;
+        public int Column = 0;
+        public string ErrorMessage;
+        public string ErrorNumber;
+        public string CodeBlock;
+    }
+
     public class ProgramEngine
     {
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
@@ -52,6 +62,22 @@ namespace HomeGenie.Automation
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
+
+        public class ScriptEngineErrors : ErrorListener
+        {
+            private string blockType = "TC";
+            public List<ProgramError> Errors = new List<ProgramError>();
+
+            public ScriptEngineErrors(string type)
+            {
+                blockType = type;
+            }
+
+            public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
+            {
+                Errors.Add(new ProgramError() { Line = span.Start.Line, Column = span.Start.Column, ErrorMessage = message, ErrorNumber = errorCode.ToString(), CodeBlock = blockType });
+            }
+        }
 
         public class EvaluateProgramConditionArgs
         {
@@ -139,7 +165,7 @@ namespace HomeGenie.Automation
                 //
                 callback(program, isConditionSatisfied);
                 //
-                Thread.Sleep(750);
+                Thread.Sleep(500);
             }
         }
 
@@ -164,40 +190,23 @@ namespace HomeGenie.Automation
             get { return scheduler; }
         }
 
-        public System.CodeDom.Compiler.CompilerResults CompileScript(ProgramBlock program)
+        public List<ProgramError> CompileScript(ProgramBlock program)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(program.AssemblyFile)))
+            List<ProgramError> errors = new List<ProgramError>();
+            switch (program.Type.ToLower())
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(program.AssemblyFile));
+                case "csharp":
+                    errors = CompileCsharp(program);
+                    break;
+                case "ruby":
+                case "python":
+                    errors = CompileIronScript(program);
+                    break;
+                case "javascript":
+                    errors = CompileJavascript(program);
+                    break;
             }
-            // DO NOT CHANGE THE FOLLOWING LINES OF CODE
-            // it is a lil' trick for mono compatibility
-            // since it was caching the assembly when using the same name
-            string tmpfile = Guid.NewGuid().ToString() + ".dll";
-            var result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
-            // delete old assembly
-            try
-            {
-
-                if (File.Exists(program.AssemblyFile))
-                {
-                    // delete old assebly
-                    File.Delete(program.AssemblyFile);
-                }
-                // move newly compiled assembly to programs folder
-                if (result.Errors.Count == 0)
-                {
-                    // submitting new assembly
-                    File.Move(tmpfile, program.AssemblyFile);
-                }
-            }
-            catch (Exception ex)
-            {
-                // report errors during post-compilation process
-                //pb.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
-                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "0", ex.Message + "\n" + ex.StackTrace));
-            }
-            return result;
+            return errors;
         }
 
         public void Run(ProgramBlock program, string options)
@@ -212,6 +221,7 @@ namespace HomeGenie.Automation
             }
             //
             program.IsRunning = true;
+            RaiseProgramModuleEvent(program, "Program.Status", "Running");
             //
             if (program.Type.ToLower() != "wizard")
             {
@@ -234,6 +244,7 @@ namespace HomeGenie.Automation
                             homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, program.Address.ToString(), "Automation Error", "CR Runtime Error", result.Exception.Message);
                         }
                         program.IsRunning = false;
+                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
                     });
                     //
                     try
@@ -244,6 +255,7 @@ namespace HomeGenie.Automation
                     {
                         program.Stop();
                         program.IsRunning = false;
+                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
                     }
                 }
             }
@@ -269,6 +281,7 @@ namespace HomeGenie.Automation
                     {
                         program.IsRunning = false;
                     }
+                    RaiseProgramModuleEvent(program, "Program.Status", "Idle");
                 });
                 //
                 program.ProgramThread.Start();
@@ -333,6 +346,14 @@ namespace HomeGenie.Automation
                             string cs = program.Commands[x].CommandString;
                             switch (cs)
                             {
+                                case "Program.Run":
+                                    string programId = program.Commands[x].CommandArguments;
+                                    var programToRun = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+                                    if (programToRun != null && programToRun.Address != program.Address && !programToRun.IsRunning)
+                                    {
+                                        Run(programToRun, "");
+                                    }
+                                    break;
                                 case "Program.Pause":
                                     Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
                                     break;
@@ -369,6 +390,165 @@ namespace HomeGenie.Automation
                 Thread.Sleep(10);
             }
         }
+
+        private void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
+        {
+            var programModule = homegenie.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
+            if (programModule != null)
+            {
+                var actionEvent = new MIG.InterfacePropertyChangedAction();
+                actionEvent.Domain = programModule.Domain;
+                actionEvent.Path = property;
+                actionEvent.Value = value;
+                actionEvent.SourceId = programModule.Address;
+                actionEvent.SourceType = "Automation Program";
+                Utility.ModuleParameterSet(programModule, property, value);
+                homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
+            }
+        }
+
+        private List<ProgramError> CompileIronScript(ProgramBlock program)
+        {
+            List<ProgramError> errors = new List<ProgramError>();
+
+            ScriptSource source = (program.scriptEngine as ScriptEngine).CreateScriptSourceFromString(program.ScriptCondition);
+            ScriptEngineErrors errorListener = new ScriptEngineErrors("TC");
+            source.Compile(errorListener);
+            errors.AddRange(errorListener.Errors);
+            errorListener = new ScriptEngineErrors("CR");
+            source = (program.scriptEngine as ScriptEngine).CreateScriptSourceFromString(program.ScriptSource);
+            source.Compile(errorListener);
+            errors.AddRange(errorListener.Errors);
+            
+            return errors;
+        }
+
+        private List<ProgramError> CompileJavascript(ProgramBlock program)
+        {
+            List<ProgramError> errors = new List<ProgramError>();
+
+            Jint.Parser.JavaScriptParser jp = new Jint.Parser.JavaScriptParser(false);
+            Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
+            try
+            {
+                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptCondition);
+            }
+            catch (Exception e)
+            {
+                // TODO: parse error message
+                if (e.Message.Contains(":"))
+                {
+                    string[] error = e.Message.Split(':');
+                    string message = error[1];
+                    int line = int.Parse(error[0].Split(' ')[0]);
+                    errors.Add(new ProgramError()
+                    {
+                        Line = line,
+                        ErrorMessage = message,
+                        CodeBlock = "TC"
+                    });
+                }
+            }
+            //
+            try
+            {
+                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptSource);
+            }
+            catch (Exception e)
+            {
+                // TODO: parse error message
+                if (e.Message.Contains(":"))
+                {
+                    string[] error = e.Message.Split(':');
+                    string message = error[1];
+                    int line = int.Parse(error[0].Split(' ')[0]);
+                    errors.Add(new ProgramError()
+                    {
+                        Line = line,
+                        ErrorMessage = message,
+                        CodeBlock = "CR"
+                    });
+                }
+            }
+
+            return errors;
+        }
+
+        private List<ProgramError> CompileCsharp(ProgramBlock program)
+        {
+            List<ProgramError> errors = new List<ProgramError>();
+
+            // dispose assembly and interrupt current task
+            program.AppAssembly = null;
+            program.IsEnabled = false;
+
+            if (!Directory.Exists(Path.GetDirectoryName(program.AssemblyFile)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(program.AssemblyFile));
+            }
+            // DO NOT CHANGE THE FOLLOWING LINES OF CODE
+            // it is a lil' trick for mono compatibility
+            // since it was caching the assembly when using the same name
+            string tmpfile = Guid.NewGuid().ToString() + ".dll";
+            var result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
+            // delete old assembly
+            try
+            {
+
+                if (File.Exists(program.AssemblyFile))
+                {
+                    // delete old assebly
+                    File.Delete(program.AssemblyFile);
+                }
+                // move newly compiled assembly to programs folder
+                if (result.Errors.Count == 0)
+                {
+                    // submitting new assembly
+                    File.Move(tmpfile, program.AssemblyFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                // report errors during post-compilation process
+                //pb.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
+                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "0", ex.Message + "\n" + ex.StackTrace));
+            }
+
+
+            //
+            if (result.Errors.Count == 0)
+            {
+                program.AppAssembly = result.CompiledAssembly;
+            }
+            else
+            {
+                int sourceLines = program.ScriptSource.Split('\n').Length;
+                foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
+                {
+                    //if (!ce.IsWarning)
+                    {
+                        int errorRow = (error.Line - 16);
+                        string blockType = "CR";
+                        if (errorRow >= sourceLines + 7)
+                        {
+                            errorRow -= (sourceLines + 7);
+                            blockType = "TC";
+                        }
+                        errors.Add(new ProgramError()
+                        {
+                            Line = errorRow,
+                            Column = error.Column,
+                            ErrorMessage = error.ErrorText,
+                            ErrorNumber = error.ErrorNumber,
+                            CodeBlock = blockType
+                        });
+                    }
+                }
+            }
+
+            return errors;
+        }
+
 
         private bool VerifyProgramCondition(ProgramCondition c)
         {
@@ -528,8 +708,16 @@ namespace HomeGenie.Automation
             ProgramBlock program = (ProgramBlock)sender;
             if (isEnabled)
             {
+                homegenie.modules_RefreshPrograms();
+                RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
                 StartProgramEvaluator(program);
             }
+            else
+            {
+                RaiseProgramModuleEvent(program, "Program.Status", "Disabled");
+                homegenie.modules_RefreshPrograms();
+            }
+            homegenie.modules_Sort();
         }
     }
 }

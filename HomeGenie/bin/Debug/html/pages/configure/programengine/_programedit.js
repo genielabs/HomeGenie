@@ -195,7 +195,8 @@ HG.WebApp.ProgramEdit.GetModuleComparableProperties = function (module)
 
 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () 
     {
-		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors != '')
+        var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;
+		if (errors.trim() != '' && errors.trim() != '[]')
 		{
 		    $('#program_error_button').show(100);
 		}
@@ -302,7 +303,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			success: function (response) {
 				$('#automation_program_saving').popup('close'); 
 				$.mobile.hidePageLoadingMsg();
-				if (response.trim() != '')
+				if (response.trim() != '' && response.trim() != '[]')
 				{
 					//$('#program_barbutton_run').attr('disabled', 'disabled');
 					//$('#program_barbutton_run').button().button('refresh');

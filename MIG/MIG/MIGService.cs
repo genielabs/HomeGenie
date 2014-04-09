@@ -244,6 +244,11 @@ namespace MIG
             webServiceConfig.Password = adminPasswordHash;
         }
 
+        public void ResetWebFileCache()
+        {
+            webFileCache.Clear();
+        }
+
         private void webGateway_ProcessRequest(object gwRequest)
         {
             var request = (WebServiceGatewayRequest)gwRequest;
@@ -534,5 +539,6 @@ namespace MIG
         }
 
         #endregion
+
     }
 }

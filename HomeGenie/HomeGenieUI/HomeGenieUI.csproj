@@ -1137,7 +1137,15 @@
     <Content Include="html\ext\zwave\pepper1db\5254_8201_8120.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\livescript\livescript.ls" />
+    <Content Include="html\js\codemirror-4.03\AUTHORS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\js\codemirror-4.03\README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="html\js\jquery-2.0.2.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1244,9 +1252,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\js\codemirror-4.03\addon\hint\css-hint.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\js\codemirror-4.03\addon\hint\currentmode-hint.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\js\codemirror-4.03\addon\hint\html-hint.js">
@@ -1369,10 +1374,6 @@
     <Content Include="html\js\codemirror-4.03\lib\codemirror.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\apl\apl.js" />
-    <Content Include="html\js\codemirror-4.03\mode\apl\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\asterisk\asterisk.js" />
-    <Content Include="html\js\codemirror-4.03\mode\asterisk\index.html" />
     <Content Include="html\js\codemirror-4.03\mode\clike\clike.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1382,66 +1383,6 @@
     <Content Include="html\js\codemirror-4.03\mode\clike\scala.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\clojure\clojure.js" />
-    <Content Include="html\js\codemirror-4.03\mode\clojure\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\cobol\cobol.js" />
-    <Content Include="html\js\codemirror-4.03\mode\cobol\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\coffeescript\coffeescript.js" />
-    <Content Include="html\js\codemirror-4.03\mode\coffeescript\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\commonlisp\commonlisp.js" />
-    <Content Include="html\js\codemirror-4.03\mode\commonlisp\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\css\css.js" />
-    <Content Include="html\js\codemirror-4.03\mode\css\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\css\less.html" />
-    <Content Include="html\js\codemirror-4.03\mode\css\less_test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\css\scss.html" />
-    <Content Include="html\js\codemirror-4.03\mode\css\scss_test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\css\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\diff\diff.js" />
-    <Content Include="html\js\codemirror-4.03\mode\diff\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\django\django.js" />
-    <Content Include="html\js\codemirror-4.03\mode\django\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\dtd\dtd.js" />
-    <Content Include="html\js\codemirror-4.03\mode\dtd\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\dylan\dylan.js" />
-    <Content Include="html\js\codemirror-4.03\mode\dylan\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\d\d.js" />
-    <Content Include="html\js\codemirror-4.03\mode\d\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\ecl\ecl.js" />
-    <Content Include="html\js\codemirror-4.03\mode\ecl\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\eiffel\eiffel.js" />
-    <Content Include="html\js\codemirror-4.03\mode\eiffel\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\erlang\erlang.js" />
-    <Content Include="html\js\codemirror-4.03\mode\erlang\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\fortran\fortran.js" />
-    <Content Include="html\js\codemirror-4.03\mode\fortran\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\gas\gas.js" />
-    <Content Include="html\js\codemirror-4.03\mode\gas\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\gfm\gfm.js" />
-    <Content Include="html\js\codemirror-4.03\mode\gfm\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\gfm\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\gherkin\gherkin.js" />
-    <Content Include="html\js\codemirror-4.03\mode\gherkin\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\go\go.js" />
-    <Content Include="html\js\codemirror-4.03\mode\go\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\groovy\groovy.js" />
-    <Content Include="html\js\codemirror-4.03\mode\groovy\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\haml\haml.js" />
-    <Content Include="html\js\codemirror-4.03\mode\haml\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\haml\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\haskell\haskell.js" />
-    <Content Include="html\js\codemirror-4.03\mode\haskell\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\haxe\haxe.js" />
-    <Content Include="html\js\codemirror-4.03\mode\haxe\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\htmlembedded\htmlembedded.js" />
-    <Content Include="html\js\codemirror-4.03\mode\htmlembedded\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\htmlmixed\htmlmixed.js" />
-    <Content Include="html\js\codemirror-4.03\mode\htmlmixed\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\http\http.js" />
-    <Content Include="html\js\codemirror-4.03\mode\http\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\jade\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\jade\jade.js" />
     <Content Include="html\js\codemirror-4.03\mode\javascript\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1457,57 +1398,15 @@
     <Content Include="html\js\codemirror-4.03\mode\javascript\typescript.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\jinja2\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\jinja2\jinja2.js" />
-    <Content Include="html\js\codemirror-4.03\mode\julia\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\julia\julia.js" />
-    <Content Include="html\js\codemirror-4.03\mode\livescript\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\livescript\livescript.js" />
-    <Content Include="html\js\codemirror-4.03\mode\lua\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\lua\lua.js" />
-    <Content Include="html\js\codemirror-4.03\mode\markdown\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\markdown\markdown.js" />
-    <Content Include="html\js\codemirror-4.03\mode\markdown\test.js" />
     <Content Include="html\js\codemirror-4.03\mode\meta.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\mirc\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\mirc\mirc.js" />
-    <Content Include="html\js\codemirror-4.03\mode\mllike\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\mllike\mllike.js" />
-    <Content Include="html\js\codemirror-4.03\mode\nginx\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\nginx\nginx.js" />
-    <Content Include="html\js\codemirror-4.03\mode\ntriples\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\ntriples\ntriples.js" />
-    <Content Include="html\js\codemirror-4.03\mode\octave\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\octave\octave.js" />
-    <Content Include="html\js\codemirror-4.03\mode\pascal\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\pascal\pascal.js" />
-    <Content Include="html\js\codemirror-4.03\mode\pegjs\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\pegjs\pegjs.js" />
-    <Content Include="html\js\codemirror-4.03\mode\perl\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\perl\perl.js" />
-    <Content Include="html\js\codemirror-4.03\mode\php\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\php\php.js" />
-    <Content Include="html\js\codemirror-4.03\mode\pig\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\pig\pig.js" />
-    <Content Include="html\js\codemirror-4.03\mode\properties\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\properties\properties.js" />
-    <Content Include="html\js\codemirror-4.03\mode\puppet\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\puppet\puppet.js" />
     <Content Include="html\js\codemirror-4.03\mode\python\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\js\codemirror-4.03\mode\python\python.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\q\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\q\q.js" />
-    <Content Include="html\js\codemirror-4.03\mode\rpm\changes\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\rpm\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\rpm\rpm.js" />
-    <Content Include="html\js\codemirror-4.03\mode\rst\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\rst\rst.js" />
     <Content Include="html\js\codemirror-4.03\mode\ruby\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1517,64 +1416,6 @@
     <Content Include="html\js\codemirror-4.03\mode\ruby\test.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\js\codemirror-4.03\mode\rust\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\rust\rust.js" />
-    <Content Include="html\js\codemirror-4.03\mode\r\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\r\r.js" />
-    <Content Include="html\js\codemirror-4.03\mode\sass\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\sass\sass.js" />
-    <Content Include="html\js\codemirror-4.03\mode\scheme\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\scheme\scheme.js" />
-    <Content Include="html\js\codemirror-4.03\mode\shell\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\shell\shell.js" />
-    <Content Include="html\js\codemirror-4.03\mode\sieve\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\sieve\sieve.js" />
-    <Content Include="html\js\codemirror-4.03\mode\smalltalk\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\smalltalk\smalltalk.js" />
-    <Content Include="html\js\codemirror-4.03\mode\smartymixed\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\smartymixed\smartymixed.js" />
-    <Content Include="html\js\codemirror-4.03\mode\smarty\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\smarty\smarty.js" />
-    <Content Include="html\js\codemirror-4.03\mode\solr\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\solr\solr.js" />
-    <Content Include="html\js\codemirror-4.03\mode\sparql\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\sparql\sparql.js" />
-    <Content Include="html\js\codemirror-4.03\mode\sql\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\sql\sql.js" />
-    <Content Include="html\js\codemirror-4.03\mode\stex\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\stex\stex.js" />
-    <Content Include="html\js\codemirror-4.03\mode\stex\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\tcl\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\tcl\tcl.js" />
-    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\tiddlywiki.css" />
-    <Content Include="html\js\codemirror-4.03\mode\tiddlywiki\tiddlywiki.js" />
-    <Content Include="html\js\codemirror-4.03\mode\tiki\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\tiki\tiki.css" />
-    <Content Include="html\js\codemirror-4.03\mode\tiki\tiki.js" />
-    <Content Include="html\js\codemirror-4.03\mode\toml\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\toml\toml.js" />
-    <Content Include="html\js\codemirror-4.03\mode\turtle\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\turtle\turtle.js" />
-    <Content Include="html\js\codemirror-4.03\mode\vbscript\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\vbscript\vbscript.js" />
-    <Content Include="html\js\codemirror-4.03\mode\vb\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\vb\vb.js" />
-    <Content Include="html\js\codemirror-4.03\mode\velocity\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\velocity\velocity.js" />
-    <Content Include="html\js\codemirror-4.03\mode\verilog\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\verilog\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\verilog\verilog.js" />
-    <Content Include="html\js\codemirror-4.03\mode\xml\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\xml\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\xml\xml.js" />
-    <Content Include="html\js\codemirror-4.03\mode\xquery\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\xquery\test.js" />
-    <Content Include="html\js\codemirror-4.03\mode\xquery\xquery.js" />
-    <Content Include="html\js\codemirror-4.03\mode\yaml\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\yaml\yaml.js" />
-    <Content Include="html\js\codemirror-4.03\mode\z80\index.html" />
-    <Content Include="html\js\codemirror-4.03\mode\z80\z80.js" />
     <Content Include="html\js\codemirror-4.03\theme\3024-day.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

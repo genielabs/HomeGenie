@@ -165,6 +165,18 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+09/04/2014 1.00 beta rev 362
+	- Added compile error display for Javascript, Ruby and Python too
+	- Fixed bug in Security Alarm System
+	- Added automatic compile when importing a CSharp program
+	- Added Program.Run instruction to Wizard scripts
+	- Added Program.Status events
+	- Fixed bugs in programs module and virtual modules update
+	- Improved MCP23017 program now supporting both output and input modes
+	- Added Raspberry Pi GPIO Modules program supporting both output and input modes
+	- Deprecated Raspberry Pi GPIO system interface
+	- Misc minor fixes
+
 06/04/2014 1.00 beta rev 361
 	- XTenLib: some lil' performance improvement
 	- Program Editor: added autocompletition (CTRL+SPACE), folding and errors gutter

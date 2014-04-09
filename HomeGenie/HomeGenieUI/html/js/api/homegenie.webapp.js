@@ -136,7 +136,7 @@ HG.WebApp.InitializePage = function ()
             $('#automation_program_scriptcondition').next().css('display', 'none');
             $('#automation_program_scriptsource').next().css('display', '');
             HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-            if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors != '')
+            if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '' && HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '[]')
             {
                 HG.WebApp.ProgramEdit.ShowProgramErrors(HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors);
             }
@@ -261,6 +261,9 @@ HG.WebApp.Home.PopupEvent = function(eventLog)
         var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, eventLog.Property);
         // discard dupes if event is not a automation program event
         if (module.Domain != 'HomeAutomation.HomeGenie.Automation' && curprop !== null && curprop.Value == eventLog.Value) return; 
+        // update current event property 
+        HG.WebApp.Utility.SetModulePropertyByName(module, eventLog.Property, eventLog.Value, eventLog.Timestamp);
+        HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
         // when event is an automation program event, we update the whole module
         if (module.Domain == 'HomeAutomation.HomeGenie.Automation')
         {
@@ -273,12 +276,6 @@ HG.WebApp.Home.PopupEvent = function(eventLog)
                     HG.WebApp.Control.UpdateModuleWidget(mod.Domain, mod.Address);
                 } catch (e) { }
             });
-        }
-        else
-        {
-            // update just current event property 
-            HG.WebApp.Utility.SetModulePropertyByName(module, eventLog.Property, eventLog.Value, eventLog.Timestamp);
-            HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
         }
     }
     //

@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r361</Version>
+  <Version>1.00 beta r362</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - XTenLib: some lil' performance improvement
-  - Program Editor: added autocompletition (CTRL+SPACE), folding and errors gutter
-  - Program Editor: fixed mouse wheel scrolling
-  - Program Editor: updated CodeMirror to 4.03</ReleaseNote>
-  <ReleaseDate>2014-04-04T18:00:49.0000Z</ReleaseDate>
+  <ReleaseNote>  - Added compile error display for Javascript, Ruby and Python too
+  - Fixed bug in Security Alarm System
+  - Added automatic compile when importing a CSharp program
+  - Added Program.Run instruction to Wizard scripts
+  - Added Program.Status events
+  - Fixed bugs in programs module and virtual modules update
+  - Improved MCP23017 program now supporting both output and input modes
+  - Added Raspberry Pi GPIO Modules program supporting both output and input modes
+  - Deprecated Raspberry Pi GPIO system interface
+  - Misc minor fixes</ReleaseNote>
+  <ReleaseDate>2014-04-09T20:11:04.0000Z</ReleaseDate>
 </ReleaseInfo>
