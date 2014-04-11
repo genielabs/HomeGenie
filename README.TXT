@@ -165,7 +165,11 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-09/04/2014 1.00 beta rev 362
+11/04/2014 1.00 beta rev 363
+	- Minor UI fixes and enhancements
+	- Added level slider to Shutter widget and inverted open/close logic
+	- Added system status led in the upper right corner (by clicking it opens the events log browser)
+	- Fixed modules cleanup on program/interface disable
 	- Added compile error display for Javascript, Ruby and Python too
 	- Fixed bug in Security Alarm System
 	- Added automatic compile when importing a CSharp program

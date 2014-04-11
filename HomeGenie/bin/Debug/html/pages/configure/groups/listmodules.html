@@ -135,12 +135,14 @@
 
             <span id="module_options_3" style="margin-top:4px">
 
-                <label for="module_programs_featureset" data-locale-id="configure_module_featuresoptions">Features/Options</label>
-                <select id="module_programs_featureset" onchange="HG.WebApp.GroupModules.ShowFeatures($(this).val())"></select>
-                <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
-                <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
+                <div id="module_options_features">
+                    <label for="module_programs_featureset" data-locale-id="configure_module_featuresoptions">Features/Options</label>
+                    <select id="module_programs_featureset" onchange="HG.WebApp.GroupModules.ShowFeatures($(this).val())"></select>
+                    <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
+                    <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
 
-                <div style="height:10px"></div>
+                    <div style="height:10px"></div>
+                </div>
 
                 <a data-locale-id="configure_module_optupdate" id="module_update_button" href="#" data-role="button" data-rel="back" data-inline="false" data-transition="flow" data-icon="check">Update module</a>
 

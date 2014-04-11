@@ -73,11 +73,17 @@
 
             </div>
 
-            <a data-locale-id="configure_program_options_edit" id="automationprograms_program_edit" href="#page_automation_editprogram" data-role="button" data-transition="slide" data-icon="edit">Edit program</a>
-            <a data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-role="button" data-icon="bars">Export program</a>
-            <a data-locale-id="configure_program_options_delete" href="#automationprograms_program_delete" data-role="button" data-position-to="window" data-rel="popup" data-transition="pop" data-icon="delete">Delete program</a>
+            <div data-role="controlgroup" data-type="horizontal" align="center">
+                <a data-locale-id="configure_program_options_restart" id="automationprograms_program_restart" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-role="button" data-icon="refresh" style="width:140px">Restart</a>
+                <a data-locale-id="configure_program_options_edit" id="automationprograms_program_edit" href="#page_automation_editprogram" data-role="button" data-transition="slide" data-icon="edit" style="width:140px">Edit</a>
+            </div>
 
-        </div>
+            <div data-role="controlgroup" data-type="horizontal" align="center">
+                <a data-locale-id="configure_program_options_delete" href="#automationprograms_program_delete" data-role="button" data-position-to="window" data-rel="popup" data-transition="pop" data-icon="delete" style="width:140px">Delete</a>
+                <a data-locale-id="configure_program_options_export" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-role="button" data-icon="bars" style="width:140px">Export</a>
+            </div>
+
+</div>
     </div>
     <div data-role="popup" id="automation_program_import" style="min-width:300px;" class="ui-corner-all">
         <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>

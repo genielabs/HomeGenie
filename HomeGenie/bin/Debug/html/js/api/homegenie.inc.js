@@ -56,14 +56,55 @@ var HG = HG || {};
 
 
 
-
-
-
-
-
 <script type="text/javascript">
-// TODO: deprecate all js code below, or move it to appropriate place in hg api
+    // TODO: deprecate all js code below, or move it to appropriate place in hg api
 
+    var uitheme = 'a'; // TODO: move this code as part of HG js api
+
+    sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
+
+    function setTheme(theme) {
+        sessvars.UserSettings.UiTheme = uitheme = theme;
+        //
+        $.mobile.activePage.find('.ui-li')
+                    .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
+                    .addClass('ui-btn-up-' + theme).attr('data-theme', theme);
+
+        $.mobile.activePage.find('.ui-btn').not('.ui-li-divider')
+                    .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
+                    .addClass('ui-btn-up-' + theme)
+                    .attr('data-theme', theme);
+
+        $.mobile.activePage.find('.ui-header, .ui-footer, .ui-listview-filter')
+                    .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
+                    .addClass('ui-bar-' + theme)
+                    .attr('data-theme', theme);
+
+        $(document).find('.ui-input-text, .ui-input-search, .ui-popup, .ui-dialog, .ui-page').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
+                    .addClass('ui-body-' + theme)
+                    .attr('data-theme', theme);
+
+        $.mobile.activePage.find('.ui-popup').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
+                    .addClass('ui-body-' + theme)
+                    .attr('data-theme', theme);
+
+        $.mobile.activePage.find('.ui-li-divider').each(function (index, obj) {
+            //if ($(this).parent().attr('data-divider-theme') == 'undefined') {
+            $(this).removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
+                .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
+                .addClass('ui-bar-a')
+                .attr('data-theme', 'a');
+            //}
+        })
+
+        if ($.mobile.activePage.attr('id') == 'page_control') {
+            $.mobile.activePage.find('a[data-ui-field="widget"]').each(function (index, obj) {
+                $(this).parent().parent().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
+                $(this).parent().parent().next().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
+            });
+        }
+
+    }
 
 
 //////////////////////////////////////////////////////

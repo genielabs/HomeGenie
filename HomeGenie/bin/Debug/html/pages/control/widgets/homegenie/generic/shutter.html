@@ -40,11 +40,35 @@
         <!-- END - COMMON UI PART --->
         <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
 
+        <div style="width:220px;height:30px;margin-left:10px;margin-top:5px;border:solid 1px white">
+            <a title="100%" href="javascript:HG.WebApp.Control.ModuleSetLevel(100)" style="height: 100%; width: 5%; background-color: #004444; float: left; "></a>
+            <a title="95%" href="javascript:HG.WebApp.Control.ModuleSetLevel(95)" style="height: 100%; width: 5%; background-color: #004949; float: left;"></a>
+            <a title="90%" href="javascript:HG.WebApp.Control.ModuleSetLevel(90)" style="height: 100%; width: 5%; background-color: #005252; float: left;"></a>
+            <a title="85%" href="javascript:HG.WebApp.Control.ModuleSetLevel(85)" style="height: 100%; width: 5%; background-color: #005555; float: left;"></a>
+            <a title="80%" href="javascript:HG.WebApp.Control.ModuleSetLevel(80)" style="height: 100%; width: 5%; background-color: #006666; float: left;"></a>
+            <a title="75%" href="javascript:HG.WebApp.Control.ModuleSetLevel(75)" style="height: 100%; width: 5%; background-color: #007777; float: left;"></a>
+            <a title="70%" href="javascript:HG.WebApp.Control.ModuleSetLevel(70)" style="height: 100%; width: 5%; background-color: #008888; float: left;"></a>
+            <a title="65%" href="javascript:HG.WebApp.Control.ModuleSetLevel(65)" style="height: 100%; width: 5%; background-color: #009999; float: left;"></a>
+            <a title="60%" href="javascript:HG.WebApp.Control.ModuleSetLevel(60)" style="height: 100%; width: 5%; background-color: #00aaaa; float: left;"></a>
+            <a title="55%" href="javascript:HG.WebApp.Control.ModuleSetLevel(55)" style="height: 100%; width: 5%; background-color: #00bbbb; float: left;"></a>
+            <a title="50%" href="javascript:HG.WebApp.Control.ModuleSetLevel(50)" style="height: 100%; width: 5%; background-color: #00cccc; float: left;"></a>
+            <a title="45%" href="javascript:HG.WebApp.Control.ModuleSetLevel(45)" style="height: 100%; width: 5%; background-color: #00dddd; float: left;"></a>
+            <a title="40%" href="javascript:HG.WebApp.Control.ModuleSetLevel(40)" style="height: 100%; width: 5%; background-color: #00eeee; float: left;"></a>
+            <a title="35%" href="javascript:HG.WebApp.Control.ModuleSetLevel(35)" style="height: 100%; width: 5%; background-color: #00ffff; float: left;"></a>
+            <a title="30%" href="javascript:HG.WebApp.Control.ModuleSetLevel(30)" style="height: 100%; width: 5%; background-color: #22ffff; float: left;"></a>
+            <a title="25%" href="javascript:HG.WebApp.Control.ModuleSetLevel(25)" style="height: 100%; width: 5%; background-color: #44ffff; float: left;"></a>
+            <a title="20%" href="javascript:HG.WebApp.Control.ModuleSetLevel(20)" style="height: 100%; width: 5%; background-color: #66ffff; float: left;"></a>
+            <a title="15%" href="javascript:HG.WebApp.Control.ModuleSetLevel(15)" style="height: 100%; width: 5%; background-color: #88ffff; float: left;"></a>
+            <a title="10%" href="javascript:HG.WebApp.Control.ModuleSetLevel(10)" style="height: 100%; width: 5%; background-color: #aaffff; float: left;"></a>
+            <a title="5%" href="javascript:HG.WebApp.Control.ModuleSetLevel(5)" style="height: 100%; width: 5%; background-color: #ccffff; float: left; "></a>
+        </div>
+
+
         <div align="center">
             <br />
             <div data-role="controlgroup" data-type="horizontal">
-                <a data-locale-id="control_module_close" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.Off', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">CLOSE</a>
-                <a data-locale-id="control_module_open" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.On', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">OPEN</a>
+                <a data-locale-id="control_module_close" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.On', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">CLOSE</a>
+                <a data-locale-id="control_module_open" data-role="button" href="javascript:HG.Control.Modules.ServiceCall('Control.Off', HG.WebApp.Data._CurrentModule.Domain, HG.WebApp.Data._CurrentModule.Address, '', function (data) { });">OPEN</a>
             </div>
         </div>
 

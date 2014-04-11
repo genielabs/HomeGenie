@@ -1099,6 +1099,7 @@ namespace HomeGenie.Service
         public void BackupCurrentSettings()
         {
             // regenerate encrypted files
+            UpdateProgramsDatabase();
             UpdateModulesDatabase();
             SystemConfiguration.Update();
             ArchiveConfiguration("html/homegenie_backup_config.zip");
@@ -1260,9 +1261,26 @@ namespace HomeGenie.Service
                 //
                 if (systemConfiguration.GetInterface(Domains.HomeAutomation_X10).IsEnabled && x10Controller != null)
                 {
+                    // CM-15 RF receiver
+                    // TODO: this shouldn't be created for CM-11
+                    var module = systemModules.Find(delegate(Module o)
+                    {
+                        return o.Domain == Domains.HomeAutomation_X10 && o.Address == "RF";
+                    });
+                    if (module == null)
+                    {
+                        module = new Module()
+                        {
+                            Domain = Domains.HomeAutomation_X10,
+                            Address = "RF",
+                            DeviceType = Module.DeviceTypes.Sensor
+                        };
+                        systemModules.Add(module);
+                    }
+                    //
                     foreach (var kv in x10Controller.ModulesStatus)
                     {
-                        var module = new Module();
+                        module = new Module();
                         try
                         {
                             module = Modules.Find(delegate(Module o)
@@ -1536,6 +1554,55 @@ namespace HomeGenie.Service
                 {
                     systemModules.RemoveAll(m => m.Domain == currentDomain && m.RoutingNode == "");
                 }
+                //
+                //
+                currentDomain = Domains.HomeAutomation_W800RF;
+                if (systemConfiguration.GetInterface(currentDomain) != null && systemConfiguration.GetInterface(currentDomain).IsEnabled)
+                {
+                    var w800rf = systemModules.Find(delegate(Module o)
+                    {
+                        return o.Domain == Domains.HomeAutomation_W800RF && o.Address == "RF";
+                    });
+                    if (w800rf == null)
+                    {
+                        w800rf = new Module()
+                        {
+                            Domain = Domains.HomeAutomation_W800RF,
+                            Address = "RF",
+                            DeviceType = Module.DeviceTypes.Sensor
+                        };
+                        systemModules.Add(w800rf);
+                    }
+                }
+                else
+                {
+                    systemModules.RemoveAll(m => m.Domain == currentDomain && m.RoutingNode == "");
+                }
+                //
+                //
+                currentDomain = Domains.Controllers_LircRemote;
+                if (systemConfiguration.GetInterface(currentDomain) != null && systemConfiguration.GetInterface(currentDomain).IsEnabled)
+                {
+                    var lirc = systemModules.Find(delegate(Module o)
+                    {
+                        return o.Domain == Domains.Controllers_LircRemote && o.Address == "IR";
+                    });
+                    if (lirc == null)
+                    {
+                        lirc = new Module()
+                        {
+                            Domain = Domains.Controllers_LircRemote,
+                            Address = "IR",
+                            DeviceType = Module.DeviceTypes.Sensor
+                        };
+                        systemModules.Add(lirc);
+                    }
+                }
+                else
+                {
+                    systemModules.RemoveAll(m => m.Domain == currentDomain && m.RoutingNode == "");
+                }
+
             }
             catch (Exception ex)
             {
@@ -1554,37 +1621,23 @@ namespace HomeGenie.Service
                 //
                 foreach (var virtualModule in virtualModules)
                 {
-                    ProgramBlock program = null;
-                    try
-                    {
-                        program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
-                    }
-                    catch
-                    {
-                    }
-                    if (program == null)
-                        continue;
+                    ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
+                    if (program == null) continue;
                     //
                     var virtualModuleWidget = Utility.ModuleParameterGet(virtualModule, Properties.WIDGET_DISPLAYMODULE);
                     //
-                    Module module = null;
-                    try
+                    Module module = Modules.Find(delegate(Module o)
                     {
-                        module = Modules.Find(delegate(Module o)
-                        {
-                            return o.Domain == virtualModule.Domain && o.Address == virtualModule.Address;
-                        });
-                    }
-                    catch
-                    {
-                    }
+                        return o.Domain == virtualModule.Domain && o.Address == virtualModule.Address;
+                    });
 
-                    // TODO: improve modules dispose mechanism
-                    if ((program == null || !program.IsEnabled) && module != null && module.RoutingNode == "")
+                    if (!program.IsEnabled)
                     {
-                        if (module.Domain != Domains.HomeAutomation_HomeGenie_Automation)
+                        if (module != null && module.RoutingNode == "" && virtualModule.ParentId != module.Address)
                         {
-                            // copy properties to virtualmodules before removing
+                            // copy instance module properties to virtualmodules before removing
+                            virtualModule.Name = module.Name;
+                            virtualModule.DeviceType = module.DeviceType;
                             virtualModule.Properties.Clear();
                             foreach (var p in module.Properties)
                             {
@@ -1595,13 +1648,6 @@ namespace HomeGenie.Service
                         continue;
                     }
 
-                    /*
-                    if ((parwidget == null || parwidget.Value == null || parwidget.Value.Trim() == "") && m.RoutingNode == "")
-                    {
-                        //if (m != null) Modules.Remove(m);
-                        continue;
-                    }
-                    else*/
                     if (module == null)
                     {
                         // add new module
@@ -1613,18 +1659,25 @@ namespace HomeGenie.Service
                             module.Properties.Add(p);
                         }
                     }
-                    //
-                    // inherited props from virtual module
+
+                    // module inherits props from associated virtual module
                     module.Domain = virtualModule.Domain;
                     module.Address = virtualModule.Address;
-                    module.DeviceType = virtualModule.DeviceType;
+                    if (module.DeviceType == Module.DeviceTypes.Generic)
+                    {
+                        module.DeviceType = virtualModule.DeviceType;
+                    }
+                    // associated module's name of an automation program cannot be changed
                     if (module.Name == "" || module.DeviceType == Module.DeviceTypes.Program)
+                    {
                         module.Name = virtualModule.Name;
+                    }
                     module.Description = virtualModule.Description;
                     //
                     Utility.ModuleParameterSet(module, Properties.VIRTUALMODULE_PARENTID, virtualModule.ParentId);
                     var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
-                    if (virtualModuleWidget != null && virtualModuleWidget.Value != "" && (moduleWidget == null || moduleWidget.Value != virtualModuleWidget.Value)) // && parwidget.Value != "")
+                    // if a widget is specified on virtual module then we force module to display using this
+                    if (virtualModuleWidget != null && (moduleWidget == null || moduleWidget.Value != virtualModuleWidget.Value))
                     {
                         Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, virtualModuleWidget.Value);
                     }
@@ -1665,7 +1718,7 @@ namespace HomeGenie.Service
                                 systemModules.Remove(module);
                                 continue;
                             }
-                            else if (!program.IsEnabled)
+                            else if (/*program.Type.ToLower() != "wizard" &&*/ !program.IsEnabled)
                             {
                                 continue;
                             }
@@ -1934,7 +1987,7 @@ namespace HomeGenie.Service
             try
             {
                 //
-                // reset Parameter.Watts, Status Level, Sensor.Generic values
+                // reset Parameter.Watts, /*Status Level,*/ Sensor.Generic values
                 //
                 for (int m = 0; m < systemModules.Count; m++)
                 {
@@ -1953,51 +2006,6 @@ namespace HomeGenie.Service
                         //parameter.LastValue = "0";
                         //parameter.LastUpdateTime = DateTime.Now;
                     }
-                }
-                //
-                // these are virtual special modules for exposing CM15 RF, W800RF and LIRC client for IR learn/control
-                //
-                var module = systemModules.Find(delegate(Module o)
-                {
-                    return o.Domain == Domains.HomeAutomation_X10 && o.Address == "RF";
-                });
-                if (module == null)
-                {
-                    module = new Module()
-                    {
-                        Domain = Domains.HomeAutomation_X10,
-                        Address = "RF",
-                        DeviceType = Module.DeviceTypes.Sensor
-                    };
-                    systemModules.Add(module);
-                }
-                var w800rf = systemModules.Find(delegate(Module o)
-                {
-                    return o.Domain == Domains.HomeAutomation_W800RF && o.Address == "RF";
-                });
-                if (w800rf == null)
-                {
-                    w800rf = new Module()
-                    {
-                        Domain = Domains.HomeAutomation_W800RF,
-                        Address = "RF",
-                        DeviceType = Module.DeviceTypes.Sensor
-                    };
-                    systemModules.Add(w800rf);
-                }
-                var lirc = systemModules.Find(delegate(Module o)
-                {
-                    return o.Domain == Domains.Controllers_LircRemote && o.Address == "IR";
-                });
-                if (lirc == null)
-                {
-                    lirc = new Module()
-                    {
-                        Domain = Domains.Controllers_LircRemote,
-                        Address = "IR",
-                        DeviceType = Module.DeviceTypes.Sensor
-                    };
-                    systemModules.Add(lirc);
                 }
             }
             catch (Exception ex)

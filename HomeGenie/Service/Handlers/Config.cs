@@ -121,6 +121,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 homegenie.GetInterface(Domains.Controllers_LircRemote).Disconnect();
                             }
+                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "CameraInput.GetIsEnabled":
@@ -262,6 +263,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 homegenie.GetInterface(Domains.HomeAutomation_W800RF).Disconnect();
                             }
+                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "RaspiGPIO.GetIsEnabled":
@@ -604,11 +606,14 @@ namespace HomeGenie.Service.Handlers
                         var newProgramList = new List<ProgramBlock>();
                         foreach (ProgramBlock program in newProgramsData)
                         {
-                            ProgramBlock p = new ProgramBlock();
-                            p.Address = program.Address;
-                            p.Name = program.Name;
-                            p.Description = program.Description;
-                            newProgramList.Add(p);
+                            if (program.Address >= 1000)
+                            {
+                                ProgramBlock p = new ProgramBlock();
+                                p.Address = program.Address;
+                                p.Name = program.Name;
+                                p.Description = program.Description;
+                                newProgramList.Add(p);
+                            }
                         }
                         newProgramList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
                         {
@@ -632,7 +637,7 @@ namespace HomeGenie.Service.Handlers
                                 var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
                                 if (currentProgram == null || program.Address >= 1000)
                                 {
-                                    var newPid = homegenie.ProgramEngine.GeneratePid();
+                                    var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
                                     try
                                     {
                                         File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);

@@ -280,6 +280,21 @@ namespace HomeGenie.Service.Handlers
                         }
                         break;
 
+                    case "Programs.Restart":
+                        currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                        if (currentProgram != null)
+                        {
+                            currentProgram.IsEnabled = false;
+                            try
+                            {
+                                currentProgram.Stop();
+                            }
+                            catch { }
+                            currentProgram.IsEnabled = true;
+                            homegenie.UpdateProgramsDatabase();
+                        }
+                        break;
+
                     case "Programs.Enable":
                         currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                         if (currentProgram != null)

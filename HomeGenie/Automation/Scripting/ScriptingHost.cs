@@ -154,7 +154,7 @@ namespace HomeGenie.Automation.Scripting
 
         public void Reset()
         {
-            programHelper.Reset();
+            //programHelper.Reset();
             serialPortHelper.Disconnect();
             tcpClientHelper.Disconnect();
         }

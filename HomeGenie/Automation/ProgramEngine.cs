@@ -709,6 +709,7 @@ namespace HomeGenie.Automation
             if (isEnabled)
             {
                 homegenie.modules_RefreshPrograms();
+                homegenie.modules_RefreshVirtualModules();
                 RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
                 StartProgramEvaluator(program);
             }
@@ -716,6 +717,7 @@ namespace HomeGenie.Automation
             {
                 RaiseProgramModuleEvent(program, "Program.Status", "Disabled");
                 homegenie.modules_RefreshPrograms();
+                homegenie.modules_RefreshVirtualModules();
             }
             homegenie.modules_Sort();
         }

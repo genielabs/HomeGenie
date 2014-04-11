@@ -141,7 +141,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:03.4627895Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4207489Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -257,7 +257,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:03.4777694Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4247512Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -403,7 +403,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:04.445656Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4257491Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -475,7 +475,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9411388Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:35.4496665Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:52:07.5840549Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1061,7 +1061,7 @@ for (int p = 0; p &lt; pinConfiguration.Count; p++)
     pinStatus[p] = deviceConnection.GetPinStatus(pincfg.Pin);
   	if (pincfg.Direction == Mcp23017PinDirection.Output)
     {
-		Program.AddVirtualModule("Components.MCP23017", pincfg.Address, "Switch", "homegenie/generic/switch");                  
+		Program.AddVirtualModule("Components.MCP23017", pincfg.Address, "Switch", "");                  
     }
   	else
     {
@@ -1205,7 +1205,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:06.4441031Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4327518Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1248,8 +1248,8 @@ Program.GoBackground();</ScriptSource>
     <Name>IR/RF remote control events forwarding</Name>
     <Description>Forwards received IR/RF remote input to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-04-11T18:48:52.8349695Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:48:52.8389698Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1292,8 +1292,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Meter.Watts events forwarding</Name>
     <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-04-11T18:48:56.637857Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:48:56.641858Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1336,8 +1336,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Status.Level events forwarding</Name>
     <Description>Forwards devices' Level changes to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-04-11T18:49:05.3961372Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:49:05.3961372Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1397,7 +1397,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:08.4434405Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4377503Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1517,7 +1517,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:09.4449242Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4387517Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1783,7 +1783,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <ActivationTime>2014-04-09T19:32:28.0932958Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:10.4443758Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4437509Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1864,7 +1864,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:11.4501143Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4577527Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2011,7 +2011,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:12.4446238Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4637533Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2277,7 +2277,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:13.4451596Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4677522Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2403,7 +2403,7 @@ Pause( pause );
     <Description>Simulate presence in the house by looping a program during a given interval time.
 The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-31T13:24:47.3307681Z</ActivationTime>
+    <ActivationTime>2014-04-11T18:50:17.2553666Z</ActivationTime>
     <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
@@ -2474,8 +2474,8 @@ The program exposes the parameter &lt;b&gt;PingMe.AtHome&lt;/b&gt;
 that can be used both in Wizard Scripts or C# APPs to
 trigger actions when you get home.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-01-03T16:48:44.452645Z</ActivationTime>
-    <TriggerTime>2014-01-03T16:48:50.192687Z</TriggerTime>
+    <ActivationTime>2014-04-11T18:50:30.519552Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:50:30.5245526Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -2704,7 +2704,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:14.4467774Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4987709Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2766,7 +2766,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:15.4441722Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:33.4227492Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2923,7 +2923,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:16.4434483Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:34.9464686Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2966,8 +2966,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Sensor.* events forwarding</Name>
     <Description>Forwards devices' Sensor.* values changes to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
-    <ActivationTime>2013-12-21T23:39:04.212865Z</ActivationTime>
-    <TriggerTime>2013-12-21T23:39:04.589769Z</TriggerTime>
+    <ActivationTime>2014-04-11T18:49:01.8605083Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:49:01.8675085Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3019,23 +3019,8 @@ When.ModuleParameterChange( (module, property) =&gt; {
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>HomeAutomation.X10.RF</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>X10RFString.LevelOn</Property>
-        <Description>Raw RF string for ON event</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>HomeAutomation.X10.RF</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>X10RFString.LevelOff</Property>
-        <Description>Raw RF string for OFF event</Description>
-      </ProgramFeature>
-    </Features>
+    <IsRunning>false</IsRunning>
+    <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>121</Address>
@@ -3043,9 +3028,9 @@ Program.GoBackground();</ScriptSource>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:17.447646Z</TriggerTime>
+    <TriggerTime>2014-04-11T15:54:17.1660696Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -3303,7 +3288,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-09T19:53:18.4467213Z</TriggerTime>
+    <TriggerTime>2014-04-11T18:48:35.918725Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3890,8 +3875,8 @@ hg.Pause(12*60*60);
     <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
   Please set your local longitude/latitude in program options (Default is Berlin, Germany).</Description>
     <Group>Contrib</Group>
-    <ActivationTime>2014-04-03T13:13:23.15672Z</ActivationTime>
-    <TriggerTime>2014-04-03T13:13:23.1597216Z</TriggerTime>
+    <ActivationTime>2014-04-11T18:49:39.8670439Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:49:40.1940621Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3961,7 +3946,7 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
   	else
     {
 	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule("RaspberryPi.Gpio", pc.Address, "Switch", "homegenie/generic/switch");                  
+		Program.AddVirtualModule("RaspberryPi.Gpio", pc.Address, "Switch", "");                  
     }
     configuration[p].Name = pc.Address;
 }
@@ -4024,10 +4009,10 @@ When.WebServiceCallReceived("RaspberryPi.Gpio", ( args ) =&gt;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>100</Address>
     <Name>GPIO Modules</Name>
@@ -4037,8 +4022,8 @@ GPIOs configured as IN are mapped to a Sensor module with a Status.Level field d
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
     <Group>Raspberry Sharp</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-04-11T18:45:31.404089Z</ActivationTime>
+    <TriggerTime>2014-04-11T18:45:31.823601Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

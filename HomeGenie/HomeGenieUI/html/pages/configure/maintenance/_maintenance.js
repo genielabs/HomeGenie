@@ -328,3 +328,11 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
 	}
 	$('#configure_interfaces_modules_list').listview('refresh');
 };
+
+HG.WebApp.Maintenance.SetTheme = function (theme) {
+    $.mobile.showPageLoadingMsg();
+    setTimeout(function () {
+        setTheme(theme);
+        document.location.href = '/';
+    }, 1000);
+};

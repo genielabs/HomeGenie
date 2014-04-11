@@ -212,7 +212,9 @@ HG.WebApp.GroupModules.GetModulesListViewItems = function (groupname)
 				});
 				if (haselement.length == 0) {
 				    var propwidget = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
-				    if (propwidget != null && propwidget.Value != null && propwidget.Value == "") continue;
+				    var vmparentid = HG.WebApp.Utility.GetModulePropertyByName(module, "VirtualModule.ParentId");
+                    // check if no explicit witdget is specified and it's not a virtual module
+				    if ((propwidget != null && propwidget.Value != null && propwidget.Value == "") && (vmparentid != null && vmparentid.Value == module.Address)) continue;
                     //
 					if (cursect != module.Domain)
 					{
@@ -461,10 +463,15 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid)
         }
     }
     $('#module_programs_features').trigger('create');
+    $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
 }
 
 HG.WebApp.GroupModules.UpdateFeatures = function () {
     HG.WebApp.GroupModules.EditModule.Properties = Array(); // used to store "features" values
+    //
+    $('#module_options_features').hide();
+    $('#module_programs_featureset').empty();
+    $('#module_programs_features').empty();
     //
     var featureset = '';
     var selected = -1;
@@ -498,15 +505,17 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
         }
     }
     //
-    $('#module_programs_featureset').empty();
-    $('#module_programs_featureset').append(featureset);
-    $('#module_programs_featureset').selectmenu('refresh', true);
-    $('#module_programs_features').empty();
-    //
-    if (selected != -1)
+    if (featureset != '')
     {
-        HG.WebApp.GroupModules.ShowFeatures(selected);
+        $('#module_programs_featureset').append(featureset);
+        $('#module_programs_featureset').selectmenu('refresh', true);
+        $('#module_options_features').show();
+        //
+        if (selected != -1) {
+            HG.WebApp.GroupModules.ShowFeatures(selected);
+        }
     }
+    $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
 };
 
 HG.WebApp.GroupModules.FeatureUpdate = function (module, property, value)
