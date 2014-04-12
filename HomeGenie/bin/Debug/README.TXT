@@ -165,7 +165,7 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-11/04/2014 1.00 beta rev 363
+12/04/2014 1.00 beta rev 364
 	- Minor UI fixes and enhancements
 	- Added level slider to Shutter widget and inverted open/close logic
 	- Added system status led in the upper right corner (by clicking it opens the events log browser)

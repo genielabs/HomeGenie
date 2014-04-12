@@ -163,7 +163,7 @@ HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
             {
                 value = data;
             }
-            else if (typeof value[0].ResponseValue != 'undefined') {
+            else if (typeof value[0] != 'undefined' && typeof value[0].ResponseValue != 'undefined') {
                 try {
                     value = value[0].ResponseValue;
                 } catch (e) { value = data; }
@@ -238,7 +238,7 @@ HG.Configure.System.ServiceCall = function (systemfn, callback)
                 {
 	                value = data;
 	            }
-	            else if (typeof value[0].ResponseValue != 'undefined') 
+                else if (typeof value[0] != 'undefined' && typeof value[0].ResponseValue != 'undefined')
                 {
 	                try {
 	                    value = value[0].ResponseValue;

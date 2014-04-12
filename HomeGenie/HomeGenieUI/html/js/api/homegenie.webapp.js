@@ -173,6 +173,19 @@ HG.WebApp.InitializePage = function ()
         }
     });
     //
+    // Prevent body scrolling when a popup is open
+    //
+    $(document).on('popupafteropen', '[data-role="popup"]' ,function( event, ui ) {
+        $('body').css('overflow-y','hidden');
+    }).on('popupafterclose', '[data-role="popup"]' ,function( event, ui ) {
+        $('body').css('overflow-y','auto');
+    });
+    $(document).on('popupafteropen', '[data-ui-field="controlpopup"]', function (event, ui) {
+        $('body').css('overflow-y', 'hidden');
+    }).on('popupafterclose', '[data-ui-field="controlpopup"]', function (event, ui) {
+        $('body').css('overflow-y', 'auto');
+    });
+    //
     // UI Localization
     //
     setTimeout(function(){

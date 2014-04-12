@@ -227,14 +227,14 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
 		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Trigger Code');
 		    setTimeout(function () {
 		        editor2.refresh();
-		    }, 500);
+		    }, 1000);
 		}
 		else {
 		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
 		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Code to Run');
 		    setTimeout(function () {
 		        editor1.refresh();
-		    }, 500);
+		    }, 1000);
 		}
     };
 
@@ -259,9 +259,17 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function ()
 	                else {
 	                    $('[id=editprograms_actionmenu_run]').each( function() { $(this).show(); } );
 	                }
-	            }
+	                if (cp.ScriptErrors.trim() != '' && cp.ScriptErrors.trim() != '[]') {
+	                    HG.WebApp.ProgramEdit.ShowProgramErrors(cp.ScriptErrors);
+	                }
+	                else {
+	                    HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
+	                    HG.WebApp.ProgramEdit.HideProgramErrors();
+	                }
+
+                }
 	        });
-	    }, 1500);
+	    }, 500);
 	};
 
 HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
@@ -308,7 +316,6 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 					//$('#program_barbutton_run').attr('disabled', 'disabled');
 					//$('#program_barbutton_run').button().button('refresh');
 					$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, 'Error updating program!', true );
-					setTimeout( $.mobile.hidePageLoadingMsg, 2000 );
 					HG.WebApp.ProgramEdit.ShowProgramErrors( response );
 				}
 				else
@@ -316,10 +323,10 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 					//$('#program_barbutton_run').removeAttr('disabled');
 					//$('#program_barbutton_run').button().button('refresh');
 					$.mobile.showPageLoadingMsg( $.mobile.loadingMessageTheme, 'Saving succeed.', true );
-					setTimeout( $.mobile.hidePageLoadingMsg, 2000 );
 					HG.WebApp.ProgramEdit.HideProgramErrors( );
 				}
-                //
+				setTimeout($.mobile.hidePageLoadingMsg, 2000);
+			    //
 	            // update modules
 	            //TODO: make this better...
 	            setTimeout(function () {
@@ -452,6 +459,7 @@ HG.WebApp.ProgramEdit.SetProgramData = function () {
 	    HG.WebApp.ProgramEdit._CurrentProgram.Description = $('#automation_programdescription').val();
 	    HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
 	    HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
+	    HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
 	    HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
 	    var programblock = {
 	        'Address': HG.WebApp.ProgramEdit._CurrentProgram.Address,

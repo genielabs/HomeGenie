@@ -266,6 +266,10 @@ namespace HomeGenie.Service.Handlers
                         currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                         if (currentProgram != null)
                         {
+                            if (!currentProgram.IsEnabled)
+                            {
+                                currentProgram.IsEnabled = true;
+                            }
                             homegenie.ProgramEngine.Run(currentProgram, migCommand.GetOption(1));
                         }
                         break;

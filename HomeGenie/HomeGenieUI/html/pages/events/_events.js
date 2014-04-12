@@ -140,8 +140,25 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             };
             break;
 
+        case 'HomeAutomation.HomeGenie.Automation':
+            var iconImage = configurepage_GetModuleIcon(module, null);
+            if (eventLog.Property == 'Runtime.Error') {
+                popupdata = {
+                    icon: iconImage,
+                    title: '<span style="color:gray;font-size:8pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
+                    text: 'Runtime<br />Error',
+                    timestamp: date
+                };
+                if ($.mobile.activePage.attr("id") == "page_automation_editprogram_code")
+                {
+                    HG.WebApp.ProgramEdit.RefreshProgramOptions();
+                }
+            }
+            break;
+
         default:
-            if (module != null && eventLog.Property != 'Meter.Watts') {
+            if (module != null && eventLog.Property != 'Meter.Watts')
+            {
 
                 var iconImage = configurepage_GetModuleIcon(module, null);
                 if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
@@ -153,7 +170,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         timestamp: date
                     };
                 }
-                else if (eventLog.Property.substring(0, 7) == 'Sensor.') {
+                else if (eventLog.Property.substring(0, 7) == 'Sensor.')
+                {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
@@ -181,7 +199,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         timestamp: date
                     };
                 }
-                else if (eventLog.Property.substring(0, 7) == 'Status.') {
+                else if (eventLog.Property.substring(0, 7) == 'Status.')
+                {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;

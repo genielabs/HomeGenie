@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r363</Version>
+  <Version>1.00 beta r364</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>  - Minor UI fixes and enhancements
   - Added level slider to Shutter widget and inverted open/close logic
@@ -17,5 +17,5 @@
   - Added Raspberry Pi GPIO Modules program supporting both output and input modes
   - Deprecated Raspberry Pi GPIO system interface
   - Misc minor fixes</ReleaseNote>
-  <ReleaseDate>2014-04-11T15:53:33.0000Z</ReleaseDate>
+  <ReleaseDate>2014-04-12T13:50:45.0000Z</ReleaseDate>
 </ReleaseInfo>

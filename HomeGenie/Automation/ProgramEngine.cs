@@ -33,6 +33,7 @@ using MIG;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
+using Newtonsoft.Json;
 
 namespace HomeGenie.Automation
 {
@@ -116,9 +117,16 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                            List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
+                                CodeBlock = "TC",
+                                Column = 0,
+                                Line = 0,
+                                ErrorNumber = "-1",
+                                ErrorMessage = result.Exception.Message
+                            }};
+                            program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, program.Address.ToString(), "Automation Error", "TC Runtime Error", result.Exception.Message);
+                            RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + result.Exception.Message);
                         }
                         else
                         {
@@ -159,8 +167,16 @@ namespace HomeGenie.Automation
                 catch (Exception ex)
                 {
                     // a runtime error occured
-                    program.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
+                    List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
+                        CodeBlock = "TC",
+                        Column = 0,
+                        Line = 0,
+                        ErrorNumber = "-1",
+                        ErrorMessage = ex.Message
+                    }};
+                    program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
+                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message);
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -239,9 +255,16 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            program.ScriptErrors = result.Exception.Message + "\n" + result.Exception.StackTrace;
+                            List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
+                                CodeBlock = "CR",
+                                Column = 0,
+                                Line = 0,
+                                ErrorNumber = "-1",
+                                ErrorMessage = result.Exception.Message
+                            }};
+                            program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, program.Address.ToString(), "Automation Error", "CR Runtime Error", result.Exception.Message);
+                            RaiseProgramModuleEvent(program, "Runtime.Error", "CR: " + result.Exception.Message);
                         }
                         program.IsRunning = false;
                         RaiseProgramModuleEvent(program, "Program.Status", "Idle");
@@ -510,8 +533,7 @@ namespace HomeGenie.Automation
             catch (Exception ex)
             {
                 // report errors during post-compilation process
-                //pb.ScriptErrors = ex.Message + "\n" + ex.StackTrace;
-                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "0", ex.Message + "\n" + ex.StackTrace));
+                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "-1", ex.Message));
             }
 
 
