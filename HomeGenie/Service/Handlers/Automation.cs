@@ -39,7 +39,7 @@ using Microsoft.Scripting;
 
 namespace HomeGenie.Service.Handlers
 {
-    
+
     public class Automation
     {
         private HomeGenieService homegenie;

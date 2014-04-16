@@ -36,20 +36,20 @@ HG.WebApp.InitializePage = function ()
         sessvars.UserSettings.UiTheme = 'a';
     }
     //
-	$.ajaxSetup({ cache: false });
-	$.mobile.ajaxFormsEnabled = false;
+    $.ajaxSetup({ cache: false });
+    $.mobile.ajaxFormsEnabled = false;
     //
-	HG.Configure.LoadData();
+    HG.Configure.LoadData();
     //
     window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
     //
     //HG.WebApp.SystemSettings.CheckConfigureStatus();
-	//
-	// page open - init stuff
-	//
-	//$(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
-	//});
-	//
+    //
+    // page open - init stuff
+    //
+    //$(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+    //});
+    //
     //$('[data-role=page]').on('pageshow', function (event) 
     //{
     //});
@@ -58,27 +58,27 @@ HG.WebApp.InitializePage = function ()
     //
     $('[data-role=page]').on('pagebeforeshow', function (event) 
     {
-		setTheme(uitheme);
+        setTheme(uitheme);
         //
         if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
         {
             // init "Control" page
-	        HG.Automation.Programs.List(function () {
-	            //if ($('#control_groupslist').children().length == 0) 
-	            {
-				    $.mobile.showPageLoadingMsg();
-				    HG.Configure.Groups.List('Control', function () 
-				    {
-				        if ($('#control_groupslist').children().length == 0) 
-				        {
-				            HG.WebApp.Control.RenderGroupsCollapsibleItems();
-				        }
-				        HG.WebApp.Control._RefreshFn();
-			            //HG.WebApp.Control.Refresh();
-			            // HG.WebApp.Control.SetAutoRefresh( true );
-				    });    
-	            }
-	        });
+            HG.Automation.Programs.List(function () {
+                //if ($('#control_groupslist').children().length == 0) 
+                {
+                    $.mobile.showPageLoadingMsg();
+                    HG.Configure.Groups.List('Control', function () 
+                    {
+                        if ($('#control_groupslist').children().length == 0) 
+                        {
+                            HG.WebApp.Control.RenderGroupsCollapsibleItems();
+                        }
+                        HG.WebApp.Control._RefreshFn();
+                        //HG.WebApp.Control.Refresh();
+                        // HG.WebApp.Control.SetAutoRefresh( true );
+                    });    
+                }
+            });
             //
             HG.Automation.Macro.GetDelay(function(data){
                 $('#macrorecord_delay_none').prop('checked', false).checkboxradio( 'refresh' );
@@ -105,7 +105,7 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == 'page_configure_interfaces') 
         {
-        	HG.WebApp.SystemSettings.LoadSettings();
+            HG.WebApp.SystemSettings.LoadSettings();
         }
         else if (this.id == 'page_configure_maintenance')
         {
@@ -113,13 +113,13 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == 'page_configure_groups') 
         {
-    	    HG.Configure.Modules.List(function (data) {
-	            try
-	            {
-	        	    HG.WebApp.Data.Modules = eval(data);                   
-	            } catch (e) { }
-    	        HG.Automation.Programs.List(function () {
-    	            HG.WebApp.GroupsList.LoadGroups();
+            HG.Configure.Modules.List(function (data) {
+                try
+                {
+                    HG.WebApp.Data.Modules = eval(data);                   
+                } catch (e) { }
+                HG.Automation.Programs.List(function () {
+                    HG.WebApp.GroupsList.LoadGroups();
                 });
             });
         }
@@ -127,12 +127,12 @@ HG.WebApp.InitializePage = function ()
         {
             HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.showPageLoadingMsg();
-//            setTimeout('HG.WebApp.GroupModules.LoadGroupModules()', 1000);
+            //            setTimeout('HG.WebApp.GroupModules.LoadGroupModules()', 1000);
         }
         else if (this.id == 'page_configure_automationgroups') 
         {
-    	    HG.Automation.Programs.List(function () {
-    	        HG.WebApp.AutomationGroupsList.LoadGroups();
+            HG.Automation.Programs.List(function () {
+                HG.WebApp.AutomationGroupsList.LoadGroups();
             });
         }
         else if (this.id == 'page_configure_schedulerservice')
@@ -141,7 +141,7 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == 'page_automation_programs') 
         {
-	        HG.WebApp.ProgramsList.LoadPrograms();
+            HG.WebApp.ProgramsList.LoadPrograms();
         }
         else if (this.id == 'page_automation_editprogram_code') 
         {
@@ -155,13 +155,13 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
-			automationpage_ConditionsRefresh();                                                    
-			automationpage_CommandsRefresh();                                                   
+            automationpage_ConditionsRefresh();                                                    
+            automationpage_CommandsRefresh();                                                   
         }
     });
-	//
-	// Page events - Close - Cleanup stuff
-	//
+    //
+    // Page events - Close - Cleanup stuff
+    //
     $('[data-role=page]').on('pagehide', function (event) {
         if ((this.id == 'page_control' || this.id == 'page_configure_groups')) 
         {
@@ -189,23 +189,23 @@ HG.WebApp.InitializePage = function ()
     // UI Localization
     //
     setTimeout(function(){
-	    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
-	    HG.WebApp.Locales.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
-	    // enable/disable speech input
-	    if (typeof document.createElement('input').webkitSpeech == 'undefined') {
-		    //no speech support
-		    $('#speechinput').hide();
-	    }
-	    else {
-		    // lookup for a localized version, if any
-		    HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
-			    if (!success)
-			    {
-				    // fallback to english lingo file
-				    HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ });
-			    }
-		    });
-	    }
+        var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+        HG.WebApp.Locales.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
+        // enable/disable speech input
+        if (typeof document.createElement('input').webkitSpeech == 'undefined') {
+            //no speech support
+            $('#speechinput').hide();
+        }
+        else {
+            // lookup for a localized version, if any
+            HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
+                if (!success)
+                {
+                    // fallback to english lingo file
+                    HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ });
+                }
+            });
+        }
         setTheme(sessvars.UserSettings.UiTheme);
     }, 1000);
     //
@@ -328,46 +328,46 @@ HG.WebApp.InitializePage = function ()
 HG.WebApp.Home = HG.WebApp.Home || {};
 HG.WebApp.Home.UpdateHeaderStatus = function()
 {
-	HG.WebApp.Home.UpdateInterfacesStatus();
+    HG.WebApp.Home.UpdateInterfacesStatus();
 };
 //
 HG.WebApp.Home.UpdateInterfacesStatus = function() 
 {
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
-	$.ajax({
-		url: ifaceurl,
-		dataType: 'json',
-		success: function (data) {
+    $.ajax({
+        url: ifaceurl,
+        dataType: 'json',
+        success: function (data) {
             var interfaces = eval(data);
             var status = '';
             var isupdateavailable = false;
             //
             if (interfaces && interfaces != 'undefined')
             {
-	            for (i = 0; i < interfaces.length; i++) {
-	                var domain = interfaces[i].Domain.split('.');
-	                var name = domain[1].toUpperCase();
-	                var connected = interfaces[i].IsConnected;
-	                //status += '<span style="color:' + (connected == 'True' ? 'lime' : 'gray') + ';margin-right:20px">' + name + '</span>';
-	                if (interfaces[i].Domain != "HomeGenie.UpdateChecker")
-	                {
-	                    status += '<img src="images/interfaces/' + name.toLowerCase() + '.png" height="28" width="30" style="' + (connected == 'True' ? 'opacity:1.0' : 'opacity:0.4') + '" vspace="2" hspace="0" />';
-	                }
-	                else
-	                {
-	                    isupdateavailable = true;
-	                }
-	            }
+                for (i = 0; i < interfaces.length; i++) {
+                    var domain = interfaces[i].Domain.split('.');
+                    var name = domain[1].toUpperCase();
+                    var connected = interfaces[i].IsConnected;
+                    //status += '<span style="color:' + (connected == 'True' ? 'lime' : 'gray') + ';margin-right:20px">' + name + '</span>';
+                    if (interfaces[i].Domain != "HomeGenie.UpdateChecker")
+                    {
+                        status += '<img src="images/interfaces/' + name.toLowerCase() + '.png" height="28" width="30" style="' + (connected == 'True' ? 'opacity:1.0' : 'opacity:0.4') + '" vspace="2" hspace="0" />';
+                    }
+                    else
+                    {
+                        isupdateavailable = true;
+                    }
+                }
             }
-		    //
+            //
             if (isupdateavailable)
             {
                 status += '<a href="#page_configure_maintenance" data-transition="slide" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
             }
-		    //
+            //
             $('#interfaces_status').html(status);
-		}
-	});		
+        }
+    });		
 };
 //
 // namespace : HG.WebApp.Utility namespace
@@ -450,15 +450,15 @@ HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, times
 	
 HG.WebApp.Utility.GetProgramByAddress = function (paddr)
 {
-	var cp = null;
-	for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
-		if (HG.WebApp.Data.Programs[i].Address == paddr)
-		{
-			cp = HG.WebApp.Data.Programs[i];
-			break;
-		}
-	}
-	return cp;
+    var cp = null;
+    for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
+        if (HG.WebApp.Data.Programs[i].Address == paddr)
+        {
+            cp = HG.WebApp.Data.Programs[i];
+            break;
+        }
+    }
+    return cp;
 };	
 
 HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
@@ -505,84 +505,84 @@ HG.WebApp.Utility.FormatDate = function (date)
 
 HG.WebApp.Utility.FormatDateTime = function (date, showms)
 {
-	var hh = date.getHours().toString(); if (hh.length == 1) hh = '0' + hh;
-	var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
-	var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
-	var dt = hh + ':' + mm + ':' + ss;
+    var hh = date.getHours().toString(); if (hh.length == 1) hh = '0' + hh;
+    var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
+    var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
+    var dt = hh + ':' + mm + ':' + ss;
     if (showms) dt += '.' + date.getMilliseconds();
-	return dt; 
+    return dt; 
 };
 	
 HG.WebApp.Utility.JScrollToElement = function (element, delay) {
-	    $('html, body').animate({
-	        scrollTop: $(element).offset().top
-	    }, delay);
-	};
+    $('html, body').animate({
+        scrollTop: $(element).offset().top
+    }, delay);
+};
 //
 // namespace : HG.WebApp.Utility namespace
 // info      : global utility functions
 //
 HG.WebApp.Locales = HG.WebApp.Locales || {};
 HG.WebApp.Locales.Localize = function(langurl)
-	{
-		// get data via ajax 
-		// store it in 		HG.WebApp.Data._CurrentLocale
-		// and replace locales strings in the current page
-		$.ajax({
-		        url: langurl,
-		        //dataType: 'json',
-		        success: function (data) {
-		            HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
-					//
-					$(document).find('[data-locale-id]').each(function(index){
-			    		var stringid = $(this).attr('data-locale-id');
-			    		var text = HG.WebApp.Locales.GetLocaleString(stringid);
-			    		if (text != null /* && text.trim() != ''*/ ) 
-                        {
-                            $this = $(this);
-                            if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
-                                $('span.ui-btn-text', $this).text(text);
-                            }
-                            /*else if( $this.is('input') ) {
-                                $this.val(text);
-                                // go up the tree
-                                var ctx = $this.closest('.ui-btn');
-                                $('span.ui-btn-text', ctx).text(text);
-                            }*/
-                            else
-                            {
-                                $(this).html(text);
-                            }
-                        }
-					});
-		        }
-		    });		
-	};
+{
+    // get data via ajax 
+    // store it in 		HG.WebApp.Data._CurrentLocale
+    // and replace locales strings in the current page
+    $.ajax({
+        url: langurl,
+        //dataType: 'json',
+        success: function (data) {
+            HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
+            //
+            $(document).find('[data-locale-id]').each(function(index){
+                var stringid = $(this).attr('data-locale-id');
+                var text = HG.WebApp.Locales.GetLocaleString(stringid);
+                if (text != null /* && text.trim() != ''*/ ) 
+                {
+                    $this = $(this);
+                    if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
+                        $('span.ui-btn-text', $this).text(text);
+                    }
+                        /*else if( $this.is('input') ) {
+                            $this.val(text);
+                            // go up the tree
+                            var ctx = $this.closest('.ui-btn');
+                            $('span.ui-btn-text', ctx).text(text);
+                        }*/
+                    else
+                    {
+                        $(this).html(text);
+                    }
+                }
+            });
+        }
+    });		
+};
 HG.WebApp.Locales.GetLocaleString = function(stringid)
-	{
-		var retval = null;
-    	$.each(HG.WebApp.Data._CurrentLocale, function(key, value) {
-    		if (key == stringid)
-    		{
-    			retval = value;
-    			return false; // break each
-    		}
-		});
-		return retval;
-	}
+{
+    var retval = null;
+    $.each(HG.WebApp.Data._CurrentLocale, function(key, value) {
+        if (key == stringid)
+        {
+            retval = value;
+            return false; // break each
+        }
+    });
+    return retval;
+}
 HG.WebApp.Locales.GenerateTemplate = function()
-	{
-		//
-		var localestring = '';
-		$(document).find('[data-locale-id]').each(function(index){
-    		var stringid = $(this).attr('data-locale-id');
-    		var value = $(this).html().trim();
-    		if (localestring.indexOf('"' + stringid + '\"') < 0)
-    		{
-    			localestring += '\t\"' + stringid + '\": \n\t\t \"' + value + '\",\n';
-			}
-		});
-		alert( localestring );
-		//
-	};
+{
+    //
+    var localestring = '';
+    $(document).find('[data-locale-id]').each(function(index){
+        var stringid = $(this).attr('data-locale-id');
+        var value = $(this).html().trim();
+        if (localestring.indexOf('"' + stringid + '\"') < 0)
+        {
+            localestring += '\t\"' + stringid + '\": \n\t\t \"' + value + '\",\n';
+        }
+    });
+    alert( localestring );
+    //
+};
 	

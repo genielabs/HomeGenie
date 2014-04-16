@@ -1,8 +1,13 @@
 /* The lint marker gutter */
 .CodeMirror-lint-markers {
-  width: 16px;
+  width: 8px;
 }
-
+.CodeMirror-lint-markers-1 {
+  width: 8px;
+}
+.CodeMirror-lint-markers-2 {
+  width: 8px;
+}
 .CodeMirror-lint-tooltip {
   background-color: infobackground;
   border: 1px solid black;

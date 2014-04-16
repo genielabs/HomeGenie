@@ -95,7 +95,6 @@ namespace HomeGenieUpdater
             }
             Console.WriteLine("\nUpdate completed!");
 
-            restart = true;
             if (restart)
             {
 

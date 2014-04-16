@@ -227,14 +227,14 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
 		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Trigger Code');
 		    setTimeout(function () {
 		        editor2.refresh();
-		    }, 1000);
+		    }, 500);
 		}
 		else {
 		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
 		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Code to Run');
 		    setTimeout(function () {
 		        editor1.refresh();
-		    }, 1000);
+		    }, 500);
 		}
     };
 
@@ -266,7 +266,6 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function ()
 	                    HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
 	                    HG.WebApp.ProgramEdit.HideProgramErrors();
 	                }
-
                 }
 	        });
 	    }, 500);
@@ -316,14 +315,14 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 					//$('#program_barbutton_run').attr('disabled', 'disabled');
 					//$('#program_barbutton_run').button().button('refresh');
 					$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, 'Error updating program!', true );
-					HG.WebApp.ProgramEdit.ShowProgramErrors( response );
+					HG.WebApp.ProgramEdit.ShowProgramErrors(response);
 				}
 				else
 				{
 					//$('#program_barbutton_run').removeAttr('disabled');
 					//$('#program_barbutton_run').button().button('refresh');
 					$.mobile.showPageLoadingMsg( $.mobile.loadingMessageTheme, 'Saving succeed.', true );
-					HG.WebApp.ProgramEdit.HideProgramErrors( );
+					HG.WebApp.ProgramEdit.HideProgramErrors();
 				}
 				setTimeout($.mobile.hidePageLoadingMsg, 2000);
 			    //
@@ -376,8 +375,11 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		}*/
 		$('#program_error_message_text').html('<h3>Errors:</h3><i>' + message.replace(/\n/g, '</br>') + '</i><h3 style="color:red;font-weight:bold">Program disabled, fix errors first.</h3>');
 		setTimeout(function () {
-		    $('#program_error_message').popup().popup('open');
-		    $('#program_error_button').show(100);
+		    if ($('#program_error_message_text').html() != '')
+		    {
+		        $('#program_error_message').popup().popup('open');
+		        $('#program_error_button').show(100);
+		    }
 		}, 1000);
 		//
 		var errors = null;
@@ -440,6 +442,7 @@ HG.WebApp.ProgramEdit.HideProgramErrors = function ()
         editor2.clearGutter('CodeMirror-lint-markers-2');
         $('#program_error_message_text').html('');
         $('#program_error_button').hide();
+        $('#program_error_message').popup().popup('close');
 	};
 
 HG.WebApp.ProgramEdit.CompileProgram = function () {

@@ -58,7 +58,7 @@ namespace HomeGenie.Automation
 
         private MacroRecorder macroRecorder = null;
 
-		private object lockObject = new object();
+        private object lockObject = new object();
 
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
@@ -133,7 +133,7 @@ namespace HomeGenie.Automation
                             isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
                         }
                     }
-                    else 
+                    else
                     {
                         // it is a Wizard Script
                         isConditionSatisfied = (program.Conditions.Count > 0);
@@ -282,7 +282,7 @@ namespace HomeGenie.Automation
                     }
                 }
             }
-            else 
+            else
             {
                 program.TriggerTime = DateTime.UtcNow;
                 if (program.ConditionType == ConditionType.Once)
@@ -324,7 +324,7 @@ namespace HomeGenie.Automation
         }
 
         public TsList<ProgramBlock> Programs { get { return automationPrograms; } }
-        
+
         public int GeneratePid()
         {
             int pid = USER_SPACE_PROGRAMS_START;
@@ -334,7 +334,7 @@ namespace HomeGenie.Automation
             }
             return pid;
         }
-        
+
         public void ProgramAdd(ProgramBlock program)
         {
             program.SetHost(homegenie);
@@ -442,7 +442,7 @@ namespace HomeGenie.Automation
             source = (program.scriptEngine as ScriptEngine).CreateScriptSourceFromString(program.ScriptSource);
             source.Compile(errorListener);
             errors.AddRange(errorListener.Errors);
-            
+
             return errors;
         }
 
@@ -724,7 +724,7 @@ namespace HomeGenie.Automation
             };
             ThreadPool.QueueUserWorkItem(new WaitCallback(EvaluateProgramCondition), evalArgs);
         }
-        
+
         private void program_EnabledStateChanged(object sender, bool isEnabled)
         {
             ProgramBlock program = (ProgramBlock)sender;

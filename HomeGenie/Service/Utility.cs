@@ -66,7 +66,7 @@ namespace HomeGenie.Service
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
-        
+
         private object syncLock = new object();
 
         public TsList()
@@ -106,7 +106,7 @@ namespace HomeGenie.Service
             lock (syncLock)
                 base.Sort(comparison);
         }
-        
+
     }
 
 
@@ -221,9 +221,16 @@ namespace HomeGenie.Service
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
                 default:
-                    var player = new System.Media.SoundPlayer();
-                    player.SoundLocation = wavFile;
-                    player.Play();
+                    //var player = new System.Media.SoundPlayer();
+                    //player.SoundLocation = wavFile;
+                    //player.Play();
+                    Process.Start(new ProcessStartInfo("aplay", "\"" + wavFile + "\"")
+                    {
+                        CreateNoWindow = true,
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                        UseShellExecute = false
+                    }).WaitForExit();
                     break;
             }
 

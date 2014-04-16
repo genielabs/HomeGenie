@@ -4,49 +4,47 @@
 //
 HG.System = HG.System || {};
 //
-HG.System.SetHttpPort = function (port, callback)
-	{
-	    $.ajax({
-	        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/' + (new Date().getTime()),
-	        type: "POST",
-	        dataType: "text",
-	        success: function (data) {
-	            if (callback != null) callback(data);
-	        }
-	    });
-	};
-HG.System.SetPassword = function (pass, callback)
-	{
-	    $.ajax({
-	        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/' + (new Date().getTime()),
-	        type: "POST",
-	        dataType: "text",
-	        success: function (data) {
-	            if (callback != null) callback(data);
-	        }
-	    });
-	};
+HG.System.SetHttpPort = function (port, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/' + (new Date().getTime()),
+        type: "POST",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
+HG.System.SetPassword = function (pass, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/' + (new Date().getTime()),
+        type: "POST",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
 HG.System.ClearPassword = function (callback) {
-	    $.ajax({
-	        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.ClearPassword/' + (new Date().getTime()),
-	        type: "POST",
-	        dataType: "text",
-	        success: function (data) {
-	            if (callback != null) callback(data);
-	        }
-	    });
-	};
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.ClearPassword/' + (new Date().getTime()),
+        type: "POST",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
 HG.System.HasPassword = function (callback) {
-	    $.ajax({
-	        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
-	        type: "POST",
-	        dataType: "text",
-	        success: function (data) {
-	            var haspass = eval(data)[0];
-	            if (callback != null) callback(haspass.ResponseValue);
-	        }
-	    });
-	};
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
+        type: "POST",
+        dataType: "text",
+        success: function (data) {
+            var haspass = eval(data)[0];
+            if (callback != null) callback(haspass.ResponseValue);
+        }
+    });
+};
 HG.System.LoggingEnable = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Enable/' + (new Date().getTime()),

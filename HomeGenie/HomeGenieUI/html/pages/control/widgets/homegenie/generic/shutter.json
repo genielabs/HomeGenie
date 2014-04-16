@@ -37,7 +37,17 @@
 			// toggle button action
 			container.find('[data-ui-field=toggle]').on('click', function(){
 				HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
-			});			
+			});
+			controlpopup.find('[data-ui-field=close_button]').on('click', function(){
+                var cmd = 'Control.Off';
+                if (module.Domain == 'HomeAutomation.ZWave') cmd = 'Control.On';
+                HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
+			});
+			controlpopup.find('[data-ui-field=open_button]').on('click', function(){
+                var cmd = 'Control.On';
+                if (module.Domain == 'HomeAutomation.ZWave') cmd = 'Control.Off';
+                HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
+			});
 		}
 		//
 		// read some context data
@@ -57,7 +67,7 @@
 				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             //
-            if (status.Value == '0') 
+            if ((module.Domain == 'HomeAutomation.ZWave' && status.Value == '0') || status.Value == '1') 
             {
 			    this.StatusText = 'OPEN';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_open.png';
