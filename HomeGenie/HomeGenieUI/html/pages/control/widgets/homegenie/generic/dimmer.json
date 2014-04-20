@@ -32,6 +32,21 @@
 				}
 			});
 			//
+			// level knob
+			//
+			controlpopup.find('[data-ui-field=level_knob]').knob({
+				'release' : function (v) 
+				{
+					v = Math.round(v);
+					HG.Control.Modules.ServiceCall("Control.Level", module.Domain, module.Address, v, function (data) { });
+				},
+				'change' : function (v)
+				{
+					v = Math.round(v);
+					controlpopup.find('[data-ui-field=status]').html(v + '%');
+				}
+            });
+			//
 			// ui events handlers
 			//
 			// toggle button action
@@ -52,13 +67,14 @@
 			var w = Math.round(watts.Value.replace(',', '.'));
 			if (w > 0)
 			{
-				watts = '&nbsp;&nbsp;&nbsp;' + w + 'W';
+				watts = w + 'W';
 			} else watts = '';
 		} else watts = '';
 		//
 		// get module level prop for status text
 		//
 		var level = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
+		var levelText = '';
 		if (level != null)
 		{
             var updatetime = level.UpdateTime;
@@ -70,22 +86,19 @@
 			}
             //
 			level = level.Value.replace(',', '.') * 100;
-        	if (level >= 99 || level == 0)
+        	if (level > 0)
         	{
-				level = (level >= 99 ? 'ON' : 'OFF');
+				levelText = 'ON';
         	}
         	else
         	{
-				level = level.toFixed(0) + '%';
+				levelText = 'OFF';
         	}
-		} else level = '';
-		this.StatusText = level + watts;
+		} else level = 0;
+		this.StatusText = ((level >=98 || level == 0) ? levelText : Math.round(level) + '%') + '&nbsp;&nbsp;&nbsp; ' + watts;
 		//
 		// get light level prop for icon image
 		//
-		level = 0;
-		var levelprop = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-		if (levelprop != null) level = levelprop.Value.replace(',', '.') * 100;
 		if (level > 0)
 		{
 			this.IconImage = 'pages/control/widgets/homegenie/generic/images/light_on.png';
@@ -109,7 +122,8 @@
 		controlpopup.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
-		controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+		controlpopup.find('[data-ui-field=status]').html(levelText + '<br />' + watts);
+		controlpopup.find('[data-ui-field=level_knob]').val(Math.round(level)).trigger('change');
     }
 
 }]

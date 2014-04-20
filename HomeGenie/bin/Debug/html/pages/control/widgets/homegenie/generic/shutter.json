@@ -13,6 +13,7 @@
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
 		var controlpopup = widget.data('ControlPopUp');
+		var invertcontrols = false;
 		//
 		// create and store a local reference to control popup object
 		//
@@ -32,6 +33,21 @@
 				}
 			});
 			//
+			// level knob
+			//
+			controlpopup.find('[data-ui-field=level_knob]').knob({
+				'release' : function (v) 
+				{
+					v = Math.round(v);
+					HG.Control.Modules.ServiceCall("Control.Level", module.Domain, module.Address, v, function (data) { });
+				},
+				'change' : function (v)
+				{
+					v = Math.round(v);
+					controlpopup.find('[data-ui-field=status]').html(v + '%');
+				}
+            });
+			//
 			// ui events handlers
 			//
 			// toggle button action
@@ -40,12 +56,12 @@
 			});
 			controlpopup.find('[data-ui-field=close_button]').on('click', function(){
                 var cmd = 'Control.Off';
-                if (module.Domain == 'HomeAutomation.ZWave') cmd = 'Control.On';
+                if (invertcontrols) cmd = 'Control.On';
                 HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
 			});
 			controlpopup.find('[data-ui-field=open_button]').on('click', function(){
                 var cmd = 'Control.On';
-                if (module.Domain == 'HomeAutomation.ZWave') cmd = 'Control.Off';
+                if (invertcontrols) cmd = 'Control.Off';
                 HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
 			});
 		}
@@ -57,8 +73,10 @@
 		// read module status prop
 		//
         var status = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
+		var level = 0;
         if (status != null)
         {
+			level = status.Value.replace(',', '.') * 100;
             var updatetime = status.UpdateTime;
 			if (typeof updatetime != 'undefined')
 			{
@@ -67,14 +85,14 @@
 				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             //
-            if ((module.Domain == 'HomeAutomation.ZWave' && status.Value == '0') || status.Value == '1') 
+            if ((invertcontrols && level != 1) || level > 0) 
             {
-			    this.StatusText = 'OPEN';
+			    this.StatusText = 'Open';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_open.png';
 		    }
 		    else
 		    {
-			    this.StatusText = 'CLOSED';
+			    this.StatusText = 'Closed';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';
 		    }
         }
@@ -83,12 +101,13 @@
 			    this.StatusText = '?';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';
         }
+		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
 		//
 		// render widget
 		//
         widget.find('[data-ui-field=name]').html(module.Name);
 		widget.find('[data-ui-field=description]').html(this.Description);
-		widget.find('[data-ui-field=status]').html(this.StatusText);
+		widget.find('[data-ui-field=status]').html(this.StatusText.toUpperCase());
 		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
         widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
 		//
@@ -98,6 +117,7 @@
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
 		controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+		controlpopup.find('[data-ui-field=level_knob]').val(Math.round(level)).trigger('change');
     }
 
 }]

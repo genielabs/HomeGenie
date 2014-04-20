@@ -482,7 +482,7 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
             for (var f = 0; f < features.length; f++) {
                 var fd = ',' + features[f].ForDomains.toLowerCase() + ',|' + features[f].ForDomains.toLowerCase() + '|';
                 var fs = ',' + features[f].ForTypes.toLowerCase() + ',|' + features[f].ForTypes.toLowerCase() + '|';
-                var featurematch = (features[f].ForDomains == '' || fd.indexOf(HG.WebApp.GroupModules.EditModule.Domain.toLowerCase(), 0) >= 0) && (features[f].ForTypes == '' || fs.indexOf(HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase(), 0) >= 0);
+                var featurematch = (features[f].ForDomains == '' || fd.indexOf(HG.WebApp.GroupModules.EditModule.Domain.toLowerCase(), 0) == 0) && (features[f].ForTypes == '' || fs.indexOf(HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase(), 0) == 0);
                 if (featurematch) {
                     var property = features[f].Property;
                     var prop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, property);

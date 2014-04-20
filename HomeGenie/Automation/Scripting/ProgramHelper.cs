@@ -531,13 +531,13 @@ namespace HomeGenie.Automation.Scripting
             get { return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0; }
         }
 
-        // that isn't of any use here.. .anyway... =)
         public ProgramHelper Reset()
         {
             this.parameter = "";
             this.value = "";
+            this.initialized = false;
             //
-            if (programModule == null) RelocateProgramModule();
+            AddControlWidget(""); // no control widget --> not visible
             //
             // remove all features 
             //
@@ -546,10 +546,6 @@ namespace HomeGenie.Automation.Scripting
             {
                 program.Features.Clear();
             }
-            //
-            initialized = false;
-            //
-            AddControlWidget(""); // no control widget --> not visible
             //
             return this;
         }

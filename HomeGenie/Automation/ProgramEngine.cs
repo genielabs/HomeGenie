@@ -34,6 +34,7 @@ using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace HomeGenie.Automation
 {
@@ -582,121 +583,114 @@ namespace HomeGenie.Automation
                 return homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
             }
             //
-            try
+            // if the comparison value starts with ":", then the value is read from another module property
+            // eg: ":HomeAutomation.X10/B3/Level"
+            if (comparisonValue.StartsWith(":"))
             {
-                //
-                // if the comparison value starts with ":", then the value is read from another module property
-                // eg: ":HomeAutomation.X10/B3/Level"
-                if (comparisonValue.StartsWith(":"))
+                string[] propertyPath = comparisonValue.Substring(1).Split('/');
+                comparisonValue = "";
+                if (propertyPath.Length >= 3)
                 {
-                    string[] propertyPath = comparisonValue.Substring(1).Split('/');
-                    comparisonValue = "";
-                    if (propertyPath.Length >= 3)
+                    string domain = propertyPath[0];
+                    string address = propertyPath[1];
+                    string propertyName = propertyPath[2];
+                    var targetModule = homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
+                    if (targetModule == null)
                     {
-                        string domain = propertyPath[0];
-                        string address = propertyPath[1];
-                        string propertyName = propertyPath[2];
-                        var targetModule = homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
-                        if (targetModule == null)
+                        // abbreviated path, eg: ":X10/B3/Level"
+                        targetModule = homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
+                    }
+                    //
+                    if (targetModule != null)
+                    {
+                        var mprop = Utility.ModuleParameterGet(targetModule, propertyName);
+                        if (mprop != null)
                         {
-                            // abbreviated path, eg: ":X10/B3/Level"
-                            targetModule = homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
+                            comparisonValue = mprop.Value;
                         }
-                        //
-                        if (targetModule != null)
-                        {
-                            var mprop = Utility.ModuleParameterGet(targetModule, propertyName);
-                            if (mprop != null)
-                            {
-                                comparisonValue = mprop.Value;
-                            }
-                        }
-                    }
-                }
-                //
-                // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
-                //
-                ModuleParameter parameter = null;
-                if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation")
-                {
-                    parameter = new ModuleParameter();
-                    parameter.Name = c.Property;
-                    switch (parameter.Name)
-                    {
-                        case "Programs.DateDay":
-                            parameter.Value = DateTime.Now.Day.ToString();
-                            break;
-                        case "Programs.DateMonth":
-                            parameter.Value = DateTime.Now.Month.ToString();
-                            break;
-                        case "Programs.DateDayOfWeek":
-                            parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
-                            break;
-                        case "Programs.DateYear":
-                            parameter.Value = DateTime.Now.Year.ToString();
-                            break;
-                        case "Programs.DateHour":
-                            parameter.Value = DateTime.Now.Hour.ToString();
-                            break;
-                        case "Programs.DateMinute":
-                            parameter.Value = DateTime.Now.Minute.ToString();
-                            break;
-                        case "Programs.Date":
-                            parameter.Value = DateTime.Now.ToString("YY-MM-dd");
-                            break;
-                        case "Programs.Time":
-                            parameter.Value = DateTime.Now.ToString("HH:mm:ss");
-                            break;
-                        case "Programs.DateTime":
-                            parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
-                            break;
-                    }
-                }
-                else
-                {
-                    Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
-                    parameter = module.Properties.Find(delegate(ModuleParameter mp)
-                    {
-                        return mp.Name == c.Property;
-                    });
-                }
-                //
-                if (parameter != null)
-                {
-                    IComparable lvalue = parameter.Value;
-                    IComparable rvalue = comparisonValue;
-                    //
-                    double dval = 0;
-                    DateTime dtval = new DateTime();
-                    //
-                    if (DateTime.TryParse(parameter.Value, out dtval))
-                    {
-                        lvalue = dtval;
-                        rvalue = DateTime.Parse(comparisonValue);
-                    }
-                    else if (double.TryParse(parameter.Value, out dval))
-                    {
-                        lvalue = dval;
-                        rvalue = double.Parse(comparisonValue);
-                    }
-                    //
-                    int comparisonresult = lvalue.CompareTo(rvalue);
-                    if (c.ComparisonOperator == ComparisonOperator.LessThan && comparisonresult < 0)
-                    {
-                        returnValue = true;
-                    }
-                    else if (c.ComparisonOperator == ComparisonOperator.Equals && comparisonresult == 0)
-                    {
-                        returnValue = true;
-                    }
-                    else if (c.ComparisonOperator == ComparisonOperator.GreaterThan && comparisonresult > 0)
-                    {
-                        returnValue = true;
                     }
                 }
             }
-            catch
+            //
+            // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
+            //
+            ModuleParameter parameter = null;
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation")
             {
+                parameter = new ModuleParameter();
+                parameter.Name = c.Property;
+                switch (parameter.Name)
+                {
+                    case "Programs.DateDay":
+                        parameter.Value = DateTime.Now.Day.ToString();
+                        break;
+                    case "Programs.DateMonth":
+                        parameter.Value = DateTime.Now.Month.ToString();
+                        break;
+                    case "Programs.DateDayOfWeek":
+                        parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
+                        break;
+                    case "Programs.DateYear":
+                        parameter.Value = DateTime.Now.Year.ToString();
+                        break;
+                    case "Programs.DateHour":
+                        parameter.Value = DateTime.Now.Hour.ToString();
+                        break;
+                    case "Programs.DateMinute":
+                        parameter.Value = DateTime.Now.Minute.ToString();
+                        break;
+                    case "Programs.Date":
+                        parameter.Value = DateTime.Now.ToString("YY-MM-dd");
+                        break;
+                    case "Programs.Time":
+                        parameter.Value = DateTime.Now.ToString("HH:mm:ss");
+                        break;
+                    case "Programs.DateTime":
+                        parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
+                        break;
+                }
+            }
+            else
+            {
+                Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                parameter = module.Properties.Find(delegate(ModuleParameter mp)
+                {
+                    return mp.Name == c.Property;
+                });
+            }
+            //
+            if (parameter != null)
+            {
+                IComparable lvalue = parameter.Value;
+                IComparable rvalue = comparisonValue;
+                //
+                double dval = 0;
+                DateTime dtval = new DateTime();
+                //
+                if (DateTime.TryParse(parameter.Value, out dtval))
+                {
+                    lvalue = dtval;
+                    rvalue = DateTime.Parse(comparisonValue);
+                }
+                else if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
+                {
+                    lvalue = dval;
+                    rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
+                }
+                //
+                int comparisonresult = lvalue.CompareTo(rvalue);
+                if (c.ComparisonOperator == ComparisonOperator.LessThan && comparisonresult < 0)
+                {
+                    returnValue = true;
+                }
+                else if (c.ComparisonOperator == ComparisonOperator.Equals && comparisonresult == 0)
+                {
+                    returnValue = true;
+                }
+                else if (c.ComparisonOperator == ComparisonOperator.GreaterThan && comparisonresult > 0)
+                {
+                    returnValue = true;
+                }
             }
             return returnValue;
         }

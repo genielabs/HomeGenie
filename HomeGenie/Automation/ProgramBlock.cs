@@ -439,10 +439,7 @@ namespace HomeGenie.Automation
 
         internal void Stop()
         {
-            //this.Reset();
-            //
             this.IsRunning = false;
-            this.Reset();
             //
             if (ProgramThread != null)
             {
@@ -456,6 +453,8 @@ namespace HomeGenie.Automation
             }
             //
             //TODO: complete cleanup and deallocation stuff here
+            this.Reset();
+            //
             ModuleIsChangingHandler = null;
             ModuleChangedHandler = null;
             //

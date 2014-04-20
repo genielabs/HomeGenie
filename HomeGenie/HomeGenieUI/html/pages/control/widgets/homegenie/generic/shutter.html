@@ -2,7 +2,7 @@
 
 <a data-ui-field="widget">
 
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" src="pages/control/widgets/homegenie/generic/images/shutters_open.png" />
+    <img data-ui-field="icon" style="margin-left:8px;margin-top:10px" src="pages/control/widgets/homegenie/generic/images/shutters_open.png" />
 
     <span data-ui-field="name"></span><br />
 
@@ -24,48 +24,43 @@
     <div style="margin:10px">
 
         <!-- BEGIN - COMMON UI PART --->
-        <table>
+        <table width="100%">
             <tr>
-                <td>
+                <td width="50">
                     <img data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/shutters_open.png" />
                 </td>
                 <td>
-                    <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
-                    <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+                    <div data-ui-field="group" style="margin:0;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+                    <h4 data-ui-field="name" style="margin:0;">Description</h4>
+                </td>
+                <td valign="top">
+                    <div data-ui-field="status" style="margin-top: 10px; font-size: 11pt; color: gray; " align="right"></div>
                 </td>
             </tr>
         </table>
         <!-- -->
-        <div data-ui-field="status" style="margin-top:10px;font-size:18pt;" align="center"></div>
         <!-- END - COMMON UI PART --->
         <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
 
-        <div style="width:220px;height:30px;margin-left:10px;margin-top:5px;border:solid 1px white">
-            <a title="100%" href="javascript:HG.WebApp.Control.ModuleSetLevel(100)" style="height: 100%; width: 5%; background-color: #004444; float: left; "></a>
-            <a title="95%" href="javascript:HG.WebApp.Control.ModuleSetLevel(95)" style="height: 100%; width: 5%; background-color: #004949; float: left;"></a>
-            <a title="90%" href="javascript:HG.WebApp.Control.ModuleSetLevel(90)" style="height: 100%; width: 5%; background-color: #005252; float: left;"></a>
-            <a title="85%" href="javascript:HG.WebApp.Control.ModuleSetLevel(85)" style="height: 100%; width: 5%; background-color: #005555; float: left;"></a>
-            <a title="80%" href="javascript:HG.WebApp.Control.ModuleSetLevel(80)" style="height: 100%; width: 5%; background-color: #006666; float: left;"></a>
-            <a title="75%" href="javascript:HG.WebApp.Control.ModuleSetLevel(75)" style="height: 100%; width: 5%; background-color: #007777; float: left;"></a>
-            <a title="70%" href="javascript:HG.WebApp.Control.ModuleSetLevel(70)" style="height: 100%; width: 5%; background-color: #008888; float: left;"></a>
-            <a title="65%" href="javascript:HG.WebApp.Control.ModuleSetLevel(65)" style="height: 100%; width: 5%; background-color: #009999; float: left;"></a>
-            <a title="60%" href="javascript:HG.WebApp.Control.ModuleSetLevel(60)" style="height: 100%; width: 5%; background-color: #00aaaa; float: left;"></a>
-            <a title="55%" href="javascript:HG.WebApp.Control.ModuleSetLevel(55)" style="height: 100%; width: 5%; background-color: #00bbbb; float: left;"></a>
-            <a title="50%" href="javascript:HG.WebApp.Control.ModuleSetLevel(50)" style="height: 100%; width: 5%; background-color: #00cccc; float: left;"></a>
-            <a title="45%" href="javascript:HG.WebApp.Control.ModuleSetLevel(45)" style="height: 100%; width: 5%; background-color: #00dddd; float: left;"></a>
-            <a title="40%" href="javascript:HG.WebApp.Control.ModuleSetLevel(40)" style="height: 100%; width: 5%; background-color: #00eeee; float: left;"></a>
-            <a title="35%" href="javascript:HG.WebApp.Control.ModuleSetLevel(35)" style="height: 100%; width: 5%; background-color: #00ffff; float: left;"></a>
-            <a title="30%" href="javascript:HG.WebApp.Control.ModuleSetLevel(30)" style="height: 100%; width: 5%; background-color: #22ffff; float: left;"></a>
-            <a title="25%" href="javascript:HG.WebApp.Control.ModuleSetLevel(25)" style="height: 100%; width: 5%; background-color: #44ffff; float: left;"></a>
-            <a title="20%" href="javascript:HG.WebApp.Control.ModuleSetLevel(20)" style="height: 100%; width: 5%; background-color: #66ffff; float: left;"></a>
-            <a title="15%" href="javascript:HG.WebApp.Control.ModuleSetLevel(15)" style="height: 100%; width: 5%; background-color: #88ffff; float: left;"></a>
-            <a title="10%" href="javascript:HG.WebApp.Control.ModuleSetLevel(10)" style="height: 100%; width: 5%; background-color: #aaffff; float: left;"></a>
-            <a title="5%" href="javascript:HG.WebApp.Control.ModuleSetLevel(5)" style="height: 100%; width: 5%; background-color: #ccffff; float: left; "></a>
+        <div align="center">
+            <input data-ui-field="level_knob" data-role="none" type="text" class="dial"
+                   data-width="170"
+                   data-height="120"
+                   data-min="0"
+                   data-max="100"
+                   data-gradient="blue"
+                   data-fgcolor="#CCCCCC"
+                   data-bgcolor="#555555"
+                   data-angleoffset=-125
+                   data-anglearc=250
+                   -data-cursor=true
+                   -data-skin="tron"
+                   data-thickness=".4"
+                   -data-linecap=round
+                   data-displayprevious=true>
         </div>
 
-
         <div align="center">
-            <br />
             <div data-role="controlgroup" data-type="horizontal">
                 <a data-locale-id="control_module_close" data-ui-field="close_button" data-role="button">CLOSE</a>
                 <a data-locale-id="control_module_open" data-ui-field="open_button" data-role="button">OPEN</a>

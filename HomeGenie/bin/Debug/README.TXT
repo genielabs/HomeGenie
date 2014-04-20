@@ -165,6 +165,14 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+19/04/2014 1.00 beta rev 366
+	- Fixed bug when parsing decimal values in Wizard script value comparison
+	- Added Alcatel Y800Z SMS Notify program 
+	- Improved Security Alarm System: run automation programs/scenarios when armed/disarmed/triggered
+	- New Dimmer and Shutter widgets (Shutter is also now supporting Scheduling ON/OFF features)
+	- Some code improvements to Raspberry Pi automation programs
+	- Some fixes to Program Source Code Editor
+
 12/04/2014 1.00 beta rev 364
 	- Minor UI fixes and enhancements
 	- Added level slider to Shutter widget and inverted open/close logic

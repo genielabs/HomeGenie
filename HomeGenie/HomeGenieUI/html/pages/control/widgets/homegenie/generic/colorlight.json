@@ -84,7 +84,7 @@
 			var w = Math.round(watts.Value.replace(',', '.'));
 			if (w > 0)
 			{
-				watts = '&nbsp;&nbsp;&nbsp;' + w + 'W';
+				watts = w + 'W';
 			} else watts = '';
 		} else watts = '';
 		//
@@ -120,7 +120,7 @@
 
 		} else level = '';
 		//
-		this.StatusText = level + watts;
+		this.StatusText = level + '&nbsp;&nbsp;&nbsp; ' + watts;
 		//
 		var hsbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
 		if (hsbcolor != null && this.ColorWheel != null)
@@ -129,8 +129,8 @@
 			var color = Raphael.color(hsbcolor);
 			if (level == 'OFF') color.v = 0.05;
 			this.ColorWheel.color(hsbcolor);
-			this.WidgetImage.clear(); this.WidgetImage.ball(20, 20, 20, color);
-			this.ControlImage.clear(); this.ControlImage.ball(20, 20, 20, color);
+			this.WidgetImage.clear(); this.WidgetImage.ball(22, 22, 22, color);
+			this.ControlImage.clear(); this.ControlImage.ball(22, 22, 22, color);
 		}
 		//
 		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
@@ -146,7 +146,7 @@
 		//
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
-		controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+		controlpopup.find('[data-ui-field=status]').html(level + '<br />' + watts);
     }
 
 }]

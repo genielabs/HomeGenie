@@ -141,7 +141,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4207489Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:28.038665Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -257,7 +257,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4247512Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:28.0466802Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -403,7 +403,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4257491Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:29.0155945Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -414,9 +414,9 @@ User must create an account at wunderground.com in order to obtain a service key
     <ScriptCondition>// this Setup delegate will be executed once, when program become active
 Program.Setup(()=&gt;
 {
-	Program.AddFeature("Light,Dimmer,Switch", "HomeGenie.ScheduleControl", "Control device on a given schedule");
-	Program.AddFeatureTextInput("Light,Dimmer,Switch", "HomeGenie.ScheduleOn", "Turn On (enter scheduler expression)");
-	Program.AddFeatureTextInput("Light,Dimmer,Switch", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
+	Program.AddFeature("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleControl", "Control device on a given schedule");
+	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOn", "Turn On (enter scheduler expression)");
+	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
 });
 //
 Pause(30); // pause a minute before next check
@@ -443,27 +443,27 @@ controlModules.Each((module)=&gt;{
   return false;
 });
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
         <Property>HomeGenie.ScheduleControl</Property>
         <Description>Control device on a given schedule</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
         <Property>HomeGenie.ScheduleOn</Property>
         <Description>Turn On (enter scheduler expression)</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Dimmer,Switch</ForTypes>
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
         <Property>HomeGenie.ScheduleOff</Property>
         <Description>Turn Off (enter scheduler expression)</Description>
       </ProgramFeature>
@@ -474,8 +474,8 @@ controlModules.Each((module)=&gt;{
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
-    <ActivationTime>2014-03-31T23:25:16.9411388Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:52:07.5840549Z</TriggerTime>
+    <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
+    <TriggerTime>2014-04-19T15:28:30.7755419Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -592,10 +592,10 @@ ConvertToLux = (volts, referenceVoltage) =&gt; {
     return volts != 0 ? luxRatio * volts / (resistor * (referenceVoltage - volts)) : 0;
 };
 
-var adcClock = ConnectorPin.P1Pin12.ToProcessor();
-var adcMiso = ConnectorPin.P1Pin16.ToProcessor();
-var adcMosi = ConnectorPin.P1Pin18.ToProcessor();
-var adcCs = ConnectorPin.P1Pin22.ToProcessor();
+var adcClock = ConnectorPin.P1Pin12;
+var adcMiso = ConnectorPin.P1Pin16;
+var adcMosi = ConnectorPin.P1Pin18;
+var adcCs = ConnectorPin.P1Pin22;
 
   
 // it makes program to respond to webservices calls:
@@ -610,8 +610,15 @@ When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Luminance", ( args ) =&
 	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Luminance").Value + "' }";
 });
 
+var driver = GpioConnectionSettings.DefaultDriver;
 
-using (var adcConnection = new Mcp3008SpiConnection(adcClock, adcCs, adcMiso, adcMosi, voltage))
+using (var clockPin = driver.Out(adcClock))
+using (var csPin = driver.Out(adcCs))
+using (var misoPin = driver.In(adcMiso))
+using (var mosiPin = driver.Out(adcMosi))
+using (var adcConnection = new Mcp3008SpiConnection(clockPin, csPin, misoPin, mosiPin))
+using (var temperaturePin = adcConnection.In(Mcp3008Channel.Channel0, ConvertToCelsius(voltage)))
+using (var luxPin = adcConnection.In(Mcp3008Channel.Channel1, voltage))
 {
   // MCP3008 Sample: Reading temperature on Channel 0 and luminosity on Channel 1
   
@@ -643,18 +650,18 @@ using (var adcConnection = new Mcp3008SpiConnection(adcClock, adcCs, adcMiso, ad
   }
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>38</Address>
     <Name>MCP3008 - Temperature and Luminance</Name>
     <Description>Analog Inputs SPI application using the MCP3008 ADC. 
 For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
     <Group>Raspberry Sharp</Group>
-    <ActivationTime>2013-12-09T19:29:38.557717Z</ActivationTime>
-    <TriggerTime>2013-12-09T19:29:38.67913Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -965,7 +972,9 @@ For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
     <ScriptCondition>// returning true will execute the "Code to Run"
 return true;
 </ScriptCondition>
-    <ScriptSource>// This examples will add 16 modules of type "Switch"
+    <ScriptSource>var moduleDomain = "Components.MCP23017";
+
+// This examples will add 16 modules of type "Switch"
 // corresponding to A0-A7 and B0-B7 pins, configured as INPUT or OUTPUT
 //
 var pinConfiguration = new List&lt;dynamic&gt;(){
@@ -999,7 +1008,7 @@ var deviceConnection = new Mcp23017I2cConnection(driver.Connect(0x20));
 //
 // implement Control.On, Control.Off, Control.Toggle serice API
 // for the domain Components.MCP23017
-When.WebServiceCallReceived("Components.MCP23017", ( args ) =&gt; 
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
 {
 	string[] reqs = ((string)args).Split('/');
   	var errormessage = "";
@@ -1008,7 +1017,7 @@ When.WebServiceCallReceived("Components.MCP23017", ( args ) =&gt;
 		string pinid = reqs[1];
       	string command = reqs[2];
         //
-        var module = Modules.InDomain("Components.MCP23017").WithAddress(pinid).Get();
+        var module = Modules.InDomain(moduleDomain).WithAddress(pinid).Get();
       	// modules with id from 1 to 8 are mapped as A0-A7
       	// modules with id from 9 to 16 as B0-B7
       	var pinname = "";
@@ -1061,14 +1070,14 @@ for (int p = 0; p &lt; pinConfiguration.Count; p++)
     pinStatus[p] = deviceConnection.GetPinStatus(pincfg.Pin);
   	if (pincfg.Direction == Mcp23017PinDirection.Output)
     {
-		Program.AddVirtualModule("Components.MCP23017", pincfg.Address, "Switch", "");                  
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Switch", "");                  
     }
   	else
     {
-		Program.AddVirtualModule("Components.MCP23017", pincfg.Address, "Sensor", "homegenie/generic/sensor");                  
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Sensor", "homegenie/generic/sensor");                  
     }
     // get the module associated to the pin and store current status
-    var module = Modules.InDomain("Components.MCP23017").WithAddress(pincfg.Address).Get();
+    var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
   	module.Parameter("Status.Level").Value = (pinStatus[p] ? "1" : "0");
 }
 
@@ -1087,7 +1096,7 @@ while (Program.IsEnabled)
             if (pinStatus[p] != status)
             {
                 // get the module associated to the pin
-                var module = Modules.InDomain("Components.MCP23017").WithAddress(pincfg.Address).Get();
+                var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
                 // raise the event and update the current pin status
                 Program.RaiseEvent(module, "Status.Level", 
                                status ? "1" : "0", 
@@ -1205,7 +1214,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4327518Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:31.0167577Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1397,7 +1406,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4377503Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:33.0172363Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1517,7 +1526,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4387517Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:34.0151693Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1613,6 +1622,11 @@ Program.GoBackground();
     Program.AddInputField("System.SirenMaxTime", "30", "2. Sirens Max Time (seconds, 0=infinite)");
   
     Program.AddInputField("Email.Recipients", "", "3. Comma separated list of recipients e-mails for alarm notifications");  
+  
+    Program.AddInputField("Trigger.ArmedProgram", "", "4. Program to run when armed");  
+    Program.AddInputField("Trigger.DisarmedProgram", "", "5. Program to run when disarmed");  
+    Program.AddInputField("Trigger.TriggeredProgram", "", "6. Program to run when triggered");  
+  
 });
 // this program will be running in background
 return true;</ScriptCondition>
@@ -1637,6 +1651,23 @@ Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
         	Pause( Program.InputField("System.ArmDelay").DecimalValue );
         }
         Program.RaiseEvent("HomeGenie.SecurityArmed", Program.Parameter("Status.Level").Value, "Security System");
+      	// run armed/disarmed program
+      	if (Program.Parameter("Status.Level").Value != "0")
+        {
+          	var armedProgram = Program.InputField("Trigger.ArmedProgram").Value;
+          	if (armedProgram != "")
+            {
+              	Program.Run(armedProgram);
+            }
+        }
+      	else
+        {
+          	var disarmedProgram = Program.InputField("Trigger.DisarmedProgram").Value;
+          	if (disarmedProgram != "")
+            {
+              	Program.Run(disarmedProgram);
+            }
+        }
     });
   	return true;
 });
@@ -1663,9 +1694,16 @@ When.ModuleParameterChange((module, parameter)=&gt;
         {
             Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
 			Program.Parameter("HomeGenie.SecurityTriggerSource").Value = 
+              	module.Instance.Name + " " + parameter.Name + " (" +
               	module.Instance.Domain + "." +
-              	module.Instance.Address + " " +
-              	module.Instance.Name + " (" + parameter.Name + ")";
+              	module.Instance.Address + ")";
+
+            var triggeredProgram = Program.InputField("Trigger.TriggeredProgram").Value;
+          	if (triggeredProgram != "")
+            {
+              	Program.Run(triggeredProgram);
+            }
+          
   			return false;
         }
     }
@@ -1782,8 +1820,8 @@ while (Program.IsEnabled)
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-04-09T19:32:28.0932958Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4437509Z</TriggerTime>
+    <ActivationTime>2014-04-19T15:28:41.5625744Z</ActivationTime>
+    <TriggerTime>2014-04-19T15:28:41.5655617Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1864,7 +1902,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4577527Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:35.0136134Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2011,7 +2049,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4637533Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:36.0214169Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2277,7 +2315,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4677522Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:37.5145136Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2296,8 +2334,6 @@ return true;
 // We want to do further processing whenever a module changes 
 When.ModuleParameterChange( (module, property) =&gt; {
   
-	// store the Status.MemoryLevel value for recalling last light dimmer level
-	// when switched on
   	if (module.HasFeature("PushingBox.DeviceId") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
 	{
       	var serviceparams = "?devid=" + module.Parameter("PushingBox.DeviceId").Value;
@@ -2315,17 +2351,17 @@ When.ModuleParameterChange( (module, property) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>143</Address>
     <Name>Pushing Box</Name>
     <Description>http://www.pushingbox.com/ integration</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2013-11-05T16:45:50.005883Z</ActivationTime>
-    <TriggerTime>2013-11-05T16:45:50.485284Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -2483,19 +2519,21 @@ trigger actions when you get home.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
+    <ScriptCondition>var moduleDomain = "Arduino.Switches";
+Program.Setup(()=&gt;
 {
 	// register 3 virtual modules using the "switch" widget for the domain "Arduino.Switches" 
-	Program.AddVirtualModules("Arduino.Switches", "Switch", "homegenie/generic/switch", 1, 3);                  
+	Program.AddVirtualModules(moduleDomain, "Switch", "homegenie/generic/switch", 1, 3);                  
 });
 // returning true will execute the "Code to Run"
 return true;
 
 </ScriptCondition>
-    <ScriptSource>// 
+    <ScriptSource>var moduleDomain = "Arduino.Switches";
+// 
 // TODO: Initialize serial port here...
 // 
-When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt; 
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
 {
 	string[] reqs = ((string)args).Split('/');
 	var res = "{ 'ResponseValue' : 'ERROR' }";
@@ -2505,7 +2543,7 @@ When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt;
 		string switchid = reqs[1];
 	    string command = reqs[2];
 	    // get reference to the virtual module 
-	    var module = Modules.InDomain("Arduino.Switches").WithAddress(switchid).Get();
+	    var module = Modules.InDomain(moduleDomain).WithAddress(switchid).Get();
 	  	//
 	    switch(command)
 	    {
@@ -2532,10 +2570,10 @@ When.WebServiceCallReceived("Arduino.Switches", ( args ) =&gt;
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>168</Address>
     <Name>Arduino Switches</Name>
@@ -2704,7 +2742,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4987709Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:38.5157189Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2766,7 +2804,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:33.4227492Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:39.5135527Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2923,7 +2961,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:34.9464686Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:40.5147117Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3036,16 +3074,20 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
+    <ScriptCondition>var moduleDomain = "HomeGenie.Leds";
+
+Program.Setup(()=&gt;
 {
 	// register 2 virtual modules using the "switch" widget    
-	Program.AddVirtualModules("HomeGenie.Leds", "Light", "homegenie/generic/light", 1, 2);                  
+	Program.AddVirtualModules(moduleDomain, "Light", "homegenie/generic/light", 1, 2);                  
 });
 // returning true will execute the "Code to Run"
 return true;
 
 </ScriptCondition>
-    <ScriptSource>// Initially turn the leds off
+    <ScriptSource>var moduleDomain = "HomeGenie.Leds";
+
+// Initially turn the leds off
 var systemleds = new PinConfiguration[] { 	ConnectorPin.P1Pin15.Output().Name("ActivityLed").Disable(), 
                                          	ConnectorPin.P1Pin13.Output().Name("ReadyLed").Disable() };
 // 
@@ -3054,7 +3096,7 @@ var ledbusy = false;
 using (var connection = new GpioConnection(systemleds))
 {  
 	When.ModuleParameterChange( (module, parameter) =&gt; {
-      	if (!ledbusy &amp;&amp; module.Instance.Domain != "HomeGenie.Leds")
+      	if (!ledbusy &amp;&amp; module.Instance.Domain != moduleDomain)
         {
           	ledbusy = true;
             connection.Blink("ActivityLed", 10); // 10 ms
@@ -3064,7 +3106,7 @@ using (var connection = new GpioConnection(systemleds))
 	});
   
     
-    When.WebServiceCallReceived("HomeGenie.Leds", ( args ) =&gt; 
+    When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
     {
         string[] reqs = ((string)args).Split('/');
         var res = "{ 'ResponseValue' : 'ERROR' }";
@@ -3074,7 +3116,7 @@ using (var connection = new GpioConnection(systemleds))
         {
             string command = reqs[2];
     		string ledid = reqs[1];
-            var module = Modules.InDomain("HomeGenie.Leds").WithAddress(ledid).Get();
+            var module = Modules.InDomain(moduleDomain).WithAddress(ledid).Get();
           	//
             switch(command)
             {
@@ -3118,7 +3160,7 @@ using (var connection = new GpioConnection(systemleds))
     }
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
@@ -3128,8 +3170,8 @@ using (var connection = new GpioConnection(systemleds))
     <Description>Staus and Activity leds for HomeGenie.
 For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
     <Group>Raspberry Sharp</Group>
-    <ActivationTime>2014-03-17T00:19:30.959208Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:59.802357Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3288,7 +3330,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:35.918725Z</TriggerTime>
+    <TriggerTime>2014-04-19T15:27:41.516582Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3912,7 +3954,9 @@ Program.Setup(()=&gt;{
 });
 return true;
 </ScriptCondition>
-    <ScriptSource>var pinMapping = new List&lt;dynamic&gt;();
+    <ScriptSource>var moduleDomain = "RaspberryPi.Gpio";
+
+var pinMapping = new List&lt;dynamic&gt;();
 // read GPIO configuration
 var gpio4  = Program.InputField("GPIO4").Value.ToLower();
 var gpio17 = Program.InputField("GPIO17").Value.ToLower();
@@ -3941,12 +3985,12 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
   	if (pc.Direction == PinDirection.Input)
     {
 	  	configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule("RaspberryPi.Gpio", pc.Address, "Sensor", "homegenie/generic/sensor");                  
+		Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
     }
   	else
     {
 	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule("RaspberryPi.Gpio", pc.Address, "Switch", "");                  
+		Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
     }
     configuration[p].Name = pc.Address;
 }
@@ -3955,7 +3999,7 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
 var connection = new GpioConnection(configuration);
 connection.PinStatusChanged += (sender, args) =&gt; {
   	var address = args.Configuration.Name;
-    var module = Modules.InDomain("RaspberryPi.Gpio").WithAddress(address).Get();
+    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
     Program.RaiseEvent(module, "Status.Level", 
                        args.Enabled ? "1" : "0",
                        address);
@@ -3967,13 +4011,13 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
 {
   	var pc = pinMapping[p];
   	var address = pc.Address;
-    var module = Modules.InDomain("RaspberryPi.Gpio").WithAddress(address).Get();
+    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
 	module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
 }
 
 // implement web serice API Control.On, Control.Off, Control.Toggle 
 // for the domain RaspberryPi.GPIO
-When.WebServiceCallReceived("RaspberryPi.Gpio", ( args ) =&gt; 
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
 {
 	string[] reqs = ((string)args).Split('/');
   	var errorMessage = "";
@@ -4012,7 +4056,7 @@ Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>100</Address>
     <Name>GPIO Modules</Name>
@@ -4022,8 +4066,103 @@ GPIOs configured as IN are mapped to a Sensor module with a Status.Level field d
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
     <Group>Raspberry Sharp</Group>
-    <ActivationTime>2014-04-11T18:45:31.404089Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:45:31.823601Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup( () =&gt; {
+  
+    Program.AddInputField("ModemIp", "", "1. Modem IP address");
+    //Program.AddInputField("ModemUsername", "", "2. Modem username");
+    Program.AddInputField("ModemPassword", "", "2. Modem password");
+    Program.AddInputField("SmsRecipient", "", "4. Recipient phone number");
+  
+	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "AlcatelY800Z.NotifyEvents", "Send SMS on module event");
+});
+// this program will be running in background
+return true;
+</ScriptCondition>
+    <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
+var modemUsername = "admin"; //Program.InputField("ModemUsername").Value;
+var modemPassword = Program.InputField("ModemPassword").Value;
+var smsRecipient = Program.InputField("SmsRecipient").Value;
+
+Func&lt;string,bool&gt; SmsSend = new Func&lt;string,bool&gt;((message)=&gt;{
+  	var success = false;
+  	var loginData = Net
+  		.WebService("http://" + modemAddress + "/goform/setLogin")
+		.Post("username=" + modemUsername + "&amp;password=" + modemPassword)
+		.GetData();
+	if (loginData.error == "0")
+  	{	
+  		var smsSend = Net
+			.WebService("http://" + modemAddress + "/goform/sendSMS")
+			.Post("sms_number=" + smsRecipient + "&amp;sms_content=" + message + "&amp;action_type=new")
+			.GetData();
+      	if (smsSend.error == "0")
+        {
+          	success = true;
+          	Program.Notify("Alcatel Y800Z Notify", "SMS succesfully delivered.");
+        }
+      	else
+        {
+          	Program.Notify("Alcatel Y800Z Error!", "Could not send SMS (Err:" + smsSend.error + ").");
+        }
+    }
+  	else
+    {
+    	Program.Notify("Alcatel Y800Z Error!", "Wrong Modem IP or credentials.");
+    }
+	return success;
+});
+
+
+// We want to do further processing whenever a module changes 
+When.ModuleParameterChange( (module, property) =&gt; {
+  	if (Program.InputField("SmsRecipient").Value != "")
+    {
+        // Security Alarm System Notification
+        if (module.Instance.Name == "Security Alarm System" &amp;&amp; property.Name == "HomeGenie.SecurityTriggered" &amp;&amp; property.Value == "1")
+        {
+            var source = Program.WithName("Security Alarm System").Parameter("HomeGenie.SecurityTriggerSource").Value;
+            SmsSend("WARNING! Alarm was just triggered: " + source);
+        }
+        else if (module.HasFeature("AlcatelY800Z.NotifyEvents") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
+        {
+            var message = module.Instance.Name + " " + property.Name + "=" + property.Value + " (" + module.Instance.Domain + "." + module.Instance.Address + ")";
+            SmsSend(message);
+        }      
+    }
+  	// returning true, will route event to other listeners
+    return true; 
+  
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow</ForTypes>
+        <Property>AlcatelY800Z.NotifyEvents</Property>
+        <Description>Send SMS on module event</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>201</Address>
+    <Name>Alcatel One Touch Y800Z SMS Notify</Name>
+    <Description>Send SMS notifies when a device status changes and/or when the Security Alarm System is triggered.</Description>
+    <Group>Messaging and Social</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

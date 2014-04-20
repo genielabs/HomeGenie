@@ -224,7 +224,7 @@ namespace XTenLib
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
             string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Dim);
-            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210));
+            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210)); // TODO: this should be 220 not 210
             //
             moduleStatus[huc].Level -= ((double)percentage / 100.0);
             if (moduleStatus[huc].Level < 0.0) moduleStatus[huc].Level = 0.0;
@@ -247,7 +247,7 @@ namespace XTenLib
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
             string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Bright);
-            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210));
+            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210)); // TODO: this should be 220 not 210
             //
             moduleStatus[huc].Level += ((double)percentage / 100.0);
             if (moduleStatus[huc].Level > 1.0) moduleStatus[huc].Level = 1.0;
