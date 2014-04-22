@@ -279,7 +279,8 @@ namespace SerialPortLib
 
         private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            Console.WriteLine("SerialPortInput ERROR: " + e.EventType.ToString() + " => " + e.ToString());
+            DebugLog("SPI !", e.EventType.ToString());
+            DebugLog("SPI !", e.ToString());
         }
 
         private void SenderLoop(object obj)
@@ -298,9 +299,7 @@ namespace SerialPortLib
                             {
                                 if (Debug)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("SPO < " + ByteArrayToString(message));
-                                    Console.ForegroundColor = ConsoleColor.White;
+                                    DebugLog("SPO <", ByteArrayToString(message));
                                 }
                                 serialPort.Write(message, 0, message.Length);
                             }
@@ -308,9 +307,8 @@ namespace SerialPortLib
                             {
                                 if (Debug)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("SPO ! ERROR: " + e.Message);
-                                    Console.ForegroundColor = ConsoleColor.White;
+                                    DebugLog("SPO !", e.Message);
+                                    DebugLog("SPO !", e.StackTrace);
                                 }
                             }
                         }
@@ -350,9 +348,7 @@ namespace SerialPortLib
                                 ; // noop
                             if (Debug)
                             {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("SPI > " + ByteArrayToString(message));
-                                Console.ForegroundColor = ConsoleColor.White;
+                                DebugLog("SPI >", ByteArrayToString(message));
                             }
                             if (MessageReceived != null)
                             {
@@ -402,6 +398,23 @@ namespace SerialPortLib
             }
         }
 
+
+
+
+        private void DebugLog(string prefix, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            if (prefix.Contains(">"))
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (prefix.Contains("!"))
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            }
+            Console.WriteLine(prefix + " " + message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
     }
 

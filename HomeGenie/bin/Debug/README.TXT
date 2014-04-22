@@ -165,8 +165,16 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+22/04/2014 1.00 beta rev 368
+	- backup restore now sets original enabled/disabled status of programs (system ones too)
+	- fixed bug in interface enable/disable and disconnect/connect both in ZWaveLib and XTenLib
+	- fixed bug in modules list update after changing interface setting (eg. X10 house codes)
+	- major XTenLib code rework in PCL receive function: now properly supporting extended receive
+	- fixed major bug in Wizard Script comparison operator
+	- fixed disappering widgets bug
+	- added "trasitiontime" parameter to Philips Hue Widget
+
 19/04/2014 1.00 beta rev 366
-	- Fixed bug when parsing decimal values in Wizard script value comparison
 	- Added Alcatel Y800Z SMS Notify program 
 	- Improved Security Alarm System: run automation programs/scenarios when armed/disarmed/triggered
 	- New Dimmer and Shutter widgets (Shutter is also now supporting Scheduling ON/OFF features)

@@ -268,6 +268,7 @@ namespace HomeGenie.Automation
                             RaiseProgramModuleEvent(program, "Runtime.Error", "CR: " + result.Exception.Message);
                         }
                         program.IsRunning = false;
+                        program.ProgramThread = null;
                         RaiseProgramModuleEvent(program, "Program.Status", "Idle");
                     });
                     //
@@ -341,6 +342,9 @@ namespace HomeGenie.Automation
             program.SetHost(homegenie);
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
+            //
+            // Initialize state
+            RaiseProgramModuleEvent(program, "Program.Status", "Idle");
             if (program.IsEnabled)
             {
                 StartProgramEvaluator(program);
@@ -667,15 +671,15 @@ namespace HomeGenie.Automation
                 double dval = 0;
                 DateTime dtval = new DateTime();
                 //
-                if (DateTime.TryParse(parameter.Value, out dtval))
-                {
-                    lvalue = dtval;
-                    rvalue = DateTime.Parse(comparisonValue);
-                }
-                else if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
+                if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
                 {
                     lvalue = dval;
                     rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
+                }
+                else if (DateTime.TryParse(parameter.Value, out dtval))
+                {
+                    lvalue = dtval;
+                    rvalue = DateTime.Parse(comparisonValue);
                 }
                 //
                 int comparisonresult = lvalue.CompareTo(rvalue);
@@ -727,6 +731,8 @@ namespace HomeGenie.Automation
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
                 RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
+                // TODO: CRITICAL
+                // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
                 StartProgramEvaluator(program);
             }
             else

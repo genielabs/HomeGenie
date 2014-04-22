@@ -130,7 +130,6 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-
         private XTenManager x10lib;
         private string portName;
 
@@ -143,62 +142,6 @@ namespace MIG.Interfaces.HomeAutomation
             x10lib.PropertyChanged += HandlePropertyChanged;
             x10lib.RfDataReceived += new Action<RfDataReceivedAction>(x10lib_RfDataReceived);
         }
-
-        private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
-        {
-            if (InterfacePropertyChangedAction != null)
-            {
-                string data = XTenLib.Utility.ByteArrayToString(eventData.RawData);
-                // flood protection =) - discard dupes
-                if (rfLastStringData != data)
-                {
-                    rfLastStringData = data;
-                    try
-                    {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
-                    }
-                    catch (Exception ex)
-                    {
-                        // TODO: add error logging 
-                    }
-                    //
-                    if (rfPulseTimer == null)
-                    {
-                        rfPulseTimer = new Timer(delegate(object target)
-                        {
-                            try
-                            {
-                                rfLastStringData = "";
-                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = "" });
-                            }
-                            catch (Exception ex)
-                            {
-                                // TODO: add error logging 
-                            }
-                        });
-                    }
-                    rfPulseTimer.Change(1000, Timeout.Infinite);
-                }
-            }
-        }
-
-        void HandlePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Level")
-            {
-                if (InterfacePropertyChangedAction != null)
-                {
-                    try
-                    {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (sender as X10Module).Code, SourceType = (sender as X10Module).Description, Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = (sender as X10Module).Level.ToString() });
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-        }
-
 
         #region MIG Interface members
 
@@ -218,14 +161,17 @@ namespace MIG.Interfaces.HomeAutomation
         {
             return x10lib.Connect();
         }
+        
         public void Disconnect()
         {
             x10lib.Disconnect();
         }
+        
         public bool IsConnected
         {
             get { return x10lib.IsConnected; }
         }
+
         public bool IsDevicePresent()
         {
             //bool present = false;
@@ -257,6 +203,7 @@ namespace MIG.Interfaces.HomeAutomation
 
             //process command
             #region X10HAL-commands compatibility !!! <-- DEPRECATE THIS
+
             if (nodeId.ToUpper() == "STATUS")
             {
                 var tmpDataItems = new List<X10Module>(x10lib.ModulesStatus.Count);
@@ -300,7 +247,9 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                 }
             }
+
             #endregion
+
             var houseCode = XTenLib.Utility.HouseCodeFromString(nodeId);
             var unitCode = XTenLib.Utility.UnitCodeFromString(nodeId);
             if (command == Command.PARAMETER_STATUS)
@@ -393,6 +342,61 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
 
+
+        private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
+        {
+            if (InterfacePropertyChangedAction != null)
+            {
+                string data = XTenLib.Utility.ByteArrayToString(eventData.RawData);
+                // flood protection =) - discard dupes
+                if (rfLastStringData != data)
+                {
+                    rfLastStringData = data;
+                    try
+                    {
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
+                    }
+                    catch (Exception ex)
+                    {
+                        // TODO: add error logging 
+                    }
+                    //
+                    if (rfPulseTimer == null)
+                    {
+                        rfPulseTimer = new Timer(delegate(object target)
+                        {
+                            try
+                            {
+                                rfLastStringData = "";
+                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = "" });
+                            }
+                            catch (Exception ex)
+                            {
+                                // TODO: add error logging 
+                            }
+                        });
+                    }
+                    rfPulseTimer.Change(1000, Timeout.Infinite);
+                }
+            }
+        }
+
+        private void HandlePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Level")
+            {
+                if (InterfacePropertyChangedAction != null)
+                {
+                    try
+                    {
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (sender as X10Module).Code, SourceType = (sender as X10Module).Description, Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = (sender as X10Module).Level.ToString() });
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
 
     }
 }

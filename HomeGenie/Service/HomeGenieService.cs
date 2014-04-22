@@ -880,6 +880,8 @@ namespace HomeGenie.Service
         {
             bool success = false;
             //
+            modules_RefreshAll();
+            //
             lock (systemModules.LockObject)
                 try
                 {
@@ -1677,7 +1679,7 @@ namespace HomeGenie.Service
                             Utility.ModuleParameterSet(module, Properties.VIRTUALMODULE_PARENTID, virtualModule.ParentId);
                             var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
                             // if a widget is specified on virtual module then we force module to display using this
-                            if (virtualModuleWidget != null && (moduleWidget == null || moduleWidget.Value != virtualModuleWidget.Value))
+                            if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
                             {
                                 Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, virtualModuleWidget.Value);
                             }
@@ -1738,7 +1740,7 @@ namespace HomeGenie.Service
                             module.Address = program.Address.ToString();
                             module.DeviceType = Module.DeviceTypes.Program;
                             module.Name = program.Name;
-                            module.Description = "Wizard Script";
+                            //module.Description = "Wizard Script";
                         }
                     }
                 }

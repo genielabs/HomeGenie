@@ -191,7 +191,10 @@ namespace HomeGenie.Automation.Scripting
             ProgramFeature feature = null;
             //
             try { feature = program.Features.Find(f => f.Property == propertyName); }
-            catch { }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+            }
             //
             if (feature == null)
             {
@@ -212,7 +215,10 @@ namespace HomeGenie.Automation.Scripting
             ProgramFeature feature = null;
             //
             try { feature = program.Features.Find(f => f.Property == propertyName); }
-            catch { }
+            catch (Exception ex) 
+            {
+                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+            }
             //
             return feature;
         }
@@ -348,13 +354,12 @@ namespace HomeGenie.Automation.Scripting
             //
             if (module == null)
             {
-                module = new VirtualModule() { ParentId = myProgramId.ToString(), Visible = (widget != ""), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = (program != null ? program.Name : ""), DeviceType = Module.DeviceTypes.Program };
+                module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = (program != null ? program.Name : ""), DeviceType = Module.DeviceTypes.Program };
                 homegenie.VirtualModules.Add(module);
             }
             //
             module.Name = (program != null ? program.Name : "");
             module.Domain = myProgramDomain;
-            module.Visible = (widget != "");
             Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
             //
             RelocateProgramModule();
@@ -398,6 +403,7 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     //
+                    HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), "Automation Program", "Program.Status", "Setup");
                     functionBlock();
                     //
                     // remove deprecated config options

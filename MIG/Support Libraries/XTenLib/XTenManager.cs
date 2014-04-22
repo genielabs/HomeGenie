@@ -56,7 +56,8 @@ namespace XTenLib
         private object accessLock = new object();
 
         private Dictionary<string, X10Module> moduleStatus = new Dictionary<string, X10Module>();
-        private string currentUnitCode = "";
+        private Dictionary<string, List<X10Module>> addressedModules = new Dictionary<string, List<X10Module>>();
+        //private string currentUnitCode = "";
         private string monitoredHouseCode = "A";
 
         private bool gotReadWriteError = true;
@@ -138,20 +139,11 @@ namespace XTenLib
 
         public bool Connect()
         {
+            Disconnect();
+            //
             bool returnValue = Open();
             //
-            if (connectionWatcher != null)
-            {
-                try
-                {
-                    keepConnectionAlive = false;
-                    connectionWatcher.Abort();
-                }
-                catch { }
-            }
-            //
             keepConnectionAlive = true;
-            //
             connectionWatcher = new Thread(new ThreadStart(delegate()
             {
                 gotReadWriteError = !returnValue;
@@ -197,6 +189,12 @@ namespace XTenLib
         public void Disconnect()
         {
             keepConnectionAlive = false;
+            try
+            {
+                connectionWatcher.Abort();
+            }
+            catch { }
+            connectionWatcher = null;
             //
             Close();
         }
@@ -208,6 +206,11 @@ namespace XTenLib
 
 
 
+
+        public Dictionary<string, X10Module> ModulesStatus
+        {
+            get { return moduleStatus; }
+        }
 
 
 
@@ -224,21 +227,23 @@ namespace XTenLib
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
             string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Dim);
-            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210)); // TODO: this should be 220 not 210
-            //
-            moduleStatus[huc].Level -= ((double)percentage / 100.0);
-            if (moduleStatus[huc].Level < 0.0) moduleStatus[huc].Level = 0.0;
             //
             sendQueue.Enqueue(new byte[] { (int)X10CommandType.Address, byte.Parse(hcunit, System.Globalization.NumberStyles.HexNumber) });
-            if (x10interface.GetType().Equals(typeof(CM11)))
+            if (x10interface.GetType().Equals(typeof(CM15)))
             {
-                int dimvalue = (int)(((double)percentage / 100D) * 16) << 3;
-                dimbright = String.Format("{0:x1}", dimvalue);
-                sendQueue.Enqueue(new byte[] { (byte)((int)X10CommandType.Function | dimvalue), byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber) });
+                double normalized = ((double)percentage / 100D);
+                sendQueue.Enqueue(new byte[] { (int)X10CommandType.Function, byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber), (byte)(normalized * 210) });
+                double newLevel = moduleStatus[huc].Level - normalized;
+                if (newLevel < 0) newLevel = 0;
+                moduleStatus[huc].Level = newLevel;
             }
             else
             {
-                sendQueue.Enqueue(new byte[] { (int)X10CommandType.Function, byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber), byte.Parse(dimbright, System.Globalization.NumberStyles.HexNumber) });
+                byte dimvalue = Utility.GetDimValue(percentage);
+                sendQueue.Enqueue(new byte[] { (byte)((int)X10CommandType.Function | dimvalue | 0x04), byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber) });
+                double newLevel = moduleStatus[huc].Level - Utility.GetPercentageValue(dimvalue);
+                if (newLevel < 0) newLevel = 0;
+                moduleStatus[huc].Level = newLevel;
             }
         }
 
@@ -247,21 +252,23 @@ namespace XTenLib
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
             string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Bright);
-            string dimbright = String.Format("{0:x1}", (int)(((double)percentage / 100D) * 210)); // TODO: this should be 220 not 210
-            //
-            moduleStatus[huc].Level += ((double)percentage / 100.0);
-            if (moduleStatus[huc].Level > 1.0) moduleStatus[huc].Level = 1.0;
             //
             sendQueue.Enqueue(new byte[] { (int)X10CommandType.Address, byte.Parse(hcunit, System.Globalization.NumberStyles.HexNumber) });
-            if (x10interface.GetType().Equals(typeof(CM11)))
+            if (x10interface.GetType().Equals(typeof(CM15)))
             {
-                int dimvalue = (int)(((double)percentage / 100D) * 16) << 3;
-                dimbright = String.Format("{0:x1}", dimvalue);
-                sendQueue.Enqueue(new byte[] { (byte)((int)X10CommandType.Function | dimvalue), byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber) });
+                double normalized = ((double)percentage / 100D);
+                sendQueue.Enqueue(new byte[] { (int)X10CommandType.Function, byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber), (byte)(normalized * 210) });
+                double newLevel = moduleStatus[huc].Level + normalized;
+                if (newLevel > 1) newLevel = 1;
+                moduleStatus[huc].Level = newLevel;
             }
             else
             {
-                sendQueue.Enqueue(new byte[] { (int)X10CommandType.Function, byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber), byte.Parse(dimbright, System.Globalization.NumberStyles.HexNumber) });
+                byte dimvalue = Utility.GetDimValue(percentage);
+                sendQueue.Enqueue(new byte[] { (byte)((int)X10CommandType.Function | dimvalue | 0x04), byte.Parse(hcfuntion, System.Globalization.NumberStyles.HexNumber) });
+                double newLevel = moduleStatus[huc].Level + Utility.GetPercentageValue(dimvalue);
+                if (newLevel > 1) newLevel = 1;
+                moduleStatus[huc].Level = newLevel;
             }
         }
 
@@ -312,200 +319,6 @@ namespace XTenLib
             AllUnitsOff(housecode.ToString());
         }
 
-
-
-
-
-
-        public Dictionary<string, X10Module> ModulesStatus
-        {
-            get { return moduleStatus; }
-        }
-
-
-
-
-
-        private void ReaderThreadLoop()
-        {
-            lock (accessLock)
-            {
-                while (true)
-                {
-                    //
-                    try
-                    {
-                        byte[] readData = x10interface.ReadData();
-
-
-
-                        if (readData.Length >= 13)
-                        {
-                            /*
-                            Console.WriteLine("\n\n\n\n{0}:{1}:{2}", (readdata[4] * 2).ToString("D2"),
-                                                    (readdata[3]).ToString("D2"),
-                                                    (readdata[2]).ToString("D2"));
-
-                            */
-                            /*
-                            // A1 Status request
-                            Thread t = new Thread(new ThreadStart(delegate()
-                            {
-                                Thread.Sleep(10000);
-                                //_sendqueue.Enqueue(new byte[] { 0x8B });
-                                _sendqueue.Enqueue(new byte[] { 0x07, 0x67, 0x06, 0x03, 0x3b });
-                                _sendqueue.Enqueue(new byte[] { 0x07, 0x67, 0x06, 0x00, 0x37 });
-                            }));
-                            t.Start();
-                            */
-
-                            if (!statusRequestOk)
-                            {
-                                UpdateInterfaceTime(false);
-                                statusRequestOk = true;
-                            }
-
-                        }
-
-
-
-                        if (readData.Length > 0)
-                        {
-                            //Console.WriteLine("<<<<< IN " + Utility.ByteArrayToString(readdata));
-                            //
-                            if (readData[0] == (int)X10CommandType.PLC_Ready)
-                            {
-                                isWaitingChecksum = false;
-                                Monitor.Enter(comLock);
-                                Monitor.Pulse(comLock);
-                                Monitor.Exit(comLock);
-                            }
-                            else if (readData[0] == (int)X10CommandType.Macro)
-                            {
-                                //Console.WriteLine("Macro   ==> " + Utility.ByteArrayToString(readdata));
-                            }
-                            else if (readData[0] == (int)X10CommandType.RF)
-                            {
-                                //Console.WriteLine("RF      ==> " + Utility.ByteArrayToString(readdata));
-                                if (RfDataReceived != null)
-                                {
-                                    RfDataReceived(new RfDataReceivedAction() { RawData = readData });
-                                }
-                            }
-                            else if ((readData[0] == (int)X10CommandType.PLC_Poll) && readData.Length == 1)
-                            {
-                                statusRequestOk = true;
-                                sendQueue.Enqueue(new byte[] { 0xC3 }); // reply to poll
-                            }
-                            else if ((readData[0] == (int)X10CommandType.PLC_Poll))
-                            {
-                                //Console.WriteLine("PLC     ==> " + Utility.ByteArrayToString(readdata));
-                                if (readData.Length > 2)
-                                {
-                                    if (readData[2] == 0x00 && readData.Length > 3)
-                                    {
-                                        string housecode = ((X10HouseCodes)Convert.ToInt16(readData[3].ToString("X2").Substring(0, 1), 16)).ToString();
-                                        string unitcode = ((X10UnitCodes)Convert.ToInt16(readData[3].ToString("X2").Substring(1, 1), 16)).ToString();
-                                        if (unitcode.IndexOf("_") > 0) unitcode = unitcode.Substring(unitcode.IndexOf("_") + 1);
-                                        //
-                                        //Console.WriteLine("            0x00 = Address");
-                                        //Console.WriteLine("      House code = " + housecode);
-                                        //Console.WriteLine("       Unit code = " + unitcode);
-                                        //
-                                        currentUnitCode = housecode + unitcode;
-                                    }
-                                    else if (readData[2] == 0x01 && readData.Length > 3)
-                                    {
-                                        string command = ((X10Command)Convert.ToInt16(readData[3].ToString("X2").Substring(1, 1), 16)).ToString().ToUpper();
-                                        string housecode = ((X10HouseCodes)Convert.ToInt16(readData[3].ToString("X2").Substring(0, 1), 16)).ToString();
-                                        //Console.WriteLine("            0x01 = Function");
-                                        //Console.WriteLine("      House code = " + housecode);
-                                        //Console.WriteLine("         Command = " + command);
-                                        //
-                                        if (currentUnitCode != "")
-                                        {
-                                            if (!moduleStatus.Keys.Contains(currentUnitCode))
-                                            {
-                                                var module = new X10Module() { Code = currentUnitCode };
-                                                //
-                                                module.PropertyChanged += ModulePropertyChanged;
-                                                //
-                                                moduleStatus.Add(currentUnitCode, module);
-                                            }
-                                            var mod = moduleStatus[currentUnitCode];
-                                            switch (command)
-                                            {
-                                                case "ON":
-                                                    //mod.Status = "ON";
-                                                    mod.Level = 1.0;
-                                                    break;
-                                                case "OFF":
-                                                    //mod.Status = "OFF";
-                                                    mod.Level = 0.0;
-                                                    break;
-                                                case "BRIGHT":
-                                                    mod.Level += (double.Parse((readData[4] >> 3).ToString()) / 16D);
-                                                    if (mod.Level > 1) mod.Level = 1;
-                                                    break;
-                                                case "DIM":
-                                                    mod.Level -= (double.Parse((readData[4] >> 3).ToString()) / 16D);
-                                                    if (mod.Level < 0) mod.Level = 0;
-                                                    break;
-                                                case "ALL_UNITS_OFF":
-                                                    AllUnitsOff(housecode);
-                                                    break;
-                                                case "ALL_LIGHTS_ON":
-                                                    AllLightsOn(housecode);
-                                                    break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else if ((readData[0] == (int)X10CommandType.PLC_TimeRequest)) // IS THIS A TIME REQUEST?
-                            {
-                                UpdateInterfaceTime(false);
-                            }
-                            else
-                            {
-                                // BEGIN: This is an hack for detecting disconnection status in Linux/Raspi
-                                if (readData[0] == 0x00)
-                                {
-                                    zeroChecksumCount++;
-                                }
-                                else
-                                {
-                                    zeroChecksumCount = 0;
-                                }
-                                //
-                                if (zeroChecksumCount > 10)
-                                {
-                                    zeroChecksumCount = 0;
-                                    gotReadWriteError = true;
-                                    Close();
-                                }
-                                // END: Linux/Raspi hack
-                                else if (isWaitingChecksum)
-                                {
-                                    //Console.WriteLine("Expected [" + Utility.ByteArrayToString(new byte[] { _expectedchecksum }) + "] Checksum ==> " + Utility.ByteArrayToString(readdata));
-                                    //TODO: checksum verification not handled, we just reply 0x00 (OK)
-                                    SendMessage(new byte[] { 0x00 });
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        if (!e.GetType().Equals(typeof(TimeoutException)))
-                        {
-                            // TODO: add error logging 
-                            gotReadWriteError = true;
-                        }
-                    }
-                    Monitor.Wait(accessLock, 10);
-                }
-            }
-        }
 
 
         public void WaitComplete()
@@ -573,6 +386,8 @@ namespace XTenLib
                 message[7] = 0x02;
             }
             //
+            DebugLog("X10 <", Utility.ByteArrayToString(message));
+            //
             SendMessage(message);
         }
 
@@ -600,6 +415,14 @@ namespace XTenLib
                 }
             }
         }
+
+
+
+        private void SendMessage(byte[] message)
+        {
+            x10interface.WriteData(message);
+        }
+
 
         private void SetCm15Codes()
         {
@@ -635,53 +458,7 @@ namespace XTenLib
             }
         }
 
-        private void SendMessage(byte[] message)
-        {
-            x10interface.WriteData(message);
-        }
 
-        private void WriterThreadLoop()
-        {
-            while (true)
-            {
-                try
-                {
-                    if (sendQueue.Count > 0)
-                    {
-                        byte[] msg = sendQueue.Dequeue();
-                        //Console.WriteLine(">>>>>OUT " + Utility.ByteArrayToString(msg));
-
-                        Monitor.Enter(comLock);
-
-                        if (isWaitingChecksum && msg.Length > 1)
-                        {
-                            Monitor.Wait(comLock, 3000);
-                            isWaitingChecksum = false;
-                        }
-
-                        SendMessage(msg);
-
-                        if (msg.Length > 1)
-                        {
-                            expectedChecksum = (byte)((msg[0] + msg[1]) & 0xff);
-                            isWaitingChecksum = true;
-                        }
-
-                        Monitor.Exit(comLock);
-                        Thread.Sleep(400); // some extra sleep after sending a message                      
-
-                    }
-                }
-                catch
-                {
-                    gotReadWriteError = true;
-                }
-                finally
-                {
-                }
-                Thread.Sleep(100);
-            }
-        }
 
         private bool Open()
         {
@@ -716,29 +493,336 @@ namespace XTenLib
                 {
                     writerTask.Abort();
                 }
-                catch
-                {
-                }
+                catch { }
+                writerTask = null;
                 try
                 {
                     readerTask.Abort();
                 }
-                catch
-                {
-                }
-                writerTask = null;
+                catch { }
                 readerTask = null;
                 //
                 try
                 {
                     x10interface.Close();
                 }
-                catch
+                catch { }
+            }
+        }
+
+
+
+
+        private void ReaderThreadLoop()
+        {
+            lock (accessLock)
+            {
+                while (true)
                 {
+                    //
+                    try
+                    {
+                        byte[] readData = x10interface.ReadData();
+
+
+
+                        if (readData.Length >= 13 || (readData.Length == 2  && readData[0] == 0xFF && readData[1] == 0x00))
+                        {
+                            /*
+                            Console.WriteLine("\n\n\n\n{0}:{1}:{2}", (readdata[4] * 2).ToString("D2"),
+                                                    (readdata[3]).ToString("D2"),
+                                                    (readdata[2]).ToString("D2"));
+
+                            */
+                            /*
+                            // A1 Status request
+                            Thread t = new Thread(new ThreadStart(delegate()
+                            {
+                                Thread.Sleep(10000);
+                                //_sendqueue.Enqueue(new byte[] { 0x8B });
+                                _sendqueue.Enqueue(new byte[] { 0x07, 0x67, 0x06, 0x03, 0x3b });
+                                _sendqueue.Enqueue(new byte[] { 0x07, 0x67, 0x06, 0x00, 0x37 });
+                            }));
+                            t.Start();
+                            */
+
+                            if (!statusRequestOk)
+                            {
+                                UpdateInterfaceTime(false);
+                                statusRequestOk = true;
+                            }
+
+                        }
+
+
+
+                        if (readData.Length > 0)
+                        {
+                            DebugLog("X10 >", Utility.ByteArrayToString(readData));
+                            //
+                            if (readData[0] == (int)X10CommandType.PLC_Ready)
+                            {
+                                isWaitingChecksum = false;
+                                Monitor.Enter(comLock);
+                                Monitor.Pulse(comLock);
+                                Monitor.Exit(comLock);
+                            }
+                            else if (readData[0] == (int)X10CommandType.Macro)
+                            {
+                                DebugLog("X10 >", "MACRO: " + Utility.ByteArrayToString(readData));
+                            }
+                            else if (readData[0] == (int)X10CommandType.RF)
+                            {
+                                DebugLog("X10 >", "RFCOM: " + Utility.ByteArrayToString(readData));
+                                if (RfDataReceived != null)
+                                {
+                                    RfDataReceived(new RfDataReceivedAction() { RawData = readData });
+                                }
+                            }
+                            else if ((readData[0] == (int)X10CommandType.PLC_Poll) && readData.Length <= 2)
+                            {
+                                statusRequestOk = true;
+                                sendQueue.Enqueue(new byte[] { (byte)X10CommandType.PLC_ReplyToPoll }); // reply to poll
+                            }
+                            else if ((readData[0] == (int)X10CommandType.PLC_FilterFail_Poll) && readData.Length <= 2)
+                            {
+                                statusRequestOk = true;
+                                sendQueue.Enqueue(new byte[] { (int)X10CommandType.PLC_FilterFail_Poll }); // reply to filter fail poll
+                            }
+                            else if ((readData[0] == (int)X10CommandType.PLC_Poll))
+                            {
+                                if (!statusRequestOk)
+                                {
+                                    sendQueue.Enqueue(new byte[] { (byte)X10CommandType.PLC_ReplyToPoll }); // reply to poll
+                                }
+                                //
+                                DebugLog("X10 >", "PLCRX: " + Utility.ByteArrayToString(readData));
+                                //
+                                if (readData.Length > 3)
+                                {
+                                    int messageLength = readData[1];
+                                    if (readData.Length > messageLength - 2)
+                                    {
+                                        char[] bitmapData = Convert.ToString(readData[2], 2).PadLeft(8, '0').ToCharArray();
+                                        byte[] functionBitmap = new byte[messageLength - 1];
+                                        for (int i = 0; i < functionBitmap.Length; i++)
+                                        {
+                                            functionBitmap[i] = byte.Parse(bitmapData[7 - i].ToString());
+                                        }
+
+                                        byte[] messageData = new byte[messageLength - 1];
+                                        Array.Copy(readData, 3, messageData, 0, messageLength - 1);
+
+                                        // CM15 Extended receive has got inverted data
+                                        if (messageLength > 2 && x10interface.GetType().Equals(typeof(CM15)))
+                                        {
+                                            Array.Reverse(functionBitmap, 0, functionBitmap.Length);
+                                            Array.Reverse(messageData, 0, messageData.Length);
+                                        }
+
+                                        DebugLog("X10 >", "FNMAP: " + Utility.ByteArrayToString(functionBitmap));
+                                        DebugLog("X10 >", " DATA: " + Utility.ByteArrayToString(messageData));
+
+                                        for (int b = 0; b < messageData.Length; b++)
+                                        {
+                                            // read current byte data (type: 0x00 address, 0x01 function)
+                                            if (functionBitmap[b] == (byte)X10FunctionType.Address) // address
+                                            {
+                                                string housecode = ((X10HouseCodes)Convert.ToInt16(messageData[b].ToString("X2").Substring(0, 1), 16)).ToString();
+                                                string unitcode = ((X10UnitCodes)Convert.ToInt16(messageData[b].ToString("X2").Substring(1, 1), 16)).ToString();
+                                                if (unitcode.IndexOf("_") > 0) unitcode = unitcode.Substring(unitcode.IndexOf("_") + 1);
+                                                string currentUnitCode = housecode + unitcode;
+                                                //
+                                                if (!moduleStatus.Keys.Contains(currentUnitCode))
+                                                {
+                                                    var module = new X10Module() { Code = currentUnitCode };
+                                                    module.PropertyChanged += ModulePropertyChanged;
+                                                    moduleStatus.Add(currentUnitCode, module);
+                                                }
+                                                var mod = moduleStatus[currentUnitCode];
+                                                //
+                                                if (!addressedModules.ContainsKey(housecode))
+                                                {
+                                                    addressedModules.Add(housecode, new List<X10Module>());
+                                                }
+                                                else
+                                                {
+                                                    addressedModules[housecode].Clear();
+                                                }
+                                                //
+                                                if (!addressedModules[housecode].Contains(mod))
+                                                {
+                                                    addressedModules[housecode].Add(mod);
+                                                }
+
+                                                DebugLog("X10 >", "      " + b + ") House code = " + housecode);
+                                                DebugLog("X10 >", "      " + b + ")  Unit code = " + unitcode);
+                                            }
+                                            else if (functionBitmap[b] == (byte)X10FunctionType.Function) // function
+                                            {
+                                                string currentCommand = ((X10Command)Convert.ToInt16(messageData[b].ToString("X2").Substring(1, 1), 16)).ToString().ToUpper();
+                                                string currentHouseCode = ((X10HouseCodes)Convert.ToInt16(messageData[b].ToString("X2").Substring(0, 1), 16)).ToString();
+                                                //
+                                                DebugLog("X10 >", "      " + b + ") House code = " + currentHouseCode);
+                                                DebugLog("X10 >", "      " + b + ")    Command = " + currentCommand);
+                                                //
+                                                switch (currentCommand)
+                                                {
+                                                    case "ALL_UNITS_OFF":
+                                                        if (currentHouseCode != "") AllUnitsOff(currentHouseCode);
+                                                        break;
+                                                    case "ALL_LIGHTS_ON":
+                                                        if (currentHouseCode != "") AllLightsOn(currentHouseCode);
+                                                        break;
+                                                    default:
+                                                        if (addressedModules.ContainsKey(currentHouseCode))
+                                                        {
+                                                            foreach (X10Module mod in addressedModules[currentHouseCode])
+                                                            {
+
+                                                                switch (currentCommand)
+                                                                {
+                                                                    case "ON":
+                                                                        mod.Level = 1.0;
+                                                                        break;
+                                                                    case "OFF":
+                                                                        mod.Level = 0.0;
+                                                                        break;
+                                                                    case "BRIGHT":
+                                                                        var brightLevel = mod.Level + (((double)messageData[++b]) / 210D);
+                                                                        if (brightLevel > 1) brightLevel = 1;
+                                                                        mod.Level = brightLevel;
+                                                                        break;
+                                                                    case "DIM":
+                                                                        var dimLevel = mod.Level - (((double)messageData[++b]) / 210D);
+                                                                        if (dimLevel < 0) dimLevel = 0;
+                                                                        mod.Level = dimLevel;
+                                                                        break;
+                                                                }
+
+                                                            }
+                                                        }
+                                                        break;
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+
+                                }
+                            }
+                            else if ((readData[0] == (int)X10CommandType.PLC_TimeRequest)) // IS THIS A TIME REQUEST?
+                            {
+                                UpdateInterfaceTime(false);
+                            }
+                            else
+                            {
+                                // BEGIN: This is an hack for detecting disconnection status in Linux/Raspi
+                                if (readData[0] == 0x00)
+                                {
+                                    zeroChecksumCount++;
+                                }
+                                else
+                                {
+                                    zeroChecksumCount = 0;
+                                }
+                                //
+                                if (zeroChecksumCount > 10)
+                                {
+                                    zeroChecksumCount = 0;
+                                    gotReadWriteError = true;
+                                    Close();
+                                }
+                                // END: Linux/Raspi hack
+                                else if (isWaitingChecksum)
+                                {
+                                    // checksum is received only from CM11
+                                    DebugLog("X10 >", "CKSUM: " + "Expected [" + Utility.ByteArrayToString(new byte[] { expectedChecksum }) + "] Checksum ==> " + Utility.ByteArrayToString(readData));
+                                    //TODO: checksum verification not handled, we just reply 0x00 (OK)
+                                    SendMessage(new byte[] { 0x00 });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (!e.GetType().Equals(typeof(TimeoutException)) && !e.GetType().Equals(typeof(OverflowException)))
+                        {
+                            DebugLog("X10 !", e.Message);
+                            DebugLog("X10 !", e.StackTrace);
+                            // TODO: add error logging 
+                            gotReadWriteError = true;
+                        }
+                    }
+                    Monitor.Wait(accessLock, 10);
                 }
             }
         }
 
+
+        private void WriterThreadLoop()
+        {
+            while (true)
+            {
+                try
+                {
+                    if (sendQueue.Count > 0)
+                    {
+                        byte[] msg = sendQueue.Dequeue();
+                        
+                        DebugLog("X10 <", Utility.ByteArrayToString(msg));
+
+                        Monitor.Enter(comLock);
+
+                        if (isWaitingChecksum && msg.Length > 1)
+                        {
+                            Monitor.Wait(comLock, 3000);
+                            isWaitingChecksum = false;
+                        }
+
+                        SendMessage(msg);
+
+                        if (msg.Length > 1)
+                        {
+                            expectedChecksum = (byte)((msg[0] + msg[1]) & 0xff);
+                            isWaitingChecksum = true;
+                        }
+
+                        Monitor.Exit(comLock);
+                        //Thread.Sleep(400); // some extra sleep after sending a message                      
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DebugLog("X10 !", ex.Message);
+                    DebugLog("X10 !", ex.StackTrace);
+
+                    gotReadWriteError = true;
+                }
+                finally
+                {
+                }
+                Thread.Sleep(100);
+            }
+        }
+
+
+        private void DebugLog(string prefix, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            if (prefix.Contains(">"))
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (prefix.Contains("!"))
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            }
+            Console.WriteLine(prefix + " " + message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
     }
 

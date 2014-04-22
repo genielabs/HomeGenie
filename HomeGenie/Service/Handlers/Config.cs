@@ -162,6 +162,10 @@ namespace HomeGenie.Service.Handlers
 
                         case "ZWave.SetPort":
                             (homegenie.GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave).SetPortName(migCommand.GetOption(1).Replace("|", "/"));
+                            if (homegenie.SystemConfiguration.GetInterface(Domains.HomeAutomation_ZWave).IsEnabled)
+                            {
+                                (homegenie.GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave).Connect();
+                            }
                             homegenie.SystemConfiguration.GetInterfaceOption(Domains.HomeAutomation_ZWave, "Port").Value = migCommand.GetOption(1).Replace("|", "/");
                             homegenie.SystemConfiguration.Update();
                             break;
@@ -632,9 +636,9 @@ namespace HomeGenie.Service.Handlers
                         reader.Close();
                         foreach (var program in newProgramsData)
                         {
+                            var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
                             if (selectedPrograms.Contains("," + program.Address.ToString() + ","))
                             {
-                                var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
                                 if (currentProgram == null || program.Address >= 1000)
                                 {
                                     var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
@@ -649,7 +653,7 @@ namespace HomeGenie.Service.Handlers
                                 else
                                 {
                                     // system programs keep original pid
-                                    bool wasEnabled = currentProgram.IsEnabled;
+                                    //bool wasEnabled = currentProgram.IsEnabled;
                                     currentProgram.IsEnabled = false;
                                     homegenie.ProgramEngine.ProgramRemove(currentProgram);
                                     try
@@ -658,8 +662,13 @@ namespace HomeGenie.Service.Handlers
                                     }
                                     catch { }
                                     homegenie.ProgramEngine.ProgramAdd(program);
-                                    program.IsEnabled = wasEnabled;
+                                    //program.IsEnabled = wasEnabled;
                                 }
+                            }
+                            else if (currentProgram != null && program.Address < 1000)
+                            {
+                                // restore system program Enabled/Disabled status
+                                currentProgram.IsEnabled = program.IsEnabled;
                             }
                         }
                         //

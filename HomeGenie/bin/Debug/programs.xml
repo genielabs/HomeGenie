@@ -141,7 +141,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:28.038665Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:40.3742234Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -166,7 +166,7 @@ Program.Setup(()=&gt;{
 
 return true;
 </ScriptCondition>
-    <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
+  <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
   	if (Program.InputField("BridgeAddress").Value == "" || Program.InputField("BridgeAddress").Value.EndsWith("?"))
     {
@@ -224,10 +224,13 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
         case "Control.ColorHsb":
         	string[] values = parameter.Split(',');
+        	double transition = 5;
+        	if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
     	    bridgeapicall(lightnumber, "{ \"on\" : true" + 
-                          ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
-                          ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
-                          ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + " }");
+                        ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
+                        ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
+                        ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
+						", \"transitiontime\" : " + transition.ToString() +  "}");
             Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
             Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
         	break; 
@@ -257,7 +260,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:28.0466802Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:40.3742234Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -403,7 +406,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:29.0155945Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:41.1631039Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -475,7 +478,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:28:30.7755419Z</TriggerTime>
+    <TriggerTime>2014-04-19T10:22:31.6662869Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1214,7 +1217,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:31.0167577Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:43.1614485Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1406,7 +1409,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:33.0172363Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:44.1638299Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1526,7 +1529,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:34.0151693Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:46.1651856Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1820,8 +1823,8 @@ while (Program.IsEnabled)
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-04-19T15:28:41.5625744Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:28:41.5655617Z</TriggerTime>
+    <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
+    <TriggerTime>2014-04-19T10:21:23.6146936Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1902,7 +1905,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:35.0136134Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:48.1602867Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2049,7 +2052,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:36.0214169Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:49.160094Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2315,7 +2318,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:37.5145136Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:49.6995455Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2742,7 +2745,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:38.5157189Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:50.6598373Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2804,7 +2807,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:39.5135527Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:51.6616361Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2961,7 +2964,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:40.5147117Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:52.6633969Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3330,7 +3333,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T15:27:41.516582Z</TriggerTime>
+    <TriggerTime>2014-04-19T09:26:53.6609936Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4087,7 +4090,7 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
 // this program will be running in background
 return true;
 </ScriptCondition>
-    <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
+  <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
 var modemUsername = "admin"; //Program.InputField("ModemUsername").Value;
 var modemPassword = Program.InputField("ModemPassword").Value;
 var smsRecipient = Program.InputField("SmsRecipient").Value;

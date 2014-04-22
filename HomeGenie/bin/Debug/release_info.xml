@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r366</Version>
+  <Version>1.00 beta r368</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - Added Alcatel Y800Z SMS Notify program 
-  - Improved Security Alarm System: run automation programs/scenarios when armed/disarmed/triggered
-  - New Dimmer and Shutter widgets (Shutter is also now supporting Scheduling ON/OFF features)
-  - Some code improvements to Raspberry Pi automation programs
-  - Some fixes to Program Source Code Editor</ReleaseNote>
-  <ReleaseDate>2014-04-19T10:42:04.0000Z</ReleaseDate>
+  <ReleaseNote>- backup restore now sets original enabled/disabled status of programs (system programs too)
+  - fixed bug in interface enable/disable and disconnect/connect both in ZWaveLib and XTenLib
+  - fixed bug in modules list update after changing interface setting (eg. X10 house codes)
+  - major XTenLib code rework in PCL receive function: now properly supporting extended receive
+  - fixed major bug in Wizard Script comparison operator
+  - fixed disappering widgets bug
+  - added "trasitiontime" parameter to Philips Hue Widget</ReleaseNote>
+  <ReleaseDate>2014-04-22T11:53:11.0000Z</ReleaseDate>
 </ReleaseInfo>

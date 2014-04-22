@@ -81,7 +81,7 @@ HG.WebApp.Events.Refresh = function () {
         if (filterSource != '' && event.Source.indexOf(filterSource) < 0) continue;
         if (filterProperty != '' && event.Property.indexOf(filterProperty) < 0) continue;
         //
-        var d= new Date(event.UnixTimestamp);
+        var d = new Date(event.UnixTimestamp);
         var longDate = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d, false);
         rows += '<tr>';
         rows += '<td><abbr title="' + longDate + '">' + HG.WebApp.Utility.FormatDateTime(d, true) + '</abbr></td>';
@@ -149,16 +149,24 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: 'Runtime<br />Error',
                     timestamp: date
                 };
-                if ($.mobile.activePage.attr("id") == "page_automation_editprogram_code")
-                {
+                if ($.mobile.activePage.attr("id") == "page_automation_editprogram_code") {
                     HG.WebApp.ProgramEdit.RefreshProgramOptions();
                 }
+            }
+            else if (eventLog.Property != 'Program.Status') {
+                //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
+                //if (module.Name != '') name = module.Name;
+                popupdata = {
+                    icon: iconImage,
+                    title: '<span style="color:gray;font-size:9pt;">' + eventLog.Property + '</span><br>' + eventLog.Value,
+                    text: "",
+                    timestamp: date
+                };
             }
             break;
 
         default:
-            if (module != null && eventLog.Property != 'Meter.Watts')
-            {
+            if (module != null && eventLog.Property != 'Meter.Watts') {
 
                 var iconImage = configurepage_GetModuleIcon(module, null);
                 if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
@@ -170,8 +178,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         timestamp: date
                     };
                 }
-                else if (eventLog.Property.substring(0, 7) == 'Sensor.')
-                {
+                else if (eventLog.Property.substring(0, 7) == 'Sensor.') {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
@@ -199,8 +206,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         timestamp: date
                     };
                 }
-                else if (eventLog.Property.substring(0, 7) == 'Status.')
-                {
+                else if (eventLog.Property.substring(0, 7) == 'Status.') {
                     var group = HG.WebApp.GroupsList.GetModuleGroup(module);
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
@@ -289,12 +295,10 @@ HG.WebApp.Events.ShowEventPopup = function (popupdata) {
     $('#statuspopup').html(s);
 
     // hide timeout
-    if (HG.WebApp.Events._popupHideTimeout != null)
-    {
+    if (HG.WebApp.Events._popupHideTimeout != null) {
         clearTimeout(HG.WebApp.Events._popupHideTimeout);
     }
-    else
-    {
+    else {
         $('#statuspopup').css('display', '');
         $('#statuspopup').animate({ opacity: '0' }, 0, function () {
             $('#statuspopup').animate({ right: '5px', opacity: '0.90' }, 300);

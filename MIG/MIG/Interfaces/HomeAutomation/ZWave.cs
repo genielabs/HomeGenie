@@ -590,7 +590,7 @@ namespace MIG.Interfaces.HomeAutomation
         {
             portName = name;
             Disconnect();
-            Connect();
+            //Connect();
         }
 
 

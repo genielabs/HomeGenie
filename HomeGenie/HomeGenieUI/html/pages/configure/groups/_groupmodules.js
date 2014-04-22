@@ -477,12 +477,13 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
     var selected = -1;
     for (var p = 0; p < HG.WebApp.Data.Programs.length; p++) {
         var cprogram = -1;
+        if (!HG.WebApp.Data.Programs[p].IsEnabled) continue;
         var features = HG.WebApp.Data.Programs[p].Features;
         if (features.length > 0) {
             for (var f = 0; f < features.length; f++) {
                 var fd = ',' + features[f].ForDomains.toLowerCase() + ',|' + features[f].ForDomains.toLowerCase() + '|';
                 var fs = ',' + features[f].ForTypes.toLowerCase() + ',|' + features[f].ForTypes.toLowerCase() + '|';
-                var featurematch = (features[f].ForDomains == '' || fd.indexOf(HG.WebApp.GroupModules.EditModule.Domain.toLowerCase(), 0) == 0) && (features[f].ForTypes == '' || fs.indexOf(HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase(), 0) == 0);
+                var featurematch = (features[f].ForDomains == '' || fd.indexOf(HG.WebApp.GroupModules.EditModule.Domain.toLowerCase(), 0) >= 0) && (features[f].ForTypes == '' || fs.indexOf(HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase(), 0) >= 0);
                 if (featurematch) {
                     var property = features[f].Property;
                     var prop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, property);
