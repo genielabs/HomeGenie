@@ -69,6 +69,9 @@ HG.WebApp.Maintenance.InitializePage = function () {
             });
         });
         //
+        //$('systemsettings_updateinstall_popup').on('popupbeforeposition', function (event) {
+        //    
+        //});
         $('#configure_system_updatemanager_installbutton').bind('click', function () {
             $('#configure_system_updatemanager_info').html('<strong>Downloading files...</strong>');
             $('#configure_system_updateinstall_log').empty();
@@ -95,24 +98,8 @@ HG.WebApp.Maintenance.InitializePage = function () {
                     }
                     else if (r[0].ResponseValue == 'RESTART')
                     {
-                        //UpdateManager.InstallProgramsList
-                        HG.System.UpdateManager.InstallProgramsList(function (res) {
-
-                            var programs = eval(res);
-                            if (programs.length > 0)
-                            {
-                                $('#configure_system_updateinstall_log').prepend('<br/>');
-                                for (var p = 0; p < programs.length; p++)
-                                {
-                                    $('#configure_system_updateinstall_log').prepend('<em>' + programs[p].Name + '</em>&nbsp;(' + programs[p].Address + ')<br/>');
-                                }
-                                $('#configure_system_updateinstall_log').prepend('<strong>Following system automation programs will be replaced/added:</strong><br/><br/>');
-                            }
-
-                            $('#configure_system_updateinstall_status').html('Update files ready. HomeGenie will be restarted during installation.');
-                            $('#configure_system_updateinstall_button').removeClass('ui-disabled');
-
-                        });
+                        $('#configure_system_updateinstall_status').html('Update files ready. HomeGenie will be restarted after updating.');
+                        $('#configure_system_updateinstall_button').removeClass('ui-disabled');
                     }
                     else if (r[0].ResponseValue == 'ERROR')
                     {

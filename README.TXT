@@ -165,6 +165,11 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+24/04/2014 1.00 beta rev 369
+	- some more fixes/improvements in XTenLib
+	- rewrote UpdateChecker, now with more logging and no need to spawn external updater process
+	- deprecated external updater process
+
 22/04/2014 1.00 beta rev 368
 	- backup restore now sets original enabled/disabled status of programs (system ones too)
 	- fixed bug in interface enable/disable and disconnect/connect both in ZWaveLib and XTenLib

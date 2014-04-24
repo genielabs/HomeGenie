@@ -162,14 +162,18 @@ namespace HomeGenie.Service
                 LogBroadcastEvent(Domains.HomeAutomation_HomeGenie, "SystemInfo", "Http port bind failed.", "HTTP.PORT", port.ToString());
             }
 
-            updateChecker = new UpdateChecker();
+            updateChecker = new UpdateChecker(this);
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
             {
-                LogBroadcastEvent(Domains.HomeGenie_UpdateChecker, "0", "HomeGenie Update Checker", "Download File", args.ReleaseInfo.DownloadUrl + " " + args.Status);
+                LogBroadcastEvent(Domains.HomeGenie_UpdateChecker, "0", "HomeGenie Update Checker", "InstallProgress.Message", "= Download " + args.Status + ": " + args.ReleaseInfo.DownloadUrl);
             };
             updateChecker.UpdateProgress += (object sender, UpdateProgressEventArgs args) =>
             {
                 LogBroadcastEvent(Domains.HomeGenie_UpdateChecker, "0", "HomeGenie Update Checker", "Update Check", args.Status.ToString());
+            };
+            updateChecker.InstallProgressMessage += (object sender, string message) =>
+            {
+                LogBroadcastEvent(Domains.HomeGenie_UpdateChecker, "0", "HomeGenie Update Checker", "InstallProgress.Message", message);
             };
             // it will check every 24 hours
             updateChecker.Start();

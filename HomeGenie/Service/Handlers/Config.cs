@@ -374,127 +374,14 @@ namespace HomeGenie.Service.Handlers
                         }
                         migCommand.Response = JsonHelper.GetSimpleResponse(resultMessage);
                     }
-                    else if (migCommand.GetOption(0) == "UpdateManager.InstallProgramsList")
-                    {
-                        var newProgramList = new List<ProgramBlock>();
-                        // We assume that first 999 (0<id<1000) programs are "system" programs whose id must match for all hg releases,
-                        // so after upgrade, system programs contained in the update will replace current system programs (new ones added)
-                        var programsPath = Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs.xml");
-                        if (File.Exists(programsPath))
-                        {
-                            var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                            var reader = new StreamReader(programsPath);
-                            var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
-                            reader.Close();
-                            foreach (var newProgram in newProgramsData)
-                            {
-                                var program = new ProgramBlock();
-                                program.Address = newProgram.Address;
-                                program.Name = newProgram.Name;
-                                program.Description = newProgram.Description;
-                                newProgramList.Add(program);
-                            }
-                            newProgramList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
-                            {
-                                string c1 = p1.Address.ToString();
-                                string c2 = p2.Address.ToString();
-                                return c1.CompareTo(c2);
-                            });
-                        }
-                        migCommand.Response = JsonConvert.SerializeObject(newProgramList);
-                    }
                     else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate") //UpdateManager.InstallProgramsCommit")
                     {
                         string resultMessage = "OK";
-                        var programsPath = Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs.xml");
-                        if (File.Exists(programsPath))
+                        if (!homegenie.UpdateChecker.InstallFiles())
                         {
-                            string selectedPrograms = migCommand.GetOption(1); // comma separated programs' id list
-                            var newProgramList = new List<ProgramBlock>();
-                            //
-                            try
-                            {
-                                var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                                var reader = new StreamReader(programsPath);
-                                newProgramList = (List<ProgramBlock>)serializer.Deserialize(reader);
-                                reader.Close();
-                            }
-                            catch { } // TODO: handle error during programs deserialization
-                            //
-                            try
-                            {
-                                if (selectedPrograms != "" && newProgramList.Count > 0)
-                                {
-
-                                    homegenie.ProgramEngine.Enabled = false;
-                                    homegenie.ProgramEngine.StopEngine();
-                                    //
-                                    foreach (var program in newProgramList)
-                                    {
-                                        if (program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START) // && plist.Contains("," + pb.Address.ToString() + ","))
-                                        {
-                                            try
-                                            {
-                                                File.Copy(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                                            }
-                                            catch (Exception)
-                                            {
-
-                                            }
-                                            ProgramBlock oldprogram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
-                                            if (oldprogram != null)
-                                            {
-                                                homegenie.ProgramEngine.ProgramRemove(oldprogram);
-                                            }
-                                            homegenie.ProgramEngine.ProgramAdd(program);
-                                        }
-                                    }
-                                    //
-                                    homegenie.UpdateProgramsDatabase();
-                                    //
-                                    // add new automation groups 
-                                    // TODO: should ignore not-imported programs groups
-                                    //
-                                    var automationGroups = new List<Group>();
-                                    //
-                                    try
-                                    {
-                                        var serializer = new XmlSerializer(typeof(List<Group>));
-                                        var reader = new StreamReader(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "automationgroups.xml"));
-                                        automationGroups = (List<Group>)serializer.Deserialize(reader);
-                                        reader.Close();
-                                    }
-                                    catch { }
-                                    //
-                                    foreach (var automationGroup in automationGroups)
-                                    {
-                                        if (homegenie.AutomationGroups.Find(g => g.Name == automationGroup.Name) == null)
-                                        {
-                                            homegenie.AutomationGroups.Add(automationGroup);
-                                        }
-                                    }
-                                    //
-                                    homegenie.UpdateGroupsDatabase("Automation");
-                                    //
-                                    if (!homegenie.UpdateChecker.IsRestartRequired)
-                                    {
-                                        homegenie.LoadConfiguration();
-                                    }
-                                }
-                                //
-                                File.Delete(programsPath);
-                                if (Directory.Exists(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs")))
-                                {
-                                    Directory.Delete(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs"), true);
-                                }
-                            }
-                            catch
-                            {
-                                resultMessage = "ERROR";
-                            }
-
+                            resultMessage = "ERROR";
                         }
-                        if (resultMessage == "OK")
+                        else
                         {
                             if (homegenie.UpdateChecker.IsRestartRequired)
                             {
@@ -507,9 +394,7 @@ namespace HomeGenie.Service.Handlers
                             }
                             else
                             {
-                                var updater = Utility.StartUpdater(false);
-                                // wait for HomeGenieUpdater.exe to exit
-                                updater.WaitForExit();
+                                homegenie.LoadConfiguration();
                                 homegenie.MigService.ResetWebFileCache();
                                 homegenie.UpdateChecker.Check();
                             }
@@ -610,7 +495,7 @@ namespace HomeGenie.Service.Handlers
                         var newProgramList = new List<ProgramBlock>();
                         foreach (ProgramBlock program in newProgramsData)
                         {
-                            if (program.Address >= 1000)
+                            if (program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
                             {
                                 ProgramBlock p = new ProgramBlock();
                                 p.Address = program.Address;
@@ -639,7 +524,7 @@ namespace HomeGenie.Service.Handlers
                             var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
                             if (selectedPrograms.Contains("," + program.Address.ToString() + ","))
                             {
-                                if (currentProgram == null || program.Address >= 1000)
+                                if (currentProgram == null || program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
                                 {
                                     var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
                                     try
@@ -650,7 +535,7 @@ namespace HomeGenie.Service.Handlers
                                     program.Address = newPid;
                                     homegenie.ProgramEngine.ProgramAdd(program);
                                 }
-                                else
+                                else if (currentProgram != null)
                                 {
                                     // system programs keep original pid
                                     //bool wasEnabled = currentProgram.IsEnabled;
@@ -665,7 +550,7 @@ namespace HomeGenie.Service.Handlers
                                     //program.IsEnabled = wasEnabled;
                                 }
                             }
-                            else if (currentProgram != null && program.Address < 1000)
+                            else if (currentProgram != null && program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
                             {
                                 // restore system program Enabled/Disabled status
                                 currentProgram.IsEnabled = program.IsEnabled;

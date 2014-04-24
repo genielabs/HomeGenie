@@ -130,14 +130,21 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
 
         case 'HomeGenie.UpdateChecker':
-            $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
-            var iconImage = configurepage_GetModuleIcon(module, null);
-            popupdata = {
-                icon: iconImage,
-                title: eventLog.Property,
-                text: eventLog.Value,
-                timestamp: date
-            };
+            if (eventLog.Property == 'InstallProgress.Message')
+            {
+                $('#configure_system_updateinstall_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+            }
+            else
+            {
+                $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
+                var iconImage = configurepage_GetModuleIcon(module, null);
+                popupdata = {
+                    icon: iconImage,
+                    title: eventLog.Property,
+                    text: eventLog.Value,
+                    timestamp: date
+                };
+            }
             break;
 
         case 'HomeAutomation.HomeGenie.Automation':

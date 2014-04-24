@@ -1,17 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Service\HomeGenieService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\README.TXT">
     <Files>
       <File FileName="..\README.TXT" Line="1" Column="1" />
       <File FileName="release_info.xml" Line="1" Column="1" />
-      <File FileName="Service\VirtualMeter.cs" Line="1" Column="1" />
-      <File FileName="Automation\ProgramEngine.cs" Line="1" Column="1" />
-      <File FileName="Service\Handlers\Logging.cs" Line="1" Column="1" />
-      <File FileName="..\MIG\MIG\MIGService.cs" Line="1" Column="1" />
-      <File FileName="..\MIG\MIG\Gateways\WebServiceUtility.cs" Line="1" Column="1" />
-      <File FileName="..\MIG\MIG\Gateways\WebServiceGateway.cs" Line="1" Column="1" />
-      <File FileName="HomeGenieUI\html\js\api\homegenie.webapp.js" Line="1" Column="1" />
-      <File FileName="Service\HomeGenieService.cs" Line="1538" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -32,6 +32,8 @@ using HomeGenie.Service;
 using Raspberry;
 
 using Newtonsoft.Json;
+using System.Diagnostics;
+using System.ServiceProcess;
 
 namespace HomeGenie
 {
@@ -39,7 +41,7 @@ namespace HomeGenie
     {
         private static HomeGenieService _homegenie = null;
         private static bool _isrunning = true;
-        private static bool _startupdater = false;
+        private static bool _restart = false;
 
         static void Main(string[] args)
         {
@@ -126,9 +128,9 @@ namespace HomeGenie
             ShutDown();
         }
 
-        internal static void Quit(bool startUpdater)
+        internal static void Quit(bool restartService)
         {
-            _startupdater = startUpdater;
+            _restart = restartService;
             _isrunning = false;
             ShutDown();
         }
@@ -145,12 +147,58 @@ namespace HomeGenie
             //
             Console.Write(" QUIT!\n\n");
             //
-            if (_startupdater)
+            int exitCode = 0;
+            if (_restart)
             {
-                Utility.StartUpdater(true);
+                //Utility.StartUpdater(true);
+                //System.Diagnostics.Process.Start("HomeGenie.exe");
+
+                var os = Environment.OSVersion;
+                var platformId = os.Platform;
+
+                // TODO: run "uname" to determine OS type
+                if (platformId == PlatformID.Win32NT)
+                {
+                    try
+                    {
+                        ServiceController service = new ServiceController("HomeGenieService");
+                        exitCode = 1; // it tell the system to restart the service
+                    }
+                    catch { StartHomeGenie(); }
+                }
+                else if (platformId == PlatformID.Win32Windows)
+                {
+                    StartHomeGenie();
+                }
+                else
+                {
+                    StartMonoHomeGenie();
+                }
             }
             //
-            System.Environment.Exit(0);
+            Environment.Exit(exitCode);
+        }
+
+        private static void StartHomeGenie()
+        {
+            var homegenie = new Process();
+            homegenie.StartInfo.FileName = "HomeGenie.exe";
+            //homegenie.StartInfo.Arguments = "-u";
+            //updater.StartInfo.UseShellExecute = true;
+            homegenie.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //updater.StartInfo.RedirectStandardOutput = true;
+            homegenie.Start();
+        }
+
+        private static void StartMonoHomeGenie()
+        {
+            var homegenie = new Process();
+            homegenie.StartInfo.FileName = "mono";
+            homegenie.StartInfo.Arguments = "HomeGenie.exe";
+            homegenie.StartInfo.UseShellExecute = false;
+            homegenie.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //updater.StartInfo.RedirectStandardOutput = true;
+            homegenie.Start();
         }
 
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -164,11 +212,11 @@ namespace HomeGenie
         {
             try
             {
-                var processInfo = new System.Diagnostics.ProcessStartInfo(command, args);
+                var processInfo = new ProcessStartInfo(command, args);
                 processInfo.RedirectStandardOutput = false;
                 processInfo.UseShellExecute = false;
                 processInfo.CreateNoWindow = true;
-                var process = new System.Diagnostics.Process();
+                var process = new Process();
                 process.StartInfo = processInfo;
                 process.Start();
             }

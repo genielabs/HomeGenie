@@ -225,3 +225,9 @@ input:-ms-input-placeholder {
     background-position: bottom;
     background-repeat: repeat-x;
 }
+
+#systemsettings_updateinstall_popup-popup {
+    width: 90%;
+    left: 5%;
+    right: 5%
+}

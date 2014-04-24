@@ -145,29 +145,29 @@ namespace HomeGenie.Service
             }
         }
 
-        public static Process StartUpdater(bool restart)
-        {
-            File.Copy("HomeGenieUpdater.exe", "HomeGenieUpdaterC.exe", true);
-            var updater = new Process();
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT || Environment.OSVersion.Platform == PlatformID.Win32Windows)
-            {
-                updater.StartInfo.FileName = "HomeGenieUpdaterC.exe";
-                updater.StartInfo.Arguments = restart ? "-r" : "";
-                //updater.StartInfo.UseShellExecute = true;
-                updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                //updater.StartInfo.RedirectStandardOutput = true;
-            }
-            else
-            {
-                updater.StartInfo.FileName = "mono";
-                updater.StartInfo.Arguments = "HomeGenieUpdaterC.exe " + (restart ? "-r" : "");
-                updater.StartInfo.UseShellExecute = false;
-                updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                //updater.StartInfo.RedirectStandardOutput = true;
-            }
-            updater.Start();
-            return updater;
-        }
+        //public static Process StartUpdater(bool restart)
+        //{
+        //    File.Copy("HomeGenieUpdater.exe", "HomeGenieUpdaterC.exe", true);
+        //    var updater = new Process();
+        //    if (Environment.OSVersion.Platform == PlatformID.Win32NT || Environment.OSVersion.Platform == PlatformID.Win32Windows)
+        //    {
+        //        updater.StartInfo.FileName = "HomeGenieUpdaterC.exe";
+        //        updater.StartInfo.Arguments = restart ? "-r" : "";
+        //        //updater.StartInfo.UseShellExecute = true;
+        //        updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //        //updater.StartInfo.RedirectStandardOutput = true;
+        //    }
+        //    else
+        //    {
+        //        updater.StartInfo.FileName = "mono";
+        //        updater.StartInfo.Arguments = "HomeGenieUpdaterC.exe " + (restart ? "-r" : "");
+        //        updater.StartInfo.UseShellExecute = false;
+        //        updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //        //updater.StartInfo.RedirectStandardOutput = true;
+        //    }
+        //    updater.Start();
+        //    return updater;
+        //}
 
         public static void Say(string sentence, string locale)
         {

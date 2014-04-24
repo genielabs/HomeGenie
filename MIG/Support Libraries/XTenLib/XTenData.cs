@@ -87,6 +87,14 @@ namespace XTenLib
         Function = 0x01
     }
 
+    public enum X10CommState
+    {
+        Ready,
+        WaitingChecksum,
+        WaitingAck,
+        WaitingPollReply
+    }
+
     public enum X10CommandType
     {
         Address = 0x04,
