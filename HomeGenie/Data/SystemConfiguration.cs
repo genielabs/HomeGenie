@@ -71,8 +71,7 @@ namespace HomeGenie.Data
 
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
-            MIGServiceConfiguration.Interface res = null;
-            res = MIGService.Interfaces.Find(i => i.Domain == domain);
+            MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
             return res;
         }
         public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)

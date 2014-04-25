@@ -165,10 +165,16 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+25/04/2014 1.00 beta rev 370
+	- fixed occasional error when adding a module to a group
+	- optimized module saving in group modules page
+	- deprecated usage of WCF in HomeGenieService and HomeGenieServiceManager (win)
+	- completed new system update manager
+
 24/04/2014 1.00 beta rev 369
 	- some more fixes/improvements in XTenLib
 	- rewrote UpdateChecker, now with more logging and no need to spawn external updater process
-	- deprecated external updater process
+	- deprecated external updater process (HomeGenieUpdater)
 
 22/04/2014 1.00 beta rev 368
 	- backup restore now sets original enabled/disabled status of programs (system ones too)

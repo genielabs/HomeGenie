@@ -296,7 +296,7 @@ HG.WebApp.ProgramsList.UpdateProgramParameter = function (el)
                 module.Properties[p].NeedsUpdate = 'true';
             }
         }
-        HG.WebApp.GroupModules.UpdateModule(module);
+        HG.WebApp.GroupModules.UpdateModule(module, null);
     };
 
 

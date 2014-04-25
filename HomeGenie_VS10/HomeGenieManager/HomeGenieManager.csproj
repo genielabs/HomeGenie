@@ -94,11 +94,6 @@
     <Compile Include="LoadingDialog.xaml.cs">
       <DependentUpon>LoadingDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Service References\HomeGenie.WCF\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Page Include="LoadingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,38 +137,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\HomeGenie.WCF\HomeGenie.WCF.wsdl" />
-    <None Include="Service References\HomeGenie.WCF\HomeGenie.WCF.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\HomeGenie.WCF\HomeGenie.WCF1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\HomeGenie.WCF\service.wsdl" />
-    <None Include="Service References\HomeGenie.WCF\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TrayIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\HomeGenie.WCF\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\HomeGenie.WCF\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\HomeGenie.WCF\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\HomeGenie.WCF\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="home_ico.ico" />

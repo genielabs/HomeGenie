@@ -127,7 +127,6 @@ HG.WebApp.InitializePage = function ()
         {
             HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.showPageLoadingMsg();
-            //            setTimeout('HG.WebApp.GroupModules.LoadGroupModules()', 1000);
         }
         else if (this.id == 'page_configure_automationgroups') 
         {

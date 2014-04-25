@@ -57,7 +57,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                         }, 3000);
                     }
                     else if (r[0].ResponseValue == 'RESTART') {
-                        $('#configure_system_updateinstall_status').html('Installing files... (HomGenie service stopped)');
+                        $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
                     }
                     else if (r[0].ResponseValue == 'ERROR') {
                         $('#configure_system_updateinstall_status').html('Error during installation progress.');

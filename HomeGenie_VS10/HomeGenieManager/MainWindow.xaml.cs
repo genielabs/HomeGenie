@@ -43,7 +43,6 @@ using System.ComponentModel;
 using System.ServiceModel;
 using System.Configuration;
 
-using HomeGenieManager.HomeGenie.WCF;
 using OpenSource.UPnP;
 
 
@@ -53,7 +52,7 @@ namespace HomeGenieManager
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
     [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single)]
-    public partial class MainWindow : Window, IManagerCallback
+    public partial class MainWindow : Window//, IManagerCallback
     {
         private WinForms.NotifyIcon notifierIcon = new WinForms.NotifyIcon();
         private ServiceController serviceController = null;
@@ -69,20 +68,6 @@ namespace HomeGenieManager
             InitializeComponent();
             //
             Initialize();
-        }
-
-        public void OnEventLogged(HomeGenie.WCF.LogEntry message, DateTime timestamp)
-        {
-            string logMessage = timestamp.ToString() + " " + timestamp.ToString() + " " + message.Domain + " " + message.Description + " " + message.Source + " " + message.Property + " " + message.Value;
-            Console.WriteLine(logMessage);
-            //log.Text = s + "\n" + log.Text;
-            //
-            if (message.Property == "Status.Level" || message.Property.StartsWith("Sensor."))
-            {
-                notifierIcon.BalloonTipTitle = "HomeGenie Message";
-                notifierIcon.BalloonTipText = message.Description + "\n[" + message.Domain.Split('.')[1] + "] " + message.Source + " --> " + message.Property.Split('.')[1] + " = " + message.Value;
-                notifierIcon.ShowBalloonTip(1000);
-            }
         }
 
         private void Initialize()
@@ -191,43 +176,19 @@ namespace HomeGenieManager
 
         private void MenuOpenHomeGenie_Click(object sender, RoutedEventArgs e)
         {
-            bool serviceUp = false;
-            try
+            if ((App.Current as HomeGenieManager.App).UPnPDevices.Count > 0)
             {
-                ManagerClient managerClient = null;
-                if (serviceController != null && serviceController.Status == ServiceControllerStatus.Running)
-                {
-                    managerClient = new ManagerClient(instanceContext);
-                    managerClient.Subscribe();
-                    if (managerClient != null)
-                    {
-                        string port = managerClient.GetHttpServicePort().ToString();
-                        System.Diagnostics.Process.Start("http://localhost:" + port + "/");
-                        managerClient.Close();
-                        serviceUp = true;
-                    }
-                }
+                System.Diagnostics.Process.Start((App.Current as HomeGenieManager.App).UPnPDevices[(App.Current as HomeGenieManager.App).UPnPDevices.Keys.ElementAt(0)].PresentationURL);
             }
-            catch (Exception ex)
+            else
             {
-            }
-            if (!serviceUp)
-            {
-                if ((App.Current as HomeGenieManager.App).UPnPDevices.Count > 0)
-                {
-                    System.Diagnostics.Process.Start((App.Current as HomeGenieManager.App).UPnPDevices[(App.Current as HomeGenieManager.App).UPnPDevices.Keys.ElementAt(0)].PresentationURL);
-                }
-                else
-                {
-                    System.Diagnostics.Process.Start("http://localhost/");
-                }
-                //MessageBox.Show("HomeGenie Service not responding.\nStart service first.");
+                System.Diagnostics.Process.Start("http://localhost/");
             }
         }
 
         private void MenuSupport_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://generoso.info/homegenie");
+            System.Diagnostics.Process.Start("http://www.homegenie.it/");
         }
 
         private void MenuExit_Click(object sender, RoutedEventArgs e)

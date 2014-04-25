@@ -156,7 +156,7 @@ namespace XTenLib
                             isInterfaceReady = false;
                             try
                             {
-                                sendQueue.Clear();
+                                ResetCurrentData();
                                 //
                                 Close();
                                 //
@@ -384,6 +384,7 @@ namespace XTenLib
                 message[7] = 0x02;
             }
             //
+            ResetCurrentData();
             DebugLog("X10 <", Utility.ByteArrayToString(message));
             //
             SendMessage(message);
@@ -493,7 +494,7 @@ namespace XTenLib
             }
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             var mod = moduleStatus[huc];
-            // TODO: before enabling this optimization, do more tests
+            // TODO: do more tests about this optimization
             //if (!addressedModules[housecode.ToString()].Contains(mod) || addressedModules[housecode.ToString()].Count > 1)
             {
                 addressedModules[housecode.ToString()].Clear();
@@ -609,13 +610,10 @@ namespace XTenLib
                         {
                             DebugLog("X10 >", Utility.ByteArrayToString(readData));
                             //
-                            if (readData[0] == (int)X10CommandType.PLC_Ready && communicationState == X10CommState.WaitingAck)
+                            if ((readData[0] == (int)X10CommandType.PLC_Ready && communicationState == X10CommState.WaitingAck) && readData.Length <= 2)
                             {
-                                Monitor.Enter(stateLock);
-                                communicationState = X10CommState.Ready;
-                                Monitor.Pulse(stateLock);
-                                Monitor.Exit(stateLock);
-                            }
+                                SetInterfaceReady();
+                            } 
                             else if (readData[0] == (int)X10CommandType.Macro)
                             {
                                 DebugLog("X10 >", "MACRO: " + Utility.ByteArrayToString(readData));
@@ -772,14 +770,14 @@ namespace XTenLib
                                 }
                                 else
                                 #endregion
-                                    if (communicationState == X10CommState.WaitingChecksum)
-                                    {
-                                        // checksum is received only from CM11
-                                        DebugLog("X10 >", "CKSUM: " + "Expected [" + Utility.ByteArrayToString(new byte[] { expectedChecksum }) + "] Checksum ==> " + Utility.ByteArrayToString(readData));
-                                        //TODO: checksum verification not handled, we just reply 0x00 (OK)
-                                        communicationState = X10CommState.WaitingAck;
-                                        SendMessage(new byte[] { 0x00 });
-                                    }
+                                if (communicationState == X10CommState.WaitingChecksum)
+                                {
+                                    // checksum is received only from CM11
+                                    DebugLog("X10 >", "CKSUM: " + "Expected [" + Utility.ByteArrayToString(new byte[] { expectedChecksum }) + "] Checksum ==> " + Utility.ByteArrayToString(readData));
+                                    //TODO: checksum verification not handled, we just reply 0x00 (OK)
+                                    communicationState = X10CommState.WaitingAck;
+                                    SendMessage(new byte[] { 0x00 });
+                                }
                             }
                         }
                     }
@@ -811,7 +809,14 @@ namespace XTenLib
                         if (communicationState != X10CommState.Ready)
                         {
                             Monitor.Enter(stateLock);
-                            Monitor.Wait(stateLock, 5000);
+                            if (x10interface.GetType().Equals(typeof(CM15)))
+                            {
+                                Monitor.Wait(stateLock, 3000);
+                            }
+                            else
+                            {
+                                Monitor.Wait(stateLock, 5000);
+                            }
                             communicationState = X10CommState.Ready;
                             Monitor.Exit(stateLock);
                         }
@@ -848,6 +853,19 @@ namespace XTenLib
             }
         }
 
+        private void SetInterfaceReady()
+        {
+            Monitor.Enter(stateLock);
+            communicationState = X10CommState.Ready;
+            Monitor.Pulse(stateLock);
+            Monitor.Exit(stateLock);
+        }
+
+        private void ResetCurrentData()
+        {
+            sendQueue.Clear();
+            addressedModules.Clear();
+        }
 
         private void DebugLog(string prefix, string message)
         {

@@ -130,12 +130,10 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
 
         case 'HomeGenie.UpdateChecker':
-            if (eventLog.Property == 'InstallProgress.Message')
-            {
+            if (eventLog.Property == 'InstallProgress.Message') {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
             }
-            else
-            {
+            else {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
                 var iconImage = configurepage_GetModuleIcon(module, null);
                 popupdata = {

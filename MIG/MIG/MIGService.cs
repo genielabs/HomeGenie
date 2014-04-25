@@ -187,12 +187,12 @@ namespace MIG
 
         public void StopService()
         {
-            webGateway.Stop();
-            //_tcpgateway.Stop();
             foreach (var migInterface in Interfaces.Values)
             {
                 migInterface.Disconnect();
             }
+            webGateway.Stop();
+            //_tcpgateway.Stop();
         }
         #endregion
 

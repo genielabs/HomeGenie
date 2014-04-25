@@ -522,9 +522,10 @@ namespace HomeGenie.Service.Handlers
                         foreach (var program in newProgramsData)
                         {
                             var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
-                            if (selectedPrograms.Contains("," + program.Address.ToString() + ","))
+                            // Only restore user space programs
+                            if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
                             {
-                                if (currentProgram == null || program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
+                                if (currentProgram == null)
                                 {
                                     var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
                                     try
@@ -537,9 +538,6 @@ namespace HomeGenie.Service.Handlers
                                 }
                                 else if (currentProgram != null)
                                 {
-                                    // system programs keep original pid
-                                    //bool wasEnabled = currentProgram.IsEnabled;
-                                    currentProgram.IsEnabled = false;
                                     homegenie.ProgramEngine.ProgramRemove(currentProgram);
                                     try
                                     {
@@ -547,12 +545,11 @@ namespace HomeGenie.Service.Handlers
                                     }
                                     catch { }
                                     homegenie.ProgramEngine.ProgramAdd(program);
-                                    //program.IsEnabled = wasEnabled;
                                 }
                             }
                             else if (currentProgram != null && program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
                             {
-                                // restore system program Enabled/Disabled status
+                                // Only restore Enabled/Disabled status of system programs
                                 currentProgram.IsEnabled = program.IsEnabled;
                             }
                         }

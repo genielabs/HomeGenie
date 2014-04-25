@@ -34,14 +34,16 @@ using System.ServiceProcess;
 
 using HomeGenie;
 using HomeGenie.Service;
-using HomeGenie.WCF;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace HomeGenieService
 {
     class HomeGenieService : ServiceBase
     {
-        private HomeGenie.Service.HomeGenieService homegenie = null;
-        private ServiceHost serviceManager = null;
+        private Process homegenie = null;
+        //private ServiceHost serviceManager = null;
         //
         public HomeGenieService()
         {
@@ -58,45 +60,56 @@ namespace HomeGenieService
         {
             base.OnStart(args);
             //
-            homegenie = new HomeGenie.Service.HomeGenieService();
-            homegenie.LogEventAction += new Action<HomeGenie.Data.LogEntry>(homegenie_LogEventAction);
-            homegenie.Start();
-
-            if (serviceManager != null)
-            {
-                serviceManager.Close();
-            }
-            // Create a ServiceHost for the CalculatorService type and 
-            // provide the base address.
-            var manager = new ManagerService();
-            serviceManager = new ServiceHost(manager);
-
-            // Open the ServiceHostBase to create listeners and start 
-            // listening for messages.
-            serviceManager.Open();
-            //
-            manager.SetHomeGenieHost(homegenie);
-        }
-
-        void homegenie_LogEventAction(HomeGenie.Data.LogEntry obj)
-        {
-            if (serviceManager != null)
-            {
-                (serviceManager.SingletonInstance as ManagerService).RaiseOnEventLogged(new LogEntry() { Description = obj.Description, Domain = obj.Domain, Property = obj.Property, Source = obj.Source, Value = obj.Value });
-            }
+            StartHomeGenie();
         }
 
         protected override void OnStop()
         {
+            StopHomeGenie();
+            //
             base.OnStop();
+        }
+
+
+        private void StartHomeGenie()
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(HomeGenieProcess));
+        }
+
+        private void HomeGenieProcess(object o)
+        {
+            homegenie = new Process();
+            homegenie.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenie.exe");
+            homegenie.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            homegenie.StartInfo.UseShellExecute = false;
+            homegenie.Start();
+            homegenie.WaitForExit();
             //
-            homegenie.Stop();
-            //
-            if (serviceManager != null)
+            // if ExitCode is 1 then a restart has been required
+            //if (homegenie.ExitCode == 1)
+            //{
+            //    
+                Thread.Sleep(2000);
+                StartHomeGenie();
+            //}
+        }
+
+        private void StopHomeGenie()
+        {
+            if (homegenie != null)
             {
-                serviceManager.Close();
+                try
+                {
+                    homegenie.Kill();
+                }
+                catch { }
+                try
+                {
+                    homegenie.Dispose();
+                }
+                catch { }
             }
-            serviceManager = null;
+            homegenie = null;
         }
 
 

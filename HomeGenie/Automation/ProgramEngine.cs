@@ -353,8 +353,8 @@ namespace HomeGenie.Automation
 
         public void ProgramRemove(ProgramBlock program)
         {
-            program.Stop();
             program.IsEnabled = false;
+            program.Stop();
             automationPrograms.Remove(program);
         }
 
