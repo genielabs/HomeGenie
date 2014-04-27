@@ -67,7 +67,7 @@ namespace ZWaveLib
         private Logger logger = new Logger();
 
         private SerialPortInput serialPort;
-        private string portName = "/dev/ttyUSB0";
+        private string portName = "";
 
         private List<ZWaveMessage> pendingMessages = new List<ZWaveMessage>();
         private bool isInitialized;
@@ -188,7 +188,7 @@ namespace ZWaveLib
                 return false;
             });
             //
-            Thread.Sleep(300);
+            Thread.Sleep(100);
             ackWait.Set();
             //
             return callbackId;

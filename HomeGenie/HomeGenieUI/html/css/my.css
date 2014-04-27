@@ -226,7 +226,8 @@ input:-ms-input-placeholder {
     background-repeat: repeat-x;
 }
 
-#systemsettings_updateinstall_popup-popup {
+#systemsettings_updateinstall_popup-popup, 
+#systemsettings_zwavediscovery_popup {
     width: 90%;
     left: 5%;
     right: 5%

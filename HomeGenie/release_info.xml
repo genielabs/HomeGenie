@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r370</Version>
+  <Version>1.00 beta r371</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - fixed occasional error when adding a module to a group
-  - optimized module saving in group modules page
-  - deprecated usage of WCF in HomeGenieService and HomeGenieServiceManager (win)
-  - completed new system update manager
-  - some more fixes/improvements in XTenLib
-  - rewrote UpdateChecker, now with more logging and no need to spawn external updater process
-  - deprecated external updater process (HomeGenieUpdater)</ReleaseNote>
-  <ReleaseDate>2014-04-25T15:36:47.0000Z</ReleaseDate>
+  <ReleaseNote>  - Automation: fixed missing DeviceType update after AddVirtualModule
+  - ZWave: fixed missing modules update after interface initialization, also added discovery button and more logging to the UI</ReleaseNote>
+  <ReleaseDate>2014-04-27T12:24:11.0000Z</ReleaseDate>
 </ReleaseInfo>

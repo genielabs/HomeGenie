@@ -36,7 +36,10 @@ namespace ZWaveLib.Devices
     public enum DISCOVERY_STATUS
     {
         NODE_ADDED = 0x00,
-        NODE_REMOVED = 0x01
+        NODE_REMOVED = 0x01,
+        DISCOVERY_START = 0xDD,
+        NODE_UPDATED = 0xEE,
+        DISCOVERY_END = 0xFF
     }
 
     public class DiscoveryEventArgs : EventArgs
@@ -87,6 +90,7 @@ namespace ZWaveLib.Devices
 
         public void Discovery()
         {
+            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_START)); // Send event
             zwavePort.Discovery();
         }
 
@@ -247,6 +251,7 @@ namespace ZWaveLib.Devices
                                                 GetNodeCapabilities(args.Message[6]);
                                                 //Discovery();
                                             }
+                                            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_END)); // Send event
                                         }
                                         else if (args.Message[5] == 0x07) // ADD_NODE_STATUS_ADDING_FAIL
                                         {
@@ -267,9 +272,9 @@ namespace ZWaveLib.Devices
                                             if (nodeOperationIdCheck == args.Message[6])
                                             {
                                                 //Console.WriteLine("\n\nREMOVING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
-                                                OnDiscoveryEvent(new DiscoveryEventArgs(args.Message[6], DISCOVERY_STATUS.NODE_REMOVED)); // Send event
                                                 RemoveDevice(args.Message[6]);
                                             }
+                                            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_END)); // Send event
                                         }
                                         else if (args.Message[5] == 0x07) // REMOVE_NODE_STATUS_REMOVING_FAIL
                                         {
@@ -438,7 +443,6 @@ namespace ZWaveLib.Devices
                     if (node.NodeId != 1)
                     {
                         //Console.WriteLine("Z-Wave Updating node " + node.NodeId + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
-                        OnDiscoveryEvent(new DiscoveryEventArgs(currentCommandTargetNode, DISCOVERY_STATUS.NODE_ADDED)); // Send event
                     }
                 }
                 catch (Exception e)
@@ -453,6 +457,10 @@ namespace ZWaveLib.Devices
                 currentCommandTargetNode = nextNode.NodeId;
                 GetNodeCapabilities(currentCommandTargetNode);
             }
+            else
+            {
+                OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_END)); // Send event
+            }
         }
 
         private void CreateDevices(byte[] receivedMessage)
@@ -466,8 +474,12 @@ namespace ZWaveLib.Devices
                     //Console.WriteLine("Z-Wave Adding node " + i + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
                     devices.Add(CreateDevice(i, 0x00));
                 }
+                else
+                {
+                    OnDiscoveryEvent(new DiscoveryEventArgs(i, DISCOVERY_STATUS.NODE_UPDATED)); // Send event
+                }
             }
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
             if (nodeList.Count > 0)
             {
                 //Console.WriteLine("Z-Wave Querying node capabilities " + currentCommandTargetNode);
@@ -513,6 +525,7 @@ namespace ZWaveLib.Devices
                 node.ManufacturerSpecificResponse -= znode_ManufacturerSpecificResponse;
             }
             devices.RemoveAll(zn => zn.NodeId == nodeId);
+            OnDiscoveryEvent(new DiscoveryEventArgs(nodeId, DISCOVERY_STATUS.NODE_REMOVED)); // Send event
         }
 
         private ZWaveNode CreateDevice(byte nodeId, byte genericClass)
@@ -531,7 +544,10 @@ namespace ZWaveLib.Devices
             var znode = (ZWaveNode)Activator.CreateInstance(Type.GetType(className), new object[] { nodeId, zwavePort, genericClass });
             znode.UpdateNodeParameter += znode_UpdateNodeParameter;
             znode.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
-            //            znode.ManufacturerSpecific_Get();
+            //znode.ManufacturerSpecific_Get();
+            //
+            OnDiscoveryEvent(new DiscoveryEventArgs(nodeId, DISCOVERY_STATUS.NODE_ADDED)); // Send event
+            //
             return znode;
         }
 

@@ -33,7 +33,7 @@ namespace W800RF32
         private SerialPort serialPort;
 
         private object commLock = new object();
-        private string portName = "COM1"; //"/dev/ttyUSB0";
+        private string portName = "";
         private bool isConnected = false;
 
         

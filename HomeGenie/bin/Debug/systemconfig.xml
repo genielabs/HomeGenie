@@ -95,18 +95,18 @@
     <Interfaces>
       <Interface Domain="HomeAutomation.ZWave" IsEnabled="false">
         <Options>
-          <Option Name="Port" Value="/dev/ttyUSB0" />
+          <Option Name="Port" Value="" />
         </Options>
       </Interface>
       <Interface Domain="HomeAutomation.X10" IsEnabled="false">
         <Options>
-          <Option Name="Port" Value="USB" />
+          <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="A" />
         </Options>
       </Interface>
       <Interface Domain="HomeAutomation.W800RF" IsEnabled="false">
         <Options>
-          <Option Name="Port" Value="/dev/ttyUSB1" />
+          <Option Name="Port" Value="" />
         </Options>
       </Interface>
       <Interface Domain="Controllers.LircRemote" IsEnabled="false">

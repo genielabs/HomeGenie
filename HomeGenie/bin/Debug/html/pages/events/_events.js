@@ -122,7 +122,17 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
     switch (eventLog.Domain) {
 
         case 'HomeGenie.System':
-            if (eventLog.Value == 'STARTED') {
+            if (eventLog.Property == 'HomeAutomation.ZWave') {
+                $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                popupdata = {
+                    icon: 'images/genie.png',
+                    title: eventLog.Property + '<br />' + eventLog.Value,
+                    text: '',
+                    timestamp: date
+                };
+                break;
+            }
+            else if (eventLog.Value == 'STARTED') {
                 $('#configure_system_updateinstall_status').html('Update install complete. HomeGenie started.');
                 setTimeout(function () {
                     document.location.href = '/';

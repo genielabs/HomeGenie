@@ -312,50 +312,91 @@ namespace HomeGenie.Service
             migService_ServiceRequestPostProcess(null, cmd);
         }
 
+
         public void InterfaceEnable(string domain)
         {
-            switch (domain)
+            try
             {
-                case Domains.HomeAutomation_ZWave:
-                    if (zwaveController != null)
-                        zwaveController.DiscoveryEvent -= zwaveController_DiscoveryEvent;
-                    zwaveController = (GetInterface(domain) as MIG.Interfaces.HomeAutomation.ZWave).ZWaveController;
-                    if (zwaveController != null)
-                        zwaveController.DiscoveryEvent += zwaveController_DiscoveryEvent;
-                    GetInterface(domain).Connect();
-                    LoadModules();
-                    RefreshModules(domain, true);
-                    break;
-                case Domains.HomeAutomation_X10:
-                    GetInterface(domain).Connect();
-                    x10Controller = (GetInterface(domain) as MIG.Interfaces.HomeAutomation.X10).X10Controller;
-                    LoadModules();
-                    RefreshModules(domain, true);
-                    break;
-                case Domains.Protocols_UPnP:
-                    GetInterface(domain).Connect();
-                    // rebuild UPnP modules list
-                    modules_RefreshMisc();
-                    modules_Sort();
-                    break;
+                switch (domain)
+                {
+                    case Domains.HomeAutomation_ZWave:
+                        var zwaveInterface = (GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave);
+                        if (zwaveController != null)
+                        {
+                            zwaveController.DiscoveryEvent -= zwaveController_DiscoveryEvent;
+                        }
+                        zwaveInterface.SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_ZWave, "Port").Value.Replace("|", "/"));
+                        zwaveInterface.Connect();
+                        zwaveController = zwaveInterface.ZWaveController;
+                        if (zwaveController != null)
+                        {
+                            zwaveController.DiscoveryEvent += zwaveController_DiscoveryEvent;
+                        }
+//                    LoadModules();
+//                        RefreshModules(domain, true);
+                        break;
+                    case Domains.HomeAutomation_X10:
+                        var x10Interface = (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10);
+                        x10Interface.SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "Port").Value.Replace("|", "/"));
+                        x10Interface.SetHouseCodes(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "HouseCodes").Value);
+                        x10Interface.Connect();
+                        x10Controller = x10Interface.X10Controller;
+//                    LoadModules();
+                        RefreshModules(domain, true);
+                        break;
+                    case Domains.HomeAutomation_W800RF:
+                        var w800rfInterface = (GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.HomeAutomation.W800RF);
+                        w800rfInterface.SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_W800RF, "Port").Value);
+                        w800rfInterface.Connect();
+//                    LoadModules();
+                        RefreshModules(domain, true);
+                        break;
+                    case Domains.EmbeddedSystems_Weeco4mGPIO:
+                        var weeco4mInterface = (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO);
+                        weeco4mInterface.SetInputPin(uint.Parse(systemConfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value));
+                        weeco4mInterface.SetPulsePerWatt(double.Parse(systemConfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value));
+                        weeco4mInterface.Connect();
+                        RefreshModules(domain, true);
+                        break;
+                    default:
+                        GetInterface(domain).Connect();
+                        RefreshModules(domain, true);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "InterfaceEnable()", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
         }
 
         public void InterfaceDisable(string domain)
         {
-            switch (domain)
+            try
             {
-                case Domains.HomeAutomation_ZWave:
-                    GetInterface(domain).Disconnect();
-                    zwaveController = null;
-                    break;
-                case Domains.HomeAutomation_X10:
-                    GetInterface(domain).Disconnect();
-                    x10Controller = null;
-                    break;
-                case Domains.Protocols_UPnP:
-                    GetInterface(domain).Disconnect();
-                    break;
+                switch (domain)
+                {
+                    case Domains.HomeAutomation_ZWave:
+                        GetInterface(domain).Disconnect();
+                        if (zwaveController != null)
+                        {
+                            zwaveController.DiscoveryEvent -= zwaveController_DiscoveryEvent;
+                        }
+                        zwaveController = null;
+                        break;
+                    case Domains.HomeAutomation_X10:
+                        GetInterface(domain).Disconnect();
+                        x10Controller = null;
+                        break;
+                    default:
+                        GetInterface(domain).Disconnect();
+                        break;
+                }
+                RefreshModules(domain, true);
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "InterfaceDisable()", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
         }
 
@@ -426,6 +467,9 @@ namespace HomeGenie.Service
                     break;
                 case Domains.HomeAutomation_X10:
                     modules_RefreshX10();
+                    break;
+                default:
+                    modules_RefreshMisc();
                     break;
             }
             //
@@ -544,26 +588,15 @@ namespace HomeGenie.Service
                 Module module = null;
                 try
                 {
-                    module = Modules.Find(delegate(Module o)
-                    {
-                        return o.Domain == command.Domain && o.Address == command.NodeId;
-                    });
-                }
-                catch
-                {
-                }
-
+                    module = Modules.Find(o => o.Domain == command.Domain && o.Address == command.NodeId);
+                } catch { }
+                //
                 if (module != null)
                 {
                     // wait for ZWaveLib asynchronous response from node and raise the proper "parameter changed" event
                     if (command.Domain == Domains.HomeAutomation_ZWave)  //  && (context != null && !context.Request.IsLocal)
                     {
-                        if (command.Command == ZWave.Command.CONTROLLER_NODEADD || command.Command == ZWave.Command.CONTROLLER_NODEREMOVE)
-                        {
-                            modules_RefreshZwave();
-                            modules_Sort();
-                        }
-                        else if (command.Command == ZWave.Command.BASIC_GET)
+                        if (command.Command == ZWave.Command.BASIC_GET)
                         {
                             command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_BASIC);
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
@@ -727,41 +760,21 @@ namespace HomeGenie.Service
 
         public void RouteParameterChangedEvent(object eventData)
         {
-            bool proceed = true;
-            RoutedEvent moduleEvent = (RoutedEvent)eventData;
-            foreach (var program in masterControlProgram.Programs)
+            try
             {
-                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
-                {
-                    try
-                    {
-                        if (program.ModuleIsChangingHandler != null)
-                        {
-                            if (!program.ModuleIsChangingHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
-                            {
-                                proceed = false;
-                                break;
-                            }
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
-                    }
-                }
-            }
-            if (proceed)
-            {
-                foreach (ProgramBlock program in masterControlProgram.Programs)
+                bool proceed = true;
+                RoutedEvent moduleEvent = (RoutedEvent)eventData;
+                foreach (var program in masterControlProgram.Programs)
                 {
                     if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                     {
                         try
                         {
-                            if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
+                            if (program.ModuleIsChangingHandler != null)
                             {
-                                if (!program.ModuleChangedHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
+                                if (!program.ModuleIsChangingHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
                                 {
+                                    proceed = false;
                                     break;
                                 }
                             }
@@ -772,6 +785,33 @@ namespace HomeGenie.Service
                         }
                     }
                 }
+                if (proceed)
+                {
+                    foreach (ProgramBlock program in masterControlProgram.Programs)
+                    {
+                        if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                        {
+                            try
+                            {
+                                if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
+                                {
+                                    if (!program.ModuleChangedHandler(new Automation.Scripting.ModuleHelper(this, moduleEvent.Module), moduleEvent.Parameter))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            catch (System.Exception ex)
+                            {
+                                HomeGenieService.LogEvent(program.Domain, program.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "RouteParameterChangedEvent()", e.Message, "Exception.StackTrace", e.StackTrace); 
             }
         }
 
@@ -1153,8 +1193,26 @@ namespace HomeGenie.Service
         // fired either at startup time and after a new z-wave node has been added to the controller
         private void zwaveController_DiscoveryEvent(object source, DiscoveryEventArgs e)
         {
-            modules_RefreshZwave();
-            modules_Sort();
+            switch(e.Status)
+            {
+                case DISCOVERY_STATUS.DISCOVERY_START:
+                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Discovery Started");
+                    break;
+                case DISCOVERY_STATUS.DISCOVERY_END:
+                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Discovery Complete");
+                    modules_RefreshZwave();
+                    modules_Sort();
+                    break;
+                case DISCOVERY_STATUS.NODE_ADDED:
+                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Added node " + e.NodeId);
+                    break;
+                case DISCOVERY_STATUS.NODE_UPDATED:
+                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Updated node " + e.NodeId);
+                    break;
+                case DISCOVERY_STATUS.NODE_REMOVED:
+                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Removed node " + e.NodeId);
+                    break;
+            }
         }
 
         #endregion
@@ -1632,10 +1690,7 @@ namespace HomeGenie.Service
                             //
                             var virtualModuleWidget = Utility.ModuleParameterGet(virtualModule, Properties.WIDGET_DISPLAYMODULE);
                             //
-                            Module module = Modules.Find(delegate(Module o)
-                            {
-                                return o.Domain == virtualModule.Domain && o.Address == virtualModule.Address;
-                            });
+                            Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
 
                             if (!program.IsEnabled)
                             {
@@ -1875,13 +1930,7 @@ namespace HomeGenie.Service
                 //
                 reader.Close();
                 //
-                //
-                if (zwaveController != null)
-                {
-                    zwaveController.DiscoveryEvent -= zwaveController_DiscoveryEvent;
-                }
-                //
-                // connect enabled interfaces only
+                // add MIG interfaces
                 //
                 foreach (MIGServiceConfiguration.Interface iface in systemConfiguration.MIGService.Interfaces)
                 {
@@ -1892,61 +1941,17 @@ namespace HomeGenie.Service
                     }
                 }
                 //
-                // initialize interfaces
-                //
-                (GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave).SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_ZWave, "Port").Value.Replace("|", "/"));
-                (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "Port").Value.Replace("|", "/"));
-                (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).SetHouseCodes(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "HouseCodes").Value);
-                (GetInterface(Domains.HomeAutomation_W800RF) as MIG.Interfaces.HomeAutomation.W800RF).SetPortName(systemConfiguration.GetInterfaceOption(Domains.HomeAutomation_W800RF, "Port").Value);
-                try
-                {
-                    (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetInputPin(uint.Parse(systemConfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "InputPin").Value));
-                    (GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO) as MIG.Interfaces.EmbeddedSystems.Weeco4mGPIO).SetPulsePerWatt(double.Parse(systemConfiguration.GetInterfaceOption(Domains.EmbeddedSystems_Weeco4mGPIO, "PulsePerWatt").Value));
-                }
-                catch (Exception ex)
-                {
-                    //                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "LoadSystemConfig()", ex.Message, "Exception.StackTrace", ex.StackTrace);
-                }
-                //
-                // get direct reference to XTenLib and ZWaveLib interface drivers
-                //
-                x10Controller = (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10).X10Controller;
-                zwaveController = (GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave).ZWaveController;
-                //
-                if (zwaveController != null)
-                {
-                    zwaveController.DiscoveryEvent += zwaveController_DiscoveryEvent;
-                }
-                //
-                // setup UPnP local service
-                //
-                if (systemConfiguration.GetInterface(Domains.Protocols_UPnP) == null)
-                {
-                    // following code is needed for backward compatibility
-                    var migInterface = GetInterface(Domains.Protocols_UPnP);
-                    if (migInterface == null)
-                    {
-                        migService.AddInterface(Domains.Protocols_UPnP);
-                    }
-                    systemConfiguration.MIGService.Interfaces.Add(new MIGServiceConfiguration.Interface() { Domain = Domains.Protocols_UPnP });
-                    systemConfiguration.GetInterface(Domains.Protocols_UPnP).IsEnabled = true;
-                }
+                // initialize MIG interfaces
                 //
                 foreach (var iface in systemConfiguration.MIGService.Interfaces)
                 {
-                    var migInterface = GetInterface(iface.Domain);
-                    var isConnected = false;
-                    try
+                    if (iface.IsEnabled)
                     {
-                        isConnected = migInterface.IsConnected;
+                        InterfaceEnable(iface.Domain);
                     }
-                    catch
+                    else
                     {
-                    }
-                    if (iface.IsEnabled && !isConnected)
-                    {
-                        //Thread.Sleep(1000);
-                        migInterface.Connect();
+                        InterfaceDisable(iface.Domain);
                     }
                 }
             }

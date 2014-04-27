@@ -31,8 +31,7 @@ namespace XTenLib.Drivers
         private SerialPort serialPort;
 
         private object commLock = new object();
-        private string portName = "COM6"; //"/dev/ttyUSB1";
-        private bool isConnected = false;
+        private string portName = "";
 
         public CM11(string port)
         {

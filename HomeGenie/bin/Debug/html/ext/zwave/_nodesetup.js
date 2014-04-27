@@ -474,10 +474,6 @@ function zwave_AutoReportSet(nodeid, intervalsec) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.AutoReportSet/' + nodeid + '/' + intervalsec + '/' + (new Date().getTime()), function (data) { });
 }
 
-function zwave_NodesDiscovery() {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.Discovery/' + (new Date().getTime()), function (data) { });
-}
-
 function zwave_NodeAdd(callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.NodeAdd/' + (new Date().getTime()), function (data) { callback(data); });
 }

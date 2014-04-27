@@ -47,7 +47,7 @@ namespace SerialPortLib
         public event MessageReceivedEvent MessageReceived;
 
         private SerialPort serialPort;
-        private string portName = "/dev/ttyUSB0";
+        private string portName = "";
         private int baudRate = 115200;
 
         private bool gotReadWriteError = true;

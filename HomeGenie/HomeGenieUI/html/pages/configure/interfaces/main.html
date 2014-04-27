@@ -45,9 +45,9 @@
             <li id="configure_interfaces_zwaveoptions">
                 <span data-locale-id="configure_interfaces_zwavecommontasks">ZWave Common Tasks</span>
                 <div id="page_configure_interfaces_x10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" data-inset="true">
-                    <!--a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:zwave_NodesDiscovery()" data-role="button">Discovery New Nodes</a -->
-                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" data-role="button" _class="ui-disabled" data-icon="plus">Add Node</a>
-                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" data-role="button" _class="ui-disabled" data-icon="minus">Remove Node</a>
+                    <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" data-role="button" data-icon="search">Discovery</a>
+                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" data-role="button" data-icon="plus">Add Node</a>
+                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" data-role="button" data-icon="minus">Remove Node</a>
                 </div>
             </li>
 
@@ -290,6 +290,23 @@
                 <p data-locale-id="configure_system_zwaveaddnodeoperationtimeout" id="systemsettings_zwaveoperation_message">this operation will timeout in 10 seconds.</p>
                 <br />
                 <a data-locale-id="configure_system_zwaveaddnodeclose" id="systemsettings_zwaveoperation_close_button" href="#" data-role="button" data-rel="back">Close</a>
+            </div>
+        </div>
+
+
+
+        <div id="systemsettings_zwavediscovery_popup" data-role="popup" data-position-to="window" data-transition="pop" class="ui-corner-all">
+            <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_zwavediscoverytitle">ZWave Discovery</h1>
+            </div>
+            <div data-role="content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+
+                <p id="configure_system_zwavediscovery_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
+
+            </div>
+            <div data-role="footer" data-tap-toggle="false">
+                <a id="configure_system_zwavediscovery_modulesadd" href="#page_configure_groups" data-role="button" data-icon="gear" data-inline="false" style="margin:8px">Configure Groups and Modules</a>
             </div>
         </div>
 

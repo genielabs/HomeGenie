@@ -282,21 +282,28 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
         {
-            VirtualModule oldModule = null;
-            try { oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
+            VirtualModule virtualModule = null;
+            try { virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
             catch { }
             //
-            if (oldModule == null)
+            if (virtualModule == null)
             {
-                var module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = address, DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                module.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
-                homegenie.VirtualModules.Add(module);
+                virtualModule = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = address, DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
+                virtualModule.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                homegenie.VirtualModules.Add(virtualModule);
             }
             else
             {
-                oldModule.Domain = domain;
-                oldModule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
-                Utility.ModuleParameterSet(oldModule, Properties.WIDGET_DISPLAYMODULE, widget);
+                virtualModule.Domain = domain;
+                virtualModule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
+                Utility.ModuleParameterSet(virtualModule, Properties.WIDGET_DISPLAYMODULE, widget);
+            }
+            // update real module device type and widget
+            Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+            if (module != null)
+            {
+                module.DeviceType = virtualModule.DeviceType;
+                Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
             }
             //
             homegenie.modules_RefreshVirtualModules();
@@ -324,21 +331,28 @@ namespace HomeGenie.Automation.Scripting
             for (int x = startAddress; x <= endAddress; x++)
             {
 
-                VirtualModule oldmodule = null;
-                try { oldmodule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString()); }
+                VirtualModule virtualModule = null;
+                try { virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString()); }
                 catch { }
                 //
-                if (oldmodule == null)
+                if (virtualModule == null)
                 {
-                    var module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = x.ToString(), DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                    module.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
-                    homegenie.VirtualModules.Add(module);
+                    virtualModule = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = x.ToString(), DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
+                    virtualModule.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                    homegenie.VirtualModules.Add(virtualModule);
                 }
                 else
                 {
-                    oldmodule.Domain = domain;
-                    oldmodule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
-                    Utility.ModuleParameterSet(oldmodule, Properties.WIDGET_DISPLAYMODULE, widget);
+                    virtualModule.Domain = domain;
+                    virtualModule.DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type);
+                    Utility.ModuleParameterSet(virtualModule, Properties.WIDGET_DISPLAYMODULE, widget);
+                }
+                // update real module device type and widget
+                Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+                if (module != null)
+                {
+                    module.DeviceType = virtualModule.DeviceType;
+                    Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
                 }
 
             }

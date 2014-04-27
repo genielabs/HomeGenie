@@ -115,13 +115,12 @@ namespace HomeGenie.Service.Handlers
                             //
                             if (homegenie.SystemConfiguration.GetInterface(Domains.Controllers_LircRemote).IsEnabled)
                             {
-                                homegenie.GetInterface(Domains.Controllers_LircRemote).Connect();
+                                homegenie.InterfaceEnable(Domains.Controllers_LircRemote);
                             }
                             else
                             {
-                                homegenie.GetInterface(Domains.Controllers_LircRemote).Disconnect();
+                                homegenie.InterfaceDisable(Domains.Controllers_LircRemote);
                             }
-                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "CameraInput.GetIsEnabled":
@@ -134,13 +133,12 @@ namespace HomeGenie.Service.Handlers
                             //
                             if (homegenie.SystemConfiguration.GetInterface(Domains.Media_CameraInput).IsEnabled)
                             {
-                                homegenie.GetInterface(Domains.Media_CameraInput).Connect();
+                                homegenie.InterfaceEnable(Domains.Media_CameraInput);
                             }
                             else
                             {
-                                homegenie.GetInterface(Domains.Media_CameraInput).Disconnect();
+                                homegenie.InterfaceDisable(Domains.Media_CameraInput);
                             }
-                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "ZWave.GetIsEnabled":
@@ -261,33 +259,31 @@ namespace HomeGenie.Service.Handlers
                             //
                             if (homegenie.SystemConfiguration.GetInterface(Domains.HomeAutomation_W800RF).IsEnabled)
                             {
-                                homegenie.GetInterface(Domains.HomeAutomation_W800RF).Connect();
+                                homegenie.InterfaceEnable(Domains.HomeAutomation_W800RF);
                             }
                             else
                             {
-                                homegenie.GetInterface(Domains.HomeAutomation_W800RF).Disconnect();
+                                homegenie.InterfaceDisable(Domains.HomeAutomation_W800RF);
                             }
-                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "RaspiGPIO.GetIsEnabled":
                             migCommand.Response = JsonHelper.GetSimpleResponse((homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled ? "1" : "0"));
                             break;
 
-                        case "RaspiGPIO.SetIsEnabled":
-                            homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled = (migCommand.GetOption(1) == "1" ? true : false);
-                            homegenie.SystemConfiguration.Update();
-                            //
-                            if (homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled)
-                            {
-                                homegenie.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).Connect();
-                            }
-                            else
-                            {
-                                homegenie.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).Disconnect();
-                            }
-                            homegenie.modules_RefreshMisc();
-                            break;
+                        //case "RaspiGPIO.SetIsEnabled":
+                        //    homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled = (migCommand.GetOption(1) == "1" ? true : false);
+                        //    homegenie.SystemConfiguration.Update();
+                        //    //
+                        //    if (homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled)
+                        //    {
+                        //        homegenie.InterfaceEnable(Domains.EmbeddedSystems_RaspiGPIO);
+                        //    }
+                        //    else
+                        //    {
+                        //        homegenie.InterfaceDisable(Domains.EmbeddedSystems_RaspiGPIO);
+                        //    }
+                        //    break;
 
                         case "Weeco4mGPIO.GetIsEnabled":
                             migCommand.Response = JsonHelper.GetSimpleResponse((homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled ? "1" : "0"));
@@ -299,13 +295,12 @@ namespace HomeGenie.Service.Handlers
                             //
                             if (homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).IsEnabled)
                             {
-                                homegenie.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).Connect();
+                                homegenie.InterfaceEnable(Domains.EmbeddedSystems_Weeco4mGPIO);
                             }
                             else
                             {
-                                homegenie.GetInterface(Domains.EmbeddedSystems_Weeco4mGPIO).Disconnect();
+                                homegenie.InterfaceDisable(Domains.EmbeddedSystems_Weeco4mGPIO);
                             }
-                            homegenie.modules_RefreshMisc();
                             break;
 
                         case "Weeco4mGPIO.SetInputPin":

@@ -165,7 +165,12 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
-25/04/2014 1.00 beta rev 370
+27/04/2014 1.00 beta rev 371
+	- Automation: fixed missing DeviceType update after AddVirtualModule
+	- ZWave: fixed missing modules update after interface initialization, also added discovery button and more logging to the UI
+
+26/04/2014 1.00 beta rev 370
+	- ZWaveLib: fixed missing modules list update after node add/remove
 	- fixed occasional error when adding a module to a group
 	- optimized module saving in group modules page
 	- deprecated usage of WCF in HomeGenieService and HomeGenieServiceManager (win)

@@ -194,21 +194,21 @@ namespace MIG.Interfaces.HomeAutomation
         {
             var os = Environment.OSVersion;
             var platformId = os.Platform;
-            //
-            switch (platformId)
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    portName = "COM7";
-                    break;
-                case PlatformID.Unix:
-                case PlatformID.MacOSX:
-                default:
-                    portName = "/dev/ttyUSB0";
-                    break;
-            }
+            ////
+            //switch (platformId)
+            //{
+            //    case PlatformID.Win32NT:
+            //    case PlatformID.Win32S:
+            //    case PlatformID.Win32Windows:
+            //    case PlatformID.WinCE:
+            //        portName = "COM7";
+            //        break;
+            //    case PlatformID.Unix:
+            //    case PlatformID.MacOSX:
+            //    default:
+            //        portName = "/dev/ttyUSB0";
+            //        break;
+            //}
         }
 
         #region MIG Interface members

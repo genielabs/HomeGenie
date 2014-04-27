@@ -36,7 +36,7 @@ namespace HomeGenie.Automation.Scripting
         private Action<byte[]> dataReceived;
         private Action<string> stringReceived;
         private Action<bool> statusChanged;
-        private string portName = "/dev/ttyUSB0";
+        private string portName = "";
 
         public SerialPortHelper()
         {
