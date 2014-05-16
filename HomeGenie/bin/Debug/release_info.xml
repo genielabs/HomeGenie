@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r371</Version>
+  <Version>1.00 beta r372</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>  - Automation: fixed missing DeviceType update after AddVirtualModule
-  - ZWave: fixed missing modules update after interface initialization, also added discovery button and more logging to the UI</ReleaseNote>
-  <ReleaseDate>2014-04-27T12:24:11.0000Z</ReleaseDate>
+  <ReleaseNote>	- Automation: fixed bug in AddControlWidget
+	- Deprecated module types: Temperature, Fan, Thermostat
+	- Widgets: added localization support
+	- Widgets: added jkUtils widgets "Solar Altitude" and "Open Weather"
+	- WebService: added automatic charset encoding
+	- X10: fixed reception of RF X10 Security codes
+	- UI: added user selectable icons for modules
+	- ZWave: updated PepperOne database
+	- Other minor fixes and improvements</ReleaseNote>
+  <ReleaseDate>2014-05-13T00:11:23.0000Z</ReleaseDate>
 </ReleaseInfo>

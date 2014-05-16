@@ -251,6 +251,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 using (var webClient = new WebClient())
                 {
+                    webClient.Encoding = Encoding.UTF8;
                     if (this.networkCredential != null)
                     {
                         webClient.Credentials = networkCredential;

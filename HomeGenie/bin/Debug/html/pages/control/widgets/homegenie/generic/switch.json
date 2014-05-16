@@ -95,7 +95,7 @@
 			var w = Math.round(watts.Value.replace(',', '.'));
 			if (w > 0)
 			{
-				watts = '&nbsp;&nbsp;&nbsp;' + w + 'W';
+				watts = w + 'W';
 			} else watts = '';
 		} else watts = '';
 		//
@@ -113,6 +113,14 @@
 			}
             //
             level = this.GetLevel(level);
+			if (level != 'OFF')
+			{
+				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
+			}
+			else
+			{
+				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="margin-right:2px;vertical-align:-3px" />';
+			}
 		} else level = '';
         //
         var level1 = '';
@@ -127,31 +135,34 @@
             if (level1 != null)
             {
                 level1 = this.GetLevel(level1);
-                //level1 = ' [1]:' + level1;
             } else level1 = '';
             //
             level2 = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.MultiInstance.SwitchBinary.2"); // instance 1 level
             if (level2 != null)
             {
                 level2 = this.GetLevel(level2);
-                //level2 = ' [2]:' + level2;
             } else level2 = '';
         }
         else
         {
             controlpopup.find('[data-ui-field=zwave-multi-options]').hide();
         }
-    	this.StatusText = level + ' ' + level1 + ' ' + level2 + ' ' + watts;
+    	this.StatusText += level + ' ' + level1 + ' ' + level2 + '&nbsp;&nbsp;&nbsp; ' + watts;
 		//
 		// set icon image
 		//
-		if (level == 'OFF')
+		var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
+		if (widgeticon != null && widgeticon.Value != '')
+        {
+            this.IconImage = widgeticon.Value;
+        }
+        else if (level != 'OFF')
 		{
-			this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_off.png';
+			this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_on.png';
 		}
 		else
 		{
-			this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_on.png';
+			this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_off.png';
 		}
 		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
 		//
@@ -169,15 +180,15 @@
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
         //
-    	controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+    	controlpopup.find('[data-ui-field=status]').html(level + '<br />' + watts);
 		//
         controlpopup.find("input[name*=zwave-multi-check]:checked").each(function () {
             if ($(this).val() == '0')
-    		    controlpopup.find('[data-ui-field=status]').html(level);
+    		    controlpopup.find('[data-ui-field=status]').html(level + '<br />' + watts);
             else if ($(this).val() == '1')
-                controlpopup.find('[data-ui-field=status]').html(level1);
+                controlpopup.find('[data-ui-field=status]').html(level1 + '<br />' + watts);
             else if ($(this).val() == '2')
-                controlpopup.find('[data-ui-field=status]').html(level2);
+                controlpopup.find('[data-ui-field=status]').html(level2 + '<br />' + watts);
         });
     },
 

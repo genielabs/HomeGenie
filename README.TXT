@@ -165,6 +165,17 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+13/05/2014 1.00 beta rev 372
+	- Automation: fixed bug in AddControlWidget
+	- Deprecated module types: Temperature, Fan, Thermostat
+	- Widgets: added localization support
+	- Widgets: added jkUtils widgets "Solar Altitude" and "Open Weather"
+	- WebService: added automatic charset encoding
+	- X10: fixed reception of RF X10 Security codes
+	- UI: added user selectable icons for modules
+	- ZWave: updated PepperOne database
+	- Other minor fixes and improvements
+
 27/04/2014 1.00 beta rev 371
 	- Automation: fixed missing DeviceType update after AddVirtualModule
 	- ZWave: fixed missing modules update after interface initialization, also added discovery button and more logging to the UI

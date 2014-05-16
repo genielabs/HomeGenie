@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "34"
+        "@value": "52"
       },
       "appVersion": {
-        "@value": "16"
+        "@value": "24"
       },
       "appSubVersion": {
-        "@value": "16"
+        "@value": "24"
       },
       "basicClass": {
         "@value": "04"
@@ -39,7 +39,7 @@
         "@value": "10"
       },
       "specificClass": {
-        "@value": "01"
+        "@value": "00"
       },
       "optional": {
         "@value": "true"
@@ -48,103 +48,85 @@
         "@value": "true"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Zwischenstecker mit Messfunktion und Multicolor-LED"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Wall Plug Switch with Metering and multicolor LED indicator"
-          },
-          {
-            "@xml:lang": "ru",
-            "#text": "Модуль в розетку с измерением электропотребления и разноцветной LED подсветкой"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Wall Plug"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          },
-          {
-            "@xml:lang": "ru"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Dreifach-Klick auf Taste"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Tripple Click on Button"
-          },
-          {
-            "@xml:lang": "ru",
-            "#text": "Тройное нажатие на кнопку"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Triple click the B button, located on the Plug's casing"
+        }
       },
-      "productName": "Wall Plug FGWPE-101",
+      "productName": "FGWPE/F-101",
       "brandName": "Fibaro",
-      "productCode": "FGWPE-101"
+      "productLine": "Fibaro",
+      "productCode": "101",
+      "productVersion": "22.23/2.1"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0020",
-          "@inNIF": "false"
+          "@id": "0072"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0070"
         },
         {
           "@id": "0085",
           "@version": "2"
         },
         {
-          "@id": "0086"
-        },
-        {
-          "@id": "0071",
-          "@version": "0"
-        },
-        {
-          "@id": "0072"
-        },
-        {
-          "@id": "0070"
-        },
-        {
-          "@id": "0031",
+          "@id": "008e",
           "@version": "2"
+        },
+        {
+          "@id": "0025",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0073"
         },
         {
           "@id": "0032",
           "@version": "2"
         },
         {
-          "@id": "0073"
+          "@id": "0031",
+          "@version": "2"
         },
         {
-          "@id": "007a"
+          "@id": "007a",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0020"
         },
         {
           "@id": "009c",
-          "@version": "0"
+          "@controlled": "true",
+          "@inNIF": "false"
         },
         {
-          "@id": "0025"
+          "@id": "0071",
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
@@ -152,62 +134,32 @@
       "assocGroup": [
         {
           "@number": "3",
-          "@maxNodes": "1",
+          "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Sendet Schaltzustand zu einem einzigen Gerät"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "reports relais status to one device"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправляет статус ВКЛ/ВЫКЛ контроллеру"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "III association group reports relay's status to just one device,\r\nZ-Wave network's main controller by default. It's not recommended\r\nto modify settings of this association group."
+            }
           }
         },
         {
           "@number": "2",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Sendet Kommando in Abhängigkeit der Last"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "send commands depending on current load"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправляет ВКЛ/ВЫКЛ в зависимости от потребляемой мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "II association group allows for sending control commands to\r\nassociated devices depending on the current load. This association\r\ngroup is configured through the advanced parameters no. 50, 51\r\nand 52."
+            }
           }
         },
         {
           "@number": "1",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Schaltstatus: Sendet ein Kommando bei jeder Änderung des Schaltstatus"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "plug status. Will send BASIC command whenever the status of the plug changes"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Включает/Выключает устройства командой BASIC при нажатии на кнопку B"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "I association group is assigned to Plugs status - On / Off. Allows\r\nfor sending control command to associated devices whenever the\r\nPlug is turned On or Off."
+            }
           }
         }
       ]
@@ -216,463 +168,75 @@
       "configParam": [
         {
           "@number": "1",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Immer AN"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Always On Function"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Всегда включен"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Always on function"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Wenn aktiviert, bleibt der Schalter immer im Einschaltzustand"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Once activated, Wall Plug will keep a connected device constantly ON, will stop reacting to alarm frames and B-button push"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Wall Plug всегда включен, его нельзя выключить ни кнопкой B, ни удаленно. В данном режиме Wall Plug работает как измеритель мощности и энергопотребление. Кроме того, Wall Plug не будет выключаться при получении сигнала тревоги с другого устройства Z-Wave (параметр 35 будет игнорироваться). Wall Plug может быть выключено только в случае превышения заданной пользователем мощности (параметр 70). В таком случае, Wall Plug может быть снова включено нажатием кнопки B либо удаленно. По умолчанию защита от перегрузки неактивна. "
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "active"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Всегда включен, нельзя отключить"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "inactive"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Можно отключить"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Once activated, Wall Plug will keep a connected device constantly\r\nON, will stop reacting to alarm frames and B-button push.\r\n\"Always on\" function turns the Plug into a power and energy meter.\r\nAlso, connected device will not be turned off upon receiving an alarm\r\nframe from another Z-Wave device (parameter 35 will be ignored).\r\nIn \"Always on\" mode, connected device may be turned off only after\r\nuser defined power has been exceeded (parameter 70). In such a\r\ncase, connected device can be turned on again by pushing the\r\nB-button or sending a control frame. By default, overload protection\r\nis inactive."
             }
-          ]
+          }
         },
         {
           "@number": "16",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zurück zu altem Status nach Stromausfall"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Remember device status after power failure"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Восстанавливать состояние реле после отключения питания"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Remember device status after power failure"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert das Verhalten nach einem Stromausfall"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Define how will the Plug react after the power supply is back on"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Определяет восстанавливать ли состояние реле на то, которое было до отключения питания устройства."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "nicht zurück zu altem Status"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Wall Plug does not memorize its state after a power failure. Connected device will be off after the power supply is reconnected"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не восстанавливать. После подачи питания устройство будет в состоянии \"Выключено\""
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "zurück zu altem Status"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Wall Plug memorizes its state after a power failure"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Восстанавливать"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Define how will the Plug react after the power supply is back on.\r\nDefault setting: 1\r\nAvailable settings:\r\n0 - Wall Plug does not memorize its state after a power failure.\r\nConnected device will be off after the power supply is\r\nreconnected.\r\n1 - Wall Plug memorizes its state after a power failure."
             }
-          ]
+          }
         },
         {
           "@number": "34",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "3f",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Reaktion auf Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Reaction to Alarm"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "На какие сигналы тревоги (Alarm) реагировать"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reaction to alarms"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Alarmtypen, auf die der Schalter reagiert"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the alarm types the plug reacts to. Set value may be a sum of available values, e.g. set value = 5 means the Plug will respond to general alarm (1) and CO alarm (4)."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Параметр позволяет выбрать на какие сигналы тревоги будет реагировать Wall Plug. Если нужно реагировать на несколько сигналов тревоги, то просуммируйте их значения. Например, для реагирования на Задымление (2) и Протечку (32), нужно задать значение 2 + 32 = 34."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Allgemeiner Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "General Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Общий сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rauchalarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Smoke Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Задымление, сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "CO Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "CO Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "CO, сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "08",
-              "@to": "08",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "CO2 Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "CO2 Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "CO2, сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "10",
-              "@to": "10",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Übertemperaturalarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "High Temperature Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Высокая температура, сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "20",
-              "@to": "20",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Überflutungsalarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Flood Alarm"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Протечка, сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "3f",
-              "@to": "3f",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Alle Alarme"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "All Alarms"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Все сигналы тревоги"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Define Z-Wave network alarms to which the Wall Plug will respond.\r\nAvailable settings: 0 - 63.\r\n1 - general alarm,\r\n2 - smoke alarm,\r\n4 - CO alarm,\r\n8 - CO2 alarm,\r\n16 - high temperature alarm,\r\n32 - flood alarm,\r\n63 - device responds to all types of alarm frames.\r\nSet value may be a sum of available values, e.g. set value = 5 means\r\nthe Plug will respond to general alarm (1) and CO alarm (4)."
             }
-          ]
+          }
         },
         {
           "@number": "35",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Antwort auf Alarmmeldung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Response to Alarm Frames"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Как реагировать на сигнал тревоги"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Wall Plug's response to alarm frames"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Aktion des Schalters bei Alarm. Im \"Immer An\" Modus wird diese Einstellung ignoriert."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the response of the plug to an alarm. In \"always on\" mode this setting is ignored."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Параметр позволяет выбрать, как Wall Plug будет реагировать на сигнал тревоги. Если в параметре №1 выбран \"Всегда включен, нельзя отключить\", то этот параметр игнорируется и Wall Plug никак не будет реагировать на сигнал тревоги."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Keine Reaktion"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "No Reaction"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не реагировать"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aktivieren Sie das angeschlossene Gerät."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Turn on connected device, LED ring signals alarm through time set in Parameter 39 or until alarm is turned off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Включить подключенное устройство, LED кольцо будет моргать столько секунд, сколько указано в параметре 39 или пока не будет устранен сигнал тревоги."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Schalten Sie das angeschlossene Gerät."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Turn off connected device, LED ring signals alarm through time set in Parameter 39 or until alarm is turned off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Выключить подключенное устройство, LED кольцо будет моргать столько секунд, сколько указано в параметре 39 или пока не будет устранен сигнал тревоги."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Ein-und ausschalten das Gerät mal in der Sekunde."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Change Device state every second. In alarm mode the plug does not report status changes, power changes and ignores alarm frames. After alarm time (Parameter 39) has passed or alarm was canceled device is set back to previous state"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Включать и выключать устройство раз в секунду. В режиме сигнала тревоги Wall Plug не посылает отчет о своем состоянии, изменении электропотребления и игнорирует другие сигналы тревоги. Устройство вернется к своему первоначальному состоянию  после того как время сигнала тревоги закончится (Параметр 39) или сигнал тревоги будет устранен."
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter defines how the Wall Plug will respond to alarms (device's\r\nstatus change)\r\nAvailable settings:\r\n0 - no reaction,\r\n1 - turn on connected device. LED ring signals an alarm through\r\ndefined time period (parameter 39) or untill the alarm is\r\ncancelled.\r\n2 - turn off connected device. LED ring signals an alarm through\r\ndefined time period (parameter 39) or untill the alarm is\r\ncancelled.\r\n3 - cyclically change device state, each 1second. In alarm mode\r\nWall Plug does not report status change, power changes,\r\nignores alarm frames. After the defined time period has passed\r\n(parameter 39) or after the alarm cancellation, connected\r\ndevice is set to the previous state."
             }
-          ]
+          }
         },
         {
           "@number": "39",
@@ -680,55 +244,15 @@
           "@size": "2",
           "@default": "0258",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Alarm Dauer"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Alarm duration"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Время сигнала тревоги"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm duration"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Aktion des Schalters bei Alarm. Im \"Immer An\" Modus wird diese Einstellung ignoriert."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Wall Plug's alarm mode duration. If a device sending an alarm frame through the Z-Wave network sets alarm duration as well, this parameter's settings are ignored."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Время действия сигнала тревоги. Если устройство приславшее сигнал тревоги, прислало еще и время действия сигнала тревоги, то этот параметр игнорируется. Также этот параметр игнорируется если в параметре №1 выбран \"Всегда включен, нельзя отключить\"."
-              }
-            ]
-          },
-          "value": {
-            "@from": "0000",
-            "@to": "ffff",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "sec"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "sec"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "секунды"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Wall Plug's alarm mode duration. If a device sending an alarm frame\r\nthrough the Z-Wave network sets alarm duration as well, this\r\nparameter's settings are ignored.\r\nAvailable settings: 1 - 65536 (seconds)"
             }
           }
         },
@@ -738,55 +262,15 @@
           "@size": "1",
           "@default": "50",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Sofortiger Bericht über Stromverbrauch"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Immediate Power Report"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отчет при изменении мгновенной потребляемой мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Immediate power report"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die notwendige Änderung im Stromverbrauch, die zu einer sofortigen Absendung eines Reports führt. Achtung: Bei stark schwankenden Lasten kann dies zu einer Überlastung des Z-Wave-Netzes führen."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Parameter defines by how much power load must change, in percents, to be reported to the main controller, with the highest priority in the Z-Wave network. By default, Fibaro Wall Plug immediately sends power report if the power load changes by 80%. NOTE: In extreme cases, reports may be sent every second if rapid and significant power load changes occur. Frequent reporting may overload the Z-Wave network so these parameter's settings should reflect significant changes in power load only."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "На сколько процентов должно измениться мгновенное потребление мощности, чтобы отправить отчет контроллеру. По умолчанию Wall Plug отправляет отчет, если потребление мгновенной мощности изменилось на 85%. Если установить маленькое значение, то отчеты будут отправляться очень часто, что может привести к перегрузке Z-Wave сети, в таком случае отчеты будут отправляться раз в секунду. 100% означает отключение отправки отчетов."
-              }
-            ]
-          },
-          "value": {
-            "@from": "01",
-            "@to": "64",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "%"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "%"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "%"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter defines by how much power load must change, in\r\npercents, to be reported to the main controller, with the highest\r\npriority in the Z-Wave network. By default, Fibaro Wall Plug\r\nimmediately sends power report if the power load changes by 80%.\r\nAvailable settings: 1 - 100 (%).\r\nValue of 100 (%) means the reports are turned off."
             }
           }
         },
@@ -796,51 +280,15 @@
           "@size": "1",
           "@default": "0f",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Änderung der Leistung zum Generieren eines Reports"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Standard Power Load Reporting"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отчет при изменении электропотребления"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Standard power load reporting"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die notwendige Änderung der Leistungsaufnahme, um einen entsprechenden automatischen Report zu generieren"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the change in power consumption to cause an unsolicided power report"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "На сколько процентов должно измениться электропотребление, чтобы отправить отчет контроллеру. По умолчанию Wall Plug отправляет отчет, если электропотребление изменилось на 15%. По умолчанию изменения электропотребления могут отправляться до 5 раз за 30 секунд. Wall Plug отправляет 5 отчетов за время указанное в параметре 43. 100% означает отключение отправки отчетов."
-              }
-            ]
-          },
-          "value": {
-            "@from": "00",
-            "@to": "64",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "%"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "%"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter defines by how much power load must change, in\r\npercents, to be reported to the main controller. By default, Fibaro\r\nWall Plug sends power report if the power load changes by 15%.\r\nBy default such changes in power load may be reported up to 5 times\r\nper 30 seconds. Wall Plug sends 5 reports during time period\r\nspecified in paramater 43.\r\nAvailable settings: 1 - 100 (%)\r\nValue of 100 (%) means the reports are turned off."
             }
           }
         },
@@ -850,159 +298,35 @@
           "@size": "1",
           "@default": "1e",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Regelmäßiges Senden eines Reports über die Stromaufnahme"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Power Reporting Frequency"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Как часто отправлять отчет о электропотреблении"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Power reporting frequency"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert den Interval, in dem ein automatischer Report über den Stromverbrauch ausgesandt wird."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the frequency to send an unsolicided power report"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Данный параметр определяет, как часто будут отправляться отчеты о электропотреблении (параметр 42). По умолчанию Wall Plug отправляет до 5 отчетов каждые 30 секунд, при условии изменения электропотребления на 15%."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "01",
-              "@to": "fe",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "sec"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "sec"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "секунды"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "ff",
-              "@to": "ff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Reports will be sent only as a result of parameter 47 settings or in case of polling"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Reports will be sent only as a result of parameter 47 settings or in case of polling"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отчет не отправляется самостоятельно. Отчет может быть получен опросом Wall Plug и отправка отчета зависит от параметра 47. "
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This parameter defines how frequently standard power reports\r\n(parameter 42) will be sent. By default Wall Plug sends up to 5\r\nreports each 30 seconds, provided the power load changes by 15%.\r\nAvailable settings: 1 - 254 (s)\r\nValue of 255 - Reports will be sent only as a result of parameter 47\r\nsettings or in case of polling."
             }
-          ]
+          }
         },
         {
           "@number": "45",
           "@type": "range",
           "@size": "1",
-          "@default": "10",
+          "@default": "0a",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Automatisches Senden eines Reportes über Stromverbrauch bei Verbrauchsänderung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Reporting Changes in energy consumed by controlled devices"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Обновление информации о энергопотреблении устройством"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reporting changes in energy consumed by controlled devices"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Änderung im Stromverbrauch, bei der ein automatischer Report über den Stromverbrauch ausgesandt wird."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines needed change of power draw to generate an unsoliceded power report"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Новое значение энергопотребления вычисляется суммированием с предыдущем значением. Доступные значения: 1-254 (0.01кВтч - 2.54кВтч)"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "01",
-              "@to": "fe",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "* 10 W"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "* 10 W"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "0.01КВтч"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "ff",
-              "@to": "ff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Changes in consumed energy will not be reported. Reports will be sent only in case of polling."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Changes in consumed energy will not be reported. Reports will be sent only in case of polling."
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не отправлять отчет."
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "New, reported energy value is calculated based on last reported\r\nvalue.\r\nAvailable settings: 1 - 254 (0,01kWh - 2,54kWh).\r\nValue of 255 - changes in consumed energy will not be reported.\r\nReports will be sent only in case of polling."
             }
-          ]
+          }
         },
         {
           "@number": "47",
@@ -1010,215 +334,51 @@
           "@size": "2",
           "@default": "0e10",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitinterval zum Senden eines Reportes ohne Änderung im Verbrauch"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time Period between reports on power and energy consumption"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Временной интервал отправки отчета о энергопотреблении и мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time period between reports on power load and energy consumption"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert den Interval, in dem ein automatischer Report über den Stromverbrauch ausgesandt wird, wenn keine Änderung des Stromverbrauches erkannt wurde"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the time pweriod between reports sent when changes in power load have nit been reported."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Параметр определяет как часто отправлять отчет о энергопотреблении и мощности, когда изменения энергопотреблении не фиксируются. По умолчанию отчет отправляется раз в час. Если выбрано \"Не отправлять отчет периодически\", тогда отчет будет отправляться только, если произошло изменение энергопотребления (параметры 40,42,43,45) или опрос с контроллера."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "0001",
-              "@to": "fffe",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "sec"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "sec"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "секунды"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "ffff",
-              "@to": "ffff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "No periodic reports. Reports will be sent only in case of power load / energy consumption changes (parameters 40,42,43,45) or in case of polling."
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "No periodic reports. Reports will be sent only in case of power load / energy consumption changes (parameters 40,42,43,45) or in case of polling."
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не отправлять отчет периодически."
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter defines time period between reports sent when changes\r\nin power load have not been recorded. By default, if power load\r\nchanges have not been recorded, reports are sent every hour.\r\nAvailable settings: 1 - 65534 (s)\r\nValue of 65535 - no periodic reports. Reports will be sent only in\r\ncase of power load / energy consumption changes (parameters 40,\r\n42, 43,45) or in case of polling."
             }
-          ]
+          }
         },
         {
           "@number": "49",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Messen des Eigenstromverbrauches"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Metering Energy consumed by Power Plug itself"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Добавлять к измерениям энергию потребляемую самим Wall Plug"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Metering energy consumed by the Wall Plug itself"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert, ob der Eigenstromverbrauch berücksichtigt werden soll."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines whether or not the own power consumption shall be recorded."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Этот параметр определяет, следует ли включать в замер количество энергии, потребляемой самим Wall Plug."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "inactive"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не добавлять"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "active"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Добавлять"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This parameter determines whether energy metering should include\r\nthe amount of energy consumed by the Wall Plug itself.\r\nResults are being added to energy consumed by controlled device.\r\nAvailable settings:\r\n0 - function inactive,\r\n1 - function activated."
             }
-          ]
+          }
         },
         {
           "@number": "50",
           "@type": "range",
-          "@size": "1",
-          "@default": "2c",
+          "@size": "2",
+          "@default": "012c",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "unterer Leistungsschwellwert"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "DOWN value"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Нижний порог мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "DOWN value"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert den Bereich des Stromverbrauches, der am Gerät signalisiert wird"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Lower power threshold, used in parameter 52 (value cannot be higher than a value specified in parameter 51)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Нижний порог мощности, используемый в параметре 52, не может превышать значение верхнего порога, указанное в параметре 51. Доступные значения: 0 - 25 000 (0,0Вт - 2 500Вт)."
-              }
-            ]
-          },
-          "value": {
-            "@from": "00",
-            "@to": "a8",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "0.1Вт"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Lower power threshold, used in parameter 52.\r\nAvailable settings: 0 - 25 000 (0,0W - 2 500W)\r\nDOWN value cannot be higher than a value specified in parameter\r\n51."
             }
           }
         },
@@ -1228,237 +388,35 @@
           "@size": "2",
           "@default": "01f4",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "oberer Leistungsschwellwert"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "UP value"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Верхний порог мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "UP value"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert den Bereich des Stromverbrauches, der am Gerät signalisiert wird"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Upper power threshold, used in parameter 52 (value cannot be lower than a value specified in parameter 50)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Верхний порог мощности, используемый в параметре 52, не может быть меньше значения нижнего порога, указанного в параметре 51. Доступные значения: 0 - 25 000 (0,0Вт - 2 500Вт)."
-              }
-            ]
-          },
-          "value": {
-            "@from": "0010",
-            "@to": "61a8",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "0.1Вт"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Upper power threshold, used in parameter 52.\r\nAvailable settings: 1 - 25 000 (0,1W - 2 500W)\r\nUP value cannot be lower than a value specified in parameter 50."
             }
           }
         },
         {
           "@number": "52",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "06",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Aktion bei Erreichen des definierten Schwellwertes (Parameter 50/51)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Action in case of exceeding defined power values (Parameter 50/51)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Действия в случае превышения верхнего и нижнего порогов мощности"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Action in case of exceeding defined power values (parameters 50 and 51)"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert, welche Aktion bei Geräten in Assoziationsgruppe 2 bei Erreichen des Schwellwertes des Stromverbrauches durchgeführt werden soll"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "definies the action for devices in association group 2 when power trigger value is reached."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Устройствам из группы 2 будет отправлена команда, если мощность опустится ниже значения указанного в параметре 50 или поднимется выше значения указанного в параметре 51."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "inactive"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отключено"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Schaltet Geräte der Assoziationsgruppe bei Erreichen des DOWN Wertes ein"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "turns associated devices ON when when power drops below DOWN value"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Включить устройства, когда мощность станет меньше НИЖНЕГО значения"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Schaltet Geräte der Assoziationsgruppe bei Erreichen des DOWN Wertes aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "turns associated devices OFF when when power drops below DOWN value"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Выключить устройства, когда мощность станет меньше НИЖНЕГО значения"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Schaltet Geräte der Assoziationsgruppe bei Erreichen des UP Wertes aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "turns associated devices ON when when power drops below UP value"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Включить устройства, когда мощность станет больше ВЕРХНЕГО значения"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Schaltet Geräte der Assoziationsgruppe bei Erreichen des UP Wertes ein"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "turns associated devices OFF when when power drops below UP value"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Выключить устройства, когда мощность станет больше ВЕРХНЕГО значения"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "05",
-              "@to": "05",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Kombination von Option 1 und Option 4"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Option 1 and 4 combined"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Опции 1 и 4 месте. Включить устройства, когда мощность станет меньше НИЖНЕГО значения, Выключить устройства, когда мощность станет больше ВЕРХНЕГО значения."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "06",
-              "@to": "06",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Kombination von Option 2 und Option 3"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Option 2 and 3 combined"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Опции 2 и 3 месте. Выключить устройства, когда мощность станет меньше НИЖНЕГО значения, Включить устройства, когда мощность станет больше ВЕРХНЕГО значения"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter deifines the way 2nd association group devices are\r\ncontrolled, depending on the current power load.\r\nAvailable settings:\r\n0 - function inactive,\r\n1 - turn the associated devices on, once the power drops below\r\nDOWN value (parameter 50),\r\n2 - turn the associated devices off, once the power drops below\r\nDOWN value (parameter 50),\r\n3 - turn the associated devices on, once the power rises above UP\r\nvalue (parameter 51),\r\n4 - turn the associated devices off, once the power rises above UP\r\nvalue (parameter 51),\r\n5 - 1 and 4 combined. Turn the associated devices on, once the\r\npower drops below DOWN value (parameter 50). Turn the\r\nassociated devices off, once the power rises above UP value\r\n(parameter 51).\r\n6 - 2 and 3 combined. Turn the associated devices off, once the\r\npower drops below DOWN value (parameter 50). Turn the\r\nassociated devices on, once the power rises above UP value\r\n(parameter 51)."
             }
-          ]
+          }
         },
         {
           "@number": "60",
@@ -1466,810 +424,87 @@
           "@size": "2",
           "@default": "61a8",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Leistungsschwellwert für violettes Blinken"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Power Load Trigger"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "При превышении какой мощности LED кольцо замигает фиолетовым"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Power load, which when exceeded, makes the LED ring flash violet"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert den Schwellwert des Stromverbrauches, ab dem das Gerät violett blinkt"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the power load that will make the plug flash purple (only when parameter 61 is set to 0 or 1)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Функция работает, когда в параметре 61 установлено значение 0 или 1"
-              }
-            ]
-          },
-          "value": {
-            "@from": "03e8",
-            "@to": "7d00",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "0.1Вт"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Function is active only when parameter 61 is set to 0 or 1.\r\nAvailable settings: 1 000 - 32 000 (100W - 3200W)."
             }
           }
         },
         {
           "@number": "61",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "LED Ring Farbe im Einschaltzustand"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "LED Ring Color when device is on"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет LED кольца, когда устройство включено"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "LED ring illumination colour when controlled device is on."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Farbe des LED Rings im eingeschalteten Zustand"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the color of the LED ring in ON state"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Farbe wechselt entsprechend der Leistungsaufnahme des Verbrauchers"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "changes in predefined steps according to power load"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Цвет соответствует мощности"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Farbe wird kontinuierlich verändert entsprechend der Leistungsaufnahme des Verbrauchers"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "changes continously according to power load using full spectrum of LED color"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Плавное изменение всех цветов"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Weiss"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "White"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Белый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rot"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Red"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Grün"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Green"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Зелёный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "05",
-              "@to": "05",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Blue"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Синий"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "06",
-              "@to": "06",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Geld"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Yellow"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Жёлтый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "07",
-              "@to": "07",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Голубой"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "08",
-              "@to": "08",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Пурпурный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "09",
-              "@to": "09",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отключено"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings:\r\n0 - LED ring illumination colour changes in predefined steps,\r\ndepending on power consumption changes,\r\n1 - LED ring illumination colour changes continuously, using full\r\nspectrum of available colorus, depending on power consumption\r\nchanges.\r\n2 - White illumination,\r\n3 - Red illumination,\r\n4 - Green illumination,\r\n5 - Blue illumination,\r\n6 - Yellow illumination,\r\n7 - Cyan (Greenish blue) illumination,\r\n8 - Magenta (Purplish red) illumination,\r\n9 - illumination turned off completely."
             }
-          ]
+          }
         },
         {
           "@number": "62",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "01",
+          "@default": "08",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "LED Ring Farbe im Ausschaltzustand"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "LED Ring Color when device is off"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет LED кольца, когда устройство выключено"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "LED ring illumination color when controlled device is off."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Farbe des LED Rings im ausgeschaltet Zustand"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the color of the LED ring in OFF state"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "LED ring is illuminated with a color corresponding to the last measured power, before the controlled device was turned off"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "LED ring is illuminated with a color corresponding to the last measured power, before the controlled device was turned off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Цвет LED кольца показывает последнюю измеренную мощность, до выключения устройства"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Weiss"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "White"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Белый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rot"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Red"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Grün"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Green"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Зеленый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Blue"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Синий"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "05",
-              "@to": "05",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Geld"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Yellow"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Жёлтый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "06",
-              "@to": "06",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Голубой"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "07",
-              "@to": "07",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Пурпурный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "08",
-              "@to": "08",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отключено"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings:\r\n0 - LED ring is illuminated with a color corresponding to the last\r\nmeasured power, before the controlled device was turned off,\r\n1 - White illumination,\r\n2 - Red illumination,\r\n3 - Green illumination,\r\n4 - Blue illumination,\r\n5 - Yellow illumination,\r\n6 - Cyan (Greenish blue) illumination,\r\n7 - Magenta (Purplish red) illumination,\r\n8 - illumination turned off completely."
             }
-          ]
+          }
         },
         {
           "@number": "63",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "LED Ring Farbe bei Z-Wave Alarmmeldungen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "LED Ring Color on Z-Wave Alarms"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет LED кольца при сигнале тревоги (Alarm)"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "LED ring illumination colour at the Z-Wave network alarm detection"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Farbe des LED Rings im Alarmfall"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the color of the LED ring on Alarm State"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Keine Farbänderung"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "No Change of color"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Цвет не изменяется. Цвет определяется настройками параметров 61 или 62"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blinked rot/blau/weiss"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "flashes red/blue/white"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Мигает красный/синий/красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Weiss"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "White"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Белый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rot"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Red"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Grün"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Green"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Зелёный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "05",
-              "@to": "05",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Blue"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Синий"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "06",
-              "@to": "06",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Geld"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Yellow"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Жёлтый"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "07",
-              "@to": "07",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Cyan"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Голубой"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "08",
-              "@to": "08",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Magenta"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Пурпурный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "09",
-              "@to": "09",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отключено"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings:\r\n0 - No change in colour. LED ring illumination colour determined by\r\nparameters 61 or 62 settings,\r\n1 - LED ring flashes red / blue / white (default),\r\n2 - White illumination,\r\n3 - Red illumination,\r\n4 - Green illumination,\r\n5 - Blue illumination,\r\n6 - Yellow illumination,\r\n7 - Cyan (Greenish blue) illumination,\r\n8 - Magenta (Purplish red) illumination,\r\n9 - illumination turned off completely."
             }
-          ]
+          }
         },
         {
           "@number": "70",
           "@type": "range",
           "@size": "2",
-          "@default": "ffff",
+          "@default": "0000",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Überlastabschaltung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Overload Safety Switch"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отключение при перезагрузки"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Overload safety switch"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "definiert die Aktion des Schalters bei Alarm. Im \"Immer An\" Modus wird diese Einstellung ignoriert."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Allows turning off a device in case of overloading. This will even happen in \"always on\" mode. Device can be turned back on using the button on the device or sending a ON command."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Эта функция позволяет выключить Wall Plug в случае превышения заданной мощности. Wall plug выключится даже если в параметре 1 задано \"Всегда включен\". Wall Plug может быть заново включен кнопкой B или Z-Wave командой. При превышении 3200Вт Wall Plug отключится не зависимо от установленного значения. По умолчанию это функция отключена (значение больше 3200Вт)."
-              }
-            ]
-          },
-          "value": {
-            "@from": "0010",
-            "@to": "ffff",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0.1W"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "0.1Вт"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This function allows for turning off the controlled device in case of\r\nexceeding the defined power. Controlled device will be turned off\r\neven if \"always on\" function is active (parameter 1).\r\nControlled device can be turned back on via B-button or sending a\r\ncontrol frame. By default this function is inactive.\r\nAvailable settings: 10 - 65 535 (1W - 6 553,5W).\r\nValue higher than 32 000 (3 200W) turns the overload safety switch\r\noff, i.e. this functionality is turned off by default.\r\nDefault setting: 65 535 (6 553,5W)"
             }
           }
         }
@@ -2277,7 +512,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/e4a48654e56d3160d184e1bc5ba84928fee6bae5.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/d3794c2aebd7d7d592935e22e1530326f2c343df.jpg"
       }
     }
   }

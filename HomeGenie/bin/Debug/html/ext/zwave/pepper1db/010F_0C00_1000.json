@@ -89,9 +89,9 @@
           }
         ]
       },
-      "productName": "Smoke Sensor FGSS-101",
+      "productName": "Smoke Sensor FGSS-001",
       "brandName": "Fibargroup",
-      "productCode": "FGSS-101"
+      "productCode": "FGSS-001"
     },
     "commandClasses": {
       "commandClass": [
@@ -226,27 +226,61 @@
               }
             ]
           },
-          "value": {
-            "@from": "0000",
-            "@to": "4380",
-            "@unit": "5s [5s-24h]",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0 - keine Verzögerung, sofortige Beendigung des Alarms\r\n65535 - Alarm Beeindigung ausgeschaltet - Alarm wird nach verschwinden des Rauches weiter gemeldet. Alarm kann nur manuell durch öffnen des 2. Menüs beendet werden"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0 - no delay, immediate cancellation\r\n65535 - alarm cancellation inactive - Smoke Sensor will keep indicating smoke\r\nalarm after the smoke will have disappeared. The smoke alarm can be only ceased\r\nmanually, by entering 2nd menu level"
-                }
-              ]
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "keine Verzögerung, sofortige Beendigung des Alarms\r\n"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "no delay, immediate cancellation\r\n"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "4380",
+              "@unit": "5s",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Verzögerung"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "delay"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "8000",
+              "@to": "8000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Alarm Beeindigung ausgeschaltet - Alarm wird nach verschwinden des Rauches weiter gemeldet. Alarm kann nur manuell durch öffnen des 2. Menüs beendet werden"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "alarm cancellation inactive - Smoke Sensor will keep indicating smoke alarm after the smoke will have disappeared. The smoke alarm can be only ceased manually, by entering 2nd menu level"
+                  }
+                ]
+              }
             }
-          }
+          ]
         },
         {
           "@number": "2",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "03",
           "name": {
@@ -342,7 +376,7 @@
         },
         {
           "@number": "5",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "7f",
           "name": {
@@ -406,7 +440,7 @@
         },
         {
           "@number": "7",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "7f",
           "name": {
@@ -546,7 +580,7 @@
         },
         {
           "@number": "13",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -797,7 +831,7 @@
         },
         {
           "@number": "82",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "02",
           "name": {
@@ -877,7 +911,7 @@
         },
         {
           "@number": "83",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -1143,7 +1177,7 @@
         },
         {
           "@number": "88",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -1207,7 +1241,7 @@
         },
         {
           "@number": "89",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "01",
           "name": {
@@ -1286,6 +1320,11 @@
           ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/e51e24992129c995046a00a181729922efc729eb.png"
+      }
     }
   }
 }

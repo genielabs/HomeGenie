@@ -402,25 +402,11 @@ namespace XTenLib
         private void SetCm15Codes()
         {
             // BuildTransceivedCodesMessage return byte message for setting transceive codes from given comma separated _monitoredhousecode
-            //byte[] trcommand = CM15.BuildTransceivedCodesMessage(_monitoredhousecode);
-            ////_sendqueue.Enqueue(new byte[] { 0x8B });
-            ////Thread.Sleep(200);
-            ////_sendqueue.Enqueue(new byte[] { 0xDB, 0x1F, 0xF0 });
-            ////Thread.Sleep(600);
-            //_sendqueue.Enqueue(trcommand);
-            //
-            //
-            // these two lines are sent to CM15 before setting transceived codes
-            // but who knows what that does mean?!?!? =)
-            SendMessage(new byte[] { 0xfb, 0x20, 0x00, 0x02 });
-            SendMessage(new byte[] { 0xfb, 0x20, 0x00, 0x02 });
-            Thread.Sleep(30);
-            // set transceived codes to AUTO
-            //byte[] trcommand = new byte[] { 0xbb, 0x40, 0x00, 0x05, 0x00, 0x14, 0x20, 0x28 };
-            // BuildTransceivedCodesMessage return byte message for setting transceive codes from given comma separated _monitoredhousecode
+            UpdateInterfaceTime(false);
             byte[] trcommand = CM15.BuildTransceivedCodesMessage(monitoredHouseCode);
             SendMessage(trcommand);
-            SendMessage(trcommand);
+            Thread.Sleep(30);
+            SendMessage(new byte[] { 0x8B });
         }
 
 
@@ -809,14 +795,14 @@ namespace XTenLib
                         if (communicationState != X10CommState.Ready)
                         {
                             Monitor.Enter(stateLock);
-                            if (x10interface.GetType().Equals(typeof(CM15)))
-                            {
-                                Monitor.Wait(stateLock, 3000);
-                            }
-                            else
-                            {
+                            //if (x10interface.GetType().Equals(typeof(CM15)))
+                            //{
+                            //    Monitor.Wait(stateLock, 3000);
+                            //}
+                            //else
+                            //{
                                 Monitor.Wait(stateLock, 5000);
-                            }
+                            //}
                             communicationState = X10CommState.Ready;
                             Monitor.Exit(stateLock);
                         }
@@ -849,6 +835,8 @@ namespace XTenLib
                     DebugLog("X10 !", ex.StackTrace);
 
                     gotReadWriteError = true;
+
+                    Thread.Sleep(1000);
                 }
             }
         }
@@ -878,7 +866,7 @@ namespace XTenLib
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
             }
-            //Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
+            Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
             Console.WriteLine(prefix + " " + message);
             Console.ForegroundColor = ConsoleColor.White;
         }

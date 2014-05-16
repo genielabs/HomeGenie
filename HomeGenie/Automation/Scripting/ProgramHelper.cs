@@ -377,6 +377,8 @@ namespace HomeGenie.Automation.Scripting
             Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
             //
             RelocateProgramModule();
+            homegenie.modules_RefreshVirtualModules();
+            homegenie.modules_Sort();
             //
             return this;
         }

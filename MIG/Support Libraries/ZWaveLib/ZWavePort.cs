@@ -188,7 +188,7 @@ namespace ZWaveLib
                 return false;
             });
             //
-            Thread.Sleep(100);
+            Thread.Sleep(300);
             ackWait.Set();
             //
             return callbackId;

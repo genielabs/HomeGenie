@@ -114,8 +114,22 @@ function configurepage_GetModuleIcon(module, callback, elid) {
     var icon = 'pages/control/widgets/homegenie/generic/images/unknown.png';
     if (module != null && module.DeviceType && module.DeviceType != '' && module.DeviceType != 'undefined')
     {
-        var widget = 'homegenie/generic/' + module.DeviceType.toLowerCase();
-        if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined')
+        var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
+        var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
+        if (widget != null && widget.Value != '')
+        {
+            widget = widget.Value;
+        }
+        else
+        {
+            widget = 'homegenie/generic/' + module.DeviceType.toLowerCase();
+        }
+        //
+        if (widgeticon != null && widgeticon.Value != '')
+        {
+            icon = widgeticon.Value;
+        }
+        else if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined')
         {
             icon = module.WidgetInstance.IconImage;
         }

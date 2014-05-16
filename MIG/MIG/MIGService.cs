@@ -28,6 +28,10 @@ using System.Linq;
 
 using System.IO;
 using MIG.Gateways;
+using MIG.Utility;
+
+using Ude;
+using Ude.Core;
 
 namespace MIG
 {
@@ -84,6 +88,7 @@ namespace MIG
         public DateTime Timestamp = DateTime.Now;
         public string FilePath = "";
         public string Content = "";
+        public Encoding Encoding;
     }
 
     public class MIGService
@@ -104,6 +109,7 @@ namespace MIG
         private TcpSocketGateway tcpGateway;
 
         private int tcpGatewayPort = 4502;
+        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("ISO-8859-1");
 
         private WebServiceGatewayConfiguration webServiceConfig;
         private List<WebFileCache> webFileCache = new List<WebFileCache>();
@@ -284,7 +290,7 @@ namespace MIG
                     if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                     {
                         context.Response.ContentType = "application/json";
-                        context.Response.ContentEncoding = Encoding.UTF8;
+                        context.Response.ContentEncoding = defaultWebFileEncoding;
                     }
                     WebServiceUtility.WriteStringToContext(context, command.Response);
                     return;
@@ -346,11 +352,14 @@ namespace MIG
                     context.Response.Headers.Set(HttpResponseHeader.LastModified, file.LastWriteTimeUtc.ToString("r"));
                     // PRE PROCESS text output
                     //TODO: add callback for handling caching (eg. function that returns true or false with requestdfile as input and that will return false for widget path)
-                    if (isText && !requestedFile.Contains("/widgets/"))
+                    if (isText)
                     {
                         try
                         {
-                            string body = GetWebFileCache(requestedFile);
+                            WebFileCache cachedItem = GetWebFileCache(requestedFile);
+                            context.Response.ContentEncoding = cachedItem.Encoding;
+                            context.Response.ContentType += "; charset=" + cachedItem.Encoding.BodyName;
+                            string body = cachedItem.Content;
                             //
                             bool tagFound;
                             do
@@ -372,7 +381,10 @@ namespace MIG
                                             {
                                                 string fileName = cs.Substring(9).TrimEnd('}').Trim();
                                                 fileName = GetWebFilePath(fileName);
-                                                body = ls + System.IO.File.ReadAllText(fileName) + rs;
+                                                //
+                                                Encoding fileEncoding = DetectWebFileEncoding(fileName);
+                                                if (fileEncoding == null) fileEncoding = defaultWebFileEncoding;
+                                                body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
                                             }
                                         }
                                         catch (Exception e)
@@ -384,12 +396,16 @@ namespace MIG
                                 }
                             } while (tagFound); // pre processor tag found
                             //
-                            PutWebFileCache(requestedFile, body);
+                            if (!(requestedFile.Contains("/widgets/") || requestedFile.Contains("\\widgets\\")))
+                            {
+                                PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
+                            }
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            // TODO: Handle this exception
                         }
                     }
                     else
@@ -434,7 +450,7 @@ namespace MIG
                 if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                 {
                     context.Response.ContentType = "application/json";
-                    context.Response.ContentEncoding = Encoding.UTF8;
+                    context.Response.ContentEncoding = defaultWebFileEncoding;
                 }
             }
             else
@@ -482,26 +498,51 @@ namespace MIG
 
         #region Web Service File Management
 
-        private string GetWebFileCache(string file)
+        private WebFileCache GetWebFileCache(string file)
         {
-            string content = "";
+            WebFileCache fileItem = new WebFileCache();
             var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
             if (cachedItem != null && (DateTime.Now - cachedItem.Timestamp).TotalSeconds < 600)
             {
-                content = cachedItem.Content;
+                fileItem = cachedItem;
             }
             else
             {
-                content = System.IO.File.ReadAllText(file);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                Encoding fileEncoding = DetectWebFileEncoding(file);  //TextFileEncodingDetector.DetectTextFileEncoding(file);
+                if (fileEncoding == null) fileEncoding = defaultWebFileEncoding;
+                fileItem.Content = System.IO.File.ReadAllText(file, fileEncoding);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                fileItem.Encoding = fileEncoding;
                 if (cachedItem != null)
                 {
                     webFileCache.Remove(cachedItem);
                 }
             }
-            return content;
+            return fileItem;
         }
 
-        private void PutWebFileCache(string file, string content)
+        private Encoding DetectWebFileEncoding(string filename)
+        {
+            Encoding enc = defaultWebFileEncoding;
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                ICharsetDetector cdet = new CharsetDetector();
+                cdet.Feed(fs);
+                cdet.DataEnd();
+                if (cdet.Charset != null)
+                {
+                    Console.WriteLine("Charset: {0}, confidence: {1}",
+                         cdet.Charset, cdet.Confidence);
+                    enc = Encoding.GetEncoding(cdet.Charset);
+                }
+                else
+                {
+                    Console.WriteLine("Detection failed.");
+                }
+            }
+            return enc;
+        }
+
+        private void PutWebFileCache(string file, string content, Encoding encoding)
         {
             var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
             if (cachedItem == null)
@@ -511,6 +552,7 @@ namespace MIG
             }
             cachedItem.FilePath = file;
             cachedItem.Content = content;
+            cachedItem.Encoding = encoding;
         }
 
         private string GetWebFilePath(string file)

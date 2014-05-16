@@ -36,8 +36,14 @@ HG.WebApp.InitializePage = function ()
         sessvars.UserSettings.UiTheme = 'a';
     }
     //
-    $.ajaxSetup({ cache: false });
     $.mobile.ajaxFormsEnabled = false;
+    $.ajaxSetup({
+        cache: false //,
+        //contentType: 'application/x-www-form-urlencoded; charset=ISO-8859-1',
+        //beforeSend: function(jqXHR) {
+        //    jqXHR.overrideMimeType('application/x-www-form-urlencoded; charset=ISO-8859-1');
+        //}
+    });
     //
     HG.Configure.LoadData();
     //
@@ -189,7 +195,7 @@ HG.WebApp.InitializePage = function ()
     //
     setTimeout(function(){
         var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
-        HG.WebApp.Locales.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
+        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
         // enable/disable speech input
         if (typeof document.createElement('input').webkitSpeech == 'undefined') {
             //no speech support
@@ -522,7 +528,7 @@ HG.WebApp.Utility.JScrollToElement = function (element, delay) {
 // info      : global utility functions
 //
 HG.WebApp.Locales = HG.WebApp.Locales || {};
-HG.WebApp.Locales.Localize = function(langurl)
+HG.WebApp.Locales.Localize = function(container, langurl)
 {
     // get data via ajax 
     // store it in 		HG.WebApp.Data._CurrentLocale
@@ -533,29 +539,26 @@ HG.WebApp.Locales.Localize = function(langurl)
         success: function (data) {
             HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
             //
-            $(document).find('[data-locale-id]').each(function(index){
+            $(container).find('[data-locale-id]').each(function(index){
                 var stringid = $(this).attr('data-locale-id');
                 var text = HG.WebApp.Locales.GetLocaleString(stringid);
-                if (text != null /* && text.trim() != ''*/ ) 
-                {
+                if (text != null) {
                     $this = $(this);
                     if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
                         $('span.ui-btn-text', $this).text(text);
                     }
-                        /*else if( $this.is('input') ) {
-                            $this.val(text);
-                            // go up the tree
-                            var ctx = $this.closest('.ui-btn');
-                            $('span.ui-btn-text', ctx).text(text);
-                        }*/
-                    else
-                    {
+                    else {
                         $(this).html(text);
                     }
                 }
             });
         }
     });		
+};
+HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
+    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+    widgetpath = widgetpath.substring(0, widgetpath.lastIndexOf('/'));
+    HG.WebApp.Locales.Localize('#' + elementid, 'pages/control/widgets/' + widgetpath + '/locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
 };
 HG.WebApp.Locales.GetLocaleString = function(stringid)
 {

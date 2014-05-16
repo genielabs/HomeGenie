@@ -141,7 +141,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:40.3742234Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5070354Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -166,7 +166,7 @@ Program.Setup(()=&gt;{
 
 return true;
 </ScriptCondition>
-  <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
+    <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
   	if (Program.InputField("BridgeAddress").Value == "" || Program.InputField("BridgeAddress").Value.EndsWith("?"))
     {
@@ -260,7 +260,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:40.3742234Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5150363Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -406,7 +406,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:41.1631039Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5220365Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -478,7 +478,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-04-19T10:22:31.6662869Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:01:25.1315396Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -680,7 +680,7 @@ For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-au
 Program.Setup(()=&gt;
 {              
 	Program.AddInputField("PollInterval", "15", "Poll Interval (seconds)");
-	Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch", "HomeGenie.ZWaveLevelPoll", "Poll module level");
+	Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level");
 });
 //
 return true; // execute "Code To Run"
@@ -698,107 +698,16 @@ return true; // execute "Code To Run"
     Pause(Program.InputField("PollInterval").DecimalValue);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>39</Address>
     <Name>Z-Wave - Lights/Switches Level Poll</Name>
     <Description>Periodically query lights and switches level.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-01-03T16:48:44.015841Z</ActivationTime>
-    <TriggerTime>2014-01-03T16:48:48.784129Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-	Program.AddFeature("Dimmer,Light,Switch", "HomeGenie.TouchlessToggle", "Control by HomeGenie Touchless Toggle");
-});
-// this program will be running in background
-return true;</ScriptCondition>
-    <ScriptSource>var irpin = ConnectorPin.P1Pin18.ToProcessor();
-var driver = new MemoryGpioConnectionDriver();
-
-var LastPulse = DateTime.Now;
-var state = "WAIT";
-//var low = 0D;
-var toggleModules = Modules.WithFeature("HomeGenie.TouchlessToggle");
-var buzzer = Modules.InDomain("HomeGenie.Buzzer").WithAddress("1");
-while (Program.IsEnabled)
-{
-    driver.Allocate(irpin, PinDirection.Input);
-    driver.Write(irpin, true);
-    
-    var startts = DateTime.Now.Ticks;
-
-    if (state == "WAIT") 
-    {  
-        LastPulse = DateTime.Now;
-        // wait for first high
-        while (driver.Read(irpin))
-        {
-            Raspberry.Timers.HighResolutionTimer.Sleep(50m);
-        }
-        while (!driver.Read(irpin))
-        {
-            Raspberry.Timers.HighResolutionTimer.Sleep(50m);
-        }
-        state = "SWITCH";
-    }
-  
-  	// high
-    startts = DateTime.Now.Ticks;
-    while (driver.Read(irpin))
-    {
-        Raspberry.Timers.HighResolutionTimer.Sleep(0.001m);
-    }
-
-  	// low
-  	startts = DateTime.Now.Ticks;
-    while (!driver.Read(irpin))
-    {
-        //Raspberry.Timers.HighResolutionTimer.Sleep(0.25m);
-    }
-  	//low = ((DateTime.Now.Ticks - startts) / 10000D );
-    //Console.WriteLine("LOW  " + low.ToString());
-  
-  	TimeSpan elapsedfrominput = new TimeSpan(DateTime.Now.Ticks - LastPulse.Ticks);
-  	switch (state)
-    {
-      	case "SWITCH":
-            if (elapsedfrominput.TotalMilliseconds &gt; 300)
-            {
-              toggleModules.Toggle();
-              buzzer.On();
-              Pause(.5); 
-              buzzer.Off();
-              LastPulse = DateTime.Now;
-              state = "WAIT";
-            }
-      		break;
-      	default:
-      		break;
-    }
-
-}
-</ScriptSource>
-    <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>50</Address>
-    <Name>HomeGenie Touchless Toggle</Name>
-    <Description>All lights with the flag "Touchless Toggle" active, 
-will be toggled whenever HomeGenie touchless sensor is activated.
-For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
-    <Group>Raspberry Sharp</Group>
-    <ActivationTime>2014-03-17T09:03:32.653461Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
@@ -1217,7 +1126,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:43.1614485Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5340367Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1409,7 +1318,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:44.1638299Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5460375Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1529,7 +1438,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:46.1651856Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5500385Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1824,7 +1733,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-04-19T10:21:23.6146936Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5620383Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1846,7 +1755,7 @@ return true;
         {
           	// nif contains all command classes supported by this module
           	string nif = " " + nodeinfo.Value + " ";
-          	if (nif.Contains(" 84 ")) // does the device support WakeUp ?
+          	if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 "))
             {
                 if (nif.Contains(" 60 ")) // MultiInstance
                 {
@@ -1895,7 +1804,7 @@ return true;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -1904,8 +1813,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Z-Wave - Wake Up Notify</Name>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:48.1602867Z</TriggerTime>
+    <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
+    <TriggerTime>2014-05-09T16:00:24.5640383Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2052,7 +1961,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:49.160094Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5660379Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2318,7 +2227,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:49.6995455Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5780387Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2745,7 +2654,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:50.6598373Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.58304Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2807,7 +2716,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:51.6616361Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.584039Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2964,7 +2873,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:52.6633969Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5890399Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3333,7 +3242,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-04-19T09:26:53.6609936Z</TriggerTime>
+    <TriggerTime>2014-05-09T16:00:24.5940405Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3400,7 +3309,7 @@ Program.Setup(()=&gt;{
 	{
 	   	if( m.Parameter("ZWaveNode.ManufacturerSpecific").Value == "010F:0900:1000" )
         {
-		 	Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","zwave/fibaro/rgbw");
+		 	Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","DaniMail/fibaro/rgbw");
           	// Added temporary until Switch.MultiLevel.GetCount works properly 
             for (int i = 1; i &lt;= 5 ; i++)
             {
@@ -3498,431 +3407,19 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt;
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>502</Address>
     <Name>Fibaro RGBW</Name>
     <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
 </Description>
     <Group>Contrib</Group>
-    <ActivationTime>2014-04-02T12:47:22.3256647Z</ActivationTime>
-    <TriggerTime>2014-04-02T12:49:38.4555809Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
-// the 'Code To Run' to be executed.
-hg.SetConditionTrue();
-
-// list the program as custom widget
-hg.Program.AddControlWidget( "weather/suncalc/suncalc" );
-
-if(hg.Program.InputField("jkUtils.SunCalc.Latitude").Value == "")
-  hg.Program.AddInputField("jkUtils.SunCalc.Latitude", "52.30", "mandatory: Location Latitude");
-if(hg.Program.InputField("jkUtils.SunCalc.Longitude").Value == "") 
-  hg.Program.AddInputField("jkUtils.SunCalc.Longitude", "13.25", "mandatory: Location Longitude");    
-if(hg.Program.InputField("jkUtils.SunCalc.Label").Value == "")
-  hg.Program.AddInputField("jkUtils.SunCalc.Label", "SunCalc - Berlin", "optional: Allows for manual label in visualization");    
-
-if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Astronomical.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Morning.Astronomical.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Nautical.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Morning.Nautical.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Civil.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Morning.Civil.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Morning.Sunrise.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Morning.Sunrise.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Sunset.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Evening.Sunset.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Civil.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Evening.Civil.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Nautical.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Evening.Nautical.Start").Value = "";
-if(hg.Program.Parameter("jkUtils.SunCalc.Evening.Astronomical.Start").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.Evening.Astronomical.Start").Value = "";
-
-if(hg.Program.Parameter("jkUtils.SunCalc.LastUpdatedValue").value == "")
-  hg.Program.Parameter("jkUtils.SunCalc.LastUpdatedValue").Value = "";</ScriptCondition>
-    <ScriptSource>
-// jkUtils - SunCalc Ver 1.0 2014-03-26
-// ------------------------------------
-// A HomeGenie script to locally calculate sunrise/sunset with civil, nautical and astronomical timings.
-// This script also sets and automatically updates timers for the scheduler service.
-// Requires local longitude and latitude values to be set within programm options.
-// Localization implemented for: US-en and DE-de. Feel free to add your own localization in /locales dir analogous to HomeGenie .json files.
-// All used Icons/Graphics make full use of png-transparency to be able to place them over any colored background.
-
-// Released under BSD-licensed.
-// (c) 2014 Jan Koch, Berlin
-
-// Acknowledgements:
-
-// This program makes use of the original SunCalc which is a JavaScript library for calculating sun/mooon position and light phases.
-// For more info see https://github.com/mourner/suncalc (c) 2011-2014, Vladimir Agafonkin. BSD-licensed.
-
-// calculations for illumination parameters of the moon, based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
-// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
-
-
-// setup default values if values are empty
-
-if(hg.Program.InputField("jkUtils.SunCalc.Latitude").Value == "")
-  hg.Program.InputField("jkUtils.SunCalc.Latitude").Value = "52.30";
-if(hg.Program.InputField("jkUtils.SunCalc.Longitude").Value == "") 
-  hg.Program.InputField("jkUtils.SunCalc.Longitude").Value = "13.25";   
-if(hg.Program.InputField("jkUtils.SunCalc.Label").Value == "")
-  hg.Program.InputField("jkUtils.SunCalc.Label").Value = "SunCalc - Berlin"; 
-
-// shortcuts for easier to read formulas
-
-var PI = Math.PI,
-    sin = Math.sin,
-    cos = Math.cos,
-    tan = Math.tan,
-    asin = Math.asin,
-    atan = Math.atan2,
-    acos = Math.acos,
-    rad = PI / 180;
-
-// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
-
-
-// date/time constants and conversions
-
-var dayMs = 1000 * 60 * 60 * 24,
-    J1970 = 2440588,
-    J2000 = 2451545;
-
-function toJulian(date) {
-    return date.valueOf() / dayMs - 0.5 + J1970;
-}
-function fromJulian(j) {
-    return new Date((j + 0.5 - J1970) * dayMs);
-}
-function toDays(date) {
-    return toJulian(date) - J2000;
-}
-
-
-// general calculations for position
-
-var e = rad * 23.4397; // obliquity of the Earth
-
-function getRightAscension(l, b) {
-    return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l));
-}
-function getDeclination(l, b) {
-    return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
-}
-function getAzimuth(H, phi, dec) {
-    return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi));
-}
-function getAltitude(H, phi, dec) {
-    return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H));
-}
-function getSiderealTime(d, lw) {
-    return rad * (280.16 + 360.9856235 * d) - lw;
-}
-
-
-// general sun calculations
-
-function getSolarMeanAnomaly(d) {
-    return rad * (357.5291 + 0.98560028 * d);
-}
-function getEquationOfCenter(M) {
-    return rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M));
-}
-function getEclipticLongitude(M, C) {
-    var P = rad * 102.9372; // perihelion of the Earth
-    return M + C + P + PI;
-}
-function getSunCoords(d) {
-
-    var M = getSolarMeanAnomaly(d),
-        C = getEquationOfCenter(M),
-        L = getEclipticLongitude(M, C);
-
-    return {
-        dec: getDeclination(L, 0),
-        ra: getRightAscension(L, 0)
-    };
-}
-
-
-var SunCalc = {};
-
-
-// calculates sun position for a given date and latitude/longitude
-
-SunCalc.getPosition = function (date, lat, lng) {
-
-    var lw = rad * -lng,
-        phi = rad * lat,
-        d = toDays(date),
-
-        c = getSunCoords(d),
-        H = getSiderealTime(d, lw) - c.ra;
-
-    return {
-        azimuth: getAzimuth(H, phi, c.dec),
-        altitude: getAltitude(H, phi, c.dec)
-    };
-};
-
-
-// sun times configuration (angle, morning name, evening name)
-
-var times = [
-    [ -0.83,'sunrise', 'sunset' ],
-    [ -0.3, 'sunriseEnd', 'sunsetStart' ],
-    [ -6,   'dawn', 'dusk' ],                     //nautical twilight angle
-    [ -12,  'nauticalDawn', 'nauticalDusk'],     //astronomical twilight angle
-    [ -18,  'nightEnd', 'night' ],               //darkness angle
-    [ 6,    'goldenHourEnd', 'goldenHour' ]
-];
-
-// adds a custom time to the times config
-
-SunCalc.addTime = function (angle, riseName, setName) {
-    times.push([angle, riseName, setName]);
-};
-
-
-// calculations for sun times
-
-var J0 = 0.0009;
-
-function getJulianCycle(d, lw) {
-    return Math.round(d - J0 - lw / (2 * PI));
-}
-function getApproxTransit(Ht, lw, n) {
-    return J0 + (Ht + lw) / (2 * PI) + n;
-}
-function getSolarTransitJ(ds, M, L) {
-    return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
-}
-function getHourAngle(h, phi, d) {
-    return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
-}
-
-
-// calculates sun times for a given date and latitude/longitude
-
-SunCalc.getTimes = function (date, lat, lng) {
-
-    var lw = rad * -lng,
-        phi = rad * lat,
-        d = toDays(date),
-
-        n = getJulianCycle(d, lw),
-        ds = getApproxTransit(0, lw, n),
-
-        M = getSolarMeanAnomaly(ds),
-        C = getEquationOfCenter(M),
-        L = getEclipticLongitude(M, C),
-
-        dec = getDeclination(L, 0),
-
-        Jnoon = getSolarTransitJ(ds, M, L);
-
-
-    // returns set time for the given sun altitude
-    function getSetJ(h) {
-        var w = getHourAngle(h, phi, dec),
-            a = getApproxTransit(w, lw, n);
-
-        return getSolarTransitJ(a, M, L);
-    }
-
-
-    var result = {
-        solarNoon: fromJulian(Jnoon),
-        nadir: fromJulian(Jnoon - 0.5)
-    };
-
-    var i, len, time, angle, morningName, eveningName, Jset, Jrise;
-
-    for (i = 0, len = times.length; i &lt; len; i += 1) {
-        time = times[i];
-
-        Jset = getSetJ(time[0] * rad);
-        Jrise = Jnoon - (Jset - Jnoon);
-
-        result[time[1]] = fromJulian(Jrise);
-        result[time[2]] = fromJulian(Jset);
-    }
-
-    return result;
-};
-
-
-// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
-
-function getMoonCoords(d) { // geocentric ecliptic coordinates of the moon
-
-    var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
-        M = rad * (134.963 + 13.064993 * d), // mean anomaly
-        F = rad * (93.272 + 13.229350 * d), // mean distance
-
-        l = L + rad * 6.289 * sin(M), // longitude
-        b = rad * 5.128 * sin(F), // latitude
-        dt = 385001 - 20905 * cos(M); // distance to the moon in km
-
-    return {
-        ra: getRightAscension(l, b),
-        dec: getDeclination(l, b),
-        dist: dt
-    };
-}
-
-SunCalc.getMoonPosition = function (date, lat, lng) {
-
-    var lw = rad * -lng,
-        phi = rad * lat,
-        d = toDays(date),
-
-        c = getMoonCoords(d),
-        H = getSiderealTime(d, lw) - c.ra,
-        h = getAltitude(H, phi, c.dec);
-
-    // altitude correction for refraction
-    h = h + rad * 0.017 / tan(h + rad * 10.26 / (h + rad * 5.10));
-
-    return {
-        azimuth: getAzimuth(H, phi, c.dec),
-        altitude: h,
-        distance: c.dist
-    };
-};
-
-SunCalc.getMoonIllumination = function (date) {
-
-    var d = toDays(date),
-        s = getSunCoords(d),
-        m = getMoonCoords(d),
-
-        sdist = 149598000, // distance from Earth to Sun in km
-
-        phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
-        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi));
-
-    return {
-        fraction: (1 + cos(inc)) / 2,
-        angle: atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec)
-            - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra))
-    };
-};
-
-SunCalc.printTime = function (d,m){
-	var newd = new Date(d.valueOf() + m * 60000);
-  	var min = newd.getMinutes();
-    var hour = newd.getHours();
-    if (min &lt; 10) min = "0" + min;
-  	if (hour &lt; 10) hour = "0" + hour;
-    return hour+":"+min;
-};
-
-SunCalc.saveTimer = function (timer,d,m){
-	var str = 'hg.Program.Parameter("'+ timer + '").Value = SunCalc.printTime(d,m);';
-	eval(str);
-  	var str = 'var savedTimer = hg.Program.Parameter("'+ timer + '").Value';
-  	eval(str);
-    var spiltTimer = savedTimer.split(":");
-    timer = timer.substring(timer.indexOf(".")+1);
-  	hg.Scheduler.WithName(timer).SetSchedule(""+ spiltTimer[1] +" "+ spiltTimer[0] +" * * *");
-};
-
-
-// HomeGenie Script Logic starts here ------- 
-
-var currentTime = new Date();
-var latitude = hg.Program.InputField("jkUtils.SunCalc.Latitude").Value;
-var longitude = hg.Program.InputField("jkUtils.SunCalc.Longitude").Value;    
-var sun = SunCalc.getTimes(currentTime, latitude, longitude);
-var moon = SunCalc.getMoonIllumination(currentTime);
-
-var timeFormat = {hour: "numeric", minute: "numeric"};
-
-
-SunCalc.saveTimer("jkUtils.SunCalc.Day.Start",sun.nightEnd,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Day.Noon",sun.solarNoon,0);
-
-SunCalc.saveTimer("jkUtils.SunCalc.Night.Start",sun.night,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Night.Nadir",sun.nadir,0);
-
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Night.End",sun.nightEnd,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Astronomical.Start",sun.nightEnd,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Astronomical.End",sun.nauticalDawn,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Nautical.Start",sun.nauticalDawn,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Nautical.End",sun.dawn,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Civil.Start",sun.dawn,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Civil.End",sun.sunrise,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Sunrise.Start",sun.sunrise,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.Sunrise.End",sun.sunriseEnd,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Morning.GoldenHour.End",sun.goldenHourEnd,0);
-
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.GoldenHour.Start",sun.goldenHour,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Sunset.Start",sun.sunsetStart,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Sunset.End",sun.sunset,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Civil.Start",sun.sunset,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Civil.End",sun.dusk,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Nautical.Start",sun.dusk,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Nautical.End",sun.nauticalDusk,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Astronomical.Start",sun.nauticalDusk,0);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Astronomical.End",sun.night,-1);
-SunCalc.saveTimer("jkUtils.SunCalc.Evening.Night.Start",sun.night,0);
-
-hg.Program.Parameter("jkUtils.SunCalc.Moon.Fraction").Value = moon.fraction;
-
-moon.fraction = moon.fraction * 100;
-
-hg.Program.Parameter("jkUtils.SunCalc.Moon.Precent").Value = Math.round(moon.fraction) + "%";
-hg.Program.Parameter("jkUtils.SunCalc.Moon.Angle").Value = moon.angle;
-hg.Program.Parameter("jkUtils.SunCalc.Moon.Waxing").Value = (moon.angle &lt; 0 ? "1" : "0");
-
-hg.Program.Parameter("jkUtils.SunCalc.LastUpdated").Value = SunCalc.printTime(currentTime,0);
-
-hg.Program.Notify("SunCalc", "Sun data updated.");
-
-// Update every 12 hours
-hg.Pause(12*60*60);
-
-
-// For your convenience:
-//   If you should need a way to parse the saved times within you own scripts, you can use the following function.
-//   It is able to parse all kind of notations e.g.: '1:00 pm','1:00 p.m.', ...
-   
-//   function parseTime(timestring) {
-//     var d = new Date();
-//     var time = timestring.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-//     d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
-//     d.setMinutes( parseInt(time[2]) || 0 );
-     
-//    return d;
-//   }
-   
-</ScriptSource>
-    <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>501</Address>
-    <Name>jkUtils - SunCalc</Name>
-    <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
-  Please set your local longitude/latitude in program options (Default is Berlin, Germany).</Description>
-    <Group>Contrib</Group>
-    <ActivationTime>2014-04-11T18:49:39.8670439Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:49:40.1940621Z</TriggerTime>
-    <Type>Javascript</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -4090,7 +3587,7 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
 // this program will be running in background
 return true;
 </ScriptCondition>
-  <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
+    <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
 var modemUsername = "admin"; //Program.InputField("ModemUsername").Value;
 var modemPassword = Program.InputField("ModemPassword").Value;
 var smsRecipient = Program.InputField("SmsRecipient").Value;
@@ -4167,6 +3664,775 @@ Program.GoBackground();</ScriptSource>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup( () =&gt; {
+  // list the program as custom weather widget
+  Program.AddControlWidget("jkUtils/OpenWeatherMap/OpenWeatherMap");
+
+  // set input fields parameters
+  Program.AddInputField("Location", "Berlin", "City name");
+  Program.AddInputField("Language", "de", "Language. See http://OpenWeatherMap.org/API for available langugae codes.");
+  Program.AddInputField("UpdateInterval", "60", "Update interval in minutes. Default is 60 minutes.");
+  Program.AddInputField("Custom Display Units", "TRUE", "Display System of Units (TRUE = use metric system, FALSE = use imperial system)");
+  Program.AddInputField("Custom Color", "213", "HUE Color Value");
+  Program.AddInputField("Custom Zoom", "100%", "Custom Zoom");
+
+  // setup program parameters
+  Program.Parameter("jkUtils.OpenWeatherMap.Cod").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Name").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Id").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Dt").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Clouds.All").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H1").Value = "";    // Rain in mm within the last 1 hour
+  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H3").Value = "";    // .. the last 3 hours
+  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H24").Value = "";   // .. the last 24 hours
+  Program.Parameter("jkUtils.OpenWeatherMap.Rain.Today").Value = ""; // .. since midnight
+  
+  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H1").Value = "";  // Snowfall in mm. same as rain.
+  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H3").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H24").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Snow.Today").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Speed").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Deg").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Gust").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp.Previous").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.Humidity").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure.Previous").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureSea").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureGround").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMax").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMin").Value = "";
+    
+  //Program.Parameter("jkUtils.OpenWeatherMap.Base").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Id").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Main").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Icon").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Message").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Country").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunrise").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunset").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lon").Value = "";
+  Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lat").Value = "";
+         
+  Program.Parameter("jkUtils.OpenWeatherMap.LastUpdated").Value = "";
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>
+// jkUtils - OpenWeatherMap Ver 2.0 2014-05-08
+// this version uses the 2.5 API from OpenWeatherMap.org
+// ------------------------------------
+// A HomeGenie script to fetch current weather data from http://OpenWeatherMap.org/ .
+// No key or account is required to use this service.
+// Localization implemented for: US-en and DE-de. Feel free to add your own localization in /locales dir analogous to HomeGenie .json files.
+// All used Icons/Graphics make full use of png-transparency to be able to place them over any colored background.
+
+// Released under BSD-licensed.
+// (c) 2014 Jan Koch, Berlin
+
+// Acknowledgements:
+
+// This program makes use the free API services of http://OpenWeatherMap.org . For details see http://OpenWeatherMap.org/API
+// Please use as adviced under http://OpenWeatherMap.org/about .
+  
+
+Func&lt;bool&gt; _checkWeather = new Func&lt;bool&gt;(()=&gt;{
+ Program.RunAsyncTask(()=&gt;
+ {
+  string location = Program.InputField("Location").Value;
+  string language = Program.InputField("Language").Value; 
+  string displayCelsius = Program.InputField("Custom Display Units").Value;
+  string webserviceurl = "http://api.OpenWeatherMap.org/data/2.5/weather?q="+ location +"&amp;lang=" + language; 
+  TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+  int UTCTimeNow = (int)t.TotalSeconds;
+  string UCTTimeNowString = UTCTimeNow.ToString();
+      
+  Program.Parameter("jkUtils.OpenWeatherMap.LastUpdated").Value = UCTTimeNowString; //last_updated;
+
+      try
+      {
+        //string last_updated = DateTime.Now.ToString("HH:mm"); 
+        
+        if (displayCelsius.ToLower() == "true") {
+         webserviceurl = webserviceurl + "&amp;units=metric";
+         Program.Parameter("jkUtils.OpenWeatherMap.Temp.Label").Value = "°C";
+         Program.Parameter("jkUtils.OpenWeatherMap.Wind.Label").Value = "m/s";
+        } else {
+         webserviceurl = webserviceurl + "&amp;units=imperial";
+         Program.Parameter("jkUtils.OpenWeatherMap.Temp.Label").Value = "°F";
+         Program.Parameter("jkUtils.OpenWeatherMap.Wind.Label").Value = "kph"; 
+        }        
+        
+        var data = Net.WebService(webserviceurl).GetData();    
+      
+        //check for update in data     
+        //if(data.dt.ToString() != Program.Parameter("jkUtils.OpenWeatherMap.Dt").Value ) {
+        if(0 != 1 ) {          
+    
+         Program.Parameter("jkUtils.OpenWeatherMap.Cod").Value = data.cod ?? "";
+         Program.Parameter("jkUtils.OpenWeatherMap.Name").Value = data.name ?? "";
+         Program.Parameter("jkUtils.OpenWeatherMap.Id").Value = data.id ?? "";
+         Program.Parameter("jkUtils.OpenWeatherMap.Dt").Value = data.dt ?? "";
+        
+         if(data.clouds != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Clouds.All").Value = data.clouds.all ?? "";
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Clouds.All").Value = ""; 
+         }
+        
+         if(data.rain != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H1").Value = data.rain["1h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H3").Value = data.rain["3h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H24").Value = data.rain["24h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.Today").Value = data.rain["today"] ?? "";
+         } else { 
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H1").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H3").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.H24").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Rain.Today").Value = "";         
+         }
+          
+         if(data.snow != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H1").Value = data.snow["1h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H3").Value = data.snow["3h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H24").Value = data.snow["24h"] ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.Today").Value = data.snow["today"] ?? "";
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H1").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H3").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.H24").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Snow.Today").Value = "";           
+         }          
+        
+         if(data.wind != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Speed").Value = data.wind.speed ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Deg").Value = data.wind.deg ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Gust").Value = data.wind.gust ?? "";
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Speed").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Deg").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Wind.Gust").Value = "";           
+         }
+        
+         if(data.main != null) {
+           if(Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value != "") {
+           	Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure.Previous").Value = Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value;           	 
+           }
+           if(Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value != "") {
+           	Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp.Previous").Value = Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value;           	 
+           }
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value = data.main.temp ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Humidity").Value = data.main.humidity ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value = data.main.pressure ?? "";
+           //optional values
+           Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureSea").Value = data.main.sea_level ?? "";
+           Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureGround").Value = data.main.grnd_level ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMax").Value = data.main.temp_max ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMin").Value = data.main.temp_min ?? "";
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp.Previous").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Humidity").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure.Previous").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureSea").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureGround").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMax").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMin").Value = "";           
+         }
+        
+         //Program.Parameter("jkUtils.OpenWeatherMap.Base").Value = data["base"] ?? "";
+        
+         if(data.weather[0] != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Id").Value = data.weather[0].id ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Main").Value = data.weather[0].main ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = data.weather[0].description ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Icon").Value = data.weather[0].icon ?? "";
+         /* 
+           // Potential fix for problems in recieving JSON UTF encoded data
+          
+           Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = Regex.Replace(
+             			 data.weather[0].description,
+                         @"\\u(?&lt;value&gt;[0-9a-f]{4})",
+                         match =&gt; {
+                             string digits = match.Groups["value"].Value;
+                             int number = int.Parse(digits, NumberStyles.HexNumber);
+                             return char.ConvertFromUtf32(number);
+                         })  ?? "";
+          */
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Id").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Main").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Weather.Icon").Value = "";           
+         }
+        
+         if(data.sys != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Message").Value = data.sys.message ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Country").Value = data.sys.country ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunrise").Value = data.sys.sunrise ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunset").Value = data.sys.sunset ?? "";        
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Message").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Country").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunrise").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunset").Value = "";                   
+         }
+        
+         if(data.coord != null) {
+          Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lon").Value = data.coord.lon ?? "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lat").Value = data.coord.lat ?? "";
+         } else {
+          Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lon").Value = "";
+          Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lat").Value = "";           
+         }
+
+         //STENCIL: Program.Parameter("jkUtils.OpenWeatherMap.").Value = data. ?? "";
+                        
+        }
+        
+        Program.Notify("jkutils - OpenWeatherMap","Data has been updated.");
+        //Program.RaiseEvent("jkUtils.OpenWeatherMap.LastUpdated", UCTTimeNowString, "Updated");
+      } 
+      catch (Exception e) 
+      {                
+        Program.Notify("jkutils - OpenWeatherMap", "Update of data failed.");
+        //DEBUG: Program.Notify("OpenWeatherMap ERROR!", e.Message);
+        Console.WriteLine( e.Message );
+        //Pause(10);        
+      }
+  
+      
+      
+    });
+  	
+  	return true;
+});      
+
+//
+// Web service calls handling
+//
+
+When.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", (args) =&gt; //"HomeGenie.SecuritySystem", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    var res = "";
+    
+    try
+    {
+      string command = reqs[2];
+      string pid = reqs[1];
+      if (pid == Program.Module.Address)
+      {
+
+        switch(command)
+        {
+          case "Control.Refresh":
+            //Program.Notify("jkutils: OpenWeatherMap","Update triggered.");
+          	_checkWeather();
+            break;
+        }
+
+      }
+    } 
+    catch (Exception ex) 
+    { 
+      res = "{ 'ResponseValue' : 'ERROR: " + ex.Message + " " + ex.StackTrace + "' }";
+    }
+    // unable to process request
+    return res;
+
+});
+
+while (Program.IsEnabled)
+{
+  _checkWeather();
+  Pause(Program.InputField("UpdateInterval").DecimalValue * 60); // pause before next check
+  //Pause(10);
+}
+</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>503</Address>
+    <Name>jkUtils - OpenWeatherData</Name>
+    <Description>Gathers weather data from http://www.OpenWeatherMap.org/ [API Version 2.5] 
+No service key required to fetch data.</Description>
+    <Group>Contrib</Group>
+    <ActivationTime>2014-05-09T16:01:02.7887618Z</ActivationTime>
+    <TriggerTime>2014-05-09T16:01:02.8657664Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
+// the 'Code To Run' to be executed.
+hg.SetConditionTrue();
+
+// list the program as custom widget
+if (hg.Program.Parameter("Widget.DisplayModule").Value != "jkUtils/SolarAltitude/SolarAltitude")
+  hg.Program.AddControlWidget("jkUtils/SolarAltitude/SolarAltitude");
+
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Latitude").Value)
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude");
+ 
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Longitude").Value)
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude");    
+
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Label").Value)  
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Label", "", "Custom Label");
+
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Zoom").Value)  
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom");
+
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Color").Value)
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)");
+
+if (!hg.Program.InputField("jkUtils.SolarAltitude.Timeformat").Value)
+  hg.Program.AddInputField("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)");
+</ScriptCondition>
+    <ScriptSource>
+// jkUtils - Solar Altitude Ver 2.0 2014-05-07
+// ------------------------------------
+// A HomeGenie script to locally calculate sunrise/sunset with civil, nautical and astronomical timings.
+// This script also sets and automatically updates timers for the scheduler service.
+// Requires local longitude and latitude values to be set within programm options.
+// Localization implemented for: US-en and DE-de. Feel free to add your own localization in /locales dir analogous to HomeGenie .json files.
+// All used Icons/Graphics make full use of png-transparency to be able to place them over any colored background.
+
+// Released under BSD-licensed.
+// (c) 2014 Jan Koch, Berlin
+
+// Acknowledgements:
+
+// This program makes use of the original SunCalc which is a JavaScript library for calculating sun/mooon position and light phases.
+// For more info see https://github.com/mourner/SunCalc (c) 2011-2014, Vladimir Agafonkin. BSD-licensed.
+
+// calculations for illumination parameters of the moon, based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
+// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+
+
+// shortcuts for easier to read formulas
+
+var PI = Math.PI,
+    sin = Math.sin,
+    cos = Math.cos,
+    tan = Math.tan,
+    asin = Math.asin,
+    atan = Math.atan2,
+    acos = Math.acos,
+    rad = PI / 180;
+
+// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
+
+
+// date/time constants and conversions
+
+var dayMs = 1000 * 60 * 60 * 24,
+    J1970 = 2440588,
+    J2000 = 2451545;
+
+function toJulian(date) {
+    return date.valueOf() / dayMs - 0.5 + J1970;
+}
+function fromJulian(j) {
+    return new Date((j + 0.5 - J1970) * dayMs);
+}
+function toDays(date) {
+    return toJulian(date) - J2000;
+}
+
+
+// general calculations for position
+
+var e = rad * 23.4397; // obliquity of the Earth
+
+function getRightAscension(l, b) {
+    return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l));
+}
+function getDeclination(l, b) {
+    return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
+}
+function getAzimuth(H, phi, dec) {
+    return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi));
+}
+function getAltitude(H, phi, dec) {
+    return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H));
+}
+function getSiderealTime(d, lw) {
+    return rad * (280.16 + 360.9856235 * d) - lw;
+}
+
+
+// general sun calculations
+
+function getSolarMeanAnomaly(d) {
+    return rad * (357.5291 + 0.98560028 * d);
+}
+function getEquationOfCenter(M) {
+    return rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M));
+}
+function getEclipticLongitude(M, C) {
+    var P = rad * 102.9372; // perihelion of the Earth
+    return M + C + P + PI;
+}
+function getSunCoords(d) {
+
+    var M = getSolarMeanAnomaly(d),
+        C = getEquationOfCenter(M),
+        L = getEclipticLongitude(M, C);
+
+    return {
+        dec: getDeclination(L, 0),
+        ra: getRightAscension(L, 0)
+    };
+}
+
+
+var SolarAltitude = {};
+
+
+// calculates sun position for a given date and latitude/longitude
+
+SolarAltitude.getPosition = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        c = getSunCoords(d),
+        H = getSiderealTime(d, lw) - c.ra;
+
+    return {
+        azimuth: getAzimuth(H, phi, c.dec),
+        altitude: getAltitude(H, phi, c.dec)
+    };
+};
+
+
+// sun times configuration (angle, morning name, evening name)
+
+var times = [
+    [ -0.83,'sunrise', 'sunset' ],
+    [ -0.3, 'sunriseEnd', 'sunsetStart' ],
+    [ -6,   'dawn', 'dusk' ],                     //nautical twilight angle
+    [ -12,  'nauticalDawn', 'nauticalDusk'],     //astronomical twilight angle
+    [ -18,  'nightEnd', 'night' ],               //darkness angle
+    [ 6,    'goldenHourEnd', 'goldenHour' ]
+];
+
+// adds a custom time to the times config
+
+SolarAltitude.addTime = function (angle, riseName, setName) {
+    times.push([angle, riseName, setName]);
+};
+
+
+// calculations for sun times
+
+var J0 = 0.0009;
+
+function getJulianCycle(d, lw) {
+    return Math.round(d - J0 - lw / (2 * PI));
+}
+function getApproxTransit(Ht, lw, n) {
+    return J0 + (Ht + lw) / (2 * PI) + n;
+}
+function getSolarTransitJ(ds, M, L) {
+    return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
+}
+function getHourAngle(h, phi, d) {
+    return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+}
+
+
+// calculates sun times for a given date and latitude/longitude
+
+SolarAltitude.getTimes = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        n = getJulianCycle(d, lw),
+        ds = getApproxTransit(0, lw, n),
+
+        M = getSolarMeanAnomaly(ds),
+        C = getEquationOfCenter(M),
+        L = getEclipticLongitude(M, C),
+
+        dec = getDeclination(L, 0),
+
+        Jnoon = getSolarTransitJ(ds, M, L);
+
+
+    // returns set time for the given sun altitude
+    function getSetJ(h) {
+        var w = getHourAngle(h, phi, dec),
+            a = getApproxTransit(w, lw, n);
+
+        return getSolarTransitJ(a, M, L);
+    }
+
+
+    var result = {
+        solarNoon: fromJulian(Jnoon),
+        nadir: fromJulian(Jnoon - 0.5)
+    };
+
+    var i, len, time, angle, morningName, eveningName, Jset, Jrise;
+
+    for (i = 0, len = times.length; i &lt; len; i += 1) {
+        time = times[i];
+
+        Jset = getSetJ(time[0] * rad);
+        Jrise = Jnoon - (Jset - Jnoon);
+
+        result[time[1]] = fromJulian(Jrise);
+        result[time[2]] = fromJulian(Jset);
+    }
+
+    return result;
+};
+
+
+// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+
+function getMoonCoords(d) { // geocentric ecliptic coordinates of the moon
+
+    var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
+        M = rad * (134.963 + 13.064993 * d), // mean anomaly
+        F = rad * (93.272 + 13.229350 * d), // mean distance
+
+        l = L + rad * 6.289 * sin(M), // longitude
+        b = rad * 5.128 * sin(F), // latitude
+        dt = 385001 - 20905 * cos(M); // distance to the moon in km
+
+    return {
+        ra: getRightAscension(l, b),
+        dec: getDeclination(l, b),
+        dist: dt
+    };
+}
+
+SolarAltitude.getMoonPosition = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+        d = toDays(date),
+
+        c = getMoonCoords(d),
+        H = getSiderealTime(d, lw) - c.ra,
+        h = getAltitude(H, phi, c.dec);
+
+    // altitude correction for refraction
+    h = h + rad * 0.017 / tan(h + rad * 10.26 / (h + rad * 5.10));
+
+    return {
+        azimuth: getAzimuth(H, phi, c.dec),
+        altitude: h,
+        distance: c.dist
+    };
+};
+
+SolarAltitude.getMoonIllumination = function (date) {
+
+    var d = toDays(date),
+        s = getSunCoords(d),
+        m = getMoonCoords(d),
+
+        sdist = 149598000, // distance from Earth to Sun in km
+
+        phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
+        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi));
+
+    return {
+        fraction: (1 + cos(inc)) / 2,
+        angle: atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec)
+            - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra))
+    };
+};
+
+SolarAltitude.printTime = function (d,m){
+	var newd = new Date(d.valueOf() + m * 60000);
+  	var min = newd.getMinutes();
+    var hour = newd.getHours();
+    if (min &lt; 10) min = "0" + min;
+  	if (hour &lt; 10) hour = "0" + hour;
+    return hour+":"+min;
+};
+
+SolarAltitude.saveTimer = function (timer,d,m){
+	var str = 'hg.Program.Parameter("'+ timer + '").Value = SolarAltitude.printTime(d,m);';
+	eval(str);
+  	var str = 'var savedTimer = hg.Program.Parameter("'+ timer + '").Value';
+  	eval(str);
+    var spiltTimer = savedTimer.split(":");
+    timer = timer.substring(timer.indexOf(".")+1);
+  	hg.Scheduler.WithName(timer).SetSchedule(""+ spiltTimer[1] +" "+ spiltTimer[0] +" * * *");
+};
+
+
+SolarAltitude.main = function () {
+
+  // HomeGenie Main Script Logic starts here ------- 
+
+	var currentTime = new Date();
+	var latitude = hg.Program.InputField("jkUtils.SolarAltitude.Latitude").Value;
+	var longitude = hg.Program.InputField("jkUtils.SolarAltitude.Longitude").Value;    
+	var sun = SolarAltitude.getTimes(currentTime, latitude, longitude);
+	var moon = SolarAltitude.getMoonIllumination(currentTime);
+
+	var timeFormat = {hour: "numeric", minute: "numeric"};
+
+	// copy configure inputs to parameters as well
+	hg.Program.Parameter("jkUtils.SolarAltitude.Latitude").Value = hg.Program.InputField("jkUtils.SolarAltitude.Latitude").Value;
+	hg.Program.Parameter("jkUtils.SolarAltitude.Longitude").Value = hg.Program.InputField("jkUtils.SolarAltitude.Longitude").Value;
+	hg.Program.Parameter("jkUtils.SolarAltitude.Label").Value = hg.Program.InputField("jkUtils.SolarAltitude.Label").Value;
+	hg.Program.Parameter("jkUtils.SolarAltitude.Timeformat").Value = hg.Program.InputField("jkUtils.SolarAltitude.Timeformat").Value;
+
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Day.Start",sun.nightEnd,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Day.Noon",sun.solarNoon,0);
+
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Night.Start",sun.night,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Night.Nadir",sun.nadir,0);
+
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Night.End",sun.nightEnd,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Astronomical.Start",sun.nightEnd,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Astronomical.End",sun.nauticalDawn,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Nautical.Start",sun.nauticalDawn,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Nautical.End",sun.dawn,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Civil.Start",sun.dawn,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Civil.End",sun.sunrise,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Sunrise.Start",sun.sunrise,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.Sunrise.End",sun.sunriseEnd,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.GoldenHour.Start",sun.sunriseEnd,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Morning.GoldenHour.End",sun.goldenHourEnd,0);
+
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.GoldenHour.Start",sun.goldenHour,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.GoldenHour.End",sun.sunsetStart,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Sunset.Start",sun.sunsetStart,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Sunset.End",sun.sunset,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Civil.Start",sun.sunset,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Civil.End",sun.dusk,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Nautical.Start",sun.dusk,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Nautical.End",sun.nauticalDusk,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Astronomical.Start",sun.nauticalDusk,0);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Astronomical.End",sun.night,-1);
+	SolarAltitude.saveTimer("jkUtils.SolarAltitude.Evening.Night.Start",sun.night,0);
+
+	hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Fraction").Value = moon.fraction;
+
+	moon.fraction = moon.fraction * 100;
+
+	hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Precent").Value = Math.round(moon.fraction) + "%";
+	hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Angle").Value = moon.angle;
+	hg.Program.Parameter("jkUtils.SolarAltitude.Moon.Waxing").Value = (moon.angle &lt; 0 ? "1" : "0");
+
+	hg.Program.Parameter("jkUtils.SolarAltitude.LastUpdated").Value = SolarAltitude.printTime(currentTime,0);
+
+	hg.Program.Notify("jkUtils - Solar Altitude", "Data has been updated.");
+  
+};
+
+while (hg.Program.IsEnabled)
+{
+  	SolarAltitude.main();
+  	// Update every 12 hours
+  	hg.Pause(12*60*60);
+
+}
+
+
+//
+// Web service calls handling
+//
+/* WebServiceCall currently not working 
+
+hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args) {
+{
+    //string[] reqs = ((string)args).Split('/');
+  	var reqs = args.split('/');
+    var res = "";
+    hg.Program.Notify("SolarAltitude", "WebServiceCall.");
+    
+    try
+    {
+      var command = reqs[2];
+      var pid = reqs[1];
+      if (pid == hg.Program.Module.Address)
+      {
+
+        switch(command)
+        {
+          case "Control.Refresh":
+            //Program.Notify("jkutils: SolarAltitude","Update triggered.");
+          	SolarAltitude.main();
+            break;
+        }
+
+      }
+
+    } catch (e) {
+    
+      var res = "{ 'ResponseValue' : 'ERROR: " + e.Message + " " + e.StackTrace + "' }";
+      
+    }
+    // unable to process request
+    return res;
+
+});
+*/
+
+
+// For your convenience:
+//   If you should need a way to parse the saved times within you own scripts, you can use the following function.
+//   It is able to parse all kind of notations e.g.: '1:00 pm','1:00 p.m.', ...
+   
+//   function parseTime(timestring) {
+//     var d = new Date();
+//     var time = timestring.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+//     d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
+//     d.setMinutes( parseInt(time[2]) || 0 );
+     
+//    return d;
+//   }
+   
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>501</Address>
+    <Name>jkUtils - Solar Altitude</Name>
+    <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
+  Please set your local longitude/latitude in program options.</Description>
+    <Group>Contrib</Group>
+    <ActivationTime>2014-05-09T16:00:57.3137647Z</ActivationTime>
+    <TriggerTime>2014-05-09T16:00:57.3197403Z</TriggerTime>
+    <Type>Javascript</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

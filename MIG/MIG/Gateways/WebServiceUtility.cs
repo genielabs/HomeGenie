@@ -34,7 +34,9 @@ namespace MIG.Gateways
 
         public static void WriteStringToContext(System.Net.HttpListenerContext context, string returnValue)
         {
-            WriteBytesToContext(context, System.Text.Encoding.UTF8.GetBytes(returnValue));
+            Encoding encoding = context.Response.ContentEncoding;
+            if (encoding == null) encoding = Encoding.GetEncoding("ISO-8859-1");
+            WriteBytesToContext(context, encoding.GetBytes(returnValue));
         }
         public static void WriteBytesToContext(System.Net.HttpListenerContext context, byte[] buffer)
         {

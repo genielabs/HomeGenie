@@ -18,16 +18,16 @@
         "@value": "0001"
       },
       "libType": {
-        "@value": "00"
+        "@value": "01"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "00"
+        "@value": "14"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "01"
       },
       "appSubVersion": {
         "@value": "00"
@@ -50,83 +50,67 @@
       "routing": {
         "@value": "false"
       },
-      "beamSensor": "0",
-      "rfFrequency": "US",
-      "certId": "13989",
-      "certNumber": "ZC08-10090001"
+      "beamSensor": "0"
     },
     "deviceDescription": {
       "description": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Home Gateway"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Browser-gestütztes Z-Wave IP-Gateway"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Browser-Based Z-Wave IP-Gateway"
+          }
+        ]
       },
       "wakeupNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
       },
       "inclusionNote": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Go to 192.168.81.1, then slect \"ZWave device\", \"Advanced\" and click on \"Copy Z-Wave network from a foreign master\""
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Device -> Add Devices -> Add Z-Wave Devices"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Device -> Add Devices -> Add Z-Wave Devices"
+          }
+        ]
       },
-      "productName": "Vera",
-      "brandName": "Vera",
-      "productLine": "Vera",
-      "productCode": "Vera",
-      "productVersion": "1.0"
+      "productName": "Vera Lite",
+      "brandName": "MIOS",
+      "productCode": "MCV_VERA_L",
+      "batteryType": "AA (optional)",
+      "batteryCount": "4"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0020",
-          "@controlled": "true",
-          "@inNIF": "false",
-          "@secure": "true"
+          "@id": "0020"
         },
         {
-          "@id": "0062",
-          "@controlled": "true",
-          "@secure": "true"
+          "@id": "0021"
         },
         {
-          "@id": "0098",
-          "@controlled": "true",
-          "@secure": "true"
+          "@id": "0072"
         },
         {
-          "@id": "0044",
-          "@controlled": "true",
-          "@secure": "true"
+          "@id": "0086"
         },
         {
-          "@id": "0040",
-          "@controlled": "true",
-          "@secure": "true"
-        },
-        {
-          "@id": "0043",
-          "@controlled": "true",
-          "@secure": "true"
-        },
-        {
-          "@id": "0063",
-          "@controlled": "true",
-          "@secure": "true"
-        },
-        {
-          "@id": "0086",
-          "@secure": "true"
+          "@id": "0081"
         }
       ]
-    },
-    "resourceLinks": {
-      "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c9239b3b9ba5155e081565dbdfc321068393ebfc.jpg"
-      }
     }
   }
 }

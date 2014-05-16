@@ -29,103 +29,33 @@
       "appSubVersion": {
         "@value": "00"
       },
-      "basicClass": {
-        "@value": "01"
-      },
-      "genericClass": {
-        "@value": "08"
-      },
-      "specificClass": {
-        "@value": "00"
-      },
       "optional": {
         "@value": "false"
       },
       "listening": {
-        "@value": "true"
+        "@value": "false"
       },
       "routing": {
         "@value": "false"
-      },
-      "beamSensor": "0"
+      }
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "7 Tage Programmierbares Raum Thermostat Z-Wave"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "7 Day Programmable Room Thermostat Z-Wave"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de"
-          },
-          {
-            "@xml:lang": "en"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "2 x Enter um Menü zu öffnen; Rechte Pfeiltaste und \"Setup\" öffnen; Rechte Pfeiltaste und \"Set up Z-Wave\" öffnen; Rechte Pfeiltaste und \"Include node\" wählen."
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "2 x Enter to start menu; right arrow key open \"Setup\"; right arrow key open \"Set up Z-Wave\"; right arrow key select \"Include node\"."
-          }
-        ]
-      },
-      "productName": "SCS-317",
-      "brandName": "Secure",
-      "productCode": "SEC_SCS317",
-      "batteryType": "AA",
-      "batteryCount": "2"
-    },
-    "commandClasses": {
-      "commandClass": [
-        {
-          "@id": "0080"
-        },
-        {
-          "@id": "0042"
-        },
-        {
-          "@id": "0043"
-        },
-        {
-          "@id": "0084"
-        },
-        {
-          "@id": "0085"
-        },
-        {
-          "@id": "0086"
-        },
-        {
-          "@id": "0070"
-        },
-        {
-          "@id": "0031"
-        },
-        {
-          "@id": "0072"
-        },
-        {
-          "@id": "0053"
-        },
-        {
-          "@id": "0025"
+        "lang": {
+          "@xml:lang": "en"
         }
-      ]
+      },
+      "productName": "FIB_HC2"
     }
   }
 }

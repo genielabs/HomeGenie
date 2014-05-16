@@ -531,6 +531,9 @@ HG.WebApp.ProgramsList.ExportProgram = function (progaddr) {
 HG.WebApp.ProgramsList.RestartProgram = function (progaddr) {
     $('#automationprograms_program_options').popup('close');
     $.mobile.showPageLoadingMsg();
+    // 
+    $('#control_groupslist').empty();
+    //
     $.ajax({
         type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Restart/' + progaddr + '/',

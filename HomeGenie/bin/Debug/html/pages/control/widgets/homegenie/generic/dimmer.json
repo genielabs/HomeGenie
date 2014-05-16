@@ -89,17 +89,28 @@
         	if (level > 0)
         	{
 				levelText = 'ON';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
         	}
         	else
         	{
 				levelText = 'OFF';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="margin-right:2px;vertical-align:-3px" />';
         	}
 		} else level = 0;
-		this.StatusText = ((level >=98 || level == 0) ? levelText : Math.round(level) + '%') + '&nbsp;&nbsp;&nbsp; ' + watts;
+		this.StatusText += ((level >=98 || level == 0) ? levelText : Math.round(level) + '%') + '&nbsp;&nbsp;&nbsp; ' + watts;
 		//
-		// get light level prop for icon image
+		// add icon to StatusText
 		//
-		if (level > 0)
+
+		//
+		// set current icon image
+		//
+        var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
+		if (widgeticon != null && widgeticon.Value != '')
+        {
+            this.IconImage = widgeticon.Value;
+        }
+        else if (level > 0)
 		{
 			this.IconImage = 'pages/control/widgets/homegenie/generic/images/light_on.png';
 		}

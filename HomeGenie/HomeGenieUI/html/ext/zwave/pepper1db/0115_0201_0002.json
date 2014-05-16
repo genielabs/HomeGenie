@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "2a"
+        "@value": "43"
       },
       "appVersion": {
         "@value": "02"
       },
       "appSubVersion": {
-        "@value": "00"
+        "@value": "01"
       },
       "basicClass": {
         "@value": "04"
@@ -81,7 +81,7 @@
           },
           {
             "@xml:lang": "ru",
-            "#text": "Одиночное нажатие кнопки внутри корпуса"
+            "#text": "Одиночное нажатие кнопки внутри корпуса. Интервалы пробуждения кратны 240 секундам. 240, 480, 720 сек."
           }
         ]
       },
@@ -101,7 +101,7 @@
           }
         ]
       },
-      "productName": "Thermostat",
+      "productName": "Thermostat 2.1",
       "brandName": "Z-Wave.Me",
       "productCode": "TSDCT_TH",
       "batteryType": "AAA",
@@ -403,11 +403,11 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Threshold for temperature"
+                "#text": "Send Unsolicited temperature report"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Изменение температуры"
+                "#text": "Автоматическая отправка температуры"
               }
             ]
           },
@@ -423,7 +423,7 @@
               },
               {
                 "@xml:lang": "ru",
-                "#text": "На сколько должна измениться температура, чтобы iTemp отправил температуру контроллеру. 10 = 1 °C"
+                "#text": "На сколько должна измениться температура, чтобы датчик отправил температуру контроллеру. 10 = 1 °C"
               }
             ]
           },
@@ -451,16 +451,16 @@
             {
               "@from": "05",
               "@to": "32",
-              "@unit": "0.1 C",
+              "@unit": "0.1 °C",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "in 0.1 C Schritten"
+                    "#text": "in 0.1 °C"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "in 0.1 C units"
+                    "#text": "in 0.1 °C"
                   },
                   {
                     "@xml:lang": "ru",
@@ -511,16 +511,16 @@
           "value": {
             "@from": "05",
             "@to": "32",
-            "@unit": "0.1 C",
+            "@unit": "0.1 °C",
             "description": {
               "lang": [
                 {
                   "@xml:lang": "de",
-                  "#text": "in 0.1 °C Schritten"
+                  "#text": "in 0.1 °C"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "in 0.1 °C units"
+                  "#text": "in 0.1 °C"
                 },
                 {
                   "@xml:lang": "ru",
@@ -639,7 +639,7 @@
               },
               {
                 "@xml:lang": "ru",
-                "#text": "если установить \"каждые N пробуждений\" = 10, то температура будет отправляться при каждом 10 просыпании"
+                "#text": "Если установить \"каждые N пробуждений\" = 10, то температура будет отправляться при каждом 10 просыпании. По умолчанию температура не отправляется."
               }
             ]
           },
@@ -686,6 +686,108 @@
           ]
         },
         {
+          "@number": "7",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperature shift"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature shift"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Коррекция температуры"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Threshold correction. For positive value 10 = 1 °C, for negative value x = 256 - (T°C * 10). Example, if need shift -2°C, value calculate: 256 - (2 * 10) = 236."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold correction. For positive value 10 = 1 °C, for negative value x = 256 - (T°C * 10). Example, if need shift -2°C, value calculate: 256 - (2 * 10) = 236."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "На сколько градусов корректировать температуру. Для положительного 10 = 1 °C. Для отрицательного значение x = 256 - (T°C * 10). Например, если нужно присылаемую температуру уменьшать на 2°C, то значение вычисляется так: 256 - (2 * 10) = 236."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "ff",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "7f",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "in 0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
           "@number": "30",
           "@type": "rangemapped",
           "@size": "1",
@@ -702,7 +804,7 @@
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Отправлять непрошеный отчёт заряда батареек Battery Report при пробуждении"
+                "#text": "Автоматическая отправка заряда батареек Battery Report при пробуждении"
               }
             ]
           },
@@ -755,7 +857,7 @@
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Тому же узлу, что и оповещение о пробуждении"
+                    "#text": "Тому же узлу, что и оповещение от пробуждении"
                   }
                 ]
               }
@@ -786,7 +888,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/2e3636231dad2ddcc669955b03f729a743498708.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/3870063c29abef57ceb8ef1a501091a1fe991be8.jpg"
       }
     }
   }

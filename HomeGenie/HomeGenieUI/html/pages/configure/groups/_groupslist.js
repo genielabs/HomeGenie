@@ -92,14 +92,15 @@ HG.WebApp.GroupsList.GroupsAdd = function(grpname) {
 HG.WebApp.GroupsList.SortGroups = function () {
 
     var neworder = '';
-
     $('#configure_groupslist').children('li').each(function () {
         var gidx = $(this).attr('data-group-index');
         if (gidx >= 0) {
             neworder += (gidx + ';')
         }
     });
-
+    // 
+    $('#control_groupslist').empty();
+    //
     HG.Configure.Groups.Sort('Control', neworder, function (res) {
         HG.WebApp.GroupsList.LoadGroups();
     });

@@ -91,6 +91,29 @@ HG.WebApp.GroupModules.InitializePage = function () {
     });
 };
 
+HG.WebApp.GroupModules.SetModuleIcon = function (img) {
+    var icon = $(img).attr('src');
+    $('#module_icon').attr('src', icon);
+    HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon', icon);
+    var iconprop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon');
+    iconprop.NeedsUpdate = 'true';
+    $('#configure_module_iconslist').hide(200);
+};
+
+HG.WebApp.GroupModules.ModuleIconsToggle = function () {
+
+    if (HG.WebApp.GroupModules.EditModule.DeviceType.toLowerCase() != 'program')
+    {
+        if ($('#configure_module_iconslist').css('display') != 'none') {
+            $('#configure_module_iconslist').hide(200);
+        }
+        else {
+            $('#configure_module_iconslist').show(200);
+        }
+    }
+
+};
+
 HG.WebApp.GroupModules.SortModules = function () {
 
     var neworder = '';
@@ -101,6 +124,9 @@ HG.WebApp.GroupModules.SortModules = function () {
         }
     });
     $.mobile.showPageLoadingMsg();
+    // 
+    $('#control_groupslist').empty();
+    //
     HG.Configure.Groups.SortModules('Control', HG.WebApp.GroupModules.CurrentGroup, neworder, function (res) {
         HG.Configure.Groups.List('Control', function () {
             HG.WebApp.GroupModules.LoadGroupModules();
@@ -237,8 +263,6 @@ HG.WebApp.GroupModules.GetModulesListViewItems = function (groupname) {
 };
 
 HG.WebApp.GroupModules.AddGroupModule = function (group, domain, address) {
-    //var module = HG.WebApp.Utility.GetModuleByDomainAddress(domain, address);
-    //
     var alreadyexists = false;
     var moduleindex = -1;
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
@@ -270,31 +294,38 @@ HG.WebApp.GroupModules.UpdateWMWatts = function (module, wmwatts) {
 }
 
 HG.WebApp.GroupModules.UpdateModuleType = function (type) {
-    HG.WebApp.GroupModules.EditModule.DeviceType = type;
-    type = type.toLowerCase();
+    var mtype = type.toLowerCase();
     //
     $('#module_options_1').css('display', '');
     $('#module_options_2').css('display', '');
     $('#module_options_3').css('display', '');
     //
-    if (type == 'light' || type == 'dimmer' || type == 'switch') {
+    if (mtype == 'light' || mtype == 'dimmer' || mtype == 'switch') {
         $('#module_vmwatts').val('0');
         $('#module_vmwatts_label').removeClass('ui-disabled');
         $('#module_vmwatts').removeClass('ui-disabled');
     }
-    else if (type == 'program') {
+    else if (mtype == 'program') {
         $('#module_options_1').css('display', 'none');
         $('#module_options_2').css('display', 'none');
         $('#module_options_3').css('display', 'none');
     }
-    else if (type && type != undefined && type != 'generic' && type != '') {
+    else if (mtype && mtype != undefined && mtype != 'generic' && mtype != '') {
         $('#module_vmwatts').val('');
         $('#module_vmwatts_label').addClass('ui-disabled');
         $('#module_vmwatts').addClass('ui-disabled');
     }
-    configurepage_GetModuleIcon(HG.WebApp.GroupModules.EditModule, function (icon) {
-        $('#module_icon').attr('src', icon);
-    });
+    //
+    if (HG.WebApp.GroupModules.EditModule.DeviceType != type)
+    {
+        HG.WebApp.GroupModules.EditModule.DeviceType = type;
+        HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon', '');
+        var iconprop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon');
+        iconprop.NeedsUpdate = 'true';
+        configurepage_GetModuleIcon(HG.WebApp.GroupModules.EditModule, function (icon) {
+            $('#module_icon').attr('src', icon);
+        });
+    }
     //
     HG.WebApp.GroupModules.UpdateFeatures();
 };
@@ -416,7 +447,9 @@ HG.WebApp.GroupModules.ModuleEdit = function (item) {
         $('#module_name').val(HG.WebApp.GroupModules.EditModule.Name);
         $('#module_type').val(HG.WebApp.GroupModules.EditModule.DeviceType).attr('selected', true).siblings('option').removeAttr('selected');
         $('#module_type').selectmenu('refresh', true);
-        configurepage_GetModuleIcon(HG.WebApp.GroupModules.EditModule, function (icon) {
+        //
+        $('#configure_module_iconslist').hide();
+        configurepage_GetModuleIcon(HG.WebApp.GroupModules.CurrentModule, function (icon) {
             $('#module_icon').attr('src', icon);
         });
         $('#module_vmwatts').val(HG.WebApp.GroupModules.EditModule.WMWatts > 0 ? HG.WebApp.GroupModules.EditModule.WMWatts : '0');
@@ -512,7 +545,7 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
 HG.WebApp.GroupModules.FeatureUpdate = function (module, property, value) {
     var mp = HG.WebApp.Utility.GetModulePropertyByName(module, property);
     HG.WebApp.Utility.SetModulePropertyByName(module, property, value);
-    property.Changed = true;
+    //property.Changed = true;
 }
 
 HG.WebApp.GroupModules.FeatureToggle = function (module, property) {
@@ -523,7 +556,7 @@ HG.WebApp.GroupModules.FeatureToggle = function (module, property) {
     else {
         HG.WebApp.Utility.SetModulePropertyByName(module, property, "On");
     }
-    property.Changed = true;
+    //property.Changed = true;
 };
 
 HG.WebApp.GroupModules.ZWave_AssociationGet = function () {

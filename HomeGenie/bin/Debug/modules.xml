@@ -9,18 +9,18 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Enabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-09T19:54:02.5364667Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4032986Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-09T19:54:02.2564513Z</LastUpdateTime>
+        <LastValue>Enabled</LastValue>
+        <LastUpdateTime>2014-04-09T19:54:02.5364667Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>6</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -46,18 +46,18 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Enabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-09T19:53:41.739717Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4052989Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-09T19:53:41.4877018Z</LastUpdateTime>
+        <LastValue>Enabled</LastValue>
+        <LastUpdateTime>2014-04-09T19:53:41.739717Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>7</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -85,16 +85,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:40.1972142Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4123549Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:52.8425457+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4072988Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>16</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -140,16 +140,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:40.2112156Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4153719Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:52.8535466+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4092995Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -177,7 +177,7 @@
         <Name>Astronomy.Sunrise</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -186,7 +186,7 @@
         <Name>Astronomy.Sunset</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -195,7 +195,7 @@
         <Name>Conditions.City</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -204,7 +204,7 @@
         <Name>Conditions.Description</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -213,7 +213,7 @@
         <Name>Conditions.DisplayLocation</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -222,7 +222,7 @@
         <Name>Conditions.IconUrl</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -231,7 +231,7 @@
         <Name>Conditions.TemperatureC</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -240,7 +240,7 @@
         <Name>Conditions.TemperatureF</Name>
         <Value />
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4183561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
@@ -294,16 +294,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:41.1610814Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4203561Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:53.826054+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4112988Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>34</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-02T16:05:20.1628516+02:00</LastUpdateTime>
@@ -331,16 +331,16 @@
         <Name>Program.Status</Name>
         <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:22:31.6692876Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4122988Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-19T10:22:31.6642876Z</LastUpdateTime>
+        <LastUpdateTime>2014-05-12T22:22:56.0560669Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>35</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -366,21 +366,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Astronomy.Sunrise</Name>
-        <Value>06:43:49</Value>
+        <Value>06:03:41</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.2286238Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.496416Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>06:58:22</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.4955225Z</LastUpdateTime>
+        <LastValue>06:03:41</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.5947588Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Astronomy.Sunset</Name>
-        <Value>19:39:24</Value>
+        <Value>20:05:05</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.1696201Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.4224122Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>19:30:57</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.4205179Z</LastUpdateTime>
+        <LastValue>20:05:05</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.5142977Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Latitude</Name>
@@ -402,90 +402,90 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Sunset</Name>
-        <Value>19:39:24</Value>
+        <Value>20:05:05</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.6316469Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.9554422Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>19:30:57</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.9295468Z</LastUpdateTime>
+        <LastValue>20:05:05</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.9939845Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Astronomical</Name>
-        <Value>21:17:53</Value>
+        <Value>21:54:28</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.8966614Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:15.1964565Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>21:07:14</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:33.1675602Z</LastUpdateTime>
+        <LastValue>21:54:28</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:45.2559998Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Civil</Name>
-        <Value>20:08:05</Value>
+        <Value>20:35:45</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.7426528Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:15.0354463Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>19:59:16</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:33.0095514Z</LastUpdateTime>
+        <LastValue>20:35:45</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:45.0829894Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Nautical</Name>
-        <Value>20:42:15</Value>
+        <Value>21:13:22</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.8186566Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:15.1164527Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>20:32:43</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:33.087555Z</LastUpdateTime>
+        <LastValue>21:13:22</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:45.1689948Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Sunrise</Name>
-        <Value>06:43:49</Value>
+        <Value>06:03:41</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.300628Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.5834217Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>06:58:22</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.5625256Z</LastUpdateTime>
+        <LastValue>06:03:41</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.6707763Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Astronomical</Name>
-        <Value>05:05:44</Value>
+        <Value>04:14:55</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.5686442Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.8914385Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>05:22:25</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.8715437Z</LastUpdateTime>
+        <LastValue>04:14:55</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.9309811Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Civil</Name>
-        <Value>06:15:13</Value>
+        <Value>05:33:07</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.3796328Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.6744273Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>06:30:07</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.6885332Z</LastUpdateTime>
+        <LastValue>05:33:07</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.7567673Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Nautical</Name>
-        <Value>05:41:11</Value>
+        <Value>04:55:42</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:45.4786389Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:14.8054342Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>05:56:47</LastValue>
-        <LastUpdateTime>2014-04-11T19:26:32.7895384Z</LastUpdateTime>
+        <LastValue>04:55:42</LastValue>
+        <LastUpdateTime>2014-05-12T22:22:44.8437716Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:43.1614485Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4293563Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:55.8284095+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4243003Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>72</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T13:21:58.6290308+02:00</LastUpdateTime>
@@ -538,12 +538,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:49:21.5327947Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4263002Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:48:52.8389698Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:49:21.5327947Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -602,12 +602,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:49:14.2660397Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4282998Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:48:56.641858Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:49:14.2660397Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -666,12 +666,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:49:25.1184916Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4303002Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:05.3961372Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:49:25.1184916Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -730,12 +730,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:49:17.9763693Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4683029Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:01.8675085Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:49:17.9763693Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -767,27 +767,27 @@
     <Properties>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter</Name>
-        <Value>0,000</Value>
+        <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:53.477606Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4953596Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-04-19T09:26:51.670638Z</LastUpdateTime>
+        <LastValue>0,000</LastValue>
+        <LastUpdateTime>2014-05-09T16:01:24.6434606Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
-        <Value>0,000</Value>
+        <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:53.477606Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4953596Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-04-19T09:26:51.670638Z</LastUpdateTime>
+        <LastValue>0,000</LastValue>
+        <LastUpdateTime>2014-05-09T16:01:24.6434606Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:53.477606Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4953596Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:15:11.149413+02:00</LastUpdateTime>
@@ -796,16 +796,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:51.6596382Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4773582Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:04.8261563+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4643033Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>81</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.1438014+02:00</LastUpdateTime>
@@ -842,16 +842,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:44.1638299Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4403571Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:57.8300988+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4323001Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>82</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -879,16 +879,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:46.1651856Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4413571Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:30:58.8298692+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4373Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>84</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -916,7 +916,7 @@
         <Name>ConfigureOptions.Email.Recipients</Name>
         <Value />
         <Description>3. Comma separated list of recipients e-mails for alarm notifications</Description>
-        <UpdateTime>2014-04-19T10:21:23.6136936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4463597Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:14:58.1512372+02:00</LastUpdateTime>
@@ -943,7 +943,7 @@
         <Name>ConfigureOptions.Trigger.ArmedProgram</Name>
         <Value />
         <Description>4. Program to run when armed</Description>
-        <UpdateTime>2014-04-19T10:21:23.6136936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4463597Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
@@ -952,7 +952,7 @@
         <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
         <Value />
         <Description>5. Program to run when disarmed</Description>
-        <UpdateTime>2014-04-19T10:21:23.6136936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4463597Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
@@ -961,7 +961,7 @@
         <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
         <Value />
         <Description>6. Program to run when triggered</Description>
-        <UpdateTime>2014-04-19T10:21:23.6136936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4463597Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
@@ -970,7 +970,7 @@
         <Name>HomeGenie.SecurityArmed</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6216941Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4763592Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:14:58.167253+02:00</LastUpdateTime>
@@ -979,7 +979,7 @@
         <Name>HomeGenie.SecurityTriggered</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4853594Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:14:58.168254+02:00</LastUpdateTime>
@@ -988,16 +988,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6136936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4463597Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Enabled</LastValue>
-        <LastUpdateTime>2014-04-19T10:21:23.6106937Z</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.441301Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4853594Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:14:58.168254+02:00</LastUpdateTime>
@@ -1006,7 +1006,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>90</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -1034,16 +1034,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:48.1592867Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4573582Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:00.8284717+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.443301Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>91</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -1071,16 +1071,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:52.6623966Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4753592Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:05.3297218+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4663029Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>93</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.1467788+02:00</LastUpdateTime>
@@ -1178,12 +1178,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:45:40.976008Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4763024Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:45:31.788691Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:45:40.976008Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1217,16 +1217,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:49.160094Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.47236Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:01.8312904+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4473009Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>112</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -1254,7 +1254,7 @@
         <Name>ConfigureOptions.Email.Sender</Name>
         <Value />
         <Description>1. E-Mail address</Description>
-        <UpdateTime>2014-04-19T09:26:49.6965452Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4743593Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
@@ -1263,7 +1263,7 @@
         <Name>ConfigureOptions.Email.SmtpPassword</Name>
         <Value />
         <Description>4. SMTP password (optional)</Description>
-        <UpdateTime>2014-04-19T09:26:49.6965452Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4743593Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
@@ -1281,7 +1281,7 @@
         <Name>ConfigureOptions.Email.SmtpServer</Name>
         <Value />
         <Description>2. SMTP Mail Server address</Description>
-        <UpdateTime>2014-04-19T09:26:49.6965452Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4743593Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
@@ -1290,7 +1290,7 @@
         <Name>ConfigureOptions.Email.SmtpUserName</Name>
         <Value />
         <Description>3. SMTP username (optional)</Description>
-        <UpdateTime>2014-04-19T09:26:49.6965452Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4743593Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
@@ -1308,16 +1308,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:49.6965452Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4743593Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:02.827002+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4513012Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>142</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
@@ -1379,12 +1379,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:50:25.5371261Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4553021Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Enabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:50:17.2563693Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:50:25.5371261Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1418,16 +1418,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:53.6609936Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4983609Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:07.3277584+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4733028Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>145</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.1467788+02:00</LastUpdateTime>
@@ -1489,12 +1489,12 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>Idle</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:50:37.016838Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:12.4563024Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:50:30.5235519Z</LastUpdateTime>
+        <LastValue>Disabled</LastValue>
+        <LastUpdateTime>2014-04-11T18:50:37.016838Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1528,16 +1528,16 @@
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2014-04-19T09:26:50.6598373Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4803612Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-09T21:31:03.8268939+02:00</LastUpdateTime>
+        <LastValue>Idle</LastValue>
+        <LastUpdateTime>2014-05-12T22:30:12.4623023Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>200</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-01T01:13:56.1438014+02:00</LastUpdateTime>
@@ -1550,413 +1550,6 @@
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-04-11T17:54:14.1672813+02:00</LastUpdateTime>
-      </ModuleParameter>
-    </Properties>
-    <RoutingNode />
-  </Module>
-  <Module>
-    <Name>jkUtils - SunCalc</Name>
-    <Description>Wizard Script</Description>
-    <DeviceType>Program</DeviceType>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>501</Address>
-    <Properties>
-      <ModuleParameter>
-        <Name>ConfigureOptions.jkUtils.SunCalc.Label</Name>
-        <Value>SunCalc - Berlin</Value>
-        <Description>optional: Allows for manual label in visualization</Description>
-        <UpdateTime>2014-04-11T18:49:40.1920628Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.jkUtils.SunCalc.Latitude</Name>
-        <Value>52.30</Value>
-        <Description>mandatory: Location Latitude</Description>
-        <UpdateTime>2014-04-11T18:49:40.1920628Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1880628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.jkUtils.SunCalc.Longitude</Name>
-        <Value>13.25</Value>
-        <Description>mandatory: Location Longitude</Description>
-        <UpdateTime>2014-04-11T18:49:40.1920628Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Day.Noon</Name>
-        <Value>13:09</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4042079Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4042079+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Day.Start</Name>
-        <Value>04:11</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.3692016Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.3682023+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Astronomical.End</Name>
-        <Value>22:05</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4242052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4242052+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Astronomical.Start</Name>
-        <Value>21:17</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4242052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Civil.End</Name>
-        <Value>20:32</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4222049Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4222049+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Civil.Start</Name>
-        <Value>19:58</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4222049Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.GoldenHour.Start</Name>
-        <Value>19:12</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4202042Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4202042+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Nautical.End</Name>
-        <Value>21:16</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4232042Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4232042+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Nautical.Start</Name>
-        <Value>20:33</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4232042Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Night.Start</Name>
-        <Value>22:06</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4252052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4252052+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Sunset.End</Name>
-        <Value>19:57</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4212056Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4212056+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Evening.Sunset.Start</Name>
-        <Value>19:54</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4212056Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.LastUpdated</Name>
-        <Value>20:49</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4262055Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4262055+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.LastUpdatedValue</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.1920628Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Moon.Angle</Name>
-        <Value>-1.25782551272479</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4252052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4252052+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Moon.Fraction</Name>
-        <Value>0.872731435354221</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4252052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4252052+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Moon.Precent</Name>
-        <Value>87%</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4252052Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4252052+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Moon.Waxing</Name>
-        <Value>1</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4262055Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4262055+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Astronomical.End</Name>
-        <Value>04:59</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.415206Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.415206+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Astronomical.Start</Name>
-        <Value>04:11</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.415206Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Civil.End</Name>
-        <Value>06:19</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4182043Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4182043+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Civil.Start</Name>
-        <Value>05:44</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4172036Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.GoldenHour.End</Name>
-        <Value>07:05</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4192046Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4192046+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Nautical.End</Name>
-        <Value>05:43</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4172036Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4172036+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Nautical.Start</Name>
-        <Value>05:00</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4162067Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Night.End</Name>
-        <Value>04:10</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4141896Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4141896+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Sunrise.End</Name>
-        <Value>06:23</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4192046Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4192046+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Morning.Sunrise.Start</Name>
-        <Value>06:20</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4182043Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.1920628+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Night.Nadir</Name>
-        <Value>01:09</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4131917Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4131917+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>jkUtils.SunCalc.Night.Start</Name>
-        <Value>22:06</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:40.4052045Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:40.4052045+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Disabled</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:50.0128518Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:40.1940621Z</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualModule.ParentId</Name>
-        <Value>501</Value>
-        <Description />
-        <UpdateTime>2014-04-11T18:49:39.8670439Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:39.8670439+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-04-11T18:49:39.8670439Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:39.8670439+02:00</LastUpdateTime>
-      </ModuleParameter>
-    </Properties>
-    <RoutingNode />
-  </Module>
-  <Module>
-    <Name>Alcatel One Touch Y800Z SMS Notify</Name>
-    <Description />
-    <DeviceType>Program</DeviceType>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1000</Address>
-    <Properties>
-      <ModuleParameter>
-        <Name>ConfigureOptions.ModemIp</Name>
-        <Value />
-        <Description>1. Modem IP address</Description>
-        <UpdateTime>2014-04-19T10:03:30.3049211Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.ModemPassword</Name>
-        <Value />
-        <Description>3. Modem password</Description>
-        <UpdateTime>2014-04-19T10:03:30.3049211Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.ModemUsername</Name>
-        <Value />
-        <Description>2. Modem username</Description>
-        <UpdateTime>2014-04-19T10:03:30.3049211Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>ConfigureOptions.SmsRecipient</Name>
-        <Value />
-        <Description>4. Recipient phone number</Description>
-        <UpdateTime>2014-04-19T10:03:30.3049211Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Program.Status</Name>
-        <Value>Disabled</Value>
-        <Description />
-        <UpdateTime>2014-04-19T10:06:33.7809394Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-04-19T10:03:30.305921Z</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>VirtualModule.ParentId</Name>
-        <Value>1000</Value>
-        <Description />
-        <UpdateTime>2014-04-19T10:03:30.360943Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2014-04-19T09:55:41.6695572Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T11:55:41.6695572+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2098,7 +1691,7 @@
         <Name>Meter.Watts</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:22:28.1992243Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:20.1193805Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue>8,98051948051948</LastValue>
         <LastUpdateTime>2014-03-31T23:00:32.7615204Z</LastUpdateTime>
@@ -2161,7 +1754,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:54.420442+01:00</LastUpdateTime>
@@ -2170,7 +1763,7 @@
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
-        <UpdateTime>2014-02-09T16:43:35.598358Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4133548Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:50.288596+01:00</LastUpdateTime>
@@ -2315,7 +1908,7 @@
         <Name>Meter.Watts</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:22:28.3012293Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:20.2204205Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue>9,68181818181818</LastValue>
         <LastUpdateTime>2014-03-31T23:00:02.5594042Z</LastUpdateTime>
@@ -2378,7 +1971,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:54.421063+01:00</LastUpdateTime>
@@ -2387,7 +1980,7 @@
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
-        <UpdateTime>2014-02-09T16:43:35.617681Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4133548Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:50.365469+01:00</LastUpdateTime>
@@ -2532,7 +2125,7 @@
         <Name>Meter.Watts</Name>
         <Value>0</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:22:28.4022365Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:20.3217557Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue>9,0974025974026</LastValue>
         <LastUpdateTime>2014-03-31T23:00:02.6604977Z</LastUpdateTime>
@@ -2595,7 +2188,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:54.421731+01:00</LastUpdateTime>
@@ -2604,7 +2197,7 @@
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
-        <UpdateTime>2014-02-09T16:43:35.618332Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4133548Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:50.366348+01:00</LastUpdateTime>
@@ -2623,7 +2216,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:54.422561+01:00</LastUpdateTime>
@@ -2632,7 +2225,7 @@
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
-        <UpdateTime>2014-02-09T16:43:35.618897Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4133548Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:50.367156+01:00</LastUpdateTime>
@@ -2651,7 +2244,7 @@
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
-        <UpdateTime>2014-04-19T10:21:23.6226938Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:25.7754306Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:54.423109+01:00</LastUpdateTime>
@@ -2660,7 +2253,7 @@
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
-        <UpdateTime>2014-02-09T16:43:35.619494Z</UpdateTime>
+        <UpdateTime>2014-05-12T22:30:13.4133548Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
         <LastValue />
         <LastUpdateTime>2014-02-09T16:37:50.367779+01:00</LastUpdateTime>

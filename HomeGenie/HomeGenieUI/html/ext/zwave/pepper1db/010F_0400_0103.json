@@ -389,7 +389,7 @@
         },
         {
           "@number": "6",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {

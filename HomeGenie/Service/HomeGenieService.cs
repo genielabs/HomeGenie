@@ -1196,21 +1196,21 @@ namespace HomeGenie.Service
             switch(e.Status)
             {
                 case DISCOVERY_STATUS.DISCOVERY_START:
-                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Discovery Started");
+                    LogBroadcastEvent(Domains.HomeAutomation_ZWave, "1", "Z-Wave Controller", "Controller.Status", "Discovery Started");
                     break;
                 case DISCOVERY_STATUS.DISCOVERY_END:
-                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Discovery Complete");
+                    LogBroadcastEvent(Domains.HomeAutomation_ZWave, "1", "Z-Wave Controller", "Controller.Status", "Discovery Complete");
                     modules_RefreshZwave();
                     modules_Sort();
                     break;
                 case DISCOVERY_STATUS.NODE_ADDED:
-                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Added node " + e.NodeId);
+                    LogBroadcastEvent(Domains.HomeAutomation_ZWave, "1", "Z-Wave Controller", "Controller.Status", "Added node " + e.NodeId);
                     break;
                 case DISCOVERY_STATUS.NODE_UPDATED:
-                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Updated node " + e.NodeId);
+                    LogBroadcastEvent(Domains.HomeAutomation_ZWave, "1", "Z-Wave Controller", "Controller.Status", "Updated node " + e.NodeId);
                     break;
                 case DISCOVERY_STATUS.NODE_REMOVED:
-                    LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", Domains.HomeAutomation_ZWave, "Removed node " + e.NodeId);
+                    LogBroadcastEvent(Domains.HomeAutomation_ZWave, "1", "Z-Wave Controller", "Controller.Status", "Removed node " + e.NodeId);
                     break;
             }
         }

@@ -79,11 +79,18 @@
             
         }
 		//
+		var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
+		if (widgeticon != null && widgeticon.Value != '')
+        {
+            this.IconImage = widgeticon.Value;
+        }
+		//
 		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>' );
 		//
 		if (sensorimgdata != '') sensorimgdata = sensorimgdata + '<br clear="all" />';
 		if (sensortxtdata != '') sensortxtdata = sensortxtdata + '<br clear="all" />';
 		widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
+		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
     }
 
 }]

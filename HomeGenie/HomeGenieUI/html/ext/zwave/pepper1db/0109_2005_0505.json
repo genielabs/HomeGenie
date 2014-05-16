@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "53"
+        "@value": "83"
       },
       "appVersion": {
-        "@value": "0e"
+        "@value": "14"
       },
       "appSubVersion": {
-        "@value": "01"
+        "@value": "03"
       },
       "basicClass": {
         "@value": "04"
@@ -45,91 +45,82 @@
         "@value": "false"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "1000"
+      "beamSensor": "1000",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Überflutungssensor"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Flood Sensor"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Wireless Siren & Strobe Alarm will sound a loud siren and flash a strobe light when an alarm message or alert is received."
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "internen Taster drücken"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Push Tamper Switch"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "internen Taster mindestens 1 Sekunde drücken"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Keep Tamper Switch Pushed for > 1 sec."
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Open the bracket and press the program switch of ZM 1601 for 1 second at least & release to be included. "
+        }
       },
-      "productName": "ZF5201",
-      "brandName": "ZF5201",
-      "productLine": "ZF5201",
-      "productCode": "ZF5201",
-      "batteryType": "CR123A",
-      "batteryCount": "1"
+      "productName": "Wireless Siren & Strobe Alarm, Battery Type",
+      "brandName": "Vision",
+      "productLine": "Home Security",
+      "productCode": "05",
+      "batteryType": "AAA",
+      "batteryCount": "4"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0080"
-        },
-        {
-          "@id": "0020",
-          "@inNIF": "false"
+          "@id": "005e",
+          "@version": "2"
         },
         {
           "@id": "0085",
           "@version": "2"
         },
         {
-          "@id": "0086",
-          "@version": "2"
+          "@id": "0059"
+        },
+        {
+          "@id": "0080"
         },
         {
           "@id": "0070"
         },
         {
-          "@id": "0071",
-          "@version": "4"
-        },
-        {
-          "@id": "0072",
-          "@version": "2"
-        },
-        {
-          "@id": "0073"
+          "@id": "005a"
         },
         {
           "@id": "007a",
           "@version": "2"
         },
         {
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0071",
+          "@version": "4"
+        },
+        {
+          "@id": "0073"
+        },
+        {
           "@id": "0025"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0020"
         }
       ]
     },
@@ -138,17 +129,16 @@
         "@number": "1",
         "@maxNodes": "5",
         "description": {
-          "lang": [
-            {
-              "@xml:lang": "de",
-              "#text": "Überflutung erkannt"
-            },
-            {
-              "@xml:lang": "en",
-              "#text": "Flood detected"
-            }
-          ]
+          "lang": {
+            "@xml:lang": "en",
+            "#text": "Back Cover Switch Trigger (COMMAND_CLASS_NOTIFICATION) & Low Voltage Report (COMMAND_CLASS_BATTERY) will be sent to the associated nodes."
+          }
         }
+      }
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/d092624a8aef407bfcd5e9be68eeaa3bc63a523b.jpg"
       }
     }
   }

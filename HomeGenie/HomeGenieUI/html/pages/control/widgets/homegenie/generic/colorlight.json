@@ -107,20 +107,23 @@
 				if (level >= 99 )
 				{
 					level = 'ON';
+					this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
 				}
 				else
 				{
 					level = 'OFF';
+					this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="margin-right:2px;vertical-align:-3px" />';
 				}
         	}
         	else
         	{
 				level = level.toFixed(0) + '%';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
         	}
 
 		} else level = '';
 		//
-		this.StatusText = level + '&nbsp;&nbsp;&nbsp; ' + watts;
+		this.StatusText += level + '&nbsp;&nbsp;&nbsp; ' + watts;
 		//
 		var hsbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
 		if (hsbcolor != null && this.ColorWheel != null)

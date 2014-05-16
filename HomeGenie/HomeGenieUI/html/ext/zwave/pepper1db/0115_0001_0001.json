@@ -18,13 +18,13 @@
         "@value": "0001"
       },
       "libType": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "00"
+        "@value": "43"
       },
       "appVersion": {
         "@value": "01"
@@ -33,48 +33,78 @@
         "@value": "00"
       },
       "basicClass": {
-        "@value": "02"
+        "@value": "04"
       },
       "genericClass": {
-        "@value": "02"
+        "@value": "a1"
       },
       "specificClass": {
-        "@value": "01"
+        "@value": "07"
       },
       "optional": {
         "@value": "true"
       },
       "listening": {
-        "@value": "true"
-      },
-      "routing": {
         "@value": "false"
       },
-      "beamSensor": "0",
-      "certId": "CEF14170",
-      "certNumber": "ZC08-1104000"
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0"
     },
     "deviceDescription": {
       "description": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Home automation software"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Rauchmelder mit integriertem Temperatur -und Feuchtesensor"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Smoke Detector with Temperature&Humidity sensor"
+          },
+          {
+            "@xml:lang": "ru"
+          }
+        ]
       },
       "wakeupNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Taster 1 Sekude drücken, wenn Melder auf Sockel aufgesteckt ist"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Press Test button for 1 second when device is mounted on mounting ring"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Удержание кнопки Test 1 секунду"
+          }
+        ]
       },
       "inclusionNote": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Press \"(Re-)include in or exclude myself from other's network\" button"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Taster 1 Sekunde drücken, wenn Melder vom Sockel angenommen ist"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Press Test button for 1 second when device is not mounted on mounting ring"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "При отжатом тампере, удерживать кнопку TEST 3 секунды"
+          }
+        ]
       },
-      "productName": "Z-Way",
+      "productName": "Smoke Detector 1.0",
       "brandName": "Z-Wave.Me",
-      "productVersion": "1.0"
+      "productVersion": "1.0",
+      "batteryType": "CR123A",
+      "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
@@ -82,570 +112,1111 @@
           "@id": "0020"
         },
         {
-          "@id": "0081"
+          "@id": "0080"
+        },
+        {
+          "@id": "0084",
+          "@version": "2"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
         },
         {
           "@id": "0086"
         },
         {
-          "@id": "0026"
-        },
-        {
-          "@id": "0060",
+          "@id": "0030",
           "@version": "2"
         },
         {
-          "@id": "008a",
-          "@version": "2"
+          "@id": "0070"
         },
         {
-          "@id": "002b"
-        },
-        {
-          "@id": "008f"
+          "@id": "0071",
+          "@version": "3"
         },
         {
           "@id": "0072"
         },
         {
-          "@id": "0094"
-        },
-        {
-          "@id": "0077"
+          "@id": "0031",
+          "@version": "5"
         }
       ]
     },
-    "endpoints": {
-      "endpoint": [
-        {
-          "@number": "16",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "15",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "14",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "13",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "12",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "11",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "10",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "9",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "8",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "7",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "6",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
-        {
-          "@number": "5",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
-        },
+    "assocGroups": {
+      "assocGroup": [
         {
           "@number": "4",
-          "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
+          "@maxNodes": "5",
           "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
-          },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
-            }
-          ]
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schaltet Gerät bei erkanntem Rauch"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switches device when smoke was detected"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройства управляемые при задымлении."
+              }
+            ]
+          }
         },
         {
           "@number": "3",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schaltet Geräte, wenn kritische Luftfeuchte überschritten ist"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switches Device when humidity reaches trigger level"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройства управляемые при достижении критической влажности"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schaltet Geräte, wenn kritische Temperatur überschritten ist"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switches Device when temperature reaches trigger level"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройства управляемые при достижении критической температуры"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "für die Steuerzentrale, empfängt alle Sensorwerte"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Controller, all Temperature and Humidity Changes"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Контроллер, которому отправляются отчеты при изменении температуры, влажности или при задымлении"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
           "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Senden eines Temperatur-Reports"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Unsolicited temperature report"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Автоматическая отправка температуры "
+              }
+            ]
           },
           "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schwellwert zum automatischen Aussenden eines Temperaturreports"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold temperature to send unsolicited report. 10 = 1 °C"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "На сколько должна измениться температура, чтобы датчик отправил температуру контроллеру. 10 = 1 °C. Отключение датчика температуры позволяет продлить срок службы батареи."
+              }
+            ]
           },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
+          "value": [
             {
-              "@id": "0020"
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
             },
             {
-              "@id": "002b"
-            },
-            {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
+              "@from": "05",
+              "@to": "32",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
             }
           ]
         },
         {
           "@number": "2",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
           "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Temperaturshift"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature shift"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Коррекция температуры"
+              }
+            ]
           },
           "description": {
-            "lang": {
-              "@xml:lang": "en"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Mit diesem Wert kann die Temperaturmessung kalibriert werden. Für positive wert gilt 10 = 1 °C, für negative Werte gilt x = 256 - (T°C * 10). . Beispiel. Soll die Temperatur um -2K geringer angezeigt werden, wird 256 - (2 * 10) = 236"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold correction. For positive value 10 = 1 °C, for negative value x = 256 - (T°C * 10). Example, if need shift -2°C, value calculate: 256 - (2 * 10) = 236."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "На сколько градусов корректировать температуру. Для положительного 10 = 1 °C. Для отрицательного значение x = 256 - (T°C * 10). Например, если нужно присылаемую температуру уменьшать на 2°C, то значение вычисляется так: 256 - (2 * 10) = 236."
+              }
+            ]
           },
-          "genericClass": {
-            "@value": "02"
-          },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
+          "value": [
             {
-              "@id": "0020"
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
             },
             {
-              "@id": "002b"
+              "@from": "01",
+              "@to": "7f",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
             },
             {
-              "@id": "0094"
-            },
-            {
-              "@id": "0026"
+              "@from": "7f",
+              "@to": "ff",
+              "@unit": "0.1 °C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "0.1 °C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "0.1 °C"
+                  }
+                ]
+              }
             }
           ]
         },
         {
-          "@number": "1",
+          "@number": "3",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
           "name": {
-            "lang": {
-              "@xml:lang": "en"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Senden eines Feuchte-Reports"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Unsolicited humidity report"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Автоматическая отправка влажности "
+              }
+            ]
           },
           "description": {
-            "lang": {
-              "@xml:lang": "en"
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schwellwert zum automatischen Aussenden eines Feuchtereports"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold humidity to send unsolicited report."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "На сколько должна измениться влажность, чтобы датчик отправил влажность контроллеру. Отключение датчика влажности позволяет продлить срок службы батареи."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "0a",
+              "@unit": "%",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "%"
+                  }
+                ]
+              }
             }
+          ]
+        },
+        {
+          "@number": "4",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "0a",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Genauigkeit der Feuchtemessung"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Humidity measurement accuracy"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Точность измерения датчика влажности"
+              }
+            ]
           },
-          "genericClass": {
-            "@value": "02"
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Mit diesem Parameter kann die Genauigkeit der Feuchtemessung geändert werden. 5 % ist der genauere Wert; die Messung braucht allerdings mehr Batterieenergie"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "This parameter determines the time, consumed by measurements. 5% takes more time, so the battery will be spent more, comparing to the 10% accuracy."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "С какой погрешностью измерять влажность, чем больше погрешность, тем дольше срок службы батареи. Возможны только 5% и 10% точность измерений."
+              }
+            ]
           },
-          "specificClass": {
-            "@value": "01"
-          },
-          "commandClass": [
+          "value": [
             {
-              "@id": "0020"
+              "@from": "05",
+              "@to": "05",
+              "@unit": "%",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "5 %"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "5 %"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "5 %"
+                  }
+                ]
+              }
             },
             {
-              "@id": "002b"
+              "@from": "0a",
+              "@to": "0a",
+              "@unit": "%",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "10 %"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "10 %"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "10 %"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "5",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Invertiert Schaltkommando für Assoziationsgruppe 2 (Temperatur)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Inverts Switching Command on Association Group 2"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Тревога при высокой и низкой температуре"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройствам из группы ассоциаций №2 будут отправляться команды ON или OFF если температура высокая или низкая. По умолчанию тревога отключена, для её включения нужно в параметре №1 включить автоматическую отправку температуры, в параметре № 9 задать значение низкой температуры, в параметре № 10 задать значение высокой температуры."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "obere Temperatur sende ON"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "At High send ON"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При высокой температуре отправляется Basic Set ON, при низкой температуре отправляется Basic Set OFF"
+                  }
+                ]
+              }
             },
             {
-              "@id": "0094"
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "obere Temperatur sende OFF"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "At High send OFF"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При высокой температуре отправляется Basic Set OFF, при низкой температуре отправляется Basic Set ON"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "6",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Invertiert Schaltkommando für Assoziationsgruppe 3 (Feuchte)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Inverts Switching Command on Association Group 3 (Humidity)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Тревога при высокой и низкой влажности"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройствам из группы ассоциаций №3 будут отправляться команды ON или OFF если влажность высокая или низкая. По умолчанию тревога отключена, для её включения нужно в параметре №3 включить автоматическую отправку влажности, в параметре № 11 задать значение низкой влажности, в параметре № 12 задать значение высокой влажности."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Feuchteschwellwert überschritten, sende ON"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Humidity trigger exceeded, send ON"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При высокой влажности отправляется Basic Set ON, при низкой влажности отправляется Basic Set OFF"
+                  }
+                ]
+              }
             },
             {
-              "@id": "0026"
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Feuchteschwellwert überschritten, sende OFF"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Humidity trigger exceeded, send OFF"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При высокой влажности отправляется Basic Set OFF, при низкой влажности отправляется Basic Set ON"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "7",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Invertiert Schaltkommando für Assoziationsgruppe 4 (Rauch)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Inverts Switching Command on Association Group 4 (Smoke)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Тревога при задымлении"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройствам из группы ассоциаций №4 будут отправляться команды ON или OFF при обнаружении задымления."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bei Rauchalarm sende ON"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "on Smoke send ON"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При задымлении отправляется Basic Set ON"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bei Rauchalarm sende OFF"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "on Smoke send OFF"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При задымлении отправляется Basic Set OFF"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "8",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "SensorBinär-Report"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send SensorBinary- Report to Group 1"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Команда отправляемая контроллеру при задымлении"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Bei Rauch wird ein SensorBinär Report an Assoziationsgruppe 1 gesendet"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "When Smoke is detected a Sensor Binary Report is sent out to Association Group 1 "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройствам из группы ассоциаций №1 будут отправляться команды Sensor Binary Report или Alarm Smoke при задымлении."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sende Rauchmelderalarm"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Alarm Smoke"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При задымлении отправляется Alarm Smoke"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sende Binärsensor-Report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Sensor Binary Report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "При задымлении отправляется Sensor Binary Report (Smoke)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "9",
+          "@type": "range",
+          "@size": "1",
+          "@default": "ff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Unterer Temperaturschwellwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperatur Trigger Low Value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Значение низкой температуры"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Needs parameter №1 to be set. Sets the temperature Low value, if the measurement is lower than this value, Basic OFF is sent in temperature association group(2). 255 -disable"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если включена автоматическая отправка температуры (Параметр №1), то можно задать значение низкой температуры при достижении которой, будет отправлен сигнал тревоги (Параметр № 5). Значение низкой температуры не может быть больше значения высокой температуры."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "64",
+              "@unit": "°C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "°C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "°C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "°C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "10",
+          "@type": "range",
+          "@size": "1",
+          "@default": "ff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Oberer Temperaturschwellwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperatur Trigger High Value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Значение высокой температуры"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Needs parameter №1 to be set. Sets the temperature High value, if the measurement is higher than this value, Basic ON is sent in temperature association group(2)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если включена автоматическая отправка температуры (Параметр №1), то можно задать значение высокой температуры при достижении которой, будет отправлен сигнал тревоги (Параметр № 5). Значение высокой температуры не может быть меньше значения низкой температуры."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "64",
+              "@unit": "°C",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "°C"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "°C"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "°C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "11",
+          "@type": "range",
+          "@size": "1",
+          "@default": "ff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Unterer Feuchteschwellwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Humidity Trigger Low Value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Значение низкой влажности"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Needs parameter № 3 to be set. Sets the humidity High value, if the measurement is higher than this value, Basic ON is sent in humidity association group(3)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если включена автоматическая отправка влажности (Параметр №3), то можно задать значение низкой влажности при достижении которой, будет отправлен сигнал тревоги (Параметр № 6). Значение низкой влажности не может быть больше значения высокой влажности."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "64",
+              "@unit": "%",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "%"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "12",
+          "@type": "range",
+          "@size": "1",
+          "@default": "ff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Oberer Feuchteschwellwert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Humidity Trigger High Value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Значение высокой влажности"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Needs parameter № 3 to be set. Sets the humidity High value, if the measurement is higher than this value, Basic ON is sent in humidity association group(3)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если включена автоматическая отправка влажности (Параметр №3), то можно задать значение высокой влажности при достижении которой, будет отправлен сигнал тревоги (Параметр № 6). Значение высокой влажности не может быть меньше значения низкой влажности."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "64",
+              "@unit": "%",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "%"
+                  }
+                ]
+              }
             }
           ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/0fa800460edd12816cf213aafb80fdcd28e5ca1a.jpg"
+      }
     }
   }
 }

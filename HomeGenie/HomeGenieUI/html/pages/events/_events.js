@@ -122,22 +122,13 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
     switch (eventLog.Domain) {
 
         case 'HomeGenie.System':
-            if (eventLog.Property == 'HomeAutomation.ZWave') {
-                $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
-                popupdata = {
-                    icon: 'images/genie.png',
-                    title: eventLog.Property + '<br />' + eventLog.Value,
-                    text: '',
-                    timestamp: date
-                };
-                break;
-            }
-            else if (eventLog.Value == 'STARTED') {
+            if (eventLog.Value == 'STARTED') {
                 $('#configure_system_updateinstall_status').html('Update install complete. HomeGenie started.');
                 setTimeout(function () {
                     document.location.href = '/';
                 }, 3000);
             }
+            // continue to default 'HomeGenie.*' event processing
 
         case 'HomeGenie.UpdateChecker':
             if (eventLog.Property == 'InstallProgress.Message') {
@@ -148,8 +139,8 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                 var iconImage = configurepage_GetModuleIcon(module, null);
                 popupdata = {
                     icon: iconImage,
-                    title: eventLog.Property,
-                    text: eventLog.Value,
+                    title: eventLog.Property + '<br/>' + eventLog.Value,
+                    text: '',
                     timestamp: date
                 };
             }
@@ -160,7 +151,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             if (eventLog.Property == 'Runtime.Error') {
                 popupdata = {
                     icon: iconImage,
-                    title: '<span style="color:gray;font-size:8pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
+                    title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
                     text: 'Runtime<br />Error',
                     timestamp: date
                 };
@@ -173,12 +164,26 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                 //if (module.Name != '') name = module.Name;
                 popupdata = {
                     icon: iconImage,
-                    title: '<span style="color:gray;font-size:9pt;">' + eventLog.Property + '</span><br>' + eventLog.Value,
+                    title: '<span style="color:yellow;font-size:9pt;">' + eventLog.Property + '</span><br>' + eventLog.Value,
                     text: "",
                     timestamp: date
                 };
             }
             break;
+
+        case 'HomeAutomation.ZWave':
+            // events from Z-Wave controller (node 1)
+            if (eventLog.Source == '1') {
+                $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                popupdata = {
+                    icon: 'images/genie.png',
+                    title: '<span style="color:yellow;font-size:9pt;">' + eventLog.Property + '</span><br/>' + eventLog.Value,
+                    text: '',
+                    timestamp: date
+                };
+                break;
+            }
+            // continue to default processing
 
         default:
             if (module != null && eventLog.Property != 'Meter.Watts') {
@@ -188,7 +193,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     iconImage = 'images/remote.png';
                     popupdata = {
                         icon: iconImage,
-                        title: '<span style="color:gray;font-size:8pt;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br>' + eventLog.Value,
+                        title: '<span style="color:yellow;font-size:9pt;">' + module.Domain.substring(module.Domain.indexOf('.') + 1) + '</span><br/>' + eventLog.Value,
                         text: module.Address,
                         timestamp: date
                     };
@@ -216,7 +221,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     //
                     popupdata = {
                         icon: iconImage,
-                        title: '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname,
+                        title: '<span style="color:yellow;font-size:9pt;">' + group + '</span><br><b>' + name + '</b><br>' + propname,
                         text: parseFloat(eventLog.Value.replace(',', '.')).toFixed(2),
                         timestamp: date
                     };
@@ -239,7 +244,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     //
                     popupdata = {
                         icon: iconImage,
-                        title: '<span style="color:gray;font-size:8pt;">' + group + '</span><br><b>' + name + '</b>',
+                        title: '<span style="color:yellow;font-size:9pt;">' + group + '</span><br><b>' + name + '</b>',
                         text: propname + '<br />' + value,
                         timestamp: date
                     };

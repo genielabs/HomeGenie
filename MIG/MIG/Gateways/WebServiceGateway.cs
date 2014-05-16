@@ -124,12 +124,14 @@ namespace MIG.Gateways
 
         private void Worker(object state)
         {
+            HttpListenerRequest request = null;
+            HttpListenerResponse response = null;
             try
             {
                 var context = state as HttpListenerContext;
                 //
-                HttpListenerRequest request = context.Request;
-                HttpListenerResponse response = context.Response;
+                request = context.Request;
+                response = context.Response;
                 //
                 if (request.IsSecureConnection)
                 {
@@ -196,7 +198,7 @@ namespace MIG.Gateways
                         if (url == "" || url.TrimEnd('/') == baseUrl.TrimEnd('/'))
                         {
                             // default home redirect
-                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html");
+                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html?" + new TimeSpan(DateTime.UtcNow.Ticks).TotalMilliseconds);
                             response.Close();
                         }
                         else
@@ -233,20 +235,22 @@ namespace MIG.Gateways
                     response.AddHeader("WWW-Authenticate", "Basic");
                     //context.Response.Headers.Set(HttpResponseHeader.WwwAuthenticate, "Basic");
                 }
-                //
-                try
-                {
-                    response.OutputStream.Close();
-                    response.Close();
-                }
-                catch { }
             }
             catch (Exception ex)
             {
                 // TODO: add error logging 
                 Console.WriteLine("WEBGATEWAY ERROR: " + ex.Message + "\n" + ex.StackTrace);
             }
-
+            //
+            try
+            {
+                response.OutputStream.Close();
+                response.Close();
+            } catch { }
+            try
+            {
+                request.InputStream.Close();
+            } catch { }
         }
 
         private void ListenAsynchronously(IEnumerable<string> prefixes)
