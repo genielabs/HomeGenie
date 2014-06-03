@@ -165,6 +165,19 @@ https://sourceforge.net/p/homegenie/wiki/Home/
 
 RELEASE HISTORY
 
+01/06/2014 1.00 beta rev 374
+	- Added voice control lingo files for french and spanish locales
+	- Voice control now support scenarios activation (start/run/stop/break followed by program name)
+	- Re-enabled voice control from web UI
+	- Scheduler can now evaluate expressions with parentheses
+	- Statistics now consider any value starting with "Meter." as valid for counter facility
+	- Source code editor now has better formatted error messages
+	- Added PullUp and PullDown resistor configuration to Raspberry GPIO and MCP23017 programs (MCP23017 PullUp only)
+	- Fixed bug in Level Memory program
+	- Fixed bug in Interconnections (remote modules control was working only for few minutes)
+	- Fixed bug in Server Sent Events (bad IDs formatting)
+	- Fixed minor bug in UpdateChecker
+
 13/05/2014 1.00 beta rev 372
 	- Automation: fixed bug in AddControlWidget
 	- Deprecated module types: Temperature, Fan, Thermostat

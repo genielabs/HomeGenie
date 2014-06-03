@@ -96,6 +96,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExpressionEvaluation">
+      <HintPath>Externals\ExpressionEvaluation\ExpressionEvaluation.dll</HintPath>
+    </Reference>
     <Reference Include="IronPython">
       <HintPath>Externals\Scripting\IronPython.dll</HintPath>
     </Reference>

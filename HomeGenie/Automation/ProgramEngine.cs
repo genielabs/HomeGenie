@@ -127,7 +127,7 @@ namespace HomeGenie.Automation
                             }};
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + result.Exception.Message);
+                            RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + result.Exception.Message.Replace('\n', ' '));
                         }
                         else
                         {
@@ -177,7 +177,7 @@ namespace HomeGenie.Automation
                     }};
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message);
+                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message.Replace('\n', ' '));
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -265,7 +265,7 @@ namespace HomeGenie.Automation
                             }};
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, "Runtime.Error", "CR: " + result.Exception.Message);
+                            RaiseProgramModuleEvent(program, "Runtime.Error", "CR: " + result.Exception.Message.Replace('\n', ' '));
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
@@ -468,13 +468,16 @@ namespace HomeGenie.Automation
                 {
                     string[] error = e.Message.Split(':');
                     string message = error[1];
-                    int line = int.Parse(error[0].Split(' ')[0]);
-                    errors.Add(new ProgramError()
+                    if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        Line = line,
-                        ErrorMessage = message,
-                        CodeBlock = "TC"
-                    });
+                        int line = int.Parse(error[0].Split(' ')[0]);
+                        errors.Add(new ProgramError()
+                        {
+                            Line = line,
+                            ErrorMessage = message,
+                            CodeBlock = "TC"
+                        });
+                    }
                 }
             }
             //
@@ -489,13 +492,16 @@ namespace HomeGenie.Automation
                 {
                     string[] error = e.Message.Split(':');
                     string message = error[1];
-                    int line = int.Parse(error[0].Split(' ')[0]);
-                    errors.Add(new ProgramError()
+                    if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        Line = line,
-                        ErrorMessage = message,
-                        CodeBlock = "CR"
-                    });
+                        int line = int.Parse(error[0].Split(' ')[0]);
+                        errors.Add(new ProgramError()
+                        {
+                            Line = line,
+                            ErrorMessage = message,
+                            CodeBlock = "CR"
+                        });
+                    }
                 }
             }
 

@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r372</Version>
+  <Version>1.00 beta r374</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>	- Automation: fixed bug in AddControlWidget
-	- Deprecated module types: Temperature, Fan, Thermostat
-	- Widgets: added localization support
-	- Widgets: added jkUtils widgets "Solar Altitude" and "Open Weather"
-	- WebService: added automatic charset encoding
-	- X10: fixed reception of RF X10 Security codes
-	- UI: added user selectable icons for modules
-	- ZWave: updated PepperOne database
-	- Other minor fixes and improvements</ReleaseNote>
-  <ReleaseDate>2014-05-13T00:11:23.0000Z</ReleaseDate>
+  <ReleaseNote>  - Added voice control lingo files for french and spanish locales
+  - Voice control now supports scenarios activation (start/run/stop/break followed by program name)
+  - Re-enabled voice control from web UI
+  - Scheduler can now evaluate expressions with parentheses
+  - Statistics now consider any value starting with "Meter." as valid for counter facility
+  - Source code editor now has better formatted error messages
+  - Added PullUp and PullDown resistor configuration to Raspberry GPIO and MCP23017 programs (MCP23017 PullUp only)
+  - Fixed bug in Level Memory program
+  - Fixed bug in Interconnections (remote modules control was working only for few minutes)
+  - Fixed bug in Server Sent Events (bad IDs formatting)
+  - Fixed minor bug in UpdateChecker</ReleaseNote>
+  <ReleaseDate>2014-06-01T19:48:32.0000Z</ReleaseDate>
 </ReleaseInfo>

@@ -55,7 +55,6 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock newProgram;
             //
             homegenie.ExecuteAutomationRequest(migCommand);
-            //
             if (migCommand.Command.StartsWith("Macro."))
             {
                 switch (migCommand.Command)
@@ -263,25 +262,11 @@ namespace HomeGenie.Service.Handlers
                         break;
 
                     case "Programs.Run":
-                        currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
-                        if (currentProgram != null)
-                        {
-                            if (!currentProgram.IsEnabled)
-                            {
-                                currentProgram.IsEnabled = true;
-                            }
-                            homegenie.ProgramEngine.Run(currentProgram, migCommand.GetOption(1));
-                        }
+                        currentProgram = ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                         break;
 
                     case "Programs.Break":
-                        currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
-                        if (currentProgram != null)
-                        {
-                            currentProgram.IsEnabled = false;
-                            currentProgram.Stop();
-                            homegenie.UpdateProgramsDatabase();
-                        }
+                        currentProgram = ProgramBreak(migCommand.GetOption(0));
                         break;
 
                     case "Programs.Restart":
@@ -324,6 +309,34 @@ namespace HomeGenie.Service.Handlers
                 }
 
             }
+        }
+
+        internal ProgramBlock ProgramRun(string address, string options)
+        {
+            int pid = 0; int.TryParse(address, out pid);
+            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            if (program != null)
+            {
+                if (!program.IsEnabled)
+                {
+                    program.IsEnabled = true;
+                }
+                homegenie.ProgramEngine.Run(program, options);
+            }
+            return program;
+        }
+
+        internal ProgramBlock ProgramBreak(string address)
+        {
+            int pid = 0; int.TryParse(address, out pid);
+            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            if (program != null)
+            {
+                program.IsEnabled = false;
+                program.Stop();
+                homegenie.UpdateProgramsDatabase();
+            }
+            return program;
         }
 
     }

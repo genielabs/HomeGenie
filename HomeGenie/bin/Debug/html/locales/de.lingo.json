@@ -15,6 +15,14 @@
 		{
 			"Command": "Control.Toggle",
 			"Aliases": [ "schalte", "wechseln" ]
+		},
+		{
+			"Command": "Control.Run",
+			"Aliases": [ "start", "laufen" ]
+		},
+		{
+			"Command": "Control.Break",
+			"Aliases": [ "stoppen", "unterbrechen" ]
 		}
 	],
 	"Types" : [

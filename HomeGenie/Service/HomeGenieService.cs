@@ -550,10 +550,10 @@ namespace HomeGenie.Service
             if (module != null && propertyChangedAction.Path != "")
             {
                 // clear RoutingNode property since the event was locally generated
-                if (module.RoutingNode != "")
-                {
-                    module.RoutingNode = "";
-                }
+                //if (module.RoutingNode != "")
+                //{
+                //    module.RoutingNode = "";
+                //}
                 // we found associated module in HomeGenie.Modules
 
                 #region z-wave specific stuff
@@ -708,6 +708,23 @@ namespace HomeGenie.Service
 
                         wshStatistics.ProcessRequest(request, migCommand);
                         break;
+                }
+            }
+            else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
+            {
+                int n;
+                bool nodeIdIsNumeric = int.TryParse(migCommand.NodeId, out n);
+                if (nodeIdIsNumeric)
+                {
+                    switch (migCommand.Command)
+                    {
+                        case "Control.Run":
+                            wshAutomation.ProgramRun(migCommand.NodeId, migCommand.GetOption(0));
+                            break;
+                        case "Control.Break":
+                            wshAutomation.ProgramBreak(migCommand.NodeId);
+                            break;
+                    }
                 }
             }
 
@@ -1729,7 +1746,7 @@ namespace HomeGenie.Service
                                 module.DeviceType = virtualModule.DeviceType;
                             }
                             // associated module's name of an automation program cannot be changed
-                            if (module.Name == "" || module.DeviceType == Module.DeviceTypes.Program)
+                            if (module.Name == "" || (module.DeviceType == Module.DeviceTypes.Program && virtualModule.Name != ""))
                             {
                                 module.Name = virtualModule.Name;
                             }
@@ -1796,9 +1813,9 @@ namespace HomeGenie.Service
                                 systemModules.Add(module);
                             }
                             //
+                            module.Name = program.Name;
                             module.Address = program.Address.ToString();
                             module.DeviceType = Module.DeviceTypes.Program;
-                            module.Name = program.Name;
                             //module.Description = "Wizard Script";
                         }
                     }

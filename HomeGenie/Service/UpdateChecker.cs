@@ -398,11 +398,20 @@ namespace HomeGenie.Service
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");
+                            if (!Directory.Exists(Path.GetDirectoryName(destinationFile)))
+                            {
+                                try
+                                {
+                                    Directory.CreateDirectory(Path.GetDirectoryName(destinationFile));
+                                    LogMessage("+ Created folder '" + Path.GetDirectoryName(destinationFile) + "'");
+                                }
+                                catch { }
+                            }
                             File.Copy(file, destinationFile, true);
                         }
                         catch (Exception e)
                         {
-                            LogMessage("! Error copying file '" + destinationFile + "'");
+                            LogMessage("! Error copying file '" + destinationFile + "' (" + e.Message + ")");
                             success = false;
                             break;
                         }

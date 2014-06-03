@@ -373,14 +373,6 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 				msgs += '<b>' + (x + 1) + '.</b> ' + errs[x] + '<br/>';
 			}
 		}*/
-		$('#program_error_message_text').html('<h3>Errors:</h3><i>' + message.replace(/\n/g, '</br>') + '</i><h3 style="color:red;font-weight:bold">Program disabled, fix errors first.</h3>');
-		setTimeout(function () {
-		    if ($('#program_error_message_text').html() != '')
-		    {
-		        $('#program_error_message').popup().popup('open');
-		        $('#program_error_button').show(100);
-		    }
-		}, 1000);
 		//
 		var errors = null;
 		try
@@ -390,7 +382,7 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
         //
 		if (errors != null)
 		{
-		    var currentLine = 0, currentBlock = '', marker = null, message = '';
+		    var currentLine = 0, currentBlock = '', marker = null, message = '', popupMessage = '';
 		    for (var e = 0; e < errors.length; e++)
 		    {
 		        var err = errors[e];
@@ -421,6 +413,9 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		            currentBlock = err.CodeBlock;
 		        }
 		        message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '</br>';
+                //
+		        popupMessage += '<b>Line ' + err.Line + ', Column ' + err.Column + '</b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger Code' : 'lime">Code to Run') + '</font>):<br/>';
+		        popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '</br>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
             }
 		    if (marker != null) {
 		        $(marker).qtip({
@@ -431,6 +426,15 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		            button: true
 		        });
 		    }
+		    //
+		    $('#program_error_message_text').html(popupMessage);
+		    setTimeout(function () {
+		        if ($('#program_error_message_text').html() != '')
+		        {
+		            $('#program_error_message').popup().popup('open');
+		            $('#program_error_button').show(100);
+		        }
+		    }, 2000);
         }
 
 

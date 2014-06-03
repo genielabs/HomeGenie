@@ -27,6 +27,9 @@ using System.Text;
 
 using NCrontab;
 using System.Threading;
+using HomeGenie.Service.Constants;
+using Newtonsoft.Json;
+using ExpressionEvaluation;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -152,13 +155,69 @@ namespace HomeGenie.Automation.Scheduler
 
         public bool IsScheduling(string cronExpression)
         {
-            bool success = true;
-            string[] exprs = cronExpression.Split(';'); // <-- ';' is AND operator
-            for (int e = 0; e < exprs.Length; e++)
+            string buildExpression = "";
+            int p = 0;
+            while (p < cronExpression.Length)
             {
-                string currentexpr = exprs[e].Trim();
-                success = success && IsEventActive(currentexpr);
-                if (!success) break;
+                char token = cronExpression[p];
+                if (token == '(' || token == ')' || token == ';' || token == ':')
+                {
+                    buildExpression += token;
+                    p++;
+                    continue;
+                }
+
+                string currentExpression = token.ToString();
+                p++;
+                while (p < cronExpression.Length)
+                {
+                    token = cronExpression[p];
+                    if (token != '(' && token != ')' && token != ';' && token != ':')
+                    {
+                        currentExpression += token;
+                        p++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                bool isEntryActive = false;
+                currentExpression = currentExpression.Trim(new char[]{ ' ', '\t' });
+                if (currentExpression.StartsWith("@"))
+                {
+                    // Check expresion from scheduled item with a given name
+                    var eventItem = Get(currentExpression.Substring(1));
+                    isEntryActive = (eventItem != null && eventItem.IsEnabled && EvaluateCronEntry(eventItem.CronExpression));
+                }
+                else
+                {
+                    isEntryActive = EvaluateCronEntry(currentExpression);
+                }
+
+                buildExpression += (isEntryActive ? "1" : "0"); 
+
+            }
+
+            buildExpression = buildExpression.Replace(":", "+");
+            buildExpression = buildExpression.Replace(";", "*");
+            
+            bool success = false;
+            try
+            {
+                ExpressionEval eval = new ExpressionEval();
+                eval.Expression = buildExpression;
+                success = eval.EvaluateBool();
+            } 
+            catch (Exception ex)
+            {
+                masterControlProgram.HomeGenie.LogBroadcastEvent(
+                    Domains.HomeAutomation_HomeGenie_Scheduler, 
+                    cronExpression, 
+                    "Scheduler Expression", 
+                    Properties.SCHEDULER_ERROR, 
+                    JsonConvert.SerializeObject(ex.Message));
             }
             return success;
         }
@@ -169,6 +228,23 @@ namespace HomeGenie.Automation.Scheduler
         }
 
 
+        private bool EvaluateCronEntry(string cronExpression)
+        {
+            var cronSchedule = NCrontab.CrontabSchedule.TryParse(cronExpression);
+            if (!cronSchedule.IsError)
+            {
+                var occurrence = cronSchedule.Value.GetNextOccurrence(DateTime.Now.AddMinutes(-1));
+                string d1 = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                string d2 = occurrence.ToString("yyyy-MM-dd HH:mm");
+                if (d1 == d2)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // TODO: deprecate this method
         private bool IsEventActive(string cronExpression, List<string> checkedStack = null)
         {
             if (checkedStack == null) checkedStack = new List<string>();

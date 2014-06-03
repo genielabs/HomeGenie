@@ -53,7 +53,7 @@
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:27%">version</div>
-                    <div class="ui-block-b" style="width:73%">&nbsp;1.00 beta r372</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;1.00 beta r374</div>
                 </div>
 
                 <div class="ui-grid-a">
@@ -89,7 +89,12 @@
 
     <div id="speechinput" data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <input type="search" results="10" placeholder="Click the mic for voice control or type a sentence..." onspeechchange="HG.VoiceControl.InterpretInput(this.value)" onwebkitspeechchange="HG.VoiceControl.InterpretInput(this.value)" onchange="HG.VoiceControl.InterpretInput(this.value)" x-webkit-speech speech />
+        <table width="100%">
+            <tr>
+                <td><input id="voicerecognition_text" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                <td width="100px"><a id="voicerecognition_button" data-role="button" href="javascript:recognition.start()">Voice</a></td>
+            </tr>
+        </table>
 
     </div>
 

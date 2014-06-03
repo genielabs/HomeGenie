@@ -91,19 +91,17 @@ When.ModuleParameterChange( (module, property) =&gt; {
   	if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
 	{
   		var level = module.Parameter("Status.Level");
-  		var lastlevel = module.Parameter("Status.LastLevel");
 		var memory = module.Parameter("Status.MemoryLevel");
 		//
-	  	lock(this)
-        if (level.DecimalValue != lastlevel.DecimalValue)
+        if (level.DecimalValue != level.LastDecimalValue)
         {
-            bool justswitchedon = (lastlevel.DecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+            bool justswitchedon = (level.LastDecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
           	if (justswitchedon)
             {
                 // set current level to memory level if different
                 if (level.DecimalValue != memory.DecimalValue &amp;&amp; memory.DecimalValue &gt; 0)
                 {
-                    var newlevel = (memory.DecimalValue * 100);
+                    var newlevel = (int)(memory.DecimalValue * 100);
                     Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
                     module.Level = newlevel;
                     // returning false, prevent from routing event to other listeners                  
@@ -115,15 +113,13 @@ When.ModuleParameterChange( (module, property) =&gt; {
                 memory.Value = level.Value;
             } 
         }
-        // store last level, that is used to determine if module has been switched on/off
-		lastlevel.Value = level.Value;
     }
   	// returning true, will route event to other listeners
     return true; 
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
@@ -140,8 +136,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5070354Z</TriggerTime>
+    <ActivationTime>2014-05-31T21:12:03.9246114Z</ActivationTime>
+    <TriggerTime>2014-05-31T21:12:03.9286116Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -260,7 +256,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5150363Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:40.0544853Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -406,7 +402,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5220365Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:39.6314474Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -478,7 +474,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:01:25.1315396Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:13:12.0489055Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -899,14 +895,14 @@ var pinConfiguration = new List&lt;dynamic&gt;(){
   new { Address =  "7", Pin = Mcp23017Pin.A6, Direction = Mcp23017PinDirection.Output },
   new { Address =  "8", Pin = Mcp23017Pin.A7, Direction = Mcp23017PinDirection.Output },
   //
-  new { Address =  "9", Pin = Mcp23017Pin.B0, Direction = Mcp23017PinDirection.Input },
-  new { Address = "10", Pin = Mcp23017Pin.B1, Direction = Mcp23017PinDirection.Input },
-  new { Address = "11", Pin = Mcp23017Pin.B2, Direction = Mcp23017PinDirection.Input },
-  new { Address = "12", Pin = Mcp23017Pin.B3, Direction = Mcp23017PinDirection.Input },
-  new { Address = "13", Pin = Mcp23017Pin.B4, Direction = Mcp23017PinDirection.Input },
-  new { Address = "14", Pin = Mcp23017Pin.B5, Direction = Mcp23017PinDirection.Input },
-  new { Address = "15", Pin = Mcp23017Pin.B6, Direction = Mcp23017PinDirection.Input },
-  new { Address = "16", Pin = Mcp23017Pin.B7, Direction = Mcp23017PinDirection.Input }
+  new { Address =  "9", Pin = Mcp23017Pin.B0, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "10", Pin = Mcp23017Pin.B1, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "11", Pin = Mcp23017Pin.B2, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "12", Pin = Mcp23017Pin.B3, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "13", Pin = Mcp23017Pin.B4, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "14", Pin = Mcp23017Pin.B5, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "15", Pin = Mcp23017Pin.B6, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "16", Pin = Mcp23017Pin.B7, Direction = Mcp23017PinDirection.Input, PullUpResistor = true }
 };
 bool[] pinStatus = new bool[16];
 //
@@ -980,12 +976,17 @@ for (int p = 0; p &lt; pinConfiguration.Count; p++)
   	// set direction and read pin status
     deviceConnection.SetDirection(pincfg.Pin, pincfg.Direction);
     pinStatus[p] = deviceConnection.GetPinStatus(pincfg.Pin);
+  	// associate a virtual module with the pin
   	if (pincfg.Direction == Mcp23017PinDirection.Output)
     {
 		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Switch", "");                  
     }
-  	else
+  	else // Input 
     {
+      	if (pincfg.PullUpResistor)
+        {
+        	deviceConnection.SetResistor(pincfg.Pin, Mcp23017PinResistor.PullUp);
+        }
 		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Sensor", "homegenie/generic/sensor");                  
     }
     // get the module associated to the pin and store current status
@@ -1126,7 +1127,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5340367Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:41.5567456Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1284,23 +1285,22 @@ When.ModuleParameterChange( (module, property) =&gt; {
   
   	if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
 	{
-            var level = module.Parameter("Status.Level");
-            var newlevel = Program.InputField("MaxLevel").DecimalValue;
-      		//
-  			lock(this)
-            if (level.DecimalValue &gt; (newlevel / 100D)) 
-            {
-                Program.Notify("Energy Saving Mode", module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
-                module.Level = newlevel;
-                return false;
-            }
+        var level = module.Parameter("Status.Level");
+        var newlevel = Program.InputField("MaxLevel").DecimalValue;
+        //
+        if (level.DecimalValue &gt; (newlevel / 100D)) 
+        {
+            Program.Notify("Energy Saving Mode", module.Instance.Address + "&lt;br&gt;" + module.Instance.Name + " set to " + newlevel + "%");
+            module.Level = newlevel;
+            return false;
+        }
     }
   	// returning true, will route event to other listeners
   	return true;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
@@ -1317,8 +1317,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Energy Saving Mode</Name>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5460375Z</TriggerTime>
+    <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
+    <TriggerTime>2014-05-31T21:12:54.2356122Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1399,19 +1399,16 @@ When.ModuleParameterIsChanging( (module, property) =&gt; {
 
   	if (module.HasFeature("X10.LevelFix") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
 	{
-        lock(this)
+        var level = module.Parameter("Status.Level");
+        var lastlevel = module.Parameter("Status.LastLevel");
+        //
+        bool justswitchedon = (level.DecimalValue &gt; 0 &amp;&amp; lastlevel.DecimalValue == 0);
+        lastlevel.Value = level.Value;
+        if (justswitchedon)
         {
-            var level = module.Parameter("Status.Level");
-            var lastlevel = module.Parameter("Status.LastLevel");
-            //
-            bool justswitchedon = (level.DecimalValue &gt; 0 &amp;&amp; lastlevel.DecimalValue == 0);
-            lastlevel.Value = level.Value;
-            if (justswitchedon)
-            {
-                Program.Notify("X10 Auto Bright", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to 100%");
-                module.Command("Control.Bright").Set("100");
-                return false; // &lt;-- prevent ModuleParameterChange event from being fired
-            }
+          Program.Notify("X10 Auto Bright", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to 100%");
+          module.Command("Control.Bright").Set("100");
+          return false; // &lt;-- prevent ModuleParameterChange event from being fired
         }
     }
 
@@ -1420,7 +1417,7 @@ When.ModuleParameterIsChanging( (module, property) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
@@ -1437,8 +1434,8 @@ Program.GoBackground();</ScriptSource>
     <Name>X10 - Dimmer Bright 100% when switched on</Name>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>Features</Group>
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5500385Z</TriggerTime>
+    <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
+    <TriggerTime>2014-05-31T21:12:24.525156Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1733,7 +1730,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Features</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5620383Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:45.0552027Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1814,7 +1811,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a device wakes up.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5640383Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:46.0526191Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1961,7 +1958,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5660379Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:47.0607397Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2227,7 +2224,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5780387Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:48.0637954Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2654,7 +2651,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.58304Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:49.0668522Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2716,7 +2713,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.584039Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:50.0539366Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2873,7 +2870,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Features</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5890399Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:51.0522948Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3242,7 +3239,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment lumosity </Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:24.5940405Z</TriggerTime>
+    <TriggerTime>2014-05-31T21:11:52.0695086Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3468,14 +3465,14 @@ var gpio24 = Program.InputField("GPIO24").Value.ToLower();
 var gpio25 = Program.InputField("GPIO25").Value.ToLower();
 
 // add configured GPIOs to a list that will be used to configure the connection
-if (gpio4  != "off") pinMapping.Add(new { Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio17 != "off") pinMapping.Add(new { Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio18 != "off") pinMapping.Add(new { Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio21 != "off") pinMapping.Add(new { Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio22 != "off") pinMapping.Add(new { Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio23 != "off") pinMapping.Add(new { Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio24 != "off") pinMapping.Add(new { Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24 == "in" ? PinDirection.Input : PinDirection.Output) });
-if (gpio25 != "off") pinMapping.Add(new { Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25 == "in" ? PinDirection.Input : PinDirection.Output) });
+if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25 == "out" ? PinDirection.Output : PinDirection.Input) });
 
 // Setup the connection to the GPIOs
 var configuration = new PinConfiguration[pinMapping.Count];
@@ -3485,6 +3482,14 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
   	if (pc.Direction == PinDirection.Input)
     {
 	  	configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+      	if (pc.Config.EndsWith("+"))
+        {
+            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
+        }
+      	else if (pc.Config.EndsWith("-"))
+        {
+            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
+        }
 		Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
     }
   	else
@@ -3562,6 +3567,7 @@ Program.GoBackground();</ScriptSource>
     <Name>GPIO Modules</Name>
     <Description>Raspberry Pi GPIO mapped to HG modules.
 Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
+Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
 GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>

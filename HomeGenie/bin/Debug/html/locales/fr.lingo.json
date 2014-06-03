@@ -1,0 +1,38 @@
+﻿{
+	"Commands" : [
+		{
+			"Command": "Control.On",
+			"Aliases": [ "allumer" ]
+		},
+		{
+			"Command": "Control.Off",
+			"Aliases": [ "éteindre" ]
+		},
+		{
+			"Command": "Control.Level",
+			"Aliases": [ "niveau" ]
+		},
+		{
+			"Command": "Control.Toggle",
+			"Aliases": [ "inverseur" ]
+		},
+		{
+			"Command": "Control.Run",
+			"Aliases": [ "démarrage", "exécuté" ]
+		},
+		{
+			"Command": "Control.Break",
+			"Aliases": [ "arrêter", "interrompre" ]
+		}
+	],
+	"Types" : [
+		{
+			"Type": "Light,Dimmer",
+			"Aliases": [ "toutes les lumières", "lumières" ]
+		},
+		{
+			"Type": "Switch",
+			"Aliases": [ "tous les commutateurs", "tous les appareils", "commutateurs", "appareils" ]
+		}
+	]
+}

@@ -50,6 +50,9 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             HG.Configure.Interfaces.ServiceCall("ZWave.SetIsEnabled/" + $("#configure_interfaces_flip_zwave").val(), function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 $.mobile.hidePageLoadingMsg();
+                if ($("#configure_interfaces_flip_zwave").val() == '1' && $('#page_configure_interfaces_zwaveport').val() == "") {
+                    HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_zwaveport');
+                }
             });
         });
         //
@@ -58,6 +61,9 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             HG.Configure.Interfaces.ServiceCall("X10.SetIsEnabled/" + $("#configure_interfaces_flip_x10").val(), function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 $.mobile.hidePageLoadingMsg();
+                if ($("#configure_interfaces_flip_x10").val() == '1' && $('#page_configure_interfaces_x10port').val() == "") {
+                    HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_x10port');
+                }
             });
         });
         //
@@ -66,6 +72,9 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             HG.Configure.Interfaces.ServiceCall("W800RF.SetIsEnabled/" + $("#configure_interfaces_flip_w800rf32").val(), function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 $.mobile.hidePageLoadingMsg();
+                if ($("#configure_interfaces_flip_w800rf32").val() == '1' && $('#page_configure_interfaces_w800rf32port').val() == "") {
+                    HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_w800rf32port');
+                }
             });
         });
         //
@@ -139,6 +148,21 @@ HG.WebApp.SystemSettings.InitializePage = function () {
     });
 };
 
+HG.WebApp.SystemSettings.ShowPortTip = function (el) {
+    $(el).qtip({
+        content: 'Select port used by this device',
+        show: { event: false, ready: true, delay: 1000 },
+        events: {
+            hide: function () {
+                $(this).qtip('destroy');
+            }
+        },
+        hide: { event: false, inactive: 3000 },
+        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+        position: { my: 'bottom center', at: 'top center' }
+    });
+};
+
 HG.WebApp.SystemSettings.LircRemoteList = function () {
     $.mobile.showPageLoadingMsg();
     $('#lirc_remotes').empty();
@@ -196,7 +220,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
     HG.Configure.Interfaces.ServiceCall("Hardware.SerialPorts", function (data) {
         var ports = eval(data);
         $('#page_configure_interfaces_zwaveport').empty();
-        $('#page_configure_interfaces_zwaveport').append('<option value="">(select a port)</option>');
+        $('#page_configure_interfaces_zwaveport').append('<option value="">(select port...)</option>');
         if (ports.length == 0) {
             $('#page_configure_interfaces_zwaveport').append('<option value="">NO SERIAL PORTS FOUND</option>');
         }
@@ -213,7 +237,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             $.mobile.hidePageLoadingMsg();
             //
             $.mobile.showPageLoadingMsg();
-            $('#page_configure_interfaces_x10port').empty().append('<option value="">(select a port)</option>');
+            $('#page_configure_interfaces_x10port').empty().append('<option value="">(select port...)</option>');
             $('#page_configure_interfaces_x10port').append('<option value="USB">CM15 Pro - USB</option>');
             for (var p = 0; p < ports.length; p++) {
                 $('#page_configure_interfaces_x10port').append('<option value="' + ports[p].replace(/\//g, '|') + '">CM11 - ' + ports[p] + '</option>');
@@ -225,7 +249,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 $.mobile.hidePageLoadingMsg();
             });
             $('#page_configure_interfaces_w800rf32port').empty();
-            $('#page_configure_interfaces_w800rf32port').append('<option value="">(select a port)</option>');
+            $('#page_configure_interfaces_w800rf32port').append('<option value="">(select port...)</option>');
             for (var p = 0; p < ports.length; p++) {
                 $('#page_configure_interfaces_w800rf32port').append('<option value="' + ports[p].replace(/\//g, '|') + '">' + ports[p] + '</option>');
             }

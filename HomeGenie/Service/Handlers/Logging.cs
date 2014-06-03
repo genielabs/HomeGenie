@@ -84,11 +84,12 @@ namespace HomeGenie.Service.Handlers
                             lastId = queryValues.Get("lastEventId");
         
                         }
+                        
                         if (lastId != null && lastId != "")
                         {
-                            double.TryParse(lastId, out lastTimeStamp);
-                            lastTimeStamp = (lastTimeStamp / 1000D) + 0.001;
+                            double.TryParse(lastId, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out lastTimeStamp);
                         }
+
                         if (lastTimeStamp == 0)
                         {
                             lastTimeStamp = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
@@ -103,7 +104,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 foreach (LogEntry entry in logData)
                                 {
-                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("id: " + entry.UnixTimestamp * 1000 + "\ndata: " + JsonConvert.SerializeObject(entry) + "\n\n");
+                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("id: " + entry.UnixTimestamp.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + "\ndata: " + JsonConvert.SerializeObject(entry) + "\n\n");
                                     context.Response.OutputStream.Write(data, 0, data.Length);
                                     context.Response.OutputStream.Flush();
                                     lastTimeStamp = entry.UnixTimestamp;

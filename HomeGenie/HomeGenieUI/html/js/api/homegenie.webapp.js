@@ -24,6 +24,10 @@ HG.WebApp.Data._CurrentLocale = {};
 var editor1 = null;
 var editor2 = null;
 //
+// Speech Recognition objects
+var recognition = null;
+var final_transcript = '';
+//
 //
 HG.WebApp.InitializePage = function ()
 {
@@ -197,11 +201,10 @@ HG.WebApp.InitializePage = function ()
         var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
         // enable/disable speech input
-        if (typeof document.createElement('input').webkitSpeech == 'undefined') {
+        if (!('webkitSpeechRecognition' in window)) {
             //no speech support
             $('#speechinput').hide();
-        }
-        else {
+        } else {
             // lookup for a localized version, if any
             HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
                 if (!success)
@@ -210,6 +213,38 @@ HG.WebApp.InitializePage = function ()
                     HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ });
                 }
             });
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.onstart = function() { 
+                $('#voicerecognition_button').addClass('ui-disabled');
+            }
+            recognition.onresult = function(event) { 
+                var interim_transcript = '';
+                if (typeof(event.results) == 'undefined') {
+                    $('#speechinput').hide();
+                    recognition.onend = null;
+                    recognition.stop();
+                    return;
+                }
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += event.results[i][0].transcript;
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+            }
+            recognition.onerror = function(event) { 
+                $('#voicerecognition_button').removeClass('ui-disabled');
+                alert('Voice Recognition Error: ' + event); 
+            }
+            recognition.onend = function() { 
+                $('#voicerecognition_text').val(final_transcript);
+                $('#voicerecognition_button').removeClass('ui-disabled');
+                HG.VoiceControl.InterpretInput(final_transcript);
+                final_transcript = '';
+            }
         }
         setTheme(sessvars.UserSettings.UiTheme);
     }, 1000);
