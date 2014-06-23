@@ -43,6 +43,7 @@ HG.WebApp.Control.InitializePage = function () {
         //
         $.ajax({
             url: "pages/control/widgets/configuration.json",
+            data: "{ dummy: 'dummy' }",
             //dataType: 'json',
             success: function (data) {
                 HG.WebApp.Control._WidgetConfiguration = eval(data);
@@ -158,6 +159,7 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
     if (widgetpath != '' && !widgetcached) {
         $.ajax({
             url: "pages/control/widgets/" + widgetpath + ".json",
+            data: "{ dummy: 'dummy' }",
             //dataType: 'json',
             success: function (data) {
                 var widget = null;

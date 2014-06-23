@@ -148,6 +148,7 @@ HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.Configure/' + ifacefn + '/',
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var value = eval(data);
@@ -172,6 +173,7 @@ HG.Configure.Modules.List = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.List/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -182,6 +184,7 @@ HG.Configure.Modules.Get = function (domain, address, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Get/' + domain + "/" + address + "/" + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -192,6 +195,7 @@ HG.Configure.Modules.Delete = function (domain, address, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Delete/' + domain + "/" + address + "/" + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -202,6 +206,7 @@ HG.Configure.Modules.RoutingReset = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.RoutingReset/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -217,6 +222,7 @@ HG.Configure.System.ServiceCall = function (systemfn, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/' + systemfn + '/',
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var value = eval(data);

@@ -94,15 +94,22 @@ namespace HomeGenie.Automation.Scheduler
             if (String.IsNullOrEmpty(name)) return null;
             //
             var eventItem = Get(name);
+			bool justAdded = false;
             if (eventItem == null)
             {
                 eventItem = new SchedulerItem();
                 eventItem.Name = name;
                 events.Add(eventItem);
+				justAdded = true;
             }
             eventItem.CronExpression = cronExpression;
             eventItem.LastOccurrence = "-";
             eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
+			// by default newly added events are enabled
+			if (justAdded) 
+			{
+				eventItem.IsEnabled = true;
+			}
             return eventItem;
         }
 
@@ -183,8 +190,10 @@ namespace HomeGenie.Automation.Scheduler
                     }
                 }
 
+                currentExpression = currentExpression.Trim(new char[] { ' ', '\t' });
+                if (String.IsNullOrEmpty(currentExpression)) continue;
+
                 bool isEntryActive = false;
-                currentExpression = currentExpression.Trim(new char[]{ ' ', '\t' });
                 if (currentExpression.StartsWith("@"))
                 {
                     // Check expresion from scheduled item with a given name

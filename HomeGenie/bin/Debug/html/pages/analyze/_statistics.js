@@ -148,6 +148,7 @@ HG.WebApp.Statistics.Refresh = function () {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var stats = eval(data);
@@ -179,6 +180,7 @@ HG.WebApp.Statistics.Refresh = function () {
             $.ajax({
                 url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.Counter/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
                 type: "POST",
+                data: "{ dummy: 'dummy' }",
                 dataType: "text",
                 success: function (data) {
                     var stats = eval(data);

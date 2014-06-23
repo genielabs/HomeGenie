@@ -8,6 +8,7 @@ HG.System.SetHttpPort = function (port, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -18,6 +19,7 @@ HG.System.SetPassword = function (pass, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -28,6 +30,7 @@ HG.System.ClearPassword = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.ClearPassword/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -38,6 +41,7 @@ HG.System.HasPassword = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var haspass = eval(data)[0];
@@ -49,6 +53,7 @@ HG.System.LoggingEnable = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Enable/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -59,6 +64,7 @@ HG.System.LoggingDisable = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.Disable/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -69,6 +75,7 @@ HG.System.LoggingIsEnabled = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.IsEnabled/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var haslog = eval(data)[0];
@@ -83,6 +90,7 @@ HG.System.UpdateManager.UpdateCheck = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.Check/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -94,6 +102,7 @@ HG.System.UpdateManager.GetUpdateList = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.UpdatesList/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -105,6 +114,7 @@ HG.System.UpdateManager.DownloadUpdate = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.DownloadUpdate/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -117,6 +127,7 @@ HG.System.UpdateManager.InstallProgramsList = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.InstallProgramsList/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
@@ -128,6 +139,7 @@ HG.System.UpdateManager.InstallUpdate = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.InstallUpdate/' + (new Date().getTime()),
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);

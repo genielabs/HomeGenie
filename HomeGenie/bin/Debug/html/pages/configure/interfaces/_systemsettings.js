@@ -125,6 +125,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 $ul.listview('refresh');
                 $.ajax({
                     url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Search/' + value + '/',
+                    data: "{ dummy: 'dummy' }",
                     dataType: 'json'
                 })
                 .then(function (response) {
@@ -167,7 +168,8 @@ HG.WebApp.SystemSettings.LircRemoteList = function () {
     $.mobile.showPageLoadingMsg();
     $('#lirc_remotes').empty();
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.List/'
+        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.List/',
+        data: "{ dummy: 'dummy' }"
     })
     .then(function (response) {
         var remotes = eval(response);
@@ -187,7 +189,8 @@ HG.WebApp.SystemSettings.LircRemoteList = function () {
 HG.WebApp.SystemSettings.LircRemoteAdd = function (remote) {
     $.mobile.showPageLoadingMsg();
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Add/' + remote + '/'
+        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Add/' + remote + '/',
+        data: "{ dummy: 'dummy' }"
     })
     .then(function (response) {
         $.mobile.hidePageLoadingMsg();
@@ -198,7 +201,8 @@ HG.WebApp.SystemSettings.LircRemoteAdd = function (remote) {
 HG.WebApp.SystemSettings.LircRemoteRemove = function (remote) {
     $.mobile.showPageLoadingMsg();
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Remove/' + remote + '/'
+        url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Remove/' + remote + '/',
+        data: "{ dummy: 'dummy' }"
     })
     .then(function (response) {
         $.mobile.hidePageLoadingMsg();
@@ -394,6 +398,7 @@ HG.WebApp.SystemSettings.CheckConfigureStatus = function () {
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
     $.ajax({
         url: ifaceurl,
+        data: "{ dummy: 'dummy' }",
         dataType: 'json',
         success: function (data) {
             var interfaces = eval(data);

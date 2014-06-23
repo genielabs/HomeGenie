@@ -588,7 +588,7 @@ namespace HomeGenie.Automation
             bool returnValue = false;
             string comparisonValue = c.ComparisonValue;
             //
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && c.Property == "Scheduler.TimeEvent")
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
             {
                 return homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
             }
@@ -632,30 +632,39 @@ namespace HomeGenie.Automation
                 switch (parameter.Name)
                 {
                     case "Programs.DateDay":
+                    case "Scheduler.DateDay":
                         parameter.Value = DateTime.Now.Day.ToString();
                         break;
                     case "Programs.DateMonth":
+                    case "Scheduler.DateMonth":
                         parameter.Value = DateTime.Now.Month.ToString();
                         break;
                     case "Programs.DateDayOfWeek":
+                    case "Scheduler.DateDayOfWeek":
                         parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
                         break;
                     case "Programs.DateYear":
+                    case "Scheduler.DateYear":
                         parameter.Value = DateTime.Now.Year.ToString();
                         break;
                     case "Programs.DateHour":
+                    case "Scheduler.DateHour":
                         parameter.Value = DateTime.Now.Hour.ToString();
                         break;
                     case "Programs.DateMinute":
+                    case "Scheduler.DateMinute":
                         parameter.Value = DateTime.Now.Minute.ToString();
                         break;
                     case "Programs.Date":
+                    case "Scheduler.Date":
                         parameter.Value = DateTime.Now.ToString("YY-MM-dd");
                         break;
                     case "Programs.Time":
+                    case "Scheduler.Time":
                         parameter.Value = DateTime.Now.ToString("HH:mm:ss");
                         break;
                     case "Programs.DateTime":
+                    case "Scheduler.DateTime":
                         parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
                         break;
                 }

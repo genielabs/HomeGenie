@@ -376,6 +376,7 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
     $.ajax({
         url: ifaceurl,
+        data: "{ dummy: 'dummy' }",
         dataType: 'json',
         success: function (data) {
             var interfaces = eval(data);
@@ -570,6 +571,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
     // and replace locales strings in the current page
     $.ajax({
         url: langurl,
+        data: "{ dummy: 'dummy' }",
         //dataType: 'json',
         success: function (data) {
             HG.WebApp.Data._CurrentLocale = $.parseJSON( data );

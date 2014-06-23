@@ -3,15 +3,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MIG</RootNamespace>
     <AssemblyName>MIG</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>1.0 beta</ReleaseVersion>
+    <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,12 +41,11 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\HomeGenie\Externals\json\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\ude-0.1\Ude.dll</HintPath>
-    </Reference>
     <Reference Include="UPnP">
       <HintPath>..\..\HomeGenie\Externals\upnp\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="Ude">
+      <HintPath>Externals\ude-0.1\Ude.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-<div data-role="popup" data-position-to="window" id="automation_domain" style="width:300px;">
+<div data-role="popup" data-position-to="window" id="automation_domain" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (1/5)</h1>
@@ -24,7 +24,7 @@
 </div>
 
 
-<div id="automation_target_popup" data-role="popup" data-position-to="window" style="width:300px;">
+<div id="automation_target_popup" data-role="popup" data-position-to="window" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (2/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -46,7 +46,7 @@
 </div>
 
 
-<div id="automation_target_homegenie_parameter" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_target_homegenie_parameter" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (3/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -68,7 +68,7 @@
 </div>
 
 
-<div id="automation_condition_type" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_condition_type" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (4/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div id="automation_condition_value" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_condition_value" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -121,7 +121,7 @@
 </div>
 
 
-<div id="automation_condition_value_domain" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_condition_value_domain" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -149,7 +149,7 @@
 </div>
 
 
-<div id="automation_condition_value_address" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_condition_value_address" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -175,7 +175,7 @@
 </div>
 
 
-<div id="automation_condition_value_property" data-position-to="window" data-role="popup" style="width:300px;">
+<div id="automation_condition_value_property" data-position-to="window" data-role="popup" style="min-width:300px;max-width:600px;">
     <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
     <div data-role="content" class="ui-corner-bottom ui-content">
@@ -308,21 +308,22 @@
             else {
                 switch (condition_targetdomain) {
                     case 'HomeAutomation.HomeGenie':
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsCounter"><a data-rel="popup" href="#automation_condition_type">Meter.WattsCounter</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsLoad"><a data-rel="popup" href="#automation_condition_type">Meter.WattsLoad</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.TimeEvent"><a data-rel="popup" href="#automation_condition_type">Scheduler.TimeEvent</a></li>');
-                        /*
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Date"><a data-rel="popup" href="#automation_condition_type">Programs.Date</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Time"><a data-rel="popup" href="#automation_condition_type">Programs.Time</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateTime"><a data-rel="popup" href="#automation_condition_type">Programs.DateTime</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDay"><a data-rel="popup" href="#automation_condition_type">Programs.DateDay</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateMonth"><a data-rel="popup" href="#automation_condition_type">Programs.DateMonth</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateYear"><a data-rel="popup" href="#automation_condition_type">Programs.DateYear</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDayOfWeek"><a data-rel="popup" href="#automation_condition_type">Programs.DateDayOfWeek</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateHour"><a data-rel="popup" href="#automation_condition_type">Programs.DateHour</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateMinute"><a data-rel="popup" href="#automation_condition_type">Programs.DateMinute</a></li>');
-                        */
-                        //			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Security.ArmedStatus"><a data-rel="popup" href="#automation_condition_type">Security.ArmedStatus</a></li>');
+                        //$('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsCounter"><a data-rel="popup" href="#automation_condition_type">Meter.WattsCounter</a></li>');
+                        //$('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsLoad"><a data-rel="popup" href="#automation_condition_type">Meter.WattsLoad</a></li>');
+                        //$('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.TimeEvent"><a data-rel="popup" href="#automation_condition_type">Scheduler.TimeEvent</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.CronEvent"><a data-rel="popup" href="#automation_condition_type">Scheduler.CronEvent</a></li>');
+
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.Date"><a data-rel="popup" href="#automation_condition_type">Scheduler.Date</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.Time"><a data-rel="popup" href="#automation_condition_type">Scheduler.Time</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateTime"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateTime</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateDay"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateDay</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateMonth"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateMonth</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateYear"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateYear</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateDayOfWeek"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateDayOfWeek</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateHour"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateHour</a></li>');
+                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.DateMinute"><a data-rel="popup" href="#automation_condition_type">Scheduler.DateMinute</a></li>');
+                        
+                        //$('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Security.ArmedStatus"><a data-rel="popup" href="#automation_condition_type">Security.ArmedStatus</a></li>');
                         break;
                     default:
                         if (module != null) {

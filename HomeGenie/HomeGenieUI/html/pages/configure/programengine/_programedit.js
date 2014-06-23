@@ -283,6 +283,7 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 		$.ajax({
 			type: 'POST',
 			url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.' + fn + '/' + pid + '/',
+			data: "{ dummy: 'dummy' }",
 			success: function (response) {
 				$('#automation_program_saving').popup('close'); 
 				$.mobile.hidePageLoadingMsg();
@@ -531,6 +532,7 @@ HG.WebApp.ProgramEdit.BreakProgram = function (pid)
         $.ajax({
             type: 'POST',
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Break/' + pid + '/',
+            data: "{ dummy: 'dummy' }",
             success: function (response) {
                 HG.WebApp.ProgramEdit.RefreshProgramOptions();
                 $.mobile.hidePageLoadingMsg();
