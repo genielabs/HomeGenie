@@ -87,6 +87,7 @@ namespace ZWaveLib
 		COMMAND_CLASS_THERMOSTAT_OPERATING_STATE =  0x42,	 
 		COMMAND_CLASS_THERMOSTAT_SETBACK = 0x47,	 
 		COMMAND_CLASS_THERMOSTAT_SETPOINT = 0x43	 
+		
     }
 
     public enum GenericType : byte
