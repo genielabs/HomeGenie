@@ -357,6 +357,45 @@ namespace ZWaveLib.Devices
 
                         break;
 
+
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:	
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_FAN_MODE, receivedMessage [9]);
+						handled = true;
+						break;
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:	 
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_FAN_STATE, receivedMessage [9]);
+						handled = true;
+						break;
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:	
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_HEATING, receivedMessage [9]);
+						handled = true;
+						break;
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:	
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, receivedMessage [9]);
+						handled = true;
+						break;
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:	
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE, receivedMessage [9]);
+						handled = true;
+						break;
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK:	
+						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_SETBACK, receivedMessage [9]);
+						handled = true;
+						break;
+
+                        /*
+                         * 
+                         * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
+                            2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
+                         * 
+                         **/
+
+					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:	
+                        double temp = ExtractTemperatureFromBytes(receivedMessage);
+                        RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, temp);
+						handled = true;
+						break;
+
                     case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
 
                         if (messageLength > 14)
@@ -865,7 +904,24 @@ namespace ZWaveLib.Devices
 
 
 
+        public static double ExtractTemperatureFromBytes(byte[] message)
+        {
+            double temperature = 0; // (double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
 
+            byte[] tmp = new byte[4];
+            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
+            message = tmp;
+
+            byte precisionScaleSize = message[0];
+
+            temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
+
+            // F to C
+            //if (precisionScaleSize != 0x22)
+            //   temperature = ((5.0 / 9.0) * (temperature - 32.0));
+
+            return temperature;
+        }
 
 
 

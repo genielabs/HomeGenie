@@ -376,8 +376,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
 
             // F to C
-            if (precisionScaleSize != 0x22)
-                temperature = ((5.0 / 9.0) * (temperature - 32.0));
+			//if (precisionScaleSize != 0x22)
+			//   temperature = ((5.0 / 9.0) * (temperature - 32.0));
 
             return temperature;
         }
