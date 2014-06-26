@@ -41,6 +41,15 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             });
         }
 
+        //initial request for thermostat mode, since this doesn't change very often
+        public virtual void thermModeGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+
         /*
          * I had no idea how this was going to work
          * found this:  http://www.agocontrol.com/forum/index.php?topic=175.10;wap2
