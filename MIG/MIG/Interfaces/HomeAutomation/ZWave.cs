@@ -84,6 +84,10 @@ namespace MIG.Interfaces.HomeAutomation
                 {705, "Control.Level"},
                 {706, "Control.Toggle"},
 
+                {801, "Therm.Mode"},
+                {802, "Therm.Temp"},
+                {803, "Therm.GetMode"},
+
                 {1000, "NodeInfo.Get"},
             };
 
@@ -124,6 +128,10 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_OFF = new Command(702);
             public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
+
+            public static readonly Command THERM_MODE = new Command(801);
+            public static readonly Command THERM_TEMP = new Command(802);
+            public static readonly Command THERM_GET_MODE = new Command(802);
 
             private readonly String name;
             private readonly int value;
@@ -490,6 +498,34 @@ namespace MIG.Interfaces.HomeAutomation
                         ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Off();
                     }
                 }
+                else if (command == Command.THERM_MODE)
+                {
+                    raisePropertyChanged = true;
+                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
+                    //
+                    // Basic.Set <level>
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    int mode = int.Parse(request.GetOption(0));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeSet(mode);
+                }
+                else if (command == Command.THERM_TEMP)
+                {
+                    raisePropertyChanged = true;
+                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
+                    //
+                    // Basic.Set <level>
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    int mode = int.Parse(request.GetOption(0));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermTempSet(mode);
+                }
+                else if (command == Command.THERM_GET_MODE)
+                {
+                    raisePropertyChanged = true;
+                   
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    int mode = int.Parse(request.GetOption(0));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeGet();
+                }
             }
             catch
             {
@@ -820,6 +856,31 @@ namespace MIG.Interfaces.HomeAutomation
                     value = normalizedval.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
                     break;
+
+				case ParameterType.PARAMETER_FAN_MODE:
+					path = "Thermostat.FanMode";
+					break;
+				case ParameterType.PARAMETER_FAN_STATE:
+					path = "Thermostat.FanState";
+					break;
+				case ParameterType.PARAMETER_THERMOSTAT_HEATING:
+					path = "Thermostat.Heating";
+					break;
+				case ParameterType.PARAMETER_THERMOSTAT_MODE:
+					path = "Thermostat.Mode";
+					break;
+				case ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE:
+					path = "Thermostat.OperatingState";
+					break;
+				case ParameterType.PARAMETER_THERMOSTAT_SETBACK:
+					path = "Thermostat.SetBack";
+					break;
+				case ParameterType.PARAMETER_THERMOSTAT_SETPOINT:
+					path = "Thermostat.SetPoint";
+					break;
+
+
+
                 default:
                     Console.WriteLine("UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}", upargs.NodeId, upargs.ParameterType, upargs.ParameterId, value);
                     break;
