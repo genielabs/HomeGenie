@@ -29,5 +29,44 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
     public class Thermostat : Sensor
     {
+
+            
+
+        public virtual void thermModeSet(int mode)
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                (byte)mode
+            });
+        }
+
+        /*
+         * I had no idea how this was going to work
+         * found this:  http://www.agocontrol.com/forum/index.php?topic=175.10;wap2
+         * not sure what it will do with Celsius
+         * 
+         * Set Thermostat Setpoint (Node=6): 0x01, 0x0c, 0x00, 0x13, 0x06, 0x05, 0x43, 0x01, 0x02, 0x09, 0x10, 0x25, 0xc5, 0x5a
+         * 
+         *  0x43 - COMMAND_CLASS_THERMOSTAT_SETPOINT
+            0x01 - THERMOSTAT_SETPOINT_SET
+            0x02 - type
+            0x09 - 3 bit precision, 2 bit scale (0 = C,1=F), 3 bit size -> Fahrenheit, size == 1
+            0x10 - value to set == 16 degF
+         * 
+         * */
+
+        public virtual void thermTempSet(double temp)
+        {
+            int t=(int)temp;
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                0x02,
+                0x09,
+                (byte)t
+            });
+        }
+
     }
 }
