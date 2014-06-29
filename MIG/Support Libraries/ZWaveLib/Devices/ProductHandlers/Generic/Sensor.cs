@@ -328,6 +328,9 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 sensorValue.Parameter = ZWaveSensorParameter.TEMPERATURE;
                 sensorValue.Value = ExtractTemperatureFromBytes(message);
                 sensorValue.EventType = ParameterType.PARAMETER_TEMPERATURE;
+
+
+
             }
             else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
             {
@@ -362,7 +365,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         }
 
 
-        // code from http://sourceforge.net/p/homegenie/discussion/general/thread/3d98093f/#677f
+   
         public static double ExtractTemperatureFromBytes(byte[] message)
         {
             double temperature = 0; // (double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
@@ -376,8 +379,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
 
             // F to C
-			//if (precisionScaleSize != 0x22)
-			//   temperature = ((5.0 / 9.0) * (temperature - 32.0));
+            if (precisionScaleSize != 0x22)
+              temperature = ((5.0 / 9.0) * (temperature - 32.0));
 
             return temperature;
         }
