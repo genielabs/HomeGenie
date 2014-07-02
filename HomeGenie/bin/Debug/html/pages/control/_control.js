@@ -13,6 +13,9 @@ HG.WebApp.Control._Widgets = [];
 HG.WebApp.Control.InitializePage = function () {
     $('#page_control').on('pageinit', function (e) {
 
+       	$('#toolbar_macrorecord').hide();
+        $('#toolbar_control').show();
+
         $('#control_groupslist').on('click', 'li', function () {
             HG.WebApp.Data._CurrentGroup = $(this).attr('data-context-group');
             var modidx = $(this).attr('data-context-value');
@@ -23,11 +26,6 @@ HG.WebApp.Control.InitializePage = function () {
                 HG.WebApp.Data._CurrentModule = null;
             }
         });
-        //
-        //			$('#module_control_popup').on('popupbeforeposition', function (event) {
-        //				$('#page_control li').removeClass("ui-btn-active");
-        //				HG.WebApp.Control.RefreshModulePopup();
-        //			});
         //
         $('#control_macrorecord_optionspopup').bind('popupafterclose', function () {
             if ($('#macrorecord_delay_none').prop('checked')) {
@@ -44,7 +42,6 @@ HG.WebApp.Control.InitializePage = function () {
         $.ajax({
             url: "pages/control/widgets/configuration.json",
             data: "{ dummy: 'dummy' }",
-            //dataType: 'json',
             success: function (data) {
                 HG.WebApp.Control._WidgetConfiguration = eval(data);
             },
@@ -52,6 +49,7 @@ HG.WebApp.Control.InitializePage = function () {
                 alert('error loading widgets configuration');
             }
         });
+
     });
 };
 //
@@ -94,11 +92,13 @@ HG.WebApp.Control.RecordMacroStart = function () {
     $('#control_actionmenu').popup('close');
     HG.Automation.Macro.Record();
     $('#toolbar_control').hide('slidedown');
-    $('#toolbar_macrorecord').show('slideup');
+    setTimeout(function(){
+    	$('#toolbar_macrorecord').show('slideup');
+	}, 500);
 }
 //
 HG.WebApp.Control.RecordMacroSave = function (mode) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Automation.Macro.Save(mode, function (data) {
         HG.Automation.Programs.List(function () {
             HG.WebApp.AutomationGroupsList._CurrentGroup = '';
@@ -106,7 +106,7 @@ HG.WebApp.Control.RecordMacroSave = function (mode) {
             HG.Configure.Groups.List('Automation', function () {
                 HG.WebApp.ProgramsList.EditProgram();
                 $.mobile.changePage($('#page_automation_editprogram'), { transition: "slide" });
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             });
         });
     });
@@ -127,23 +127,9 @@ HG.WebApp.Control.RenderGroupsCollapsibleItems = function () {
         if (i == 0) {
             HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
         }
-        var el = $('#control_groupslist').append('<span id="group_load_info_' + i + '" style="z-index:100;position:absolute;right:50px;margin-top:14px;font-size:9pt;"></span><img id="group_load_icon_' + i + '" src="images/led-green-off.png" style="z-index:100;position:absolute;right:20px;margin-top:10px"><div data-role="collapsible" data-inset="false" id="groupdiv_' + i + '" data-collapsed="true" onclick="HG.WebApp.Data._CurrentGroup = \'' + HG.WebApp.Data.Groups[i].Name + '\'; "><h3>' + HG.WebApp.Data.Groups[i].Name + '</h3><ul id="groupdiv_modules_' + i + '" data-theme="c" data-content-theme="c" data-inset="false" /></div>');
+
+        var el = $('#control_groupslist').append('<div id="groupdiv_' + i + '" class="ui-bar-inherit ui-shadow hg-widget-group-title"><h3 class="hg-widget-header">' + HG.WebApp.Data.Groups[i].Name + '</h3><table align="right" style="float:right;margin-right:20px"><tr id="indicators"></tr></table></div><div id="groupdiv_modules_' + i + '" /><br clear="all" />');
     }
-    //
-    $('#control_groupslist a[data-role="button"]').button();
-    $('#control_groupslist div[data-role*="controlgroup"]').controlgroup();
-    $('#control_groupslist').collapsibleset();
-    //	    $('#control_groupslist').collapsibleset('refresh');
-    //
-    $('#control_groupslist div[data-role="collapsible"]').each(function (args) {
-        $(this).children().next().slideToggle(0);
-        $(this).children().next().slideToggle(0);
-    });
-    //
-    $('#control_groupslist div[data-role="collapsible"]').bind('expand collapse', function (event) {
-        $(this).children().next().slideToggle(500);
-        return false;
-    });
 };
 //
 HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
@@ -160,7 +146,6 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
         $.ajax({
             url: "pages/control/widgets/" + widgetpath + ".json",
             data: "{ dummy: 'dummy' }",
-            //dataType: 'json',
             success: function (data) {
                 var widget = null;
                 var widgetjson = null;
@@ -209,13 +194,14 @@ HG.WebApp.Control.RenderModule = function () {
             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 1);
         }
         else {
-            var html = '<li id="' + rendermodule.ElementId + '" data-icon="false" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
+            var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
             HG.WebApp.Control.GetWidget(rendermodule.Module.Widget, function (w) {
                 if (w != null) {
                     html += w.Model;
-                    html += '</li>';
+                    html += '</div></div>';
                     rendermodule.GroupElement.append(html);
-                    rendermodule.GroupElement.listview('refresh');
+                    rendermodule.GroupElement.trigger('create');
+                    //rendermodule.GroupElement.listview('refresh');
                     //
                     if (w.Json != null) {
                         try {
@@ -247,11 +233,20 @@ HG.WebApp.Control.RenderModule = function () {
     }
     else {
         rendermodulesbusy = false;
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
+        //
+		HG.WebApp.Control.RefreshGroupIndicators();
         //
         if (!widgetsinitialized) {
             widgetsinitialized = true;
-            setTheme(uitheme);
+		    for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+
+		    	$('#groupdiv_modules_' + i).isotope({
+					itemSelector: '.freewall',
+					layoutMode: 'packery'
+				});
+
+		    }
         }
     }
 
@@ -299,9 +294,6 @@ HG.WebApp.Control.RenderGroupModules = function () {
     //
     for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
-        var grouploadkw = 0;
-        var somedevon = false;
-        //
         var grp = $('#groupdiv_modules_' + groupmodules.Index);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
             var module = groupmodules.Modules[m];
@@ -343,28 +335,7 @@ HG.WebApp.Control.RenderGroupModules = function () {
                     module.WidgetInstance.RenderView(cuid, module);
                 }
             }
-            //
-            var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
-            var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-            if (w != null && l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
-                grouploadkw += (parseFloat(w.Value.replace(',', '.')) / 1000.0);
-            }
-            if (l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
-                somedevon = true;
-            }
         }
-        //
-        $('#group_load_icon_' + i).attr('src', 'images/led-green-off.png');
-        $('#group_load_info_' + i).html('');
-        //
-        if (grouploadkw > 0 || somedevon) {
-            $('#group_load_icon_' + i).attr('src', 'images/led-green-on.png');
-        }
-        if (grouploadkw > 0) {
-            $('#group_load_info_' + i).html('kW ' + grouploadkw.toFixed(3));
-        }
-        grp.listview();
-
     }
     //
     $('#control_groupslist').collapsibleset();
@@ -372,8 +343,104 @@ HG.WebApp.Control.RenderGroupModules = function () {
     widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule();', 1);
 };
 //
+HG.WebApp.Control.RefreshGroupIndicators = function() {
+    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+        var grouploadkw = 0;
+        var operating_lights = 0;
+        var operating_switches = 0;
+        var group_temperature = null;
+        var group_humidity = null;
+        var group_luminance = null;
+        //
+        var grp = $('#groupdiv_modules_' + groupmodules.Index);
+        for (var m = 0; m < groupmodules.Modules.length; m++) {
+            var module = groupmodules.Modules[m];
+            var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
+            var cuid = '#' + uid;
+            var modui = $(cuid);
+            var type = module.DeviceType + ''; type = type.toLowerCase();
+            //
+            var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
+            var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
+            if (w != null && l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
+                grouploadkw += (parseFloat(w.Value.replace(',', '.')) / 1000.0);
+            }
+            if (l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
+                switch (type)
+                {
+                	case 'dimmer':
+                	case 'light':
+                		operating_lights++;
+                		break;
+                	case 'switch':
+						operating_switches++;
+						break;
+                }
+            }
+
+        	if (group_temperature == null)
+			{
+            	var t = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
+            	if (t != null && t.Value != '')
+            	{
+            		group_temperature = t.Value;
+            	}
+        	}
+
+        	if (group_humidity == null)
+			{
+            	var h = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Humidity");
+            	if (h != null && h.Value != '')
+            	{
+            		group_humidity = h.Value;
+            	}
+        	}
+
+        	if (group_luminance == null)
+			{
+            	var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Luminance");
+            	if (l != null && l.Value != '')
+            	{
+            		group_luminance = l.Value;
+            	}
+        	}
+        }
+        //
+
+//		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
+
+		var indicators = '';
+        if (group_temperature != null)
+        {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/temperature.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_temperature * 1).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        }
+        if (group_humidity != null)
+        {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/humidity.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+        }
+        if (group_luminance != null)
+        {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/luminance.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_lights > 0)
+        {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/bulb.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + operating_lights + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_switches > 0)
+        {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/plug.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + operating_switches + '</span></td><td>&nbsp;</td>';
+        }
+        if (grouploadkw > 0) {
+        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/energy.png" style="vertical-align:middle"/> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        }
+		$('#groupdiv_' + i).find('#indicators').html(indicators);
+
+    }
+}
+//
 HG.WebApp.Control.LoadGroups = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Configure.Groups.List('Control', function () {
         HG.WebApp.Control.RenderGroupsCollapsibleItems();
     });

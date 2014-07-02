@@ -6,31 +6,31 @@ HG.WebApp.Maintenance.InitializePage = function () {
     $('#page_configure_maintenance').on('pageinit', function (e) {
         $('#systemsettings_httpport_change').bind('click', function () {
             var port = $('#http_service_port').val();
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             HG.System.SetHttpPort(port, function (data) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             });
         });
         //
         $("#configure_system_flip_logging").on('slidestop', function (event) {
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             if ($("#configure_system_flip_logging").val() == '1') {
                 HG.System.LoggingEnable(function (data) {
-                    $.mobile.hidePageLoadingMsg();
+                    $.mobile.loading('hide');
                 });
             }
             else {
                 HG.System.LoggingDisable(function (data) {
-                    $.mobile.hidePageLoadingMsg();
+                    $.mobile.loading('hide');
                 });
             }
         });
         //
         $('#configure_system_updatemanager_updatebutton').bind('click', function () {
             $('#configure_system_updatemanager_info').html('<strong>Checking for updates...</strong>');
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             HG.System.UpdateManager.UpdateCheck(function (res) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
                 HG.WebApp.Maintenance.LoadUpdateCheckSettings();
             });
         });
@@ -41,7 +41,6 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show', {
                 text: 'Please wait...',
                 textVisible: true,
-                theme: uitheme,
                 html: ""
             });
             HG.System.UpdateManager.InstallUpdate(function (res) {
@@ -78,7 +77,6 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show', {
                 text: 'Please wait...',
                 textVisible: true,
-                theme: uitheme,
                 html: ""
             });
             HG.System.UpdateManager.DownloadUpdate(function (res) {
@@ -106,26 +104,26 @@ HG.WebApp.Maintenance.InitializePage = function () {
         //
         $('#securitysettings_password_change').bind('click', function () {
             var pass = $('#securitysettings_user_password').val();
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             HG.System.SetPassword(pass, function (data) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
                 setTimeout(function () {
                     HG.WebApp.Maintenance.LoadSecuritySettings();
                 }, 1000);
             });
         });
         $('#securitysettings_password_clear').bind('click', function () {
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             HG.System.ClearPassword(function (data) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
                 HG.WebApp.Maintenance.LoadSecuritySettings();
             });
         });
         //
         $('#maintenance_configuration_backupbutton').bind('click', function () {
-            //$.mobile.showPageLoadingMsg();
+            //$.mobile.loading('show');
             //HG.Configure.System.ServiceCall("System.ConfigurationBackup", function (data) {
-            //    $.mobile.hidePageLoadingMsg();
+            //    $.mobile.loading('hide');
             //});
         });
         $('#maintenance_configuration_restorebutton').bind('click', function () {
@@ -197,7 +195,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
 
         });
         $('#configure_interfaces_modules_list').on('click', 'li', function () {
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
             //
             var domain = $(this).attr('data-context-domain');
             var address = $(this).attr('data-context-address');
@@ -215,7 +213,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 }
                 HG.WebApp.Maintenance.RefreshModulesList();
                 //
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             });
         });
     });
@@ -232,12 +230,12 @@ HG.WebApp.Maintenance.RestoreProgramToggle = function (el) {
 };
 
 HG.WebApp.Maintenance.LoadSettings = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     //
     HG.Configure.System.ServiceCall("HttpService.GetPort", function (data) {
         $('#http_service_port').val(data);
         $('#systemsettings_httpport_text').html(data);
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
     });
     //
     HG.WebApp.Maintenance.LoadSecuritySettings();
@@ -245,7 +243,7 @@ HG.WebApp.Maintenance.LoadSettings = function () {
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     $('#configure_system_updateinstall_button').addClass('ui-disabled');
     HG.System.UpdateManager.GetUpdateList(function (data) {
         var releasedata = eval(data);
@@ -267,19 +265,19 @@ HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
             $('#configure_system_updatemanager_detailsscroll').show();
             $('#configure_system_updatemanager_installbutton').show();
         }
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
     });
 };
 
 HG.WebApp.Maintenance.LoadSecuritySettings = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.System.HasPassword(function (data) {
         var sfx = (data == '1' ? 'on' : 'off');
         $('#securitysettings_password_image').attr('src', 'images/protection-' + sfx + '.png');
         //
         HG.System.LoggingIsEnabled(function (data) {
             $('#configure_system_flip_logging').val(data).slider('refresh');
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         });
     });
 };
@@ -293,10 +291,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
         if (mod.Domain == 'HomeAutomation.HomeGenie.Automation') continue;
         //
         if (cdomain != mod.Domain) {
-            $('#configure_interfaces_modules_list').append($('<li/>', { 'data-role': 'list-divider', 'data-theme': uitheme }).append('<p/>').append(mod.Domain));
+            $('#configure_interfaces_modules_list').append($('<li/>', { 'data-role': 'list-divider' }).append(mod.Domain));
             cdomain = mod.Domain;
         }
-        $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-theme': uitheme, 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
+        $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
 			.append($('<a/>',
 				{
 				    'text': mod.Address + ' ' + mod.Name
@@ -309,10 +307,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
         if (mod.Domain != 'HomeAutomation.HomeGenie.Automation') continue;
         //
         if (cdomain != mod.Domain) {
-            $('#configure_interfaces_modules_list').append($('<li/>', { 'data-role': 'list-divider', 'data-theme': uitheme }).append('<p/>').append(mod.Domain));
+            $('#configure_interfaces_modules_list').append($('<li/>', { 'data-role': 'list-divider' }).append(mod.Domain));
             cdomain = mod.Domain;
         }
-        $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-theme': uitheme, 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
+        $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
 			.append($('<a/>',
 				{
 				    'text': mod.Address + ' ' + mod.Name
@@ -322,9 +320,5 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
 };
 
 HG.WebApp.Maintenance.SetTheme = function (theme) {
-    $.mobile.showPageLoadingMsg();
-    setTimeout(function () {
-        setTheme(theme);
-        document.location.href = '/';
-    }, 1000);
+    setTheme(theme);
 };

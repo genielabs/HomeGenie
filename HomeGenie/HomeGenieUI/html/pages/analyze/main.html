@@ -7,14 +7,14 @@
 
 
         <img src="images/analyze.png" style="position:absolute;top:63px;left:20px;" width="64" />
-        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="analyze_statistics">Analyze<br />Statistics</h3></div>
+        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="analyze_statistics">Statistics</h3></div>
 
         <h5 id="page_analyze_since" style="position:absolute;top:110px;"></h5>
 
         <h3 id="page_analyze_title" style="position:absolute;top:140px;">Global, Watts</h3>
 
         <fieldset data-role="controlgroup" data-type="horizontal" style="text-align:right;">
-            <a href="#analyze_stats_options" data-role="button" data-rel="popup" data-icon="edit">Options</a>
+            <a href="#analyze_stats_options" class="ui-btn" data-rel="popup" data-icon="edit">Options</a>
         </fieldset>
 
         <div style="margin:0px">
@@ -61,7 +61,7 @@
     </div>
 
 
-    <div data-role="popup" id="analyze_stats_options" style="min-width:300px;" class="ui-corner-all" data-position-to="window" data-transition="pop">
+    <div id="analyze_stats_options" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
 
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="analyze_statistics">Options</h1>
@@ -91,11 +91,16 @@
                 </select>
 
             </fieldset>
-            <p></p>
 
-            <a href="#" data-role="button" data-rel="back" data-icon="delete" data-inline="true">Cancel</a>
-            <a href="#" id="page_analyze_renderbutton" data-role="button" data-icon="check" data-inline="true">Update</a>
+        </div>
 
+        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
+        	<div class="ui-block-a">
+        		<a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-rel="back">Cancel</a>
+            </div>
+            <div class="ui-block-b">
+	            <a href="#" id="page_analyze_renderbutton" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left">Update</a>
+            </div>
         </div>
 
     </div>
@@ -103,20 +108,20 @@
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="home_menu_control" data-role="button" data-transition="slide" href="#page_control" data-icon="grid" data-iconpos="left">
+                    <a data-locale-id="home_menu_control" class="ui-btn ui-icon-grid ui-btn-icon-left" data-transition="slide" href="#page_control">
                         Control
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="home_menu_configure" data-role="button" data-transition="slide" href="#page_configure" data-icon="gear" data-iconpos="left">
+                    <a data-locale-id="home_menu_configure" class="ui-btn ui-icon-gear ui-btn-icon-right" data-transition="slide" href="#page_configure">
                         Configure
                     </a>
                 </li>

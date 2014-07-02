@@ -76,7 +76,7 @@ HG.WebApp.InitializePage = function ()
             HG.Automation.Programs.List(function () {
                 //if ($('#control_groupslist').children().length == 0) 
                 {
-                    $.mobile.showPageLoadingMsg();
+                    $.mobile.loading('show');
                     HG.Configure.Groups.List('Control', function () 
                     {
                         if ($('#control_groupslist').children().length == 0) 
@@ -136,7 +136,7 @@ HG.WebApp.InitializePage = function ()
         else if (this.id == 'page_configure_groupmodules') 
         {
             HG.WebApp.GroupModules.LoadGroupModules();
-            $.mobile.showPageLoadingMsg();
+            $.mobile.loading('show');
         }
         else if (this.id == 'page_configure_automationgroups') 
         {
@@ -184,16 +184,16 @@ HG.WebApp.InitializePage = function ()
     //
     // Prevent body scrolling when a popup is open
     //
-    $(document).on('popupafteropen', '[data-role="popup"]' ,function( event, ui ) {
-        $('body').css('overflow-y','hidden');
-    }).on('popupafterclose', '[data-role="popup"]' ,function( event, ui ) {
-        $('body').css('overflow-y','auto');
-    });
-    $(document).on('popupafteropen', '[data-ui-field="controlpopup"]', function (event, ui) {
-        $('body').css('overflow-y', 'hidden');
-    }).on('popupafterclose', '[data-ui-field="controlpopup"]', function (event, ui) {
-        $('body').css('overflow-y', 'auto');
-    });
+    //$(document).on('popupafteropen', '[data-role="popup"]' ,function( event, ui ) {
+    //    $('body').css('overflow-y','hidden');
+    //}).on('popupafterclose', '[data-role="popup"]' ,function( event, ui ) {
+    //    $('body').css('overflow-y','auto');
+    //});
+    //$(document).on('popupafteropen', '[data-ui-field="controlpopup"]', function (event, ui) {
+    //    $('body').css('overflow-y', 'hidden');
+    //}).on('popupafterclose', '[data-ui-field="controlpopup"]', function (event, ui) {
+    //    $('body').css('overflow-y', 'auto');
+    //});
     //
     // UI Localization
     //
@@ -377,7 +377,6 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
     $.ajax({
         url: ifaceurl,
         data: "{ dummy: 'dummy' }",
-        dataType: 'json',
         success: function (data) {
             var interfaces = eval(data);
             var status = '';
@@ -559,6 +558,22 @@ HG.WebApp.Utility.JScrollToElement = function (element, delay) {
         scrollTop: $(element).offset().top
     }, delay);
 };
+
+HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
+   	var switchfn = function( event, ui ) {
+	    if (notransition == true)
+	    {
+	    	setTimeout(function () { $(popup_id2).popup('open'); }, 10);
+		}
+		else	
+		{
+	    	setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
+		}
+		$(popup_id1).off('popupafterclose', switchfn);
+    };
+    $(popup_id1).on('popupafterclose', switchfn);
+    $(popup_id1).popup('close');
+};
 //
 // namespace : HG.WebApp.Utility namespace
 // info      : global utility functions
@@ -572,7 +587,6 @@ HG.WebApp.Locales.Localize = function(container, langurl)
     $.ajax({
         url: langurl,
         data: "{ dummy: 'dummy' }",
-        //dataType: 'json',
         success: function (data) {
             HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
             //

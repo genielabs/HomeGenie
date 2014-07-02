@@ -1,18 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\README.TXT">
-    <Files>
-      <File FileName="..\README.TXT" Line="1" Column="1" />
-      <File FileName="release_info.xml" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="Data\Command.cs" line="32" offsetX="382" offsetY="558" expression="requests" liveUpdate="False" />
-    <Watch file="..\MIG\MIG\Gateways\WebServiceGateway.cs" line="82" offsetX="798" offsetY="1458" expression="httpRequest" liveUpdate="False" />
-    <Watch file="..\MIG\MIG\MIGService.cs" line="105" offsetX="611" offsetY="1600" expression="type" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="Generoso Martello" Email="gene@homegenie.it" Copyright="2011-2014 G-Labs" Company="G-Labs" Trademark="" />
 </Properties>

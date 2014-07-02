@@ -16,11 +16,6 @@ HG.WebApp.Events.InitializePage = function () {
     });
     setTimeout(function () {
         HG.WebApp.Events.SetupListener();
-        //
-        // status popup repositioning
-        $(window).bind('scroll resize', function () {
-            $('#statuspopup').css('top', $(this).scrollTop());
-        });
     }, 2000);
 
 };
@@ -45,6 +40,7 @@ HG.WebApp.Events.SetupListener = function () {
                 // update current event property 
                 HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
             }
+			HG.WebApp.Control.RefreshGroupIndicators();
         }
         // send message to UI for updating UI elements related to this event (widgets, popup and such)
         HG.WebApp.Events.SendEventToUi(module, event);

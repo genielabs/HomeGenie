@@ -9,7 +9,6 @@ HG.VoiceControl.Localize = function (langurl, callback) {
     $.ajax({
         url: langurl,
         data: "{ dummy: 'dummy' }",
-        //dataType: 'json',
         success: function (data) {
             HG.VoiceControl.LingoData = $.parseJSON(data);
             callback(true);

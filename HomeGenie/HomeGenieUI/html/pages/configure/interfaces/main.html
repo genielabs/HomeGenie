@@ -3,14 +3,14 @@
 
     {include pages/header.html}
 
-    <div data-role="content" style="padding: 15px">
+    <div class="ui-content">
 
 
         <img src="images/interfaces.png" style="position:absolute;top:65px;left:20px;" width="64" />
-        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="configure_interfaces_heading">System and Interfaces</h3></div>
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_interfaces_heading">System and Interfaces</h3></div>
 
 
-        <ul data-role="listview" data-inset="true">
+        <ul data-role="listview">
             <li data-locale-id="configure_interfaces_zwaveoptions" data-role="list-divider">ZWave Interface Options</li>
             <li>
 
@@ -22,13 +22,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <!--span data-locale-id="configure_interfaces_zwave_enable">Z-Wave Interface</span-->
-                                <select id="configure_interfaces_flip_zwave" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_zwave" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -38,16 +35,16 @@
 
             <li id="configure_interfaces_zwaveoptions">
                 <span data-locale-id="configure_interfaces_zwaveport">Device Port</span>
-                <select id="page_configure_interfaces_zwaveport" data-inset="true"></select>
+                <select id="page_configure_interfaces_zwaveport"></select>
 
             </li>
 
             <li id="configure_interfaces_zwaveoptions">
                 <span data-locale-id="configure_interfaces_zwavecommontasks">ZWave Common Tasks</span>
-                <div id="page_configure_interfaces_x10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" data-inset="true">
-                    <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" data-role="button" data-icon="search">Discovery</a>
-                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" data-role="button" data-icon="plus">Add Node</a>
-                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" data-role="button" data-icon="minus">Remove Node</a>
+                <div id="page_configure_interfaces_x10housecodes" data-role="controlgroup" data-type="horizontal">
+                    <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
+                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
+                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
                 </div>
             </li>
 
@@ -64,15 +61,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-
-                            <div class="containing-element" style="width:200px">
-                                <!--span data-locale-id="configure_interfaces_x10_enable">X10 Interface</span-->
-                                <select id="configure_interfaces_flip_x10" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
-
+                            <select id="configure_interfaces_flip_x10" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -83,7 +75,7 @@
             <li id="configure_interfaces_x10options">
 
                 <span data-locale-id="configure_interfaces_x10port">Device Port</span>
-                <select id="page_configure_interfaces_x10port" data-inset="true"></select>
+                <select id="page_configure_interfaces_x10port"></select>
 
             </li>
             <li id="configure_interfaces_x10options">
@@ -119,12 +111,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <select id="configure_interfaces_flip_w800rf32" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_w800rf32" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -134,7 +124,7 @@
 
             <li id="configure_interfaces_w800rf32options">
                 <span data-locale-id="configure_interfaces_w800rf32port">Device Port</span>
-                <select id="page_configure_interfaces_w800rf32port" onchange="HG.WebApp.SystemSettings.W800RfSetPort($(this).val())" data-inset="true"></select>
+                <select id="page_configure_interfaces_w800rf32port" onchange="HG.WebApp.SystemSettings.W800RfSetPort($(this).val())"></select>
 
             </li>
 
@@ -149,12 +139,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <select id="configure_interfaces_flip_lircremote" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_lircremote" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -163,9 +151,10 @@
             <li id="configure_interfaces_lircremoteoptions">
                 <span data-locale-id="configure_interfaces_lircremoteconfiguration">Lirc Configuration</span>
                 <br clear="all" />
-                <div data-role="controlgroup" data-mini="true">
-                    <ul data-role="listview" id="lirc_remotes" data-inset="true" data-inline="true"></ul>
-                    <a data-locale-id="configure_interfaces_lircremoteaddremote" data-inset="true" data-inline="true" href="#systemsettings_lircremotes_popup" data-role="button" data-rel="popup" data-transition="pop" data-icon="plus">Add Remote</a>
+
+                <ul data-role="listview" data-inset="true" id="lirc_remotes"></ul>
+                <div data-role="controlgroup" data-type="horizontal">
+                	<a data-locale-id="configure_interfaces_lircremoteaddremote" href="#systemsettings_lircremotes_popup" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left" data-rel="popup" data-transition="pop">Add Remote</a>
                 </div>
 
             </li>
@@ -181,12 +170,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <select id="configure_interfaces_flip_camera" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_camera" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -208,12 +195,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <select id="configure_interfaces_flip_upnp" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_upnp" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -224,7 +209,7 @@
             
             <li id="configure_interfaces_cameraoptions" style="display:none">
                 <span data-locale-id="configure_interfaces_cameraport">Device Port</span>
-                <select id="page_configure_interfaces_cameraport" onchange="HG.WebApp.SystemSettings.CameraInputSetPort($(this).val())" data-inset="true">
+                <select id="page_configure_interfaces_cameraport" onchange="HG.WebApp.SystemSettings.CameraInputSetPort($(this).val())">
                     <option value="|dev|video0">/dev/video0</option>
                     <option value="|dev|video1">/dev/video1</option>
                 </select>
@@ -244,13 +229,10 @@
 
                     <div class="ui-block-b">
                         <span style="float:right">
-                            <div class="containing-element" style="width:200px">
-                                <!--span data-locale-id="configure_interfaces__raspigpio_enable">GPIO Interface</span-->
-                                <select id="configure_interfaces_flip_weeco4mgpio" data-role="slider">
-                                    <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                                    <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                                </select>
-                            </div>
+                            <select id="configure_interfaces_flip_weeco4mgpio" data-role="slider">
+                                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                            </select>
                         </span>
                     </div>
 
@@ -262,51 +244,51 @@
         </ul>
 
 
-        <div id="systemsettings_lircremotes_popup" data-role="popup" data-position-to="window" data-transition="pop" style="max-width:300px;" class="ui-corner-all">
-            <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <div id="systemsettings_lircremotes_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_lircremotesadd">Add Remote</h1>
             </div>
-            <div data-role="content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
                 <ul id="configure_interfaces_lircremote_search" data-role="listview"></ul>
             </div>
             <div data-role="footer" data-tap-toggle="false" style="min-height:70px;padding:10px">
                 <label>Enter brand or model name</label>
-                <div class="fiendcontain" data-inline="false">
-                    <div class="ui-block-a"><input type="search" id="configure_interfaces_lircremote_searchinput" value="" /></div>
+                <div class="fiendcontain">
+                    <input type="search" id="configure_interfaces_lircremote_searchinput" value="" />
                 </div>
             </div>
         </div>
 
 
-        <div id="systemsettings_zwaveoperation_popup" data-role="popup" data-position-to="window" data-transition="pop" style="max-width:400px;" class="ui-corner-all">
-            <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <div id="systemsettings_zwaveoperation_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_zwaveaddnodeheading" id="systemsettings_zwaveoperation_title">Add/Remove Node</h1>
             </div>
-            <div data-role="content" class="ui-corner-bottom ui-content">
+            <div class="ui-content ui-corner-bottom">
                 <h3 data-locale-id="configure_system_zwaveaddnodepressbutton" class="ui-title">Press the button on your device:</h3>
                 <h2 id="systemsettings_zwaveoperation_nodeid" align="center"></h2>
                 <p data-locale-id="configure_system_zwaveaddnodeoperationtimeout" id="systemsettings_zwaveoperation_message">this operation will timeout in 10 seconds.</p>
                 <br />
-                <a data-locale-id="configure_system_zwaveaddnodeclose" id="systemsettings_zwaveoperation_close_button" href="#" data-role="button" data-rel="back">Close</a>
+                <a id="systemsettings_zwaveoperation_close_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_zwaveaddnodeclose" data-rel="back">Close</a>
             </div>
         </div>
 
 
 
-        <div id="systemsettings_zwavediscovery_popup" data-role="popup" data-position-to="window" data-transition="pop" class="ui-corner-all">
-            <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <div id="systemsettings_zwavediscovery_popup" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_zwavediscoverytitle">ZWave Discovery</h1>
             </div>
-            <div data-role="content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+            <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
 
                 <p id="configure_system_zwavediscovery_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
 
             </div>
-            <div data-role="footer" data-tap-toggle="false">
-                <a id="configure_system_zwavediscovery_modulesadd" href="#page_configure_groups" data-role="button" data-icon="gear" data-inline="false" style="margin:8px">Configure Groups and Modules</a>
+            <div data-role="footer" data-tap-toggle="false" align="center">
+                <a id="configure_system_zwavediscovery_modulesadd" href="#page_configure_groups" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-left" style="margin:8px">Configure Groups and Modules</a>
             </div>
         </div>
 
@@ -316,20 +298,20 @@
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" data-role="button" data-transition="slide" data-direction="reverse" href="#page_configure" data-icon="back" data-iconpos="left" data-mini="true">
+                    <a data-locale-id="bottombar_button_back" class="ui-btn ui-icon-back ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_configure">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_menu_groups_modules" data-role="button" data-transition="slide" href="#page_configure_groups" data-icon="grid" data-iconpos="left" data-mini="true">
+                    <a data-locale-id="configure_menu_groups_modules" class="ui-btn ui-icon-grid ui-btn-icon-right" data-transition="slide" href="#page_configure_groups">
                         Groups and Modules
                     </a>
                 </li>

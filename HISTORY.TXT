@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+02/07/2014 1.00 beta rev 388
+	- Some more fixes to new UI: custom font, re-enabled themes, fixed popup event re-positioning on scroll, other minor fixes
+
+30/06/2014 1.00 beta rev 387
+	- Upgraded to JQM 1.4.2. Main UI rework.
+
 22/06/2014 1.00 beta rev 375
 	- Fixed "Unknown/Unsupported" module error appearing in some browsers (eg. SmartTV web browser)
 	- Fixed parsing error in scheduler expressions with blank characers before/after parentheses

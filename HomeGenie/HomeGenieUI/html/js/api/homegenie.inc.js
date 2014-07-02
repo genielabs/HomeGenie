@@ -65,45 +65,10 @@ sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
 
 function setTheme(theme) {
     sessvars.UserSettings.UiTheme = uitheme = theme;
-    //
-    $.mobile.activePage.find('.ui-li')
-                .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-                .addClass('ui-btn-up-' + theme).attr('data-theme', theme);
-
-    $.mobile.activePage.find('.ui-btn').not('.ui-li-divider')
-                .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-                .addClass('ui-btn-up-' + theme)
-                .attr('data-theme', theme);
-
-    $.mobile.activePage.find('.ui-header, .ui-footer, .ui-listview-filter')
-                .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
-                .addClass('ui-bar-' + theme)
-                .attr('data-theme', theme);
-
-    $(document).find('.ui-input-text, .ui-input-search, .ui-popup, .ui-dialog, .ui-page').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
-                .addClass('ui-body-' + theme)
-                .attr('data-theme', theme);
-
-    $.mobile.activePage.find('.ui-popup').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
-                .addClass('ui-body-' + theme)
-                .attr('data-theme', theme);
-
-    $.mobile.activePage.find('.ui-li-divider').each(function (index, obj) {
-        //if ($(this).parent().attr('data-divider-theme') == 'undefined') {
-        $(this).removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
-            .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-            .addClass('ui-bar-a')
-            .attr('data-theme', 'a');
-        //}
-    })
-
-    if ($.mobile.activePage.attr('id') == 'page_control') {
-        $.mobile.activePage.find('a[data-ui-field="widget"]').each(function (index, obj) {
-            $(this).parent().parent().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
-            $(this).parent().parent().next().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
-        });
-    }
-
+	$(document).find('.ui-page')
+			.removeClass('ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e ui-page-theme-f ui-page-theme-g ui-page-theme-h')
+            .addClass('ui-page-theme-' + theme);
+    return;
 }
 
 
@@ -189,7 +154,7 @@ function configurepage_GetModuleStatus(module) {
             else if (module.Properties[p].Name == 'Sensor.DoorWindow')
             {
                 var doorw = (module.Properties[p].Value.replace(',', '.')) * 1;
-                text += (doorw > 0 ? '<span style="color:green;font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
+                text += (doorw > 0 ? '<span style="font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
             }
             else if (module.Properties[p].Name == 'Sensor.Tamper')
             {
@@ -232,7 +197,7 @@ function configurepage_GetModuleStatus(module) {
     }
     else if (level != null && type == 'shutter')
     {
-        text += (level > 0 ? '<span style="color:green;font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
+        text += (level > 0 ? '<span style="font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
     }
     //
     //        if (temp != null)

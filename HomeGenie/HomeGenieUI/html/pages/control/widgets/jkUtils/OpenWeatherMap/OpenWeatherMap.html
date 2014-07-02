@@ -171,7 +171,7 @@
 
 </style>
 
-<a data-ui-field="widget" data-rel="popup" class="OpenWeatherMap">
+<div data-ui-field="widget" class="OpenWeatherMap ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c">
  <div class="wrapper">
 
 	<div class="left">
@@ -191,7 +191,7 @@
 	</div>
 
 	<div class="center">
-		<div class="" style="display: inline-block; min-width: 50%;">
+		<div class="" style="display: inline-block;">
 			<div class="main" style="">
 				<div>
 					<div style="height: 2.5ex; padding-left: 0.7ex;">
@@ -366,14 +366,14 @@
 	</div>
 
  </div>
-</a>
+</div>
 
-<a data-ui-field="refresh" href="#" data-icon="refresh" data-corners="false" data-shadow="false" data-iconshadow="true" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px">Refresh</a>
+<a data-ui-field="refresh" href="#" data-icon="refresh" data-corners="false" data-shadow="false" data-iconshadow="true" style="display:none;border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px">Refresh</a>
 
 <!-- widget popups and other ui elements follow -->
 
-<div data-ui-field="controlpopup" data-position-to="window" style="" data-transition="pop" style="display:none" class="OpenWeatherMap">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div class="OpenWeatherMap hg-popup-a" data-ui-field="controlpopup" data-position-to="window" style="" data-transition="pop" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 
     <div style="margin:10px">
 

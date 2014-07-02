@@ -18,6 +18,11 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
 //                return false;
 //            });
             //
+            $('#automation_program_delete_button').bind('click', function (event) {
+				HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
+                return true;
+            });
+            //
             $('#editprograms_actionmenu').on('popupbeforeposition', function (event) {
                 HG.WebApp.ProgramEdit.RefreshProgramOptions();
             });
@@ -62,7 +67,7 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                         //
                         var displayname = HG.WebApp.Data.Modules[m].Domain.substring(HG.WebApp.Data.Modules[m].Domain.lastIndexOf('.') + 1);
                         if (displayname == 'Automation') displayname = 'Programs';
-                        $('#automation_conditiontarget').append('<li data-theme="' + uitheme + '" data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_target_popup">' + displayname + '</a></li>');
+                        $('#automation_conditiontarget').append('<li data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_target_popup">' + displayname + '</a></li>');
                     }
                 }
                 $('#automation_conditiontarget').listview('refresh');//trigger('create');
@@ -89,7 +94,7 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                         //
                         var displayname = HG.WebApp.Data.Modules[m].Domain.substring(HG.WebApp.Data.Modules[m].Domain.lastIndexOf('.') + 1);
                         if (displayname == 'Automation') displayname = 'Programs';
-                        $('#automation_conditionvalue_domain').append('<li data-theme="' + uitheme + '" data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_condition_value_address">' + displayname + '</a></li>');
+                        $('#automation_conditionvalue_domain').append('<li data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_condition_value_address">' + displayname + '</a></li>');
                     }
                 }
                 $('#automation_conditionvalue_domain').listview('refresh');//trigger('create');
@@ -115,7 +120,7 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                         if (HG.WebApp.ProgramEdit.GetDomainControllableModules(HG.WebApp.Data.Modules[m].Domain, false).length == 0) continue;
                         //
                         var displayname = HG.WebApp.Data.Modules[m].Domain.substring(HG.WebApp.Data.Modules[m].Domain.lastIndexOf('.') + 1);
-                        $('#automation_commandtarget').append('<li data-theme="' + uitheme + '" data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_command_target_popup">' + displayname + '</a></li>');
+                        $('#automation_commandtarget').append('<li data-context-value="' + HG.WebApp.Data.Modules[m].Domain + '"><a data-rel="popup" href="#automation_command_target_popup">' + displayname + '</a></li>');
                     }
                 }
                 $('#automation_commandtarget').listview('refresh');//trigger('create');
@@ -275,7 +280,7 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 	{
 	    var fn = (isenabled ? 'Enable' : 'Disable');
 		//
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
 		// 
 		$('#control_groupslist').empty();
 		//
@@ -286,11 +291,11 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 			data: "{ dummy: 'dummy' }",
 			success: function (response) {
 				$('#automation_program_saving').popup('close'); 
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			},
 			error: function (a, b, c) {
 				$('#automation_program_saving').popup('close'); 
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			}
 		});	        	
 	};
@@ -298,7 +303,7 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 
 HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 	{
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
 		// 
 		$('#control_groupslist').empty();
 		//
@@ -310,22 +315,22 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			data: JSON.stringify(programblock),
 			success: function (response) {
 				$('#automation_program_saving').popup('close'); 
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 				if (response.trim() != '' && response.trim() != '[]')
 				{
 					//$('#program_barbutton_run').attr('disabled', 'disabled');
-					//$('#program_barbutton_run').button().button('refresh');
-					$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, 'Error updating program!', true );
+				    //$('#program_barbutton_run').button().button('refresh');
+				    $.mobile.loading('show', { text: 'Error updating program!', textVisible: true });
 					HG.WebApp.ProgramEdit.ShowProgramErrors(response);
 				}
 				else
 				{
 					//$('#program_barbutton_run').removeAttr('disabled');
-					//$('#program_barbutton_run').button().button('refresh');
-					$.mobile.showPageLoadingMsg( $.mobile.loadingMessageTheme, 'Saving succeed.', true );
+				    //$('#program_barbutton_run').button().button('refresh');
+				    $.mobile.loading('show', { text: 'Saving succeed.', textVisible: true });
 					HG.WebApp.ProgramEdit.HideProgramErrors();
 				}
-				setTimeout($.mobile.hidePageLoadingMsg, 2000);
+				setTimeout(function () { $.mobile.loading('hide'); }, 2000);
 			    //
 	            // update modules
 	            //TODO: make this better...
@@ -341,10 +346,10 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			},
 			error: function (a, b, c) {
 				$('#automation_program_saving').popup('close'); 
-				$.mobile.hidePageLoadingMsg();
-				//
-				$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
-				setTimeout( $.mobile.hidePageLoadingMsg, 5000 );
+				$.mobile.loading('hide');
+			    //
+				$.mobile.loading('show', { text: 'An error occurred!', textVisible: true });
+				setTimeout(function () { $.mobile.loading('hide'); }, 5000);
 			}
 		});	        	
 	};
@@ -493,7 +498,7 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program)
 		//
 		// check if program is using the special var PROGRAM_OPTIONS_STRING
 		// this var is used to pass a string argument to the program
-		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.indexOf('PROGRAM_OPTIONS_STRING') > 0)
+/*		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.indexOf('PROGRAM_OPTIONS_STRING') > 0)
 		{
 			var prompt = 'Enter program options:';
 			if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.substring(0, 24) == '//OPTIONS_STRING_PROMPT=')
@@ -520,7 +525,7 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program)
 		        }			
 			});
   		}
-  		else
+  		else*/
   		{
 			HG.WebApp.ProgramEdit.RunProgram( program.Address, null );
   		}
@@ -528,17 +533,17 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program)
 
 HG.WebApp.ProgramEdit.BreakProgram = function (pid)
     {
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
         $.ajax({
             type: 'POST',
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Break/' + pid + '/',
             data: "{ dummy: 'dummy' }",
             success: function (response) {
                 HG.WebApp.ProgramEdit.RefreshProgramOptions();
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             },
             error: function (a, b, c) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             }
         });	        	
 
@@ -550,17 +555,17 @@ HG.WebApp.ProgramEdit.RunProgram = function (pid, options)
 		HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
 		HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
 		//		
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
         HG.Automation.Programs.Run(pid, options, function(res){
             if (res != null) HG.WebApp.ProgramEdit.RefreshProgramOptions();
-			$.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
         });
 	};
 
 HG.WebApp.ProgramEdit.DeleteProgram = function (program) {
-	    $.mobile.showPageLoadingMsg();
+	    $.mobile.loading('show');
 	    HG.Automation.Programs.DeleteProgram(program, function () {
-	        $.mobile.hidePageLoadingMsg();
+	        $.mobile.loading('hide');
 	        setTimeout(function () {
 	            $.mobile.changePage($('#page_automation_programs'), { transition: 'fade' });
 	        }, 200);

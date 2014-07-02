@@ -24,19 +24,33 @@
 			//
 			// initialization stuff here
 			//
-			// when widget is clicked control popup is shown
-			widget.on('click', function() {
-				if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
-				{
-					$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
-				}
-			});
+			// when options button is clicked control popup is shown
+			//widget.find('[data-ui-field=options]').on('click', function() {
+			//	if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
+			//	{
+			//		$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
+			//	}
+			//});
 			//
 			// ui events handlers
 			//
-			// toggle button action
-			container.find('[data-ui-field=toggle]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
+			//
+			// ui events handlers
+			//
+			// on button action
+			widget.find('[data-ui-field=on]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
+			});			
+			controlpopup.find('[data-ui-field=on]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
+			});			
+			//
+			// off button action
+			widget.find('[data-ui-field=off]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
+			});			
+			controlpopup.find('[data-ui-field=off]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
 			});			
 		}
 		//
@@ -66,7 +80,7 @@
 			{
 				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 				var d = new Date(updatetime);
-				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             //
 			level = level.Value.replace(',', '.') * 100;

@@ -9,9 +9,11 @@
     </title>
 
     <!-- jquery & jquery mobile css's -->
-    <link rel="stylesheet" href="css/homegenie.min.css" />
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
-    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.icons-1.4.2.min.css" />
+    <!--link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-png-1.4.2.min.css" /-->
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-svg-1.4.2.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+
     <link rel="stylesheet" href="css/ui.notify.css" />
     <link rel="stylesheet" href="css/jquery.qtip.min.css" />
 
@@ -19,27 +21,29 @@
     <script src="js/jquery-2.0.2.min.js"></script>
     <!-- jquery-ui used for sortable -->
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
     <script src="js/jquery.notify.min.js"></script>
     <script src="js/jquery.qtip.min.js"></script>
     <script src="js/jquery.knob.js"></script>
 
 
-    <!-- jquery & co css includes -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />
-
+    <!-- custom css/font includes -->
+	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/my.css" />
+    <link rel="stylesheet" href="css/homegenie.min.css" />
 
-    <!--script type="text/javascript" src="js/jquery.mousewheel.min.js"></script -->
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.simpledialog2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.simpledialog.min.js"></script>
+
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
     <script language="javascript" type="text/javascript" src="js/json2.js"></script>
     <script language="javascript" type="text/javascript" src="js/moment.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/eventsource.js"></script>
+
+    <!-- Isotope -->
+	<script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/packery-mode.pkgd.min.js"></script>
 
     <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
@@ -88,6 +92,68 @@
             //
             HG.WebApp.InitializePage();
 
+            $.mobile.switchPopup = function (sourceElement, destinationElement, onswitched) {
+                var afterClose = function () {
+                    destinationElement.popup("open");
+                    sourceElement.off("popupafterclose", afterClose);
+
+                    if (onswitched && typeof onswitched === "function") {
+                        onswitched();
+                    }
+                };
+
+                sourceElement.on("popupafterclose", afterClose);
+                sourceElement.popup("close");
+            };
+
+            var trapScroll;
+            (function ($) {
+
+                trapScroll = function (opt) {
+
+                    var trapElement;
+                    var scrollableDist;
+                    var trapClassName = 'trapScroll-enabled';
+                    var trapSelector = '.trapScroll';
+
+                    var trapWheel = function (e) {
+
+                        if (!$('body').hasClass(trapClassName)) return;
+                        else {
+                            var curScrollPos = trapElement.scrollTop();
+                            var wheelEvent = e.originalEvent;
+                            var dY = wheelEvent.deltaY;
+
+                            // only trap events once we've scrolled to the end
+                            // or beginning
+                            if ((dY > 0 && curScrollPos >= scrollableDist) ||
+                                (dY < 0 && curScrollPos <= 0)) {
+                                if (opt && opt.onScrollEnd) opt.onScrollEnd();
+                                return false;
+                            }
+                        }
+                    }
+
+                    $(document)
+                      .on('wheel', trapWheel)
+                      .on('mouseleave', trapSelector, function () {
+
+                          $('body').removeClass(trapClassName);
+                      })
+                      .on('mouseenter', trapSelector, function () {
+
+                          trapElement = $(this);
+                          var containerHeight = trapElement.outerHeight();
+                          var contentHeight = trapElement[0].scrollHeight; // height of scrollable content
+                          scrollableDist = contentHeight - containerHeight;
+
+                          if (contentHeight > containerHeight)
+                              $('body').addClass(trapClassName);
+                      });
+                }
+            })($);
+            trapScroll();
+
         });
 
     </script>
@@ -134,16 +200,16 @@
     {include pages/apps/netplay/slideshow.html}
 
     <!-- Event Logs button -->
-    <div data-position="fixed" style="position:fixed;top:7px;right:5px;z-index:1000">
+    <div style="position:fixed;top:7px;right:5px;z-index:1000">
         <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
         <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
     </div>
 
     <!-- System Interfaces Status -->
-    <div data-position="fixed" style="position:fixed;top:5px;right:35px;z-index:1000" id="interfaces_status"></div>
+    <div style="position:fixed;top:5px;right:35px;z-index:1000" id="interfaces_status"></div>
 
     <!-- hg builtin notify popup -->
-    <div style="font-family:monospace;font-size:10pt;display:none;border-radius: 10px;background-color:black;color:white;border:solid 1px yellow;position:absolute;padding:10px;margin-top:40px;right:-300px; width:285px; max-height:120px; opacity:0.0;z-index:1973" id="statuspopup">
+    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed">
         <p></p>
     </div>
 

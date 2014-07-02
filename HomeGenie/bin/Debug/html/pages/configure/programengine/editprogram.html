@@ -5,7 +5,7 @@
 
     {include pages/header.html}
 
-    <div data-role="content" style="padding: 15px">
+    <div class="ui-content" style="padding: 15px">
 
 
         <img src="images/program.png" style="position:absolute;top:65px;left:20px;" width="64" />
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="ui-block-b" style="width:30%">
-                        <a href="http://www.homegenie.it/docs/" target="_hgmanual" data-role="button">Help</a>
+                        <a href="http://www.homegenie.it/docs/" target="_hgmanual" class="ui-btn ui-corner-all">Help</a>
                     </div>
                 </div>
                 <br />
@@ -68,26 +68,25 @@
             <ul data-role="listview" data-inset="false">
                 <li data-locale-id="configure_program_programconditions" data-role="list-divider">Program Conditions</li>
             </ul>
-            <hr style="margin-top:16px">
-            <ul id="automation_program_conditions" data-split-icon="delete" data-role="listview" data-inset="false"></ul>
+            <ul id="automation_program_conditions" style="margin-top:14px" data-split-icon="delete" data-role="listview" data-inset="false"></ul>
             <br clear="all" />
-            <div>
-                <a data-locale-id="configure_program_conditionadd" href="#automation_domain" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Add Condition</a>
-                <a data-locale-id="configure_program_conditioncapture" href="#automation_capture_condition_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Capture</a>
+            <div data-role="controlgroup" data-type="horizontal">
+                <a class="ui-btn ui-icon-plus ui-btn-icon-left" data-locale-id="configure_program_conditionadd" href="#automation_domain" data-rel="popup" data-inline="true">Add Condition</a>
+                <a class="ui-btn ui-icon-eye ui-btn-icon-left" data-locale-id="configure_program_conditioncapture" href="#automation_capture_condition_popup" data-rel="popup" data-inline="true">Capture</a>
             </div>
             {include pages/configure/programengine/conditionwizard.html}
 
             <br clear="all" />
             <br clear="all" />
 
-            <ul data-role="listview" data-inset="false">
+            <ul style="margin-top:14px" data-role="listview" data-inset="false">
                 <li data-locale-id="configure_program_instructions" data-role="list-divider">Program Instructions</li>
             </ul>
-            <ul style="margin-top:14px" id="automation_program_instructions" data-split-icon="delete" data-role="listview" data-inset="false"></ul>
+            <ul id="automation_program_instructions" style="margin-top:14px" data-split-icon="delete" data-role="listview" data-inset="false"></ul>
             <br clear="all" />
-            <div>
-                <a data-locale-id="configure_program_instructionadd" href="#automation_command_domain_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Add Instruction</a>
-                <a data-locale-id="configure_program_commamdcapture" href="#automation_capture_command_popup" data-icon="plus" data-rel="popup" data-role="button" data-inline="true">Capture</a>
+            <div data-role="controlgroup" data-type="horizontal">
+                <a class="ui-btn ui-icon-plus ui-btn-icon-left" data-locale-id="configure_program_instructionadd" href="#automation_command_domain_popup" data-rel="popup">Add Instruction</a>
+                <a class="ui-btn ui-icon-eye ui-btn-icon-left" data-locale-id="configure_program_commamdcapture" href="#automation_capture_command_popup" data-rel="popup">Capture</a>
             </div>
             {include pages/configure/programengine/commandwizard.html}
 
@@ -99,7 +98,7 @@
                 <li data-locale-id="configure_program_programcode" data-role="list-divider">Program Code</li>
             </ul>
             <br clear="all" />
-            <div><a href="#page_automation_editprogram_code" data-role="button" data-icon="edit" data-transition="slide" data-inline="true">Edit Source Code</a></div>
+            <div style="float:left"><a href="#page_automation_editprogram_code" class="ui-btn ui-icon-edit ui-btn-icon-left ui-corner-all" data-transition="slide">Edit Source Code</a></div>
 
             <!--br clear="all" />
 
@@ -121,11 +120,11 @@
 
 
 
-    <div data-role="popup" id="automation_program_saving" class="ui-corner-all">
+    <div data-role="popup" id="automation_program_saving" class="ui-corner-all" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_savingtitle">Saving Program</h1>
         </div>
-        <div data-role="content" class="ui-corner-bottom ui-content">
+        <div class="ui-content ui-corner-bottom">
             <h3 data-locale-id="configure_program_savingwait" class="ui-title">Please wait...</h3>
         </div>
     </div>
@@ -133,48 +132,56 @@
 
 
 
-    <div data-role="popup" id="automation_program_switchtype" class="ui-corner-all">
+    <div id="automation_program_switchtype" class="ui-corner-all" data-role="popup" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_switchtypetitle">Change Type?</h1>
         </div>
-        <div data-role="content" class="ui-corner-bottom ui-content">
+        <div class="ui-content ui-corner-bottom">
             <h3 data-locale-id="configure_program_switchtypeprompt" class="ui-title">Are you sure you want to change program type?</h3>
             <p data-locale-id="configure_program_switchtypeadvice">Current program data will be cleared.</p>
-            <a data-locale-id="configure_program_switchtypecancel" id="program_switchtypecancel_button" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-            <a data-locale-id="configure_program_switchtypeconfirm" id="program_switchtype_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Change</a>
+            <div class="ui-grid-a">
+            	<div class="ui-block-a">
+		            <a data-locale-id="configure_program_switchtypecancel" id="program_switchtypecancel_button" class="ui-btn ui-corner-all" data-inline="true" data-rel="back">Cancel</a>
+            	</div>
+				<div class="ui-block-b">
+		            <a data-locale-id="configure_program_switchtypeconfirm" id="program_switchtype_button" href="#" class="ui-btn ui-corner-all" data-inline="true" data-rel="back" data-transition="flow">Change</a>
+				</div>
+            </div>
         </div>
     </div>
 
 
 
 
-    <div data-role="popup" id="automation_program_delete" class="ui-corner-all">
+    <div id="automation_program_delete" class="ui-corner-all" data-role="popup" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_deletetitle">Delete Program?</h1>
         </div>
-        <div data-role="content" class="ui-corner-bottom ui-content">
+        <div class="ui-content ui-corner-bottom">
             <h3 data-locale-id="configure_program_deleteprompt" class="ui-title">Are you sure you want to delete this program?</h3>
             <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
-            <a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-            <a data-locale-id="configure_program_deleteconfirm" id="program_delete_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+            <div class="ui-grid-a">
+            	<div class="ui-block-a">
+		            <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deletecancel" data-inline="true" data-rel="back">Cancel</a>
+            	</div>
+				<div class="ui-block-b">
+		            <a id="program_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+				</div>
+            </div>
         </div>
     </div>
 
 
 
-    <a href="#" id="simplestringdialog" data-role="button" style="display:none" data-theme="a" data-content-theme="a">Run Options Prompt</a>
 
-
-
-
-    <div data-role="popup" id="editprograms_actionmenu">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div id="editprograms_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li data-icon="minus" data-iconpos="left"><a href="#automation_program_delete" data-position-to="window" data-rel="popup" data-transition="pop">Delete program</a></li>
-            <li id="editprograms_actionmenu_run" data-icon="gear" data-iconpos="left"><a data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
-            <li id="editprograms_actionmenu_break" data-icon="minus" data-iconpos="left"><a data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
-            <li data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_save" href="javascript:HG.WebApp.ProgramEdit.SaveProgram();history.back();">Save</a>
+            <li><a id="automation_program_delete_button" class="ui-btn ui-icon-minus ui-btn-icon-right" data-position-to="window" data-transition="pop">Delete program</a></li>
+            <li id="editprograms_actionmenu_run"><a class="ui-btn ui-icon-gear ui-btn-icon-right" data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
+            <li id="editprograms_actionmenu_break"><a class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
+            <li><a class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_program_options_save" href="javascript:HG.WebApp.ProgramEdit.SaveProgram();history.back();">Save</a>
         </ul>
     </div>
 
@@ -183,20 +190,20 @@
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" id="editprograms_backbutton" data-role="button" data-transition="slide" data-direction="reverse" href="#page_automation_programs" data-icon="back" data-iconpos="left" data-mini="true">
+                    <a id="editprograms_backbutton" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_automation_programs">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                    <a class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#page_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_program_bbaractions" data-role="button" href="#editprograms_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left" data-mini="true">
+                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#editprograms_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>
@@ -229,12 +236,12 @@
 
     {include pages/header.html}
 
-    <div data-role="content" style="padding: 15px">
+    <div class="ui-content" style="padding: 15px">
 
 
         <img src="images/program.png" style="position:absolute;top:65px;left:20px;" width="64" />
         <div style="position:relative;height:100px;font-size:10pt;margin-top:20px"><h3 id="page_automation_programcode_title" style="position:absolute;bottom:40px;left:90px;"></h3></div>
-        <div style="position:absolute;top:80px; right:20px;font-weight:bolder;"><a id="program_error_button" href="#program_error_message" data-rel="popup" data-role="button">ERRORS!</a></div>
+        <div style="position:absolute;top:80px; right:20px;font-weight:bolder;"><a id="program_error_button" href="#program_error_message" data-rel="popup" class="ui-btn">ERRORS!</a></div>
 
     </div>
 
@@ -244,11 +251,11 @@
 
 
     <div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;" data-transition="slidedown">
-        <a href="javascript:$('#program_error_message').popup('close')" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <a href="javascript:$('#program_error_message').popup('close')" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_errorstitle">Errors</h1>
         </div>
-        <div data-role="content" class="ui-corner-bottom ui-content">
+        <div class="ui-content ui-corner-bottom">
             <p id="program_error_message_text"></p>
         </div>
     </div>
@@ -256,13 +263,13 @@
 
 
 
-    <div data-role="popup" id="editprograms_code_actionmenu">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div id="editprograms_code_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li id="editprograms_actionmenu_run" data-icon="gear" data-iconpos="left"><a data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
-            <li id="editprograms_actionmenu_break" data-icon="minus" data-iconpos="left"><a data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
-            <li id="editprograms_actionmenu_compile" data-icon="check" data-iconpos="left"><a data-locale-id="configure_program_options_update" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Update</a>
+            <li id="editprograms_actionmenu_run"><a class="ui-btn ui-btn-icon-right ui-icon-gear" data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
+            <li id="editprograms_actionmenu_break"><a class="ui-btn ui-btn-icon-right ui-icon-minus" data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
+            <li id="editprograms_actionmenu_compile"><a class="ui-btn ui-btn-icon-right ui-icon-check" data-locale-id="configure_program_options_update" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Update</a></li>
         </ul>
     </div>
 
@@ -272,20 +279,20 @@
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" data-role="button" data-transition="slide" data-direction="reverse" href="#page_automation_editprogram" data-icon="back" data-iconpos="left" data-mini="true">
+                    <a class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_automation_editprogram">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a id="editprograms_code_codeblockstoggle" data-locale-id="configure_program_bbar_programeditruncode" data-role="button" data-icon="gear" data-iconpos="left" data-mini="true">
+                    <a id="editprograms_code_codeblockstoggle" class="ui-btn ui-icon-gear ui-btn-icon-left" data-locale-id="configure_program_bbar_programeditruncode">
                         Edit Trigger Code
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_program_bbaractions" data-role="button" href="#editprograms_code_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left" data-mini="true">
+                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-locale-id="configure_program_bbaractions" href="#editprograms_code_actionmenu" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>

@@ -3,7 +3,7 @@ HG.WebApp.GroupsList = HG.WebApp.GroupsList || {};
 HG.WebApp.GroupsList.InitializePage = function () {
     $('#page_configure_groups').on('pageinit', function (e) {
         $('[data-role=popup]').on('popupbeforeposition', function (event) {
-            if (this.id == 'automation_group_add') {
+            if (this.id == 'configure_group_groupadd') {
                 $('#group_new_name').val('');
             }
         });
@@ -12,10 +12,10 @@ HG.WebApp.GroupsList.InitializePage = function () {
             HG.WebApp.GroupsList.GroupsAdd($('#group_new_name').val());
         });
         //	
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
         HG.Configure.Groups.List('Control', function () {
             HG.WebApp.GroupsList.GetGroupsListViewItems();
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         });
         //
         HG.WebApp.GroupsList.LoadGroups();
@@ -32,16 +32,16 @@ HG.WebApp.GroupsList.InitializePage = function () {
 //
 HG.WebApp.GroupsList.LoadGroups = function()
 {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Configure.Groups.List('Control', function () {
         HG.WebApp.GroupsList.GetGroupsListViewItems();
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
     });
 };
 //
 HG.WebApp.GroupsList.GetGroupsListViewItems = function() {
     $('#configure_groupslist').empty();
-    $('#configure_groupslist').append('<li data-theme="a" data-icon="false" data-role="list-divider">Groups List</li>');
+    $('#configure_groupslist').append('<li data-icon="false" data-role="list-divider">Groups List</li>');
     //
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         // count modules
@@ -53,7 +53,7 @@ HG.WebApp.GroupsList.GetGroupsListViewItems = function() {
                 modulescount++;
             }
         }
-        $('#configure_groupslist').append('<li data-theme="' + uitheme + '" data-group-name="' + HG.WebApp.Data.Groups[i].Name + '" data-group-index="' + i + '"><a href="#page_configure_groupmodules" data-transition="slide">' + HG.WebApp.Data.Groups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        $('#configure_groupslist').append('<li data-group-name="' + HG.WebApp.Data.Groups[i].Name + '" data-group-index="' + i + '"><a href="#page_configure_groupmodules" data-transition="slide">' + HG.WebApp.Data.Groups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
     }
     $('#configure_groupslist').listview();
     $('#configure_groupslist').listview('refresh');
@@ -108,29 +108,28 @@ HG.WebApp.GroupsList.SortGroups = function () {
 }
 
 HG.WebApp.GroupsList.SaveGroups = function(callback) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     $.ajax({
         type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.Save/',
-        //                        dataType: 'json',
         data: JSON.stringify(HG.WebApp.Data.Groups),
         success: function (response) {
             $('#control_groupslist').empty();
             //
             HG.WebApp.GroupModules.LoadGroupModules();
             //
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
             //
             if (callback != null) callback();
         },
         error: function (a, b, c) {
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         }
     });
 };
 //
 HG.WebApp.GroupsList.SaveModules = function() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     var modules = null;
     try
     {
@@ -139,7 +138,7 @@ HG.WebApp.GroupsList.SaveModules = function() {
     catch (e)
     {
         alert('Error saving modules!\nPlease retry.');
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
     }
     if (modules != null)
     $.ajax({
@@ -151,7 +150,7 @@ HG.WebApp.GroupsList.SaveModules = function() {
             HG.WebApp.GroupsList.SaveGroups(null);                        
         },
         error: function (a, b, c) {
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         }
     });
 };

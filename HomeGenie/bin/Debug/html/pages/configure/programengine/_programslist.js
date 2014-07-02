@@ -10,8 +10,24 @@ HG.WebApp.ProgramsList.InitializePage = function ()
             //$('#automationprograms_program_options').on('popupbeforeposition', function (event) {
             //});
             //$('#automationprograms_program_options').on('popupafteropen', function (event) {
-            //});
+		    //});
             //
+		    // action menu butttons
+		    $('#btn_automationprograms_group_delete').bind('click', function (event) {
+		    	HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automationprograms_group_delete');
+		    });
+		    $('#btn_automation_program_import').bind('click', function (event) {
+		    	HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automation_program_import');
+		    });
+		    $('#btn_automation_program_add').bind('click', function (event) {
+		    	HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automation_program_add');
+		    });
+		    $('#btn_automation_program_refresh').bind('click', function (event) {
+		        $('#listprograms_actionmenu').popup('close');
+		        HG.WebApp.ProgramsList.LoadPrograms(null);
+		    });
+            //
+            // other page/popups buttons
             $('#automationprograms_delete_button').bind('click', function (event) {
                 HG.WebApp.ProgramsList.DeleteGroup(HG.WebApp.AutomationGroupsList._CurrentGroup);
             });
@@ -135,7 +151,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        //
 	        var features = cp.Features;
             for (var f = 0; f < features.length; f++) {
-	            params += '<li data-theme="' + uitheme + '"><p style="font-size:12pt;margin:0;padding:0"><strong>' + features[f].Property + '</strong> : ';
+	            params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + features[f].Property + '</strong> : ';
 	            params += '' + features[f].Description + '</br>'
 	            var fordomains = features[f].ForDomains; if (fordomains == '') fordomains = 'Any';
 	            var fortypes = features[f].ForTypes; if (fortypes == '') fortypes = 'Any';
@@ -143,7 +159,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
             }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-theme="' + uitheme + '" data-role="list-divider">Implemented Features</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Implemented Features</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
 	 	} 
@@ -160,14 +176,14 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        	{
 		        	var updatetime = module.Properties[p].UpdateTime; updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 	            	var d = new Date(updatetime);	        	
-		            params += '<li data-theme="' + uitheme + '"><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name.substring(17) + '</strong> = ';
+		            params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name.substring(17) + '</strong> = ';
 		            params += '"' + module.Properties[p].Value + '"</br>'
 		            params += '<span style="font-size:8pt;"><em>' + d + '</em></span></p></li>';
 	            }
 	        }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-theme="' + uitheme + '" data-role="list-divider">Configuration Options</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Configuration Options</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
     	}
@@ -182,13 +198,13 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        	if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.' || module.Properties[p].Name == 'Widget.DisplayModule' || module.Properties[p].Name == 'VirtualModule.ParentId') continue;
 	        	var updatetime = module.Properties[p].UpdateTime; updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
             	var d = new Date(updatetime);	        	
-	            params += '<li data-theme="' + uitheme + '"><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name + '</strong> = ';
+	            params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name + '</strong> = ';
 	            params += '"' + module.Properties[p].Value + '"</br>'
 	            params += '<span style="font-size:8pt;font;"><em>' + d + '</em></span></p></li>';
 	        }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-theme="' + uitheme + '" data-role="list-divider">Module Parameters</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Module Parameters</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
 	        //
@@ -213,7 +229,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 				var vparentid = HG.WebApp.Utility.GetModulePropertyByName(cmod, "VirtualModule.ParentId");
 				if (vparentid != null && vparentid.Value == HG.WebApp.ProgramEdit._CurrentProgram.Address && cmod.Domain != 'HomeAutomation.HomeGenie.Automation')
 				{
-		            params += '<li data-theme="' + uitheme + '"><p style="font-size:12pt;margin:0;padding:0"><strong>' + cmod.Domain + ' ' + cmod.Address + '</strong>';
+		            params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + cmod.Domain + ' ' + cmod.Address + '</strong>';
 		            params += '</br>'
 		            params += '<span style="font-size:8pt;font;"> ';
 		            params += '<strong>Type</strong> &#9658; <em>' + cmod.DeviceType + '</em> &nbsp;&nbsp;&nbsp;';
@@ -224,7 +240,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
         }
         if (params != '')
         {
-        	params = '</br><ul data-role="listview"><li data-theme="' + uitheme + '" data-role="list-divider">Virtual Modules</li>' + params + '</ul></br>';
+        	params = '</br><ul data-role="listview"><li data-role="list-divider">Virtual Modules</li>' + params + '</ul></br>';
         	fieldparams.append(params);
     	}
         //
@@ -323,10 +339,10 @@ HG.WebApp.ProgramsList.ChangeProgramType = function (type)
 
 HG.WebApp.ProgramsList.LoadPrograms = function (callback) 
     {
-	    $.mobile.showPageLoadingMsg();
+	    $.mobile.loading('show');
 	    HG.Automation.Programs.List(function () {
 	        HG.WebApp.ProgramsList.RefreshPrograms();
-	        $.mobile.hidePageLoadingMsg();
+	        $.mobile.loading('hide');
 	        if (callback) callback();
 	    });
 	};
@@ -335,7 +351,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	var automationtitle = HG.WebApp.Locales.GetLocaleString('configure_program_automationtitle');
 	$('#configure_automation_group_title').html('<font style="color:gray">' + (automationtitle != null ? automationtitle : 'Automation')+ '</font><br />' + HG.WebApp.AutomationGroupsList._CurrentGroup);
 	$('#configure_programslist').empty();
-	$('#configure_programslist').append('<li data-theme="a" data-icon="false" data-role="list-divider">Programs List</li>');
+	$('#configure_programslist').append('<li data-icon="false" data-role="list-divider">Programs List</li>');
 	//
 	for (i = 0; i < HG.WebApp.Data.Programs.length; i++) {
 	    var progrm = HG.WebApp.Data.Programs[i];
@@ -344,7 +360,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	    if (pgroup != HG.WebApp.AutomationGroupsList._CurrentGroup) continue;
         //
 	    var pname = progrm.Name;
-	    var item = '<li data-theme="' + uitheme + '" data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '">';
+	    var item = '<li data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '">';
 	    item += '<a href="#" class="programitem" data-program-domain="' + progrm.Domain + '"  data-program-address="' + progrm.Address + '" data-program-index="' + i + '">';
 	    //
 	    var status = HG.WebApp.ProgramsList.GetProgramStatusColor(progrm);
@@ -359,7 +375,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	    item += '	<h3 class="ui-li-heading"><img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ' + pname + '</h3>';
 	    item += '	<p class="ui-li-desc">' + (progrm.Description != null ? progrm.Description : '') + ' &nbsp;</p>';
 	    item += '</a>';
-	    item += '<a data-theme="' + uitheme + '" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px" href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(\'' + progrm.Address + '\')">' + (progrm.IsEnabled ? 'Tap to DISABLE program' : 'Tap to ENABLE program') + '</a>';
+	    item += '<a href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(\'' + progrm.Address + '\')">' + (progrm.IsEnabled ? 'Tap to DISABLE program' : 'Tap to ENABLE program') + '</a>';
 	    //
 	    item += '</li>';
 	    $('#configure_programslist').append(item);
@@ -372,7 +388,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	    HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
 	    if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
 	    //
-	    $.mobile.showPageLoadingMsg();
+	    $.mobile.loading('show');
 	    HG.Automation.Programs.List(function () {
 	        HG.Configure.Modules.List(function (data) {
 	            try {
@@ -406,7 +422,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	            }
 
 	            $('#automationprograms_program_options').popup('open', { 'transition': 'slidedown' });
-	            $.mobile.hidePageLoadingMsg();
+	            $.mobile.loading('hide');
 	        });
 	    });
 	});
@@ -530,7 +546,7 @@ HG.WebApp.ProgramsList.ExportProgram = function (progaddr) {
 
 HG.WebApp.ProgramsList.RestartProgram = function (progaddr) {
     $('#automationprograms_program_options').popup('close');
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     // 
     $('#control_groupslist').empty();
     //
@@ -539,11 +555,11 @@ HG.WebApp.ProgramsList.RestartProgram = function (progaddr) {
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Restart/' + progaddr + '/',
         data: "{ dummy: 'dummy' }",
         success: function (response) {
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
             HG.WebApp.ProgramsList.LoadPrograms(null);
         },
         error: function (a, b, c) {
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         }
     });
 };
@@ -562,29 +578,29 @@ HG.WebApp.ProgramsList.AddProgram = function (progname) {
 HG.WebApp.ProgramsList.ToggleProgramIsEnabled = function (paddr) {
 	    var cp = HG.WebApp.Utility.GetProgramByAddress(paddr);
 	    cp.IsEnabled = !cp.IsEnabled;
-	    $.mobile.showPageLoadingMsg();
+	    $.mobile.loading('show');
 	    HG.WebApp.ProgramEdit.ProgramEnable(cp.Address, cp.IsEnabled);
         setTimeout(function () {
 	        HG.WebApp.ProgramsList.LoadPrograms(function () {
 	            HG.WebApp.ProgramsList.RefreshPrograms();
-	            $.mobile.hidePageLoadingMsg();
+	            $.mobile.loading('hide');
 	        });
 	    }, 3000);
 	};
 
 
 HG.WebApp.ProgramsList.DeleteGroup = function (group) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Configure.Groups.DeleteGroup('Automation', group, function () {
         $.mobile.changePage($('#page_configure_automationgroups'), { transition: "slide" });
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
     });
 };
 
 HG.WebApp.ProgramsList.DeleteProgram = function (program) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Automation.Programs.DeleteProgram(program, function () {
         HG.WebApp.ProgramsList.LoadPrograms();
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
     });
 };

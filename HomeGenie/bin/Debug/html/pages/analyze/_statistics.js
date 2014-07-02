@@ -116,7 +116,7 @@ HG.WebApp.Statistics.RefreshModules = function () {
 };
 
 HG.WebApp.Statistics.Refresh = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     //
     HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
         var trange = eval(res)[0];
@@ -214,7 +214,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         });
                     } catch (e) { }
                     //
-                    $.mobile.hidePageLoadingMsg();
+                    $.mobile.loading('hide');
                 }
             });
         }

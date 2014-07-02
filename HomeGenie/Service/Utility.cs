@@ -272,10 +272,9 @@ namespace HomeGenie.Service
 
         public static dynamic ParseXmlToDynamic(string xml)
         {
-            var document = XDocument.Load(new StringReader(xml));
-            dynamic root = new ExpandoObject();
-            XmlToDynamic.Parse(root, document.Elements().First());
-            return root;
+			var document = XElement.Load(new StringReader(xml));
+			XElement root = new XElement("Root", document);
+			return new DynamicXmlParser(root);
         }
 
         public static Thread RunAsyncTask(AsyncFunction functionBlock)
@@ -370,8 +369,8 @@ namespace HomeGenie.Service
         public static string Module2Json(Module module, bool hideProperties)
         {
             string json = "{\n" +
-                        "   \"Name\": \"" + XmlEncode(module.Name) + "\",\n" +
-                        "   \"Description\": \"" + XmlEncode(module.Description) + "\",\n" +
+                        "   \"Name\": \"" + JsonEncode(module.Name) + "\",\n" +
+                        "   \"Description\": \"" + JsonEncode(module.Description) + "\",\n" +
                         "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
                         "   \"Domain\": \"" + module.Domain + "\",\n" +
                         "   \"Address\": \"" + module.Address + "\",\n";
@@ -383,12 +382,12 @@ namespace HomeGenie.Service
                 {
                     var parameter = module.Properties[i];
                     json += "       {\n" +
-                            "           \"Name\": \"" + XmlEncode(parameter.Name) + "\",\n" +
-                            "           \"Description\": \"" + XmlEncode(parameter.Description) + "\",\n" +
-                            "           \"Value\": \"" + XmlEncode(parameter.Value) + "\",\n" +
+                            "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
+                            "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
+                            "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
                             "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
                             "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
-                            "           \"LastValue\": \"" + XmlEncode(parameter.LastValue) + "\",\n" +
+                            "           \"LastValue\": \"" + JsonEncode(parameter.LastValue) + "\",\n" +
                             "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
                             "       },\n";
                 }
@@ -400,6 +399,26 @@ namespace HomeGenie.Service
             json += "}";
             //
             return json;
+        }
+
+        public static string JsonEncode(string fieldValue)
+        {
+            if (fieldValue == null)
+            {
+                fieldValue = "";
+            }
+            else
+            {
+                fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "&quot;");
+                fieldValue = fieldValue.Replace("\n", "\\n");
+				//fieldValue = fieldValue.Replace("\'", "\\'");
+                fieldValue = fieldValue.Replace("\r", "\\r");
+                fieldValue = fieldValue.Replace("\t", "\\t");
+                fieldValue = fieldValue.Replace("\b", "\\b");
+                fieldValue = fieldValue.Replace("\f", "\\f");
+            }
+            return fieldValue;
         }
 
         public static string XmlEncode(string fieldValue)
@@ -418,60 +437,71 @@ namespace HomeGenie.Service
 
     }
 
-    public class XmlToDynamic
-    {
-        public static void Parse(dynamic parent, XElement node)
-        {
-            if (node.HasElements)
-            {
-                if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
-                {
-                    //list
-                    var item = new ExpandoObject();
-                    var list = new List<dynamic>();
-                    foreach (var element in node.Elements())
-                    {
-                        Parse(list, element);
-                    }
+	public class DynamicXmlParser : DynamicObject
+	{
 
-                    AddProperty(item, node.Elements().First().Name.LocalName, list);
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-                else
-                {
-                    var item = new ExpandoObject();
+		XElement element;
 
-                    foreach (var attribute in node.Attributes())
-                    {
-                        AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
-                    }
+		public DynamicXmlParser(string filename)
+		{
+			element = XElement.Load(filename);
+		}
 
-                    //element
-                    foreach (var element in node.Elements())
-                    {
-                        Parse(item, element);
-                    }
+		public DynamicXmlParser(XElement el)
+		{
+			element = el;
+		}
 
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-            }
-            else
-            {
-                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
-            }
-        }
+		public override bool TryGetMember(GetMemberBinder binder, out object result)
+		{
+			if (element == null)
+			{
+				result = null;
+				return false;
+			}
 
-        private static void AddProperty(dynamic parent, string name, object value)
-        {
-            if (parent is List<dynamic>)
-            {
-                (parent as List<dynamic>).Add(value);
-            }
-            else
-            {
-                (parent as IDictionary<String, object>)[name] = value;
-            }
-        }
-    }
+			XElement sub = element.Element(binder.Name);
+			if (sub == null)
+			{
+				result = null;
+				return false;
+			}
+			else
+			{
+				result = new DynamicXmlParser(sub);
+				return true;
+			}
+		}
+
+		public static implicit operator string(DynamicXmlParser p)
+		{
+			return p.ToString();
+		}
+
+		public override string ToString()
+		{
+			if (element != null)
+			{
+				return element.Value;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
+
+		public string this[string attr]
+		{
+			get
+			{
+				if (element == null)
+				{
+					return string.Empty;
+				}
+				return element.Attribute(attr).Value;
+			}
+		}
+
+	}
 
 }

@@ -2,7 +2,7 @@
 
 _cwd="$PWD"
 
-echo "Enter HomeGenie revision (eg. 374):"
+echo "Enter HomeGenie revision (eg. r387):"
 read hg_revision_number
 
 echo "Enter target folder (eg. /home/myuser):"
@@ -27,7 +27,7 @@ then
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
 	cd $hg_target_folder
-	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "usr/local/bin/homegenie/%P " | xargs md5sum > "$_cwd/LinuxFiles/DEBIAN/md5sums"
+	find "./usr/local/bin/homegenie/" -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf "\"usr/local/bin/homegenie/%P\" " | xargs md5sum > "$_cwd/LinuxFiles/DEBIAN/md5sums"
 	hg_installed_size=`du -s ./usr | cut -f1`
 	echo "  installed size: $hg_installed_size"
 	cd "$_cwd"

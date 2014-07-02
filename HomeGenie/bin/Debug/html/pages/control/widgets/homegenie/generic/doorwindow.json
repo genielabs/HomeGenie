@@ -41,7 +41,7 @@
 			{
 				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 				var d = new Date(updatetime);
-				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             doorstate = dwstate.Value;
         }
@@ -52,12 +52,19 @@
 			{
 				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 				var d = new Date(updatetime);
-				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             doorstate = generic.Value;
         }
         else if (level != null)
         {
+            var updatetime = level.UpdateTime;
+			if (typeof updatetime != 'undefined')
+			{
+				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+				var d = new Date(updatetime);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+			}
         	doorstate = level.Value.replace(',', '.') * 100;
         }
         //
@@ -83,15 +90,11 @@
         }
         //
     	var sensorimgdata = '';
-    	var sensortxtdata = '';
+   		var sensortxtdata = '';
+		var infotext = '';
         if (module.Properties != null) {
             for (p = 0; p < module.Properties.length; p++) {
-				if ((module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Battery')
-					&& (	   module.Properties[p].Name != 'Sensor.DoorWindow' 
-							&& module.Properties[p].Name != 'Sensor.Tamper' 
-							&& module.Properties[p].Name != 'Sensor.Alarm' 
-							&& module.Properties[p].Name != 'Sensor.Generic')
-						) 
+				if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') 
 				{
 					var value = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
 					if (isNaN(value)) value = module.Properties[p].Value;
@@ -121,41 +124,54 @@
 	                    else if (blevel > 10) blevel = 20;
 	                    else if (blevel > 0) blevel = 10;
 	                    //
-	                    imagesrc = 'pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png';
-	                    displayvalue = value + '%';
+						infotext += '<span>' + value + '%</span> <img src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
+						continue;
 	                }
 	                else if (module.Properties[p].Name == "Sensor.Temperature") {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+	                	imagesrc = 'images/indicators/temperature.png';
 	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
 	                    displayvalue = temp + '&#8451;';
 	                }
 	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+	                	imagesrc = 'images/indicators/temperature.png';
 	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
 	                    displayvalue = temp + '&#8457;';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Luminance') {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/luminance.png';
+	                	imagesrc = 'images/indicators/luminance.png';
 	                    displayvalue = value + '%';
 	                }
+	                else if (module.Properties[p].Name == 'Sensor.Humidity') {
+	                	imagesrc = 'images/indicators/humidity.png';
+	                    displayvalue = value + '%';
+	                }
+					// select property icon when available
+					if (module.Properties[p].Name == 'Meter.Watts') {
+						imagesrc = 'images/indicators/energy.png';
+					}
+					else if (module.Properties[p].Name == 'Sensor.DoorWindow' ) {
+						imagesrc = 'images/indicators/door.png';
+					}
+					//
 	                if (imagesrc != '')
 	                {
 	                    displayname = '<img src="' + imagesrc + '" alt="' + updatetime + '" height="22" align="middle" style="vertical-align:bottom" />';
-	                    sensorimgdata += '<div style="margin:2px;height:28px;float:left"><div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;text-align:bottom;width:100px;float:left">' + displayname + '</div><div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;"><font style="line-height:28px;text-align:bottom;color:gray">' + displayvalue + '</font></div></div>';
+	                    sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
 	                }
 	                else
 	                {
-	                    sensortxtdata += '<div style="margin:2px;height:20px;float:left"><div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;line-height:20px;text-align:bottom;width:100px;float:left">' + displayname + '</div><div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;"><font style="line-height:20px;text-align:bottom;color:gray">' + displayvalue + '</font></div></div>';
+	                    sensortxtdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;font-size:11pt;font-weight:bold;text-align:bottom;line-height:28px;overflow:hidden;text-overflow:ellipsis;">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;text-align:bottom;line-height:28px;font-size:18pt">' + displayvalue + '</div></div>';
                     }
                 }
             }
-        }        
+            
+        }
 		//
 		// render widget
 		//
 		widget.find('[data-ui-field=name]').html(module.Name);
 		//
-		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>' );
+		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address );
 		//
 		widget.find('[data-ui-field=status]').html(this.StatusText);
 		//

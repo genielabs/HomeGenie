@@ -38,7 +38,7 @@ HG.WebApp.Scheduler.GetItemMarkup = function (schedule) {
     var displayName = schedule.Name;
     if (displayName.indexOf('.') > 0)
         displayName = displayName.substring(displayName.indexOf('.') + 1);
-    var item = '<li data-theme="' + uitheme + '" data-icon="' + (schedule.IsEnabled ? 'check' : 'alert') + '" data-schedule-name="' + schedule.Name + '"  data-schedule-index="' + i + '">';
+    var item = '<li data-icon="' + (schedule.IsEnabled ? 'check' : 'alert') + '" data-schedule-name="' + schedule.Name + '"  data-schedule-index="' + i + '">';
     item += '<a href="#schedulerservice_item_edit" data-rel="popup" data-position-to="window" data-transition="pop">';
     //
     //            var triggertime = '';
@@ -51,21 +51,21 @@ HG.WebApp.Scheduler.GetItemMarkup = function (schedule) {
     item += '	<h3 class="ui-li-heading">' + displayName + '</h3>';
     item += '	<p class="ui-li-desc">' + schedule.CronExpression + ' &nbsp;</p>';
     item += '</a>';
-    item += '<a data-theme="' + uitheme + '" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px" href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
+    item += '<a href="javascript:HG.WebApp.Scheduler.ToggleScheduleIsEnabled(\'' + i + '\')">' + (schedule.IsEnabled ? 'Tap to DISABLE item' : 'Tap to ENABLE item') + '</a>';
     //
     item += '</li>';
     return item;
 }
 
 HG.WebApp.Scheduler.LoadScheduling = function (callback) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     HG.Automation.Scheduling.List(function (data) {
         HG.WebApp.Scheduler._ScheduleList = data;
         //
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading('hide');
         //
         $('#configure_schedulerservice_list').empty();
-        $('#configure_schedulerservice_list').append('<li data-theme="a" data-icon="false" data-role="list-divider">Scheduler Events</li>');
+        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">Scheduler Events</li>');
         //
         // element containing '.' in the name are grouped in own sections
         for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++)
@@ -85,7 +85,7 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
                 var item = HG.WebApp.Scheduler.GetItemMarkup(schedule);
                 if (scheduleGroup != currentGroup)
                 {
-                    $('#configure_schedulerservice_list').append('<li data-theme="' + uitheme + '" data-role="list-divider">' + scheduleGroup + '</li>');
+                    $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup + '</li>');
                     currentGroup = scheduleGroup;
                 }
                 $('#configure_schedulerservice_list').append(item);
@@ -127,7 +127,7 @@ HG.WebApp.Scheduler.RefreshEventDetails = function () {
 
 HG.WebApp.Scheduler.ToggleScheduleIsEnabled = function (index) {
     var item = HG.WebApp.Scheduler._ScheduleList[index];
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     if (item.IsEnabled)
     {
         HG.Automation.Scheduling.Disable(item.Name, function () {

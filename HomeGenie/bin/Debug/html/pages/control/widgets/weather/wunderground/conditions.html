@@ -1,38 +1,49 @@
-﻿<a data-ui-field="widget" data-rel="popup">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="min-height:170px">
 
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" src="http://icons-ak.wxug.com/graphics/wu2/logo_130x80.png" />
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+		<div style="font-weight:bold">Weather Underground</div>
+		<div data-ui-field="name">Waiting for data...</div>
+	</div>
 
-    <span data-ui-field="name"></span><br />
-    <span style="color:gray;magin-top:12px;font-size:12pt;" data-ui-field="description">loading widget...</span><br />
+	<div align="left">
+	    <img data-ui-field="icon" style="margin-left:10px;margin-right:10px;height:64px;float: left" src="pages/control/widgets/jkUtils/OpenWeatherMap/images/icons/10d.png" />
+	    <div style="float: left;margin-top:5px">
+		    <div data-ui-field="description" style="font-size:18pt;">Possible showers</div>
+		    <div style="font-size:10pt;height:28px">Updated: <span data-ui-field="last_updated_value">Not updated!</span></div>
+	    </div>
+		<br clear="all" />
+	</div>
+    <div align="center" style="font-size:10pt;padding-right:20px;">
 
-    <span style="font-family:Monospace;font-size:10pt;text-align:left;height:28px;color:gray">Updated - <font data-ui-field="last_updated_value" /></span>
-
-    <div style="font-family:Monospace;font-size:10pt;color:green;text-wrapping:wrap;padding-bottom:5px;">
-
-        <div style="margin:2px;height:28px;float:left">
-            <div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;text-align:bottom;width:40px;float:left">
-                <img data-ui-field="temperature_image" alt="Temperature" src="pages/control/widgets/homegenie/generic/images/temperature.png" height="22" align="center" style="vertical-align:bottom" />
-
+        <div style="margin:2px;height:28px;display: inline-block;">
+            <div align="right" style="padding:4px;height:28px;text-align:bottom;width:50px;float:left">
+                <img data-ui-field="temperature_image" alt="Temperature" src="pages/control/widgets/homegenie/generic/images/temperature.png" height="32" align="center" style="vertical-align:bottom" />
             </div>
-            <div align="left" style="width:80px;padding:4px;float:left;border-top:solid 1px lightgray;">
-                <font data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+            <div align="left" style="width:80px;padding:4px;float:left;">
+                <font data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;font-size:22pt">22.5</font>
             </div>
         </div>
-        <div style="margin:2px;height:28px;float:left">
-            <div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+
+        <div style="margin:2px;height:28px;display: inline-block;">
+            <div align="right" style="padding:4px;line-height:28px;text-align:bottom;width:50px;float:left">
                 <b>Sunrise</b>
             </div>
-            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
-                <font data-ui-field="sunrise_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+            <div align="left" style="width:60px;padding:4px;float:left;">
+                <font data-ui-field="sunrise_value" style="line-height:28px;text-align:bottom;font-size:22pt">05:55</font>
             </div>
         </div>
-        <div style="margin:2px;height:28px;float:left">
-            <div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+
+        <div style="margin:2px;height:28px;display: inline-block;">
+            <div align="right" style="padding:4px;height:28px;line-height:28px;text-align:bottom;width:50px;float:left">
                 <b>Sunset</b>
             </div>
-            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
-                <font data-ui-field="sunset_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+            <div align="left" style="width:60px;padding:4px;float:left;">
+                <font data-ui-field="sunset_value" style="line-height:28px;text-align:bottom;font-size:22pt">18:25</font>
             </div>
         </div>
-    </div><br />
-</a>
+            
+    </div>
+
+    <br clear="all" />
+
+</div>

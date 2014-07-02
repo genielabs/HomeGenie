@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r375</Version>
+  <Version>1.00 beta r388</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote> - Fixed "Unknown/Unsupported" module error appearing in some browsers (eg. SmartTV web browser)
- - Fixed parsing error in scheduler expressions with blank characers before/after parentheses
- - Added Scheduler.DateTime comparison operators to Wizard programs' condition
- - Newly added scheduler events are now set to enabled by default
- - Fixed Solar Altitude "NaN" bug
-  </ReleaseNote>
-  <ReleaseDate>2014-06-22T15:41:09.0000Z</ReleaseDate>
+  <ReleaseNote>   - Some more fixes to new UI: custom font, re-enabled themes, fixed popup event re-positioning on scroll, other minor fixes</ReleaseNote>
+  <ReleaseDate>2014-07-02T07:48:36.0000Z</ReleaseDate>
 </ReleaseInfo>

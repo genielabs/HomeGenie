@@ -25,8 +25,8 @@
 			//
 			// initialization stuff here
 			//
-			// when widget is clicked control popup is shown
-			widget.on('click', function() {
+			// when options button is clicked control popup is shown
+			widget.find('[data-ui-field=options]').on('click', function() {
 				if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
 				{
 					$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
@@ -50,20 +50,21 @@
 			//
 			// ui events handlers
 			//
-			// toggle button action
-			container.find('[data-ui-field=toggle]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
-			});
-			controlpopup.find('[data-ui-field=close_button]').on('click', function(){
-                var cmd = 'Control.Off';
-                if (invertcontrols) cmd = 'Control.On';
-                HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
-			});
+			// on button action
+			widget.find('[data-ui-field=open]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
+			});			
 			controlpopup.find('[data-ui-field=open_button]').on('click', function(){
-                var cmd = 'Control.On';
-                if (invertcontrols) cmd = 'Control.Off';
-                HG.Control.Modules.ServiceCall(cmd, module.Domain, module.Address, '', function (data) { });
-			});
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
+			});			
+			//
+			// off button action
+			widget.find('[data-ui-field=close]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
+			});			
+			controlpopup.find('[data-ui-field=close_button]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
+			});	
 		}
 		//
 		// read some context data
@@ -82,7 +83,7 @@
 			{
 				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 				var d = new Date(updatetime);
-				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             //
             if ((invertcontrols && level != 1) || level > 0) 
@@ -101,7 +102,7 @@
 			    this.StatusText = '?';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';
         }
-		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
+		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
 		//
 		// render widget
 		//

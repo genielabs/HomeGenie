@@ -15,6 +15,7 @@
 		var popupisopen = false;
         var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, "Image.URL");
         if (imageurl != null) imageurl = imageurl.Value; else imageurl = "";
+		this.Description = 'Camera ' + module.Address;
         //
 		// create and store a local reference to control popup object
 		//
@@ -70,7 +71,7 @@
 		//
 		widget.find('[data-ui-field=name]').html(module.Name);
 		widget.find('[data-ui-field=description]').html(this.Description);
-		widget.find('[data-ui-field=status]').html(this.StatusText);
+		//widget.find('[data-ui-field=status]').html(this.StatusText);
 		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		//
         var imgsrc = imageurl != "" ? imageurl : '/api/Media.CameraInput/0/Camera.GetPicture/';

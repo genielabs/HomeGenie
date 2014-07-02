@@ -21,8 +21,13 @@
 		{
 			this.Initialized = true;
 			//
+			//container.css('width', '100%');
+			//container.css('float', 'right');
+			//container.css('text-align', 'right');
+			//container.css('horizontal-alignment', 'right');
+			//
 			var groupname = this.GroupName;
-			container.on('click', function() {
+			widget.on('click', function() {
 				HG.Automation.Programs.Run(module.Address, groupname, null);
 			});
 		}

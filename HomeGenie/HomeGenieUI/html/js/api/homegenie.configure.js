@@ -174,7 +174,7 @@ HG.Configure.Modules.List = function (callback) {
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.List/' + (new Date().getTime()),
         type: "POST",
         data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        dataType: "json",
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }

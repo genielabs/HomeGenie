@@ -67,8 +67,8 @@
 			//
 			// initialization stuff here
 			//
-			// when widget is clicked control popup is shown
-			widget.on('click', function() {
+			// when options button is clicked control popup is shown
+			widget.find('[data-ui-field=options]').on('click', function() {
 				if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
 				{
 					$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
@@ -77,10 +77,21 @@
 			//
 			// ui events handlers
 			//
-			// toggle button action
-			container.find('[data-ui-field=toggle]').on('click', function(){
-				HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
+			// on button action
+			widget.find('[data-ui-field=on]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
 			});			
+			controlpopup.find('[data-ui-field=on]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
+			});			
+			//
+			// off button action
+			widget.find('[data-ui-field=off]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
+			});			
+			controlpopup.find('[data-ui-field=off]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Control.Off", module.Domain, module.Address, null, function (data) { });
+			});	
 		}
 		//
 		// read some context data
@@ -109,7 +120,7 @@
 			{
 				updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 				var d = new Date(updatetime);
-				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+				this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
 			}
             //
             level = this.GetLevel(level);
@@ -146,8 +157,9 @@
         else
         {
             controlpopup.find('[data-ui-field=zwave-multi-options]').hide();
+			widget.find('[data-ui-field=options]').hide();
         }
-    	this.StatusText += level + ' ' + level1 + ' ' + level2 + '&nbsp;&nbsp;&nbsp; ' + watts;
+    	this.StatusText = watts + '&nbsp;&nbsp;&nbsp; ' + level + ' ' + level1 + ' ' + level2 + ' ' + this.StatusText;
 		//
 		// set icon image
 		//
@@ -164,7 +176,7 @@
 		{
 			this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_off.png';
 		}
-		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
+		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
 		//
 		// render widget
 		//

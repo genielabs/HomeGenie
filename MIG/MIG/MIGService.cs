@@ -287,11 +287,12 @@ namespace MIG
                 if (!string.IsNullOrEmpty(command.Response))
                 {
                     // simple automatic json response type detection
-                    if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
-                    {
-                        context.Response.ContentType = "application/json";
-                        context.Response.ContentEncoding = defaultWebFileEncoding;
-                    }
+					if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
+					{
+						// TODO: check the reason why this cause ajax/json error on some browser
+						context.Response.ContentType = "application/json";
+						context.Response.ContentEncoding = defaultWebFileEncoding;
+					}
                     WebServiceUtility.WriteStringToContext(context, command.Response);
                     return;
                 }
@@ -530,8 +531,8 @@ namespace MIG
                 cdet.DataEnd();
                 if (cdet.Charset != null)
                 {
-                    Console.WriteLine("Charset: {0}, confidence: {1}",
-                         cdet.Charset, cdet.Confidence);
+					//Console.WriteLine("Charset: {0}, confidence: {1}",
+					//     cdet.Charset, cdet.Confidence);
                     enc = Encoding.GetEncoding(cdet.Charset);
                 }
                 else

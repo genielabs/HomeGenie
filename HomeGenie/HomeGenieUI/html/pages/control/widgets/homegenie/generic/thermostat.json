@@ -11,9 +11,12 @@
     RenderView: function (cuid, module) {
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
-
-        widget.find('[data-ui-field=name]').html(module.Name);
-        widget.find('[data-ui-field=description]').html('z-wave node <strong>' + module.Address + '</strong>');
+		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
+		//
+		// render widget
+		//
+		widget.find('[data-ui-field=name]').html(module.Name + " (" + module.DeviceType + ")");
+		widget.find('[data-ui-field=description]').html(this.Description);
     }
 
 }]
