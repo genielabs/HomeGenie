@@ -31,11 +31,24 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
     {
 
             
+        /*
+         * 
+         * This Sets the mode for the thermostat (cool, heat, off, auto)  Based on int commands
+         * 
+         **/ 
 
         public virtual void thermModeSet(int mode)
         {
             this.nodeHost.ZWaveMessage(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                (byte)mode
+            });
+        }
+        public virtual void thermFanModeSet(int mode)
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
                 (byte)Command.COMMAND_BASIC_SET, 
                 (byte)mode
             });
@@ -46,6 +59,29 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             this.nodeHost.ZWaveMessage(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+            
+        public virtual void thermSetpointGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+
+        public virtual void thermFanModeGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+        public virtual void thermFanStateGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE, 
                 (byte)Command.COMMAND_BASIC_GET
             });
         }
