@@ -15,8 +15,8 @@ HG.WebApp.Data.ZWaveControllerId = "1";
 HG.WebApp.Data.CurrentKw = -1;
 //
 HG.WebApp.Data._CurrentGroup = null;
+HG.WebApp.Data._CurrentGroupIndex = 0;
 HG.WebApp.Data._CurrentModule = null;
-HG.WebApp.Data._IgnoreUIEvents = false;
 //
 HG.WebApp.Data._CurrentLocale = {};
 //
@@ -73,22 +73,15 @@ HG.WebApp.InitializePage = function ()
         if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
         {
             // init "Control" page
-            HG.Automation.Programs.List(function () {
-                //if ($('#control_groupslist').children().length == 0) 
+            $.mobile.loading('show');
+            HG.Configure.Groups.List('Control', function () 
+            {
+                if ($('#control_groupslist').children().length == 0) 
                 {
-                    $.mobile.loading('show');
-                    HG.Configure.Groups.List('Control', function () 
-                    {
-                        if ($('#control_groupslist').children().length == 0) 
-                        {
-                            HG.WebApp.Control.RenderGroupsCollapsibleItems();
-                        }
-                        HG.WebApp.Control._RefreshFn();
-                        //HG.WebApp.Control.Refresh();
-                        // HG.WebApp.Control.SetAutoRefresh( true );
-                    });    
+                    HG.WebApp.Control.RenderGroups();
                 }
-            });
+                HG.WebApp.Control.UpdateModules();
+            });    
             //
             HG.Automation.Macro.GetDelay(function(data){
                 $('#macrorecord_delay_none').prop('checked', false).checkboxradio( 'refresh' );
@@ -172,11 +165,7 @@ HG.WebApp.InitializePage = function ()
     // Page events - Close - Cleanup stuff
     //
     $('[data-role=page]').on('pagehide', function (event) {
-        if ((this.id == 'page_control' || this.id == 'page_configure_groups')) 
-        {
-            HG.WebApp.Control.SetAutoRefresh( false );
-        }
-        else if (this.id == "page_analyze") 
+        if (this.id == "page_analyze") 
         {
             HG.WebApp.Statistics.SetAutoRefresh( false );
         }

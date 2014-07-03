@@ -49,38 +49,38 @@
 	                    else if (blevel > 10) blevel = 20;
 	                    else if (blevel > 0) blevel = 10;
 	                    //
-						infotext += '<span>' + value + '%</span> <img src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
+						infotext += '<span style="vertical-align:middle">' + value + '%</span> <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
 						continue;
 	                }
 	                else if (module.Properties[p].Name == "Sensor.Temperature") {
-	                	imagesrc = 'images/indicators/temperature.png';
+	                	imagesrc = 'hg-indicator-temperature';
 	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8451;';
 	                }
 	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
-	                	imagesrc = 'images/indicators/temperature.png';
+	                	imagesrc = 'hg-indicator-temperature';
 	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8457;';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Luminance') {
-	                	imagesrc = 'images/indicators/luminance.png';
+	                	imagesrc = 'hg-indicator-luminance';
 	                    displayvalue = value + '%';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Humidity') {
-	                	imagesrc = 'images/indicators/humidity.png';
+	                	imagesrc = 'hg-indicator-humidity';
 	                    displayvalue = value + '%';
 	                }
 					//
 					if (module.Properties[p].Name == 'Meter.Watts') {
-						imagesrc = 'images/indicators/energy.png';
+						imagesrc = 'hg-indicator-energy';
 					}
 					else if (module.Properties[p].Name == 'Sensor.DoorWindow' ) {
-						imagesrc = 'images/indicators/door.png';
+						imagesrc = 'hg-indicator-door';
 					}
 					//
 	                if (imagesrc != '')
 	                {
-	                    displayname = '<img src="' + imagesrc + '" alt="' + updatetime + '" height="22" align="middle" style="vertical-align:bottom" />';
+	                    displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
 	                    sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
 	                }
 	                else

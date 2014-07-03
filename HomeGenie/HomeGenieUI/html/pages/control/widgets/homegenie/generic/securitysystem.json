@@ -73,7 +73,7 @@
 		//
 		widget.find('[data-ui-field=name]').html(module.Name);
 		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
-        widget.find('[data-ui-field=status]').html(this.StatusText);
+        widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + this.StatusText + '</span>');
 		widget.find('[data-ui-field=description]').html(this.Description);
 	    }
 

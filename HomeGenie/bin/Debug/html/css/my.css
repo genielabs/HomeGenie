@@ -55,7 +55,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     font-size:10pt;
     border:solid 1px gray;
     padding:5px;
-    margin-top:48px;
+    margin-top:85px;
     right:-300px;
     width:285px;
     max-height:120px; 
@@ -101,8 +101,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 
 .hg-widget-c
 {
-    min-width:100%;
-    width:100%;
+    width:auto;
     margin:15px;
 }
 
@@ -114,7 +113,12 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 	margin:0;
 	padding:0;
 }
-
+.hg-widget-footer
+{
+	padding-left:5px;
+	padding-right:8px;
+	padding-bottom:2px;
+}
 .hg-widget-group-title
 {
     display: inline-block;
@@ -137,6 +141,123 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 {
 	margin-left:20px;
 	height:64px;
+}
+
+
+/* Indicators Icons */
+
+.hg-indicator-energy
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/energy-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-temperature
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/temperature-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-humidity
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/humidity-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-luminance
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/luminance-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-bulb
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/bulb-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-plug
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/plug-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-door
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/plug-door.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+/* Inverted icons for theme A */
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-energy,div.ui-bar-inherit span.hg-indicator-energy
+{
+  background: url("../images/indicators/energy.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-temperature,div.ui-bar-inherit span.hg-indicator-temperature
+{
+  background: url("../images/indicators/temperature.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity,div.ui-bar-inherit span.hg-indicator-humidity
+{
+  background: url("../images/indicators/humidity.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance,div.ui-bar-inherit span.hg-indicator-luminance
+{
+  background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb,div.ui-bar-inherit span.hg-indicator-bulb
+{
+  background: url("../images/indicators/bulb.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug,div.ui-bar-inherit span.hg-indicator-plug
+{
+  background: url("../images/indicators/plug.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door,div.ui-bar-inherit span.hg-indicator-door
+{
+  background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
 }
 
 .freewall 

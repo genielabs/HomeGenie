@@ -355,6 +355,8 @@ HG.WebApp.GroupModules.DeleteGroup = function (group) {
         $.mobile.changePage($('#page_configure_groups'), { transition: "slide" });
         $.mobile.loading('hide');
     });
+    $('#control_groupslist').empty();
+    HG.WebApp.Data._CurrentGroupIndex = 0;
 };
 
 HG.WebApp.GroupModules.LoadGroupModules = function () {

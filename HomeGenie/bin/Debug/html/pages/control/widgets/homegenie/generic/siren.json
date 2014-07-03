@@ -93,7 +93,7 @@
 				level = level.toFixed(0) + '%';
         	}
 		} else level = '';
-		this.StatusText = level + watts;
+		this.StatusText = '<span style="vertical-align:middle">' + level + watts + '</span>';
 		//
 		// get light level prop for icon image ... 
         // TODO: merge with the code above

@@ -130,7 +130,7 @@
 
 		} else level = '';
 		//
-		this.StatusText = watts + '&nbsp;&nbsp;&nbsp;' + level + '&nbsp;' + this.StatusText;
+		this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp;' + level + '</span>&nbsp;' + this.StatusText;
 		//
 		var hsbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
 		if (hsbcolor != null && this.ColorWheel != null)

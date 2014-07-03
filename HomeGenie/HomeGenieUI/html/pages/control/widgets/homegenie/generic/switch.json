@@ -126,11 +126,11 @@
             level = this.GetLevel(level);
 			if (level != 'OFF')
 			{
-				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
 			}
 			else
 			{
-				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="margin-right:2px;vertical-align:-3px" />';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
 			}
 		} else level = '';
         //
@@ -159,7 +159,7 @@
             controlpopup.find('[data-ui-field=zwave-multi-options]').hide();
 			widget.find('[data-ui-field=options]').hide();
         }
-    	this.StatusText = watts + '&nbsp;&nbsp;&nbsp; ' + level + ' ' + level1 + ' ' + level2 + ' ' + this.StatusText;
+    	this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp; ' + level + ' ' + level1 + ' ' + level2 + '</span> ' + this.StatusText;
 		//
 		// set icon image
 		//

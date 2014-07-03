@@ -85,15 +85,15 @@
         	if (level > 0)
         	{
 				levelText = 'ON';
-				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="margin-right:2px;vertical-align:-3px" />';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
         	}
         	else
         	{
 				levelText = 'OFF';
-				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="margin-right:2px;vertical-align:-3px" />';
+				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
         	}
 		} else level = 0;
-		this.StatusText = watts + '&nbsp;&nbsp;&nbsp; ' + levelText + '&nbsp;' + this.StatusText;
+		this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp; ' + levelText + '</span>&nbsp;' + this.StatusText;
 		//
 		// get light level prop for icon image
 		//

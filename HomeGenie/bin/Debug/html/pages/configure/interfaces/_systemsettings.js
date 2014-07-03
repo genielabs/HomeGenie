@@ -345,7 +345,7 @@ HG.WebApp.SystemSettings.ZWaveNodeAdd = function (port) {
     $('#systemsettings_zwaveoperation_popup').popup('open');
     zwave_NodeAdd(function (res) {
         if (res != 0) {
-            HG.WebApp.Control._RefreshFn();
+            HG.WebApp.Control.UpdateModules();
             //
             $('#systemsettings_zwaveoperation_nodeid').html(res);
             $('#systemsettings_zwaveoperation_message').html('node added.');
@@ -363,7 +363,7 @@ HG.WebApp.SystemSettings.ZWaveNodeRemove = function (port) {
     $('#systemsettings_zwaveoperation_popup').popup('open');
     zwave_NodeRemove(function (res) {
         if (res != 0) {
-            HG.WebApp.Control._RefreshFn();
+            HG.WebApp.Control.UpdateModules();
             //
             $('#systemsettings_zwaveoperation_nodeid').html(res);
             $('#systemsettings_zwaveoperation_message').html('node removed.');

@@ -537,7 +537,7 @@ namespace MIG
                 }
                 else
                 {
-                    Console.WriteLine("Detection failed.");
+					//Console.WriteLine("Detection failed.");
                 }
             }
             return enc;

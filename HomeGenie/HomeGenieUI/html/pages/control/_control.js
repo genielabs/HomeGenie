@@ -16,17 +16,6 @@ HG.WebApp.Control.InitializePage = function () {
        	$('#toolbar_macrorecord').hide();
         $('#toolbar_control').show();
 
-        $('#control_groupslist').on('click', 'li', function () {
-            HG.WebApp.Data._CurrentGroup = $(this).attr('data-context-group');
-            var modidx = $(this).attr('data-context-value');
-            if (modidx != -1) {
-                HG.WebApp.Data._CurrentModule = HG.WebApp.Data.Modules[modidx];
-            }
-            else {
-                HG.WebApp.Data._CurrentModule = null;
-            }
-        });
-        //
         $('#control_macrorecord_optionspopup').bind('popupafterclose', function () {
             if ($('#macrorecord_delay_none').prop('checked')) {
                 HG.Automation.Macro.SetDelay('None', '');
@@ -38,6 +27,11 @@ HG.WebApp.Control.InitializePage = function () {
                 HG.Automation.Macro.SetDelay('Fixed', $('#macrorecord_delay_seconds').val());
             }
         });
+		//
+		$('#control_groupselect').change(function() {
+			var gid = $('#control_groupselect').val();
+			HG.WebApp.Control.ShowGroup(gid);
+		});
         //
         $.ajax({
             url: "pages/control/widgets/configuration.json",
@@ -53,25 +47,24 @@ HG.WebApp.Control.InitializePage = function () {
     });
 };
 //
-HG.WebApp.Control.SetAutoRefresh = function (autorefresh) {
-    if (HG.WebApp.Control._RefreshIntervalObject != null) clearInterval(HG.WebApp.Control._RefreshIntervalObject);
-    HG.WebApp.Control._RefreshIntervalObject = null;
-    if (autorefresh) {
-        HG.WebApp.Control._RefreshIntervalObject = setInterval('HG.WebApp.Control.Refresh();', HG.WebApp.Control._RefreshInterval);
-    }
+HG.WebApp.Control.ToggleMenu = function()
+{
+	$('#control_groupsmenu').slideToggle(400);
 };
 //
-HG.WebApp.Control._RefreshTs = new Date().getTime();
-HG.WebApp.Control.Refresh = function () {
-    if (HG.WebApp.Control._RefreshTimeoutObject != null) window.clearTimeout(HG.WebApp.Control._RefreshTimeoutObject);
-    var delay = 100;
-    if (new Date().getTime() - HG.WebApp.Control._RefreshTs < 2000) delay = 2000;;
-    HG.WebApp.Control._RefreshTs = new Date().getTime() + delay;
-    HG.WebApp.Control._RefreshTimeoutObject = window.setTimeout('HG.WebApp.Control._RefreshFn()', delay);
+HG.WebApp.Control.ShowGroup = function (gid)
+{
+    $.mobile.loading('show');
+	HG.WebApp.Data._CurrentGroupIndex = gid;
+	HG.WebApp.Control.RefreshGroupIndicators();
+	$('#control_groupsmenu').slideUp(400, function(){
+		$('#control_groupcontent').children('div').hide();
+		$('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
+		HG.WebApp.Control.RenderGroupModules(gid);
+	});
 };
 //
-HG.WebApp.Control._RefreshFn = function () {
-    HG.WebApp.Data._IgnoreUIEvents = true;
+HG.WebApp.Control.UpdateModules = function () {
     HG.Configure.Modules.List(function (data) {
         //
         try {
@@ -79,12 +72,8 @@ HG.WebApp.Control._RefreshFn = function () {
         } catch (e) { }
         //
         HG.Automation.Programs.List(function () {
-            HG.WebApp.Control.RenderGroupModules();
-            //
-            //HG.WebApp.Control.RefreshModulePopup();
-            //
+            HG.WebApp.Control.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
         });
-        HG.WebApp.Data._IgnoreUIEvents = false;
     });
 };
 //
@@ -120,16 +109,18 @@ HG.WebApp.Control.RecordMacroDiscard = function () {
     $('#toolbar_macrorecord').hide('slidedown');
 }
 //
-HG.WebApp.Control.RenderGroupsCollapsibleItems = function () {
-    $('#control_groupslist').empty();
+HG.WebApp.Control.RenderGroups = function () {
+    $('#control_groupcontent').empty();
+    $('#control_groupsmenu').empty();
     //
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         if (i == 0) {
             HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
         }
-
-        var el = $('#control_groupslist').append('<div id="groupdiv_' + i + '" class="ui-bar-inherit ui-shadow hg-widget-group-title"><h3 class="hg-widget-header">' + HG.WebApp.Data.Groups[i].Name + '</h3><table align="right" style="float:right;margin-right:20px"><tr id="indicators"></tr></table></div><div id="groupdiv_modules_' + i + '" /><br clear="all" />');
+        $('#control_groupsmenu').append('<li onclick="HG.WebApp.Control.ShowGroup(' + i + ')">' + HG.WebApp.Data.Groups[i].Name + '<table align="right" style="position:absolute;right:10px;top:8px;vertical-align:middle"><tr id="control_groupindicators_' + i + '"></tr></table></li>');
+        var el = $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
     }
+	$('#control_groupsmenu').listview('refresh');
 };
 //
 HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
@@ -179,19 +170,16 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
 //
 var widgetsloadqueue = [];
 var widgetsloadtimer = null;
-var widgetsinitialized = false;
 HG.WebApp.Control.RenderModule = function () {
     clearTimeout(widgetsloadtimer);
     if (widgetsloadqueue.length > 0) {
-        //
-        widgetsinitialized = false;
         //
         // extract and render element 
         var rendermodule = widgetsloadqueue.splice(0, 1)[0];
         var widget = $('#' + rendermodule.ElementId).data('homegenie.widget');
         if (widget != null && widget != 'undefined') {
             widget.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
-            widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 1);
+            widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
         }
         else {
             var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
@@ -223,10 +211,10 @@ HG.WebApp.Control.RenderModule = function () {
                 }
                 else {
                     //alert(rendermodule.Module.Widget + " Widget Error.");
-                    // setTimeout('HG.WebApp.Control.RenderModule()', 50);
+                    // setTimeout('HG.WebApp.Control.RenderModule()', 10);
                 }
 
-                widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 1);
+                widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
             });
         }
 
@@ -234,20 +222,11 @@ HG.WebApp.Control.RenderModule = function () {
     else {
         rendermodulesbusy = false;
         $.mobile.loading('hide');
-        //
-		HG.WebApp.Control.RefreshGroupIndicators();
-        //
-        if (!widgetsinitialized) {
-            widgetsinitialized = true;
-		    for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-
-		    	$('#groupdiv_modules_' + i).isotope({
-					itemSelector: '.freewall',
-					layoutMode: 'packery'
-				});
-
-		    }
-        }
+		//
+    	$('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
+			itemSelector: '.freewall',
+			layoutMode: 'packery'
+		}).isotope();
     }
 
 };
@@ -282,167 +261,169 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
 
 var rendermodulesdelay = null;
 var rendermodulesbusy = false;
-HG.WebApp.Control.RenderGroupModules = function () {
+HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
     if (widgetsloadqueue.length > 0 || rendermodulesbusy) {
         if (rendermodulesdelay != null) clearTimeout(rendermodulesdelay);
-        rendermodulesdelay = setTimeout('HG.WebApp.Control.RenderGroupModules();', 100);
+        rendermodulesdelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 100);
         return;
     }
     //
     rendermodulesbusy = true;
     rendermodulesdelay = null;
     //
-    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
-        var grp = $('#groupdiv_modules_' + groupmodules.Index);
-        for (var m = 0; m < groupmodules.Modules.length; m++) {
-            var module = groupmodules.Modules[m];
-            var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
-            var cuid = '#' + uid;
-            var modui = $(cuid);
-            var type = module.DeviceType + ''; type = type.toLowerCase();
-            //
-            var widgetfound = false;
-            // look for explicit widget display module parameter
-            var displaymodule = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
-            if (displaymodule != null && displaymodule.Value != '') {
-                module.Widget = displaymodule.Value;
-                widgetfound = true;
-            }
-            // fallback to configuration.json widgets mapping
-            if (!widgetfound) {
-                for (var wi = 0; wi < HG.WebApp.Control._WidgetConfiguration.length; wi++) {
-                    var widgetobj = HG.WebApp.Control._WidgetConfiguration[wi];
-                    var modprop = HG.WebApp.Utility.GetModulePropertyByName(module, widgetobj.MatchProperty);
-                    if (modprop != null && (widgetobj.MatchValue == "*" || modprop.Value == widgetobj.MatchValue)) {
-                        module.Widget = widgetobj.Widget;
-                        widgetfound = true;
-                        break;
-                    }
+    var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
+    var grp = $('#groupdiv_modules_' + groupmodules.Index);
+    for (var m = 0; m < groupmodules.Modules.length; m++) {
+        var module = groupmodules.Modules[m];
+        var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
+        var cuid = '#' + uid;
+        var modui = $(cuid);
+        var type = module.DeviceType + ''; type = type.toLowerCase();
+        //
+        var widgetfound = false;
+        // look for explicit widget display module parameter
+        var displaymodule = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
+        if (displaymodule != null && displaymodule.Value != '') {
+            module.Widget = displaymodule.Value;
+            widgetfound = true;
+        }
+        // fallback to configuration.json widgets mapping
+        if (!widgetfound) {
+            for (var wi = 0; wi < HG.WebApp.Control._WidgetConfiguration.length; wi++) {
+                var widgetobj = HG.WebApp.Control._WidgetConfiguration[wi];
+                var modprop = HG.WebApp.Utility.GetModulePropertyByName(module, widgetobj.MatchProperty);
+                if (modprop != null && (widgetobj.MatchValue == "*" || modprop.Value == widgetobj.MatchValue)) {
+                    module.Widget = widgetobj.Widget;
+                    widgetfound = true;
+                    break;
                 }
             }
-            // last fall back.... select a generic widget based on DeviceType if no category specific widget has been found
-            if (!widgetfound) {
-                module.Widget = 'homegenie/generic/' + (type == 'undefined' ? 'unknown' : type);
-            }
-            //
-            if (modui.length == 0) {
-                widgetsloadqueue.push({ GroupName: HG.WebApp.Data.Groups[i].Name, GroupElement: grp, ElementId: uid, Module: module });
-            }
-            else {
-                if (modui.data('homegenie.widget')) {
-                    module.WidgetInstance = modui.data('homegenie.widget');
-                    module.WidgetInstance.RenderView(cuid, module);
-                }
+        }
+        // last fall back.... select a generic widget based on DeviceType if no category specific widget has been found
+        if (!widgetfound) {
+            module.Widget = 'homegenie/generic/' + (type == 'undefined' ? 'unknown' : type);
+        }
+        //
+        if (modui.length == 0) {
+            widgetsloadqueue.push({ GroupName: HG.WebApp.Data.Groups[groupIndex].Name, GroupElement: grp, ElementId: uid, Module: module });
+        }
+        else {
+            if (modui.data('homegenie.widget')) {
+                module.WidgetInstance = modui.data('homegenie.widget');
+                module.WidgetInstance.RenderView(cuid, module);
             }
         }
     }
     //
-    $('#control_groupslist').collapsibleset();
-    //
-    widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule();', 1);
+    widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule();', 10);
 };
 //
 HG.WebApp.Control.RefreshGroupIndicators = function() {
     for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
-        var grouploadkw = 0;
-        var operating_lights = 0;
-        var operating_switches = 0;
-        var group_temperature = null;
-        var group_humidity = null;
-        var group_luminance = null;
-        //
-        var grp = $('#groupdiv_modules_' + groupmodules.Index);
-        for (var m = 0; m < groupmodules.Modules.length; m++) {
-            var module = groupmodules.Modules[m];
-            var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
-            var cuid = '#' + uid;
-            var modui = $(cuid);
-            var type = module.DeviceType + ''; type = type.toLowerCase();
-            //
-            var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
-            var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-            if (w != null && l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
-                grouploadkw += (parseFloat(w.Value.replace(',', '.')) / 1000.0);
-            }
-            if (l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
-                switch (type)
-                {
-                	case 'dimmer':
-                	case 'light':
-                		operating_lights++;
-                		break;
-                	case 'switch':
+	    var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+	    var grouploadkw = 0;
+	    var operating_lights = 0;
+	    var operating_switches = 0;
+	    var group_temperature = null;
+	    var group_humidity = null;
+	    var group_luminance = null;
+	    //
+	    var grp = $('#groupdiv_modules_' + groupmodules.Index);
+	    for (var m = 0; m < groupmodules.Modules.length; m++) {
+	        var module = groupmodules.Modules[m];
+	        var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
+	        var cuid = '#' + uid;
+	        var modui = $(cuid);
+	        var type = module.DeviceType + ''; type = type.toLowerCase();
+	        //
+	        var w = HG.WebApp.Utility.GetModulePropertyByName(module, "Meter.Watts");
+	        var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
+	        if (w != null && l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
+	            grouploadkw += (parseFloat(w.Value.replace(',', '.')) / 1000.0);
+	        }
+	        if (l != null && parseFloat(l.Value.replace(',', '.')) != 0) {
+	            switch (type)
+	            {
+	            	case 'dimmer':
+	            	case 'light':
+	            		operating_lights++;
+	            		break;
+	            	case 'switch':
 						operating_switches++;
 						break;
-                }
-            }
+	            }
+	        }
 
-        	if (group_temperature == null)
+	    	if (group_temperature == null)
 			{
-            	var t = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
-            	if (t != null && t.Value != '')
-            	{
-            		group_temperature = t.Value;
-            	}
-        	}
+	        	var t = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
+	        	if (t != null && t.Value != '')
+	        	{
+	        		group_temperature = t.Value;
+	        	}
+	    	}
 
-        	if (group_humidity == null)
+	    	if (group_humidity == null)
 			{
-            	var h = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Humidity");
-            	if (h != null && h.Value != '')
-            	{
-            		group_humidity = h.Value;
-            	}
-        	}
+	        	var h = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Humidity");
+	        	if (h != null && h.Value != '')
+	        	{
+	        		group_humidity = h.Value;
+	        	}
+	    	}
 
-        	if (group_luminance == null)
+	    	if (group_luminance == null)
 			{
-            	var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Luminance");
-            	if (l != null && l.Value != '')
-            	{
-            		group_luminance = l.Value;
-            	}
-        	}
-        }
-        //
+	        	var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Luminance");
+	        	if (l != null && l.Value != '')
+	        	{
+	        		group_luminance = l.Value;
+	        	}
+	    	}
+	    }
+	    //
 
-//		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
+	//		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
 		var indicators = '';
-        if (group_temperature != null)
-        {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/temperature.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_temperature * 1).toFixed(1) + '</span></td><td>&nbsp;</td>';
-        }
-        if (group_humidity != null)
-        {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/humidity.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
-        if (group_luminance != null)
-        {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/luminance.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
-        if (operating_lights > 0)
-        {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/bulb.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + operating_lights + '</span></td><td>&nbsp;</td>';
-        }
-        if (operating_switches > 0)
-        {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/plug.png" style="vertical-align:middle" /> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + operating_switches + '</span></td><td>&nbsp;</td>';
-        }
-        if (grouploadkw > 0) {
-        	indicators += '<td align="center" style="vertical-align:middle"><img src="images/indicators/energy.png" style="vertical-align:middle"/> <span style="font-size:14pt;font-weight:bold;vertical-align:middle">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
-        }
-		$('#groupdiv_' + i).find('#indicators').html(indicators);
+	    if (group_temperature != null)
+	    {
+	    	indicators += '<td align="center"><span class="hg-indicator-temperature">' + (group_temperature * 1).toFixed(1) + '</span></td><td>&nbsp;</td>';
+	    }
+	    if (group_humidity != null)
+	    {
+	    	indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+	    }
+	    if (group_luminance != null)
+	    {
+	    	indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+	    }
+	    if (operating_lights > 0)
+	    {
+	    	indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
+	    }
+	    if (operating_switches > 0)
+	    {
+	    	indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
+	    }
+	    if (grouploadkw > 0) {
+	    	indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+	    }
 
-    }
+		$('#control_groupindicators_' + i).html(indicators);
+
+	    if (i == HG.WebApp.Data._CurrentGroupIndex)
+	    {
+	    	$('#control_groupmenutitle').html(HG.WebApp.Data.Groups[i].Name);
+			$('#control_groupindicators').html(indicators);
+		}
+	}
 }
 //
 HG.WebApp.Control.LoadGroups = function () {
     $.mobile.loading('show');
     HG.Configure.Groups.List('Control', function () {
-        HG.WebApp.Control.RenderGroupsCollapsibleItems();
+        HG.WebApp.Control.RenderGroups();
     });
 };
 //

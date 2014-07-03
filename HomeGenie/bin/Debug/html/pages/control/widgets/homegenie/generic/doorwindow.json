@@ -128,34 +128,34 @@
 						continue;
 	                }
 	                else if (module.Properties[p].Name == "Sensor.Temperature") {
-	                	imagesrc = 'images/indicators/temperature.png';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                	imagesrc = 'hg-indicator-temperature';
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8451;';
 	                }
 	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
-	                	imagesrc = 'images/indicators/temperature.png';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                	imagesrc = 'hg-indicator-temperature';
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8457;';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Luminance') {
-	                	imagesrc = 'images/indicators/luminance.png';
+	                	imagesrc = 'hg-indicator-luminance';
 	                    displayvalue = value + '%';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Humidity') {
-	                	imagesrc = 'images/indicators/humidity.png';
+	                	imagesrc = 'hg-indicator-humidity';
 	                    displayvalue = value + '%';
 	                }
-					// select property icon when available
+					//
 					if (module.Properties[p].Name == 'Meter.Watts') {
-						imagesrc = 'images/indicators/energy.png';
+						imagesrc = 'hg-indicator-energy';
 					}
 					else if (module.Properties[p].Name == 'Sensor.DoorWindow' ) {
-						imagesrc = 'images/indicators/door.png';
+						imagesrc = 'hg-indicator-door';
 					}
 					//
 	                if (imagesrc != '')
 	                {
-	                    displayname = '<img src="' + imagesrc + '" alt="' + updatetime + '" height="22" align="middle" style="vertical-align:bottom" />';
+	                    displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
 	                    sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
 	                }
 	                else
@@ -173,7 +173,7 @@
 		//
 		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address );
 		//
-		widget.find('[data-ui-field=status]').html(this.StatusText);
+		widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + this.StatusText + '</span>');
 		//
 		if (sensorimgdata != '') sensorimgdata = sensorimgdata + '<br clear="all" />';
 		if (sensortxtdata != '') sensortxtdata = sensortxtdata + '<br clear="all" />';

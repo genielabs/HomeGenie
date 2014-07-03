@@ -117,7 +117,7 @@
 		controlpopup.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
-		controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+		controlpopup.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + this.StatusText + '</span>');
 		controlpopup.find('[data-ui-field=level_knob]').val(Math.round(level)).trigger('change');
     }
 

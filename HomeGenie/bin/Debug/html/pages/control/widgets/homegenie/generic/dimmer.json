@@ -108,7 +108,7 @@
 				this.StatusText = '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
         	}
 		} else level = 0;
-		this.StatusText = watts + '&nbsp;&nbsp;&nbsp;' + ((level >=98 || level == 0) ? levelText : Math.round(level) + '%') + '&nbsp;' + this.StatusText;
+		this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp;' + ((level >=98 || level == 0) ? levelText : Math.round(level) + '%') + '</span>&nbsp;' + this.StatusText;
 		//
 		// add icon to StatusText
 		//

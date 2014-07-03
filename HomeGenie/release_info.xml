@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r388</Version>
+  <Version>1.00 beta r390</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Some more fixes to new UI: custom font, re-enabled themes, fixed popup event re-positioning on scroll, other minor fixes</ReleaseNote>
-  <ReleaseDate>2014-07-02T07:48:36.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added menu for selecting current control group in Control page
+  - More enhancements and fixes to new ui</ReleaseNote>
+  <ReleaseDate>2014-07-03T19:41:32.0000Z</ReleaseDate>
 </ReleaseInfo>

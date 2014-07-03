@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+03/07/2014 1.00 beta rev 390
+	- Added menu for selecting current control group in Control page
+	- More enhancements and fixes to new ui
+
 02/07/2014 1.00 beta rev 388
 	- Some more fixes to new UI: custom font, re-enabled themes, fixed popup event re-positioning on scroll, other minor fixes
 
