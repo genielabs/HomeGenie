@@ -87,6 +87,11 @@ namespace MIG.Interfaces.HomeAutomation
                 {801, "Therm.Mode"},
                 {802, "Therm.Temp"},
                 {803, "Therm.GetMode"},
+                {804, "Therm.GetFanMode"},
+                {805, "Therm.GetSetPoint"},
+                {806, "Therm.SetFanMode"},
+                {807, "Therm.GetFanState"},
+                {808, "Therm.GetAll"},
 
                 {1000, "NodeInfo.Get"},
             };
@@ -129,9 +134,15 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
 
+         
             public static readonly Command THERM_MODE = new Command(801);
             public static readonly Command THERM_TEMP = new Command(802);
-            public static readonly Command THERM_GET_MODE = new Command(802);
+            public static readonly Command THERM_GET_MODE = new Command(803);
+            public static readonly Command THERM_GET_FAN_MODE = new Command(804);
+            public static readonly Command THERM_GET_SET_POINT = new Command(805);
+            public static readonly Command THERM_SET_FAN_MODE = new Command(806);
+            public static readonly Command THERM_GET_FAN_STATE = new Command(807);
+            public static readonly Command THERM_GET_ALL = new Command(808);
 
             private readonly String name;
             private readonly int value;
@@ -523,9 +534,54 @@ namespace MIG.Interfaces.HomeAutomation
                     raisePropertyChanged = true;
                    
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    int mode = int.Parse(request.GetOption(0));
                     ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeGet();
                 }
+                else if (command == Command.THERM_GET_FAN_MODE)
+                {
+                    raisePropertyChanged = true;
+
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeGet();
+                }
+                else if (command == Command.THERM_GET_FAN_STATE)
+                {
+                    raisePropertyChanged = true;
+
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanStateGet();
+                }
+                else if (command == Command.THERM_GET_SET_POINT)
+                {
+                    raisePropertyChanged = true;
+
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermSetpointGet();
+                }
+                else if (command == Command.THERM_SET_FAN_MODE)
+                {
+                    raisePropertyChanged = true;
+
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    int mode = int.Parse(request.GetOption(0));
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeSet(mode);
+                }
+                else if (command == Command.THERM_GET_ALL)
+                {
+                    raisePropertyChanged = true;
+
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+               
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermSetpointGet();
+                    Thread.Sleep(200);
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanStateGet();
+                    Thread.Sleep(200);
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeGet();
+                    Thread.Sleep(200);
+                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeGet();
+                    Thread.Sleep(200);
+                    node.RequestMultiLevelReport();
+                }
+
             }
             catch
             {
