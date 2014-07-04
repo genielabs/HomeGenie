@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
 using System.Linq;
+using ZWaveLib.Devices.ProductHandlers.Generic;
 
 namespace ZWaveLib.Devices
 {
@@ -391,7 +392,7 @@ namespace ZWaveLib.Devices
                          **/
 
 					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:	
-                        double temp = ExtractTemperatureFromBytes(receivedMessage);
+						double temp = Sensor.ExtractTemperatureFromBytes(receivedMessage);
                         RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, temp);
 						handled = true;
 						break;
@@ -900,38 +901,6 @@ namespace ZWaveLib.Devices
 
             Thread.Sleep(200);
         }
-
-
-
-
-        public static double ExtractTemperatureFromBytes(byte[] message)
-        {
-            double temperature = 0; // (double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
-
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            byte precisionScaleSize = message[0];
-
-            temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
-
-            // F to C
-            //if (precisionScaleSize != 0x22)
-            //   temperature = ((5.0 / 9.0) * (temperature - 32.0));
-
-            return temperature;
-        }
-
-
-
-
-
-
-
-
-
-
 
 
 
