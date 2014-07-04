@@ -1,8 +1,9 @@
 ﻿RELEASE HISTORY
 
-04/07/2014 1.00 beta rev 391
+04/07/2014 1.00 beta rev 392
 	- Some fixes to the debian package builder
 	- Disabled web file caching due to suspect bug
+	- Added preliminary Z-Wave Thermostat support (mtanana)
 
 03/07/2014 1.00 beta rev 390
 	- Added menu for selecting current control group in Control page

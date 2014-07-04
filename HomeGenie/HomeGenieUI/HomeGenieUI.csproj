@@ -4107,7 +4107,6 @@
     <Content Include="html\pages\control\_control.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="index.master" />
     <Content Include="html\images\protection-off.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4121,15 +4120,6 @@
     <Content Include="html\js\flot\jquery.flot.spline.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="index.master.cs">
-      <DependentUpon>index.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.master.designer.cs">
-      <DependentUpon>index.master</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
