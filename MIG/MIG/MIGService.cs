@@ -397,10 +397,10 @@ namespace MIG
                                 }
                             } while (tagFound); // pre processor tag found
                             //
-                            if (!(requestedFile.Contains("/widgets/") || requestedFile.Contains("\\widgets\\")))
-                            {
-                                PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
-                            }
+//                            if (!(requestedFile.Contains("/widgets/") || requestedFile.Contains("\\widgets\\")))
+//                            {
+//                                PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
+//                            }
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }

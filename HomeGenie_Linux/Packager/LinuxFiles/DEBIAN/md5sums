@@ -4,7 +4,7 @@
 04cacfcda7d5a832964a349282386e31  usr/local/bin/homegenie/Raspberry.System.dll
 70267b3ae3130abad7e9c5b8729a787a  usr/local/bin/homegenie/System.Data.SQLite.Linq.dll
 e4582ab704936d27cfc29f1e866adfea  usr/local/bin/homegenie/homegenie_stats.db
-a579575a8510823dfc54cfef90810404  usr/local/bin/homegenie/MIG.dll
+06a6edfb4de3afb261281f8501ef2dd0  usr/local/bin/homegenie/MIG.dll
 bcdc1b8562d8bb3994ba6e643511467a  usr/local/bin/homegenie/CREDITS.TXT
 840ba9adf7531994ad4d26319c80451c  usr/local/bin/homegenie/ExpressionEvaluation.dll
 b849774e11bf4572b8911682592df5b0  usr/local/bin/homegenie/TUIOLib.dll.mdb
@@ -16,7 +16,6 @@ a414b15c9532c38baf5a27be15ec4017  usr/local/bin/homegenie/IronRuby.dll
 15c82241239947081c4112df748c3242  usr/local/bin/homegenie/start.html
 0a8f09f08dc3574cb87bada79b9fb108  usr/local/bin/homegenie/Raspberry.IO.GeneralPurpose.dll
 5d7cce87c06eb3a74ad83820c9dca101  usr/local/bin/homegenie/HomeGenie.vshost.exe
-7e13e1910d85ba10f3443d1be114c2f0  usr/local/bin/homegenie/liblirc_client.so
 8f24fa985aaf9e90e299c4791d6ca090  usr/local/bin/homegenie/UPnP.dll
 0d75bd2fca8b58ac2108af550c668610  usr/local/bin/homegenie/programs/71.dll
 6cd691ac1269f4e22dd76b03b3b89d2a  usr/local/bin/homegenie/programs/93.dll
@@ -68,20 +67,18 @@ af96d2e2222d15c66adbd69d6e508f8c  usr/local/bin/homegenie/programs/35.dll
 2291d7a5f8c71e7c6a877b2c757f1e68  usr/local/bin/homegenie/HomeGenieUI.dll.mdb
 5b87044b1d3bf893594dbdb5ea08ae98  usr/local/bin/homegenie/XTenLib.dll
 0dd334a75a245d02ed9f8811d87130de  usr/local/bin/homegenie/System.Data.SQLite.dll
-1efc810923b81df77e4925ec5751a9e9  usr/local/bin/homegenie/HomeGenie.exe.mdb
+e30b0df4dbecbe1e1a1efeb4ddff1538  usr/local/bin/homegenie/HomeGenie.exe.mdb
 883888c6692436f107b9e921f4b8c438  usr/local/bin/homegenie/MIG.pdb
 a2b7a1cffdf1ffed6b1fc245d5e3963e  usr/local/bin/homegenie/Jint.dll
 37eecbeadf5dca36834120373b107c83  usr/local/bin/homegenie/lircconfig.xml
 b820d677deab8530e276544228a4a8e0  usr/local/bin/homegenie/Raspberry.IO.Components.dll
 45e62f3ec45dca03882e5f749a9cc018  usr/local/bin/homegenie/HomeGenie.vshost.exe.config
-4b2e8cdefcdd848a1e4293864093ff7d  usr/local/bin/homegenie/libCameraCaptureV4L.so
 5619e5d4b93e544c7b9174c062f6c40b  usr/local/bin/homegenie/Newtonsoft.Json.dll
 41a3b7a62fd7e9d56107195f7cea0902  usr/local/bin/homegenie/IronPython.Modules.dll
 31cd5e509a9e6ae25aaeb10d8ce5517d  usr/local/bin/homegenie/HomeGenieUI.dll
 c7afb2c53942845beb88145a718287e5  usr/local/bin/homegenie/HomeGenieService.pdb
 8742ca673f11373aa5b26f966c03ef49  usr/local/bin/homegenie/LICENCE.TXT
 f48f01c8e260c648d763d32a557cfd0b  usr/local/bin/homegenie/Ude.pdb
-b7b7dc34d5fb2f6b71cdd44de6de428e  usr/local/bin/homegenie/libusb-1.0.so
 772f05bd8bbb133f1e52bd30ff4dd511  usr/local/bin/homegenie/systemconfig.xml~
 f0f36907e1a8a5120f5bec1a6b197a03  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 4b2e8cdefcdd848a1e4293864093ff7d  usr/local/bin/homegenie/v4l/debian64_libCameraCaptureV4L.so
@@ -1430,7 +1427,7 @@ cb46f4b49cf13afbda74f67a5e0c26bb  usr/local/bin/homegenie/html/images/protection
 547b817c3ca3b97ff9ac464f94ab51e9  usr/local/bin/homegenie/TUIOLib.pdb
 a788dc0b6ecbb33038c6351732202351  usr/local/bin/homegenie/startup.sh
 e0fbeb6927dd3e4ebbdc8eec81d38232  usr/local/bin/homegenie/SerialPortLib.dll.mdb
-e6673f53ebcb7896fba1ee8672c83906  usr/local/bin/homegenie/HomeGenie.exe
+17c59c921f553213076bd6e6246bef6d  usr/local/bin/homegenie/HomeGenie.exe
 ec2b5f96ce7a255ad7ce4d2d5b711bc4  usr/local/bin/homegenie/release_info.xml
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 2f68971d3bf7f717013d31011a1f3651  usr/local/bin/homegenie/lame.exe
@@ -1443,7 +1440,7 @@ e406fabaaed87ae43d2aa100ad78e5f9  usr/local/bin/homegenie/TcpClientLib.dll
 d4d383f6ee66bbfe4b4f80f1bf90615a  usr/local/bin/homegenie/Microsoft.Scripting.dll
 659270b585f19cbd7bbc9c3ca257a164  usr/local/bin/homegenie/HomeGenie.pdb
 d29cc36b5af351e6ae8f6231af80ad99  usr/local/bin/homegenie/W800RF32.pdb
-2040bb1d5b68067b380ac5fc34b574b6  usr/local/bin/homegenie/MIG.dll.mdb
+56e26e448d066dcfab9747547ded6d0b  usr/local/bin/homegenie/MIG.dll.mdb
 5813884c93ed53bbc3d8ffb90569d2a5  usr/local/bin/homegenie/TcpClientLib.pdb
 fe894a7f28576d0f20e128f0e8d3c25b  usr/local/bin/homegenie/homegenie_factory_config.zip
 aebaf8e3738454b539e29a7992a301f0  usr/local/bin/homegenie/W800RF32.dll

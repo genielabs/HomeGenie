@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+04/07/2014 1.00 beta rev 391
+	- Some fixes to the debian package builder
+	- Disabled web file caching due to suspect bug
+
 03/07/2014 1.00 beta rev 390
 	- Added menu for selecting current control group in Control page
 	- More enhancements and fixes to new ui

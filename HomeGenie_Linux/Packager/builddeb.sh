@@ -24,6 +24,9 @@ then
 	rm -rf "$hg_target_folder/usr/local/bin/homegenie/x64"
 	rm -rf "$hg_target_folder/usr/local/bin/homegenie/x86"
 	rm -rf "$hg_target_folder/usr/local/bin/homegenie/log"
+	rm -rf "$hg_target_folder/usr/local/bin/homegenie/libCameraCaptureV4L.so"
+	rm -rf "$hg_target_folder/usr/local/bin/homegenie/liblirc_client.so"
+	rm -rf "$hg_target_folder/usr/local/bin/homegenie/libusb-1.0.so"
 
 	echo "\n- Generating md5sums in DEBIAN folder..."
 	cd $hg_target_folder

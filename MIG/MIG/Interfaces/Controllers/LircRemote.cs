@@ -331,7 +331,10 @@ namespace MIG.Interfaces.Controllers
                     }));
                     lircListener.Start();
                 }
-                catch { }
+				catch (Exception e)
+				{
+					return false;
+				}
             }
             return true;
         }
@@ -340,8 +343,12 @@ namespace MIG.Interfaces.Controllers
         {
             if (isConnected)
             {
-                lircListener.Abort();
-                lircListener = null;
+				try
+				{
+					lircListener.Abort();
+				} catch {
+				}
+				lircListener = null;
                 //
                 try
                 {
