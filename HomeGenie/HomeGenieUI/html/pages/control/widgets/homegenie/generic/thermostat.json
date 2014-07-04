@@ -1,7 +1,7 @@
 ﻿[{
-    Name: "Thermostat Dummy Widget",
-    Author: "Generoso Martello",
-    Version: "2013-03-31",
+    Name: "Thermostat Widget",
+    Author: "Mike Tanana",
+    Version: "2013-07-03",
 
 	GroupName : '',
 	IconImage : 'pages/control/widgets/homegenie/generic/images/temperature.png',
@@ -11,12 +11,147 @@
     RenderView: function (cuid, module) {
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
+
+		
+
+
+		var controlpopup = widget.data('ControlPopUp');
+		if (!controlpopup)
+		{
+			container.find('[data-ui-field=controlpopup]').trigger('create');
+			controlpopup = container.find('[data-ui-field=controlpopup]').popup();
+			widget.data('ControlPopUp',  controlpopup);
+
+
+			widget.find('[data-ui-field=options]').on('click', function() {
+				if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
+				{
+					$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
+				}
+			});
+
+
+			controlpopup.find('[data-ui-field=level_knob]').knob({
+				'release' : function (v) 
+				{
+					v = Math.round(v);
+					HG.Control.Modules.ServiceCall("Therm.Temp", module.Domain, module.Address, v, function (data) { });
+				},
+				'change' : function (v)
+				{
+					v = Math.round(v);
+					controlpopup.find('[data-ui-field=status]').html(v + '&deg;');
+				}
+           		 });
+
+			
+			controlpopup.find('[data-locale-id=therm_off]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Therm.Mode", module.Domain, module.Address, 0, function (data) { });
+			});		
+			controlpopup.find('[data-locale-id=therm_cool]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Therm.Mode", module.Domain, module.Address, 2, function (data) { });
+			});
+			controlpopup.find('[data-locale-id=therm_heat]').on('click', function(){
+				HG.Control.Modules.ServiceCall("Therm.Mode", module.Domain, module.Address, 1, function (data) { });
+			});				
+
+		}
+
+
+
 		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
-		//
-		// render widget
-		//
-		widget.find('[data-ui-field=name]').html(module.Name + " (" + module.DeviceType + ")");
-		widget.find('[data-ui-field=description]').html(this.Description);
+
+
+
+        widget.find('[data-ui-field=name]').html(module.Name);
+        widget.find('[data-ui-field=description]').html(this.Description);
+	 	controlpopup.find('[data-ui-field=group]').html(this.GroupName);
+	 	controlpopup.find('[data-ui-field=name]').html(module.Name);
+
+	
+
+ 
+        if (module.Properties != null) {
+            for (p = 0; p < module.Properties.length; p++) {
+
+			var displayvalue="test";
+	                if (module.Properties[p].Name == "Sensor.Temperature") {
+			 var dcp = HG.WebApp.Utility.GetModulePropertyByName(module, "Conditions.DisplayCelsius");
+			 var display_celsius='FALSE';
+			if(dcp!=null)display_celsius=dcp.Value
+
+	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+				var tempc = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+				var tempf = Math.round(module.Properties[p].Value.replace(',', '.') *(9/5)+32);
+				if (display_celsius == 'TRUE') {
+					widget.find('[data-ui-field=temperature_value]').html(tempc + '&#8451;');
+				} else {
+		        		widget.find('[data-ui-field=temperature_value]').html(tempf + '&#8457;');
+				}
+
+
+	                }
+	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
+	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                    displayvalue = temp + '&#8457;';
+				widget.find('[data-ui-field=temperature_value]').html( displayvalue);
+
+	                }
+			else if (module.Properties[p].Name == "Thermostat.SetPoint") {
+	                	
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                    displayvalue = temp + '&deg;';
+			      widget.find('[data-ui-field=set_value]').html( displayvalue);
+			      controlpopup.find('[data-ui-field=level_knob]').val(Math.round(temp)).trigger('change');
+
+	                }
+
+			else if (module.Properties[p].Name == "Thermostat.FanState") {
+				var displaystate = "";
+	                     var state = module.Properties[p].Value
+				if(state==1)displaystate="On";
+				else displaystate="Off";
+				widget.find('[data-ui-field=fan_value]').html(displaystate);
+	              }
+			else if (module.Properties[p].Name == "Thermostat.OperatingState") {
+				var displaystate = "";
+	                     var state = module.Properties[p].Value
+				if(state==0)displaystate="Off";
+				else if(state==1)displaystate="Heat";
+				else if(state==2)displaystate="Cool";
+				else if(state==3)displaystate="Auto";
+				else if(state==4)displaystate="Aux Heat";
+				else if(state==5)displaystate="Waiting";
+				else if(state==6)displaystate="Waiting";
+
+	
+
+				widget.find('[data-ui-field=operating_value]').html(displaystate);
+	              }
+			else if (module.Properties[p].Name == "Thermostat.Mode") {
+				var displaystate = "";
+	                     var state = module.Properties[p].Value
+				if(state==0)displaystate="OFF";
+				else if(state==1)displaystate="Heat";
+				else if(state==2)displaystate="Cool";
+				else if(state==3)displaystate="Auto";
+				else if(state==4)displaystate="Aux Heat";
+	
+
+				widget.find('[data-ui-field=mode_value]').html(displaystate);
+	              }
+
+
+	           		
+                }
+         }
+            
+        
+	
+
+		
+
     }
 
 }]
