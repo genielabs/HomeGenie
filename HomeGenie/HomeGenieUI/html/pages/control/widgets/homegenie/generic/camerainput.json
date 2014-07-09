@@ -7,15 +7,17 @@
 	IconImage : 'pages/control/widgets/homegenie/generic/images/camera.png',
 	StatusText : '',
 	Description : '',
+	Widget : null,
 
     RenderView: function (cuid, module) {
 		var container = $(cuid);
-		var widget = container.find('[data-ui-field=widget]');
+		var widget = this.Widget = container.find('[data-ui-field=widget]');
 		var controlpopup = widget.data('ControlPopUp');
 		var popupisopen = false;
+		this.Description = 'Camera ' + module.Address;
+        //
         var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, "Image.URL");
         if (imageurl != null) imageurl = imageurl.Value; else imageurl = "";
-		this.Description = 'Camera ' + module.Address;
         //
 		// create and store a local reference to control popup object
 		//
@@ -35,23 +37,22 @@
 					setTimeout(function(){
 						var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
                         //
-                        var imgsrc = imageurl != "" ? imageurl : '/api/Media.CameraInput/0/Camera.GetPicture/';
+                        var imgsrc = imageurl != "" ? imageurl : this.IconImage;
 						//
                         popup.find('[data-ui-field=camerapicture]').attr('src', imgsrc + '?' + (new Date().getTime()));
-					}, 200);
+					}, 100);
 				}
             });
 			//
 			// initialization stuff here
 			//
 			// when widget is clicked control popup is shown
-			widget.on('click', function() {
+			widget.find('[data-ui-field=camerapicturepreview]').on('click', function() {
 				if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
 				{
                     var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
 					popup.popup('open');
-                    //
-                    var imgsrc = imageurl != "" ? imageurl : '/api/Media.CameraInput/0/Camera.GetPicture/';
+                    var imgsrc = imageurl != "" ? imageurl : this.IconImage;
 					//
                     popup.find('[data-ui-field=camerapicture]').attr('src', imgsrc + '?' + (new Date().getTime()));
 				}
@@ -72,9 +73,25 @@
 		widget.find('[data-ui-field=name]').html(module.Name);
 		widget.find('[data-ui-field=description]').html(this.Description);
 		//widget.find('[data-ui-field=status]').html(this.StatusText);
-		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
+		//widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		//
-        var imgsrc = imageurl != "" ? imageurl : '/api/Media.CameraInput/0/Camera.GetPicture/';
-		widget.find('[data-ui-field=camerapicturepreview]').attr('src', imgsrc + '?' + (new Date().getTime()));
-    }
+		this.PollCamera(module);
+    },
+
+		
+	PollCamera: function(module)
+	{
+		var _this = this;
+		// poll media renderer status while widget is visible
+		if (_this.Widget.is(':visible'))
+		{
+	        var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, "Image.URL");
+	        if (imageurl != null) imageurl = imageurl.Value; else imageurl = "";
+	        var imgsrc = imageurl != "" ? imageurl : _this.IconImage;
+			_this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imgsrc + '?' + (new Date().getTime()));
+			setTimeout(function(){ _this.PollCamera(module); }, 10000);
+		}
+
+	}
+
 }]

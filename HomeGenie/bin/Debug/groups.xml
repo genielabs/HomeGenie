@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Group>
     <Name>Dashboard</Name>
     <Modules>
@@ -31,6 +31,10 @@
       <ModuleReference>
         <Address>3</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>Automation</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>6</Address>

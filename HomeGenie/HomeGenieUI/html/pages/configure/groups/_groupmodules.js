@@ -11,7 +11,12 @@ HG.WebApp.GroupModules.InitializePage = function () {
             var selectedopt = $('#automation_group_moduleadd').find(":selected");
             var domain = selectedopt.attr('data-context-domain');
             var address = selectedopt.attr('data-context-value');
-            HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, domain, address);
+            HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, domain, address, function(){
+				$.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
+		        HG.WebApp.GroupModules.ModuleEdit($("#page_configure_groupmodules_list li").last());
+		        $.mobile.loading('show');
+		        setTimeout("$('#automation_group_module_edit').popup('open');$.mobile.loading('hide');", 1000);
+            });
         });
         //
         $('#group_delete_button').bind('click', function (event) {
@@ -27,6 +32,41 @@ HG.WebApp.GroupModules.InitializePage = function () {
         });
 		$('#btn_configure_group_addmodule').bind('click', function (event) {
 			HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_modulechoose');
+        });
+		$('#btn_configure_group_addseparator').bind('click', function (event) {
+        	HG.WebApp.GroupModules.EditModule.Domain = '';
+        	HG.WebApp.GroupModules.EditModule.Address = '';
+			HG.WebApp.Utility.SwitchPopup('#listmodules_actionmenu', '#automation_group_separator_edit');
+        });
+        $('#btn_configure_group_editseparatorremove').bind('click', function (event) {
+            HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
+            HG.WebApp.GroupsList.SaveGroups(null);
+        });
+        $('#btn_configure_group_editseparatoradd').bind('click', function (event) {
+        	var label = $('#automation_group_separatorlabel').val().trim();
+        	if (label != '')
+        	{
+        		HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, "HomeGenie.UI.Separator", label, function(){
+					$.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
+        		});
+        	}
+        });
+		//
+        $('#automation_group_separator_edit').on('popupbeforeposition', function (event) {
+        	if (HG.WebApp.GroupModules.EditModule.Address != '')
+        	{
+        		$('#automation_group_separatorlabel').val(HG.WebApp.GroupModules.EditModule.Address);
+        		$('#automation_group_separatorlabel').addClass('ui-disabled');
+				$('#btn_configure_group_editseparatoradd').hide();
+				$('#btn_configure_group_editseparatorremove').show();
+    		}
+			else
+			{
+				$('#automation_group_separatorlabel').val('');
+        		$('#automation_group_separatorlabel').removeClass('ui-disabled');
+				$('#btn_configure_group_editseparatoradd').show();
+				$('#btn_configure_group_editseparatorremove').hide();
+			}
         });
         //
         $('#automation_group_modulechoose').on('popupbeforeposition', function (event) {
@@ -124,21 +164,24 @@ HG.WebApp.GroupModules.ModuleIconsToggle = function () {
 HG.WebApp.GroupModules.SortModules = function () {
 
     var neworder = '';
+    var current = 0;
     $('#page_configure_groupmodules_list').children('li').each(function () {
         var midx = $(this).attr('data-module-index');
         if (midx >= 0) {
             neworder += (midx + ';')
         }
+        $(this).attr('data-module-index', current);
+        current++;
     });
     $.mobile.loading('show');
     // 
     $('#control_groupslist').empty();
     //
     HG.Configure.Groups.SortModules('Control', HG.WebApp.GroupModules.CurrentGroup, neworder, function (res) {
-        HG.Configure.Groups.List('Control', function () {
-            HG.WebApp.GroupModules.LoadGroupModules();
+//        HG.Configure.Groups.List('Control', function () {
+//            HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.loading('hide');
-        });
+//        });
     });
 
 };
@@ -268,7 +311,7 @@ HG.WebApp.GroupModules.GetModulesListViewItems = function (groupname) {
     return htmlopt;
 };
 
-HG.WebApp.GroupModules.AddGroupModule = function (group, domain, address) {
+HG.WebApp.GroupModules.AddGroupModule = function (group, domain, address, callback) {
     var alreadyexists = false;
     var moduleindex = -1;
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
@@ -289,9 +332,7 @@ HG.WebApp.GroupModules.AddGroupModule = function (group, domain, address) {
     }
     //
     HG.WebApp.GroupsList.SaveGroups(function () {
-        HG.WebApp.GroupModules.ModuleEdit($("#page_configure_groupmodules_list li").last());
-        $.mobile.loading('show');
-        setTimeout("$('#automation_group_module_edit').popup('open');$.mobile.loading('hide');", 1000);
+    	callback();
     });
 };
 
@@ -369,36 +410,45 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     //
     $('#page_configure_groupmodules_list').empty();
     $('#page_configure_groupmodules_list').listview().listview('refresh');
-    $('#page_configure_groupmodules_list').append('<li data-icon="false" data-role="list-divider">Group Modules</li>');
+    //$('#page_configure_groupmodules_list').append('<li data-icon="false" data-role="list-divider">Group Modules</li>');
     //
     var html = '';
     for (var m = 0; m < groupmodules.Modules.length; m++) {
         var domain_label = groupmodules.Modules[m].Domain.substring(groupmodules.Modules[m].Domain.lastIndexOf('.') + 1);
-        var address_label = "Module";
-        if (groupmodules.Modules[m].Domain == 'HomeAutomation.ZWave') {
-            address_label = "Node";
+
+		if (groupmodules.Modules[m].Domain == 'HomeGenie.UI.Separator') {
+	        html += '<li class="ui-header" data-icon="false" data-module-index="' + m + '">';
+	        html += '<a href="#automation_group_separator_edit" data-rel="popup" data-transition="pop">' + groupmodules.Modules[m].Address + '</a>';
+	        html += '</li>';
         }
-        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.RaspiGPIO') {
-            address_label = "GPIO";
-        }
-        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.Weeco4mGPIO') {
-            address_label = "GPIO";
-        }
-        else if (groupmodules.Modules[m].Domain == 'HomeAutomation.HomeGenie.Automation') {
-            address_label = "Program";
-        }
-        var iconid = 'module_icon_image_' + m;
-        var icon = configurepage_GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
-            $('#' + elid).attr('src', iconimage);
-        }, iconid);
-        html += '<li data-icon="bars" data-module-index="' + m + '">';
-        html += '<a href="#automation_group_module_edit" data-rel="popup" data-transition="pop">';
-        html += '<table><tr><td rowspan="2" align="left"><img id="' + iconid + '" height="54" src="' + icon + '"></td>';
-        html += '<td style="padding-left:10px"><span>' + groupmodules.Modules[m].Name + '</span></td></tr>';
-        html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + address_label + ' ' + groupmodules.Modules[m].Address + '</td>';
-        html += '</tr></table></a>';
-        html += '<a href="#page_configure_groupmodules_propspopup" data-rel="popup" data-transition="pop">Module Parameters</a>';
-        html += '</li>';
+		else
+		{
+	        var address_label = "Module";
+	        if (groupmodules.Modules[m].Domain == 'HomeAutomation.ZWave') {
+	            address_label = "Node";
+	        }
+	        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.RaspiGPIO') {
+	            address_label = "GPIO";
+	        }
+	        else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.Weeco4mGPIO') {
+	            address_label = "GPIO";
+	        }
+	        else if (groupmodules.Modules[m].Domain == 'HomeAutomation.HomeGenie.Automation') {
+	            address_label = "Program";
+	        }
+	        var iconid = 'module_icon_image_' + m;
+	        var icon = configurepage_GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
+	            $('#' + elid).attr('src', iconimage);
+	        }, iconid);
+	        html += '<li data-icon="bars" data-module-index="' + m + '">';
+	        html += '<a href="#automation_group_module_edit" data-rel="popup" data-transition="pop">';
+	        html += '<table><tr><td rowspan="2" align="left"><img id="' + iconid + '" height="54" src="' + icon + '"></td>';
+	        html += '<td style="padding-left:10px"><span>' + groupmodules.Modules[m].Name + '</span></td></tr>';
+	        html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + address_label + ' ' + groupmodules.Modules[m].Address + '</td>';
+	        html += '</tr></table></a>';
+	        html += '<a href="#page_configure_groupmodules_propspopup" data-rel="popup" data-transition="pop">Module Parameters</a>';
+	        html += '</li>';
+		}
     }
     $('#page_configure_groupmodules_list').append(html);
     //

@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-check ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save" data-transition="slide" data-direction="reverse">
+                    <a id="btn_control_macrorecord" class="ui-btn ui-icon-check ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save" data-transition="slide" data-direction="reverse">
                         Save
                     </a>
                 </li>
@@ -91,7 +91,7 @@
 
         <div style="position:fixed;z-index:1000;width:100%;cursor:pointer">
 	        <div class="ui-bar-b" style="opacity:0.9;">
-	        	<ul data-role="listview" id="control_groupsmenu" style="margin:0;max-height:180px;overflow:auto;">
+	        	<ul data-role="listview" id="control_groupsmenu" style="margin:0;max-height:180px;overflow:auto;" class="trapScroll">
 	        	</ul>
 	        </div>
 	        <div onclick="HG.WebApp.Control.ToggleMenu()" class="ui-header ui-bar-inherit ui-shadow" style="display:inline-block;width:100%;">
@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		<div align="center">
-	        <div id="control_groupcontent" style="margin:8px;margin-top:55px">
+	        <div id="control_groupcontent" style="margin-top:55px;margin-bottom:40px">
 	        </div>
         </div>
 
@@ -109,8 +109,11 @@
     <div id="control_actionmenu" data-role="popup" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 align="center">Actions Menu</h5>
-        <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li id="control_actionmenu_macrorecord"><a class="ui-btn ui-icon-edit ui-btn-icon-right" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
+        <ul id="control_custom_actionmenu" data-role="listview" data-inset="false" style="min-width:210px;">
+        </ul>
+        <div class="ui-body-inherit" style="height:2px;width:100%;overflow:hidden;border:0">&nbsp;</div>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;" data-mini="true">
+            <li id="control_actionmenu_macrorecord" data-mini="true"><a class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
             <!--li><a class="ui-btn ui-icon-refresh ui-btn-icon-right" href="javascript:$.mobile.loading('show');HG.WebApp.Control.UpdateModules();">Refresh list</a></li-->
         </ul>
     </div>

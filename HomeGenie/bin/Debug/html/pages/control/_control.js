@@ -55,6 +55,7 @@ HG.WebApp.Control.ToggleMenu = function()
 HG.WebApp.Control.ShowGroup = function (gid)
 {
     $.mobile.loading('show');
+    HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
 	HG.WebApp.Data._CurrentGroupIndex = gid;
 	HG.WebApp.Control.RefreshGroupIndicators();
 	$('#control_groupsmenu').slideUp(400, function(){
@@ -65,6 +66,7 @@ HG.WebApp.Control.ShowGroup = function (gid)
 };
 //
 HG.WebApp.Control.UpdateModules = function () {
+    $.mobile.loading('show');
     HG.Configure.Modules.List(function (data) {
         //
         try {
@@ -72,6 +74,7 @@ HG.WebApp.Control.UpdateModules = function () {
         } catch (e) { }
         //
         HG.Automation.Programs.List(function () {
+		    $.mobile.loading('hide');
             HG.WebApp.Control.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
         });
     });
@@ -84,6 +87,22 @@ HG.WebApp.Control.RecordMacroStart = function () {
     setTimeout(function(){
     	$('#toolbar_macrorecord').show('slideup');
 	}, 500);
+	$('#btn_control_macrorecord').qtip({
+        content: {
+        	title: 'Recording...',
+        	text: 'Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.',
+        	button: 'Close'
+    	},
+        show: { event: false, ready: true, delay: 1500 },
+        events: {
+            hide: function () {
+                $(this).qtip('destroy');
+            }
+        },
+        hide: { event: false, inactive: 5000 },
+        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+        position: { my: 'bottom center', at: 'top center' }
+    });
 }
 //
 HG.WebApp.Control.RecordMacroSave = function (mode) {
@@ -225,8 +244,10 @@ HG.WebApp.Control.RenderModule = function () {
 		//
     	$('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
 			itemSelector: '.freewall',
-			layoutMode: 'packery'
+			layoutMode: 'fitRows'
 		}).isotope();
+		//
+   		HG.WebApp.Control.UpdateActionsMenu();
     }
 
 };
@@ -238,13 +259,31 @@ HG.WebApp.Control.GetModuleUid = function (module) {
     return id;
 };
 
+HG.WebApp.Control.UpdateActionsMenu = function () {
+    $('#control_custom_actionmenu').empty();
+    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+    	if (i == HG.WebApp.Data._CurrentGroupIndex)
+    	{
+	        var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
+	        for (var m = 0; m < groupmodules.Modules.length; m++) {
+	            var module = groupmodules.Modules[m];
+	            if (module.Widget == 'homegenie/generic/program') {
+	            	// add item to actions menu
+	            	$('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Run(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + module.Name + '</a></li>');
+	            }
+	        }
+		}
+    }
+	$('#control_custom_actionmenu').listview('refresh');
+};
+
 HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
     for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[i].Name);
         for (var m = 0; m < groupmodules.Modules.length; m++) {
             var module = groupmodules.Modules[m];
             if (module.Domain == domain && module.Address == address) {
-                var uid = ($('#groupdiv_modules_' + groupmodules.Index).attr('id') + '_module_' + HG.WebApp.Control.GetModuleUid(module));
+                var uid = 'groupdiv_modules_' + groupmodules.Index + '_module_' + HG.WebApp.Control.GetModuleUid(module);
                 var cuid = '#' + uid;
                 var modui = $(cuid);
                 var type = module.DeviceType + ''; type = type.toLowerCase();
@@ -281,12 +320,22 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         var type = module.DeviceType + ''; type = type.toLowerCase();
         //
         var widgetfound = false;
-        // look for explicit widget display module parameter
-        var displaymodule = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
-        if (displaymodule != null && displaymodule.Value != '') {
-            module.Widget = displaymodule.Value;
-            widgetfound = true;
+
+        // look for UI Group Label (fake module with domain HomeGenie.UI.GroupLabel
+        if (module.Domain == 'HomeGenie.UI.Separator')
+        {
+        	module.Widget = 'homegenie/generic/grouplabel';
+        	widgetfound = true;
         }
+
+        // look for explicit widget display module parameter
+        if (!widgetfound) {
+	        var displaymodule = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
+	        if (displaymodule != null && displaymodule.Value != '') {
+	            module.Widget = displaymodule.Value;
+	            widgetfound = true;
+	        }
+		}
         // fallback to configuration.json widgets mapping
         if (!widgetfound) {
             for (var wi = 0; wi < HG.WebApp.Control._WidgetConfiguration.length; wi++) {
@@ -315,7 +364,11 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         }
     }
     //
-    widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule();', 10);
+	widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule();', 10);
+    if (widgetsloadqueue.length == 0)
+    {
+   		HG.WebApp.Control.UpdateActionsMenu();
+    }
 };
 //
 HG.WebApp.Control.RefreshGroupIndicators = function() {

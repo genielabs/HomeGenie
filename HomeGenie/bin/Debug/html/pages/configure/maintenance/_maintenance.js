@@ -12,6 +12,20 @@ HG.WebApp.Maintenance.InitializePage = function () {
             });
         });
         //
+        $("#configure_system_flip_httpcache").on('slidestop', function (event) {
+            $.mobile.loading('show');
+            if ($("#configure_system_flip_httpcache").val() == '1') {
+                HG.System.WebCacheEnable(function (data) {
+                    $.mobile.loading('hide');
+                });
+            }
+            else {
+                HG.System.WebCacheDisable(function (data) {
+                    $.mobile.loading('hide');
+                });
+            }
+        });
+        //
         $("#configure_system_flip_logging").on('slidestop', function (event) {
             $.mobile.loading('show');
             if ($("#configure_system_flip_logging").val() == '1') {
@@ -23,6 +37,17 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 HG.System.LoggingDisable(function (data) {
                     $.mobile.loading('hide');
                 });
+            }
+        });
+		//
+        $("#configure_system_flip_eventshistory").on('slidestop', function (event) {
+            if ($("#configure_system_flip_eventshistory").val() == '1') {
+            	sessvars.UserSettings.EventsHistory = true;
+            	$('#btn_eventshistory_led').show();
+            }
+            else {
+            	sessvars.UserSettings.EventsHistory = false;
+            	$('#btn_eventshistory_led').hide();
             }
         });
         //
@@ -70,6 +95,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
         //    
         //});
         $('#configure_system_updatemanager_installbutton').bind('click', function () {
+            $('#configure_system_updateinstall_button').removeClass('ui-disabled');
             $('#configure_system_updatemanager_info').html('<strong>Downloading files...</strong>');
             $('#configure_system_updateinstall_log').empty();
             $('#systemsettings_updateinstall_popup').popup('open');
@@ -119,6 +145,21 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 HG.WebApp.Maintenance.LoadSecuritySettings();
             });
         });
+		//
+		$('#btn_configuresystem_downloadtday').bind('click', function () {
+            window.open('/api/HomeAutomation.HomeGenie/Config/System.Configure/SystemLogging.DownloadCsv/0');
+        });
+		//
+		$('#btn_configuresystem_downloadyday').bind('click', function () {
+            window.open('/api/HomeAutomation.HomeGenie/Config/System.Configure/SystemLogging.DownloadCsv/1');
+        });
+		//
+        $('#maintenance_configuration_restartproceedbutton').bind('click', function () {
+        	$('#maintenance_configuration_restartbutton').addClass('ui-disabled');
+            $.mobile.loading('show', { text: 'Restarting service, please wait...', textVisible: true, theme: 'a', html: '' });
+            // FACTORY RESET....
+            HG.Configure.System.ServiceCall("Service.Restart", function (data) { });
+        });
         //
         $('#maintenance_configuration_backupbutton').bind('click', function () {
             //$.mobile.loading('show');
@@ -135,6 +176,8 @@ HG.WebApp.Maintenance.InitializePage = function () {
                     .animate({ borderColor: "#FFFFFF" }, 250);
             }
             else {
+            	$('#systemsettings_backuprestores1cancelbutton').removeClass('ui-disabled');
+            	$('#systemsettings_backuprestores1confirmbutton').removeClass('ui-disabled');
                 $.mobile.loading('show', { text: 'Restoring backup, please wait...', textVisible: true, theme: 'a', html: '' });
                 $('#restore_configuration_form').submit();
             }
@@ -181,6 +224,8 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $('#systemsettings_backuprestores1').popup('open');
             });
             $('#systemsettings_backuprestores1confirmbutton').bind('click', function () {
+            	$('#systemsettings_backuprestores1cancelbutton').addClass('ui-disabled');
+            	$('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
                 $.mobile.loading('show');
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     $.mobile.loading('hide');
@@ -240,6 +285,8 @@ HG.WebApp.Maintenance.LoadSettings = function () {
     //
     HG.WebApp.Maintenance.LoadSecuritySettings();
     HG.WebApp.Maintenance.LoadUpdateCheckSettings();
+    //
+    $('#configure_system_flip_eventshistory').val(sessvars.UserSettings.EventsHistory ? "1" : "0").slider('refresh');
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
@@ -277,6 +324,11 @@ HG.WebApp.Maintenance.LoadSecuritySettings = function () {
         //
         HG.System.LoggingIsEnabled(function (data) {
             $('#configure_system_flip_logging').val(data).slider('refresh');
+            $.mobile.loading('hide');
+        });
+        //
+        HG.System.WebCacheIsEnabled(function (data) {
+            $('#configure_system_flip_httpcache').val(data).slider('refresh');
             $.mobile.loading('hide');
         });
     });

@@ -1,5 +1,18 @@
 ﻿RELEASE HISTORY
 
+09/07/2014 1.00 beta rev 395
+	- fixed a bug in Philips Hue and Fibaro RGBW apps
+
+08/07/2014 1.00 beta rev 394
+	- adapted UPnP media widgets to the new UI
+	- added Events History enable/disable in Maintenance section
+	- added log file download in Maintenance section
+	- added Web Caching enable/disable in Maintenance section
+	- updated Raspberry#.IO library
+	- added service Restart button in Maintenance section
+	- Macro Recording now records UPnP commands as well
+	- other minor fixes
+
 04/07/2014 1.00 beta rev 392
 	- Some fixes to the debian package builder
 	- Disabled web file caching due to suspect bug

@@ -109,7 +109,7 @@
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td valign="top">
-                        <a href="javascript:HG.WebApp.GroupModules.ModuleIconsToggle()"><img width="48" height="48" id="module_icon" style="margin-right:10px;margin-top:10px;" src="pages/control/widgets/homegenie/generic/images/unknown.png"></a>
+                        <a href="javascript:HG.WebApp.GroupModules.ModuleIconsToggle()" style="cursor:pointer"><img width="48" height="48" id="module_icon" style="margin-right:10px;margin-top:10px;" src="pages/control/widgets/homegenie/generic/images/unknown.png"></a>
                     </td>
                     <td>
                         <label data-locale-id="configure_module_propname">Name</label>
@@ -134,6 +134,8 @@
                             <option data-locale-id="configure_module_typethermostat" value="Thermostat">Thermostat</option>
                             <option data-locale-id="configure_module_typeshutter" value="Shutter">Shutter</option>
                             <option data-locale-id="configure_module_typedoorwindow" value="DoorWindow">Door/Window</option>
+                            <option data-locale-id="configure_module_typemediareceiver" value="MediaReceiver">Media Receiver</option>
+                            <option data-locale-id="configure_module_typemediatransmitter" value="MediaTransmitter">Media Transmitter</option>
                         </select>
                     </td>
                     <td valign="bottom" style="padding-left:5px">
@@ -224,17 +226,60 @@
 
 
 
+
+
+
+
+
+
+    <div id="automation_group_separator_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 id="configure_groupmodules_separatoredit">Edit Separator</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <label data-locale-id="configure_separator_label">Label</label>
+                        <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" value="" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
+        	<div class="ui-block-a">
+                <a id="btn_configure_group_editseparatorremove" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremoveseparator" data-rel="back">Remove</a>
+            </div>
+            <div class="ui-block-b">
+                <a id="btn_configure_group_editseparatoradd" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optaddseparator" data-rel="back">Update</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
     <div id="listmodules_actionmenu" data-role="popup" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 align="center">Actions Menu</h5>
         <ul data-role="listview" class="ui-listview" style="min-width:210px;">
             <li>
-                <a id="btn_configure_group_deletegroup" class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_group_actionmenu_deletegroup" href="#automation_group_delete">
+                <a id="btn_configure_group_deletegroup" class="ui-btn ui-icon-minus ui-btn-icon-right" data-locale-id="configure_group_actionmenu_deletegroup">
                     Delete Group
                 </a>
             </li>
             <li>
-                <a id="btn_configure_group_addmodule" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_group_actionmenu_addmodule" href="#automation_group_modulechoose">
+                <a id="btn_configure_group_addseparator" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_group_actionmenu_addseparatorlabel">
+                    Add Separator
+                </a>
+            </li>
+            <li>
+                <a id="btn_configure_group_addmodule" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_group_actionmenu_addmodule">
                     Add Module
                 </a>
             </li>

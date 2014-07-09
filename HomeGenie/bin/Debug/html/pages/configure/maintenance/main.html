@@ -11,18 +11,6 @@
 
         <ul data-role="listview">
 
-            <li data-locale-id="configure_system_theme" data-role="list-divider">Theme</li>
-            <li>
-                <div data-role="controlgroup" data-type="horizontal">
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('a')">A</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('b')">B</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('c')">C</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('d')">D</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('e')">E</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('f')">F</a>
-                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('g')">G</a>
-                </div>
-            </li>
             <li data-locale-id="configure_system_options" data-role="list-divider">System Options</li>
             <li>
 
@@ -31,7 +19,7 @@
                     <div class="ui-block-a">
 
                         <div>
-                            <label><span data-locale-id="configure_system_updatemanager">HomeGenie Update Manager</span> </label>
+                            <label><span data-locale-id="configure_system_updatemanager">Update Manager</span> </label>
                             <p id="configure_system_updatemanager_info" style="margin-top:5px"></p>
                             <div id="configure_system_updatemanager_detailsscroll" style="background-color: black; border: 1px dashed gray; overflow-y: scroll; overflow-x: hidden; max-height: 60px;">
                                 <p id="configure_system_updatemanager_details">
@@ -50,6 +38,66 @@
                 </div>
 
             </li>
+
+            <li>
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_restart_service">Service Restart</label><br />
+                    </div>
+
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a id="maintenance_configuration_restartbutton" class="ui-btn ui-corner-all" data-locale-id="configure_system_restart" href="#maintenance_configuration_servicerestartpopup" data-rel="popup" data-transition="slidedown">Restart</a>
+                    </div>
+
+                </div>
+            </li>
+
+            <li>
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_loganddebug">Log file</label>
+                        <p>Download</p>
+		                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+		                    <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
+		                    <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
+		                </div>
+                    </div>
+
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_logging" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
+
+                </div>
+            </li>
+
+            <li data-locale-id="configure_system_httpsettings" data-role="list-divider">HTTP Settings</li>
+            <li>
+
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a">
+
+                        <div>
+                            <label data-locale-id="configure_security_passwordprotectedaccess">Password protected access</label>
+                            <img id="securitysettings_password_image" src="images/protection-on.png" width="64" height="64" />
+                        </div>
+
+                    </div>
+
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#securitysettings_password_popup" data-rel="popup" class="ui-btn ui-corner-all">Set</a>
+                        <a href="#" id="securitysettings_password_clear" data-rel="popup" class="ui-btn ui-corner-all">Clear</a>
+                    </div>
+
+                </div>
+
+            </li>
+
             <li>
 
                 <div class="ui-grid-a">
@@ -70,37 +118,16 @@
                 </div>
 
             </li>
-            <li>
-
-                <div class="ui-grid-a">
-
-                    <div class="ui-block-a">
-
-                        <div>
-                            <label data-locale-id="configure_security_passwordprotectedaccess">Password protected access</label><br />
-                            <img id="securitysettings_password_image" src="images/protection-on.png" width="64" height="64" style="margin:8px" />
-                        </div>
-
-                    </div>
-
-                    <div class="ui-block-b" style="float:right;width:150px">
-                        <a href="#securitysettings_password_popup" data-rel="popup" class="ui-btn ui-corner-all">Set</a>
-                        <a href="#" id="securitysettings_password_clear" data-rel="popup" class="ui-btn ui-corner-all">Clear</a>
-                    </div>
-
-                </div>
-
-            </li>
-
+                
             <li>
                 <div class="ui-grid-a">
 
                     <div class="ui-block-a">
-                        <label data-locale-id="configure_system_logging">Log and debug to file</label><br />
+                        <label data-locale-id="configure_system_httpcache">Http Service Cache</label><br />
                     </div>
 
                     <div class="ui-block-b" style="float:right;width:150px" align="right">
-                        <select id="configure_system_flip_logging" data-role="slider">
+                        <select id="configure_system_flip_httpcache" data-role="slider">
                             <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
                             <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
                         </select>
@@ -109,19 +136,7 @@
                 </div>
             </li>
 
-            <li>
-                <div class="ui-grid-a">
 
-                    <div class="ui-block-a">
-                        <label data-locale-id="configure_system_restart_service">Restart Service</label><br />
-                    </div>
-
-                    <div class="ui-block-b" style="float:right;width:150px">
-                        <a href="#systemsettings_restart_popup" class="ui-btn ui-corner-all ui-disabled" data-locale-id="configure_system_restart" data-rel="popup">Restart</a>
-                    </div>
-
-                </div>
-            </li>
 
             <li data-locale-id="configure_system_configanddata" data-role="list-divider">Configuration and Data</li>
             <li>
@@ -214,6 +229,36 @@
 
             </li>
 
+            <li data-locale-id="configure_system_userinterface" data-role="list-divider">User Interface</li>
+            <li>
+            	<span data-locale-id="configure_system_theme">Theme</span>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('a')">A</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('b')">B</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('c')">C</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('d')">D</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('e')">E</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('f')">F</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('g')">G</a>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_eventshistory">Events History</label><br />
+                    </div>
+
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_eventshistory" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
+
+                </div>
+            </li>
+
         </ul>
 
 
@@ -267,7 +312,7 @@
                 <fieldset id="systemsettings_backuprestores1plist" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;"></fieldset>
                 <div class="ui-grid-a">
 	                <div class="ui-block-a">
-		                <a href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1cancel" data-rel="back" data-transition="flow">Cancel</a>
+		                <a id="systemsettings_backuprestores1cancelbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1cancel" data-rel="back" data-transition="flow">Cancel</a>
 	                </div>
 	                <div class="ui-block-b">
 		                <a id="systemsettings_backuprestores1confirmbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1confirm">Restore</a>
@@ -347,6 +392,24 @@
 
 
 
+
+        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="maintenance_configuration_servicerestart">Restart Service?</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_maintenance_restartprompt" class="ui-title">Are you sure you want to restart service?</h3>
+                <p data-locale-id="configure_maintenance_restartwarning"></p>
+                <div class="ui-grid-a">
+	                <div class="ui-block-a">
+	    	            <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                	</div>
+	                <div class="ui-block-b">
+		                <a id="maintenance_configuration_restartproceedbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetproceed" data-rel="back" data-transition="slideup">Proceed</a>
+                	</div>
+                </div>
+            </div>
+        </div>
 
 
 

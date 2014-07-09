@@ -88,7 +88,9 @@ namespace HomeGenie.Data
             Fan,
             Thermostat,
             Shutter,
-            DoorWindow
+            DoorWindow,
+            MediaTransmitter,
+            MediaReceiver
             //siren, alarm, motion sensor, door sensor, thermal sensor, etc.
         }
 

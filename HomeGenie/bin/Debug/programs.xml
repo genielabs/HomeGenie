@@ -185,7 +185,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
     {
       string lightnumber = reqs[1];
       string command = reqs[2];
-      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
       //
       var module = hueModules.WithAddress(lightnumber).Get();
       //
@@ -3335,7 +3335,7 @@ When.WebServiceCallReceived("HomeAutomation.FibaroRGBW", ( args ) =&gt;
     {
       string lightnumber = reqs[1];
       string command = reqs[2];
-      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
       //
       var module = Modules.InDomain("HomeAutomation.ZWave").WithAddress(lightnumber).Get();
       var moduleRaise = Modules.InDomain("HomeAutomation.FibaroRGBW").WithAddress(lightnumber).Get();
