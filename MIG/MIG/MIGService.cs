@@ -180,6 +180,8 @@ namespace MIG
             }
             catch (Exception ex)
             {
+            	webGateway = new WebServiceGateway();
+                tcpGateway = new TcpSocketGateway();
                 // TODO: add error logging 
             }
             return success;
