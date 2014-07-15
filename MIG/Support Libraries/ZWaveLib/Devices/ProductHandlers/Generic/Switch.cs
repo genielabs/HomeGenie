@@ -57,7 +57,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             bool processed = false;
             //
-            byte cmdLength = message[6];
+            //byte cmdLength = message[6];
             byte cmdClass = message[7];
             byte cmdType = message[8];
             byte instanceCmdClass = message[9];
@@ -68,11 +68,21 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 byte inst_count = message[10];
                 if (instanceCmdClass == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY)
                 {
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(
+                        nodeHost,
+                        0,
+                        ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT,
+                        inst_count
+                    );
                 }
                 else
                 {
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(
+                        nodeHost,
+                        0,
+                        ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT,
+                        inst_count
+                    );
                 }
                 processed = true;
             }
@@ -90,11 +100,21 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     if (cmd == (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(
+                            nodeHost,
+                            instance,
+                            ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY,
+                            (double)value
+                        );
                     }
                     else
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(
+                            nodeHost,
+                            instance,
+                            ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL,
+                            (double)value
+                        );
                     }
                     //_nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_BASIC, (double)value);
                     //

@@ -41,9 +41,11 @@ namespace SerialPortLib
     public class SerialPortInput
     {
         public delegate void ConnectedStateChangedEvent(object sender, ConnectedStateChangedEventArgs statusargs);
+
         public event ConnectedStateChangedEvent ConnectedStateChanged;
 
         public delegate void MessageReceivedEvent(byte[] message);
+
         public event MessageReceivedEvent MessageReceived;
 
         private SerialPort serialPort;
@@ -57,7 +59,7 @@ namespace SerialPortLib
         private bool isConnected = false;
         private bool isRunning = true;
 
-        private object writeLock = new object();
+        //private object writeLock = new object();
 
         private Thread receiverTask;
         private Thread senderTask;
@@ -78,10 +80,13 @@ namespace SerialPortLib
             {
                 serialPort.Close();
             }
-            catch { }
+            catch
+            {
+            }
             //
             gotReadWriteError = true;
         }
+
         public bool IsConnected
         {
             get { return isConnected && !gotReadWriteError; }
@@ -118,7 +123,9 @@ namespace SerialPortLib
                     keepConnectionAlive = false;
                     connectionWatcher.Abort();
                 }
-                catch { }
+                catch
+                {
+                }
             }
             //
             keepConnectionAlive = true;
@@ -134,11 +141,10 @@ namespace SerialPortLib
                         try
                         {
                             Close();
-                            //
                         }
-                        catch (Exception unex)
+                        catch
                         {
-                            //							Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
+                            //Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
                         }
                         Thread.Sleep(5000);
                         if (keepConnectionAlive)
@@ -147,9 +153,9 @@ namespace SerialPortLib
                             {
                                 gotReadWriteError = !Open();
                             }
-                            catch (Exception unex)
+                            catch
                             {
-                                //                                Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
+                                //Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
                             }
                         }
                     }
@@ -166,11 +172,21 @@ namespace SerialPortLib
         {
             keepConnectionAlive = false;
             //
-            try { senderTask.Abort(); }
-            catch { }
+            try
+            {
+                senderTask.Abort();
+            }
+            catch
+            {
+            }
             senderTask = null;
-            try { receiverTask.Abort(); }
-            catch { }
+            try
+            {
+                receiverTask.Abort();
+            }
+            catch
+            {
+            }
             receiverTask = null;
             //
             Close();
@@ -230,7 +246,7 @@ namespace SerialPortLib
                 }
                 success = true;
             }
-            catch (Exception ex)
+            catch
             {
             }
             //
@@ -344,8 +360,7 @@ namespace SerialPortLib
                             byte[] message = new byte[msglen];
                             //
                             int readbytes = 0;
-                            while (serialPort.Read(message, readbytes, msglen - readbytes) <= 0)
-                                ; // noop
+                            while (serialPort.Read(message, readbytes, msglen - readbytes) <= 0) ; // noop
                             if (Debug)
                             {
                                 DebugLog("SPI >", ByteArrayToString(message));
@@ -366,7 +381,7 @@ namespace SerialPortLib
                             Thread.Sleep(50);
                         }
                     }
-                    catch (Exception e)
+                    catch
                     {
                         gotReadWriteError = true;
                         Thread.Sleep(1000);

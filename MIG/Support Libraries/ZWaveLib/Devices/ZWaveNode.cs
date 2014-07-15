@@ -156,8 +156,8 @@ namespace ZWaveLib.Devices
 
         internal ZWavePort zwavePort;
 
-        private object cbLock = new object();
-        private DateTime lastManufacturerGetTs = DateTime.Now;
+        //private object cbLock = new object();
+        //private DateTime lastManufacturerGetTs = DateTime.Now;
         private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
 
         public ZWaveNode(byte nodeId, ZWavePort zport)
@@ -190,7 +190,7 @@ namespace ZWaveLib.Devices
                 this.DeviceHandler = deviceHandler;
                 this.DeviceHandler.SetNodeHost(this);
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: add error logging 
             }
@@ -223,7 +223,7 @@ namespace ZWaveLib.Devices
             if (!handled && messageLength > 8)
             {
 
-                byte commandLength = receivedMessage[6];
+                //byte commandLength = receivedMessage[6];
                 byte commandClass = receivedMessage[7];
                 byte commandType = receivedMessage[8]; // is this the Payload length in bytes? or is it the command type?
                 //
@@ -516,7 +516,7 @@ namespace ZWaveLib.Devices
                             break;
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // TODO: add error logging 
                         //                                        Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);

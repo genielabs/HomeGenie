@@ -30,7 +30,7 @@ namespace XTenLib.Drivers
     {
         private SerialPort serialPort;
 
-        private object commLock = new object();
+        //private object commLock = new object();
         private string portName = "";
 
         public CM11(string port)
@@ -48,10 +48,13 @@ namespace XTenLib.Drivers
                     //					_serialport.Dispose();
                     serialPort.Close();
                 }
-                catch { }
+                catch
+                {
+                }
                 serialPort = null;
             }
         }
+
         public bool Open()
         {
             bool success = false;
@@ -87,7 +90,7 @@ namespace XTenLib.Drivers
                 this.WriteData(new byte[] { 0x8B }); // status request
                 success = true;
             }
-            catch (Exception ex)
+            catch
             {
             }
             //
@@ -106,10 +109,8 @@ namespace XTenLib.Drivers
                 readBytes = serialPort.Read(buffer, length, buflen - length);
                 length += readBytes;
                 //
-                if (length > 1 && buffer[0] < length)
-                    break;
-                else if (buffer[0] > 0x10 && serialPort.BytesToRead == 0)
-                    break;
+                if (length > 1 && buffer[0] < length) break;
+                else if (buffer[0] > 0x10 && serialPort.BytesToRead == 0) break;
             } while (readBytes > 0 && (buflen - length > 0));
             //
             byte[] readData = new byte[length + 1];

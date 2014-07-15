@@ -58,6 +58,7 @@ namespace ZWaveLib.Devices
     public class Controller : ZWaveNode
     {
         public override event ManufacturerSpecificResponseEventHandler ManufacturerSpecificResponse;
+
         public Action<object, DiscoveryEventArgs> DiscoveryEvent;
 
         public void OnDiscoveryEvent(DiscoveryEventArgs e)
@@ -72,10 +73,12 @@ namespace ZWaveLib.Devices
         private byte nodeOperationIdCheck = 0;
         private byte currentCommandTargetNode = 0;
 
-        public Controller(ZWavePort zwavePort)
-            : base(1, zwavePort)
+        public Controller(ZWavePort zwavePort) : base(1, zwavePort)
         {
-            zwavePort.ZWaveMessageReceived += new ZWavePort.ZWaveMessageReceivedEvent((object sender, ZWaveMessageReceivedEventArgs args) =>
+            zwavePort.ZWaveMessageReceived += new ZWavePort.ZWaveMessageReceivedEvent((
+                object sender,
+                ZWaveMessageReceivedEventArgs args
+            ) =>
             {
                 try
                 {
@@ -98,6 +101,7 @@ namespace ZWaveLib.Devices
         {
             return devices.Find(zn => zn.NodeId == nodeId);
         }
+
         public List<ZWaveNode> Devices
         {
             get { return devices; }
@@ -105,7 +109,12 @@ namespace ZWaveLib.Devices
 
         public virtual byte BeginNodeAdd()
         {
-            byte[] header = new byte[] { 0x01 /* Start Of Frame */, 0x05 /*packet len */, 0x00 /* type req/res */, 0x4a };
+            byte[] header = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x05 /*packet len */,
+                0x00 /* type req/res */,
+                0x4a
+            };
             byte[] footer = new byte[] { 0x03 | 0x80, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
 
@@ -120,7 +129,12 @@ namespace ZWaveLib.Devices
 
         public virtual byte StopNodeAdd()
         {
-            byte[] header = new byte[] { 0x01 /* Start Of Frame */, 0x05 /*packet len */, 0x00 /* type req/res */, 0x4a };
+            byte[] header = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x05 /*packet len */,
+                0x00 /* type req/res */,
+                0x4a
+            };
             byte[] footer = new byte[] { 0x05, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
 
@@ -134,7 +148,12 @@ namespace ZWaveLib.Devices
         public virtual byte BeginNodeRemove()
         {
 
-            byte[] header = new byte[] { 0x01 /* Start Of Frame */, 0x05 /*packet len */, 0x00 /* type req/res */, 0x4b };
+            byte[] header = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x05 /*packet len */,
+                0x00 /* type req/res */,
+                0x4b
+            };
             byte[] footer = new byte[] { 0x01 | 0x80, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
 
@@ -146,7 +165,12 @@ namespace ZWaveLib.Devices
 
         public virtual byte StopNodeRemove()
         {
-            byte[] header = new byte[] { 0x01 /* Start Of Frame */, 0x05 /*packet len */, 0x00 /* type req/res */, 0x4b };
+            byte[] header = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x05 /*packet len */,
+                0x00 /* type req/res */,
+                0x4b
+            };
             byte[] footer = new byte[] { 0x05, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
 
@@ -160,13 +184,27 @@ namespace ZWaveLib.Devices
         private void GetNodeCapabilities(byte nodeId)
         {
             currentCommandTargetNode = nodeId;
-            byte[] message = new byte[] { 0x01, 0x04, 0x00, (byte)ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO, nodeId, 0x00 };
+            byte[] message = new byte[] {
+                0x01,
+                0x04,
+                0x00,
+                (byte)ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO,
+                nodeId,
+                0x00
+            };
             SendMessage(message, true);
         }
 
         public void GetNodeInformationFrame(byte nodeId)
         {
-            byte[] message = new byte[] { 0x01, 0x04, 0x00, (byte)ZWaveCommandClass.CMD_REQUEST_NODE_INFO, nodeId, 0x00 };
+            byte[] message = new byte[] {
+                0x01,
+                0x04,
+                0x00,
+                (byte)ZWaveCommandClass.CMD_REQUEST_NODE_INFO,
+                nodeId,
+                0x00
+            };
             SendMessage(message, true);
         }
 
@@ -193,194 +231,210 @@ namespace ZWaveLib.Devices
                 ZWaveMessageHeader zwaveHeader = (ZWaveMessageHeader)args.Message[0];
                 switch (zwaveHeader)
                 {
-                    case ZWaveMessageHeader.CAN:
-                        zwavePort.SendAck();
+                case ZWaveMessageHeader.CAN:
+                    zwavePort.SendAck();
                         // RESEND
                         //Console.WriteLine("ZWaveLib: received CAN, resending last message");
                         //                        zp.ResendLastMessage();
-                        break;
-                    case ZWaveMessageHeader.ACK:
-                        zwavePort.SendAck();
-                        break;
-                    case ZWaveMessageHeader.SOF: // start of zwave frame
+                    break;
+                case ZWaveMessageHeader.ACK:
+                    zwavePort.SendAck();
+                    break;
+                case ZWaveMessageHeader.SOF: // start of zwave frame
                         //
                         // parse frame headers
                         //
-                        int msgLength = (int)args.Message[1];
-                        var msgType = (ZWaveMessageType)args.Message[2];
-                        var cmdClass = (args.Message.Length > 3 ? (ZWaveCommandClass)args.Message[3] : 0);
+                        //int msgLength = (int)args.Message[1];
+                    var msgType = (ZWaveMessageType)args.Message[2];
+                    var cmdClass = (args.Message.Length > 3 ? (ZWaveCommandClass)args.Message[3] : 0);
                         //
-                        byte sourceNodeId = 0;
+                    byte sourceNodeId = 0;
                         //
-                        switch (msgType)
+                    switch (msgType)
+                    {
+                    case ZWaveMessageType.REQUEST:
+                        zwavePort.SendAck();
+
+                        if (devices.Count == 0) break;
+
+                        //byte callbackId = 0;
+
+                        switch (cmdClass)
                         {
-                            case ZWaveMessageType.REQUEST:
-                                zwavePort.SendAck();
+                        case ZWaveCommandClass.CMD_NONE:
+                            break;
 
-                                if (devices.Count == 0) break;
+                        case ZWaveCommandClass.CMD_NODE_ADD:
 
-                                byte callbackId = 0;
-
-                                switch (cmdClass)
+                            //callbackId = args.Message[ 4 ];
+                            if (args.Message[5] == 0x03) // ADD_NODE_STATUS_ADDING_SLAVE
+                            {
+                                //
+                                //Console.WriteLine("\n\nADDING NODE SLAVE {0}\n     ->   ", zp.ByteArrayToString(args.Message));
+                                //
+                                // example response from HSM-100 3in1 sensor 
+                                // 01 15 00 4A 32 03 2E 0E 04 21 01 60 31 70 84 85 80 72 77 86 EF 20 79
+                                //                         bt gt st c1 c2 c3 c4 c5 c6 c7 c8 c9 --------
+                                // node supported classes (c1, c2.... cn)
+                                //
+                                nodeOperationIdCheck = args.Message[6];
+                                CreateDevice(nodeOperationIdCheck, 0x00);
+                            }
+                            else if (args.Message[5] == 0x05) // ADD_NODE_STATUS_PROTOCOL_DONE
+                            {
+                                if (nodeOperationIdCheck == args.Message[6])
                                 {
-                                    case ZWaveCommandClass.CMD_NONE:
-                                        break;
-
-                                    case ZWaveCommandClass.CMD_NODE_ADD:
-
-                                        callbackId = args.Message[4];
-                                        if (args.Message[5] == 0x03) // ADD_NODE_STATUS_ADDING_SLAVE
-                                        {
-                                            //
-                                            //Console.WriteLine("\n\nADDING NODE SLAVE {0}\n     ->   ", zp.ByteArrayToString(args.Message));
-                                            //
-                                            // example response from HSM-100 3in1 sensor 
-                                            // 01 15 00 4A 32 03 2E 0E 04 21 01 60 31 70 84 85 80 72 77 86 EF 20 79
-                                            //                         bt gt st c1 c2 c3 c4 c5 c6 c7 c8 c9 --------
-                                            // node supported classes (c1, c2.... cn)
-                                            //
-                                            nodeOperationIdCheck = args.Message[6];
-                                            CreateDevice(nodeOperationIdCheck, 0x00);
-                                        }
-                                        else if (args.Message[5] == 0x05) // ADD_NODE_STATUS_PROTOCOL_DONE
-                                        {
-                                            if (nodeOperationIdCheck == args.Message[6])
-                                            {
-                                                //Console.WriteLine("\n\nADDING NODE PROTOCOL DONE {0} {1}\n\n", args.Message[6], callbackid);
-                                                Thread.Sleep(500);
-                                                GetNodeCapabilities(args.Message[6]);
-                                                //Discovery();
-                                            }
-                                            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_END)); // Send event
-                                        }
-                                        else if (args.Message[5] == 0x07) // ADD_NODE_STATUS_ADDING_FAIL
-                                        {
-                                            //Console.WriteLine("\n\nADDING NODE FAIL {0}\n\n", args.Message[6]);
-                                        }
-                                        break;
-
-                                    case ZWaveCommandClass.CMD_NODE_REMOVE:
-
-                                        callbackId = args.Message[4];
-                                        if (args.Message[5] == 0x03) // REMOVE_NODE_STATUS_REMOVING_SLAVE
-                                        {
-                                            //Console.WriteLine("\n\nREMOVING NODE SLAVE {0}\n\n", args.Message[6]);
-                                            nodeOperationIdCheck = args.Message[6];
-                                        }
-                                        else if (args.Message[5] == 0x06) // REMOVE_NODE_STATUS_REMOVING_DONE
-                                        {
-                                            if (nodeOperationIdCheck == args.Message[6])
-                                            {
-                                                //Console.WriteLine("\n\nREMOVING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
-                                                RemoveDevice(args.Message[6]);
-                                            }
-                                            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_END)); // Send event
-                                        }
-                                        else if (args.Message[5] == 0x07) // REMOVE_NODE_STATUS_REMOVING_FAIL
-                                        {
-                                            //Console.WriteLine("\n\nREMOVING NODE FAIL {0}\n\n", args.Message[6]);
-                                        }
-                                        break;
-
-                                    case ZWaveCommandClass.CMD_APPLICATION_COMMAND:
-
-                                        sourceNodeId = args.Message[5];
-                                        var node = devices.Find(n => n.NodeId == sourceNodeId);
-                                        if (node == null)
-                                        {
-                                            CreateDevice(sourceNodeId, 0x00);
-                                            GetNodeCapabilities(sourceNodeId);
-                                        }
-                                        try
-                                        {
-                                            node.MessageRequestHandler(args.Message);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            //Console.WriteLine("# " + ex.Message + "\n" + ex.StackTrace);
-                                        }
-                                        break;
-
-                                    case ZWaveCommandClass.CMD_SEND_DATA:
-
-                                        byte commandId = args.Message[4];
-                                        if (commandId == 0x01) // SEND DATA OK
-                                        {
-                                            // TODO: ... what does that mean?
-                                        }
-                                        else if (args.Message[5] == 0x00)
-                                        {
-                                            // Messaging complete, remove callbackid
-                                            zwavePort.PendingMessages.RemoveAll(zm => zm.CallbackId == commandId);
-                                        }
-                                        else if (args.Message[5] == 0x01)
-                                        {
-                                            // TODO: callback error???
-                                            zwavePort.ResendLastMessage(commandId);
-                                        }
-                                        break;
-
-                                    case ZWaveCommandClass.CMD_NODE_UPDATE_INFO:
-
-                                        sourceNodeId = args.Message[5];
-                                        int nifLength = (int)args.Message[6];
-                                        var znode = devices.Find(n => n.NodeId == sourceNodeId);
-                                        if (znode != null)
-                                        {
-                                            byte[] nodeInfo = new byte[nifLength - 2];
-                                            //Console.WriteLine(ByteArrayToString(args.Message));
-                                            Array.Copy(args.Message, 7, nodeInfo, 0, nifLength - 2);
-                                            //
-                                            RaiseUpdateParameterEvent(znode, 0, ParameterType.PARAMETER_NODE_INFO, zwavePort.ByteArrayToString(nodeInfo));
-                                            RaiseUpdateParameterEvent(znode, 0, ParameterType.PARAMETER_WAKEUP_NOTIFY, "1");
-                                        }
-                                        break;
-
-                                    default:
-                                        Console.WriteLine("\nUNHANDLED Z-Wave REQUEST\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
-                                        break;
-
+                                    //Console.WriteLine("\n\nADDING NODE PROTOCOL DONE {0} {1}\n\n", args.Message[6], callbackid);
+                                    Thread.Sleep(500);
+                                    GetNodeCapabilities(args.Message[6]);
+                                    //Discovery();
                                 }
+                                OnDiscoveryEvent(new DiscoveryEventArgs(
+                                    0x00,
+                                    DISCOVERY_STATUS.DISCOVERY_END
+                                )); // Send event
+                            }
+                            else if (args.Message[5] == 0x07) // ADD_NODE_STATUS_ADDING_FAIL
+                            {
+                                //Console.WriteLine("\n\nADDING NODE FAIL {0}\n\n", args.Message[6]);
+                            }
+                            break;
 
+                        case ZWaveCommandClass.CMD_NODE_REMOVE:
 
-                                break;
-                            case ZWaveMessageType.RESPONSE:
-
-
-                                switch (cmdClass)
+                            //callbackId = args.Message[ 4 ];
+                            if (args.Message[5] == 0x03) // REMOVE_NODE_STATUS_REMOVING_SLAVE
+                            {
+                                //Console.WriteLine("\n\nREMOVING NODE SLAVE {0}\n\n", args.Message[6]);
+                                nodeOperationIdCheck = args.Message[6];
+                            }
+                            else if (args.Message[5] == 0x06) // REMOVE_NODE_STATUS_REMOVING_DONE
+                            {
+                                if (nodeOperationIdCheck == args.Message[6])
                                 {
-                                    case ZWaveCommandClass.CMD_DISCOVERY_NODES:
-                                        MessageResponseNodeBitMaskHandler(args.Message);
-                                        //zp.SendAck();
-                                        break;
-                                    case ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO:
-                                        MessageResponseNodeCapabilityHandler(args.Message);
-                                        //zp.SendAck();
-                                        break;
-                                    case ZWaveCommandClass.CMD_REQUEST_NODE_INFO:
-                                        //                                        Console.WriteLine("\nNODE INFO RESPONSE: " + zp.ByteArrayToString(args.Message) + "\n");
-                                        break;
-                                    case ZWaveCommandClass.CMD_SEND_DATA:
-                                        this.ReadyToSend = true;
-                                        break;
-                                    default:
-                                        //if (args.Message.Length > 2 && args.Message[3] != 0x13) 
-                                        Console.WriteLine("\nUNHANDLED Z-Wave RESPONSE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
-                                        break;
+                                    //Console.WriteLine("\n\nREMOVING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
+                                    RemoveDevice(args.Message[6]);
                                 }
+                                OnDiscoveryEvent(new DiscoveryEventArgs(
+                                    0x00,
+                                    DISCOVERY_STATUS.DISCOVERY_END
+                                )); // Send event
+                            }
+                            else if (args.Message[5] == 0x07) // REMOVE_NODE_STATUS_REMOVING_FAIL
+                            {
+                                //Console.WriteLine("\n\nREMOVING NODE FAIL {0}\n\n", args.Message[6]);
+                            }
+                            break;
 
+                        case ZWaveCommandClass.CMD_APPLICATION_COMMAND:
 
-                                break;
+                            sourceNodeId = args.Message[5];
+                            var node = devices.Find(n => n.NodeId == sourceNodeId);
+                            if (node == null)
+                            {
+                                CreateDevice(sourceNodeId, 0x00);
+                                GetNodeCapabilities(sourceNodeId);
+                            }
+                            try
+                            {
+                                node.MessageRequestHandler(args.Message);
+                            }
+                            catch
+                            {
+                                //Console.WriteLine("# " + ex.Message + "\n" + ex.StackTrace);
+                            }
+                            break;
 
-                            default:
-                                Console.WriteLine("\nUNHANDLED Z-Wave message TYPE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
-                                break;
+                        case ZWaveCommandClass.CMD_SEND_DATA:
+
+                            byte commandId = args.Message[4];
+                            if (commandId == 0x01) // SEND DATA OK
+                            {
+                                // TODO: ... what does that mean?
+                            }
+                            else if (args.Message[5] == 0x00)
+                            {
+                                // Messaging complete, remove callbackid
+                                zwavePort.PendingMessages.RemoveAll(zm => zm.CallbackId == commandId);
+                            }
+                            else if (args.Message[5] == 0x01)
+                            {
+                                // TODO: callback error???
+                                zwavePort.ResendLastMessage(commandId);
+                            }
+                            break;
+
+                        case ZWaveCommandClass.CMD_NODE_UPDATE_INFO:
+
+                            sourceNodeId = args.Message[5];
+                            int nifLength = (int)args.Message[6];
+                            var znode = devices.Find(n => n.NodeId == sourceNodeId);
+                            if (znode != null)
+                            {
+                                byte[] nodeInfo = new byte[nifLength - 2];
+                                //Console.WriteLine(ByteArrayToString(args.Message));
+                                Array.Copy(args.Message, 7, nodeInfo, 0, nifLength - 2);
+                                //
+                                RaiseUpdateParameterEvent(
+                                    znode,
+                                    0,
+                                    ParameterType.PARAMETER_NODE_INFO,
+                                    zwavePort.ByteArrayToString(nodeInfo)
+                                );
+                                RaiseUpdateParameterEvent(
+                                    znode,
+                                    0,
+                                    ParameterType.PARAMETER_WAKEUP_NOTIFY,
+                                    "1"
+                                );
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("\nUNHANDLED Z-Wave REQUEST\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                            break;
+
                         }
 
 
+                        break;
+                    case ZWaveMessageType.RESPONSE:
+
+
+                        switch (cmdClass)
+                        {
+                        case ZWaveCommandClass.CMD_DISCOVERY_NODES:
+                            MessageResponseNodeBitMaskHandler(args.Message);
+                                        //zp.SendAck();
+                            break;
+                        case ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO:
+                            MessageResponseNodeCapabilityHandler(args.Message);
+                                        //zp.SendAck();
+                            break;
+                        case ZWaveCommandClass.CMD_REQUEST_NODE_INFO:
+                                        //                                        Console.WriteLine("\nNODE INFO RESPONSE: " + zp.ByteArrayToString(args.Message) + "\n");
+                            break;
+                        case ZWaveCommandClass.CMD_SEND_DATA:
+                            this.ReadyToSend = true;
+                            break;
+                        default:
+                                        //if (args.Message.Length > 2 && args.Message[3] != 0x13) 
+                            Console.WriteLine("\nUNHANDLED Z-Wave RESPONSE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                            break;
+                        }
+
+
+                        break;
+
+                    default:
+                        Console.WriteLine("\nUNHANDLED Z-Wave message TYPE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                        break;
+                    }
+
+
 
                         //
-                        break;
+                    break;
                 }
 
             }
@@ -445,7 +499,7 @@ namespace ZWaveLib.Devices
                         //Console.WriteLine("Z-Wave Updating node " + node.NodeId + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
                     }
                 }
-                catch (Exception e)
+                catch
                 {
                     //Console.WriteLine("Z-Wave ERROR adding node " + node.NodeId + " : " + e.Message + "\n" + e.StackTrace);
                     //System.Diagnostics.Debugger.Break();
@@ -505,7 +559,7 @@ namespace ZWaveLib.Devices
                             nodeList.Add(k);
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
 
                         System.Diagnostics.Debugger.Break();
@@ -533,15 +587,22 @@ namespace ZWaveLib.Devices
             string className = "ZWaveLib.Devices.";
             switch (genericClass)
             {
-                case 0x02:
-                    className += "Controller";
-                    this.NodeId = nodeId;
-                    return (ZWaveNode)this;
-                default: // generic node
-                    className += "ZWaveNode";
-                    break;
+            case 0x02:
+                className += "Controller";
+                this.NodeId = nodeId;
+                return (ZWaveNode)this;
+            default: // generic node
+                className += "ZWaveNode";
+                break;
             }
-            var znode = (ZWaveNode)Activator.CreateInstance(Type.GetType(className), new object[] { nodeId, zwavePort, genericClass });
+            var znode = (ZWaveNode)Activator.CreateInstance(
+                            Type.GetType(className),
+                            new object[] {
+                    nodeId,
+                    zwavePort,
+                    genericClass
+                }
+                        );
             znode.UpdateNodeParameter += znode_UpdateNodeParameter;
             znode.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
             //znode.ManufacturerSpecific_Get();
@@ -553,7 +614,12 @@ namespace ZWaveLib.Devices
 
         void znode_ManufacturerSpecificResponse(object sender, ManufacturerSpecificResponseEventArg mfargs)
         {
-            RaiseUpdateParameterEvent((ZWaveNode)sender, 0, ParameterType.PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC, mfargs.ManufacturerSpecific);
+            RaiseUpdateParameterEvent(
+                (ZWaveNode)sender,
+                0,
+                ParameterType.PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC,
+                mfargs.ManufacturerSpecific
+            );
             if (this.ManufacturerSpecificResponse != null)
             {
                 // route nodes events

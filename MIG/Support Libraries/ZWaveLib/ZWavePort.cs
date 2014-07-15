@@ -64,7 +64,7 @@ namespace ZWaveLib
         private byte callbackIdSeq = 1;
         private object callbackLock = new object();
 
-        private Logger logger = new Logger();
+        //private Logger logger = new Logger();
 
         private SerialPortInput serialPort;
         private string portName = "";

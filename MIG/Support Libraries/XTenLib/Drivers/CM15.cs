@@ -31,7 +31,8 @@ namespace XTenLib.Drivers
 {
     public class CM15 : XTenInterface, IDisposable
     {
-        public UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0x0BC7, 0x0001);  // Marmitek CM15Pro usb interface 
+        public UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0x0BC7, 0x0001);
+        // Marmitek CM15Pro usb interface
 
         /// <summary>Use the first read endpoint</summary>
         public readonly byte TRANFER_ENDPOINT = UsbConstants.ENDPOINT_DIR_MASK;
@@ -45,7 +46,7 @@ namespace XTenLib.Drivers
         /// <summary>Size of each transfer</summary>
         public int TRANFER_SIZE = 16;
 
-        private DateTime startTime = DateTime.MinValue;
+        //private DateTime startTime = DateTime.MinValue;
         private UsbDevice myUsbDevice;
 
         private UsbEndpointReader reader = null;
@@ -60,11 +61,21 @@ namespace XTenLib.Drivers
         {
             if (myUsbDevice != null && myUsbDevice.IsOpen)
             {
-                try { reader.Abort(); }
-                catch { }
+                try
+                {
+                    reader.Abort();
+                }
+                catch
+                {
+                }
                 //
-                try { writer.Abort(); }
-                catch { }
+                try
+                {
+                    writer.Abort();
+                }
+                catch
+                {
+                }
             }
         }
 
@@ -75,8 +86,13 @@ namespace XTenLib.Drivers
             {
                 if (myUsbDevice.DriverMode == UsbDevice.DriverModeType.MonoLibUsb)
                 {
-                    try { myUsbDevice.Close(); }
-                    catch { }
+                    try
+                    {
+                        myUsbDevice.Close();
+                    }
+                    catch
+                    {
+                    }
                 }
                 myUsbDevice = null;
             }
@@ -159,7 +175,9 @@ namespace XTenLib.Drivers
             {
                 ecRead = usbReadTransfer.Wait(out transferredIn);
             }
-            catch { }
+            catch
+            {
+            }
             usbReadTransfer.Dispose();
             //
             byte[] readdata = new byte[transferredIn];
