@@ -9,7 +9,7 @@ http://homegenie.it
 HomeGenie/HomeGenie.sln
 
 **Microsoft Visual Studio**:
-HomeGenie_Windows/HomeGenie_Windows.sln
+HomeGenie_Windows/HomeGenie_VS10.sln
 
 ## Precompiled packages and install instructions
 
