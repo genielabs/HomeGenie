@@ -70,28 +70,29 @@
         //
         if (doorstate === '') 
         {
-			    this.StatusText = '?';
+			    this.StatusText = '&nbsp;&nbsp;&nbsp;<span style="vertical-align:middle">?</span>';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
         }
         else if (doorstate != '0') 
         {
-			this.StatusText = 'OPEN';
+			this.StatusText = '&nbsp;&nbsp;&nbsp;<span style="vertical-align:middle">OPEN</span> ';
+			this.StatusText += '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
     		this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_open.png';
 	    }
 		else
 		{
-			this.StatusText = 'CLOSED';
+			this.StatusText = '&nbsp;&nbsp;&nbsp;<span style="vertical-align:middle">CLOSED</span> ';
+			this.StatusText += '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
 			this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
 		}
 		//
         if (tamper > 0)
         {
-            this.StatusText += ' <span style="color:red">TAMPERED</span>';
+            this.StatusText = '&nbsp;&nbsp;&nbsp;<span style="color:red;vertical-align:middle">TAMPER</span>' + this.StatusText;
         }
         //
     	var sensorimgdata = '';
    		var sensortxtdata = '';
-		var infotext = '';
         if (module.Properties != null) {
             for (p = 0; p < module.Properties.length; p++) {
 				if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') 
@@ -124,7 +125,7 @@
 	                    else if (blevel > 10) blevel = 20;
 	                    else if (blevel > 0) blevel = 10;
 	                    //
-						infotext += '<span>' + value + '%</span> <img src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
+						this.StatusText = '<span style="vertical-align:middle">' + value + '%</span> <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" /> ' + this.StatusText;
 						continue;
 	                }
 	                else if (module.Properties[p].Name == "Sensor.Temperature") {

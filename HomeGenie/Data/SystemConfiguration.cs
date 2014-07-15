@@ -37,6 +37,7 @@ namespace HomeGenie.Data
         public event Action<bool> OnUpdate;
 
         public HomeGenieConfiguration HomeGenie { get; set; }
+
         public MIGServiceConfiguration MIGService { get; set; }
 
         public SystemConfiguration()
@@ -74,6 +75,7 @@ namespace HomeGenie.Data
             MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
             return res;
         }
+
         public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
         {
             MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
@@ -91,9 +93,14 @@ namespace HomeGenie.Data
                     try
                     {
                         if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
-                        if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(p.LastValue, GetPassPhrase());
+                        if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(
+                                p.LastValue,
+                                GetPassPhrase()
+                            );
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
 
@@ -132,10 +139,15 @@ namespace HomeGenie.Data
     public class HomeGenieConfiguration
     {
         public string SystemName { get; set; }
+
         public string Location { get; set; }
+
         public int ServicePort { get; set; }
+
         public string UserLogin { get; set; }
+
         public string UserPassword { get; set; }
+
         public List<ModuleParameter> Settings = new List<ModuleParameter>();
 
         public string GUID { get; set; }
@@ -146,6 +158,8 @@ namespace HomeGenie.Data
     [Serializable()]
     public class MIGServiceConfiguration
     {
+        public string EnableWebCache { get; set; }
+
         public List<Interface> Interfaces = new List<Interface>();
 
         [Serializable()]
@@ -165,6 +179,7 @@ namespace HomeGenie.Data
             {
                 [XmlAttribute]
                 public string Name { get; set; }
+
                 [XmlAttribute]
                 public string Value { get; set; }
             }

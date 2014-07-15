@@ -92,17 +92,22 @@ HG.WebApp.GroupsList.GroupsAdd = function(grpname) {
 HG.WebApp.GroupsList.SortGroups = function () {
 
     var neworder = '';
+    var current = 0;
     $('#configure_groupslist').children('li').each(function () {
         var gidx = $(this).attr('data-group-index');
         if (gidx >= 0) {
             neworder += (gidx + ';')
+            $(this).attr('data-module-index', current);
+            current++;
         }
     });
     // 
+    $.mobile.loading('show');
     $('#control_groupslist').empty();
     //
     HG.Configure.Groups.Sort('Control', neworder, function (res) {
-        HG.WebApp.GroupsList.LoadGroups();
+    //    HG.WebApp.GroupsList.LoadGroups();
+	    $.mobile.loading('hide');
     });
 
 }

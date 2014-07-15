@@ -85,6 +85,42 @@ HG.System.LoggingIsEnabled = function (callback) {
 };
 
 
+HG.System.WebCacheEnable = function (callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/1/' + (new Date().getTime()),
+        type: "POST",
+        data: "{ dummy: 'dummy' }",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
+HG.System.WebCacheDisable = function (callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetWebCacheEnabled/0/' + (new Date().getTime()),
+        type: "POST",
+        data: "{ dummy: 'dummy' }",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
+HG.System.WebCacheIsEnabled = function (callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.GetWebCacheEnabled/' + (new Date().getTime()),
+        type: "POST",
+        data: "{ dummy: 'dummy' }",
+        dataType: "text",
+        success: function (data) {
+            var haslog = eval(data)[0];
+            if (callback != null) callback(haslog.ResponseValue);
+        }
+    });
+};
+
+
 HG.System.UpdateManager = HG.System.UpdateManager || {};
 HG.System.UpdateManager.UpdateCheck = function (callback) {
     $.ajax({

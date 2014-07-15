@@ -62,15 +62,28 @@ namespace MIG.Gateways
         public void Start()
         {
             server = NetworkConnectivity.CreateTCPServerChannel("server");
-            server.ChannelClientConnected += new ServerConnectionEventHandler(server_ChannelClientConnected);
-            server.ChannelClientDisconnected += new ServerConnectionEventHandler(server_ChannelClientDisconnected);
+            server.ChannelClientConnected += server_ChannelClientConnected;
+            server.ChannelClientDisconnected += server_ChannelClientDisconnected;
             //_server.ChannelConnected += 
             //_server.ChannelDisconnected += 
-            server.DataReceived += new ServerDataEventHandler(server_DataReceived);
+            server.DataReceived += server_DataReceived;
             //_server.DataSent += 
             //_server.ExceptionOccurred += 
-            server.ExceptionOccurred += new System.IO.ErrorEventHandler(server_ExceptionOccurred);
+            server.ExceptionOccurred += server_ExceptionOccurred;
             server.Connect(servicePort);
+        }
+
+        public void Stop()
+        {
+            server.ChannelClientConnected -= server_ChannelClientConnected;
+            server.ChannelClientDisconnected -= server_ChannelClientDisconnected;
+            //_server.ChannelConnected -= 
+            //_server.ChannelDisconnected -= 
+            server.DataReceived -= server_DataReceived;
+            //_server.DataSent -= 
+            //_server.ExceptionOccurred -= 
+            server.ExceptionOccurred -= server_ExceptionOccurred;
+            server.Disconnect();
         }
 
         public void Configure(object gwConfiguration)

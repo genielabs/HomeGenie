@@ -44,6 +44,7 @@ namespace HomeGenie
 
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 
             Console.OutputEncoding = Encoding.UTF8;
             /* Change current culture
@@ -100,7 +101,7 @@ namespace HomeGenie
                         {
                             File.WriteAllText("/root/.lircrc", lircrc);
                         }
-                        catch (Exception ex) { }
+                        catch { }
                     }
                     //
                     //if (File.Exists("/usr/lib/libgdiplus.so") && !File.Exists("/usr/local/lib/libgdiplus.so"))
@@ -110,7 +111,21 @@ namespace HomeGenie
                 }
                 else // fallback (ubuntu and other 64bit debians)
                 {
-                    ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/debian64_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
+                    string v4lfile = "v4l/debian64_libCameraCaptureV4L.so.gd3";
+                    if (!File.Exists("/usr/lib/x86_64-linux-gnu/libgd.so.3"))
+                    {
+                        v4lfile = "v4l/debian64_libCameraCaptureV4L.so";
+                    }
+                    ShellCommand(
+                        "cp",
+                        " -f \"" + Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            v4lfile
+                        ) + "\" \"" + Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "libCameraCaptureV4L.so"
+                        ) + "\""
+                    );
                 }
             }
             //
@@ -178,6 +193,16 @@ namespace HomeGenie
                 process.Start();
             }
             catch { }
+        }
+
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
+            HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
+                Domain = "HomeAutomation.HomeGenie",
+                Source = "UnhandledExceptionTrapper",
+                Description = e.ExceptionObject.ToString(),
+                Property = "HomeGenie.UnhandledException",
+                Value = e.ExceptionObject.ToString()
+            });
         }
 
     }

@@ -36,7 +36,7 @@ namespace HomeGenie.Automation.Scripting
     {
         private string command = "Command.NotSelected";
         private string commandValue = "0";
-        private string parameter = "Parameter.NotSelected";
+        //private string parameter = "Parameter.NotSelected";
         private string withName = "";
         private string ofDeviceType = "";
         private string inGroup = "";
@@ -239,15 +239,18 @@ namespace HomeGenie.Automation.Scripting
         {
             return Set();
         }
+
         public ModulesManager Execute(string sparams)
         {
             return Set(sparams);
         }
+
         public ModulesManager Set()
         {
             this.commandValue = "0";
             return Set(this.commandValue);
         }
+
         public ModulesManager Set(string valueToSet)
         {
             this.commandValue = valueToSet;
@@ -256,7 +259,10 @@ namespace HomeGenie.Automation.Scripting
             {
                 foreach (var module in SelectedModules)
                 {
-                    InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/"));
+                    InterfaceControl(
+                        module,
+                        new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/")
+                    );
                     DelayIteration();
                 }
             }
@@ -268,7 +274,10 @@ namespace HomeGenie.Automation.Scripting
         {
             foreach (var module in SelectedModules)
             {
-                InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
+                InterfaceControl(
+                    module,
+                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                );
                 DelayIteration();
             }
             return this;
@@ -278,7 +287,10 @@ namespace HomeGenie.Automation.Scripting
         {
             foreach (var module in SelectedModules)
             {
-                InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
+                InterfaceControl(
+                    module,
+                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                );
                 DelayIteration();
             }
             return this;
@@ -293,11 +305,17 @@ namespace HomeGenie.Automation.Scripting
                 {
                     if (levelParameter.Value == "0")
                     {
-                        InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/"));
+                        InterfaceControl(
+                            module,
+                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                        );
                     }
                     else
                     {
-                        InterfaceControl(module, new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/"));
+                        InterfaceControl(
+                            module,
+                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                        );
                     }
                 }
                 DelayIteration();
@@ -306,6 +324,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         #region Properties
+
         public double Level
         {
             get
@@ -428,7 +447,7 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-		// TODO: deprecate this
+        // TODO: deprecate this
         public string X10RfData
         {
             get
@@ -455,7 +474,7 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-		// TODO: deprecate this
+        // TODO: deprecate this
         public string RfRemoteDataW800
         {
             get
@@ -473,13 +492,14 @@ namespace HomeGenie.Automation.Scripting
                 return rfData;
             }
         }
+
         #endregion
 
         public ModulesManager Reset()
         {
             command = "Command.NotSelected";
             commandValue = "0";
-            parameter = "Parameter.NotSelected";
+            //parameter = "Parameter.NotSelected";
             withName = "";
             ofDeviceType = "";
             inGroup = "";
@@ -500,7 +520,8 @@ namespace HomeGenie.Automation.Scripting
                 foreach (var module in SelectedModules)
                 {
                     double value = Service.Utility.ModuleParameterGet(module, parameter).DecimalValue;
-                    averageValue += value; ;
+                    averageValue += value;
+                    ;
                 }
                 averageValue = averageValue / SelectedModules.Count;
             }

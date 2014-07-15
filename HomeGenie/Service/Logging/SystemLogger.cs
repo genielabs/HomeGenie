@@ -40,7 +40,8 @@ namespace HomeGenie.Service.Logging
     {
         private static SystemLogger instance;
         private static Queue<LogEntry> logQueue;
-        private static int maxLogAge = (60 * 60 * 24) * 1; // one day
+        private static int maxLogAge = (60 * 60 * 24) * 1;
+        // one day
         private static int queueSize = 50;
         private static FileStream logStream;
         private static StreamWriter logWriter;
@@ -148,7 +149,7 @@ namespace HomeGenie.Service.Logging
             {
                 Directory.CreateDirectory(logDir);
             }
-            logStream = File.Open(logPath, FileMode.Append, FileAccess.Write);
+            logStream = File.Open(logPath, FileMode.Append, FileAccess.Write, FileShare.Read);
             logWriter = new StreamWriter(logStream);
             logWriter.WriteLine("#Version: 1.0");
             logWriter.WriteLine("#Software: " + assembly.ManifestModule.Name.Replace(".exe", "") + " " + version);
@@ -169,7 +170,9 @@ namespace HomeGenie.Service.Logging
                     logStream.Close();
                     logStream = null;
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

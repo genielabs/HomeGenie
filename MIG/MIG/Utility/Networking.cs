@@ -28,8 +28,7 @@ namespace MIG.Utility
 
         protected void FireChannelConnected()
         {
-            if (ChannelConnected != null)
-                ChannelConnected(this, EventArgs.Empty);
+            if (ChannelConnected != null) ChannelConnected(this, EventArgs.Empty);
         }
 
         protected string m_ChannelName;
@@ -38,10 +37,10 @@ namespace MIG.Utility
         /// This event occures on channel disconnection
         /// </summary>
         public event EventHandler ChannelDisconnected;
+
         protected void FireChannelDisconnected()
         {
-            if (ChannelDisconnected != null)
-                ChannelDisconnected(this, EventArgs.Empty);
+            if (ChannelDisconnected != null) ChannelDisconnected(this, EventArgs.Empty);
         }
 
         internal NetworkChannel(string channelName)
@@ -58,8 +57,11 @@ namespace MIG.Utility
         }
 
         internal abstract bool SendData(Socket socket, byte[] data);
+
         protected abstract void Stop();
+
         protected Socket m_mainSocket = null;
+
         /// <summary>
         /// This function is used to disconnect channel socket.
         /// </summary>
@@ -77,12 +79,12 @@ namespace MIG.Utility
 
 
         private AsyncCallback m_pfnCallBack;
+
         abstract protected void dataReceivedCallback(IAsyncResult asyn);
 
         protected void WaitForData(int bufferSize, Socket socket)
         {
-            if (m_pfnCallBack == null)
-                m_pfnCallBack = new AsyncCallback(dataReceivedCallback);
+            if (m_pfnCallBack == null) m_pfnCallBack = new AsyncCallback(dataReceivedCallback);
             SocketPacket theSocPkt = new SocketPacket(socket, bufferSize);
 
             socket.BeginReceive(theSocPkt.dataBuffer, 0,
@@ -96,6 +98,7 @@ namespace MIG.Utility
         /// This event occures on any exception 
         /// </summary>
         public event ErrorEventHandler ExceptionOccurred;
+
         protected void FireExceptionOccured(Exception e)
         {
             if (ExceptionOccurred != null)
@@ -126,6 +129,7 @@ namespace MIG.Utility
         {
             get { return m_ClientId; }
         }
+
         int m_ClientId;
     }
 
@@ -146,6 +150,7 @@ namespace MIG.Utility
         }
 
         byte[] m_Data;
+
         /// <summary>
         /// Gets the sent/received data byte array
         /// </summary>
@@ -153,7 +158,9 @@ namespace MIG.Utility
         {
             get { return m_Data; }
         }
+
         int m_DataLength;
+
         /// <summary>
         /// Gets the actual data buffer length. Note that it can be less than Data.Length
         /// </summary>
@@ -168,8 +175,7 @@ namespace MIG.Utility
     /// </summary>
     public class ServerDataEventArgs : DataEventArgs
     {
-        internal ServerDataEventArgs(byte[] _Data, int _DataLength, int _ClientId)
-            : base(_Data, _DataLength)
+        internal ServerDataEventArgs(byte[] _Data, int _DataLength, int _ClientId) : base(_Data, _DataLength)
         {
             m_ClientId = _ClientId;
         }
@@ -206,12 +212,18 @@ namespace MIG.Utility
     /// </summary>
     public class NetworkConnectivity
     {
-        private NetworkConnectivity() { }
+        private NetworkConnectivity()
+        {
+        }
+
         #region Configuration
+
         internal static int BufferSize = 1492;
+
         #endregion
 
         static internal List<NetworkChannel> m_Channels = new List<NetworkChannel>();
+
         /// <summary>
         /// This function is used for creation of TCP server channel.
         /// </summary>
@@ -229,6 +241,7 @@ namespace MIG.Utility
 
             return uc;
         }
+
         /// <summary>
         /// This function is used for creation of TCP server channel.
         /// </summary>
@@ -256,6 +269,7 @@ namespace MIG.Utility
         {
             writer.Close();
         }
+
         internal static NETWriter writer
         {
             get { return NETWriter.GetNETWriter(); }
@@ -317,22 +331,19 @@ namespace MIG.Utility
 
         private bool rWrite(NetworkChannel channel, Socket socket, byte[] data)
         {
-            if (socket == null)
-                return false;
+            if (socket == null) return false;
 
-            if (socket.SocketType == SocketType.Stream && !socket.Connected)
-                return false;
+            if (socket.SocketType == SocketType.Stream && !socket.Connected) return false;
 
             return channel.SendData(socket, data);
         }
 
         private void NetWrite()
         {
-            WaitHandle[] wait = new WaitHandle[]
-			{
-				exitEvent,
-				m_MsgQueue
-			};
+            WaitHandle[] wait = new WaitHandle[] {
+                exitEvent,
+                m_MsgQueue
+            };
 
             bool bCont = true;
             while (bCont)
@@ -340,22 +351,20 @@ namespace MIG.Utility
                 int res = WaitHandle.WaitAny(wait);
                 switch (res)
                 {
-                    case 0:
-                        bCont = false;
+                case 0:
+                    bCont = false;
 
-                        for (int i = 0; i < NetworkConnectivity.m_Channels.Count; i++)
-                        {
-                            NetworkChannel ch = (NetworkChannel)NetworkConnectivity.m_Channels[i];
-                            if (ch != null)
-                                ch.Disconnect();
-                        }
-                        NetworkConnectivity.m_Channels.Clear();
-                        break;
-                    case 1:
-                        NetQueuedMessage ntcpm = m_MsgQueue.Dequeue(100) as NetQueuedMessage;
-                        if (ntcpm != null && ntcpm.m_Socket != null)
-                            rWrite(ntcpm.m_Channel, ntcpm.m_Socket, ntcpm.Data);
-                        break;
+                    for (int i = 0; i < NetworkConnectivity.m_Channels.Count; i++)
+                    {
+                        NetworkChannel ch = (NetworkChannel)NetworkConnectivity.m_Channels[ i ];
+                        if (ch != null) ch.Disconnect();
+                    }
+                    NetworkConnectivity.m_Channels.Clear();
+                    break;
+                case 1:
+                    NetQueuedMessage ntcpm = m_MsgQueue.Dequeue(100) as NetQueuedMessage;
+                    if (ntcpm != null && ntcpm.m_Socket != null) rWrite(ntcpm.m_Channel, ntcpm.m_Socket, ntcpm.Data);
+                    break;
                 }
             }
 
@@ -368,6 +377,7 @@ namespace MIG.Utility
         internal Socket m_Socket = null;
         internal NetworkChannel m_Channel = null;
         internal byte[] Data;
+
         internal NetQueuedMessage(NetworkChannel channel, Socket socket, byte[] data)
         {
             m_Socket = socket;
@@ -390,7 +400,10 @@ namespace MIG.Utility
             dataBuffer = new byte[bufferSize];
         }
 
-        private SocketPacket() { }
+        private SocketPacket()
+        {
+        }
+
         internal Socket m_currentSocket;
         internal byte[] dataBuffer = new byte[NetworkConnectivity.BufferSize];
     }
@@ -401,7 +414,11 @@ namespace MIG.Utility
     public class UDPChannel : NetworkChannel
     {
         #region Constructor
-        internal UDPChannel(string _ChannelName) : base(_ChannelName) { }
+
+        internal UDPChannel(string _ChannelName) : base(_ChannelName)
+        {
+        }
+
         #endregion
 
         IPEndPoint EPCast = null;
@@ -449,7 +466,14 @@ namespace MIG.Utility
                     IPAddress ip = IPAddress.Parse(castGroupIp);
 
                     EPCast = new IPEndPoint(ip, port);
-                    m_mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(ip, IPAddress.Any));
+                    m_mainSocket.SetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.AddMembership,
+                        new MulticastOption(
+                            ip,
+                            IPAddress.Any
+                        )
+                    );
                 }
 
                 FireChannelConnected();
@@ -467,6 +491,7 @@ namespace MIG.Utility
         #endregion
 
         #region Disconnection
+
         protected override void Stop()
         {
             try
@@ -491,22 +516,22 @@ namespace MIG.Utility
                 FireChannelDisconnected();
             }
         }
+
         #endregion
 
         #region Send
+
         /// <summary>
         /// This function is used to start asyncronious sending operation to remote machine
         /// </summary>
         /// <param name="data">Buffer to send</param>
         public void Send(byte[] data)
         {
-            if (data == null)
-                return;
+            if (data == null) return;
 
             lock (this)
             {
-                if (m_mainSocket != null)
-                    NetworkConnectivity.writer.Write(this, m_mainSocket, data);
+                if (m_mainSocket != null) NetworkConnectivity.writer.Write(this, m_mainSocket, data);
             }
         }
 
@@ -526,8 +551,7 @@ namespace MIG.Utility
                     res = socket.SendTo(data, EPCast);
                 }
 
-                if (DataSent != null)
-                    DataSent(this, new DataEventArgs(data, res));
+                if (DataSent != null) DataSent(this, new DataEventArgs(data, res));
 
                 return true;
             }
@@ -546,6 +570,7 @@ namespace MIG.Utility
         #endregion
 
         #region Receive
+
         /// <summary>
         /// This function is used to start asyncronious receive operation from remote machine
         /// </summary>
@@ -576,8 +601,7 @@ namespace MIG.Utility
                     {
                         SocketPacket socketData = (SocketPacket)asyn.AsyncState;
                         int res = socketData.m_currentSocket.EndReceive(asyn);
-                        if (DataReceived != null)
-                            DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                        if (DataReceived != null) DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
                     }
                 }
             }
@@ -613,11 +637,17 @@ namespace MIG.Utility
     public class TCPServerChannel : NetworkChannel
     {
         #region Configurations
+
         static int Backlog = 100;
+
         #endregion
-        internal TCPServerChannel(string _ChannelName) : base(_ChannelName) { }
+
+        internal TCPServerChannel(string _ChannelName) : base(_ChannelName)
+        {
+        }
 
         #region Events
+
         /// <summary>
         /// This event occures on server accepted connection from client
         /// </summary>
@@ -636,11 +666,13 @@ namespace MIG.Utility
         /// This event occures when asynchronious send operation is completed
         /// </summary>
         public event ServerDataEventHandler DataSent;
+
         #endregion
 
         System.Collections.Hashtable m_workerSocketList = new System.Collections.Hashtable();
 
         #region Connection
+
         /// <summary>
         /// Gets a value indicating whether a specific client is connected to the server
         /// </summary>
@@ -648,13 +680,11 @@ namespace MIG.Utility
         /// <returns>true if the client is connected as of the most recent operation; otherwise, false</returns>
         public bool Connected(int clientId)
         {
-            if (m_mainSocket == null || !m_mainSocket.Connected)
-                return false;
+            if (m_mainSocket == null || !m_mainSocket.Connected) return false;
 
-            if (!m_workerSocketList.ContainsKey(clientId))
-                return false;
+            if (!m_workerSocketList.ContainsKey(clientId)) return false;
 
-            Socket socket = (Socket)m_workerSocketList[clientId];
+            Socket socket = (Socket)m_workerSocketList[ clientId ];
 
             return socket.Connected;
         }
@@ -699,8 +729,7 @@ namespace MIG.Utility
                 Socket workerSocket = m_mainSocket.EndAccept(asyn);
                 m_workerSocketList.Add(workerSocket.GetHashCode(), workerSocket);
 
-                if (ChannelClientConnected != null)
-                    ChannelClientConnected(this, new ServerConnectionEventArgs(workerSocket.GetHashCode()));
+                if (ChannelClientConnected != null) ChannelClientConnected(this, new ServerConnectionEventArgs(workerSocket.GetHashCode()));
 
                 //TBD: Send welcome message
 
@@ -729,6 +758,7 @@ namespace MIG.Utility
                 FireExceptionOccured(ex);
             }
         }
+
         #endregion
 
         #region Disconnection
@@ -739,20 +769,17 @@ namespace MIG.Utility
         /// <param name="clientId">Client ID</param>
         public void DisconnectClient(int clientId)
         {
-            if (m_mainSocket == null || !m_mainSocket.Connected)
-                return;
+            if (m_mainSocket == null || !m_mainSocket.Connected) return;
 
-            if (!m_workerSocketList.ContainsKey(clientId))
-                return;
+            if (!m_workerSocketList.ContainsKey(clientId)) return;
 
             try
             {
-                Socket socket = (Socket)m_workerSocketList[clientId];
+                Socket socket = (Socket)m_workerSocketList[ clientId ];
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
                 m_workerSocketList.Remove(clientId);
-                if (ChannelClientDisconnected != null)
-                    ChannelClientDisconnected(this, new ServerConnectionEventArgs(clientId));
+                if (ChannelClientDisconnected != null) ChannelClientDisconnected(this, new ServerConnectionEventArgs(clientId));
             }
             catch (Exception ex)
             {
@@ -778,8 +805,7 @@ namespace MIG.Utility
                         socket.Close();
                         //NetworkConnectivity.writer.Close();
                     }
-                    if (ChannelClientDisconnected != null)
-                        ChannelClientDisconnected(this, new ServerConnectionEventArgs(id));
+                    if (ChannelClientDisconnected != null) ChannelClientDisconnected(this, new ServerConnectionEventArgs(id));
                 }
                 catch (Exception ex)
                 {
@@ -796,6 +822,7 @@ namespace MIG.Utility
         #endregion
 
         #region Send
+
         /// <summary>
         /// This function is used to start asyncronious sending operation 
         /// to specific remote client by its ID
@@ -805,14 +832,12 @@ namespace MIG.Utility
         /// <returns>true, if the client exists; otherwise, false </returns>
         public bool Send(byte[] data, int clientId)
         {
-            if (!m_workerSocketList.ContainsKey(clientId))
-                return false;
-            if (data == null)
-                return false;
+            if (!m_workerSocketList.ContainsKey(clientId)) return false;
+            if (data == null) return false;
 
             lock (this)
             {
-                Socket socket = (Socket)m_workerSocketList[clientId];
+                Socket socket = (Socket)m_workerSocketList[ clientId ];
                 NetworkConnectivity.writer.Write(this, socket, data);
             }
             return true;
@@ -839,30 +864,27 @@ namespace MIG.Utility
                     {
                         res = socket.Send(data);
                     }
-                    if (DataSent != null)
-                        DataSent(this, new ServerDataEventArgs(data, res, socket.GetHashCode()));
+                    if (DataSent != null) DataSent(this, new ServerDataEventArgs(data, res, socket.GetHashCode()));
                 }
 
                 return true;
             }
-
             catch (SocketException sex)
             {
                 if (!socket.Connected)
                 {
-                    if (ChannelClientDisconnected != null)
-                        ChannelClientDisconnected(this, new ServerConnectionEventArgs(socket.GetHashCode()));
+                    if (ChannelClientDisconnected != null) ChannelClientDisconnected(this, new ServerConnectionEventArgs(socket.GetHashCode()));
                     m_workerSocketList.Remove(socket.GetHashCode());
                     try
                     {
                         socket.Shutdown(SocketShutdown.Both);
                         socket.Close();
                     }
-                    catch (Exception ex) { }
+                    catch
+                    {
+                    }
                 }
-
-                else
-                    FireExceptionOccured(sex);
+                else FireExceptionOccured(sex);
             }
             catch (Exception ex)
             {
@@ -875,6 +897,7 @@ namespace MIG.Utility
         #endregion
 
         #region Receive
+
         /// <summary>
         /// This function is used to start asynchronious receive operation from remote client 
         /// by its ID
@@ -886,7 +909,7 @@ namespace MIG.Utility
         {
             if (m_workerSocketList.ContainsKey(clientId))
             {
-                Socket socket = (Socket)m_workerSocketList[clientId];
+                Socket socket = (Socket)m_workerSocketList[ clientId ];
 
                 try
                 {
@@ -898,14 +921,15 @@ namespace MIG.Utility
                     if (!socket.Connected)
                     {
                         m_workerSocketList.Remove(socket.GetHashCode());
-                        if (ChannelClientDisconnected != null)
-                            ChannelClientDisconnected(this, new ServerConnectionEventArgs(socket.GetHashCode()));
+                        if (ChannelClientDisconnected != null) ChannelClientDisconnected(this, new ServerConnectionEventArgs(socket.GetHashCode()));
                         try
                         {
                             socket.Shutdown(SocketShutdown.Both);
                             socket.Close();
                         }
-                        catch (Exception ex) { }
+                        catch
+                        {
+                        }
                     }
                     else
                     {
@@ -930,12 +954,10 @@ namespace MIG.Utility
                 lock (this)
                 {
                     int res = socketData.m_currentSocket.EndReceive(asyn);
-                    if (DataReceived != null)
-                        DataReceived(this, new ServerDataEventArgs(socketData.dataBuffer, res,
+                    if (DataReceived != null) DataReceived(this, new ServerDataEventArgs(socketData.dataBuffer, res,
                             socketData.m_currentSocket.GetHashCode()));
                 }
             }
-
             catch (ObjectDisposedException ode)
             {
                 //Console.WriteLine(ode.ObjectName);
@@ -947,8 +969,10 @@ namespace MIG.Utility
                 if (sex.ErrorCode == 10054) // Error code for Connection reset by peer
                 {
                     m_workerSocketList.Remove(socketData.m_currentSocket);
-                    if (ChannelClientDisconnected != null)
-                        ChannelClientDisconnected(this, new ServerConnectionEventArgs(socketData.m_currentSocket.GetHashCode()));
+                    if (ChannelClientDisconnected != null) ChannelClientDisconnected(
+                            this,
+                            new ServerConnectionEventArgs(socketData.m_currentSocket.GetHashCode())
+                        );
                 }
                 else
                 {
@@ -964,6 +988,7 @@ namespace MIG.Utility
                 FireExceptionOccured(e);
             }
         }
+
         #endregion
 
         /// <summary>
@@ -975,8 +1000,7 @@ namespace MIG.Utility
             string ret = "";
             ret = "TCP Channel ";
             ret += "server ";
-            if (m_mainSocket.Connected)
-                ret += "Connected. " + m_mainSocket.LocalEndPoint.ToString();
+            if (m_mainSocket.Connected) ret += "Connected. " + m_mainSocket.LocalEndPoint.ToString();
             return ret;
         }
     }
@@ -986,9 +1010,12 @@ namespace MIG.Utility
     /// </summary>
     public class TCPClientChannel : NetworkChannel
     {
-        internal TCPClientChannel(string _ChannelName) : base(_ChannelName) { }
+        internal TCPClientChannel(string _ChannelName) : base(_ChannelName)
+        {
+        }
 
         #region Events
+
         /// <summary>
         /// This event occures when asynchronious receive operation is completed
         /// </summary>
@@ -1010,8 +1037,7 @@ namespace MIG.Utility
         {
             get
             {
-                if (m_mainSocket == null)
-                    return false;
+                if (m_mainSocket == null) return false;
 
                 return m_mainSocket.Connected;
             }
@@ -1028,8 +1054,7 @@ namespace MIG.Utility
             {
                 lock (this)
                 {
-                    if (m_mainSocket == null)
-                        m_mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    if (m_mainSocket == null) m_mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);
                     // Connect to the remote host
                     m_mainSocket.BeginConnect(ipEnd, new AsyncCallback(connectedCallback), m_mainSocket);
@@ -1052,8 +1077,7 @@ namespace MIG.Utility
                 Socket socket = (Socket)asyn.AsyncState;
                 socket.EndConnect(asyn);
 
-                if (socket.Connected)
-                    FireChannelConnected();
+                if (socket.Connected) FireChannelConnected();
             }
             catch (SocketException sex)
             {
@@ -1064,9 +1088,11 @@ namespace MIG.Utility
                 FireExceptionOccured(ex);
             }
         }
+
         #endregion
 
         #region Disconnection
+
         protected override void Stop()
         {
             lock (this)
@@ -1078,7 +1104,7 @@ namespace MIG.Utility
                         m_mainSocket.Shutdown(SocketShutdown.Both);
                         m_mainSocket.Close();
                     }
-                    catch (Exception ex)
+                    catch
                     {
 
                     }
@@ -1087,9 +1113,11 @@ namespace MIG.Utility
             }
             FireChannelDisconnected();
         }
+
         #endregion
 
         #region Send
+
         /// <summary>
         /// This function is used to start asyncronious sending operation to remote machine
         /// </summary>
@@ -1097,10 +1125,8 @@ namespace MIG.Utility
         /// <returns>true if main socket is connected; otherwise false</returns>
         public bool Send(byte[] data)
         {
-            if (m_mainSocket == null || !m_mainSocket.Connected)
-                return false;
-            if (data == null)
-                return false;
+            if (m_mainSocket == null || !m_mainSocket.Connected) return false;
+            if (data == null) return false;
 
             lock (this)
             {
@@ -1120,8 +1146,7 @@ namespace MIG.Utility
                     {
                         res = m_mainSocket.Send(data);
                     }
-                    if (DataSent != null)
-                        DataSent(this, new DataEventArgs(data, res));
+                    if (DataSent != null) DataSent(this, new DataEventArgs(data, res));
 
                     return true;
                 }
@@ -1135,8 +1160,7 @@ namespace MIG.Utility
                     m_mainSocket = null;
                     FireChannelDisconnected();
                 }
-                else
-                    FireExceptionOccured(sex);
+                else FireExceptionOccured(sex);
             }
             catch (Exception ex)
             {
@@ -1148,6 +1172,7 @@ namespace MIG.Utility
         #endregion
 
         #region Receive
+
         /// <summary>
         /// This function is used to start asyncronious receive operation from remote machine
         /// </summary>
@@ -1155,8 +1180,7 @@ namespace MIG.Utility
         /// <returns>true if main socket is connected; otherwise false</returns>
         public bool Receive(int dataSize)
         {
-            if (m_mainSocket == null || !m_mainSocket.Connected || dataSize < 0)
-                return false;
+            if (m_mainSocket == null || !m_mainSocket.Connected || dataSize < 0) return false;
 
             try
             {
@@ -1171,8 +1195,7 @@ namespace MIG.Utility
                     m_mainSocket.Close();
                     FireChannelDisconnected();
                 }
-                else
-                    FireExceptionOccured(sex);
+                else FireExceptionOccured(sex);
             }
             catch (Exception ex)
             {
@@ -1190,11 +1213,9 @@ namespace MIG.Utility
                 {
                     SocketPacket socketData = (SocketPacket)asyn.AsyncState;
                     int res = socketData.m_currentSocket.EndReceive(asyn);
-                    if (DataReceived != null)
-                        DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                    if (DataReceived != null) DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
                 }
             }
-
             catch (ObjectDisposedException ode)
             {
                 //Console.WriteLine(ode.ObjectName);
@@ -1206,10 +1227,8 @@ namespace MIG.Utility
                 //LOG: Socket Exception
                 //Console.WriteLine(sex.Message);
                 //Console.WriteLine(sex.StackTrace);
-                if (!m_mainSocket.Connected)
-                    FireChannelDisconnected();
-                else
-                    FireExceptionOccured(sex);
+                if (!m_mainSocket.Connected) FireChannelDisconnected();
+                else FireExceptionOccured(sex);
             }
             catch (Exception e)
             {
@@ -1217,6 +1236,7 @@ namespace MIG.Utility
                 FireExceptionOccured(e);
             }
         }
+
         #endregion
 
 
@@ -1230,10 +1250,8 @@ namespace MIG.Utility
             ret = "TCP Channel ";
             ret += "client ";
 
-            if (Connected)
-                ret += "Connected. " + m_mainSocket.RemoteEndPoint.ToString();
-            else
-                ret += "Disconnected";
+            if (Connected) ret += "Connected. " + m_mainSocket.RemoteEndPoint.ToString();
+            else ret += "Disconnected";
 
             return ret;
         }
@@ -1278,7 +1296,7 @@ namespace MIG.Utility
                 {
                     m_WrappedQueue.Enqueue(p_Item);
                 }
-                catch (Exception e)
+                catch
                 {
                     //Console.WriteLine("Enqueue throwed exception,Queue size={0}", m_WrappedQueue.Count);
                     //Console.WriteLine(e.Message);
@@ -1287,8 +1305,7 @@ namespace MIG.Utility
             }
 
             //set event only if it wasn't set before
-            if (bWasEmpty)
-                m_Event.Set();
+            if (bWasEmpty) m_Event.Set();
         }
 
         /// <summary>
@@ -1305,19 +1322,17 @@ namespace MIG.Utility
             //Note: thread starvation is possible
             object item = null;
 
-            for (; ; )
+            for (; ;)
             {
                 //optimistic approach - get something from the queue
                 item = AttemptDequeue();
 
                 //if succeded - we are done
-                if (item != null)
-                    break;
+                if (item != null) break;
 
                 //if not - wait for event.
                 //Note: queue isn't locked when we enter wait state
-                if (!m_Event.WaitOne(p_Timeout, false))
-                    break;
+                if (!m_Event.WaitOne(p_Timeout, false)) break;
 
                 //We were waked up, so there is something in queue.
                 //Although event is signalled, queue may be empty already,
@@ -1434,13 +1449,11 @@ namespace MIG.Utility
                     {
                         m_Event.Reset();
                     }
-                    else
-                        bNotEmpty = true;
+                    else bNotEmpty = true;
                 }
             }
 
-            if (bNotEmpty)
-                m_Event.Set();
+            if (bNotEmpty) m_Event.Set();
 
             return item;
         }

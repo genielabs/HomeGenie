@@ -235,9 +235,15 @@ namespace HomeGenie.Service
             UpdateModulesDatabase();
             systemConfiguration.Update();
             //
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
-            if (masterControlProgram != null) masterControlProgram.StopEngine();
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPING");
             if (migService != null) migService.StopService();
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPING");
+            if (masterControlProgram != null) masterControlProgram.StopEngine();
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPED");
             //
             SystemLogger.Instance.Dispose();
         }

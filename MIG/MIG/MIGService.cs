@@ -106,22 +106,25 @@ namespace MIG
         public Dictionary<string, MIGInterface> Interfaces; // TODO: this should be read-only, so implement pvt member _interfaces
 
         private WebServiceGateway webGateway;
-        private TcpSocketGateway tcpGateway;
+        //private TcpSocketGateway tcpGateway;
 
-        private int tcpGatewayPort = 4502;
+        //private int tcpGatewayPort = 4502;
         private Encoding defaultWebFileEncoding = Encoding.GetEncoding("ISO-8859-1");
 
         private WebServiceGatewayConfiguration webServiceConfig;
+		// TODO: move webFileCache to WebServiceGateway.cs
         private List<WebFileCache> webFileCache = new List<WebFileCache>();
 
         #region Lifecycle
         public MIGService()
         {
-            webGateway = new WebServiceGateway();
-            tcpGateway = new TcpSocketGateway();
-            //
             Interfaces = new Dictionary<string, MIGInterface>();
             //
+            //tcpGateway = new TcpSocketGateway();
+            //tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
+            //
+            webGateway = new WebServiceGateway();
+            webGateway.ProcessRequest += webGateway_ProcessRequest;
             webServiceConfig = new WebServiceGatewayConfiguration()
             {
                 Port = 80,
@@ -166,19 +169,17 @@ namespace MIG
                 // TODO: collects gateways to a List<MIGGateway> and expose it by public member Gateways
                 //
                 webGateway.Configure(webServiceConfig);
-                webGateway.ProcessRequest += webGateway_ProcessRequest;
                 webGateway.Start();
                 //
-                tcpGateway.Configure(new TcpSocketGatewayConfiguration()
-                {
-                    Port = tcpGatewayPort
-                });
-                tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
-                tcpGateway.Start();
+                //tcpGateway.Configure(new TcpSocketGatewayConfiguration()
+                //{
+                //    Port = tcpGatewayPort
+                //});
+                //tcpGateway.Start();
                 //
                 success = true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: add error logging 
             }
@@ -198,7 +199,7 @@ namespace MIG
                 migInterface.Disconnect();
             }
             webGateway.Stop();
-            //_tcpgateway.Stop();
+            //tcpGateway.Stop();
         }
         #endregion
 
@@ -217,6 +218,7 @@ namespace MIG
 
         #region TcpGateway
 
+        /*
         public void ConfigureTcpGateway(int port)
         {
             tcpGatewayPort = port;
@@ -230,12 +232,13 @@ namespace MIG
 
             var encoding = new System.Text.UTF8Encoding();
             string commandLine = encoding.GetString(data).Trim(new char[] { '\0', ' ' });
-            // TODO: 
-            // parse command line as <domain>/<target>/<command>/<parameter>[/<parameter>]
-            // or as XML serialized instance of GatewayClientRequest
-            // then deliver de-serialized command by firing  InterfaceRequestReceived
-            // and route to the interface with requested domain
+
+            // TODO: parse command line as <domain>/<target>/<command>/<parameter>[/<parameter>]
+            // TODO: or as XML serialized instance of GatewayClientRequest
+            // TODO: then deliver de-serialized command by firing  InterfaceRequestReceived
+            // TODO: and route to the interface with requested domain
         }
+        */
 
         #endregion
 
@@ -250,7 +253,20 @@ namespace MIG
             webServiceConfig.Password = adminPasswordHash;
         }
 
-        public void ResetWebFileCache()
+		public bool IsWebCacheEnabled
+		{
+			get { return webServiceConfig.CacheEnable; }
+			set {
+				if (value) {
+					webServiceConfig.CacheEnable = true;
+				} else {
+					webServiceConfig.CacheEnable = false;
+					webFileCache.Clear();
+				}
+			}
+		}
+
+        public void ClearWebCache()
         {
             webFileCache.Clear();
         }
@@ -388,7 +404,7 @@ namespace MIG
                                                 body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
                                             }
                                         }
-                                        catch (Exception e)
+                                        catch
                                         {
                                             body = ls + "<h5 style=\"color:red\">Error processing '" + cs.Replace("{", "[").Replace("}", "]") + "'</h5>" + rs;
                                         }
@@ -397,14 +413,14 @@ namespace MIG
                                 }
                             } while (tagFound); // pre processor tag found
                             //
-//                            if (!(requestedFile.Contains("/widgets/") || requestedFile.Contains("\\widgets\\")))
-//                            {
-//                                PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
-//                            }
+							if (webServiceConfig.CacheEnable)
+                            {
+                               PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
+                            }
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }
-                        catch (Exception e)
+                        catch
                         {
                             // TODO: Handle this exception
                         }

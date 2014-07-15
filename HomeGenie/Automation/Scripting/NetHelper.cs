@@ -29,6 +29,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+
 //using Microsoft.Runtime;
 
 using Newtonsoft.Json;
@@ -41,6 +42,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using HomeGenie.Service.Constants;
+using Nmqtt;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -51,15 +53,19 @@ namespace HomeGenie.Automation.Scripting
         private string method = "post";
         private string putData = "";
         private string mailService = "";
-        private int mailPort = -1; // unset
-        private int mailSsl = -1; // unset
+        private int mailPort = -1;
+        // unset
+        private int mailSsl = -1;
+        // unset
         private NameValueCollection customHeaders = new NameValueCollection();
         private NetworkCredential networkCredential = null;
         private string mailFrom = "homegenie@localhost";
-        private string mailTo = "";
+        //private string mailTo = "";
         private string mailBody = "";
         private string mailSubject = "";
         private Dictionary<string, byte[]> attachments = new Dictionary<string, byte[]>();
+
+        private MqttClient mqttClient = null;
 
         private HomeGenieService homegenie;
 
@@ -69,16 +75,25 @@ namespace HomeGenie.Automation.Scripting
             homegenie = hg;
         }
 
-        public static bool Validator(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        public static bool Validator(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }
+
+
+        #region SMTP client
 
         public NetHelper MailService(string smtpServer)
         {
             this.mailService = smtpServer;
             return this;
         }
+
         public NetHelper MailService(string smtpServer, int port, bool useSsl)
         {
             this.mailPort = port;
@@ -111,19 +126,23 @@ namespace HomeGenie.Automation.Scripting
         {
             this.mailFrom = "";
             // this is a System Parameter
-            var spEmailSender = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.Sender"; });
+            var spEmailSender = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+            {
+                return mp.Name == "Messaging.Email.Sender";
+            });
             if (spEmailSender != null && spEmailSender.Value != "")
             {
                 this.mailFrom = spEmailSender.Value;
             }
             return SendMessage(this.mailFrom, recipients, subject, messageText);
         }
+
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
             try
             {
                 this.mailFrom = from;
-                this.mailTo = recipients;
+                //this.mailTo = recipients;
                 this.mailSubject = subject;
                 this.mailBody = messageText;
                 //
@@ -140,14 +159,20 @@ namespace HomeGenie.Automation.Scripting
                     //
                     for (int a = 0; a < attachments.Count; a++)
                     {
-                        var attachment = new Attachment(new MemoryStream(attachments.ElementAt(a).Value), attachments.ElementAt(a).Key);
+                        var attachment = new Attachment(
+                                             new MemoryStream(attachments.ElementAt(a).Value),
+                                             attachments.ElementAt(a).Key
+                                         );
                         message.Attachments.Add(attachment);
                     }
                     //
                     if (this.mailService == "")
                     {
                         // this is a System Parameter
-                        var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpServer"; });
+                        var spSmtpServer = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpServer";
+                        });
                         if (spSmtpServer != null)
                         {
                             this.mailService = spSmtpServer.Value;
@@ -156,7 +181,10 @@ namespace HomeGenie.Automation.Scripting
                     if (this.mailPort == -1)
                     {
                         // this is a System Parameter
-                        var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPort"; });
+                        var spSmtpPort = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpPort";
+                        });
                         if (spSmtpPort != null && spSmtpPort.DecimalValue > 0)
                         {
                             this.mailPort = (int)spSmtpPort.DecimalValue;
@@ -165,7 +193,10 @@ namespace HomeGenie.Automation.Scripting
                     if (this.mailSsl == -1)
                     {
                         // this is a System Parameter
-                        var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUseSsl"; });
+                        var spSmtpUseSsl = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpUseSsl";
+                        });
                         if (spSmtpUseSsl != null && spSmtpUseSsl.Value.ToLower() == "true")
                         {
                             this.mailSsl = 1;
@@ -175,7 +206,10 @@ namespace HomeGenie.Automation.Scripting
                     {
                         var username = "";
                         // this is a System Parameter
-                        var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpUserName"; });
+                        var spSmtpUserName = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                        {
+                            return mp.Name == "Messaging.Email.SmtpUserName";
+                        });
                         if (spSmtpUserName != null)
                         {
                             username = spSmtpUserName.Value;
@@ -184,7 +218,10 @@ namespace HomeGenie.Automation.Scripting
                         {
                             var password = "";
                             // this is a System Parameter
-                            var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == "Messaging.Email.SmtpPassword"; });
+                            var spSmtpPassword = homegenie.Parameters.Find(delegate(ModuleParameter mp)
+                            {
+                                return mp.Name == "Messaging.Email.SmtpPassword";
+                            });
                             if (spSmtpPassword != null)
                             {
                                 password = spSmtpPassword.Value;
@@ -213,11 +250,23 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie_Automation,
+                    this.GetType().Name,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
                 return false;
             }
             return true;
         }
+
+        #endregion
+
+
+        #region HTTP client
+
         public NetHelper WebService(string serviceurl)
         {
             this.method = "";
@@ -225,12 +274,14 @@ namespace HomeGenie.Automation.Scripting
             this.webServiceUrl = serviceurl;
             return this;
         }
+
         public NetHelper Put(string data)
         {
             this.method = "PUT";
             this.putData = data;
             return this;
         }
+
         public NetHelper Post(string data)
         {
             this.method = "POST";
@@ -272,7 +323,13 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.GetType().Name, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie_Automation,
+                    this.GetType().Name,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             return returnvalue;
         }
@@ -324,9 +381,16 @@ namespace HomeGenie.Automation.Scripting
                     responseBytes = webClient.DownloadData(this.webServiceUrl);
                 }
             }
-            catch { }
+            catch
+            {
+            }
             return responseBytes;
         }
+
+        #endregion
+
+
+        #region Ping client
 
         public bool Ping(string ipAddress)
         {
@@ -352,6 +416,43 @@ namespace HomeGenie.Automation.Scripting
             return success;
         }
 
+        #endregion
+
+
+        #region MQTT client
+
+        public NetHelper MqttService(string server, int port, string topic)
+        {
+            mqttClient = new MqttClient (server, port, topic);
+            mqttClient.Connect();
+            return this;
+        }
+
+        public NetHelper MqttService(string server, int port, string username, string password, string topic)
+        {
+            mqttClient = new MqttClient (server, port, topic);
+            mqttClient.Connect(username, password);
+            return this;
+        }
+
+        public NetHelper Subscribe(string topic, Action<string,string> callback)
+        {
+            mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
+                //.ObserveOn(System.Threading.SynchronizationContext.Current)
+                .Subscribe(msg => { 
+                    callback(msg.Topic, msg.Payload);
+                    //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
+                });
+            return this;
+        }
+
+        public NetHelper Publish(string topic, string message)
+        {
+            mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            return this;
+        }
+
+        #endregion
 
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
@@ -368,9 +469,14 @@ namespace HomeGenie.Automation.Scripting
             this.webServiceUrl = "";
             this.mailService = "localhost";
             this.networkCredential = null;
-            this.mailTo = "";
+            //this.mailTo = "";
             this.mailBody = "";
             this.mailSubject = "";
+            //
+            if (this.mqttClient != null)
+            {
+                try { this.mqttClient.Dispose(); } catch { }
+            }
         }
 
 

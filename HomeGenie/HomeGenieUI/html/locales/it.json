@@ -258,7 +258,7 @@
 	"configure_interfaces_camera": 
 		 "Camera Device",
 	"configure_interfaces_cameradesc": 
-		 "Works with any Video4Linux compatible device on <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
+		 "Works with any Video4Linux compatible device (x64 Ubuntu and Raspberry Pi only).",
 	"configure_interfaces_cameraport": 
 		 "Device Port",
 	"configure_interfaces_raspigpio": 

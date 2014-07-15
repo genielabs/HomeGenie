@@ -40,6 +40,7 @@ namespace MIG.Gateways
         public bool UseSSL = false;
         public string Password;
         public int SslPort;
+        public bool CacheEnable;
     }
 
     class WebServiceGatewayRequest
@@ -67,6 +68,7 @@ namespace MIG.Gateways
         }
 
         public HttpListener Listener { get { return listener; } }
+
         public AutoResetEvent ListenForNextRequest { get { return listenForNextRequest; } }
     }
 
@@ -77,7 +79,7 @@ namespace MIG.Gateways
         private ManualResetEvent stopEvent = new ManualResetEvent(false);
         //
         private string servicePassword;
-        private string homePath;
+        //private string homePath;
         private string baseUrl;
         private string[] bindingPrefixes;
 
@@ -88,7 +90,7 @@ namespace MIG.Gateways
         public void Configure(object gwConfiguration)
         {
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
-            homePath = config.HomePath;
+            //homePath = config.HomePath;
             baseUrl = config.BaseUrl;
             //bindingPrefixes = new string[2] { 
             //    String.Format(@"http://+:{0}/", config.Port),
@@ -156,7 +158,7 @@ namespace MIG.Gateways
                 //
                 response.KeepAlive = false;
                 //
-                bool isAuthenticated = (request.Headers["Authorization"] != null);
+                bool isAuthenticated = (request.Headers[ "Authorization" ] != null);
                 //
                 if (servicePassword == "" || isAuthenticated) //request.IsAuthenticated)
                 {
@@ -176,10 +178,10 @@ namespace MIG.Gateways
                         //identity = (HttpListenerBasicIdentity)context.User.Identity;
                         // authuser = identity.Name;
                         // authpass = identity.Password;
-                        byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers["Authorization"].Split(' ')[1]);
+                        byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers[ "Authorization" ].Split(' ')[ 1 ]);
                         string authtoken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
-                        authUser = authtoken.Split(':')[0];
-                        authPass = authtoken.Split(':')[1];
+                        authUser = authtoken.Split(':')[ 0 ];
+                        authPass = authtoken.Split(':')[ 1 ];
                     }
                     //
                     //TODO: complete authorization (for now with one fixed user 'admin', add multiuser support)
@@ -246,11 +248,17 @@ namespace MIG.Gateways
             {
                 response.OutputStream.Close();
                 response.Close();
-            } catch { }
+            }
+            catch
+            {
+            }
             try
             {
                 request.InputStream.Close();
-            } catch { }
+            }
+            catch
+            {
+            }
         }
 
         private void ListenAsynchronously(IEnumerable<string> prefixes)

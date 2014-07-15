@@ -42,10 +42,11 @@ namespace HomeGenie.Automation.Scripting
         private int myProgramId = -1;
         private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
 
-        private string parameter = "";
-        private string value = "";
+        //private string parameter = "";
+        //private string value = "";
 
-        private bool initialized = false; // if setup has been done
+        private bool initialized = false;
+        // if setup has been done
 
         public ProgramHelper(HomeGenieService hg, int programId)
         {
@@ -185,15 +186,30 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        public ProgramHelper AddFeature(string forDomains, string forModuleTypes, string propertyName, string description, string type) // default type = checkbox
+        public ProgramHelper AddFeature(
+            string forDomains,
+            string forModuleTypes,
+            string propertyName,
+            string description,
+            string type
+        ) // default type = checkbox
         {
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             ProgramFeature feature = null;
             //
-            try { feature = program.Features.Find(f => f.Property == propertyName); }
+            try
+            {
+                feature = program.Features.Find(f => f.Property == propertyName);
+            }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    myProgramDomain,
+                    myProgramId.ToString(),
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             //
             if (feature == null)
@@ -214,10 +230,19 @@ namespace HomeGenie.Automation.Scripting
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             ProgramFeature feature = null;
             //
-            try { feature = program.Features.Find(f => f.Property == propertyName); }
-            catch (Exception ex) 
+            try
             {
-                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                feature = program.Features.Find(f => f.Property == propertyName);
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    myProgramDomain,
+                    myProgramId.ToString(),
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             //
             return feature;
@@ -241,7 +266,12 @@ namespace HomeGenie.Automation.Scripting
         /// <param name='description'>
         /// Description for this checkbox option
         /// </param>
-        public ProgramHelper AddFeature(string forDomains, string forModuleTypes, string propertyName, string description)
+        public ProgramHelper AddFeature(
+            string forDomains,
+            string forModuleTypes,
+            string propertyName,
+            string description
+        )
         {
             return AddFeature(forDomains, forModuleTypes, propertyName, description, "checkbox");
         }
@@ -270,7 +300,12 @@ namespace HomeGenie.Automation.Scripting
         /// <param name='description'>
         /// Description for this input field
         /// </param>
-        public ProgramHelper AddFeatureTextInput(string forDomain, string forModuleTypes, string propertyName, string description)
+        public ProgramHelper AddFeatureTextInput(
+            string forDomain,
+            string forModuleTypes,
+            string propertyName,
+            string description
+        )
         {
             return AddFeature(forDomain, forModuleTypes, propertyName, description, "text");
         }
@@ -283,13 +318,29 @@ namespace HomeGenie.Automation.Scripting
         public ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)
         {
             VirtualModule virtualModule = null;
-            try { virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
-            catch { }
+            try
+            {
+                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address);
+            }
+            catch
+            {
+            }
             //
             if (virtualModule == null)
             {
-                virtualModule = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = address, DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                virtualModule.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                virtualModule = new VirtualModule() {
+                    ParentId = myProgramId.ToString(),
+                    Domain = domain,
+                    Address = address,
+                    DeviceType = (Module.DeviceTypes)Enum.Parse(
+                        typeof(Module.DeviceTypes),
+                        type
+                    )
+                };
+                virtualModule.Properties.Add(new ModuleParameter() {
+                    Name = Properties.WIDGET_DISPLAYMODULE,
+                    Value = widget
+                });
                 homegenie.VirtualModules.Add(virtualModule);
             }
             else
@@ -314,8 +365,13 @@ namespace HomeGenie.Automation.Scripting
         public ProgramHelper RemoveVirtualModule(string domain, string address)
         {
             VirtualModule oldModule = null;
-            try { oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address); }
-            catch { }
+            try
+            {
+                oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address);
+            }
+            catch
+            {
+            }
             if (oldModule != null)
             {
                 homegenie.VirtualModules.Remove(oldModule);
@@ -326,19 +382,41 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        public ProgramHelper AddVirtualModules(string domain, string type, string widget, int startAddress, int endAddress)
+        public ProgramHelper AddVirtualModules(
+            string domain,
+            string type,
+            string widget,
+            int startAddress,
+            int endAddress
+        )
         {
             for (int x = startAddress; x <= endAddress; x++)
             {
 
                 VirtualModule virtualModule = null;
-                try { virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString()); }
-                catch { }
+                try
+                {
+                    virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString());
+                }
+                catch
+                {
+                }
                 //
                 if (virtualModule == null)
                 {
-                    virtualModule = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = domain, Address = x.ToString(), DeviceType = (Module.DeviceTypes)Enum.Parse(typeof(Module.DeviceTypes), type) };
-                    virtualModule.Properties.Add(new ModuleParameter() { Name = Properties.WIDGET_DISPLAYMODULE, Value = widget });
+                    virtualModule = new VirtualModule() {
+                        ParentId = myProgramId.ToString(),
+                        Domain = domain,
+                        Address = x.ToString(),
+                        DeviceType = (Module.DeviceTypes)Enum.Parse(
+                            typeof(Module.DeviceTypes),
+                            type
+                        )
+                    };
+                    virtualModule.Properties.Add(new ModuleParameter() {
+                        Name = Properties.WIDGET_DISPLAYMODULE,
+                        Value = widget
+                    });
                     homegenie.VirtualModules.Add(virtualModule);
                 }
                 else
@@ -368,7 +446,13 @@ namespace HomeGenie.Automation.Scripting
             //
             if (module == null)
             {
-                module = new VirtualModule() { ParentId = myProgramId.ToString(), Domain = myProgramDomain, Address = myProgramId.ToString(), Name = (program != null ? program.Name : ""), DeviceType = Module.DeviceTypes.Program };
+                module = new VirtualModule() {
+                    ParentId = myProgramId.ToString(),
+                    Domain = myProgramDomain,
+                    Address = myProgramId.ToString(),
+                    Name = (program != null ? program.Name : ""),
+                    DeviceType = Module.DeviceTypes.Program
+                };
                 homegenie.VirtualModules.Add(module);
             }
             //
@@ -394,7 +478,13 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    myProgramDomain,
+                    myProgramId.ToString(),
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
         }
 
@@ -419,7 +509,13 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     //
-                    HomeGenieService.LogEvent(myProgramDomain, myProgramId.ToString(), "Automation Program", "Program.Status", "Setup");
+                    HomeGenieService.LogEvent(
+                        myProgramDomain,
+                        myProgramId.ToString(),
+                        "Automation Program",
+                        "Program.Status",
+                        "Setup"
+                    );
                     functionBlock();
                     //
                     // remove deprecated config options
@@ -468,7 +564,9 @@ namespace HomeGenie.Automation.Scripting
             {
                 parameter = Service.Utility.ModuleParameterGet(programModule, parameterName);
             }
-            catch { }
+            catch
+            {
+            }
             // create parameter if does not exists
             if (parameter == null)
             {
@@ -505,7 +603,13 @@ namespace HomeGenie.Automation.Scripting
 
         public ProgramHelper Notify(string title, string message)
         {
-            homegenie.LogBroadcastEvent(Domains.HomeAutomation_HomeGenie_Automation, myProgramId.ToString(), "Automation Program", title, message);
+            homegenie.LogBroadcastEvent(
+                Domains.HomeAutomation_HomeGenie_Automation,
+                myProgramId.ToString(),
+                "Automation Program",
+                title,
+                message
+            );
             return this;
         }
 
@@ -523,7 +627,13 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(programModule.Domain, programModule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    programModule.Domain,
+                    programModule.Address,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             return this;
         }
@@ -542,7 +652,13 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(programModule.Domain, programModule.Address, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                HomeGenieService.LogEvent(
+                    programModule.Domain,
+                    programModule.Address,
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             return this;
         }
@@ -550,13 +666,19 @@ namespace HomeGenie.Automation.Scripting
         // TODO: find a better place for this
         public double EnergyUseCounter
         {
-            get { return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0; }
+            get
+            {
+                return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(
+                    Properties.METER_WATTS,
+                    3600
+                ) : 0;
+            }
         }
 
         public ProgramHelper Reset()
         {
-            this.parameter = "";
-            this.value = "";
+            //this.parameter = "";
+            //this.value = "";
             this.initialized = false;
             //
             AddControlWidget(""); // no control widget --> not visible

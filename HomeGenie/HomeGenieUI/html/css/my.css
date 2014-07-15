@@ -260,6 +260,15 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door,div.ui-bar-inheri
   background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
 }
 
+
+.ui-li-has-thumb .ui-btn {
+    min-height: 18px !important;
+    max-height: 18px !important;
+    height: 18px !important;
+    padding-left:50px !important;
+}
+
+
 .freewall 
 {
     float: left;

@@ -1,15 +1,43 @@
-﻿<a data-ui-field="widget">
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" height="48" src="pages/control/widgets/homegenie/generic/images/media_receiver.png" />
-    <span data-ui-field="name"></span><br />
-    <p style="margin:0">
-        <span data-ui-field="description" style="color:gray">loading...</span><br />
-        <span data-ui-field="deviceinfo" style="color:gray"></span>
-    </p>
-</a>
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+
+
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+		<div data-ui-field="name" style="display:block;font-weight:bold">Name</div>
+	    <div data-ui-field="description" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">loading...</div>
+	</div>
+
+	<br />
+
+    <div data-role="controlgroup" data-type="horizontal" align="center" data-mini="true">
+        <img class="ui-btn" data-ui-field="media_prev" height="32" src="pages/control/widgets/homegenie/generic/images/media_previous.png" />
+        <img class="ui-btn" data-ui-field="media_stop" height="32" src="pages/control/widgets/homegenie/generic/images/media_stop.png" />
+        <img class="ui-btn" data-ui-field="media_play" height="32" src="pages/control/widgets/homegenie/generic/images/media_play.png" />
+        <img class="ui-btn" data-ui-field="media_pause" height="32" src="pages/control/widgets/homegenie/generic/images/media_pause.png" style="display:none" />
+        <img class="ui-btn" data-ui-field="media_next" height="32" src="pages/control/widgets/homegenie/generic/images/media_next.png" />
+    </div>
+
+    <div style="margin-left:20px">
+	    <img data-ui-field="media_mute" alt="Mute/Unmute" height="32" src="pages/control/widgets/homegenie/generic/images/media_mute.png" style="display:inline-block;vertical-align:middle;cursor:pointer" />
+	    <span style="display:inline-block;vertical-align:middle">
+	    	&nbsp;Volume
+		</span>
+	</div>
+
+	<div style="margin-left:10px;">
+    	<input data-ui-field="media_volume" data-mini="true" type="range" value="60" min="0" max="100">
+    </div>
+
+
+
+	<div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+	</div>
+
+</div>
 
 <!-- widget popups and other ui elements follow -->
 
-<div data-ui-field="controlpopup" data-position-to="window" style="width:280px;" data-transition="pop" style="display:none">
+<div data-ui-field="controlpopup" data-position-to="window" class="hg-popup-a" data-transition="pop" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 
     <div style="margin:10px">
@@ -27,22 +55,6 @@
             </tr>
         </table>
 
-
-        <!--div data-ui-field="status" style="margin:0;font-size:14pt;" align="center">Playing...</div-->
-        <p align="center" style="margin-top:4px">Media Player Controls</p>
-        <div data-role="controlgroup" data-type="horizontal" align="center">
-            <img data-ui-field="media_prev" height="42" src="pages/control/widgets/homegenie/generic/images/media_previous.png" />
-            <img data-ui-field="media_stop" height="42" src="pages/control/widgets/homegenie/generic/images/media_stop.png" />
-            <img data-ui-field="media_play" height="42" src="pages/control/widgets/homegenie/generic/images/media_play.png" />
-            <img data-ui-field="media_pause" height="42" src="pages/control/widgets/homegenie/generic/images/media_pause.png" style="display:none" />
-            <img data-ui-field="media_next" height="42" src="pages/control/widgets/homegenie/generic/images/media_next.png" />
-        </div>
-
-        <p align="center" style="margin-top:4px">Volume</p>
-        <div style="position:relative">
-            <img data-ui-field="media_mute" height="32" src="pages/control/widgets/homegenie/generic/images/media_mute.png" style="position:absolute;top:-2px;left:30px" align="left" />
-            <input data-ui-field="media_volume" data-mini="true" type="range" value="60" min="0" max="100" style="position:absolute">
-        </div>
 
         <br />
     </div>

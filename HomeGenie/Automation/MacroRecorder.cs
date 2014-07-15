@@ -43,7 +43,7 @@ namespace HomeGenie.Automation
         private DateTime currentTimestamp = DateTime.Now;
         private double delaySeconds = 1;
         private MacroDelayType delayType = MacroDelayType.Fixed;
-        private DateTime startTimestamp = DateTime.Now;
+        //private DateTime startTimestamp = DateTime.Now;
 
         private ProgramEngine masterControlProgram;
 
@@ -62,7 +62,7 @@ namespace HomeGenie.Automation
         {
             // start recording
             macroCommands.Clear();
-            startTimestamp = currentTimestamp = DateTime.Now;
+            //startTimestamp = currentTimestamp = DateTime.Now;
             isMacroRecordingEnabled = true;
         }
 
@@ -98,15 +98,15 @@ namespace HomeGenie.Automation
             double delay = 0;
             switch (delayType)
             {
-                case MacroDelayType.Mimic:
-                    // calculate pause between current and previous command
-                    delay = new TimeSpan(DateTime.Now.Ticks - currentTimestamp.Ticks).TotalSeconds;
-                    break;
+            case MacroDelayType.Mimic:
+                // calculate pause between current and previous command
+                delay = new TimeSpan(DateTime.Now.Ticks - currentTimestamp.Ticks).TotalSeconds;
+                break;
 
-                case MacroDelayType.Fixed:
-                    // put a fixed pause
-                    delay = delaySeconds;
-                    break;
+            case MacroDelayType.Fixed:
+                // put a fixed pause
+                delay = delaySeconds;
+                break;
             }
             //
             try
@@ -118,7 +118,7 @@ namespace HomeGenie.Automation
                 }
                 macroCommands.Add(cmd);
             }
-            catch (Exception ex)
+            catch
             {
                 //HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "migservice_ServiceRequestPostProcess(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }

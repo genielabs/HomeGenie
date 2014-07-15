@@ -1,5 +1,15 @@
 ﻿RELEASE HISTORY
 
+13/07/2014 1.00 beta rev 400
+	- Updated MQTT Network app. Now with virtual modules and remote module control
+
+13/07/2014 1.00 beta rev 398
+	- added device/resolution/fps parameters to camera driver
+	- added gdlib3 support to CameraCaptureV4L wrapper
+	- added MQTT app (Automation/Interconnections)
+	- added MQTT support to NetHelper class
+	- added unhalded exceptions trapping to main program
+
 09/07/2014 1.00 beta rev 395
 	- fixed a bug in Philips Hue and Fibaro RGBW apps
 

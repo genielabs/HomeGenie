@@ -75,6 +75,7 @@
 		//
         var status = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
 		var level = 0;
+		var leveltext = '';
         if (status != null)
         {
 			level = status.Value.replace(',', '.') * 100;
@@ -88,18 +89,22 @@
             //
             if ((invertcontrols && level != 1) || level > 0) 
             {
-			    this.StatusText = 'Open';
+				leveltext = 'OPEN';
+			    this.StatusText = '<span style="vertical-align:middle">' + leveltext + '</span> ';
+				this.StatusText += '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_open.png';
 		    }
 		    else
 		    {
-			    this.StatusText = 'Closed';
+				leveltext = 'CLOSED';
+			    this.StatusText = '<span style="vertical-align:middle">' + leveltext + '</span> ';
+				this.StatusText += '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';
 		    }
         }
         else
         {
-			    this.StatusText = '?';
+			    this.StatusText = '<span style="vertical-align:middle">?</span>';
 			    this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';
         }
 		this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
@@ -108,7 +113,7 @@
 		//
         widget.find('[data-ui-field=name]').html(module.Name);
 		widget.find('[data-ui-field=description]').html(this.Description);
-		widget.find('[data-ui-field=status]').html(this.StatusText.toUpperCase());
+		widget.find('[data-ui-field=status]').html(this.StatusText);
 		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
         widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
 		//
@@ -117,7 +122,7 @@
 		controlpopup.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		controlpopup.find('[data-ui-field=group]').html(this.GroupName);
 		controlpopup.find('[data-ui-field=name]').html(module.Name);
-		controlpopup.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + this.StatusText + '</span>');
+		controlpopup.find('[data-ui-field=status]').html(leveltext);
 		controlpopup.find('[data-ui-field=level_knob]').val(Math.round(level)).trigger('change');
     }
 

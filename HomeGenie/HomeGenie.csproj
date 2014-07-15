@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BFD3C868-1F62-43FF-8771-CF21825F0C0A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -27,26 +27,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <ReleaseVersion>1.0</ReleaseVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -136,12 +116,58 @@
     <Reference Include="Raspberry.System">
       <HintPath>Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>Externals\json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Externals\sqlite\System.Data.SQLite.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>Externals\nmqtt\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>Externals\nmqtt\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Nmqtt">
+      <HintPath>Externals\nmqtt\Nmqtt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>Externals\nmqtt\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>Externals\nmqtt\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>Externals\nmqtt\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>Externals\raspberry-sharp\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>Externals\raspberry-sharp\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.Components">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.GeneralPurpose">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.Interop">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +292,18 @@
     <ProjectReference Include="..\MIG\Support Libraries\SerialPortLib\SerialPortLib.csproj">
       <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
       <Name>SerialPortLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="HomeGenieUI\HomeGenieUI.csproj">
+      <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
+      <Name>HomeGenieUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseFiles\Common\Common.csproj">
+      <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MIG\Support Libraries\W800RF32\W800RF32.csproj">
+      <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
+      <Name>W800RF32</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,8 +16,9 @@
 		var popupisopen = false;
 		this.Description = 'Camera ' + module.Address;
         //
-        var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, "Image.URL");
-        if (imageurl != null) imageurl = imageurl.Value; else imageurl = "";
+        var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, 'Image.URL');
+        if (imageurl != null) imageurl = imageurl.Value; 
+		else imageurl = '/api/' + module.Domain + '/' + module.Address + '/Camera.GetPicture/';
         //
 		// create and store a local reference to control popup object
 		//
@@ -36,10 +37,7 @@
 				{
 					setTimeout(function(){
 						var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-                        //
-                        var imgsrc = imageurl != "" ? imageurl : this.IconImage;
-						//
-                        popup.find('[data-ui-field=camerapicture]').attr('src', imgsrc + '?' + (new Date().getTime()));
+                        popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
 					}, 100);
 				}
             });
@@ -52,9 +50,7 @@
 				{
                     var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
 					popup.popup('open');
-                    var imgsrc = imageurl != "" ? imageurl : this.IconImage;
-					//
-                    popup.find('[data-ui-field=camerapicture]').attr('src', imgsrc + '?' + (new Date().getTime()));
+                    popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
 				}
 			});
 			//
@@ -75,21 +71,18 @@
 		//widget.find('[data-ui-field=status]').html(this.StatusText);
 		//widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
 		//
-		this.PollCamera(module);
+		this.PollCamera(imageurl);
     },
 
 		
-	PollCamera: function(module)
+	PollCamera: function(imageurl)
 	{
 		var _this = this;
 		// poll media renderer status while widget is visible
 		if (_this.Widget.is(':visible'))
 		{
-	        var imageurl = HG.WebApp.Utility.GetModulePropertyByName(module, "Image.URL");
-	        if (imageurl != null) imageurl = imageurl.Value; else imageurl = "";
-	        var imgsrc = imageurl != "" ? imageurl : _this.IconImage;
-			_this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imgsrc + '?' + (new Date().getTime()));
-			setTimeout(function(){ _this.PollCamera(module); }, 10000);
+			_this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
+			setTimeout(function(){ _this.PollCamera(imageurl); }, 1000);
 		}
 
 	}

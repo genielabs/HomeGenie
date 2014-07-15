@@ -36,7 +36,6 @@ HG.WebApp.InitializePage = function ()
     //
     var t = sessvars.UserSettings.UiTheme;
     if (t < 'a' || t > 'g') {
-
         sessvars.UserSettings.UiTheme = 'a';
     }
     //
@@ -68,7 +67,7 @@ HG.WebApp.InitializePage = function ()
     //
     $('[data-role=page]').on('pagebeforeshow', function (event) 
     {
-        setTheme(uitheme);
+        setTheme(sessvars.UserSettings.UiTheme);
         //
         if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
         {
@@ -186,7 +185,8 @@ HG.WebApp.InitializePage = function ()
     //
     // UI Localization
     //
-    setTimeout(function(){
+    setTimeout(function() {
+
         var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
         // enable/disable speech input
@@ -235,7 +235,17 @@ HG.WebApp.InitializePage = function ()
                 final_transcript = '';
             }
         }
+		//
+		// Apply UI settings
         setTheme(sessvars.UserSettings.UiTheme);
+        if (sessvars.UserSettings.EventsHistory)
+        {
+        	$('#btn_eventshistory_led').show();
+        }
+        //
+		// add css google web fonts
+		$('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+
     }, 1000);
     //
     // Code Mirror and other UI widgets

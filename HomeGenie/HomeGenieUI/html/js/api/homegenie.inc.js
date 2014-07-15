@@ -59,12 +59,10 @@ var HG = HG || {};
 <script type="text/javascript">
 // TODO: deprecate all js code below, or move it to appropriate place in hg api
 
-var uitheme = 'a'; // TODO: move this code as part of HG js api
-
-sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
+sessvars.UserSettings = sessvars.UserSettings || { UiTheme: 'a', EventsHistory: false };
 
 function setTheme(theme) {
-    sessvars.UserSettings.UiTheme = uitheme = theme;
+    sessvars.UserSettings.UiTheme = theme;
 	$(document).find('.ui-page')
 			.removeClass('ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e ui-page-theme-f ui-page-theme-g ui-page-theme-h')
             .addClass('ui-page-theme-' + theme);

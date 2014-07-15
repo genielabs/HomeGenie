@@ -28,6 +28,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
+using System.Xml.Serialization;
 
 using HomeGenie.Service;
 using HomeGenie.Automation.Scripting;
@@ -51,6 +52,7 @@ namespace HomeGenie.Automation
 
         // event delegates
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
+
         public event EnabledStateChangedEventHandler EnabledStateChanged;
 
         // c# program fields
@@ -60,7 +62,7 @@ namespace HomeGenie.Automation
         private MethodInfo methodRun = null;
         private MethodInfo methodReset = null;
         private MethodInfo methodEvaluateCondition = null;
-        private static object instanceObject = new object();
+        //private static object instanceObject = new object();
         private System.Reflection.Assembly appAssembly;
 
         // IronScript fields for Python, Ruby, Javascript
@@ -77,7 +79,7 @@ namespace HomeGenie.Automation
         //
         // Type = "Wizard" program data
         // subj: Domain, TargetNode, Property (eg. Domains.HomeAutomation_ZWave, "4", Globals.MODPAR_METER_WATTS ) , Date, Time
-        // cond: Equals, GreaterThan, LessThan 
+        // cond: Equals, GreaterThan, LessThan
         //  val: <value>
         public ConditionType ConditionType;
         public List<ProgramCondition> Conditions;
@@ -88,7 +90,7 @@ namespace HomeGenie.Automation
         public string ScriptSource;
         public string ScriptErrors;
 
-        // common public members 
+        // common public members
         public bool IsRunning;
         public List<ProgramFeature> Features = new List<ProgramFeature>();
 
@@ -111,15 +113,15 @@ namespace HomeGenie.Automation
                 scriptScope = null;
                 switch (codeType.ToLower())
                 {
-                    case "python":
-                        scriptEngine = Python.CreateEngine();
-                        break;
-                    case "ruby":
-                        scriptEngine = Ruby.CreateEngine();
-                        break;
-                    case "javascript":
-                        scriptEngine = new Jint.Engine();
-                        break;
+                case "python":
+                    scriptEngine = Python.CreateEngine();
+                    break;
+                case "ruby":
+                    scriptEngine = Ruby.CreateEngine();
+                    break;
+                case "javascript":
+                    scriptEngine = new Jint.Engine();
+                    break;
                 }
                 if (homegenie != null && scriptEngine != null)
                 {
@@ -223,7 +225,9 @@ namespace HomeGenie.Automation
                     {
                         AppDomain.Unload(programDomain);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     programDomain = null;
                     //
                     try
@@ -231,7 +235,9 @@ namespace HomeGenie.Automation
                         // Deleting assembly...
                         File.Delete(this.AssemblyFile);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 //
                 IsRunning = false;
@@ -306,7 +312,13 @@ namespace HomeGenie.Automation
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie_Automation, this.Address.ToString(), ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogEvent(
+                        Domains.HomeAutomation_HomeGenie_Automation,
+                        this.Address.ToString(),
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
                 }
                 //
                 methodRun = assemblyType.GetMethod("Run");
@@ -328,52 +340,52 @@ namespace HomeGenie.Automation
             MethodRunResult result = null;
             switch (codeType.ToLower())
             {
-                case "python":
-                    string pythonScript = this.ScriptSource;
-                    ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        pythonEngine.Execute(pythonScript, scriptScope);
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "ruby":
-                    string rubyScript = this.ScriptSource;
-                    ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        rubyEngine.Execute(rubyScript, scriptScope);
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "javascript":
-                    string jsScript = this.ScriptSource;
-                    Jint.Engine engine = (scriptEngine as Jint.Engine);
+            case "python":
+                string pythonScript = this.ScriptSource;
+                ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    pythonEngine.Execute(pythonScript, scriptScope);
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "ruby":
+                string rubyScript = this.ScriptSource;
+                ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    rubyEngine.Execute(rubyScript, scriptScope);
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "javascript":
+                string jsScript = this.ScriptSource;
+                Jint.Engine engine = (scriptEngine as Jint.Engine);
                     //engine.Options.AllowClr(false);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        engine.Execute(jsScript);
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "csharp":
-                    if (appAssembly != null && CheckAppInstance())
-                    {
-                        result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
-                    }
-                    break;
+                result = new MethodRunResult();
+                try
+                {
+                    engine.Execute(jsScript);
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "csharp":
+                if (appAssembly != null && CheckAppInstance())
+                {
+                    result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
+                }
+                break;
             }
             //
             return result;
@@ -384,54 +396,54 @@ namespace HomeGenie.Automation
             MethodRunResult result = null;
             switch (codeType.ToLower())
             {
-                case "python":
-                    string pythonScript = this.ScriptCondition;
-                    ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        pythonEngine.Execute(pythonScript, scriptScope);
-                        result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "ruby":
-                    string rubyScript = this.ScriptCondition;
-                    ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        rubyEngine.Execute(rubyScript, scriptScope);
-                        result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "javascript":
-                    string jsScript = this.ScriptCondition;
-                    Jint.Engine engine = (scriptEngine as Jint.Engine);
-                    result = new MethodRunResult();
-                    try
-                    {
-                        engine.Execute(jsScript);
-                        result.ReturnValue = (engine.GetValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
-                    }
-                    catch (Exception e)
-                    {
-                        result.Exception = e;
-                    }
-                    break;
-                case "csharp":
-                    if (appAssembly != null && CheckAppInstance())
-                    {
-                        result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
-                    }
-                    break;
+            case "python":
+                string pythonScript = this.ScriptCondition;
+                ScriptEngine pythonEngine = (scriptEngine as ScriptEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    pythonEngine.Execute(pythonScript, scriptScope);
+                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "ruby":
+                string rubyScript = this.ScriptCondition;
+                ScriptEngine rubyEngine = (scriptEngine as ScriptEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    rubyEngine.Execute(rubyScript, scriptScope);
+                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "javascript":
+                string jsScript = this.ScriptCondition;
+                Jint.Engine engine = (scriptEngine as Jint.Engine);
+                result = new MethodRunResult();
+                try
+                {
+                    engine.Execute(jsScript);
+                    result.ReturnValue = (engine.GetValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
+            case "csharp":
+                if (appAssembly != null && CheckAppInstance())
+                {
+                    result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
+                }
+                break;
             }
             //
             return result;
@@ -448,7 +460,9 @@ namespace HomeGenie.Automation
                 {
                     ProgramThread.Abort();
                 }
-                catch { }
+                catch
+                {
+                }
                 //
                 ProgramThread = null;
             }
@@ -466,12 +480,12 @@ namespace HomeGenie.Automation
             //
             switch (codeType.ToLower())
             {
-                case "python":
-                case "ruby":
-                    (scriptEngine as ScriptEngine).Runtime.Shutdown();
-                    break;
-                //case "javascript":
-                //case "csharp":
+            case "python":
+            case "ruby":
+                (scriptEngine as ScriptEngine).Runtime.Shutdown();
+                break;
+            //case "javascript":
+            //case "csharp":
             }
         }
 

@@ -25,12 +25,6 @@ HG.WebApp.Events.SetupListener = function () {
     es.onmessage = function (e) {
         var event = eval('[' + e.data + ']')[0];
         //
-        // add message to local events queue
-        HG.WebApp.Data.Events.push(event);
-        if (HG.WebApp.Data.Events.length > HG.WebApp.Events._eventQueueCapacity) {
-            HG.WebApp.Data.Events.shift();
-        }
-        //
         // update event source (the module that is raising this event)
         var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
         if (module != null) {
@@ -45,22 +39,31 @@ HG.WebApp.Events.SetupListener = function () {
         // send message to UI for updating UI elements related to this event (widgets, popup and such)
         HG.WebApp.Events.SendEventToUi(module, event);
         //
-        // blink hg activity led
-        if (HG.WebApp.Events._ledOffTimeout != null) {
-            clearTimeout(HG.WebApp.Events._ledOffTimeout);
-        }
-        $('#event_status_off').hide();
-        $('#event_status_on').show();
-        HG.WebApp.Events._ledOffTimeout = setTimeout(function () {
-            HG.WebApp.Events._ledOffTimeout = null;
-            $('#event_status_on').hide();
-            $('#event_status_off').show();
-        }, 500);
         //
-        // refresh events list page if currently open
-        if ($.mobile.activePage.attr("id") == "page_events") {
-            HG.WebApp.Events.Refresh();
-        }
+        if (sessvars.UserSettings.EventsHistory)
+        {
+	        // add message to local events queue
+	        HG.WebApp.Data.Events.push(event);
+	        if (HG.WebApp.Data.Events.length > HG.WebApp.Events._eventQueueCapacity) {
+	            HG.WebApp.Data.Events.shift();
+	        }
+	        // blink hg activity led
+	        if (HG.WebApp.Events._ledOffTimeout != null) {
+	            clearTimeout(HG.WebApp.Events._ledOffTimeout);
+	        }
+	        $('#event_status_off').hide();
+	        $('#event_status_on').show();
+	        HG.WebApp.Events._ledOffTimeout = setTimeout(function () {
+	            HG.WebApp.Events._ledOffTimeout = null;
+	            $('#event_status_on').hide();
+	            $('#event_status_off').show();
+	        }, 500);
+	        //
+	        // refresh events list page if currently open
+	        if ($.mobile.activePage.attr("id") == "page_events") {
+	            HG.WebApp.Events.Refresh();
+	        }
+		}
     }
 }
 

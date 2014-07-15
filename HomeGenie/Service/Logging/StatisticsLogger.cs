@@ -45,7 +45,14 @@ namespace HomeGenie.Service.Logging
 
     public class StatisticsLogger
     {
-        public static List<string> StatisticsFields = new List<string>() { "Conditions.", "Sensor.", "Meter.", "PowerMonitor.", "Statistics." };
+        public static List<string> StatisticsFields = new List<string>() {
+            "Conditions.",
+            "Sensor.",
+            "Meter.",
+            "PowerMonitor.",
+            "Statistics."
+        };
+
         public static bool IsValidField(string field)
         {
             bool isValid = false;
@@ -64,7 +71,7 @@ namespace HomeGenie.Service.Logging
         private HomeGenieService homegenie;
         private SQLiteConnection dbConnection;
 
-        private object dbLock = new object();
+        //private object dbLock = new object();
         private long dbSizeLimit = 5242880 * 2;
 
         private static int STATISTICS_TIME_RESOLUTION_MINUTES = 5;
@@ -158,7 +165,9 @@ namespace HomeGenie.Service.Logging
                     {
                         value = (double)reader.GetFloat(0);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 //
                 reader.Close();
@@ -166,7 +175,12 @@ namespace HomeGenie.Service.Logging
             return value;
         }
 
-        public List<StatisticsEntry> GetHourlyCounter(string domain, string address, string parameterName, double timescaleseconds)
+        public List<StatisticsEntry> GetHourlyCounter(
+            string domain,
+            string address,
+            string parameterName,
+            double timescaleseconds
+        )
         {
             var values = new List<StatisticsEntry>();
             //lock (dbLock)
@@ -193,7 +207,10 @@ namespace HomeGenie.Service.Logging
                     catch
                     {
                         var value = reader.GetValue(4);
-                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
+                        if (value != DBNull.Value && value != null) double.TryParse(
+                                reader.GetString(4),
+                                out entry.Value
+                            );
                     }
                     //
                     values.Add(entry);
@@ -204,7 +221,12 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        public List<StatisticsEntry> GetHourlyStats24(string domain, string address, string parameterName, string aggregator)
+        public List<StatisticsEntry> GetHourlyStats24(
+            string domain,
+            string address,
+            string parameterName,
+            string aggregator
+        )
         {
             var values = new List<StatisticsEntry>();
             //lock (dbLock)
@@ -233,7 +255,10 @@ namespace HomeGenie.Service.Logging
                     catch
                     {
                         var value = reader.GetValue(4);
-                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
+                        if (value != DBNull.Value && value != null) double.TryParse(
+                                reader.GetString(4),
+                                out entry.Value
+                            );
                     }
                     //
                     values.Add(entry);
@@ -245,7 +270,12 @@ namespace HomeGenie.Service.Logging
         }
 
 
-        public List<StatisticsEntry> GetTodayDetail(string domain, string address, string parameterName, string aggregator = "Avg")
+        public List<StatisticsEntry> GetTodayDetail(
+            string domain,
+            string address,
+            string parameterName,
+            string aggregator = "Avg"
+        )
         {
             var values = new List<StatisticsEntry>();
             //lock (dbLock)
@@ -279,7 +309,10 @@ namespace HomeGenie.Service.Logging
                     catch
                     {
                         var value = reader.GetValue(4);
-                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
+                        if (value != DBNull.Value && value != null) double.TryParse(
+                                reader.GetString(4),
+                                out entry.Value
+                            );
                     }
                     //
                     values.Add(entry);
@@ -290,7 +323,12 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        public List<StatisticsEntry> GetHourlyStats(string domain, string address, string parameterName, string aggregator)
+        public List<StatisticsEntry> GetHourlyStats(
+            string domain,
+            string address,
+            string parameterName,
+            string aggregator
+        )
         {
             var values = new List<StatisticsEntry>();
             //lock (dbLock)
@@ -317,7 +355,10 @@ namespace HomeGenie.Service.Logging
                     catch
                     {
                         var value = reader.GetValue(4);
-                        if (value != DBNull.Value && value != null) double.TryParse(reader.GetString(4), out entry.Value);
+                        if (value != DBNull.Value && value != null) double.TryParse(
+                                reader.GetString(4),
+                                out entry.Value
+                            );
                     }
                     //
                     values.Add(entry);
@@ -395,7 +436,6 @@ namespace HomeGenie.Service.Logging
                         //
                         if (values.Count > 0)
                         {
-                            var range = new TimeSpan(end.Ticks - parameter.Statistics.LastProcessedTimestap.Ticks);
                             double average = (values.Sum(d => d.Value) / values.Count);
                             //
                             //TODO: check db file age/size for archiving old data
@@ -417,7 +457,13 @@ namespace HomeGenie.Service.Logging
                             }
                             catch (Exception ex)
                             {
-                                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.StatisticsLogger", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                                HomeGenieService.LogEvent(
+                                    Domains.HomeAutomation_HomeGenie,
+                                    "Service.StatisticsLogger",
+                                    ex.Message,
+                                    "Exception.StackTrace",
+                                    ex.StackTrace
+                                );
                             }
                             //
                             parameter.Statistics.LastProcessedTimestap = end;

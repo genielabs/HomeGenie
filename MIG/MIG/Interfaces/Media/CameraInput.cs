@@ -45,11 +45,15 @@ namespace MIG.Interfaces.Media
             {
                 {101, "Camera.GetPicture"},
                 {102, "Camera.GetLuminance"},
+                {201, "Camera.GetDevice"},
+                {202, "Camera.SetDevice"}
             };
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
             public static readonly Command CAMERA_GETPICTURE = new Command(101);
             public static readonly Command CAMERA_GETLUMINANCE = new Command(102);
+            public static readonly Command CAMERA_GETDEVICE = new Command(201);
+            public static readonly Command CAMERA_SETDEVICE = new Command(202);
 
             private readonly String name;
             private readonly int value;
@@ -131,8 +135,34 @@ namespace MIG.Interfaces.Media
             #endregion
         }
 
-        private IntPtr cameraSource = IntPtr.Zero;
+        public class CameraDevice
+        {
+            public string Device = "/dev/video0";
+            public uint Width = 320;
+            public uint Height = 240;
+            public uint Fps = 2;
+        }
 
+        private IntPtr cameraSource = IntPtr.Zero;
+        private CameraDevice videoInput = new CameraDevice();
+
+        #region public members
+
+        public CameraDevice GetVideoInput()
+        {
+            return videoInput;
+        }
+
+        public void SetVideoInput(string device, uint width, uint height, uint fps)
+        {
+            videoInput.Device = device;
+            videoInput.Width = width;
+            videoInput.Height = height;
+            videoInput.Fps = fps;
+            Connect();
+        }
+
+        #endregion
 
         #region MIG Interface members
 
@@ -164,11 +194,9 @@ namespace MIG.Interfaces.Media
         {
             if (cameraSource != IntPtr.Zero)
             {
-
                 Disconnect();
-
             }
-            cameraSource = CameraCaptureV4LInterop.OpenCameraStream("/dev/video0", 320, 240, 3);
+            cameraSource = CameraCaptureV4LInterop.OpenCameraStream(videoInput.Device, videoInput.Width, videoInput.Height, videoInput.Fps);
             return (cameraSource != IntPtr.Zero);
         }
         /// <summary>
@@ -220,23 +248,30 @@ namespace MIG.Interfaces.Media
             if (request.Command == Command.CAMERA_GETPICTURE)
             {
                 // get picture from camera <nodeid>
-                // there is actually only single camera support though
-
-                // TODO: check if file exists before opening it ("/dev/video0")
+                // TODO: there is actually only single camera support 
                 if (cameraSource != IntPtr.Zero)
                 {
-
-                    var pictureBuffer = CameraCaptureV4LInterop.GetFrame(cameraSource);
-                    var data = new byte[pictureBuffer.Size];
-                    Marshal.Copy(pictureBuffer.Data, data, 0, pictureBuffer.Size);
-                    //System.IO.File.WriteAllBytes("html/test.jpg", data);
-                    return data;
-
+                    lock (this)
+                    {
+                        var pictureBuffer = CameraCaptureV4LInterop.GetFrame(cameraSource);
+                        var data = new byte[pictureBuffer.Size];
+                        Marshal.Copy(pictureBuffer.Data, data, 0, pictureBuffer.Size);
+                        return data;
+                    }
                 }
             }
             else if (request.Command == Command.CAMERA_GETLUMINANCE)
             {
                 // TODO: ....
+            }
+            else if (request.Command == Command.CAMERA_GETDEVICE)
+            {
+                //request.Response = JsonSerializeObject( cameraDevice );
+            }
+            else if (request.Command == Command.CAMERA_SETDEVICE)
+            {
+                SetVideoInput(request.GetOption(0).Replace("|", "/"), uint.Parse(request.GetOption(1)), uint.Parse(request.GetOption(2)), uint.Parse(request.GetOption(3)));
+                //request.Response = "OK"; // Utility.GetSimpleJson( ... )
             }
             //
             return request.Response;

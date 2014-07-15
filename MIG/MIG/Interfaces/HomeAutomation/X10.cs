@@ -48,17 +48,16 @@ namespace MIG.Interfaces.HomeAutomation
         public sealed class Command : GatewayCommand
         {
 
-            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>()
-            {
-                {203, "Parameter.Status"},
-                {701, "Control.On"},
-                {702, "Control.Off"},
-                {703, "Control.Bright"},
-                {704, "Control.Dim"},
-                {705, "Control.Level"},
-                {706, "Control.Toggle"},
-                {721, "Control.AllLightsOn"},
-                {722, "Control.AllLightsOff"}
+            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>() {
+                { 203, "Parameter.Status" },
+                { 701, "Control.On" },
+                { 702, "Control.Off" },
+                { 703, "Control.Bright" },
+                { 704, "Control.Dim" },
+                { 705, "Control.Level" },
+                { 706, "Control.Toggle" },
+                { 721, "Control.AllLightsOn" },
+                { 722, "Control.AllLightsOff" }
             };
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
@@ -77,7 +76,7 @@ namespace MIG.Interfaces.HomeAutomation
 
             private Command(int value)
             {
-                this.name = CommandsList[value];
+                this.name = CommandsList[ value ];
                 this.value = value;
             }
 
@@ -110,7 +109,9 @@ namespace MIG.Interfaces.HomeAutomation
             {
                 if (CommandsList.ContainsValue(str))
                 {
-                    var cmd = from c in CommandsList where c.Value == str select c.Key;
+                    var cmd = from c in CommandsList
+                                             where c.Value == str
+                                             select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -118,10 +119,12 @@ namespace MIG.Interfaces.HomeAutomation
                     throw new InvalidCastException();
                 }
             }
+
             public static bool operator ==(Command a, Command b)
             {
                 return a.value == b.value;
             }
+
             public static bool operator !=(Command a, Command b)
             {
                 return a.value != b.value;
@@ -161,12 +164,12 @@ namespace MIG.Interfaces.HomeAutomation
         {
             return x10lib.Connect();
         }
-        
+
         public void Disconnect()
         {
             x10lib.Disconnect();
         }
-        
+
         public bool IsConnected
         {
             get { return x10lib.IsConnected; }
@@ -209,7 +212,7 @@ namespace MIG.Interfaces.HomeAutomation
                 var tmpDataItems = new List<X10Module>(x10lib.ModulesStatus.Count);
                 foreach (string key in x10lib.ModulesStatus.Keys)
                 {
-                    tmpDataItems.Add(x10lib.ModulesStatus[key]);
+                    tmpDataItems.Add(x10lib.ModulesStatus[ key ]);
                 }
 
                 var serializer = new XmlSerializer(typeof(List<X10Module>));
@@ -243,7 +246,7 @@ namespace MIG.Interfaces.HomeAutomation
                     sb.Append(config);
                     return sb.ToString();
                 }
-                catch (Exception e)
+                catch
                 {
                 }
             }
@@ -274,7 +277,7 @@ namespace MIG.Interfaces.HomeAutomation
             }
             else if (command == Command.CONTROL_LEVEL)
             {
-                int dimvalue = int.Parse(option) - (int)(x10lib.ModulesStatus[nodeId].Level * 100.0);
+                int dimvalue = int.Parse(option) - (int)(x10lib.ModulesStatus[ nodeId ].Level * 100.0);
                 if (dimvalue > 0)
                 {
                     x10lib.Bright(houseCode, unitCode, dimvalue);
@@ -287,7 +290,7 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_TOGGLE)
             {
                 string huc = XTenLib.Utility.HouseUnitCodeFromEnum(houseCode, unitCode);
-                if (x10lib.ModulesStatus[huc].Level == 0)
+                if (x10lib.ModulesStatus[ huc ].Level == 0)
                 {
                     x10lib.LightOn(houseCode, unitCode);
                 }
@@ -354,9 +357,15 @@ namespace MIG.Interfaces.HomeAutomation
                     rfLastStringData = data;
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = "RF",
+                            SourceType = "X10 RF Receiver",
+                            Path = "Receiver.RawData",
+                            Value = rfLastStringData
+                        });
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // TODO: add error logging 
                     }
@@ -368,9 +377,15 @@ namespace MIG.Interfaces.HomeAutomation
                             try
                             {
                                 rfLastStringData = "";
-                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "X10 RF Receiver", Path = "Receiver.RawData", Value = "" });
+                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                    Domain = this.Domain,
+                                    SourceId = "RF",
+                                    SourceType = "X10 RF Receiver",
+                                    Path = "Receiver.RawData",
+                                    Value = ""
+                                });
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 // TODO: add error logging 
                             }
@@ -389,7 +404,13 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = (sender as X10Module).Code, SourceType = (sender as X10Module).Description, Path = ModuleParameters.MODPAR_STATUS_LEVEL, Value = (sender as X10Module).Level.ToString() });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = (sender as X10Module).Code,
+                            SourceType = (sender as X10Module).Description,
+                            Path = ModuleParameters.MODPAR_STATUS_LEVEL,
+                            Value = (sender as X10Module).Level.ToString()
+                        });
                     }
                     catch
                     {

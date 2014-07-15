@@ -31,15 +31,22 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 $('#control_groupslist').empty(); // forces control menu rebuild
             }
             else {
-                $(document).simpledialog2({
-                    mode: 'blank',
-                    headerText: 'Error',
-                    headerClose: true,
-                    blankContent:
-                      "<p style='margin:20px'>At least one house code must be selected.</p>" +
-                      // NOTE: the use of rel="close" causes this button to close the dialog.
-                      "<a rel='close' data-role='button' href='#'>Close</a>"
-                });
+				$('#page_configure_interfaces_x10housecodes').qtip({
+			        content: {
+			        	title: 'Notice',
+			        	text: 'Please select at least one house code.',
+			        	button: 'Close'
+			    	},
+			        show: { event: false, ready: true, delay: 500 },
+			        events: {
+			            hide: function () {
+			                $(this).qtip('destroy');
+			            }
+			        },
+			        hide: { event: false, inactive: 3000 },
+			        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+			        position: { my: 'bottom center', at: 'top center' }
+			    });
             }
         });
         //
@@ -95,7 +102,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
         //
         $("#configure_interfaces_flip_weeco4mgpio").on('slidestop', function (event) {
-            HG.Configure.Interfaces.ServiceCall("Weeco4mGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_weeco4mgpio").val(), function (data) {
+            HG.Configure.Interfaces.ServiHG.Configure.Interfaces.ServiceCallceCall("Weeco4mGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_weeco4mgpio").val(), function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 $.mobile.loading('hide');
             });
@@ -115,7 +122,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
         //
         $("#configure_interfaces_flip_camera").on('slidestop', function (event) {
-            //	        	HG.WebApp.SystemSettings.RefreshOptions('camera');
+            HG.WebApp.SystemSettings.RefreshOptions('camera');
             HG.Configure.Interfaces.ServiceCall("CameraInput.SetIsEnabled/" + $("#configure_interfaces_flip_camera").val(), function (data) {
                 $.mobile.loading('hide');
             });
@@ -155,12 +162,25 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 });
             }
         });
+		//
+		$('#page_configure_interfaces_camerachange').bind('click', function() {
+			var device = encodeURIComponent($('#page_configure_interfaces_cameraport').val());
+			var resolution = encodeURIComponent($('#page_configure_interfaces_cameraresolution').val());
+			var fps = encodeURIComponent($('#page_configure_interfaces_camerafps').val());
+            HG.Configure.Interfaces.ServiceCall("CameraInput.SetVideoInput/" + device + "/" + resolution + "/" + fps , function(data) {
+            	
+            });
+		});
     });
 };
 
 HG.WebApp.SystemSettings.ShowPortTip = function (el) {
     $(el).qtip({
-        content: 'Select port used by this device',
+        content: {
+        	title: 'Notice',
+        	text: 'Please select port used by this device.',
+        	button: 'Close'
+    	},
         show: { event: false, ready: true, delay: 1000 },
         events: {
             hide: function () {
@@ -169,7 +189,7 @@ HG.WebApp.SystemSettings.ShowPortTip = function (el) {
         },
         hide: { event: false, inactive: 3000 },
         style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-        position: { my: 'bottom center', at: 'top center' }
+        position: { my: 'left center', at: 'right center' }
     });
 };
 
@@ -245,7 +265,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
         $('#page_configure_interfaces_zwaveport').selectmenu('refresh', true);
         //
         HG.Configure.Interfaces.ServiceCall("ZWave.GetPort", function (data) {
-            $('#page_configure_interfaces_zwaveport').val(data).attr('selected', true).siblings('option').removeAttr('selected');
+            $('#page_configure_interfaces_zwaveport').val(data);
             $('#page_configure_interfaces_zwaveport').selectmenu('refresh', true);
             $.mobile.loading('hide');
             //
@@ -257,7 +277,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             }
             $('#page_configure_interfaces_x10port').selectmenu('refresh', true);
             HG.Configure.Interfaces.ServiceCall("X10.GetPort", function (data) {
-                $('#page_configure_interfaces_x10port').val(data).attr('selected', true).siblings('option').removeAttr('selected');;
+                $('#page_configure_interfaces_x10port').val(data);
                 $('#page_configure_interfaces_x10port').selectmenu('refresh', true);
                 $.mobile.loading('hide');
             });
@@ -267,8 +287,18 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 $('#page_configure_interfaces_w800rf32port').append('<option value="' + ports[p].replace(/\//g, '|') + '">' + ports[p] + '</option>');
             }
             HG.Configure.Interfaces.ServiceCall("W800RF.GetPort", function (data) {
-                $('#page_configure_interfaces_w800rf32port').val(data).attr('selected', true).siblings('option').removeAttr('selected');;
+                $('#page_configure_interfaces_w800rf32port').val(data);
                 $('#page_configure_interfaces_w800rf32port').selectmenu('refresh', true);
+                $.mobile.loading('hide');
+            });
+            HG.Configure.Interfaces.ServiceCall("CameraInput.GetVideoInput", function (data) {
+            	data = data[0];
+            	$('#page_configure_interfaces_cameraport').val(data.Device);
+            	$('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
+            	$('#page_configure_interfaces_cameraresolution').val(data.Width + 'x' + data.Height);
+            	$('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
+            	$('#page_configure_interfaces_camerafps').val(data.Fps);
+            	$('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
                 $.mobile.loading('hide');
             });
             HG.Configure.Interfaces.ServiceCall("ZWave.GetIsEnabled", function (data) {
@@ -294,7 +324,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             });
             HG.Configure.Interfaces.ServiceCall("CameraInput.GetIsEnabled", function (data) {
                 $('#configure_interfaces_flip_camera').val(data).slider('refresh');
-                //                HG.WebApp.SystemSettings.RefreshOptions('camera');
+                HG.WebApp.SystemSettings.RefreshOptions('camera');
                 $.mobile.loading('hide');
             });
             HG.Configure.Interfaces.ServiceCall("RaspiGPIO.GetIsEnabled", function (data) {

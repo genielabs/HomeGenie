@@ -27,8 +27,7 @@
     <script src="js/jquery.knob.js"></script>
 
 
-    <!-- custom css/font includes -->
-	<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- custom css includes -->
     <link rel="stylesheet" href="css/my.css" />
     <link rel="stylesheet" href="css/homegenie.min.css" />
     <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
@@ -200,14 +199,16 @@
     <!-- Applications / NetPlay -->
     {include pages/apps/netplay/slideshow.html}
 
-    <!-- Event Logs button -->
-    <div style="position:fixed;top:7px;right:5px;z-index:1000">
-        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
-        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
+    <div  style="position:fixed;top:6px;right:5px;z-index:1000">
+	    <!-- System Interfaces Status -->
+	    <div style="float:left;" id="interfaces_status"></div>
+	    <!-- Event Logs button -->
+	    <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
+	        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
+	        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
+	    </div>
     </div>
 
-    <!-- System Interfaces Status -->
-    <div style="position:fixed;top:5px;right:35px;z-index:1000" id="interfaces_status"></div>
 
     <!-- hg builtin notify popup -->
     <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed">

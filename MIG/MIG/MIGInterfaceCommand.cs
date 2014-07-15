@@ -29,12 +29,15 @@ namespace MIG
         private string[] options = new string[0];
 
         public string Domain { get; set; }
+
         public string NodeId { get; set; }
+
         public string Command { get; set; }
         //public string option { get; set; }
         //public string option1 { get; set; }
 
         public string Response { get; set; }
+
         public string OriginalRequest { get; set; }
 
         public MIGInterfaceCommand(string request)
@@ -45,7 +48,7 @@ namespace MIG
                 var requests = request.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                 if (requests.Length > 0)
                 {
-                    Domain = requests[0];
+                    Domain = requests[ 0 ];
                     if (Domain == "html")
                     {
                         return;
@@ -53,8 +56,8 @@ namespace MIG
 
                     if (requests.Length > 2)
                     {
-                        NodeId = requests[1];
-                        Command = requests[2];
+                        NodeId = requests[ 1 ];
+                        Command = requests[ 2 ];
                     }
                     //                option = string.Empty;
                     //                option1 = string.Empty;
@@ -70,7 +73,7 @@ namespace MIG
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //Console.WriteLine("\n\nError parsing interface command request (" + request + ") : " + ex.Message + "\n" + ex.StackTrace);
             }
@@ -82,7 +85,7 @@ namespace MIG
             var option = "";
             if (index < options.Length)
             {
-                option = Uri.UnescapeDataString(options[index]);
+                option = Uri.UnescapeDataString(options[ index ]);
             }
             //Console.ForegroundColor = ConsoleColor.DarkMagenta;
             //Console.WriteLine("OPTION " + index + " = " + option);
@@ -97,7 +100,7 @@ namespace MIG
                 var options = "";
                 for (var o = 0; o < options.Length; o++)
                 {
-                    options += options[o] + "/";
+                    options += options[ o ] + "/";
                 }
                 return options;
             }

@@ -59,7 +59,7 @@ namespace HomeGenie.Automation
 
         private MacroRecorder macroRecorder = null;
 
-        private object lockObject = new object();
+        //private object lockObject = new object();
 
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
@@ -75,9 +75,21 @@ namespace HomeGenie.Automation
                 blockType = type;
             }
 
-            public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
+            public override void ErrorReported(
+                ScriptSource source,
+                string message,
+                Microsoft.Scripting.SourceSpan span,
+                int errorCode,
+                Microsoft.Scripting.Severity severity
+            )
             {
-                Errors.Add(new ProgramError() { Line = span.Start.Line, Column = span.Start.Column, ErrorMessage = message, ErrorNumber = errorCode.ToString(), CodeBlock = blockType });
+                Errors.Add(new ProgramError() {
+                    Line = span.Start.Line,
+                    Column = span.Start.Column,
+                    ErrorMessage = message,
+                    ErrorNumber = errorCode.ToString(),
+                    CodeBlock = blockType
+                });
             }
         }
 
@@ -105,7 +117,11 @@ namespace HomeGenie.Automation
             //
             while (isEngineRunning && program.IsEnabled)
             {
-                if (program.IsRunning || !isEngineEnabled) { Thread.Sleep(1000); continue; }
+                if (program.IsRunning || !isEngineEnabled)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
                 //
                 try
                 {
@@ -118,16 +134,24 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
-                                CodeBlock = "TC",
-                                Column = 0,
-                                Line = 0,
-                                ErrorNumber = "-1",
-                                ErrorMessage = result.Exception.Message
-                            }};
+                            List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
+                                    CodeBlock = "TC",
+                                    Column = 0,
+                                    Line = 0,
+                                    ErrorNumber = "-1",
+                                    ErrorMessage = result.Exception.Message
+                                }
+                            };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + result.Exception.Message.Replace('\n', ' '));
+                            RaiseProgramModuleEvent(
+                                program,
+                                "Runtime.Error",
+                                "TC: " + result.Exception.Message.Replace(
+                                    '\n',
+                                    ' '
+                                )
+                            );
                         }
                         else
                         {
@@ -168,13 +192,14 @@ namespace HomeGenie.Automation
                 catch (Exception ex)
                 {
                     // a runtime error occured
-                    List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
-                        CodeBlock = "TC",
-                        Column = 0,
-                        Line = 0,
-                        ErrorNumber = "-1",
-                        ErrorMessage = ex.Message
-                    }};
+                    List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
+                            CodeBlock = "TC",
+                            Column = 0,
+                            Line = 0,
+                            ErrorNumber = "-1",
+                            ErrorMessage = ex.Message
+                        }
+                    };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
                     RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message.Replace('\n', ' '));
@@ -212,24 +237,23 @@ namespace HomeGenie.Automation
             List<ProgramError> errors = new List<ProgramError>();
             switch (program.Type.ToLower())
             {
-                case "csharp":
-                    errors = CompileCsharp(program);
-                    break;
-                case "ruby":
-                case "python":
-                    errors = CompileIronScript(program);
-                    break;
-                case "javascript":
-                    errors = CompileJavascript(program);
-                    break;
+            case "csharp":
+                errors = CompileCsharp(program);
+                break;
+            case "ruby":
+            case "python":
+                errors = CompileIronScript(program);
+                break;
+            case "javascript":
+                errors = CompileJavascript(program);
+                break;
             }
             return errors;
         }
 
         public void Run(ProgramBlock program, string options)
         {
-            if (program.IsRunning)
-                return;
+            if (program.IsRunning) return;
             //
             if (program.ProgramThread != null)
             {
@@ -256,16 +280,24 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { new ProgramError(){
-                                CodeBlock = "CR",
-                                Column = 0,
-                                Line = 0,
-                                ErrorNumber = "-1",
-                                ErrorMessage = result.Exception.Message
-                            }};
+                            List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
+                                    CodeBlock = "CR",
+                                    Column = 0,
+                                    Line = 0,
+                                    ErrorNumber = "-1",
+                                    ErrorMessage = result.Exception.Message
+                                }
+                            };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, "Runtime.Error", "CR: " + result.Exception.Message.Replace('\n', ' '));
+                            RaiseProgramModuleEvent(
+                                program,
+                                "Runtime.Error",
+                                "CR: " + result.Exception.Message.Replace(
+                                    '\n',
+                                    ' '
+                                )
+                            );
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
@@ -369,45 +401,51 @@ namespace HomeGenie.Automation
                 {
                     switch (program.Commands[x].Target)
                     {
-                        case "Automation":
+                    case "Automation":
                             //
-                            string cs = program.Commands[x].CommandString;
-                            switch (cs)
+                        string cs = program.Commands[x].CommandString;
+                        switch (cs)
+                        {
+                        case "Program.Run":
+                            string programId = program.Commands[x].CommandArguments;
+                            var programToRun = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+                            if (programToRun != null && programToRun.Address != program.Address && !programToRun.IsRunning)
                             {
-                                case "Program.Run":
-                                    string programId = program.Commands[x].CommandArguments;
-                                    var programToRun = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
-                                    if (programToRun != null && programToRun.Address != program.Address && !programToRun.IsRunning)
-                                    {
-                                        Run(programToRun, "");
-                                    }
-                                    break;
-                                case "Program.Pause":
-                                    Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
-                                    break;
-                                case "Program.Repeat":
-                                    // TODO: implement check for contiguous repeat statements
-                                    if (repeatCount <= 0)
-                                    {
-                                        repeatCount = (int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
-                                    }
-                                    if (--repeatCount == 0)
-                                    {
-                                        repeatStartLine = x + 1;
-                                    }
-                                    else
-                                    {
-                                        x = repeatStartLine - 1;
-                                    }
-                                    break;
-                                default:
-                                    var programCommand = program.Commands[x];
-                                    string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
-                                    homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
-                                    break;
+                                Run(programToRun, "");
                             }
-                            //
                             break;
+                        case "Program.Pause":
+                            Thread.Sleep((int)(double.Parse(
+                                program.Commands[x].CommandArguments,
+                                System.Globalization.CultureInfo.InvariantCulture
+                            ) * 1000));
+                            break;
+                        case "Program.Repeat":
+                                    // TODO: implement check for contiguous repeat statements
+                            if (repeatCount <= 0)
+                            {
+                                repeatCount = (int)(double.Parse(
+                                    program.Commands[x].CommandArguments,
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                ));
+                            }
+                            if (--repeatCount == 0)
+                            {
+                                repeatStartLine = x + 1;
+                            }
+                            else
+                            {
+                                x = repeatStartLine - 1;
+                            }
+                            break;
+                        default:
+                            var programCommand = program.Commands[x];
+                            string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
+                            homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
+                            break;
+                        }
+                            //
+                        break;
                     }
                 }
                 else
@@ -456,7 +494,7 @@ namespace HomeGenie.Automation
             List<ProgramError> errors = new List<ProgramError>();
 
             Jint.Parser.JavaScriptParser jp = new Jint.Parser.JavaScriptParser(false);
-            Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
+            //Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
             try
             {
                 Jint.Parser.Ast.Program p = jp.Parse(program.ScriptCondition);
@@ -471,8 +509,7 @@ namespace HomeGenie.Automation
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
                         int line = int.Parse(error[0].Split(' ')[0]);
-                        errors.Add(new ProgramError()
-                        {
+                        errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
                             CodeBlock = "TC"
@@ -495,8 +532,7 @@ namespace HomeGenie.Automation
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
                         int line = int.Parse(error[0].Split(' ')[0]);
-                        errors.Add(new ProgramError()
-                        {
+                        errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
                             CodeBlock = "CR"
@@ -567,8 +603,7 @@ namespace HomeGenie.Automation
                             errorRow -= (sourceLines + 7);
                             blockType = "TC";
                         }
-                        errors.Add(new ProgramError()
-                        {
+                        errors.Add(new ProgramError() {
                             Line = errorRow,
                             Column = error.Column,
                             ErrorMessage = error.ErrorText,
@@ -631,42 +666,42 @@ namespace HomeGenie.Automation
                 parameter.Name = c.Property;
                 switch (parameter.Name)
                 {
-                    case "Programs.DateDay":
-                    case "Scheduler.DateDay":
-                        parameter.Value = DateTime.Now.Day.ToString();
-                        break;
-                    case "Programs.DateMonth":
-                    case "Scheduler.DateMonth":
-                        parameter.Value = DateTime.Now.Month.ToString();
-                        break;
-                    case "Programs.DateDayOfWeek":
-                    case "Scheduler.DateDayOfWeek":
-                        parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
-                        break;
-                    case "Programs.DateYear":
-                    case "Scheduler.DateYear":
-                        parameter.Value = DateTime.Now.Year.ToString();
-                        break;
-                    case "Programs.DateHour":
-                    case "Scheduler.DateHour":
-                        parameter.Value = DateTime.Now.Hour.ToString();
-                        break;
-                    case "Programs.DateMinute":
-                    case "Scheduler.DateMinute":
-                        parameter.Value = DateTime.Now.Minute.ToString();
-                        break;
-                    case "Programs.Date":
-                    case "Scheduler.Date":
-                        parameter.Value = DateTime.Now.ToString("YY-MM-dd");
-                        break;
-                    case "Programs.Time":
-                    case "Scheduler.Time":
-                        parameter.Value = DateTime.Now.ToString("HH:mm:ss");
-                        break;
-                    case "Programs.DateTime":
-                    case "Scheduler.DateTime":
-                        parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
-                        break;
+                case "Programs.DateDay":
+                case "Scheduler.DateDay":
+                    parameter.Value = DateTime.Now.Day.ToString();
+                    break;
+                case "Programs.DateMonth":
+                case "Scheduler.DateMonth":
+                    parameter.Value = DateTime.Now.Month.ToString();
+                    break;
+                case "Programs.DateDayOfWeek":
+                case "Scheduler.DateDayOfWeek":
+                    parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
+                    break;
+                case "Programs.DateYear":
+                case "Scheduler.DateYear":
+                    parameter.Value = DateTime.Now.Year.ToString();
+                    break;
+                case "Programs.DateHour":
+                case "Scheduler.DateHour":
+                    parameter.Value = DateTime.Now.Hour.ToString();
+                    break;
+                case "Programs.DateMinute":
+                case "Scheduler.DateMinute":
+                    parameter.Value = DateTime.Now.Minute.ToString();
+                    break;
+                case "Programs.Date":
+                case "Scheduler.Date":
+                    parameter.Value = DateTime.Now.ToString("YY-MM-dd");
+                    break;
+                case "Programs.Time":
+                case "Scheduler.Time":
+                    parameter.Value = DateTime.Now.ToString("HH:mm:ss");
+                    break;
+                case "Programs.DateTime":
+                case "Scheduler.DateTime":
+                    parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
+                    break;
                 }
             }
             else
@@ -686,10 +721,19 @@ namespace HomeGenie.Automation
                 double dval = 0;
                 DateTime dtval = new DateTime();
                 //
-                if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
+                if (double.TryParse(
+                        parameter.Value.Replace(",", "."),
+                        NumberStyles.AllowDecimalPoint,
+                        CultureInfo.InvariantCulture,
+                        out dval
+                    ))
                 {
                     lvalue = dval;
-                    rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
+                    rvalue = double.Parse(
+                        comparisonValue.Replace(",", "."),
+                        NumberStyles.AllowDecimalPoint,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 else if (DateTime.TryParse(parameter.Value, out dtval))
                 {
@@ -716,7 +760,7 @@ namespace HomeGenie.Automation
 
         private void ExecuteProgramCommand(ProgramCommand programCommand)
         {
-            string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
+            string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
             var interfaceCommand = new MIGInterfaceCommand(command);
             homegenie.InterfaceControl(interfaceCommand);
             homegenie.WaitOnPending(programCommand.Domain);
@@ -724,8 +768,7 @@ namespace HomeGenie.Automation
 
         private void StartProgramEvaluator(ProgramBlock program)
         {
-            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs()
-            {
+            EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs() {
                 Program = program,
                 Callback = (ProgramBlock p, bool conditionsatisfied) =>
                 {

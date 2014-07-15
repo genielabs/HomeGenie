@@ -604,13 +604,13 @@ namespace MIG.Interfaces.Protocols
             }
             //
             IPHostEntry host;
-            string localIP = "";
+            //string localIP = "";
             host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    localIP = ip.ToString();
+                    //localIP = ip.ToString();
                     break;
                 }
             }
