@@ -6,7 +6,7 @@ http://homegenie.it
 ## Supported IDEs
 
 **MonoDevelop / Xamarin Studio**:
-HomeGenie/HomeGenie.sln
+HomeGenie_Linux/HomeGenie_Linux.sln
 
 **Microsoft Visual Studio**:
 HomeGenie_Windows/HomeGenie_VS10.sln
