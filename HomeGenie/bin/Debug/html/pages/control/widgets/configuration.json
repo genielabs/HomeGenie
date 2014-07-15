@@ -1,8 +1,0 @@
-﻿[
-	{
-		Description		: "FortreZz Strobe Siren",
-		Widget			: "homegenie/generic/siren",
-		MatchProperty	: "ZWaveNode.DeviceHandler",
-		MatchValue		: "ZWaveLib.Devices.ProductHandlers.FortrezZ.SSA1StrobeSiren"
-	}
-]

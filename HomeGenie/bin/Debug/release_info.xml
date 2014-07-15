@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>HomeGenie</Name>
-  <Version>1.00 beta r395</Version>
-  <Description>Latest public release.</Description>
-  <ReleaseNote>   - fixed a bug in Philips Hue and Fibaro RGBW apps</ReleaseNote>
-  <ReleaseDate>2014-07-09T15:48:09.0000Z</ReleaseDate>
-</ReleaseInfo>
