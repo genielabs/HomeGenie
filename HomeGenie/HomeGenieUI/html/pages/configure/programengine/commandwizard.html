@@ -1,9 +1,9 @@
-<div id="automation_command_domain_popup" data-role="popup" data-position-to="window" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_command_domain_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (1/4)</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
 
         <div>
             <p data-locale-id="configure_program_selectcommandcontext" style="margin-top:-10px;font-weight:bold">Select command context</p>
@@ -17,9 +17,9 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_deletecancel" data-rel="back" data-role="button" data-icon="back" href="#">Cancel</a>
+                <a class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" href="#" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
             </div>
         </div>
     </div>
@@ -27,12 +27,12 @@
 </div>
 
 
-<div id="automation_command_target_popup" data-role="popup" data-position-to="window" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_command_target_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (2/4)</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectcommandtarget" style="margin-top:-10px;font-weight:bold">Select command target</p>
             <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -41,22 +41,22 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_command_domain_popup">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_domain_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<div id="automation_command_target_property" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_command_target_property" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (3/4)</h1>
     </div>
 
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectcommandtoperform" style="margin-top:-10px;font-weight:bold">Select command to perform</p>
             <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -65,22 +65,22 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_command_target_popup">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<div id="automation_command_args" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_command_args" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (4/4)</h1>
     </div>
 
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_commandarguments" style="margin-top:-10px;font-weight:bold">Command arguments</p>
             <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -91,37 +91,43 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_command_target_property">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_args', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
             </div>
             <div class="ui-block-b">
-                <a data-locale-id="configure_program_wizarddone" id="command_completed" data-rel="popup" data-role="button" data-icon="check" href="#cancel">done</a>
+                <a id="command_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel" data-locale-id="configure_program_wizarddone">Add</a>
             </div>
         </div>
     </div>
 </div>
 
-<div data-role="popup" id="automation_capture_command_popup" data-position-to="window" style="width:250px;" class="ui-corner-all">
+<div id="automation_capture_command_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
     <div data-role="header" class="ui-corner-top">
         <h1 data-locale-id="configure_program_commandcapturetitle">Capturing Commands</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <h3 data-locale-id="configure_program_waitingnewcommand" class="ui-title">Waiting for new events...</h3>
         <p data-locale-id="configure_program_waitingnewcommandadvice"></p>
-        <a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
+        <a data-locale-id="configure_program_capturestop" href="#" class="ui-btn ui-corner-all" data-rel="back">Stop</a>
     </div>
 </div>
 
-<div data-role="popup" id="automation_command_delete" style="max-width:400px;" class="ui-corner-all">
+<div data-role="popup" id="automation_command_delete" class="ui-corner-all hg-popup-a" data-transition="pop" data-overlay-theme="b">
     <div data-role="header" class="ui-corner-top">
         <h1 data-locale-id="configure_program_deleteinstructiontitle">Delete Instruction?</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <h3 class="ui-title" data-locale-id="configure_program_deleteinstructionprompt">Are you sure you want to delete this instruction statement?</h3>
         <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
-        <a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-        <a data-locale-id="configure_program_deleteconfirm" id="command_delete_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+		        <a data-locale-id="configure_program_deletecancel" href="#" class="ui-btn ui-corner-all" data-rel="back">Cancel</a>
+            </div>
+            <div class="ui-block-b">
+		        <a data-locale-id="configure_program_deleteconfirm" id="command_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -176,10 +182,10 @@
             //
             switch (command_targetdomain) {
                 case 'HomeAutomation.HomeGenie':
-                    $('#automation_command_target').append('<li data-theme="' + uitheme + '" data-context-value="Automation"><a data-rel="popup" href="#automation_command_target_property">Automation</a></li>');
+                    $('#automation_command_target').append('<li data-context-value="Automation"><a>Automation</a></li>');
                     break;
                 case 'Controllers.LircRemote':
-                    $('#automation_command_target').append('<li data-theme="' + uitheme + '" data-context-value="IR"><a data-rel="popup" href="#automation_command_target_property">IR</a></li>');
+                    $('#automation_command_target').append('<li data-context-value="IR"><a>IR</a></li>');
                     break;
                 default:
                     //			case 'HomeAutomation.X10':
@@ -190,6 +196,8 @@
             $('#automation_command_target').listview('refresh');
             //
             build_command();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_command_domain_popup', '#automation_command_target_popup', true);
         });
 
         $('#automation_command_target_popup').on('click', 'li', function () {
@@ -199,14 +207,15 @@
             //
             switch (command_targetdomain) {
                 case 'HomeAutomation.HomeGenie':
-                    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Program.Pause"><a data-rel="popup" href="#automation_command_args">Program.Pause</a></li>');
-                    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Program.Repeat"><a data-rel="popup" href="#automation_command_args">Program.Repeat</a></li>');
-                    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Groups.LightsOn"><a data-rel="popup" href="#automation_command_args">Groups.LightsOn</a></li>');
-                    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Groups.LightsOff"><a data-rel="popup" href="#automation_command_args">Groups.LightsOff</a></li>');
-                    //			    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Security.ArmedStatus"><a data-rel="popup" href="#automation_command_args">Security.ArmedStatus</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Program.Pause"><a>Program.Pause</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Program.Repeat"><a>Program.Repeat</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Program.Run"><a>Program.Run</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Groups.LightsOn"><a>Groups.LightsOn</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Groups.LightsOff"><a>Groups.LightsOff</a></li>');
+                    //			    $('#automation_command_property').append('<li data-context-value="Security.ArmedStatus"><a>Security.ArmedStatus</a></li>');
                     break;
                 case 'Controllers.LircRemote':
-                    $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.IrSend"><a data-rel="popup" href="#automation_command_args">Send IR code</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Control.IrSend"><a>Send IR code</a></li>');
                     break;
                 default:
                     //			case 'HomeAutomation.X10':
@@ -220,9 +229,9 @@
                             break;
                         case 'light':
                         case 'switch':
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.On"><a data-rel="popup" href="#automation_command_args">Control.On</a></li>');
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.Off"><a data-rel="popup" href="#automation_command_args">Control.Off</a></li>');
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.Toggle"><a data-rel="popup" href="#automation_command_args">Control.Toggle</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.On"><a>Control.On</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Off"><a>Control.Off</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Toggle"><a>Control.Toggle</a></li>');
                             break;
                             /*
                                             case 'siren':
@@ -230,10 +239,10 @@
                                             case 'shutter':
                                             case 'fan':*/
                         default:
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.On"><a data-rel="popup" href="#automation_command_args">Control.On</a></li>');
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.Off"><a data-rel="popup" href="#automation_command_args">Control.Off</a></li>');
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.Level"><a data-rel="popup" href="#automation_command_args">Control.Level</a></li>');
-                            $('#automation_command_property').append('<li data-theme="' + uitheme + '" data-context-value="Control.Toggle"><a data-rel="popup" href="#automation_command_args">Control.Toggle</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.On"><a>Control.On</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Off"><a>Control.Off</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Level"><a>Control.Level</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Toggle"><a>Control.Toggle</a></li>');
                             break;
                     }
                     break;
@@ -241,10 +250,20 @@
             $('#automation_command_property').listview('refresh');
             //
             build_command();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_target_property', true);
         });
 
         $('#automation_command_target_property').on('click', 'li', function () {
             command_targetparameter = $(this).attr('data-context-value')
+            build_command();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_args', true);
+        });
+
+        $('#command_args_input').on('keyup', function () {
+            command_value = $('#command_args_input').val();
+            //
             build_command();
         });
 
@@ -261,7 +280,6 @@
             HG.WebApp.ProgramEdit._CurrentProgram.Commands.push(commandobj);
 
             automationpage_CommandsRefresh();
-
         });
 
     });
@@ -272,14 +290,14 @@
         var htmlopt = '';
         var mods = HG.WebApp.ProgramEdit.GetDomainControllableModules(domain, showall);
         for (var m = 0; m < mods.length; m++) {
-            htmlopt += '<li data-theme="' + uitheme + '" data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a data-rel="popup" href="#automation_command_target_property">' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
+            htmlopt += '<li data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a>' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
         }
         return htmlopt;
     }
 
 
 
-    function build_command(current) {
+    function build_command() {
         var commandstring = '... ?';
 
         if (command_targetdomain != '') {
@@ -295,7 +313,6 @@
             commandstring += '<br />&bull; <b>' + command_value + '</b>';
         }
         $('body').find('[id=command_wizard_text]').each(function () { $(this).html(commandstring); });
-        //return conditionstring;
     }
 
 
@@ -309,13 +326,13 @@
                 args = HG.WebApp.ProgramEdit._CurrentProgram.Commands[i].CommandArguments;
             }
             $('#automation_program_instructions').append('' +
-                '<li data-theme="' + uitheme + '" data-context-value="' + i + '"><a>' +
+                '<li data-context-value="' + i + '"><a>' +
                 ' <span style="color:gray">' + HG.WebApp.ProgramEdit._CurrentProgram.Commands[i].Domain.split('.')[1] + '</span>' +
                 ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Commands[i].Target + (module ? ' <span style="color:gray">' + module.DeviceType + '</span>' : ' <span style="color:gray">do</span>') +
                 ' <b>' + HG.WebApp.ProgramEdit._CurrentProgram.Commands[i].CommandString.split('.')[1].toUpperCase() + '</b>' +
                 ' ' +
                 '<b>' + args + '</b>' +
-                '</a><a data-theme="' + uitheme + '" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px" data-rel="popup" data-position-to="window" data-role="button" data-transition="pop" href="#automation_command_delete">--</a></li>');
+                '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-transition="pop" href="#automation_command_delete">Delete</a></li>');
         }
         $('#automation_program_instructions').listview('refresh');
     }

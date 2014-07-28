@@ -116,7 +116,7 @@ HG.WebApp.Statistics.RefreshModules = function () {
 };
 
 HG.WebApp.Statistics.Refresh = function () {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading('show');
     //
     HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
         var trange = eval(res)[0];
@@ -127,7 +127,7 @@ HG.WebApp.Statistics.Refresh = function () {
 //        $('#page_analyze_enddate').val( moment(end).format('YYYY-MM-DD') );
     });
     //
-    if (HG.WebApp.Statistics._CurrentParameter == 'Meter.Watts' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.')
+    if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.')
     {
 	    HG.Statistics.ServiceCall('Global.CounterTotal', '', HG.WebApp.Statistics._CurrentParameter, function(total){
 			$('#page_analyze_totalunits').val( (total * 1).toFixed(2) );
@@ -148,6 +148,7 @@ HG.WebApp.Statistics.Refresh = function () {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
         type: "POST",
+        data: "{ dummy: 'dummy' }",
         dataType: "text",
         success: function (data) {
             var stats = eval(data);
@@ -179,6 +180,7 @@ HG.WebApp.Statistics.Refresh = function () {
             $.ajax({
                 url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.Counter/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
                 type: "POST",
+                data: "{ dummy: 'dummy' }",
                 dataType: "text",
                 success: function (data) {
                     var stats = eval(data);
@@ -212,7 +214,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         });
                     } catch (e) { }
                     //
-                    $.mobile.hidePageLoadingMsg();
+                    $.mobile.loading('hide');
                 }
             });
         }

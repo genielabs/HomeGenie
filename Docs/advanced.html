@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HomeGenie - Documentation</title>
+    <meta name="description" content="HomeGenie: Open Source Home Automation Server in a Internet Of Things world. For Windows, Linux, Mac, Raspberry Pi.">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google-translate-customization" content="4465409ca18a218d-3c5a592dabcc0b15-gd17525dd79b50c62-1c">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- JQuery Snippet -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.snippet.min.css">
+    <link rel="stylesheet" type="text/css" href="css_pirobox/style_1/style.css">
+    <!--::: OR :::-->
+    <link rel="stylesheet" type="text/css" href="css_pirobox/style_2/style.css">
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.snippet.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <!--::: it depends on which style you choose :::-->
+    <script type="text/javascript" src="js/pirobox_extended.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
+    <!-- or use minified version  "pirobox_extended_min.js"  -->
+    <script type="text/javascript">
+            $(document).ready(function(){
+                  // pirobox gallery
+                  $().piroBox_ext({
+                      piro_speed: 700,
+                      bg_alpha: 0.5,
+                      piro_scroll: true //pirobox always positioned at the center of the page
+                  });
+                  // smooth scroll
+                  $(".scroll").click(function (event) {
+                      event.preventDefault();
+                      $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 500);
+                  });
+                  // source code snippet
+                  $("pre.csharp").snippet("csharp", { style: "kwrite", transparent: false, showNum: true });
+            });			
+      </script>
+    <script type="text/javascript">
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-40902095-1', 'generoso.info');
+            ga('send', 'pageview');
+      </script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>      <![endif]-->
+    <div class="header-container">
+      <header class="wrapper clearfix">
+        <h1 class="title">HomeGenie</h1>
+        <nav>
+          <ul>
+            <li><a href="http://www.homegenie.it/">Home</a></li>
+            <li><a href="http://www.homegenie.it/docs">Docs</a></li>
+            <li><a href="http://www.homegenie.it/download.php">Download</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <div class="main-container">
+      <div class="main wrapper clearfix">
+        <article style="width:100%">
+          <aside class="blank">
+            <script type="text/javascript">
+                              function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-40902095-1'}, 'google_translate_element');
+                              }
+                              </script>
+            <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </aside>
+          <header>
+            <!--h1>...</h1>
+                              <p>                              ...                              </p--> </header>
+          <section>
+            <h1> Advanced Topics</h1>
+            <h2>Adding configuration parameters to a program</h2>
+            In some case it is useful to let user configure some program parameters without having to dig into the source code. For this purpose, the <span style="font-style: italic;">Program Helper</span> class offers the <strong><em>AddInputField</em> </strong>method.<br>
+            For instance, the <em>Energy Saving Mode</em> program (available from <em>Energy Management</em> group), let the user configure the maximum allowed dimmer level.<br>
+            <br>
+            <div align="center"> <a title="Program Cofiguration Parameters" href="images/docs/advancedtopics_01.jpg" rel="gallery" class="pirobox_gall"><img src="images/docs/advancedtopics_01.jpg" alt="" width="300"></a> </div>
+            <br>
+            The <em><strong>AddInputField</strong></em> method is meant to be used inside the <em>Program Helper</em> <em><strong>Setup</strong> </em>method delegate and placed in the <em>Trigger Code</em> block, as shown in the code below:<br>
+            <pre class="csharp">Program.Setup(()=&gt;
+{              
+    Program.AddInputField("MaxLevel", "40", "Keep level below the following value");
+});            </pre>
+            This will automatically add a new input field in the program options popup as already seen in the previous screenshot.<br>
+            To read the current value of a configuration parameter we will use the <em>Program Helper</em> <em><strong>InputField</strong></em> method:<br>
+            <pre class="csharp">var maxLevel = Program.InputField("MaxLevel");
+</pre> <br>
+            <h2> Adding new features to modules</h2>
+            Let's see at the <span style="font-style: italic;">Energy Saving Mode</span> program once again. Beside letting the user configure the maximun dimmer level, the program also let the user specify what devices will be controlled by it.<br>
+            This is where the <em><strong>AddFeature</strong></em> method from the Program Helper class become useful. The <em><strong>AddFeature </strong></em>method will "attach" to a given types of module a checkbox or an input text field.<br>
+            The program will then select only the modules having the Energy Saving Mode "feature" enabled and so adjust their dimmer level value.<br>
+            As seen for the <em>AddInputField</em> method, also the <em><strong>AddFeature </strong></em>method is meant to be included in the Program.Setup method delegate:<br>
+            <pre class="csharp">Program.Setup(()=&gt;
+{              
+    Program.AddInputField("MaxLevel", "40", "Keep level below the following value");
+    Program.AddFeature("Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light");
+});            </pre>
+            To select modules with a specific feature active we can use the <em>Modules Helper</em> <strong><em>WithFeature</em></strong> selector, while to check if a certain module has a feature active we can use <strong><em>HasFeature</em></strong> property:<br>
+            <pre class="csharp">When.ModuleParameterChange( (module, property) =&gt; {
+    if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; property.Name == "Status.Level")
+    {
+        // Adjust module level if needed ....
+    }
+});
+</pre> In the following screenshots we can see, in the module's options popup, the resulting checkbox out of the <em><strong>Addfeature</strong></em> method and in the program's options popup the summary of implemented features and configuration parameters.<br>
+            <br>
+            <div align="center"> <a title="Module Options and Features Popup" href="images/docs/advancedtopics_02.jpg" rel="gallery" class="pirobox_gall"><img src="images/docs/advancedtopics_02.jpg" alt="" width="300"></a> <a title="Program Implementation Details" href="images/docs/advancedtopics_03.jpg" rel="gallery" class="pirobox_gall"><img src="images/docs/advancedtopics_03.jpg" alt="" width="300"></a> </div>
+            <br>
+            <h2>Virtual Modules</h2>
+            We already learned that each program comes with an associated module. But we could also add an arbitrary number of modules that our program will manage. The <em>Program Helper</em> <strong><em>AddVirtualModules </em></strong>method is meant for this purpose. One of the system programs using this method, is the <em>Philips Hue Bridge</em> program.<br>
+            It creates virtual modules that will let HG control the color lights connected to the Philips bridge hardware. <br>
+            <pre class="csharp">Program.AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5);</pre>
+            The first parameter of the <em><strong>AddVirtualModules</strong></em> command is the domain associated to the modules.<br>
+            The second parameter set the type of the device.<br>
+            The thirth parameter set the control widget that will be used to display these modules in the <em>Control Panel</em>.<br>
+            The last two parameters set the start and the end address of the modules that are being added.<br>
+            The <em>Color Light</em> widget, associated to these modules, will send commands in the form:<br>
+            <pre>    http://&lt;hg_address&gt;<span style="font-style: italic;">/api/&lt;module_domain&gt;/&lt;module_address&gt;/&lt;command&gt;/&lt;param&gt;</span></pre>
+            An example call is:<br>
+            <pre>    http://<span style="font-style: italic;">192.168.10.5/api/HomeAutomation.PhilipsHue/2/Control.On</span></pre>
+            So, the <span style="font-style: italic;">Philips Hue Birdge</span> program must also handle these web service calls in order to invoke the corresponding API command on the Philips Hue Bridge hardware (using the <em>Net Helper</em> class).<br>
+            See the next paragraph about how to handle custom web service calls.<br>
+            &nbsp;<br>
+            <h2>Handling custom Web Service calls</h2>
+            To handle custom web service calls, we will be using the <em>Events Helper</em> <em><strong>WebServiceCallReceived</strong></em> method.<br>
+            This method let our program register and listen for a particular API call.<br>
+            <pre class="csharp">When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; 
+{
+    // url path after "/api/" is passed as argument of the delegate 
+    string[] reqs = ((string)args).Split('/');
+    // ...
+});
+</pre>In the above example, all api calls starting with
+            <pre>    /api/<strong>HomeAutomation.PhilipsHue</strong></pre>
+            will trig the execution of our WebServiceCallReceived delegate.<br>
+            To the delegate will be also passed an argument (<em>args</em>) with the relative url path (not including <em>/api/</em> string).<br>
+            For example, the api call seen in the previous paragraph, will be passed as:<br>
+            <pre>    HomeAutomation.PhilipsHue/2/Control.On</pre>
+            So we can now just "split" this string to obtain the address of the module (<em>2</em>) and the command to be issued (<em>Control.On</em>).<br>
+            <br>
+            <br>
+            <br>
+          </section>
+          <footer>
+            <p align="center"><a href="index.html">[back to index]</a></p>
+          </footer>
+        </article>
+      </div>
+      <!-- #main --> </div>
+    <!-- #main-container -->
+    <div class="footer-container">
+      <footer class="wrapper">
+        <h3><a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" style="color:yellow">CC BY-NC 3.0</a> © 2012-2014 G-Labs</h3>
+      </footer>
+    </div>
+  </body>
+</html>

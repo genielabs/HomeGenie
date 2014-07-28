@@ -15,6 +15,14 @@
 		{
 			"Command": "Control.Toggle",
 			"Aliases": [ "växla" ]
+		},
+		{
+			"Command": "Control.Run",
+			"Aliases": [ "start", "köra" ]
+		},
+		{
+			"Command": "Control.Break",
+			"Aliases": [ "stoppa", "avbryter" ]
 		}
 	],
 	"Types" : [

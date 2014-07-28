@@ -21,21 +21,48 @@
 		{
 			this.Initialized = true;
 			//
+			//container.css('width', '100%');
+			//container.css('float', 'right');
+			//container.css('text-align', 'right');
+			//container.css('horizontal-alignment', 'right');
+			//
 			var groupname = this.GroupName;
-			container.on('click', function() {
+			widget.on('click', function() {
 				HG.Automation.Programs.Run(module.Address, groupname, null);
 			});
 		}
         //
-        var program = HG.WebApp.ProgramsList.GetProgramByAddress(module.Address);
-        if (program != null)
-        {
-            var statuscolor = HG.WebApp.ProgramsList.GetProgramStatusColor(program);
-            widget.css('background-image', 'url(images/common/led_' + statuscolor + '.png)');
-        }
+        var prog = HG.WebApp.ProgramsList.GetProgramByAddress(module.Address);
+		var statuscolor = 'black';
+		var status = HG.WebApp.Utility.GetModulePropertyByName(module, "Program.Status");
+		if (status != null) 
+		{
+			switch(status.Value)
+			{
+				case 'Enabled':
+				case 'Idle':
+					statuscolor = 'yellow';
+					break;
+				case 'Running':
+					statuscolor = 'green';
+					break;
+				case 'Disabled':
+					statuscolor = 'black';
+					if (prog.Type.toLowerCase() != 'wizard' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]') {
+						if (prog.IsEnabled) {
+							statuscolor = 'red';
+						}
+						else {
+							statuscolor = 'brown';
+						}
+					}
+					break;
+			}
+		}
 		//
 		// render widget
 		//
 		widget.find('[data-ui-field=name]').html(module.Name.substring(module.Name.lastIndexOf('|') + 1));
+        widget.css('background-image', 'url(images/common/led_' + statuscolor + '.png)');
     }
 }]

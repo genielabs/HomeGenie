@@ -144,15 +144,15 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
         var callback = function (success) {
             if (!success && tries < 3) {
                 tries++;
-                $.mobile.showPageLoadingMsg();
+                $.mobile.loading('show');
                 window.setTimeout(function () { HG.WebApp.GroupModules.ZWave_NodeInfoRequest(callback); }, 1000);
             }
             else
             {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading('hide');
             }
         };
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
         HG.WebApp.GroupModules.ZWave_NodeInfoRequest(callback);
     }
     //
@@ -350,6 +350,146 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
 
 
 
+// TODO: Refactor all of the following methods to stay in "HG.Ext.ZWave." domain
+
+
+HG.WebApp.GroupModules.ZWave_AssociationGet = function () {
+    $('#opt-zwave-association-label').html('Nodes Id in this group = ? (querying node...)');
+    zwave_AssociationGet($('#configurepage_OptionZWave_id').val(), $('#configassoc-gid').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-association-label').html('Nodes Id in this group = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-association-label').html('Nodes Id in this group = ' + res);
+        }
+    });
+};
+
+HG.WebApp.GroupModules.ZWave_ConfigVariableGet = function () {
+    $('#opt-zwave-configvar-label').html('Variable Value = ? (querying node...)');
+    zwave_ConfigurationParameterGet($('#configurepage_OptionZWave_id').val(), $('#configvar-id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-configvar-label').html('Variable Value = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-configvar-label').html('Variable Value = ' + res);
+        }
+    });
+};
+
+HG.WebApp.GroupModules.ZWave_BasicGet = function () {
+    $('#opt-zwave-basic-label').html('Basic Value = ? (querying node...)');
+    zwave_BasicGet($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-basic-label').html('Basic Value = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-basic-label').html('Basic Value = ' + res);
+        }
+    });
+};
+
+HG.WebApp.GroupModules.ZWave_BatteryGet = function () {
+    $('#opt-zwave-battery-label').html('Battery Level = ? (querying node...)');
+    zwave_BatteryGet($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-battery-label').html('Battery Level = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-battery-label').html('Battery Level = ' + res + '%');
+        }
+    });
+};
+
+HG.WebApp.GroupModules.ZWave_WakeUpGet = function () {
+    $('#opt-zwave-wakeup-label').html('Wake Up Interval = ? (querying node...)');
+    zwave_WakeUpGet($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-wakeup-label').html('Wake Up Interval = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-wakeup-label').html('Wake Up Interval = ' + res + 's');
+        }
+    });
+};
+
+HG.WebApp.GroupModules.ZWave_NodeInfoRequest = function (callback) {
+    $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ? (querying node...)');
+    zwave_ManufacturerSpecificGet($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ? (operation timeout!)');
+            if (callback != null) callback(false);
+        }
+        else {
+            var mspecs = res;
+            $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (querying nodeinfo)');
+            zwave_NodeInformationGet($('#configurepage_OptionZWave_id').val(), function (res) {
+                if (res == '') {
+                    $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ' + mspecs + ' (operation timeout!)');
+                    if (callback != null) callback(false);
+                }
+                else {
+                    var nodeid = $('#configurepage_OptionZWave_id').val();
+                    //TODO: find a better way of refreshing options data
+                    HG.Configure.Modules.List(function (data) {
+                        HG.WebApp.Data.Modules = eval(data);
+                        HG.WebApp.GroupModules.ShowModuleOptions("HomeAutomation.ZWave", nodeid);
+                    });
+                    //
+                    if (callback != null) callback(true);
+                }
+            });
+        }
+    });
+};
+
+HG.WebApp.GroupModules.SwitchBinaryParameterGet = function () {
+    $('#opt-zwave-switchbinary-label').html('Switch Binary = ? (querying node...)');
+    zwave_SwitchBinaryParameterGet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-switchbinary-label').html('Switch Binary = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-switchbinary-label').html('Switch Binary = ' + (res == '0' ? 'Off' : 'On'));
+        }
+    });
+}
+
+HG.WebApp.GroupModules.SwitchMultiLevelParameterGet = function () {
+    $('#opt-zwave-switchmulti-label').html('Switch MultiLevel = ? (querying node...)');
+    zwave_SwitchMultilevelParameterGet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-switchmulti-label').html('Switch MultiLevel = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-switchmulti-label').html('Switch MultiLevel = ' + Math.round(parseFloat(res.replace(',', '.') * 99)));
+        }
+    });
+};
+
+HG.WebApp.GroupModules.SensorBinaryParameterGet = function () {
+    $('#opt-zwave-sensorbinary-label').html('Sensor Binary = ? (querying node...)');
+    zwave_SensorBinaryParameterGet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-sensorbinary-label').html('Sensor Binary = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-sensorbinary-label').html('Sensor Binary = ' + (res == '0' ? 'Off' : 'On'));
+        }
+    });
+};
+
+HG.WebApp.GroupModules.SensorMultiLevelParameterGet = function () {
+    $('#opt-zwave-sensormulti-label').html('Sensor MultiLevel = ? (querying node...)');
+    zwave_SensorMultilevelParameterGet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-sensormulti-label').html('Sensor MultiLevel = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-sensormulti-label').html('Sensor MultiLevel = ' + res);
+        }
+    });
+};
 
 
 
@@ -362,6 +502,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
 
 
 
+// TODO: Refactor all of the following methods to stay in "HG.Ext.ZWave.Api" domain
 
 
 function zwave_AssociationGet(nodeid, groupid, callback) {
@@ -472,10 +613,6 @@ function zwave_SensorMultilevelParameterGet(nodeid, varid, callback) {
 
 function zwave_AutoReportSet(nodeid, intervalsec) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.AutoReportSet/' + nodeid + '/' + intervalsec + '/' + (new Date().getTime()), function (data) { });
-}
-
-function zwave_NodesDiscovery() {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.Discovery/' + (new Date().getTime()), function (data) { });
 }
 
 function zwave_NodeAdd(callback) {

@@ -1,0 +1,93 @@
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+		<div data-ui-field="name" style="font-weight:bold">Name</div>
+	    <div data-ui-field="description">loading...</div>
+	    <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
+	</div>
+
+    <br />
+
+    <div class="ui-grid-a">
+    	<div class="ui-block-a">
+		    <div data-ui-field="color" style="margin-top:8px;margin-left:30px;width:48px;height:52px"></div>
+    	</div>
+    	<div class="ui-block-b">
+	        <div data-role="controlgroup" data-type="horizontal">
+	            <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn" href="#">Off</a>
+	            <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn" href="#">On</a>
+	        </div>
+    	</div>
+    </div>
+
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+
+	<div class="ui-footer ui-bar-inherit" style="padding-left:5px;padding-right:5px;">
+        <div data-ui-field="status" align="right" style="font-family:Monospace;font-size:12pt;vertical-align:middle"></div>
+	</div>
+
+</div>
+<a data-ui-field="toggle" href="#" data-icon="refresh" data-corners="false" data-shadow="false" data-iconshadow="true" style="display:none; border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px">Toggle</a>
+
+
+
+<!-- widget popups and other ui elements follow -->
+
+<div data-ui-field="controlpopup" data-position-to="window" style="width:260px;" data-transition="pop" data-overlay-theme="b" style="display:none">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+
+    <div style="margin:10px">
+
+        <!-- BEGIN - COMMON UI PART --->
+        <table>
+            <tr>
+                <td>
+                    <div data-ui-field="color" style="width:48px;height:48px;border:solird 2px white;"></div>
+                </td>
+                <td>
+                    <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+                    <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+                </td>
+            </tr>
+        </table>
+        <!-- -->
+        <div data-ui-field="status" style="margin:0;font-size:18pt;" align="center"></div>
+        <!-- END - COMMON UI PART --->
+        <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
+
+        <div data-ui-field="colors" style="margin-left:20px">
+        </div>
+
+        <div align="center">
+            <br />
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="prg1" data-locale-id="control_module_prg1" class="ui-btn" href="#">1</a>
+                <a data-ui-field="prg2" data-locale-id="control_module_prg2" class="ui-btn" href="#">2</a>
+                <a data-ui-field="prg3" data-locale-id="control_module_prg3" class="ui-btn" href="#">3</a>
+                <a data-ui-field="prg4" data-locale-id="control_module_prg4" class="ui-btn" href="#">4</a>
+            </div>
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="prg5" data-locale-id="control_module_prg5" class="ui-btn" href="#">5</a>
+                <a data-ui-field="prg6" data-locale-id="control_module_prg6" class="ui-btn" href="#">6</a>
+                <a data-ui-field="prg7" data-locale-id="control_module_prg7" class="ui-btn" href="#">7</a>
+                <a data-ui-field="prg8" data-locale-id="control_module_prg8" class="ui-btn" href="#">8</a>
+            </div>
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="prg9" data-locale-id="control_module_prg9" class="ui-btn" href="#">9</a>
+                <a data-ui-field="prg10" data-locale-id="control_module_prg10" class="ui-btn" href="#">10</a>
+            </div>
+        </div>
+
+        <div align="center">
+            <br />
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn" href="#">OFF</a>
+                <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn" href="#">ON</a>
+            </div>
+        </div>
+
+        <!-- END - MODULE TYPE SPECIFIC DIVS -->
+
+        <br />
+    </div>
+</div>

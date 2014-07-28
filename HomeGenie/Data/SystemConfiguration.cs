@@ -37,6 +37,7 @@ namespace HomeGenie.Data
         public event Action<bool> OnUpdate;
 
         public HomeGenieConfiguration HomeGenie { get; set; }
+
         public MIGServiceConfiguration MIGService { get; set; }
 
         public SystemConfiguration()
@@ -71,10 +72,10 @@ namespace HomeGenie.Data
 
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
-            MIGServiceConfiguration.Interface res = null;
-            res = MIGService.Interfaces.Find(i => i.Domain == domain);
+            MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
             return res;
         }
+
         public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
         {
             MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
@@ -86,32 +87,34 @@ namespace HomeGenie.Data
             bool success = false;
             try
             {
-                //lock (_dblock)
+                SystemConfiguration syscopy = (SystemConfiguration)this.Clone();
+                foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
                 {
-                    SystemConfiguration syscopy = (SystemConfiguration)this.Clone();
-                    foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
+                    try
                     {
-                        try
-                        {
-                            if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
-                            if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(p.LastValue, GetPassPhrase());
-                        }
-                        catch { }
+                        if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
+                        if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(
+                                p.LastValue,
+                                GetPassPhrase()
+                            );
                     }
-
-
-                    string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
-                    if (File.Exists(fname))
+                    catch
                     {
-                        File.Delete(fname);
                     }
-                    System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
-                    ws.Indent = true;
-                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
-                    System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
-                    x.Serialize(wri, syscopy);
-                    wri.Close();
                 }
+
+
+                string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
+                if (File.Exists(fname))
+                {
+                    File.Delete(fname);
+                }
+                System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
+                ws.Indent = true;
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
+                System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
+                x.Serialize(wri, syscopy);
+                wri.Close();
                 success = true;
             }
             catch (Exception)
@@ -136,10 +139,15 @@ namespace HomeGenie.Data
     public class HomeGenieConfiguration
     {
         public string SystemName { get; set; }
+
         public string Location { get; set; }
+
         public int ServicePort { get; set; }
+
         public string UserLogin { get; set; }
+
         public string UserPassword { get; set; }
+
         public List<ModuleParameter> Settings = new List<ModuleParameter>();
 
         public string GUID { get; set; }
@@ -150,6 +158,8 @@ namespace HomeGenie.Data
     [Serializable()]
     public class MIGServiceConfiguration
     {
+        public string EnableWebCache { get; set; }
+
         public List<Interface> Interfaces = new List<Interface>();
 
         [Serializable()]
@@ -169,6 +179,7 @@ namespace HomeGenie.Data
             {
                 [XmlAttribute]
                 public string Name { get; set; }
+
                 [XmlAttribute]
                 public string Value { get; set; }
             }

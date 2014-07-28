@@ -33,8 +33,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         private double temperature = 0;
         private double luminance = 0;
         private double humidity = 0;
-        private double generic = 0;
-        private double power = 0;
+        //private double generic = 0;
+        //private double power = 0;
 
         public void SetNodeHost(ZWaveNode node)
         {
@@ -62,7 +62,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             bool handled = false;
             //
-            byte cmdLength = message[6];
+            //byte cmdLength = message[6];
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
@@ -111,7 +111,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             bool processed = false;
             //
-            byte cmdLength = message[6];
+            //byte cmdLength = message[6];
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
@@ -124,11 +124,17 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 {
                     // CLASS METER
                     //
-                    double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
+                    double wattsRead = ((double)int.Parse(
+                                           message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
+                                           System.Globalization.NumberStyles.HexNumber
+                                       )) / 1000D;
                     nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
                     //
                     Logger.Log(LogLevel.REPORT, " * Received METER report from node " + nodeHost.NodeId); // + " (" + _nodehost.Description + ")");
-                    Logger.Log(LogLevel.REPORT, " * " + nodeHost.NodeId + ">   kW " + Math.Round(wattsRead, 3) /*+ "    Counter kW " + Math.Round(meter_count, 10)*/ );
+                    Logger.Log(
+                        LogLevel.REPORT,
+                        " * " + nodeHost.NodeId + ">   kW " + Math.Round(wattsRead, 3) /*+ "    Counter kW " + Math.Round(meter_count, 10)*/
+                    );
                     //
                     processed = true;
                 }
@@ -144,8 +150,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 //                     mi ?  in    sb rp vl
                 byte instance = message[9];
                 byte reportType = message[10];
-                byte cmd = message[11];
-                byte type = message[12];
+                //byte cmd = message[11];
+                //byte type = message[12];
                 //
                 //SPI > 01 0F 00 04 00 32 09 60 06 03 31 05 01 2A 02 E4 53
                 if (true) // TODO: check against proper command classes SENSOR_BINARY, SENSOR_MULTILEVEL, ...
@@ -182,14 +188,19 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         //if (temperature <= 212) // this fixes a bug with my HSM-100 sensor
                         {
                             nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, temperature);
-                            nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.PARAMETER_TEMPERATURE, temperature);
+                            nodeHost.RaiseUpdateParameterEvent(
+                                nodeHost,
+                                key,
+                                ParameterType.PARAMETER_TEMPERATURE,
+                                temperature
+                            );
                         }
                         //
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
                     {
-                        generic = val;
+                        //generic = val;
                         //
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.PARAMETER_GENERIC, humidity);
@@ -229,7 +240,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                             energy = ((double)e) / 1000.0;
                         }
 
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL, (double)energy);
+                        nodeHost.RaiseUpdateParameterEvent(
+                            nodeHost,
+                            instance,
+                            ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL,
+                            (double)energy
+                        );
 
                         processed = true;
                     }
@@ -251,6 +267,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             public ZWaveSensorParameter Parameter = ZWaveSensorParameter.UNKNOWN;
             public double Value = 0d;
         }
+
         public class SensorAlarmValue
         {
             public ParameterType EventType = ParameterType.PARAMETER_GENERIC;
@@ -269,31 +286,34 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.COMMAND_CLASS_SENSOR_ALARM)
             {
-                sensorValue.Parameter = (ZWaveSensorAlarmParameter)Enum.Parse(typeof(ZWaveSensorAlarmParameter), message[10].ToString());
+                sensorValue.Parameter = (ZWaveSensorAlarmParameter)Enum.Parse(
+                    typeof(ZWaveSensorAlarmParameter),
+                    message[10].ToString()
+                );
                 sensorValue.Value = message[11];
             }
             //
             switch (sensorValue.Parameter)
             {
-                case ZWaveSensorAlarmParameter.CARBONDIOXIDE:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_CARBONDIOXIDE;
-                    break;
-                case ZWaveSensorAlarmParameter.CARBONMONOXIDE:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_CARBONMONOXIDE;
-                    break;
-                case ZWaveSensorAlarmParameter.SMOKE:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_SMOKE;
-                    break;
-                case ZWaveSensorAlarmParameter.HEAT:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_HEAT;
-                    break;
-                case ZWaveSensorAlarmParameter.FLOOD:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_FLOOD;
-                    break;
-                //case ZWaveSensorAlarmParameter.GENERIC:
-                default:
-                    sensorValue.EventType = ParameterType.PARAMETER_ALARM_GENERIC;
-                    break;
+            case ZWaveSensorAlarmParameter.CARBONDIOXIDE:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_CARBONDIOXIDE;
+                break;
+            case ZWaveSensorAlarmParameter.CARBONMONOXIDE:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_CARBONMONOXIDE;
+                break;
+            case ZWaveSensorAlarmParameter.SMOKE:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_SMOKE;
+                break;
+            case ZWaveSensorAlarmParameter.HEAT:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_HEAT;
+                break;
+            case ZWaveSensorAlarmParameter.FLOOD:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_FLOOD;
+                break;
+            //case ZWaveSensorAlarmParameter.GENERIC:
+            default:
+                sensorValue.EventType = ParameterType.PARAMETER_ALARM_GENERIC;
+                break;
             }
             //
             return sensorValue;
@@ -328,6 +348,9 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 sensorValue.Parameter = ZWaveSensorParameter.TEMPERATURE;
                 sensorValue.Value = ExtractTemperatureFromBytes(message);
                 sensorValue.EventType = ParameterType.PARAMETER_TEMPERATURE;
+
+
+
             }
             else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
             {
@@ -362,7 +385,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         }
 
 
-        // code from http://sourceforge.net/p/homegenie/discussion/general/thread/3d98093f/#677f
+   
         public static double ExtractTemperatureFromBytes(byte[] message)
         {
             double temperature = 0; // (double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
@@ -376,8 +399,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
 
             // F to C
-            if (precisionScaleSize != 0x22)
-                temperature = ((5.0 / 9.0) * (temperature - 32.0));
+            if (precisionScaleSize != 0x22) temperature = ((5.0 / 9.0) * (temperature - 32.0));
 
             return temperature;
         }

@@ -1,18 +1,33 @@
-﻿<a data-ui-field="widget">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
 
-    <img data-ui-field="icon" style="margin-left:6px;margin-top:12px" height="54" src="pages/control/widgets/homegenie/generic/images/securitysystem.png" />
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+		<span data-ui-field="name" style="font-weight:bold">Name</span><br />
+	    <span data-ui-field="description">...</span>
+	    <!--a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a-->
+	</div>
 
-    <span data-ui-field="name"></span><br />
+    <br />
 
-    <p style="margin:0;max-width:180px">
-        <select data-ui-field="armdisarm" data-role="slider" data-mini="true" data-inset="true">
-            <option value="off">
-                Disarmed
-            </option>
-            <option value="on">
-                Armed
-            </option>
-        </select>
-        <div data-ui-field="status" style="position:absolute;right:50px;top:40%;bottom:58%;"></div>
-    </p>
-</a>
+    <div class="ui-grid-a">
+    	<div class="ui-block-a">
+		    <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/securitysystem.png" />
+    	</div>
+    	<div class="ui-block-b" style="padding-top:8px;">
+	        <select data-ui-field="armdisarm" data-role="slider">
+	            <option value="off">
+	                Disarmed
+	            </option>
+	            <option value="on">
+	                Armed
+	            </option>
+	        </select>
+    	</div>
+    </div>
+
+	<br />
+
+	<div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+	</div>
+
+</div>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>HomeGenie</Name>
-  <Version>1.00 beta r351</Version>
-  <Description>Latest public release.</Description>
-  <ReleaseNote>  - General better memory and multi-threading management using ThreadPool
-  - Fixed: enabling a program after disable was not executing Program.Setup delegate</ReleaseNote>
-  <ReleaseDate>2014-03-17T07:21:41.0000Z</ReleaseDate>
-</ReleaseInfo>

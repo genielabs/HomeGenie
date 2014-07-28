@@ -43,7 +43,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
         {
             bool handled = false;
             //
-            byte cmdLength = message[6];
+            //byte cmdLength = message[6];
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //

@@ -31,6 +31,8 @@
 		 "Configura",
 	"configure_menu_heading": 
 		 "Menu Configura",
+	"configure_groups_heading": 
+		 "Gruppi<br>e Moduli",
 	"configure_menu_groups_modules": 
 		 "Gruppi e Moduli",
 	"configure_menu_automation": 
@@ -40,7 +42,7 @@
 	"configure_menu_maintenance": 
 		 "Manutenzione",
 	"configure_automation_heading": 
-		 "Groups and<br>Modules",
+		 "<font style='color:gray'>Automazione</font><br>Gruppi",
 	"configure_group_newgroup": 
 		 "Nuovo Gruppo",
 	"configure_group_entergroupname": 
@@ -76,7 +78,7 @@
 	"configure_module_typedimmer": 
 		 "Variatore",
 	"configure_module_typeswitch": 
-		 "Presa",
+		 "Interruttore",
 	"configure_module_typesensor": 
 		 "Sensore",
 	"configure_module_typetemperature": 
@@ -124,11 +126,11 @@
 	"configure_program_options": 
 		 "Options",
 	"configure_program_options_edit": 
-		 "Edit program",
+		 "Edit",
 	"configure_program_options_export": 
-		 "Export program",
+		 "Export",
 	"configure_program_options_delete": 
-		 "Delete program",
+		 "Delete",
 	"configure_program_programgroup": 
 		 "Program Group",
 	"configure_program_programname": 
@@ -256,7 +258,7 @@
 	"configure_interfaces_camera": 
 		 "Camera Device",
 	"configure_interfaces_cameradesc": 
-		 "Works with any Video4Linux compatible device on <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
+		 "Works with any Video4Linux compatible device (x64 Ubuntu and Raspberry Pi only).",
 	"configure_interfaces_cameraport": 
 		 "Device Port",
 	"configure_interfaces_raspigpio": 

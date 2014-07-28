@@ -1,8 +1,23 @@
-﻿<a data-ui-field="widget">
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" height="48" src="pages/control/widgets/homegenie/generic/images/sensor.png" />
-    <span data-ui-field="name"></span><br />
-    <p style="margin:0">
-        <span data-ui-field="description" style="color:gray">loading...</span><br />
-        <div data-ui-field="sensorstatus" style="font-family:Monospace;font-size:10pt;color:green;text-wrapping:wrap;margin-top:5px;padding-bottom:5px;"></div>
-    </p>
-</a>
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+
+
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+		<div data-ui-field="name" style="font-weight:bold">Name</div>
+	    <div data-ui-field="description">loading...</div>
+	    <!--a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a-->
+	</div>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+    	<td valign="top"><img class="hg-widget-icon" style="margin-top:20px" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/sensor.png" /></td>
+    	<td align="right" valign="middle"><div data-ui-field="sensorstatus" style="font-size:12pt;"></div></td>
+    </tr>
+	</table>
+
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+
+	<div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+	</div>
+
+</div>

@@ -2,47 +2,22 @@
 <div data-role="page" id="page_control">
 
 
-    {include pages/header.html}
-
-    <div data-role="content">
-
-        <img src="images/control.png" style="position:absolute;top:63px;left:20px;" width="64" />
-        <div style="position:relative;height:70px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:0;left:90px;" data-locale-id="control_groups_and_modules">Control Groups<br /> and Modules</h3></div>
-
-        <div id="control_groupslist" data-role="collapsible-set">
-        </div>
-
-    </div>
 
 
-
-
-    <div data-role="popup" id="control_actionmenu">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        <h5 align="center">Actions Menu</h5>
-        <ul data-role="listview" data-inset="false" style="min-width:210px;" data-iconpos="right">
-            <li id="control_actionmenu_macrorecord" data-icon="edit"><a href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
-            <li data-icon="refresh"><a href="javascript:HG.WebApp.Control.Refresh();HG.WebApp.Control.SetAutoRefresh(true);">Refresh list</a></li>
-        </ul>
-    </div>
-
-
-
-
-    <div data-role="popup" id="control_macrorecord_optionspopup" style="min-width:280px">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div id="control_macrorecord_optionspopup" class="hg-popup-a" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header"><h1>Options</h1></div>
-        <div data-role="content">
+        <div class="ui-content">
 
             <h4>Pause Between commands</h4>
             <div align="center">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <label for="macrorecord_delay_none">None</label>
-                    <input name="macrorecord_delay_radio" id="macrorecord_delay_none" type="radio" data-icon="gear" data-iconpos="left" data-mini="true" />
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_none" type="radio" data-icon="gear" data-iconpos="left" />
                     <label for="macrorecord_delay_mimic">Mimic</label>
-                    <input name="macrorecord_delay_radio" id="macrorecord_delay_mimic" type="radio" data-icon="gear" data-iconpos="left" data-mini="true" />
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_mimic" type="radio" data-icon="gear" data-iconpos="left" />
                     <label for="macrorecord_delay_fixed">Fixed</label>
-                    <input name="macrorecord_delay_radio" id="macrorecord_delay_fixed" type="radio" data-icon="gear" data-iconpos="left" data-mini="true" />
+                    <input name="macrorecord_delay_radio" id="macrorecord_delay_fixed" type="radio" data-icon="gear" data-iconpos="left" />
                 </fieldset>
             </div>
             <fieldset data-role="controlgroup">
@@ -62,20 +37,20 @@
 
     <div id="toolbar_control" data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="home_menu_configure" data-role="button" data-transition="slide" href="#page_configure" data-icon="gear" data-iconpos="left">
+                    <a data-locale-id="home_menu_configure" class="ui-btn ui-icon-gear ui-btn-icon-left" data-transition="slide" href="#page_configure">
                         Configure
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                    <a data-locale-id="bottombar_button_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-transition="slide" data-direction="reverse" href="#page_home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_program_bbaractions" data-role="button" href="#control_actionmenu" data-rel="popup" data-transition="slideup" data-icon="arrow-u" data-iconpos="left">
+                    <a data-locale-id="configure_program_bbaractions" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#control_actionmenu" data-rel="popup" data-transition="slideup">
                         Actions
                     </a>
                 </li>
@@ -84,23 +59,23 @@
 
     </div>
 
-    <div id="toolbar_macrorecord" data-role="footer" data-position="fixed" data-tap-toggle="false" class="ui-screen-hidden">
+    <div id="toolbar_macrorecord" data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <div data-role="navbar" data-iconpos="right">
+        <div data-role="navbar">
 
             <ul>
                 <li>
-                    <a href="javascript:HG.WebApp.Control.RecordMacroDiscard()" data-locale-id="control_macrorecord_discard" data-role="button" href="#" data-icon="delete" data-iconpos="left">
+                    <a class="ui-btn ui-icon-delete ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroDiscard()" data-locale-id="control_macrorecord_discard" href="#">
                         Discard
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save" data-role="button" data-transition="slide" data-direction="reverse" data-icon="check" data-iconpos="left">
+                    <a id="btn_control_macrorecord" class="ui-btn ui-icon-check ui-btn-icon-left" href="javascript:HG.WebApp.Control.RecordMacroSave()" data-locale-id="control_macrorecord_save" data-transition="slide" data-direction="reverse">
                         Save
                     </a>
                 </li>
                 <li>
-                    <a data-role="button" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-transition="slideup" data-icon="gear" data-mini="true" __style="max-width:100px;">
+                    <a class="ui-btn ui-icon-gear ui-btn-icon-right" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-transition="slideup">
                         Options
                     </a>
                 </li>
@@ -110,6 +85,38 @@
 
     </div>
 
+    {include pages/header.html}
+
+    <div class="ui-content" style="margin:0;padding:0">
+
+        <div style="position:fixed;z-index:1000;width:100%;cursor:pointer">
+	        <div class="ui-bar-b" style="opacity:0.9;">
+	        	<ul data-role="listview" id="control_groupsmenu" style="margin:0;max-height:180px;overflow:auto;" class="trapScroll">
+	        	</ul>
+	        </div>
+	        <div onclick="HG.WebApp.Control.ToggleMenu()" class="ui-header ui-bar-inherit ui-shadow" style="display:inline-block;width:100%;">
+	        	<div style="float:left"><p class="ui-icon-bars ui-btn-icon-left" style="margin:5px;margin-left:0"><strong id="control_groupmenutitle">&nbsp;</strong></p></div>
+				<table align="right" style="float:right;margin-right:10px;vertical-align:middle"><tr id="control_groupindicators"></tr></table>
+			</div>
+		</div>
+		<div align="center">
+	        <div id="control_groupcontent" style="margin-top:55px;margin-bottom:40px">
+	        </div>
+        </div>
+
+    </div>
+
+    <div id="control_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 align="center">Actions Menu</h5>
+        <ul id="control_custom_actionmenu" data-role="listview" data-inset="false" style="min-width:210px;">
+        </ul>
+        <div class="ui-body-inherit" style="height:2px;width:100%;overflow:hidden;border:0">&nbsp;</div>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;" data-mini="true">
+            <li id="control_actionmenu_macrorecord" data-mini="true"><a class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
+            <!--li><a class="ui-btn ui-icon-refresh ui-btn-icon-right" href="javascript:$.mobile.loading('show');HG.WebApp.Control.UpdateModules();">Refresh list</a></li-->
+        </ul>
+    </div>
 
 </div>
 

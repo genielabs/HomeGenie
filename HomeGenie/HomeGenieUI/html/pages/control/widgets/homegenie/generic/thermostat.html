@@ -1,11 +1,136 @@
-﻿<a data-ui-field="widget">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
 
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:10px" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+		<div data-ui-field="name" style="font-weight:bold">Name</div>
+	    <div data-ui-field="description">loading...</div>
+	    <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
+	</div>
 
-    <span data-ui-field="name"></span><br />
+    <br />
 
-    <p style="magin:5px;">
-        <span style="color:gray;magin-top:5px;font-size:8pt;" data-ui-field="description">not implemented in current version</span><br />
-    </p>
+    <div class="ui-grid-a">
+    	<div class="ui-block-a" style="width:30%">
+		    <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+    	</div>
+    	<div class="ui-block-b" style="width:70%">
 
-</a>
+
+
+
+			<div style="margin:2px;height:28px;float:left">
+	            <div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;text-align:bottom;width:40px;float:left">
+	                <img data-ui-field="temperature_image" alt="Temperature" src="pages/control/widgets/homegenie/generic/images/temperature.png" height="22" align="center" style="vertical-align:bottom" />
+
+	            </div>
+	            <div align="left" style="width:80px;padding:4px;float:left;border-top:solid 1px lightgray;">
+	                <font data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+	            </div>
+	        </div>
+			<div style="margin:2px;height:28px;float:left">
+	            <div align="left" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+	                <b>Set:</b>
+	            </div>
+	            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
+	                <font data-ui-field="set_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+	            </div>
+	        </div>
+
+	        <div style="margin:2px;height:28px;float:left">
+	            <div align="left" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+	                <b>Fan:</b>
+	            </div>
+	            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
+	                <font data-ui-field="fan_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+	            </div>
+	        </div>
+	        <div style="margin:2px;height:28px;float:left">
+	            <div align="left" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+	                <b>Op:</b>
+	            </div>
+	            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
+	                <font data-ui-field="operating_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+	            </div>
+	        </div>
+			<div style="margin:2px;height:28px;float:left">
+	            <div align="left" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;line-height:28px;text-align:bottom;width:70px;float:left">
+	                <b>Mode:</b>
+	            </div>
+	            <div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;">
+	                <font data-ui-field="mode_value" style="line-height:28px;text-align:bottom;color:gray"></font>
+	            </div>
+	        </div>
+
+
+
+
+
+    	</div>
+    </div>
+
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+
+	<div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+	</div>
+
+</div>
+
+
+<!-- widget popups and other ui elements follow -->
+
+<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+    <div style="margin:10px">
+
+        <!-- BEGIN - COMMON UI PART --->
+        <table width="100%">
+            <tr>
+                <td width="56">
+                    <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+                </td>
+                <td>
+                    <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+                    <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+                </td>
+                <td valign="top">
+                    <div data-ui-field="status" style="margin-top:10px;font-size:11pt;color:gray;" align="right"></div>
+                </td>
+            </tr>
+        </table>
+        <!-- END - COMMON UI PART --->
+        <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
+	  <div align="center">
+            <input data-ui-field="level_knob" data-role="none" type="text" class="dial"
+                   data-width="170"
+                   data-height="120"
+                   data-min="40"
+                   data-max="100"
+                   data-gradient="red"
+                   data-fgcolor="#CCCCCC"
+                   data-bgcolor="#555555"
+                   data-angleoffset=-125
+                   data-anglearc=250
+                   -data-cursor=true
+                   -data-skin="tron"
+                   data-thickness=".4"
+                   -data-linecap=round
+                   data-displayprevious=true>
+        </div>
+
+
+        <div align="center">
+
+
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-locale-id="therm_off" data-role="button" href="">Off</a>
+                <a data-locale-id="therm_cool" data-role="button" href="">Cool</a>
+		  <a data-locale-id="therm_heat" data-role="button" href="">Heat</a>
+            </div>
+        </div>
+
+        <!-- END - MODULE TYPE SPECIFIC DIVS -->
+
+        <br />
+    </div>
+</div>

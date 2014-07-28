@@ -3,15 +3,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MIG</RootNamespace>
     <AssemblyName>MIG</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>0.9 beta</ReleaseVersion>
+    <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +33,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="LibUsbDotNet">
       <HintPath>..\Support Libraries\XTenLib\LibUsbDotNet.dll</HintPath>
@@ -49,6 +43,9 @@
     </Reference>
     <Reference Include="UPnP">
       <HintPath>..\..\HomeGenie\Externals\upnp\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="Ude">
+      <HintPath>Externals\ude-0.1\Ude.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +76,6 @@
   <ItemGroup>
     <Folder Include="Gateways\ProtocolAdapters\OSC\" />
     <Folder Include="Gateways\ProtocolAdapters\WebRTC\" />
-    <Folder Include="Interfaces\Controllers\MsKinect\" />
-    <Folder Include="Interfaces\Controllers\OpenNI\" />
-    <Folder Include="Interfaces\Controllers\WiiRemote\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -100,21 +94,17 @@
       <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
       <Name>ZWaveLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Support Libraries\TUIOLib\TUIOLib.csproj">
-      <Project>{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}</Project>
-      <Name>TUIOLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Support Libraries\W800RF32\W800RF32.csproj">
       <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
       <Name>W800RF32</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Support Libraries\OpenKinectLib\OpenKinectLib.csproj">
-      <Project>{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}</Project>
-      <Name>OpenKinectLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Support Libraries\SerialPortLib\SerialPortLib.csproj">
       <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
       <Name>SerialPortLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Support Libraries\TUIOLib\TUIOLib.csproj">
+      <Project>{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}</Project>
+      <Name>TUIOLib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

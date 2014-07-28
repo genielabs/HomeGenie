@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HomeGenie - Documentation</title>
+    <meta name="description" content="HomeGenie: Open Source Home Automation Server in a Internet Of Things world. For Windows, Linux, Mac, Raspberry Pi.">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google-translate-customization" content="4465409ca18a218d-3c5a592dabcc0b15-gd17525dd79b50c62-1c">
+    <link rel="stylesheet" href="../css/normalize.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- JQuery Snippet -->
+    <link rel="stylesheet" type="text/css" href="../css/jquery.snippet.min.css">
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+    <!--script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script-->
+    <script type="text/javascript" src="http://gettopup.com/releases/latest/top_up-min.js"></script>
+    <script type="text/javascript" src="../js/jquery.snippet.min.js"></script>
+    <script src="../js/plugins.js"></script>
+    <script src="../js/main.js"></script>
+    <script type="text/javascript">
+			$(document).ready(function(){
+//				setTimeout(function () {
+					$("pre.csharp").snippet("csharp", { style: "kwrite", transparent: false, showNum: true });
+//				}, 1000);		
+				//$('li:odd').css("background-color", "gray");
+				//$('li:even').css("background-color", "white");
+			});			
+		</script>
+    <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type="text/javascript">
+
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-40902095-1', 'generoso.info');
+		  ga('send', 'pageview');
+		  
+		</script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>        <![endif]-->
+    <div class="header-container">
+      <header class="wrapper clearfix">
+        <h1 class="title">HomeGenie</h1>
+        <nav>
+          <ul>
+            <li><a href="http://www.homegenie.it/">Home</a></li>
+            <li><a href="http://www.homegenie.it/docs">Docs</a></li>
+            <li><a href="http://www.homegenie.it/download.php">Download</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <div class="main-container">
+      <div class="main wrapper clearfix">
+        <article style="width:100%">
+          <aside class="blank">
+            <script type="text/javascript">
+						function googleTranslateElementInit() {
+						  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-40902095-1'}, 'google_translate_element');
+						}
+						</script>
+            <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </aside>
+          <header>
+            <!--h1>...</h1>
+						<p>						...						</p--> </header>
+          <section>
+            <h1>ProgramHelper Class</h1>
+            <p>Class instance accessor: <span style="font-style: italic;"><span style="font-weight: bold;">Program</span></span><strong><em></em></strong></p>
+            <h2>.Notify</h2>
+            <p>Display a notification message from current program. </p>
+            <h2 class="section-title">.Notify( <em>title</em>, <em>message</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong></strong><strong>title</strong><br>
+              Type: string<br>
+              Title for the notification message.<br>
+              <hr><strong>message</strong><br>
+              Type: string<br>
+              Notification message text.<br>
+              <hr><em>Example snippet:</em><br>
+              <pre class="csharp">    Program.Notify("Test Program", "Hello world!");</pre>
+            </div>
+            <h2>.Say</h2>
+            <p>Playbacks a synthesized voice message from speaker.</p>
+            <h2 class="section-title">.Say( <em>message, locale[, donotwait]</em> );<span class="returns"></span></h2>
+            <div class="entry-wrapper"><strong>message</strong><br>
+              Type: string<br>
+              Message to output.<br>
+              <hr><strong>locale</strong><em><br>
+                Type: string<br>
+              </em>Language locale string (eg. <em>"en-US"</em>, <em>"it-IT"</em>, <em>"en-GB"</em>, <em>"nl-NL"</em>,...)<em><br>
+              </em>
+              <hr><strong>[donotwait</strong>]<span style="font-weight: bold;"> &nbsp; </span>(defaut value is <em>false</em>)<br>
+              Type: bool<br>
+              If <em>true</em>, the command will be executed asyncronously.<br>
+              <hr><em></em><em>Example snippet:</em><br>
+              <pre class="csharp">    Program.Say("The garage door has been opened", "en-US");</pre>
+            </div>
+            <h2>.Play</h2>
+            <p>Playbacks a wave file.</p>
+            <h2 class="section-title">.Play( <em>wave_url</em> );<span class="returns"></span></h2>
+            <div class="entry-wrapper"><strong>wave_url</strong><br>
+              Type: string<br>
+              URL of the audio wave file to play.<br>
+            </div>
+            <h2><a id="Program.Setup" name="Program.Setup"></a>.Setup</h2>
+            <p>Execute a setup function once the program is enabled. It is meant to be used in the <em>Trigger Code Block</em> to configure program input fields, parameters and features.</p>
+            <h2 class="section-title">.Setup( <em>fn</em> )<span class="returns">Returns: void</span></h2>
+            <div class="entry-wrapper"> <strong></strong><em>Example snippet:</em><br>
+              <pre class="csharp">  Program.Setup(()=&gt;
+  {              
+    	Program.AddInputField(<br>			"MaxLevel",<br>			"40", <br>			"Keep level below the following value");
+    	Program.AddFeature(<br>			"Dimmer",<br>			"EnergyManagement.EnergySavingMode", <br>			"Energy Saving Mode enabled light");
+  });</pre>
+            </div>
+            <h2>.AddControlWidget</h2>
+            <p>Set the widget to be used for displaying the module program in the Control Panel.</p>
+            <h2 class="section-title">.AddControlWidget( <em>widget_id</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <em><strong></strong></em><strong>widget_id</strong><br>
+              Type: string<br>
+              Widget identifier (eg. <em>homegenie/generic/sensor</em>).<br>
+            </div>
+            <h2>.AddInputField</h2>
+            <p>Adds a configuration input field to the program. The input field will be displayed in the program options dialog as a text input box.</p>
+            <h2 class="section-title">.AddInputField( <em>name, default_value, description</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong></strong><strong>name</strong><br>
+              Type: string<br>
+              Identifier name of the input field.<br>
+              <hr><strong>default_value</strong><br>
+              Type: string<br>
+              Default field value.<br>
+              <hr><strong>description</strong><br>
+              Type: string<br>
+              The description that will be displayed as the label of this field.<em><br>
+              </em>
+              <hr>See <em><a href="#Program.Setup">.Setup</a> </em>example above.<br>
+            </div>
+            <h2>.InputField</h2>
+            <p>Gets the value of a program input field.</p>
+            <h2 class="section-title">.InputField( <em>name</em> )<span class="returns">Returns: ModuleParameter</span></h2>
+            <div class="entry-wrapper"> <strong></strong><strong>name</strong><br>
+              Type: string<br>
+              Identifier name of the input field.<em><br>
+              </em>
+              <hr><em>Example snippet:</em><br>
+              <pre class="csharp">		// ....<br>		var delay = Program.InputField("OffDelay").DecimalValue;<br>		Pause( delay ); <br>		Modules.WithFeature("Timer.TurnOffDelay").Off()</pre>
+            </div>
+            <h2>.AddFeature</h2>
+            <p>Adds a custom "feature" parameter to module options dialog for a given domain/device type. This command should only appear in a <a href="#Program.Setup"><em>.Setup</em></a> function block.</p>
+            <h2 class="section-title">.AddFeature( <em>for_domains, for_module_types, feature_name, description[, type]</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong>for_domains</strong><br>
+              Type: string<br>
+              Comma separated domain names (<em>eg. "HomeAutomation.X10,HomeAutomation.ZWave"</em>). Empty string value stands for "any" domain.<br>
+              <hr><strong>for_module_types</strong><br>
+              Type: string<br>
+              Comma separated module types (eg. <em>"Dimmer,Switch,Light"</em>). Empty string value stands for "any" module.<br>
+              <hr><strong>parameter_name</strong><br>
+              Type: string<br>
+              Identifier name for this feature.<br>
+              <hr><strong>description</strong><br>
+              Type: string<br>
+              Description for this parameter.<br>
+              <hr><strong>type</strong><br>
+              Type: string<br>
+              Type of parameter. Accepts values "checkbox" and "text".<br>
+              <hr><em>Example snippet:</em><br>
+              <pre class="csharp"> 	Program.Setup(()=&gt;
+	{<br>		// adds a feature parameter for any Switch, Light or Dimmer device<br>		Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "text");<br>	});	</pre>
+            </div>
+            <h2>.Feature</h2>
+            <p>Gets a custom "feature" parameter.</p>
+            <h2 class="section-title">.Feature( <em>name</em> )<span class="returns">Returns: ModuleParameter</span></h2>
+            <div class="entry-wrapper"> <strong></strong><strong>name</strong><br>
+              Type: string<br>
+              Identifier name.<br>
+            </div>
+            <h2>.AddVirtualModules</h2>
+            <p>Add a new set of virtual modules to the system.</p>
+            <h2 class="section-title">.AddVirtualModules( <em>domain, type, widget_id, start_address, end_address</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong>domain</strong><br>
+              Type: string<br>
+              Domain name of virtual modules.<br>
+              <hr><strong>type</strong><br>
+              Type: string<br>
+              Type name of virtual modules.<br>
+              <hr><strong>widget_id</strong><br>
+              Type: string<br>
+              Widget identifier.<br>
+              <hr><strong>start_address</strong><br>
+              Type: int<br>
+              Starting address of the modules to add.<br>
+              <hr><strong>end_address</strong><br>
+              Type: int<br>
+              Ending address of the modules to add.<br>
+            </div>
+            <h2>.AddVirtualModule</h2>
+            <p>Add a new virtual module to the system.</p>
+            <h2 class="section-title">.AddVirtualModule( <em>domain, address, type, widget_id</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong>domain</strong><br>
+              Type: string<br>
+              Module domain.<br>
+              <hr> <strong>address</strong><br>
+              Type: string<br>
+              Module address.<br>
+              <hr><strong>type</strong><br>
+              Type: string<br>
+              Module type.<br>
+              <hr><strong>widget_id</strong><br>
+              Type: string<br>
+              Widget identifier.<br>
+            </div>
+            <h2>.RemoveVirtualModule</h2>
+            <p>Remove a virtual module from the system.</p>
+            <h2 class="section-title">.RemoveVirtualModule( <em>domain, address</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong>domain</strong><br>
+              Type: string<br>
+              Module domain.<br>
+              <hr> <strong>address</strong><br>
+              Type: string<br>
+              Module address.<br>
+            </div>
+            <h2>.Parameter</h2>
+            <p>Gets or sets a program parameter.</p>
+            <h2 class="section-title">.Parameter( <em>name</em> )<span class="returns">Returns: ModuleParameter</span></h2>
+            <div class="entry-wrapper"><strong>name</strong><em><br>
+                Type: string<br>
+                The program parameter name.<br>
+              </em>
+              <hr><em>Example snippet:</em><br>
+              <pre class="csharp">	// sets an example program parameter<br>	Program.Parameter("MyProgram.ExampleParameter").Value = "Just testing...";<br><br>	// read "Sensor.Temperature" parameter of the program named "DHT-11"<br>	if (Program.WithName("DHT-11").Parameter("Sensor.Temperature").DecimalValue &lt; 20 <br>		&amp;&amp; Modules.WithName("Heater").IsOff)<br>	{<br>		Modules.WithName("Heater").On();<br>	}</pre>
+            </div>
+            <h2>.IsRunning</h2>
+            <p>Returns <em>true </em>if the program is currently being executed.</p>
+            <h2 class="section-title">.IsRunning<span class="returns">bool</span></h2>
+            <div class="entry-wrapper"> <strong></strong><em>Example snippet:</em><br>
+              <pre class="csharp">		if (!Program.WithName("Weather Service").IsRunning)<br>		{<br>			Program.Notify("Alert", "Weather Service is not running!");<br>		}</pre>
+            </div>
+            <h2>.IsEnabled</h2>
+            <p>Returns <em>true</em> if the program is enabled.</p>
+            <h2 class="section-title">.IsEnabled<span class="returns">bool</span></h2>
+            <div class="entry-wrapper"> <strong></strong><em>Example snippet:</em><br>
+              <pre class="csharp">	while (Program.IsEnabled)<br>	{<br>		if (!Program.WithName("Weather Service").IsRunning)<br>		{<br>			Program.Notify("Alert", "Weather Service is not running!");<br>		}<br>		// pause 60 seconds before next check<br>		Pause(60); <br>	}</pre>
+            </div>
+            <h2>.GoBackground</h2>
+            <p>This command is usually put at the end of the "code to run". It is the equivalent of an infinite noop loop.</p>
+            <h2 class="section-title">.GoBackground()<span class="returns">Returns: void</span></h2>
+            <div class="entry-wrapper"> <em>Example snippet:</em><br>
+              <pre class="csharp">	When.ModuleParameterIsChanging((module, parameter) =&gt; {
+		// check if the module has just been turned on
+		if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
+		{
+			var level = module.Parameter("Status.Level");
+			var lastlevel = module.Parameter("Status.LastLevel");
+			//
+			if (level.DecimalValue != lastlevel.DecimalValue)
+			{
+				bool justswitchedon = (lastlevel.DecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+				if (justswitchedon)
+				{
+					var pausedelay = module.Parameter("HomeGenie.TurnOffDelay").DecimalValue;
+					var targetmodule = module;
+					Program.RunAsyncTask(()=&gt;{
+						Pause(pausedelay);
+						targetmodule.Off();
+					});
+				}
+			}
+		}
+		return true;
+	});
+	Program.<strong>GoBackground</strong>();</pre>
+            </div>
+            <h2>.RaiseEvent</h2>
+            <p>Raise a module parameter change event and set the parameter with the specified value. If module is not specified the current program module will be used.</p>
+            <h2 class="section-title">.RaiseEvent( <em>[module,] parameter, value, description</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong>module</strong> (optional)<br>
+              Type: ModuleHelper<br>
+              Module instance.<br>
+              <hr> <strong>parameter</strong><br>
+              Type: string<br>
+              Parameter name.<br>
+              <hr> <strong>value</strong><br>
+              Type: string<br>
+              Parameter value to set.<br>
+              <hr> <strong>description</strong><br>
+              Type: string<br>
+              Event description.<br>
+            </div>
+            <h2>.Run</h2>
+            <p>Execute a program.</p>
+            <h2 class="section-title">.Run( <em>program_id</em> )<span class="returns">Returns: void</span></h2>
+            <div class="entry-wrapper"> <strong>program_id</strong><br>
+              Type: string<br>
+              Program name or ID .</div>
+            <h2>.RunAsyncTask</h2>
+            <p>Execute a function block asynchronously.</p>
+            <h2 class="section-title">.RunAsyncTask( <em>fn</em> )<span class="returns">Returns: Thread</span></h2>
+            <div class="entry-wrapper"> <strong>fn</strong><br>
+              Type: function<br>
+              The delegate function to execute.<br>
+              <em></em></div>
+            <h2>.WithName</h2>
+            <p>Returns the ProgramHelper reference of the program with the specified name.</p>
+            <h2 class="section-title">.WithName( <em>program_name</em> )<span class="returns">Returns: ProgramHelper</span></h2>
+            <div class="entry-wrapper"> <strong></strong><strong>name</strong><em><br>
+              </em>Type: string<br>
+              The program name.<em><br>
+              </em><em></em></div>
+          </section>
+          <br>
+          <footer>
+            <p align="center"><a href="../index.html">[back to index]</a></p>
+          </footer>
+        </article>
+      </div>
+      <!-- #main --> </div>
+    <!-- #main-container -->
+    <div class="footer-container">
+      <footer class="wrapper">
+        <h3><a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" style="color:yellow">CC BY-NC 3.0</a> © 2012-2014 G-Labs</h3>
+      </footer>
+    </div>
+  </body>
+</html>

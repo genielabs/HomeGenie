@@ -131,7 +131,7 @@ namespace HomeGenie.Service.Handlers
                     hoursAverages[1] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Max");
                     hoursAverages[2] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Avg");
                     hoursAverages[3] = homegenie.Statistics.GetHourlyStats24(domain, address, migCommand.GetOption(0), "Avg");
-                    if (migCommand.GetOption(0) == Properties.METER_WATTS)
+                    if (migCommand.GetOption(0).StartsWith(Properties.METER_ANY))
                     {
                         hoursAverages[4] = homegenie.Statistics.GetTodayDetail(domain, address, migCommand.GetOption(0), "Sum");
                     }
@@ -148,7 +148,7 @@ namespace HomeGenie.Service.Handlers
                             StatisticsEntry firstEntry = null;
                             if (hoursAverages[x] != null && hoursAverages[x].Count > 0)
                             {
-                                if (migCommand.GetOption(0) == Properties.METER_WATTS)
+                                if (migCommand.GetOption(0).StartsWith(Properties.METER_ANY))
                                 {
                                     firstEntry = hoursAverages[x].Find(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0);
                                 }
@@ -164,7 +164,7 @@ namespace HomeGenie.Service.Handlers
                                 switch (x)
                                 {
                                     case 0:
-                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0).StartsWith(Properties.METER_ANY))
                                         {
                                             sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Min(se => se.Value));
                                         }
@@ -177,7 +177,7 @@ namespace HomeGenie.Service.Handlers
                                         sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h).Max(se => se.Value));
                                         break;
                                     case 2:
-                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0).StartsWith(Properties.METER_ANY))
                                         {
                                             sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
                                         }
@@ -187,7 +187,7 @@ namespace HomeGenie.Service.Handlers
                                         }
                                         break;
                                     case 3:
-                                        if (migCommand.GetOption(0) == Properties.METER_WATTS)
+                                        if (migCommand.GetOption(0).StartsWith(Properties.METER_ANY))
                                         {
                                             sum = (double)(hoursAverages[x].FindAll(se => se.TimeStart.ToLocalTime().Hour == h && se.Value > 0).Average(se => se.Value));
                                         }

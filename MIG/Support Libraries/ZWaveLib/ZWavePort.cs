@@ -64,10 +64,10 @@ namespace ZWaveLib
         private byte callbackIdSeq = 1;
         private object callbackLock = new object();
 
-        private Logger logger = new Logger();
+        //private Logger logger = new Logger();
 
         private SerialPortInput serialPort;
-        private string portName = "/dev/ttyUSB0";
+        private string portName = "";
 
         private List<ZWaveMessage> pendingMessages = new List<ZWaveMessage>();
         private bool isInitialized;
@@ -276,6 +276,8 @@ namespace ZWaveLib
         {
             //byte[] data = { 0x01, 0x0F, 0x00, 0x04, 0x00, 0x32, 0x09, 0x60, 0x06, 0x03, 0x31, 0x05, 0x01, 0x2A, 0x02, 0xC0, 0x77, 0x18 };
             //{ 0x01, 0x0E, 0x00, 0x04, 0x00, 0x30, 0x08, 0x32, 0x02, 0x21, 0x74, 0x00, 0x00, 0x18, 0x6F, 0xDF };
+            if (data.Length < 4) return true;
+
             int offset = 1;
             byte returnValue = data[offset];
             for (int i = offset + 1; i < data.Length - 1; i++)

@@ -31,6 +31,8 @@
 		 "Configure",
 	"configure_menu_heading": 
 		 "Configure Menu",
+	"configure_groups_heading": 
+		 "Groups<br>and Modules",
 	"configure_menu_groups_modules": 
 		 "Groups and Modules",
 	"configure_menu_automation": 
@@ -40,7 +42,7 @@
 	"configure_menu_maintenance": 
 		 "Maintenance and Updates",
 	"configure_automation_heading": 
-		 "Groups and<br>Modules",
+		 "<font style='color:gray'>Automation</font><br>Groups",
 	"configure_group_newgroup": 
 		 "New Group",
 	"configure_group_entergroupname": 
@@ -124,11 +126,11 @@
 	"configure_program_options": 
 		 "Options",
 	"configure_program_options_edit": 
-		 "Edit program",
+		 "Edit",
 	"configure_program_options_export": 
-		 "Export program",
+		 "Export",
 	"configure_program_options_delete": 
-		 "Delete program",
+		 "Delete",
 	"configure_program_programgroup": 
 		 "Program Group",
 	"configure_program_programname": 

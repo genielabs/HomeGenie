@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTenLib", "Support Librarie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TUIOLib", "Support Libraries\TUIOLib\TUIOLib.csproj", "{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKinectLib", "Support Libraries\OpenKinectLib\OpenKinectLib.csproj", "{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,22 +61,11 @@ Global
 		{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}.Release|x86.ActiveCfg = Release|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{06995CE8-149B-42FA-B345-FB11C4D6E180} = {9EB8E871-A955-4756-A7F2-ECC1A6C5DD8D}
 		{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF} = {9EB8E871-A955-4756-A7F2-ECC1A6C5DD8D}
 		{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D} = {9EB8E871-A955-4756-A7F2-ECC1A6C5DD8D}
-		{B255E0EA-A69B-4E5C-B2C1-D7F5C53D8510} = {9EB8E871-A955-4756-A7F2-ECC1A6C5DD8D}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = MIG\MIG.csproj

@@ -13,10 +13,10 @@ HG.WebApp.AutomationGroupsList.InitializePage = function () {
             HG.WebApp.AutomationGroupsList.GroupsAdd($('#automationgroup_new_name').val());
         });
         //	
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading('show');
         HG.Configure.Groups.List('Automation', function () {
             HG.WebApp.AutomationGroupsList.GetGroupsListViewItems();
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading('hide');
         });
         //
         HG.WebApp.AutomationGroupsList.LoadGroups();
@@ -32,16 +32,16 @@ HG.WebApp.AutomationGroupsList.InitializePage = function () {
 	//
 HG.WebApp.AutomationGroupsList.LoadGroups = function ()
 	{
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
 		HG.Configure.Groups.List('Automation', function () {
 		    HG.WebApp.AutomationGroupsList.GetGroupsListViewItems();
-			$.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
 		});
 	};
 //
 HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         $('#configure_automationgroupslist').empty();
-        $('#configure_automationgroupslist').append('<li data-theme="a" data-icon="false" data-role="list-divider">Groups List</li>');
+        $('#configure_automationgroupslist').append('<li data-icon="false" data-role="list-divider">Groups List</li>');
         //
         var i = 0;
         for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {
@@ -53,7 +53,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
 					modulescount++;
 				}
 			}
-            $('#configure_automationgroupslist').append('<li data-theme="' + uitheme + '" data-group-name="' + HG.WebApp.Data.AutomationGroups[i].Name + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + HG.WebApp.Data.AutomationGroups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+            $('#configure_automationgroupslist').append('<li data-group-name="' + HG.WebApp.Data.AutomationGroups[i].Name + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + HG.WebApp.Data.AutomationGroups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
         }
         //
         // programs with no group are shown in "Ungrouped" special group
@@ -65,7 +65,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         }
         if (modulescount > 0)
         {
-            $('#configure_automationgroupslist').append('<li data-group-name="" data-theme="' + uitheme + '"><a href="#page_automation_programs" data-transition="slide">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+            $('#configure_automationgroupslist').append('<li data-group-name=""><a href="#page_automation_programs" data-transition="slide">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
         }
         //
         $('#configure_automationgroupslist').listview();
@@ -165,11 +165,10 @@ HG.WebApp.AutomationGroupsList.SortGroups = function () {
 }
 
 HG.WebApp.AutomationGroupsList.SaveGroups = function () {
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
 		$.ajax({
 			type: 'POST',
 			url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.Save/Automation/',
-			//                        dataType: 'json',
 			data: JSON.stringify(HG.WebApp.Data.AutomationGroups),
 			success: function (response) {
 			    $('#control_automationgroupslist').empty();
@@ -177,10 +176,10 @@ HG.WebApp.AutomationGroupsList.SaveGroups = function () {
                 // TODO: reload group programs
 ///				HG.WebApp.GroupModules.LoadGroupModules();
 				//
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			},
 			error: function (a, b, c) {
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			}
 		});
 	};

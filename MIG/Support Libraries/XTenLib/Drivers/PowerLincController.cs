@@ -31,7 +31,8 @@ namespace XTenLib.Drivers
 {
     public class PowerLincController : XTenInterface, IDisposable
     {
-        public UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0x10bf, 0x0004);  // PowerLinc usb interface 
+        public UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0x10bf, 0x0004);
+        // PowerLinc usb interface
 
         /// <summary>Use the first read endpoint</summary>
         public readonly byte TRANFER_ENDPOINT = UsbConstants.ENDPOINT_DIR_MASK;
@@ -45,7 +46,7 @@ namespace XTenLib.Drivers
         /// <summary>Size of each transfer</summary>
         public int TRANFER_SIZE = 16;
 
-        private DateTime mStartTime = DateTime.MinValue;
+        //private DateTime mStartTime = DateTime.MinValue;
         private UsbDevice MyUsbDevice;
 
         private UsbEndpointReader reader = null;
@@ -60,11 +61,21 @@ namespace XTenLib.Drivers
         {
             if (MyUsbDevice != null && MyUsbDevice.IsOpen)
             {
-                try { reader.Abort(); }
-                catch { }
+                try
+                {
+                    reader.Abort();
+                }
+                catch
+                {
+                }
                 //
-                try { writer.Abort(); }
-                catch { }
+                try
+                {
+                    writer.Abort();
+                }
+                catch
+                {
+                }
             }
         }
 
@@ -75,8 +86,13 @@ namespace XTenLib.Drivers
             {
                 if (MyUsbDevice.DriverMode == UsbDevice.DriverModeType.MonoLibUsb)
                 {
-                    try { MyUsbDevice.Close(); }
-                    catch { }
+                    try
+                    {
+                        MyUsbDevice.Close();
+                    }
+                    catch
+                    {
+                    }
                 }
                 MyUsbDevice = null;
             }

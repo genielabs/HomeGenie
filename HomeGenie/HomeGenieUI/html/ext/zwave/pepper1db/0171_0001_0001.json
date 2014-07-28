@@ -81,16 +81,102 @@
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0072"
+          "@id": "0072",
+          "@controlled": "true"
         },
         {
-          "@id": "0086"
+          "@id": "0086",
+          "@controlled": "true"
         },
         {
-          "@id": "008f"
+          "@id": "008f",
+          "@controlled": "true"
         },
         {
-          "@id": "0020"
+          "@id": "0020",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0084",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0035",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0071",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0000",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0026",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0031",
+          "@version": "4",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0060",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0032",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "005a",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0070",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0025",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0030",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0080",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "0085",
+          "@controlled": "true",
+          "@inNIF": "false"
+        },
+        {
+          "@id": "009c",
+          "@version": "2",
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },

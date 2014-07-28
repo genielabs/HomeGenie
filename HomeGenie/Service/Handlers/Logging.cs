@@ -27,12 +27,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
+using System.Web;
 
 namespace HomeGenie.Service.Handlers
 {
     public class Logging
     {
         private HomeGenieService homegenie;
+
         public Logging(HomeGenieService hg)
         {
             homegenie = hg;
@@ -47,18 +50,75 @@ namespace HomeGenie.Service.Handlers
                 {
                     case "Recent.From":
                         logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null && le.Domain.StartsWith("MIG.") == false && (le.UnixTimestamp >= double.Parse(migCommand.GetOption(0))));
+                        migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
                         break;
 
                     case "Recent.Last":
-                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null 
-                            && le.Domain.StartsWith("MIG.") == false 
-                            && le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migCommand.GetOption(0))));
+                        logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null
+                        && le.Domain.StartsWith("MIG.") == false
+                        && le.Timestamp > DateTime.UtcNow.AddMilliseconds(-int.Parse(migCommand.GetOption(0))));
+                        migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
+                        break;
+
+                    case "RealTime.EventStream":
+                        HttpListenerContext context = (HttpListenerContext)request.Context;
+                        //context.Response.KeepAlive = true;
+                        context.Response.ContentEncoding = Encoding.UTF8;
+                        context.Response.ContentType = "text/event-stream";
+                        context.Response.AddHeader("Cache-Control", "no-cache");
+                        context.Response.AddHeader("Access-Control-Allow-Origin", "*");
+                        //
+                        // 2K padding for IE
+                        var padding = ":" + new String(' ', 2048) + "\n";
+                        byte[] paddingData = System.Text.Encoding.UTF8.GetBytes(padding);
+                        context.Response.OutputStream.Write(paddingData, 0, paddingData.Length);
+                        byte[] retryData = System.Text.Encoding.UTF8.GetBytes("retry: 1000\n");
+                        context.Response.OutputStream.Write(retryData, 0, retryData.Length);
+                        context.Response.OutputStream.Flush();
+                        //
+                        double lastTimeStamp = 0;
+                        var lastId = context.Request.Headers.Get("Last-Event-ID");
+                        if (lastId == null || lastId == "")
+                        {
+                            var queryValues = HttpUtility.ParseQueryString(context.Request.Url.Query);
+                            lastId = queryValues.Get("lastEventId");
+        
+                        }
+                        
+                        if (lastId != null && lastId != "")
+                        {
+                            double.TryParse(lastId, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out lastTimeStamp);
+                        }
+
+                        if (lastTimeStamp == 0)
+                        {
+                            lastTimeStamp = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
+                        }
+                        int looped = 0;
+                        while (looped < 10)
+                        {
+                            logData = homegenie.RecentEventsLog.ToList().FindAll(le => le != null
+                            && le.Domain.StartsWith("MIG.") == false
+                            && le.UnixTimestamp > lastTimeStamp);
+                            if (logData.Count > 0)
+                            {
+                                foreach (LogEntry entry in logData)
+                                {
+                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("id: " + entry.UnixTimestamp.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + "\ndata: " + JsonConvert.SerializeObject(entry) + "\n\n");
+                                    context.Response.OutputStream.Write(data, 0, data.Length);
+                                    context.Response.OutputStream.Flush();
+                                    lastTimeStamp = entry.UnixTimestamp;
+                                }
+                            }
+                            System.Threading.Thread.Sleep(1000);
+                            looped++;
+                        }
                         break;
                 }
             }
-            catch { }
-            migCommand.Response = JsonConvert.SerializeObject(logData); //, Formatting.Indented);
+            catch
+            {
+            }
         }
-
     }
 }

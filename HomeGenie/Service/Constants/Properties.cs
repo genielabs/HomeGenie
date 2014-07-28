@@ -31,11 +31,17 @@ namespace HomeGenie.Service.Constants
     // these are untyped, thouhg the consumer know how to handle these
     public static class Properties
     {
+        // internal HomeGenie parameters
+        public const string SCHEDULER_ERROR
+            = "Scheduler.Error";
+
         // commonly used parameters
         public const string STATUS_LEVEL
             = "Status.Level";
         public const string METER_WATTS
             = "Meter.Watts";
+        public const string METER_ANY
+            = "Meter.";
         public const string WIDGET_DISPLAYMODULE
             = "Widget.DisplayModule";
         public const string VIRTUALMODULE_PARENTID

@@ -28,6 +28,10 @@ using System.Linq;
 
 using System.IO;
 using MIG.Gateways;
+using MIG.Utility;
+
+using Ude;
+using Ude.Core;
 
 namespace MIG
 {
@@ -84,6 +88,7 @@ namespace MIG
         public DateTime Timestamp = DateTime.Now;
         public string FilePath = "";
         public string Content = "";
+        public Encoding Encoding;
     }
 
     public class MIGService
@@ -101,21 +106,25 @@ namespace MIG
         public Dictionary<string, MIGInterface> Interfaces; // TODO: this should be read-only, so implement pvt member _interfaces
 
         private WebServiceGateway webGateway;
-        private TcpSocketGateway tcpGateway;
+        //private TcpSocketGateway tcpGateway;
 
-        private int tcpGatewayPort = 4502;
+        //private int tcpGatewayPort = 4502;
+        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("ISO-8859-1");
 
         private WebServiceGatewayConfiguration webServiceConfig;
+		// TODO: move webFileCache to WebServiceGateway.cs
         private List<WebFileCache> webFileCache = new List<WebFileCache>();
 
         #region Lifecycle
         public MIGService()
         {
-            webGateway = new WebServiceGateway();
-            tcpGateway = new TcpSocketGateway();
-            //
             Interfaces = new Dictionary<string, MIGInterface>();
             //
+            //tcpGateway = new TcpSocketGateway();
+            //tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
+            //
+            webGateway = new WebServiceGateway();
+            webGateway.ProcessRequest += webGateway_ProcessRequest;
             webServiceConfig = new WebServiceGatewayConfiguration()
             {
                 Port = 80,
@@ -160,19 +169,17 @@ namespace MIG
                 // TODO: collects gateways to a List<MIGGateway> and expose it by public member Gateways
                 //
                 webGateway.Configure(webServiceConfig);
-                webGateway.ProcessRequest += webGateway_ProcessRequest;
                 webGateway.Start();
                 //
-                tcpGateway.Configure(new TcpSocketGatewayConfiguration()
-                {
-                    Port = tcpGatewayPort
-                });
-                tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
-                tcpGateway.Start();
+                //tcpGateway.Configure(new TcpSocketGatewayConfiguration()
+                //{
+                //    Port = tcpGatewayPort
+                //});
+                //tcpGateway.Start();
                 //
                 success = true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: add error logging 
             }
@@ -187,12 +194,12 @@ namespace MIG
 
         public void StopService()
         {
-            webGateway.Stop();
-            //_tcpgateway.Stop();
             foreach (var migInterface in Interfaces.Values)
             {
                 migInterface.Disconnect();
             }
+            webGateway.Stop();
+            //tcpGateway.Stop();
         }
         #endregion
 
@@ -211,6 +218,7 @@ namespace MIG
 
         #region TcpGateway
 
+        /*
         public void ConfigureTcpGateway(int port)
         {
             tcpGatewayPort = port;
@@ -224,12 +232,13 @@ namespace MIG
 
             var encoding = new System.Text.UTF8Encoding();
             string commandLine = encoding.GetString(data).Trim(new char[] { '\0', ' ' });
-            // TODO: 
-            // parse command line as <domain>/<target>/<command>/<parameter>[/<parameter>]
-            // or as XML serialized instance of GatewayClientRequest
-            // then deliver de-serialized command by firing  InterfaceRequestReceived
-            // and route to the interface with requested domain
+
+            // TODO: parse command line as <domain>/<target>/<command>/<parameter>[/<parameter>]
+            // TODO: or as XML serialized instance of GatewayClientRequest
+            // TODO: then deliver de-serialized command by firing  InterfaceRequestReceived
+            // TODO: and route to the interface with requested domain
         }
+        */
 
         #endregion
 
@@ -242,6 +251,24 @@ namespace MIG
             webServiceConfig.HomePath = homePath;
             webServiceConfig.BaseUrl = baseUrl.TrimStart('/');
             webServiceConfig.Password = adminPasswordHash;
+        }
+
+		public bool IsWebCacheEnabled
+		{
+			get { return webServiceConfig.CacheEnable; }
+			set {
+				if (value) {
+					webServiceConfig.CacheEnable = true;
+				} else {
+					webServiceConfig.CacheEnable = false;
+					webFileCache.Clear();
+				}
+			}
+		}
+
+        public void ClearWebCache()
+        {
+            webFileCache.Clear();
         }
 
         private void webGateway_ProcessRequest(object gwRequest)
@@ -276,11 +303,12 @@ namespace MIG
                 if (!string.IsNullOrEmpty(command.Response))
                 {
                     // simple automatic json response type detection
-                    if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
-                    {
-                        context.Response.ContentType = "application/json";
-                        context.Response.ContentEncoding = Encoding.UTF8;
-                    }
+					if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
+					{
+						// TODO: check the reason why this cause ajax/json error on some browser
+						context.Response.ContentType = "application/json";
+						context.Response.ContentEncoding = defaultWebFileEncoding;
+					}
                     WebServiceUtility.WriteStringToContext(context, command.Response);
                     return;
                 }
@@ -341,11 +369,14 @@ namespace MIG
                     context.Response.Headers.Set(HttpResponseHeader.LastModified, file.LastWriteTimeUtc.ToString("r"));
                     // PRE PROCESS text output
                     //TODO: add callback for handling caching (eg. function that returns true or false with requestdfile as input and that will return false for widget path)
-                    if (isText && !requestedFile.Contains("/widgets/"))
+                    if (isText)
                     {
                         try
                         {
-                            string body = GetWebFileCache(requestedFile);
+                            WebFileCache cachedItem = GetWebFileCache(requestedFile);
+                            context.Response.ContentEncoding = cachedItem.Encoding;
+                            context.Response.ContentType += "; charset=" + cachedItem.Encoding.BodyName;
+                            string body = cachedItem.Content;
                             //
                             bool tagFound;
                             do
@@ -367,10 +398,13 @@ namespace MIG
                                             {
                                                 string fileName = cs.Substring(9).TrimEnd('}').Trim();
                                                 fileName = GetWebFilePath(fileName);
-                                                body = ls + System.IO.File.ReadAllText(fileName) + rs;
+                                                //
+                                                Encoding fileEncoding = DetectWebFileEncoding(fileName);
+                                                if (fileEncoding == null) fileEncoding = defaultWebFileEncoding;
+                                                body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
                                             }
                                         }
-                                        catch (Exception e)
+                                        catch
                                         {
                                             body = ls + "<h5 style=\"color:red\">Error processing '" + cs.Replace("{", "[").Replace("}", "]") + "'</h5>" + rs;
                                         }
@@ -379,12 +413,16 @@ namespace MIG
                                 }
                             } while (tagFound); // pre processor tag found
                             //
-                            PutWebFileCache(requestedFile, body);
+							if (webServiceConfig.CacheEnable)
+                            {
+                               PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
+                            }
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }
                         catch
                         {
+                            // TODO: Handle this exception
                         }
                     }
                     else
@@ -429,7 +467,7 @@ namespace MIG
                 if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                 {
                     context.Response.ContentType = "application/json";
-                    context.Response.ContentEncoding = Encoding.UTF8;
+                    context.Response.ContentEncoding = defaultWebFileEncoding;
                 }
             }
             else
@@ -477,26 +515,51 @@ namespace MIG
 
         #region Web Service File Management
 
-        private string GetWebFileCache(string file)
+        private WebFileCache GetWebFileCache(string file)
         {
-            string content = "";
+            WebFileCache fileItem = new WebFileCache();
             var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
             if (cachedItem != null && (DateTime.Now - cachedItem.Timestamp).TotalSeconds < 600)
             {
-                content = cachedItem.Content;
+                fileItem = cachedItem;
             }
             else
             {
-                content = System.IO.File.ReadAllText(file);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                Encoding fileEncoding = DetectWebFileEncoding(file);  //TextFileEncodingDetector.DetectTextFileEncoding(file);
+                if (fileEncoding == null) fileEncoding = defaultWebFileEncoding;
+                fileItem.Content = System.IO.File.ReadAllText(file, fileEncoding);  //Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                fileItem.Encoding = fileEncoding;
                 if (cachedItem != null)
                 {
                     webFileCache.Remove(cachedItem);
                 }
             }
-            return content;
+            return fileItem;
         }
 
-        private void PutWebFileCache(string file, string content)
+        private Encoding DetectWebFileEncoding(string filename)
+        {
+            Encoding enc = defaultWebFileEncoding;
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                ICharsetDetector cdet = new CharsetDetector();
+                cdet.Feed(fs);
+                cdet.DataEnd();
+                if (cdet.Charset != null)
+                {
+					//Console.WriteLine("Charset: {0}, confidence: {1}",
+					//     cdet.Charset, cdet.Confidence);
+                    enc = Encoding.GetEncoding(cdet.Charset);
+                }
+                else
+                {
+					//Console.WriteLine("Detection failed.");
+                }
+            }
+            return enc;
+        }
+
+        private void PutWebFileCache(string file, string content, Encoding encoding)
         {
             var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
             if (cachedItem == null)
@@ -506,6 +569,7 @@ namespace MIG
             }
             cachedItem.FilePath = file;
             cachedItem.Content = content;
+            cachedItem.Encoding = encoding;
         }
 
         private string GetWebFilePath(string file)
@@ -534,5 +598,6 @@ namespace MIG
         }
 
         #endregion
+
     }
 }

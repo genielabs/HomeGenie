@@ -15,7 +15,15 @@
         {
             "Command": "Control.Toggle",
             "Aliases": [ "wissel", "wisselen", "omwisselen", "omkeren" ]
-        }
+        },
+		{
+			"Command": "Control.Run",
+			"Aliases": [ "starten", "start", "begin", "uitvoeren" ]
+		},
+		{
+			"Command": "Control.Break",
+			"Aliases": [ "stop", "stoppen", "afbreken", "onderbreken" ]
+		}
     ],
     "Types" : [
         {

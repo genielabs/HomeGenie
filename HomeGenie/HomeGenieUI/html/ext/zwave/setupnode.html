@@ -1,5 +1,5 @@
 ﻿
-<div data-role="page" id="configurepage_OptionZWave">
+<div id="configurepage_OptionZWave" data-role="page">
 
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>
@@ -8,7 +8,7 @@
     </div>
 
 
-    <div data-role="content" style="padding:25px; padding-top:0px;">
+    <div class="ui-content">
 
 
         <div id="zwave_configure_advanced">
@@ -25,7 +25,7 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_NodeInfoRequest()">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_NodeInfoRequest()">Get</a>
                             </td>
                         </tr>
                     </table>
@@ -62,7 +62,7 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px;">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_AssociationGet();">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_AssociationGet();">Get</a>
                             </td>
                         </tr>
                     </table>
@@ -77,13 +77,13 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td>
-                                <a rel="external" data-role="button" href="javascript:zwave_AssociationSet($('#configurepage_OptionZWave_id').val(), $('#configassoc-gid').val(), $('#configassoc-value').val());">Add</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_AssociationSet($('#configurepage_OptionZWave_id').val(), $('#configassoc-gid').val(), $('#configassoc-value').val());">Add</a>
                             </td>
                             <td style="padding-left:5px">
                                 <input style="max-width:100px" type="text" id="configassoc-value" data-module-prop="AssociationValue" placeholder="node id" />
                             </td>
                             <td style="padding-left:5px">
-                                <a rel="external" data-role="button" href="javascript:zwave_AssociationRemove($('#configurepage_OptionZWave_id').val(), $('#configassoc-gid').val(), $('#configassoc-value').val());">Remove</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_AssociationRemove($('#configurepage_OptionZWave_id').val(), $('#configassoc-gid').val(), $('#configassoc-value').val());">Remove</a>
                             </td>
                         </tr>
                     </table>
@@ -120,10 +120,10 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px;">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_ConfigVariableGet()">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_ConfigVariableGet()">Get</a>
                             </td>
                             <td>
-                                <a rel="external" data-role="button" href="javascript:zwave_ConfigurationParameterSet($('#configurepage_OptionZWave_id').val(), $('#configvar-id').val(), $('#configvar-value').val())">Set</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_ConfigurationParameterSet($('#configurepage_OptionZWave_id').val(), $('#configvar-id').val(), $('#configvar-value').val())">Set</a>
                             </td>
                             <td>
                                 <input style="min-width:60px" type="text" id="configvar-value" data-module-prop="VariableValue" placeholder="value" />
@@ -144,10 +144,10 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_WakeUpGet()">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_WakeUpGet()">Get</a>
                             </td>
                             <td>
-                                <a rel="external" data-role="button" href="javascript:zwave_WakeUpSet($('#configurepage_OptionZWave_id').val(), $('#wakeupset-value').val())">Set</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_WakeUpSet($('#configurepage_OptionZWave_id').val(), $('#wakeupset-value').val())">Set</a>
                             </td>
                             <td>
                                 <input style="min-width:60px" type="text" id="wakeupset-value" data-module-prop="WakeUpInterval" placeholder="seconds" />
@@ -167,10 +167,10 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_BasicGet()">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_BasicGet()">Get</a>
                             </td>
                             <td>
-                                <a rel="external" data-role="button" href="javascript:zwave_BasicSet($('#configurepage_OptionZWave_id').val(), $('#basicset-value').val())">Set</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_BasicSet($('#configurepage_OptionZWave_id').val(), $('#basicset-value').val())">Set</a>
                             </td>
                             <td>
                                 <input style="min-width:60px" type="text" id="basicset-value" data-module-prop="BasicCommandValue" placeholder="value" />
@@ -201,13 +201,13 @@
                         <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                             <tr>
                                 <td style="padding-right:30px;">
-                                    <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.SwitchBinaryParameterGet()">Get</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.SwitchBinaryParameterGet()">Get</a>
                                 </td>
                                 <td>
-                                    <a rel="external" data-role="button" href="javascript:zwave_SwitchBinaryParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), 0)">Off</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_SwitchBinaryParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), 0)">Off</a>
                                 </td>
                                 <td>
-                                    <a rel="external" data-role="button" href="javascript:zwave_SwitchBinaryParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), 255)">On</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_SwitchBinaryParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), 255)">On</a>
                                 </td>
                             </tr>
                         </table>
@@ -218,10 +218,10 @@
                         <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                             <tr>
                                 <td style="padding-right:30px">
-                                    <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.SwitchMultiLevelParameterGet()">Get</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.SwitchMultiLevelParameterGet()">Get</a>
                                 </td>
                                 <td>
-                                    <a rel="external" data-role="button" href="javascript:zwave_SwitchMultilevelParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), $('#instancevar-value').val())">Set</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_SwitchMultilevelParameterSet($('#configurepage_OptionZWave_id').val(), $('#instancevar-id').val(), $('#instancevar-value').val())">Set</a>
                                 </td>
                                 <td>
                                     <input style="min-width:60px" type="text" id="instancevar-value" data-module-prop="InstanceValue" placeholder="value" />
@@ -235,7 +235,7 @@
                         <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                             <tr>
                                 <td style="padding-right:30px">
-                                    <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.SensorBinaryParameterGet()">Get</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.SensorBinaryParameterGet()">Get</a>
                                 </td>
                             </tr>
                         </table>
@@ -246,7 +246,7 @@
                         <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                             <tr>
                                 <td style="padding-right:30px">
-                                    <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.SensorMultiLevelParameterGet()">Get</a>
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.SensorMultiLevelParameterGet()">Get</a>
                                 </td>
                             </tr>
                         </table>
@@ -264,7 +264,7 @@
                     <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
                         <tr>
                             <td style="padding-right:30px">
-                                <a rel="external" data-role="button" href="javascript:HG.WebApp.GroupModules.ZWave_BatteryGet()">Get</a>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_BatteryGet()">Get</a>
                             </td>
                         </tr>
                     </table>
@@ -277,9 +277,9 @@
             <!--li data-role="list-divider">Reports</li>
             <li>
                 <div data-role="controlgroup" data-type="horizontal">
-                    <a rel="external" data-role="button" href="javascript:zwave_BasicReport($('#configurepage_OptionZWave_id').val())">Basic</a>
-                    <a rel="external" data-role="button" href="javascript:zwave_MultilevelReport($('#configurepage_OptionZWave_id').val())">Multilevel</a>
-                    <a rel="external" data-role="button" href="javascript:zwave_BatteryGet($('#configurepage_OptionZWave_id').val())">Battery</a>
+                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_BasicReport($('#configurepage_OptionZWave_id').val())">Basic</a>
+                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_MultilevelReport($('#configurepage_OptionZWave_id').val())">Multilevel</a>
+                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_BatteryGet($('#configurepage_OptionZWave_id').val())">Battery</a>
                 </div>
             </li>
 
@@ -292,7 +292,7 @@
                     </div>
                     <div class="ui-block-b">
                         <div data-role="controlgroup" data-type="horizontal" style="right:0;bottom:0;position:absolute;margin:20px;">
-                            <a rel="external" data-role="button" href="javascript:zwave_AutoReportSet($('#configurepage_OptionZWave_id').val(), $('#slider-autoreport').val())">Set</a>
+                            <a rel="external" class="ui-btn ui-corner-all" href="javascript:zwave_AutoReportSet($('#configurepage_OptionZWave_id').val(), $('#slider-autoreport').val())">Set</a>
                         </div>
                     </div>
                 </div>
@@ -311,17 +311,17 @@
         <div data-role="navbar" data-iconpos="right">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_back" data-role="button" data-transition="slide" data-direction="reverse" href="#" data-rel="back" data-icon="back" data-iconpos="left" data-mini="true">
+                    <a class="ui-btn ui-icon-back ui-btn-icon-left" href="#" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" data-rel="back">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="bottombar_button_home" data-role="button" data-transition="slide" data-direction="reverse" href="#page_home" data-icon="home" data-iconpos="left">
+                    <a class="ui-btn ui-icon-home ui-btn-icon-left" href="#page_home" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_menu_system" data-role="button" data-transition="slide" data-direction="reverse" href="#page_configure_interfaces" data-icon="gear" data-iconpos="left" data-mini="true">
+                    <a data-locale-id="configure_menu_system" class="ui-btn ui-icon-gear ui-btn-icon-right" href="#page_configure_interfaces" data-transition="slide" data-direction="reverse">
                         Interfaces
                     </a>
                 </li>

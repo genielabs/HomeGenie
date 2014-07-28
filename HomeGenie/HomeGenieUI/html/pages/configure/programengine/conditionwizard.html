@@ -1,9 +1,9 @@
-<div data-role="popup" data-position-to="window" id="automation_domain" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_domain" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header">
         <h1>Wizard (1/5)</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
 
         <div>
             <p data-locale-id="configure_program_selectconditioncontext" style="margin-top:-10px;font-weight:bold">Select condition context</p>
@@ -15,19 +15,19 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_deletecancel" data-rel="back" data-role="button" data-icon="back" href="#">Cancel</a>
+                <a data-locale-id="configure_program_deletecancel" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" href="#">Cancel</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<div id="automation_target_popup" data-role="popup" data-position-to="window" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_target_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (2/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
 
         <div>
             <p data-locale-id="configure_program_selectconditionsubject" style="margin-top:-10px;font-weight:bold">Select condition subject</p>
@@ -36,9 +36,9 @@
         <ul id="automation_condition_target" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_domain">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -46,10 +46,10 @@
 </div>
 
 
-<div id="automation_target_homegenie_parameter" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_target_homegenie_parameter" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (3/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
 
         <div>
             <p data-locale-id="configure_program_selectconditionproperty" style="margin-top:-10px;font-weight:bold">Select comparison property</p>
@@ -59,19 +59,19 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_target_popup">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_target_homegenie_parameter', '#automation_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
 </div>
 
 
-<div id="automation_condition_type" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_condition_type" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (4/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
 
         <div>
             <p data-locale-id="configure_program_selectoperator" style="margin-top:-10px;font-weight:bold">Select comparison operator</p>
@@ -85,35 +85,35 @@
 
     </div>
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_target_homegenie_parameter">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_type', '#automation_target_homegenie_parameter', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
 </div>
 
-<div id="automation_condition_value" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_condition_value" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
         </div>
         <fieldset data-role="controlgroup" data-type="vertical" style="height:134px;max-height:134px;">
             <input type="text" name="value" id="comparison_value_input" onkeyup="build_condition()" value="" placeholder="value" />
-            <a href="#automation_condition_value_domain" data-role="button" data-rel="popup">Module Parameter Value</a>
+            <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value', '#automation_condition_value_domain', true)" class="ui-btn ui-corner-all">Module Parameter Value</a>
         </fieldset>
     </div>
 
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_condition_type">back</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value', '#automation_condition_type', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
             <div class="ui-block-b">
-                <a data-locale-id="configure_program_wizarddone" id="condition_completed" data-role="button" data-icon="check" href="#cancel">done</a>
+                <a data-locale-id="configure_program_wizarddone" id="condition_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel">Done</a>
             </div>
         </div>
     </div>
@@ -121,10 +121,10 @@
 </div>
 
 
-<div id="automation_condition_value_domain" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_condition_value_domain" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -136,12 +136,9 @@
     </div>
 
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_condition_value">back</a>
-            </div>
-            <div class="ui-block-b">
-                <a data-locale-id="configure_program_wizarddone" id="condition_completed" data-role="button" data-icon="check" href="#cancel">done</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -149,10 +146,10 @@
 </div>
 
 
-<div id="automation_condition_value_address" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_condition_value_address" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -163,11 +160,8 @@
 
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_condition_value_domain">back</a>
-            </div>
-            <div class="ui-block-b">
-                <a data-locale-id="configure_program_wizarddone" id="condition_completed" data-role="button" data-icon="check" href="#cancel">done</a>
+            <div class="ui-block-a" align="center">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_domain', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -175,10 +169,10 @@
 </div>
 
 
-<div id="automation_condition_value_property" data-position-to="window" data-role="popup" style="width:300px;">
-    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div id="automation_condition_value_property" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <div>
             <p data-locale-id="configure_program_selectvalue" style="margin-top:-10px;font-weight:bold">Select comparison value</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -188,12 +182,9 @@
     </div>
 
     <div data-role="footer" data-tap-toggle="false">
-        <div class="ui-grid-a">
+        <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
-                <a data-locale-id="configure_program_wizardback" data-rel="popup" data-role="button" data-icon="back" href="#automation_condition_value_address">back</a>
-            </div>
-            <div class="ui-block-b">
-                <a data-locale-id="configure_program_wizarddone" id="condition_completed" data-role="button" data-icon="check" href="#cancel">done</a>
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value_property', '#automation_condition_value_address', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback">Back</a>
             </div>
         </div>
     </div>
@@ -209,26 +200,32 @@
 
 
 
-<div data-role="popup" id="automation_capture_condition_popup" data-position-to="window" style="width:250px;" class="ui-corner-all">
+<div id="automation_capture_condition_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b" data-transition="pop">
     <div data-role="header" class="ui-corner-top">
         <h1 data-locale-id="configure_program_conditioncapturetitle">Capturing Conditions</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <h3 data-locale-id="configure_program_waitingnewcondition" class="ui-title">Waiting for new events...</h3>
         <p data-locale-id="configure_program_waitingnewconditionadvice"></p>
-        <a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
+        <a data-locale-id="configure_program_capturestop" href="#" class="ui-btn ui-corner-all" data-inline="true" data-rel="back">Stop</a>
     </div>
 </div>
 
-<div data-role="popup" id="automation_condition_delete" style="max-width:400px;" class="ui-corner-all">
+<div id="automation_condition_delete" class="ui-corner-all hg-popup-a" data-role="popup">
     <div data-role="header" class="ui-corner-top">
         <h1 data-locale-id="configure_program_deleteconditiontitle">Delete Condition?</h1>
     </div>
-    <div data-role="content" class="ui-corner-bottom ui-content">
+    <div class="ui-content ui-corner-bottom">
         <h3 data-locale-id="configure_program_deleteconditionprompt" class="ui-title">Are you sure you want to delete this condition statement?</h3>
         <p data-locale-id="configure_program_deleteconditionadvice">This action cannot be undone.</p>
-        <a data-locale-id="configure_program_deletecancel" href="#" data-role="button" data-inline="true" data-rel="back">Cancel</a>
-        <a data-locale-id="configure_program_deleteconfirm" id="condition_delete_button" href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+        <div class="ui-grid-a">
+        	<div class="ui-block-a">
+        		<a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
+        	</div>
+        	<div class="ui-block-b">
+        		<a id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
+        	</div>
+        </div>
     </div>
 </div>
 
@@ -285,15 +282,17 @@
             //
             switch (condition_targetdomain) {
                 case 'HomeAutomation.HomeGenie':
-                    $('#automation_condition_target').append('<li data-theme="' + uitheme + '" data-context-value="Automation"><a data-rel="popup" href="#automation_target_homegenie_parameter">Automation</a></li>');
+                    $('#automation_condition_target').append('<li data-context-value="Automation"><a>Automation</a></li>');
                     break;
                 default:
-                    $('#automation_condition_target').append(automationpage_GetModulesListViewItems(condition_targetdomain, 'automation_target_homegenie_parameter', false));
+                    $('#automation_condition_target').append(automationpage_GetModulesListViewItems(condition_targetdomain, false));
                     break;
             }
             $('#automation_condition_target').listview('refresh');
             //
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_domain', '#automation_target_popup', true);
         });
 
         $('#automation_target_popup').on('click', 'li', function () {
@@ -303,33 +302,34 @@
             //
             var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition_targetdomain, condition_targetsubject);
             if (module != null && (module.Address == "RF" || module.Address == "IR")) {
-                $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Receiver.RawData"><a data-rel="popup" href="#automation_condition_type">Receiver.RawData</a></li>');
+                $('#automation_condition_property').append('<li data-context-value="Receiver.RawData"><a>Receiver.RawData</a></li>');
             }
             else {
                 switch (condition_targetdomain) {
                     case 'HomeAutomation.HomeGenie':
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsCounter"><a data-rel="popup" href="#automation_condition_type">Meter.WattsCounter</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Meter.WattsLoad"><a data-rel="popup" href="#automation_condition_type">Meter.WattsLoad</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Scheduler.TimeEvent"><a data-rel="popup" href="#automation_condition_type">Scheduler.TimeEvent</a></li>');
-                        /*
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Date"><a data-rel="popup" href="#automation_condition_type">Programs.Date</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.Time"><a data-rel="popup" href="#automation_condition_type">Programs.Time</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateTime"><a data-rel="popup" href="#automation_condition_type">Programs.DateTime</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDay"><a data-rel="popup" href="#automation_condition_type">Programs.DateDay</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateMonth"><a data-rel="popup" href="#automation_condition_type">Programs.DateMonth</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateYear"><a data-rel="popup" href="#automation_condition_type">Programs.DateYear</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateDayOfWeek"><a data-rel="popup" href="#automation_condition_type">Programs.DateDayOfWeek</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateHour"><a data-rel="popup" href="#automation_condition_type">Programs.DateHour</a></li>');
-                        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Programs.DateMinute"><a data-rel="popup" href="#automation_condition_type">Programs.DateMinute</a></li>');
-                        */
-                        //			        $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="Security.ArmedStatus"><a data-rel="popup" href="#automation_condition_type">Security.ArmedStatus</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Meter.WattsCounter"><a>Meter.WattsCounter</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Meter.WattsLoad"><a>Meter.WattsLoad</a></li>');
+                        //$('#automation_condition_property').append('<li data-context-value="Scheduler.TimeEvent"><a>Scheduler.TimeEvent</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.CronEvent"><a>Scheduler.CronEvent</a></li>');
+
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.Date"><a>Scheduler.Date</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.Time"><a>Scheduler.Time</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateTime"><a>Scheduler.DateTime</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateDay"><a>Scheduler.DateDay</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateMonth"><a>Scheduler.DateMonth</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateYear"><a>Scheduler.DateYear</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateDayOfWeek"><a>Scheduler.DateDayOfWeek</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateHour"><a>Scheduler.DateHour</a></li>');
+                        $('#automation_condition_property').append('<li data-context-value="Scheduler.DateMinute"><a>Scheduler.DateMinute</a></li>');
+
+                        //$('#automation_condition_property').append('<li data-context-value="Security.ArmedStatus"><a>Security.ArmedStatus</a></li>');
                         break;
                     default:
                         if (module != null) {
                             var comparable_props = HG.WebApp.ProgramEdit.GetModuleComparableProperties(module);
                             for (var p = 0; p < comparable_props.length; p++) {
                                 var prop = comparable_props[p];
-                                $('#automation_condition_property').append('<li data-theme="' + uitheme + '" data-context-value="' + prop.Name + '"><a data-rel="popup" href="#automation_condition_type">' + prop.Name + '</a></li>');
+                                $('#automation_condition_property').append('<li data-context-value="' + prop.Name + '"><a>' + prop.Name + '</a></li>');
                             }
                         }
                         break;
@@ -338,6 +338,8 @@
             $('#automation_condition_property').listview('refresh');
             //
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
         });
 
         $('#automation_target_homegenie_parameter').on('click', 'li', function () {
@@ -351,11 +353,15 @@
                 $('#configure_program_conditiongreaterthan').show();
             }
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_target_homegenie_parameter', '#automation_condition_type', true);
         });
 
         $('#automation_condition_type').on('click', 'li', function () {
             condition_type = $(this).attr('data-context-value')
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_condition_type', '#automation_condition_value', true);
         });
 
 
@@ -365,11 +371,13 @@
             //
             $('#automation_conditionvalue_address').listview().empty();
             //
-            $('#automation_conditionvalue_address').append(automationpage_GetModulesListViewItems(domain, 'automation_condition_value_property', false));
+            $('#automation_conditionvalue_address').append(automationpage_GetModulesListViewItems(domain, false));
             //
             $('#automation_conditionvalue_address').listview('refresh');
             //
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_domain', '#automation_condition_value_address', true);
         });
 
 
@@ -381,18 +389,29 @@
             //
             var module = HG.WebApp.Utility.GetModuleByDomainAddress(domain, address);
             if (module != null && (module.Address == "RF" || module.Address == "IR")) {
-                $('#automation_conditionvalue_property').append('<li data-theme="' + uitheme + '" data-context-value="Receiver.RawData"><a data-rel="popup" href="#automation_condition_value">Receiver.RawData</a></li>');
+                $('#automation_conditionvalue_property').append('<li data-context-value="Receiver.RawData"><a>Receiver.RawData</a></li>');
             }
             else if (module != null) {
                 var comparable_props = HG.WebApp.ProgramEdit.GetModuleComparableProperties(module);
                 for (var p = 0; p < comparable_props.length; p++) {
                     var prop = comparable_props[p];
-                    $('#automation_conditionvalue_property').append('<li data-theme="' + uitheme + '" data-context-value=":' + module.Domain + '/' + module.Address + '/' + prop.Name + '"><a data-rel="popup" href="#automation_condition_value">' + prop.Name + '</a></li>');
+                    $('#automation_conditionvalue_property').append('<li data-context-value=":' + module.Domain + '/' + module.Address + '/' + prop.Name + '"><a>' + prop.Name + '</a></li>');
                 }
             }
             $('#automation_conditionvalue_property').listview('refresh');
             //
             build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_address', '#automation_condition_value_property', true);
+        });
+
+        $('#automation_conditionvalue_property').on('click', 'li', function () {
+            condition_value = $(this).attr('data-context-value');
+            $('#comparison_value_input').val(condition_value);
+            //
+            build_condition();
+            //
+            HG.WebApp.Utility.SwitchPopup('#automation_condition_value_property', '#automation_condition_value', true);
         });
 
         $('#comparison_value_input').on('keyup', function () {
@@ -400,14 +419,6 @@
             //
             build_condition();
         });
-        $('#automation_conditionvalue_property').on('click', 'li', function () {
-            condition_value = $(this).attr('data-context-value');
-            $('#comparison_value_input').val(condition_value);
-            //
-            build_condition();
-        });
-
-
 
         $('#condition_completed').on('click', function () {
             condition_value = $('#comparison_value_input').val();
@@ -430,11 +441,11 @@
 
 
 
-    function automationpage_GetModulesListViewItems(domain, target, showall) {
+    function automationpage_GetModulesListViewItems(domain, showall) {
         var htmlopt = '';
         var mods = HG.WebApp.ProgramEdit.GetDomainComparableModules(domain, showall);
         for (var m = 0; m < mods.length; m++) {
-            htmlopt += '<li data-theme="' + uitheme + '" data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a data-rel="popup" href="#' + target + '">' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
+            htmlopt += '<li data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a>' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
         }
         return htmlopt;
     }
@@ -468,7 +479,6 @@
             conditionstring += '<br />&bull; <b>' + cval + '</b>';
         }
         $('body').find('[id=condition_wizard_text]').each(function () { $(this).html(conditionstring); });
-        //return conditionstring;
     }
 
 
@@ -496,13 +506,13 @@
                 pname = pname.substring(pname.indexOf('.') + 1);
             }
             $('#automation_program_conditions').append('' +
-                '<li data-theme="' + uitheme + '" data-context-value="' + i + '"><a>' +
+                '<li data-context-value="' + i + '"><a>' +
                 ' <span style="color:gray">' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].Domain.split('.')[1] + '</span>' +
                 ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].Target +
                 ' <span style="color:gray">property</span> <b>' + pname + '</b>' +
                 ' <span style="color:gray">' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator + '</span>' +
                 ' <b>' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonValue + '</b>' +
-                '</a><a data-theme="' + uitheme + '" style="border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" href="#automation_condition_delete">--</a></li>');
+                '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
         }
         $('#automation_program_conditions').listview('refresh');
 

@@ -1,25 +1,25 @@
-﻿<a data-ui-field="widget">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b">
 
-    <img data-ui-field="icon" style="margin-left:10px;margin-top:16px" height="48" src="pages/control/widgets/homegenie/generic/images/camera.png" />
 
-    <span data-ui-field="name"></span><br />
+	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
+		<div data-ui-field="name" style="font-weight:bold">Name</div>
+	    <div data-ui-field="description">loading...</div>
+	</div>
 
-    <p style="margin:0">
-        <span data-ui-field="description" style="color:gray">loading...</span><br />
-        <div data-ui-field="status" style="font-family:Monospace;font-size:12pt;color:green"></div>
-    </p>
+	<div class="ui-content" align="center" style="padding:0;margin:2px">
+		<img style="border:2px solid black;height:100px;cursor:pointer" data-ui-field="camerapicturepreview" src="pages/control/widgets/homegenie/generic/images/camera.png" />
+	</div>
 
-    <div style="position:absolute;right:0;top:10px;margin-right:40px;">
-        <img style="border:2px solid black" data-ui-field="camerapicturepreview" src="images/background.jpg" height="60" />
-    </div>
+	<div class="ui-footer ui-bar-inherit" style="padding-left:5px;padding-right:5px;">
+        <div data-ui-field="status" align="right" style="font-size:12pt;vertical-align:middle">&nbsp;</div>
+	</div>
 
-</a>
-
+</div>
 
 <!-- widget popups and other ui elements follow -->
 
-<div data-ui-field="controlpopup" data-position-to="window" style="width:80%;" data-theme="a" data-overlay-theme="a" data-transition="slidedown" style="display:none">
-    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div data-ui-field="controlpopup" data-position-to="window" style="width:80%;" data-overlay-theme="a" data-transition="slidedown" style="display:none">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 
     <div style="margin:10px">
         <img data-ui-field="camerapicture" src="images/background.jpg" width="100%" />

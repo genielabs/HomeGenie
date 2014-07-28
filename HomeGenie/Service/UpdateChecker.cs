@@ -20,6 +20,10 @@
  *     Project Homepage: http://homegenie.it
  */
 
+using HomeGenie.Automation;
+using HomeGenie.Automation.Scheduler;
+using HomeGenie.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,7 +65,7 @@ namespace HomeGenie.Service
     public enum ArchiveDownloadStatus
     {
         UNDEFINED,
-        STARTED,
+        DOWNLOADING,
         COMPLETED,
         DECOMPRESSING,
         ERROR
@@ -91,6 +95,8 @@ namespace HomeGenie.Service
         public ArchiveDownloadEvent ArchiveDownloadUpdate;
         public delegate void UpdateProgressEvent(object sender, UpdateProgressEventArgs args);
         public UpdateProgressEvent UpdateProgress;
+        public delegate void InstallProgressMessageEvent(object sender, string message);
+        public InstallProgressMessageEvent InstallProgressMessage;
 
         private string endpointUrl = "http://www.homegenie.it/release_updates.php";
         private ReleaseInfo currentRelease;
@@ -98,10 +104,14 @@ namespace HomeGenie.Service
         private Timer checkInterval;
         private const string updateFolder = "_update";
 
+        private HomeGenieService homegenie;
+
         // TODO: add automatic interval check and "UpdateAvailable", "UpdateChecking" events
 
-        public UpdateChecker()
+        public UpdateChecker(HomeGenieService hg)
         {
+            homegenie = hg;
+            //
             checkInterval = new Timer(1000 * 60 * 60 * 24); // 24 hours interval between update checks
             checkInterval.AutoReset = true;
             checkInterval.Elapsed += checkInterval_Elapsed;
@@ -121,19 +131,6 @@ namespace HomeGenie.Service
             else
             {
                 UpdateProgress(this, new UpdateProgressEventArgs(UpdateProgressStatus.ERROR));
-            }
-            //
-            // TODO: remove the following lines at some point... 
-            string newUpdaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdaterNew.exe");
-            string currentUpdaterPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HomeGenieUpdater.exe");
-            if (File.Exists(newUpdaterPath))
-            {
-                try
-                {
-                    File.Copy(newUpdaterPath, currentUpdaterPath, true);
-                    File.Delete(newUpdaterPath);
-                }
-                catch { }
             }
         }
 
@@ -243,7 +240,7 @@ namespace HomeGenie.Service
 
         public List<string> DownloadAndUncompress(ReleaseInfo releaseInfo)
         {
-            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.STARTED));
+            if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DOWNLOADING));
             //
             string destinationFolder = Path.Combine(updateFolder, "files");
             string archiveName = Path.Combine(updateFolder, "archives", "hg_update_" + releaseInfo.Version.Replace(" ", "_").Replace(".", "_") + ".zip");
@@ -315,13 +312,122 @@ namespace HomeGenie.Service
             return files;
         }
 
-        void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
+        public bool InstallFiles()
         {
-            Check();
-            if (IsUpdateAvailable)
+            bool success = true;
+
+            string oldFilesPath = Path.Combine("_update", "oldfiles");
+            if (Directory.Exists(oldFilesPath))
             {
-                // TODO: ...
+                Directory.Delete(oldFilesPath, true);
             }
+            Directory.CreateDirectory(oldFilesPath);
+            if (Directory.Exists(Path.Combine("_update", "files", "HomeGenie")))
+            {
+                LogMessage("= Copying new files...");
+                foreach (string file in Directory.EnumerateFiles(Path.Combine("_update", "files", "HomeGenie"), "*", SearchOption.AllDirectories))
+                {
+                    bool doNotCopy = false;
+
+                    string destinationFolder = Path.GetDirectoryName(file).Replace(Path.Combine("_update", "files", "HomeGenie"), "");
+                    if (destinationFolder != "" && !Directory.Exists(destinationFolder)) Directory.CreateDirectory(destinationFolder);
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
+
+                    // backup current file before replacing it
+                    if (File.Exists(destinationFile))
+                    {
+                        string oldFile = Path.Combine(oldFilesPath, destinationFile);
+                        Directory.CreateDirectory(Path.GetDirectoryName(oldFile));
+
+                        LogMessage("+ Backup file '" + oldFile + "'");
+
+                        // TODO: delete oldFilesPath before starting update
+                        //File.Delete(oldFile); 
+
+                        if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll"))
+                        {
+                            // this will allow replace of new exe and dll files
+                            File.Move(destinationFile, oldFile);
+                        }
+                        else
+                        {
+                            File.Copy(destinationFile, oldFile);
+                        }
+                    }
+
+                    if (destinationFile.EndsWith(".xml") && File.Exists(destinationFile))
+                    {
+                        switch (destinationFile)
+                        {
+                            case "automationgroups.xml":
+                                doNotCopy = true;
+                                success = UpdateAutomationGroups(file);
+                                break;
+                            case "groups.xml":
+                                doNotCopy = true;
+                                success = UpdateGroups(file);
+                                break;
+                            case "lircconfig.xml":
+                                doNotCopy = true;
+                                break;
+                            case "modules.xml":
+                                doNotCopy = true;
+                                break;
+                            case "programs.xml":
+                                doNotCopy = true;
+                                success = UpdatePrograms(file);
+                                break;
+                            case "scheduler.xml":
+                                doNotCopy = true;
+                                success = UpdateScheduler(file);
+                                break;
+                            case "systemconfig.xml":
+                                doNotCopy = true;
+                                success = UpdateSystemConfig(file);
+                                break;
+                        }
+                        if (!success)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (!doNotCopy)
+                    {
+                        Console.WriteLine("+ " + destinationFile);
+                        try
+                        {
+                            LogMessage("+ Copying file '" + destinationFile + "'");
+                            if (!Directory.Exists(Path.GetDirectoryName(destinationFile)))
+                            {
+                                try
+                                {
+                                    Directory.CreateDirectory(Path.GetDirectoryName(destinationFile));
+                                    LogMessage("+ Created folder '" + Path.GetDirectoryName(destinationFile) + "'");
+                                }
+                                catch { }
+                            }
+                            File.Copy(file, destinationFile, true);
+                        }
+                        catch (Exception e)
+                        {
+                            LogMessage("! Error copying file '" + destinationFile + "' (" + e.Message + ")");
+                            success = false;
+                            break;
+                        }
+                    }
+
+                }
+
+                if (!success)
+                {
+                    // TODO: should revert!
+                    LogMessage("! ERROR update aborted.");
+                }
+
+            }
+
+            return success;
         }
 
 
@@ -344,5 +450,275 @@ namespace HomeGenie.Service
                 return restartRequired;
             }
         }
+
+
+        private void checkInterval_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Check();
+            if (IsUpdateAvailable)
+            {
+                // TODO: ...
+            }
+        }
+
+        private void LogMessage(string message)
+        {
+            if (InstallProgressMessage != null)
+            {
+                InstallProgressMessage(this, message);
+            }
+        }
+
+        private bool UpdateGroups(string file)
+        {
+            bool success = true;
+            //
+            // add new modules groups 
+            //
+            try
+            {
+                var serializer = new XmlSerializer(typeof(List<Group>));
+                var reader = new StreamReader(file);
+                var modulesGroups = (List<Group>)serializer.Deserialize(reader);
+                reader.Close();
+                //
+                bool configChanged = false;
+                foreach (var group in modulesGroups)
+                {
+                    if (homegenie.Groups.Find(g => g.Name == group.Name) == null)
+                    {
+                        LogMessage("+ Adding Modules Group: " + group.Name);
+                        homegenie.Groups.Add(group);
+                        if (!configChanged) configChanged = true;
+                    }
+                }
+                //
+                if (configChanged)
+                {
+                    homegenie.UpdateGroupsDatabase("");
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+            if (!success)
+            {
+                LogMessage("! ERROR updating Modules Groups");
+            }
+            return success;
+        }
+
+        private bool UpdateAutomationGroups(string file)
+        {
+            bool success = true;
+            //
+            // add new automation groups 
+            //
+            try
+            {
+                var serializer = new XmlSerializer(typeof(List<Group>));
+                var reader = new StreamReader(file);
+                var automationGroups = (List<Group>)serializer.Deserialize(reader);
+                reader.Close();
+                //
+                bool configChanged = false;
+                foreach (var group in automationGroups)
+                {
+                    if (homegenie.AutomationGroups.Find(g => g.Name == group.Name) == null)
+                    {
+                        LogMessage("+ Adding Automation Group: " + group.Name);
+                        homegenie.AutomationGroups.Add(group);
+                        if (!configChanged) configChanged = true;
+                    }
+                }
+                //
+                if (configChanged)
+                {
+                    homegenie.UpdateGroupsDatabase("Automation");
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+            if (!success)
+            {
+                LogMessage("! ERROR updating Automation Groups");
+            }
+            return success;
+        }
+
+        private bool UpdateScheduler(string file)
+        {
+            bool success = true;
+            //
+            // add new scheduler items
+            //
+            try
+            {
+                var serializer = new XmlSerializer(typeof(List<SchedulerItem>));
+                var reader = new StreamReader(file);
+                var schedulerItems = (List<SchedulerItem>)serializer.Deserialize(reader);
+                reader.Close();
+                //
+                bool configChanged = false;
+                foreach (var item in schedulerItems)
+                {
+                    if (homegenie.ProgramEngine.SchedulerService.Get(item.Name) == null)
+                    {
+                        LogMessage("+ Adding Scheduler Item: " + item.Name);
+                        homegenie.ProgramEngine.SchedulerService.AddOrUpdate(item.Name, item.CronExpression);
+                        if (!configChanged) configChanged = true;
+                    }
+                }
+                //
+                if (configChanged)
+                {
+                    homegenie.UpdateSchedulerDatabase();
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+            if (!success)
+            {
+                LogMessage("! ERROR updating Scheduler Items");
+            }
+            return success;
+        }
+
+        private bool UpdateSystemConfig(string file)
+        {
+            bool success = true;
+            //
+            // add new MIG interfaces
+            //
+            try
+            {
+                var serializer = new XmlSerializer(typeof(SystemConfiguration));
+                var reader = new StreamReader(file);
+                var config = (SystemConfiguration)serializer.Deserialize(reader);
+                //
+                bool configChanged = false;
+                foreach (var iface in config.MIGService.Interfaces)
+                {
+                    if (homegenie.SystemConfiguration.GetInterface(iface.Domain) == null)
+                    {
+                        LogMessage("+ Adding MIG Interface: " + iface.Domain);
+                        homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                        if (!configChanged) configChanged = true;
+                    }
+                }
+                //
+                if (configChanged)
+                {
+                    homegenie.SystemConfiguration.Update();
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+            if (!success)
+            {
+                LogMessage("! ERROR updating System Configuration");
+            }
+            return success;
+        }
+
+        private bool UpdatePrograms(string file)
+        {
+            bool success = true;
+            try
+            {
+                var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+                var reader = new StreamReader(file);
+                var newProgramList = (List<ProgramBlock>)serializer.Deserialize(reader);
+                reader.Close();
+                //
+                if (newProgramList.Count > 0)
+                {
+                    bool configChanged = false;
+                    foreach (var program in newProgramList)
+                    {
+
+                        // Only system programs are to be updated
+                        if (program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        {
+                            ProgramBlock oldProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                            if (oldProgram != null)
+                            {
+
+                                // Check new program against old one to find out if they differ
+                                bool changed = ProgramsDiff(oldProgram, program);
+                                if (!changed) continue;
+
+                                // Preserve IsEnabled status if program already exist
+                                program.IsEnabled = oldProgram.IsEnabled;
+                                LogMessage("* Updating Automation Program: " + program.Name + " (" + program.Address + ")");
+                                homegenie.ProgramEngine.ProgramRemove(oldProgram);
+
+                            }
+                            else
+                            {
+                                LogMessage("+ Adding Automation Program: " + program.Name + " (" + program.Address + ")");
+                            }
+
+                            // Try copying the new compiled program binary dll
+                            try
+                            {
+                                File.Copy(Path.Combine(UpdateBaseFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
+                            }
+                            catch { }
+
+                            // Add the new program to the ProgramEngine
+                            homegenie.ProgramEngine.ProgramAdd(program);
+
+                            if (!configChanged) configChanged = true;
+                        }
+
+                    }
+
+                    if (configChanged)
+                    {
+                        // Save new programs config
+                        homegenie.UpdateProgramsDatabase();
+                    }
+                }
+                //
+                File.Delete(file);
+                if (Directory.Exists(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs")))
+                {
+                    Directory.Delete(Path.Combine(homegenie.UpdateChecker.UpdateBaseFolder, "programs"), true);
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+
+            if (!success)
+            {
+                LogMessage("+ ERROR updating Automation Programs");
+            }
+            return success;
+        }
+
+        private bool ProgramsDiff(ProgramBlock oldProgram, ProgramBlock newProgram)
+        {
+            bool unchanged = (JsonConvert.SerializeObject(oldProgram.ConditionType) == JsonConvert.SerializeObject(newProgram.ConditionType)) &&
+            (JsonConvert.SerializeObject(oldProgram.Conditions) == JsonConvert.SerializeObject(newProgram.Conditions)) &&
+            (JsonConvert.SerializeObject(oldProgram.Commands) == JsonConvert.SerializeObject(newProgram.Commands)) &&
+            (oldProgram.ScriptCondition == newProgram.ScriptCondition) &&
+            (oldProgram.ScriptSource == newProgram.ScriptSource) &&
+            (oldProgram.Name == newProgram.Name) &&
+            (oldProgram.Description == newProgram.Description) &&
+            (oldProgram.Group == newProgram.Group) &&
+            (oldProgram.Type == newProgram.Type);
+            return !unchanged;
+        }
+
     }
 }

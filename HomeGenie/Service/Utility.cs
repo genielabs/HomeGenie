@@ -52,7 +52,6 @@ namespace HomeGenie.Service
             IList<T> list = null;
             if (listToClone.GetType() == typeof(TsList<T>))
             {
-                var tslist = ((TsList<T>)listToClone);
                 list = listToClone.Select(item => (T)item.Clone()).ToList();
             }
             else
@@ -66,6 +65,7 @@ namespace HomeGenie.Service
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
+
         private object syncLock = new object();
 
         public TsList()
@@ -76,33 +76,32 @@ namespace HomeGenie.Service
         {
             get { return syncLock; }
         }
+
         new public void Clear()
         {
 
-            lock (syncLock)
-                base.Clear();
+            lock (syncLock) base.Clear();
         }
+
         new public void Add(T value)
         {
 
-            lock (syncLock)
-                base.Add(value);
+            lock (syncLock) base.Add(value);
         }
+
         new public void RemoveAll(Predicate<T> predicate)
         {
-            lock (syncLock)
-                base.RemoveAll(predicate);
+            lock (syncLock) base.RemoveAll(predicate);
         }
+
         new public void Remove(T item)
         {
-            lock (syncLock)
-                base.Remove(item);
+            lock (syncLock) base.Remove(item);
         }
 
         new public void Sort(Comparison<T> comparison)
         {
-            lock (syncLock)
-                base.Sort(comparison);
+            lock (syncLock) base.Sort(comparison);
         }
 
     }
@@ -127,7 +126,7 @@ namespace HomeGenie.Service
         // delegate used by RunAsyncTask
         public delegate void AsyncFunction();
 
-        public static void Say(string sentence, string locale, bool async = false)
+        internal static void Say(string sentence, string locale, bool async = false)
         {
             if (async)
             {
@@ -143,31 +142,7 @@ namespace HomeGenie.Service
             }
         }
 
-        public static Process StartUpdater(bool restart)
-        {
-            File.Copy("HomeGenieUpdater.exe", "HomeGenieUpdaterC.exe", true);
-            var updater = new Process();
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT || Environment.OSVersion.Platform == PlatformID.Win32Windows)
-            {
-                updater.StartInfo.FileName = "HomeGenieUpdaterC.exe";
-                updater.StartInfo.Arguments = restart ? "-r" : "";
-                //updater.StartInfo.UseShellExecute = true;
-                updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                //updater.StartInfo.RedirectStandardOutput = true;
-            }
-            else
-            {
-                updater.StartInfo.FileName = "mono";
-                updater.StartInfo.Arguments = "HomeGenieUpdaterC.exe " + (restart ? "-r" : "");
-                updater.StartInfo.UseShellExecute = false;
-                updater.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                //updater.StartInfo.RedirectStandardOutput = true;
-            }
-            updater.Start();
-            return updater;
-        }
-
-        public static void Say(string sentence, string locale)
+        internal static void Say(string sentence, string locale)
         {
             try
             {
@@ -186,8 +161,7 @@ namespace HomeGenie.Service
                 stream.Close();
 
                 var wavFile = file.Replace(".mp3", ".wav");
-                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + wavFile + "\"")
-                {
+                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + wavFile + "\"") {
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
@@ -202,7 +176,7 @@ namespace HomeGenie.Service
             }
         }
 
-        public static void Play(string wavFile)
+        internal static void Play(string wavFile)
         {
 
             var os = Environment.OSVersion;
@@ -210,24 +184,30 @@ namespace HomeGenie.Service
             //
             switch (platform)
             {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
-                    break;
-                case PlatformID.Unix:
-                case PlatformID.MacOSX:
-                default:
-                    var player = new System.Media.SoundPlayer();
-                    player.SoundLocation = wavFile;
-                    player.Play();
-                    break;
+            case PlatformID.Win32NT:
+            case PlatformID.Win32S:
+            case PlatformID.Win32Windows:
+            case PlatformID.WinCE:
+                PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
+                break;
+            case PlatformID.Unix:
+            case PlatformID.MacOSX:
+            default:
+                    //var player = new System.Media.SoundPlayer();
+                    //player.SoundLocation = wavFile;
+                    //player.Play();
+                Process.Start(new ProcessStartInfo("aplay", "\"" + wavFile + "\"") {
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    UseShellExecute = false
+                }).WaitForExit();
+                break;
             }
 
         }
 
-        public static void AddFileToZip(string zipFilename, string fileToAdd)
+        internal static void AddFileToZip(string zipFilename, string fileToAdd)
         {
             using (var zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
             {
@@ -261,15 +241,7 @@ namespace HomeGenie.Service
             }
         }
 
-        public static dynamic ParseXmlToDynamic(string xml)
-        {
-            var document = XDocument.Load(new StringReader(xml));
-            dynamic root = new ExpandoObject();
-            XmlToDynamic.Parse(root, document.Elements().First());
-            return root;
-        }
-
-        public static Thread RunAsyncTask(AsyncFunction functionBlock)
+        internal static Thread RunAsyncTask(AsyncFunction functionBlock)
         {
             var asyncTask = new Thread(() =>
             {
@@ -279,16 +251,34 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogEvent(
+                        Domains.HomeAutomation_HomeGenie,
+                        "Service.Utility.RunAsyncTask",
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
                 }
             });
             asyncTask.Start();
             return asyncTask;
         }
 
+
+
+        public static dynamic ParseXmlToDynamic(string xml)
+        {
+            var document = XElement.Load(new StringReader(xml));
+            XElement root = new XElement("Root", document);
+            return new DynamicXmlParser(root);
+        }
+
         public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
-            return module.Properties.Find(delegate(ModuleParameter parameter) { return parameter.Name == propertyName; });
+            return module.Properties.Find(delegate(ModuleParameter parameter)
+            {
+                return parameter.Name == propertyName;
+            });
         }
 
         public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
@@ -333,23 +323,6 @@ namespace HomeGenie.Service
             return value;
         }
 
-        public class StringValueAttribute : System.Attribute
-        {
-
-            private string attributeValue;
-
-            public StringValueAttribute(string value)
-            {
-                attributeValue = value;
-            }
-
-            public string Value
-            {
-                get { return attributeValue; }
-            }
-
-        }
-
         public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
         {
             // Java timestamp is millisecods past epoch
@@ -361,11 +334,11 @@ namespace HomeGenie.Service
         public static string Module2Json(Module module, bool hideProperties)
         {
             string json = "{\n" +
-                        "   \"Name\": \"" + XmlEncode(module.Name) + "\",\n" +
-                        "   \"Description\": \"" + XmlEncode(module.Description) + "\",\n" +
-                        "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
-                        "   \"Domain\": \"" + module.Domain + "\",\n" +
-                        "   \"Address\": \"" + module.Address + "\",\n";
+                          "   \"Name\": \"" + JsonEncode(module.Name) + "\",\n" +
+                          "   \"Description\": \"" + JsonEncode(module.Description) + "\",\n" +
+                          "   \"DeviceType\": \"" + module.DeviceType + "\",\n" +
+                          "   \"Domain\": \"" + module.Domain + "\",\n" +
+                          "   \"Address\": \"" + module.Address + "\",\n";
             if (!hideProperties)
             {
                 json += "   \"Properties\": [ \n";
@@ -374,14 +347,14 @@ namespace HomeGenie.Service
                 {
                     var parameter = module.Properties[i];
                     json += "       {\n" +
-                            "           \"Name\": \"" + XmlEncode(parameter.Name) + "\",\n" +
-                            "           \"Description\": \"" + XmlEncode(parameter.Description) + "\",\n" +
-                            "           \"Value\": \"" + XmlEncode(parameter.Value) + "\",\n" +
-                            "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
-                            "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
-                            "           \"LastValue\": \"" + XmlEncode(parameter.LastValue) + "\",\n" +
-                            "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
-                            "       },\n";
+                    "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
+                    "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
+                    "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
+                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
+                    "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
+                    "           \"LastValue\": \"" + JsonEncode(parameter.LastValue) + "\",\n" +
+                    "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
+                    "       },\n";
                 }
                 json = json.TrimEnd(',', '\n');
                 //
@@ -391,6 +364,26 @@ namespace HomeGenie.Service
             json += "}";
             //
             return json;
+        }
+
+        public static string JsonEncode(string fieldValue)
+        {
+            if (fieldValue == null)
+            {
+                fieldValue = "";
+            }
+            else
+            {
+                fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "&quot;");
+                fieldValue = fieldValue.Replace("\n", "\\n");
+                //fieldValue = fieldValue.Replace("\'", "\\'");
+                fieldValue = fieldValue.Replace("\r", "\\r");
+                fieldValue = fieldValue.Replace("\t", "\\t");
+                fieldValue = fieldValue.Replace("\b", "\\b");
+                fieldValue = fieldValue.Replace("\f", "\\f");
+            }
+            return fieldValue;
         }
 
         public static string XmlEncode(string fieldValue)
@@ -408,61 +401,72 @@ namespace HomeGenie.Service
         }
 
     }
-    
-    public class XmlToDynamic
+
+    public class DynamicXmlParser : DynamicObject
     {
-        public static void Parse(dynamic parent, XElement node)
+
+        XElement element;
+
+        public DynamicXmlParser(string filename)
         {
-            if (node.HasElements)
+            element = XElement.Load(filename);
+        }
+
+        public DynamicXmlParser(XElement el)
+        {
+            element = el;
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            if (element == null)
             {
-                if (node.Elements(node.Elements().First().Name.LocalName).Count() > 1)
-                {
-                    //list
-                    var item = new ExpandoObject();
-                    var list = new List<dynamic>();
-                    foreach (var element in node.Elements())
-                    {
-                        Parse(list, element);
-                    }
+                result = null;
+                return false;
+            }
 
-                    AddProperty(item, node.Elements().First().Name.LocalName, list);
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
-                else
-                {
-                    var item = new ExpandoObject();
-
-                    foreach (var attribute in node.Attributes())
-                    {
-                        AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
-                    }
-
-                    //element
-                    foreach (var element in node.Elements())
-                    {
-                        Parse(item, element);
-                    }
-
-                    AddProperty(parent, node.Name.ToString(), item);
-                }
+            XElement sub = element.Element(binder.Name);
+            if (sub == null)
+            {
+                result = null;
+                return false;
             }
             else
             {
-                AddProperty(parent, node.Name.ToString(), node.Value.Trim());
+                result = new DynamicXmlParser(sub);
+                return true;
             }
         }
 
-        private static void AddProperty(dynamic parent, string name, object value)
+        public static implicit operator string(DynamicXmlParser p)
         {
-            if (parent is List<dynamic>)
+            return p.ToString();
+        }
+
+        public override string ToString()
+        {
+            if (element != null)
             {
-                (parent as List<dynamic>).Add(value);
+                return element.Value;
             }
             else
             {
-                (parent as IDictionary<String, object>)[name] = value;
+                return string.Empty;
             }
         }
+
+        public string this[string attr]
+        {
+            get
+            {
+                if (element == null)
+                {
+                    return string.Empty;
+                }
+                return element.Attribute(attr).Value;
+            }
+        }
+
     }
 
 }

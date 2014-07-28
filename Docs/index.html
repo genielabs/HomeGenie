@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HomeGenie - Documentation</title>
+    <meta name="description" content="HomeGenie: Open Source Home Automation Server in a Internet Of Things world. For Windows, Linux, Mac, Raspberry Pi.">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google-translate-customization" content="4465409ca18a218d-3c5a592dabcc0b15-gd17525dd79b50c62-1c">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- JQuery Snippet -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.snippet.min.css">
+    <link rel="stylesheet" type="text/css" href="css_pirobox/style_1/style.css">
+    <!--::: OR :::-->
+    <link rel="stylesheet" type="text/css" href="css_pirobox/style_2/style.css">
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.snippet.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <!--::: it depends on which style you choose :::-->
+    <script type="text/javascript" src="js/pirobox_extended.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
+    <!-- or use minified version  "pirobox_extended_min.js"  -->
+    <script type="text/javascript">
+            $(document).ready(function(){
+                  // pirobox gallery
+                  $().piroBox_ext({
+                      piro_speed: 700,
+                      bg_alpha: 0.5,
+                      piro_scroll: true //pirobox always positioned at the center of the page
+                  });
+                  // smooth scroll
+                  $(".scroll").click(function (event) {
+                      event.preventDefault();
+                      $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 500);
+                  });
+                  // source code snippet
+                  $("pre.csharp").snippet("csharp", { style: "kwrite", transparent: false, showNum: true });
+            });			
+      </script>
+    <script type="text/javascript">
+
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-40902095-1', 'generoso.info');
+		  ga('send', 'pageview');
+		  
+		</script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>        <![endif]-->
+    <div class="header-container">
+      <header class="wrapper clearfix">
+        <h1 class="title">HomeGenie</h1>
+        <nav>
+          <ul>
+            <li><a href="http://www.homegenie.it/">Home</a></li>
+            <li><a href="http://www.homegenie.it/docs">Docs</a></li>
+            <li><a href="http://www.homegenie.it/download.php">Download</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <div class="main-container">
+      <div class="main wrapper clearfix">
+        <article style="width:100%">
+          <header>
+            <!--h1>About this Project</h1>
+						<p>						...						</p--> </header>
+          <section>
+            <aside class="blank">
+                  <script type="text/javascript">
+                  function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-40902095-1'}, 'google_translate_element');
+                  }
+                  </script>
+              <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script><br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <a href="http://en.wikipedia.org/wiki/Occam%27s_razor" target="_blank" style="text-decoration:none;font-size:10pt;color:gray"><i>«&nbsp;It is futile to do with more, things which can be done with fewer.&nbsp;»</i></a></aside>
+            <h2>Automation Programming</h2>
+            <p> </p>
+            <ol>
+              <li><a href="paradigm.html">Paradigm</a></li>
+              <li><a href="gettingstarted.html">Getting started</a></li>
+              <li><a href="overview.html">Overview by examples</a></li>
+              <li><a title="Advanced Topics" href="advanced.html">Advanced Topics</a> </li>
+              <li><a title="About Widgets" href="widgets.html">About Widgets</a></li>
+              <li><a title="Having fun with HG and Raspberry Pi" href="raspberrypi.html"><span style="color: #0000ee;">Playing with HG and Raspberry Pi</span></a></li>
+              <li>Helper Class Reference
+                <ul>
+                  <li><a title="EventsHelper Class" href="api/events.html">EventsHelper</a></li>
+                  <li> <a title="ModulesHelper class" href="api/modules.html"> ModulesManager</a></li>
+                  <li>ModuleHelper</li>
+                  <li><a title="NetHelper class" href="api/network.html">NetHelper</a></li>
+                  <li><a title="ProgramHelper class" href="api/program.html">ProgramHelper</a></li>
+                  <li>SchedulerHelper</li>
+                  <li>SettingsHelper</li>
+                  <li>SerialPortHelper</li>
+                  <li>TcpClientHelper</li>
+                  <li>RaspberrySharp</li>
+                </ul>
+              </li>
+              <li> <a href="https://sourceforge.net/p/homegenie/wiki/Home/" target="_blank">Development Wiki and Web Service <strong>API</strong></a></li>
+            </ol>
+            <br>
+            <br>
+            <br>
+            <br>
+          </section>
+        </article>
+      </div>
+      <!-- #main --> </div>
+    <!-- #main-container -->
+    <div class="footer-container">
+      <footer class="wrapper">
+        <h3><a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" style="color:yellow">CC BY-NC 3.0</a> © 2012-2014 G-Labs</h3>
+      </footer>
+    </div>
+  </body>
+</html>

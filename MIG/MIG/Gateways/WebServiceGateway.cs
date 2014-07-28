@@ -40,6 +40,7 @@ namespace MIG.Gateways
         public bool UseSSL = false;
         public string Password;
         public int SslPort;
+        public bool CacheEnable;
     }
 
     class WebServiceGatewayRequest
@@ -67,6 +68,7 @@ namespace MIG.Gateways
         }
 
         public HttpListener Listener { get { return listener; } }
+
         public AutoResetEvent ListenForNextRequest { get { return listenForNextRequest; } }
     }
 
@@ -77,7 +79,7 @@ namespace MIG.Gateways
         private ManualResetEvent stopEvent = new ManualResetEvent(false);
         //
         private string servicePassword;
-        private string homePath;
+        //private string homePath;
         private string baseUrl;
         private string[] bindingPrefixes;
 
@@ -88,11 +90,14 @@ namespace MIG.Gateways
         public void Configure(object gwConfiguration)
         {
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
-            homePath = config.HomePath;
+            //homePath = config.HomePath;
             baseUrl = config.BaseUrl;
-            bindingPrefixes = new string[2] { 
-                String.Format(@"http://+:{0}/", config.Port),
-                String.Format(@"https://+:{0}/", config.SslPort)
+            //bindingPrefixes = new string[2] { 
+            //    String.Format(@"http://+:{0}/", config.Port),
+            //    String.Format(@"https://+:{0}/", config.SslPort)
+            //};
+            bindingPrefixes = new string[1] { 
+                String.Format(@"http://+:{0}/", config.Port)
             };
             //
             SetPasswordHash(config.Password);
@@ -121,12 +126,14 @@ namespace MIG.Gateways
 
         private void Worker(object state)
         {
+            HttpListenerRequest request = null;
+            HttpListenerResponse response = null;
             try
             {
                 var context = state as HttpListenerContext;
                 //
-                HttpListenerRequest request = context.Request;
-                HttpListenerResponse response = context.Response;
+                request = context.Request;
+                response = context.Response;
                 //
                 if (request.IsSecureConnection)
                 {
@@ -151,7 +158,7 @@ namespace MIG.Gateways
                 //
                 response.KeepAlive = false;
                 //
-                bool isAuthenticated = (request.Headers["Authorization"] != null);
+                bool isAuthenticated = (request.Headers[ "Authorization" ] != null);
                 //
                 if (servicePassword == "" || isAuthenticated) //request.IsAuthenticated)
                 {
@@ -171,10 +178,10 @@ namespace MIG.Gateways
                         //identity = (HttpListenerBasicIdentity)context.User.Identity;
                         // authuser = identity.Name;
                         // authpass = identity.Password;
-                        byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers["Authorization"].Split(' ')[1]);
+                        byte[] encodedDataAsBytes = System.Convert.FromBase64String(request.Headers[ "Authorization" ].Split(' ')[ 1 ]);
                         string authtoken = System.Text.Encoding.UTF8.GetString(encodedDataAsBytes);
-                        authUser = authtoken.Split(':')[0];
-                        authPass = authtoken.Split(':')[1];
+                        authUser = authtoken.Split(':')[ 0 ];
+                        authPass = authtoken.Split(':')[ 1 ];
                     }
                     //
                     //TODO: complete authorization (for now with one fixed user 'admin', add multiuser support)
@@ -193,7 +200,7 @@ namespace MIG.Gateways
                         if (url == "" || url.TrimEnd('/') == baseUrl.TrimEnd('/'))
                         {
                             // default home redirect
-                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html");
+                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html?" + new TimeSpan(DateTime.UtcNow.Ticks).TotalMilliseconds);
                             response.Close();
                         }
                         else
@@ -230,20 +237,28 @@ namespace MIG.Gateways
                     response.AddHeader("WWW-Authenticate", "Basic");
                     //context.Response.Headers.Set(HttpResponseHeader.WwwAuthenticate, "Basic");
                 }
-                //
-                try
-                {
-                    response.OutputStream.Close();
-                    response.Close();
-                }
-                catch { }
             }
             catch (Exception ex)
             {
                 // TODO: add error logging 
                 Console.WriteLine("WEBGATEWAY ERROR: " + ex.Message + "\n" + ex.StackTrace);
             }
-
+            //
+            try
+            {
+                response.OutputStream.Close();
+                response.Close();
+            }
+            catch
+            {
+            }
+            try
+            {
+                request.InputStream.Close();
+            }
+            catch
+            {
+            }
         }
 
         private void ListenAsynchronously(IEnumerable<string> prefixes)
@@ -269,9 +284,8 @@ namespace MIG.Gateways
             while (callbackState.Listener.IsListening)
             {
                 callbackState.Listener.BeginGetContext(new AsyncCallback(ListenerCallback), callbackState);
-                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, stopEvent }, 10000);
+                int n = WaitHandle.WaitAny(new WaitHandle[] { callbackState.ListenForNextRequest, stopEvent });
                 if (n == 1)
-
                 {
                     // stopEvent was signalled 
                     callbackState.Listener.Stop();
@@ -284,7 +298,7 @@ namespace MIG.Gateways
         {
             HttpListenerCallbackState callbackState = (HttpListenerCallbackState)result.AsyncState;
             HttpListenerContext context = null;
-            //
+            callbackState.ListenForNextRequest.Set();
             try
             {
                 context = callbackState.Listener.EndGetContext(result);
@@ -293,12 +307,11 @@ namespace MIG.Gateways
             {
                 Console.WriteLine("WebServiceGateway: " + ex.Message + "\n" + ex.StackTrace);
             }
-            finally
-            {
-                callbackState.ListenForNextRequest.Set();
-            }
+            //finally
+            //{
+            //    callbackState.ListenForNextRequest.Set();
+            //}
             if (context == null) return;
-            //
             Worker(context);
         }
 

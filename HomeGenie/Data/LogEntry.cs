@@ -31,6 +31,7 @@ namespace HomeGenie.Data
     public class LogEntry
     {
         public DateTime Timestamp;
+
         public double UnixTimestamp
         {
             get
@@ -39,6 +40,7 @@ namespace HomeGenie.Data
                 return uts.TotalMilliseconds;
             }
         }
+
         public string Domain = "";
         public string Source = "";
         public string Description = "";

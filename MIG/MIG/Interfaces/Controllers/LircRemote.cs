@@ -52,17 +52,17 @@ namespace MIG.Interfaces.Controllers
     {
 
         #region Implemented MIG Commands
+
         // typesafe enum
         public sealed class Command : GatewayCommand
         {
 
-            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>()
-            {
-                {101, "Remotes.Search"},
-                {102, "Remotes.Add"},
-                {103, "Remotes.Remove"},
-                {104, "Remotes.List"},
-                {711, "Control.IrSend"},
+            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>() {
+                { 101, "Remotes.Search" },
+                { 102, "Remotes.Add" },
+                { 103, "Remotes.Remove" },
+                { 104, "Remotes.List" },
+                { 711, "Control.IrSend" },
             };
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
@@ -77,7 +77,7 @@ namespace MIG.Interfaces.Controllers
 
             private Command(int value)
             {
-                this.name = CommandsList[value];
+                this.name = CommandsList[ value ];
                 this.value = value;
             }
 
@@ -110,7 +110,9 @@ namespace MIG.Interfaces.Controllers
             {
                 if (CommandsList.ContainsValue(str))
                 {
-                    var cmd = from c in CommandsList where c.Value == str select c.Key;
+                    var cmd = from c in CommandsList
+                                             where c.Value == str
+                                             select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -118,18 +120,22 @@ namespace MIG.Interfaces.Controllers
                     throw new InvalidCastException();
                 }
             }
+
             public static bool operator ==(Command a, Command b)
             {
                 return a.value == b.value;
             }
+
             public static bool operator !=(Command a, Command b)
             {
                 return a.value != b.value;
             }
         }
+
         #endregion
 
         #region Managed to Unmanaged Interop
+
         [DllImport("lirc_client")]
         private extern static int lirc_init(string prog, int verbose);
 
@@ -147,6 +153,7 @@ namespace MIG.Interfaces.Controllers
 
         [DllImport("lirc_client")]
         private extern static int lirc_code2char(IntPtr config, string code, out string str);
+
         #endregion
 
         private string programName = "homegenie";
@@ -228,6 +235,7 @@ namespace MIG.Interfaces.Controllers
         {
             get { return isConnected; }
         }
+
         /// <summary>
         /// Returns true if the device has been found in the system
         /// </summary>
@@ -274,7 +282,9 @@ namespace MIG.Interfaces.Controllers
                             {
                                 lirc_nextcode(out code);
                             }
-                            catch { } // TODO: handle exception
+                            catch
+                            {
+                            } // TODO: handle exception
                             //
                             if (code == null)
                             {
@@ -288,15 +298,14 @@ namespace MIG.Interfaces.Controllers
                                 string[] codeparts = code.Split(' ');
                                 try
                                 {
-                                    if (codeparts[1] == "00") // we signal only the first pulse
+                                    if (codeparts[ 1 ] == "00") // we signal only the first pulse
                                     {
-                                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction()
-                                        {
+                                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                                             Domain = this.Domain,
                                             SourceId = "IR",
                                             SourceType = "LIRC Remote",
                                             Path = "Receiver.RawData",
-                                            Value = codeparts[3].TrimEnd(new char[] { '\n', '\r' }) + "/" + codeparts[2]
+                                            Value = codeparts[ 3 ].TrimEnd(new char[] { '\n', '\r' }) + "/" + codeparts[ 2 ]
                                         });
                                         //
                                         if (rfPulseTimer == null)
@@ -306,8 +315,7 @@ namespace MIG.Interfaces.Controllers
                                                 try
                                                 {
                                                     //_rfprevstringdata = "";
-                                                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction()
-                                                    {
+                                                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                                                         Domain = this.Domain,
                                                         SourceId = "IR",
                                                         SourceType = "LIRC Remote",
@@ -315,7 +323,7 @@ namespace MIG.Interfaces.Controllers
                                                         Value = ""
                                                     });
                                                 }
-                                                catch (Exception ex)
+                                                catch
                                                 {
                                                     // TODO: add error logging 
                                                 }
@@ -324,14 +332,19 @@ namespace MIG.Interfaces.Controllers
                                         rfPulseTimer.Change(1000, Timeout.Infinite);
                                     }
                                 }
-                                catch { } // TODO: handle exception
+                                catch
+                                {
+                                } // TODO: handle exception
                             }
                             Thread.Sleep(100);
                         }
                     }));
                     lircListener.Start();
                 }
-                catch { }
+                catch
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -340,7 +353,13 @@ namespace MIG.Interfaces.Controllers
         {
             if (isConnected)
             {
-                lircListener.Abort();
+                try
+                {
+                    lircListener.Abort();
+                }
+                catch
+                {
+                }
                 lircListener = null;
                 //
                 try
@@ -348,7 +367,7 @@ namespace MIG.Interfaces.Controllers
                     LircFreeConfig(lircConfig);
                     LircDeinit();
                 }
-                catch (System.Exception ex)
+                catch
                 {
 
                 }
@@ -363,7 +382,10 @@ namespace MIG.Interfaces.Controllers
             //
             if (request.Command == Command.REMOTES_SEARCH)
             {
-                request.Response = JsonConvert.SerializeObject(SearchRemotes(request.GetOption(0)), Formatting.Indented);
+                request.Response = JsonConvert.SerializeObject(
+                    SearchRemotes(request.GetOption(0)),
+                    Formatting.Indented
+                );
             }
             else if (request.Command == Command.REMOTES_ADD)
             {
@@ -440,7 +462,9 @@ namespace MIG.Interfaces.Controllers
                 File.WriteAllText("/etc/lirc/lircd.conf", lircConfiguration);
                 ShellCommand("/etc/init.d/lirc", " force-reload");
             }
-            catch { }
+            catch
+            {
+            }
         }
 
 

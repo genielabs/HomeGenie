@@ -1,10 +1,10 @@
 ﻿[{
-    Name: "Generic Program",
+    Name: "UI Link",
     Author: "Generoso Martello",
     Version: "2013-03-31",
 
 	GroupName : '',
-	IconImage : 'pages/control/widgets/homegenie/generic/images/program.png',
+	IconImage : 'pages/control/widgets/homegenie/generic/images/link.png',
 	StatusText : '',
 	Description : '',
 	Initialized : false,
@@ -23,7 +23,7 @@
 			this.Initialized = true;
 			//
 			var groupname = this.GroupName;
-			container.on('click', function() {
+			widget.on('click', function() {
 				//HG.Automation.Programs.Run(module.Address, groupname, null);
 				if (link != '')
 				{

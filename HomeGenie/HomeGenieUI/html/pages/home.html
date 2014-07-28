@@ -3,7 +3,7 @@
 
     {include pages/header.html}
 
-    <div data-role="content">
+    <div class="ui-content">
 
         <div align="center" style="position:absolute;width:100%;top:10px;left:0px;z-index:1000"><img src="images/genie.png" width="128" /></div>
 
@@ -13,10 +13,10 @@
 
         <ul data-role="listview" data-inset="true" style="margin-top:70px;">
             <li data-locale-id="home_menu_title" data-role="list-divider">Home Menu</li>
-            <li><a data-locale-id="home_menu_control" id="homemenu_option_control" href="#page_control" data-transition="slide" class="ui-disabled">Control</a></li>
+            <li><a data-locale-id="home_menu_control" id="homemenu_option_control" href="#page_control" data-transition="slide" _class_="ui-disabled">Control</a></li>
             <li><a data-locale-id="home_menu_analyze" href="#page_analyze" data-transition="slide">Analyze</a></li>
             <li><a data-locale-id="home_menu_configure" href="#page_configure" data-transition="slide">Configure</a></li>
-            <li data-icon="info"><a data-locale-id="home_menu_about" href="#page_homegenie_about" data-rel="popup" data-transition="slidedown">About</a></li>
+            <li class="ui-icon-info ui-btn-icon-right"><a data-locale-id="home_menu_about" href="#page_homegenie_about" data-rel="popup" data-transition="slidedown">About</a></li>
         </ul>
 
 
@@ -28,47 +28,47 @@
         <header data-role="header">
             <h1>Oh-oh!</h1>
         </header>
-        <div data-role="content">
+        <div class="ui-content">
             <p>System is not configured.<br /></p>
-            <a href="#page_configure_interfaces" data-transition="slide" title="Configure System" data-role="button">Configure System</a>
+            <a href="#page_configure_interfaces" data-transition="slide" title="Configure System" class="ui-btn">Configure System</a>
         </div>
     </div>
 
 
 
-    <div data-role="popup" id="page_homegenie_about" class="ui-corner-all" data-close-btn="right" style="min-width:280px">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div data-role="popup" id="page_homegenie_about" class="ui-corner-all hg-popup-a" data-close-btn="right" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="homegenie_about_title">About</h1>
         </div>
-        <div data-role="content" class="ui-corner-bottom ui-content">
+        <div class="ui-content ui-corner-bottom">
 
-            <div style="position:absolute;right:-25px;top:50px">
+            <!--div style="position:absolute;right:-25px;top:50px">
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.homegenie.it/" data-text="HomeGenie, Home Automation Server in the Internet of Things era. &quot;Things Different!&quot; =)" data-size="large" data-hashtags="iot,homeautomation,raspberrypi">Tweet</a>
                 <script>    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-            </div>
+            </div-->
 
             <h5 style="font-family:georgia">HomeGenie</h5>
             <fieldset data-role="fieldcontain" style="border:solid 1px gray;margin:10px;padding:10px;font-family:monospace;font-size:9pt;">
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:27%">version</div>
-                    <div class="ui-block-b" style="width:73%">&nbsp;1.00 beta r351</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;1.00 beta r400</div>
                 </div>
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:27%">codename</div>
-                    <div class="ui-block-b" style="width:73%">&nbsp;AutomaThing</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;AutomaThing</div>
                 </div>
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:27%">motto</div>
-                    <div class="ui-block-b" style="width:73%">&nbsp;Things Different! =P</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;Things Different! =P</div>
                 </div>
 
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:27%">license</div>
-                    <div class="ui-block-b" style="width:73%">&nbsp;<a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank">CC BY-NC 3.0</a></div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;<a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank">CC BY-NC 3.0</a></div>
                 </div>
 
             </fieldset>
@@ -79,8 +79,8 @@
 
             <br />
 
-            <a data-locale-id="" target="_blank" href="http://homegenie.it/" data-role="button" data-icon="home">HomePage and Support</a>
-            <a data-locale-id="" target="_blank" href="http://homegenie.it/docs/" data-role="button" data-icon="bars">Documentation</a>
+            <a data-locale-id="" target="_blank" href="http://homegenie.it/" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left">HomePage and Support</a>
+            <a data-locale-id="" target="_blank" href="http://homegenie.it/docs/" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left">Documentation</a>
         </div>
     </div>
 
@@ -89,7 +89,12 @@
 
     <div id="speechinput" data-role="footer" data-position="fixed" data-tap-toggle="false">
 
-        <input type="search" results="10" placeholder="Click the mic for voice control or type a sentence..." onspeechchange="HG.VoiceControl.InterpretInput(this.value)" onwebkitspeechchange="HG.VoiceControl.InterpretInput(this.value)" onchange="HG.VoiceControl.InterpretInput(this.value)" x-webkit-speech speech />
+        <table width="100%">
+            <tr>
+                <td><input id="voicerecognition_text" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                <td width="100px"><a id="voicerecognition_button" class="ui-btn" href="javascript:recognition.start()">Voice</a></td>
+            </tr>
+        </table>
 
     </div>
 

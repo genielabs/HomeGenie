@@ -32,17 +32,8 @@ namespace XTenLib
 
         public string Description { get; set; }
         public string Code { get; set; }
-        /*
-        private string _status;
-        public string Status { 
-            get { return _status; }
-            set { 
-                _status = value;
-                OnPropertyChanged("Status");
-            }
-        }
-        */
         private double statusLevel;
+
         public double Level
         {
             get { return statusLevel; }
@@ -57,7 +48,6 @@ namespace XTenLib
         {
             Description = "";
             Code = "";
-            //Status = "";
             Level = 0.0;
         }
 
@@ -91,6 +81,20 @@ namespace XTenLib
         Status_Request
     }
 
+    public enum X10FunctionType
+    {
+        Address = 0x00,
+        Function = 0x01
+    }
+
+    public enum X10CommState
+    {
+        Ready,
+        WaitingChecksum,
+        WaitingAck,
+        WaitingPollReply
+    }
+
     public enum X10CommandType
     {
         Address = 0x04,
@@ -98,10 +102,12 @@ namespace XTenLib
         //
         PLC_Ready = 0x55,
         PLC_Poll = 0x5A,
+        PLC_FilterFail_Poll = 0xF3, // CP10-CM11
         Macro = 0x5B,
         RF = 0x5D,
         //
-        PLC_TimeRequest = 0xA5
+        PLC_TimeRequest = 0xA5,
+        PLC_ReplyToPoll = 0xC3
     }
 
     public enum X10HouseCodes
@@ -147,7 +153,31 @@ namespace XTenLib
     public static class Utility
     {
 
+        public const int X10_MAX_DIM = 22;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="percentage"></param>
+        /// <returns></returns>
+        public static byte GetDimValue(int percentage)
+        {
+            if (percentage > 100) percentage = 100;
+            else if (percentage < 0) percentage = 0;
+            percentage = (int)Math.Floor(((double)percentage / 100D) * X10_MAX_DIM);
+            byte dimvalue = (byte)(percentage << 3);
+            return dimvalue;
+        }
+
+        /// <summary>
+        /// returns a value between 0.0 and 1.0 representing the percentage of dim
+        /// </summary>
+        /// <param name="dimvalue"></param>
+        /// <returns></returns>
+        public static double GetPercentageValue(byte dimvalue)
+        {
+            return ((double)((dimvalue) >> 3) / (double)X10_MAX_DIM);
+        }
 
         public static string HouseUnitCodeFromEnum(X10HouseCodes housecode, X10UnitCodes unitcodes)
         {

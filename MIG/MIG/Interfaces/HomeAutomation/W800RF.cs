@@ -40,6 +40,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         private Timer rfPulseTimer;
         private string rfLastStringData = "";
+
         void HandleRfDataReceived(RfDataReceivedAction eventdata)
         {
             string data = XTenLib.Utility.ByteArrayToString(eventdata.RawData);
@@ -51,9 +52,15 @@ namespace MIG.Interfaces.HomeAutomation
                     rfLastStringData = data;
                     try
                     {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "W800RF32 RF Receiver", Path = "Receiver.RawData", Value = rfLastStringData });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = "RF",
+                            SourceType = "W800RF32 RF Receiver",
+                            Path = "Receiver.RawData",
+                            Value = rfLastStringData
+                        });
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // TODO: add error logging 
                     }
@@ -61,17 +68,23 @@ namespace MIG.Interfaces.HomeAutomation
                     if (rfPulseTimer == null)
                     {
                         rfPulseTimer = new Timer(delegate(object target)
-                                                  {
-                                                      try
-                                                      {
-                                                          rfLastStringData = "";
-                                                          InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = "RF", SourceType = "W800RF32 RF Receiver", Path = "Receiver.RawData", Value = "" });
-                                                      }
-                                                      catch (Exception ex)
-                                                      {
-                                                          // TODO: add error logging 
-                                                      }
-                                                  });
+                        {
+                            try
+                            {
+                                rfLastStringData = "";
+                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                    Domain = this.Domain,
+                                    SourceId = "RF",
+                                    SourceType = "W800RF32 RF Receiver",
+                                    Path = "Receiver.RawData",
+                                    Value = ""
+                                });
+                            }
+                            catch
+                            {
+                                // TODO: add error logging 
+                            }
+                        });
                     }
                     rfPulseTimer.Change(1000, Timeout.Infinite);
                 }
@@ -98,14 +111,17 @@ namespace MIG.Interfaces.HomeAutomation
         {
             return w800Rf32.Connect();
         }
+
         public void Disconnect()
         {
             w800Rf32.Disconnect();
         }
+
         public bool IsConnected
         {
             get { return w800Rf32.IsConnected; }
         }
+
         public bool IsDevicePresent()
         {
             bool present = true;

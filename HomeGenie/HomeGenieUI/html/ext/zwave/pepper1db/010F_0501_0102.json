@@ -51,7 +51,7 @@
         "@value": "true"
       },
       "beamSensor": "0",
-      "rfFrequency": "Russia"
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
@@ -509,7 +509,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "In the case of alarm frames the alarm priority is specified.\r\nValue of 255 makes it possible to activate the device when using the Dimmer module it means activating the device and setting it to the previous stored condition, e.g. when Dimmer is set to 30%, then deactivated, and then reactivated using command 255, it will automatically be set to the previous condition, i.e. 30%."
+              "#text": "In the case of alarm frames the alarm priority is specified.\nValue of 255 makes it possible to activate the device when using the Dimmer module it means activating the device and setting it to the previous stored condition, e.g. when Dimmer is set to 30%, then deactivated, and then reactivated using command 255, it will automatically be set to the previous condition, i.e. 30%."
             }
           },
           "value": [
@@ -549,7 +549,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "In the case of alarm frames the alarm priority is specified.\r\nValue of 255 makes it possible to activate the device; when using of the Dimmer module it means activating the device and setting it to the previous stored condition, e.g. when Dimmer is set to 30%, then deactivated, and then reactivated using command 255, it will automatically be set to the previous condition, i.e. 30%."
+              "#text": "In the case of alarm frames the alarm priority is specified.\nValue of 255 makes it possible to activate the device; when using of the Dimmer module it means activating the device and setting it to the previous stored condition, e.g. when Dimmer is set to 30%, then deactivated, and then reactivated using command 255, it will automatically be set to the previous condition, i.e. 30%."
             }
           },
           "value": [
@@ -589,7 +589,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "It allows for disabling the deactivation function or the alarm cancellation function for devices associated with the appropriate input of the Fibaro Sensor. In the case of association group no. 1 and 2 the information is sent. sent. In the case of association group no. 2 the information is sent.\r\nNOTE: Information concerning alarm violation or activation commands for devices from association groups are always sent."
+              "#text": "It allows for disabling the deactivation function or the alarm cancellation function for devices associated with the appropriate input of the Fibaro Sensor. In the case of association group no. 1 and 2 the information is sent. sent. In the case of association group no. 2 the information is sent.\nNOTE: Information concerning alarm violation or activation commands for devices from association groups are always sent."
             }
           },
           "value": [
@@ -667,7 +667,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "The forced report is sent immediately after the next reading of temperature from the sensor, irrespective of the settings of parameter no. 12.\r\nNote: Frequent sending of temperature condition reports is reasonable when the sensor is located somewhere where can occure rapid changes of ambient temperature. In other cases it is recommended to leave the parameter set to the default value."
+              "#text": "The forced report is sent immediately after the next reading of temperature from the sensor, irrespective of the settings of parameter no. 12.\nNote: Frequent sending of temperature condition reports is reasonable when the sensor is located somewhere where can occure rapid changes of ambient temperature. In other cases it is recommended to leave the parameter set to the default value."
             }
           },
           "value": [
@@ -707,7 +707,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "This is the maximum acceptable difference between the last reported temperature and the current temperature taken from the sensor. If the temperatures differ by the set value or more, then a report with the current temperature value is sent to the device assigned to association group no. 3. Intervals between taking readings from sensors are specified by parameter no. 10.\r\nDefault value: 8 [0.5oC]\r\nPossible parameter settings:0 – 255 [0oC to 16oC] [0 oF – 28.8oF]\r\nIn order to set the appropriate value of the parameter, the following formula should be used:\r\nx = delta T x 16 - for Celsius\r\nx = delta T x 80 / 9 - for Fahrenheit\r\nx – parameter value\r\ndelta T – maximum acceptable temperature gradient in Celsius or Fahrenheit\r\nIf the value is set to 0, then information about the temperature will be sent every time, immediately once the readings have been taken from the sensor."
+              "#text": "This is the maximum acceptable difference between the last reported temperature and the current temperature taken from the sensor. If the temperatures differ by the set value or more, then a report with the current temperature value is sent to the device assigned to association group no. 3. Intervals between taking readings from sensors are specified by parameter no. 10.\nDefault value: 8 [0.5oC]\nPossible parameter settings:0 – 255 [0oC to 16oC] [0 oF – 28.8oF]\nIn order to set the appropriate value of the parameter, the following formula should be used:\nx = delta T x 16 - for Celsius\nx = delta T x 80 / 9 - for Fahrenheit\nx – parameter value\ndelta T – maximum acceptable temperature gradient in Celsius or Fahrenheit\nIf the value is set to 0, then information about the temperature will be sent every time, immediately once the readings have been taken from the sensor."
             }
           },
           "value": {
@@ -735,7 +735,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Information sent in this mode is not repeated by the mesh network. NOTE!\r\nIf the “broadcast” mode of information transmission is activated for a given channel, then transmission of information in “singlecast” mode to devices assigned to the association group of this channel is deactivated."
+              "#text": "Information sent in this mode is not repeated by the mesh network. NOTE!\nIf the “broadcast” mode of information transmission is activated for a given channel, then transmission of information in “singlecast” mode to devices assigned to the association group of this channel is deactivated."
             }
           },
           "value": [

@@ -32,6 +32,7 @@ using HomeGenie.Service;
 using Raspberry;
 
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace HomeGenie
 {
@@ -39,10 +40,11 @@ namespace HomeGenie
     {
         private static HomeGenieService _homegenie = null;
         private static bool _isrunning = true;
-        private static bool _startupdater = false;
+        private static bool _restart = false;
 
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 
             Console.OutputEncoding = Encoding.UTF8;
             /* Change current culture
@@ -99,7 +101,7 @@ namespace HomeGenie
                         {
                             File.WriteAllText("/root/.lircrc", lircrc);
                         }
-                        catch (Exception ex) { }
+                        catch { }
                     }
                     //
                     //if (File.Exists("/usr/lib/libgdiplus.so") && !File.Exists("/usr/local/lib/libgdiplus.so"))
@@ -109,7 +111,21 @@ namespace HomeGenie
                 }
                 else // fallback (ubuntu and other 64bit debians)
                 {
-                    ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/debian64_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
+                    string v4lfile = "v4l/debian64_libCameraCaptureV4L.so.gd3";
+                    if (!File.Exists("/usr/lib/x86_64-linux-gnu/libgd.so.3"))
+                    {
+                        v4lfile = "v4l/debian64_libCameraCaptureV4L.so";
+                    }
+                    ShellCommand(
+                        "cp",
+                        " -f \"" + Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            v4lfile
+                        ) + "\" \"" + Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "libCameraCaptureV4L.so"
+                        ) + "\""
+                    );
                 }
             }
             //
@@ -126,9 +142,9 @@ namespace HomeGenie
             ShutDown();
         }
 
-        internal static void Quit(bool startUpdater)
+        internal static void Quit(bool restartService)
         {
-            _startupdater = startUpdater;
+            _restart = restartService;
             _isrunning = false;
             ShutDown();
         }
@@ -143,14 +159,18 @@ namespace HomeGenie
                 _homegenie = null;
             }
             //
-            Console.Write(" QUIT!\n\n");
-            //
-            if (_startupdater)
+            int exitCode = 0;
+            if (_restart)
             {
-                Utility.StartUpdater(true);
+                exitCode = 1;
+                Console.Write("\n\n...RESTART!\n\n");
+            }
+            else
+            {
+                Console.Write("\n\n...QUIT!\n\n");
             }
             //
-            System.Environment.Exit(0);
+            Environment.Exit(exitCode);
         }
 
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -164,15 +184,25 @@ namespace HomeGenie
         {
             try
             {
-                var processInfo = new System.Diagnostics.ProcessStartInfo(command, args);
+                var processInfo = new ProcessStartInfo(command, args);
                 processInfo.RedirectStandardOutput = false;
                 processInfo.UseShellExecute = false;
                 processInfo.CreateNoWindow = true;
-                var process = new System.Diagnostics.Process();
+                var process = new Process();
                 process.StartInfo = processInfo;
                 process.Start();
             }
             catch { }
+        }
+
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
+            HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
+                Domain = "HomeAutomation.HomeGenie",
+                Source = "UnhandledExceptionTrapper",
+                Description = e.ExceptionObject.ToString(),
+                Property = "HomeGenie.UnhandledException",
+                Value = e.ExceptionObject.ToString()
+            });
         }
 
     }

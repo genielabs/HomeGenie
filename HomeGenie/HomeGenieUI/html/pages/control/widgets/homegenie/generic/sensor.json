@@ -16,11 +16,12 @@
 		//
     	var sensorimgdata = '';
     	var sensortxtdata = '';
+		var infotext = '';
         if (module.Properties != null) {
             for (p = 0; p < module.Properties.length; p++) {
 				if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') 
 				{
-					var value = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+					var value = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 					if (isNaN(value)) value = module.Properties[p].Value;
 					//
 					var displayname = module.Properties[p].Name.replace('Sensor.', '');
@@ -48,42 +49,62 @@
 	                    else if (blevel > 10) blevel = 20;
 	                    else if (blevel > 0) blevel = 10;
 	                    //
-	                    imagesrc = 'pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png';
-	                    displayvalue = value + '%';
+						infotext += '<span style="vertical-align:middle">' + value + '%</span> <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
+						continue;
 	                }
 	                else if (module.Properties[p].Name == "Sensor.Temperature") {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                	imagesrc = 'hg-indicator-temperature';
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8451;';
 	                }
 	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
+	                	imagesrc = 'hg-indicator-temperature';
+	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
 	                    displayvalue = temp + '&#8457;';
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Luminance') {
-	                	imagesrc = 'pages/control/widgets/homegenie/generic/images/luminance.png';
+	                	imagesrc = 'hg-indicator-luminance';
 	                    displayvalue = value + '%';
 	                }
+	                else if (module.Properties[p].Name == 'Sensor.Humidity') {
+	                	imagesrc = 'hg-indicator-humidity';
+	                    displayvalue = value + '%';
+	                }
+					//
+					if (module.Properties[p].Name == 'Meter.Watts') {
+						imagesrc = 'hg-indicator-energy';
+					}
+					else if (module.Properties[p].Name == 'Sensor.DoorWindow' ) {
+						imagesrc = 'hg-indicator-door';
+					}
+					//
 	                if (imagesrc != '')
 	                {
-	                    displayname = '<img src="' + imagesrc + '" alt="' + updatetime + '" height="22" align="middle" style="vertical-align:bottom" />';
-	                    sensorimgdata += '<div style="margin:2px;height:28px;float:left"><div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;height:28px;text-align:bottom;width:100px;float:left">' + displayname + '</div><div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;"><font style="line-height:28px;text-align:bottom;color:gray">' + displayvalue + '</font></div></div>';
+	                    displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
+	                    sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
 	                }
 	                else
 	                {
-	                    sensortxtdata += '<div style="margin:2px;height:20px;float:left"><div align="right" style="padding:4px;border-left:solid 1px lightgray;border-top:solid 1px lightgray;line-height:20px;text-align:bottom;width:100px;float:left">' + displayname + '</div><div align="left" style="width:60px;padding:4px;float:left;border-top:solid 1px lightgray;"><font style="line-height:20px;text-align:bottom;color:gray">' + displayvalue + '</font></div></div>';
+	                    sensortxtdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;font-size:11pt;font-weight:bold;text-align:bottom;line-height:28px;overflow:hidden;text-overflow:ellipsis;">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;text-align:bottom;line-height:28px;font-size:18pt">' + displayvalue + '</div></div>';
                     }
                 }
             }
             
         }
 		//
-		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>' );
+		var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
+		if (widgeticon != null && widgeticon.Value != '')
+        {
+            this.IconImage = widgeticon.Value;
+        }
+		//
+		widget.find('[data-ui-field=description]').html( (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address );
 		//
 		if (sensorimgdata != '') sensorimgdata = sensorimgdata + '<br clear="all" />';
 		if (sensortxtdata != '') sensortxtdata = sensortxtdata + '<br clear="all" />';
+		widget.find('[data-ui-field=status]').html(infotext);
 		widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
+		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
     }
 
 }]

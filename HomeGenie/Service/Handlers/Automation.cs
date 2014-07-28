@@ -34,9 +34,12 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
+using Microsoft.Scripting.Hosting;
+using Microsoft.Scripting;
 
 namespace HomeGenie.Service.Handlers
 {
+
     public class Automation
     {
         private HomeGenieService homegenie;
@@ -52,7 +55,6 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock newProgram;
             //
             homegenie.ExecuteAutomationRequest(migCommand);
-            //
             if (migCommand.Command.StartsWith("Macro."))
             {
                 switch (migCommand.Command)
@@ -116,6 +118,10 @@ namespace HomeGenie.Service.Handlers
                         migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Get(migCommand.GetOption(0)));
                         break;
                     case "Scheduling.List":
+                        homegenie.ProgramEngine.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
+                        {
+                            return s1.Name.CompareTo(s2.Name);
+                        });
                         migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Items);
                         break;
                 }
@@ -146,10 +152,11 @@ namespace HomeGenie.Service.Handlers
                         newProgram.Group = migCommand.GetOption(0);
                         homegenie.ProgramEngine.ProgramAdd(newProgram);
                         //
-                        //TODO: move program compilation into an method of ProgramEngine and also apply to Programs.Update
                         newProgram.IsEnabled = false;
                         newProgram.ScriptErrors = "";
                         newProgram.AppAssembly = null;
+                        //
+                        homegenie.ProgramEngine.CompileScript(newProgram);
                         //
                         homegenie.UpdateProgramsDatabase();
                         //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
@@ -232,70 +239,47 @@ namespace HomeGenie.Service.Handlers
                             // reset last condition evaluation status
                             currentProgram.LastConditionEvaluationResult = false;
                         }
-
+                        //
                         if (migCommand.Command == "Programs.Compile")
                         {
                             // reset previous error status
+                            currentProgram.IsEnabled = false;
+                            currentProgram.Stop();
                             currentProgram.ScriptErrors = "";
                             //
-                            if (currentProgram.Type.ToLower() == "csharp")
-                            {
-                                // dispose assembly and interrupt current task
-                                currentProgram.AppAssembly = null; 
-                                currentProgram.IsEnabled = false;
-                                //
-                                System.CodeDom.Compiler.CompilerResults res = homegenie.ProgramEngine.CompileScript(currentProgram);
-                                //
-                                if (res.Errors.Count == 0)
-                                {
-                                    currentProgram.AppAssembly = res.CompiledAssembly;
-                                }
-                                else
-                                {
-                                    int sourcelines = currentProgram.ScriptSource.Split('\n').Length;
-                                    foreach (System.CodeDom.Compiler.CompilerError error in res.Errors)
-                                    {
-                                        //if (!ce.IsWarning)
-                                        {
-                                            int errline = (error.Line - 16);
-                                            string blocktype = "Code";
-                                            if (errline >= sourcelines + 7)
-                                            {
-                                                errline -= (sourcelines + 7);
-                                                blocktype = "Condition";
-                                            }
-                                            string errmsg = "Line " + errline + ", Column " + error.Column + " " + error.ErrorText + " (" + error.ErrorNumber + ")";
-                                            currentProgram.ScriptErrors += errmsg + " (" + blocktype + ")" + "\n";
-                                        }
-                                    }
-                                }
-                                //
-                                currentProgram.IsEnabled = newProgram.IsEnabled;
-                                //
-                                migCommand.Response = currentProgram.ScriptErrors;
-                            }
+                            List<ProgramError> errors = homegenie.ProgramEngine.CompileScript(currentProgram);
+                            //
+                            currentProgram.IsEnabled = newProgram.IsEnabled;
+                            currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
+                            migCommand.Response = currentProgram.ScriptErrors;
                         }
-
+                        //
                         homegenie.UpdateProgramsDatabase();
                         //
+                        homegenie.modules_RefreshPrograms();
                         homegenie.modules_RefreshVirtualModules();
                         homegenie.modules_Sort();
                         break;
 
                     case "Programs.Run":
-                        currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
-                        if (currentProgram != null)
-                        {
-                            homegenie.ProgramEngine.Run(currentProgram, migCommand.GetOption(1));
-                        }
+                        currentProgram = ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                         break;
 
                     case "Programs.Break":
+                        currentProgram = ProgramBreak(migCommand.GetOption(0));
+                        break;
+
+                    case "Programs.Restart":
                         currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                         if (currentProgram != null)
                         {
                             currentProgram.IsEnabled = false;
-                            currentProgram.Stop();
+                            try
+                            {
+                                currentProgram.Stop();
+                            }
+                            catch { }
+                            currentProgram.IsEnabled = true;
                             homegenie.UpdateProgramsDatabase();
                         }
                         break;
@@ -325,6 +309,34 @@ namespace HomeGenie.Service.Handlers
                 }
 
             }
+        }
+
+        internal ProgramBlock ProgramRun(string address, string options)
+        {
+            int pid = 0; int.TryParse(address, out pid);
+            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            if (program != null)
+            {
+                if (!program.IsEnabled)
+                {
+                    program.IsEnabled = true;
+                }
+                homegenie.ProgramEngine.Run(program, options);
+            }
+            return program;
+        }
+
+        internal ProgramBlock ProgramBreak(string address)
+        {
+            int pid = 0; int.TryParse(address, out pid);
+            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            if (program != null)
+            {
+                program.IsEnabled = false;
+                program.Stop();
+                homegenie.UpdateProgramsDatabase();
+            }
+            return program;
         }
 
     }

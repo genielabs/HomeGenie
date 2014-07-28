@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HomeGenie/release_info.xml">
+    <Files>
+      <File FileName="../HomeGenie/release_info.xml" Line="6" Column="97" />
+      <File FileName="../HISTORY.TXT" Line="3" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="Generoso Martello" Email="generoso@martello.com" Copyright="GenieLabs" Company="GenieLabs" Trademark="" />
+</Properties>

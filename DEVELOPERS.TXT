@@ -1,0 +1,28 @@
+﻿LINUX
+
+Open HomeGenie_Linux/HomeGenie_Linux.sln file using MonoDevelop.
+http://monodevelop.com/
+
+
+MAC
+
+Open HomeGenie_Mac/HomeGenie_Mac.sln file using Xamarin Studio.
+http://xamarin.com/studio
+
+
+WINDOWS
+
+Open HomeGenie_VS10/HomeGenie_VS10.sln file using Microsoft Visual Studio Professional.
+http://www.microsoft.com/en-us/download/details.aspx?id=40763
+
+
+SOURCE CODE
+
+http://sourceforge.net/projects/homegenie/
+http://github.com/genielabs/HomeGenie
+
+
+SUPPORT FORUM AND WIKI
+
+http://www.homegenie.it/forum
+http://sourceforge.net/p/homegenie/wiki/Home/

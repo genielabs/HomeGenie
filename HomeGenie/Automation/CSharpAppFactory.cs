@@ -37,20 +37,15 @@ namespace HomeGenie.Automation
     public class CSharpAppFactory
     {
 
-        private ProgramEngine masterControlProgram = null;
-        private HomeGenieService homegenie = null;
+        //private HomeGenieService homegenie = null;
 
         public CSharpAppFactory(HomeGenieService hg)
         {
-            homegenie = hg;
-            masterControlProgram = homegenie.ProgramEngine;
-            //AppDomain currentDomain = AppDomain.CurrentDomain;
-            //currentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyLookup);
+            //homegenie = hg;
         }
 
         public CompilerResults CompileScript(string condition, string statement, string outputDllFile)
         {
-            List<string> errors = new List<string>();
             string source = @"using System;
 using System.Collections.Generic;
 
@@ -58,7 +53,7 @@ using HomeGenie;
 using HomeGenie.Service;
 using HomeGenie.Automation; using HomeGenie.Data;
 
-using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
+using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Controllers.Pca9685; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
 namespace HomeGenie.Automation.Scripting
 {
     public class ScriptingInstance : ScriptingHost
@@ -115,19 +110,17 @@ namespace HomeGenie.Automation.Scripting
             source = source.Replace("{statement}", statement);
             source = source.Replace("{condition}", condition);
             //
-            Dictionary<string, string> providerOptions = new Dictionary<string, string>
-                {
-                    //                    { "CompilerVersion", "v4.0" }
-                };
+            Dictionary<string, string> providerOptions = new Dictionary<string, string> {
+                //                    { "CompilerVersion", "v4.0" }
+            };
             CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
-            CompilerParameters compilerParams = new CompilerParameters
-                {
-                    GenerateInMemory = true,
-                    GenerateExecutable = false,
-                    IncludeDebugInformation = false,
-                    TreatWarningsAsErrors = true,
-                    OutputAssembly = outputDllFile
-                };
+            CompilerParameters compilerParams = new CompilerParameters {
+                GenerateInMemory = true,
+                GenerateExecutable = false,
+                IncludeDebugInformation = false,
+                TreatWarningsAsErrors = false,
+                OutputAssembly = outputDllFile
+            };
             //
             // Mono runtime 2/3 compatibility fix 
             bool relocateSystemAsm = false;
@@ -144,7 +137,7 @@ namespace HomeGenie.Automation.Scripting
                     }
                 }
             }
-            if (relocateSystemAsm)
+            if (!relocateSystemAsm)
             {
                 Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 foreach (var assembly in assemblies)
@@ -180,6 +173,7 @@ namespace HomeGenie.Automation.Scripting
             //
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {
+                compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.GeneralPurpose.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
@@ -187,29 +181,15 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
             }
             //
+            compilerParams.ReferencedAssemblies.Add("System.Reactive.Core.dll");
+            compilerParams.ReferencedAssemblies.Add("System.Reactive.Interfaces.dll");
+            compilerParams.ReferencedAssemblies.Add("System.Reactive.Linq.dll");
+            compilerParams.ReferencedAssemblies.Add("System.Reactive.PlatformServices.dll");
+            compilerParams.ReferencedAssemblies.Add("Nmqtt.dll");
+            //
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
         }
-
-        //private static Assembly AssemblyLookup(object sender, ResolveEventArgs args)
-        //{
-        //    string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        //    string assemblyPath = Path.Combine(folderPath, new AssemblyName(args.Name).Name + ".dll");
-        //    if (File.Exists(assemblyPath) == false)
-        //    {
-        //        assemblyPath = Path.Combine("/usr/local/lib/mono/4.0", new AssemblyName(args.Name).Name + ".dll");
-        //    }
-        //    if (File.Exists(assemblyPath) == false)
-        //    {
-        //        assemblyPath = Path.Combine("/usr/lib/mono/4.0", new AssemblyName(args.Name).Name + ".dll");
-        //    }
-        //    if (File.Exists(assemblyPath) == false)
-        //    {
-        //        return null;
-        //    }
-        //    Assembly assembly = Assembly.LoadFrom(assemblyPath);
-        //    return assembly;
-        //}
 
     }
 }

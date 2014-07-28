@@ -64,11 +64,11 @@
           },
           {
             "@xml:lang": "en",
-            "#text": "Key Fob with 4 buttons"
+            "#text": "Key Fob with 4 buttons with DoorLock support"
           },
           {
             "@xml:lang": "ru",
-            "#text": "Брелок с 4 кнопками"
+            "#text": "Брелок с 4 кнопками с поддержкой замков"
           }
         ]
       },
@@ -106,6 +106,7 @@
       },
       "productName": "Key Fob 2",
       "brandName": "Z-Wave.Me",
+      "productLine": "Secure product",
       "batteryType": "CR2032",
       "batteryCount": "1"
     },

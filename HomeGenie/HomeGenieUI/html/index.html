@@ -1,146 +1,160 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
+    <meta charset="utf-8">
     <meta name="robots" content="noindex">
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
         HomeGenie
     </title>
 
     <!-- jquery & jquery mobile css's -->
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
-    <link rel="stylesheet" href="css/homegenie.min.css" />
-    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.icons-1.4.2.min.css" />
+    <!--link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-png-1.4.2.min.css" /-->
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-svg-1.4.2.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+
+    <link rel="stylesheet" href="css/ui.notify.css" />
+    <link rel="stylesheet" href="css/jquery.qtip.min.css" />
 
     <!-- jquery & co framework includes -->
     <script src="js/jquery-2.0.2.min.js"></script>
     <!-- jquery-ui used for sortable -->
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/jquery.notify.min.js"></script>
+    <script src="js/jquery.qtip.min.js"></script>
+    <script src="js/jquery.knob.js"></script>
 
 
-    <!-- jquery & co css includes -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />
-
+    <!-- custom css includes -->
     <link rel="stylesheet" href="css/my.css" />
+    <link rel="stylesheet" href="css/homegenie.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
 
-    <!--script type="text/javascript" src="js/jquery.mousewheel.min.js"></script -->
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.simpledialog2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile.simpledialog.min.js"></script>
+
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
     <script language="javascript" type="text/javascript" src="js/json2.js"></script>
     <script language="javascript" type="text/javascript" src="js/moment.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/eventsource.js"></script>
+
+    <!-- Isotope -->
+	<script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/packery-mode.pkgd.min.js"></script>
 
     <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
 
     <!-- Code Mirror -->
-    <script src="js/codemirror-3.13/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="js/codemirror-3.13/lib/codemirror.css">
-    <link rel="stylesheet" href="js/codemirror-3.13/theme/ambiance.css">
-    <script src="js/codemirror-3.13/mode/clike/clike.js"></script>
-    <script src="js/codemirror-3.13/mode/javascript/javascript.js"></script>
-    <script src="js/codemirror-3.13/mode/python/python.js"></script>
-    <script src="js/codemirror-3.13/mode/ruby/ruby.js"></script>
+    <link rel="stylesheet" href="js/codemirror-4.03/lib/codemirror.css">
+    <link rel="stylesheet" href="js/codemirror-4.03/theme/ambiance.css">
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/fold/foldgutter.css" />
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/lint/lint.css" />
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/hint/show-hint.css" />
+    <link rel="stylesheet" href="js/codemirror-4.03/addon/dialog/dialog.css" />
+    <script src="js/codemirror-4.03/lib/codemirror.js"></script>
+    <script src="js/codemirror-4.03/mode/clike/clike.js"></script>
+    <script src="js/codemirror-4.03/mode/javascript/javascript.js"></script>
+    <script src="js/codemirror-4.03/mode/python/python.js"></script>
+    <script src="js/codemirror-4.03/mode/ruby/ruby.js"></script>
+    <!-- Code Mirror Add-Ons -->
+    <script src="js/codemirror-4.03/addon/lint/lint.js"></script>
+    <script src="js/codemirror-4.03/addon/lint/javascript-lint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/show-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/anyword-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/javascript-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/python-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/edit/closebrackets.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/foldcode.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/foldgutter.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/brace-fold.js"></script>
+    <script src="js/codemirror-4.03/addon/fold/comment-fold.js"></script>
+    <script src="js/codemirror-4.03/addon/search/searchcursor.js"></script>
+    <script src="js/codemirror-4.03/addon/search/search.js"></script>
+    <script src="js/codemirror-4.03/addon/search/match-highlighter.js"></script>
+    <script src="js/codemirror-4.03/addon/dialog/dialog.js"></script>
 
     <script src="js/raphael-min.js"></script>
     <script src="js/colorwheel.js"></script>
     <script src="js/sessvars.js"></script>
 
-    <script type="text/javascript">
-        var uitheme = 'a'; // TODO: move this code as part of HG js api
-
-        sessvars.UserSettings = sessvars.UserSettings || { UiTheme: uitheme };
-
-        function setTheme(theme) {
-            sessvars.UserSettings.UiTheme = uitheme = theme;
-            //
-            $.mobile.activePage.find('.ui-li')
-                       .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-                        .addClass('ui-btn-up-' + theme).attr('data-theme', theme);
-
-            $.mobile.activePage.find('.ui-btn').not('.ui-li-divider')
-                       .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-                       .addClass('ui-btn-up-' + theme)
-                       .attr('data-theme', theme);
-
-            $.mobile.activePage.find('.ui-header, .ui-footer')
-                       .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
-                       .addClass('ui-bar-' + theme)
-                       .attr('data-theme', theme);
-
-            $(document).find('.ui-input-text, .ui-popup, .ui-dialog, .ui-page').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
-                       .addClass('ui-body-' + theme)
-                       .attr('data-theme', theme);
-
-            $.mobile.activePage.find('.ui-popup').removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e ui-body-f ui-body-g')
-                       .addClass('ui-body-' + theme)
-                       .attr('data-theme', theme);
-
-            $.mobile.activePage.find('.ui-li-divider').each(function (index, obj) {
-                //if ($(this).parent().attr('data-divider-theme') == 'undefined') {
-                $(this).removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e ui-bar-f ui-bar-g')
-                    .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-up-f ui-btn-up-g ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e ui-btn-hover-f ui-btn-hover-g')
-                    .addClass('ui-bar-a')
-                    .attr('data-theme', 'a');
-                //}
-            })
-
-            if ($.mobile.activePage.attr('id') == 'page_control') {
-                $.mobile.activePage.find('a[data-ui-field="widget"]').each(function (index, obj) {
-                    $(this).parent().parent().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
-                    $(this).parent().parent().next().removeClass('ui-btn-up-' + theme).addClass('ui-btn-up-z').attr('data-theme', 'z');;
-                });
-            }
-
-        }
-
-
-
-    </script>
     {include js/api/homegenie.inc.js}
 
     <script type="text/javascript">
-        var editor1 = null;
-        var editor2 = null;
 
         $(document).ready(function (e) {
 
-            var t = sessvars.UserSettings.UiTheme;
-            if (t < 'a' || t > 'e') {
-
-                sessvars.UserSettings.UiTheme = 'a';
-            }
             //
-            Raphael.fn.ball = function (x, y, r, color) {
-                return this.set(
-                    this.ellipse(x, y + r - r / 5, r, r / 2).attr({ fill: "rhsb(" + color.h + ", 1, .25)-hsb(" + color.h + ", 1, .25)", stroke: "none", opacity: 0 }),
-                    this.ellipse(x, y, r, r).attr({ fill: "r(.5,.9)hsb(" + color.h + ", " + color.s + ", .75)-hsb(" + color.h + ", " + color.s + ", " + color.v + ")", stroke: "none", opacity: 0.8 }),
-                    this.ellipse(x, y, r - r / 5, r - r / 20).attr({ stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0 })
-                );
-            };
-            //
-            //HG.WebApp.Locales.GenerateTemplate();
+            //HG.WebApp.Locales.GenerateTemplate(); <-- use this to re-create the UI localization template
             //
             HG.WebApp.InitializePage();
-            //
-            editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
-                lineNumbers: true,
-                matchBrackets: true,
-                theme: 'ambiance'
-            });
-            editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
-                lineNumbers: true,
-                matchBrackets: true,
-                theme: 'ambiance'
-            });
-        });
 
+            $.mobile.switchPopup = function (sourceElement, destinationElement, onswitched) {
+                var afterClose = function () {
+                    destinationElement.popup("open");
+                    sourceElement.off("popupafterclose", afterClose);
+
+                    if (onswitched && typeof onswitched === "function") {
+                        onswitched();
+                    }
+                };
+
+                sourceElement.on("popupafterclose", afterClose);
+                sourceElement.popup("close");
+            };
+
+            var trapScroll;
+            (function ($) {
+
+                trapScroll = function (opt) {
+
+                    var trapElement;
+                    var scrollableDist;
+                    var trapClassName = 'trapScroll-enabled';
+                    var trapSelector = '.trapScroll';
+
+                    var trapWheel = function (e) {
+
+                        if (!$('body').hasClass(trapClassName)) return;
+                        else {
+                            var curScrollPos = trapElement.scrollTop();
+                            var wheelEvent = e.originalEvent;
+                            var dY = wheelEvent.deltaY;
+
+                            // only trap events once we've scrolled to the end
+                            // or beginning
+                            if ((dY > 0 && curScrollPos >= scrollableDist) ||
+                                (dY < 0 && curScrollPos <= 0)) {
+                                if (opt && opt.onScrollEnd) opt.onScrollEnd();
+                                return false;
+                            }
+                        }
+                    }
+
+                    $(document)
+                      .on('wheel', trapWheel)
+                      .on('mouseleave', trapSelector, function () {
+
+                          $('body').removeClass(trapClassName);
+                      })
+                      .on('mouseenter', trapSelector, function () {
+
+                          trapElement = $(this);
+                          var containerHeight = trapElement.outerHeight();
+                          var contentHeight = trapElement[0].scrollHeight; // height of scrollable content
+                          scrollableDist = contentHeight - containerHeight;
+
+                          if (contentHeight > containerHeight)
+                              $('body').addClass(trapClassName);
+                      });
+                }
+            })($);
+            trapScroll();
+
+        });
 
     </script>
 
@@ -150,6 +164,9 @@
 
     <!-- Home -->
     {include pages/home.html}
+
+    <!-- Event Log -->
+    {include pages/events/main.html}
 
     <!-- Control -->
     {include pages/control/main.html}
@@ -182,11 +199,32 @@
     <!-- Applications / NetPlay -->
     {include pages/apps/netplay/slideshow.html}
 
+    <div  style="position:fixed;top:6px;right:5px;z-index:1000">
+	    <!-- System Interfaces Status -->
+	    <div style="float:left;" id="interfaces_status"></div>
+	    <!-- Event Logs button -->
+	    <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
+	        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
+	        <a data-locale-id="home_menu_events" href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
+	    </div>
+    </div>
 
-    <div data-position="fixed" style="position:fixed;top:5px;right:10px;z-index:1000" id="interfaces_status"></div>
-    <!--div id="watts_hour" style="position:absolute;right:10px;top:5px"></div-->
-    <div style="font-family:monospace;font-size:10pt;display:none;border-radius: 10px;background-color:black;color:white;border:solid 2px yellow;position:absolute;padding:10px;margin-top:6px;right:-400px; width:285px; max-height:120px; opacity:0.0;z-index:1973" id="statuspopup">
+
+    <!-- hg builtin notify popup -->
+    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed">
         <p></p>
+    </div>
+
+    <!-- jquery.ui notify popup (stacked) -->
+    <div id="content" style="z-index:1973;">
+
+        <div id="notifypopup" class="ui-notify-popup">
+            <a class="ui-notify-close ui-notify-cross" href="x">X</a>
+            <div style="float:left;margin-right:6px;"><img src="#{icon}" width="48"></div>
+            <h1>#{title}</h1>
+            <p>#{text}</p>
+        </div>
+
     </div>
 
 </body>
