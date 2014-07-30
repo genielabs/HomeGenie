@@ -132,7 +132,7 @@ HG.WebApp.ProgramsList.SetOptionsTab = function (tabid)
 			//
 			setTimeout(function(){
 				$("#automationprograms_program_options").popup("reposition", {positionTo: 'window'});
-			}, 50);
+			}, 200);
 		}, 200);
 	};
 
@@ -386,46 +386,51 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
 	$("#configure_programslist li a").bind("click", function () {
 	    HG.WebApp.ProgramEdit._CurrentProgram.Domain = $(this).attr('data-program-domain');
 	    HG.WebApp.ProgramEdit._CurrentProgram.Address = $(this).attr('data-program-address');
-	    if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
-	    //
-	    $.mobile.loading('show');
-	    HG.Automation.Programs.List(function () {
-	        HG.Configure.Modules.List(function (data) {
-	            try {
-	                HG.WebApp.Data.Modules = eval(data);
-	            } catch (e) { }
-
-	            HG.WebApp.ProgramsList.RefreshProgramOptions();
-	            HG.WebApp.ProgramsList.RefreshProgramDetails();
-
-	            var hasdetails = true;
-	            if ($('#automationprograms_program_details').text().trim() == '') {
-	                $('#automationprograms_program_options_tab1').css('visibility', 'hidden');
-	                hasdetails = false;
-	            }
-	            else {
-	                $('#automationprograms_program_options_tab1').css('visibility', '');
-	            }
-	            if ($('#automationprograms_program_parameters').text().trim() == '') {
-	                $('#automationprograms_program_options_tab0').css('visibility', 'hidden');
-	                if (hasdetails) {
-	                    HG.WebApp.ProgramsList.SetOptionsTab(1);
-	                }
-	                else {
-	                    $('#automationprograms_program_parameters').hide();
-	                    $('#automationprograms_program_details').hide();
-	                }
-	            }
-	            else {
-	                $('#automationprograms_program_options_tab0').css('visibility', '');
-	                HG.WebApp.ProgramsList.SetOptionsTab(0);
-	            }
-
-	            $('#automationprograms_program_options').popup('open', { 'transition': 'slidedown' });
-	            $.mobile.loading('hide');
-	        });
-	    });
+	    HG.WebApp.ProgramsList.UpdateOptionsPopup();
 	});
+};
+
+HG.WebApp.ProgramsList.UpdateOptionsPopup = function()
+{
+    if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
+    //
+    $.mobile.loading('show', { text: 'Loading Program data', textVisible: true, theme: 'a', html: '' });
+    HG.Automation.Programs.List(function () {
+        HG.Configure.Modules.List(function (data) {
+            try {
+                HG.WebApp.Data.Modules = eval(data);
+            } catch (e) { }
+
+            HG.WebApp.ProgramsList.RefreshProgramOptions();
+            HG.WebApp.ProgramsList.RefreshProgramDetails();
+
+            var hasdetails = true;
+            if ($('#automationprograms_program_details').text().trim() == '') {
+                $('#automationprograms_program_options_tab1').css('visibility', 'hidden');
+                hasdetails = false;
+            }
+            else {
+                $('#automationprograms_program_options_tab1').css('visibility', '');
+            }
+            if ($('#automationprograms_program_parameters').text().trim() == '') {
+                $('#automationprograms_program_options_tab0').css('visibility', 'hidden');
+                if (hasdetails) {
+                    HG.WebApp.ProgramsList.SetOptionsTab(1);
+                }
+                else {
+                    $('#automationprograms_program_parameters').hide();
+                    $('#automationprograms_program_details').hide();
+                }
+            }
+            else {
+                $('#automationprograms_program_options_tab0').css('visibility', '');
+                HG.WebApp.ProgramsList.SetOptionsTab(0);
+            }
+
+            $('#automationprograms_program_options').popup('open', { 'transition': 'slidedown' });
+            $.mobile.loading('hide');
+        });
+    });
 };
 
 HG.WebApp.ProgramsList.GetProgramByAddress = function(pid)

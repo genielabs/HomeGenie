@@ -229,14 +229,14 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
         //
 		if ($('#automation_program_scriptcondition').next().css('display') == 'none') {
 		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>CODE TO RUN</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Trigger Code');
+		    $('#editprograms_code_codeblockstoggle').text('Edit Trigger Code');
 		    setTimeout(function () {
 		        editor2.refresh();
 		    }, 500);
 		}
 		else {
 		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-		    $('#editprograms_code_codeblockstoggle .ui-btn-text').text('Edit Code to Run');
+		    $('#editprograms_code_codeblockstoggle').text('Edit Code to Run');
 		    setTimeout(function () {
 		        editor1.refresh();
 		    }, 500);
@@ -279,22 +279,17 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function ()
 HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 	{
 	    var fn = (isenabled ? 'Enable' : 'Disable');
-		//
-		$.mobile.loading('show');
-		// 
+	    var action = (isenabled ? 'Enabling' : 'Disabling');
+	    $.mobile.loading('show', { text: action + ' program', textVisible: true, theme: 'a', html: '' });
 		$('#control_groupslist').empty();
-		//
-		$('#automation_program_saving').popup().popup('open');
 		$.ajax({
 			type: 'POST',
 			url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.' + fn + '/' + pid + '/',
 			data: "{ dummy: 'dummy' }",
 			success: function (response) {
-				$('#automation_program_saving').popup('close'); 
 				$.mobile.loading('hide');
 			},
 			error: function (a, b, c) {
-				$('#automation_program_saving').popup('close'); 
 				$.mobile.loading('hide');
 			}
 		});	        	
@@ -303,18 +298,14 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 
 HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 	{
-		$.mobile.loading('show');
-		// 
+	    $.mobile.loading('show', { text: 'Updating program data', textVisible: true, theme: 'a', html: '' });
 		$('#control_groupslist').empty();
-		//
-		$('#automation_program_saving').popup().popup('open');
 		$.ajax({
 			type: 'POST',
 			url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.' + (compile ? 'Compile' : 'Update')  + '/',
 			dataType: 'text',
 			data: JSON.stringify(programblock),
 			success: function (response) {
-				$('#automation_program_saving').popup('close'); 
 				$.mobile.loading('hide');
 				if (response.trim() != '' && response.trim() != '[]')
 				{
@@ -345,7 +336,6 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 
 			},
 			error: function (a, b, c) {
-				$('#automation_program_saving').popup('close'); 
 				$.mobile.loading('hide');
 			    //
 				$.mobile.loading('show', { text: 'An error occurred!', textVisible: true });
@@ -533,7 +523,7 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program)
 
 HG.WebApp.ProgramEdit.BreakProgram = function (pid)
     {
-        $.mobile.loading('show');
+	    $.mobile.loading('show', { text: 'Stopping program', textVisible: true, theme: 'a', html: '' });
         $.ajax({
             type: 'POST',
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Break/' + pid + '/',
@@ -555,7 +545,7 @@ HG.WebApp.ProgramEdit.RunProgram = function (pid, options)
 		HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
 		HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
 		//		
-		$.mobile.loading('show');
+	    $.mobile.loading('show', { text: 'Running program', textVisible: true, theme: 'a', html: '' });
         HG.Automation.Programs.Run(pid, options, function(res){
             if (res != null) HG.WebApp.ProgramEdit.RefreshProgramOptions();
 			$.mobile.loading('hide');
@@ -563,7 +553,7 @@ HG.WebApp.ProgramEdit.RunProgram = function (pid, options)
 	};
 
 HG.WebApp.ProgramEdit.DeleteProgram = function (program) {
-	    $.mobile.loading('show');
+	    $.mobile.loading('show', { text: 'Deleting program', textVisible: true, theme: 'a', html: '' });
 	    HG.Automation.Programs.DeleteProgram(program, function () {
 	        $.mobile.loading('hide');
 	        setTimeout(function () {

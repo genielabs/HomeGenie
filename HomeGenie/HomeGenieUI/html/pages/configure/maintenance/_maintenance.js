@@ -226,7 +226,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $('#systemsettings_backuprestores1confirmbutton').bind('click', function () {
             	$('#systemsettings_backuprestores1cancelbutton').addClass('ui-disabled');
             	$('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
-                $.mobile.loading('show');
+                $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     $.mobile.loading('hide');
                     window.location.replace("/");

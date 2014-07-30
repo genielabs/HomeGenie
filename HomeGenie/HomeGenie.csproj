@@ -24,7 +24,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
@@ -144,12 +143,6 @@
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Core">
-      <HintPath>Externals\raspberry-sharp\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging">
-      <HintPath>Externals\raspberry-sharp\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.Components">
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
@@ -297,13 +290,13 @@
       <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
       <Name>HomeGenieUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseFiles\Common\Common.csproj">
-      <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MIG\Support Libraries\W800RF32\W800RF32.csproj">
       <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
       <Name>W800RF32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseFiles\Common\Common.csproj">
+      <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

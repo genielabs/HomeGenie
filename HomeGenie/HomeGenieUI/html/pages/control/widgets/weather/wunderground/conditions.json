@@ -11,13 +11,41 @@
     RenderView: function (cuid, module) {
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
-
+		//
+        if (!this.Initialized)
+        {
+			this.Initialized = true;
+			// settings button
+			widget.find('[data-ui-field=settings]').on('click', function(){
+			    HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
+			    HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
+			    HG.WebApp.ProgramsList.UpdateOptionsPopup();
+			});			
+		}
+		//
 		var display_location = HG.WebApp.Utility.GetModulePropertyByName(module, "Conditions.DisplayLocation").Value;
 		var serviceapi = HG.WebApp.Utility.GetModulePropertyByName(module, "ConfigureOptions.ApiKey").Value;
 		if (serviceapi == '' || serviceapi == '?')
 		{
-			widget.find('[data-ui-field=name]').html( '<a href="index.html#page_configure_automationgroups">Please, configure and restart widget program.</a>' );
+			widget.find('[data-ui-field=name]').html( 'Not configured.' );
 			widget.find('[data-ui-field=sunrise_value]').html(sunrise);
+			//
+			widget.find('[data-ui-field=settings]').qtip({
+			        content: {
+			        	title: 'Widget not configured',
+			        	text: 'Click this button to edit configuration.',
+			        	button: 'Close'
+			    	},
+			        show: { event: false, ready: true, delay: 1000 },
+			        events: {
+			            hide: function () {
+			                $(this).qtip('destroy');
+			            }
+			        },
+			        hide: { event: false, inactive: 3000 },
+			        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+			        position: { my: 'top center', at: 'bottom center' }
+		    });
 		}
 		else if (display_location == "")
 		{

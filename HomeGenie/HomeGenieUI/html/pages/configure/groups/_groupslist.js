@@ -102,12 +102,12 @@ HG.WebApp.GroupsList.SortGroups = function () {
         }
     });
     // 
-    $.mobile.loading('show');
     $('#control_groupslist').empty();
     //
+    $.mobile.loading('show');
     HG.Configure.Groups.Sort('Control', neworder, function (res) {
-    //    HG.WebApp.GroupsList.LoadGroups();
 	    $.mobile.loading('hide');
+        HG.WebApp.GroupsList.LoadGroups();
     });
 
 }
@@ -126,33 +126,6 @@ HG.WebApp.GroupsList.SaveGroups = function(callback) {
             $.mobile.loading('hide');
             //
             if (callback != null) callback();
-        },
-        error: function (a, b, c) {
-            $.mobile.loading('hide');
-        }
-    });
-};
-//
-HG.WebApp.GroupsList.SaveModules = function() {
-    $.mobile.loading('show');
-    var modules = null;
-    try
-    {
-        modules = JSON.stringify(HG.WebApp.Data.Modules);
-    } 
-    catch (e)
-    {
-        alert('Error saving modules!\nPlease retry.');
-        $.mobile.loading('show');
-    }
-    if (modules != null)
-    $.ajax({
-        type: 'POST',
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Save/Control/',
-        //                        dataType: 'json',
-        data: modules,
-        success: function (response) {
-            HG.WebApp.GroupsList.SaveGroups(null);                        
         },
         error: function (a, b, c) {
             $.mobile.loading('hide');

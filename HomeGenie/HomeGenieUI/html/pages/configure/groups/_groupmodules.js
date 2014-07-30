@@ -3,6 +3,7 @@ HG.WebApp.GroupModules.CurrentGroup = '(none)';
 HG.WebApp.GroupModules.CurrentModule = null;
 HG.WebApp.GroupModules.CurrentModuleProperty = null;
 HG.WebApp.GroupModules.EditModule = Array();
+HG.WebApp.GroupModules.SeparatorItemDomain = "HomeGenie.UI.Separator";
 
 HG.WebApp.GroupModules.InitializePage = function () {
     $('#page_configure_groupmodules').on('pageinit', function (e) {
@@ -13,7 +14,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
             var address = selectedopt.attr('data-context-value');
             HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, domain, address, function(){
 				$.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
-		        HG.WebApp.GroupModules.ModuleEdit($("#page_configure_groupmodules_list li").last());
+				HG.WebApp.GroupModules.EditCurrentModule($("#page_configure_groupmodules_list li").last());
 		        $.mobile.loading('show');
 		        setTimeout("$('#automation_group_module_edit').popup('open');$.mobile.loading('hide');", 1000);
             });
@@ -46,7 +47,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         	var label = $('#automation_group_separatorlabel').val().trim();
         	if (label != '')
         	{
-        		HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, "HomeGenie.UI.Separator", label, function(){
+        		HG.WebApp.GroupModules.AddGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.SeparatorItemDomain, label, function(){
 					$.mobile.silentScroll($("#page_configure_groupmodules_list li").last().position().top);
         		});
         	}
@@ -77,31 +78,6 @@ HG.WebApp.GroupModules.InitializePage = function () {
         //
         $('#page_configure_groupmodules_propspopup').on('popupbeforeposition', function (event) {
             HG.WebApp.GroupModules.LoadModuleParameters();
-        });
-        //
-        $('#module_update_button').bind('click', function (event) {
-            HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
-            HG.WebApp.GroupModules.CurrentModule.DeviceType = HG.WebApp.GroupModules.EditModule.DeviceType;
-            HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, 'VirtualMeter.Watts', HG.WebApp.GroupModules.EditModule.WMWatts);
-            //TODO: find out why it's not setting NeedsUpdate flag to true for VirtualMeter.Watts
-            HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'VirtualMeter.Watts', HG.WebApp.GroupModules.EditModule.WMWatts);
-            //
-            for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
-                var prop = HG.WebApp.GroupModules.EditModule.Properties[p];
-                HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, prop.Name, prop.Value);
-                prop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, prop.Name);
-                prop.NeedsUpdate = 'true';
-            }
-            //
-            HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, function () {
-                $('#control_groupslist').empty();
-                HG.WebApp.GroupModules.LoadGroupModules();
-            });
-        });
-        //
-        $('#module_remove_button').bind('click', function (event) {
-            HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
-            HG.WebApp.GroupsList.SaveGroups(null);
         });
         //
         $('#automation_group_module_propdelete').bind('click', function () {
@@ -164,24 +140,18 @@ HG.WebApp.GroupModules.ModuleIconsToggle = function () {
 HG.WebApp.GroupModules.SortModules = function () {
 
     var neworder = '';
-    var current = 0;
     $('#page_configure_groupmodules_list').children('li').each(function () {
         var midx = $(this).attr('data-module-index');
         if (midx >= 0) {
             neworder += (midx + ';')
         }
-        $(this).attr('data-module-index', current);
-        current++;
     });
     $.mobile.loading('show');
-    // 
-    $('#control_groupslist').empty();
-    //
     HG.Configure.Groups.SortModules('Control', HG.WebApp.GroupModules.CurrentGroup, neworder, function (res) {
-//        HG.Configure.Groups.List('Control', function () {
-//            HG.WebApp.GroupModules.LoadGroupModules();
+        HG.Configure.Groups.List('Control', function () {
+            HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.loading('hide');
-//        });
+        });
     });
 
 };
@@ -218,7 +188,7 @@ HG.WebApp.GroupModules.ModulePropertyAdd = function (module, name, value) {
 
 
 HG.WebApp.GroupModules.UpdateModule = function (module, callback) {
-    $.mobile.loading('show');
+    $.mobile.loading('show', { text: 'Saving module settings', textVisible: true, theme: 'a', html: '' });
     $.ajax({
         type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Update/',
@@ -409,7 +379,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     $('#groupmodules_groupname').val(groupmodules.Name);
     //
     $('#page_configure_groupmodules_list').empty();
-    $('#page_configure_groupmodules_list').listview().listview('refresh');
+    //$('#page_configure_groupmodules_list').listview().listview('refresh');
     //$('#page_configure_groupmodules_list').append('<li data-icon="false" data-role="list-divider">Group Modules</li>');
     //
     var html = '';
@@ -418,7 +388,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
 
 		if (groupmodules.Modules[m].Domain == 'HomeGenie.UI.Separator') {
 	        html += '<li class="ui-header" data-icon="false" data-module-index="' + m + '">';
-	        html += '<a href="#automation_group_separator_edit" data-rel="popup" data-transition="pop">' + groupmodules.Modules[m].Address + '</a>';
+	        html += '<a>' + groupmodules.Modules[m].Address + '</a>';
 	        html += '</li>';
         }
 		else
@@ -441,7 +411,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
 	            $('#' + elid).attr('src', iconimage);
 	        }, iconid);
 	        html += '<li data-icon="bars" data-module-index="' + m + '">';
-	        html += '<a href="#automation_group_module_edit" data-rel="popup" data-transition="pop">';
+	        html += '<a>';
 	        html += '<table><tr><td rowspan="2" align="left"><img id="' + iconid + '" height="54" src="' + icon + '"></td>';
 	        html += '<td style="padding-left:10px"><span>' + groupmodules.Modules[m].Name + '</span></td></tr>';
 	        html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + address_label + ' ' + groupmodules.Modules[m].Address + '</td>';
@@ -455,13 +425,12 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     $('#page_configure_groupmodules_list').listview().listview('refresh');
     //
     $("#page_configure_groupmodules_list li").on("click", function () {
-        HG.WebApp.GroupModules.ModuleEdit($(this));
+        HG.WebApp.GroupModules.EditCurrentModule($(this));
     });
     $("#configure_groupslist").listview("refresh");
 };
 
-
-HG.WebApp.GroupModules.ModuleEdit = function (item) {
+HG.WebApp.GroupModules.EditCurrentModule = function(item) {
 
     var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.GroupModules.CurrentGroup);
     //
@@ -477,45 +446,65 @@ HG.WebApp.GroupModules.ModuleEdit = function (item) {
             HG.WebApp.GroupModules.CurrentModule = groupmodules.Modules[m];
             HG.WebApp.GroupModules.CurrentModule.DeviceType = '';
         }
-        //
-        HG.WebApp.GroupModules.EditModule.Domain = HG.WebApp.GroupModules.CurrentModule.Domain;
-        HG.WebApp.GroupModules.EditModule.Address = HG.WebApp.GroupModules.CurrentModule.Address;
-        HG.WebApp.GroupModules.EditModule.Name = HG.WebApp.GroupModules.CurrentModule.Name;
-        HG.WebApp.GroupModules.EditModule.Type = HG.WebApp.GroupModules.CurrentModule.Type;
-        HG.WebApp.GroupModules.EditModule.DeviceType = HG.WebApp.GroupModules.CurrentModule.DeviceType;
-        //
-        HG.WebApp.GroupModules.EditModule.WMWatts = 0;
-        if (HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualMeter.Watts") != null) {
-            HG.WebApp.GroupModules.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualMeter.Watts").Value;
-        }
-        //
-        // disable option button if it's a virtual module
-        $('#module_options_button').removeClass('ui-disabled');
-        if (HG.WebApp.GroupModules.CurrentModule.Domain != 'HomeAutomation.ZWave') {
+		$('#module_remove_button').show();
+		if (HG.WebApp.GroupModules.CurrentModule.Domain == HG.WebApp.GroupModules.SeparatorItemDomain)
+		{
+		    $('#automation_group_separator_edit').popup('open', { transition: 'pop', positionTo: 'window' });
+		}
+		else
+		{
+			HG.WebApp.GroupModules.ModuleEdit(function(){
+				// module updated callback
+	            $('#control_groupslist').empty();
+	            HG.WebApp.GroupModules.LoadGroupModules();			
+			});
+		}
+    }
+
+};
+
+HG.WebApp.GroupModules.ModuleEdit = function (callback) {
+
+    HG.WebApp.GroupModules.ModuleUpdatedCallback = callback;
+    HG.WebApp.GroupModules.EditModule.Domain = HG.WebApp.GroupModules.CurrentModule.Domain;
+    HG.WebApp.GroupModules.EditModule.Address = HG.WebApp.GroupModules.CurrentModule.Address;
+    HG.WebApp.GroupModules.EditModule.Name = HG.WebApp.GroupModules.CurrentModule.Name;
+    HG.WebApp.GroupModules.EditModule.Type = HG.WebApp.GroupModules.CurrentModule.Type;
+    HG.WebApp.GroupModules.EditModule.DeviceType = HG.WebApp.GroupModules.CurrentModule.DeviceType;
+    //
+    HG.WebApp.GroupModules.EditModule.WMWatts = 0;
+    if (HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualMeter.Watts") != null) {
+        HG.WebApp.GroupModules.EditModule.WMWatts = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualMeter.Watts").Value;
+    }
+    //
+    // disable option button if it's a virtual module
+    $('#module_options_button').removeClass('ui-disabled');
+    if (HG.WebApp.GroupModules.CurrentModule.Domain != 'HomeAutomation.ZWave') {
+        $('#module_options_button').addClass('ui-disabled');
+    }
+    else if (HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualModule.ParentId") != null) {
+        var parentid = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualModule.ParentId").Value;
+        if (parentid != HG.WebApp.GroupModules.CurrentModule.Address) {
             $('#module_options_button').addClass('ui-disabled');
         }
-        else if (HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualModule.ParentId") != null) {
-            var parentid = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, "VirtualModule.ParentId").Value;
-            if (parentid != HG.WebApp.GroupModules.CurrentModule.Address) {
-                $('#module_options_button').addClass('ui-disabled');
-            }
-        }
-        //
-        HG.WebApp.GroupModules.UpdateModuleType(HG.WebApp.GroupModules.CurrentModule.DeviceType);
-        //
-        $('#module_title').html(HG.WebApp.GroupModules.EditModule.Domain.split('.')[1] + ' ' + HG.WebApp.GroupModules.EditModule.Address + ' - Settings');
-        $('#module_name').val(HG.WebApp.GroupModules.EditModule.Name);
-        $('#module_type').val(HG.WebApp.GroupModules.EditModule.DeviceType).attr('selected', true).siblings('option').removeAttr('selected');
-        $('#module_type').selectmenu('refresh', true);
-        //
-        $('#configure_module_iconslist').hide();
-        configurepage_GetModuleIcon(HG.WebApp.GroupModules.CurrentModule, function (icon) {
-            $('#module_icon').attr('src', icon);
-        });
-        $('#module_vmwatts').val(HG.WebApp.GroupModules.EditModule.WMWatts > 0 ? HG.WebApp.GroupModules.EditModule.WMWatts : '0');
-        //
-        HG.WebApp.GroupModules.UpdateFeatures();
     }
+    //
+    HG.WebApp.GroupModules.UpdateModuleType(HG.WebApp.GroupModules.CurrentModule.DeviceType);
+    //
+    $('#module_title').html(HG.WebApp.GroupModules.EditModule.Domain.split('.')[1] + ' ' + HG.WebApp.GroupModules.EditModule.Address + ' - Settings');
+    $('#module_name').val(HG.WebApp.GroupModules.EditModule.Name);
+    $('#module_type').val(HG.WebApp.GroupModules.EditModule.DeviceType).attr('selected', true).siblings('option').removeAttr('selected');
+    $('#module_type').selectmenu('refresh', true);
+    //
+    $('#configure_module_iconslist').hide();
+    configurepage_GetModuleIcon(HG.WebApp.GroupModules.CurrentModule, function (icon) {
+        $('#module_icon').attr('src', icon);
+    });
+    $('#module_vmwatts').val(HG.WebApp.GroupModules.EditModule.WMWatts > 0 ? HG.WebApp.GroupModules.EditModule.WMWatts : '0');
+    //
+    HG.WebApp.GroupModules.UpdateFeatures();
+    //
+    $('#automation_group_module_edit').popup('open', { transition: 'pop', positionTo: 'window' });
 
 }
 

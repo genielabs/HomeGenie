@@ -265,6 +265,10 @@ namespace HomeGenie.Service.Handlers
                         currentProgram = ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                         break;
 
+                    case "Programs.Toggle":
+                        currentProgram = ProgramToggle(migCommand.GetOption(0), migCommand.GetOption(1));
+                        break;
+
                     case "Programs.Break":
                         currentProgram = ProgramBreak(migCommand.GetOption(0));
                         break;
@@ -317,11 +321,34 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
-                if (!program.IsEnabled)
+                if (!program.IsEnabled) program.IsEnabled = true;
+                try
                 {
+                    homegenie.ProgramEngine.Run(program, options);
+                } catch { };
+            }
+            return program;
+        }
+
+        internal ProgramBlock ProgramToggle(string address, string options)
+        {
+            int pid = 0; int.TryParse(address, out pid);
+            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            if (program != null)
+            {
+                if (program.IsRunning)
+                {
+                    ProgramBreak(address);
                     program.IsEnabled = true;
                 }
-                homegenie.ProgramEngine.Run(program, options);
+                else
+                {
+                    if (!program.IsEnabled) program.IsEnabled = true;
+                    try
+                    {
+                        homegenie.ProgramEngine.Run(program, options);
+                    } catch { };
+                }
             }
             return program;
         }

@@ -1,5 +1,17 @@
 ﻿RELEASE HISTORY
 
+29/07/2014 1.00 beta rev 403
+	- Some optimizations to the X10, ZWave and SerialPort driver libraries
+	- Other minor fixes
+
+26/07/2014 1.00 beta rev 402
+	- Added "Sunrise Colors Scenario" sample script for Philips Hue lights
+	- Added module settings popup to the control page
+	- Fixed occasional crash in shutdown/restart process
+	- Added "Raspberry Pi Camera" resolution modes to camera driver (up to 5Mpx and 90fps)
+	- Fixed bug in Interconnections (decimal fields serialization issue in SignalEvent)
+	- Fixed bug in web service file caching
+
 13/07/2014 1.00 beta rev 400
 	- Updated MQTT Network app. Now with virtual modules and remote module control
 

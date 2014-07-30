@@ -15,7 +15,7 @@ HG.WebApp.Control.InitializePage = function () {
 
        	$('#toolbar_macrorecord').hide();
         $('#toolbar_control').show();
-
+        //
         $('#control_macrorecord_optionspopup').bind('popupafterclose', function () {
             if ($('#macrorecord_delay_none').prop('checked')) {
                 HG.Automation.Macro.SetDelay('None', '');
@@ -252,6 +252,25 @@ HG.WebApp.Control.RenderModule = function () {
 
 };
 
+HG.WebApp.Control.EditModule = function (module) {
+	HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data._CurrentGroup;
+	HG.WebApp.GroupModules.CurrentModule = module;
+	var oldtype = module.DeviceType;
+	$('#module_remove_button').hide();
+	HG.WebApp.GroupModules.ModuleEdit(function() {
+		if (oldtype != module.DeviceType)
+		{
+			var grp = $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex);
+			grp.empty();
+			HG.WebApp.Control.ShowGroup(HG.WebApp.Data._CurrentGroupIndex);
+		}
+		else
+		{
+			HG.WebApp.Control.UpdateModuleWidget(module.Domain, module.Address);
+		}
+	});
+};
+
 HG.WebApp.Control.GetModuleUid = function (module) {
     var domain = module.Domain.substring(module.Domain.lastIndexOf('.') + 1).replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() ]/g, '_');
     var address = module.Address.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~() ]/g, '_');
@@ -269,7 +288,7 @@ HG.WebApp.Control.UpdateActionsMenu = function () {
 	            var module = groupmodules.Modules[m];
 	            if (module.Widget == 'homegenie/generic/program') {
 	            	// add item to actions menu
-	            	$('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Run(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + module.Name + '</a></li>');
+	            	$('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + module.Name + '</a></li>');
 	            }
 	        }
 		}

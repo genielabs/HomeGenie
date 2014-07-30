@@ -293,21 +293,28 @@ namespace HomeGenie.Automation
 
         private bool CheckAppInstance()
         {
-            if (programDomain == null)
+            bool success = false;
+            if (programDomain != null)
             {
-                bool success = false;
-
-                // Creating app domain
-                programDomain = AppDomain.CurrentDomain;
-
-                assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
-                assembly = Activator.CreateInstance(assemblyType);
-
-                MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
-                //
+                success = true;
+            }
+            else
+            {
                 try
                 {
+                    // Creating app domain
+                    programDomain = AppDomain.CurrentDomain;
+                    //
+                    assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
+                    assembly = Activator.CreateInstance(assemblyType);
+                    //
+                    MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
                     miSetHost.Invoke(assembly, new object[2] { homegenie, this.Address });
+                    //
+                    methodRun = assemblyType.GetMethod("Run");
+                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
+                    methodReset = assemblyType.GetMethod("Reset");
+                    //
                     success = true;
                 }
                 catch (Exception ex)
@@ -320,14 +327,8 @@ namespace HomeGenie.Automation
                         ex.StackTrace
                     );
                 }
-                //
-                methodRun = assemblyType.GetMethod("Run");
-                methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
-                methodReset = assemblyType.GetMethod("Reset");
-                //
-                return success;
             }
-            return true;
+            return success;
         }
 
         #endregion
@@ -452,13 +453,14 @@ namespace HomeGenie.Automation
         internal void Stop()
         {
             this.IsRunning = false;
-            this.Reset();
+            //this.Reset();
             //
             if (ProgramThread != null)
             {
                 try
                 {
                     ProgramThread.Abort();
+                    ProgramThread.Join(100);
                 }
                 catch
                 {

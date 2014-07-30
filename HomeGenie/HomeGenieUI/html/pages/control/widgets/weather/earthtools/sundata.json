@@ -7,10 +7,22 @@
 	IconImage : 'pages/control/widgets/weather/earthtools/images/earthtools.png',
 	StatusText : '',
 	Description : '',
+	Initialized : false,
 
     RenderView: function (cuid, module) {
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
+		//
+        if (!this.Initialized)
+        {
+			this.Initialized = true;
+			// settings button
+			widget.find('[data-ui-field=settings]').on('click', function(){
+			    HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
+			    HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
+			    HG.WebApp.ProgramsList.UpdateOptionsPopup();
+			});			
+		}
 		//
 		var latitude = HG.WebApp.Utility.GetModulePropertyByName(module, "ConfigureOptions.Latitude").Value;
 		widget.find('[data-ui-field=latitude]').html(latitude);

@@ -275,7 +275,15 @@ namespace HomeGenie.Automation
                     program.TriggerTime = DateTime.UtcNow;
                     program.ProgramThread = new Thread(() =>
                     {
-                        var result = program.Run(options);
+                        MethodRunResult result = null;
+                        try
+                        {
+                            result = program.Run(options);
+                        } catch (Exception ex) {
+                            result = new MethodRunResult();
+                            result.Exception = ex;
+                        }
+                        //
                         if (result != null && result.Exception != null)
                         {
                             // runtime error occurred, script is being disabled
@@ -763,7 +771,7 @@ namespace HomeGenie.Automation
             string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
             var interfaceCommand = new MIGInterfaceCommand(command);
             homegenie.InterfaceControl(interfaceCommand);
-            homegenie.WaitOnPending(programCommand.Domain);
+            //homegenie.WaitOnPending(programCommand.Domain);
         }
 
         private void StartProgramEvaluator(ProgramBlock program)

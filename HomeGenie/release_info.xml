@@ -1,8 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r400</Version>
+  <Version>1.00 beta r403</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Updated MQTT Network app. Now with virtual modules and remote module control</ReleaseNote>
-  <ReleaseDate>2014-07-14T21:36:47.0000Z</ReleaseDate>
+  <ReleaseNote>   - Some optimizations to the X10, ZWave and SerialPort driver libraries
+  - Added "Sunrise Colors Scenario" sample script for Philips Hue lights
+  - Added module settings popup to the control page
+  - Fixed occasional crash in shutdown/restart process
+  - Added "Raspberry Pi Camera" resolution modes to camera driver (up to 5Mpx and 90fps)
+  - Fixed bug in Interconnections (decimal fields serialization issue in SignalEvent)
+  - Fixed bug in web service file caching</ReleaseNote>
+  <ReleaseDate>2014-07-29T11:48:41.0000Z</ReleaseDate>
 </ReleaseInfo>

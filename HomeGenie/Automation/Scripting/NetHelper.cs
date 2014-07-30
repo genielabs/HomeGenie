@@ -46,6 +46,10 @@ using Nmqtt;
 
 namespace HomeGenie.Automation.Scripting
 {
+    /// <summary>
+    /// Net Helper class.\n
+    /// Class instance accessor: **Net**
+    /// </summary>
     public class NetHelper
     {
 
@@ -88,12 +92,26 @@ namespace HomeGenie.Automation.Scripting
 
         #region SMTP client
 
+        /// <summary>
+        /// Set the SMTP server address for sending emails.
+        /// If "E-Mail Account" program has been already configured, this method can be used to specify a different SMTP server to use for Net.SendMessage method.
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="smtpServer">SMTP server address</param>
         public NetHelper MailService(string smtpServer)
         {
             this.mailService = smtpServer;
             return this;
         }
 
+        /// <summary>
+        /// Set the SMTP server address for sending emails.
+        /// If "E-Mail Account" program has been already configured, this method can be used to specify a different SMTP server to use for Net.SendMessage method.
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="smtpServer">SMTP server address</param>
+        /// <param name="port">SMTP server port.</param>
+        /// <param name="useSsl">If set to <c>true</c> use SSL.</param>
         public NetHelper MailService(string smtpServer, int port, bool useSsl)
         {
             this.mailPort = port;
@@ -101,27 +119,25 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        public NetHelper WithCredentials(string user, string pass)
-        {
-            this.networkCredential = new NetworkCredential(user, pass);
-            return this;
-        }
-        // TODO: implement a callback
-        public void SendMessageAsync(string from, string recipients, string subject, string messageText)
-        {
-            var t = new Thread(() =>
-            {
-                this.SendMessage(from, recipients, subject, messageText);
-            });
-            t.Start();
-        }
-        //
+        /// <summary>
+        /// Adds an attachment to the message. Can be called multiple times for attaching more files.
+        /// </summary>
+        /// <returns>NetHelper</returns>
+        /// <param name="name">File name (without path).</param>
+        /// <param name="data">Binary data of the file to attach.</param>
         public NetHelper AddAttachment(string name, byte[] data)
         {
             attachments.Add(name, data);
             return this;
         }
-        //
+
+        /// <summary>
+        /// Sends an E-Mail.
+        /// </summary>
+        /// <returns><c>true</c>, if message was sent, <c>false</c> otherwise.</returns>
+        /// <param name="recipients">Message recipients.</param>
+        /// <param name="subject">Message subject.</param>
+        /// <param name="messageText">Message text.</param>
         public bool SendMessage(string recipients, string subject, string messageText)
         {
             this.mailFrom = "";
@@ -137,6 +153,14 @@ namespace HomeGenie.Automation.Scripting
             return SendMessage(this.mailFrom, recipients, subject, messageText);
         }
 
+        /// <summary>
+        /// Sends an E-Mail.
+        /// </summary>
+        /// <returns><c>true</c>, if message was sent, <c>false</c> otherwise.</returns>
+        /// <param name="from">Message sender.</param>
+        /// <param name="recipients">Message recipients.</param>
+        /// <param name="subject">Message subject.</param>
+        /// <param name="messageText">Message text.</param>
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
             try
@@ -262,19 +286,46 @@ namespace HomeGenie.Automation.Scripting
             return true;
         }
 
+        // TODO: deprecate this (Program.RunAsyncTask can already do the trick)
+        public void SendMessageAsync(string from, string recipients, string subject, string messageText)
+        {
+            var t = new Thread(() =>
+            {
+                this.SendMessage(from, recipients, subject, messageText);
+            });
+            t.Start();
+        }
+
         #endregion
 
 
         #region HTTP client
 
-        public NetHelper WebService(string serviceurl)
+        /// <summary>
+        /// Set the web service URL to call. 
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="serviceUrl">Service URL.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// var iplocation = Net.WebService("http://freegeoip.net/json/").GetData(); 
+        /// Program.Notify("IP to Location", iplocation.city);
+        /// </code>
+        /// </example>
+        public NetHelper WebService(string serviceUrl)
         {
             this.method = "";
             this.customHeaders.Clear();
-            this.webServiceUrl = serviceurl;
+            this.webServiceUrl = serviceUrl;
             return this;
         }
 
+        /// <summary>
+        /// Sends the specified string data using the PUT method.
+        /// </summary>
+        /// <param name="data">Data to send.</param>
         public NetHelper Put(string data)
         {
             this.method = "PUT";
@@ -282,6 +333,10 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        /// <summary>
+        /// Sends the specified string data using the POST method.
+        /// </summary>
+        /// <param name="data">String containing post data fields and values in the form field1=value1&filed2=value2&...&fieldn=valuen.</param>
         public NetHelper Post(string data)
         {
             this.method = "POST";
@@ -289,12 +344,22 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        /// <summary>
+        /// Adds the specified HTTP header to the HTTP request.
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="name">Header name.</param>
+        /// <param name="value">Header value.</param>
         public NetHelper AddHeader(string name, string value)
         {
             customHeaders.Add(name, value);
             return this;
         }
 
+        /// <summary>
+        /// Call the web service url.
+        /// </summary>
+        /// <returns>String containing the server response.</returns>
         public string Call()
         {
             string returnvalue = "";
@@ -315,9 +380,9 @@ namespace HomeGenie.Automation.Scripting
                     }
                     else
                     {
-                        byte[] data = Encoding.ASCII.GetBytes(this.putData);
+                        byte[] data = Encoding.UTF8.GetBytes(this.putData);
                         byte[] responsebytes = webClient.UploadData(this.webServiceUrl, this.method, data);
-                        returnvalue = Encoding.ASCII.GetString(responsebytes);
+                        returnvalue = Encoding.UTF8.GetString(responsebytes);
                     }
                 }
             }
@@ -333,7 +398,8 @@ namespace HomeGenie.Automation.Scripting
             }
             return returnvalue;
         }
-        // TODO: implement a callback
+
+        // TODO: deprecate this (Program.RunAsyncTask can do the trick)
         public void CallAsync()
         {
             var t = new Thread(() =>
@@ -343,6 +409,10 @@ namespace HomeGenie.Automation.Scripting
             t.Start();
         }
 
+        /// <summary>
+        /// Call the web service url and returns the server response.
+        /// </summary>
+        /// <returns>The returned value can be a simple string or an object containing all fields mapped from the JSON/XML response (see Net.WebService example).</returns>
         public dynamic GetData()
         {
             dynamic returnValue = null;
@@ -366,6 +436,10 @@ namespace HomeGenie.Automation.Scripting
             return returnValue;
         }
 
+        /// <summary>
+        /// Call the web service url and returns the server response as binary data.
+        /// </summary>
+        /// <returns>Byte array containing the raw server response.</returns>
         public byte[] GetBytes()
         {
             byte[] responseBytes = null;
@@ -392,7 +466,11 @@ namespace HomeGenie.Automation.Scripting
 
         #region Ping client
 
-        public bool Ping(string ipAddress)
+        /// <summary>
+        /// Ping the specified remote host.
+        /// </summary>
+        /// <param name="remoteAddress">IP or DNS address.</param>
+        public bool Ping(string remoteAddress)
         {
             bool success = false;
             using (var pingClient = new Ping())
@@ -407,7 +485,7 @@ namespace HomeGenie.Automation.Scripting
                 string data = "01010101010101010101010101010101";
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
                 int timeout = 1000;
-                var reply = pingClient.Send(ipAddress, timeout, buffer, options);
+                var reply = pingClient.Send(remoteAddress, timeout, buffer, options);
                 if (reply.Status == IPStatus.Success)
                 {
                     success = true;
@@ -421,31 +499,57 @@ namespace HomeGenie.Automation.Scripting
 
         #region MQTT client
 
+        /// <summary>
+        /// Sets the MQTT server to use.
+        /// </summary>
+        /// <returns>The service.</returns>
+        /// <param name="server">MQTT server address.</param>
+        /// <param name="port">MQTT server port.</param>
+        /// <param name="topic">MQTT topic.</param>
         public NetHelper MqttService(string server, int port, string topic)
         {
-            mqttClient = new MqttClient (server, port, topic);
-            mqttClient.Connect();
+            mqttClient = new MqttClient(server, port, topic);
+            if (this.networkCredential != null)
+            {
+                mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
+            }
+            else
+            {
+                mqttClient.Connect();
+            }
             return this;
         }
 
+        //TODO: deprecate this (use this.networkCredential instead)
         public NetHelper MqttService(string server, int port, string username, string password, string topic)
         {
-            mqttClient = new MqttClient (server, port, topic);
+            mqttClient = new MqttClient(server, port, topic);
             mqttClient.Connect(username, password);
             return this;
         }
 
+        /// <summary>
+        /// Subscribe the specified topic.
+        /// </summary>
+        /// <param name="topic">Topic name.</param>
+        /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
         public NetHelper Subscribe(string topic, Action<string,string> callback)
         {
             mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
-                //.ObserveOn(System.Threading.SynchronizationContext.Current)
-                .Subscribe(msg => { 
-                    callback(msg.Topic, msg.Payload);
-                    //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
-                });
+            //.ObserveOn(System.Threading.SynchronizationContext.Current)
+                .Subscribe(msg =>
+            { 
+                callback(msg.Topic, msg.Payload);
+                //Console.WriteLine("MQTT {0} : {1}", msg.Topic, msg.Payload); 
+            });
             return this;
         }
 
+        /// <summary>
+        /// Publish a message to the specified topic.
+        /// </summary>
+        /// <param name="topic">Topic name.</param>
+        /// <param name="message">Message text.</param>
         public NetHelper Publish(string topic, string message)
         {
             mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
@@ -454,13 +558,31 @@ namespace HomeGenie.Automation.Scripting
 
         #endregion
 
+
+        //TODO: add autodoc comment (HG Event forwarding)
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
             string eventRouteUrl = "http://" + hgAddress + "/api/HomeAutomation.HomeGenie/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
             // propagate event to remote hg endpoint
             this.WebService(eventRouteUrl)
-              .Put(JsonConvert.SerializeObject(new ModuleEvent(module.SelectedModules[0], parameter)))
-              .CallAsync();
+                .Put(JsonConvert.SerializeObject(
+                    new ModuleEvent(module.SelectedModules[0], parameter),
+                    new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
+                ))
+                .CallAsync();
+            return this;
+        }
+
+
+        /// <summary>
+        /// Uses provided credentials when connecting to SMTP/HTTP/MQTT/HG service.
+        /// </summary>
+        /// <returns>NetHelper.</returns>
+        /// <param name="user">Username.</param>
+        /// <param name="pass">Password.</param>
+        public NetHelper WithCredentials(string user, string pass)
+        {
+            this.networkCredential = new NetworkCredential(user, pass);
             return this;
         }
 
@@ -475,10 +597,26 @@ namespace HomeGenie.Automation.Scripting
             //
             if (this.mqttClient != null)
             {
-                try { this.mqttClient.Dispose(); } catch { }
+                try
+                {
+                    this.mqttClient.Dispose();
+                }
+                catch
+                {
+                }
             }
         }
 
+        private class WebClient : System.Net.WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest w = base.GetWebRequest(uri);
+                w.Timeout = 15 * 1000;
+                return w;
+            }
+        }
 
     }
+
 }

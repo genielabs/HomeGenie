@@ -232,6 +232,7 @@ namespace HomeGenie.Service
             LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STOPPING");
             //
             // update last received parameters before quitting
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
             //
@@ -518,7 +519,8 @@ namespace HomeGenie.Service
         {
             MIG.Interfaces.DynamicInterfaceAPI.UnRegister(apiCall);
         }
-        // called after ProgramCommand executed, should pause thread. Mostly unimplemented
+
+        /*
         public void WaitOnPending(string domain)
         {
             MIGInterface migInterface = GetInterface(domain);
@@ -528,6 +530,7 @@ namespace HomeGenie.Service
             }
             //Thread.Sleep(50);
         }
+        */
 
         public List<Group> GetGroups(string namePrefix)
         {
@@ -620,14 +623,13 @@ namespace HomeGenie.Service
                 for (int m = 0; m < group.Modules.Count; m++)
                 {
                     var module = Modules.Find(mod => mod.Domain == group.Modules[ m ].Domain && mod.Address == group.Modules[ m ].Address);
-                    if (/*module.Type == Module.Types.MultiLevelSwitch ||*/
-                        module.DeviceType == Module.DeviceTypes.Light || module.DeviceType == Module.DeviceTypes.Dimmer)
+                    if (module != null && (module.DeviceType == Module.DeviceTypes.Light || module.DeviceType == Module.DeviceTypes.Dimmer))
                     {
-                        Service.Utility.ModuleParameterGet(module, ModuleParameters.MODPAR_STATUS_LEVEL).Value = levelValue;
                         try
                         {
                             MIGInterfaceCommand icmd = new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + commandValue);
                             InterfaceControl(icmd);
+                            Service.Utility.ModuleParameterGet(module, ModuleParameters.MODPAR_STATUS_LEVEL).Value = levelValue;
                         }
                         catch
                         {

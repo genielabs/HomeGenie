@@ -32,7 +32,7 @@ Modules
     <Description>Turn on all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-04-09T19:54:02.5364667Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2014-07-25T22:01:45.648302Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -70,7 +70,7 @@ Modules
     <Description>Turn off all the lights in the current group.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-04-09T19:53:41.739717Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2014-07-25T22:01:47.655689Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -135,9 +135,9 @@ Program.GoBackground();</ScriptSource>
     <Address>16</Address>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
-    <Group>Features</Group>
+    <Group>Lights</Group>
     <ActivationTime>2014-05-31T21:12:03.9246114Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:44.701746Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:49.099487Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -256,7 +256,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:45.209451Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:49.610526Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -402,7 +402,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:45.706352Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:50.11561Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -472,9 +472,9 @@ controlModules.Each((module)=&gt;{
     <Address>35</Address>
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
-    <Group>Scenes</Group>
+    <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-07-14T21:21:19.857315Z</TriggerTime>
+    <TriggerTime>2014-07-25T22:15:39.854574Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -543,7 +543,7 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <Address>37</Address>
     <Name>HCSR04 - Ultrasonic Ranging Module</Name>
     <Description>Ultrasonic Ranging Module sensor </Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime>2013-12-07T01:38:37.454915Z</ActivationTime>
     <TriggerTime>2013-12-07T01:38:48.349238Z</TriggerTime>
     <Type>CSharp</Type>
@@ -658,7 +658,7 @@ using (var luxPin = adcConnection.In(Mcp3008Channel.Channel1, voltage))
     <Name>MCP3008 - Temperature and Luminance</Name>
     <Description>Analog Inputs SPI application using the MCP3008 ADC. 
 For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -700,9 +700,9 @@ return true; // execute "Code To Run"
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>39</Address>
-    <Name>Z-Wave - Lights/Switches Level Poll</Name>
+    <Name>Level Poll</Name>
     <Description>Periodically query lights and switches level.</Description>
-    <Group>Features</Group>
+    <Group>Z-Wave</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -852,7 +852,7 @@ while (Program.IsEnabled)
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11. 
 For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -1033,7 +1033,7 @@ By default, pins A0-A7 are mapped as output modules (switch) and B0-B7 as input 
 To change this configuration, edit the program source code.
 
 For wirings see http://www.skpang.co.uk/blog/archives/454 .</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -1127,7 +1127,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:46.71137Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:51.11473Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1318,71 +1318,9 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:47.206331Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:51.603725Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnSwitchTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-return false;
-</ScriptCondition>
-    <ScriptSource>var adcClock = ConnectorPin.P1Pin23.ToProcessor();
-var adcMiso = ConnectorPin.P1Pin21.ToProcessor();
-var adcMosi = ConnectorPin.P1Pin19.ToProcessor();
-var adcCs = ConnectorPin.P1Pin22.ToProcessor();
-
-var spiConnection = new Raspberry.IO.SerialPeripheralInterface.SpiConnection(adcClock, adcCs, adcMiso, adcMosi, 0 /*Endianness.LittleEndian*/);
-
-using(spiConnection.SelectSlave())
-{
-  
-  // Start bit
-  spiConnection.Write(true);
-  
-  // Channel is single-ended
-  spiConnection.Write(true);
-  
-  // Channel Id
-  spiConnection.Write((byte)2, 3);
-
-  // Let one clock to sample
-  spiConnection.Synchronize();
-  
-  while (true)
-  {
-    //Program.RunAsyncTask(()=&gt;{
-    //  // Let one clock to sample
-     // spiConnection.Synchronize();
-	//  spiConnection.Write((byte)255, 8);
-    //});
-    
-    // Read 8 bits
-    for (int i = 0; i &lt; 8; i++)
-    {
-      var data = spiConnection.Read(8);
-      Console.Write( data.ToString("X2") + " ");  
-    }
-    Console.WriteLine("");
-  }
-}</ScriptSource>
-    <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>83</Address>
-    <Name>nRF24L01</Name>
-    <Description>(just testing)</Description>
-    <Group>Raspberry Sharp</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1431,11 +1369,11 @@ Program.GoBackground();</ScriptSource>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>84</Address>
-    <Name>X10 - Dimmer Bright 100% when switched on</Name>
+    <Name>Set to 100% when switched on</Name>
     <Description>Brighten a light to 100% when switched on.</Description>
-    <Group>Features</Group>
+    <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:47.702832Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:52.106001Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1728,9 +1666,9 @@ while (Program.IsEnabled)
     <Address>90</Address>
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
-    <Group>Features</Group>
+    <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:48.217936Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:52.615847Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1807,11 +1745,11 @@ Program.GoBackground();</ScriptSource>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>91</Address>
-    <Name>Z-Wave - Wake Up Notify</Name>
-    <Description>Query sensors' data and battery level when a device wakes up.</Description>
-    <Group>Features</Group>
+    <Name>Query on Wake Up</Name>
+    <Description>Query sensors' data and battery level when a node wakes up.</Description>
+    <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:48.707054Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:53.108668Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1886,7 +1824,7 @@ using (var connection = new GpioConnection(systembuzzer))
     <Address>92</Address>
     <Name>HomeGenie Buzzer</Name>
     <Description>GPIO controlled Buzzer</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime>2014-03-17T00:19:30.475555Z</ActivationTime>
     <TriggerTime>2014-03-17T00:19:51.259516Z</TriggerTime>
     <Type>CSharp</Type>
@@ -1956,9 +1894,9 @@ Program.GoBackground();</ScriptSource>
     <Address>112</Address>
     <Name>Turn Off Delay</Name>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
-    <Group>Scenes</Group>
+    <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:49.206154Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:53.607097Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2103,12 +2041,12 @@ Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>122</Address>
-    <Name>X10 SC9000 RF Vitual Modules</Name>
-    <Description>SC9000 Security Console driver (experimental)</Description>
-    <Group>Devices and Things</Group>
+    <Name>SC9000 RF Vitual Modules</Name>
+    <Description>SC9000 Security Console driver</Description>
+    <Group>X10</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
     <TriggerTime>2014-04-02T14:04:08.6876241Z</TriggerTime>
     <Type>CSharp</Type>
@@ -2224,7 +2162,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:49.70672Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:54.109789Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2347,7 +2285,7 @@ Pause( pause );
     <Name>Presence Simulator</Name>
     <Description>Simulate presence in the house by looping a program during a given interval time.
 The program to run can  be a pre-recorded Wizard Script (http://generoso.info/homegenie/scenarios.html).</Description>
-    <Group>Scenes</Group>
+    <Group>Security</Group>
     <ActivationTime>2014-04-11T18:50:17.2553666Z</ActivationTime>
     <TriggerTime>2013-12-21T20:24:34.858981Z</TriggerTime>
     <Type>CSharp</Type>
@@ -2409,7 +2347,7 @@ return true;</ScriptCondition>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>154</Address>
     <Name>Ping Me at Home</Name>
@@ -2418,7 +2356,7 @@ when you're getting close to home.
 The program exposes the parameter &lt;b&gt;PingMe.AtHome&lt;/b&gt;
 that can be used both in Wizard Scripts or C# APPs to
 trigger actions when you get home.</Description>
-    <Group>Scenes</Group>
+    <Group>Security</Group>
     <ActivationTime>2014-04-11T18:50:30.519552Z</ActivationTime>
     <TriggerTime>2014-04-11T18:50:30.5245526Z</TriggerTime>
     <Type>CSharp</Type>
@@ -2487,7 +2425,7 @@ Program.GoBackground();</ScriptSource>
     <Address>168</Address>
     <Name>Arduino Switches</Name>
     <Description>Arduino controlled Switches.</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -2506,7 +2444,15 @@ return false;</ScriptCondition>
     <ScriptSource />
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Favourites.Link</ForDomains>
+        <ForTypes>Generic</ForTypes>
+        <Property>FavouritesLink.Url</Property>
+        <Description>Favourites link</Description>
+      </ProgramFeature>
+    </Features>
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>180</Address>
@@ -2515,10 +2461,10 @@ return false;</ScriptCondition>
 These can be added to  groups and are then
 shown as hyperlink buttons in the control page.</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
+    <ActivationTime>2014-07-25T22:02:17.939326Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2651,7 +2597,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:50.209189Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:54.611227Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2713,7 +2659,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:50.706675Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:55.115549Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2865,12 +2811,12 @@ Program.GoBackground();</ScriptSource>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>93</Address>
-    <Name>Z-Wave - Multi Instance/Channel </Name>
+    <Name>Multi Instance/Channel  Virtual Modules</Name>
     <Description>Adds a virtual module for each instance of a multi instance node.
 It requires that a manufacturer specific get has been issued on the node.</Description>
-    <Group>Features</Group>
+    <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:51.20719Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:55.604793Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2968,12 +2914,12 @@ Program.GoBackground();</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>121</Address>
     <Name>X10 RF Virtual Modules Mapper</Name>
     <Description>Generate ON/OFF event when specific X10 RF raw strings are received.</Description>
-    <Group>Devices and Things</Group>
+    <Group>X10</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
     <TriggerTime>2014-04-11T15:54:17.1660696Z</TriggerTime>
     <Type>CSharp</Type>
@@ -3078,7 +3024,7 @@ using (var connection = new GpioConnection(systemleds))
     <Name>HomeGenie Leds</Name>
     <Description>Staus and Activity leds for HomeGenie.
 For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -3237,9 +3183,9 @@ while (Program.IsEnabled)
     <Address>145</Address>
     <Name>Smart Lights</Name>
     <Description>Control device by motion detection and enviroment lumosity </Description>
-    <Group>Scenes</Group>
+    <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-14T20:43:51.713922Z</TriggerTime>
+    <TriggerTime>2014-07-25T21:58:56.112261Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3571,7 +3517,7 @@ Use IN+ to activate the internal PullUp resistor or IN- to activate the internal
 GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
-    <Group>Raspberry Sharp</Group>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -4633,5 +4579,64 @@ Supports full control/scripting of remote modules, just like a standard local mo
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+
+Program.Setup(()=&gt;{
+		Program.AddFeature(
+          	"HomeAutomation.PhilipsHue",
+            "Dimmer",
+            "Scenarios.SunriseColors",
+            "Link to Sunrise Colors Scenario");
+  		Program.AddControlWidget("homegenie/generic/program");
+});
+
+return false;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+
+// Initialize scenario
+var colorLights = Modules.WithFeature("Scenarios.SunriseColors")
+  	.Off()
+  	.Command("Control.ColorHsb");
+
+// First transition to red, 5 seconds
+colorLights.Set("0,1,.8,5");
+Pause(5);
+
+// Second transition to orange, 5 seconds
+colorLights.Set("0.08,1,.8,5");
+Pause(5);
+
+// Last transition to bright white, 10 seconds
+colorLights.Set("0.13,0,1,10");
+Pause(10);</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.PhilipsHue</ForDomains>
+        <ForTypes>Dimmer</ForTypes>
+        <Property>Scenarios.SunriseColors</Property>
+        <Description>Link to Sunrise Colors Scenario</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>8</Address>
+    <Name>Sunrise Colors Scenario</Name>
+    <Description />
+    <Group>Scenes</Group>
+    <ActivationTime>2014-07-25T21:30:38.298025Z</ActivationTime>
+    <TriggerTime>2014-07-25T22:01:09.283224Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>
