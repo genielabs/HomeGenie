@@ -64,8 +64,6 @@ namespace ZWaveLib
         private byte callbackIdSeq = 1;
         private object callbackLock = new object();
 
-        //private Logger logger = new Logger();
-
         private SerialPortInput serialPort;
         private string portName = "";
 
@@ -73,9 +71,6 @@ namespace ZWaveLib
         private bool isInitialized;
 
         private Timer discoveryTimer;
-
-        private ManualResetEvent ackWait = new ManualResetEvent(true);
-
 
         public ZWavePort()
         {
@@ -142,8 +137,6 @@ namespace ZWaveLib
             //
             if (!disableCallback)
             {
-                ackWait.WaitOne();
-                ackWait.Reset();
                 ////
                 //// discard timed-out messages (prevent flooding)
                 ////
@@ -188,9 +181,6 @@ namespace ZWaveLib
                 return false;
             });
             //
-            Thread.Sleep(300);
-            ackWait.Set();
-            //
             return callbackId;
         }
 
@@ -225,19 +215,11 @@ namespace ZWaveLib
 
         public byte GetCallbackId()
         {
-            lock (this.callbackLock)
+            if (++this.callbackIdSeq > 0xFF)
             {
-                if (++this.callbackIdSeq > 0xFF)
-                {
-                    this.callbackIdSeq = 1;
-                }
-                return this.callbackIdSeq;
+                this.callbackIdSeq = 1;
             }
-        }
-
-        public ManualResetEvent CallbackAckEvent
-        {
-            get { return ackWait; }
+            return this.callbackIdSeq;
         }
 
         public String ByteArrayToString(byte[] message)
@@ -297,8 +279,6 @@ namespace ZWaveLib
             //
             if (header == ZWaveMessageHeader.ACK)
             {
-                Logger.Log(LogLevel.DEBUG_IN, ByteArrayToString(new byte[] { (byte)ZWaveMessageHeader.ACK }));
-                //
                 ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.ACK }));
                 if (message.Length > 1)
                 {
@@ -329,12 +309,10 @@ namespace ZWaveLib
             if (header == ZWaveMessageHeader.SOF)
             { // found SOF
                 //
-                Logger.Log(LogLevel.DEBUG_IN, ByteArrayToString(message));
-                //
                 byte[] cmdAck = new byte[] { 0x01, 0x04, 0x01, 0x13, 0x01, 0xE8 };
                 if (message.SequenceEqual(cmdAck))
                 {
-                    //_ackwait.Set();
+                    //TODO: should something be handled here?
                 }
                 else if (VerifyChecksum(message))
                 {
@@ -349,16 +327,12 @@ namespace ZWaveLib
             {
                 // RESEND
                 ResendLastMessage();
-                //
-                Logger.Log(LogLevel.WARNING, ByteArrayToString(message));
-                //
                 ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.CAN }));
             }
             else
             {
                 Console.WriteLine("ZWaveLib: unhandled message " + ByteArrayToString(message));
-                Logger.Log(LogLevel.ERROR, ByteArrayToString(message));
-                //                ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
+                //ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
             }
 
             if (nextMessage != null)

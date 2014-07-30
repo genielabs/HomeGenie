@@ -74,9 +74,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
                     nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
                     //
-                    Logger.Log(LogLevel.REPORT, " * Received METER report from node " + nodeHost.NodeId); // + " (" + _nodehost.Description + ")");
-                    Logger.Log(LogLevel.REPORT, " * " + nodeHost.NodeId + ">   kW " + Math.Round(wattsRead, 3) /*+ "    Counter kW " + Math.Round(meter_count, 10)*/ );
-                    //
                     processed = true;
                 }
                 else if (message.Length > 14 && message[4] == 0x08)

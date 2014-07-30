@@ -59,15 +59,9 @@ namespace SerialPortLib
         private bool isConnected = false;
         private bool isRunning = true;
 
-        //private object writeLock = new object();
-
         private Thread receiverTask;
-        private Thread senderTask;
-
-        private Queue<byte[]> messageQueue = new Queue<byte[]>();
 
         private bool debug = false;
-
 
         public SerialPortInput()
         {
@@ -79,11 +73,7 @@ namespace SerialPortLib
             try
             {
                 serialPort.Close();
-            }
-            catch
-            {
-            }
-            //
+            } catch { }
             gotReadWriteError = true;
         }
 
@@ -174,14 +164,6 @@ namespace SerialPortLib
             //
             try
             {
-                senderTask.Abort();
-            }
-            catch
-            {
-            }
-            senderTask = null;
-            try
-            {
                 receiverTask.Abort();
             }
             catch
@@ -195,7 +177,22 @@ namespace SerialPortLib
 
         public void SendMessage(byte[] message)
         {
-            messageQueue.Enqueue(message);
+            try
+            {
+                if (Debug)
+                {
+                    DebugLog("SPO <", ByteArrayToString(message));
+                }
+                serialPort.Write(message, 0, message.Length);
+            }
+            catch (Exception e)
+            {
+                if (Debug)
+                {
+                    DebugLog("SPO !", e.Message);
+                    DebugLog("SPO !", e.StackTrace);
+                }
+            }
         }
 
 
@@ -261,10 +258,6 @@ namespace SerialPortLib
                 receiverTask = new Thread(ReceiverLoop);
                 //_receiverthread.Priority = ThreadPriority.Highest;
                 receiverTask.Start();
-                //
-                senderTask = new Thread(SenderLoop);
-                //_senderthread.Priority = ThreadPriority.Highest;
-                senderTask.Start();
             }
             return success;
         }
@@ -298,50 +291,6 @@ namespace SerialPortLib
             DebugLog("SPI !", e.EventType.ToString());
             DebugLog("SPI !", e.ToString());
         }
-
-        private void SenderLoop(object obj)
-        {
-            messageQueue.Clear();
-            while (isRunning)
-            {
-                if (serialPort != null)
-                {
-                    try
-                    {
-                        while (messageQueue.Count > 0)
-                        {
-                            byte[] message = messageQueue.Dequeue();
-                            try
-                            {
-                                if (Debug)
-                                {
-                                    DebugLog("SPO <", ByteArrayToString(message));
-                                }
-                                serialPort.Write(message, 0, message.Length);
-                            }
-                            catch (Exception e)
-                            {
-                                if (Debug)
-                                {
-                                    DebugLog("SPO !", e.Message);
-                                    DebugLog("SPO !", e.StackTrace);
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-
-                    }
-                }
-                else
-                {
-                    Thread.Sleep(950);
-                }
-                Thread.Sleep(50);
-            }
-        }
-
 
         private void ReceiverLoop()
         {

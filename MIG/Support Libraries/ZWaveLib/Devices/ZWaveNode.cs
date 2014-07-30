@@ -201,16 +201,6 @@ namespace ZWaveLib.Devices
         {
             //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
             //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
-            // Do nothing
-            //if (this.NodeId != 1 && (this.TypeId == null || this.DeviceHandler == null))
-            //{
-            //    TimeSpan ts = new TimeSpan(DateTime.Now.Ticks - _lastmanufacturerget.Ticks);
-            //    if (ts.TotalSeconds > 10)
-            //    {
-            //        _lastmanufacturerget = DateTime.Now;
-            //        ManufacturerSpecific_Get();
-            //    } 
-            //}
             //
             bool handled = false;
             int messageLength = receivedMessage.Length;
@@ -450,16 +440,6 @@ namespace ZWaveLib.Devices
             //
             if (!handled && messageLength > 3)
             {
-                //if (receivedMessage[3] == 0x13)
-                //{
-                //    // Check the callback id
-                //    if (callbackIds.ContainsKey(receivedMessage[4]))
-                //    {
-                //        MessagingCompleted(receivedMessage[4]);
-                //    }
-                //    return true;
-                //}
-                //else
                 if (receivedMessage[3] != 0x13)
                 {
                     bool log = true;
