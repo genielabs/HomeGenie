@@ -151,7 +151,7 @@ namespace MIG.Interfaces.HomeAutomation
 
             private Command(int value)
             {
-                this.name = CommandsList[ value ];
+                this.name = CommandsList[value];
                 this.value = value;
             }
 
@@ -304,7 +304,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
                     lastAddedNode = 0;
-                    //byte addedId = controller.BeginNodeAdd();
+                    byte addedId = controller.BeginNodeAdd();
                     for (int i = 0; i < 20; i++)
                     {
                         if (lastAddedNode > 0)
@@ -320,7 +320,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROLLER_NODEREMOVE)
                 {
                     lastRemovedNode = 0;
-                    //byte remcid = controller.BeginNodeRemove();
+                    byte remcid = controller.BeginNodeRemove();
                     for (int i = 0; i < 20; i++)
                     {
                         if (lastRemovedNode > 0)
@@ -879,8 +879,8 @@ namespace MIG.Interfaces.HomeAutomation
                     path = "ZWaveNode.Associations.Count";
                     break;
                 case 3:
-                    string gid = value.ToString().Split(':')[ 0 ];
-                    value = value.ToString().Split(':')[ 1 ];
+                    string gid = value.ToString().Split(':')[0];
+                    value = value.ToString().Split(':')[1];
                     path = "ZWaveNode.Associations." + gid; // TODO: implement generic group/node association instead of fixed one
                     break;
                 }

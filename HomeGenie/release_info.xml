@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r403</Version>
+  <Version>1.00 beta r403fix</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Some optimizations to the X10, ZWave and SerialPort driver libraries
-  - Added "Sunrise Colors Scenario" sample script for Philips Hue lights
-  - Added module settings popup to the control page
-  - Fixed occasional crash in shutdown/restart process
-  - Added "Raspberry Pi Camera" resolution modes to camera driver (up to 5Mpx and 90fps)
-  - Fixed bug in Interconnections (decimal fields serialization issue in SignalEvent)
-  - Fixed bug in web service file caching</ReleaseNote>
-  <ReleaseDate>2014-07-29T11:48:41.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed ZWaveLib "node add" and "node remove" functions</ReleaseNote>
+  <ReleaseDate>2014-07-31T21:31:59.0000Z</ReleaseDate>
 </ReleaseInfo>

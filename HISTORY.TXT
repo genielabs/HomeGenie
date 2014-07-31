@@ -1,5 +1,7 @@
 ﻿RELEASE HISTORY
 
+	- Fixed ZWaveLib "node add" and "node remove" functions
+
 29/07/2014 1.00 beta rev 403
 	- Some optimizations to the X10, ZWave and SerialPort driver libraries
 	- Other minor fixes
