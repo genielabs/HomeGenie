@@ -109,7 +109,7 @@ namespace MIG
         //private TcpSocketGateway tcpGateway;
 
         //private int tcpGatewayPort = 4502;
-        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("ISO-8859-1");
+        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("UTF-8");
 
         private WebServiceGatewayConfiguration webServiceConfig;
 		// TODO: move webFileCache to WebServiceGateway.cs
