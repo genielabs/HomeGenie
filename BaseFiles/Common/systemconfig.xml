@@ -98,6 +98,11 @@
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
+      <Interface Domain="HomeAutomation.Insteon" IsEnabled="false">
+        <Options>
+          <Option Name="Port" Value="" />
+        </Options>
+      </Interface>
       <Interface Domain="HomeAutomation.X10" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />

@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace MIG
 {
@@ -31,6 +32,7 @@ namespace MIG
         /// that should be usually automatically calculated from namespace
         /// </summary>
         string Domain { get; }
+        //List<InterfaceModule> GetModules();
         /// <summary>
         /// all input data coming from connected device
         /// is routed via InterfacePropertyChangedAction event
@@ -46,6 +48,7 @@ namespace MIG
         /// <summary>
         /// wait for completition of all queued interface commands 
         /// </summary>
+        //TODO: deprecate this
         void WaitOnPending();
         /// <summary>
         /// this value can be actively polled to detect
@@ -66,6 +69,14 @@ namespace MIG
         /// </summary>
         /// <returns></returns>
         bool IsDevicePresent();
+    }
+
+    public class InterfaceModule
+    {
+        public string Domain { get; set; }
+        public string Address { get; set; }
+        public string ModuleType { get; set; }
+        public dynamic CustomData { get; set; }
     }
 
     public class InterfacePropertyChangedAction

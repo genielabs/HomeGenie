@@ -1,0 +1,67 @@
+DESCRIPTION
+===========
+
+    Ude is a C# port of Mozilla Universal Charset Detector.
+
+    The original source code is available at: 
+
+    http://mxr.mozilla.org/mozilla/source/extensions/universalchardet/src/    
+
+    The article "A composite approach to language/encoding detection" describes
+    the algorithms of Universal Charset Detector and is available at: 
+
+        http://www.mozilla.org/projects/intl/UniversalCharsetDetection.html
+        http://mxr.mozilla.org/mozilla-central/source/extensions/universalchardet/doc/UniversalCharsetDetection.doc
+
+    Some data-structures used into this port have been adapted from the Java port 
+    "juniversalchardet", available at:
+     
+        http://code.google.com/p/juniversalchardet/
+
+    Another port I know of is "chardet" (in Python) available at: 
+        
+        http://chardet.feedparser.org/
+
+USAGE
+=======
+
+    Import the library:
+
+        using Ude;
+
+    and feed a stream or a byte array to the detector. Call DataEnd to notify the detector that 
+    you want back the result:
+         
+        ICharsetDetector cdet = new CharsetDetector();
+        byte[] buff = new byte[1024];
+        int read;
+        while ((read = stream.Read(buff, 0, buff.Length)) > 0 && !done) {
+            cdet.Feed(buff, 0, read);
+        }
+        cdet.DataEnd();
+        Console.WriteLine("Charset: {0}, confidence: {1}, cdet.Charset, cdet.Confidence);
+
+
+    Alternatively, you can feed a Stream to the detector:
+
+        using (FileStream fs = File.OpenRead(filename)) {
+            ICharsetDetector cdet = new CharsetDetector();
+            cdet.Feed(fs);
+            cdet.DataEnd();
+            Console.WriteLine("Charset: {0}, confidence: {1}, cdet.Charset, cdet.Confidence);
+        }    
+
+    Or you can provide an alternative implementation of the interface - Ude.ICharsetDetector - 
+    that wraps the original nsUniversalDetector API. 
+ 
+
+LICENSE
+=======
+
+    This library is subject to the Mozilla Public License Version 1.1 (the
+    "License").  Alternatively, the contents of this file may be used under the
+    terms of either the GNU General Public License Version 2 or later (the "GPL"),
+    or the GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+
+
+

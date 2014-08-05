@@ -44,6 +44,8 @@ namespace HomeGenie.Service.Constants
             = "HomeAutomation.ZWave";
         public const string HomeAutomation_X10
             = "HomeAutomation.X10";
+        public const string HomeAutomation_Insteon
+            = "HomeAutomation.Insteon";
         public const string HomeAutomation_W800RF
             = "HomeAutomation.W800RF";
         //

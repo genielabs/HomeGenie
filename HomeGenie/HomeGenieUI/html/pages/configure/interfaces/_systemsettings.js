@@ -12,6 +12,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             HG.WebApp.SystemSettings.ZWaveSetPort($(this).val());
         });
         //
+        $('#page_configure_interfaces_insteonport').change(function (event) {
+            HG.WebApp.SystemSettings.InsteonSetPort($(this).val());
+        });
+        //
         $('#page_configure_interfaces_x10port').change(function (event) {
             HG.WebApp.SystemSettings.X10SetPort($(this).val());
         });
@@ -66,6 +70,20 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             });
         });
         //
+        $("#configure_interfaces_flip_insteon").on('slidestop', function (event) {
+            HG.WebApp.SystemSettings.RefreshOptions('insteon');
+            HG.Configure.Interfaces.ServiceCall("Insteon.SetIsEnabled/" + $("#configure_interfaces_flip_insteon").val(), function (data) {
+                $('#control_groupslist').empty(); // forces control menu rebuild
+                $.mobile.loading('hide');
+                if ($("#configure_interfaces_flip_insteon").val() == '1' && $('#page_configure_interfaces_insteonport').val() == "") {
+                    HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_insteonport');
+                }
+                if ($("#configure_interfaces_flip_insteon").val() == '1' && $('#page_configure_interfaces_insteonport').val() == "") {
+                    HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_insteonport');
+                }
+            });
+        });
+        //
         $("#configure_interfaces_flip_x10").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('x10');
             HG.Configure.Interfaces.ServiceCall("X10.SetIsEnabled/" + $("#configure_interfaces_flip_x10").val(), function (data) {
@@ -94,12 +112,12 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             });
         });
         //
-        $("#configure_interfaces_flip_raspigpio").on('slidestop', function (event) {
-            HG.Configure.Interfaces.ServiceCall("RaspiGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_raspigpio").val(), function (data) {
-                $('#control_groupslist').empty(); // forces control menu rebuild
-                $.mobile.loading('hide');
-            });
-        });
+        //$("#configure_interfaces_flip_raspigpio").on('slidestop', function (event) {
+        //    HG.Configure.Interfaces.ServiceCall("RaspiGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_raspigpio").val(), function (data) {
+        //        $('#control_groupslist').empty(); // forces control menu rebuild
+        //        $.mobile.loading('hide');
+        //    });
+        //});
         //
         $("#configure_interfaces_flip_weeco4mgpio").on('slidestop', function (event) {
             HG.Configure.Interfaces.ServiHG.Configure.Interfaces.ServiceCallceCall("Weeco4mGPIO.SetIsEnabled/" + $("#configure_interfaces_flip_weeco4mgpio").val(), function (data) {
@@ -270,6 +288,18 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             $.mobile.loading('hide');
             //
             $.mobile.loading('show');
+            $('#page_configure_interfaces_insteonport').empty().append('<option value="">(select port...)</option>');
+            for (var p = 0; p < ports.length; p++) {
+                $('#page_configure_interfaces_insteonport').append('<option value="' + ports[p].replace(/\//g, '|') + '">' + ports[p] + '</option>');
+            }
+            $('#page_configure_interfaces_insteonport').selectmenu('refresh', true);
+            HG.Configure.Interfaces.ServiceCall("Insteon.GetPort", function (data) {
+                $('#page_configure_interfaces_insteonport').val(data);
+                $('#page_configure_interfaces_insteonport').selectmenu('refresh', true);
+                $.mobile.loading('hide');
+            });
+            //
+            $.mobile.loading('show');
             $('#page_configure_interfaces_x10port').empty().append('<option value="">(select port...)</option>');
             $('#page_configure_interfaces_x10port').append('<option value="USB">CM15 Pro - USB</option>');
             for (var p = 0; p < ports.length; p++) {
@@ -306,6 +336,15 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 HG.WebApp.SystemSettings.RefreshOptions('zwave');
                 $.mobile.loading('hide');
             });
+            HG.Configure.Interfaces.ServiceCall("Insteon.GetIsEnabled", function (data) {
+                $('#configure_interfaces_flip_insteon').val(data).slider('refresh');
+                HG.WebApp.SystemSettings.RefreshOptions('insteon');
+                $.mobile.loading('hide');
+            });
+            HG.Configure.Interfaces.ServiceCall("Insteon.GetIsEnabled", function (data) {
+                $('#configure_interfaces_flip_insteon').val(data).slider('refresh');
+                $.mobile.loading('hide');
+            });
             HG.Configure.Interfaces.ServiceCall("X10.GetIsEnabled", function (data) {
                 $('#configure_interfaces_flip_x10').val(data).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('x10');
@@ -327,10 +366,10 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 HG.WebApp.SystemSettings.RefreshOptions('camera');
                 $.mobile.loading('hide');
             });
-            HG.Configure.Interfaces.ServiceCall("RaspiGPIO.GetIsEnabled", function (data) {
-                $('#configure_interfaces_flip_raspigpio').val(data).slider('refresh');
-                $.mobile.loading('hide');
-            });
+            //HG.Configure.Interfaces.ServiceCall("RaspiGPIO.GetIsEnabled", function (data) {
+            //    $('#configure_interfaces_flip_raspigpio').val(data).slider('refresh');
+            //    $.mobile.loading('hide');
+            //});
             HG.Configure.Interfaces.ServiceCall("Weeco4mGPIO.GetIsEnabled", function (data) {
                 $('#configure_interfaces_flip_weeco4mgpio').val(data).slider('refresh');
                 $.mobile.loading('hide');
@@ -403,6 +442,15 @@ HG.WebApp.SystemSettings.ZWaveNodeRemove = function (port) {
             $('#systemsettings_zwaveoperation_message').html('operation falied.');
         }
         $('#systemsettings_zwaveoperation_close_button').removeClass('ui-disabled');
+    });
+};
+
+
+
+HG.WebApp.SystemSettings.InsteonSetPort = function (port) {
+    $.mobile.loading('show');
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.Configure/Insteon.SetPort/' + (port == '' ? '_' : port) + '/' + (new Date().getTime()), function (data) {
+        $.mobile.loading('hide');
     });
 };
 

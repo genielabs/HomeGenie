@@ -178,11 +178,44 @@ namespace HomeGenie.Service.Handlers
                     homegenie.SystemConfiguration.GetInterfaceOption(Domains.HomeAutomation_ZWave, "Port").Value = migCommand.GetOption(1).Replace("|",
                                                                                                                                                            "/");
                     homegenie.SystemConfiguration.Update();
+                    homegenie.RefreshModules(Domains.HomeAutomation_ZWave, true);
                     break;
 
                 case "ZWave.GetPort":
                     migCommand.Response = (homegenie.GetInterface(Domains.HomeAutomation_ZWave) as MIG.Interfaces.HomeAutomation.ZWave).GetPortName();
                     if (migCommand.Response == "_") migCommand.Response = "";
+                    migCommand.Response = JsonHelper.GetSimpleResponse(migCommand.Response.Replace("/", "|"));
+                    break;
+
+                case "Insteon.GetIsEnabled":
+                    migCommand.Response = JsonHelper.GetSimpleResponse((homegenie.SystemConfiguration.GetInterface(Domains.HomeAutomation_Insteon).IsEnabled ? "1" : "0"));
+                    break;
+
+                case "Insteon.SetIsEnabled":
+                    homegenie.SystemConfiguration.GetInterface(Domains.HomeAutomation_Insteon).IsEnabled = (migCommand.GetOption(1) == "1" ? true : false);
+                    homegenie.SystemConfiguration.Update();
+                    //
+                    if (homegenie.SystemConfiguration.GetInterface(Domains.HomeAutomation_Insteon).IsEnabled)
+                    {
+                        homegenie.InterfaceEnable(Domains.HomeAutomation_Insteon);
+                    }
+                    else
+                    {
+                        homegenie.InterfaceDisable(Domains.HomeAutomation_Insteon);
+                    }
+                    break;
+
+                case "Insteon.SetPort":
+                    (homegenie.GetInterface(Domains.HomeAutomation_Insteon) as MIG.Interfaces.HomeAutomation.Insteon).SetPortName(migCommand.GetOption(1).Replace("|",
+                        "/"));
+                    homegenie.SystemConfiguration.GetInterfaceOption(Domains.HomeAutomation_Insteon, "Port").Value = migCommand.GetOption(1).Replace("|",
+                        "/");
+                    homegenie.SystemConfiguration.Update();
+                    homegenie.RefreshModules(Domains.HomeAutomation_Insteon, true);
+                    break;
+
+                case "Insteon.GetPort":
+                    migCommand.Response = (homegenie.GetInterface(Domains.HomeAutomation_Insteon) as MIG.Interfaces.HomeAutomation.Insteon).GetPortName();
                     migCommand.Response = JsonHelper.GetSimpleResponse(migCommand.Response.Replace("/", "|"));
                     break;
 
@@ -210,6 +243,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.SystemConfiguration.GetInterfaceOption(Domains.HomeAutomation_X10, "Port").Value = migCommand.GetOption(1).Replace("|",
                                                                                                                                                          "/");
                     homegenie.SystemConfiguration.Update();
+                    homegenie.RefreshModules(Domains.HomeAutomation_X10, true);
                     break;
 
                 case "X10.GetPort":
@@ -285,9 +319,9 @@ namespace HomeGenie.Service.Handlers
                     }
                     break;
 
-                case "RaspiGPIO.GetIsEnabled":
-                    migCommand.Response = JsonHelper.GetSimpleResponse((homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled ? "1" : "0"));
-                    break;
+                //case "RaspiGPIO.GetIsEnabled":
+                //    migCommand.Response = JsonHelper.GetSimpleResponse((homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled ? "1" : "0"));
+                //    break;
 
                 //case "RaspiGPIO.SetIsEnabled":
                 //    homegenie.SystemConfiguration.GetInterface(Domains.EmbeddedSystems_RaspiGPIO).IsEnabled = (migCommand.GetOption(1) == "1" ? true : false);

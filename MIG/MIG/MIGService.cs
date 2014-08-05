@@ -420,9 +420,12 @@ namespace MIG
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // TODO: Handle this exception
+                            // TODO: report internal mig interface  error
+                            context.Response.StatusCode = 500;
+                            WebServiceUtility.WriteStringToContext(context, ex.Message + "\n" + ex.StackTrace);
+                            Console.WriteLine("\nMIGService ERROR: " + ex.Message + "\n" + ex.StackTrace + "\n");
                         }
                     }
                     else
@@ -512,13 +515,20 @@ namespace MIG
 
         #endregion
 
-
         #region Web Service File Management
-
+        //
         private WebFileCache GetWebFileCache(string file)
         {
-            WebFileCache fileItem = new WebFileCache();
-            var cachedItem = webFileCache.Find(wfc => wfc.FilePath == file);
+            WebFileCache fileItem = new WebFileCache(), cachedItem = null;
+            try { cachedItem = webFileCache.Find(wfc => wfc.FilePath == file); } 
+            catch (Exception ex) 
+            {
+                //TODO: sometimes the Find method fires an "object reference not set" error (who knows why???)
+                Console.WriteLine("\nMIGService ERROR: " + ex.Message + "\n" + ex.StackTrace + "\n");
+                // clear possibly corrupted cache items
+                ClearWebCache();
+            }
+            //
             if (cachedItem != null && (DateTime.Now - cachedItem.Timestamp).TotalSeconds < 600)
             {
                 fileItem = cachedItem;

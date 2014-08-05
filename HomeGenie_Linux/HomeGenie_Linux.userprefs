@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
-      <File FileName="../HomeGenie/release_info.xml" Line="2" Column="1" />
-      <File FileName="../HISTORY.TXT" Line="5" Column="12" />
+      <File FileName="../HomeGenie/release_info.xml" Line="4" Column="26" />
+      <File FileName="../HISTORY.TXT" Line="4" Column="67" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

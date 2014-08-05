@@ -412,8 +412,18 @@ namespace HomeGenie.Service
                     {
                         zwaveController.DiscoveryEvent += zwaveController_DiscoveryEvent;
                     }
-//                    LoadModules();
-//                        RefreshModules(domain, true);
+                    break;
+                case Domains.HomeAutomation_Insteon:
+                    var insteonInterface = (GetInterface(Domains.HomeAutomation_Insteon) as MIG.Interfaces.HomeAutomation.Insteon);
+                    insteonInterface.SetPortName(systemConfiguration.GetInterfaceOption(
+                        Domains.HomeAutomation_Insteon,
+                        "Port"
+                    ).Value.Replace(
+                        "|",
+                        "/"
+                    ));
+                    insteonInterface.Connect();
+                    RefreshModules(domain, true);
                     break;
                 case Domains.HomeAutomation_X10:
                     var x10Interface = (GetInterface(Domains.HomeAutomation_X10) as MIG.Interfaces.HomeAutomation.X10);
@@ -430,7 +440,6 @@ namespace HomeGenie.Service
                     ).Value);
                     x10Interface.Connect();
                     x10Controller = x10Interface.X10Controller;
-//                    LoadModules();
                     RefreshModules(domain, true);
                     break;
                 case Domains.HomeAutomation_W800RF:
@@ -440,7 +449,6 @@ namespace HomeGenie.Service
                         "Port"
                     ).Value);
                     w800rfInterface.Connect();
-//                    LoadModules();
                     RefreshModules(domain, true);
                     break;
                 case Domains.EmbeddedSystems_Weeco4mGPIO:
@@ -582,6 +590,9 @@ namespace HomeGenie.Service
             {
             case Domains.HomeAutomation_ZWave:
                 modules_RefreshZwave();
+                break;
+            case Domains.HomeAutomation_Insteon:
+                modules_RefreshInsteon();
                 break;
             case Domains.HomeAutomation_X10:
                 modules_RefreshX10();
@@ -1658,6 +1669,55 @@ namespace HomeGenie.Service
                 }
         }
 
+        internal void modules_RefreshInsteon()
+        {
+            lock (systemModules.LockObject) try
+            {
+                Insteon insteon = (GetInterface(Domains.HomeAutomation_Insteon) as Insteon);
+                //
+                // Insteon devices
+                //
+                if (insteon != null && systemConfiguration.GetInterface(Domains.HomeAutomation_Insteon).IsEnabled)
+                {
+                    foreach (InterfaceModule device in insteon.GetModules())
+                    {
+                        Module module = Modules.Find(delegate(Module o)
+                        {
+                            return o.Domain == Domains.HomeAutomation_Insteon && o.Address == device.Address;
+                        });
+                        if (module == null)
+                        {
+                            // add new module
+                            module = new Module();
+                            module.Domain = Domains.HomeAutomation_Insteon;
+                            module.Address = device.Address;
+                            module.DeviceType = Module.DeviceTypes.Generic;
+                            systemModules.Add(module);
+                        }
+                        // udpdate module data
+                        if (module.Description == null || module.Description == "")
+                        {
+                            module.Description = "Insteon Device";
+                        }
+                    }
+                }
+                else if (!systemConfiguration.GetInterface(Domains.HomeAutomation_Insteon).IsEnabled)
+                {
+                    systemModules.RemoveAll(m => m.Domain == Domains.HomeAutomation_Insteon && m.RoutingNode == "");
+                }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_RefreshInsteon()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
+        }
+
         internal void modules_RefreshMisc()
         {
             // TODO: create method MIGInterface.GetModules() and abstract this draft code
@@ -2205,6 +2265,7 @@ namespace HomeGenie.Service
             systemModules.RemoveAll(m => m == null); // dunno why but sometimes it happen to have null entries causing exceptions
             modules_RefreshZwave();
             modules_RefreshX10();
+            modules_RefreshInsteon();
             modules_RefreshMisc();
             modules_RefreshPrograms();
             modules_RefreshVirtualModules();

@@ -48,6 +48,9 @@
     <Reference Include="Ude">
       <HintPath>Externals\ude-0.1\Ude.dll</HintPath>
     </Reference>
+    <Reference Include="SoapBox.FluentDwelling">
+      <HintPath>Externals\FluentDwelling\SoapBox.FluentDwelling.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gateways\WebServiceUtility.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="Interfaces\EmbeddedSystems\RaspiGPIO.cs" />
     <Compile Include="Interfaces\HomeAutomation\W800RF.cs" />
     <Compile Include="Interfaces\HomeAutomation\ModuleParameters.cs" />
+    <Compile Include="Interfaces\HomeAutomation\Insteon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gateways\ProtocolAdapters\OSC\" />

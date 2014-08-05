@@ -193,6 +193,7 @@ namespace MIG.Interfaces.HomeAutomation
             return true;
         }
 
+        //TODO: deprecate this
         public void WaitOnPending()
         {
             x10lib.WaitComplete();
@@ -343,7 +344,6 @@ namespace MIG.Interfaces.HomeAutomation
         {
             x10lib.HouseCode = hcodes;
         }
-
 
 
         private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
