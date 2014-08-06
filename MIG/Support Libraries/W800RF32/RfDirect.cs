@@ -31,12 +31,8 @@ namespace W800RF32
     {
         
         private SerialPort serialPort;
-
-        private object commLock = new object();
         private string portName = "";
-        private bool isConnected = false;
 
-        
         public RfDirect(string portname)
         {
             portName = portname;
@@ -89,7 +85,7 @@ namespace W800RF32
                 success = true;
                 //Console.WriteLine("OK");
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
                 // TODO: add error logging 
             }

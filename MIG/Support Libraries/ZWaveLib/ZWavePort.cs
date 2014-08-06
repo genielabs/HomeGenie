@@ -62,7 +62,6 @@ namespace ZWaveLib
         public ZWaveMessageReceivedEvent ZWaveMessageReceived;
 
         private byte callbackIdSeq = 1;
-        private object callbackLock = new object();
 
         private SerialPortInput serialPort;
         private string portName = "";

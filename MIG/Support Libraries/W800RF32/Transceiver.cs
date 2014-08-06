@@ -130,7 +130,7 @@ namespace W800RF32
                                     catch { }
                                 }
                             }
-                            catch (Exception unex)
+                            catch// (Exception unex)
                             {
                                 //Console.WriteLine(unex.Message + "\n" + unex.StackTrace);
                             }

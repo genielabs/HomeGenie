@@ -68,8 +68,6 @@ namespace XTenLib
         private bool gotReadWriteError = true;
         private bool keepConnectionAlive = false;
 
-        private object waitAckLock = new Object();
-
         // this is used on Linux for detecting when the link gets disconnected
         private int zeroChecksumCount = 0;
 
@@ -387,25 +385,6 @@ namespace XTenLib
             AllUnitsOff(housecode.ToString());
         }
 
-
-        //TODO: deprecate this interface method??!
-        public void WaitComplete()
-        {
-            /*
-            int hitcount = 0;
-            while (true)
-            {
-                if (sendQueue.Count == 0 && ++hitcount == 2)
-                {
-                    break;
-                }
-                Thread.Sleep(100);
-            }
-            */
-        }
-
-
-
         private void UpdateInterfaceTime(bool batteryclear)
         {
             /*
@@ -501,7 +480,7 @@ namespace XTenLib
                         var elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                         while (elapsedFromWaitAck.TotalSeconds < commandTimeoutSeconds && communicationState != X10CommState.Ready)
                         {
-                            Thread.Sleep(50);
+                            Thread.Sleep(100);
                             elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                         }
                         if (elapsedFromWaitAck.TotalSeconds >= commandTimeoutSeconds && communicationState != X10CommState.Ready)
@@ -844,20 +823,23 @@ namespace XTenLib
                                             }
                                             var mod = moduleStatus[currentUnitCode];
                                             //
-                                            if (!addressedModules.ContainsKey(housecode))
-                                            {
-                                                addressedModules.Add(housecode, new List<X10Module>());
-                                            }
-                                            else if (newAddressData)
-                                            {
-                                                newAddressData = false;
-                                                addressedModules[housecode].Clear();
-                                            }
+                                            //TODO: this needs more thinking....
+                                            //if (!addressedModules.ContainsKey(housecode))
+                                            //{
+                                            //    addressedModules.Add(housecode, new List<X10Module>());
+                                            //}
+                                            //else if (newAddressData)
+                                            //{
+                                            //    newAddressData = false;
+                                            //    addressedModules[housecode].Clear();
+                                            //}
                                             //
-                                            if (!addressedModules[housecode].Contains(mod))
-                                            {
-                                                addressedModules[housecode].Add(mod);
-                                            }
+                                            //if (!addressedModules[housecode].Contains(mod))
+                                            //{
+                                            //    addressedModules[housecode].Add(mod);
+                                            //}
+                                            //TODO: as a temporary solution, alway clear addressed modules list on plc receive
+                                            addressedModules.Clear();
                                         }
                                         else if (functionBitmap[b] == (byte)X10FunctionType.Function) // function
                                         {
