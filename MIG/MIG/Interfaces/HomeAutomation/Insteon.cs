@@ -129,10 +129,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-
-
         private Plm insteonPlm;
-        private string portName;
 
         public Insteon()
         {
@@ -140,6 +137,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -151,6 +149,8 @@ namespace MIG.Interfaces.HomeAutomation
                 return domain;
             }
         }
+
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
         public List<InterfaceModule> GetModules()
         {
@@ -170,13 +170,34 @@ namespace MIG.Interfaces.HomeAutomation
                     {
                         // It responded.  You can get identification info like this:
                         string address = device.DeviceId.ToString();
-                        string category = device.DeviceCategory;
-                        string subcategory = device.DeviceSubcategory;
+                        string category = device.DeviceCategoryCode.ToString();
+                        string subcategory = device.DeviceSubcategoryCode.ToString();
+
+                        ModuleTypes type = ModuleTypes.Generic;
+                        switch (device.GetType().Name)
+                        {
+                        case "LightingControl":
+                            type = ModuleTypes.Light;
+                            break;
+                        case "DimmableLightingControl":
+                            type = ModuleTypes.Dimmer;
+                            break;
+                        case "SwitchedLightingControl":
+                            type = ModuleTypes.Light;
+                            break;
+                        case "SensorsActuators":
+                            type = ModuleTypes.Switch;
+                            break;
+                        case "WindowCoveringControl":
+                            type = ModuleTypes.DoorWindow;
+                            break;
+                        }
+
                         modules.Add(new InterfaceModule() {
                             Domain = this.Domain,
                             Address = address,
-                            ModuleType = device.GetType().Name,
-                            CustomData = device.DeviceCategoryCode + "/" + device.DeviceSubcategoryCode
+                            ModuleType = type,
+                            CustomData = category + "/" + subcategory
                         });
                     }
                     else
@@ -190,13 +211,14 @@ namespace MIG.Interfaces.HomeAutomation
 
         public bool Connect()
         {
-            insteonPlm = new Plm(portName);
+            insteonPlm = new Plm(this.GetOption("Port").Value);
             if (insteonPlm.Error)
             {
                 Disconnect();
                 return false;
             }
             insteonPlm.OnError += insteonPlm_HandleOnError;
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return true;
         }
 
@@ -220,11 +242,6 @@ namespace MIG.Interfaces.HomeAutomation
             return present;
         }
 
-        public void WaitOnPending()
-        {
-
-        }
-
         public object InterfaceControl(MIGInterfaceCommand request)
         {
             string nodeId = request.NodeId;
@@ -233,6 +250,8 @@ namespace MIG.Interfaces.HomeAutomation
 
             DeviceBase device = null;
             insteonPlm.Network.TryConnectToDevice(nodeId, out device);
+
+            //TODO: handle types IrrigationControl and PoolAndSpaControl
 
             if (command == Command.CONTROL_ON)
             {
@@ -328,19 +347,6 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
         #endregion
-
-
-        public string GetPortName()
-        {
-            return portName;
-        }
-
-        public void SetPortName(string portname)
-        {
-            portName = portname;
-            Disconnect();
-            Connect();
-        }
 
 
     }

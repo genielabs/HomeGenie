@@ -37,9 +37,7 @@ namespace MIG.Gateways
         public string HomePath;
         public string BaseUrl;
         public int Port;
-        public bool UseSSL = false;
         public string Password;
-        public int SslPort;
         public bool CacheEnable;
     }
 
@@ -79,7 +77,6 @@ namespace MIG.Gateways
         private ManualResetEvent stopEvent = new ManualResetEvent(false);
         //
         private string servicePassword;
-        //private string homePath;
         private string baseUrl;
         private string[] bindingPrefixes;
 
@@ -90,16 +87,10 @@ namespace MIG.Gateways
         public void Configure(object gwConfiguration)
         {
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
-            //homePath = config.HomePath;
             baseUrl = config.BaseUrl;
-            //bindingPrefixes = new string[2] { 
-            //    String.Format(@"http://+:{0}/", config.Port),
-            //    String.Format(@"https://+:{0}/", config.SslPort)
-            //};
             bindingPrefixes = new string[1] { 
                 String.Format(@"http://+:{0}/", config.Port)
             };
-            //
             SetPasswordHash(config.Password);
         }
 

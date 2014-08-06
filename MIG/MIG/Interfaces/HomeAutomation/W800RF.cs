@@ -24,13 +24,13 @@ using System;
 using System.Threading;
 
 using W800RF32;
+using System.Collections.Generic;
 
 namespace MIG.Interfaces.HomeAutomation
 {
     public class W800RF : MIGInterface
     {
         private W800RF32.Transceiver w800Rf32;
-        private string portName;
 
         public W800RF()
         {
@@ -95,6 +95,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -107,8 +108,23 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            InterfaceModule module = new InterfaceModule();
+            module.Domain = this.Domain;
+            module.Address = "RF";
+            module.ModuleType = ModuleTypes.Sensor;
+            modules.Add(module);
+            return modules;
+        }
+
         public bool Connect()
         {
+            w800Rf32.PortName = this.GetOption("Port").Value;
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return w800Rf32.Connect();
         }
 
@@ -128,32 +144,12 @@ namespace MIG.Interfaces.HomeAutomation
             return present;
         }
 
-        public void WaitOnPending()
-        {
-
-        }
-
         public object InterfaceControl(MIGInterfaceCommand request)
         {
             return "";
         }
 
         #endregion
-
-
-        public string GetPortName()
-        {
-            return portName;
-        }
-
-        public void SetPortName(string portname)
-        {
-            if (w800Rf32 != null)
-            {
-                portName = portname;
-                w800Rf32.PortName = portName;
-            }
-        }
 
 
     }

@@ -164,6 +164,18 @@ HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
         }
     });
 };
+
+HG.Configure.MIG = HG.Configure.MIG || {};
+HG.Configure.MIG.InterfaceCommand = function (domain, command, option1, option2, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/MIGService.Interfaces/' + domain + '/' + command + '/' + option1 + '/' + option2 + '/' + (new Date().getTime()), function (data) {
+    	var res = '';
+    	try {
+    		res = eval(data)[0];
+    		if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+    	} catch (e) { }
+    	if (callback) callback(res);
+    });
+};
 //
 // namespace : HG.Configure.Modules namespace
 // info      : -

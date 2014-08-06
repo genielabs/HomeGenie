@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+07/08/2014 1.00 beta rev 407
+	- Fixed current house code reset on plc receive
+	- Moved to MIG project some MIG specific code that was present in Homegenie
+
 05/08/2014 1.00 beta rev 406
 	- Added preliminary support for Insteon PLM 2413 (serial and usb)
 	- Fixed ZWaveLib "node add" and "node remove" functions

@@ -604,7 +604,7 @@ namespace HomeGenie.Service
                 bool configChanged = false;
                 foreach (var iface in config.MIGService.Interfaces)
                 {
-                    if (homegenie.SystemConfiguration.GetInterface(iface.Domain) == null)
+                    if (homegenie.SystemConfiguration.MIGService.GetInterface(iface.Domain) == null)
                     {
                         LogMessage("+ Adding MIG Interface: " + iface.Domain);
                         homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);

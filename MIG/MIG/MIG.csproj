@@ -77,6 +77,7 @@
     <Compile Include="Interfaces\HomeAutomation\W800RF.cs" />
     <Compile Include="Interfaces\HomeAutomation\ModuleParameters.cs" />
     <Compile Include="Interfaces\HomeAutomation\Insteon.cs" />
+    <Compile Include="MIGServiceConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gateways\ProtocolAdapters\OSC\" />

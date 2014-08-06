@@ -23,6 +23,7 @@
 using System;
 
 using MIG.Interfaces.HomeAutomation.Commons;
+using System.Collections.Generic;
 
 namespace MIG.Interfaces.HomeAutomation
 {
@@ -47,6 +48,8 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
         #region MIG Interface members
+
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
 
         /// <summary>
         /// This event must be arisen whenever an interface property changed.
@@ -97,13 +100,27 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            return modules;
+        }
 
         /// <summary>
         /// Connect to the automation interface/controller device.
         /// </summary>
         public bool Connect()
         {
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return true;
         }
         /// <summary>
@@ -131,38 +148,6 @@ namespace MIG.Interfaces.HomeAutomation
         {
             // eg. check against libusb for device presence by vendorId and productId
             return true;
-        }
-
-
-        /* I deprecate this
-        /// <summary>
-        /// Handles the webservice gateway client requests.
-        /// This function is automatically invoked by
-        /// the MIG WebService Gateway.
-        /// Don't modify it. It is just an entry point. 
-        /// You'll be modifying the other function called "InterfaceControl"
-        /// instead, described later.
-        /// </summary>
-        /// <returns>
-        /// optional string reply to the client (usually xml encoded).
-        /// </returns>
-        /// <param name='request'>
-        /// Request.
-        /// </param>
-        public string HandleGatewayClientRequest (string request)
-        {
-            string returnvalue = InterfaceControl (request);
-            return returnvalue;
-        }*/
-
-        /// <summary>
-        /// This method is used by ProgramEngine to synchronize with
-        /// asyncronously executed commands.
-        /// You can ignore this if commands to interface device are already executed synchronously
-        /// </summary>
-        public void WaitOnPending()
-        {
-            // Pause the thread until all issued interface commands are effectively completed. 
         }
 
         /// <summary>

@@ -166,6 +166,7 @@ namespace MIG.Interfaces.Media
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         /// <summary>
@@ -186,6 +187,28 @@ namespace MIG.Interfaces.Media
         }
 
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+
+            InterfaceModule module = new InterfaceModule();
+            module.Domain = this.Domain;
+            module.Address = "AV0";
+            module.Description = "Video 4 Linux Video Input";
+            module.ModuleType = MIG.ModuleTypes.Sensor;
+            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                Domain = this.Domain,
+                SourceId = module.Address,
+                SourceType = "Camera Input",
+                Path = "Widget.DisplayModule",
+                Value = "homegenie/generic/camerainput"
+            });
+            modules.Add(module);
+
+            return modules;
+        }
 
         /// <summary>
         /// Connect to the automation interface/controller device.
@@ -196,7 +219,14 @@ namespace MIG.Interfaces.Media
             {
                 Disconnect();
             }
+            /*SetVideoInput(
+                this.GetOption("Device"),
+                this.GetOption("Width"),
+                this.GetOption("Height"),
+                this.GetOption("Fps")
+            );*/
             cameraSource = CameraCaptureV4LInterop.OpenCameraStream(videoInput.Device, videoInput.Width, videoInput.Height, videoInput.Fps);
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return (cameraSource != IntPtr.Zero);
         }
         /// <summary>
@@ -228,17 +258,6 @@ namespace MIG.Interfaces.Media
         {
             // eg. check against libusb for device presence by vendorId and productId
             return true;
-        }
-
-
-        /// <summary>
-        /// This method is used by ProgramEngine to synchronize with
-        /// asyncronously executed commands.
-        /// You can ignore this if commands to interface device are already executed synchronously
-        /// </summary>
-        public void WaitOnPending()
-        {
-            // Pause the thread until all issued interface commands are effectively completed. 
         }
 
         public object InterfaceControl(MIGInterfaceCommand request)

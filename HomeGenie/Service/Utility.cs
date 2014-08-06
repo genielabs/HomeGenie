@@ -111,7 +111,7 @@ namespace HomeGenie.Service
     {
         public static string GetSimpleResponse(string value)
         {
-            return "[{ ResponseValue : '" + value + "' }]";
+            return "[{ \"ResponseValue\" : \"" + Uri.EscapeDataString(value) + "\" }]";
         }
     }
 

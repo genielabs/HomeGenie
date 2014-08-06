@@ -43,36 +43,36 @@ namespace MIG.Interfaces.Protocols
 
 
         #region Implemented MIG Commands
+
         // typesafe enum
         public sealed class Command : GatewayCommand
         {
 
-            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>()
-            {
-                {701, "Control.On"},
-                {702, "Control.Off"},
-                {705, "Control.Level"},
-                {706, "Control.Toggle"},
+            public static Dictionary<int, string> CommandsList = new Dictionary<int, string>() {
+                { 701, "Control.On" },
+                { 702, "Control.Off" },
+                { 705, "Control.Level" },
+                { 706, "Control.Toggle" },
 
-                {801, "AvMedia.Browse"},
-                {802, "AvMedia.GetUri"},
-                {803, "AvMedia.SetUri"},
-                {804, "AvMedia.GetTransportInfo"},
-                {805, "AvMedia.GetMediaInfo"},
-                {806, "AvMedia.GetPositionInfo"},
+                { 801, "AvMedia.Browse" },
+                { 802, "AvMedia.GetUri" },
+                { 803, "AvMedia.SetUri" },
+                { 804, "AvMedia.GetTransportInfo" },
+                { 805, "AvMedia.GetMediaInfo" },
+                { 806, "AvMedia.GetPositionInfo" },
 
-                {807, "AvMedia.Play"},
-                {808, "AvMedia.Pause"},
-                {809, "AvMedia.Stop"},
+                { 807, "AvMedia.Play" },
+                { 808, "AvMedia.Pause" },
+                { 809, "AvMedia.Stop" },
 
-                {810, "AvMedia.Previous"},
-                {811, "AvMedia.Next"},
-                {812, "AvMedia.SetNext"},
+                { 810, "AvMedia.Previous" },
+                { 811, "AvMedia.Next" },
+                { 812, "AvMedia.SetNext" },
 
-                {813, "AvMedia.GetMute"},
-                {814, "AvMedia.SetMute"},
-                {815, "AvMedia.GetVolume"},
-                {816, "AvMedia.SetVolume"},
+                { 813, "AvMedia.GetMute" },
+                { 814, "AvMedia.SetMute" },
+                { 815, "AvMedia.GetVolume" },
+                { 816, "AvMedia.SetVolume" },
 
             };
 
@@ -140,7 +140,9 @@ namespace MIG.Interfaces.Protocols
             {
                 if (CommandsList.ContainsValue(str))
                 {
-                    var cmd = from c in CommandsList where c.Value == str select c.Key;
+                    var cmd = from c in CommandsList
+                                             where c.Value == str
+                                             select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -148,15 +150,18 @@ namespace MIG.Interfaces.Protocols
                     throw new InvalidCastException();
                 }
             }
+
             public static bool operator ==(Command a, Command b)
             {
                 return a.value == b.value;
             }
+
             public static bool operator !=(Command a, Command b)
             {
                 return a.value != b.value;
             }
         }
+
         #endregion
 
 
@@ -171,6 +176,7 @@ namespace MIG.Interfaces.Protocols
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -183,9 +189,193 @@ namespace MIG.Interfaces.Protocols
             }
         }
 
-        public void WaitOnPending()
-        {
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+
+            for (int d = 0; d < this.UpnpControlPoint.DeviceTable.Count; d++)
+            {
+                var device = (UPnPDevice)(this.UpnpControlPoint.DeviceTable[d]);
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = device.UniqueDeviceName;
+                module.Description = device.FriendlyName + " (" + device.ModelName + ")";
+                module.ModuleType = MIG.ModuleTypes.Sensor;
+                if (device.StandardDeviceType == "MediaRenderer")
+                {
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "UPnP.DeviceType",
+                        Value = device.StandardDeviceType
+                    });
+                    module.ModuleType = MIG.ModuleTypes.MediaReceiver;
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "Widget.DisplayModule",
+                        Value = "homegenie/generic/mediareceiver"
+                    });
+                }
+                else if (device.StandardDeviceType == "MediaServer")
+                {
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "Widget.DisplayModule",
+                        Value = "homegenie/generic/mediaserver"
+                    });
+                }
+                else if (device.StandardDeviceType == "SwitchPower")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Switch;
+                }
+                else if (device.StandardDeviceType == "BinaryLight")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Light;
+                }
+                else if (device.StandardDeviceType == "DimmableLight")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Dimmer;
+                }
+                else if (device.HasPresentation)
+                {
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "Widget.DisplayModule",
+                        Value = "homegenie/generic/link"
+                    });
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "FavouritesLink.Url",
+                        Value = device.PresentationURL
+                    });
+                }
+
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.DeviceURN",
+                    Value = device.DeviceURN
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.DeviceURN_Prefix",
+                    Value = device.DeviceURN_Prefix
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.FriendlyName",
+                    Value = device.FriendlyName
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.LocationURL",
+                    Value = device.LocationURL
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.Version",
+                    Value = device.Major + "." + device.Minor
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.ModelName",
+                    Value = device.ModelName
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.ModelNumber",
+                    Value = device.ModelNumber
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.ModelDescription",
+                    Value = device.ModelDescription
+                });
+
+                if (device.ModelURL != null)
+                {
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + device.FriendlyName,
+                        Path = "UPnP.ModelURL",
+                        Value = device.ModelURL.ToString()
+                    });
+                }
+
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.Manufacturer",
+                    Value = device.Manufacturer
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.ManufacturerURL",
+                    Value = device.ManufacturerURL
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.PresentationURL",
+                    Value = device.PresentationURL
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.UniqueDeviceName",
+                    Value = device.UniqueDeviceName
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.SerialNumber",
+                    Value = device.SerialNumber
+                });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.StandardDeviceType",
+                    Value = device.StandardDeviceType
+                });
+
+                modules.Add(module);
+            }
+
+            return modules;
         }
 
         public bool IsConnected
@@ -201,6 +391,7 @@ namespace MIG.Interfaces.Protocols
                 controPoint.OnAddedDevice += controPoint_OnAddedDevice;
                 isConnected = true;
             }
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
             return true;
 
         }
@@ -240,8 +431,8 @@ namespace MIG.Interfaces.Protocols
                 bool commandValue = (request.Command == Command.CONTROL_ON ? true : false);
                 var newValue = new UPnPArgument("newTargetValue", commandValue);
                 var args = new UPnPArgument[] { 
-                                    newValue
-                                };
+                    newValue
+                };
                 InvokeUpnpDeviceService(device, "SwitchPower", "SetTarget", args);
                 //
                 raisePropertyChanged = true;
@@ -252,8 +443,8 @@ namespace MIG.Interfaces.Protocols
             {
                 var newvalue = new UPnPArgument("NewLoadLevelTarget", (byte)uint.Parse(request.GetOption(0)));
                 var args = new UPnPArgument[] { 
-                                    newvalue
-                                };
+                    newvalue
+                };
                 InvokeUpnpDeviceService(device, "Dimming", "SetLoadLevelTarget", args);
                 //
                 raisePropertyChanged = true;
@@ -271,7 +462,10 @@ namespace MIG.Interfaces.Protocols
                 //
                 var objectId = new UPnPArgument("ObjectID", id);
                 var flags = new UPnPArgument("BrowseFlag", "BrowseMetadata");
-                var filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
+                var filter = new UPnPArgument(
+                                 "Filter",
+                                 "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri"
+                             );
                 var startIndex = new UPnPArgument("StartingIndex", (uint)0);
                 var requestedCount = new UPnPArgument("RequestedCount", (uint)1);
                 var sortCriteria = new UPnPArgument("SortCriteria", "");
@@ -309,7 +503,9 @@ namespace MIG.Interfaces.Protocols
                         }
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
             }
             else if (request.Command == Command.AVMEDIA_BROWSE)
@@ -319,7 +515,10 @@ namespace MIG.Interfaces.Protocols
                 //
                 var objectId = new UPnPArgument("ObjectID", id);
                 var flags = new UPnPArgument("BrowseFlag", "BrowseDirectChildren");
-                var filter = new UPnPArgument("Filter", "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri");
+                var filter = new UPnPArgument(
+                                 "Filter",
+                                 "upnp:album,upnp:artist,upnp:genre,upnp:title,res@size,res@duration,res@bitrate,res@sampleFrequency,res@bitsPerSample,res@nrAudioChannels,res@protocolInfo,res@protection,res@importUri"
+                             );
                 var startIndex = new UPnPArgument("StartingIndex", (uint)0);
                 var requestedCount = new UPnPArgument("RequestedCount", (uint)0);
                 var sortCriteria = new UPnPArgument("SortCriteria", "");
@@ -359,7 +558,9 @@ namespace MIG.Interfaces.Protocols
                     //
                     returnValue = jsonres;
                 }
-                catch { }
+                catch
+                {
+                }
 
             }
             else if (request.Command == Command.AVMEDIA_GETTRANSPORTINFO)
@@ -369,11 +570,11 @@ namespace MIG.Interfaces.Protocols
                 var transportStatus = new UPnPArgument("CurrentTransportStatus", "");
                 var currentSpeed = new UPnPArgument("CurrentSpeed", "");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    transportState,
-                                    transportStatus,
-                                    currentSpeed
-                                };
+                    instanceId,
+                    transportState,
+                    transportStatus,
+                    currentSpeed
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "GetTransportInfo", args);
                 //
                 string jsonres = "[{ ";
@@ -397,17 +598,17 @@ namespace MIG.Interfaces.Protocols
                 var recordMedium = new UPnPArgument("RecordMedium", "");
                 var writeStatus = new UPnPArgument("WriteStatus", "");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    nrTracks,
-                                    mediaDuration,
-                                    currentUri,
-                                    currentUriMetadata,
-                                    nextUri,
-                                    nextUriMetadata,
-                                    playMedium,
-                                    recordMedium,
-                                    writeStatus
-                                };
+                    instanceId,
+                    nrTracks,
+                    mediaDuration,
+                    currentUri,
+                    currentUriMetadata,
+                    nextUri,
+                    nextUriMetadata,
+                    playMedium,
+                    recordMedium,
+                    writeStatus
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "GetMediaInfo", args);
                 //
                 string jsonres = "[{ ";
@@ -436,16 +637,16 @@ namespace MIG.Interfaces.Protocols
                 var relativeCount = new UPnPArgument("RelCount", (uint)0);
                 var absoluteCount = new UPnPArgument("AbsCount", (uint)0);
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    currentTrack,
-                                    trackDuration,
-                                    trackMetadata,
-                                    trackUri,
-                                    relativeTime,
-                                    absoluteTime,
-                                    relativeCount,
-                                    absoluteCount
-                                };
+                    instanceId,
+                    currentTrack,
+                    trackDuration,
+                    trackMetadata,
+                    trackUri,
+                    relativeTime,
+                    absoluteTime,
+                    relativeCount,
+                    absoluteCount
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "GetPositionInfo", args);
                 //
                 string jsonres = "[{";
@@ -467,10 +668,10 @@ namespace MIG.Interfaces.Protocols
                 var currentUri = new UPnPArgument("CurrentURI", request.GetOption(0));
                 var uriMetadata = new UPnPArgument("CurrentURIMetaData", "");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    currentUri,
-                                    uriMetadata
-                                };
+                    instanceId,
+                    currentUri,
+                    uriMetadata
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "SetAVTransportURI", args);
             }
             else if (request.Command == Command.AVMEDIA_PLAY)
@@ -478,41 +679,41 @@ namespace MIG.Interfaces.Protocols
                 var instanceId = new UPnPArgument("InstanceID", (uint)0);
                 var speed = new UPnPArgument("Speed", "1");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    speed
-                                };
+                    instanceId,
+                    speed
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "Play", args);
             }
             else if (request.Command == Command.AVMEDIA_PAUSE)
             {
                 var instanceId = new UPnPArgument("InstanceID", (uint)0);
                 var args = new UPnPArgument[] { 
-                                    instanceId
-                                };
+                    instanceId
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "Pause", args);
             }
             else if (request.Command == Command.AVMEDIA_STOP)
             {
                 var instanceId = new UPnPArgument("InstanceID", (uint)0);
                 var args = new UPnPArgument[] { 
-                                    instanceId
-                                };
+                    instanceId
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "Stop", args);
             }
             else if (request.Command == Command.AVMEDIA_PREVIOUS)
             {
                 var instanceId = new UPnPArgument("InstanceID", (uint)0);
                 var args = new UPnPArgument[] { 
-                                    instanceId
-                                };
+                    instanceId
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "Previous", args);
             }
             else if (request.Command == Command.AVMEDIA_NEXT)
             {
                 var instanceId = new UPnPArgument("InstanceID", (uint)0);
                 var args = new UPnPArgument[] { 
-                                    instanceId
-                                };
+                    instanceId
+                };
                 InvokeUpnpDeviceService(device, "AVTransport", "Next", args);
             }
             else if (request.Command == Command.AVMEDIA_SETNEXT)
@@ -524,10 +725,10 @@ namespace MIG.Interfaces.Protocols
                 var channel = new UPnPArgument("Channel", "Master");
                 var currentMute = new UPnPArgument("CurrentMute", "");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    channel,
-                                    currentMute
-                                };
+                    instanceId,
+                    channel,
+                    currentMute
+                };
                 InvokeUpnpDeviceService(device, "RenderingControl", "GetMute", args);
                 returnValue = currentMute.DataValue.ToString();
             }
@@ -537,10 +738,10 @@ namespace MIG.Interfaces.Protocols
                 var channel = new UPnPArgument("Channel", "Master");
                 var mute = new UPnPArgument("DesiredMute", request.GetOption(0) == "1" ? true : false);
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    channel,
-                                    mute
-                                };
+                    instanceId,
+                    channel,
+                    mute
+                };
                 InvokeUpnpDeviceService(device, "RenderingControl", "SetMute", args);
             }
             else if (request.Command == Command.AVMEDIA_GETVOLUME)
@@ -549,10 +750,10 @@ namespace MIG.Interfaces.Protocols
                 var channel = new UPnPArgument("Channel", "Master");
                 var currentVolume = new UPnPArgument("CurrentVolume", "");
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    channel,
-                                    currentVolume
-                                };
+                    instanceId,
+                    channel,
+                    currentVolume
+                };
                 InvokeUpnpDeviceService(device, "RenderingControl", "GetVolume", args);
                 returnValue = currentVolume.DataValue.ToString();
             }
@@ -562,10 +763,10 @@ namespace MIG.Interfaces.Protocols
                 var channel = new UPnPArgument("Channel", "Master");
                 var volume = new UPnPArgument("DesiredVolume", UInt16.Parse(request.GetOption(0)));
                 var args = new UPnPArgument[] { 
-                                    instanceId,
-                                    channel,
-                                    volume
-                                };
+                    instanceId,
+                    channel,
+                    volume
+                };
                 InvokeUpnpDeviceService(device, "RenderingControl", "SetVolume", args);
             }
 
@@ -575,9 +776,17 @@ namespace MIG.Interfaces.Protocols
             {
                 try
                 {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = device.UniqueDeviceName, SourceType = "UPnP " + (device != null ? device.StandardDeviceType : "device"), Path = parameterPath, Value = raiseParameter });
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = device.UniqueDeviceName,
+                        SourceType = "UPnP " + (device != null ? device.StandardDeviceType : "device"),
+                        Path = parameterPath,
+                        Value = raiseParameter
+                    });
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
 
@@ -595,7 +804,18 @@ namespace MIG.Interfaces.Protocols
             get { return controPoint; }
         }
 
-        public void CreateLocalDevice(string deviceGuid, string deviceType, string presentationUrl, string rootDirectory, string modelName, string modelDescription, string modelUrl, string modelNumber, string manufacturer, string manufacturerUrl)
+        public void CreateLocalDevice(
+            string deviceGuid,
+            string deviceType,
+            string presentationUrl,
+            string rootDirectory,
+            string modelName,
+            string modelDescription,
+            string modelUrl,
+            string modelNumber,
+            string manufacturer,
+            string manufacturerUrl
+        )
         {
             if (localDevice != null)
             {
@@ -656,7 +876,12 @@ namespace MIG.Interfaces.Protocols
             return device;
         }
 
-        private void InvokeUpnpDeviceService(UPnPDevice device, string serviceId, string methodName, params UPnPArgument[] args)
+        private void InvokeUpnpDeviceService(
+            UPnPDevice device,
+            string serviceId,
+            string methodName,
+            params UPnPArgument[] args
+        )
         {
             foreach (UPnPService s in device.Services)
             {
@@ -675,8 +900,15 @@ namespace MIG.Interfaces.Protocols
                 //{
                 //    s.Subscribe(1000, new UPnPService.UPnPEventSubscribeHandler(_subscribe_sink));
                 //}
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() { Domain = this.Domain, SourceId = device.UniqueDeviceName, SourceType = "UPnP " + device.FriendlyName, Path = "UPnP.DeviceType", Value = device.StandardDeviceType });
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = device.UniqueDeviceName,
+                    SourceType = "UPnP " + device.FriendlyName,
+                    Path = "UPnP.DeviceType",
+                    Value = device.StandardDeviceType
+                });
             }
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
         }
 
         //        private void _subscribe_sink(UPnPService sender, bool SubscribeOK)
@@ -708,7 +940,7 @@ namespace MIG.Interfaces.Protocols
 
 
 
-    // original code from 
+    // original code from
     // https://code.google.com/p/phanfare-tools/
     // http://phanfare-tools.googlecode.com/svn/trunk/Phanfare.MediaServer/UPnP/Intel/UPNP/UPnPInternalSmartControlPoint.cs
 
@@ -726,7 +958,8 @@ namespace MIG.Interfaces.Protocols
         private WeakEvent OnDeviceExpiredEvent = new WeakEvent();
         private WeakEvent OnRemovedDeviceEvent = new WeakEvent();
         private WeakEvent OnUpdatedDeviceEvent = new WeakEvent();
-        private string searchFilter = "upnp:rootdevice"; //"ssdp:all"; //
+        private string searchFilter = "upnp:rootdevice";
+        //"ssdp:all"; //
 
 
         public ArrayList DeviceTable
@@ -800,7 +1033,11 @@ namespace MIG.Interfaces.Protocols
             //Console.WriteLine("UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "]");
             if (!this.deviceTable.Contains(device.UniqueDeviceName))
             {
-                EventLogger.Log(this, EventLogEntryType.Error, "UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "] in xml but not in SSDP");
+                EventLogger.Log(
+                    this,
+                    EventLogEntryType.Error,
+                    "UPnPDevice[" + device.FriendlyName + "]@" + device.LocationURL + " advertised UDN[" + device.UniqueDeviceName + "] in xml but not in SSDP"
+                );
             }
             else
             {
@@ -809,7 +1046,11 @@ namespace MIG.Interfaces.Protocols
                     DeviceInfo info2 = (DeviceInfo)this.deviceTable[device.UniqueDeviceName];
                     if (info2.Device != null)
                     {
-                        EventLogger.Log(this, EventLogEntryType.Information, "Unexpected UPnP Device Creation: " + device.FriendlyName + "@" + device.LocationURL);
+                        EventLogger.Log(
+                            this,
+                            EventLogEntryType.Information,
+                            "Unexpected UPnP Device Creation: " + device.FriendlyName + "@" + device.LocationURL
+                        );
                         return;
                     }
                     DeviceInfo info = (DeviceInfo)this.deviceTable[device.UniqueDeviceName];
@@ -950,7 +1191,16 @@ namespace MIG.Interfaces.Protocols
             this.genericControlPoint.FindDeviceAsync(searchFilter);
         }
 
-        internal void SSDPNotifySink(IPEndPoint source, IPEndPoint local, Uri LocationURL, bool IsAlive, string USN, string SearchTarget, int MaxAge, HTTPMessage Packet)
+        internal void SSDPNotifySink(
+            IPEndPoint source,
+            IPEndPoint local,
+            Uri LocationURL,
+            bool IsAlive,
+            string USN,
+            string SearchTarget,
+            int MaxAge,
+            HTTPMessage Packet
+        )
         {
             UPnPDevice device = null;
             if (SearchTarget == searchFilter)
@@ -1041,11 +1291,20 @@ namespace MIG.Interfaces.Protocols
                 this.deviceUpdateClock.Remove(info);
                 this.activeDeviceList.Remove(device);
             }
-            catch { }
+            catch
+            {
+            }
             return device;
         }
 
-        private void UPnPControlPointSearchSink(IPEndPoint source, IPEndPoint local, Uri LocationURL, string USN, string SearchTarget, int MaxAge)
+        private void UPnPControlPointSearchSink(
+            IPEndPoint source,
+            IPEndPoint local,
+            Uri LocationURL,
+            string USN,
+            string SearchTarget,
+            int MaxAge
+        )
         {
             lock (this.deviceTableLock)
             {

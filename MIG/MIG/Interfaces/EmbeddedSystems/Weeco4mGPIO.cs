@@ -242,6 +242,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
 
@@ -255,8 +256,57 @@ namespace MIG.Interfaces.EmbeddedSystems
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+
+            foreach (var rv in RegPins)
+            {
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.ModuleType = MIG.ModuleTypes.Sensor;
+                module.Address = rv.Key;
+                module.Description = "Weeco-4M Register";
+                modules.Add(module);
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = module.Domain,
+                    SourceId = module.Address,
+                    SourceType = module.Description,
+                    Path = "Status.Level",
+                    Value = rv.Value
+                });
+            }
+
+            // digital in/out
+            foreach (var rv in GpioPins)
+            {
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = rv.Key;
+                module.Description = "Weeco-4M GPIO";
+                module.ModuleType = MIG.ModuleTypes.Switch;
+                modules.Add(module);
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = module.Domain,
+                    SourceId = module.Address,
+                    SourceType = module.Description,
+                    Path = "Status.Level",
+                    Value = (rv.Value ? "1" : "0")
+                });
+            }
+
+            return modules;
+        }
+
         public bool Connect()
         {
+            uint inputPin = uint.Parse(this.GetOption("InputPin").Value);
+            double pulsePerWatt = double.Parse(this.GetOption("PulsePerWatt").Value);
+            SetInputPin(inputPin);
+            SetPulsePerWatt(pulsePerWatt);
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return isConnected;
         }
 
@@ -273,10 +323,6 @@ namespace MIG.Interfaces.EmbeddedSystems
         public bool IsConnected
         {
             get { return isConnected; }
-        }
-
-        public void WaitOnPending()
-        {
         }
 
         public void SetInputPin(uint pin)

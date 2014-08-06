@@ -210,34 +210,17 @@ namespace MIG.Interfaces.HomeAutomation
 
         private ZWavePort zwavePort;
         private Controller controller;
-        private string portName = "";
 
         private byte lastRemovedNode = 0;
         private byte lastAddedNode = 0;
 
         public ZWave()
         {
-            var os = Environment.OSVersion;
-            var platformId = os.Platform;
-            ////
-            //switch (platformId)
-            //{
-            //    case PlatformID.Win32NT:
-            //    case PlatformID.Win32S:
-            //    case PlatformID.Win32Windows:
-            //    case PlatformID.WinCE:
-            //        portName = "COM7";
-            //        break;
-            //    case PlatformID.Unix:
-            //    case PlatformID.MacOSX:
-            //    default:
-            //        portName = "/dev/ttyUSB0";
-            //        break;
-            //}
         }
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -250,6 +233,65 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            if (controller != null)
+            {
+                foreach (var node in controller.Devices)
+                {
+                    if (node.NodeId == 0x01) // zwave controller id
+                        continue;
+                    //
+                    // add new module
+                    InterfaceModule module = new InterfaceModule();
+                    module.Domain = this.Domain;
+                    module.Address = node.NodeId.ToString();
+                    //module.Description = "ZWave Node";
+                    module.ModuleType = ModuleTypes.Generic;
+                    if (node.GenericClass != 0x00)
+                    {
+                        switch (node.GenericClass)
+                        {
+                        case 0x10: // BINARY SWITCH
+                            module.Description = "ZWave Switch";
+                            module.ModuleType = ModuleTypes.Switch;
+                            break;
+
+                        case 0x11: // MULTILEVEL SWITCH (DIMMER)
+                            module.Description = "ZWave Multilevel Switch";
+                            module.ModuleType = ModuleTypes.Dimmer;
+                            break;
+
+                        case 0x08: // THERMOSTAT
+                            module.Description = "ZWave Thermostat";
+                            module.ModuleType = ModuleTypes.Thermostat;
+                            break;
+
+                        case 0x20: // BINARY SENSOR
+                            module.Description = "ZWave Sensor";
+                            module.ModuleType = ModuleTypes.Sensor;
+                            break;
+
+                        case 0x21: // MULTI-LEVEL SENSOR
+                            module.Description = "ZWave Multilevel Sensor";
+                            module.ModuleType = ModuleTypes.Sensor;
+                            break;
+
+                        case 0x31: // METER
+                            module.Description = "ZWave Meter";
+                            module.ModuleType = ModuleTypes.Sensor;
+                            break;
+                        }
+                    }
+                    modules.Add(module);
+                }
+            }
+            return modules;
+        }
+
         public bool IsConnected
         {
             get
@@ -257,11 +299,6 @@ namespace MIG.Interfaces.HomeAutomation
                 if (zwavePort != null) return zwavePort.IsConnected;
                 else return false;
             }
-        }
-
-        public void WaitOnPending()
-        {
-
         }
 
         public object InterfaceControl(MIGInterfaceCommand request)
@@ -414,7 +451,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.NODEINFO_GET)
                 {
-                    ZWaveController.GetNodeInformationFrame((byte)int.Parse(nodeId));
+                    controller.GetNodeInformationFrame((byte)int.Parse(nodeId));
                 }
                 ////-----------------------
                 else if (command == Command.BATTERY_GET)
@@ -631,6 +668,7 @@ namespace MIG.Interfaces.HomeAutomation
             catch
             {
             }
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
             //
             return success;
         }
@@ -680,26 +718,6 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-
-        public Controller ZWaveController
-        {
-            get { return controller; }
-        }
-
-
-        public string GetPortName()
-        {
-            return portName;
-        }
-
-        public void SetPortName(string name)
-        {
-            portName = name;
-            Disconnect();
-            //Connect();
-        }
-
-
         public void Dispose()
         {
 
@@ -739,7 +757,7 @@ namespace MIG.Interfaces.HomeAutomation
                 controller.UpdateNodeParameter += controller_UpdateNodeParameter;
                 controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
-            zwavePort.PortName = portName;
+            zwavePort.PortName = this.GetOption("Port").Value;
         }
 
         private void UnloadZwavePort()
@@ -780,17 +798,62 @@ namespace MIG.Interfaces.HomeAutomation
         }
         */
 
+        // fired either at startup time and after a new z-wave node has been added to the controller
         private void DiscoveryEvent(object sender, DiscoveryEventArgs e)
         {
-            //ZWaveNode node = _controller.GetDevice(e.NodeId);
-            //
-            if (e.Status == DISCOVERY_STATUS.NODE_REMOVED)
+            switch (e.Status)
             {
-                lastRemovedNode = e.NodeId;
-            }
-            else if (e.Status == DISCOVERY_STATUS.NODE_ADDED)
-            {
+            case DISCOVERY_STATUS.DISCOVERY_START:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Discovery Started"
+                });
+                break;
+            case DISCOVERY_STATUS.DISCOVERY_END:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Discovery Complete"
+                });
+                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                break;
+            case DISCOVERY_STATUS.NODE_ADDED:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Added node " + e.NodeId
+                });
                 lastAddedNode = e.NodeId;
+                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                break;
+            case DISCOVERY_STATUS.NODE_UPDATED:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Updated node " + e.NodeId
+                });
+                //if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                break;
+            case DISCOVERY_STATUS.NODE_REMOVED:
+                lastRemovedNode = e.NodeId;
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Removed node " + e.NodeId
+                });
+                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                break;
             }
         }
 
@@ -805,7 +868,6 @@ namespace MIG.Interfaces.HomeAutomation
                 path = ModuleParameters.MODPAR_METER_WATTS;
                 break;
             case ParameterType.PARAMETER_BATTERY:
-                    //
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = upargs.NodeId.ToString(),
@@ -813,7 +875,6 @@ namespace MIG.Interfaces.HomeAutomation
                     Path = "ZWaveNode.Battery",
                     Value = value
                 });
-                    //
                 path = ModuleParameters.MODPAR_STATUS_BATTERY;
                 break;
             case ParameterType.PARAMETER_NODE_INFO:
@@ -859,9 +920,9 @@ namespace MIG.Interfaces.HomeAutomation
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
                 break;
             case ParameterType.PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC:
-                    //ManufacturerSpecific mf = (ManufacturerSpecific)value;
+                ManufacturerSpecific mf = (ManufacturerSpecific)value;
                 path = "ZWaveNode.ManufacturerSpecific";
-                    //value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
+                value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
                 break;
             case ParameterType.PARAMETER_CONFIG:
                 path = "ZWaveNode.Variables." + upargs.ParameterId;
@@ -998,28 +1059,34 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        private void UpdateZWaveNodeDeviceHandler(int nodeId)
+        {
+            var node = controller.Devices.Find(zn => zn.NodeId == nodeId);
+            //if (node != null && node.DeviceHandler != null && (handler == null || handler.Value.Contains(".Generic.")))
+            //{
+            //    Utility.ModuleParameterSet(
+            //        module,
+            //        Properties.ZWAVENODE_DEVICEHANDLER,
+            //        node.DeviceHandler.GetType().FullName
+            //    );
+            //}
+            //else if (handler != null && !handler.Value.Contains(".Generic."))
+            //{
+            //    // set to last known handler
+            //    node.SetDeviceHandlerFromName(handler.Value);
+            //}
+            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                Domain = this.Domain,
+                SourceId = nodeId.ToString(),
+                SourceType = "ZWave Node",
+                Path = "ZWaveNode.DeviceHandler",
+                Value = node.DeviceHandler.GetType().FullName
+            });
+        }
+
         private void controller_ManufacturerSpecificResponse(object sender, ManufacturerSpecificResponseEventArg args)
         {
-            if (InterfacePropertyChangedAction != null)
-            {
-                try
-                {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = args.NodeId.ToString(),
-                        SourceType = "ZWave Node",
-                        Path = "ZWaveNode.ManufacturerSpecific",
-                        Value = new ManufacturerSpecific() {
-                            TypeId = args.ManufacturerSpecific.TypeId,
-                            ProductId = args.ManufacturerSpecific.ProductId,
-                            ManufacturerId = args.ManufacturerSpecific.ManufacturerId
-                        }
-                    });
-                }
-                catch
-                {
-                }
-            }
+            UpdateZWaveNodeDeviceHandler(args.NodeId);
         }
 
 

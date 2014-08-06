@@ -27,6 +27,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
+using MIG;
 using HomeGenie.Service;
 
 namespace HomeGenie.Data
@@ -70,6 +71,7 @@ namespace HomeGenie.Data
             return obj;
         }
 
+        /*
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
             MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
@@ -78,9 +80,15 @@ namespace HomeGenie.Data
 
         public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
         {
-            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return mi.Options.Find(o => o.Name == option);
+            return GetInterfaceOptions(domain).Find(o => o.Name == option);
         }
+
+        public List<MIGServiceConfiguration.Interface.Option> GetInterfaceOptions(string domain)
+        {
+            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
+            return mi.Options;
+        }
+        */
 
         public bool Update()
         {
@@ -154,39 +162,6 @@ namespace HomeGenie.Data
 
         public string EnableLogFile { get; set; }
     }
-
-    [Serializable()]
-    public class MIGServiceConfiguration
-    {
-        public string EnableWebCache { get; set; }
-
-        public List<Interface> Interfaces = new List<Interface>();
-
-        [Serializable()]
-        public class Interface
-        {
-
-            [XmlAttribute]
-            public string Domain { get; set; }
-
-            [XmlAttribute]
-            public bool IsEnabled { get; set; }
-
-            public List<Option> Options = new List<Option>();
-
-            [Serializable()]
-            public class Option
-            {
-                [XmlAttribute]
-                public string Name { get; set; }
-
-                [XmlAttribute]
-                public string Value { get; set; }
-            }
-
-        }
-    }
-
 
 }
 

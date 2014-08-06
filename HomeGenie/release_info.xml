@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r406</Version>
+  <Version>1.00 beta r407</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added preliminary support for Insteon PLM 2413 (serial and usb)
-  - Fixed ZWaveLib "node add" and "node remove" functions</ReleaseNote>
+  <ReleaseNote>	- Fixed current house code reset on plc receive
+	- Moved to MIG project some MIG specific code that was present in Homegenie</ReleaseNote>
   <ReleaseDate>2014-08-05T11:39:01.0000Z</ReleaseDate>
 </ReleaseInfo>

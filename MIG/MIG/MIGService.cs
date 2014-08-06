@@ -97,6 +97,7 @@ namespace MIG
         //public event Action<object> ServiceStopped;
 
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChanged;
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
 
         public delegate void WebServiceRequestPreProcessEventHandler(MIGClientRequest request, MIGInterfaceCommand migCmd);
         public event WebServiceRequestPreProcessEventHandler ServiceRequestPreProcess;
@@ -115,6 +116,8 @@ namespace MIG
 		// TODO: move webFileCache to WebServiceGateway.cs
         private List<WebFileCache> webFileCache = new List<WebFileCache>();
 
+        private MIGServiceConfiguration configuration;
+
         #region Lifecycle
         public MIGService()
         {
@@ -128,11 +131,49 @@ namespace MIG
             webServiceConfig = new WebServiceGatewayConfiguration()
             {
                 Port = 80,
-                SslPort = 443,
                 HomePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html"),
                 BaseUrl = "hg/html",
                 Password = ""
             };
+        }
+
+        //TODO: implement a ShutDown method that releases all interfaces and related resources
+        public MIGServiceConfiguration Configuration
+        {
+            get { return configuration; }
+            set {
+                configuration = value;
+
+                if (configuration.EnableWebCache == "true")
+                {
+                    IsWebCacheEnabled = true;
+                }
+                else
+                {
+                    IsWebCacheEnabled = false;
+                }
+                //
+                // add MIG interfaces
+                //
+                foreach (MIGServiceConfiguration.Interface iface in configuration.Interfaces)
+                {
+                    AddInterface(iface.Domain);
+                }
+                //
+                // initialize MIG interfaces
+                //
+                foreach (MIGServiceConfiguration.Interface iface in configuration.Interfaces)
+                {
+                    if (iface.IsEnabled)
+                    {
+                        EnableInterface(iface.Domain);
+                    }
+                    else
+                    {
+                        DisableInterface(iface.Domain);
+                    }
+                }
+            }
         }
 
         public bool IsInterfacePresent(string domain)
@@ -151,13 +192,37 @@ namespace MIG
 
         public void AddInterface(string domain)
         {
-            MIGInterface migInterface = null;
-            var type = Type.GetType("MIG.Interfaces." + domain);
-            migInterface = (MIGInterface)Activator.CreateInstance(type);
-            Interfaces.Add(domain, migInterface);
-            migInterface.InterfacePropertyChangedAction += new Action<InterfacePropertyChangedAction>(MigService_InterfacePropertyChanged);
+            if (!Interfaces.ContainsKey(domain))
+            {
+                MIGInterface migInterface = null;
+                var type = Type.GetType("MIG.Interfaces." + domain);
+                migInterface = (MIGInterface)Activator.CreateInstance(type);
+                Interfaces.Add(domain, migInterface);
+                migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
+                migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
+                migInterface.Options = configuration.GetInterface(domain).Options;
+            }
             //TODO: implement eventually a RemoveInterface method containing code:
+            //          migInterface.ModulesChangedAction -= MigService_ModulesChanged;
             //			mif.InterfacePropertyChangedAction -= MIGService_InterfacePropertyChangedAction;
+        }
+
+        public void EnableInterface(string domain)
+        {
+            if (Interfaces.ContainsKey(domain))
+            {
+                MIGInterface migInterface = Interfaces[domain];
+                migInterface.Connect();
+            }
+        }
+
+        public void DisableInterface(string domain)
+        {
+            if (Interfaces.ContainsKey(domain))
+            {
+                MIGInterface migInterface = Interfaces[domain];
+                migInterface.Disconnect();
+            }
         }
 
         // try to bind httpport, launch WebGateway threads, and listen to Interfaces' changes
@@ -214,6 +279,14 @@ namespace MIG
             }
         }
 
+        private void MigService_InterfaceModulesChanged(InterfaceModulesChangedAction args)
+        {
+            if (InterfaceModulesChangedAction != null)
+            {
+                InterfaceModulesChangedAction(args);
+            }
+        }
+
         #endregion
 
         #region TcpGateway
@@ -244,10 +317,9 @@ namespace MIG
 
         #region WebGateway
 
-        public void ConfigureWebGateway(int port, int sslPort, string homePath, string baseUrl, string adminPasswordHash)
+        public void ConfigureWebGateway(int port, string homePath, string baseUrl, string adminPasswordHash)
         {
             webServiceConfig.Port = port;
-            webServiceConfig.SslPort = sslPort;
             webServiceConfig.HomePath = homePath;
             webServiceConfig.BaseUrl = baseUrl.TrimStart('/');
             webServiceConfig.Password = adminPasswordHash;
@@ -289,11 +361,71 @@ namespace MIG
             };
 
             // we are expecting url in the forms http://<hgserver>/<hgservicekey>/<servicedomain>/<servicegroup>/<command>/<opt1>/.../<optn>
-            // arguments up to <command> are mandatory. CHANGED, CHECK COMMAND IMPLEMENTATION
+            // arguments up to <command> are mandatory.
             string migCommand = requestedUrl.Substring(requestedUrl.IndexOf('/', 1) + 1);
             //string section = requestedurl.Substring (0, requestedurl.IndexOf ('/', 1) - 1); TODO: "api" section keyword, ignored for now
             //TODO: implement "api" keyword in MIGInterfaceCommand?
             var command = new MIGInterfaceCommand(migCommand);
+
+
+            // MIGService namespace Web API
+            if (command.Domain == "MIGService.Interfaces")
+            {
+                context.Response.ContentType = "application/json";
+                switch (command.Command)
+                {
+                case "IsEnabled.Set":
+                    if (command.GetOption(0) == "1")
+                    {
+                        configuration.GetInterface(command.NodeId).IsEnabled = true;
+                        EnableInterface(command.NodeId);
+                    }
+                    else
+                    {
+                        configuration.GetInterface(command.NodeId).IsEnabled = false;
+                        DisableInterface(command.NodeId);
+                    }
+                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"OK\" }]");
+                    //
+                    if (InterfacePropertyChanged != null)
+                    {
+                        InterfacePropertyChanged(new InterfacePropertyChangedAction(){
+                            Domain = "MIGService.Interfaces",
+                            SourceId = command.NodeId,
+                            SourceType = "MIG Interface",
+                            Path = "Status.IsEnabled",
+                            Value = command.GetOption(0)                           
+                        });
+                    }
+                    break;
+                case "IsEnabled.Get":
+                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"" + (configuration.GetInterface(command.NodeId).IsEnabled ? "1" : "0") + "\" }]");
+                    break;
+                case "Options.Set":
+                    Interfaces[command.NodeId].SetOption(command.GetOption(0), command.GetOption(1));
+                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"OK\" }]");
+                    //
+                    if (InterfacePropertyChanged != null)
+                    {
+                        InterfacePropertyChanged(new InterfacePropertyChangedAction() {
+                            Domain = "MIGService.Interfaces",
+                            SourceId = command.NodeId,
+                            SourceType = "MIG Interface",
+                            Path = "Options." + command.GetOption(0),
+                            Value = command.GetOption(1)
+                        });
+                    }
+                    break;
+                case "Options.Get":
+                    string optionValue = Interfaces[command.NodeId].GetOption(command.GetOption(0)).Value;
+                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"" + Uri.EscapeDataString(optionValue) + "\" }]");
+                    break;
+                default:
+                    break;
+                }
+                return;
+            }
+
 
             //PREPROCESS request: if domain != html, execute command
             if (ServiceRequestPreProcess != null)

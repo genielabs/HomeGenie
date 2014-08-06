@@ -205,6 +205,7 @@ namespace MIG.Interfaces.Controllers
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         /// <summary>
@@ -224,6 +225,18 @@ namespace MIG.Interfaces.Controllers
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            InterfaceModule module = new InterfaceModule();
+            module.Domain = this.Domain;
+            module.Address = "RF";
+            module.ModuleType = ModuleTypes.Sensor;
+            modules.Add(module);
+            return modules;
+        }
 
         /// <summary>
         /// Gets a value indicating whether the interface/controller device is connected or not.
@@ -244,16 +257,6 @@ namespace MIG.Interfaces.Controllers
         {
             // eg. check against libusb for device presence by vendorId and productId
             return true;
-        }
-
-        /// <summary>
-        /// This method is used by ProgramEngine to synchronize with
-        /// asyncronously executed commands.
-        /// You can ignore this if commands to interface device are already executed synchronously
-        /// </summary>
-        public void WaitOnPending()
-        {
-            // Pause the thread until all issued interface commands are effectively completed. 
         }
 
         public bool Connect()
@@ -346,6 +349,7 @@ namespace MIG.Interfaces.Controllers
                     return false;
                 }
             }
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return true;
         }
 

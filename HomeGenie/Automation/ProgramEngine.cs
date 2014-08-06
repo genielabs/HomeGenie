@@ -771,7 +771,6 @@ namespace HomeGenie.Automation
             string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
             var interfaceCommand = new MIGInterfaceCommand(command);
             homegenie.InterfaceControl(interfaceCommand);
-            //homegenie.WaitOnPending(programCommand.Domain);
         }
 
         private void StartProgramEvaluator(ProgramBlock program)

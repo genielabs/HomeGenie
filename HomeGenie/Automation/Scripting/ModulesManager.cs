@@ -776,7 +776,6 @@ namespace HomeGenie.Automation.Scripting
             migCommand.Domain = module.Domain;
             migCommand.NodeId = module.Address;
             homegenie.InterfaceControl(migCommand);
-            //homegenie.WaitOnPending(module.Domain);
         }
     }
 }

@@ -23,11 +23,13 @@
 using System;
 
 using TUIOLib;
+using System.Collections.Generic;
 
 namespace MIG.Interfaces.MultiTouch
 {
     public class TUIO : MIGInterface
     {
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public TUIO()
@@ -47,8 +49,24 @@ namespace MIG.Interfaces.MultiTouch
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!  !!!!!!!!!!!!!!!!!!!
+            //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            return modules;
+        }
+
         public bool Connect()
         {
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return true;
         }
         public void Disconnect()
@@ -62,11 +80,6 @@ namespace MIG.Interfaces.MultiTouch
         public bool IsConnected
         {
             get { return true; }
-        }
-
-        public void WaitOnPending()
-        {
-
         }
 
         public object InterfaceControl(MIGInterfaceCommand request)

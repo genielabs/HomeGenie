@@ -143,6 +143,7 @@ namespace MIG.Interfaces.EmbeddedSystems
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -155,8 +156,28 @@ namespace MIG.Interfaces.EmbeddedSystems
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+
+            foreach (var rv in GpioPins)
+            {
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = rv.Key;
+                module.Description = "Raspberry Pi GPIO";
+                module.ModuleType = MIG.ModuleTypes.Switch;
+                modules.Add(module);
+            }
+
+            return modules;
+        }
+
         public bool Connect()
         {
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return isConnected;
         }
         public void Disconnect()
@@ -170,10 +191,6 @@ namespace MIG.Interfaces.EmbeddedSystems
         public bool IsConnected
         {
             get { return isConnected; }
-        }
-
-        public void WaitOnPending()
-        {
         }
 
         public object InterfaceControl(MIGInterfaceCommand request)

@@ -134,7 +134,6 @@ namespace MIG.Interfaces.HomeAutomation
         #endregion
 
         private XTenManager x10lib;
-        private string portName;
 
         private Timer rfPulseTimer;
         private string rfLastStringData = "";
@@ -148,6 +147,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         #region MIG Interface members
 
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
 
         public string Domain
@@ -160,8 +160,112 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+
+        public List<InterfaceModule> GetModules()
+        {
+            List<InterfaceModule> modules = new List<InterfaceModule>();
+            if (x10lib != null)
+            {
+
+                // CM-15 RF receiver
+                // TODO: this shouldn't be created for CM-11
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = "RF";
+                module.ModuleType = ModuleTypes.Sensor;
+                modules.Add(module);
+
+                foreach (var kv in x10lib.ModulesStatus)
+                {
+
+                    module = new InterfaceModule();
+                    module.Domain = this.Domain;
+                    module.Address = kv.Value.Code;
+                    module.ModuleType = ModuleTypes.Generic;
+                    module.Description = "X10 Module";
+                    modules.Add(module);
+
+                }
+
+
+                /*
+
+
+                // CM-15 RF receiver
+                // TODO: this shouldn't be created for CM-11
+                var module = systemModules.Find(delegate(Module o)
+                {
+                    return o.Domain == Domains.HomeAutomation_X10 && o.Address == "RF";
+                });
+                if (module == null)
+                {
+                    module = new Module() {
+                        Domain = Domains.HomeAutomation_X10,
+                        Address = "RF",
+                        DeviceType = MIG.ModuleTypes.Sensor
+                    };
+                    systemModules.Add(module);
+                }
+                //
+                foreach (var kv in x10Controller.ModulesStatus)
+                {
+                    module = new Module();
+                    try
+                    {
+                        module = Modules.Find(delegate(Module o)
+                        {
+                            return o.Domain == Domains.HomeAutomation_X10 && o.Address == kv.Value.Code;
+                        });
+                    }
+                    catch
+                    {
+                    }
+                    // add new module
+                    if (module == null)
+                    {
+                        module = new Module();
+                        module.Domain = Domains.HomeAutomation_X10;
+                        module.DeviceType = MIG.ModuleTypes.Generic;
+                        systemModules.Add(module);
+                    }
+                    //
+                    var parameter = module.Properties.Find(mpar => mpar.Name == ModuleParameters.MODPAR_STATUS_LEVEL);
+                    if (parameter == null)
+                    {
+                        module.Properties.Add(new ModuleParameter() {
+                            Name = ModuleParameters.MODPAR_STATUS_LEVEL,
+                            Value = ((double)kv.Value.Level).ToString()
+                        });
+                    }
+                    else if (parameter.Value != ((double)kv.Value.Level).ToString())
+                    {
+                        parameter.Value = ((double)kv.Value.Level).ToString();
+                    }
+                    module.Address = kv.Value.Code;
+                    if (module.Description == null || module.Description == "")
+                    {
+                        module.Description = "X10 Module";
+                    }
+                }
+
+
+
+                */
+
+
+
+
+
+            }
+            return modules;
+        }
+
         public bool Connect()
         {
+            x10lib.PortName = this.GetOption("Port").Value.Replace("|", "/");
+            x10lib.HouseCode = this.GetOption("HouseCodes").Value;
+            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return x10lib.Connect();
         }
 
@@ -193,69 +297,19 @@ namespace MIG.Interfaces.HomeAutomation
             return true;
         }
 
-        //TODO: deprecate this
-        public void WaitOnPending()
-        {
-            x10lib.WaitComplete();
-        }
-
         public object InterfaceControl(MIGInterfaceCommand request)
         {
+            string response = "[{ ResponseValue : 'OK' }]";
+
             string nodeId = request.NodeId;
             var command = (Command)request.Command;
             string option = request.GetOption(0);
 
-            //process command
-            #region X10HAL-commands compatibility !!! <-- DEPRECATE THIS
-
-            if (nodeId.ToUpper() == "STATUS")
-            {
-                var tmpDataItems = new List<X10Module>(x10lib.ModulesStatus.Count);
-                foreach (string key in x10lib.ModulesStatus.Keys)
-                {
-                    tmpDataItems.Add(x10lib.ModulesStatus[ key ]);
-                }
-
-                var serializer = new XmlSerializer(typeof(List<X10Module>));
-                var writer = new StringWriter();
-                var ns = new XmlSerializerNamespaces();
-                ns.Add("", "");
-                serializer.Serialize(writer, tmpDataItems, ns);
-
-                var sb = new StringBuilder();
-                sb.Append(writer.ToString());
-                //byte[] b = Encoding.UTF8.GetBytes(sb.ToString());
-                //response.ContentLength64 = b.Length;
-                //response.OutputStream.Write(b, 0, b.Length);
-                return sb.ToString();
-            }
-            else if (nodeId.ToUpper() == "CONFIG")
-            {
-                string configPath = @"C:\Program Files\ActiveHome Pro\HAL.ahx";
-                string config = "";
-                //
-                try
-                {
-                    config = System.IO.File.ReadAllText(configPath);
-                    //
-                    if (config.IndexOf("&amp;") <= 0)
-                    {
-                        config = config.Replace("&", "&amp;");
-                    }
-                    //
-                    var sb = new StringBuilder();
-                    sb.Append(config);
-                    return sb.ToString();
-                }
-                catch
-                {
-                }
-            }
-
-            #endregion
-
+            // Parse house/unit
             var houseCode = XTenLib.Utility.HouseCodeFromString(nodeId);
             var unitCode = XTenLib.Utility.UnitCodeFromString(nodeId);
+
+            // Modules control
             if (command == Command.PARAMETER_STATUS)
             {
                 x10lib.StatusRequest(houseCode, unitCode);
@@ -308,43 +362,10 @@ namespace MIG.Interfaces.HomeAutomation
             {
                 x10lib.AllUnitsOff(houseCode);
             }//
-            return "";
+            return response;
         }
 
         #endregion
-
-
-        public XTenManager X10Controller
-        {
-            get { return x10lib; }
-        }
-
-
-        public string GetPortName()
-        {
-            return portName;
-        }
-
-        public void SetPortName(string name)
-        {
-            if (x10lib != null)
-            {
-                x10lib.PortName = name;
-            }
-            portName = name;
-        }
-
-
-        public string GetHouseCodes()
-        {
-            return x10lib.HouseCode;
-        }
-
-        public void SetHouseCodes(string hcodes)
-        {
-            x10lib.HouseCode = hcodes;
-        }
-
 
         private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
         {
