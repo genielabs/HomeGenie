@@ -60,8 +60,8 @@ namespace XTenLib
         private X10CommState communicationState = X10CommState.Ready;
         private byte expectedChecksum = 0x00;
         //TODO: rename the following two as constants
-        private int commandTimeoutSeconds = 3;
-        private int commandResendMax = 2;
+        private double commandTimeoutSeconds = 1.5;
+        private int commandResendMax = 1;
         private byte[] commandLastMessage = new byte[0];
         private int commandResendAttempts = 0;
 
@@ -461,6 +461,8 @@ namespace XTenLib
                 // Wait for message delivery acknowledge
                 if (message.Length > 1 && IsConnected)
                 {
+                    //Thread.Sleep(300);
+
                     commandLastMessage = message;
                     waitAckTimestamp = DateTime.Now;
 
@@ -473,14 +475,13 @@ namespace XTenLib
                     {
                         communicationState = X10CommState.WaitingAck;
                     }
-                    Thread.Sleep(100);
 
                     while (commandResendAttempts < commandResendMax && communicationState != X10CommState.Ready)
                     {
                         var elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                         while (elapsedFromWaitAck.TotalSeconds < commandTimeoutSeconds && communicationState != X10CommState.Ready)
                         {
-                            Thread.Sleep(100);
+                            Thread.Sleep(50);
                             elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                         }
                         if (elapsedFromWaitAck.TotalSeconds >= commandTimeoutSeconds && communicationState != X10CommState.Ready)
@@ -586,7 +587,7 @@ namespace XTenLib
             string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
             var mod = moduleStatus[huc];
             // TODO: do more tests about this optimization
-            if (!addressedModules[housecode.ToString()].Contains(mod) || addressedModules[housecode.ToString()].Count > 1)
+            //if (!addressedModules[housecode.ToString()].Contains(mod) || addressedModules[housecode.ToString()].Count > 1)
             {
                 addressedModules[housecode.ToString()].Clear();
                 addressedModules[housecode.ToString()].Add(mod);

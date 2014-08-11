@@ -65,12 +65,12 @@ namespace ZWaveLib.Devices
         PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT,
         PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL,
         PARAMETER_FAN_MODE,
-		PARAMETER_FAN_STATE,
-		PARAMETER_THERMOSTAT_HEATING,
-		PARAMETER_THERMOSTAT_MODE,
-		PARAMETER_THERMOSTAT_OPERATING_STATE,
-		PARAMETER_THERMOSTAT_SETBACK,
-		PARAMETER_THERMOSTAT_SETPOINT
+        PARAMETER_FAN_STATE,
+        PARAMETER_THERMOSTAT_HEATING,
+        PARAMETER_THERMOSTAT_MODE,
+        PARAMETER_THERMOSTAT_OPERATING_STATE,
+        PARAMETER_THERMOSTAT_SETBACK,
+        PARAMETER_THERMOSTAT_SETPOINT
     }
 
     public enum ZWaveSensorAlarmParameter
@@ -112,15 +112,20 @@ namespace ZWaveLib.Devices
     public class UpdateNodeParameterEventArgs
     {
         public int NodeId { get; internal set; }
+
         public int ParameterId { get; internal set; }
+
         public ParameterType ParameterType { get; internal set; }
+
         public object Value { get; internal set; }
     }
 
     public class ManufacturerSpecific
     {
         public string ManufacturerId { get; set; }
+
         public string TypeId { get; set; }
+
         public string ProductId { get; set; }
     }
 
@@ -128,6 +133,7 @@ namespace ZWaveLib.Devices
     public class ManufacturerSpecificResponseEventArg
     {
         public int NodeId { get; internal set; }
+
         public ManufacturerSpecific ManufacturerSpecific;
     }
 
@@ -137,27 +143,29 @@ namespace ZWaveLib.Devices
         public byte NodeId { get; protected set; }
         //
         public string ManufacturerId { get; protected set; }
+
         public string TypeId { get; protected set; }
+
         public string ProductId { get; protected set; }
         //
         public byte BasicClass { get; internal set; }
+
         public byte GenericClass { get; internal set; }
+
         public byte SpecificClass { get; internal set; }
         //
         public IZWaveDeviceHandler DeviceHandler = null;
 
         public delegate void UpdateNodeParameterEventHandler(object sender, UpdateNodeParameterEventArgs upargs);
+
         public event UpdateNodeParameterEventHandler UpdateNodeParameter;
 
         public delegate void ManufacturerSpecificResponseEventHandler(object sender, ManufacturerSpecificResponseEventArg mfargs);
+
         public virtual event ManufacturerSpecificResponseEventHandler ManufacturerSpecificResponse;
 
 
-
         internal ZWavePort zwavePort;
-
-        //private object cbLock = new object();
-        //private DateTime lastManufacturerGetTs = DateTime.Now;
         private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
 
         public ZWaveNode(byte nodeId, ZWavePort zport)
@@ -220,219 +228,222 @@ namespace ZWaveLib.Devices
                 switch (commandClass)
                 {
 
-                    case (byte)CommandClass.COMMAND_CLASS_BASIC:
-                    case (byte)CommandClass.COMMAND_CLASS_ALARM:
-                    case (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY:
-                    case (byte)CommandClass.COMMAND_CLASS_SENSOR_ALARM:
-                    case (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL:
-                    case (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY:
-                    case (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL:
-                    case (byte)CommandClass.COMMAND_CLASS_SCENE_ACTIVATION:
+                case (byte)CommandClass.COMMAND_CLASS_BASIC:
+                case (byte)CommandClass.COMMAND_CLASS_ALARM:
+                case (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY:
+                case (byte)CommandClass.COMMAND_CLASS_SENSOR_ALARM:
+                case (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL:
+                case (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY:
+                case (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL:
+                case (byte)CommandClass.COMMAND_CLASS_SCENE_ACTIVATION:
 
-                        if (this.DeviceHandler != null)
+                    if (this.DeviceHandler != null)
+                    {
+                        handled = this.DeviceHandler.HandleBasicReport(receivedMessage);
+                    }
+
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_COONFIGURATION:
+
+                    if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
+                    {
+                        byte paramId = receivedMessage[9];
+                        byte paramLength = receivedMessage[10];
+                        //
+                        if (!nodeConfigParamsLength.ContainsKey(paramId))
                         {
-                            handled = this.DeviceHandler.HandleBasicReport(receivedMessage);
+                            nodeConfigParamsLength.Add(paramId, paramLength);
                         }
-
-                        break;
-
-                    case (byte)CommandClass.COMMAND_CLASS_COONFIGURATION:
-
-                        if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
+                        else
                         {
-                            byte paramId = receivedMessage[9];
-                            byte paramLength = receivedMessage[10];
-                            //
-                            if (!nodeConfigParamsLength.ContainsKey(paramId))
+                            // this shouldn't change on read... but you never know! =)
+                            nodeConfigParamsLength[paramId] = paramLength;
+                        }
+                        //
+                        byte[] bval = new byte[4];
+                        // extract bytes value
+                        Array.Copy(receivedMessage, 11, bval, 4 - (int)paramLength, (int)paramLength);
+                        uint paramval = bval[0];
+                        Array.Reverse(bval);
+                        paramval = BitConverter.ToUInt32(bval, 0);
+                        // convert it to uint
+                        //
+                        RaiseUpdateParameterEvent(this, paramId, ParameterType.PARAMETER_CONFIG, paramval);
+                        //
+                        handled = true;
+                    }
+
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_ASSOCIATION:
+
+                    if (messageLength > 12 && commandType == (byte)Command.COMMAND_ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
+                    {
+                        byte groupId = receivedMessage[9];
+                        byte maxAssociations = receivedMessage[10];
+                        byte numAssociations = receivedMessage[11]; // it is always zero ?!?
+                        string assocNodes = "";
+                        if (receivedMessage.Length > 13)
+                        {
+                            for (int a = 12; a < receivedMessage.Length - 1; a++)
                             {
-                                nodeConfigParamsLength.Add(paramId, paramLength);
+                                assocNodes += receivedMessage[a] + ",";
                             }
-                            else
-                            {
-                                // this shouldn't change on read... but you never know! =)
-                                nodeConfigParamsLength[paramId] = paramLength;
-                            }
-                            //
-                            byte[] bval = new byte[4];
-                            // extract bytes value
-                            Array.Copy(receivedMessage, 11, bval, 4 - (int)paramLength, (int)paramLength);
-                            uint paramval = bval[0];
-                            Array.Reverse(bval);
-                            paramval = BitConverter.ToUInt32(bval, 0);
-                            // convert it to uint
-                            //
-                            RaiseUpdateParameterEvent(this, paramId, ParameterType.PARAMETER_CONFIG, paramval);
-                            //
-                            handled = true;
                         }
+                        assocNodes = assocNodes.TrimEnd(',');
+                        //
+                        //_raiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_ASSOC, groupid);
+                        RaiseUpdateParameterEvent(this, 1, ParameterType.PARAMETER_ASSOC, maxAssociations);
+                        RaiseUpdateParameterEvent(this, 2, ParameterType.PARAMETER_ASSOC, numAssociations);
+                        RaiseUpdateParameterEvent(
+                            this,
+                            3,
+                            ParameterType.PARAMETER_ASSOC,
+                            groupId + ":" + assocNodes
+                        );
+                        //
+                        handled = true;
+                    }
 
-                        break;
+                    break;
 
-                    case (byte)CommandClass.COMMAND_CLASS_ASSOCIATION:
+                case (byte)CommandClass.COMMAND_CLASS_WAKE_UP:
 
-                        if (messageLength > 12 && commandType == (byte)Command.COMMAND_ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
-                        {
-                            byte groupId = receivedMessage[9];
-                            byte maxAssociations = receivedMessage[10];
-                            byte numAssociations = receivedMessage[11]; // it is always zero ?!?
-                            string assocNodes = "";
-                            if (receivedMessage.Length > 13)
-                            {
-                                for (int a = 12; a < receivedMessage.Length - 1; a++)
-                                {
-                                    assocNodes += receivedMessage[a] + ",";
-                                }
-                            }
-                            assocNodes = assocNodes.TrimEnd(',');
-                            //
-                            //_raiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_ASSOC, groupid);
-                            RaiseUpdateParameterEvent(this, 1, ParameterType.PARAMETER_ASSOC, maxAssociations);
-                            RaiseUpdateParameterEvent(this, 2, ParameterType.PARAMETER_ASSOC, numAssociations);
-                            RaiseUpdateParameterEvent(this, 3, ParameterType.PARAMETER_ASSOC, groupId + ":" + assocNodes);
-                            //
-                            handled = true;
-                        }
-
-                        break;
-
-                    case (byte)CommandClass.COMMAND_CLASS_WAKE_UP:
-
-                        if (messageLength > 11 && commandType == (byte)Command.COMMAND_WAKEUP_REPORT) // WAKE UP REPORT 0x06
-                        {
-                            uint interval = ((uint)receivedMessage[9]) << 16;
-                            interval |= (((uint)receivedMessage[10]) << 8);
-                            interval |= (uint)receivedMessage[11];
-                            //
-                            RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_INTERVAL, interval);
-                            //
-                            handled = true;
-                        }
+                    if (messageLength > 11 && commandType == (byte)Command.COMMAND_WAKEUP_REPORT) // WAKE UP REPORT 0x06
+                    {
+                        uint interval = ((uint)receivedMessage[9]) << 16;
+                        interval |= (((uint)receivedMessage[10]) << 8);
+                        interval |= (uint)receivedMessage[11];
+                        //
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_INTERVAL, interval);
+                        //
+                        handled = true;
+                    }
                         // 0x01, 0x08, 0x00, 0x04, 0x00, 0x06, 0x02, 0x84, 0x07, 0x74
                         else if (messageLength > 7 && commandType == (byte)Command.COMMAND_WAKEUP_NOTIFICATION) // AWAKE NOTIFICATION 0x07
-                        {
-                            RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_NOTIFY, 1);
-                            //
-                            handled = true;
-                        }
-
-                        break;
-
-                    case (byte)CommandClass.COMMAND_CLASS_BATTERY:
-
-                        if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
-                        {
-                            RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_BATTERY, receivedMessage[9]);
-                            //
-                            handled = true;
-                        }
-
-                        break;
-
-                    case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
-                    case (byte)CommandClass.COMMAND_CLASS_METER:
-
-                        if (messageLength > 10)
-                        {
-                            if (this.DeviceHandler != null)
-                            {
-                                handled = this.DeviceHandler.HandleMultiInstanceReport(receivedMessage);
-                            }
-                        }
-
-                        break;
-
-                    case (byte)CommandClass.COMMAND_CLASS_HAIL:
-
-                        this.Basic_Get();
+                    {
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_NOTIFY, 1);
+                        //
                         handled = true;
+                    }
 
-                        break;
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_BATTERY:
+
+                    if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
+                    {
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_BATTERY, receivedMessage[9]);
+                        //
+                        handled = true;
+                    }
+
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
+                case (byte)CommandClass.COMMAND_CLASS_METER:
+
+                    if (messageLength > 10)
+                    {
+                        if (this.DeviceHandler != null)
+                        {
+                            handled = this.DeviceHandler.HandleMultiInstanceReport(receivedMessage);
+                        }
+                    }
+
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_HAIL:
+
+                    this.Basic_Get();
+                    handled = true;
+
+                    break;
 
 
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:	
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_FAN_MODE, receivedMessage [9]);
-						handled = true;
-						break;
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:	 
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_FAN_STATE, receivedMessage [9]);
-						handled = true;
-						break;
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:	
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_HEATING, receivedMessage [9]);
-						handled = true;
-						break;
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:	
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, receivedMessage [9]);
-						handled = true;
-						break;
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:	
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE, receivedMessage [9]);
-						handled = true;
-						break;
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK:	
-						RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_SETBACK, receivedMessage [9]);
-						handled = true;
-						break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:	
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_FAN_MODE, receivedMessage[9]);
+                    handled = true;
+                    break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:	 
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_FAN_STATE, receivedMessage[9]);
+                    handled = true;
+                    break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:	
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_HEATING, receivedMessage[9]);
+                    handled = true;
+                    break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:	
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, receivedMessage[9]);
+                    handled = true;
+                    break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:	
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE, receivedMessage[9]);
+                    handled = true;
+                    break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK:	
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_SETBACK, receivedMessage[9]);
+                    handled = true;
+                    break;
 
-                        /*
+                /*
                          * 
                          * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
                             2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
                          * 
                          **/
 
-					case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:	
-						double temp = Sensor.ExtractTemperatureFromBytes(receivedMessage);
-                        RaiseUpdateParameterEvent (this, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, temp);
-						handled = true;
-						break;
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:	
+                    double temp = Sensor.ExtractTemperatureFromBytes(receivedMessage);
+                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, temp);
+                    handled = true;
+                    break;
 
-                    case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
+                case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
 
-                        if (messageLength > 14)
+                    if (messageLength > 14)
+                    {
+                        byte[] manufacturerId = new byte[2] { receivedMessage[9], receivedMessage[10] };
+                        byte[] typeId = new byte[2] { receivedMessage[11], receivedMessage[12] };
+                        byte[] productId = new byte[2] { receivedMessage[13], receivedMessage[14] };
+
+                        this.ManufacturerId = zwavePort.ByteArrayToString(manufacturerId).Replace(" ", "");
+                        this.TypeId = zwavePort.ByteArrayToString(typeId).Replace(" ", "");
+                        this.ProductId = zwavePort.ByteArrayToString(productId).Replace(" ", "");
+
+                        var manufacturerSpecs = new ManufacturerSpecific() {
+                            TypeId = zwavePort.ByteArrayToString(typeId).Replace(" ", ""),
+                            ProductId = zwavePort.ByteArrayToString(productId).Replace(" ", ""),
+                            ManufacturerId = zwavePort.ByteArrayToString(manufacturerId).Replace(" ", "")
+                        };
+                        //
+                        CheckDeviceHandler(manufacturerSpecs);
+                        //
+                        if (ManufacturerSpecificResponse != null)
                         {
-                            byte[] manufacturerId = new byte[2] { receivedMessage[9], receivedMessage[10] };
-                            byte[] typeId = new byte[2] { receivedMessage[11], receivedMessage[12] };
-                            byte[] productId = new byte[2] { receivedMessage[13], receivedMessage[14] };
-
-                            this.ManufacturerId = zwavePort.ByteArrayToString(manufacturerId).Replace(" ", "");
-                            this.TypeId = zwavePort.ByteArrayToString(typeId).Replace(" ", "");
-                            this.ProductId = zwavePort.ByteArrayToString(productId).Replace(" ", "");
-
-                            var manufacturerSpecs = new ManufacturerSpecific()
+                            try
                             {
-                                TypeId = zwavePort.ByteArrayToString(typeId).Replace(" ", ""),
-                                ProductId = zwavePort.ByteArrayToString(productId).Replace(" ", ""),
-                                ManufacturerId = zwavePort.ByteArrayToString(manufacturerId).Replace(" ", "")
-                            };
-                            //
-                            CheckDeviceHandler(manufacturerSpecs);
-                            //
-                            if (ManufacturerSpecificResponse != null)
-                            {
-                                try
-                                {
-                                    ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg()
-                                    {
-                                        NodeId = this.NodeId,
-                                        ManufacturerSpecific = manufacturerSpecs
-                                    });
-                                }
-                                catch (Exception ex)
-                                {
-
-                                    Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " + ex.Message + "\n" + ex.StackTrace);
-
-                                }
+                                ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg() {
+                                    NodeId = this.NodeId,
+                                    ManufacturerSpecific = manufacturerSpecs
+                                });
                             }
-                            //
-                            handled = true;
-                            //
-                            //Console.WriteLine (" ########################################################################################################### ");
-                            //this.SendMessage (new byte[] { 0x01, 0x09, 0x00, 0x13, 0x13, this.NodeId, 0x31, 0x01, 0x25, 0x40, 0xa1 });
-                        }
+                            catch (Exception ex)
+                            {
 
-                        break;
+                                Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " + ex.Message + "\n" + ex.StackTrace);
+
+                            }
+                        }
+                        //
+                        handled = true;
+                        //
+                        //Console.WriteLine (" ########################################################################################################### ");
+                        //this.SendMessage (new byte[] { 0x01, 0x09, 0x00, 0x13, 0x13, this.NodeId, 0x31, 0x01, 0x25, 0x40, 0xa1 });
+                    }
+
+                    break;
 
                 }
 
@@ -444,8 +455,7 @@ namespace ZWaveLib.Devices
                 {
                     bool log = true;
                     if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC) log = false;
-                    if (log)
-                        Console.WriteLine("ZWaveLib UNHANDLED message: " + zwavePort.ByteArrayToString(receivedMessage));
+                    if (log) Console.WriteLine("ZWaveLib UNHANDLED message: " + zwavePort.ByteArrayToString(receivedMessage));
                 }
             }
 
@@ -460,18 +470,30 @@ namespace ZWaveLib.Devices
             var typeList = new List<Type>();
             foreach (Type type in assembly.GetTypes())
             {
-                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace))
-                    typeList.Add(type);
+                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace)) typeList.Add(type);
             }
             //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
             return typeList;
         }
 
-        internal virtual void RaiseUpdateParameterEvent(ZWaveNode node, int pid, ParameterType peventtype, object value)
+        internal virtual void RaiseUpdateParameterEvent(
+            ZWaveNode node,
+            int pid,
+            ParameterType peventtype,
+            object value
+        )
         {
             if (UpdateNodeParameter != null)
             {
-                UpdateNodeParameter(node, new UpdateNodeParameterEventArgs() { NodeId = (int)node.NodeId, ParameterId = pid, ParameterType = peventtype, Value = value });
+                UpdateNodeParameter(
+                    node,
+                    new UpdateNodeParameterEventArgs() {
+                        NodeId = (int)node.NodeId,
+                        ParameterId = pid,
+                        ParameterType = peventtype,
+                        Value = value
+                    }
+                );
             }
         }
 
@@ -479,7 +501,10 @@ namespace ZWaveLib.Devices
         {
             //if (this.DeviceHandler == null)
             {
-                var typeList = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "ZWaveLib.Devices.ProductHandlers.");
+                var typeList = GetTypesInNamespace(
+                                   Assembly.GetExecutingAssembly(),
+                                   "ZWaveLib.Devices.ProductHandlers."
+                               );
                 for (int i = 0; i < typeList.Count; i++)
                 {
 
@@ -515,25 +540,32 @@ namespace ZWaveLib.Devices
                 IZWaveDeviceHandler deviceHandler = null;
                 switch (this.GenericClass)
                 {
-                    case 0x00:
+                case 0x00:
                         // need to query node capabilities
-                        byte[] message = new byte[] { 0x01, 0x04, 0x00, (byte)Controller.ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO, this.NodeId, 0x00 };
-                        SendMessage(message);
-                        break;
-                    case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
-                        deviceHandler = new ProductHandlers.Generic.Switch();
-                        break;
-                    case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
-                        deviceHandler = new ProductHandlers.Generic.Dimmer();
-                        break;
-                    case (byte)ZWaveLib.GenericType.THERMOSTAT:
-                        deviceHandler = new ProductHandlers.Generic.Thermostat();
-                        break;
-                    // Fallback to generic Sensor driver if type is not directly supported.
-                    // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
-                    default:
-                        deviceHandler = new ProductHandlers.Generic.Sensor();
-                        break;
+                    byte[] message = new byte[] {
+                        0x01,
+                        0x04,
+                        0x00,
+                        (byte)Controller.ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO,
+                        this.NodeId,
+                        0x00
+                    };
+                    SendMessage(message);
+                    break;
+                case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
+                    deviceHandler = new ProductHandlers.Generic.Switch();
+                    break;
+                case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
+                    deviceHandler = new ProductHandlers.Generic.Dimmer();
+                    break;
+                case (byte)ZWaveLib.GenericType.THERMOSTAT:
+                    deviceHandler = new ProductHandlers.Generic.Thermostat();
+                    break;
+                // Fallback to generic Sensor driver if type is not directly supported.
+                // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
+                default:
+                    deviceHandler = new ProductHandlers.Generic.Sensor();
+                    break;
                 }
                 if (deviceHandler != null)
                 {
@@ -564,10 +596,10 @@ namespace ZWaveLib.Devices
         public virtual void Basic_Set(int value)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_BASIC, 
-				(byte)Command.COMMAND_BASIC_SET, 
-				byte.Parse(value.ToString())
-			});
+                (byte)CommandClass.COMMAND_CLASS_BASIC, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                byte.Parse(value.ToString())
+            });
         }
 
         /// <summary>
@@ -576,9 +608,9 @@ namespace ZWaveLib.Devices
         public virtual void Basic_Get()
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_BASIC, 
-				(byte)Command.COMMAND_BASIC_GET 
-			});
+                (byte)CommandClass.COMMAND_CLASS_BASIC, 
+                (byte)Command.COMMAND_BASIC_GET 
+            });
         }
 
         #endregion
@@ -588,84 +620,84 @@ namespace ZWaveLib.Devices
         public virtual void MultiInstance_GetCount(byte command_class) // eg. CommandClass.COMMAND_CLASS_SWITCH_BINARY
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 (byte)Command.COMMAND_MULTIINSTANCE_COUNT_GET, // 0x04 = GET, 0x05 = REPORT
                 command_class
-			});
+            });
         }
 
         public virtual void MultiInstance_SwitchBinaryGet(byte instance)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x0d, // ??
                 0x00, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
                 (byte)Command.COMMAND_MULTIINSTANCE_GET
-			});
+            });
         }
 
         public virtual void MultiInstance_SwitchBinarySet(byte instance, int value)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x0d, // 
                 0x00, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
                 (byte)Command.COMMAND_MULTIINSTANCE_SET,
                 byte.Parse(value.ToString())
-			});
+            });
         }
 
         public virtual void MultiInstance_SwitchMultiLevelGet(byte instance)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x0d, // ??
                 0x00, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
                 (byte)Command.COMMAND_MULTIINSTANCE_GET
-			});
+            });
         }
 
         public virtual void MultiInstance_SwitchMultiLevelSet(byte instance, int value)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x0d, // 
                 0x00, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
                 (byte)Command.COMMAND_MULTIINSTANCE_SET,
                 byte.Parse(value.ToString())
-			});
+            });
         }
 
         public virtual void MultiInstance_SensorBinaryGet(byte instance)
         {
             // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x06, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY,
                 0x04 //
-			});
+            });
         }
 
         public virtual void MultiInstance_SensorMultiLevelGet(byte instance)
         {
             // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
                 0x06, // ??
                 instance,
                 (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL,
                 0x04 //
-			});
+            });
         }
 
         #endregion
@@ -680,11 +712,11 @@ namespace ZWaveLib.Devices
         public virtual void Association_Set(byte groupid, byte targetnodeid)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-				(byte)Command.COMMAND_ASSOCIATION_SET, 
-				groupid, 
-				targetnodeid 
-			});
+                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
+                (byte)Command.COMMAND_ASSOCIATION_SET, 
+                groupid, 
+                targetnodeid 
+            });
         }
 
         /// <summary>
@@ -694,10 +726,10 @@ namespace ZWaveLib.Devices
         public virtual void Association_Get(byte groupid)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-				(byte)Command.COMMAND_ASSOCIATION_GET, 
-				groupid 
-			});
+                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
+                (byte)Command.COMMAND_ASSOCIATION_GET, 
+                groupid 
+            });
         }
 
         /// <summary>
@@ -708,11 +740,11 @@ namespace ZWaveLib.Devices
         public virtual void Association_Remove(byte groupid, byte targetnodeid)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-				(byte)Command.COMMAND_ASSOCIATION_REMOVE, 
-				groupid, 
-				targetnodeid 
-			});
+                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
+                (byte)Command.COMMAND_ASSOCIATION_REMOVE, 
+                groupid, 
+                targetnodeid 
+            });
         }
 
         /// <summary>
@@ -721,9 +753,9 @@ namespace ZWaveLib.Devices
         public virtual void Association_GroupingsGet()
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_ASSOCIATION,
-				(byte)Command.COMMAND_CONFIG_GET 
-			});
+                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION,
+                (byte)Command.COMMAND_CONFIG_GET 
+            });
         }
 
         #endregion
@@ -733,33 +765,35 @@ namespace ZWaveLib.Devices
         public virtual void Battery_Get()
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_BATTERY, 
-				(byte)Command.COMMAND_BASIC_GET 
-			});
+                (byte)CommandClass.COMMAND_CLASS_BATTERY, 
+                (byte)Command.COMMAND_BASIC_GET 
+            });
         }
 
         #endregion
 
         #region ZWave Command Class Wake Up
+
         public virtual void WakeUpGetInterval()
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
-				(byte)Command.COMMAND_CONFIG_GET 
-			});
+                (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
+                (byte)Command.COMMAND_CONFIG_GET 
+            });
         }
 
         public virtual void WakeUpSetInterval(uint interval)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
-				(byte)Command.COMMAND_CONFIG_SET,
+                (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
+                (byte)Command.COMMAND_CONFIG_SET,
                 (byte)((interval >> 16) & 0xff),
                 (byte)((interval >> 8) & 0xff),
                 (byte)((interval) & 0xff),
-				0x01
-			});
+                0x01
+            });
         }
+
         #endregion
 
         #region ZWave Command Class Configuration
@@ -804,15 +838,15 @@ namespace ZWaveLib.Devices
             msg[3] = (byte)valueLength;
             switch (valueLength)
             {
-                case 1:
-                    Array.Copy(value32, 3, msg, 4, 1);
-                    break;
-                case 2:
-                    Array.Copy(value32, 2, msg, 4, 2);
-                    break;
-                case 4:
-                    Array.Copy(value32, 0, msg, 4, 4);
-                    break;
+            case 1:
+                Array.Copy(value32, 3, msg, 4, 1);
+                break;
+            case 2:
+                Array.Copy(value32, 2, msg, 4, 2);
+                break;
+            case 4:
+                Array.Copy(value32, 0, msg, 4, 4);
+                break;
             }
             this.ZWaveMessage(msg);
         }
@@ -820,10 +854,10 @@ namespace ZWaveLib.Devices
         public virtual void ConfigParameterGet(byte parameter)
         {
             this.ZWaveMessage(new byte[] { 
-				(byte)CommandClass.COMMAND_CLASS_COONFIGURATION, 
-				(byte)Command.COMMAND_CONFIG_GET,
+                (byte)CommandClass.COMMAND_CLASS_COONFIGURATION, 
+                (byte)Command.COMMAND_CONFIG_GET,
                 parameter
-			});
+            });
         }
 
         #endregion
@@ -835,7 +869,19 @@ namespace ZWaveLib.Devices
 
         public virtual void ManufacturerSpecific_Get()
         {
-            byte[] message = new byte[] { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x72 /* class manuf spec */, 0x04 /* get */, 0x05 /* report */, 0x01 | 0x04, 0x00 }; //, 0x05, 0x00, 0x00 };
+            byte[] message = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x09 /*packet len */,
+                0x00 /* type req/res */,
+                0x13 /* func send data */,
+                this.NodeId,
+                0x02,
+                0x72 /* class manuf spec */,
+                0x04 /* get */,
+                0x05 /* report */,
+                0x01 | 0x04,
+                0x00
+            }; //, 0x05, 0x00, 0x00 };
             SendMessage(message);
         }
 
@@ -848,7 +894,19 @@ namespace ZWaveLib.Devices
 
         public virtual void RequestMeterReport()
         {
-            byte[] message = new byte[] { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x32 /* class meter */, 0x04 /* get */, 0x05 /* report */, 0x01 | 0x04, 0x00 }; //, 0x05, 0x00, 0x00 };
+            byte[] message = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x09 /*packet len */,
+                0x00 /* type req/res */,
+                0x13 /* func send data */,
+                this.NodeId,
+                0x02,
+                0x32 /* class meter */,
+                0x04 /* get */,
+                0x05 /* report */,
+                0x01 | 0x04,
+                0x00
+            }; //, 0x05, 0x00, 0x00 };
             SendMessage(message);
         }
 
@@ -863,20 +921,65 @@ namespace ZWaveLib.Devices
 
             //MultiChannel Encapsulated (instance=1):SwitchMultilevelCmd_Get 
             //   0x01, 0x0d, 0x00, 0x13, <nodeid>, 0x06, 0x60, 0x0d, 0x00, 0x01, 0x26, 0x02, 0x05 //, 0x1e, 0xb5
-            message = new byte[] { 0x01, 0x0C, 0x00, 0x13, this.NodeId, 0x05, 0x60, 0x06, 0x01, 0x31, 0x04, 0x05, 0x03, 0x00 };
+            message = new byte[] {
+                0x01,
+                0x0C,
+                0x00,
+                0x13,
+                this.NodeId,
+                0x05,
+                0x60,
+                0x06,
+                0x01,
+                0x31,
+                0x04,
+                0x05,
+                0x03,
+                0x00
+            };
             SendMessage(message);
 
             Thread.Sleep(200);
 
             //MultiChannel Encapsulated (instance=2):SwitchMultilevelCmd_Get 
             //   0x01, 0x0d, 0x00, 0x13, <nodeid>, 0x06, 0x60, 0x0d, 0x00, 0x02, 0x26, 0x02, 0x05 //, 0x1e, 0xb5
-            message = new byte[] { 0x01, 0x0C, 0x00, 0x13, this.NodeId, 0x05, 0x60, 0x06, 0x02, 0x31, 0x04, 0x05, 0x03, 0x00 };
+            message = new byte[] {
+                0x01,
+                0x0C,
+                0x00,
+                0x13,
+                this.NodeId,
+                0x05,
+                0x60,
+                0x06,
+                0x02,
+                0x31,
+                0x04,
+                0x05,
+                0x03,
+                0x00
+            };
             SendMessage(message);
 
             Thread.Sleep(200);
 
             //MultiChannel Encapsulated (instance=3):SwitchMultilevelCmd_Get 
-            message = new byte[] { 0x01, 0x0C, 0x00, 0x13, this.NodeId, 0x05, 0x60, 0x06, 0x03, 0x31, 0x04, 0x05, 0x03, 0x00 }; //, 0x05, 0x00, 0x00 };
+            message = new byte[] {
+                0x01,
+                0x0C,
+                0x00,
+                0x13,
+                this.NodeId,
+                0x05,
+                0x60,
+                0x06,
+                0x03,
+                0x31,
+                0x04,
+                0x05,
+                0x03,
+                0x00
+            }; //, 0x05, 0x00, 0x00 };
             SendMessage(message);
 
             Thread.Sleep(200);
@@ -886,7 +989,14 @@ namespace ZWaveLib.Devices
 
         public virtual void ZWaveMessage(byte[] msg)
         {
-            byte[] header = new byte[] { 0x01 /* Start Of Frame */, (byte)(msg.Length + 7) /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, (byte)(msg.Length) };
+            byte[] header = new byte[] {
+                0x01 /* Start Of Frame */,
+                (byte)(msg.Length + 7) /*packet len */,
+                0x00 /* type req/res */,
+                0x13 /* func send data */,
+                this.NodeId,
+                (byte)(msg.Length)
+            };
             byte[] footer = new byte[] { 0x01 | 0x04, 0x00, 0x00 };
             byte[] message = new byte[header.Length + msg.Length + footer.Length];// { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x31, 0x04, 0x01 | 0x04, 0x00, 0x00 };
 
