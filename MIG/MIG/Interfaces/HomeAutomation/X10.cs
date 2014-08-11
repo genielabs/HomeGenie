@@ -138,6 +138,8 @@ namespace MIG.Interfaces.HomeAutomation
         private Timer rfPulseTimer;
         private string rfLastStringData = "";
 
+        List<MIGServiceConfiguration.Interface.Option> options;
+
         public X10()
         {
             x10lib = new XTenManager();
@@ -160,7 +162,18 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
-        public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+        public List<MIGServiceConfiguration.Interface.Option> Options { 
+            get
+            {
+                return options;
+            }
+            set 
+            { 
+                options = value;
+                x10lib.PortName = this.GetOption("Port").Value.Replace("|", "/");
+                x10lib.HouseCode = this.GetOption("HouseCodes").Value;
+            }
+        }
 
         public List<InterfaceModule> GetModules()
         {
@@ -187,75 +200,6 @@ namespace MIG.Interfaces.HomeAutomation
                     modules.Add(module);
 
                 }
-
-
-                /*
-
-
-                // CM-15 RF receiver
-                // TODO: this shouldn't be created for CM-11
-                var module = systemModules.Find(delegate(Module o)
-                {
-                    return o.Domain == Domains.HomeAutomation_X10 && o.Address == "RF";
-                });
-                if (module == null)
-                {
-                    module = new Module() {
-                        Domain = Domains.HomeAutomation_X10,
-                        Address = "RF",
-                        DeviceType = MIG.ModuleTypes.Sensor
-                    };
-                    systemModules.Add(module);
-                }
-                //
-                foreach (var kv in x10Controller.ModulesStatus)
-                {
-                    module = new Module();
-                    try
-                    {
-                        module = Modules.Find(delegate(Module o)
-                        {
-                            return o.Domain == Domains.HomeAutomation_X10 && o.Address == kv.Value.Code;
-                        });
-                    }
-                    catch
-                    {
-                    }
-                    // add new module
-                    if (module == null)
-                    {
-                        module = new Module();
-                        module.Domain = Domains.HomeAutomation_X10;
-                        module.DeviceType = MIG.ModuleTypes.Generic;
-                        systemModules.Add(module);
-                    }
-                    //
-                    var parameter = module.Properties.Find(mpar => mpar.Name == ModuleParameters.MODPAR_STATUS_LEVEL);
-                    if (parameter == null)
-                    {
-                        module.Properties.Add(new ModuleParameter() {
-                            Name = ModuleParameters.MODPAR_STATUS_LEVEL,
-                            Value = ((double)kv.Value.Level).ToString()
-                        });
-                    }
-                    else if (parameter.Value != ((double)kv.Value.Level).ToString())
-                    {
-                        parameter.Value = ((double)kv.Value.Level).ToString();
-                    }
-                    module.Address = kv.Value.Code;
-                    if (module.Description == null || module.Description == "")
-                    {
-                        module.Description = "X10 Module";
-                    }
-                }
-
-
-
-                */
-
-
-
-
 
             }
             return modules;

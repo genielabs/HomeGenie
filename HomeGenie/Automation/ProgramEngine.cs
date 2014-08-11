@@ -568,11 +568,11 @@ namespace HomeGenie.Automation
             // it is a lil' trick for mono compatibility
             // since it was caching the assembly when using the same name
             string tmpfile = Guid.NewGuid().ToString() + ".dll";
-            var result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
             // delete old assembly
+            System.CodeDom.Compiler.CompilerResults result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-
+                result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
                 if (File.Exists(program.AssemblyFile))
                 {
                     // delete old assebly

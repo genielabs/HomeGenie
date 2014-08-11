@@ -424,8 +424,11 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     //
     $('#page_configure_groupmodules_list').listview().listview('refresh');
     //
-    $("#page_configure_groupmodules_list li").on("click", function () {
-        HG.WebApp.GroupModules.EditCurrentModule($(this));
+    $("#page_configure_groupmodules_list li").each(function(index){
+    	var item = $(this);
+    	item.find("a:first").on("click", function () {
+          	HG.WebApp.GroupModules.EditCurrentModule(item);
+        });
     });
     $("#configure_groupslist").listview("refresh");
 };

@@ -20,11 +20,6 @@
  *     Project Homepage: http://homegenie.it
  */
 
-/* 
- * 2014-02-24:
- *      Weecoboard-4M module     
- *      Author: Luciano Neri <l.neri@nerinformatica.it>
-*/
 
 using System;
 using System.Collections.Generic;
@@ -65,6 +60,7 @@ namespace HomeGenie.Service
         private StatisticsLogger statisticsLogger;
         // Internal data structures
         private TsList<Module> systemModules = new HomeGenie.Service.TsList<Module>();
+        private TsList<Module> modulesGarbage = new HomeGenie.Service.TsList<Module>();
         private TsList<VirtualModule> virtualModules = new TsList<VirtualModule>();
         private List<Group> automationGroups = new List<Group>();
         private List<Group> controlGroups = new List<Group>();
@@ -112,7 +108,7 @@ namespace HomeGenie.Service
             //
             // initialize MIGService, interfaces (hw controllers drivers), webservice
             migService = new MIG.MIGService();
-            migService.InterfaceModulesChangedAction += migService_InterfaceModulesChangedAction;
+            migService.InterfaceModulesChanged += migService_InterfaceModulesChanged;
             migService.InterfacePropertyChanged += migService_InterfacePropertyChanged;
             migService.ServiceRequestPreProcess += migService_ServiceRequestPreProcess;
             migService.ServiceRequestPostProcess += migService_ServiceRequestPostProcess;
@@ -133,7 +129,7 @@ namespace HomeGenie.Service
             // Try to start WebGateway, at  0 < (port - ServicePort) < 10
             bool serviceStarted = false;
             int port = systemConfiguration.HomeGenie.ServicePort;
-            while (!serviceStarted && port <= systemConfiguration.HomeGenie.ServicePort + 8000)
+            while (!serviceStarted && port <= systemConfiguration.HomeGenie.ServicePort + 10)
             {
                 // TODO: this should be done like this _services.Gateways["WebService"].Configure(....)
                 migService.ConfigureWebGateway(
@@ -142,7 +138,7 @@ namespace HomeGenie.Service
                     "/hg/html",
                     systemConfiguration.HomeGenie.UserPassword
                 );
-                if (migService.StartService())
+                if (migService.StartGateways())
                 {
                     systemConfiguration.HomeGenie.ServicePort = port;
                     serviceStarted = true;
@@ -178,6 +174,7 @@ namespace HomeGenie.Service
                     "HTTP.PORT",
                     port.ToString()
                 );
+                Program.Quit(false);
             }
 
             updateChecker = new UpdateChecker(this);
@@ -231,7 +228,7 @@ namespace HomeGenie.Service
         {
             LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STOPPING");
             //
-            // update last received parameters before quitting
+            // save system data before quitting
             LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
@@ -304,6 +301,7 @@ namespace HomeGenie.Service
             get { return updateChecker; }
         }
         // Reference to Recent Events Log
+        //TODO: deprecate this
         public TsList<LogEntry> RecentEventsLog
         {
             get { return recentEventsLog; }
@@ -492,7 +490,7 @@ namespace HomeGenie.Service
 
         #region MIG Service events handling
 
-        private void migService_InterfaceModulesChangedAction (InterfaceModulesChangedAction args)
+        private void migService_InterfaceModulesChanged (InterfaceModulesChangedAction args)
         {
             modules_RefreshInterface(GetInterface(args.Domain));
         }
@@ -526,7 +524,6 @@ namespace HomeGenie.Service
             }
             else
             {
-                // There is no source module in Modules for this event.
                 if (propertyChangedAction.Domain == "MIGService.Interfaces")
                 {
                     modules_RefreshInterface(GetInterface(propertyChangedAction.SourceId));
@@ -1087,7 +1084,7 @@ namespace HomeGenie.Service
         {
             LoadSystemConfig();
             //
-            // load last saved modules data into modules list
+            // load modules data
             //
             LoadModules();
             //
@@ -1177,9 +1174,22 @@ namespace HomeGenie.Service
             {
                 //TODO: log error
             }
+            //
+            // start MIG Interfaces
+            //
+            try
+            {
+                migService.StartInterfaces();
+            }
+            catch
+            {
+                //TODO: log error
+            }
             // force re-generation of Modules list
             //_jsonSerializedModules(false);
             modules_RefreshAll();
+            //
+            // enable automation programs engine
             //
             masterControlProgram.Enabled = true;
         }
@@ -1497,7 +1507,12 @@ namespace HomeGenie.Service
             // Refresh all MIG modules
             foreach (var iface in migService.Interfaces)
             {
-                modules_RefreshInterface(iface.Value);
+                try
+                {
+                    modules_RefreshInterface(iface.Value);
+                } catch {
+                    //TODO: interface not ready? handle this
+                }
             }
 
             // Refresh other HG modules
@@ -1512,30 +1527,68 @@ namespace HomeGenie.Service
             // TODO: read IsEnabled instead of IsConnected
             if (migService.Configuration.GetInterface(iface.Domain).IsEnabled)
             {
-                foreach (var migModule in iface.GetModules())
+                var interfaceModules = iface.GetModules();
+                if (interfaceModules.Count > 0)
                 {
-                    Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
-                    if (module == null)
+                    // delete removed modules
+                    var deleted = systemModules.FindAll(m => m.Domain == iface.Domain && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
+                    foreach (var mod in deleted)
                     {
-                        module = new Module();
-                        module.Domain = migModule.Domain;
-                        module.Address = migModule.Address;
-                        systemModules.Add(module);
+                        var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                        if (virtualParam == null || virtualParam.DecimalValue == 0)
+                        {
+                            Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
+                            if (garbaged != null) modulesGarbage.Remove(garbaged);
+                            modulesGarbage.Add(mod);
+                            systemModules.Remove(mod);
+                        }
                     }
-                    if (String.IsNullOrEmpty(module.Description))
+                    //
+                    foreach (var migModule in interfaceModules)
                     {
-                        module.Description = migModule.Description;
-                    }
-                    if (module.DeviceType == ModuleTypes.Generic)
-                    {
-                        module.DeviceType = migModule.ModuleType;
+                        Module module = systemModules.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                        if (module == null)
+                        {
+                            // try restoring from garbage
+                            module = modulesGarbage.Find(o => o.Domain == migModule.Domain && o.Address == migModule.Address);
+                            if (module != null)
+                            {
+                                systemModules.Add(module);
+                            }
+                            else
+                            {
+                                module = new Module();
+                                module.Domain = migModule.Domain;
+                                module.Address = migModule.Address;
+                                systemModules.Add(module);
+                            }
+                        }
+                        //
+                        if (String.IsNullOrEmpty(module.Description))
+                        {
+                            module.Description = migModule.Description;
+                        }
+                        if (module.DeviceType == ModuleTypes.Generic)
+                        {
+                            module.DeviceType = migModule.ModuleType;
+                        }
                     }
                 }
             }
             else
             {
-                //TODO: implemente a "Deleted" property for Module type
-                systemModules.RemoveAll(m => m.Domain == iface.Domain);
+                var deleted = systemModules.FindAll(m => m.Domain == iface.Domain);
+                foreach (var mod in deleted)
+                {
+                    var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                    if (virtualParam == null || virtualParam.DecimalValue == 0)
+                    {
+                        Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
+                        if (garbaged != null) modulesGarbage.Remove(garbaged);
+                        modulesGarbage.Add(mod);
+                        systemModules.Remove(mod);
+                    }
+                }
             }
         }
 
@@ -1593,6 +1646,15 @@ namespace HomeGenie.Service
                 //
                 // configure MIG
                 //
+                if (systemConfiguration.MIGService.GetInterface("HomeAutomation.Insteon") == null)
+                {
+                    var options = new List<MIGServiceConfiguration.Interface.Option>();
+                    options.Add(new MIGServiceConfiguration.Interface.Option(){ Name = "Port", Value = "" });
+                    systemConfiguration.MIGService.Interfaces.Add(new MIGServiceConfiguration.Interface(){ 
+                        Domain = "HomeAutomation.Insteon",
+                        Options = options
+                    });
+                }
                 migService.Configuration = systemConfiguration.MIGService;
             }
             catch (Exception ex)
@@ -1639,6 +1701,7 @@ namespace HomeGenie.Service
                 //
                 reader.Close();
                 //
+                modulesGarbage.Clear();
                 systemModules.Clear();
                 systemModules = modules;
             }

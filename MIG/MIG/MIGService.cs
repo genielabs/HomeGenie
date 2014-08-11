@@ -97,7 +97,7 @@ namespace MIG
         //public event Action<object> ServiceStopped;
 
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChanged;
-        public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
+        public event Action<InterfaceModulesChangedAction> InterfaceModulesChanged;
 
         public delegate void WebServiceRequestPreProcessEventHandler(MIGClientRequest request, MIGInterfaceCommand migCmd);
         public event WebServiceRequestPreProcessEventHandler ServiceRequestPreProcess;
@@ -159,20 +159,6 @@ namespace MIG
                 {
                     AddInterface(iface.Domain);
                 }
-                //
-                // initialize MIG interfaces
-                //
-                foreach (MIGServiceConfiguration.Interface iface in configuration.Interfaces)
-                {
-                    if (iface.IsEnabled)
-                    {
-                        EnableInterface(iface.Domain);
-                    }
-                    else
-                    {
-                        DisableInterface(iface.Domain);
-                    }
-                }
             }
         }
 
@@ -197,10 +183,10 @@ namespace MIG
                 MIGInterface migInterface = null;
                 var type = Type.GetType("MIG.Interfaces." + domain);
                 migInterface = (MIGInterface)Activator.CreateInstance(type);
+                migInterface.Options = configuration.GetInterface(domain).Options;
                 Interfaces.Add(domain, migInterface);
                 migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
                 migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
-                migInterface.Options = configuration.GetInterface(domain).Options;
             }
             //TODO: implement eventually a RemoveInterface method containing code:
             //          migInterface.ModulesChangedAction -= MigService_ModulesChanged;
@@ -212,6 +198,7 @@ namespace MIG
             if (Interfaces.ContainsKey(domain))
             {
                 MIGInterface migInterface = Interfaces[domain];
+                migInterface.Options = configuration.GetInterface(domain).Options;
                 migInterface.Connect();
             }
         }
@@ -226,7 +213,7 @@ namespace MIG
         }
 
         // try to bind httpport, launch WebGateway threads, and listen to Interfaces' changes
-        public bool StartService()
+        public bool StartGateways()
         {
             bool success = false;
             try
@@ -257,6 +244,24 @@ namespace MIG
             webGateway.SetPasswordHash(passwordHash);
         }
 
+        public void StartInterfaces()
+        {
+            //
+            // initialize MIG interfaces
+            //
+            foreach (MIGServiceConfiguration.Interface iface in configuration.Interfaces)
+            {
+                if (iface.IsEnabled)
+                {
+                    EnableInterface(iface.Domain);
+                }
+                else
+                {
+                    DisableInterface(iface.Domain);
+                }
+            }
+        }
+
         public void StopService()
         {
             foreach (var migInterface in Interfaces.Values)
@@ -281,9 +286,9 @@ namespace MIG
 
         private void MigService_InterfaceModulesChanged(InterfaceModulesChangedAction args)
         {
-            if (InterfaceModulesChangedAction != null)
+            if (InterfaceModulesChanged != null)
             {
-                InterfaceModulesChangedAction(args);
+                InterfaceModulesChanged(args);
             }
         }
 
