@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+11/08/2014  1.00 beta rev 409
+	- Fixed XTenLib received rf/plc events not firing 
+	- Fixed XTenLib locking issue 
+	- Fixed Insteon interface "Control.Off" command bug
 
 08/08/2014 1.00 beta rev 408
 	- Some fixes to ZWaveLib and XTenLib

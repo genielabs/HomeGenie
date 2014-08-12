@@ -232,7 +232,7 @@ namespace MIG.Interfaces.Controllers
             List<InterfaceModule> modules = new List<InterfaceModule>();
             InterfaceModule module = new InterfaceModule();
             module.Domain = this.Domain;
-            module.Address = "RF";
+            module.Address = "IR";
             module.ModuleType = ModuleTypes.Sensor;
             modules.Add(module);
             return modules;

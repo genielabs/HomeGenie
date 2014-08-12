@@ -32,6 +32,7 @@ using System.Linq;
 using SoapBox.FluentDwelling;
 using SoapBox.FluentDwelling.Devices;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MIG.Interfaces.HomeAutomation
 {
@@ -130,6 +131,7 @@ namespace MIG.Interfaces.HomeAutomation
         #endregion
 
         private Plm insteonPlm;
+        private Thread readerTask;
 
         public Insteon()
         {
@@ -191,6 +193,12 @@ namespace MIG.Interfaces.HomeAutomation
                         case "WindowCoveringControl":
                             type = ModuleTypes.DoorWindow;
                             break;
+                        case "PoolAndSpaControl":
+                            type = ModuleTypes.Thermostat;
+                            break;
+                        case "IrrigationControl":
+                            type = ModuleTypes.Switch;
+                            break;
                         }
 
                         modules.Add(new InterfaceModule() {
@@ -211,13 +219,47 @@ namespace MIG.Interfaces.HomeAutomation
 
         public bool Connect()
         {
+            Disconnect();
             insteonPlm = new Plm(this.GetOption("Port").Value);
+            insteonPlm.OnError += insteonPlm_HandleOnError;
+            /* 
+
+            // other events:
+
+            insteonPlm.SetButton.PressedAndHeld
+            insteonPlm.SetButton.ReleasedAfterHolding
+            insteonPlm.SetButton.UserReset (SET Button Held During Power-up)
+
+            insteonPlm.Network.StandardMessageReceived
+                += new StandardMessageReceivedHandler((s, e) =>
+            {
+                Console.WriteLine("Message received: " + e.Description
+                    + ", from " + e.PeerId.ToString());
+            });
+
+
+            // also see:
+            insteonPlm.Network.X10.CommandReceived
+            insteonPlm.Network.SendStandardCommandToAddress
+
+
+            */
             if (insteonPlm.Error)
             {
                 Disconnect();
                 return false;
             }
-            insteonPlm.OnError += insteonPlm_HandleOnError;
+            //
+            readerTask = new Thread(() =>
+            {
+                while(insteonPlm != null)
+                {
+                    insteonPlm.Receive();
+                    System.Threading.Thread.Sleep(100); // wait 100 ms
+                }
+            });
+            readerTask.Start();
+            //
             if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return true;
         }
@@ -226,8 +268,14 @@ namespace MIG.Interfaces.HomeAutomation
         {
             if (insteonPlm != null)
             {
-                insteonPlm.Dispose();
+                insteonPlm.OnError -= insteonPlm_HandleOnError;
+                try { insteonPlm.Dispose(); } catch { }
                 insteonPlm = null;
+            }
+            if (readerTask != null)
+            {
+                try { readerTask.Abort(); } catch { }
+                readerTask = null;
             }
         }
 
@@ -273,6 +321,11 @@ namespace MIG.Interfaces.HomeAutomation
                 case "WindowCoveringControl":
                     (device as WindowCoveringControl).Open();
                     break;
+                case "PoolAndSpaControl":
+                    break;
+                case "IrrigationControl":
+                    (device as IrrigationControl).TurnOnSprinklerValve(byte.Parse(option));
+                    break;
                 }
             }
             else if (command == Command.CONTROL_OFF)
@@ -281,19 +334,24 @@ namespace MIG.Interfaces.HomeAutomation
                 switch (device.GetType().Name)
                 {
                 case "LightingControl":
-                    (device as LightingControl).TurnOn();
+                    (device as LightingControl).TurnOff();
                     break;
                 case "DimmableLightingControl":
-                    (device as DimmableLightingControl).TurnOn();
+                    (device as DimmableLightingControl).TurnOff();
                     break;
                 case "SwitchedLightingControl":
-                    (device as SwitchedLightingControl).TurnOn();
+                    (device as SwitchedLightingControl).TurnOff();
                     break;
                 case "SensorsActuators":
-                    (device as SensorsActuators).TurnOnOutput(byte.Parse(option));
+                    (device as SensorsActuators).TurnOffOutput(byte.Parse(option));
                     break;
                 case "WindowCoveringControl":
                     (device as WindowCoveringControl).Close();
+                    break;
+                case "PoolAndSpaControl":
+                    break;
+                case "IrrigationControl":
+                    (device as IrrigationControl).TurnOffSprinklerValve(byte.Parse(option));
                     break;
                 }
             }
@@ -314,6 +372,7 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_LEVEL)
             {
                 byte level = byte.Parse(option);
+                if (device != null)
                 switch (device.GetType().Name)
                 {
                 case "DimmableLightingControl":
