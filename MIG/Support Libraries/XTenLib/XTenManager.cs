@@ -60,10 +60,12 @@ namespace XTenLib
         private X10CommState communicationState = X10CommState.Ready;
         private byte expectedChecksum = 0x00;
         //TODO: rename the following two as constants
-        private double commandTimeoutSeconds = 1.5;
+        private double commandTimeoutSeconds = 5.0;
         private int commandResendMax = 1;
         private byte[] commandLastMessage = new byte[0];
         private int commandResendAttempts = 0;
+        private object waitAckMonitor = new object();
+        private DateTime lastReceivedTs = DateTime.Now;
 
         private bool gotReadWriteError = true;
         private bool keepConnectionAlive = false;
@@ -215,177 +217,198 @@ namespace XTenLib
 
         public void StatusRequest(X10HouseCodes housecode, X10UnitCodes unitcode)
         {
-            //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Status_Request);
-            SendModuleAddress(housecode, unitcode);
-            SendMessage(new byte[] {
-                (int)X10CommandType.Function,
-                byte.Parse(
-                    hcfuntion,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-        }
-
-        public void Dim(X10HouseCodes housecode, X10UnitCodes unitcode, int percentage)
-        {
-            string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Dim);
-            //
-            SendModuleAddress(housecode, unitcode);
-            if (x10interface.GetType().Equals(typeof(CM15)))
+            lock (this)
             {
-                double normalized = ((double)percentage / 100D);
+                //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Status_Request);
+                SendModuleAddress(housecode, unitcode);
                 SendMessage(new byte[] {
                     (int)X10CommandType.Function,
                     byte.Parse(
                         hcfuntion,
                         System.Globalization.NumberStyles.HexNumber
-                    ),
-                    (byte)(normalized * 210)
-                });
-                double newLevel = moduleStatus[huc].Level - normalized;
-                if (newLevel < 0) newLevel = 0;
-                moduleStatus[huc].Level = newLevel;
-            }
-            else
-            {
-                byte dimvalue = Utility.GetDimValue(percentage);
-                SendMessage(new byte[] {
-                    (byte)((int)X10CommandType.Function | dimvalue | 0x04),
-                    byte.Parse(
-                        hcfuntion,
-                        System.Globalization.NumberStyles.HexNumber
                     )
                 });
-                double newLevel = moduleStatus[huc].Level - Utility.GetPercentageValue(dimvalue);
-                if (newLevel < 0) newLevel = 0;
-                moduleStatus[huc].Level = newLevel;
+            }
+        }
+
+        public void Dim(X10HouseCodes housecode, X10UnitCodes unitcode, int percentage)
+        {
+            lock (this)
+            {
+                string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Dim);
+                //
+                SendModuleAddress(housecode, unitcode);
+                if (x10interface.GetType().Equals(typeof(CM15)))
+                {
+                    double normalized = ((double)percentage / 100D);
+                    SendMessage(new byte[] {
+                        (int)X10CommandType.Function,
+                        byte.Parse(
+                            hcfuntion,
+                            System.Globalization.NumberStyles.HexNumber
+                        ),
+                        (byte)(normalized * 210)
+                    });
+                    double newLevel = moduleStatus[huc].Level - normalized;
+                    if (newLevel < 0) newLevel = 0;
+                    moduleStatus[huc].Level = newLevel;
+                }
+                else
+                {
+                    byte dimvalue = Utility.GetDimValue(percentage);
+                    SendMessage(new byte[] {
+                        (byte)((int)X10CommandType.Function | dimvalue | 0x04),
+                        byte.Parse(
+                            hcfuntion,
+                            System.Globalization.NumberStyles.HexNumber
+                        )
+                    });
+                    double newLevel = moduleStatus[huc].Level - Utility.GetPercentageValue(dimvalue);
+                    if (newLevel < 0) newLevel = 0;
+                    moduleStatus[huc].Level = newLevel;
+                }
             }
         }
 
         public void Bright(X10HouseCodes housecode, X10UnitCodes unitcode, int percentage)
         {
-            string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
-            //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Bright);
-            //
-            SendModuleAddress(housecode, unitcode);
-            if (x10interface.GetType().Equals(typeof(CM15)))
+            lock (this)
             {
-                double normalized = ((double)percentage / 100D);
-                SendMessage(new byte[] {
-                    (int)X10CommandType.Function,
-                    byte.Parse(
-                        hcfuntion,
-                        System.Globalization.NumberStyles.HexNumber
-                    ),
-                    (byte)(normalized * 210)
-                });
-                double newLevel = moduleStatus[huc].Level + normalized;
-                if (newLevel > 1) newLevel = 1;
-                moduleStatus[huc].Level = newLevel;
-            }
-            else
-            {
-                byte dimvalue = Utility.GetDimValue(percentage);
-                SendMessage(new byte[] {
-                    (byte)((int)X10CommandType.Function | dimvalue | 0x04),
-                    byte.Parse(
-                        hcfuntion,
-                        System.Globalization.NumberStyles.HexNumber
-                    )
-                });
-                double newLevel = moduleStatus[huc].Level + Utility.GetPercentageValue(dimvalue);
-                if (newLevel > 1) newLevel = 1;
-                moduleStatus[huc].Level = newLevel;
+                string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
+                //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Bright);
+                //
+                SendModuleAddress(housecode, unitcode);
+                if (x10interface.GetType().Equals(typeof(CM15)))
+                {
+                    double normalized = ((double)percentage / 100D);
+                    SendMessage(new byte[] {
+                        (int)X10CommandType.Function,
+                        byte.Parse(
+                            hcfuntion,
+                            System.Globalization.NumberStyles.HexNumber
+                        ),
+                        (byte)(normalized * 210)
+                    });
+                    double newLevel = moduleStatus[huc].Level + normalized;
+                    if (newLevel > 1) newLevel = 1;
+                    moduleStatus[huc].Level = newLevel;
+                }
+                else
+                {
+                    byte dimvalue = Utility.GetDimValue(percentage);
+                    SendMessage(new byte[] {
+                        (byte)((int)X10CommandType.Function | dimvalue | 0x04),
+                        byte.Parse(
+                            hcfuntion,
+                            System.Globalization.NumberStyles.HexNumber
+                        )
+                    });
+                    double newLevel = moduleStatus[huc].Level + Utility.GetPercentageValue(dimvalue);
+                    if (newLevel > 1) newLevel = 1;
+                    moduleStatus[huc].Level = newLevel;
+                }
             }
         }
 
         public void LightOn(X10HouseCodes housecode, X10UnitCodes unitcode)
         {
-            //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.On);
-            SendModuleAddress(housecode, unitcode);
-            SendMessage(new byte[] {
-                (int)X10CommandType.Function,
-                byte.Parse(
-                    hcfuntion,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            //
-            string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
-            if (moduleStatus[huc].Level == 0.0)
+            lock (this)
             {
-                moduleStatus[huc].Level = 1.0;
+                //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.On);
+                SendModuleAddress(housecode, unitcode);
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Function,
+                    byte.Parse(
+                        hcfuntion,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                //
+                string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
+                if (moduleStatus[huc].Level == 0.0)
+                {
+                    moduleStatus[huc].Level = 1.0;
+                }
             }
         }
 
         public void LightOff(X10HouseCodes housecode, X10UnitCodes unitcode)
         {
-            //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Off);
-            SendModuleAddress(housecode, unitcode);
-            SendMessage(new byte[] {
-                (int)X10CommandType.Function,
-                byte.Parse(
-                    hcfuntion,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            //
-            string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
-            moduleStatus[huc].Level = 0.0;
+            lock (this)
+            {
+                //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Off);
+                SendModuleAddress(housecode, unitcode);
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Function,
+                    byte.Parse(
+                        hcfuntion,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                //
+                string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
+                moduleStatus[huc].Level = 0.0;
+            }
         }
 
         public void AllLightsOn(X10HouseCodes housecode)
         {
-            string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Lights_On);
-            SendMessage(new byte[] {
-                (int)X10CommandType.Address,
-                byte.Parse(
-                    hcunit,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            SendMessage(new byte[] {
-                (int)X10CommandType.Function,
-                byte.Parse(
-                    hcfuntion,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            //
-            // TODO: pick only lights module
-            AllLightsOn(housecode.ToString());
+            lock (this)
+            {
+                string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Lights_On);
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Address,
+                    byte.Parse(
+                        hcunit,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Function,
+                    byte.Parse(
+                        hcfuntion,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                //
+                // TODO: pick only lights module
+                AllLightsOn(housecode.ToString());
+            }
         }
 
         public void AllUnitsOff(X10HouseCodes housecode)
         {
-            string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
-            string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Units_Off);
-            SendMessage(new byte[] {
-                (int)X10CommandType.Address,
-                byte.Parse(
-                    hcunit,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            SendMessage(new byte[] {
-                (int)X10CommandType.Function,
-                byte.Parse(
-                    hcfuntion,
-                    System.Globalization.NumberStyles.HexNumber
-                )
-            });
-            //
-            // TODO: pick only lights module
-            AllUnitsOff(housecode.ToString());
+            lock (this)
+            {
+                string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
+                string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Units_Off);
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Address,
+                    byte.Parse(
+                        hcunit,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                SendMessage(new byte[] {
+                    (int)X10CommandType.Function,
+                    byte.Parse(
+                        hcfuntion,
+                        System.Globalization.NumberStyles.HexNumber
+                    )
+                });
+                //
+                // TODO: pick only lights module
+                AllUnitsOff(housecode.ToString());
+            }
         }
 
-        private void UpdateInterfaceTime(bool batteryclear)
+        private void UpdateInterfaceTime(bool batteryClear)
         {
             /*
             The PC must then respond with the following transmission
@@ -427,7 +450,7 @@ namespace XTenLib
             message[3] = Convert.ToByte(hour);
             message[4] = Convert.ToByte(yearDay);
             message[5] = Convert.ToByte(wday);
-            message[6] = Convert.ToByte((batteryclear ? 0x07 : 0x03) + Utility.HouseCodeFromString(this.HouseCode)); // Send timer purgeflag + Monitored status clear flag, monitored house code.
+            message[6] = Convert.ToByte((batteryClear ? 0x07 : 0x03) + Utility.HouseCodeFromString(this.HouseCode)); // Send timer purgeflag + Monitored status clear flag, monitored house code.
             //
             if (x10interface.GetType().Equals(typeof(CM15)))
             {
@@ -442,62 +465,67 @@ namespace XTenLib
         }
 
 
-        private object waitAckMonitor = new object();
         private void SendMessage(byte[] message)
         {
-            bool lockAcquired = false;
-
             try
             {
-                if (message.Length > 1 && IsConnected)
-                {
-                    Monitor.Enter(waitAckMonitor);
-                    lockAcquired = true;
-                }
-
-                DebugLog("X10 <", Utility.ByteArrayToString(message));
-                x10interface.WriteData(message);
 
                 // Wait for message delivery acknowledge
                 if (message.Length > 1 && IsConnected)
                 {
-                    //Thread.Sleep(300);
-
-                    commandLastMessage = message;
-                    waitAckTimestamp = DateTime.Now;
-
-                    if (x10interface.GetType().Equals(typeof(CM11)))
+                    lock(waitAckMonitor)
                     {
-                        expectedChecksum = (byte)((message[0] + message[1]) & 0xff);
-                        communicationState = X10CommState.WaitingChecksum;
-                    }
-                    else
-                    {
-                        communicationState = X10CommState.WaitingAck;
-                    }
-
-                    while (commandResendAttempts < commandResendMax && communicationState != X10CommState.Ready)
-                    {
-                        var elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
-                        while (elapsedFromWaitAck.TotalSeconds < commandTimeoutSeconds && communicationState != X10CommState.Ready)
+                        while((DateTime.Now - lastReceivedTs).TotalMilliseconds < 500)
                         {
                             Thread.Sleep(50);
-                            elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                         }
-                        if (elapsedFromWaitAck.TotalSeconds >= commandTimeoutSeconds && communicationState != X10CommState.Ready)
+
+                        DebugLog("X10 <", Utility.ByteArrayToString(message));
+                        x10interface.WriteData(message);
+
+                        commandLastMessage = message;
+                        waitAckTimestamp = DateTime.Now;
+
+                        if (x10interface.GetType().Equals(typeof(CM11)))
                         {
-                            // Resend last message
-                            commandResendAttempts++;
-                            DebugLog(
-                                "X10 >",
-                                "PREVIOUS COMMAND TIMED OUT, RESENDING(" + commandResendAttempts + ")"
-                            );
-                            x10interface.WriteData(commandLastMessage);
-                            waitAckTimestamp = DateTime.Now;
+                            expectedChecksum = (byte)((message[0] + message[1]) & 0xff);
+                            communicationState = X10CommState.WaitingChecksum;
                         }
+                        else
+                        {
+                            communicationState = X10CommState.WaitingAck;
+                        }
+
+                        while (commandResendAttempts < commandResendMax && communicationState != X10CommState.Ready)
+                        {
+                            var elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
+                            while (elapsedFromWaitAck.TotalSeconds < commandTimeoutSeconds && communicationState != X10CommState.Ready)
+                            {
+                                Thread.Sleep(50);
+                                elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
+                            }
+                            if (elapsedFromWaitAck.TotalSeconds >= commandTimeoutSeconds && communicationState != X10CommState.Ready)
+                            {
+                                // Resend last message
+                                commandResendAttempts++;
+                                DebugLog(
+                                    "X10 >",
+                                    "PREVIOUS COMMAND TIMED OUT, RESENDING(" + commandResendAttempts + ")"
+                                );
+                                x10interface.WriteData(commandLastMessage);
+                                waitAckTimestamp = DateTime.Now;
+                            }
+                        }
+                        commandResendAttempts = 0;
+                        commandLastMessage = new byte[0];
+
                     }
-                    commandResendAttempts = 0;
-                    commandLastMessage = new byte[0];
+                }
+                else
+                {
+
+                    DebugLog("X10 <", Utility.ByteArrayToString(message));
+                    x10interface.WriteData(message);
 
                 }
 
@@ -509,22 +537,20 @@ namespace XTenLib
 
                 gotReadWriteError = true;
             }
-
-            if (lockAcquired)
-            {
-                Monitor.Exit(waitAckMonitor);
-            }
-
+            Thread.Sleep(50);
         }
 
 
         private void SetCm15Codes()
         {
-            // BuildTransceivedCodesMessage return byte message for setting transceive codes from given comma separated _monitoredhousecode
-            UpdateInterfaceTime(false);
-            byte[] trcommand = CM15.BuildTransceivedCodesMessage(monitoredHouseCode);
-            SendMessage(trcommand);
-            SendMessage(new byte[] { 0x8B });
+            lock (this)
+            {
+                // BuildTransceivedCodesMessage return byte message for setting transceive codes from given comma separated _monitoredhousecode
+                UpdateInterfaceTime(false);
+                byte[] trcommand = CM15.BuildTransceivedCodesMessage(monitoredHouseCode);
+                SendMessage(trcommand);
+                SendMessage(new byte[] { 0x8B });
+            }
         }
 
 
@@ -736,10 +762,12 @@ namespace XTenLib
                         }
                         else if (readData[0] == (int)X10CommandType.Macro)
                         {
+                            lastReceivedTs = DateTime.Now;
                             DebugLog("X10 >", "MACRO: " + Utility.ByteArrayToString(readData));
                         }
                         else if (readData[0] == (int)X10CommandType.RF)
                         {
+                            lastReceivedTs = DateTime.Now;
                             DebugLog("X10 >", "RFCOM: " + Utility.ByteArrayToString(readData));
                             if (RfDataReceived != null)
                             {
@@ -763,6 +791,7 @@ namespace XTenLib
                         }
                         else if ((readData[0] == (int)X10CommandType.PLC_Poll))
                         {
+                            lastReceivedTs = DateTime.Now;
                             DebugLog("X10 >", "PLCRX: " + Utility.ByteArrayToString(readData));
                             //
                             if (readData.Length > 3)
@@ -824,23 +853,21 @@ namespace XTenLib
                                             }
                                             var mod = moduleStatus[currentUnitCode];
                                             //
-                                            //TODO: this needs more thinking....
-                                            //if (!addressedModules.ContainsKey(housecode))
-                                            //{
-                                            //    addressedModules.Add(housecode, new List<X10Module>());
-                                            //}
-                                            //else if (newAddressData)
-                                            //{
-                                            //    newAddressData = false;
-                                            //    addressedModules[housecode].Clear();
-                                            //}
+                                            //TODO: this needs more testing....
+                                            if (!addressedModules.ContainsKey(housecode))
+                                            {
+                                                addressedModules.Add(housecode, new List<X10Module>());
+                                            }
+                                            else if (newAddressData)
+                                            {
+                                                newAddressData = false;
+                                                addressedModules[housecode].Clear();
+                                            }
                                             //
-                                            //if (!addressedModules[housecode].Contains(mod))
-                                            //{
-                                            //    addressedModules[housecode].Add(mod);
-                                            //}
-                                            //TODO: as a temporary solution, alway clear addressed modules list on plc receive
-                                            addressedModules.Clear();
+                                            if (!addressedModules[housecode].Contains(mod))
+                                            {
+                                                addressedModules[housecode].Add(mod);
+                                            }
                                         }
                                         else if (functionBitmap[b] == (byte)X10FunctionType.Function) // function
                                         {
@@ -861,6 +888,13 @@ namespace XTenLib
                                             //
                                             DebugLog("X10 >", "      " + b + ") House code = " + currentHouseCode);
                                             DebugLog("X10 >", "      " + b + ")    Command = " + currentCommand);
+                                            //
+                                            //
+                                            //TODO: this needs more testing....
+                                            if (!addressedModules.ContainsKey(currentHouseCode))
+                                            {
+                                                addressedModules.Add(currentHouseCode, new List<X10Module>());
+                                            }
                                             //
                                             switch (currentCommand)
                                             {
