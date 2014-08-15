@@ -1,0 +1,38 @@
+﻿{
+	"Commands" : [
+		{
+			"Command": "Control.On",
+			"Aliases": [ "включить", "вкл." ]
+		},
+		{
+			"Command": "Control.Off",
+			"Aliases": [ "выключить", "выкл." ]
+		},
+		{
+			"Command": "Control.Level",
+			"Aliases": [ "уровень" ]
+		},
+		{
+			"Command": "Control.Toggle",
+			"Aliases": [ "переключить" ]
+		},
+		{
+			"Command": "Control.Run",
+			"Aliases": [ "старт", "запуск", "запустить" ]
+		},
+		{
+			"Command": "Control.Break",
+			"Aliases": [ "стоп", "остановить" ]
+		}
+	],
+	"Types" : [
+		{
+			"Type": "Light,Dimmer",
+			"Aliases": [ "весь свет", "свет", "все освещение" ]
+		},
+		{
+			"Type": "Switch",
+			"Aliases": [ "все выключатели", "выключатали", "каждый выключатель" ]
+		}
+	]
+}
