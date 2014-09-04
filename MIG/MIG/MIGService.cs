@@ -495,6 +495,10 @@ namespace MIG
                     {
                         context.Response.ContentType = "audio/mp3";
                     }
+                    else if (requestedUrl.EndsWith(".appcache"))
+                    {
+                        context.Response.ContentType = "text/cache-manifest";
+                    }
                     else
                     {
                         context.Response.ContentType = "text/html";

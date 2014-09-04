@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r409</Version>
+  <Version>1.00 beta r411</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed XTenLib received rf/plc events not firing 
-  - Fixed XTenLib locking issue 
-  - Fixed bug in "Control.Off" command for Insteon interface</ReleaseNote>
-  <ReleaseDate>2014-08-11T11:00:10.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed IR send bug</ReleaseNote>
+  <ReleaseDate>2014-08-14T08:32:49.0000Z</ReleaseDate>
 </ReleaseInfo>

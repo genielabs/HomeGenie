@@ -422,7 +422,11 @@ namespace MIG.Interfaces.Controllers
                 int c = 0;
                 while (request.GetOption(c) != "")
                 {
-                    commands += "\"" + request.GetOption(c) + "\" ";
+                    var options = request.GetOption(c).Split('/');
+                    foreach (string o in options)
+                    {
+                        commands += "\"" + o + "\" ";
+                    }
                     c++;
                 }
                 ShellCommand("irsend", "SEND_ONCE " + commands);

@@ -1,15 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../HomeGenie/release_info.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
-      <File FileName="../HISTORY.TXT" Line="17" Column="29" />
+      <File FileName="../HISTORY.TXT" Line="1" Column="1" />
       <File FileName="../MIG/MIG/Interfaces/HomeAutomation/Insteon.cs" Line="1" Column="1" />
       <File FileName="../MIG/MIG/Interfaces/Controllers/LircRemote.cs" Line="1" Column="1" />
-      <File FileName="../MIG/Support Libraries/XTenLib/XTenManager.cs" Line="491" Column="72" />
       <File FileName="../HomeGenie/HomeGenieUI/html/pages/home.html" Line="1" Column="1" />
-      <File FileName="../HomeGenie/release_info.xml" Line="6" Column="65" />
-      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/X10.cs" Line="334" Column="22" />
-      <File FileName="../HomeGenie/Automation/Scripting/NetHelper.cs" Line="615" Column="21" />
+      <File FileName="../HomeGenie/release_info.xml" Line="1" Column="1" />
+      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/X10.cs" Line="1" Column="1" />
+      <File FileName="../HomeGenie/Automation/Scripting/NetHelper.cs" Line="1" Column="1" />
+      <File FileName="../MIG/MIG/MIGInterfaceCommand.cs" Line="1" Column="1" />
+      <File FileName="../HomeGenie/HomeGenieUI/html/index.html" Line="1" Column="1" />
+      <File FileName="../HomeGenie/HomeGenieUI/html/homegenie.appcache" Line="1" Column="1" />
+      <File FileName="../MIG/MIG/MIGService.cs" Line="1" Column="1" />
+      <File FileName="../MIG/Support Libraries/ZWaveLib/ZWavePort.cs" Line="31" Column="31" />
+      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/ZWave.cs" Line="16" Column="16" />
+      <File FileName="../MIG/Support Libraries/SerialPortLib/SerialPort.cs" Line="35" Column="35" />
+      <File FileName="../MIG/Support Libraries/ZWaveLib/Devices/ProductHandlers/Fibaro/MotionSensor.cs" Line="1" Column="1" />
+      <File FileName="../MIG/Support Libraries/ZWaveLib/Devices/ProductHandlers/Generic/Sensor.cs" Line="56" Column="56" />
+      <File FileName="../MIG/Support Libraries/ZWaveLib/ZWaveMessage.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

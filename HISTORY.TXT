@@ -1,5 +1,17 @@
 ﻿RELEASE HISTORY
 
+04/09/2014 1.00 beta rev 412
+    - Added support for Banana Pi GPIO
+    - Fixed Aeotec Multi-Sensor luminance value
+    - Enabled html5 app caching and iOS launcher icon
+    - Added Russian locales (contributed by Bounz)
+    - Added support for Fibaro System Motion Sensor 010F:0800:1001 (contributed by Bounz)
+
+14/08/2014  1.00 beta rev 411
+    - Fixed IR send bug
+	- Added command "Control.Level.Adjust" to XTenLib, to fix synchronization issues with dimmers w/ level memory
+	- Added "Simulate Only" option to "Level Memory" program (to be used with LW12 dimmers)
+
 11/08/2014  1.00 beta rev 409
 	- Fixed XTenLib received rf/plc events not firing 
 	- Fixed XTenLib locking issue 
@@ -93,7 +105,8 @@
 
 27/04/2014 1.00 beta rev 371
 	- Automation: fixed missing DeviceType update after AddVirtualModule
-	- ZWave: fixed missing modules update after interface initialization, also added discovery button and more logging to the UI
+	- ZWave: fixed missFibaro System Motion Sensor
+    // 010F:0800:1001ing modules update after interface initialization, also added discovery button and more logging to the UI
 
 26/04/2014 1.00 beta rev 370
 	- ZWaveLib: fixed missing modules list update after node add/remove

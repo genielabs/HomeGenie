@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html>
+<html manifest="homegenie.appcache">
 <head>
     <meta charset="utf-8">
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 	<link rel="apple-touch-icon" href="/hg/html/images/genie.png"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>
         HomeGenie
     </title>
@@ -199,8 +202,9 @@
     <!-- Applications / NetPlay -->
     {include pages/apps/netplay/slideshow.html}
 
-    <div  style="position:fixed;top:6px;right:5px;z-index:1000">
-	    <!-- System Interfaces Status -->
+
+    <!-- System Interfaces Status -->
+    <div  style="position:fixed;top:6px;right:5px;z-index:1973">
 	    <div style="float:left;" id="interfaces_status"></div>
 	    <!-- Event Logs button -->
 	    <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
@@ -211,9 +215,10 @@
 
 
     <!-- hg builtin notify popup -->
-    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed">
+    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed"  style="top:0;z-index:1973">
         <p></p>
     </div>
+
 
     <!-- jquery.ui notify popup (stacked) -->
     <div id="content" style="z-index:1973;">
@@ -226,6 +231,177 @@
         </div>
 
     </div>
+
+<!-- Global Popups -->
+
+    <!-- Module Edit Popup -->
+    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 id="module_title">Module Settings</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+
+
+
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td valign="top">
+                        <a href="javascript:HG.WebApp.GroupModules.ModuleIconsToggle()" style="cursor:pointer"><img width="48" height="48" id="module_icon" style="margin-right:10px;margin-top:10px;" src="pages/control/widgets/homegenie/generic/images/unknown.png"></a>
+                    </td>
+                    <td>
+                        <label data-locale-id="configure_module_propname">Name</label>
+                        <input type="text" onchange="HG.WebApp.GroupModules.EditModule.Name = $(this).val()" placeholder="enter name" id="module_name" name="module_name" value="" />
+                    </td>
+                    <td style="padding-left:10px" id="module_options_1">
+                        <label id="module_vmwatts_label">VM Watt</label>
+                        <span id="module_vmwatts_span"><input onchange="HG.WebApp.GroupModules.UpdateWMWatts(HG.WebApp.GroupModules.CurrentModule, $(this).val())" id="module_vmwatts" style="max-width:80px" type="number" text="" number="" value=""></span>
+                    </td>
+                </tr>
+                <tr id="module_options_2">
+                    <td valign="bottom" colspan="2">
+                        <select id="module_type" onchange="HG.WebApp.GroupModules.UpdateModuleType($(this).val())">
+                            <option value="Generic">(select type)</option>
+                            <option data-locale-id="configure_module_typelight" value="Light">Light</option>
+                            <option data-locale-id="configure_module_typedimmer" value="Dimmer">Dimmer</option>
+                            <option data-locale-id="configure_module_typeswitch" value="Switch">Switch</option>
+                            <option data-locale-id="configure_module_typesensor" value="Sensor">Sensor</option>
+                            <!--option data-locale-id="configure_module_typetemperature" value="Temperature">Temperature</option-->
+                            <option data-locale-id="configure_module_typesiren" value="Siren">Siren</option>
+                            <!--option data-locale-id="configure_module_typefan" value="Fan">Fan</option-->
+                            <option data-locale-id="configure_module_typethermostat" value="Thermostat">Thermostat</option>
+                            <option data-locale-id="configure_module_typeshutter" value="Shutter">Shutter</option>
+                            <option data-locale-id="configure_module_typedoorwindow" value="DoorWindow">Door/Window</option>
+                            <option data-locale-id="configure_module_typemediareceiver" value="MediaReceiver">Media Receiver</option>
+                            <option data-locale-id="configure_module_typemediatransmitter" value="MediaTransmitter">Media Transmitter</option>
+                        </select>
+                    </td>
+                    <td valign="bottom" style="padding-left:5px">
+                        <a id="module_options_button" class="ui-btn ui-corner-all" href="#" data-locale-id="configure_module_options">Setup</a>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div id="module_options_3" style="margin-top:4px">
+
+                <div id="module_options_features">
+                    <label for="module_programs_featureset" data-locale-id="configure_module_featuresoptions">Features/Options</label>
+                    <select id="module_programs_featureset" onchange="HG.WebApp.GroupModules.ShowFeatures($(this).val())"></select>
+                    <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
+                    
+                    <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
+
+                    <div style="height:10px"></div>
+                </div>
+
+            </div>
+
+            <div id="configure_module_iconslist" style="position: absolute; display: none; top: 125px; left: 10px; right: 10px; height: 138px; padding-top: 5px; padding-bottom: 5px; border: solid 2px black; background-color: white; z-index: 100; overflow-y: scroll; text-align: center">
+
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/airpurifier.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/aladdinlamp.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/appliance.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/blender.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/blinds.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/coffee_machine.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/computer_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/computer_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/curtains.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/display.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/door.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/fan_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/fan_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/fan_03.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/flood_sensor.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/garden_light.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/heater_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/heater_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/hifi.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/lamp_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/lamp_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/lamp_03.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/lamp_04.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/lavalamp.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/oven.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/printer.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/printer_fax.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/projector.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/radio_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/radio_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/radio_03.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/refrigerator.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/refrigerator_washing.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/robot.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/shader.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/siren.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/smoke_sensor.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/socketplug.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/speaker.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/speakers.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/television_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/television_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/temperature.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/toaster_01.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/toaster_02.png" width="48" height="48" />
+                <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/washingmachine.png" width="48" height="48" />
+
+            </div>
+
+        </div>
+
+        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
+        	<div class="ui-block-a">
+                <a id="module_remove_button" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremove" data-rel="back">Remove from group</a>
+            </div>
+            <div class="ui-block-b">
+                <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optupdate" data-rel="back">Update module</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Program Configuration Popup -->
+    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_program_options">Options</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h4 id="automationprograms_program_title"></h4>
+            <p id="automationprograms_program_description"></p>
+            <div data-role="navbar">
+                <ul id="automationprograms_program_options_list">
+                    <li id="automationprograms_program_options_tab0"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(0)" class="ui-btn-active">Options</a></li>
+                    <li id="automationprograms_program_options_tab1"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(1)">Details</a></li><!-- Implemented Parameters, Features and Virtual Modules -->
+                </ul>
+            </div><!-- /navbar -->
+
+            <div id="automationprograms_program_parameters" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
+
+            <div id="automationprograms_program_details" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
+
+        </div>
+
+        <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
+        	<div class="ui-block-a">
+                <a class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
+        	</div>
+        	<div class="ui-block-b">
+                <a class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
+        	</div>
+        	<div class="ui-block-c">
+                <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
+        	</div>
+        	<div class="ui-block-d">
+                <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit" data-transition="slide">Edit</a>
+        	</div>
+        </div>
+
+    </div>
+
 
 </body>
 </html>

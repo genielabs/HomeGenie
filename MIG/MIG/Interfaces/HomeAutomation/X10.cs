@@ -55,7 +55,8 @@ namespace MIG.Interfaces.HomeAutomation
                 { 703, "Control.Bright" },
                 { 704, "Control.Dim" },
                 { 705, "Control.Level" },
-                { 706, "Control.Toggle" },
+                { 706, "Control.Level.Adjust" },
+                { 707, "Control.Toggle" },
                 { 721, "Control.AllLightsOn" },
                 { 722, "Control.AllLightsOff" }
             };
@@ -67,7 +68,8 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_BRIGHT = new Command(703);
             public static readonly Command CONTROL_DIM = new Command(704);
             public static readonly Command CONTROL_LEVEL = new Command(705);
-            public static readonly Command CONTROL_TOGGLE = new Command(706);
+            public static readonly Command CONTROL_LEVEL_ADJUST = new Command(706);
+            public static readonly Command CONTROL_TOGGLE = new Command(707);
             public static readonly Command CONTROL_ALLLIGHTSON = new Command(721);
             public static readonly Command CONTROL_ALLLIGHTSOFF = new Command(722);
 
@@ -273,6 +275,18 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_DIM)
             {
                 x10lib.Dim(houseCode, unitCode, int.Parse(option));
+            }
+            else if (command == Command.CONTROL_LEVEL_ADJUST)
+            {
+                int dimvalue = int.Parse(option);
+                x10lib.ModulesStatus[ nodeId ].Level = ((double)dimvalue/100D);
+                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = nodeId,
+                    SourceType = "X10 Module",
+                    Path = "Status.Level",
+                    Value = x10lib.ModulesStatus[ nodeId ].Level
+                });
             }
             else if (command == Command.CONTROL_LEVEL)
             {

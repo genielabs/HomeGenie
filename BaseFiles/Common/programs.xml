@@ -75,17 +75,18 @@ Modules
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
+  <ConditionType>OnTrue</ConditionType>
+  <Conditions />
+  <Commands />
+  <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
+	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only");
 });
 // this program will be running in background
 return true;
 </ScriptCondition>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+  <ScriptSource>// We want to do further processing whenever a module changes 
+When.ModuleParameterChanged( (module, property) =&gt; {
 	// stores the Status.MemoryLevel value for recalling last light dimmer level
 	// when switched on
   	if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
@@ -103,7 +104,14 @@ When.ModuleParameterChange( (module, property) =&gt; {
                 {
                     var newlevel = (int)(memory.DecimalValue * 100);
                     Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
-                    module.Level = newlevel;
+                  	if (module.HasFeature("HomeGenie.LevelMemory.SimulateOnly"))
+                    {
+                      	module.Command("Control.Level.Adjust").Set(newlevel.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    }
+                  	else
+                    {
+                     	module.Level = newlevel; 
+                    }
                     // returning false, prevent from routing event to other listeners                  
                     return false;
                 }
@@ -119,27 +127,34 @@ When.ModuleParameterChange( (module, property) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>true</IsRunning>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
-        <Property>HomeGenie.LevelMemory</Property>
-        <Description>Recall last light level when switched on</Description>
-      </ProgramFeature>
-    </Features>
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>16</Address>
-    <Name>Level Memory</Name>
-    <Description>Store and recall last dimmer level when device is switched on.</Description>
-    <Group>Lights</Group>
-    <ActivationTime>2014-05-31T21:12:03.9246114Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:49.099487Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+  <ScriptErrors>[]</ScriptErrors>
+  <IsRunning>true</IsRunning>
+  <Features>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes>Dimmer</ForTypes>
+      <Property>HomeGenie.LevelMemory</Property>
+      <Description>Recall last light level when switched on</Description>
+    </ProgramFeature>
+    <ProgramFeature>
+      <FieldType>checkbox</FieldType>
+      <ForDomains />
+      <ForTypes>Dimmer</ForTypes>
+      <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
+      <Description>Simulate only</Description>
+    </ProgramFeature>
+  </Features>
+  <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>16</Address>
+  <Name>Level Memory</Name>
+  <Description>Store and recall last dimmer level when device is switched on.</Description>
+  <Group>Lights</Group>
+  <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
+  <TriggerTime>2014-08-12T18:20:15.310497Z</TriggerTime>
+  <Type>CSharp</Type>
+  <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1145,7 +1160,7 @@ It can be used for "Sunrise/Sunset" feature.</Description>
 
 return true;</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   	var celladdress  = Program.InputField("CellAddress").Value;
   	var cellusername = Program.InputField("CellUsername").Value;
   	var cellpassword = Program.InputField("CellPassword").Value;
@@ -1189,7 +1204,7 @@ Program.GoBackground();</ScriptSource>
 
 return true;</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   	var celladdress  = Program.InputField("CellAddress").Value;
   	var cellusername = Program.InputField("CellUsername").Value;
   	var cellpassword = Program.InputField("CellPassword").Value;
@@ -1233,7 +1248,7 @@ Program.GoBackground();</ScriptSource>
 
 return true;</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   	var celladdress  = Program.InputField("CellAddress").Value;
   	var cellusername = Program.InputField("CellUsername").Value;
   	var cellpassword = Program.InputField("CellPassword").Value;
@@ -1281,7 +1296,7 @@ Program.Setup(()=&gt;
 return true; // execute "Code To Run"
 </ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   
   	if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
 	{
@@ -1346,7 +1361,7 @@ When.ModuleParameterIsChanging( (module, property) =&gt; {
         {
           Program.Notify("X10 Auto Bright", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to 100%");
           module.Command("Control.Bright").Set("100");
-          return false; // &lt;-- prevent ModuleParameterChange event from being fired
+          return false; // &lt;-- prevent ModuleParameterChanged event from being fired
         }
     }
 
@@ -1521,7 +1536,7 @@ Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
 //
 // module events handling
 //
-When.ModuleParameterChange((module, parameter)=&gt;
+When.ModuleParameterChanged((module, parameter)=&gt;
 {
   	if (Program.Parameter("HomeGenie.SecurityArmed").Value == "1")
     {
@@ -1681,7 +1696,7 @@ while (Program.IsEnabled)
 
 return true;
 </ScriptCondition>
-    <ScriptSource>When.ModuleParameterChange((module, parameter) =&gt; {
+    <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
   	if (parameter.Name == "ZWaveNode.WakeUpNotify")
     {     
@@ -1950,7 +1965,7 @@ var security_events = new Dictionary&lt;string, string&gt;() {
 
 var sc9000Modules = Modules.InDomain("HomeAutomation.X10.SC9000");
 // We want to do further processing whenever a module prop changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
 	
   	if (property.Name == "Receiver.RawData" &amp;&amp; property.Value.StartsWith(RF_SECURITY))
     {
@@ -2179,7 +2194,7 @@ return true;
     <ScriptSource>var serviceurl = "http://api.pushingbox.com/pushingbox";
 
 // We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   
   	if (module.HasFeature("PushingBox.DeviceId") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
 	{
@@ -2528,7 +2543,7 @@ When.WebServiceCallReceived("HomeAutomaion.HomeGenie/Messaging", ( args ) =&gt;
     return "{ 'ResponseValue' : 'OK' }";
 });
 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
 
   	if (notificationurl != "" &amp;&amp; module.HasFeature("MobileNotification.SendChanges") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
 	{
@@ -2672,7 +2687,7 @@ energy consumption.</Description>
 
 return true;
 </ScriptCondition>
-    <ScriptSource>When.ModuleParameterChange((module, parameter) =&gt; {
+    <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 	var nif = (" " + parameter.Value + " "); // node information frame
   	switch (parameter.Name)
     {
@@ -2834,7 +2849,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
 
 return true;</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   	var celladdress  = Program.InputField("CellAddress").Value;
   	var cellusername = Program.InputField("CellUsername").Value;
   	var cellpassword = Program.InputField("CellPassword").Value;
@@ -2881,7 +2896,7 @@ return true;
 </ScriptCondition>
     <ScriptSource>var x10rfModules = Modules.InDomain("HomeAutomation.X10.RF");
 // We want to do further processing whenever a module prop changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
 	
   	if (property.Name == "Receiver.RawData" &amp;&amp; module.Instance.Domain == "HomeAutomation.X10")
     {
@@ -2950,7 +2965,7 @@ var ledsname = new Dictionary&lt;string, string&gt;() { {"1", "ReadyLed"}, {"2",
 var ledbusy = false;
 using (var connection = new GpioConnection(systemleds))
 {  
-	When.ModuleParameterChange( (module, parameter) =&gt; {
+	When.ModuleParameterChanged( (module, parameter) =&gt; {
       	if (!ledbusy &amp;&amp; module.Instance.Domain != moduleDomain)
         {
           	ledbusy = true;
@@ -3575,7 +3590,7 @@ Func&lt;string,bool&gt; SmsSend = new Func&lt;string,bool&gt;((message)=&gt;{
 
 
 // We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
   	if (Program.InputField("SmsRecipient").Value != "")
     {
         // Security Alarm System Notification
@@ -4550,7 +4565,7 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt;
 
 
 // We want to do further processing whenever a module changes 
-When.ModuleParameterChange( (module, property) =&gt; {
+When.ModuleParameterChanged( (module, property) =&gt; {
     if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
     {
         try{
