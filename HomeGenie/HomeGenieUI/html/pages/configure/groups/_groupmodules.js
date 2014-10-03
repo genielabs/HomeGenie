@@ -519,7 +519,9 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
         if (mp.ProgramIndex == programid) {
             var featurecb = '';
             if (mp.FieldType == "text") {
-                featurecb = '<label for="feature-' + p + '">' + mp.Description + '</label><div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input name="option-' + p + '" id="feature-' + p + '" style="width:98%;" data-role="none" onchange="HG.WebApp.GroupModules.FeatureUpdate(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\', this.value)" type="text" value="' + mp.Value + '" data-mini="true" /></div>';
+                featurecb = '<label for="feature-' + p + '">' + mp.Description + '</label>';
+                featurecb+= '<div style="position:relative;"><div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input name="option-' + p + '" id="feature-' + p + '" style="width:98%;" data-role="none" onchange="HG.WebApp.GroupModules.FeatureUpdate(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\', this.value)" type="text" value="' + mp.Value + '" data-mini="true" /></div>';
+                //featurecb+= '<div data-bind-field="feature-' + p + '" class="hg-wizard-capturebutton" href="#" onclick="automationpage_WizardCaptureFieldToggle($(this), \'Property\')">&lt;&lt;</div></div>';
                 $('#module_programs_features').append(featurecb);
             }
         }

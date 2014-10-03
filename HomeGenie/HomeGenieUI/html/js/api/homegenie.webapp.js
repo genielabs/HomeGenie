@@ -16,7 +16,6 @@ HG.WebApp.Data.CurrentKw = -1;
 //
 HG.WebApp.Data._CurrentGroup = null;
 HG.WebApp.Data._CurrentGroupIndex = 0;
-HG.WebApp.Data._CurrentModule = null;
 //
 HG.WebApp.Data._CurrentLocale = {};
 //
@@ -144,18 +143,23 @@ HG.WebApp.InitializePage = function ()
         {
             HG.WebApp.ProgramsList.LoadPrograms();
         }
+		// TODO: deprecate this
         else if (this.id == 'page_automation_editprogram_code') 
         {
-            $('#automation_program_scriptcondition').next().css('display', 'none');
-            $('#automation_program_scriptsource').next().css('display', '');
-            HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-            if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '' && HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '[]')
-            {
-                HG.WebApp.ProgramEdit.ShowProgramErrors(HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors);
-            }
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
+
+            $('#automation_program_scriptcondition').next().css('display', '');
+            $('#automation_program_scriptsource').next().css('display', '');
+            
+			HG.WebApp.ProgramEdit.SetTab(1);
+            HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+            //if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '' && HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '[]')
+            //{
+            //    HG.WebApp.ProgramEdit.ShowProgramErrors(HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors);
+            //}
+
             automationpage_ConditionsRefresh();                                                    
             automationpage_CommandsRefresh();                                                   
         }
@@ -297,6 +301,32 @@ HG.WebApp.InitializePage = function ()
         );
     };
 
+	$( "#automation_group_module_edit" ).enhanceWithin().popup();
+    $('#module_update_button').bind('click', function (event) {
+        HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
+        HG.WebApp.GroupModules.CurrentModule.DeviceType = HG.WebApp.GroupModules.EditModule.DeviceType;
+        HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, 'VirtualMeter.Watts', HG.WebApp.GroupModules.EditModule.WMWatts);
+        //TODO: find out why it's not setting NeedsUpdate flag to true for VirtualMeter.Watts
+        HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'VirtualMeter.Watts', HG.WebApp.GroupModules.EditModule.WMWatts);
+        //
+        for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
+            var prop = HG.WebApp.GroupModules.EditModule.Properties[p];
+            HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, prop.Name, prop.Value);
+            prop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.CurrentModule, prop.Name);
+            prop.NeedsUpdate = 'true';
+        }
+        //
+        HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, function () {
+        	HG.WebApp.GroupModules.ModuleUpdatedCallback();
+        });
+    });
+    $('#module_remove_button').bind('click', function (event) {
+        HG.WebApp.GroupModules.DeleteGroupModule(HG.WebApp.GroupModules.CurrentGroup, HG.WebApp.GroupModules.CurrentModule);
+        HG.WebApp.GroupsList.SaveGroups(null);
+    });
+    //
+    $( "#automationprograms_program_options" ).enhanceWithin().popup();
+
 };
 
 
@@ -356,7 +386,7 @@ HG.WebApp.InitializePage = function ()
 //
 {include pages/configure/scheduler/_scheduler.js}	
 //
-// namespace : HG.WebApp.Apps.NetPlay.SlideShow 
+// namespace : HG.WebApp.Apps.NetPlEditCurrentModuleay.SlideShow 
 // info      : -
 //
 {include pages/apps/netplay/_slideshow.js}	

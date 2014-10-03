@@ -211,20 +211,25 @@
     </div>
 </div>
 
-<div id="automation_condition_delete" class="ui-corner-all hg-popup-a" data-role="popup">
+<div id="automation_condition_delete" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-overlay-theme="b">
     <div data-role="header" class="ui-corner-top">
-        <h1 data-locale-id="configure_program_deleteconditiontitle">Delete Condition?</h1>
+        <h1 data-locale-id="configure_program_wizard_editline_title">Edit Line</h1>
     </div>
     <div class="ui-content ui-corner-bottom">
-        <h3 data-locale-id="configure_program_deleteconditionprompt" class="ui-title">Are you sure you want to delete this condition statement?</h3>
-        <p data-locale-id="configure_program_deleteconditionadvice">This action cannot be undone.</p>
+        <p data-locale-id="configure_program_wizard_editline_prompt">Move or delete line <span id="condition_linenumber_label" style="font-weight:bold"></span></p>
+        <ul data-role="listview" data-inset="true">
+            <li>
+            	<label data-locale-id="configure_program_wizard_editline_number" for="condition_linenumber_input">New line number</label>
+            	<input id="condition_linenumber_input" type="range" min="1" max="1" name="value" value="1" placeholder="line number" />
+        	</li>
+    	</ul>
         <div class="ui-grid-a">
-        	<div class="ui-block-a">
-        		<a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
-        	</div>
-        	<div class="ui-block-b">
-        		<a id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
-        	</div>
+            <div class="ui-block-a">
+		        <a data-locale-id="configure_program_wizard_editline_delete" id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
+            </div>
+            <div class="ui-block-b">
+		        <a data-locale-id="configure_program_wizard_editline_change" id="condition_move_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Move</a>
+            </div>
         </div>
     </div>
 </div>
@@ -248,36 +253,19 @@
 
         //
         // automation pop wizard popups
-        $('[data-role=popup]').on('popupbeforeposition', function (event) {
-            if (this.id == 'automation_domain') {
-                condition_targetdomain = '';
-                condition_targetsubject = '';
-                condition_targetparameter = '';
-                condition_type = '';
-                condition_value = '';
-                //
-                $('#comparison_value_input').val('');
-                //
-                build_condition();
-            }
-        });
-
-
-        $('#automation_program_conditions').on('click', ' > li', function () {
-            selected_condition_index = $(this).index();
-        });
-
-        $('#condition_delete_button').bind('click', function (event) {
-            if (selected_condition_index >= 0) {
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.splice(selected_condition_index, 1);
-                automationpage_ConditionsRefresh();
-            }
-        });
-
-
-        $('#automation_conditiontarget').on('click', 'li', function () {
-            condition_targetdomain = $(this).attr('data-context-value');
+        $('#automation_domain').on('popupbeforeposition', function (event) {
+            condition_targetdomain = '';
+            condition_targetsubject = '';
+            condition_targetparameter = '';
+            condition_type = '';
+            condition_value = '';
             //
+            $('#comparison_value_input').val('');
+            //
+            build_condition();
+        });
+		
+		$('#automation_target_popup').on('popupbeforeposition', function (event) {
             $('#automation_condition_target').listview().empty();
             //
             switch (condition_targetdomain) {
@@ -290,14 +278,10 @@
             }
             $('#automation_condition_target').listview('refresh');
             //
-            build_condition();
-            //
-            HG.WebApp.Utility.SwitchPopup('#automation_domain', '#automation_target_popup', true);
-        });
+            build_condition();		
+		});
 
-        $('#automation_target_popup').on('click', 'li', function () {
-            condition_targetsubject = $(this).attr('data-context-value');
-            //
+		$('#automation_target_homegenie_parameter').on('popupbeforeposition', function (event) {
             $('#automation_condition_property').listview().empty();
             //
             var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition_targetdomain, condition_targetsubject);
@@ -338,12 +322,9 @@
             $('#automation_condition_property').listview('refresh');
             //
             build_condition();
-            //
-            HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
-        });
+		});
 
-        $('#automation_target_homegenie_parameter').on('click', 'li', function () {
-            condition_targetparameter = $(this).attr('data-context-value')
+		$('#automation_condition_type').on('popupbeforeposition', function (event) {
             if (condition_targetparameter == 'Scheduler.TimeEvent' || condition_targetparameter == 'Receiver.RawData') {
                 $('#configure_program_conditionlessthan').hide();
                 $('#configure_program_conditiongreaterthan').hide();
@@ -352,8 +333,58 @@
                 $('#configure_program_conditionlessthan').show();
                 $('#configure_program_conditiongreaterthan').show();
             }
-            build_condition();
             //
+            build_condition();
+		});
+
+		$('#automation_condition_value').on('popupbeforeposition', function (event) {
+			$('#comparison_value_input').val(condition_value);
+            build_command();
+		});
+		$('#automation_condition_delete').on('popupbeforeposition', function (event) {
+			$('#condition_linenumber_label').html('#' + (selected_condition_index + 1));
+			$('#condition_linenumber_input').val(selected_condition_index + 1);
+			$('#condition_linenumber_input').attr('max', HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length);
+            $('#condition_linenumber_input').slider('refresh');
+		});
+
+        //$('#automation_program_conditions').on('click', ' > li', function () {
+        //    selected_condition_index = $(this).index();
+        //});
+
+        $('#condition_delete_button').bind('click', function (event) {
+            if (selected_condition_index >= 0) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.splice(selected_condition_index, 1);
+                automationpage_ConditionsRefresh();
+            }
+        });
+        $('#condition_move_button').bind('click', function (event) {
+            if (selected_condition_index >= 0 && newLine != selected_condition_index) {
+            	var newLine = $('#condition_linenumber_input').val() - 1;
+            	var conditions = HG.WebApp.ProgramEdit._CurrentProgram.Conditions;
+            	var conditionObj = conditions[selected_condition_index];
+            	var direction = (selected_condition_index > newLine ? -1 : +1);
+            	for (var c = selected_condition_index; c != newLine; c += direction)
+            	{
+            		conditions[c] = conditions[c + direction];
+            	}
+            	conditions[newLine] = conditionObj;
+                automationpage_ConditionsRefresh();
+            }
+        });
+
+        $('#automation_conditiontarget').on('click', 'li', function () {
+            condition_targetdomain = $(this).attr('data-context-value');
+            HG.WebApp.Utility.SwitchPopup('#automation_domain', '#automation_target_popup', true);
+        });
+
+        $('#automation_target_popup').on('click', 'li', function () {
+            condition_targetsubject = $(this).attr('data-context-value');
+            HG.WebApp.Utility.SwitchPopup('#automation_target_popup', '#automation_target_homegenie_parameter', true);
+        });
+
+        $('#automation_target_homegenie_parameter').on('click', 'li', function () {
+            condition_targetparameter = $(this).attr('data-context-value')
             HG.WebApp.Utility.SwitchPopup('#automation_target_homegenie_parameter', '#automation_condition_type', true);
         });
 
@@ -431,7 +462,14 @@
                 'ComparisonValue': condition_value
             };
 
-            HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
+            if (selected_condition_index == -1)
+            {
+	            HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
+            }
+           	else
+           	{
+           		HG.WebApp.ProgramEdit._CurrentProgram.Conditions[selected_condition_index] = conditionobj;
+           	}
 
             automationpage_ConditionsRefresh();
 
@@ -439,7 +477,11 @@
 
     });
 
-
+    function automationpage_WizardConditionAdd()
+    {
+    	selected_condition_index = -1;
+    	$('#automation_domain').popup('open');
+    }
 
     function automationpage_GetModulesListViewItems(domain, showall) {
         var htmlopt = '';
@@ -482,39 +524,67 @@
     }
 
 
-
-
+    function automationpage_ConditionChangeLine(lineNumber)
+    {
+		selected_condition_index = lineNumber;
+		$('#automation_condition_delete').popup('open');
+    }
+    
+    function automationpage_ConditionEditLine(lineNumber)
+    {
+		selected_condition_index = lineNumber;
+        var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[lineNumber];
+    	condition_targetdomain = condition.Domain;
+		condition_targetsubject = condition.Target;
+		condition_targetparameter = condition.Property;
+		condition_type = condition.ComparisonOperator;
+		condition_value = condition.ComparisonValue;
+		$('#automation_condition_value').popup('open');
+		build_condition();
+    }
 
 
 
     function automationpage_ConditionsRefresh() {
 
         $('#automation_program_conditions').empty();
+        var html = '';
         for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length; i++) {
-            if (HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator == "-1") {
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator = "LessThan";
+            var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i];
+            var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition.Domain, condition.Target);
+
+            if (condition.ComparisonOperator == "-1") {
+                condition.ComparisonOperator = "LessThan";
             }
-            else if (HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator == "0") {
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator = "Equals";
+            else if (condition.ComparisonOperator == "0") {
+                condition.ComparisonOperator = "Equals";
             }
-            else if (HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator == "1") {
-                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator = "GreaterThan";
+            else if (condition.ComparisonOperator == "1") {
+                condition.ComparisonOperator = "GreaterThan";
             }
-            //
-            var pname = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].Property;
-            if (pname.indexOf('.') > 0) {
-                pname = pname.substring(pname.indexOf('.') + 1);
-            }
+			var lineNumber = ('0000' + (i+1).toString()).substr((i+1).toString().length);
+			var displayName = (module != null ? module.Name : '');
+			html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
+			html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
+			html += '<div class="ui-block-a">&nbsp;' + condition.Domain + ':' + condition.Target + '</div>';
+			html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+			html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
+			html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
+			html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
+            /*
             $('#automation_program_conditions').append('' +
                 '<li data-context-value="' + i + '"><a>' +
-                ' <span style="color:gray">' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].Domain.split('.')[1] + '</span>' +
-                ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].Target +
+                ' <span style="color:gray">' + condition.Domain.split('.')[1] + '</span>' +
+                ' ' + condition.Target +
                 ' <span style="color:gray">property</span> <b>' + pname + '</b>' +
-                ' <span style="color:gray">' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonOperator + '</span>' +
-                ' <b>' + HG.WebApp.ProgramEdit._CurrentProgram.Conditions[i].ComparisonValue + '</b>' +
+                ' <span style="color:gray">' + condition.ComparisonOperator + '</span>' +
+                ' <b>' + condition.ComparisonValue + '</b>' +
                 '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
+            */
+			html += '</div>';
         }
-        $('#automation_program_conditions').listview('refresh');
+        $('#automation_program_conditions').append(html);
+        $('#automation_program_conditions').trigger('create');
 
     }
 

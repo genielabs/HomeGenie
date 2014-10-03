@@ -36,8 +36,6 @@ using MIG;
 using MIG.Interfaces.HomeAutomation.Commons;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using XTenLib;
-using ZWaveLib.Devices;
 using System.Diagnostics;
 using System.Net.Sockets;
 using OpenSource.UPnP;
@@ -69,9 +67,6 @@ namespace HomeGenie.Service
         //
         private SystemConfiguration systemConfiguration;
         //
-        // Reference to Z-Wave and X10 drivers (obtained from MIGService)
-        private ZWaveLib.Devices.Controller zwaveController;
-        private XTenLib.XTenManager x10Controller;
         // public events
         public event Action<LogEntry> LogEventAction;
 

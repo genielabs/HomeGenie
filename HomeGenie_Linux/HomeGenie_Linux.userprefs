@@ -2,27 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
-      <File FileName="../HISTORY.TXT" Line="1" Column="1" />
-      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/Insteon.cs" Line="1" Column="1" />
-      <File FileName="../MIG/MIG/Interfaces/Controllers/LircRemote.cs" Line="1" Column="1" />
-      <File FileName="../HomeGenie/HomeGenieUI/html/pages/home.html" Line="1" Column="1" />
-      <File FileName="../HomeGenie/release_info.xml" Line="1" Column="1" />
-      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/X10.cs" Line="1" Column="1" />
-      <File FileName="../HomeGenie/Automation/Scripting/NetHelper.cs" Line="1" Column="1" />
-      <File FileName="../MIG/MIG/MIGInterfaceCommand.cs" Line="1" Column="1" />
-      <File FileName="../HomeGenie/HomeGenieUI/html/index.html" Line="1" Column="1" />
-      <File FileName="../HomeGenie/HomeGenieUI/html/homegenie.appcache" Line="1" Column="1" />
-      <File FileName="../MIG/MIG/MIGService.cs" Line="1" Column="1" />
-      <File FileName="../MIG/Support Libraries/ZWaveLib/ZWavePort.cs" Line="31" Column="31" />
-      <File FileName="../MIG/MIG/Interfaces/HomeAutomation/ZWave.cs" Line="16" Column="16" />
-      <File FileName="../MIG/Support Libraries/SerialPortLib/SerialPort.cs" Line="35" Column="35" />
-      <File FileName="../MIG/Support Libraries/ZWaveLib/Devices/ProductHandlers/Fibaro/MotionSensor.cs" Line="1" Column="1" />
-      <File FileName="../MIG/Support Libraries/ZWaveLib/Devices/ProductHandlers/Generic/Sensor.cs" Line="56" Column="56" />
-      <File FileName="../MIG/Support Libraries/ZWaveLib/ZWaveMessage.cs" Line="1" Column="1" />
+      <File FileName="../HISTORY.TXT" Line="23" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/gene/Documenti/HomeGenie-sfnet/HomeGenie/HomeGenie/HomeGenieUI/index.master.designer.cs" line="10" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="Generoso Martello" Email="generoso@martello.com" Copyright="GenieLabs" Company="GenieLabs" Trademark="" />

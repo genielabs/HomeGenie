@@ -5,6 +5,7 @@ HG.WebApp.ProgramEdit._CurrentProgram.Conditions = Array();
 HG.WebApp.ProgramEdit._CurrentProgram.Commands = Array(); 
 HG.WebApp.ProgramEdit._IsCapturingConditions = false;
 HG.WebApp.ProgramEdit._IsCapturingCommands = false;
+HG.WebApp.ProgramEdit._CurrentTab = 1;
 
 HG.WebApp.ProgramEdit.InitializePage = function () 
 	{
@@ -20,6 +21,16 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
             //
             $('#automation_program_delete_button').bind('click', function (event) {
 				HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
+                return true;
+            });
+			//
+			$('#configure_program_editorcompilecode').bind('click', function (event) {
+				HG.WebApp.ProgramEdit.CompileProgram();
+                return true;
+            });
+			//
+			$('#configure_program_editorcompilecode2').bind('click', function (event) {
+				HG.WebApp.ProgramEdit.CompileProgram();
                 return true;
             });
             //
@@ -125,24 +136,8 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                 }
                 $('#automation_commandtarget').listview('refresh');//trigger('create');
             });
-            //
+            //HG.WebApp.ProgramEdit.CompileProgram
             $('#automation_target_popup').on('popupbeforeposition', function (event) {
-            });
-            //
-            $('#editprograms_code_codeblockstoggle').click(function(e) {
-                e.stopImmediatePropagation();
-                e.preventDefault();
-                if ($('#automation_program_scriptcondition').next().css('display') == 'none')
-                {
-                    $('#automation_program_scriptcondition').next().css('display', '');
-                    $('#automation_program_scriptsource').next().css('display', 'none');
-                }
-                else
-                {
-                    $('#automation_program_scriptcondition').next().css('display', 'none');
-                    $('#automation_program_scriptsource').next().css('display', '');
-                }
-                HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
             });
         });
 	};
@@ -200,47 +195,46 @@ HG.WebApp.ProgramEdit.GetModuleComparableProperties = function (module)
 
 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () 
     {
-        var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;
-		if (errors.trim() != '' && errors.trim() != '[]')
+        var editMode = HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase();
+    	if (editMode != 'wizard')
+    	{
+	        var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;
+			if (typeof errors != 'undefined' && errors.trim() != '' && errors.trim() != '[]')
+			{
+				HG.WebApp.ProgramEdit.ShowProgramErrors(errors);
+			}
+			else
+			{
+				HG.WebApp.ProgramEdit.HideProgramErrors();
+			}
+	        // update editor mode
+			if (editMode == 'python') {
+			    editor1.setOption('mode', 'text/x-python');
+			    editor2.setOption('mode', 'text/x-python');
+			}
+			else if (editMode == 'ruby') {
+			    editor1.setOption('mode', 'text/x-ruby');
+			    editor2.setOption('mode', 'text/x-ruby');
+			}
+			else if (editMode == 'javascript') {
+			    editor1.setOption('mode', 'text/javascript');
+			    editor2.setOption('mode', 'text/javascript');
+			}
+			else if (editMode == 'csharp') {
+			    editor1.setOption('mode', 'text/x-csharp');
+			    editor2.setOption('mode', 'text/x-csharp');
+			}
+			setTimeout(function(){
+				editor1.refresh();
+				editor2.refresh();
+			}, 500);
+		}
+		else
 		{
-		    $('#program_error_button').show(100);
+			HG.WebApp.ProgramEdit.HideProgramErrors();
 		}
-        else
-        {
-            $('#program_error_button').hide(100);
-		}
-        // update editor mode
-		if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
-		    editor1.setOption('mode', 'text/x-python');
-		    editor2.setOption('mode', 'text/x-python');
-		}
-		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
-		    editor1.setOption('mode', 'text/x-ruby');
-		    editor2.setOption('mode', 'text/x-ruby');
-		}
-		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
-		    editor1.setOption('mode', 'text/javascript');
-		    editor2.setOption('mode', 'text/javascript');
-		}
-		else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
-		    editor1.setOption('mode', 'text/x-csharp');
-		    editor2.setOption('mode', 'text/x-csharp');
-		}
-        //
-		if ($('#automation_program_scriptcondition').next().css('display') == 'none') {
-		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>CODE TO RUN</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-		    $('#editprograms_code_codeblockstoggle').text('Edit Trigger Code');
-		    setTimeout(function () {
-		        editor2.refresh();
-		    }, 500);
-		}
-		else {
-		    $('#page_automation_programcode_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM <b>TRIGGER CODE</b> (' + HG.WebApp.ProgramEdit._CurrentProgram.Type + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
-		    $('#editprograms_code_codeblockstoggle').text('Edit Code to Run');
-		    setTimeout(function () {
-		        editor1.refresh();
-		    }, 500);
-		}
+		// update title
+        $('#page_automation_program_title').html('<span style="font-size:9pt;font-weight:bold">PROGRAM EDITOR (' + editMode + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Address + ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
     };
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () 
@@ -298,6 +292,9 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 
 HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 	{
+		//$('#configure_program_editorruncode').addClass('ui-disabled');
+		$('#configure_program_editorcompilecode').addClass('ui-disabled');
+		$('#configure_program_editorcompilecode2').addClass('ui-disabled');
 	    $.mobile.loading('show', { text: 'Updating program data', textVisible: true, theme: 'a', html: '' });
 		$('#control_groupslist').empty();
 		$.ajax({
@@ -307,9 +304,12 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			data: JSON.stringify(programblock),
 			success: function (response) {
 				$.mobile.loading('hide');
+				//$('#configure_program_editorruncode').removeClass('ui-disabled');
+				$('#configure_program_editorcompilecode').removeClass('ui-disabled');
+				$('#configure_program_editorcompilecode2').removeClass('ui-disabled');
 				if (response.trim() != '' && response.trim() != '[]')
 				{
-					//$('#program_barbutton_run').attr('disabled', 'disabled');
+					//$('#proHG.WebApp.ProgramEdit.UpdateProgramgram_barbutton_run').attr('disabled', 'disabled');
 				    //$('#program_barbutton_run').button().button('refresh');
 				    $.mobile.loading('show', { text: 'Error updating program!', textVisible: true });
 					HG.WebApp.ProgramEdit.ShowProgramErrors(response);
@@ -319,7 +319,8 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 					//$('#program_barbutton_run').removeAttr('disabled');
 				    //$('#program_barbutton_run').button().button('refresh');
 				    $.mobile.loading('show', { text: 'Saving succeed.', textVisible: true });
-					HG.WebApp.ProgramEdit.HideProgramErrors();
+				    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+					//HG.WebApp.ProgramEdit.HideProgramErrors();
 				}
 				setTimeout(function () { $.mobile.loading('hide'); }, 2000);
 			    //
@@ -337,11 +338,40 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			},
 			error: function (a, b, c) {
 				$.mobile.loading('hide');
+				//$('#configure_program_editorruncode').removeClass('ui-disabled');
+				$('#configure_program_editorcompilecode').removeClass('ui-disabled');
+				$('#configure_program_editorcompilecode2').removeClass('ui-disabled');
 			    //
 				$.mobile.loading('show', { text: 'An error occurred!', textVisible: true });
 				setTimeout(function () { $.mobile.loading('hide'); }, 5000);
 			}
 		});	        	
+	};
+
+HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position) 
+	{
+		var editor = (blockType == 'TC' ? editor1 : editor2);
+		if (blockType == 'TC')
+		{
+			HG.WebApp.ProgramEdit.SetTab(3);
+		}
+		else
+		{
+			HG.WebApp.ProgramEdit.SetTab(2);
+		}
+		editor.focus();
+		editor.setCursor(0);
+       	var lc = editor.addLineClass(position.line, null, "center-me");
+	    window.setTimeout(function() {
+	       var line = $('#page_automation_editprogram .CodeMirror-lines .center-me');
+	       if (typeof line.offset() != 'undefined')
+	       {
+		       var h = line.parent();
+		       $('.CodeMirror-scroll').scrollTop(0).scrollTop(line.offset().top - $('.CodeMirror-scroll').offset().top - Math.round($('.CodeMirror-scroll').height()/2));
+		       editor.removeLineClass(lc, null, "center-me");
+			   editor.setCursor(position);
+		    }
+	   }, 500);
 	};
 
 HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
@@ -387,11 +417,10 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		            if (marker != null)
 		            {
 		                $(marker).qtip({
-		                    content: { title: 'Error', text: message },
+		                    content: { title: 'Error', text: message, button: 'Close' },
 		                    show: { event: 'mouseover', solo: true },
 		                    hide: 'mouseout',
-		                    style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-		                    button: true
+		                    style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' }
 		                });
 		                message = '';
 		            }
@@ -401,7 +430,7 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		            {
 		                editor1.setGutterMarker(err.Line - 1, 'CodeMirror-lint-markers-1', marker);
 		            }
-		            else // CR = Code to Run
+		            else // CR = Code to Run = Program Code
 		            {
 		                editor2.setGutterMarker(err.Line - 1, 'CodeMirror-lint-markers-2', marker);
 		            }
@@ -410,27 +439,52 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		        }
 		        message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '</br>';
                 //
-		        popupMessage += '<b>Line ' + err.Line + ', Column ' + err.Column + '</b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger Code' : 'lime">Code to Run') + '</font>):<br/>';
+		        popupMessage += '<b><a href="javascript:HG.WebApp.ProgramEdit.JumpToLine(\'' + err.CodeBlock + '\', { line: ' + (err.Line - 1) + ', ch: ' + (err.Column - 1) + ' })">Line ' + err.Line + ', Column ' + err.Column + '</a></b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger Code' : 'lime">Program Code') + '</font>):<br/>';
 		        popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '</br>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
             }
 		    if (marker != null) {
 		        $(marker).qtip({
-		            content: { title: 'Error', text: message },
+		            content: { title: 'Error', text: message, button: 'Close' },
 		            show: { event: 'mouseover', solo: true },
 		            hide: 'mouseout',
-		            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-		            button: true
+		            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' }
 		        });
 		    }
 		    //
-		    $('#program_error_message_text').html(popupMessage);
-		    setTimeout(function () {
-		        if ($('#program_error_message_text').html() != '')
-		        {
-		            $('#program_error_message').popup().popup('open');
-		            $('#program_error_button').show(100);
-		        }
-		    }, 2000);
+		    //$('#program_error_message_text').html(popupMessage);
+		    if (popupMessage != '')
+		    {
+			    $('#program_error_button').show();
+			    $('#program_error_button2').show();
+			    //
+			    $('#program_error_button').qtip({
+			            content: { title: 'Error', text: popupMessage, button: 'Close' },
+			            show: { event: 'mouseover', ready: (HG.WebApp.ProgramEdit._CurrentTab == 2 ? true : false), delay: 500 },
+				        hide: { event: false, inactive: 5000 },
+			            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+			            position: { adjust : { screen: true }, my: 'top center', at: 'bottom center' }
+			        });
+			    //
+			    $('#program_error_button2').qtip({
+			            content: { title: 'Error', text: popupMessage, button: 'Close' },
+			            show: { event: 'mouseover', ready: (HG.WebApp.ProgramEdit._CurrentTab == 3 ? true : false), delay: 500 },
+				        hide: { event: false, inactive: 5000 },
+			            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+			            position: { adjust : { screen: true }, my: 'top center', at: 'bottom center' }
+			        });
+			}
+			else
+			{
+			    $('#program_error_button').hide();
+			    $('#program_error_button2').hide();
+			}
+		    //setTimeout(function () {
+		    //    if ($('#program_error_message_text').html() != '')
+		    //    {
+		    //        $('#program_error_message').popup().popup('open');
+		    //        $('#program_error_button').show(100);
+		    //    }
+		    //}, 2000);
         }
 
 
@@ -440,9 +494,10 @@ HG.WebApp.ProgramEdit.HideProgramErrors = function ()
 	{
         editor1.clearGutter('CodeMirror-lint-markers-1');
         editor2.clearGutter('CodeMirror-lint-markers-2');
-        $('#program_error_message_text').html('');
+        //$('#program_error_message_text').html('');
         $('#program_error_button').hide();
-        $('#program_error_message').popup().popup('close');
+        $('#program_error_button2').hide();
+        //$('#program_error_message').popup().popup('close');
 	};
 
 HG.WebApp.ProgramEdit.CompileProgram = function () {
@@ -451,7 +506,8 @@ HG.WebApp.ProgramEdit.CompileProgram = function () {
 	    HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
     };
 HG.WebApp.ProgramEdit.SaveProgram = function () {
-        $('#program_error_button').hide(500);
+        $('#program_error_button').hide();
+        $('#program_error_button2').hide();
         var programblock = HG.WebApp.ProgramEdit.SetProgramData();
 	    HG.WebApp.ProgramEdit.UpdateProgram(programblock, false);
 	};
@@ -560,4 +616,19 @@ HG.WebApp.ProgramEdit.DeleteProgram = function (program) {
 	            $.mobile.changePage($('#page_automation_programs'), { transition: 'fade' });
 	        }, 200);
 	    });
+	};
+
+
+HG.WebApp.ProgramEdit.SetTab = function (tabindex) 
+	{
+		HG.WebApp.ProgramEdit._CurrentTab = tabindex;
+		HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+		$('#program_edit_tab1').hide();
+		$('#program_edit_tab2').hide();
+		$('#program_edit_tab3').hide();
+		$('#program_edit_tab1_button').removeClass('ui-btn-active');
+		$('#program_edit_tab2_button').removeClass('ui-btn-active');
+		$('#program_edit_tab3_button').removeClass('ui-btn-active');
+		$('#program_edit_tab' + tabindex).show();
+		$('#program_edit_tab' + tabindex + '_button').addClass('ui-btn-active');
 	};

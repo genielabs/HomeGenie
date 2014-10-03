@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r411</Version>
+  <Version>1.00 beta r415</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed IR send bug</ReleaseNote>
-  <ReleaseDate>2014-08-14T08:32:49.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Eden Sensor Board programs to Raspberry Pi section (http://homegenie.it/docs/diy/eden.php)
+  - Improved Program Editor UI
+  - Updated Python and Ruby engines to latest IronLanguages release
+  - Fixed bug in Z-Wave discovery (issue #12)
+  - Added user definable API commands to Wizard script editor (issue #28)
+  - Added remote node prefix to domain of remotely Interconnected modules (issue #26)
+  - Added last updated time info to sensor widget
+  - Updated Jint Javascript Engine (r353-4) - now accepting hg.Program.Setup and other methods using Action delegates
+  - Updated RaspberrySharp-IO
+  - Fixed occasional bug in reading temperature value from HSM-100 sensor</ReleaseNote>
+  <ReleaseDate>2014-10-02T12:20:33.0000Z</ReleaseDate>
 </ReleaseInfo>
