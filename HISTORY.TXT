@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+04/10/2014 1.00 beta rev 416
+	- Some minor fixes to r415
+
 02/10/2014 1.00 beta rev 415
 	- Added Eden Sensor Board programs to Raspberry Pi section (http://homegenie.it/docs/diy/eden.php)
 	- Improved Program Editor UI

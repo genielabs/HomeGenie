@@ -1150,9 +1150,16 @@ namespace HomeGenie.Service
                 }
                 reader.Close();
             }
-            catch
+            catch (Exception ex)
             {
                 //TODO: log error
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "LoadConfiguration()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             //
             // load last saved scheduler items data into masterControlProgram.SchedulerService.Items list

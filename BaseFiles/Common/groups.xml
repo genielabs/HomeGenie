@@ -15,6 +15,26 @@
         <Address>90</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
+      <ModuleReference>
+        <Address>Resources on the web</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>2</Address>
+        <Domain>Favourites.Link</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>Favourites.Link</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>4</Address>
+        <Domain>Favourites.Link</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>Favourites.Link</Domain>
+      </ModuleReference>
     </Modules>
   </Group>
   <Group>
@@ -35,6 +55,10 @@
       <ModuleReference>
         <Address>Automation</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>8</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>6</Address>

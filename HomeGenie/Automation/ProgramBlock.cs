@@ -114,13 +114,13 @@ namespace HomeGenie.Automation
                 switch (codeType.ToLower())
                 {
                 case "python":
-                    scriptEngine = Python.CreateEngine();
+                    try { scriptEngine = Python.CreateEngine(); } catch { }
                     break;
                 case "ruby":
-                    scriptEngine = Ruby.CreateEngine();
+                    try { scriptEngine = Ruby.CreateEngine(); } catch { }
                     break;
                 case "javascript":
-                    scriptEngine = new Jint.Engine();
+                    try { scriptEngine = new Jint.Engine(); } catch { }
                     break;
                 }
                 if (homegenie != null && scriptEngine != null)

@@ -630,7 +630,7 @@ var driver = GpioConnectionSettings.DefaultDriver;
 while (Program.IsEnabled)
 {
   		Pause(1);
-	  if (Modules.WithAddress("1021").Get().Parameter("Spi.Locked").Value == "1")	continue;
+	  if (Modules.WithAddress("61").Get().Parameter("Spi.Locked").Value == "1")	continue;
   
     Program.Parameter("Spi.Locked").Value = "1";
 	{
@@ -5896,7 +5896,7 @@ while (Program.IsEnabled)
       
         string txt = (temperature.DecimalValue * 100).ToString();
         if (!txt.StartsWith("-")) txt = "+" + txt;
-        txt = txt.Substring(0, 3) + "." + txt.Substring(3, 1);
+        if (txt.Length >= 4) txt = txt.Substring(0, 3) + "." + txt.Substring(3, 1);
 
         for (y = 0; y &lt; 2; y++)
         {
