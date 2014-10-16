@@ -1,6 +1,6 @@
 ﻿RELEASE HISTORY
 
-05/10/2014 1.00 beta rev 417
+--/--/---- 1.00 beta rev 418
 	- Fixed Ruby engine error (issue #33)
 	
 04/10/2014 1.00 beta rev 416
