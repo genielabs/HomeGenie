@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r415</Version>
+  <Version>1.00 beta r419</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added Eden Sensor Board programs to Raspberry Pi section (http://homegenie.it/docs/diy/eden.php)
-  - Improved Program Editor UI
-  - Updated Python and Ruby engines to latest IronLanguages release
-  - Fixed bug in Z-Wave discovery (issue #12)
-  - Added user definable API commands to Wizard script editor (issue #28)
-  - Added remote node prefix to domain of remotely Interconnected modules (issue #26)
-  - Added last updated time info to sensor widget
-  - Updated Jint Javascript Engine (r353-4) - now accepting hg.Program.Setup and other methods using Action delegates
-  - Updated RaspberrySharp-IO
-  - Fixed occasional bug in reading temperature value from HSM-100 sensor</ReleaseNote>
-  <ReleaseDate>2014-10-02T12:20:33.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed ModuleParameter.DecimalValue negative values conversion (issue #43)
+   - Reviewed ZWaveLib/MIG Thermostat device implementation
+   - Added new thermostat widget
+   - Updated MCP3008 app, now with virtual modules mapped from analog input channels
+   - Added "Generic Thermostat" app for using any sensor and any switch module for implementing a thermostat logic
+   - Fixed modules properties editing bug (issue #27)
+   - Enhanced HTTP port binding: if default HTTP port is busy, HG will now try to bind from 8080 to 8090
+   - Should fix Z-Wave discovery problem reported as issue #42</ReleaseNote>
+  <ReleaseDate>2014-11-12T15:18:07.0000Z</ReleaseDate>
 </ReleaseInfo>

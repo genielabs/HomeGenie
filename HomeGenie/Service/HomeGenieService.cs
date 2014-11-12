@@ -121,10 +121,11 @@ namespace HomeGenie.Service
             wshStatistics = new Handlers.Statistics(this);
             wshLogging = new Handlers.Logging(this);
             //
-            // Try to start WebGateway, at  0 < (port - ServicePort) < 10
+            // Try to start WebGateway, if default HTTP port is busy, then it will try from 8080 to 8090
             bool serviceStarted = false;
+            int bindAttempts = 0;
             int port = systemConfiguration.HomeGenie.ServicePort;
-            while (!serviceStarted && port <= systemConfiguration.HomeGenie.ServicePort + 10)
+            while (!serviceStarted && bindAttempts <= 10)
             {
                 // TODO: this should be done like this _services.Gateways["WebService"].Configure(....)
                 migService.ConfigureWebGateway(
@@ -140,7 +141,9 @@ namespace HomeGenie.Service
                 }
                 else
                 {
-                    port++;
+                    if (port < 8080) port = 8080;
+                    else port++;
+                    bindAttempts++;
                 }
             }
 

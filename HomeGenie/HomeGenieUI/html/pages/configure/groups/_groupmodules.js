@@ -171,17 +171,17 @@ HG.WebApp.GroupModules.ModulePropertyDelete = function (name) {
 HG.WebApp.GroupModules.ModulePropertyAdd = function (module, name, value) {
     var doesexists = false;
     for (var p = 0; p < module.Properties.length; p++) {
-
         if (module.Properties[p].Name == name) {
             module.Properties[p].Value = value;
+            module.Properties[p].NeedsUpdate = 'true';
             doesexists = true;
             break;
         }
-
     }
     if (!doesexists) {
-        module.Properties.push({ Name: name, Value: value });
+        module.Properties.push({ Name: name, Value: value, NeedsUpdate : 'true' });
     }
+    return doesexists;
 }
 
 
@@ -210,11 +210,15 @@ HG.WebApp.GroupModules.UpdateModule = function (module, callback) {
 
 
 HG.WebApp.GroupModules.UpdateCurrentModuleParameter = function () {
-    HG.WebApp.GroupModules.ModulePropertyAdd(HG.WebApp.GroupModules.CurrentModule, HG.WebApp.GroupModules.CurrentModuleProperty.find('input[type=text]').first().val(), HG.WebApp.GroupModules.CurrentModuleProperty.find('input[type=text]').last().val());
-    var stop = $('#automation_group_module_params').children().last().offset().top - 314;
-    $('#automation_group_module_params').animate({ scrollTop: '+=' + stop }, 1000);
-    $('#automation_group_module_params').children().last().find('input[type=text]').first().focus();
-    HG.WebApp.GroupModules.LoadModuleParameters();
+    var isNewProp = HG.WebApp.GroupModules.ModulePropertyAdd(HG.WebApp.GroupModules.CurrentModule, HG.WebApp.GroupModules.CurrentModuleProperty.find('input[type=text]').first().val(), HG.WebApp.GroupModules.CurrentModuleProperty.find('input[type=text]').last().val());
+    // TODO: enable custom property adding?
+    //if (isNewProp)
+    //{
+    //    var stop = $('#automation_group_module_params').children().last().offset().top - 314;
+    //    $('#automation_group_module_params').animate({ scrollTop: '+=' + stop }, 1000);
+    //    $('#automation_group_module_params').children().last().find('input[type=text]').first().focus();
+    //    HG.WebApp.GroupModules.LoadModuleParameters();
+    //}
 }
 
 HG.WebApp.GroupModules.LoadModuleParameters = function () {
@@ -428,6 +432,18 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     	var item = $(this);
     	item.find("a:first").on("click", function () {
           	HG.WebApp.GroupModules.EditCurrentModule(item);
+        });
+        item.find("a:last").on("click", function () {
+    		var m = item.attr('data-module-index');
+    		if (m) {
+                HG.WebApp.GroupModules.CurrentModule = HG.WebApp.Utility.GetModuleByDomainAddress(groupmodules.Modules[m].Domain, groupmodules.Modules[m].Address);
+                if (HG.WebApp.GroupModules.CurrentModule == null) {
+                    // module not found, pheraps it was removed
+                    // so we return the data in the group module reference (address and domain only)
+                    HG.WebApp.GroupModules.CurrentModule = groupmodules.Modules[m];
+                    HG.WebApp.GroupModules.CurrentModule.DeviceType = '';
+                }
+        	}        	
         });
     });
     $("#configure_groupslist").listview("refresh");

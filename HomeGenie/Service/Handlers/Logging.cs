@@ -24,6 +24,7 @@ using HomeGenie.Data;
 using MIG;
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,7 +88,7 @@ namespace HomeGenie.Service.Handlers
                         
                         if (lastId != null && lastId != "")
                         {
-                            double.TryParse(lastId, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out lastTimeStamp);
+                            double.TryParse(lastId, NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out lastTimeStamp);
                         }
 
                         if (lastTimeStamp == 0)
@@ -104,7 +105,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 foreach (LogEntry entry in logData)
                                 {
-                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("id: " + entry.UnixTimestamp.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + "\ndata: " + JsonConvert.SerializeObject(entry) + "\n\n");
+                                    byte[] data = System.Text.Encoding.UTF8.GetBytes("id: " + entry.UnixTimestamp.ToString("R", CultureInfo.InvariantCulture) + "\ndata: " + JsonConvert.SerializeObject(entry) + "\n\n");
                                     context.Response.OutputStream.Write(data, 0, data.Length);
                                     context.Response.OutputStream.Flush();
                                     lastTimeStamp = entry.UnixTimestamp;

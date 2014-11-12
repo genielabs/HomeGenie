@@ -732,7 +732,7 @@ namespace HomeGenie.Automation
                 //
                 if (double.TryParse(
                         parameter.Value.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
+                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
                         CultureInfo.InvariantCulture,
                         out dval
                     ))
@@ -740,7 +740,7 @@ namespace HomeGenie.Automation
                     lvalue = dval;
                     rvalue = double.Parse(
                         comparisonValue.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
+                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
                         CultureInfo.InvariantCulture
                     );
                 }

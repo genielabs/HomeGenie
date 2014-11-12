@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Globalization;
 
 using Newtonsoft.Json;
 using System.Xml.Serialization;
@@ -81,7 +82,7 @@ namespace HomeGenie.Data
                     //
                     // can we add this value for statistics?
                     double v;
-                    if (value != "" && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v))
+                    if (value != "" && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
                     {
                         Statistics.AddValue(v, this.UpdateTime);
                     }
@@ -109,7 +110,7 @@ namespace HomeGenie.Data
             {
 
                 double v = 0;
-                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v)) v = 0;
+                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
                 return v;
             }
         }
@@ -118,8 +119,8 @@ namespace HomeGenie.Data
         {
             get
             {
-                double v;
-                if (!double.TryParse(this.LastValue, out v)) v = 0;
+                double v = 0;
+                if (this.LastValue != null && !double.TryParse(this.LastValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
                 return v;
             }
         }
