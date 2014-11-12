@@ -10,6 +10,8 @@
     <AssemblyName>ZWaveLib</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ReleaseVersion>1.0</ReleaseVersion>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Devices\Controller.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="ZWavePort.cs" />
     <Compile Include="Devices\CommandClass.cs" />
     <Compile Include="Devices\ProductHandlers\Aeon\MicroSmartEnergySwitch.cs" />
+    <Compile Include="Devices\ProductHandlers\Fibaro\MotionSensor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -65,5 +69,8 @@
       <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
       <Name>SerialPortLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Devices\ProductHandlers\Fibaro\" />
   </ItemGroup>
 </Project>

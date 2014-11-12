@@ -64,8 +64,8 @@ namespace ZWaveLib.Devices
         PARAMETER_MULTIINSTANCE_SENSOR_BINARY,
         PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT,
         PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL,
-        PARAMETER_FAN_MODE,
-        PARAMETER_FAN_STATE,
+        PARAMETER_THERMOSTAT_FAN_MODE,
+        PARAMETER_THERMOSTAT_FAN_STATE,
         PARAMETER_THERMOSTAT_HEATING,
         PARAMETER_THERMOSTAT_MODE,
         PARAMETER_THERMOSTAT_OPERATING_STATE,
@@ -218,6 +218,9 @@ namespace ZWaveLib.Devices
                 handled = true;
             }
             //
+            // Only generic command classes are handled directly in this function
+            // other device specific commands are handled by corresponding DeviceHandler
+            //
             if (!handled && messageLength > 8)
             {
 
@@ -236,6 +239,13 @@ namespace ZWaveLib.Devices
                 case (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY:
                 case (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL:
                 case (byte)CommandClass.COMMAND_CLASS_SCENE_ACTIVATION:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK: 
+                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT: 
 
                     if (this.DeviceHandler != null)
                     {
@@ -243,8 +253,21 @@ namespace ZWaveLib.Devices
                     }
 
                     break;
+                    
+                case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
+                case (byte)CommandClass.COMMAND_CLASS_METER:
 
-                case (byte)CommandClass.COMMAND_CLASS_COONFIGURATION:
+                    if (messageLength > 10)
+                    {
+                        if (this.DeviceHandler != null)
+                        {
+                            handled = this.DeviceHandler.HandleMultiInstanceReport(receivedMessage);
+                        }
+                    }
+
+                    break;
+
+                case (byte)CommandClass.COMMAND_CLASS_CONFIGURATION:
 
                     if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
                     {
@@ -341,63 +364,11 @@ namespace ZWaveLib.Devices
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
-                case (byte)CommandClass.COMMAND_CLASS_METER:
-
-                    if (messageLength > 10)
-                    {
-                        if (this.DeviceHandler != null)
-                        {
-                            handled = this.DeviceHandler.HandleMultiInstanceReport(receivedMessage);
-                        }
-                    }
-
-                    break;
-
                 case (byte)CommandClass.COMMAND_CLASS_HAIL:
 
                     this.Basic_Get();
                     handled = true;
 
-                    break;
-
-
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:	
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_FAN_MODE, receivedMessage[9]);
-                    handled = true;
-                    break;
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:	 
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_FAN_STATE, receivedMessage[9]);
-                    handled = true;
-                    break;
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:	
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_HEATING, receivedMessage[9]);
-                    handled = true;
-                    break;
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:	
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, receivedMessage[9]);
-                    handled = true;
-                    break;
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:	
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE, receivedMessage[9]);
-                    handled = true;
-                    break;
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK:	
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_SETBACK, receivedMessage[9]);
-                    handled = true;
-                    break;
-
-                /*
-                         * 
-                         * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
-                            2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
-                         * 
-                         **/
-
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:	
-                    double temp = Sensor.ExtractTemperatureFromBytes(receivedMessage);
-                    RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, temp);
-                    handled = true;
                     break;
 
                 case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
@@ -832,7 +803,7 @@ namespace ZWaveLib.Devices
             //Console.WriteLine("\n\n\nCOMPUTED VALUE: " + zp.ByteArrayToString(value32) + "\n->" + zp.ByteArrayToString(BitConverter.GetBytes(intvalue)) + "\n\n");
             //
             byte[] msg = new byte[4 + valueLength];
-            msg[0] = (byte)CommandClass.COMMAND_CLASS_COONFIGURATION;
+            msg[0] = (byte)CommandClass.COMMAND_CLASS_CONFIGURATION;
             msg[1] = (byte)Command.COMMAND_CONFIG_SET;
             msg[2] = parameter;
             msg[3] = (byte)valueLength;
@@ -854,7 +825,7 @@ namespace ZWaveLib.Devices
         public virtual void ConfigParameterGet(byte parameter)
         {
             this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_COONFIGURATION, 
+                (byte)CommandClass.COMMAND_CLASS_CONFIGURATION, 
                 (byte)Command.COMMAND_CONFIG_GET,
                 parameter
             });
