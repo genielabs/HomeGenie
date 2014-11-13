@@ -3312,6 +3312,15 @@
     <Content Include="html\css\jquery-ui.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="html\pages\control\widgets\homegenie\generic\images\therm_cool.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\homegenie\generic\images\therm_heat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\homegenie\generic\images\therm_fan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\css\homegenie.css">

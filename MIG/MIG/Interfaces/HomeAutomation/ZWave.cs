@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Linq;
+using System.Globalization;
 
 using LibUsbDotNet;
 using LibUsbDotNet.LibUsb;
@@ -376,7 +377,7 @@ namespace MIG.Interfaces.HomeAutomation
                     raisePropertyChanged = true;
                     double raiseValue = double.Parse(request.GetOption(0)) / 100;
                     if (raiseValue > 1) raiseValue = 1;
-                    raiseParameter = raiseValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    raiseParameter = raiseValue.ToString(CultureInfo.InvariantCulture);
                     //
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Basic_Set((byte)int.Parse(request.GetOption(0)));
@@ -583,7 +584,7 @@ namespace MIG.Interfaces.HomeAutomation
                     //
                     raisePropertyChanged = true;
                     parameterPath = "Thermostat.SetPoint." + request.GetOption(0);
-                    raiseParameter = temperature.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    raiseParameter = temperature.ToString(CultureInfo.InvariantCulture);
                     //
                     ((Thermostat)node.DeviceHandler).Thermostat_SetPointSet(mode, temperature);
                 }
@@ -991,7 +992,7 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     path = ModuleParameters.MODPAR_STATUS_LEVEL + "." + upargs.ParameterId;
                 }
-                value = normalizedval.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                value = normalizedval.ToString(CultureInfo.InvariantCulture);
 
                 break;
             case ParameterType.PARAMETER_THERMOSTAT_MODE:

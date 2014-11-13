@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+13/11/2014 1.00 beta rev 420
+    - Added 1-Wire modules app
+    - Updated Insteon interface to support X10 modules (wip)
+    - Updated Generic Thermostat app
+    - Fixed missing png files for thermostat widget (issue #45)
+    - Fixed some missing app assemblies
+
 12/11/2014 1.00 beta rev 419
     - Fixed ModuleParameter.DecimalValue negative values conversion (issue #43)
     - Reviewed ZWaveLib/MIG Thermostat device implementation

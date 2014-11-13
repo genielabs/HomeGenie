@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:38.920721Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:46.643275Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:39.414613Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:47.149465Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:39.914707Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:47.650237Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:45:41.140284Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:35:50.113597Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -554,14 +554,14 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>37</Address>
     <Name>HCSR04 - Ultrasonic Ranging Module</Name>
     <Description>Ultrasonic Ranging Module sensor </Description>
     <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-11-13T16:35:20.828486Z</ActivationTime>
+    <TriggerTime>2014-11-13T16:35:28.702851Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -752,7 +752,7 @@ while (Program.IsEnabled)
     <Address>70</Address>
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11. 
-For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
+For wirings see http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
@@ -1028,7 +1028,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:40.919399Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:48.654262Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1219,7 +1219,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:41.407298Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:49.147081Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1274,7 +1274,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:41.910024Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:49.644521Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1569,7 +1569,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:42.421075Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:50.155092Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1650,86 +1650,9 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:42.907762Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:50.644217Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
-{
-	// register 2 virtual modules using the "switch" widget    
-	Program.AddVirtualModules("HomeGenie.Buzzer", "Switch", "homegenie/generic/switch", 1, 1);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-</ScriptCondition>
-    <ScriptSource>// Initially turn the leds off
-var systembuzzer = new PinConfiguration[] { 	ConnectorPin.P1Pin16.Output().Name("Buzzer").Disable()  };
-// 
-using (var connection = new GpioConnection(systembuzzer))
-{  
-    
-    When.WebServiceCallReceived("HomeGenie.Buzzer", ( args ) =&gt; 
-    {
-        string[] reqs = ((string)args).Split('/');
-        var res = "{ 'ResponseValue' : 'ERROR' }";
-    
-        try
-        {
-            string command = reqs[2];
-    		//string buzid = reqs[1];
-            var module = Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").Get();
-          	//
-            switch(command)
-            {
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.On
-              case "Control.On":
-              	connection["Buzzer"] = true;
-                Program.RaiseEvent(module, "Status.Level", "1", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Off
-              case "Control.Off":
-              	connection["Buzzer"] = false;
-                Program.RaiseEvent(module, "Status.Level", "0", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Toggle
-              case "Control.Toggle":
-              	connection["Buzzer"] = !connection["Buzzer"];
-                Program.RaiseEvent(module, "Status.Level", connection["Buzzer"] ? "1" : "0", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-            }
-        } 
-        catch (Exception ex) 
-        { 
-            res = ex.Message + " " + ex.StackTrace;
-        }
-        // unable to process request
-        return res;
-    });
-  
-  
-	Program.GoBackground();
-}
-</ScriptSource>
-    <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>92</Address>
-    <Name>HomeGenie Buzzer</Name>
-    <Description>GPIO controlled Buzzer</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime>2014-03-17T00:19:30.475555Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:51.259516Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1797,7 +1720,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:43.410847Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:51.14617Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2063,7 +1986,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:43.909933Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:51.64843Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2267,75 +2190,6 @@ trigger actions when you get home.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>var moduleDomain = "Arduino.Switches";
-Program.Setup(()=&gt;
-{
-	// register 3 virtual modules using the "switch" widget for the domain "Arduino.Switches" 
-	Program.AddVirtualModules(moduleDomain, "Switch", "homegenie/generic/switch", 1, 3);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-
-</ScriptCondition>
-    <ScriptSource>var moduleDomain = "Arduino.Switches";
-// 
-// TODO: Initialize serial port here...
-// 
-When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-{
-	string[] reqs = ((string)args).Split('/');
-	var res = "{ 'ResponseValue' : 'ERROR' }";
-	//
-	try
-	{
-		string switchid = reqs[1];
-	    string command = reqs[2];
-	    // get reference to the virtual module 
-	    var module = Modules.InDomain(moduleDomain).WithAddress(switchid).Get();
-	  	//
-	    switch(command)
-	    {
-	      	// eg. http://hg_address/api/Arduino.Switches/1/Control.On
-	      	case "Control.On":
-	      		// TODO: Send command by serial port to the arduino to turn on the switchid
-				Program.RaiseEvent(module, "Status.Level", "1", "Switch " + switchid);
-				res = "{ 'ResponseValue' : 'OK' }";
-				break;
-          	// eg. http://hg_address/api/Arduino.Switches/2/Control.Off
-	      	case "Control.Off":
-	      		// TODO: Send command by serial port to the arduino to turn off the switchid
-				Program.RaiseEvent(module, "Status.Level", "0", "Switch " + switchid);
-				res = "{ 'ResponseValue' : 'OK' }";
-				break;
-	    }
-	} 
-	catch (Exception ex) 
-	{ 
-	    res = ex.Message + " " + ex.StackTrace;
-	}
-	// unable to process request
-	return res;
-});
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>168</Address>
-    <Name>Arduino Switches</Name>
-    <Description>Arduino controlled Switches.</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
     Program.AddFeatureTextInput("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link");
@@ -2498,7 +2352,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:44.917365Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:52.646591Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2560,7 +2414,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:45.409477Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:53.148503Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2717,7 +2571,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:45.909124Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:53.650611Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2823,111 +2677,6 @@ Program.GoBackground();</ScriptSource>
     <Group>X10</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
     <TriggerTime>2014-04-11T15:54:17.1660696Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>var moduleDomain = "HomeGenie.Leds";
-
-Program.Setup(()=&gt;
-{
-	// register 2 virtual modules using the "switch" widget    
-	Program.AddVirtualModules(moduleDomain, "Light", "homegenie/generic/light", 1, 2);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-
-</ScriptCondition>
-    <ScriptSource>var moduleDomain = "HomeGenie.Leds";
-
-// Initially turn the leds off
-var systemleds = new PinConfiguration[] { 	ConnectorPin.P1Pin15.Output().Name("ActivityLed").Disable(), 
-                                         	ConnectorPin.P1Pin13.Output().Name("ReadyLed").Disable() };
-// 
-var ledsname = new Dictionary&lt;string, string&gt;() { {"1", "ReadyLed"}, {"2", "ActivityLed"} };
-var ledbusy = false;
-using (var connection = new GpioConnection(systemleds))
-{  
-	When.ModuleParameterChanged( (module, parameter) =&gt; {
-      	if (!ledbusy &amp;&amp; module.Instance.Domain != moduleDomain)
-        {
-          	ledbusy = true;
-            connection.Blink("ActivityLed", 10); // 10 ms
-            ledbusy = false;
-        }
-      	return true;
-	});
-  
-    
-    When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-    {
-        string[] reqs = ((string)args).Split('/');
-        var res = "{ 'ResponseValue' : 'ERROR' }";
-    
-      	//Command cmd = new Command((string)args);
-        try
-        {
-            string command = reqs[2];
-    		string ledid = reqs[1];
-            var module = Modules.InDomain(moduleDomain).WithAddress(ledid).Get();
-          	//
-            switch(command)
-            {
-              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.On
-              case "Control.On":
-              	connection[ledsname[ledid]] = true;
-                Program.RaiseEvent(module, "Status.Level", "1", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Leds/2/Control.Off
-              case "Control.Off":
-              	connection[ledsname[ledid]] = false;
-                Program.RaiseEvent(module, "Status.Level", "0", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.Toggle
-              case "Control.Toggle":
-              	connection[ledsname[ledid]] = !connection[ledsname[ledid]];
-                Program.RaiseEvent(module, "Status.Level", connection[ledsname[ledid]] ? "1" : "0", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-            }
-        } 
-        catch (Exception ex) 
-        { 
-            res = ex.Message + " " + ex.StackTrace;
-        }
-        // unable to process request
-        return res;
-    });
-  
-  
-  
-  	while(Program.IsEnabled) 
-    {
-      	// HomeGenie heart beat
-      	connection.Blink("ReadyLed", 10);
-	    Pause(0.060);
-      	connection.Blink("ReadyLed", 230);
-	    Pause(0.700);
-    }
-}
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>40</Address>
-    <Name>HomeGenie Leds</Name>
-    <Description>Staus and Activity leds for HomeGenie.
-For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3083,10 +2832,10 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
     <Name>Smart Lights</Name>
-    <Description>Control device by motion detection and enviroment lumosity </Description>
+    <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-12T15:44:46.413542Z</TriggerTime>
+    <TriggerTime>2014-11-13T16:33:54.148967Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4533,7 +4282,7 @@ Pause(10);</ScriptSource>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
     <Name>Sunrise Colors Scenario</Name>
-    <Description />
+    <Description>Example scenario for Philips Hue lights.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-07-25T21:30:38.298025Z</ActivationTime>
     <TriggerTime>2014-07-25T22:01:09.283224Z</TriggerTime>
@@ -4649,14 +4398,15 @@ for (int z = 0; z &lt; 1000; z++)
 	setLevel(z % 11);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>60</Address>
     <Name>Grove - Led Bar</Name>
-    <Description />
+    <Description>Using a Grove Led Bar.
+http://www.seeedstudio.com/wiki/Grove_-_LED_Bar</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
@@ -5806,7 +5556,7 @@ while (Program.IsEnabled)
 
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
@@ -5829,12 +5579,13 @@ while (Program.IsEnabled)
 // To execute the Code To Run,
 // use a 'return true' or 'return false' otherwise.
 
-  // set the widget that will display this program data (the temperature,luminance).
-Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, 1);
-
+Program.Setup(()=&gt;{
+  	Program.AddInputField("LedsNumber", "1", "Number of chained RGB leds");
+	Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, 1);
+});
 return true;
 </ScriptCondition>
-    <ScriptSource>var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin03, ConnectorPin.P1Pin07, 1);
+    <ScriptSource>var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin03, ConnectorPin.P1Pin07, (int)Program.InputField("LedsNumber").DecimalValue);
 groveRgb.SetColorRgb(0, 0, 0, 0);
 
 var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
@@ -5907,46 +5658,20 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
 
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>62</Address>
     <Name>Grove - Chainable RGB Led</Name>
-    <Description />
+    <Description>Virtual modules for Chainable RGB Leds.
+http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition># Put your trigger code logic here.
-# Call 'hg.SetConditionTrue()' when you want
-# the 'Code To Run' to be executed.
-hg.SetConditionFalse()
-</ScriptCondition>
-    <ScriptSource># Ruby Automation Script
-# Example for using Helper Classes:
-hg.Modules.WithName('Light 1').On()
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>1000</Address>
-    <Name>test</Name>
-    <Description />
-    <Group>Interconnections</Group>
-    <ActivationTime>2014-10-05T15:43:29.636845Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
-    <Type>Ruby</Type>
-    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -6096,10 +5821,10 @@ while (Program.IsEnabled)
 
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>38</Address>
     <Name>MCP3008 - Analog Input Modules</Name>
@@ -6126,7 +5851,7 @@ Program.Setup(()=&gt;{
   	Program.AddControlWidget("homegenie/generic/thermostat");
   	Program.AddInputField("TemperatureModule", "", "Module to read temperature from");
   	Program.AddInputField("SwitchModule", "", "Module to switch on/off on set point");
-  	Program.AddInputField("ScheduleCheck", "", "Scheduler expression constraint");
+  	//Program.AddInputField("ScheduleCheck", "", "Scheduler expression constraint");
 });
 
 return true;
@@ -6139,87 +5864,92 @@ var operatingState = Program.Parameter("Thermostat.OperatingState");
 var thermostatMode = Program.Parameter("Thermostat.Mode");
 var heatSetPoint = Program.Parameter("Thermostat.SetPoint.Heating");
 
+var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+
+  // Get a reference to the temperature module
+  domainAddress = Program.InputField("TemperatureModule").Value;
+  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+  {
+    domain = domainAddress.Split(':')[0];
+    address = domainAddress.Split(':')[1];
+  }
+  var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+  if (temperatureModule == null)
+  {
+    Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
+    return false;
+  }
+  // Update Thermostat module Temperature field
+  temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+
+  // get a reference to the switch/relay module
+  domainAddress = Program.InputField("SwitchModule").Value;
+  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+  {
+    domain = domainAddress.Split(':')[0];
+    address = domainAddress.Split(':')[1];
+  }
+  var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+  if (switchModule == null)
+  {
+    Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
+    return false;
+  }
+
+  // Heat Mode logic
+  if (thermostatMode.Value == "Heat")
+  {
+    if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue)
+    {
+      // Heating
+      switchModule.On();
+      Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
+    }
+    else
+    {
+      // Waiting
+      switchModule.Off();
+      Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
+    }
+  }
+  else
+  {
+    // Off
+    if (operatingState.Value != "Off")
+    {
+      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
+    }
+    switchModule.Off();
+  }  
+  
+  return true;
+});
+
 // implement Web API calls as defined in the Thermostat widget
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.SetPointSet", (args)=&gt;{
-  Program.RaiseEvent("Thermostat.SetPoint.Heating", "Heating/" + args.ToString().Split('/')[0], "Eden Thermostat");
+  if (args.ToString().Split('/')[0] == "Heating")
+  {
+	  Program.RaiseEvent("Thermostat.SetPoint.Heating", args.ToString().Split('/')[1], "Eden Thermostat");
+	  ThermostatLogicRun();
+  }
   return true;
 });
 
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.ModeSet", (args)=&gt;{
   Program.RaiseEvent("Thermostat.Mode", args.ToString().Split('/')[0], "Eden Thermostat");
+  ThermostatLogicRun();
   return true;
 });
 
 while (Program.IsEnabled)
 {
-  	Pause(30);
-  
-  	string domainAddress = "";
-  	string domain = "";
-  	string address = "";
-  
-  
-  	// Get a reference to the temperature module
-  	domainAddress = Program.InputField("TemperatureModule").Value;
-  	if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
-    {
-      domain = domainAddress.Split(':')[0];
-      address = domainAddress.Split(':')[1];
-    }
-    var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
-    if (temperatureModule == null)
-    {
-      Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
-      continue;
-    }
-  	// Update Thermostat module Temperature field
-	temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
-
-  
-  	// get a reference to the switch/relay module
-	domainAddress = Program.InputField("SwitchModule").Value;
-  	if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
-    {
-      domain = domainAddress.Split(':')[0];
-      address = domainAddress.Split(':')[1];
-    }
-  	var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
-  	if (switchModule == null)
-    {
-      Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
-      continue;
-    }
-  
-  
-  	// Heat Mode logic
-  	if (thermostatMode.Value == "Heat")
-    {
-      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue)
-      {
-        // Heating
-        switchModule.On();
-        Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
-      }
-      else
-      {
-        // Waiting
-        switchModule.Off();
-        Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
-      }
-    }
-	else
-    {
-      // Off
-      if (operatingState.Value != "Off")
-      {
-	      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
-      }
-      switchModule.Off();
-    }
-  
-  
+  Pause(30);
+  ThermostatLogicRun();
 }</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -6229,8 +5959,117 @@ while (Program.IsEnabled)
     <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-11-13T09:13:29.399292Z</ActivationTime>
+    <TriggerTime>2014-11-13T09:13:29.455843Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+
+Program.Setup(()=&gt;{
+	Program.AddInputField("ModulesCount", "3", "Connected sensors number");
+	Program.AddInputField("UpdateInterval", "60", "Update interval");
+	Program.AddFeatureTextInput("HomeAutomation.OneWire", "Sensor", "OneWire.DeviceId", "Device ID");
+});
+      
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+// 1-Wire Sensor Modules
+// NOTE: Currently only temperature sensors are supported
+
+// Read sensor data text lines
+var readSensorData = new Func&lt;string, List&lt;string&gt;&gt;((sensorId) =&gt; {
+    string oneWireSysPath = "/sys/bus/w1/devices/";
+    string currentLine = "";
+    var lines = new List&lt;string&gt;();
+	//lines.Add("7c 01 4b 46 7f ff 04 10 09 : crc=09 YES");
+	//lines.Add("7c 01 4b 46 7f ff 04 10 09 t=23750");
+    try
+    {
+        System.IO.StreamReader file = new System.IO.StreamReader(oneWireSysPath + sensorId + "/w1_slave");
+        while((currentLine = file.ReadLine()) != null)
+        {
+            lines.Add(currentLine);
+        }
+        file.Close();
+    } catch (Exception ex) {
+        Program.Notify("OneWire Error", ex.Message);
+    }
+    return lines;
+});
+
+// Parse data from a 1-wire temperature sensors (DS18B20).
+// It returns decimal value indicating temperature in celsius degree.
+var parseTemperatureData = new Func&lt;List&lt;string&gt;, double&gt;((dataLines) =&gt; {
+  	double temperature = 0;
+  	foreach(string l in dataLines)
+    {
+      	if (l.IndexOf(" t=") &gt; 0)
+        {
+          	var ts = l.Substring(l.LastIndexOf(" t=") + 3);
+          	temperature = double.Parse(ts) / 1000D;
+        }
+    }
+  	return temperature;
+});
+
+//  Add virtual modules for 1-wire domain
+int sensorCount = (int)(Program.InputField("ModulesCount").DecimalValue);
+Program.AddVirtualModules("HomeAutomation.OneWire", "Sensor", "homegenie/generic/sensor", 1, sensorCount);
+
+while (Program.IsEnabled)
+{
+  	for(int n = 1; n &lt;= sensorCount; n++)
+    {
+      	// Get a reference to the virtual module associated with current sensor
+      	var module = Modules.InDomain("HomeAutomation.OneWire").WithAddress(n.ToString()).Get();
+      	var deviceId = module.Parameter("OneWire.DeviceId").Value;
+		// If a sensor id has been specified for the module, then we read and update temperature values
+      	if (deviceId != "")
+       	{
+				var data = readSensorData(deviceId);
+          		var temperatureCelsius = parseTemperatureData(data);
+          		// Update virtual module data
+          		Program.RaiseEvent(module, "Sensor.TemperatureF", (temperatureCelsius * 9d / 5d + 32d).ToString(), "1-Wire Device");
+          		Pause(1);
+          		Program.RaiseEvent(module, "Sensor.Temperature", temperatureCelsius.ToString(), "1-Wire Device");
+        }
+	}
+  
+	double updateInterval = Program.InputField("UpdateInterval").DecimalValue;
+  	if (updateInterval &lt; 1) updateInterval = 1;
+  	Pause(updateInterval);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.OneWire</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>OneWire.DeviceId</Property>
+        <Description>Device ID</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>133</Address>
+    <Name>One-Wire Devices</Name>
+    <Description>Integrates 1-wire devices as HG modules (linux only).
+To enable a 1-wire device, its ID must be specified in the module options popup.
+To find out your connected devices ID, issue from a terminal the command:
+&amp;nbsp;&amp;nbsp;&lt;i&gt;ls -la /sys/bus/w1/devices/&lt;/i&gt;</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-11-13T15:39:01.375637Z</ActivationTime>
+    <TriggerTime>2014-11-13T15:39:01.407546Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

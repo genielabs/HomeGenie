@@ -54,6 +54,20 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             }
         });
         //
+        $('#page_configure_interfaces_insteonx10housecodes input[type=checkbox]').change(function (event) {
+            var hc = '';
+            //
+            $('#page_configure_interfaces_insteonx10housecodes input[type=checkbox]').each(function () {
+                if ($(this).prop('checked')) {
+                    hc += $(this).val() + ',';
+                }
+            });
+            //
+            hc = hc.substr(0, hc.length - 1);
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'Options.Set', 'HouseCodes', encodeURIComponent(hc));
+            $('#control_groupslist').empty(); // forces control menu rebuild
+        });
+        //
         // Interfaces enable / disable switches
         //
         $("#configure_interfaces_flip_zwave").on('slidestop', function (event) {
@@ -354,6 +368,18 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             }
         });
         $('#page_configure_interfaces_x10housecodes input[type=checkbox]').checkboxradio('refresh');
+    });
+    HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'Options.Get', 'HouseCodes', '', function (data) {
+        data = ',' + data.ResponseValue + ',';
+        $('#page_configure_interfaces_insteonx10housecodes input[type=checkbox]').each(function () {
+            if (data.indexOf(',' + $(this).val() + ',') >= 0) {
+                $(this).prop('checked', true);
+            }
+            else {
+                $(this).prop('checked', false);
+            }
+        });
+        $('#page_configure_interfaces_insteonx10housecodes input[type=checkbox]').checkboxradio('refresh');
     });
 };
 
