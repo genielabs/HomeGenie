@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:46.643275Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:07.879034Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:47.149465Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:08.389981Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:47.650237Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:08.892624Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:35:50.113597Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:39.429487Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1028,7 +1028,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:48.654262Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:09.891287Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1219,7 +1219,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:49.147081Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:10.379672Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1274,7 +1274,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:49.644521Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:10.880879Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1569,7 +1569,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:50.155092Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:11.393896Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1650,7 +1650,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:50.644217Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:11.879079Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1720,7 +1720,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:51.14617Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:12.382674Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1986,7 +1986,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:51.64843Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:12.884925Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2352,7 +2352,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:52.646591Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:13.883975Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2414,7 +2414,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:53.148503Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:14.384352Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2571,7 +2571,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:53.650611Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:14.886318Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2835,7 +2835,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:33:54.148967Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:15.390355Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5690,41 +5690,13 @@ Program.Setup(()=&gt;
   Program.AddVirtualModule("Components.MCP3008", "CH5", "Sensor", "homegenie/generic/sensor");
   Program.AddVirtualModule("Components.MCP3008", "CH6", "Sensor", "homegenie/generic/sensor");
   Program.AddVirtualModule("Components.MCP3008", "CH7", "Sensor", "homegenie/generic/sensor");
+
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterName", "Parameter name to store computed value");
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterFactor", "Multiply read raw value by");
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterAdjust", "Adjust computed value by");
   
   // add program configuration parameters
   Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
-  
-  Program.AddInputField("CH0.ParameterName", "Sensor.Temperature", "CH0: parameter name");
-  Program.AddInputField("CH0.ParameterFactor", "0.260", "CH0: normalization factor");
-  Program.AddInputField("CH0.ParameterAdjust", "-40", "CH0: adjust by");
-
-  Program.AddInputField("CH1.ParameterName", "Sensor.Luminance", "CH1: parameter name");
-  Program.AddInputField("CH1.ParameterFactor", "0.098", "CH1: normalization factor");
-  Program.AddInputField("CH1.ParameterAdjust", "0", "CH1: adjust by");
-
-  Program.AddInputField("CH2.ParameterName", "", "CH2: parameter name");
-  Program.AddInputField("CH2.ParameterFactor", "0", "CH2: normalization factor");
-  Program.AddInputField("CH2.ParameterAdjust", "0", "CH2: adjust by");
-
-  Program.AddInputField("CH3.ParameterName", "", "CH3: parameter name");
-  Program.AddInputField("CH3.ParameterFactor", "0", "CH3: normalization factor");
-  Program.AddInputField("CH3.ParameterAdjust", "0", "CH3: adjust by");
-
-  Program.AddInputField("CH4.ParameterName", "", "CH4: parameter name");
-  Program.AddInputField("CH4.ParameterFactor", "0", "CH4: normalization factor");
-  Program.AddInputField("CH4.ParameterAdjust", "0", "CH4: adjust by");
-
-  Program.AddInputField("CH5.ParameterName", "", "CH5: parameter name");
-  Program.AddInputField("CH5.ParameterFactor", "0", "CH5: normalization factor");
-  Program.AddInputField("CH5.ParameterAdjust", "0", "CH5: adjust by");
-
-  Program.AddInputField("CH6.ParameterName", "", "CH6: parameter name");
-  Program.AddInputField("CH6.ParameterFactor", "0", "CH6: normalization factor");
-  Program.AddInputField("CH6.ParameterAdjust", "0", "CH6: adjust by");
-
-  Program.AddInputField("CH7.ParameterName", "", "CH7: parameter name");
-  Program.AddInputField("CH7.ParameterFactor", "0", "CH7: normalization factor");
-  Program.AddInputField("CH7.ParameterAdjust", "0", "CH7: adjust by");
 
 }); // end program setup
 
@@ -5777,9 +5749,10 @@ while (Program.IsEnabled)
               	var channelPrefix = "CH" + x.ToString();
             	var channelModule = Modules.InDomain("Components.MCP3008").WithAddress(channelPrefix).Get();
               
-              	var parameterName = Program.InputField(channelPrefix + ".ParameterName").Value;
-              	var parameterFactor = (decimal)Program.InputField(channelPrefix + ".ParameterFactor").DecimalValue;
-              	var parameterAdjust = decimal.Parse(Program.InputField(channelPrefix + ".ParameterAdjust").Value);
+              	var parameterName = channelModule.Parameter("AnalogInput.ParameterName").Value;
+              	var parameterFactor = (decimal)channelModule.Parameter("AnalogInput.ParameterFactor").DecimalValue;
+              	var parameterAdjust = (decimal)channelModule.Parameter("AnalogInput.ParameterAdjust").DecimalValue;
+              
               	if (parameterFactor != 0)
                 {
                                 
@@ -5823,7 +5796,29 @@ while (Program.IsEnabled)
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterName</Property>
+        <Description>Parameter name to store computed value</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterFactor</Property>
+        <Description>Multiply read raw value by</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterAdjust</Property>
+        <Description>Adjust computed value by</Description>
+      </ProgramFeature>
+    </Features>
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>38</Address>

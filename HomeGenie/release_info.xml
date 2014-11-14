@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r420</Version>
+  <Version>1.00 beta r421</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added 1-Wire modules app
+  <ReleaseNote>   - Updated MCP3008 app
+   - Fixed modules sorting issue
+   - Added 1-Wire modules app
    - Updated Insteon interface to support X10
    - Updated Generic Thermostat app
    - Fixed missing png files for thermostat widget (issue #45)
@@ -16,5 +18,5 @@
    - Fixed modules properties editing bug (issue #27)
    - Enhanced HTTP port binding: if default HTTP port is busy, HG will now try to bind from 8080 to 8090
    - Should fix Z-Wave discovery problem reported as issue #42</ReleaseNote>
-  <ReleaseDate>2014-11-13T16:42:11.0000Z</ReleaseDate>
+  <ReleaseDate>2014-11-14T00:11:52.0000Z</ReleaseDate>
 </ReleaseInfo>

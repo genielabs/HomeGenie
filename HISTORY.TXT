@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+14/11/2014 1.00 beta rev 421
+    - Updated MCP3008 program
+    - Fixed modules sorting issue
+
 13/11/2014 1.00 beta rev 420
     - Added 1-Wire modules app
     - Updated Insteon interface to support X10 modules (wip)

@@ -30,20 +30,25 @@ using System.Net;
 using System.Text;
 using System.Timers;
 using System.Xml.Serialization;
-using HomeGenie.Automation;
-using HomeGenie.Data;
-using MIG;
-using MIG.Interfaces.HomeAutomation.Commons;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using System.Diagnostics;
 using System.Net.Sockets;
-using OpenSource.UPnP;
+using System.Threading;
+
+using HomeGenie.Automation;
+using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using MIG.Interfaces.HomeAutomation;
 using HomeGenie.Service.Logging;
 using HomeGenie.Automation.Scheduler;
-using System.Threading;
+
+using MIG;
+using MIG.Interfaces.HomeAutomation.Commons;
+using MIG.Interfaces.HomeAutomation;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using OpenSource.UPnP;
 
 namespace HomeGenie.Service
 {
@@ -1280,93 +1285,95 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshVirtualModules()
         {
-            lock (systemModules.LockObject) lock (virtualModules.LockObject) try
+            lock (systemModules.LockObject) 
+            lock (virtualModules.LockObject) 
+            try
+            {
+                //
+                // Virtual Modules
+                //
+                foreach (var virtualModule in virtualModules)
                 {
+                    ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
+                    if (program == null) continue;
                     //
-                    // Virtual Modules
+                    var virtualModuleWidget = Utility.ModuleParameterGet(
+                                                  virtualModule,
+                                                  Properties.WIDGET_DISPLAYMODULE
+                                              );
                     //
-                    foreach (var virtualModule in virtualModules)
+                    Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+
+                    if (!program.IsEnabled)
                     {
-                        ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
-                        if (program == null) continue;
-                        //
-                        var virtualModuleWidget = Utility.ModuleParameterGet(
-                                                      virtualModule,
-                                                      Properties.WIDGET_DISPLAYMODULE
-                                                  );
-                        //
-                        Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
-
-                        if (!program.IsEnabled)
+                        if (module != null && module.RoutingNode == "" && virtualModule.ParentId != module.Address)
                         {
-                            if (module != null && module.RoutingNode == "" && virtualModule.ParentId != module.Address)
+                            // copy instance module properties to virtualmodules before removing
+                            virtualModule.Name = module.Name;
+                            virtualModule.DeviceType = module.DeviceType;
+                            virtualModule.Properties.Clear();
+                            foreach (var p in module.Properties)
                             {
-                                // copy instance module properties to virtualmodules before removing
-                                virtualModule.Name = module.Name;
-                                virtualModule.DeviceType = module.DeviceType;
-                                virtualModule.Properties.Clear();
-                                foreach (var p in module.Properties)
-                                {
-                                    virtualModule.Properties.Add(p);
-                                }
-                                systemModules.Remove(module);
+                                virtualModule.Properties.Add(p);
                             }
-                            continue;
+                            systemModules.Remove(module);
                         }
+                        continue;
+                    }
 
-                        if (module == null)
+                    if (module == null)
+                    {
+                        // add new module
+                        module = new Module();
+                        systemModules.Add(module);
+                        // copy properties from virtualmodules
+                        foreach (var p in virtualModule.Properties)
                         {
-                            // add new module
-                            module = new Module();
-                            systemModules.Add(module);
-                            // copy properties from virtualmodules
-                            foreach (var p in virtualModule.Properties)
-                            {
-                                module.Properties.Add(p);
-                            }
-                        }
-
-                        // module inherits props from associated virtual module
-                        module.Domain = virtualModule.Domain;
-                        module.Address = virtualModule.Address;
-                        if (module.DeviceType == MIG.ModuleTypes.Generic)
-                        {
-                            module.DeviceType = virtualModule.DeviceType;
-                        }
-                        // associated module's name of an automation program cannot be changed
-                        if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
-                        {
-                            module.Name = virtualModule.Name;
-                        }
-                        module.Description = virtualModule.Description;
-                        //
-                        Utility.ModuleParameterSet(
-                            module,
-                            Properties.VIRTUALMODULE_PARENTID,
-                            virtualModule.ParentId
-                        );
-                        var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
-                        // if a widget is specified on virtual module then we force module to display using this
-                        if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
-                        {
-                            Utility.ModuleParameterSet(
-                                module,
-                                Properties.WIDGET_DISPLAYMODULE,
-                                virtualModuleWidget.Value
-                            );
+                            module.Properties.Add(p);
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "modules_RefreshVirtualModules()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
+
+                    // module inherits props from associated virtual module
+                    module.Domain = virtualModule.Domain;
+                    module.Address = virtualModule.Address;
+                    if (module.DeviceType == MIG.ModuleTypes.Generic)
+                    {
+                        module.DeviceType = virtualModule.DeviceType;
+                    }
+                    // associated module's name of an automation program cannot be changed
+                    if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
+                    {
+                        module.Name = virtualModule.Name;
+                    }
+                    module.Description = virtualModule.Description;
+                    //
+                    Utility.ModuleParameterSet(
+                        module,
+                        Properties.VIRTUALMODULE_PARENTID,
+                        virtualModule.ParentId
                     );
+                    var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
+                    // if a widget is specified on virtual module then we force module to display using this
+                    if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
+                    {
+                        Utility.ModuleParameterSet(
+                            module,
+                            Properties.WIDGET_DISPLAYMODULE,
+                            virtualModuleWidget.Value
+                        );
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_RefreshVirtualModules()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
         }
 
         internal void modules_RefreshPrograms()
@@ -1455,41 +1462,18 @@ namespace HomeGenie.Service
                     //
                     systemModules.Sort((Module m1, Module m2) =>
                     {
-                        string l1 = "";
-                        int n1 = 0;
-                        if (m1.Domain.EndsWith(".X10"))
-                        {
-                            l1 = m1.Address.Substring(0, 1);
-                            int.TryParse(m1.Address.Substring(1), out n1);
-                        }
-                        else
-                        {
-                            int.TryParse(m1.Address, out n1);
-                        }
-                        string l2 = "";
-                        int n2 = 0;
-                        if (m2.Domain.EndsWith(".X10"))
-                        {
-                            l2 = m2.Address.Substring(0, 1);
-                            int.TryParse(m2.Address.Substring(1), out n2);
-                        }
-                        else
-                        {
-                            int.TryParse(m2.Address, out n2);
-                        }
-                        string d1 = m1.Domain;
-                        string d2 = m2.Domain;
-                        /*
-                        if (d1.StartsWith("EmbeddedSystems."))
-                        {
-                            d1 = "z|" + d1;
-                        }
-                        if (d2.StartsWith("EmbeddedSystems."))
-                        {
-                            d2 = "z|" + d2;
-                        }
-                        */
-                        return ((d1 + "|" + l1 + n1.ToString("00000")).CompareTo(d2 + "|" + l2 + n2.ToString("00000")));
+                        System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(@"([a-zA-Z]+)(\d+)");
+                        System.Text.RegularExpressions.Match result1 = re.Match(m1.Address);
+                        System.Text.RegularExpressions.Match result2 = re.Match(m2.Address);
+
+                        string alphaPart1 = result1.Groups[1].Value.PadRight(8, '0');
+                        string numberPart1 = result1.Groups[2].Value.PadLeft(8, '0');
+                        string alphaPart2 = result2.Groups[1].Value.PadRight(8, '0');
+                        string numberPart2 = result2.Groups[2].Value.PadLeft(8, '0');
+
+                        string d1 = m1.Domain + "|" + alphaPart1 + numberPart1;
+                        string d2 = m2.Domain + "|" + alphaPart2 + numberPart2;
+                        return d1.CompareTo(d2);
                     });
 
                 }
