@@ -505,7 +505,7 @@ namespace HomeGenie.Automation
             //Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
             try
             {
-                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptCondition);
+                jp.Parse(program.ScriptCondition);
             }
             catch (Exception e)
             {
@@ -528,7 +528,7 @@ namespace HomeGenie.Automation
             //
             try
             {
-                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptSource);
+                jp.Parse(program.ScriptSource);
             }
             catch (Exception e)
             {
@@ -591,7 +591,8 @@ namespace HomeGenie.Automation
                 result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "-1", ex.Message));
             }
 
-
+            int startCodeLine = 19;
+            int conditionCodeOffset = 7;
             //
             if (result.Errors.Count == 0)
             {
@@ -604,11 +605,11 @@ namespace HomeGenie.Automation
                 {
                     //if (!ce.IsWarning)
                     {
-                        int errorRow = (error.Line - 16);
+                        int errorRow = (error.Line - startCodeLine);
                         string blockType = "CR";
-                        if (errorRow >= sourceLines + 7)
+                        if (errorRow >= sourceLines + conditionCodeOffset)
                         {
-                            errorRow -= (sourceLines + 7);
+                            errorRow -= (sourceLines + conditionCodeOffset);
                             blockType = "TC";
                         }
                         errors.Add(new ProgramError() {
@@ -731,7 +732,7 @@ namespace HomeGenie.Automation
                 //
                 if (double.TryParse(
                         parameter.Value.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
+                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
                         CultureInfo.InvariantCulture,
                         out dval
                     ))
@@ -739,7 +740,7 @@ namespace HomeGenie.Automation
                     lvalue = dval;
                     rvalue = double.Parse(
                         comparisonValue.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
+                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
                         CultureInfo.InvariantCulture
                     );
                 }

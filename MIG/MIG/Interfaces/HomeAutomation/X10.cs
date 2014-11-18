@@ -319,7 +319,8 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_ALLLIGHTSOFF)
             {
                 x10lib.AllUnitsOff(houseCode);
-            }//
+            }
+            //
             return response;
         }
 

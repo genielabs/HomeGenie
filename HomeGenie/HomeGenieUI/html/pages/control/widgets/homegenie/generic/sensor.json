@@ -7,16 +7,29 @@
 	IconImage : 'pages/control/widgets/homegenie/generic/images/sensor.png',
 	StatusText : '',
 	Description : '',
+	Initialized : false,
 
     RenderView: function (cuid, module) {
 		var container = $(cuid);
 		var widget = container.find('[data-ui-field=widget]');
 		//
+		if (!this.Initialized)
+		{
+			this.Initialized = true;
+			//
+			// ui events handlers
+			//
+			// settings button
+			widget.find('[data-ui-field=settings]').on('click', function(){
+				HG.WebApp.Control.EditModule(module);
+			});			
+		}
         widget.find('[data-ui-field=name]').html(module.Name);
 		//
     	var sensorimgdata = '';
     	var sensortxtdata = '';
 		var infotext = '';
+		var lastupdatetime = 0;
         if (module.Properties != null) {
             for (p = 0; p < module.Properties.length; p++) {
 				if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') 
@@ -34,7 +47,10 @@
 		            var updatetime = module.Properties[p].UpdateTime;
 		            updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 		            var d = new Date(updatetime);
-		            updatetime = HG.WebApp.Utility.GetElapsedTimeText(d);
+					if (lastupdatetime < d)
+					{
+						lastupdatetime = d;
+					}
 		            //
 		            var imagesrc = '';
 					//
@@ -89,7 +105,6 @@
                     }
                 }
             }
-            
         }
 		//
 		var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
@@ -105,6 +120,11 @@
 		widget.find('[data-ui-field=status]').html(infotext);
 		widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
 		widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
+        if (lastupdatetime > 0)
+		{
+			this.UpdateTime = HG.WebApp.Utility.FormatDate(lastupdatetime) + ' ' + HG.WebApp.Utility.FormatDateTime(lastupdatetime);
+        	widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
+		}
     }
 
 }]

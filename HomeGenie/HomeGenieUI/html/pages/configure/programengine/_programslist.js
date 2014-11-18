@@ -322,14 +322,15 @@ HG.WebApp.ProgramsList.RefreshProgramType = function ()
         //
 		if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard')
 		{
-			$('#configure_program_editfortypewizard').css('display', 'none');
-			$('#configure_program_editfortypecsharp').css('display', '');
+			$('[data-block-id=configure_program_editfortypewizard]').css('display', 'none');
+			$('[data-block-id=configure_program_editfortypecsharp]').css('display', '');
         }
 		else
 		{
-			$('#configure_program_editfortypewizard').css('display', '');
-			$('#configure_program_editfortypecsharp').css('display', 'none');
+			$('[data-block-id=configure_program_editfortypewizard]').css('display', '');
+			$('[data-block-id=configure_program_editfortypecsharp]').css('display', 'none');
         }
+		HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
 	};
 
 HG.WebApp.ProgramsList.ChangeProgramType = function (type) 
@@ -506,10 +507,6 @@ HG.WebApp.ProgramsList.EditProgram = function ()
 				//
 				editor1.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition);
 				editor2.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource);
-				setTimeout(function(){
-					editor1.refresh();
-					editor2.refresh();
-				}, 500);
 				//
 				HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = HG.WebApp.Data.Programs[i].ConditionType;
 				//
@@ -540,8 +537,6 @@ HG.WebApp.ProgramsList.EditProgram = function ()
 				break;
 			}
 		}
-        //
-        $('#page_automation_program_title').html('<span style="font-size:7pt;font-weight:bold">EDIT PROGRAM</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
 	};
 
 

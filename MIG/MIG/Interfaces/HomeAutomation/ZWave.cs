@@ -22,9 +22,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Linq;
+using System.Globalization;
 
 using LibUsbDotNet;
 using LibUsbDotNet.LibUsb;
@@ -34,6 +35,7 @@ using ZWaveLib;
 using ZWaveLib.Devices;
 
 //using System.Management;
+using ZWaveLib.Devices.ProductHandlers.Generic;
 
 using MIG.Interfaces.HomeAutomation.Commons;
 
@@ -84,14 +86,14 @@ namespace MIG.Interfaces.HomeAutomation
                 { 705, "Control.Level" },
                 { 706, "Control.Toggle" },
 
-                { 801, "Therm.Mode" },
-                { 802, "Therm.Temp" },
-                { 803, "Therm.GetMode" },
-                { 804, "Therm.GetFanMode" },
-                { 805, "Therm.GetSetPoint" },
-                { 806, "Therm.SetFanMode" },
-                { 807, "Therm.GetFanState" },
-                { 808, "Therm.GetAll" },
+                { 801, "Thermostat.ModeGet" },
+                { 802, "Thermostat.ModeSet" },
+                { 803, "Thermostat.SetPointGet" },
+                { 804, "Thermostat.SetPointSet" },
+                { 805, "Thermostat.FanModeGet" },
+                { 806, "Thermostat.FanModeSet" },
+                { 807, "Thermostat.FanStateGet" },
+                { 808, "Thermostat.GetAll" },
 
                 { 1000, "NodeInfo.Get" },
             };
@@ -135,16 +137,15 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_OFF = new Command(702);
             public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
-
          
-            public static readonly Command THERM_MODE = new Command(801);
-            public static readonly Command THERM_TEMP = new Command(802);
-            public static readonly Command THERM_GET_MODE = new Command(803);
-            public static readonly Command THERM_GET_FAN_MODE = new Command(804);
-            public static readonly Command THERM_GET_SET_POINT = new Command(805);
-            public static readonly Command THERM_SET_FAN_MODE = new Command(806);
-            public static readonly Command THERM_GET_FAN_STATE = new Command(807);
-            public static readonly Command THERM_GET_ALL = new Command(808);
+            public static readonly Command THERMOSTAT_MODEGET = new Command(801);
+            public static readonly Command THERMOSTAT_MODESET = new Command(802);
+            public static readonly Command THERMOSTAT_SETPOINTGET = new Command(803);
+            public static readonly Command THERMOSTAT_SETPOINTSET = new Command(804);
+            public static readonly Command THERMOSTAT_FANMODEGET = new Command(805);
+            public static readonly Command THERMOSTAT_FANMODESET = new Command(806);
+            public static readonly Command THERMOSTAT_FANSTATEGET = new Command(807);
+            public static readonly Command THERMOSTAT_GETALL = new Command(808);
 
             private readonly String name;
             private readonly int value;
@@ -376,7 +377,7 @@ namespace MIG.Interfaces.HomeAutomation
                     raisePropertyChanged = true;
                     double raiseValue = double.Parse(request.GetOption(0)) / 100;
                     if (raiseValue > 1) raiseValue = 1;
-                    raiseParameter = raiseValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    raiseParameter = raiseValue.ToString(CultureInfo.InvariantCulture);
                     //
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     node.Basic_Set((byte)int.Parse(request.GetOption(0)));
@@ -516,7 +517,7 @@ namespace MIG.Interfaces.HomeAutomation
                     //
                     // Basic.Set 0xFF
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).On();
+                    ((Switch)node.DeviceHandler).On();
                 }
                 else if (command == Command.CONTROL_OFF)
                 {
@@ -525,7 +526,7 @@ namespace MIG.Interfaces.HomeAutomation
                     //
                     // Basic.Set 0x00
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Off();
+                    ((Switch)node.DeviceHandler).Off();
                 }
                 else if (command == Command.CONTROL_LEVEL)
                 {
@@ -534,95 +535,90 @@ namespace MIG.Interfaces.HomeAutomation
                     //
                     // Basic.Set <level>
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Dimmer)node.DeviceHandler).Level = int.Parse(request.GetOption(0));
+                    ((Dimmer)node.DeviceHandler).Level = int.Parse(request.GetOption(0));
                 }
                 else if (command == Command.CONTROL_TOGGLE)
                 {
                     raisePropertyChanged = true;
                     //
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    if (((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Level == 0)
+                    if (((Switch)node.DeviceHandler).Level == 0)
                     {
                         raiseParameter = "1";
                         // Basic.Set 0xFF
-                        ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).On();
+                        ((Switch)node.DeviceHandler).On();
                     }
                     else
                     {
                         raiseParameter = "0";
                         // Basic.Set 0x00
-                        ((ZWaveLib.Devices.ProductHandlers.Generic.Switch)node.DeviceHandler).Off();
+                        ((Switch)node.DeviceHandler).Off();
                     }
                 }
-                else if (command == Command.THERM_MODE)
+                else if (command == Command.THERMOSTAT_MODEGET)
                 {
-                    raisePropertyChanged = true;
-                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    ((Thermostat)node.DeviceHandler).Thermostat_ModeGet();
+                }
+                else if (command == Command.THERMOSTAT_MODESET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    Thermostat.Mode mode = (Thermostat.Mode)Enum.Parse(typeof(Thermostat.Mode), request.GetOption(0));
                     //
-                    // Basic.Set <level>
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    int mode = int.Parse(request.GetOption(0));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeSet(mode);
-                }
-                else if (command == Command.THERM_TEMP)
-                {
                     raisePropertyChanged = true;
-                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
+                    parameterPath = "Thermostat.Mode";
+                    raiseParameter = request.GetOption(0);
                     //
-                    // Basic.Set <level>
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    int mode = int.Parse(request.GetOption(0));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermTempSet(mode);
+                    ((Thermostat)node.DeviceHandler).Thermostat_ModeSet(mode);
                 }
-                else if (command == Command.THERM_GET_MODE)
+                else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
-                    raisePropertyChanged = true;
-                   
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
                 }
-                else if (command == Command.THERM_GET_FAN_MODE)
+                else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
-                    raisePropertyChanged = true;
-
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeGet();
+                    Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
+                    int temperature = int.Parse(request.GetOption(1));
+                    //
+                    raisePropertyChanged = true;
+                    parameterPath = "Thermostat.SetPoint." + request.GetOption(0);
+                    raiseParameter = temperature.ToString(CultureInfo.InvariantCulture);
+                    //
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointSet(mode, temperature);
                 }
-                else if (command == Command.THERM_GET_FAN_STATE)
+                else if (command == Command.THERMOSTAT_FANMODEGET)
                 {
-                    raisePropertyChanged = true;
-
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanStateGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_FanModeGet();
                 }
-                else if (command == Command.THERM_GET_SET_POINT)
+                else if (command == Command.THERMOSTAT_FANMODESET)
                 {
-                    raisePropertyChanged = true;
-
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermSetpointGet();
+                    Thermostat.FanMode mode = (Thermostat.FanMode)Enum.Parse(typeof(Thermostat.FanMode), request.GetOption(0));
+                    //
+                    raisePropertyChanged = true;
+                    parameterPath = "Thermostat.FanMode";
+                    raiseParameter = request.GetOption(0);
+                    //
+                    ((Thermostat)node.DeviceHandler).Thermostat_FanModeSet(mode);
                 }
-                else if (command == Command.THERM_SET_FAN_MODE)
+                else if (command == Command.THERMOSTAT_FANSTATEGET)
                 {
-                    raisePropertyChanged = true;
-
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    int mode = int.Parse(request.GetOption(0));
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeSet(mode);
+                    ((Thermostat)node.DeviceHandler).Thermostat_FanStateGet();
                 }
-                else if (command == Command.THERM_GET_ALL)
+                else if (command == Command.THERMOSTAT_GETALL)
                 {
-                    raisePropertyChanged = true;
-
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-               
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermSetpointGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
                     Thread.Sleep(200);
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanStateGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_FanStateGet();
                     Thread.Sleep(200);
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermFanModeGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_FanModeGet();
                     Thread.Sleep(200);
-                    ((ZWaveLib.Devices.ProductHandlers.Generic.Thermostat)node.DeviceHandler).thermModeGet();
+                    ((Thermostat)node.DeviceHandler).Thermostat_ModeGet();
                     Thread.Sleep(200);
                     node.RequestMultiLevelReport();
                 }
@@ -996,33 +992,35 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     path = ModuleParameters.MODPAR_STATUS_LEVEL + "." + upargs.ParameterId;
                 }
-                value = normalizedval.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                value = normalizedval.ToString(CultureInfo.InvariantCulture);
 
-                break;
-
-            case ParameterType.PARAMETER_FAN_MODE:
-                path = "Thermostat.FanMode";
-                break;
-            case ParameterType.PARAMETER_FAN_STATE:
-                path = "Thermostat.FanState";
-                break;
-            case ParameterType.PARAMETER_THERMOSTAT_HEATING:
-                path = "Thermostat.Heating";
                 break;
             case ParameterType.PARAMETER_THERMOSTAT_MODE:
                 path = "Thermostat.Mode";
+                value = ((Thermostat.Mode)value).ToString();
                 break;
             case ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE:
                 path = "Thermostat.OperatingState";
+                value = ((Thermostat.OperatingState)value).ToString();
+                break;
+            case ParameterType.PARAMETER_THERMOSTAT_FAN_MODE:
+                path = "Thermostat.FanMode";
+                value = ((Thermostat.FanMode)value).ToString();
+                break;
+            case ParameterType.PARAMETER_THERMOSTAT_FAN_STATE:
+                path = "Thermostat.FanState";
+                value = ((Thermostat.FanState)value).ToString();
+                break;
+            case ParameterType.PARAMETER_THERMOSTAT_HEATING:
+                path = "Thermostat.Heating";
                 break;
             case ParameterType.PARAMETER_THERMOSTAT_SETBACK:
                 path = "Thermostat.SetBack";
                 break;
             case ParameterType.PARAMETER_THERMOSTAT_SETPOINT:
-                path = "Thermostat.SetPoint";
+                path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
+                value = ((dynamic)value).Value;
                 break;
-
-
 
             default:
                 Console.WriteLine(

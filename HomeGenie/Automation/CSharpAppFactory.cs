@@ -46,14 +46,17 @@ namespace HomeGenie.Automation
 
         public CompilerResults CompileScript(string condition, string statement, string outputDllFile)
         {
-            string source = @"using System;
+            string source = @"    //# pragma warning disable 0168 // variable declared but not used.
+//# pragma warning disable 0219 // variable assigned but not used.
+//# pragma warning disable 0414 // private field assigned but not used.
+using System;
 using System.Collections.Generic;
 
 using HomeGenie;
 using HomeGenie.Service;
 using HomeGenie.Automation; using HomeGenie.Data;
 
-using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Controllers.Pca9685; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
+using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.Timers; using Raspberry.IO.Components.Controllers.Pca9685; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Leds.GroveRgb; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.Distance.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
 namespace HomeGenie.Automation.Scripting
 {
     public class ScriptingInstance : ScriptingHost

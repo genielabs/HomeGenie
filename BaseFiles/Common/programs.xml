@@ -75,17 +75,17 @@ Modules
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ConditionType>OnTrue</ConditionType>
-  <Conditions />
-  <Commands />
-  <ScriptCondition>Program.Setup( () =&gt; {
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup( () =&gt; {
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on");
 	Program.AddFeature("Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only");
 });
 // this program will be running in background
 return true;
 </ScriptCondition>
-  <ScriptSource>// We want to do further processing whenever a module changes 
+    <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
 	// stores the Status.MemoryLevel value for recalling last light dimmer level
 	// when switched on
@@ -127,34 +127,34 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-  <ScriptErrors>[]</ScriptErrors>
-  <IsRunning>true</IsRunning>
-  <Features>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes>Dimmer</ForTypes>
-      <Property>HomeGenie.LevelMemory</Property>
-      <Description>Recall last light level when switched on</Description>
-    </ProgramFeature>
-    <ProgramFeature>
-      <FieldType>checkbox</FieldType>
-      <ForDomains />
-      <ForTypes>Dimmer</ForTypes>
-      <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
-      <Description>Simulate only</Description>
-    </ProgramFeature>
-  </Features>
-  <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-  <Address>16</Address>
-  <Name>Level Memory</Name>
-  <Description>Store and recall last dimmer level when device is switched on.</Description>
-  <Group>Lights</Group>
-  <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-  <TriggerTime>2014-08-12T18:20:15.310497Z</TriggerTime>
-  <Type>CSharp</Type>
-  <IsEnabled>true</IsEnabled>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory</Property>
+        <Description>Recall last light level when switched on</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
+        <Description>Simulate only</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>16</Address>
+    <Name>Level Memory</Name>
+    <Description>Store and recall last dimmer level when device is switched on.</Description>
+    <Group>Lights</Group>
+    <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
+    <TriggerTime>2014-11-13T23:07:07.879034Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:49.610526Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:08.389981Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:50.11561Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:08.892624Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-07-25T22:15:39.854574Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:39.429487Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -513,13 +513,14 @@ Program.Setup(()=&gt;
 return true; // execute the 'Code to Run'</ScriptCondition>
     <ScriptSource>// example code adapted from https://github.com/raspberry-sharp/
 //
+var driver = GpioConnectionSettings.DefaultDriver;
 
 Func&lt;bool&gt; readdistance = new Func&lt;bool&gt;(() =&gt; {
     var triggerPin = ConnectorPin.P1Pin03.ToProcessor();
     var echoPin = ConnectorPin.P1Pin07.ToProcessor();
     var success = false;
     
-    using (var connection = new HcSr04Connection(triggerPin, echoPin))
+    using (var connection = new HcSr04Connection(driver.Out(triggerPin), driver.In(echoPin)))
     {
         try
         {
@@ -550,7 +551,7 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
 	return "{ 'ResponseValue' : '" + res + "' }";
 }); 
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -559,123 +560,8 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <Name>HCSR04 - Ultrasonic Ranging Module</Name>
     <Description>Ultrasonic Ranging Module sensor </Description>
     <Group>Raspberry Pi</Group>
-    <ActivationTime>2013-12-07T01:38:37.454915Z</ActivationTime>
-    <TriggerTime>2013-12-07T01:38:48.349238Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt;
-{
-  
-  // set the widget that will display this program data (the temperature,luminance).
-  Program.AddControlWidget("homegenie/generic/temperature");
-  
-  // set a configuration parameter
-  Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
-  
-  // initialize program parameters
-  Program.Parameter("Sensor.Temperature").Value = "";
-  Program.Parameter("Sensor.Luminance").Value = "";
-  
-}); // end program setup
-
-return true;
-</ScriptCondition>
-    <ScriptSource>//
-// adapted from https://github.com/raspberry-sharp/raspberry-sharp-io/blob/master/Test.Gpio.MCP3008/Program.cs
-// see also http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview
-// Connected pins are the same as in the original sample.
-
-const decimal voltage = 3.3m;
-//
-Func&lt;decimal, decimal&gt; 
-ConvertToCelsius = (volts) =&gt; {
-	return 100 * volts - 50;
-};
-Func&lt;decimal, decimal, decimal&gt;
-ConvertToLux = (volts, referenceVoltage) =&gt; {
-    // See http://learn.adafruit.com/photocells/using-a-photocell
-    // and http://www.emant.com/316002.page    
-    decimal resistor = 10000;
-    decimal luxRatio = 500000;
-    return volts != 0 ? luxRatio * volts / (resistor * (referenceVoltage - volts)) : 0;
-};
-
-var adcClock = ConnectorPin.P1Pin12;
-var adcMiso = ConnectorPin.P1Pin16;
-var adcMosi = ConnectorPin.P1Pin18;
-var adcCs = ConnectorPin.P1Pin22;
-
-  
-// it makes program to respond to webservices calls:
-// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Temperature
-When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Temperature", ( args ) =&gt; 
-{
-  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
-});
-// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Luminance
-When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Luminance", ( args ) =&gt; 
-{
-	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Luminance").Value + "' }";
-});
-
-var driver = GpioConnectionSettings.DefaultDriver;
-
-using (var clockPin = driver.Out(adcClock))
-using (var csPin = driver.Out(adcCs))
-using (var misoPin = driver.In(adcMiso))
-using (var mosiPin = driver.Out(adcMosi))
-using (var adcConnection = new Mcp3008SpiConnection(clockPin, csPin, misoPin, mosiPin))
-using (var temperaturePin = adcConnection.In(Mcp3008Channel.Channel0, ConvertToCelsius(voltage)))
-using (var luxPin = adcConnection.In(Mcp3008Channel.Channel1, voltage))
-{
-  // MCP3008 Sample: Reading temperature on Channel 0 and luminosity on Channel 1
-  
-  while (Program.IsEnabled)
-  {
-    
-    var temperature = String.Format("{0,5:0.0}", ConvertToCelsius( adcConnection.Read(Mcp3008Channel.Channel0) ));
-    var lux = String.Format("{0,5:0.0}", ConvertToLux( adcConnection.Read(Mcp3008Channel.Channel1), voltage ));
-
-    if (temperature != "-50.0")
-    {
-        if (temperature != Program.Parameter("Sensor.Temperature").Value)
-        {
-            Program.RaiseEvent("Sensor.Temperature",  temperature, "MCP3008 Sensor");
-        }
-        if (lux != Program.Parameter("Sensor.Luminance").Value)
-        {
-            Program.RaiseEvent("Sensor.Luminance", lux, "MCP3008 Sensor");
-        }
-    }
-    else
-    {
-      	Program.Notify("MCP3008 Error", "Could not read sensor data.");
-    }
-    
-    double pauseseconds = double.Parse(Program.InputField("PollFrequency").Value);
-    Pause( pauseseconds * 60 ); // pause 
-    
-  }
-}
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>38</Address>
-    <Name>MCP3008 - Temperature and Luminance</Name>
-    <Description>Analog Inputs SPI application using the MCP3008 ADC. 
-For wirings see http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2014-11-13T16:35:20.828486Z</ActivationTime>
+    <TriggerTime>2014-11-13T16:35:28.702851Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -866,7 +752,7 @@ while (Program.IsEnabled)
     <Address>70</Address>
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11. 
-For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
+For wirings see http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
@@ -1142,7 +1028,7 @@ return true;
 It can be used for "Sunrise/Sunset" feature.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:51.11473Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:09.891287Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1333,7 +1219,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:51.603725Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:10.379672Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1388,7 +1274,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:52.106001Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:10.880879Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1683,7 +1569,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:52.615847Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:11.393896Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1764,86 +1650,9 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:53.108668Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:11.879079Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
-{
-	// register 2 virtual modules using the "switch" widget    
-	Program.AddVirtualModules("HomeGenie.Buzzer", "Switch", "homegenie/generic/switch", 1, 1);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-</ScriptCondition>
-    <ScriptSource>// Initially turn the leds off
-var systembuzzer = new PinConfiguration[] { 	ConnectorPin.P1Pin16.Output().Name("Buzzer").Disable()  };
-// 
-using (var connection = new GpioConnection(systembuzzer))
-{  
-    
-    When.WebServiceCallReceived("HomeGenie.Buzzer", ( args ) =&gt; 
-    {
-        string[] reqs = ((string)args).Split('/');
-        var res = "{ 'ResponseValue' : 'ERROR' }";
-    
-        try
-        {
-            string command = reqs[2];
-    		//string buzid = reqs[1];
-            var module = Modules.InDomain("HomeGenie.Buzzer").WithAddress("1").Get();
-          	//
-            switch(command)
-            {
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.On
-              case "Control.On":
-              	connection["Buzzer"] = true;
-                Program.RaiseEvent(module, "Status.Level", "1", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Off
-              case "Control.Off":
-              	connection["Buzzer"] = false;
-                Program.RaiseEvent(module, "Status.Level", "0", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Buzzer/1/Control.Toggle
-              case "Control.Toggle":
-              	connection["Buzzer"] = !connection["Buzzer"];
-                Program.RaiseEvent(module, "Status.Level", connection["Buzzer"] ? "1" : "0", "Buzzer");
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-            }
-        } 
-        catch (Exception ex) 
-        { 
-            res = ex.Message + " " + ex.StackTrace;
-        }
-        // unable to process request
-        return res;
-    });
-  
-  
-	Program.GoBackground();
-}
-</ScriptSource>
-    <ScriptErrors />
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>92</Address>
-    <Name>HomeGenie Buzzer</Name>
-    <Description>GPIO controlled Buzzer</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime>2014-03-17T00:19:30.475555Z</ActivationTime>
-    <TriggerTime>2014-03-17T00:19:51.259516Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1911,7 +1720,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:53.607097Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:12.382674Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2177,7 +1986,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:54.109789Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:12.884925Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2381,75 +2190,6 @@ trigger actions when you get home.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>var moduleDomain = "Arduino.Switches";
-Program.Setup(()=&gt;
-{
-	// register 3 virtual modules using the "switch" widget for the domain "Arduino.Switches" 
-	Program.AddVirtualModules(moduleDomain, "Switch", "homegenie/generic/switch", 1, 3);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-
-</ScriptCondition>
-    <ScriptSource>var moduleDomain = "Arduino.Switches";
-// 
-// TODO: Initialize serial port here...
-// 
-When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-{
-	string[] reqs = ((string)args).Split('/');
-	var res = "{ 'ResponseValue' : 'ERROR' }";
-	//
-	try
-	{
-		string switchid = reqs[1];
-	    string command = reqs[2];
-	    // get reference to the virtual module 
-	    var module = Modules.InDomain(moduleDomain).WithAddress(switchid).Get();
-	  	//
-	    switch(command)
-	    {
-	      	// eg. http://hg_address/api/Arduino.Switches/1/Control.On
-	      	case "Control.On":
-	      		// TODO: Send command by serial port to the arduino to turn on the switchid
-				Program.RaiseEvent(module, "Status.Level", "1", "Switch " + switchid);
-				res = "{ 'ResponseValue' : 'OK' }";
-				break;
-          	// eg. http://hg_address/api/Arduino.Switches/2/Control.Off
-	      	case "Control.Off":
-	      		// TODO: Send command by serial port to the arduino to turn off the switchid
-				Program.RaiseEvent(module, "Status.Level", "0", "Switch " + switchid);
-				res = "{ 'ResponseValue' : 'OK' }";
-				break;
-	    }
-	} 
-	catch (Exception ex) 
-	{ 
-	    res = ex.Message + " " + ex.StackTrace;
-	}
-	// unable to process request
-	return res;
-});
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>168</Address>
-    <Name>Arduino Switches</Name>
-    <Description>Arduino controlled Switches.</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
     Program.AddFeatureTextInput("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link");
@@ -2612,7 +2352,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:54.611227Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:13.883975Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2674,7 +2414,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:55.115549Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:14.384352Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2831,7 +2571,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:55.604793Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:14.886318Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2937,111 +2677,6 @@ Program.GoBackground();</ScriptSource>
     <Group>X10</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
     <TriggerTime>2014-04-11T15:54:17.1660696Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>var moduleDomain = "HomeGenie.Leds";
-
-Program.Setup(()=&gt;
-{
-	// register 2 virtual modules using the "switch" widget    
-	Program.AddVirtualModules(moduleDomain, "Light", "homegenie/generic/light", 1, 2);                  
-});
-// returning true will execute the "Code to Run"
-return true;
-
-</ScriptCondition>
-    <ScriptSource>var moduleDomain = "HomeGenie.Leds";
-
-// Initially turn the leds off
-var systemleds = new PinConfiguration[] { 	ConnectorPin.P1Pin15.Output().Name("ActivityLed").Disable(), 
-                                         	ConnectorPin.P1Pin13.Output().Name("ReadyLed").Disable() };
-// 
-var ledsname = new Dictionary&lt;string, string&gt;() { {"1", "ReadyLed"}, {"2", "ActivityLed"} };
-var ledbusy = false;
-using (var connection = new GpioConnection(systemleds))
-{  
-	When.ModuleParameterChanged( (module, parameter) =&gt; {
-      	if (!ledbusy &amp;&amp; module.Instance.Domain != moduleDomain)
-        {
-          	ledbusy = true;
-            connection.Blink("ActivityLed", 10); // 10 ms
-            ledbusy = false;
-        }
-      	return true;
-	});
-  
-    
-    When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-    {
-        string[] reqs = ((string)args).Split('/');
-        var res = "{ 'ResponseValue' : 'ERROR' }";
-    
-      	//Command cmd = new Command((string)args);
-        try
-        {
-            string command = reqs[2];
-    		string ledid = reqs[1];
-            var module = Modules.InDomain(moduleDomain).WithAddress(ledid).Get();
-          	//
-            switch(command)
-            {
-              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.On
-              case "Control.On":
-              	connection[ledsname[ledid]] = true;
-                Program.RaiseEvent(module, "Status.Level", "1", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Leds/2/Control.Off
-              case "Control.Off":
-              	connection[ledsname[ledid]] = false;
-                Program.RaiseEvent(module, "Status.Level", "0", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-              // eg. http://hg_address/api/HomeGenie.Leds/1/Control.Toggle
-              case "Control.Toggle":
-              	connection[ledsname[ledid]] = !connection[ledsname[ledid]];
-                Program.RaiseEvent(module, "Status.Level", connection[ledsname[ledid]] ? "1" : "0", "Led " + ledid);
-                res = "{ 'ResponseValue' : 'OK' }";
-                break;
-            }
-        } 
-        catch (Exception ex) 
-        { 
-            res = ex.Message + " " + ex.StackTrace;
-        }
-        // unable to process request
-        return res;
-    });
-  
-  
-  
-  	while(Program.IsEnabled) 
-    {
-      	// HomeGenie heart beat
-      	connection.Blink("ReadyLed", 10);
-	    Pause(0.060);
-      	connection.Blink("ReadyLed", 230);
-	    Pause(0.700);
-    }
-}
-</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>40</Address>
-    <Name>HomeGenie Leds</Name>
-    <Description>Staus and Activity leds for HomeGenie.
-For wirings see http://www.homegenie.it/docs/doityourself.php .</Description>
-    <Group>Raspberry Pi</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -3197,10 +2832,10 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
     <Name>Smart Lights</Name>
-    <Description>Control device by motion detection and enviroment lumosity </Description>
+    <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-07-25T21:58:56.112261Z</TriggerTime>
+    <TriggerTime>2014-11-13T23:07:15.390355Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3374,7 +3009,7 @@ Program.GoBackground();
     <Name>Fibaro RGBW</Name>
     <Description>Adds ZWave Fibaro RGBWM-441 control capability to HomeGenie. 
 </Description>
-    <Group>Contrib</Group>
+    <Group>Z-Wave</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
@@ -3937,13 +3572,13 @@ while (Program.IsEnabled)
     <ScriptErrors />
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>503</Address>
     <Name>jkUtils - OpenWeatherData</Name>
     <Description>Gathers weather data from http://www.OpenWeatherMap.org/ [API Version 2.5] 
 No service key required to fetch data.</Description>
-    <Group>Contrib</Group>
+    <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-05-09T16:01:02.7887618Z</ActivationTime>
     <TriggerTime>2014-05-09T16:01:02.8657664Z</TriggerTime>
     <Type>CSharp</Type>
@@ -4402,7 +4037,7 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
     <Name>jkUtils - Solar Altitude</Name>
     <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
   Please set your local longitude/latitude in program options.</Description>
-    <Group>Contrib</Group>
+    <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-05-09T16:00:57.3137647Z</ActivationTime>
     <TriggerTime>2014-05-09T16:00:57.3197403Z</TriggerTime>
     <Type>Javascript</Type>
@@ -4647,11 +4282,1790 @@ Pause(10);</ScriptSource>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>8</Address>
     <Name>Sunrise Colors Scenario</Name>
-    <Description />
+    <Description>Example scenario for Philips Hue lights.</Description>
     <Group>Scenes</Group>
     <ActivationTime>2014-07-25T21:30:38.298025Z</ActivationTime>
     <TriggerTime>2014-07-25T22:01:09.283224Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+return false;
+</ScriptCondition>
+    <ScriptSource>var pinDta = ConnectorPin.P1Pin07.ToProcessor();
+var pinClk = ConnectorPin.P1Pin13.ToProcessor();
+
+var driver = GpioConnectionSettings.DefaultDriver;
+
+driver.Allocate(pinDta, PinDirection.Output);
+driver.Allocate(pinClk, PinDirection.Output);
+
+//init 
+driver.Write(pinDta, false);
+Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
+
+
+for(int i = 0; i &lt; 4; i++)
+{
+  	driver.Write(pinDta, true);
+	driver.Write(pinDta, false);
+}
+
+var sendData16 = new Func&lt;uint, bool&gt;((data)=&gt;{
+  // send 16 bit data
+   for(int i=0; i&lt;16; i++)
+  {
+    bool state = ((data&amp;0x8000) &gt; 0 ? true : false);
+    driver.Write(pinDta, state);
+    state = driver.Read(pinClk) ? false : true;
+    driver.Write(pinClk, state);
+    data &lt;&lt;= 1;
+  }
+  return true;
+});
+
+var latchData = new Func&lt;bool&gt;(()=&gt;{
+    driver.Write(pinDta, false);
+	Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
+    for(int i=0; i&lt;4; i++)
+    {
+         driver.Write(pinDta, true);
+         driver.Write(pinDta, false);
+    }
+  	return true;
+});
+
+uint CMDMODE = 0x0000;
+
+
+var setLeds = new Func&lt;string, bool&gt;((leds)=&gt;{
+    sendData16(CMDMODE);
+    uint index_bits = (uint)Convert.ToInt32(leds, 2);
+    for (int i=0;i&lt;12;i++)
+    {
+        uint state = (uint)((index_bits&amp;0x0001) &gt; 0 ? 0x00FF : 0x0000);
+        sendData16(state);
+        index_bits = index_bits&gt;&gt;1;
+    }
+    latchData();
+  	return true;
+});
+
+setLeds("1000000000");
+//Pause(.1);
+setLeds("0100000000");
+//Pause(.1);
+setLeds("0010000000");
+//Pause(.1);
+setLeds("0001000000");
+//Pause(.1);
+setLeds("0000100000");
+//Pause(.1);
+setLeds("0000010000");
+//Pause(.1);
+setLeds("0000001000");
+//Pause(.1);
+setLeds("0000000100");
+//Pause(.1);
+setLeds("0000000010");
+//Pause(.1);
+setLeds("0000000001");
+//Pause(.1);
+
+
+Pause(3);
+
+
+var setLevel = new Func&lt;int, bool&gt;((level)=&gt;{
+    sendData16(CMDMODE);
+     for(int i=0;i&lt;12;i++)
+    {
+        uint state1 = (uint)((i&lt; level) ? 0x00FF : 0x0000);
+        sendData16(state1);
+    }
+    latchData();
+  	return true;
+});
+
+for (int z = 0; z &lt; 1000; z++)
+{
+	setLevel(z % 11);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>60</Address>
+    <Name>Grove - Led Bar</Name>
+    <Description>Using a Grove Led Bar.
+http://www.seeedstudio.com/wiki/Grove_-_LED_Bar</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Parameter("Spi.Locked").Value = "0";
+return true;</ScriptCondition>
+    <ScriptSource>#pragma warning disable 0168
+#pragma warning disable 0219
+#pragma warning disable 0414
+
+var edenModule = Modules.WithAddress("38").Get();
+var temperature = edenModule.Parameter("Sensor.Temperature");
+string oldTemperature ="-----";
+
+int LCD_X_RES = 84;
+int LCD_Y_RES = 48;
+
+const byte
+    CmdPowerDown = 0x04,
+    CmdEntryMode = 0x02,
+    CmdExtendedInstr = 0x01,
+    CmdFunctionSet = 0x20,
+    CmdDispControl = 0x08, 
+    CmdSetBias = 0x10,
+    CmdSetVop = 0x80, 
+    CmdDispBlank = 0x00,
+    CmdDispNormal = 0x04,
+    CmdDispAllOn = 0x01,
+    CmdDispInverted = 0x05,
+    CmdSetTemp = 0x04,
+    CmdSetYAddr = 0x40,
+    CmdSetXAddr = 0x80;
+
+long[] nanoFont =
+{
+    0x00000000, // ' ' - chr 32
+    0x44404000, // '!' - chr 33
+    0xaa000000, // '"' - chr 34
+    0xaeaea000, // '#' - chr 35
+    0x6ce6c000, // '$' - chr 36
+    0xa248a000, // '%' - chr 37
+    0x4a5ad000, // '&amp;' - chr 38
+    0x44000000, // ''' - chr 39
+    0x24442000, // '(' - chr 40
+    0x42224000, // ')' - chr 41
+    0x0a4a0000, // '*' - chr 42
+    0x04e40000, // '+' - chr 43
+    0x00048000, // ',' - chr 44
+    0x00e00000, // '-' - chr 45
+    0x00004000, // '.' - chr 46
+    0x22488000, // '/' - chr 47
+    0x6aaac000, // '0' - chr 48
+    0x4c44e000, // '1' - chr 49
+    0xc268e000, // '2' - chr 50
+    0xc242c000, // '3' - chr 51
+    0x88ae2000, // '4' - chr 52
+    0xe8e2c000, // '5' - chr 53
+    0x68eac000, // '6' - chr 54
+    0xe2488000, // '7' - chr 55
+    0x6aeac000, // '8' - chr 56
+    0x6ae2c000, // '9' - chr 57
+    0x04040000, // ':' - chr 58
+    0x04048000, // ';' - chr 59
+    0x24842000, // '&lt;' - chr 60
+    0x0e0e0000, // '=' - chr 61
+    0x84248000, // '&gt;' - chr 62
+    0xe2404000, // '?' - chr 63
+    0x4aa86000, // '@' - chr 64
+    0x6aeaa000, // 'A' - chr 65
+    0x6acac000, // 'B' - chr 66
+    0x68886000, // 'C' - chr 67
+    0xcaaac000, // 'D' - chr 68
+    0x68e8e000, // 'E' - chr 69
+    0x68e88000, // 'F' - chr 70
+    0x68aa6000, // 'G' - chr 71
+    0xaaeaa000, // 'H' - chr 72
+    0xe444e000, // 'I' - chr 73
+    0x622a4000, // 'J' - chr 74
+    0xaacaa000, // 'K' - chr 75
+    0x8888e000, // 'L' - chr 76
+    0xaeaaa000, // 'M' - chr 77
+    0xcaaaa000, // 'N' - chr 78
+    0x4aaa4000, // 'O' - chr 79
+    0xcae88000, // 'P' - chr 80
+    0x6aae6000, // 'Q' - chr 81
+    0x6acaa000, // 'R' - chr 82
+    0x6842c000, // 'S' - chr 83
+    0xe4444000, // 'T' - chr 84
+    0xaaaa6000, // 'U' - chr 85
+    0xaaaa4000, // 'V' - chr 86
+    0xaaaea000, // 'W' - chr 87
+    0xaa4aa000, // 'X' - chr 88
+    0xaa444000, // 'Y' - chr 89
+    0xe248e000, // 'Z' - chr 90
+    0x64446000, // '[' - chr 91
+    0x88422000, // '\' - chr 92
+    0x62226000, // ']' - chr 93
+    0x4a000000, // '^' - chr 94
+    0x0000f000, // '_' - chr 95
+    0x42000000, // '`' - chr 96
+    0x06aa6000, // 'a' - chr 97
+    0x8caac000, // 'b' - chr 98
+    0x06886000, // 'c' - chr 99
+    0x26aa6000, // 'd' - chr 100
+    0x06ac6000, // 'e' - chr 101
+    0x4a8c8000, // 'f' - chr 102
+    0x04a62c00, // 'g' - chr 103
+    0x88caa000, // 'h' - chr 104
+    0x40442000, // 'i' - chr 105
+    0x40444800, // 'j' - chr 106
+    0x8acaa000, // 'k' - chr 107
+    0x44442000, // 'l' - chr 108
+    0x0aeaa000, // 'm' - chr 109
+    0x0caaa000, // 'n' - chr 110
+    0x04aa4000, // 'o' - chr 111
+    0x0caac800, // 'p' - chr 112
+    0x06aa6200, // 'q' - chr 113
+    0x0ac88000, // 'r' - chr 114
+    0x06c2c000, // 's' - chr 115
+    0x8c886000, // 't' - chr 116
+    0x0aaa6000, // 'u' - chr 117
+    0x0aaac000, // 'v' - chr 118
+    0x0aaea000, // 'w' - chr 119
+    0x0a4aa000, // 'x' - chr 120
+    0x0aa62400, // 'y' - chr 121
+    0x0c42ac00, // 'z' - chr 122
+    0x64c46000, // '{' - chr 123
+    0x44444000, // '|' - chr 124
+    0xc464c000, // '}' - chr 125
+    0x5a000000, // '~' - chr 126
+    0x4aae0000 // '' - chr 127
+};
+
+
+byte[] smallFont =
+{
+    0x00, 0x00, 0x00, 0x00, 0x00 ,   // sp
+    0x00, 0x00, 0x2f, 0x00, 0x00 ,   // !
+    0x00, 0x07, 0x00, 0x07, 0x00 ,   // "
+    0x14, 0x7f, 0x14, 0x7f, 0x14 ,   // #
+    0x24, 0x2a, 0x7f, 0x2a, 0x12 ,   // $
+    0x61, 0x66, 0x08, 0x33, 0x43 ,   // %
+    0x36, 0x49, 0x55, 0x22, 0x50 ,   // &amp;
+    0x00, 0x05, 0x03, 0x00, 0x00 ,   // '
+    0x00, 0x1c, 0x22, 0x41, 0x00 ,   // (
+    0x00, 0x41, 0x22, 0x1c, 0x00 ,   // )
+    0x14, 0x08, 0x3E, 0x08, 0x14 ,   // *
+    0x08, 0x08, 0x3E, 0x08, 0x08 ,   // +
+    0x00, 0x00, 0x50, 0x30, 0x00 ,   // ,
+    0x10, 0x10, 0x10, 0x10, 0x10 ,   // -
+    0x00, 0x60, 0x60, 0x00, 0x00 ,   // .
+    0x20, 0x10, 0x08, 0x04, 0x02 ,   // /
+    0x3E, 0x51, 0x49, 0x45, 0x3E ,   // 0
+    0x00, 0x42, 0x7F, 0x40, 0x00 ,   // 1
+    0x42, 0x61, 0x51, 0x49, 0x46 ,   // 2
+    0x21, 0x41, 0x45, 0x4B, 0x31 ,   // 3
+    0x18, 0x14, 0x12, 0x7F, 0x10 ,   // 4
+    0x27, 0x45, 0x45, 0x45, 0x39 ,   // 5
+    0x3C, 0x4A, 0x49, 0x49, 0x30 ,   // 6
+    0x01, 0x71, 0x09, 0x05, 0x03 ,   // 7
+    0x36, 0x49, 0x49, 0x49, 0x36 ,   // 8
+    0x06, 0x49, 0x49, 0x29, 0x1E ,   // 9
+    0x00, 0x36, 0x36, 0x00, 0x00 ,   // :
+    0x00, 0x56, 0x36, 0x00, 0x00 ,   // ;
+    0x08, 0x14, 0x22, 0x41, 0x00 ,   // &lt;
+    0x14, 0x14, 0x14, 0x14, 0x14 ,   // =
+    0x00, 0x41, 0x22, 0x14, 0x08 ,   // &gt;
+    0x02, 0x01, 0x51, 0x09, 0x06 ,   // ?
+    0x32, 0x49, 0x59, 0x51, 0x3E ,   // @
+    0x7E, 0x11, 0x11, 0x11, 0x7E ,   // A
+    0x7F, 0x49, 0x49, 0x49, 0x36 ,   // B
+    0x3E, 0x41, 0x41, 0x41, 0x22 ,   // C
+    0x7F, 0x41, 0x41, 0x22, 0x1C ,   // D
+    0x7F, 0x49, 0x49, 0x49, 0x41 ,   // E
+    0x7F, 0x09, 0x09, 0x09, 0x01 ,   // F
+    0x3E, 0x41, 0x49, 0x49, 0x7A ,   // G
+    0x7F, 0x08, 0x08, 0x08, 0x7F ,   // H
+    0x00, 0x41, 0x7F, 0x41, 0x00 ,   // I
+    0x20, 0x40, 0x41, 0x3F, 0x01 ,   // J
+    0x7F, 0x08, 0x14, 0x22, 0x41 ,   // K
+    0x7F, 0x40, 0x40, 0x40, 0x40 ,   // L
+    0x7F, 0x02, 0x0C, 0x02, 0x7F ,   // M
+    0x7F, 0x04, 0x08, 0x10, 0x7F ,   // N
+    0x3E, 0x41, 0x41, 0x41, 0x3E ,   // O
+    0x7F, 0x09, 0x09, 0x09, 0x06 ,   // P
+    0x3E, 0x41, 0x51, 0x21, 0x5E ,   // Q
+    0x7F, 0x09, 0x19, 0x29, 0x46 ,   // R
+    0x46, 0x49, 0x49, 0x49, 0x31 ,   // S
+    0x01, 0x01, 0x7F, 0x01, 0x01 ,   // T
+    0x3F, 0x40, 0x40, 0x40, 0x3F ,   // U
+    0x1F, 0x20, 0x40, 0x20, 0x1F ,   // V
+    0x3F, 0x40, 0x38, 0x40, 0x3F ,   // W
+    0x63, 0x14, 0x08, 0x14, 0x63 ,   // X
+    0x07, 0x08, 0x70, 0x08, 0x07 ,   // Y
+    0x61, 0x51, 0x49, 0x45, 0x43 ,   // Z
+    0x00, 0x7F, 0x41, 0x41, 0x00 ,   // [
+    0x55, 0x2A, 0x55, 0x2A, 0x55 ,   // checker pattern
+    0x00, 0x41, 0x41, 0x7F, 0x00 ,   // ]
+    0x04, 0x02, 0x01, 0x02, 0x04 ,   // ^
+    0x40, 0x40, 0x40, 0x40, 0x40 ,   // _
+    0x00, 0x01, 0x02, 0x04, 0x00 ,   // '
+    0x20, 0x54, 0x54, 0x54, 0x78 ,   // a
+    0x7F, 0x48, 0x44, 0x44, 0x38 ,   // b
+    0x38, 0x44, 0x44, 0x44, 0x20 ,   // c
+    0x38, 0x44, 0x44, 0x48, 0x7F ,   // d
+    0x38, 0x54, 0x54, 0x54, 0x18 ,   // e
+    0x08, 0x7E, 0x09, 0x01, 0x02 ,   // f
+    0x0C, 0x52, 0x52, 0x52, 0x3E ,   // g
+    0x7F, 0x08, 0x04, 0x04, 0x78 ,   // h
+    0x00, 0x44, 0x7D, 0x40, 0x00 ,   // i
+    0x20, 0x40, 0x44, 0x3D, 0x00 ,   // j
+    0x7F, 0x10, 0x28, 0x44, 0x00 ,   // k
+    0x00, 0x41, 0x7F, 0x40, 0x00 ,   // l
+    0x7C, 0x04, 0x18, 0x04, 0x78 ,   // m
+    0x7C, 0x08, 0x04, 0x04, 0x78 ,   // n
+    0x38, 0x44, 0x44, 0x44, 0x38 ,   // o
+    0x7C, 0x14, 0x14, 0x14, 0x08 ,   // p
+    0x08, 0x14, 0x14, 0x18, 0x7C ,   // q
+    0x7C, 0x08, 0x04, 0x04, 0x08 ,   // r
+    0x48, 0x54, 0x54, 0x54, 0x20 ,   // s
+    0x04, 0x3F, 0x44, 0x40, 0x20 ,   // t
+    0x3C, 0x40, 0x40, 0x20, 0x7C ,   // u
+    0x1C, 0x20, 0x40, 0x20, 0x1C ,   // v
+    0x3C, 0x40, 0x30, 0x40, 0x3C ,   // w
+    0x44, 0x28, 0x10, 0x28, 0x44 ,   // x
+    0x0C, 0x50, 0x50, 0x50, 0x3C ,   // y
+    0x44, 0x64, 0x54, 0x4C, 0x44 ,   // z
+    0x00, 0x06, 0x09, 0x09, 0x06     // Degree symbol
+};
+
+byte[] coolFont2 =
+{
+    0x00, 0x00, 0x00, 0x00, 0x00,// (space)
+    0x00, 0x00, 0x5F, 0x00, 0x00,// !
+    0x00, 0x07, 0x00, 0x07, 0x00,// "
+    0x14, 0x7F, 0x14, 0x7F, 0x14,// #
+    0x24, 0x2A, 0x7F, 0x2A, 0x12,// $
+    0x23, 0x13, 0x08, 0x64, 0x62,// %
+    0x36, 0x49, 0x55, 0x22, 0x50,// &amp;
+    0x00, 0x05, 0x03, 0x00, 0x00,// '
+    0x00, 0x1C, 0x22, 0x41, 0x00,// (
+    0x00, 0x41, 0x22, 0x1C, 0x00,// )
+    0x08, 0x2A, 0x1C, 0x2A, 0x08,// *
+    0x08, 0x08, 0x3E, 0x08, 0x08,// +
+    0x00, 0x50, 0x30, 0x00, 0x00,// ,
+    0x08, 0x08, 0x08, 0x08, 0x08,// -
+    0x00, 0x60, 0x60, 0x00, 0x00,// .
+    0x20, 0x10, 0x08, 0x04, 0x02,// /
+    0x3E, 0x51, 0x49, 0x45, 0x3E,// 0
+    0x00, 0x42, 0x7F, 0x40, 0x00,// 1
+    0x42, 0x61, 0x51, 0x49, 0x46,// 2
+    0x21, 0x41, 0x45, 0x4B, 0x31,// 3
+    0x18, 0x14, 0x12, 0x7F, 0x10,// 4
+    0x27, 0x45, 0x45, 0x45, 0x39,// 5
+    0x3C, 0x4A, 0x49, 0x49, 0x30,// 6
+    0x01, 0x71, 0x09, 0x05, 0x03,// 7
+    0x36, 0x49, 0x49, 0x49, 0x36,// 8
+    0x06, 0x49, 0x49, 0x29, 0x1E,// 9
+    0x00, 0x36, 0x36, 0x00, 0x00,// :
+    0x00, 0x56, 0x36, 0x00, 0x00,// ;
+    0x00, 0x08, 0x14, 0x22, 0x41,// &lt;
+    0x14, 0x14, 0x14, 0x14, 0x14,// =
+    0x41, 0x22, 0x14, 0x08, 0x00,// &gt;
+    0x02, 0x01, 0x51, 0x09, 0x06,// ?
+    0x32, 0x49, 0x79, 0x41, 0x3E,// @
+    0x7E, 0x11, 0x11, 0x11, 0x7E,// A
+    0x7F, 0x49, 0x49, 0x49, 0x36,// B
+    0x3E, 0x41, 0x41, 0x41, 0x22,// C
+    0x7F, 0x41, 0x41, 0x22, 0x1C,// D
+    0x7F, 0x49, 0x49, 0x49, 0x41,// E
+    0x7F, 0x09, 0x09, 0x01, 0x01,// F
+    0x3E, 0x41, 0x41, 0x51, 0x32,// G
+    0x7F, 0x08, 0x08, 0x08, 0x7F,// H
+    0x00, 0x41, 0x7F, 0x41, 0x00,// I
+    0x20, 0x40, 0x41, 0x3F, 0x01,// J
+    0x7F, 0x08, 0x14, 0x22, 0x41,// K
+    0x7F, 0x40, 0x40, 0x40, 0x40,// L
+    0x7F, 0x02, 0x04, 0x02, 0x7F,// M
+    0x7F, 0x04, 0x08, 0x10, 0x7F,// N
+    0x3E, 0x41, 0x41, 0x41, 0x3E,// O
+    0x7F, 0x09, 0x09, 0x09, 0x06,// P
+    0x3E, 0x41, 0x51, 0x21, 0x5E,// Q
+    0x7F, 0x09, 0x19, 0x29, 0x46,// R
+    0x46, 0x49, 0x49, 0x49, 0x31,// S
+    0x01, 0x01, 0x7F, 0x01, 0x01,// T
+    0x3F, 0x40, 0x40, 0x40, 0x3F,// U
+    0x1F, 0x20, 0x40, 0x20, 0x1F,// V
+    0x7F, 0x20, 0x18, 0x20, 0x7F,// W
+    0x63, 0x14, 0x08, 0x14, 0x63,// X
+    0x03, 0x04, 0x78, 0x04, 0x03,// Y
+    0x61, 0x51, 0x49, 0x45, 0x43,// Z
+    0x00, 0x00, 0x7F, 0x41, 0x41,// [
+    0x02, 0x04, 0x08, 0x10, 0x20,// "\"
+    0x41, 0x41, 0x7F, 0x00, 0x00,// ]
+    0x04, 0x02, 0x01, 0x02, 0x04,// ^
+    0x40, 0x40, 0x40, 0x40, 0x40,// _
+    0x00, 0x01, 0x02, 0x04, 0x00,// `
+    0x20, 0x54, 0x54, 0x54, 0x78,// a
+    0x7F, 0x48, 0x44, 0x44, 0x38,// b
+    0x38, 0x44, 0x44, 0x44, 0x20,// c
+    0x38, 0x44, 0x44, 0x48, 0x7F,// d
+    0x38, 0x54, 0x54, 0x54, 0x18,// e
+    0x08, 0x7E, 0x09, 0x01, 0x02,// f
+    0x08, 0x14, 0x54, 0x54, 0x3C,// g
+    0x7F, 0x08, 0x04, 0x04, 0x78,// h
+    0x00, 0x44, 0x7D, 0x40, 0x00,// i
+    0x20, 0x40, 0x44, 0x3D, 0x00,// j
+    0x00, 0x7F, 0x10, 0x28, 0x44,// k
+    0x00, 0x41, 0x7F, 0x40, 0x00,// l
+    0x7C, 0x04, 0x18, 0x04, 0x78,// m
+    0x7C, 0x08, 0x04, 0x04, 0x78,// n
+    0x38, 0x44, 0x44, 0x44, 0x38,// o
+    0x7C, 0x14, 0x14, 0x14, 0x08,// p
+    0x08, 0x14, 0x14, 0x18, 0x7C,// q
+    0x7C, 0x08, 0x04, 0x04, 0x08,// r
+    0x48, 0x54, 0x54, 0x54, 0x20,// s
+    0x04, 0x3F, 0x44, 0x40, 0x20,// t
+    0x3C, 0x40, 0x40, 0x20, 0x7C,// u
+    0x1C, 0x20, 0x40, 0x20, 0x1C,// v
+    0x3C, 0x40, 0x30, 0x40, 0x3C,// w
+    0x44, 0x28, 0x10, 0x28, 0x44,// x
+    0x0C, 0x50, 0x50, 0x50, 0x3C,// y
+    0x44, 0x64, 0x54, 0x4C, 0x44,// z
+    0x00, 0x08, 0x36, 0x41, 0x00,// {
+    0x00, 0x00, 0x7F, 0x00, 0x00,// |
+    0x00, 0x41, 0x36, 0x08, 0x00,// }
+    0x08, 0x08, 0x2A, 0x1C, 0x08,// -&gt;
+    0x08, 0x1C, 0x2A, 0x08, 0x08 // &lt;-
+};
+
+byte[] coolFont = 
+{
+    0x00, 0x00, 0x00, 0x00, 0x00 // 20  
+    ,0x00, 0x00, 0x5f, 0x00, 0x00 // 21 !
+    ,0x00, 0x07, 0x00, 0x07, 0x00 // 22 "
+    ,0x14, 0x7f, 0x14, 0x7f, 0x14 // 23 #
+    ,0x24, 0x2a, 0x7f, 0x2a, 0x12 // 24 $
+    ,0x23, 0x13, 0x08, 0x64, 0x62 // 25 %
+    ,0x36, 0x49, 0x55, 0x22, 0x50 // 26 &amp;
+    ,0x00, 0x05, 0x03, 0x00, 0x00 // 27 '
+    ,0x00, 0x1c, 0x22, 0x41, 0x00 // 28 (
+    ,0x00, 0x41, 0x22, 0x1c, 0x00 // 29 )
+    ,0x14, 0x08, 0x3e, 0x08, 0x14 // 2a *
+    ,0x08, 0x08, 0x3e, 0x08, 0x08 // 2b +
+    ,0x00, 0x50, 0x30, 0x00, 0x00 // 2c ,
+    ,0x08, 0x08, 0x08, 0x08, 0x08 // 2d -
+    ,0x00, 0x60, 0x60, 0x00, 0x00 // 2e .
+    ,0x20, 0x10, 0x08, 0x04, 0x02 // 2f /
+    ,0x3e, 0x51, 0x49, 0x45, 0x3e // 30 0
+    ,0x00, 0x42, 0x7f, 0x40, 0x00 // 31 1
+    ,0x42, 0x61, 0x51, 0x49, 0x46 // 32 2
+    ,0x21, 0x41, 0x45, 0x4b, 0x31 // 33 3
+    ,0x18, 0x14, 0x12, 0x7f, 0x10 // 34 4
+    ,0x27, 0x45, 0x45, 0x45, 0x39 // 35 5
+    ,0x3c, 0x4a, 0x49, 0x49, 0x30 // 36 6
+    ,0x01, 0x71, 0x09, 0x05, 0x03 // 37 7
+    ,0x36, 0x49, 0x49, 0x49, 0x36 // 38 8
+    ,0x06, 0x49, 0x49, 0x29, 0x1e // 39 9
+    ,0x00, 0x36, 0x36, 0x00, 0x00 // 3a :
+    ,0x00, 0x56, 0x36, 0x00, 0x00 // 3b ;
+    ,0x08, 0x14, 0x22, 0x41, 0x00 // 3c &lt;
+    ,0x14, 0x14, 0x14, 0x14, 0x14 // 3d =
+    ,0x00, 0x41, 0x22, 0x14, 0x08 // 3e &gt;
+    ,0x02, 0x01, 0x51, 0x09, 0x06 // 3f ?
+    ,0x32, 0x49, 0x79, 0x41, 0x3e // 40 @
+    ,0x7e, 0x11, 0x11, 0x11, 0x7e // 41 A
+    ,0x7f, 0x49, 0x49, 0x49, 0x36 // 42 B
+    ,0x3e, 0x41, 0x41, 0x41, 0x22 // 43 C
+    ,0x7f, 0x41, 0x41, 0x22, 0x1c // 44 D
+    ,0x7f, 0x49, 0x49, 0x49, 0x41 // 45 E
+    ,0x7f, 0x09, 0x09, 0x09, 0x01 // 46 F
+    ,0x3e, 0x41, 0x49, 0x49, 0x7a // 47 G
+    ,0x7f, 0x08, 0x08, 0x08, 0x7f // 48 H
+    ,0x00, 0x41, 0x7f, 0x41, 0x00 // 49 I
+    ,0x20, 0x40, 0x41, 0x3f, 0x01 // 4a J
+    ,0x7f, 0x08, 0x14, 0x22, 0x41 // 4b K
+    ,0x7f, 0x40, 0x40, 0x40, 0x40 // 4c L
+    ,0x7f, 0x02, 0x0c, 0x02, 0x7f // 4d M
+    ,0x7f, 0x04, 0x08, 0x10, 0x7f // 4e N
+    ,0x3e, 0x41, 0x41, 0x41, 0x3e // 4f O
+    ,0x7f, 0x09, 0x09, 0x09, 0x06 // 50 P
+    ,0x3e, 0x41, 0x51, 0x21, 0x5e // 51 Q
+    ,0x7f, 0x09, 0x19, 0x29, 0x46 // 52 R
+    ,0x46, 0x49, 0x49, 0x49, 0x31 // 53 S
+    ,0x01, 0x01, 0x7f, 0x01, 0x01 // 54 T
+    ,0x3f, 0x40, 0x40, 0x40, 0x3f // 55 U
+    ,0x1f, 0x20, 0x40, 0x20, 0x1f // 56 V
+    ,0x3f, 0x40, 0x38, 0x40, 0x3f // 57 W
+    ,0x63, 0x14, 0x08, 0x14, 0x63 // 58 X
+    ,0x07, 0x08, 0x70, 0x08, 0x07 // 59 Y
+    ,0x61, 0x51, 0x49, 0x45, 0x43 // 5a Z
+    ,0x00, 0x7f, 0x41, 0x41, 0x00 // 5b [
+    ,0x02, 0x04, 0x08, 0x10, 0x20 // 5c \
+    ,0x00, 0x41, 0x41, 0x7f, 0x00 // 5d ]
+    ,0x04, 0x02, 0x01, 0x02, 0x04 // 5e ^
+    ,0x40, 0x40, 0x40, 0x40, 0x40 // 5f _
+    ,0x00, 0x01, 0x02, 0x04, 0x00 // 60 `
+    ,0x20, 0x54, 0x54, 0x54, 0x78 // 61 a
+    ,0x7f, 0x48, 0x44, 0x44, 0x38 // 62 b
+    ,0x38, 0x44, 0x44, 0x44, 0x20 // 63 c
+    ,0x38, 0x44, 0x44, 0x48, 0x7f // 64 d
+    ,0x38, 0x54, 0x54, 0x54, 0x18 // 65 e
+    ,0x08, 0x7e, 0x09, 0x01, 0x02 // 66 f
+    ,0x0c, 0x52, 0x52, 0x52, 0x3e // 67 g
+    ,0x7f, 0x08, 0x04, 0x04, 0x78 // 68 h
+    ,0x00, 0x44, 0x7d, 0x40, 0x00 // 69 i
+    ,0x20, 0x40, 0x44, 0x3d, 0x00 // 6a j 
+    ,0x7f, 0x10, 0x28, 0x44, 0x00 // 6b k
+    ,0x00, 0x41, 0x7f, 0x40, 0x00 // 6c l
+    ,0x7c, 0x04, 0x18, 0x04, 0x78 // 6d m
+    ,0x7c, 0x08, 0x04, 0x04, 0x78 // 6e n
+    ,0x38, 0x44, 0x44, 0x44, 0x38 // 6f o
+    ,0x7c, 0x14, 0x14, 0x14, 0x08 // 70 p
+    ,0x08, 0x14, 0x14, 0x18, 0x7c // 71 q
+    ,0x7c, 0x08, 0x04, 0x04, 0x08 // 72 r
+    ,0x48, 0x54, 0x54, 0x54, 0x20 // 73 s
+    ,0x04, 0x3f, 0x44, 0x40, 0x20 // 74 t
+    ,0x3c, 0x40, 0x40, 0x20, 0x7c // 75 u
+    ,0x1c, 0x20, 0x40, 0x20, 0x1c // 76 v
+    ,0x3c, 0x40, 0x30, 0x40, 0x3c // 77 w
+    ,0x44, 0x28, 0x10, 0x28, 0x44 // 78 x
+    ,0x0c, 0x50, 0x50, 0x50, 0x3c // 79 y
+    ,0x44, 0x64, 0x54, 0x4c, 0x44 // 7a z
+    ,0x00, 0x08, 0x36, 0x41, 0x00 // 7b {
+    ,0x00, 0x00, 0x7f, 0x00, 0x00 // 7c |
+    ,0x00, 0x41, 0x36, 0x08, 0x00 // 7d }
+    ,0x10, 0x08, 0x08, 0x10, 0x08 // 7e ~
+    ,0x78, 0x46, 0x41, 0x46, 0x78 // 7f DEL
+};
+
+// This font be freely used without any restriction(It is placed in public domain)
+byte[] basicFont =
+{
+    0x00, 0x00, 0x00, 0x00, 0x00 ,   // sp
+    0x00, 0x00, 0x2f, 0x00, 0x00 ,   // !
+    0x00, 0x07, 0x00, 0x07, 0x00 ,   // "
+    0x14, 0x7f, 0x14, 0x7f, 0x14 ,   // #
+    0x24, 0x2a, 0x7f, 0x2a, 0x12 ,   // $
+    0x61, 0x66, 0x08, 0x33, 0x43 ,   // %
+    0x36, 0x49, 0x55, 0x22, 0x50 ,   // &amp;
+    0x00, 0x05, 0x03, 0x00, 0x00 ,   // '
+    0x00, 0x1c, 0x22, 0x41, 0x00 ,   // (
+    0x00, 0x41, 0x22, 0x1c, 0x00 ,   // )
+    0x14, 0x08, 0x3E, 0x08, 0x14 ,   // *
+    0x08, 0x08, 0x3E, 0x08, 0x08 ,   // +
+    0x00, 0x00, 0x50, 0x30, 0x00 ,   // ,
+    0x10, 0x10, 0x10, 0x10, 0x10 ,   // -
+    0x00, 0x60, 0x60, 0x00, 0x00 ,   // .
+    0x20, 0x10, 0x08, 0x04, 0x02 ,   // /
+    0x3E, 0x51, 0x49, 0x45, 0x3E ,   // 0
+    0x00, 0x42, 0x7F, 0x40, 0x00 ,   // 1
+    0x42, 0x61, 0x51, 0x49, 0x46 ,   // 2
+    0x21, 0x41, 0x45, 0x4B, 0x31 ,   // 3
+    0x18, 0x14, 0x12, 0x7F, 0x10 ,   // 4
+    0x27, 0x45, 0x45, 0x45, 0x39 ,   // 5
+    0x3C, 0x4A, 0x49, 0x49, 0x30 ,   // 6
+    0x01, 0x71, 0x09, 0x05, 0x03 ,   // 7
+    0x36, 0x49, 0x49, 0x49, 0x36 ,   // 8
+    0x06, 0x49, 0x49, 0x29, 0x1E ,   // 9
+    0x00, 0x36, 0x36, 0x00, 0x00 ,   // :
+    0x00, 0x56, 0x36, 0x00, 0x00 ,   // ;
+    0x08, 0x14, 0x22, 0x41, 0x00 ,   // &lt;
+    0x14, 0x14, 0x14, 0x14, 0x14 ,   // =
+    0x00, 0x41, 0x22, 0x14, 0x08 ,   // &gt;
+    0x02, 0x01, 0x51, 0x09, 0x06 ,   // ?
+    0x32, 0x49, 0x59, 0x51, 0x3E ,   // @
+    0x7E, 0x11, 0x11, 0x11, 0x7E ,   // A
+    0x7F, 0x49, 0x49, 0x49, 0x36 ,   // B
+    0x3E, 0x41, 0x41, 0x41, 0x22 ,   // C
+    0x7F, 0x41, 0x41, 0x22, 0x1C ,   // D
+    0x7F, 0x49, 0x49, 0x49, 0x41 ,   // E
+    0x7F, 0x09, 0x09, 0x09, 0x01 ,   // F
+    0x3E, 0x41, 0x49, 0x49, 0x7A ,   // G
+    0x7F, 0x08, 0x08, 0x08, 0x7F ,   // H
+    0x00, 0x41, 0x7F, 0x41, 0x00 ,   // I
+    0x20, 0x40, 0x41, 0x3F, 0x01 ,   // J
+    0x7F, 0x08, 0x14, 0x22, 0x41 ,   // K
+    0x7F, 0x40, 0x40, 0x40, 0x40 ,   // L
+    0x7F, 0x02, 0x0C, 0x02, 0x7F ,   // M
+    0x7F, 0x04, 0x08, 0x10, 0x7F ,   // N
+    0x3E, 0x41, 0x41, 0x41, 0x3E ,   // O
+    0x7F, 0x09, 0x09, 0x09, 0x06 ,   // P
+    0x3E, 0x41, 0x51, 0x21, 0x5E ,   // Q
+    0x7F, 0x09, 0x19, 0x29, 0x46 ,   // R
+    0x46, 0x49, 0x49, 0x49, 0x31 ,   // S
+    0x01, 0x01, 0x7F, 0x01, 0x01 ,   // T
+    0x3F, 0x40, 0x40, 0x40, 0x3F ,   // U
+    0x1F, 0x20, 0x40, 0x20, 0x1F ,   // V
+    0x3F, 0x40, 0x38, 0x40, 0x3F ,   // W
+    0x63, 0x14, 0x08, 0x14, 0x63 ,   // X
+    0x07, 0x08, 0x70, 0x08, 0x07 ,   // Y
+    0x61, 0x51, 0x49, 0x45, 0x43 ,   // Z
+    0x00, 0x7F, 0x41, 0x41, 0x00 ,   // [
+    0x55, 0x2A, 0x55, 0x2A, 0x55 ,   // checker pattern
+    0x00, 0x41, 0x41, 0x7F, 0x00 ,   // ]
+    0x04, 0x02, 0x01, 0x02, 0x04 ,   // ^
+    0x40, 0x40, 0x40, 0x40, 0x40 ,   // _
+    0x00, 0x01, 0x02, 0x04, 0x00 ,   // '
+    0x20, 0x54, 0x54, 0x54, 0x78 ,   // a
+    0x7F, 0x48, 0x44, 0x44, 0x38 ,   // b
+    0x38, 0x44, 0x44, 0x44, 0x20 ,   // c
+    0x38, 0x44, 0x44, 0x48, 0x7F ,   // d
+    0x38, 0x54, 0x54, 0x54, 0x18 ,   // e
+    0x08, 0x7E, 0x09, 0x01, 0x02 ,   // f
+    0x0C, 0x52, 0x52, 0x52, 0x3E ,   // g
+    0x7F, 0x08, 0x04, 0x04, 0x78 ,   // h
+    0x00, 0x44, 0x7D, 0x40, 0x00 ,   // i
+    0x20, 0x40, 0x44, 0x3D, 0x00 ,   // j
+    0x7F, 0x10, 0x28, 0x44, 0x00 ,   // k
+    0x00, 0x41, 0x7F, 0x40, 0x00 ,   // l
+    0x7C, 0x04, 0x18, 0x04, 0x78 ,   // m
+    0x7C, 0x08, 0x04, 0x04, 0x78 ,   // n
+    0x38, 0x44, 0x44, 0x44, 0x38 ,   // o
+    0x7C, 0x14, 0x14, 0x14, 0x08 ,   // p
+    0x08, 0x14, 0x14, 0x18, 0x7C ,   // q
+    0x7C, 0x08, 0x04, 0x04, 0x08 ,   // r
+    0x48, 0x54, 0x54, 0x54, 0x20 ,   // s
+    0x04, 0x3F, 0x44, 0x40, 0x20 ,   // t
+    0x3C, 0x40, 0x40, 0x20, 0x7C ,   // u
+    0x1C, 0x20, 0x40, 0x20, 0x1C ,   // v
+    0x3C, 0x40, 0x30, 0x40, 0x3C ,   // w
+    0x44, 0x28, 0x10, 0x28, 0x44 ,   // x
+    0x0C, 0x50, 0x50, 0x50, 0x3C ,   // y
+    0x44, 0x64, 0x54, 0x4C, 0x44 ,   // z
+    0x00, 0x06, 0x09, 0x09, 0x06     // Degree symbol
+};
+
+byte[,,] numb = {
+    {{0x00,0x00,0xc0,0xe0,0x70,0x30,0x30,0x30,0x70,0xe0,0xc0,0x00,0x00,0x00,0x00,0x00}, // '0'
+        {0x00,0xff,0xff,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xff,0x00,0x00,0x00,0x00},
+        {0x00,0x07,0x1f,0x38,0x70,0x60,0x60,0x60,0x70,0x38,0x1f,0x07,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x00,0x00,0xc0,0xc0,0xc0,0xf0,0xf0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // '1'
+        {0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xff,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00},
+        {0x00,0x00,0x00,0x60,0x60,0x60,0x7f,0x7f,0x60,0x60,0x60,0x00,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0xe0,0x60,0x70,0x30,0x30,0x30,0x30,0x60,0xe0,0x80,0x00,0x00,0x00,0x00,0x00},  // '2'
+        {0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xc0,0xf0,0x3f,0x1f,0x00,0x00,0x00,0x00,0x00},
+        {0x00,0x70,0x78,0x7c,0x6e,0x67,0x63,0x61,0x60,0x60,0x60,0x60,0x00,0x00,0x00,0x00}},  
+
+    {{0x00,0xe0,0x60,0x70,0x30,0x30,0x30,0x30,0x30,0x60,0xe0,0xc0,0x00,0x00,0x00,0x00},  // '3'
+        {0x00,0x00,0x00,0x00,0x00,0x18,0x18,0x18,0x3c,0x7c,0xe7,0xc3,0x00,0x00,0x00,0x00},
+        {0x00,0x38,0x30,0x70,0x60,0x60,0x60,0x60,0x70,0x38,0x1f,0x0f,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xc0,0x60,0xf0,0xf0,0x00,0x00,0x00,0x00,0x00},  // '4'
+        {0x00,0xe0,0xf0,0xdc,0xce,0xc7,0xc1,0xc0,0xc0,0xff,0xff,0x00,0x00,0x00,0x00,0x00},
+        {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x7f,0x7f,0x00,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x00,0xf0,0xf0,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x00,0x00,0x00,0x00,0x00},  // '5'
+        {0x00,0x00,0x1f,0x1f,0x18,0x18,0x18,0x18,0x30,0xf0,0xc0,0x00,0x00,0x00,0x00,0x00},
+        {0x00,0x30,0x70,0x60,0x60,0x60,0x60,0x70,0x38,0x1f,0x0f,0x00,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x00,0x80,0xc0,0xe0,0x60,0x30,0x30,0x30,0x30,0x30,0x00,0x00,0x00,0x00,0x00},  // '6'
+        {0x00,0xfc,0xff,0x33,0x18,0x18,0x18,0x18,0x18,0x30,0xf0,0xc0,0x00,0x00,0x00,0x00},
+        {0x00,0x07,0x1f,0x38,0x70,0x60,0x60,0x60,0x60,0x30,0x1f,0x0f,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0xb0,0xf0,0xf0,0x00,0x00,0x00,0x00,0x00},  // '7'
+        {0x00,0x00,0x00,0x00,0xc0,0xf0,0x78,0x1e,0x07,0x01,0x00,0x00,0x00,0x00,0x00,0x00},
+        {0x00,0x60,0x78,0x3e,0x0f,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x80,0xe0,0x60,0x30,0x30,0x30,0x30,0x30,0x60,0xe0,0xc0,0x00,0x00,0x00,0x00},  // '8'
+        {0x00,0x87,0xe7,0x6c,0x18,0x18,0x30,0x30,0x38,0x6c,0xc7,0x83,0x00,0x00,0x00,0x00},
+        {0x00,0x0f,0x3f,0x38,0x70,0x60,0x60,0x60,0x60,0x30,0x1f,0x0f,0x00,0x00,0x00,0x00}},
+
+    {{0x00,0x80,0xc0,0x60,0x30,0x30,0x30,0x30,0x70,0xe0,0xc0,0x00,0x00,0x00,0x00,0x00},  // '9'
+        {0x00,0x0f,0x3f,0x30,0x60,0x60,0x60,0x60,0x60,0x30,0xff,0xff,0x00,0x00,0x00,0x00},
+        {0x00,0x00,0x00,0x60,0x60,0x60,0x60,0x70,0x38,0x1e,0x0f,0x03,0x00,0x00,0x00,0x00}},
+
+    {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // '.'
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,56,56,56,0,0,0,0,0,0,0,0,0,0,0,0}},
+
+    {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // '+'
+        {0,64,64,64,248,64,64,64,0,0,0,0,0,0,0, 0},
+        {0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0}},
+
+    {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},     // '-'
+        {0,64,64,64,64,64,64,64,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}
+};
+
+byte[] bignum =
+{
+    0x04, 0x00, 0x00, 0x00, 0x38, 0x00, 0x38, 0x00, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Code for char .
+    0x04, 0x00, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, // Code for char -
+    0x0A, 0x00, 0x00, 0xF0, 0x07, 0xFC, 0x1F, 0xFE, 0x3F, 0x0E, 0x38, 0x06, 0x30, 0x0E, 0x38, 0xFE, 0x3F, 0xFC, 0x1F, 0xF0, 0x07, 0x00, 0x00, // Code for char 0
+    0x0B, 0x00, 0x00, 0x00, 0x00, 0x18, 0x30, 0x0C, 0x30, 0x0E, 0x30, 0xFE, 0x3F, 0xFE, 0x3F, 0xFE, 0x3F, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, // Code for char 1
+    0x0A, 0x00, 0x00, 0x18, 0x38, 0x1C, 0x3C, 0x1E, 0x3E, 0x06, 0x37, 0x86, 0x33, 0xC6, 0x31, 0xFE, 0x31, 0xFC, 0x30, 0x78, 0x30, 0x00, 0x00, // Code for char 2
+    0x0A, 0x00, 0x00, 0x18, 0x0C, 0x1C, 0x1C, 0x1E, 0x3C, 0xC6, 0x30, 0xC6, 0x30, 0xC6, 0x31, 0xFE, 0x3F, 0xBC, 0x1F, 0x3C, 0x0F, 0x00, 0x00, // Code for char 3
+    0x0B, 0x00, 0x00, 0x00, 0x07, 0xC0, 0x07, 0xE0, 0x06, 0x38, 0x06, 0x1E, 0x06, 0xFE, 0x3F, 0xFE, 0x3F, 0xFE, 0x3F, 0x00, 0x06, 0x00, 0x06, // Code for char 4
+    0x0A, 0x00, 0x00, 0xFE, 0x0C, 0xFE, 0x1C, 0xC6, 0x3C, 0x66, 0x38, 0x66, 0x30, 0xE6, 0x38, 0xE6, 0x3F, 0xC6, 0x1F, 0x80, 0x0F, 0x00, 0x00, // Code for char 5
+    0x0A, 0x00, 0x00, 0xF0, 0x07, 0xFC, 0x1F, 0xFC, 0x3F, 0x8E, 0x38, 0xC6, 0x30, 0xC6, 0x30, 0xCE, 0x3F, 0x8C, 0x1F, 0x08, 0x0F, 0x00, 0x00, // Code for char 6
+    0x0A, 0x00, 0x00, 0x06, 0x00, 0x06, 0x00, 0x06, 0x38, 0x06, 0x3F, 0xC6, 0x3F, 0xE6, 0x03, 0xFE, 0x00, 0x3E, 0x00, 0x0E, 0x00, 0x00, 0x00, // Code for char 7
+    0x0A, 0x00, 0x00, 0x38, 0x0F, 0xFC, 0x1F, 0xFE, 0x3F, 0xC6, 0x30, 0xC6, 0x30, 0xC6, 0x30, 0xFE, 0x3F, 0xFC, 0x1F, 0x38, 0x0F, 0x00, 0x00, // Code for char 8
+    0x0A, 0x00, 0x00, 0x78, 0x08, 0xFC, 0x18, 0xFE, 0x39, 0x86, 0x31, 0x86, 0x31, 0x86, 0x38, 0xFE, 0x1F, 0xFC, 0x1F, 0xF0, 0x07, 0x00, 0x00, // Code for char 9
+    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 // Code for char blank char
+};
+
+
+byte[] tempSymbol =
+{
+     0x00,0x00
+    ,0x3c,0x00
+    ,0x43,0xfc
+    ,0x58,0x06
+    ,0x5f,0x52
+    ,0x58,0x06
+    ,0x43,0xfc
+    ,0x3c,0x50
+};
+
+
+byte[] edenlogo =
+{
+    0x00, 0x00, 0x00, //                       
+    0x3F, 0x80, 0x00, //   #######             
+    0x7F, 0xC0, 0x00, //  #########            
+    0x7F, 0xE0, 0x00, //  ##########           
+    0x7F, 0xF7, 0xC0, //  ########### #####    
+    0x70, 0xFF, 0xE0, //  ###    ###########   
+    0x60, 0x3F, 0xF0, //  ##       ##########  
+    0x60, 0x1E, 0x78, //  ##        ####  #### 
+    0x60, 0x08, 0x18, //  ##         #      ## 
+    0x20, 0x00, 0x08, //   #                 # 
+    0x30, 0x00, 0x08, //   ##                # 
+    0x18, 0x01, 0xF8, //    ##          ###### 
+    0x1E, 0x00, 0xF0, //    ####         ####  
+    0x3F, 0xC0, 0x00, //   ########            
+    0x7F, 0xE0, 0x00, //  ##########           
+    0x7F, 0xF8, 0x00, //  ############         
+    0x71, 0xFC, 0x00, //  ###   #######        
+    0x60, 0x1C, 0x00, //  ##        ###        
+    0x30, 0x0C, 0x00, //   ##        ##        
+    0x18, 0x04, 0x00, //    ##        #        
+    0x3F, 0x04, 0x00, //   ######     #        
+    0x7F, 0xFC, 0x00, //  #############        
+    0x7F, 0xFF, 0x80, //  ################     
+    0x7F, 0xFF, 0xE0, //  ##################   
+    0x60, 0x7F, 0xF0, //  ##      ###########  
+    0x30, 0x03, 0xF0, //   ##          ######  
+    0x3C, 0x00, 0x00, //   ####                
+    0x3F, 0xC0, 0x00, //   ########            
+    0x7F, 0xE0, 0x00, //  ##########           
+    0x7F, 0xF0, 0x00, //  ###########          
+    0x7F, 0xF8, 0x00, //  ############         
+    0x61, 0x1C, 0x00, //  ##    #   ###        
+    0x61, 0x0C, 0x00, //  ##    #    ##        
+    0x21, 0x84, 0x00, //   #    ##    #        
+    0x30, 0xFC, 0x00, //   ##    ######        
+    0x10, 0x7C, 0x00, //    #     #####        
+    0x58, 0x10, 0x00, //  # ##      #          
+    0x7E, 0x00, 0x00, //  ######               
+    0x7F, 0xF0, 0x00, //  ###########          
+    0x7F, 0xFC, 0x00, //  #############        
+    0x1F, 0xFC, 0x00, //    ###########        
+    0x00, 0xFC, 0x00, //         ######        
+    0x00, 0x1C, 0x00, //            ###        
+    0x00, 0x0C, 0x00, //             ##        
+    0x3F, 0x0C, 0x00, //   ######    ##        
+    0x7F, 0xFC, 0x00, //  #############        
+    0x7F, 0xFC, 0x00, //  #############        
+    0x7F, 0xFC, 0x00, //  #############        
+    0x20, 0x10, 0x00, //   #        #          
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x00, 0x00, 0x00, //                       
+    0x1F, 0x03, 0xF8, //    #####      ####### 
+    0x20, 0x80, 0x40, //   #     #        #    
+    0x3C, 0x80, 0x40, //   ####  #        #    
+    0x00, 0x03, 0xF8, //               ####### 
+    0x1C, 0x00, 0x00, //    ###                
+    0x2A, 0x01, 0xC0, //   # # #        ###    
+    0x2C, 0x02, 0x20, //   # ##        #   #   
+    0x00, 0x02, 0x20, //               #   #   
+    0x3E, 0x01, 0xC0, //   #####        ###    
+    0x02, 0x00, 0x00, //       #               
+    0x02, 0x03, 0xE0, //       #       #####   
+    0x3C, 0x00, 0x20, //   ####            #   
+    0x00, 0x00, 0x20, //                   #   
+    0x00, 0x03, 0xE0, //               #####   
+    0x3E, 0x80, 0x20, //   ##### #         #   
+    0x00, 0x03, 0xC0, //               ####    
+    0x1C, 0x00, 0x00, //    ###                
+    0x2A, 0x01, 0xC0, //   # # #        ###    
+    0x2C, 0x02, 0xA0, //   # ##        # # #   
+    0x00, 0x02, 0xC0, //               # ##    
+    0x00, 0x00, 0x00, //                       
+};
+
+
+
+
+byte[] hglogo =
+{
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //                                           
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //                                           
+    0x00, 0x00, 0x00, 0x00, 0x3C, 0x00, //                                   ####    
+    0x00, 0x00, 0x00, 0x00, 0x3E, 0x00, //                                   #####   
+    0x00, 0x00, 0x00, 0x7C, 0x03, 0x00, //                          #####        ##  
+    0x00, 0x00, 0x00, 0x7F, 0xE1, 0x80, //                          ##########    ## 
+    0x00, 0x00, 0x00, 0x3F, 0xFF, 0x80, //                           ############### 
+    0x00, 0x00, 0x00, 0x03, 0xFF, 0x80, //                               ########### 
+    0x00, 0x00, 0x00, 0x00, 0x7F, 0xC0, //                                  #########
+    0x00, 0x00, 0x00, 0x00, 0x61, 0x80, //                                  ##    ## 
+    0x00, 0x00, 0x00, 0x78, 0x60, 0x00, //                          ####    ##       
+    0x00, 0x00, 0x00, 0x7F, 0xE0, 0x00, //                          ##########       
+    0x00, 0x00, 0x00, 0x7F, 0xFC, 0x00, //                          #############    
+    0x00, 0x00, 0x00, 0x07, 0xFF, 0x80, //                              ############ 
+    0x00, 0x00, 0x00, 0x00, 0x3F, 0xC0, //                                   ########
+    0x00, 0x00, 0x00, 0x1E, 0x03, 0xC0, //                            ####       ####
+    0x00, 0x00, 0x00, 0x3F, 0x80, 0x00, //                           #######         
+    0x00, 0x00, 0x00, 0x7F, 0xE0, 0x00, //                          ##########       
+    0x00, 0x00, 0x00, 0x7F, 0xE0, 0x00, //                          ##########       
+    0x00, 0x00, 0x00, 0x60, 0x70, 0x00, //                          ##      ###      
+    0x00, 0x00, 0x00, 0x30, 0x10, 0x00, //                           ##       #      
+    0x00, 0x00, 0x00, 0x38, 0x10, 0x00, //                           ###      #      
+    0x00, 0x00, 0x00, 0x1F, 0xF0, 0x00, //                            #########      
+    0x00, 0x00, 0x00, 0x07, 0xE0, 0x00, //                              ######       
+    0x00, 0x00, 0x00, 0x00, 0x80, 0x00, //                                 #         
+    0x00, 0x1E, 0x00, 0x7C, 0x80, 0x00, //            ####          #####  #         
+    0x38, 0x7F, 0xC0, 0x7F, 0xE0, 0x00, //   ###    #########       ##########       
+    0x7C, 0xFF, 0xE0, 0x3F, 0xF0, 0x00, //  #####  ###########       ##########      
+    0x4C, 0xF3, 0xF0, 0x03, 0xF0, 0x00, //  #  ##  ####  ######          ######      
+    0x44, 0xC0, 0x70, 0x00, 0x70, 0x00, //  #   #  ##       ###             ###      
+    0x4C, 0x80, 0x38, 0x78, 0x30, 0x00, //  #  ##  #         ###    ####     ##      
+    0x70, 0x80, 0x18, 0x7F, 0xF0, 0x00, //  ###    #          ##    ###########      
+    0x3F, 0xC0, 0x08, 0x7F, 0xF0, 0x00, //   ########          #    ###########      
+    0x1F, 0xF8, 0x08, 0x07, 0xF0, 0x00, //    ##########       #        #######      
+    0x07, 0xFC, 0xD8, 0x00, 0x60, 0x00, //      #########  ## ##            ##       
+    0x00, 0x7C, 0xF0, 0x00, 0x30, 0x00, //          #####  ####              ##      
+    0x00, 0x00, 0x60, 0x3F, 0x30, 0x00, //                  ##       ######  ##      
+    0x03, 0xE0, 0x00, 0x7F, 0xF0, 0x00, //       #####              ###########      
+    0x07, 0xF8, 0x00, 0x7F, 0xF0, 0x00, //      ########            ###########      
+    0x07, 0xFC, 0x00, 0x30, 0xE0, 0x00, //      #########            ##    ###       
+    0x06, 0x7E, 0x00, 0x30, 0x00, 0x00, //      ##  ######           ##              
+    0x06, 0x27, 0x00, 0x3F, 0x00, 0x00, //      ##   #  ###          ######          
+    0x06, 0x23, 0x00, 0x3F, 0xC0, 0x00, //      ##   #   ##          ########        
+    0x02, 0x1B, 0x00, 0x7F, 0xE0, 0x00, //       #    ## ##         ##########       
+    0x03, 0x1E, 0x00, 0x73, 0xF0, 0x00, //       ##   ####          ###  ######      
+    0x07, 0x80, 0x00, 0x62, 0x30, 0x00, //      ####                ##   #   ##      
+    0x07, 0xF8, 0x00, 0x33, 0x10, 0x00, //      ########             ##  ##   #      
+    0x07, 0xFF, 0x00, 0x11, 0xF0, 0x00, //      ###########           #   #####      
+    0x00, 0xFF, 0x00, 0x00, 0xF0, 0x00, //         ########                ####      
+    0x00, 0x0F, 0x00, 0x00, 0x00, 0x00, //             ####                          
+    0x00, 0x02, 0x00, 0x00, 0x00, 0x00, //               #                           
+    0x03, 0xC3, 0x00, 0x00, 0x00, 0x00, //       ####    ##                          
+    0x07, 0xFF, 0x00, 0x00, 0x00, 0x00, //      ###########                          
+    0x07, 0xFF, 0x00, 0x00, 0x00, 0x00, //      ###########                          
+    0x06, 0x1E, 0x00, 0x00, 0x00, 0x00, //      ##    ####                           
+    0x02, 0x00, 0x00, 0x00, 0x00, 0x00, //       #                                   
+    0x03, 0x80, 0x00, 0x00, 0x00, 0x00, //       ###                                 
+    0x07, 0xF8, 0x00, 0x00, 0x00, 0x00, //      ########                             
+    0x07, 0xFF, 0x00, 0x00, 0x00, 0x00, //      ###########                          
+    0x06, 0xFF, 0x70, 0x00, 0x00, 0x00, //      ## ######## ###                      
+    0x06, 0x03, 0x70, 0x00, 0x00, 0x00, //      ##       ## ###                      
+    0x03, 0x00, 0x60, 0x00, 0x00, 0x00, //       ##         ##                       
+    0x03, 0xF0, 0x00, 0x00, 0x00, 0x00, //       ######                              
+    0x07, 0xFC, 0x00, 0x00, 0x00, 0x00, //      #########                            
+    0x07, 0xFE, 0x00, 0x00, 0x00, 0x00, //      ##########                           
+    0x06, 0x7E, 0x00, 0x00, 0x00, 0x00, //      ##  ######                           
+    0x06, 0x23, 0x00, 0x00, 0x00, 0x00, //      ##   #   ##                          
+    0x06, 0x31, 0x00, 0x00, 0x00, 0x00, //      ##   ##   #                          
+    0x01, 0x1F, 0x00, 0x00, 0x00, 0x00, //        #   #####                          
+    0x00, 0x0E, 0x00, 0x00, 0x00, 0x00, //             ###                           
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //                                           
+};
+
+
+
+
+byte[] pi_logo = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0010 (16) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xF8, 0xFC, 0xAE, 0x0E, 0x0E, 0x06, 0x0E, 0x06,   // 0x0020 (32) pixels
+    0xCE, 0x86, 0x8E, 0x0E, 0x0E, 0x1C, 0xB8, 0xF0, 0xF8, 0x78, 0x38, 0x1E, 0x0E, 0x8E, 0x8E, 0xC6,   // 0x0030 (48) pixels
+    0x0E, 0x06, 0x0E, 0x06, 0x0E, 0x9E, 0xFE, 0xFC, 0xF8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0040 (64) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0050 (80) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0060 (96) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0F, 0x0F, 0xFE,   // 0x0070 (112) pixels
+    0xF8, 0xF0, 0x60, 0x60, 0xE0, 0xE1, 0xE3, 0xF7, 0x7E, 0x3E, 0x1E, 0x1F, 0x1F, 0x1F, 0x3E, 0x7E,   // 0x0080 (128) pixels
+    0xFB, 0xF3, 0xE1, 0xE0, 0x60, 0x70, 0xF0, 0xF8, 0xBE, 0x1F, 0x0F, 0x07, 0x00, 0x00, 0x00, 0x00,   // 0x0090 (144) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x00A0 (160) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x00B0 (176) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xC0,   // 0x00C0 (192) pixels
+    0xE0, 0xFC, 0xFE, 0xFF, 0xF3, 0x38, 0x38, 0x0C, 0x0E, 0x0F, 0x0F, 0x0F, 0x0E, 0x3C, 0x38, 0xF8,   // 0x00D0 (208) pixels
+    0xF8, 0x38, 0x3C, 0x0E, 0x0F, 0x0F, 0x0F, 0x0E, 0x0C, 0x38, 0x38, 0xF3, 0xFF, 0xFF, 0xF8, 0xE0,   // 0x00E0 (224) pixels
+    0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x00F0 (240) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0100 (256) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0110 (272) pixels
+    0x00, 0x7F, 0xFF, 0xE7, 0xC3, 0xC1, 0xE0, 0xFF, 0xFF, 0x78, 0xE0, 0xC0, 0xC0, 0xC0, 0xC0, 0xE0,   // 0x0120 (288) pixels
+    0x60, 0x78, 0x38, 0x3F, 0x3F, 0x38, 0x38, 0x60, 0x60, 0xC0, 0xC0, 0xC0, 0xC0, 0xE0, 0xF8, 0x7F,   // 0x0130 (304) pixels
+    0xFF, 0xE0, 0xC1, 0xC3, 0xE7, 0x7F, 0x3E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0140 (320) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0150 (336) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0160 (352) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0F, 0x7F, 0xFF, 0xF1, 0xE0, 0xC0, 0x80, 0x01,   // 0x0170 (368) pixels
+    0x03, 0x9F, 0xFF, 0xF0, 0xE0, 0xE0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xE0, 0xE0, 0xF0, 0xFF, 0x9F,   // 0x0180 (384) pixels
+    0x03, 0x01, 0x80, 0xC0, 0xE0, 0xF1, 0x7F, 0x1F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x0190 (400) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x01A0 (416) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x01B0 (432) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,   // 0x01C0 (448) pixels
+    0x03, 0x03, 0x07, 0x07, 0x0F, 0x1F, 0x1F, 0x3F, 0x3B, 0x71, 0x60, 0x60, 0x60, 0x60, 0x60, 0x71,   // 0x01D0 (464) pixels
+    0x3B, 0x1F, 0x0F, 0x0F, 0x0F, 0x07, 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x01E0 (480) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // 0x01F0 (496) pixels
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+var sdaPin = ConnectorPin.P1Pin03;
+var sclPin = ConnectorPin.P1Pin05;
+var lcdClock = ConnectorPin.P1Pin23;
+var lcdMiso = ConnectorPin.P1Pin21;
+var lcdMosi = ConnectorPin.P1Pin19;
+var lcdCs = ConnectorPin.P1Pin26;
+
+var pinCd = sdaPin.ToProcessor();
+var pinRes = sclPin.ToProcessor();
+
+var driver = GpioConnectionSettings.DefaultDriver;
+bool isInitialized = false;
+
+
+var sendCommand = new Func&lt;Raspberry.IO.SerialPeripheralInterface.SpiConnection, byte, bool&gt;((connection, command)=&gt;{
+    driver.Write(pinCd, false);
+    connection.Write(command, 8);
+    return true;
+});
+
+
+var spiSetup = new Func&lt;Raspberry.IO.SerialPeripheralInterface.SpiConnection, bool&gt;((connection)=&gt;{
+
+    // extended function set
+    sendCommand(connection, CmdFunctionSet | CmdExtendedInstr);
+    // set bias
+    sendCommand(connection, CmdSetBias | 0x04);
+    // set VOP (contrast)
+    sendCommand(connection, CmdSetVop | 80);
+
+    sendCommand(connection, CmdSetTemp | 0x01);
+    sendCommand(connection, CmdSetYAddr | 0x00);
+
+    sendCommand(connection, CmdFunctionSet);
+    sendCommand(connection, CmdSetYAddr | 0x00);
+    sendCommand(connection, CmdSetXAddr | 0x00);    
+
+    return true;
+
+});
+
+var blankScreen = new Func&lt;bool&gt;(()=&gt;{
+    return false;
+});
+
+
+driver.Allocate(pinCd, PinDirection.Output);
+driver.Allocate(pinRes, PinDirection.Output);
+
+
+while (Program.IsEnabled)
+{
+
+  	Pause(1);
+    if (edenModule.Parameter("Spi.Locked").Value == "1") continue;
+
+    Program.Parameter("Spi.Locked").Value = "1";
+
+    using (var spiConnection = new Raspberry.IO.SerialPeripheralInterface.SpiConnection(driver.Out(lcdClock),
+        driver.Out(lcdCs),
+        driver.In(lcdMiso),
+        driver.Out(lcdMosi),
+        (Raspberry.IO.SerialPeripheralInterface.Endianness)0))
+    {
+
+        spiConnection.SelectSlave();
+
+
+        // refactor to sendData
+        var drawStride = new Func&lt;int, int, byte, bool&gt;((lx, ly, stride)=&gt;{
+            if (lx &gt;= LCD_X_RES || ly &gt;= LCD_Y_RES)
+                return false;
+
+            driver.Write(pinCd, true);
+            spiConnection.Write(stride, 8);
+            driver.Write(pinCd, false);
+
+            return true;
+        });
+
+
+        var lcdWrite = new Func&lt;int, int, int, string, int&gt;((row, col, fontid, text)=&gt;{
+            int pixelWidth = 0;
+            sendCommand(spiConnection, (byte)(CmdSetYAddr | row));
+            sendCommand(spiConnection, (byte)(CmdSetXAddr | col));
+            switch (fontid)
+            {
+            case 0:
+            case 1:
+                for (int c = 0; c &lt; text.Length &amp;&amp; c &lt; 16; c++)
+                {
+                    string b = Convert.ToString(nanoFont[text[c]-32], 2).PadLeft(32, '0');
+                    string[] data = new string[8];
+                    data[0] = b.Substring(20, 4);
+                    data[1] = b.Substring(16, 4);
+                    data[2] = b.Substring(12, 4);
+                    data[3] = b.Substring(8, 4);
+                    data[4] = b.Substring(4, 4);
+                    data[5] = b.Substring(0, 4);
+                    data[6] = "0000";
+                    data[7] = "0000";
+                    for (int sz = 0; sz &lt; 4; sz++)
+                    {
+                        string btc = "";
+                        for (int sk = 0; sk &lt;8; sk++)  
+                        {
+                            btc += data[sk][sz];
+                        }
+                        byte bindata = Convert.ToByte(btc, 2);
+                      	if ((fontid &amp; 1) == 1) bindata = (byte)~bindata;
+                        drawStride(0, 0, bindata);
+                        pixelWidth++;
+                    }
+                    drawStride(0, 0, (byte)((fontid &amp; 1) == 1 ? 0xFF : 0x00));
+                    pixelWidth++;
+                }
+                break;
+            default:
+                int fontBytes = 5;
+                for (int c = 0; c &lt; text.Length &amp;&amp; c &lt; 16; c++)
+                {
+                    for (int cx = 0; cx &lt; fontBytes; cx++)
+                    {
+                        int ch = smallFont[((text[c]-32)*fontBytes)+cx];
+                        drawStride(0, 0, (byte)(ch));           
+                        pixelWidth++;
+                    }
+                    // 1 px spacing
+                    drawStride(0, 0, 0x00);
+                    pixelWidth++;
+                }
+                break; 
+            }
+            return pixelWidth;
+        });      
+
+        var lcdWriteLine = new Func&lt;int, int, string, bool&gt;((row, fontid, text)=&gt;{
+            int pixelWidth = lcdWrite(row, 0, fontid, text);
+            // clear to end of line
+            for(int cx = pixelWidth; cx &lt; 84; cx++)
+            {
+                drawStride(0, 0, (byte)((fontid &amp; 1) == 1 ? 0xFF : 0x00)); // inverse bit
+            }
+            return true;
+        });
+
+
+        /*
+        var setPage = new Func&lt;int, bool&gt;((page) =&gt;{
+
+            // Enter function mode
+            driver.Write(pinCd, false);
+            spiConnection.Write(0x20 | 0x01, 8);
+
+            driver.Write(pinCd, false);
+            spiConnection.Write(0x04 | 0x00, 8);
+
+            driver.Write(pinCd, false);
+            spiConnection.Write((byte)(0x40 | (page*(LCD_Y_RES / 2))), 8);
+
+            // Exit function mode
+            driver.Write(pinCd, false);
+            spiConnection.Write(0x20 | 0x00, 8);
+
+            return true;
+
+        });
+   		*/
+
+
+
+        int x = 0, y = 0;
+
+
+
+        if (!isInitialized)
+        {
+
+            driver.Write(pinRes, false);
+            Pause(0.5);
+            driver.Write(pinRes, true);
+
+        }    
+
+        spiSetup(spiConnection);  
+
+        if (!isInitialized)
+        {
+
+            sendCommand(spiConnection, CmdDispControl | CmdDispBlank);
+            /*
+    		// clear screen
+            for (y = 0; y &lt; 6; y++)  
+            {
+
+                sendCommand(spiConnection, (byte)(CmdSetYAddr | y));
+                sendCommand(spiConnection, CmdSetXAddr | 0x00);
+                //driver.Write(pinCd, false);
+                //spiConnection.Write((byte)(0x40 | y), 8);
+                //driver.Write(pinCd, false);
+                //spiConnection.Write((byte)(0x80 | 0x00), 8);
+
+                for (x = 0; x &lt; 84; x++)
+                {
+                    drawStride(x, y, 0x00);
+                }
+            }
+            */
+
+
+          	var drawImage = new Func&lt;int, int, int, byte[], bool&gt;((row, col, lines, data)=&gt;{
+
+                for (int cy = 0; cy &lt; lines; cy++)  
+                {
+
+                    sendCommand(spiConnection, (byte)(CmdSetYAddr | row + cy));
+                    sendCommand(spiConnection, (byte)(CmdSetXAddr | col));
+
+                    for (int cx = 0; cx &lt; 84; cx++)
+                    {
+                        int i = (cx * lines) + lines -  cy - 1;
+                        if (i &gt;= data.Length)
+                        {
+                          	// clear to end of line
+                            //drawStride(0, 0, 0x00);
+                          	break;
+                        }
+                        else
+                        {
+                            drawStride(0, 0, (byte)(data[i]));          
+                        }
+                    }
+                }
+              
+              	return true;
+            });
+          
+          drawImage(0, 0, 3, edenlogo);
+          
+          lcdWriteLine(3, 0, "");
+          lcdWriteLine(4, 0, "");
+
+          drawImage(3, 32, 2, tempSymbol);
+
+          sendCommand(spiConnection, CmdDispControl | CmdDispNormal);
+
+        }
+        else
+        {
+
+            //       driver.Write(pinRes, false);
+            //    Pause(0.5);
+            //    driver.Write(pinRes, true);
+
+
+            //   sendCommand(spiConnection, CmdFunctionSet);
+            //    sendCommand(spiConnection, CmdSetYAddr | 0x00);
+            //   sendCommand(spiConnection, CmdSetXAddr | 0x00);
+            //   sendCommand(spiConnection, CmdDispControl | CmdDispNormal);
+        }
+
+      
+        string txt = (temperature.DecimalValue * 100).ToString();
+        if (!txt.StartsWith("-")) txt = "+" + txt;
+        if (txt.Length &gt;= 4) txt = txt.Substring(0, 3) + "." + txt.Substring(3, 1);
+
+        for (y = 0; y &lt; 2; y++)
+        {
+            //  new line
+            sendCommand(spiConnection, (byte)(CmdSetYAddr | (3 + y)));
+            sendCommand(spiConnection, CmdSetXAddr | 0x2B);
+
+            int cx = 0;
+            for(int s = 0; s &lt; txt.Length; s++)
+            {
+                var c = txt[s];
+                int idx = (int)(txt[s]) - 46;
+                //if (oldTemperature.Length != txt.Length || oldTemperature[s] != c)
+                {
+                    if (c == '+' || c == ' ') idx = 12;
+                    else if (c == '.' || c == ',') idx = 0;
+                    else if (c == '-' || idx &lt; 1) idx = 1;
+
+                    for (x = 0; x &lt; bignum[idx*23]; x++) 
+                    {
+                        byte xv = (byte)(bignum[(idx*23) + y + (x*2) + 1]);
+                        drawStride(x, y, xv);
+                    }
+
+                }
+                cx += bignum[idx*23];
+            }
+        }
+        oldTemperature = txt;
+
+
+        var weatherApp = Modules.WithName("Weather Underground").Get();
+        var location = weatherApp.Parameter("Conditions.City");
+        var conditions = weatherApp.Parameter("Conditions.Description");
+        var locationTemp = weatherApp.Parameter("Conditions.TemperatureC");
+        var locationTempF = weatherApp.Parameter("Conditions.TemperatureF");
+
+        lcdWriteLine(5, 1, " " + location.Value.ToUpper() + " " + locationTemp.Value + "C");
+        Pause(2);
+        lcdWriteLine(5, 1, " " + location.Value.ToUpper() + " " + locationTempF.Value + "F");
+        Pause(2);
+        lcdWriteLine(5, 1, " " + conditions.Value.ToUpper());
+
+        if (!isInitialized)
+        {
+            //lcdWrite(0, 30, 0, "-----------!");
+            lcdWrite(1, 56, 0, "Hello");
+            lcdWrite(2, 56, 0, "World!");
+            //lcdWrite(2, 56, 0, "      ");
+            isInitialized = true;    
+        }
+        else
+        {
+            var dt = DateTime.Now.ToString().Split(' ');
+            lcdWrite(0, 33, 0, dt[0]); // date
+            lcdWrite(4, 2, 0, dt[1].Substring(0, 5)); // time
+            lcdWrite(3, 2, 0, DateTime.Now.DayOfWeek.ToString().Substring(0, 3).ToUpper());
+        }
+
+    }
+    Program.Parameter("Spi.Locked").Value = "0";
+
+    Pause(30);
+
+
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>61</Address>
+    <Name>Olimex - Nokia 3310 LCD display</Name>
+    <Description>Using a Nokia 3310 lcd display.
+( see http://homegenie.it/docs/diy/eden.php )</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+
+Program.Setup(()=&gt;{
+  	Program.AddInputField("LedsNumber", "1", "Number of chained RGB leds");
+	Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, 1);
+});
+return true;
+</ScriptCondition>
+    <ScriptSource>var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin03, ConnectorPin.P1Pin07, (int)Program.InputField("LedsNumber").DecimalValue);
+groveRgb.SetColorRgb(0, 0, 0, 0);
+
+var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
+
+When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt; 
+{
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+    try
+    {
+      string lightnumber = reqs[1];
+      string command = reqs[2];
+      string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
+      //
+      var module = rgbModules.WithAddress(lightnumber).Get();
+      //
+      switch(command)
+      {
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+        case "Control.On":
+        	string[] memory = module.Parameter("Status.ColorHsb").Value.Split(',');
+        	groveRgb.SetColorHsv(0, double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
+                        double.Parse(memory[1], System.Globalization.CultureInfo.InvariantCulture),
+                        double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture));
+        	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
+            Program.RaiseEvent(module, "Status.ColorHsb", module.Parameter("Status.ColorHsb").Value, "Color Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+        case "Control.Off":
+			groveRgb.SetColorRgb(0, 0, 0, 0);
+        	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
+        	break;
+        case "Control.Toggle":
+        	if (module.Parameter("Status.Level").DecimalValue == 0)
+            {
+				groveRgb.SetColorRgb(0, 255, 255, 255);
+              	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
+            }
+        	else
+            {
+				groveRgb.SetColorRgb(0, 0, 0, 0);
+	        	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
+            }
+        	break;
+        case "Control.Level":
+    	    //bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString() + " }");
+            //Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Hue Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+        case "Control.ColorHsb":
+        	string[] values = parameter.Split(',');
+        	//double transition = 5;
+        	//if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
+          	groveRgb.SetColorHsv(0, double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
+                        double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture),
+                        double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture));
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Color Light");
+            Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Color Light");
+        	break; 
+      }
+      //
+      return "{ 'ResponseValue' : 'OK' }";    
+    } catch (Exception e) { 
+      
+    	Program.Notify("Grove RGB ERROR!", e.Message);
+                       
+    }
+    return "{ 'ResponseValue' : 'ERROR' }";
+}); 
+
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>62</Address>
+    <Name>Grove - Chainable RGB Led</Name>
+    <Description>Virtual modules for Chainable RGB Leds.
+http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// this Setup delegate will be executed once, when program become active
+Program.Setup(()=&gt;
+{
+  
+  // Add analog channels modules
+  Program.AddVirtualModule("Components.MCP3008", "CH0", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH1", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH2", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH3", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH4", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH5", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH6", "Sensor", "homegenie/generic/sensor");
+  Program.AddVirtualModule("Components.MCP3008", "CH7", "Sensor", "homegenie/generic/sensor");
+
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterName", "Parameter name to store computed value");
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterFactor", "Multiply read raw value by");
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterAdjust", "Adjust computed value by");
+  
+  // add program configuration parameters
+  Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
+
+}); // end program setup
+
+return true;
+</ScriptCondition>
+    <ScriptSource>const decimal voltage = 3.3m;
+
+var adcClock = ConnectorPin.P1Pin23.ToProcessor();
+var adcMiso = ConnectorPin.P1Pin21.ToProcessor();
+var adcMosi = ConnectorPin.P1Pin19.ToProcessor();
+var adcCs = ConnectorPin.P1Pin24.ToProcessor();
+
+/*  
+// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Temperature", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.MCP3008/0/Sensor.Luminance
+When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Luminance", ( args ) =&gt; 
+{
+	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Luminance").Value + "' }";
+});
+*/
+
+var driver = GpioConnectionSettings.DefaultDriver;
+while (Program.IsEnabled)
+{
+  	
+  	//uncomment this line when using Nokia3110 LCD display
+    //if (Modules.WithAddress("61").Get().Parameter("Spi.Locked").Value == "1")	continue;
+  
+    Program.Parameter("Spi.Locked").Value = "1";
+	{
+		driver.Allocate(adcClock, PinDirection.Output);
+		driver.Allocate(adcCs, PinDirection.Output);
+		driver.Allocate(adcMosi, PinDirection.Output);
+		driver.Allocate(adcMiso, PinDirection.Input);
+  
+		using (var adcConnection = new Mcp3008SpiConnection(
+				driver.Out(adcClock),
+				driver.Out(adcCs),
+				driver.In(adcMiso),
+				driver.Out(adcMosi)))
+		{
+          	// read channel voltage values and map/normalize configured parameter names
+          	for(int x = 0; x &lt; 8; x++)
+            {
+              	var channelPrefix = "CH" + x.ToString();
+            	var channelModule = Modules.InDomain("Components.MCP3008").WithAddress(channelPrefix).Get();
+              
+              	var parameterName = channelModule.Parameter("AnalogInput.ParameterName").Value;
+              	var parameterFactor = (decimal)channelModule.Parameter("AnalogInput.ParameterFactor").DecimalValue;
+              	var parameterAdjust = (decimal)channelModule.Parameter("AnalogInput.ParameterAdjust").DecimalValue;
+              
+              	if (parameterFactor != 0)
+                {
+                                
+                    Program.RaiseEvent(channelModule,
+                                       "Sensor.RawValue",
+                                       adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(x)).Value.ToString(),
+                                       "Analog Channel");
+					if (parameterName != "")
+                    {
+                      	var adjustedValue = (adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(x)).Value * parameterFactor) + parameterAdjust;
+                      	adjustedValue = (Math.Round(adjustedValue * 10m / 5m, 0) * 5m / 10m); // 0.5 resolution
+                        Program.RaiseEvent(channelModule, 
+                                           parameterName, 
+                                           adjustedValue.ToString(), 
+                                           "Analog Channel");
+                    }
+                  
+                }
+              
+              	Pause(2);
+
+            }
+          
+        }
+
+        try
+        {
+            driver.Release(adcClock);
+            driver.Release(adcCs);
+            driver.Release(adcMosi);
+            driver.Release(adcMiso);
+        } catch { }
+      
+    }
+    Program.Parameter("Spi.Locked").Value = "0";
+
+    double pauseseconds = double.Parse(Program.InputField("PollFrequency").Value);
+    Pause( pauseseconds ); // pause 
+
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterName</Property>
+        <Description>Parameter name to store computed value</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterFactor</Property>
+        <Description>Multiply read raw value by</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Components.MCP3008</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>AnalogInput.ParameterAdjust</Property>
+        <Description>Adjust computed value by</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>38</Address>
+    <Name>MCP3008 - Analog Input Modules</Name>
+    <Description>MCP3008 8 channels ADC connected to SPI interface. 
+Use with Eden Sensor Board http://www.homegenie.it/docs/diy/eden.php
+or experiment on a breadboard http://learn.adafruit.com/reading-a-analog-in-and-controlling-audio-volume-with-the-raspberry-pi/overview .
+Each analog channel can be mapped to a virtual module with configurable field name.
+ 
+</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+Program.Setup(()=&gt;{
+  	Program.AddControlWidget("homegenie/generic/thermostat");
+  	Program.AddInputField("TemperatureModule", "", "Module to read temperature from");
+  	Program.AddInputField("SwitchModule", "", "Module to switch on/off on set point");
+  	//Program.AddInputField("ScheduleCheck", "", "Scheduler expression constraint");
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+// Example for using Helper Classes:
+// Modules.WithName("Light 1").On();
+var temperature = Program.Parameter("Sensor.Temperature");
+var operatingState = Program.Parameter("Thermostat.OperatingState");
+var thermostatMode = Program.Parameter("Thermostat.Mode");
+var heatSetPoint = Program.Parameter("Thermostat.SetPoint.Heating");
+
+var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+
+  // Get a reference to the temperature module
+  domainAddress = Program.InputField("TemperatureModule").Value;
+  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+  {
+    domain = domainAddress.Split(':')[0];
+    address = domainAddress.Split(':')[1];
+  }
+  var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+  if (temperatureModule == null)
+  {
+    Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
+    return false;
+  }
+  // Update Thermostat module Temperature field
+  temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+
+  // get a reference to the switch/relay module
+  domainAddress = Program.InputField("SwitchModule").Value;
+  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+  {
+    domain = domainAddress.Split(':')[0];
+    address = domainAddress.Split(':')[1];
+  }
+  var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+  if (switchModule == null)
+  {
+    Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
+    return false;
+  }
+
+  // Heat Mode logic
+  if (thermostatMode.Value == "Heat")
+  {
+    if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue)
+    {
+      // Heating
+      switchModule.On();
+      Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
+    }
+    else
+    {
+      // Waiting
+      switchModule.Off();
+      Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
+    }
+  }
+  else
+  {
+    // Off
+    if (operatingState.Value != "Off")
+    {
+      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
+    }
+    switchModule.Off();
+  }  
+  
+  return true;
+});
+
+// implement Web API calls as defined in the Thermostat widget
+When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.SetPointSet", (args)=&gt;{
+  if (args.ToString().Split('/')[0] == "Heating")
+  {
+	  Program.RaiseEvent("Thermostat.SetPoint.Heating", args.ToString().Split('/')[1], "Eden Thermostat");
+	  ThermostatLogicRun();
+  }
+  return true;
+});
+
+When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.ModeSet", (args)=&gt;{
+  Program.RaiseEvent("Thermostat.Mode", args.ToString().Split('/')[0], "Eden Thermostat");
+  ThermostatLogicRun();
+  return true;
+});
+
+while (Program.IsEnabled)
+{
+  Pause(30);
+  ThermostatLogicRun();
+}</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>78</Address>
+    <Name>Generic Thermostat</Name>
+    <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
+Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2014-11-13T09:13:29.399292Z</ActivationTime>
+    <TriggerTime>2014-11-13T09:13:29.455843Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+
+Program.Setup(()=&gt;{
+	Program.AddInputField("ModulesCount", "3", "Connected sensors number");
+	Program.AddInputField("UpdateInterval", "60", "Update interval");
+	Program.AddFeatureTextInput("HomeAutomation.OneWire", "Sensor", "OneWire.DeviceId", "Device ID");
+});
+      
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+// 1-Wire Sensor Modules
+// NOTE: Currently only temperature sensors are supported
+
+// Read sensor data text lines
+var readSensorData = new Func&lt;string, List&lt;string&gt;&gt;((sensorId) =&gt; {
+    string oneWireSysPath = "/sys/bus/w1/devices/";
+    string currentLine = "";
+    var lines = new List&lt;string&gt;();
+	//lines.Add("7c 01 4b 46 7f ff 04 10 09 : crc=09 YES");
+	//lines.Add("7c 01 4b 46 7f ff 04 10 09 t=23750");
+    try
+    {
+        System.IO.StreamReader file = new System.IO.StreamReader(oneWireSysPath + sensorId + "/w1_slave");
+        while((currentLine = file.ReadLine()) != null)
+        {
+            lines.Add(currentLine);
+        }
+        file.Close();
+    } catch (Exception ex) {
+        Program.Notify("OneWire Error", ex.Message);
+    }
+    return lines;
+});
+
+// Parse data from a 1-wire temperature sensors (DS18B20).
+// It returns decimal value indicating temperature in celsius degree.
+var parseTemperatureData = new Func&lt;List&lt;string&gt;, double&gt;((dataLines) =&gt; {
+  	double temperature = 0;
+  	foreach(string l in dataLines)
+    {
+      	if (l.IndexOf(" t=") &gt; 0)
+        {
+          	var ts = l.Substring(l.LastIndexOf(" t=") + 3);
+          	temperature = double.Parse(ts) / 1000D;
+        }
+    }
+  	return temperature;
+});
+
+//  Add virtual modules for 1-wire domain
+int sensorCount = (int)(Program.InputField("ModulesCount").DecimalValue);
+Program.AddVirtualModules("HomeAutomation.OneWire", "Sensor", "homegenie/generic/sensor", 1, sensorCount);
+
+while (Program.IsEnabled)
+{
+  	for(int n = 1; n &lt;= sensorCount; n++)
+    {
+      	// Get a reference to the virtual module associated with current sensor
+      	var module = Modules.InDomain("HomeAutomation.OneWire").WithAddress(n.ToString()).Get();
+      	var deviceId = module.Parameter("OneWire.DeviceId").Value;
+		// If a sensor id has been specified for the module, then we read and update temperature values
+      	if (deviceId != "")
+       	{
+				var data = readSensorData(deviceId);
+          		var temperatureCelsius = parseTemperatureData(data);
+          		// Update virtual module data
+          		Program.RaiseEvent(module, "Sensor.TemperatureF", (temperatureCelsius * 9d / 5d + 32d).ToString(), "1-Wire Device");
+          		Pause(1);
+          		Program.RaiseEvent(module, "Sensor.Temperature", temperatureCelsius.ToString(), "1-Wire Device");
+        }
+	}
+  
+	double updateInterval = Program.InputField("UpdateInterval").DecimalValue;
+  	if (updateInterval &lt; 1) updateInterval = 1;
+  	Pause(updateInterval);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.OneWire</ForDomains>
+        <ForTypes>Sensor</ForTypes>
+        <Property>OneWire.DeviceId</Property>
+        <Description>Device ID</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>133</Address>
+    <Name>One-Wire Devices</Name>
+    <Description>Integrates 1-wire devices as HG modules (linux only).
+To enable a 1-wire device, its ID must be specified in the module options popup.
+To find out your connected devices ID, issue from a terminal the command:
+&amp;nbsp;&amp;nbsp;&lt;i&gt;ls -la /sys/bus/w1/devices/&lt;/i&gt;</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-11-13T15:39:01.375637Z</ActivationTime>
+    <TriggerTime>2014-11-13T15:39:01.407546Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

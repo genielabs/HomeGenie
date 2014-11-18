@@ -16,13 +16,13 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
+ *     Author: Mike Tanana
+ *     Author: Generoso Martello <gene@homegenie.it> 12-11-2014
  *     Project Homepage: http://homegenie.it
  */
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace ZWaveLib.Devices.ProductHandlers.Generic
@@ -30,62 +30,170 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
     public class Thermostat : Sensor
     {
 
-            
-        /*
-         * 
-         * This Sets the mode for the thermostat (cool, heat, off, auto)  Based on int commands
-         * 
-         **/ 
-
-        public virtual void thermModeSet(int mode)
+        public enum Mode
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
-                (byte)Command.COMMAND_BASIC_SET, 
-                (byte)mode
-            });
+            Off = 0x00,
+            Heat = 0x01,
+            Cool = 0x02,
+            Auto = 0x03,
+            AuxHeat = 0x04,
+            Resume = 0x05,
+            FanOnly = 0x06,
+            Furnance = 0x07,
+            DryAir = 0x08,
+            MoistAir = 0x09,
+            AutoChangeover = 0x0A,
+            HeatEconomy = 0x0B,
+            CoolEconomy = 0x0C,
+            Away = 0x0D
         }
-        public virtual void thermFanModeSet(int mode)
+
+        public enum OperatingState
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
-                (byte)Command.COMMAND_BASIC_SET, 
-                (byte)mode
-            });
+            Idle = 0x00,
+            Heating = 0x01,
+            Cooling = 0x02,
+            FanOnly = 0x03,
+            PendingHeat = 0x04,
+            PendingCool = 0x05,
+            VentEconomizer = 0x06,
+            State07 = 0x07,
+            State08 = 0x08,
+            State09 = 0x09,
+            State10 = 0x0A,
+            State11 = 0x0B,
+            State12 = 0x0C,
+            State13 = 0x0D,
+            State14 = 0x0E,
+            State15 = 0x0F
+        }
+        
+        public enum FanMode
+        {
+            AutoLow = 0x00,
+            OnLow = 0x01,
+            AutoHigh = 0x02,
+            OnHigh = 0x03,
+            Unknown4 = 0x04,
+            Unknown5 = 0x05,
+            Circulate = 0x06
+        }
+
+        public enum FanState
+        {
+            Idle = 0x00,
+            Running = 0x01,
+            RunningHigh = 0x02,
+            State03 = 0x03,
+            State04 = 0x04,
+            State05 = 0x05,
+            State06 = 0x06,
+            State07 = 0x07,
+            State08 = 0x08,
+            State09 = 0x09,
+            State10 = 0x0A,
+            State11 = 0x0B,
+            State12 = 0x0C,
+            State13 = 0x0D,
+            State14 = 0x0E,
+            State15 = 0x0F
+        }
+        
+        public enum SetPointType
+        {
+            Unused = 0x00,
+            Heating = 0x01,
+            Cooling = 0x02,
+            Unused03 = 0x03,
+            Unused04 = 0x04,
+            Unused05 = 0x05,
+            Unused06 = 0x06,
+            Furnance = 0x07,
+            DryAir = 0x08,
+            MoistAir = 0x09,
+            AutoChangeover = 0x0A,
+            HeatingEconomy = 0x0B,
+            CoolingEconomy = 0x0C,
+            HeatingAway = 0x0D
+        }
+
+        public virtual bool HandleBasicReport(byte[] message)
+        {
+            bool handled = false;
+            byte cmdClass = message[7];
+            byte cmdType = message[8];
+            switch (cmdClass)
+            {
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:  
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, message[9]);
+                handled = true;
+                break;
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:   
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE, message[9]);
+                handled = true;
+                break;
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:  
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_FAN_MODE, message[9]);
+                handled = true;
+                break;
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:  
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_FAN_STATE, message[9]);
+                handled = true;
+                break;
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:   
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_HEATING, message[9]);
+                handled = true;
+                break;
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK:   
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_SETBACK, message[9]);
+                handled = true;
+                break;
+            /*
+             * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
+                2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
+             */
+            case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:  
+                double temp = Sensor.ExtractTemperatureFromBytes(message);
+                dynamic ptype = new dynamic();
+                ptype.Type = (SetPointType)message[9];
+                ptype.Value = temp;
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, ptype);
+                handled = true;
+                break;
+            }
+
+            return handled;
         }
 
         //initial request for thermostat mode, since this doesn't change very often
-        public virtual void thermModeGet()
+        public virtual void Thermostat_ModeGet()
         {
             this.nodeHost.ZWaveMessage(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
                 (byte)Command.COMMAND_BASIC_GET
             });
+        }       
+
+        /*
+         * This Sets the mode for the thermostat (cool, heat, off, auto)  Based on int commands
+         */ 
+        public virtual void Thermostat_ModeSet(Mode mode)
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                (byte)mode
+            });
         }
             
-        public virtual void thermSetpointGet()
+        public virtual void Thermostat_SetPointGet()
         {
             this.nodeHost.ZWaveMessage(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
-                (byte)Command.COMMAND_BASIC_GET
+                (byte)Command.THERMOSTAT_SETPOINT_GET
             });
         }
-
-        public virtual void thermFanModeGet()
-        {
-            this.nodeHost.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
-                (byte)Command.COMMAND_BASIC_GET
-            });
-        }
-        public virtual void thermFanStateGet()
-        {
-            this.nodeHost.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE, 
-                (byte)Command.COMMAND_BASIC_GET
-            });
-        }
-
+        
         /*
          * I had no idea how this was going to work
          * found this:  http://www.agocontrol.com/forum/index.php?topic=175.10;wap2
@@ -95,21 +203,43 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
          * 
          *  0x43 - COMMAND_CLASS_THERMOSTAT_SETPOINT
             0x01 - THERMOSTAT_SETPOINT_SET
-            0x02 - type
+            0x02 - type (see SetPointType enum)
             0x09 - 3 bit precision, 2 bit scale (0 = C,1=F), 3 bit size -> Fahrenheit, size == 1
             0x10 - value to set == 16 degF
-         * 
-         * */
-
-        public virtual void thermTempSet(double temp)
+         */
+        public virtual void Thermostat_SetPointSet(SetPointType ptype, int temperature)
         {
-            int t=(int)temp;
             this.nodeHost.ZWaveMessage(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
-                (byte)Command.COMMAND_BASIC_SET, 
-                0x02,
+                (byte)Command.THERMOSTAT_SETPOINT_SET, 
+                (byte)ptype,
                 0x09,
-                (byte)t
+                (byte)temperature
+            });
+        }
+        
+        public virtual void Thermostat_FanStateGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+
+        public virtual void Thermostat_FanModeGet()
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+
+        public virtual void Thermostat_FanModeSet(FanMode mode)
+        {
+            this.nodeHost.ZWaveMessage(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
+                (byte)Command.COMMAND_BASIC_SET, 
+                (byte)mode
             });
         }
 

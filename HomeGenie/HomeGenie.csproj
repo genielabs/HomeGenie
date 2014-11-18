@@ -26,6 +26,8 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
     <ReleaseVersion>1.0</ReleaseVersion>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -144,23 +146,23 @@
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Raspberry.IO.Components">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.GeneralPurpose">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.Interop">
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.GeneralPurpose">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.Components">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -286,10 +288,6 @@
       <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
       <Name>SerialPortLib</Name>
     </ProjectReference>
-    <ProjectReference Include="HomeGenieUI\HomeGenieUI.csproj">
-      <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
-      <Name>HomeGenieUI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MIG\Support Libraries\W800RF32\W800RF32.csproj">
       <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
       <Name>W800RF32</Name>
@@ -297,6 +295,10 @@
     <ProjectReference Include="..\BaseFiles\Common\Common.csproj">
       <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="HomeGenieUI\HomeGenieUI.csproj">
+      <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
+      <Name>HomeGenieUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

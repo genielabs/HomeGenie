@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Group>
-    <Name>Features</Name>
+    <Name>Lights</Name>
     <Modules />
   </Group>
   <Group>
@@ -9,15 +9,7 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Devices and Things</Name>
-    <Modules />
-  </Group>
-  <Group>
     <Name>Scenes</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Messaging and Social</Name>
     <Modules />
   </Group>
   <Group>
@@ -25,15 +17,31 @@
     <Modules />
   </Group>
   <Group>
+    <Name>Messaging and Social</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Devices and Things</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>X10</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Z-Wave</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Raspberry Pi</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Security</Name>
+    <Modules />
+  </Group>
+  <Group>
     <Name>Interconnections</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Raspberry Sharp</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Contrib</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>

@@ -89,20 +89,6 @@ namespace HomeGenie
                 if (Raspberry.Board.Current.IsRaspberryPi)
                 {
                     ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/raspbian_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
-                    if (!File.Exists("/root/.lircrc"))
-                    {
-                        var lircrc = "begin\n" +
-                                        "        prog = homegenie\n" +
-                                        "        button = KEY_1\n" +
-                                        "        repeat = 3\n" +
-                                        "        config = KEY_1\n" +
-                                        "end\n";
-                        try
-                        {
-                            File.WriteAllText("/root/.lircrc", lircrc);
-                        }
-                        catch { }
-                    }
                     //
                     //if (File.Exists("/usr/lib/libgdiplus.so") && !File.Exists("/usr/local/lib/libgdiplus.so"))
                     //{
@@ -126,6 +112,21 @@ namespace HomeGenie
                             "libCameraCaptureV4L.so"
                         ) + "\""
                     );
+                }
+                //
+                if (!File.Exists("~/.lircrc"))
+                {
+                    var lircrc = "begin\n" +
+                        "        prog = homegenie\n" +
+                        "        button = KEY_1\n" +
+                        "        repeat = 3\n" +
+                        "        config = KEY_1\n" +
+                        "end\n";
+                    try
+                    {
+                        File.WriteAllText("~/.lircrc", lircrc);
+                    }
+                    catch { }
                 }
             }
             //
@@ -151,7 +152,7 @@ namespace HomeGenie
 
         private static void ShutDown()
         {
-            Console.Write("HomeGenie is now exiting...");
+            Console.Write("HomeGenie is now exiting...\n");
             //
             if (_homegenie != null)
             {

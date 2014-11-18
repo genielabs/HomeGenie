@@ -9,6 +9,8 @@
     <AssemblyName>W800RF32</AssemblyName>
     <UseMSBuildEngine>False</UseMSBuildEngine>
     <ReleaseVersion>1.0</ReleaseVersion>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
