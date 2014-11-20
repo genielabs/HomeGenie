@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+20/11/2014 1.00 beta rev 422
+    - Added skelton for ProgramEngine.CompileArduino function
+    - Adding support for Arduino sketches inside HomeGenie Program Editor (wip)
+
 14/11/2014 1.00 beta rev 421
     - Updated MCP3008 program
     - Fixed modules sorting issue

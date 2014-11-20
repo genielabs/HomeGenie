@@ -247,6 +247,9 @@ namespace HomeGenie.Automation
             case "javascript":
                 errors = CompileJavascript(program);
                 break;
+            case "arduino":
+                errors = CompileArduino(program);
+                break;
             }
             return errors;
         }
@@ -626,6 +629,28 @@ namespace HomeGenie.Automation
             return errors;
         }
 
+        private List<ProgramError> CompileArduino(ProgramBlock program)
+        {
+            List<ProgramError> errors = new List<ProgramError>();
+
+            // Generate, compile and upload Arduino Sketch
+
+            // TODO: Add code for generating and compiling Arduino Sketch (.ino source and Makefile for running make and make upload)
+            // TODO: Possibly add support for rt debugging and arduino output logging
+            // TODO: Implement an "arduino-hg-interop" C library
+            // NOTE: Issue "apt-get install arduino-mk" on the hosting platform to get needed tools for this task
+            // NOTE: also see http://www.themgames.net/arduino-from-the-command-line/ example.
+
+            errors.Add(new ProgramError() {
+                Line = 0,
+                Column = 0,
+                ErrorMessage = "Arduino Sketch support is a work in progress.",
+                ErrorNumber = "500",
+                CodeBlock = "CR"
+            });
+
+            return errors;
+        }
 
         private bool VerifyProgramCondition(ProgramCondition c)
         {

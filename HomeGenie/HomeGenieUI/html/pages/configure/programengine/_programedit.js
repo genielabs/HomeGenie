@@ -207,27 +207,6 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
 			{
 				HG.WebApp.ProgramEdit.HideProgramErrors();
 			}
-	        // update editor mode
-			if (editMode == 'python') {
-			    editor1.setOption('mode', 'text/x-python');
-			    editor2.setOption('mode', 'text/x-python');
-			}
-			else if (editMode == 'ruby') {
-			    editor1.setOption('mode', 'text/x-ruby');
-			    editor2.setOption('mode', 'text/x-ruby');
-			}
-			else if (editMode == 'javascript') {
-			    editor1.setOption('mode', 'text/javascript');
-			    editor2.setOption('mode', 'text/javascript');
-			}
-			else if (editMode == 'csharp') {
-			    editor1.setOption('mode', 'text/x-csharp');
-			    editor2.setOption('mode', 'text/x-csharp');
-			}
-			setTimeout(function(){
-				editor1.refresh();
-				editor2.refresh();
-			}, 500);
 		}
 		else
 		{
@@ -239,6 +218,7 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () 
     {
+    console.log(HG.WebApp.ProgramEdit._CurrentProgram.Address);
 	    $('[id=editprograms_actionmenu_run]').each( function() { $(this).show(); } );
 	    $('[id=editprograms_actionmenu_break]').each( function() { $(this).hide(); } );
 	    $('[id=editprograms_actionmenu_run]').each( function() { $(this).addClass('ui-disabled'); } );
@@ -376,6 +356,9 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position)
 
 HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
     {
+        editor1.clearGutter('CodeMirror-lint-markers-1');
+        editor2.clearGutter('CodeMirror-lint-markers-2');
+        //
         if (typeof (message) == 'undefined') message == '';
         HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = message;
         if (message == '') return;
@@ -486,7 +469,8 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		    //    }
 		    //}, 2000);
         }
-
+        
+        HG.WebApp.ProgramEdit.RefreshCodeMirror();                
 
 	};
 
@@ -498,7 +482,18 @@ HG.WebApp.ProgramEdit.HideProgramErrors = function ()
         $('#program_error_button').hide();
         $('#program_error_button2').hide();
         //$('#program_error_message').popup().popup('close');
+        HG.WebApp.ProgramEdit.RefreshCodeMirror();                
 	};
+
+HG.WebApp.ProgramEdit.RefreshCodeMirror = function() {
+        
+        // refresh editors
+        setTimeout(function(){
+            editor1.refresh();
+            editor2.refresh();
+        }, 500);
+        
+    };
 
 HG.WebApp.ProgramEdit.CompileProgram = function () {
         HG.WebApp.ProgramEdit.HideProgramErrors();
@@ -622,7 +617,6 @@ HG.WebApp.ProgramEdit.DeleteProgram = function (program) {
 HG.WebApp.ProgramEdit.SetTab = function (tabindex) 
 	{
 		HG.WebApp.ProgramEdit._CurrentTab = tabindex;
-		HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
 		$('#program_edit_tab1').hide();
 		$('#program_edit_tab2').hide();
 		$('#program_edit_tab3').hide();
@@ -631,4 +625,6 @@ HG.WebApp.ProgramEdit.SetTab = function (tabindex)
 		$('#program_edit_tab3_button').removeClass('ui-btn-active');
 		$('#program_edit_tab' + tabindex).show();
 		$('#program_edit_tab' + tabindex + '_button').addClass('ui-btn-active');
+        //        
+        HG.WebApp.ProgramEdit.RefreshCodeMirror();                
 	};
