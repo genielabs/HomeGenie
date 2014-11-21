@@ -35,6 +35,7 @@ using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace HomeGenie.Automation
 {
@@ -55,7 +56,6 @@ namespace HomeGenie.Automation
 
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
-        private CSharpAppFactory scriptingHost = null;
 
         private MacroRecorder macroRecorder = null;
 
@@ -102,7 +102,6 @@ namespace HomeGenie.Automation
         public ProgramEngine(HomeGenieService hg)
         {
             homegenie = hg;
-            scriptingHost = new CSharpAppFactory(homegenie);
             macroRecorder = new MacroRecorder(this);
             scheduler = new SchedulerService(this);
             scheduler.Start();
@@ -575,7 +574,7 @@ namespace HomeGenie.Automation
             System.CodeDom.Compiler.CompilerResults result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-                result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
+                result = CSharpAppFactory.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
                 if (File.Exists(program.AssemblyFile))
                 {
                     // delete old assebly
@@ -634,20 +633,31 @@ namespace HomeGenie.Automation
             List<ProgramError> errors = new List<ProgramError>();
 
             // Generate, compile and upload Arduino Sketch
+            string sketchFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString(), "sketch_" + program.Address + ".ino");
+            if (!Directory.Exists(Path.GetDirectoryName(sketchFileName)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(sketchFileName));
+            }
+            string sketchMakefile = Path.Combine(Path.GetDirectoryName(sketchFileName), "Makefile");
 
-            // TODO: Add code for generating and compiling Arduino Sketch (.ino source and Makefile for running make and make upload)
-            // TODO: Possibly add support for rt debugging and arduino output logging
-            // TODO: Implement an "arduino-hg-interop" C library
-            // NOTE: Issue "apt-get install arduino-mk" on the hosting platform to get needed tools for this task
-            // NOTE: also see http://www.themgames.net/arduino-from-the-command-line/ example.
-
-            errors.Add(new ProgramError() {
-                Line = 0,
-                Column = 0,
-                ErrorMessage = "Arduino Sketch support is a work in progress.",
-                ErrorNumber = "500",
-                CodeBlock = "CR"
-            });
+            try
+            {
+                // .ino source is stored in the ScriptSource property
+                File.WriteAllText(sketchFileName, program.ScriptSource);
+                // Makefile source is stored in the ScriptCondition property
+                File.WriteAllText(sketchMakefile, program.ScriptCondition);
+                errors = ArduinoAppFactory.CompileSketch(sketchFileName, sketchMakefile);
+            }
+            catch (Exception e)
+            { 
+                errors.Add(new ProgramError() {
+                    Line = 0,
+                    Column = 0,
+                    ErrorMessage = "General failure: are Arduino libraries instaled?\nRunning 'sudo apt-get install arduino-mk' from a terminal could fix the problem.\n\n" + e.Message,
+                    ErrorNumber = "500",
+                    CodeBlock = "CR"
+                });
+            }
 
             return errors;
         }

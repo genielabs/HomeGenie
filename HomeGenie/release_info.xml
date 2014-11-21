@@ -3,7 +3,10 @@
   <Name>HomeGenie</Name>
   <Version>1.00 beta r422</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added skelton for ProgramEngine.CompileArduino function
-  - Adding support for Arduino sketches inside HomeGenie Program Editor (wip)</ReleaseNote>
-  <ReleaseDate>2014-11-20T11:37:18.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added support for Arduino sketches inside HomeGenie Program Editor
+  - Added DHT-22 app
+  - Added SmartIC app for using two MCP23017 I/O expanders
+  - Updated Grove-RGB, OneWire, DHT-11 apps
+  - Updated Jint Javascript Engine</ReleaseNote>
+  <ReleaseDate>2014-11-21T14:45:01.0000Z</ReleaseDate>
 </ReleaseInfo>
