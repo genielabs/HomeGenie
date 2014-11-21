@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:07.879034Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:50.96018Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:08.389981Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:51.465499Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:08.892624Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:51.966307Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:39.429487Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:31:26.192514Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -665,7 +665,7 @@ while (Program.IsEnabled)
 {
   	for(int a = 0; a &lt; 30; a++)
     {
-        var irpin = ConnectorPin.P1Pin7.ToProcessor();
+        var irpin = ConnectorPin.P1Pin16.ToProcessor();
         MemoryGpioConnectionDriver driver = new MemoryGpioConnectionDriver();
         //
         driver.Allocate(irpin, PinDirection.Output);
@@ -751,8 +751,9 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>70</Address>
     <Name>DHT-11 Sensor</Name>
-    <Description>Temperature and Humidity sensing using DHT-11. 
-For wirings see http://homegenie.it/docs/diy/eden.php .</Description>
+    <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
+Edit program code line #19 to change the data pin GPIO.
+See example video at http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
@@ -1018,7 +1019,7 @@ return true;
     Pause(24 * 60 * 60); // pause 24 hours before next check
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1030,7 +1031,7 @@ It can be used for "Sunrise/Sunset" feature.</Description>
     <ActivationTime>2014-04-02T14:05:17.4724054Z</ActivationTime>
     <TriggerTime>2014-11-13T23:07:09.891287Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -1219,7 +1220,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:10.379672Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:52.962989Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1274,7 +1275,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:10.880879Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:53.464075Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1569,7 +1570,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:11.393896Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:53.966639Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1650,7 +1651,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:11.879079Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:54.463876Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1720,7 +1721,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:12.382674Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:54.965811Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1986,7 +1987,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:12.884925Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:55.467338Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2352,7 +2353,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:13.883975Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:56.468455Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2414,7 +2415,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:14.384352Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:56.967673Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2571,7 +2572,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:14.886318Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:57.468667Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2835,7 +2836,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-13T23:07:15.390355Z</TriggerTime>
+    <TriggerTime>2014-11-21T14:27:57.971604Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3591,28 +3592,15 @@ No service key required to fetch data.</Description>
     <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
 // the 'Code To Run' to be executed.
 hg.SetConditionTrue();
-
-// list the program as custom widget
-if (hg.Program.Parameter("Widget.DisplayModule").Value != "jkUtils/SolarAltitude/SolarAltitude")
+hg.Program.Setup(function(){
   hg.Program.AddControlWidget("jkUtils/SolarAltitude/SolarAltitude");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Latitude").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude");
- 
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Longitude").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude");    
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Label").Value)  
   hg.Program.AddInputField("jkUtils.SolarAltitude.Label", "", "Custom Label");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Zoom").Value)  
   hg.Program.AddInputField("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Color").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Timeformat").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)");
+});
 </ScriptCondition>
     <ScriptSource>
 // jkUtils - Solar Altitude Ver 2.0 2014-05-07
@@ -5581,14 +5569,21 @@ while (Program.IsEnabled)
 
 Program.Setup(()=&gt;{
   	Program.AddInputField("LedsNumber", "1", "Number of chained RGB leds");
-	Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, 1);
 });
 return true;
 </ScriptCondition>
-    <ScriptSource>var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin03, ConnectorPin.P1Pin07, (int)Program.InputField("LedsNumber").DecimalValue);
-groveRgb.SetColorRgb(0, 0, 0, 0);
+    <ScriptSource>var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
 
-var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
+int ledsCount = (int)Program.InputField("LedsCount").DecimalValue;
+var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin13, ConnectorPin.P1Pin07, ledsCount);
+Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, ledsCount);
+for(int x = 0; x &lt; ledsCount; x++)
+{
+  	var module = rgbModules.WithAddress((x+1).ToString()).Get();
+	groveRgb.SetColorRgb(x, 0, 0, 0);
+  	module.Parameter("Status.Level").Value = "0";
+  	module.Parameter("Status.ColorHsb").Value = "1,1,1";
+}
 
 When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt; 
 {
@@ -5601,13 +5596,14 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
       string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
       //
       var module = rgbModules.WithAddress(lightnumber).Get();
+      int lightId = int.Parse(lightnumber) - 1;
       //
       switch(command)
       {
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
         case "Control.On":
         	string[] memory = module.Parameter("Status.ColorHsb").Value.Split(',');
-        	groveRgb.SetColorHsv(0, double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
+        	groveRgb.SetColorHsv(lightId, double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(memory[1], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture));
         	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
@@ -5615,18 +5611,18 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
         case "Control.Off":
-			groveRgb.SetColorRgb(0, 0, 0, 0);
+			groveRgb.SetColorRgb(lightId, 0, 0, 0);
         	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
         	break;
         case "Control.Toggle":
         	if (module.Parameter("Status.Level").DecimalValue == 0)
             {
-				groveRgb.SetColorRgb(0, 255, 255, 255);
+				groveRgb.SetColorRgb(lightId, 255, 255, 255);
               	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
             }
         	else
             {
-				groveRgb.SetColorRgb(0, 0, 0, 0);
+				groveRgb.SetColorRgb(lightId, 0, 0, 0);
 	        	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
             }
         	break;
@@ -5639,7 +5635,7 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
         	string[] values = parameter.Split(',');
         	//double transition = 5;
         	//if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-          	groveRgb.SetColorHsv(0, double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
+          	groveRgb.SetColorHsv(lightId, double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture));
             Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Color Light");
@@ -5665,7 +5661,7 @@ Program.GoBackground();</ScriptSource>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>62</Address>
     <Name>Grove - Chainable RGB Led</Name>
-    <Description>Virtual modules for Chainable RGB Leds.
+    <Description>Chainable RGB color leds modules wired to GPIO#4 and GPIO#21/27 (power with 3v3).
 http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
@@ -6030,6 +6026,7 @@ while (Program.IsEnabled)
       	if (deviceId != "")
        	{
 				var data = readSensorData(deviceId);
+          		if (data.Count &gt; 0 &amp;&amp; data[0].Contains(" crc=") &amp;&amp; data[0].Contains(" NO")) continue;
           		var temperatureCelsius = parseTemperatureData(data);
           		// Update virtual module data
           		Program.RaiseEvent(module, "Sensor.TemperatureF", (temperatureCelsius * 9d / 5d + 32d).ToString(), "1-Wire Device");
@@ -6065,6 +6062,489 @@ To find out your connected devices ID, issue from a terminal the command:
     <Group>Devices and Things</Group>
     <ActivationTime>2014-11-13T15:39:01.375637Z</ActivationTime>
     <TriggerTime>2014-11-13T15:39:01.407546Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
+// For manually activated program, just leave a "return false" statement here.
+Program.Setup(()=&gt;
+{
+  
+  // set the widget that will display this program data (the temperature,luminance).
+  Program.AddControlWidget("homegenie/generic/sensor");
+  
+  // set a configuration parameter
+  //Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
+  
+  // initialize program parameters
+  Program.Parameter("Sensor.Humidity").Value = "";
+  Program.Parameter("Sensor.Temperature").Value = "";
+  Program.Parameter("Sensor.TemperatureF").Value = "";
+
+  Program.AddInputField("UpdateInterval", "600", "Update Interval (seconds)");
+  
+  // it makes program to respond to webservices calls:
+  // - http://&lt;hg_address&gt;/api/EmbeddedSystems.Raspberry/DHT22/Sensor.Temperature
+  When.WebServiceCallReceived("EmbeddedSystems.Raspberry/DHT22/Sensor.Temperature", ( args ) =&gt; 
+  {
+    return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+  });
+  // - http://&lt;hg_address&gt;/api/EmbeddedSystems.Raspberry/DHT22/Sensor.Humidity
+  When.WebServiceCallReceived("EmbeddedSystems.Raspberry/DHT22/Sensor.Humidity", ( args ) =&gt; 
+  {
+    return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+  });
+  
+}); // end program setup
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// it makes program to respond to webservices calls:
+// - http://&lt;hg_address&gt;/api/Components.DHT22/0/Sensor.Temperature
+When.WebServiceCallReceived("Components.DHT22/0/Sensor.Temperature", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Temperature").Value + "' }";
+});
+// - http://&lt;hg_address&gt;/api/Components.DHT22/0/Sensor.Humidity
+When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt; 
+{
+  	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
+});
+
+int[] data = new int[5];
+
+var irpin = ConnectorPin.P1Pin7.ToProcessor();
+MemoryGpioConnectionDriver driver = new MemoryGpioConnectionDriver();
+while (Program.IsEnabled)
+{
+    driver.Allocate(irpin, PinDirection.Output);
+    driver.Write(irpin, true);
+    //Pause(5);
+  	for(int a = 0; a &lt; 30; a++)
+    {
+        driver.Allocate(irpin, PinDirection.Output);
+        driver.Write(irpin, false);
+        Pause(0.0018);
+        //Pause(0.0006);
+        //driver.Write(irpin, true);
+        //Pause(0.001);
+        //  
+        driver.Allocate(irpin, PinDirection.Input);
+        //
+        int i = 0;
+        data = new int[5];
+        int j = 0;
+        int counter = 0;
+        bool laststate = true;  
+        //
+        // detect change and read data
+        for ( i=0; i&lt;= 85; i++) {
+          counter = 0;
+          while (driver.Read(irpin) == laststate) {
+            //Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
+            if (++counter == 255) {
+              break;
+            }
+          }
+          laststate = driver.Read(irpin);
+          //Console.WriteLine(i);
+          if (counter == 255) break;
+      
+          // ignore first 3 transitions
+          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) {
+            // shove each bit into the storage bytes
+            data[j/8] &lt;&lt;= 1;
+            if (counter &gt; 40)
+              data[j/8] |= 1;
+            j++;
+          }
+        }
+        // 
+      	//Program.Notify("DHT-22", "J = " + j.ToString());
+        if ((j &gt;= 40) &amp;&amp; (data[4] == ((data[0] + data[1] + data[2] + data[3]) &amp; 0xFF)) ) 
+        {
+            //data[2] = data[2] - 3; // temperature adjustment, due to heat excess inside the HG box
+            //double f = data[2] * 9D / 5D + 32;
+          	//double f = temperatura + decimale/10;
+            //Console.WriteLine("\n\nHumidity = {0}.{1} %\nTemperature = {2}.{3} *C ({4} *F)\n\n", 
+            //      			data[0], data[1], data[2], data[3], f);
+          
+          	
+          
+          	//data[0] = (data[0] )/10;
+            
+          	int umidita =((data[0]&lt;&lt;8) + data[1])/10;
+          	int decumid = ((data[0]&lt;&lt;8) + data[1]) - umidita*10;
+            //var hum = data[0] + "." + data[1];
+          	//var hum = (data[0] * 256 + data[1])/10;
+          	var hum = umidita + "." + decumid;	
+          	int moltiplicatore =1;
+          	if (data[2] &gt; 128)
+          	{
+            moltiplicatore = -1;
+            data[2] = data[2] - 128;
+            }
+                            
+            int temperatura =((data[2]&lt;&lt;8)+data[3])/10;
+          	int decimale = 	((data[2]&lt;&lt;8)+data[3]) - temperatura*10;
+          //data[2] = ((data[2]&lt;&lt;8)+data[3]);
+          	//data[2] /= 10;
+           
+              
+              
+            var tempc = (moltiplicatore * temperatura) + "." + decimale;
+            //var tempc = data[2] + ".." + data[4];
+			
+          
+            var tempf = ((temperatura + decimale/10) * 9D / 5D + 32).ToString();
+          	//if (hum != Program.Parameter("Sensor.Humidity").Value)
+            {
+              	Program.RaiseEvent("Sensor.Humidity", hum, "DHT-22 Sensor");
+            }
+          	//if (tempc != Program.Parameter("Sensor.Temperature").Value)
+            {
+                Program.RaiseEvent("Sensor.TemperatureF", tempf, "DHT-22 Sensor");
+                Program.RaiseEvent("Sensor.Temperature", tempc, "DHT-22 Sensor");
+            }
+            break;
+        }
+        else
+        {
+            //Console.WriteLine(j + ") Data not good, skip\n");
+          	Pause(2);
+        }
+    }
+    //
+    //Console.WriteLine(data[0]);
+    //Console.WriteLine(data[1]);
+    //Console.WriteLine(data[2]);
+    //Console.WriteLine(data[3]);
+    //Console.WriteLine(data[4]);
+  	//
+  	var pause = Program.InputField("UpdateInterval").DecimalValue;
+  	if (pause == 0) pause = 600; // default pause is 10 minutes
+  	Pause(pause);
+
+}</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>63</Address>
+    <Name>DHT-22 Sensor</Name>
+    <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
+Edit program code line #15 to change the data pin GPIO.
+</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions>
+      <ProgramCondition>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>37</Target>
+        <Property>Sensor.DoorWindow</Property>
+        <ComparisonOperator>Equals</ComparisonOperator>
+        <ComparisonValue>255</ComparisonValue>
+      </ProgramCondition>
+    </Conditions>
+    <Commands>
+      <ProgramCommand>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>4</Target>
+        <CommandString>Control.Off</CommandString>
+        <CommandArguments />
+      </ProgramCommand>
+    </Commands>
+    <ScriptCondition>// returning true will execute the "Code to Run"
+return true;
+</ScriptCondition>
+    <ScriptSource>var moduleDomain = "Components.MCP23017";
+
+// This examples will add 32 modules of type "Sensor"
+// corresponding to A0-A7 and B0-B7 pins, configured as INPUT or OUTPUT
+//
+var pinConfigurationA = new List&lt;dynamic&gt;(){
+  new { Address =  "1", Pin = Mcp23017Pin.A0, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "2", Pin = Mcp23017Pin.A1, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "3", Pin = Mcp23017Pin.A2, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "4", Pin = Mcp23017Pin.A3, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "5", Pin = Mcp23017Pin.A4, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "6", Pin = Mcp23017Pin.A5, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "7", Pin = Mcp23017Pin.A6, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "8", Pin = Mcp23017Pin.A7, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  //
+  new { Address =  "9", Pin = Mcp23017Pin.B0, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "10", Pin = Mcp23017Pin.B1, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "11", Pin = Mcp23017Pin.B2, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "12", Pin = Mcp23017Pin.B3, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "13", Pin = Mcp23017Pin.B4, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "14", Pin = Mcp23017Pin.B5, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "15", Pin = Mcp23017Pin.B6, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "16", Pin = Mcp23017Pin.B7, Direction = Mcp23017PinDirection.Input, PullUpResistor = true }
+};
+
+var pinConfigurationB = new List&lt;dynamic&gt;(){
+  new { Address =  "17", Pin = Mcp23017Pin.A0, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "18", Pin = Mcp23017Pin.A1, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "19", Pin = Mcp23017Pin.A2, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "20", Pin = Mcp23017Pin.A3, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "21", Pin = Mcp23017Pin.A4, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "22", Pin = Mcp23017Pin.A5, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "23", Pin = Mcp23017Pin.A6, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address =  "24", Pin = Mcp23017Pin.A7, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  //
+  new { Address =  "25", Pin = Mcp23017Pin.B0, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "26", Pin = Mcp23017Pin.B1, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "27", Pin = Mcp23017Pin.B2, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "28", Pin = Mcp23017Pin.B3, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "29", Pin = Mcp23017Pin.B4, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "30", Pin = Mcp23017Pin.B5, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "31", Pin = Mcp23017Pin.B6, Direction = Mcp23017PinDirection.Input, PullUpResistor = true },
+  new { Address = "32", Pin = Mcp23017Pin.B7, Direction = Mcp23017PinDirection.Input, PullUpResistor = true }
+};
+
+
+bool[] pinStatusA = new bool[16]; 
+bool[] pinStatusB = new bool[16];
+//
+// Change SDA and SCL pins to match your current setup
+//
+var sdaPin = ConnectorPin.P1Pin03.ToProcessor();
+var sclPin = ConnectorPin.P1Pin05.ToProcessor();
+//
+var driver = new I2cDriver(sdaPin, sclPin);
+var deviceConnectionA = new Mcp23017I2cConnection(driver.Connect(0x20));
+Pause(0.5);
+var deviceConnectionB = new Mcp23017I2cConnection(driver.Connect(0x21));
+
+// implement Control.On, Control.Off, Control.Toggle serice API
+// for the domain Components.MCP23017
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
+{
+	string[] reqs = ((string)args).Split('/');
+    string returnValue =  "{ 'ResponseValue' : 'OK' }";
+  	var errormessage = "";
+	try
+	{
+		string pinid = reqs[1];
+      	string command = reqs[2];
+        //
+        var module = Modules.InDomain(moduleDomain).WithAddress(pinid).Get();
+        // modules with id from 1 to 8 are mapped as A0-A7
+        // modules with id from 9 to 16 are mapped as B0-B7
+        // modules with id from 17 to 24 are mapped as A0-A7
+        // modules with id from 25 to 32 are mapped as B0-B7
+      	var pinname = "";
+      	var i = int.Parse(pinid); 
+      	if (i &gt;=1 &amp;&amp; i &lt;= 8) 
+        {
+          	pinname = "A" + (i - 1).ToString();
+        }
+      	else if  (i &gt;=9 &amp;&amp; i &lt;= 16) 
+        {
+          	pinname = "B" + (i - 9).ToString();
+        }      
+      	else if (i &gt;= 17 &amp;&amp; i &lt;= 24)
+        {
+        	pinname = "A" + (i - 17).ToString();
+        }
+       	else if (i &gt;= 25 &amp;&amp; i &lt;= 32)
+        {
+        	pinname = "B" + (i - 25).ToString();
+        }
+      	//
+		var mcppin = (Mcp23017Pin)Enum.Parse(typeof(Mcp23017Pin), pinname);
+      
+        if (i &lt;= 16)
+    	{  
+        	switch(command)
+        	{
+          		// eg. http://hg_address/api/Components.MCP23017/1/Control.On
+          		case "Control.On":
+          			deviceConnectionA.SetPinStatus(mcppin, true);
+                	Program.RaiseEvent(module, "Status.Level", deviceConnectionA.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 A " + pinname);
+          			break;
+          		// eg. http://hg_address/api/Components.MCP23017/3/Control.Off
+          		case "Control.Off":
+          			deviceConnectionA.SetPinStatus(mcppin, false);
+              		Program.RaiseEvent(module, "Status.Level", deviceConnectionA.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 A " + pinname);
+          			break;
+          		// eg. http://hg_address/api/Components.MCP23017/9/Control.Toggle
+         		 case "Control.Toggle":
+          			deviceConnectionA.Toogle(mcppin);
+              		Program.RaiseEvent(module, "Status.Level", deviceConnectionA.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 A " + pinname);
+          			break;
+                // eg. http://hg_address/api/Components.MCP23017/1/Get.Status
+         		 case "Get.Status":
+              		returnValue = "{ 'ResponseValue' : '" + (deviceConnectionA.GetPinStatus(mcppin) ? "0" : "1") + "' }";
+                    break;
+        	}
+          
+        			
+        } 
+     	else
+        {
+        	switch(command)
+        	{
+          		// eg. http://hg_address/api/Components.MCP23017/1/Control.On
+          		case "Control.On":
+          			deviceConnectionB.SetPinStatus(mcppin, true);
+                    Program.RaiseEvent(module, "Status.Level", deviceConnectionB.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 B " + pinname);
+          			break;
+          		// eg. http://hg_address/api/Components.MCP23017/3/Control.Off
+          		case "Control.Off":
+          			deviceConnectionB.SetPinStatus(mcppin, false);
+              		Program.RaiseEvent(module, "Status.Level", deviceConnectionB.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 B " + pinname);
+          			break;
+          		// eg. http://hg_address/api/Components.MCP23017/9/Control.Toggle
+         		 case "Control.Toggle":
+          			deviceConnectionB.Toogle(mcppin);
+              		Program.RaiseEvent(module, "Status.Level", deviceConnectionB.GetPinStatus(mcppin) ? "0" : "1", "MCP23017 B " + pinname);
+          			break;
+               // eg. http://hg_address/api/Components.MCP23017/1/Get.Status
+         		 case "Get.Status":
+              		returnValue = "{ 'ResponseValue' : '" + (deviceConnectionB.GetPinStatus(mcppin) ? "0" : "1") + "' }";
+                    break;
+        	}
+          
+        			
+      	}
+      
+      
+        return returnValue;  
+    } 
+  	catch (Exception ex) 
+    { 
+	    errormessage = ex.Message + " " + ex.StackTrace;
+    }
+    // unable to process request
+    return "{ 'ResponseValue' : 'ERROR " + errormessage + "' }";
+});
+
+
+
+// Initialize MCP23017 A pins
+for (int p = 0; p &lt; pinConfigurationA.Count; p++)
+{
+	var pincfg = pinConfigurationA[p];
+  	// set direction and read pin status
+    deviceConnectionA.SetDirection(pincfg.Pin, pincfg.Direction);
+    pinStatusA[p] = deviceConnectionA.GetPinStatus(pincfg.Pin);
+  	// associate a virtual module with the pin
+  	if (pincfg.Direction == Mcp23017PinDirection.Output)
+    {
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Switch", "");                  
+    }
+  	else // Input 
+    {
+      	if (pincfg.PullUpResistor)
+        {
+        	deviceConnectionA.SetResistor(pincfg.Pin, Mcp23017PinResistor.PullUp);
+        }
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Sensor", "homegenie/generic/sensor");                  
+    }
+    // get the module associated to the pin and store current status
+    var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
+  	module.Parameter("Status.Level").Value = (pinStatusA[p] ? "0" : "1");
+}
+
+// Initialize MCP23017 B pins
+for (int p = 0; p &lt; pinConfigurationB.Count; p++)
+{
+	var pincfg = pinConfigurationB[p];
+  	// set direction and read pin status
+    deviceConnectionB.SetDirection(pincfg.Pin, pincfg.Direction);
+    pinStatusB[p] = deviceConnectionB.GetPinStatus(pincfg.Pin);
+  	// associate a virtual module with the pin
+  	if (pincfg.Direction == Mcp23017PinDirection.Output)
+    {
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Switch", "");                  
+    }
+  	else // Input 
+    {
+      	if (pincfg.PullUpResistor)
+        {
+        	deviceConnectionB.SetResistor(pincfg.Pin, Mcp23017PinResistor.PullUp);
+        }
+		Program.AddVirtualModule(moduleDomain, pincfg.Address, "Sensor", "homegenie/generic/sensor");                  
+    }
+    // get the module associated to the pin and store current status
+    var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
+  	module.Parameter("Status.Level").Value = (pinStatusB[p] ? "0" : "1");
+}
+
+
+
+
+// status polling loop
+while (Program.IsEnabled)
+{
+  
+  	Pause(0.1); // 100 ms poll resolution
+  	//
+  	for (int p = 0; p &lt; pinConfigurationA.Count; p++)
+    {
+      	var pincfg = pinConfigurationA[p];
+      	if (pincfg.Direction == Mcp23017PinDirection.Input)
+        {
+            bool status = deviceConnectionA.GetPinStatus(pincfg.Pin);
+            // check if the pin status changed
+            if (pinStatusA[p] != status)
+            {
+                // get the module associated to the pin
+                var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
+                // raise the event and update the current pin status
+                Program.RaiseEvent(module, "Status.Level",  status ? "0" : "1", "MCP23017 A " + pincfg.Pin.ToString());
+                pinStatusA[p] = status;
+              	Pause(0.1);
+            }
+        }
+    }
+   	//
+    for (int p = 0; p &lt; pinConfigurationB.Count; p++)
+    {
+      	var pincfg = pinConfigurationB[p];
+      	if (pincfg.Direction == Mcp23017PinDirection.Input)
+        {
+            bool status = deviceConnectionB.GetPinStatus(pincfg.Pin);
+            // check if the pin status changed
+            if (pinStatusB[p] != status)
+            {
+                // get the module associated to the pin
+                var module = Modules.InDomain(moduleDomain).WithAddress(pincfg.Address).Get();
+                // raise the event and update the current pin status
+                Program.RaiseEvent(module, "Status.Level", status ? "0" : "1", "MCP23017 B " + pincfg.Pin.ToString());
+                pinStatusB[p] = status;
+              	Pause(0.1);
+            }
+        }
+    }
+  
+}
+</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>79</Address>
+    <Name>SmartIC - MCP23017</Name>
+    <Description>Using 2 MCP23017 I/O expanders connected to 0x20 and 0x21 I2C bus. 
+Contributed by Christophe De Boeck.
+Based on HomeGenie MCP23017 example app.</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

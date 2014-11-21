@@ -387,6 +387,18 @@ namespace HomeGenie.Automation
                     result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
                 }
                 break;
+            case "arduino":
+                // TODO: upload compiled sketch to the board (make upload)
+                result = new MethodRunResult();
+                try
+                {
+                    ArduinoAppFactory.UploadSketch(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", this.Address.ToString()));
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
             }
             //
             return result;

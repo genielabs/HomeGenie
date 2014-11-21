@@ -22,8 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
@@ -34,17 +32,10 @@ using System.IO;
 namespace HomeGenie.Automation
 {
 
-    public class CSharpAppFactory
+    public static class CSharpAppFactory
     {
 
-        //private HomeGenieService homegenie = null;
-
-        public CSharpAppFactory(HomeGenieService hg)
-        {
-            //homegenie = hg;
-        }
-
-        public CompilerResults CompileScript(string condition, string statement, string outputDllFile)
+        public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
             string source = @"    //# pragma warning disable 0168 // variable declared but not used.
 //# pragma warning disable 0219 // variable assigned but not used.
@@ -110,8 +101,8 @@ namespace HomeGenie.Automation.Scripting
     }
 }
 ";
-            source = source.Replace("{statement}", statement);
-            source = source.Replace("{condition}", condition);
+            source = source.Replace("{statement}", scriptSource);
+            source = source.Replace("{condition}", conditionSource);
             //
             Dictionary<string, string> providerOptions = new Dictionary<string, string> {
                 //                    { "CompilerVersion", "v4.0" }

@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Dynamic;
 
 namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
@@ -154,7 +155,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
              */
             case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT:  
                 double temp = Sensor.ExtractTemperatureFromBytes(message);
-                dynamic ptype = new dynamic();
+                dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
                 ptype.Value = temp;
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_SETPOINT, ptype);

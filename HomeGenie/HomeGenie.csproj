@@ -25,9 +25,9 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
-    <ReleaseVersion>1.0</ReleaseVersion>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -212,6 +212,7 @@
     <Compile Include="Data\SystemConfiguration.cs" />
     <Compile Include="Automation\Scripting\SettingsHelper.cs" />
     <Compile Include="Service\StringCipher.cs" />
+    <Compile Include="Automation\ArduinoAppFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">
@@ -272,10 +273,6 @@
       <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
       <Name>MIG</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\TcpClientLib\TcpClientLib.csproj">
-      <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
-      <Name>TcpClientLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MIG\Support Libraries\XTenLib\XTenLib.csproj">
       <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
       <Name>XTenLib</Name>
@@ -296,9 +293,9 @@
       <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="HomeGenieUI\HomeGenieUI.csproj">
-      <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
-      <Name>HomeGenieUI</Name>
+    <ProjectReference Include="..\MIG\Support Libraries\TcpClientLib\TcpClientLib.csproj">
+      <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
+      <Name>TcpClientLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

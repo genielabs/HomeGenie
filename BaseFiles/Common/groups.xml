@@ -4,10 +4,6 @@
     <Name>Dashboard</Name>
     <Modules>
       <ModuleReference>
-        <Address>72</Address>
-        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>34</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>

@@ -3,7 +3,16 @@
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="MIG-files" expanded="True">
+            <Node name="Support Libraries" expanded="True" />
+            <Node name="MIG" expanded="True" />
+          </Node>
+          <Node name="Common" expanded="True" />
+          <Node name="HomeGenie" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />

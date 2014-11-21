@@ -1,5 +1,18 @@
 ﻿RELEASE HISTORY
 
+21/11/2014 1.00 beta rev 425
+    - Completed Arduino Sketch support inside HomeGenie Program Editor
+    - Added DHT-22 app
+    - Added SmartIC app for using two MCP23017 I/O expanders
+    - Updated Grove-RGB, OneWire, DHT-11 apps
+    - Updated Jint Javascript Engine
+    - Moved HomeGenie/HomeGenieUI/html to BaseFiles/Common/html
+    - Fixed solution build errors under Windows and Mac
+
+20/11/2014 1.00 beta rev 422
+    - Added skelton for ProgramEngine.CompileArduino function
+    - Adding support for Arduino sketches inside HomeGenie Program Editor (wip)
+
 14/11/2014 1.00 beta rev 421
     - Updated MCP3008 program
     - Fixed modules sorting issue
