@@ -1711,9 +1711,6 @@
     <None Include="html\js\jquery-ui-1.10.3.custom.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\js\jquery-ui-1.10.3.custom.min.js~">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\js\jquery.knob.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
