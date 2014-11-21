@@ -3,13 +3,34 @@
 **Project info and documentation**:
 http://homegenie.it
 
+
 ## Supported IDEs
 
-**MonoDevelop / Xamarin Studio**:
-HomeGenie_Linux/HomeGenie_Linux.sln
+- **MonoDevelop / Xamarin Studio**
+- **Microsoft Visual Studio**
 
-**Microsoft Visual Studio**:
-HomeGenie_Windows/HomeGenie_VS10.sln
+
+## Building, debugging and packaging HomeGenie
+
+**Linux**
+- Open the *HomeGenie_Linux/HomeGenie_Linux.sln* solution file
+- Prepare base files by building the *BaseFiles/Linux* project
+- Build/Debug the main *HomeGenie* project
+- To bundle a debian setup package, build the *Packger* project (even if this appear to be disabled, it will lauch a script in a terminal window)
+
+**Windows**
+- Open the *HomeGenie_Windows/HomeGenie_VS10.sln* solution file
+- Prepare base files by building the *BaseFiles/Windows* project
+- Build/Run/Debug the main *HomeGenie* project
+- To bundle a setup package, open and run the InnoSetup file located in the *HomeGenie_Windows/Packager* folder.
+
+**Mac**
+- Open the *HomeGenie_Mac/HomeGenie_Mac.sln* solution file
+- Build/Debug the main *HomeGenie* project
+- no setup packaging currently supported for Mac
+
+
+
 
 ## Precompiled packages and install instructions
 
