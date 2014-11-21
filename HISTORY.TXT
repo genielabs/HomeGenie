@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+21/11/2014 1.00 beta rev 423
+    - Moved HomeGenie/HomeGenieUI/html to BaseFiles/Common/html
+    - Updated Jint Javascript Engine
+    - Fixed solution build errors under Windows and Mac
+
 20/11/2014 1.00 beta rev 422
     - Added skelton for ProgramEngine.CompileArduino function
     - Adding support for Arduino sketches inside HomeGenie Program Editor (wip)

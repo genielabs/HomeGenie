@@ -3591,28 +3591,15 @@ No service key required to fetch data.</Description>
     <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
 // the 'Code To Run' to be executed.
 hg.SetConditionTrue();
-
-// list the program as custom widget
-if (hg.Program.Parameter("Widget.DisplayModule").Value != "jkUtils/SolarAltitude/SolarAltitude")
+hg.Program.Setup(function(){
   hg.Program.AddControlWidget("jkUtils/SolarAltitude/SolarAltitude");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Latitude").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude");
- 
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Longitude").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude");    
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Label").Value)  
   hg.Program.AddInputField("jkUtils.SolarAltitude.Label", "", "Custom Label");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Zoom").Value)  
   hg.Program.AddInputField("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Color").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)");
-
-if (!hg.Program.InputField("jkUtils.SolarAltitude.Timeformat").Value)
   hg.Program.AddInputField("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)");
+});
 </ScriptCondition>
     <ScriptSource>
 // jkUtils - Solar Altitude Ver 2.0 2014-05-07

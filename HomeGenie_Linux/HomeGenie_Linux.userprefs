@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../BaseFiles/Common/html/pages/configure/programengine/_programedit.js">
     <Files>
-      <File FileName="../HISTORY.TXT" Line="17" Column="1" />
-      <File FileName="../HomeGenie/release_info.xml" Line="7" Column="47" />
+      <File FileName="../HISTORY.TXT" Line="6" Column="48" />
+      <File FileName="../HomeGenie/release_info.xml" Line="1" Column="1" />
+      <File FileName="../MIG/Support Libraries/ZWaveLib/Devices/ProductHandlers/Generic/Thermostat.cs" Line="172" Column="21" />
+      <File FileName="../BaseFiles/Common/html/pages/configure/programengine/_programedit.js" Line="221" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

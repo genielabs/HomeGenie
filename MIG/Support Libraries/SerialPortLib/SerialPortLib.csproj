@@ -9,7 +9,6 @@
     <RootNamespace>SerialPortLib</RootNamespace>
     <AssemblyName>SerialPortLib</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>1.0</ReleaseVersion>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>

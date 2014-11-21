@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie", "..\HomeGenie\HomeGenie.csproj", "{BFD3C868-1F62-43FF-8771-CF21825F0C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenieUI", "..\HomeGenie\HomeGenieUI\HomeGenieUI.csproj", "{E20F7347-033B-4378-A4F9-CCD70345B4A1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MIG-files", "MIG-files", "{52648E06-7C13-4C7A-97B7-2C109FBAC6B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Libraries", "Support Libraries", "{63A13BEF-B17E-43DE-A96C-D6A1433402DA}"
@@ -101,12 +99,6 @@ Global
 		{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E20F7347-033B-4378-A4F9-CCD70345B4A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{63A13BEF-B17E-43DE-A96C-D6A1433402DA} = {52648E06-7C13-4C7A-97B7-2C109FBAC6B7}
