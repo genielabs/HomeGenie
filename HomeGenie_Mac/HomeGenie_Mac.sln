@@ -5,23 +5,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie_Mac", "HomeGenie_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeGenie", "..\HomeGenie\HomeGenie.csproj", "{BFD3C868-1F62-43FF-8771-CF21825F0C0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MIG-files", "MIG-files", "{9C653CCE-6610-4BAA-8E2F-4F7FB841C1C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MigFiles", "MigFiles", "{9C653CCE-6610-4BAA-8E2F-4F7FB841C1C6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Libraries", "Support Libraries", "{335D9A9D-0137-4F95-AE9D-54B431E08E91}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportLibraries", "SupportLibraries", "{335D9A9D-0137-4F95-AE9D-54B431E08E91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TUIOLib", "..\MIG\Support Libraries\TUIOLib\TUIOLib.csproj", "{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TUIOLib", "..\MigFiles\SupportLibraries\TUIOLib\TUIOLib.csproj", "{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTenLib", "..\MIG\Support Libraries\XTenLib\XTenLib.csproj", "{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTenLib", "..\MigFiles\SupportLibraries\XTenLib\XTenLib.csproj", "{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZWaveLib", "..\MIG\Support Libraries\ZWaveLib\ZWaveLib.csproj", "{06995CE8-149B-42FA-B345-FB11C4D6E180}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZWaveLib", "..\MigFiles\SupportLibraries\ZWaveLib\ZWaveLib.csproj", "{06995CE8-149B-42FA-B345-FB11C4D6E180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W800RF32", "..\MIG\Support Libraries\W800RF32\W800RF32.csproj", "{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W800RF32", "..\MigFiles\SupportLibraries\W800RF32\W800RF32.csproj", "{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortLib", "..\MIG\Support Libraries\SerialPortLib\SerialPortLib.csproj", "{8118C0B9-3B16-47AA-8B24-E5B15F429F78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortLib", "..\MigFiles\SupportLibraries\SerialPortLib\SerialPortLib.csproj", "{8118C0B9-3B16-47AA-8B24-E5B15F429F78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpClientLib", "..\MIG\Support Libraries\TcpClientLib\TcpClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpClientLib", "..\MigFiles\SupportLibraries\TcpClientLib\TcpClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIG", "..\MIG\MIG\MIG.csproj", "{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIG", "..\MigFiles\MIG\MIG.csproj", "{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\BaseFiles\Common\Common.csproj", "{0A27EF44-EC80-4FDB-8764-B153C169905D}"
 EndProject
