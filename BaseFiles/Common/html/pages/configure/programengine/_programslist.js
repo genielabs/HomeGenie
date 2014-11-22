@@ -540,25 +540,29 @@ HG.WebApp.ProgramsList.GetProgramByAddress = function(pid)
 
 HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog)
     {
-        var status = 'black';
-        if (prog.IsRunning) {
-            status = 'green';
+        var statusColor = 'black';
+        var statusProperty = '';
+        var hasErrors = (prog.Type.toLowerCase() != 'wizard' && typeof(prog.ScriptErrors) != 'undefined' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]');
+        //
+        var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prog.Address);
+        if (module != null) {
+            statusProperty = HG.WebApp.Utility.GetModulePropertyByName(module, 'Program.Status').Value;
         }
-        else if (prog.IsEnabled) {
-            status = 'yellow';
+        //
+        if (statusProperty == 'Running') {
+            statusColor = 'green';
         }
-        else {
-            status = 'black';
+        else if (prog.IsEnabled) { //statusProperty == 'Idle' || statusProperty == 'Enabled' || statusProperty == 'Setup'
+            if (hasErrors)
+                statusColor = 'red';
+            else
+                statusColor = 'yellow';
         }
-        if (prog.Type.toLowerCase() != 'wizard' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]') {
-            if (prog.IsEnabled) {
-                status = 'red';
-            }
-            else {
-                status = 'brown';
-            }
+        else if (hasErrors) {
+            statusColor = 'brown';
         }
-        return status; 
+        //
+        return statusColor; 
     };
 
 HG.WebApp.ProgramsList.EditProgram = function () 

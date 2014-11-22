@@ -262,7 +262,17 @@ namespace HomeGenie.Service.Handlers
                         break;
 
                     case "Programs.Run":
-                        currentProgram = ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
+                        currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                        if (currentProgram != null) {
+                            // clear any runtime errors before running
+                            currentProgram.ScriptErrors = "";
+                            homegenie.ProgramEngine.RaiseProgramModuleEvent(
+                                currentProgram,
+                                "Runtime.Error",
+                                ""
+                            );
+                            ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
+                        }
                         break;
 
                     case "Programs.Toggle":

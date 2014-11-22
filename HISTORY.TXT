@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+22/11/2014 1.00 beta rev 428
+    - Added program status led in the program editor
+    - Better Arduino compiler errors parsing/reporting
+
 21/11/2014 1.00 beta rev 425
     - Completed Arduino Sketch support inside HomeGenie Program Editor
     - Added DHT-22 app

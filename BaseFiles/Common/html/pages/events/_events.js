@@ -148,17 +148,32 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         case 'HomeAutomation.HomeGenie.Automation':
             var iconImage = configurepage_GetModuleIcon(module, null);
             if (eventLog.Property == 'Runtime.Error') {
-                popupdata = {
-                    icon: iconImage,
-                    title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
-                    text: 'Runtime<br />Error',
-                    timestamp: date
-                };
-                if ($.mobile.activePage.attr("id") == "page_automation_editprogram_code") {
-                    HG.WebApp.ProgramEdit.RefreshProgramOptions();
+                if (eventLog.Value != '')
+                {
+                    popupdata = {
+                        icon: iconImage,
+                        title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
+                        text: 'Runtime<br />Error',
+                        timestamp: date
+                    };
+                    if ($.mobile.activePage.attr("id") == "page_automation_editprogram") {
+                        HG.WebApp.ProgramEdit.RefreshProgramOptions();
+                    }
+                }
+                else if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                    //var cp = HG.WebApp.Utility.GetProgramByAddress(module.Address);
+                    //if (cp != null) cp.ScriptErrors = '';
+                    HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
+                    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
             }
-            else if (eventLog.Property != 'Program.Status') {
+            else if (eventLog.Property == 'Program.Status') {
+                if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address)
+                {
+                    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+                }
+            }
+            else {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {

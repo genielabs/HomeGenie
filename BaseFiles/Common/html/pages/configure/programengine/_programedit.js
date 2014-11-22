@@ -213,7 +213,9 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function ()
 			HG.WebApp.ProgramEdit.HideProgramErrors();
 		}
 		// update title
-        $('#page_automation_program_title').html('<span style="font-size:9pt;font-weight:bold">PROGRAM EDITOR (' + editMode + ')</span><br />' + HG.WebApp.ProgramEdit._CurrentProgram.Address + ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
+        var status = HG.WebApp.ProgramsList.GetProgramStatusColor(HG.WebApp.ProgramEdit._CurrentProgram);
+        var statusImage = '<img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ';
+        $('#page_automation_program_title').html('<span style="font-size:9pt;font-weight:bold">PROGRAM EDITOR (' + editMode + ')</span><br />' + statusImage + HG.WebApp.ProgramEdit._CurrentProgram.Address + ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
     };
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () 
@@ -238,12 +240,12 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function ()
 	                    $('[id=editprograms_actionmenu_run]').each( function() { $(this).show(); } );
 	                }
 	                if (cp.ScriptErrors.trim() != '' && cp.ScriptErrors.trim() != '[]') {
-	                    HG.WebApp.ProgramEdit.ShowProgramErrors(cp.ScriptErrors);
+                        HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = cp.ScriptErrors;
 	                }
 	                else {
 	                    HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
-	                    HG.WebApp.ProgramEdit.HideProgramErrors();
 	                }
+                    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
 	        });
 	    }, 500);
@@ -480,6 +482,7 @@ HG.WebApp.ProgramEdit.HideProgramErrors = function ()
         //$('#program_error_message_text').html('');
         $('#program_error_button').hide();
         $('#program_error_button2').hide();
+        $('.qtip').hide();
         //$('#program_error_message').popup().popup('close');
         HG.WebApp.ProgramEdit.RefreshCodeMirror();                
 	};

@@ -46,6 +46,7 @@ namespace HomeGenie.Automation
             {
                 using (StreamReader reader = process.StandardError)
                 {
+                    string errorOutput = "";
                     while (!reader.EndOfStream)
                     {
                         string line = reader.ReadLine();
@@ -55,13 +56,18 @@ namespace HomeGenie.Automation
                         {
                             int errorRow = 0;
                             int errorColumn = 0;
-                            if (lineParts[3].Trim() == "error" && int.TryParse(lineParts[1], out errorRow) && int.TryParse(lineParts[2], out errorColumn))
+                            if (lineParts[3].Contains("error") && int.TryParse(lineParts[1], out errorRow) && int.TryParse(
+                                lineParts[2],
+                                out errorColumn
+                            ))
                             {
+                                var errorDetail = new String[lineParts.Length - 4];
+                                Array.Copy(lineParts, 4, errorDetail, 0, errorDetail.Length);
                                 errors.Add(new ProgramError() {
                                     Line = errorRow,
                                     Column = errorColumn,
-                                    ErrorMessage = lineParts[3]+": "+lineParts[4],
-                                    ErrorNumber = "1",
+                                    ErrorMessage = lineParts[3]+": " + String.Join(": ", errorDetail),
+                                    ErrorNumber = "110",
                                     CodeBlock = "CR"
                                 });
                             }
@@ -75,12 +81,27 @@ namespace HomeGenie.Automation
                                     Line = errorRow,
                                     Column = 0,
                                     ErrorMessage = line,
-                                    ErrorNumber = "1",
+                                    ErrorNumber = "120",
                                     CodeBlock = "TC"
                                 });
                             }
                         }
+                        else if (!String.IsNullOrWhiteSpace(line))
+                        {
+                            errorOutput += line + "\n";
+                        }
                         Console.WriteLine(line);
+                    }
+                    //
+                    if (!String.IsNullOrWhiteSpace(errorOutput))
+                    {
+                        errors.Add(new ProgramError() {
+                            Line = 0,
+                            Column = 0,
+                            ErrorMessage = "Build failure: please check the Makefile; ensure BOARD_TAG is correct and ARDUINO_LIBS is referencing libraries needed by this sketch.\n\n" + errorOutput,
+                            ErrorNumber = "130",
+                            CodeBlock = "CR"
+                        });
                     }
                 }
             }
@@ -112,7 +133,8 @@ namespace HomeGenie.Automation
                     Console.WriteLine(errorOutput);
                 }
             }
-            if (!String.IsNullOrEmpty(errorOutput))
+            //
+            if (!String.IsNullOrWhiteSpace(errorOutput))
             {
                 throw(new IOException(errorOutput));
             }

@@ -467,7 +467,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        private void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
+        internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
         {
             var programModule = homegenie.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
             if (programModule != null)
@@ -653,7 +653,7 @@ namespace HomeGenie.Automation
                 errors.Add(new ProgramError() {
                     Line = 0,
                     Column = 0,
-                    ErrorMessage = "General failure: are Arduino libraries instaled?\nRunning 'sudo apt-get install arduino-mk' from a terminal could fix the problem.\n\n" + e.Message,
+                    ErrorMessage = "General failure: is 'arduino-mk' package installed?\n\n" + e.Message,
                     ErrorNumber = "500",
                     CodeBlock = "CR"
                 });
