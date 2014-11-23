@@ -18,19 +18,19 @@
         "@value": "0001"
       },
       "libType": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "00"
+        "@value": "34"
       },
       "appVersion": {
-        "@value": "01"
+        "@value": "02"
       },
       "appSubVersion": {
-        "@value": "08"
+        "@value": "00"
       },
       "basicClass": {
         "@value": "04"
@@ -48,7 +48,7 @@
         "@value": "false"
       },
       "routing": {
-        "@value": "false"
+        "@value": "true"
       },
       "beamSensor": "0"
     },
@@ -62,6 +62,10 @@
           {
             "@xml:lang": "en",
             "#text": "Temperature/Humidity Sensor"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Датчик Влажности/Температуры"
           }
         ]
       },
@@ -74,6 +78,10 @@
           {
             "@xml:lang": "en",
             "#text": "Stays awake for 10 min. after inclusion, tripple click on C/F"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Трижды нажать C/F. После включения в сеть датчик не спит 10 минут"
           }
         ]
       },
@@ -86,12 +94,18 @@
           {
             "@xml:lang": "en",
             "#text": "Tripple press C/F button"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Трижды нажать C/F"
           }
         ]
       },
-      "productName": "ST814",
+      "productName": "Temperature/Humidity Sensor 2.0 ST814",
       "brandName": "Everspring",
       "productLine": "Sensors",
+      "productCode": "ST814",
+      "productVersion": "2.0",
       "batteryType": "AA",
       "batteryCount": "3"
     },
@@ -101,8 +115,24 @@
           "@id": "0020"
         },
         {
+          "@id": "0031",
+          "@version": "2"
+        },
+        {
           "@id": "0060",
           "@version": "2"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0080"
         },
         {
           "@id": "0084",
@@ -114,40 +144,11 @@
         },
         {
           "@id": "0086"
-        },
-        {
-          "@id": "0080"
-        },
-        {
-          "@id": "0070"
-        },
-        {
-          "@id": "0031",
-          "@version": "2"
-        },
-        {
-          "@id": "0072"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
-        {
-          "@number": "2",
-          "@maxNodes": "3",
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Sensor Sendet Alarm Meldung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Sensor Triggered"
-              }
-            ]
-          }
-        },
         {
           "@number": "1",
           "@maxNodes": "1",
@@ -160,6 +161,30 @@
               {
                 "@xml:lang": "en",
                 "#text": "Battery Status and Sensor Report"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет для контроллера о батареи, состоянии датчиков, и сигналы тревоги от датчиков"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "3",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sensor Sendet Alarm Meldung"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Sensor Triggered"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Для устройств управляемых датчиком влажности и температуры (BASIC_SET)"
               }
             ]
           }
@@ -182,6 +207,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Basic Level Set"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Уровень диммирования, отправляемый устройствам из группы 2"
               }
             ]
           },
@@ -194,25 +223,14 @@
               {
                 "@xml:lang": "en",
                 "#text": "Set basic set value to be on or off"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять устройствам из группы 2 заданный уровень диммирования. Так можно при срабатывании датчика влажности или температуры открытия включать свет на 50% или открывать жалюзи на 30%."
               }
             ]
           },
           "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Disable"
-                  }
-                ]
-              }
-            },
             {
               "@from": "01",
               "@to": "63",
@@ -224,6 +242,30 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Use value"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Уровень диммирования"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -244,6 +286,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Temperature Trigger ON value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Температура при которой отправляется команда Включить"
               }
             ]
           },
@@ -256,6 +302,9 @@
               {
                 "@xml:lang": "en",
                 "#text": "Temperature level when a ON command is sent out"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -263,7 +312,7 @@
             {
               "@from": "ec",
               "@to": "ff",
-              "@unit": "deg",
+              "@unit": "°C",
               "description": {
                 "lang": [
                   {
@@ -272,6 +321,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Trigger On on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Температура включения (-20 ... -1)"
                   }
                 ]
               }
@@ -279,7 +332,7 @@
             {
               "@from": "00",
               "@to": "32",
-              "@unit": "deg",
+              "@unit": "°C",
               "description": {
                 "lang": [
                   {
@@ -288,6 +341,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Trigger On on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Температура включения (0 ... 50)"
                   }
                 ]
               }
@@ -303,6 +360,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -323,6 +384,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Temperature Trigger OFF value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Температура при которой отправляется команда Выключить"
               }
             ]
           },
@@ -335,6 +400,9 @@
               {
                 "@xml:lang": "en",
                 "#text": "Trigger Temperature level when a OFF command is sent out"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -342,7 +410,7 @@
             {
               "@from": "ec",
               "@to": "ff",
-              "@unit": "deg",
+              "@unit": "°C",
               "description": {
                 "lang": [
                   {
@@ -351,6 +419,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Trigger Off on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Температура выключения (-20 ... -1)"
                   }
                 ]
               }
@@ -358,7 +430,7 @@
             {
               "@from": "00",
               "@to": "32",
-              "@unit": "deg",
+              "@unit": "°C",
               "description": {
                 "lang": [
                   {
@@ -367,6 +439,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Trigger Off on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Температура выключения (0 ... 50)"
                   }
                 ]
               }
@@ -382,6 +458,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -402,6 +482,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Humidity Trigger ON value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Влажности при которой отправляется команда Включить"
               }
             ]
           },
@@ -414,6 +498,9 @@
               {
                 "@xml:lang": "en",
                 "#text": "Humidity level when a ON command is sent out"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -430,6 +517,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Trigger On on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Влажность включения"
                   }
                 ]
               }
@@ -445,6 +536,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -465,6 +560,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Humidity Trigger OFF value"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Влажности при которой отправляется команда Выключить"
               }
             ]
           },
@@ -477,6 +576,9 @@
               {
                 "@xml:lang": "en",
                 "#text": "Humidity level when a OFF command is sent out"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -493,6 +595,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Tigger Off on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Влажность выключения"
                   }
                 ]
               }
@@ -508,6 +614,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -528,6 +638,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время автоматического отчета о температуре и влажности"
               }
             ]
           },
@@ -540,25 +654,14 @@
               {
                 "@xml:lang": "en",
                 "#text": "Sets the time interval when a sensor report is sent"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Интервал времени через который будет отправляться автоматический отчет о температуре и влажности"
               }
             ]
           },
           "value": [
-            {
-              "@from": "0000",
-              "@to": "0000",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Disable"
-                  }
-                ]
-              }
-            },
             {
               "@from": "0001",
               "@to": "059f",
@@ -571,6 +674,29 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Auto report periodically"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Время отчета"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -591,6 +717,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Temperature"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Температура при изменении на которую отправляется отчет"
               }
             ]
           },
@@ -603,25 +733,14 @@
               {
                 "@xml:lang": "en",
                 "#text": "Sets the temperature change causing  a sensor report "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если задать 1°C, то при изменении температуры на 1°C будет отправлен отчет контроллеру с текущей температурой"
               }
             ]
           },
           "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Disabled"
-                  }
-                ]
-              }
-            },
             {
               "@from": "01",
               "@to": "46",
@@ -634,6 +753,29 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Auto report on temp. change"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Температура отчета"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -654,6 +796,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Humidity"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Влажность при изменении на которую отправляется отчет"
               }
             ]
           },
@@ -666,25 +812,14 @@
               {
                 "@xml:lang": "en",
                 "#text": "Sets the humidity change causing  a sensor report "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если задать 1%, то при изменении влажности на 1°C будет отправлен отчет контроллеру с текущей влажностью"
               }
             ]
           },
           "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Disable"
-                  }
-                ]
-              }
-            },
             {
               "@from": "05",
               "@to": "46",
@@ -697,6 +832,29 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Auto report on humidity change"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Влажность отчета"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -767,7 +925,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://pepper1.net/zwavedb/uploads/resources/cffa555e8e8b7ca8ba9c8ba92584fa77d6692908.gif"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/b7f7611342fb1bdf5a63e925d131c4286f97a068.png"
       }
     }
   }

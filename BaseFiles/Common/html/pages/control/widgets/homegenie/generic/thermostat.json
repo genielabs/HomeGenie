@@ -11,7 +11,9 @@
   levelKnobBindValue : 'Heating',
   
   RenderView: function (cuid, module) {
-    var displayUnit = 'Celsius'; // or 'Fahrenheit'
+    var displayUnit = 'Celsius';
+    if (HG.WebApp.Locales.GetDateEndianType() == 'M') displayUnit = 'Fahrenheit';
+    
     var container = $(cuid);
     var widget = container.find('[data-ui-field=widget]');
     var controlpopup = widget.data('ControlPopUp');
@@ -148,15 +150,6 @@
     {
       temperature = Math.round(temperatureField.Value.replace(',', '.') * 100) / 100;
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-    }
-    else 
-    {
-      temperatureField = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.TemperatureF");
-      if (temperatureField != null)
-      {
-        temperature = Math.round(temperature.Value.replace(',', '.') * 100) / 100;
-        if (displayUnit == 'Celsius') temperature = (temperature - 32) / 1.8; 
-      }
     }
     widget.find('[data-ui-field=temperature_value]').html(temperature + '&deg;');
     

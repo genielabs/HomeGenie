@@ -52,10 +52,12 @@
       },
       "inclusionNote": {
         "lang": {
-          "@xml:lang": "en"
+          "@xml:lang": "en",
+          "#text": "Button triple press"
         }
       },
-      "productName": "FIB_HC2"
+      "productName": "Double Switch",
+      "brandName": "Duwi"
     }
   }
 }

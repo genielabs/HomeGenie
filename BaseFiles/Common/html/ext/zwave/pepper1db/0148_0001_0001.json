@@ -133,6 +133,11 @@
           "@id": "0077"
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c0e7d131f5ac7428b17335b4c51a38dde55f7c8d.jpg"
+      }
     }
   }
 }

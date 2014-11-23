@@ -1,0 +1,254 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "5254"
+      },
+      "productType": {
+        "@value": "8200"
+      },
+      "productId": {
+        "@value": "8130"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "67"
+      },
+      "appVersion": {
+        "@value": "00"
+      },
+      "appSubVersion": {
+        "@value": "21"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "11"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "US"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Dimming Switch Mini Module (Dual mode)"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Triple click the PROG button within 1 second."
+        }
+      },
+      "productName": "ZDS-200US",
+      "brandName": "Remotec",
+      "productLine": "Z-Wave Home Automation",
+      "productCode": "BW8130US",
+      "productVersion": "0.21"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0026",
+          "@version": "2"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "002b"
+        },
+        {
+          "@id": "002c"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0086"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "2",
+          "@maxNodes": "4",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Dimmer mode: ZDS-200 will send out related dimming level e.g. 50% by basic set\r\ncommand to its association group automatically when ZDS-200 received the dimming\r\ncommand by local switch or wireless command e.g. 50%.\r\nSwitch mode: ZDS-200 will send out related basic set command On (0xFF) or Off (0x00)\r\nto its association group automatically when ZDS-200 received On (0xFF) or Off (0x00)\r\ncommand by local switch or wireless command respectively."
+            }
+          }
+        },
+        {
+          "@number": "1",
+          "@maxNodes": "1",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Association group_1 is used to report status change such as AUTO report to gateway."
+            }
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Activate/Deactivate All On/All Off"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 (0x00) - All On is not active, All Off is not active 1 (0x01) - All On is not active, All Off active 2 (0x02) - All On active, All Off is not active 255 (0xFF) - All On active, All Off active"
+            }
+          }
+        },
+        {
+          "@number": "5",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Switch returns to the last position saved before power failure"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 (0x00) - Switch does not save the state after power failure, it returns to \"off\" position 1 (0x01) - Switch saves its state before power failure"
+            }
+          }
+        },
+        {
+          "@number": "13",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Double click option (set to max. brightness)"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 (0x00) - Double click function disabled 1 (0x01) - Double click function enabled"
+            }
+          }
+        },
+        {
+          "@number": "17",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "03",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time of moving the Dimmer from 0% to max. dimming values."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Dimmer Mode: From 0 to 5 seconds Step size = 1 second"
+            }
+          }
+        },
+        {
+          "@number": "18",
+          "@type": "range",
+          "@size": "1",
+          "@default": "63",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Maximum Dimmer level control"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "2 (0x02) to 99 (0x63) %"
+            }
+          }
+        },
+        {
+          "@number": "19",
+          "@type": "range",
+          "@size": "1",
+          "@default": "0d",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Minimum Dimmer level control"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "1 (0x01) to 98 (0x62) %"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

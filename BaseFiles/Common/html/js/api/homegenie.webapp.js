@@ -191,7 +191,7 @@ HG.WebApp.InitializePage = function ()
     //
     setTimeout(function() {
 
-        var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+        var userLang = HG.WebApp.Locales.GetUserLanguage();
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
         // enable/disable speech input
         if (!('webkitSpeechRecognition' in window)) {
@@ -568,17 +568,32 @@ HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
 
 HG.WebApp.Utility.FormatDate = function (date)
 {
-    var dt = $.datepicker.formatDate('D, dd/mm/yy', date);
+    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dt = null;
+    if (endianType == 'M')
+        dt = $.datepicker.formatDate('D, mm/dd/yy', date);
+    else
+        dt = $.datepicker.formatDate('D, dd/mm/yy', date);
     return dt; 
 };
 
 HG.WebApp.Utility.FormatDateTime = function (date, showms)
 {
-    var hh = date.getHours().toString(); if (hh.length == 1) hh = '0' + hh;
+    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dt = null;
+    var h = date.getHours();
     var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
     var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
-    var dt = hh + ':' + mm + ':' + ss;
-    if (showms) dt += '.' + date.getMilliseconds();
+    if (endianType == 'M')
+    {
+        var ampm = (h >= 12 ? 'PM' : 'AM');
+        h = h % 12; h = (h ? h : 12);
+        dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '') + ' ' + ampm;
+    }
+    else
+    {
+        dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '');
+    }
     return dt; 
 };
 	
@@ -608,6 +623,22 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
 // info      : global utility functions
 //
 HG.WebApp.Locales = HG.WebApp.Locales || {};
+HG.WebApp.Locales.GetUserLanguage = function()
+{
+    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+    if (userLang.length > 2) userLang = userLang.substring(0, 2);
+    return userLang;
+};
+HG.WebApp.Locales.GetDateEndianType = function()
+{
+    // L = Little Endian -> DMY
+    // M = Middle Endian -> MDY
+    var endianType = 'L';
+    var testDate = new Date(98326800000);
+    var localeDateParts = testDate.toLocaleDateString().split('/');
+    if (localeDateParts[1] == '12') endianType = 'M';
+    return endianType;
+}
 HG.WebApp.Locales.Localize = function(container, langurl)
 {
     // get data via ajax 
@@ -636,7 +667,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
     });		
 };
 HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
-    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+    var userLang = HG.WebApp.Locales.GetUserLanguage();
     widgetpath = widgetpath.substring(0, widgetpath.lastIndexOf('/'));
     HG.WebApp.Locales.Localize('#' + elementid, 'pages/control/widgets/' + widgetpath + '/locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
 };

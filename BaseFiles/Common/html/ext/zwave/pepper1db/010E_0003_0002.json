@@ -50,52 +50,53 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "1000",
-      "rfFrequency": "EU"
+      "beamSensor": "1000"
     },
     "deviceDescription": {
       "description": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "Z-Wave Türschloss"
+            "@xml:lang": "en",
+            "#text": "Door Lock with Z-Wave and Bluetooth"
           },
           {
-            "@xml:lang": "en",
-            "#text": "Z-Wave Door Lock"
+            "@xml:lang": "ru",
+            "#text": "Круглый дверной замок с управлением по Z-Wave и Bluetooth"
           }
         ]
       },
       "wakeupNote": {
         "lang": [
           {
-            "@xml:lang": "de"
+            "@xml:lang": "en"
           },
           {
-            "@xml:lang": "en"
+            "@xml:lang": "ru"
           }
         ]
       },
       "inclusionNote": {
         "lang": [
           {
-            "@xml:lang": "de",
-            "#text": "User-Taste drücken und halten bis 2 mal Signalton ertönt"
+            "@xml:lang": "en",
+            "#text": "Touch the touch button in the middle of the face plate until you hear 2 beeps"
           },
           {
-            "@xml:lang": "en",
-            "#text": "Hold button untill second beep"
+            "@xml:lang": "ru",
+            "#text": "Коснитесь сенсорной кнопки в середине замка и удерживайте ее пока не прозвучат два звуковых сигнала"
           }
         ]
       },
-      "productName": "Danalock Circle",
-      "brandName": "Polycontrol",
-      "productVersion": "2.4",
-      "batteryType": "Lithium Battery Pack 3.0V",
-      "batteryCount": "1"
+      "productName": "DanaLock",
+      "brandName": "Poly-control",
+      "productVersion": "2.4"
     },
     "commandClasses": {
       "commandClass": [
+        {
+          "@id": "0020",
+          "@inNIF": "false"
+        },
         {
           "@id": "0072",
           "@secure": "true"
@@ -143,30 +144,34 @@
       "configParam": [
         {
           "@number": "1",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Drehrichtung"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Turning Direction"
+                "#text": "Invert lock direction"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Инвертировать направление движения замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert in welche Richtung der Motor das Schloss in Relation zum Schließbolzen dreht"
+                "@xml:lang": "de"
               },
               {
-                "@xml:lang": "en",
-                "#text": "parameter defines which direction the motor turns the lock in relation to the latch"
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -177,12 +182,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "in Uhrzeigerrichtung beim Schließen"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Clockwise when latching"
+                    "#text": "The motor goes clockwise when unlatched"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Мотор крутится по часовой стрелке для открытия замка"
                   }
                 ]
               }
@@ -193,12 +201,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "gegen Uhrzeigerrichtung beim Schließen"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Counterclockwise when latching"
+                    "#text": "The motor goes counterclockwise when unlatched"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Мотор крутится против часовой стрелки для открытия замка"
                   }
                 ]
               }
@@ -207,30 +218,34 @@
         },
         {
           "@number": "2",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
-          "@default": "03",
+          "@default": "05",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Drehgeschwindigkeit (Drehmoment)"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Turning Speed (Torque)"
+                "#text": "Lock Speed"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Скорость замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert, ob Motor langsam (mehr Drehmoment) oder schnell (weniger Drehmoment) dreht"
+                "@xml:lang": "de"
               },
               {
-                "@xml:lang": "en",
-                "#text": "parameter defines whether the motor goes slower (more torque) or faster (less torque) when turning the lock"
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -241,12 +256,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "niedrigste Geschwindigkeit, höchstes Drehmoment"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Slowest Speed, Strongest Torque"
+                    "#text": "Slowest"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Очень медленно"
                   }
                 ]
               }
@@ -257,12 +275,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "niedrige Geschwindigkeit, hoches Drehmoment"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Slow Speed, Stronger Torque"
+                    "#text": "Slow"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Медленно"
                   }
                 ]
               }
@@ -273,12 +294,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "normale Geschwindigkeit, normales Drehmoment"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Normal Speed,\tNormal Torque"
+                    "#text": "Normal"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Нормально"
                   }
                 ]
               }
@@ -289,12 +313,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "hohe Geschwindigkeit, geringes Drehmoment"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Fast Speed, Weak Torque"
+                    "#text": "Fast"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Быстро"
                   }
                 ]
               }
@@ -305,12 +332,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "höchste Geschwindigkeit, geringstes Drehmoment"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Fastest Speed, Weakest Torque"
+                    "#text": "Fastest"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Очень быстро"
                   }
                 ]
               }
@@ -319,30 +349,34 @@
         },
         {
           "@number": "3",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "01",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Drehmoment-Einstellung"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Torque Setup"
+                "#text": "Lock Mode"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Режим замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert ob Motor mit viel oder wenig Drehmoment dreht beim Öffnen/Schließen (weniger Drehmoment spart Energie)"
+                "@xml:lang": "de"
               },
               {
-                "@xml:lang": "en",
-                "#text": "parameter defines if more or less torque is used at latch/unlatch operations (less torque safes power)"
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -353,12 +387,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "geringes Drehmoment, Energiespar-Modus"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Less torque, Power Saving mode\t"
+                    "#text": "Stepper motor mode wave drive (Power saving)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Шаговый двигатель работает в режиме ШИМ (энергосбережение)"
                   }
                 ]
               }
@@ -369,12 +406,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Normaler Modus"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Normal Mode"
+                    "#text": "Stepper motor mode full drive(Normal)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Шаговый двигатель работает на полную мощность"
                   }
                 ]
               }
@@ -389,40 +429,46 @@
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Drehwinkel"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Turning degrees"
+                "#text": "Lock Turn degrees"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Градус поворота замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert wieviel Grad das Schloss dreht bei Öffnen/Schließen"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter defines how many degrees the lock turns at latch/unlatch operations"
+                "#text": "Factor 10 turn degrees ( 1 = 10 degrees, 9 = 90 degrees etc)."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "1 = 10 градусов, 9 = 90 градусов."
               }
             ]
           },
           "value": {
             "@from": "01",
             "@to": "64",
-            "@unit": "*10°",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "Faktor 10;\r\n1 = 10°;\r\n72 = 720° = 2 Umdrehungen"
+                  "@xml:lang": "de"
                 },
                 {
-                  "@xml:lang": "en",
-                  "#text": "factor 10;\r\n1 = 10°;\r\n72 = 720° = 2 turns"
+                  "@xml:lang": "en"
+                },
+                {
+                  "@xml:lang": "ru"
                 }
               ]
             }
@@ -436,24 +482,30 @@
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Auto Schließ-Zeit Verzögerung"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Auto Latch Time Delay"
+                "#text": "Lock Normal closed time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Автозакрытие замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert nach wievielen Sekunden nach dem Öffnen das Schloss automatisch wieder schließt"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter defines amount of seconds after opening the door automatically locks again"
+                "#text": "How many seconds from the lock has been unlatched to it automatically should close again. If 0 then it is disabled."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Через сколько секунд после открытия, замок автоматически закроется."
               }
             ]
           },
@@ -464,12 +516,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Inaktiv"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -477,16 +532,18 @@
             {
               "@from": "01",
               "@to": "3c",
-              "@unit": "s",
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Verzögerung nach dem Öffnen in Sekunden"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "delay after opening in seconds"
+                    "#text": "seconds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "секунды"
                   }
                 ]
               }
@@ -495,30 +552,36 @@
         },
         {
           "@number": "6",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "01",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Klang-Einstellungen"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Sound setup"
+                "#text": "Lock Sound"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Звук замка"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert, ob ein akustisches Signal das Öffnen/Schließen bestätigt"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter defines if an acoustic signal confirms latch/unlatch operations"
+                "#text": "Disable or enable the beep sound from latch or unlatch operations."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Звук при открытии или закрытии замка."
               }
             ]
           },
@@ -529,12 +592,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "akustisches Signal deaktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Latch/unlatch Sound disabled "
+                    "#text": "Disable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
                   }
                 ]
               }
@@ -545,12 +611,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "akustisches Signal aktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Latch/unlatch Sound enabled"
+                    "#text": "Enable"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включено"
                   }
                 ]
               }
@@ -559,30 +628,36 @@
         },
         {
           "@number": "7",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Batterie-Typ"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Battery Type"
+                "#text": "Battery type"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Тип батареи"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert mit welchem Batterie-Typ (Spannung) das Gerät betrieben wird; Wert sollte nicht geändert werden!"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter defines the battery type (voltage) is used to power the device; value shouldn't be changed!"
+                "#text": "Set the type of battery that powers the device. This affect the returned battery state."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Выберите тип используемом батареи, чтобы замок правильно сообщал о ее заряде."
               }
             ]
           },
@@ -593,12 +668,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "3.6 Volt Batterie-Typ"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "3.6 volt battery type"
+                    "#text": "3.6 V"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "3.6 В"
                   }
                 ]
               }
@@ -609,12 +687,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "3.0 Volt Batterie-Typ"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "3.0 volt battery type"
+                    "#text": "3.0 V"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "3.0 В"
                   }
                 ]
               }
@@ -625,44 +706,52 @@
           "@number": "8",
           "@type": "range",
           "@size": "1",
-          "@default": "1e",
+          "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Batterie Alarm Wert"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Battery Alarm Value Threshold"
+                "#text": "Battery alarm percent"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Звук при низком заряде батареи"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Parameter definiert einen Batterie-Status Prozentwert, der beim Unterschreiten zu einem akustischen Signal nach dem Öffnen/Schließen führt"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter defines the percent battery status threshold underrun which leads to an acoustic signal after latch/unlatch operations"
+                "#text": "When the battery level is equal to, or under this value. The device will notify with a beep sound after latch or unlatch."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "При каком заряде батареи замок должен издавать звуковой сигнал"
               }
             ]
           },
           "value": {
             "@from": "00",
             "@to": "64",
-            "@unit": "%",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de",
-                  "#text": "0-100%"
+                  "@xml:lang": "de"
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "0-100%"
+                  "#text": "Battery level %"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "Заряд батареи %"
                 }
               ]
             }
@@ -672,7 +761,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f27398fa27df5c74859210415932a7a9cb5cb231.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/707d5878e5368c1a286cf8ac251664d6ae861ac6.jpg"
       }
     }
   }

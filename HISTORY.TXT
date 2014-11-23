@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+23/11/2014 1.00 beta rev 429
+    - Should fix DHT-11 / DHT-22 values reading issues
+    - Added When.SystemStarted / When.SystemStopping events
+    - Fixed display unit as Celsius/Fahrenheit based on user's locale settings
+    - Deprecated Sensor.Temperature parameter
+    - Added support for middle endian date/time formatting
+    - Updated Pepper1 Z-Wave database (30+ new devices supported)
+
 22/11/2014 1.00 beta rev 428
     - Added program status led in the program editor
     - Better Arduino compiler errors parsing/reporting

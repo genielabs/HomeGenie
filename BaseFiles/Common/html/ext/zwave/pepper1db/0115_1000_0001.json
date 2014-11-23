@@ -51,7 +51,7 @@
         "@value": "true"
       },
       "beamSensor": "0",
-      "rfFrequency": "Russia"
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {

@@ -1,0 +1,143 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "013c"
+      },
+      "productType": {
+        "@value": "0001"
+      },
+      "productId": {
+        "@value": "0011"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "83"
+      },
+      "appVersion": {
+        "@value": "01"
+      },
+      "appSubVersion": {
+        "@value": "08"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "beamSensor": "0"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      }
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "005e",
+          "@version": "2"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0098"
+        },
+        {
+          "@id": "005a"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0059"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0025"
+        },
+        {
+          "@id": "0020"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0032",
+          "@version": "3"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071"
+        },
+        {
+          "@id": "0075",
+          "@version": "2"
+        },
+        {
+          "@id": "007a",
+          "@version": "2"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "1",
+        "description": {
+          "lang": {
+            "@xml:lang": "en"
+          }
+        }
+      }
+    }
+  }
+}

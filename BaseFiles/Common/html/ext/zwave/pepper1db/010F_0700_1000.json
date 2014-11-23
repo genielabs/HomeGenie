@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "2a"
+        "@value": "67"
       },
       "appVersion": {
         "@value": "02"
       },
       "appSubVersion": {
-        "@value": "01"
+        "@value": "05"
       },
       "basicClass": {
         "@value": "04"
@@ -48,156 +48,113 @@
         "@value": "false"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
       "beamSensor": "0",
       "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "en",
-            "#text": "Door/Window Sensor"
-          },
-          {
-            "@xml:lang": "ru",
-            "#text": "Датчик открытия дверей/окон"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Door/Window Sensor"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "en",
-            "#text": "Triple press TMP button"
-          },
-          {
-            "@xml:lang": "ru",
-            "#text": "Тройное нажатие кнопки TMP"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Pressing the TMP button."
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "en",
-            "#text": "Triple press TMP button"
-          },
-          {
-            "@xml:lang": "ru",
-            "#text": "Тройное нажатие кнопки TMP"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "The Fibaro Door/Window Sensor is added to the network by quickly\r\npressing the TMP button three times (the button is located on the\r\nunderside of the device, inside its casing).One of the buttons needs to be pressed constantly."
+        }
       },
-      "productName": "Door/Window Sensor FGK-101 - 107",
+      "productName": "FGK Door/Window Sensor 2.5",
       "brandName": "Fibaro",
-      "productCode": "FGK-101",
-      "productVersion": "2.1",
-      "batteryType": "ER14250 (1/2AA)",
+      "productLine": "Fibaro",
+      "productCode": "10x",
+      "productVersion": "2.5",
+      "batteryType": "ER14250",
       "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
         {
+          "@id": "0030"
+        },
+        {
+          "@id": "009c"
+        },
+        {
           "@id": "0060",
-          "@version": "2"
-        },
-        {
-          "@id": "0020",
-          "@inNIF": "false"
-        },
-        {
-          "@id": "0084"
+          "@version": "3"
         },
         {
           "@id": "0085",
           "@version": "2"
         },
         {
-          "@id": "0086"
-        },
-        {
-          "@id": "0030"
-        },
-        {
-          "@id": "0080"
+          "@id": "0072"
         },
         {
           "@id": "0070"
         },
         {
-          "@id": "0072"
+          "@id": "0086"
         },
         {
-          "@id": "007a"
+          "@id": "0080"
         },
         {
-          "@id": "009c",
-          "@version": "0"
+          "@id": "0056"
+        },
+        {
+          "@id": "0084"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "002b",
+          "@controlled": "true",
+          "@inNIF": "false"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
         {
-          "@number": "1",
+          "@number": "3",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Auslösen des Einganges IN1 und des Magnetsensors (Sendet BASIC und ALARM)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Group I is assigned to input IN1 (and the magnetic sensor). Sending BASIC SET or ALARM command frames. "
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Устройства управляемые событиями открытия/закрытия и входом IN1. Отправляется Basic Set или Alarm."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Group III reports on the condition of the device, only one device\r\nmay be assigned to the group (main controller, by default)."
+            }
           }
         },
         {
           "@number": "2",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Auslösen des Manipulationsschutzes (Sendet ALARM)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Group II is assigned to TMP button. Once the button is released, ALARM GENERIC frame is sent to associated devices."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Устройства управляемые кнопкой TMP. При отпускании кнопки отправляется Alarm Generic"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Group II is assigned to TMP button. Once the button is released,\r\nALARM GENERIC frame is sent to associated devices."
+            }
           }
         },
         {
-          "@number": "3",
-          "@maxNodes": "1",
+          "@number": "1",
+          "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Report des Gerätestatus"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Group III reports on the condition of the device, only one device may be assigned to the group (main controller, by default)."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправлять отчет об изменении состояния устройства, заряда батареи и температуры"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Group I is assigned to input IN1 (and the magnetic sensor).\r\nSending BASIC SET or ALARM command frames."
+            }
           }
         }
       ]
@@ -210,591 +167,125 @@
           "@size": "2",
           "@default": "0000",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Alarm Verzögerung Eingang IN "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Input IN alarm cancellation delay"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Через  какое время отправлять команду - окно закрыто"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Input IN alarm cancellation delay."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "ermöglicht, das Auslösen eines Alarms durch Signal an Eingang IN zu verzögern"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Additional delay after an alarm from input IN has ceased. The parameter allows user to specify additional time, after which the input IN alarm is cancelled once its violation has ceased. "
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "При открытии окна или размыкании IN и GND мгновенно отправляется команда - окно открыто. Но после закрытия окна или замыкания IN и GND команду - окно закрыто, можно отправить с задержкой. Это удобно при быстрых открытиях/закрытиях, чтобы устройство управляемое датчиком не выключалось после каждого закрытия."
-              }
-            ]
-          },
-          "value": {
-            "@from": "0000",
-            "@to": "ffff",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Sekunden"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "seconds"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "секунды"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Additional delay after an alarm from input IN has ceased. The\r\nparameter allows user to specify additional time, after which the\r\ninput IN alarm is cancelled once its violation has ceased.\r\nDefault value: 0\r\nAvailable parameter settings: 0 – 65535 s"
             }
           }
         },
         {
           "@number": "2",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Anzeige der Statusänderung durch LED"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Status change signalled by LED"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Режим световой индикации"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Status change signalled by LED."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "LED geht aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "LED turned Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "LED отключен"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "LED geht an"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "LED turned On"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "LED включен"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Default setting: 1\r\nAvailable parameter settings:\r\n0 - LED turned Off,\r\n1 - LED turned On."
             }
-          ]
+          }
         },
         {
           "@number": "3",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Typ des Eingangssignals an IN"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Type of IN input"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Тип входа IN"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Type of IN input."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": " normaler Schließer"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Normal Close"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": " Нормально замкнут"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Normaler Öffner"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Normal Open"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Нормально разомкнут"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Monostabil"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Mono Stable"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Моностабильный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "bistabil"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "bistable"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Бистабильный"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Default value: 0 – INPUT_NC (Normal Close)\r\nAvailable parameter settings:\r\n0 – INPUT_NC (Normal Close)\r\n1 – INPUT_NO (Normal Open)\r\n2 – INPUT_MONOSTABLE\r\n3 – INPUT_BISTABLE"
             }
-          ]
+          }
         },
         {
           "@number": "5",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "ff",
+          "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": " Art der Alarmmeldung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Type of control frame transmitted for association group 1, activated via IN input"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": " Тип сигнала тревоги, отправляемый устройствам из группы 1"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Type of control frame transmitted for association group 1, activated via IN input."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": " erlaubt die Art der Alarmmeldung des Gerätes zu spezifizieren."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The parameter allows you to specify the type of an alarm frame or to force control frames transmission (BASIC_SET)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Устройства из группы 1 управляются входом IN или магнитом. При размыкании IN и GND или сенсора и магнита этим устройствам отправляется сигнал тревоги."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Allgemeiner Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM GENERIC frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Общий сигнал тревоги"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rauchmelder"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM SMOKE frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Задымление"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Kohlenmonoxid-Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM CO frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Угарный газ "
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Kohlendioxid-Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM CO2 frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Углекислый газ"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Überhitzungs-Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM HEAT frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Высокая температура"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "05",
-              "@to": "05",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Überflutungs-Alarm"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM WATER frame"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Протечка"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "ff",
-              "@to": "ff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "BASIC SET Kommando"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Control frame BASIC_SET"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "BASIC_SET"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The parameter allows you to specify the type of an\r\nalarm frame or to force control frames transmission (BASIC_SET)\r\nDefault value: 255 – BASIC SET\r\nAvailable parameter settings:\r\n1 – ALARM SMOKE frame\r\n2 – ALARM CO frame\r\n3 – ALARM CO2 frame\r\n4 – ALARM HEAT frame\r\n5 – ALARM WATER frame\r\n255 – Control frame BASIC_SET"
             }
-          ]
+          }
         },
         {
           "@number": "7",
-          "@type": "range",
-          "@size": "1",
-          "@default": "ff",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Dimmer/Motorsteuerung Niveau bei Alarmsteuerung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Value of the parameter specifying the forced level of dimming/opening roller blinds when “switch on”/”open” commands are sent to devices from association group no.1"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "ровень диммирования, отправляемый устройствам из группы 1"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": " Im Alarmfall wird eine Alarmmeldung ausgesendet und es kann ein Aktor geschaltet werden. Für Dimmer und Jalousiecontroller kann definiert werden, auf welches Dimmerniveau oder welche Motorposition der Aktor gesteuert werden soll"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "In case of alarm frames an alarm priority is specified. Value of 255 makes it possible to activate a device. In case of the Dimmer module it means activating the device and setting it to the\npreviously stored condition, e.g. when Dimmer is set to 30%, deactivated and then reactivated using 255 commend, it will be automatically set to the previous condition i.e. 30%.\n"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправлять устройствам из группы 1 заданный уровень диммирования. Так можно при срабатывании датчика открытия включать свет на 50% или открывать жалюзи на 30%."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "01",
-              "@to": "63",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Dimmerniveau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Dimming level"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Уровень диммирования"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "ff",
-              "@to": "ff",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Turn On"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Включить"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "@number": "9",
           "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Senden einer Alarmdeaktivierungsnachricht "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Deactivating transmission of the alarm cancelling frame or the control frame deactivating the device (Basic)"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправлять устройствам из группы 1 сигнал тревоги или команду отключения"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Value of the parameter specifying the forced level of dimming/opening roller blinds when “switch on”/”open” commands are sent to devices from association group no.1."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": " Es wird definiert, das Verschwinden der Alarmbedingung zum erneuten Schalten eines Aktors oder zum Aussenden einer Alarmdeaktivierungsnachricht führen soll."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "It allows for disabling the function of deactivating the device and cancelling alarms for devices associated with IN input."
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Deactivating transmission of the alarm cancelling frame or the control frame deactivating the device (Basic). It allows for disabling\nthe function of deactivating the device and cancelling alarms for devices associated with IN input."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Information wird gesendet an Gruppe 1"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "for association group no. 1 information is sent\n\n"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Отправлять"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Information wird  nicht gesendet"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "for association group no. 1 information is not sent"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не отправлять"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "In case of alarm frames an alarm priority is specified.\r\nDefault value: 255\r\nPossible parameter settings: (1 – 99) and 255\r\nValue of 255 makes it possible to activate a device. In case of the\r\nDimmer module it means activating the device and setting it to the\r\npreviously stored condition, e.g. when Dimmer is set to 30%,\r\ndeactivated and then reactivated using 255 commend, it will be\r\nautomatically set to the previous condition i.e. 30%."
             }
-          ]
+          }
+        },
+        {
+          "@number": "9",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Deactivating transmission of the alarm cancelling frame or the control frame deactivating the device (Basic)."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "It allows for disabling\r\nthe function of deactivating the device and cancelling alarms for\r\ndevices associated with IN input.\r\nDefault value: 0\r\nAvailable parameter settings:\r\n0 – for association group no. 1 information is sent\r\n1 – for association group no. 1 information is not sent."
+            }
+          }
+        },
+        {
+          "@number": "10",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Tamper alarm."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Default value: 1\r\n0 - Tamper alarm cancellation inactive\r\n1 - Tamper alarm cancellation active"
+            }
+          }
         },
         {
           "@number": "12",
@@ -802,257 +293,71 @@
           "@size": "1",
           "@default": "08",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Schwellwert zum Aussenden eines Temperatur-Reports"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Sensitivity to temperature changes"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправлять отчет при изменении температуры на Температура = значение/16 "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Sensitivity to temperature changes. The maximum acceptable difference between the last reported temperature and the current temperature read from the sensor."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Es wird die Abweichung der gemessenen Temperatur zur letzten per Funk gesendeten Temperatur definiert, die zu einem erneuten Report der Temperatur an die Geräte in Assoziationsgruppe 3 führt. Ist der Wert = Null, wird ein Temperatur mindestens aller 4 Minuten oder bei jedem Aufweckintervall gesendet. "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The maximum acceptable difference between the last reported temperature and the current temperature read from the sensor. If the temperatures differ by the set value or more, a report with the current temperature value is sent to the device assigned to association group no. 3.\n\nTo set an appropriate parameter value use the following formula:\n\nx = delta T x 16 - for Celsius;\n\nx = delta T x 80 / 9 - for Fahrenheit;\n\nx = parameter value;\n\ndelta T – maximum acceptable temperature gradient in Celsius or\n\nFahrenheit.\n\nIf the value is set to 0:\n\n- if the wake-up interval is set to 255 seconds, temperature report\n\nwill be sent according to the interval;\n\n- if the wake-up interval is set to over 255, temperature report will be\n\nsent each ca. 4 minutes.\n\nAvailable parameter settings: 0 – 255 [0oC to 16oC] [32oF –\n\n60,8oF]\n\n\n\n"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Если с последнего замера температура изменилась больше чем на заданное значение, например 0.5 градусов, то будет отправлен отчет устройству из группы 3. Значение для градусов Цельсия высчитывается по формуле: X = deltaT*16; X - нужное значение; deltaT - разница температур (например 0.5);\n\nЕсли мы хотим получать отчет при изменении температуры на 0.5 градусов формула такова: 8 = 0.5*15. Если задано значение 0 и интервал пробуждения 255 секунд, то отчет о температуре будет присылаться при пробуждении (каждые 255 секунд). Если задано 0 и интервал пробуждения больше 255, то отчет будет присылаться каждые 4 минуты."
-              }
-            ]
-          },
-          "value": {
-            "@from": "00",
-            "@to": "ff",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "1/16 K"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "1/16 K"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "1/16 K"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "If the temperatures differ by the\r\nset value or more, a report with the current temperature value is\r\nsent to the device assigned to association group no. 3.\r\nDefault value: 8 [0,5oC]\r\nAvailable parameter settings: 0 – 255 [0oC to 16oC] [32oF – 60,8oF]\r\nTo set an appropriate parameter value use the following formula:\r\nx = delta T x 16 - for Celsius\r\nx = delta T x 80 / 9 - for Fahrenheit\r\nx = parameter value\r\ndelta T – maximum acceptable temperature gradient in Celsius or\r\nFahrenheit\r\nIf the value is set to 0:\r\n- if the wake-up interval is set to 255 seconds, temperature report\r\nwill be sent according to the interval,\r\n- if the wake-up interval is set to over 255, temperature report will be\r\nsent each ca. 4 minutes."
             }
           }
         },
         {
           "@number": "13",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Sendemodus für Alarm-Nachricht "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Sending an alarm or control frame (for IN input, depending on parameter no.5 value), and TMP button alarm frame"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Отправлять широковещательные сообщения от IN и TMP "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Sending an alarm or control frame (for IN input, depending on parameter no.5 value), and TMP button alarm frame."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Definiert, wie Alarmmeldungen gesendet werden. Nachrichten im Broadcast Mode werden von allen umgebenden Geräten empfangen jedoch nicht geroutet. "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The frame is sent in “broadcast” mode, i.e. to all devices within range - information sent in this mode is not repeated by the mesh network. "
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Широковещательные сообщения отправляются всем устройствам в сети."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "IN und TMP Broadcast inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "IN and TMP Broadcast mode inactive"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "от IN не отправлять, от TMP не отправлять"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "IN Broadcast aktiv, TMP Broadcast inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "IN broadcast mode active, TMP broadcast mode inactive"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "от IN отправлять, от TMP не отправлять"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "IN Broadcast inaktiv und TMP Broadcast aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "IN broadcast mode inactive, TMP broadcast mode active"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "от IN не отправлять, от TMP отправлять"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "IN und TMP Broadcast aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "IN and TMP broadcast mode active"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "от IN отправлять, от TMP отправлять"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The frame is\r\nsent in “broadcast” mode, i.e. to all devices within range -\r\ninformation sent in this mode is not repeated by the mesh network.\r\nDefault value: 0\r\nAvailable parameter settings:\r\n0 – IN and TMP Broadcast mode inactive,\r\n1 – IN broadcast mode active, TMP broadcast mode inactive\r\n2 – IN broadcast mode inactive, TMP broadcast mode active\r\n3 – IN and TMP broadcast mode active"
             }
-          ]
+          }
         },
         {
           "@number": "14",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Szenenaktivierungsoption des Eingangs IN"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Scene activation functionality"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Использовать сцены"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Scene activation functionality."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "von \"AUS\" nach \"EIN\" generiert id 10, von \"EIN\" nach \"AUS\" generiert id 11, Taste gedrückt halten generiert id 12, Loslassen generiert id 13, Doppelklick generiert id 14, Dreifachklick generiert id 15: Achtung: Szenenaktivierung entlädt die Batterie schneller. "
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "IN input:\n\nSwitch from “off” to “on” ID10;\n\nSwitch from “on” to “off” ID11;\n\nRemaining IDs are recognized correctly if the value of parameter\n\nno.3 was set to 2\n\nHolding down ID12;\n\nReleasing ID13;\n\nDouble click ID14;\n\nTriple click ID 15;\n\nScene activation functionality may shorten the battery \n\nlife, even by 25%. "
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Это устройство позволяет выполнять сцены. Команды на выполнения сцен отправляются устройствам находящимся в группе 3. Контроллеры, такие как Home Center 2, Z-Box понимают эти команды и могут исполнить сцену, ID которой указан в команде. Нажатие кнопки подключенной к IN отправляет определенный ID. Таким образом можно по двойному нажатию запускать сцену \"Включить везде свет\", а по тройному \"Выключить везде свет\". Для бистабильного выключателя: ID 10 - переключение с ВЫКЛ на ВКЛ; ID 11 - переключение с ВКЛ на ВЫКЛ. Для моностабильного выключателя: ID 12 - удержание; ID 13 - отпускание; ID 14 - двойное нажатие; ID 15 - тройное нажатие."
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Deaktiviert "
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "functionality deactivated "
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Не использовать"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aktiviert "
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "functionality activated"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Использовать"
-                  }
-                ]
-              }
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available parameter settings:\r\n0 - functionality deactivated\r\n1 - functionality activated\r\nThe device offers the possibility of sending commands compatible\r\nwith Command class scene activation. Information is sent to\r\ndevices assigned to association group no. 3\r\nControllers such as the Home Center 2 are able to interpret such\r\ncommands and based on these commands activate scenes, to\r\nwhich specific scene IDs have been assigned. The user may\r\nexpand the functionality of a button connected to IN input by\r\ndistinguishing the sequence of it being pushed. For example:\r\ndouble click would trigger the “goodnight” scene and triple click\r\nwould trigger the “morning” scene. To fully use the possibilities\r\noffered by the parameter no.14 it is recommended to use a\r\nmomentary or a toggle switch (parameter no.3).\r\nScene ID is determined in the following manner:\r\nIN input:\r\nSwitch from “off” to “on” ID10\r\nSwitch from “on” to “off” ID11\r\nRemaining IDs are recognized correctly if the value of parameter\r\nno.3 was set to 2\r\nHolding down ID12\r\nReleasing ID13\r\nDouble click ID14\r\nTriple click ID15"
             }
-          ]
+          }
+        },
+        {
+          "@number": "15",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "READ ONLY Parameter - can not set values"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The parameter value is automatically sent to the association group\r\nIII if the connected sensor DS18B20 four times mistakenly read the\r\ntemperature. In case of Wake Up Interval set for 4000 seconds\r\ntemperature sensor will be checked every 5 minutes.\r\n0 - DS18B20 is working properly\r\n1 - DS18B20 is not working properly\r\n255 - No DS18B20 temperature sensor."
+            }
+          }
         }
       ]
     },
@@ -1061,24 +366,14 @@
         {
           "@number": "2",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "genericClass": {
             "@value": "21"
@@ -1086,36 +381,21 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": [
-            {
-              "@id": "0020"
-            },
-            {
-              "@id": "0031"
-            }
-          ]
+          "commandClass": {
+            "@id": "0031"
+          }
         },
         {
           "@number": "1",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "en"
-              },
-              {
-                "@xml:lang": "ru"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "genericClass": {
             "@value": "20"
@@ -1123,20 +403,15 @@
           "specificClass": {
             "@value": "01"
           },
-          "commandClass": [
-            {
-              "@id": "0030"
-            },
-            {
-              "@id": "0020"
-            }
-          ]
+          "commandClass": {
+            "@id": "0030"
+          }
         }
       ]
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/caaee9747e7cd1f6c4d6d69103b2cb789164cea0.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/8a77269b55c554d5a690c03b82b6bbdcda07c164.jpg"
       }
     }
   }

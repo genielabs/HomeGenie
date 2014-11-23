@@ -24,13 +24,13 @@
         "@value": "02"
       },
       "protoSubVersion": {
-        "@value": "40"
+        "@value": "18"
       },
       "appVersion": {
-        "@value": "01"
+        "@value": "00"
       },
       "appSubVersion": {
-        "@value": "02"
+        "@value": "01"
       },
       "basicClass": {
         "@value": "03"
@@ -57,11 +57,11 @@
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "Schalter Zwischenstecker"
+            "#text": "Lampenfassung mit Schalter"
           },
           {
             "@xml:lang": "en",
-            "#text": "Switch Plugin"
+            "#text": "Lamp Holder Switch"
           }
         ]
       },
@@ -87,9 +87,9 @@
           }
         ]
       },
-      "productName": "AN157",
+      "productName": "AN145",
       "brandName": "Everspring",
-      "productLine": "Plugins"
+      "productLine": "Z-Wave"
     },
     "commandClasses": {
       "commandClass": [
@@ -98,7 +98,8 @@
           "@inNIF": "false"
         },
         {
-          "@id": "0025"
+          "@id": "0085",
+          "@version": "0"
         },
         {
           "@id": "0086"
@@ -114,12 +115,37 @@
         },
         {
           "@id": "0075"
+        },
+        {
+          "@id": "0025"
         }
       ]
     },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "5",
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de",
+              "#text": "Geräte, die bei Alarm informiert werden"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Devices are switched by local button"
+            },
+            {
+              "@xml:lang": "ru",
+              "#text": "Устройства, которые получают сигналы тревоги"
+            }
+          ]
+        }
+      }
+    },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/3a4da64b4cf9113502efc93871a00800dadc46e2.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/8cee1997e331dd10317f8f94a06ed281df2c4601.gif"
       }
     }
   }

@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:50.96018Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:12.710583Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:51.465499Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:13.208984Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:51.966307Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:13.70992Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:31:26.192514Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:43:45.480847Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -659,21 +659,20 @@ When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt;
   	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
 });
 
-int[] data = new int[5];
+var dataPin = ConnectorPin.P1Pin16.ToProcessor();
+var driver = new MemoryGpioConnectionDriver();
 
 while (Program.IsEnabled)
 {
-  	for(int a = 0; a &lt; 30; a++)
+	int[] data = new int[5];
+	for(int a = 0; a &lt; 30; a++)
     {
-        var irpin = ConnectorPin.P1Pin16.ToProcessor();
-        MemoryGpioConnectionDriver driver = new MemoryGpioConnectionDriver();
-        //
-        driver.Allocate(irpin, PinDirection.Output);
-        driver.Write(irpin, false);
-        Pause(0.0095);
-        driver.Write(irpin, true);
+        driver.Allocate(dataPin, PinDirection.Output);
+        driver.Write(dataPin, false);
+        Pause(0.018);
+        driver.Write(dataPin, true);
         //  
-        driver.Allocate(irpin, PinDirection.Input);
+        driver.Allocate(dataPin, PinDirection.Input);
         //
         int i = 0;
         data = new int[5];
@@ -682,21 +681,24 @@ while (Program.IsEnabled)
         bool laststate = true;  
         //
         // detect change and read data
-        for ( i=0; i&lt; 85; i++) {
+        for ( i=0; i&lt; 85; i++) 
+        {
           counter = 0;
-          while (driver.Read(irpin) == laststate) {
-            counter++;
+          while (driver.Read(dataPin) == laststate) 
+          {
             //Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
-            if (counter == 255) {
+            if (++counter == 255) 
+            {
               break;
             }
           }
-          laststate = driver.Read(irpin);
+          laststate = driver.Read(dataPin);
       
           if (counter == 255) break;
       
           // ignore first 3 transitions
-          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) {
+          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) 
+          {
             // shove each bit into the storage bytes
             data[j/8] &lt;&lt;= 1;
             if (counter &gt; 40)
@@ -707,21 +709,16 @@ while (Program.IsEnabled)
         // 
         if ((j &gt;= 40) &amp;&amp; (data[4] == ((data[0] + data[1] + data[2] + data[3]) &amp; 0xFF)) ) 
         {
-            data[2] = data[2] - 3; // temperature adjustment, due to heat excess inside the HG box
-            double f = data[2] * 9D / 5D + 32;
-            //Console.WriteLine("\n\nHumidity = {0}.{1} %\nTemperature = {2}.{3} *C ({4} *F)\n\n", 
-            //      			data[0], data[1], data[2], data[3], f);
+            data[2] = data[2] - 3; // temperature adjustment, dunno exactly why this tuning is needed
           
           	var hum = data[0] + "." + data[1];
           	var tempc = data[2] + "." + data[3];
-          	var tempf = f.ToString();
           	//if (hum != Program.Parameter("Sensor.Humidity").Value)
             {
               	Program.RaiseEvent("Sensor.Humidity", hum, "DHT-11 Sensor");
             }
           	//if (tempc != Program.Parameter("Sensor.Temperature").Value)
             {
-                Program.RaiseEvent("Sensor.TemperatureF", tempf, "DHT-11 Sensor");
                 Program.RaiseEvent("Sensor.Temperature", tempc, "DHT-11 Sensor");
             }
             break;
@@ -742,7 +739,6 @@ while (Program.IsEnabled)
   	var pause = Program.InputField("UpdateInterval").DecimalValue;
   	if (pause == 0) pause = 600; // default pause is 10 minutes
   	Pause(pause);
-
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
@@ -752,7 +748,7 @@ while (Program.IsEnabled)
     <Address>70</Address>
     <Name>DHT-11 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-11 with data pin on GPIO#23. 
-Edit program code line #19 to change the data pin GPIO.
+Edit program code line #13 to change the data pin GPIO.
 See example video at http://homegenie.it/docs/diy/eden.php .</Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
@@ -1220,7 +1216,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:52.962989Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:14.706225Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1275,7 +1271,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:53.464075Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:15.208353Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1570,7 +1566,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:53.966639Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:15.713559Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1651,7 +1647,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:54.463876Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:16.209058Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1721,7 +1717,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:54.965811Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:16.709613Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1987,7 +1983,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:55.467338Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:17.212117Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2353,7 +2349,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:56.468455Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:18.212141Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2415,7 +2411,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:56.967673Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:18.712502Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2572,7 +2568,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:57.468667Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:19.213683Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2836,7 +2832,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-21T14:27:57.971604Z</TriggerTime>
+    <TriggerTime>2014-11-23T10:42:19.717429Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6115,25 +6111,25 @@ When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt;
   	return "{ 'ResponseValue' : '" + Program.Parameter("Sensor.Humidity").Value + "' }";
 });
 
-int[] data = new int[5];
+var dataPin = ConnectorPin.P1Pin7.ToProcessor();
+var driver = new MemoryGpioConnectionDriver();
 
-var irpin = ConnectorPin.P1Pin7.ToProcessor();
-MemoryGpioConnectionDriver driver = new MemoryGpioConnectionDriver();
 while (Program.IsEnabled)
 {
-    driver.Allocate(irpin, PinDirection.Output);
-    driver.Write(irpin, true);
+    driver.Allocate(dataPin, PinDirection.Output);
+    driver.Write(dataPin, true);
     //Pause(5);
+	int[] data = new int[5];
   	for(int a = 0; a &lt; 30; a++)
     {
-        driver.Allocate(irpin, PinDirection.Output);
-        driver.Write(irpin, false);
-        Pause(0.0018);
+        driver.Allocate(dataPin, PinDirection.Output);
+        driver.Write(dataPin, false);
+        Pause(0.018);
         //Pause(0.0006);
-        //driver.Write(irpin, true);
+        //driver.Write(dataPin, true);
         //Pause(0.001);
         //  
-        driver.Allocate(irpin, PinDirection.Input);
+        driver.Allocate(dataPin, PinDirection.Input);
         //
         int i = 0;
         data = new int[5];
@@ -6142,20 +6138,24 @@ while (Program.IsEnabled)
         bool laststate = true;  
         //
         // detect change and read data
-        for ( i=0; i&lt;= 85; i++) {
+        for ( i=0; i&lt;= 85; i++) 
+        {
           counter = 0;
-          while (driver.Read(irpin) == laststate) {
+          while (driver.Read(dataPin) == laststate) 
+          {
             //Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
-            if (++counter == 255) {
+            if (++counter == 255) 
+            {
               break;
             }
           }
-          laststate = driver.Read(irpin);
+          laststate = driver.Read(dataPin);
           //Console.WriteLine(i);
           if (counter == 255) break;
       
           // ignore first 3 transitions
-          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) {
+          if ((i &gt;= 4) &amp;&amp; (i%2 == 0)) 
+          {
             // shove each bit into the storage bytes
             data[j/8] &lt;&lt;= 1;
             if (counter &gt; 40)
@@ -6167,16 +6167,6 @@ while (Program.IsEnabled)
       	//Program.Notify("DHT-22", "J = " + j.ToString());
         if ((j &gt;= 40) &amp;&amp; (data[4] == ((data[0] + data[1] + data[2] + data[3]) &amp; 0xFF)) ) 
         {
-            //data[2] = data[2] - 3; // temperature adjustment, due to heat excess inside the HG box
-            //double f = data[2] * 9D / 5D + 32;
-          	//double f = temperatura + decimale/10;
-            //Console.WriteLine("\n\nHumidity = {0}.{1} %\nTemperature = {2}.{3} *C ({4} *F)\n\n", 
-            //      			data[0], data[1], data[2], data[3], f);
-          
-          	
-          
-          	//data[0] = (data[0] )/10;
-            
           	int umidita =((data[0]&lt;&lt;8) + data[1])/10;
           	int decumid = ((data[0]&lt;&lt;8) + data[1]) - umidita*10;
             //var hum = data[0] + "." + data[1];
@@ -6185,29 +6175,23 @@ while (Program.IsEnabled)
           	int moltiplicatore =1;
           	if (data[2] &gt; 128)
           	{
-            moltiplicatore = -1;
-            data[2] = data[2] - 128;
+            	moltiplicatore = -1;
+            	data[2] = data[2] - 128;
             }
                             
             int temperatura =((data[2]&lt;&lt;8)+data[3])/10;
           	int decimale = 	((data[2]&lt;&lt;8)+data[3]) - temperatura*10;
-          //data[2] = ((data[2]&lt;&lt;8)+data[3]);
+          	//data[2] = ((data[2]&lt;&lt;8)+data[3]);
           	//data[2] /= 10;
-           
-              
               
             var tempc = (moltiplicatore * temperatura) + "." + decimale;
-            //var tempc = data[2] + ".." + data[4];
-			
-          
-            var tempf = ((temperatura + decimale/10) * 9D / 5D + 32).ToString();
+
           	//if (hum != Program.Parameter("Sensor.Humidity").Value)
             {
               	Program.RaiseEvent("Sensor.Humidity", hum, "DHT-22 Sensor");
             }
           	//if (tempc != Program.Parameter("Sensor.Temperature").Value)
             {
-                Program.RaiseEvent("Sensor.TemperatureF", tempf, "DHT-22 Sensor");
                 Program.RaiseEvent("Sensor.Temperature", tempc, "DHT-22 Sensor");
             }
             break;
@@ -6230,7 +6214,7 @@ while (Program.IsEnabled)
   	Pause(pause);
 
 }</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
@@ -6238,7 +6222,7 @@ while (Program.IsEnabled)
     <Address>63</Address>
     <Name>DHT-22 Sensor</Name>
     <Description>Temperature and Humidity sensing using DHT-22 with data pin on GPIO#4. 
-Edit program code line #15 to change the data pin GPIO.
+Edit program code line #13 to change the data pin GPIO.
 </Description>
     <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />

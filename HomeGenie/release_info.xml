@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r428</Version>
+  <Version>1.00 beta r429</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added support for Arduino sketches inside HomeGenie Program Editor
+  <ReleaseNote>   - Added When.SystemStarted / When.SystemStopping events
+  - Fixed display unit as Celsius/Fahrenheit based on user's locale settings
+  - Deprecated Sensor.TemperatureF parameter
+  - Added support for middle endian date/time formatting
+  - Updated Pepper1 Z-Wave database (30+ new devices supported)
+  - Added support for Arduino sketches inside HomeGenie Program Editor
   - Added program status led in the program editor
   - Added DHT-22 app
   - Added SmartIC app for using two MCP23017 I/O expanders
   - Updated Grove-RGB, OneWire, DHT-11 apps
   - Updated Jint Javascript Engine</ReleaseNote>
-  <ReleaseDate>2014-11-22T15:26:11.0000Z</ReleaseDate>
+  <ReleaseDate>2014-11-23T10:49:51.0000Z</ReleaseDate>
 </ReleaseInfo>

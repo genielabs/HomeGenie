@@ -24,7 +24,7 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "29"
+        "@value": "5c"
       },
       "appVersion": {
         "@value": "01"
@@ -50,53 +50,87 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "Russia",
+      "certId": "15397",
+      "certNumber": "ZC08-13050003"
     },
     "deviceDescription": {
       "description": {
         "lang": [
           {
-            "@xml:lang": "de"
+            "@xml:lang": "de",
+            "#text": "PIR-, Tür/Fenster-, Temperatur- und Helligkeitssensor"
           },
           {
             "@xml:lang": "en",
-            "#text": "3 in 1 Sensor (Door-/Window, Temperature, Illumination)"
+            "#text": "PIR, door/window, temperature and illumination Sensor"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Датчик движения, освещенности, температуры, открытия двери/окна"
           }
         ]
       },
       "wakeupNote": {
         "lang": [
           {
-            "@xml:lang": "de"
+            "@xml:lang": "de",
+            "#text": "einmaliges Drücken des Manipulationsschutzschalters"
           },
           {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Single press tamper button"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Один раз нажать тампер"
           }
         ]
       },
       "inclusionNote": {
         "lang": [
           {
-            "@xml:lang": "de"
+            "@xml:lang": "de",
+            "#text": "dreimaliges Drücken des Manipulationsschutzschalters"
           },
           {
-            "@xml:lang": "en"
+            "@xml:lang": "en",
+            "#text": "Tripple press tamper button"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Три раза нажать тампер"
           }
         ]
       },
-      "productName": "Slim Multi-Sensor PSM01-1 ",
-      "brandName": "Philio Technology Corporation",
-      "productCode": "PHI_PSM01-1",
+      "productName": "Slim Multi-Sensor PST02-A",
+      "brandName": "Philio",
+      "productLine": "Philio Z-Wave Product",
+      "productCode": "PST02-A",
+      "productVersion": "1.0",
       "batteryType": "CR123A",
       "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0080"
+          "@id": "0030",
+          "@version": "2"
         },
         {
-          "@id": "0020"
+          "@id": "0031",
+          "@version": "5"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0080"
         },
         {
           "@id": "0084",
@@ -110,40 +144,13 @@
           "@id": "0086"
         },
         {
-          "@id": "0070"
-        },
-        {
-          "@id": "0030",
-          "@version": "2"
-        },
-        {
-          "@id": "0031",
-          "@version": "5"
-        },
-        {
-          "@id": "0072",
-          "@version": "2"
+          "@id": "0020",
+          "@controlled": "true"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
-        {
-          "@number": "2",
-          "@maxNodes": "7",
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Gruppe 2 ist für Lichtsteuerung, das Gerät sendet “Basic Set” Kommandos zu dieser Gruppe"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "group 2 is for light control, the device will send the “Basic Set” command to this group."
-              }
-            ]
-          }
-        },
         {
           "@number": "1",
           "@maxNodes": "7",
@@ -156,6 +163,30 @@
               {
                 "@xml:lang": "en",
                 "#text": "group 1 is for receiving the report message, like triggered event, temperature, illumination etc."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Для контроллера, которому отправляется информация о температуре, освещенности и срабатывании тампера"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "7",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Gruppe 2 ist für Lichtsteuerung, das Gerät sendet “Basic Set” Kommandos zu dieser Gruppe"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "group 2 is for light control, the device will send the “Basic Set” command to this group."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Устройству отправляется BASIC SET при сработке датчика движения или датчика открытия"
               }
             ]
           }
@@ -178,6 +209,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Basic Set Level"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Уровень диммирования, отправляемый устройствам из группы 2"
               }
             ]
           },
@@ -190,6 +225,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Setting the BASIC command value to turn on the light"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять устройствам из группы 2 заданный уровень диммирования. Так можно при срабатывании датчика открытия или движения включить свет на 50% или открыть жалюзи на 30%."
               }
             ]
           },
@@ -201,27 +240,115 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "0xFF(-1) schaltet Licht ein."
+                    "#text": "Aus"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0xFF(-1) turns on the light."
+                    "#text": "Turn On"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить"
                   }
                 ]
               }
             },
             {
               "@from": "01",
-              "@to": "64",
+              "@to": "63",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Für Dimmer 1 bis 100 Beleuchtungsstärke"
+                    "#text": "Dimmerniveau"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "For dimmers 1 to 100 means the light strength"
+                    "#text": "Dimming level"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Уровень диммирования"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "3",
+          "@type": "range",
+          "@size": "1",
+          "@default": "46",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "PIR Empfindlichkeit"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "PIR Sensitivity"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Датчик движения"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Setting the BASIC command value to turn on the light"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "parameter to set the Sensitivity for the PIR (Passiv Infrared Sensor)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Настройка чувствительности датчика движения.1 - минимальная чувствительность, 99% - максимальная чувствительность"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Disable PIR motion"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable PIR motion"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключен"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "1 geringste Empfindlichkeit; 99 höchste Empfindlichkeit"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "1 means the lowest sensitivity, 99 means the highest sensitivity"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Чувствительность"
                   }
                 ]
               }
@@ -242,6 +369,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Light Threshold"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Освещенность"
               }
             ]
           },
@@ -254,10 +385,54 @@
               {
                 "@xml:lang": "en",
                 "#text": "Setting the illumination threshold to turn on the light. When the event triggered and the environment illumination lower then the threshold, the device will turn on the light"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "При обнаружении движения проверяется уровень освещенности окружающей среды и если освещенность меньше заданной (т.е. темно), то свет включится. 1 - темно, 99 - ярко"
               }
             ]
           },
           "value": [
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "1 dunkelste Stufe. 99 hellste Stufe"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "1 means darkest. 99 means brightest"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Освещенность"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "64",
+              "@to": "64",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Helligkeitsabhängiges Einschalten deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Turn off illumination detected"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключить проверку освещенности"
+                  }
+                ]
+              }
+            },
             {
               "@from": "00",
               "@to": "00",
@@ -270,22 +445,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "0 means turn off illumination detected function And never turn on the light."
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "64",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "1 dunkelste Stufe. 99 hellste Stufe. 100 bedeutet Helligkeitsabhängiges Einschalten deaktiviert; Licht immer einschalten"
                   },
                   {
-                    "@xml:lang": "en",
-                    "#text": "1 means darkest.\r\n99 means brightest.\r\n100 means turn off illumination detected function. And always turn on the light\r\n"
+                    "@xml:lang": "ru",
+                    "#text": "Отключить датчик движения, датчик открытия и проверку освещенность"
                   }
                 ]
               }
@@ -294,7 +457,7 @@
         },
         {
           "@number": "5",
-          "@type": "range",
+          "@type": "bitset",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -306,6 +469,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Operation Mode"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Режим работы"
               }
             ]
           },
@@ -313,34 +480,144 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Parameter zum Festlegen der Funktionsweise"
+                "#text": "Bit 0 und Bit 1 werden beeinflusst, wenn DIP-Schalter auf Programmier Modus steht. Wenn Bit 1 aktiviert, ist Bit 0 ohne Funktion "
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter to set the Operation Mode"
+                "#text": "Bit0 and Bit1 will effect when the DIP Switch setting to program mode.If Bit1 is enabled, the Bit0 is useless. "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Bit0 и Bit1 работают только если DIP переключатель установлен в режим программирования. Если Bit1 установлен, то Bit0 не используется"
               }
             ]
           },
-          "value": {
-            "@from": "00",
-            "@to": "7f",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Bit 0: reserviert. \r\nBit 1: reserviert. \r\nBit 2: deaktivieren der Tür/Fenster Funktion.\r\nBit 3: Setzen der Temperatur Einheit.\r\n  0: Fahrenheit, 1:Celsius\r\nBit 4: Deaktivieren des Beleuchtungs-Reports nach einem ausgelösten Event.\r\nBit 5: Deaktivieren des Temperatur-Reports nach einem ausgelösten Event."
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "Bit 0: Reversed. \r\nBit 1: Reversed. \r\nBit 2: Disable the door/window function.\r\nBit 3: Setting the temperature scale.\r\n  0: Fahrenheit, 1:Celsius\r\nBit 4: Disable illumination report after event triggered.\r\nBit 5: Disable temperature report after event triggered."
-                }
-              ]
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit0. 0 - Home Automation Modus;\r\n1 - Security Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit0. 0 - Home Automation mode\r\n1 - Security Mode"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit0. 0 - Режим Домашней автоматизации; 1 - Режим Охраны"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit1. Test Modus"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit1. Test Mode"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit1. Тестовый режим"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit2. Deaktivieren der Tür/Fenster Sensor"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit2. Disable Door/Window Sensor"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit2. Отключить Датчик открытия"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit3. 0 - Temperatur in Fahrenheit;\r\n1 - Temperatur in Celsius"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit3. 0 - Temperature in Fahrenheit;\r\n1 - Temperature in Celsius"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit3. 0 - Температура в Фаренгейтах;\r\n1 - Температура в Цельсиях"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit4. Deaktivieren des Beleuchtungs-Reports nach einem ausgelösten Event"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit4. Disable illumination report after event triggered"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit4. Отключить отчеты о освещенности при срабатывании датчика открытия или движения"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit5. Deaktivieren des Temperatur-Reports nach einem ausgelösten Event"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit5. Disable temperature report after event triggered"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit5. Отключить отчеты о температуре при срабатывании датчика открытия или движения"
+                  }
+                ]
+              }
             }
-          }
+          ]
         },
         {
           "@number": "6",
-          "@type": "range",
+          "@type": "bitset",
           "@size": "1",
           "@default": "04",
           "name": {
@@ -352,6 +629,187 @@
               {
                 "@xml:lang": "en",
                 "#text": "Multi-Sensor Function Switch"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Функция выключателя"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit0. Deaktiviert Magnetisch integrierte Beleuchtung"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit0. Disable magnetic integrate illumination"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit0. Не включать светодиод при сработке датчика открытия"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit1. Deaktiviert PIR integrierte Beleuchtung"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit1. Disable PIR integrate Illumination"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit1. Не включать светодиод при сработке датчика движения"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit2. Deaktiviert magnetisch integrierte PIR"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit2. Disable magnetic integrate PIR"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit2. Отключить магнит установленный в самом датчике"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit3. Wenn Bit 2 is 0 (aktiviert), Gerät im gleichen Raum wie das zu schaltende Licht? 0: Im gleichen Raum (standard), 1: in anderem Raum"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit3. When Bit2 is 0 (Enable), the device is install in the same room with the light? 0: In the same room(Default), 1: In the different room"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit3. 0 - Датчик установлен в той же комнате, что и свет; \r\n1 - Датчик установлен не в той комнате, что и свет. Если Bit2 = 1, эта функция не используется"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit4. Deaktiviert die 5 sek Verzögerung zum Ausschalten des Lichts, wenn Tür/Fenster geschlossen"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit4. Disable delay 5 seconds to turn off the light, when door/window closed"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit4. Отключить задержку в 5 секунд при выключении света, когда дверь закрылась"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit5. Deaktiviert automat. Abschaltung des Lichts, nachdem Tür/Fenster geöffnet und Licht angeschaltet wurde. Wenn Bit 2 auf 0, dann ist diese Einstellung ohne Funktion"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit5. Disable auto turn off the light, after door/window opened to turn on the light. If Bit2 = 0, this setting is useless"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit5. Не выключать свет после того, когда сработал датчик открытия и включил свет. Если Bit2 = 0, эта функция не используется"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bit6. Aktiviert Temperatur Messung. Wenn aktiviert wird bei Temperaturänderung von 3° ein Temperatur-Report gesendet. Ebenfalls wird ein Temperatur-Report (aller 64 Sekunden) gesendet, wenn diese über 140° Fahrenheit steigt"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Bit6. Enable temperature monitoring. When this bit enable, the temperature changed 3 degree Fahrenheit, it will report. And also the temperature over 140 degree Fahrenheit, it will report every 64 seconds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Bit6. При изменении температуры на 3 ° присылать отчет. При температуре больше 60 °C отчет присылается каждые 64 секунды"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "8",
+          "@type": "range",
+          "@size": "1",
+          "@default": "03",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "PIR Intervall Zeit für erneutes Erkennen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "PIR Re-Detect Interval Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время бездействия датчика после обнаружения движения"
               }
             ]
           },
@@ -359,26 +817,35 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Parameter zum Festlegen der Sensor-Funktionen"
+                "#text": "Im Security Modus, nach Erkennung des Bewegungssensors, festlegen der Zeit zum erneuten Erkennen"
               },
               {
                 "@xml:lang": "en",
-                "#text": "parameter to set the sensor functions"
+                "#text": "In the security mode, after the PIR motion detected, setting the re-detect time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "После обнаружения движения датчик отключается на время указанное в этом параметре. Время бездействия датчика задается с шагом 8 секунд, т.е. 1 = 8 секунд, 3 = 24 секунд. Если значение времени бездействия больше чем в параметре 9, тогда это время на которое будет отключен датчик движения после выключения света"
               }
             ]
           },
           "value": {
-            "@from": "00",
+            "@from": "03",
             "@to": "7f",
+            "@unit": "8 sec",
             "description": {
               "lang": [
                 {
                   "@xml:lang": "de",
-                  "#text": "Bit 0: deaktiviert Magnetisch integrierte Beleuchtung.\r\nBit 1: reserviert, immer 1.\r\nBit 2: reserviert, immer 1.\r\nBit 3: reserviert.\r\nBit 4: Deaktiviert die 5 sek Verzögerung zum Ausschalten des Lichts, wenn Tür/Fenster geschlossen.\r\nBit 5: Deaktiviert automat. Abschaltung des Lichts, nachdem Tür/Fenster geöffnet und Licht angeschaltet wurde.\r\nBit 6: aktiviert Temperatur Messung. Wenn aktiviert wird bei Temperaturänderung von 3° ein Temperatur-Report gesendet. Ebenfalls wird ein Temperatur-Report (aller 64 Sekunden) gesendet, wenn diese über 140° Fahrenheit steigt."
+                  "#text": "8 Sekunden pro Tick, minimale Verzögerung 24 Sekunden (3 Ticks = 24 Sekunden)."
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "Bit 0: Disable magnetic integrate illumination.\r\nBit 1: Reserved, always 1.\r\nBit 2: Reserved, always 1.\r\nBit 3: Reserved.\r\nBit 4: Disable delay 5 seconds to turn off the light, when door/window closed.\r\nBit 5: Disable auto turn off the light, after door/window opened to turn on the light. \r\nBit 6:Enable temperature monitoring.\r\nWhen this bit enable, the temperature changed 3 degree Fahrenheit, it will report.\r\nAnd also the temperature over 140 degree Fahrenheit, it will report every 64 seconds."
+                  "#text": "8 seconds per tick, and minimum time is 24 seconds, default tick is 3 (24 seconds)."
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "секунды / 8"
                 }
               ]
             }
@@ -398,6 +865,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Turn Off Light Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время выключения"
               }
             ]
           },
@@ -410,6 +881,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "After turn on the light, setting the delay time to turn off the light when the PIR motion is not detected"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время через которое датчик движения отправит команду выключения (после того как датчик отправил команду включения и не было движения). Каждое движение сбрасывается время на начало. Время выключения задается с шагом 8 секунд, т.е. 1 = 8 секунд, 4 = 32 секунд"
               }
             ]
           },
@@ -426,6 +901,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "8 seconds per tick, and minimum time is 32 seconds, default tick is 4 (32 seconds)"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "секунды / 8"
                 }
               ]
             }
@@ -445,6 +924,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Battery Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время автоматического отчета о батареи"
               }
             ]
           },
@@ -457,6 +940,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "interval time for auto report the battery level"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время задается с шагом 30 минут, т.е. 1 = 30 минут, 12 = 6 часов"
               }
             ]
           },
@@ -473,6 +960,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "30 minutes per tick and minimum time is 30 minutes, default tick is 12 (6 hours)"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "минуты / 30"
                 }
               ]
             }
@@ -492,6 +983,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Door/Window State Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время автоматического отчета о состоянии датчика двери/окна"
               }
             ]
           },
@@ -504,6 +999,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "interval time for auto report the door/window state"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время задается с шагом 30 минут, т.е. 1 = 30 минут, 12 = 6 часов"
               }
             ]
           },
@@ -520,6 +1019,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "30 minutes per tick and minimum time is 30 minutes, default tick is 12 (6 hours)"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "минуты / 30"
                 }
               ]
             }
@@ -538,7 +1041,11 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Auto Report Temperature Time"
+                "#text": "Auto Report Illumination Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время автоматического отчета о освещенности"
               }
             ]
           },
@@ -551,6 +1058,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "interval time for auto report the temperature"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время задается с шагом 30 минут, т.е. 1 = 30 минут, 12 = 6 часов"
               }
             ]
           },
@@ -567,6 +1078,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "30 minutes per tick and minimum time is 30 minutes, default tick is 12 (6 hours)"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "минуты / 30"
                 }
               ]
             }
@@ -586,6 +1101,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Auto Report Temperature Time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время автоматического отчета о температуре"
               }
             ]
           },
@@ -598,13 +1117,17 @@
               {
                 "@xml:lang": "en",
                 "#text": "interval time for auto report the temperature"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время задается с шагом 30 минут, т.е. 1 = 30 минут, 12 = 6 часов"
               }
             ]
           },
           "value": {
             "@from": "01",
             "@to": "7f",
-            "@unit": "3",
+            "@unit": "30 min",
             "description": {
               "lang": [
                 {
@@ -614,12 +1137,21 @@
                 {
                   "@xml:lang": "en",
                   "#text": "30 minutes per tick and minimum time is 30 minutes, default tick is 12 (6 hours)"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "минуты / 30"
                 }
               ]
             }
           }
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/388753ce8c30967f9919ade356622f9e8a985d32.png"
+      }
     }
   }
 }

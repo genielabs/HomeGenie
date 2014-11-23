@@ -137,17 +137,13 @@ namespace HomeGenie
             _homegenie = new HomeGenieService();
             //
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
-            //
-            System.Threading.Thread.Sleep(2000);
-            //
-            ShutDown();
         }
 
         internal static void Quit(bool restartService)
         {
             _restart = restartService;
-            _isrunning = false;
             ShutDown();
+            _isrunning = false;
         }
 
         private static void ShutDown()
@@ -177,8 +173,7 @@ namespace HomeGenie
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             Console.WriteLine("\n\nProgram interrupted!\n");
-            ShutDown();
-            _isrunning = false;
+            Quit(false);
         }
 
         private static void ShellCommand(string command, string args)

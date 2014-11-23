@@ -244,7 +244,7 @@
         },
         {
           "@number": "2",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "0f",
           "name": {
@@ -291,7 +291,7 @@
         },
         {
           "@number": "3",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "01",
           "name": {
@@ -338,7 +338,7 @@
         },
         {
           "@number": "4",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "02",
           "name": {
@@ -432,7 +432,7 @@
         },
         {
           "@number": "8",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -559,7 +559,7 @@
         },
         {
           "@number": "12",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -623,9 +623,9 @@
         },
         {
           "@number": "14",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
-          "@default": "7f",
+          "@default": "ff",
           "name": {
             "lang": [
               {
@@ -650,24 +650,60 @@
               }
             ]
           },
-          "value": {
-            "@from": "81",
-            "@to": "7f",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de"
-                },
-                {
-                  "@xml:lang": "en"
-                }
-              ]
+          "value": [
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "ON"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "ON"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "OFF"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "OFF"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "%"
+                  }
+                ]
+              }
             }
-          }
+          ]
         },
         {
           "@number": "16",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -696,33 +732,49 @@
           },
           "value": [
             {
-              "@from": "81",
-              "@to": "81",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "0 schaltet Gerät aus"
+                    "#text": "ON"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0 allows to turn a device OFF"
+                    "#text": "ON"
                   }
                 ]
               }
             },
             {
-              "@from": "7f",
-              "@to": "7f",
+              "@from": "00",
+              "@to": "00",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "255 schaltet Gerät an"
+                    "#text": "OFF"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "255 allows to turn ON a device"
+                    "#text": "OFF"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "%"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "%"
                   }
                 ]
               }
@@ -731,7 +783,7 @@
         },
         {
           "@number": "20",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "0f",
           "name": {
@@ -825,7 +877,7 @@
         },
         {
           "@number": "24",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -937,7 +989,7 @@
         },
         {
           "@number": "26",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -1283,7 +1335,7 @@
         },
         {
           "@number": "80",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "0a",
           "name": {
@@ -1982,7 +2034,7 @@
         },
         {
           "@number": "89",
-          "@type": "constant",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "01",
           "name": {

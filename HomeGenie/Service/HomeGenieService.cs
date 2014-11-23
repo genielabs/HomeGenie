@@ -217,19 +217,63 @@ namespace HomeGenie.Service
             statisticsLogger = new StatisticsLogger(this);
             statisticsLogger.Start();
             //
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STARTED");
-            //
             // Setup local UPnP device
             SetupUpnp();
+            //
+            Start();
         }
 
         public void Start()
         {
+            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STARTED");
+            //
+            // Signal "SystemStarted" event to listeners
+            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+            {
+                try
+                {
+                    var pb = masterControlProgram.Programs[p];
+                    if (pb.IsEnabled)
+                    {
+                        if (pb.SystemStarted != null)
+                        {
+                            if (!!pb.SystemStarted())
+                            // stop routing this event to other listeners
+                            break;
+                        }
+                    }
+                }
+                catch 
+                {
+                    // TODO: log error
+                }
+            }
         }
 
         public void Stop()
         {
             LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STOPPING");
+            //
+            // Signal "SystemStopping" event to listeners
+            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+            {
+                try
+                {
+                    var pb = masterControlProgram.Programs[p];
+                    if (pb.IsEnabled)
+                    {
+                        if (pb.SystemStopping != null && !pb.SystemStopping())
+                        {
+                            // stop routing this event to other listeners
+                            break;
+                        }
+                    }
+                }
+                catch 
+                {
+                    // TODO: log error
+                }
+            }
             //
             // save system data before quitting
             LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "SAVING DATA");

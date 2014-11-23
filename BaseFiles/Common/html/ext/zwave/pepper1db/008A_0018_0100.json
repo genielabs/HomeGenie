@@ -55,20 +55,38 @@
     },
     "deviceDescription": {
       "description": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Zwischenstecker Dimmer max. 125W"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Plug-In Dimmer max. 125W"
+          }
+        ]
       },
       "wakeupNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
       },
       "inclusionNote": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Turn off using button (LED should turn off), hold button untill LED bliks two times."
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Bestätigen mit Taster (LED geht dabei aus), Drücken und Halten des Tasters bis LED zweimal blinkt."
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Turn off using button (LED should turn off), hold button untill LED blinks two times."
+          }
+        ]
       },
       "productName": "Plug-in Dimmer",
       "brandName": "BeNext",
@@ -118,30 +136,48 @@
           "@number": "1",
           "@maxNodes": "8",
           "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Group 1"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Gruppe 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 1"
+              }
+            ]
           }
         },
         {
           "@number": "2",
           "@maxNodes": "1",
           "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Group 2"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Gruppe 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 2"
+              }
+            ]
           }
         },
         {
           "@number": "3",
           "@maxNodes": "1",
           "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Group 3"
-            }
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Gruppe 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 3"
+              }
+            ]
           }
         }
       ]

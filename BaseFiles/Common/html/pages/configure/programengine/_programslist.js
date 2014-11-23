@@ -546,10 +546,11 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog)
         //
         var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prog.Address);
         if (module != null) {
-            statusProperty = HG.WebApp.Utility.GetModulePropertyByName(module, 'Program.Status').Value;
+            var propObj = HG.WebApp.Utility.GetModulePropertyByName(module, 'Program.Status');
+            if (propObj != null) statusProperty = propObj.Value;
         }
         //
-        if (statusProperty == 'Running') {
+        if (prog.IsEnabled && statusProperty == 'Running') {
             statusColor = 'green';
         }
         else if (prog.IsEnabled) { //statusProperty == 'Idle' || statusProperty == 'Enabled' || statusProperty == 'Setup'

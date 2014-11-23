@@ -68,15 +68,18 @@
 						infotext += '<span style="vertical-align:middle">' + value + '%</span> <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" />';
 						continue;
 	                }
-	                else if (module.Properties[p].Name == "Sensor.Temperature") {
+	                else if (module.Properties[p].Name == 'Sensor.Temperature') {
 	                	imagesrc = 'hg-indicator-temperature';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
-	                    displayvalue = temp + '&#8451;';
-	                }
-	                else if (module.Properties[p].Name == "Sensor.TemperatureF") {
-	                	imagesrc = 'hg-indicator-temperature';
-	                    var temp = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
-	                    displayvalue = temp + '&#8457;';
+	                    var temp = module.Properties[p].Value.replace(',', '.');
+                        if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
+                            // display as Fahrenheit
+                            temp = Math.round((temp * 1.8 + 32) * 10) / 10; 
+                            displayvalue = temp + '&#8457;';
+                        } else {
+                            // display as Celsius
+                            temp = Math.round(temp * 10) / 10;
+                            displayvalue = temp + '&#8451;';
+                        }
 	                }
 	                else if (module.Properties[p].Name == 'Sensor.Luminance') {
 	                	imagesrc = 'hg-indicator-luminance';

@@ -168,7 +168,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     //double val = (double)int.Parse(message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
                     //
-                    if (key == (byte)ZWaveSensorParameter.TEMPERATURE)
+                    if (key == (byte)ZWaveSensorParameter.TEMPERATURE && message.Length > 16)
                     {
                         if (cmdType == (byte)Command.COMMAND_MULTIINSTANCEV2_ENCAP && message.Length > 18)
                         {
@@ -179,16 +179,13 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                             temperature = ExtractTemperatureFromBytes(message);
                         }
                         //
-                        //if (temperature <= 212) // this fixes a bug with my HSM-100 sensor
-                        {
-                            nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, temperature);
-                            nodeHost.RaiseUpdateParameterEvent(
-                                nodeHost,
-                                key,
-                                ParameterType.PARAMETER_TEMPERATURE,
-                                temperature
-                            );
-                        }
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, temperature);
+                        nodeHost.RaiseUpdateParameterEvent(
+                            nodeHost,
+                            key,
+                            ParameterType.PARAMETER_TEMPERATURE,
+                            temperature
+                        );
                         //
                         processed = true;
                     }
@@ -333,6 +330,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             SensorValue sensorValue = new SensorValue();
             //
             byte key = message[9];
+            byte precisionScaleSize = message[10]; // type of the field to read
             byte val = message[11];
             //
             //double val = (double)int.Parse(message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber) / 1000D;
@@ -342,9 +340,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 sensorValue.Parameter = ZWaveSensorParameter.TEMPERATURE;
                 sensorValue.Value = ExtractTemperatureFromBytes(message);
                 sensorValue.EventType = ParameterType.PARAMETER_TEMPERATURE;
-
-
-
             }
             else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
             {
@@ -355,7 +350,14 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
             {
                 sensorValue.Parameter = ZWaveSensorParameter.LUMINANCE;
-                sensorValue.Value = val;
+                if (precisionScaleSize == 0x0A) // 0x0A = LUX ? (0-1000)
+                {
+                    sensorValue.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);
+                }
+                else // 0x01 = % percentage ? (0 - 100)
+                {
+                    sensorValue.Value = val;
+                }
                 sensorValue.EventType = ParameterType.PARAMETER_LUMINANCE;
             }
             else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
@@ -390,9 +392,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 
             byte precisionScaleSize = message[0];
 
+            // precisionScaleSize = 0x2A = Fahrenheit
+            // precisionScaleSize = 0x22 = Celius
+
             temperature = ((double)(((((int)message[1]) << 8)) | ((int)message[2]))) / 10;
 
-            // F to C
+            // convert from Fahrenheit to Celsius
             if (precisionScaleSize != 0x22) temperature = ((5.0 / 9.0) * (temperature - 32.0));
 
             return temperature;

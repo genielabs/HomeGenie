@@ -70,9 +70,14 @@ namespace HomeGenie.Automation
         private ScriptScope scriptScope = null;
         private ScriptingHost hgScriptingHost = null;
 
+        // System events handlers
+        internal Func<bool> SystemStarted = null;
+        internal Func<bool> SystemStopping = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
         internal List<string> registeredApiCalls = new List<string>();
+
+        // Main program thread
         internal Thread ProgramThread;
 
         // wizard script public members
@@ -485,6 +490,8 @@ namespace HomeGenie.Automation
             //
             ModuleIsChangingHandler = null;
             ModuleChangedHandler = null;
+            SystemStarted = null;
+            SystemStopping = null;
             //
             foreach (string apiCall in registeredApiCalls)
             {
