@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:12.710583Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:29.013778Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:13.208984Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:29.525946Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:13.70992Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:30.01337Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +489,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:43:45.480847Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:10:31.166846Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -664,24 +664,24 @@ var driver = new MemoryGpioConnectionDriver();
 
 while (Program.IsEnabled)
 {
-	int[] data = new int[5];
+	int[] data;
+    driver.Allocate(dataPin, PinDirection.Output);
+    driver.Write(dataPin, true);
 	for(int a = 0; a &lt; 30; a++)
     {
         driver.Allocate(dataPin, PinDirection.Output);
         driver.Write(dataPin, false);
         Pause(0.018);
-        driver.Write(dataPin, true);
         //  
         driver.Allocate(dataPin, PinDirection.Input);
         //
-        int i = 0;
-        data = new int[5];
-        int j = 0;
+        int i = 0, j = 0;
         int counter = 0;
         bool laststate = true;  
+        data = new int[5];
         //
         // detect change and read data
-        for ( i=0; i&lt; 85; i++) 
+        for (i=0; i &lt;= 85; i++) 
         {
           counter = 0;
           while (driver.Read(dataPin) == laststate) 
@@ -1216,7 +1216,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:14.706225Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:31.016068Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1271,7 +1271,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:15.208353Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:31.515823Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1566,7 +1566,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:15.713559Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:32.021018Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1647,7 +1647,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:16.209058Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:32.516485Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1717,7 +1717,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:16.709613Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:33.01721Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1983,7 +1983,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:17.212117Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:33.515991Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2349,7 +2349,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:18.212141Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:34.516907Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2411,7 +2411,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:18.712502Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:35.019582Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2568,7 +2568,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:19.213683Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:35.520812Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2832,7 +2832,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T10:42:19.717429Z</TriggerTime>
+    <TriggerTime>2014-11-23T20:09:36.024398Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5782,6 +5782,7 @@ while (Program.IsEnabled)
     Program.Parameter("Spi.Locked").Value = "0";
 
     double pauseseconds = double.Parse(Program.InputField("PollFrequency").Value);
+  	if (pauseseconds &lt; 1) pauseseconds = 1;
     Pause( pauseseconds ); // pause 
 
 }
@@ -6118,24 +6119,19 @@ while (Program.IsEnabled)
 {
     driver.Allocate(dataPin, PinDirection.Output);
     driver.Write(dataPin, true);
-    //Pause(5);
-	int[] data = new int[5];
+	int[] data;
   	for(int a = 0; a &lt; 30; a++)
     {
         driver.Allocate(dataPin, PinDirection.Output);
         driver.Write(dataPin, false);
         Pause(0.018);
-        //Pause(0.0006);
-        //driver.Write(dataPin, true);
-        //Pause(0.001);
         //  
         driver.Allocate(dataPin, PinDirection.Input);
         //
-        int i = 0;
-        data = new int[5];
-        int j = 0;
+        int i = 0, j = 0;
         int counter = 0;
         bool laststate = true;  
+        data = new int[5];
         //
         // detect change and read data
         for ( i=0; i&lt;= 85; i++) 

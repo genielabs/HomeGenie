@@ -636,9 +636,9 @@ HG.WebApp.Locales.GetDateEndianType = function()
     var endianType = 'L';
     var testDate = new Date(98326800000);
     var localeDateParts = testDate.toLocaleDateString().split('/');
-    if (localeDateParts[1] == '12') endianType = 'M';
+    if (localeDateParts[0] == '2') endianType = 'M';
     return endianType;
-}
+};
 HG.WebApp.Locales.Localize = function(container, langurl)
 {
     // get data via ajax 

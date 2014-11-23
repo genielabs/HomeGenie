@@ -75,10 +75,13 @@ namespace HomeGenie.Automation.Scripting
 
         public NetHelper(HomeGenieService hg)
         {
-            ServicePointManager.ServerCertificateValidationCallback = Validator;
             homegenie = hg;
+            // TODO: SSL connection certificate validation
+            // TODO: this is just an hack not meant to be used in production enviroment
+            ServicePointManager.ServerCertificateValidationCallback = Validator;
         }
 
+        // TODO: this is just an hack not meant to be used in production enviroment
         public static bool Validator(
             object sender,
             X509Certificate certificate,

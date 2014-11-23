@@ -14,12 +14,10 @@
     You should have received a copy of the GNU General Public License
     along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
 */
-
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
-
 using HomeGenie.Automation;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
@@ -90,9 +88,9 @@ namespace HomeGenie.Service.Handlers
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
-                            if (serialPorts[ p ].Contains("/ttyS") || serialPorts[ p ].Contains("/ttyUSB"))
+                            if (serialPorts[p].Contains("/ttyS") || serialPorts[p].Contains("/ttyUSB"))
                             {
-                                portList.Add(serialPorts[ p ]);
+                                portList.Add(serialPorts[p]);
                             }
                         }
                         if (Raspberry.Board.Current.IsRaspberryPi && !portList.Contains("/dev/ttyAMA0"))
@@ -215,7 +213,8 @@ namespace HomeGenie.Service.Handlers
                     if (File.Exists(logpath))
                     {
                         using (var fs = new FileStream(logpath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                        using (var sr = new StreamReader(fs, Encoding.Default)) {
+                        using (var sr = new StreamReader(fs, Encoding.Default))
+                        {
                             csvlog = sr.ReadToEnd();
                         }
                     }
@@ -267,8 +266,8 @@ namespace HomeGenie.Service.Handlers
                 {
                     // file uploaded by user
                     string archivename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                          "tmp",
-                                                          "homegenie_restore_config.zip");
+                                                      "tmp",
+                                                      "homegenie_restore_config.zip");
                     if (!Directory.Exists("tmp"))
                     {
                         Directory.CreateDirectory("tmp");
@@ -294,12 +293,12 @@ namespace HomeGenie.Service.Handlers
                         var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
                         string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
                         MIG.Gateways.WebServiceUtility.SaveFile(encoding,
-                                                                    boundary,
-                                                                    request.InputStream,
-                                                                    archivename);
+                                                                boundary,
+                                                                request.InputStream,
+                                                                archivename);
                         homegenie.UnarchiveConfiguration(archivename,
-                                                             Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                       "tmp"));
+                                                         Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                                          "tmp"));
                         File.Delete(archivename);
                     }
                     catch
@@ -310,8 +309,8 @@ namespace HomeGenie.Service.Handlers
                 {
                     var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
                     var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                   "tmp",
-                                                                   "programs.xml"));
+                                                               "tmp",
+                                                               "programs.xml"));
                     var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
                     reader.Close();
                     var newProgramList = new List<ProgramBlock>();
@@ -336,72 +335,11 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS2")
                 {
-                    string selectedPrograms = migCommand.GetOption(1);
-                    var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+                    //
+                    var serializer = new XmlSerializer(typeof(List<Group>));
                     var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                   "tmp",
-                                                                   "programs.xml"));
-                    var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
-                    reader.Close();
-                    foreach (var program in newProgramsData)
-                    {
-                        var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
-                        // Only restore user space programs
-                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
-                        {
-                            if (currentProgram == null)
-                            {
-                                var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
-                                try
-                                {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                               "tmp",
-                                                               "programs",
-                                                               program.Address + ".dll"),
-                                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                                                                 "programs",
-                                                                                                                                                                 newPid + ".dll"),
-                                                  true);
-                                }
-                                catch
-                                {
-                                }
-                                program.Address = newPid;
-                                homegenie.ProgramEngine.ProgramAdd(program);
-                            }
-                            else if (currentProgram != null)
-                            {
-                                homegenie.ProgramEngine.ProgramRemove(currentProgram);
-                                try
-                                {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                               "tmp",
-                                                               "programs",
-                                                               program.Address + ".dll"),
-                                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                                                                 "programs",
-                                                                                                                                                                 program.Address + ".dll"),
-                                                  true);
-                                }
-                                catch
-                                {
-                                }
-                                homegenie.ProgramEngine.ProgramAdd(program);
-                            }
-                        }
-                        else if (currentProgram != null && program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
-                        {
-                            // Only restore Enabled/Disabled status of system programs
-                            currentProgram.IsEnabled = program.IsEnabled;
-                        }
-                    }
-                    //
-                    homegenie.UpdateProgramsDatabase();
-                    //
-                    serializer = new XmlSerializer(typeof(List<Group>));
-                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                               "tmp",
-                                                               "automationgroups.xml"));
+                                                           "tmp",
+                                                           "automationgroups.xml"));
                     var automationGroups = (List<Group>)serializer.Deserialize(reader);
                     reader.Close();
                     //
@@ -417,23 +355,82 @@ namespace HomeGenie.Service.Handlers
                     //
                     //File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "automationgroups.xml"), "./automationgroups.xml", true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "groups.xml"),
-                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                         "groups.xml"),
-                                  true);
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"),
+                              true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "lircconfig.xml"),
-                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                             "lircconfig.xml"),
-                                  true);
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml"),
+                              true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"),
-                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                          "modules.xml"),
-                                  true);
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"),
+                              true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"),
-                                  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                                                                               "systemconfig.xml"),
-                                  true);
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"),
+                              true);
                     //
                     homegenie.LoadConfiguration();
+                    //
+                    // Restore automation programs
+                    string selectedPrograms = migCommand.GetOption(1);
+                    serializer = new XmlSerializer(typeof(List<ProgramBlock>));
+                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                               "tmp",
+                                                               "programs.xml"));
+                    var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
+                    reader.Close();
+                    foreach (var program in newProgramsData)
+                    {
+                        var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                        // Only restore user space programs
+                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        {
+                            if (currentProgram == null)
+                            {
+                                var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
+                                try
+                                {
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                           "tmp",
+                                                           "programs",
+                                                           program.Address + ".dll"),
+                                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                 "programs",
+                                                 newPid + ".dll"),
+                                              true);
+                                }
+                                catch
+                                {
+                                }
+                                program.Address = newPid;
+                                homegenie.ProgramEngine.ProgramAdd(program);
+                            }
+                            else if (currentProgram != null)
+                            {
+                                homegenie.ProgramEngine.ProgramRemove(currentProgram);
+                                try
+                                {
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                           "tmp",
+                                                           "programs",
+                                                           program.Address + ".dll"),
+                                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                 "programs",
+                                                 program.Address + ".dll"),
+                                              true);
+                                }
+                                catch
+                                {
+                                }
+                                homegenie.ProgramEngine.ProgramAdd(program);
+                            }
+                        }
+                        else if (currentProgram != null && program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        {
+                            // Only restore Enabled/Disabled status of system programs
+                            currentProgram.IsEnabled = program.IsEnabled;
+                        }
+                    }
+                    //
+                    homegenie.UpdateProgramsDatabase();
                     //
                     // regenerate encrypted files
                     homegenie.UpdateModulesDatabase();
@@ -483,7 +480,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     for (int m = 0; m < homegenie.Modules.Count; m++)
                     {
-                        homegenie.Modules[ m ].RoutingNode = "";
+                        homegenie.Modules[m].RoutingNode = "";
                     }
                     migCommand.Response = "OK";
                 }
@@ -500,25 +497,25 @@ namespace HomeGenie.Service.Handlers
                 {
                     try
                     {
-                        var module = homegenie.Modules.Find(m => m.Address == newModules[ i ][ "Address" ].ToString() && m.Domain == newModules[ i ][ "Domain" ].ToString());
-                        module.Name = newModules[ i ][ "Name" ].ToString();
+                        var module = homegenie.Modules.Find(m => m.Address == newModules[i]["Address"].ToString() && m.Domain == newModules[i]["Domain"].ToString());
+                        module.Name = newModules[i]["Name"].ToString();
                         //
                         try
                         {
                             module.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes),
-                                                                                   newModules[ i ][ "DeviceType" ].ToString(),
-                                                                                   true);
+                                                                            newModules[i]["DeviceType"].ToString(),
+                                                                            true);
                         }
                         catch
                         {
                             // TODO: check what's wrong here...
                         }
                         //
-                        var moduleProperties = newModules[ i ][ "Properties" ] as JArray;
+                        var moduleProperties = newModules[i]["Properties"] as JArray;
                         for (int p = 0; p < moduleProperties.Count; p++)
                         {
-                            string propertyName = moduleProperties[ p ][ "Name" ].ToString();
-                            string propertyValue = moduleProperties[ p ][ "Value" ].ToString();
+                            string propertyName = moduleProperties[p]["Name"].ToString();
+                            string propertyValue = moduleProperties[p]["Value"].ToString();
                             ModuleParameter parameter = null;
                             parameter = module.Properties.Find(delegate(ModuleParameter mp)
                             {
@@ -530,7 +527,7 @@ namespace HomeGenie.Service.Handlers
                                 try
                                 {
                                     propertyValue = double.Parse(propertyValue.Replace(",", "."),
-                                                                     System.Globalization.CultureInfo.InvariantCulture).ToString();
+                                                                 System.Globalization.CultureInfo.InvariantCulture).ToString();
                                 }
                                 catch
                                 {
@@ -547,7 +544,7 @@ namespace HomeGenie.Service.Handlers
                             }
                             else //if (true)
                             {
-                                if (moduleProperties[ p ][ "NeedsUpdate" ] != null && moduleProperties[ p ][ "NeedsUpdate" ].ToString() == "true")
+                                if (moduleProperties[p]["NeedsUpdate"] != null && moduleProperties[p]["NeedsUpdate"].ToString() == "true")
                                 {
                                     parameter.Value = propertyValue;
                                 }
@@ -628,7 +625,7 @@ namespace HomeGenie.Service.Handlers
                     string jsonmodules = "[";
                     for (int m = 0; m < theGroup.Modules.Count; m++)
                     {
-                        var groupModule = homegenie.Modules.Find(mm => mm.Domain == theGroup.Modules[ m ].Domain && mm.Address == theGroup.Modules[ m ].Address);
+                        var groupModule = homegenie.Modules.Find(mm => mm.Domain == theGroup.Modules[m].Domain && mm.Address == theGroup.Modules[m].Address);
                         if (groupModule != null)
                         {
                             jsonmodules += Utility.Module2Json(groupModule, false) + ",\n";
@@ -684,10 +681,10 @@ namespace HomeGenie.Service.Handlers
                 {
                     var newGroupList = new List<Group>();
                     string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' },
-                                                                             StringSplitOptions.RemoveEmptyEntries);
+                                                                         StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < newPositionOrder.Length; i++)
                     {
-                        newGroupList.Add(homegenie.GetGroups(migCommand.GetOption(0))[ int.Parse(newPositionOrder[ i ]) ]);
+                        newGroupList.Add(homegenie.GetGroups(migCommand.GetOption(0))[int.Parse(newPositionOrder[i])]);
                     }
                     homegenie.GetGroups(migCommand.GetOption(0)).Clear();
                     homegenie.GetGroups(migCommand.GetOption(0)).RemoveAll(g => true);
@@ -722,10 +719,10 @@ namespace HomeGenie.Service.Handlers
                     {
                         var newModulesReference = new List<ModuleReference>();
                         string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' },
-                                                                                 StringSplitOptions.RemoveEmptyEntries);
+                                                                             StringSplitOptions.RemoveEmptyEntries);
                         for (int i = 0; i < newPositionOrder.Length; i++)
                         {
-                            newModulesReference.Add(sortGroup.Modules[ int.Parse(newPositionOrder[ i ]) ]);
+                            newModulesReference.Add(sortGroup.Modules[int.Parse(newPositionOrder[i])]);
                         }
                         sortGroup.Modules.Clear();
                         sortGroup.Modules = newModulesReference;
@@ -786,9 +783,9 @@ namespace HomeGenie.Service.Handlers
                 {
                     try
                     {
-                        var group = homegenie.Groups.Find(z => z.Name == newGroups[ i ].Name);
+                        var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
                         group.Modules.Clear();
-                        group.Modules = newGroups[ i ].Modules;
+                        group.Modules = newGroups[i].Modules;
                     }
                     catch
                     {
@@ -799,7 +796,5 @@ namespace HomeGenie.Service.Handlers
             }
 
         }
-
-
     }
 }

@@ -93,7 +93,7 @@ namespace HomeGenie.Automation
                         Console.WriteLine(line);
                     }
                     //
-                    if (!String.IsNullOrWhiteSpace(errorOutput))
+                    if (errors.Count == 0 && !String.IsNullOrWhiteSpace(errorOutput))
                     {
                         errors.Add(new ProgramError() {
                             Line = 0,
