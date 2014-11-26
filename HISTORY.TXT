@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+25/11/2014 1.00 beta rev 431
+    - Fixed Arduino Sketch upload issues
+    - Patched avrdude on Raspberry Pi SD card to support GPIO#27-DTR and allow direct UART to Arduino upload
+    - Added Doxygen project for generating autodocs
+    - Removed IsOn/IsOff check from Scheduled On/Off app
+    - Added value "Smoothing" option to MCP3008 app
+
 23/11/2014 1.00 beta rev 430
     - Minor fixes to ArduinoAppFactory error reporting
     - Fixes DHT-11 app (finally =)

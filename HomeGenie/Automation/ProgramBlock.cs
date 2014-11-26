@@ -393,16 +393,43 @@ namespace HomeGenie.Automation
                 }
                 break;
             case "arduino":
-                // TODO: upload compiled sketch to the board (make upload)
                 result = new MethodRunResult();
-                try
+                homegenie.LogBroadcastEvent(
+                    Domains.HomeAutomation_HomeGenie_Automation,
+                    this.Address.ToString(),
+                    "Arduino Sketch Upload",
+                    "Arduino.UploadOutput",
+                    "Upload started"
+                    );
+                string[] outputResult = ArduinoAppFactory.UploadSketch(Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "programs",
+                    "arduino",
+                    this.Address.ToString()
+                )).Split('\n');
+                //
+                for (int x = 0; x < outputResult.Length; x++)
                 {
-                    ArduinoAppFactory.UploadSketch(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", this.Address.ToString()));
+                    if (!String.IsNullOrWhiteSpace(outputResult[x]))
+                    {
+                        homegenie.LogBroadcastEvent(
+                            Domains.HomeAutomation_HomeGenie_Automation,
+                            this.Address.ToString(),
+                            "Arduino Sketch",
+                            "Arduino.UploadOutput",
+                            outputResult[x]
+                        );
+                        Thread.Sleep(500);
+                    }
                 }
-                catch (Exception e)
-                {
-                    result.Exception = e;
-                }
+                //
+                homegenie.LogBroadcastEvent(
+                    Domains.HomeAutomation_HomeGenie_Automation,
+                    this.Address.ToString(),
+                    "Arduino Sketch",
+                    "Arduino.UploadOutput",
+                    "Upload finished"
+                    );
                 break;
             }
             //

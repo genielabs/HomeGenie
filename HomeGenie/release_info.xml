@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r430</Version>
+  <Version>1.00 beta r431</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added When.SystemStarted / When.SystemStopping events
+  <ReleaseNote>   - Removed IsOn/IsOff check from Scheduled On/Off app
+  - Added value "Smoothing" option to MCP3008 app
+  - Fixed Arduino Sketch upload issues
+  - Added When.SystemStarted / When.SystemStopping events
   - Fixed display unit as Celsius/Fahrenheit based on user's locale settings
   - Deprecated Sensor.TemperatureF parameter
   - Added support for middle endian date/time formatting
@@ -14,5 +17,5 @@
   - Added SmartIC app for using two MCP23017 I/O expanders
   - Updated Grove-RGB, OneWire, DHT-11 apps
   - Updated Jint Javascript Engine</ReleaseNote>
-  <ReleaseDate>2014-11-23T20:12:11.0000Z</ReleaseDate>
+  <ReleaseDate>2014-11-25T19:15:28.0000Z</ReleaseDate>
 </ReleaseInfo>

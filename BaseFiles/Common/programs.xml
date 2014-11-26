@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:29.013778Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:43.6297Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:29.525946Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:44.131058Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +417,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:30.01337Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:44.633241Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -440,7 +440,7 @@ return true; // execute the "Code To Run"
     <ScriptSource>var controlModules = Modules.WithFeature("HomeGenie.ScheduleControl");
 controlModules.Each((module)=&gt;{
   var schedexpr = module.Parameter("HomeGenie.ScheduleOn").Value;
-  if (module.IsOff &amp;&amp; Scheduler.IsScheduling(schedexpr))
+  if (/*module.IsOff &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
   {
   	Program.Notify("Scheduled Control", module.Instance.Name + " ON");
     module.On();
@@ -449,7 +449,7 @@ controlModules.Each((module)=&gt;{
 });
 controlModules.Each((module)=&gt;{
   var schedexpr = module.Parameter("HomeGenie.ScheduleOff").Value;
-  if (module.IsOn &amp;&amp; Scheduler.IsScheduling(schedexpr))
+  if (/*module.IsOn &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
   {
   	Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
     module.Off();
@@ -488,8 +488,8 @@ controlModules.Each((module)=&gt;{
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-04-19T07:23:29.0682078Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:10:31.166846Z</TriggerTime>
+    <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
+    <TriggerTime>2014-11-25T18:26:45.790405Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1216,7 +1216,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:31.016068Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:45.629469Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1271,7 +1271,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:31.515823Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:46.13133Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1566,7 +1566,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:32.021018Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:46.637061Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1647,7 +1647,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:32.516485Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:47.129778Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1717,7 +1717,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:33.01721Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:47.633244Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1983,7 +1983,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:33.515991Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:48.134799Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2349,7 +2349,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:34.516907Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:49.135239Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2411,7 +2411,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:35.019582Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:49.635541Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2568,7 +2568,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:35.520812Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:50.134807Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2832,7 +2832,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-23T20:09:36.024398Z</TriggerTime>
+    <TriggerTime>2014-11-25T18:25:50.636186Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5686,6 +5686,7 @@ Program.Setup(()=&gt;
   Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterName", "Parameter name to store computed value");
   Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterFactor", "Multiply read raw value by");
   Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.ParameterAdjust", "Adjust computed value by");
+  Program.AddFeatureTextInput("Components.MCP3008", "Sensor", "AnalogInput.StabilizeValue", "Soft stabilize value (yes/no)");
   
   // add program configuration parameters
   Program.AddInputField("PollFrequency", "10", "Pause between updates (seconds)");
@@ -5715,6 +5716,9 @@ When.WebServiceCallReceived("Components.MCP3008/0/Sensor.Luminance", ( args ) =&
 });
 */
 
+var valuesHistory = new Queue&lt;decimal&gt;[8];
+for (int q = 0; q &lt; 8; q++) valuesHistory[q] = new Queue&lt;decimal&gt;();
+
 var driver = GpioConnectionSettings.DefaultDriver;
 while (Program.IsEnabled)
 {
@@ -5735,6 +5739,14 @@ while (Program.IsEnabled)
 				driver.In(adcMiso),
 				driver.Out(adcMosi)))
 		{
+          /*
+          while(Program.IsEnabled)
+          {
+          	var v = adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(0));
+          	Program.Notify("CH0", "V = " + v.Value);
+			Pause(1);
+          }
+          */
           	// read channel voltage values and map/normalize configured parameter names
           	for(int x = 0; x &lt; 8; x++)
             {
@@ -5747,14 +5759,29 @@ while (Program.IsEnabled)
               
               	if (parameterFactor != 0)
                 {
-                                
+                    var v = adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(x)).Value;
+                  	valuesHistory[x].Enqueue(v);
+                  
+                  	// Software value stabilization
+                  	if (channelModule.Parameter("AnalogInput.StabilizeValue").Value.ToLower().StartsWith("y"))
+                    {
+                        decimal avg = 0;
+                        foreach(decimal sv in valuesHistory[x]) avg += sv;
+                        v = (decimal)Math.Round(avg / (decimal)valuesHistory[x].Count, 0);
+                      	// prefer smoothed value
+                      	valuesHistory[x].Dequeue();
+                      	valuesHistory[x].Enqueue(v);
+                    }                	
+                  
+                  	if (valuesHistory[x].Count &gt; 5) valuesHistory[x].Dequeue();
+                  
                     Program.RaiseEvent(channelModule,
                                        "Sensor.RawValue",
-                                       adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(x)).Value.ToString(),
+                                       v.ToString(),
                                        "Analog Channel");
 					if (parameterName != "")
                     {
-                      	var adjustedValue = (adcConnection.Read((Raspberry.IO.Components.Converters.Mcp3008.Mcp3008Channel)(x)).Value * parameterFactor) + parameterAdjust;
+                      	var adjustedValue = (v * parameterFactor) + parameterAdjust;
                       	adjustedValue = (Math.Round(adjustedValue * 10m / 5m, 0) * 5m / 10m); // 0.5 resolution
                         Program.RaiseEvent(channelModule, 
                                            parameterName, 

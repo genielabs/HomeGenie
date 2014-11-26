@@ -39,6 +39,7 @@ namespace HomeGenie.Automation
             var processInfo = new ProcessStartInfo("make", "");
             processInfo.WorkingDirectory = Path.GetDirectoryName(sketchFileName);
             processInfo.RedirectStandardOutput = false;
+            processInfo.RedirectStandardInput = false;
             processInfo.RedirectStandardError = true;
             processInfo.UseShellExecute = false;
             processInfo.CreateNoWindow = true;
@@ -86,7 +87,7 @@ namespace HomeGenie.Automation
                                 });
                             }
                         }
-                        else if (!String.IsNullOrWhiteSpace(line))
+                        else if (!String.IsNullOrWhiteSpace(line) && !line.Contains("depends.mk:"))
                         {
                             errorOutput += line + "\n";
                         }
@@ -113,12 +114,13 @@ namespace HomeGenie.Automation
             return errors;
         }
         
-        public static void UploadSketch(string sketchDirectory)
+        public static string UploadSketch(string sketchDirectory)
         {
             string errorOutput = "";
-            var processInfo = new ProcessStartInfo("make", "upload");
+            var processInfo = new ProcessStartInfo("empty", "-f -L uploadres.txt make upload");
             processInfo.WorkingDirectory = sketchDirectory;
             processInfo.RedirectStandardOutput = false;
+            processInfo.RedirectStandardInput = false;
             processInfo.RedirectStandardError = true;
             processInfo.UseShellExecute = false;
             processInfo.CreateNoWindow = true;
@@ -128,16 +130,32 @@ namespace HomeGenie.Automation
                 {
                     while (!reader.EndOfStream)
                     {
-                        errorOutput += reader.ReadLine();
+                        string line = reader.ReadLine();
+                        if (!String.IsNullOrWhiteSpace(line)) errorOutput += line + "\n";
                     }
                     Console.WriteLine(errorOutput);
                 }
             }
-            //
-            if (!String.IsNullOrWhiteSpace(errorOutput))
+            try
             {
-                throw(new IOException(errorOutput));
+                string[] outputFile = File.ReadAllText(Path.Combine(sketchDirectory, "uploadres.txt")).Split('\n');
+                for(int l = 0; l < outputFile.Length; l++)
+                {
+                    if (outputFile[l].StartsWith("avrdude") && outputFile[l].IndexOf(":") > 0)
+                    {
+                        string logLine = outputFile[l].Substring(outputFile[l].IndexOf(":") + 1);
+                        errorOutput += logLine + "\n";
+                    }
+                }
+                File.Delete(Path.Combine(sketchDirectory, "uploadres.txt"));
+            } catch {
             }
+            //
+            //if (!String.IsNullOrWhiteSpace(errorOutput))
+            //{
+            //    throw(new IOException(errorOutput));
+            //}
+            return errorOutput;
         }
 
     }

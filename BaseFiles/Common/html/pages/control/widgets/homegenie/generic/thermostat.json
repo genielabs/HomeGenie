@@ -4,23 +4,23 @@
   Version: "2013-07-03",
 
   GroupName : '',
-	IconImage : 'pages/control/widgets/homegenie/generic/images/temperature.png',
-	StatusText : '',
-	Description : '',
+  IconImage : 'pages/control/widgets/homegenie/generic/images/temperature.png',
+  StatusText : '',
+  Description : '',
 
   levelKnobBindValue : 'Heating',
-  
+
   RenderView: function (cuid, module) {
     var displayUnit = 'Celsius';
     if (HG.WebApp.Locales.GetDateEndianType() == 'M') displayUnit = 'Fahrenheit';
-    
+
     var container = $(cuid);
     var widget = container.find('[data-ui-field=widget]');
     var controlpopup = widget.data('ControlPopUp');
     if (!controlpopup)
     {
       var _this = this;
-      
+
       container.find('[data-ui-field=controlpopup]').trigger('create');
       controlpopup = container.find('[data-ui-field=controlpopup]').popup();
       widget.data('ControlPopUp',  controlpopup);
@@ -31,7 +31,7 @@
           $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
         }
       });
-      
+
       controlpopup.find('[data-ui-field=level_knob]').knob({
         'release' : function (v) 
         {
@@ -46,36 +46,36 @@
           controlpopup.find('[data-ui-field=status]').html(v + '&deg;');
         }
       });
-			
+
       if (displayUnit == 'Celsius')
       {
         controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
-	        min: 5,
+          min: 5,
           max: 35
         });
       }
       else
       {
         controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
-	        min: 40,
+          min: 40,
           max: 100
         });
       }
 
-			// settings button
-			widget.find('[data-ui-field=settings]').on('click', function(){
-				if (module.Domain == 'HomeAutomation.HomeGenie.Automation')
-				{
-				    HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
-				    HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
-				    HG.WebApp.ProgramsList.UpdateOptionsPopup();
-				}
-				else
-				{
-					HG.WebApp.Control.EditModule(module);
-				}
-			});		
-      
+      // settings button
+      widget.find('[data-ui-field=settings]').on('click', function(){
+        if (module.Domain == 'HomeAutomation.HomeGenie.Automation')
+        {
+          HG.WebApp.ProgramEdit._CurrentProgram.Domain = module.Domain;
+          HG.WebApp.ProgramEdit._CurrentProgram.Address = module.Address;
+          HG.WebApp.ProgramsList.UpdateOptionsPopup();
+        }
+        else
+        {
+          HG.WebApp.Control.EditModule(module);
+        }
+      });		
+
       // popup values on open
       controlpopup.on('popupbeforeposition', function(evt, ui){
         // reset buttons' state
@@ -131,7 +131,7 @@
         _this.EditHeatSetPoint(controlpopup, module);
         HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Heat", function (data) { });
       });
-      
+
     }
 
     this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
@@ -142,7 +142,7 @@
     controlpopup.find('[data-ui-field=name]').html(module.Name);
 
     var imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-  
+
     // display Temperature
     var temperatureField = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
     var temperature = 0;
@@ -152,7 +152,7 @@
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
     }
     widget.find('[data-ui-field=temperature_value]').html(temperature + '&deg;');
-    
+
     // display Fan State
     var fanState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.FanState");
     if (fanState == null || fanState.Value == '')
@@ -174,34 +174,36 @@
       }
       widget.find('[data-ui-field=fan_value]').html(displayFan);       
     }
-    
-    
+
+
     // display current Heating SetPoint
     var heatTo = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.SetPoint.Heating");
     if (heatTo == null || heatTo.Value == '')
     {
-        widget.find('[data-ui-field=heat_field]').hide();
+      widget.find('[data-ui-field=heat_field]').hide();
     }
     else
     {
-        widget.find('[data-ui-field=heat_field]').show();
-        var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
-        widget.find('[data-ui-field=set_value]').html( temperature + '&deg;' );
+      widget.find('[data-ui-field=heat_field]').show();
+      var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
+      if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
+      widget.find('[data-ui-field=set_value]').html( temperature + '&deg;' );
     }
-    
-    
+
+
     // display current Cooling SetPoint
     widget.find('[data-ui-field=cool_field]').hide();
     var coolTo = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.SetPoint.Cooling");
     if (coolTo == null || coolTo.Value == '')
     {
-        widget.find('[data-ui-field=cool_field]').hide();
+      widget.find('[data-ui-field=cool_field]').hide();
     }
     else
     {
-        widget.find('[data-ui-field=cool_field]').show();
-        var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
-        widget.find('[data-ui-field=set_value]').html( temperature + '&deg;' );
+      widget.find('[data-ui-field=cool_field]').show();
+      var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
+      if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
+      widget.find('[data-ui-field=set_value]').html( temperature + '&deg;' );
     }
     // enable/disable Cool Set Point feature (not every thermostat support it)
     if (coolTo == null)
@@ -214,8 +216,8 @@
       controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-disabled');
       controlpopup.find('[data-ui-field=cool_setpoint]').removeClass('ui-disabled');
     }
-    
-    
+
+
     // display status line (operating state + mode)
     var displayState = '---';
     var operatingState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.OperatingState");
@@ -226,7 +228,7 @@
     var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.Mode");
     if (operatingMode != null) displayMode = operatingMode.Value;
     widget.find('[data-ui-field=mode_value]').html(displayMode);  
-    
+
   },
 
   EditCoolSetPoint: function(controlpopup, module) {
