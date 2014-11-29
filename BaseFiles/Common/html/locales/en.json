@@ -324,5 +324,131 @@
 	"configure_maintenance_resetproceed": 
 		 "Proceed",
 	"configure_maintenance_resetcancel": 
-		 "Cancel"
+		 "Cancel",
+    "home_voicerecognition_text_placeholder": 
+         "Click the button for voice control or type a sentence...",
+    "home_voicerecognition_voice": 
+         "Voice",
+    "configure_menu_scheduler":
+        "Scheduler",
+    "configure_grouplist":
+        "Groups List",
+    "configure_schedulerservice_title":
+        "Automation<br />Scheduler",
+    "configure_scheduler_events":
+        "Scheduler Events",
+    "configure_schedulerservice_bottombar_event_add":
+        "Add Event",
+    "configure_schedulerservice_schedulerevent":
+        "Scheduler Event",
+    "configure_schedulerservice_itemname":
+        "Name",
+    "configure_schedulerservice_itemcronexp":
+        "Cron Expression",
+    "configure_schedulerservice_itemprogramid":
+        "Program Id or Name (optional)",
+    "configure_schedulerservice_cancelitem":
+        "Cancel",
+    "configure_schedulerservice_deleteitem":
+        "Delete",
+    "configure_schedulerservice_updateitem":
+        "Update",
+    "configure_system_updatemanager":
+        "Update Manager",
+    "configure_system_updatemanager_updatecheck":
+        "Update Check",
+    "configure_system_updatemanager_installupdate":
+        "Install Update",
+    "configure_system_restart_service":
+        "Service Restart",
+    "configure_system_restart":
+        "Restart",
+    "configure_system_loganddebug":
+        "Log file",
+    "configure_system_logdownload":
+        "Download",
+    "configure_system_logdownloadtoday":
+        "Today",
+    "configure_system_logdownloadyesterday":
+        "Yesterday",
+    "configure_system_httpsettings":
+        "HTTP Settings",
+    "configure_security_passwordprotectedaccess_set":
+        "Set",
+    "configure_security_passwordprotectedaccess_clear":
+        "Clear",
+    "configure_system_httpcache":
+        "Http Service Cache",
+    "configure_maintenance_configuration_info":
+        "<b>Note:</b> before restoring a backup file you've to set the same system password used when creating it.",
+    "configure_maintenance_configuration_backup":
+        "Backup",
+    "configure_maintenance_configuration_restore":
+        "Restore",
+    "configure_maintenance_configuration_factory_reset":
+        "Factory Reset",
+    "configure_system_modulescleanup":
+        "Modules Cleanup",
+    "configure_system_modulesselect":
+        "Select Modules",
+    "configure_system_remotemodules":
+        "Remote Modules Routing",
+    "configure_system_modsroutingreset":
+        "Reset",
+    "configure_system_userinterface":
+        "User Interface",
+    "configure_system_eventshistory":
+        "Events History",
+    "home_about_version":
+        "version",
+    "home_about_codename":
+        "codename",
+    "home_about_motto":
+        "motto",
+    "home_about_concept":
+        "Concept, design, ideas and coding<br /> by G-Labs",
+    "home_about_license":
+        "license",
+    "home_about_site":
+        "HomePage and Support",
+    "home_about_site_docs":
+        "Documentation",
+    "actions_menu":
+        "Actions Menu",
+    "control_macrorecord_record_macro":
+        "Record Macro",
+    "control_macrorecord_recording":
+        "Recording...",
+    "control_macrorecord_description":
+        "Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.",
+    "control_macrorecord_close":
+        "Close",
+    "control_macrorecord_options":
+        "Options",
+    "control_macrorecord_options_pause":
+        "Pause Between commands",
+    "control_macrorecord_options_none":
+        "None",
+    "control_macrorecord_options_mimic":
+        "Mimic",
+    "control_macrorecord_options_fixed":
+        "Fixed",
+    "control_macrorecord_options_pauseduration":
+        "Fixed pause seconds",
+    "update_options_popup_loading":
+        "Loading Program data",
+    "control_widget_notconfigured_title":
+        "Widget not configured",
+    "control_widget_notconfigured_text":
+        "Click this button to edit configuration.",
+    "control_widget_notconfigured_button":
+        "Close",
+    "configure_program_options_details":
+        "Details",
+    "configure_program_options_restart":
+        "Restart",
+    "configure_program_details_configoptions":
+        "Configuration Options",
+    "configure_program_details_moduleparams":
+        "Module Parameters"
 }

@@ -159,7 +159,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Configuration Options</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_configoptions') + '</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
     	}
@@ -180,7 +180,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Module Parameters</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_moduleparams') + '</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
 	        //
@@ -492,7 +492,7 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function()
 {
     if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
     //
-    $.mobile.loading('show', { text: 'Loading Program data', textVisible: true, theme: 'a', html: '' });
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('update_options_popup_loading'), textVisible: true, theme: 'a', html: '' });
     HG.Automation.Programs.List(function () {
         HG.Configure.Modules.List(function (data) {
             try {

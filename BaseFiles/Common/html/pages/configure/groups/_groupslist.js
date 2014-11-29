@@ -41,7 +41,7 @@ HG.WebApp.GroupsList.LoadGroups = function()
 //
 HG.WebApp.GroupsList.GetGroupsListViewItems = function() {
     $('#configure_groupslist').empty();
-    $('#configure_groupslist').append('<li data-icon="false" data-role="list-divider">Groups List</li>');
+    $('#configure_groupslist').append('<li data-icon="false" data-role="list-divider">'+HG.WebApp.Locales.GetLocaleString('configure_grouplist')+'</li>');
     //
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         // count modules

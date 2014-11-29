@@ -658,6 +658,9 @@ HG.WebApp.Locales.Localize = function(container, langurl)
                     if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
                         $('span.ui-btn-text', $this).text(text);
                     }
+                    else if( $this.is('input') ) {
+                        $this.attr("placeholder", text);
+                    }
                     else {
                         $(this).html(text);
                     }

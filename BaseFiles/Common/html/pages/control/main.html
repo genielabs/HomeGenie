@@ -6,22 +6,22 @@
 
     <div id="control_macrorecord_optionspopup" class="hg-popup-a" data-role="popup" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <div data-role="header"><h1>Options</h1></div>
+        <div data-role="header"><h1 data-locale-id="control_macrorecord_options">Options</h1></div>
         <div class="ui-content">
 
-            <h4>Pause Between commands</h4>
+            <h4 data-locale-id="control_macrorecord_options_pause">Pause Between commands</h4>
             <div align="center">
                 <fieldset data-role="controlgroup" data-type="horizontal">
-                    <label for="macrorecord_delay_none">None</label>
+                    <label data-locale-id="control_macrorecord_options_none" for="macrorecord_delay_none">None</label>
                     <input name="macrorecord_delay_radio" id="macrorecord_delay_none" type="radio" data-icon="gear" data-iconpos="left" />
-                    <label for="macrorecord_delay_mimic">Mimic</label>
+                    <label data-locale-id="control_macrorecord_options_mimic" for="macrorecord_delay_mimic">Mimic</label>
                     <input name="macrorecord_delay_radio" id="macrorecord_delay_mimic" type="radio" data-icon="gear" data-iconpos="left" />
-                    <label for="macrorecord_delay_fixed">Fixed</label>
+                    <label data-locale-id="control_macrorecord_options_fixed" for="macrorecord_delay_fixed">Fixed</label>
                     <input name="macrorecord_delay_radio" id="macrorecord_delay_fixed" type="radio" data-icon="gear" data-iconpos="left" />
                 </fieldset>
             </div>
             <fieldset data-role="controlgroup">
-                <label for="macrorecord_delay_seconds">Fixed pause seconds</label>
+                <label data-locale-id="control_macrorecord_options_pauseduration" for="macrorecord_delay_seconds">Fixed pause seconds</label>
                 <input id="macrorecord_delay_seconds" type="number" step="0.1" min="0" value="0" />
             </fieldset>
 
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-gear ui-btn-icon-right" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-transition="slideup">
+                    <a class="ui-btn ui-icon-gear ui-btn-icon-right" href="#control_macrorecord_optionspopup" data-rel="popup" data-position-to="window" data-locale-id="control_macrorecord_options" data-transition="slideup">
                         Options
                     </a>
                 </li>
@@ -108,12 +108,12 @@
 
     <div id="control_actionmenu" data-role="popup" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <h5 align="center">Actions Menu</h5>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul id="control_custom_actionmenu" data-role="listview" data-inset="false" style="min-width:210px;">
         </ul>
         <div class="ui-body-inherit" style="height:2px;width:100%;overflow:hidden;border:0">&nbsp;</div>
         <ul data-role="listview" data-inset="false" style="min-width:210px;" data-mini="true">
-            <li id="control_actionmenu_macrorecord" data-mini="true"><a class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
+            <li id="control_actionmenu_macrorecord" data-mini="true"><a data-locale-id="control_macrorecord_record_macro" class="ui-btn ui-icon-edit ui-btn-icon-right" data-mini="true" href="javascript:HG.WebApp.Control.RecordMacroStart()">Record Macro</a></li>
             <!--li><a class="ui-btn ui-icon-refresh ui-btn-icon-right" href="javascript:$.mobile.loading('show');HG.WebApp.Control.UpdateModules();">Refresh list</a></li-->
         </ul>
     </div>

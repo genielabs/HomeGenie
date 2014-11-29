@@ -89,9 +89,9 @@ HG.WebApp.Control.RecordMacroStart = function () {
 	}, 500);
 	$('#btn_control_macrorecord').qtip({
         content: {
-        	title: 'Recording...',
-        	text: 'Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.',
-        	button: 'Close'
+        	title: HG.WebApp.Locales.GetLocaleString('control_macrorecord_recording'),
+        	text: HG.WebApp.Locales.GetLocaleString('control_macrorecord_description'),
+        	button: HG.WebApp.Locales.GetLocaleString('control_macrorecord_close'),
     	},
         show: { event: false, ready: true, delay: 1500 },
         events: {

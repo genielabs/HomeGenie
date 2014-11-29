@@ -41,7 +41,7 @@ HG.WebApp.AutomationGroupsList.LoadGroups = function ()
 //
 HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         $('#configure_automationgroupslist').empty();
-        $('#configure_automationgroupslist').append('<li data-icon="false" data-role="list-divider">Groups List</li>');
+        $('#configure_automationgroupslist').append('<li data-icon="false" data-role="list-divider">'+HG.WebApp.Locales.GetLocaleString('configure_grouplist')+'</li>');
         //
         var i = 0;
         for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {

@@ -32,9 +32,9 @@
 			//
 			widget.find('[data-ui-field=settings]').qtip({
 			        content: {
-			        	title: 'Widget not configured',
-			        	text: 'Click this button to edit configuration.',
-			        	button: 'Close'
+			        	title: HG.WebApp.Locales.GetLocaleString('control_widget_notconfigured_title'),
+			        	text: HG.WebApp.Locales.GetLocaleString('control_widget_notconfigured_text'),
+			        	button: HG.WebApp.Locales.GetLocaleString('control_widget_notconfigured_button')
 			    	},
 			        show: { event: false, ready: true, delay: 1000 },
 			        events: {
