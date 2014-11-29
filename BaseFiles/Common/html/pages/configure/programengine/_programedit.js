@@ -276,7 +276,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 		//$('#configure_program_editorruncode').addClass('ui-disabled');
 		$('#configure_program_editorcompilecode').addClass('ui-disabled');
 		$('#configure_program_editorcompilecode2').addClass('ui-disabled');
-	    $.mobile.loading('show', { text: 'Updating program data', textVisible: true, theme: 'a', html: '' });
+	    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_saving'), textVisible: true, theme: 'a', html: '' });
 		$('#control_groupslist').empty();
 		$.ajax({
 			type: 'POST',
@@ -292,14 +292,14 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 				{
 					//$('#proHG.WebApp.ProgramEdit.UpdateProgramgram_barbutton_run').attr('disabled', 'disabled');
 				    //$('#program_barbutton_run').button().button('refresh');
-				    $.mobile.loading('show', { text: 'Error updating program!', textVisible: true });
+				    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_error_updating'), textVisible: true });
 					HG.WebApp.ProgramEdit.ShowProgramErrors(response);
 				}
 				else
 				{
 					//$('#program_barbutton_run').removeAttr('disabled');
 				    //$('#program_barbutton_run').button().button('refresh');
-				    $.mobile.loading('show', { text: 'Saving succeed.', textVisible: true });
+				    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_saving_succeed'), textVisible: true });
 				    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
 					//HG.WebApp.ProgramEdit.HideProgramErrors();
 				}

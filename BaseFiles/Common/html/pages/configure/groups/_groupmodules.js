@@ -420,7 +420,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
 	        html += '<td style="padding-left:10px"><span>' + groupmodules.Modules[m].Name + '</span></td></tr>';
 	        html += '<tr><td style="padding-left:10px"><span style="color:gray">' + domain_label + '</span> ' + address_label + ' ' + groupmodules.Modules[m].Address + '</td>';
 	        html += '</tr></table></a>';
-	        html += '<a href="#page_configure_groupmodules_propspopup" data-rel="popup" data-transition="pop">Module Parameters</a>';
+	        html += '<a href="#page_configure_groupmodules_propspopup" data-rel="popup" data-transition="pop">'+HG.WebApp.Locales.GetLocaleString('configure_module_parameters_linktitle')+'</a>';
 	        html += '</li>';
 		}
     }

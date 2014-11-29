@@ -76,7 +76,7 @@
     <div id="page_configure_groupmodules_propspopup" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header">
-            <h2>Parameters</h2>
+            <h2 data-locale-id="configure_module_parameters">Parameters</h2>
         </div>
         <div class="ui-content">
 
@@ -85,11 +85,11 @@
         </div>
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
         	<div class="ui-block-a">
-            	<a class="ui-btn ui-icon-minus ui-btn-icon-left ui-disabled ui-corner-all" href="#" id="automation_group_module_propdelete">Delete</a>
+            	<a class="ui-btn ui-icon-minus ui-btn-icon-left ui-disabled ui-corner-all" href="#" id="automation_group_module_propdelete" data-locale-id="configure_module_parameters_delete">Delete</a>
             </div>
             <!-- a class="ui-btn ui-icon-plus ui-btn-icon-left" href="javascript:HG.WebApp.GroupModules.ModulePropertyAdd(HG.WebApp.GroupModules.CurrentModule, 'Custom.Property', '')">Add</a -->
             <div class="ui-block-b">
-            	<a class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="javascript:HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, null)" id="automation_group_module_propsave">Save</a>
+            	<a class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="javascript:HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, null)" id="automation_group_module_propsave" data-locale-id="configure_module_parameters_save">Save</a>
             </div>
         </div>
     </div>
@@ -101,14 +101,14 @@
     <div id="automation_group_separator_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
-            <h1 id="configure_groupmodules_separatoredit">Edit Separator</h1>
+            <h1 id="configure_groupmodules_separatoredit" data-locale-id="configure_separator_edit">Edit Separator</h1>
         </div>
         <div class="ui-content ui-corner-bottom">
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
                         <label data-locale-id="configure_separator_label">Label</label>
-                        <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" value="" />
+                        <input id="automation_group_separatorlabel" type="text" onchange="HG.WebApp.GroupModules.EditModule.Address = $(this).val()" placeholder="enter label" data-locale-id="configure_separator_placeholder" value="" />
                     </td>
                 </tr>
             </table>

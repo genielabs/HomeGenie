@@ -128,7 +128,7 @@
 	"configure_program_options_edit": 
 		 "Редактировать",
 	"configure_program_options_export": 
-		 "Экспортировать",
+		 "Экспорт",
 	"configure_program_options_delete": 
 		 "Удалить",
 	"configure_program_programgroup": 
@@ -244,7 +244,7 @@
 	"configure_interfaces_x10port": 
 		 "Порт устройства",
 	"configure_interfaces_x10housecodes": 
-		 "Используемый код дома",
+		 "Используемые коды дома",
 	"configure_interfaces_w800rf32": 
 		 "Опции интерфейса W800RF32 RF Receiver",
 	"configure_interfaces_w800rf32port": 
@@ -420,7 +420,7 @@
     "control_macrorecord_recording":
         "Запись...",
     "control_macrorecord_description":
-        "Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Сохранить</strong> button when finished.",
+        "Все команды теперь записываются в <strong>Мастер сценарий</strong>.<br>Нажмите кнопку <strong>Сохранить</strong> по завершении.",
     "control_macrorecord_close":
         "Закрыть",
     "control_macrorecord_options":
@@ -450,5 +450,95 @@
     "configure_program_details_configoptions":
         "Конфигурационные настройки",
     "configure_program_details_moduleparams":
-        "Параметры модуля"
+        "Параметры модуля",
+    "configure_group_actionmenu_deletegroup":
+        "Удалить группу",
+    "configure_group_actionmenu_addseparatorlabel":
+        "Добавить разделитель",
+    "configure_group_actionmenu_addmodule":
+        "Добавить модуль",
+    "configure_separator_edit":
+        "Изменить разделитель",
+    "configure_separator_label":
+        "Метка",
+    "configure_separator_placeholder":
+        "введите метку",
+    "configure_module_optaddseparator":
+        "Обновить",
+    "configure_module_parameters":
+        "Параметры",
+    "configure_module_parameters_delete":
+        "Удалить",
+    "configure_module_parameters_save":
+        "Сохранить",
+    "configure_module_parameters_linktitle":
+        "Параметры модуля",
+    "configure_automationgroup_add":
+        "Добавить",
+    "configure_programslist_listtitle":
+        "Список программ",
+    "configure_programslist_tap_disable":
+        "Нажмите чтобы ВЫКЛЮЧИТЬ программу",
+    "configure_programslist_tab_enable":
+        "Нажмите чтобы ВКЛЮЧИТЬ программу",
+    "configure_programslist_deletegroup":
+        "Удалить группу",
+    "configure_programslist_importprogram":
+        "Импортировать программу",
+    "configure_programslist_addnewprogram":
+        "Добавить новую программу",
+    "configure_programslist_refreshlist":
+        "Обновить список",
+    "configure_programslist_import":
+        "Импорт",
+    "configure_program_summary":
+        "Свойства",
+    "configure_program_programcode":
+        "Код программы",
+    "configure_program_sketchcode":
+        "Код скетча",
+    "configure_program_triggercode":
+        "Код триггера",
+    "configure_program_makefile":
+        "Makefile",
+    "configure-editprogram-addcommand":
+        "Добавить команду",
+    "configure-editprogram-addcondition":
+        "Добавить условие",
+    "configure-editprogram-capture":
+        "Захват",
+    "configure-editprogram-help":
+        "Помощь",
+    "configure_program_triggertype":
+        "Триггер",
+    "configure_editprogram_options_delete":
+        "Удалить программу",
+    "configure_editprogram_saving_succeed":
+        "Успешно сохранено.",
+    "configure_editprogram_saving":
+        "Сохранение программы",
+    "configure_editprogram_error_updating":
+        "Ошибка при обновлении программы!",
+    "configure_editprogram_compile":
+        "Компилировать",
+    "systemsettings_selectport_title":
+        "Внимание",
+    "systemsettings_selectport_placeholder":
+        "(выберите порт...)",
+    "systemsettings_selectport_text":
+        "Пожалуйста, выберите порт для этого устройства",
+    "systemsettings_selectport_button":
+        "Закрыть",
+    "systemsettings_x10housecodes_title":
+        "Внимание",
+    "systemsettings_x10housecodes_text":
+        "Пожалуйста, выберите как минимум один код дома.",
+    "systemsettings_x10housecodes_button":
+        "Закрыть",
+    "configure_interfaces_insteon": 
+         "Insteon PLM (2413S/2413U)",
+    "configure_interfaces_insteonport": 
+         "Порт устройства",
+    "configure_interfaces_insteonx10housecodes": 
+         "Используемые коды дома (только для устройств X10)"
 }

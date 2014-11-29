@@ -69,14 +69,14 @@
     <div id="automation_program_import" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b">
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
         <div class="ui-corner-top" data-role="header">
-            <h2 data-locale-id="configure_program_options">Import Program</h2>
+            <h2 data-locale-id="configure_programslist_importprogram">Import Program</h2>
         </div>
         <div class="ui-content ui-corner-bottom">
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
                 <form id="program_import_form" target="program_upload_frame" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Automation/Programs.Import/" data-ajax="false">
                     <input id="program_import_uploadfile" type="file" title="Import program from XML file" name="file" />
                 </form>
-                <a id="program_import_button" href="#" class="ui-btn ui-shadow ui-corner-all">Import</a>
+                <a data-locale-id="configure_programslist_import" id="program_import_button" href="#" class="ui-btn ui-shadow ui-corner-all">Import</a>
                 <iframe id="program_import_uploadframe" name="program_upload_frame" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
                 <iframe id="program_import_downloadframe" name="program_download_frame" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
             </fieldset>
@@ -87,10 +87,10 @@
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul data-role="listview" class="ui-listview" style="min-width:210px;">
-            <li><a id="btn_automationprograms_group_delete" class="ui-btn ui-btn-icon-right ui-icon-minus">Delete group</a></li>
-            <li><a id="btn_automation_program_import" class="ui-btn ui-btn-icon-right ui-icon-bars">Import program</a></li>
-            <li><a id="btn_automation_program_add" class="ui-btn ui-btn-icon-right ui-icon-edit">Add new program</a></li>
-            <li><a id="btn_automation_program_refresh" class="ui-btn ui-btn-icon-right ui-icon-refresh">Refresh list</a></li>
+            <li><a id="btn_automationprograms_group_delete" data-locale-id="configure_programslist_deletegroup" class="ui-btn ui-btn-icon-right ui-icon-minus">Delete group</a></li>
+            <li><a id="btn_automation_program_import" data-locale-id="configure_programslist_importprogram" class="ui-btn ui-btn-icon-right ui-icon-bars">Import program</a></li>
+            <li><a id="btn_automation_program_add" data-locale-id="configure_programslist_addnewprogram" class="ui-btn ui-btn-icon-right ui-icon-edit">Add new program</a></li>
+            <li><a id="btn_automation_program_refresh" data-locale-id="configure_programslist_refreshlist" class="ui-btn ui-btn-icon-right ui-icon-refresh">Refresh list</a></li>
         </ul>
     </div>
 

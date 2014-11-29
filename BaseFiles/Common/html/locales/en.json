@@ -450,5 +450,95 @@
     "configure_program_details_configoptions":
         "Configuration Options",
     "configure_program_details_moduleparams":
-        "Module Parameters"
+        "Module Parameters",
+    "configure_group_actionmenu_deletegroup":
+        "Delete Group",
+    "configure_group_actionmenu_addseparatorlabel":
+        "Add Separator",
+    "configure_group_actionmenu_addmodule":
+        "Add Module",
+    "configure_separator_edit":
+        "Edit separator",
+    "configure_separator_label":
+        "Label",
+    "configure_separator_placeholder":
+        "enter label",
+    "configure_module_optaddseparator":
+        "Update",
+    "configure_module_parameters":
+        "Parameters",
+    "configure_module_parameters_delete":
+        "Delete",
+    "configure_module_parameters_save":
+        "Save",
+    "configure_module_parameters_linktitle":
+        "Module Parameters",
+    "configure_automationgroup_add":
+        "Add",
+    "configure_programslist_listtitle":
+        "Programs list",
+    "configure_programslist_tap_disable":
+        "Tap to DISABLE program",
+    "configure_programslist_tab_enable":
+        "Tap to ENABLE program",
+    "configure_programslist_deletegroup":
+        "Delete Group",
+    "configure_programslist_importprogram":
+        "Import program",
+    "configure_programslist_addnewprogram":
+        "Add new program",
+    "configure_programslist_refreshlist":
+        "Refresh list",
+    "configure_programslist_import":
+        "Import",
+    "configure_program_summary":
+        "Summary",
+    "configure_program_programcode":
+        "Program Code",
+    "configure_program_sketchcode":
+        "Sketch Code",
+    "configure_program_triggercode":
+        "Trigger Code",
+    "configure_program_makefile":
+        "Makefile",
+    "configure-editprogram-addcommand":
+        "Add Command",
+    "configure-editprogram-addcondition":
+        "Add Condition",
+    "configure-editprogram-capture":
+        "Capture",
+    "configure-editprogram-help":
+        "Help",
+    "configure_program_triggertype":
+        "Trigger",
+    "configure_editprogram_options_delete":
+        "Delete Program",
+    "configure_editprogram_saving_succeed":
+        "Saving succeed.",
+    "configure_editprogram_saving":
+        "Updating program data",
+    "configure_editprogram_error_updating":
+        "Error updating program!",
+    "configure_editprogram_compile":
+        "Compile",
+    "systemsettings_selectport_title":
+        "Notice",
+    "systemsettings_selectport_placeholder":
+        "(select port...)",
+    "systemsettings_selectport_text":
+        "Please select port used by this device",
+    "systemsettings_selectport_button":
+        "Close",
+    "systemsettings_x10housecodes_title":
+        "Notice",
+    "systemsettings_x10housecodes_text":
+        "Please select at least one house code.",
+    "systemsettings_x10housecodes_button":
+        "Close",
+    "configure_interfaces_insteon": 
+         "Insteon PLM (2413S/2413U)",
+    "configure_interfaces_insteonport": 
+         "Device Port",
+    "configure_interfaces_insteonx10housecodes": 
+         "House Codes in use (for X10 devices only)"
 }
