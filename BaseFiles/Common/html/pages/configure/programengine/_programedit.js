@@ -195,7 +195,8 @@ HG.WebApp.ProgramEdit.GetModuleComparableProperties = function (module)
 
 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () 
     {
-        var editMode = HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase();
+        var editMode = 'wizard';
+        if (typeof(HG.WebApp.ProgramEdit._CurrentProgram.Type) != 'undefined') editMode = HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase();
     	if (editMode != 'wizard')
     	{
 	        var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;

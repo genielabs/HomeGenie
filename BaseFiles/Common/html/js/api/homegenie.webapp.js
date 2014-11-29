@@ -33,9 +33,11 @@ HG.WebApp.InitializePage = function ()
     //
     // Application start - Init stuff
     //
-    var t = sessvars.UserSettings.UiTheme;
-    if (t < 'a' || t > 'g') {
-        sessvars.UserSettings.UiTheme = 'a';
+    dataStore = $.jStorage; //new window.Basil({ namespace: 'HomeGenie', storages: ['local', 'session', 'cookie', 'memory'] });
+    //
+    var theme = dataStore.get('UI.Theme');
+    if (theme == null || (theme < 'a' || theme > 'g')) {
+        dataStore.set('UI.Theme', 'a');
     }
     //
     $.mobile.ajaxFormsEnabled = false;
@@ -66,7 +68,7 @@ HG.WebApp.InitializePage = function ()
     //
     $('[data-role=page]').on('pagebeforeshow', function (event) 
     {
-        setTheme(sessvars.UserSettings.UiTheme);
+        setTheme(dataStore.get('UI.Theme'));
         //
         if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
         {
@@ -142,10 +144,6 @@ HG.WebApp.InitializePage = function ()
         else if (this.id == 'page_automation_programs') 
         {
             HG.WebApp.ProgramsList.LoadPrograms();
-        }
-		// TODO: deprecate this
-        else if (this.id == 'page_automation_editprogram_code') 
-        {
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
@@ -241,8 +239,8 @@ HG.WebApp.InitializePage = function ()
         }
 		//
 		// Apply UI settings
-        setTheme(sessvars.UserSettings.UiTheme);
-        if (sessvars.UserSettings.EventsHistory)
+        setTheme(dataStore.get('UI.Theme'));
+        if (dataStore.get('UI.EventsHistory'))
         {
         	$('#btn_eventshistory_led').show();
         }

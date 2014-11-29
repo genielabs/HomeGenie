@@ -27,6 +27,47 @@ using System.Text;
 
 using HomeGenie.Service;
 
+/*! \mainpage Extend, customize, create!
+ *
+ * \section terms_used Actors you will find in here
+ *
+ * **Program Engine** (also known as 'Master Control Program' or 'mcp')
+ * \n
+ * \n
+ * **Automation Program Plugin** (also known as just 'program' or 'app')
+ * \n
+ * \n
+ * **Module**
+ * \n It consists of a fixed number of properties (Domain, Address, Name, Description) and a certain number of variant properties (see *Parameters*).
+ * \n
+ * \n
+ * **Module Event**
+ * \n .....
+ * \n
+ * \n
+ * **Parameter**
+ * \n .....
+ * \n
+ * \n
+ * **Helper Class**
+ * \n .....
+ * \n
+ *
+ * \section faq_sec FAQ
+ * \subsection faq_1 Where do I find some examples?
+ * etc...
+ * \subsection faq_2 How do I create a new app?
+ * etc...
+ * \subsection faq_3 What support libraries are referenced in a app?
+ * (Raspberry#, nMQTT, NewtonSoft.Json,...)
+ * etc...
+ * \subsection faq_4 Can I create my robot's intelligence using HG?
+ * Well... good luck! =)
+ * \subsection faq_5 Can I add a custom module parameter to the Statistics page?
+ * Any parameter with a valid numeric value is automatically added to the Statistics.
+ * etc...
+ */
+
 namespace HomeGenie.Automation.Scripting
 {
 
@@ -47,6 +88,7 @@ namespace HomeGenie.Automation.Scripting
         private EventsHelper eventsHelper;
         private SerialPortHelper serialPortHelper;
         private TcpClientHelper tcpClientHelper;
+        private UdpClientHelper udpClientHelper;
         private SchedulerHelper schedulerHelper;
 
         public void SetHost(HomeGenieService hg, int programId)
@@ -57,6 +99,7 @@ namespace HomeGenie.Automation.Scripting
             eventsHelper = new EventsHelper(homegenie, programId);
             serialPortHelper = new SerialPortHelper();
             tcpClientHelper = new TcpClientHelper();
+            udpClientHelper = new UdpClientHelper();
             schedulerHelper = new SchedulerHelper(homegenie);
         }
 
@@ -154,9 +197,10 @@ namespace HomeGenie.Automation.Scripting
 
         public void Reset()
         {
-            programHelper.Reset();
+            //programHelper.Reset();
             serialPortHelper.Disconnect();
             tcpClientHelper.Disconnect();
+            udpClientHelper.Disconnect();
             netHelper.Reset();
         }
 

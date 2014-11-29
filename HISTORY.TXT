@@ -1,5 +1,14 @@
 ﻿RELEASE HISTORY
 
+29/11/2014 1.00 beta rev 434
+    - Added UdpClientHelper (contributed by smeghead)
+    - Added jSettings for client side settings persistence (issue #51)
+    - Update JQuery Mobile to 1.4.5
+    - Fixed bug in popups theming (not adapting when choosing a different theme)
+    - Added EndOfLine property both to TcpClientHelper and SerialPortHelper
+    - Fixed issues affecting TcpClientHelper (issue #48)
+    - Fixed bug in releasing resources used by SerialPortHelper, NetHelper and TcpClientHelper
+
 25/11/2014 1.00 beta rev 431
     - Fixed Arduino Sketch upload issues
     - Patched avrdude on Raspberry Pi SD card to support GPIO#27-DTR and allow direct UART to Arduino upload

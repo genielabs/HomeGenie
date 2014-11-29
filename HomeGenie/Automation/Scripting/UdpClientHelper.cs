@@ -16,7 +16,7 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
+ *     Author: smeghead http://www.homegenie.it/forum/index.php?topic=474.msg2666#msg2666
  *     Project Homepage: http://homegenie.it
  */
 
@@ -25,69 +25,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SerialPortLib;
+using NetClientLib;
 
 namespace HomeGenie.Automation.Scripting
 {
+
     /// <summary>
-    /// Serial port helper.\n
-    /// Class instance accessor: **SerialPort**
+    /// Udp client helper.\n
+    /// Class instance accessor: **udpClient**
     /// </summary>
-    public class SerialPortHelper
+    public class UdpClientHelper
     {
-        private SerialPortInput serialPort;
+        private UDPClient udpClient;
         private Action<byte[]> dataReceived;
         private Action<string> stringReceived;
         private Action<bool> statusChanged;
-        private string portName = "";
         private string[] textEndOfLine = new string[] { "\n" };
         private string textBuffer = "";
 
-        public SerialPortHelper()
+        public UdpClientHelper()
         {
-            serialPort = new SerialPortInput();
+            udpClient = new UDPClient();
         }
 
         /// <summary>
-        /// Selects the serial port with the specified name.
+        /// Sets the client as a sender to address:port
         /// </summary>
-        /// <returns>SerialPortHelper.</returns>
-        /// <param name="port">Port name.</param>
-        public SerialPortHelper WithName(string port)
+        /// <returns>udpClientHelper.</returns>
+        /// <param name="address">Remote DNS or IP address.</param>
+        /// <param name="port">port to send to</param>
+        public UdpClientHelper Sender(string address, int port)
         {
-            portName = port;
+            udpClient.Connect(address, port);
             return this;
         }
 
         /// <summary>
-        /// Connect the serial port (@115200bps).
+        /// Connect to the remote using the specified port.
         /// </summary>
-        public bool Connect()
+        /// <param name="port">Port number.</param>
+        public bool Receiver(int port)
         {
-            return Connect(115200);
-        }
-
-        /// <summary>
-        /// Connect the serial port at the specified speed.
-        /// </summary>
-        /// <param name="baudRate">Baud rate.</param>
-        public bool Connect(int baudRate)
-        {
-            serialPort.MessageReceived += serialPort_MessageReceived;
-            serialPort.ConnectedStateChanged += serialPort_ConnectedStateChanged;
+            udpClient.MessageReceived += udpClient_MessageReceived;
+            udpClient.ConnectedStateChanged += udpClient_ConnectedStateChanged;
             //
-            serialPort.SetPort(portName, baudRate);
-            return serialPort.Connect();
+            return udpClient.Connect(port);
         }
 
         /// <summary>
-        /// Disconnects the serial port.
+        /// Disconnects from the remote host.
         /// </summary>
-        public SerialPortHelper Disconnect()
+        public UdpClientHelper Disconnect()
         {
-            serialPort.Disconnect();
-            serialPort.MessageReceived -= serialPort_MessageReceived;
-            serialPort.ConnectedStateChanged -= serialPort_ConnectedStateChanged;
+            udpClient.Disconnect();
+            udpClient.MessageReceived -= udpClient_MessageReceived;
+            udpClient.ConnectedStateChanged -= udpClient_ConnectedStateChanged;
             return this;
         }
 
@@ -97,10 +89,10 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message.</param>
         public void SendMessage(string message)
         {
-            if (serialPort.IsConnected)
+            if (udpClient.IsConnected)
             {
                 byte[] msg = Encoding.UTF8.GetBytes(message);
-                serialPort.SendMessage(msg);
+                udpClient.SendMessage(msg);
             }
         }
 
@@ -110,9 +102,9 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message.</param>
         public void SendMessage(byte[] message)
         {
-            if (serialPort.IsConnected)
+            if (udpClient.IsConnected)
             {
-                serialPort.SendMessage(message);
+                udpClient.SendMessage(message);
             }
         }
 
@@ -120,7 +112,7 @@ namespace HomeGenie.Automation.Scripting
         /// Sets the function to call when a new string message is received.
         /// </summary>
         /// <param name="receivedAction">Function or inline delegate.</param>
-        public SerialPortHelper OnStringReceived(Action<string> receivedAction)
+        public UdpClientHelper OnStringReceived(Action<string> receivedAction)
         {
             stringReceived = receivedAction;
             return this;
@@ -130,29 +122,29 @@ namespace HomeGenie.Automation.Scripting
         /// Sets the function to call when a new raw message is received.
         /// </summary>
         /// <param name="receivedAction">Function or inline delegate.</param>
-        public SerialPortHelper OnMessageReceived(Action<byte[]> receivedAction)
+        public UdpClientHelper OnMessageReceived(Action<byte[]> receivedAction)
         {
             dataReceived = receivedAction;
             return this;
         }
 
         /// <summary>
-        /// Sets the function to call when the status of the serial connection changes.
+        /// Sets the function to call when the status of the connection changes.
         /// </summary>
         /// <param name="statusChangeAction">Function or inline delegate.</param>
-        public SerialPortHelper OnStatusChanged(Action<bool> statusChangeAction)
+        public UdpClientHelper OnStatusChanged(Action<bool> statusChangeAction)
         {
             statusChanged = statusChangeAction;
             return this;
         }
 
         /// <summary>
-        /// Gets a value indicating whether the serial port is connected.
+        /// Gets a value indicating whether the connection to the service is estabilished.
         /// </summary>
         /// <value><c>true</c> if connected; otherwise, <c>false</c>.</value>
         public bool IsConnected
         {
-            get { return serialPort.IsConnected; }
+            get { return udpClient.IsConnected; }
         }
         
         /// <summary>
@@ -165,7 +157,7 @@ namespace HomeGenie.Automation.Scripting
             set { textEndOfLine = new string[] { value }; }
         }
 
-        private void serialPort_MessageReceived(byte[] message)
+        private void udpClient_MessageReceived(byte[] message)
         {
             if (dataReceived != null)
             {
@@ -199,7 +191,7 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        private void serialPort_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        private void udpClient_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
         {
             // send last received text buffer before disconnecting
             if (!statusargs.Connected && !String.IsNullOrEmpty(textBuffer))
