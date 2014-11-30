@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r434</Version>
+  <Version>1.00 beta r435</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added UdpClientHelper (contributed by smeghead)
+  <ReleaseNote>   - Interface localization improvements
+  - Preliminary ZWaveMe.Thermostat
+  - Added UdpClientHelper (contributed by smeghead)
   - Added jSettings for client side settings persistence (issue #51)
   - Update JQuery Mobile to 1.4.5
   - Fixed bug in popups theming (not adapting when choosing a different theme)
   - Added EndOfLine property both to TcpClientHelper and SerialPortHelper
   - Fixed issues affecting TcpClientHelper (issue #48)
   - Fixed bug in releasing resources used by SerialPortHelper, NetHelper and TcpClientHelper</ReleaseNote>
-  <ReleaseDate>2014-11-29T22:30:37.0000Z</ReleaseDate>
+  <ReleaseDate>2014-11-30T16:11:29.0000Z</ReleaseDate>
 </ReleaseInfo>

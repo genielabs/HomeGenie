@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+30/11/2014 1.00 beta rev 435
+    - Fixed wrong assembly reference (TcpClientLib instead of NetClientLib) in CSharpAppFactory.cs
+    - Some other bug fixing to localization functions
+    - Merged pull request #53 from github : Interface localization improvements, preliminary ZWaveMe.Thermostat support by Bounz
+
 29/11/2014 1.00 beta rev 434
     - Added UdpClientHelper (contributed by smeghead)
     - Added jSettings for client side settings persistence (issue #51)

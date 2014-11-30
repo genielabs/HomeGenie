@@ -163,7 +163,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
             //
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");
-            compilerParams.ReferencedAssemblies.Add("TcpClientLib.dll");
+            compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
             //
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {

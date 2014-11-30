@@ -11,6 +11,6 @@ HG.Control.Modules.ServiceCall = function (fn, domain, nodeid, fnopt, callback) 
             callback(data);
         }
     }).fail(function() {
-    	callback('');
+    	if (typeof(callback) != 'undefined') callback('');
   	});
 };
