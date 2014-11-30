@@ -135,7 +135,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
             }
 	        if (params != '')
 	        {
-	        	params = '</br><ul data-role="listview"><li data-role="list-divider">Implemented Features</li>' + params + '</ul></br>';
+	        	params = '</br><ul data-role="listview"><li data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_program_details_implemfeatures') + '</li>' + params + '</ul></br>';
 	        	fieldparams.append(params);
         	}
 	 	} 
