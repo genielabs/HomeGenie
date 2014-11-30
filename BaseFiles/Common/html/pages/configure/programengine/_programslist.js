@@ -492,6 +492,20 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function()
 {
     if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
     //
+    // hide edit button if not called from automation section
+    if ($.mobile.activePage.attr("id") != 'page_automation_programs')
+    {
+        $('#automationprograms_program_edit').hide();
+        $('#automationprograms_program_btn_delete').hide();
+        $('#automationprograms_program_btn_export').hide();
+    }
+    else
+    {
+        $('#automationprograms_program_edit').show();
+        $('#automationprograms_program_btn_delete').show();
+        $('#automationprograms_program_btn_export').show();
+    }
+    //
     $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('update_options_popup_loading'), textVisible: true, theme: 'a', html: '' });
     HG.Automation.Programs.List(function () {
         HG.Configure.Modules.List(function (data) {
@@ -548,7 +562,7 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog)
     {
         var statusColor = 'black';
         var statusProperty = '';
-        var hasErrors = (prog.Type.toLowerCase() != 'wizard' && typeof(prog.ScriptErrors) != 'undefined' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]');
+        var hasErrors = (typeof(prog.Type) != 'undefined' && prog.Type.toLowerCase() != 'wizard' && typeof(prog.ScriptErrors) != 'undefined' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]');
         //
         var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prog.Address);
         if (module != null) {

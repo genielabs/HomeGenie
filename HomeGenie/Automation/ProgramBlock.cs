@@ -497,7 +497,7 @@ namespace HomeGenie.Automation
         internal void Stop()
         {
             this.IsRunning = false;
-            //this.Reset();
+            this.Reset();
             //
             if (ProgramThread != null)
             {

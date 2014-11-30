@@ -42,11 +42,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
 		//
         $("#configure_system_flip_eventshistory").on('slidestop', function (event) {
             if ($("#configure_system_flip_eventshistory").val() == '1') {
-            	sessvars.UserSettings.EventsHistory = true;
+            	dataStore.set('UI.EventsHistory', true);
             	$('#btn_eventshistory_led').show();
             }
             else {
-            	sessvars.UserSettings.EventsHistory = false;
+                dataStore.set('UI.EventsHistory', false);
             	$('#btn_eventshistory_led').hide();
             }
         });
@@ -286,7 +286,7 @@ HG.WebApp.Maintenance.LoadSettings = function () {
     HG.WebApp.Maintenance.LoadSecuritySettings();
     HG.WebApp.Maintenance.LoadUpdateCheckSettings();
     //
-    $('#configure_system_flip_eventshistory').val(sessvars.UserSettings.EventsHistory ? "1" : "0").slider('refresh');
+    $('#configure_system_flip_eventshistory').val(dataStore.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {

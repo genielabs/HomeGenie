@@ -6,7 +6,7 @@
     <ProjectGuid>{318D2523-3C8B-4273-B1EA-DE339868403C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TcpClientLib</RootNamespace>
+    <RootNamespace>NetClientLib</RootNamespace>
     <AssemblyName>TcpClientLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,6 +39,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TcpClient.cs" />
+    <Compile Include="UdpClient.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

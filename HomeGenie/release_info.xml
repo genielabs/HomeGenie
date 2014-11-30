@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r431</Version>
+  <Version>1.00 beta r434</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Removed IsOn/IsOff check from Scheduled On/Off app
-  - Added value "Smoothing" option to MCP3008 app
-  - Fixed Arduino Sketch upload issues
-  - Added When.SystemStarted / When.SystemStopping events
-  - Fixed display unit as Celsius/Fahrenheit based on user's locale settings
-  - Deprecated Sensor.TemperatureF parameter
-  - Added support for middle endian date/time formatting
-  - Updated Pepper1 Z-Wave database (30+ new devices supported)
-  - Added support for Arduino sketches inside HomeGenie Program Editor
-  - Added program status led in the program editor
-  - Added DHT-22 app
-  - Added SmartIC app for using two MCP23017 I/O expanders
-  - Updated Grove-RGB, OneWire, DHT-11 apps
-  - Updated Jint Javascript Engine</ReleaseNote>
-  <ReleaseDate>2014-11-25T19:15:28.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added UdpClientHelper (contributed by smeghead)
+  - Added jSettings for client side settings persistence (issue #51)
+  - Update JQuery Mobile to 1.4.5
+  - Fixed bug in popups theming (not adapting when choosing a different theme)
+  - Added EndOfLine property both to TcpClientHelper and SerialPortHelper
+  - Fixed issues affecting TcpClientHelper (issue #48)
+  - Fixed bug in releasing resources used by SerialPortHelper, NetHelper and TcpClientHelper</ReleaseNote>
+  <ReleaseDate>2014-11-29T22:30:37.0000Z</ReleaseDate>
 </ReleaseInfo>

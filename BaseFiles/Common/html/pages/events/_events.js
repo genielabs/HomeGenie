@@ -40,7 +40,7 @@ HG.WebApp.Events.SetupListener = function () {
         HG.WebApp.Events.SendEventToUi(module, event);
         //
         //
-        if (sessvars.UserSettings.EventsHistory)
+        if (dataStore.get('UI.EventsHistory'))
         {
 	        // add message to local events queue
 	        HG.WebApp.Data.Events.push(event);
@@ -221,6 +221,13 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     switch (propname) {
                         case 'Temperature':
                             iconImage = 'pages/control/widgets/homegenie/generic/images/temperature.png';
+                            if (HG.WebApp.Locales.GetDateEndianType() == 'M')
+                            {
+                                // convert to Fahrenheit
+                                var temperature = Math.round(eventLog.Value.replace(',', '.') * 100) / 100;
+                                temperature = (temperature * 1.8) + 32;
+                                eventLog.Value = temperature.toString();
+                            }
                             break;
                         case 'Luminance':
                             iconImage = 'pages/control/widgets/homegenie/generic/images/luminance.png';

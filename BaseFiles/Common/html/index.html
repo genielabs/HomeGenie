@@ -12,10 +12,10 @@
     </title>
 
     <!-- jquery & jquery mobile css's -->
-    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.icons-1.4.2.min.css" />
-    <!--link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-png-1.4.2.min.css" /-->
-    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.inline-svg-1.4.2.min.css" />
-    <link rel="stylesheet" href="js/jquery.mobile-1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+    <!--link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-png-1.4.5.min.css" /-->
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-svg-1.4.5.min.css" />
+    <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />
 
     <link rel="stylesheet" href="css/ui.notify.css" />
     <link rel="stylesheet" href="css/jquery.qtip.min.css" />
@@ -25,7 +25,7 @@
     <script src="js/jquery-2.0.2.min.js"></script>
     <!-- jquery-ui used for sortable -->
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="js/jquery.notify.min.js"></script>
     <script src="js/jquery.qtip.min.js"></script>
     <script src="js/jquery.knob.js"></script>
@@ -47,6 +47,9 @@
     <!-- Isotope -->
 	<script src="js/isotope.pkgd.min.js"></script>
 	<script src="js/packery-mode.pkgd.min.js"></script>
+
+    <!-- jStorage data persistence -->
+    <script src="js/jstorage.min.js"></script>
 
     <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
@@ -82,7 +85,6 @@
 
     <script src="js/raphael-min.js"></script>
     <script src="js/colorwheel.js"></script>
-    <script src="js/sessvars.js"></script>
 
     <!-- local css definitions and overrides -->
     <link rel="stylesheet" href="css/my.css" />
@@ -390,16 +392,16 @@
 
         <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
         	<div class="ui-block-a">
-                <a class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
+                <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
         	</div>
         	<div class="ui-block-b">
-                <a class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
+                <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
         	</div>
         	<div class="ui-block-c">
-                <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
+                <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit" data-transition="slide">Edit</a>
         	</div>
         	<div class="ui-block-d">
-                <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit" data-transition="slide">Edit</a>
+                <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
         	</div>
         </div>
 
