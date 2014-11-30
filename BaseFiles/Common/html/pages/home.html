@@ -52,35 +52,35 @@
             <fieldset data-role="fieldcontain" style="border:solid 1px gray;margin:10px;padding:10px;font-family:monospace;font-size:9pt;">
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" style="width:27%">version</div>
+                    <div data-locale-id="home_about_version" class="ui-block-a" style="width:27%">version</div>
                     <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;1.00 beta r434</div>
                 </div>
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" style="width:27%">codename</div>
+                    <div data-locale-id="home_about_codename" class="ui-block-a" style="width:27%">codename</div>
                     <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;AutomaThing</div>
                 </div>
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" style="width:27%">motto</div>
+                    <div data-locale-id="home_about_motto" class="ui-block-a" style="width:27%">motto</div>
                     <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;Things Different! =P</div>
                 </div>
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" style="width:27%">license</div>
+                    <div data-locale-id="home_about_license" class="ui-block-a" style="width:27%">license</div>
                     <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;<a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank">CC BY-NC 3.0</a></div>
                 </div>
 
             </fieldset>
 
-            <h5 style="font-family:georgia" align="center">Concept, design, ideas and coding<br /> by G-Labs</h5>
+            <h5 data-locale-id="home_about_concept" style="font-family:georgia" align="center">Concept, design, ideas and coding<br /> by G-Labs</h5>
 
 
 
             <br />
 
-            <a data-locale-id="" target="_blank" href="http://homegenie.it/" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left">HomePage and Support</a>
-            <a data-locale-id="" target="_blank" href="http://homegenie.it/docs/" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left">Documentation</a>
+            <a data-locale-id="home_about_site" target="_blank" href="http://homegenie.it/" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left">HomePage and Support</a>
+            <a data-locale-id="home_about_site_docs" target="_blank" href="http://homegenie.it/docs/" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left">Documentation</a>
         </div>
     </div>
 
@@ -91,8 +91,8 @@
 
         <table width="100%">
             <tr>
-                <td><input id="voicerecognition_text" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
-                <td width="100px"><a id="voicerecognition_button" class="ui-btn" href="javascript:recognition.start()">Voice</a></td>
+                <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                <td width="100px"><a data-locale-id="home_voicerecognition_voice" id="voicerecognition_button" class="ui-btn" href="javascript:recognition.start()">Voice</a></td>
             </tr>
         </table>
 

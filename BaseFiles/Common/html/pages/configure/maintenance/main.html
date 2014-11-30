@@ -58,7 +58,7 @@
 
                     <div class="ui-block-a">
                         <label data-locale-id="configure_system_loganddebug">Log file</label>
-                        <p>Download</p>
+                        <p data-locale-id="configure_system_logdownload">Download</p>
 		                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
 		                    <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
 		                    <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
@@ -90,8 +90,8 @@
                     </div>
 
                     <div class="ui-block-b" style="float:right;width:150px">
-                        <a href="#securitysettings_password_popup" data-rel="popup" class="ui-btn ui-corner-all">Set</a>
-                        <a href="#" id="securitysettings_password_clear" data-rel="popup" class="ui-btn ui-corner-all">Clear</a>
+                        <a href="#securitysettings_password_popup" data-locale-id="configure_security_passwordprotectedaccess_set" data-rel="popup" class="ui-btn ui-corner-all">Set</a>
+                        <a href="#" id="securitysettings_password_clear" data-locale-id="configure_security_passwordprotectedaccess_clear" data-rel="popup" class="ui-btn ui-corner-all">Clear</a>
                     </div>
 
                 </div>
@@ -159,9 +159,9 @@
                     </div>
 
                     <div class="ui-block-b" style="float:right;width:150px">
-                        <a id="maintenance_configuration_backupbutton" class="ui-btn ui-corner-all" target="restore_configuration_downloadframe" href="../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup">Backup</a>
-                        <a id="maintenance_configuration_restorebutton" href="#" class="ui-btn ui-corner-all">Restore</a>
-                        <a class="ui-btn ui-corner-all" href="#maintenance_configuration_factoryresetpopup" data-rel="popup" data-transition="slidedown">Factory Reset</a>
+                        <a id="maintenance_configuration_backupbutton" data-locale-id="configure_maintenance_configuration_backup" class="ui-btn ui-corner-all" target="restore_configuration_downloadframe" href="../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup">Backup</a>
+                        <a id="maintenance_configuration_restorebutton" data-locale-id="configure_maintenance_configuration_restore" href="#" class="ui-btn ui-corner-all">Restore</a>
+                        <a class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_configuration_factory_reset" href="#maintenance_configuration_factoryresetpopup" data-rel="popup" data-transition="slidedown">Factory Reset</a>
                         <iframe id="restore_configuration_downloadframe" name="downloadframe" src="./dummy" style="display:none;width:0;height:0;border:0"></iframe>
                     </div>
 

@@ -65,7 +65,7 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
         $.mobile.loading('hide');
         //
         $('#configure_schedulerservice_list').empty();
-        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">Scheduler Events</li>');
+        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">'+HG.WebApp.Locales.GetLocaleString('configure_scheduler_events')+'</li>');
         //
         // element containing '.' in the name are grouped in own sections
         for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++)
