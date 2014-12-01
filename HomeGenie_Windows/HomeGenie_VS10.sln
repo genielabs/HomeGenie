@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportLibraries", "Support
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MigFiles", "MigFiles", "{52648E06-7C13-4C7A-97B7-2C109FBAC6B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpClientLib", "..\MigFiles\SupportLibraries\TcpClientLib\TcpClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BaseFiles", "BaseFiles", "{35B0CB76-2656-4737-892A-C6F43D67E28E}"
 EndProject

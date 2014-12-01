@@ -166,6 +166,14 @@ namespace HomeGenie.Automation.Scripting
                 return tcpClientHelper;
             }
         }
+        
+        public UdpClientHelper UdpClient
+        {
+            get
+            {
+                return udpClientHelper;
+            }
+        }
 
         public SchedulerHelper Scheduler
         {

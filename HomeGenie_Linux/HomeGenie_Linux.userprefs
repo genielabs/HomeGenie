@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HomeGenie/Automation/Scripting/ScriptingHost.cs">
     <Files>
       <File FileName="../HISTORY.TXT" Line="5" Column="7" />
-      <File FileName="../HomeGenie/release_info.xml" Line="15" Column="35" />
+      <File FileName="../HomeGenie/release_info.xml" Line="1" Column="1" />
+      <File FileName="../HomeGenie/Automation/Scripting/ScriptingHost.cs" Line="170" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

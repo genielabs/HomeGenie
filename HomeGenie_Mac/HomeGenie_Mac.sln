@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W800RF32", "..\MigFiles\Sup
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortLib", "..\MigFiles\SupportLibraries\SerialPortLib\SerialPortLib.csproj", "{8118C0B9-3B16-47AA-8B24-E5B15F429F78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpClientLib", "..\MigFiles\SupportLibraries\TcpClientLib\TcpClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientLib", "..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj", "{318D2523-3C8B-4273-B1EA-DE339868403C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIG", "..\MigFiles\MIG\MIG.csproj", "{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}"
 EndProject
