@@ -448,7 +448,7 @@
     "configure_program_options_restart": 
         "Перезапуск",
     "configure_program_details_implemfeatures": 
-        "Implemented Features",
+        "Реализованные возможности",
     "configure_program_details_configoptions": 
         "Конфигурационные настройки",
     "configure_program_details_moduleparams": 
@@ -546,71 +546,71 @@
     "configure_group_newgroupconfirm": 
         "Ok",
     "configure_module_optremoveseparator": 
-        "Remove",
+        "Удалить",
     "configure_program_selectcommandtarget": 
-        "Select command target",
+        "Укажите цель для команды",
     "configure_program_selectcommandtoperform": 
-        "Select command to perform",
+        "Выберите команду для выполнения",
     "configure_program_commandcustom": 
         "Custom API command",
     "configure_program_wizardproceed": 
-        "Proceed",
+        "Продолжить",
     "configure_program_commandcapturetitle": 
-        "Capturing Commands",
+        "Запить команд",
     "configure_program_waitingnewcommand": 
-        "Waiting for new events...",
+        "Ожидаю новых событий...",
     "configure_program_waitingnewcommandadvice": 
         "",
     "configure_program_capturestop": 
-        "Stop",
+        "Стоп",
     "configure_program_wizard_editline_title": 
-        "Edit line",
+        "Редактировать строку",
     "configure_program_wizard_editcmdline_prompt": 
-        "Move or delete line <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Переместить или удалить сроку <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editconline_prompt": 
-        "Move or delete line <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Переместить или удалить сроку <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editline_number": 
-        "New line number",
+        "Номер новой строки",
     "configure_program_wizard_editline_delete": 
-        "Delete",
+        "Удалить",
     "configure_program_wizard_editline_change": 
-        "Move",
+        "Переместить",
     "configure_program_selectconditionsubject": 
-        "Select condition subject",
+        "Выберите предмет для условия",
     "configure_program_selectconditionproperty": 
-        "Select comparison property",
+        "Выберите свойство для сравнения",
     "configure_program_conditioncapturetitle": 
-        "Capturing Conditions",
+        "Запись условий",
     "configure_program_waitingnewcondition": 
-        "Waiting for new events...",
+        "Ожидаю новых событий...",
     "configure_program_waitingnewconditionadvice": 
         "",
     "configure_program_options_update": 
-        "Update",
+        "Обновить",
     "configure_interfaces_zwavediscovery": 
-        "Discovery",
+        "Обнаружение",
     "configure_interfaces_camerasettings": 
-        "Device / Resolution / FPS",
+        "Устройство / Разрешение / FPS",
     "configure_interfaces_upnp": 
         "Universal Plug &amp; Play",
     "configure_interfaces_weeco4mgpio": 
         "WEECOBOARD 4M GPIO",
     "configure_system_zwavediscoverytitle": 
-        "ZWave Discovery",
+        "Обнаружение устройств ZWave",
     "configure_system_updateinstall": 
-        "Update Install",
+        "Установка обновления",
     "configure_system_deletemodule": 
-        "Delete Module",
+        "Удалить модуль",
     "systemsettings_backuprestores1selectallnone": 
-        "Select all / none",
+        "Выбрать все/ничего",
     "securitysettings_password_setpassword": 
-        "Set password",
+        "Установить пароль",
     "securitysettings_password_enterpassword": 
-        "Enter password for 'admin' user",
+        "Введите пароль для пользователя 'admin'",
     "maintenance_configuration_servicerestart": 
-        "Restart Service?",
+        "Перезапустить сервис?",
     "configure_maintenance_restartprompt": 
-        "Are you sure you want to restart service?",
+        "Вы уверены, что хотите перезапустить сервис??",
     "configure_maintenance_restartwarning": 
         "",
     "configure_module_typemediareceiver": 
@@ -618,5 +618,5 @@
     "configure_module_typemediatransmitter": 
         "Media Transmitter",
     "configure_module_featuresoptions": 
-        "Features/Options"
+        "Возможности/Свойства"
 }
