@@ -956,6 +956,23 @@ namespace ZWaveLib.Devices
             Thread.Sleep(200);
         }
 
+        public virtual void SensorMultiLevelGet()
+        {
+            byte[] message = new byte[] {
+                0x01 /* Start Of Frame */,
+                0x09 /*packet len */,
+                0x00 /* type req/res */,
+                0x13 /* func send data */,
+                this.NodeId,
+                0x02,
+                0x31 /* class meter */,
+                0x04 /* get */,
+                0x05 /* report */,
+                0x01 | 0x04,
+                0x00
+            }; //, 0x05, 0x00, 0x00 };
+            SendMessage(message);
+        }
 
 
         public virtual void ZWaveMessage(byte[] msg)

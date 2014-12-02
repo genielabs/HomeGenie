@@ -118,7 +118,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             HeatingAway = 0x0D
         }
 
-        public virtual bool HandleBasicReport(byte[] message)
+        public override bool HandleBasicReport(byte[] message)
         {
             bool handled = false;
             byte cmdClass = message[7];
@@ -126,7 +126,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             switch (cmdClass)
             {
             case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_THERMOSTAT_MODE, (Thermostat.Mode)message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:   
@@ -162,6 +162,9 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 handled = true;
                 break;
             }
+
+            if (!handled)
+                handled = base.HandleBasicReport(message);
 
             return handled;
         }

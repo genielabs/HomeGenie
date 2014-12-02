@@ -339,9 +339,9 @@ namespace ZWaveLib.Devices
                             {
                                 node.MessageRequestHandler(args.Message);
                             }
-                            catch
+                            catch(Exception ex)
                             {
-                                //Console.WriteLine("# " + ex.Message + "\n" + ex.StackTrace);
+                                Console.WriteLine("# " + ex.Message + "\n" + ex.StackTrace);
                             }
                             break;
 

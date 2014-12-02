@@ -80,6 +80,7 @@ namespace MIG.Interfaces.HomeAutomation
                 { 502, "WakeUp.Set" },
 
                 { 601, "MultiLevel.Report" },
+                { 602, "MultiLevel.Get" },
 
                 { 701, "Control.On" },
                 { 702, "Control.Off" },
@@ -132,6 +133,7 @@ namespace MIG.Interfaces.HomeAutomation
 
             public static readonly Command MULTILEVEL_REPORT = new Command(601);
             // TODO deprecate this
+            public static readonly Command MULTILEVEL_GET = new Command(602);
 
             public static readonly Command CONTROL_ON = new Command(701);
             public static readonly Command CONTROL_OFF = new Command(702);
@@ -621,6 +623,11 @@ namespace MIG.Interfaces.HomeAutomation
                     ((Thermostat)node.DeviceHandler).Thermostat_ModeGet();
                     Thread.Sleep(200);
                     node.RequestMultiLevelReport();
+                }
+                else if (command == Command.MULTILEVEL_GET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.SensorMultiLevelGet();
                 }
 
             }
