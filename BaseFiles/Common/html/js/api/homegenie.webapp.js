@@ -23,6 +23,7 @@ HG.WebApp.Data._CurrentLocale = {};
 // Code Mirror editor instances (TODO: refactor these global vars to a better name)
 var editor1 = null;
 var editor2 = null;
+var editor3 = null;
 //
 // Speech Recognition objects
 var recognition = null;
@@ -281,6 +282,21 @@ HG.WebApp.InitializePage = function ()
         mode: { globalVars: true },
         theme: 'ambiance'
     });
+    editor3 = CodeMirror.fromTextArea(document.getElementById('automation_program_sketchfile'), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        extraKeys: {
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+            "Ctrl-Space": "autocomplete"
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        highlightSelectionMatches: { showToken: /\w/ },
+        mode: { globalVars: true },
+        theme: 'ambiance'
+    });
+    $(editor3.getWrapperElement()).hide();
     //
     // stacked message popups
     //

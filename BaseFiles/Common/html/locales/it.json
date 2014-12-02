@@ -618,5 +618,21 @@
     "configure_module_typemediatransmitter": 
         "Media Transmitter",
     "configure_module_featuresoptions": 
-        "Caratteristiche/Opzioni"
+        "Caratteristiche/Opzioni",
+    "configure_editprogram_files":
+        "File",
+    "configure_program_newfile":
+        "Aggiungi File",
+    "configure_program_filename":
+        "Nome file",
+    "configure_program_fileslist":
+        "Elenco file",
+    "configure_program_fileslist_exit":
+        "Esci",
+    "configure_program_fileslist_delete":
+        "Cancella",
+    "configure_program_fileslist_edit":
+        "Modifica",
+    "configure_program_fileslist_add":
+        "Agg."
 }

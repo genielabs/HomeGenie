@@ -633,7 +633,7 @@ namespace HomeGenie.Automation
             List<ProgramError> errors = new List<ProgramError>();
 
             // Generate, compile and upload Arduino Sketch
-            string sketchFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString(), "sketch_" + program.Address + ".cpp");
+            string sketchFileName = ArduinoAppFactory.GetSketchFile(program.Address.ToString());
             if (!Directory.Exists(Path.GetDirectoryName(sketchFileName)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(sketchFileName));

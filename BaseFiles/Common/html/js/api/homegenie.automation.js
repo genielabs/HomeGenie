@@ -157,6 +157,113 @@ HG.Automation.Programs.Toggle = function (pid, options, callback) {
     });
 };
 
+HG.Automation.Programs.ArduinoFileLoad = function (pid, filename, callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileLoad/' + pid + '/' + filename,
+        data: "{ dummy: 'dummy' }",
+        success: function (data) {
+            var value = eval(data);
+            if (value == 'undefined') {
+                value = data;
+            }
+            else {
+                try {
+                    value = value[0].ResponseValue;
+                } catch (e) { value = data; }
+            }
+            callback(unescape(value));
+        },
+        error: function (a, b, c) {
+            if (callback != null) callback(null);
+        }
+    });
+};
+
+HG.Automation.Programs.ArduinoFileAdd = function (pid, filename, callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileAdd/' + pid + '/' + filename,
+        data: "{ dummy: 'dummy' }",
+        success: function (data) {
+            var value = eval(data);
+            if (value == 'undefined') {
+                value = data;
+            }
+            else {
+                try {
+                    value = value[0].ResponseValue;
+                } catch (e) { value = data; }
+            }
+            callback(unescape(value));
+        },
+        error: function (a, b, c) {
+            if (callback != null) callback(null);
+        }
+    });
+};
+
+HG.Automation.Programs.ArduinoFileDelete = function (pid, filename, callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileDelete/' + pid + '/' + filename,
+        data: "{ dummy: 'dummy' }",
+        success: function (data) {
+            var value = eval(data);
+            if (value == 'undefined') {
+                value = data;
+            }
+            else {
+                try {
+                    value = value[0].ResponseValue;
+                } catch (e) { value = data; }
+            }
+            callback(unescape(value));
+        },
+        error: function (a, b, c) {
+            if (callback != null) callback(null);
+        }
+    });
+};
+
+HG.Automation.Programs.ArduinoFileSave = function (pid, filename, srctext, callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileSave/' + pid + '/' + filename,
+        data: srctext,
+        success: function (data) {
+            var value = eval(data);
+            if (value == 'undefined') {
+                value = data;
+            }
+            else {
+                try {
+                    value = value[0].ResponseValue;
+                } catch (e) { value = data; }
+            }
+            callback(unescape(value));
+        },
+        error: function (a, b, c) {
+            if (callback != null) callback(null);
+        }
+    });
+};
+
+HG.Automation.Programs.ArduinoFileList = function (pid, callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileList/' + pid,
+        data: "{ dummy: 'dummy' }",
+        success: function (data) {
+            var files = eval(data);
+            callback(files);
+        },
+        error: function (a, b, c) {
+            if (callback != null) callback(null);
+        }
+    });
+};
+
 //
 // namespace : HG.Automation.Scheduling namespace
 // info      : -

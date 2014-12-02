@@ -63,6 +63,10 @@
 		        	<a id="configure_program_editorcompilecode" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_editprogram_compile" href="#">Compile</a>
 		        	<!--a id="configure_program_editorruncode" class="ui-btn ui-btn-icon-left ui-icon-arrow-r" href="#">Run</a -->
 	        	</div>
+                <div id="configure_program_editorsketch" data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:110px;position:absolute;margin:0;display:none" data-theme="e">
+                    <a id="configure_program_editorfiles" data-rel="popup" href="#automation_program_listfiles" class="ui-btn ui-btn-icon-left ui-icon-bullets" data-locale-id="configure_editprogram_files" href="#">Files</a>
+                    <span id="configure_program_editorfilename" style="margin-left:10px;margin-top:10px;font-size:16pt;font-weight:bold">main</span>
+                </div>
 	        	<div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;right:84px;position:absolute;margin:0" data-theme="f">
 		        	<a id="program_error_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>
 	        	</div>
@@ -71,6 +75,7 @@
 	        	</div>
 
 				<textarea id="automation_program_scriptsource" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="postion:absolute;width:100%;height:100%"></textarea>
+                <textarea id="automation_program_sketchfile" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false" style="postion:absolute;width:100%;height:100%"></textarea>
 
 	        </div>
 
@@ -193,6 +198,51 @@
 				<div class="ui-block-b">
 		            <a id="program_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
 				</div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div id="automation_program_fileadd" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_program_newfile">Add File</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 class="ui-title" data-locale-id="configure_program_filename">File name</h3>
+            <input id="programfile_new_name" type="text" />
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_newprogramcancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a id="programfile_new_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_newprogramconfirm" data-transition="flow">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="automation_program_listfiles" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_program_fileslist">File list</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <ul id="automation_program_sketchfiles" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+        </div>
+        <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
+            <div class="ui-block-a">
+                <a data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_fileslist_exit">Exit</a>
+            </div>
+            <div class="ui-block-b">
+                <a id="automation_program_sketchfiles_delete" class="ui-btn ui-icon-delete ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_fileslist_delete">Delete</a>
+            </div>
+            <div class="ui-block-c">
+                <a id="automation_program_sketchfiles_edit" class="ui-btn ui-icon-edit ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_fileslist_edit">Edit</a>
+            </div>
+            <div class="ui-block-d">
+                <a id="automation_program_sketchfiles_add" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_fileslist_add">Add</a>
             </div>
         </div>
     </div>

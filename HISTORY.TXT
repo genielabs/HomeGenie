@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+02/12/2014 1.00 beta rev 439
+    - Completed Arduino Sketch file manager
+    - Merged github pull request #56 from Bounz (some fixes to ZWave thermostat handler)
+
+01/12/2014 1.00 beta rev 438
+    - Updated completed russian translation
+    - Adding file manager for Arduino Sketch (wip)
+
 30/11/2014 1.00 beta rev 435
     - Fixed wrong assembly reference (TcpClientLib instead of NetClientLib) in CSharpAppFactory.cs
     - Some other bug fixing to localization functions
