@@ -2,6 +2,7 @@ HG.WebApp = HG.WebApp || {};
 //
 HG.WebApp.Data = HG.WebApp.Data || {};
 //
+HG.WebApp.Data.Interfaces = Array();
 HG.WebApp.Data.Events = Array();
 HG.WebApp.Data.Modules = Array(); 
 HG.WebApp.Data.Groups = Array();  
@@ -208,7 +209,7 @@ HG.WebApp.InitializePage = function ()
             });
             recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
-            recognition.interimResults = false;
+            recognition.interimResults = false;getinter
             recognition.onstart = function() { 
                 $('#voicerecognition_button').addClass('ui-disabled');
             }
@@ -291,7 +292,7 @@ HG.WebApp.InitializePage = function ()
             "Ctrl-Space": "autocomplete"
         },
         foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        gutters: ["CodeMirror-lint-markers-3", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
         highlightSelectionMatches: { showToken: /\w/ },
         mode: { globalVars: true },
         theme: 'ambiance'
@@ -422,7 +423,7 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
         url: ifaceurl,
         data: "{ dummy: 'dummy' }",
         success: function (data) {
-            var interfaces = eval(data);
+            var interfaces = HG.WebApp.Data.Interfaces = eval(data);
             var status = '';
             var isupdateavailable = false;
             //

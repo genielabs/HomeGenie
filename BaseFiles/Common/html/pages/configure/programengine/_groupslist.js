@@ -43,9 +43,21 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         $('#configure_automationgroupslist').empty();
         $('#configure_automationgroupslist').append('<li data-icon="false" data-role="list-divider">'+HG.WebApp.Locales.GetLocaleString('configure_grouplist')+'</li>');
         //
+        var ifaceZwave = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.ZWave');
+        var ifaceInsteon = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.Insteon');
+        var ifaceX10 = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.X10');
+        var ifaceW800rf = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.W800RF');
+        //
         var i = 0;
         for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {
-			// count modules
+            var groupName = HG.WebApp.Data.AutomationGroups[i].Name;
+            //
+            // filter non valid entries for the running configuration
+            if (groupName == 'Raspberry Pi' && HOST_SYSTEM.substring(0, 3) == 'Win') continue;
+            else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) continue;
+            else if (groupName == 'Z-Wave' && ifaceZwave == null) continue;
+            //
+            // count modules
             var modulescount = 0;
             for (p = 0; p < HG.WebApp.Data.Programs.length; p++) {
                 if (HG.WebApp.Data.Programs[p].Group == HG.WebApp.Data.AutomationGroups[i].Name)
@@ -53,7 +65,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
 					modulescount++;
 				}
 			}
-            $('#configure_automationgroupslist').append('<li data-group-name="' + HG.WebApp.Data.AutomationGroups[i].Name + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + HG.WebApp.Data.AutomationGroups[i].Name + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+            $('#configure_automationgroupslist').append('<li data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
         }
         //
         // programs with no group are shown in "Ungrouped" special group

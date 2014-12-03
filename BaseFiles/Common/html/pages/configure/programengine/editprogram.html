@@ -35,12 +35,12 @@
 	                    <div class="ui-block-a">
 				            <label data-locale-id="configure_program_programtype" for="automation_programtype">Program Type</label>
 	                        <select id="automation_programtype" onchange="HG.WebApp.ProgramsList.ChangeProgramType(this.value)">
-	                            <option _data-locale-id="configure_program_typewizard" value="Wizard">Wizard Script</option>
-	                            <option _data-locale-id="configure_program_typecsharp" value="CSharp">C# Program</option>
-	                            <option _data-locale-id="configure_program_typecsharp" value="Javascript">Javascript Script</option>
-	                            <option _data-locale-id="configure_program_typecsharp" value="Python">Python Script</option>
-	                            <option _data-locale-id="configure_program_typecsharp" value="Ruby">Ruby Script</option>
-                                <option _data-locale-id="configure_program_typearduino" value="Arduino">Arduino Sketch</option>
+	                            <option value="Wizard">Wizard Script</option>
+	                            <option value="CSharp">C# Program</option>
+	                            <option value="Javascript">Javascript Script</option>
+	                            <option value="Python">Python Script</option>
+	                            <option value="Ruby">Ruby Script</option>
+                                <option id="automation_programtype_option_arduino" value="Arduino">Arduino Sketch</option>
 	                        </select>
 	                    </div>
 	                    <div class="ui-block-b">
@@ -65,7 +65,7 @@
 	        	</div>
                 <div id="configure_program_editorsketch" data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:110px;position:absolute;margin:0;display:none" data-theme="e">
                     <a id="configure_program_editorfiles" data-rel="popup" href="#automation_program_listfiles" class="ui-btn ui-btn-icon-left ui-icon-bullets" data-locale-id="configure_editprogram_files" href="#">Files</a>
-                    <span id="configure_program_editorfilename" style="margin-left:10px;margin-top:10px;font-size:16pt;font-weight:bold">main</span>
+                    <span id="configure_program_editorfilename" style="margin-left:14px;font-size:18pt;font-weight:bold">main</span>
                 </div>
 	        	<div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;right:84px;position:absolute;margin:0" data-theme="f">
 		        	<a id="program_error_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>

@@ -4,6 +4,7 @@ HG.WebApp.ProgramEdit._CurrentProgram.Name = 'New Program';
 HG.WebApp.ProgramEdit._CurrentProgram.Conditions = Array(); 
 HG.WebApp.ProgramEdit._CurrentProgram.Commands = Array(); 
 HG.WebApp.ProgramEdit._CurrentSketchFile = '';
+HG.WebApp.ProgramEdit._CurrentErrors = [];
 HG.WebApp.ProgramEdit._IsCapturingConditions = false;
 HG.WebApp.ProgramEdit._IsCapturingCommands = false;
 HG.WebApp.ProgramEdit._CurrentTab = 1;
@@ -11,6 +12,11 @@ HG.WebApp.ProgramEdit._CurrentTab = 1;
 HG.WebApp.ProgramEdit.InitializePage = function () 
 	{
 		$('#page_automation_editprogram').on('pageinit', function (e) {
+            if (HOST_SYSTEM.substring(0, 3) == 'Win')
+            {
+                $('#automation_programtype_option_arduino').hide();
+            }
+            //
 			$('#program_delete_button').bind('click', function (event) {
 				HG.WebApp.ProgramEdit.DeleteProgram( HG.WebApp.ProgramEdit._CurrentProgram.Address );
                 return true;
@@ -180,7 +186,6 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                     HG.WebApp.ProgramEdit.SketchFileList();
                     if (filename == HG.WebApp.ProgramEdit._CurrentSketchFile)
                     {
-                        HG.WebApp.ProgramEdit._CurrentSketchFile = '';
                         HG.WebApp.ProgramEdit.SketchFileOpen('main');
                     }
                     $.mobile.loading('hide');
@@ -386,7 +391,9 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position)
 		}
 		else
 		{
+            HG.WebApp.ProgramEdit.SketchFileOpen('main');
 			HG.WebApp.ProgramEdit.SetTab(2);
+            
 		}
 		editor.focus();
 		editor.setCursor(0);
@@ -405,8 +412,10 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position)
 
 HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
     {
+        HG.WebApp.ProgramEdit._CurrentErrors = [];
         editor1.clearGutter('CodeMirror-lint-markers-1');
         editor2.clearGutter('CodeMirror-lint-markers-2');
+        editor3.clearGutter('CodeMirror-lint-markers-3');
         //
         if (typeof (message) == 'undefined') message == '';
         HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = message;
@@ -421,17 +430,6 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
             }
         }
         //
-        /*
-		var errs = message.split('\n');
-		var msgs = '';
-		for (x = 0; x < errs.length; x++)
-		{
-			if (errs[x].trim() != '')
-			{
-				msgs += '<b>' + (x + 1) + '.</b> ' + errs[x] + '<br/>';
-			}
-		}*/
-		//
 		var errors = null;
 		try
 		{
@@ -440,10 +438,11 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
         //
 		if (errors != null)
 		{
+            HG.WebApp.ProgramEdit._CurrentErrors = errors;
 		    var currentLine = 0, currentBlock = '', marker = null, message = '', popupMessage = '';
-		    for (var e = 0; e < errors.length; e++)
+		    for (var e = 0; e < HG.WebApp.ProgramEdit._CurrentErrors.length; e++)
 		    {
-		        var err = errors[e];
+		        var err = HG.WebApp.ProgramEdit._CurrentErrors[e];
 		        if (err.Line > 0)
 		        {
                     if (currentLine != err.Line || currentBlock != err.CodeBlock)
@@ -472,9 +471,9 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
     		            currentBlock = err.CodeBlock;
                     }
                     message += '<b>(' + err.Line + ',' + err.Column + '):</b> ' + err.ErrorMessage + '</br>';
-                    popupMessage += '<b><a href="javascript:HG.WebApp.ProgramEdit.JumpToLine(\'' + err.CodeBlock + '\', { line: ' + (err.Line - 1) + ', ch: ' + (err.Column - 1) + ' })">Line ' + err.Line + ', Column ' + err.Column + '</a></b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger Code' : 'lime">Program Code') + '</font>):<br/>';
+                    popupMessage += '<b><a href="javascript:HG.WebApp.ProgramEdit.JumpToLine(\'' + err.CodeBlock + '\', { line: ' + (err.Line - 1) + ', ch: ' + (err.Column - 1) + ' })">Line ' + err.Line + ', Column ' + err.Column + '</a></b> (<font style="color:' + (err.CodeBlock == 'TC' ? 'yellow">Trigger' : 'lime">Code') + '</font>):<br/>';
 		        }
-		        popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '</br>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
+	            popupMessage += '&nbsp;&nbsp;&nbsp;&nbsp;<em>' + err.ErrorMessage.replace(/\n/g, '</br>&nbsp;&nbsp;&nbsp;&nbsp;') + '</em><br /><br />';
             }
 		    if (marker != null) {
 		        $(marker).qtip({
@@ -484,13 +483,18 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 		            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' }
 		        });
 		    }
+            //
+            // Build external file errors (editor3 used for external sketch files)
+            //
+            HG.WebApp.ProgramEdit.ShowExternalErrors();
 		    //
-		    //$('#program_error_message_text').html(popupMessage);
+		    // Set message on "Errors" button
 		    if (popupMessage != '')
 		    {
 			    $('#program_error_button').show();
 			    $('#program_error_button2').show();
 			    //
+                // message popup on "Error" button (Tab 2)
 			    $('#program_error_button').qtip({
 			            content: { title: 'Error', text: popupMessage, button: 'Close' },
 			            show: { event: 'mouseover', ready: (HG.WebApp.ProgramEdit._CurrentTab == 2 ? true : false), delay: 500 },
@@ -499,6 +503,7 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 			            position: { adjust : { screen: true }, my: 'top center', at: 'bottom center' }
 			        });
 			    //
+                // message popup on "Error" button (Tab 3)
 			    $('#program_error_button2').qtip({
 			            content: { title: 'Error', text: popupMessage, button: 'Close' },
 			            show: { event: 'mouseover', ready: (HG.WebApp.ProgramEdit._CurrentTab == 3 ? true : false), delay: 500 },
@@ -512,23 +517,68 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message)
 			    $('#program_error_button').hide();
 			    $('#program_error_button2').hide();
 			}
-		    //setTimeout(function () {
-		    //    if ($('#program_error_message_text').html() != '')
-		    //    {
-		    //        $('#program_error_message').popup().popup('open');
-		    //        $('#program_error_button').show(100);
-		    //    }
-		    //}, 2000);
+        }
+        else
+        {
+            HG.WebApp.ProgramEdit._CurrentErrors = [];
         }
         
         HG.WebApp.ProgramEdit.RefreshCodeMirror();                
 
 	};
+    
+HG.WebApp.ProgramEdit.ShowExternalErrors = function ()
+    {
+        editor3.clearGutter('CodeMirror-lint-markers-3');
+        var currentLine = 0, currentBlock = '', marker = null, message = '';
+        for (var l = 0; l < HG.WebApp.ProgramEdit._CurrentErrors.length; l++)
+        {
+            var errors = HG.WebApp.ProgramEdit._CurrentErrors[l].ErrorMessage.split('\n');
+        for (var e = 0; e < errors.length; e++)
+        {
+            var err = errors[e];
+            var lineParts = err.split(':');
+            
+            if (lineParts.length > 3 && lineParts[0] == HG.WebApp.ProgramEdit._CurrentSketchFile && $.isNumeric(lineParts[1]) && $.isNumeric(lineParts[2]))
+            {
+                if (currentLine != lineParts[1] || currentBlock != err.CodeBlock)
+                {
+                    if (marker != null)
+                    {
+                        $(marker).qtip({
+                            content: { title: 'Error', text: message, button: 'Close' },
+                            show: { event: 'mouseover', solo: true },
+                            hide: 'mouseout',
+                            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' }
+                        });
+                        message = '';
+                    }
+                    marker = document.createElement('div');
+                    marker.className = 'CodeMirror-lint-marker-error';
+                    editor3.setGutterMarker(lineParts[1] - 1, 'CodeMirror-lint-markers-3', marker);
+                    currentLine = lineParts[1];
+                    currentBlock = err.CodeBlock;
+                }
+                message += err + '</br>';
+            }
+        }
+        }
+        if (marker != null) {
+            $(marker).qtip({
+                content: { title: 'Error', text: message, button: 'Close' },
+                show: { event: 'mouseover', solo: true },
+                hide: 'mouseout',
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' }
+            });
+        }
+    };
 
 HG.WebApp.ProgramEdit.HideProgramErrors = function ()
 	{
+        HG.WebApp.ProgramEdit._CurrentErrors = [];
         editor1.clearGutter('CodeMirror-lint-markers-1');
         editor2.clearGutter('CodeMirror-lint-markers-2');
+        editor3.clearGutter('CodeMirror-lint-markers-3');
         //$('#program_error_message_text').html('');
         $('#program_error_button').hide();
         $('#program_error_button2').hide();
@@ -718,10 +768,12 @@ HG.WebApp.ProgramEdit.SketchFileSelect = function(el)
 };
 HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
 {
+    $('#automation_program_listfiles').popup().popup('close');
     $.mobile.loading('show', { text: 'Opening file ' + filename, textVisible: true, theme: 'a', html: '' });
     if (filename == 'main')
     {
         // the main sketch file is stored in standard code editor (editor2)
+        HG.WebApp.ProgramEdit._CurrentSketchFile = '';
         $('#configure_program_editorfilename').html(filename);
         $(editor3.getWrapperElement()).hide();
         $(editor2.getWrapperElement()).show();
@@ -738,6 +790,7 @@ HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
             $('#configure_program_editorfilename').html(filename);
             editor3.setValue(src);
             editor3.refresh();
+            HG.WebApp.ProgramEdit.ShowExternalErrors();
             $.mobile.loading('hide');
         });                        
     }
@@ -767,10 +820,11 @@ HG.WebApp.ProgramEdit.SketchFileList = function()
     $('#automation_program_sketchfiles_delete').addClass('ui-disabled');
     HG.Automation.Programs.ArduinoFileList(HG.WebApp.ProgramEdit._CurrentProgram.Address, function(list){
         $('#automation_program_sketchfiles').empty();
-        $('#automation_program_sketchfiles').append('<li data-icon="false"><a onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#" data-context-value="main"><strong>Main Sketch Code</strong></a></li>');
+        $('#automation_program_sketchfiles').append('<li data-icon="false"><a ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'main\')" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#" data-context-value="main"><strong>Main Sketch Code</strong></a></li>');
+        if (typeof(list) != 'undefined' && list != null)
         for(var f = 0; f < list.length; f++)
         {
-            $('#automation_program_sketchfiles').append('<li data-icon="false"><a data-context-value="' + list[f] + '" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#">' + list[f] + '</a></li>');
+            $('#automation_program_sketchfiles').append('<li data-icon="false"><a data-context-value="' + list[f] + '" ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'' + list[f] + '\')" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#">' + list[f] + '</a></li>');
         }
         $('#automation_program_sketchfiles').listview('refresh');
     });

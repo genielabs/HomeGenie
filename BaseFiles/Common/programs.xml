@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:43.6297Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:47.022984Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -245,6 +245,13 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
             Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
             Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
         	break; 
+        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
+        case "Control.Alert":
+         	// eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
+          	string alertType = "select";
+          	if (parameter == "Long") {alertType = "lselect";}
+          	bridgeapicall(lightnumber, "{\"alert\" : \"" + alertType + "\"}");
+          	break; 
       }
       //
       return "{ 'ResponseValue' : 'OK' }";    
@@ -258,7 +265,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -270,8 +277,8 @@ In order for this to work, you must register "homegenie" username
 (default is "newdeveloper") with your Philips Hue Bridge first.
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2014-03-31T23:25:16.9401389Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:44.131058Z</TriggerTime>
+    <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
+    <TriggerTime>2014-12-03T20:22:47.525784Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -417,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:44.633241Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:48.024342Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -489,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:26:45.790405Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:27:54.049544Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1216,7 +1223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:45.629469Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:49.024308Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1271,7 +1278,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:46.13133Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:49.525049Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1566,7 +1573,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:46.637061Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:50.027392Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1647,7 +1654,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:47.129778Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:50.525569Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1717,7 +1724,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:47.633244Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:51.026748Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1983,7 +1990,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:48.134799Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:51.527099Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2349,7 +2356,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:49.135239Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:52.528498Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2411,7 +2418,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:49.635541Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:53.028371Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2568,7 +2575,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:50.134807Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:53.528546Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2832,7 +2839,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-11-25T18:25:50.636186Z</TriggerTime>
+    <TriggerTime>2014-12-03T20:22:54.030673Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5874,108 +5881,150 @@ return true;
     <ScriptSource>// CSharp Automation Program Plugin
 // Example for using Helper Classes:
 // Modules.WithName("Light 1").On();
+const int HOLDING_MODE_DIFF = 1;
+
 var temperature = Program.Parameter("Sensor.Temperature");
 var operatingState = Program.Parameter("Thermostat.OperatingState");
 var thermostatMode = Program.Parameter("Thermostat.Mode");
 var heatSetPoint = Program.Parameter("Thermostat.SetPoint.Heating");
+
+var holdingMode = false;
 
 var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
   string domainAddress = "";
   string domain = "";
   string address = "";
 
-  // Get a reference to the temperature module
-  domainAddress = Program.InputField("TemperatureModule").Value;
-  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+  try
   {
-    domain = domainAddress.Split(':')[0];
-    address = domainAddress.Split(':')[1];
-  }
-  var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
-  if (temperatureModule == null)
-  {
-    Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
-    return false;
-  }
-  // Update Thermostat module Temperature field
-  temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
-
-  // get a reference to the switch/relay module
-  domainAddress = Program.InputField("SwitchModule").Value;
-  if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
-  {
-    domain = domainAddress.Split(':')[0];
-    address = domainAddress.Split(':')[1];
-  }
-  var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
-  if (switchModule == null)
-  {
-    Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
-    return false;
-  }
-
-  // Heat Mode logic
-  if (thermostatMode.Value == "Heat")
-  {
-    if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue)
+    // Get a reference to the temperature module
+    domainAddress = Program.InputField("TemperatureModule").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
     {
-      // Heating
-      switchModule.On();
-      Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
+    {
+      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
+      Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
+      return false;
+    }
+    // Update Thermostat module Temperature field
+    temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+
+    // get a reference to the switch/relay module
+    domain = address = "";
+    domainAddress = Program.InputField("SwitchModule").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
+    {
+      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
+      Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
+      return false;
+    }
+
+    // Heat Mode logic
+    if (thermostatMode.Value == "Heat")
+    {
+      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue - (holdingMode ? HOLDING_MODE_DIFF : 0))
+      {
+        if (switchModule.IsOff) holdingMode = false;
+        if (operatingState.Value != "Heating")
+        {
+          Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
+        }
+        // Heating
+        switchModule.On();
+      }
+      else
+      {
+        if (switchModule.IsOn) holdingMode = true;
+        if (operatingState.Value != "PendingHeat")
+        {
+          Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
+        }
+        // Waiting
+        switchModule.Off();
+      }
     }
     else
     {
-      // Waiting
+      if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
+      {
+        Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
+        holdingMode = false;
+      }
+      // Off
       switchModule.Off();
-      Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
-    }
-  }
-  else
+    }  
+  } 
+  catch (Exception e) 
   {
-    // Off
-    if (operatingState.Value != "Off")
-    {
-      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
-    }
-    switchModule.Off();
-  }  
-  
+    Program.Notify("Generic Thermostat", "ERROR: " + e.Message);
+  }
   return true;
+});
+
+When.ModuleParameterChanged((module, parameter)=&gt;{
+  	if (parameter.Is("Sensor.Temperature"))
+    {
+      var domainAddress = Program.InputField("TemperatureModule").Value;
+      if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
+      {
+        var domain = domainAddress.Split(':')[0].ToLower();
+        var address = domainAddress.Split(':')[1].ToLower();
+        if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
+        {
+          Program.RaiseEvent("Sensor.Temperature", parameter.Value, "Eden Thermostat");
+          ThermostatLogicRun();
+        }
+      }
+    }
+  	return true;
 });
 
 // implement Web API calls as defined in the Thermostat widget
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.SetPointSet", (args)=&gt;{
   if (args.ToString().Split('/')[0] == "Heating")
   {
-	  Program.RaiseEvent("Thermostat.SetPoint.Heating", args.ToString().Split('/')[1], "Eden Thermostat");
-	  ThermostatLogicRun();
+    Program.RaiseEvent("Thermostat.SetPoint.Heating", args.ToString().Split('/')[1], "Eden Thermostat");
+    holdingMode = false;
+    ThermostatLogicRun();
   }
   return true;
 });
 
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.ModeSet", (args)=&gt;{
   Program.RaiseEvent("Thermostat.Mode", args.ToString().Split('/')[0], "Eden Thermostat");
+  holdingMode = false;
   ThermostatLogicRun();
   return true;
 });
 
 while (Program.IsEnabled)
 {
-  Pause(30);
   ThermostatLogicRun();
+  Pause(30);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
     <Name>Generic Thermostat</Name>
     <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2014-11-13T09:13:29.399292Z</ActivationTime>
-    <TriggerTime>2014-11-13T09:13:29.455843Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -6550,6 +6599,56 @@ while (Program.IsEnabled)
 Contributed by Christophe De Boeck.
 Based on HomeGenie MCP23017 example app.</Description>
     <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// this is a background app
+// so we just put initialization code here and a return true
+// to activate the background task loop
+
+// ...
+Program.Setup(()=&gt;
+{              
+	Program.AddInputField("PollInterval", "120", "Poll Interval (seconds)");
+	//Program.AddFeature("HomeAutomation.ZWave", "Thermostat", "HomeGenie.ZWaveLevelPoll", "Poll module level");
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  	// basic get will returns current device level 
+  	Modules.InDomain("HomeAutomation.ZWave").OfDeviceType("Thermostat").Each((module) =&gt; {
+  		Program.Notify("Z-Wave Thermostat Poll", "Polling thermostat " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+      	module.Command("MultiLevel.Get").Execute();
+		Pause(Program.InputField("PollInterval").DecimalValue);
+      	return false; // do not break, continue iterating...
+  	});
+	// pause between each poll
+  	var pause = Program.InputField("PollInterval").DecimalValue;
+  	if (pause &lt; 15)
+    {
+    	pause = 15;
+      	Program.Notify("Z-Wave Thermostat Poll", "Poll interval seconds must be &gt;= 15!");
+    }
+    Pause(pause);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>92</Address>
+    <Name>Z-Wave Thermostat Poll</Name>
+    <Description />
+    <Group>Z-Wave</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>

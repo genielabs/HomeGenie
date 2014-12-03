@@ -398,6 +398,12 @@ namespace HomeGenie.Automation
             program.IsEnabled = false;
             program.Stop();
             automationPrograms.Remove(program);
+            // delete program files
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
+            // remove csharp assembly
+            try { File.Delete(Path.Combine(file, program.Address + ".dll")); } catch { }
+            // remove arduino folder files 
+            try { Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true); } catch { }
         }
 
         // TODO: find a better solution to this...

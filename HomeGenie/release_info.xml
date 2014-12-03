@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r435</Version>
+  <Version>1.00 beta r440</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Interface localization improvements
+  <ReleaseNote>   - Updated Generic Thermostat and Philips Hue app; added ZWave Thermostat poll app
+  - Added file manager for Arduino Sketch programs
+  - Added automatic hiding of options/programs when not enabled on current system configuration
+  - Interface localization improvements
   - Preliminary ZWaveMe.Thermostat
   - Added UdpClientHelper (contributed by smeghead)
   - Added jSettings for client side settings persistence (issue #51)
@@ -12,5 +15,5 @@
   - Added EndOfLine property both to TcpClientHelper and SerialPortHelper
   - Fixed issues affecting TcpClientHelper (issue #48)
   - Fixed bug in releasing resources used by SerialPortHelper, NetHelper and TcpClientHelper</ReleaseNote>
-  <ReleaseDate>2014-11-30T16:11:29.0000Z</ReleaseDate>
+  <ReleaseDate>2014-12-03T19:29:11.0000Z</ReleaseDate>
 </ReleaseInfo>

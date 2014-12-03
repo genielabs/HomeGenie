@@ -403,7 +403,7 @@ HG.WebApp.ProgramsList.RefreshProgramType = function ()
             $('#automation_conditiontype').selectmenu().selectmenu('refresh');
             // set example code text for the current programming language
             if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'arduino') {
-                $(editor2.getWrapperElement()).hide();
+                $(editor2.getWrapperElement()).show();
                 $(editor3.getWrapperElement()).hide();
                 $('#configure_program_editorsketch').show();
                 $('#automation_conditiontype_wrapper').hide();
@@ -412,6 +412,7 @@ HG.WebApp.ProgramsList.RefreshProgramType = function ()
                 editor3.setOption('mode', 'text/x-csrc');
                 editor2.setOption('mode', 'text/x-csrc');
                 editor1.setOption('mode', 'text/x-python');
+                HG.WebApp.ProgramEdit.SketchFileOpen('main');
             }                    
             else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
                 editor2.setOption('mode', 'text/x-python');

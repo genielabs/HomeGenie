@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+03/12/2014 1.00 beta rev 440
+    - Updated Generic Thermostat and Philips Hue app; added ZWave Thermostat poll app
+    - Added automatic hiding of options/programs when not enabled on current system configuration
+    - Added "{hostos}" keyword to MIG web service gateway preprocessor
+    - Closes github issue #55
+
 02/12/2014 1.00 beta rev 439
     - Completed Arduino Sketch file manager
     - Merged github pull request #56 from Bounz (some fixes to ZWave thermostat handler)

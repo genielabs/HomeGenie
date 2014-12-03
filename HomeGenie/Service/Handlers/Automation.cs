@@ -300,6 +300,7 @@ namespace HomeGenie.Service.Handlers
 
                 case "Programs.Arduino.FileAdd":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
+                    if (!Directory.Exists(sketchFolder)) Directory.CreateDirectory(sketchFolder);
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
                     if (File.Exists(sketchFile))
                     {

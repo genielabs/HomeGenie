@@ -99,6 +99,8 @@ namespace HomeGenie.Service
         public HomeGenieService()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
+            // TODO: all the following initialization stuff should go async
             //
             // initialize recent log list
             recentEventsLog = new TsList<LogEntry>();
@@ -237,7 +239,7 @@ namespace HomeGenie.Service
                     {
                         if (pb.SystemStarted != null)
                         {
-                            if (!!pb.SystemStarted())
+                            if (!pb.SystemStarted())
                             // stop routing this event to other listeners
                             break;
                         }

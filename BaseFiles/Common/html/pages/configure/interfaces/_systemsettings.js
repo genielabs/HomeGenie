@@ -2,6 +2,13 @@ HG.WebApp.SystemSettings = HG.WebApp.SystemSettings || {};
 
 HG.WebApp.SystemSettings.InitializePage = function () {
     $('#page_configure_interfaces').on('pageinit', function (e) {
+        if (HOST_SYSTEM.substring(0, 3) == 'Win')
+        {
+            $('[data-locale-id=configure_interfaces_lircremote]').hide().next().hide();
+            $('[data-locale-id=configure_interfaces_camera]').hide().next().hide();
+            $('[data-locale-id=configure_interfaces_weeco4mgpio]').hide().next().hide();
+        }
+        //    
         $('#systemsettings_zwaveoperation_popup').on('popupbeforeposition', function (event) {
             $('#systemsettings_zwaveoperation_close_button').addClass('ui-disabled');
             $('#systemsettings_zwaveoperation_nodeid').html('<span style="color:green">waiting</span>');
@@ -189,6 +196,20 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             });
 		});
     });
+};
+
+HG.WebApp.SystemSettings.GetInterface = function (domain) {
+    var iface = null;
+    var interfaces = HG.WebApp.Data.Interfaces;
+    if (interfaces && interfaces != 'undefined') {
+        for (i = 0; i < interfaces.length; i++) {
+            if (interfaces[i].Domain == domain) {
+                iface = interfaces[i];
+                break;
+            }
+        }
+    }
+    return iface;
 };
 
 HG.WebApp.SystemSettings.ShowPortTip = function (el) {
