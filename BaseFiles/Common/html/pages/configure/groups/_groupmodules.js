@@ -367,8 +367,10 @@ HG.WebApp.GroupModules.DeleteGroupModule = function (groupname, module) {
 HG.WebApp.GroupModules.DeleteGroup = function (group) {
     $.mobile.loading('show');
     HG.Configure.Groups.DeleteGroup('Control', group, function () {
-        $.mobile.changePage($('#page_configure_groups'), { transition: "slide" });
         $.mobile.loading('hide');
+        setTimeout(function(){
+            $.mobile.changePage($('#page_configure_groups'));
+        }, 200);
     });
     $('#control_groupslist').empty();
     HG.WebApp.Data._CurrentGroupIndex = 0;

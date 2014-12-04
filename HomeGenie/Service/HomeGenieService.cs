@@ -375,15 +375,17 @@ namespace HomeGenie.Service
         public void InterfaceControl(MIGInterfaceCommand cmd)
         {
             var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
-            bool isRemoteModule = (target != null && target.RoutingNode.Trim() != "");
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
             if (isRemoteModule)
             {
                 // ...
                 try
                 {
-                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + cmd.Domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
+                    string domain = cmd.Domain;
+                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
                     Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                    if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
+                    if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
                     {
                         netHelper.WithCredentials(
                             systemConfiguration.HomeGenie.UserLogin,
@@ -688,13 +690,15 @@ namespace HomeGenie.Service
             #region Interconnection (Remote Node Command Routing)
 
             Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.NodeId);
-            bool isremotemodule = (target != null && target.RoutingNode.Trim() != "");
-            if (isremotemodule)
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
+            if (isRemoteModule)
             {
                 // ...
                 try
                 {
-                    string serviceurl = "http://" + target.RoutingNode + "/api/" + migCommand.Domain + "/" + migCommand.NodeId + "/" + migCommand.Command + "/" + migCommand.OptionsString;
+                    string domain = migCommand.Domain;
+                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.NodeId + "/" + migCommand.Command + "/" + migCommand.OptionsString;
                     Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
                     if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
                     {

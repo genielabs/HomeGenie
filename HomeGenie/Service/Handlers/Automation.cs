@@ -206,8 +206,7 @@ namespace HomeGenie.Service.Handlers
                     newProgram = new ProgramBlock() {
                         Group = migCommand.GetOption(0),
                         Name = streamContent,
-                        Type = "Wizard",
-                        ScriptCondition = "// A \"return true;\" statement at any point of this code block, will cause the program to run.\n// For manually activated program, just leave a \"return false\" statement here.\n\nreturn false;\n"
+                        Type = "Wizard"
                     };
                     newProgram.Address = homegenie.ProgramEngine.GeneratePid();
                     homegenie.ProgramEngine.ProgramAdd(newProgram);
@@ -300,11 +299,16 @@ namespace HomeGenie.Service.Handlers
 
                 case "Programs.Arduino.FileAdd":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    if (!Directory.Exists(sketchFolder)) Directory.CreateDirectory(sketchFolder);
+                    if (!Directory.Exists(sketchFolder))
+                        Directory.CreateDirectory(sketchFolder);
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
                     if (File.Exists(sketchFile))
                     {
                         migCommand.Response = JsonHelper.GetSimpleResponse("EXISTS");
+                    }
+                    else if (!ArduinoAppFactory.IsValidProjectFile(sketchFile))
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("INVALID_NAME");
                     }
                     else
                     {
@@ -321,7 +325,7 @@ namespace HomeGenie.Service.Handlers
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
                     if (!File.Exists(sketchFile))
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("NOTFOUND");
+                        migCommand.Response = JsonHelper.GetSimpleResponse("NOT_FOUND");
                     }
                     else
                     {
@@ -336,7 +340,10 @@ namespace HomeGenie.Service.Handlers
                     List<string> files = new List<string>();
                     for (int f = 0; f < filePaths.Length; f++)
                     {
-                        if (!Path.GetFileName(filePaths[f]).StartsWith("sketch_") && (filePaths[f].EndsWith(".cpp") || filePaths[f].EndsWith(".h"))) files.Add(Path.GetFileName(filePaths[f]));
+                        if (ArduinoAppFactory.IsValidProjectFile(filePaths[f]))
+                        {
+                            files.Add(Path.GetFileName(filePaths[f]));
+                        }
                     }
                     migCommand.Response = JsonConvert.SerializeObject(files);
                     break;

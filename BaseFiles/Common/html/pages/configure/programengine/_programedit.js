@@ -162,7 +162,14 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                 HG.Automation.Programs.ArduinoFileAdd(HG.WebApp.ProgramEdit._CurrentProgram.Address, filename, function(res){
                     if (res == 'EXISTS')
                     {
-                        $.mobile.loading('show', { text: 'A file named ' + filename + ' already exists', textVisible: true, theme: 'a', html: '' });
+                        $.mobile.loading('show', { text: 'A file named "' + filename + '" already exists', textVisible: true, theme: 'a', html: '' });
+                        setTimeout(function(){
+                            $.mobile.loading('hide');
+                        }, 3000);
+                    }
+                    else if (res == 'INVALID_NAME')
+                    {
+                        $.mobile.loading('show', { text: 'Invalid file name "' + filename + '". Must ends with .c, .cpp, .h or have no extension.', textVisible: true, theme: 'a', html: '' });
                         setTimeout(function(){
                             $.mobile.loading('hide');
                         }, 3000);
@@ -768,9 +775,8 @@ HG.WebApp.ProgramEdit.SketchFileSelect = function(el)
 };
 HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
 {
-    $('#automation_program_listfiles').popup().popup('close');
     $.mobile.loading('show', { text: 'Opening file ' + filename, textVisible: true, theme: 'a', html: '' });
-    if (filename == 'main')
+    if (filename == null || typeof(filename) == 'undefined' || filename == '' || filename == 'main')
     {
         // the main sketch file is stored in standard code editor (editor2)
         HG.WebApp.ProgramEdit._CurrentSketchFile = '';
@@ -820,11 +826,11 @@ HG.WebApp.ProgramEdit.SketchFileList = function()
     $('#automation_program_sketchfiles_delete').addClass('ui-disabled');
     HG.Automation.Programs.ArduinoFileList(HG.WebApp.ProgramEdit._CurrentProgram.Address, function(list){
         $('#automation_program_sketchfiles').empty();
-        $('#automation_program_sketchfiles').append('<li data-icon="false"><a ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'main\')" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#" data-context-value="main"><strong>Main Sketch Code</strong></a></li>');
+        $('#automation_program_sketchfiles').append('<li data-icon="false"><a ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'main\');$(\'#automation_program_listfiles\').popup(\'close\');" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#" data-context-value="main"><strong>Main Sketch Code</strong></a></li>');
         if (typeof(list) != 'undefined' && list != null)
         for(var f = 0; f < list.length; f++)
         {
-            $('#automation_program_sketchfiles').append('<li data-icon="false"><a data-context-value="' + list[f] + '" ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'' + list[f] + '\')" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#">' + list[f] + '</a></li>');
+            $('#automation_program_sketchfiles').append('<li data-icon="false"><a data-context-value="' + list[f] + '" ondblclick="HG.WebApp.ProgramEdit.SketchFileOpen(\'' + list[f] + '\');$(\'#automation_program_listfiles\').popup(\'close\');" onclick="HG.WebApp.ProgramEdit.SketchFileSelect(this)" href="#">' + list[f] + '</a></li>');
         }
         $('#automation_program_sketchfiles').listview('refresh');
     });

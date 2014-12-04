@@ -459,7 +459,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -471,7 +471,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -482,11 +482,11 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.Modules[m].RoutingNode = "";
                     }
-                    migCommand.Response = "OK";
+                    migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -644,7 +644,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -664,16 +664,6 @@ namespace HomeGenie.Service.Handlers
                 {
                     migCommand.Response = JsonHelper.GetSimpleResponse("New name already in use.");
                 }
-                    /*
-                    try
-                    {
-                        cmd.response = JsonConvert.SerializeObject(cmd.option.ToLower() == "automation" ? _automationgroups : _controlgroups);
-                    }
-                    catch (Exception ex)
-                    {
-                        cmd.response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
-                    }
-                    */
                 break;
 
             case "Groups.Sort":
@@ -698,7 +688,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 
@@ -736,7 +726,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 catch (Exception ex)
                 {
-                    migCommand.Response = "ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace;
+                    migCommand.Response = JsonHelper.GetSimpleResponse("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
                 }
                 break;
 

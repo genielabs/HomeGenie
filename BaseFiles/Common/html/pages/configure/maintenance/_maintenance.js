@@ -95,7 +95,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
         //    
         //});
         $('#configure_system_updatemanager_installbutton').bind('click', function () {
-            $('#configure_system_updateinstall_button').removeClass('ui-disabled');
+            $('#configure_system_updateinstall_button').addClass('ui-disabled');
             $('#configure_system_updatemanager_info').html('<strong>Downloading files...</strong>');
             $('#configure_system_updateinstall_log').empty();
             $('#systemsettings_updateinstall_popup').popup('open');

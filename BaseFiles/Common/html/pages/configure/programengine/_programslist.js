@@ -722,8 +722,10 @@ HG.WebApp.ProgramsList.ToggleProgramIsEnabled = function (paddr) {
 HG.WebApp.ProgramsList.DeleteGroup = function (group) {
     $.mobile.loading('show');
     HG.Configure.Groups.DeleteGroup('Automation', group, function () {
-        $.mobile.changePage($('#page_configure_automationgroups'), { transition: "slide" });
         $.mobile.loading('hide');
+        setTimeout(function(){
+            $.mobile.changePage($('#page_configure_automationgroups'));
+        }, 200);
     });
 };
 

@@ -416,6 +416,61 @@
     <RoutingNode />
   </Module>
   <Module>
+    <Name>MiLight Control</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>28</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.HomeGenieMiLightAddress</Name>
+        <Value>192.168.0.?</Value>
+        <Description>MiLight IP Address</Description>
+        <UpdateTime>2014-12-04T14:59:46.775169Z</UpdateTime>
+        <NeedsUpdate>false</NeedsUpdate>
+        <LastValue />
+        <LastUpdateTime>2014-12-04T15:59:46.775169+01:00</LastUpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.HomeGenieMiLightPort</Name>
+        <Value>8899</Value>
+        <Description>MiLight UDP Port</Description>
+        <UpdateTime>2014-12-04T14:59:46.775182Z</UpdateTime>
+        <NeedsUpdate>false</NeedsUpdate>
+        <LastValue />
+        <LastUpdateTime>2014-12-04T15:59:46.775181+01:00</LastUpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
+        <Description />
+        <UpdateTime>2014-12-04T15:00:00.007479Z</UpdateTime>
+        <NeedsUpdate>false</NeedsUpdate>
+        <LastValue>Running</LastValue>
+        <LastUpdateTime>2014-12-04T14:59:46.776333Z</LastUpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>28</Value>
+        <Description />
+        <UpdateTime>2014-12-04T14:59:46.776172Z</UpdateTime>
+        <NeedsUpdate>false</NeedsUpdate>
+        <LastValue />
+        <LastUpdateTime>2014-12-04T15:59:46.764784+01:00</LastUpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/colorlight</Value>
+        <Description />
+        <UpdateTime>2014-12-04T14:59:46.768879Z</UpdateTime>
+        <NeedsUpdate>false</NeedsUpdate>
+        <LastValue />
+        <LastUpdateTime>2014-12-04T15:59:46.764804+01:00</LastUpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <RoutingNode />
+  </Module>
+  <Module>
     <Name>Weather Underground</Name>
     <Description />
     <DeviceType>Program</DeviceType>

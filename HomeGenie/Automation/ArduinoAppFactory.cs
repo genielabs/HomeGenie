@@ -169,6 +169,18 @@ namespace HomeGenie.Automation
             );
             return filename;
         }
+
+        public static bool IsValidProjectFile(string filename)
+        {
+            bool isValid = !Path.GetFileName(filename).StartsWith("sketch_") && 
+                Path.GetFileName(filename) != "Makefile" &&
+                (filename.EndsWith(".cpp")
+                || filename.EndsWith(".c")
+                || filename.EndsWith(".h")
+                || !filename.Contains("."));
+            return isValid;
+        }
+
     }
 }
 

@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:47.022984Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:15.272261Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:47.525784Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:15.777452Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:48.024342Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:16.278745Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -496,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:27:54.049544Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:46.832513Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1223,7 +1223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:49.024308Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:17.276459Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1278,7 +1278,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:49.525049Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:17.777395Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1573,7 +1573,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:50.027392Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:18.282906Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1654,7 +1654,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:50.525569Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:18.777271Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1724,7 +1724,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:51.026748Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:19.278756Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1990,7 +1990,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:51.527099Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:19.780835Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2356,7 +2356,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:52.528498Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:20.781954Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2418,7 +2418,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:53.028371Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:21.281728Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2575,7 +2575,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:53.528546Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:21.782626Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2839,7 +2839,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-03T20:22:54.030673Z</TriggerTime>
+    <TriggerTime>2014-12-04T14:55:22.285539Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6651,6 +6651,367 @@ return true; // execute "Code To Run"
     <Group>Z-Wave</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+
+
+Program.Setup(()=&gt;{
+    Program.AddControlWidget("homegenie/generic/colorlight");
+
+  	Program.AddVirtualModules("HomeAutomation.MiLightRGBW", "Light", "homegenie/generic/colorlight", 0, 4);
+  	//Program.AddVirtualModules("HomeAutomation.MiLightWhite", "Light", "homegenie/generic/light", 0, 4);
+
+  	Program.AddInputField("HomeGenieMiLightAddress", "192.168.0.?", "MiLight IP Address");
+  	Program.AddInputField("HomeGenieMiLightPort","8899", "MiLight UDP Port");
+  
+	Program.AddFeature("HomeAutomation.MiLightRGBW", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on");
+	//Program.AddFeature("HomeAutomation.MiLightWhite", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on");
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>#pragma warning disable 0168
+#pragma warning disable 0219
+#pragma warning disable 0414
+
+//   Script created by Smeghead based on and thanks to
+//      Version 0.1   30/11/2014
+// https://github.com/yasharrashedi/LimitlessLED
+// https://github.com/yasharrashedi/LimitlessLED/blob/master/Milight.php
+//  I used these entensivelly when creating this script
+//    At the moment, only RBGW lights are supported and not the White only LED lights
+
+
+var MILIGHT_IP_ADDR = "HomeGenieMiLightAddress";
+var MILIGHT_PORT    = "HomeGenieMiLightPort";
+
+Func&lt;byte, byte, bool&gt; sendCommand = (byte code, byte param) =&gt; 
+{
+    byte[] buffer = new byte[] { code, param, 0x55 };
+    UdpClient.SendMessage(buffer); 
+    return true;
+};
+
+Func&lt;int, bool&gt; sendRGBWOnCommand = (int zone) =&gt; 
+{
+  byte[] codes = new byte[]{0x42, 0x45, 0x47, 0x49, 0x4B};
+  Program.Notify("MiLight On", zone.ToString());
+  //Console.WriteLine("MiLight ************************ Zone " + zone + " Is On");
+  return sendCommand(codes[zone], (byte) 0x00);
+};
+
+Func&lt;int, bool&gt; sendRGBWOffCommand = (int zone) =&gt; 
+{
+  byte[] codes = new byte[]{0x41, 0x46, 0x48, 0x4A, 0x4C};
+  Program.Notify("MiLight Off", zone.ToString());
+  //Console.WriteLine("MiLight ************************ Zone " + zone + " Is Off");
+  return sendCommand(codes[zone], (byte) 0x00);
+};
+
+Func&lt;int, bool&gt; sendRGBWWhiteCommand = (int zone) =&gt; 
+{
+  byte[] codes = new byte[]{(byte) 0xC2, (byte) 0xC5, (byte) 0xC7, (byte) 0xC9, (byte) 0xCB};
+  bool result1 = sendRGBWOnCommand(zone);
+  Pause(0.11);
+  bool result2 = sendCommand(codes[zone], (byte) 0x00);
+  return (result1 &amp;&amp; result2);
+};
+
+Func&lt;int, int, bool&gt; sendRGBWColorCommand = (int zone, int color) =&gt; 
+{
+  bool result1 = sendRGBWOnCommand(zone);
+  Pause(0.11);
+  bool result2 = sendCommand((byte) 0x40, (byte) color);
+  return (result1 &amp;&amp; result2);
+};
+
+Func&lt;int, bool&gt; sendRGBWDiscoCommand = (int zone) =&gt; 
+{
+  bool result1 = sendRGBWOnCommand(zone);
+  Pause(0.11);
+  bool result2 = sendCommand((byte) 0x4D, (byte) 0x00);
+  return (result1 &amp;&amp; result2);
+};
+
+Func&lt;int, bool&gt; sendRGBWDiscoDecCommand = (int zone) =&gt; 
+{
+  bool result1 = sendRGBWOnCommand(zone);
+  Pause(0.11);
+  bool result2 = sendCommand((byte) 0x43, (byte) 0x00);
+  return (result1 &amp;&amp; result2);
+};
+
+Func&lt;int, bool&gt; sendRGBWDiscoIncCommand = (int zone) =&gt; 
+{
+  bool result1 = sendRGBWOnCommand(zone);
+  Pause(0.11);
+  bool result2 = sendCommand((byte) 0x44, (byte) 0x00);
+  return (result1 &amp;&amp; result2);
+};
+
+Func&lt;int, int, bool&gt; sendRGBWBrightnessCommand = (int zone, int brightness) =&gt; 
+{
+  if ( brightness &gt;= 0 &amp;&amp; brightness &lt;= 100 ) {
+     int[] codes = new int[]{0x02, 0x03, 0x04, 0x05, 0x08, 0x09, 0x0A, 0x0B, 0x0D, 0x0E,
+                             0x0F, 0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19};
+     bool result1 = sendRGBWOnCommand(zone);
+     Pause(0.11);
+     int val = Math.Max(0, Math.Min(19, brightness / 5));
+     bool result2 = sendCommand((byte) 0x4E, (byte) codes[val]);
+     return (result1 &amp;&amp; result2);
+  }
+  return false;
+};
+
+Func &lt;int[], int&gt; hslToMilightColor = (int[] hsl) =&gt;                
+{
+    int color = (256 + 176 - (int)(hsl[0] / 360.0 * 255.0)) % 256;
+    return color &amp; 0xfa;
+};
+
+Func &lt;string, int&gt; hexdec = (string h) =&gt;                
+{
+    h = h.Replace("x", string.Empty);
+    long result = 0;
+    long.TryParse(h, System.Globalization.NumberStyles.HexNumber, null, out result);
+    return (int)result;
+};
+
+Func &lt;string, int[]&gt; rgbHexToIntArray = (string hexColor) =&gt; 
+{
+    hexColor = hexColor.Replace("#", string.Empty);
+    if ( hexColor.StartsWith("0x") ) {
+        hexColor = hexColor.Substring(2);
+    }
+    int hexColorLenghth = hexColor.Length;
+    if (hexColorLenghth != 8 &amp;&amp; hexColorLenghth != 6) {
+        return new int[] {0,0,0};
+    }
+    int r,g,b;
+    if (hexColorLenghth == 8) {
+        r = hexdec(hexColor.Substring(2, 2));
+        g = hexdec(hexColor.Substring(4, 2));
+        b = hexdec(hexColor.Substring(6, 2));
+        if ((r == 0 &amp;&amp; g == 0 &amp;&amp; b == 0) || (r == 255 &amp;&amp; g == 255 &amp;&amp; b == 255)) {
+            return new int[] {0,0,0};
+        }
+        return new int[]{r, g, b};
+    }
+    r = hexdec(hexColor.Substring(0, 2));
+    g = hexdec(hexColor.Substring(2, 2));
+    b = hexdec(hexColor.Substring(4, 2));
+    if ((r == 0 &amp;&amp; g == 0 &amp;&amp; b == 0) || (r == 255 &amp;&amp; g == 255 &amp;&amp; b == 255)) {
+        return new int[] {0,0,0};
+    }
+    return new int[]{r, g, b};
+};
+     
+Func &lt;int, int, int, int[]&gt; rgbToHsl = (int r, int g, int b) =&gt;                
+{
+    r = r / 255;
+    g = g / 255;
+    b = b / 255;
+    int max = Math.Max(r, Math.Max(g, b));
+    int min = Math.Min(r, Math.Min(g, b));
+    int l = (max + min) / 2;
+    int d = max - min;
+    int h = 0;
+    int s = 0;
+    if (d == 0) {
+       h = s = 0;
+    }
+    else {
+       s = d / (1 - Math.Abs(2 * l - 1));
+       if ( max == r ) {
+           h = 60 * (((g - b) / d) % 6);
+           if (b &gt; g) {
+               h += 360;
+           }         
+       }
+       else if (max == g) {
+          h = 60 * ((b - r) / d + 2);
+       }
+       else {
+          h = 60 * ((r - g) / d + 4);
+       }
+    }
+    return new int[] {h, s, l};
+};
+               
+
+Func &lt;int, int[], bool&gt; sendRGBWSetColorHsv = (int zone, int[] hsvColor) =&gt; 
+{
+   int milightColor = hslToMilightColor(hsvColor);
+   int brightness = (hsvColor[2] * 100) / 250;
+   //Console.WriteLine("       MiLight Color " + milightColor + "    brightness " + brightness);
+   Pause(0.11);
+   sendRGBWBrightnessCommand (zone,  brightness);
+   Pause(0.11);
+   return sendRGBWColorCommand (zone, milightColor); //$this-&gt;sendCommand(array(0x40, $milightColor));
+};
+
+Func &lt;int, string, bool&gt; sendRGBWSetColorHexString = (int zone, string color) =&gt; 
+//public function rgbwSetColorHexString($color)
+{
+    int[] rgb = rgbHexToIntArray(color);
+    int[] hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+    int milightColor = hslToMilightColor(hsl);
+    return sendRGBWColorCommand (zone, milightColor);
+};
+
+var milightModules = Modules.InDomain("HomeAutomation.MiLightRGBW");
+
+When.ModuleParameterChanged( (module, property) =&gt; {
+
+  	if (module.Instance.Domain == "HomeAutomation.MiLightRGBW" )
+	{
+        //Console.WriteLine("MiLight ************************ ModuleParameterChanged RGBW");
+        int lightnumber = Convert.ToInt32(module.Instance.Address);
+        switch (property.Name) {
+          case "Meter.Watts":
+              break;
+          case "Control.On":
+              sendRGBWOnCommand(lightnumber);
+        	  Program.RaiseEvent(module, "Status.Level", "1", "MiLight Light");
+              break;
+          case "Control.Off":
+              sendRGBWOffCommand(lightnumber);
+        	  Program.RaiseEvent(module, "Status.Level", "0", "MiLight Light");
+              break;
+          default:  
+              break;
+        }
+        return false;
+    }
+  	else if (module.Instance.Domain == "HomeAutomation.MiLightWhite" )
+	{
+        //Console.WriteLine("MiLight ************************ ModuleParameterChanged White");
+      
+        return false;
+    }
+
+    return true;
+  
+});
+
+When.WebServiceCallReceived("HomeAutomation.MiLight", ( args ) =&gt; 
+{
+    //Console.WriteLine("MiLight ************************ WebServiceCallReceived");
+    string[] reqs = ((string)args).Split('/');
+    //string domain = reqs[0];
+    try
+    {
+      string lightnumber = reqs[1];
+      string command = reqs[2];
+      string parameter = ""; 
+      if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
+      //
+      var module = milightModules.WithAddress(lightnumber).Get();
+      
+      //Console.WriteLine("module name " + module.Instance.Name);
+      //
+      
+      //Console.WriteLine("MiLight ************************ Command "+ command);
+      switch(command)
+      {
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+        case "Control.On":
+            sendRGBWOnCommand(Convert.ToInt32(lightnumber));
+        	Program.RaiseEvent(module, "Status.Level", "1", "MiLight Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+        case "Control.Off":
+            sendRGBWOffCommand(Convert.ToInt32(lightnumber));
+        	Program.RaiseEvent(module, "Status.Level", "0", "MiLight Light");
+        	break;
+        case "Control.Toggle":
+        	if (module.Parameter("Status.Level").DecimalValue == 0)
+            {
+                sendRGBWOnCommand(Convert.ToInt32(lightnumber));
+              	Program.RaiseEvent(module, "Status.Level", "1", "MiLight Light");
+            }
+        	else
+            {
+                sendRGBWOffCommand(Convert.ToInt32(lightnumber));
+	        	Program.RaiseEvent(module, "Status.Level", "0", "MiLight Light");
+            }
+        	break;
+        case "Control.Level":
+            int brightness = (int)(double.Parse(parameter));
+            sendRGBWBrightnessCommand (Convert.ToInt32(lightnumber),  brightness);
+    	    //bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString() + " }");
+            //Console.WriteLine("MiLight ************************ brightness "+ brightness);
+            Program.RaiseEvent(module, "Status.Level", brightness.ToString(), "MiLight Light");
+        	break;
+		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+        case "Control.ColorHsb":
+        	string[] values = parameter.Split(',');
+        	double transition = 5;
+        	//if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
+            int[] hsbColor = new int[] { (int)(double.Parse(values[0]) * 255), (int)(double.Parse(values[1]) * 255), (int)(double.Parse(values[2]) * 255) };
+            //Console.WriteLine("       Color HSB " + hsbColor[0] + " : " + hsbColor[1] + " : " + hsbColor[2] );
+    	    sendRGBWSetColorHsv(Convert.ToInt32(lightnumber), hsbColor);
+            double levelHsb = hsbColor[2] / 250.0;
+            Program.RaiseEvent(module, "Status.Level", levelHsb.ToString(), "MiLight Light");
+            Program.RaiseEvent(module, "Status.ColorHsb", parameter, "MiLight Light");
+        	break; 
+      }
+      //
+      return "{ 'ResponseValue' : 'OK' }";    
+    } catch (Exception e) { 
+    	Program.Notify("MiLight ERROR!", e.Message);
+    }
+    return "{ 'ResponseValue' : 'ERROR' }";
+});
+
+while (Program.IsEnabled)
+{
+	string addr = Program.InputField(MILIGHT_IP_ADDR).Value;
+	string port = Program.InputField(MILIGHT_PORT).Value; 
+
+	if (!UdpClient.IsConnected) 
+    {
+  		if (!String.IsNullOrWhiteSpace(addr) &amp;&amp; !addr.EndsWith("?") &amp;&amp; !String.IsNullOrWhiteSpace(port))
+   		{
+   			UdpClient.Sender(addr, Convert.ToInt32(port));
+        }
+      	else
+        {
+          	Program.Notify("MiLight", "Please configure a valid address and port.");
+        }
+    } 
+ 	Pause(5);
+}
+
+
+</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.MiLightRGBW</ForDomains>
+        <ForTypes>Dimmer,Light</ForTypes>
+        <Property>MiLight.LevelFix</Property>
+        <Description>Set level to 100% when switched on</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>28</Address>
+    <Name>MiLight Control</Name>
+    <Description>MiLight and EasyBulb Lights</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2014-12-04T14:55:48.706099Z</ActivationTime>
+    <TriggerTime>2014-12-04T14:55:48.742104Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
