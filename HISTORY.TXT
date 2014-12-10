@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+08/12/2014 1.00 beta rev 442
+    - Fixed import/export of automation programs of type "arduino" (will be zip bundle instead of simple hgx)
+    - Fixed bug in program editor undo history handling (was not reset when switching between files)
+    - Fixed bug when loading program files larger than 32K
+    - Fixed wrong isConnected assigment order in SerialPortLib
+
 04/12/2014 1.00 beta rev 441
     - Added "MiLight Control" app
     - Fixed bug in interconnections remote module control

@@ -32,7 +32,7 @@ namespace HomeGenie.Automation.Scripting
 
     /// <summary>
     /// Udp client helper.\n
-    /// Class instance accessor: **udpClient**
+    /// Class instance accessor: **UdpClient**
     /// </summary>
     public class UdpClientHelper
     {
@@ -51,7 +51,7 @@ namespace HomeGenie.Automation.Scripting
         /// <summary>
         /// Sets the client as a sender to address:port
         /// </summary>
-        /// <returns>udpClientHelper.</returns>
+        /// <returns>UdpClientHelper.</returns>
         /// <param name="address">Remote DNS or IP address.</param>
         /// <param name="port">port to send to</param>
         public UdpClientHelper Sender(string address, int port)

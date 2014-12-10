@@ -146,33 +146,63 @@ namespace HomeGenie.Service.Handlers
                     string archiveName = "homegenie_program_import.hgx";
                     if (File.Exists(archiveName))
                         File.Delete(archiveName);
-                        //
+                    //
                     var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
                     string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
                     MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveName);
-                        //
-                    var serializer = new XmlSerializer(typeof(ProgramBlock));
+                    //
+                    int newPid = homegenie.ProgramEngine.GeneratePid();
                     var reader = new StreamReader(archiveName);
+                    char[] signature = new char[2];
+                    reader.Read(signature, 0, 2);
+                    reader.Close();
+                    if (signature[0] == 'P' && signature[1] == 'K')
+                    {
+                        // Read and uncompress zip file content (arduino program bundle)
+                        string zipFileName = archiveName.Replace(".hgx", ".zip");
+                        if (File.Exists(zipFileName))
+                            File.Delete(zipFileName);
+                        File.Move(archiveName, zipFileName);
+                        string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import");
+                        if (Directory.Exists(destFolder))
+                            Directory.Delete(destFolder, true);
+                        homegenie.UnarchiveConfiguration(zipFileName, destFolder);
+                        string bundleFolder = Path.Combine("programs", "arduino", newPid.ToString());
+                        if (Directory.Exists(bundleFolder))
+                            Directory.Delete(bundleFolder, true);
+                        Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
+                        reader = new StreamReader(Path.Combine(destFolder, "program.hgx"));
+                    }
+                    else
+                    {
+                        reader = new StreamReader(archiveName);
+                    }
+                    var serializer = new XmlSerializer(typeof(ProgramBlock));
                     newProgram = (ProgramBlock)serializer.Deserialize(reader);
                     reader.Close();
-                        //
-                    newProgram.Address = homegenie.ProgramEngine.GeneratePid();
+                    //
+                    newProgram.Address = newPid;
                     newProgram.Group = migCommand.GetOption(0);
                     homegenie.ProgramEngine.ProgramAdd(newProgram);
-                        //
+                    //
                     newProgram.IsEnabled = false;
                     newProgram.ScriptErrors = "";
                     newProgram.AppAssembly = null;
-                        //
-                    homegenie.ProgramEngine.CompileScript(newProgram);
-                        //
+                    //
+                    if (newProgram.Type.ToLower() != "arduino")
+                    {
+                        homegenie.ProgramEngine.CompileScript(newProgram);
+                    }
+                    //
                     homegenie.UpdateProgramsDatabase();
-                        //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
+                    //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
                     migCommand.Response = newProgram.Address.ToString();
                     break;
 
                 case "Programs.Export":
                     currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    string filename = currentProgram.Address + "-" + currentProgram.Name.Replace(" ", "_");
+                    //
                     var writerSettings = new System.Xml.XmlWriterSettings();
                     writerSettings.Indent = true;
                     var programSerializer = new System.Xml.Serialization.XmlSerializer(typeof(ProgramBlock));
@@ -180,15 +210,48 @@ namespace HomeGenie.Service.Handlers
                     var writer = System.Xml.XmlWriter.Create(builder, writerSettings);
                     programSerializer.Serialize(writer, currentProgram);
                     writer.Close();
-                    migCommand.Response = builder.ToString();
+                    //
+                    if (currentProgram.Type.ToLower() == "arduino")
+                    {
+                        string arduinoBundle = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                           "tmp",
+                                                           "export",
+                                                            filename + ".zip");
+                        if (File.Exists(arduinoBundle))
+                        {
+                            File.Delete(arduinoBundle);
+                        }
+                        else if (!Directory.Exists(Path.GetDirectoryName(arduinoBundle)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(arduinoBundle));
+                        }
+                        string mainProgramFile = Path.Combine(Path.GetDirectoryName(arduinoBundle), "program.hgx");
+                        File.WriteAllText(
+                            mainProgramFile,
+                            builder.ToString()
+                        );
+                        Utility.AddFileToZip(arduinoBundle, mainProgramFile, "program.hgx");
+                        sketchFolder = Path.Combine("programs", "arduino", currentProgram.Address.ToString());
+                        foreach (string f in Directory.GetFiles(sketchFolder))
+                        {
+                            Utility.AddFileToZip(arduinoBundle, Path.Combine(sketchFolder, Path.GetFileName(f)), Path.Combine("src", Path.GetFileName(f)));
+                        }
                         //
-                    (request.Context as HttpListenerContext).Response.AddHeader(
-                        "Content-Disposition",
-                        "attachment; filename=\"" + currentProgram.Address + "-" + currentProgram.Name.Replace(
-                            " ",
-                            "_"
-                        ) + ".hgx\""
-                    );
+                        byte[] bundleData = File.ReadAllBytes(arduinoBundle);
+                        (request.Context as HttpListenerContext).Response.AddHeader(
+                            "Content-Disposition",
+                            "attachment; filename=\"" + filename + ".zip\""
+                            );
+                        (request.Context as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
+                    }
+                    else
+                    {
+                        (request.Context as HttpListenerContext).Response.AddHeader(
+                            "Content-Disposition",
+                            "attachment; filename=\"" + filename + ".hgx\""
+                        );
+                        migCommand.Response = builder.ToString();
+                    }
                     break;
 
                 case "Programs.List":
@@ -336,13 +399,12 @@ namespace HomeGenie.Service.Handlers
 
                 case "Programs.Arduino.FileList":
                     sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    string[] filePaths = Directory.GetFiles(sketchFolder);
                     List<string> files = new List<string>();
-                    for (int f = 0; f < filePaths.Length; f++)
+                    foreach (string f in Directory.GetFiles(sketchFolder))
                     {
-                        if (ArduinoAppFactory.IsValidProjectFile(filePaths[f]))
+                        if (ArduinoAppFactory.IsValidProjectFile(f))
                         {
-                            files.Add(Path.GetFileName(filePaths[f]));
+                            files.Add(Path.GetFileName(f));
                         }
                     }
                     migCommand.Response = JsonConvert.SerializeObject(files);
