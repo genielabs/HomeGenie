@@ -1291,34 +1291,6 @@ namespace HomeGenie.Service
             ArchiveConfiguration("html/homegenie_backup_config.zip");
         }
 
-        public void UnarchiveConfiguration(string archiveName, string destinationFolder)
-        {
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
-            {
-                foreach (var part in package.GetParts())
-                {
-                    string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1));
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
-
-                    if (File.Exists(target)) File.Delete(target);
-
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
-                    {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
-                    }
-                }
-            }
-        }
-
         #endregion Initialization and Data Storage
 
         #region Misc events handlers
@@ -1801,9 +1773,19 @@ namespace HomeGenie.Service
             }
             foreach (var program in masterControlProgram.Programs)
             {
-                if (File.Exists("programs/" + program.Address + ".dll"))
+                string relFile = Path.Combine("programs/", program.Address + ".dll");
+                if (File.Exists(relFile))
                 {
-                    Utility.AddFileToZip(archiveName, "programs/" + program.Address + ".dll");
+                    Utility.AddFileToZip(archiveName, relFile);
+                }
+                if (program.Type.ToLower() == "arduino")
+                {
+                    string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
+                    string[] filePaths = Directory.GetFiles(arduinoFolder);
+                    foreach (string f in filePaths)
+                    {
+                        Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
+                    }
                 }
             }
             //
@@ -1816,6 +1798,34 @@ namespace HomeGenie.Service
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
+            }
+        }
+        
+        public void UnarchiveConfiguration(string archiveName, string destinationFolder)
+        {
+            // Unarchive (unzip)
+            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
+            {
+                foreach (var part in package.GetParts())
+                {
+                    string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1));
+                    if (!Directory.Exists(Path.GetDirectoryName(target)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(target));
+                    }
+
+                    if (File.Exists(target)) File.Delete(target);
+
+                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
+                    {
+                        byte[] buffer = new byte[4096];
+                        int read;
+                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            destination.Write(buffer, 0, read);
+                        }
+                    }
+                }
             }
         }
 

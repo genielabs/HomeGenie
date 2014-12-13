@@ -783,6 +783,7 @@ HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
         $('#configure_program_editorfilename').html(filename);
         $(editor3.getWrapperElement()).hide();
         $(editor2.getWrapperElement()).show();
+        editor2.clearHistory();
         editor2.refresh();
         $.mobile.loading('hide');
     }
@@ -795,6 +796,7 @@ HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
             HG.WebApp.ProgramEdit._CurrentSketchFile = filename;
             $('#configure_program_editorfilename').html(filename);
             editor3.setValue(src);
+            editor3.clearHistory();
             editor3.refresh();
             HG.WebApp.ProgramEdit.ShowExternalErrors();
             $.mobile.loading('hide');
