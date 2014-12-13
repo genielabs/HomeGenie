@@ -184,7 +184,26 @@
 
 
 
-    <div id="automation_program_delete" class="ui-corner-all" data-role="popup" data-overlay-theme="b">
+    <div id="automation_program_notsaved" class="ui-corner-all" data-role="popup" data-transition="pop" data-position-to="window" data-dismissible="false" data-overlay-theme="b">
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="configure_program_hasmodification">Program was modified!</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 data-locale-id="configure_program_savechangesprompt" class="ui-title">Do you want to save changes?</h3>
+            <p data-locale-id="configure_program_changeswillbelost"></p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a id="program_notsaved_dontsave" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_dontsave" data-inline="true" data-rel="back">No</a>
+                </div>
+                <div class="ui-block-b">
+                    <a id="program_notsaved_save" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="automation_program_delete" class="ui-corner-all" data-role="popup" data-transition="pop" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_deletetitle">Delete Program?</h1>
         </div>
@@ -269,12 +288,12 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a id="editprograms_backbutton" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_automation_programs">
+                    <a id="editprograms_backbutton" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#">
                         Back
                     </a>
                 </li>
                 <li>
-                    <a class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#page_home">
+                    <a id="editprograms_homebutton" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#">
                         Home
                     </a>
                 </li>
@@ -290,6 +309,7 @@
 
 </div>
 
+<!-- TODO: the following page is deprecated, should be deleted -->
 <div data-role="page" id="page_automation_editprogram_code">
 
     {include pages/header.html}

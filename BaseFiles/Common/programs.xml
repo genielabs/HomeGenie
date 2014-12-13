@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:15.272261Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:51.746028Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:15.777452Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:52.252147Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:16.278745Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:52.746644Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -496,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:46.832513Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:34:23.361283Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1223,7 +1223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:17.276459Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:53.74799Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1278,7 +1278,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:17.777395Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:54.246323Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1573,7 +1573,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:18.282906Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:54.755366Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1633,11 +1633,9 @@ return true;
                 //
                 Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
                 module.Command("Basic.Get").Execute();
-                //Pause(.5);
+                Pause(1);
             }
         }
-      	//
-      	return false; // do not process this event any further
     }
 
   	return true; // continue processing event
@@ -1653,8 +1651,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Query on Wake Up</Name>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
-    <ActivationTime>2014-05-09T12:07:55.9935349Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:18.777271Z</TriggerTime>
+    <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
+    <TriggerTime>2014-12-13T18:33:55.24881Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1724,7 +1722,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:19.278756Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:55.751505Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1990,7 +1988,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:19.780835Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:56.252468Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2356,7 +2354,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:20.781954Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:57.255361Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2418,7 +2416,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:21.281728Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:57.752911Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2431,140 +2429,137 @@ energy consumption.</Description>
 
 return true;
 </ScriptCondition>
-    <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
-	var nif = (" " + parameter.Value + " "); // node information frame
-  	switch (parameter.Name)
+    <ScriptSource>var checkVirtualModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
+  var defaultType = "Switch";
+  var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
+  if (parameter.DecimalValue == 0)
+  {
+    // if not SwitchBinary, try SwitchMultilevel
+    defaultType = "Dimmer";
+    parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchMultiLevel.Count");
+  }
+  // ADD A VIRTUAL MODULE FOR EACH INSTANCE
+  for (int m = 1; m &lt;= parameter.DecimalValue; m++)
+  {
+    string address = module.Instance.Address + "." + m.ToString();
+    var virtualModule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(address).Get();
+    if (!virtualModule.WasFound)
     {
-      case "ZWaveNode.NodeInfo":
-      	if (nif.Contains(" 60 ")) // MultiInstance/Channel
-        {
-          	// ReQUEST instances count
-          	if (nif.Contains(" 25 ")) // 0x25 Switch Binary
-            {
-              	module.Command("MultiInstance.GetCount").Execute("Switch.Binary");
-            }
-          	if (nif.Contains(" 26 ")) // 0x26 Switch MultiLevel
-            {
-              	module.Command("MultiInstance.GetCount").Execute("Switch.MultiLevel");
-            }          	
-        }
-      	break;
-      case "ZWaveNode.MultiInstance.SwitchBinary.Count":
-        // ADD A VIRTUAL MODULE FOR EACH INSTANCE
-        for (int m = 1; m &lt;= parameter.DecimalValue; m++)
-        {
-          	string address = module.Instance.Address + "." + m.ToString();
-            Program.AddVirtualModule(module.Instance.Domain, address, "Switch", "homegenie/generic/switch");
-          	Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
-        }
-      	break;
-      case "ZWaveNode.MultiInstance.SwitchMultiLevel.Count":
-        // ADD A VIRTUAL MODULE FOR EACH INSTANCE
-        for (int m = 1; m &lt;= parameter.DecimalValue; m++)
-        {
-          	string address = module.Instance.Address + "." + m.ToString();
-            Program.AddVirtualModule(module.Instance.Domain, address, "Dimmer", "homegenie/generic/dimmer");
-        }
-    	break;
+      Program.AddVirtualModule("HomeAutomation.ZWave", address, defaultType, "");
+      Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
+    }
+  }
+  return true;
+});
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  lock(this)
+  if (!parameter.Name.EndsWith(".Count") &amp;&amp; (parameter.Name.StartsWith("ZWaveNode.MultiInstance.SwitchMultiLevel.") || parameter.Name.StartsWith("ZWaveNode.MultiInstance.SwitchBinary.")))
+  {
+    var path = parameter.Name.Split('.');
+    //var eventType = path[2]; 	// "SwitchMultiLevel" or "SwitchBinary"
+    var instance = path[3];		// the instance number
+    
+    var id = 0;
+    if (int.TryParse(instance, out id))
+    {
+      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(module.Instance.Address + "." + instance).Get();
+      Program.RaiseEvent(virtualmodule, "Status.Level", parameter.Value, "ZWaveNode");
     }
 
-  	return true; // continue processing event
+  }
+  else if (parameter.Name == "ZWaveNode.NodeInfo")
+  {
+    var nif = (" " + parameter.Value + " "); // node information frame
+    if (nif.Contains(" 60 ")) // MultiInstance/Channel
+    {
+      // ReQUEST instances count
+      if (nif.Contains(" 25 ")) // 0x25 Switch Binary
+      {
+        module.Command("MultiInstance.GetCount").Execute("Switch.Binary");
+      }
+      if (nif.Contains(" 26 ")) // 0x26 Switch MultiLevel
+      {
+        module.Command("MultiInstance.GetCount").Execute("Switch.MultiLevel");
+      }
+      checkVirtualModules(module);
+    }
+  }
+
+  return true; // continue processing event
 });
 
 When.WebServiceCallReceived("HomeAutomation.ZWave", (args) =&gt; {
-  
-    string[] reqs = ((string)args).Split('/');
-    //string domain = reqs[0];
-    try
+
+  string[] reqs = ((string)args).Split('/');
+  //string domain = reqs[0];
+  try
+  {
+    string nodeid = reqs[1];
+    string instance = "";
+    string command = reqs[2];
+    string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+    //
+    // Check if it's a node supporting MultiInstance/Channel
+    // if the node address is in the form &lt;mainnode_id&gt;.&lt;instance&gt;
+    // then this is a command for a multiinstance virtual module
+    if (nodeid.IndexOf('.') &gt; 0)
     {
-      string nodeid = reqs[1];
-      string instance = "";
-      string command = reqs[2];
-      string parameter = ""; if (reqs.Length &gt; 3) parameter = reqs[3];
+      instance = nodeid.Substring(nodeid.IndexOf('.') + 1);
+      nodeid = nodeid.Substring(0, nodeid.IndexOf('.'));
+    }
+    if (instance != "")
+    {
+      var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
+      var parentmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid).Get();
       //
-      // Check if it's a node supporting MultiInstance/Channel
-      // if the node address is in the form &lt;mainnode_id&gt;.&lt;instance&gt;
-      // then this is a command for a multiinstance virtual module
-      if (nodeid.IndexOf('.') &gt; 0)
+      switch(command)
       {
-        	instance = nodeid.Substring(nodeid.IndexOf('.') + 1);
-        	nodeid = nodeid.Substring(0, nodeid.IndexOf('.'));
+        case "Control.On":
+        parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
+        Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+        break;
+        case "Control.Off":
+        parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+        Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+        break;
+        case "Control.Toggle":
+        if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
+        {
+          parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
+          Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
+        }
+        else
+        {
+          parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
+          Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
+        }
+        break;
+        case "Control.Level":
+        parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
+        Program.RaiseEvent(virtualmodule, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
+        break;
       }
-      if (instance != "")
-      {
-          var virtualmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid + "." + instance).Get();
-          var parentmodule = Modules.InDomain("HomeAutomation.ZWave").WithAddress(nodeid).Get();
-          //
-          switch(command)
-          {
-            // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
-            case "Control.On":
-                parentmodule.Command("MultiInstance.Set").Execute("Switch.Binary/" + instance + "/255");
-                Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
-                break;
-            // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
-            case "Control.Off":
-                parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-                Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
-                break;
-            case "Control.Toggle":
-                if (virtualmodule.Parameter("Status.Level").DecimalValue == 0)
-                {
-                  parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/255");
-                  Program.RaiseEvent(virtualmodule, "Status.Level", "1", "ZWaveNode");
-                }
-                else
-                {
-                  parentmodule.Command("MultiInstance.Set").Set("Switch.Binary/" + instance + "/0");
-                  Program.RaiseEvent(virtualmodule, "Status.Level", "0", "ZWaveNode");
-                }
-                break;
-            case "Control.Level":
-                parentmodule.Command("MultiInstance.Set").Set("Switch.MultiLevel/" + instance + "/" + parameter);
-                Program.RaiseEvent(virtualmodule, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "ZWaveNode");
-                break;
-            //case "Control.ColorHsb":
-            //    string[] values = parameter.Split(',');
-            //    bridgeapicall(lightnumber, "{ \"on\" : true" + 
-            //                  ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
-            //                  ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
-            //                  ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + " }");
-            //    Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
-            //    Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
-            //    break; 
-          }
-          //
-          return "{ 'ResponseValue' : 'OK' }";    
-      }
-    } catch (Exception e) { 
-      
-    	Program.Notify("ZWave MultiInstance module ERROR!", e.Message);
-                       
-    }  	
-  	
-  	return "";
+      //
+      return "{ 'ResponseValue' : 'OK' }";    
+    }
+  } catch (Exception e) { 
+
+    Program.Notify("ZWave MultiInstance module ERROR!", e.Message);
+
+  }  	
+
+  return "";
 });
 
 // setup multi channel virtual modules at startup
 Modules.InDomain("HomeAutomation.ZWave").Each((module)=&gt;{
-  	var parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchBinary.Count");
-  	if (parameter.DecimalValue == 0)
-    {
-      	// if not SwitchBinary, try SwitchMultilevel
-      	parameter = module.Parameter("ZWaveNode.MultiInstance.SwitchMultiLevel.Count");
-    }
-    // ADD A VIRTUAL MODULE FOR EACH INSTANCE
-    for (int m = 1; m &lt;= parameter.DecimalValue; m++)
-    {
-        string address = module.Instance.Address + "." + m.ToString();
-        Program.AddVirtualModule(module.Instance.Domain, address, "Switch", "homegenie/generic/switch");
-        Program.Notify("MultiChannel Z-Wave", "Adding virtual module " + address);
-    }
-  	return false;
+  checkVirtualModules(module);
+  return false;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -2574,8 +2569,8 @@ Program.GoBackground();</ScriptSource>
     <Description>Adds a virtual module for each instance of a multi instance node.
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:21.782626Z</TriggerTime>
+    <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
+    <TriggerTime>2014-12-13T18:33:58.252547Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2839,7 +2834,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-04T14:55:22.285539Z</TriggerTime>
+    <TriggerTime>2014-12-13T18:33:58.756856Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3100,8 +3095,18 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
     configuration[p].Name = pc.Address;
 }
 
-// Listen for events coming from GPIO pins
-var connection = new GpioConnection(configuration);
+// Allocate GPIO connection and listen for events coming from GPIO pins
+GpioConnection connection = null;
+try
+{
+	connection = new GpioConnection(configuration);
+}
+catch 
+{
+  	Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
+  	Pause(10);
+  	return;
+}
 connection.PinStatusChanged += (sender, args) =&gt; {
   	var address = args.Configuration.Name;
     var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
@@ -7014,5 +7019,24 @@ while (Program.IsEnabled)
     <TriggerTime>2014-12-04T14:55:48.742104Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>None</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition />
+    <ScriptSource />
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>1000</Address>
+    <Name>test</Name>
+    <Group>Interconnections</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>Wizard</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

@@ -54,6 +54,7 @@ HG.WebApp.InitializePage = function ()
     //
     HG.Configure.LoadData();
     //
+    HG.WebApp.Home.UpdateHeaderStatus();
     window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
     //
     //HG.WebApp.SystemSettings.CheckConfigureStatus();
@@ -209,7 +210,7 @@ HG.WebApp.InitializePage = function ()
             });
             recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
-            recognition.interimResults = false;getinter
+            recognition.interimResults = false;
             recognition.onstart = function() { 
                 $('#voicerecognition_button').addClass('ui-disabled');
             }
@@ -641,7 +642,7 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
 HG.WebApp.Locales = HG.WebApp.Locales || {};
 HG.WebApp.Locales.GetUserLanguage = function()
 {
-    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+    var userLang = (navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage));
     if (userLang.length > 2) userLang = userLang.substring(0, 2);
     return userLang;
 };

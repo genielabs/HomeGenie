@@ -637,8 +637,11 @@ HG.WebApp.ProgramsList.EditProgram = function ()
 				editor2.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource);
                 // clear old edit history
                 editor1.clearHistory();
+                editor1.markClean();
                 editor2.clearHistory();
+                editor2.markClean();
                 editor3.clearHistory();
+                editor3.markClean();
 				//
 				HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = HG.WebApp.Data.Programs[i].ConditionType;
 				//

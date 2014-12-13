@@ -743,7 +743,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value>CR: Win32 IO returned ERROR_GEN_FAILURE. Path: /sys/class/gpio/export</Value>
+        <Value></Value>
         <Description />
         <UpdateTime>2014-11-13T22:54:55.631275Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
@@ -807,7 +807,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value>CR: Win32 IO returned ERROR_GEN_FAILURE. Path: /sys/class/gpio/export</Value>
+        <Value></Value>
         <Description />
         <UpdateTime>2014-11-13T09:16:41.552427Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
@@ -862,7 +862,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value>CR: Exception of type 'Raspberry.IO.Interop.MemoryMapFailedException' was thrown.</Value>
+        <Value></Value>
         <Description />
         <UpdateTime>2014-11-13T16:35:38.440737Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
@@ -1866,7 +1866,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO21</Name>
-        <Value>OUT</Value>
+        <Value>OFF</Value>
         <Description>GPIO21 (IN, OUT or OFF)</Description>
         <UpdateTime>2014-04-11T18:45:31.767748Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
@@ -1893,7 +1893,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO24</Name>
-        <Value>OUT</Value>
+        <Value>OFF</Value>
         <Description>GPIO24 (IN, OUT or OFF)</Description>
         <UpdateTime>2014-04-11T18:45:31.768212Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>
@@ -1911,7 +1911,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO4</Name>
-        <Value>OUT</Value>
+        <Value>OFF</Value>
         <Description>GPIO04 (IN, OUT or OFF)</Description>
         <UpdateTime>2014-04-11T18:45:31.767237Z</UpdateTime>
         <NeedsUpdate>false</NeedsUpdate>

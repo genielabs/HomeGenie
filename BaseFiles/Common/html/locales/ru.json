@@ -481,7 +481,7 @@
         "Список программ",
     "configure_programslist_tap_disable": 
         "Нажмите чтобы ВЫКЛЮЧИТЬ программу",
-    "configure_programslist_tab_enable": 
+    "configure_programslist_tap_enable": 
         "Нажмите чтобы ВКЛЮЧИТЬ программу",
     "configure_programslist_deletegroup": 
         "Удалить группу",
@@ -634,5 +634,15 @@
     "configure_program_fileslist_edit":
         "Edit",
     "configure_program_fileslist_add":
-        "Add"
+        "Add",
+    "configure_program_hasmodification":
+        "Program was modified!",
+    "configure_program_savechangesprompt":
+        "Do you want to save changes?",
+    "configure_program_changeswillbelost":
+        "",
+    "configure_program_dontsave":
+        "No",
+    "configure_program_saveconfirm":
+        "Save"
 }
