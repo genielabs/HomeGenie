@@ -9,20 +9,20 @@
         "Heat economy",
     "therm_heat":
         "Heat",
-    "therm_furnance":
-        "Furnance",
+    "therm_furnace":
+        "Furnace",
     "Off":
         "Off",
     "HeatEconomy":
         "Economy heat",
     "Heat":
         "Heat",
-    "Furnance":
-        "Furnance",
+    "Furnace":
+        "Furnace",
     "economy_heat_to":
         "economy heat to",
     "heat_to":
         "heat to",
-    "furnance_to":
-        "furnance to"
+    "furnace_to":
+        "furnace to"
 }

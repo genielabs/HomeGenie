@@ -9,7 +9,7 @@
         "Экономичный обогрев",
     "therm_heat":
         "Обогрев",
-    "therm_furnance":
+    "therm_furnace":
         "Сушка",
     "Off":
         "Выключен",
@@ -17,12 +17,12 @@
         "Экономичный обогрев",
     "Heat":
         "Обогрев",
-    "Furnance":
+    "Furnace":
         "Сушка",
     "economy_heat_to":
         "экономичный обогрев до",
     "heat_to":
         "обогрев до",
-    "furnance_to":
+    "furnace_to":
         "сушка до"
 }

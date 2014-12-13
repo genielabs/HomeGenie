@@ -82,7 +82,7 @@
         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heateconomy]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
-        controlpopup.find('[data-ui-field=mode_furnance]').removeClass('ui-btn-active');
+        controlpopup.find('[data-ui-field=mode_furnace]').removeClass('ui-btn-active');
         // set current buttons' state from module properties 
         var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.Mode');
         if (thermostatMode != null)
@@ -101,10 +101,10 @@
             controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
             _this.EditHeatSetPoint(controlpopup, module);
           }
-          else if (thermostatMode.Value == 'Furnance') 
+          else if (thermostatMode.Value == 'Furnace') 
           {
-            controlpopup.find('[data-ui-field=mode_furnance]').addClass('ui-btn-active');
-            _this.EditFurnanceSetPoint(controlpopup, module);
+            controlpopup.find('[data-ui-field=mode_furnace]').addClass('ui-btn-active');
+            _this.EditFurnaceSetPoint(controlpopup, module);
           }
         }
         else
@@ -121,8 +121,8 @@
       controlpopup.find('[data-ui-field=heat_setpoint]').on('click', function(){
         _this.EditHeatSetPoint(controlpopup, module);
       });
-      controlpopup.find('[data-ui-field=furnance_setpoint]').on('click', function(){
-        _this.EditFurnanceSetPoint(controlpopup, module);
+      controlpopup.find('[data-ui-field=furnace_setpoint]').on('click', function(){
+        _this.EditFurnaceSetPoint(controlpopup, module);
       });
 
       // thermostat mode buttons events
@@ -130,14 +130,14 @@
         controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heateconomy]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
-        controlpopup.find('[data-ui-field=mode_furnance]').removeClass('ui-btn-active');
+        controlpopup.find('[data-ui-field=mode_furnace]').removeClass('ui-btn-active');
         HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Off", function (data) { });
       });
       controlpopup.find('[data-ui-field=mode_heateconomy]').on('click', function(){
         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heateconomy]').addClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
-        controlpopup.find('[data-ui-field=mode_furnance]').removeClass('ui-btn-active');
+        controlpopup.find('[data-ui-field=mode_furnace]').removeClass('ui-btn-active');
         _this.EditHeatEconomySetPoint(controlpopup, module);
         HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "HeatEconomy", function (data) { });
       });
@@ -145,17 +145,17 @@
         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heateconomy]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
-        controlpopup.find('[data-ui-field=mode_furnance]').removeClass('ui-btn-active');
+        controlpopup.find('[data-ui-field=mode_furnace]').removeClass('ui-btn-active');
         _this.EditHeatSetPoint(controlpopup, module);
         HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Heat", function (data) { });
       });
-      controlpopup.find('[data-ui-field=mode_furnance]').on('click', function(){
+      controlpopup.find('[data-ui-field=mode_furnace]').on('click', function(){
         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heateconomy]').removeClass('ui-btn-active');
         controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
-        controlpopup.find('[data-ui-field=mode_furnance]').addClass('ui-btn-active');
-        _this.EditFurnanceSetPoint(controlpopup, module);
-        HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Furnance", function (data) { });
+        controlpopup.find('[data-ui-field=mode_furnace]').addClass('ui-btn-active');
+        _this.EditFurnaceSetPoint(controlpopup, module);
+        HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Furnace", function (data) { });
       });
 
     }
@@ -210,19 +210,19 @@
       widget.find('[data-ui-field=heateconomy_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
     }
 
-    // display current Furnance SetPoint
-    widget.find('[data-ui-field=furnance_field]').hide();
-    var furnanceTo = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.SetPoint.Furnance");
-    if (furnanceTo == null || furnanceTo.Value == '')
+    // display current Furnace SetPoint
+    widget.find('[data-ui-field=furnace_field]').hide();
+    var furnaceTo = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.SetPoint.Furnace");
+    if (furnaceTo == null || furnaceTo.Value == '')
     {
-      widget.find('[data-ui-field=furnance_field]').hide();
+      widget.find('[data-ui-field=furnace_field]').hide();
     }
     else
     {
-      widget.find('[data-ui-field=furnance_field]').show();
-      var temperature = Math.round(furnanceTo.Value.toString().replace(',', '.') * 100) / 100;
+      widget.find('[data-ui-field=furnace_field]').show();
+      var temperature = Math.round(furnaceTo.Value.toString().replace(',', '.') * 100) / 100;
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-      widget.find('[data-ui-field=furnance_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
+      widget.find('[data-ui-field=furnace_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
     }
 
 
@@ -245,22 +245,22 @@
             case "Off":
                 widget.find('[data-ui-field=heat_field]').hide();
                 widget.find('[data-ui-field=heateconomy_field]').hide();
-                widget.find('[data-ui-field=furnance_field]').hide();
+                widget.find('[data-ui-field=furnace_field]').hide();
                 break;
             case "HeatEconomy":
                 widget.find('[data-ui-field=heat_field]').hide();
                 widget.find('[data-ui-field=heateconomy_field]').show();
-                widget.find('[data-ui-field=furnance_field]').hide();
+                widget.find('[data-ui-field=furnace_field]').hide();
                 break;
             case "Heat":
                 widget.find('[data-ui-field=heat_field]').show();
                 widget.find('[data-ui-field=heateconomy_field]').hide();
-                widget.find('[data-ui-field=furnance_field]').hide();
+                widget.find('[data-ui-field=furnace_field]').hide();
                 break;
-            case "Furnance":
+            case "Furnace":
                 widget.find('[data-ui-field=heat_field]').hide();
                 widget.find('[data-ui-field=heateconomy_field]').hide();
-                widget.find('[data-ui-field=furnance_field]').show();
+                widget.find('[data-ui-field=furnace_field]').show();
                 break;
         }
      }
@@ -269,7 +269,7 @@
   EditHeatEconomySetPoint: function(controlpopup, module) {
     var levelKnob = controlpopup.find('[data-ui-field=level_knob]');
     controlpopup.find('[data-ui-field=heat_setpoint]').removeClass('ui-btn-active');
-    controlpopup.find('[data-ui-field=furnance_setpoint]').removeClass('ui-btn-active');
+    controlpopup.find('[data-ui-field=furnace_setpoint]').removeClass('ui-btn-active');
     controlpopup.find('[data-ui-field=heateconomy_setpoint]').addClass('ui-btn-active');
     // show current heatEconomy setpoint
     var heatEconomySetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.HeatingEconomy');
@@ -284,7 +284,7 @@
   EditHeatSetPoint: function(controlpopup, module) {
     var levelKnob = controlpopup.find('[data-ui-field=level_knob]');
     controlpopup.find('[data-ui-field=heateconomy_setpoint]').removeClass('ui-btn-active');
-    controlpopup.find('[data-ui-field=furnance_setpoint]').removeClass('ui-btn-active');
+    controlpopup.find('[data-ui-field=furnace_setpoint]').removeClass('ui-btn-active');
     controlpopup.find('[data-ui-field=heat_setpoint]').addClass('ui-btn-active');
     // show current heat setpoint
     var heatSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Heating');
@@ -296,19 +296,19 @@
     this.levelKnobBindValue = 'Heating';    
   },
 
-  EditFurnanceSetPoint: function(controlpopup, module) {
+  EditFurnaceSetPoint: function(controlpopup, module) {
     var levelKnob = controlpopup.find('[data-ui-field=level_knob]');
     controlpopup.find('[data-ui-field=heateconomy_setpoint]').removeClass('ui-btn-active');
     controlpopup.find('[data-ui-field=heat_setpoint]').removeClass('ui-btn-active');
-    controlpopup.find('[data-ui-field=furnance_setpoint]').addClass('ui-btn-active');
-    // show current furnance setpoint
-    var furnanceSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Furnance');
-    if (furnanceSetPoint != null) 
+    controlpopup.find('[data-ui-field=furnace_setpoint]').addClass('ui-btn-active');
+    // show current furnace setpoint
+    var furnaceSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Furnace');
+    if (furnaceSetPoint != null) 
     {
-      levelKnob.val(furnanceSetPoint.Value).trigger('change');
-      controlpopup.find('[data-ui-field=status]').html(furnanceSetPoint.Value + '&deg;');
+      levelKnob.val(furnaceSetPoint.Value).trigger('change');
+      controlpopup.find('[data-ui-field=status]').html(furnaceSetPoint.Value + '&deg;');
     }
-    this.levelKnobBindValue = 'Furnance';    
+    this.levelKnobBindValue = 'Furnace';    
   }  
 
 }]
