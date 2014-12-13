@@ -209,7 +209,7 @@ HG.WebApp.InitializePage = function ()
             });
             recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
-            recognition.interimResults = false;getinter
+            recognition.interimResults = false;
             recognition.onstart = function() { 
                 $('#voicerecognition_button').addClass('ui-disabled');
             }
