@@ -93,8 +93,8 @@
           }
           if (thermostatMode.Value == 'HeatEconomy') 
           {
-            controlpopup.find('[data-ui-field=mode_cool]').addClass('ui-btn-active');
-            _this.EditCoolSetPoint(controlpopup, module);
+            controlpopup.find('[data-ui-field=mode_heateconomy]').addClass('ui-btn-active');
+            _this.EditHeatEconomySetPoint(controlpopup, module);
           }
           else if (thermostatMode.Value == 'Heat') 
           {
@@ -104,7 +104,7 @@
           else if (thermostatMode.Value == 'Furnance') 
           {
             controlpopup.find('[data-ui-field=mode_furnance]').addClass('ui-btn-active');
-            _this.EditHeatSetPoint(controlpopup, module);
+            _this.EditFurnanceSetPoint(controlpopup, module);
           }
         }
         else
@@ -189,7 +189,7 @@
     else
     {
       widget.find('[data-ui-field=heat_field]').show();
-      var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
+      var temperature = Math.round(heatTo.Value.toString().replace(',', '.') * 100) / 100;
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
       widget.find('[data-ui-field=heat_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
     }
@@ -205,7 +205,7 @@
     else
     {
       widget.find('[data-ui-field=heateconomy_field]').show();
-      var temperature = Math.round(heatEconomyTo.Value.replace(',', '.') * 100) / 100;
+      var temperature = Math.round(heatEconomyTo.Value.toString().replace(',', '.') * 100) / 100;
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
       widget.find('[data-ui-field=heateconomy_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
     }
@@ -220,7 +220,7 @@
     else
     {
       widget.find('[data-ui-field=furnance_field]').show();
-      var temperature = Math.round(furnanceTo.Value.replace(',', '.') * 100) / 100;
+      var temperature = Math.round(furnanceTo.Value.toString().replace(',', '.') * 100) / 100;
       if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
       widget.find('[data-ui-field=furnance_field] > [data-ui-field=set_value]').html( temperature + '&deg;' );
     }
@@ -236,7 +236,11 @@
     var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.Mode");
     if (operatingMode != null) {
         displayMode = operatingMode.Value;
-        widget.find('[data-ui-field=mode_value]').html(displayMode);
+        var localizedDisplayMode = HG.WebApp.Locales.GetWidgetLocaleString(widget, displayMode);
+        if(localizedDisplayMode != undefined)
+            widget.find('[data-ui-field=mode_value]').html(localizedDisplayMode);
+        else
+            widget.find('[data-ui-field=mode_value]').html(displayMode);
         switch(displayMode) {
             case "Off":
                 widget.find('[data-ui-field=heat_field]').hide();

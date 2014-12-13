@@ -1,0 +1,28 @@
+﻿{
+    "mode":
+        "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "therm_setpoint":
+        "Set point",
+    "therm_setmode":
+        "Mode",
+    "therm_heateconomy":
+        "Heat economy",
+    "therm_heat":
+        "Heat",
+    "therm_furnance":
+        "Furnance",
+    "Off":
+        "Off",
+    "HeatEconomy":
+        "Economy heat",
+    "Heat":
+        "Heat",
+    "Furnance":
+        "Furnance",
+    "economy_heat_to":
+        "economy heat to",
+    "heat_to":
+        "heat to",
+    "furnance_to":
+        "furnance to"
+}

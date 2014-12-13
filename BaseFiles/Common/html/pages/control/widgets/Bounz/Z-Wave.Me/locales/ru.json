@@ -1,0 +1,28 @@
+﻿{
+    "mode":
+        "&nbsp;&nbsp;&nbsp;Режим&nbsp;&nbsp;",
+    "therm_setpoint":
+        "Установка температуры",
+    "therm_setmode":
+        "Режим",
+    "therm_heateconomy":
+        "Экономичный обогрев",
+    "therm_heat":
+        "Обогрев",
+    "therm_furnance":
+        "Сушка",
+    "Off":
+        "Выключен",
+    "HeatEconomy":
+        "Экономичный обогрев",
+    "Heat":
+        "Обогрев",
+    "Furnance":
+        "Сушка",
+    "economy_heat_to":
+        "экономичный обогрев до",
+    "heat_to":
+        "обогрев до",
+    "furnance_to":
+        "сушка до"
+}
