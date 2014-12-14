@@ -857,6 +857,15 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
+            case DISCOVERY_STATUS.NODE_ERROR:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = "Erreur ZWave Node " + e.NodeId
+                });
+                break;
             }
         }
 
