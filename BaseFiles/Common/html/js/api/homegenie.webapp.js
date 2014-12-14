@@ -712,7 +712,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
 
             $(container).find('[data-locale-id]').each(function(index){
                 var stringid = $(this).attr('data-locale-id');
-                var text = findLocaleString(locale, stringid);
+                var text = HG.WebApp.Locales.FindLocaleString(locale, stringid);
                 if (text != null) {
                     $this = $(this);
                     if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
@@ -729,7 +729,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
             // localizable strings
             $(container).find('[data-localizable]').each(function(index){
                 var stringid = $(this).text();
-                var text = findLocaleString(locale, stringid);
+                var text = HG.WebApp.Locales.FindLocaleString(locale, stringid);
                 if (text != null) {                    
                     $(this).text(text);                    
                 }
@@ -740,7 +740,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
                 var popup = $(this);
                 $(popup).find('[data-locale-id]').each(function(index){
                     var stringid = $(this).attr('data-locale-id');
-                    var text = findLocaleString(locale, stringid);
+                    var text = HG.WebApp.Locales.FindLocaleString(locale, stringid);
                     if (text != null) {
                         $this = $(this);
                         if( $this.is('a') && $('span.ui-btn-text', $this).is('span') ) {
@@ -758,7 +758,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
         }
     });
 };
-var findLocaleString = function(locale, stringid) {
+HG.WebApp.Locales.FindLocaleString = function(locale, stringid) {
     var text = null;
     $.each(locale, function(key, value) {
         if (key == stringid)
@@ -767,33 +767,17 @@ var findLocaleString = function(locale, stringid) {
             return false; // break each
         }
     });
+    if (text == null)
+    {
+        console.log("WIDGET LOCALIZATION ERROR " + stringid + ' == ' + text + '!!!');
+    }
     return text;
 }
 HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId){
     var retval = null;
     if(widget.data("Locale") == undefined)
         return retval;
-    $.each(widget.data("Locale"), function(key, value) {
-        if (key == stringId)
-        {
-            retval = value;
-            return false; // break each
-        }
-    });
-    if (retval == null)
-    {
-        $.each(HG.WebApp.Data._DefaultLocale, function(key, value) {
-            if (key == stringid)
-            {
-                retval = value;
-                return false; // break each
-            }
-        });
-        if (retval == null)
-        {
-            console.log("LOCALIZATION ERROR " + stringid + ' == ' + retval + '!!!'); 
-        }
-    }
+    retval = HG.WebApp.Locales.FindLocaleString(widget.data("Locale"), stringId);
     return retval;
 }
 HG.WebApp.Locales.GetLocaleString = function(stringid)

@@ -90,6 +90,7 @@
           if (thermostatMode.Value == 'Off') 
           {
             controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
+            _this.EditHeatSetPoint(controlpopup, module);
           }
           if (thermostatMode.Value == 'HeatEconomy') 
           {

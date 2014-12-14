@@ -5,6 +5,8 @@
         "Set point",
     "therm_setmode":
         "Mode",
+    "therm_off":
+        "Off",
     "therm_heateconomy":
         "Heat economy",
     "therm_heat":
