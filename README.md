@@ -29,7 +29,26 @@ http://homegenie.it
 - Build/Debug the main *HomeGenie* project
 - no setup packaging currently supported for Mac
 
+To debug mono remotely on RPi using Xamarin Studio on Mac follow these steps:
 
+1. In *startup_debug.sh* replace the IP on lines 13 and 16 from *10.0.1.10* to the actual IP address of your Raspberry Pi.
+2. Start HG from the console using *startup_debug.sh*
+
+    ```bash
+    $ cd /usr/local/bin/homegenie
+    $ ./startup_debug.sh
+    ```
+
+3. Start Xamarin Studio from Terminal with one environment variable defined:
+
+    ```bash
+    $ export MONODEVELOP_SDB_TEST=1
+    $ cd /Applications
+    $ open Xamarin\ Studio.app/
+    ```
+
+4. Open the project. To start debugging connect to mono debugger that runs on RPi using *Run* > *Run With* > *Custom Command Mono Soft Debugger* menu option. It will open a prompt window where you should enter the IP address of RPi in the *IP* field and 10000 in the *Port* field.
+5. Click *Connect* and debug will start.
 
 
 ## Precompiled packages and install instructions
