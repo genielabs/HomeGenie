@@ -39,7 +39,7 @@ namespace ZWaveLib.Devices
         NODE_REMOVED = 0x01,
         DISCOVERY_START = 0xDD,
         NODE_UPDATED = 0xEE,
-		NODE_ERROR = 0xFE,
+        NODE_ERROR = 0xFE,
         DISCOVERY_END = 0xFF
     }
 
@@ -360,10 +360,10 @@ namespace ZWaveLib.Devices
                             }
                             else if (args.Message[5] == 0x01)
                             {
-								// TODO: callback error???
-								byte nodeID = zwavePort.ResendLastMessage(commandId) ;
-								if( nodeID != 0 )
-									OnDiscoveryEvent(new DiscoveryEventArgs(nodeID, DISCOVERY_STATUS.NODE_ERROR)); // Send event
+                                // TODO: callback error???
+                                byte nodeID = zwavePort.ResendLastMessage(commandId) ;
+                                if( nodeID != 0 )
+                                   OnDiscoveryEvent(new DiscoveryEventArgs(nodeID, DISCOVERY_STATUS.NODE_ERROR)); // Send event
                             }
                             break;
 

@@ -179,24 +179,24 @@ namespace ZWaveLib
             //
             return callbackId;
         }
-
-		public byte ResendLastMessage(byte callbackId)
-		{
-			var message = pendingMessages.Find(zm => zm.CallbackId == callbackId);
-			if (message != null)
-			{
-				pendingMessages.Remove(message);
-				if (message.ResendCount < 3)
-				{
-					message.ResendCount++;
-					SendMessage(message);
-				}
-				else // In case of Error if no more resend return NodeID 
-					return message.Message[4]; 
-			}
-			return 0; // Return 0 When the Resend is OK
-		}
-
+        
+        public byte ResendLastMessage(byte callbackId)
+        {
+            var message = pendingMessages.Find(zm => zm.CallbackId == callbackId);
+            if (message != null)
+            {
+                pendingMessages.Remove(message);
+                if (message.ResendCount < 3)
+                {
+                    message.ResendCount++;
+                    SendMessage(message);
+                }
+                else // In case of Error if no more resend return NodeID 
+                    return message.Message[4]; 
+            }
+            return 0; // Return 0 When the Resend is OK
+        }
+        
         public void ResendLastMessage()
         {
             if (pendingMessages.Count > 0)
@@ -210,7 +210,7 @@ namespace ZWaveLib
                 }
             }
         }
-
+        
         public byte GetCallbackId()
         {
             lock (this.callbackLock)
