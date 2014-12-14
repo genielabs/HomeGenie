@@ -602,6 +602,7 @@ namespace HomeGenie.Service
                 {
                 }
                 //
+                // TODO: this should be placed somewhere else (this is specific code for handling interface responses, none of HG business)
                 if (module != null)
                 {
                     // wait for ZWaveLib asynchronous response from node and raise the proper "parameter changed" event
@@ -629,11 +630,14 @@ namespace HomeGenie.Service
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module,
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(
-                                    ".",
-                                    ""
-                                ) + "." + command.GetOption(1)
-                            );
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + command.GetOption(1));
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
+                        else if (command.Command == ZWave.Command.MULTIINSTANCE_GETCOUNT)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module, 
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." +".Count");
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
                         else if (command.Command == ZWave.Command.ASSOCIATION_GET)
@@ -1469,46 +1473,45 @@ namespace HomeGenie.Service
         internal void modules_Sort()
         {
             lock (systemModules.LockObject) try
+            {
+                // sort modules properties by name
+                foreach (var module in systemModules)
                 {
-
-                    // sort modules properties by name
-                    foreach (var module in systemModules)
+                    module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
                     {
-                        module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
-                        {
-                            return p1.Name.CompareTo(p2.Name);
-                        });
-                    }
-                    //
-                    // sort modules
-                    //
-                    systemModules.Sort((Module m1, Module m2) =>
-                    {
-                        System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(@"([a-zA-Z]+)(\d+)");
-                        System.Text.RegularExpressions.Match result1 = re.Match(m1.Address);
-                        System.Text.RegularExpressions.Match result2 = re.Match(m2.Address);
-
-                        string alphaPart1 = result1.Groups[1].Value.PadRight(8, '0');
-                        string numberPart1 = result1.Groups[2].Value.PadLeft(8, '0');
-                        string alphaPart2 = result2.Groups[1].Value.PadRight(8, '0');
-                        string numberPart2 = result2.Groups[2].Value.PadLeft(8, '0');
-
-                        string d1 = m1.Domain + "|" + alphaPart1 + numberPart1;
-                        string d2 = m2.Domain + "|" + alphaPart2 + numberPart2;
-                        return d1.CompareTo(d2);
+                        return p1.Name.CompareTo(p2.Name);
                     });
-
                 }
-                catch (Exception ex)
+                //
+                // sort modules
+                //
+                systemModules.Sort((Module m1, Module m2) =>
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "modules_Sort()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
+                    System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(@"([a-zA-Z]+)(\d+)");
+                    System.Text.RegularExpressions.Match result1 = re.Match(m1.Address);
+                    System.Text.RegularExpressions.Match result2 = re.Match(m2.Address);
+
+                    string alphaPart1 = result1.Groups[1].Value.PadRight(8, '0');
+                    string numberPart1 = (String.IsNullOrWhiteSpace(result1.Groups[2].Value) ? m1.Address.PadLeft(8, '0') : result1.Groups[2].Value.PadLeft(8, '0'));
+                    string alphaPart2 = result2.Groups[1].Value.PadRight(8, '0');
+                    string numberPart2 = (String.IsNullOrWhiteSpace(result2.Groups[2].Value) ? m2.Address.PadLeft(8, '0') : result2.Groups[2].Value.PadLeft(8, '0'));
+
+                    string d1 = m1.Domain + "|" + alphaPart1 + numberPart1;
+                    string d2 = m2.Domain + "|" + alphaPart2 + numberPart2;
+                    return d1.CompareTo(d2);
+                });
+
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_Sort()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
         }
 
         internal void modules_RefreshAll()

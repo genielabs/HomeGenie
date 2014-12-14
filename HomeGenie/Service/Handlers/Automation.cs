@@ -234,7 +234,17 @@ namespace HomeGenie.Service.Handlers
                         sketchFolder = Path.Combine("programs", "arduino", currentProgram.Address.ToString());
                         foreach (string f in Directory.GetFiles(sketchFolder))
                         {
-                            Utility.AddFileToZip(arduinoBundle, Path.Combine(sketchFolder, Path.GetFileName(f)), Path.Combine("src", Path.GetFileName(f)));
+                            if (!Path.GetFileName(f).StartsWith("sketch_"))
+                            {
+                                Utility.AddFileToZip(
+                                    arduinoBundle,
+                                    Path.Combine(sketchFolder, Path.GetFileName(f)),
+                                    Path.Combine(
+                                        "src",
+                                        Path.GetFileName(f)
+                                    )
+                                );
+                            }
                         }
                         //
                         byte[] bundleData = File.ReadAllBytes(arduinoBundle);

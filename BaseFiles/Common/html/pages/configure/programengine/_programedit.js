@@ -7,6 +7,7 @@ HG.WebApp.ProgramEdit._CurrentSketchFile = '';
 HG.WebApp.ProgramEdit._CurrentErrors = [];
 HG.WebApp.ProgramEdit._IsCapturingConditions = false;
 HG.WebApp.ProgramEdit._IsCapturingCommands = false;
+HG.WebApp.ProgramEdit._SavePromptCallback = null;
 HG.WebApp.ProgramEdit._CurrentTab = 1;
 
 HG.WebApp.ProgramEdit.InitializePage = function () 
@@ -21,10 +22,29 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
 				HG.WebApp.ProgramEdit.DeleteProgram( HG.WebApp.ProgramEdit._CurrentProgram.Address );
                 return true;
             });
-//            $('#editprograms_backbutton').on('click', function() {
-//                history.back();
-//                return false;
-//            });
+            //
+            $('#editprograms_backbutton').on('click', function() {
+                HG.WebApp.ProgramEdit.CheckIsClean(function(){
+                    $.mobile.changePage('#page_automation_programs', { transition: 'slide', reverse: true });
+                });
+                return false;
+            });
+            $('#editprograms_homebutton').on('click', function() {
+                HG.WebApp.ProgramEdit.CheckIsClean(function(){
+                    $.mobile.changePage('#page_home', { transition: 'slide', reverse: true });
+                });
+                return false;
+            });            
+            $('#program_notsaved_save').on('click', function() {
+                HG.WebApp.ProgramEdit.SaveProgram(function(){
+                    HG.WebApp.ProgramEdit._SavePromptCallback();
+                });
+                return false;
+            });
+            $('#program_notsaved_dontsave').on('click', function() {
+                HG.WebApp.ProgramEdit._SavePromptCallback();
+                return false;
+            });
             //
             $('#automation_program_delete_button').bind('click', function (event) {
 				HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
@@ -143,9 +163,6 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
                 }
                 $('#automation_commandtarget').listview('refresh');//trigger('create');
             });
-            //HG.WebApp.ProgramEdit.CompileProgram
-            //$('#automation_target_popup').on('popupbeforeposition', function (event) {
-            //});
             //
             // Arduino Sketch files management
             $('#automation_program_listfiles').on('popupbeforeposition', function (event) {
@@ -201,6 +218,30 @@ HG.WebApp.ProgramEdit.InitializePage = function ()
         });
 	};
 
+HG.WebApp.ProgramEdit.CheckIsClean = function(callback)
+    {
+        if (!HG.WebApp.ProgramEdit.IsClean())
+        {
+            HG.WebApp.ProgramEdit._SavePromptCallback = function(){
+                callback();
+            }
+            $('#automation_program_notsaved').popup('open');
+        }
+        else
+        {
+            callback();
+        }
+    };
+HG.WebApp.ProgramEdit.IsClean = function()
+    {   
+        var isClean = (HG.WebApp.ProgramEdit._CurrentProgram.Group == $('#automation_programgroup').val());
+        isClean = isClean && (HG.WebApp.ProgramEdit._CurrentProgram.Name == $('#automation_programname').val());
+        isClean = isClean && (HG.WebApp.ProgramEdit._CurrentProgram.Description == $('#automation_programdescription').val());
+        isClean = isClean && (HG.WebApp.ProgramEdit._CurrentProgram.ConditionType == $('#automation_conditiontype').val());
+        isClean = isClean && editor1.isClean() && editor2.isClean() && editor3.isClean();
+        // TODO: add checking of Wizard type programs Conditions and Commands too
+        return isClean;
+    };
 HG.WebApp.ProgramEdit.GetDomainControllableModules = function (domain, showall)
     {
         var mods = Array();
@@ -331,7 +372,7 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled)
 	};
 
 
-HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
+HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile, callback)
 	{
 		//$('#configure_program_editorruncode').addClass('ui-disabled');
 		$('#configure_program_editorcompilecode').addClass('ui-disabled');
@@ -345,27 +386,26 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			data: JSON.stringify(programblock),
 			success: function (response) {
 				$.mobile.loading('hide');
-				//$('#configure_program_editorruncode').removeClass('ui-disabled');
+                editor1.markClean();
+                editor2.markClean();
 				$('#configure_program_editorcompilecode').removeClass('ui-disabled');
 				$('#configure_program_editorcompilecode2').removeClass('ui-disabled');
 				if (response.trim() != '' && response.trim() != '[]')
 				{
-					//$('#proHG.WebApp.ProgramEdit.UpdateProgramgram_barbutton_run').attr('disabled', 'disabled');
-				    //$('#program_barbutton_run').button().button('refresh');
 				    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_error_updating'), textVisible: true });
 					HG.WebApp.ProgramEdit.ShowProgramErrors(response);
 				}
 				else
 				{
-					//$('#program_barbutton_run').removeAttr('disabled');
-				    //$('#program_barbutton_run').button().button('refresh');
 				    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_saving_succeed'), textVisible: true });
 				    HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-					//HG.WebApp.ProgramEdit.HideProgramErrors();
 				}
-				setTimeout(function () { $.mobile.loading('hide'); }, 2000);
+				setTimeout(function () { 
+                    $.mobile.loading('hide'); 
+                    if (callback != null && typeof callback != 'undefined') callback();
+                }, 2000);
 			    //
-	            // update modules
+	            // update module list from server
 	            //TODO: make this better...
 	            setTimeout(function () {
 	                HG.Configure.Modules.List(function (data) {
@@ -379,7 +419,6 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile)
 			},
 			error: function (a, b, c) {
 				$.mobile.loading('hide');
-				//$('#configure_program_editorruncode').removeClass('ui-disabled');
 				$('#configure_program_editorcompilecode').removeClass('ui-disabled');
 				$('#configure_program_editorcompilecode2').removeClass('ui-disabled');
 			    //
@@ -621,7 +660,7 @@ HG.WebApp.ProgramEdit.CompileProgram = function () {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
         }
     };
-HG.WebApp.ProgramEdit.SaveProgram = function () {
+HG.WebApp.ProgramEdit.SaveProgram = function (callback) {
         $('#program_error_button').hide();
         $('#program_error_button2').hide();
         var programblock = HG.WebApp.ProgramEdit.SetProgramData();
@@ -630,12 +669,12 @@ HG.WebApp.ProgramEdit.SaveProgram = function () {
         {
             // save other opened sketch files before compiling
             HG.WebApp.ProgramEdit.SketchFileSave(function(){
-                HG.WebApp.ProgramEdit.UpdateProgram(programblock, false);
+                HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
             });
         }
         else
         {
-            HG.WebApp.ProgramEdit.UpdateProgram(programblock, false);
+            HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
         }
 	};
 HG.WebApp.ProgramEdit.SetProgramData = function () {
@@ -775,33 +814,39 @@ HG.WebApp.ProgramEdit.SketchFileSelect = function(el)
 };
 HG.WebApp.ProgramEdit.SketchFileOpen = function(filename)
 {
-    $.mobile.loading('show', { text: 'Opening file ' + filename, textVisible: true, theme: 'a', html: '' });
-    if (filename == null || typeof(filename) == 'undefined' || filename == '' || filename == 'main')
-    {
-        // the main sketch file is stored in standard code editor (editor2)
-        HG.WebApp.ProgramEdit._CurrentSketchFile = '';
-        $('#configure_program_editorfilename').html(filename);
-        $(editor3.getWrapperElement()).hide();
-        $(editor2.getWrapperElement()).show();
-        editor2.clearHistory();
-        editor2.refresh();
-        $.mobile.loading('hide');
-    }
-    else
-    {
-        // all other sketch files are stored in editor3
-        $(editor2.getWrapperElement()).hide();
-        $(editor3.getWrapperElement()).show();
-        HG.Automation.Programs.ArduinoFileLoad(HG.WebApp.ProgramEdit._CurrentProgram.Address, filename, function(src){
-            HG.WebApp.ProgramEdit._CurrentSketchFile = filename;
+    // first save any other currently opened file
+    HG.WebApp.ProgramEdit.SketchFileSave(function(){
+        $.mobile.loading('show', { text: 'Opening file ' + filename, textVisible: true, theme: 'a', html: '' });
+        if (filename == null || typeof(filename) == 'undefined' || filename == '' || filename == 'main')
+        {
+            // the main sketch file is stored in standard code editor (editor2)
+            HG.WebApp.ProgramEdit._CurrentSketchFile = '';
             $('#configure_program_editorfilename').html(filename);
-            editor3.setValue(src);
-            editor3.clearHistory();
-            editor3.refresh();
-            HG.WebApp.ProgramEdit.ShowExternalErrors();
+            $(editor3.getWrapperElement()).hide();
+            $(editor2.getWrapperElement()).show();
+            editor2.clearHistory();
+            editor2.markClean();
+            editor2.refresh();
             $.mobile.loading('hide');
-        });                        
-    }
+        }
+        else
+        {
+            // all other sketch files are stored in editor3
+            $(editor2.getWrapperElement()).hide();
+            $(editor3.getWrapperElement()).show();
+            // load specified file into editor
+            HG.Automation.Programs.ArduinoFileLoad(HG.WebApp.ProgramEdit._CurrentProgram.Address, filename, function(src){
+                HG.WebApp.ProgramEdit._CurrentSketchFile = filename;
+                $('#configure_program_editorfilename').html(filename);
+                editor3.setValue(src);
+                editor3.clearHistory();
+                editor3.markClean();
+                editor3.refresh();
+                HG.WebApp.ProgramEdit.ShowExternalErrors();
+                $.mobile.loading('hide');
+            });
+        }
+    });
 };
 HG.WebApp.ProgramEdit.SketchFileSave = function(callback)
 {
