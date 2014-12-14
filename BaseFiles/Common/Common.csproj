@@ -4189,6 +4189,18 @@
     <None Include="programs\28.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\thermostat.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\thermostat.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\locales\ru.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\locales\en.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -4196,5 +4208,8 @@
   <ItemGroup>
     <Folder Include="html\" />
     <Folder Include="html\js\jquery.mobile-1.4.5\" />
+    <Folder Include="html\pages\control\widgets\Bounz\" />
+    <Folder Include="html\pages\control\widgets\Bounz\Z-Wave.Me\" />
+    <Folder Include="html\pages\control\widgets\Bounz\Z-Wave.Me\locales\" />
   </ItemGroup>
 </Project>

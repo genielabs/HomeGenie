@@ -620,29 +620,29 @@
     "configure_module_featuresoptions": 
         "Возможности/Свойства",
     "configure_editprogram_files":
-        "Files",
+        "Файлы",
     "configure_program_newfile":
-        "Add File",
+        "Добавить файл",
     "configure_program_filename":
-        "File name",
+        "Имя файла",
     "configure_program_fileslist":
-        "File list",
+        "Список файлов",
     "configure_program_fileslist_exit":
-        "Exit",
+        "Выход",
     "configure_program_fileslist_delete":
-        "Delete",
+        "Удалить",
     "configure_program_fileslist_edit":
-        "Edit",
+        "Редактировать",
     "configure_program_fileslist_add":
-        "Add",
+        "Добавить",
     "configure_program_hasmodification":
-        "Program was modified!",
+        "Программа была изменена!",
     "configure_program_savechangesprompt":
-        "Do you want to save changes?",
+        "Вы хотите сохранить изменения?",
     "configure_program_changeswillbelost":
         "",
     "configure_program_dontsave":
-        "No",
+        "Нет",
     "configure_program_saveconfirm":
-        "Save"
+        "Сохранить"
 }
