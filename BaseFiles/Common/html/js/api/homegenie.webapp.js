@@ -775,7 +775,7 @@ HG.WebApp.Locales.FindLocaleString = function(locale, stringid) {
 }
 HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId){
     var retval = null;
-    if(widget.data("Locale") == undefined)
+    if(typeof(widget.data("Locale")) == "undefined")
         return retval;
     retval = HG.WebApp.Locales.FindLocaleString(widget.data("Locale"), stringId);
     return retval;
