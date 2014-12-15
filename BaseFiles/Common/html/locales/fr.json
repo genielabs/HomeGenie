@@ -640,9 +640,21 @@
     "configure_program_savechangesprompt":
         "Voulez-vous enregistrer les modifications ?",
     "configure_program_changeswillbelost":
-        "",
+        "Les modifications seront perdues !",
     "configure_program_dontsave":
         "Non",
     "configure_program_saveconfirm":
-        "Sauvegarder"
+        "Sauvegarder",
+    "configure_interfaces_zwavehardreset":
+        "Réinitialisation",
+    "systemsettings_zwavehardreset_hardreset":
+        "Réinitialiser le Contrôleur ?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Etes-vous sûr de vouloir réintialiser le Contrôleur Z-Wave ?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "Tous les noeuds seront supprimés !",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Annuler",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Exécuter"
 }
