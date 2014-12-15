@@ -10,7 +10,7 @@
     "home_menu_about": 
         "A Propos",
     "homegenie_about_title": 
-        "About",
+        "A propos",
     "control_groups_and_modules": 
         "Contrôle des<br>Groupes et Modules",
     "bottombar_button_home": 
@@ -18,9 +18,9 @@
     "configure_program_bbaractions": 
         "Actions",
     "control_macrorecord_discard": 
-        "Discard",
+        "Annuler",
     "control_macrorecord_save": 
-        "Save",
+        "Sauvegarder",
     "analyze_statistics": 
         "Analyse &<br>Statistiques",
     "analyze_total_watts_hourly": 
@@ -42,31 +42,31 @@
     "configure_menu_maintenance": 
         "Maintenance et Mise à Jour",
     "configure_automation_heading": 
-        "<font style='color:gray'>Automation</font><br>Groups",
+        "<font style='color:gray'>Automate</font><br>Groupes",
     "configure_group_newgroup": 
         "Nouveau Groupe",
     "configure_group_entergroupname": 
-        "Ajouter un nouveau groupe:",
+        "Ajouter un nouveau groupe :",
     "configure_group_newgroupcancel": 
         "Annuler",
     "bottombar_button_back": 
         "Retour",
     "configure_group_bottombar_group_add": 
-        "Ajouter Groupe",
+        "Ajouter un Groupe",
     "configure_group_groupname": 
-        "Group Name",
+        "Nom du Groupe",
     "configure_group_deletegroup": 
-        "Supprimer Groupe?",
+        "Supprimer le Groupe ?",
     "configure_group_deleteprompt": 
-        "Etes-vous sûr de vouloir supprimer ce groupe?",
+        "Etes-vous sûr de vouloir supprimer ce groupe ?",
     "configure_group_deletewarning": 
-        "Cette action est irreversible.",
+        "Cette action est irréversible.",
     "configure_group_deletecancel": 
         "Annuler",
     "configure_group_deleteconfirm": 
         "Supprimer",
     "configure_module_newmoduleadd": 
-        "Ajouter nouveau Module",
+        "Ajouter un nouveau Module",
     "configure_module_newmodulecancel": 
         "Annuler",
     "configure_module_newmoduleconfirm": 
@@ -86,13 +86,13 @@
     "configure_module_typesiren": 
         "Sirène",
     "configure_module_typefan": 
-        "Fan",
+        "Ventilateur",
     "configure_module_typethermostat": 
         "Thermostat",
     "configure_module_typeshutter": 
-        "Shutter",
+        "Volet roulant",
     "configure_module_typedoorwindow": 
-        "Door/Window",
+        "Porte/Fenêtre",
     "configure_module_options": 
         "Setup",
     "configure_module_optupdate": 
@@ -100,7 +100,7 @@
     "configure_module_optremove": 
         "Effacer du groupe",
     "configure_group_bottombar_deletemodule": 
-        "Supprimer Groupe",
+        "Supprimer le Groupe",
     "configure_group_bottombar_addmodule": 
         "Ajouter Module",
     "configure_program_automationtitle": 
@@ -116,9 +116,9 @@
     "configure_program_deletetitle": 
         "Effacer le scénario?",
     "configure_program_deleteprompt": 
-        "Etes-vous sur de vouloir effacer ce scénario?",
+        "Etes-vous sûr de vouloir effacer ce scénario?",
     "configure_program_deleteadvice": 
-        "Cette action est irreversible.",
+        "Cette action est irréversible.",
     "configure_program_deletecancel": 
         "Annuler",
     "configure_program_deleteconfirm": 
@@ -130,23 +130,23 @@
     "configure_program_options_export": 
         "Export",
     "configure_program_options_delete": 
-        "Delete",
+        "Supprimer",
     "configure_program_programgroup": 
-        "Program Group",
+        "Groupe de Programme",
     "configure_program_programname": 
-        "Program Name",
+        "Nom du Programme",
     "configure_program_programdescription": 
-        "Program Description",
+        "Description du Programme",
     "configure_program_programtype": 
-        "Program Type",
+        "Type de Programme",
     "configure_program_trigger": 
-        "Program Trigger",
+        "Déclenchement du Programme",
     "configure_program_conditionswitchestrue": 
-        "Lorsque les conditions deviennent 'vrais'",
+        "Lorsque les conditions deviennent 'vraies'",
     "configure_program_conditionswitchesfalse": 
         "Lorsque les conditions deviennent 'fausses'",
     "configure_program_runonceconditiontrue": 
-        "Executer une fois, lorsque que les conditions sont 'vraies'",
+        "Exécuter une fois, lorsque que les conditions sont 'vraies'",
     "configure_program_conditionistrue": 
         "Temps que les conditions sont 'vraies'",
     "configure_program_conditionisfalse": 
@@ -172,11 +172,11 @@
     "configure_program_wizarddone": 
         "Fini",
     "configure_program_deleteconditiontitle": 
-        "Effacer condition?",
+        "Effacer la condition ?",
     "configure_program_deleteconditionprompt": 
-        "Êtes-vous sûr de vouloir supprimer cette condition?",
+        "Êtes-vous sûr de vouloir supprimer cette condition ?",
     "configure_program_deleteconditionadvice": 
-        "Cette action est irreversible.",
+        "Cette action est irréversible.",
     "configure_program_instructions": 
         "Commandes",
     "configure_program_instructionadd": 
@@ -190,39 +190,39 @@
     "configure_program_deleteinstructionprompt": 
         "Etes-vous sur de vouloir effacer cette commande?",
     "configure_program_csharpprogram": 
-        "C# Program",
+        "Programme C#",
     "configure_program_savingtitle": 
-        "Saving Program",
+        "Sauvegarde du Programme",
     "configure_program_savingwait": 
-        "Please wait...",
+        "Attendez s'il vous plaît...",
     "configure_program_switchtypetitle": 
-        "Change Type?",
+        "Changer le Type ?",
     "configure_program_switchtypeprompt": 
-        "Are you sure you want to change program type?",
+        "Etes-vous sur de vouloir changer le type de Programme ?",
     "configure_program_switchtypeadvice": 
         "Current program data will be cleared.",
     "configure_program_switchtypecancel": 
-        "Cancel",
+        "Annuler",
     "configure_program_switchtypeconfirm": 
-        "Change",
+        "Changer",
     "configure_program_options_run": 
-        "Run",
+        "Exécuter",
     "configure_program_options_break": 
-        "Break",
+        "Stopper",
     "configure_program_options_save": 
-        "Save",
+        "Sauvegarder",
     "configure_program_errorstitle": 
-        "Errors",
+        "Erreurs",
     "configure_program_bbar_programeditruncode": 
-        "Edit Trigger Code",
+        "Editer le code d'initialisation",
     "configure_automationgroup_newgroup": 
-        "New Group",
+        "Nouveau Groupe",
     "configure_automationgroup_entergroupname": 
-        "Enter new group name:",
+        "Entrer le nouveau nom de Groupe :",
     "configure_automationgroup_newgroupcancel": 
-        "Cancel",
+        "Annuler",
     "configure_automationgroup_bottombar_group_add": 
-        "Add Group",
+        "Ajouter un Groupe",
     "configure_interfaces_heading": 
         "Système et Contrôleurs",
     "configure_interfaces_zwaveoptions": 
@@ -232,63 +232,63 @@
     "configure_interfaces_optenable": 
         "Enable",
     "configure_interfaces_zwaveport": 
-        "Port Contrôleur",
+        "Port du Contrôleur",
     "configure_interfaces_zwavecommontasks": 
         "Action ZWave",
     "configure_interfaces_zwaveaddnode": 
-        "Ajouter module",
+        "Ajouter un module",
     "configure_interfaces_zwaveremovenode": 
-        "Supprimer module",
+        "Supprimer un module",
     "configure_interfaces_x10options": 
         "Contrôleur X10",
     "configure_interfaces_x10port": 
-        "Port Contrôleur",
+        "Port du Contrôleur",
     "configure_interfaces_x10housecodes": 
-        "Codes utiliser dans la maison",
+        "Codes utilisés dans la maison",
     "configure_interfaces_w800rf32": 
-        "W800RF32 RF Receiver Interface Options",
+        "Options de réception du contrôleur W800RF32 RF",
     "configure_interfaces_w800rf32port": 
-        "Device Port",
+        "Port du Contrôleur",
     "configure_interfaces_lircremote": 
-        "Lirc Infrared Remotes",
+        "Télécommande infrarouge LIRC",
     "configure_interfaces_lircremoteconfiguration": 
-        "Lirc Configuration",
+        "Configuration LIRC",
     "configure_interfaces_lircremoteaddremote": 
-        "Add Remote",
+        "Ajouter une télécommande",
     "configure_interfaces_camera": 
-        "Camera Device",
+        "Caméra",
     "configure_interfaces_cameradesc": 
-        "Works with any Video4Linux compatible device on <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
+        "Travaille avec n'importe quelle caméra compatible avec Video4Linux sur <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
     "configure_interfaces_cameraport": 
-        "Device Port",
+        "Port de la caméra",
     "configure_interfaces_raspigpio": 
-        "Raspberry Pi GPIO",
+        "GPIO Raspberry Pi",
     "configure_interfaces_airplay": 
         "Airplay Receiver",
     "configure_system_lircremotesadd": 
-        "Add Remote",
+        "Ajouter une télécommande",
     "configure_system_zwaveaddnodeheading": 
-        "Ajout/suppression Module",
+        "Ajout/suppression d'un Module",
     "configure_system_zwaveaddnodepressbutton": 
-        "Appuyer sur le bouton du module:",
+        "Appuyer sur le bouton du module :",
     "configure_system_zwaveaddnodeoperationtimeout": 
-        "Vous avez 10 secondes.",
+        "Vous avez 10 secondes...",
     "configure_system_zwaveaddnodeclose": 
         "Fermer",
     "configure_maintenance_heading": 
         "Maintenance",
     "configure_system_theme": 
-        "Theme",
+        "Thème",
     "configure_system_options": 
         "Options Système",
     "configure_system_serviceportis": 
-        "Le Port Http est",
+        "Le Port Http est :",
     "configure_system_serviceportchange": 
-        "Changer Port",
+        "Port",
     "configure_security_passwordprotectedaccess": 
-        "Password protected access",
+        "Protection d'accès par mot de passe",
     "configure_system_configanddata": 
-        "Configuration and Data",
+        "Configuration et Données",
     "configure_maintenance_configuration": 
         "Configuration",
     "configure_system_statistics": 
@@ -296,365 +296,365 @@
     "configure_system_databasereset": 
         "RAZ base de données",
     "systemsettings_backuprestores1heading": 
-        "Restore Configuration",
+        "Restaurer la Configuration",
     "configure_system_backuprestores1note": 
-        "Select Automation Programs to restore:",
+        "Selectionner les Programmes à restaurer :",
     "systemsettings_backuprestores1cancel": 
-        "Cancel",
+        "Annuler",
     "systemsettings_backuprestores1confirm": 
-        "Restore",
+        "Restaurer",
     "configure_system_serviceportheading": 
         "Port Http",
     "configure_system_serviceportchangenote": 
-        "Note: après avoir changé le port, HomeGenie doit être redémarré pour prendre en compte les changements!",
+        "Note: après avoir changé le port, HomeGenie doit être redémarré pour prendre en compte les modifications !",
     "configure_system_serviceportcancel": 
         "Annuler",
     "securitysettings_password_adminpassword": 
         "<b>admin</b> user password",
     "securitysettings_password_changecancel": 
-        "Cancel",
+        "Annuler",
     "securitysettings_password_changecommit": 
         "Set",
     "maintenance_configuration_factoryreset": 
-        "Factory Reset?",
+        "Reset Usine ?",
     "configure_maintenance_resetprompt": 
-        "Are you sure you want to reset system configuration to factory defaults?",
+        "Etes-vous sûr de vouloir réinitialiser la configuration aux valeurs par défauts ?",
     "configure_maintenance_resetwarning": 
         "",
     "configure_maintenance_resetproceed": 
-        "Proceed",
+        "Exécuter",
     "configure_maintenance_resetcancel": 
-        "Cancel",
+        "Annuler",
     "home_voicerecognition_text_placeholder": 
-        "Click the button for voice control or type a sentence...",
+        "Cliquer sur le bouton pour effectuer une commande vocale ou taper une phrase...",
     "home_voicerecognition_voice": 
-        "Voice",
+        "Reconnaissance vocale",
     "configure_menu_scheduler": 
         "Scheduler",
     "configure_grouplist": 
-        "Groups List",
+        "Liste des Groupes",
     "configure_schedulerservice_title": 
-        "Automation<br />Scheduler",
+        "Automate<br />Scheduler",
     "configure_scheduler_events": 
-        "Scheduler Events",
+        "Evénements du Scheduler",
     "configure_schedulerservice_bottombar_event_add": 
-        "Add Event",
+        "Ajouter un événement",
     "configure_schedulerservice_schedulerevent": 
-        "Scheduler Event",
+        "Evénements du Scheduler",
     "configure_schedulerservice_itemname": 
-        "Name",
+        "Nom",
     "configure_schedulerservice_itemcronexp": 
-        "Cron Expression",
+        "Expression Cron",
     "configure_schedulerservice_itemprogramid": 
-        "Program Id or Name (optional)",
+        "ID ou Nom du Programme (optionel)",
     "configure_schedulerservice_cancelitem": 
-        "Cancel",
+        "Annuler",
     "configure_schedulerservice_deleteitem": 
-        "Delete",
+        "Supprimer",
     "configure_schedulerservice_updateitem": 
-        "Update",
+        "Mettre à jour",
     "configure_system_updatemanager": 
-        "Update Manager",
+        "Gestionnaire de mise à jour",
     "configure_system_updatemanager_updatecheck": 
-        "Update Check",
+        "Vérifier",
     "configure_system_updatemanager_installupdate": 
-        "Install Update",
+        "Installer",
     "configure_system_restart_service": 
-        "Service Restart",
+        "Redémarrage du service",
     "configure_system_restart": 
-        "Restart",
+        "Redémarrer",
     "configure_system_loganddebug": 
-        "Log file",
+        "Fichiers Log",
     "configure_system_logdownload": 
-        "Download",
+        "Téléchargement",
     "configure_system_logdownloadtoday": 
-        "Today",
+        "Aujourd'hui",
     "configure_system_logdownloadyesterday": 
-        "Yesterday",
+        "Hier",
     "configure_system_httpsettings": 
-        "HTTP Settings",
+        "Paramètres HTTP",
     "configure_security_passwordprotectedaccess_set": 
-        "Set",
+        "Programmer",
     "configure_security_passwordprotectedaccess_clear": 
-        "Clear",
+        "Effacer",
     "configure_system_httpcache": 
-        "Http Service Cache",
+        "Service Cache HTTP",
     "configure_maintenance_configuration_info": 
-        "<b>Note:</b> before restoring a backup file you've to set the same system password used when creating it.",
+        "<b>Note :</b> avant de restaurer un fichier de sauvegarde, vérifiez que vous avez défini le même mot de passe système utilisé lors de sa création.",
     "configure_maintenance_configuration_backup": 
-        "Backup",
+        "Sauvegarde",
     "configure_maintenance_configuration_restore": 
-        "Restore",
+        "Restauration",
     "configure_maintenance_configuration_factory_reset": 
-        "Factory Reset",
+        "Config.Usine",
     "configure_system_modulescleanup": 
-        "Modules Cleanup",
+        "Nettotage des Modules",
     "configure_system_modulesselect": 
-        "Select Modules",
+        "Sélectionner",
     "configure_system_remotemodules": 
-        "Remote Modules Routing",
+        "Routine des Modules déportés",
     "configure_system_modsroutingreset": 
-        "Reset",
+        "Redémarrer",
     "configure_system_userinterface": 
-        "User Interface",
+        "Interface Utilisateur",
     "configure_system_eventshistory": 
-        "Events History",
+        "Historique des événements",
     "home_about_version": 
-        "version",
+        "Version",
     "home_about_codename": 
-        "codename",
+        "CodeName",
     "home_about_motto": 
-        "motto",
+        "Devise",
     "home_about_concept": 
-        "Concept, design, ideas and coding<br /> by G-Labs",
+        "Concept, design, idées et programmation<br /> par G-Labs",
     "home_about_license": 
         "license",
     "home_about_site": 
-        "HomePage and Support",
+        "Page d'accueil et Support",
     "home_about_site_docs": 
         "Documentation",
     "actions_menu": 
-        "Actions Menu",
+        "Menu",
     "control_macrorecord_record_macro": 
-        "Record Macro",
+        "Enregister une Macro",
     "control_macrorecord_recording": 
-        "Recording...",
+        "Enregistrement...",
     "control_macrorecord_description": 
-        "Any issued command is now being recorded to a <strong>Wizard Script</strong>.<br>Click <strong>Save</strong> button when finished.",
+        "Maintenant chaque commande sera enregistrée dans un <strong>Script assisté</strong>.<br>Cliquer le bouton <strong>Sauvegarder</strong> pour terminer le script.",
     "control_macrorecord_close": 
-        "Close",
+        "Fermer",
     "control_macrorecord_options": 
         "Options",
     "control_macrorecord_options_pause": 
-        "Pause Between commands",
+        "Pause entre les commandes",
     "control_macrorecord_options_none": 
-        "None",
+        "Sans",
     "control_macrorecord_options_mimic": 
-        "Mimic",
+        "Imiter",
     "control_macrorecord_options_fixed": 
-        "Fixed",
+        "Fixer",
     "control_macrorecord_options_pauseduration": 
-        "Fixed pause seconds",
+        "Pause fixe en secondes",
     "update_options_popup_loading": 
-        "Loading Program data",
+        "Chargement des données du Programme",
     "control_widget_notconfigured_title": 
-        "Widget not configured",
+        "Widget non configuré",
     "control_widget_notconfigured_text": 
-        "Click this button to edit configuration.",
+        "Cliquer ce bouton pour éditer la configuration.",
     "control_widget_notconfigured_button": 
-        "Close",
+        "Fermer",
     "configure_program_options_details": 
-        "Details",
+        "Détails",
     "configure_program_options_restart": 
-        "Restart",
+        "Redémarrage",
     "configure_program_details_implemfeatures": 
-        "Implemented Features",
+        "Fonctions implémentées",
     "configure_program_details_configoptions": 
-        "Configuration Options",
+        "Options de Configuration",
     "configure_program_details_moduleparams": 
-        "Module Parameters",
+        "Paramètres du Module",
     "configure_group_actionmenu_deletegroup": 
-        "Delete Group",
+        "Supprimer un Groupe",
     "configure_group_actionmenu_addseparatorlabel": 
-        "Add Separator",
+        "Ajouter un Séparateur",
     "configure_group_actionmenu_addmodule": 
-        "Add Module",
+        "Ajouter un Module",
     "configure_separator_edit": 
-        "Edit separator",
+        "Edition du Séparateur",
     "configure_separator_label": 
-        "Label",
+        "Libellé",
     "configure_separator_placeholder": 
-        "enter label",
+        "Entrer le libellé",
     "configure_module_optaddseparator": 
-        "Update",
+        "Mise à jour",
     "configure_module_parameters": 
-        "Parameters",
+        "Paramètres",
     "configure_module_parameters_delete": 
-        "Delete",
+        "Supprimer",
     "configure_module_parameters_save": 
-        "Save",
+        "Sauvegarder",
     "configure_module_parameters_linktitle": 
-        "Module Parameters",
+        "Paramètres du Module",
     "configure_automationgroup_add": 
-        "Add",
+        "Ajouter",
     "configure_programslist_listtitle": 
-        "Programs list",
+        "Liste des Programmes",
     "configure_programslist_tap_disable": 
-        "Tap to DISABLE program",
+        "Cliquer pour DESACTIVER l Programme",
     "configure_programslist_tap_enable": 
-        "Tap to ENABLE program",
+        "Cliquer pour ACTIVER le Programme",
     "configure_programslist_deletegroup": 
-        "Delete Group",
+        "Supprimer le Groupe",
     "configure_programslist_importprogram": 
-        "Import program",
+        "Importer un Programme",
     "configure_programslist_addnewprogram": 
-        "Add new program",
+        "Ajouter un Programme",
     "configure_programslist_refreshlist": 
-        "Refresh list",
+        "Raffraichir la liste",
     "configure_programslist_import": 
-        "Import",
+        "Importer",
     "configure_program_summary": 
-        "Summary",
+        "Sommaire",
     "configure_program_programcode": 
-        "Program Code",
+        "Code du Programme",
     "configure_program_sketchcode": 
         "Sketch Code",
     "configure_program_triggercode": 
-        "Trigger Code",
+        "Code d'initialisation",
     "configure_program_makefile": 
-        "Makefile",
+        "Compilation",
     "configure-editprogram-addcommand": 
-        "Add Command",
+        "Ajouter une Commande",
     "configure-editprogram-addcondition": 
-        "Add Condition",
+        "Ajouter une Condition",
     "configure-editprogram-capture": 
-        "Capture",
+        "Capturer",
     "configure-editprogram-help": 
-        "Help",
+        "Aide",
     "configure_program_triggertype": 
-        "Trigger",
+        "Initialisation",
     "configure_editprogram_options_delete": 
-        "Delete Program",
+        "Supprimer un Programme",
     "configure_editprogram_saving_succeed": 
-        "Saving succeed.",
+        "Sauvegarde effectuée.",
     "configure_editprogram_saving": 
-        "Updating program data",
+        "Mise à jour des données du Pogramme",
     "configure_editprogram_error_updating": 
-        "Error updating program!",
+        "Erreur de la mise à jour du Programme !",
     "configure_editprogram_compile": 
-        "Compile",
+        "Compiler",
     "systemsettings_selectport_title": 
-        "Notice",
+        "Note",
     "systemsettings_selectport_placeholder": 
-        "(select port...)",
+        "(sélectionner un port...)",
     "systemsettings_selectport_text": 
-        "Please select port used by this device",
+        "Sélectionnez le port utilisé par cet interface",
     "systemsettings_selectport_button": 
-        "Close",
+        "Fermer",
     "systemsettings_x10housecodes_title": 
-        "Notice",
+        "Note",
     "systemsettings_x10housecodes_text": 
-        "Please select at least one house code.",
+        "Sélectionnez au moins un code.",
     "systemsettings_x10housecodes_button": 
-        "Close",
+        "Fermer",
     "configure_interfaces_insteon": 
         "Insteon PLM (2413S/2413U)",
     "configure_interfaces_insteonport": 
-        "Device Port",
+        "Port du Contrôleur",
     "configure_interfaces_insteonx10housecodes": 
-        "House Codes in use (for X10 devices only)",
+        "Codes utilisés (pour les interfaces X10 seulement)",
     "configure_group_newgroupconfirm": 
         "Ok",
     "configure_module_optremoveseparator": 
-        "Remove",
+        "Supprimer",
     "configure_program_selectcommandtarget": 
-        "Select command target",
+        "Sélectionner la cible de la commande",
     "configure_program_selectcommandtoperform": 
-        "Select command to perform",
+        "Sélectionner la commande à exécuter",
     "configure_program_commandcustom": 
-        "Custom API command",
+        "Commande API personnalisée",
     "configure_program_wizardproceed": 
-        "Proceed",
+        "Procéder",
     "configure_program_commandcapturetitle": 
-        "Capturing Commands",
+        "Capturer les Commandes",
     "configure_program_waitingnewcommand": 
-        "Waiting for new events...",
+        "Attente des nouveaux événements...",
     "configure_program_waitingnewcommandadvice": 
         "",
     "configure_program_capturestop": 
-        "Stop",
+        "Arrêter",
     "configure_program_wizard_editline_title": 
-        "Edit line",
+        "Editer la ligne",
     "configure_program_wizard_editcmdline_prompt": 
-        "Move or delete line <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Déplacer ou supprimer la ligne <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editconline_prompt": 
-        "Move or delete line <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+        "Déplacer ou supprimer la ligne <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editline_number": 
-        "New line number",
+        "Nouveau numéro de ligne",
     "configure_program_wizard_editline_delete": 
-        "Delete",
+        "Supprimer",
     "configure_program_wizard_editline_change": 
-        "Move",
+        "Déplacer",
     "configure_program_selectconditionsubject": 
-        "Select condition subject",
+        "Sélectionner la condition",
     "configure_program_selectconditionproperty": 
-        "Select comparison property",
+        "Sélectionner le type de comparaison",
     "configure_program_conditioncapturetitle": 
-        "Capturing Conditions",
+        "Capturer les conditions",
     "configure_program_waitingnewcondition": 
-        "Waiting for new events...",
+        "Attente des nouveaux événements...",
     "configure_program_waitingnewconditionadvice": 
         "",
     "configure_program_options_update": 
-        "Update",
+        "Mise à jour",
     "configure_interfaces_zwavediscovery": 
-        "Discovery",
+        "Découvrir",
     "configure_interfaces_camerasettings": 
-        "Device / Resolution / FPS",
+        "Caméra / Résolution / FPS",
     "configure_interfaces_upnp": 
-        "Universal Plug &amp; Play",
+        "Plug &amp; Play universel",
     "configure_interfaces_weeco4mgpio": 
         "WEECOBOARD 4M GPIO",
     "configure_system_zwavediscoverytitle": 
-        "ZWave Discovery",
+        "Découverte ZWave",
     "configure_system_updateinstall": 
-        "Update Install",
+        "Installer la Mise à jour",
     "configure_system_deletemodule": 
-        "Delete Module",
+        "Supprimer un Module",
     "systemsettings_backuprestores1selectallnone": 
-        "Select all / none",
+        "Sélectionner Tout / Rien",
     "securitysettings_password_setpassword": 
-        "Set password",
+        "Mot de passe",
     "securitysettings_password_enterpassword": 
-        "Enter password for 'admin' user",
+        "Entrer le mot de passe  pour l'utilisateur 'admin'",
     "maintenance_configuration_servicerestart": 
-        "Restart Service?",
+        "Redémarrer le Service ?",
     "configure_maintenance_restartprompt": 
-        "Are you sure you want to restart service?",
+        "Etes-vous sûr de vouloir redémarrer le Service ?",
     "configure_maintenance_restartwarning": 
         "",
     "configure_module_typemediareceiver": 
-        "Media Receiver",
+        "Récepteur Média",
     "configure_module_typemediatransmitter": 
-        "Media Transmitter",
+        "Emetteur Média",
     "configure_module_featuresoptions": 
-        "Features/Options",
+        "Facilités/Options",
     "configure_editprogram_files":
-        "Files",
+        "Fichiers",
     "configure_program_newfile":
-        "Add File",
+        "Ajouter un fichier",
     "configure_program_filename":
-        "File name",
+        "Nom du fichier",
     "configure_program_fileslist":
-        "File list",
+        "Liste des fichiers",
     "configure_program_fileslist_exit":
-        "Exit",
+        "Sortie",
     "configure_program_fileslist_delete":
         "Delete",
     "configure_program_fileslist_edit":
         "Edit",
     "configure_program_fileslist_add":
-        "Add",
+        "Ajouter",
     "configure_program_hasmodification":
-        "Program was modified!",
+        "Le Programme a été modifié !",
     "configure_program_savechangesprompt":
-        "Do you want to save changes?",
+        "Voulez-vous enregistrer les modifications ?",
     "configure_program_changeswillbelost":
-        "",
+        "Les modifications seront perdues !",
     "configure_program_dontsave":
-        "No",
+        "Non",
     "configure_program_saveconfirm":
-        "Save",
+        "Sauvegarder",
     "configure_interfaces_zwavehardreset":
-        "Hard Reset",
+        "Réinitialisation",
     "systemsettings_zwavehardreset_hardreset":
-        "Hard Reset Controller?",
+        "Réinitialiser le Contrôleur ?",
     "systemsettings_zwavehardreset_hardresetprompt":
-        "Are you sure you want to hard reset Z-Wave controller?",
+        "Etes-vous sûr de vouloir réintialiser le Contrôleur Z-Wave ?",
     "systemsettings_zwavehardreset_hardresetwarning":
-        "All nodes will be removed!",
+        "Tous les noeuds seront supprimés !",
     "systemsettings_zwavehardreset_hardresetcancel":
-        "Cancel",
+        "Annuler",
     "systemsettings_zwavehardreset_hardresetproceed":
-        "Proceed"
+        "Exécuter"
 }

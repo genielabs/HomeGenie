@@ -28,11 +28,11 @@
 	"Types" : [
 		{
 			"Type": "Light,Dimmer",
-			"Aliases": [ "toutes les lumières", "lumières" ]
+			"Aliases": [ "toutes les lumières", "lumières", "toutes les lampes", "lampes" ]
 		},
 		{
 			"Type": "Switch",
-			"Aliases": [ "tous les commutateurs", "tous les appareils", "commutateurs", "appareils" ]
+			"Aliases": [ "tous les interrupteurs", "tous les commutateurs", "tous les appareils", "interrupteurs", "commutateurs", "appareils" ]
 		}
 	]
 }
