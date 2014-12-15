@@ -125,19 +125,14 @@ namespace ZWaveLib
             //
             lock (ackWait)
             {
-                if (!disableCallback)
+                // Insert checksum
+                if (disableCallback)
                 {
-                    //ackWait.WaitOne();
-                    //ackWait.Reset();
-                    ////
-                    //// discard timed-out messages (prevent flooding)
-                    ////
-                    //TimeSpan ttl = new TimeSpan(DateTime.UtcNow.Ticks - msg.Timestamp.Ticks);
-                    //if (ttl.TotalSeconds > 5)
-                    //{
-                    // return 0;
-                    //}
-                    //
+                    message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
+                    serialPort.SendMessage(message.Message);
+                }
+                else
+                {
                     if (message.ResendCount == 0)
                     {
                         // Insert the callback id into the message
@@ -145,21 +140,20 @@ namespace ZWaveLib
                         message.Message[message.Message.Length - 2] = callbackId;
                         message.CallbackId = callbackId;
                     }
+                    message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
+                    pendingMessages.Add(message);
+                    //
+                    serialPort.SendMessage(message.Message);
+                    //
+                    // wait for any previous message callback response
+                    int maxWait = 50; // 5 seconds max wait
+                    while (pendingMessages.Contains(message) && maxWait > 0)
+                    {
+                        Thread.Sleep(100);
+                        maxWait--;
+                    }
+                    pendingMessages.Remove(message);
                 }
-                // Insert checksum
-                message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
-                pendingMessages.Add(message);
-                //
-                serialPort.SendMessage(message.Message);
-                //
-                // wait for any previous message callback response
-                int maxWait = 50; // 5 seconds max wait
-                while (pendingMessages.Contains(message) && maxWait > 0)
-                {
-                    Thread.Sleep(100);
-                    maxWait--;
-                }
-                pendingMessages.Remove(message);
                 //
                 // remove timed out messages (requeued messages after failure)
                 //
@@ -173,8 +167,7 @@ namespace ZWaveLib
                     return false;
                 });
                 //
-                Thread.Sleep(300);
-                //ackWait.Set();
+                Thread.Sleep(100);
             }
             //
             return callbackId;
@@ -191,8 +184,11 @@ namespace ZWaveLib
                     message.ResendCount++;
                     SendMessage(message);
                 }
-                else // In case of Error if no more resend return NodeID 
+                else
+                {
+                    // In case of timeout (max retries exceeded) return NodeID 
                     return message.Message[4]; 
+                }
             }
             return 0; // Return 0 When the Resend is OK
         }

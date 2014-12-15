@@ -360,10 +360,12 @@ namespace ZWaveLib.Devices
                             }
                             else if (args.Message[5] == 0x01)
                             {
-                                // TODO: callback error???
                                 byte nodeID = zwavePort.ResendLastMessage(commandId) ;
                                 if( nodeID != 0 )
-                                   OnDiscoveryEvent(new DiscoveryEventArgs(nodeID, DISCOVERY_STATUS.NODE_ERROR)); // Send event
+                                {
+                                    // Resend timed out
+                                    OnDiscoveryEvent(new DiscoveryEventArgs(nodeID, DISCOVERY_STATUS.NODE_ERROR));
+                                }
                             }
                             break;
 

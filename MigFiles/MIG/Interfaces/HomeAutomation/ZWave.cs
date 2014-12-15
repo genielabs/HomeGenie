@@ -863,7 +863,7 @@ namespace MIG.Interfaces.HomeAutomation
                     SourceId = "1",
                     SourceType = "Z-Wave Controller",
                     Path = "Controller.Status",
-                    Value = "Erreur ZWave Node " + e.NodeId
+                    Value = "Node " + e.NodeId + " response timeout!"
                 });
                 break;
             }

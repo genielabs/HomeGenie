@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+14/12/2014 1.00 beta rev 444
+    - Improved widget localization function
+    - Added Z-Wave.Me thermostat widget
+    - Added node timeout error message to ZWaveLib
+    - Fixed ZWaveLib bug affecting nodes discovery
+
 12/12/2014 1.00 beta rev 443
     - Added save prompt when leaving the program editor page with unsaved modifications
     - Fixed bug in Z-Wave multi instance app
