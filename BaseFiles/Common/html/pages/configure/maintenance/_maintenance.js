@@ -4,6 +4,7 @@ HG.WebApp.Maintenance = HG.WebApp.Maintenance || {};
 
 HG.WebApp.Maintenance.InitializePage = function () {
     $('#page_configure_maintenance').on('pageinit', function (e) {
+
         $('#systemsettings_httpport_change').bind('click', function () {
             var port = $('#http_service_port').val();
             $.mobile.loading('show');
@@ -261,6 +262,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $.mobile.loading('hide');
             });
         });
+        
     });
 };
 

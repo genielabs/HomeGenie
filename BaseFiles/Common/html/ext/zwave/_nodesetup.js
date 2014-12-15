@@ -537,12 +537,6 @@ function zwave_BatteryGet(nodeid, callback) {
         }
     });
 }
-function zwave_BasicReport(nodeid) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Basic.Report/' + (new Date().getTime()), function (data) { });
-}
-function zwave_MultilevelReport(nodeid) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/MultiLevel.Report/' + (new Date().getTime()), function (data) { });
-}
 
 function zwave_WakeUpGet(nodeid, callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/WakeUp.Get/' + (new Date().getTime()), function (data) {
@@ -609,16 +603,9 @@ function zwave_SensorMultilevelParameterGet(nodeid, varid, callback) {
     });
 }
 
-
-
-function zwave_AutoReportSet(nodeid, intervalsec) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.AutoReportSet/' + nodeid + '/' + intervalsec + '/' + (new Date().getTime()), function (data) { });
-}
-
 function zwave_NodeAdd(callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.NodeAdd/' + (new Date().getTime()), function (data) { callback(data); });
 }
-
 function zwave_NodeRemove(callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.NodeRemove/' + (new Date().getTime()), function (data) { callback(data); });
 }

@@ -25,7 +25,7 @@ using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {
-    public enum ZWaveMessageHeader
+    public enum ZWaveMessageHeader : byte
     {
         SOF = 0x01,
         ACK = 0x06,
@@ -33,7 +33,7 @@ namespace ZWaveLib
         CAN = 0x18
     }
 
-    public enum ZWaveMessageType
+    public enum ZWaveMessageType : byte
     {
         REQUEST = 0x00,
         RESPONSE = 0x01

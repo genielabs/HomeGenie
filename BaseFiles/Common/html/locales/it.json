@@ -644,5 +644,17 @@
     "configure_program_dontsave":
         "No",
     "configure_program_saveconfirm":
-        "Salva"
+        "Salva",
+    "configure_interfaces_zwavehardreset":
+        "Hard Reset",
+    "systemsettings_zwavehardreset_hardreset":
+        "Reimpostare il Controller?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Sei sicuro di voler reimpostare il controller Z-Wave?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "Tutti i nodi verranno rimossi!",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Annulla",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Procedi"
 }

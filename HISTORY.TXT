@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+15/12/2014 1.00 beta rev 446
+    - Added Hard Reset option to Z-Wave interface settings (UI)
+    - Added ZWaveLib Controller.SoftReset and Controller.HardReset functions
+    - Made some cleanup around ZWaveLib
+
 14/12/2014 1.00 beta rev 444
     - Improved widget localization function
     - Added Z-Wave.Me thermostat widget

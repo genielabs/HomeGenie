@@ -17,6 +17,9 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $('#page_configure_interfaces_zwaveport').change(function (event) {
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'Options.Set', 'Port', encodeURIComponent($(this).val()));
+        });    
+        $('#systemsettings_zwavehardreset_hardresetbutton').bind('click', function () {
+            HG.WebApp.SystemSettings.ZWaveHardReset();
         });
         //
         $('#page_configure_interfaces_insteonport').change(function (event) {
@@ -410,6 +413,10 @@ HG.WebApp.SystemSettings.ZWaveDiscovery = function (port) {
     $('#configure_system_zwavediscovery_log').empty();
     $('#systemsettings_zwavediscovery_popup').popup('open');
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.Discovery/' + (new Date().getTime()), function (data) { });
+};
+
+HG.WebApp.SystemSettings.ZWaveHardReset = function (port) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.HardReset/' + (new Date().getTime()), function (data) { });
 };
 
 HG.WebApp.SystemSettings.ZWaveNodeAdd = function (port) {

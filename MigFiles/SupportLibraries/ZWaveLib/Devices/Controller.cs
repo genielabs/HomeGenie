@@ -92,12 +92,6 @@ namespace ZWaveLib.Devices
             });
         }
 
-        public void Discovery()
-        {
-            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_START)); // Send event
-            zwavePort.Discovery();
-        }
-
         public ZWaveNode GetDevice(byte nodeId)
         {
             return devices.Find(zn => zn.NodeId == nodeId);
@@ -107,13 +101,45 @@ namespace ZWaveLib.Devices
         {
             get { return devices; }
         }
+        
+        public void Discovery()
+        {
+            OnDiscoveryEvent(new DiscoveryEventArgs(0x00, DISCOVERY_STATUS.DISCOVERY_START)); // Send event
+            zwavePort.Discovery();
+        }
 
-        public virtual byte BeginNodeAdd()
+        public void SoftRest()
+        {
+            byte[] message = new byte[] {
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
+                0x04,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
+                (byte)ZWaveCommandClass.CMD_CONTROLLER_SOFT_RESET,
+                0xff, /* nodeid */
+                0x00
+            };
+            SendMessage(message, false);
+        }
+
+        public void HardRest()
+        {
+            byte[] message = new byte[] {
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
+                0x04,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
+                (byte)ZWaveCommandClass.CMD_CONTROLLER_SET_DEFAULT,
+                0xff, /* nodeid */
+                0x00
+            };
+            SendMessage(message, true);
+        }
+
+        public byte BeginNodeAdd()
         {
             byte[] header = new byte[] {
-                0x01 /* Start Of Frame */,
-                0x05 /*packet len */,
-                0x00 /* type req/res */,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
+                0x05, /*packet len */
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 0x4a
             };
             byte[] footer = new byte[] { 0x03 | 0x80, 0x00, 0x00 };
@@ -127,13 +153,12 @@ namespace ZWaveLib.Devices
             return callbackId;
         }
 
-
-        public virtual byte StopNodeAdd()
+        public byte StopNodeAdd()
         {
             byte[] header = new byte[] {
-                0x01 /* Start Of Frame */,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                0x00 /* type req/res */,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 0x4a
             };
             byte[] footer = new byte[] { 0x05, 0x00, 0x00 };
@@ -146,13 +171,13 @@ namespace ZWaveLib.Devices
         }
 
 
-        public virtual byte BeginNodeRemove()
+        public byte BeginNodeRemove()
         {
 
             byte[] header = new byte[] {
-                0x01 /* Start Of Frame */,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                0x00 /* type req/res */,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 0x4b
             };
             byte[] footer = new byte[] { 0x01 | 0x80, 0x00, 0x00 };
@@ -164,12 +189,12 @@ namespace ZWaveLib.Devices
             return SendMessage(message);
         }
 
-        public virtual byte StopNodeRemove()
+        public byte StopNodeRemove()
         {
             byte[] header = new byte[] {
-                0x01 /* Start Of Frame */,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                0x00 /* type req/res */,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 0x4b
             };
             byte[] footer = new byte[] { 0x05, 0x00, 0x00 };
@@ -186,9 +211,9 @@ namespace ZWaveLib.Devices
         {
             currentCommandTargetNode = nodeId;
             byte[] message = new byte[] {
-                0x01,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
                 0x04,
-                0x00,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 (byte)ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO,
                 nodeId,
                 0x00
@@ -199,9 +224,9 @@ namespace ZWaveLib.Devices
         public void GetNodeInformationFrame(byte nodeId)
         {
             byte[] message = new byte[] {
-                0x01,
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
                 0x04,
-                0x00,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
                 (byte)ZWaveCommandClass.CMD_REQUEST_NODE_INFO,
                 nodeId,
                 0x00
@@ -214,8 +239,10 @@ namespace ZWaveLib.Devices
             CMD_NONE = 0x00,
             CMD_DISCOVERY_NODES = 0x02,
             CMD_APPLICATION_COMMAND = 0x04,
+            CMD_CONTROLLER_SOFT_RESET = 0x08,
             CMD_SEND_DATA = 0x13,
             CMD_GET_NODE_PROTOCOL_INFO = 0x41,
+            CMD_CONTROLLER_SET_DEFAULT = 0x42, // hard reset
             CMD_NODE_UPDATE_INFO = 0x49,
             CMD_NODE_ADD = 0x4A,
             CMD_NODE_REMOVE = 0x4B,

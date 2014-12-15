@@ -644,5 +644,17 @@
     "configure_program_dontsave":
         "No",
     "configure_program_saveconfirm":
-        "Save"
+        "Save",
+    "configure_interfaces_zwavehardreset":
+        "Hard Reset",
+    "systemsettings_zwavehardreset_hardreset":
+        "Hard Reset Controller?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Are you sure you want to hard reset Z-Wave controller?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "All nodes will be removed!",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Cancel",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Proceed"
 }
