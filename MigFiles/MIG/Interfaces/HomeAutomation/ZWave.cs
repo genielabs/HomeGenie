@@ -235,8 +235,9 @@ namespace MIG.Interfaces.HomeAutomation
             List<InterfaceModule> modules = new List<InterfaceModule>();
             if (controller != null)
             {
-                foreach (var node in controller.Devices)
+                for(int d = 0; d < controller.Devices.Count; d++)
                 {
+                    var node = controller.Devices[d];
                     if (node.NodeId == 0x01) // zwave controller id
                         continue;
                     //

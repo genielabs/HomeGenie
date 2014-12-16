@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r443</Version>
+  <Version>1.00 beta r447</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added save prompt when leaving the program editor page with unsaved modifications
-  - Fixed bug in Z-Wave multi instance app
-  - Fixed modules sorting bug
-  - Updated Raspberry Pi GPIO Modules app
-  - Fixed issue #59 and issue #61
-  - Fixed import/export of automation programs of type "arduino" (will be zip bundle instead of simple hgx)
-  - Fixed bug in program editor undo history handling (was not reset when switching between files)
-  - Fixed bug when loading program files larger than 32K
-  - Fixed wrong isConnected assigment order in SerialPortLib</ReleaseNote>
-  <ReleaseDate>2014-12-12T11:19:51.0000Z</ReleaseDate>
+  <ReleaseNote>   - Updated French locale files
+    - Added Hard Reset option to Z-Wave interface settings (UI)
+    - Added ZWaveLib Controller.SoftReset and Controller.HardReset functions
+    - Added Z-Wave.Me thermostat widget
+    - Added node timeout error message to ZWaveLib
+    - Fixed ZWaveLib bug affecting nodes discovery (issue #66)
+    - Small fix to ZWaveLib (issue #66)</ReleaseNote>
+  <ReleaseDate>2014-12-16T18:53:02.0000Z</ReleaseDate>
 </ReleaseInfo>
