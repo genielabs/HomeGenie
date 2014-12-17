@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../MigFiles/MIG/Interfaces/HomeAutomation/ZWave.cs">
     <Files>
-      <File FileName="../HISTORY.TXT" Line="2" Column="1" />
       <File FileName="../HomeGenie/release_info.xml" Line="19" Column="35" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/Controller.cs" Line="377" Column="33" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/ZWavePort.cs" Line="213" Column="9" />
+      <File FileName="../MigFiles/MIG/Interfaces/HomeAutomation/ZWave.cs" Line="866" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
