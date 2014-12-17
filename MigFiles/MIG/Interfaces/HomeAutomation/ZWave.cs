@@ -315,11 +315,11 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.CONTROLLER_SOFTRESET)
                 {
-                    controller.SoftRest();
+                    controller.SoftReset();
                 }
                 else if (command == Command.CONTROLLER_HARDRESET)
                 {
-                    controller.HardRest();
+                    controller.HardReset();
                     Thread.Sleep(500);
                     controller.Discovery();
                 }
@@ -784,7 +784,7 @@ namespace MIG.Interfaces.HomeAutomation
         {
             switch (e.Status)
             {
-            case DISCOVERY_STATUS.DISCOVERY_START:
+            case DiscoveryStatus.DISCOVERY_START:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -793,7 +793,7 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Discovery Started"
                 });
                 break;
-            case DISCOVERY_STATUS.DISCOVERY_END:
+            case DiscoveryStatus.DISCOVERY_END:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -803,7 +803,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DISCOVERY_STATUS.NODE_ADDED:
+            case DiscoveryStatus.NODE_ADDED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -814,7 +814,7 @@ namespace MIG.Interfaces.HomeAutomation
                 lastAddedNode = e.NodeId;
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DISCOVERY_STATUS.NODE_UPDATED:
+            case DiscoveryStatus.NODE_UPDATED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -824,7 +824,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 //if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DISCOVERY_STATUS.NODE_REMOVED:
+            case DiscoveryStatus.NODE_REMOVED:
                 lastRemovedNode = e.NodeId;
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -835,7 +835,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DISCOVERY_STATUS.NODE_ERROR:
+            case DiscoveryStatus.NODE_ERROR:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",

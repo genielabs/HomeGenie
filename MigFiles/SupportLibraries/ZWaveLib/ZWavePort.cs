@@ -51,9 +51,15 @@ namespace ZWaveLib
 
     public class ZWavePort
     {
-        public delegate void ZWaveMessageReceivedEvent(object sender, ZWaveMessageReceivedEventArgs zwaveargs);
+        #region Public fields
 
+        public delegate void ZWaveMessageReceivedEvent(object sender, ZWaveMessageReceivedEventArgs zwaveargs);
         public ZWaveMessageReceivedEvent ZWaveMessageReceived;
+
+        #endregion Public fields
+
+        #region Private fields
+
         private byte callbackIdSeq = 1;
         private object callbackLock = new object();
         private SerialPortInput serialPort;
@@ -62,6 +68,10 @@ namespace ZWaveLib
         private bool isInitialized;
         private Timer discoveryTimer;
         private ManualResetEvent ackWait = new ManualResetEvent(true);
+
+        #endregion Private fields
+
+        #region Lifecycle
 
         public ZWavePort()
         {
@@ -74,6 +84,10 @@ namespace ZWaveLib
                 Discovery();
             });
         }
+
+        #endregion Lifecycle
+
+        #region Public members
 
         public string PortName
         {
@@ -89,7 +103,7 @@ namespace ZWaveLib
         {
             get { return serialPort.IsConnected; }
         }
-
+        
         public bool Connect()
         {
             return serialPort.Connect();
@@ -99,10 +113,7 @@ namespace ZWaveLib
         {
             serialPort.Disconnect();
         }
-        //public void Dispose ()
-        //{
-        // Disconnect();
-        //}
+
         public void Discovery()
         {
             serialPort.SendMessage(new byte[] { 0x01, 0x03, 0x00, 0x02, 0xFE });
@@ -229,6 +240,10 @@ namespace ZWaveLib
             return returnValue.Trim();
         }
 
+        #endregion Public members
+
+        #region Private members
+
         private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
             Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToString());
@@ -350,5 +365,7 @@ namespace ZWaveLib
                 isInitialized = false;
             }
         }
+
+        #endregion Private members
     }
 } 
