@@ -42,6 +42,7 @@
 	                    <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
 	                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
 	                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
+                        <a data-locale-id="configure_interfaces_zwavehardreset" href="#systemsettings_zwavehardreset_popup" data-rel="popup" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
 	                </div>
 	            </div>
 
@@ -369,6 +370,25 @@
         </div>
 
 
+
+        <div id="systemsettings_zwavehardreset_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="systemsettings_zwavehardreset_hardreset">Hard Reset Controller?</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="systemsettings_zwavehardreset_hardresetprompt" class="ui-title">Are you sure you want to hard reset Z-Wave controller?</h3>
+                <p data-locale-id="systemsettings_zwavehardreset_hardresetwarning">All nodes will be removed!</p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_zwavehardreset_hardresetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_zwavehardreset_hardresetbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_zwavehardreset_hardresetproceed" data-rel="back" data-transition="slideup">Proceed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
 
     </div>

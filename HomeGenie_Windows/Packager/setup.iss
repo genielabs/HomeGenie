@@ -13,10 +13,10 @@
 
 [Setup]
 AppName=HomeGenie
-AppVerName=HomeGenie 1.00 beta (r394)
+AppVerName=HomeGenie 1.00 beta (r447)
 AppPublisher=GenieLabs
 AppPublisherURL=http://www.homegenie.it
-AppVersion=1.00 beta (r394)
+AppVersion=1.00 beta (r447)
 DefaultDirName={pf}\HomeGenie
 DefaultGroupName=HomeGenie
 Compression=lzma
@@ -189,12 +189,12 @@ begin
   else
      Result := true;
 
-  MsgBox('Connect your automation interfaces now, if not already connected.', mbInformation, MB_OK);
+  //MsgBox('Connect your automation interfaces now, if not already connected.', mbInformation, MB_OK);
 end;
 
 [Files]
 ; copy your libusb-win32 setup package to the App folder
-Source: "C:\Program Files (x86)\ISTool\isxdl.dll"; Flags: dontcopy
+Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
 ;Source: "..\..\Drivers\LibUSB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
 Source: "..\..\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
 ;Source: "C:\Users\Gene\Documents\Progetti\Personali\HomeGenie\Drivers\USB_ActiveHome_Interface\dpinst32.exe"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs; Excludes: "*.exe"
@@ -222,8 +222,8 @@ Type: files; Name: "{app}\SQLite.Interop.dll";
 ;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Icons]
-Name: "{group}\HomeGenie 1.00 beta (r394)"; Filename: "{app}\HomeGenieManager.exe"
-Name: "{group}\Uninstall HomeGenie 1.00 beta (r394)"; Filename: "{uninstallexe}"
+Name: "{group}\HomeGenie 1.00 beta (r447)"; Filename: "{app}\HomeGenieManager.exe"
+Name: "{group}\Uninstall HomeGenie 1.00 beta (r447)"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\HomeGenie"; Filename: "{app}\HomeGenieManager.exe"
 
 [Run]

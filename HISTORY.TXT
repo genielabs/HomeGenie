@@ -1,5 +1,34 @@
 ﻿RELEASE HISTORY
 
+16/12/2014 1.00 beta rev 447
+    - Small fix to ZWaveLib (issue #66)
+    - Updated Windows setup packager
+    - Updated French locale files
+
+15/12/2014 1.00 beta rev 446
+    - Added Hard Reset option to Z-Wave interface settings (UI)
+    - Added ZWaveLib Controller.SoftReset and Controller.HardReset functions
+    - Made some cleanup around ZWaveLib
+
+14/12/2014 1.00 beta rev 444
+    - Improved widget localization function
+    - Added Z-Wave.Me thermostat widget
+    - Added node timeout error message to ZWaveLib
+    - Fixed ZWaveLib bug affecting nodes discovery
+
+12/12/2014 1.00 beta rev 443
+    - Added save prompt when leaving the program editor page with unsaved modifications
+    - Fixed bug in Z-Wave multi instance app
+    - Fixed modules sorting bug
+    - Updated Raspberry Pi GPIO Modules app
+    - Fixed issue #59 and issue #61
+
+08/12/2014 1.00 beta rev 442
+    - Fixed import/export of automation programs of type "arduino" (will be zip bundle instead of simple hgx)
+    - Fixed bug in program editor undo history handling (was not reset when switching between files)
+    - Fixed bug when loading program files larger than 32K
+    - Fixed wrong isConnected assigment order in SerialPortLib
+
 04/12/2014 1.00 beta rev 441
     - Added "MiLight Control" app
     - Fixed bug in interconnections remote module control

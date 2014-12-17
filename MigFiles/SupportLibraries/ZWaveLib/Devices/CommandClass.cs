@@ -46,6 +46,8 @@ namespace ZWaveLib
         COMMAND_CONFIG_GET = 0x05,
         COMMAND_CONFIG_REPORT = 0x06,
         //
+        COMMAND_MANUFACTURERSPECIFIC_GET = 0x04,
+        //
         COMMAND_WAKEUP_REPORT = 0x06,
         COMMAND_WAKEUP_NOTIFICATION = 0x07,
         //

@@ -164,6 +164,7 @@
     <Reference Include="Raspberry.IO.Components">
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />

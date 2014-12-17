@@ -481,7 +481,7 @@
         "Elenco Programmi",
     "configure_programslist_tap_disable":
         "Tap per DISABILITARE programma",
-    "configure_programslist_tab_enable":
+    "configure_programslist_tap_enable":
         "Tap per ABILITARE programma",
     "configure_programslist_deletegroup":
         "Rimuovi Gruppo",
@@ -634,5 +634,27 @@
     "configure_program_fileslist_edit":
         "Modifica",
     "configure_program_fileslist_add":
-        "Agg."
+        "Agg.",
+    "configure_program_hasmodification":
+        "Il programma è stato modificato!",
+    "configure_program_savechangesprompt":
+        "Vuoi salvare le modifiche?",
+    "configure_program_changeswillbelost":
+        "",
+    "configure_program_dontsave":
+        "No",
+    "configure_program_saveconfirm":
+        "Salva",
+    "configure_interfaces_zwavehardreset":
+        "Hard Reset",
+    "systemsettings_zwavehardreset_hardreset":
+        "Reimpostare il Controller?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Sei sicuro di voler reimpostare il controller Z-Wave?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "Tutti i nodi verranno rimossi!",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Annulla",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Procedi"
 }

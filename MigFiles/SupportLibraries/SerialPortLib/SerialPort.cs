@@ -247,16 +247,16 @@ namespace SerialPortLib
             {
             }
             //
+            isConnected = success;
             if (ConnectedStateChanged != null)
             {
                 ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(success));
             }
-            isConnected = success;
             //
             if (success && receiverTask == null)
             {
                 receiverTask = new Thread(ReceiverLoop);
-                //_receiverthread.Priority = ThreadPriority.Highest;
+                //receiverTask.Priority = ThreadPriority.Highest;
                 receiverTask.Start();
             }
             return success;
@@ -321,7 +321,7 @@ namespace SerialPortLib
                                 {
                                     ReceiveMessage(message);
                                 });
-                                deliver.Priority = ThreadPriority.AboveNormal;
+                                //deliver.Priority = ThreadPriority.AboveNormal;
                                 deliver.Start();
                             }
                         }

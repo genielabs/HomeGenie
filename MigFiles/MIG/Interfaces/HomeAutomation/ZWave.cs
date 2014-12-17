@@ -54,11 +54,11 @@ namespace MIG.Interfaces.HomeAutomation
                 { 101, "Controller.Discovery" },
                 { 111, "Controller.NodeAdd" },
                 { 113, "Controller.NodeRemove" },
-                { 151, "Controller.AutoReportSet" },
+                { 131, "Controller.SoftReset" },
+                { 132, "Controller.HardReset" },
 
                 { 201, "Basic.Get" },
                 { 202, "Basic.Set" },
-                { 203, "Basic.Report" },
 
                 { 211, "MultiInstance.Get" },
                 { 212, "MultiInstance.Set" },
@@ -79,8 +79,7 @@ namespace MIG.Interfaces.HomeAutomation
                 { 501, "WakeUp.Get" },
                 { 502, "WakeUp.Set" },
 
-                { 601, "MultiLevel.Report" },
-                { 602, "MultiLevel.Get" },
+                // TODO: 600 slot free for future command set implementation
 
                 { 701, "Control.On" },
                 { 702, "Control.Off" },
@@ -103,13 +102,11 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROLLER_DISCOVERY = new Command(101);
             public static readonly Command CONTROLLER_NODEADD = new Command(111);
             public static readonly Command CONTROLLER_NODEREMOVE = new Command(113);
-            public static readonly Command CONTROLLER_AUTOREPORTSET = new Command(151);
+            public static readonly Command CONTROLLER_SOFTRESET = new Command(131);
+            public static readonly Command CONTROLLER_HARDRESET = new Command(132);
 
             public static readonly Command BASIC_GET = new Command(201);
             public static readonly Command BASIC_SET = new Command(202);
-
-            public static readonly Command BASIC_REPORT = new Command(203);
-            // TODO deprecate this
 
             public static readonly Command MULTIINSTANCE_GET = new Command(211);
             public static readonly Command MULTIINSTANCE_SET = new Command(212);
@@ -129,11 +126,6 @@ namespace MIG.Interfaces.HomeAutomation
 
             public static readonly Command WAKEUP_GET = new Command(501);
             public static readonly Command WAKEUP_SET = new Command(502);
-
-
-            public static readonly Command MULTILEVEL_REPORT = new Command(601);
-            // TODO deprecate this
-            public static readonly Command MULTILEVEL_GET = new Command(602);
 
             public static readonly Command CONTROL_ON = new Command(701);
             public static readonly Command CONTROL_OFF = new Command(702);
@@ -243,8 +235,9 @@ namespace MIG.Interfaces.HomeAutomation
             List<InterfaceModule> modules = new List<InterfaceModule>();
             if (controller != null)
             {
-                foreach (var node in controller.Devices)
+                for(int d = 0; d < controller.Devices.Count; d++)
                 {
+                    var node = controller.Devices[d];
                     if (node.NodeId == 0x01) // zwave controller id
                         continue;
                     //
@@ -320,27 +313,16 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     controller.Discovery();
                 }
-
-
-                //--------------////---------------------- DEPRECATE THESE  ----------------------------
-                //else if (command == Command.CONTROLLER_AUTOREPORTSET)
-                //{
-                //    _controller.AutoReportSet((byte)int.Parse(request.GetOption(0)), (byte)int.Parse(request.GetOption(1)));
-                //}
-                //else 
-                if (command == Command.BASIC_REPORT || command.ToString() == "Meter.Get") // TODO .. FIX: this is not basic report, it's a meter get
+                else if (command == Command.CONTROLLER_SOFTRESET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.RequestMeterReport();
+                    controller.SoftRest();
                 }
-                else if (command == Command.MULTILEVEL_REPORT) // TODO this one call for having SwitchMultiLevel and SensorMultiLevel reports
+                else if (command == Command.CONTROLLER_HARDRESET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.RequestMultiLevelReport();
+                    controller.HardRest();
+                    Thread.Sleep(500);
+                    controller.Discovery();
                 }
-                //--------------////--------------------------------------------------------------------
-
-
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
                     lastAddedNode = 0;
@@ -621,13 +603,9 @@ namespace MIG.Interfaces.HomeAutomation
                     ((Thermostat)node.DeviceHandler).Thermostat_FanModeGet();
                     Thread.Sleep(200);
                     ((Thermostat)node.DeviceHandler).Thermostat_ModeGet();
-                    Thread.Sleep(200);
-                    node.RequestMultiLevelReport();
-                }
-                else if (command == Command.MULTILEVEL_GET)
-                {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.SensorMultiLevelGet();
+                    // TODO: find an alternative to the deprecated method below
+                    //Thread.Sleep(200);
+                    //node.RequestMultiLevelReport();
                 }
 
             }
@@ -863,7 +841,7 @@ namespace MIG.Interfaces.HomeAutomation
                     SourceId = "1",
                     SourceType = "Z-Wave Controller",
                     Path = "Controller.Status",
-                    Value = "Erreur ZWave Node " + e.NodeId
+                    Value = "Node " + e.NodeId + " response timeout!"
                 });
                 break;
             }

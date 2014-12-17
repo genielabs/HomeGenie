@@ -9,10 +9,12 @@ DISCLAIMER
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-HOMEPAGE AND DOCUMENTATION
-==========================
+HOMEPAGE, DOCUMENTATION AND FORUM
+=================================
 
 http://www.homegenie.it
+http://www.homegenie.it/docs
+http://www.homegenie.it/forum
 
 
 AUDIENCE
@@ -27,7 +29,7 @@ MISSION
 
 - Developing an easy to use and generic purpose Home Automation Server that will have highly extensible/programmable features
 - Giving a concrete common language "chance" to all "connected" devices and standards, humans included =)
-- Building a "Do It Yourself" HG server box, based on Raspberry Pi, with integrated LCD, touch UI, user-selectable Display Widget and also supporting pluggable HW add-ins (1-wire sensors and other easy to plug devices) via a Common eXpansion Port
+- Building a "Do It Yourself" HG server box, based on Raspberry Pi, with integrated display and also supporting direct plugging of HW add-ins (1-wire sensors and other easy to plug devices)
 - Making HomeGenie boxes "talk" each other and interoperate
 
 Some of these goals have been already accomplished (see CURRENT FEATURES).
@@ -91,12 +93,12 @@ CURRENT FEATURES
 
 * Mobile app clients (Android, Windows Phone)
 
-* Open Source (last but not least)
+* Open Source
 
 
 
-BUILT-IN INTERFACES AND PROTOCOLS DRIVERS
-=========================================
+BUILT-IN INTERFACES AND PROTOCOL DRIVERS
+========================================
 
 - X10      Marmitek CM15Pro USB interface
 - X10	   Marmitek CM11/CM12 Serial interface
@@ -106,9 +108,11 @@ BUILT-IN INTERFACES AND PROTOCOLS DRIVERS
 - Insteon  Insteon PLM 2413S/2413U
 - LIRC	   Any LIRC compatible IR transceiver
 - GPIO     Raspberry Pi GPIO 1Wire/SPI/I2C
+- Arduino  Integrated Arduino development
 - V4L      Video4Linux camera video driver
 - Serial   Generic serial port interface
 - TCP      Generic TCP interface
+- UDP      Generic UDP interface
 
 
 BUILT-IN X10 FEATURES
@@ -223,4 +227,10 @@ Interconnections
 - Sensor.* events forwarding
 - Status.Level events forwarding
 - MQTT Network
+
+More program plugins available from contributors at Users' Forum board:
+http://www.homegenie.it/forum/index.php?board=3.0
+
+
+
 

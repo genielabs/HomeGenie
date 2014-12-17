@@ -481,7 +481,7 @@
         "Список программ",
     "configure_programslist_tap_disable": 
         "Нажмите чтобы ВЫКЛЮЧИТЬ программу",
-    "configure_programslist_tab_enable": 
+    "configure_programslist_tap_enable": 
         "Нажмите чтобы ВКЛЮЧИТЬ программу",
     "configure_programslist_deletegroup": 
         "Удалить группу",
@@ -620,19 +620,41 @@
     "configure_module_featuresoptions": 
         "Возможности/Свойства",
     "configure_editprogram_files":
-        "Files",
+        "Файлы",
     "configure_program_newfile":
-        "Add File",
+        "Добавить файл",
     "configure_program_filename":
-        "File name",
+        "Имя файла",
     "configure_program_fileslist":
-        "File list",
+        "Список файлов",
     "configure_program_fileslist_exit":
-        "Exit",
+        "Выход",
     "configure_program_fileslist_delete":
-        "Delete",
+        "Удалить",
     "configure_program_fileslist_edit":
-        "Edit",
+        "Редактировать",
     "configure_program_fileslist_add":
-        "Add"
+        "Добавить",
+    "configure_program_hasmodification":
+        "Программа была изменена!",
+    "configure_program_savechangesprompt":
+        "Вы хотите сохранить изменения?",
+    "configure_program_changeswillbelost":
+        "",
+    "configure_program_dontsave":
+        "Нет",
+    "configure_program_saveconfirm":
+        "Сохранить",
+    "configure_interfaces_zwavehardreset":
+        "Hard Reset",
+    "systemsettings_zwavehardreset_hardreset":
+        "Hard Reset Controller?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Are you sure you want to hard reset Z-Wave controller?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "All nodes will be removed!",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Cancel",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Proceed"
 }

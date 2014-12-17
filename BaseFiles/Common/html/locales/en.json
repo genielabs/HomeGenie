@@ -481,7 +481,7 @@
         "Programs list",
     "configure_programslist_tap_disable":
         "Tap to DISABLE program",
-    "configure_programslist_tab_enable":
+    "configure_programslist_tap_enable":
         "Tap to ENABLE program",
     "configure_programslist_deletegroup":
         "Delete Group",
@@ -634,5 +634,27 @@
     "configure_program_fileslist_edit":
         "Edit",
     "configure_program_fileslist_add":
-        "Add"
+        "Add",
+    "configure_program_hasmodification":
+        "Program was modified!",
+    "configure_program_savechangesprompt":
+        "Do you want to save changes?",
+    "configure_program_changeswillbelost":
+        "",
+    "configure_program_dontsave":
+        "No",
+    "configure_program_saveconfirm":
+        "Save",
+    "configure_interfaces_zwavehardreset":
+        "Hard Reset",
+    "systemsettings_zwavehardreset_hardreset":
+        "Hard Reset Controller?",
+    "systemsettings_zwavehardreset_hardresetprompt":
+        "Are you sure you want to hard reset Z-Wave controller?",
+    "systemsettings_zwavehardreset_hardresetwarning":
+        "All nodes will be removed!",
+    "systemsettings_zwavehardreset_hardresetcancel":
+        "Cancel",
+    "systemsettings_zwavehardreset_hardresetproceed":
+        "Proceed"
 }
