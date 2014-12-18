@@ -140,33 +140,33 @@ namespace ZWaveLib.Devices
 
     public class ZWaveNode
     {
+        #region Public fields
+
         public byte NodeId { get; protected set; }
-        //
         public string ManufacturerId { get; protected set; }
-
         public string TypeId { get; protected set; }
-
         public string ProductId { get; protected set; }
-        //
         public byte BasicClass { get; internal set; }
-
         public byte GenericClass { get; internal set; }
-
         public byte SpecificClass { get; internal set; }
-        //
         public IZWaveDeviceHandler DeviceHandler = null;
 
         public delegate void UpdateNodeParameterEventHandler(object sender, UpdateNodeParameterEventArgs upargs);
-
         public event UpdateNodeParameterEventHandler UpdateNodeParameter;
 
         public delegate void ManufacturerSpecificResponseEventHandler(object sender, ManufacturerSpecificResponseEventArg mfargs);
-
         public virtual event ManufacturerSpecificResponseEventHandler ManufacturerSpecificResponse;
 
+        #endregion Public fields
+
+        #region Private fields
 
         internal ZWavePort zwavePort;
         private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
+
+        #endregion Private fields
+
+        #region Lifecycle
 
         public ZWaveNode(byte nodeId, ZWavePort zport)
         {
@@ -181,22 +181,9 @@ namespace ZWaveLib.Devices
             this.GenericClass = genericType;
         }
 
-        public void SetDeviceHandlerFromName(string fullName)
-        {
-            var type = Assembly.GetExecutingAssembly().GetType(fullName); // full name - i.e. with namespace (perhaps concatenate)
-            try
-            {
-                var deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                //
-                this.DeviceHandler = deviceHandler;
-                this.DeviceHandler.SetNodeHost(this);
-            }
-            catch
-            {
-                // TODO: add error logging 
-            }
-        }
+        #endregion Lifecycle
 
+        #region Public members
 
         public virtual bool MessageRequestHandler(byte[] receivedMessage)
         {
@@ -425,76 +412,7 @@ namespace ZWaveLib.Devices
 
             return false;
         }
-
-
-        #region private methods
-
-        private List<Type> GetTypesInNamespace(Assembly assembly, string nameSpace)
-        {
-            var typeList = new List<Type>();
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace)) typeList.Add(type);
-            }
-            //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
-            return typeList;
-        }
-
-        internal void RaiseUpdateParameterEvent(
-            ZWaveNode node,
-            int pid,
-            ParameterType peventtype,
-            object value
-        )
-        {
-            if (UpdateNodeParameter != null)
-            {
-                UpdateNodeParameter(
-                    node,
-                    new UpdateNodeParameterEventArgs() {
-                        NodeId = (int)node.NodeId,
-                        ParameterId = pid,
-                        ParameterType = peventtype,
-                        Value = value
-                    }
-                );
-            }
-        }
-
-        private void CheckDeviceHandler(ManufacturerSpecific manufacturerspecs)
-        {
-            //if (this.DeviceHandler == null)
-            {
-                var typeList = GetTypesInNamespace(
-                                   Assembly.GetExecutingAssembly(),
-                                   "ZWaveLib.Devices.ProductHandlers."
-                               );
-                for (int i = 0; i < typeList.Count; i++)
-                {
-                    //Console.WriteLine(typelist[i].FullName);
-                    Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
-                    try
-                    {
-                        IZWaveDeviceHandler deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                        //
-                        if (deviceHandler.CanHandleProduct(manufacturerspecs))
-                        {
-                            this.DeviceHandler = deviceHandler;
-                            this.DeviceHandler.SetNodeHost(this);
-                            break;
-                        }
-                    }
-                    catch
-                    {
-                        // TODO: add error logging 
-                        //Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);
-                    }
-                }
-            }
-
-        }
-
-
+        
         public void SetGenericHandler()
         {
             if (this.DeviceHandler == null)
@@ -503,30 +421,30 @@ namespace ZWaveLib.Devices
                 IZWaveDeviceHandler deviceHandler = null;
                 switch (this.GenericClass)
                 {
-                case 0x00:
-                        // need to query node capabilities
+                    case 0x00:
+                    // need to query node capabilities
                     byte[] message = new byte[] {
                         0x01,
                         0x04,
                         0x00,
-                        (byte)Controller.ZWaveCommandClass.CMD_GET_NODE_PROTOCOL_INFO,
+                        (byte)Controller.Command.CMD_GET_NODE_PROTOCOL_INFO,
                         this.NodeId,
                         0x00
                     };
                     SendMessage(message);
                     break;
-                case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
+                    case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
                     deviceHandler = new ProductHandlers.Generic.Switch();
                     break;
-                case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
+                    case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
                     deviceHandler = new ProductHandlers.Generic.Dimmer();
                     break;
-                case (byte)ZWaveLib.GenericType.THERMOSTAT:
+                    case (byte)ZWaveLib.GenericType.THERMOSTAT:
                     deviceHandler = new ProductHandlers.Generic.Thermostat();
                     break;
-                // Fallback to generic Sensor driver if type is not directly supported.
-                // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
-                default:
+                    // Fallback to generic Sensor driver if type is not directly supported.
+                    // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
+                    default:
                     deviceHandler = new ProductHandlers.Generic.Sensor();
                     break;
                 }
@@ -537,9 +455,46 @@ namespace ZWaveLib.Devices
                 }
             }
         }
+        
+        public void SetDeviceHandlerFromName(string fullName)
+        {
+            var type = Assembly.GetExecutingAssembly().GetType(fullName); // full name - i.e. with namespace (perhaps concatenate)
+            try
+            {
+                var deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
+                //
+                this.DeviceHandler = deviceHandler;
+                this.DeviceHandler.SetNodeHost(this);
+            }
+            catch
+            {
+                // TODO: add error logging 
+            }
+        }
 
-        #endregion
+        public void ZWaveMessage(byte[] msg)
+        {
+            byte[] header = new byte[] {
+                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
+                (byte)(msg.Length + 7) /*packet len */,
+                (byte)ZWaveMessageType.REQUEST, /* Type of message */
+                0x13 /* func send data */,
+                this.NodeId,
+                (byte)(msg.Length)
+            };
+            byte[] footer = new byte[] { 0x01 | 0x04, 0x00, 0x00 };
+            byte[] message = new byte[header.Length + msg.Length + footer.Length];// { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x31, 0x04, 0x01 | 0x04, 0x00, 0x00 };
 
+            System.Array.Copy(header, 0, message, 0, header.Length);
+            System.Array.Copy(msg, 0, message, header.Length, msg.Length);
+            System.Array.Copy(footer, 0, message, message.Length - footer.Length, footer.Length);
+
+            SendMessage(message);
+        }
+
+        #endregion Public members
+
+        #region Private members
 
         #region ZWave Command Class Basic
 
@@ -837,32 +792,80 @@ namespace ZWaveLib.Devices
         }
 
         #endregion
-        
+
+
         internal byte SendMessage(byte[] message, bool disableCallback = false)
         {
             var msg = new ZWaveMessage() { Node = this, Message = message };
             return zwavePort.SendMessage(msg, disableCallback);
         }
-                
-        public void ZWaveMessage(byte[] msg)
+
+        internal void RaiseUpdateParameterEvent(
+            ZWaveNode node,
+            int pid,
+            ParameterType peventtype,
+            object value
+            )
         {
-            byte[] header = new byte[] {
-                (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
-                (byte)(msg.Length + 7) /*packet len */,
-                (byte)ZWaveMessageType.REQUEST, /* Type of message */
-                0x13 /* func send data */,
-                this.NodeId,
-                (byte)(msg.Length)
-            };
-            byte[] footer = new byte[] { 0x01 | 0x04, 0x00, 0x00 };
-            byte[] message = new byte[header.Length + msg.Length + footer.Length];// { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x31, 0x04, 0x01 | 0x04, 0x00, 0x00 };
-
-            System.Array.Copy(header, 0, message, 0, header.Length);
-            System.Array.Copy(msg, 0, message, header.Length, msg.Length);
-            System.Array.Copy(footer, 0, message, message.Length - footer.Length, footer.Length);
-
-            SendMessage(message);
+            if (UpdateNodeParameter != null)
+            {
+                UpdateNodeParameter(
+                    node,
+                    new UpdateNodeParameterEventArgs() {
+                    NodeId = (int)node.NodeId,
+                    ParameterId = pid,
+                    ParameterType = peventtype,
+                    Value = value
+                }
+                );
+            }
         }
+
+        private List<Type> GetTypesInNamespace(Assembly assembly, string nameSpace)
+        {
+            var typeList = new List<Type>();
+            foreach (Type type in assembly.GetTypes())
+            {
+                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace)) typeList.Add(type);
+            }
+            //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
+            return typeList;
+        }
+
+        private void CheckDeviceHandler(ManufacturerSpecific manufacturerspecs)
+        {
+            //if (this.DeviceHandler == null)
+            {
+                var typeList = GetTypesInNamespace(
+                    Assembly.GetExecutingAssembly(),
+                    "ZWaveLib.Devices.ProductHandlers."
+                    );
+                for (int i = 0; i < typeList.Count; i++)
+                {
+                    //Console.WriteLine(typelist[i].FullName);
+                    Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
+                    try
+                    {
+                        IZWaveDeviceHandler deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
+                        //
+                        if (deviceHandler.CanHandleProduct(manufacturerspecs))
+                        {
+                            this.DeviceHandler = deviceHandler;
+                            this.DeviceHandler.SetNodeHost(this);
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        // TODO: add error logging 
+                        //Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);
+                    }
+                }
+            }
+
+        }
+
+        #endregion Private members
 
     }
 }
