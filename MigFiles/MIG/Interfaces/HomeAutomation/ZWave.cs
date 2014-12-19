@@ -705,7 +705,7 @@ namespace MIG.Interfaces.HomeAutomation
             //_unloadZWavePort();
             try
             {
-                controller.DiscoveryEvent -= DiscoveryEvent;
+                controller.ControllerEvent -= DiscoveryEvent;
                 controller.UpdateNodeParameter -= controller_UpdateNodeParameter;
                 controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
             }
@@ -734,7 +734,7 @@ namespace MIG.Interfaces.HomeAutomation
                 //
                 controller = new Controller(zwavePort);
                 //
-                controller.DiscoveryEvent += DiscoveryEvent;
+                controller.ControllerEvent += DiscoveryEvent;
                 controller.UpdateNodeParameter += controller_UpdateNodeParameter;
                 controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
@@ -780,11 +780,11 @@ namespace MIG.Interfaces.HomeAutomation
         */
 
         // fired either at startup time and after a new z-wave node has been added to the controller
-        private void DiscoveryEvent(object sender, DiscoveryEventArgs e)
+        private void DiscoveryEvent(object sender, ControllerEventArgs e)
         {
             switch (e.Status)
             {
-            case DiscoveryStatus.DISCOVERY_START:
+            case ControllerStatus.DISCOVERY_START:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -793,7 +793,7 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Discovery Started"
                 });
                 break;
-            case DiscoveryStatus.DISCOVERY_END:
+            case ControllerStatus.DISCOVERY_END:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -803,7 +803,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_ADDED:
+            case ControllerStatus.NODE_ADDED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -814,7 +814,7 @@ namespace MIG.Interfaces.HomeAutomation
                 lastAddedNode = e.NodeId;
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_UPDATED:
+            case ControllerStatus.NODE_UPDATED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -824,7 +824,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 //if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_REMOVED:
+            case ControllerStatus.NODE_REMOVED:
                 lastRemovedNode = e.NodeId;
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -835,7 +835,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_ERROR:
+            case ControllerStatus.NODE_ERROR:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",

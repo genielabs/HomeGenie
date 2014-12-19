@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+19/12/2014 1.00 beta rev 449
+    - Added (ZWaveLib) duplicate message check for incoming messages
+    - Improved (ZWaveLib) nodes discovery/capability get process
+
 16/12/2014 1.00 beta rev 447
     - Small fix to ZWaveLib (issue #66)
     - Updated Windows setup packager
