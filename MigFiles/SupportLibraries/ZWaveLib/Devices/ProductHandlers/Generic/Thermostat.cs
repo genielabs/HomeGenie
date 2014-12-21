@@ -172,7 +172,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         //initial request for thermostat mode, since this doesn't change very often
         public virtual void Thermostat_ModeGet()
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
                 (byte)Command.COMMAND_BASIC_GET
             });
@@ -183,7 +183,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
          */ 
         public virtual void Thermostat_ModeSet(Mode mode)
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE, 
                 (byte)Command.COMMAND_BASIC_SET, 
                 (byte)mode
@@ -192,7 +192,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             
         public virtual void Thermostat_SetPointGet()
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
                 (byte)Command.THERMOSTAT_SETPOINT_GET
             });
@@ -213,7 +213,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
          */
         public virtual void Thermostat_SetPointSet(SetPointType ptype, int temperature)
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
                 (byte)Command.THERMOSTAT_SETPOINT_SET, 
                 (byte)ptype,
@@ -224,7 +224,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         
         public virtual void Thermostat_FanStateGet()
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE, 
                 (byte)Command.COMMAND_BASIC_GET
             });
@@ -232,7 +232,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 
         public virtual void Thermostat_FanModeGet()
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
                 (byte)Command.COMMAND_BASIC_GET
             });
@@ -240,7 +240,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 
         public virtual void Thermostat_FanModeSet(FanMode mode)
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE, 
                 (byte)Command.COMMAND_BASIC_SET, 
                 (byte)mode

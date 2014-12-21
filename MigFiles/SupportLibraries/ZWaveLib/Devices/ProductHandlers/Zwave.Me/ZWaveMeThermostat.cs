@@ -41,7 +41,7 @@ namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
          */
         public override void Thermostat_SetPointSet(SetPointType ptype, int temperature)
         {
-            this.nodeHost.ZWaveMessage(new byte[] { 
+            this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT, 
                 (byte)Command.THERMOSTAT_SETPOINT_SET, 
                 (byte)ptype,

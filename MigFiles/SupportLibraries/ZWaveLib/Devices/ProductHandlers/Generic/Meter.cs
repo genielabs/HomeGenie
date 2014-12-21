@@ -60,29 +60,22 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual bool HandleMultiInstanceReport(byte[] message)
         {
             //UNHANDLED: 01 14 00 04 08 04 0E 32 02 21 74 00 00 1E BB 00 00 00 00 00 00 2D
-            //                       ^^
+            //                       ^^        |  |
+            //                                 +--|------> 0x31 Command Class Meter
+            //                                    +------> 0x02 Meter Report
             bool processed = false;
             //
             byte commandClass = message[7];
+            byte commandType = message[8];
             //
-            if (commandClass == (byte)CommandClass.COMMAND_CLASS_METER)
+            if (commandClass == (byte)CommandClass.COMMAND_CLASS_METER && commandType == (byte)Command.COMMAND_METER_REPORT)
             {
-                if (message.Length > 14 && message[4] == 0x00)
-                {
-                    // CLASS METER
-                    //
-                    double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
-                    //
-                    processed = true;
-                }
-                else if (message.Length > 14 && message[4] == 0x08)
-                {
-                    //TODO: complete here...
-                    processed = true;
-                }
+                // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
+                // TODO: the code below parse always as Electric type 
+                double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
+                processed = true;
             }
-
             return processed;
         }
 

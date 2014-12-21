@@ -591,8 +591,10 @@ namespace HomeGenie.Service
         // Check if command was Control.*, update the ModuleParameter. This should happen in a HWInt->HomeGenie pathway
         private void migService_ServiceRequestPostProcess(MIGClientRequest request, MIGInterfaceCommand command)
         {
-            if (command.Domain == Domains.HomeAutomation_X10 || command.Domain == Domains.HomeAutomation_ZWave)
+            switch (command.Domain)
             {
+            case Domains.HomeAutomation_X10:
+            case Domains.HomeAutomation_ZWave:
                 Module module = null;
                 try
                 {
@@ -630,14 +632,16 @@ namespace HomeGenie.Service
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module,
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + command.GetOption(1));
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + command.GetOption(1)
+                            );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
                         else if (command.Command == ZWave.Command.MULTIINSTANCE_GETCOUNT)
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module, 
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." +".Count");
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + ".Count"
+                            );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
                         else if (command.Command == ZWave.Command.ASSOCIATION_GET)
@@ -671,6 +675,13 @@ namespace HomeGenie.Service
                         }
                     }
                 }
+                break;
+            case Domains.MigService_Interfaces:
+                if (command.Command.EndsWith(".Set"))
+                {
+                    systemConfiguration.Update();
+                }
+                break;
             }
             //
             // Macro Recording

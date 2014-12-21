@@ -38,6 +38,7 @@ namespace ZWaveLib.Devices
         PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC,
         PARAMETER_GENERIC,
         PARAMETER_WATTS,
+        PARAMETER_POWER,
         PARAMETER_TEMPERATURE,
         PARAMETER_HUMIDITY,
         PARAMETER_LUMINANCE,
@@ -472,7 +473,7 @@ namespace ZWaveLib.Devices
             }
         }
 
-        public void ZWaveMessage(byte[] msg)
+        public void SendRequest(byte[] msg)
         {
             byte[] header = new byte[] {
                 (byte)ZWaveMessageHeader.SOF, /* Start Of Frame */
@@ -492,10 +493,8 @@ namespace ZWaveLib.Devices
             SendMessage(message);
         }
 
-        #endregion Public members
 
-        #region Private members
-
+        
         #region ZWave Command Class Basic
 
         /// <summary>
@@ -504,7 +503,7 @@ namespace ZWaveLib.Devices
         /// <param name="value"></param>
         public void Basic_Set(int value)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_BASIC, 
                 (byte)Command.COMMAND_BASIC_SET, 
                 byte.Parse(value.ToString())
@@ -516,96 +515,9 @@ namespace ZWaveLib.Devices
         /// </summary>
         public void Basic_Get()
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_BASIC, 
                 (byte)Command.COMMAND_BASIC_GET 
-            });
-        }
-
-        #endregion
-
-        #region ZWave Command Class MultiInstance/Channel
-
-        public void MultiInstance_GetCount(byte command_class) // eg. CommandClass.COMMAND_CLASS_SWITCH_BINARY
-        {
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                (byte)Command.COMMAND_MULTIINSTANCE_COUNT_GET, // 0x04 = GET, 0x05 = REPORT
-                command_class
-            });
-        }
-
-        public void MultiInstance_SwitchBinaryGet(byte instance)
-        {
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x0d, // ??
-                0x00, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
-                (byte)Command.COMMAND_MULTIINSTANCE_GET
-            });
-        }
-
-        public void MultiInstance_SwitchBinarySet(byte instance, int value)
-        {
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x0d, // 
-                0x00, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
-                (byte)Command.COMMAND_MULTIINSTANCE_SET,
-                byte.Parse(value.ToString())
-            });
-        }
-
-        public void MultiInstance_SwitchMultiLevelGet(byte instance)
-        {
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x0d, // ??
-                0x00, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
-                (byte)Command.COMMAND_MULTIINSTANCE_GET
-            });
-        }
-
-        public void MultiInstance_SwitchMultiLevelSet(byte instance, int value)
-        {
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x0d, // 
-                0x00, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
-                (byte)Command.COMMAND_MULTIINSTANCE_SET,
-                byte.Parse(value.ToString())
-            });
-        }
-
-        public void MultiInstance_SensorBinaryGet(byte instance)
-        {
-            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x06, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY,
-                0x04 //
-            });
-        }
-
-        public void MultiInstance_SensorMultiLevelGet(byte instance)
-        {
-            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
-            this.ZWaveMessage(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                0x06, // ??
-                instance,
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL,
-                0x04 //
             });
         }
 
@@ -620,7 +532,7 @@ namespace ZWaveLib.Devices
         /// <param name="targetnodeid"></param>
         public void Association_Set(byte groupid, byte targetnodeid)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
                 (byte)Command.COMMAND_ASSOCIATION_SET, 
                 groupid, 
@@ -634,7 +546,7 @@ namespace ZWaveLib.Devices
         /// <param name="groupid"></param>
         public void Association_Get(byte groupid)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
                 (byte)Command.COMMAND_ASSOCIATION_GET, 
                 groupid 
@@ -648,7 +560,7 @@ namespace ZWaveLib.Devices
         /// <param name="targetnodeid"></param>
         public void Association_Remove(byte groupid, byte targetnodeid)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
                 (byte)Command.COMMAND_ASSOCIATION_REMOVE, 
                 groupid, 
@@ -661,7 +573,7 @@ namespace ZWaveLib.Devices
         /// </summary>
         public void Association_GroupingsGet()
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_ASSOCIATION,
                 (byte)Command.COMMAND_CONFIG_GET 
             });
@@ -673,7 +585,7 @@ namespace ZWaveLib.Devices
 
         public void Battery_Get()
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_BATTERY, 
                 (byte)Command.COMMAND_BASIC_GET 
             });
@@ -683,17 +595,17 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Wake Up
 
-        public void WakeUpGetInterval()
+        public void WakeUp_Get()
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
                 (byte)Command.COMMAND_CONFIG_GET 
             });
         }
 
-        public void WakeUpSetInterval(uint interval)
+        public void WakeUp_Set(uint interval)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
                 (byte)Command.COMMAND_CONFIG_SET,
                 (byte)((interval >> 16) & 0xff),
@@ -707,12 +619,12 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Configuration
 
-        public void ConfigParameterSet(byte parameter, Int32 paramValue)
+        public void Configuration_ParameterSet(byte parameter, Int32 paramValue)
         {
             int valueLength = 1;
             if (!nodeConfigParamsLength.ContainsKey(parameter))
             {
-                ConfigParameterGet(parameter);
+                Configuration_ParameterGet(parameter);
                 int retries = 0;
                 while (!nodeConfigParamsLength.ContainsKey(parameter) && retries++ <= 5)
                 {
@@ -747,28 +659,28 @@ namespace ZWaveLib.Devices
             msg[3] = (byte)valueLength;
             switch (valueLength)
             {
-            case 1:
+                case 1:
                 Array.Copy(value32, 3, msg, 4, 1);
                 break;
-            case 2:
+                case 2:
                 Array.Copy(value32, 2, msg, 4, 2);
                 break;
-            case 4:
+                case 4:
                 Array.Copy(value32, 0, msg, 4, 4);
                 break;
             }
-            this.ZWaveMessage(msg);
+            this.SendRequest(msg);
         }
 
-        public void ConfigParameterGet(byte parameter)
+        public void Configuration_ParameterGet(byte parameter)
         {
-            this.ZWaveMessage(new byte[] { 
+            this.SendRequest(new byte[] { 
                 (byte)CommandClass.COMMAND_CLASS_CONFIGURATION, 
                 (byte)Command.COMMAND_CONFIG_GET,
                 parameter
             });
         }
-        
+
         #endregion
 
         #region ZWave Command Class Manufacturer Specific
@@ -793,6 +705,149 @@ namespace ZWaveLib.Devices
 
         #endregion
 
+        #region ZWave Command Class MultiInstance/Channel
+
+        public void MultiInstance_GetCount(byte command_class) // eg. CommandClass.COMMAND_CLASS_SWITCH_BINARY
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)Command.COMMAND_MULTIINSTANCE_COUNT_GET, // 0x04 = GET, 0x05 = REPORT
+                command_class
+            });
+        }
+
+        public void MultiInstance_SwitchBinaryGet(byte instance)
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x0d, // ??
+                0x00, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
+                (byte)Command.COMMAND_MULTIINSTANCE_GET
+            });
+        }
+
+        public void MultiInstance_SwitchBinarySet(byte instance, int value)
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x0d, // 
+                0x00, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
+                (byte)Command.COMMAND_MULTIINSTANCE_SET,
+                byte.Parse(value.ToString())
+            });
+        }
+
+        public void MultiInstance_SwitchMultiLevelGet(byte instance)
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x0d, // ??
+                0x00, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
+                (byte)Command.COMMAND_MULTIINSTANCE_GET
+            });
+        }
+
+        public void MultiInstance_SwitchMultiLevelSet(byte instance, int value)
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x0d, // 
+                0x00, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
+                (byte)Command.COMMAND_MULTIINSTANCE_SET,
+                byte.Parse(value.ToString())
+            });
+        }
+
+        public void MultiInstance_SensorBinaryGet(byte instance)
+        {
+            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x06, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY,
+                0x04 //
+            });
+        }
+
+        public void MultiInstance_SensorMultiLevelGet(byte instance)
+        {
+            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                0x06, // ??
+                instance,
+                (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL,
+                0x04 //
+            });
+        }
+
+        #endregion
+
+        #region ZWave Command Class Meter
+
+        public virtual void Meter_Get()
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_METER, 
+                (byte)Command.COMMAND_METER_GET
+            });
+        }
+        public virtual void Meter_SupportedGet()
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_METER, 
+                (byte)Command.COMMAND_METER_SUPPORTED_GET
+            });
+        }
+        public virtual void Meter_Reset()
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_METER, 
+                (byte)Command.COMMAND_METER_RESET
+            });
+        }
+
+        #endregion
+        
+        #region ZWave Command Class Sensor Binary
+
+        public virtual void SensorBinary_Get()
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY, 
+                (byte)Command.COMMAND_SENSOR_BINARY_GET
+            });
+        }
+
+        #endregion
+
+        #region ZWave Command Class Sensor Multilevel
+
+        public virtual void SensorMultiLevel_Get()
+        {
+            this.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL, 
+                (byte)Command.COMMAND_SENSOR_MULTILEVEL_GET
+            });
+        }
+
+        #endregion
+
+
+
+        #endregion Public members
+
+
+        #region Private members
 
         internal byte SendMessage(byte[] message, bool disableCallback = false)
         {

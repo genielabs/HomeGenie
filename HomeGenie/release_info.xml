@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r447</Version>
+  <Version>1.00 beta r450</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Updated French locale files
-    - Added Hard Reset option to Z-Wave interface settings (UI)
-    - Added ZWaveLib Controller.SoftReset and Controller.HardReset functions
-    - Added Z-Wave.Me thermostat widget
-    - Added node timeout error message to ZWaveLib
-    - Fixed ZWaveLib bug affecting nodes discovery (issue #66)
-    - Small fix to ZWaveLib (issue #66)</ReleaseNote>
-  <ReleaseDate>2014-12-16T18:53:02.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Ssd 1306 OLED display and Eden Board OLED apps for Raspberry Pi
+  - Added new ZWave Api commands: SensorBinary.Get, SensorMultiLevel.Get, Meter.Get, Meter.SupportedGet, Meter.Reset
+  - Added "Meter.Power" parameter handling to Z-Wave MIG interface (Watt counter of a module)
+  - Added system configuration saving on interface settings change
+  - Added (ZWaveLib) duplicate message check for incoming messages
+  - Improved (ZWaveLib) nodes discovery/capability get process</ReleaseNote>
+  <ReleaseDate>2014-12-21T18:46:33.0000Z</ReleaseDate>
 </ReleaseInfo>
