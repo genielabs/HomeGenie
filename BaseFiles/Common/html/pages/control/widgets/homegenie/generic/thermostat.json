@@ -17,14 +17,16 @@
     var container = $(cuid);
     var widget = container.find('[data-ui-field=widget]');
     var controlpopup = widget.data('ControlPopUp');
+    var _this = this;
+    
     if (!controlpopup)
     {
-      var _this = this;
 
       container.find('[data-ui-field=controlpopup]').trigger('create');
       controlpopup = container.find('[data-ui-field=controlpopup]').popup();
       widget.data('ControlPopUp',  controlpopup);
-
+    }
+    
       widget.find('[data-ui-field=options]').on('click', function() {
         if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
         {
@@ -131,8 +133,6 @@
         _this.EditHeatSetPoint(controlpopup, module);
         HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Heat", function (data) { });
       });
-
-    }
 
     this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
 

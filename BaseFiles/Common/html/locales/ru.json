@@ -646,15 +646,15 @@
     "configure_program_saveconfirm":
         "Сохранить",
     "configure_interfaces_zwavehardreset":
-        "Hard Reset",
+        "Аппаратный сброс",
     "systemsettings_zwavehardreset_hardreset":
-        "Hard Reset Controller?",
+        "Аппатный сброс контроллера?",
     "systemsettings_zwavehardreset_hardresetprompt":
-        "Are you sure you want to hard reset Z-Wave controller?",
+        "Вы уверены, что хотите сделать аппаратный сброс Z-Wave контроллера?",
     "systemsettings_zwavehardreset_hardresetwarning":
-        "All nodes will be removed!",
+        "Все устройства будут удалены из сети!",
     "systemsettings_zwavehardreset_hardresetcancel":
-        "Cancel",
+        "Отмена",
     "systemsettings_zwavehardreset_hardresetproceed":
-        "Proceed"
+        "Продолжить"
 }

@@ -222,6 +222,39 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
   font-weight:bold;
 }
 
+.hg-indicator-level
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/level-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-alarm
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/alarm-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
+.hg-indicator-generic
+{
+  display: inline-block;
+  line-height:30px;
+  padding-left: 25px;
+  background: url("../images/indicators/generic-black.png") no-repeat scroll 0 6px transparent;
+  vertical-align: middle;
+  font-size:14pt;
+  font-weight:bold;
+}
+
 .hg-indicator-bulb
 {
   display: inline-block;
@@ -340,6 +373,21 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity,div.ui-bar-in
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance,div.ui-bar-inherit span.hg-indicator-luminance
 {
   background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm,div.ui-bar-inherit span.hg-indicator-alarm
+{
+  background: url("../images/indicators/alarm.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-generic,div.ui-bar-inherit span.hg-indicator-geniric
+{
+  background: url("../images/indicators/generic.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-level,div.ui-bar-inherit span.hg-indicator-level
+{
+  background: url("../images/indicators/level.png") no-repeat scroll 0 6px transparent;
 }
 
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb,div.ui-bar-inherit span.hg-indicator-bulb

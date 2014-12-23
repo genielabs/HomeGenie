@@ -34,6 +34,9 @@ namespace HomeGenie.Service.Constants
         public const string HomeGenie_System
             = "HomeGenie.System";
         //
+        public const string MigService_Interfaces
+            = "MIGService.Interfaces";
+        //
         public const string HomeAutomation_HomeGenie
             = "HomeAutomation.HomeGenie";
         public const string HomeAutomation_HomeGenie_Automation

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6233118D-CB72-47D9-9F48-A2D21414C1D2}</ProjectGuid>
     <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -28,14 +28,12 @@
     <ConsolePause>False</ConsolePause>
     <EnableCodeSigning>False</EnableCodeSigning>
     <CreatePackage>False</CreatePackage>
-    <CodeSigningKey>Mac Developer</CodeSigningKey>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="/bin/bash -c &quot;cp -r ${SolutionDir}/../HomeGenie/html .&quot;" workingdir="${TargetDir}/HomeGenie_Mac.app/Contents/MonoBundle" />
+        <Command type="AfterBuild" command="/bin/bash -c &quot;cp -r ${SolutionDir}/../BaseFiles/Common/html .&quot;" workingdir="${TargetDir}/HomeGenie_Mac.app/Contents/MonoBundle" />
       </CustomCommands>
     </CustomCommands>
-    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-    <I18n />
+    <UseSGen>false</UseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -56,6 +54,7 @@
         <Command type="AfterBuild" command="/bin/bash -c &quot;cp -r ${SolutionDir}/../HomeGenie/html .&quot;" workingdir="${TargetDir}/HomeGenie_Mac.app/Contents/MonoBundle" />
       </CustomCommands>
     </CustomCommands>
+    <UseSGen>false</UseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|x86' ">
     <DebugType>none</DebugType>
@@ -77,6 +76,7 @@
         <Command type="AfterBuild" command="/bin/bash -c &quot;cp -r ${SolutionDir}/../HomeGenie/html .&quot;" workingdir="${TargetDir}/HomeGenie_Mac.app/Contents/MonoBundle" />
       </CustomCommands>
     </CustomCommands>
+    <UseSGen>false</UseSGen>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

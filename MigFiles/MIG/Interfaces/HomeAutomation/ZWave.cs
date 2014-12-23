@@ -79,7 +79,11 @@ namespace MIG.Interfaces.HomeAutomation
                 { 501, "WakeUp.Get" },
                 { 502, "WakeUp.Set" },
 
-                // TODO: 600 slot free for future command set implementation
+                { 601, "SensorBinary.Get" },
+                { 602, "SensorMultiLevel.Get" },
+                { 605, "Meter.Get" },
+                { 606, "Meter.SupportedGet" },
+                { 607, "Meter.Reset" },
 
                 { 701, "Control.On" },
                 { 702, "Control.Off" },
@@ -126,6 +130,12 @@ namespace MIG.Interfaces.HomeAutomation
 
             public static readonly Command WAKEUP_GET = new Command(501);
             public static readonly Command WAKEUP_SET = new Command(502);
+
+            public static readonly Command SENSORBINARY_GET = new Command(601);
+            public static readonly Command SENSORMULTILEVEL_GET = new Command(602);
+            public static readonly Command METER_GET = new Command(605);
+            public static readonly Command METER_SUPPORTEDGET = new Command(606);
+            public static readonly Command METER_RESET = new Command(607);
 
             public static readonly Command CONTROL_ON = new Command(701);
             public static readonly Command CONTROL_OFF = new Command(702);
@@ -434,6 +444,31 @@ namespace MIG.Interfaces.HomeAutomation
                         break;
                     }
                 }
+                else if (command == Command.SENSORBINARY_GET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.SensorBinary_Get();
+                }
+                else if (command == Command.SENSORMULTILEVEL_GET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.SensorMultiLevel_Get();
+                }
+                else if (command == Command.METER_GET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.Meter_Get();
+                }
+                else if (command == Command.METER_SUPPORTEDGET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.Meter_SupportedGet();
+                }
+                else if (command == Command.METER_RESET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    node.Meter_Reset();
+                }
                 else if (command == Command.NODEINFO_GET)
                 {
                     controller.GetNodeInformationFrame((byte)int.Parse(nodeId));
@@ -475,23 +510,23 @@ namespace MIG.Interfaces.HomeAutomation
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     //byte[] value = new byte[] { (byte)int.Parse(option1) };//BitConverter.GetBytes(Int16.Parse(option1));
                     //Array.Reverse(value);
-                    node.ConfigParameterSet((byte)int.Parse(request.GetOption(0)), int.Parse(request.GetOption(1)));
+                    node.Configuration_ParameterSet((byte)int.Parse(request.GetOption(0)), int.Parse(request.GetOption(1)));
                 }
                 else if (command == Command.CONFIG_PARAMETERGET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.ConfigParameterGet((byte)int.Parse(request.GetOption(0)));
+                    node.Configuration_ParameterGet((byte)int.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.WAKEUP_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.WakeUpGetInterval();
+                    node.WakeUp_Get();
                 }
                 else if (command == Command.WAKEUP_SET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.WakeUpSetInterval(uint.Parse(request.GetOption(0)));
+                    node.WakeUp_Set(uint.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.CONTROL_ON)
@@ -705,7 +740,7 @@ namespace MIG.Interfaces.HomeAutomation
             //_unloadZWavePort();
             try
             {
-                controller.DiscoveryEvent -= DiscoveryEvent;
+                controller.ControllerEvent -= DiscoveryEvent;
                 controller.UpdateNodeParameter -= controller_UpdateNodeParameter;
                 controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
             }
@@ -734,7 +769,7 @@ namespace MIG.Interfaces.HomeAutomation
                 //
                 controller = new Controller(zwavePort);
                 //
-                controller.DiscoveryEvent += DiscoveryEvent;
+                controller.ControllerEvent += DiscoveryEvent;
                 controller.UpdateNodeParameter += controller_UpdateNodeParameter;
                 controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
@@ -780,11 +815,11 @@ namespace MIG.Interfaces.HomeAutomation
         */
 
         // fired either at startup time and after a new z-wave node has been added to the controller
-        private void DiscoveryEvent(object sender, DiscoveryEventArgs e)
+        private void DiscoveryEvent(object sender, ControllerEventArgs e)
         {
             switch (e.Status)
             {
-            case DiscoveryStatus.DISCOVERY_START:
+            case ControllerStatus.DISCOVERY_START:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -793,7 +828,7 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Discovery Started"
                 });
                 break;
-            case DiscoveryStatus.DISCOVERY_END:
+            case ControllerStatus.DISCOVERY_END:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -803,7 +838,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_ADDED:
+            case ControllerStatus.NODE_ADDED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -814,7 +849,7 @@ namespace MIG.Interfaces.HomeAutomation
                 lastAddedNode = e.NodeId;
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_UPDATED:
+            case ControllerStatus.NODE_UPDATED:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -824,7 +859,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 //if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_REMOVED:
+            case ControllerStatus.NODE_REMOVED:
                 lastRemovedNode = e.NodeId;
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -835,7 +870,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case DiscoveryStatus.NODE_ERROR:
+            case ControllerStatus.NODE_ERROR:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -856,6 +891,9 @@ namespace MIG.Interfaces.HomeAutomation
             {
             case ParameterType.PARAMETER_WATTS:
                 path = ModuleParameters.MODPAR_METER_WATTS;
+                break;
+            case ParameterType.PARAMETER_POWER:
+                path = ModuleParameters.MODPAR_METER_POWER;
                 break;
             case ParameterType.PARAMETER_BATTERY:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {

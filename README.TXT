@@ -108,7 +108,7 @@ BUILT-IN INTERFACES AND PROTOCOL DRIVERS
 - Insteon  Insteon PLM 2413S/2413U
 - LIRC	   Any LIRC compatible IR transceiver
 - GPIO     Raspberry Pi GPIO 1Wire/SPI/I2C
-- Arduino  Integrated Arduino development
+- Arduino  Integrated Arduino(TM) development
 - V4L      Video4Linux camera video driver
 - Serial   Generic serial port interface
 - TCP      Generic TCP interface

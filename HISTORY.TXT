@@ -1,5 +1,15 @@
 ﻿RELEASE HISTORY
 
+21/12/2014 1.00 beta rev 450
+    - Added Ssd 1306 OLED display and Eden Board OLED apps for Raspberry Pi
+    - Added new ZWave Api commands: SensorBinary.Get, SensorMultiLevel.Get, Meter.Get, Meter.SupportedGet, Meter.Reset
+    - Added "Meter.Power" parameter handling to Z-Wave MIG interface (Watt counter of a module)
+    - Added system configuration saving on interface settings change
+
+19/12/2014 1.00 beta rev 449
+    - Added (ZWaveLib) duplicate message check for incoming messages
+    - Improved (ZWaveLib) nodes discovery/capability get process
+
 16/12/2014 1.00 beta rev 447
     - Small fix to ZWaveLib (issue #66)
     - Updated Windows setup packager

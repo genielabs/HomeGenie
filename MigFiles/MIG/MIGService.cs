@@ -353,6 +353,7 @@ namespace MIG
             var request = (WebServiceGatewayRequest)gwRequest;
             var context = request.Context;
             string requestedUrl = request.UrlRequest;
+            bool wroteBytes = false;
 
             var migRequest = new MIGClientRequest()
             {
@@ -373,9 +374,28 @@ namespace MIG
             var command = new MIGInterfaceCommand(migCommand);
 
 
-            // MIGService namespace Web API
+            //PREPROCESS request: if domain != html, execute command
+            if (ServiceRequestPreProcess != null)
+            {
+                ServiceRequestPreProcess(migRequest, command);
+                // request was handled by preprocess listener
+                if (!string.IsNullOrEmpty(command.Response))
+                {
+                    // simple automatic json response type detection
+                    if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
+                    {
+                        // TODO: check the reason why this cause ajax/json error on some browser
+                        context.Response.ContentType = "application/json";
+                        context.Response.ContentEncoding = defaultWebFileEncoding;
+                    }
+                    WebServiceUtility.WriteStringToContext(context, command.Response);
+                    return;
+                }
+            }
+
             if (command.Domain == "MIGService.Interfaces")
             {
+                // This is a MIGService namespace Web API
                 context.Response.ContentType = "application/json";
                 switch (command.Command)
                 {
@@ -394,7 +414,7 @@ namespace MIG
                     //
                     if (InterfacePropertyChanged != null)
                     {
-                        InterfacePropertyChanged(new InterfacePropertyChangedAction(){
+                        InterfacePropertyChanged(new InterfacePropertyChangedAction() {
                             Domain = "MIGService.Interfaces",
                             SourceId = command.NodeId,
                             SourceType = "MIG Interface",
@@ -404,7 +424,10 @@ namespace MIG
                     }
                     break;
                 case "IsEnabled.Get":
-                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"" + (configuration.GetInterface(command.NodeId).IsEnabled ? "1" : "0") + "\" }]");
+                    WebServiceUtility.WriteStringToContext(
+                        context,
+                        "[{ \"ResponseValue\" : \"" + (configuration.GetInterface(command.NodeId).IsEnabled ? "1" : "0") + "\" }]"
+                    );
                     break;
                 case "Options.Set":
                     Interfaces[command.NodeId].SetOption(command.GetOption(0), command.GetOption(1));
@@ -423,39 +446,18 @@ namespace MIG
                     break;
                 case "Options.Get":
                     string optionValue = Interfaces[command.NodeId].GetOption(command.GetOption(0)).Value;
-                    WebServiceUtility.WriteStringToContext(context, "[{ \"ResponseValue\" : \"" + Uri.EscapeDataString(optionValue) + "\" }]");
+                    WebServiceUtility.WriteStringToContext(
+                        context,
+                        "[{ \"ResponseValue\" : \"" + Uri.EscapeDataString(optionValue) + "\" }]"
+                    );
                     break;
                 default:
                     break;
                 }
-                return;
             }
-
-
-            //PREPROCESS request: if domain != html, execute command
-            if (ServiceRequestPreProcess != null)
+            else if (requestedUrl.StartsWith(webServiceConfig.BaseUrl))
             {
-                ServiceRequestPreProcess(migRequest, command);
-                // request was handled by preprocess listener
-                if (!string.IsNullOrEmpty(command.Response))
-                {
-                    // simple automatic json response type detection
-					if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
-					{
-						// TODO: check the reason why this cause ajax/json error on some browser
-						context.Response.ContentType = "application/json";
-						context.Response.ContentEncoding = defaultWebFileEncoding;
-					}
-                    WebServiceUtility.WriteStringToContext(context, command.Response);
-                    return;
-                }
-            }
-
-            // TODO: move dupe code to WebServiceUtility
-
-            //if request begins /hg/html, process
-            if (requestedUrl.StartsWith(webServiceConfig.BaseUrl))
-            {
+                // If request begins /hg/html, process as standard Web request
                 string requestedFile = GetWebFilePath(requestedUrl);
                 if (!System.IO.File.Exists(requestedFile))
                 {
@@ -544,22 +546,29 @@ namespace MIG
                                                 fileName = GetWebFilePath(fileName);
                                                 //
                                                 Encoding fileEncoding = DetectWebFileEncoding(fileName);
-                                                if (fileEncoding == null) fileEncoding = defaultWebFileEncoding;
+                                                if (fileEncoding == null)
+                                                    fileEncoding = defaultWebFileEncoding;
                                                 body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
                                             }
                                         }
                                         catch
                                         {
-                                            body = ls + "<h5 style=\"color:red\">Error processing '" + cs.Replace("{", "[").Replace("}", "]") + "'</h5>" + rs;
+                                            body = ls + "<h5 style=\"color:red\">Error processing '" + cs.Replace(
+                                                "{",
+                                                "["
+                                            ).Replace(
+                                                "}",
+                                                "]"
+                                            ) + "'</h5>" + rs;
                                         }
                                         tagFound = true;
                                     }
                                 }
                             } while (tagFound); // pre processor tag found
                             //
-							if (webServiceConfig.CacheEnable)
+                            if (webServiceConfig.CacheEnable)
                             {
-                               PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
+                                PutWebFileCache(requestedFile, body, context.Response.ContentEncoding);
                             }
                             //
                             WebServiceUtility.WriteStringToContext(context, body);
@@ -578,49 +587,51 @@ namespace MIG
                     }
                 }
             }
-
-            object responseObject = null;
-            bool wroteBytes = false;
-            //domain == HomeAutomation._Interface_ call InterfaceControl
-            var result = (from miginterface in Interfaces.Values
+            else
+            {
+                // Try processing as MigInterface Api or Web Service Dynamic Api
+                object responseObject = null;
+                //domain == HomeAutomation._Interface_ call InterfaceControl
+                var result = (from miginterface in Interfaces.Values
                           let ns = miginterface.GetType().Namespace
                           let domain = ns.Substring(ns.LastIndexOf(".") + 1) + "." + miginterface.GetType().Name
                           where (command.Domain != null && command.Domain.StartsWith(domain))
                           select miginterface).FirstOrDefault();
-            if (result != null)
-            {
-                try
+                if (result != null)
                 {
-                    responseObject = result.InterfaceControl(command);
+                    try
+                    {
+                        responseObject = result.InterfaceControl(command);
+                    }
+                    catch (Exception ex)
+                    {
+                        // TODO: report internal mig interface  error
+                        context.Response.StatusCode = 500;
+                        responseObject = ex.Message + "\n" + ex.StackTrace;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    // TODO: report internal mig interface  error
-                    context.Response.StatusCode = 500;
-                    responseObject = ex.Message + "\n" + ex.StackTrace;
-                }
-            }
-            //
-            if (responseObject == null || responseObject.Equals(String.Empty))
-            {
-                responseObject = WebServiceDynamicApiCall(command);
-            }
-            //
-            if (responseObject != null && responseObject.GetType().Equals(typeof(string)))
-            {
-                command.Response = (string)responseObject;
                 //
-                // simple automatic json response type detection
-                if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
+                if (responseObject == null || responseObject.Equals(String.Empty))
                 {
-                    context.Response.ContentType = "application/json";
-                    context.Response.ContentEncoding = defaultWebFileEncoding;
+                    responseObject = WebServiceDynamicApiCall(command);
                 }
-            }
-            else
-            {
-                WebServiceUtility.WriteBytesToContext(context, (Byte[])responseObject);
-                wroteBytes = true;
+                //
+                if (responseObject != null && responseObject.GetType().Equals(typeof(string)))
+                {
+                    command.Response = (string)responseObject;
+                    //
+                    // simple automatic json response type detection
+                    if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
+                    {
+                        context.Response.ContentType = "application/json";
+                        context.Response.ContentEncoding = defaultWebFileEncoding;
+                    }
+                }
+                else
+                {
+                    WebServiceUtility.WriteBytesToContext(context, (Byte[])responseObject);
+                    wroteBytes = true;
+                }
             }
             //
             //POSTPROCESS 

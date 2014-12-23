@@ -115,28 +115,19 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_METER)
+            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_METER && cmdType == (byte)Command.COMMAND_METER_REPORT)
             {
                 //UNHANDLED: 01 14 00 04 08 04 0E 32 02 21 74 00 00 1E BB 00 00 00 00 00 00 2D
                 //           01 14 00 04 00 0A 0E 32 02 21 64 00 00 0C 06 00 00 00 00 00 00 94
                 //
-                if (message.Length > 14 && message[4] == 0x00)
-                {
-                    // CLASS METER
-                    //
-                    double wattsRead = ((double)int.Parse(
-                                           message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
-                                           System.Globalization.NumberStyles.HexNumber
-                                       )) / 1000D;
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
-                    //
-                    processed = true;
-                }
-                else if (message.Length > 14 && message[4] == 0x08)
-                {
-                    //TODO: complete here...
-                    processed = true;
-                }
+                // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
+                // TODO: the code below parse always as Electric type 
+                double wattsRead = ((double)int.Parse(
+                                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
+                                       System.Globalization.NumberStyles.HexNumber
+                                   )) / 1000D;
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
+                processed = true;
             }
             else if (cmdClass == (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE)
             {
@@ -368,9 +359,14 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             }
             else if (key == (byte)ZWaveSensorParameter.POWER)
             {
+                // TODO: this might be very buggy.... to be completed
                 sensorValue.Parameter = ZWaveSensorParameter.POWER;
-                sensorValue.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0) / 10D;
-                sensorValue.EventType = ParameterType.PARAMETER_WATTS;
+                //sensorValue.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0) / 10D;
+                sensorValue.Value = ((double)int.Parse(
+                    message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
+                    System.Globalization.NumberStyles.HexNumber
+                    )) / 1000D;
+                sensorValue.EventType = ParameterType.PARAMETER_POWER;
             }
             else
             {
