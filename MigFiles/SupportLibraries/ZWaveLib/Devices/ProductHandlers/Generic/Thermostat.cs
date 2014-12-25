@@ -247,5 +247,20 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             });
         }
 
+        public virtual void Thermostat_OperatingStateGet()
+        {
+            this.nodeHost.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE, 
+                (byte)Command.COMMAND_BASIC_GET
+            });
+        }
+
+        public virtual void Thermostat_OperatingStateReport()
+        {
+            this.nodeHost.SendRequest(new byte[] { 
+                (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE, 
+                (byte)Command.COMMAND_BASIC_REPORT
+            });
+        }
     }
 }
