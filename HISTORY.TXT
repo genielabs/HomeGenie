@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+28/12/2014 1.00 beta rev 451
+    - Added Z-Wave automation commands "Thermostat.OperatingStateGet" and "Thermostat.OperatingStateReport" (pull request #79)
+    - Fixed module settings not opening from Control page before going to Group/Modules page (pull request #79)
+    - Fixed bug in Arduino program import
+    - Fixed issue #81
+    
 21/12/2014 1.00 beta rev 450
     - Added Ssd 1306 OLED display and Eden Board OLED apps for Raspberry Pi
     - Added new ZWave Api commands: SensorBinary.Get, SensorMultiLevel.Get, Meter.Get, Meter.SupportedGet, Meter.Reset

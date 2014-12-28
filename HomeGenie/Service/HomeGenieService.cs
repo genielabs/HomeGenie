@@ -813,6 +813,7 @@ namespace HomeGenie.Service
                         Name = propertyChangedAction.Path,
                         Value = propertyChangedAction.Value.ToString()
                     });
+                    parameter = Utility.ModuleParameterGet(module, propertyChangedAction.Path);
                 }
                 else
                 {

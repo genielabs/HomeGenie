@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r450</Version>
+  <Version>1.00 beta r451</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added Ssd 1306 OLED display and Eden Board OLED apps for Raspberry Pi
-  - Added new ZWave Api commands: SensorBinary.Get, SensorMultiLevel.Get, Meter.Get, Meter.SupportedGet, Meter.Reset
-  - Added "Meter.Power" parameter handling to Z-Wave MIG interface (Watt counter of a module)
-  - Added system configuration saving on interface settings change
-  - Added (ZWaveLib) duplicate message check for incoming messages
-  - Improved (ZWaveLib) nodes discovery/capability get process</ReleaseNote>
-  <ReleaseDate>2014-12-21T18:46:33.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed bug in Arduino program import
+  - Added Z-Wave automation commands "Thermostat.OperatingStateGet" and "Thermostat.OperatingStateReport" (pull request #79)
+  - Fixed module settings not opening from Control page before going to Group/Modules page (pull request #79)
+  - Fixed issue #81</ReleaseNote>
+  <ReleaseDate>2014-12-28T15:10:21.0000Z</ReleaseDate>
 </ReleaseInfo>
