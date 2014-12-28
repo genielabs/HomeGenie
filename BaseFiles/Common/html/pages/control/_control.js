@@ -219,6 +219,9 @@ HG.WebApp.Control.RenderModule = function () {
                             myinstance.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
                             $('#' + rendermodule.ElementId).data('homegenie.widget', myinstance);
                             rendermodule.Module.WidgetInstance = myinstance;
+                            $('#module_options_button').unbind('click').bind('click.widget', function (event) {
+                                HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
+                            });
                         } catch (e) {
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
