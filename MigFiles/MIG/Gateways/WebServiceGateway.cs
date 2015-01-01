@@ -191,7 +191,7 @@ namespace MIG.Gateways
                         if (url == "" || url.TrimEnd('/') == baseUrl.TrimEnd('/'))
                         {
                             // default home redirect
-                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html?" + new TimeSpan(DateTime.UtcNow.Ticks).TotalMilliseconds);
+                            response.Redirect("/" + baseUrl.TrimEnd('/') + "/index.html?" + new TimeSpan(DateTime.UtcNow.Ticks).TotalMilliseconds + "#page_control");
                             response.Close();
                         }
                         else

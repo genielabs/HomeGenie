@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+30/12/2014 1.00 beta rev 452
+    - Added History object to ModuleParameter (issue #80)
+    - Added "Eden Oled Menu" program
+    - Updated "SSd1306 OLED" and "Eden Oled Display" programs
+    - Fixed GPIO program bug (was firing multiple Status.Level change events if restarted)
+    - Added When.ProgramStopping helper function
+    - Changed default start page to Control Dashboard
+    - Fixed empty "html" folder creation in root directory during system update (issue #83)
+    - Added password hiding in program configuration fields and module feature fields (issue #64)
+    - Added support for Z-Wave ZME_UZB1 by adding /dev/ttyACM0 to the port selection list (Raspberry Pi)
+
 28/12/2014 1.00 beta rev 451
     - Added Z-Wave automation commands "Thermostat.OperatingStateGet" and "Thermostat.OperatingStateReport" (pull request #79)
     - Fixed module settings not opening from Control page before going to Group/Modules page (pull request #79)

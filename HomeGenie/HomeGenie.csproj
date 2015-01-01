@@ -214,6 +214,7 @@
     <Compile Include="Service\StringCipher.cs" />
     <Compile Include="Automation\ArduinoAppFactory.cs" />
     <Compile Include="Automation\Scripting\UdpClientHelper.cs" />
+    <Compile Include="Data\ValueHistory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

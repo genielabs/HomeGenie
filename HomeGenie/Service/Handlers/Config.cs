@@ -93,9 +93,10 @@ namespace HomeGenie.Service.Handlers
                                 portList.Add(serialPorts[p]);
                             }
                         }
-                        if (Raspberry.Board.Current.IsRaspberryPi && !portList.Contains("/dev/ttyAMA0"))
+                        if (Raspberry.Board.Current.IsRaspberryPi)
                         {
-                            portList.Add("/dev/ttyAMA0");
+                            if (!portList.Contains("/dev/ttyAMA0")) portList.Add("/dev/ttyAMA0"); // RaZberry
+                            if (!portList.Contains("/dev/ttyACM0")) portList.Add("/dev/ttyACM0"); // ZME_UZB1
                         }
                         migCommand.Response = JsonHelper.GetSimpleResponse(JsonConvert.SerializeObject(portList));
                     }

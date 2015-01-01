@@ -73,6 +73,7 @@ namespace HomeGenie.Automation
         // System events handlers
         internal Func<bool> SystemStarted = null;
         internal Func<bool> SystemStopping = null;
+        internal Func<bool> Stopping = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler = null;
         internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler = null;
         internal List<string> registeredApiCalls = new List<string>();
@@ -497,6 +498,10 @@ namespace HomeGenie.Automation
         internal void Stop()
         {
             this.IsRunning = false;
+            if (this.Stopping != null)
+            {
+                try { Stopping(); } catch { }
+            }
             this.Reset();
             //
             if (ProgramThread != null)

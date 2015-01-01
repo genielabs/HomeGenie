@@ -35,6 +35,7 @@ namespace HomeGenie.Data
     public class ModuleParameter
     {
         [NonSerialized]
+        private ValueHistory history;
         private ValueStatistics statistics;
         private string parameterValue;
         //
@@ -60,6 +61,16 @@ namespace HomeGenie.Data
             }
         }
         //
+        [XmlIgnore]
+        public ValueHistory History
+        {
+            get
+            {
+                if (history == null) history = new ValueHistory();
+                return history;
+            }
+        }
+        //
         public string Name { get; set; }
         public string Value
         {
@@ -69,23 +80,22 @@ namespace HomeGenie.Data
             }
             set
             {
-                //TODO: find a better solution for "Meter.Watts" case
-                //if (_value != value || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
+                if ((!string.IsNullOrEmpty(parameterValue) && parameterValue != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
                 {
-                    if ((!string.IsNullOrEmpty(parameterValue) && parameterValue != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
-                    {
-                        LastValue = parameterValue;
-                        LastUpdateTime = UpdateTime.ToUniversalTime();
-                    }
-                    UpdateTime = DateTime.UtcNow;
-                    parameterValue = value;
-                    //
-                    // can we add this value for statistics?
-                    double v;
-                    if (value != "" && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
-                    {
-                        Statistics.AddValue(v, this.UpdateTime);
-                    }
+                    LastValue = parameterValue;
+                    LastUpdateTime = UpdateTime.ToUniversalTime();
+                }
+                UpdateTime = DateTime.UtcNow;
+                parameterValue = value;
+                //
+                // add value to the history
+                History.AddValue(value, this.UpdateTime);
+                //
+                // can we add this value for statistics?
+                double v;
+                if (!string.IsNullOrEmpty(value) && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
+                {
+                    Statistics.AddValue(v, this.UpdateTime);
                 }
             }
         }

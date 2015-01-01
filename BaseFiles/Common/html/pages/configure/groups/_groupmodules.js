@@ -536,9 +536,11 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
         var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
         if (mp.ProgramIndex == programid) {
             var featurecb = '';
-            if (mp.FieldType == "text") {
+            if (mp.FieldType == 'text') {
+                var inputType = 'text';
+                if (mp.Description.toLowerCase().indexOf('password') >= 0) inputType = 'password';
                 featurecb = '<label for="feature-' + p + '">' + mp.Description + '</label>';
-                featurecb+= '<div style="position:relative;"><div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input name="option-' + p + '" id="feature-' + p + '" style="width:98%;" data-role="none" onchange="HG.WebApp.GroupModules.FeatureUpdate(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\', this.value)" type="text" value="' + mp.Value + '" data-mini="true" /></div>';
+                featurecb+= '<div style="position:relative;"><div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input name="option-' + p + '" id="feature-' + p + '" style="width:98%;" data-role="none" onchange="HG.WebApp.GroupModules.FeatureUpdate(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\', this.value)" type="' + inputType + '" value="' + mp.Value + '" data-mini="true" /></div>';
                 //featurecb+= '<div data-bind-field="feature-' + p + '" class="hg-wizard-capturebutton" href="#" onclick="automationpage_WizardCaptureFieldToggle($(this), \'Property\')">&lt;&lt;</div></div>';
                 $('#module_programs_features').append(featurecb);
             }
@@ -547,7 +549,7 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
     for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
         var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
         if (mp.ProgramIndex == programid) {
-            if (mp.FieldType == "checkbox") {
+            if (mp.FieldType == 'checkbox') {
                 var checked = '';
                 var featurecb = '';
                 if (mp != null && mp.Value == 'On') {

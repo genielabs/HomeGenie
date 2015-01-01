@@ -329,9 +329,12 @@ namespace HomeGenie.Service
                 {
                     bool doNotCopy = false;
 
-                    string destinationFolder = Path.GetDirectoryName(file).Replace(Path.Combine("_update", "files", "HomeGenie"), "");
-                    if (destinationFolder != "" && !Directory.Exists(destinationFolder)) Directory.CreateDirectory(destinationFolder);
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
+                    string destinationFolder = Path.GetDirectoryName(file).Replace(Path.Combine("_update", "files", "HomeGenie"), "").TrimStart('/').TrimStart('\\');
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/').TrimStart('\\');
 
                     // backup current file before replacing it
                     if (File.Exists(destinationFile))
@@ -398,7 +401,7 @@ namespace HomeGenie.Service
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");
-                            if (!Directory.Exists(Path.GetDirectoryName(destinationFile)))
+                            if (!String.IsNullOrWhiteSpace(Path.GetDirectoryName(destinationFile)) && !Directory.Exists(Path.GetDirectoryName(destinationFile)))
                             {
                                 try
                                 {
