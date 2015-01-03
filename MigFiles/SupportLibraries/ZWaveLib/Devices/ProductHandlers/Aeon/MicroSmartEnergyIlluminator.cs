@@ -28,7 +28,7 @@ using ZWaveLib.Devices.ProductHandlers.Generic;
 
 namespace ZWaveLib.Devices.ProductHandlers.Aeon
 {
-    class MicroSmartEnergyIlluminator : Dimmer
+    public class MicroSmartEnergyIlluminator : Dimmer
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)

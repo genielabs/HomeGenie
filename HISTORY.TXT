@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+03/01/2015 1.00 beta rev 453
+    - Fixed c# automation programs not starting after restoring from a backup (issue #86)
+    - Added ModuleParameter.Wait(double seconds) to wait a parameter update for a given time (issue #72)
+    - Deprecated ModuleParameter.LastValue, LastDecimalValue, ValueIncrement (moved to ModuleParameter.Statistics)
+    - Deprecated ModuleParameter.History and moved its functionalities to ModuleParameter.Statistics (issue #80)
+    - Fixed bug introduced with r452 and that was preventing modules config from being saved
+    - Fixed parsing of negative sensor values in ZWaveLib
+    - Fixed "NaN" issue in group values indicator for locales using "," as decimal separator
+    - Added modules.xml fields encryption
+    - Fixed missing scheduler config restore from a backup
+
 30/12/2014 1.00 beta rev 452
     - Added History object to ModuleParameter (issue #80)
     - Added "Eden Oled Menu" program

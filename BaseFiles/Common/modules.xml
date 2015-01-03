@@ -9,39 +9,27 @@
     <Properties>
       <ModuleParameter>
         <Name>FavouritesLink.Url</Name>
-        <Value>http://www.homegenie.it/docs/doityourself.php</Value>
+        <Value>dtYEgv0vZ5T3NeZhZD9OXwdXbj1zTH6CONPfHB1b7UKXK3qyQQ1isdMDbupOD6p4</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:04:08.144157Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:04:08.144148+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093021Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:04:08.143906Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:04:08.142648+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093215Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969289Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973504+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:40.007618Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973004+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -55,39 +43,27 @@
     <Properties>
       <ModuleParameter>
         <Name>FavouritesLink.Url</Name>
-        <Value>http://www.homegenie.it/docs/quickstart.php</Value>
+        <Value>dtYEgv0vZ5T3NeZhZD9OX8QyQ/zTYFOSjCnNHTd7si1LbcsTOyjLwaF7pz3fc7ZY</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:05:29.625054Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:05:29.625039+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093404Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:05:29.625023Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:05:29.625016+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093581Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969303Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973528+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:40.007646Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.97303+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -101,39 +77,27 @@
     <Properties>
       <ModuleParameter>
         <Name>FavouritesLink.Url</Name>
-        <Value>http://www.homegenie.it/forum/</Value>
+        <Value>dtYEgv0vZ5T3NeZhZD9OX54ux5W82wufcF4PJ6VOP5o=</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:07:56.855844Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:07:56.855836+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093759Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:07:56.855806Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:07:56.855792+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.093935Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969319Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973553+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:40.007672Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973051+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -147,39 +111,27 @@
     <Properties>
       <ModuleParameter>
         <Name>FavouritesLink.Url</Name>
-        <Value>https://plus.google.com/+HomegenieItNow</Value>
+        <Value>5BOwzpBQ9VBL1Ge/a1HawZhFygJCYHK45g/0DXYIAJ9X9TnN/4D58r5QbS2Cb2Td</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:10:45.518458Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:10:45.518454+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.094121Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:10:45.518437Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:10:45.518429+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.094298Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969333Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973576+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:40.007699Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973071+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -196,18 +148,12 @@
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969348Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973601+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/link</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:40.007727Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.973091+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -221,30 +167,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.201328Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:45.648215Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.094475Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>6</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969023Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/program</Value>
         <Description />
         <UpdateTime>2014-04-11T18:45:15.535632Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>homegenie/generic/program</LastValue>
-        <LastUpdateTime>2014-04-11T15:54:02.6774717Z</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -258,30 +195,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.245488Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:47.655594Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.094653Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>7</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969036Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/program</Value>
         <Description />
         <UpdateTime>2014-04-11T19:26:31.5647654Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>homegenie/generic/program</LastValue>
-        <LastUpdateTime>2014-04-11T18:48:33.4117521Z</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -295,30 +223,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.295205Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:09.283126Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.094831Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>8</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969443Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-25T23:30:38.328809+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/program</Value>
         <Description />
         <UpdateTime>2014-07-25T21:30:38.336888Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-25T23:30:38.328821+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -332,30 +251,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:34.503754Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.247569Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.095009Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>16</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969046Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:02.6764765Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:02.6764765+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -369,48 +279,33 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.BridgeAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>Philips Hue Bridge IP Address</Description>
-        <UpdateTime>2014-03-31T23:14:41.1705437Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:41.1705437+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.095187Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.BridgeUsername</Name>
-        <Value>newdeveloper</Value>
+        <Value>pPx+IKgjmjrO7CTwAMY9jg==</Value>
         <Description>Philips Hue Bridge API username</Description>
-        <UpdateTime>2014-03-31T23:14:41.1705437Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:41.1705437+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.095365Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:35.018472Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.247797Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.095543Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969056Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:02.7024741Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:02.7024741+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -424,48 +319,33 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.HomeGenieMiLightAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>MiLight IP Address</Description>
-        <UpdateTime>2014-12-04T14:59:46.775169Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-12-04T15:59:46.775169+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.09572Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.HomeGenieMiLightPort</Name>
-        <Value>8899</Value>
+        <Value>7Ftf/+3CiqlE4Tt0HeeR4w==</Value>
         <Description>MiLight UDP Port</Description>
-        <UpdateTime>2014-12-04T14:59:46.775182Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-12-04T15:59:46.775181+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.095898Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Disabled</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-12-04T15:00:00.007479Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-12-04T14:59:46.776333Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096075Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>28</Value>
         <Description />
         <UpdateTime>2014-12-04T14:59:46.776172Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-12-04T15:59:46.764784+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-12-04T14:59:46.768879Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-12-04T15:59:46.764804+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -482,144 +362,96 @@
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513978Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Astronomy.Sunset</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513974Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.City</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513981Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.Description</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513998Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.DisplayLocation</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513991Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.IconUrl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513994Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.TemperatureC</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513984Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Conditions.TemperatureF</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T22:53:35.513987Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
-        <Value>?</Value>
+        <Value>VGqXv2FlOtueeEb8myx1bw==</Value>
         <Description>Weather Underground Key</Description>
-        <UpdateTime>2014-04-02T14:05:20.1618527Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096254Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.InputDisplayCelsius</Name>
-        <Value>TRUE</Value>
+        <Value>ixkAM/uq24w4FhL1vR+sFg==</Value>
         <Description>Display Temperature in degrees Celsius - TRUE or FALSE</Description>
-        <UpdateTime>2014-04-02T14:05:20.1618527Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096432Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Language</Name>
-        <Value>EN</Value>
+        <Value>Cn6VRtmascV3JQiOUKb3YQ==</Value>
         <Description>Language</Description>
-        <UpdateTime>2014-04-02T14:05:20.1618527Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096609Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Location</Name>
-        <Value>autoip</Value>
+        <Value>9zHIW0h+bCZIpaI9n1F1kg==</Value>
         <Description>City name</Description>
-        <UpdateTime>2014-04-02T14:05:20.1618527Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096787Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
-        <Value>30</Value>
+        <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
         <Description>Update interval (minutes)</Description>
-        <UpdateTime>2014-04-02T14:05:20.1618527Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1618527+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.096964Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:35.514555Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.248004Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.097142Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>34</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969134Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:20.1628516+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>weather/wunderground/conditions</Value>
         <Description />
         <UpdateTime>2014-04-11T19:26:31.5697656Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>weather/wunderground/conditions</LastValue>
-        <LastUpdateTime>2014-04-11T18:48:33.4237492Z</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -633,30 +465,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:55:07.356388Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Running</LastValue>
-        <LastUpdateTime>2014-11-13T22:55:07.353728Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.09732Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>35</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969144Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:04.6680764Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:04.6680764+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -670,48 +493,33 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.249659Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T16:35:28.897659Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.097497Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Distance</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:20.880994Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:20.880988+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.StatusMessage</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:20.881Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:20.880998+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>37</Value>
         <Description />
         <UpdateTime>2014-11-13T16:35:20.882024Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:20.861528+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <UpdateTime>2014-11-13T16:35:20.872024Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:20.861542+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -725,57 +533,39 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.PollFrequency</Name>
-        <Value>10</Value>
+        <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
         <Description>Pause between updates (seconds)</Description>
-        <UpdateTime>2014-11-13T16:35:05.459219Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:05.459218+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.097676Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:54:55.631334Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T22:54:55.619202Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.097853Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value></Value>
+        <Value />
         <Description />
         <UpdateTime>2014-11-13T22:54:55.631275Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:05.491757+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Spi.Locked</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:54:55.616032Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:05.477505+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.098031Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>38</Value>
         <Description />
         <UpdateTime>2014-11-13T22:54:55.599764Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:05.337446+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:05.337468Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:05.337467+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -789,48 +579,33 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.LedsNumber</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description>Number of chained RGB leds</Description>
-        <UpdateTime>2014-11-13T09:16:41.493516Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:16:41.493515+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.098213Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.295698Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T09:16:41.542825Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.098392Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value></Value>
+        <Value />
         <Description />
         <UpdateTime>2014-11-13T09:16:41.552427Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:16:41.552412+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>62</Value>
         <Description />
         <UpdateTime>2014-11-13T09:16:41.509906Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:16:41.477204+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T09:16:41.477229Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:16:41.477228+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -844,75 +619,51 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
-        <Value>600</Value>
+        <Value>aLfrhpFxSdGkIMZWZFvWjQ==</Value>
         <Description>Update Interval (seconds)</Description>
-        <UpdateTime>2014-11-13T16:35:38.421771Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.42177+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.09857Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.250012Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T16:35:38.427481Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.098747Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Runtime.Error</Name>
-        <Value></Value>
+        <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:38.440737Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.440723+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Humidity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:38.421757Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.421753+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:38.421762Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.42176+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.TemperatureF</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T16:35:38.421766Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.421765+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>70</Value>
         <Description />
         <UpdateTime>2014-11-13T16:35:38.422903Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.40172+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/sensor</Value>
         <Description />
         <UpdateTime>2014-11-13T16:35:38.412532Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T17:35:38.401733+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -926,138 +677,93 @@
     <Properties>
       <ModuleParameter>
         <Name>Astronomy.Sunrise</Name>
-        <Value>07:45:53</Value>
+        <Value>JwuB3jCqRo9WFdGP+v0QIw==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.619268Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>07:45:53</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.707596Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.098926Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Astronomy.Sunset</Name>
-        <Value>18:05:25</Value>
+        <Value>/ybxswE8vqPoDQOtIbVYUg==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.617516Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>18:05:25</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.704949Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099101Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Latitude</Name>
-        <Value>42.50</Value>
+        <Value>+16Q0RwqS+CiNhONrIqtSQ==</Value>
         <Description>Location latitude</Description>
-        <UpdateTime>2014-04-02T14:05:17.477405Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:17.477405+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099277Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Longitude</Name>
-        <Value>12.50</Value>
+        <Value>cZMqvcgpLt/m6QdAFckriQ==</Value>
         <Description>Location longitude</Description>
-        <UpdateTime>2014-04-02T14:05:17.477405Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-02T16:05:17.477405+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099455Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Sunset</Name>
-        <Value>18:05:25</Value>
+        <Value>/ybxswE8vqPoDQOtIbVYUg==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.629102Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>18:05:25</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.717932Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099633Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Astronomical</Name>
-        <Value>19:40:38</Value>
+        <Value>PWx2s2DQKhajrfXSU7+wyA==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.635237Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>19:40:38</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.724672Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099809Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Civil</Name>
-        <Value>18:34:41</Value>
+        <Value>uO4deLWsmyn6DwGVZlPSNQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.631111Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>18:34:41</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.72006Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.099985Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Evening.Twilight.Nautical</Name>
-        <Value>19:07:54</Value>
+        <Value>YKHT+W5v8/dc7xIdAhqeSQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.633129Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>19:07:54</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.722403Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.100161Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Sunrise</Name>
-        <Value>07:45:53</Value>
+        <Value>JwuB3jCqRo9WFdGP+v0QIw==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.620973Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>07:45:53</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.709676Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.10036Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Astronomical</Name>
-        <Value>06:10:35</Value>
+        <Value>wdKxsg3CJq3rkE7NC2GVtA==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.6275Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>06:10:35</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.71619Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.100592Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Civil</Name>
-        <Value>07:16:36</Value>
+        <Value>v5HO8F0OKZnwo2Fnyc7HBw==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.623213Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>07:16:36</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.711879Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.100769Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EarthTool.Morning.Twilight.Nautical</Name>
-        <Value>06:43:21</Value>
+        <Value>yd48omkmX9NdESSPKmDalg==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:47.625378Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>06:43:21</LastValue>
-        <LastUpdateTime>2014-11-13T16:33:56.714043Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.100995Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:36.511185Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.250382Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.101171Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>72</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969157Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T13:21:58.6290308+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>weather/earthtools/sundata</Value>
         <Description />
         <UpdateTime>2014-04-11T18:45:15.536067Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>weather/earthtools/sundata</LastValue>
-        <LastUpdateTime>2014-04-02T14:05:17.4794063Z</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1071,57 +777,39 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.CellAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
-        <UpdateTime>2014-04-11T18:48:52.8379712Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:52.8379712+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.101349Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
         <Value />
         <Description>3. Password</Description>
         <UpdateTime>2014-04-11T18:48:52.8379712Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:52.8379712+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellUsername</Name>
         <Value />
         <Description>2. Username</Description>
         <UpdateTime>2014-04-11T18:48:52.8379712Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:52.8379712+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.250579Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:21.5327947Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.101527Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>73</Value>
         <Description />
         <UpdateTime>2014-04-11T18:49:17.9773696Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:52.8389698+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:48:52.8389698Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:52.8389698+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1135,57 +823,39 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.CellAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
-        <UpdateTime>2014-04-11T18:48:56.6408587Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:56.6408587+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.101705Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
         <Value />
         <Description>3. Password</Description>
         <UpdateTime>2014-04-11T18:48:56.6408587Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:56.6408587+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellUsername</Name>
         <Value />
         <Description>2. Username</Description>
         <UpdateTime>2014-04-11T18:48:56.6408587Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:56.6408587+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.250769Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:14.2660397Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.101883Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>74</Value>
         <Description />
         <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:56.641858+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:48:56.641858Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:48:56.641858+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1199,57 +869,39 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.CellAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
-        <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:05.3961372+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.102061Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
         <Value />
         <Description>3. Password</Description>
         <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:05.3961372+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellUsername</Name>
         <Value />
         <Description>2. Username</Description>
         <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:05.3961372+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.250963Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:25.1184916Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.10229Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>75</Value>
         <Description />
         <UpdateTime>2014-04-11T18:49:21.5337947Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:05.3961372+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:49:05.3961372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:05.3961372+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1263,57 +915,39 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.CellAddress</Name>
-        <Value>192.168.0.?</Value>
+        <Value>DbL490/ZOfL+lYKD+i9ZZA==</Value>
         <Description>1. Remote HG server address</Description>
-        <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:01.8675085+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.102475Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellPassword</Name>
         <Value />
         <Description>3. Password</Description>
         <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:01.8675085+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.CellUsername</Name>
         <Value />
         <Description>2. Username</Description>
         <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:01.8675085+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.254248Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:49:17.9763693Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.102659Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>76</Value>
         <Description />
         <UpdateTime>2014-04-11T18:49:14.2670397Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:01.8675085+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:49:01.8675085Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:49:01.8675085+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1327,84 +961,57 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ClientId</Name>
-        <Value>hg-1</Value>
+        <Value>yREVeI8dF4mBMgVLkVnT3A==</Value>
         <Description>0. Enter unique ID for this client</Description>
-        <UpdateTime>2014-07-12T23:26:04.925351Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.925351+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.102843Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Password</Name>
         <Value />
         <Description>5. Password (optional)</Description>
         <UpdateTime>2014-07-14T20:41:16.978473Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.925346+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerAddress</Name>
         <Value />
         <Description>1. MQTT server address</Description>
         <UpdateTime>2014-07-14T20:41:11.960376Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>test.mosquitto.org</LastValue>
-        <LastUpdateTime>2014-07-14T20:40:49.047431Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerPort</Name>
-        <Value>1883</Value>
+        <Value>meJwjyLKoo9JY2kYx/ZR4g==</Value>
         <Description>2. MQTT server port</Description>
-        <UpdateTime>2014-07-12T23:26:04.925331Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.925329+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.103026Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ServerTopic</Name>
-        <Value>#</Value>
+        <Value>j4pi82PQEHeb4jgboRapLw==</Value>
         <Description>3. Topic</Description>
-        <UpdateTime>2014-07-12T23:26:04.925351Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.925351+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.103209Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Username</Name>
         <Value />
         <Description>4. Username (optional)</Description>
         <UpdateTime>2014-07-14T20:41:16.978472Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.925342+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.294964Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-07-14T20:41:22.407585Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.103393Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>77</Value>
         <Description />
         <UpdateTime>2014-07-14T20:41:16.979209Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.917799+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-12T23:26:04.917821Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-13T01:26:04.917821+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1421,81 +1028,54 @@
         <Value />
         <Description>Module to switch on/off on set point</Description>
         <UpdateTime>2014-11-13T09:13:29.454845Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.454844+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.TemperatureModule</Name>
         <Value />
         <Description>Module to read temperature from</Description>
         <UpdateTime>2014-11-13T09:13:29.45484Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.454838+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.296077Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T09:13:36.903378Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.103577Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Sensor.Temperature</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T09:13:29.457119Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.457117+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.Mode</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T09:13:29.457128Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.457128+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.OperatingState</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T09:13:29.457124Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.457123+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Thermostat.SetPoint.Heating</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T09:13:29.457132Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.457131+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>78</Value>
         <Description />
         <UpdateTime>2014-11-13T09:13:29.45573Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.43431+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/thermostat</Value>
         <Description />
         <UpdateTime>2014-11-13T09:13:29.446435Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T10:13:29.434322+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1509,57 +1089,39 @@
     <Properties>
       <ModuleParameter>
         <Name>EnergyMonitor.KwCounter</Name>
-        <Value>0,000</Value>
+        <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:54:41.132504Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:41.013484Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.10376Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.KwLoad</Name>
-        <Value>0,000</Value>
+        <Value>brjQKghjAAmd8uyeI1dWKw==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:54:41.13254Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:41.01351Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.103942Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyMonitor.OperatingDevices</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:54:41.13257Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>3</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:55.12722Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.104124Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:41.011121Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.25384Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.104305Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>81</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969386Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.1438014+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:17.1650706Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:17.1650706+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1573,39 +1135,27 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.MaxLevel</Name>
-        <Value>40</Value>
+        <Value>eQmibguU4RfcrcKLwpuf7w==</Value>
         <Description>Keep level below the following value</Description>
-        <UpdateTime>2014-03-31T23:14:54.1484418Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:54.1484418+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.104489Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:37.004741Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.251164Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.104673Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>82</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969173Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:07.6652023Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:07.6652023+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1619,30 +1169,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:37.507477Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.251357Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.104856Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>84</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969188Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:09.1655773Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:09.1655773+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1659,108 +1200,72 @@
         <Value />
         <Description>3. Comma separated list of recipients e-mails for alarm notifications</Description>
         <UpdateTime>2014-11-13T22:53:38.015575Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.1512372+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.ArmDelay</Name>
-        <Value>10</Value>
+        <Value>evhKWvO6ao3ifrLl95fkRA==</Value>
         <Description>1. Arm Delay (seconds)</Description>
-        <UpdateTime>2014-03-31T23:14:58.1512372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.1512372+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.10504Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.System.SirenMaxTime</Name>
-        <Value>30</Value>
+        <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
         <Description>2. Sirens Max Time (seconds, 0=infinite)</Description>
-        <UpdateTime>2014-03-31T23:14:58.1512372Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.1512372+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.105223Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.ArmedProgram</Name>
         <Value />
         <Description>4. Program to run when armed</Description>
         <UpdateTime>2014-11-13T22:53:38.015578Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.DisarmedProgram</Name>
         <Value />
         <Description>5. Program to run when disarmed</Description>
         <UpdateTime>2014-11-13T22:53:38.015582Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Trigger.TriggeredProgram</Name>
         <Value />
         <Description>6. Program to run when triggered</Description>
         <UpdateTime>2014-11-13T22:53:38.015585Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-19T12:21:23.6136936+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityArmed</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:38.019291Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.167253+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.105407Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityTriggered</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:38.01938Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.168254+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.105589Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:38.01626Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.25171Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.105778Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:38.019391Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:14:58.168254+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.105956Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>90</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969204Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/securitysystem</Value>
         <Description />
         <UpdateTime>2014-04-11T19:26:31.638769Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>homegenie/generic/securitysystem</LastValue>
-        <LastUpdateTime>2014-04-11T18:45:15.816644Z</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1774,30 +1279,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:38.510991Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.251907Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.106139Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>91</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969219Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:12.1634217Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:12.1634217+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1811,30 +1307,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:41.513616Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.254051Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.106318Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>93</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969404Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.1467788+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:17.1650706Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:17.1650706+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1848,102 +1335,69 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO17</Name>
-        <Value>OFF</Value>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
         <Description>GPIO17 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.767439Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.767412+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.106496Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO18</Name>
-        <Value>OFF</Value>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
         <Description>GPIO18 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.7676Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.767583+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.106676Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO21</Name>
-        <Value>OFF</Value>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
         <Description>GPIO21 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.767748Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.767732+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.106854Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO22</Name>
-        <Value>OUT</Value>
+        <Value>CVYGQ7GOpvcliTxoEU3zsQ==</Value>
         <Description>GPIO22 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.767899Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.767884+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.107031Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO23</Name>
-        <Value>OUT</Value>
+        <Value>CVYGQ7GOpvcliTxoEU3zsQ==</Value>
         <Description>GPIO23 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.768057Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.768036+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.107208Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO24</Name>
-        <Value>OFF</Value>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
         <Description>GPIO24 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.768212Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.768196+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.107386Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO25</Name>
-        <Value>OUT</Value>
+        <Value>CVYGQ7GOpvcliTxoEU3zsQ==</Value>
         <Description>GPIO25 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.768367Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.768351+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.107563Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.GPIO4</Name>
-        <Value>OFF</Value>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
         <Description>GPIO04 (IN, OUT or OFF)</Description>
-        <UpdateTime>2014-04-11T18:45:31.767237Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.767212+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.10774Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.255309Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:45:40.976008Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.107918Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>100</Value>
         <Description />
         <UpdateTime>2014-04-11T18:45:32.509835Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.412028+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:45:31.412259Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:45:31.412245+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1957,30 +1411,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:39.009122Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.252106Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108095Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>112</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969237Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:12.1634217Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:12.1634217+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -1994,48 +1439,33 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ModulesCount</Name>
-        <Value>3</Value>
+        <Value>OGzMiOkGhp0dCVGwLGMY+w==</Value>
         <Description>Connected sensors number</Description>
-        <UpdateTime>2014-11-13T15:59:06.506048Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T16:59:06.506046+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108273Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.UpdateInterval</Name>
-        <Value>60</Value>
+        <Value>d67l2OZYIKNoL4jzsdSjQw==</Value>
         <Description>Update interval</Description>
-        <UpdateTime>2014-11-13T15:59:06.506062Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T16:59:06.506061+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108451Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.296267Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-11-13T15:59:19.96192Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108628Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>133</Value>
         <Description />
         <UpdateTime>2014-11-13T15:59:06.509407Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T16:59:06.496726+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-11-13T15:59:06.496746Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-11-13T16:59:06.496746+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2052,81 +1482,54 @@
         <Value />
         <Description>1. E-Mail address</Description>
         <UpdateTime>2014-11-13T22:53:39.510983Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPassword</Name>
         <Value />
         <Description>4. SMTP password (optional)</Description>
         <UpdateTime>2014-11-13T22:53:39.510991Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpPort</Name>
-        <Value>25</Value>
+        <Value>eJbaQytfgHp7xJPm8Z/eJA==</Value>
         <Description>5. SMTP Mail Server port</Description>
-        <UpdateTime>2014-03-31T23:15:04.1573418Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108806Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpServer</Name>
         <Value />
         <Description>2. SMTP Mail Server address</Description>
         <UpdateTime>2014-11-13T22:53:39.510986Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUserName</Name>
         <Value />
         <Description>3. SMTP username (optional)</Description>
         <UpdateTime>2014-11-13T22:53:39.510989Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Email.SmtpUseSsl</Name>
-        <Value>FALSE</Value>
+        <Value>0FQhG1EsSLkRkn9SBGrHmw==</Value>
         <Description>6. SMTP Mail Server use SSL (TRUE or FALSE)</Description>
-        <UpdateTime>2014-03-31T23:15:04.1573418Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:15:04.1573418+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.108984Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:39.51171Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.252638Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.109161Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>142</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969254Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.142796+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:13.1662119Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:13.1662119+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2143,63 +1546,42 @@
         <Value />
         <Description>2. Stop 'Presence' program at time:</Description>
         <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Pause</Name>
-        <Value>30</Value>
+        <Value>8XBi4G8MLNk4IJcRGtyCPg==</Value>
         <Description>4. Pause between each run (seconds):</Description>
-        <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.109339Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.ProgramToRun</Name>
         <Value />
         <Description>3. Enter the Name or ID of the program to run:</Description>
         <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.StartTime</Name>
         <Value />
         <Description>1. Start 'Presence' program at time:</Description>
         <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.253009Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:50:25.5371261Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.109517Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>144</Value>
         <Description />
         <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:50:17.2633685Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:17.2633685+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2213,30 +1595,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:42.017212Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.254621Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.109695Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>145</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969425Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.1467788+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:18.1648773Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:18.1648773+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2253,63 +1626,42 @@
         <Value />
         <Description>IP address to ping #1</Description>
         <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.PingMe.Address2</Name>
         <Value />
         <Description>IP address to ping #2</Description>
         <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.PingMe.Address3</Name>
         <Value />
         <Description>IP address to ping #3</Description>
         <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>PingMe.AtHome</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description />
-        <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.109873Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.253217Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Disabled</LastValue>
-        <LastUpdateTime>2014-04-11T18:50:37.016838Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11005Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>154</Value>
         <Description />
         <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T18:50:30.5235519Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T20:50:30.5235519+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2323,30 +1675,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Idle</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:33.25342Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Enabled</LastValue>
-        <LastUpdateTime>2014-07-25T22:02:17.940506Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.110231Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>180</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969273Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.96527+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:02:17.96529Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:02:17.965289+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2360,30 +1703,21 @@
     <Properties>
       <ModuleParameter>
         <Name>Program.Status</Name>
-        <Value>Running</Value>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:53:40.510082Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>Idle</LastValue>
-        <LastUpdateTime>2014-11-13T22:53:33.253634Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11041Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>200</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969368Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T01:13:56.1438014+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-11T15:54:14.1672813Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-11T17:54:14.1672813+02:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2400,216 +1734,144 @@
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815446Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.197975+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815447Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198148+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.110588Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleControl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.81546Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>On</LastValue>
-        <LastUpdateTime>2014-02-23T16:59:18.3050207Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOff</Name>
-        <Value>00 19 * * *;@Weekend</Value>
+        <Value>aP5xXbpLvanu8smp3kJ85NtxHptqcyoOFcs8Xp0ONEA=</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815461Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>01 18 * * *;@Weekend</LastValue>
-        <LastUpdateTime>2014-02-23T16:59:18.3050207Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.110766Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOn</Name>
-        <Value>00 18 * * *;@Weekend</Value>
+        <Value>cTOF8mIugpfgzfgDPpbH5b3Oftjy6p0QkFUy7HCT8vg=</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815473Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>00 18 * * *;@Weekdays</LastValue>
-        <LastUpdateTime>2014-02-23T16:59:18.3050207Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.110943Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityAlarm</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815484Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198241+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815486Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198526+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815487Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198352+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815489Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198446+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815491Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198637+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunRiseOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-23T16:17:21.6399216Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-23T17:11:29.1619365+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunSetOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-23T16:17:21.6409205Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-23T17:11:29.1619365+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TouchlessToggle</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-23T17:02:26.8571012Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.198071+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TurnOffDelay</Name>
-        <Value>15</Value>
+        <Value>x7W6TCAxBXz/CDUi+lC+ZQ==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815498Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>30</LastValue>
-        <LastUpdateTime>2014-03-31T22:56:06.1236506Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.111119Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:55:14.043731Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>12</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:28.603669Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.111295Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>MobileNotification.SendChanges</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:08.815512Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:08.199034+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815401Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-25T23:31:08.815392+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11148Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>0.3130718954248361,1,0.6022727272727273</Value>
+        <Value>r0n3TaaTzY37ZtZX4xg53Emgcc1dASgMVhxT4wtiPS/WXDzPsQ1V9b/TcV7AyfNt</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:28.29434Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0.07973856209150654,1,1</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:21.955369Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.111661Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.LastLevel</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-03-31T23:00:44.415725Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,748376623376623</LastValue>
-        <LastUpdateTime>2014-03-31T23:00:14.4097709Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11184Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:47.657557Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>1</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:45.650198Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112019Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:45.720753Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,8</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:20.291535Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112198Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>12</Value>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:08.815525Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-02-23T17:02:26.8580827Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112376Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969069Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:54.420442+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:35.008469Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:50.288596+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2626,216 +1888,144 @@
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187955Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799157+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:14.187956Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799344+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112553Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleControl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187963Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:03.7464057+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187963Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:03.7464057+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187964Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:03.7464057+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityAlarm</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187965Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799445+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187966Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.79974+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187967Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799563+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187969Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799661+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.18797Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799835+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunRiseOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.018871Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.800009+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunSetOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.018786Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799932+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TouchlessToggle</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.018165Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.799234+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TurnOffDelay</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187974Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.800122+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:55:14.144011Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>9,6</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:28.703889Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112734Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>MobileNotification.SendChanges</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:14.187977Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:33.800201+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:14.187928Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-25T23:31:14.187924+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.112913Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>0.6568627450980387,1,0.5340909090909092</Value>
+        <Value>scF8VAU4sOjryaEj1FDqcRVkyqgxG9q78fobkwMg6VX02ogodZhAIpLcDoLNdOjz</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:29.295083Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0.08,1,.8,5</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:21.290774Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.113098Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.LastLevel</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-03-31T23:00:07.7594572Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,806818181818182</LastValue>
-        <LastUpdateTime>2014-03-31T22:59:48.4403048Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.114522Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:48.008145Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>1</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:46.000759Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.114734Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:46.001035Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,8</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:21.290907Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.114913Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>12</Value>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:14.187983Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-02-09T17:41:54.017879Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.115092Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969083Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:54.421063+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:35.008495Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:50.365469+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -2852,216 +2042,144 @@
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618876Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.02049+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:21.618879Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.020665+01:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11527Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleControl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618891Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:18.1314698+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618893Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:18.1314698+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618897Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-04-01T00:52:18.1314698+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityAlarm</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618898Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.020759+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.6189Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021098+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618901Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.020881+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618903Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.020987+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618905Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021174+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunRiseOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.021388Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021384+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SunSetOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.021286Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021283+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TouchlessToggle</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T17:41:54.020571Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.020568+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TurnOffDelay</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618913Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021481+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Meter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-11-13T22:55:14.244246Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>9,6</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:28.804174Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.11545Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>MobileNotification.SendChanges</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T21:31:21.618917Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T18:41:54.021764+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
-        <Value>On</Value>
+        <Value>gYT4Z6v1sEmFqc/ettaDQw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:21.618827Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-25T23:31:21.618818+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.115627Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.ColorHsb</Name>
-        <Value>0.8313725490196097,1,0.6801948051948052</Value>
+        <Value>9TBtMgGMsQwWeB1apCQ0iL+g9JwUSCGwbMGX74VA8gF7TYn76LowT1OsRS9aLIsF</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:30.295799Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0.08,1,.8,5</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:22.293173Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.115809Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.LastLevel</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-03-31T23:00:07.9602816Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,758116883116883</LastValue>
-        <LastUpdateTime>2014-03-31T22:59:48.6913388Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.115987Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:48.358761Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>1</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:46.351359Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.116165Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.MemoryLevel</Name>
-        <Value>1</Value>
+        <Value>ZIWBXy5mRGRuEte8y0MSqg==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:01:46.351632Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0,8</LastValue>
-        <LastUpdateTime>2014-07-25T22:01:22.713345Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.116344Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>12</Value>
+        <Value>LzcafCiKqnobmz095C+Usw==</Value>
         <Description />
-        <UpdateTime>2014-07-25T21:31:21.618929Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-02-09T17:41:54.020215Z</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.116522Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969096Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:54.421731+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:35.008518Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:50.366348+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -3078,144 +2196,96 @@
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.33672Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336712+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336747Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336729+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleControl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336757Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336753+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336794Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336787+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336765Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336761+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityAlarm</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336812Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336803+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336884Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336876+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336849Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336822+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336867Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336859+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336901Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336893+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TurnOffDelay</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336949Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336926+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>MobileNotification.SendChanges</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336967Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.336959+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:05.336917Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:05.33691+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:13:05.336681Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:13:05.336668+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.1167Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969109Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:54.422561+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:35.008541Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:50.367156+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />
@@ -3232,144 +2302,96 @@
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754293Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754289+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754302Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754298+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleControl</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754311Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754307+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOff</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754327Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754323+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.ScheduleOn</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754319Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754315+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SecurityAlarm</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754336Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754331+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.CheckLuminosity</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754365Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754361+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.Enable</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754347Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754341+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.OnMotionDetect</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754355Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754351+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.SmartLights.SwitchOffTimeout</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754373Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754369+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.TurnOffDelay</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.75439Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754386+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>MobileNotification.SendChanges</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754398Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754394+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
         <Value />
         <Description />
         <UpdateTime>2014-07-25T22:13:19.754382Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-07-26T00:13:19.754378+02:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualMeter.Watts</Name>
-        <Value>0</Value>
+        <Value>1bJd8AxkP04ggqA73hoY+w==</Value>
         <Description />
-        <UpdateTime>2014-07-25T22:13:19.754274Z</UpdateTime>
-        <NeedsUpdate>true</NeedsUpdate>
-        <LastValue>0</LastValue>
-        <LastUpdateTime>2014-07-26T00:13:19.754267+02:00</LastUpdateTime>
+        <UpdateTime>2015-01-03T14:02:11.116878Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>26</Value>
         <Description />
         <UpdateTime>2014-11-13T22:55:32.969121Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:54.423109+01:00</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
         <Value>homegenie/generic/colorlight</Value>
         <Description />
         <UpdateTime>2014-11-13T22:53:35.008563Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T16:37:50.367779+01:00</LastUpdateTime>
       </ModuleParameter>
     </Properties>
     <RoutingNode />

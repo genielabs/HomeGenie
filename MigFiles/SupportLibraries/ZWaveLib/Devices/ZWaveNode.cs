@@ -34,44 +34,44 @@ namespace ZWaveLib.Devices
 
     public enum ParameterType
     {
-        PARAMETER_BASIC,
-        PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC,
-        PARAMETER_GENERIC,
-        PARAMETER_WATTS,
-        PARAMETER_POWER,
-        PARAMETER_TEMPERATURE,
-        PARAMETER_HUMIDITY,
-        PARAMETER_LUMINANCE,
-        PARAMETER_MOTION,
-        PARAMETER_ALARM_DOORWINDOW,
-        PARAMETER_ALARM_GENERIC,
-        PARAMETER_ALARM_SMOKE,
-        PARAMETER_ALARM_CARBONMONOXIDE,
-        PARAMETER_ALARM_CARBONDIOXIDE,
-        PARAMETER_ALARM_HEAT,
-        PARAMETER_ALARM_FLOOD,
-        PARAMETER_ALARM_TAMPERED,
-        PARAMETER_CONFIG,
-        PARAMETER_WAKEUP_INTERVAL,
-        PARAMETER_WAKEUP_NOTIFY,
-        PARAMETER_ASSOC,
-        PARAMETER_BATTERY,
-        PARAMETER_NODE_INFO,
-        PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT,
-        PARAMETER_MULTIINSTANCE_SWITCH_BINARY,
-        PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT,
-        PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL,
-        PARAMETER_MULTIINSTANCE_SENSOR_BINARY_COUNT,
-        PARAMETER_MULTIINSTANCE_SENSOR_BINARY,
-        PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT,
-        PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL,
-        PARAMETER_THERMOSTAT_FAN_MODE,
-        PARAMETER_THERMOSTAT_FAN_STATE,
-        PARAMETER_THERMOSTAT_HEATING,
-        PARAMETER_THERMOSTAT_MODE,
-        PARAMETER_THERMOSTAT_OPERATING_STATE,
-        PARAMETER_THERMOSTAT_SETBACK,
-        PARAMETER_THERMOSTAT_SETPOINT
+        BASIC,
+        MANUFACTURER_SPECIFIC,
+        GENERIC,
+        WATTS,
+        POWER,
+        TEMPERATURE,
+        HUMIDITY,
+        LUMINANCE,
+        MOTION,
+        ALARM_DOORWINDOW,
+        ALARM_GENERIC,
+        ALARM_SMOKE,
+        ALARM_CARBONMONOXIDE,
+        ALARM_CARBONDIOXIDE,
+        ALARM_HEAT,
+        ALARM_FLOOD,
+        ALARM_TAMPERED,
+        CONFIGURATION,
+        WAKEUP_INTERVAL,
+        WAKEUP_NOTIFY,
+        ASSOCIATION,
+        BATTERY,
+        NODE_INFO,
+        MULTIINSTANCE_SWITCH_BINARY_COUNT,
+        MULTIINSTANCE_SWITCH_BINARY,
+        MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT,
+        MULTIINSTANCE_SWITCH_MULTILEVEL,
+        MULTIINSTANCE_SENSOR_BINARY_COUNT,
+        MULTIINSTANCE_SENSOR_BINARY,
+        MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT,
+        MULTIINSTANCE_SENSOR_MULTILEVEL,
+        THERMOSTAT_FAN_MODE,
+        THERMOSTAT_FAN_STATE,
+        THERMOSTAT_HEATING,
+        THERMOSTAT_MODE,
+        THERMOSTAT_OPERATING_STATE,
+        THERMOSTAT_SETBACK,
+        THERMOSTAT_SETPOINT
     }
 
     public enum ZWaveSensorAlarmParameter
@@ -212,21 +212,21 @@ namespace ZWaveLib.Devices
                 switch (commandClass)
                 {
 
-                case (byte)CommandClass.COMMAND_CLASS_BASIC:
-                case (byte)CommandClass.COMMAND_CLASS_ALARM:
-                case (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY:
-                case (byte)CommandClass.COMMAND_CLASS_SENSOR_ALARM:
-                case (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL:
-                case (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY:
-                case (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL:
-                case (byte)CommandClass.COMMAND_CLASS_SCENE_ACTIVATION:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_MODE:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_MODE:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_FAN_STATE:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_HEATING:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_OPERATING_STATE:
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETBACK: 
-                case (byte)CommandClass.COMMAND_CLASS_THERMOSTAT_SETPOINT: 
+                case (byte)CommandClass.BASIC:
+                case (byte)CommandClass.ALARM:
+                case (byte)CommandClass.SENSOR_BINARY:
+                case (byte)CommandClass.SENSOR_ALARM:
+                case (byte)CommandClass.SENSOR_MULTILEVEL:
+                case (byte)CommandClass.SWITCH_BINARY:
+                case (byte)CommandClass.SWITCH_MULTILEVEL:
+                case (byte)CommandClass.SCENE_ACTIVATION:
+                case (byte)CommandClass.THERMOSTAT_MODE:
+                case (byte)CommandClass.THERMOSTAT_FAN_MODE:
+                case (byte)CommandClass.THERMOSTAT_FAN_STATE:
+                case (byte)CommandClass.THERMOSTAT_HEATING:
+                case (byte)CommandClass.THERMOSTAT_OPERATING_STATE:
+                case (byte)CommandClass.THERMOSTAT_SETBACK: 
+                case (byte)CommandClass.THERMOSTAT_SETPOINT: 
 
                     if (this.DeviceHandler != null)
                     {
@@ -235,8 +235,8 @@ namespace ZWaveLib.Devices
 
                     break;
                     
-                case (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE:
-                case (byte)CommandClass.COMMAND_CLASS_METER:
+                case (byte)CommandClass.MULTIINSTANCE:
+                case (byte)CommandClass.METER:
 
                     if (messageLength > 10)
                     {
@@ -248,9 +248,9 @@ namespace ZWaveLib.Devices
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_CONFIGURATION:
+                case (byte)CommandClass.CONFIGURATION:
 
-                    if (messageLength > 11 && commandType == (byte)Command.COMMAND_CONFIG_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
+                    if (messageLength > 11 && commandType == (byte)Command.CONFIGURATION_REPORT) // CONFIGURATION PARAMETER REPORT  0x06
                     {
                         byte paramId = receivedMessage[9];
                         byte paramLength = receivedMessage[10];
@@ -273,16 +273,16 @@ namespace ZWaveLib.Devices
                         paramval = BitConverter.ToUInt32(bval, 0);
                         // convert it to uint
                         //
-                        RaiseUpdateParameterEvent(this, paramId, ParameterType.PARAMETER_CONFIG, paramval);
+                        RaiseUpdateParameterEvent(this, paramId, ParameterType.CONFIGURATION, paramval);
                         //
                         handled = true;
                     }
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_ASSOCIATION:
+                case (byte)CommandClass.ASSOCIATION:
 
-                    if (messageLength > 12 && commandType == (byte)Command.COMMAND_ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
+                    if (messageLength > 12 && commandType == (byte)Command.ASSOCIATION_REPORT) // ASSOCIATION REPORT 0x03
                     {
                         byte groupId = receivedMessage[9];
                         byte maxAssociations = receivedMessage[10];
@@ -298,12 +298,12 @@ namespace ZWaveLib.Devices
                         assocNodes = assocNodes.TrimEnd(',');
                         //
                         //_raiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_ASSOC, groupid);
-                        RaiseUpdateParameterEvent(this, 1, ParameterType.PARAMETER_ASSOC, maxAssociations);
-                        RaiseUpdateParameterEvent(this, 2, ParameterType.PARAMETER_ASSOC, numAssociations);
+                        RaiseUpdateParameterEvent(this, 1, ParameterType.ASSOCIATION, maxAssociations);
+                        RaiseUpdateParameterEvent(this, 2, ParameterType.ASSOCIATION, numAssociations);
                         RaiseUpdateParameterEvent(
                             this,
                             3,
-                            ParameterType.PARAMETER_ASSOC,
+                            ParameterType.ASSOCIATION,
                             groupId + ":" + assocNodes
                         );
                         //
@@ -312,47 +312,47 @@ namespace ZWaveLib.Devices
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_WAKE_UP:
+                case (byte)CommandClass.WAKE_UP:
 
-                    if (messageLength > 11 && commandType == (byte)Command.COMMAND_WAKEUP_REPORT) // WAKE UP REPORT 0x06
+                    if (messageLength > 11 && commandType == (byte)Command.WAKEUP_INTERVAL_REPORT) // WAKE UP REPORT 0x06
                     {
                         uint interval = ((uint)receivedMessage[9]) << 16;
                         interval |= (((uint)receivedMessage[10]) << 8);
                         interval |= (uint)receivedMessage[11];
                         //
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_INTERVAL, interval);
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.WAKEUP_INTERVAL, interval);
                         //
                         handled = true;
                     }
                         // 0x01, 0x08, 0x00, 0x04, 0x00, 0x06, 0x02, 0x84, 0x07, 0x74
-                        else if (messageLength > 7 && commandType == (byte)Command.COMMAND_WAKEUP_NOTIFICATION) // AWAKE NOTIFICATION 0x07
+                        else if (messageLength > 7 && commandType == (byte)Command.WAKEUP_NOTIFICATION) // AWAKE NOTIFICATION 0x07
                     {
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_WAKEUP_NOTIFY, 1);
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.WAKEUP_NOTIFY, 1);
                         //
                         handled = true;
                     }
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_BATTERY:
+                case (byte)CommandClass.BATTERY:
 
                     if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
                     {
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_BATTERY, receivedMessage[9]);
+                        RaiseUpdateParameterEvent(this, 0, ParameterType.BATTERY, receivedMessage[9]);
                         //
                         handled = true;
                     }
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_HAIL:
+                case (byte)CommandClass.HAIL:
 
                     this.Basic_Get();
                     handled = true;
 
                     break;
 
-                case (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC:
+                case (byte)CommandClass.MANUFACTURER_SPECIFIC:
 
                     if (messageLength > 14)
                     {
@@ -406,7 +406,7 @@ namespace ZWaveLib.Devices
                 if (receivedMessage[3] != 0x13)
                 {
                     bool log = true;
-                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC) log = false;
+                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.MANUFACTURER_SPECIFIC) log = false;
                     if (log) Console.WriteLine("ZWaveLib UNHANDLED message: " + zwavePort.ByteArrayToString(receivedMessage));
                 }
             }
@@ -504,8 +504,8 @@ namespace ZWaveLib.Devices
         public void Basic_Set(int value)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_BASIC, 
-                (byte)Command.COMMAND_BASIC_SET, 
+                (byte)CommandClass.BASIC, 
+                (byte)Command.BASIC_SET, 
                 byte.Parse(value.ToString())
             });
         }
@@ -516,8 +516,8 @@ namespace ZWaveLib.Devices
         public void Basic_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_BASIC, 
-                (byte)Command.COMMAND_BASIC_GET 
+                (byte)CommandClass.BASIC, 
+                (byte)Command.BASIC_GET 
             });
         }
 
@@ -533,8 +533,8 @@ namespace ZWaveLib.Devices
         public void Association_Set(byte groupid, byte targetnodeid)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-                (byte)Command.COMMAND_ASSOCIATION_SET, 
+                (byte)CommandClass.ASSOCIATION, 
+                (byte)Command.ASSOCIATION_SET, 
                 groupid, 
                 targetnodeid 
             });
@@ -547,8 +547,8 @@ namespace ZWaveLib.Devices
         public void Association_Get(byte groupid)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-                (byte)Command.COMMAND_ASSOCIATION_GET, 
+                (byte)CommandClass.ASSOCIATION, 
+                (byte)Command.ASSOCIATION_GET, 
                 groupid 
             });
         }
@@ -561,8 +561,8 @@ namespace ZWaveLib.Devices
         public void Association_Remove(byte groupid, byte targetnodeid)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION, 
-                (byte)Command.COMMAND_ASSOCIATION_REMOVE, 
+                (byte)CommandClass.ASSOCIATION, 
+                (byte)Command.ASSOCIATION_REMOVE, 
                 groupid, 
                 targetnodeid 
             });
@@ -574,8 +574,8 @@ namespace ZWaveLib.Devices
         public void Association_GroupingsGet()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_ASSOCIATION,
-                (byte)Command.COMMAND_CONFIG_GET 
+                (byte)CommandClass.ASSOCIATION,
+                (byte)Command.ASSOCIATION_GET 
             });
         }
 
@@ -586,8 +586,8 @@ namespace ZWaveLib.Devices
         public void Battery_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_BATTERY, 
-                (byte)Command.COMMAND_BASIC_GET 
+                (byte)CommandClass.BATTERY, 
+                (byte)Command.BATTERY_GET 
             });
         }
 
@@ -598,16 +598,16 @@ namespace ZWaveLib.Devices
         public void WakeUp_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
-                (byte)Command.COMMAND_CONFIG_GET 
+                (byte)CommandClass.WAKE_UP, 
+                (byte)Command.WAKEUP_INTERVAL_GET 
             });
         }
 
         public void WakeUp_Set(uint interval)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_WAKE_UP, 
-                (byte)Command.COMMAND_CONFIG_SET,
+                (byte)CommandClass.WAKE_UP, 
+                (byte)Command.WAKEUP_INTERVAL_SET,
                 (byte)((interval >> 16) & 0xff),
                 (byte)((interval >> 8) & 0xff),
                 (byte)((interval) & 0xff),
@@ -653,8 +653,8 @@ namespace ZWaveLib.Devices
             //Console.WriteLine("\n\n\nCOMPUTED VALUE: " + zp.ByteArrayToString(value32) + "\n->" + zp.ByteArrayToString(BitConverter.GetBytes(intvalue)) + "\n\n");
             //
             byte[] msg = new byte[4 + valueLength];
-            msg[0] = (byte)CommandClass.COMMAND_CLASS_CONFIGURATION;
-            msg[1] = (byte)Command.COMMAND_CONFIG_SET;
+            msg[0] = (byte)CommandClass.CONFIGURATION;
+            msg[1] = (byte)Command.CONFIGURATION_SET;
             msg[2] = parameter;
             msg[3] = (byte)valueLength;
             switch (valueLength)
@@ -675,8 +675,8 @@ namespace ZWaveLib.Devices
         public void Configuration_ParameterGet(byte parameter)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_CONFIGURATION, 
-                (byte)Command.COMMAND_CONFIG_GET,
+                (byte)CommandClass.CONFIGURATION, 
+                (byte)Command.CONFIGURATION_GET,
                 parameter
             });
         }
@@ -694,8 +694,8 @@ namespace ZWaveLib.Devices
                 0x13 /* func send data */,
                 this.NodeId,
                 0x02,
-                (byte)CommandClass.COMMAND_CLASS_MANUFACTURER_SPECIFIC,
-                (byte)Command.COMMAND_MANUFACTURERSPECIFIC_GET,
+                (byte)CommandClass.MANUFACTURER_SPECIFIC,
+                (byte)Command.MANUFACTURERSPECIFIC_GET,
                 0x05 /* report ?!? */,
                 0x01 | 0x04,
                 0x00
@@ -710,8 +710,8 @@ namespace ZWaveLib.Devices
         public void MultiInstance_GetCount(byte command_class) // eg. CommandClass.COMMAND_CLASS_SWITCH_BINARY
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
-                (byte)Command.COMMAND_MULTIINSTANCE_COUNT_GET, // 0x04 = GET, 0x05 = REPORT
+                (byte)CommandClass.MULTIINSTANCE, 
+                (byte)Command.MULTIINSTANCE_COUNT_GET, // 0x04 = GET, 0x05 = REPORT
                 command_class
             });
         }
@@ -719,24 +719,24 @@ namespace ZWaveLib.Devices
         public void MultiInstance_SwitchBinaryGet(byte instance)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x0d, // ??
                 0x00, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
-                (byte)Command.COMMAND_MULTIINSTANCE_GET
+                (byte)CommandClass.SWITCH_BINARY,
+                (byte)Command.MULTIINSTANCE_GET
             });
         }
 
         public void MultiInstance_SwitchBinarySet(byte instance, int value)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x0d, // 
                 0x00, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_BINARY,
-                (byte)Command.COMMAND_MULTIINSTANCE_SET,
+                (byte)CommandClass.SWITCH_BINARY,
+                (byte)Command.MULTIINSTANCE_SET,
                 byte.Parse(value.ToString())
             });
         }
@@ -744,24 +744,24 @@ namespace ZWaveLib.Devices
         public void MultiInstance_SwitchMultiLevelGet(byte instance)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x0d, // ??
                 0x00, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
-                (byte)Command.COMMAND_MULTIINSTANCE_GET
+                (byte)CommandClass.SWITCH_MULTILEVEL,
+                (byte)Command.MULTIINSTANCE_GET
             });
         }
 
         public void MultiInstance_SwitchMultiLevelSet(byte instance, int value)
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x0d, // 
                 0x00, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL,
-                (byte)Command.COMMAND_MULTIINSTANCE_SET,
+                (byte)CommandClass.SWITCH_MULTILEVEL,
+                (byte)Command.MULTIINSTANCE_SET,
                 byte.Parse(value.ToString())
             });
         }
@@ -770,10 +770,10 @@ namespace ZWaveLib.Devices
         {
             // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x06, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY,
+                (byte)CommandClass.SENSOR_BINARY,
                 0x04 //
             });
         }
@@ -782,10 +782,10 @@ namespace ZWaveLib.Devices
         {
             // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_MULTIINSTANCE, 
+                (byte)CommandClass.MULTIINSTANCE, 
                 0x06, // ??
                 instance,
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL,
+                (byte)CommandClass.SENSOR_MULTILEVEL,
                 0x04 //
             });
         }
@@ -797,22 +797,22 @@ namespace ZWaveLib.Devices
         public virtual void Meter_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_METER, 
-                (byte)Command.COMMAND_METER_GET
+                (byte)CommandClass.METER, 
+                (byte)Command.METER_GET
             });
         }
         public virtual void Meter_SupportedGet()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_METER, 
-                (byte)Command.COMMAND_METER_SUPPORTED_GET
+                (byte)CommandClass.METER, 
+                (byte)Command.METER_SUPPORTED_GET
             });
         }
         public virtual void Meter_Reset()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_METER, 
-                (byte)Command.COMMAND_METER_RESET
+                (byte)CommandClass.METER, 
+                (byte)Command.METER_RESET
             });
         }
 
@@ -823,8 +823,8 @@ namespace ZWaveLib.Devices
         public virtual void SensorBinary_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_BINARY, 
-                (byte)Command.COMMAND_SENSOR_BINARY_GET
+                (byte)CommandClass.SENSOR_BINARY, 
+                (byte)Command.SENSOR_BINARY_GET
             });
         }
 
@@ -835,8 +835,8 @@ namespace ZWaveLib.Devices
         public virtual void SensorMultiLevel_Get()
         {
             this.SendRequest(new byte[] { 
-                (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL, 
-                (byte)Command.COMMAND_SENSOR_MULTILEVEL_GET
+                (byte)CommandClass.SENSOR_MULTILEVEL, 
+                (byte)Command.SENSOR_MULTILEVEL_GET
             });
         }
 

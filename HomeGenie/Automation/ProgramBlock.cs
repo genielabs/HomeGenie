@@ -524,6 +524,7 @@ namespace HomeGenie.Automation
             ModuleChangedHandler = null;
             SystemStarted = null;
             SystemStopping = null;
+            Stopping = null;
             //
             foreach (string apiCall in registeredApiCalls)
             {

@@ -31,7 +31,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
 {
     // Aeon Labs Aeotec Z-Wave Multi-Sensor
     // 0086:0002:0005
-    class MultiSensor : Sensor
+    public class MultiSensor : Sensor
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
@@ -47,7 +47,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL && cmdType == 0x05)
+            if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
             {
                 SensorValue sensorval = Sensor.ParseSensorValue(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)

@@ -101,10 +101,6 @@ namespace HomeGenie.Data
                     try
                     {
                         if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
-                        if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(
-                                p.LastValue,
-                                GetPassPhrase()
-                            );
                     }
                     catch
                     {

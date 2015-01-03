@@ -94,9 +94,9 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   		var level = module.Parameter("Status.Level");
 		var memory = module.Parameter("Status.MemoryLevel");
 		//
-        if (level.DecimalValue != level.LastDecimalValue)
+        if (level.DecimalValue != level.Statistics.Last.Value)
         {
-            bool justswitchedon = (level.LastDecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+            bool justswitchedon = (level.Statistics.Last.Value == 0 &amp;&amp; level.DecimalValue &gt; 0);
           	if (justswitchedon)
             {
                 // set current level to memory level if different
@@ -151,8 +151,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
-    <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:41.23034Z</TriggerTime>
+    <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
+    <TriggerTime>2015-01-03T14:26:05.722796Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:41.736297Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:02.240647Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:42.232414Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:02.740643Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -496,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:47:21.367612Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:27:05.132203Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1223,7 +1223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:43.232068Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:03.73744Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1278,7 +1278,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:43.7332Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:04.238698Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1573,7 +1573,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:44.235581Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:04.74479Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1652,7 +1652,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:44.732578Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:05.237929Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1722,7 +1722,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:45.235637Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:05.740219Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1996,7 +1996,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:58.873557Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:06.242484Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2297,7 +2297,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 
   	if (notificationurl != "" &amp;&amp; module.HasFeature("MobileNotification.SendChanges") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
 	{
-      	if (property.Value != property.LastValue) // TODO: check time from lastvalue as well to prevent flooding
+      	if (property.DecimalValue != property.Statistics.Last.Value) // TODO: check time from lastvalue as well to prevent flooding
         {
             var pname = property.Name;
             if (pname.IndexOf('.') &gt; 0)
@@ -2342,7 +2342,7 @@ while(Program.IsEnabled)
 
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
@@ -2361,8 +2361,8 @@ Program.GoBackground();</ScriptSource>
 It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:46.738184Z</TriggerTime>
+    <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
+    <TriggerTime>2015-01-03T14:27:09.414547Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2384,37 +2384,47 @@ var notifyTicks = 0; // minutes
 var meterModules = Modules.WithParameter("Meter.Watts");
 while (Program.IsEnabled)
 {
-  	Pause(60);
-  	notifyTicks++;
-  	//
-    var loadkw = 0d;
-    var devcount = 0;
-    meterModules.Each((mod)=&gt;{
-      if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
-      {
-        loadkw += mod.Parameter("Meter.Watts").DecimalValue;
-        devcount++;
-      }
-      return false;
-    });
-  	//
-  	var energyUse = Program.EnergyUseCounter;
-  	Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
-  	Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
-  	Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
-  	//
-  	// notify every 5 minutes
-  	if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+  Pause(60);
+  notifyTicks++;
+  //
+  var loadkw = 0d;
+  int devcount = 0, lightcount = 0, switchcount = 0;
+  meterModules.Each((mod)=&gt;{
+    if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
     {
-      	notifyTicks = 0;
-      	Program.Notify("Energy Monitor", 
-                       "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
-                       "Counter = " + energyUse.ToString("0.000"));
+      loadkw += mod.Parameter("Meter.Watts").DecimalValue;
+      if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
+      {
+        lightcount++;
+      }
+      else
+      {
+        switchcount++;  
+      }
+      devcount++;
     }
+    return false;
+  });
+  //
+  var energyUse = Program.EnergyUseCounter;
+  Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
+  Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
+  Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
+  Program.Parameter("EnergyMonitor.OperatingLights").Value = lightcount.ToString("0");
+  Program.Parameter("EnergyMonitor.OperatingSwitches").Value = switchcount.ToString("0");
+  //
+  // notify every 5 minutes
+  if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+  {
+    notifyTicks = 0;
+    Program.Notify("Energy Monitor", 
+                   "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
+                   "Counter = " + energyUse.ToString("0.000"));
+  }
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2423,8 +2433,8 @@ while (Program.IsEnabled)
     <Description>Collects and stores real-time information about
 energy consumption.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:29.49026Z</TriggerTime>
+    <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
+    <TriggerTime>2015-01-03T14:25:07.742279Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2578,7 +2588,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:47.236627Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:08.244566Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2842,7 +2852,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-01T15:39:47.737815Z</TriggerTime>
+    <TriggerTime>2015-01-03T14:25:08.749463Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7194,7 +7204,7 @@ byte[][] lcdfont_2l = {
    new byte[] { (byte)' ', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
    new byte[] { (byte)'!', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00 },
    new byte[] { (byte)'"', 8, 16, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-   new byte[] { (byte)'#', 8, 16, 0x00, 0x20, 0xe0, 0x3c, 0x20, 0xe0, 0x3c, 0x20, 0x08, 0x78, 0x0f, 0x08, 0x78, 0x0f, 0x08, 0x00 },
+   //new byte[] { (byte)'#', 8, 16, 0x00, 0x20, 0xe0, 0x3c, 0x20, 0xe0, 0x3c, 0x20, 0x08, 0x78, 0x0f, 0x08, 0x78, 0x0f, 0x08, 0x00 },
    new byte[] { (byte)'$', 8, 16, 0x00, 0x38, 0x44, 0x84, 0xfe, 0x04, 0x04, 0x18, 0x00, 0x18, 0x20, 0x20, 0x7f, 0x21, 0x22, 0x1c },
    new byte[] { (byte)'%', 8, 16, 0x00, 0x38, 0x44, 0x44, 0xb8, 0x60, 0x10, 0x0c, 0x00, 0x18, 0x04, 0x03, 0x1c, 0x22, 0x22, 0x1c },
    new byte[] { (byte)'&amp;', 8, 16, 0x00, 0x00, 0x38, 0xc4, 0xc4, 0x38, 0x00, 0x80, 0x00, 0x1e, 0x21, 0x20, 0x20, 0x13, 0x0c, 0x33 },
@@ -7222,7 +7232,7 @@ byte[][] lcdfont_2l = {
    new byte[] { (byte)'&lt;', 8, 16, 0x80, 0x40, 0x40, 0x20, 0x10, 0x10, 0x08, 0x00, 0x00, 0x01, 0x01, 0x02, 0x04, 0x04, 0x08, 0x00 },
    new byte[] { (byte)'=', 8, 16, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02 },
    new byte[] { (byte)'&gt;', 8, 16, 0x00, 0x08, 0x10, 0x10, 0x20, 0x40, 0x40, 0x80, 0x00, 0x08, 0x04, 0x04, 0x02, 0x01, 0x01, 0x00 },
-   new byte[] { (byte)'|'  /* ☂ */, 16, 32, 0x00, 0xe0, 0x30, 0x78, 0xf8, 0x3c, 0x3c, 0xfe, 0x7c, 0x3c, 0x3c, 0xf8, 0x78, 0x30, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   //new byte[] { (byte)'|'  /* ☂ */, 16, 32, 0x00, 0xe0, 0x30, 0x78, 0xf8, 0x3c, 0x3c, 0xfe, 0x7c, 0x3c, 0x3c, 0xf8, 0x78, 0x30, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
    new byte[] { (byte)'@', 8, 16, 0x00, 0xf0, 0x08, 0xc4, 0x24, 0xe4, 0x08, 0xf0, 0x00, 0x0f, 0x10, 0x23, 0x24, 0x23, 0x24, 0x17 },
    new byte[] { (byte)'A', 8, 16, 0x00, 0x00, 0x00, 0xe0, 0x1c, 0xe0, 0x00, 0x00, 0x00, 0x38, 0x07, 0x04, 0x04, 0x04, 0x07, 0x38 },
    new byte[] { (byte)'B', 8, 16, 0x00, 0xfc, 0x84, 0x84, 0x84, 0x84, 0x48, 0x30, 0x00, 0x3f, 0x20, 0x20, 0x20, 0x20, 0x11, 0x0e },
@@ -7252,7 +7262,7 @@ byte[][] lcdfont_2l = {
    new byte[] { (byte)'Z', 8, 16, 0x00, 0x04, 0x04, 0x04, 0xc4, 0x34, 0x0c, 0x00, 0x00, 0x30, 0x2c, 0x23, 0x20, 0x20, 0x20, 0x00 },
    new byte[] { (byte)'[', 8, 16, 0x00, 0x00, 0x00, 0xfe, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x7f, 0x40, 0x40, 0x40, 0x00 },
    new byte[] { (byte)']', 8, 16, 0x00, 0x02, 0x02, 0x02, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00 },
-   new byte[] { (byte)'^', 8, 16, 0x00, 0x00, 0x08, 0x04, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   //new byte[] { (byte)'^', 8, 16, 0x00, 0x00, 0x08, 0x04, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
    new byte[] { (byte)'_', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40 },
    new byte[] { (byte)'`', 8, 16, 0x00, 0x00, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
    new byte[] { (byte)'a', 8, 16, 0x00, 0x80, 0x40, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x1c, 0x22, 0x22, 0x22, 0x22, 0x1f, 0x20 },
@@ -7283,7 +7293,11 @@ byte[][] lcdfont_2l = {
    new byte[] { (byte)'z', 8, 16, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0xc0, 0x00, 0x00, 0x30, 0x28, 0x24, 0x22, 0x21, 0x20, 0x00 },
    new byte[] { (byte)'©', 8, 16, 0xe0, 0x18, 0xe4, 0x14, 0x14, 0x24, 0x18, 0xe0, 0x07, 0x18, 0x27, 0x28, 0x28, 0x24, 0x18, 0x07 },
    new byte[] { (byte)'®', 16, 32, 0x00, 0x00, 0xc0, 0x30, 0x08, 0xe8, 0x14, 0x14, 0x14, 0x14, 0xe8, 0x08, 0x30, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0c, 0x10, 0x1f, 0x21, 0x21, 0x21, 0x21, 0x1e, 0x10, 0x0c, 0x03, 0x00, 0x00 },
-   new byte[] { (byte)'\\' /* ° */, 16, 32, 0x00, 0x00, 0x18, 0x24, 0x24, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
+   new byte[] { (byte)'\\' /* ° */, 16, 32, 0x00, 0x00, 0x18, 0x24, 0x24, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'#' /* bulb */, 11, 22, 0x00, 0x78, 0xe4, 0xfa, 0xfe, 0xfe, 0xfe, 0xfe, 0xfc, 0x78, 0x00, 0x00, 0x00, 0x01, 0x17, 0x77, 0x77, 0x77, 0x17, 0x01, 0x00, 0x00 },
+   new byte[] { (byte)'|' /* plug */, 12, 24, 0x00, 0x60, 0xe0, 0xfe, 0xfe, 0xe0, 0xe0, 0xfe, 0xfe, 0xe0, 0x60, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x0f, 0x7f, 0x7f, 0x0f, 0x0f, 0x07, 0x00, 0x00 },
+   new byte[] { (byte)'^' /* energy */, 9, 18, 0x00, 0xe0, 0xfe, 0xfe, 0x5e, 0xc6, 0xe0, 0xe0, 0x00, 0x00, 0x01, 0x60, 0x38, 0x0e, 0x07, 0x01, 0x00, 0x00 }
+     
 };
 
 byte[][] lcdfont_3l = 
@@ -7717,6 +7731,8 @@ hg.SetConditionTrue();
 var temperature = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH0").Get().Parameter("Sensor.Temperature");
 var luminance = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH1").Get().Parameter("Sensor.Luminance");
 var energyLoad = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.KwLoad");
+var operatingLights = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingSwitches");
 var weather = hg.Program.WithName("Weather Underground");
 
 var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
@@ -7769,7 +7785,9 @@ while (hg.Program.IsEnabled)
     oled.Command("Oled.GoTo").Execute("0/4");
     oled.Command("Oled.DrawText2").Execute("Energy Use/CENTER");
     oled.Command("Oled.GoTo").Execute("0/6");
-    oled.Command("Oled.DrawText2").Execute((Math.round(energyLoad.DecimalValue * 10) / 10) + " kW/CENTER");
+    oled.Command("Oled.DrawText2").Execute('/CENTER');
+    oled.Command("Oled.GoTo").Execute("0/6");
+    oled.Command("Oled.DrawText2").Execute('#' + operatingLights.Value + ' |' + operatingSwitches.Value + ' ^' + (Math.round(energyLoad.DecimalValue * 10) / 10));
   }  
   hg.Pause(5);
 }
@@ -7818,17 +7836,173 @@ hg.Program.Setup(function(){
 });
 hg.SetConditionTrue();
 </ScriptCondition>
-    <ScriptSource>var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
+    <ScriptSource>// Get a reference to the OLED object
+var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
+
+// Get a reference to other programs of which data will be displayed on the OLED screen
 var thermostat = hg.Modules.WithName("Generic Thermostat").Get();
 var setPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
 var securitySystem = hg.Modules.WithName("Security Alarm System").Get();
 var securityArmed = securitySystem.Parameter("HomeGenie.SecurityArmed");
 
+// Global state variables
 var currentContext = '';
 var displayMode = 'normal';
 var lastButton = '';
 var startPressTs = new Date().getTime();
+// This system wide parameter is used to prevent other apps
+// from writing on the OLED screen  when the menu is open
 hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'OFF';
+
+// Menu screens
+
+function menuShowMain()
+{
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("----[ MENU ]----");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("1 Set Point/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText").Execute("2 Security/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/6");
+  oled.Command("Oled.DrawText").Execute("3 Invert Display/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  oled.Command("Oled.DrawText").Execute("4 Exit/LEFT");
+}
+
+function menuShowSetPoint()
+{
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("Set Point:/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText2").Execute(setPoint.Value + "/CENTER");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  oled.Command("Oled.DrawText").Execute("2 + 3 -   EXIT 4/CENTER");  
+}
+
+function menuShowSecurity()
+{
+  var level = securitySystem.Parameter("Status.Level");
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("Security:/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText2").Execute((securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0 ? "ARMED" : "DISARMED") + "/CENTER");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  if (securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0)
+  {
+    oled.Command("Oled.DrawText").Execute("2 DISARM  EXIT 4/CENTER");
+  }
+  else
+  {
+    oled.Command("Oled.DrawText").Execute("2 ARM     EXIT 4/CENTER");
+  }
+}
+
+// Context switch functions
+
+function setContext(ctx)
+{
+  currentContext = ctx;
+  hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'ON';
+  switch(ctx)
+  {
+    case 'main':
+      menuShowMain();
+      break;
+    case 'setpoint':
+      menuShowSetPoint();
+      break;
+    case 'security':
+      menuShowSecurity();
+      break;
+    case 'energysaving':
+      menuShowEnergySaving();
+      break;
+    case 'exit':
+      oled.Command("Oled.GoTo").Execute("0/3");
+      oled.Command("Oled.DrawText").Execute("/CENTER");
+      oled.Command("Oled.GoTo").Execute("0/4");
+      oled.Command("Oled.ShowLogo").Execute();
+      hg.Pause(2);
+      hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'OFF';
+      break;
+  }
+}
+
+function setContextInput(input)
+{
+  switch (input)
+  {
+    case '1': // BUTTON #1
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('setpoint');
+          break;
+      }
+      break;
+    case '2': // BUTTON #2
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('security');
+          break;
+        case 'setpoint':
+          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue + 1));
+          menuShowSetPoint();
+          break;
+        case 'security':
+          if (securityArmed.DecimalValue == 0)
+          {
+            securitySystem.Command("Control.On").Execute();
+          }
+          else
+          {
+            securitySystem.Command("Control.Off").Execute();
+          }
+          menuShowSecurity();
+          break;
+      }
+      break;
+    case '3': // BUTTON #3
+      switch (currentContext)
+      {
+        case 'main':
+          if (displayMode == 'normal')
+          {
+            displayMode = 'inverse';
+            oled.Command("Oled.DisplayInvert").Execute();
+          }
+          else
+          {
+            displayMode = 'normal';
+            oled.Command("Oled.DisplayNormal").Execute();
+          }
+          break;
+        case 'setpoint':
+          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue - 1));
+          menuShowSetPoint();
+          break;
+      }
+      break;
+    case '4': // BUTTON #4
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('exit');
+          break;
+        default:
+          setContext('main');
+          break;
+      }
+      break;
+  }
+
+}
 
 hg.When.ModuleParameterChange(function(module, parameter){
   if (module.Instance.Domain == 'RaspberryPi.Gpio' &amp;&amp; parameter.Is("Status.Level") &amp;&amp; parameter.DecimalValue &gt; 0)
@@ -7931,200 +8105,11 @@ hg.When.ModuleParameterChange(function(module, parameter){
 });
 
 hg.Program.GoBackground();
-
-// Context switch functions
-
-function setContext(ctx)
-{
-  currentContext = ctx;
-  hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'ON';
-  switch(ctx)
-  {
-    case 'main':
-      menuShowMain();
-      break;
-    case 'setpoint':
-      menuShowSetPoint();
-      break;
-    case 'security':
-      menuShowSecurity();
-      break;
-    case 'energysaving':
-      menuShowEnergySaving();
-      break;
-    case 'exit':
-      oled.Command("Oled.GoTo").Execute("0/3");
-      oled.Command("Oled.DrawText").Execute("/CENTER");
-      oled.Command("Oled.GoTo").Execute("0/4");
-      oled.Command("Oled.ShowLogo").Execute();
-      hg.Pause(2);
-      hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'OFF';
-      break;
-  }
-}
-
-function setContextInput(input)
-{
-  switch (input)
-  {
-    case '1': // BUTTON #1
-      switch (currentContext)
-      {
-        case 'main':
-          setContext('setpoint');
-          break;
-      }
-      break;
-    case '2': // BUTTON #2
-      switch (currentContext)
-      {
-        case 'main':
-          setContext('security');
-          break;
-        case 'setpoint':
-          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue + 1));
-          menuShowSetPoint();
-          break;
-        case 'security':
-          if (securityArmed.DecimalValue == 0)
-          {
-            securitySystem.Command("Control.On").Execute();
-          }
-          else
-          {
-            securitySystem.Command("Control.Off").Execute();
-          }
-          menuShowSecurity();
-          break;
-      }
-      break;
-    case '3': // BUTTON #3
-      switch (currentContext)
-      {
-        case 'main':
-          //setContext('energysaving');
-          if (displayMode == 'normal')
-          {
-            displayMode = 'inverse';
-            oled.Command("Oled.DisplayInvert").Execute();
-          }
-          else
-          {
-            displayMode = 'normal';
-            oled.Command("Oled.DisplayNormal").Execute();
-          }
-          break;
-        case 'setpoint':
-          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue - 1));
-          menuShowSetPoint();
-          break;
-      }
-      break;
-    case '4': // BUTTON #4
-      switch (currentContext)
-      {
-        case 'main':
-          setContext('exit');
-          break;
-        default:
-          setContext('main');
-          break;
-      }
-      break;
-  }
-
-}
-
-function menuShowMain()
-{
-  oled.Command("Oled.GoTo").Execute("0/3");
-  oled.Command("Oled.DrawText").Execute("----[ MENU ]----");
-  oled.Command("Oled.GoTo").Execute("0/4");
-  oled.Command("Oled.DrawText").Execute("1 Set Point/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/5");
-  oled.Command("Oled.DrawText").Execute("2 Security/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/6");
-  oled.Command("Oled.DrawText").Execute("3 Invert Display/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/7");
-  oled.Command("Oled.DrawText").Execute("4 Exit/LEFT");
-}
-
-function menuShowSetPoint()
-{
-  oled.Command("Oled.GoTo").Execute("0/3");
-  oled.Command("Oled.DrawText").Execute("/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/4");
-  oled.Command("Oled.DrawText").Execute("Set Point:/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/5");
-  oled.Command("Oled.DrawText2").Execute(setPoint.Value + "/CENTER");
-  oled.Command("Oled.GoTo").Execute("0/7");
-  oled.Command("Oled.DrawText").Execute("2 + 3 -   EXIT 4/CENTER");  
-}
-
-function menuShowSecurity()
-{
-  var level = securitySystem.Parameter("Status.Level");
-  oled.Command("Oled.GoTo").Execute("0/3");
-  oled.Command("Oled.DrawText").Execute("/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/4");
-  oled.Command("Oled.DrawText").Execute("Security:/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/5");
-  oled.Command("Oled.DrawText2").Execute((securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0 ? "ARMED" : "DISARMED") + "/CENTER");
-  oled.Command("Oled.GoTo").Execute("0/7");
-  if (securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0)
-  {
-    oled.Command("Oled.DrawText").Execute("2 DISARM  EXIT 4/CENTER");
-  }
-  else
-  {
-    oled.Command("Oled.DrawText").Execute("2 ARM     EXIT 4/CENTER");
-  }
-}
-
-function menuShowEnergySaving()
-{
-  oled.Command("Oled.GoTo").Execute("0/3");
-  oled.Command("Oled.DrawText").Execute("/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/4");
-  oled.Command("Oled.DrawText").Execute("Energy Saving:/LEFT");
-  oled.Command("Oled.GoTo").Execute("0/5");
-  oled.Command("Oled.DrawText2").Execute("OFF/CENTER");
-  oled.Command("Oled.GoTo").Execute("0/7");
-  oled.Command("Oled.DrawText").Execute("2 ON      EXIT 4/CENTER");
-}</ScriptSource>
+</ScriptSource>
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer,Light,Switch,Shutter</ForTypes>
-        <Property>EdenDisplay.ToggleButton.1</Property>
-        <Description>Toggle by button #1</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer,Light,Switch,Shutter</ForTypes>
-        <Property>EdenDisplay.ToggleButton.2</Property>
-        <Description>Toggle by button #2</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer,Light,Switch,Shutter</ForTypes>
-        <Property>EdenDisplay.ToggleButton.3</Property>
-        <Description>Toggle by button #3</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer,Light,Switch,Shutter</ForTypes>
-        <Property>EdenDisplay.ToggleButton.4</Property>
-        <Description>Toggle by button #4</Description>
-      </ProgramFeature>
-    </Features>
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>66</Address>
     <Name>Eden Oled Menu</Name>

@@ -151,7 +151,7 @@ namespace HomeGenie.Service.Logging
         public double GetTotalCounter(string parameterName, double timeScaleSeconds)
         {
             double value = 0;
-            //lock (dbLock)
+            try
             {
                 var dbCommand = dbConnection.CreateCommand();
                 // TODO: protect against sqlinjection ?
@@ -171,6 +171,8 @@ namespace HomeGenie.Service.Logging
                 }
                 //
                 reader.Close();
+            } catch {
+                // TODO: report/handle exception
             }
             return value;
         }

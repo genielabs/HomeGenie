@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r452</Version>
+  <Version>1.00 beta r453</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added History object to ModuleParameter (issue #80)
-  - Added "Eden Oled Menu" program
-  - Updated "SSd1306 OLED" and "Eden Oled Display" programs
-  - Fixed GPIO program bug (was firing multiple Status.Level change events if restarted)
-  - Added When.ProgramStopping helper function
-  - Changed default start page to Control Dashboard
-  - Fixed empty "html" folder creation in root directory during system update (issue #83)
-  - Added password hiding in program configuration fields and module feature fields (issue #64)
-  - Added support for Z-Wave ZME_UZB1 by adding /dev/ttyACM0 to the port selection list (Raspberry Pi)</ReleaseNote>
-  <ReleaseDate>2015-01-01T16:22:04.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed c# automation programs not starting after restoring from a backup (issue #86)
+  - Added ModuleParameter.Wait(double seconds) to wait a parameter update for a given time (issue #72)
+  - Deprecated ModuleParameter.LastValue, LastDecimalValue, ValueIncrement (moved to ModuleParameter.Statistics)
+  - Deprecated ModuleParameter.History and moved its functionalities to ModuleParameter.Statistics (issue #80)
+  - Fixed bug introduced with r452 and that was preventing modules config from being saved
+  - Fixed parsing of negative sensor values in ZWaveLib
+  - Fixed "NaN" issue in group values indicator for locales using "," as decimal separator
+  - Added modules.xml fields encryption
+  - Fixed missing scheduler config restore from a backup</ReleaseNote>
+  <ReleaseDate>2015-01-03T23:07:24.0000Z</ReleaseDate>
 </ReleaseInfo>

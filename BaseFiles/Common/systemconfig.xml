@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SystemConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SystemConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <HomeGenie>
     <Settings>
       <ModuleParameter>
@@ -7,81 +7,54 @@
         <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:44:43.926698Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpServer</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:44:54.129667Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpUserName</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:45:15.149807Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpPassword</Name>
         <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:49.9710739Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:45:36.203948Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.Monitor.KwLoad</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T19:47:35.762198Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:46:24.536057Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.Monitor.KwCounter</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T19:47:35.770991Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:46:24.555189Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EnergyManagement.Monitor.OperatingDevices</Name>
         <Value />
         <Description />
         <UpdateTime>2014-02-09T19:47:35.779683Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue />
-        <LastUpdateTime>2014-02-09T19:46:24.574276Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpPort</Name>
-        <Value></Value>
+        <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:58.6929279Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue></LastValue>
-        <LastUpdateTime>2014-04-19T10:24:49.9710739Z</LastUpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Messaging.Email.SmtpUseSsl</Name>
-        <Value></Value>
+        <Value />
         <Description />
         <UpdateTime>2014-04-19T10:24:58.6939286Z</UpdateTime>
-        <NeedsUpdate>false</NeedsUpdate>
-        <LastValue></LastValue>
-        <LastUpdateTime>2014-04-19T10:24:49.9710739Z</LastUpdateTime>
       </ModuleParameter>
     </Settings>
     <SystemName>HAL</SystemName>

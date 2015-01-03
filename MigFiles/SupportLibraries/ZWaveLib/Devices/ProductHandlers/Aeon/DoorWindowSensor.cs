@@ -27,7 +27,7 @@ using System.Text;
 
 namespace ZWaveLib.Devices.ProductHandlers.Aeon
 {
-    class DoorWindowSensor : Generic.Sensor
+    public class DoorWindowSensor : Generic.Sensor
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
@@ -43,10 +43,10 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.COMMAND_CLASS_ALARM && cmdType == 0x05 && message[9] == 0x00)
+            if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.ALARM && cmdType == (byte)Command.ALARM_REPORT && message[9] == 0x00)
             {
                 // tampered status
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_ALARM_TAMPERED, message[10]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_TAMPERED, message[10]);
                 return true;
             }
             return false;
@@ -59,7 +59,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             if (message[8] == 0x01)
             {
                 // door / window status
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_ALARM_DOORWINDOW, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_DOORWINDOW, message[9]);
                 handled = true;
             }
             else

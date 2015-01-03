@@ -2,12 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
-      <File FileName="../HISTORY.TXT" Line="8" Column="9" />
-      <File FileName="../HomeGenie/release_info.xml" Line="15" Column="35" />
+      <File FileName="../HISTORY.TXT" Line="2" Column="1" />
+      <File FileName="../HomeGenie/release_info.xml" Line="4" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/HomeGenie/Automation/ProgramEngine.cs" line="847" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="Generoso Martello" Email="generoso@martello.com" Copyright="GenieLabs" Company="GenieLabs" Trademark="" />

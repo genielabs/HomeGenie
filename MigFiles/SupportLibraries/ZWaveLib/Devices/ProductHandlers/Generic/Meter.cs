@@ -34,7 +34,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public void SetNodeHost(ZWaveNode node)
         {
             nodeHost = node;
-            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, 0);
+            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.WATTS, 0);
         }
 
 
@@ -68,12 +68,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte commandClass = message[7];
             byte commandType = message[8];
             //
-            if (commandClass == (byte)CommandClass.COMMAND_CLASS_METER && commandType == (byte)Command.COMMAND_METER_REPORT)
+            if (commandClass == (byte)CommandClass.METER && commandType == (byte)Command.METER_REPORT)
             {
                 // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
                 // TODO: the code below parse always as Electric type 
                 double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.WATTS, wattsRead);
                 processed = true;
             }
             return processed;

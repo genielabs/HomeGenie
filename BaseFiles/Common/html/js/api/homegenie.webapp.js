@@ -517,7 +517,6 @@ HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, times
     if (module.Properties != null) {
         for (var p = 0; p < module.Properties.length; p++) {
             if (module.Properties[p].Name == prop) {
-                module.Properties[p].LastValue = module.Properties[p].Value;
                 module.Properties[p].Value = value;
                 if (typeof timestamp != 'undefined')
                 {

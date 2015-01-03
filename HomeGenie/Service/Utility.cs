@@ -351,10 +351,7 @@ namespace HomeGenie.Service
                     "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
                     "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
                     "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
-                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
-                    "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
-                    "           \"LastValue\": \"" + JsonEncode(parameter.LastValue) + "\",\n" +
-                    "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
+                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
                     "       },\n";
                 }
                 json = json.TrimEnd(',', '\n');

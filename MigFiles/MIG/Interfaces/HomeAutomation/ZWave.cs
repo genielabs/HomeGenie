@@ -393,16 +393,16 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.COMMAND_CLASS_SWITCH_BINARY);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SWITCH_BINARY);
                         break;
                     case "Switch.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.COMMAND_CLASS_SWITCH_MULTILEVEL);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SWITCH_MULTILEVEL);
                         break;
                     case "Sensor.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.COMMAND_CLASS_SENSOR_BINARY);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SENSOR_BINARY);
                         break;
                     case "Sensor.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SENSOR_MULTILEVEL);
                         break;
                     }
                 }
@@ -902,13 +902,13 @@ namespace MIG.Interfaces.HomeAutomation
             //
             switch (upargs.ParameterType)
             {
-            case ParameterType.PARAMETER_WATTS:
+            case ParameterType.WATTS:
                 path = ModuleParameters.MODPAR_METER_WATTS;
                 break;
-            case ParameterType.PARAMETER_POWER:
+            case ParameterType.POWER:
                 path = ModuleParameters.MODPAR_METER_POWER;
                 break;
-            case ParameterType.PARAMETER_BATTERY:
+            case ParameterType.BATTERY:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = upargs.NodeId.ToString(),
@@ -918,57 +918,57 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 path = ModuleParameters.MODPAR_STATUS_BATTERY;
                 break;
-            case ParameterType.PARAMETER_NODE_INFO:
+            case ParameterType.NODE_INFO:
                 path = "ZWaveNode.NodeInfo";
                 break;
-            case ParameterType.PARAMETER_GENERIC:
+            case ParameterType.GENERIC:
                 path = ModuleParameters.MODPAR_SENSOR_GENERIC;
                 break;
-            case ParameterType.PARAMETER_ALARM_GENERIC:
+            case ParameterType.ALARM_GENERIC:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
                 break;
-            case ParameterType.PARAMETER_ALARM_DOORWINDOW:
+            case ParameterType.ALARM_DOORWINDOW:
                 path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
                 break;
-            case ParameterType.PARAMETER_ALARM_TAMPERED:
+            case ParameterType.ALARM_TAMPERED:
                 path = ModuleParameters.MODPAR_SENSOR_TAMPER;
                 break;
-            case ParameterType.PARAMETER_TEMPERATURE:
+            case ParameterType.TEMPERATURE:
                 path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
                 break;
-            case ParameterType.PARAMETER_HUMIDITY:
+            case ParameterType.HUMIDITY:
                 path = ModuleParameters.MODPAR_SENSOR_HUMIDITY;
                 break;
-            case ParameterType.PARAMETER_LUMINANCE:
+            case ParameterType.LUMINANCE:
                 path = ModuleParameters.MODPAR_SENSOR_LUMINANCE;
                 break;
-            case ParameterType.PARAMETER_MOTION:
+            case ParameterType.MOTION:
                 path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
                 break;
-            case ParameterType.PARAMETER_ALARM_SMOKE:
+            case ParameterType.ALARM_SMOKE:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_SMOKE;
                 break;
-            case ParameterType.PARAMETER_ALARM_CARBONMONOXIDE:
+            case ParameterType.ALARM_CARBONMONOXIDE:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONMONOXIDE;
                 break;
-            case ParameterType.PARAMETER_ALARM_CARBONDIOXIDE:
+            case ParameterType.ALARM_CARBONDIOXIDE:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONDIOXIDE;
                 break;
-            case ParameterType.PARAMETER_ALARM_HEAT:
+            case ParameterType.ALARM_HEAT:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_HEAT;
                 break;
-            case ParameterType.PARAMETER_ALARM_FLOOD:
+            case ParameterType.ALARM_FLOOD:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
                 break;
-            case ParameterType.PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC:
+            case ParameterType.MANUFACTURER_SPECIFIC:
                 ManufacturerSpecific mf = (ManufacturerSpecific)value;
                 path = "ZWaveNode.ManufacturerSpecific";
                 value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
                 break;
-            case ParameterType.PARAMETER_CONFIG:
+            case ParameterType.CONFIGURATION:
                 path = "ZWaveNode.Variables." + upargs.ParameterId;
                 break;
-            case ParameterType.PARAMETER_ASSOC:
+            case ParameterType.ASSOCIATION:
                 switch (upargs.ParameterId)
                 {
                 //                    case 0:
@@ -987,37 +987,37 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 }
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY_COUNT:
+            case ParameterType.MULTIINSTANCE_SWITCH_BINARY_COUNT:
                 path = "ZWaveNode.MultiInstance.SwitchBinary.Count";
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT:
+            case ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT:
                 path = "ZWaveNode.MultiInstance.SwitchMultiLevel.Count";
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_BINARY_COUNT:
+            case ParameterType.MULTIINSTANCE_SENSOR_BINARY_COUNT:
                 path = "ZWaveNode.MultiInstance.SensorBinary.Count";
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT:
+            case ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT:
                 path = "ZWaveNode.MultiInstance.SensorMultiLevel.Count";
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_BINARY:
+            case ParameterType.MULTIINSTANCE_SWITCH_BINARY:
                 path = "ZWaveNode.MultiInstance.SwitchBinary." + upargs.ParameterId;
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SWITCH_MULTILEVEL:
+            case ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL:
                 path = "ZWaveNode.MultiInstance.SwitchMultiLevel." + upargs.ParameterId;
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_BINARY:
+            case ParameterType.MULTIINSTANCE_SENSOR_BINARY:
                 path = "ZWaveNode.MultiInstance.SensorBinary." + upargs.ParameterId;
                 break;
-            case ParameterType.PARAMETER_MULTIINSTANCE_SENSOR_MULTILEVEL:
+            case ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL:
                 path = "ZWaveNode.MultiInstance.SensorMultiLevel." + upargs.ParameterId;
                 break;
-            case ParameterType.PARAMETER_WAKEUP_INTERVAL:
+            case ParameterType.WAKEUP_INTERVAL:
                 path = "ZWaveNode.WakeUpInterval";
                 break;
-            case ParameterType.PARAMETER_WAKEUP_NOTIFY:
+            case ParameterType.WAKEUP_NOTIFY:
                 path = "ZWaveNode.WakeUpNotify";
                 break;
-            case ParameterType.PARAMETER_BASIC:
+            case ParameterType.BASIC:
                     //
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -1040,29 +1040,29 @@ namespace MIG.Interfaces.HomeAutomation
                 value = normalizedval.ToString(CultureInfo.InvariantCulture);
 
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_MODE:
+            case ParameterType.THERMOSTAT_MODE:
                 path = "Thermostat.Mode";
                 value = ((Thermostat.Mode)value).ToString();
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_OPERATING_STATE:
+            case ParameterType.THERMOSTAT_OPERATING_STATE:
                 path = "Thermostat.OperatingState";
                 value = ((Thermostat.OperatingState)value).ToString();
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_FAN_MODE:
+            case ParameterType.THERMOSTAT_FAN_MODE:
                 path = "Thermostat.FanMode";
                 value = ((Thermostat.FanMode)value).ToString();
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_FAN_STATE:
+            case ParameterType.THERMOSTAT_FAN_STATE:
                 path = "Thermostat.FanState";
                 value = ((Thermostat.FanState)value).ToString();
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_HEATING:
+            case ParameterType.THERMOSTAT_HEATING:
                 path = "Thermostat.Heating";
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_SETBACK:
+            case ParameterType.THERMOSTAT_SETBACK:
                 path = "Thermostat.SetBack";
                 break;
-            case ParameterType.PARAMETER_THERMOSTAT_SETPOINT:
+            case ParameterType.THERMOSTAT_SETPOINT:
                 path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
                 value = ((dynamic)value).Value;
                 break;

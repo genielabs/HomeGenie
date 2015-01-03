@@ -24,6 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HomeGenie.Service;
+using HomeGenie.Service.Logging;
 
 namespace HomeGenie.Data
 {
@@ -41,25 +43,81 @@ namespace HomeGenie.Data
             }
         }
 
-        public DateTime LastProcessedTimestap;
-
         private List<StatValue> statValues;
+        private TsList<StatValue> historyValues = new TsList<StatValue>();
+        private int historyLimit = 10;
+        private StatValue lastEvent, lastOn, lastOff;
 
         public ValueStatistics()
         {
             LastProcessedTimestap = DateTime.UtcNow;
             statValues = new List<StatValue>();
             statValues.Add(new StatValue(0, LastProcessedTimestap));
+            lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestap);
+            historyValues.Add(lastEvent);
+            while (historyValues.Count > historyLimit)
+            {
+                historyValues.RemoveAt(historyValues.Count - 1);
+            }
         }
 
-        public void AddValue(double value, DateTime timestamp)
+        public void AddValue(string fieldName, double value, DateTime timestamp)
         {
-            statValues.Add(new StatValue(value, timestamp));
+            if (StatisticsLogger.IsValidField(fieldName))
+            {
+                // add value for StatisticsLogger use
+                statValues.Add(new StatValue(value, timestamp));
+            }
+            //
+            // "value" is the occurring event in this very moment, 
+            // so "Current" is holding previous value right now
+            if (Current.Value != value)
+            {
+                lastEvent = new StatValue(Current.Value, Current.Timestamp);
+                if (value == 0)
+                {
+                    lastOn = lastEvent;
+                    lastOff = new StatValue(value, timestamp);
+                }
+                else if (Current.Value == 0)
+                {
+                    lastOff = lastEvent;
+                    lastOn = new StatValue(value, timestamp);
+                }
+            }
+            // insert current value into history and so update "Current" to "value"
+            historyValues.Insert(0, new StatValue(value, timestamp));
         }
 
-        public List<StatValue> Values
+        public int HistoryLimit
         {
-            get { return statValues; }
+            get { return historyLimit; }
+            set { historyLimit = value; }
+        }
+        
+        public TsList<StatValue> History
+        {
+            get { return historyValues; }
+        }
+
+        public StatValue Current
+        {
+            get { return historyValues[0]; }
+        }
+
+        public StatValue Last
+        {
+            get { return lastEvent; }
+        }
+
+        public StatValue LastOn
+        {
+            get { return lastOn; }
+        }
+        
+        public StatValue LastOff
+        {
+            get { return lastOff; }
         }
 
         /// <summary>
@@ -67,7 +125,15 @@ namespace HomeGenie.Data
         /// </summary>
         public List<StatValue> GetResampledValues(int sampleWidth) // in minutes
         {
+            // TODO: to be implemented
             return null;
+        }
+
+        // These fields are used by StatisticsLogger
+        internal DateTime LastProcessedTimestap;
+        internal List<StatValue> Values
+        {
+            get { return statValues; }
         }
 
     }

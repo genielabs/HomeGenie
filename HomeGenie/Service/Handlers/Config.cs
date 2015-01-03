@@ -364,6 +364,9 @@ namespace HomeGenie.Service.Handlers
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"),
                               Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"),
                               true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "scheduler.xml"),
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"),
+                              true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"),
                               Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"),
                               true);
@@ -381,6 +384,7 @@ namespace HomeGenie.Service.Handlers
                     foreach (var program in newProgramsData)
                     {
                         var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                        program.IsRunning = false;
                         // Only restore user space programs
                         if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
                         {

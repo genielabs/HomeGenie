@@ -35,7 +35,6 @@ namespace HomeGenie.Data
     public class ModuleParameter
     {
         [NonSerialized]
-        private ValueHistory history;
         private ValueStatistics statistics;
         private string parameterValue;
         //
@@ -46,9 +45,6 @@ namespace HomeGenie.Data
             Value = "";
             Description = "";
             UpdateTime = DateTime.Now;
-            //
-            LastValue = "";
-            LastUpdateTime = DateTime.Now;
         }
         //
         [XmlIgnore]
@@ -61,16 +57,6 @@ namespace HomeGenie.Data
             }
         }
         //
-        [XmlIgnore]
-        public ValueHistory History
-        {
-            get
-            {
-                if (history == null) history = new ValueHistory();
-                return history;
-            }
-        }
-        //
         public string Name { get; set; }
         public string Value
         {
@@ -80,40 +66,23 @@ namespace HomeGenie.Data
             }
             set
             {
-                if ((!string.IsNullOrEmpty(parameterValue) && parameterValue != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
-                {
-                    LastValue = parameterValue;
-                    LastUpdateTime = UpdateTime.ToUniversalTime();
-                }
                 UpdateTime = DateTime.UtcNow;
                 parameterValue = value;
                 //
-                // add value to the history
-                History.AddValue(value, this.UpdateTime);
-                //
                 // can we add this value for statistics?
                 double v;
-                if (!string.IsNullOrEmpty(value) && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
+                if (!string.IsNullOrEmpty(value) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
                 {
-                    Statistics.AddValue(v, this.UpdateTime);
+                    Statistics.AddValue(Name, v, this.UpdateTime);
                 }
             }
         }
         public string Description { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
+        [XmlIgnore]
         public bool NeedsUpdate { get; set; }
-        //
-        public double ValueIncrement
-        {
-            get
-            {
-                return (this.DecimalValue - this.LastDecimalValue);
-            }
-        }
-        //
-        public string LastValue { get; /* protected */ set; }
-        public DateTime LastUpdateTime { get; /* protected */ set; }
 
+        [XmlIgnore]
         public double DecimalValue
         {
             get
@@ -125,20 +94,19 @@ namespace HomeGenie.Data
             }
         }
 
-        public double LastDecimalValue
-        {
-            get
-            {
-                double v = 0;
-                if (this.LastValue != null && !double.TryParse(this.LastValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
-                return v;
-            }
-        }
-
         public bool Is(string name)
         {
             return (this.Name.ToLower() == name.ToLower());
         }
+
+        public bool Wait(double timeoutSeconds)
+        {
+            var lastUpdate = new DateTime(UpdateTime.Ticks);
+            var startTimestamp = DateTime.UtcNow;
+            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - startTimestamp).TotalSeconds < timeoutSeconds);
+            return lastUpdate.Ticks != UpdateTime.Ticks;
+        }
+
     }
 
 }
