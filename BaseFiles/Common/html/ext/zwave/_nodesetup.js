@@ -653,11 +653,13 @@ function _zwavedelayupdate(nodeid) {
 
 function Pepper1Db_getConfigValue(zvalue) {
     var v = { from: "0", to: "0", description: '' };
-    v.from = parseInt(zvalue['@from'], 16);
-    //if (v.from.length > 1) v.from = v.from.replace(new RegExp("^[0]+"), "");
-    v.to = parseInt(zvalue['@to'], 16);
-    //if (v.to.length > 1) v.to = v.to.replace(new RegExp("^[0]+"), "");
-    v.description = Pepper1Db_getLocaleText(zvalue.description);
+    if(typeof zvalue !== "undefined"){
+        v.from = parseInt(zvalue['@from'], 16);
+        //if (v.from.length > 1) v.from = v.from.replace(new RegExp("^[0]+"), "");
+        v.to = parseInt(zvalue['@to'], 16);
+        //if (v.to.length > 1) v.to = v.to.replace(new RegExp("^[0]+"), "");
+        v.description = Pepper1Db_getLocaleText(zvalue.description);
+    }
     return v;
 }
 
@@ -719,16 +721,20 @@ function Pepper1Db_getArray(zarray, type) {
 function Pepper1Db_getLocaleText(zproperty) {
     var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
     var lang = userLang.toLowerCase().substring(0, 2);
-    //
-    var item = zproperty.lang.filter(function (obj) {
-        return obj['@xml:lang'] == lang;
-    });
-    if (item.length == 0) {
-        item = zproperty.lang.filter(function (obj) {
-            return obj['@xml:lang'] == 'en';
+    // if lang is array
+    if($.isArray(zproperty.lang)){
+        var item = zproperty.lang.filter(function (obj) {
+            return obj['@xml:lang'] == lang;
         });
+        if (item.length == 0) {
+            item = zproperty.lang.filter(function (obj) {
+                return obj['@xml:lang'] == 'en';
+            });
+        }
+        return item[0]['#text'];
     }
-    return item[0]['#text'];
+    // else
+    return zproperty.lang['#text'];
 }
 
 
