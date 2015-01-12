@@ -31,7 +31,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Fibaro
 {
     // Fibaro System Motion Sensor
     // 010F:0800:1001
-    class MotionSensor : Sensor
+    public class MotionSensor : Sensor
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
@@ -47,7 +47,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Fibaro
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL && cmdType == 0x05)
+            if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
             {
                 SensorValue sensorval = Sensor.ParseSensorValue(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)

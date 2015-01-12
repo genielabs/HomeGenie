@@ -2,11 +2,11 @@
 	"Commands" : [
 		{
 			"Command": "Control.On",
-			"Aliases": [ "allumer" ]
+			"Aliases": [ "allumer", "ouvrir" ]
 		},
 		{
 			"Command": "Control.Off",
-			"Aliases": [ "éteindre" ]
+			"Aliases": [ "éteindre", "fermer" ]
 		},
 		{
 			"Command": "Control.Level",

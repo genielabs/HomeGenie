@@ -163,7 +163,13 @@ namespace HomeGenie.Automation
                         isConditionSatisfied = (program.Conditions.Count > 0);
                         for (int c = 0; c < program.Conditions.Count; c++)
                         {
-                            bool res = VerifyProgramCondition(program.Conditions[c]);
+                            bool res = false;
+                            try
+                            {
+                                res = VerifyProgramCondition(program.Conditions[c]);
+                            } catch {
+                                // TODO: report/handle exception
+                            }
                             isConditionSatisfied = (isConditionSatisfied && res);
                         }
                     }
@@ -384,6 +390,12 @@ namespace HomeGenie.Automation
             program.SetHost(homegenie);
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
+            //
+            // in case of c# script preload assembly from generated .dll
+            if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
+            {
+                program.ScriptErrors = "Program update is required.";
+            }
             //
             // Initialize state
             RaiseProgramModuleEvent(program, "Program.Status", "Idle");

@@ -150,10 +150,13 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function ()
 	        for (var p = 0; p < module.Properties.length; p++) {
 	        	if (module.Properties[p].Name.substring(0, 17) == 'ConfigureOptions.')
 	        	{
+                    var inputType = 'text';
+                    var desc = (module.Properties[p].Description && module.Properties[p].Description != 'undefined' && module.Properties[p].Description != '' ? module.Properties[p].Description : module.Properties[p].Name);
+                    if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
 		        	var updatetime = module.Properties[p].UpdateTime; updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
 	            	var d = new Date(updatetime);	        	
 		            params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + module.Properties[p].Name.substring(17) + '</strong> = ';
-		            params += '"' + module.Properties[p].Value + '"</br>'
+		            params += '"' + (inputType == 'password' ? '*****' : module.Properties[p].Value) + '"</br>'
 		            params += '<span style="font-size:8pt;"><em>' + d + '</em></span></p></li>';
 	            }
 	        }
@@ -266,8 +269,10 @@ HG.WebApp.ProgramsList.RefreshProgramOptions = function ()
 
             for (var p = 0; p < arr.length; p++) {
 
+                var inputType = 'text';
                 var desc = (arr[p].Description && arr[p].Description != 'undefined' && arr[p].Description != '' ? arr[p].Description : arr[p].Name);
-                var opt = '<div><p style="font-weight:bold">' + desc + '</p><input type="text" value="' + arr[p].Value + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" /></div>';
+                if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
+                var opt = '<div><p style="font-weight:bold">' + desc + '</p><input type="' + inputType + '" value="' + arr[p].Value + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" /></div>';
                 fieldparams.append(opt);            
             
             }

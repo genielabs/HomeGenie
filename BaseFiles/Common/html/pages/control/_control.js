@@ -219,6 +219,9 @@ HG.WebApp.Control.RenderModule = function () {
                             myinstance.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
                             $('#' + rendermodule.ElementId).data('homegenie.widget', myinstance);
                             rendermodule.Module.WidgetInstance = myinstance;
+                            $('#module_options_button').unbind('click').bind('click.widget', function (event) {
+                                HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
+                            });
                         } catch (e) {
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
@@ -431,7 +434,7 @@ HG.WebApp.Control.RefreshGroupIndicators = function() {
 	        	var t = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
 	        	if (t != null && t.Value != '')
 	        	{
-	        		group_temperature = t.Value;
+	        		group_temperature = parseFloat(t.Value.replace(',', '.'));
 	        	}
 	    	}
 
@@ -440,7 +443,7 @@ HG.WebApp.Control.RefreshGroupIndicators = function() {
 	        	var h = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Humidity");
 	        	if (h != null && h.Value != '')
 	        	{
-	        		group_humidity = h.Value;
+	        		group_humidity = parseFloat(h.Value.replace(',', '.'));
 	        	}
 	    	}
 
@@ -449,7 +452,7 @@ HG.WebApp.Control.RefreshGroupIndicators = function() {
 	        	var l = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Luminance");
 	        	if (l != null && l.Value != '')
 	        	{
-	        		group_luminance = l.Value;
+	        		group_luminance = parseFloat(l.Value.replace(',', '.'));
 	        	}
 	    	}
 	    }

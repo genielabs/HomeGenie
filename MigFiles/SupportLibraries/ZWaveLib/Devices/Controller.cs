@@ -444,13 +444,13 @@ namespace ZWaveLib.Devices
                                 RaiseUpdateParameterEvent(
                                     znode,
                                     0,
-                                    ParameterType.PARAMETER_NODE_INFO,
+                                    ParameterType.NODE_INFO,
                                     zwavePort.ByteArrayToString(nodeInfo)
                                 );
                                 RaiseUpdateParameterEvent(
                                     znode,
                                     0,
-                                    ParameterType.PARAMETER_WAKEUP_NOTIFY,
+                                    ParameterType.WAKEUP_NOTIFY,
                                     "1"
                                 );
                             }
@@ -656,7 +656,7 @@ namespace ZWaveLib.Devices
             RaiseUpdateParameterEvent(
                 (ZWaveNode)sender,
                 0,
-                ParameterType.PARAMETER_ZWAVE_MANUFACTURER_SPECIFIC,
+                ParameterType.MANUFACTURER_SPECIFIC,
                 mfargs.ManufacturerSpecific
             );
             if (this.ManufacturerSpecificResponse != null)

@@ -28,7 +28,7 @@ using ZWaveLib.Devices.ProductHandlers.Generic;
 
 namespace ZWaveLib.Devices.ProductHandlers.Aeon
 {
-    class MicroSmartEnergySwitch : Switch
+    public class MicroSmartEnergySwitch : Switch
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
