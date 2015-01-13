@@ -649,6 +649,15 @@
                 gradient.addColorStop("0.8", "#AAEEEE");
                 gradient.addColorStop("1.0", "#FFFFFF");
             }
+            else if (this.o.gradient == 'bluered') {
+                gradient = c.createLinearGradient(20, 140, 160, 100);
+                gradient.addColorStop("0.0", "#000088");
+                gradient.addColorStop("0.25", "#0044FF");
+                gradient.addColorStop("0.4", "#00FF00");
+                gradient.addColorStop("0.7", "#FF4400");
+                gradient.addColorStop("0.8", "#CC0000");
+                gradient.addColorStop("1.0", "#880000");
+            }
             c.beginPath();
             c.strokeStyle = (gradient != null ? gradient : '#888888');
             c.opacity = 0.1;

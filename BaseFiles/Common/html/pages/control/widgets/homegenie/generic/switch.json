@@ -171,7 +171,10 @@
 		var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
 		if (widgeticon != null && widgeticon.Value != '')
         {
-            this.IconImage = widgeticon.Value;
+            if (level != 'OFF')
+                this.IconImage = widgeticon.Value.replace('_off','_on');
+            else
+                this.IconImage = widgeticon.Value;
         }
         else if (level != 'OFF')
 		{

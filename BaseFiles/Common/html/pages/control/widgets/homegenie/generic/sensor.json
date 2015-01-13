@@ -89,15 +89,22 @@
 	                	imagesrc = 'hg-indicator-humidity';
 	                    displayvalue = value + '%';
 	                }
-					//
 					if (module.Properties[p].Name == 'Meter.Watts') {
 						imagesrc = 'hg-indicator-energy';
 					}
 					else if (module.Properties[p].Name == 'Sensor.DoorWindow' ) {
-						imagesrc = 'hg-indicator-door';
-					}
-					//
-	                if (imagesrc != '')
+                        imagesrc = 'hg-indicator-door';
+                    }
+					else if (module.Properties[p].Name == 'Sensor.Alarm' ) {
+                        imagesrc = 'hg-indicator-alarm';
+                    }
+                    else if (module.Properties[p].Name == 'Sensor.Generic' ) {
+                        imagesrc = 'hg-indicator-generic';
+                    }
+                    else if (module.Properties[p].Name == 'Status.Level' ) {
+                        imagesrc = 'hg-indicator-level';
+                    }
+                    if (imagesrc != '')
 	                {
 	                    displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
 	                    sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
