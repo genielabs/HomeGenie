@@ -2,8 +2,7 @@ HG.WebApp.SystemSettings = HG.WebApp.SystemSettings || {};
 
 HG.WebApp.SystemSettings.InitializePage = function () {
     $('#page_configure_interfaces').on('pageinit', function (e) {
-        if (HOST_SYSTEM.substring(0, 3) == 'Win')
-        {
+        if (HOST_SYSTEM.substring(0, 3) == 'Win') {
             $('[data-locale-id=configure_interfaces_lircremote]').hide().next().hide();
             $('[data-locale-id=configure_interfaces_camera]').hide().next().hide();
             $('[data-locale-id=configure_interfaces_weeco4mgpio]').hide().next().hide();
@@ -17,7 +16,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $('#page_configure_interfaces_zwaveport').change(function (event) {
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'Options.Set', 'Port', encodeURIComponent($(this).val()));
-        });    
+        });
         $('#systemsettings_zwavehardreset_hardresetbutton').bind('click', function () {
             HG.WebApp.SystemSettings.ZWaveHardReset();
         });
@@ -41,26 +40,26 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             //
             if (hc != '') {
                 hc = hc.substr(0, hc.length - 1);
-            	HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Set', 'HouseCodes', encodeURIComponent(hc));
+                HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Set', 'HouseCodes', encodeURIComponent(hc));
                 $('#control_groupslist').empty(); // forces control menu rebuild
             }
             else {
-				$('#page_configure_interfaces_x10housecodes').qtip({
-			        content: {
-			        	title: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_title'),
-			        	text: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_text'),
-			        	button: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_button')
-			    	},
-			        show: { event: false, ready: true, delay: 500 },
-			        events: {
-			            hide: function () {
-			                $(this).qtip('destroy');
-			            }
-			        },
-			        hide: { event: false, inactive: 3000 },
-			        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
-			        position: { my: 'bottom center', at: 'top center' }
-			    });
+                $('#page_configure_interfaces_x10housecodes').qtip({
+                    content: {
+                        title: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_title'),
+                        text: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_text'),
+                        button: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_button')
+                    },
+                    show: { event: false, ready: true, delay: 500 },
+                    events: {
+                        hide: function () {
+                            $(this).qtip('destroy');
+                        }
+                    },
+                    hide: { event: false, inactive: 3000 },
+                    style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                    position: { my: 'bottom center', at: 'top center' }
+                });
             }
         });
         //
@@ -82,7 +81,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $("#configure_interfaces_flip_zwave").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('zwave');
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Set', $("#configure_interfaces_flip_zwave").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Set', $("#configure_interfaces_flip_zwave").val(), '', function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 if ($("#configure_interfaces_flip_zwave").val() == '1' && $('#page_configure_interfaces_zwaveport').val() == "") {
                     HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_zwaveport');
@@ -95,7 +94,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $("#configure_interfaces_flip_insteon").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('insteon');
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'IsEnabled.Set', $("#configure_interfaces_flip_insteon").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'IsEnabled.Set', $("#configure_interfaces_flip_insteon").val(), '', function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 if ($("#configure_interfaces_flip_insteon").val() == '1' && $('#page_configure_interfaces_insteonport').val() == "") {
                     HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_insteonport');
@@ -108,7 +107,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $("#configure_interfaces_flip_x10").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('x10');
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Set', $("#configure_interfaces_flip_x10").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Set', $("#configure_interfaces_flip_x10").val(), '', function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 if ($("#configure_interfaces_flip_x10").val() == '1' && $('#page_configure_interfaces_x10port').val() == "") {
                     HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_x10port');
@@ -121,7 +120,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         //
         $("#configure_interfaces_flip_w800rf32").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('w800rf32');
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Set', $("#configure_interfaces_flip_w800rf32").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Set', $("#configure_interfaces_flip_w800rf32").val(), '', function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
                 if ($("#configure_interfaces_flip_w800rf32").val() == '1' && $('#page_configure_interfaces_w800rf32port').val() == "") {
                     HG.WebApp.SystemSettings.ShowPortTip('#page_configure_interfaces_w800rf32port');
@@ -133,25 +132,25 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
         //
         $("#configure_interfaces_flip_weeco4mgpio").on('slidestop', function (event) {
-        	HG.Configure.MIG.InterfaceCommand('EmbeddedSystems.Weeco4mGPIO', 'IsEnabled.Set', $("#configure_interfaces_flip_weeco4mgpio").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('EmbeddedSystems.Weeco4mGPIO', 'IsEnabled.Set', $("#configure_interfaces_flip_weeco4mgpio").val(), '', function (data) {
                 $('#control_groupslist').empty(); // forces control menu rebuild
             });
         });
         //
         $("#configure_interfaces_flip_upnp").on('slidestop', function (event) {
-        	HG.Configure.MIG.InterfaceCommand('Protocols.UPnP', 'IsEnabled.Set', $("#configure_interfaces_flip_upnp").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Protocols.UPnP', 'IsEnabled.Set', $("#configure_interfaces_flip_upnp").val(), '', function (data) {
             });
         });
         //
         $("#configure_interfaces_flip_lircremote").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('lircremote');
-        	HG.Configure.MIG.InterfaceCommand('Controllers.LircRemote', 'IsEnabled.Set', $("#configure_interfaces_flip_lircremote").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Controllers.LircRemote', 'IsEnabled.Set', $("#configure_interfaces_flip_lircremote").val(), '', function (data) {
             });
         });
         //
         $("#configure_interfaces_flip_camera").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('camera');
-        	HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'IsEnabled.Set', $("#configure_interfaces_flip_camera").val(), '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'IsEnabled.Set', $("#configure_interfaces_flip_camera").val(), '', function (data) {
             });
         });
         //
@@ -189,15 +188,15 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 });
             }
         });
-		//
-		$('#page_configure_interfaces_camerachange').bind('click', function() {
-			var device = encodeURIComponent($('#page_configure_interfaces_cameraport').val());
-			var resolution = encodeURIComponent($('#page_configure_interfaces_cameraresolution').val());
-			var fps = encodeURIComponent($('#page_configure_interfaces_camerafps').val());
-        	HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'VideoInput.Set', encodeURIComponent(device) + "/" + encodeURIComponent(resolution) + "/" + encodeURIComponent(fps), '', function (data) {
-            	
+        //
+        $('#page_configure_interfaces_camerachange').bind('click', function () {
+            var device = encodeURIComponent($('#page_configure_interfaces_cameraport').val());
+            var resolution = encodeURIComponent($('#page_configure_interfaces_cameraresolution').val());
+            var fps = encodeURIComponent($('#page_configure_interfaces_camerafps').val());
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'VideoInput.Set', encodeURIComponent(device) + "/" + encodeURIComponent(resolution) + "/" + encodeURIComponent(fps), '', function (data) {
+
             });
-		});
+        });
     });
 };
 
@@ -218,10 +217,10 @@ HG.WebApp.SystemSettings.GetInterface = function (domain) {
 HG.WebApp.SystemSettings.ShowPortTip = function (el) {
     $(el).qtip({
         content: {
-        	title: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_title'),
-        	text: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_text'),
-        	button: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_button')
-    	},
+            title: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_title'),
+            text: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_text'),
+            button: HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_button')
+        },
         show: { event: false, ready: true, delay: 1000 },
         events: {
             hide: function () {
@@ -315,7 +314,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 $('#page_configure_interfaces_insteonport').append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
             }
             $('#page_configure_interfaces_insteonport').selectmenu('refresh', true);
-	        HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'Options.Get', 'Port', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'Options.Get', 'Port', '', function (data) {
                 $('#page_configure_interfaces_insteonport').val(data.ResponseValue);
                 $('#page_configure_interfaces_insteonport').selectmenu('refresh', true);
             });
@@ -326,7 +325,7 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 $('#page_configure_interfaces_x10port').append('<option value="' + ports[p] + '">CM11 - ' + ports[p] + '</option>');
             }
             $('#page_configure_interfaces_x10port').selectmenu('refresh', true);
-	        HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Get', 'Port', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Get', 'Port', '', function (data) {
                 $('#page_configure_interfaces_x10port').val(data.ResponseValue);
                 $('#page_configure_interfaces_x10port').selectmenu('refresh', true);
             });
@@ -335,53 +334,53 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             for (var p = 0; p < ports.length; p++) {
                 $('#page_configure_interfaces_w800rf32port').append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
             }
-	        HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'Options.Get', 'Port', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'Options.Get', 'Port', '', function (data) {
                 $('#page_configure_interfaces_w800rf32port').val(data.ResponseValue);
                 $('#page_configure_interfaces_w800rf32port').selectmenu('refresh', true);
             });
-	        HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Get', 'VideoInput', '', function (data) {
-            	data = data[0];
-            	$('#page_configure_interfaces_cameraport').val(data.Device);
-            	$('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
-            	$('#page_configure_interfaces_cameraresolution').val(data.Width + 'x' + data.Height);
-            	$('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
-            	$('#page_configure_interfaces_camerafps').val(data.Fps);
-            	$('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Get', 'VideoInput', '', function (data) {
+                data = data[0];
+                $('#page_configure_interfaces_cameraport').val(data.Device);
+                $('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
+                $('#page_configure_interfaces_cameraresolution').val(data.Width + 'x' + data.Height);
+                $('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
+                $('#page_configure_interfaces_camerafps').val(data.Fps);
+                $('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
             });
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_zwave').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('zwave');
             });
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Insteon', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_insteon').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('insteon');
             });
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_x10').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('x10');
             });
-        	HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_w800rf32').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('w800rf32');
             });
-        	HG.Configure.MIG.InterfaceCommand('Controllers.LircRemote', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Controllers.LircRemote', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_lircremote').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('lircremote');
                 HG.WebApp.SystemSettings.LircRemoteList();
             });
-        	HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_camera').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('camera');
             });
-        	HG.Configure.MIG.InterfaceCommand('EmbeddedSystems.Weeco4mGPIO', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('EmbeddedSystems.Weeco4mGPIO', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_weeco4mgpio').val(data.ResponseValue).slider('refresh');
             });
-        	HG.Configure.MIG.InterfaceCommand('Protocols.UPnP', 'IsEnabled.Get', '', '', function (data) {
+            HG.Configure.MIG.InterfaceCommand('Protocols.UPnP', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_upnp').val(data.ResponseValue).slider('refresh');
             });
         });
     });
-	HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Get', 'HouseCodes', '', function (data) {
+    HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Get', 'HouseCodes', '', function (data) {
         data = ',' + data.ResponseValue + ',';
         $('#page_configure_interfaces_x10housecodes input[type=checkbox]').each(function () {
             if (data.indexOf(',' + $(this).val() + ',') >= 0) {

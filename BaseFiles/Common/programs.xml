@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:26:05.722796Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:30.307863Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:02.240647Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:30.813737Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:02.740643Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:31.311557Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -496,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:27:05.132203Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:35:14.082382Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -546,6 +546,11 @@ Func&lt;bool&gt; readdistance = new Func&lt;bool&gt;(() =&gt; {
 	return success;
 });
   
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 // it makes program to respond to webservices calls:
 //     http:///api/Components.HCSR04/0/Sensor.Distance
 When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt; 
@@ -561,14 +566,14 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>37</Address>
     <Name>HCSR04 - Ultrasonic Ranging Module</Name>
     <Description>Ultrasonic Ranging Module sensor </Description>
     <Group>Raspberry Pi</Group>
-    <ActivationTime>2014-11-13T16:35:20.828486Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:35:28.702851Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -669,6 +674,11 @@ When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt;
 var dataPin = ConnectorPin.P1Pin16.ToProcessor();
 var driver = new MemoryGpioConnectionDriver();
 
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
 	int[] data;
@@ -746,7 +756,8 @@ while (Program.IsEnabled)
   	var pause = Program.InputField("UpdateInterval").DecimalValue;
   	if (pause == 0) pause = 600; // default pause is 10 minutes
   	Pause(pause);
-}</ScriptSource>
+}
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
@@ -819,6 +830,10 @@ var sclPin = ConnectorPin.P1Pin05.ToProcessor();
 var driver = new I2cDriver(sdaPin, sclPin);
 var deviceConnection = new Mcp23017I2cConnection(driver.Connect(0x20));
 //
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 // implement Control.On, Control.Off, Control.Toggle serice API
 // for the domain Components.MCP23017
 When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
@@ -1223,7 +1238,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:03.73744Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:32.311883Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1278,7 +1293,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:04.238698Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:32.810282Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1573,7 +1588,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:04.74479Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:33.316676Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1652,7 +1667,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:05.237929Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:33.813696Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1722,7 +1737,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:05.740219Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:34.311743Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1996,7 +2011,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:06.242484Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:34.814033Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2362,7 +2377,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:27:09.414547Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:35.817977Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2434,7 +2449,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:07.742279Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:36.314811Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2588,7 +2603,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:08.244566Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:36.816943Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2852,7 +2867,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-03T14:25:08.749463Z</TriggerTime>
+    <TriggerTime>2015-01-14T22:24:37.321647Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3138,6 +3153,7 @@ connection.PinStatusChanged += pinChanged;
 
 When.ProgramStopping(()=&gt;{
   connection.PinStatusChanged -= pinChanged;
+  ((IDisposable)connection).Dispose();
   return true;
 });
 
@@ -4327,6 +4343,11 @@ var driver = GpioConnectionSettings.DefaultDriver;
 driver.Allocate(pinDta, PinDirection.Output);
 driver.Allocate(pinClk, PinDirection.Output);
 
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 //init 
 driver.Write(pinDta, false);
 Raspberry.Timers.HighResolutionTimer.Sleep(0.000001m);
@@ -5295,6 +5316,11 @@ driver.Allocate(pinCd, PinDirection.Output);
 driver.Allocate(pinRes, PinDirection.Output);
 
 
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
 
@@ -5608,15 +5634,25 @@ return true;
     <ScriptSource>var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
 
 int ledsCount = (int)Program.InputField("LedsCount").DecimalValue;
-var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin13, ConnectorPin.P1Pin07, ledsCount);
+
+var driver = GpioConnectionSettings.DefaultDriver;
+var gpioOut1 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin13.ToProcessor());
+var gpioOut2 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin07.ToProcessor());
+var groveRgb = new GroveRgbConnection(gpioOut1, gpioOut2, ledsCount);
+
 Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, ledsCount);
 for(int x = 0; x &lt; ledsCount; x++)
 {
   	var module = rgbModules.WithAddress((x+1).ToString()).Get();
-	groveRgb.SetColorRgb(x, 0, 0, 0);
+	groveRgb.SetColor(x, new RgbColor(0, 0, 0));
   	module.Parameter("Status.Level").Value = "0";
   	module.Parameter("Status.ColorHsb").Value = "1,1,1";
 }
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)groveRgb).Dispose();
+  return true;
+});
 
 When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt; 
 {
@@ -5636,26 +5672,26 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
         case "Control.On":
         	string[] memory = module.Parameter("Status.ColorHsb").Value.Split(',');
-        	groveRgb.SetColorHsv(lightId, double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
+        	groveRgb.SetColor(lightId, RgbColor.FromHsv(double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(memory[1], System.Globalization.CultureInfo.InvariantCulture),
-                        double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture));
+                        double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture)));
         	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
             Program.RaiseEvent(module, "Status.ColorHsb", module.Parameter("Status.ColorHsb").Value, "Color Light");
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
         case "Control.Off":
-			groveRgb.SetColorRgb(lightId, 0, 0, 0);
+			groveRgb.SetColor(lightId, new RgbColor());
         	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
         	break;
         case "Control.Toggle":
         	if (module.Parameter("Status.Level").DecimalValue == 0)
             {
-				groveRgb.SetColorRgb(lightId, 255, 255, 255);
+				groveRgb.SetColor(lightId, new RgbColor(255, 255, 255));
               	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
             }
         	else
             {
-				groveRgb.SetColorRgb(lightId, 0, 0, 0);
+				groveRgb.SetColor(lightId, new RgbColor());
 	        	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
             }
         	break;
@@ -5668,9 +5704,9 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
         	string[] values = parameter.Split(',');
         	//double transition = 5;
         	//if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-          	groveRgb.SetColorHsv(lightId, double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
+          	groveRgb.SetColor(lightId, RgbColor.FromHsv(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture),
-                        double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture));
+                        double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)));
             Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Color Light");
             Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Color Light");
         	break; 
@@ -5757,6 +5793,12 @@ var valuesHistory = new Queue&lt;decimal&gt;[8];
 for (int q = 0; q &lt; 8; q++) valuesHistory[q] = new Queue&lt;decimal&gt;();
 
 var driver = GpioConnectionSettings.DefaultDriver;
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
   	
@@ -6221,6 +6263,11 @@ When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt;
 var dataPin = ConnectorPin.P1Pin7.ToProcessor();
 var driver = new MemoryGpioConnectionDriver();
 
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
     driver.Allocate(dataPin, PinDirection.Output);
@@ -6412,6 +6459,11 @@ var driver = new I2cDriver(sdaPin, sclPin);
 var deviceConnectionA = new Mcp23017I2cConnection(driver.Connect(0x20));
 Pause(0.5);
 var deviceConnectionB = new Mcp23017I2cConnection(driver.Connect(0x21));
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 
 // implement Control.On, Control.Off, Control.Toggle serice API
 // for the domain Components.MCP23017
@@ -6618,7 +6670,7 @@ while (Program.IsEnabled)
   
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>

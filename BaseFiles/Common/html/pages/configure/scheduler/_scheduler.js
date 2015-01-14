@@ -47,7 +47,7 @@ HG.WebApp.Scheduler.GetItemMarkup = function (schedule) {
     //                triggertime = triggerts.format('L LT');
     //            }
     //
-    item += '	<p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence +'</font></p>';
+    item += '	<p class="ui-li-aside ui-li-desc"><strong>&nbsp;' + schedule.ProgramId + '</strong><br><font style="opacity:0.5">' + 'Last: ' + schedule.LastOccurrence + '<br>' + 'Next: ' + schedule.NextOccurrence + '</font></p>';
     item += '	<h3 class="ui-li-heading">' + displayName + '</h3>';
     item += '	<p class="ui-li-desc">' + schedule.CronExpression + ' &nbsp;</p>';
     item += '</a>';
@@ -65,14 +65,12 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
         $.mobile.loading('hide');
         //
         $('#configure_schedulerservice_list').empty();
-        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">'+HG.WebApp.Locales.GetLocaleString('configure_scheduler_events')+'</li>');
+        $('#configure_schedulerservice_list').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_scheduler_events') + '</li>');
         //
         // element containing '.' in the name are grouped in own sections
-        for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++)
-        {
+        for (i = 0; i < HG.WebApp.Scheduler._ScheduleList.length; i++) {
             var schedule = HG.WebApp.Scheduler._ScheduleList[i];
-            if (schedule.Name.indexOf('.') < 0)
-            {
+            if (schedule.Name.indexOf('.') < 0) {
                 var item = HG.WebApp.Scheduler.GetItemMarkup(schedule);
                 $('#configure_schedulerservice_list').append(item);
             }
@@ -83,8 +81,7 @@ HG.WebApp.Scheduler.LoadScheduling = function (callback) {
             if (schedule.Name.indexOf('.') > 0) {
                 var scheduleGroup = schedule.Name.substring(0, schedule.Name.indexOf('.'));
                 var item = HG.WebApp.Scheduler.GetItemMarkup(schedule);
-                if (scheduleGroup != currentGroup)
-                {
+                if (scheduleGroup != currentGroup) {
                     $('#configure_schedulerservice_list').append('<li data-role="list-divider">' + scheduleGroup + '</li>');
                     currentGroup = scheduleGroup;
                 }
@@ -128,14 +125,12 @@ HG.WebApp.Scheduler.RefreshEventDetails = function () {
 HG.WebApp.Scheduler.ToggleScheduleIsEnabled = function (index) {
     var item = HG.WebApp.Scheduler._ScheduleList[index];
     $.mobile.loading('show');
-    if (item.IsEnabled)
-    {
+    if (item.IsEnabled) {
         HG.Automation.Scheduling.Disable(item.Name, function () {
             HG.WebApp.Scheduler.LoadScheduling();
         });
     }
-    else
-    {
+    else {
         HG.Automation.Scheduling.Enable(item.Name, function () {
             HG.WebApp.Scheduler.LoadScheduling();
         });

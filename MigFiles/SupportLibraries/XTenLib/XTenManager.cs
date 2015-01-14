@@ -52,6 +52,7 @@ namespace XTenLib
         private string monitoredHouseCode = "A";
         private Dictionary<string, X10Module> moduleStatus = new Dictionary<string, X10Module>();
         private Dictionary<string, List<X10Module>> addressedModules = new Dictionary<string, List<X10Module>>();
+        private bool newAddressData = true;
 
         private string portName = "USB";
         private XTenInterface x10interface;
@@ -155,7 +156,7 @@ namespace XTenLib
                         isInterfaceReady = false;
                         try
                         {
-                            ResetCurrentData();
+                            ResetAddressedModules();
                             //
                             Close();
                             //
@@ -458,7 +459,7 @@ namespace XTenLib
                 message[7] = 0x02;
             }
             //
-            ResetCurrentData();
+            ResetAddressedModules();
             DebugLog("X10 <", Utility.ByteArrayToString(message));
             //
             SendMessage(message);
@@ -477,7 +478,7 @@ namespace XTenLib
                     {
                         while((DateTime.Now - lastReceivedTs).TotalMilliseconds < 500)
                         {
-                            Thread.Sleep(50);
+                            Thread.Sleep(1);
                         }
 
                         DebugLog("X10 <", Utility.ByteArrayToString(message));
@@ -501,7 +502,7 @@ namespace XTenLib
                             var elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                             while (elapsedFromWaitAck.TotalSeconds < commandTimeoutSeconds && communicationState != X10CommState.Ready)
                             {
-                                Thread.Sleep(50);
+                                Thread.Sleep(1);
                                 elapsedFromWaitAck = DateTime.Now - waitAckTimestamp;
                             }
                             if (elapsedFromWaitAck.TotalSeconds >= commandTimeoutSeconds && communicationState != X10CommState.Ready)
@@ -625,6 +626,7 @@ namespace XTenLib
                         System.Globalization.NumberStyles.HexNumber
                     )
                 });
+                newAddressData = true;
             }
         }
 
@@ -632,8 +634,9 @@ namespace XTenLib
         {
             if (addressedModules.ContainsKey(housecode))
             {
-                foreach (X10Module mod in addressedModules[housecode])
+                for (int m = 0; m < addressedModules[housecode].Count; m++)
                 {
+                    X10Module mod = addressedModules[housecode][m];
                     mod.Level = 1.0;
                 }
             }
@@ -643,8 +646,9 @@ namespace XTenLib
         {
             if (addressedModules.ContainsKey(housecode))
             {
-                foreach (X10Module mod in addressedModules[housecode])
+                for (int m = 0; m < addressedModules[housecode].Count; m++)
                 {
+                    X10Module mod = addressedModules[housecode][m];
                     mod.Level = 0.0;
                 }
             }
@@ -654,9 +658,9 @@ namespace XTenLib
         {
             if (addressedModules.ContainsKey(housecode))
             {
-                foreach (X10Module mod in addressedModules[housecode])
+                for (int m = 0; m < addressedModules[housecode].Count; m++)
                 {
-
+                    X10Module mod = addressedModules[housecode][m];
                     var brightLevel = mod.Level + (((double)parameter) / 210D);
                     if (brightLevel > 1) brightLevel = 1;
                     mod.Level = brightLevel;
@@ -668,9 +672,9 @@ namespace XTenLib
         {
             if (addressedModules.ContainsKey(housecode))
             {
-                foreach (X10Module mod in addressedModules[housecode])
+                for (int m = 0; m < addressedModules[housecode].Count; m++)
                 {
-
+                    X10Module mod = addressedModules[housecode][m];
                     var dimLevel = mod.Level - (((double)parameter) / 210D);
                     if (dimLevel < 0) dimLevel = 0;
                     mod.Level = dimLevel;
@@ -769,11 +773,11 @@ namespace XTenLib
                         {
                             lastReceivedTs = DateTime.Now;
                             DebugLog("X10 >", "RFCOM: " + Utility.ByteArrayToString(readData));
+                            ResetAddressedModules();
                             if (RfDataReceived != null)
                             {
                                 Thread signal = new Thread(() =>
                                 {
-                                    addressedModules.Clear();
                                     RfDataReceived(new RfDataReceivedAction() { RawData = readData });
                                 });
                                 signal.Start();
@@ -796,7 +800,7 @@ namespace XTenLib
                             //
                             if (readData.Length > 3)
                             {
-                                bool newAddressData = true;
+                                //newAddressData = true;
                                 int messageLength = readData[1];
                                 if (readData.Length > messageLength - 2)
                                 {
@@ -826,18 +830,12 @@ namespace XTenLib
                                         if (functionBitmap[b] == (byte)X10FunctionType.Address) // address
                                         {
                                             string housecode = ((X10HouseCodes)Convert.ToInt16(
-                                                                   messageData[b].ToString("X2").Substring(
-                                                                       0,
-                                                                       1
-                                                                   ),
-                                                                   16
+                                                                    messageData[b].ToString("X2").Substring(0, 1),
+                                                                    16
                                                                )).ToString();
                                             string unitcode = ((X10UnitCodes)Convert.ToInt16(
-                                                                  messageData[b].ToString("X2").Substring(
-                                                                      1,
-                                                                      1
-                                                                  ),
-                                                                  16
+                                                                    messageData[b].ToString("X2").Substring(1, 1),
+                                                                    16
                                                               )).ToString();
                                             if (unitcode.IndexOf("_") > 0) unitcode = unitcode.Substring(unitcode.IndexOf("_") + 1);
                                             //
@@ -949,6 +947,10 @@ namespace XTenLib
                                 gotReadWriteError = true;
                                 Close();
                             }
+                            else
+                            {
+                                SendMessage(new byte[] { 0x00 });
+                            }
                             #endregion
                         }
                     }
@@ -966,7 +968,7 @@ namespace XTenLib
             }
         }
 
-        private void ResetCurrentData()
+        private void ResetAddressedModules()
         {
             addressedModules.Clear();
         }

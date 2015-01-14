@@ -4,23 +4,20 @@
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
- 	<link rel="apple-touch-icon" href="/hg/html/images/genie.png"/>
+    <link rel="apple-touch-icon" href="/hg/html/images/genie.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>
         HomeGenie
     </title>
-
     <!-- jquery & jquery mobile css's -->
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
     <!--link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-png-1.4.5.min.css" /-->
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.inline-svg-1.4.5.min.css" />
     <link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />
-
     <link rel="stylesheet" href="css/ui.notify.css" />
     <link rel="stylesheet" href="css/jquery.qtip.min.css" />
-	<link rel="stylesheet" href="css/jquery-ui.min.css" />
-
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <!-- jquery & co framework includes -->
     <script src="js/jquery-2.0.2.min.js"></script>
     <!-- jquery-ui used for sortable -->
@@ -30,30 +27,23 @@
     <script src="js/jquery.qtip.min.js"></script>
     <script src="js/jquery.knob.js"></script>
 
-
     <!-- custom css includes -->
     <link rel="stylesheet" href="css/homegenie.min.css" />
     <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
-
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
     <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
     <script language="javascript" type="text/javascript" src="js/json2.js"></script>
     <script language="javascript" type="text/javascript" src="js/moment.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/eventsource.js"></script>
-
     <!-- Isotope -->
-	<script src="js/isotope.pkgd.min.js"></script>
-	<script src="js/packery-mode.pkgd.min.js"></script>
-
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/packery-mode.pkgd.min.js"></script>
     <!-- jStorage data persistence -->
     <script src="js/jstorage.min.js"></script>
-
     <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
-
     <!-- Code Mirror -->
     <link rel="stylesheet" href="js/codemirror-4.03/lib/codemirror.css">
     <link rel="stylesheet" href="js/codemirror-4.03/theme/ambiance.css">
@@ -82,17 +72,14 @@
     <script src="js/codemirror-4.03/addon/search/search.js"></script>
     <script src="js/codemirror-4.03/addon/search/match-highlighter.js"></script>
     <script src="js/codemirror-4.03/addon/dialog/dialog.js"></script>
-
     <script src="js/raphael-min.js"></script>
     <script src="js/colorwheel.js"></script>
-
     <!-- local css definitions and overrides -->
     <link rel="stylesheet" href="css/my.css" />
-
     {include js/api/homegenie.inc.js}
 
     <script type="text/javascript">
-        
+
         var HOST_SYSTEM = '{hostos}';
         $(document).ready(function (e) {
 
@@ -167,10 +154,8 @@
 
     </script>
 
-
 </head>
 <body>
-
     <!-- Home -->
     {include pages/home.html}
 
@@ -210,36 +195,30 @@
 
 
     <!-- System Interfaces Status -->
-    <div  style="position:fixed;top:6px;right:5px;z-index:1973">
-	    <div style="float:left;" id="interfaces_status"></div>
-	    <!-- Event Logs button -->
-	    <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
-	        <a href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
-	        <a href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
-	    </div>
+    <div style="position:fixed;top:6px;right:5px;z-index:1973">
+        <div style="float:left;" id="interfaces_status"></div>
+        <!-- Event Logs button -->
+        <div id="btn_eventshistory_led" style="float:left;display:none;margin-top:2px">
+            <a href="#page_events" data-transition="slide"><img id="event_status_on" src="images/event_on.png" style="display:none" /></a>
+            <a href="#page_events" data-transition="slide"><img id="event_status_off" src="images/event_off.png" /></a>
+        </div>
     </div>
 
-
     <!-- hg builtin notify popup -->
-    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed"  style="top:0;z-index:1973">
+    <div id="statuspopup" class="hg-event-popup ui-overlay-shadow ui-corner-all" data-position="fixed" style="top:0;z-index:1973">
         <p></p>
     </div>
 
-
     <!-- jquery.ui notify popup (stacked) -->
     <div id="content" style="z-index:1973;">
-
         <div id="notifypopup" class="ui-notify-popup">
             <a class="ui-notify-close ui-notify-cross" href="x">X</a>
             <div style="float:left;margin-right:6px;"><img src="#{icon}" width="48"></div>
             <h1>#{title}</h1>
             <p>#{text}</p>
         </div>
-
     </div>
-
-<!-- Global Popups -->
-
+    <!-- Global Popups -->
     <!-- Module Edit Popup -->
     <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -247,8 +226,6 @@
             <h1 id="module_title">Module Settings</h1>
         </div>
         <div class="ui-content ui-corner-bottom">
-
-
 
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -288,23 +265,17 @@
                 </tr>
             </table>
 
-
             <div id="module_options_3" style="margin-top:4px">
-
                 <div id="module_options_features">
                     <label for="module_programs_featureset" data-locale-id="configure_module_featuresoptions">Features/Options</label>
                     <select id="module_programs_featureset" onchange="HG.WebApp.GroupModules.ShowFeatures($(this).val())"></select>
                     <p id="module_programs_featuredesc" style="margin-left:10px;margin-right:10px;font-size:10pt;opacity:0.9"></p>
-                    
-                    <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
 
+                    <fieldset id="module_programs_features" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;"></fieldset>
                     <div style="height:10px"></div>
                 </div>
-
             </div>
-
             <div id="configure_module_iconslist" style="position: absolute; display: none; top: 125px; left: 10px; right: 10px; height: 138px; padding-top: 5px; padding-bottom: 5px; border: solid 2px black; background-color: white; z-index: 100; overflow-y: scroll; text-align: center">
-
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/airpurifier.png" width="48" height="48" />
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/aladdinlamp.png" width="48" height="48" />
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/appliance.png" width="48" height="48" />
@@ -352,22 +323,17 @@
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/toaster_01.png" width="48" height="48" />
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/toaster_02.png" width="48" height="48" />
                 <img style="cursor: pointer; margin-left: 4px" onclick="HG.WebApp.GroupModules.SetModuleIcon(this)" src="pages/control/widgets/homegenie/generic/images/icons/washingmachine.png" width="48" height="48" />
-
             </div>
-
         </div>
-
         <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
-        	<div class="ui-block-a">
+            <div class="ui-block-a">
                 <a id="module_remove_button" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-left" href="#" data-locale-id="configure_module_optremove" data-rel="back">Remove from group</a>
             </div>
             <div class="ui-block-b">
                 <a id="module_update_button" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" href="#" data-locale-id="configure_module_optupdate" data-rel="back">Update module</a>
             </div>
         </div>
-
     </div>
-
 
     <!-- Program Configuration Popup -->
     <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
@@ -384,30 +350,24 @@
                     <li id="automationprograms_program_options_tab1"><a href="javascript:HG.WebApp.ProgramsList.SetOptionsTab(1)" data-locale-id="configure_program_options_details">Details</a></li><!-- Implemented Parameters, Features and Virtual Modules -->
                 </ul>
             </div><!-- /navbar -->
-
             <div id="automationprograms_program_parameters" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
-
             <div id="automationprograms_program_details" class="trapScroll hg-program-options-scroll" data-role="controlgroup" data-type="vertical"></div>
-
         </div>
-
         <div class="ui-grid-c ui-footer ui-bar-inherit" align="center">
-        	<div class="ui-block-a">
+            <div class="ui-block-a">
                 <a id="automationprograms_program_btn_delete" class="ui-btn ui-shadow ui-corner-all ui-icon-minus ui-btn-icon-left" onclick="HG.WebApp.Utility.SwitchPopup('#automationprograms_program_options', '#automationprograms_program_delete')" data-locale-id="configure_program_options_delete">Delete</a>
-        	</div>
-        	<div class="ui-block-b">
+            </div>
+            <div class="ui-block-b">
                 <a id="automationprograms_program_btn_export" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.ExportProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_export">Export</a>
-        	</div>
-        	<div class="ui-block-c">
+            </div>
+            <div class="ui-block-c">
                 <a id="automationprograms_program_edit" class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left" href="#page_automation_editprogram" data-locale-id="configure_program_options_edit" data-transition="slide">Edit</a>
-        	</div>
-        	<div class="ui-block-d">
+            </div>
+            <div class="ui-block-d">
                 <a id="automationprograms_program_restart" class="ui-btn ui-shadow ui-corner-all ui-icon-refresh ui-btn-icon-left" href="javascript:HG.WebApp.ProgramsList.RestartProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address)" data-locale-id="configure_program_options_restart">Restart</a>
-        	</div>
+            </div>
         </div>
-
     </div>
-
 
 </body>
 </html>

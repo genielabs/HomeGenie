@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -2461,123 +2461,123 @@
     <None Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.json">
+    <Content Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\camerainput.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\camerainput.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\camerainput.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\colorlight.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\colorlight.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\colorlight.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\dimmer.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\dimmer.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\doorwindow.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\doorwindow.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\doorwindow.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\generic.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\generic.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\generic.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\grouplabel.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\grouplabel.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\grouplabel.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\light.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\light.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\light.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\link.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\link.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\link.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\mediareceiver.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\mediareceiver.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\mediareceiver.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\mediaserver.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\mediaserver.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\mediaserver.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\program.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\program.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\program.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\securitysystem.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\securitysystem.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\securitysystem.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\sensor.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\sensor.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\sensor.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\shutter.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\shutter.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\shutter.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\siren.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\siren.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\siren.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\status.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\status.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\status.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\switch.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\switch.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\switch.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\thermostat.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\thermostat.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\thermostat.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\unknown.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\homegenie\generic\unknown.json">
+    <Content Include="html\pages\control\widgets\homegenie\generic\unknown.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\homegenie\generic\images\battery_level_0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2866,9 +2866,9 @@
     <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\OpenWeatherMap.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\OpenWeatherMap.json">
+    <Content Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\OpenWeatherMap.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\images\Clouds.All.0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3166,9 +3166,9 @@
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.json">
+    <Content Include="html\pages\control\widgets\jkUtils\SolarAltitude\SolarAltitude.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\images\Coord.Lat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3397,18 +3397,18 @@
     <None Include="html\pages\control\widgets\weather\earthtools\sundata.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\weather\earthtools\sundata.json">
+    <Content Include="html\pages\control\widgets\weather\earthtools\sundata.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\weather\earthtools\images\earthtools.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\control\widgets\weather\wunderground\conditions.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\weather\wunderground\conditions.json">
+    <Content Include="html\pages\control\widgets\weather\wunderground\conditions.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\events\_events.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4192,9 +4192,9 @@
     <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\thermostat.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\thermostat.json">
+    <Content Include="html\pages\control\widgets\Bounz\Z-Wave.Me\thermostat.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="html\pages\control\widgets\Bounz\Z-Wave.Me\locales\ru.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4214,11 +4214,5 @@
   <ItemGroup>
     <Compile Include="dummy.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="html\" />
-    <Folder Include="html\js\jquery.mobile-1.4.5\" />
-    <Folder Include="html\pages\control\widgets\Bounz\" />
-    <Folder Include="html\pages\control\widgets\Bounz\Z-Wave.Me\" />
-    <Folder Include="html\pages\control\widgets\Bounz\Z-Wave.Me\locales\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -1,6 +1,6 @@
 /*
 	MIG Input Plugin TUIO Data Structure
-    author: Generoso Martello <generoso@martello.com>
+    author: Generoso Martello <gene@homegenie.it>
     date  : 11-2008
 */
 

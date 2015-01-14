@@ -20,42 +20,40 @@ HG.WebApp.Statistics.InitializePage = function () {
     $('#page_analyze_param').on('change', function () {
         HG.WebApp.Statistics.RefreshModules();
     });
-	$('#page_analyze_graphtype').on('change', function () {
+    $('#page_analyze_graphtype').on('change', function () {
         //...
-	});
+    });
     //
-	$('#page_analyze_renderbutton').bind('click', function () {
-	    var selected = $('#page_analyze_source').find('option:selected');
-	    HG.WebApp.Statistics._CurrentModule = selected.attr('data-context-domain') + ':' + selected.attr('data-context-address');
-	    if (HG.WebApp.Statistics._CurrentModule == ':') HG.WebApp.Statistics._CurrentModule = '';
-	    HG.WebApp.Statistics._CurrentParameter = $('#page_analyze_param').val();
-	    HG.WebApp.Statistics._CurrentGraphType = $('#page_analyze_graphtype').val();
-	    HG.WebApp.Statistics.Refresh();
-	    //
-	    $('#page_analyze_title').html($('#page_analyze_source').find('option:selected').text() + ', ' + $('#page_analyze_param').find('option:selected').text());
-	    //
-	    $('#analyze_stats_options').popup('close');
-	});
+    $('#page_analyze_renderbutton').bind('click', function () {
+        var selected = $('#page_analyze_source').find('option:selected');
+        HG.WebApp.Statistics._CurrentModule = selected.attr('data-context-domain') + ':' + selected.attr('data-context-address');
+        if (HG.WebApp.Statistics._CurrentModule == ':') HG.WebApp.Statistics._CurrentModule = '';
+        HG.WebApp.Statistics._CurrentParameter = $('#page_analyze_param').val();
+        HG.WebApp.Statistics._CurrentGraphType = $('#page_analyze_graphtype').val();
+        HG.WebApp.Statistics.Refresh();
+        //
+        $('#page_analyze_title').html($('#page_analyze_source').find('option:selected').text() + ', ' + $('#page_analyze_param').find('option:selected').text());
+        //
+        $('#analyze_stats_options').popup('close');
+    });
     //
-	$('#page_analyze_costperunit').on('change', function(){
-		var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
-		$('#page_analyze_totalcost').val( cost.toFixed(2) );
-	});
+    $('#page_analyze_costperunit').on('change', function () {
+        var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
+        $('#page_analyze_totalcost').val(cost.toFixed(2));
+    });
     //
-	$('#analyze_stats_options').on('popupbeforeposition', function (event) {
-	    HG.WebApp.Statistics.RefreshModules();
-	    HG.WebApp.Statistics.RefreshParameters();
-	});
+    $('#analyze_stats_options').on('popupbeforeposition', function (event) {
+        HG.WebApp.Statistics.RefreshModules();
+        HG.WebApp.Statistics.RefreshParameters();
+    });
 };
 
-HG.WebApp.Statistics.SetAutoRefresh = function(autorefresh)
-{
-	if (HG.WebApp.Statistics._RefreshIntervalObject != null) clearInterval( HG.WebApp.Statistics._RefreshIntervalObject );
-	HG.WebApp.Statistics._RefreshIntervalObject = null;
-	if (autorefresh)
-	{
-	    HG.WebApp.Statistics._RefreshIntervalObject = setInterval('HG.WebApp.Statistics.Refresh();', HG.WebApp.Statistics._RefreshInterval);
-	}
+HG.WebApp.Statistics.SetAutoRefresh = function (autorefresh) {
+    if (HG.WebApp.Statistics._RefreshIntervalObject != null) clearInterval(HG.WebApp.Statistics._RefreshIntervalObject);
+    HG.WebApp.Statistics._RefreshIntervalObject = null;
+    if (autorefresh) {
+        HG.WebApp.Statistics._RefreshIntervalObject = setInterval('HG.WebApp.Statistics.Refresh();', HG.WebApp.Statistics._RefreshInterval);
+    }
 };
 
 
@@ -90,19 +88,17 @@ HG.WebApp.Statistics.RefreshModules = function () {
         for (var c = 0; c < groupmodules.length; c++) {
             var mod = groupmodules[c];
             if (typeof mod.Properties != 'undefined')
-            for (var p = 0; p < mod.Properties.length; p++)
-            {
-                if (mod.Properties[p].Name == $('#page_analyze_param').val())
-                {
-                    var name = mod.Domain + ':' + mod.Address;
-                    if (mod.Name != '') name = mod.Name;
-                    //
-                    var selected = (mod.Domain == sdomain && mod.Address == saddress);
-                    //
-                    datamodules += '<option data-context-domain="' + mod.Domain + '" data-context-address="' + mod.Address + '"' + (selected ? ' selected' : '') + '>' + name + '</option>';
-                    break;
+                for (var p = 0; p < mod.Properties.length; p++) {
+                    if (mod.Properties[p].Name == $('#page_analyze_param').val()) {
+                        var name = mod.Domain + ':' + mod.Address;
+                        if (mod.Name != '') name = mod.Name;
+                        //
+                        var selected = (mod.Domain == sdomain && mod.Address == saddress);
+                        //
+                        datamodules += '<option data-context-domain="' + mod.Domain + '" data-context-address="' + mod.Address + '"' + (selected ? ' selected' : '') + '>' + name + '</option>';
+                        break;
+                    }
                 }
-            }
         }
         if (datamodules != '') {
             datasources += '<optgroup label="' + g.Name + '">';
@@ -123,22 +119,20 @@ HG.WebApp.Statistics.Refresh = function () {
         var start = new Date(trange.StartTime * 1);
         var end = new Date(trange.EndTime * 1);
         $('#page_analyze_since').html('From: <em>' + moment(start).format('llll') + '</em> &nbsp;&nbsp; To: <em>' + moment(end).format('llll') + '</em> &nbsp;&nbsp; (' + HG.WebApp.Utility.GetElapsedTimeText(start) + ')');
-//        $('#page_analyze_startdate').val( moment(start).format('YYYY-MM-DD') );
-//        $('#page_analyze_enddate').val( moment(end).format('YYYY-MM-DD') );
+        //        $('#page_analyze_startdate').val( moment(start).format('YYYY-MM-DD') );
+        //        $('#page_analyze_enddate').val( moment(end).format('YYYY-MM-DD') );
     });
     //
-    if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.')
-    {
-	    HG.Statistics.ServiceCall('Global.CounterTotal', '', HG.WebApp.Statistics._CurrentParameter, function(total){
-			$('#page_analyze_totalunits').val( (total * 1).toFixed(2) );
-			var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
-			$('#page_analyze_totalcost').val( cost.toFixed(2) );
-		});
-		$('#page_analyze_cost').show();
+    if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.') {
+        HG.Statistics.ServiceCall('Global.CounterTotal', '', HG.WebApp.Statistics._CurrentParameter, function (total) {
+            $('#page_analyze_totalunits').val((total * 1).toFixed(2));
+            var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
+            $('#page_analyze_totalcost').val(cost.toFixed(2));
+        });
+        $('#page_analyze_cost').show();
     }
-    else
-    {
-		$('#page_analyze_cost').hide();
+    else {
+        $('#page_analyze_cost').hide();
     }
     //
     var showsplines = (HG.WebApp.Statistics._CurrentGraphType == 'splines' ? true : false);
@@ -174,7 +168,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         },
                         colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
                         points: { show: true }
-                });
+                    });
             } catch (e) { }
             //
             $.ajax({
@@ -186,17 +180,16 @@ HG.WebApp.Statistics.Refresh = function () {
                     var stats = eval(data);
                     //
                     var total = 0.0;
-                    for (var s = 0; s < stats[0].length; s++)
-                    {
+                    for (var s = 0; s < stats[0].length; s++) {
                         total += stats[0][s][1];
                     }
                     $('#page_analyze_cost_counter').html('Counter ' + (Math.round(total * 100) / 100));
                     //
                     try {
                         $.plot($("#statscounter"), [{
-                                label: HG.WebApp.Statistics._CurrentParameter,
-                                data: stats[0]
-                            }],
+                            label: HG.WebApp.Statistics._CurrentParameter,
+                            data: stats[0]
+                        }],
                             {
                                 yaxis: {},
                                 xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
@@ -211,7 +204,7 @@ HG.WebApp.Statistics.Refresh = function () {
                                 },
                                 colors: ["rgba(120, 160, 0, 0.5)"],
                                 points: { show: true }
-                        });
+                            });
                     } catch (e) { }
                     //
                     $.mobile.loading('hide');

@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+14/01/2015 1.00 beta rev 454
+    - Fixed unwanted serialization of module fields as Statistics (also affecting MQTT client app)
+    - Added prelminary support for CubieTruck/Cubieboard3 through RaspberrySharp-IO
+    - Fixed bug in X10 that was not performing first command after HG startup
+    - Fixed bug in Lirc initialization that was preventing IR remote from working when installing HG from debian package
+    - Should fix multiple UC handling in X10 commands issue #30
+    - Added more field icons to sensor widget (pull request #94)
+    - Fixed error with Pepper1 db when lang is not an array (pull request #90)
+    - Changed widget's files extension from *.json to *.js
+    - Code formatting normalization in BaseFiles/html
+
 03/01/2015 1.00 beta rev 453
     - Fixed c# automation programs not starting after restoring from a backup (issue #86)
     - Added ModuleParameter.Wait(double seconds) to wait a parameter update for a given time (issue #72)

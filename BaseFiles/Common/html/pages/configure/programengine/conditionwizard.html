@@ -4,7 +4,6 @@
         <h1>Wizard (1/5)</h1>
     </div>
     <div class="ui-content ui-corner-bottom">
-
         <div>
             <p data-locale-id="configure_program_selectconditioncontext" style="margin-top:-10px;font-weight:bold">Select condition context</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -12,7 +11,6 @@
         <ul id="automation_conditiontarget" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
             <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
         </ul>
-
     </div>
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
@@ -23,12 +21,10 @@
     </div>
 </div>
 
-
 <div id="automation_target_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (2/5)</h1></div>
     <div class="ui-content ui-corner-bottom">
-
         <div>
             <p data-locale-id="configure_program_selectconditionsubject" style="margin-top:-10px;font-weight:bold">Select condition subject</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -42,21 +38,17 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 <div id="automation_target_homegenie_parameter" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (3/5)</h1></div>
     <div class="ui-content ui-corner-bottom">
-
         <div>
             <p data-locale-id="configure_program_selectconditionproperty" style="margin-top:-10px;font-weight:bold">Select comparison property</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
         </div>
         <ul id="automation_condition_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
-
     </div>
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
@@ -67,12 +59,10 @@
     </div>
 </div>
 
-
 <div id="automation_condition_type" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (4/5)</h1></div>
     <div class="ui-content ui-corner-bottom">
-
         <div>
             <p data-locale-id="configure_program_selectoperator" style="margin-top:-10px;font-weight:bold">Select comparison operator</p>
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
@@ -82,7 +72,6 @@
             <li data-context-value="Equals"><a data-locale-id="configure_program_operatorequal" data-rel="popup" href="#automation_condition_value">Equals</a></li>
             <li data-context-value="GreaterThan" id="configure_program_conditiongreaterthan"><a data-locale-id="configure_program_operatorgreaterthan" data-rel="popup" href="#automation_condition_value">Greater Than</a></li>
         </ul>
-
     </div>
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
@@ -92,7 +81,6 @@
         </div>
     </div>
 </div>
-
 <div id="automation_condition_value" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     <div data-role="header"><h1>Wizard (5/5)</h1></div>
@@ -106,7 +94,6 @@
             <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_condition_value', '#automation_condition_value_domain', true)" class="ui-btn ui-corner-all">Module Parameter Value</a>
         </fieldset>
     </div>
-
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
@@ -117,9 +104,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 <div id="automation_condition_value_domain" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -132,9 +117,7 @@
         <ul id="automation_conditionvalue_domain" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
             <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_target_popup">HomeGenie</a></li>
         </ul>
-
     </div>
-
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
@@ -142,9 +125,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 <div id="automation_condition_value_address" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -155,9 +136,7 @@
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
         </div>
         <ul id="automation_conditionvalue_address" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
-
     </div>
-
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a">
             <div class="ui-block-a" align="center">
@@ -165,9 +144,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 <div id="automation_condition_value_property" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -178,9 +155,7 @@
             <p id="condition_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
         </div>
         <ul id="automation_conditionvalue_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
-
     </div>
-
     <div data-role="footer" data-tap-toggle="false">
         <div class="ui-grid-a" align="center">
             <div class="ui-block-a">
@@ -188,13 +163,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -210,7 +179,6 @@
         <a data-locale-id="configure_program_capturestop" href="#" class="ui-btn ui-corner-all" data-inline="true" data-rel="back">Stop</a>
     </div>
 </div>
-
 <div id="automation_condition_delete" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-overlay-theme="b">
     <div data-role="header" class="ui-corner-top">
         <h1 data-locale-id="configure_program_wizard_editline_title">Edit Line</h1>
@@ -219,23 +187,20 @@
         <p data-locale-id="configure_program_wizard_editconline_prompt">Move or delete line <span id="condition_linenumber_label" style="font-weight:bold"></span></p>
         <ul data-role="listview" data-inset="true">
             <li>
-            	<label data-locale-id="configure_program_wizard_editline_number" for="condition_linenumber_input">New line number</label>
-            	<input id="condition_linenumber_input" type="range" min="1" max="1" name="value" value="1" placeholder="line number" />
-        	</li>
-    	</ul>
+                <label data-locale-id="configure_program_wizard_editline_number" for="condition_linenumber_input">New line number</label>
+                <input id="condition_linenumber_input" type="range" min="1" max="1" name="value" value="1" placeholder="line number" />
+            </li>
+        </ul>
         <div class="ui-grid-a">
             <div class="ui-block-a">
-		        <a data-locale-id="configure_program_wizard_editline_delete" id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
+                <a data-locale-id="configure_program_wizard_editline_delete" id="condition_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
             </div>
             <div class="ui-block-b">
-		        <a data-locale-id="configure_program_wizard_editline_change" id="condition_move_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Move</a>
+                <a data-locale-id="configure_program_wizard_editline_change" id="condition_move_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Move</a>
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 
 
@@ -264,8 +229,8 @@
             //
             build_condition();
         });
-		
-		$('#automation_target_popup').on('popupbeforeposition', function (event) {
+
+        $('#automation_target_popup').on('popupbeforeposition', function (event) {
             $('#automation_condition_target').listview().empty();
             //
             switch (condition_targetdomain) {
@@ -278,10 +243,10 @@
             }
             $('#automation_condition_target').listview('refresh');
             //
-            build_condition();		
-		});
+            build_condition();
+        });
 
-		$('#automation_target_homegenie_parameter').on('popupbeforeposition', function (event) {
+        $('#automation_target_homegenie_parameter').on('popupbeforeposition', function (event) {
             $('#automation_condition_property').listview().empty();
             //
             var module = HG.WebApp.Utility.GetModuleByDomainAddress(condition_targetdomain, condition_targetsubject);
@@ -322,9 +287,9 @@
             $('#automation_condition_property').listview('refresh');
             //
             build_condition();
-		});
+        });
 
-		$('#automation_condition_type').on('popupbeforeposition', function (event) {
+        $('#automation_condition_type').on('popupbeforeposition', function (event) {
             if (condition_targetparameter == 'Scheduler.TimeEvent' || condition_targetparameter == 'Receiver.RawData') {
                 $('#configure_program_conditionlessthan').hide();
                 $('#configure_program_conditiongreaterthan').hide();
@@ -335,18 +300,18 @@
             }
             //
             build_condition();
-		});
+        });
 
-		$('#automation_condition_value').on('popupbeforeposition', function (event) {
-			$('#comparison_value_input').val(condition_value);
+        $('#automation_condition_value').on('popupbeforeposition', function (event) {
+            $('#comparison_value_input').val(condition_value);
             build_command();
-		});
-		$('#automation_condition_delete').on('popupbeforeposition', function (event) {
-			$('#condition_linenumber_label').html('#' + (selected_condition_index + 1));
-			$('#condition_linenumber_input').val(selected_condition_index + 1);
-			$('#condition_linenumber_input').attr('max', HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length);
+        });
+        $('#automation_condition_delete').on('popupbeforeposition', function (event) {
+            $('#condition_linenumber_label').html('#' + (selected_condition_index + 1));
+            $('#condition_linenumber_input').val(selected_condition_index + 1);
+            $('#condition_linenumber_input').attr('max', HG.WebApp.ProgramEdit._CurrentProgram.Conditions.length);
             $('#condition_linenumber_input').slider('refresh');
-		});
+        });
 
         //$('#automation_program_conditions').on('click', ' > li', function () {
         //    selected_condition_index = $(this).index();
@@ -360,15 +325,14 @@
         });
         $('#condition_move_button').bind('click', function (event) {
             if (selected_condition_index >= 0 && newLine != selected_condition_index) {
-            	var newLine = $('#condition_linenumber_input').val() - 1;
-            	var conditions = HG.WebApp.ProgramEdit._CurrentProgram.Conditions;
-            	var conditionObj = conditions[selected_condition_index];
-            	var direction = (selected_condition_index > newLine ? -1 : +1);
-            	for (var c = selected_condition_index; c != newLine; c += direction)
-            	{
-            		conditions[c] = conditions[c + direction];
-            	}
-            	conditions[newLine] = conditionObj;
+                var newLine = $('#condition_linenumber_input').val() - 1;
+                var conditions = HG.WebApp.ProgramEdit._CurrentProgram.Conditions;
+                var conditionObj = conditions[selected_condition_index];
+                var direction = (selected_condition_index > newLine ? -1 : +1);
+                for (var c = selected_condition_index; c != newLine; c += direction) {
+                    conditions[c] = conditions[c + direction];
+                }
+                conditions[newLine] = conditionObj;
                 automationpage_ConditionsRefresh();
             }
         });
@@ -462,14 +426,12 @@
                 'ComparisonValue': condition_value
             };
 
-            if (selected_condition_index == -1)
-            {
-	            HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
+            if (selected_condition_index == -1) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions.push(conditionobj);
             }
-           	else
-           	{
-           		HG.WebApp.ProgramEdit._CurrentProgram.Conditions[selected_condition_index] = conditionobj;
-           	}
+            else {
+                HG.WebApp.ProgramEdit._CurrentProgram.Conditions[selected_condition_index] = conditionobj;
+            }
 
             automationpage_ConditionsRefresh();
 
@@ -477,10 +439,9 @@
 
     });
 
-    function automationpage_WizardConditionAdd()
-    {
-    	selected_condition_index = -1;
-    	$('#automation_domain').popup('open');
+    function automationpage_WizardConditionAdd() {
+        selected_condition_index = -1;
+        $('#automation_domain').popup('open');
     }
 
     function automationpage_GetModulesListViewItems(domain, showall) {
@@ -524,23 +485,21 @@
     }
 
 
-    function automationpage_ConditionChangeLine(lineNumber)
-    {
-		selected_condition_index = lineNumber;
-		$('#automation_condition_delete').popup('open');
+    function automationpage_ConditionChangeLine(lineNumber) {
+        selected_condition_index = lineNumber;
+        $('#automation_condition_delete').popup('open');
     }
-    
-    function automationpage_ConditionEditLine(lineNumber)
-    {
-		selected_condition_index = lineNumber;
+
+    function automationpage_ConditionEditLine(lineNumber) {
+        selected_condition_index = lineNumber;
         var condition = HG.WebApp.ProgramEdit._CurrentProgram.Conditions[lineNumber];
-    	condition_targetdomain = condition.Domain;
-		condition_targetsubject = condition.Target;
-		condition_targetparameter = condition.Property;
-		condition_type = condition.ComparisonOperator;
-		condition_value = condition.ComparisonValue;
-		$('#automation_condition_value').popup('open');
-		build_condition();
+        condition_targetdomain = condition.Domain;
+        condition_targetsubject = condition.Target;
+        condition_targetparameter = condition.Property;
+        condition_type = condition.ComparisonOperator;
+        condition_value = condition.ComparisonValue;
+        $('#automation_condition_value').popup('open');
+        build_condition();
     }
 
 
@@ -562,15 +521,15 @@
             else if (condition.ComparisonOperator == "1") {
                 condition.ComparisonOperator = "GreaterThan";
             }
-			var lineNumber = ('0000' + (i+1).toString()).substr((i+1).toString().length);
-			var displayName = (module != null ? module.Name : '');
-			html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
-			html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
-			html += '<div class="ui-block-a">&nbsp;' + condition.Domain + ':' + condition.Target + '</div>';
-			html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
-			html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
-			html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
-			html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
+            var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
+            var displayName = (module != null ? module.Name : '');
+            html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_ConditionChangeLine(' + i + ')">#' + lineNumber + '</div>';
+            html += '<div class="ui-grid-d hg-wizard-grid" onclick="automationpage_ConditionEditLine(' + i + ')">';
+            html += '<div class="ui-block-a">&nbsp;' + condition.Domain + ':' + condition.Target + '</div>';
+            html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+            html += '<div class="ui-block-c">&nbsp;' + condition.Property + '</div>';
+            html += '<div class="ui-block-d">&nbsp;' + condition.ComparisonOperator + '</div>';
+            html += '<div class="ui-block-e">&nbsp;' + condition.ComparisonValue + '</div>';
             /*
             $('#automation_program_conditions').append('' +
                 '<li data-context-value="' + i + '"><a>' +
@@ -581,7 +540,7 @@
                 ' <b>' + condition.ComparisonValue + '</b>' +
                 '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-inline="true" data-transition="pop" href="#automation_condition_delete">Delete</a></li>');
             */
-			html += '</div>';
+            html += '</div>';
         }
         $('#automation_program_conditions').append(html);
         $('#automation_program_conditions').trigger('create');

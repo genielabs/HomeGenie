@@ -6,13 +6,11 @@ HG.Ext.ZWave = HG.Ext.ZWave || {};
 
 HG.Ext.ZWave.NodeSetup = HG.Ext.ZWave.NodeSetup || {};
 
-HG.Ext.ZWave.NodeSetup.Show = function(module)
-{
+HG.Ext.ZWave.NodeSetup.Show = function (module) {
     HG.Ext.ZWave.NodeSetup.Refresh(module);
 }
 
-HG.Ext.ZWave.NodeSetup.Refresh = function(module)
-{
+HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
 
 
     // load data into fields
@@ -138,8 +136,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
         $('#opt-zwave-nodeinformation-overview').html(infotext);
         //
     }
-    else
-    {
+    else {
         var tries = 0;
         var callback = function (success) {
             if (!success && tries < 3) {
@@ -147,8 +144,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
                 $.mobile.loading('show');
                 window.setTimeout(function () { HG.WebApp.GroupModules.ZWave_NodeInfoRequest(callback); }, 1000);
             }
-            else
-            {
+            else {
                 $.mobile.loading('hide');
             }
         };
@@ -239,8 +235,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
             // populate groups list
             $('#opt-zwave-association-groupselect').selectmenu();
             $('#opt-zwave-association-groupselect').empty();
-            for (var g = 0; g < zwaveNode.associationGroups.length; g++)
-            {
+            for (var g = 0; g < zwaveNode.associationGroups.length; g++) {
                 var name = (typeof (zwaveNode.associationGroups[g].name) != 'undefined' ? zwaveNode.associationGroups[g].name : '');
                 var desc = (typeof (zwaveNode.associationGroups[g].description) != 'undefined' ? zwaveNode.associationGroups[g].description : '');
                 var opt = $('<option/>');
@@ -249,8 +244,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
                 opt.attr('data-context-description', desc);
                 opt.html(zwaveNode.associationGroups[g].number);
                 //
-                if (g == 0)
-                {
+                if (g == 0) {
                     $('#opt-zwave-association-groupdescription').html('<strong>' + name + '</strong>' + (name != '' ? '<br/>' : '') + '<em>' + desc + '</em>');
                     $('#configassoc-gid').val(zwaveNode.associationGroups[g].number);
                 }
@@ -264,7 +258,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
                 $('#opt-zwave-association-groupdescription').html('<strong>' + name + '</strong>' + (name != '' ? '<br/>' : '') + '<em>' + desc + '</em>');
                 $('#configassoc-gid').val($(this).find(":selected").val());
             });
-            
+
             // show variables list
             $('#opt-zwave-configuration-varinput').hide();
             $('#opt-zwave-configuration-varslist').show();
@@ -275,23 +269,18 @@ HG.Ext.ZWave.NodeSetup.Refresh = function(module)
                 var name = (typeof (zwaveNode.configParams[p].name) != 'undefined' ? zwaveNode.configParams[p].name : '');
                 var desc = (typeof (zwaveNode.configParams[p].description) != 'undefined' ? zwaveNode.configParams[p].description : '');
                 //
-                if (zwaveNode.configParams[p].values.length > 0)
-                {
+                if (zwaveNode.configParams[p].values.length > 0) {
                     desc += '<br><u>Accepted values</u><br>';
-                    for (var v = 0; v < zwaveNode.configParams[p].values.length; v++)
-                    {
+                    for (var v = 0; v < zwaveNode.configParams[p].values.length; v++) {
                         var value = zwaveNode.configParams[p].values[v];
                         var valuedesc = '';
-                        if (typeof (value.description) != 'undefined' && value.description != '')
-                        {
+                        if (typeof (value.description) != 'undefined' && value.description != '') {
                             valuedesc = ' : <em>' + value.description + '</em>';
                         }
-                        if (value.to == value.from)
-                        {
+                        if (value.to == value.from) {
                             desc += '&nbsp; <b>' + value.from + '</b>' + valuedesc + '<br>';
                         }
-                        else
-                        {
+                        else {
                             desc += '&nbsp; from <b>' + value.from + '</b> to <b>' + value.to + '</b>' + valuedesc + '<br>';
                         }
                     }
@@ -653,7 +642,7 @@ function _zwavedelayupdate(nodeid) {
 
 function Pepper1Db_getConfigValue(zvalue) {
     var v = { from: "0", to: "0", description: '' };
-    if(typeof zvalue !== "undefined"){
+    if (typeof zvalue !== "undefined") {
         v.from = parseInt(zvalue['@from'], 16);
         //if (v.from.length > 1) v.from = v.from.replace(new RegExp("^[0]+"), "");
         v.to = parseInt(zvalue['@to'], 16);
@@ -680,7 +669,7 @@ function Pepper1Db_getAssociationGroup(zgroup) {
     var g = { number: 1, maxNodes: 1, description: '' };
     g.number = zgroup['@number'];
     g.maxNodes = zgroup['@maxNodes'];
-    g.name = (typeof(zgroup.name) != 'undefined' ? Pepper1Db_getLocaleText(zgroup.name) : '');
+    g.name = (typeof (zgroup.name) != 'undefined' ? Pepper1Db_getLocaleText(zgroup.name) : '');
     g.description = Pepper1Db_getLocaleText(zgroup.description);
     return g;
 }
@@ -722,7 +711,7 @@ function Pepper1Db_getLocaleText(zproperty) {
     var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
     var lang = userLang.toLowerCase().substring(0, 2);
     // if lang is array
-    if($.isArray(zproperty.lang)){
+    if ($.isArray(zproperty.lang)) {
         var item = zproperty.lang.filter(function (obj) {
             return obj['@xml:lang'] == lang;
         });

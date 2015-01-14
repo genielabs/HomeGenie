@@ -34,7 +34,6 @@ namespace HomeGenie.Data
     [Serializable()]
     public class ModuleParameter
     {
-        [NonSerialized]
         private ValueStatistics statistics;
         private string parameterValue;
         //
@@ -47,7 +46,7 @@ namespace HomeGenie.Data
             UpdateTime = DateTime.Now;
         }
         //
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public ValueStatistics Statistics
         {
             get
@@ -79,10 +78,10 @@ namespace HomeGenie.Data
         }
         public string Description { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public bool NeedsUpdate { get; set; }
 
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public double DecimalValue
         {
             get
