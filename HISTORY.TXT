@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+15/01/2015 1.00 beta rev 455
+    - Updated RaspberrySharp-IO with CT/CB8 auto detect and connector mappings
+    - Added X10 RF commands decoding to XTenLib; Major library code rework
+
 14/01/2015 1.00 beta rev 454
     - Fixed unwanted serialization of module fields as Statistics (also affecting MQTT client app)
     - Added prelminary support for CubieTruck/Cubieboard3 through RaspberrySharp-IO
