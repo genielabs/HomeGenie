@@ -430,7 +430,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.ScriptErrors = "";
                         homegenie.ProgramEngine.RaiseProgramModuleEvent(
                             currentProgram,
-                            "Runtime.Error",
+                            Properties.RUNTIME_ERROR,
                             ""
                         );
                         ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));

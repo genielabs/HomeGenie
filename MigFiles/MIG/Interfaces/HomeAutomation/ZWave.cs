@@ -1105,19 +1105,6 @@ namespace MIG.Interfaces.HomeAutomation
         private void UpdateZWaveNodeDeviceHandler(int nodeId)
         {
             var node = controller.Devices.Find(zn => zn.NodeId == nodeId);
-            //if (node != null && node.DeviceHandler != null && (handler == null || handler.Value.Contains(".Generic.")))
-            //{
-            //    Utility.ModuleParameterSet(
-            //        module,
-            //        Properties.ZWAVENODE_DEVICEHANDLER,
-            //        node.DeviceHandler.GetType().FullName
-            //    );
-            //}
-            //else if (handler != null && !handler.Value.Contains(".Generic."))
-            //{
-            //    // set to last known handler
-            //    node.SetDeviceHandlerFromName(handler.Value);
-            //}
             InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                 Domain = this.Domain,
                 SourceId = nodeId.ToString(),

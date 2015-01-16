@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+16/01/2015 1.00 beta rev 456
+    - Added saving/loading of node device handlers to ZWaveLib (issue #78)
+    - Updated UPnP library from latest source code release
+    - Added ModuleParameter.RequestUpdate() and ModuleParameter.IdleTime, also renamed ModuleParameter.Wait to WaitUpdate (issue #72)
+    - Fixed "precision" issue in ZWaveLib ExtractValueFromBytes (issue #97)
+
 15/01/2015 1.00 beta rev 455
     - Updated RaspberrySharp-IO with CT/CB8 auto detect and connector mappings
     - Added X10 RF commands decoding to XTenLib; Major library code rework

@@ -370,8 +370,6 @@ namespace ZWaveLib.Devices
                             ManufacturerId = zwavePort.ByteArrayToString(manufacturerId).Replace(" ", "")
                         };
                         //
-                        CheckDeviceHandler(manufacturerSpecs);
-                        //
                         if (ManufacturerSpecificResponse != null)
                         {
                             try
@@ -412,65 +410,6 @@ namespace ZWaveLib.Devices
             }
 
             return false;
-        }
-        
-        public void SetGenericHandler()
-        {
-            if (this.DeviceHandler == null)
-            {
-                //No specific devicehandler could be found. Use a generic handler
-                IZWaveDeviceHandler deviceHandler = null;
-                switch (this.GenericClass)
-                {
-                    case 0x00:
-                    // need to query node capabilities
-                    byte[] message = new byte[] {
-                        0x01,
-                        0x04,
-                        0x00,
-                        (byte)Controller.Command.CMD_GET_NODE_PROTOCOL_INFO,
-                        this.NodeId,
-                        0x00
-                    };
-                    SendMessage(message);
-                    break;
-                    case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
-                    deviceHandler = new ProductHandlers.Generic.Switch();
-                    break;
-                    case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
-                    deviceHandler = new ProductHandlers.Generic.Dimmer();
-                    break;
-                    case (byte)ZWaveLib.GenericType.THERMOSTAT:
-                    deviceHandler = new ProductHandlers.Generic.Thermostat();
-                    break;
-                    // Fallback to generic Sensor driver if type is not directly supported.
-                    // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
-                    default:
-                    deviceHandler = new ProductHandlers.Generic.Sensor();
-                    break;
-                }
-                if (deviceHandler != null)
-                {
-                    this.DeviceHandler = deviceHandler;
-                    this.DeviceHandler.SetNodeHost(this);
-                }
-            }
-        }
-        
-        public void SetDeviceHandlerFromName(string fullName)
-        {
-            var type = Assembly.GetExecutingAssembly().GetType(fullName); // full name - i.e. with namespace (perhaps concatenate)
-            try
-            {
-                var deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                //
-                this.DeviceHandler = deviceHandler;
-                this.DeviceHandler.SetNodeHost(this);
-            }
-            catch
-            {
-                // TODO: add error logging 
-            }
         }
 
         public void SendRequest(byte[] msg)
@@ -874,50 +813,6 @@ namespace ZWaveLib.Devices
                 }
                 );
             }
-        }
-
-        private List<Type> GetTypesInNamespace(Assembly assembly, string nameSpace)
-        {
-            var typeList = new List<Type>();
-            foreach (Type type in assembly.GetTypes())
-            {
-                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace)) typeList.Add(type);
-            }
-            //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
-            return typeList;
-        }
-
-        private void CheckDeviceHandler(ManufacturerSpecific manufacturerspecs)
-        {
-            //if (this.DeviceHandler == null)
-            {
-                var typeList = GetTypesInNamespace(
-                    Assembly.GetExecutingAssembly(),
-                    "ZWaveLib.Devices.ProductHandlers."
-                    );
-                for (int i = 0; i < typeList.Count; i++)
-                {
-                    //Console.WriteLine(typelist[i].FullName);
-                    Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
-                    try
-                    {
-                        IZWaveDeviceHandler deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                        //
-                        if (deviceHandler.CanHandleProduct(manufacturerspecs))
-                        {
-                            this.DeviceHandler = deviceHandler;
-                            this.DeviceHandler.SetNodeHost(this);
-                            break;
-                        }
-                    }
-                    catch
-                    {
-                        // TODO: add error logging 
-                        //Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);
-                    }
-                }
-            }
-
         }
 
         #endregion Private members

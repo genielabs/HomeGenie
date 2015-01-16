@@ -1059,7 +1059,11 @@ namespace HomeGenie.Service
                         foreach (var parameter in module.Properties)
                         {
                             // these two properties have to be kept in clear text
-                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE && parameter.Name != Properties.VIRTUALMODULE_PARENTID)
+                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE 
+                                && parameter.Name != Properties.VIRTUALMODULE_PARENTID
+                                && parameter.Name != Properties.PROGRAM_STATUS
+                                && parameter.Name != Properties.RUNTIME_ERROR
+                            )
                             {
                                 if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Encrypt(
                                         parameter.Value,

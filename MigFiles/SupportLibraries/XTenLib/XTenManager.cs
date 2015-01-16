@@ -825,6 +825,7 @@ namespace XTenLib
                                 //signal.Start();
                             }
                             // Decode X10 RF Module Command (eg. "5D 20 70 8F 48 B7")
+                            /*
                             if (readData.Length == 6 && readData[1] == 0x20 && ((readData[3] &~ readData[2]) == readData[3] && (readData[5] &~ readData[4]) == readData[5]))
                             {
                                 byte hu = readData[2]; // house code + 4th bit of unit code
@@ -863,6 +864,7 @@ namespace XTenLib
                                     break;
                                 }
                             }
+                            */
                         }
                         else if ((readData[0] == (int)X10CommandType.PLC_Poll) && readData.Length <= 2)
                         {

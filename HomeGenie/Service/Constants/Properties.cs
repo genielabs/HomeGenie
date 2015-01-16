@@ -34,6 +34,10 @@ namespace HomeGenie.Service.Constants
         // internal HomeGenie parameters
         public const string SCHEDULER_ERROR
             = "Scheduler.Error";
+        public const string PROGRAM_STATUS
+            = "Program.Status";
+        public const string RUNTIME_ERROR
+            = "Runtime.Error";
 
         // commonly used parameters
         public const string STATUS_LEVEL

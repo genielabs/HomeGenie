@@ -397,7 +397,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     }
                 }
                 //
-                result = ((double)value / (precision == 0 ? 1 : precision * 10D));
+                result = ((double)value / (precision == 0 ? 1 : Math.Pow(10D, precision) ));
             } catch {
             }
             return result;

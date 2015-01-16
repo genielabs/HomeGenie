@@ -145,7 +145,7 @@ namespace HomeGenie.Automation
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(
                                 program,
-                                "Runtime.Error",
+                                Properties.RUNTIME_ERROR,
                                 "TC: " + result.Exception.Message.Replace(
                                     '\n',
                                     ' '
@@ -207,7 +207,7 @@ namespace HomeGenie.Automation
                     };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message.Replace('\n', ' '));
+                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' '));
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -270,7 +270,7 @@ namespace HomeGenie.Automation
             }
             //
             program.IsRunning = true;
-            RaiseProgramModuleEvent(program, "Program.Status", "Running");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Running");
             //
             if (program.Type.ToLower() != "wizard")
             {
@@ -308,7 +308,7 @@ namespace HomeGenie.Automation
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(
                                 program,
-                                "Runtime.Error",
+                                Properties.RUNTIME_ERROR,
                                 "CR: " + result.Exception.Message.Replace(
                                     '\n',
                                     ' '
@@ -317,7 +317,7 @@ namespace HomeGenie.Automation
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     });
                     //
                     try
@@ -328,7 +328,7 @@ namespace HomeGenie.Automation
                     {
                         program.Stop();
                         program.IsRunning = false;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     }
                 }
             }
@@ -354,7 +354,7 @@ namespace HomeGenie.Automation
                     {
                         program.IsRunning = false;
                     }
-                    RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                    RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                 });
                 //
                 program.ProgramThread.Start();
@@ -398,7 +398,7 @@ namespace HomeGenie.Automation
             }
             //
             // Initialize state
-            RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
             if (program.IsEnabled)
             {
                 StartProgramEvaluator(program);
@@ -849,14 +849,14 @@ namespace HomeGenie.Automation
             {
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
-                RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Enabled");
                 // TODO: CRITICAL
                 // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
                 StartProgramEvaluator(program);
             }
             else
             {
-                RaiseProgramModuleEvent(program, "Program.Status", "Disabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Disabled");
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
             }

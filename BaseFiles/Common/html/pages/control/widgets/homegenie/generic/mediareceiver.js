@@ -137,7 +137,6 @@
         if (_this.Widget.is(':visible')) {
             setTimeout(function () { _this.PollStatus(module); }, 2500);
         }
-
     }
 
 }]
