@@ -35,8 +35,8 @@ namespace MIG.Interfaces.HomeAutomation.Commons
             "Status.Battery";
         public static string MODPAR_METER_WATTS =
             "Meter.Watts";
-        public static string MODPAR_METER_POWER =
-            "Meter.Power";
+        public static string MODPAR_SENSOR_POWER =
+            "Sensor.Power";
         public static string MODPAR_SENSOR_GENERIC =
             "Sensor.Generic";
         public static string MODPAR_SENSOR_MOTIONDETECT =

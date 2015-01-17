@@ -816,13 +816,13 @@ namespace XTenLib
                             //
                             if (RfDataReceived != null)
                             {
-                                //Thread signal = new Thread(() =>
-                                //{
-                                try { RfDataReceived(new RfDataReceivedAction() { RawData = readData }); } catch { 
-                                    // TODO: handle/report exception
-                                }
-                                //});
-                                //signal.Start();
+                                Thread signal = new Thread(() =>
+                                {
+                                    try { RfDataReceived(new RfDataReceivedAction() { RawData = readData }); } catch { 
+                                        // TODO: handle/report exception
+                                    }
+                                });
+                                signal.Start();
                             }
                             // Decode X10 RF Module Command (eg. "5D 20 70 8F 48 B7")
                             /*
@@ -984,10 +984,10 @@ namespace XTenLib
                                 gotReadWriteError = true;
                                 Close();
                             }
-                            //else
-                            //{
-                            //    SendMessage(new byte[] { 0x00 });
-                            //}
+                            else
+                            {
+                                SendMessage(new byte[] { 0x00 });
+                            }
 
                             #endregion
 

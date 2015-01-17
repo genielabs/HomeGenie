@@ -25,11 +25,11 @@
     <Modules />
   </Group>
   <Group>
-    <Name>X10</Name>
+    <Name>Security</Name>
     <Modules />
   </Group>
   <Group>
-    <Name>Z-Wave</Name>
+    <Name>Interconnections</Name>
     <Modules />
   </Group>
   <Group>
@@ -37,11 +37,7 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Security</Name>
-    <Modules />
-  </Group>
-  <Group>
-    <Name>Interconnections</Name>
+    <Name>CubieTruck</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>

@@ -22,16 +22,18 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#configurepage_OptionZWave').find('span[data-module-prop="Address"]').html(module.Address);
     //$('#configurepage_OptionZWave').find('span[data-module-prop="Group"]').html(module.Group);
     //
-    /*			        var basicval = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level"); // TODO: duplicate prop to ZWaveNode.BasicCommandValue
-                        if (basicval != null)
-                        {
-                            basicval = basicval.Value;
-                        }
-                        else
-                        {
-                            basicval = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="BasicCommandValue"]').val(basicval);*/
+    /*
+    var basicval = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level"); // TODO: duplicate prop to ZWaveNode.BasicCommandValue
+    if (basicval != null)
+    {
+        basicval = basicval.Value;
+    }
+    else
+    {
+        basicval = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="BasicCommandValue"]').val(basicval);
+    */
     //
     $('#opt-zwave-configvar-label').html('Variable Value = ?');
     $('#opt-zwave-basic-label').html('Basic Value = ?');
@@ -152,41 +154,46 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
         HG.WebApp.GroupModules.ZWave_NodeInfoRequest(callback);
     }
     //
-    /*			        var wakeupinterval = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.WakeUpInterval");
-                        if (wakeupinterval != null)
-                        {
-                            wakeupinterval = wakeupinterval.Value;
-                        }
-                        else
-                        {
-                            wakeupinterval = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="WakeUpInterval"]').val(wakeupinterval);*/
+    /*
+    var wakeupinterval = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.WakeUpInterval");
+    if (wakeupinterval != null)
+    {
+        wakeupinterval = wakeupinterval.Value;
+    }
+    else
+    {
+        wakeupinterval = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="WakeUpInterval"]').val(wakeupinterval);
+    */
     //
-    /*			        var association = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Associations." + $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationId"]').val());
-                        if (association != null)
-                        {
-                            association = association.Value;
-                        }
-                        else
-                        {
-                            association = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationValue"]').val(association);*/
+    /*
+    var association = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Associations." + $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationId"]').val());
+    if (association != null)
+    {
+        association = association.Value;
+    }
+    else
+    {
+        association = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationValue"]').val(association);
+    */
     //
-    /*			        var variable = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Variables." + $('#configurepage_OptionZWave').find('input[data-module-prop="VariableId"]').val());
-                        if (variable != null)
-                        {
-                            variable = variable.Value;
-                        }
-                        else
-                        {
-                            variable = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="VariableValue"]').val(variable);*/
+    /*			        
+    var variable = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Variables." + $('#configurepage_OptionZWave').find('input[data-module-prop="VariableId"]').val());
+    if (variable != null)
+    {
+        variable = variable.Value;
+    }
+    else
+    {
+        variable = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="VariableValue"]').val(variable);
+    */
     //
-
-    if (manufacturerspec != null) {
+    if (manufacturerspec != null && manufacturerspec.Value.replace(/:/g, '_') != '') {
         jQuery.ajaxSetup({ cache: true });
         var devinfo = {};
         $.get('ext/zwave/pepper1db/' + manufacturerspec.Value.replace(/:/g, '_') + '.json', function (responsedata) {

@@ -906,7 +906,7 @@ namespace MIG.Interfaces.HomeAutomation
                 path = ModuleParameters.MODPAR_METER_WATTS;
                 break;
             case ParameterType.POWER:
-                path = ModuleParameters.MODPAR_METER_POWER;
+                path = ModuleParameters.MODPAR_SENSOR_POWER;
                 break;
             case ParameterType.BATTERY:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {

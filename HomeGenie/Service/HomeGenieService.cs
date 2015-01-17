@@ -295,6 +295,11 @@ namespace HomeGenie.Service
             SystemLogger.Instance.Dispose();
         }
 
+        ~HomeGenieService()
+        {
+            Stop();
+        }
+
         #endregion
 
         #region Data Wrappers - Public Members

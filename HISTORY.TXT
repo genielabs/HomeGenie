@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+17/01/2015 1.00 beta rev 457
+    - Added CubieTruck/CB3 GPIO app with 30 modules-mapped GPIOs
+    - Fixed possible loop in ZWaveLib Controller.cs when querying node's capabilities
+    - Fixed parameters not updating (bug introduced in r455)
+    - Fixed gpio folder name lookup in raspberry-sharp-io (CubieTruck/CB3)
+
 16/01/2015 1.00 beta rev 456
     - Added saving/loading of node device handlers to ZWaveLib (issue #78)
     - Updated UPnP library from latest source code release

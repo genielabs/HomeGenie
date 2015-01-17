@@ -727,7 +727,7 @@ namespace ZWaveLib.Devices
                 {
                 case 0x00:
                     // need to query node capabilities
-                    GetNodeCapabilities(node.NodeId);
+                    //GetNodeCapabilities(node.NodeId);
                     break;
                 case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
                     deviceHandler = new ProductHandlers.Generic.Switch();

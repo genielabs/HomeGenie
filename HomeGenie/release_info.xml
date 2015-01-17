@@ -1,16 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r453</Version>
+  <Version>1.00 beta r457</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed c# automation programs not starting after restoring from a backup (issue #86)
-  - Added ModuleParameter.Wait(double seconds) to wait a parameter update for a given time (issue #72)
-  - Deprecated ModuleParameter.LastValue, LastDecimalValue, ValueIncrement (moved to ModuleParameter.Statistics)
-  - Deprecated ModuleParameter.History and moved its functionalities to ModuleParameter.Statistics (issue #80)
-  - Fixed bug introduced with r452 and that was preventing modules config from being saved
-  - Fixed parsing of negative sensor values in ZWaveLib
-  - Fixed "NaN" issue in group values indicator for locales using "," as decimal separator
-  - Added modules.xml fields encryption
-  - Fixed missing scheduler config restore from a backup</ReleaseNote>
-  <ReleaseDate>2015-01-03T23:07:24.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added CubieTruck/CB3 GPIO app with 30 modules-mapped GPIOs
+    - Added saving/loading of node device handlers to ZWaveLib (issue #78)
+    - Updated UPnP library from latest source code release
+    - Added ModuleParameter.RequestUpdate() and ModuleParameter.IdleTime, also renamed ModuleParameter.Wait to WaitUpdate (issue #72)
+    - Fixed "precision" issue in ZWaveLib ExtractValueFromBytes (issue #97)
+    - Fixed unwanted serialization of some module fields such as "Statistics" (also affecting performance of MQTT client app)
+    - Added support for CubieTruck/Cubieboard3 to raspberrysharp-io library
+    - Fixed bug in X10 that was not performing first command after HG startup
+    - Fixed bug in Lirc initialization that was preventing IR remote from working when installing HG from debian package
+    - Fixed multiple unit code addressing in X10 library issue #30
+    - Added more field icons to sensor widget (pull request #94)
+    - Fixed error with Pepper1 db when lang is not an array (pull request #90)
+    - Changed widget's files extension from *.json to *.js</ReleaseNote>
+  <ReleaseDate>2015-01-17T16:58:02.0000Z</ReleaseDate>
 </ReleaseInfo>

@@ -2396,4 +2396,212 @@
     </Properties>
     <RoutingNode />
   </Module>
+  <Module>
+    <Name>GPIO Modules</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>150</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB02</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#17 PB02</Description>
+        <UpdateTime>2015-01-17T16:50:16.869771Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB03</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#16 PB03</Description>
+        <UpdateTime>2015-01-17T16:50:16.869943Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB04</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#18 PB04</Description>
+        <UpdateTime>2015-01-17T16:50:16.870114Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB14</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#07 PB14</Description>
+        <UpdateTime>2015-01-17T16:50:16.870285Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB15</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#09 PB15</Description>
+        <UpdateTime>2015-01-17T16:50:16.870457Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB16</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#08 PB16</Description>
+        <UpdateTime>2015-01-17T16:50:16.870674Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB17</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#10 PB17</Description>
+        <UpdateTime>2015-01-17T16:50:16.870846Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB18</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#19 PB18</Description>
+        <UpdateTime>2015-01-17T16:50:16.871018Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PB19</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#20 PB19</Description>
+        <UpdateTime>2015-01-17T16:50:16.871189Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PC19</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#03 PC19</Description>
+        <UpdateTime>2015-01-17T16:50:16.871385Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PC20</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#05 PC20</Description>
+        <UpdateTime>2015-01-17T16:50:16.871592Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PC21</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#04 PC21</Description>
+        <UpdateTime>2015-01-17T16:50:16.871765Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PC22</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#06 PC22</Description>
+        <UpdateTime>2015-01-17T16:50:16.871938Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG00</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#21 PG00</Description>
+        <UpdateTime>2015-01-17T16:50:16.87211Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG01</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#24 PG01</Description>
+        <UpdateTime>2015-01-17T16:50:16.872282Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG02</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#23 PG02</Description>
+        <UpdateTime>2015-01-17T16:50:16.872454Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG03</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#22 PG03</Description>
+        <UpdateTime>2015-01-17T16:50:16.872638Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG04</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#25 PG04</Description>
+        <UpdateTime>2015-01-17T16:50:16.87287Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG05</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#26 PG05</Description>
+        <UpdateTime>2015-01-17T16:50:16.873041Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG06</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#27 PG06</Description>
+        <UpdateTime>2015-01-17T16:50:16.873215Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG07</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#28 PG07</Description>
+        <UpdateTime>2015-01-17T16:50:16.873386Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG08</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#29 PG08</Description>
+        <UpdateTime>2015-01-17T16:50:16.873558Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG09</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#30 PG09</Description>
+        <UpdateTime>2015-01-17T16:50:16.873729Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG10</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#31 PG10</Description>
+        <UpdateTime>2015-01-17T16:50:16.8739Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PG11</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#32 PG11</Description>
+        <UpdateTime>2015-01-17T16:50:16.874071Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PI03</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#15 PI03</Description>
+        <UpdateTime>2015-01-17T16:50:16.874243Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PI14</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#12 PI14</Description>
+        <UpdateTime>2015-01-17T16:50:16.874415Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PI15</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#14 PI15</Description>
+        <UpdateTime>2015-01-17T16:50:16.874586Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PI20</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#11 PI20</Description>
+        <UpdateTime>2015-01-17T16:50:16.874757Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.Gpio.PI21</Name>
+        <Value>XSHDBMcF4dK1GQSqQGpA9g==</Value>
+        <Description>#13 PI21</Description>
+        <UpdateTime>2015-01-17T16:50:16.87493Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Disabled</Value>
+        <Description />
+        <UpdateTime>2015-01-17T16:50:01.936254Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>150</Value>
+        <Description />
+        <UpdateTime>2015-01-17T16:49:56.972114Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2015-01-17T16:49:56.967426Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <RoutingNode />
+  </Module>
 </ArrayOfModule>

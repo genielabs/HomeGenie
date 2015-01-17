@@ -81,7 +81,7 @@ namespace HomeGenie.Data
         }
         public string Description { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
-        [XmlIgnore, JsonIgnore]
+        [XmlIgnore]
         public bool NeedsUpdate { get; set; }
 
         [XmlIgnore, JsonIgnore]

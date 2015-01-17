@@ -4210,6 +4210,9 @@
     <None Include="html\images\indicators\generic.png" />
     <None Include="html\images\indicators\level-black.png" />
     <None Include="html\images\indicators\level.png" />
+    <None Include="programs\150.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
