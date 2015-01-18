@@ -33,8 +33,18 @@ namespace MIG.Interfaces.HomeAutomation.Commons
             "Status.Level";
         public static string MODPAR_STATUS_BATTERY =
             "Status.Battery";
+        public static string MODPAR_METER_KW_HOUR =
+            "Meter.KilowattHour";
+        public static string MODPAR_METER_KVA_HOUR =
+            "Meter.KilovoltAmpereHour";
         public static string MODPAR_METER_WATTS =
             "Meter.Watts";
+        public static string MODPAR_METER_PULSES =
+            "Meter.Pulses";
+        public static string MODPAR_METER_AC_VOLT =
+            "Meter.AcVoltage";
+        public static string MODPAR_METER_AC_CURRENT =
+            "Meter.AcCurrent";
         public static string MODPAR_SENSOR_POWER =
             "Sensor.Power";
         public static string MODPAR_SENSOR_GENERIC =

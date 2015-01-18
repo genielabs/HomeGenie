@@ -25,6 +25,14 @@
     <Modules />
   </Group>
   <Group>
+    <Name>X10</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Z-Wave</Name>
+    <Modules />
+  </Group>
+  <Group>
     <Name>Security</Name>
     <Modules />
   </Group>

@@ -461,7 +461,9 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.METER_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.Meter_Get();
+                    // see ZWaveLib Sensor.cs for EnergyMeterScale options
+                    int scaleType = 0; int.TryParse(request.GetOption(0), out scaleType);
+                    node.Meter_Get((byte)(scaleType << 0x03));
                 }
                 else if (command == Command.METER_SUPPORTEDGET)
                 {
@@ -902,10 +904,25 @@ namespace MIG.Interfaces.HomeAutomation
             //
             switch (upargs.ParameterType)
             {
-            case ParameterType.WATTS:
+            case ParameterType.METER_KW_HOUR:
+                path = ModuleParameters.MODPAR_METER_KW_HOUR;
+                break;
+            case ParameterType.METER_KVA_HOUR:
+                path = ModuleParameters.MODPAR_METER_KVA_HOUR;
+                break;
+            case ParameterType.METER_WATT:
                 path = ModuleParameters.MODPAR_METER_WATTS;
                 break;
-            case ParameterType.POWER:
+            case ParameterType.METER_PULSES:
+                path = ModuleParameters.MODPAR_METER_PULSES;
+                break;
+            case ParameterType.METER_AC_VOLT:
+                path = ModuleParameters.MODPAR_METER_AC_VOLT;
+                break;
+            case ParameterType.METER_AC_CURRENT:
+                path = ModuleParameters.MODPAR_METER_AC_CURRENT;
+                break;
+            case ParameterType.METER_POWER:
                 path = ModuleParameters.MODPAR_SENSOR_POWER;
                 break;
             case ParameterType.BATTERY:
@@ -933,16 +950,16 @@ namespace MIG.Interfaces.HomeAutomation
             case ParameterType.ALARM_TAMPERED:
                 path = ModuleParameters.MODPAR_SENSOR_TAMPER;
                 break;
-            case ParameterType.TEMPERATURE:
+            case ParameterType.SENSOR_TEMPERATURE:
                 path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
                 break;
-            case ParameterType.HUMIDITY:
+            case ParameterType.SENSOR_HUMIDITY:
                 path = ModuleParameters.MODPAR_SENSOR_HUMIDITY;
                 break;
-            case ParameterType.LUMINANCE:
+            case ParameterType.SENSOR_LUMINANCE:
                 path = ModuleParameters.MODPAR_SENSOR_LUMINANCE;
                 break;
-            case ParameterType.MOTION:
+            case ParameterType.SENSOR_MOTION:
                 path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
                 break;
             case ParameterType.ALARM_SMOKE:
@@ -1017,7 +1034,7 @@ namespace MIG.Interfaces.HomeAutomation
             case ParameterType.WAKEUP_NOTIFY:
                 path = "ZWaveNode.WakeUpNotify";
                 break;
-            case ParameterType.BASIC:
+            case ParameterType.LEVEL:
                     //
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,

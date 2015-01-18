@@ -32,84 +32,6 @@ using ZWaveLib.Devices.ProductHandlers.Generic;
 namespace ZWaveLib.Devices
 {
 
-    public enum ParameterType
-    {
-        BASIC,
-        MANUFACTURER_SPECIFIC,
-        GENERIC,
-        WATTS,
-        POWER,
-        TEMPERATURE,
-        HUMIDITY,
-        LUMINANCE,
-        MOTION,
-        ALARM_DOORWINDOW,
-        ALARM_GENERIC,
-        ALARM_SMOKE,
-        ALARM_CARBONMONOXIDE,
-        ALARM_CARBONDIOXIDE,
-        ALARM_HEAT,
-        ALARM_FLOOD,
-        ALARM_TAMPERED,
-        CONFIGURATION,
-        WAKEUP_INTERVAL,
-        WAKEUP_NOTIFY,
-        ASSOCIATION,
-        BATTERY,
-        NODE_INFO,
-        MULTIINSTANCE_SWITCH_BINARY_COUNT,
-        MULTIINSTANCE_SWITCH_BINARY,
-        MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT,
-        MULTIINSTANCE_SWITCH_MULTILEVEL,
-        MULTIINSTANCE_SENSOR_BINARY_COUNT,
-        MULTIINSTANCE_SENSOR_BINARY,
-        MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT,
-        MULTIINSTANCE_SENSOR_MULTILEVEL,
-        THERMOSTAT_FAN_MODE,
-        THERMOSTAT_FAN_STATE,
-        THERMOSTAT_HEATING,
-        THERMOSTAT_MODE,
-        THERMOSTAT_OPERATING_STATE,
-        THERMOSTAT_SETBACK,
-        THERMOSTAT_SETPOINT
-    }
-
-    public enum ZWaveSensorAlarmParameter
-    {
-        GENERIC = 0,
-        SMOKE,
-        CARBONMONOXIDE,
-        CARBONDIOXIDE,
-        HEAT,
-        FLOOD
-    }
-
-    public enum ZWaveSensorParameter
-    {
-        UNKNOWN = -1,
-        TEMPERATURE = 1,
-        GENERAL_PURPOSE_VALUE = 2,
-        LUMINANCE = 3,
-        POWER = 4,
-        RELATIVE_HUMIDITY = 5,
-        VELOCITY = 6,
-        DIRECTION = 7,
-        ATMOSPHERIC_PRESSURE = 8,
-        BAROMETRIC_PRESSURE = 9,
-        SOLAR_RADIATION = 10,
-        DEW_POINT = 11,
-        RAIN_RATE = 12,
-        TIDE_LEVEL = 13,
-        WEIGHT = 14,
-        VOLTAGE = 15,
-        CURRENT = 16,
-        CO2_LEVEL = 17,
-        AIR_FLOW = 18,
-        TANK_CAPACITY = 19,
-        DISTANCE = 20,
-        ANGLE_POSITION = 21
-    }
-
     public class UpdateNodeParameterEventArgs
     {
         public int NodeId { get; internal set; }
@@ -733,11 +655,12 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Meter
 
-        public virtual void Meter_Get()
+        public virtual void Meter_Get(byte scaleType)
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.METER, 
-                (byte)Command.METER_GET
+                (byte)Command.METER_GET,
+                scaleType
             });
         }
         public virtual void Meter_SupportedGet()

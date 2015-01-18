@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:15.880924Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:13.994086Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:16.389394Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:14.50067Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:16.890083Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:15.003111Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -496,7 +496,7 @@ controlModules.Each((module)=&gt;{
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2015-01-17T16:28:45.561479Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:43:49.28887Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -596,15 +596,16 @@ return true; // execute "Code To Run"
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
-  	// basic get will returns current device level 
-  	Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
-  		Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
-      	module.Command("Basic.Get").Execute();
-		Pause(Program.InputField("PollInterval").DecimalValue);
-      	return false; // do not break, continue iterating...
-  	});
-	// pause between each poll
-    Pause(Program.InputField("PollInterval").DecimalValue);
+  // basic get will returns current device level 
+  Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("Basic.Get").Execute();
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.InputField("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -1238,7 +1239,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:17.882723Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:15.997621Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1293,7 +1294,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:18.385468Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:16.500362Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1588,7 +1589,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:18.893039Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:17.007914Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1667,7 +1668,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:19.39167Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:17.50192Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1737,7 +1738,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:19.88988Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:18.00232Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2011,7 +2012,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:20.392661Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:18.504006Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2377,7 +2378,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:21.395279Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:19.503023Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2449,7 +2450,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:21.894198Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:20.006163Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2603,7 +2604,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:22.393032Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:20.502499Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2867,7 +2868,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-17T15:39:22.898287Z</TriggerTime>
+    <TriggerTime>2015-01-18T10:40:21.010322Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8418,6 +8419,59 @@ GPIOs configured as IN are mapped to a Sensor module with a Status.Level field d
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
     <Group>CubieTruck</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// this is a background app
+// so we just put initialization code here and a return true
+// to activate the background task loop
+
+// ...
+Program.Setup(()=&gt;
+{              
+	Program.AddInputField("PollInterval", "45", "Poll Interval (seconds)");
+	Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt");
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  // basic get will returns current device level 
+  Modules.WithFeature("HomeGenie.ZWaveMeterPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("Meter.Get").Execute("2");
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.InputField("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveMeterPoll</Property>
+        <Description>Poll meter Watt</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>40</Address>
+    <Name>Meter Watt Poll</Name>
+    <Description>Periodically reads instant Watt value from meter devices</Description>
+    <Group>Z-Wave</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
