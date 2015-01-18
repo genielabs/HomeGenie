@@ -3094,14 +3094,14 @@ var gpio24 = Program.InputField("GPIO24").Value.ToLower();
 var gpio25 = Program.InputField("GPIO25").Value.ToLower();
 
 // add configured GPIOs to a list that will be used to configure the connection
-if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio4.StartsWith("!") });
+if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio17.StartsWith("!") });
+if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio18.StartsWith("!") });
+if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio21.StartsWith("!") });
+if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio22.StartsWith("!") });
+if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio23.StartsWith("!") });
+if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio24.StartsWith("!") });
+if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio25.StartsWith("!") });
 
 // Setup the connection to the GPIOs
 var configuration = new PinConfiguration[pinMapping.Count];
@@ -3124,7 +3124,8 @@ for (int p = 0; p &lt; pinMapping.Count; p++)
   	else
     {
 	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+      	((OutputPinConfiguration)configuration[p]).Reversed = pc.Reversed;
+        Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
     }
     configuration[p].Name = pc.Address;
 }
@@ -3215,6 +3216,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Raspberry Pi GPIO mapped to HG modules.
 Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
 Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
+Use !OUT to Reverse the pin level On = 0 and Off = 1.
 GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
