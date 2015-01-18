@@ -34,7 +34,10 @@ namespace HomeGenie.Data
     [Serializable()]
     public class ModuleParameter
     {
+        [NonSerialized]
         private ValueStatistics statistics;
+        [NonSerialized]
+        private DateTime requestUpdateTimestamp = DateTime.UtcNow;
         private string parameterValue;
         //
         public ModuleParameter()
@@ -43,7 +46,7 @@ namespace HomeGenie.Data
             Name = "";
             Value = "";
             Description = "";
-            UpdateTime = DateTime.Now;
+            UpdateTime = DateTime.UtcNow;
         }
         //
         [XmlIgnore, JsonIgnore]
@@ -78,7 +81,7 @@ namespace HomeGenie.Data
         }
         public string Description { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
-        [XmlIgnore, JsonIgnore]
+        [XmlIgnore]
         public bool NeedsUpdate { get; set; }
 
         [XmlIgnore, JsonIgnore]
@@ -98,12 +101,25 @@ namespace HomeGenie.Data
             return (this.Name.ToLower() == name.ToLower());
         }
 
-        public bool Wait(double timeoutSeconds)
+        public void RequestUpdate()
         {
-            var lastUpdate = new DateTime(UpdateTime.Ticks);
-            var startTimestamp = DateTime.UtcNow;
-            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - startTimestamp).TotalSeconds < timeoutSeconds);
+            requestUpdateTimestamp = DateTime.UtcNow;
+        }
+
+        public bool WaitUpdate(double timeoutSeconds)
+        {
+            var lastUpdate = UpdateTime;
+            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - requestUpdateTimestamp).TotalSeconds < timeoutSeconds);
             return lastUpdate.Ticks != UpdateTime.Ticks;
+        }
+
+        [XmlIgnore, JsonIgnore]
+        public double IdleTime
+        {
+            get 
+            {
+                return (DateTime.UtcNow - UpdateTime).TotalSeconds;
+            }
         }
 
     }

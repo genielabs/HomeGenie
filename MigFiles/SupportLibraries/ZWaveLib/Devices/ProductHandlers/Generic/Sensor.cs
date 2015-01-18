@@ -24,9 +24,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
+
     public class Sensor : IZWaveDeviceHandler
     {
         internal ZWaveNode nodeHost = null;
@@ -56,7 +58,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.BASIC && (cmdType == (byte)Command.BASIC_REPORT || cmdType == (byte)Command.BASIC_SET))
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.BASIC, (double)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, (double)message[9]);
                 handled = true;
             }
             else if (cmdClass == (byte)CommandClass.SCENE_ACTIVATION && cmdType == (byte)Command.SCENE_ACTIVATION_SET)
@@ -71,23 +73,23 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             }
             else if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
             {
-                var sensorValue = Sensor.ParseSensorValue(message);
-                if (sensorValue.Parameter == ZWaveSensorParameter.UNKNOWN)
+                var sensor = SensorValue.Parse(message);
+                if (sensor.Parameter == ZWaveSensorParameter.UNKNOWN)
                 {
                     byte key = message[9];
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, sensorValue.Value);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, sensor.Value);
                     Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                 }
                 else
                 {
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, sensorValue.EventType, sensorValue.Value);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, sensor.EventType, sensor.Value);
                     handled = true;
                 }
             }
             else if ((cmdClass == (byte)CommandClass.SENSOR_ALARM && cmdType == (byte)Command.SENSOR_ALARM_REPORT) || (cmdClass == (byte)CommandClass.ALARM && cmdType == (byte)Command.ALARM_REPORT))
             {
-                var sensorAlarmValue = Sensor.ParseSensorAlarmValue(message);
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, sensorAlarmValue.EventType, sensorAlarmValue.Value);
+                var alarm = AlarmValue.Parse(message);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, alarm.EventType, alarm.Value);
                 handled = true;
             }
             return handled;
@@ -105,16 +107,10 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.METER && cmdType == (byte)Command.METER_REPORT)
             {
-                //UNHANDLED: 01 14 00 04 08 04 0E 32 02 21 74 00 00 1E BB 00 00 00 00 00 00 2D
-                //           01 14 00 04 00 0A 0E 32 02 21 64 00 00 0C 06 00 00 00 00 00 00 94
-                //
-                // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
+                // TODO: should check meter report type (Electric, Gas, Water) and value precision / scale
                 // TODO: the code below parse always as Electric type 
-                double wattsRead = ((double)int.Parse(
-                                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
-                                       System.Globalization.NumberStyles.HexNumber
-                                   )) / 1000D;
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.WATTS, wattsRead);
+                EnergyValue energy = EnergyValue.Parse(message);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, energy.EventType, energy.Value);
                 processed = true;
             }
             else if (cmdClass == (byte)CommandClass.MULTIINSTANCE)
@@ -133,14 +129,15 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         paramType = ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL;
                     }
                     // we assume its a COMMAND_MULTIINSTANCE_REPORT
+                    int scale = 0;
                     byte key = message[12];
-                    double val = ExtractValueFromBytes(message, 14);
+                    double val = Utility.ExtractValueFromBytes(message, 14, out scale);
 
                     // if it's a COMMAND_MULTIINSTANCEV2_ENCAP we shift key and val +1 byte
                     if (cmdType == (byte)Command.MULTIINSTANCEV2_ENCAP)
                     {
                         key = message[13];
-                        val = ExtractValueFromBytes(message, 15);
+                        val = Utility.ExtractValueFromBytes(message, 15, out scale);
                     }
                     //
                     if (key == (byte)ZWaveSensorParameter.TEMPERATURE && message.Length > 16)
@@ -151,14 +148,14 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         }
                         else
                         {
-                            val = ExtractTemperatureFromBytes(message);
+                            val = Utility.ExtractTemperatureFromBytes(message);
                         }
                         //
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, val);
                         nodeHost.RaiseUpdateParameterEvent(
                             nodeHost,
                             key,
-                            ParameterType.TEMPERATURE,
+                            ParameterType.SENSOR_TEMPERATURE,
                             val
                         );
                         processed = true;
@@ -172,17 +169,18 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.LUMINANCE, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_LUMINANCE, val);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.HUMIDITY, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_HUMIDITY, val);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.POWER)
                     {
+                        // TODO: verify if it's possible to use EnergyValue class
                         double energy = 0;
 
                         if (cmdType == (byte)Command.MULTIINSTANCEV2_ENCAP && message.Length > 18)
@@ -214,195 +212,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 }
             }
             return processed;
-        }
-
-
-        public class SensorValue
-        {
-            public ParameterType EventType = ParameterType.GENERIC;
-            public ZWaveSensorParameter Parameter = ZWaveSensorParameter.UNKNOWN;
-            public double Value = 0d;
-        }
-
-        public class SensorAlarmValue
-        {
-            public ParameterType EventType = ParameterType.GENERIC;
-            public ZWaveSensorAlarmParameter Parameter = ZWaveSensorAlarmParameter.GENERIC;
-            public byte Value = 0x00;
-        }
-
-        public static SensorAlarmValue ParseSensorAlarmValue(byte[] message)
-        {
-            SensorAlarmValue sensorValue = new SensorAlarmValue();
-            //
-            byte cmdClass = message[7];
-            //
-            sensorValue.Parameter = ZWaveSensorAlarmParameter.GENERIC;
-            sensorValue.Value = message[10]; // CommandClass.COMMAND_CLASS_ALARM
-            //
-            if (cmdClass == (byte)CommandClass.SENSOR_ALARM)
-            {
-                sensorValue.Parameter = (ZWaveSensorAlarmParameter)Enum.Parse(
-                    typeof(ZWaveSensorAlarmParameter),
-                    message[10].ToString()
-                );
-                sensorValue.Value = message[11];
-            }
-            //
-            switch (sensorValue.Parameter)
-            {
-            case ZWaveSensorAlarmParameter.CARBONDIOXIDE:
-                sensorValue.EventType = ParameterType.ALARM_CARBONDIOXIDE;
-                break;
-            case ZWaveSensorAlarmParameter.CARBONMONOXIDE:
-                sensorValue.EventType = ParameterType.ALARM_CARBONMONOXIDE;
-                break;
-            case ZWaveSensorAlarmParameter.SMOKE:
-                sensorValue.EventType = ParameterType.ALARM_SMOKE;
-                break;
-            case ZWaveSensorAlarmParameter.HEAT:
-                sensorValue.EventType = ParameterType.ALARM_HEAT;
-                break;
-            case ZWaveSensorAlarmParameter.FLOOD:
-                sensorValue.EventType = ParameterType.ALARM_FLOOD;
-                break;
-            //case ZWaveSensorAlarmParameter.GENERIC:
-            default:
-                sensorValue.EventType = ParameterType.ALARM_GENERIC;
-                break;
-            }
-            //
-            return sensorValue;
-        }
-
-        public static SensorValue ParseSensorValue(byte[] message)
-        {
-            // ...
-            /*
-             * 
-    SPI > 01 0C 00 04 00 16 06 31 05 03 0A 00 43 99
-    SPO < 06
-    ZWaveLib UNHANDLED message: 01 0C 00 04 00 16 06 31 05 03 0A 00 43 99
-    SPI > 01 0C 00 04 00 16 06 31 05 05 01 27 00 F0
-    SPO < 06
-    ZWaveLib UNHANDLED message: 01 0C 00 04 00 16 06 31 05 05 01 27 00 F0
-    SPI > 01 0C 00 04 00 16 06 31 05 01 2A 03 3B C0
-    SPO < 06
-    ZWaveLib UNHANDLED message: 01 0C 00 04 00 16 06 31 05 01 2A 03 3B C0					 
-             * 
-            */
-
-            SensorValue sensorValue = new SensorValue();
-            //
-            byte key = message[9];
-            double val = ExtractValueFromBytes(message, 11);
-            //
-            if (key == (byte)ZWaveSensorParameter.TEMPERATURE)
-            {
-                sensorValue.Parameter = ZWaveSensorParameter.TEMPERATURE;
-                sensorValue.Value = ExtractTemperatureFromBytes(message);
-                sensorValue.EventType = ParameterType.TEMPERATURE;
-            }
-            else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
-            {
-                sensorValue.Parameter = ZWaveSensorParameter.GENERAL_PURPOSE_VALUE;
-                sensorValue.Value = val;
-                sensorValue.EventType = ParameterType.GENERIC;
-            }
-            else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
-            {
-                sensorValue.Parameter = ZWaveSensorParameter.LUMINANCE;
-                sensorValue.Value = val;
-                sensorValue.EventType = ParameterType.LUMINANCE;
-            }
-            else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
-            {
-                sensorValue.Parameter = ZWaveSensorParameter.RELATIVE_HUMIDITY;
-                sensorValue.Value = val;
-                sensorValue.EventType = ParameterType.HUMIDITY;
-            }
-            else if (key == (byte)ZWaveSensorParameter.POWER)
-            {
-                // TODO: this might be very buggy.... to be completed
-                sensorValue.Parameter = ZWaveSensorParameter.POWER;
-                //sensorValue.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0) / 10D;
-                sensorValue.Value = ((double)int.Parse(
-                    message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
-                    System.Globalization.NumberStyles.HexNumber
-                    )) / 1000D;
-                sensorValue.EventType = ParameterType.POWER;
-            }
-            else
-            {
-                sensorValue.Value = val;
-            }
-            //
-            return sensorValue;
-        }
-
-
-   
-        public static double ExtractTemperatureFromBytes(byte[] message)
-        {
-            double temperature = 0;
-
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            byte precisionScaleSize = message[0];
-            // precisionScaleSize = 0x2A = Fahrenheit
-            // precisionScaleSize = 0x22 = Celius
-
-            temperature = ExtractValueFromBytes(message, 1);
-
-            // convert from Fahrenheit to Celsius
-            if (precisionScaleSize != 0x22) temperature = ((5.0 / 9.0) * (temperature - 32.0));
-
-            return temperature;
-        }
-
-        // adapted from: 
-        // https://github.com/dcuddeback/open-zwave/blob/master/cpp/src/command_classes/CommandClass.cpp#L289
-        public static double ExtractValueFromBytes(byte[] message, int valueOffset)
-        {
-            double result = 0;
-            try
-            {
-                byte sizeMask = 0x07, 
-                    scaleMask = 0x18, scaleShift = 0x03, 
-                    precisionMask = 0xe0, precisionShift = 0x05;
-                //
-                byte size = (byte)(message[valueOffset-1] & sizeMask);
-                byte precision = (byte)((message[valueOffset-1] & precisionMask) >> precisionShift);
-                //
-                int value = 0;
-                byte i;
-                for( i=0; i<size; ++i )
-                {
-                    value <<= 8;
-                    value |= (int)message[i+(int)valueOffset];
-                }
-                // Deal with sign extension. All values are signed
-                if( (message[valueOffset] & 0x80) > 0 )
-                {
-                    // MSB is signed
-                    if( size == 1 )
-                    {
-                        value = (int)((uint)value | 0xffffff00);
-                    }
-                    else if( size == 2 )
-                    {
-                        value = (int)((uint)value | 0xffff0000);
-                    }
-                }
-                //
-                result = ((double)value / (precision == 0 ? 1 : precision * 10D));
-            } catch {
-            }
-            return result;
-        }
-
+        }   
 
     }
 }

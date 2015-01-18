@@ -52,7 +52,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         var groupName = HG.WebApp.Data.AutomationGroups[i].Name;
         //
         // filter non valid entries for the running configuration
-        if (groupName == 'Raspberry Pi' && HOST_SYSTEM.substring(0, 3) == 'Win') continue;
+        if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win') continue;
         else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) continue;
         else if (groupName == 'Z-Wave' && ifaceZwave == null) continue;
         //

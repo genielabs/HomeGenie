@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Devices\Controller.cs" />
@@ -57,6 +58,11 @@
     <Compile Include="Devices\ProductHandlers\Aeon\MicroSmartEnergySwitch.cs" />
     <Compile Include="Devices\ProductHandlers\Fibaro\MotionSensor.cs" />
     <Compile Include="Devices\ProductHandlers\Zwave.Me\ZWaveMeThermostat.cs" />
+    <Compile Include="Devices\Values\Utility.cs" />
+    <Compile Include="Devices\Values\SensorValue.cs" />
+    <Compile Include="Devices\Values\AlarmValue.cs" />
+    <Compile Include="Devices\Values\EnergyValue.cs" />
+    <Compile Include="Devices\ParameterType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -74,5 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Devices\ProductHandlers\Fibaro\" />
+    <Folder Include="Devices\Values\" />
   </ItemGroup>
 </Project>

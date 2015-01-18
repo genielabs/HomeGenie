@@ -39,7 +39,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.BASIC || cmdClass == (byte)CommandClass.SWITCH_BINARY || cmdClass == (byte)CommandClass.SWITCH_MULTILEVEL)
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.BASIC, levelValue);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, levelValue);
                 switch (cmdClass)
                 {
                 case (byte)CommandClass.SWITCH_BINARY:

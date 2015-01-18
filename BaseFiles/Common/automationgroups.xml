@@ -33,15 +33,19 @@
     <Modules />
   </Group>
   <Group>
-    <Name>Raspberry Pi</Name>
-    <Modules />
-  </Group>
-  <Group>
     <Name>Security</Name>
     <Modules />
   </Group>
   <Group>
     <Name>Interconnections</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>Raspberry Pi</Name>
+    <Modules />
+  </Group>
+  <Group>
+    <Name>CubieTruck</Name>
     <Modules />
   </Group>
 </ArrayOfGroup>

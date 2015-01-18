@@ -26,6 +26,7 @@ using System.Linq;
 using System.Text;
 
 using ZWaveLib.Devices.ProductHandlers.Generic;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Devices.ProductHandlers.Fibaro
 {
@@ -49,7 +50,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Fibaro
             //
             if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
             {
-                SensorValue sensorval = Sensor.ParseSensorValue(message);
+                SensorValue sensorval = SensorValue.Parse(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)
                 {
                     sensorval.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);

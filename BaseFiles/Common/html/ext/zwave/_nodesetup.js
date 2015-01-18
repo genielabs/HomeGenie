@@ -22,16 +22,18 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#configurepage_OptionZWave').find('span[data-module-prop="Address"]').html(module.Address);
     //$('#configurepage_OptionZWave').find('span[data-module-prop="Group"]').html(module.Group);
     //
-    /*			        var basicval = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level"); // TODO: duplicate prop to ZWaveNode.BasicCommandValue
-                        if (basicval != null)
-                        {
-                            basicval = basicval.Value;
-                        }
-                        else
-                        {
-                            basicval = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="BasicCommandValue"]').val(basicval);*/
+    /*
+    var basicval = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level"); // TODO: duplicate prop to ZWaveNode.BasicCommandValue
+    if (basicval != null)
+    {
+        basicval = basicval.Value;
+    }
+    else
+    {
+        basicval = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="BasicCommandValue"]').val(basicval);
+    */
     //
     $('#opt-zwave-configvar-label').html('Variable Value = ?');
     $('#opt-zwave-basic-label').html('Basic Value = ?');
@@ -52,12 +54,15 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#opt-zwave-wakeup-box').hide();
     $('#opt-zwave-associations-box').hide();
     $('#opt-zwave-configuration-box').hide();
-    $('#opt-zwave-multiinstance-box').hide();
     //
+    $('#opt-zwave-multiinstance-box').hide();
     $('#opt-zwave-switchbinary-opt').hide();
     $('#opt-zwave-switchmulti-opt').hide();
     $('#opt-zwave-sensorbinary-opt').hide();
     $('#opt-zwave-sensormulti-opt').hide();
+    //
+    $('#opt-zwave-meter-box').hide();
+    //
     $('#opt-zwave-battery-box').hide();
     //
     $('#opt-zwave-nodeinformation-overview').html('');
@@ -129,6 +134,9 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
                 case 'Battery':
                     $('#opt-zwave-battery-box').show();
                     break;
+                case 'Meter':
+                    $('#opt-zwave-meter-box').show();
+                    break;
             }
         }
         //
@@ -152,41 +160,46 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
         HG.WebApp.GroupModules.ZWave_NodeInfoRequest(callback);
     }
     //
-    /*			        var wakeupinterval = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.WakeUpInterval");
-                        if (wakeupinterval != null)
-                        {
-                            wakeupinterval = wakeupinterval.Value;
-                        }
-                        else
-                        {
-                            wakeupinterval = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="WakeUpInterval"]').val(wakeupinterval);*/
+    /*
+    var wakeupinterval = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.WakeUpInterval");
+    if (wakeupinterval != null)
+    {
+        wakeupinterval = wakeupinterval.Value;
+    }
+    else
+    {
+        wakeupinterval = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="WakeUpInterval"]').val(wakeupinterval);
+    */
     //
-    /*			        var association = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Associations." + $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationId"]').val());
-                        if (association != null)
-                        {
-                            association = association.Value;
-                        }
-                        else
-                        {
-                            association = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationValue"]').val(association);*/
+    /*
+    var association = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Associations." + $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationId"]').val());
+    if (association != null)
+    {
+        association = association.Value;
+    }
+    else
+    {
+        association = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="AssociationValue"]').val(association);
+    */
     //
-    /*			        var variable = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Variables." + $('#configurepage_OptionZWave').find('input[data-module-prop="VariableId"]').val());
-                        if (variable != null)
-                        {
-                            variable = variable.Value;
-                        }
-                        else
-                        {
-                            variable = "";
-                        }
-                        $('#configurepage_OptionZWave').find('input[data-module-prop="VariableValue"]').val(variable);*/
+    /*			        
+    var variable = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Variables." + $('#configurepage_OptionZWave').find('input[data-module-prop="VariableId"]').val());
+    if (variable != null)
+    {
+        variable = variable.Value;
+    }
+    else
+    {
+        variable = "";
+    }
+    $('#configurepage_OptionZWave').find('input[data-module-prop="VariableValue"]').val(variable);
+    */
     //
-
-    if (manufacturerspec != null) {
+    if (manufacturerspec != null && manufacturerspec.Value.replace(/:/g, '_') != '') {
         jQuery.ajaxSetup({ cache: true });
         var devinfo = {};
         $.get('ext/zwave/pepper1db/' + manufacturerspec.Value.replace(/:/g, '_') + '.json', function (responsedata) {
@@ -402,6 +415,14 @@ HG.WebApp.GroupModules.ZWave_WakeUpGet = function () {
     });
 };
 
+HG.WebApp.GroupModules.ZWave_MeterGet = function (type) {
+    zwave_MeterGet($('#configurepage_OptionZWave_id').val(), type, function (res) { });
+};
+
+HG.WebApp.GroupModules.ZWave_MeterReset = function (type) {
+    zwave_MeterReset($('#configurepage_OptionZWave_id').val(), function (res) { });
+};
+
 HG.WebApp.GroupModules.ZWave_NodeInfoRequest = function (callback) {
     $('#opt-zwave-manufacturerspecs-label').html('Manufacturer Specific = ? (querying node...)');
     zwave_ManufacturerSpecificGet($('#configurepage_OptionZWave_id').val(), function (res) {
@@ -539,6 +560,20 @@ function zwave_WakeUpSet(nodeid, opt1, opt2) {
 }
 
 
+function zwave_MeterGet(nodeid, type, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Meter.Get/' + type + '/' + (new Date().getTime()), function (data) {
+        if (typeof callback != 'undefined' && callback != null) {
+            callback();
+        }
+    });
+}
+function zwave_MeterReset(nodeid, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Meter.Reset/' + (new Date().getTime()), function (data) {
+        if (typeof callback != 'undefined' && callback != null) {
+            callback();
+        }
+    });
+}
 
 
 function zwave_ConfigurationParameterGet(nodeid, varid, callback) {

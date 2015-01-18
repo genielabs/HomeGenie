@@ -9,6 +9,7 @@
     <div class="ui-content">
 
         <div id="zwave_configure_advanced">
+        
             <h3 data-module-prop="Name"></h3>
             <input id="configurepage_OptionZWave_id" type="hidden" />
             <ul data-role="listview" data-inset="false" id="opt-zwave-options-list">
@@ -221,6 +222,32 @@
 
                 </li>
             </ul>
+            
+            <ul id="opt-zwave-meter-box" data-role="listview" data-inset="false">
+                <li data-role="list-divider">Meter</li>
+                <li>
+                    <table style="border-left:dotted 4px;padding-left:10px;margin-left:5px;margin-bottom:15px;">
+                        <tr>
+                            <td style="padding-right:30px">
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_MeterGet($('#opt-zwave-meter-typeselect').val())">Get</a>
+                                    <select id="opt-zwave-meter-typeselect">
+                                    <option value="0">kWh</option>
+                                    <option value="1">kVAh</option>
+                                    <option value="2">Watt</option>
+                                    <option value="3">Pulses</option>
+                                    <option value="4">AC Volt</option>
+                                    <option value="5">AC Current</option>
+                                    <option value="6">Power Factor</option>
+                                    </select>
+                                </div>
+                                <a rel="external" class="ui-btn ui-corner-all" href="javascript:HG.WebApp.GroupModules.ZWave_MeterReset()">Reset</a>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+            
             <ul id="opt-zwave-battery-box" data-role="listview" data-inset="false">
                 <li data-role="list-divider">Battery</li>
                 <li>
@@ -234,6 +261,7 @@
                     </table>
                 </li>
             </ul>
+            
         </div>
 
     </div>

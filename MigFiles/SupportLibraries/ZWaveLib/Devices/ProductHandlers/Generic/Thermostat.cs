@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Dynamic;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
@@ -154,7 +155,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
              */
             case (byte)CommandClass.THERMOSTAT_SETPOINT:  
-                double temp = Sensor.ExtractTemperatureFromBytes(message);
+                double temp = Utility.ExtractTemperatureFromBytes(message);
                 dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
                 ptype.Value = temp;

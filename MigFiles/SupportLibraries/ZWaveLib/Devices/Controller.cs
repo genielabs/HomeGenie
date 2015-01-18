@@ -26,6 +26,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace ZWaveLib.Devices
 {
@@ -49,6 +51,13 @@ namespace ZWaveLib.Devices
         NODE_UPDATED = 0xEE,
         NODE_ERROR = 0xFE,
         DISCOVERY_END = 0xFF
+    }
+
+    [Serializable]
+    public class ZWaveNodeConfig
+    {
+        public byte NodeId { get; set; }
+        public string DeviceHandler { get; set; }
     }
 
     public class Controller : ZWaveNode
@@ -86,6 +95,7 @@ namespace ZWaveLib.Devices
         #region Private fields
 
         private List<ZWaveNode> devices = new List<ZWaveNode>();
+        private List<ZWaveNodeConfig> nodesConfig = new List<ZWaveNodeConfig>();
         private byte nodeOperationIdCheck = 0;
         private byte currentCommandTargetNode = 0;
         private byte[] lastMessage = null;
@@ -98,10 +108,7 @@ namespace ZWaveLib.Devices
 
         public Controller(ZWavePort zwavePort) : base(1, zwavePort)
         {
-            zwavePort.ZWaveMessageReceived += new ZWavePort.ZWaveMessageReceivedEvent((
-                object sender,
-                ZWaveMessageReceivedEventArgs args
-            ) =>
+            zwavePort.ZWaveMessageReceived += new ZWavePort.ZWaveMessageReceivedEvent((object sender, ZWaveMessageReceivedEventArgs args) =>
             {
                 try
                 {
@@ -112,6 +119,7 @@ namespace ZWaveLib.Devices
                     Console.WriteLine("ZWaveLib: ERROR in _zwavemessagereceived(...) " + ex.Message + "\n" + ex.StackTrace);
                 }
             });
+            LoadNodesConfig();
         }
 
         #endregion Lifecycle
@@ -525,25 +533,28 @@ namespace ZWaveLib.Devices
                 try
                 {
                     var node = devices.Find(n => n.NodeId == currentCommandTargetNode);
+                    // TODO: node == null should not happen, deprecate this if block
                     if (node == null)
                     {
                         //Console.WriteLine("Z-Wave Adding node " + currentCommandTargetNode + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
-                        devices.Add(CreateDevice(currentCommandTargetNode, receivedMessage[8]));
+                        node = CreateDevice(currentCommandTargetNode, receivedMessage[8]);
+                        devices.Add(node);
                     }
                     //
                     node.BasicClass = receivedMessage[7];
                     node.GenericClass = receivedMessage[8];
                     node.SpecificClass = receivedMessage[9];
-                    node.SetGenericHandler();
                     //
-                    if (node.NodeId != 1)
-                    {
+                    SetDeviceHandler(node);
+                    //
+                    //if (node.NodeId != 1)
+                    //{
                         //Console.WriteLine("Z-Wave Updating node " + node.NodeId + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
-                    }
+                    //}
                 }
-                catch
+                catch (Exception e)
                 {
-                    //Console.WriteLine("Z-Wave ERROR adding node " + node.NodeId + " : " + e.Message + "\n" + e.StackTrace);
+                    Console.WriteLine("Z-Wave ERROR adding node : " + e.Message + "\n" + e.StackTrace);
                     //System.Diagnostics.Debugger.Break();
                 }
                 nodeCapabilityAck.Set();
@@ -644,24 +655,171 @@ namespace ZWaveLib.Devices
             );
             znode.UpdateNodeParameter += znode_UpdateNodeParameter;
             znode.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
-            //znode.ManufacturerSpecific_Get();
             //
             OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NODE_ADDED)); // Send event
             //
             return znode;
         }
+        
+        private List<Type> GetTypesInNamespace(Assembly assembly, string nameSpace)
+        {
+            var typeList = new List<Type>();
+            foreach (Type type in assembly.GetTypes())
+            {
+                if (type.Namespace != null && type.Namespace.StartsWith(nameSpace)) typeList.Add(type);
+            }
+            //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
+            return typeList;
+        }
+
+        private void CheckDeviceHandler(ZWaveNode node, ManufacturerSpecific manufacturerspecs)
+        {
+            //if (node.DeviceHandler == null)
+            {
+                var typeList = GetTypesInNamespace(
+                    Assembly.GetExecutingAssembly(),
+                    "ZWaveLib.Devices.ProductHandlers."
+                    );
+                for (int i = 0; i < typeList.Count; i++)
+                {
+                    //Console.WriteLine(typelist[i].FullName);
+                    Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
+                    try
+                    {
+                        IZWaveDeviceHandler deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
+                        //
+                        if (deviceHandler.CanHandleProduct(manufacturerspecs))
+                        {
+                            node.DeviceHandler = deviceHandler;
+                            node.DeviceHandler.SetNodeHost(node);
+                            SaveNodesConfig();
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        // TODO: add error logging 
+                        //Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);
+                    }
+                }
+            }
+
+        }
+                
+        public void SetDeviceHandler(ZWaveNode node)
+        {
+            // Search handler in nodesConfig first
+            for (int n = 0; n < nodesConfig.Count; n++)
+            {
+                var config = nodesConfig[n];
+                if (config.NodeId == node.NodeId && config.DeviceHandler != null && !config.DeviceHandler.Contains(".Generic."))
+                {
+                    // set to last known handler
+                    SetDeviceHandlerFromName(node, config.DeviceHandler);
+                    break;
+                }
+            }
+            // If no specific devicehandler could be found, then set a generic handler
+            if (node.DeviceHandler == null)
+            {
+                IZWaveDeviceHandler deviceHandler = null;
+                switch (node.GenericClass)
+                {
+                case 0x00:
+                    // need to query node capabilities
+                    //GetNodeCapabilities(node.NodeId);
+                    break;
+                case (byte)ZWaveLib.GenericType.SWITCH_BINARY:
+                    deviceHandler = new ProductHandlers.Generic.Switch();
+                    break;
+                case (byte)ZWaveLib.GenericType.SWITCH_MULTILEVEL: // eg. dimmer
+                    deviceHandler = new ProductHandlers.Generic.Dimmer();
+                    break;
+                case (byte)ZWaveLib.GenericType.THERMOSTAT:
+                    deviceHandler = new ProductHandlers.Generic.Thermostat();
+                    break;
+                    // Fallback to generic Sensor driver if type is not directly supported.
+                    // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
+                default:
+                    deviceHandler = new ProductHandlers.Generic.Sensor();
+                    break;
+                }
+                if (deviceHandler != null)
+                {
+                    node.DeviceHandler = deviceHandler;
+                    node.DeviceHandler.SetNodeHost(node);
+                }
+            }
+        }
+
+        public void SetDeviceHandlerFromName(ZWaveNode node, string fullName)
+        {
+            var type = Assembly.GetExecutingAssembly().GetType(fullName); // full name - i.e. with namespace (perhaps concatenate)
+            try
+            {
+                var deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
+                node.DeviceHandler = deviceHandler;
+                node.DeviceHandler.SetNodeHost(node);
+            }
+            catch
+            {
+                // TODO: add error logging 
+            }
+        }
+
+        private void LoadNodesConfig()
+        {
+            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "zwavenodes.xml");
+            try
+            {
+                var serializer = new XmlSerializer(nodesConfig.GetType());
+                var reader = new StreamReader(configPath);
+                nodesConfig = (List<ZWaveNodeConfig>)serializer.Deserialize(reader);
+                reader.Close();
+            } catch {
+                // TODO: report/handle exception
+            }
+        }
+
+        private void SaveNodesConfig()
+        {
+            nodesConfig.Clear();
+            for (int n = 0; n < devices.Count; n++)
+            {
+                nodesConfig.Add(new ZWaveNodeConfig() {
+                    NodeId = devices[n].NodeId,
+                    DeviceHandler = devices[n].DeviceHandler.GetType().FullName
+                });
+            }
+            // TODO: save config to xml
+            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "zwavenodes.xml");
+            try
+            {
+                var settings = new System.Xml.XmlWriterSettings();
+                settings.Indent = true;
+                var serializer = new System.Xml.Serialization.XmlSerializer(nodesConfig.GetType());
+                var writer = System.Xml.XmlWriter.Create(configPath, settings);
+                serializer.Serialize(writer, nodesConfig);
+                writer.Close();
+            } catch {
+                // TODO: report/handle exception
+            }
+        }
+
+        #region Events Handling
 
         private void znode_ManufacturerSpecificResponse(object sender, ManufacturerSpecificResponseEventArg mfargs)
         {
+            CheckDeviceHandler((ZWaveNode)sender, mfargs.ManufacturerSpecific);
             RaiseUpdateParameterEvent(
                 (ZWaveNode)sender,
                 0,
                 ParameterType.MANUFACTURER_SPECIFIC,
                 mfargs.ManufacturerSpecific
             );
+            // Route event to other listeners
             if (this.ManufacturerSpecificResponse != null)
             {
-                // route nodes events
                 ManufacturerSpecificResponse(sender, mfargs);
             }
         }
@@ -670,6 +828,8 @@ namespace ZWaveLib.Devices
         {
             RaiseUpdateParameterEvent((ZWaveNode)sender, upargs.ParameterId, upargs.ParameterType, upargs.Value);
         }
+
+        #endregion
 
         #endregion Private members
     }
