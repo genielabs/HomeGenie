@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:13.994086Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:32.217554Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:14.50067Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:32.723576Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:15.003111Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:33.225007Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -440,32 +440,39 @@ Program.Setup(()=&gt;
 	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
 });
 //
-Pause(30); // pause a minute before next check
-//
-return true; // execute the "Code To Run"
+return true; // execute the "Program Code"
 </ScriptCondition>
     <ScriptSource>var controlModules = Modules.WithFeature("HomeGenie.ScheduleControl");
-controlModules.Each((module)=&gt;{
-  var schedexpr = module.Parameter("HomeGenie.ScheduleOn").Value;
-  if (/*module.IsOff &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
-  {
-  	Program.Notify("Scheduled Control", module.Instance.Name + " ON");
-    module.On();
-  }
-  return false;
-});
-controlModules.Each((module)=&gt;{
-  var schedexpr = module.Parameter("HomeGenie.ScheduleOff").Value;
-  if (/*module.IsOn &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
-  {
-  	Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
-    module.Off();
-  }
-  return false;
-});
-</ScriptSource>
+
+while (Program.IsEnabled)
+{
+
+  controlModules.Each((module)=&gt;{
+    
+    var scheduleOn = module.Parameter("HomeGenie.ScheduleOn").Value;
+    var scheduleOff = module.Parameter("HomeGenie.ScheduleOff").Value;
+    
+    if (Scheduler.IsScheduling(scheduleOn))
+    {
+      Program.Notify("Scheduled Control", module.Instance.Name + " ON");
+      module.On();
+    }
+    
+    if (Scheduler.IsScheduling(scheduleOff))
+    {
+      Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
+      module.Off();
+    }
+    
+    return false;
+  });
+
+  var pause = (60 - DateTime.Now.Second);
+  Pause(pause);
+
+}</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -495,8 +502,8 @@ controlModules.Each((module)=&gt;{
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:43:49.28887Z</TriggerTime>
+    <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
+    <TriggerTime>2015-01-20T10:48:33.719144Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1239,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:15.997621Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:34.22036Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1294,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:16.500362Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:34.722297Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1589,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:17.007914Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:35.2228Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1668,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:17.50192Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:35.720685Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1738,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:18.00232Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:36.224349Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2012,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:18.504006Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:36.723896Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2378,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:19.503023Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:37.724814Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2450,7 +2457,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:20.006163Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:38.226218Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2604,7 +2611,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:20.502499Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:38.726179Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2868,7 +2875,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-18T10:40:21.010322Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:39.225818Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3094,61 +3101,62 @@ var gpio24 = Program.InputField("GPIO24").Value.ToLower();
 var gpio25 = Program.InputField("GPIO25").Value.ToLower();
 
 // add configured GPIOs to a list that will be used to configure the connection
-if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio4.StartsWith("!") });
+if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio17.StartsWith("!") });
+if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio18.StartsWith("!") });
+if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio21.StartsWith("!") });
+if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio22.StartsWith("!") });
+if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio23.StartsWith("!") });
+if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio24.StartsWith("!") });
+if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio25.StartsWith("!") });
 
 // Setup the connection to the GPIOs
 var configuration = new PinConfiguration[pinMapping.Count];
 for (int p = 0; p &lt; pinMapping.Count; p++)
 {
-  	var pc = pinMapping[p];
-  	if (pc.Direction == PinDirection.Input)
+  var pc = pinMapping[p];
+  if (pc.Direction == PinDirection.Input)
+  {
+    configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    if (pc.Config.EndsWith("+"))
     {
-	  	configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-      	if (pc.Config.EndsWith("+"))
-        {
-            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
-        }
-      	else if (pc.Config.EndsWith("-"))
-        {
-            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
-        }
-		Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
     }
-  	else
+    else if (pc.Config.EndsWith("-"))
     {
-	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
     }
-    configuration[p].Name = pc.Address;
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+  }
+  else
+  {
+    configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    ((OutputPinConfiguration)configuration[p]).Reversed = pc.Reversed;
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+  }
+  configuration[p].Name = pc.Address;
 }
 
 // Allocate GPIO connection and listen for events coming from GPIO pins
 GpioConnection connection = null;
 try
 {
-	connection = new GpioConnection(configuration);
+  connection = new GpioConnection(configuration);
 }
 catch 
 {
-  	Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
-  	Pause(10);
-  	return;
+  Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
+  Pause(10);
+  return;
 }
 
 var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
-  	var address = args.Configuration.Name;
-    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
-    Program.RaiseEvent(module, "Status.Level", 
-                       args.Enabled ? "1" : "0",
-                       address);
-  
+  var address = args.Configuration.Name;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  Program.RaiseEvent(module, "Status.Level", 
+                     args.Enabled ? "1" : "0",
+                     address);
+
 });
 connection.PinStatusChanged += pinChanged;
 
@@ -3161,48 +3169,48 @@ When.ProgramStopping(()=&gt;{
 // read and store current pins status
 for (int p = 0; p &lt; pinMapping.Count; p++)
 {
-  	var pc = pinMapping[p];
-  	var address = pc.Address;
-    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
-	module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
+  var pc = pinMapping[p];
+  var address = pc.Address;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
 }
 
 // implement web serice API Control.On, Control.Off, Control.Toggle 
 // for the domain RaspberryPi.GPIO
 When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-{
-	string[] reqs = ((string)args).Split('/');
-  	var errorMessage = "";
-	try
-	{
-		string address = reqs[1];
-      	string command = reqs[2];
-        //
-        switch(command)
-        {
-          // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
-          case "Control.On":
-          connection[address] = true;
-          break;
-          // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
-          case "Control.Off":
-          connection[address] = false;
-          break;
-          // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
-          case "Control.Toggle":
-          connection.Toggle(address);
-          break;
-        }
-      	//
-        return "{ 'ResponseValue' : 'OK' }";    
-    } 
-  	catch (Exception ex) 
-    { 
-	    errorMessage = ex.Message + " " + ex.StackTrace;
-    }
-    // unable to process request
-    return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
-});
+                            {
+                              string[] reqs = ((string)args).Split('/');
+                              var errorMessage = "";
+                              try
+                              {
+                                string address = reqs[1];
+                                string command = reqs[2];
+                                //
+                                switch(command)
+                                {
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
+                                  case "Control.On":
+                                  connection[address] = true;
+                                  break;
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
+                                  case "Control.Off":
+                                  connection[address] = false;
+                                  break;
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
+                                  case "Control.Toggle":
+                                  connection.Toggle(address);
+                                  break;
+                                }
+                                //
+                                return "{ 'ResponseValue' : 'OK' }";    
+                              } 
+                              catch (Exception ex) 
+                              { 
+                                errorMessage = ex.Message + " " + ex.StackTrace;
+                              }
+                              // unable to process request
+                              return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
+                            });
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -3215,6 +3223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Raspberry Pi GPIO mapped to HG modules.
 Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
 Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
+Use !OUT to Reverse the pin level On = 0 and Off = 1.
 GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
@@ -8472,6 +8481,74 @@ return true; // execute "Code To Run"
     <Name>Meter Watt Poll</Name>
     <Description>Periodically reads instant Watt value from meter devices</Description>
     <Group>Z-Wave</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+return true;
+</ScriptCondition>
+    <ScriptSource>var address = 0x38;
+
+var clockPin = Pcf8574Pin.P2;
+var readWritePin = Pcf8574Pin.P1;
+var registerSelectPin = Pcf8574Pin.P0;
+var backlightPin = Pcf8574Pin.P3;
+
+var dataPins = new[]
+{
+  Pcf8574Pin.P4,
+  Pcf8574Pin.P5,
+  Pcf8574Pin.P6,
+  Pcf8574Pin.P7
+};
+
+var sdaPin = ConnectorPin.P1Pin03;
+var sclPin = ConnectorPin.P1Pin05;
+var driver = new I2cDriver(sdaPin.ToProcessor(), sclPin.ToProcessor()) { ClockDivider = 512 };
+var connection = new Pcf8574I2cConnection(driver.Connect(address));
+
+dynamic configuration = new dynamic();
+configuration.Pins = new Hd44780Pins(
+  connection.Out(registerSelectPin),
+  connection.Out(clockPin),
+  dataPins.Select(p =&gt; (IOutputBinaryPin)connection.Out(p)))
+{
+  Backlight = connection.Out(backlightPin),
+  ReadWrite = connection.Out(readWritePin),
+};
+
+var settings = new Hd44780LcdConnectionSettings
+{
+  ScreenWidth = 20,
+  ScreenHeight = 2,
+};
+
+using (var display = new Hd44780LcdConnection(settings, configuration.Pins))
+{
+  display.SetCustomCharacter(1, new byte[] {0x0, 0x0, 0x04, 0xe, 0x1f, 0x0, 0x0});
+  display.SetCustomCharacter(2, new byte[] {0x0, 0x0, 0x1f, 0xe, 0x04, 0x0, 0x0});
+  display.Clear();
+  display.WriteLine("OS Version");
+  display.WriteLine(Environment.OSVersion);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>67</Address>
+    <Name>HD44780 LCD PCF8574</Name>
+    <Description>Example of using HD44780 LCD with PCF8574 I2C I/O expander</Description>
+    <Group>Raspberry Pi</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>

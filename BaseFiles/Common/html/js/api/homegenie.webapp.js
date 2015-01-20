@@ -252,7 +252,7 @@ HG.WebApp.InitializePage = function ()
         // add css google web fonts
         $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
 
-    }, 1000);
+    }, 100);
     //
     // Code Mirror and other UI widgets
     //
