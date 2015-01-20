@@ -10,8 +10,8 @@
   
   RenderView: function (cuid, module) {
     var imgTherm='pages/control/widgets/DaniMail/generic/images/therm_';
-    var moduleCalendrier='1000';
-    var moduleTabHOR='1001';
+    var moduleCalendrier='510';
+    var moduleTabHOR='511';
     var nameSensor;
     var nameSwitch;
     var displayUnit='Celsuis';

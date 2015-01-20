@@ -8,8 +8,8 @@
   Description : '',
   
   RenderView: function (cuid, module) {
-    var moduleCalendrier='1000';
-    var moduleTabHOR='1001';
+    var moduleCalendrier='510';
+    var moduleTabHOR='511';
     var nameLight1;
     var nameLight2;
 	var typeDay=' ';
