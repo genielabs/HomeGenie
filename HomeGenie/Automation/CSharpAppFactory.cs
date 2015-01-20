@@ -158,7 +158,7 @@ namespace HomeGenie.Automation.Scripting
                     }
                 }
             }
-            if (!relocateSystemAsm)
+            if (relocateSystemAsm)
             {
                 Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 foreach (var assembly in assemblies)
