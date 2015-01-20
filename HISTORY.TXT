@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+20/01/2015 1.00 beta rev 459
+    - Removed some old unused files/projects from HG solution
+    - Little improvement to Scheduled ON/OFF program
+    - Added I2C PCF8574 + Hd44780 LCD display example app (Raspberry Pi)
+    - Improved Raspberry Pi GPIO Modules program by adding !OUT option for inverted level logic (pull request #99)
+
 18/01/2015 1.00 beta rev 458
     - Fixed missing X10, Z-Wave automation groups (bug from r457)
     - Added Z-Wave Meter Poll app; fixed bug in Level Poll app
