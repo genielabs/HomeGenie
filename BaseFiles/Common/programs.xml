@@ -8477,4 +8477,1078 @@ return true; // execute "Code To Run"
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>DateTime dateCou ; 
+DateTime dateInit ;
+DateTime dateBase ;
+string tabMonth = "" ;
+
+int offsetYear, yearCou ;
+int moiInit = 1 ;
+int nbYear = 0 ;
+DayOfWeek dayOfWeek ;
+
+Program.Setup( () =&gt; {
+  
+    Program.AddControlWidget("DaniMail/generic/calendrier");
+
+    Program.AddInputField("Calend.Pair", "", "Année Paire" );
+    Program.AddInputField("Calend.Impair", "", "Année Impaire" );
+    for( int i=0 ; i&lt;12 ; i++ )
+    {
+      Program.AddInputField("Calend.Year.0." + i.ToString(), "", "Calendrier année paire - Mois " + i.ToString() );
+      Program.AddInputField("Calend.Year.1." + i.ToString(), "", "Calendrier année impaire - Mois " + i.ToString() );
+    }
+  
+    dateCou = DateTime.Now ;
+    yearCou = dateCou.Year ;
+    dateInit = new DateTime( yearCou, 1, 1 ) ;
+    offsetYear = (yearCou % 2) ;
+    if( (yearCou % 2) == 0 )
+        tabMonth =  Program.InputField("Calend.Year.0." + (dateCou.Month-1) ).Value ;
+    else
+        tabMonth = Program.InputField("Calend.Year.1." + (dateCou.Month-1) ).Value;
+    if( String.IsNullOrEmpty( tabMonth ) )
+    {
+        if( (yearCou % 2) == 0 )
+        {
+            Program.InputField("Calend.Pair").Value = yearCou.ToString() ;
+            Program.InputField("Calend.Impair").Value = (yearCou+1).ToString() ;
+        }
+        else
+        {
+            Program.InputField("Calend.Impair").Value = yearCou.ToString() ;
+            Program.InputField("Calend.Pair").Value = (yearCou+1).ToString() ;
+        }
+        do
+        {
+            dateBase = dateInit ;
+            if( moiInit != dateInit.Month )
+            {
+              Program.InputField( "Calend.Year." + offsetYear.ToString() + "." + (moiInit-1).ToString() ).Value = tabMonth ;
+              if( dateInit.Month == 1 )
+              {
+                 if( offsetYear == 0)
+                   offsetYear = 1 ;
+                 else
+                   offsetYear = (dateInit.Year % 2) ;
+                 nbYear += 1 ;
+              }
+              moiInit = dateInit.Month ;
+              tabMonth = "" ;
+            }
+            if( ((dateInit.Month == 1) || (dateInit.Month == 5) || (dateInit.Month == 11)) &amp;&amp; (dateInit.Day == 1) )
+               tabMonth += "F" ;
+            else {
+              if( (dateInit.Month == 5) &amp;&amp; (dateInit.Day == 8) )
+                tabMonth += "F" ;
+              else
+                if( (dateInit.Month == 7) &amp;&amp; (dateInit.Day == 14) )
+                  tabMonth += "F" ;
+                else
+                if( (dateInit.Month == 8) &amp;&amp; (dateInit.Day == 15) )
+                  tabMonth += "F" ;
+                else
+                  if( (dateInit.Month == 11) &amp;&amp; (dateInit.Day == 11) )
+                    tabMonth += "F" ;
+                  else {
+                    if( (dateInit.Month == 12) &amp;&amp; (dateInit.Day == 25) )
+                      tabMonth += "F" ;
+                    else
+                    {
+                      dayOfWeek = dateInit.DayOfWeek ;
+                      if( (dayOfWeek == DayOfWeek.Saturday) || (dayOfWeek == DayOfWeek.Sunday) )
+                        tabMonth += "W" ;
+                      else
+                        tabMonth += "O" ;
+                    }
+                  }
+            }
+            dateInit = dateBase.AddDays( 1 ) ;
+        }
+        while( nbYear &lt; 2 ) ;
+    }
+//  Program.Notify("Calendrier", Program.Module.Domain+" "+Program.Module.Name+" "+Program.Module.Address );
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>DateTime newDate ; 
+bool init = false ;
+int yearSel = 0 ;
+int yearNow = 0 ;
+
+When.WebServiceCallReceived(Program.Module.Domain+"/"+Program.Module.Address+"/Calendrier.SetMonth",(args)=&gt;{
+    string[] reqs = ((string)args).Split('/');
+
+    int annee = Convert.ToInt32(reqs[0]);
+    int mois = Convert.ToInt32(reqs[1]);
+    if((mois&gt;=0) &amp;&amp; (mois&lt;12))
+    {
+        DateTime localDate = DateTime.Now ;
+        Settings.Parameter("Calend.Year."+mois.ToString()).Value = Program.InputField("Calend.Year."+(annee%2).ToString()+"."+mois.ToString()).Value;
+        Settings.Parameter("Schedule.Set").Value = "1" ;
+        Program.Notify("Calendrier","SetMonth "+mois.ToString()+"/"+annee.ToString());
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+//  int timePause ;
+    newDate = DateTime.Now ;
+    yearNow = newDate.Year ;
+    if( yearSel != yearNow )
+    {
+        DateTime dateInit ;
+        DateTime dateBase ;
+        string tabMonth = "" ;
+        int offsetYear ;
+        int moiInit = 1 ;
+        int nbYear = 0 ;
+        DayOfWeek dayOfWeek ;
+        string szPar ;
+        int nextYear = yearNow+1 ;
+      
+        offsetYear = nextYear%2 ;
+        if( offsetYear == 0 )
+            szPar = "Calend.Pair" ;
+        else
+            szPar = "Calend.Impair" ;
+        if( nextYear.ToString() != Program.InputField( szPar ).Value )
+        {
+            dateInit = new DateTime( nextYear, 1, 1 ) ;
+            do
+            {
+                dateBase = dateInit ;
+                if( moiInit != dateInit.Month )
+                {
+                  Program.InputField( "Calend.Year." + offsetYear.ToString() + "." + (moiInit-1).ToString() ).Value = tabMonth ;
+                  if( dateInit.Month == 1 )
+                  {
+                     if( offsetYear == 0)
+                       offsetYear = 1 ;
+                     else
+                       offsetYear = (dateInit.Year % 2) ;
+                     nbYear += 1 ;
+                  }
+                  moiInit = dateInit.Month ;
+                  tabMonth = "" ;
+                }
+                if( ((dateInit.Month == 1) || (dateInit.Month == 5) || (dateInit.Month == 11)) &amp;&amp; (dateInit.Day == 1) )
+                   tabMonth += "F" ;
+                else {
+                  if( (dateInit.Month == 5) &amp;&amp; (dateInit.Day == 8) )
+                    tabMonth += "F" ;
+                  else
+                    if( (dateInit.Month == 7) &amp;&amp; (dateInit.Day == 14) )
+                      tabMonth += "F" ;
+                    else
+                    if( (dateInit.Month == 8) &amp;&amp; (dateInit.Day == 15) )
+                      tabMonth += "F" ;
+                    else
+                      if( (dateInit.Month == 11) &amp;&amp; (dateInit.Day == 11) )
+                        tabMonth += "F" ;
+                      else {
+                        if( (dateInit.Month == 12) &amp;&amp; (dateInit.Day == 25) )
+                          tabMonth += "F" ;
+                        else
+                        {
+                          dayOfWeek = dateInit.DayOfWeek ;
+                          if( (dayOfWeek == DayOfWeek.Saturday) || (dayOfWeek == DayOfWeek.Sunday) )
+                            tabMonth += "W" ;
+                          else
+                            tabMonth += "O" ;
+                        }
+                      }
+                }
+                dateInit = dateBase.AddDays( 1 ) ;
+            }
+            while( nbYear &lt; 1 ) ;
+            Program.InputField(szPar).Value = nextYear.ToString() ;
+       }
+        yearSel = yearNow ;
+        init = false ;
+    }
+    if( init == false )
+    {
+      for( int i=0 ; i&lt;12 ; i++ )
+      {
+        if( (yearNow % 2) == 0 )
+           Settings.Parameter("Calend.Year."+i.ToString()).Value = Program.InputField("Calend.Year.0."+i.ToString()).Value;
+        else
+           Settings.Parameter("Calend.Year."+i.ToString()).Value = Program.InputField("Calend.Year.1."+i.ToString()).Value;
+      }
+      Settings.Parameter("Schedule.Set").Value="0"; ;
+      init = true ;
+    }
+//  timePause=((23-newDate.Hour)*3600)+((59-newDate.Minute)*60)+(60-newDate.Second);
+    Pause(300);
+}
+</ScriptSource>
+    <ScriptErrors>Program update is required.</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>510</Address>
+    <Name>Calendrier</Name>
+    <Description />
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2015-01-20T12:48:14.902351Z</ActivationTime>
+    <TriggerTime>2015-01-20T12:48:14.936054Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup( () =&gt; {
+   Program.AddControlWidget("DaniMail/generic/tablehoraire");
+   for( int i=0 ; i&lt;10 ; i++ )
+      Program.AddInputField("Table.Therm." + i.ToString(), "", "Thermostat : Table horaire "+i.ToString() );
+   for( int i=0 ; i&lt;6 ; i++ )
+      Program.AddInputField("Table.Light." + i.ToString(), "", "Switch and light : Table horaire "+i.ToString() );
+   for( int i=0 ; i&lt;6 ; i++ )
+      Program.AddInputField("Table.Shutter." + i.ToString(), "", "Shutter : Table horaire "+i.ToString() );
+//  Program.Notify("Tables Horaires", Program.Module.Domain+" "+Program.Module.Name+" "+Program.Module.Address );
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>bool initGlobal = false ;
+  
+// implement Web API calls as defined in the Thermostat widget No used and not finished actually
+When.WebServiceCallReceived(Program.Module.Domain+"/"+Program.Module.Address+"/Table.Set",(args)=&gt;{
+  string typeTable = args.ToString().Split('/')[0] ;
+  string []parSet = typeTable.Split('.'); 
+  
+  switch( parSet[2] )
+  {
+      case "Therm":
+      case "Light":
+      case "Shutter":
+        string namePar = parSet[1]+"."+parSet[2]+"."+parSet[3];
+        Settings.Parameter(namePar).Value = Program.InputField(namePar).Value;
+        Program.Notify("Table Horaire","Set "+namePar );
+        if(parSet[2] == "Therm")
+            Settings.Parameter("Schedule.Set").Value = "1" ;
+        break;
+      default :
+        Program.Notify("Table Horaire","Erreur Set "+typeTable );
+        break;
+  }
+  return true;
+});
+
+while (Program.IsEnabled)
+{
+  if( initGlobal == false )
+  {
+ //  Settings.Parameter("TabHOR.Module").Value = Program.Module.Address ;
+     for( int i=0 ; i&lt;10 ; i++ )
+         Settings.Parameter("Table.Therm."+i.ToString() ).Value = Program.InputField("Table.Therm."+i.ToString()).Value;
+     for( int i=0 ; i&lt;6 ; i++ )
+         Settings.Parameter("Table.Light."+i.ToString() ).Value = Program.InputField("Table.Light."+i.ToString()).Value;
+     for( int i=0 ; i&lt;6 ; i++ )
+         Settings.Parameter("Table.Shutter."+i.ToString() ).Value = Program.InputField("Table.Shutter."+i.ToString()).Value;
+      Settings.Parameter("Schedule.Set").Value = "0" ;
+      initGlobal = true ;  
+  }
+  Pause(300);
+}
+</ScriptSource>
+    <ScriptErrors>Program update is required.</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>511</Address>
+    <Name>Tables horaires</Name>
+    <Description />
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2015-01-20T12:48:59.488677Z</ActivationTime>
+    <TriggerTime>2015-01-20T12:48:59.51808Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+Program.Setup(()=&gt;{
+    Program.AddInputField("ThermostatsNumber", "4", "Number of virtual thermostats (Max.8)");
+    int thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
+    if( thermsCount &gt; 8 )
+        thermsCount = 8;
+    Program.AddVirtualModules("HomeAutomation.Thermostat", "Thermostat", "DaniMail/generic/thermostats",1,thermsCount);
+    for(int x = 0; x &lt; thermsCount; x++)
+    {
+      var module = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("ModuleTemperature").Value.Length == 0)) )
+      {
+        // Paramètres statiques
+        module.Parameter("ModuleTemperature").Value = "";
+        module.Parameter("SwitchModule1").Value = "";
+        module.Parameter("SwitchModule2").Value = "";
+        module.Parameter("SwitchModule3").Value = "";
+        module.Parameter("Table.W").Value = "0";
+        module.Parameter("Table.O").Value = "1";
+        module.Parameter("Table.F").Value = "2";
+        module.Parameter("Table.S").Value = "3";
+        module.Parameter("Thermostat.SetPoint.NoFrost").Value = "5";
+        module.Parameter("Thermostat.SetPoint.Eco").Value = "16";
+        module.Parameter("Thermostat.SetPoint.Heating").Value = "20";
+        // Pamètres dynamiques
+        module.Parameter("Sensor.Temperature").Value = "";
+        module.Parameter("Sensor.Humidity").Value = "";
+        module.Parameter("Status.Battery").Value = "";
+        module.Parameter("Thermostat.OperatingState").Value = "";
+        module.Parameter("Thermostat.Mode").Value = "Arrêt";
+      }
+    }
+});
+              
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+const int HOLDING_MODE_DIFF = 1;
+
+char typeDay,typeAction ;
+string currentTable = "";
+string newTable = "";
+string szState = "";
+int index, currentMonth = -1;
+double temperatureAComparer = 0;
+string currentMode = "";
+int thermsCount = 0;
+int nTempo=60;
+
+bool[] holdingMode = new bool[8];
+string tabMon = "";
+string tabScene = "";
+
+var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+
+  thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
+  if( thermsCount &gt; 8 )
+     thermsCount = 8;
+  for(int x=0;x&lt;thermsCount;x++)
+  {
+    var moduleVirtuel = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+    
+    if( moduleVirtuel.Instance.Name == "" )
+    {
+        Pause(1) ;
+        continue ;
+    }
+    var name = "Thermostat " + moduleVirtuel.Instance.Name ;
+    var temperature = moduleVirtuel.Parameter("Sensor.Temperature");
+    var operatingState = moduleVirtuel.Parameter("Thermostat.OperatingState");
+    var thermostatMode = moduleVirtuel.Parameter("Thermostat.Mode").Value;
+    double nofrostSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.NoFrost").DecimalValue;
+    double ecoSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.Eco").DecimalValue;
+    double heatSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.Heating").DecimalValue;
+    // Get a reference to the temperature module
+    domainAddress = moduleVirtuel.Parameter("ModuleTemperature").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", "! Erreur MT", "Thermostat");
+      Program.Notify(name, "Spécifiez un Module Sonde valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the switch/relay module 1
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule1").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", "! Erreur MS", "Thermostat");
+      Program.Notify(name, "Spécifiez un Module Switch valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the switch/relay module 2
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule2").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool switch2 = true ;
+    var switchModule2 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule2.Instance == null)
+      switch2 = false ;
+    // Get a reference to the switch/relay module 3
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule3").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool switch3 = true ;
+    var switchModule3 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule3.Instance == null)
+      switch3 = false ;
+    // Traitement du module virtuel
+    // Update Thermostat module Temperature field
+    temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+    // Heat Mode
+    typeAction = 'T'; // Test tempétarure
+    currentMode = "";
+    if(thermostatMode == "Comfort")
+    {
+       currentMode = "(C)";
+       temperatureAComparer = heatSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    //  Eco Mode
+    if(thermostatMode == "Eco")
+    {
+       currentMode = "(E)";
+       temperatureAComparer = ecoSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    // NoFrost Mode
+    if (thermostatMode == "NoFrost")
+    {
+       currentMode = "(H)";
+       temperatureAComparer = nofrostSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    // Off Mode
+    if (thermostatMode == "Off")
+    {
+       currentMode = "(A)";
+       temperatureAComparer = 0;
+    }
+    else
+    // Program Mode
+    if (thermostatMode == "Program")
+    {
+        DateTime currentTime = DateTime.Now ;
+        if( Settings.Parameter("Schedule.Set").Value == "1" )
+        {
+           Settings.Parameter("Schedule.Set").Value = "0" ;
+//         Program.Notify("Thermostat","Schedule.Set 1") ;
+           currentMonth = -1 ;
+           currentTable = "" ;
+        }
+        if( currentMonth != currentTime.Month )
+        {
+            currentMonth = currentTime.Month - 1 ;
+            tabMon = Settings.Parameter( "Calend.Year." + currentMonth ).Value ;
+        }
+        if( tabMon.Length &lt; currentTime.Day )
+        {
+            typeAction = 'E'; // Erreur
+            szState = "! Erreur LGCA";
+            Program.Notify("Eclairage","Calendrier Erreur LG mois "+currentTime.Month) ;
+            continue;
+        }
+        typeDay = tabMon[currentTime.Day-1] ;
+        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        if( newTable.Length != 0 )
+        {
+           if( newTable != currentTable )
+           {
+               currentTable = newTable ;
+               tabScene = Settings.Parameter( "Table.Therm." + currentTable ).Value ;
+           }
+        }
+        else
+        {
+           szState = "! Erreur THND";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH non définie") ;
+        }
+        if( tabScene.Length == 96 )
+        {
+          index = (int)(currentTime.Hour*4)+(int)(currentTime.Minute/15) ;
+          switch( tabScene[index])
+          {
+              case 'A' :
+                  currentMode = "(A)";
+                  temperatureAComparer = 0 ;
+                  break ;
+              case 'H' :
+                  currentMode = "(H)" ;
+                  temperatureAComparer = nofrostSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              case 'E' :
+                  currentMode = "(E)" ;
+                  temperatureAComparer = ecoSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              case 'C' :
+                  currentMode = "(C)" ;
+                  temperatureAComparer = heatSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              default :
+                  temperatureAComparer = 0 ;
+                  szState = "! Erreur THAI";
+                  typeAction = 'E'; // Erreur
+                  Program.Notify(name,"TH Action indéfinie '"+tabScene[index]+"'") ;
+                  break ;
+          }
+        }
+        else
+        {
+           if( newTable.Length != 0 )
+           {
+              szState = "! Erreur LGTH";
+              typeAction = 'E'; // Erreur
+              Program.Notify(name+" Jour "+typeDay, "TH Erreur longueur") ;
+           }
+        }
+    }
+    else
+    {
+       szState = "! Erreur MODE";
+       typeAction = 'E'; // Erreur
+       Program.Notify(name, "Erreur Mode "+thermostatMode) ;
+    }
+    if(typeAction == 'T')
+    {
+       if ( temperatureAComparer != 0 )
+       {
+          if (temperature.DecimalValue &lt; temperatureAComparer)
+          {
+             if(switchModule.IsOff || (operatingState.Value != currentMode+"On"))
+                holdingMode[x] = false;
+             szState = "On";
+          }
+          else
+          {
+            if (switchModule.IsOn || (operatingState.Value != currentMode+"Off")) 
+               holdingMode[x] = true;
+            szState = "Off";
+          }
+       }
+       else
+       {
+          holdingMode[x] = false;
+          szState = "Off";
+       }
+    }
+    else
+        holdingMode[x] = false;
+    if(szState == "On")
+    {
+      switchModule.On();
+      if( switch2 == true )
+        switchModule2.On();
+      if( switch3 == true )
+        switchModule3.On();
+    }
+    else
+    {
+      switchModule.Off();
+      if( switch2 == true )
+        switchModule2.Off();
+      if( switch3 == true )
+        switchModule3.Off();
+    }
+    // Store last time the switch change of state
+    if(operatingState.Value != currentMode+szState)
+       Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", currentMode+szState, "Thermostat");
+    Pause(2);
+  }
+  return true;
+});
+
+When.ModuleParameterChanged((module, parameter)=&gt;{
+    if (parameter.Is("Sensor.Temperature") || parameter.Is("Sensor.Humidity") || parameter.Is("Status.Battery"))
+    {
+      string domainAddress = "";
+      string domain = "";
+      string address = "";
+      for(int x = 0; x &lt; thermsCount; x++)
+      {
+         var moduleVirtuel = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+         domainAddress = moduleVirtuel.Parameter("ModuleTemperature").Value;
+         if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+         {
+            domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+            address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+            if( (module.Instance.Domain.ToLower() == domain.ToLower()) &amp;&amp; (module.Instance.Address.ToLower() == address.ToLower()))
+            {
+                Program.RaiseEvent(moduleVirtuel,parameter.Name,parameter.Value,"Thermostat");
+                // Program.Notify("Thermostat","Set "+module.Instance.Name+" "+parameter.Value+"°");
+                nTempo=0;
+                break;
+            }
+         }
+         domain = address = "";
+      }
+    }
+    return true;
+});
+
+// implement Web API calls as defined in the Thermostat widget
+When.WebServiceCallReceived("HomeAutomation.Thermostat", (args)=&gt;
+{
+    string[] reqs = ((string)args).Split('/');
+
+    string thermNumber = reqs[1];
+    string command = reqs[2];
+    string parametre = reqs[3];
+    int nTherm;
+
+    switch( command )
+    {
+        case "Thermostat.SetPointSet":
+           nTherm = Int32.Parse(thermNumber);
+           var moduleS = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           if( parametre == "Heating")
+           {
+              Program.RaiseEvent(moduleS,"Thermostat.SetPoint.Heating", reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if ( parametre == "Eco")
+           {
+
+             Program.RaiseEvent(moduleS,"Thermostat.SetPoint.Eco", reqs[4], "Thermostat");
+             holdingMode[nTherm-1] = false;
+           }
+           if ( parametre == "NoFrost")
+           {
+             Program.RaiseEvent(moduleS,"Thermostat.SetPoint.NoFrost", reqs[4], "Thermostat");
+             holdingMode[nTherm-1] = false;
+           }
+           nTempo=0;
+           break;
+        case "Thermostat.SetTable":
+           nTherm = Int32.Parse(thermNumber);
+           var moduleT = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           if( parametre == "W")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "O")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "F")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "S")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           nTempo=0;
+           break;
+      case "Thermostat.ModeSet" :
+           nTherm = Int32.Parse(thermNumber);
+           var moduleM = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           Program.RaiseEvent(moduleM,"Thermostat.Mode", parametre, "Thermostat");
+           Program.RaiseEvent(moduleM,"Thermostat.OperatingState", "---", "Thermostat");
+           holdingMode[nTherm-1] = false;
+           nTempo=0;
+           break;
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+   nTempo=300;
+   ThermostatLogicRun();
+   if(nTempo == 300)
+   {
+     DateTime currentTime = DateTime.Now ;
+     nTempo = ((5-(currentTime.Minute%5))*60)-currentTime.Second;
+     // Program.Notify("Thermostat","Réveil dans "+nTempo+" sec.");
+   }
+//   else
+//     Program.Notify("Thermostat","Réveil immédiat ...");
+   while( nTempo &gt; 0 )
+   {
+     Pause(1);
+     nTempo-- ;
+   };
+}
+</ScriptSource>
+    <ScriptErrors>Program update is required.</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>512</Address>
+    <Name>Thermostat</Name>
+    <Description>Use any temperature sensor and relay switch module to implement Thermostat(s) virtual device.
+Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2015-01-20T12:51:25.576946Z</ActivationTime>
+    <TriggerTime>2015-01-20T12:51:25.612579Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+Program.Setup(()=&gt;{
+    Program.AddInputField("LightsNumber", "4", "Number of virtual Lights (Max.8)");
+    int lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
+    if( lightsCount &gt; 8 )
+        lightsCount = 8;
+    Program.Notify("Eclairage","Nb Modules virtuel = "+lightsCount.ToString());
+    Program.AddVirtualModules("HomeAutomation.Eclairage", "Light", "DaniMail/generic/eclairages",1,lightsCount);
+    for(int x = 0; x &lt; lightsCount; x++)
+    {
+      var module = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
+      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("LightModule1").Value.Length == 0)) )
+      {
+        // Paramètres statiques
+        module.Parameter("LightModule1").Value = "";
+        module.Parameter("LightModule2").Value = "";
+        module.Parameter("LightModule3").Value = "";
+        module.Parameter("LightModule4").Value = "";
+        module.Parameter("Table.W").Value = "0";
+        module.Parameter("Table.O").Value = "1";
+        module.Parameter("Table.F").Value = "2";
+        module.Parameter("Table.S").Value = "3";
+        // Pamètres dynamiques
+        module.Parameter("Light.OperatingState").Value = "Off";
+        module.Parameter("Light.Mode").Value = "Off";
+      }
+    }
+});
+              
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+
+char typeDay;
+string currentTable="";
+string newTable="";
+string szState="";
+int index,currentMonth=-1;
+DateTime oldSunRise=DateTime.Now;
+DateTime sunRise;
+DateTime oldSunSet=DateTime.Now;
+DateTime sunSet;
+int lightsCount=0;
+char typeAction=' ';
+int nTempo=60;
+bool night;
+
+string tabMon="";
+string tabScene="";
+
+var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress="";
+  string domain="";
+  string address="";
+
+  try
+  {
+    sunRise = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Morning.Sunrise.Start").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+    sunSet = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Evening.Sunset.End").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+    if((sunRise != oldSunRise) || (sunSet != oldSunSet))
+    {
+      Program.Notify("Eclairage"," SunRise. = "+sunRise.ToString("dd/MM HH:mm:ss")+" SunSet.. = "+sunSet.ToString("dd/MM HH:mm:ss"));
+      oldSunRise = sunRise;
+      oldSunSet = sunSet;
+    }
+  }
+  catch(Exception e) 
+  {
+    Program.Notify("Eclairage","SunRise/SunSet "+e.Message);
+    sunRise = DateTime.Now;
+    sunSet = DateTime.Now;
+  }
+  night = false;
+  if (DateTime.Compare(DateTime.Now,sunRise)&lt;0 || DateTime.Compare(DateTime.Now,sunSet)&gt;0)
+    night = true;
+  
+  lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
+  if( lightsCount &gt; 8 )
+     lightsCount=8;
+  for(int x=0;x&lt;lightsCount;x++)
+  {
+    var moduleVirtuel = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
+    if(moduleVirtuel.Instance.Name == "")
+    {
+        Pause(1);
+        continue ;
+    }
+    var name = "Eclairage " + moduleVirtuel.Instance.Name ;
+    var operatingState = moduleVirtuel.Parameter("Light.OperatingState");
+    var lightMode = moduleVirtuel.Parameter("Light.Mode").Value;
+    // Get a reference to the switch/relay module 1
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule1").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var lightModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", "! Erreur MLS", "Eclairage");
+      Program.Notify(name, "Spécifier un Module Light ou Switch valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the light/switch module 2
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule2").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light2 = true ;
+    var lightModule2 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule2.Instance == null)
+      light2 = false ;
+    // Get a reference to the light/switch module 3
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule3").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light3 = true ;
+    var lightModule3 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
+      light3 = false ;
+    // Get a reference to the light/switch module 4
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule4").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light4 = true ;
+    var lightModule4 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
+      light4 = false ;
+    // Traitement du module virtuel
+    if (lightMode == "Off")
+      typeAction = 'F';
+    else
+    if (lightMode == "On")
+      typeAction = 'O';
+    else
+    if (lightMode == "Program")
+    {
+        DateTime currentTime = DateTime.Now ;
+        if( Settings.Parameter("Schedule.Set").Value == "1" )
+        {
+           Settings.Parameter("Schedule.Set").Value = "0" ;
+//         Program.Notify("Eclairage","Schedule.Set 1") ;
+           currentMonth = -1 ;
+           currentTable = "" ;
+        }
+        if( currentMonth != currentTime.Month )
+        {
+            currentMonth = currentTime.Month - 1 ;
+            tabMon = Settings.Parameter( "Calend.Year." + currentMonth ).Value ;
+        }
+        if( tabMon.Length &lt; currentTime.Day )
+        {
+            szState = "! Erreur LGCA";
+            typeAction = 'E'; // Erreur
+            Program.Notify("Eclairage","Calendrier Erreur LG mois "+currentTime.Month) ;
+            continue;
+        }
+        typeDay = tabMon[currentTime.Day-1] ;
+        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        if( newTable.Length != 0 )
+        {
+           if( newTable != currentTable )
+           {
+               currentTable = newTable ;
+               tabScene = Settings.Parameter( "Table.Light." + currentTable ).Value ;
+           }
+        }
+        else
+        {
+           szState = "! Erreur THND";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH non définie") ;
+        }
+        if( tabScene.Length == 96 )
+        {
+          index = (int)(currentTime.Hour*4)+(int)(currentTime.Minute/15) ;
+          typeAction=tabScene[index];
+          switch(typeAction)
+          {
+            case 'R': // SunRise - Soleil levant
+            case 'S': // SunSet - Soleil couchant
+              if( night == true )
+                typeAction='O'; // Level On
+              else
+                typeAction='S'; // Sunrise or Sunset : Waiting for end of night
+              break ;
+            case 'O':
+            case 'F':
+              break;
+            default :
+              szState = "! Erreur THAI";
+              typeAction = 'E'; // Erreur
+              Program.Notify(name,"TH Action indéfinie '"+tabScene[index]+"'") ;
+              break ;
+          }
+        }
+        else
+        {
+           szState = "! Erreur LGTH";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH Erreur longueur") ;
+        }
+    }
+    else
+    {
+       szState = "! Erreur MODE";
+       typeAction = 'E'; // Erreur
+       Program.Notify(name, "Erreur Mode "+lightMode) ;
+    }
+    switch(typeAction)
+    {
+      case 'E':
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+      case 'F':
+        szState = "Off";
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+     case 'O':
+        szState = "On";
+        lightModule.On();
+        if( light2 == true )
+          lightModule2.On();
+        if( light3 == true )
+          lightModule3.On();
+        if( light4 == true )
+          lightModule4.On();
+        break ;
+      case 'S':
+        szState = "Sun";
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+    }
+    if( operatingState.Value != szState )
+       Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", szState, "Eclairage");
+    Pause(2);
+  }
+  return true;
+});
+
+// implement Web API calls as defined in the Eclairage widget
+When.WebServiceCallReceived("HomeAutomation.Eclairage", (args)=&gt;
+{
+    string[] reqs = ((string)args).Split('/');
+
+    string lightNumber = reqs[1];
+    string command = reqs[2];
+    string parametre = reqs[3];
+
+    switch( command )
+    {
+        case "Light.SetTable":
+           var moduleT = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
+           if( parametre == "W")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "O")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "F")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "S")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           nTempo=0;
+           break;
+      case "Light.ModeSet" :
+           var moduleM = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
+           Program.RaiseEvent(moduleM,"Light.Mode", parametre, "Eclairage");
+           Program.RaiseEvent(moduleM,"Light.OperatingState", "---", "Eclairage");
+           nTempo=0;
+           break;
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+   nTempo=300;
+   LightLogicRun();
+   if(nTempo == 300)
+   {
+     DateTime currentTime = DateTime.Now ;
+     nTempo = ((5-(currentTime.Minute%5))*60)-currentTime.Second;
+   }
+   while( nTempo &gt; 0 )
+   {
+     Pause(1);
+     nTempo-- ;
+   };
+}</ScriptSource>
+    <ScriptErrors>Program update is required.</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>514</Address>
+    <Name>Eclairage</Name>
+    <Description>Use any light or switch module to implement light virtual device.
+Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Group>Lights</Group>
+    <ActivationTime>2015-01-20T12:50:55.728104Z</ActivationTime>
+    <TriggerTime>2015-01-20T12:50:55.762225Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
 </ArrayOfProgramBlock>
