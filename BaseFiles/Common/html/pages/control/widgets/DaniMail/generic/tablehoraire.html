@@ -1,0 +1,311 @@
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c">
+
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="images/scheduler.png"/>
+    <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+    <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+  </div>
+
+  <div id="thermostats" style="margin:10px">
+  	<table style="width:620px">
+  	  <tr>
+  		<td><canvas id='legend0' width='216' height='18' style="background:#666666;"></canvas></td>
+  		<td>Thermostats</td>
+  	  </tr>
+  	</table>
+    <canvas id='therm0' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='therm1' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='therm2' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='therm3' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='therm4' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='therm5' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='therm6' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='therm7' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='therm8' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='therm9' width='310' height='50' style="background:#666666;">
+    </canvas>
+  </div>
+
+  <div id="lights" style="margin:10px">
+  	<table style="width:620px">
+  	  <tr>
+  		<td><canvas id='legend1' width='216' height='18' style="background:#666666;"></canvas></td>
+  		<td>Lampes et Prises</td>
+  	  </tr>
+  	</table>
+    <canvas id='light0' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='light1' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='light2' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='light3' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='light4' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='light5' width='310' height='50' style="background:#666666;">
+    </canvas>
+  </div>
+
+  <div id="shutters" style="margin:10px">
+  	<table style="width:620px">
+  	  <tr>
+  		<td><canvas id='legend2' width='216' height='18' style="background:#666666;"></canvas></td>
+  		<td>Volets roulants et Variateurs</td>
+  	  </tr>
+  	</table>
+    <canvas id='shutter0' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='shutter1' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='shutter2' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='shutter3' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <br/>
+    <canvas id='shutter4' width='310' height='50' style="background:#666666;">
+    </canvas>
+    <canvas id='shutter5' width='310' height='50' style="background:#666666;">
+    </canvas>
+  </div>
+
+  <br/>
+</div>
+
+<!-- widget popups and other ui elements follow -->
+<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+  <div style="margin:10px">
+
+    <table width="100%">
+      <tr>
+        <td width="56">
+          <img data-ui-field="icon" height="56" src="images/scheduler.png" />
+        </td>
+        <td>
+          <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+          <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <tr>
+        <td>
+  	      <select id="heure_deb"></select>
+        </td>
+        <td>
+          <select id="heure_fin"></select>
+        </td>
+      </tr>
+    </table>
+  	<div style="margin:10px">
+    	<canvas id='choice' width='216' height='30' style="background:#000000;">
+    	</canvas>
+    </div>
+    <div align="right" style="margin:10px">
+        <div data-role="controlgroup" data-type="horizontal">
+            <a data-ui-field="off" data-locale-id="control_module_off" class="ui-btn ui-corner-all" href="#">Annuler</a>
+            <a data-ui-field="on" data-locale-id="control_module_on" class="ui-btn ui-corner-all" href="#">Valider</a>
+        </div>
+    </div>
+	<br />
+  </div>
+</div>
+<script>   
+function drawTable(context,etat,name) {
+    var x=10;
+    var y=28;
+    var nb=0;
+    var fgcolor ;
+
+    context.font = "8pt Arial";
+    context.fillStyle = "black";
+    context.fillText(name,8,10);
+    context.font = "6pt Arial";
+    for(var i=0 , c = etat.length ; i < 96 ; i++ )
+    {
+    	if( i < c )
+	        switch( etat[i] )
+	        {
+	           case 'A' :
+	            fgcolor = "#bcbcbc" ;
+	            break ;
+	           case 'H' :
+	            fgcolor = "#2387dc" ;
+	            break ;
+	           case 'E' :
+	            fgcolor = "#53a840" ;
+	            break ;
+	           case 'C' :
+	            fgcolor = "#da4336" ;
+	            break ;
+	           case 'O' :
+	            fgcolor = "green" ;
+	           	break ;
+	           case 'S' :
+	            fgcolor = "#666600" ;
+	           	break ;
+	           case 'R' :
+	            fgcolor = "#999900" ;
+	           	break ;
+	           case 'F' :
+	            fgcolor = "#444444" ;
+	           	break ;
+	           case '0' :
+	            fgcolor = "#222200" ;
+	           	break ;
+	           case '1' :
+	            fgcolor = "#333300" ;
+	           	break ;
+	           case '2' :
+	            fgcolor = "#666600" ;
+	           	break ;
+	           case '3' :
+	            fgcolor = "#999900" ;
+	           	break ;
+	           case '4' :
+	            fgcolor = "#CCCC00" ;
+	           	break ;
+	           case '5' :
+	            fgcolor = "yellow" ;
+	           	break ;
+	           default :
+	            fgcolor = 'black' ;
+	            break ;
+	        }
+	    else
+            fgcolor = "black" ;
+        nb++ ;
+        if( (i == 95) || (etat[i+1] != etat[i])) 
+        {
+            context.fillStyle=fgcolor;
+            context.fillRect(x,y,nb*3,16);
+            x += nb*3 ;
+            nb = 0 ;
+        }
+        if( i%4 == 0 )
+        {
+            context.fillStyle = "black";
+            context.fillText(i/4,((i/4)*12)+7,24);
+        }
+    }
+    context.fillStyle = "black";
+    context.fillText(i/4,((i/4)*12)+7,24);
+}    
+
+function drawChoice(context,type,select,height) {
+    var x=0;
+    var y=0;
+  	var c= type.length ;  
+  	var xlen = 216/c ;
+    var fgcolor ;
+    var texte ;
+
+    context.font = "8pt Arial";
+    for(var i=0 ; i < c ; i++ )
+    {
+        switch( type[i] )
+        {
+           case 'A' :
+           	texte = "Arrêt" ;
+            fgcolor = "#bcbcbc" ;
+            break ;
+           case 'H' :
+           	texte = "Hors Gel" ;
+            fgcolor = "#2387dc" ;
+            break ;
+           case 'E' :
+           	texte = "Eco" ;
+            fgcolor = "#53a840" ;
+            break ;
+           case 'C' :
+           	texte = "Confort" ;
+            fgcolor = "#da4336" ;
+            break ;
+           case 'O' :
+           	texte = "On" ;
+            fgcolor = "green" ;
+           	break ;
+           case 'S' :
+           	texte = "SunSet" ;
+            fgcolor = "#666600" ;
+           	break ;
+           case 'R' :
+           	texte = "SunRise" ;
+            fgcolor = "#999900" ;
+           	break ;
+           case 'F' :
+           	texte = "Off" ;
+            fgcolor = "#444444" ;
+           	break ;
+           case '0' :
+           	texte = "0 %" ;
+            fgcolor = "#222200" ;
+           	break ;
+           case '1' :
+           	texte = "20 %" ;
+            fgcolor = "#333300" ;
+           	break ;
+           case '2' :
+           	texte = "40 %" ;
+            fgcolor = "#666600" ;
+           	break ;
+           case '3' :
+           	texte = "60 %" ;
+            fgcolor = "#999900" ;
+           	break ;
+           case '4' :
+           	texte = "80 %" ;
+            fgcolor = "#CCCC00" ;
+           	break ;
+           case '5' :
+           	texte = "100%" ;
+            fgcolor = "yellow" ;
+           	break ;
+        }
+        context.fillStyle=fgcolor;
+        if( select == type[i] )
+       	{
+			context.beginPath();
+			context.lineWidth="3";   
+			context.strokeStyle="blue";   
+			context.rect(x,0,xlen-1,height);
+			context.fill();
+			context.stroke();       		
+       	}
+       	else
+	        context.fillRect(x,0,xlen,height);
+        if( (fgcolor=="black") || (fgcolor=="#222200") || (fgcolor=="#444444") )
+		    context.fillStyle = "white";
+        else
+    		context.fillStyle = "black";
+    	context.fillText(texte,x+6,(height/2)+5);
+    	x += xlen ;
+    }
+}    
+
+function getClickPos(element,evt) {
+	var canvas = document.getElementById(element);
+	var rect = canvas.getBoundingClientRect();
+	var posx = evt.pageX-rect.left ;
+	var posy = evt.pageY-rect.top ;
+  return {x:posx,y:posy};
+}
+</script>

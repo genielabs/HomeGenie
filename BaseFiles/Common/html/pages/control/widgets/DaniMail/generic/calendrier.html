@@ -1,0 +1,140 @@
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c">
+
+  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;"> 
+    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="images/scheduler.png" />
+    <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+    <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+  </div>
+
+  <div id="calendrier" style="margin-top:20px;margin-left:20px;margin-right:20px">
+    <canvas id='canvas_mois' width='260' height='278' style="background:#666666;">
+    </canvas>
+  </div>
+  <br/>
+</div>
+
+<!-- widget popups and other ui elements follow -->
+<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+</div>
+
+<script> 
+var tabJour = ["Di","Lu","Ma","Me","Je","Ve","Sa"];
+var monthName = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"] ;
+var tabLegend = ["Week-end","Ouvré","Férié","Spécial"];
+
+function drawMois( context, offsetDay, tabMois, numMonth, year )
+{
+    var x=6 ;
+    var y=28 ;
+    var fgcolor ;
+
+    context.font = "14pt Arial";
+
+    context.fillStyle = "grey";
+    context.fillRect(6,2,34,24);
+  	context.fillStyle = "black";
+    context.fillText( '<', 14, 20 );
+
+    context.fillStyle = "grey";
+    context.fillRect(222,2,34,24);
+  	context.fillStyle = "black";
+    context.fillText( '>', 236, 20 );
+
+    context.fillStyle = "grey";
+    context.fillRect(42,2,178,24);
+    context.fillStyle = "black";
+    context.fillText(monthName[numMonth]+" "+year,46,20);
+
+    context.font = "12pt Arial";
+    for( var i=0 ; i<7 ; i++ )
+    {
+	    context.fillStyle = "grey";
+        context.fillRect(x,y,34,32);
+    	context.fillStyle = "black";
+        context.fillText(tabJour[i],x+9,y+20);
+        x += 36 ;
+    }
+	x = 6 ;
+	y += 34 ;
+    context.font = "10pt Arial";
+    for(var i=0, j=0, c = tabMois.length ; i < 42 ; i++ )
+    {
+    	if( i < offsetDay )
+           	fgcolor = "grey";
+        else
+        {
+        	if( j < c )
+        	{
+		        switch( tabMois[j] )
+		        {
+		           case 'W' :
+		            fgcolor = "#bcbcbc" ;
+		            break ;
+		           case 'O' :
+		            fgcolor = "#2387dc" ;
+		            break ;
+		           case 'F' :
+		            fgcolor = "#53a840" ;
+		            break ;
+		           case 'S' :
+		            fgcolor = "#da4336" ;
+		            break ;
+		           default :
+		           	fgcolor = 'grey' ;
+		           	break ;
+		        }
+		     }
+		     else
+	           	fgcolor = "grey";
+	        j++ ;
+        }
+        if( (i != 0) && (i%7 === 0) )
+        {
+            x = 6 ;
+            y += 30 ;
+        }
+        context.fillStyle=fgcolor;
+        context.fillRect(x,y,34,28);
+        if( (j != 0) && (j <= c ) )
+        {
+    		context.fillStyle = "black";
+        	context.fillText(j,x+((j<10)?14:10),y+18);
+       	}
+        x += 36 ;
+    }
+}    
+
+function drawLegend(context) {
+    var x=6;
+    var y=244;
+  	var xlen=252/4;
+  	var type="WOFS";
+    var fgcolor;
+
+    context.font = "8pt Arial";
+    for(var i=0 ; i < 4 ; i++ )
+    {
+        switch( type[i] )
+        {
+           case 'W' :
+            fgcolor = "#bcbcbc" ;
+            break ;
+           case 'O' :
+            fgcolor = "#2387dc" ;
+            break ;
+           case 'F' :
+            fgcolor = "#53a840" ;
+            break ;
+           case 'S' :
+            fgcolor = "#da4336" ;
+            break ;
+        }
+   		context.fillStyle=fgcolor;
+        context.fillRect(x,y,xlen-2,30);
+   		context.fillStyle="black";
+    	context.fillText(tabLegend[i],x+6,y+20);
+    	x+=xlen;
+	}
+}
+</script>
