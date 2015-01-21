@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:32.217554Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:21.62515Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:32.723576Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:22.13276Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:33.225007Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:22.628173Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -503,7 +503,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:33.719144Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:23.125601Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1246,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:34.22036Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:23.628459Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1301,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:34.722297Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:24.125497Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1596,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:35.2228Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:24.632356Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1675,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:35.720685Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:25.128475Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1745,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:36.224349Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:25.632051Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2019,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:36.723896Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:26.133401Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2385,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:37.724814Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:27.132749Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2457,7 +2457,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:38.226218Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:27.633667Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2611,7 +2611,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:38.726179Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:28.130613Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2875,7 +2875,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-20T10:48:39.225818Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:28.635083Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6101,7 +6101,7 @@ while (Program.IsEnabled)
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
-    <Name>Generic Thermostat</Name>
+    <Name>Basic Thermostat</Name>
     <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Weather and Enviroment</Group>
@@ -8765,17 +8765,17 @@ while (Program.IsEnabled)
     Pause(300);
 }
 </ScriptSource>
-    <ScriptErrors>Program update is required.</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>510</Address>
-    <Name>Calendrier</Name>
+    <Name>Calendar</Name>
     <Description />
-    <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-20T12:48:14.902351Z</ActivationTime>
-    <TriggerTime>2015-01-20T12:48:14.936054Z</TriggerTime>
+    <Group>Scheduling</Group>
+    <ActivationTime>2015-01-21T19:59:26.997668Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:29.64214Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8837,17 +8837,17 @@ while (Program.IsEnabled)
   Pause(300);
 }
 </ScriptSource>
-    <ScriptErrors>Program update is required.</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>511</Address>
-    <Name>Tables horaires</Name>
+    <Name>Time tables</Name>
     <Description />
-    <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-20T12:48:59.488677Z</ActivationTime>
-    <TriggerTime>2015-01-20T12:48:59.51808Z</TriggerTime>
+    <Group>Scheduling</Group>
+    <ActivationTime>2015-01-21T19:59:29.139045Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:30.141354Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -9272,20 +9272,20 @@ while (Program.IsEnabled)
    };
 }
 </ScriptSource>
-    <ScriptErrors>Program update is required.</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>512</Address>
-    <Name>Thermostat</Name>
+    <Name>Thermostat Scheduler</Name>
     <Description>Use any temperature sensor and relay switch module to implement Thermostat(s) virtual device.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-20T12:51:25.576946Z</ActivationTime>
-    <TriggerTime>2015-01-20T12:51:25.612579Z</TriggerTime>
+    <ActivationTime>2015-01-21T19:59:29.831941Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:30.645544Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -9613,19 +9613,19 @@ while (Program.IsEnabled)
      nTempo-- ;
    };
 }</ScriptSource>
-    <ScriptErrors>Program update is required.</ScriptErrors>
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>514</Address>
-    <Name>Eclairage</Name>
+    <Name>Lights Scheduler</Name>
     <Description>Use any light or switch module to implement light virtual device.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Lights</Group>
-    <ActivationTime>2015-01-20T12:50:55.728104Z</ActivationTime>
-    <TriggerTime>2015-01-20T12:50:55.762225Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

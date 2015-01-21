@@ -411,11 +411,11 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
 HG.WebApp.SystemSettings.ZWaveDiscovery = function (port) {
     $('#configure_system_zwavediscovery_log').empty();
     $('#systemsettings_zwavediscovery_popup').popup('open');
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.Discovery/' + (new Date().getTime()), function (data) { });
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/1/Controller.Discovery/' + (new Date().getTime()), function (data) { });
 };
 
 HG.WebApp.SystemSettings.ZWaveHardReset = function (port) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.HardReset/' + (new Date().getTime()), function (data) { });
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/1/Controller.HardReset/' + (new Date().getTime()), function (data) { });
 };
 
 HG.WebApp.SystemSettings.ZWaveNodeAdd = function (port) {

@@ -163,6 +163,20 @@ namespace HomeGenie.Automation
                         isConditionSatisfied = (program.Conditions.Count > 0);
                         for (int c = 0; c < program.Conditions.Count; c++)
                         {
+                            // check for OR logic operator
+                            if (program.Conditions[c].ComparisonOperator == ComparisonOperator.LogicOrJoint)
+                            {
+                                if (isConditionSatisfied)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    isConditionSatisfied = (c < program.Conditions.Count - 1);
+                                    continue;
+                                }
+                            }
+                            //
                             bool res = false;
                             try
                             {

@@ -64,7 +64,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte commandClass = message[7];
             byte commandType = message[8];
             //
-            if (commandClass == (byte)CommandClass.METER && commandType == (byte)Command.METER_REPORT)
+            if (commandClass == (byte)CommandClass.Meter && commandType == (byte)Command.MeterReport)
             {
                 // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
                 // TODO: the code below parse always as Electric type

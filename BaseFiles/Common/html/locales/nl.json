@@ -36,13 +36,13 @@
     "configure_menu_groups_modules": 
         "Groupen en Modules",
     "configure_menu_automation": 
-        "Automatiseren",
+        "Programma's",
     "configure_menu_system": 
-        "Systeem en Interfaces",
+        "Instellingen",
     "configure_menu_maintenance": 
         "Onderhoud en Updates",
     "configure_automation_heading": 
-        "<font style='color:gray'>Automation</font><br>Groups",
+        "<font style='color:gray'>Program</font><br>Groups",
     "configure_group_newgroup": 
         "Nieuwe Group",
     "configure_group_entergroupname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Add Group",
     "configure_interfaces_heading": 
-        "Systeem / Interfaces",
+        "Instellingen",
     "configure_interfaces_zwaveoptions": 
         "ZWave Interface",
     "configure_interfaces_optdisable": 
@@ -334,7 +334,7 @@
     "configure_grouplist": 
         "Groups List",
     "configure_schedulerservice_title": 
-        "Automation<br />Scheduler",
+        "Event<br />Planning",
     "configure_scheduler_events": 
         "Scheduler Events",
     "configure_schedulerservice_bottombar_event_add": 
