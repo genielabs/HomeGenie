@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r458</Version>
+  <Version>1.00 beta r459</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added Z-Wave Meter Poll app; fixed bug in Level Poll app
+  <ReleaseNote>   - Little improvement to Scheduled ON/OFF program
+    - Added I2C PCF8574 + Hd44780 LCD display example app (Raspberry Pi)
+    - Improved Raspberry Pi GPIO Modules program by adding !OUT option for inverted level logic (pull request #99)
+    - Added Z-Wave Meter Poll app; fixed bug in Level Poll app
     - Optimized file GPIO connection driver for faaaster I/O operationss
     - Added "fuzzyness" to Virtual Meter
     - Added Meter box to Z-Wave node setup page
@@ -21,5 +24,5 @@
     - Added more field icons to sensor widget (pull request #94)
     - Fixed error with Pepper1 db when lang is not an array (pull request #90)
     - Changed widget's files extension from *.json to *.js</ReleaseNote>
-  <ReleaseDate>2015-01-18T10:47:58.0000Z</ReleaseDate>
+  <ReleaseDate>2015-01-20T11:05:39.0000Z</ReleaseDate>
 </ReleaseInfo>

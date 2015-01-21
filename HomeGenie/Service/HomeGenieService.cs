@@ -213,14 +213,15 @@ namespace HomeGenie.Service
                     message
                 );
             };
-            // it will check every 24 hours
-            updateChecker.Start();
             //
             statisticsLogger = new StatisticsLogger(this);
             statisticsLogger.Start();
             //
             // Setup local UPnP device
             SetupUpnp();
+            //
+            // it will check every 24 hours
+            updateChecker.Start();
             //
             Start();
         }
@@ -1858,6 +1859,8 @@ namespace HomeGenie.Service
             {
                 systemConfiguration.HomeGenie.GUID = uniqueDeviceName = System.Guid.NewGuid().ToString();
                 systemConfiguration.Update();
+                // initialize database for first use
+                statisticsLogger.DatabaseReset();
             }
             //
             UPnPDevice localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");

@@ -672,6 +672,7 @@ namespace XTenLib
             catch
             {
             }
+            isInterfaceReady = false;
         }
 
         private void SendMessage(byte[] message)

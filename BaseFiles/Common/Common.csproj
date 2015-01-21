@@ -4228,6 +4228,7 @@
     <None Include="programs\40.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+<<<<<<< HEAD
     <None Include="html\pages\control\widgets\DaniMail\generic\calendrier.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4280,6 +4281,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="programs\514.dll">
+=======
+    <None Include="programs\67.dll">
+>>>>>>> a71dd9db9b91c9e6f5b3028587d1de2d01cea795
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
