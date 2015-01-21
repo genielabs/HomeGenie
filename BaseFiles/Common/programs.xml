@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:16.522581Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:32.217554Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -266,7 +266,7 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
 Program.GoBackground();
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -278,9 +278,9 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:17.026115Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:32.723576Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -413,7 +413,7 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors />
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -424,9 +424,9 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:17.524452Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:33.225007Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -503,7 +503,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:18.02219Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:33.719144Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1246,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:18.524021Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:34.22036Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1301,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:19.02503Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:34.722297Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1596,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:19.527287Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:35.2228Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1675,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:20.024913Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:35.720685Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1745,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:20.526259Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:36.224349Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2019,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:21.026035Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:36.723896Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2232,7 +2232,15 @@ return false;</ScriptCondition>
     <ScriptSource />
     <ScriptErrors />
     <IsRunning>false</IsRunning>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Favourites.Link</ForDomains>
+        <ForTypes>Generic</ForTypes>
+        <Property>FavouritesLink.Url</Property>
+        <Description>Favourites link</Description>
+      </ProgramFeature>
+    </Features>
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>180</Address>
@@ -2244,7 +2252,7 @@ shown as hyperlink buttons in the control page.</Description>
     <ActivationTime>2014-07-25T22:02:17.939326Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2377,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:22.027575Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:37.724814Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2449,7 +2457,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:22.527233Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:38.226218Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2603,7 +2611,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:23.027055Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:38.726179Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2867,7 +2875,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:15:23.530378Z</TriggerTime>
+    <TriggerTime>2015-01-20T10:48:39.225818Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3624,17 +3632,17 @@ while (Program.IsEnabled)
     <ScriptErrors />
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>503</Address>
     <Name>jkUtils - OpenWeatherData</Name>
     <Description>Gathers weather data from http://www.OpenWeatherMap.org/ [API Version 2.5] 
 No service key required to fetch data.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-20T22:50:21.023847Z</ActivationTime>
-    <TriggerTime>2015-01-20T22:45:10.206662Z</TriggerTime>
+    <ActivationTime>2014-05-09T16:01:02.7887618Z</ActivationTime>
+    <TriggerTime>2014-05-09T16:01:02.8657664Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -4068,19 +4076,19 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
    
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>501</Address>
     <Name>jkUtils - Solar Altitude</Name>
     <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
   Please set your local longitude/latitude in program options.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-20T18:48:41.633966Z</ActivationTime>
-    <TriggerTime>2015-01-20T18:48:41.762907Z</TriggerTime>
+    <ActivationTime>2014-05-09T16:00:57.3137647Z</ActivationTime>
+    <TriggerTime>2014-05-09T16:00:57.3197403Z</TriggerTime>
     <Type>Javascript</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
