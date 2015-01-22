@@ -1,6 +1,12 @@
 ﻿{
     "mode":
         "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "title_therm":
+    	"Thermostats",
+    "title_light":
+    	"Lights and Switchs",
+    "title_shutter":
+    	"Shutters and Dimmers",
     "control_light_on":
         "&nbsp;On&nbsp;",    
     "control_light_off":

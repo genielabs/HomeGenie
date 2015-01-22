@@ -1,6 +1,12 @@
 ﻿{
     "mode":
         "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "title_therm":
+    	"Thermostats",
+    "title_light":
+    	"Lampes et Prises",
+    "title_shutter":
+    	"Volets roulants et Variateurs",
     "control_light_on":
         "&nbsp;On&nbsp;",    
     "control_light_off":
