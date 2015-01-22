@@ -25,7 +25,7 @@ using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {
-    public enum ZWaveMessageHeader : byte
+    public enum MessageHeader : byte
     {
         SOF = 0x01,
         ACK = 0x06,
@@ -33,7 +33,7 @@ namespace ZWaveLib
         CAN = 0x18
     }
 
-    public enum ZWaveMessageType : byte
+    public enum MessageType : byte
     {
         REQUEST = 0x00,
         RESPONSE = 0x01
@@ -127,7 +127,7 @@ namespace ZWaveLib
 
         public void SendAck()
         {
-            byte[] MSG_ACKNOWLEDGE = new byte[] { (byte)ZWaveMessageHeader.ACK };
+            byte[] MSG_ACKNOWLEDGE = new byte[] { (byte)MessageHeader.ACK };
             serialPort.SendMessage(MSG_ACKNOWLEDGE);
         }
 
@@ -283,13 +283,13 @@ namespace ZWaveLib
 
         private void ReceiveMessage(byte[] message)
         {
-            ZWaveMessageHeader header = (ZWaveMessageHeader)((int)message[0]);
+            MessageHeader header = (MessageHeader)((int)message[0]);
             //
-            if (header == ZWaveMessageHeader.ACK)
+            if (header == MessageHeader.ACK)
             {
                 ZWaveMessageReceived(
                     this,
-                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.ACK })
+                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.ACK })
                 );
                 if (message.Length > 1)
                 {
@@ -317,7 +317,7 @@ namespace ZWaveLib
             //
             //Console.WriteLine("=== > " + ByteArrayToString(message));
             //
-            if (header == ZWaveMessageHeader.SOF)
+            if (header == MessageHeader.SOF)
             { // found SOF
                 //
                 byte[] cmdAck = new byte[] { 0x01, 0x04, 0x01, 0x13, 0x01, 0xE8 };
@@ -334,14 +334,14 @@ namespace ZWaveLib
                     Console.WriteLine("\nZWaveLib: bad checksum message " + ByteArrayToString(message) + "\n");
                 }
             }
-            else if (header == ZWaveMessageHeader.CAN)
+            else if (header == MessageHeader.CAN)
             {
                 // RESEND
                 ResendLastMessage();
                 //
                 ZWaveMessageReceived(
                     this,
-                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.CAN })
+                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.CAN })
                 );
             }
             else

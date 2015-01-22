@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+21/01/2015 1.00 beta rev 461
+    - Integrating DaniMail Thermostat, Calendar and Time tables (pull request #101) - WIP
+    - Added logic operator "OR" to Wizard script conditions
+    - Improved Z-Wave 'add node' function
+    - Fixed hidden automation groups bug
+
 20/01/2015 1.00 beta rev 459
     - Removed some old unused files/projects from HG solution
     - Little improvement to Scheduled ON/OFF program

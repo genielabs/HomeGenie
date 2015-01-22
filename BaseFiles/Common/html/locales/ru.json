@@ -36,13 +36,13 @@
     "configure_menu_groups_modules": 
         "Группы и модули",
     "configure_menu_automation": 
-        "Автоматизация",
+        "Программы",
     "configure_menu_system": 
-        "Интерфейсы",
+        "Настройки",
     "configure_menu_maintenance": 
         "Обслуживание и обновление",
     "configure_automation_heading": 
-        "Группы<br><font style='color:gray'>автоматизации</font>",
+        "Программы<br><font style='color:gray'>автоматизации</font>",
     "configure_group_newgroup": 
         "Новая группа",
     "configure_group_entergroupname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Добавить группу",
     "configure_interfaces_heading": 
-        "Система и интерфейсы",
+        "Настройки",
     "configure_interfaces_zwaveoptions": 
         "Опции интерфейса ZWave",
     "configure_interfaces_optdisable": 
@@ -334,7 +334,7 @@
     "configure_grouplist": 
         "Список групп",
     "configure_schedulerservice_title": 
-        "Планировщик<br />автоматизации",
+        "планирование<br />Событий",
     "configure_scheduler_events": 
         "События планировщика",
     "configure_schedulerservice_bottombar_event_add": 

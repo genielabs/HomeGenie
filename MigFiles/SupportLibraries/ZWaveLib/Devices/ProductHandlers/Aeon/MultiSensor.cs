@@ -48,7 +48,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
+            if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
                 SensorValue sensorval = SensorValue.Parse(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)

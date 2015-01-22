@@ -252,7 +252,7 @@ namespace MIG.Interfaces.HomeAutomation
                 for(int d = 0; d < controller.Devices.Count; d++)
                 {
                     var node = controller.Devices[d];
-                    if (node.NodeId == 0x01) // zwave controller id
+                    if (node.NodeId == 0x01) // main zwave controller
                         continue;
                     //
                     // add new module
@@ -261,36 +261,46 @@ namespace MIG.Interfaces.HomeAutomation
                     module.Address = node.NodeId.ToString();
                     //module.Description = "ZWave Node";
                     module.ModuleType = ModuleTypes.Generic;
-                    if (node.GenericClass != 0x00)
+                    if (node.GenericClass != (byte)GenericType.None)
                     {
                         switch (node.GenericClass)
                         {
-                        case 0x10: // BINARY SWITCH
-                            module.Description = "ZWave Switch";
+                        case (byte)GenericType.StaticController:
+                            module.Description = "Static Controller";
+                            module.ModuleType = ModuleTypes.Generic;
+                            break;
+
+                        case (byte)GenericType.SwitchBinary:
+                            module.Description = "Binary Switch";
                             module.ModuleType = ModuleTypes.Switch;
                             break;
 
-                        case 0x11: // MULTILEVEL SWITCH (DIMMER)
-                            module.Description = "ZWave Multilevel Switch";
+                        case (byte)GenericType.SwitchMultilevel:
+                            module.Description = "Multilevel Switch";
                             module.ModuleType = ModuleTypes.Dimmer;
                             break;
 
-                        case 0x08: // THERMOSTAT
-                            module.Description = "ZWave Thermostat";
+                        case (byte)GenericType.Thermostat:
+                            module.Description = "Thermostat";
                             module.ModuleType = ModuleTypes.Thermostat;
                             break;
-
-                        case 0x20: // BINARY SENSOR
-                            module.Description = "ZWave Sensor";
+                            
+                        case (byte)GenericType.SensorAlarm:
+                            module.Description = "Alarm Sensor";
                             module.ModuleType = ModuleTypes.Sensor;
                             break;
 
-                        case 0x21: // MULTI-LEVEL SENSOR
-                            module.Description = "ZWave Multilevel Sensor";
+                        case (byte)GenericType.SensorBinary:
+                            module.Description = "Binary Sensor";
                             module.ModuleType = ModuleTypes.Sensor;
                             break;
 
-                        case 0x31: // METER
+                        case (byte)GenericType.SensorMultilevel:
+                            module.Description = "Multilevel Sensor";
+                            module.ModuleType = ModuleTypes.Sensor;
+                            break;
+
+                        case (byte)GenericType.Meter:
                             module.Description = "ZWave Meter";
                             module.ModuleType = ModuleTypes.Sensor;
                             break;
@@ -393,16 +403,16 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SWITCH_BINARY);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SwitchBinary);
                         break;
                     case "Switch.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SWITCH_MULTILEVEL);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SwitchMultilevel);
                         break;
                     case "Sensor.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SENSOR_BINARY);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SensorBinary);
                         break;
                     case "Sensor.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SENSOR_MULTILEVEL);
+                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SensorMultilevel);
                         break;
                     }
                 }
@@ -834,7 +844,7 @@ namespace MIG.Interfaces.HomeAutomation
         {
             switch (e.Status)
             {
-            case ControllerStatus.DISCOVERY_START:
+            case ControllerStatus.DiscoveryStart:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -843,7 +853,7 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Discovery Started"
                 });
                 break;
-            case ControllerStatus.DISCOVERY_END:
+            case ControllerStatus.DiscoveryEnd:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -853,7 +863,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case ControllerStatus.NODE_ADDED:
+            case ControllerStatus.NodeAdded:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -864,7 +874,7 @@ namespace MIG.Interfaces.HomeAutomation
                 lastAddedNode = e.NodeId;
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case ControllerStatus.NODE_UPDATED:
+            case ControllerStatus.NodeUpdated:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",
@@ -874,7 +884,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 //if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case ControllerStatus.NODE_REMOVED:
+            case ControllerStatus.NodeRemoved:
                 lastRemovedNode = e.NodeId;
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -885,7 +895,7 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
-            case ControllerStatus.NODE_ERROR:
+            case ControllerStatus.NodeError:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = "1",

@@ -48,13 +48,15 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
     var ifaceW800rf = HG.WebApp.SystemSettings.GetInterface('HomeAutomation.W800RF');
     //
     var i = 0;
+    var hiddenGroup = ' style="display:none"';
     for (; i < HG.WebApp.Data.AutomationGroups.length; i++) {
         var groupName = HG.WebApp.Data.AutomationGroups[i].Name;
+        var itemVisibility = '';
         //
-        // filter non valid entries for the running configuration
-        if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win') continue;
-        else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) continue;
-        else if (groupName == 'Z-Wave' && ifaceZwave == null) continue;
+        // hide non valid entries for the running configuration
+        if ((groupName == 'Raspberry Pi' || groupName == 'CubieTruck') && HOST_SYSTEM.substring(0, 3) == 'Win') itemVisibility = hiddenGroup;
+        else if (groupName == 'X10' && ifaceX10 == null && ifaceInsteon == null && ifaceW800rf == null) itemVisibility = hiddenGroup;
+        else if (groupName == 'Z-Wave' && ifaceZwave == null) itemVisibility = hiddenGroup;
         //
         // count modules
         var modulescount = 0;
@@ -63,7 +65,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
                 modulescount++;
             }
         }
-        $('#configure_automationgroupslist').append('<li data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        $('#configure_automationgroupslist').append('<li' + itemVisibility + ' data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
     }
     //
     // programs with no group are shown in "Ungrouped" special group

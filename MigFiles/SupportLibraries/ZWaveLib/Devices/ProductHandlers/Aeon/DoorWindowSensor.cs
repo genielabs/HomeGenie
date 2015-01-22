@@ -43,7 +43,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.ALARM && cmdType == (byte)Command.ALARM_REPORT && message[9] == 0x00)
+            if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.Alarm && cmdType == (byte)Command.AlarmReport && message[9] == 0x00)
             {
                 // tampered status
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_TAMPERED, message[10]);

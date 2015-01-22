@@ -126,27 +126,27 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdType = message[8];
             switch (cmdClass)
             {
-            case (byte)CommandClass.THERMOSTAT_MODE:  
+            case (byte)CommandClass.ThermostatMode:  
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_MODE, (Thermostat.Mode)message[9]);
                 handled = true;
                 break;
-            case (byte)CommandClass.THERMOSTAT_OPERATING_STATE:   
+            case (byte)CommandClass.ThermostatOperatingState:   
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_OPERATING_STATE, message[9]);
                 handled = true;
                 break;
-            case (byte)CommandClass.THERMOSTAT_FAN_MODE:  
+            case (byte)CommandClass.ThermostatFanMode:  
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_FAN_MODE, message[9]);
                 handled = true;
                 break;
-            case (byte)CommandClass.THERMOSTAT_FAN_STATE:  
+            case (byte)CommandClass.ThermostatFanState:  
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_FAN_STATE, message[9]);
                 handled = true;
                 break;
-            case (byte)CommandClass.THERMOSTAT_HEATING:   
+            case (byte)CommandClass.ThermostatHeating:   
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_HEATING, message[9]);
                 handled = true;
                 break;
-            case (byte)CommandClass.THERMOSTAT_SETBACK:   
+            case (byte)CommandClass.ThermostatSetBack:   
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_SETBACK, message[9]);
                 handled = true;
                 break;
@@ -154,7 +154,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
              * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
                 2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
              */
-            case (byte)CommandClass.THERMOSTAT_SETPOINT:  
+            case (byte)CommandClass.ThermostatSetPoint:  
                 double temp = Utility.ExtractTemperatureFromBytes(message);
                 dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
@@ -174,8 +174,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_ModeGet()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_MODE, 
-                (byte)Command.BASIC_GET
+                (byte)CommandClass.ThermostatMode, 
+                (byte)Command.BasicGet
             });
         }       
 
@@ -185,8 +185,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_ModeSet(Mode mode)
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_MODE, 
-                (byte)Command.BASIC_SET, 
+                (byte)CommandClass.ThermostatMode, 
+                (byte)Command.BasicGet, 
                 (byte)mode
             });
         }
@@ -194,8 +194,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_SetPointGet()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_SETPOINT, 
-                (byte)Command.THERMOSTAT_SETPOINT_GET
+                (byte)CommandClass.ThermostatSetPoint, 
+                (byte)Command.ThermostatSetPointGet
             });
         }
         
@@ -215,8 +215,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_SetPointSet(SetPointType ptype, int temperature)
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_SETPOINT, 
-                (byte)Command.THERMOSTAT_SETPOINT_SET, 
+                (byte)CommandClass.ThermostatSetPoint, 
+                (byte)Command.ThermostatSetPointSet, 
                 (byte)ptype,
                 0x09,
                 (byte)temperature
@@ -226,24 +226,24 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_FanStateGet()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_FAN_STATE, 
-                (byte)Command.BASIC_GET
+                (byte)CommandClass.ThermostatFanState, 
+                (byte)Command.BasicGet
             });
         }
 
         public virtual void Thermostat_FanModeGet()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_FAN_MODE, 
-                (byte)Command.BASIC_GET
+                (byte)CommandClass.ThermostatFanMode, 
+                (byte)Command.BasicGet
             });
         }
 
         public virtual void Thermostat_FanModeSet(FanMode mode)
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_FAN_MODE, 
-                (byte)Command.BASIC_SET, 
+                (byte)CommandClass.ThermostatFanMode, 
+                (byte)Command.BasicGet, 
                 (byte)mode
             });
         }
@@ -251,16 +251,16 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public virtual void Thermostat_OperatingStateGet()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_OPERATING_STATE, 
-                (byte)Command.BASIC_GET
+                (byte)CommandClass.ThermostatOperatingState, 
+                (byte)Command.BasicGet
             });
         }
 
         public virtual void Thermostat_OperatingStateReport()
         {
             this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.THERMOSTAT_OPERATING_STATE, 
-                (byte)Command.BASIC_REPORT
+                (byte)CommandClass.ThermostatOperatingState, 
+                (byte)Command.BasicReport
             });
         }
     }

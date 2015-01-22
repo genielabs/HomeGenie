@@ -1,0 +1,38 @@
+﻿{
+    "mode":
+        "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "control_light_on":
+        "&nbsp;On&nbsp;",    
+    "control_light_off":
+        "Off",    
+    "control_light_prog":
+        "Programmé",    
+    "therm_setpoint":
+        "Température",
+    "therm_setmode":
+        "Mode",
+    "therm_off":
+        "Arrêt",
+    "therm_nofrost":
+        "Hors Gel",
+    "therm_eco":
+        "Eco",
+    "therm_heat":
+        "Confort",
+    "therm_prog":
+        "Programmé",
+    "Off":
+        "Arrêt",
+    "NoFrost":
+        "Hors Gel",
+    "Eco":
+        "Eco",
+    "Heat":
+        "Confort",
+    "Program":
+    	"Programmé",
+    "control_module_off":
+        "Annuler",
+    "control_module_on":
+        "Valider"
+}

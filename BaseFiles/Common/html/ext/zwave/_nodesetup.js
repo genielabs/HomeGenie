@@ -628,10 +628,10 @@ function zwave_SensorMultilevelParameterGet(nodeid, varid, callback) {
 }
 
 function zwave_NodeAdd(callback) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.NodeAdd/' + (new Date().getTime()), function (data) { callback(data); });
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/1/Controller.NodeAdd/' + (new Date().getTime()), function (data) { callback(data); });
 }
 function zwave_NodeRemove(callback) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/0/Controller.NodeRemove/' + (new Date().getTime()), function (data) { callback(data); });
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/1/Controller.NodeRemove/' + (new Date().getTime()), function (data) { callback(data); });
 }
 
 function zwave_ManufacturerSpecificGet(nodeid, callback) {

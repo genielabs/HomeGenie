@@ -41,6 +41,10 @@
     <Modules />
   </Group>
   <Group>
+    <Name>Scheduling</Name>
+    <Modules />
+  </Group>
+  <Group>
     <Name>Raspberry Pi</Name>
     <Modules />
   </Group>

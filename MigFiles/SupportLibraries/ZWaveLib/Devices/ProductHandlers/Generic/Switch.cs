@@ -37,12 +37,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             levelValue = (int)message[9];
             //
-            if (cmdClass == (byte)CommandClass.BASIC || cmdClass == (byte)CommandClass.SWITCH_BINARY || cmdClass == (byte)CommandClass.SWITCH_MULTILEVEL)
+            if (cmdClass == (byte)CommandClass.Basic || cmdClass == (byte)CommandClass.SwitchBinary || cmdClass == (byte)CommandClass.SwitchMultilevel)
             {
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, levelValue);
                 switch (cmdClass)
                 {
-                case (byte)CommandClass.SWITCH_BINARY:
+                case (byte)CommandClass.SwitchBinary:
                     nodeHost.RaiseUpdateParameterEvent(
                         nodeHost,
                         1,
@@ -50,7 +50,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         (double)levelValue
                         );
                     break;
-                case (byte)CommandClass.SWITCH_MULTILEVEL:
+                case (byte)CommandClass.SwitchMultilevel:
                     nodeHost.RaiseUpdateParameterEvent(
                         nodeHost,
                         1,
@@ -80,11 +80,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdType = message[8];
             byte instanceCmdClass = message[9];
             //
-            if ((instanceCmdClass == (byte)CommandClass.SWITCH_BINARY || instanceCmdClass == (byte)CommandClass.SWITCH_MULTILEVEL) && cmdType == (byte)Command.MULTIINSTANCE_COUNT_REPORT)
+            if ((instanceCmdClass == (byte)CommandClass.SwitchBinary || instanceCmdClass == (byte)CommandClass.SwitchMultilevel) && cmdType == (byte)Command.MultiInstanceCountReport)
             {
                 // 01 0A 00 04 00 30 04 60 05 25 02 87
                 byte inst_count = message[10];
-                if (instanceCmdClass == (byte)CommandClass.SWITCH_BINARY)
+                if (instanceCmdClass == (byte)CommandClass.SwitchBinary)
                 {
                     nodeHost.RaiseUpdateParameterEvent(
                         nodeHost,
@@ -104,7 +104,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 }
                 processed = true;
             }
-            else if (cmdClass == (byte)CommandClass.MULTIINSTANCE && message.Length > 12)
+            else if (cmdClass == (byte)CommandClass.MultiInstance && message.Length > 12)
             {
                 //01 0D 00 04 00 2F 07 60 0D 01 00 25 03 FF 6B
                 //                     mi ?  in    sb rp vl
@@ -112,11 +112,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 byte cmd = message[11];
                 byte type = message[12];
                 //
-                if ((cmd == (byte)CommandClass.SWITCH_BINARY || cmd == (byte)CommandClass.SWITCH_MULTILEVEL) && type == (byte)Command.BASIC_REPORT) // 0x03 ??
+                if ((cmd == (byte)CommandClass.SwitchBinary || cmd == (byte)CommandClass.SwitchMultilevel) && type == (byte)Command.BasicReport) // 0x03 ??
                 {
                     byte value = message[13];
                     //
-                    if (cmd == (byte)CommandClass.SWITCH_BINARY)
+                    if (cmd == (byte)CommandClass.SwitchBinary)
                     {
                         nodeHost.RaiseUpdateParameterEvent(
                             nodeHost,

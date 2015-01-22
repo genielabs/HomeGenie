@@ -56,22 +56,22 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.BASIC && (cmdType == (byte)Command.BASIC_REPORT || cmdType == (byte)Command.BASIC_SET))
+            if (cmdClass == (byte)CommandClass.Basic && (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicGet))
             {
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, (double)message[9]);
                 handled = true;
             }
-            else if (cmdClass == (byte)CommandClass.SCENE_ACTIVATION && cmdType == (byte)Command.SCENE_ACTIVATION_SET)
+            else if (cmdClass == (byte)CommandClass.SceneActivation && cmdType == (byte)Command.SceneActivationSet)
             {
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, (double)message[9]);
                 handled = true;
             }
-            else if (cmdClass == (byte)CommandClass.SENSOR_BINARY && cmdType == (byte)Command.SENSOR_BINARY_REPORT)
+            else if (cmdClass == (byte)CommandClass.SensorBinary && cmdType == (byte)Command.SensorBinaryReport)
             {
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, message[9]);
                 handled = true;
             }
-            else if (cmdClass == (byte)CommandClass.SENSOR_MULTILEVEL && cmdType == (byte)Command.SENSOR_MULTILEVEL_REPORT)
+            else if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
                 var sensor = SensorValue.Parse(message);
                 if (sensor.Parameter == ZWaveSensorParameter.UNKNOWN)
@@ -86,7 +86,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     handled = true;
                 }
             }
-            else if ((cmdClass == (byte)CommandClass.SENSOR_ALARM && cmdType == (byte)Command.SENSOR_ALARM_REPORT) || (cmdClass == (byte)CommandClass.ALARM && cmdType == (byte)Command.ALARM_REPORT))
+            else if ((cmdClass == (byte)CommandClass.SensorAlarm && cmdType == (byte)Command.SensorAlarmReport) || (cmdClass == (byte)CommandClass.Alarm && cmdType == (byte)Command.AlarmReport))
             {
                 var alarm = AlarmValue.Parse(message);
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, alarm.EventType, alarm.Value);
@@ -105,7 +105,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.METER && cmdType == (byte)Command.METER_REPORT)
+            if (cmdClass == (byte)CommandClass.Meter && cmdType == (byte)Command.MeterReport)
             {
                 // TODO: should check meter report type (Electric, Gas, Water) and value precision / scale
                 // TODO: the code below parse always as Electric type 
@@ -113,7 +113,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, energy.EventType, energy.Value);
                 processed = true;
             }
-            else if (cmdClass == (byte)CommandClass.MULTIINSTANCE)
+            else if (cmdClass == (byte)CommandClass.MultiInstance)
             {
                 //01 0D 00 04 00 2F 07 60 0D 01 00 25 03 FF 6B
                 //                     mi ?  in    sb rp vl
@@ -124,7 +124,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 if (true) // TODO: check against proper command classes SENSOR_BINARY, SENSOR_MULTILEVEL, ...
                 {
                     var paramType = ParameterType.MULTIINSTANCE_SENSOR_BINARY;
-                    if (reportType == (byte)CommandClass.SENSOR_MULTILEVEL)
+                    if (reportType == (byte)CommandClass.SensorMultilevel)
                     {
                         paramType = ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL;
                     }
@@ -134,7 +134,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     double val = Utility.ExtractValueFromBytes(message, 14, out scale);
 
                     // if it's a COMMAND_MULTIINSTANCEV2_ENCAP we shift key and val +1 byte
-                    if (cmdType == (byte)Command.MULTIINSTANCEV2_ENCAP)
+                    if (cmdType == (byte)Command.MultiInstaceV2Encapsulated)
                     {
                         key = message[13];
                         val = Utility.ExtractValueFromBytes(message, 15, out scale);
@@ -142,7 +142,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     if (key == (byte)ZWaveSensorParameter.TEMPERATURE && message.Length > 16)
                     {
-                        if (cmdType == (byte)Command.MULTIINSTANCEV2_ENCAP && message.Length > 18)
+                        if (cmdType == (byte)Command.MultiInstaceV2Encapsulated && message.Length > 18)
                         {
                             val = BitConverter.ToUInt16(new byte[2] { message[18], message[17] }, 0) / 100D;
                         }
@@ -183,12 +183,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         // TODO: verify if it's possible to use EnergyValue class
                         double energy = 0;
 
-                        if (cmdType == (byte)Command.MULTIINSTANCEV2_ENCAP && message.Length > 18)
+                        if (cmdType == (byte)Command.MultiInstaceV2Encapsulated && message.Length > 18)
                         {
                             var e = ((UInt32)message[15]) * 256 * 256 * 256 + ((UInt32)message[16]) * 256 * 256 + ((UInt32)message[17]) * 256 + ((UInt32)message[18]);
                             energy = ((double)e) / 1000.0;
                         }
-                        else if (cmdType == (byte)Command.MULTIINSTANCE_REPORT)
+                        else if (cmdType == (byte)Command.MultiInstanceReport)
                         {
                             var e = ((UInt32)message[14]) * 256 * 256 * 256 + ((UInt32)message[15]) * 256 * 256 + ((UInt32)message[16]) * 256 + ((UInt32)message[17]);
                             energy = ((double)e) / 1000.0;

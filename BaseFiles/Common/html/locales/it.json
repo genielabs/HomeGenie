@@ -36,13 +36,13 @@
     "configure_menu_groups_modules": 
          "Gruppi e Moduli",
     "configure_menu_automation": 
-         "Automazione",
+         "Programmi",
     "configure_menu_system": 
-         "Sistema",
+         "Impostazioni",
     "configure_menu_maintenance": 
          "Manutenzione",
     "configure_automation_heading": 
-         "<font style='color:gray'>Automazione</font><br>Gruppi",
+         "<font style='color:gray'>Programmi</font><br>Gruppi",
     "configure_group_newgroup": 
          "Nuovo Gruppo",
     "configure_group_entergroupname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
          "Aggiungi Gruppo",
     "configure_interfaces_heading": 
-         "Sistema e Interfacce",
+         "Impostazioni",
     "configure_interfaces_zwaveoptions": 
          "Interfaccia Z-Wave",
     "configure_interfaces_optdisable": 
@@ -334,7 +334,7 @@
     "configure_grouplist":
         "Elenco Gruppi",
     "configure_schedulerservice_title":
-        "Automazione<br />Pianificazione",
+        "Pianificazione<br />Eventi",
     "configure_scheduler_events":
         "Eventi pianificati",
     "configure_schedulerservice_bottombar_event_add":
