@@ -10,7 +10,7 @@
   	<table style="width:620px">
   	  <tr>
   		<td><canvas id='legend0' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td>Thermostats</td>
+  		<td><div id="id_title_therm"  data-locale-id="title_therm" value="toto">Thermostats</td>
   	  </tr>
   	</table>
     <canvas id='therm0' width='310' height='50' style="background:#666666;">
@@ -43,7 +43,7 @@
   	<table style="width:620px">
   	  <tr>
   		<td><canvas id='legend1' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td>Lampes et Prises</td>
+  		<td><div id="id_title_light" data-locale-id="title_light">Lights and switchs</td>
   	  </tr>
   	</table>
     <canvas id='light0' width='310' height='50' style="background:#666666;">
@@ -66,7 +66,7 @@
   	<table style="width:620px">
   	  <tr>
   		<td><canvas id='legend2' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td>Volets roulants et Variateurs</td>
+  		<td><div id="id_title_shut" data-locale-id="title_shutter">Shutters and dimmers</div></td>
   	  </tr>
   	</table>
     <canvas id='shutter0' width='310' height='50' style="background:#666666;">
@@ -84,8 +84,16 @@
     <canvas id='shutter5' width='310' height='50' style="background:#666666;">
     </canvas>
   </div>
-
   <br/>
+
+  <!-- widget settings -->
+  <div class="settings" style="display: none">
+     <span data-ui-label="id_off" data-locale-id="therm_off">Stop</span>
+     <span data-ui-label="id_nofrost" data-locale-id="therm_nofrost">No frost</span>
+     <span data-ui-label="id_eco" data-locale-id="therm_eco">Eco</span>
+     <span data-ui-label="id_heat" data-locale-id="therm_heat">Comfort</span>
+     <span data-ui-label="id_program" data-locale-id="therm_prog">Program</span>
+  </div>
 </div>
 
 <!-- widget popups and other ui elements follow -->
@@ -209,103 +217,4 @@ function drawTable(context,etat,name) {
     context.fillStyle = "black";
     context.fillText(i/4,((i/4)*12)+7,24);
 }    
-
-function drawChoice(context,type,select,height) {
-    var x=0;
-    var y=0;
-  	var c= type.length ;  
-  	var xlen = 216/c ;
-    var fgcolor ;
-    var texte ;
-
-    context.font = "8pt Arial";
-    for(var i=0 ; i < c ; i++ )
-    {
-        switch( type[i] )
-        {
-           case 'A' :
-           	texte = "Arrêt" ;
-            fgcolor = "#bcbcbc" ;
-            break ;
-           case 'H' :
-           	texte = "Hors Gel" ;
-            fgcolor = "#2387dc" ;
-            break ;
-           case 'E' :
-           	texte = "Eco" ;
-            fgcolor = "#53a840" ;
-            break ;
-           case 'C' :
-           	texte = "Confort" ;
-            fgcolor = "#da4336" ;
-            break ;
-           case 'O' :
-           	texte = "On" ;
-            fgcolor = "green" ;
-           	break ;
-           case 'S' :
-           	texte = "SunSet" ;
-            fgcolor = "#666600" ;
-           	break ;
-           case 'R' :
-           	texte = "SunRise" ;
-            fgcolor = "#999900" ;
-           	break ;
-           case 'F' :
-           	texte = "Off" ;
-            fgcolor = "#444444" ;
-           	break ;
-           case '0' :
-           	texte = "0 %" ;
-            fgcolor = "#222200" ;
-           	break ;
-           case '1' :
-           	texte = "20 %" ;
-            fgcolor = "#333300" ;
-           	break ;
-           case '2' :
-           	texte = "40 %" ;
-            fgcolor = "#666600" ;
-           	break ;
-           case '3' :
-           	texte = "60 %" ;
-            fgcolor = "#999900" ;
-           	break ;
-           case '4' :
-           	texte = "80 %" ;
-            fgcolor = "#CCCC00" ;
-           	break ;
-           case '5' :
-           	texte = "100%" ;
-            fgcolor = "yellow" ;
-           	break ;
-        }
-        context.fillStyle=fgcolor;
-        if( select == type[i] )
-       	{
-			context.beginPath();
-			context.lineWidth="3";   
-			context.strokeStyle="blue";   
-			context.rect(x,0,xlen-1,height);
-			context.fill();
-			context.stroke();       		
-       	}
-       	else
-	        context.fillRect(x,0,xlen,height);
-        if( (fgcolor=="black") || (fgcolor=="#222200") || (fgcolor=="#444444") )
-		    context.fillStyle = "white";
-        else
-    		context.fillStyle = "black";
-    	context.fillText(texte,x+6,(height/2)+5);
-    	x += xlen ;
-    }
-}    
-
-function getClickPos(element,evt) {
-	var canvas = document.getElementById(element);
-	var rect = canvas.getBoundingClientRect();
-	var posx = evt.pageX-rect.left ;
-	var posy = evt.pageY-rect.top ;
-  return {x:posx,y:posy};
-}
 </script>
