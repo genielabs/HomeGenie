@@ -1,90 +1,90 @@
-﻿{
+{
     "cal_sun":
-        "Di",
+        "Su",
     "cal_mon":
-        "Lu",
+        "Mo",
     "cal_tue":
-        "Ma",
+        "Tu",
     "cal_wed":
-        "Me",
+        "We",
     "cal_thu":
-        "Je",
+        "Th",
     "cal_fri":
-        "Ve",
+        "Fr",
     "cal_sat":
         "Sa",
     "cal_jan":
-        "Janvier",
+        "January",
     "cal_feb":
-        "Février",
+        "February",
     "cal_mar":
-        "Mars",
+        "March",
     "cal_apr":
-        "Avril",
+        "April",
     "cal_mai":
         "Mai",
     "cal_jun":
-        "Juin",
+        "June",
     "cal_jul":
-        "Juillet",
+        "July",
     "cal_aug":
-        "Août",
+        "August",
     "cal_sep":
-        "Septembre",
+        "September",
     "cal_oct":
-        "Octobre",
+        "October",
     "cal_nov":
-        "Novembre",
+        "November",
     "cal_dec":
-        "Décembre",
+        "December",
     "cal_wek":
         "Week-end",
     "cal_work":
-        "Ouvré",
+        "Work Day",
     "cal_free":
-        "Férié",
+        "Holliday",
     "cal_spe":
-        "Spécial",
+        "Special",
     "mode":
-        "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+        "&nbsp;&nbsp;&nbsp;Modalità&nbsp;&nbsp;",
     "title_therm":
-    	"Thermostats",
+        "Termostati",
     "title_light":
-    	"Lampes et Prises",
+        "Luci e Prese",
     "title_shutter":
-    	"Volets roulants et Variateurs",
+        "Avvolgibili e Variatori",
     "control_light_on":
         "&nbsp;On&nbsp;",    
     "control_light_off":
         "Off",    
     "control_light_prog":
-        "Programmé",    
+        "Programmato",    
     "therm_setpoint":
-        "Température",
+        "Temperatura",
     "therm_setmode":
-        "Mode",
+        "Modalità",
     "therm_off":
-        "Arrêt",
+        "Spento",
     "therm_nofrost":
-        "Hors Gel",
+        "Antigelo",
     "therm_eco":
         "Eco",
     "therm_heat":
-        "Confort",
+        "Comfort",
     "therm_prog":
-        "Programmé",
+        "Pianificato",
     "Off":
-        "Arrêt",
+        "Spento",
     "NoFrost":
-        "Hors Gel",
+        "Antigelo",
     "Eco":
         "Eco",
     "Heat":
-        "Confort",
+        "Comfort",
     "Program":
-    	"Programmé",
+        "Pianificato",
     "control_module_off":
-        "Annuler",
+        "Annulla",
     "control_module_on":
-        "Valider"
+        "Imposta"
 }

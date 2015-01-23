@@ -63,25 +63,25 @@
 	          hourC=dateTime.getHours();
 	          minC=dateTime.getMinutes();
 	          var moduleCAL = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleCalendrier);
-	          if((moduleCAL != null) && (moduleCAL.Name == 'Calendrier'))
+	          if(moduleCAL != null)
 	          {
 		     	  var tabMois=HG.WebApp.Utility.GetModulePropertyByName(moduleCAL, 'ConfigureOptions.Calend.Year.'+offYear+'.'+numMonth );
 		     	  typeDay = tabMois.Value.charAt(numDay-1);
 		          var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
-	          	  if((moduleTH != null) && (moduleTH.Name == 'Tables horaires'))
+	          	  if(moduleTH != null)
 		          {
 					  var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.W');
 					  var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      drawTable(controlpopup.find('[id=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+tabHOR.Value,(typeDay=='W'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+tabHOR.Value,(typeDay=='W'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.O');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      drawTable(controlpopup.find('[id=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+tabHOR.Value,(typeDay=='O'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+tabHOR.Value,(typeDay=='O'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.F');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      drawTable(controlpopup.find('[id=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+tabHOR.Value,(typeDay=='F'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+tabHOR.Value,(typeDay=='F'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.S');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      drawTable(controlpopup.find('[id=tableS]')[0].getContext('2d'),tabletherm.Value,'Spécial - Table horaire '+tabHOR.Value,(typeDay=='S'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,'Spécial - Table horaire '+tabHOR.Value,(typeDay=='S'),hourC,minC);
 			      }
 		      }
 	          $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
@@ -111,10 +111,10 @@
 	        var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.Mode');
 	        if (thermostatMode != null)
 	        {
-	          controlpopup.find('[id=tableW]').hide();
-	          controlpopup.find('[id=tableO]').hide();
-	          controlpopup.find('[id=tableF]').hide();
-	          controlpopup.find('[id=tableS]').hide();
+	          controlpopup.find('[data-ui-field=tableW]').hide();
+	          controlpopup.find('[data-ui-field=tableO]').hide();
+	          controlpopup.find('[data-ui-field=tableF]').hide();
+	          controlpopup.find('[data-ui-field=tableS]').hide();
 	          controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
 	          controlpopup.find('[data-ui-field=mode_nofrost]').removeClass('ui-btn-active');
 	          controlpopup.find('[data-ui-field=mode_eco]').removeClass('ui-btn-active');
@@ -141,10 +141,10 @@
 	          else if (thermostatMode.Value == 'Program') 
 	          {
 	            controlpopup.find('[data-ui-field=mode_prog]').addClass('ui-btn-active');
-	            controlpopup.find('[id=tableW]').show();
-	            controlpopup.find('[id=tableO]').show();
-	            controlpopup.find('[id=tableF]').show();
-	            controlpopup.find('[id=tableS]').show();
+	            controlpopup.find('[data-ui-field=tableW]').show();
+	            controlpopup.find('[data-ui-field=tableO]').show();
+	            controlpopup.find('[data-ui-field=tableF]').show();
+	            controlpopup.find('[data-ui-field=tableS]').show();
 	          }
 	          else if (thermostatMode.Value == 'Off')
 	          {
@@ -191,10 +191,10 @@
 	        controlpopup.find('[data-ui-field=heat_setpoint]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=eco_setpoint]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=nofrost_setpoint]').removeClass('ui-btn-active');
-	        controlpopup.find('[id=tableW]').hide();
-	        controlpopup.find('[id=tableO]').hide();
-	        controlpopup.find('[id=tableF]').hide();
-	        controlpopup.find('[id=tableS]').hide();
+	        controlpopup.find('[data-ui-field=tableW]').hide();
+	        controlpopup.find('[data-ui-field=tableO]').hide();
+	        controlpopup.find('[data-ui-field=tableF]').hide();
+	        controlpopup.find('[data-ui-field=tableS]').hide();
 	        HG.Control.Modules.ServiceCall('Thermostat.ModeSet', module.Domain, module.Address, 'Off', function (data) { });
 	  });
 	  controlpopup.find('[data-ui-field=mode_nofrost]').on('click', function(){
@@ -203,10 +203,10 @@
 	        controlpopup.find('[data-ui-field=mode_eco]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_prog]').removeClass('ui-btn-active');
-	        controlpopup.find('[id=tableW]').hide();
-	        controlpopup.find('[id=tableO]').hide();
-	        controlpopup.find('[id=tableF]').hide();
-	        controlpopup.find('[id=tableS]').hide();
+	        controlpopup.find('[data-ui-field=tableW]').hide();
+	        controlpopup.find('[data-ui-field=tableO]').hide();
+	        controlpopup.find('[data-ui-field=tableF]').hide();
+	        controlpopup.find('[data-ui-field=tableS]').hide();
 	        _this.EditNoFrostSetPoint(controlpopup, module);
 	        HG.Control.Modules.ServiceCall('Thermostat.ModeSet', module.Domain, module.Address, 'NoFrost', function (data) { });
 	  });
@@ -216,10 +216,10 @@
 	        controlpopup.find('[data-ui-field=mode_eco]').addClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_prog]').removeClass('ui-btn-active');
-	        controlpopup.find('[id=tableW]').hide();
-	        controlpopup.find('[id=tableO]').hide();
-	        controlpopup.find('[id=tableF]').hide();
-	        controlpopup.find('[id=tableS]').hide();
+	        controlpopup.find('[data-ui-field=tableW]').hide();
+	        controlpopup.find('[data-ui-field=tableO]').hide();
+	        controlpopup.find('[data-ui-field=tableF]').hide();
+	        controlpopup.find('[data-ui-field=tableS]').hide();
 	        _this.EditEcoSetPoint(controlpopup, module);
 	        HG.Control.Modules.ServiceCall('Thermostat.ModeSet', module.Domain, module.Address, 'Eco', function (data) { });
 	  });
@@ -229,10 +229,10 @@
 	        controlpopup.find('[data-ui-field=mode_eco]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_prog]').removeClass('ui-btn-active');
-	        controlpopup.find('[id=tableW]').hide();
-	        controlpopup.find('[id=tableO]').hide();
-	        controlpopup.find('[id=tableF]').hide();
-	        controlpopup.find('[id=tableS]').hide();
+	        controlpopup.find('[data-ui-field=tableW]').hide();
+	        controlpopup.find('[data-ui-field=tableO]').hide();
+	        controlpopup.find('[data-ui-field=tableF]').hide();
+	        controlpopup.find('[data-ui-field=tableS]').hide();
 	        _this.EditHeatSetPoint(controlpopup, module);
 	        HG.Control.Modules.ServiceCall('Thermostat.ModeSet', module.Domain, module.Address, 'Comfort', function (data) { });
 	  });
@@ -245,14 +245,14 @@
 	        controlpopup.find('[data-ui-field=heat_setpoint]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=eco_setpoint]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=nofrost_setpoint]').removeClass('ui-btn-active');
-	        controlpopup.find('[id=tableW]').show();
-	        controlpopup.find('[id=tableO]').show();
-	        controlpopup.find('[id=tableF]').show();
-	        controlpopup.find('[id=tableS]').show();
+	        controlpopup.find('[data-ui-field=tableW]').show();
+	        controlpopup.find('[data-ui-field=tableO]').show();
+	        controlpopup.find('[data-ui-field=tableF]').show();
+	        controlpopup.find('[data-ui-field=tableS]').show();
 	        HG.Control.Modules.ServiceCall('Thermostat.ModeSet', module.Domain, module.Address, 'Program', function (data) { });
 	  });
 	    
-	  controlpopup.find('[id=tableW]').on("click",function(event){
+	  controlpopup.find('[data-ui-field=tableW]').on("click",function(event){
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
@@ -264,11 +264,11 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				drawTable(controlpopup.find('[id=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+newtabHOR,(typeDay=='W'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+newtabHOR,(typeDay=='W'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/W',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
-		controlpopup.find('[id=tableO]').on("click",function(event){
+		controlpopup.find('[data-ui-field=tableO]').on("click",function(event){
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
@@ -280,11 +280,11 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				drawTable(controlpopup.find('[id=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+newtabHOR,(typeDay=='O'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+newtabHOR,(typeDay=='O'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/O',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
-		controlpopup.find('[id=tableF]').on("click",function(event){
+		controlpopup.find('[data-ui-field=tableF]').on("click",function(event){
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
@@ -296,11 +296,11 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				drawTable(controlpopup.find('[id=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+newtabHOR,(typeDay=='F'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+newtabHOR,(typeDay=='F'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/F',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
-		controlpopup.find('[id=tableS]').on("click",function(event){
+		controlpopup.find('[data-ui-field=tableS]').on("click",function(event){
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
@@ -312,7 +312,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				drawTable(controlpopup.find('[id=tableS]')[0].getContext('2d'),tabletherm.Value,'Special - Table horaire '+newtabHOR,(typeDay=='S'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,'Special - Table horaire '+newtabHOR,(typeDay=='S'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/S',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -414,9 +414,9 @@
     var displayState='---';
     var operatingState = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.OperatingState');
     if (operatingState != null) displayState = operatingState.Value;
-    widget.find('[id=img_heat]').hide();
-    widget.find('[id=img_eco]').hide();
-    widget.find('[id=img_nofrost]').hide();
+    widget.find('[data-ui-field=img_heat]').hide();
+    widget.find('[data-ui-field=img_eco]').hide();
+    widget.find('[data-ui-field=img_nofrost]').hide();
     if( displayState.charAt(0) == '(' )
     {
         var displayIcon='';
@@ -432,18 +432,18 @@
         }
     	if( displayState.charAt(1) == 'C' )
     	{
- 		   widget.find('[id=img_heat]').attr('src',displayIcon);
-     	   widget.find('[id=img_heat]').show();
+ 		   widget.find('[data-ui-field=img_heat]').attr('src',displayIcon);
+     	   widget.find('[data-ui-field=img_heat]').show();
 		}
     	if( displayState.charAt(1) == 'E' )
     	{
-		   widget.find('[id=img_eco]').attr('src',displayIcon);
-		   widget.find('[id=img_eco]').show();
+		   widget.find('[data-ui-field=img_eco]').attr('src',displayIcon);
+		   widget.find('[data-ui-field=img_eco]').show();
 		}
     	if( displayState.charAt(1) == 'H' )
     	{
-		   widget.find('[id=img_nofrost]').attr('src',displayIcon);
-    	   widget.find('[id=img_nofrost]').show();
+		   widget.find('[data-ui-field=img_nofrost]').attr('src',displayIcon);
+    	   widget.find('[data-ui-field=img_nofrost]').show();
 		}
    	}
    	else
@@ -566,6 +566,94 @@
      	if( (posY > 30) && (posY < 45) )
      		this.index=2;
      }
-  }
+  },
+  
+  drawTable: function (context,etat,name,select,heure,minute) {
+    var x=10;
+    var y=28;
+    var nb=0;
+    var fgcolor ;
+
+    context.clearRect(0,0,310,50) ;
+    if( select == true )
+    {
+        context.beginPath();
+        context.lineWidth="2";   
+        context.strokeStyle="white";   
+        context.rect(0,0,309,49);
+        context.stroke();               
+    }
+    context.font = "8pt Arial";
+    context.fillStyle = "black";
+    context.fillText(name,8,10);
+    context.font = "6pt Arial";
+    for(var i=0 , c = etat.length ; i < 96 ; i++ )
+    {
+        if( i < c ) {
+            switch( etat[i] )
+            {
+               case 'A' :
+                fgcolor = "#bcbcbc" ;
+                break ;
+               case 'H' :
+                fgcolor = "#2387dc" ;
+                break ;
+               case 'E' :
+                fgcolor = "#53a840" ;
+                break ;
+               case 'C' :
+                fgcolor = "#da4336" ;
+                break ;
+               default :
+                fgcolor = "black" ;
+                break ;
+            }
+        }
+        else
+            fgcolor = "black" ;
+        nb++ ;
+        if( (i == 95) || (etat[i+1] != etat[i])) 
+        {
+            context.fillStyle=fgcolor;
+            context.fillRect(x,y,nb*3,16);
+            x += nb*3 ;
+            nb = 0 ;
+        }
+        if( i%4 == 0 )
+        {
+            context.fillStyle = "black";
+            context.fillText(i/4,((i/4)*12)+7,24);
+        }
+    }
+    context.fillStyle = "black";
+    context.fillText(i/4,((i/4)*12)+7,24);
+    if( select == true )
+    {
+        var posq=(heure*4)+Math.floor(minute/15);
+        context.beginPath();
+        context.lineWidth="1";
+        context.strokeStyle="white";   
+        context.rect(10+((posq-1)*3),y-2,9,20);
+        context.stroke();               
+    }
+    context.beginPath();
+    context.strokeStyle="#343434";   
+    context.lineWidth="2";
+    
+    context.moveTo(326,11);
+    context.lineTo(326,19);
+    context.moveTo(322,15);
+    context.lineTo(330,15);
+    
+    context.moveTo(322,35);
+    context.lineTo(330,35);
+    context.stroke();               
+    context.strokeStyle="#343434";   
+    context.lineWidth="1";
+    context.rect(318,5,16,40);
+    context.moveTo(318,25);
+    context.lineTo(334,25);
+    context.stroke();               
+  }   
 
 }]
