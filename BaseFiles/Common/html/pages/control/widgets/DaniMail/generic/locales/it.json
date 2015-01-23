@@ -1,0 +1,44 @@
+{
+    "mode":
+        "&nbsp;&nbsp;&nbsp;Modalità&nbsp;&nbsp;",
+    "title_therm":
+        "Termostati",
+    "title_light":
+        "Luci e Prese",
+    "title_shutter":
+        "Avvolgibili e Variatori",
+    "control_light_on":
+        "&nbsp;On&nbsp;",    
+    "control_light_off":
+        "Off",    
+    "control_light_prog":
+        "Programmato",    
+    "therm_setpoint":
+        "Temperatura",
+    "therm_setmode":
+        "Modalità",
+    "therm_off":
+        "Spento",
+    "therm_nofrost":
+        "Antigelo",
+    "therm_eco":
+        "Eco",
+    "therm_heat":
+        "Comfort",
+    "therm_prog":
+        "Pianificato",
+    "Off":
+        "Spento",
+    "NoFrost":
+        "Antigelo",
+    "Eco":
+        "Eco",
+    "Heat":
+        "Comfort",
+    "Program":
+        "Pianificato",
+    "control_module_off":
+        "Annulla",
+    "control_module_on":
+        "Imposta"
+}

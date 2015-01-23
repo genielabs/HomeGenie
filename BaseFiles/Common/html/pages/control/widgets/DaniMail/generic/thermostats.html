@@ -15,21 +15,21 @@
 
   <!-- HEAT -->
   <div data-ui-field="heat_field" style="margin-bottom:8px;" align="center">
-    <img id="img_heat" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
+    <img data-ui-field="img_heat" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
     <img src="pages/control/widgets/homegenie/generic/images/therm_heat.png" style="width:32px;height:32px;vertical-align:middle">Confort
     <b data-ui-field="set_value">20.0</b>
   </div>
 
   <!-- ECO -->
   <div data-ui-field="eco_field" style="margin-bottom:8px" align="center">
-    <img id="img_eco" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
+    <img data-ui-field="img_eco" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
     <img src="pages/control/widgets/DaniMail/generic/images/therm_eco.png" style="width:32px;height:32px;vertical-align:middle">Eco
     <b data-ui-field="ecoset_value">16.0</b>
   </div>
 
   <!-- NOFROST -->
   <div data-ui-field="nofrost_field" style="margin-bottom:8px" align="center">
-    <img id="img_nofrost" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
+    <img data-ui-field="img_nofrost" src="pages/control/widgets/DaniMail/generic/images/therm_off.png" style="width:32px;height:32px;vertical-align:middle">
     <img src="pages/control/widgets/DaniMail/generic/images/therm_nofrost.png" style="width:32px;height:32px;vertical-align:middle">Hors Gel
     <b data-ui-field="nofrostset_value">5.0</b>
   </div>
@@ -114,109 +114,19 @@
         <a data-ui-field="mode_prog" data-locale-id="therm_prog" data-role="button" href="">Programmé</a>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-          <canvas id='tableW' width='340' height='50' style="background:#666666;">
+          <canvas data-ui-field='tableW' width='340' height='50' style="background:#666666;">
           <br/>
           </canvas>
-          <canvas id='tableO' width='340' height='50' style="background:#666666;">
+          <canvas data-ui-field='tableO' width='340' height='50' style="background:#666666;">
           <br/>
           </canvas>
-          <canvas id='tableF' width='340' height='50' style="background:#666666;">
+          <canvas data-ui-field='tableF' width='340' height='50' style="background:#666666;">
           <br/>
           </canvas>
-          <canvas id='tableS' width='340' height='50' style="background:#666666;">
+          <canvas data-ui-field='tableS' width='340' height='50' style="background:#666666;">
           </canvas>
       </div>
     </div>
   </div>
 </div>
-<script>   
-function drawTable(context,etat,name,select,heure,minute) {
-    var x=10;
-    var y=28;
-    var nb=0;
-    var fgcolor ;
-
-	context.clearRect(0,0,310,50) ;
-	if( select == true )
-	{
-		context.beginPath();
-		context.lineWidth="2";   
-		context.strokeStyle="white";   
-		context.rect(0,0,309,49);
-		context.stroke();       		
-	}
-    context.font = "8pt Arial";
-    context.fillStyle = "black";
-    context.fillText(name,8,10);
-    context.font = "6pt Arial";
-    for(var i=0 , c = etat.length ; i < 96 ; i++ )
-    {
-    	if( i < c ) {
-	        switch( etat[i] )
-	        {
-	           case 'A' :
-	            fgcolor = "#bcbcbc" ;
-	            break ;
-	           case 'H' :
-	            fgcolor = "#2387dc" ;
-	            break ;
-	           case 'E' :
-	            fgcolor = "#53a840" ;
-	            break ;
-	           case 'C' :
-	            fgcolor = "#da4336" ;
-	            break ;
-	           default :
-	            fgcolor = "black" ;
-	            break ;
-	        }
-	    }
-	    else
-            fgcolor = "black" ;
-        nb++ ;
-        if( (i == 95) || (etat[i+1] != etat[i])) 
-        {
-            context.fillStyle=fgcolor;
-            context.fillRect(x,y,nb*3,16);
-            x += nb*3 ;
-            nb = 0 ;
-        }
-        if( i%4 == 0 )
-        {
-            context.fillStyle = "black";
-            context.fillText(i/4,((i/4)*12)+7,24);
-        }
-    }
-    context.fillStyle = "black";
-    context.fillText(i/4,((i/4)*12)+7,24);
-	if( select == true )
-	{
-		var posq=(heure*4)+Math.floor(minute/15);
-		context.beginPath();
-		context.lineWidth="1";
-		context.strokeStyle="white";   
-		context.rect(10+((posq-1)*3),y-2,9,20);
-		context.stroke();       		
-	}
-	context.beginPath();
-	context.strokeStyle="#343434";   
-	context.lineWidth="2";
-	
-    context.moveTo(326,11);
-    context.lineTo(326,19);
-    context.moveTo(322,15);
-    context.lineTo(330,15);
-    
-    context.moveTo(322,35);
-    context.lineTo(330,35);
-	context.stroke();       		
-	context.strokeStyle="#343434";   
-	context.lineWidth="1";
-	context.rect(318,5,16,40);
-	context.moveTo(318,25);
-	context.lineTo(334,25);
-	context.stroke();       		
-}    
-</script>
-
 
