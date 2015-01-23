@@ -16,9 +16,9 @@
     setTimeout(function () {
         for(var i = 0; i < _this.ThermLocalUI.length; i++)
           _this.ThermLocalUI[i] = widget.find('[data-ui-label=id_'+_this.ThermLocalUI[i]+']').html();
-        _this.drawChoice(widget, widget.find('[data-ui-field=legend0]')[0].getContext('2d'),"AHEC",' ',18);
-		_this.drawChoice(widget, widget.find('[data-ui-field=legend1]')[0].getContext('2d'),"FRSO",' ',18);
-		_this.drawChoice(widget, widget.find('[data-ui-field=legend2]')[0].getContext('2d'),"012345",' ',18);
+        _this.drawChoice(widget.find('[data-ui-field=legend0]')[0].getContext('2d'),"AHEC",' ',18);
+		_this.drawChoice(widget.find('[data-ui-field=legend1]')[0].getContext('2d'),"FRSO",' ',18);
+		_this.drawChoice(widget.find('[data-ui-field=legend2]')[0].getContext('2d'),"012345",' ',18);
     },250);
    this.Initialized = true;
   },
@@ -72,7 +72,7 @@
 	   	controlpopup.find('[data-ui-field=choice]').on("click",function(event){
 			var rect = $(this).offset();
 			_this.analyseChoice(event.pageX-rect.left);
-			_this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			_this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    });
 	    
 	    // Validation tranche Horaire events
@@ -122,7 +122,7 @@
 	        	HG.WebApp.Utility.SetModulePropertyByName(module,_this.etat.Name,newStr);
 		    	HG.WebApp.GroupModules.UpdateModule(module);
 				HG.Control.Modules.ServiceCall('Table.Set',module.Domain,module.Address,_this.etat.Name,function (data) { });
-	  	    	_this.drawChoice(widget,_this.context,newStr,_this.nTab);
+	  	    	_this.drawChoice(_this.context,newStr,_this.nTab);
 		    }
 	    	$(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('close');
 	    });
@@ -141,7 +141,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -154,7 +154,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -167,7 +167,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -180,7 +180,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -193,7 +193,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -206,7 +206,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -219,7 +219,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"6");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -232,7 +232,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"7");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -245,7 +245,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"8");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -258,7 +258,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"9");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -271,7 +271,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -284,7 +284,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -297,7 +297,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -310,7 +310,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -323,7 +323,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -336,7 +336,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLight+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -349,7 +349,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -362,7 +362,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -375,7 +375,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -388,7 +388,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -401,7 +401,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -414,7 +414,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfShut+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(widget,controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -614,7 +614,7 @@ analyseClick: function(container,etat,rect,event) {
     context.fillText(i/4,((i/4)*12)+7,24);
   },
    
-  drawChoice: function(widget,context,type,select,height) {
+  drawChoice: function(context,type,select,height) {
     var x=0;
     var y=0;
   	var c= type.length ;  

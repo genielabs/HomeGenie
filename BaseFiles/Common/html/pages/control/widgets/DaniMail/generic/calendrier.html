@@ -11,130 +11,32 @@
     </canvas>
   </div>
   <br/>
+  <!-- widget settings -->
+  <div class="settings" style="display: none">
+     <span data-ui-label="id_sun" data-locale-id="cal_sun">Su</span>
+     <span data-ui-label="id_mon" data-locale-id="cal_mon">Mo</span>
+     <span data-ui-label="id_tue" data-locale-id="cal_tue">Tu</span>
+     <span data-ui-label="id_wed" data-locale-id="cal_wed">We</span>
+     <span data-ui-label="id_thu" data-locale-id="cal_thu">Th</span>
+     <span data-ui-label="id_fri" data-locale-id="cal_fri">Fr</span>
+     <span data-ui-label="id_sat" data-locale-id="cal_sat">Sa</span>
+
+     <span data-ui-label="id_jan" data-locale-id="cal_jan">January</span>
+     <span data-ui-label="id_feb" data-locale-id="cal_feb">February</span>
+     <span data-ui-label="id_mar" data-locale-id="cal_mar">March</span>
+     <span data-ui-label="id_apr" data-locale-id="cal_apr">April</span>
+     <span data-ui-label="id_mai" data-locale-id="cal_mai">Mai</span>
+     <span data-ui-label="id_jun" data-locale-id="cal_jun">June</span>
+     <span data-ui-label="id_jul" data-locale-id="cal_jul">July</span>
+     <span data-ui-label="id_aug" data-locale-id="cal_aug">August</span>
+     <span data-ui-label="id_sep" data-locale-id="cal_sep">September</span>
+     <span data-ui-label="id_oct" data-locale-id="cal_oct">October</span>
+     <span data-ui-label="id_nov" data-locale-id="cal_nov">November</span>
+     <span data-ui-label="id_dec" data-locale-id="cal_dec">December</span>
+
+     <span data-ui-label="id_wek" data-locale-id="cal_we">Week-end</span>
+     <span data-ui-label="id_work" data-locale-id="cal_work">Work Day</span>
+     <span data-ui-label="id_free" data-locale-id="cal_free">Holiday</span>
+     <span data-ui-label="id_spe" data-locale-id="cal_spe">Special</span>
+  </div>
 </div>
-
-<!-- widget popups and other ui elements follow -->
-<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-</div>
-
-<script> 
-var tabJour = ["Di","Lu","Ma","Me","Je","Ve","Sa"];
-var monthName = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"] ;
-var tabLegend = ["Week-end","Ouvré","Férié","Spécial"];
-
-function drawMois( context, offsetDay, tabMois, numMonth, year )
-{
-    var x=6 ;
-    var y=28 ;
-    var fgcolor ;
-
-    context.font = "14pt Arial";
-
-    context.fillStyle = "grey";
-    context.fillRect(6,2,34,24);
-  	context.fillStyle = "black";
-    context.fillText( '<', 14, 20 );
-
-    context.fillStyle = "grey";
-    context.fillRect(222,2,34,24);
-  	context.fillStyle = "black";
-    context.fillText( '>', 236, 20 );
-
-    context.fillStyle = "grey";
-    context.fillRect(42,2,178,24);
-    context.fillStyle = "black";
-    context.fillText(monthName[numMonth]+" "+year,46,20);
-
-    context.font = "12pt Arial";
-    for( var i=0 ; i<7 ; i++ )
-    {
-	    context.fillStyle = "grey";
-        context.fillRect(x,y,34,32);
-    	context.fillStyle = "black";
-        context.fillText(tabJour[i],x+9,y+20);
-        x += 36 ;
-    }
-	x = 6 ;
-	y += 34 ;
-    context.font = "10pt Arial";
-    for(var i=0, j=0, c = tabMois.length ; i < 42 ; i++ )
-    {
-    	if( i < offsetDay )
-           	fgcolor = "grey";
-        else
-        {
-        	if( j < c )
-        	{
-		        switch( tabMois[j] )
-		        {
-		           case 'W' :
-		            fgcolor = "#bcbcbc" ;
-		            break ;
-		           case 'O' :
-		            fgcolor = "#2387dc" ;
-		            break ;
-		           case 'F' :
-		            fgcolor = "#53a840" ;
-		            break ;
-		           case 'S' :
-		            fgcolor = "#da4336" ;
-		            break ;
-		           default :
-		           	fgcolor = 'grey' ;
-		           	break ;
-		        }
-		     }
-		     else
-	           	fgcolor = "grey";
-	        j++ ;
-        }
-        if( (i != 0) && (i%7 === 0) )
-        {
-            x = 6 ;
-            y += 30 ;
-        }
-        context.fillStyle=fgcolor;
-        context.fillRect(x,y,34,28);
-        if( (j != 0) && (j <= c ) )
-        {
-    		context.fillStyle = "black";
-        	context.fillText(j,x+((j<10)?14:10),y+18);
-       	}
-        x += 36 ;
-    }
-}    
-
-function drawLegend(context) {
-    var x=6;
-    var y=244;
-  	var xlen=252/4;
-  	var type="WOFS";
-    var fgcolor;
-
-    context.font = "8pt Arial";
-    for(var i=0 ; i < 4 ; i++ )
-    {
-        switch( type[i] )
-        {
-           case 'W' :
-            fgcolor = "#bcbcbc" ;
-            break ;
-           case 'O' :
-            fgcolor = "#2387dc" ;
-            break ;
-           case 'F' :
-            fgcolor = "#53a840" ;
-            break ;
-           case 'S' :
-            fgcolor = "#da4336" ;
-            break ;
-        }
-   		context.fillStyle=fgcolor;
-        context.fillRect(x,y,xlen-2,30);
-   		context.fillStyle="black";
-    	context.fillText(tabLegend[i],x+6,y+20);
-    	x+=xlen;
-	}
-}
-</script>
