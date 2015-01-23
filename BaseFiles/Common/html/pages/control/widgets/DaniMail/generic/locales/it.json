@@ -1,4 +1,50 @@
 {
+    "cal_sun":
+        "Su",
+    "cal_mon":
+        "Mo",
+    "cal_tue":
+        "Tu",
+    "cal_wed":
+        "We",
+    "cal_thu":
+        "Th",
+    "cal_fri":
+        "Fr",
+    "cal_sat":
+        "Sa",
+    "cal_jan":
+        "January",
+    "cal_feb":
+        "February",
+    "cal_mar":
+        "March",
+    "cal_apr":
+        "April",
+    "cal_mai":
+        "Mai",
+    "cal_jun":
+        "June",
+    "cal_jul":
+        "July",
+    "cal_aug":
+        "August",
+    "cal_sep":
+        "September",
+    "cal_oct":
+        "October",
+    "cal_nov":
+        "November",
+    "cal_dec":
+        "December",
+    "cal_wek":
+        "Week-end",
+    "cal_work":
+        "Work Day",
+    "cal_free":
+        "Holliday",
+    "cal_spe":
+        "Special",
     "mode":
         "&nbsp;&nbsp;&nbsp;Modalità&nbsp;&nbsp;",
     "title_therm":
