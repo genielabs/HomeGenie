@@ -1,18 +1,22 @@
-<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c">
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c" style="min-height:355px">
 
   <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
     <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="images/scheduler.png"/>
     <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
     <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+    <div data-role="navbar" style="position:absolute;width:480px;top:4px;margin-left:150px">
+        <ul>
+            <li><a data-ui-field="btn_page_thermostats" class="ui-btn-active" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="title_therm">Thermostats</a></li>
+            <li><a data-ui-field="btn_page_lights" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="title_light">Lights and switches</a></li>
+            <li><a data-ui-field="btn_page_shutters" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="title_shutter">Shutters and dimmers</a></li>
+        </ul>
+    </div>
   </div>
 
-  <div style="margin:10px">
-  	<table style="width:620px">
-  	  <tr>
-  		<td><canvas data-ui-field='legend0' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td><div data-ui-field="id_title_therm"  data-locale-id="title_therm" value="toto">Thermostats</td>
-  	  </tr>
-  	</table>
+  <div data-ui-field="div_page_thermostats" style="margin:10px">
+    <canvas data-ui-field='legend0' width='310' height='18' style="background:#666666;">
+    </canvas>
+    <br/>
     <canvas data-ui-field='therm0' width='310' height='50' style="background:#666666;">
     </canvas>
     <canvas data-ui-field='therm1' width='310' height='50' style="background:#666666;">
@@ -39,13 +43,10 @@
     </canvas>
   </div>
 
-  <div style="margin:10px">
-  	<table style="width:620px">
-  	  <tr>
-  		<td><canvas data-ui-field='legend1' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td><div data-ui-field="id_title_light" data-locale-id="title_light">Lights and switchs</td>
-  	  </tr>
-  	</table>
+  <div data-ui-field="div_page_lights" style="margin:10px;display:none">
+    <canvas data-ui-field='legend1' width='310' height='18' style="background:#666666;">
+    </canvas>
+    <br/>
     <canvas data-ui-field='light0' width='310' height='50' style="background:#666666;">
     </canvas>
     <canvas data-ui-field='light1' width='310' height='50' style="background:#666666;">
@@ -62,13 +63,10 @@
     </canvas>
   </div>
 
-  <div style="margin:10px">
-  	<table style="width:620px">
-  	  <tr>
-  		<td><canvas data-ui-field='legend2' width='216' height='18' style="background:#666666;"></canvas></td>
-  		<td><div data-ui-field="id_title_shut" data-locale-id="title_shutter">Shutters and dimmers</div></td>
-  	  </tr>
-  	</table>
+  <div data-ui-field="div_page_shutters" style="margin:10px;display:none">
+    <canvas data-ui-field='legend2' width='310' height='18' style="background:#666666;">
+    </canvas>
+    <br/>
     <canvas data-ui-field='shutter0' width='310' height='50' style="background:#666666;">
     </canvas>
     <canvas data-ui-field='shutter1' width='310' height='50' style="background:#666666;">
@@ -84,7 +82,6 @@
     <canvas data-ui-field='shutter5' width='310' height='50' style="background:#666666;">
     </canvas>
   </div>
-  <br/>
 
   <!-- widget settings -->
   <div class="settings" style="display: none">

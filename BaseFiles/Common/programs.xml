@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:21.62515Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:32.19871Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:22.13276Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:32.703977Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:22.628173Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:33.207731Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -503,7 +503,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:23.125601Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:33.705587Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1246,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:23.628459Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:34.206179Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1301,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:24.125497Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:34.705164Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1596,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:24.632356Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:35.205765Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1675,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:25.128475Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:35.706055Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1745,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:25.632051Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:36.211089Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2019,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:26.133401Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:36.707779Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2385,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:27.132749Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:37.711985Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2457,7 +2457,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:27.633667Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:38.207664Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2611,7 +2611,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:28.130613Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:38.709609Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2875,7 +2875,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:28.635083Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:39.215511Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4076,19 +4076,19 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
    
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>501</Address>
     <Name>jkUtils - Solar Altitude</Name>
     <Description>Calculates schedulers for sunrise/sunset with civil, nautical, astronomical timings. 
   Please set your local longitude/latitude in program options.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2014-05-09T16:00:57.3137647Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:00:57.3197403Z</TriggerTime>
+    <ActivationTime>2015-01-24T15:29:22.324048Z</ActivationTime>
+    <TriggerTime>2015-01-24T15:29:22.429399Z</TriggerTime>
     <Type>Javascript</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -8772,10 +8772,10 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>510</Address>
     <Name>Calendar</Name>
-    <Description />
+    <Description>Calendar widget for use with Time Tables.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-21T19:59:26.997668Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:29.64214Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:40.217001Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8844,10 +8844,10 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>511</Address>
     <Name>Time tables</Name>
-    <Description />
+    <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-21T19:59:29.139045Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:30.141354Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:40.719504Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -9278,12 +9278,12 @@ while (Program.IsEnabled)
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>512</Address>
-    <Name>Thermostat Scheduler</Name>
-    <Description>Use any temperature sensor and relay switch module to implement Thermostat(s) virtual device.
-Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Name>Enhanced Thermostats</Name>
+    <Description>Time tables based programmable thermostats that can bind to any user specified temperature sensor and switch module.
+</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-21T19:59:29.831941Z</ActivationTime>
-    <TriggerTime>2015-01-21T21:30:30.645544Z</TriggerTime>
+    <TriggerTime>2015-01-24T15:24:41.225165Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -9291,340 +9291,225 @@ Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;addr
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-Program.Setup(()=&gt;{
-    Program.AddInputField("LightsNumber", "4", "Number of virtual Lights (Max.8)");
-    int lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
-    if( lightsCount &gt; 8 )
-        lightsCount = 8;
-    Program.Notify("Eclairage","Nb Modules virtuel = "+lightsCount.ToString());
-    Program.AddVirtualModules("HomeAutomation.Eclairage", "Light", "DaniMail/generic/eclairages",1,lightsCount);
-    for(int x = 0; x &lt; lightsCount; x++)
-    {
-      var module = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
-      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("LightModule1").Value.Length == 0)) )
-      {
-        // Paramètres statiques
-        module.Parameter("LightModule1").Value = "";
-        module.Parameter("LightModule2").Value = "";
-        module.Parameter("LightModule3").Value = "";
-        module.Parameter("LightModule4").Value = "";
-        module.Parameter("Table.W").Value = "0";
-        module.Parameter("Table.O").Value = "1";
-        module.Parameter("Table.F").Value = "2";
-        module.Parameter("Table.S").Value = "3";
-        // Pamètres dynamiques
-        module.Parameter("Light.OperatingState").Value = "Off";
-        module.Parameter("Light.Mode").Value = "Off";
-      }
-    }
+    <ScriptCondition>Program.Setup(()=&gt;{
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.W", "Time table to use for weekend (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.O", "Time table to use for week days (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.F", "Time table to use for holidays (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.S", "Time table to use for special days (0-5)");
+  	Program.AddFeature("Light,Switch", "TimeTable.Enable", "Enable time table scheduling");
 });
               
 return true;
 </ScriptCondition>
     <ScriptSource>// CSharp Automation Program Plugin
 
+var jkSolarAltitude = Program.WithName("jkUtils - Solar Altitude");
+string popupTitle = "Time Tables Scheduler";
 char typeDay;
 string currentTable="";
 string newTable="";
-string szState="";
 int index,currentMonth=-1;
 DateTime oldSunRise=DateTime.Now;
 DateTime sunRise;
 DateTime oldSunSet=DateTime.Now;
 DateTime sunSet;
-int lightsCount=0;
 char typeAction=' ';
 int nTempo=60;
-bool night;
+bool isDark;
 
 string tabMon="";
 string tabScene="";
 
 var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
-  string domainAddress="";
-  string domain="";
-  string address="";
 
   try
   {
-    sunRise = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Morning.Sunrise.Start").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
-    sunSet = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Evening.Sunset.End").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+    sunRise = DateTime.ParseExact(jkSolarAltitude.Parameter("jkUtils.SolarAltitude.Morning.Sunrise.Start").Value, "H:mm", CultureInfo.InvariantCulture);
+    sunSet = DateTime.ParseExact(jkSolarAltitude.Parameter("jkUtils.SolarAltitude.Evening.Sunset.End").Value, "H:mm", CultureInfo.InvariantCulture);
     if((sunRise != oldSunRise) || (sunSet != oldSunSet))
     {
-      Program.Notify("Eclairage"," SunRise. = "+sunRise.ToString("dd/MM HH:mm:ss")+" SunSet.. = "+sunSet.ToString("dd/MM HH:mm:ss"));
+      Program.Notify(popupTitle, " SunRise. = " + sunRise.ToString("dd/MM HH:mm:ss") + " SunSet.. = " + sunSet.ToString("dd/MM HH:mm:ss"));
       oldSunRise = sunRise;
       oldSunSet = sunSet;
     }
   }
   catch(Exception e) 
   {
-    Program.Notify("Eclairage","SunRise/SunSet "+e.Message);
+    Program.Notify(popupTitle, "SunRise/SunSet " + e.Message);
     sunRise = DateTime.Now;
     sunSet = DateTime.Now;
   }
-  night = false;
-  if (DateTime.Compare(DateTime.Now,sunRise)&lt;0 || DateTime.Compare(DateTime.Now,sunSet)&gt;0)
-    night = true;
-  
-  lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
-  if( lightsCount &gt; 8 )
-     lightsCount=8;
-  for(int x=0;x&lt;lightsCount;x++)
-  {
-    var moduleVirtuel = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
-    if(moduleVirtuel.Instance.Name == "")
+
+  isDark = false;
+  if (DateTime.Compare(DateTime.Now,sunRise) &lt; 0 || DateTime.Compare(DateTime.Now,sunSet) &gt; 0)
+    isDark = true;
+
+  Modules.WithFeature("TimeTable.Enable").Each((module)=&gt;{
+
+    // if time table is disabled for this module, continue to next module
+    if (module.Parameter("TimeTable.Enable").Value == "0") return false;
+
+    var tableType = ""; // OnOff
+    if (module.IsOfDeviceType("Light,Switch"))
+      tableType = "Light"; // OnOff
+    else if (module.IsOfDeviceType("Dimmer,Shutter"))
+      tableType = "Shutter"; // Level
+
+    // No table type for current device type, continue to next
+    if (tableType == "")
+      return false;
+
+    var displayName = module.Instance.DeviceType + " " + module.Instance.Name;
+    DateTime currentTime = DateTime.Now ;
+    //if( Settings.Parameter("Schedule.Set").Value == "1" )
     {
-        Pause(1);
-        continue ;
+      Settings.Parameter("Schedule.Set").Value = "0" ;
+      currentMonth = -1 ;
+      currentTable = "" ;
     }
-    var name = "Eclairage " + moduleVirtuel.Instance.Name ;
-    var operatingState = moduleVirtuel.Parameter("Light.OperatingState");
-    var lightMode = moduleVirtuel.Parameter("Light.Mode").Value;
-    // Get a reference to the switch/relay module 1
-    domain = address = "";
-    domainAddress = moduleVirtuel.Parameter("LightModule1").Value;
-    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    if (currentMonth != currentTime.Month)
     {
-      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
-      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+      currentMonth = currentTime.Month - 1 ;
+      tabMon = Settings.Parameter("Calend.Year." + currentMonth).Value ;
     }
-    var lightModule = Modules.InDomain(domain).WithAddress(address).Get();
-    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule.Instance == null)
+    if (tabMon.Length &lt; currentTime.Day)
     {
-      Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", "! Erreur MLS", "Eclairage");
-      Program.Notify(name, "Spécifier un Module Light ou Switch valide.");
-      Pause(2);
-      continue;
+      typeAction = 'E'; // Erreur
+      Program.Notify(popupTitle, "Calendar Error month length " + currentTime.Month) ;
+      return false;
     }
-    // Get a reference to the light/switch module 2
-    domain = address = "";
-    domainAddress = moduleVirtuel.Parameter("LightModule2").Value;
-    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    typeDay = tabMon[currentTime.Day - 1] ;
+    // HERE We get the time table depends on the kind of day
+    newTable = module.Parameter("TimeTable." + typeDay).Value;
+    if (newTable.Length != 0)
     {
-      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
-      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
-    }
-    bool light2 = true ;
-    var lightModule2 = Modules.InDomain(domain).WithAddress(address).Get();
-    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule2.Instance == null)
-      light2 = false ;
-    // Get a reference to the light/switch module 3
-    domain = address = "";
-    domainAddress = moduleVirtuel.Parameter("LightModule3").Value;
-    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
-    {
-      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
-      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
-    }
-    bool light3 = true ;
-    var lightModule3 = Modules.InDomain(domain).WithAddress(address).Get();
-    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
-      light3 = false ;
-    // Get a reference to the light/switch module 4
-    domain = address = "";
-    domainAddress = moduleVirtuel.Parameter("LightModule4").Value;
-    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
-    {
-      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
-      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
-    }
-    bool light4 = true ;
-    var lightModule4 = Modules.InDomain(domain).WithAddress(address).Get();
-    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
-      light4 = false ;
-    // Traitement du module virtuel
-    if (lightMode == "Off")
-      typeAction = 'F';
-    else
-    if (lightMode == "On")
-      typeAction = 'O';
-    else
-    if (lightMode == "Program")
-    {
-        DateTime currentTime = DateTime.Now ;
-        if( Settings.Parameter("Schedule.Set").Value == "1" )
-        {
-           Settings.Parameter("Schedule.Set").Value = "0" ;
-//         Program.Notify("Eclairage","Schedule.Set 1") ;
-           currentMonth = -1 ;
-           currentTable = "" ;
-        }
-        if( currentMonth != currentTime.Month )
-        {
-            currentMonth = currentTime.Month - 1 ;
-            tabMon = Settings.Parameter( "Calend.Year." + currentMonth ).Value ;
-        }
-        if( tabMon.Length &lt; currentTime.Day )
-        {
-            szState = "! Erreur LGCA";
-            typeAction = 'E'; // Erreur
-            Program.Notify("Eclairage","Calendrier Erreur LG mois "+currentTime.Month) ;
-            continue;
-        }
-        typeDay = tabMon[currentTime.Day-1] ;
-        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
-        if( newTable.Length != 0 )
-        {
-           if( newTable != currentTable )
-           {
-               currentTable = newTable ;
-               tabScene = Settings.Parameter( "Table.Light." + currentTable ).Value ;
-           }
-        }
-        else
-        {
-           szState = "! Erreur THND";
-           typeAction = 'E'; // Erreur
-           Program.Notify(name+" Jour "+typeDay, "TH non définie") ;
-        }
-        if( tabScene.Length == 96 )
-        {
-          index = (int)(currentTime.Hour*4)+(int)(currentTime.Minute/15) ;
-          typeAction=tabScene[index];
-          switch(typeAction)
-          {
-            case 'R': // SunRise - Soleil levant
-            case 'S': // SunSet - Soleil couchant
-              if( night == true )
-                typeAction='O'; // Level On
-              else
-                typeAction='S'; // Sunrise or Sunset : Waiting for end of night
-              break ;
-            case 'O':
-            case 'F':
-              break;
-            default :
-              szState = "! Erreur THAI";
-              typeAction = 'E'; // Erreur
-              Program.Notify(name,"TH Action indéfinie '"+tabScene[index]+"'") ;
-              break ;
-          }
-        }
-        else
-        {
-           szState = "! Erreur LGTH";
-           typeAction = 'E'; // Erreur
-           Program.Notify(name+" Jour "+typeDay, "TH Erreur longueur") ;
-        }
+      if (newTable != currentTable)
+      {
+        currentTable = newTable ;
+        tabScene = Settings.Parameter("Table." + tableType + "." + currentTable).Value ;
+      }
     }
     else
     {
-       szState = "! Erreur MODE";
-       typeAction = 'E'; // Erreur
-       Program.Notify(name, "Erreur Mode "+lightMode) ;
+      typeAction = 'E'; // Erreur
+      Program.Notify(popupTitle, displayName + " Jour " + typeDay + "\nUndefined time table") ;
     }
-    switch(typeAction)
+    if (tabScene.Length == 96)
     {
-      case 'E':
-        lightModule.Off();
-        if( light2 == true )
-          lightModule2.Off();
-        if( light3 == true )
-          lightModule3.Off();
-        if( light4 == true )
-          lightModule4.Off();
-        break ;
+      index = (int)(currentTime.Hour*4) + (int)(currentTime.Minute/15) ;
+      typeAction = tabScene[index];
+    }
+    else
+    {
+      typeAction = 'E'; // Erreur
+      Program.Notify(popupTitle, displayName + " Jour " + typeDay + "\ntime table length error") ;
+    }
+
+    if (tableType == "Light")
+    {
+      switch (typeAction)
+      {
+      case 'R': // SunRise - Soleil levant
+      case 'S': // SunSet - Soleil couchant
+        if(isDark == true &amp;&amp; module.IsOff)
+          module.On(); // Level On
+        else if (module.IsOn)
+          module.Off(); // Sunrise or Sunset : Waiting for end of dark
+      	break ;
+      case 'O':
+        if (module.IsOff) module.On();
+        break;
       case 'F':
-        szState = "Off";
-        lightModule.Off();
-        if( light2 == true )
-          lightModule2.Off();
-        if( light3 == true )
-          lightModule3.Off();
-        if( light4 == true )
-          lightModule4.Off();
+        if (module.IsOn) module.Off();
+        break;
+      default :
+        Program.Notify(popupTitle, displayName + "\nUndefined time table action '" + typeAction + "'") ;
         break ;
-     case 'O':
-        szState = "On";
-        lightModule.On();
-        if( light2 == true )
-          lightModule2.On();
-        if( light3 == true )
-          lightModule3.On();
-        if( light4 == true )
-          lightModule4.On();
-        break ;
-      case 'S':
-        szState = "Sun";
-        lightModule.Off();
-        if( light2 == true )
-          lightModule2.Off();
-        if( light3 == true )
-          lightModule3.Off();
-        if( light4 == true )
-          lightModule4.Off();
-        break ;
+      }
     }
-    if( operatingState.Value != szState )
-       Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", szState, "Eclairage");
-    Pause(2);
-  }
-  return true;
-});
-
-// implement Web API calls as defined in the Eclairage widget
-When.WebServiceCallReceived("HomeAutomation.Eclairage", (args)=&gt;
-{
-    string[] reqs = ((string)args).Split('/');
-
-    string lightNumber = reqs[1];
-    string command = reqs[2];
-    string parametre = reqs[3];
-
-    switch( command )
+    else
     {
-        case "Light.SetTable":
-           var moduleT = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
-           if( parametre == "W")
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
-           if( parametre == "O")
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
-           if( parametre == "F")
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
-           if( parametre == "S")
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
-           nTempo=0;
-           break;
-      case "Light.ModeSet" :
-           var moduleM = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
-           Program.RaiseEvent(moduleM,"Light.Mode", parametre, "Eclairage");
-           Program.RaiseEvent(moduleM,"Light.OperatingState", "---", "Eclairage");
-           nTempo=0;
-           break;
+      double level = 0;
+      if (double.TryParse(typeAction.ToString(), out level))
+      {
+        level = (level * 20);
+        if (level &gt;= 0 &amp;&amp; level &lt;= 100 &amp;&amp; module.Level != level)
+          module.Level = level;
+      }
+      else
+      {
+        Program.Notify(popupTitle, displayName + "\nWrong level found in time table '" + typeAction + "'") ;
+      }
     }
-    return true;
+
+    return false; // do not stop iterating, continue processing next module
+  });
+
+  return true;
 });
 
 while (Program.IsEnabled)
 {
-   nTempo=300;
-   LightLogicRun();
-   if(nTempo == 300)
-   {
-     DateTime currentTime = DateTime.Now ;
-     nTempo = ((5-(currentTime.Minute%5))*60)-currentTime.Second;
-   }
-   while( nTempo &gt; 0 )
-   {
-     Pause(1);
-     nTempo-- ;
-   };
+  nTempo = 300;
+  LightLogicRun();
+  if(nTempo == 300)
+  {
+    DateTime currentTime = DateTime.Now ;
+    nTempo = ((5-(currentTime.Minute%5))*60) - currentTime.Second;
+  }
+  while(nTempo &gt; 0)
+  {
+    Pause(1);
+    nTempo--;
+  };
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
-    <Features />
+    <IsRunning>true</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <Property>TimeTable.W</Property>
+        <Description>Time table to use for weekend (0-5)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <Property>TimeTable.O</Property>
+        <Description>Time table to use for week days (0-5)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <Property>TimeTable.F</Property>
+        <Description>Time table to use for holidays (0-5)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <Property>TimeTable.S</Property>
+        <Description>Time table to use for special days (0-5)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable time table scheduling</Description>
+      </ProgramFeature>
+    </Features>
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>514</Address>
-    <Name>Lights Scheduler</Name>
-    <Description>Use any light or switch module to implement light virtual device.
-Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
-    <Group>Lights</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Name>Time Tables Scheduler</Name>
+    <Description>Switch device on/off or set level based on Time Tables widget.</Description>
+    <Group>Scheduling</Group>
+    <ActivationTime>2015-01-24T15:26:46.831038Z</ActivationTime>
+    <TriggerTime>2015-01-24T15:26:46.852711Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

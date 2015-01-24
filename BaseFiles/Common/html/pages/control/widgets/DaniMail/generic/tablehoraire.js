@@ -67,6 +67,23 @@
           HG.WebApp.Control.EditModule(module);
         }
       });		
+      // tabs switching buttons
+      widget.find('[data-ui-field=btn_page_thermostats]').on('click',function() {
+        widget.find('[data-ui-field=div_page_thermostats]').show();
+        widget.find('[data-ui-field=div_page_lights]').hide();
+        widget.find('[data-ui-field=div_page_shutters]').hide();
+      });
+      widget.find('[data-ui-field=btn_page_lights]').on('click',function() {
+        widget.find('[data-ui-field=div_page_thermostats]').hide();
+        widget.find('[data-ui-field=div_page_lights]').show();
+        widget.find('[data-ui-field=div_page_shutters]').hide();
+      });
+      widget.find('[data-ui-field=btn_page_shutters]').on('click',function() {
+        widget.find('[data-ui-field=div_page_thermostats]').hide();
+        widget.find('[data-ui-field=div_page_lights]').hide();
+        widget.find('[data-ui-field=div_page_shutters]').show();
+      });
+      
       // popup values on open
       controlpopup.on('popupbeforeposition', function(evt, ui){
       });
