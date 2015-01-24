@@ -3,11 +3,36 @@
   Author: "DaniMail",
   Version: "2015-01-02",
 
-  GroupName : '',
-  IconImage : 'pages/control/widgets/homegenie/generic/images/temperature.png',
-  StatusText : '',
-  Description : '',
-  
+  GroupName: '',
+  IconImage: 'pages/control/widgets/homegenie/generic/images/temperature.png',
+  StatusText: '',
+  Description: '',
+  Initialized: false,
+  NDisplayMode: -1,
+  TimeTableUI: '',
+  ThermSensorUI: '', 
+  ThermSwitchUI: '', 
+  TabLegendUI: ["wek","work","free","spe"],
+  TableMode: ["---","Off","NoFrost","Eco","Comfort","Program"],
+  ThermLocalUI: ["updt","off","nofrost","eco","heat","prog"],
+	
+  InitView: function (container) {
+      var _this = this;
+   	  var widget=container.find('[data-ui-field=widget]');
+      setTimeout(function () {
+      _this.TimeTableUI = widget.find('[data-ui-label=id_timetable]').html();
+      _this.ThermSensorUI = widget.find('[data-ui-label=id_sensor]').html();
+      _this.ThermSwitchUI = widget.find('[data-ui-label=id_switch]').html();
+      for(var i = 0; i < _this.TabLegendUI.length; i++)
+        _this.TabLegendUI[i] = widget.find('[data-ui-label=id_'+_this.TabLegendUI[i]+']').html();
+      for(var i = 0; i < _this.ThermLocalUI.length; i++)
+        _this.ThermLocalUI[i] = widget.find('[data-ui-label=id_'+_this.ThermLocalUI[i]+']').html();
+      if(NDisplayMode != -1)
+        widget.find('[data-ui-field=mode_value]').html(_this.ThermLocalUI[NDisplayMode]+'&nbsp;&nbsp;&nbsp;');  
+    },1000);
+    this.Initialized = true;
+  },
+
   RenderView: function (cuid, module) {
     var imgTherm='pages/control/widgets/DaniMail/generic/images/therm_';
     var moduleCalendrier='510';
@@ -23,7 +48,9 @@
     var widget = container.find('[data-ui-field=widget]');
     var controlpopup = widget.data('ControlPopUp');
     var _this = this;
-    
+
+    if (!this.Initialized) this.InitView($(cuid));
+
     if (HG.WebApp.Locales.GetDateEndianType() == 'M') 
     	displayUnit = 'Fahrenheit';
 
@@ -46,7 +73,6 @@
 	      max: 100
 	    });
 	  }
-	
 	  widget.find('[data-ui-field=options]').on('click', function() {
 	        if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp'))
 	        {
@@ -72,16 +98,16 @@
 		          {
 					  var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.W');
 					  var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+tabHOR.Value,(typeDay=='W'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='W'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.O');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+tabHOR.Value,(typeDay=='O'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='O'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.F');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+tabHOR.Value,(typeDay=='F'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='F'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.S');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,'Spécial - Table horaire '+tabHOR.Value,(typeDay=='S'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='S'),hourC,minC);
 			      }
 		      }
 	          $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
@@ -100,8 +126,11 @@
 	          HG.WebApp.Control.EditModule(module);
 	        }
 	  });
-	  	
+
 	  controlpopup.on('popupbeforeposition', function(evt, ui){
+	  		// Set Modules Sensor en Switch Name
+    		controlpopup.find('[data-ui-field=sensor]').html(_this.ThermSensorUI+_this.getNameModule(module,"ModuleTemperature"));
+    		controlpopup.find('[data-ui-field=switch]').html(_this.ThermSwitchUI+_this.getNameModule(module,"SwitchModule1"));
 	        // reset buttons' state
 	        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_nofrost]').removeClass('ui-btn-active');
@@ -264,7 +293,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+newtabHOR,(typeDay=='W'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+' '+newtabHOR,(typeDay=='W'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/W',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -280,7 +309,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+newtabHOR,(typeDay=='O'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+' '+newtabHOR,newtabHOR,(typeDay=='O'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/O',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -296,7 +325,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+newtabHOR,(typeDay=='F'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+' '+newtabHOR,+newtabHOR,(typeDay=='F'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/F',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -312,7 +341,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,'Special - Table horaire '+newtabHOR,(typeDay=='S'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+' '+newtabHOR,+newtabHOR,(typeDay=='S'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/S',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -323,8 +352,6 @@
     widget.find('[data-ui-field=description]').html(this.Description);
     controlpopup.find('[data-ui-field=group]').html(this.GroupName);
     controlpopup.find('[data-ui-field=name]').html(module.Name);
-    controlpopup.find('[data-ui-field=sensor]').html("Sonde : "+this.getNameModule(module,"ModuleTemperature"));
-    controlpopup.find('[data-ui-field=switch]').html("Zone : "+this.getNameModule(module,"SwitchModule1"));
 
     var imagesrc = 'pages/control/widgets/homegenie/generic/images/temperature.png';
 
@@ -341,8 +368,11 @@
     var humidityField = HG.WebApp.Utility.GetModulePropertyByName(module, 'Sensor.Humidity');
     if (humidityField != null)
     {
-        var humidity = '&nbsp;&nbsp;&nbsp;'+Math.round(humidityField.Value.replace(',', '.')*10)/10+'%';
-    	widget.find('[data-ui-field=humidity_value]').html(humidity);
+        var humidity = Math.round(humidityField.Value.replace(',', '.')*10)/10;
+        if(humidity == 0)
+	    	widget.find('[data-ui-field=humidity_value]').html('');
+	    else
+    		widget.find('[data-ui-field=humidity_value]').html('&nbsp;&nbsp;&nbsp;'+humidity+'%');
     }
     // display current Heating SetPoint
     var heatTo = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Heating');
@@ -455,26 +485,20 @@
     }
    	widget.find('[data-ui-field=operating_value]').html(this.StatusText);
     //
-    var displayMode = '---';
-    var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.Mode');
+    NDisplayMode=0;
+    var displayMode='---';
+    var operatingMode=HG.WebApp.Utility.GetModulePropertyByName(module,'Thermostat.Mode');
     if (operatingMode != null) displayMode = operatingMode.Value;
-    if( displayMode == 'Off' )
-    	displayMode = 'Arrêt';
-    else
-    if( displayMode == 'NoFrost' )
-    	displayMode = 'Hors Gel';
-    else
-    if( displayMode == 'Eco' )
-    	displayMode = 'Eco';
-    else
-    if( displayMode == 'Comfort' )
-    	displayMode = 'Confort';
-    else
-    if( displayMode == 'Program' )
-    	displayMode = 'Programmé';
-    widget.find('[data-ui-field=mode_value]').html(displayMode+'&nbsp;&nbsp;&nbsp;');  
+    for( var i=0 ; i<this.TableMode.length ; i++) {
+    	if(displayMode == this.TableMode[i])
+    	{
+    		NDisplayMode=i;
+    		break;
+    	}
+   	}
+    widget.find('[data-ui-field=mode_value]').html(this.ThermLocalUI[NDisplayMode]+'&nbsp;&nbsp;&nbsp;');  
 	// Display battery level of Sansor
-    var batteryLevel =HG.WebApp.Utility.GetModulePropertyByName(module, 'Status.Battery');
+    var batteryLevel=HG.WebApp.Utility.GetModulePropertyByName(module,'Status.Battery');
     if (batteryLevel != null) {
         var value = Math.round(batteryLevel.Value.replace(',', '.') * 10) / 10;
         var blevel = 0;
@@ -655,5 +679,4 @@
     context.lineTo(334,25);
     context.stroke();               
   }   
-
 }]

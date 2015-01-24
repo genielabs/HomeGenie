@@ -22,7 +22,7 @@
     "cal_apr":
         "April",
     "cal_mai":
-        "May",
+        "Mai",
     "cal_jun":
         "June",
     "cal_jul":
@@ -42,15 +42,17 @@
     "cal_work":
         "Work Day",
     "cal_free":
-        "Holiday",
+        "Holliday",
     "cal_spe":
         "Special",
     "mode":
         "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "mode_value":
+        "Halt&nbsp;&nbsp;",
     "title_therm":
     	"Thermostats",
     "title_light":
-    	"Lights and Switches",
+    	"Lights and Switchs",
     "title_shutter":
     	"Shutters and Dimmers",
     "control_light_on":
@@ -63,8 +65,10 @@
         "Temperature",
     "therm_setmode":
         "Mode",
+    "therm_updt":
+        "---",
     "therm_off":
-        "Halt",
+        "Stop",
     "therm_nofrost":
         "Avoid Frost",
     "therm_eco":
@@ -73,16 +77,12 @@
         "Comfort",
     "therm_prog":
         "Scheduled",
-    "Off":
-        "Halt",
-    "NoFrost":
-        "Avoid Frost",
-    "Eco":
-        "Eco",
-    "Heat":
-        "Comfort",
-    "Program":
-    	"Scheduled",
+    "therm_sensor":
+        "Sensor : ",
+    "therm_switch":
+        "Switch : ",
+    "tt_timetable":
+        "Time Table ",
     "control_module_off":
         "Cancel",
     "control_module_on":

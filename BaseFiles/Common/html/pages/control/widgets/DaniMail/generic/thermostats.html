@@ -39,8 +39,27 @@
   <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
     <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
     <b style="font-size:11pt;display: table-cell;">&nbsp;&nbsp;Mode&nbsp;&nbsp;</b>
-    <div data-ui-field="mode_value" style="font-size:10pt;display: table-cell;">Arrêt</div>
+    <div data-ui-field="mode_value" style="font-size:10pt;display: table-cell;">Stop&nbsp;&nbsp;</div>
     <div data-ui-field="operating_value" style="font-size:10pt;display: table-cell;">&nbsp;</div>
+  </div>
+
+  <!-- widget settings -->
+  <div class="settings" style="display: none">
+     <span data-ui-label="id_updt" data-locale-id="therm_updt">---</span>
+     <span data-ui-label="id_off" data-locale-id="therm_off">Stop</span>
+     <span data-ui-label="id_nofrost" data-locale-id="therm_nofrost">No Frost</span>
+     <span data-ui-label="id_eco" data-locale-id="therm_eco">Eco</span>
+     <span data-ui-label="id_heat" data-locale-id="therm_heat">Comfort</span>
+     <span data-ui-label="id_prog" data-locale-id="therm_prog">Scheduled</span>
+
+     <span data-ui-label="id_sensor" data-locale-id="therm_sensor"></span>
+     <span data-ui-label="id_switch" data-locale-id="therm_switch"></span>
+
+     <span data-ui-label="id_timetable" data-locale-id="tt_timetable"></span>
+     <span data-ui-label="id_wek" data-locale-id="cal_wek">Week-end</span>
+     <span data-ui-label="id_work" data-locale-id="cal_work">Work Day</span>
+     <span data-ui-label="id_free" data-locale-id="cal_free">Holiday</span>
+     <span data-ui-label="id_spe" data-locale-id="cal_spe">Special</span>
   </div>
 
 </div>
@@ -72,8 +91,8 @@
     <div>
       <table width="100%">
         <tr>
-          <td><div data-ui-field="sensor">Sonde :</div></td>
-          <td><div data-ui-field="switch">Zone :</div></td>
+          <td><div data-ui-field="sensor">Sensor :&nbsp;</div></td>
+          <td><div data-ui-field="switch">Switch :&nbsp;</div></td>
         </tr>
       </table>
 	</div>
@@ -98,7 +117,7 @@
 
     <div align="center">
 
-      <span data-locale-id="therm_setpoint">Température</span>
+      <span data-locale-id="therm_setpoint">Temperature</span>
       <div data-role="controlgroup" data-type="horizontal" data-mini="true">
         <a data-ui-field="nofrost_setpoint" data-locale-id="therm_nofrost" data-role="button" href="">Hors Gel</a>
         <a data-ui-field="eco_setpoint" data-locale-id="therm_eco" data-role="button" href="">Eco</a>
