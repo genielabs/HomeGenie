@@ -36,13 +36,13 @@
     "configure_menu_groups_modules": 
         "Groupes et Modules",
     "configure_menu_automation": 
-        "Scénarios",
+        "Programmes",
     "configure_menu_system": 
-        "Système et Contrôleurs",
+        "Paramètres",
     "configure_menu_maintenance": 
         "Maintenance et Mise à Jour",
     "configure_automation_heading": 
-        "<font style='color:gray'>Automate</font><br>Groupes",
+        "<font style='color:gray'>Programme</font><br>Groupes",
     "configure_group_newgroup": 
         "Nouveau Groupe",
     "configure_group_entergroupname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Ajouter un Groupe",
     "configure_interfaces_heading": 
-        "Système et Contrôleurs",
+        "Paramètres",
     "configure_interfaces_zwaveoptions": 
         "Contrôleur ZWave",
     "configure_interfaces_optdisable": 
@@ -334,7 +334,7 @@
     "configure_grouplist": 
         "Liste des Groupes",
     "configure_schedulerservice_title": 
-        "Automate<br />Scheduler",
+        "Planification<br />de l'événement",
     "configure_scheduler_events": 
         "Evénements du Scheduler",
     "configure_schedulerservice_bottombar_event_add": 
@@ -518,7 +518,7 @@
     "configure_editprogram_saving_succeed": 
         "Sauvegarde effectuée.",
     "configure_editprogram_saving": 
-        "Mise à jour des données du Pogramme",
+        "Mise à jour des données du Programme",
     "configure_editprogram_error_updating": 
         "Erreur de la mise à jour du Programme !",
     "configure_editprogram_compile": 

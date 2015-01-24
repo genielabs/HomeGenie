@@ -114,7 +114,8 @@ namespace HomeGenie
                     );
                 }
                 //
-                if (!File.Exists("~/.lircrc"))
+                var lircrcFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".lircrc");
+                if (!File.Exists(lircrcFile))
                 {
                     var lircrc = "begin\n" +
                         "        prog = homegenie\n" +
@@ -124,7 +125,7 @@ namespace HomeGenie
                         "end\n";
                     try
                     {
-                        File.WriteAllText("~/.lircrc", lircrc);
+                        File.WriteAllText(lircrcFile, lircrc);
                     }
                     catch { }
                 }

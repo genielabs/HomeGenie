@@ -94,9 +94,9 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   		var level = module.Parameter("Status.Level");
 		var memory = module.Parameter("Status.MemoryLevel");
 		//
-        if (level.DecimalValue != level.LastDecimalValue)
+        if (level.DecimalValue != level.Statistics.Last.Value)
         {
-            bool justswitchedon = (level.LastDecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
+            bool justswitchedon = (level.Statistics.Last.Value == 0 &amp;&amp; level.DecimalValue &gt; 0);
           	if (justswitchedon)
             {
                 // set current level to memory level if different
@@ -151,8 +151,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
-    <ActivationTime>2014-08-12T18:20:13.330926Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:23.482449Z</TriggerTime>
+    <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:21.62515Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:23.988035Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:22.13276Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:24.485093Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:22.628173Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -440,32 +440,39 @@ Program.Setup(()=&gt;
 	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
 });
 //
-Pause(30); // pause a minute before next check
-//
-return true; // execute the "Code To Run"
+return true; // execute the "Program Code"
 </ScriptCondition>
     <ScriptSource>var controlModules = Modules.WithFeature("HomeGenie.ScheduleControl");
-controlModules.Each((module)=&gt;{
-  var schedexpr = module.Parameter("HomeGenie.ScheduleOn").Value;
-  if (/*module.IsOff &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
-  {
-  	Program.Notify("Scheduled Control", module.Instance.Name + " ON");
-    module.On();
-  }
-  return false;
-});
-controlModules.Each((module)=&gt;{
-  var schedexpr = module.Parameter("HomeGenie.ScheduleOff").Value;
-  if (/*module.IsOn &amp;&amp;*/ Scheduler.IsScheduling(schedexpr))
-  {
-  	Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
-    module.Off();
-  }
-  return false;
-});
-</ScriptSource>
+
+while (Program.IsEnabled)
+{
+
+  controlModules.Each((module)=&gt;{
+    
+    var scheduleOn = module.Parameter("HomeGenie.ScheduleOn").Value;
+    var scheduleOff = module.Parameter("HomeGenie.ScheduleOff").Value;
+    
+    if (Scheduler.IsScheduling(scheduleOn))
+    {
+      Program.Notify("Scheduled Control", module.Instance.Name + " ON");
+      module.On();
+    }
+    
+    if (Scheduler.IsScheduling(scheduleOff))
+    {
+      Program.Notify("Scheduled Control", module.Instance.Name + " OFF");
+      module.Off();
+    }
+    
+    return false;
+  });
+
+  var pause = (60 - DateTime.Now.Second);
+  Pause(pause);
+
+}</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
@@ -495,8 +502,8 @@ controlModules.Each((module)=&gt;{
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-11-25T15:39:28.621566Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:34:28.14926Z</TriggerTime>
+    <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:23.125601Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -546,6 +553,11 @@ Func&lt;bool&gt; readdistance = new Func&lt;bool&gt;(() =&gt; {
 	return success;
 });
   
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 // it makes program to respond to webservices calls:
 //     http:///api/Components.HCSR04/0/Sensor.Distance
 When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt; 
@@ -561,14 +573,14 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>37</Address>
     <Name>HCSR04 - Ultrasonic Ranging Module</Name>
     <Description>Ultrasonic Ranging Module sensor </Description>
     <Group>Raspberry Pi</Group>
-    <ActivationTime>2014-11-13T16:35:20.828486Z</ActivationTime>
-    <TriggerTime>2014-11-13T16:35:28.702851Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -591,15 +603,16 @@ return true; // execute "Code To Run"
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
-  	// basic get will returns current device level 
-  	Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
-  		Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
-      	module.Command("Basic.Get").Execute();
-		Pause(Program.InputField("PollInterval").DecimalValue);
-      	return false; // do not break, continue iterating...
-  	});
-	// pause between each poll
-    Pause(Program.InputField("PollInterval").DecimalValue);
+  // basic get will returns current device level 
+  Modules.WithFeature("HomeGenie.ZWaveLevelPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("Basic.Get").Execute();
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.InputField("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -668,6 +681,11 @@ When.WebServiceCallReceived("Components.DHT11/0/Sensor.Humidity", ( args ) =&gt;
 
 var dataPin = ConnectorPin.P1Pin16.ToProcessor();
 var driver = new MemoryGpioConnectionDriver();
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 
 while (Program.IsEnabled)
 {
@@ -746,7 +764,8 @@ while (Program.IsEnabled)
   	var pause = Program.InputField("UpdateInterval").DecimalValue;
   	if (pause == 0) pause = 600; // default pause is 10 minutes
   	Pause(pause);
-}</ScriptSource>
+}
+</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
@@ -819,6 +838,10 @@ var sclPin = ConnectorPin.P1Pin05.ToProcessor();
 var driver = new I2cDriver(sdaPin, sclPin);
 var deviceConnection = new Mcp23017I2cConnection(driver.Connect(0x20));
 //
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 // implement Control.On, Control.Off, Control.Toggle serice API
 // for the domain Components.MCP23017
 When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
@@ -1223,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:25.484663Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:23.628459Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1278,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:25.986337Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:24.125497Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1573,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:26.488915Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:24.632356Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1652,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:26.98604Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:25.128475Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1722,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:27.488936Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:25.632051Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1968,17 +1991,25 @@ while (Program.IsEnabled)
 return true;</ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
-  	Settings.Parameter("Messaging.Email.Sender").Value = Program.InputField("Email.Sender").Value;
-  	Settings.Parameter("Messaging.Email.SmtpServer").Value = Program.InputField("Email.SmtpServer").Value;
-  	Settings.Parameter("Messaging.Email.SmtpPort").Value = Program.InputField("Email.SmtpPort").Value;
-  	Settings.Parameter("Messaging.Email.SmtpUseSsl").Value = Program.InputField("Email.SmtpUseSsl").Value;
-  	Settings.Parameter("Messaging.Email.SmtpUserName").Value = Program.InputField("Email.SmtpUserName").Value;
-  	Settings.Parameter("Messaging.Email.SmtpPassword").Value = Program.InputField("Email.SmtpPassword").Value;
+  
+  if (Program.InputField("Email.Sender").Value != Settings.Parameter("Messaging.Email.Sender").Value)
+    Settings.Parameter("Messaging.Email.Sender").Value = Program.InputField("Email.Sender").Value;
+  if (Program.InputField("Email.SmtpServer").Value != Settings.Parameter("Messaging.Email.SmtpServer").Value)
+    Settings.Parameter("Messaging.Email.SmtpServer").Value = Program.InputField("Email.SmtpServer").Value;
+  if (Program.InputField("Email.SmtpPort").Value != Settings.Parameter("Messaging.Email.SmtpPort").Value)
+    Settings.Parameter("Messaging.Email.SmtpPort").Value = Program.InputField("Email.SmtpPort").Value;
+  if (Program.InputField("Email.SmtpUseSsl").Value != Settings.Parameter("Messaging.Email.SmtpUseSsl").Value)
+    Settings.Parameter("Messaging.Email.SmtpUseSsl").Value = Program.InputField("Email.SmtpUseSsl").Value;
+  if (Program.InputField("Email.SmtpUserName").Value != Settings.Parameter("Messaging.Email.SmtpUserName").Value)
+    Settings.Parameter("Messaging.Email.SmtpUserName").Value = Program.InputField("Email.SmtpUserName").Value;
+  if (Program.InputField("Email.SmtpPassword").Value != Settings.Parameter("Messaging.Email.SmtpPassword").Value)
+    Settings.Parameter("Messaging.Email.SmtpPassword").Value = Program.InputField("Email.SmtpPassword").Value;
 
-  	Pause(10);
+  Pause(10);
+  
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
@@ -1987,8 +2018,8 @@ return true;</ScriptCondition>
     <Name>E-Mail Account</Name>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:27.989486Z</TriggerTime>
+    <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:26.133401Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2289,7 +2320,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 
   	if (notificationurl != "" &amp;&amp; module.HasFeature("MobileNotification.SendChanges") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
 	{
-      	if (property.Value != property.LastValue) // TODO: check time from lastvalue as well to prevent flooding
+      	if (property.DecimalValue != property.Statistics.Last.Value) // TODO: check time from lastvalue as well to prevent flooding
         {
             var pname = property.Name;
             if (pname.IndexOf('.') &gt; 0)
@@ -2334,7 +2365,7 @@ while(Program.IsEnabled)
 
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
@@ -2353,8 +2384,8 @@ Program.GoBackground();</ScriptSource>
 It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:28.992154Z</TriggerTime>
+    <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:27.132749Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2376,37 +2407,47 @@ var notifyTicks = 0; // minutes
 var meterModules = Modules.WithParameter("Meter.Watts");
 while (Program.IsEnabled)
 {
-  	Pause(60);
-  	notifyTicks++;
-  	//
-    var loadkw = 0d;
-    var devcount = 0;
-    meterModules.Each((mod)=&gt;{
-      if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
-      {
-        loadkw += mod.Parameter("Meter.Watts").DecimalValue;
-        devcount++;
-      }
-      return false;
-    });
-  	//
-  	var energyUse = Program.EnergyUseCounter;
-  	Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
-  	Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
-  	Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
-  	//
-  	// notify every 5 minutes
-  	if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+  Pause(60);
+  notifyTicks++;
+  //
+  var loadkw = 0d;
+  int devcount = 0, lightcount = 0, switchcount = 0;
+  meterModules.Each((mod)=&gt;{
+    if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
     {
-      	notifyTicks = 0;
-      	Program.Notify("Energy Monitor", 
-                       "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
-                       "Counter = " + energyUse.ToString("0.000"));
+      loadkw += mod.Parameter("Meter.Watts").DecimalValue;
+      if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
+      {
+        lightcount++;
+      }
+      else
+      {
+        switchcount++;  
+      }
+      devcount++;
     }
+    return false;
+  });
+  //
+  var energyUse = Program.EnergyUseCounter;
+  Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
+  Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
+  Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
+  Program.Parameter("EnergyMonitor.OperatingLights").Value = lightcount.ToString("0");
+  Program.Parameter("EnergyMonitor.OperatingSwitches").Value = switchcount.ToString("0");
+  //
+  // notify every 5 minutes
+  if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+  {
+    notifyTicks = 0;
+    Program.Notify("Energy Monitor", 
+                   "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
+                   "Counter = " + energyUse.ToString("0.000"));
+  }
 }
 </ScriptSource>
-    <ScriptErrors>[{"Line":0,"Column":0,"ErrorMessage":"Object reference not set to an instance of an object","ErrorNumber":"-1","CodeBlock":"CR"}]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2415,10 +2456,10 @@ while (Program.IsEnabled)
     <Description>Collects and stores real-time information about
 energy consumption.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2014-04-02T14:14:52.7290035Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:29.49026Z</TriggerTime>
+    <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:27.633667Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -2570,7 +2611,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:29.987008Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:28.130613Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2834,7 +2875,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2014-12-21T18:31:30.492565Z</TriggerTime>
+    <TriggerTime>2015-01-21T21:30:28.635083Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3060,107 +3101,116 @@ var gpio24 = Program.InputField("GPIO24").Value.ToLower();
 var gpio25 = Program.InputField("GPIO25").Value.ToLower();
 
 // add configured GPIOs to a list that will be used to configure the connection
-if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24 == "out" ? PinDirection.Output : PinDirection.Input) });
-if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (gpio4  != "off") pinMapping.Add(new { Config = gpio4, Address =  "GPIO4", Pin =  ConnectorPin.P1Pin7, Direction = ( gpio4.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio4.StartsWith("!") });
+if (gpio17 != "off") pinMapping.Add(new { Config = gpio17, Address = "GPIO17", Pin = ConnectorPin.P1Pin11, Direction = (gpio17.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio17.StartsWith("!") });
+if (gpio18 != "off") pinMapping.Add(new { Config = gpio18, Address = "GPIO18", Pin = ConnectorPin.P1Pin12, Direction = (gpio18.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio18.StartsWith("!") });
+if (gpio21 != "off") pinMapping.Add(new { Config = gpio21, Address = "GPIO21", Pin = ConnectorPin.P1Pin13, Direction = (gpio21.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio21.StartsWith("!") });
+if (gpio22 != "off") pinMapping.Add(new { Config = gpio22, Address = "GPIO22", Pin = ConnectorPin.P1Pin15, Direction = (gpio22.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio22.StartsWith("!") });
+if (gpio23 != "off") pinMapping.Add(new { Config = gpio23, Address = "GPIO23", Pin = ConnectorPin.P1Pin16, Direction = (gpio23.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio23.StartsWith("!") });
+if (gpio24 != "off") pinMapping.Add(new { Config = gpio24, Address = "GPIO24", Pin = ConnectorPin.P1Pin18, Direction = (gpio24.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio24.StartsWith("!") });
+if (gpio25 != "off") pinMapping.Add(new { Config = gpio25, Address = "GPIO25", Pin = ConnectorPin.P1Pin22, Direction = (gpio25.EndsWith("out") ? PinDirection.Output : PinDirection.Input), Reversed = gpio25.StartsWith("!") });
 
 // Setup the connection to the GPIOs
 var configuration = new PinConfiguration[pinMapping.Count];
 for (int p = 0; p &lt; pinMapping.Count; p++)
 {
-  	var pc = pinMapping[p];
-  	if (pc.Direction == PinDirection.Input)
+  var pc = pinMapping[p];
+  if (pc.Direction == PinDirection.Input)
+  {
+    configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    if (pc.Config.EndsWith("+"))
     {
-	  	configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-      	if (pc.Config.EndsWith("+"))
-        {
-            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
-        }
-      	else if (pc.Config.EndsWith("-"))
-        {
-            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
-        }
-		Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
     }
-  	else
+    else if (pc.Config.EndsWith("-"))
     {
-	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
-		Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+      ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
     }
-    configuration[p].Name = pc.Address;
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+  }
+  else
+  {
+    configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+    ((OutputPinConfiguration)configuration[p]).Reversed = pc.Reversed;
+    Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+  }
+  configuration[p].Name = pc.Address;
 }
 
 // Allocate GPIO connection and listen for events coming from GPIO pins
 GpioConnection connection = null;
 try
 {
-	connection = new GpioConnection(configuration);
+  connection = new GpioConnection(configuration);
 }
 catch 
 {
-  	Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
-  	Pause(10);
-  	return;
+  Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
+  Pause(10);
+  return;
 }
-connection.PinStatusChanged += (sender, args) =&gt; {
-  	var address = args.Configuration.Name;
-    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
-    Program.RaiseEvent(module, "Status.Level", 
-                       args.Enabled ? "1" : "0",
-                       address);
-  
-};
+
+var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
+  var address = args.Configuration.Name;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  Program.RaiseEvent(module, "Status.Level", 
+                     args.Enabled ? "1" : "0",
+                     address);
+
+});
+connection.PinStatusChanged += pinChanged;
+
+When.ProgramStopping(()=&gt;{
+  connection.PinStatusChanged -= pinChanged;
+  ((IDisposable)connection).Dispose();
+  return true;
+});
 
 // read and store current pins status
 for (int p = 0; p &lt; pinMapping.Count; p++)
 {
-  	var pc = pinMapping[p];
-  	var address = pc.Address;
-    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
-	module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
+  var pc = pinMapping[p];
+  var address = pc.Address;
+  var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+  module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
 }
 
 // implement web serice API Control.On, Control.Off, Control.Toggle 
 // for the domain RaspberryPi.GPIO
 When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
-{
-	string[] reqs = ((string)args).Split('/');
-  	var errorMessage = "";
-	try
-	{
-		string address = reqs[1];
-      	string command = reqs[2];
-        //
-        switch(command)
-        {
-          // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
-          case "Control.On":
-          connection[address] = true;
-          break;
-          // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
-          case "Control.Off":
-          connection[address] = false;
-          break;
-          // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
-          case "Control.Toggle":
-          connection.Toggle(address);
-          break;
-        }
-      	//
-        return "{ 'ResponseValue' : 'OK' }";    
-    } 
-  	catch (Exception ex) 
-    { 
-	    errorMessage = ex.Message + " " + ex.StackTrace;
-    }
-    // unable to process request
-    return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
-});
+                            {
+                              string[] reqs = ((string)args).Split('/');
+                              var errorMessage = "";
+                              try
+                              {
+                                string address = reqs[1];
+                                string command = reqs[2];
+                                //
+                                switch(command)
+                                {
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
+                                  case "Control.On":
+                                  connection[address] = true;
+                                  break;
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
+                                  case "Control.Off":
+                                  connection[address] = false;
+                                  break;
+                                  // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
+                                  case "Control.Toggle":
+                                  connection.Toggle(address);
+                                  break;
+                                }
+                                //
+                                return "{ 'ResponseValue' : 'OK' }";    
+                              } 
+                              catch (Exception ex) 
+                              { 
+                                errorMessage = ex.Message + " " + ex.StackTrace;
+                              }
+                              // unable to process request
+                              return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
+                            });
 
 Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
@@ -3173,6 +3223,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Raspberry Pi GPIO mapped to HG modules.
 Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
 Use IN+ to activate the internal PullUp resistor or IN- to activate the internal PullDown resistor.
+Use !OUT to Reverse the pin level On = 0 and Off = 1.
 GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
 GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
 </Description>
@@ -4221,7 +4272,7 @@ To publish a module over the MQTT network, activate "Publish module on MQTT" opt
 Other HomeGenie servers will automatically discover the published module once an event is generated from it.
 Supports full control/scripting of remote modules, just like a standard local module.</Description>
     <Group>Interconnections</Group>
-    <ActivationTime>2014-07-14T21:21:27.102475Z</ActivationTime>
+    <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
@@ -4301,6 +4352,11 @@ var driver = GpioConnectionSettings.DefaultDriver;
 
 driver.Allocate(pinDta, PinDirection.Output);
 driver.Allocate(pinClk, PinDirection.Output);
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 
 //init 
 driver.Write(pinDta, false);
@@ -5270,6 +5326,11 @@ driver.Allocate(pinCd, PinDirection.Output);
 driver.Allocate(pinRes, PinDirection.Output);
 
 
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
 
@@ -5583,15 +5644,25 @@ return true;
     <ScriptSource>var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
 
 int ledsCount = (int)Program.InputField("LedsCount").DecimalValue;
-var groveRgb = new GroveRgbConnection(ConnectorPin.P1Pin13, ConnectorPin.P1Pin07, ledsCount);
+
+var driver = GpioConnectionSettings.DefaultDriver;
+var gpioOut1 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin13.ToProcessor());
+var gpioOut2 = new GpioOutputBinaryPin(driver, ConnectorPin.P1Pin07.ToProcessor());
+var groveRgb = new GroveRgbConnection(gpioOut1, gpioOut2, ledsCount);
+
 Program.AddVirtualModules("HomeAutomation.GroveRGB", "Dimmer", "homegenie/generic/colorlight", 1, ledsCount);
 for(int x = 0; x &lt; ledsCount; x++)
 {
   	var module = rgbModules.WithAddress((x+1).ToString()).Get();
-	groveRgb.SetColorRgb(x, 0, 0, 0);
+	groveRgb.SetColor(x, new RgbColor(0, 0, 0));
   	module.Parameter("Status.Level").Value = "0";
   	module.Parameter("Status.ColorHsb").Value = "1,1,1";
 }
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)groveRgb).Dispose();
+  return true;
+});
 
 When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt; 
 {
@@ -5611,26 +5682,26 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
         case "Control.On":
         	string[] memory = module.Parameter("Status.ColorHsb").Value.Split(',');
-        	groveRgb.SetColorHsv(lightId, double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
+        	groveRgb.SetColor(lightId, RgbColor.FromHsv(double.Parse(memory[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(memory[1], System.Globalization.CultureInfo.InvariantCulture),
-                        double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture));
+                        double.Parse(memory[2], System.Globalization.CultureInfo.InvariantCulture)));
         	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
             Program.RaiseEvent(module, "Status.ColorHsb", module.Parameter("Status.ColorHsb").Value, "Color Light");
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
         case "Control.Off":
-			groveRgb.SetColorRgb(lightId, 0, 0, 0);
+			groveRgb.SetColor(lightId, new RgbColor());
         	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
         	break;
         case "Control.Toggle":
         	if (module.Parameter("Status.Level").DecimalValue == 0)
             {
-				groveRgb.SetColorRgb(lightId, 255, 255, 255);
+				groveRgb.SetColor(lightId, new RgbColor(255, 255, 255));
               	Program.RaiseEvent(module, "Status.Level", "1", "Groove RGB Led");
             }
         	else
             {
-				groveRgb.SetColorRgb(lightId, 0, 0, 0);
+				groveRgb.SetColor(lightId, new RgbColor());
 	        	Program.RaiseEvent(module, "Status.Level", "0", "Groove RGB Led");
             }
         	break;
@@ -5643,9 +5714,9 @@ When.WebServiceCallReceived("HomeAutomation.GroveRGB", ( args ) =&gt;
         	string[] values = parameter.Split(',');
         	//double transition = 5;
         	//if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-          	groveRgb.SetColorHsv(lightId, double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
+          	groveRgb.SetColor(lightId, RgbColor.FromHsv(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture),
                         double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture),
-                        double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture));
+                        double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)));
             Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Color Light");
             Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Color Light");
         	break; 
@@ -5732,6 +5803,12 @@ var valuesHistory = new Queue&lt;decimal&gt;[8];
 for (int q = 0; q &lt; 8; q++) valuesHistory[q] = new Queue&lt;decimal&gt;();
 
 var driver = GpioConnectionSettings.DefaultDriver;
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
+
 while (Program.IsEnabled)
 {
   	
@@ -6024,7 +6101,7 @@ while (Program.IsEnabled)
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>
-    <Name>Generic Thermostat</Name>
+    <Name>Basic Thermostat</Name>
     <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
 Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
     <Group>Weather and Enviroment</Group>
@@ -6195,6 +6272,11 @@ When.WebServiceCallReceived("Components.DHT22/0/Sensor.Humidity", ( args ) =&gt;
 
 var dataPin = ConnectorPin.P1Pin7.ToProcessor();
 var driver = new MemoryGpioConnectionDriver();
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 
 while (Program.IsEnabled)
 {
@@ -6387,6 +6469,11 @@ var driver = new I2cDriver(sdaPin, sclPin);
 var deviceConnectionA = new Mcp23017I2cConnection(driver.Connect(0x20));
 Pause(0.5);
 var deviceConnectionB = new Mcp23017I2cConnection(driver.Connect(0x21));
+
+When.ProgramStopping(()=&gt;{
+  ((IDisposable)driver).Dispose();
+  return true;
+});
 
 // implement Control.On, Control.Off, Control.Toggle serice API
 // for the domain Components.MCP23017
@@ -6593,7 +6680,7 @@ while (Program.IsEnabled)
   
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
@@ -7038,6 +7125,8 @@ return true;</ScriptCondition>
 const int displayWidth = 128;  
 const int displayHeight = 64;
 
+int currentX = 0, currentY = 0;
+
 // Constants
 const byte SSD1306_I2C_ADDRESS = 0x3C; // 011110+SA0+RW - 0x3C or 0x3D
 const byte SSD1306_SETCONTRAST = 0x81;
@@ -7173,56 +7262,203 @@ List&lt;byte[]&gt; basicFont = new List&lt;byte[]&gt;() {
     new byte[] {0x00,0x02,0x05,0x05,0x02,0x00,0x00,0x00}
 };
 
-var bigNumbers = new Dictionary&lt;char, Dictionary&lt;int, byte[]&gt;&gt;(); {
-  bigNumbers.Add('.', new Dictionary&lt;int, byte[]&gt;(){ {11, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('+', new Dictionary&lt;int, byte[]&gt;(){ {26, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xff, 0xff, 0xff, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0xff, 0xff, 0xff, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('-', new Dictionary&lt;int, byte[]&gt;(){ {13, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('/', new Dictionary&lt;int, byte[]&gt;(){ {14, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf8, 0xfe, 0x3e, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xfe, 0xff, 0x1f, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf8, 0xff, 0x3f, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xfc, 0xff, 0x1f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add(',', new Dictionary&lt;int, byte[]&gt;(){ {11, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xfc, 0xff, 0x7f, 0x1f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add(':', new Dictionary&lt;int, byte[]&gt;(){ {13, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1f, 0x1f, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('0', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xf0, 0xf8, 0x3c, 0x1e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1e, 0x3c, 0xf8, 0xf0, 0xe0, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xfe, 0x00, 0x00, 0x00, 0x0f, 0xff, 0xff, 0xe0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0xff, 0xff, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x03, 0x07, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0f, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('1', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0xc0, 0xe0, 0xe0, 0xf8, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('2', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x1c, 0x1c, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1e, 0x3c, 0xf8, 0xf0, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0xf8, 0x7f, 0x3f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xe0, 0xf0, 0x78, 0x3c, 0x1e, 0x0f, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x0f, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('3', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x1c, 0x1c, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1e, 0x3c, 0xfc, 0xf8, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x70, 0x70, 0x70, 0x70, 0x78, 0xf8, 0xdc, 0xcf, 0x87, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc1, 0xff, 0xff, 0x7e, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x07, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0f, 0x07, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('4', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xe0, 0x70, 0x38, 0xfc, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xf0, 0x78, 0x3c, 0x0e, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0xff, 0xff, 0xff, 0x07, 0x07, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('5', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0xfc, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x7f, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xf0, 0xe0, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc1, 0xff, 0xff, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x07, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x07, 0x07, 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('6', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0xf0, 0x38, 0x1c, 0x1c, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1e, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0xff, 0xff, 0x63, 0x70, 0x30, 0x38, 0x38, 0x38, 0x38, 0x38, 0x78, 0x70, 0xf0, 0xe0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x1f, 0xff, 0xff, 0xe0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc1, 0xff, 0xff, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x03, 0x07, 0x07, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0f, 0x07, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('7', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x1c, 0x9c, 0xfc, 0xfc, 0x7c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0xfc, 0x3e, 0x0f, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xf0, 0x7c, 0x3f, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x0e, 0x0f, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('8', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xf0, 0xf8, 0x3c, 0x1e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1e, 0x3c, 0xfc, 0xf8, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x8f, 0xdf, 0xde, 0x78, 0x78, 0x70, 0x70, 0x60, 0xe0, 0xf0, 0xfc, 0xdf, 0x8f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x7c, 0xff, 0xff, 0xc3, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x83, 0xff, 0xff, 0x7e, 0x00, 0x00, 0x00, 0x00, 0x01, 0x03, 0x07, 0x07, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0f, 0x07, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-  bigNumbers.Add('9', new Dictionary&lt;int, byte[]&gt;(){ {20, new byte[]{ 
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0xf8, 0x78, 0x1c, 0x1c, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x1c, 0x3c, 0xf8, 0xf0, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x1f, 0x7f, 0xff, 0xf0, 0xc0, 0xc0, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xc0, 0xc0, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x81, 0xe1, 0xf8, 0x7f, 0x1f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x07, 0x07, 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-  }}});
-}
+byte[][] lcdfont_2l = {
+   new byte[] { (byte)' ', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'!', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'"', 8, 16, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   //new byte[] { (byte)'#', 8, 16, 0x00, 0x20, 0xe0, 0x3c, 0x20, 0xe0, 0x3c, 0x20, 0x08, 0x78, 0x0f, 0x08, 0x78, 0x0f, 0x08, 0x00 },
+   new byte[] { (byte)'$', 8, 16, 0x00, 0x38, 0x44, 0x84, 0xfe, 0x04, 0x04, 0x18, 0x00, 0x18, 0x20, 0x20, 0x7f, 0x21, 0x22, 0x1c },
+   new byte[] { (byte)'%', 8, 16, 0x00, 0x38, 0x44, 0x44, 0xb8, 0x60, 0x10, 0x0c, 0x00, 0x18, 0x04, 0x03, 0x1c, 0x22, 0x22, 0x1c },
+   new byte[] { (byte)'&amp;', 8, 16, 0x00, 0x00, 0x38, 0xc4, 0xc4, 0x38, 0x00, 0x80, 0x00, 0x1e, 0x21, 0x20, 0x20, 0x13, 0x0c, 0x33 },
+   new byte[] { (byte)'\'', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'(', 8, 16, 0x00, 0x00, 0xe0, 0x18, 0x04, 0x02, 0x00, 0x00, 0x00, 0x00, 0x07, 0x18, 0x20, 0x40, 0x00, 0x00 },
+   new byte[] { (byte)')', 8, 16, 0x00, 0x00, 0x02, 0x04, 0x18, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x40, 0x20, 0x18, 0x07, 0x00, 0x00 },
+   new byte[] { (byte)'*', 8, 16, 0x00, 0x40, 0x80, 0xe0, 0x80, 0x40, 0x00, 0x00, 0x00, 0x02, 0x01, 0x00, 0x01, 0x02, 0x00, 0x00 },
+   new byte[] { (byte)'+', 8, 16, 0x00, 0x80, 0x80, 0x80, 0xf0, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)',', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x30, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'-', 8, 16, 0x00, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'.', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'/', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x30, 0x0c, 0x00, 0x00, 0x30, 0x0c, 0x03, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'0', 8, 16, 0x00, 0xf0, 0x08, 0x04, 0x04, 0x04, 0x08, 0xf0, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x0f },
+   new byte[] { (byte)'1', 8, 16, 0x00, 0x00, 0x08, 0x08, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'2', 8, 16, 0x00, 0x18, 0x04, 0x04, 0x04, 0x84, 0x78, 0x00, 0x00, 0x38, 0x24, 0x22, 0x21, 0x20, 0x20, 0x00 },
+   new byte[] { (byte)'3', 8, 16, 0x00, 0x18, 0x84, 0x84, 0x84, 0x84, 0x78, 0x00, 0x00, 0x18, 0x20, 0x20, 0x20, 0x20, 0x1f, 0x00 },
+   new byte[] { (byte)'4', 8, 16, 0x00, 0x00, 0x00, 0xc0, 0x30, 0x0c, 0xfc, 0x00, 0x00, 0x04, 0x07, 0x04, 0x04, 0x04, 0x3f, 0x04 },
+   new byte[] { (byte)'5', 8, 16, 0x00, 0xfc, 0x44, 0x44, 0x44, 0x44, 0x84, 0x00, 0x00, 0x18, 0x20, 0x20, 0x20, 0x20, 0x1f, 0x00 },
+   new byte[] { (byte)'6', 8, 16, 0x00, 0xf8, 0x84, 0x84, 0x84, 0x84, 0x18, 0x00, 0x00, 0x1f, 0x20, 0x20, 0x20, 0x20, 0x1f, 0x00 },
+   new byte[] { (byte)'7', 8, 16, 0x00, 0x04, 0x04, 0x04, 0xc4, 0x34, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x3e, 0x01, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'8', 8, 16, 0x00, 0x78, 0x84, 0x84, 0x84, 0x84, 0x78, 0x00, 0x00, 0x1f, 0x20, 0x20, 0x20, 0x20, 0x1f, 0x00 },
+   new byte[] { (byte)'9', 8, 16, 0x00, 0xf8, 0x04, 0x04, 0x04, 0x04, 0xf8, 0x00, 0x00, 0x18, 0x21, 0x21, 0x21, 0x21, 0x1f, 0x00 },
+   new byte[] { (byte)':', 8, 16, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)';', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x1c, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'&lt;', 8, 16, 0x80, 0x40, 0x40, 0x20, 0x10, 0x10, 0x08, 0x00, 0x00, 0x01, 0x01, 0x02, 0x04, 0x04, 0x08, 0x00 },
+   new byte[] { (byte)'=', 8, 16, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02 },
+   new byte[] { (byte)'&gt;', 8, 16, 0x00, 0x08, 0x10, 0x10, 0x20, 0x40, 0x40, 0x80, 0x00, 0x08, 0x04, 0x04, 0x02, 0x01, 0x01, 0x00 },
+   //new byte[] { (byte)'|'  /* ☂ */, 16, 32, 0x00, 0xe0, 0x30, 0x78, 0xf8, 0x3c, 0x3c, 0xfe, 0x7c, 0x3c, 0x3c, 0xf8, 0x78, 0x30, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'@', 8, 16, 0x00, 0xf0, 0x08, 0xc4, 0x24, 0xe4, 0x08, 0xf0, 0x00, 0x0f, 0x10, 0x23, 0x24, 0x23, 0x24, 0x17 },
+   new byte[] { (byte)'A', 8, 16, 0x00, 0x00, 0x00, 0xe0, 0x1c, 0xe0, 0x00, 0x00, 0x00, 0x38, 0x07, 0x04, 0x04, 0x04, 0x07, 0x38 },
+   new byte[] { (byte)'B', 8, 16, 0x00, 0xfc, 0x84, 0x84, 0x84, 0x84, 0x48, 0x30, 0x00, 0x3f, 0x20, 0x20, 0x20, 0x20, 0x11, 0x0e },
+   new byte[] { (byte)'C', 8, 16, 0x00, 0xf0, 0x08, 0x04, 0x04, 0x04, 0x08, 0x30, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x0c },
+   new byte[] { (byte)'D', 8, 16, 0x00, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x18, 0xe0, 0x00, 0x3f, 0x20, 0x20, 0x20, 0x20, 0x18, 0x07 },
+   new byte[] { (byte)'E', 8, 16, 0x00, 0xfc, 0x84, 0x84, 0x84, 0x84, 0x84, 0x04, 0x00, 0x3f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 },
+   new byte[] { (byte)'F', 8, 16, 0x00, 0xfc, 0x84, 0x84, 0x84, 0x84, 0x84, 0x04, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'G', 8, 16, 0x00, 0xf0, 0x08, 0x04, 0x04, 0x04, 0x08, 0x10, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x21, 0x11, 0x3f },
+   new byte[] { (byte)'H', 8, 16, 0x00, 0xfc, 0x80, 0x80, 0x80, 0x80, 0x80, 0xfc, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f },
+   new byte[] { (byte)'I', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'J', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x18, 0x20, 0x20, 0x20, 0x1f, 0x00, 0x00 },
+   new byte[] { (byte)'K', 8, 16, 0x00, 0xfc, 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x00, 0x3f, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20 },
+   new byte[] { (byte)'L', 8, 16, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00 },
+   new byte[] { (byte)'M', 8, 16, 0x00, 0xfc, 0x30, 0xc0, 0x00, 0xc0, 0x30, 0xfc, 0x00, 0x3f, 0x00, 0x00, 0x07, 0x00, 0x00, 0x3f },
+   new byte[] { (byte)'N', 8, 16, 0x00, 0xfc, 0x18, 0x60, 0x80, 0x00, 0x00, 0xfc, 0x00, 0x3f, 0x00, 0x00, 0x01, 0x06, 0x18, 0x3f },
+   new byte[] { (byte)'O', 8, 16, 0x00, 0xf0, 0x08, 0x04, 0x04, 0x04, 0x08, 0xf0, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x0f },
+   new byte[] { (byte)'P', 8, 16, 0x00, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x88, 0x70, 0x00, 0x3f, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00 },
+   new byte[] { (byte)'Q', 8, 16, 0x00, 0xf0, 0x08, 0x04, 0x04, 0x04, 0x08, 0xf0, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x28, 0x10, 0x2f },
+   new byte[] { (byte)'R', 8, 16, 0x00, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x88, 0x70, 0x00, 0x3f, 0x01, 0x01, 0x01, 0x01, 0x02, 0x3c },
+   new byte[] { (byte)'S', 8, 16, 0x00, 0x38, 0x44, 0x84, 0x84, 0x04, 0x04, 0x18, 0x00, 0x18, 0x20, 0x20, 0x20, 0x21, 0x22, 0x1c },
+   new byte[] { (byte)'T', 8, 16, 0x00, 0x04, 0x04, 0x04, 0xfc, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'U', 8, 16, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x1f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x1f },
+   new byte[] { (byte)'V', 8, 16, 0x00, 0x1c, 0xe0, 0x00, 0x00, 0x00, 0xe0, 0x1c, 0x00, 0x00, 0x00, 0x07, 0x38, 0x07, 0x00, 0x00 },
+   new byte[] { (byte)'W', 8, 16, 0x00, 0xfc, 0x00, 0x80, 0x7c, 0x80, 0x00, 0xfc, 0x00, 0x03, 0x3c, 0x03, 0x00, 0x03, 0x3c, 0x03 },
+   new byte[] { (byte)'X', 8, 16, 0x00, 0x0c, 0x30, 0x40, 0x80, 0x40, 0x30, 0x0c, 0x00, 0x30, 0x0c, 0x03, 0x00, 0x03, 0x0c, 0x30 },
+   new byte[] { (byte)'Y', 8, 16, 0x00, 0x0c, 0x30, 0xc0, 0x00, 0xc0, 0x30, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'Z', 8, 16, 0x00, 0x04, 0x04, 0x04, 0xc4, 0x34, 0x0c, 0x00, 0x00, 0x30, 0x2c, 0x23, 0x20, 0x20, 0x20, 0x00 },
+   new byte[] { (byte)'[', 8, 16, 0x00, 0x00, 0x00, 0xfe, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x7f, 0x40, 0x40, 0x40, 0x00 },
+   new byte[] { (byte)']', 8, 16, 0x00, 0x02, 0x02, 0x02, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00 },
+   //new byte[] { (byte)'^', 8, 16, 0x00, 0x00, 0x08, 0x04, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'_', 8, 16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40 },
+   new byte[] { (byte)'`', 8, 16, 0x00, 0x00, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'a', 8, 16, 0x00, 0x80, 0x40, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x1c, 0x22, 0x22, 0x22, 0x22, 0x1f, 0x20 },
+   new byte[] { (byte)'b', 8, 16, 0x00, 0xfc, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x3f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x0f },
+   new byte[] { (byte)'c', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x40, 0x40, 0x80, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x20, 0x10 },
+   new byte[] { (byte)'d', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x40, 0x80, 0xfc, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x3f },
+   new byte[] { (byte)'e', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x0f, 0x12, 0x22, 0x22, 0x22, 0x22, 0x13 },
+   new byte[] { (byte)'f', 8, 16, 0x00, 0x40, 0x40, 0xf8, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'g', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x80, 0xc0, 0x00, 0x00, 0x27, 0x48, 0x50, 0x50, 0x48, 0x3f, 0x00 },
+   new byte[] { (byte)'h', 8, 16, 0x00, 0xfc, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00 },
+   new byte[] { (byte)'i', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xcc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'j', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xcc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'k', 8, 16, 0x00, 0xfc, 0x00, 0x00, 0x80, 0x40, 0x20, 0x00, 0x00, 0x3f, 0x02, 0x05, 0x08, 0x10, 0x20, 0x00 },
+   new byte[] { (byte)'l', 8, 16, 0x00, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'m', 8, 16, 0x00, 0xc0, 0x40, 0x40, 0x80, 0x40, 0x40, 0x80, 0x00, 0x3f, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x3f },
+   new byte[] { (byte)'n', 8, 16, 0x00, 0xc0, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00 },
+   new byte[] { (byte)'o', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x0f, 0x10, 0x20, 0x20, 0x20, 0x10, 0x0f },
+   new byte[] { (byte)'p', 8, 16, 0x00, 0xc0, 0x80, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x7f, 0x08, 0x10, 0x10, 0x10, 0x08, 0x07 },
+   new byte[] { (byte)'q', 8, 16, 0x00, 0x00, 0x80, 0x40, 0x40, 0x40, 0x80, 0xc0, 0x00, 0x07, 0x08, 0x10, 0x10, 0x10, 0x08, 0x7f },
+   new byte[] { (byte)'r', 8, 16, 0x00, 0x00, 0xc0, 0x80, 0x40, 0x40, 0x40, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'s', 8, 16, 0x00, 0x80, 0x40, 0x40, 0x40, 0x40, 0x80, 0x00, 0x00, 0x11, 0x22, 0x22, 0x24, 0x24, 0x18, 0x00 },
+   new byte[] { (byte)'t', 8, 16, 0x00, 0x40, 0x40, 0xfc, 0x40, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00, 0x1f, 0x20, 0x20, 0x20, 0x00 },
+   new byte[] { (byte)'u', 8, 16, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 0x1f, 0x20, 0x20, 0x20, 0x20, 0x3f, 0x00 },
+   new byte[] { (byte)'v', 8, 16, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 0x03, 0x0c, 0x30, 0x0c, 0x03, 0x00 },
+   new byte[] { (byte)'w', 8, 16, 0x00, 0xc0, 0x00, 0x00, 0x80, 0x00, 0x00, 0xc0, 0x00, 0x07, 0x38, 0x0c, 0x03, 0x0c, 0x38, 0x07 },
+   new byte[] { (byte)'x', 8, 16, 0x00, 0x40, 0x80, 0x00, 0x00, 0x00, 0x80, 0x40, 0x00, 0x20, 0x10, 0x09, 0x06, 0x09, 0x10, 0x20 },
+   new byte[] { (byte)'y', 8, 16, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x40, 0x43, 0x4c, 0x30, 0x0c, 0x03, 0x00 },
+   new byte[] { (byte)'z', 8, 16, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0xc0, 0x00, 0x00, 0x30, 0x28, 0x24, 0x22, 0x21, 0x20, 0x00 },
+   new byte[] { (byte)'©', 8, 16, 0xe0, 0x18, 0xe4, 0x14, 0x14, 0x24, 0x18, 0xe0, 0x07, 0x18, 0x27, 0x28, 0x28, 0x24, 0x18, 0x07 },
+   new byte[] { (byte)'®', 16, 32, 0x00, 0x00, 0xc0, 0x30, 0x08, 0xe8, 0x14, 0x14, 0x14, 0x14, 0xe8, 0x08, 0x30, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0c, 0x10, 0x1f, 0x21, 0x21, 0x21, 0x21, 0x1e, 0x10, 0x0c, 0x03, 0x00, 0x00 },
+   new byte[] { (byte)'\\' /* ° */, 16, 32, 0x00, 0x00, 0x18, 0x24, 0x24, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'#' /* bulb */, 11, 22, 0x00, 0x78, 0xe4, 0xfa, 0xfe, 0xfe, 0xfe, 0xfe, 0xfc, 0x78, 0x00, 0x00, 0x00, 0x01, 0x17, 0x77, 0x77, 0x77, 0x17, 0x01, 0x00, 0x00 },
+   new byte[] { (byte)'|' /* plug */, 12, 24, 0x00, 0x60, 0xe0, 0xfe, 0xfe, 0xe0, 0xe0, 0xfe, 0xfe, 0xe0, 0x60, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x0f, 0x7f, 0x7f, 0x0f, 0x0f, 0x07, 0x00, 0x00 },
+   new byte[] { (byte)'^' /* energy */, 9, 18, 0x00, 0xe0, 0xfe, 0xfe, 0x5e, 0xc6, 0xe0, 0xe0, 0x00, 0x00, 0x01, 0x60, 0x38, 0x0e, 0x07, 0x01, 0x00, 0x00 }
+     
+};
+
+byte[][] lcdfont_3l = 
+{
+   new byte[] { (byte)' ', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'!', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7f, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'"', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'#', 12, 36, 0x00, 0x00, 0x80, 0x80, 0x80, 0xfc, 0xfc, 0x80, 0x80, 0xfc, 0xfc, 0x80, 0x00, 0x40, 0x40, 0xc0, 0xff, 0x7f, 0x40, 0xc0, 0xff, 0x7f, 0x40, 0x40, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'$', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0xff, 0xff, 0x04, 0x0c, 0x38, 0x30, 0x00, 0x00, 0x81, 0x83, 0x06, 0x04, 0xff, 0xff, 0x08, 0x18, 0xf0, 0xe0, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x3f, 0x3f, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'%', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0xfc, 0xf8, 0xc0, 0xf0, 0x3c, 0x0c, 0x00, 0x00, 0x00, 0x01, 0x01, 0xe1, 0xf9, 0xde, 0xe7, 0x21, 0x20, 0xe0, 0xc0, 0x00, 0x00, 0x0c, 0x0f, 0x03, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x0f, 0x07 },
+   new byte[] { (byte)'&amp;', 12, 36, 0x00, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0x39, 0x0f, 0x0e, 0x3b, 0xf1, 0xc0, 0x80, 0xf0, 0x70, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x07, 0x0d, 0x08 },
+   new byte[] { (byte)'\'', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'(', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0x78, 0x1c, 0x06, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x07, 0x1e, 0x38, 0x60, 0x40, 0x00, 0x00 },
+   new byte[] { (byte)')', 12, 36, 0x00, 0x00, 0x02, 0x06, 0x1c, 0x78, 0xe0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x60, 0x38, 0x1e, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'*', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x46, 0x64, 0x3c, 0x1f, 0x1f, 0x3c, 0x64, 0x46, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'+', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08, 0x08, 0x08, 0xff, 0xff, 0x08, 0x08, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)',', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x2c, 0x1c, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'-', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'.', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x0c, 0x0c, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'/', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x7c, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf8, 0x1f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x70, 0x3e, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'0', 12, 36, 0x00, 0xc0, 0xf0, 0x38, 0x0c, 0x04, 0x04, 0x04, 0x0c, 0x38, 0xf0, 0xc0, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'1', 12, 36, 0x00, 0x00, 0x00, 0x10, 0x10, 0x18, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'2', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0x00, 0x80, 0xc0, 0x60, 0x20, 0x30, 0x18, 0x0e, 0x07, 0x01, 0x00, 0x00, 0x0e, 0x0f, 0x09, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00 },
+   new byte[] { (byte)'3', 12, 36, 0x00, 0x70, 0x78, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0x80, 0x80, 0x00, 0x04, 0x04, 0x04, 0x04, 0x0e, 0xfb, 0xf1, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'4', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x70, 0x1c, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0x9c, 0x87, 0x81, 0x80, 0x80, 0xff, 0xff, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00 },
+   new byte[] { (byte)'5', 12, 36, 0x00, 0x00, 0xfc, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x80, 0x87, 0x07, 0x02, 0x02, 0x02, 0x02, 0x06, 0xfc, 0xf8, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'6', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x38, 0x30, 0x00, 0x00, 0xff, 0xff, 0x04, 0x02, 0x02, 0x02, 0x02, 0x06, 0xfc, 0xf8, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'7', 12, 36, 0x00, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0xe4, 0xfc, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf8, 0x7f, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'8', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0xf1, 0xfb, 0x0e, 0x04, 0x04, 0x04, 0x04, 0x0e, 0xfb, 0xf1, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'9', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0x07, 0x0f, 0x18, 0x10, 0x10, 0x10, 0x10, 0x08, 0xff, 0xff, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)':', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)';', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0b, 0x07, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'&lt;', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0xc0, 0x60, 0x60, 0x30, 0x00, 0x00, 0x1c, 0x3e, 0x36, 0x63, 0xc1, 0xc1, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x03, 0x03, 0x06, 0x00 },
+   new byte[] { (byte)'=', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'&gt;', 12, 36, 0x00, 0x30, 0x60, 0x60, 0xc0, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc1, 0xc1, 0x63, 0x36, 0x3e, 0x1c, 0x00, 0x00, 0x06, 0x03, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   //new byte[] { (byte)'☂', 24, 72, 0x00, 0x00, 0x80, 0xc0, 0xe0, 0xe0, 0xf0, 0xf0, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf0, 0xf0, 0xe0, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x0c, 0x03, 0x01, 0x01, 0x03, 0x0f, 0x03, 0x01, 0x01, 0x01, 0xff, 0x07, 0x01, 0x01, 0x01, 0x03, 0x0f, 0x03, 0x01, 0x01, 0x03, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x40, 0x40, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'@', 12, 36, 0x00, 0x80, 0xe0, 0x70, 0x18, 0x08, 0x88, 0x08, 0x98, 0x30, 0xe0, 0xc0, 0x00, 0xff, 0xff, 0x00, 0x7e, 0xff, 0x81, 0xff, 0x7f, 0x80, 0xff, 0x7f, 0x00, 0x01, 0x03, 0x06, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x06, 0x02 },
+   new byte[] { (byte)'A', 12, 36, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf8, 0x3c, 0xf8, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xfe, 0x4f, 0x41, 0x40, 0x41, 0x4f, 0xfe, 0xf0, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f },
+   new byte[] { (byte)'B', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0xff, 0xff, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0e, 0xfb, 0xf1, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'C', 12, 36, 0x00, 0xc0, 0xf0, 0x38, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x38, 0x30, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03 },
+   new byte[] { (byte)'D', 12, 36, 0x00, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x38, 0xf0, 0xc0, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'E', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0xff, 0xff, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00 },
+   new byte[] { (byte)'F', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0xff, 0xff, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'G', 12, 36, 0x00, 0xc0, 0xf0, 0x38, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x78, 0x70, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x04, 0x04, 0x04, 0x04, 0xfc, 0xfc, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x06, 0x0f, 0x0f },
+   new byte[] { (byte)'H', 12, 36, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0xff, 0xff, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0xff, 0xff, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'I', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'J', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00, 0x00 },
+   new byte[] { (byte)'K', 12, 36, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x80, 0xc0, 0x60, 0x30, 0x18, 0x0c, 0x00, 0x00, 0xff, 0xff, 0x06, 0x03, 0x0f, 0x3c, 0xf0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0f, 0x0c, 0x00 },
+   new byte[] { (byte)'L', 12, 36, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00 },
+   new byte[] { (byte)'M', 12, 36, 0x00, 0xfc, 0xfc, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xfc, 0xfc, 0x00, 0xff, 0xff, 0x03, 0x1f, 0xf8, 0xc0, 0xf8, 0x1f, 0x03, 0xff, 0xff, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x0f, 0x0f },
+   new byte[] { (byte)'N', 12, 36, 0x00, 0xfc, 0xfc, 0x70, 0xc0, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0xff, 0xff, 0x00, 0x01, 0x07, 0x1c, 0x70, 0xc0, 0xff, 0xff, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'O', 12, 36, 0x00, 0xc0, 0xf0, 0x38, 0x0c, 0x04, 0x04, 0x04, 0x0c, 0x38, 0xf0, 0xc0, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'P', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0xff, 0xff, 0x08, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'Q', 12, 36, 0x00, 0xc0, 0xf0, 0x38, 0x0c, 0x04, 0x04, 0x04, 0x0c, 0x38, 0xf0, 0xc0, 0x00, 0xff, 0xff, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x09, 0x0b, 0x0e, 0x0f, 0x1b, 0x10 },
+   new byte[] { (byte)'R', 12, 36, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0c, 0xf8, 0xf0, 0x00, 0x00, 0xff, 0xff, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0e, 0xfb, 0xf1, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'S', 12, 36, 0x00, 0xf0, 0xf8, 0x0c, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x38, 0x30, 0x00, 0x00, 0x80, 0x81, 0x03, 0x02, 0x06, 0x04, 0x0c, 0x18, 0xf0, 0xe0, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'T', 12, 36, 0x00, 0x04, 0x04, 0x04, 0x04, 0xfc, 0xfc, 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'U', 12, 36, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'V', 12, 36, 0x00, 0x3c, 0xfc, 0xc0, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xfc, 0x3c, 0x00, 0x00, 0x00, 0x03, 0x3f, 0xfc, 0xc0, 0xc0, 0xfc, 0x3f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0f, 0x0f, 0x01, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'W', 12, 36, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0xc0, 0xfc, 0xc0, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x01, 0x7f, 0xfe, 0xe0, 0x7f, 0x01, 0x7f, 0xe0, 0xfe, 0x7f, 0x01, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00 },
+   new byte[] { (byte)'X', 12, 36, 0x00, 0x0c, 0x3c, 0xf0, 0xc0, 0x00, 0x00, 0xc0, 0xf0, 0x3c, 0x0c, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf3, 0x3f, 0x3f, 0xf3, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0f, 0x0c, 0x00 },
+   new byte[] { (byte)'Y', 12, 36, 0x00, 0x1c, 0xfc, 0xe0, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xfc, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0f, 0xfc, 0xfc, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'Z', 12, 36, 0x00, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0xc4, 0xf4, 0x3c, 0x0c, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xf0, 0x3c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x0f, 0x0b, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00 },
+   new byte[] { (byte)'[', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xfe, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7f, 0x7f, 0x40, 0x40, 0x40, 0x00, 0x00 },
+   new byte[] { (byte)']', 12, 36, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0xfe, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x7f, 0x7f, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'^', 12, 36, 0x00, 0x00, 0x10, 0x18, 0x0c, 0x06, 0x06, 0x0c, 0x18, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'_', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40 },
+   new byte[] { (byte)'`', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x04, 0x0c, 0x18, 0x30, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'a', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x84, 0xc6, 0x63, 0x21, 0x21, 0x21, 0x23, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x0f, 0x08 },
+   new byte[] { (byte)'b', 12, 36, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x01, 0x01, 0x01, 0x03, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x04, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'c', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x03, 0x01, 0x01, 0x01, 0x03, 0x06, 0x04, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x06, 0x02, 0x00 },
+   new byte[] { (byte)'d', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x03, 0x01, 0x01, 0x01, 0x02, 0xff, 0xff, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x04, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'e', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x23, 0x21, 0x21, 0x21, 0x23, 0x3e, 0x3c, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x06, 0x02, 0x00 },
+   new byte[] { (byte)'f', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0xfc, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0xff, 0xff, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'g', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x03, 0x01, 0x01, 0x01, 0x02, 0xff, 0xff, 0x00, 0x00, 0x00, 0x11, 0x33, 0x66, 0x44, 0x44, 0x44, 0x62, 0x3f, 0x1f, 0x00 },
+   new byte[] { (byte)'h', 12, 36, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x01, 0x01, 0x01, 0x03, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'i', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1c, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'j', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1c, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x60, 0x3f, 0x1f, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'k', 12, 36, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x60, 0x70, 0xd8, 0x8c, 0x06, 0x03, 0x01, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x01, 0x03, 0x06, 0x0c, 0x08 },
+   new byte[] { (byte)'l', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'m', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xfe, 0x01, 0x01, 0xff, 0xfe, 0x01, 0x01, 0xff, 0xfe, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x0f, 0x0f },
+   new byte[] { (byte)'n', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x01, 0x01, 0x03, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00 },
+   new byte[] { (byte)'o', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x03, 0x01, 0x01, 0x01, 0x03, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'p', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x01, 0x01, 0x01, 0x03, 0xfe, 0xfc, 0x00, 0x00, 0x00, 0x7f, 0x7f, 0x04, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'q', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfc, 0xfe, 0x03, 0x01, 0x01, 0x01, 0x02, 0xff, 0xff, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x04, 0x7f, 0x7f, 0x00 },
+   new byte[] { (byte)'r', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'s', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x1e, 0x33, 0x21, 0x21, 0x61, 0x43, 0xce, 0x8c, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x0c, 0x07, 0x03, 0x00 },
+   new byte[] { (byte)'t', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0xff, 0xff, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x0f, 0x08, 0x08, 0x08, 0x00, 0x00 },
+   new byte[] { (byte)'u', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x03, 0x07, 0x0c, 0x08, 0x08, 0x08, 0x04, 0x0f, 0x0f, 0x00 },
+   new byte[] { (byte)'v', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x3f, 0xf8, 0xc0, 0x00, 0xc0, 0xf8, 0x3f, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x07, 0x0e, 0x07, 0x01, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'w', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0xff, 0xf0, 0x00, 0xf0, 0x3e, 0xf0, 0x00, 0xf0, 0xff, 0x0f, 0x00, 0x00, 0x00, 0x0f, 0x0f, 0x01, 0x00, 0x01, 0x0f, 0x0f, 0x00, 0x00 },
+   new byte[] { (byte)'x', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x0f, 0x9c, 0xf0, 0x60, 0xf0, 0x9c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x0c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x03, 0x0f, 0x0c, 0x00 },
+   new byte[] { (byte)'y', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x3f, 0xf8, 0xc0, 0x00, 0x00, 0xc0, 0xf8, 0x3f, 0x07, 0x00, 0x00, 0x40, 0x40, 0x60, 0x33, 0x1f, 0x0f, 0x03, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'z', 12, 36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0xc1, 0xe1, 0x39, 0x1d, 0x07, 0x03, 0x00, 0x00, 0x00, 0x0c, 0x0e, 0x0b, 0x09, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00 },
+   new byte[] { (byte)'©', 12, 36, 0x00, 0x80, 0x60, 0x10, 0x88, 0x88, 0x88, 0x88, 0x88, 0x10, 0x60, 0x80, 0x00, 0xff, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0xc3, 0xc3, 0x00, 0xff, 0x00, 0x01, 0x06, 0x08, 0x11, 0x11, 0x11, 0x11, 0x11, 0x08, 0x06, 0x01 },
+   new byte[] { (byte)'®', 24, 72, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x20, 0x10, 0x10, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x10, 0x10, 0x20, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0x10, 0x10, 0x10, 0x30, 0xf0, 0xdf, 0x0e, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x04, 0x08, 0x09, 0x11, 0x10, 0x10, 0x10, 0x10, 0x10, 0x09, 0x09, 0x04, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'\\' /* ° */, 10, 30, 0x00, 0x00, 0x1c, 0x36, 0x22, 0x36, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+   new byte[] { (byte)'|' /* temp symbol */, 16, 48, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfe, 0x03, 0x81, 0x81, 0x03, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x7f, 0x00, 0xff, 0xff, 0x00, 0x7f, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x10, 0x20, 0x4e, 0x5f, 0x5f, 0x4e, 0x20, 0x10, 0x0f, 0x00, 0x00, 0x00 }
+};
 
 var logo = new byte[]{
   0xC0, 0xF0, 0xF8, 0x1C, 0x0C, 0x06, 0xF6, 0xFE, 0xFF, 0xFF, 0x0F, 0x00, 0x00, 0x00, 0xC0, 0xFE,
@@ -7265,6 +7501,7 @@ ConnectorPin sdaPin = ConnectorPin.P1Pin03;
 ConnectorPin sclPin = ConnectorPin.P1Pin05;
 
 var sendCommand = new Func&lt;byte[],bool&gt;((commands)=&gt;{
+  lock (this)
   using (var driver = new I2cDriver(sdaPin.ToProcessor(), sclPin.ToProcessor()))
   {
     var connection = driver.Connect(SSD1306_I2C_ADDRESS);
@@ -7300,6 +7537,7 @@ var initialize = new Func&lt;bool&gt;(()=&gt;{
 
 var clearScreen = new Func&lt;bool&gt;(()=&gt;{
   // clear screen
+  lock (this)
   using (var driver = new I2cDriver(sdaPin.ToProcessor(), sclPin.ToProcessor()))
   {
     var connection = driver.Connect(SSD1306_I2C_ADDRESS);
@@ -7350,6 +7588,7 @@ var gotoTextXY = new Func&lt;int, int, bool&gt;((col, row)=&gt;{
 });
 
 var drawStride = new Func&lt;byte[], bool&gt;((data)=&gt;{
+  lock (this)
   using (var driver = new I2cDriver(sdaPin.ToProcessor(), sclPin.ToProcessor()))
   {
     var connection = driver.Connect(SSD1306_I2C_ADDRESS);
@@ -7370,83 +7609,53 @@ var drawText = new Func&lt;string, bool&gt;((s)=&gt;{
   return true;
 });
 
+var drawTextEx = new Func&lt;string, int, int, int, bool&gt;((s, cx, cy, font)=&gt;{
+  int cursorX = cx;
+  var charset = lcdfont_2l;
+  if (font == 3) charset = lcdfont_3l;
+  
+  // draw text on the center
+  for (int c = 0; c &lt; s.Length; c++)
+  {
+    int charIndex = -1;
+    for(int i = 0; i &lt; charset.Length; i++)
+    {
+    	if (charset[i][0] == s[c])
+        {
+          charIndex = i;
+          break;
+        }
+    }
+    if (charIndex == -1) continue;
+    
+    byte[] fontData = charset[charIndex];
+    int fontWidth = fontData[1];
+    int fontLength = fontData[2];
+    for (int y = 0; y &lt; (fontLength / fontWidth); y++)
+    {
+
+      sendCommand(new byte[]{
+        (byte)(0xB0 + cy + y),						//set page address
+        (byte)(0x00 + (cursorX &amp; 0x0F)),			//set column lower address
+        (byte)(0x10 + ((cursorX&gt;&gt;4)&amp;0x0F))			//set column higher address
+      });      
+
+      var data = new byte[fontWidth + 1];
+      data[0] = 0x40;
+      Array.Copy(fontData, (y * fontWidth) + 3, data, 1, fontWidth);
+      drawStride(data);
+
+    }
+    cursorX += fontWidth;
+  }
+  return true;
+});
+
 var drawLogo = new Func&lt;bool&gt;(()=&gt;{
   var data2 = new byte[512+1];
   data2[0] = 0x40;
   Array.Copy(logo, 0, data2, 1, 512);
-  drawStride(data2);      
-  return true;
-});
-
-var drawNumbers = new Func&lt;string, bool&gt;((s)=&gt;{
-  // calculate text width and rows (1 row = 8 pixel tall)
-  var textWidth = 0;
-  var maxRows = 1;
-  for (int c = 0; c &lt; s.Length; c++)
-  {
-    if (!bigNumbers.ContainsKey(s[c])) continue;
-    var font = bigNumbers[s[c]];
-    var enumerator = font.GetEnumerator();
-    enumerator.MoveNext();
-    int fontWidth = enumerator.Current.Key;
-    byte[] fontData = enumerator.Current.Value;
-    if (fontData.Length / fontWidth &gt; maxRows) maxRows = fontData.Length / fontWidth;
-    textWidth += enumerator.Current.Key;
-  }
-  var centerGap = (displayWidth - textWidth) / 2;
-  if (centerGap &lt; 0) centerGap = 0;
-  // left spacing
-  var cursorX = 0;
-  for (int y = 0; y &lt; maxRows; y++)
-  {
-    sendCommand(new byte[]{
-      (byte)(0xB0 + 0+y),							//set page address
-        (byte)(0x00 + (cursorX &amp; 0x0F)),			//set column lower address
-      (byte)(0x10 + ((cursorX&gt;&gt;4)&amp;0x0F))			//set column higher address
-    });      
-    var data = new byte[centerGap + 1];
-    data[0] = 0x40;
-    drawStride(data);
-  }
-  cursorX = centerGap;
-  // draw text on the center
-  for (int c = 0; c &lt; s.Length; c++)
-  {
-    if (!bigNumbers.ContainsKey(s[c])) continue;
-    var font = bigNumbers[s[c]];
-    var enumerator = font.GetEnumerator();
-    enumerator.MoveNext();
-    int fontWidth = enumerator.Current.Key;
-    byte[] fontData = enumerator.Current.Value;
-    for (int y = 0; y &lt; fontData.Length/fontWidth; y++)
-    {
-
-      sendCommand(new byte[]{
-        (byte)(0xB0 + 0+y),							//set page address
-          (byte)(0x00 + (cursorX &amp; 0x0F)),			//set column lower address
-        (byte)(0x10 + ((cursorX&gt;&gt;4)&amp;0x0F))			//set column higher address
-      });      
-
-      var data = new byte[fontWidth+1];
-      data[0] = 0x40;
-      Array.Copy(fontData, y*fontWidth, data, 1, fontWidth);
-      drawStride(data);
-
-    }
-    cursorX+=fontWidth;
-  }
-  // right spacing
-  for (int y = 0; y &lt; maxRows; y++)
-  {
-    sendCommand(new byte[]{
-      (byte)(0xB0 + 0+y),							//set page address
-        (byte)(0x00 + (cursorX &amp; 0x0F)),			//set column lower address
-      (byte)(0x10 + ((cursorX&gt;&gt;4)&amp;0x0F))			//set column higher address
-    });      
-    var data = new byte[centerGap + 1];
-    data[0] = 0x40;
-    drawStride(data);
-  }  
+  drawStride(data2);
   return true;
 });
 
@@ -7504,17 +7713,19 @@ When.WebServiceCallReceived("Components.Ssd1306", (args)=&gt;{
           response = "{ 'ResponseValue' : 'INVALID ARGUMENTS' }";
           break;
         }
-        int x = int.Parse(cmdParts[3]);
-      	int y = int.Parse(cmdParts[4]);
+        int x = currentX = int.Parse(cmdParts[3]);
+      	int y = currentY = int.Parse(cmdParts[4]);
       	gotoTextXY(x, y);
       	break;
-      case "Oled.DrawLogo":
+      case "Oled.ShowLogo":
       	drawLogo();
       	break;
-      case "Oled.DrawNumber":
-      	drawNumbers(argument);
-      	break;
+//      case "Oled.DrawNumber":
+//      	drawNumbers(argument);
+//      	break;
       case "Oled.DrawText":
+      case "Oled.DrawText2":
+      case "Oled.DrawText3":
         var align="";
         if (cmdParts.Length &gt; 4)
         {
@@ -7536,7 +7747,18 @@ When.WebServiceCallReceived("Components.Ssd1306", (args)=&gt;{
           text = text.PadLeft(padLeft).PadRight(16);          
           break;
         }
-      	drawText(text);
+      	if (command.EndsWith("2"))
+        {
+	      	drawTextEx(text, currentX, currentY, 2);
+        }
+      	else if (command.EndsWith("3"))
+        {
+	      	drawTextEx(text, currentX, currentY, 3);
+        }
+      	else
+        {
+	      	drawText(text);
+        }
       	break;
     }
   }
@@ -7571,6 +7793,8 @@ hg.SetConditionTrue();
 var temperature = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH0").Get().Parameter("Sensor.Temperature");
 var luminance = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH1").Get().Parameter("Sensor.Luminance");
 var energyLoad = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.KwLoad");
+var operatingLights = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingSwitches");
 var weather = hg.Program.WithName("Weather Underground");
 
 var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
@@ -7580,47 +7804,54 @@ oled.Command("Oled.DisplayClear").Execute();
 
 while (hg.Program.IsEnabled)
 {
+  if (hg.Settings.Parameter('EdenDisplay.MenuMode').Value != 'ON')
+  {
+    // Eden TMP36 sensor
+    oled.Command("Oled.GoTo").Execute("42/0");
+    oled.Command("Oled.DrawText3").Execute("|" + (Math.round(temperature.DecimalValue * 10) / 10) + "\\");
 
-  // Weather Underground data  
-  var weatherText = weather.Parameter("Conditions.City").Value + " " + weather.Parameter("Conditions.TemperatureC").Value;
-  oled.Command("Oled.GoTo").Execute("0/6");
-  oled.Command("Oled.DrawText").Execute(weatherText + "/CENTER");
-  oled.Command("Oled.GoTo").Execute("0/7");
-  oled.Command("Oled.DrawText").Execute(weather.Parameter("Conditions.Description").Value + "/CENTER");
-  
-  // Eden TMP36 sensor
-  oled.Command("Oled.DrawNumber").Execute(Math.round(temperature.DecimalValue, 1));
-  oled.Command("Oled.GoTo").Execute("0/0");
-  oled.Command("Oled.DrawText").Execute(" TEMPERATURE/CENTER");
+    // Eden photo cell light sensor
+    var lux = luminance.DecimalValue.toFixed(0);
+    while (lux.length &lt; 4) lux = " " + lux;
+    oled.Command("Oled.GoTo").Execute("0/0");
+    oled.Command("Oled.DrawText2").Execute(lux);
+    oled.Command("Oled.GoTo").Execute("0/2");
+    oled.Command("Oled.DrawText").Execute("*LUX");
 
+    // Current date time
+    var today = new Date();
+    var time = formatTime(today);
+    var displayDate = dayNames[today.getDay()] + ',' + monthNames[today.getMonth()] + ' ' + today.getDate(); 
+    oled.Command("Oled.GoTo").Execute("0/4");
+    oled.Command("Oled.DrawText2").Execute(displayDate + "/CENTER");
+    oled.Command("Oled.GoTo").Execute("0/6");
+    oled.Command("Oled.DrawText2").Execute(time.Time + ' ' + time.AmPm + "/CENTER");
+    hg.Pause(5);
+  }
+  if (hg.Settings.Parameter('EdenDisplay.MenuMode').Value != 'ON')
+  {
+    // Weather Underground data  
+    var weatherText = weather.Parameter("Conditions.City").Value + " " + weather.Parameter("Conditions.TemperatureC").Value;
+    if (weatherText.trim() != '')
+    {
+      oled.Command("Oled.GoTo").Execute("0/4");
+      oled.Command("Oled.DrawText2").Execute(weatherText + "/CENTER");
+      oled.Command("Oled.GoTo").Execute("0/6");
+      oled.Command("Oled.DrawText2").Execute(weather.Parameter("Conditions.Description").Value + "/CENTER");
+      hg.Pause(5);
+    }
+  }
+  if (hg.Settings.Parameter('EdenDisplay.MenuMode').Value != 'ON')
+  {
+    // Energy monitor Kw Load
+    oled.Command("Oled.GoTo").Execute("0/4");
+    oled.Command("Oled.DrawText2").Execute("Energy Use/CENTER");
+    oled.Command("Oled.GoTo").Execute("0/6");
+    oled.Command("Oled.DrawText2").Execute('/CENTER');
+    oled.Command("Oled.GoTo").Execute("0/6");
+    oled.Command("Oled.DrawText2").Execute('#' + operatingLights.Value + ' |' + operatingSwitches.Value + ' ^' + (Math.round(energyLoad.DecimalValue * 10) / 10));
+  }  
   hg.Pause(5);
-  
-  // Eden photo cell light sensor
-  oled.Command("Oled.DrawNumber").Execute(luminance.DecimalValue.toFixed(0));
-  oled.Command("Oled.GoTo").Execute("0/0");
-  oled.Command("Oled.DrawText").Execute(" LUMINANCE/CENTER");
-
-  hg.Pause(5);
-  
-  // Energy monitor Kw Load
-  oled.Command("Oled.DrawNumber").Execute(Math.round(energyLoad.DecimalValue, 1));
-  oled.Command("Oled.GoTo").Execute("0/0");
-  oled.Command("Oled.DrawText").Execute("Energy Use  kW/CENTER");
-
-  hg.Pause(5);
-
-  // Current date time
-  var today = new Date();
-  var time = formatTime(today);
-  var displayDate = dayNames[today.getDay()] + ',' + monthNames[today.getMonth()] + ' ' + today.getDate(); 
-  oled.Command("Oled.DrawNumber").Execute(time.Time);
-  oled.Command("Oled.GoTo").Execute("0/0");
-  oled.Command("Oled.DrawText").Execute(displayDate + "/CENTER");
-  oled.Command("Oled.GoTo").Execute("14/3");
-  oled.Command("Oled.DrawText").Execute(time.AmPm);
-  
-  hg.Pause(5);
-  
 }
 
 function formatTime(date) {
@@ -7647,5 +7878,1754 @@ function formatTime(date) {
     <TriggerTime xsi:nil="true" />
     <Type>Javascript</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// Call 'hg.SetConditionTrue()' when you want
+// the 'Code To Run' to be executed.
+hg.Program.Setup(function(){
+  hg.Program.AddInputField("EdenDisplay.ButtonProgram.1", "", "Button #1 program");
+  hg.Program.AddInputField("EdenDisplay.ButtonProgram.2", "", "Button #2 program");
+  hg.Program.AddInputField("EdenDisplay.ButtonProgram.3", "", "Button #3 program");
+  hg.Program.AddInputField("EdenDisplay.ButtonProgram.4", "", "Button #4 program");
+  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.1", "Toggle by button #1");
+  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.2", "Toggle by button #2");
+  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.3", "Toggle by button #3");
+  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.4", "Toggle by button #4");
+});
+hg.SetConditionTrue();
+</ScriptCondition>
+    <ScriptSource>// Get a reference to the OLED object
+var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
+
+// Get a reference to other programs of which data will be displayed on the OLED screen
+var thermostat = hg.Modules.WithName("Generic Thermostat").Get();
+var setPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
+var securitySystem = hg.Modules.WithName("Security Alarm System").Get();
+var securityArmed = securitySystem.Parameter("HomeGenie.SecurityArmed");
+
+// Global state variables
+var currentContext = '';
+var displayMode = 'normal';
+var lastButton = '';
+var startPressTs = new Date().getTime();
+// This system wide parameter is used to prevent other apps
+// from writing on the OLED screen  when the menu is open
+hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'OFF';
+
+// Menu screens
+
+function menuShowMain()
+{
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("----[ MENU ]----");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("1 Set Point/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText").Execute("2 Security/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/6");
+  oled.Command("Oled.DrawText").Execute("3 Invert Display/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  oled.Command("Oled.DrawText").Execute("4 Exit/LEFT");
+}
+
+function menuShowSetPoint()
+{
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("Set Point:/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText2").Execute(setPoint.Value + "/CENTER");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  oled.Command("Oled.DrawText").Execute("2 + 3 -   EXIT 4/CENTER");  
+}
+
+function menuShowSecurity()
+{
+  var level = securitySystem.Parameter("Status.Level");
+  oled.Command("Oled.GoTo").Execute("0/3");
+  oled.Command("Oled.DrawText").Execute("/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/4");
+  oled.Command("Oled.DrawText").Execute("Security:/LEFT");
+  oled.Command("Oled.GoTo").Execute("0/5");
+  oled.Command("Oled.DrawText2").Execute((securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0 ? "ARMED" : "DISARMED") + "/CENTER");
+  oled.Command("Oled.GoTo").Execute("0/7");
+  if (securityArmed.DecimalValue &gt; 0 || level.DecimalValue &gt; 0)
+  {
+    oled.Command("Oled.DrawText").Execute("2 DISARM  EXIT 4/CENTER");
+  }
+  else
+  {
+    oled.Command("Oled.DrawText").Execute("2 ARM     EXIT 4/CENTER");
+  }
+}
+
+// Context switch functions
+
+function setContext(ctx)
+{
+  currentContext = ctx;
+  hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'ON';
+  switch(ctx)
+  {
+    case 'main':
+      menuShowMain();
+      break;
+    case 'setpoint':
+      menuShowSetPoint();
+      break;
+    case 'security':
+      menuShowSecurity();
+      break;
+    case 'energysaving':
+      menuShowEnergySaving();
+      break;
+    case 'exit':
+      oled.Command("Oled.GoTo").Execute("0/3");
+      oled.Command("Oled.DrawText").Execute("/CENTER");
+      oled.Command("Oled.GoTo").Execute("0/4");
+      oled.Command("Oled.ShowLogo").Execute();
+      hg.Pause(2);
+      hg.Settings.Parameter('EdenDisplay.MenuMode').Value = 'OFF';
+      break;
+  }
+}
+
+function setContextInput(input)
+{
+  switch (input)
+  {
+    case '1': // BUTTON #1
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('setpoint');
+          break;
+      }
+      break;
+    case '2': // BUTTON #2
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('security');
+          break;
+        case 'setpoint':
+          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue + 1));
+          menuShowSetPoint();
+          break;
+        case 'security':
+          if (securityArmed.DecimalValue == 0)
+          {
+            securitySystem.Command("Control.On").Execute();
+          }
+          else
+          {
+            securitySystem.Command("Control.Off").Execute();
+          }
+          menuShowSecurity();
+          break;
+      }
+      break;
+    case '3': // BUTTON #3
+      switch (currentContext)
+      {
+        case 'main':
+          if (displayMode == 'normal')
+          {
+            displayMode = 'inverse';
+            oled.Command("Oled.DisplayInvert").Execute();
+          }
+          else
+          {
+            displayMode = 'normal';
+            oled.Command("Oled.DisplayNormal").Execute();
+          }
+          break;
+        case 'setpoint':
+          thermostat.Command("Thermostat.SetPointSet").Execute("Heating/" + (setPoint.DecimalValue - 1));
+          menuShowSetPoint();
+          break;
+      }
+      break;
+    case '4': // BUTTON #4
+      switch (currentContext)
+      {
+        case 'main':
+          setContext('exit');
+          break;
+        default:
+          setContext('main');
+          break;
+      }
+      break;
+  }
+
+}
+
+hg.When.ModuleParameterChange(function(module, parameter){
+  if (module.Instance.Domain == 'RaspberryPi.Gpio' &amp;&amp; parameter.Is("Status.Level") &amp;&amp; parameter.DecimalValue &gt; 0)
+  {
+    // A button was pressed, store the timestamp
+    startPressTs = new Date().getTime();
+    if (currentContext == '')
+    {
+      // A long press of 3 seconds will open the settings menu
+      var duration = 0;
+      while (duration &lt; 3 &amp;&amp; parameter.DecimalValue &gt; 0)
+      {
+          hg.Pause(1);
+          duration++;
+      }
+      if (duration &gt;= 3) setContext('main');
+      return true;
+    }
+    //
+    // The input is only processed when the settings menu is opened
+    switch (module.Instance.Address)
+    {
+        // BUTTON #1 pressed
+      case 'GPIO22': 
+        setContextInput('1');
+        break;
+        // BUTTON #2 pressed
+      case 'GPIO23':
+        setContextInput('2');
+        break;
+        // BUTTON #3 pressed
+      case 'GPIO24':
+        setContextInput('3');
+        break;
+        // BUTTON #4 pressed
+      case 'GPIO25':
+        setContextInput('4');
+        break;
+    }
+  }
+  else if (module.Instance.Domain == 'RaspberryPi.Gpio' &amp;&amp; parameter.Is("Status.Level") &amp;&amp; parameter.DecimalValue == 0)
+  {
+    // A button was released
+    var currentTs = new Date().getTime();
+    if (currentContext == 'exit')
+    {
+      currentContext = '';
+    }
+    else if (currentContext == '' &amp;&amp; currentTs - startPressTs &lt; 3000) // 3 seconds
+    {
+      // We are outside the settings menu, so
+      // the buttons functionality is to toggle scenarios/devices
+      lastButton = '';
+      switch (module.Instance.Address)
+      {
+          // BUTTON #1 released
+        case 'GPIO22': 
+          lastButton = '1';
+          break;
+          // BUTTON #2 released
+        case 'GPIO23': 
+          lastButton = '2';
+          break;
+          // BUTTON #3 released
+        case 'GPIO24': 
+          lastButton = '3';
+          break;
+          // BUTTON #4 released
+        case 'GPIO25':
+          lastButton= '4';
+          break;
+      }
+      if (lastButton != '')
+      {
+        hg.Modules.WithFeature("EdenDisplay.ToggleButton." + lastButton).Toggle();
+        var program = hg.Program.InputField("EdenDisplay.ButtonProgram." + lastButton).Value;
+        // scenarios are specified in the form &lt;program_id_or_name&gt;/&lt;options&gt;
+        if (program != '')
+        {
+          // it is a scenario
+          var options = '';
+          if (program.lastIndexOf('/') &gt; 0) 
+          {
+            options = program.substring(program.lastIndexOf('/') + 1);
+            program = program.substring(0, program.lastIndexOf('/'));
+          }
+          hg.Program.Run(program, options);
+        }
+      }
+    }
+    // Reset long press timestamp
+    startPressTs = new Date().getTime();
+  }
+  else if (parameter.Is("HomeGenie.SecurityArmed") &amp;&amp; currentContext == "security")
+  {
+    // update security menu
+    menuShowSecurity();
+  }
+  return true;
+});
+
+hg.Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors />
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>66</Address>
+    <Name>Eden Oled Menu</Name>
+    <Description>Implement a settings menu for Eden Oled Display.
+It requires 4 input buttons connected to GPIO#22,#23,#24,#25.
+A long press of at least 3 seconds will open the settings menu.
+A normal press will toggle scenarios/devices associated to the buttons.
+</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>Javascript</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions>
+      <ProgramCondition>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>37</Target>
+        <Property>Sensor.DoorWindow</Property>
+        <ComparisonOperator>Equals</ComparisonOperator>
+        <ComparisonValue>255</ComparisonValue>
+      </ProgramCondition>
+    </Conditions>
+    <Commands>
+      <ProgramCommand>
+        <Domain>HomeAutomation.ZWave</Domain>
+        <Target>4</Target>
+        <CommandString>Control.Off</CommandString>
+        <CommandArguments />
+      </ProgramCommand>
+    </Commands>
+    <ScriptCondition>// returning true will execute the "Code to Run"
+Program.Setup(()=&gt;{
+  	// Connector CN8
+  	Program.AddInputField("Gpio.PC19", "OFF", "#03 PC19");
+  	Program.AddInputField("Gpio.PC21", "OFF", "#04 PC21");
+  	Program.AddInputField("Gpio.PC20", "OFF", "#05 PC20");
+  	Program.AddInputField("Gpio.PC22", "OFF", "#06 PC22");
+  	Program.AddInputField("Gpio.PB14", "OFF", "#07 PB14");
+  	Program.AddInputField("Gpio.PB16", "OFF", "#08 PB16");
+  	Program.AddInputField("Gpio.PB15", "OFF", "#09 PB15");
+  	Program.AddInputField("Gpio.PB17", "OFF", "#10 PB17");
+  	Program.AddInputField("Gpio.PI20", "OFF", "#11 PI20");
+  	Program.AddInputField("Gpio.PI14", "OFF", "#12 PI14");
+  	Program.AddInputField("Gpio.PI21", "OFF", "#13 PI21");
+  	Program.AddInputField("Gpio.PI15", "OFF", "#14 PI15");
+  	Program.AddInputField("Gpio.PI03", "OFF", "#15 PI03");
+  	Program.AddInputField("Gpio.PB03", "OFF", "#16 PB03");
+  	Program.AddInputField("Gpio.PB02", "OFF", "#17 PB02");
+  	Program.AddInputField("Gpio.PB04", "OFF", "#18 PB04");
+  	Program.AddInputField("Gpio.PB18", "OFF", "#19 PB18");
+  	Program.AddInputField("Gpio.PB19", "OFF", "#20 PB19");
+  	// Connector CN9
+  	Program.AddInputField("Gpio.PG00", "OFF", "#21 PG00");
+  	Program.AddInputField("Gpio.PG03", "OFF", "#22 PG03");
+  	Program.AddInputField("Gpio.PG02", "OFF", "#23 PG02");
+  	Program.AddInputField("Gpio.PG01", "OFF", "#24 PG01");
+  	Program.AddInputField("Gpio.PG04", "OFF", "#25 PG04");
+  	Program.AddInputField("Gpio.PG05", "OFF", "#26 PG05");
+  	Program.AddInputField("Gpio.PG06", "OFF", "#27 PG06");
+  	Program.AddInputField("Gpio.PG07", "OFF", "#28 PG07");
+  	Program.AddInputField("Gpio.PG08", "OFF", "#29 PG08");
+  	Program.AddInputField("Gpio.PG09", "OFF", "#30 PG09");
+  	Program.AddInputField("Gpio.PG10", "OFF", "#31 PG10");
+  	Program.AddInputField("Gpio.PG11", "OFF", "#32 PG11");
+});
+return true;
+</ScriptCondition>
+    <ScriptSource>var moduleDomain = "RaspberryPi.Gpio";
+
+var pinMapping = new List&lt;dynamic&gt;();
+// read GPIO configuration
+// GPIO on connector CN8
+var pc19 = Program.InputField("Gpio.PC19").Value.ToLower();
+var pc21 = Program.InputField("Gpio.PC21").Value.ToLower();
+var pc20 = Program.InputField("Gpio.PC20").Value.ToLower();
+var pc22 = Program.InputField("Gpio.PC22").Value.ToLower();
+var pb14 = Program.InputField("Gpio.PB14").Value.ToLower();
+var pb16 = Program.InputField("Gpio.PB16").Value.ToLower();
+var pb15 = Program.InputField("Gpio.PB15").Value.ToLower();
+var pb17 = Program.InputField("Gpio.PB17").Value.ToLower();
+var pi20 = Program.InputField("Gpio.PI20").Value.ToLower();
+var pi14 = Program.InputField("Gpio.PI14").Value.ToLower();
+var pi21 = Program.InputField("Gpio.PI21").Value.ToLower();
+var pi15 = Program.InputField("Gpio.PI15").Value.ToLower();
+var pi03 = Program.InputField("Gpio.PI03").Value.ToLower();
+var pb03 = Program.InputField("Gpio.PB03").Value.ToLower();
+var pb02 = Program.InputField("Gpio.PB02").Value.ToLower();
+var pb04 = Program.InputField("Gpio.PB04").Value.ToLower();
+var pb18 = Program.InputField("Gpio.PB18").Value.ToLower();
+var pb19 = Program.InputField("Gpio.PB19").Value.ToLower();
+// GPIO on connector CN9
+var pg00 = Program.InputField("Gpio.PG00").Value.ToLower();
+var pg03 = Program.InputField("Gpio.PG03").Value.ToLower();
+var pg02 = Program.InputField("Gpio.PG02").Value.ToLower();
+var pg01 = Program.InputField("Gpio.PG01").Value.ToLower();
+var pg04 = Program.InputField("Gpio.PG04").Value.ToLower();
+var pg05 = Program.InputField("Gpio.PG05").Value.ToLower();
+var pg06 = Program.InputField("Gpio.PG06").Value.ToLower();
+var pg07 = Program.InputField("Gpio.PG07").Value.ToLower();
+var pg08 = Program.InputField("Gpio.PG08").Value.ToLower();
+var pg09 = Program.InputField("Gpio.PG09").Value.ToLower();
+var pg10 = Program.InputField("Gpio.PG10").Value.ToLower();
+var pg11 = Program.InputField("Gpio.PG11").Value.ToLower();
+
+// add configured GPIOs to a list that will be used to configure the connection
+// GPIO on connector CN8
+if (pc19 != "off") pinMapping.Add(new { Config = pc19, Address = "PC19", Pin = ConnectorPin.CB3_CN8Pin05, Direction = (pc19 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pc21 != "off") pinMapping.Add(new { Config = pc21, Address = "PC21", Pin = ConnectorPin.CB3_CN8Pin06, Direction = (pc21 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pc20 != "off") pinMapping.Add(new { Config = pc20, Address = "PC20", Pin = ConnectorPin.CB3_CN8Pin07, Direction = (pc20 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pc22 != "off") pinMapping.Add(new { Config = pc22, Address = "PC22", Pin = ConnectorPin.CB3_CN8Pin08, Direction = (pc22 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb14 != "off") pinMapping.Add(new { Config = pb14, Address = "PB14", Pin = ConnectorPin.CB3_CN8Pin09, Direction = (pb14 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb16 != "off") pinMapping.Add(new { Config = pb16, Address = "PB16", Pin = ConnectorPin.CB3_CN8Pin10, Direction = (pb16 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb15 != "off") pinMapping.Add(new { Config = pb15, Address = "PB15", Pin = ConnectorPin.CB3_CN8Pin11, Direction = (pb15 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb17 != "off") pinMapping.Add(new { Config = pb17, Address = "PB17", Pin = ConnectorPin.CB3_CN8Pin12, Direction = (pb17 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pi20 != "off") pinMapping.Add(new { Config = pi20, Address = "PI20", Pin = ConnectorPin.CB3_CN8Pin15, Direction = (pi20 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pi14 != "off") pinMapping.Add(new { Config = pi14, Address = "PI14", Pin = ConnectorPin.CB3_CN8Pin16, Direction = (pi14 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pi21 != "off") pinMapping.Add(new { Config = pi21, Address = "PI21", Pin = ConnectorPin.CB3_CN8Pin17, Direction = (pi21 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pi15 != "off") pinMapping.Add(new { Config = pi15, Address = "PI15", Pin = ConnectorPin.CB3_CN8Pin18, Direction = (pi15 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pi03 != "off") pinMapping.Add(new { Config = pi03, Address = "PI03", Pin = ConnectorPin.CB3_CN8Pin19, Direction = (pi03 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb03 != "off") pinMapping.Add(new { Config = pb03, Address = "PB03", Pin = ConnectorPin.CB3_CN8Pin20, Direction = (pb03 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb02 != "off") pinMapping.Add(new { Config = pb02, Address = "PB02", Pin = ConnectorPin.CB3_CN8Pin21, Direction = (pb02 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb04 != "off") pinMapping.Add(new { Config = pb04, Address = "PB04", Pin = ConnectorPin.CB3_CN8Pin22, Direction = (pb04 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb18 != "off") pinMapping.Add(new { Config = pb18, Address = "PB18", Pin = ConnectorPin.CB3_CN8Pin23, Direction = (pb18 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pb19 != "off") pinMapping.Add(new { Config = pb19, Address = "PB19", Pin = ConnectorPin.CB3_CN8Pin25, Direction = (pb19 == "out" ? PinDirection.Output : PinDirection.Input) });
+// GPIO on connector CN9
+if (pg00 != "off") pinMapping.Add(new { Config = pg00, Address = "PG00", Pin = ConnectorPin.CB3_CN9Pin03, Direction = (pg00 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg03 != "off") pinMapping.Add(new { Config = pg03, Address = "PG03", Pin = ConnectorPin.CB3_CN9Pin04, Direction = (pg03 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg02 != "off") pinMapping.Add(new { Config = pg02, Address = "PG02", Pin = ConnectorPin.CB3_CN9Pin05, Direction = (pg02 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg01 != "off") pinMapping.Add(new { Config = pg01, Address = "PG01", Pin = ConnectorPin.CB3_CN9Pin06, Direction = (pg01 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg04 != "off") pinMapping.Add(new { Config = pg04, Address = "PG04", Pin = ConnectorPin.CB3_CN9Pin07, Direction = (pg04 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg05 != "off") pinMapping.Add(new { Config = pg05, Address = "PG05", Pin = ConnectorPin.CB3_CN9Pin08, Direction = (pg05 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg06 != "off") pinMapping.Add(new { Config = pg06, Address = "PG06", Pin = ConnectorPin.CB3_CN9Pin09, Direction = (pg06 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg07 != "off") pinMapping.Add(new { Config = pg07, Address = "PG07", Pin = ConnectorPin.CB3_CN9Pin10, Direction = (pg07 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg08 != "off") pinMapping.Add(new { Config = pg08, Address = "PG08", Pin = ConnectorPin.CB3_CN9Pin11, Direction = (pg08 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg09 != "off") pinMapping.Add(new { Config = pg09, Address = "PG09", Pin = ConnectorPin.CB3_CN9Pin12, Direction = (pg09 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg10 != "off") pinMapping.Add(new { Config = pg10, Address = "PG10", Pin = ConnectorPin.CB3_CN9Pin13, Direction = (pg10 == "out" ? PinDirection.Output : PinDirection.Input) });
+if (pg11 != "off") pinMapping.Add(new { Config = pg11, Address = "PG11", Pin = ConnectorPin.CB3_CN9Pin14, Direction = (pg11 == "out" ? PinDirection.Output : PinDirection.Input) });
+
+// Setup the connection to the GPIOs
+var configuration = new PinConfiguration[pinMapping.Count];
+for (int p = 0; p &lt; pinMapping.Count; p++)
+{
+  	var pc = pinMapping[p];
+  	if (pc.Direction == PinDirection.Input)
+    {
+	  	configuration[p] = new InputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+      	if (pc.Config.EndsWith("+"))
+        {
+            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullUp;
+        }
+      	else if (pc.Config.EndsWith("-"))
+        {
+            ((InputPinConfiguration)configuration[p]).Resistor = PinResistor.PullDown;
+        }
+		Program.AddVirtualModule(moduleDomain, pc.Address, "Sensor", "homegenie/generic/sensor");                  
+    }
+  	else
+    {
+	  	configuration[p] = new OutputPinConfiguration(PinMapping.ToProcessor(pc.Pin));
+		Program.AddVirtualModule(moduleDomain, pc.Address, "Switch", "");                  
+    }
+    configuration[p].Name = pc.Address;
+}
+
+// Allocate GPIO connection and listen for events coming from GPIO pins
+GpioConnection connection = null;
+try
+{
+	connection = new GpioConnection(configuration);
+}
+catch 
+{
+  	Program.Notify("GPIO Modules", "ERROR: could not allocate some GPIO!\nPlease set to OFF GPIO\nthat are already in use.");
+  	Pause(10);
+  	return;
+}
+
+var pinChanged = new EventHandler&lt;PinStatusEventArgs&gt;((sender, args) =&gt; {
+  	var address = args.Configuration.Name;
+    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+    Program.RaiseEvent(module, "Status.Level", 
+                       args.Enabled ? "1" : "0",
+                       address);
+  
+});
+connection.PinStatusChanged += pinChanged;
+
+When.ProgramStopping(()=&gt;{
+  connection.PinStatusChanged -= pinChanged;
+  ((IDisposable)connection).Dispose();
+  return true;
+});
+
+// read and store current pins status
+for (int p = 0; p &lt; pinMapping.Count; p++)
+{
+  	var pc = pinMapping[p];
+  	var address = pc.Address;
+    var module = Modules.InDomain(moduleDomain).WithAddress(address).Get();
+	module.Parameter("Status.Level").Value = (connection[address] ? "1" : "0");
+}
+
+// implement web serice API Control.On, Control.Off, Control.Toggle 
+// for the domain RaspberryPi.GPIO
+When.WebServiceCallReceived(moduleDomain, ( args ) =&gt; 
+{
+	string[] reqs = ((string)args).Split('/');
+  	var errorMessage = "";
+	try
+	{
+		string address = reqs[1];
+      	string command = reqs[2];
+        //
+        switch(command)
+        {
+          // eg. http://hg_address/api/RaspberryPi.GPIO/1/Control.On
+          case "Control.On":
+          connection[address] = true;
+          break;
+          // eg. http://hg_address/api/RaspberryPi.GPIO/3/Control.Off
+          case "Control.Off":
+          connection[address] = false;
+          break;
+          // eg. http://hg_address/api/RaspberryPi.GPIO/9/Control.Toggle
+          case "Control.Toggle":
+          connection.Toggle(address);
+          break;
+        }
+      	//
+        return "{ 'ResponseValue' : 'OK' }";    
+    } 
+  	catch (Exception ex) 
+    { 
+	    errorMessage = ex.Message + " " + ex.StackTrace;
+    }
+    // unable to process request
+    return "{ 'ResponseValue' : 'ERROR " + errorMessage + "' }";
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>150</Address>
+    <Name>GPIO Modules</Name>
+    <Description>CubieTruck/CubieBoard3 GPIOs mapped to HG modules.
+Each GPIO can be configured as input (IN), output (OUT) or can be disabled (OFF).
+GPIOs configured as IN are mapped to a Sensor module with a Status.Level field displaying current pin level (0, 1).
+GPIOs configured as OUT are mapped to a Switch module that can be controlled with on/off commands.
+</Description>
+    <Group>CubieTruck</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// this is a background app
+// so we just put initialization code here and a return true
+// to activate the background task loop
+
+// ...
+Program.Setup(()=&gt;
+{              
+	Program.AddInputField("PollInterval", "45", "Poll Interval (seconds)");
+	Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt");
+});
+//
+return true; // execute "Code To Run"
+</ScriptCondition>
+    <ScriptSource>while (Program.IsEnabled)
+{
+  // basic get will returns current device level 
+  Modules.WithFeature("HomeGenie.ZWaveMeterPoll").Each((module) =&gt; {
+    //Program.Notify("Z-Wave Level Poll", "Polling node " + module.Instance.Address + "&lt;br&gt;" + module.Instance.Name);
+    module.Command("Meter.Get").Execute("2");
+    return false; // do not break, continue iterating...
+  });
+  // pause between each poll
+  var delay = Program.InputField("PollInterval").DecimalValue;
+  if (delay &lt; 5) delay = 5;
+  Pause(delay);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>HomeAutomation.ZWave</ForDomains>
+        <ForTypes>Light,Dimmer,Switch,Sensor</ForTypes>
+        <Property>HomeGenie.ZWaveMeterPoll</Property>
+        <Description>Poll meter Watt</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>40</Address>
+    <Name>Meter Watt Poll</Name>
+    <Description>Periodically reads instant Watt value from meter devices</Description>
+    <Group>Z-Wave</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+return true;
+</ScriptCondition>
+    <ScriptSource>var address = 0x38;
+
+var clockPin = Pcf8574Pin.P2;
+var readWritePin = Pcf8574Pin.P1;
+var registerSelectPin = Pcf8574Pin.P0;
+var backlightPin = Pcf8574Pin.P3;
+
+var dataPins = new[]
+{
+  Pcf8574Pin.P4,
+  Pcf8574Pin.P5,
+  Pcf8574Pin.P6,
+  Pcf8574Pin.P7
+};
+
+var sdaPin = ConnectorPin.P1Pin03;
+var sclPin = ConnectorPin.P1Pin05;
+var driver = new I2cDriver(sdaPin.ToProcessor(), sclPin.ToProcessor()) { ClockDivider = 512 };
+var connection = new Pcf8574I2cConnection(driver.Connect(address));
+
+dynamic configuration = new dynamic();
+configuration.Pins = new Hd44780Pins(
+  connection.Out(registerSelectPin),
+  connection.Out(clockPin),
+  dataPins.Select(p =&gt; (IOutputBinaryPin)connection.Out(p)))
+{
+  Backlight = connection.Out(backlightPin),
+  ReadWrite = connection.Out(readWritePin),
+};
+
+var settings = new Hd44780LcdConnectionSettings
+{
+  ScreenWidth = 20,
+  ScreenHeight = 2,
+};
+
+using (var display = new Hd44780LcdConnection(settings, configuration.Pins))
+{
+  display.SetCustomCharacter(1, new byte[] {0x0, 0x0, 0x04, 0xe, 0x1f, 0x0, 0x0});
+  display.SetCustomCharacter(2, new byte[] {0x0, 0x0, 0x1f, 0xe, 0x04, 0x0, 0x0});
+  display.Clear();
+  display.WriteLine("OS Version");
+  display.WriteLine(Environment.OSVersion);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>67</Address>
+    <Name>HD44780 LCD PCF8574</Name>
+    <Description>Example of using HD44780 LCD with PCF8574 I2C I/O expander</Description>
+    <Group>Raspberry Pi</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>DateTime dateCou ; 
+DateTime dateInit ;
+DateTime dateBase ;
+string tabMonth = "" ;
+
+int offsetYear, yearCou ;
+int moiInit = 1 ;
+int nbYear = 0 ;
+DayOfWeek dayOfWeek ;
+
+Program.Setup( () =&gt; {
+  
+    Program.AddControlWidget("DaniMail/generic/calendrier");
+
+    Program.AddInputField("Calend.Pair", "", "Année Paire" );
+    Program.AddInputField("Calend.Impair", "", "Année Impaire" );
+    for( int i=0 ; i&lt;12 ; i++ )
+    {
+      Program.AddInputField("Calend.Year.0." + i.ToString(), "", "Calendrier année paire - Mois " + i.ToString() );
+      Program.AddInputField("Calend.Year.1." + i.ToString(), "", "Calendrier année impaire - Mois " + i.ToString() );
+    }
+  
+    dateCou = DateTime.Now ;
+    yearCou = dateCou.Year ;
+    dateInit = new DateTime( yearCou, 1, 1 ) ;
+    offsetYear = (yearCou % 2) ;
+    if( (yearCou % 2) == 0 )
+        tabMonth =  Program.InputField("Calend.Year.0." + (dateCou.Month-1) ).Value ;
+    else
+        tabMonth = Program.InputField("Calend.Year.1." + (dateCou.Month-1) ).Value;
+    if( String.IsNullOrEmpty( tabMonth ) )
+    {
+        if( (yearCou % 2) == 0 )
+        {
+            Program.InputField("Calend.Pair").Value = yearCou.ToString() ;
+            Program.InputField("Calend.Impair").Value = (yearCou+1).ToString() ;
+        }
+        else
+        {
+            Program.InputField("Calend.Impair").Value = yearCou.ToString() ;
+            Program.InputField("Calend.Pair").Value = (yearCou+1).ToString() ;
+        }
+        do
+        {
+            dateBase = dateInit ;
+            if( moiInit != dateInit.Month )
+            {
+              Program.InputField( "Calend.Year." + offsetYear.ToString() + "." + (moiInit-1).ToString() ).Value = tabMonth ;
+              if( dateInit.Month == 1 )
+              {
+                 if( offsetYear == 0)
+                   offsetYear = 1 ;
+                 else
+                   offsetYear = (dateInit.Year % 2) ;
+                 nbYear += 1 ;
+              }
+              moiInit = dateInit.Month ;
+              tabMonth = "" ;
+            }
+            if( ((dateInit.Month == 1) || (dateInit.Month == 5) || (dateInit.Month == 11)) &amp;&amp; (dateInit.Day == 1) )
+               tabMonth += "F" ;
+            else {
+              if( (dateInit.Month == 5) &amp;&amp; (dateInit.Day == 8) )
+                tabMonth += "F" ;
+              else
+                if( (dateInit.Month == 7) &amp;&amp; (dateInit.Day == 14) )
+                  tabMonth += "F" ;
+                else
+                if( (dateInit.Month == 8) &amp;&amp; (dateInit.Day == 15) )
+                  tabMonth += "F" ;
+                else
+                  if( (dateInit.Month == 11) &amp;&amp; (dateInit.Day == 11) )
+                    tabMonth += "F" ;
+                  else {
+                    if( (dateInit.Month == 12) &amp;&amp; (dateInit.Day == 25) )
+                      tabMonth += "F" ;
+                    else
+                    {
+                      dayOfWeek = dateInit.DayOfWeek ;
+                      if( (dayOfWeek == DayOfWeek.Saturday) || (dayOfWeek == DayOfWeek.Sunday) )
+                        tabMonth += "W" ;
+                      else
+                        tabMonth += "O" ;
+                    }
+                  }
+            }
+            dateInit = dateBase.AddDays( 1 ) ;
+        }
+        while( nbYear &lt; 2 ) ;
+    }
+//  Program.Notify("Calendrier", Program.Module.Domain+" "+Program.Module.Name+" "+Program.Module.Address );
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>DateTime newDate ; 
+bool init = false ;
+int yearSel = 0 ;
+int yearNow = 0 ;
+
+When.WebServiceCallReceived(Program.Module.Domain+"/"+Program.Module.Address+"/Calendrier.SetMonth",(args)=&gt;{
+    string[] reqs = ((string)args).Split('/');
+
+    int annee = Convert.ToInt32(reqs[0]);
+    int mois = Convert.ToInt32(reqs[1]);
+    if((mois&gt;=0) &amp;&amp; (mois&lt;12))
+    {
+        DateTime localDate = DateTime.Now ;
+        Settings.Parameter("Calend.Year."+mois.ToString()).Value = Program.InputField("Calend.Year."+(annee%2).ToString()+"."+mois.ToString()).Value;
+        Settings.Parameter("Schedule.Set").Value = "1" ;
+        Program.Notify("Calendrier","SetMonth "+mois.ToString()+"/"+annee.ToString());
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+//  int timePause ;
+    newDate = DateTime.Now ;
+    yearNow = newDate.Year ;
+    if( yearSel != yearNow )
+    {
+        DateTime dateInit ;
+        DateTime dateBase ;
+        string tabMonth = "" ;
+        int offsetYear ;
+        int moiInit = 1 ;
+        int nbYear = 0 ;
+        DayOfWeek dayOfWeek ;
+        string szPar ;
+        int nextYear = yearNow+1 ;
+      
+        offsetYear = nextYear%2 ;
+        if( offsetYear == 0 )
+            szPar = "Calend.Pair" ;
+        else
+            szPar = "Calend.Impair" ;
+        if( nextYear.ToString() != Program.InputField( szPar ).Value )
+        {
+            dateInit = new DateTime( nextYear, 1, 1 ) ;
+            do
+            {
+                dateBase = dateInit ;
+                if( moiInit != dateInit.Month )
+                {
+                  Program.InputField( "Calend.Year." + offsetYear.ToString() + "." + (moiInit-1).ToString() ).Value = tabMonth ;
+                  if( dateInit.Month == 1 )
+                  {
+                     if( offsetYear == 0)
+                       offsetYear = 1 ;
+                     else
+                       offsetYear = (dateInit.Year % 2) ;
+                     nbYear += 1 ;
+                  }
+                  moiInit = dateInit.Month ;
+                  tabMonth = "" ;
+                }
+                if( ((dateInit.Month == 1) || (dateInit.Month == 5) || (dateInit.Month == 11)) &amp;&amp; (dateInit.Day == 1) )
+                   tabMonth += "F" ;
+                else {
+                  if( (dateInit.Month == 5) &amp;&amp; (dateInit.Day == 8) )
+                    tabMonth += "F" ;
+                  else
+                    if( (dateInit.Month == 7) &amp;&amp; (dateInit.Day == 14) )
+                      tabMonth += "F" ;
+                    else
+                    if( (dateInit.Month == 8) &amp;&amp; (dateInit.Day == 15) )
+                      tabMonth += "F" ;
+                    else
+                      if( (dateInit.Month == 11) &amp;&amp; (dateInit.Day == 11) )
+                        tabMonth += "F" ;
+                      else {
+                        if( (dateInit.Month == 12) &amp;&amp; (dateInit.Day == 25) )
+                          tabMonth += "F" ;
+                        else
+                        {
+                          dayOfWeek = dateInit.DayOfWeek ;
+                          if( (dayOfWeek == DayOfWeek.Saturday) || (dayOfWeek == DayOfWeek.Sunday) )
+                            tabMonth += "W" ;
+                          else
+                            tabMonth += "O" ;
+                        }
+                      }
+                }
+                dateInit = dateBase.AddDays( 1 ) ;
+            }
+            while( nbYear &lt; 1 ) ;
+            Program.InputField(szPar).Value = nextYear.ToString() ;
+       }
+        yearSel = yearNow ;
+        init = false ;
+    }
+    if( init == false )
+    {
+      for( int i=0 ; i&lt;12 ; i++ )
+      {
+        if( (yearNow % 2) == 0 )
+           Settings.Parameter("Calend.Year."+i.ToString()).Value = Program.InputField("Calend.Year.0."+i.ToString()).Value;
+        else
+           Settings.Parameter("Calend.Year."+i.ToString()).Value = Program.InputField("Calend.Year.1."+i.ToString()).Value;
+      }
+      Settings.Parameter("Schedule.Set").Value="0"; ;
+      init = true ;
+    }
+//  timePause=((23-newDate.Hour)*3600)+((59-newDate.Minute)*60)+(60-newDate.Second);
+    Pause(300);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>510</Address>
+    <Name>Calendar</Name>
+    <Description />
+    <Group>Scheduling</Group>
+    <ActivationTime>2015-01-21T19:59:26.997668Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:29.64214Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup( () =&gt; {
+   Program.AddControlWidget("DaniMail/generic/tablehoraire");
+   for( int i=0 ; i&lt;10 ; i++ )
+      Program.AddInputField("Table.Therm." + i.ToString(), "", "Thermostat : Table horaire "+i.ToString() );
+   for( int i=0 ; i&lt;6 ; i++ )
+      Program.AddInputField("Table.Light." + i.ToString(), "", "Switch and light : Table horaire "+i.ToString() );
+   for( int i=0 ; i&lt;6 ; i++ )
+      Program.AddInputField("Table.Shutter." + i.ToString(), "", "Shutter : Table horaire "+i.ToString() );
+//  Program.Notify("Tables Horaires", Program.Module.Domain+" "+Program.Module.Name+" "+Program.Module.Address );
+});
+
+return true;</ScriptCondition>
+    <ScriptSource>bool initGlobal = false ;
+  
+// implement Web API calls as defined in the Thermostat widget No used and not finished actually
+When.WebServiceCallReceived(Program.Module.Domain+"/"+Program.Module.Address+"/Table.Set",(args)=&gt;{
+  string typeTable = args.ToString().Split('/')[0] ;
+  string []parSet = typeTable.Split('.'); 
+  
+  switch( parSet[2] )
+  {
+      case "Therm":
+      case "Light":
+      case "Shutter":
+        string namePar = parSet[1]+"."+parSet[2]+"."+parSet[3];
+        Settings.Parameter(namePar).Value = Program.InputField(namePar).Value;
+        Program.Notify("Table Horaire","Set "+namePar );
+        if(parSet[2] == "Therm")
+            Settings.Parameter("Schedule.Set").Value = "1" ;
+        break;
+      default :
+        Program.Notify("Table Horaire","Erreur Set "+typeTable );
+        break;
+  }
+  return true;
+});
+
+while (Program.IsEnabled)
+{
+  if( initGlobal == false )
+  {
+ //  Settings.Parameter("TabHOR.Module").Value = Program.Module.Address ;
+     for( int i=0 ; i&lt;10 ; i++ )
+         Settings.Parameter("Table.Therm."+i.ToString() ).Value = Program.InputField("Table.Therm."+i.ToString()).Value;
+     for( int i=0 ; i&lt;6 ; i++ )
+         Settings.Parameter("Table.Light."+i.ToString() ).Value = Program.InputField("Table.Light."+i.ToString()).Value;
+     for( int i=0 ; i&lt;6 ; i++ )
+         Settings.Parameter("Table.Shutter."+i.ToString() ).Value = Program.InputField("Table.Shutter."+i.ToString()).Value;
+      Settings.Parameter("Schedule.Set").Value = "0" ;
+      initGlobal = true ;  
+  }
+  Pause(300);
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>511</Address>
+    <Name>Time tables</Name>
+    <Description />
+    <Group>Scheduling</Group>
+    <ActivationTime>2015-01-21T19:59:29.139045Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:30.141354Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+Program.Setup(()=&gt;{
+    Program.AddInputField("ThermostatsNumber", "4", "Number of virtual thermostats (Max.8)");
+    int thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
+    if( thermsCount &gt; 8 )
+        thermsCount = 8;
+    Program.AddVirtualModules("HomeAutomation.Thermostat", "Thermostat", "DaniMail/generic/thermostats",1,thermsCount);
+    for(int x = 0; x &lt; thermsCount; x++)
+    {
+      var module = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("ModuleTemperature").Value.Length == 0)) )
+      {
+        // Paramètres statiques
+        module.Parameter("ModuleTemperature").Value = "";
+        module.Parameter("SwitchModule1").Value = "";
+        module.Parameter("SwitchModule2").Value = "";
+        module.Parameter("SwitchModule3").Value = "";
+        module.Parameter("Table.W").Value = "0";
+        module.Parameter("Table.O").Value = "1";
+        module.Parameter("Table.F").Value = "2";
+        module.Parameter("Table.S").Value = "3";
+        module.Parameter("Thermostat.SetPoint.NoFrost").Value = "5";
+        module.Parameter("Thermostat.SetPoint.Eco").Value = "16";
+        module.Parameter("Thermostat.SetPoint.Heating").Value = "20";
+        // Pamètres dynamiques
+        module.Parameter("Sensor.Temperature").Value = "";
+        module.Parameter("Sensor.Humidity").Value = "";
+        module.Parameter("Status.Battery").Value = "";
+        module.Parameter("Thermostat.OperatingState").Value = "";
+        module.Parameter("Thermostat.Mode").Value = "Arrêt";
+      }
+    }
+});
+              
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+const int HOLDING_MODE_DIFF = 1;
+
+char typeDay,typeAction ;
+string currentTable = "";
+string newTable = "";
+string szState = "";
+int index, currentMonth = -1;
+double temperatureAComparer = 0;
+string currentMode = "";
+int thermsCount = 0;
+int nTempo=60;
+
+bool[] holdingMode = new bool[8];
+string tabMon = "";
+string tabScene = "";
+
+var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress = "";
+  string domain = "";
+  string address = "";
+
+  thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
+  if( thermsCount &gt; 8 )
+     thermsCount = 8;
+  for(int x=0;x&lt;thermsCount;x++)
+  {
+    var moduleVirtuel = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+    
+    if( moduleVirtuel.Instance.Name == "" )
+    {
+        Pause(1) ;
+        continue ;
+    }
+    var name = "Thermostat " + moduleVirtuel.Instance.Name ;
+    var temperature = moduleVirtuel.Parameter("Sensor.Temperature");
+    var operatingState = moduleVirtuel.Parameter("Thermostat.OperatingState");
+    var thermostatMode = moduleVirtuel.Parameter("Thermostat.Mode").Value;
+    double nofrostSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.NoFrost").DecimalValue;
+    double ecoSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.Eco").DecimalValue;
+    double heatSetPoint = moduleVirtuel.Parameter("Thermostat.SetPoint.Heating").DecimalValue;
+    // Get a reference to the temperature module
+    domainAddress = moduleVirtuel.Parameter("ModuleTemperature").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", "! Erreur MT", "Thermostat");
+      Program.Notify(name, "Spécifiez un Module Sonde valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the switch/relay module 1
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule1").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", "! Erreur MS", "Thermostat");
+      Program.Notify(name, "Spécifiez un Module Switch valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the switch/relay module 2
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule2").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool switch2 = true ;
+    var switchModule2 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule2.Instance == null)
+      switch2 = false ;
+    // Get a reference to the switch/relay module 3
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("SwitchModule3").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool switch3 = true ;
+    var switchModule3 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule3.Instance == null)
+      switch3 = false ;
+    // Traitement du module virtuel
+    // Update Thermostat module Temperature field
+    temperature.Value = temperatureModule.Parameter("Sensor.Temperature").Value;
+    // Heat Mode
+    typeAction = 'T'; // Test tempétarure
+    currentMode = "";
+    if(thermostatMode == "Comfort")
+    {
+       currentMode = "(C)";
+       temperatureAComparer = heatSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    //  Eco Mode
+    if(thermostatMode == "Eco")
+    {
+       currentMode = "(E)";
+       temperatureAComparer = ecoSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    // NoFrost Mode
+    if (thermostatMode == "NoFrost")
+    {
+       currentMode = "(H)";
+       temperatureAComparer = nofrostSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0);
+    }
+    else
+    // Off Mode
+    if (thermostatMode == "Off")
+    {
+       currentMode = "(A)";
+       temperatureAComparer = 0;
+    }
+    else
+    // Program Mode
+    if (thermostatMode == "Program")
+    {
+        DateTime currentTime = DateTime.Now ;
+        if( Settings.Parameter("Schedule.Set").Value == "1" )
+        {
+           Settings.Parameter("Schedule.Set").Value = "0" ;
+//         Program.Notify("Thermostat","Schedule.Set 1") ;
+           currentMonth = -1 ;
+           currentTable = "" ;
+        }
+        if( currentMonth != currentTime.Month )
+        {
+            currentMonth = currentTime.Month - 1 ;
+            tabMon = Settings.Parameter( "Calend.Year." + currentMonth ).Value ;
+        }
+        if( tabMon.Length &lt; currentTime.Day )
+        {
+            typeAction = 'E'; // Erreur
+            szState = "! Erreur LGCA";
+            Program.Notify("Eclairage","Calendrier Erreur LG mois "+currentTime.Month) ;
+            continue;
+        }
+        typeDay = tabMon[currentTime.Day-1] ;
+        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        if( newTable.Length != 0 )
+        {
+           if( newTable != currentTable )
+           {
+               currentTable = newTable ;
+               tabScene = Settings.Parameter( "Table.Therm." + currentTable ).Value ;
+           }
+        }
+        else
+        {
+           szState = "! Erreur THND";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH non définie") ;
+        }
+        if( tabScene.Length == 96 )
+        {
+          index = (int)(currentTime.Hour*4)+(int)(currentTime.Minute/15) ;
+          switch( tabScene[index])
+          {
+              case 'A' :
+                  currentMode = "(A)";
+                  temperatureAComparer = 0 ;
+                  break ;
+              case 'H' :
+                  currentMode = "(H)" ;
+                  temperatureAComparer = nofrostSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              case 'E' :
+                  currentMode = "(E)" ;
+                  temperatureAComparer = ecoSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              case 'C' :
+                  currentMode = "(C)" ;
+                  temperatureAComparer = heatSetPoint - (holdingMode[x] ? HOLDING_MODE_DIFF : 0) ;
+                  break ;
+              default :
+                  temperatureAComparer = 0 ;
+                  szState = "! Erreur THAI";
+                  typeAction = 'E'; // Erreur
+                  Program.Notify(name,"TH Action indéfinie '"+tabScene[index]+"'") ;
+                  break ;
+          }
+        }
+        else
+        {
+           if( newTable.Length != 0 )
+           {
+              szState = "! Erreur LGTH";
+              typeAction = 'E'; // Erreur
+              Program.Notify(name+" Jour "+typeDay, "TH Erreur longueur") ;
+           }
+        }
+    }
+    else
+    {
+       szState = "! Erreur MODE";
+       typeAction = 'E'; // Erreur
+       Program.Notify(name, "Erreur Mode "+thermostatMode) ;
+    }
+    if(typeAction == 'T')
+    {
+       if ( temperatureAComparer != 0 )
+       {
+          if (temperature.DecimalValue &lt; temperatureAComparer)
+          {
+             if(switchModule.IsOff || (operatingState.Value != currentMode+"On"))
+                holdingMode[x] = false;
+             szState = "On";
+          }
+          else
+          {
+            if (switchModule.IsOn || (operatingState.Value != currentMode+"Off")) 
+               holdingMode[x] = true;
+            szState = "Off";
+          }
+       }
+       else
+       {
+          holdingMode[x] = false;
+          szState = "Off";
+       }
+    }
+    else
+        holdingMode[x] = false;
+    if(szState == "On")
+    {
+      switchModule.On();
+      if( switch2 == true )
+        switchModule2.On();
+      if( switch3 == true )
+        switchModule3.On();
+    }
+    else
+    {
+      switchModule.Off();
+      if( switch2 == true )
+        switchModule2.Off();
+      if( switch3 == true )
+        switchModule3.Off();
+    }
+    // Store last time the switch change of state
+    if(operatingState.Value != currentMode+szState)
+       Program.RaiseEvent(moduleVirtuel,"Thermostat.OperatingState", currentMode+szState, "Thermostat");
+    Pause(2);
+  }
+  return true;
+});
+
+When.ModuleParameterChanged((module, parameter)=&gt;{
+    if (parameter.Is("Sensor.Temperature") || parameter.Is("Sensor.Humidity") || parameter.Is("Status.Battery"))
+    {
+      string domainAddress = "";
+      string domain = "";
+      string address = "";
+      for(int x = 0; x &lt; thermsCount; x++)
+      {
+         var moduleVirtuel = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+         domainAddress = moduleVirtuel.Parameter("ModuleTemperature").Value;
+         if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+         {
+            domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+            address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+            if( (module.Instance.Domain.ToLower() == domain.ToLower()) &amp;&amp; (module.Instance.Address.ToLower() == address.ToLower()))
+            {
+                Program.RaiseEvent(moduleVirtuel,parameter.Name,parameter.Value,"Thermostat");
+                // Program.Notify("Thermostat","Set "+module.Instance.Name+" "+parameter.Value+"°");
+                nTempo=0;
+                break;
+            }
+         }
+         domain = address = "";
+      }
+    }
+    return true;
+});
+
+// implement Web API calls as defined in the Thermostat widget
+When.WebServiceCallReceived("HomeAutomation.Thermostat", (args)=&gt;
+{
+    string[] reqs = ((string)args).Split('/');
+
+    string thermNumber = reqs[1];
+    string command = reqs[2];
+    string parametre = reqs[3];
+    int nTherm;
+
+    switch( command )
+    {
+        case "Thermostat.SetPointSet":
+           nTherm = Int32.Parse(thermNumber);
+           var moduleS = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           if( parametre == "Heating")
+           {
+              Program.RaiseEvent(moduleS,"Thermostat.SetPoint.Heating", reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if ( parametre == "Eco")
+           {
+
+             Program.RaiseEvent(moduleS,"Thermostat.SetPoint.Eco", reqs[4], "Thermostat");
+             holdingMode[nTherm-1] = false;
+           }
+           if ( parametre == "NoFrost")
+           {
+             Program.RaiseEvent(moduleS,"Thermostat.SetPoint.NoFrost", reqs[4], "Thermostat");
+             holdingMode[nTherm-1] = false;
+           }
+           nTempo=0;
+           break;
+        case "Thermostat.SetTable":
+           nTherm = Int32.Parse(thermNumber);
+           var moduleT = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           if( parametre == "W")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "O")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "F")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           if( parametre == "S")
+           {
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              holdingMode[nTherm-1] = false;
+           }
+           nTempo=0;
+           break;
+      case "Thermostat.ModeSet" :
+           nTherm = Int32.Parse(thermNumber);
+           var moduleM = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
+           Program.RaiseEvent(moduleM,"Thermostat.Mode", parametre, "Thermostat");
+           Program.RaiseEvent(moduleM,"Thermostat.OperatingState", "---", "Thermostat");
+           holdingMode[nTherm-1] = false;
+           nTempo=0;
+           break;
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+   nTempo=300;
+   ThermostatLogicRun();
+   if(nTempo == 300)
+   {
+     DateTime currentTime = DateTime.Now ;
+     nTempo = ((5-(currentTime.Minute%5))*60)-currentTime.Second;
+     // Program.Notify("Thermostat","Réveil dans "+nTempo+" sec.");
+   }
+//   else
+//     Program.Notify("Thermostat","Réveil immédiat ...");
+   while( nTempo &gt; 0 )
+   {
+     Pause(1);
+     nTempo-- ;
+   };
+}
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>true</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>512</Address>
+    <Name>Thermostat Scheduler</Name>
+    <Description>Use any temperature sensor and relay switch module to implement Thermostat(s) virtual device.
+Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Group>Weather and Enviroment</Group>
+    <ActivationTime>2015-01-21T19:59:29.831941Z</ActivationTime>
+    <TriggerTime>2015-01-21T21:30:30.645544Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>// Put your trigger code logic here.
+// To execute the Code To Run,
+// use a 'return true' or 'return false' otherwise.
+Program.Setup(()=&gt;{
+    Program.AddInputField("LightsNumber", "4", "Number of virtual Lights (Max.8)");
+    int lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
+    if( lightsCount &gt; 8 )
+        lightsCount = 8;
+    Program.Notify("Eclairage","Nb Modules virtuel = "+lightsCount.ToString());
+    Program.AddVirtualModules("HomeAutomation.Eclairage", "Light", "DaniMail/generic/eclairages",1,lightsCount);
+    for(int x = 0; x &lt; lightsCount; x++)
+    {
+      var module = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
+      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("LightModule1").Value.Length == 0)) )
+      {
+        // Paramètres statiques
+        module.Parameter("LightModule1").Value = "";
+        module.Parameter("LightModule2").Value = "";
+        module.Parameter("LightModule3").Value = "";
+        module.Parameter("LightModule4").Value = "";
+        module.Parameter("Table.W").Value = "0";
+        module.Parameter("Table.O").Value = "1";
+        module.Parameter("Table.F").Value = "2";
+        module.Parameter("Table.S").Value = "3";
+        // Pamètres dynamiques
+        module.Parameter("Light.OperatingState").Value = "Off";
+        module.Parameter("Light.Mode").Value = "Off";
+      }
+    }
+});
+              
+return true;
+</ScriptCondition>
+    <ScriptSource>// CSharp Automation Program Plugin
+
+char typeDay;
+string currentTable="";
+string newTable="";
+string szState="";
+int index,currentMonth=-1;
+DateTime oldSunRise=DateTime.Now;
+DateTime sunRise;
+DateTime oldSunSet=DateTime.Now;
+DateTime sunSet;
+int lightsCount=0;
+char typeAction=' ';
+int nTempo=60;
+bool night;
+
+string tabMon="";
+string tabScene="";
+
+var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
+  string domainAddress="";
+  string domain="";
+  string address="";
+
+  try
+  {
+    sunRise = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Morning.Sunrise.Start").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+    sunSet = DateTime.ParseExact(Program.WithName("jkUtils - Solar Altitude").Parameter("jkUtils.SolarAltitude.Evening.Sunset.End").Value, "H:mm", System.Globalization.CultureInfo.InvariantCulture);
+    if((sunRise != oldSunRise) || (sunSet != oldSunSet))
+    {
+      Program.Notify("Eclairage"," SunRise. = "+sunRise.ToString("dd/MM HH:mm:ss")+" SunSet.. = "+sunSet.ToString("dd/MM HH:mm:ss"));
+      oldSunRise = sunRise;
+      oldSunSet = sunSet;
+    }
+  }
+  catch(Exception e) 
+  {
+    Program.Notify("Eclairage","SunRise/SunSet "+e.Message);
+    sunRise = DateTime.Now;
+    sunSet = DateTime.Now;
+  }
+  night = false;
+  if (DateTime.Compare(DateTime.Now,sunRise)&lt;0 || DateTime.Compare(DateTime.Now,sunSet)&gt;0)
+    night = true;
+  
+  lightsCount = (int)Program.InputField("LightsNumber").DecimalValue;
+  if( lightsCount &gt; 8 )
+     lightsCount=8;
+  for(int x=0;x&lt;lightsCount;x++)
+  {
+    var moduleVirtuel = Modules.InDomain("HomeAutomation.Eclairage").WithAddress((x+1).ToString()).Get();
+    if(moduleVirtuel.Instance.Name == "")
+    {
+        Pause(1);
+        continue ;
+    }
+    var name = "Eclairage " + moduleVirtuel.Instance.Name ;
+    var operatingState = moduleVirtuel.Parameter("Light.OperatingState");
+    var lightMode = moduleVirtuel.Parameter("Light.Mode").Value;
+    // Get a reference to the switch/relay module 1
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule1").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    var lightModule = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule.Instance == null)
+    {
+      Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", "! Erreur MLS", "Eclairage");
+      Program.Notify(name, "Spécifier un Module Light ou Switch valide.");
+      Pause(2);
+      continue;
+    }
+    // Get a reference to the light/switch module 2
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule2").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light2 = true ;
+    var lightModule2 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule2.Instance == null)
+      light2 = false ;
+    // Get a reference to the light/switch module 3
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule3").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light3 = true ;
+    var lightModule3 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
+      light3 = false ;
+    // Get a reference to the light/switch module 4
+    domain = address = "";
+    domainAddress = moduleVirtuel.Parameter("LightModule4").Value;
+    if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
+    {
+      domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
+      address = domainAddress.Substring(domainAddress.LastIndexOf(":") + 1);
+    }
+    bool light4 = true ;
+    var lightModule4 = Modules.InDomain(domain).WithAddress(address).Get();
+    if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || lightModule3.Instance == null)
+      light4 = false ;
+    // Traitement du module virtuel
+    if (lightMode == "Off")
+      typeAction = 'F';
+    else
+    if (lightMode == "On")
+      typeAction = 'O';
+    else
+    if (lightMode == "Program")
+    {
+        DateTime currentTime = DateTime.Now ;
+        if( Settings.Parameter("Schedule.Set").Value == "1" )
+        {
+           Settings.Parameter("Schedule.Set").Value = "0" ;
+//         Program.Notify("Eclairage","Schedule.Set 1") ;
+           currentMonth = -1 ;
+           currentTable = "" ;
+        }
+        if( currentMonth != currentTime.Month )
+        {
+            currentMonth = currentTime.Month - 1 ;
+            tabMon = Settings.Parameter( "Calend.Year." + currentMonth ).Value ;
+        }
+        if( tabMon.Length &lt; currentTime.Day )
+        {
+            szState = "! Erreur LGCA";
+            typeAction = 'E'; // Erreur
+            Program.Notify("Eclairage","Calendrier Erreur LG mois "+currentTime.Month) ;
+            continue;
+        }
+        typeDay = tabMon[currentTime.Day-1] ;
+        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        if( newTable.Length != 0 )
+        {
+           if( newTable != currentTable )
+           {
+               currentTable = newTable ;
+               tabScene = Settings.Parameter( "Table.Light." + currentTable ).Value ;
+           }
+        }
+        else
+        {
+           szState = "! Erreur THND";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH non définie") ;
+        }
+        if( tabScene.Length == 96 )
+        {
+          index = (int)(currentTime.Hour*4)+(int)(currentTime.Minute/15) ;
+          typeAction=tabScene[index];
+          switch(typeAction)
+          {
+            case 'R': // SunRise - Soleil levant
+            case 'S': // SunSet - Soleil couchant
+              if( night == true )
+                typeAction='O'; // Level On
+              else
+                typeAction='S'; // Sunrise or Sunset : Waiting for end of night
+              break ;
+            case 'O':
+            case 'F':
+              break;
+            default :
+              szState = "! Erreur THAI";
+              typeAction = 'E'; // Erreur
+              Program.Notify(name,"TH Action indéfinie '"+tabScene[index]+"'") ;
+              break ;
+          }
+        }
+        else
+        {
+           szState = "! Erreur LGTH";
+           typeAction = 'E'; // Erreur
+           Program.Notify(name+" Jour "+typeDay, "TH Erreur longueur") ;
+        }
+    }
+    else
+    {
+       szState = "! Erreur MODE";
+       typeAction = 'E'; // Erreur
+       Program.Notify(name, "Erreur Mode "+lightMode) ;
+    }
+    switch(typeAction)
+    {
+      case 'E':
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+      case 'F':
+        szState = "Off";
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+     case 'O':
+        szState = "On";
+        lightModule.On();
+        if( light2 == true )
+          lightModule2.On();
+        if( light3 == true )
+          lightModule3.On();
+        if( light4 == true )
+          lightModule4.On();
+        break ;
+      case 'S':
+        szState = "Sun";
+        lightModule.Off();
+        if( light2 == true )
+          lightModule2.Off();
+        if( light3 == true )
+          lightModule3.Off();
+        if( light4 == true )
+          lightModule4.Off();
+        break ;
+    }
+    if( operatingState.Value != szState )
+       Program.RaiseEvent(moduleVirtuel,"Light.OperatingState", szState, "Eclairage");
+    Pause(2);
+  }
+  return true;
+});
+
+// implement Web API calls as defined in the Eclairage widget
+When.WebServiceCallReceived("HomeAutomation.Eclairage", (args)=&gt;
+{
+    string[] reqs = ((string)args).Split('/');
+
+    string lightNumber = reqs[1];
+    string command = reqs[2];
+    string parametre = reqs[3];
+
+    switch( command )
+    {
+        case "Light.SetTable":
+           var moduleT = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
+           if( parametre == "W")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "O")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "F")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           if( parametre == "S")
+              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Eclairage");
+           nTempo=0;
+           break;
+      case "Light.ModeSet" :
+           var moduleM = Modules.InDomain("HomeAutomation.Eclairage").WithAddress(lightNumber).Get();
+           Program.RaiseEvent(moduleM,"Light.Mode", parametre, "Eclairage");
+           Program.RaiseEvent(moduleM,"Light.OperatingState", "---", "Eclairage");
+           nTempo=0;
+           break;
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+   nTempo=300;
+   LightLogicRun();
+   if(nTempo == 300)
+   {
+     DateTime currentTime = DateTime.Now ;
+     nTempo = ((5-(currentTime.Minute%5))*60)-currentTime.Second;
+   }
+   while( nTempo &gt; 0 )
+   {
+     Pause(1);
+     nTempo-- ;
+   };
+}</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>514</Address>
+    <Name>Lights Scheduler</Name>
+    <Description>Use any light or switch module to implement light virtual device.
+Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+    <Group>Lights</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

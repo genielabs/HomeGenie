@@ -40,15 +40,15 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 });
             }
         });
-		//
+        //
         $("#configure_system_flip_eventshistory").on('slidestop', function (event) {
             if ($("#configure_system_flip_eventshistory").val() == '1') {
-            	dataStore.set('UI.EventsHistory', true);
-            	$('#btn_eventshistory_led').show();
+                dataStore.set('UI.EventsHistory', true);
+                $('#btn_eventshistory_led').show();
             }
             else {
                 dataStore.set('UI.EventsHistory', false);
-            	$('#btn_eventshistory_led').hide();
+                $('#btn_eventshistory_led').hide();
             }
         });
         //
@@ -146,17 +146,17 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 HG.WebApp.Maintenance.LoadSecuritySettings();
             });
         });
-		//
-		$('#btn_configuresystem_downloadtday').bind('click', function () {
+        //
+        $('#btn_configuresystem_downloadtday').bind('click', function () {
             window.open('/api/HomeAutomation.HomeGenie/Config/System.Configure/SystemLogging.DownloadCsv/0');
         });
-		//
-		$('#btn_configuresystem_downloadyday').bind('click', function () {
+        //
+        $('#btn_configuresystem_downloadyday').bind('click', function () {
             window.open('/api/HomeAutomation.HomeGenie/Config/System.Configure/SystemLogging.DownloadCsv/1');
         });
-		//
+        //
         $('#maintenance_configuration_restartproceedbutton').bind('click', function () {
-        	$('#maintenance_configuration_restartbutton').addClass('ui-disabled');
+            $('#maintenance_configuration_restartbutton').addClass('ui-disabled');
             $.mobile.loading('show', { text: 'Restarting service, please wait...', textVisible: true, theme: 'a', html: '' });
             // FACTORY RESET....
             HG.Configure.System.ServiceCall("Service.Restart", function (data) { });
@@ -177,8 +177,8 @@ HG.WebApp.Maintenance.InitializePage = function () {
                     .animate({ borderColor: "#FFFFFF" }, 250);
             }
             else {
-            	$('#systemsettings_backuprestores1cancelbutton').removeClass('ui-disabled');
-            	$('#systemsettings_backuprestores1confirmbutton').removeClass('ui-disabled');
+                $('#systemsettings_backuprestores1cancelbutton').removeClass('ui-disabled');
+                $('#systemsettings_backuprestores1confirmbutton').removeClass('ui-disabled');
                 $.mobile.loading('show', { text: 'Restoring backup, please wait...', textVisible: true, theme: 'a', html: '' });
                 $('#restore_configuration_form').submit();
             }
@@ -225,8 +225,8 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $('#systemsettings_backuprestores1').popup('open');
             });
             $('#systemsettings_backuprestores1confirmbutton').bind('click', function () {
-            	$('#systemsettings_backuprestores1cancelbutton').addClass('ui-disabled');
-            	$('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
+                $('#systemsettings_backuprestores1cancelbutton').addClass('ui-disabled');
+                $('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     $.mobile.loading('hide');
@@ -262,7 +262,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $.mobile.loading('hide');
             });
         });
-        
+
     });
 };
 

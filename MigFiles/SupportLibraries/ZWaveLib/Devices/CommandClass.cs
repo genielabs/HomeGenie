@@ -21,117 +21,185 @@
  */
 
 using System;
+
 namespace ZWaveLib
 {
-    public enum Command : byte
+
+    public enum Function: byte
     {
-        COMMAND_BASIC_SET = 0x01,
-        COMMAND_BASIC_GET = 0x02,
-        COMMAND_BASIC_REPORT = 0x03,
+        None = 0x00,
+        DiscoveryNodes = 0x02,
+        ApplicationCommand = 0x04,
+        ControllerSoftReset = 0x08,
+        SendData = 0x13,
+        GetNodeProtocolInfo = 0x41,
+        ControllerSetDefault = 0x42, // hard reset
+        NodeUpdateInfo = 0x49,
+        NodeAdd = 0x4A,
+        NodeRemove = 0x4B,
+        RequestNodeInfo = 0x60
+    }
+    
+    public enum NodeFunctionOption : byte
+    {
+        AddNodeAny = 0x01,
+        AddNodeController = 0x02,
+        AddNodeSlave = 0x03,
+        AddNodeExisting = 0x04,
+        AddNodeStop = 0x05,
         //
-        COMMAND_METER_GET = 0x01,
-        COMMAND_METER_REPORT = 0x02,
-        COMMAND_METER_SUPPORTED_GET = 0x03,
-        COMMAND_METER_SUPPORTED_REPORT = 0x04,
-        COMMAND_METER_RESET = 0x05,
+        RemoveNodeAny = 0x01,
+        RemoveNodeController = 0x02,
+        RemoveNodeSlave = 0x03,
+        RemoveNodeStop = 0x05
+    }
+
+    public enum NodeFunctionStatus : byte
+    {
+        AddNodeLearnReady = 0x01,
+        AddNodeNodeFound = 0x02,
+        AddNodeAddingSlave = 0x03,
+        AddNodeAddingController = 0x04,
+        AddNodeProtocolDone = 0x05,
+        AddNodeDone = 0x06,
+        AddNodeFailed = 0x07,
         //
-        COMMAND_SENSOR_BINARY_GET = 0x02,
-        COMMAND_SENSOR_BINARY_REPORT = 0x03,
-        //
-        COMMAND_SENSOR_MULTILEVEL_GET = 0x04,
-        COMMAND_SENSOR_MULTILEVEL_REPORT = 0x05,
-        //
-        COMMAND_MULTIINSTANCE_SET = 0x01,
-        COMMAND_MULTIINSTANCE_GET = 0x02,
-        COMMAND_MULTIINSTANCE_COUNT_GET = 0x04,
-        COMMAND_MULTIINSTANCE_COUNT_REPORT = 0x05,
-        COMMAND_MULTIINSTANCE_REPORT = 0x06,
-        //
-        COMMAND_MULTIINSTANCEV2_ENCAP = 0x0D,
-        //
-        COMMAND_ASSOCIATION_SET = 0x01,
-        COMMAND_ASSOCIATION_GET = 0x02,
-        COMMAND_ASSOCIATION_REPORT = 0x03,
-        COMMAND_ASSOCIATION_REMOVE = 0x04,
-        //
-        COMMAND_CONFIG_SET = 0x04,
-        COMMAND_CONFIG_GET = 0x05,
-        COMMAND_CONFIG_REPORT = 0x06,
-        //
-        COMMAND_MANUFACTURERSPECIFIC_GET = 0x04,
-        //
-        COMMAND_WAKEUP_REPORT = 0x06,
-        COMMAND_WAKEUP_NOTIFICATION = 0x07,
-        //
-        THERMOSTAT_SETPOINT_SET = 0x01,
-        THERMOSTAT_SETPOINT_GET = 0x02,
-        THERMOSTAT_SETPOINT_REPORT = 0x03,
-        THERMOSTAT_SETPOINT_SUPPORTED_GET = 0x04,
-        THERMOSTAT_SETPOINT_SUPPORTED_REPORT = 0x05
+        RemoveNodeLearnReady = 0x01,
+        RemoveNodeNodeFound = 0x02,
+        RemoveNodeRemovingSlave = 0x03,
+        RemoveNodeRemovingController = 0x04,
+        RemoveNodeDone = 0x06,
+        RemoveNodeFailed = 0x07
     }
 
     public enum CommandClass : byte
     {
-        COMMAND_CLASS_BASIC = 0x20,
+        Basic = 0x20,
         //
-        COMMAND_CLASS_SWITCH_BINARY = 0x25,
-        COMMAND_CLASS_SWITCH_MULTILEVEL = 0x26,
-        COMMAND_CLASS_SWITCH_ALL = 0x27,
+        SwitchBinary = 0x25,
+        SwitchMultilevel = 0x26,
+        SwitchAll = 0x27,
         //
-        COMMAND_CLASS_SCENE_ACTIVATION = 0x2B,
+        SceneActivation = 0x2B,
         //
-        COMMAND_CLASS_SENSOR_BINARY = 0x30,
-        COMMAND_CLASS_SENSOR_MULTILEVEL = 0x31,
+        SensorBinary = 0x30,
+        SensorMultilevel = 0x31,
         //
-        COMMAND_CLASS_METER = 0x32,
+        Meter = 0x32,
         //
-        COMMAND_CLASS_MULTIINSTANCE = 0x60,
-        COMMAND_CLASS_CONFIGURATION = 0x70,
-        COMMAND_CLASS_ALARM = 0x71,
-        COMMAND_CLASS_MANUFACTURER_SPECIFIC = 0x72,
-        COMMAND_CLASS_NODE_NAMING = 0x77,
+        MultiInstance = 0x60,
+        Configuration = 0x70,
+        Alarm = 0x71,
+        ManufacturerSpecific = 0x72,
+        NodeNaming = 0x77,
         //
-        COMMAND_CLASS_BATTERY = 0x80,
-        COMMAND_CLASS_HAIL = 0x82,
-        COMMAND_CLASS_WAKE_UP = 0x84,
-        COMMAND_CLASS_ASSOCIATION = 0x85,
-        COMMAND_CLASS_VERSION = 0x86,
+        Battery = 0x80,
+        Hail = 0x82,
+        WakeUp = 0x84,
+        Association = 0x85,
+        Version = 0x86,
         //
-        COMMAND_CLASS_SENSOR_ALARM = 0x9C,
-        COMMAND_CLASS_SILENCE_ALARM = 0x9D,
+        SensorAlarm = 0x9C,
+        SilenceAlarm = 0x9D,
         //
-        COMMAND_CLASS_THERMOSTAT_FAN_MODE = 0x44,	 
-        COMMAND_CLASS_THERMOSTAT_FAN_STATE = 0x45,	 
-        COMMAND_CLASS_THERMOSTAT_HEATING = 0x38,
-        COMMAND_CLASS_THERMOSTAT_MODE = 0x40,
-        COMMAND_CLASS_THERMOSTAT_OPERATING_STATE =  0x42,	 
-        COMMAND_CLASS_THERMOSTAT_SETBACK = 0x47,	 
-        COMMAND_CLASS_THERMOSTAT_SETPOINT = 0x43	 
+        ThermostatFanMode = 0x44,  
+        ThermostatFanState = 0x45,     
+        ThermostatHeating = 0x38,
+        ThermostatMode = 0x40,
+        ThermostatOperatingState =  0x42,  
+        ThermostatSetBack = 0x47,   
+        ThermostatSetPoint = 0x43   
+    }
+
+    public enum Command : byte
+    {
+        BasicSet = 0x01,
+        BasicGet = 0x02,
+        BasicReport = 0x03,
+        //
+        BatteryGet = 0x02,
+        BatteryReport = 0x03,
+        //
+        MeterGet = 0x01,
+        MeterReport = 0x02,
+        MeterSupportedGet = 0x03,
+        MeterSupportedReport = 0x04,
+        MeterReset = 0x05,
+        //
+        SensorBinaryGet = 0x02,
+        SensorBinaryReport = 0x03,
+        //
+        SensorMultilevelGet = 0x04,
+        SensorMultilevelReport = 0x05,
+        //
+        SensorAlarmGet = 0x01,
+        SensorAlarmReport = 0x02,
+        SensorAlarmSupportedGet = 0x03,
+        SensorAlarmSupportedReport = 0x04,
+        //
+        AlarmGet = 0x04,
+        AlarmReport = 0x05,
+        //
+        MultiInstanceSet = 0x01,
+        MultiInstanceGet = 0x02,
+        MultiInstanceCountGet = 0x04,
+        MultiInstanceCountReport = 0x05,
+        MultiInstanceReport = 0x06,
+        //
+        MultiInstaceV2Encapsulated = 0x0D,
+        //
+        AssociationSet = 0x01,
+        AssociationGet = 0x02,
+        AssociationReport = 0x03,
+        AssociationRemove = 0x04,
+        //
+        ConfigurationSet = 0x04,
+        ConfigurationGet = 0x05,
+        ConfigurationReport = 0x06,
+        //
+        ManufacturerSpecificGet = 0x04,
+        //
+        WakeUpIntervalSet = 0x04,
+        WakeUpIntervalGet = 0x05,
+        WakeUpIntervalReport = 0x06,
+        WakeUpNotification = 0x07,
+        WakeUpIntervalCapabilitiesGet = 0x09,
+        WakeUpIntervalCapabilitiesReport = 0x0A,
+        //
+        ThermostatSetPointSet = 0x01,
+        ThermostatSetPointGet = 0x02,
+        ThermostatSetPointReport = 0x03,
+        ThermostatSetPointSupportedGet = 0x04,
+        ThermostatSetPointSupportedReport = 0x05,
+        //
+        SceneActivationSet = 0x01
     }
 
     public enum GenericType : byte
     {
-        GENERIC_CONTROLLER = 0x01,
-        STATIC_CONTROLLER = 0x02,
-        AV_CONTROL_POINT = 0x03,
-        DISPLAY = 0x06,
-        GARAGE_DOOR = 0x07,
-        THERMOSTAT = 0x08,
-        WINDOW_COVERING = 0x09,
-        REPEATER_SLAVE = 0x0F,
-        SWITCH_BINARY = 0x10,
-        SWITCH_MULTILEVEL = 0x11,
-        SWITCH_REMOTE = 0x12,
-        SWITCH_TOGGLE = 0x13,
-        SENSOR_BINARY = 0x20,
-        SENSOR_MULTILEVEL = 0x21,
-        WATER_CONTROL = 0x22,
-        METER_PULSE = 0x30,
-        METER = 0x31,
-        ENTRY_CONTROL = 0x40,
-        SEMI_INTEROPERABLE = 0x50,
-        SENSOR_ALARM = 0xA1,
-        NON_INTEROPERABLE = 0xFF
+        None = 0x00,
+        GenericController = 0x01,
+        StaticController = 0x02,
+        AvControlPoint = 0x03,
+        Display = 0x06,
+        GarageDoor = 0x07,
+        Thermostat = 0x08,
+        WindowCovering = 0x09,
+        RepeaterSlave = 0x0F,
+        SwitchBinary = 0x10,
+        SwitchMultilevel = 0x11,
+        SwitchRemote = 0x12,
+        SwitchToggle = 0x13,
+        SensorBinary = 0x20,
+        SensorMultilevel = 0x21,
+        WaterControl = 0x22,
+        MeterPulse = 0x30,
+        Meter = 0x31,
+        EntryControl = 0x40,
+        SemiInteroperable = 0x50,
+        SensorAlarm = 0xA1,
+        NonInteroperable = 0xFF
     }
+
 }
 

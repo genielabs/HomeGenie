@@ -36,13 +36,13 @@
     "configure_menu_groups_modules": 
         "Grupper och Moduler",
     "configure_menu_automation": 
-        "Automation",
+        "Program",
     "configure_menu_system": 
-        "Gränssnitt",
+        "Inställningar",
     "configure_menu_maintenance": 
         "Underhåll och Uppdateringar",
     "configure_automation_heading": 
-        "Grupper och<br>Moduler",
+        "Program<br>Grupper",
     "configure_group_newgroup": 
         "Ny Grupp",
     "configure_group_entergroupname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Lägg Till Grupp",
     "configure_interfaces_heading": 
-        "System och Gränssnitt",
+        "Inställningar",
     "configure_interfaces_zwaveoptions": 
         "ZWave Gränssnitt Inställningar",
     "configure_interfaces_optdisable": 
@@ -334,7 +334,7 @@
     "configure_grouplist": 
         "Groups List",
     "configure_schedulerservice_title": 
-        "Automation<br />Scheduler",
+        "Event<br />Scheduling",
     "configure_scheduler_events": 
         "Scheduler Events",
     "configure_schedulerservice_bottombar_event_add": 

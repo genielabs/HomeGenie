@@ -34,36 +34,35 @@ HG.WebApp.Events.SetupListener = function () {
                 // update current event property 
                 HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
             }
-			HG.WebApp.Control.RefreshGroupIndicators();
+            HG.WebApp.Control.RefreshGroupIndicators();
         }
         // send message to UI for updating UI elements related to this event (widgets, popup and such)
         HG.WebApp.Events.SendEventToUi(module, event);
         //
         //
-        if (dataStore.get('UI.EventsHistory'))
-        {
-	        // add message to local events queue
-	        HG.WebApp.Data.Events.push(event);
-	        if (HG.WebApp.Data.Events.length > HG.WebApp.Events._eventQueueCapacity) {
-	            HG.WebApp.Data.Events.shift();
-	        }
-	        // blink hg activity led
-	        if (HG.WebApp.Events._ledOffTimeout != null) {
-	            clearTimeout(HG.WebApp.Events._ledOffTimeout);
-	        }
-	        $('#event_status_off').hide();
-	        $('#event_status_on').show();
-	        HG.WebApp.Events._ledOffTimeout = setTimeout(function () {
-	            HG.WebApp.Events._ledOffTimeout = null;
-	            $('#event_status_on').hide();
-	            $('#event_status_off').show();
-	        }, 500);
-	        //
-	        // refresh events list page if currently open
-	        if ($.mobile.activePage.attr("id") == "page_events") {
-	            HG.WebApp.Events.Refresh();
-	        }
-		}
+        if (dataStore.get('UI.EventsHistory')) {
+            // add message to local events queue
+            HG.WebApp.Data.Events.push(event);
+            if (HG.WebApp.Data.Events.length > HG.WebApp.Events._eventQueueCapacity) {
+                HG.WebApp.Data.Events.shift();
+            }
+            // blink hg activity led
+            if (HG.WebApp.Events._ledOffTimeout != null) {
+                clearTimeout(HG.WebApp.Events._ledOffTimeout);
+            }
+            $('#event_status_off').hide();
+            $('#event_status_on').show();
+            HG.WebApp.Events._ledOffTimeout = setTimeout(function () {
+                HG.WebApp.Events._ledOffTimeout = null;
+                $('#event_status_on').hide();
+                $('#event_status_off').show();
+            }, 500);
+            //
+            // refresh events list page if currently open
+            if ($.mobile.activePage.attr("id") == "page_events") {
+                HG.WebApp.Events.Refresh();
+            }
+        }
     }
 }
 
@@ -148,8 +147,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         case 'HomeAutomation.HomeGenie.Automation':
             var iconImage = configurepage_GetModuleIcon(module, null);
             if (eventLog.Property == 'Runtime.Error') {
-                if (eventLog.Value != '')
-                {
+                if (eventLog.Value != '') {
                     popupdata = {
                         icon: iconImage,
                         title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
@@ -168,8 +166,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                 }
             }
             else if (eventLog.Property == 'Program.Status') {
-                if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address)
-                {
+                if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
             }
@@ -221,8 +218,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     switch (propname) {
                         case 'Temperature':
                             iconImage = 'pages/control/widgets/homegenie/generic/images/temperature.png';
-                            if (HG.WebApp.Locales.GetDateEndianType() == 'M')
-                            {
+                            if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
                                 // convert to Fahrenheit
                                 var temperature = Math.round(eventLog.Value.replace(',', '.') * 100) / 100;
                                 temperature = (temperature * 1.8) + 32;

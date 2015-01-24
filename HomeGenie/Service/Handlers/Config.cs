@@ -93,9 +93,10 @@ namespace HomeGenie.Service.Handlers
                                 portList.Add(serialPorts[p]);
                             }
                         }
-                        if (Raspberry.Board.Current.IsRaspberryPi && !portList.Contains("/dev/ttyAMA0"))
+                        if (Raspberry.Board.Current.IsRaspberryPi)
                         {
-                            portList.Add("/dev/ttyAMA0");
+                            if (!portList.Contains("/dev/ttyAMA0")) portList.Add("/dev/ttyAMA0"); // RaZberry
+                            if (!portList.Contains("/dev/ttyACM0")) portList.Add("/dev/ttyACM0"); // ZME_UZB1
                         }
                         migCommand.Response = JsonHelper.GetSimpleResponse(JsonConvert.SerializeObject(portList));
                     }
@@ -363,6 +364,9 @@ namespace HomeGenie.Service.Handlers
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"),
                               Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"),
                               true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "scheduler.xml"),
+                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"),
+                              true);
                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"),
                               Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"),
                               true);
@@ -380,6 +384,7 @@ namespace HomeGenie.Service.Handlers
                     foreach (var program in newProgramsData)
                     {
                         var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                        program.IsRunning = false;
                         // Only restore user space programs
                         if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
                         {

@@ -1,46 +1,34 @@
 ﻿<!-- widget main ui form -->
-
 <div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
-
-	<div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-		<div data-ui-field="name" style="font-weight:bold">Name</div>
-	    <div data-ui-field="description">loading...</div>
-	    <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
-	    <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
-	</div>
-
-    <br />
-
-    <div class="ui-grid-a">
-    	<div class="ui-block-a">
-		    <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/light_off.png" />
-    	</div>
-    	<div class="ui-block-b">
-	        <div data-role="controlgroup" data-type="horizontal">
-	            <a data-ui-field="close" data-locale-id="control_module_close" class="ui-btn ui-corner-all ui-icon-arrow-d ui-btn-icon-notext" href="#">Close</a>
-	            <a data-ui-field="open" data-locale-id="control_module_open" class="ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext" href="#">Open</a>
-	        </div>
-    	</div>
+    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+        <div data-ui-field="name" style="font-weight:bold">Name</div>
+        <div data-ui-field="description">loading...</div>
+        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
+        <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
     </div>
-
+    <br />
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <img class="hg-widget-icon" data-ui-field="icon" src="pages/control/widgets/homegenie/generic/images/light_off.png" />
+        </div>
+        <div class="ui-block-b">
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="close" data-locale-id="control_module_close" class="ui-btn ui-corner-all ui-icon-arrow-d ui-btn-icon-notext" href="#">Close</a>
+                <a data-ui-field="open" data-locale-id="control_module_open" class="ui-btn ui-corner-all ui-icon-arrow-u ui-btn-icon-notext" href="#">Open</a>
+            </div>
+        </div>
+    </div>
     <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
-
-	<div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
         <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
-	</div>
-
+    </div>
 </div>
 <a data-ui-field="toggle" href="#" data-icon="refresh" data-corners="false" data-shadow="false" data-iconshadow="true" style="display:none; border:0;-moz-border-radius: 0px;-webkit-border-radius: 0px;border-radius: 0px">Toggle</a>
 
-
-
 <!-- widget popups and other ui elements follow -->
-
 <div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-
     <div style="margin:10px">
-
         <!-- BEGIN - COMMON UI PART --->
         <table width="100%">
             <tr>
@@ -59,7 +47,6 @@
         <!-- -->
         <!-- END - COMMON UI PART --->
         <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
-
         <div align="center">
             <input data-ui-field="level_knob" data-role="none" type="text" class="dial"
                    data-width="170"
@@ -77,16 +64,13 @@
                    -data-linecap=round
                    data-displayprevious=true>
         </div>
-
         <div align="center">
             <div data-role="controlgroup" data-type="horizontal">
                 <a data-locale-id="control_module_close" data-ui-field="close_button" class="ui-btn">Close</a>
                 <a data-locale-id="control_module_open" data-ui-field="open_button" class="ui-btn">Open</a>
             </div>
         </div>
-
         <!-- END - MODULE TYPE SPECIFIC DIVS -->
-
 
         <br />
     </div>

@@ -262,11 +262,11 @@ namespace MIG.Interfaces.HomeAutomation
             }
             else if (command == Command.CONTROL_ON)
             {
-                x10lib.LightOn(houseCode, unitCode);
+                x10lib.UnitOn(houseCode, unitCode);
             }
             else if (command == Command.CONTROL_OFF)
             {
-                x10lib.LightOff(houseCode, unitCode);
+                x10lib.UnitOff(houseCode, unitCode);
             }
             else if (command == Command.CONTROL_BRIGHT)
             {
@@ -305,11 +305,11 @@ namespace MIG.Interfaces.HomeAutomation
                 string huc = XTenLib.Utility.HouseUnitCodeFromEnum(houseCode, unitCode);
                 if (x10lib.ModulesStatus[ huc ].Level == 0)
                 {
-                    x10lib.LightOn(houseCode, unitCode);
+                    x10lib.UnitOn(houseCode, unitCode);
                 }
                 else
                 {
-                    x10lib.LightOff(houseCode, unitCode);
+                    x10lib.UnitOff(houseCode, unitCode);
                 }
             }
             else if (command == Command.CONTROL_ALLLIGHTSON)

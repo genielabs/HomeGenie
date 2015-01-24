@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
 {
-    class ZME_06436MotorControl : IZWaveDeviceHandler
+    public class ZME_06436MotorControl : IZWaveDeviceHandler
     {
         ZWaveNode mynode = null;
 

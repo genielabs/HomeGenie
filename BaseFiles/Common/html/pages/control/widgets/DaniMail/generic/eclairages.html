@@ -1,0 +1,181 @@
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
+    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+      <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/light_off.png" />
+      <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+      <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+      <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
+      <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
+    </div>
+
+    <br />
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <img id="img_icon" class="hg-widget-icon" src=""/>
+        </div>
+        <div class="ui-block-b">
+            <div data-role="controlgroup" data-type="horizontal">
+                <a data-ui-field="off" data-locale-id="control_light_off" class="ui-btn" href="#">Off</a>
+                <a data-ui-field="on" data-locale-id="control_light_on" class="ui-btn" href="#">On</a>
+            </div>
+            <div data-role="controlgroup" data-type="horizontal">
+              <a data-ui-field="prog" data-locale-id="control_light_prog" data-role="button" href="#">Programmé</a>
+            </div>
+        </div>
+    </div>
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+
+    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+      <b style="font-size:11pt;display: table-cell;">&nbsp;&nbsp;Mode&nbsp;&nbsp;</b>
+      <div data-ui-field="mode_value" style="font-size:10pt;display: table-cell;">---</div>
+      <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
+    </div>
+</div>
+
+<!-- widget popups and other ui elements follow -->
+
+<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+  <div style="margin:10px">
+
+    <!-- BEGIN - COMMON UI PART --->
+    <table width="100%">
+      <tr>
+        <td width="56">
+          <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/light_off.png" />
+        </td>
+        <td>
+          <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+          <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+        </td>
+        <td valign="top">
+          <div data-ui-field="status" style="margin-top:10px;font-size:11pt;color:gray;" align="right"></div>
+        </td>
+      </tr>
+    </table>
+    <!-- END - COMMON UI PART --->
+    <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
+    <div>
+      <table width="100%">
+        <tr>
+          <td><div data-ui-field="light1"></div></td>
+          <td><div data-ui-field="light2"></div></td>
+        </tr>
+      </table>
+	</div>
+    <br />  
+    <div align="center">
+      <span data-locale-id="therm_setmode">Mode</span>
+      <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <a data-ui-field="mode_off" data-locale-id="control_light_off" data-role="button" href="">Off</a>
+        <a data-ui-field="mode_prog" data-locale-id="control_light_prog" data-role="button" href="">Programmé</a>
+        <a data-ui-field="mode_on" data-locale-id="control_light_on" data-role="button" href="">On</a>
+      </div>
+      <br />  
+      <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+          <canvas id='tableW' width='340' height='50' style="background:#666666;">
+          <br/>
+          </canvas>
+          <canvas id='tableO' width='340' height='50' style="background:#666666;">
+          <br/>
+          </canvas>
+          <canvas id='tableF' width='340' height='50' style="background:#666666;">
+          <br/>
+          </canvas>
+          <canvas id='tableS' width='340' height='50' style="background:#666666;">
+          </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<script>   
+function drawTable(context,etat,name,select,heure,minute) {
+    var x=10;
+    var y=28;
+    var nb=0;
+    var fgcolor ;
+
+	context.clearRect(0,0,310,50) ;
+	if( select == true )
+	{
+		context.beginPath();
+		context.lineWidth="2";   
+		context.strokeStyle="white";   
+		context.rect(0,0,309,49);
+		context.stroke();       		
+	}
+    context.font = "8pt Arial";
+    context.fillStyle = "black";
+    context.fillText(name,8,10);
+    context.font = "6pt Arial";
+    for(var i=0 , c = etat.length ; i < 96 ; i++ )
+    {
+    	if( i < c ) {
+	        switch( etat[i] )
+	        {
+	           case 'O' :
+	            fgcolor = "green" ;
+	           	break ;
+	           case 'S' :
+	            fgcolor = "#666600" ;
+	           	break ;
+	           case 'R' :
+	            fgcolor = "#999900" ;
+	           	break ;
+	           case 'F' :
+	            fgcolor = "#444444" ;
+	           	break ;
+	           default :
+	            fgcolor = "black" ;
+	            break ;
+	        }
+	    }
+	    else
+            fgcolor = "black" ;
+        nb++ ;
+        if( (i == 95) || (etat[i+1] != etat[i])) 
+        {
+            context.fillStyle=fgcolor;
+            context.fillRect(x,y,nb*3,16);
+            x += nb*3 ;
+            nb = 0 ;
+        }
+        if( i%4 == 0 )
+        {
+            context.fillStyle = "black";
+            context.fillText(i/4,((i/4)*12)+7,24);
+        }
+    }
+    context.fillStyle = "black";
+    context.fillText(i/4,((i/4)*12)+7,24);
+	if( select == true )
+	{
+		var posq=(heure*4)+Math.floor(minute/15);
+		context.beginPath();
+		context.lineWidth="1";
+		context.strokeStyle="white";   
+		context.rect(10+((posq-1)*3),y-2,9,20);
+		context.stroke();       		
+	}
+	context.beginPath();
+	context.strokeStyle="#343434";   
+	context.lineWidth="2";
+	
+    context.moveTo(326,11);
+    context.lineTo(326,19);
+    context.moveTo(322,15);
+    context.lineTo(330,15);
+    
+    context.moveTo(322,35);
+    context.lineTo(330,35);
+	context.stroke();       		
+	context.strokeStyle="#343434";   
+	context.lineWidth="1";
+	context.rect(318,5,16,40);
+	context.moveTo(318,25);
+	context.lineTo(334,25);
+	context.stroke();       		
+}    
+</script>
+
+

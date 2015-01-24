@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
@@ -34,28 +35,23 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public void SetNodeHost(ZWaveNode node)
         {
             nodeHost = node;
-            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, 0);
+            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.METER_WATT, 0);
         }
-
-
 
         public virtual bool CanHandleProduct(ManufacturerSpecific productspecs)
         {
             return false; // generic types must return false here
         }
 
-
         public virtual bool HandleRawMessageRequest(byte[] message)
         {
             return false;
         }
 
-
         public virtual bool HandleBasicReport(byte[] message)
         {
             return false;
         }
-
 
         public virtual bool HandleMultiInstanceReport(byte[] message)
         {
@@ -68,12 +64,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte commandClass = message[7];
             byte commandType = message[8];
             //
-            if (commandClass == (byte)CommandClass.COMMAND_CLASS_METER && commandType == (byte)Command.COMMAND_METER_REPORT)
+            if (commandClass == (byte)CommandClass.Meter && commandType == (byte)Command.MeterReport)
             {
                 // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
-                // TODO: the code below parse always as Electric type 
-                double wattsRead = ((double)int.Parse(message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"), System.Globalization.NumberStyles.HexNumber)) / 1000D;
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.PARAMETER_WATTS, wattsRead);
+                // TODO: the code below parse always as Electric type
+                EnergyValue energy = EnergyValue.Parse(message);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, energy.EventType, energy.Value);
                 processed = true;
             }
             return processed;

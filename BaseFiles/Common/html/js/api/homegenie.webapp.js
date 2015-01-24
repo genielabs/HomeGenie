@@ -155,7 +155,7 @@ HG.WebApp.InitializePage = function ()
             $('#automation_program_scriptcondition').next().css('display', '');
             $('#automation_program_scriptsource').next().css('display', '');
             
-			HG.WebApp.ProgramEdit.SetTab(1);
+            HG.WebApp.ProgramEdit.SetTab(1);
             HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
             //if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '' && HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '[]')
             //{
@@ -241,18 +241,18 @@ HG.WebApp.InitializePage = function ()
                 final_transcript = '';
             }
         }
-		//
-		// Apply UI settings
+        //
+        // Apply UI settings
         setTheme(dataStore.get('UI.Theme'));
         if (dataStore.get('UI.EventsHistory'))
         {
-        	$('#btn_eventshistory_led').show();
+            $('#btn_eventshistory_led').show();
         }
         //
-		// add css google web fonts
-		$('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+        // add css google web fonts
+        $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
 
-    }, 1000);
+    }, 100);
     //
     // Code Mirror and other UI widgets
     //
@@ -318,7 +318,7 @@ HG.WebApp.InitializePage = function ()
         );
     };
 
-	$( "#automation_group_module_edit" ).enhanceWithin().popup();
+    $( "#automation_group_module_edit" ).enhanceWithin().popup();
     $('#module_update_button').bind('click', function (event) {
         HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
         HG.WebApp.GroupModules.CurrentModule.DeviceType = HG.WebApp.GroupModules.EditModule.DeviceType;
@@ -334,7 +334,7 @@ HG.WebApp.InitializePage = function ()
         }
         //
         HG.WebApp.GroupModules.UpdateModule(HG.WebApp.GroupModules.CurrentModule, function () {
-        	HG.WebApp.GroupModules.ModuleUpdatedCallback();
+            HG.WebApp.GroupModules.ModuleUpdatedCallback();
         });
     });
     $('#module_remove_button').bind('click', function (event) {
@@ -517,7 +517,6 @@ HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, times
     if (module.Properties != null) {
         for (var p = 0; p < module.Properties.length; p++) {
             if (module.Properties[p].Name == prop) {
-                module.Properties[p].LastValue = module.Properties[p].Value;
                 module.Properties[p].Value = value;
                 if (typeof timestamp != 'undefined')
                 {
@@ -621,16 +620,16 @@ HG.WebApp.Utility.JScrollToElement = function (element, delay) {
 };
 
 HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
-   	var switchfn = function( event, ui ) {
-	    if (notransition == true)
-	    {
-	    	setTimeout(function () { $(popup_id2).popup('open'); }, 10);
-		}
-		else	
-		{
-	    	setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
-		}
-		$(popup_id1).off('popupafterclose', switchfn);
+    var switchfn = function( event, ui ) {
+        if (notransition == true)
+        {
+            setTimeout(function () { $(popup_id2).popup('open'); }, 10);
+        }
+        else	
+        {
+            setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
+        }
+        $(popup_id1).off('popupafterclose', switchfn);
     };
     $(popup_id1).on('popupafterclose', switchfn);
     $(popup_id1).popup('close');
@@ -736,6 +735,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
             });
             // try to localize widget's popups if they were already processed by jQuery popup() function
             var popups = $(container).find('[data-ui-field=widget]').data('ControlPopUp');
+            if (popups)
             popups.each(function (index) {
                 var popup = $(this);
                 $(popup).find('[data-locale-id]').each(function(index){

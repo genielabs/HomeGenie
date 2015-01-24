@@ -58,7 +58,6 @@
     <Compile Include="Gateways\WebServiceUtility.cs" />
     <Compile Include="Interfaces\Controllers\LircRemote.cs" />
     <Compile Include="Interfaces\DynamicInterfaceAPI.cs" />
-    <Compile Include="Gateways\ProtocolAdapters\MIRIA\MiriaAdapter.cs" />
     <Compile Include="Gateways\TcpSocketGateway.cs" />
     <Compile Include="Gateways\WebServiceGateway.cs" />
     <Compile Include="Interfaces\EmbeddedSystems\Weeco4mGPIO.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Encryption.cs" />
     <Compile Include="Utility\Networking.cs" />
-    <Compile Include="Interfaces\MultiTouch\TUIO.cs" />
     <Compile Include="Interfaces\HomeAutomation\ExampleDriver.cs" />
     <Compile Include="MIGInterface.cs" />
     <Compile Include="Interfaces\EmbeddedSystems\RaspiGPIO.cs" />
@@ -80,10 +78,6 @@
     <Compile Include="Interfaces\HomeAutomation\ModuleParameters.cs" />
     <Compile Include="Interfaces\HomeAutomation\Insteon.cs" />
     <Compile Include="MIGServiceConfiguration.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gateways\ProtocolAdapters\OSC\" />
-    <Folder Include="Gateways\ProtocolAdapters\WebRTC\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -109,10 +103,6 @@
     <ProjectReference Include="..\SupportLibraries\SerialPortLib\SerialPortLib.csproj">
       <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
       <Name>SerialPortLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SupportLibraries\TUIOLib\TUIOLib.csproj">
-      <Project>{41BAB999-0A6A-48C6-8DA6-B55323BD6B6D}</Project>
-      <Name>TUIOLib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

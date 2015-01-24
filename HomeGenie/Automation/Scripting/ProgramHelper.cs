@@ -111,7 +111,7 @@ namespace HomeGenie.Automation.Scripting
                         myProgramDomain,
                         myProgramId.ToString(),
                         "Automation Program",
-                        "Program.Status",
+                        Properties.PROGRAM_STATUS,
                         "Setup"
                     );
                     functionBlock();

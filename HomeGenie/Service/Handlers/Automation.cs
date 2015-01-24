@@ -170,6 +170,8 @@ namespace HomeGenie.Service.Handlers
                         string bundleFolder = Path.Combine("programs", "arduino", newPid.ToString());
                         if (Directory.Exists(bundleFolder))
                             Directory.Delete(bundleFolder, true);
+                        if (!Directory.Exists(Path.Combine("programs", "arduino")))
+                            Directory.CreateDirectory(Path.Combine("programs", "arduino"));
                         Directory.Move(Path.Combine(destFolder, "src"), bundleFolder);
                         reader = new StreamReader(Path.Combine(destFolder, "program.hgx"));
                     }
@@ -428,7 +430,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.ScriptErrors = "";
                         homegenie.ProgramEngine.RaiseProgramModuleEvent(
                             currentProgram,
-                            "Runtime.Error",
+                            Properties.RUNTIME_ERROR,
                             ""
                         );
                         ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));

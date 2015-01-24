@@ -90,6 +90,29 @@ namespace HomeGenie.Automation.Scripting
             program.SystemStopping = handler;
             return this;
         }
+        
+        /// <summary>
+        /// Call the specified <handler> when the program is beign stopped.
+        /// </summary>
+        /// <returns>EventsHelper</returns>
+        /// <param name="handler">The handler function to call.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        ///     When.Stopping( () =>
+        ///     {
+        ///         Program.Say("Oh-oh! I'm quitting!");
+        ///         // returning true will route this event to other listeners
+        ///         return true;
+        ///     }); 
+        /// </code></example>
+        public EventsHelper ProgramStopping(Func<bool> handler)
+        {
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Stopping = handler;
+            return this;
+        }
 
         /// <summary>
         /// Call the specified <handler> function when a parameter of a module changed.

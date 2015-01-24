@@ -4,7 +4,7 @@
 // HomeGenie AJAX/WebService API
 // Copyright: (c) 2010-2014 GenieLabs
 // Author   : Generoso Martello
-// E-Mail   : generoso@martello.com
+// E-Mail   : gene@homegenie.it
 */ 
 
 
@@ -64,7 +64,7 @@ var dataStore;
 
 function setTheme(theme) {
     dataStore.set('UI.Theme', theme);
-	$(document).find('.ui-page')
+    $(document).find('.ui-page')
 			.removeClass('ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e ui-page-theme-f ui-page-theme-g ui-page-theme-h')
             .addClass('ui-page-theme-' + theme);
     $(document).find('.ui-mobile-viewport')

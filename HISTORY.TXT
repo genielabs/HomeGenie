@@ -1,5 +1,85 @@
 ﻿RELEASE HISTORY
 
+24/01/2015 1.00 beta rev 462
+    - WIP Time Tables 
+    - Fixed error in localization functions when widget has no control popup defined
+    - Updated Pepper1 Z-Wave device database
+
+21/01/2015 1.00 beta rev 461
+    - Integrating DaniMail Thermostat, Calendar and Time tables (pull request #101) - WIP
+    - Added logic operator "OR" to Wizard script conditions
+    - Improved Z-Wave 'add node' function
+    - Fixed hidden automation groups bug
+
+20/01/2015 1.00 beta rev 459
+    - Removed some old unused files/projects from HG solution
+    - Little improvement to Scheduled ON/OFF program
+    - Added I2C PCF8574 + Hd44780 LCD display example app (Raspberry Pi)
+    - Improved Raspberry Pi GPIO Modules program by adding !OUT option for inverted level logic (pull request #99)
+
+18/01/2015 1.00 beta rev 458
+    - Fixed missing X10, Z-Wave automation groups (bug from r457)
+    - Added Z-Wave Meter Poll app; fixed bug in Level Poll app
+    - Optimized file GPIO connection driver for faaaster I/O operationss
+    - Added "fuzzyness" to Virtual Meter
+    - Added Meter box to Z-Wave node setup page
+    - Major ZWaveLib refactoring, now supporting kWh, KVAh, Watt, Pulses, AC Volt, AC Current and Power Factor energy values (issue #21)
+
+17/01/2015 1.00 beta rev 457
+    - Added CubieTruck/CB3 GPIO app with 30 modules-mapped GPIOs
+    - Fixed possible loop in ZWaveLib Controller.cs when querying node's capabilities
+    - Fixed parameters not updating (bug introduced in r455)
+    - Fixed gpio folder name lookup in raspberry-sharp-io (CubieTruck/CB3)
+
+16/01/2015 1.00 beta rev 456
+    - Added saving/loading of node device handlers to ZWaveLib (issue #78)
+    - Updated UPnP library from latest source code release
+    - Added ModuleParameter.RequestUpdate() and ModuleParameter.IdleTime, also renamed ModuleParameter.Wait to WaitUpdate (issue #72)
+    - Fixed "precision" issue in ZWaveLib ExtractValueFromBytes (issue #97)
+
+15/01/2015 1.00 beta rev 455
+    - Updated RaspberrySharp-IO with CT/CB8 auto detect and connector mappings
+    - Added X10 RF commands decoding to XTenLib; Major library code rework
+
+14/01/2015 1.00 beta rev 454
+    - Fixed unwanted serialization of module fields as Statistics (also affecting MQTT client app)
+    - Added prelminary support for CubieTruck/Cubieboard3 through RaspberrySharp-IO
+    - Fixed bug in X10 that was not performing first command after HG startup
+    - Fixed bug in Lirc initialization that was preventing IR remote from working when installing HG from debian package
+    - Should fix multiple UC handling in X10 commands issue #30
+    - Added more field icons to sensor widget (pull request #94)
+    - Fixed error with Pepper1 db when lang is not an array (pull request #90)
+    - Changed widget's files extension from *.json to *.js
+    - Code formatting normalization in BaseFiles/html
+
+03/01/2015 1.00 beta rev 453
+    - Fixed c# automation programs not starting after restoring from a backup (issue #86)
+    - Added ModuleParameter.Wait(double seconds) to wait a parameter update for a given time (issue #72)
+    - Deprecated ModuleParameter.LastValue, LastDecimalValue, ValueIncrement (moved to ModuleParameter.Statistics)
+    - Deprecated ModuleParameter.History and moved its functionalities to ModuleParameter.Statistics (issue #80)
+    - Fixed bug introduced with r452 and that was preventing modules config from being saved
+    - Fixed parsing of negative sensor values in ZWaveLib
+    - Fixed "NaN" issue in group values indicator for locales using "," as decimal separator
+    - Added modules.xml fields encryption
+    - Fixed missing scheduler config restore from a backup
+
+30/12/2014 1.00 beta rev 452
+    - Added History object to ModuleParameter (issue #80)
+    - Added "Eden Oled Menu" program
+    - Updated "SSd1306 OLED" and "Eden Oled Display" programs
+    - Fixed GPIO program bug (was firing multiple Status.Level change events if restarted)
+    - Added When.ProgramStopping helper function
+    - Changed default start page to Control Dashboard
+    - Fixed empty "html" folder creation in root directory during system update (issue #83)
+    - Added password hiding in program configuration fields and module feature fields (issue #64)
+    - Added support for Z-Wave ZME_UZB1 by adding /dev/ttyACM0 to the port selection list (Raspberry Pi)
+
+28/12/2014 1.00 beta rev 451
+    - Added Z-Wave automation commands "Thermostat.OperatingStateGet" and "Thermostat.OperatingStateReport" (pull request #79)
+    - Fixed module settings not opening from Control page before going to Group/Modules page (pull request #79)
+    - Fixed bug in Arduino program import
+    - Fixed issue #81
+    
 21/12/2014 1.00 beta rev 450
     - Added Ssd 1306 OLED display and Eden Board OLED apps for Raspberry Pi
     - Added new ZWave Api commands: SensorBinary.Get, SensorMultiLevel.Get, Meter.Get, Meter.SupportedGet, Meter.Reset

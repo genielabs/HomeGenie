@@ -26,12 +26,13 @@ using System.Linq;
 using System.Text;
 
 using ZWaveLib.Devices.ProductHandlers.Generic;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Devices.ProductHandlers.Fibaro
 {
     // Fibaro System Motion Sensor
     // 010F:0800:1001
-    class MotionSensor : Sensor
+    public class MotionSensor : Sensor
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)
@@ -47,9 +48,9 @@ namespace ZWaveLib.Devices.ProductHandlers.Fibaro
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.COMMAND_CLASS_SENSOR_MULTILEVEL && cmdType == 0x05)
+            if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
-                SensorValue sensorval = Sensor.ParseSensorValue(message);
+                SensorValue sensorval = SensorValue.Parse(message);
                 if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)
                 {
                     sensorval.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);

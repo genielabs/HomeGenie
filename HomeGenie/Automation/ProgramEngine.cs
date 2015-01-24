@@ -145,7 +145,7 @@ namespace HomeGenie.Automation
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(
                                 program,
-                                "Runtime.Error",
+                                Properties.RUNTIME_ERROR,
                                 "TC: " + result.Exception.Message.Replace(
                                     '\n',
                                     ' '
@@ -163,7 +163,27 @@ namespace HomeGenie.Automation
                         isConditionSatisfied = (program.Conditions.Count > 0);
                         for (int c = 0; c < program.Conditions.Count; c++)
                         {
-                            bool res = VerifyProgramCondition(program.Conditions[c]);
+                            // check for OR logic operator
+                            if (program.Conditions[c].ComparisonOperator == ComparisonOperator.LogicOrJoint)
+                            {
+                                if (isConditionSatisfied)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    isConditionSatisfied = (c < program.Conditions.Count - 1);
+                                    continue;
+                                }
+                            }
+                            //
+                            bool res = false;
+                            try
+                            {
+                                res = VerifyProgramCondition(program.Conditions[c]);
+                            } catch {
+                                // TODO: report/handle exception
+                            }
                             isConditionSatisfied = (isConditionSatisfied && res);
                         }
                     }
@@ -201,7 +221,7 @@ namespace HomeGenie.Automation
                     };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message.Replace('\n', ' '));
+                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' '));
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -264,7 +284,7 @@ namespace HomeGenie.Automation
             }
             //
             program.IsRunning = true;
-            RaiseProgramModuleEvent(program, "Program.Status", "Running");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Running");
             //
             if (program.Type.ToLower() != "wizard")
             {
@@ -302,7 +322,7 @@ namespace HomeGenie.Automation
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(
                                 program,
-                                "Runtime.Error",
+                                Properties.RUNTIME_ERROR,
                                 "CR: " + result.Exception.Message.Replace(
                                     '\n',
                                     ' '
@@ -311,7 +331,7 @@ namespace HomeGenie.Automation
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     });
                     //
                     try
@@ -322,7 +342,7 @@ namespace HomeGenie.Automation
                     {
                         program.Stop();
                         program.IsRunning = false;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     }
                 }
             }
@@ -348,7 +368,7 @@ namespace HomeGenie.Automation
                     {
                         program.IsRunning = false;
                     }
-                    RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                    RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                 });
                 //
                 program.ProgramThread.Start();
@@ -385,8 +405,14 @@ namespace HomeGenie.Automation
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
             //
+            // in case of c# script preload assembly from generated .dll
+            if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
+            {
+                program.ScriptErrors = "Program update is required.";
+            }
+            //
             // Initialize state
-            RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
             if (program.IsEnabled)
             {
                 StartProgramEvaluator(program);
@@ -837,14 +863,14 @@ namespace HomeGenie.Automation
             {
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
-                RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Enabled");
                 // TODO: CRITICAL
                 // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
                 StartProgramEvaluator(program);
             }
             else
             {
-                RaiseProgramModuleEvent(program, "Program.Status", "Disabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Disabled");
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
             }

@@ -1,108 +1,91 @@
 <div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
-
-  <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-    <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
-    <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
-    <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
-    <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
-    <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
-  </div>
-
-  <div align="center" data-ui-field="temperature_value" style="font-size:36pt">
-    22.5&#x2103;
-  </div>
-
-  <!-- HEAT -->
-  <div data-ui-field="heat_field" style="margin-bottom:8px;" align="center">
-    <img src="pages/control/widgets/homegenie/generic/images/therm_heat.png" style="width:32px;height:32px;vertical-align:middle">
-    heat to <b data-ui-field="set_value">21.0</b>
-  </div>
-
-  <!-- COOL -->
-  <div data-ui-field="cool_field" style="margin-bottom:8px" align="center">
-    <img src="pages/control/widgets/homegenie/generic/images/therm_cool.png" style="width:32px;height:32px;vertical-align:middle">
-    cool to <b data-ui-field="coolset_value">23.0</b>
-  </div>
-
-  <!-- FAN -->  
-  <div data-ui-field="fan_field" style="margin-bottom:8px" align="center">
-    <img src="pages/control/widgets/homegenie/generic/images/therm_fan.png" style="width:32px;height:32px;vertical-align:middle">
-    fan <b data-ui-field="fan_value">AUTO</b>
-  </div>
-
-  <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
-
-  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
-    <b style="font-size:11pt;display: table-cell;">&nbsp;Status&nbsp;&nbsp;</b>
-    <div data-ui-field="operating_value" style="font-size:10pt;display: table-cell;">OFF</div>
-    <b style="font-size:11pt;display: table-cell;">&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;</b>
-    <div data-ui-field="mode_value" style="font-size:10pt;display: table-cell;">HEAT</div>
-  </div>
-
+    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
+        <img data-ui-field="icon" style="height:36px;margin:2px;margin-right:4px" align="left" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+        <div data-ui-field="name" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14pt">Name</div>
+        <div data-ui-field="description" style="margin-right:68px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:8pt">loading...</div>
+        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right" style="margin-right:40px">Features</a>
+        <a data-ui-field="options" data-role="button" data-icon="gear" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Options</a>
+    </div>
+    <div align="center" data-ui-field="temperature_value" style="font-size:36pt">
+        22.5&#x2103;
+    </div>
+    <!-- HEAT -->
+    <div data-ui-field="heat_field" style="margin-bottom:8px;" align="center">
+        <img src="pages/control/widgets/homegenie/generic/images/therm_heat.png" style="width:32px;height:32px;vertical-align:middle">
+        heat to <b data-ui-field="set_value">21.0</b>
+    </div>
+    <!-- COOL -->
+    <div data-ui-field="cool_field" style="margin-bottom:8px" align="center">
+        <img src="pages/control/widgets/homegenie/generic/images/therm_cool.png" style="width:32px;height:32px;vertical-align:middle">
+        cool to <b data-ui-field="coolset_value">23.0</b>
+    </div>
+    <!-- FAN -->
+    <div data-ui-field="fan_field" style="margin-bottom:8px" align="center">
+        <img src="pages/control/widgets/homegenie/generic/images/therm_fan.png" style="width:32px;height:32px;vertical-align:middle">
+        fan <b data-ui-field="fan_value">AUTO</b>
+    </div>
+    <div data-ui-field="updatetime" style="margin-right:10px;margin-bottom:10px;text-align:right;font-size:10pt"></div>
+    <div class="ui-footer ui-bar-inherit hg-widget-footer" align="right">
+        <b style="font-size:11pt;display: table-cell;">&nbsp;Status&nbsp;&nbsp;</b>
+        <div data-ui-field="operating_value" style="font-size:10pt;display: table-cell;">OFF</div>
+        <b style="font-size:11pt;display: table-cell;">&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;</b>
+        <div data-ui-field="mode_value" style="font-size:10pt;display: table-cell;">HEAT</div>
+    </div>
 </div>
 
-
 <!-- widget popups and other ui elements follow -->
-
 <div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <div style="margin:10px">
+        <!-- BEGIN - COMMON UI PART --->
+        <table width="100%">
+            <tr>
+                <td width="56">
+                    <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
+                </td>
+                <td>
+                    <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
+                    <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
+                </td>
+                <td valign="top">
+                    <div data-ui-field="status" style="margin-top:10px;font-size:11pt;color:gray;" align="right"></div>
+                </td>
+            </tr>
+        </table>
+        <!-- END - COMMON UI PART --->
+        <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
+        <div align="center">
+            <input data-ui-field="level_knob" data-role="none" type="text" class="dial"
+                   data-width="170"
+                   data-height="120"
+                   data-min="40"
+                   data-max="100"
+                   data-gradient="red"
+                   data-fgcolor="#CCCCCC"
+                   data-bgcolor="#555555"
+                   data-angleoffset=-125
+                   data-anglearc=250
+                   -data-cursor=true
+                   -data-skin="tron"
+                   data-thickness=".4"
+                   -data-linecap=round
+                   data-displayprevious=true>
+        </div>
 
-  <div style="margin:10px">
-
-    <!-- BEGIN - COMMON UI PART --->
-    <table width="100%">
-      <tr>
-        <td width="56">
-          <img data-ui-field="icon" height="56" src="pages/control/widgets/homegenie/generic/images/temperature.png" />
-        </td>
-        <td>
-          <div data-ui-field="group" style="margin:0;margin-left:10px;font-family:Georgia;font-size:11pt;color:gray">Group Name</div>
-          <h4 data-ui-field="name" style="margin:0;margin-left:10px;">Description</h4>
-        </td>
-        <td valign="top">
-          <div data-ui-field="status" style="margin-top:10px;font-size:11pt;color:gray;" align="right"></div>
-        </td>
-      </tr>
-    </table>
-    <!-- END - COMMON UI PART --->
-    <!-- BEGIN - MODULE TYPE SPECIFIC DIVS -->
-    <div align="center">
-      <input data-ui-field="level_knob" data-role="none" type="text" class="dial"
-             data-width="170"
-             data-height="120"
-             data-min="40"
-             data-max="100"
-             data-gradient="red"
-             data-fgcolor="#CCCCCC"
-             data-bgcolor="#555555"
-             data-angleoffset=-125
-             data-anglearc=250
-             -data-cursor=true
-             -data-skin="tron"
-             data-thickness=".4"
-             -data-linecap=round
-             data-displayprevious=true>
+        <div align="center">
+            <span data-locale-id="therm_setpoint">Set Point</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <a data-ui-field="cool_setpoint" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
+                <a data-ui-field="heat_setpoint" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
+            </div>
+            <span data-locale-id="therm_setmode">Mode</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <a data-ui-field="mode_off" data-locale-id="therm_off" data-role="button" href="">Off</a>
+                <a data-ui-field="mode_cool" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
+                <a data-ui-field="mode_heat" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
+            </div>
+        </div>
+        <!-- END - MODULE TYPE SPECIFIC DIVS -->
+        <br />
     </div>
-
-
-    <div align="center">
-
-      <span data-locale-id="therm_setpoint">Set Point</span>
-      <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-        <a data-ui-field="cool_setpoint" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
-        <a data-ui-field="heat_setpoint" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
-      </div>
-
-      <span data-locale-id="therm_setmode">Mode</span>
-      <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-        <a data-ui-field="mode_off" data-locale-id="therm_off" data-role="button" href="">Off</a>
-        <a data-ui-field="mode_cool" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
-        <a data-ui-field="mode_heat" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
-      </div>
-    </div>
-
-    <!-- END - MODULE TYPE SPECIFIC DIVS -->
-
-    <br />
-  </div>
 </div>

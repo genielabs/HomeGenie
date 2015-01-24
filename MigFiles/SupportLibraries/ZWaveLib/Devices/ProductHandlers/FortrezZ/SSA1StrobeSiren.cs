@@ -26,7 +26,7 @@ using System.Text;
 
 namespace ZWaveLib.Devices.ProductHandlers.FortrezZ
 {
-    class SSA1StrobeSiren : ProductHandlers.Generic.Dimmer
+    public class SSA1StrobeSiren : ProductHandlers.Generic.Dimmer
     {
 
         public override bool CanHandleProduct(ManufacturerSpecific productspecs)

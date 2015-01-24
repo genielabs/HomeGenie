@@ -1,70 +1,56 @@
 
 <div data-role="page" id="page_configure_interfaces">
-
     {include pages/header.html}
 
     <div class="ui-content">
 
-
         <img src="images/interfaces.png" style="position:absolute;top:65px;left:20px;" width="64" />
-        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_interfaces_heading">System and Interfaces</h3></div>
-
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_interfaces_heading">Settings</h3></div>
 
         <ul data-role="listview">
             <li data-locale-id="configure_interfaces_zwaveoptions" data-role="list-divider">ZWave Interface Options</li>
-
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-			            <div id="configure_interfaces_zwaveoptions">
-			                <span data-locale-id="configure_interfaces_zwaveport">Device Port</span>
-			                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				                <select id="page_configure_interfaces_zwaveport" data-mini="true"></select>
-			                </div>
-			            </div>
+                        <div id="configure_interfaces_zwaveoptions">
+                            <span data-locale-id="configure_interfaces_zwaveport">Device Port</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select id="page_configure_interfaces_zwaveport" data-mini="true"></select>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="ui-block-b" align="right">
                         <select id="configure_interfaces_flip_zwave" data-role="slider">
                             <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
                             <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
                         </select>
                     </div>
-
                 </div>
 
-
-	            <div id="configure_interfaces_zwaveoptions">
-	                <span data-locale-id="configure_interfaces_zwavecommontasks">ZWave Common Tasks</span>
-	                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-	                    <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
-	                    <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
-	                    <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
+                <div id="configure_interfaces_zwaveoptions">
+                    <span data-locale-id="configure_interfaces_zwavecommontasks">ZWave Common Tasks</span>
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <a data-locale-id="configure_interfaces_zwavediscovery" href="javascript:HG.WebApp.SystemSettings.ZWaveDiscovery()" class="ui-btn ui-icon-search ui-btn-icon-left">Discovery</a>
+                        <a data-locale-id="configure_interfaces_zwaveaddnode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeAdd()" class="ui-btn ui-icon-plus ui-btn-icon-left">Add Node</a>
+                        <a data-locale-id="configure_interfaces_zwaveremovenode" href="javascript:HG.WebApp.SystemSettings.ZWaveNodeRemove()" class="ui-btn ui-icon-minus ui-btn-icon-left">Remove Node</a>
                         <a data-locale-id="configure_interfaces_zwavehardreset" href="#systemsettings_zwavehardreset_popup" data-rel="popup" class="ui-btn ui-icon-alert ui-btn-icon-left">Hard Reset</a>
-	                </div>
-	            </div>
-
+                    </div>
+                </div>
             </li>
-
-
 
             <li data-locale-id="configure_interfaces_insteon" data-role="list-divider">Insteon PLM (2413S/2413U)</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-			            <div id="configure_interfaces_insteonoptions">
-                        
-			                <span data-locale-id="configure_interfaces_insteonport">Device Port</span>
-			                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				                <select id="page_configure_interfaces_insteonport" data-mini="true"></select>
-			                </div>
-                            
+                        <div id="configure_interfaces_insteonoptions">
+
+                            <span data-locale-id="configure_interfaces_insteonport">Device Port</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select id="page_configure_interfaces_insteonport" data-mini="true"></select>
+                            </div>
+
                             <span data-locale-id="configure_interfaces_insteonx10housecodes">House Codes in use (for X10 devices only)</span>
-                            <br clear="all"/>
+                            <br clear="all" />
                             <div id="page_configure_interfaces_insteonx10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" style="display:inline-block">
                                 <label>A<input type="checkbox" value="A" /></label>
                                 <label>B<input type="checkbox" value="B" /></label>
@@ -83,10 +69,9 @@
                                 <label>O<input type="checkbox" value="O" /></label>
                                 <label>P<input type="checkbox" value="P" /></label>
                             </div>
-                            
-			            </div>
-                    </div>
 
+                        </div>
+                    </div>
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_insteon" data-role="slider">
@@ -95,75 +80,62 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
-                                
-            </li>
 
-            
+            </li>
 
             <li data-locale-id="configure_interfaces_x10options" data-role="list-divider">X10 Interface Options</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-			            <div id="configure_interfaces_x10options">
-			                <span data-locale-id="configure_interfaces_x10port">Device Port</span>
-			                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				                <select id="page_configure_interfaces_x10port" data-mini="true"></select>
-				            </div>
-			            </div>
+                        <div id="configure_interfaces_x10options">
+                            <span data-locale-id="configure_interfaces_x10port">Device Port</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select id="page_configure_interfaces_x10port" data-mini="true"></select>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="ui-block-b" align="right">
                         <select id="configure_interfaces_flip_x10" data-role="slider">
                             <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
                             <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
                         </select>
                     </div>
-
                 </div>
-
-	            <div id="configure_interfaces_x10options">
-	                <span data-locale-id="configure_interfaces_x10housecodes">House Codes in use</span>
-	                <br clear="all"/>
-	                <div id="page_configure_interfaces_x10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" style="display:inline-block">
-	                    <label>A<input type="checkbox" value="A" /></label>
-	                    <label>B<input type="checkbox" value="B" /></label>
-	                    <label>C<input type="checkbox" value="C" /></label>
-	                    <label>D<input type="checkbox" value="D" /></label>
-	                    <label>E<input type="checkbox" value="E" /></label>
-	                    <label>F<input type="checkbox" value="F" /></label>
-	                    <label>G<input type="checkbox" value="G" /></label>
-	                    <label>H<input type="checkbox" value="H" /></label>
-	                    <label>I<input type="checkbox" value="I" /></label>
-	                    <label>J<input type="checkbox" value="J" /></label>
-	                    <label>K<input type="checkbox" value="K" /></label>
-	                    <label>L<input type="checkbox" value="L" /></label>
-	                    <label>M<input type="checkbox" value="M" /></label>
-	                    <label>N<input type="checkbox" value="N" /></label>
-	                    <label>O<input type="checkbox" value="O" /></label>
-	                    <label>P<input type="checkbox" value="P" /></label>
-	                </div>
-	            </div>
-
+                <div id="configure_interfaces_x10options">
+                    <span data-locale-id="configure_interfaces_x10housecodes">House Codes in use</span>
+                    <br clear="all" />
+                    <div id="page_configure_interfaces_x10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" style="display:inline-block">
+                        <label>A<input type="checkbox" value="A" /></label>
+                        <label>B<input type="checkbox" value="B" /></label>
+                        <label>C<input type="checkbox" value="C" /></label>
+                        <label>D<input type="checkbox" value="D" /></label>
+                        <label>E<input type="checkbox" value="E" /></label>
+                        <label>F<input type="checkbox" value="F" /></label>
+                        <label>G<input type="checkbox" value="G" /></label>
+                        <label>H<input type="checkbox" value="H" /></label>
+                        <label>I<input type="checkbox" value="I" /></label>
+                        <label>J<input type="checkbox" value="J" /></label>
+                        <label>K<input type="checkbox" value="K" /></label>
+                        <label>L<input type="checkbox" value="L" /></label>
+                        <label>M<input type="checkbox" value="M" /></label>
+                        <label>N<input type="checkbox" value="N" /></label>
+                        <label>O<input type="checkbox" value="O" /></label>
+                        <label>P<input type="checkbox" value="P" /></label>
+                    </div>
+                </div>
             </li>
-
             <li data-locale-id="configure_interfaces_w800rf32" data-role="list-divider">W800RF32 RF Receiver Interface Options</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-			            <div id="configure_interfaces_w800rf32options">
-			                <span data-locale-id="configure_interfaces_w800rf32port">Device Port</span>
-			                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-			                	<select id="page_configure_interfaces_w800rf32port" onchange="HG.WebApp.SystemSettings.W800RfSetPort($(this).val())" data-mini="true"></select>
-							</div>
-			            </div>
+                        <div id="configure_interfaces_w800rf32options">
+                            <span data-locale-id="configure_interfaces_w800rf32port">Device Port</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select id="page_configure_interfaces_w800rf32port" onchange="HG.WebApp.SystemSettings.W800RfSetPort($(this).val())" data-mini="true"></select>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_w800rf32" data-role="slider">
@@ -172,25 +144,19 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
-
             </li>
-
             <li data-locale-id="configure_interfaces_lircremote" data-role="list-divider">Lirc Infrared Remotes</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-                    	<div id="configure_interfaces_lircremoteoptions">
-			                <span data-locale-id="configure_interfaces_lircremoteconfiguration">Lirc Configuration</span>
-			                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-			                	<a data-locale-id="configure_interfaces_lircremoteaddremote" href="#systemsettings_lircremotes_popup" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left" data-rel="popup" data-transition="pop">Add Remote</a>
-			                </div>
-						</div>
+                        <div id="configure_interfaces_lircremoteoptions">
+                            <span data-locale-id="configure_interfaces_lircremoteconfiguration">Lirc Configuration</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <a data-locale-id="configure_interfaces_lircremoteaddremote" href="#systemsettings_lircremotes_popup" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left" data-rel="popup" data-transition="pop">Add Remote</a>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_lircremote" data-role="slider">
@@ -199,62 +165,52 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
-
-	            <div id="configure_interfaces_lircremoteoptions">
-
-	                <ul id="lirc_remotes" data-inset="true" data-role="listview" data-mini="true"></ul>
-
-	            </div>
-
+                <div id="configure_interfaces_lircremoteoptions">
+                    <ul id="lirc_remotes" data-inset="true" data-role="listview" data-mini="true"></ul>
+                </div>
 
             </li>
 
-
             <li data-locale-id="configure_interfaces_camera" data-role="list-divider">Camera Device</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-                		<div id="configure_interfaces_cameraoptions">
-	                    	<span data-locale-id="configure_interfaces_camerasettings">Device / Resolution / FPS</span>
-	                    	<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				                <select id="page_configure_interfaces_cameraport">
-				                    <option value="/dev/video0">/dev/video0</option>
-				                    <option value="/dev/video1">/dev/video1</option>
-				                </select>
-				                <select id="page_configure_interfaces_cameraresolution">
-				                    <option value="320x200">320x200</option>
-				                    <option value="320x240">320x240</option>
-				                    <option value="640x400">640x400</option>
-				                    <option value="640x480" selected="selected">640x480</option>
-				                    <option value="1280x720">1280x720</option>
-				                    <option value="1280x960">1280x960</option>
-				                    <option value="1920x1080">1920x1080</option>
-				                    <option value="2592x1944">2592x1944</option>
-				                </select>
-				                <select id="page_configure_interfaces_camerafps">
-				                    <option value="1">1</option>
-				                    <option value="2">2</option>
-				                    <option value="3">3</option>
-				                    <option value="4">4</option>
-				                    <option value="5">5</option>
-				                    <option value="10">10</option>
-				                    <option value="15">15</option>
-				                    <option value="25">25</option>
-				                    <option value="30">30</option>
-				                    <option value="50">50</option>
-				                    <option value="60">60</option>
-				                    <option value="90">90</option>
-				                </select>
-								<a id="page_configure_interfaces_camerachange" class="ui-btn">Change</a>
-							</div>
-						</div>
-
+                        <div id="configure_interfaces_cameraoptions">
+                            <span data-locale-id="configure_interfaces_camerasettings">Device / Resolution / FPS</span>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <select id="page_configure_interfaces_cameraport">
+                                    <option value="/dev/video0">/dev/video0</option>
+                                    <option value="/dev/video1">/dev/video1</option>
+                                </select>
+                                <select id="page_configure_interfaces_cameraresolution">
+                                    <option value="320x200">320x200</option>
+                                    <option value="320x240">320x240</option>
+                                    <option value="640x400">640x400</option>
+                                    <option value="640x480" selected="selected">640x480</option>
+                                    <option value="1280x720">1280x720</option>
+                                    <option value="1280x960">1280x960</option>
+                                    <option value="1920x1080">1920x1080</option>
+                                    <option value="2592x1944">2592x1944</option>
+                                </select>
+                                <select id="page_configure_interfaces_camerafps">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="60">60</option>
+                                    <option value="90">90</option>
+                                </select>
+                                <a id="page_configure_interfaces_camerachange" class="ui-btn">Change</a>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_camera" data-role="slider">
@@ -263,23 +219,16 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
                 <p data-locale-id="configure_interfaces_cameradesc">Works with any Video4Linux compatible device (x64 Ubuntu and Raspberry Pi only).</p>
-
             </li>
-
-
 
             <li data-locale-id="configure_interfaces_upnp" data-role="list-divider">Universal Plug &amp; Play</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
                         UPnP/DLNA control point (experimental/unstable)
                     </div>
-
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_upnp" data-role="slider">
@@ -288,22 +237,15 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
             </li>
-
-            
 
 
             <li data-locale-id="configure_interfaces_weeco4mgpio" data-role="list-divider">WEECOBOARD 4M GPIO</li>
             <li>
-
                 <div class="ui-grid-a">
-
                     <div class="ui-block-a">
-
                     </div>
-
                     <div class="ui-block-b">
                         <span style="float:right">
                             <select id="configure_interfaces_flip_weeco4mgpio" data-role="slider">
@@ -312,14 +254,10 @@
                             </select>
                         </span>
                     </div>
-
                 </div>
             </li>
 
-
-
         </ul>
-
 
         <div id="systemsettings_lircremotes_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -337,7 +275,6 @@
             </div>
         </div>
 
-
         <div id="systemsettings_zwaveoperation_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div data-role="header" class="ui-corner-top">
@@ -352,24 +289,18 @@
             </div>
         </div>
 
-
-
         <div id="systemsettings_zwavediscovery_popup" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="configure_system_zwavediscoverytitle">ZWave Discovery</h1>
             </div>
             <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
-
                 <p id="configure_system_zwavediscovery_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
-
             </div>
             <div data-role="footer" data-tap-toggle="false" align="center">
                 <a id="configure_system_zwavediscovery_modulesadd" href="#page_configure_groups" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-left" style="margin:8px">Configure Groups and Modules</a>
             </div>
         </div>
-
-
 
         <div id="systemsettings_zwavehardreset_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">
@@ -388,12 +319,10 @@
                 </div>
             </div>
         </div>
-        
 
 
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-
         <div data-role="navbar">
             <ul>
                 <li>
@@ -413,7 +342,6 @@
                 </li>
             </ul>
         </div><!-- /navbar -->
-
     </div>
 </div>
 <!-- hg page init script -->

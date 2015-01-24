@@ -35,6 +35,9 @@
       "basicClass": {
         "@value": "04"
       },
+      "genericClass": {
+        "@value": "a1"
+      },
       "optional": {
         "@value": "true"
       },

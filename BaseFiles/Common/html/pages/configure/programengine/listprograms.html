@@ -1,16 +1,13 @@
 <!-- ProgramEngine - Program List -->
 <div data-role="page" id="page_automation_programs">
-
     {include pages/header.html}
 
     <div class="ui-content">
-
         <img src="images/automation.png" style="position:absolute;top:65px;left:20px;" width="64" />
         <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 id="configure_automation_group_title" style="position:absolute;bottom:30px;left:90px;" data-locale-id="configure_program_automationtitle"></h3></div>
-
         <ul id="configure_programslist" data-role="listview"></ul>
     </div>
-    
+
     <div id="automation_program_add" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_newprogram">Add Program</h2>
@@ -28,7 +25,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="automationprograms_group_delete" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h2 data-locale-id="configure_group_deletegroup">Delete Group?</h2>
@@ -47,7 +44,6 @@
         </div>
     </div>
 
-
     <div id="automationprograms_program_delete" class="ui-corner-all" data-role="popup" data-overlay-theme="b">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_deletetitle">Delete Program?</h2>
@@ -57,15 +53,14 @@
             <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-            		<a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
                 </div>
                 <div class="ui-block-b">
-            		<a id="automationprograms_program_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
+                    <a id="automationprograms_program_delete_button" href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-rel="back" data-transition="flow">Delete</a>
                 </div>
             </div>
         </div>
     </div>
-
     <div id="automation_program_import" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b">
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
         <div class="ui-corner-top" data-role="header">
@@ -82,7 +77,6 @@
             </fieldset>
         </div>
     </div>
-
     <div id="listprograms_actionmenu" data-role="popup" data-overlay-theme="b">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
@@ -93,7 +87,6 @@
             <li><a id="btn_automation_program_refresh" data-locale-id="configure_programslist_refreshlist" class="ui-btn ui-btn-icon-right ui-icon-refresh">Refresh list</a></li>
         </ul>
     </div>
-
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div data-role="navbar">
             <ul>
@@ -115,9 +108,7 @@
             </ul>
         </div><!-- /navbar -->
     </div>
-
 </div>
-
 
 <!-- hg page init script -->
 <script type="text/javascript">

@@ -1,0 +1,90 @@
+﻿{
+    "cal_sun":
+        "Su",
+    "cal_mon":
+        "Mo",
+    "cal_tue":
+        "Tu",
+    "cal_wed":
+        "We",
+    "cal_thu":
+        "Th",
+    "cal_fri":
+        "Fr",
+    "cal_sat":
+        "Sa",
+    "cal_jan":
+        "January",
+    "cal_feb":
+        "February",
+    "cal_mar":
+        "March",
+    "cal_apr":
+        "April",
+    "cal_mai":
+        "Mai",
+    "cal_jun":
+        "June",
+    "cal_jul":
+        "July",
+    "cal_aug":
+        "August",
+    "cal_sep":
+        "September",
+    "cal_oct":
+        "October",
+    "cal_nov":
+        "November",
+    "cal_dec":
+        "December",
+    "cal_wek":
+        "Week-end",
+    "cal_work":
+        "Work Day",
+    "cal_free":
+        "Holliday",
+    "cal_spe":
+        "Special",
+    "mode":
+        "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "mode_value":
+        "Halt&nbsp;&nbsp;",
+    "title_therm":
+    	"Thermostats",
+    "title_light":
+    	"Lights and Switchs",
+    "title_shutter":
+    	"Shutters and Dimmers",
+    "control_light_on":
+        "&nbsp;On&nbsp;",    
+    "control_light_off":
+        "Off",    
+    "control_light_prog":
+        "Programmed",    
+    "therm_setpoint":
+        "Temperature",
+    "therm_setmode":
+        "Mode",
+    "therm_updt":
+        "---",
+    "therm_off":
+        "Stop",
+    "therm_nofrost":
+        "Avoid Frost",
+    "therm_eco":
+        "Eco",
+    "therm_heat":
+        "Comfort",
+    "therm_prog":
+        "Scheduled",
+    "therm_sensor":
+        "Sensor : ",
+    "therm_switch":
+        "Switch : ",
+    "tt_timetable":
+        "Time Table ",
+    "control_module_off":
+        "Cancel",
+    "control_module_on":
+        "Set"
+}
