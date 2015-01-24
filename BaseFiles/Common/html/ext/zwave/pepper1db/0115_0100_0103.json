@@ -15,31 +15,28 @@
         "@value": "0100"
       },
       "productId": {
-        "@value": "0401"
+        "@value": "0103"
       },
       "libType": {
-        "@value": "03"
+        "@value": "02"
       },
       "protoVersion": {
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "43"
+        "@value": "63"
       },
       "appVersion": {
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "04"
+        "@value": "03"
       },
       "basicClass": {
-        "@value": "04"
-      },
-      "genericClass": {
-        "@value": "12"
+        "@value": "01"
       },
       "specificClass": {
-        "@value": "02"
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
@@ -48,23 +45,23 @@
         "@value": "false"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "0",
-      "rfFrequency": "EU",
-      "certId": "14965",
-      "certNumber": "ZC08-12070010"
+      "beamSensor": "0"
     },
     "deviceDescription": {
       "description": {
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "Wandcontroller mit geteilter Schaltwippe"
+            "#text": "Sichere Fernbedienung mit 4 Tasten"
           },
           {
             "@xml:lang": "en",
-            "#text": "Split Paddle Wall Controller"
+            "#text": "Secure Key Chain Controller with 4 buttons"
+          },
+          {
+            "@xml:lang": "fr"
           },
           {
             "@xml:lang": "ru"
@@ -75,11 +72,15 @@
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "gleichzeitiges 5 sek langes Drücken aller 4 Tasten und anschließend Taste 2"
+            "#text": "gleichzeitiges 5 sek langes Drücken aller 4 Tasten und anschließend Button 2"
           },
           {
             "@xml:lang": "en",
             "#text": "Simultaneously press four buttons for 5 seconds and then button 2"
+          },
+          {
+            "@xml:lang": "fr",
+            "#text": "pression simultanée de 5 secondes à tous les 4 boutons et après bouton numéro 2"
           },
           {
             "@xml:lang": "ru",
@@ -91,41 +92,32 @@
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "gleichzeitiges 5 sek langes Drücken aller 4 Tasten and anschließend Taste 1"
+            "#text": "Drücken einer Taste länger als eine Sekunde bis die LED grün/rot blinkt"
           },
           {
             "@xml:lang": "en",
-            "#text": "Simultaneously press four buttons for 5 seconds and then button 1"
+            "#text": "Hit one button for > 1 sec until green/red blinking"
+          },
+          {
+            "@xml:lang": "fr",
+            "#text": "pression simultanée de 5 secondes à tous les 4 boutons et après bouton numéro 1  "
           },
           {
             "@xml:lang": "ru",
-            "#text": "Одновременное нажатие 4 кнопок на 5 секунд и далее кнопка 1"
+            "#text": "Одновременное нажатие 4 кнопок на 5 секунд и далее кнопка 1  "
           }
         ]
       },
-      "productName": "Dual Paddle Wall Controller 1.4",
+      "productName": "KFOBC",
       "brandName": "Z-Wave.Me",
-      "productCode": "ZMR_WCD_1",
+      "productLine": "Secure Key Chain Controller",
+      "productCode": "Secure Key Chain Controller",
+      "productVersion": "1.3",
       "batteryType": "CR2032",
       "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
-        {
-          "@id": "002d"
-        },
-        {
-          "@id": "0070"
-        },
-        {
-          "@id": "0072"
-        },
-        {
-          "@id": "0075"
-        },
-        {
-          "@id": "0077"
-        },
         {
           "@id": "0080"
         },
@@ -138,11 +130,71 @@
           "@version": "2"
         },
         {
-          "@id": "0086"
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "002d"
         },
         {
           "@id": "008e",
           "@version": "2"
+        },
+        {
+          "@id": "008f",
+          "@secure": "true"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "005b",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@controlled": "true"
+        },
+        {
+          "@id": "005e"
+        },
+        {
+          "@id": "005a"
+        },
+        {
+          "@id": "0059"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "002b",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0026",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0062",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0060",
+          "@controlled": "true",
+          "@secure": "true"
+        },
+        {
+          "@id": "0073"
         }
       ]
     },
@@ -150,56 +202,92 @@
       "assocGroup": [
         {
           "@number": "1",
-          "@maxNodes": "8",
+          "@maxNodes": "10",
           "description": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wird gesteuert durch Taste 1 oder einfache Klicks auf Taste 1 und 3"
+                "#text": "Lifeline"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Controlled by button 1 or single clicks of buttons 1 and 3"
+                "#text": "Lifeline"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Lifeline"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Управляется кнопкой 1 или одинарными нажатиями кнопок 1 и 3"
+                "#text": "Lifeline"
               }
             ]
           }
         },
         {
           "@number": "2",
-          "@maxNodes": "8",
+          "@maxNodes": "10",
           "description": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wird gesteuert durch Taste 2 oder einfache Klicks auf Taste 2 und 4"
+                "#text": "Steuergruppe A, gesteuert durch Taste 1 oder einfache Klicks auf Taste 1 und 3"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Controlled by button 2 or single clicks of buttons 2 and 4"
+                "#text": "Control Group A, controlled by button 1 or single clicks of buttons 1 and 3"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "est controllée par bouton A ou clics simples sur bouton 1 et 3"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Управляется кнопкой 2 или одинарными нажатиями кнопок 2 и 4"
+                "#text": "Управляется кнопкой A или одинарными нажатиями кнопок 1 и 3"
               }
             ]
           }
         },
         {
           "@number": "3",
-          "@maxNodes": "8",
+          "@maxNodes": "10",
           "description": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wird gesteuert durch Taste 3 oder zwei Klicks auf Taste 1 und 3"
+                "#text": "Steuergruppe B, gesteuert durch Taste 2 oder einfache Klicks auf Taste 2 und 4"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Controlled by button 3 or double clicks of buttons 1 and 3"
+                "#text": "Control Group B, controlled by button 2 or single clicks of buttons 2 and 4"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "est controllée par bouton 1 ou clics simples sur bouton 2 et 4"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Управляется кнопкой B или одинарными нажатиями кнопок 2 и 4"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "4",
+          "@maxNodes": "10",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Steuergruppe C, gesteuert durch Taste 3 oder zwei Klicks auf Taste 1 und 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Control Group C, controlled by button 3 or double clicks of buttons 1 and 3"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "est controllée par bouton 3 ou deux clics sur bouton 1 et 3"
               },
               {
                 "@xml:lang": "ru",
@@ -209,17 +297,21 @@
           }
         },
         {
-          "@number": "4",
-          "@maxNodes": "8",
+          "@number": "5",
+          "@maxNodes": "10",
           "description": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Wird gesteuert durch Taste 4 oder zwei Klicks auf Taste 2 und 4"
+                "#text": "Steuergruppe D, gesteuert durch Taste 4 oder zwei Klicks auf Taste 2 und 4"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Controlled by button 4 or double clicks of buttons 2 and 4"
+                "#text": "Control Group D, controlled by button 4 or double clicks of buttons 2 and 4"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "est controllée par bouton 4 ou deux clics sur bouton 2 et 4"
               },
               {
                 "@xml:lang": "ru",
@@ -248,6 +340,10 @@
                 "#text": "Button 1 and 3 pair mode"
               },
               {
+                "@xml:lang": "fr",
+                "#text": "Boutons 1 et 3 accouplés"
+              },
+              {
                 "@xml:lang": "ru",
                 "#text": "Режим работы пары кнопок 1 и 3"
               }
@@ -257,15 +353,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Im entkoppelten Modus steuert Taste 1 die Gruppe 1  und Taste 3 die Gruppe 3, im gekoppelten Modus steuern beide die Gruppen 1 und 3, wobei Einfachklick Gruppe 1 und Doppelklick Gruppe 3 schaltet.\r\n\r\n"
+                "#text": "Im entkoppelten Modus steuert Taste 1 die Gruppe A und Taste 3 die Gruppe C, im gekoppelten Modus steuern beide die Gruppen A und C, wobei Einfachklick Gruppe A und Doppelklick Gruppe C schaltet."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In separate mode button 1 works with group 1, button 3 with groups 3. Click is On, Hold is dimming Up, Double click is Off, Click-Hold is dimming Down. In pair button 1/3 are Up/Down correspondingly. Click is On/Off, Hold is dimming Up/Down. Single clicks works with group 1, double click with group 3."
+                "#text": "In separate mode button 1 works with group A, button 3 with groups C. Click is On, Hold is dimming Up, Double click is Off, Click-Hold is dimming Down. In pair button 1/3 are Up/Down correspondingly. Click is On/Off, Hold is dimming Up/Down. Single clicks works with group A, double click with group C."
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Au mode découplé, le bouton 1 contrôle le groupe A et bouton 3 le groupe C, en mode accouplé les deux contrôlent les groupes A et C, ou clic simple couple groupe A et clic double groupe C."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В раздельном режиме кнопка 1 работает с группой 1, кнопка 3 с группой 3. Нажатие - Вкл, удержание - диммирование Вверх, двойное нажатие - Выкл, нажатие-удержание - Вниз. В парном режиме 1/3 - Вверх/Вниз соответственно. Клик - Вкл/Выкл, удержания - диммирование Вверх/Вниз. Одинарный клик работает с группой 1, двойной с группой 3."
+                "#text": "В раздельном режиме кнопка 1 работает с группой A, кнопка 3 с группой C. Нажатие - Вкл, удержание - диммирование Вверх, двойное нажатие - Выкл, нажатие-удержание - Вниз. В парном режиме A/C - Вверх/Вниз соответственно. Клик - Вкл/Выкл, удержания - диммирование Вверх/Вниз. Одинарный клик работает с группой A, двойной с группой C."
               }
             ]
           },
@@ -277,11 +377,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Taste 1 und 3 sind unabängig"
+                    "#text": "Taste 1 und 3 sind unabhängig"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Separately"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "bouton 1 et 3 sont indépendants"
                   },
                   {
                     "@xml:lang": "ru",
@@ -304,6 +408,10 @@
                     "#text": "In pair without double clicks"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "bouton 1 et 3 contrôlent ensemble, clic double n'existe pas"
+                  },
+                  {
                     "@xml:lang": "ru",
                     "#text": "В паре без двойных кликов"
                   }
@@ -322,6 +430,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "In pair with double clicks"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "boutons 1 et 3 contrôlent ensemble, clic double existe"
                   },
                   {
                     "@xml:lang": "ru",
@@ -348,6 +460,10 @@
                 "#text": "Button 2 and 4 pair mode"
               },
               {
+                "@xml:lang": "fr",
+                "#text": "Boutons 2 et 4 accouplés"
+              },
+              {
                 "@xml:lang": "ru",
                 "#text": "Режим работы пары кнопок 2 и 4"
               }
@@ -357,15 +473,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Im entkoppelten Modus steuert Taste 2 die Gruppe 2  und Taste 4 die Gruppe 4, im gekoppelten Modus steuern beide die Gruppen 2 und 4, wobei Einfachklick Gruppe 2 und Doppelklick Gruppe 4 schaltet."
+                "#text": "Im entkoppelten Modus steuert Taste 2 die Gruppe B und Taste 4 die Gruppe D, im gekoppelten Modus steuern beide die Gruppen B und D, wobei Einfachklick Gruppe B und Doppelklick Gruppe D schaltet."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In separate mode button 2 works with group 2, button 4 with groups 4. Click is On, Hold is dimming Up, Double click is Off, Click-Hold is dimming Down. In pair button 2/4 are Up/Down correspondingly. Click is On/Off, Hold is dimming Up/Down. Single clicks works with group 2, double click with group 4."
+                "#text": "In separate mode button 2 works with control group B, button 4 with control group D. Click is On, Hold is dimming Up, Double click is Off, Click-Hold is dimming Down. In pair button B/D are Up/Down correspondingly. Click is On/Off, Hold is dimming Up/Down. Single clicks works with group B, double click with group D."
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Au mode découplé, le bouton 2 contrôle le groupe B et bouton 4 le groupe D, en mode accouplé les deux contrôlent les groupes B et D, ou clic simple couple groupe B et clic double groupe D."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В раздельном режиме кнопка 2 работает с группой 2, кнопка 4 с группой 4. Нажатие - Вкл, удержание - диммирование Вверх, двойное нажатие - Выкл, нажатие-удержание - Вниз. В парном режиме 2/4 - Вверх/Вниз соответственно. Клик - Вкл/Выкл, удержания - диммирование Вверх/Вниз. Одинарный клик работает с группой 2, двойной с группой 4."
+                "#text": "В раздельном режиме кнопка 2 работает с группой B, кнопка 4 с группой D. Нажатие - Вкл, удержание - диммирование Вверх, двойное нажатие - Выкл, нажатие-удержание - Вниз. В парном режиме B/D - Вверх/Вниз соответственно. Клик - Вкл/Выкл, удержания - диммирование Вверх/Вниз. Одинарный клик работает с группой B, двойной с группой D."
               }
             ]
           },
@@ -377,11 +497,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Taste 2 und 4 sind unhängig\n\n"
+                    "#text": "Taste 2 und 4 sind unabhängig"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Separately"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "boutons 2 et 4 sont indépendants"
                   },
                   {
                     "@xml:lang": "ru",
@@ -404,6 +528,10 @@
                     "#text": "In pair without double clicks"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "bouton 2 et 4 contrôlent ensemble, clic double n'existe pas"
+                  },
+                  {
                     "@xml:lang": "ru",
                     "#text": "В паре без двойных кликов"
                   }
@@ -424,6 +552,10 @@
                     "#text": "In pair with double clicks"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "boutons 2 et 4 contrôlent ensemble, clic double existe"
+                  },
+                  {
                     "@xml:lang": "ru",
                     "#text": "В паре с двойными кликами"
                   }
@@ -436,20 +568,24 @@
           "@number": "11",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "08",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Aktion für Gruppe 1"
+                "#text": "Kommando an Steuergruppe A"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Action on group 1"
+                "#text": "Command to Control Group A"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Action pour groupe A"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Действия для группы 1"
+                "#text": "Действия для группы A"
               }
             ]
           },
@@ -457,15 +593,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Assoziationsgruppe 1 gesendet wird."
+                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Steuergruppe A gesendet wird."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In Switch On/Off only mode On command is sent on Dim Up, Off on Dim Down. In Scenes mode the scene ID sent is (10 * group + ActionID), where ActionID is: 1 = On, 2 = Off, 3 = Dim Up Start, 4 = Dim Down Start, 5 = Dim Up Stop, 6 = Dim Down Stop"
+                "#text": "This parameter defines the command to be sent to devices of control group A when the related button is pressed"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Ce paramètre défini le commando manoeuvre, lequel est envoyé aux appareils de goupe d'association 1."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В режиме Только Включить/Выключить при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример: в режиме \"В паре без двойных кликов\" при нажатии на кнопку 1 (группа 1) отправится команда 10 * 1 + 1(Вкл) = 11."
+                "#text": "В режиме Только Включать/Выключать при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 1 (группа 1) отправится команда 10 * 1 + 1(Вкл) = 11."
               }
             ]
           },
@@ -482,6 +622,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
                   },
                   {
                     "@xml:lang": "ru",
@@ -504,8 +648,12 @@
                     "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить/Выключить и Диммировать (Basic Set и Switch Multilevel)"
+                    "#text": "Включать/Выключать и Диммировать (отправлять Basic Set и Switch Multilevel)"
                   }
                 ]
               }
@@ -524,8 +672,8 @@
                     "#text": "Switch On/Off only (send Basic Set)"
                   },
                   {
-                    "@xml:lang": "ru",
-                    "#text": "Только Включить/Выключить (Basic Set)"
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
                   }
                 ]
               }
@@ -544,8 +692,12 @@
                     "#text": "Switch All"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить всё/Выключить всё"
+                    "#text": "Включать всё/Выключать всё"
                   }
                 ]
               }
@@ -564,8 +716,12 @@
                     "#text": "Send Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка Сцен"
+                    "#text": "Отправлять Сцены"
                   }
                 ]
               }
@@ -584,8 +740,84 @@
                     "#text": "Send Preconfigured Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка преднастроенных Сцен"
+                    "#text": "Отправлять преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé\n\n"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправлять глобальные сцены контроллеру"
                   }
                 ]
               }
@@ -596,20 +828,24 @@
           "@number": "12",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "08",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Aktion für Gruppe 2"
+                "#text": "Kommando an Steuergruppe B"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Action on group 2"
+                "#text": "Command to Control Group B"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Action pour groupe B"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Действия для группы 2"
+                "#text": "Действия для группы B"
               }
             ]
           },
@@ -617,15 +853,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Assoziationsgruppe 2 gesendet wird."
+                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Steuergruppe B gesendet wird."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In Switch On/Off only mode On command is sent on Dim Up, Off on Dim Down. In Scenes mode the scene ID sent is (10 * group + ActionID), where ActionID is: 1 = On, 2 = Off, 3 = Dim Up Start, 4 = Dim Down Start, 5 = Dim Up Stop, 6 = Dim Down Stop"
+                "#text": "This parameter defines the command to be sent to devices of control group B when the related button is pressed"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Ce paramètre défini le commando manoeuvre, lequel est envoyé aux appareils de goupe d'association 2."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В режиме Только Включить/Выключить при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 2 (группа 2) отправится команда 10 * 2 + 1(Вкл) = 21."
+                "#text": "В режиме Только Включать/Выключать при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 2 (группа 2) отправится команда 10 * 2 + 1(Вкл) = 21."
               }
             ]
           },
@@ -642,6 +882,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
                   },
                   {
                     "@xml:lang": "ru",
@@ -664,8 +908,12 @@
                     "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить/Выключить и Диммировать (Basic Set и Switch Multilevel)"
+                    "#text": "Включать/Выключать и Диммировать (отправлять Basic Set и Switch Multilevel)"
                   }
                 ]
               }
@@ -684,8 +932,12 @@
                     "#text": "Switch On/Off only (send Basic Set)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Только Включить/Выключить (Basic Set)"
+                    "#text": "Только Включать/Выключать (отправлять Basic Set)"
                   }
                 ]
               }
@@ -704,8 +956,12 @@
                     "#text": "Switch All"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить всё/Выключить всё"
+                    "#text": "Включать всё/Выключать всё"
                   }
                 ]
               }
@@ -724,8 +980,12 @@
                     "#text": "Send Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка Сцен"
+                    "#text": "Отправлять Сцены"
                   }
                 ]
               }
@@ -744,8 +1004,84 @@
                     "#text": "Send Preconfigured Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка преднастроенных Сцен"
+                    "#text": "Отправлять преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé\n\n"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправлять глобальные сцены контроллеру"
                   }
                 ]
               }
@@ -756,20 +1092,24 @@
           "@number": "13",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "08",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Aktion für Gruppe 3"
+                "#text": "Kommando an Steuergruppe C"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Action on group 3"
+                "#text": "Command to Control Group C"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Action pour groupe C"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Действия для группы 3"
+                "#text": "Действия для группы C"
               }
             ]
           },
@@ -777,15 +1117,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Assoziationsgruppe 3 gesendet wird."
+                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Steuergruppe C gesendet wird."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In Switch On/Off only mode On command is sent on Dim Up, Off on Dim Down. In Scenes mode the scene ID sent is (10 * group + ActionID), where ActionID is: 1 = On, 2 = Off, 3 = Dim Up Start, 4 = Dim Down Start, 5 = Dim Up Stop, 6 = Dim Down Stop"
+                "#text": "This parameter defines the command to be sent to devices of control group C when the related button is pressed"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Ce paramètre défini le commando manoeuvre, lequel est envoyé aux appareils de goupe d'association 3."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В режиме Только Включить/Выключить при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 3 (группа 1) отправится команда 10 * 1 + 2(Выкл) = 12."
+                "#text": "В режиме Только Включать/Выключать при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:   в режиме \"В паре без двойных кликов\" при нажатии на кнопку 3 (группа 3) отправится команда 10 * 1 + 2(Выкл) = 22."
               }
             ]
           },
@@ -802,6 +1146,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
                   },
                   {
                     "@xml:lang": "ru",
@@ -824,8 +1172,12 @@
                     "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить/Выключить и Диммировать (Basic Set и Switch Multilevel)"
+                    "#text": "Включать/Выключать и Диммировать (отправлять Basic Set и Switch Multilevel)"
                   }
                 ]
               }
@@ -844,8 +1196,12 @@
                     "#text": "Switch On/Off only (send Basic Set)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Только Включить/Выключить (Basic Set)"
+                    "#text": "Только Включать/Выключать (отправлять Basic Set)"
                   }
                 ]
               }
@@ -864,8 +1220,12 @@
                     "#text": "Switch All"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить всё/Выключить всё"
+                    "#text": "Включать всё/Выключать всё"
                   }
                 ]
               }
@@ -884,8 +1244,12 @@
                     "#text": "Send Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка Сцен"
+                    "#text": "Отправлять Сцены"
                   }
                 ]
               }
@@ -904,8 +1268,84 @@
                     "#text": "Send Preconfigured Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка преднастроенных Сцен"
+                    "#text": "Отправлять преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé\n\n"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправлять глобальные сцены контроллеру"
                   }
                 ]
               }
@@ -916,20 +1356,24 @@
           "@number": "14",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "08",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Aktion für Gruppe 4"
+                "#text": "Kommando an Steuergruppe D"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Action on group 4"
+                "#text": "Command to Control Group D"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Action pour groupe D"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Действия для группы 4"
+                "#text": "Действия для группы D"
               }
             ]
           },
@@ -937,15 +1381,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Assoziationsgruppe 4 gesendet wird."
+                "#text": "Dieser Parameter definiert das Schaltkommando, das an Geräte in Steuergruppe D gesendet wird."
               },
               {
                 "@xml:lang": "en",
-                "#text": "In Switch On/Off only mode On command is sent on Dim Up, Off on Dim Down. In Scenes mode the scene ID sent is (10 * group + ActionID), where ActionID is: 1 = On, 2 = Off, 3 = Dim Up Start, 4 = Dim Down Start, 5 = Dim Up Stop, 6 = Dim Down Stop"
+                "#text": "This parameter defines the command to be sent to devices of control group D when the related button is pressed"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Ce paramètre défini le commando manoeuvre, lequel est envoyé aux appareils de goupe d'association 4."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "В режиме Только Включить/Выключить при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 4 (группа 2) отправится команда 10 * 2 + 2(Выкл) = 22."
+                "#text": "В режиме Только Включать/Выключать при диммировании Вверх отправляется команда Включить, Вниз - команда Выключить. В режиме Сцен номер сцены вычисляется так: (10 * группа + ActionID), где ActionID это: 1 - Вкл, 2 = Выкл, 3 = Начало диммирования Вверх, 4 = Начало диммирования Вниз, 5 = Окончание диммирования Вверх, 6 = Окончание диммирования Вниз. Пример:  в режиме \"В паре без двойных кликов\" при нажатии на кнопку 4 (группа 2) отправится команда 10 * 2 + 2(Выкл) = 22."
               }
             ]
           },
@@ -962,6 +1410,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
                   },
                   {
                     "@xml:lang": "ru",
@@ -984,8 +1436,12 @@
                     "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить/Выключить и Диммировать (Basic Set и Switch Multilevel)"
+                    "#text": "Включать/Выключать и Диммировать (отправлять Basic Set и Switch Multilevel)"
                   }
                 ]
               }
@@ -1004,8 +1460,12 @@
                     "#text": "Switch On/Off only (send Basic Set)"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Только Включить/Выключить (Basic Set)"
+                    "#text": "Только Включать/Выключать (отправлять Basic Set)"
                   }
                 ]
               }
@@ -1024,8 +1484,12 @@
                     "#text": "Switch All"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Включить всё/Выключить всё"
+                    "#text": "Включать всё/Выключать всё"
                   }
                 ]
               }
@@ -1044,8 +1508,12 @@
                     "#text": "Send Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка Сцен"
+                    "#text": "Отправлять Сцены"
                   }
                 ]
               }
@@ -1064,72 +1532,89 @@
                     "#text": "Send Preconfigured Scenes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
                     "@xml:lang": "ru",
-                    "#text": "Отправка преднастроенных Сцен"
+                    "#text": "Отправлять преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé\n\n"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправлять глобальные сцены контроллеру"
                   }
                 ]
               }
             }
           ]
-        },
-        {
-          "@number": "20",
-          "@type": "range",
-          "@size": "1",
-          "@default": "32",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Typische Zeitüberschreitungseinstellungen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Typical click timeout"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Характерное время нажатия"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Diese Einstellungen werden dfür genutzt um zwischen einem einfachem Klick, einem gehaltenem Taste und einem Doppelklick unterscheiden zu können."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Typical time used to differenciate click, hold and double clicks"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Харакерное время для отличия нажатия, удержания и двойного нажатий"
-              }
-            ]
-          },
-          "value": {
-            "@from": "0a",
-            "@to": "64",
-            "@unit": "ms",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "in 10ms Schritten"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "in 10ms units"
-                },
-                {
-                  "@xml:lang": "ru",
-                  "#text": "в единицах 10мс"
-                }
-              ]
-            }
-          }
         },
         {
           "@number": "21",
@@ -1147,6 +1632,10 @@
                 "#text": "Send the following Switch All commands"
               },
               {
+                "@xml:lang": "fr",
+                "#text": "envoie les commandos \"Switch All\" suivants"
+              },
+              {
                 "@xml:lang": "ru",
                 "#text": "Отправлять следующие команды включить/выключит всё"
               }
@@ -1161,6 +1650,9 @@
                 "@xml:lang": "en"
               },
               {
+                "@xml:lang": "fr"
+              },
+              {
                 "@xml:lang": "ru"
               }
             ]
@@ -1173,11 +1665,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Nur bei alle Ausschalten"
+                    "#text": "Nur alle Ausschalten"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Switch off only"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "éteindre tous seulement"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1193,11 +1689,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Nur bei alle Einschalten"
+                    "#text": "Nur alle Einschalten"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Switch on only"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "activer tous seulement"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1218,6 +1718,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Switch all on and off"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "activer et éteindre tous"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1244,6 +1748,10 @@
                 "#text": "Invert buttons"
               },
               {
+                "@xml:lang": "fr",
+                "#text": "inverser les boutons"
+              },
+              {
                 "@xml:lang": "ru",
                 "#text": "Инвертировать кнопки"
               }
@@ -1256,6 +1764,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "fr"
               },
               {
                 "@xml:lang": "ru"
@@ -1275,6 +1786,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "No"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Non"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1297,6 +1812,10 @@
                     "#text": "Yes"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Oui"
+                  },
+                  {
                     "@xml:lang": "ru",
                     "#text": "Да"
                   }
@@ -1309,7 +1828,7 @@
           "@number": "30",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "00",
+          "@default": "01",
           "name": {
             "lang": [
               {
@@ -1319,6 +1838,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Send unsolicited Battery Report on Wake Up"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Envoie sans ordre l'état de la batterie avec le réveil "
               },
               {
                 "@xml:lang": "ru",
@@ -1333,6 +1856,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "fr"
               },
               {
                 "@xml:lang": "ru"
@@ -1352,6 +1878,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "No"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Non"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1374,6 +1904,10 @@
                     "#text": "To same node as wake up notification"
                   },
                   {
+                    "@xml:lang": "fr",
+                    "#text": "Au même aparreil que la notification de reveil "
+                  },
+                  {
                     "@xml:lang": "ru",
                     "#text": "Тому же узлу, что и оповещение от пробуждении"
                   }
@@ -1391,7 +1925,11 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Broadcast to neighbours"
+                    "#text": "Broadcast to neighbors"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Broadcast au voisinage"
                   },
                   {
                     "@xml:lang": "ru",
@@ -1403,23 +1941,27 @@
           ]
         },
         {
-          "@number": "24",
+          "@number": "25",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "02",
+          "@default": "00",
           "name": {
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "LED Bestätigungsmodus"
+                "#text": "Blockiert das Aufwecken des Gerätes selbst bei gesetztem Aufweckinterval"
               },
               {
                 "@xml:lang": "en",
-                "#text": "LED confirmation mode"
+                "#text": "Blocks wakeup even when wakeup interval is set"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "bloque le réveil de l'appareil même si l'intervalle de réveil est activé"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Режим подтверждения светодиода"
+                "#text": "Блокировать просыпания, немотря на настроки интервала пробуждения"
               }
             ]
           },
@@ -1427,15 +1969,19 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Dieser Modus dient der Verlängerung der Batterielebensdauer."
+                "#text": "Weckt der KFOB auf und es befindet sich kein Controller in der Nähe, wird mit erfolglosen Kommunikationsversuchen viel Batterieleistung verbraucht."
               },
               {
                 "@xml:lang": "en",
-                "#text": "This allows to save battery"
+                "#text": "If the KFOB wakes up and there is no controller nearby, several unsuccessful communication attempts will drain battery"
+              },
+              {
+                "@xml:lang": "fr",
+                "#text": "Si le KFOB se réveille et s'il n'y a pas de contrôleur au voisinage, beaucoup de charge de batterie est consommé avec des essais de communication sans succès."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Позволяет экономить заряд батарейки"
+                "#text": "Если брелок просыпается вдалеке от контроллера, несколько попыток связаться с контроллером приведут к бессмысленной трате батареек. Для брелока, часто находящегося вне дома рекомендуется не активировать просыпания."
               }
             ]
           },
@@ -1447,15 +1993,19 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Deaktiviert"
+                    "#text": "Aufwecken Blockiert"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "No confirmations"
+                    "#text": "Wakeup is blocked"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "réveil est bloqué"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Без подтверждения"
+                    "#text": "Просыпания заблокированы"
                   }
                 ]
               }
@@ -1467,35 +2017,19 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Bestätige Druck auf Taste"
+                    "#text": "Wakeup findet statt, wenn entsprechend konfiguriert"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Confirm button press"
+                    "#text": "Wakeup is possible if configured accordingly."
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "réveil s'opére, si configuration est conforme."
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Подтвердить нажатие клавиши"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Bestätige Druck auf Taste und Funkkomunikation"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Confirm button press and delivery"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Подтвердить нажатие клавиши и доставку"
+                    "#text": "Просыпается в соответствии с настройками"
                   }
                 ]
               }
@@ -1506,7 +2040,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f90ca634dd41b191bad2b44a3625251688e1bbc5.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f5c72a7276c22daab845710acd620f957a65d7ed.jpg"
       }
     }
   }

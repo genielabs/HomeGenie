@@ -91,7 +91,8 @@
           "@controlled": "true"
         },
         {
-          "@id": "0020"
+          "@id": "0020",
+          "@controlled": "true"
         },
         {
           "@id": "0084",
@@ -186,11 +187,6 @@
         },
         {
           "@id": "0080",
-          "@controlled": "true",
-          "@inNIF": "false"
-        },
-        {
-          "@id": "0020",
           "@controlled": "true",
           "@inNIF": "false"
         },

@@ -15,7 +15,7 @@
         "@value": "0001"
       },
       "productId": {
-        "@value": "0011"
+        "@value": "0015"
       },
       "libType": {
         "@value": "03"
@@ -24,22 +24,22 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "83"
+        "@value": "95"
       },
       "appVersion": {
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "05"
+        "@value": "01"
       },
       "basicClass": {
         "@value": "04"
       },
       "genericClass": {
-        "@value": "10"
+        "@value": "11"
       },
       "specificClass": {
-        "@value": "01"
+        "@value": "07"
       },
       "optional": {
         "@value": "true"
@@ -48,7 +48,7 @@
         "@value": "true"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
       "beamSensor": "0",
       "rfFrequency": "EU"
@@ -57,7 +57,7 @@
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "This plug-in ON/OFF switch PAN11 is a security enabled wireless switch, based on Z-Wave technology. This plug-in ON/OFF switch is able to detect current wattage and overload wattage of connected lights or appliances. When detecting overload state, the Switch will be disabled and its On/Off button will be lockout of which LED will flash quickly. However, unplug and re-connect the switch will reset its overload condition to normal status. "
+          "#text": "The in-wall Roller Shutter Controller is designed to switch rise/lower roller shutter connected to its terminals using radio waves, controllers and a push button directlyconnected to this Roller Controller."
         }
       },
       "wakeupNote": {
@@ -68,13 +68,13 @@
       "inclusionNote": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Pressing On/Off button three times\r\nwithin 2 seconds will enter inclusion mode."
+          "#text": "Pressing Include button three times within 2 seconds will enter inclusion mode."
         }
       },
-      "productName": "Smart Energy Plug In Switch",
+      "productName": "Roller shutter controller",
       "brandName": "Philio",
       "productLine": "Philio Z-Wave Products",
-      "productCode": "PAN11-1A"
+      "productCode": "PAN08-1A "
     },
     "commandClasses": {
       "commandClass": [
@@ -84,70 +84,50 @@
         },
         {
           "@id": "0086",
-          "@version": "2",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@version": "2"
         },
         {
           "@id": "0072",
           "@version": "2"
         },
         {
-          "@id": "0098"
-        },
-        {
           "@id": "005a"
         },
         {
           "@id": "0085",
-          "@version": "2",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@version": "2"
         },
         {
-          "@id": "0059",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "0059"
         },
         {
           "@id": "0073"
         },
         {
-          "@id": "0025",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "0025"
         },
         {
-          "@id": "0020",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "0020"
         },
         {
-          "@id": "0027",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "0026",
+          "@version": "3"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071"
         },
         {
           "@id": "0032",
-          "@version": "3",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@version": "3"
         },
         {
-          "@id": "0070",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "002b"
         },
         {
-          "@id": "0071",
-          "@secure": "true",
-          "@nonSecure": "false"
-        },
-        {
-          "@id": "0075",
-          "@version": "2",
-          "@secure": "true",
-          "@nonSecure": "false"
+          "@id": "002c"
         },
         {
           "@id": "007a",
@@ -162,7 +142,7 @@
         "description": {
           "lang": {
             "@xml:lang": "en",
-            "#text": "For group 1, the Switch will report its latest status to Z-Wave Controller.\r\nGrouping 1 includes, SWITCH_BINARY_REPORT, METER_REPORT,\r\nALARM_REPORT."
+            "#text": "MULTILEVEL_SWITCH_REPORT、METER_REPORT_COMMAND_V3、ALARM_REPORT"
           }
         }
       }
@@ -183,7 +163,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0x01-0x7FFF\r\n5s\r\n720*5s=3600s=1 hour"
+              "#text": "0x01-0x7FFF\r\n5*720s=3600s=1 hour"
             }
           }
         },
@@ -201,7 +181,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0x01- 0x7FFF\r\n10min\r\n6*10min=1 hour"
+              "#text": "0x01-0x7FFF\r\n6*10min= 1 hour"
             }
           }
         },
@@ -209,7 +189,7 @@
           "@number": "3",
           "@type": "range",
           "@size": "2",
-          "@default": "0514",
+          "@default": "01f4",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -219,7 +199,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "10-1300\r\n0.01A\r\n1300*0.01A = 13A"
+              "#text": "10-500\r\n500*0.01A=5A"
             }
           }
         },
@@ -237,7 +217,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1-10000\r\n1KWh\r\n10000"
+              "#text": "1-10000"
             }
           }
         },
@@ -245,17 +225,17 @@
           "@number": "5",
           "@type": "constant",
           "@size": "1",
-          "@default": "01",
+          "@default": "02",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Restore switch state mode"
+              "#text": "External switch type"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Last switch state\r\n2 : Switch on"
+              "#text": "1-2\r\n1: One Push button\r\n2:Two Push button"
             }
           }
         },
@@ -263,71 +243,17 @@
           "@number": "6",
           "@type": "constant",
           "@size": "1",
-          "@default": "01",
+          "@default": "02",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Mode of Switch Off function"
+              "#text": "Level report mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Disable\r\n1 : Enable"
-            }
-          }
-        },
-        {
-          "@number": "7",
-          "@type": "constant",
-          "@size": "1",
-          "@default": "01",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "LED indication mode"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "1 : Show switch state\r\n2 : Show night mode"
-            }
-          }
-        },
-        {
-          "@number": "8",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0000",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Auto off timer"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "0 : Disable auto off\r\nfunction\r\n1-0x7FFF : 1s ~ 32767s"
-            }
-          }
-        },
-        {
-          "@number": "9",
-          "@type": "constant",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "RF off command mode"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Ignore\r\n2 : Switch toggle\r\n3 : Switch on"
+              "#text": "1-2\r\n1:Report destination level in 5s\r\n2:Report 10 percent level while running"
             }
           }
         }
@@ -335,7 +261,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/898a871cffa314baf351b0a4f43e370802eea5b7.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/6672c10447e9c81010b21a3cfaad516be0966b8f.jpg"
       }
     }
   }

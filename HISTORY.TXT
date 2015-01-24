@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+24/01/2015 1.00 beta rev 462
+    - WIP Time Tables 
+    - Fixed error in localization functions when widget has no control popup defined
+    - Updated Pepper1 Z-Wave device database
+
 21/01/2015 1.00 beta rev 461
     - Integrating DaniMail Thermostat, Calendar and Time tables (pull request #101) - WIP
     - Added logic operator "OR" to Wizard script conditions

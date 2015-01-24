@@ -15,7 +15,7 @@
         "@value": "0001"
       },
       "productId": {
-        "@value": "0011"
+        "@value": "0010"
       },
       "libType": {
         "@value": "03"
@@ -30,7 +30,7 @@
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "05"
+        "@value": "11"
       },
       "basicClass": {
         "@value": "04"
@@ -48,7 +48,7 @@
         "@value": "true"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
       "beamSensor": "0",
       "rfFrequency": "EU"
@@ -57,7 +57,7 @@
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "This plug-in ON/OFF switch PAN11 is a security enabled wireless switch, based on Z-Wave technology. This plug-in ON/OFF switch is able to detect current wattage and overload wattage of connected lights or appliances. When detecting overload state, the Switch will be disabled and its On/Off button will be lockout of which LED will flash quickly. However, unplug and re-connect the switch will reset its overload condition to normal status. "
+          "#text": "This in-wall switch module is a transceiver which is a security enabled device which based on Z-Wave Plus technology."
         }
       },
       "wakeupNote": {
@@ -68,35 +68,39 @@
       "inclusionNote": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Pressing On/Off button three times\r\nwithin 2 seconds will enter inclusion mode."
+          "#text": "Pressing Include button of PAN05\r\nthree times within 2 seconds will\r\nenter exclusion mode."
         }
       },
-      "productName": "Smart Energy Plug In Switch",
+      "productName": "In Wall Single relay(1 way) switch module ",
       "brandName": "Philio",
       "productLine": "Philio Z-Wave Products",
-      "productCode": "PAN11-1A"
+      "productCode": "PAN05-1A "
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "005e",
-          "@version": "2"
+          "@id": "005e"
         },
         {
-          "@id": "0086",
-          "@version": "2",
-          "@secure": "true",
-          "@nonSecure": "false"
-        },
-        {
-          "@id": "0072",
-          "@version": "2"
+          "@id": "0072"
         },
         {
           "@id": "0098"
         },
         {
           "@id": "005a"
+        },
+        {
+          "@id": "007a"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0086",
+          "@version": "2",
+          "@secure": "true",
+          "@nonSecure": "false"
         },
         {
           "@id": "0085",
@@ -110,9 +114,6 @@
           "@nonSecure": "false"
         },
         {
-          "@id": "0073"
-        },
-        {
           "@id": "0025",
           "@secure": "true",
           "@nonSecure": "false"
@@ -124,12 +125,6 @@
         },
         {
           "@id": "0027",
-          "@secure": "true",
-          "@nonSecure": "false"
-        },
-        {
-          "@id": "0032",
-          "@version": "3",
           "@secure": "true",
           "@nonSecure": "false"
         },
@@ -148,10 +143,6 @@
           "@version": "2",
           "@secure": "true",
           "@nonSecure": "false"
-        },
-        {
-          "@id": "007a",
-          "@version": "2"
         }
       ]
     },
@@ -162,7 +153,7 @@
         "description": {
           "lang": {
             "@xml:lang": "en",
-            "#text": "For group 1, the Switch will report its latest status to Z-Wave Controller.\r\nGrouping 1 includes, SWITCH_BINARY_REPORT, METER_REPORT,\r\nALARM_REPORT."
+            "#text": "SWITCH_BINARY_REPORT"
           }
         }
       }
@@ -171,78 +162,24 @@
       "configParam": [
         {
           "@number": "1",
-          "@type": "range",
-          "@size": "2",
-          "@default": "02d0",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Watt Meter Report Period"
+              "#text": "Edge or Pulse mode or Edge-Toggle mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0x01-0x7FFF\r\n5s\r\n720*5s=3600s=1 hour"
+              "#text": "1：Edge mode\r\n2：Pulse mode\r\n3：Edge-Toggle mode"
             }
           }
         },
         {
           "@number": "2",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0006",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "KWH Meter Report Period"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "0x01- 0x7FFF\r\n10min\r\n6*10min=1 hour"
-            }
-          }
-        },
-        {
-          "@number": "3",
-          "@type": "range",
-          "@size": "2",
-          "@default": "0514",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Threshold of current for Load caution"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "10-1300\r\n0.01A\r\n1300*0.01A = 13A"
-            }
-          }
-        },
-        {
-          "@number": "4",
-          "@type": "range",
-          "@size": "2",
-          "@default": "2710",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Threshold of KWh for Load caution"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "1-10000\r\n1KWh\r\n10000"
-            }
-          }
-        },
-        {
-          "@number": "5",
           "@type": "constant",
           "@size": "1",
           "@default": "01",
@@ -255,30 +192,30 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Last switch state\r\n2 : Switch on"
+              "#text": "0 : Switch Off\r\n1 : Last Switch State\r\n2 : Switch On"
             }
           }
         },
         {
-          "@number": "6",
+          "@number": "3",
           "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Mode of Switch Off function"
+              "#text": "Manual On/Off mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Disable\r\n1 : Enable"
+              "#text": "0：Disable\r\nmanual On/Off\r\n1：Enable\r\nmanual On/Off"
             }
           }
         },
         {
-          "@number": "7",
+          "@number": "4",
           "@type": "constant",
           "@size": "1",
           "@default": "01",
@@ -291,12 +228,12 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 : Show switch state\r\n2 : Show night mode"
+              "#text": "1：Show switch state\r\n2：Show night mode\r\n3 : One flash mode"
             }
           }
         },
         {
-          "@number": "8",
+          "@number": "5",
           "@type": "range",
           "@size": "2",
           "@default": "0000",
@@ -309,25 +246,25 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Disable auto off\r\nfunction\r\n1-0x7FFF : 1s ~ 32767s"
+              "#text": "0：Disable auto off function\r\n1-0x7FFF：1 ~ 32767seconds"
             }
           }
         },
         {
-          "@number": "9",
+          "@number": "6",
           "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "RF off command mode"
+              "#text": "RF Off command mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Ignore\r\n2 : Switch toggle\r\n3 : Switch on"
+              "#text": "0：Switch off\r\n1：Ignore\r\n2：Switch toggle\r\n3：Switch on"
             }
           }
         }
@@ -335,7 +272,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/898a871cffa314baf351b0a4f43e370802eea5b7.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/597e2c0773c09338fedf6a5731cd5cda5c757c83.jpg"
       }
     }
   }

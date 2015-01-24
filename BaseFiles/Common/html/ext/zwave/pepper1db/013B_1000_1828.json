@@ -98,10 +98,14 @@
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0072"
+          "@id": "0072",
+          "@controlled": "true",
+          "@secure": "true"
         },
         {
-          "@id": "0086"
+          "@id": "0086",
+          "@controlled": "true",
+          "@secure": "true"
         },
         {
           "@id": "0071",
@@ -158,12 +162,6 @@
           "@secure": "true"
         },
         {
-          "@id": "0072",
-          "@controlled": "true",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
           "@id": "008f",
           "@controlled": "true",
           "@inNIF": "false",
@@ -213,12 +211,6 @@
         },
         {
           "@id": "0063",
-          "@controlled": "true",
-          "@inNIF": "false",
-          "@secure": "true"
-        },
-        {
-          "@id": "0086",
           "@controlled": "true",
           "@inNIF": "false",
           "@secure": "true"

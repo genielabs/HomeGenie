@@ -735,6 +735,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
             });
             // try to localize widget's popups if they were already processed by jQuery popup() function
             var popups = $(container).find('[data-ui-field=widget]').data('ControlPopUp');
+            if (popups)
             popups.each(function (index) {
                 var popup = $(this);
                 $(popup).find('[data-locale-id]').each(function(index){

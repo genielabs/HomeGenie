@@ -89,9 +89,9 @@
           }
         ]
       },
-      "productName": "StellaZ",
-      "brandName": "StellaZ",
-      "productCode": "StellaZ",
+      "productName": "Stella Z",
+      "brandName": "Eurotronic",
+      "productCode": "Stella Z",
       "batteryType": "AA",
       "batteryCount": "2"
     },
@@ -136,7 +136,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c0e7d131f5ac7428b17335b4c51a38dde55f7c8d.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c6530c0ac075d00903147410e51ad8d084cc577d.png"
       }
     }
   }
