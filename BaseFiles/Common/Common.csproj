@@ -4345,6 +4345,8 @@
     <None Include="html\ext\zwave\pepper1db\0115_0000_0000.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\fr.json" />
+    <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\locales\fr.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
