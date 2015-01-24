@@ -1,52 +1,54 @@
 {
     "cal_sun":
-        "Su",
+        "Do",
     "cal_mon":
-        "Mo",
+        "Lu",
     "cal_tue":
-        "Tu",
+        "Ma",
     "cal_wed":
-        "We",
+        "Me",
     "cal_thu":
-        "Th",
+        "Gi",
     "cal_fri":
-        "Fr",
+        "Ve",
     "cal_sat":
         "Sa",
     "cal_jan":
-        "January",
+        "Gennaio",
     "cal_feb":
-        "February",
+        "Febbraio",
     "cal_mar":
-        "March",
+        "Marzo",
     "cal_apr":
-        "April",
+        "Aprile",
     "cal_mai":
-        "Mai",
+        "Maggio",
     "cal_jun":
-        "June",
+        "Giugno",
     "cal_jul":
-        "July",
+        "Luglio",
     "cal_aug":
-        "August",
+        "Agosto",
     "cal_sep":
-        "September",
+        "Settembre",
     "cal_oct":
-        "October",
+        "Ottobre",
     "cal_nov":
-        "November",
+        "Novembre",
     "cal_dec":
-        "December",
+        "Dicember",
     "cal_wek":
         "Week-end",
     "cal_work":
-        "Work Day",
+        "Affari",
     "cal_free":
-        "Holliday",
+        "Vacanza",
     "cal_spe":
-        "Special",
+        "Speciale",
     "mode":
         "&nbsp;&nbsp;&nbsp;Modalità&nbsp;&nbsp;",
+    "mode_value":
+        "&nbsp;&nbsp;",
     "title_therm":
         "Termostati",
     "title_light":
@@ -58,11 +60,13 @@
     "control_light_off":
         "Off",    
     "control_light_prog":
-        "Programmato",    
+        "Pianificato",    
     "therm_setpoint":
         "Temperatura",
     "therm_setmode":
         "Modalità",
+    "therm_updt":
+        "---",
     "therm_off":
         "Spento",
     "therm_nofrost":
@@ -73,16 +77,12 @@
         "Comfort",
     "therm_prog":
         "Pianificato",
-    "Off":
-        "Spento",
-    "NoFrost":
-        "Antigelo",
-    "Eco":
-        "Eco",
-    "Heat":
-        "Comfort",
-    "Program":
-        "Pianificato",
+    "therm_sensor":
+        "Sensor : ",
+    "therm_switch":
+        "Inter. : ",
+    "tt_timetable":
+        "Tabella Horaire ",
     "control_module_off":
         "Annulla",
     "control_module_on":

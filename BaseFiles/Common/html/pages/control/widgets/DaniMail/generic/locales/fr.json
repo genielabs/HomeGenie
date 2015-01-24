@@ -47,6 +47,8 @@
         "Spécial",
     "mode":
         "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "mode_value":
+        "Arrêt&nbsp;&nbsp;",
     "title_therm":
     	"Thermostats",
     "title_light":
@@ -63,6 +65,8 @@
         "Température",
     "therm_setmode":
         "Mode",
+    "therm_updt":
+        "---",
     "therm_off":
         "Arrêt",
     "therm_nofrost":
@@ -73,16 +77,12 @@
         "Confort",
     "therm_prog":
         "Programmé",
-    "Off":
-        "Arrêt",
-    "NoFrost":
-        "Hors Gel",
-    "Eco":
-        "Eco",
-    "Heat":
-        "Confort",
-    "Program":
-    	"Programmé",
+    "therm_sensor":
+        "Sonde : ",
+    "therm_switch":
+        "Zone : ",
+    "tt_timetable":
+        "Table Horaire ",
     "control_module_off":
         "Annuler",
     "control_module_on":
