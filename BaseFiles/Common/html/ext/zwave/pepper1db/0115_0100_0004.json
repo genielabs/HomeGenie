@@ -1136,7 +1136,7 @@
             ]
           },
           "value": {
-            "@from": "01",
+            "@from": "0a",
             "@to": "64",
             "@unit": "ms",
             "description": {

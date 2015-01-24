@@ -9,56 +9,55 @@
     "descriptorVersion": "1",
     "deviceData": {
       "manufacturerId": {
-        "@value": "0001"
+        "@value": "017c"
       },
       "productType": {
-        "@value": "5257"
+        "@value": "0001"
       },
       "productId": {
-        "@value": "3033"
+        "@value": "0002"
       },
       "libType": {
-        "@value": "00"
+        "@value": "06"
       },
       "protoVersion": {
-        "@value": "02"
+        "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "61"
+        "@value": "67"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "03"
       },
       "appSubVersion": {
-        "@value": "00"
+        "@value": "78"
       },
       "basicClass": {
         "@value": "04"
       },
       "genericClass": {
-        "@value": "10"
+        "@value": "21"
       },
       "specificClass": {
-        "@value": "03"
+        "@value": "01"
       },
       "optional": {
-        "@value": "false"
+        "@value": "true"
       },
       "listening": {
-        "@value": "true"
+        "@value": "false"
       },
       "routing": {
         "@value": "false"
       },
-      "rfFrequency": "US",
-      "certId": "13949",
-      "certNumber": "ZC08-11020001"
+      "beamSensor": "0",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Scene Capable  Relay Wall Switch"
+          "#text": "Room sensor"
         }
       },
       "wakeupNote": {
@@ -69,14 +68,16 @@
       "inclusionNote": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Tap the button"
+          "#text": "Press the learn key (5) for 2 seconds."
         }
       },
-      "productName": "ZRW103, LSM-20",
-      "brandName": "HomePro, Evolve",
-      "productLine": "HomePro, Evolve",
-      "productCode": "ZRW103, LSM-20",
-      "productVersion": "V5.1"
+      "productName": "heatapp! sense temperatur sensor z-wave",
+      "brandName": "heatapp! sense",
+      "productLine": "Temperature Sensor",
+      "productCode": "9600050000",
+      "productVersion": "1.0",
+      "batteryType": "1.5 V AAA",
+      "batteryCount": "2"
     },
     "commandClasses": {
       "commandClass": [
@@ -84,102 +85,92 @@
           "@id": "0020"
         },
         {
-          "@id": "0025"
-        },
-        {
-          "@id": "002b"
-        },
-        {
-          "@id": "0027"
-        },
-        {
-          "@id": "0072"
-        },
-        {
-          "@id": "0086"
+          "@id": "0080"
         },
         {
           "@id": "0070"
         },
         {
-          "@id": "0073"
+          "@id": "0072"
+        },
+        {
+          "@id": "0031"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0084"
         }
       ]
     },
     "configParams": {
       "configParam": [
         {
-          "@number": "3",
-          "@type": "constant",
+          "@number": "1",
+          "@type": "range",
           "@size": "1",
-          "@default": "01",
+          "@default": "05",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Night Light"
+              "#text": "delta temperature"
             }
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Configuration parameter 1 \"delta temperature\"\r\n\r\nDefault value is 5 (0.5°C)."
             }
           },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "The LED will\r\nturn ON when the load attached is turned ON"
-                }
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "The LED on the ZRW103 will turn OFF when the load attached is turned ON"
-                }
+          "value": {
+            "@from": "02",
+            "@to": "32",
+            "@unit": "°C",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "It is possible to set in the range of 2 to 50, in 0.1\r\ndegree steps."
               }
             }
-          ]
+          }
         },
         {
-          "@number": "4",
-          "@type": "constant",
+          "@number": "2",
+          "@type": "range",
           "@size": "1",
-          "@default": "00",
+          "@default": "0a",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Invert Switch"
+              "#text": "temperature scale"
             }
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Configuration parameter 2 \"temperature scale\"\r\n\r\nDefault value is 0."
             }
           },
           "value": [
             {
               "@from": "00",
-              "@to": "00",
+              "@to": "7f",
               "description": {
                 "lang": {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "0 to 127(0x00-0x7F) = Celsius"
                 }
               }
             },
             {
-              "@from": "01",
-              "@to": "01",
+              "@from": "80",
+              "@to": "ff",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Change the top of the switch to OFF and the bottom of the switch ON"
+                  "#text": "-128 to -1 (0x80-0xFF ) = Fahrenheit"
                 }
               }
             }
@@ -189,7 +180,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/aae14255925f8c270de994b911c53e6ce94d37ae.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/853a65fb452f1eb98927bfd9c736321fa31730c5.png"
       }
     }
   }

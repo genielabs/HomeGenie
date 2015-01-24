@@ -24,10 +24,10 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "43"
+        "@value": "63"
       },
       "appVersion": {
-        "@value": "01"
+        "@value": "02"
       },
       "appSubVersion": {
         "@value": "00"
@@ -36,10 +36,10 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "10"
+        "@value": "11"
       },
       "specificClass": {
-        "@value": "01"
+        "@value": "07"
       },
       "optional": {
         "@value": "true"
@@ -56,15 +56,16 @@
       "description": {
         "lang": [
           {
-            "@xml:lang": "de"
+            "@xml:lang": "de",
+            "#text": "Jalousiesch"
           },
           {
             "@xml:lang": "en",
-            "#text": "Wall Plug Switch"
+            "#text": "One paddle blind control"
           },
           {
             "@xml:lang": "ru",
-            "#text": "Выключатель в розетку"
+            "#text": "Устройство управление жалюзи с одной клавишей"
           }
         ]
       },
@@ -93,67 +94,116 @@
           },
           {
             "@xml:lang": "ru",
-            "#text": "Тройное нажатие на кнопоку"
+            "#text": "Тройное нажатие на одну из кнопок"
           }
         ]
       },
-      "productName": "Wall Plug Switch",
+      "productName": "Flush-Mountable Blind Control v1.8",
       "brandName": "Z-Wave.Me",
       "productLine": "Düwi modification",
-      "productVersion": "1.0"
+      "productCode": "054367Z"
     },
     "commandClasses": {
       "commandClass": [
         {
           "@id": "0020",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0025"
-        },
-        {
-          "@id": "0027"
-        },
-        {
-          "@id": "0032",
-          "@version": "4"
-        },
-        {
-          "@id": "0059"
-        },
-        {
-          "@id": "005a"
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
         },
         {
           "@id": "005e",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0072",
+          "@secure": "true"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "007a",
           "@version": "2"
         },
         {
-          "@id": "0070"
+          "@id": "0086",
+          "@version": "2",
+          "@secure": "true"
         },
         {
-          "@id": "0072"
+          "@id": "0098",
+          "@secure": "true"
         },
         {
-          "@id": "0075"
+          "@id": "0025",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0026",
+          "@version": "3",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0027",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "002d",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0059",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "005a",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "005b",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0070",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0075",
+          "@inNIF": "false",
+          "@secure": "true"
         },
         {
           "@id": "0085",
-          "@version": "2"
-        },
-        {
-          "@id": "0086"
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
         },
         {
           "@id": "008e",
-          "@version": "2"
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "002b",
+          "@controlled": "true"
         },
         {
           "@id": "0060",
           "@controlled": "true"
-        },
-        {
-          "@id": "0087"
         }
       ]
     },
@@ -161,40 +211,57 @@
       "assocGroup": [
         {
           "@number": "1",
-          "@maxNodes": "5",
+          "@maxNodes": "14",
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Reports über alle Änderungen des Schaltzustandes"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Send Reports on switch state change"
+                "#text": "LifeLine. Send Reports on blind state change"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Отправлять отчёты при изменении состояния выключателя"
+                "#text": "Отправлять отчёты при изменение уровня открытия"
               }
             ]
           }
         },
         {
           "@number": "2",
-          "@maxNodes": "5",
+          "@maxNodes": "14",
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Tastendruck"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Controlled by buttons"
+                "#text": "Single press and hold of up/down buttons"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Управляемые с кнопки"
+                "#text": "Одиночное нажатие или удержание клавиш вверх/вниз"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "14",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Double press and press-hold of up/down buttons"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Двойное нажатие или нажатие-удержание клавиш вверх/вниз"
               }
             ]
           }
@@ -211,8 +278,7 @@
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "LED Modus"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
@@ -227,8 +293,7 @@
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Bestimmt das Verhalten der LED am Gerät"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
@@ -247,8 +312,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Deaktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -267,16 +331,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Zeigt Schaltzustand"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Show switch state"
+                    "#text": "Show working state"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Индикация состояния реле"
+                    "#text": "Индикация состояния работы"
                   }
                 ]
               }
@@ -287,16 +350,34 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "von Indikator-Kommandoklasse gesteuert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Operated by Indicator Command Class"
+                    "#text": "Show idle state"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Управляется классом комманд Indicator"
+                    "#text": "Индикация состояния простоя"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Show if not closed"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Индикация незакрытой двери"
                   }
                 ]
               }
@@ -311,32 +392,30 @@
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Automatisches Auschalten nach"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Automatically switch off after"
+                "#text": "Automatically open or close after"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Авто отключение первого канала через"
+                "#text": "Авто открытие/закрытие через"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Wenn nicht 0, dann schaltet das Gerät nach festgelegten Sekunden automatisch wieder ab"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "If not zero, automatically switch device off after a user defined time"
+                "#text": "If not zero, automatically open or close blind after a user defined time"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Если не 0, автоматически отключает реле первого канала после определённого пользователем времени"
+                "#text": "Если не 0, автоматически открывает/закрывает жалюзи после определённого пользователем времени"
               }
             ]
           },
@@ -347,8 +426,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Deaktiviert"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -367,8 +445,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Sekunden"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -391,32 +468,30 @@
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Reaktion auf Funkkommando AUS"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "What to do on RF off command"
+                "#text": "What to do on RF close command"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Действие при получении радиокоманды выключения первого канала"
+                "#text": "Что делать при получении радиокоманды закрытия"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Definiert, wie das Funkkommando AUS interpretiert werden soll."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Defines how to interpret RF Off command. Can be used in conjunction with Auto Off function: Ignore - to switch on the light by motion detectors and switch it off after some amount of time: in case of multiple motion detectors each would try to switch the light off that would break logics; Switch on - to switch on the light on both On and Off paddle press on the remote and switch it off after some amount of time. Button off click will still work (if button operations are not disabled)."
+                "#text": "Defines how to interpret RF Off command. Can be used in conjunction with Auto Close function: Ignore - to open the door by motion detectors and close it back after some amount of time: in case of multiple motion detectors each would try to open that would break logics; Open - to open on both On and Off paddle press on the remote and close after some amount of time. Button close click will still work (if button operations are not disabled). Note that Dim Down command will still begin close motion."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Определяет поведение при получении радио команды выключения первого канал. Может использоваться совместно с функцией авто отключения: Игнорирование - для включения света по датчику движения и отключения по прошествии определённого времени: в случае использования нескольких датчиков движения каждый будет пытаться выключить свет сам, что приведёт к неправильной логике работы; Включить нагрузку - для включения света при нажатии на кнопки Вкл и Выкл на пульте управления и отключения по прошествии определённого времени. Выключение по кнопке будет продолжать работать (если не отключено)."
+                "#text": "Определяет поведение при получении радио команды выключения. Может использоваться совместно с функцией авто закрытия: Игнорирование - для открытия двери по детектору движения и закрытия по прошествии определённого времени: в случае использования нескольких детекторов движения каждый будет пытаться открыть дверь сам, что приведёт к неправильной логике работы; Открывать - для открытия при нажатии на кнопки Вкл и Выкл на пульте управления и закрытия по прошествии определённого времени. Закрытие по кнопке будет продолжать работать (если не отключено). Обратите внимение, что команда Димировать Вниз в любом случае будет включать закрытие."
               }
             ]
           },
@@ -427,16 +502,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Ausschalten"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Switch off"
+                    "#text": "Close"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Выключить нагрузку"
+                    "#text": "Закрыть"
                   }
                 ]
               }
@@ -447,8 +521,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Ignorieren"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -467,16 +540,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Anschalten"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Switch on"
+                    "#text": "Open"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Включить нагрузку"
+                    "#text": "Открыть"
                   }
                 ]
               }
@@ -487,16 +559,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Schalte ein, wenn vorher ausgeschaltet und umgekehrt."
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Switch on if load is off else switch off"
+                    "#text": "Open if closed else close"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Включить, если нагрузка выключена, иначе выключить"
+                    "#text": "Открыть, если закрыто, иначе закрыть"
                   }
                 ]
               }
@@ -504,39 +575,37 @@
           ]
         },
         {
-          "@number": "5",
+          "@number": "16",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "01",
+          "@default": "00",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Automatische Rückkehr zu letztem Schaltzustand nach Stromausfall"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Restore switch state after power cycle"
+                "#text": "What to do on button Down press"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Восстанавливать состояние реле после отключения питания"
+                "#text": "Что делать при нажатии вниз"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Definiert das Verhalten des Gerätes nach Stromausfall"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Defines if the switch should restore switch state to the last state prior to device power off (power cycle)."
+                "#text": "Defines how to interpret button Down press. Depends on \"Switch by buttons\" parameter. If not Disabled this parameter will affect the action selected by the latter parameter. Can be used in conjunction with Auto Off function."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Определяет восстанавливать ли состояние реле на то, которое было до отключения питания устройства."
+                "#text": "Определяет поведение при нажатии клавиши вниз. Зависит от параметра \"Включать/выключать нагрузку кнопками\". Если не \"Нет\", данный параметр будет применён к выбранному упомянутым параметром действию. Может использоваться совместно с функцией авто отключения."
               }
             ]
           },
@@ -547,16 +616,15 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Nein, ausschalten"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "No, turn off"
+                    "#text": "Close"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Нет, выключится"
+                    "#text": "Закрыть"
                   }
                 ]
               }
@@ -567,8 +635,501 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Ja"
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Open if closed else close"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Открыть, если закрыто, иначе закрыть"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Open"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Открыть"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "4",
+          "@type": "range",
+          "@size": "2",
+          "@default": "003c",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Full close time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время полного закрытия"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Time to go from opened to closed state. Used to estimate the current level. Note that in Permanent motion mode the reported value would a be Closed or Opened, while all Basic and Multilevel Set values (1-99, 255) would Open except 0 value that would Close."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время, необходимое для полного закрытия из открытого состояния. Используется для оценки текущего положения. Обратите внимание, в режиме Держать включеным возвращаемые отчёты будут всегда или Закрыто или Открыто, тогда как все значения команд Basic и Multilevel Set (1-99, 255) будут работать на Открытия, кроме команды 0, которая будет Закрывать."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Keep in permanent motion"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Постоянно держать включеным"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "00ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "seconds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "секунд"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "5",
+          "@type": "range",
+          "@size": "2",
+          "@default": "003c",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Full open time"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время полного открытия"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Time to go from closed to open state. This value may differ from Full close time for some blinds due to gravity. Used to estimate the current level. Note that in Permanent motion mode the reported value would a be Closed or Opened, while all Basic and Multilevel Set values (1-99, 255) would Open except 0 value that would Close."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время, необходимое для полного открытия из закрытого состояния. Это значение может отличаться от значения Времени полного закрытия из-за воздействия силы гравитации. Используется для оценки текущего положения. Обратите внимание, в режиме Держать включеным возвращаемые отчёты будут всегда или Закрыто или Открыто, тогда как все значения команд Basic и Multilevel Set (1-99, 255) будут работать на Открытия, кроме команды 0, которая будет Закрывать."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Keep in permanent motion"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Постоянно держать включеным"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "00ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "seconds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "секунд"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "6",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Node Id of the blocking device"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Идентификатор блокирующего узла"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Id of the device which commands would be interpreted not as Open/Close, but as block/unblock. Usefull with door opening detector: if the door is open, block the blind not to break shades while they move."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Номер утройства, команды BASIC и BINARY Set которого будут использоваться не для открытия/закрытия, а для включение/выключения защиты, предотвращающей открытие/закрытие. Данная функция полезна в сочетании с датчиком открытия двери: при открытии двери жалюзи будут заблокированны, чтобы случайно не сламать шторки."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "e8",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Node Id"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Номер узла"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "7",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "On which command from blocking node to enable the protection"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "По какой команде от блокирующего узла включать защиту"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines which command from blocking device to interpret as closed door and hence, unprotected."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Считать команду Выключить от блокирующего узла оповещающей о закрытии двери, и снимать защиту. Определяет по какой команде от блокирующего узла включать блокировку управления."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "on On"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "по команде Включения"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "on Off"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "по команде Выключения"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "8",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Stop or Revert if opposite button is pressed"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Остановить или запустить в обратном направлении при нажатии на противоположную клавишу"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines behaviour on open press while closing and vice versa. To allow Stop behavior when switched by remote, use Stop by Basic"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Определяет поведение при нажатии на кнопку вниз при движении вверх и наоборот. Для того, чтобы делать Остановку при управлении со стороннего пульта, используйте Остановить по Basic"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Stop (by buttons and Binary)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Остановить (по кнопкам и Binary)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Stop (by buttons, Binary and Basic)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Остановить (по кнопкам, Binary и Basic)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Revert"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Запустить в обратном направлении"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "9",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Invert open and close relays"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Поменять местами реле открытия и зкарытия"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Allow exchanging open and close relays if blind control is wired to the motor incorrectly"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Позволяет поменять местами реле закрытия и открытия, если управление жалюзи подключено к мотору неверным образом"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "No"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Нет"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -584,46 +1145,942 @@
           ]
         },
         {
-          "@number": "20",
+          "@number": "10",
           "@type": "range",
-          "@size": "2",
-          "@default": "0000",
+          "@size": "1",
+          "@default": "32",
           "name": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Energieverbrauch"
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Energy consumption"
+                "#text": "Typical click timeout"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Энергопотребление первого канала"
+                "#text": "Характерное время нажатия"
               }
             ]
           },
           "description": {
             "lang": [
               {
-                "@xml:lang": "de",
-                "#text": "Last in Watt, um Energieverbrauch zu berechnen. Max 1800 W."
+                "@xml:lang": "de"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Specify the consumption of the load in watts, for the calculation of power consumption. Max load 1800 W."
+                "#text": "Typical time used to differentiate click, hold, double and triple clicks"
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Укажите потребление нагрузки в ваттах, для подсчета энергопотребления. Максимальная нагрузка 1800 Ватт."
+                "#text": "Харакерное время для отличия нажатия, удержания, двойного и тройного нажатий"
+              }
+            ]
+          },
+          "value": {
+            "@from": "01",
+            "@to": "64",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "in 10ms units"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "в единицах 10мс"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "11",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Invert buttons"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Инвертировать кнопки"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
           "value": [
             {
-              "@from": "0000",
-              "@to": "0000",
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "No"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Нет"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Yes"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Да"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "12",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switch by buttons"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Включить/выключить нагрузку кнопками"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "If disabled, the local operations by buttons will not switch the load, but only send commands to On/Off association group. In this mode buttons are not linked with the switch anymore. They can be used separately: buttons to control remote device, switch will operate by RF commands only."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если отключено, нажатия на кнопки не будут включать реле, а только отправлят команды группе ассоциаций Включит/Выключить. В данном режиме кнопки не связаны с реле. Они могут быть использованы отдельно: кнопки для управления удалённой нагрузкой, реле будет управляться только по радио."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "No"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Нет"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "By single press and hold"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Одинарным нажатием и удержанием"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "By double press and press-hold"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Двойным нажатием и нажатием-удержанием"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "13",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "04",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Action on button single press or hold"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Действия при одинарном нажатии или удержании клавиши"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines which command should be sent on button single press or hold. Basic and Scene Activation commands are sent to Association group. Use Scene Controller Conf to set up Scene ID for Scene Activation. Switch All commands are sent broadcast."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Определяет вид команд, которые отправляюся при одинарном нажатии или удержании кнопок. Команды Basic и Активация сцен отправляются группе ассоциаций. Используйте Scene Controller Conf для задания номера сцены для Scene Activation. Команда Включить/Выключить всё отправляется на широковещательный адрес (всем)."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Schaltkommandos Ein und Aus mittels 'Basic' und 'SwitchMultilevel' Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить/Выключить и Диммировать (отправить Basic Set и Switch Multilevel)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Schaltkommandos Ein und Aus mittels 'Basic' Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch On/Off only (send Basic Set)"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только Включить/Выключить (отправить Basic Set)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "'Switch All\" Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch All"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить всё/Выключить всё"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Szenenaktivierung"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Scenes"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Vorkonfigurierte Szenen werden gesendet."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Preconfigured Scenes"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить глобальные сцены контроллеру"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "14",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Action on button double press or hold"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Действия при двойном нажатии или удержании клавиши"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines which command should be sent on button double press or press-hold. Basic and Scene Activation commands are sent to Association group. Use Scene Controller Conf to set up Scene ID for Scene Activation. Switch All commands are sent broadcast. If not disabled, the device will wait for a click timeout to see if the second click would be pressed. This will introduce a small delay for single click commands"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Определяет вид команд, которые отправляются при двойном нажатии или нажатии-удержании кнопок. Команды Basic и Активация сцен отправляются группе ассоциаций. Используйте Scene Controller Conf для задания номера сцены для Scene Activation. Команда Включить/Выключить всё отправляется на широковещательный адрес (всем). Если не отключено, устройство будет ждать характерное время нажатия второго нажатия. Данная функция приведёт к небольшой задержке при одинарном нажатии"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "désactivé"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Schaltkommandos Ein und Aus mittels 'Basic' und 'SwitchMultilevel' Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch On/Off and Dim (send Basic Set and Switch Multilevel)"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set et Multilevel)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить/Выключить и Диммировать (отправить Basic Set и Switch Multilevel)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Schaltkommandos Ein und Aus mittels 'Basic' Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch On/Off only (send Basic Set)"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "Commandos manoeuvres Marche et Arret (par commando Basic Set)"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только Включить/Выключить (отправить Basic Set)"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "'Switch All\" Kommando"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch All"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "accoupler tous"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить всё/Выключить всё"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Szenenaktivierung"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Scenes"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "activation de la scène"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Vorkonfigurierte Szenen werden gesendet."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Preconfigured Scenes"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "scènes préconfigurées sont envoyées"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить преднастроенные Сцены"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": " Alle Geräte in der Nähe werden durch den Schlüsselanhänger gesteuert."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control devices in proximity"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "tous les appareils au voisinage sont contrôlés par la porte-clé"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять ближайшими устройствами"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Steuert Türschloss"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Control DoorLock"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "controler une serrure"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Управлять замком"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "08",
+              "@to": "08",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zentrale Szene im Gateway"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Central Scene to Gateway"
+                  },
+                  {
+                    "@xml:lang": "fr",
+                    "#text": "enoyer des scenes globales  a routeur"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отправить глобальные сцены контроллеру"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "15",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send the following Switch All commands"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправить следующие команды включить/выключит всё"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch off only"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только выключить всё"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch on only"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Только включить всё"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Switch all on and off"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Включить и выключить всё"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "17",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Action on Auto open or close function"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Действие по Авто открытию/закрытию"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Close blinds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Закрыть шторы"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Open blinds"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Открыть шторы"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "21",
+          "@type": "range",
+          "@size": "1",
+          "@default": "14",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send intermediate value of the opening level"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять промежуточные значения уровня открытия"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Во время движения жалюзи будет периодично отправлять уровень открытия. Если задать 10%, то при изменении уровня открытия на 10% будет отправлен отчет. "
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
               "description": {
                 "lang": [
                   {
@@ -636,305 +2093,27 @@
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Отключено"
+                    "#text": "Не присылать отчет во время движения"
                   }
                 ]
               }
             },
             {
-              "@from": "0001",
-              "@to": "0dac",
+              "@from": "0a",
+              "@to": "32",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Watts"
+                    "#text": "%"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Watts"
+                    "#text": "%"
                   },
                   {
                     "@xml:lang": "ru",
-                    "#text": "Ватт"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "@number": "21",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Aus Farb"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Off color"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет Выкл"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Color for Off state"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет выключенного состояния"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Выключен"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rot"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Red"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Grün"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Green"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Зелёный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Blue"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Синий"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Gelb"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Yellow"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Желтый"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "@number": "22",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "03",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Auf Farb"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "On color"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет Вкл"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Color for On state"
-              },
-              {
-                "@xml:lang": "ru",
-                "#text": "Цвет включенного состояния"
-              }
-            ]
-          },
-          "value": [
-            {
-              "@from": "00",
-              "@to": "00",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Aus"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Off"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Выключен"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "01",
-              "@to": "01",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rot"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Red"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Красный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Grün"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Green"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Зелёный"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Blau"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Blue"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Синий"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "04",
-              "@to": "04",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Gelb"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "Yellow"
-                  },
-                  {
-                    "@xml:lang": "ru",
-                    "#text": "Желтый"
+                    "#text": "%"
                   }
                 ]
               }
@@ -945,7 +2124,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/3e1ffb02bbb4e3bd8824e685323c7918da2ebf84.gif"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/614431a28d8f8cb870184d91ab1b799db6a6e785.jpg"
       }
     }
   }

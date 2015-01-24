@@ -12,10 +12,10 @@
         "@value": "0109"
       },
       "productType": {
-        "@value": "2001"
+        "@value": "2012"
       },
       "productId": {
-        "@value": "0105"
+        "@value": "1206"
       },
       "libType": {
         "@value": "03"
@@ -24,37 +24,40 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "92"
+        "@value": "95"
       },
       "appVersion": {
-        "@value": "05"
+        "@value": "14"
       },
       "appSubVersion": {
-        "@value": "01"
+        "@value": "07"
       },
       "basicClass": {
         "@value": "04"
       },
       "genericClass": {
-        "@value": "a1"
+        "@value": "0f"
+      },
+      "specificClass": {
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
       },
       "listening": {
-        "@value": "false"
+        "@value": "true"
       },
       "routing": {
         "@value": "false"
       },
       "beamSensor": "0",
-      "rfFrequency": "EU"
+      "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Door or Window Detection"
+          "#text": "Repeater"
         }
       },
       "wakeupNote": {
@@ -65,33 +68,19 @@
       "inclusionNote": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Press the program switch for sending the NIF."
+          "#text": "Put the Z-Wave™ Interface Controller into“inclusion”\r\nmode and following its instruction to add the ZR1202 to your controller. To get into the “inclusion”\r\nmode, the distance between module and controller is suggested to be in one meter. Press the\r\nprogram switch on the ZR1202 three times in 3 seconds. The LED should stop flashing, if not,\r\nplease try again."
         }
       },
-      "productName": "Door Sensor ",
+      "productName": "Repeater",
       "brandName": "Vision",
       "productLine": "Home Security",
-      "productCode": "ZD2102EU-5",
-      "productVersion": "01",
-      "batteryType": "CR123A",
-      "batteryCount": "1"
+      "productCode": "ZR1202US-5"
     },
     "commandClasses": {
       "commandClass": [
         {
           "@id": "005e",
           "@version": "2"
-        },
-        {
-          "@id": "0086",
-          "@version": "2"
-        },
-        {
-          "@id": "0072",
-          "@version": "2"
-        },
-        {
-          "@id": "005a"
         },
         {
           "@id": "0085",
@@ -101,29 +90,25 @@
           "@id": "0059"
         },
         {
-          "@id": "0073"
-        },
-        {
-          "@id": "0080"
-        },
-        {
-          "@id": "0071",
-          "@version": "4"
-        },
-        {
-          "@id": "0070"
-        },
-        {
-          "@id": "0084",
-          "@version": "2"
+          "@id": "005a"
         },
         {
           "@id": "007a",
           "@version": "2"
         },
         {
-          "@id": "0020",
-          "@controlled": "true"
+          "@id": "0072",
+          "@version": "2"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0020"
         }
       ]
     },
@@ -134,14 +119,14 @@
         "description": {
           "lang": {
             "@xml:lang": "en",
-            "#text": "All triggering reports & low voltage report will be sent to the associated nodes."
+            "#text": "Support one association group (5 nodes)."
           }
         }
       }
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/3deaaeaf47898531ae75bb5d21df07c3aa8a8ac4.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/a6b2e870a94d2ff1b96a00e6508b70f8da8f277d.png"
       }
     }
   }
