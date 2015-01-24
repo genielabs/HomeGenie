@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace MIG
 {
@@ -64,6 +65,11 @@ namespace MIG
         List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
         /// <summary>
+        /// gets the interface modules for domain.
+        /// </summary>
+        List<InterfaceModule> Modules { get; set; }
+
+        /// <summary>
         /// all input data coming from connected device
         /// is routed via InterfacePropertyChangedAction event
         /// </summary>
@@ -104,12 +110,18 @@ namespace MIG
 
     }
 
+    [Serializable()]
     public class InterfaceModule
     {
+        [XmlAttribute]
         public string Domain { get; set; }
+        [XmlAttribute]
         public string Address { get; set; }
+        [XmlAttribute]
         public ModuleTypes ModuleType { get; set; }
+        [XmlAttribute]
         public string Description { get; set; }
+        [XmlAttribute]
         public dynamic CustomData { get; set; }
     }
 

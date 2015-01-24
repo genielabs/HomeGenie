@@ -191,6 +191,11 @@ namespace MIG.Interfaces.Protocols
 
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
+        /// <summary>
+        /// get modules and module properties
+        /// </summary>
+        public List<InterfaceModule> Modules { get; set; }
+
         public List<InterfaceModule> GetModules()
         {
             List<InterfaceModule> modules = new List<InterfaceModule>();

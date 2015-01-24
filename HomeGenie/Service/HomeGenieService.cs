@@ -1698,7 +1698,23 @@ namespace HomeGenie.Service
                 HomeGenie.Service.TsList<Module> modules = (HomeGenie.Service.TsList<Module>)serializer.Deserialize(reader);
                 //
                 foreach (var module in modules)
-                {
+                {                    
+                    if (module.Domain == "HomeAutomation.ConnAir")
+                    {
+                        var migInterface = systemConfiguration.MIGService.GetInterface(module.Domain);
+                        if (migInterface != null)
+                        {
+                            migService.Modules.Add(module.Domain +"_" + module.Address, new InterfaceModule()
+                            {                         
+                            Domain = module.Domain,
+                            Address = module.Address,
+                            Description = module.Description,
+                            ModuleType = module.DeviceType,
+                            CustomData = module.Properties
+                            });                            
+                        }
+                    }
+
                     foreach (var parameter in module.Properties)
                     {
                         try

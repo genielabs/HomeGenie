@@ -29,6 +29,8 @@ namespace MIG
             public bool IsEnabled { get; set; }
 
             public List<Option> Options = new List<Option>();
+            
+           // public List<InterfaceModule> Modules = new List<InterfaceModule>();
 
             [Serializable()]
             public class Option
