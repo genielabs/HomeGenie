@@ -2613,163 +2613,163 @@
     <Properties>
       <ModuleParameter>
         <Name>Calendrier</Name>
-        <Value>Dm3G1MU4eAU7lDpP7I5Vhg==</Value>
+        <Value />
         <Description />
         <UpdateTime>2015-01-21T21:46:53.628083Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Impair</Name>
-        <Value>whZFAgcUDw+75zyoseDVcQ==</Value>
+        <Value />
         <Description>Année Impaire</Description>
         <UpdateTime>2015-01-21T21:46:53.628261Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Pair</Name>
-        <Value>VFP9ZKsHs3DA4t/9Y9plmQ==</Value>
+        <Value />
         <Description>Année Paire</Description>
         <UpdateTime>2015-01-21T21:46:53.628438Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.0</Name>
-        <Value>+fdC42ho8Uk+BWefC8p07dMt3qL1qvMQvJhJHOTsbcA=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 0</Description>
         <UpdateTime>2015-01-21T21:46:53.628618Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.1</Name>
-        <Value>O8u54iJNhvWoSXv1kfxcJH16c0ikkhdDOJnY1a7w30w=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 1</Description>
         <UpdateTime>2015-01-21T21:46:53.628798Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.10</Name>
-        <Value>gmQZY7ybB0xxGJ0KQJIpMucoO32zZ/nKtZx8elZgLxo=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 10</Description>
         <UpdateTime>2015-01-21T21:46:53.628977Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.11</Name>
-        <Value>eYCq3u5g/thEFHHroAO0kvu+EXQIcWUrhc2sFlM2JmE=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 11</Description>
         <UpdateTime>2015-01-21T21:46:53.629155Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.2</Name>
-        <Value>+jMW6pb45L2Upn58T2tJzXvnSY/g/+wCkvoSkm0kPsw=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 2</Description>
         <UpdateTime>2015-01-21T21:46:53.629334Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.3</Name>
-        <Value>sW593IwPLoZpvKYdeA7WqXF9qvdYj/NSIAyft0Mezvw=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 3</Description>
         <UpdateTime>2015-01-21T21:46:53.629514Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.4</Name>
-        <Value>wZkKtO6xu3NGs35i8Pyq3HQHsc5mCqQ/lsz2uRNYEJo=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 4</Description>
         <UpdateTime>2015-01-21T21:46:53.629694Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.5</Name>
-        <Value>F/WXX2Ip9mxcWUknVlRu/dPt/+wogQ0fojtuf6kFjiw=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 5</Description>
         <UpdateTime>2015-01-21T21:46:53.629873Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.6</Name>
-        <Value>Ci2ffkPklidHIWEJf5jJj9R7mZk9ME/wJ7gPpqp8Tcs=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 6</Description>
         <UpdateTime>2015-01-21T21:46:53.630054Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.7</Name>
-        <Value>wf0KqMhB/59oFPKU6Hgav2Hd4EDFnvLADxQUodQFrXI=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 7</Description>
         <UpdateTime>2015-01-21T21:46:53.630232Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.8</Name>
-        <Value>eYCq3u5g/thEFHHroAO0ktYZvnSApQ0+gp2ARO4msog=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 8</Description>
         <UpdateTime>2015-01-21T21:46:53.630413Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.0.9</Name>
-        <Value>NivfzovHeiOzjm9EN7uljROIm+XOlKU4fOee1Xep4ks=</Value>
+        <Value />
         <Description>Calendrier année paire - Mois 9</Description>
         <UpdateTime>2015-01-21T21:46:53.630593Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.0</Name>
-        <Value>VJyrWFVVibf6WSfch6JNmlmEQUrPu65QQozMT8nhbTU=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 0</Description>
         <UpdateTime>2015-01-21T21:46:53.630772Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.1</Name>
-        <Value>MMuVGx2lzt2AqHO6JJIe+fqZk/4aWb+dT5S//kOKmzg=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 1</Description>
         <UpdateTime>2015-01-21T21:46:53.630951Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.10</Name>
-        <Value>BCjdlFf5LOaPfkPrkuMGW+YPK5f3BiG7uBzbK9yDc/g=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 10</Description>
         <UpdateTime>2015-01-21T21:46:53.631131Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.11</Name>
-        <Value>+jMW6pb45L2Upn58T2tJzUEklj1UvgajFcwrdSWyNek=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 11</Description>
         <UpdateTime>2015-01-21T21:46:53.631316Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.2</Name>
-        <Value>JFahLWUEjiDvu1pRAfIjHmHMIbt5/sF7lyoqEBk6utQ=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 2</Description>
         <UpdateTime>2015-01-21T21:46:53.631507Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.3</Name>
-        <Value>F/WXX2Ip9mxcWUknVlRu/dPt/+wogQ0fojtuf6kFjiw=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 3</Description>
         <UpdateTime>2015-01-21T21:46:53.63168Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.4</Name>
-        <Value>WMx/O1DY0sIE1NnxlFKDGgxO3q4frjQKRkDjPJJahG4=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 4</Description>
         <UpdateTime>2015-01-21T21:46:53.631853Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.5</Name>
-        <Value>O8u54iJNhvWoSXv1kfxcJIOUosQV2L9+p77ORaNFi+4=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 5</Description>
         <UpdateTime>2015-01-21T21:46:53.63204Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.6</Name>
-        <Value>vPtjjx8B2MRYrAve+HsirJpW5vgGGvNPFjR9OJipp+M=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 6</Description>
         <UpdateTime>2015-01-21T21:46:53.632282Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.7</Name>
-        <Value>YJSI6cy4uWBx7ztLRE45Jxrgbnc8gkGnh0ykn7/6Mkk=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 7</Description>
         <UpdateTime>2015-01-21T21:46:53.632511Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.8</Name>
-        <Value>+jMW6pb45L2Upn58T2tJzbrro68y7QDVRUVHuOwdRVM=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 8</Description>
         <UpdateTime>2015-01-21T21:46:53.632713Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Calend.Year.1.9</Name>
-        <Value>eYCq3u5g/thEFHHroAO0kmpXOxXKvPoOcvLnXmMPGVE=</Value>
+        <Value />
         <Description>Calendrier année impaire - Mois 9</Description>
         <UpdateTime>2015-01-21T21:46:53.632917Z</UpdateTime>
       </ModuleParameter>
@@ -2803,7 +2803,7 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Light.0</Name>
-        <Value>Jsfuzdfd4XFQy4t02BTCt0Y6mZ52n5NB2/QEN6c3ann1wT5z0VUYFtwvRSYZohBoUtRia4xFO2hXvdTOZga2T+5Ss1F+tex2YX5DkvM/LaKHG6aXCEJEBFUjC3K6SxVS4SqzIEOo1kxlAfpKbVvbMQ==</Value>
+        <Value />
         <Description>Switch and light : Table horaire 0</Description>
         <UpdateTime>2015-01-21T21:46:53.633126Z</UpdateTime>
       </ModuleParameter>
@@ -2815,7 +2815,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Light.2</Name>
-        <Value>zKgAMg7mppj5XfRqJGhC3PzYqmTtzigBYq70WoOQFhWSTuiaEkb+FjtVOOxaadFNYkR7iTTo9nnfyhrLCmYBPEm8LpfNs67GqK4xu2tmpFNw5yVSEH0eAX+gkJDUjKU5facjl8/NHIpVypfB6PcEug==</Value>
+        <Value />
         <Description>Switch and light : Table horaire 2</Description>
         <UpdateTime>2015-01-21T21:46:53.633307Z</UpdateTime>
       </ModuleParameter>
@@ -2839,13 +2839,13 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Shutter.0</Name>
-        <Value>TAxWgSnkrxkIH8e26WxqgVccBc6FT/Wy2B+C/1Y7n4Mp+q8gBFfCFJhaa8KllWGoH8LDGFdWzuZcnOqaNhERAnLanLvU4hvO8agJeqQWz1Bh73ENtNivYsTMgT0ENGtTe+chRAXCLEIY/d/vGgAFJQ==</Value>
+        <Value />
         <Description>Shutter : Table horaire 0</Description>
         <UpdateTime>2015-01-21T21:46:53.633489Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Shutter.1</Name>
-        <Value>ySavKBcXD0zm9UOYzKWDMe52Jfx9aZQnby7hgHN341RM9enBMj3cinnCdBGeRm0yEScB9md17JkvDSqJJoVfh9eN00Y9Q1/yLZGQR7UPMlhzldNPNlRo0NXs2xEiGQ2MhVnHX5Ts+ady16Ne4ynIhg==</Value>
+        <Value />
         <Description>Shutter : Table horaire 1</Description>
         <UpdateTime>2015-01-21T21:46:53.633671Z</UpdateTime>
       </ModuleParameter>
@@ -2875,7 +2875,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.0</Name>
-        <Value>E/ESr3IJxwJI0vz38G+f0cEnpJw5XVEQL9zZIo1kOxYJi9fOtr7aKrbRDFWs6v5ev/XYy3PhMAVkaDyAdYihgD7naWJBsj2puJRvCwQd7+TskNeeHeyjJeqr7oqaMFrQ91djzKJxGa5sxm32fZsAfQ==</Value>
+        <Value />
         <Description>Thermostat : Table horaire 0</Description>
         <UpdateTime>2015-01-21T21:46:53.633871Z</UpdateTime>
       </ModuleParameter>
@@ -2941,7 +2941,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Table Horaire</Name>
-        <Value>+Q00yVX5PfrGg9p4gcudVlEg0KWxkcjGxUiXQtE3znA=</Value>
+        <Value />
         <Description />
         <UpdateTime>2015-01-21T21:46:53.63411Z</UpdateTime>
       </ModuleParameter>
@@ -2961,7 +2961,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Thermostats Scheduler</Name>
+    <Name>Enhanced Thermostats</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2995,18 +2995,12 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Lights Scheduler</Name>
+    <Name>Time Tables Scheduler</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>514</Address>
     <Properties>
-      <ModuleParameter>
-        <Name>ConfigureOptions.LightsNumber</Name>
-        <Value>lpDXt9Qx8AdAfFtgH1eotw==</Value>
-        <Description>Number of virtual Lights (Max.8)</Description>
-        <UpdateTime>2015-01-21T21:46:53.636978Z</UpdateTime>
-      </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Running</Value>

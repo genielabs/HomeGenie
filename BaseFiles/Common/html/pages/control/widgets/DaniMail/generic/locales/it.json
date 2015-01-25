@@ -36,13 +36,13 @@
     "cal_nov":
         "Novembre",
     "cal_dec":
-        "Dicember",
+        "Dicembre",
     "cal_wek":
         "Week-end",
     "cal_work":
-        "Affari",
+        "Feriale",
     "cal_free":
-        "Vacanza",
+        "Festivo",
     "cal_spe":
         "Speciale",
     "mode":
@@ -78,11 +78,11 @@
     "therm_prog":
         "Pianificato",
     "therm_sensor":
-        "Sensor : ",
+        "Sensore: ",
     "therm_switch":
-        "Inter. : ",
+        "Interr.: ",
     "tt_timetable":
-        "Tabella Horaire ",
+        "Tabella Orario ",
     "control_module_off":
         "Annulla",
     "control_module_on":
