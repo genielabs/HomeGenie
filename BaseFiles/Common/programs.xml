@@ -9510,7 +9510,7 @@ while (Program.IsEnabled)
     nTempo--;
   };
 }</ScriptSource>
-    <ScriptErrors>[{"Line":24,"Column":123,"ErrorMessage":"The name `CultureInfo' does not exist in the current context","ErrorNumber":"CS0103","CodeBlock":"CR"},{"Line":25,"Column":119,"ErrorMessage":"The name `CultureInfo' does not exist in the current context","ErrorNumber":"CS0103","CodeBlock":"CR"},{"Line":200,"Column":3,"ErrorMessage":"Expression denotes a `variable', where a `method group' was expected","ErrorNumber":"CS0119","CodeBlock":"CR"}]</ScriptErrors>
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features>
       <ProgramFeature>
