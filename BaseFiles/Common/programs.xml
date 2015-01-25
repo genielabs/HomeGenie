@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:37.2408Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:26.520584Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:37.746308Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:27.023002Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:38.245861Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:27.52475Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -503,7 +503,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:38.745228Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:28.021914Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1246,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:39.245129Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:28.523333Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1301,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:39.746081Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:29.023417Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1596,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:40.251675Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:29.527331Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1675,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:40.746854Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:30.01842Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1745,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:41.248749Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:30.52817Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2019,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:41.750062Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:31.024566Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2385,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:42.748416Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:32.028626Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2393,29 +2393,41 @@ Currently limited to one client channel.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
+    <ScriptCondition>Program.Setup(()=&gt;{
+	Program.AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor");
+});
 return true;
 </ScriptCondition>
-    <ScriptSource>Program.Parameter("EnergyMonitor.KwCounter").Value = "0";
-Program.Parameter("EnergyMonitor.KwLoad").Value = "0";
-Program.Parameter("EnergyMonitor.OperatingDevices").Value = "0";
-//
-var notifyTicks = 0; // minutes
-//
+    <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
+var kwLoad = energyMonitor.Parameter("EnergyMonitor.KwLoad");
+var wattCounter = energyMonitor.Parameter("EnergyMonitor.WattCounter");
+var wattLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
+var operatingDevices = energyMonitor.Parameter("EnergyMonitor.OperatingDevices");
+var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
+
+// initialize
+energyMonitor.Instance.Name = "Energy Monitor";
+kwCounter.Value = "0";
+kwLoad.Value = "0";
+wattCounter.Value = "0";
+wattLoad.Value = "0";
+operatingDevices.Value = "0";
+operatingLights.Value = "0";
+operatingSwitches.Value = "0";
+
+// select all modules supporting metering
 var meterModules = Modules.WithParameter("Meter.Watts");
-while (Program.IsEnabled)
-{
-  Pause(60);
-  notifyTicks++;
-  //
-  var loadkw = 0d;
+var notifyTicks = 5; // minutes
+
+var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
+  var totalLoad = 0d;
   int devcount = 0, lightcount = 0, switchcount = 0;
   meterModules.Each((mod)=&gt;{
     if (mod.Parameter("Meter.Watts").DecimalValue &gt; 0)
     {
-      loadkw += mod.Parameter("Meter.Watts").DecimalValue;
+      totalLoad += mod.Parameter("Meter.Watts").DecimalValue;
       if (mod.IsOfDeviceType("Light") || mod.IsOfDeviceType("Dimmer"))
       {
         lightcount++;
@@ -2428,36 +2440,54 @@ while (Program.IsEnabled)
     }
     return false;
   });
-  //
-  var energyUse = Program.EnergyUseCounter;
-  Program.Parameter("EnergyMonitor.KwCounter").Value = energyUse.ToString("0.000");
-  Program.Parameter("EnergyMonitor.KwLoad").Value = loadkw.ToString("0.000");
-  Program.Parameter("EnergyMonitor.OperatingDevices").Value = devcount.ToString("0");
-  Program.Parameter("EnergyMonitor.OperatingLights").Value = lightcount.ToString("0");
-  Program.Parameter("EnergyMonitor.OperatingSwitches").Value = switchcount.ToString("0");
-  //
-  // notify every 5 minutes
-  if (loadkw &gt; 0 &amp;&amp; notifyTicks == 5)
+  Program.RaiseEvent(energyMonitor, kwLoad.Name, (totalLoad / 1000D).ToString("0.000", CultureInfo.InvariantCulture), "Energy Monitor");
+  Program.RaiseEvent(energyMonitor, wattLoad.Name, totalLoad.ToString("0.000", CultureInfo.InvariantCulture), "Energy Monitor");
+  Program.RaiseEvent(energyMonitor, operatingDevices.Name, devcount.ToString("0"), "Energy Monitor");
+  Program.RaiseEvent(energyMonitor, operatingLights.Name, lightcount.ToString("0"), "Energy Monitor");
+  Program.RaiseEvent(energyMonitor, operatingSwitches.Name, switchcount.ToString("0"), "Energy Monitor");
+  return true;
+});
+
+When.WebServiceCallReceived("HomeAutomation.EnergyMonitor", (args)=&gt;{
+  dynamic response = new System.Dynamic.ExpandoObject();
+  response.KiloWattLoad = kwLoad.Value;
+  response.KiloWattCouter = kwCounter.Value;
+  response.WattCounter = wattCounter.Value;
+  response.WattLoad = wattLoad.Value;
+  response.OperatingDevices = operatingDevices.Value;
+  response.OperatingLights = operatingLights.Value;
+  response.OperatingSwitches = operatingSwitches.Value;
+  return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(response) + "]";
+});
+
+while (Program.IsEnabled)
+{
+  notifyTicks++;
+  UpdateEnergyLoad();
+  // update global statistics and notify every 5 minutes
+  if (wattLoad.DecimalValue &gt; 0 &amp;&amp; notifyTicks &gt;= 5)
   {
     notifyTicks = 0;
-    Program.Notify("Energy Monitor", 
-                   "kW load = " + loadkw.ToString("0.000") + " / " + devcount.ToString("0") + "&lt;br&gt;" +
-                   "Counter = " + energyUse.ToString("0.000"));
+    // update energy use parameters
+    var energyUse = Program.EnergyUseCounter;
+    Program.RaiseEvent(energyMonitor, kwCounter.Name, (energyUse / 1000D).ToString("0.000", CultureInfo.InvariantCulture), "Energy Monitor");
+  	Program.RaiseEvent(energyMonitor, wattCounter.Name, energyUse.ToString("0.000", CultureInfo.InvariantCulture), "Energy Monitor");
   }
+  Pause(60);
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
     <Name>Energy Monitor</Name>
     <Description>Collects and stores real-time information about
 energy consumption.</Description>
     <Group>Energy Management</Group>
-    <ActivationTime>2015-01-02T02:14:37.899564Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:43.248782Z</TriggerTime>
+    <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2611,7 +2641,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:43.750541Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:33.026084Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2875,7 +2905,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:44.256379Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:33.531516Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4086,7 +4116,7 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
   Please set your local longitude/latitude in program options.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-24T15:29:22.324048Z</ActivationTime>
-    <TriggerTime>2015-01-25T08:16:44.823554Z</TriggerTime>
+    <TriggerTime>2015-01-25T15:04:34.095166Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8839,14 +8869,14 @@ while (Program.IsEnabled)
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>511</Address>
     <Name>Time tables</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-25T07:53:06.051025Z</ActivationTime>
-    <TriggerTime>2015-01-25T07:59:15.919581Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -8858,21 +8888,23 @@ while (Program.IsEnabled)
 // To execute the Code To Run,
 // use a 'return true' or 'return false' otherwise.
 Program.Setup(()=&gt;{
-    Program.AddInputField("ThermostatsNumber", "4", "Number of virtual thermostats (Max.8)");
-    int thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
-    if( thermsCount &gt; 8 )
-        thermsCount = 8;
-    Program.AddVirtualModules("HomeAutomation.DaniMail", "Thermostat", "DaniMail/generic/thermostats",1,thermsCount);
+  Program.AddInputField("ThermostatsNumber", "4", "Number of virtual thermostats (Max.8)");
+  int thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
+  if( thermsCount &gt; 8 )
+    thermsCount = 8;
+  if(thermsCount &gt; 0) 
+  {
+    Program.AddVirtualModules("HomeAutomation.DaniMail", "Thermostat", "DaniMail/generic/thermostats", 1, thermsCount);
     for(int x = 0; x &lt; thermsCount; x++)
     {
       var module = Modules.InDomain("HomeAutomation.DaniMail").WithAddress((x+1).ToString()).Get();
-      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("ModuleTemperature").Value.Length == 0)) )
+      if( module.Instance != null &amp;&amp; module.Parameter("ModuleTemperature").Value.Length == 0 )
       {
         // Paramètres statiques
-        module.Parameter("Table.W").Value = "0";
-        module.Parameter("Table.O").Value = "1";
-        module.Parameter("Table.F").Value = "2";
-        module.Parameter("Table.S").Value = "3";
+        module.Parameter("TimeTable.W").Value = "0";
+        module.Parameter("TimeTable.O").Value = "1";
+        module.Parameter("TimeTable.F").Value = "2";
+        module.Parameter("TimeTable.S").Value = "3";
         module.Parameter("Thermostat.SetPoint.NoFrost").Value = "5";
         module.Parameter("Thermostat.SetPoint.Eco").Value = "16";
         module.Parameter("Thermostat.SetPoint.Heating").Value = "20";
@@ -8884,12 +8916,13 @@ Program.Setup(()=&gt;{
         module.Parameter("Thermostat.Mode").Value = "Arrêt";
       }
     }
-  	Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "ModuleTemperature", "Module to read temperature from");
-  	Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule1", "Module 1 to switch on/off");  
-  	Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule2", "Module 2 to switch on/off");  
-  	Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule3", "Module 3 to switch on/off");  
+  }
+  Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "ModuleTemperature", "Module to read temperature from");
+  Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule1", "Module 1 to switch on/off");  
+  Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule2", "Module 2 to switch on/off");  
+  Program.AddFeatureTextInput("HomeAutomation.DaniMail", "Thermostat", "SwitchModule3", "Module 3 to switch on/off");  
 });
-              
+
 return true;
 </ScriptCondition>
     <ScriptSource>// CSharp Automation Program Plugin
@@ -9045,7 +9078,7 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
             continue;
         }
         typeDay = tabMon[currentTime.Day-1] ;
-        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        newTable = moduleVirtuel.Parameter("TimeTable."+typeDay).Value;
         if( newTable.Length != 0 )
         {
            if( newTable != currentTable )
@@ -9291,11 +9324,11 @@ while (Program.IsEnabled)
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.W", "Time table to use for weekend");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.O", "Time table to use for week days");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.F", "Time table to use for holidays");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.S", "Time table to use for special days");
-  	Program.AddFeature("Light,Switch,Shutter,Dimmer", "TimeTable.Enable", "Enable time table scheduling");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.W", "Time table to use for weekend (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.O", "Time table to use for week days (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.F", "Time table to use for holidays (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.S", "Time table to use for special days (0-5)");
+  	Program.AddFeature("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable time table scheduling");
 });
               
 return true;
@@ -9353,6 +9386,8 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       tableType = "OnOff"; // OnOff
     else if (module.IsOfDeviceType("Dimmer,Shutter"))
       tableType = "Level"; // Level
+    else if (module.IsOfDeviceType("Thermostat"))
+      tableType = "Thermostat"; // Level
 
     // No table type for current device type, continue to next
     if (tableType == "")
@@ -9426,6 +9461,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       }
     }
     else
+    if (tableType == "OnOff")
     {
       double level = 0;
       if (double.TryParse(typeAction.ToString(), out level))
@@ -9439,7 +9475,54 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
         Program.Notify(popupTitle, displayName + "\nWrong level found in time table '" + typeAction + "'") ;
       }
     }
-
+    else // Type Thermostat
+    {
+      string actionToDo="";
+      string tempSetPoint="";
+      int temperatureToReach=0;
+      switch (typeAction)
+      {
+        case 'A' : // Stop
+          actionToDo="Stop";
+          break ;
+        case 'N' : // Fan
+          actionToDo="Fan";
+          tempSetPoint="Fan";
+          break ;
+        case 'L' : // Cool
+          actionToDo="Cool";
+          tempSetPoint="Cooling";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Cool").DecimalValue;
+          break ;
+        case 'H' : // No Frost
+          actionToDo="NoFrost";
+          tempSetPoint="NoFrost";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.NoFrost").DecimalValue;
+          break ;
+        case 'E' : // Eco
+          actionToDo="Eco";
+          tempSetPoint="Eco";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Eco").DecimalValue;
+          break ;
+        case 'C' :  // Comfort
+          actionToDo="Heat";
+          tempSetPoint="Heating";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Heating").DecimalValue;
+          break ;
+        default :  // Undefined
+          temperatureToReach=-1;
+	      Program.Notify(popupTitle, displayName + "\nWrong Action found in time table '" + typeAction + "'") ;
+          break ;
+      }
+      if(temperatureToReach != -1)
+      {
+        // Send the temperature reach Value to the physical thermostat
+        if(temperatureToReach != 0)
+           Program.RaiseEvent(module,"Thermostat.SetPoint."+actionToDo,temperatureToReach.ToString(),"Thermostat");
+        // Send the current action to the physical thermostat
+        Program.RaiseEvent(module,"Thermostat.ModeSet", actionToDo,"Thermostat");
+      }  
+    }
     return false; // do not stop iterating, continue processing next module
   });
 
@@ -9500,15 +9583,15 @@ while (Program.IsEnabled)
         <Description>Enable time table scheduling</Description>
       </ProgramFeature>
     </Features>
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>514</Address>
     <Name>Time tables scheduler</Name>
     <Description>Switch device on/off or set level based on Time Tables widget.
 Specify a time table number (0-5) or leave fields empty to disable.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-25T07:58:38.858455Z</ActivationTime>
-    <TriggerTime>2015-01-25T07:59:16.410647Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>

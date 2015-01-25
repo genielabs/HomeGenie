@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+25/01/2015 1.00 beta rev 465
+    - Merged pull request #109 (DaniMail time table/thermostat)
+    - Improved Energy Monitor app; added Energy Monitor widget to the dashboard
+
 24/01/2015 1.00 beta rev 462
     - WIP Time Tables 
     - Fixed error in localization functions when widget has no control popup defined

@@ -96,18 +96,18 @@
 		          var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 	          	  if(moduleTH != null)
 		          {
-					  var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.W');
+					  var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'TimeTable.W');
 					  var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='W'),hourC,minC);
-					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.O');
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+tabHOR.Value,(typeDay=='W'),hourC,minC);
+					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'TimeTable.O');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='O'),hourC,minC);
-					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.F');
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+tabHOR.Value,(typeDay=='O'),hourC,minC);
+					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'TimeTable.F');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='F'),hourC,minC);
-					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.S');
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+tabHOR.Value,(typeDay=='F'),hourC,minC);
+					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'TimeTable.S');
 					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+tabHOR.Value);
-				      _this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+' '+tabHOR.Value,(typeDay=='S'),hourC,minC);
+				      _this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+tabHOR.Value,(typeDay=='S'),hourC,minC);
 			      }
 		      }
 	          $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
@@ -285,7 +285,7 @@
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
-	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'Table.W');
+	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'TimeTable.W');
 	    	    var newtabHOR = tabHOR.Value;
 	    	    if(_this.index == 1 && newtabHOR < 9)
 	    	    	newtabHOR++ ;
@@ -293,7 +293,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+' '+newtabHOR,(typeDay=='W'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableW]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[0]+' - '+_this.TimeTableUI+newtabHOR,(typeDay=='W'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/W',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -301,7 +301,7 @@
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
-	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'Table.O');
+	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'TimeTable.O');
 	    	    var newtabHOR = tabHOR.Value;
 	    	    if(_this.index == 1 && newtabHOR < 9)
 	    	    	newtabHOR++ ;
@@ -309,7 +309,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+' '+newtabHOR,newtabHOR,(typeDay=='O'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableO]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[1]+' - '+_this.TimeTableUI+newtabHOR,(typeDay=='O'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/O',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -317,7 +317,7 @@
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
-	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'Table.F');
+	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'TimeTable.F');
 	    	    var newtabHOR = tabHOR.Value;
 	    	    if(_this.index == 1 && newtabHOR < 9)
 	    	    	newtabHOR++ ;
@@ -325,7 +325,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+' '+newtabHOR,+newtabHOR,(typeDay=='F'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableF]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[2]+' - '+_this.TimeTableUI+newtabHOR,(typeDay=='F'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/F',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -333,7 +333,7 @@
 			_this.analyseClick($(this).offset(),event);
 			if( _this.index != 0 )
 			{
-	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'Table.S');
+	    	    var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module,'TimeTable.S');
 	    	    var newtabHOR = tabHOR.Value;
 	    	    if(_this.index == 1 && newtabHOR < 9)
 	    	    	newtabHOR++ ;
@@ -341,7 +341,7 @@
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
 				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Therm.'+newtabHOR);
-				_this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+' '+newtabHOR,+newtabHOR,(typeDay=='S'),hourC,minC);
+				_this.drawTable(controlpopup.find('[data-ui-field=tableS]')[0].getContext('2d'),tabletherm.Value,_this.TabLegendUI[3]+' - '+_this.TimeTableUI+' '+newtabHOR,(typeDay=='S'),hourC,minC);
 	            HG.Control.Modules.ServiceCall('Thermostat.SetTable/S',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
@@ -511,7 +511,7 @@
         else if (blevel > 10) blevel = 20;
         else if (blevel > 0) blevel = 10;
         //
-        var infotext = blevel+'%  <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_'+blevel+'.png"/>';
+        var infotext = value+'%  <img style="vertical-align:middle" src="pages/control/widgets/homegenie/generic/images/battery_level_'+blevel+'.png"/>';
 	    widget.find('[data-ui-field=status]').html('&nbsp;'+infotext);  
     }
  },
