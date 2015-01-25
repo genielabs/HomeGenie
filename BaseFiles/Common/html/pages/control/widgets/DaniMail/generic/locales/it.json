@@ -69,6 +69,10 @@
         "---",
     "therm_off":
         "Spento",
+    "therm_fan":
+        "Ventil.",
+    "therm_cool":
+        "Fresco",
     "therm_nofrost":
         "Antigelo",
     "therm_eco":
@@ -83,6 +87,10 @@
         "Interr.: ",
     "tt_timetable":
         "Tabella Orario ",
+    "hour_from":
+        "Da :  ",
+    "hour_to":
+        "&nbsp;&nbsp;A :  ",
     "control_module_off":
         "Annulla",
     "control_module_on":
