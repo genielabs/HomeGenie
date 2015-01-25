@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r465</Version>
+  <Version>1.00 beta r466</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>    - Improved Energy Monitor app; added Energy Monitor widget
   - Added Time Tables, Calendar and Virtual Thermostats programs by DaniMail
@@ -31,5 +31,5 @@
   - Added more field icons to sensor widget (pull request #94)
   - Fixed error with Pepper1 db when lang is not an array (pull request #90)
   - Changed widget's files extension from *.json to *.js</ReleaseNote>
-  <ReleaseDate>2015-01-25T11:11:11.0000Z</ReleaseDate>
+  <ReleaseDate>2015-01-25T20:27:42.0000Z</ReleaseDate>
 </ReleaseInfo>

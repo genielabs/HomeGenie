@@ -9,7 +9,7 @@
   Description : '',
   Initialized: false,
   TimeTableUI: '',
-  ThermLocalUI : ["off","nofrost","eco","heat"],
+  ThermLocalUI : ["off","fan","cool","nofrost","eco","heat"],
 	
   InitView: function (container) {
     var _this = this;
@@ -18,9 +18,9 @@
       _this.TimeTableUI = widget.find('[data-ui-label=id_timetable]').html();
       for(var i = 0; i < _this.ThermLocalUI.length; i++)
         _this.ThermLocalUI[i] = widget.find('[data-ui-label=id_'+_this.ThermLocalUI[i]+']').html();
-      _this.drawChoice(widget.find('[data-ui-field=legend0]')[0].getContext('2d'),"AHEC",' ',18);
-	  _this.drawChoice(widget.find('[data-ui-field=legend1]')[0].getContext('2d'),"FRSO",' ',18);
-	  _this.drawChoice(widget.find('[data-ui-field=legend2]')[0].getContext('2d'),"012345",' ',18);
+      _this.drawChoice(widget.find('[data-ui-field=legend0]')[0].getContext('2d'),"ANLHEC",' ',310,18);;
+	  _this.drawChoice(widget.find('[data-ui-field=legend1]')[0].getContext('2d'),"FRSO",' ',310,18);
+	  _this.drawChoice(widget.find('[data-ui-field=legend2]')[0].getContext('2d'),"012345",' ',310,18);
     },1000);
    this.Initialized = true;
   },
@@ -90,7 +90,7 @@
 	   	controlpopup.find('[data-ui-field=choice]').on("click",function(event){
 			var rect = $(this).offset();
 			_this.analyseChoice(event.pageX-rect.left);
-			_this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			_this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    });
 	    
 	    // Validation tranche Horaire events
@@ -151,7 +151,7 @@
 		});
 		
 		widget.find('[data-ui-field=therm0]').on("click",function(event){
-			_this.initSelectCanvas("AHEC",0);
+			_this.initSelectCanvas("ANLHEC",0);
 			_this.context=widget.find('[data-ui-field=therm0]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -159,12 +159,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 	    widget.find('[data-ui-field=therm1]').on( "click", function(event) {
-			_this.initSelectCanvas("AHEC",1);
+			_this.initSelectCanvas("ANLHEC",1);
 			_this.context=widget.find('[data-ui-field=therm1]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -172,12 +172,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm2]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",2);
+			_this.initSelectCanvas("ANLHEC",2);
 			_this.context=widget.find('[data-ui-field=therm2]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -185,12 +185,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm3]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",3);
+			_this.initSelectCanvas("ANLHEC",3);
 			_this.context=widget.find('[data-ui-field=therm3]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -198,12 +198,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm4]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",4);
+			_this.initSelectCanvas("ANLHEC",4);
 			_this.context=widget.find('[data-ui-field=therm4]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -211,12 +211,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm5]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",5);
+			_this.initSelectCanvas("ANLHEC",5);
 			_this.context=widget.find('[data-ui-field=therm5]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -224,12 +224,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm6]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",0);
+			_this.initSelectCanvas("ANLHEC",0);
 			_this.context=widget.find('[data-ui-field=therm6]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -237,12 +237,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"6");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm7]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",7);
+			_this.initSelectCanvas("ANLHEC",7);
 			_this.context=widget.find('[data-ui-field=therm7]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -250,12 +250,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"7");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm8]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",8);
+			_this.initSelectCanvas("ANLHEC",8);
 			_this.context=widget.find('[data-ui-field=therm8]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -263,12 +263,12 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"8");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
 		widget.find('[data-ui-field=therm9]').on("click",function(event) {
-			_this.initSelectCanvas("AHEC",9);
+			_this.initSelectCanvas("ANLHEC",9);
 			_this.context=widget.find('[data-ui-field=therm9]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
 			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
@@ -276,7 +276,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"9");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -289,7 +289,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -302,7 +302,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -315,7 +315,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -328,7 +328,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -341,7 +341,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -354,7 +354,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -367,7 +367,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -380,7 +380,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -393,7 +393,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -406,7 +406,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -419,7 +419,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -432,7 +432,7 @@
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
 			{
-			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,30);
+			  _this.drawChoice(controlpopup.find('[data-ui-field=choice]')[0].getContext('2d'),_this.choice,_this.cetat,300,30);
 	    	  $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
 	    	}
 	    });
@@ -544,7 +544,7 @@ analyseClick: function(container,etat,rect,event) {
   analyseChoice: function(posX)
   {
 	var c=this.choice.length;
-	var xlen=216/c;
+	var xlen=280/c;
 	var index=Math.floor(posX/xlen);
     
     this.cetat=this.choice[index];
@@ -566,49 +566,55 @@ analyseClick: function(container,etat,rect,event) {
         if( i < c )
             switch( etat[i] )
             {
-               case 'A' :
+              case 'A' :
+                fgcolor = "#222222" ;
+                break ;
+              case 'N' :
                 fgcolor = "#bcbcbc" ;
                 break ;
-               case 'H' :
+              case 'L' :
+                fgcolor = "#cccc00" ;
+                break ;
+              case 'H' :
                 fgcolor = "#2387dc" ;
                 break ;
-               case 'E' :
+              case 'E' :
                 fgcolor = "#53a840" ;
                 break ;
-               case 'C' :
+              case 'C' :
                 fgcolor = "#da4336" ;
                 break ;
-               case 'O' :
+              case 'O' :
                 fgcolor = "green" ;
                 break ;
-               case 'S' :
+              case 'S' :
                 fgcolor = "#666600" ;
                 break ;
-               case 'R' :
+              case 'R' :
                 fgcolor = "#999900" ;
                 break ;
-               case 'F' :
-                fgcolor = "#444444" ;
+              case 'F' :
+                fgcolor = "#222222" ;
                 break ;
-               case '0' :
+              case '0' :
                 fgcolor = "#222200" ;
                 break ;
-               case '1' :
+              case '1' :
                 fgcolor = "#333300" ;
                 break ;
-               case '2' :
+              case '2' :
                 fgcolor = "#666600" ;
                 break ;
-               case '3' :
+              case '3' :
                 fgcolor = "#999900" ;
                 break ;
-               case '4' :
+              case '4' :
                 fgcolor = "#CCCC00" ;
                 break ;
-               case '5' :
+              case '5' :
                 fgcolor = "yellow" ;
                 break ;
-               default :
+              default :
                 fgcolor = 'black' ;
                 break ;
             }
@@ -632,73 +638,81 @@ analyseClick: function(container,etat,rect,event) {
     context.fillText(i/4,((i/4)*12)+7,24);
   },
    
-  drawChoice: function(context,type,select,height) {
+  drawChoice: function(context,type,select,width,height) {
     var x=0;
     var y=0;
-  	var c= type.length ;  
-  	var xlen = 216/c ;
-    var fgcolor ;
-    var texte ;
+  	var c= type.length;  
+  	var xlen = width/c;
+    var fgcolor;
+    var texte;
 
     context.font = "8pt Arial";
     for(var i=0 ; i < c ; i++ )
     {
         switch( type[i] )
         {
-           case 'A' :
+          case 'A' :
            	texte = this.ThermLocalUI[0];
+            fgcolor = "#222222" ;
+            break ;
+          case 'N' :
+           	texte = this.ThermLocalUI[1];
             fgcolor = "#bcbcbc" ;
             break ;
-           case 'H' :
-           	texte = this.ThermLocalUI[1];
+          case 'L' :
+           	texte = this.ThermLocalUI[2];
+            fgcolor = "#cccc00" ;
+            break ;
+          case 'H' :
+           	texte = this.ThermLocalUI[3];
             fgcolor = "#2387dc" ;
             break ;
-           case 'E' :
-           	texte = this.ThermLocalUI[2];
+          case 'E' :
+           	texte = this.ThermLocalUI[4];
             fgcolor = "#53a840" ;
             break ;
-           case 'C' :
+          case 'C' :
 //        	texte = widget.find('[data-ui-label=id_heat]').html();
-           	texte = this.ThermLocalUI[3];
+           	texte = this.ThermLocalUI[5];
             fgcolor = "#da4336" ;
             break ;
-           case 'O' :
+          case 'O' :
            	texte = "On" ;
             fgcolor = "green" ;
            	break ;
-           case 'S' :
+          case 'S' :
            	texte = "SunSet" ;
             fgcolor = "#666600" ;
            	break ;
-           case 'R' :
+          case 'R' :
            	texte = "SunRise" ;
             fgcolor = "#999900" ;
            	break ;
-           case 'F' :
+          case 'F' :
            	texte = "Off" ;
-            fgcolor = "#444444" ;
+            fgcolor = "#222222" ;
            	break ;
-           case '0' :
+          case '0' :
            	texte = "0 %" ;
             fgcolor = "#222200" ;
            	break ;
-           case '1' :
+          case '1' :
            	texte = "20 %" ;
             fgcolor = "#333300" ;
            	break ;
-           case '2' :
+          case '2' :
            	texte = "40 %" ;
             fgcolor = "#666600" ;
            	break ;
-           case '3' :
+          case '3' :
            	texte = "60 %" ;
             fgcolor = "#999900" ;
            	break ;
-           case '4' :
+          case '4' :
            	texte = "80 %" ;
             fgcolor = "#CCCC00" ;
            	break ;
-           case '5' :
+          case '5' :
            	texte = "100%" ;
             fgcolor = "yellow" ;
            	break ;
@@ -715,7 +729,7 @@ analyseClick: function(container,etat,rect,event) {
        	}
        	else
 	        context.fillRect(x,0,xlen,height);
-        if( (fgcolor=="black") || (fgcolor=="#222200") || (fgcolor=="#444444") )
+        if( (fgcolor=="black") || (fgcolor=="#222200") || (fgcolor=="#222222") )
 		    context.fillStyle = "white";
         else
     		context.fillStyle = "black";

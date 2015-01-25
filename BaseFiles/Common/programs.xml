@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:26.520584Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:05.365936Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2014-12-03T20:12:51.356776Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:27.023002Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:05.864714Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -424,7 +424,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2014-04-02T15:14:59.1516283Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:27.52475Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:06.370476Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -503,7 +503,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:28.021914Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:06.868333Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1246,7 +1246,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:28.523333Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:07.36752Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1301,7 +1301,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:29.023417Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:07.86648Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1596,7 +1596,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2014-04-19T10:21:23.6096933Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:29.527331Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:08.374155Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1675,7 +1675,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:30.01842Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:08.866677Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1745,7 +1745,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:30.52817Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:09.37258Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2019,7 +2019,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:31.024566Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:09.870954Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2385,7 +2385,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:32.028626Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:10.874011Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2477,9 +2477,9 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
     <Name>Energy Monitor</Name>
@@ -2487,7 +2487,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2015-01-25T19:02:11.378339Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2641,7 +2641,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:33.026084Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:11.873088Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2905,7 +2905,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:33.531516Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:12.377517Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4116,7 +4116,7 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
   Please set your local longitude/latitude in program options.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-24T15:29:22.324048Z</ActivationTime>
-    <TriggerTime>2015-01-25T15:04:34.095166Z</TriggerTime>
+    <TriggerTime>2015-01-25T19:02:12.941726Z</TriggerTime>
     <Type>Javascript</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8796,18 +8796,18 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>510</Address>
-    <Name>Calendar</Name>
-    <Description>Calendar widget for use with Time Tables.</Description>
+    <Name>Timetable Calendar</Name>
+    <Description>Calendar widget for use with Timetable widget.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-25T07:44:13.214917Z</ActivationTime>
-    <TriggerTime>2015-01-25T07:59:15.419426Z</TriggerTime>
+    <ActivationTime>2015-01-25T19:16:04.748911Z</ActivationTime>
+    <TriggerTime>2015-01-25T19:16:04.799999Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -8816,11 +8816,11 @@ while (Program.IsEnabled)
     <ScriptCondition>Program.Setup( () =&gt; {
    Program.AddControlWidget("DaniMail/generic/tablehoraire");
    for( int i=0 ; i&lt;10 ; i++ )
-      Program.AddInputField("Table.Therm." + i.ToString(), "", "Thermostat : Time table "+i.ToString() );
+      Program.AddInputField("Table.Therm." + i.ToString(), "", "Thermostat : Timetable "+i.ToString() );
    for( int i=0 ; i&lt;6 ; i++ )
-      Program.AddInputField("Table.OnOff." + i.ToString(), "", "Switch and light : Time table "+i.ToString() );
+      Program.AddInputField("Table.OnOff." + i.ToString(), "", "Switch and light : Timetable "+i.ToString() );
    for( int i=0 ; i&lt;6 ; i++ )
-      Program.AddInputField("Table.Level." + i.ToString(), "", "Shutter and dimmer : Time table "+i.ToString() );
+      Program.AddInputField("Table.Level." + i.ToString(), "", "Shutter and dimmer : Timetable "+i.ToString() );
 });
 
 return true;</ScriptCondition>
@@ -8838,12 +8838,12 @@ When.WebServiceCallReceived(Program.Module.Domain+"/"+Program.Module.Address+"/T
       case "Level":
         string namePar = parSet[1]+"."+parSet[2]+"."+parSet[3];
         Settings.Parameter(namePar).Value = Program.InputField(namePar).Value;
-        Program.Notify("Time Table","Set " + namePar);
+        Program.Notify("Timetable","Set " + namePar);
         if(parSet[2] == "Therm")
             Settings.Parameter("Schedule.Set").Value = "1" ;
         break;
       default :
-        Program.Notify("Time Table","Error setting " + typeTable);
+        Program.Notify("Timetable","Error setting " + typeTable);
         break;
   }
   return true;
@@ -8867,18 +8867,18 @@ while (Program.IsEnabled)
 }
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>511</Address>
-    <Name>Time tables</Name>
+    <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2015-01-25T19:16:06.050387Z</ActivationTime>
+    <TriggerTime>2015-01-25T19:16:06.097268Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
@@ -9311,32 +9311,36 @@ while (Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>512</Address>
     <Name>Enhanced thermostats</Name>
-    <Description>Time tables based programmable virtual thermostats that can bind to any user specified temperature sensor and switch module.
+    <Description>Timetable based scheduler for thermostats.
+Also implementing virtual thermostas that can bind to any user specified temperature sensor and switch modules.
 </Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime xsi:nil="true" />
+    <ActivationTime>2015-01-25T19:16:22.076122Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.W", "Time table to use for weekend (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.O", "Time table to use for week days (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.F", "Time table to use for holidays (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.S", "Time table to use for special days (0-5)");
-  	Program.AddFeature("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable time table scheduling");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.W", "Timetable to use for weekend");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.O", "Timetable to use for week days");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.F", "Timetable to use for holidays");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.S", "Timetable to use for special days");
+  	Program.AddFeature("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable timetable scheduling");
 });
               
 return true;
 </ScriptCondition>
     <ScriptSource>// CSharp Automation Program Plugin
+#pragma warning disable 0168
+#pragma warning disable 0219
+#pragma warning disable 0414
 
 var jkSolarAltitude = Program.WithName("jkUtils - Solar Altitude");
-string popupTitle = "Time Tables Scheduler";
+string popupTitle = "Timetable Scheduler";
 char typeDay;
 string currentTable="";
 string newTable="";
@@ -9378,7 +9382,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
 
   Modules.WithFeature("TimeTable.Enable").Each((module)=&gt;{
 
-    // if time table is disabled for this module, continue to next module
+    // if timetable is disabled for this module, continue to next module
     if (module.Parameter("TimeTable.Enable").Value == "0") return false;
 
     var tableType = ""; // OnOff
@@ -9412,7 +9416,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       return false;
     }
     typeDay = tabMon[currentTime.Day - 1] ;
-    // HERE We get the time table depends on the kind of day
+    // HERE We get the timetable depends on the kind of day
     newTable = module.Parameter("TimeTable." + typeDay).Value;
     if (newTable.Length != 0)
     {
@@ -9424,7 +9428,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
     }
     else
     {
-      Program.Notify(popupTitle, displayName + " Jour " + typeDay + ". Undefined time table") ;
+      Program.Notify(popupTitle, displayName + " Jour " + typeDay + ". Undefined timetable") ;
       return false;
     }
     if (tabScene.Length == 96)
@@ -9434,7 +9438,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
     }
     else
     {
-      Program.Notify(popupTitle, displayName + " Jour " + typeDay + ", time table length error") ;
+      Program.Notify(popupTitle, displayName + " Jour " + typeDay + ", timetable length error") ;
       return false;
     }
 
@@ -9456,7 +9460,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
         if (module.IsOn) module.Off();
         break;
       default :
-        Program.Notify(popupTitle, displayName + "\nUndefined time table action '" + typeAction + "'") ;
+        Program.Notify(popupTitle, displayName + "\nUndefined timetable action '" + typeAction + "'") ;
         break ;
       }
     }
@@ -9472,7 +9476,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       }
       else
       {
-        Program.Notify(popupTitle, displayName + "\nWrong level found in time table '" + typeAction + "'") ;
+        Program.Notify(popupTitle, displayName + "\nWrong level found in timetable '" + typeAction + "'") ;
       }
     }
     else // Type Thermostat
@@ -9511,7 +9515,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
           break ;
         default :  // Undefined
           temperatureToReach=-1;
-	      Program.Notify(popupTitle, displayName + "\nWrong Action found in time table '" + typeAction + "'") ;
+	      Program.Notify(popupTitle, displayName + "\nWrong Action found in timetable '" + typeAction + "'") ;
           break ;
       }
       if(temperatureToReach != -1)
@@ -9545,54 +9549,54 @@ while (Program.IsEnabled)
   };
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
         <Property>TimeTable.W</Property>
-        <Description>Time table to use for weekend</Description>
+        <Description>Timetable to use for weekend</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
         <Property>TimeTable.O</Property>
-        <Description>Time table to use for week days</Description>
+        <Description>Timetable to use for week days</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
         <Property>TimeTable.F</Property>
-        <Description>Time table to use for holidays</Description>
+        <Description>Timetable to use for holidays</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
         <Property>TimeTable.S</Property>
-        <Description>Time table to use for special days</Description>
+        <Description>Timetable to use for special days</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Light,Switch,Shutter,Dimmer</ForTypes>
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
         <Property>TimeTable.Enable</Property>
-        <Description>Enable time table scheduling</Description>
+        <Description>Enable timetable scheduling</Description>
       </ProgramFeature>
     </Features>
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>514</Address>
-    <Name>Time tables scheduler</Name>
-    <Description>Switch device on/off or set level based on Time Tables widget.
+    <Name>Timetable Scheduler</Name>
+    <Description>Switch device on/off or set level based on Timetable widget.
 Specify a time table number (0-5) or leave fields empty to disable.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2015-01-25T19:16:03.533084Z</ActivationTime>
+    <TriggerTime>2015-01-25T19:16:03.577925Z</TriggerTime>
     <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

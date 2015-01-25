@@ -69,6 +69,10 @@
         "---",
     "therm_off":
         "Arrêt",
+    "therm_fan":
+        "Ventil.",
+    "therm_cool":
+        "Climat.",
     "therm_nofrost":
         "Hors Gel",
     "therm_eco":
@@ -83,6 +87,10 @@
         "Zone : ",
     "tt_timetable":
         "Table Horaire ",
+    "hour_from":
+        "De :  ",
+    "hour_to":
+        "&nbsp;&nbsp;A :  ",
     "control_module_off":
         "Annuler",
     "control_module_on":

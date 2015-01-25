@@ -16,6 +16,18 @@
         <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
+        <Address>Scheduling</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>511</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>510</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
         <Address>Resources on the web</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>

@@ -69,6 +69,10 @@
         "---",
     "therm_off":
         "Stop",
+    "therm_fan":
+        "Fan",
+    "therm_cool":
+        "Cool",
     "therm_nofrost":
         "Avoid Frost",
     "therm_eco":
@@ -83,6 +87,10 @@
         "Switch : ",
     "tt_timetable":
         "Time Table ",
+    "hour_from":
+        "From :  ",
+    "hour_to":
+        "&nbsp;&nbsp;To :  ",
     "control_module_off":
         "Cancel",
     "control_module_on":

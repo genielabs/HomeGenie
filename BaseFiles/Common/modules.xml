@@ -2795,161 +2795,155 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Time tables</Name>
+    <Name>Timetable</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>511</Address>
     <Properties>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.0</Name>
-        <Value />
-        <Description>Switch and light : Table horaire 0</Description>
-        <UpdateTime>2015-01-21T21:46:53.633126Z</UpdateTime>
+        <Name>ConfigureOptions.Table.Level.0</Name>
+        <Value>PU3H9cTJdH65mkLO49SlIRAVxlth1h4TrnF9o6kInUIi98bRukyX+HCfLHkAOAIAEyZrsnC8oZFnrhWpHzUdWBR98hZROWtaINkCFMuGA2BOdGy9qKzur8RUK2/ck2Dq72tIE3qUt1vUWr82MUyFmA==</Value>
+        <Description>Shutter and dimmer : Timetable 0</Description>
+        <UpdateTime>2015-01-25T17:36:44.265049Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.1</Name>
-        <Value />
-        <Description>Switch and light : Table horaire 1</Description>
-        <UpdateTime>2015-01-21T21:46:27.926572Z</UpdateTime>
+        <Name>ConfigureOptions.Table.Level.1</Name>
+        <Value>+/0gakBjZvW6Qq1ojh08irCSyDaevZrVhueOp0VmCgIYgReUBQd9omkVcBIMHae56gd/aqYuErL7elX2fDWYyN/OQqqxFM7WunRr2/aHvBPbyzWCCnhs2PFcJV9XXjaWyHaPUZ7I+0KZtkeomcISFg==</Value>
+        <Description>Shutter and dimmer : Timetable 1</Description>
+        <UpdateTime>2015-01-25T17:36:44.265227Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.2</Name>
+        <Name>ConfigureOptions.Table.Level.2</Name>
         <Value />
-        <Description>Switch and light : Table horaire 2</Description>
-        <UpdateTime>2015-01-21T21:46:53.633307Z</UpdateTime>
+        <Description>Shutter and dimmer : Timetable 2</Description>
+        <UpdateTime>2015-01-25T17:15:01.604646Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.3</Name>
+        <Name>ConfigureOptions.Table.Level.3</Name>
         <Value />
-        <Description>Switch and light : Table horaire 3</Description>
-        <UpdateTime>2015-01-21T21:46:27.926575Z</UpdateTime>
+        <Description>Shutter and dimmer : Timetable 3</Description>
+        <UpdateTime>2015-01-25T17:15:01.604648Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.4</Name>
+        <Name>ConfigureOptions.Table.Level.4</Name>
         <Value />
-        <Description>Switch and light : Table horaire 4</Description>
-        <UpdateTime>2015-01-21T21:46:27.926577Z</UpdateTime>
+        <Description>Shutter and dimmer : Timetable 4</Description>
+        <UpdateTime>2015-01-25T17:15:01.60465Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Light.5</Name>
+        <Name>ConfigureOptions.Table.Level.5</Name>
         <Value />
-        <Description>Switch and light : Table horaire 5</Description>
-        <UpdateTime>2015-01-21T21:46:27.926579Z</UpdateTime>
+        <Description>Shutter and dimmer : Timetable 5</Description>
+        <UpdateTime>2015-01-25T17:15:01.604652Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.0</Name>
-        <Value />
-        <Description>Shutter : Table horaire 0</Description>
-        <UpdateTime>2015-01-21T21:46:53.633489Z</UpdateTime>
+        <Name>ConfigureOptions.Table.OnOff.0</Name>
+        <Value>0HWGnp+LONL6mxnlTqeTGDS5aQK7fdhp0Ar2v4/nLNAe8L6avZH/lE3HtS4lPHEZ65t6XcZ9Bzy9zqlIBjlX1+jsLhliTmfLff0qB1HBAk+AWrv1UujjY93ALs0QORi3ox6a7VF5nsq1qDYzrZo64A==</Value>
+        <Description>Switch and light : Timetable 0</Description>
+        <UpdateTime>2015-01-25T17:36:44.265408Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.1</Name>
+        <Name>ConfigureOptions.Table.OnOff.1</Name>
         <Value />
-        <Description>Shutter : Table horaire 1</Description>
-        <UpdateTime>2015-01-21T21:46:53.633671Z</UpdateTime>
+        <Description>Switch and light : Timetable 1</Description>
+        <UpdateTime>2015-01-25T17:15:01.604626Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.2</Name>
+        <Name>ConfigureOptions.Table.OnOff.2</Name>
         <Value />
-        <Description>Shutter : Table horaire 2</Description>
-        <UpdateTime>2015-01-21T21:46:27.92659Z</UpdateTime>
+        <Description>Switch and light : Timetable 2</Description>
+        <UpdateTime>2015-01-25T17:15:01.604628Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.3</Name>
+        <Name>ConfigureOptions.Table.OnOff.3</Name>
         <Value />
-        <Description>Shutter : Table horaire 3</Description>
-        <UpdateTime>2015-01-21T21:46:27.926592Z</UpdateTime>
+        <Description>Switch and light : Timetable 3</Description>
+        <UpdateTime>2015-01-25T17:15:01.60463Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.4</Name>
+        <Name>ConfigureOptions.Table.OnOff.4</Name>
         <Value />
-        <Description>Shutter : Table horaire 4</Description>
-        <UpdateTime>2015-01-21T21:46:27.926594Z</UpdateTime>
+        <Description>Switch and light : Timetable 4</Description>
+        <UpdateTime>2015-01-25T17:15:01.604633Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.Table.Shutter.5</Name>
+        <Name>ConfigureOptions.Table.OnOff.5</Name>
         <Value />
-        <Description>Shutter : Table horaire 5</Description>
-        <UpdateTime>2015-01-21T21:46:27.926596Z</UpdateTime>
+        <Description>Switch and light : Timetable 5</Description>
+        <UpdateTime>2015-01-25T17:15:01.604635Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.0</Name>
-        <Value />
-        <Description>Thermostat : Table horaire 0</Description>
-        <UpdateTime>2015-01-21T21:46:53.633871Z</UpdateTime>
+        <Value>3MpvDGMs/kvPKCKmuad4NN5spE5QmfgHd0D23ZkFWRcWSjZNbF9noylrOHnE7beP5fvxpRfnm0O7oJy1LEPY1D6o3O7SQDoWzelEPMdK4Qcb2NNJHXfds8SEQ+ny8ESq9QsUxwIz/uYRGAz8vJnLFA==</Value>
+        <Description>Thermostat : Timetable 0</Description>
+        <UpdateTime>2015-01-25T17:36:44.265587Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.1</Name>
-        <Value />
-        <Description>Thermostat : Table horaire 1</Description>
-        <UpdateTime>2015-01-21T21:46:27.926541Z</UpdateTime>
+        <Value>3MpvDGMs/kvPKCKmuad4NMeONyAO1Pl9gXQl8QYpN7egHmQpN69yG2opjA1Vx90BlgHYn1MXSMQYEGbN3DgPrO6AoE0ldeZvi2YhF48hoIxfW1UPcuntV0FOIAXjJcZRxaS9IaT5tuJaaFDr2kIxWg==</Value>
+        <Description>Thermostat : Timetable 1</Description>
+        <UpdateTime>2015-01-25T17:36:44.265767Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.2</Name>
         <Value />
-        <Description>Thermostat : Table horaire 2</Description>
-        <UpdateTime>2015-01-21T21:46:27.926544Z</UpdateTime>
+        <Description>Thermostat : Timetable 2</Description>
+        <UpdateTime>2015-01-25T17:15:01.604594Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.3</Name>
         <Value />
-        <Description>Thermostat : Table horaire 3</Description>
-        <UpdateTime>2015-01-21T21:46:27.926546Z</UpdateTime>
+        <Description>Thermostat : Timetable 3</Description>
+        <UpdateTime>2015-01-25T17:15:01.604597Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.4</Name>
         <Value />
-        <Description>Thermostat : Table horaire 4</Description>
-        <UpdateTime>2015-01-21T21:46:27.926549Z</UpdateTime>
+        <Description>Thermostat : Timetable 4</Description>
+        <UpdateTime>2015-01-25T17:15:01.604599Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.5</Name>
         <Value />
-        <Description>Thermostat : Table horaire 5</Description>
-        <UpdateTime>2015-01-21T21:46:27.926551Z</UpdateTime>
+        <Description>Thermostat : Timetable 5</Description>
+        <UpdateTime>2015-01-25T17:15:01.604602Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.6</Name>
         <Value />
-        <Description>Thermostat : Table horaire 6</Description>
-        <UpdateTime>2015-01-21T21:46:27.926555Z</UpdateTime>
+        <Description>Thermostat : Timetable 6</Description>
+        <UpdateTime>2015-01-25T17:15:01.604605Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.7</Name>
         <Value />
-        <Description>Thermostat : Table horaire 7</Description>
-        <UpdateTime>2015-01-21T21:46:27.926558Z</UpdateTime>
+        <Description>Thermostat : Timetable 7</Description>
+        <UpdateTime>2015-01-25T17:15:01.604608Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.8</Name>
         <Value />
-        <Description>Thermostat : Table horaire 8</Description>
-        <UpdateTime>2015-01-21T21:46:27.92656Z</UpdateTime>
+        <Description>Thermostat : Timetable 8</Description>
+        <UpdateTime>2015-01-25T17:15:01.604611Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Table.Therm.9</Name>
         <Value />
-        <Description>Thermostat : Table horaire 9</Description>
-        <UpdateTime>2015-01-21T21:46:27.926563Z</UpdateTime>
+        <Description>Thermostat : Timetable 9</Description>
+        <UpdateTime>2015-01-25T17:15:01.604615Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
-        <UpdateTime>2015-01-21T21:46:27.927876Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Table Horaire</Name>
-        <Value />
-        <Description />
-        <UpdateTime>2015-01-21T21:46:53.63411Z</UpdateTime>
+        <UpdateTime>2015-01-25T17:15:01.605963Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>511</Value>
         <Description />
-        <UpdateTime>2015-01-21T21:46:53.57981Z</UpdateTime>
+        <UpdateTime>2015-01-25T17:36:44.212007Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
@@ -2995,7 +2989,7 @@
     <RoutingNode />
   </Module>
   <Module>
-    <Name>Time Tables Scheduler</Name>
+    <Name>Timetable Scheduler</Name>
     <Description />
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>

@@ -3,11 +3,13 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
       <File FileName="../HISTORY.TXT" Line="2" Column="1" />
-      <File FileName="../HomeGenie/release_info.xml" Line="7" Column="3" />
+      <File FileName="../HomeGenie/release_info.xml" Line="34" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Switch.cs" line="158" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="Generoso Martello" Email="gene@homegenie.it" Copyright="G-Labs" Company="G-Labs" Trademark="" />
