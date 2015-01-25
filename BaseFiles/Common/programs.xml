@@ -8855,38 +8855,39 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
+    <ScriptCondition>// Code Setup
 Program.Setup(()=&gt;{
-    Program.AddInputField("ThermostatsNumber", "4", "Number of virtual thermostats (Max.8)");
+    Program.AddInputField("ThermostatsNumber", "0", "Number of virtual thermostats (Max.8)");
     int thermsCount = (int)Program.InputField("ThermostatsNumber").DecimalValue;
-    if( thermsCount &gt; 8 )
+    if(thermsCount &gt; 8)
         thermsCount = 8;
-    Program.AddVirtualModules("HomeAutomation.Thermostat", "Thermostat", "DaniMail/generic/thermostats",1,thermsCount);
-    for(int x = 0; x &lt; thermsCount; x++)
+    if(thermsCount != 0) 
     {
-      var module = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
-      if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("ModuleTemperature").Value.Length == 0)) )
+      Program.AddVirtualModules("HomeAutomation.Thermostat", "Thermostat", "DaniMail/generic/thermostats",1,thermsCount);
+      for(int x = 0; x &lt; thermsCount; x++)
       {
-        // Paramètres statiques
-        module.Parameter("ModuleTemperature").Value = "";
-        module.Parameter("SwitchModule1").Value = "";
-        module.Parameter("SwitchModule2").Value = "";
-        module.Parameter("SwitchModule3").Value = "";
-        module.Parameter("Table.W").Value = "0";
-        module.Parameter("Table.O").Value = "1";
-        module.Parameter("Table.F").Value = "2";
-        module.Parameter("Table.S").Value = "3";
-        module.Parameter("Thermostat.SetPoint.NoFrost").Value = "5";
-        module.Parameter("Thermostat.SetPoint.Eco").Value = "16";
-        module.Parameter("Thermostat.SetPoint.Heating").Value = "20";
-        // Pamètres dynamiques
-        module.Parameter("Sensor.Temperature").Value = "";
-        module.Parameter("Sensor.Humidity").Value = "";
-        module.Parameter("Status.Battery").Value = "";
-        module.Parameter("Thermostat.OperatingState").Value = "";
-        module.Parameter("Thermostat.Mode").Value = "Arrêt";
+        var module = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
+        if( (module.Instance == null) || ((module.Instance.Name.Length == 0) &amp;&amp; (module.Parameter("ModuleTemperature").Value.Length == 0)) )
+        {
+          // Paramètres statiques
+          module.Parameter("ModuleTemperature").Value = "";
+          module.Parameter("SwitchModule1").Value = "";
+          module.Parameter("SwitchModule2").Value = "";
+          module.Parameter("SwitchModule3").Value = "";
+          module.Parameter("TimeTable.W").Value = "0";
+          module.Parameter("TimeTable.O").Value = "1";
+          module.Parameter("TimeTable.F").Value = "2";
+          module.Parameter("TimeTable.S").Value = "3";
+          module.Parameter("Thermostat.SetPoint.NoFrost").Value = "5";
+          module.Parameter("Thermostat.SetPoint.Eco").Value = "16";
+          module.Parameter("Thermostat.SetPoint.Heating").Value = "20";
+          // Pamètres dynamiques
+          module.Parameter("Sensor.Temperature").Value = "";
+          module.Parameter("Sensor.Humidity").Value = "";
+          module.Parameter("Status.Battery").Value = "";
+          module.Parameter("Thermostat.OperatingState").Value = "";
+          module.Parameter("Thermostat.Mode").Value = "Arrêt";
+        }
       }
     }
 });
@@ -8922,7 +8923,7 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
   {
     var moduleVirtuel = Modules.InDomain("HomeAutomation.Thermostat").WithAddress((x+1).ToString()).Get();
     
-    if( moduleVirtuel.Instance.Name == "" )
+    if( (moduleVirtuel == null) || (moduleVirtuel.Instance.Name == "") )
     {
         Pause(1) ;
         continue ;
@@ -9046,7 +9047,7 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
             continue;
         }
         typeDay = tabMon[currentTime.Day-1] ;
-        newTable = moduleVirtuel.Parameter("Table."+typeDay).Value;
+        newTable = moduleVirtuel.Parameter("TimeTable."+typeDay).Value;
         if( newTable.Length != 0 )
         {
            if( newTable != currentTable )
@@ -9221,22 +9222,22 @@ When.WebServiceCallReceived("HomeAutomation.Thermostat", (args)=&gt;
            var moduleT = Modules.InDomain("HomeAutomation.Thermostat").WithAddress(thermNumber).Get();
            if( parametre == "W")
            {
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              Program.RaiseEvent(moduleT,"TimeTable."+parametre, reqs[4], "Thermostat");
               holdingMode[nTherm-1] = false;
            }
            if( parametre == "O")
            {
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              Program.RaiseEvent(moduleT,"TimeTable."+parametre, reqs[4], "Thermostat");
               holdingMode[nTherm-1] = false;
            }
            if( parametre == "F")
            {
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              Program.RaiseEvent(moduleT,"TimeTable."+parametre, reqs[4], "Thermostat");
               holdingMode[nTherm-1] = false;
            }
            if( parametre == "S")
            {
-              Program.RaiseEvent(moduleT,"Table."+parametre, reqs[4], "Thermostat");
+              Program.RaiseEvent(moduleT,"TimeTable."+parametre, reqs[4], "Thermostat");
               holdingMode[nTherm-1] = false;
            }
            nTempo=0;
@@ -9292,11 +9293,11 @@ while (Program.IsEnabled)
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.W", "Time table to use for weekend (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.O", "Time table to use for week days (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.F", "Time table to use for holidays (0-5)");
-  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer", "TimeTable.S", "Time table to use for special days (0-5)");
-  	Program.AddFeature("Light,Switch,Shutter,Dimmer", "TimeTable.Enable", "Enable time table scheduling");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.W", "Time table to use for weekend (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.O", "Time table to use for week days (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.F", "Time table to use for holidays (0-5)");
+  	Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.S", "Time table to use for special days (0-5)");
+  	Program.AddFeature("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable time table scheduling");
 });
               
 return true;
@@ -9354,6 +9355,8 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       tableType = "Light"; // OnOff
     else if (module.IsOfDeviceType("Dimmer,Shutter"))
       tableType = "Shutter"; // Level
+    else if (module.IsOfDeviceType("Thermostat"))
+      tableType = "Thermostat"; // Thermostat Set
 
     // No table type for current device type, continue to next
     if (tableType == "")
@@ -9405,7 +9408,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
       Program.Notify(popupTitle, displayName + " Jour " + typeDay + "\ntime table length error") ;
     }
 
-    if (tableType == "Light")
+    if (tableType == "Light") // Type Light, Switch
     {
       switch (typeAction)
       {
@@ -9427,7 +9430,7 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
         break ;
       }
     }
-    else
+    else if(tableType == "Shutter")  // Type Shutter, Dimmer
     {
       double level = 0;
       if (double.TryParse(typeAction.ToString(), out level))
@@ -9441,7 +9444,46 @@ var LightLogicRun = new Func&lt;bool&gt;(()=&gt;{
         Program.Notify(popupTitle, displayName + "\nWrong level found in time table '" + typeAction + "'") ;
       }
     }
-
+    else // Type Thermostat
+    {
+      string actionToDo="";
+      string tempSetPoint="";
+      int temperatureToReach;
+      switch (typeAction)
+      {
+        case 'A' : // Stop
+          actionToDo="Stop";
+          temperatureToReach=0;
+          break ;
+        case 'H' : // No Frost
+          actionToDo="Cool";       // Perhaps have to change this value
+          tempSetPoint="Cooling";  // To change so
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Cool").DecimalValue;
+          break ;
+        case 'E' : // Eco
+          actionToDo="Eco";
+          tempSetPoint="Eco";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Eco").DecimalValue;
+          break ;
+        case 'C' :  // Comfort
+          actionToDo="Heat";
+          tempSetPoint="Heating";
+    	  temperatureToReach=(int)module.Parameter("Thermostat.SetPoint.Heating").DecimalValue;
+          break ;
+        default :  // Undefined
+          temperatureToReach=-1;
+	      Program.Notify(popupTitle, displayName + "\nWrong Action found in time table '" + typeAction + "'") ;
+          break ;
+      }
+      if(temperatureToReach != -1)
+      {
+        // Send the temperature reach Value to the physical thermostat
+        if(temperatureToReach != 0)
+           Program.RaiseEvent(module,"Thermostat.SetPoint."+actionToDo,temperatureToReach.ToString(),"Thermostat");
+        // Send the current action to the physical thermostat
+        Program.RaiseEvent(module,"Thermostat.ModeSet", actionToDo,"Thermostat");
+      }  
+    }
     return false; // do not stop iterating, continue processing next module
   });
 
