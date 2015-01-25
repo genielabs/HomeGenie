@@ -87,6 +87,8 @@
   <div class="settings" style="display: none">
      <span data-ui-label="id_timetable" data-locale-id="tt_timetable">Time table</span>
      <span data-ui-label="id_off" data-locale-id="therm_off">Stop</span>
+     <span data-ui-label="id_fan" data-locale-id="therm_fan">Stop</span>
+     <span data-ui-label="id_cool" data-locale-id="therm_cool">Stop</span>
      <span data-ui-label="id_nofrost" data-locale-id="therm_nofrost">No frost</span>
      <span data-ui-label="id_eco" data-locale-id="therm_eco">Eco</span>
      <span data-ui-label="id_heat" data-locale-id="therm_heat">Comfort</span>
@@ -112,16 +114,18 @@
     </table>
     <table width="100%">
       <tr>
+        <td><div data-locale-id="hour_from">From : </div></td>
         <td>
   	      <select data-ui-field="heure_deb"></select>
         </td>
+        <td><div data-locale-id="hour_to">&nbsp;&nbsp;To : </div></td>
         <td>
           <select data-ui-field="heure_fin"></select>
         </td>
       </tr>
     </table>
   	<div style="margin:10px">
-    	<canvas data-ui-field='choice' width='216' height='30' style="background:#000000;">
+    	<canvas data-ui-field='choice' width='300' height='30' style="background:#000000;">
     	</canvas>
     </div>
     <div align="right" style="margin:10px">
