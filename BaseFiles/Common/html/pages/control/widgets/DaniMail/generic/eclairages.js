@@ -49,16 +49,16 @@
 	          	  if((moduleTH != null) && (moduleTH.Name == 'Tables horaires'))
 		          {
 					  var tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.W');
-					  var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+tabHOR.Value);
+					  var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+tabHOR.Value);
 				      drawTable(controlpopup.find('[id=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+tabHOR.Value,(typeDay=='W'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.O');
-					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+tabHOR.Value);
+					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+tabHOR.Value);
 				      drawTable(controlpopup.find('[id=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+tabHOR.Value,(typeDay=='O'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.F');
-					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+tabHOR.Value);
+					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+tabHOR.Value);
 				      drawTable(controlpopup.find('[id=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+tabHOR.Value,(typeDay=='F'),hourC,minC);
 					  tabHOR = HG.WebApp.Utility.GetModulePropertyByName(module, 'Table.S');
-					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+tabHOR.Value);
+					  tabletherm = HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+tabHOR.Value);
 				      drawTable(controlpopup.find('[id=tableS]')[0].getContext('2d'),tabletherm.Value,'Spécial - Table horaire '+tabHOR.Value,(typeDay=='S'),hourC,minC);
 			      }
 		      }
@@ -73,7 +73,7 @@
 	        controlpopup.find('[id=tableO]').hide();
 	        controlpopup.find('[id=tableF]').hide();
 	        controlpopup.find('[id=tableS]').hide();
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'Off', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'Off', function (data) { });
 	  });
 	  controlpopup.find('[data-ui-field=mode_on]').on('click', function(){
 	        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
@@ -83,7 +83,7 @@
 	        controlpopup.find('[id=tableO]').hide();
 	        controlpopup.find('[id=tableF]').hide();
 	        controlpopup.find('[id=tableS]').hide();
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'On', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'On', function (data) { });
 	  });
 	  controlpopup.find('[data-ui-field=mode_prog]').on('click', function(){
 	        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
@@ -93,7 +93,7 @@
 	        controlpopup.find('[id=tableO]').show();
 	        controlpopup.find('[id=tableF]').show();
 	        controlpopup.find('[id=tableS]').show();
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'Program', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'Program', function (data) { });
 	  });
 	    
 	  controlpopup.find('[id=tableW]').on("click",function(event){
@@ -107,9 +107,9 @@
 	    	    if(_this.index == 2 && newtabHOR > 0)
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
-				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+newtabHOR);
+				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+newtabHOR);
 				drawTable(controlpopup.find('[id=tableW]')[0].getContext('2d'),tabletherm.Value,'Week-End - Table horaire '+newtabHOR,(typeDay=='W'),hourC,minC);
-	            HG.Control.Modules.ServiceCall('Light.SetTable/W',module.Domain,module.Address,newtabHOR,function(data){ });
+	            HG.Control.Modules.ServiceCall('OnOff.SetTable/W',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
 		controlpopup.find('[id=tableO]').on("click",function(event){
@@ -123,9 +123,9 @@
 	    	    if(_this.index == 2 && newtabHOR > 0)
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
-				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+newtabHOR);
+				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+newtabHOR);
 				drawTable(controlpopup.find('[id=tableO]')[0].getContext('2d'),tabletherm.Value,'Ouvré - Table horaire '+newtabHOR,(typeDay=='O'),hourC,minC);
-	            HG.Control.Modules.ServiceCall('Light.SetTable/O',module.Domain,module.Address,newtabHOR,function(data){ });
+	            HG.Control.Modules.ServiceCall('OnOff.SetTable/O',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
 		controlpopup.find('[id=tableF]').on("click",function(event){
@@ -139,9 +139,9 @@
 	    	    if(_this.index == 2 && newtabHOR > 0)
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
-				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+newtabHOR);
+				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+newtabHOR);
 				drawTable(controlpopup.find('[id=tableF]')[0].getContext('2d'),tabletherm.Value,'Férié - Table horaire '+newtabHOR,(typeDay=='F'),hourC,minC);
-	            HG.Control.Modules.ServiceCall('Light.SetTable/F',module.Domain,module.Address,newtabHOR,function(data){ });
+	            HG.Control.Modules.ServiceCall('OnOff.SetTable/F',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
 		controlpopup.find('[id=tableS]').on("click",function(event){
@@ -155,9 +155,9 @@
 	    	    if(_this.index == 2 && newtabHOR > 0)
 	    	    	newtabHOR-- ;
 			    var moduleTH = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation',moduleTabHOR);
-				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.Light.'+newtabHOR);
+				var tabletherm=  HG.WebApp.Utility.GetModulePropertyByName(moduleTH, 'ConfigureOptions.Table.OnOff.'+newtabHOR);
 				drawTable(controlpopup.find('[id=tableS]')[0].getContext('2d'),tabletherm.Value,'Special - Table horaire '+newtabHOR,(typeDay=='S'),hourC,minC);
-	            HG.Control.Modules.ServiceCall('Light.SetTable/S',module.Domain,module.Address,newtabHOR,function(data){ });
+	            HG.Control.Modules.ServiceCall('OnOff.SetTable/S',module.Domain,module.Address,newtabHOR,function(data){ });
 			}
 	    });
 	  });
@@ -177,13 +177,13 @@
 	  	
 	  // light mode buttons events
 	  widget.find('[data-ui-field=off]').on('click', function(){
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'Off', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'Off', function (data) { });
 	  });
 	  widget.find('[data-ui-field=on]').on('click', function(){
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'On', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'On', function (data) { });
 	  });
 	  widget.find('[data-ui-field=prog]').on('click', function(){
-	        HG.Control.Modules.ServiceCall('Light.ModeSet', module.Domain, module.Address, 'Program', function (data) { });
+	        HG.Control.Modules.ServiceCall('OnOff.ModeSet', module.Domain, module.Address, 'Program', function (data) { });
 	  });
 
 	  controlpopup.on('popupbeforeposition', function(evt, ui){
@@ -192,7 +192,7 @@
 	        controlpopup.find('[data-ui-field=mode_on]').removeClass('ui-btn-active');
 	        controlpopup.find('[data-ui-field=mode_prog]').removeClass('ui-btn-active');
 	        // set current buttons' state from module properties 
-	        var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Light.Mode');
+	        var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'OnOff.Mode');
 	        if (thermostatMode != null)
 	        {
 	          controlpopup.find('[id=tableW]').hide();
@@ -238,7 +238,7 @@
     } else watts = '';
 
     // get module operatingstate prop for status text
-    var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Light.OperatingState");
+    var operatingMode = HG.WebApp.Utility.GetModulePropertyByName(module, "OnOff.OperatingState");
     if(operatingMode != null) {
         var updatetime = operatingMode.UpdateTime;
         if(typeof updatetime != 'undefined') {
@@ -267,7 +267,7 @@
     if (operatingMode.Value == 'On')
        this.IconImage = this.IconImage.replace('_off', '_on');
     var displayMode = '---';
-    var lightMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Light.Mode');
+    var lightMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'OnOff.Mode');
     if (lightMode != null) displayMode = lightMode.Value;
     if( displayMode == 'Program' )
     	displayMode = 'Programmé';
