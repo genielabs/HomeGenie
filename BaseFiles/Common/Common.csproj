@@ -4347,6 +4347,12 @@
     </None>
     <None Include="html\pages\control\widgets\jkUtils\SolarAltitude\locales\fr.json" />
     <None Include="html\pages\control\widgets\jkUtils\OpenWeatherMap\locales\fr.json" />
+    <None Include="html\pages\control\widgets\homegenie\generic\energymonitor.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\homegenie\generic\energymonitor.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />

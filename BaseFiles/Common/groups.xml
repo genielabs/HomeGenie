@@ -12,6 +12,10 @@
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
+        <Address>1</Address>
+        <Domain>HomeAutomation.EnergyMonitor</Domain>
+      </ModuleReference>
+      <ModuleReference>
         <Address>Resources on the web</Address>
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
