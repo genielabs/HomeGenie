@@ -31,5 +31,5 @@
   - Added more field icons to sensor widget (pull request #94)
   - Fixed error with Pepper1 db when lang is not an array (pull request #90)
   - Changed widget's files extension from *.json to *.js</ReleaseNote>
-  <ReleaseDate>2015-01-25T20:27:42.0000Z</ReleaseDate>
+  <ReleaseDate>2015-01-25T22:11:57.0000Z</ReleaseDate>
 </ReleaseInfo>
