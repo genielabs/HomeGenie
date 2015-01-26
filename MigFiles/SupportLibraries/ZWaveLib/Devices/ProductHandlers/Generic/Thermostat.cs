@@ -186,7 +186,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatMode, 
-                (byte)Command.BasicGet, 
+                (byte)Command.BasicSet, 
                 (byte)mode
             });
         }
@@ -243,7 +243,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatFanMode, 
-                (byte)Command.BasicGet, 
+                (byte)Command.BasicSet, 
                 (byte)mode
             });
         }

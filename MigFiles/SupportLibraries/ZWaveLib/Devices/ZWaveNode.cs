@@ -366,7 +366,7 @@ namespace ZWaveLib.Devices
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet, 
+                (byte)Command.BasicSet, 
                 byte.Parse(value.ToString())
             });
         }
