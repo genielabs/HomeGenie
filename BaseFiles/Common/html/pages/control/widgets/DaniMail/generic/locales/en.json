@@ -42,7 +42,7 @@
     "cal_work":
         "Work Day",
     "cal_free":
-        "Holliday",
+        "Holiday",
     "cal_spe":
         "Special",
     "mode":
@@ -50,7 +50,7 @@
     "title_therm":
     	"Thermostats",
     "title_light":
-    	"Lights and Switchs",
+    	"Lights and Switches",
     "title_shutter":
     	"Shutters and Dimmers",
     "control_light_on":
