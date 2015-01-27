@@ -1166,7 +1166,7 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   	var cellusername = Program.InputField("CellUsername").Value;
   	var cellpassword = Program.InputField("CellPassword").Value;
   	// ROUTE METERING EVENT TO REMOTE HG CELL
-  	if (!celladdress.Contains("?") &amp;&amp; property.Name == "Status.Level")
+  	if (!celladdress.Contains("?") &amp;&amp; ((property.Name == "Status.Level") || (property.Name == "Status.Battery")))
     {
   		Net
           .WithCredentials(cellusername, cellpassword)

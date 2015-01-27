@@ -32,10 +32,13 @@
     var index,hDeb,mDeb,hFin,mFin,xDeb,xFin,cetat;
     var szCfTrm="ConfigureOptions.Table.Therm.";
     var szImgTrm="pages/control/widgets/homegenie/generic/images/temperature.png";
+    var szBtnTherm='[data-ui-field=btn_page_thermostats]';
     var szCfOnOff="ConfigureOptions.Table.OnOff.";
     var szImgLight="pages/control/widgets/homegenie/generic/images/light_on.png";
+    var szBtnLight='[data-ui-field=btn_page_lights]';
     var szCfLevel="ConfigureOptions.Table.Level.";
     var szImgShut="pages/control/widgets/homegenie/generic/images/shutters_open.png";
+    var szBtnShut='[data-ui-field=btn_page_shutters]';
     var context,choice,numId;
     var _this, etat;
 
@@ -154,7 +157,7 @@
 			_this.initSelectCanvas("ANLHEC",0);
 			_this.context=widget.find('[data-ui-field=therm0]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"0");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -167,7 +170,7 @@
 			_this.initSelectCanvas("ANLHEC",1);
 			_this.context=widget.find('[data-ui-field=therm1]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"1");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -180,7 +183,7 @@
 			_this.initSelectCanvas("ANLHEC",2);
 			_this.context=widget.find('[data-ui-field=therm2]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"2");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -193,7 +196,7 @@
 			_this.initSelectCanvas("ANLHEC",3);
 			_this.context=widget.find('[data-ui-field=therm3]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"3");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -206,7 +209,7 @@
 			_this.initSelectCanvas("ANLHEC",4);
 			_this.context=widget.find('[data-ui-field=therm4]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"4");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -219,7 +222,7 @@
 			_this.initSelectCanvas("ANLHEC",5);
 			_this.context=widget.find('[data-ui-field=therm5]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"5");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -232,7 +235,7 @@
 			_this.initSelectCanvas("ANLHEC",0);
 			_this.context=widget.find('[data-ui-field=therm6]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"6");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"6");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -245,7 +248,7 @@
 			_this.initSelectCanvas("ANLHEC",7);
 			_this.context=widget.find('[data-ui-field=therm7]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"7");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"7");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -258,7 +261,7 @@
 			_this.initSelectCanvas("ANLHEC",8);
 			_this.context=widget.find('[data-ui-field=therm8]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"8");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"8");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -271,7 +274,7 @@
 			_this.initSelectCanvas("ANLHEC",9);
 			_this.context=widget.find('[data-ui-field=therm9]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgTrm);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_therm]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnTherm).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"9");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfTrm+"9");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -284,7 +287,7 @@
 			_this.initSelectCanvas("FRSO",0);
 			_this.context=widget.find('[data-ui-field=light0]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"0");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -297,7 +300,7 @@
 			_this.initSelectCanvas("FRSO",1);
 			_this.context=widget.find('[data-ui-field=light1]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"1");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -310,7 +313,7 @@
 			_this.initSelectCanvas("FRSO",2);
 			_this.context=widget.find('[data-ui-field=light2]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"2");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -323,7 +326,7 @@
 			_this.initSelectCanvas("FRSO",3);
 			_this.context=widget.find('[data-ui-field=light3]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"3");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -336,7 +339,7 @@
 			_this.initSelectCanvas("FRSO",4);
 			_this.context=widget.find('[data-ui-field=light4]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"4");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -349,7 +352,7 @@
 			_this.initSelectCanvas("FRSO",5);
 			_this.context=widget.find('[data-ui-field=light5]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgLight);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_light]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnLight).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"5");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfOnOff+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -362,7 +365,7 @@
   			_this.initSelectCanvas("012345",0);
 			_this.context=widget.find('[data-ui-field=shutter0]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"0");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"0");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -375,7 +378,7 @@
 			_this.initSelectCanvas("012345",1);
 			_this.context=widget.find('[data-ui-field=shutter1]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"1");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"1");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -388,7 +391,7 @@
 			_this.initSelectCanvas("012345",2);
 			_this.context=widget.find('[data-ui-field=shutter2]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"2");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"2");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -401,7 +404,7 @@
 			_this.initSelectCanvas("012345",3);
 			_this.context=widget.find('[data-ui-field=shutter3]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"3");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"3");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -414,7 +417,7 @@
 			_this.initSelectCanvas("012345",4);
 			_this.context=widget.find('[data-ui-field=shutter4]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"4");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"4");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
@@ -427,7 +430,7 @@
 			_this.initSelectCanvas("012345",5);
 			_this.context=widget.find('[data-ui-field=shutter5]')[0].getContext('2d');
 			controlpopup.find('[data-ui-field=icon]').attr('src',szImgShut);
-			controlpopup.find('[data-ui-field=group]').html(widget.find('[data-ui-field=id_title_shut]').html());
+			controlpopup.find('[data-ui-field=group]').html(widget.find(szBtnShut).html());
 	  		controlpopup.find('[data-ui-field=name]').html(_this.TimeTableUI+"5");
 		 	_this.etat=HG.WebApp.Utility.GetModulePropertyByName(module,szCfLevel+"5");
 			if(_this.analyseClick($(cuid),_this.etat.Value,$(this).offset(),event) != -1)
