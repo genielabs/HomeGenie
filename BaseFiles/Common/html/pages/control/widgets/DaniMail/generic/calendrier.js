@@ -24,7 +24,7 @@
           _this.TabLegendUI[i] = widget.find('[data-ui-label=id_'+_this.TabLegendUI[i]+']').html();
         _this.drawLegend(widget.find('[id=canvas_mois]')[0].getContext('2d'));
         _this.drawMois(widget.find('[id=canvas_mois]')[0].getContext('2d'),offsetDay,tabMois,numMonth,newYear);
-    },500);
+    },1000);
    this.Initialized = true;
   },
   

@@ -67,7 +67,7 @@ namespace HomeGenie.Automation
 //# pragma warning disable 0414 // private field assigned but not used.
 
 using System;
-using System.Linq; using System.Collections.Generic; using Newtonsoft.Json.Linq;
+using System.Globalization; using System.Linq; using System.Collections.Generic; using System.Dynamic; using Newtonsoft.Json; using Newtonsoft.Json.Linq;
 
 using HomeGenie;
 using HomeGenie.Service;

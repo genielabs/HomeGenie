@@ -35,12 +35,6 @@
       "basicClass": {
         "@value": "04"
       },
-      "genericClass": {
-        "@value": "a1"
-      },
-      "specificClass": {
-        "@value": "02"
-      },
       "optional": {
         "@value": "true"
       },
@@ -68,7 +62,7 @@
       "inclusionNote": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Pressing and releasing the push button on the side of EZMultiPli."
+          "#text": "Press and release the push button on the EZMultiPli."
         }
       },
       "productName": "EZMultiPli",
@@ -135,7 +129,7 @@
       "assocGroup": [
         {
           "@number": "2",
-          "@maxNodes": "4",
+          "@maxNodes": "1",
           "description": {
             "lang": {
               "@xml:lang": "en",
@@ -149,7 +143,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "LIFELINE"
+              "#text": "LIFELINE\r\nThis group is normally automatically assigned to the Z-Wave system controller when EZMultiPli is added to the Z-Wave network. All Notification reports (motion detection) are sent to the node assigned to this group. Advanced lighting control should be handled by a home-control application based on these reports."
             }
           }
         }
@@ -171,13 +165,37 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "OnTime sets the number of minutes that the lights stay on when motion has not been detected.\r\nA value of 0 is a special mode where the lights are constantly sent a command to turn them on whenever motion is detected. EZMultiPli will NOT turn the lights off in this mode.\r\nRecommended values:\r\n5 min for hallways\r\n20 min for an office environment\r\n60 min for a library, office or other room where someone may be sitting still for a long time"
+              "#text": "OnTime sets the number of minutes that the lights stay on when motion has not been detected.\r\n\r\nRecommended values:\r\n5 min for hallways\r\n20 min for an office environment\r\n60 min for a library, office or other room where someone may be sitting still for a long time"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@unit": "min",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value of 0 is a special mode where the lights are constantly sent a command to turn them on whenever motion is detected. EZMultiPli will NOT turn the lights off in this mode."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "@unit": "min",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Number of minutes that the lights stay on when motion has not been detected."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
-          "@type": "rangemapped",
+          "@type": "range",
           "@size": "1",
           "@default": "ff",
           "name": {
@@ -189,9 +207,43 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "OnLevel is the value sent by the Z-Wave BASIC_SET command to all Group 2 nodes when motion is detected.\r\nA value of 0 will turn the lights off (not recommended).\r\nA value between 1 and 99 will set the dim level to between 1% and 99% (99% is full on).\r\nA value of -1 will turn the light “on” which depends on the device but most will set the dim level to the last dim setting."
+              "#text": "OnLevel is the value sent by the Z-Wave BASIC_SET command to all Group 2 nodes when motion is detected.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@unit": "%",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value of 0 will turn the lights off (not recommended)."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "@unit": "%",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value between 1 and 99 will set the dim level to between 1% and 99% (99% is full on)."
+                }
+              }
+            },
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value of -1 will turn the light “on” which depends on the device but most will set the dim level to the last dim setting."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "3",
@@ -207,9 +259,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "A Luminance report is sent to the system controller every LiteMin minutes if the value has changed by more than 5% since the last reading.\r\nA value of zero turns this mode off. Luminance values can still be obtained at any time by the home-control application in this mode."
+              "#text": "A Luminance report is sent to the system controller every LiteMin minutes if the value has changed by more than 5% since the last reading.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "7f",
+              "@unit": "min",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value between 1 and 127 sets time interval for luminance report."
+                }
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value of zero turns this mode off. Luminance values can still be obtained at any time by the home-control application in this mode."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "4",
@@ -225,9 +300,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "A Temperature report is sent to the system controller every TempMin minutes if the value has changed by more than 0.5F since the last reading.\r\nA value of zero turns this mode off. Temperature values can still be obtained at any time by the home-control application in this mode."
+              "#text": "A Temperature report is sent to the system controller every TempMin minutes if the value has changed by more than 0.5F since the last reading.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value of zero turns this mode off. Temperature values can still be obtained at any time by the home-control application in this mode."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "@unit": "min",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "A value between 1 and 127 sets time interval for temperature report."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "5",
@@ -243,7 +341,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "TempAdj is a twos-complement number that is used to adjust the temperature reading to make it more accurate. The value is in tenths of degree Fahrenheit. The temperature reading can be adjusted up to +12.7F to -12.8F. A value of 1 will adjust the temperature reading by +0.1F. A value of -1 will adjust the temperature by -0.1F. A value of 123 will adjust the temperature by +12.3F."
+              "#text": "TempAdj is a twos-complement number that is used to adjust the temperature reading to make it more accurate. The value is in tenths of degree Fahrenheit. "
+            }
+          },
+          "value": {
+            "@from": "81",
+            "@to": "7f",
+            "@unit": "F",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "The value is in tenths of degree Fahrenheit. The temperature reading can be adjusted up to +12.7F to -12.7F. A value of 1 will adjust the temperature reading by +0.1F. A value of -1 will adjust the temperature by -0.1F. A value of 123 will adjust the temperature by +12.3F."
+              }
             }
           }
         }
@@ -251,7 +360,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/876ed729c63554e90be94dec3bebcc1249d92059.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/392ed7a23b98f969c3860de818acb99d7a129ad1.jpg"
       }
     }
   }

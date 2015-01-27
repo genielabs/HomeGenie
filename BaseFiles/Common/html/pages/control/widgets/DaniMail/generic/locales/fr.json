@@ -47,12 +47,14 @@
         "Spécial",
     "mode":
         "&nbsp;&nbsp;&nbsp;Mode&nbsp;&nbsp;",
+    "mode_value":
+        "Arrêt&nbsp;&nbsp;",
     "title_therm":
     	"Thermostats",
     "title_light":
     	"Lampes et Prises",
     "title_shutter":
-    	"Volets roulants et Variateurs",
+    	"Variateurs et Volets roulants",
     "control_light_on":
         "&nbsp;On&nbsp;",    
     "control_light_off":
@@ -63,8 +65,14 @@
         "Température",
     "therm_setmode":
         "Mode",
+    "therm_updt":
+        "---",
     "therm_off":
         "Arrêt",
+    "therm_fan":
+        "Ventil.",
+    "therm_cool":
+        "Climat.",
     "therm_nofrost":
         "Hors Gel",
     "therm_eco":
@@ -73,16 +81,16 @@
         "Confort",
     "therm_prog":
         "Programmé",
-    "Off":
-        "Arrêt",
-    "NoFrost":
-        "Hors Gel",
-    "Eco":
-        "Eco",
-    "Heat":
-        "Confort",
-    "Program":
-    	"Programmé",
+    "therm_sensor":
+        "Sonde : ",
+    "therm_switch":
+        "Zone : ",
+    "tt_timetable":
+        "Table Horaire ",
+    "hour_from":
+        "De :  ",
+    "hour_to":
+        "&nbsp;&nbsp;A :  ",
     "control_module_off":
         "Annuler",
     "control_module_on":

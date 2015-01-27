@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+25/01/2015 1.00 beta rev 466
+    - Fixed bug in ZWaveLib Basic Set command (bug introduced with latest refactoring)
+    - Added timetable widget to default dashboard
+    - Merged pull request #109 + pull request #110 (DaniMail time table/thermostat)
+    - Improved Energy Monitor app; added Energy Monitor widget to default dashboard
+
+24/01/2015 1.00 beta rev 462
+    - WIP Time Tables 
+    - Fixed error in localization functions when widget has no control popup defined
+    - Updated Pepper1 Z-Wave device database
+
 21/01/2015 1.00 beta rev 461
     - Integrating DaniMail Thermostat, Calendar and Time tables (pull request #101) - WIP
     - Added logic operator "OR" to Wizard script conditions

@@ -36,7 +36,7 @@
     "configure_menu_groups_modules": 
          "Gruppi e Moduli",
     "configure_menu_automation": 
-         "Programmi",
+         "Automazione e Programmi",
     "configure_menu_system": 
          "Impostazioni",
     "configure_menu_maintenance": 
@@ -448,7 +448,7 @@
     "configure_program_options_restart":
         "Riavvia",
     "configure_program_details_implemfeatures":
-        "Caratteristiche Implementate",
+        "Funzionalità Implementate",
     "configure_program_details_configoptions":
         "Opzioni Configurazione",
     "configure_program_details_moduleparams":
@@ -618,7 +618,7 @@
     "configure_module_typemediatransmitter": 
         "Media Transmitter",
     "configure_module_featuresoptions": 
-        "Caratteristiche/Opzioni",
+        "Funzionalità/Opzioni",
     "configure_editprogram_files":
         "File",
     "configure_program_newfile":

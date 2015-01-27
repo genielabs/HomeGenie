@@ -1,0 +1,90 @@
+{
+	"jkUtils.OpenWeatherMap.Weather":
+		 "Temps à ",
+	"jkUtils.OpenWeatherMap.LastUpdate":
+		 "Dernière Mise à jour :&nbsp;",
+	"jkUtils.OpenWeatherMap.Wind.Gust":
+		 "Force :",
+	"jkUtils.OpenWeatherMap.Main.PressureSea":
+		 "Niveau de la mer :",
+	"jkUtils.OpenWeatherMap.Main.PressureGround":
+		 "A terre :",
+	"jkUtils.OpenWeatherMap.Main.Humidity":
+		 "% Humidité",
+	"jkUtils.OpenWeatherMap.Clouds.All":
+		 "% Couverture nuageuse",
+	"jkUtils.OpenWeatherMap.Temp.Tendency":
+		 "Tendance",
+	"jkUtils.OpenWeatherMap.Tendency.Rising":
+		 "En hausse",
+	"jkUtils.OpenWeatherMap.Tendency.Falling":
+		 "En baisse",
+	"jkUtils.OpenWeatherMap.Tendency.Unchanged":
+		 "Inchangé",
+	"jkUtils.OpenWeatherMap.Main.TempMax.Tooltip":
+		 "Temp. Maximum",
+	"jkUtils.OpenWeatherMap.Main.Temp.Tooltip":
+		 "Temp. Actuelle",
+	"jkUtils.OpenWeatherMap.Main.TempMin.Tooltip":
+		 "Temp. Minimum",
+	"jkUtils.OpenWeatherMap.Coord.Lat.Tooltip":
+		 "Lattitude de la ville",
+	"jkUtils.OpenWeatherMap.Coord.Lon.Tooltip":
+		 "Longitude de la ville",
+	"jkUtils.OpenWeatherMap.Wind.Tooltip":
+		 "Vitesse du vent",
+	"jkUtils.OpenWeatherMap.Gust.Tooltip":
+		 "Force du vent",
+	"jkUtils.OpenWeatherMap.Deg.Tooltip":
+		 "Direction du vent",
+	"jkUtils.OpenWeatherMap.Main.Pressure.Tooltip":
+		 "Pression",
+	"jkUtils.OpenWeatherMap.Main.PressureSea.Tooltip":
+		 "Pression niveau de la mer",
+	"jkUtils.OpenWeatherMap.Main.PressureGround.Tooltip":
+		 "Pression à terre",
+	"jkUtils.OpenWeatherMap.Main.Humidity.Tooltip":
+		 "Humidité",
+	"jkUtils.OpenWeatherMap.Clouds.All.Tooltip":
+		 "Pourcentage de couverture nuageuse",
+	"jkUtils.OpenWeatherMap.Rain.H1.Tooltip":
+		 "Quantité de pluie dernière heure",
+	"jkUtils.OpenWeatherMap.Rain.H3.Tooltip":
+		 "Quantité de pluie trois dernières heures",
+	"jkUtils.OpenWeatherMap.Rain.H24.Tooltip":
+		 "Quantité de pluie au cours des dernières 24 heures",
+	"jkUtils.OpenWeatherMap.Rain.Today.Tooltip":
+		 "Quantité de pluie depuis minuit",
+	"jkUtils.OpenWeatherMap.Snow.H1.Tooltip":
+		 "Quantité de neige dernière heure",
+	"jkUtils.OpenWeatherMap.Snow.H3.Tooltip":
+		 "Quantité de neige trois dernières heures",
+	"jkUtils.OpenWeatherMap.Snow.H24.Tooltip":
+		 "Quantité de neige au cours des dernières 24 heures",
+	"jkUtils.OpenWeatherMap.Snow.Today.Tooltip":
+		 "Quantité de neige depuis minuit",
+	"jkUtils.OpenWeatherMap.LastUpdated.Tooltip":
+		 "Affiche la dernière fois qu'une mise à jour a été téléchargée par HomeGenie et que les dernières valeurs de temps ont été mesurés et publiés.",
+	"jkUtils.OpenWeatherMap.LastChecked":
+		 "Dernier test : ",
+	"jkUtils.OpenWeatherMap.LastUpdated":
+		 "Dernière mise à jour : ",
+	"jkUtils.OpenWeatherMap.DataProvidedBy":
+		 "Data reçu de :",
+	"jkUtils.OpenWeatherMap.Wind.N":
+		 "N",
+	"jkUtils.OpenWeatherMap.Wind.NE":
+		 "NE",
+	"jkUtils.OpenWeatherMap.Wind.E":
+		 "E",
+	"jkUtils.OpenWeatherMap.Wind.SE":
+		 "SE",
+	"jkUtils.OpenWeatherMap.Wind.S":
+		 "S",
+	"jkUtils.OpenWeatherMap.Wind.SW":
+		 "SO",
+	"jkUtils.OpenWeatherMap.Wind.W":
+		 "O",
+	"jkUtils.OpenWeatherMap.Wind.NW":
+		 "NO"
+}
