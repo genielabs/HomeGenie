@@ -14,7 +14,7 @@
     "control_groups_and_modules": 
         "Contrôle des<br>Groupes et Modules",
     "bottombar_button_home": 
-        "Retour",
+        "Page d'accueil",
     "configure_program_bbaractions": 
         "Actions",
     "control_macrorecord_discard": 
@@ -22,11 +22,11 @@
     "control_macrorecord_save": 
         "Sauvegarder",
     "analyze_statistics": 
-        "Analyse &<br>Statistiques",
+        "Analyse &amp;<br>Statistiques",
     "analyze_total_watts_hourly": 
         "Consommation totale par tranche horaire",
     "analyze_load_peak_last": 
-        "Pics de consommation durant les quatre dernières heures",
+        "Pics de consommation durant les quatres dernières heures",
     "configure_menu_title": 
         "Configurer",
     "configure_menu_heading": 
@@ -40,9 +40,9 @@
     "configure_menu_system": 
         "Paramètres",
     "configure_menu_maintenance": 
-        "Maintenance et Mise à Jour",
+        "Maintenance et mise à jour",
     "configure_automation_heading": 
-        "<font style='color:gray'>Programme</font><br>Groupes",
+        "<font style='color:gray'>Programmes</font><br>Groupes",
     "configure_group_newgroup": 
         "Nouveau Groupe",
     "configure_group_entergroupname": 
@@ -126,9 +126,9 @@
     "configure_program_options": 
         "Options",
     "configure_program_options_edit": 
-        "Edit",
+        "Modifier",
     "configure_program_options_export": 
-        "Export",
+        "Exporter",
     "configure_program_options_delete": 
         "Supprimer",
     "configure_program_programgroup": 
@@ -148,13 +148,13 @@
     "configure_program_runonceconditiontrue": 
         "Exécuter une fois, lorsque que les conditions sont 'vraies'",
     "configure_program_conditionistrue": 
-        "Temps que les conditions sont 'vraies'",
+        "Tant que les conditions sont 'vraies'",
     "configure_program_conditionisfalse": 
-        "Temps que les conditions sont 'fausses'",
+        "Tant que les conditions sont 'fausses'",
     "configure_program_programconditions": 
         "Conditions",
     "configure_program_conditionadd": 
-        "Ajouter une Condition",
+        "Ajouter une condition",
     "configure_program_selectconditioncontext": 
         "Sélectionner le type de condition",
     "configure_program_wizardback": 
@@ -196,11 +196,11 @@
     "configure_program_savingwait": 
         "Attendez s'il vous plaît...",
     "configure_program_switchtypetitle": 
-        "Changer le Type ?",
+        "Changer le type ?",
     "configure_program_switchtypeprompt": 
-        "Etes-vous sur de vouloir changer le type de Programme ?",
+        "Etes-vous sur de vouloir changer le type de programme ?",
     "configure_program_switchtypeadvice": 
-        "Current program data will be cleared.",
+        "Les données actuelles du programme vont être effacées.",
     "configure_program_switchtypecancel": 
         "Annuler",
     "configure_program_switchtypeconfirm": 
@@ -258,7 +258,7 @@
     "configure_interfaces_camera": 
         "Caméra",
     "configure_interfaces_cameradesc": 
-        "Travaille avec n'importe quelle caméra compatible avec Video4Linux sur <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
+        "Travaille avec n'importe quelle caméra compatible avec Video4Linux sur <b>/dev/video0</b> (x64 Ubuntu et Raspberry Pi seulement).",
     "configure_interfaces_cameraport": 
         "Port de la caméra",
     "configure_interfaces_raspigpio": 
@@ -268,7 +268,7 @@
     "configure_system_lircremotesadd": 
         "Ajouter une télécommande",
     "configure_system_zwaveaddnodeheading": 
-        "Ajout/suppression d'un Module",
+        "Ajout/suppression d'un module",
     "configure_system_zwaveaddnodepressbutton": 
         "Appuyer sur le bouton du module :",
     "configure_system_zwaveaddnodeoperationtimeout": 
@@ -294,17 +294,17 @@
     "configure_system_statistics": 
         "Statistiques",
     "configure_system_databasereset": 
-        "RAZ base de données",
+        "RAZ Database",
     "systemsettings_backuprestores1heading": 
-        "Restaurer la Configuration",
+        "Restaurer la configuration",
     "configure_system_backuprestores1note": 
-        "Selectionner les Programmes à restaurer :",
+        "Selectionner les programmes à restaurer :",
     "systemsettings_backuprestores1cancel": 
         "Annuler",
     "systemsettings_backuprestores1confirm": 
         "Restaurer",
     "configure_system_serviceportheading": 
-        "Port Http",
+        "Port HTTP",
     "configure_system_serviceportchangenote": 
         "Note: après avoir changé le port, HomeGenie doit être redémarré pour prendre en compte les modifications !",
     "configure_system_serviceportcancel": 
@@ -314,9 +314,9 @@
     "securitysettings_password_changecancel": 
         "Annuler",
     "securitysettings_password_changecommit": 
-        "Set",
+        "Changer",
     "maintenance_configuration_factoryreset": 
-        "Reset Usine ?",
+        "RAZ Usine ?",
     "configure_maintenance_resetprompt": 
         "Etes-vous sûr de vouloir réinitialiser la configuration aux valeurs par défauts ?",
     "configure_maintenance_resetwarning": 
@@ -330,17 +330,17 @@
     "home_voicerecognition_voice": 
         "Reconnaissance vocale",
     "configure_menu_scheduler": 
-        "Scheduler",
+        "Planificateur",
     "configure_grouplist": 
         "Liste des Groupes",
     "configure_schedulerservice_title": 
         "Planification<br />de l'événement",
     "configure_scheduler_events": 
-        "Evénements du Scheduler",
+        "Evénements du planifiés",
     "configure_schedulerservice_bottombar_event_add": 
         "Ajouter un événement",
     "configure_schedulerservice_schedulerevent": 
-        "Evénements du Scheduler",
+        "Evénements du planificateur",
     "configure_schedulerservice_itemname": 
         "Nom",
     "configure_schedulerservice_itemcronexp": 
@@ -386,13 +386,13 @@
     "configure_maintenance_configuration_restore": 
         "Restauration",
     "configure_maintenance_configuration_factory_reset": 
-        "Config.Usine",
+        "Config. Usine",
     "configure_system_modulescleanup": 
         "Nettotage des Modules",
     "configure_system_modulesselect": 
         "Sélectionner",
     "configure_system_remotemodules": 
-        "Routine des Modules déportés",
+        "Routine des modules déportés",
     "configure_system_modsroutingreset": 
         "Redémarrer",
     "configure_system_userinterface": 
@@ -408,7 +408,7 @@
     "home_about_concept": 
         "Concept, design, idées et programmation<br /> par G-Labs",
     "home_about_license": 
-        "license",
+        "Licence",
     "home_about_site": 
         "Page d'accueil et Support",
     "home_about_site_docs": 
@@ -436,7 +436,7 @@
     "control_macrorecord_options_pauseduration": 
         "Pause fixe en secondes",
     "update_options_popup_loading": 
-        "Chargement des données du Programme",
+        "Chargement des données du programme",
     "control_widget_notconfigured_title": 
         "Widget non configuré",
     "control_widget_notconfigured_text": 
@@ -448,7 +448,7 @@
     "configure_program_options_restart": 
         "Redémarrage",
     "configure_program_details_implemfeatures": 
-        "Fonctions implémentées",
+        "Fonctions disponibles",
     "configure_program_details_configoptions": 
         "Options de Configuration",
     "configure_program_details_moduleparams": 
@@ -460,11 +460,11 @@
     "configure_group_actionmenu_addmodule": 
         "Ajouter un Module",
     "configure_separator_edit": 
-        "Edition du Séparateur",
+        "Modifier le séparateur",
     "configure_separator_label": 
         "Libellé",
     "configure_separator_placeholder": 
-        "Entrer le libellé",
+        "Saisir le libellé",
     "configure_module_optaddseparator": 
         "Mise à jour",
     "configure_module_parameters": 
@@ -474,15 +474,15 @@
     "configure_module_parameters_save": 
         "Sauvegarder",
     "configure_module_parameters_linktitle": 
-        "Paramètres du Module",
+        "Paramètres du module",
     "configure_automationgroup_add": 
         "Ajouter",
     "configure_programslist_listtitle": 
-        "Liste des Programmes",
+        "Liste des programmes",
     "configure_programslist_tap_disable": 
-        "Cliquer pour DESACTIVER l Programme",
+        "Cliquer pour DESACTIVER le programme",
     "configure_programslist_tap_enable": 
-        "Cliquer pour ACTIVER le Programme",
+        "Cliquer pour ACTIVER le programme",
     "configure_programslist_deletegroup": 
         "Supprimer le Groupe",
     "configure_programslist_importprogram": 
@@ -518,9 +518,9 @@
     "configure_editprogram_saving_succeed": 
         "Sauvegarde effectuée.",
     "configure_editprogram_saving": 
-        "Mise à jour des données du Programme",
+        "Mise à jour des données du programme",
     "configure_editprogram_error_updating": 
-        "Erreur de la mise à jour du Programme !",
+        "Erreur de la mise à jour du programme !",
     "configure_editprogram_compile": 
         "Compiler",
     "systemsettings_selectport_title": 
@@ -528,7 +528,7 @@
     "systemsettings_selectport_placeholder": 
         "(sélectionner un port...)",
     "systemsettings_selectport_text": 
-        "Sélectionnez le port utilisé par cet interface",
+        "Sélectionnez le port utilisé par cette interface",
     "systemsettings_selectport_button": 
         "Fermer",
     "systemsettings_x10housecodes_title": 
@@ -540,11 +540,11 @@
     "configure_interfaces_insteon": 
         "Insteon PLM (2413S/2413U)",
     "configure_interfaces_insteonport": 
-        "Port du Contrôleur",
+        "Port du contrôleur",
     "configure_interfaces_insteonx10housecodes": 
         "Codes utilisés (pour les interfaces X10 seulement)",
     "configure_group_newgroupconfirm": 
-        "Ok",
+        "Ajouter",
     "configure_module_optremoveseparator": 
         "Supprimer",
     "configure_program_selectcommandtarget": 
@@ -556,7 +556,7 @@
     "configure_program_wizardproceed": 
         "Procéder",
     "configure_program_commandcapturetitle": 
-        "Capturer les Commandes",
+        "Capturer les commandes",
     "configure_program_waitingnewcommand": 
         "Attente des nouveaux événements...",
     "configure_program_waitingnewcommandadvice": 
@@ -564,7 +564,7 @@
     "configure_program_capturestop": 
         "Arrêter",
     "configure_program_wizard_editline_title": 
-        "Editer la ligne",
+        "Modifier la ligne",
     "configure_program_wizard_editcmdline_prompt": 
         "Déplacer ou supprimer la ligne <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
     "configure_program_wizard_editconline_prompt": 
@@ -598,15 +598,15 @@
     "configure_system_zwavediscoverytitle": 
         "Découverte ZWave",
     "configure_system_updateinstall": 
-        "Installer la Mise à jour",
+        "Installer la mise à jour",
     "configure_system_deletemodule": 
-        "Supprimer un Module",
+        "Supprimer un module",
     "systemsettings_backuprestores1selectallnone": 
         "Sélectionner Tout / Rien",
     "securitysettings_password_setpassword": 
         "Mot de passe",
     "securitysettings_password_enterpassword": 
-        "Entrer le mot de passe  pour l'utilisateur 'admin'",
+        "Entrer le mot de passe pour l'utilisateur 'admin'",
     "maintenance_configuration_servicerestart": 
         "Redémarrer le Service ?",
     "configure_maintenance_restartprompt": 
@@ -630,9 +630,9 @@
     "configure_program_fileslist_exit":
         "Sortie",
     "configure_program_fileslist_delete":
-        "Delete",
+        "Effacer",
     "configure_program_fileslist_edit":
-        "Edit",
+        "Modifier",
     "configure_program_fileslist_add":
         "Ajouter",
     "configure_program_hasmodification":
