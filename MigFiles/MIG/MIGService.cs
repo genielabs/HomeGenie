@@ -652,10 +652,12 @@ namespace MIG
         {
             object response = "";
             // Dynamic Interface API 
-            var handler = MIG.Interfaces.DynamicInterfaceAPI.Find(command.Domain + "/" + command.NodeId + "/" + command.Command);
+            var registeredApi = command.Domain + "/" + command.NodeId + "/" + command.Command;
+            var handler = MIG.Interfaces.DynamicInterfaceAPI.Find(registeredApi);
             if (handler != null)
             {
-                response = handler(command.GetOption(0) + (command.GetOption(1) != "" ? "/" + command.GetOption(1) : ""));
+                var args = command.OriginalRequest.Substring(registeredApi.Length);
+                response = handler(args);
             }
             else
             {

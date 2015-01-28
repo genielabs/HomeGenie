@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+28/01/2015 1.00 beta rev 469
+    - Added X10 CM15 RF messages decoding
+    - Added new Timetable widget (work in progress)
+    - Deprecated old Timetable widget
+    - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)
+    - Fixed bug in RegisterDynamicApiCall
+
 25/01/2015 1.00 beta rev 466
     - Fixed bug in ZWaveLib Basic Set command (bug introduced with latest refactoring)
     - Added timetable widget to default dashboard

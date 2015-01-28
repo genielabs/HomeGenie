@@ -394,7 +394,33 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inher
     float: left;
 }
 
-
+.ui-datepicker {     
+    font-size: 14pt;
+    height: 300px;
+    width: auto;
+}
+.ui-datepicker-daywe {
+    background: rgb(100, 100, 100);
+    background: rgba(100, 100, 100, 0.5);
+}
+.ui-datepicker-day0 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.5);
+}
+.ui-datepicker-day1 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.5);
+}
+.ui-datepicker-day2 {
+    background: rgb(0, 255, 0);
+    background: rgba(0, 255, 0, 0.5);
+}
+.ui-datepicker-day3 {
+    background: rgb(255, 0, 0);
+    background: rgba(255, 0, 0, 0.5);
+}
+.hg-widget-b .ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default { background: none; }
+ 
 /**** media queries ****/
 
 /** Small Mobile **/

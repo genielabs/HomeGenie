@@ -1,0 +1,44 @@
+{
+    "timetable_group_shutters" : "Avvolgibili e variatori",
+    "timetable_group_thermostats" : "Termostati",
+    "timetable_group_lights" : "Luci e prese",
+    
+    "timetable_edit_table" : "Tabella oraria",
+    "timetable_popup_set" : "Imposta",
+    "timetable_popup_cancel" : "Annulla",
+    "timetable_hour_from" : "dalle ore",
+    "timetable_hour_to" : "alle ore",
+    
+    "timetable_levelmode_off" : "Spegni",
+    "timetable_levelmode_10" : "10%",
+    "timetable_levelmode_20" : "20%",
+    "timetable_levelmode_30" : "30%",
+    "timetable_levelmode_40" : "40%",
+    "timetable_levelmode_50" : "50%",
+    "timetable_levelmode_60" : "60%",
+    "timetable_levelmode_70" : "70%",
+    "timetable_levelmode_80" : "80%",
+    "timetable_levelmode_90" : "90%",
+    "timetable_levelmode_100" : "100%",
+    
+    "timetable_thermmode_off" : "Spegni",
+    "timetable_thermmode_heat" : "Caldo",
+    "timetable_thermmode_cool" : "Fresco",
+    "timetable_thermmode_auto" : "Auto",
+    "timetable_thermmode_fanonly" : "Ventilatore",
+    "timetable_thermmode_furnance" : "Forno",
+    "timetable_thermmode_heateco" : "Caldo Economia",
+    "timetable_thermmode_cooleco" : "Fresco Economia",
+    "timetable_thermmode_away" : "Fuori",
+    
+    "timetable_onoffmode_off" : "Spegni",
+    "timetable_onoffmode_on" : "Accendi",
+    
+    "timetable_calendar_weekend" : "Weekend",
+    "timetable_calendar_workday" : "Feriale",
+    "timetable_calendar_holiday" : "Festivo",
+    "timetable_calendar_special" : "Speciale",
+    
+    "timetable_popup_close" : "Chiudi",
+    "timetable_popup_save" : "Salve"    
+}

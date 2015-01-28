@@ -56,7 +56,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             byte cmdClass = message[7];
             byte cmdType = message[8];
             //
-            if (cmdClass == (byte)CommandClass.Basic && (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicGet))
+            if (cmdClass == (byte)CommandClass.Basic && (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet))
             {
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, (double)message[9]);
                 handled = true;

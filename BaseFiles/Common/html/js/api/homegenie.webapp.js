@@ -772,14 +772,14 @@ HG.WebApp.Locales.FindLocaleString = function(locale, stringid) {
         console.log("WIDGET LOCALIZATION ERROR " + stringid + ' == ' + text + '!!!');
     }
     return text;
-}
-HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId){
+};
+HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId, defaultValue) {
     var retval = null;
     if(typeof(widget.data("Locale")) == "undefined")
-        return retval;
+        return (defaultValue ? defaultValue : null);
     retval = HG.WebApp.Locales.FindLocaleString(widget.data("Locale"), stringId);
-    return retval;
-}
+    return (retval == null && defaultValue ? defaultValue : retval);
+};
 HG.WebApp.Locales.GetLocaleString = function(stringid)
 {
     var retval = null;
@@ -805,7 +805,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid)
         }
     }
     return retval;
-}
+};
 HG.WebApp.Locales.GenerateTemplate = function()
 {
     var localestring = '';
