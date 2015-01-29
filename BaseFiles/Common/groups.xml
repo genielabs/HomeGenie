@@ -8,15 +8,15 @@
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>90</Address>
-        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>1</Address>
         <Domain>HomeAutomation.EnergyMonitor</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>36</Address>
+        <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>90</Address>
         <Domain>HomeAutomation.HomeGenie.Automation</Domain>
       </ModuleReference>
       <ModuleReference>
