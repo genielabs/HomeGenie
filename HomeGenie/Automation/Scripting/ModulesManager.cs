@@ -29,6 +29,7 @@ using HomeGenie.Service;
 using HomeGenie.Data;
 using MIG;
 using HomeGenie.Service.Constants;
+using System.Globalization;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -588,7 +589,7 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 this.command = Commands.Control.CONTROL_LEVEL;
-                this.Set(value.ToString());
+                this.Set(value.ToString(CultureInfo.InvariantCulture));
             }
         }
 

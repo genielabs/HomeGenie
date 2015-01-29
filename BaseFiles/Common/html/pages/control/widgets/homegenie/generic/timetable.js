@@ -17,6 +17,7 @@
   Timebar: null,
   TimebarWidth: 530,
   TimebarHeight: 50,
+  TimebarResolution: 5,
   
   CalendarData: '',
   CurrentGroup: '',
@@ -60,6 +61,8 @@
         ]
     }
   ],
+  
+  CurrentSlice: null,
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
@@ -124,6 +127,19 @@
         var title = HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_edit_table', 'Edit Timetable');
         _this.ControlPopup.find('[data-ui-field=timetable_edit_slot]').html(title + ' #' + (_this.CurrentTableId + 1));
       });
+      this.CalendarPopup.on('popupbeforeposition', function(evt, ui){
+        $.mobile.loading('show', { text: 'Loading Calendar', textVisible: true });
+        $.ajax({
+          url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Calendar.Get/',
+          type: "GET",
+          dataType: "text",
+          success: function (data) {
+             _this.CalendarData = eval(data)[0].ResponseValue;
+             _this.CalendarPopup.find('[data-ui-field=datepicker]').datepicker('refresh');
+            $.mobile.loading('hide');
+          }
+        });
+      });
       this.Widget.find('[data-ui-field=btn-page-shutters]').click(function(el){
         _this.SetTableGroup(0);
       });
@@ -132,7 +148,7 @@
       });
       this.Widget.find('[data-ui-field=btn-page-lights]').click(function(el){
         _this.SetTableGroup(2);
-      });    
+      });
       this.Widget.find('[data-ui-field=btn-table-select]').click(function(el){
         var id = parseInt($(this).html() - 1);
         _this.SetTable(id);
@@ -143,11 +159,27 @@
       this.Widget.find('[data-ui-field=btn-table-calendar]').click(function(el){
         _this.CalendarPopup.popup('open');
       });
+      this.CalendarPopup.find('[data-ui-field=btn_calendar_save]').click(function(el){
+        $.mobile.loading('show', { text: 'Saving Calendar', textVisible: true });
+        HG.Control.Modules.ServiceCall(
+            'Calendar.Set',
+            _this.Module.Domain,
+            _this.Module.Address,
+            _this.CalendarData,
+            function (data) { 
+                _this.CalendarPopup.popup('close');
+                $.mobile.loading('hide');
+            }
+        );
+      });
       this.ControlPopup.find('[data-ui-field=btn_timeslot_set]').click(function(el){
         var slotFrom = _this.ControlPopup.find('[data-ui-field=select_timestart]').val();
         var slotTo = _this.ControlPopup.find('[data-ui-field=select_timeend]').val();
         var slotValue = _this.ControlPopup.find('[data-ui-field=select_action]').val();
+        var slotRangeStart = _this.CurrentSlice.data("index");
+        var slotRangeEnd = slotRangeStart + _this.CurrentSlice.data("length");
         var request = _this.Groups[_this.CurrentGroup].Table + '.' + _this.CurrentTableId + '/' + slotFrom + '/' + slotTo + '/' + slotValue;
+        request += '/' + slotRangeStart + '/' + slotRangeEnd;
         $.mobile.loading('show', { text: 'Saving table', textVisible: true });
         HG.Control.Modules.ServiceCall(
             'Timetable.Set',
@@ -242,15 +274,17 @@
     var selectEnd = this.ControlPopup.find('[data-ui-field=select_timeend]');
     selectStart.empty();
     selectEnd.empty();
-    for (var i = 0; i <= length; i++)
+    var tableLength = 24 * 60 / this.TimebarResolution;
+    var sliceSize = (60 / this.TimebarResolution);
+    for (var i = 0; i <= tableLength; i++)
     {
-      var hour = Math.floor((start + i) / 4); // 15 minutes * 4 slices = 1 hour
-      var minute = (((start + i) / 4) - hour) * 60;
+      var hour = Math.floor(i / sliceSize);
+      var minute = Math.round(((i / sliceSize) - hour) * 60);
       if (hour.toString().length == 1) hour = '0' + hour;
       if (minute.toString().length == 1) minute = '0' + minute;
       var displayTime = hour + ':' + minute;
-      selectStart.append('<option value="' + (start + i) + '">' + displayTime + '</option>');
-      selectEnd.append('<option value="' + (start + i) + '"' + (i == length ? ' selected' : '') + '>' + displayTime + '</option>');
+      selectStart.append('<option value="' + i + '"' + (i == start ? ' selected' : '') + '>' + displayTime + '</option>');
+      selectEnd.append('<option value="' + i + '"' + (i == (start + length) ? ' selected' : '') + '>' + displayTime + '</option>');
     }
     selectStart.selectmenu('refresh', true);
     selectEnd.selectmenu('refresh', true);
@@ -262,20 +296,23 @@
     var _this = this;
     _this.TimetablePaper.clear();
     _this.TimetablePaper.rect(0, 0, this.TimebarWidth, this.TimebarHeight, 0).attr({fill: "#000", stroke: "none"});
-    while (timetable.length < 96) timetable += ' ';
+    var tableLength = 24 * 60 / this.TimebarResolution;
+    var sliceFactor = (60 / this.TimebarResolution);
+    while (timetable.length < tableLength) timetable += ' ';
     var nb = 0, x = 0, y = 0, startIndex = 0;
     var stepSize = (_this.TimebarWidth / timetable.length);
-    for (var i = 0, c = timetable.length; i < 96; i++)
+    for (var i = 0, c = timetable.length; i < tableLength; i++)
     {
       nb++;
-      if ((i == 95) || (timetable[i + 1] != timetable[i])) 
+      if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
       {
-        var rect = _this.TimetablePaper.rect(x, y + 14, (nb * stepSize) - 1, _this.TimebarHeight - 15, 0).attr({ 'fill': '90-#455-' + _this.GetTableAction(timetable[i]).color , stroke: 'none' })
+        var rect = _this.TimetablePaper.rect(x, y + 14, (nb * stepSize) - 1, _this.TimebarHeight - 15).attr({ 'fill': '90-#455-' + _this.GetTableAction(timetable[i]).color, 'stroke': '#fff', 'stroke-width': '0.0' })
         .mouseover(function(e){
           this.attr({ 'stroke': '#5f5', 'stroke-width': '2', 'stroke-opacity' : 0.7 });
+          _this.CurrentSlice = this;
         })
         .mouseout(function(e){
-          this.attr({ 'stroke': 'none' });
+          this.attr({ 'stroke': '#fff', 'stroke-width': '0.0' });
         })
         .click(function(e){
           _this.EditTimetable(this.data('index'), this.data('length'), this.data('action'));
@@ -288,10 +325,10 @@
         nb = 0;
         startIndex = i + 1;
       }
-      if (i % 4 == 0)
+      if (i % sliceFactor == 0)
       {
-        this.TimetablePaper.text(((i / 4) * (4 * stepSize)) + 10, 7, (i / 4).toString()).attr({ fill: '#fff' });
-        this.TimetablePaper.rect(((i / 4) * (4 * stepSize)) + (stepSize * 4), 0, 2, 16, 0).attr({ fill: '#99f' });
+        this.TimetablePaper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 7, (i / sliceFactor).toString()).attr({ fill: '#fff' });
+        this.TimetablePaper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
       }
     }    
     

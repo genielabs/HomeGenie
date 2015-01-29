@@ -2,7 +2,7 @@
 
   <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal">
     
-    <img src="images/scheduler.png" align="left" height="40">
+    <img src="images/scheduler.png" align="left" height="38" vspace="2">
     <div data-role="navbar" style="position:absolute;width:480px;top:6px;margin-left:45px">
         <ul>
             <li><a data-ui-field="btn-page-shutters" class="ui-btn-active" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" data-ajax="false" data-locale-id="timetable_group_shutters">Shutters and dimmers</a></li>
@@ -13,7 +13,7 @@
 
   </div>
 
-  <div data-ui-field="content" align="center" style="margin-top:2px;margin-bottom:6px;">
+  <div data-ui-field="content" align="center" style="margin-top:2px;padding-bottom:7px;">
     <div data-ui-field="description" align="left" style="margin-left:5px;font-weight:bold">Timetable #1</div>
     <div data-ui-field="timebar" style="border-top:1px solid lightgray;border-bottom:1px solid lightgray;width:530px;height:50px;margin-top:4px"></div>
     <div class="ui-grid-a">
@@ -41,14 +41,13 @@
   </div>
 
 
-  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="center">
+  <div class="ui-footer ui-bar-inherit hg-widget-footer" align="center" style="display:none">
     <div data-ui-field="status" style="font-size:11pt;display: table-cell;">&nbsp;</div>
   </div>
 
 </div>
 
-<div class="hg-popup-a" data-ui-field="controlpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div class="hg-popup-a" data-ui-field="controlpopup" data-dismissible="false" data-position-to="window" data-transition="pop" data-overlay-theme="b">
   <div class="ui-corner-top" data-role="header">
     <h2 data-ui-field="timetable_edit_slot">Edit Timetable #1</h2>
   </div>
@@ -82,18 +81,17 @@
 
   <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
     <div class="ui-block-a">
-      <a data-locale-id="timetable_popup_cancel" class="ui-btn ui-corner-all" style="width:50%" href="#" data-rel="back">Cancel</a>
+      <a data-locale-id="timetable_popup_cancel" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" style="width:50%" href="#" data-rel="back">Cancel</a>
     </div>
     <div class="ui-block-b">
-      <a data-locale-id="timetable_popup_set" data-ui-field="btn_timeslot_set" class="ui-btn ui-corner-all" style="width:50%" href="#">Set</a>
+      <a data-locale-id="timetable_popup_set" data-ui-field="btn_timeslot_set" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" style="width:50%" href="#">Set</a>
     </div>
   </div>
   
 </div>
 
 
-<div class="hg-popup-a" data-ui-field="helppopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
-  <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+<div class="hg-popup-a" data-ui-field="helppopup" data-position-to="window" data-dismissible="false" data-transition="pop" data-overlay-theme="b">
   <div class="ui-corner-top" data-role="header">
     <h2 data-ui-field="timetable_edit_slot">Timetable Help</h2>
   </div>
@@ -106,16 +104,16 @@ text text text text text text text text
 
   <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
     <div class="ui-block-a">
+      <a data-locale-id="timetable_popup_close" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" style="width:50%" href="#" data-rel="back">Close</a>
     </div>
     <div class="ui-block-b">
-      <a data-locale-id="timetable_popup_close" class="ui-btn ui-corner-all" style="width:50%" href="#" data-rel="back">Close</a>
     </div>
   </div>
   
 </div>
 
 
-<div class="hg-popup-a" data-ui-field="calendarpopup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+<div class="hg-popup-a" data-ui-field="calendarpopup" data-position-to="window" data-dismissible="false" data-transition="pop" data-overlay-theme="b">
   <!--a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a-->
   <div class="ui-corner-top" data-role="header">
     <h2 data-ui-field="timetable_calendar_title">Timetable Calendar</h2>
@@ -135,10 +133,10 @@ text text text text text text text text
 
   <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
     <div class="ui-block-a">
-      <a data-locale-id="timetable_popup_cancel" class="ui-btn ui-corner-all" style="width:50%" href="#" data-rel="back">Cancel</a>
+      <a data-locale-id="timetable_popup_cancel" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" style="width:50%" href="#" data-rel="back">Cancel</a>
     </div>
     <div class="ui-block-b">
-      <a data-locale-id="timetable_popup_save" class="ui-btn ui-corner-all" style="width:50%" href="#">Save</a>
+      <a data-locale-id="timetable_popup_save" data-ui-field="btn_calendar_save" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" style="width:50%" href="#">Save</a>
     </div>
   </div>
   

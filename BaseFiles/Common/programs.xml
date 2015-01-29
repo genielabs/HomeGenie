@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:19.839488Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:37.225627Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -230,8 +230,8 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
         	break;
         case "Control.Level":
         	if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
-    	    bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString() + " }");
-            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(), "Hue Light");
+    	    bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture), "Hue Light");
         	break;
 		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
         case "Control.ColorHsb":
@@ -239,11 +239,11 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt;
         	double transition = 5;
         	if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
     	    bridgeapicall(lightnumber, "{ \"on\" : true" + 
-                        ", \"hue\" : " + (int)(double.Parse(values[0], System.Globalization.CultureInfo.InvariantCulture) * 65536) + 
-                        ", \"sat\" : " + (int)(double.Parse(values[1], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
-                        ", \"bri\" : " + (int)(double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture) * 255) + 
+                        ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) + 
+                        ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
+                        ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
 						", \"transitiontime\" : " + transition.ToString() +  "}");
-            Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], System.Globalization.CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+            Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
             Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
         	break; 
         // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
@@ -278,7 +278,7 @@ In order for this to work, you must register "homegenie" username
 (default is "newdeveloper") with your Philips Hue Bridge first.
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
-    <ActivationTime>2015-01-28T16:13:11.380087Z</ActivationTime>
+    <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -425,7 +425,7 @@ It can be used for "Sunrise/Sunset" feature.
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-28T16:12:01.643147Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:12:01.666018Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:38.224817Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -504,7 +504,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:21.335006Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:38.726106Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1247,7 +1247,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:21.840093Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:39.227264Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1302,7 +1302,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:22.33826Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:39.726582Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1597,7 +1597,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:22.84546Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:40.231868Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1676,7 +1676,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:23.341458Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:40.728371Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1746,7 +1746,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:23.841027Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:41.228618Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2020,7 +2020,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:24.342142Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:41.731352Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2386,7 +2386,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:25.347433Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:42.733837Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2488,7 +2488,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:25.85511Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:43.237501Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2642,7 +2642,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:26.341871Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:43.732488Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2906,7 +2906,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:26.850584Z</TriggerTime>
+    <TriggerTime>2015-01-29T12:51:44.237068Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8590,49 +8590,278 @@ using (var display = new Hd44780LcdConnection(settings, configuration.Pins))
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
-   Program.AddControlWidget("homegenie/generic/timetable");
+  Program.AddControlWidget("homegenie/generic/timetable");
+  Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Weekend", "Timetable to use for weekend");
+  Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Workday", "Timetable to use for workday");
+  Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Holiday", "Timetable to use for holiday");
+  Program.AddFeatureTextInput("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Special", "Timetable to use for special day");
+  Program.AddFeature("Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable Timetable scheduling");
+  // Initialize Calendar if not already defined
+  var calendarSettings = Settings.Parameter("Timetable.Calendar.Year");
+  while (calendarSettings.Value.Length &lt; 366) calendarSettings.Value += '0';
+  if (calendarSettings.Value[0] == '0')
+    calendarSettings.Value = "2" + calendarSettings.Value.Substring(1); // first of the year marked as holiday (2)
 });
 return true;</ScriptCondition>
-    <ScriptSource>When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args)=&gt;{
+    <ScriptSource>var timeResolution = 5d;
+var tableLength = (int)((24 * 60) / timeResolution);
+var tablePrefix = "Timetable.Table.";
+var calendarTableSettings = "Timetable.Calendar.Year";
+var timetableModules = Modules.WithFeature("TimeTable.Enable");
+
+var GetTableSettings = new Func&lt;string, ModuleParameter&gt;((table)=&gt;{
+  var settingPath = tablePrefix + table;
+  var setting = Settings.Parameter(settingPath);
+  while (setting.Value.Length &lt; tableLength) setting.Value += '0';
+  setting.Value = setting.Value.Substring(0, tableLength);
+  return setting;
+});
+
+var GetTableSliceAction = new Func&lt;string, DateTime, ExpandoObject&gt;((table, date)=&gt;{
+  var sliceIndex = (int)Math.Floor((date - DateTime.Today).TotalMinutes / timeResolution);
+  var previous = (sliceIndex == 0 ? (tableLength - 1) : sliceIndex - 1);
+  dynamic action = new ExpandoObject();
+  action.Previous = table[previous];
+  action.Value = table[sliceIndex];
+  action.Index = sliceIndex;
+  return action;
+});
+
+var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module, tableType, action) =&gt;{
+  switch (tableType)  
+  {
+    case "OnOff":
+      if (action.Value == '1' &amp;&amp; action.Previous == '0' &amp;&amp; module.IsOff)
+      {
+        module.On();
+      }
+      else if (action.Value == '0' &amp;&amp; action.Previous == '1' &amp;&amp; module.IsOn)
+      {
+        module.Off();
+      }
+      break;
+	case "Level":
+      // Level values are '0' = Off, '1' = 10%, '2' = 20%, ..., '9' = 90%, 'A' = 100%
+      var level = ((int)action.Value - 48);
+      if (action.Value == 'A') level = 10;
+      if (action.Value != '0' &amp;&amp; action.Previous == '0' &amp;&amp; module.IsOff)
+      {
+        module.Level = level * 10;
+      }
+      else if (action.Value == '0' &amp;&amp; action.Previous != '0' &amp;&amp; module.IsOn)
+      {
+        module.Off();
+      }
+      break;
+    case "Therm":
+      var command = module.Command("Thermostat.ModeSet");
+      if (action.Value != action.Previous == '0')
+      switch ((char)action.Value)
+      {
+        case '0':
+          command.Execute("Off");
+          break;
+        case '1':
+          command.Execute("Heat");
+          break;
+        case '2':
+          command.Execute("Cool");
+          break;
+        case '3':
+          command.Execute("Auto");
+          break;
+        case '4':
+          command.Execute("FanOnly");
+          break;
+        case '5':
+          command.Execute("Furnance");
+          break;
+        case '6':
+          command.Execute("HeatEconomy");
+          break;
+        case '7':
+          command.Execute("CoolEconomy");
+          break;
+        case '8':
+          command.Execute("Away");
+          break;
+      }
+      break;
+  }
+  return true;
+});
+
+When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args)=&gt;{
   var request = args.ToString().Split('/');
   var response = "ERROR";
   var command = request[2];
-  var settingPath = "Timetable.Table." + request[3];
-  var setting = Settings.Parameter(settingPath);
-  while (setting.Value.Length &lt; 96) setting.Value += '0';
-  setting.Value = setting.Value.Substring(0, 96);
+  ModuleParameter setting = null;
   switch (command)
   {
+    case "Calendar.Get":
+      setting = Settings.Parameter(calendarTableSettings);
+      response = setting.Value;
+      break;
+    case "Calendar.Set":
+      setting = Settings.Parameter(calendarTableSettings);
+      setting.Value = request[3];
+      break;
     case "Timetable.Set":
+      setting = GetTableSettings(request[3]);
       var slotFrom = int.Parse(request[4]);
       var slotTo = int.Parse(request[5]);
       var slotValue = request[6];
+      var slotRangeStart = int.Parse(request[7]);
+      var slotRangeEnd = int.Parse(request[8]);
       var newValue = new System.Text.StringBuilder(setting.Value);
       newValue.Remove(slotFrom, slotTo - slotFrom);
       newValue.Insert(slotFrom, new String(slotValue.ToString()[0], slotTo - slotFrom));
+      if (slotRangeStart &lt; slotFrom)
+      {
+        newValue.Remove(slotRangeStart, slotFrom - slotRangeStart);
+        newValue.Insert(slotRangeStart, new String('0', slotFrom - slotRangeStart));
+      }
+      if (slotRangeEnd &gt; slotTo)
+      {
+        newValue.Remove(slotTo, slotRangeEnd - slotTo);
+        newValue.Insert(slotTo, new String('0', slotRangeEnd - slotTo));
+      }
       setting.Value = newValue.ToString();
-   	  response = "OK";
+      response = "OK";
       break;
     case "Timetable.Get":
+      setting = GetTableSettings(request[3]);
       response = setting.Value;
       break;
   }
   return "[{ 'ResponseValue': '" + response + "' }]";
 });
 
-Program.GoBackground();
+// Timetable control loop
+while (Program.IsEnabled)
+{
+  timetableModules.Each((module)=&gt;{
+
+    // determine table type
+    var tableType = "OnOff";
+    if (module.IsOfDeviceType("Shutter,Dimmer"))
+    {
+      tableType = "Level";
+    }
+    else if (module.IsOfDeviceType("Thermostat"))
+    {
+      tableType = "Therm";
+    }
+
+    // calculate current day of year as interval from 0 to 365 (non-leap year normalized)
+    var todayDate = DateTime.Now;
+    var dayIndex = todayDate.DayOfYear - 1;
+    // normalize if not leap year
+    if (!DateTime.IsLeapYear(todayDate.Year) &amp;&amp; todayDate.Month &gt; 2) dayIndex++;
+    var isWeekend = (todayDate.DayOfWeek == DayOfWeek.Saturday || todayDate.DayOfWeek == DayOfWeek.Sunday);
+
+    // Get day type from Calendar (Weekday, Weekend, Holiday, Special)
+    // and select Timetable table to be used
+    var tableIndex = 0d; // 0 stand for not used, accepted values are 1 to 10
+    bool isHoliday = false, isWorkday = false, isSpecial = false;
+    var calendar = Settings.Parameter(calendarTableSettings);
+    var dayType = calendar.Value[dayIndex];
+    switch (dayType)
+    {
+      case '0':
+        if (!isWeekend) isWorkday = true;
+        break;
+      case '1':
+        isWorkday = true;
+        break;
+      case '2':
+        isHoliday = true;
+        break;
+      case '3':
+        isSpecial = true;
+        break;
+    }
+    if (isWorkday) 
+    {
+      tableIndex = module.Parameter("TimeTable.Workday").DecimalValue;
+    }
+    else if (isHoliday) 
+    {
+      tableIndex = module.Parameter("TimeTable.Holiday").DecimalValue;
+    }
+    else if (isSpecial) 
+    {
+      tableIndex = module.Parameter("TimeTable.Special").DecimalValue;
+    }
+    else if (isWeekend) 
+    {
+      tableIndex = module.Parameter("TimeTable.Weekend").DecimalValue;
+    }
+
+    // Perform action on current module
+    if (tableIndex &gt; 0)
+    {
+      var timetable = GetTableSettings(tableType + "." + (tableIndex - 1)); // tables are stored as zero normalized indexes
+      var action = GetTableSliceAction(timetable.Value, todayDate);
+      PerformAction(module, tableType, action);
+    }
+
+    return false; // do not stop iterating, continue processing next module
+  });
+  
+  // Pause untile next slice of time of "timeResolution" size
+  var nextCheck = (Math.Floor(DateTime.Now.Minute / timeResolution) + 1) * timeResolution;
+  var pause = ((nextCheck - DateTime.Now.Minute) * 60) - DateTime.Now.Second;
+  Pause(pause);
+}
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>true</IsRunning>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Weekend</Property>
+        <Description>Timetable to use for weekend</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Workday</Property>
+        <Description>Timetable to use for workday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Holiday</Property>
+        <Description>Timetable to use for holiday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Special</Property>
+        <Description>Timetable to use for special day</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable Timetable scheduling</Description>
+      </ProgramFeature>
+    </Features>
     <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>36</Address>
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-28T15:34:17.195717Z</ActivationTime>
-    <TriggerTime>2015-01-28T16:08:27.858848Z</TriggerTime>
+    <ActivationTime>2015-01-29T12:52:28.010432Z</ActivationTime>
+    <TriggerTime>2015-01-29T12:52:28.032395Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
