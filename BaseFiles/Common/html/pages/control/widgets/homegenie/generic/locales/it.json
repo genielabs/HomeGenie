@@ -26,7 +26,7 @@
     "timetable_thermmode_cool" : "Fresco",
     "timetable_thermmode_auto" : "Auto",
     "timetable_thermmode_fanonly" : "Ventilatore",
-    "timetable_thermmode_furnance" : "Forno",
+    "timetable_thermmode_autochangeover" : "Commutazione Autom.",
     "timetable_thermmode_heateco" : "Caldo Economia",
     "timetable_thermmode_cooleco" : "Fresco Economia",
     "timetable_thermmode_away" : "Fuori",

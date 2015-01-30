@@ -26,7 +26,7 @@
     "timetable_thermmode_cool" : "Cool",
     "timetable_thermmode_auto" : "Auto",
     "timetable_thermmode_fanonly" : "Fan Only",
-    "timetable_thermmode_furnance" : "Furnance",
+    "timetable_thermmode_autochangeover" : "Auto Changeover",
     "timetable_thermmode_heateco" : "Heat Economy",
     "timetable_thermmode_cooleco" : "Cool Economy",
     "timetable_thermmode_away" : "Away",
