@@ -27,30 +27,30 @@
         'Table': 'Level', 
         'Actions': [
             { id: '0', localeId: 'timetable_levelmode_off', description: 'Off', color: '#222' },
-            { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#440' },
-            { id: '2', localeId: 'timetable_levelmode_20', description: '20%', color: '#660' },
-            { id: '3', localeId: 'timetable_levelmode_30', description: '30%', color: '#770' },
-            { id: '4', localeId: 'timetable_levelmode_40', description: '40%', color: '#990' },
-            { id: '5', localeId: 'timetable_levelmode_50', description: '50%', color: '#AA0' },
-            { id: '6', localeId: 'timetable_levelmode_60', description: '60%', color: '#BB0' },
-            { id: '7', localeId: 'timetable_levelmode_70', description: '70%', color: '#CC0' },
-            { id: '8', localeId: 'timetable_levelmode_80', description: '80%', color: '#DD0' },
-            { id: '9', localeId: 'timetable_levelmode_90', description: '90%', color: '#EE0' },
-            { id: 'A', localeId: 'timetable_levelmode_100', description: '100%', color: '#FF0' }
+            { id: '1', localeId: 'timetable_levelmode_10', description: '10%', color: '#663' },
+            { id: '2', localeId: 'timetable_levelmode_20', description: '20%', color: '#773' },
+            { id: '3', localeId: 'timetable_levelmode_30', description: '30%', color: '#884' },
+            { id: '4', localeId: 'timetable_levelmode_40', description: '40%', color: '#994' },
+            { id: '5', localeId: 'timetable_levelmode_50', description: '50%', color: '#AA4' },
+            { id: '6', localeId: 'timetable_levelmode_60', description: '60%', color: '#BB5' },
+            { id: '7', localeId: 'timetable_levelmode_70', description: '70%', color: '#CC5' },
+            { id: '8', localeId: 'timetable_levelmode_80', description: '80%', color: '#DD6' },
+            { id: '9', localeId: 'timetable_levelmode_90', description: '90%', color: '#EE7' },
+            { id: 'A', localeId: 'timetable_levelmode_100', description: '100%', color: '#FF8' }
         ]
     },
     {
         'Table': 'Therm',
         'Actions': [ 
             { id: '0', localeId: 'timetable_thermmode_off', description: 'Off', color: '#222' },
-            { id: '1', localeId: 'timetable_thermmode_heat', description: 'Heat', color: '#900' },
-            { id: '2', localeId: 'timetable_thermmode_cool', description: 'Cool', color: '#55F' },
-            { id: '3', localeId: 'timetable_thermmode_auto', description: 'Auto', color: '#AA0' },
-            { id: '4', localeId: 'timetable_thermmode_fanonly', description: 'Fan Only', color: '#AAA' },
-            { id: '5', localeId: 'timetable_thermmode_furnance', description: 'Furnance', color: '#F00' },
-            { id: '6', localeId: 'timetable_thermmode_heateco', description: 'Heat Economy', color: '#A60' },
-            { id: '7', localeId: 'timetable_thermmode_cooleco', description: 'Cool Economy', color: '#06A' },
-            { id: '8', localeId: 'timetable_thermmode_away', description: 'Away', color: '#0AA' }
+            { id: '1', localeId: 'timetable_thermmode_heat', description: 'Heat', color: '#E33' },
+            { id: '2', localeId: 'timetable_thermmode_cool', description: 'Cool', color: '#77F' },
+            { id: '3', localeId: 'timetable_thermmode_auto', description: 'Auto', color: '#493' },
+            { id: '4', localeId: 'timetable_thermmode_fanonly', description: 'Fan Only', color: '#8A8' },
+            { id: '5', localeId: 'timetable_thermmode_autochangeover', description: 'Auto Changeover', color: '#A6F' },
+            { id: '6', localeId: 'timetable_thermmode_heateco', description: 'Heat Economy', color: '#B55' },
+            { id: '7', localeId: 'timetable_thermmode_cooleco', description: 'Cool Economy', color: '#66A' },
+            { id: '8', localeId: 'timetable_thermmode_away', description: 'Away', color: '#CCC' }
         ]
     },
     {
@@ -172,6 +172,10 @@
             }
         );
       });
+      this.ControlPopup.find('[data-ui-field=select_action]').change(function() {
+        var color = $(this).find('option:selected').attr('data-option-color');
+        _this.ControlPopup.find('[data-ui-field=current_action_color]').css('background', color);
+      });
       this.ControlPopup.find('[data-ui-field=btn_timeslot_set]').click(function(el){
         var slotFrom = _this.ControlPopup.find('[data-ui-field=select_timestart]').val();
         var slotTo = _this.ControlPopup.find('[data-ui-field=select_timeend]').val();
@@ -250,7 +254,7 @@
     for (var i = 0; i < this.Groups[id].Actions.length; i++)
     {
         var title = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, this.Groups[id].Actions[i].localeId, this.Groups[id].Actions[i].description);
-        actions.append('<option value="' + this.Groups[id].Actions[i].id + '">' + title + '</option>');
+        actions.append('<option value="' + this.Groups[id].Actions[i].id + '" data-option-color="' + this.Groups[id].Actions[i].color + '" style="padding-left:5px;border-left:solid 30px ' + this.Groups[id].Actions[i].color + '">' + title + '</option>');
     }
     actions.selectmenu('refresh', true);
     this.SetTable(0);
@@ -269,26 +273,47 @@
     return foundAction;
   },
   
+  GetSliceInfo: function(rect) {
+    var id = rect.data('action');
+    var start = rect.data('index');
+    var end = start + rect.data('length');
+    var action = this.GetTableAction(id);
+    var info = '';
+    if (action != null)
+    {
+        info = '<strong>' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, action.localeId, action.description) + '</strong>';
+        info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_from', 'from');
+        info += ' <strong>' + this.GetSliceTime(start) + '</strong>';
+        info += ' ' + HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_hour_to', 'to');
+        info += ' <strong>' + this.GetSliceTime(end) + '</strong>';
+    }
+    return info;
+  },
+  
+  GetSliceTime: function(sliceIndex) {
+      var sliceSize = (60 / this.TimebarResolution);
+      var hour = Math.floor(sliceIndex / sliceSize);
+      var minute = Math.round(((sliceIndex / sliceSize) - hour) * 60);
+      if (hour.toString().length == 1) hour = '0' + hour;
+      if (minute.toString().length == 1) minute = '0' + minute;
+      return hour + ':' + minute;
+  },
+  
   EditTimetable: function(start, length, action) {
     var selectStart = this.ControlPopup.find('[data-ui-field=select_timestart]');
     var selectEnd = this.ControlPopup.find('[data-ui-field=select_timeend]');
     selectStart.empty();
     selectEnd.empty();
     var tableLength = 24 * 60 / this.TimebarResolution;
-    var sliceSize = (60 / this.TimebarResolution);
     for (var i = 0; i <= tableLength; i++)
     {
-      var hour = Math.floor(i / sliceSize);
-      var minute = Math.round(((i / sliceSize) - hour) * 60);
-      if (hour.toString().length == 1) hour = '0' + hour;
-      if (minute.toString().length == 1) minute = '0' + minute;
-      var displayTime = hour + ':' + minute;
+      var displayTime = this.GetSliceTime(i);
       selectStart.append('<option value="' + i + '"' + (i == start ? ' selected' : '') + '>' + displayTime + '</option>');
       selectEnd.append('<option value="' + i + '"' + (i == (start + length) ? ' selected' : '') + '>' + displayTime + '</option>');
     }
     selectStart.selectmenu('refresh', true);
     selectEnd.selectmenu('refresh', true);
-    this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(action).id).selectmenu('refresh');
+    this.ControlPopup.find('[data-ui-field=select_action]').val(this.GetTableAction(action).id).selectmenu('refresh').change();
     this.ControlPopup.popup('open');
   },
   
@@ -320,6 +345,14 @@
         rect.data('index', startIndex);
         rect.data('length', nb);
         rect.data('action', timetable[i]);
+        //
+        var centerX = (nb * stepSize) / 2;
+        $(rect.node).qtip({ 
+            content: _this.GetSliceInfo(rect),
+            show: { delay: 350 },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'bottom center', at: 'top right', adjust: { x: centerX, y: -10 } }
+        });
         //
         x += nb * stepSize;
         nb = 0;
