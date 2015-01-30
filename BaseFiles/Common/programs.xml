@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:25.392788Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:41.920279Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:25.897181Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:42.421447Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -361,7 +361,7 @@ return true; // execute "Code To Run"
         string display_location = weatherdata.current_observation.display_location.full;
         string weather_text = weatherdata.current_observation.weather;
         string icon = weatherdata.current_observation.icon;
-        string icon_url = weatherdata.current_observation.icon_url;
+        string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e");
         string wind_dir = weatherdata.current_observation.wind_dir;
         string wind_kph = weatherdata.current_observation.wind_kph;
         string pressure_mb = weatherdata.current_observation.pressure_mb;
@@ -371,7 +371,7 @@ return true; // execute "Code To Run"
         string precip_1hr_metric = weatherdata.current_observation.precip_1hr_metric;
 
         // 2014-01-22 - Added to allow the widget to display the date/time.
-        string last_updated = DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
+        string last_updated = weatherdata.current_observation.observation_time; //DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
         
         Program.RaiseEvent("Conditions.City", city, "");
         Program.RaiseEvent("Conditions.Country", country, "");
@@ -396,13 +396,31 @@ return true; // execute "Code To Run"
 	    // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
         Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
         
+        // 2015-01-30 - Added forecast of next 3 days
+        webserviceurl = "http://api.wunderground.com/api/" + apikey + "/forecast/lang:" + language + "/q/" + location + ".json";
+        var forecastData = Net.WebService(webserviceurl).GetData().forecast.simpleforecast.forecastday;
+        // Collect forecast data
+        for (int d = 1; d &lt;= 3; d++)
+        {
+          Program.RaiseEvent("Conditions.Forecast." + d + ".Description", forecastData[d].conditions.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".Year", forecastData[d].date.year.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".Month", forecastData[d].date.monthname.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".Day", forecastData[d].date.day.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".Weekday", forecastData[d].date.weekday.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e"), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.Low", forecastData[d].low.celsius.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.Low", forecastData[d].low.fahrenheit.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.High", forecastData[d].high.celsius.ToString(), "");
+          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.High", forecastData[d].high.fahrenheit.ToString(), "");
+        }
+        
         Program.Notify("Weather Underground", "Updated.");
 
       } 
       catch (Exception e) 
       {
         
-        Program.Notify("Weather Underground ERROR!", "Unable to get data from service.");
+        Program.Notify("Weather Underground ERROR!", "Unable to get data from service. " + e.Message);
         //Program.Parameter("Conditions.City").Value = "ERROR: " + e.Message;
         Console.WriteLine( e.Message );
         Pause(10);
@@ -414,9 +432,9 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>true</IsRunning>
+    <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
     <Name>Weather Underground</Name>
@@ -424,8 +442,8 @@ return true; // execute "Code To Run"
 It can be used for "Sunrise/Sunset" feature. 
 User must create an account at wunderground.com in order to obtain a service key.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2015-01-28T16:12:01.643147Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:26.396717Z</TriggerTime>
+    <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -504,7 +522,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:26.893867Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:43.420698Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1247,7 +1265,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:27.397706Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:43.92258Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1302,7 +1320,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:27.900901Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:44.423059Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1597,7 +1615,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:28.405993Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:44.927916Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1676,7 +1694,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:28.898342Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:45.42345Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1746,7 +1764,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:29.401357Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:45.92338Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2020,7 +2038,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:29.903543Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:46.425987Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2386,7 +2404,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:30.906238Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:47.428778Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2488,7 +2506,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:31.410469Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:47.929394Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2642,7 +2660,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:31.905629Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:48.428551Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2906,7 +2924,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:03:32.410629Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:48.932816Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8865,7 +8883,7 @@ while (Program.IsEnabled)
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-30T10:04:02.402834Z</ActivationTime>
-    <TriggerTime>2015-01-30T10:04:02.42324Z</TriggerTime>
+    <TriggerTime>2015-01-30T19:13:49.939974Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

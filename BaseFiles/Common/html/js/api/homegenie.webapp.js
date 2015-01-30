@@ -45,11 +45,7 @@ HG.WebApp.InitializePage = function ()
     //
     $.mobile.ajaxFormsEnabled = false;
     $.ajaxSetup({
-        cache: false //,
-        //contentType: 'application/x-www-form-urlencoded; charset=ISO-8859-1',
-        //beforeSend: function(jqXHR) {
-        //    jqXHR.overrideMimeType('application/x-www-form-urlencoded; charset=ISO-8859-1');
-        //}
+        cache: false
     });
     //
     HG.Configure.LoadData();
