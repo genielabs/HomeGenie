@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+30/01/2015 1.00 beta rev 473
+    - Added forecast info to Weather Underground widget
+
 29/01/2015 1.00 beta rev 471
     - Completed new Timetable app
     - Fixed security widget slider size
