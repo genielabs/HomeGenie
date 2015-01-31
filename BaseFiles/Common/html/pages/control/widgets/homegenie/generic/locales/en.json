@@ -1,0 +1,44 @@
+{
+    "timetable_group_shutters" : "Shutters and dimmers",
+    "timetable_group_thermostats" : "Thermostats",
+    "timetable_group_lights" : "Lights and switches",
+    
+    "timetable_edit_table" : "Edit Timetable",
+    "timetable_popup_set" : "Set",
+    "timetable_popup_cancel" : "Cancel",
+    "timetable_hour_from" : "from",
+    "timetable_hour_to" : "to",
+    
+    "timetable_levelmode_off" : "Off",
+    "timetable_levelmode_10" : "10%",
+    "timetable_levelmode_20" : "20%",
+    "timetable_levelmode_30" : "30%",
+    "timetable_levelmode_40" : "40%",
+    "timetable_levelmode_50" : "50%",
+    "timetable_levelmode_60" : "60%",
+    "timetable_levelmode_70" : "70%",
+    "timetable_levelmode_80" : "80%",
+    "timetable_levelmode_90" : "90%",
+    "timetable_levelmode_100" : "100%",
+    
+    "timetable_thermmode_off" : "Off",
+    "timetable_thermmode_heat" : "Heat",
+    "timetable_thermmode_cool" : "Cool",
+    "timetable_thermmode_auto" : "Auto",
+    "timetable_thermmode_fanonly" : "Fan Only",
+    "timetable_thermmode_autochangeover" : "Auto Changeover",
+    "timetable_thermmode_heateco" : "Heat Economy",
+    "timetable_thermmode_cooleco" : "Cool Economy",
+    "timetable_thermmode_away" : "Away",
+    
+    "timetable_onoffmode_off" : "Off",
+    "timetable_onoffmode_on" : "On",
+    
+    "timetable_calendar_weekend" : "Weekend",
+    "timetable_calendar_workday" : "Workday",
+    "timetable_calendar_holiday" : "Holiday",
+    "timetable_calendar_special" : "Special",
+    
+    "timetable_popup_close" : "Close",
+    "timetable_popup_save" : "Save"
+}

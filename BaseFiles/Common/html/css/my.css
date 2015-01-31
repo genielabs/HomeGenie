@@ -160,6 +160,11 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 
+.hg-widget-container .ui-slider
+{
+    width: 120px;
+}
+
 .hg-widget-icon {
     margin-left: 20px;
     height: 64px;
@@ -285,28 +290,28 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     background-color: darkgreen;
 }
 
-    .hg-wizard-capturebutton .active {
-        border: 1px solid lime;
-        background-color: green;
-    }
+.hg-wizard-capturebutton .active {
+    border: 1px solid lime;
+    background-color: green;
+}
 
 .hg-wizard-grid {
     background-color: white;
     color: black;
 }
 
-    .hg-wizard-grid:hover {
-        background-color: yellow;
-        cursor: pointer;
-    }
+.hg-wizard-grid:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
 
-    .hg-wizard-grid div {
-        padding: 6px;
-        border-bottom: 1px solid lightgray;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+.hg-wizard-grid div {
+    padding: 6px;
+    border-bottom: 1px solid lightgray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 .hg-wizard-grid-linenumber {
     width: 80px;
@@ -318,10 +323,10 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
-    .hg-wizard-grid-linenumber:hover {
-        background-color: limegreen;
-        cursor: pointer;
-    }
+.hg-wizard-grid-linenumber:hover {
+    background-color: limegreen;
+    cursor: pointer;
+}
 
 #page_automation_editprogram label {
     font-weight: bold;
@@ -394,6 +399,34 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inher
     float: left;
 }
 
+.ui-datepicker {     
+    font-size: 14pt;
+    height: 300px;
+    width: auto;
+}
+.ui-datepicker-daywe {
+    background: rgb(100, 100, 100);
+    background: rgba(100, 100, 100, 0.4);
+}
+.ui-datepicker-day0 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.4);
+}
+.ui-datepicker-day1 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.4);
+}
+.ui-datepicker-day2 {
+    background: rgb(0, 255, 0);
+    background: rgba(0, 255, 0, 0.4);
+}
+.ui-datepicker-day3 {
+    background: rgb(255, 0, 0);
+    background: rgba(255, 0, 0, 0.4);
+}
+.ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default { background: none; }
+.ui-datepicker-calendar .ui-state-highlight, .ui-widget-content .ui-state-highlight { color: yellow; text-decoration: underline }
+.ui-datepicker-year { display: none; }
 
 /**** media queries ****/
 

@@ -1,43 +1,68 @@
-﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="min-height:175px">
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="min-height:175px;min-width:420px">
     <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
         <div style="font-weight:bold">Weather Underground</div>
-        <div data-ui-field="name">Waiting for data...</div>
+        <div data-ui-field="last_updated_value">Waiting for data...</div>
         <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-direction="reverse" data-iconpos="notext" class="ui-btn-right">Configuration</a>
     </div>
     <div align="left">
-        <img data-ui-field="icon" style="margin-left:10px;margin-right:10px;height:64px;float: left" src="pages/control/widgets/jkUtils/OpenWeatherMap/images/icons/10d.png" />
-        <div style="float: left;margin-top:5px">
-            <div data-ui-field="description" style="font-size:18pt;">Possible showers</div>
-            <div style="font-size:10pt;height:28px">Updated: <span data-ui-field="last_updated_value">Not updated!</span></div>
-        </div>
-        <br clear="all" />
+        <table width="100%"><tr>
+        <td width="46">
+            <img data-ui-field="icon" class="ui-corner-all ui-overlay-shadow" src="http://icons.wxug.com/i/c/e/partlysunny.gif" style="margin-top:3px;margin-left:10px;margin-right:5px" />
+        </td>
+        <td>
+            <div data-ui-field="name" style="font-size:11pt;">Not updated!</div>
+            <div data-ui-field="description" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:200px;font-size:14pt;">Possible showers</div>
+        </td>
+        <td align="center" style="font-size:10pt" valign="top">
+            &#9728;&uarr; <span data-ui-field="sunrise_value">05:55</span>
+            &#9728;&darr; <span data-ui-field="sunset_value">18:20</span>
+            <br />
+            <span class="hg-indicator-temperature" style="padding-left:0;width:20px;vertical-align:top">&nbsp;</span>
+            <span data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;font-size:22pt">22.5</span>
+        </td>
+        </tr></table>
     </div>
-    <div align="center" style="font-size:10pt;padding-right:20px;">
-        <div style="margin:2px;height:28px;display: inline-block;">
-            <div align="right" style="padding:4px;height:28px;text-align:bottom;width:50px;float:left">
-                <img data-ui-field="temperature_image" alt="Temperature" src="pages/control/widgets/homegenie/generic/images/temperature.png" height="32" align="center" style="vertical-align:bottom" />
-            </div>
-            <div align="left" style="width:80px;padding:4px;float:left;">
-                <font data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;font-size:22pt">22.5</font>
-            </div>
-        </div>
-        <div style="margin:2px;height:28px;display: inline-block;">
-            <div align="right" style="padding:4px;line-height:28px;text-align:bottom;width:50px;float:left">
-                <b>Sunrise</b>
-            </div>
-            <div align="left" style="width:60px;padding:4px;float:left;">
-                <font data-ui-field="sunrise_value" style="line-height:28px;text-align:bottom;font-size:22pt">05:55</font>
-            </div>
-        </div>
-        <div style="margin:2px;height:28px;display: inline-block;">
-            <div align="right" style="padding:4px;height:28px;line-height:28px;text-align:bottom;width:50px;float:left">
-                <b>Sunset</b>
-            </div>
-            <div align="left" style="width:60px;padding:4px;float:left;">
-                <font data-ui-field="sunset_value" style="line-height:28px;text-align:bottom;font-size:22pt">18:25</font>
-            </div>
-        </div>
-
+    <div style="font-size:10pt;margin-left:10px;">
+        
+        <table width="100%">
+        <tr>
+            <td colspan="2" data-ui-field="forecast_1_date">Sat, 31 January</td>
+            <td colspan="2" data-ui-field="forecast_2_date">Sun, 1 February</td>
+            <td colspan="2" data-ui-field="forecast_3_date">Mon, 2 February</td>
+        </tr>
+        <tr>
+            <td align="left" width="46">
+                <img data-ui-field="forecast_1_icon" class="ui-corner-all ui-overlay-shadow" src="http://icons.wxug.com/i/c/e/flurries.gif" />
+            </td>
+            <td align="left" valign="top">
+                <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
+                    &#x25BC; <span data-ui-field="forecast_1_tmin">8.2℃</span><br>
+                    &#x25B2; <span data-ui-field="forecast_1_tmax">12.1℃</span><br>
+                    <span data-ui-field="forecast_1_desc">Partly cloudy</span>
+                </div>
+            </td>
+            <td align="left" width="46">
+                <img data-ui-field="forecast_2_icon" class="ui-corner-all ui-overlay-shadow" src="http://icons.wxug.com/i/c/e/sunny.gif" />
+            </td>
+            <td align="left" valign="top">
+                <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
+                    &#x25BC; <span data-ui-field="forecast_2_tmin">4.0℃</span><br>
+                    &#x25B2; <span data-ui-field="forecast_2_tmax">10.5℃</span><br>
+                    <span data-ui-field="forecast_2_desc">Chance of rain</span>
+                </div>
+            </td>
+            <td align="left" width="46">
+                <img data-ui-field="forecast_3_icon" class="ui-corner-all ui-overlay-shadow" src="http://icons.wxug.com/i/c/e/tstorms.gif" />
+            </td>
+            <td align="left" valign="top">
+                <div style="font-size:8pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:80px">
+                    &#x25BC; <span data-ui-field="forecast_3_tmin">6.7℃</span><br>
+                    &#x25B2; <span data-ui-field="forecast_3_tmax">16.2℃</span><br>
+                    <span data-ui-field="forecast_3_desc">Clear</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+        
     </div>
-    <br clear="all" />
 </div>

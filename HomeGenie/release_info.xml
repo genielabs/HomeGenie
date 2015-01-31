@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r466</Version>
+  <Version>1.00 beta r471</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>    - Improved Energy Monitor app; added Energy Monitor widget
-  - Added Time Tables, Calendar and Virtual Thermostats programs by DaniMail
+  <ReleaseNote>   - Added new Timetable app for scheduling Lights, Shutters, Thermostats
+  - Fixed security widget slider size
+  - Added X10 CM15 RF messages decoding
+  - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)
+  - Fixed bug in RegisterDynamicApiCall
+  - Improved Energy Monitor app; added Energy Monitor widget
   - Fixed error in localization functions when widget has no control popup defined
   - Updated Pepper1 Z-Wave device database
   - Added logic operator "OR" to Wizard script conditions
@@ -31,5 +35,5 @@
   - Added more field icons to sensor widget (pull request #94)
   - Fixed error with Pepper1 db when lang is not an array (pull request #90)
   - Changed widget's files extension from *.json to *.js</ReleaseNote>
-  <ReleaseDate>2015-01-25T22:11:57.0000Z</ReleaseDate>
+  <ReleaseDate>2015-01-29T12:47:12.0000Z</ReleaseDate>
 </ReleaseInfo>
