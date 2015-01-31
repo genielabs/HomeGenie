@@ -418,7 +418,7 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
     $.ajax({
         url: ifaceurl,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var interfaces = HG.WebApp.Data.Interfaces = eval(data);
             var status = '';
@@ -654,7 +654,7 @@ HG.WebApp.Locales.GetDateEndianType = function()
 HG.WebApp.Locales.GetDefault = function(callback) {
     $.ajax({
         url: './locales/en.json',
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             HG.WebApp.Data._DefaultLocale = $.parseJSON( data );
             callback();
@@ -669,7 +669,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
     HG.WebApp.Locales.GetDefault(function(){
         $.ajax({
             url: langurl,
-            data: "{ dummy: 'dummy' }",
+            type: 'GET',
             success: function (data) {
                 HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
                 //
@@ -700,7 +700,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
     var langurl = 'pages/control/widgets/' + widgetpath + '/locales/' + userLang.toLowerCase().substring(0, 2) + '.json';
     $.ajax({
         url: langurl,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var locale = $.parseJSON( data );
             $(container).find('[data-ui-field=widget]').data('Locale', locale);

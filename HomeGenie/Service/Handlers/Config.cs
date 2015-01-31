@@ -336,7 +336,6 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS2")
                 {
-                    //
                     var serializer = new XmlSerializer(typeof(List<Group>));
                     var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                                                            "tmp",
@@ -568,7 +567,7 @@ namespace HomeGenie.Service.Handlers
                                     Value = propertyValue
                                 });
                             }
-                            else //if (true)
+                            else
                             {
                                 if (moduleProperties[p]["NeedsUpdate"] != null && moduleProperties[p]["NeedsUpdate"].ToString() == "true")
                                 {
@@ -589,7 +588,7 @@ namespace HomeGenie.Service.Handlers
                 string streamContent = new StreamReader(request.InputStream).ReadToEnd();
                 var newModule = JsonConvert.DeserializeObject<Module>(streamContent);
                 var currentModule = homegenie.Modules.Find(p => p.Domain == newModule.Domain && p.Address == newModule.Address);
-                    //
+                //
                 if (currentModule == null)
                 {
                     homegenie.Modules.Add(newModule);
@@ -599,8 +598,6 @@ namespace HomeGenie.Service.Handlers
                     currentModule.Name = newModule.Name;
                     currentModule.Description = newModule.Description;
                     currentModule.DeviceType = newModule.DeviceType;
-                    //cm.Properties = mod.Properties;
-
                     foreach (var newParameter in newModule.Properties)
                     {
                         var currentParameter = currentModule.Properties.Find(mp => mp.Name == newParameter.Name);
@@ -629,7 +626,7 @@ namespace HomeGenie.Service.Handlers
                     }
                     deletedParameters.Clear();
                 }
-                    //
+                //
                 homegenie.UpdateModulesDatabase();
                 break;
 
@@ -640,7 +637,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.Modules.Remove(deletedModule);
                 }
                 migCommand.Response = JsonHelper.GetSimpleResponse("OK");
-                    //
+                //
                 homegenie.UpdateModulesDatabase();
                 break;
 
@@ -656,7 +653,6 @@ namespace HomeGenie.Service.Handlers
                         {
                             jsonmodules += Utility.Module2Json(groupModule, false) + ",\n";
                         }
-
                     }
                     jsonmodules = jsonmodules.TrimEnd(',', '\n');
                     jsonmodules += "]";
@@ -679,7 +675,7 @@ namespace HomeGenie.Service.Handlers
                 string newName = new StreamReader(request.InputStream).ReadToEnd();
                 var currentGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(g => g.Name == oldName);
                 var newGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(g => g.Name == newName);
-                    // ensure that the new group name is not already defined
+                // ensure that the new group name is not already defined
                 if (newGroup == null && currentGroup != null)
                 {
                     currentGroup.Name = newName;
@@ -707,7 +703,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.GetGroups(migCommand.GetOption(0)).AddRange(newGroupList);
                     homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));
                 }
-                    //
+                //
                 try
                 {
                     migCommand.Response = JsonConvert.SerializeObject(homegenie.GetGroups(migCommand.GetOption(0)));
@@ -772,7 +768,7 @@ namespace HomeGenie.Service.Handlers
                 catch
                 {
                 }
-                    //
+                //
                 if (deletedGroup != null)
                 {
                     homegenie.GetGroups(migCommand.GetOption(0)).Remove(deletedGroup);

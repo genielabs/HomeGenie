@@ -141,9 +141,7 @@ HG.WebApp.Statistics.Refresh = function () {
     //
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
         success: function (data) {
             var stats = eval(data);
 
@@ -154,7 +152,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
                         { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
                         { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
-                ],
+                    ],
                     {
                         yaxis: {},
                         xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
@@ -167,15 +165,19 @@ HG.WebApp.Statistics.Refresh = function () {
                             backgroundColor: { colors: ["#fff", "#ddd"] }
                         },
                         colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
-                        points: { show: true }
+                        points: { show: true },
+                        zoom: {
+                            interactive: true
+                        },
+                        pan: {
+                            interactive: true
+                        }  
                     });
             } catch (e) { }
             //
             $.ajax({
                 url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.Counter/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/',
-                type: "POST",
-                data: "{ dummy: 'dummy' }",
-                dataType: "text",
+                type: 'GET',
                 success: function (data) {
                     var stats = eval(data);
                     //
@@ -187,9 +189,9 @@ HG.WebApp.Statistics.Refresh = function () {
                     //
                     try {
                         $.plot($("#statscounter"), [{
-                            label: HG.WebApp.Statistics._CurrentParameter,
-                            data: stats[0]
-                        }],
+                                label: HG.WebApp.Statistics._CurrentParameter,
+                                data: stats[0]
+                            }],
                             {
                                 yaxis: {},
                                 xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
@@ -203,7 +205,13 @@ HG.WebApp.Statistics.Refresh = function () {
                                     backgroundColor: { colors: ["#fff", "#ddd"] }
                                 },
                                 colors: ["rgba(120, 160, 0, 0.5)"],
-                                points: { show: true }
+                                points: { show: true },
+                                zoom: {
+                                    interactive: true
+                                },
+                                pan: {
+                                    interactive: true
+                                }    
                             });
                     } catch (e) { }
                     //

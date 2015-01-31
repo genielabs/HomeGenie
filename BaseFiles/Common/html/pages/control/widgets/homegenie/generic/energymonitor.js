@@ -41,9 +41,7 @@
         var showbars = true;
         $.ajax({
             url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/Meter.Watts/' + mod + '/',
-            type: "POST",
-            data: "{ dummy: 'dummy' }",
-            dataType: "text",
+            type: 'GET',
             success: function (data) {
                 var stats = eval(data);
                 try {
@@ -53,10 +51,10 @@
                             { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
                             { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
                             { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
-                    ],
+                        ],
                         {
-                            yaxis: {},
-                            xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+                            yaxis: { minTickSize: 10, tickSize: 10 },
+                            xaxis: { mode: "time", timeformat: "%H", minTickSize: [2, "hour"], tickSize: [2, "hour"] },
                             legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
                             lines: { show: showlines, lineWidth: 1.0 },
                             series: {
@@ -66,7 +64,13 @@
                                 backgroundColor: { colors: ["#fff", "#ddd"] }
                             },
                             colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
-                            points: { show: true }
+                            points: { show: false },
+                            zoom: {
+                                interactive: true
+                            },
+                            pan: {
+                                interactive: true
+                            }                            
                         });
                 } catch (e) { }
 

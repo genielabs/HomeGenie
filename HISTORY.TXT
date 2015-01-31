@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+31/01/2015 1.00 beta rev 474
+    - Fixed synchronization issue in controlling modules (InterfaceControl) that could have caused commands not being executed if performed too fastly
+    - Fixed bug in Timetable (not peforming actions on level changes)
+    - Fixed occasional Ajax network error occurring on IE
+    - Added zoom/panning to statistic graphs
+
 30/01/2015 1.00 beta rev 473
     - Added forecast info to Weather Underground widget
 

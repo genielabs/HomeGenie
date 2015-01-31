@@ -1,39 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r471</Version>
+  <Version>1.00 beta r474</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added new Timetable app for scheduling Lights, Shutters, Thermostats
+  <ReleaseNote>   - Fixed occasional Ajax network error occurring on IE
+  - Fixed synchronization issue in controlling modules (InterfaceControl) that could have caused commands not being executed if performed too fastly
+  - Added zoom/panning to statistic graphs
+  - Added forecast info to Weather Underground widget
+  - Added new Timetable app for scheduling Lights, Shutters, Thermostats
   - Fixed security widget slider size
   - Added X10 CM15 RF messages decoding
-  - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)
-  - Fixed bug in RegisterDynamicApiCall
-  - Improved Energy Monitor app; added Energy Monitor widget
-  - Fixed error in localization functions when widget has no control popup defined
-  - Updated Pepper1 Z-Wave device database
-  - Added logic operator "OR" to Wizard script conditions
-  - Improved Z-Wave 'add node' function
-  - Fixed hidden automation groups bug
-  - Little improvement to Scheduled ON/OFF program
-  - Added I2C PCF8574 + Hd44780 LCD display example app (Raspberry Pi)
-  - Improved Raspberry Pi GPIO Modules program by adding !OUT option for inverted level logic (pull request #99)
-  - Added Z-Wave Meter Poll app; fixed bug in Level Poll app
-  - Optimized file GPIO connection driver for faaaster I/O operationss
-  - Added "fuzzyness" to Virtual Meter
-  - Added Meter box to Z-Wave node setup page
-  - Major ZWaveLib refactoring, now supporting kWh, KVAh, Watt, Pulses, AC Volt, AC Current and Power Factor energy values (issue #21)
-  - Added CubieTruck/CB3 GPIO app with 30 modules-mapped GPIOs
-  - Fixed possible loop in ZWaveLib Controller.cs when querying node's capabilities
-  - Added saving/loading of node device handlers to ZWaveLib (issue #78)
-  - Updated UPnP library from latest source code release
-  - Added ModuleParameter.RequestUpdate() and ModuleParameter.IdleTime, also renamed ModuleParameter.Wait to WaitUpdate (issue #72)
-  - Fixed "precision" issue in ZWaveLib ExtractValueFromBytes (issue #97)
-  - Fixed unwanted serialization of module fields as Statistics (also affecting MQTT client app)
-  - Fixed bug in X10 that was not performing first command after HG startup
-  - Fixed bug in Lirc initialization that was preventing IR remote from working when installing HG from debian package
-  - Should fix multiple UC handling in X10 commands (issue #30)
-  - Added more field icons to sensor widget (pull request #94)
-  - Fixed error with Pepper1 db when lang is not an array (pull request #90)
-  - Changed widget's files extension from *.json to *.js</ReleaseNote>
-  <ReleaseDate>2015-01-29T12:47:12.0000Z</ReleaseDate>
+  - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)</ReleaseNote>
+  <ReleaseDate>2015-01-31T12:48:31.0000Z</ReleaseDate>
 </ReleaseInfo>
