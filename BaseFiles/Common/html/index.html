@@ -222,9 +222,36 @@
             <p>#{text}</p>
         </div>
     </div>
-    <!-- Global Popups -->
+    
+<!-- BEGIN Global Popups -->
+    
+    <!-- Event Popup Settings -->
+    <div id="configure_popupsettings_edit" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+        <div data-role="header" class="ui-corner-top">
+            <h1>Event popup filters</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+        
+            <ul data-role="listview" id="popupsettings_ignorelist">
+                <li data-role="list-divider">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a hg-label" style="width:75%">Domain</div>
+                        <div class="ui-block-b hg-label" style="width:25%">Address</div>
+                    </div>
+                </li>
+            </ul>
+        
+        </div>
+        <div class="ui-grid-a ui-footer ui-bar-inherit" align="center">
+            <div class="ui-block-a">
+                <a class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" href="#" data-locale-id="configure_popupfilter_optclose" data-rel="back">Close</a>
+            </div>
+        </div>
+    </div>
+    
+    
     <!-- Module Edit Popup -->
-    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
+    <div id="automation_group_module_edit" class="ui-corner-all hg-popup-a" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <div data-role="header" class="ui-corner-top">
             <h1 id="module_title">Module Settings</h1>
@@ -340,7 +367,7 @@
     </div>
 
     <!-- Program Configuration Popup -->
-    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window">
+    <div id="automationprograms_program_options" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_options">Options</h2>
@@ -372,6 +399,8 @@
             </div>
         </div>
     </div>
+
+<!-- END Global Popups -->
 
 </body>
 </html>

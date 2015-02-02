@@ -35,6 +35,7 @@ HG.System.HasPassword = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var haspass = eval(data)[0];
             if (callback != null) callback(haspass.ResponseValue);
@@ -63,6 +64,7 @@ HG.System.LoggingIsEnabled = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.IsEnabled/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var haslog = eval(data)[0];
             if (callback != null) callback(haslog.ResponseValue);
@@ -93,6 +95,7 @@ HG.System.WebCacheIsEnabled = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.GetWebCacheEnabled/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var haslog = eval(data)[0];
             if (callback != null) callback(haslog.ResponseValue);
@@ -106,6 +109,7 @@ HG.System.UpdateManager.UpdateCheck = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.Check/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }
@@ -116,6 +120,7 @@ HG.System.UpdateManager.GetUpdateList = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.UpdatesList/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }
@@ -126,6 +131,7 @@ HG.System.UpdateManager.DownloadUpdate = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.DownloadUpdate/' + (new Date().getTime()),
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }

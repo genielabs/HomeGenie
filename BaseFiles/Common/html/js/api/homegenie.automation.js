@@ -35,6 +35,7 @@ HG.Automation.Macro.Save = function (mode, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.Save/" + mode + "/",
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -59,6 +60,7 @@ HG.Automation.Macro.GetDelay = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.GetDelay/",
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var value = eval(data)[0];
             callback(value);
@@ -83,7 +85,7 @@ HG.Automation.Programs.AddProgram = function (group, program, callback) {
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Add/' + group + '/' + (new Date().getTime()),
         type: 'POST',
         data: program,
-        dataType: "text",
+        dataType: 'text',
         success: function (data) {
             var value = eval(data);
             if (value == 'undefined') {
@@ -252,6 +254,7 @@ HG.Automation.Scheduling.Update = function (name, expression, pid, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + name + '/' + expression.replace(/\//g, '|') + '/' + pid,
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -261,6 +264,7 @@ HG.Automation.Scheduling.Delete = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Delete/' + name,
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -270,6 +274,7 @@ HG.Automation.Scheduling.Enable = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Enable/' + name,
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -279,6 +284,7 @@ HG.Automation.Scheduling.Disable = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Disable/' + name,
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -288,6 +294,7 @@ HG.Automation.Scheduling.List = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.List/',
         type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(eval(arguments[2].responseText));
         }

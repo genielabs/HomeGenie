@@ -11,5 +11,5 @@
   - Fixed security widget slider size
   - Added X10 CM15 RF messages decoding
   - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)</ReleaseNote>
-  <ReleaseDate>2015-01-31T12:48:31.0000Z</ReleaseDate>
+  <ReleaseDate>2015-02-02T14:37:11.0000Z</ReleaseDate>
 </ReleaseInfo>

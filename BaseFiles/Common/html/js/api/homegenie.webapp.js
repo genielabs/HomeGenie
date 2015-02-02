@@ -36,7 +36,7 @@ HG.WebApp.InitializePage = function ()
     //
     // Application start - Init stuff
     //
-    dataStore = $.jStorage; //new window.Basil({ namespace: 'HomeGenie', storages: ['local', 'session', 'cookie', 'memory'] });
+    dataStore = $.jStorage;
     //
     var theme = dataStore.get('UI.Theme');
     if (theme == null || (theme < 'a' || theme > 'g')) {
@@ -313,7 +313,7 @@ HG.WebApp.InitializePage = function ()
             this.ellipse(x, y, r - r / 5, r - r / 20).attr({ stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0 })
         );
     };
-
+    // Global Popups
     $( "#automation_group_module_edit" ).enhanceWithin().popup();
     $('#module_update_button').bind('click', function (event) {
         HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
@@ -338,7 +338,11 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.GroupsList.SaveGroups(null);
     });
     //
-    $( "#automationprograms_program_options" ).enhanceWithin().popup();
+    $('#automationprograms_program_options').enhanceWithin().popup();
+    $('#configure_popupsettings_edit').enhanceWithin().popup();
+    $('#configure_popupsettings_edit').on('popupbeforeposition', function(){
+        HG.WebApp.Events.PopupRefreshIgnore();
+    });
 
 };
 

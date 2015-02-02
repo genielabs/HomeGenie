@@ -29,7 +29,11 @@
             //
             // initialization stuff here
             //
-            // when widget is clicked control popup is shown
+            // settings button
+            widget.find('[data-ui-field=settings]').on('click', function () {
+                HG.WebApp.Control.EditModule(module);
+            });
+            // when browse button is clicked control popup is shown
             widget.find('[data-ui-field=browse]').on('click', function () {
                 if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
                     $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');

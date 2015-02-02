@@ -100,6 +100,11 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     max-width: 600px;
 }
 
+.hg-label {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
 .hg-program-options-scroll {
     border: solid 1px gray;
     padding: 5px;
@@ -374,6 +379,17 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug, div.ui-bar-inher
 
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inherit span.hg-indicator-door {
     background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
+}
+
+.ui-slider-track.ui-mini {
+    height: 12px;
+    top: 8px;
+    margin: 0px 15px 0px 68px;  /* add this line to file */
+}
+div.ui-slider-switch.ui-mini {
+    height: 29px;
+    top: 0;
+    margin: .5em 0; /* add this line */
 }
 
 

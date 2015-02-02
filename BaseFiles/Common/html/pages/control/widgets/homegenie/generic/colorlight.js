@@ -4,7 +4,7 @@
     Version: "2013-03-31",
 
     GroupName: '',
-    IconImage: 'pages/control/widgets/homegenie/generic/images/light_off.png',
+    IconImage: 'pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png',
     StatusText: '',
     Description: '',
     UpdateTime: '',

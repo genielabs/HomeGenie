@@ -221,7 +221,7 @@ HG.WebApp.Control.RenderModule = function () {
                                 HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
                             });
                         } catch (e) {
-                            console.log('ERROR in Widget RenderView: ' + e);
+                            console.log('Widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
                     }

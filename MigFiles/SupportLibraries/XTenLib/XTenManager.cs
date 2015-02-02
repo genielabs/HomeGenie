@@ -76,6 +76,7 @@ namespace XTenLib
         private byte[] commandLastMessage = new byte[0];
         private int commandResendAttempts = 0;
         private object waitAckMonitor = new object();
+        private object commandLock = new object();
         private DateTime waitAckTimestamp = DateTime.Now;
         private DateTime lastReceivedTs = DateTime.Now;
 
@@ -240,7 +241,7 @@ namespace XTenLib
 
         public void Dim(X10HouseCode housecode, X10UnitCode unitcode, int percentage)
         {
-            lock (this)
+            lock (commandLock)
             {
                 string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Dim);
@@ -280,7 +281,7 @@ namespace XTenLib
 
         public void Bright(X10HouseCode housecode, X10UnitCode unitcode, int percentage)
         {
-            lock (this)
+            lock (commandLock)
             {
                 string huc = Utility.HouseUnitCodeFromEnum(housecode, unitcode);
                 //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
@@ -321,7 +322,7 @@ namespace XTenLib
 
         public void UnitOn(X10HouseCode housecode, X10UnitCode unitcode)
         {
-            lock (this)
+            lock (commandLock)
             {
                 //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.On);
@@ -344,7 +345,7 @@ namespace XTenLib
 
         public void UnitOff(X10HouseCode housecode, X10UnitCode unitcode)
         {
-            lock (this)
+            lock (commandLock)
             {
                 //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Off);
@@ -364,7 +365,7 @@ namespace XTenLib
 
         public void AllLightsOn(X10HouseCode housecode)
         {
-            lock (this)
+            lock (commandLock)
             {
                 string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Lights_On);
@@ -390,7 +391,7 @@ namespace XTenLib
 
         public void AllUnitsOff(X10HouseCode housecode)
         {
-            lock (this)
+            lock (commandLock)
             {
                 string hcunit = String.Format("{0:X}{1:X}", (int)housecode, 0);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.All_Units_Off);
@@ -416,7 +417,7 @@ namespace XTenLib
         
         public void StatusRequest(X10HouseCode housecode, X10UnitCode unitcode)
         {
-            lock (this)
+            lock (commandLock)
             {
                 //string hcunit = String.Format("{0:X}{1:X}", (int)housecode, (int)unitcode);
                 string hcfuntion = String.Format("{0:x1}{1:x1}", (int)housecode, (int)X10Command.Status_Request);
@@ -516,7 +517,7 @@ namespace XTenLib
 
         private void InitializeCm15()
         {
-            lock (this)
+            lock (commandLock)
             {
                 // BuildTransceivedCodesMessage return byte message for setting transceive codes from given comma separated _monitoredhousecode
                 UpdateInterfaceTime(false);

@@ -312,23 +312,82 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             break;
     }
     //
-    if (popupdata != null) {
+    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source)) {
 
-        HG.WebApp.Events.ShowEventPopup(popupdata);
+        HG.WebApp.Events.ShowEventPopup(popupdata, eventLog);
 
     }
 
 };
 
-HG.WebApp.Events.ShowEventPopup = function (popupdata) {
+HG.WebApp.Events.PopupRefreshIgnore = function () {
+    var ignoreList = dataStore.get('UI.EventPopupIgnore');
+    if (ignoreList == null) return;
+    $('#popupsettings_ignorelist li:gt(0)').remove();
+    for (var i = 0; i < ignoreList.length; i++)
+    {
+        var item = '<li data-icon="minus">';
+        item += '    <a href="#" class="ui-grid-a" onclick="HG.WebApp.Events.PopupRemoveIgnore(' + i + ')">';
+        item += '        <div class="ui-block-a hg-label" style="width:75%">' + ignoreList[i].Domain + '</div>';
+        item += '        <div class="ui-block-b hg-label" style="width:25%" align="center">' + ignoreList[i].Address + '</div>';
+        item += '    </a>';
+        item += '</li>';
+        $('#popupsettings_ignorelist').append(item);
+    }
+    $('#popupsettings_ignorelist').listview().trigger('create');
+    $('#popupsettings_ignorelist').listview('refresh');
+}
+
+HG.WebApp.Events.PopupHasIgnore = function (domain, address) {
+    var ignoreList = dataStore.get('UI.EventPopupIgnore');
+    if (ignoreList == null) return false;
+    var exists = false;
+    for(var i = 0; i < ignoreList.length; i++)
+    {
+        if (ignoreList[i].Domain == domain && ignoreList[i].Address == address)
+        {
+            exists = true;
+            break;
+        }
+    }
+    return exists;
+};
+
+HG.WebApp.Events.PopupRemoveIgnore = function (index) {
+    var ignoreList = dataStore.get('UI.EventPopupIgnore');
+    if (ignoreList == null || ignoreList.length <= index) return;
+    ignoreList.splice(index, 1);
+    HG.WebApp.Events.PopupRefreshIgnore();
+};
+
+HG.WebApp.Events.PopupAddIgnore = function (domain, address) {
+    var ignoreList = dataStore.get('UI.EventPopupIgnore');
+    if (ignoreList == null)
+    {
+        ignoreList = Array();
+    }
+    if (!HG.WebApp.Events.PopupHasIgnore(domain, address))
+    {
+        ignoreList.push({ Domain: domain, Address: address});
+        dataStore.set('UI.EventPopupIgnore', ignoreList);
+    }
+    $('#statuspopup').css('display', 'none');
+};
+
+HG.WebApp.Events.ShowEventPopup = function (popupdata, eventLog) {
 
     var s = '<table width="100%"><tr><td width="48" rowspan="2">';
     s += '<img src="' + popupdata.icon + '" width="48">';
     s += '</td><td valign="top" align="left">';
     s += popupdata.title;
     s += '</td><td align="right" style="color:lime;font-size:12pt">' + popupdata.text + '</td></tr>';
-    s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + popupdata.timestamp + '</span>';
-    s += '</td></tr></table>';
+    s += '<tr style="color:gray;font-size:9pt;"><td>' + popupdata.timestamp + '</td>';
+    if (eventLog)
+    {
+        s += '<td align="right"><a href="#" title="Block popup from this source" class="ui-corner-all" onclick="HG.WebApp.Events.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a>&nbsp;&nbsp;</td>';
+    }
+    s += '</tr>';
+    s += '</table>';
     $('#statuspopup').html(s);
 
     // hide timeout

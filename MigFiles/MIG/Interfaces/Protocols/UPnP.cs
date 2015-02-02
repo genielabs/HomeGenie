@@ -165,9 +165,9 @@ namespace MIG.Interfaces.Protocols
         #endregion
 
 
-        private UpnpSmartControlPoint controPoint;
+        private UpnpSmartControlPoint controlPoint;
         private bool isConnected = false;
-        private UPnPDevice localDevice;
+        //private UPnPDevice localDevice;
 
         public UPnP()
         {
@@ -194,10 +194,12 @@ namespace MIG.Interfaces.Protocols
         public List<InterfaceModule> GetModules()
         {
             List<InterfaceModule> modules = new List<InterfaceModule>();
-
             for (int d = 0; d < this.UpnpControlPoint.DeviceTable.Count; d++)
             {
                 var device = (UPnPDevice)(this.UpnpControlPoint.DeviceTable[d]);
+                if (String.IsNullOrWhiteSpace(device.StandardDeviceType))
+                    continue;
+                //
                 InterfaceModule module = new InterfaceModule();
                 module.Domain = this.Domain;
                 module.Address = device.UniqueDeviceName;
@@ -205,13 +207,6 @@ namespace MIG.Interfaces.Protocols
                 module.ModuleType = MIG.ModuleTypes.Sensor;
                 if (device.StandardDeviceType == "MediaRenderer")
                 {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "UPnP.DeviceType",
-                        Value = device.StandardDeviceType
-                    });
                     module.ModuleType = MIG.ModuleTypes.MediaReceiver;
                     InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                         Domain = this.Domain,
@@ -223,6 +218,7 @@ namespace MIG.Interfaces.Protocols
                 }
                 else if (device.StandardDeviceType == "MediaServer")
                 {
+                    module.ModuleType = MIG.ModuleTypes.MediaTransmitter;
                     InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                         Domain = this.Domain,
                         SourceId = device.UniqueDeviceName,
@@ -374,7 +370,6 @@ namespace MIG.Interfaces.Protocols
 
                 modules.Add(module);
             }
-
             return modules;
         }
 
@@ -385,10 +380,10 @@ namespace MIG.Interfaces.Protocols
 
         public bool Connect()
         {
-            if (controPoint == null)
+            if (controlPoint == null)
             {
-                controPoint = new UpnpSmartControlPoint();
-                controPoint.OnAddedDevice += controPoint_OnAddedDevice;
+                controlPoint = new UpnpSmartControlPoint();
+                controlPoint.OnAddedDevice += controPoint_OnAddedDevice;
                 isConnected = true;
             }
             if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
@@ -398,15 +393,18 @@ namespace MIG.Interfaces.Protocols
 
         public void Disconnect()
         {
+            /*
             if (localDevice != null)
             {
                 localDevice.StopDevice();
                 localDevice = null;
             }
-            if (controPoint != null)
+            */
+            if (controlPoint != null)
             {
-                controPoint.OnAddedDevice -= controPoint_OnAddedDevice;
-                controPoint = null;
+                controlPoint.OnAddedDevice -= controPoint_OnAddedDevice;
+                controlPoint.ShutDown();
+                controlPoint = null;
             }
             isConnected = false;
         }
@@ -801,9 +799,10 @@ namespace MIG.Interfaces.Protocols
 
         public UpnpSmartControlPoint UpnpControlPoint
         {
-            get { return controPoint; }
+            get { return controlPoint; }
         }
 
+        /*
         public void CreateLocalDevice(
             string deviceGuid,
             string deviceType,
@@ -856,6 +855,7 @@ namespace MIG.Interfaces.Protocols
             localDevice.StartDevice();
 
         }
+        */
 
         #endregion
 
@@ -865,7 +865,7 @@ namespace MIG.Interfaces.Protocols
         private UPnPDevice GetUpnpDevice(string deviceId)
         {
             UPnPDevice device = null;
-            foreach (UPnPDevice d in controPoint.DeviceTable)
+            foreach (UPnPDevice d in controlPoint.DeviceTable)
             {
                 if (d.UniqueDeviceName == deviceId)
                 {
@@ -960,7 +960,33 @@ namespace MIG.Interfaces.Protocols
         private WeakEvent OnUpdatedDeviceEvent = new WeakEvent();
         private string searchFilter = "upnp:rootdevice";
         //"ssdp:all"; //
+                
+        public UpnpSmartControlPoint()
+        {
+            this.deviceFactory.OnDevice += this.DeviceFactoryCreationSink;
+            this.deviceLifeTimeClock.OnExpired += this.DeviceLifeTimeClockSink;
+            this.deviceUpdateClock.OnExpired += this.DeviceUpdateClockSink;
+            this.hostNetworkInfo = new NetworkInfo(new NetworkInfo.InterfaceHandler(this.NetworkInfoNewInterfaceSink));
+            this.hostNetworkInfo.OnInterfaceDisabled += this.NetworkInfoOldInterfaceSink;
+            this.genericControlPoint = new UPnPControlPoint(this.hostNetworkInfo);
+            this.genericControlPoint.OnSearch += this.UPnPControlPointSearchSink;
+            this.genericControlPoint.OnNotify += this.SSDPNotifySink;
+            this.genericControlPoint.FindDeviceAsync(searchFilter);
+        }
 
+        public void ShutDown()
+        {
+            this.deviceFactory.OnDevice -= this.DeviceFactoryCreationSink;
+            this.deviceLifeTimeClock.OnExpired -= this.DeviceLifeTimeClockSink;
+            this.deviceUpdateClock.OnExpired -= this.DeviceUpdateClockSink;
+            this.hostNetworkInfo.OnInterfaceDisabled -= this.NetworkInfoOldInterfaceSink;
+            this.genericControlPoint.OnSearch -= this.UPnPControlPointSearchSink;
+            this.genericControlPoint.OnNotify -= this.SSDPNotifySink;
+            this.deviceFactory.Shutdown();
+            this.deviceFactory = null;
+            this.hostNetworkInfo = null;
+            this.genericControlPoint = null;
+        }
 
         public ArrayList DeviceTable
         {
@@ -1013,19 +1039,6 @@ namespace MIG.Interfaces.Protocols
             {
                 this.OnUpdatedDeviceEvent.UnRegister(value);
             }
-        }
-
-        public UpnpSmartControlPoint()
-        {
-            this.deviceFactory.OnDevice += new UPnPDeviceFactory.UPnPDeviceHandler(this.DeviceFactoryCreationSink);
-            this.deviceLifeTimeClock.OnExpired += new LifeTimeMonitor.LifeTimeHandler(this.DeviceLifeTimeClockSink);
-            this.deviceUpdateClock.OnExpired += new LifeTimeMonitor.LifeTimeHandler(this.DeviceUpdateClockSink);
-            this.hostNetworkInfo = new NetworkInfo(new NetworkInfo.InterfaceHandler(this.NetworkInfoNewInterfaceSink));
-            this.hostNetworkInfo.OnInterfaceDisabled += new NetworkInfo.InterfaceHandler(this.NetworkInfoOldInterfaceSink);
-            this.genericControlPoint = new UPnPControlPoint(this.hostNetworkInfo);
-            this.genericControlPoint.OnSearch += new UPnPControlPoint.SearchHandler(this.UPnPControlPointSearchSink);
-            this.genericControlPoint.OnNotify += new SSDP.NotifyHandler(this.SSDPNotifySink);
-            this.genericControlPoint.FindDeviceAsync(searchFilter);
         }
 
         private void DeviceFactoryCreationSink(UPnPDeviceFactory sender, UPnPDevice device, Uri locationURL)

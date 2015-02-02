@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+02/02/2015 1.00 beta rev 475
+    - Added event popups ignore list (issue #46)
+    - Fixed some bugs in js/api web service calls (introduced with r474 js/api refactoring)
+    - Improved Media Renderer widget
+    - Fixed some bugs in UPnP MIG interface (not disposing objects when disabled; not setting device type to MediaTransmitter for media browser nodes)
+    - Removed all System.Windows.Forms and System.Drawing references from UPnP library (hopefully making it more stable)
+
 31/01/2015 1.00 beta rev 474
     - Fixed synchronization issue in controlling modules (InterfaceControl) that could have caused commands not being executed if performed too fastly
     - Fixed bug in Timetable (not peforming actions on level changes)

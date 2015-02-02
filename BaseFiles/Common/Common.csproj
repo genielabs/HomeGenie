@@ -4431,6 +4431,12 @@
     <None Include="html\pages\control\widgets\homegenie\generic\images\wu_tstorms.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\pages\control\widgets\homegenie\generic\images\media_unmute.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\images\halt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
