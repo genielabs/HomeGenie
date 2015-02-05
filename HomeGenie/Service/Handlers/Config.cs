@@ -203,6 +203,21 @@ namespace HomeGenie.Service.Handlers
                     {
                     }
                 }
+                else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
+                {
+                    migCommand.Response = JsonHelper.GetSimpleResponse(homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes.ToString());
+                }
+                else if (migCommand.GetOption(0) == "Statistics.SetStatisticsDatabaseMaximumSize")
+                {
+                    try
+                    {
+                        homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = int.Parse(migCommand.GetOption(1));
+                        homegenie.SystemConfiguration.Update();
+                    }
+                    catch
+                    {
+                    }
+                }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
                     string csvlog = "";
