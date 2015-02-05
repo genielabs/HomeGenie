@@ -67,7 +67,7 @@ namespace HomeGenie.Service.Handlers
                 }
                 if (homegenie.UpdateChecker != null && homegenie.UpdateChecker.IsUpdateAvailable)
                 {
-                    migCommand.Response += "{ \"Domain\" : \"HomeGenie.UpdateChecker\", \"IsConnected\" : \"True\" }";
+                    migCommand.Response += "{ \"Domain\" : \"" + Domains.HomeGenie_UpdateChecker + "\", \"IsConnected\" : \"True\" }";
                     migCommand.Response += " ]";
                 }
                 else

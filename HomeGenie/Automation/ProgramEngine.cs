@@ -550,7 +550,7 @@ namespace HomeGenie.Automation
                     string message = error[1];
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        int line = int.Parse(error[0].Split(' ')[0]);
+                        int line = int.Parse(error[0].Split(' ')[1]);
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
@@ -573,7 +573,7 @@ namespace HomeGenie.Automation
                     string message = error[1];
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        int line = int.Parse(error[0].Split(' ')[0]);
+                        int line = int.Parse(error[0].Split(' ')[1]);
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,

@@ -44,6 +44,16 @@ namespace MIG.Interfaces.HomeAutomation
 
     public class ZWave : MIGInterface
     {
+        #region Private fields
+
+        private ZWavePort zwavePort;
+        private Controller controller;
+
+        private byte lastRemovedNode = 0;
+        private byte lastAddedNode = 0;
+
+        #endregion
+        
         #region Implemented MIG Commands
 
         // typesafe enum
@@ -143,7 +153,7 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_OFF = new Command(702);
             public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
-         
+
             public static readonly Command THERMOSTAT_MODEGET = new Command(801);
             public static readonly Command THERMOSTAT_MODESET = new Command(802);
             public static readonly Command THERMOSTAT_SETPOINTGET = new Command(803);
@@ -194,8 +204,8 @@ namespace MIG.Interfaces.HomeAutomation
                 if (CommandsList.ContainsValue(str))
                 {
                     var cmd = from c in CommandsList
-                                             where c.Value == str
-                                             select c.Key;
+                        where c.Value == str
+                            select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -216,16 +226,6 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
         #endregion
-
-        private ZWavePort zwavePort;
-        private Controller controller;
-
-        private byte lastRemovedNode = 0;
-        private byte lastAddedNode = 0;
-
-        public ZWave()
-        {
-        }
 
         #region MIG Interface members
 
@@ -695,7 +695,6 @@ namespace MIG.Interfaces.HomeAutomation
             return returnValue;
         }
 
-
         public bool Connect()
         {
             bool success = false;
@@ -756,9 +755,15 @@ namespace MIG.Interfaces.HomeAutomation
             return true;
         }
 
-
         #endregion
 
+        #region Public members
+
+        public ZWave()
+        {
+        }
+        
+        // TODO: check if this is to be deprecated or relocated
         public void Dispose()
         {
 
@@ -785,6 +790,9 @@ namespace MIG.Interfaces.HomeAutomation
 
         }
 
+        #endregion
+
+        #region Private members
 
         private void LoadZwavePort()
         {
@@ -1146,6 +1154,7 @@ namespace MIG.Interfaces.HomeAutomation
             UpdateZWaveNodeDeviceHandler(args.NodeId);
         }
 
+        #endregion
 
     }
 

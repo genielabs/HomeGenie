@@ -229,7 +229,8 @@ namespace HomeGenie.Automation.Scripting
                             this.mailSsl = 1;
                         }
                     }
-                    if (this.networkCredential == null)
+                    var credentials = this.networkCredential;
+                    if (credentials == null)
                     {
                         var username = "";
                         // this is a System Parameter
@@ -241,7 +242,7 @@ namespace HomeGenie.Automation.Scripting
                         {
                             username = spSmtpUserName.Value;
                         }
-                        if (username != "")
+                        if (!String.IsNullOrWhiteSpace(username))
                         {
                             var password = "";
                             // this is a System Parameter
@@ -253,13 +254,14 @@ namespace HomeGenie.Automation.Scripting
                             {
                                 password = spSmtpPassword.Value;
                             }
-                            this.networkCredential = new NetworkCredential(username, password);
+                            credentials = new NetworkCredential(username, password);
                         }
                     }
                     //
                     using (var smtpClient = new SmtpClient(this.mailService))
                     {
-                        smtpClient.Credentials = this.networkCredential;
+                        smtpClient.Credentials = credentials;
+                        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                         if (this.mailPort > 0)
                         {
                             smtpClient.Port = this.mailPort;
@@ -565,7 +567,7 @@ namespace HomeGenie.Automation.Scripting
         //TODO: add autodoc comment (HG Event forwarding)
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
-            string eventRouteUrl = "http://" + hgAddress + "/api/HomeAutomation.HomeGenie/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
+            string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
             // propagate event to remote hg endpoint
             this.WebService(eventRouteUrl)
                 .Put(JsonConvert.SerializeObject(

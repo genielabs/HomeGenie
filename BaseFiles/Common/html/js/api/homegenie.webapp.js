@@ -101,6 +101,7 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == "page_analyze") 
         {
+            HG.WebApp.Statistics.SetTab(1);
             HG.WebApp.Statistics.SetAutoRefresh(true);
             window.setTimeout(function(){
                 HG.WebApp.Statistics.Refresh();

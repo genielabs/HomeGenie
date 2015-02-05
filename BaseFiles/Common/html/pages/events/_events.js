@@ -29,11 +29,7 @@ HG.WebApp.Events.SetupListener = function () {
         var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
         if (module != null) {
             var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, event.Property);
-            // discard dupes if event is not a automation program event
-            if ((module.Domain != 'HomeAutomation.HomeGenie.Automation' && curprop !== null && curprop.Value == event.Value) == false) {
-                // update current event property 
-                HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
-            }
+            HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
             HG.WebApp.Control.RefreshGroupIndicators();
         }
         // send message to UI for updating UI elements related to this event (widgets, popup and such)
@@ -101,7 +97,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
     if (module != null) {
         HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
         // when event is an automation program event, we update the whole module
-        if (module.Domain == 'HomeAutomation.HomeGenie.Automation') {
+        if (module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') {
             HG.Configure.Modules.Get(module.Domain, module.Address, function (data) {
                 try {
                     var mod = eval('[' + data + ']')[0];
@@ -170,28 +166,40 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
             }
+            else if (eventLog.Property == 'Program.Notification') {
+                var notification = JSON.parse(eventLog.Value);
+                popupdata = {
+                    icon: iconImage,
+                    title: '<span style="color:yellow;font-size:9pt;">' + notification.Title + '</span><br>' + notification.Message,
+                    text: '',
+                    timestamp: date
+                };
+            }
             else {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {
                     icon: iconImage,
                     title: '<span style="color:yellow;font-size:9pt;">' + eventLog.Property + '</span><br>' + eventLog.Value,
-                    text: "",
+                    text: '',
                     timestamp: date
                 };
             }
             break;
 
+        case 'Protocols.UPnP':
         case 'HomeAutomation.ZWave':
-            // events from Z-Wave controller (node 1)
+            // events from Z-Wave and UPnP controllers (node 1)
             if (eventLog.Source == '1') {
-                $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                var domain = eventLog.Domain.substr(eventLog.Domain.lastIndexOf('.') + 1);
                 popupdata = {
                     icon: 'images/genie.png',
-                    title: '<span style="color:yellow;font-size:9pt;">' + eventLog.Property + '</span><br/>' + eventLog.Value,
+                    title: '<span style="color:yellow;font-size:9pt;">' + domain + ' ' + eventLog.Property + '</span><br/>' + eventLog.Value,
                     text: '',
                     timestamp: date
                 };
+                if (eventLog.Domain == 'HomeAutomation.ZWave')
+                    $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing
@@ -312,7 +320,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             break;
     }
     //
-    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source)) {
+    if (popupdata != null && !HG.WebApp.Events.PopupHasIgnore(eventLog.Domain, eventLog.Source, eventLog.Property)) {
 
         HG.WebApp.Events.ShowEventPopup(popupdata, eventLog);
 
@@ -327,9 +335,10 @@ HG.WebApp.Events.PopupRefreshIgnore = function () {
     for (var i = 0; i < ignoreList.length; i++)
     {
         var item = '<li data-icon="minus">';
-        item += '    <a href="#" class="ui-grid-a" onclick="HG.WebApp.Events.PopupRemoveIgnore(' + i + ')">';
-        item += '        <div class="ui-block-a hg-label" style="width:75%">' + ignoreList[i].Domain + '</div>';
-        item += '        <div class="ui-block-b hg-label" style="width:25%" align="center">' + ignoreList[i].Address + '</div>';
+        item += '    <a href="#" class="ui-grid-b" onclick="HG.WebApp.Events.PopupRemoveIgnore(' + i + ')">';
+        item += '        <div class="ui-block-a hg-label" style="width:40%">' + ignoreList[i].Domain + '</div>';
+        item += '        <div class="ui-block-b hg-label" style="width:20%" align="center">' + ignoreList[i].Address + '</div>';
+        item += '        <div class="ui-block-c hg-label" style="width:40%">' + ignoreList[i].Property + '</div>';
         item += '    </a>';
         item += '</li>';
         $('#popupsettings_ignorelist').append(item);
@@ -338,13 +347,13 @@ HG.WebApp.Events.PopupRefreshIgnore = function () {
     $('#popupsettings_ignorelist').listview('refresh');
 }
 
-HG.WebApp.Events.PopupHasIgnore = function (domain, address) {
+HG.WebApp.Events.PopupHasIgnore = function (domain, address, property) {
     var ignoreList = dataStore.get('UI.EventPopupIgnore');
     if (ignoreList == null) return false;
     var exists = false;
     for(var i = 0; i < ignoreList.length; i++)
     {
-        if (ignoreList[i].Domain == domain && ignoreList[i].Address == address)
+        if (ignoreList[i].Domain == domain && ignoreList[i].Address == address && ignoreList[i].Property == property)
         {
             exists = true;
             break;
@@ -360,15 +369,15 @@ HG.WebApp.Events.PopupRemoveIgnore = function (index) {
     HG.WebApp.Events.PopupRefreshIgnore();
 };
 
-HG.WebApp.Events.PopupAddIgnore = function (domain, address) {
+HG.WebApp.Events.PopupAddIgnore = function (domain, address, property) {
     var ignoreList = dataStore.get('UI.EventPopupIgnore');
     if (ignoreList == null)
     {
         ignoreList = Array();
     }
-    if (!HG.WebApp.Events.PopupHasIgnore(domain, address))
+    if (!HG.WebApp.Events.PopupHasIgnore(domain, address, property))
     {
-        ignoreList.push({ Domain: domain, Address: address});
+        ignoreList.push({ Domain: domain, Address: address, Property: property });
         dataStore.set('UI.EventPopupIgnore', ignoreList);
     }
     $('#statuspopup').css('display', 'none');
@@ -376,15 +385,15 @@ HG.WebApp.Events.PopupAddIgnore = function (domain, address) {
 
 HG.WebApp.Events.ShowEventPopup = function (popupdata, eventLog) {
 
-    var s = '<table width="100%"><tr><td width="48" rowspan="2">';
-    s += '<img src="' + popupdata.icon + '" width="48">';
+    var s = '<table width="100%"><tr><td width="42" valign="top">';
+    s += '<img src="' + popupdata.icon + '" width="42">';
     s += '</td><td valign="top" align="left">';
     s += popupdata.title;
     s += '</td><td align="right" style="color:lime;font-size:12pt">' + popupdata.text + '</td></tr>';
-    s += '<tr style="color:gray;font-size:9pt;"><td>' + popupdata.timestamp + '</td>';
+    s += '<tr style="color:gray;font-size:9pt;"><td colspan="2">' + popupdata.timestamp + '</td>';
     if (eventLog)
     {
-        s += '<td align="right"><a href="#" title="Block popup from this source" class="ui-corner-all" onclick="HG.WebApp.Events.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a>&nbsp;&nbsp;</td>';
+        s += '<td align="right"><a href="#" title="Block popup from this source" onclick="HG.WebApp.Events.PopupAddIgnore(\'' + eventLog.Domain + '\',\'' + eventLog.Source + '\',\'' + eventLog.Property + '\')"><img border="0" alt="Block popup from this source" src="images/halt.png" /></a></td>';
     }
     s += '</tr>';
     s += '</table>';

@@ -7,12 +7,55 @@
     IconImage: 'pages/control/widgets/homegenie/generic/images/power.png',
     StatusText: '',
     Description: '',
+    Initialized: false,
     Widget: null,
     LastDrawStats: new Date(0),
 
     RenderView: function (cuid, module) {
         var container = $(cuid);
         var widget = this.Widget = container.find('[data-ui-field=widget]');
+        if (!this.Initialized)
+        {
+            this.Widget.find('[data-ui-field=energystats]').qtip({
+                id: 'flot',
+                prerender: true,
+                content: ' ',
+                position: {
+                    target: 'mouse',
+                    viewport: $('#flot'),
+                    adjust: {
+                        x: 5
+                    }
+                },
+                show: false,
+                hide: {
+                    event: false,
+                    fixed: true
+                }
+            });
+            this.Widget.find('[data-ui-field=energystats]').bind("plothover", function (event, pos, item) {
+                // Grab the API reference
+                var graph = $(this),
+                    api = graph.qtip(),
+                    previousPoint;
+                // If we weren't passed the item object, hide the tooltip and remove cached point data
+                if (!item) {
+                    api.cache.point = false;
+                    return api.hide(item);
+                }
+                previousPoint = api.cache.point;
+                if (previousPoint !== item.dataIndex) {
+                    var offset = new Date().getTimezoneOffset() * 60 * 1000;
+                    api.cache.point = item.dataIndex;
+
+                    api.set('content.text',
+                    item.series.label + " at " + new Date(item.datapoint[0] + offset).toLocaleTimeString() + " = " + item.datapoint[1].toFixed(2));
+
+                    api.elements.tooltip.stop(1, 1);
+                    api.show(item);
+                }
+            });
+        }
         // render widget
         this.DrawData();
         var elapsedMinutes = ((new Date() - this.LastDrawStats) / 1000 / 60);
@@ -40,7 +83,7 @@
         var showlines = false;
         var showbars = true;
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/Meter.Watts/' + mod + '/',
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/Meter.Watts/' + mod + '/0/' + new Date().getTime(),
             type: 'GET',
             success: function (data) {
                 var stats = eval(data);
@@ -53,7 +96,7 @@
                             { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
                         ],
                         {
-                            yaxis: { minTickSize: 10, tickSize: 10 },
+                            yaxis: { show: false },
                             xaxis: { mode: "time", timeformat: "%H", minTickSize: [2, "hour"], tickSize: [2, "hour"] },
                             legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
                             lines: { show: showlines, lineWidth: 1.0 },
@@ -61,7 +104,8 @@
                                 splines: { show: showsplines }
                             },
                             grid: {
-                                backgroundColor: { colors: ["#fff", "#ddd"] }
+                                backgroundColor: { colors: ["#fff", "#ddd"] },
+                                hoverable: true
                             },
                             colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
                             points: { show: false },

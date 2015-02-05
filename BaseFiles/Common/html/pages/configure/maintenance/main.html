@@ -22,7 +22,7 @@
                     </div>
                     <div class="ui-block-b" style="float:right;width:150px">
                         <a data-locale-id="configure_system_updatemanager_updatecheck" id="configure_system_updatemanager_updatebutton" class="ui-btn ui-corner-all">Update Check</a>
-                        <a data-locale-id="configure_system_updatemanager_installupdate" id="configure_system_updatemanager_installbutton" class="ui-btn ui-corner-all">Install Update</a>
+                        <a data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
                     </div>
                 </div>
             </li>
@@ -287,7 +287,7 @@
 
 
 
-        <div id="maintenance_configuration_factoryresetpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b">
+        <div id="maintenance_configuration_factoryresetpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_factoryreset">Factory Reset?</h1>
             </div>
@@ -306,7 +306,7 @@
         </div>
 
 
-        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b">
+        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_servicerestart">Restart Service?</h1>
             </div>
@@ -324,6 +324,23 @@
             </div>
         </div>
 
+        <div id="systemsettings_updatewarning_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_updateinstall_warning" class="ui-title">It is strongly recommended to make a backup of your configuration before proceeding with any update.</h3>
+                <p></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="configure_system_updatemanager_proceedbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_updatemanager_installupdate">Install Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">

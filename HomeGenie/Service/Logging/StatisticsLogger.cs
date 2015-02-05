@@ -120,7 +120,7 @@ namespace HomeGenie.Service.Logging
             return parameterList;
         }
 
-        public StatisticsEntry GetStartDate()
+        public StatisticsEntry GetDateRange()
         {
             var start = DateTime.UtcNow;
             var end = DateTime.UtcNow;
@@ -181,7 +181,8 @@ namespace HomeGenie.Service.Logging
             string domain,
             string address,
             string parameterName,
-            double timescaleseconds
+            double timescaleseconds,
+            DateTime startDate, DateTime endDate
         )
         {
             var values = new List<StatisticsEntry>();
@@ -190,7 +191,7 @@ namespace HomeGenie.Service.Logging
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
-                string query = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + "Parameter = '" + parameterName + "' group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
+                string query = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + "Parameter = '" + parameterName + "' AND " + GetDateRangeFilter(startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
                 dbCommand.CommandText = query;
                 var reader = dbCommand.ExecuteReader();
                 //
@@ -223,7 +224,7 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
-        public List<StatisticsEntry> GetHourlyStats24(
+        public List<StatisticsEntry> GetHourlyStatsToday(
             string domain,
             string address,
             string parameterName,
@@ -329,7 +330,8 @@ namespace HomeGenie.Service.Logging
             string domain,
             string address,
             string parameterName,
-            string aggregator
+            string aggregator,
+            DateTime startDate, DateTime endDate
         )
         {
             var values = new List<StatisticsEntry>();
@@ -338,7 +340,7 @@ namespace HomeGenie.Service.Logging
                 var dbCommand = dbConnection.CreateCommand();
                 string filter = "";
                 if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
-                string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' AND " + GetDateRangeFilter(startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
                 dbCommand.CommandText = query;
                 var reader = dbCommand.ExecuteReader();
                 //
@@ -410,6 +412,13 @@ namespace HomeGenie.Service.Logging
             }
         }
 
+        private string GetDateRangeFilter(DateTime start, DateTime end)
+        {
+            var d1 = DateTime.Parse(start.ToString("yyyy-MM-dd") + " 00:00:00.000000");
+            var d2 = DateTime.Parse(end.ToString("yyyy-MM-dd") + " 23:59:59.999999");
+            var filter = "(TimeStart >= '" + d1.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' AND TimeStart <= '" + d2.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "')";
+            return filter;
+        }
 
         private string GetStatisticsDatabaseName()
         {

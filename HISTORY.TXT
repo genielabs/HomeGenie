@@ -1,5 +1,15 @@
 ﻿RELEASE HISTORY
 
+05/02/2015 1.00 beta rev 476
+    - Added HTTP post data handling for dynamic web service handlers
+    - Fixed bug in Net.SendMail also affecting Security Alarm System app (issue #88)
+    - Optimized DLNA/UPnP MIG interface driver
+    - Fixed web service call handling in jkUtils OpenWeatherMap and SolarAltitude apps
+    - Fixed bug in error reporting for Javascript automation programs
+    - Improved Statistics section with new UI and date range selection (issue #17)
+    - Added tooltips to graphs
+    - Minor improvements to popup notifications blocking functionality (issue #46)
+
 02/02/2015 1.00 beta rev 475
     - Added event popups ignore list (issue #46)
     - Fixed some bugs in js/api web service calls (introduced with r474 js/api refactoring)

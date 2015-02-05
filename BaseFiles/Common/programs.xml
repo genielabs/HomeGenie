@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:00.970558Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:03.990422Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:01.47681Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:22.493342Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -438,12 +438,11 @@ return true; // execute "Code To Run"
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
     <Name>Weather Underground</Name>
-    <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
-It can be used for "Sunrise/Sunset" feature. 
-User must create an account at wunderground.com in order to obtain a service key.</Description>
+    <Description>Current weather, forecast and sunrise/sunset information from &lt;strong&gt;Weather Underground&lt;/strong&gt; service. 
+To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:01.974862Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:22.99477Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +521,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:02.470843Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:23.492904Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1265,7 +1264,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:02.97357Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:23.995446Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1320,7 +1319,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:03.476681Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:24.494033Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1615,7 +1614,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:03.976795Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:24.999407Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1694,7 +1693,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:04.475597Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:25.495641Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1764,7 +1763,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:04.977224Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:25.995325Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2038,7 +2037,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:05.479101Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:26.496775Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2404,7 +2403,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:06.47905Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:27.500349Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2506,7 +2505,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:06.986356Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:28.008068Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2660,7 +2659,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:07.484965Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:28.498787Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2924,7 +2923,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:07.985559Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:29.003306Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4054,55 +4053,23 @@ SolarAltitude.main = function () {
   
 };
 
-while (hg.Program.IsEnabled)
-{
-  	SolarAltitude.main();
-  	// Update every 12 hours
-  	hg.Pause(12*60*60);
-
-}
-
-
 //
 // Web service calls handling
 //
-/* WebServiceCall currently not working 
-
-hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args) {
-{
-    //string[] reqs = ((string)args).Split('/');
+hg.When.WebServiceCallReceived(hg.Program.Module.Domain + "/" + hg.Program.Module.Address, function (args) {
   	var reqs = args.split('/');
-    var res = "";
-    hg.Program.Notify("SolarAltitude", "WebServiceCall.");
-    
-    try
+    var res = "ERROR";
+    var command = reqs[2];
+    switch(command)
     {
-      var command = reqs[2];
-      var pid = reqs[1];
-      if (pid == hg.Program.Module.Address)
-      {
-
-        switch(command)
-        {
-          case "Control.Refresh":
-            //Program.Notify("jkutils: SolarAltitude","Update triggered.");
-          	SolarAltitude.main();
-            break;
-        }
-
-      }
-
-    } catch (e) {
-    
-      var res = "{ 'ResponseValue' : 'ERROR: " + e.Message + " " + e.StackTrace + "' }";
-      
+      case "Control.Refresh":
+        res = "OK";
+        hg.Program.Notify("jkutils: SolarAltitude","Update triggered.");
+        SolarAltitude.main();
+        break;
     }
-    // unable to process request
     return res;
-
 });
-*/
-
 
 // For your convenience:
 //   If you should need a way to parse the saved times within you own scripts, you can use the following function.
@@ -4117,11 +4084,20 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
 //    return d;
 //   }
    
+
+while (hg.Program.IsEnabled)
+{
+  	SolarAltitude.main();
+  	// Update every 12 hours
+  	hg.Pause(12*60*60);
+
+}
+
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>501</Address>
     <Name>jkUtils - Solar Altitude</Name>
@@ -7835,9 +7811,10 @@ hg.SetConditionTrue();
     <ScriptSource>var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
 var temperature = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH0").Get().Parameter("Sensor.Temperature");
 var luminance = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH1").Get().Parameter("Sensor.Luminance");
-var energyLoad = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.KwLoad");
-var operatingLights = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingLights");
-var operatingSwitches = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingSwitches");
+var energyMonitor = hg.Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+var energyLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
+var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
 var weather = hg.Program.WithName("Weather Underground");
 
 var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
@@ -7886,7 +7863,7 @@ while (hg.Program.IsEnabled)
   }
   if (hg.Settings.Parameter('EdenDisplay.MenuMode').Value != 'ON')
   {
-    // Energy monitor Kw Load
+    // Energy monitor Watt load
     oled.Command("Oled.GoTo").Execute("0/4");
     oled.Command("Oled.DrawText2").Execute("Energy Use/CENTER");
     oled.Command("Oled.GoTo").Execute("0/6");
@@ -8907,7 +8884,7 @@ while (Program.IsEnabled)
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-31T13:58:36.107619Z</ActivationTime>
-    <TriggerTime>2015-02-02T20:50:08.993387Z</TriggerTime>
+    <TriggerTime>2015-02-04T12:12:30.009942Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

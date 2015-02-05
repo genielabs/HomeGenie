@@ -35,12 +35,29 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Threading;
 
 namespace MIG.Interfaces.Protocols
 {
+
     public class UPnP : MIGInterface
     {
 
+        #region Private fields
+
+        private UpnpSmartControlPoint controlPoint;
+        private bool isConnected = false;
+        private object deviceOperationLock = new object();
+        private List<InterfaceModule> modules = new List<InterfaceModule>();
+        //private UPnPDevice localDevice;
+
+        private class DeviceHolder
+        {
+            public UPnPDevice Device;
+            public bool Initialized;
+        }
+
+        #endregion
 
         #region Implemented MIG Commands
 
@@ -164,16 +181,6 @@ namespace MIG.Interfaces.Protocols
 
         #endregion
 
-
-        private UpnpSmartControlPoint controlPoint;
-        private bool isConnected = false;
-        //private UPnPDevice localDevice;
-
-        public UPnP()
-        {
-
-        }
-
         #region MIG Interface members
 
         public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
@@ -193,183 +200,11 @@ namespace MIG.Interfaces.Protocols
 
         public List<InterfaceModule> GetModules()
         {
-            List<InterfaceModule> modules = new List<InterfaceModule>();
-            for (int d = 0; d < this.UpnpControlPoint.DeviceTable.Count; d++)
-            {
-                var device = (UPnPDevice)(this.UpnpControlPoint.DeviceTable[d]);
-                if (String.IsNullOrWhiteSpace(device.StandardDeviceType))
-                    continue;
-                //
-                InterfaceModule module = new InterfaceModule();
-                module.Domain = this.Domain;
-                module.Address = device.UniqueDeviceName;
-                module.Description = device.FriendlyName + " (" + device.ModelName + ")";
-                module.ModuleType = MIG.ModuleTypes.Sensor;
-                if (device.StandardDeviceType == "MediaRenderer")
-                {
-                    module.ModuleType = MIG.ModuleTypes.MediaReceiver;
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "Widget.DisplayModule",
-                        Value = "homegenie/generic/mediareceiver"
-                    });
-                }
-                else if (device.StandardDeviceType == "MediaServer")
-                {
-                    module.ModuleType = MIG.ModuleTypes.MediaTransmitter;
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "Widget.DisplayModule",
-                        Value = "homegenie/generic/mediaserver"
-                    });
-                }
-                else if (device.StandardDeviceType == "SwitchPower")
-                {
-                    module.ModuleType = MIG.ModuleTypes.Switch;
-                }
-                else if (device.StandardDeviceType == "BinaryLight")
-                {
-                    module.ModuleType = MIG.ModuleTypes.Light;
-                }
-                else if (device.StandardDeviceType == "DimmableLight")
-                {
-                    module.ModuleType = MIG.ModuleTypes.Dimmer;
-                }
-                else if (device.HasPresentation)
-                {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "Widget.DisplayModule",
-                        Value = "homegenie/generic/link"
-                    });
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "FavouritesLink.Url",
-                        Value = device.PresentationURL
-                    });
-                }
-
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.DeviceURN",
-                    Value = device.DeviceURN
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.DeviceURN_Prefix",
-                    Value = device.DeviceURN_Prefix
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.FriendlyName",
-                    Value = device.FriendlyName
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.LocationURL",
-                    Value = device.LocationURL
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.Version",
-                    Value = device.Major + "." + device.Minor
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.ModelName",
-                    Value = device.ModelName
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.ModelNumber",
-                    Value = device.ModelNumber
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.ModelDescription",
-                    Value = device.ModelDescription
-                });
-
-                if (device.ModelURL != null)
-                {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = device.UniqueDeviceName,
-                        SourceType = "UPnP " + device.FriendlyName,
-                        Path = "UPnP.ModelURL",
-                        Value = device.ModelURL.ToString()
-                    });
-                }
-
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.Manufacturer",
-                    Value = device.Manufacturer
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.ManufacturerURL",
-                    Value = device.ManufacturerURL
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.PresentationURL",
-                    Value = device.PresentationURL
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.UniqueDeviceName",
-                    Value = device.UniqueDeviceName
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.SerialNumber",
-                    Value = device.SerialNumber
-                });
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.StandardDeviceType",
-                    Value = device.StandardDeviceType
-                });
-
-                modules.Add(module);
-            }
+            Thread updatePropertiesAsync = new Thread(() => {
+                Thread.Sleep(2000);
+                UpdateDeviceProperties();
+            });
+            updatePropertiesAsync.Start();
             return modules;
         }
 
@@ -384,6 +219,8 @@ namespace MIG.Interfaces.Protocols
             {
                 controlPoint = new UpnpSmartControlPoint();
                 controlPoint.OnAddedDevice += controPoint_OnAddedDevice;
+                controlPoint.OnRemovedDevice += controPoint_OnRemovedDevice;
+                controlPoint.OnDeviceExpired += controPoint_OnDeviceExpired;
                 isConnected = true;
             }
             if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
@@ -403,6 +240,8 @@ namespace MIG.Interfaces.Protocols
             if (controlPoint != null)
             {
                 controlPoint.OnAddedDevice -= controPoint_OnAddedDevice;
+                controlPoint.OnRemovedDevice -= controPoint_OnRemovedDevice;
+                controlPoint.OnDeviceExpired -= controPoint_OnDeviceExpired;
                 controlPoint.ShutDown();
                 controlPoint = null;
             }
@@ -793,9 +632,12 @@ namespace MIG.Interfaces.Protocols
 
         #endregion
 
+        #region Public members
+        
+        public UPnP()
+        {
 
-
-        #region non-MIGInterface public members
+        }
 
         public UpnpSmartControlPoint UpnpControlPoint
         {
@@ -859,8 +701,7 @@ namespace MIG.Interfaces.Protocols
 
         #endregion
 
-
-
+        #region Private Members
 
         private UPnPDevice GetUpnpDevice(string deviceId)
         {
@@ -894,21 +735,99 @@ namespace MIG.Interfaces.Protocols
 
         private void controPoint_OnAddedDevice(UpnpSmartControlPoint sender, UPnPDevice device)
         {
-            if (InterfacePropertyChangedAction != null)
+            if (String.IsNullOrWhiteSpace(device.StandardDeviceType))
+                return;
+
+            //foreach (UPnPService s in device.Services)
+            //{
+            //    s.Subscribe(1000, new UPnPService.UPnPEventSubscribeHandler(_subscribe_sink));
+            //}
+
+            lock (deviceOperationLock)
             {
-                //foreach (UPnPService s in device.Services)
-                //{
-                //    s.Subscribe(1000, new UPnPService.UPnPEventSubscribeHandler(_subscribe_sink));
-                //}
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = device.UniqueDeviceName,
-                    SourceType = "UPnP " + device.FriendlyName,
-                    Path = "UPnP.DeviceType",
-                    Value = device.StandardDeviceType
-                });
+                InterfaceModule module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = device.UniqueDeviceName;
+                module.Description = device.FriendlyName + " (" + device.ModelName + ")";
+                if (device.StandardDeviceType == "MediaRenderer")
+                {
+                    module.ModuleType = MIG.ModuleTypes.MediaReceiver;
+                }
+                else if (device.StandardDeviceType == "MediaServer")
+                {
+                    module.ModuleType = MIG.ModuleTypes.MediaTransmitter;
+                }
+                else if (device.StandardDeviceType == "SwitchPower")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Switch;
+                }
+                else if (device.StandardDeviceType == "BinaryLight")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Light;
+                }
+                else if (device.StandardDeviceType == "DimmableLight")
+                {
+                    module.ModuleType = MIG.ModuleTypes.Dimmer;
+                }
+                else
+                {
+                    module.ModuleType = MIG.ModuleTypes.Sensor;
+                }
+                module.CustomData = new DeviceHolder() { Device = device, Initialized = false };
+                modules.Add(module);
+                //
+                if (InterfacePropertyChangedAction != null)
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = "1",
+                        SourceType = "DLNA/UPnP Controller",
+                        Path = "Controller.Status",
+                        Value = "Added node " + module.Description
+                    });
             }
             if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
+        }
+
+        private void controPoint_OnRemovedDevice(UpnpSmartControlPoint sender, UPnPDevice device)
+        {
+            lock (deviceOperationLock)
+            {
+                var module = modules.Find(m => m.Address == device.UniqueDeviceName);
+                if (module != null)
+                {
+                    if (InterfacePropertyChangedAction != null)
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = "1",
+                            SourceType = "DLNA/UPnP Controller",
+                            Path = "Controller.Status",
+                            Value = "Removed node " + module.Description
+                        });
+                    modules.Remove(module);
+                    if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
+                }
+            }
+        }
+
+        private void controPoint_OnDeviceExpired(UpnpSmartControlPoint sender, UPnPDevice device)
+        {
+            lock (deviceOperationLock)
+            {
+                var module = modules.Find(m => m.Address == device.UniqueDeviceName);
+                if (module != null)
+                {
+                    if (InterfacePropertyChangedAction != null)
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = "1",
+                            SourceType = "DLNA/UPnP Controller",
+                            Path = "Controller.Status",
+                            Value = "Removed node " + module.Description
+                        });
+                    modules.Remove(module);
+                    if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
+                }
+            }
         }
 
         //        private void _subscribe_sink(UPnPService sender, bool SubscribeOK)
@@ -925,20 +844,207 @@ namespace MIG.Interfaces.Protocols
         //Console.WriteLine("\n\n\n" + sender.ServiceURN + " - " + SEQ + "\n\n\n");
         //        }
 
+        private void UpdateDeviceProperties()
+        {
+            lock (deviceOperationLock)
+            {
+                for (int d = 0; d < modules.Count; d++)
+                {
+                    var module = modules[d];
+                    var deviceHolder = module.CustomData as DeviceHolder;
+                    if (deviceHolder.Initialized)
+                        continue;
+                    deviceHolder.Initialized = true;
+                    var device = deviceHolder.Device;
+                    if (InterfacePropertyChangedAction != null && !String.IsNullOrWhiteSpace(device.StandardDeviceType))
+                    {
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = device.UniqueDeviceName,
+                            SourceType = "UPnP " + device.FriendlyName,
+                            Path = "UPnP.DeviceType",
+                            Value = device.StandardDeviceType
+                        });
+                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = device.UniqueDeviceName,
+                            SourceType = "UPnP " + device.FriendlyName,
+                            Path = "UPnP.Version",
+                            Value = device.Major + "." + device.Minor
+                        });
+                        if (device.StandardDeviceType == "MediaRenderer")
+                        {
+                            module.ModuleType = MIG.ModuleTypes.MediaReceiver;
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "Widget.DisplayModule",
+                                Value = "homegenie/generic/mediareceiver"
+                            });
+                        }
+                        else if (device.StandardDeviceType == "MediaServer")
+                        {
+                            module.ModuleType = MIG.ModuleTypes.MediaTransmitter;
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "Widget.DisplayModule",
+                                Value = "homegenie/generic/mediaserver"
+                            });
+                        }
+                        else if (device.StandardDeviceType == "SwitchPower")
+                        {
+                            module.ModuleType = MIG.ModuleTypes.Switch;
+                        }
+                        else if (device.StandardDeviceType == "BinaryLight")
+                        {
+                            module.ModuleType = MIG.ModuleTypes.Light;
+                        }
+                        else if (device.StandardDeviceType == "DimmableLight")
+                        {
+                            module.ModuleType = MIG.ModuleTypes.Dimmer;
+                        }
+                        else if (device.HasPresentation && device.PresentationURL != null)
+                        {
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "Widget.DisplayModule",
+                                Value = "homegenie/generic/link"
+                            });
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "FavouritesLink.Url",
+                                Value = device.PresentationURL
+                            });
+                        }               
+                        if (!String.IsNullOrWhiteSpace(device.DeviceURN))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.DeviceURN",
+                                Value = device.DeviceURN
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.DeviceURN_Prefix))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.DeviceURN_Prefix",
+                                Value = device.DeviceURN_Prefix
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.FriendlyName))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.FriendlyName",
+                                Value = device.FriendlyName
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.LocationURL))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.LocationURL",
+                                Value = device.LocationURL
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.ModelName))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.ModelName",
+                                Value = device.ModelName
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.ModelNumber))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.ModelNumber",
+                                Value = device.ModelNumber
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.ModelDescription))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.ModelDescription",
+                                Value = device.ModelDescription
+                            });
+                        if (device.ModelURL != null)
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.ModelURL",
+                                Value = device.ModelURL.ToString()
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.Manufacturer))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.Manufacturer",
+                                Value = device.Manufacturer
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.ManufacturerURL))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.ManufacturerURL",
+                                Value = device.ManufacturerURL
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.PresentationURL))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.PresentationURL",
+                                Value = device.PresentationURL
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.UniqueDeviceName))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.UniqueDeviceName",
+                                Value = device.UniqueDeviceName
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.SerialNumber))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.SerialNumber",
+                                Value = device.SerialNumber
+                            });
+                        if (!String.IsNullOrWhiteSpace(device.StandardDeviceType))
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = device.UniqueDeviceName,
+                                SourceType = "UPnP " + device.FriendlyName,
+                                Path = "UPnP.StandardDeviceType",
+                                Value = device.StandardDeviceType
+                            });
+                    }
+                }
+            }
+        }
+
+        #endregion
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    #region UpnpSmartControlPoint helper class
 
     // original code from
     // https://code.google.com/p/phanfare-tools/
@@ -1382,8 +1488,6 @@ namespace MIG.Interfaces.Protocols
         }
     }
 
-
-
-
+    #endregion
 
 }

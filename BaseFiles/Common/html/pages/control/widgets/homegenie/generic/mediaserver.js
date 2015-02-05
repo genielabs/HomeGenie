@@ -46,20 +46,6 @@
                 var item = (_this.NavStack.length > 0 ? _this.NavStack[_this.NavStack.length - 1] : '0');
                 _this.RenderBrowseList(browselist, item);
             });
-            //
-            var sendtolist = controlpopup.find('[data-ui-field=sendto]');
-            sendtolist.empty();
-            for (m = 0; m < HG.WebApp.Data.Modules.length; m++) {
-                var upnpdev = HG.WebApp.Data.Modules[m];
-                var devtype = HG.WebApp.Utility.GetModulePropertyByName(upnpdev, "UPnP.StandardDeviceType");
-                if (devtype != null && devtype.Value == 'MediaRenderer') {
-                    var dn = (upnpdev.Name != '' ? upnpdev.Name : upnpdev.Description);
-                    var mr = $('<option value="' + upnpdev.Address + '">' + dn + '</option>')
-                    sendtolist.append(mr);
-                }
-            }
-            sendtolist.append('<option value="browser">Open in browser</option>');
-            sendtolist.selectmenu('refresh');
         }
         //
         widget.find('[data-ui-field=name]').html(module.Name);
@@ -76,6 +62,21 @@
         controlpopup.find('[data-ui-field=icon]').attr('src', this.IconImage);
         controlpopup.find('[data-ui-field=group]').html(this.GroupName);
         controlpopup.find('[data-ui-field=name]').html(module.Name);
+        //
+        var sendtolist = controlpopup.find('[data-ui-field=sendto]');
+        sendtolist.empty();
+        for (m = 0; m < HG.WebApp.Data.Modules.length; m++) {
+            var upnpdev = HG.WebApp.Data.Modules[m];
+            var devtype = HG.WebApp.Utility.GetModulePropertyByName(upnpdev, "UPnP.StandardDeviceType");
+            if (upnpdev.DeviceType == 'MediaReceiver' || (devtype != null && devtype.Value == 'MediaRenderer')) {
+                var dn = (upnpdev.Name != '' ? upnpdev.Name : upnpdev.Description);
+                var mr = $('<option value="' + upnpdev.Address + '">' + dn + '</option>')
+                sendtolist.append(mr);
+            }
+        }
+        sendtolist.append('<option value="browser">Open in browser</option>');
+        sendtolist.selectmenu('refresh');
+        // 
         widget.find('[data-ui-field=description]').html(this.DeviceInfo != '' ? this.DeviceInfo : this.Description);
     },
 

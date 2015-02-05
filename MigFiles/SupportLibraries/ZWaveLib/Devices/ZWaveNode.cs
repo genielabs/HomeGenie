@@ -63,6 +63,14 @@ namespace ZWaveLib.Devices
 
     public class ZWaveNode
     {
+        
+        #region Private fields
+
+        internal ZWavePort zwavePort;
+        private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
+
+        #endregion Private fields
+
         #region Public fields
 
         public byte NodeId { get; protected set; }
@@ -81,13 +89,6 @@ namespace ZWaveLib.Devices
         public virtual event ManufacturerSpecificResponseEventHandler ManufacturerSpecificResponse;
 
         #endregion Public fields
-
-        #region Private fields
-
-        internal ZWavePort zwavePort;
-        private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
-
-        #endregion Private fields
 
         #region Lifecycle
 
@@ -707,7 +708,6 @@ namespace ZWaveLib.Devices
 
 
         #endregion Public members
-
 
         #region Private members
 

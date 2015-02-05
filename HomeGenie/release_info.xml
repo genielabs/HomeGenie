@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r474</Version>
+  <Version>1.00 beta r476</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed occasional Ajax network error occurring on IE
-  - Fixed synchronization issue in controlling modules (InterfaceControl) that could have caused commands not being executed if performed too fastly
-  - Added zoom/panning to statistic graphs
-  - Added forecast info to Weather Underground widget
-  - Added new Timetable app for scheduling Lights, Shutters, Thermostats
-  - Fixed security widget slider size
-  - Added X10 CM15 RF messages decoding
-  - Fixed bug in ZWaveLib Basic Report command (bug introduced with latest refactoring)</ReleaseNote>
-  <ReleaseDate>2015-02-02T14:37:11.0000Z</ReleaseDate>
+  <ReleaseNote>   - Improved Statistics section with new UI and date range selection (issue #17)
+  - Added tooltips to graphs
+  - Added event popups ignore list (issue #46)
+  - Improved Media Server and Receiver widget
+  - Fixed bug in Net.SendMail also affecting Security Alarm System app (issue #88)
+  - Fixed web service call handling in jkUtils OpenWeatherMap and SolarAltitude apps
+  - Fixed bug in error reporting for Javascript automation programs
+  - Fixed some bugs in js/api web service calls (introduced with r474 js/api refactoring)
+  - Optimized DLNA/UPnP MIG interface and fixed some bugs (not disposing objects when disabled; not setting device type to MediaTransmitter for media browser nodes)
+  - Removed all System.Windows.Forms and System.Drawing references from UPnP library (hopefully making it more stable)</ReleaseNote>
+  <ReleaseDate>2015-02-05T10:53:28.0000Z</ReleaseDate>
 </ReleaseInfo>
