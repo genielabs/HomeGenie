@@ -150,31 +150,26 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                             zvalue.Value = Utility.ExtractTemperatureFromBytes(message);
                         }
                         //
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue);
-                        nodeHost.RaiseUpdateParameterEvent(
-                            nodeHost,
-                            key,
-                            ParameterType.SENSOR_TEMPERATURE,
-                            zvalue
-                        );
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_TEMPERATURE, zvalue.Value);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, zvalue);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, zvalue.Value);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_LUMINANCE, zvalue);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_LUMINANCE, zvalue.Value);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_HUMIDITY, zvalue);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_HUMIDITY, zvalue.Value);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.POWER)
@@ -205,7 +200,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     else
                     {
                         nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, zvalue);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, zvalue.Value);
                         Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                     }
                 }
