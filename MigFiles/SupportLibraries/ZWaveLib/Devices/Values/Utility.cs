@@ -30,28 +30,17 @@ namespace ZWaveLib.Devices.Values
         public int Scale;
         public int Precision;
         public int Size;
-        public byte PrecisionScaleSize;
     }
 
     public class Utility
     {
+        private static byte sizeMask = 0x07, 
+            scaleMask = 0x18, scaleShift = 0x03, 
+            precisionMask = 0xe0, precisionShift = 0x05;
 
-        public static double FahrenheitToCelsius(double temperature)
+        public static byte GetPrecisionScaleSize(int precision, int scale, int size)
         {
-            return ((5.0 / 9.0) * (temperature - 32.0));
-        }
-
-        public static ZWaveValue ExtractTemperatureFromBytes(byte[] message)
-        {
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            ZWaveValue zvalue = ExtractValueFromBytes(message, 1);
-            // zvalue.Scale == 1 -> Fahrenheit
-            // zvalue.Scale == 0 -> Celsius 
-
-            return zvalue;
+            return (byte)((precision << precisionShift) | (scale << scaleShift) | size);
         }
 
         // adapted from: 
@@ -61,15 +50,10 @@ namespace ZWaveLib.Devices.Values
             ZWaveValue result = new ZWaveValue();
             try
             {
-                byte sizeMask = 0x07, 
-                scaleMask = 0x18, scaleShift = 0x03, 
-                precisionMask = 0xe0, precisionShift = 0x05;
-                //
                 byte size = (byte)(message[valueOffset-1] & sizeMask);
                 byte precision = (byte)((message[valueOffset-1] & precisionMask) >> precisionShift);
                 int scale = (int)((message[valueOffset-1] & scaleMask) >> scaleShift);
                 //
-                result.PrecisionScaleSize = (byte)((precision << precisionShift) | (scale << scaleShift) | size);
                 result.Size = size;
                 result.Precision = precision;
                 result.Scale = scale;
@@ -100,6 +84,24 @@ namespace ZWaveLib.Devices.Values
                 // TODO: report/handle exception
             }
             return result;
+        }
+
+        public static ZWaveValue ExtractTemperatureFromBytes(byte[] message)
+        {
+            byte[] tmp = new byte[4];
+            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
+            message = tmp;
+
+            ZWaveValue zvalue = ExtractValueFromBytes(message, 1);
+            // zvalue.Scale == 1 -> Fahrenheit
+            // zvalue.Scale == 0 -> Celsius 
+
+            return zvalue;
+        }
+        
+        public static double FahrenheitToCelsius(double temperature)
+        {
+            return ((5.0 / 9.0) * (temperature - 32.0));
         }
 
     }

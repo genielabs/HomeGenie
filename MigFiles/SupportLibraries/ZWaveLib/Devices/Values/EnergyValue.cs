@@ -44,16 +44,16 @@ namespace ZWaveLib.Devices.Values
 
         public static EnergyValue Parse(byte[] message)
         {
-            int scale = 0;
+            ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 11);
             EnergyValue energy = new EnergyValue();
             //energy.Value = ((double)int.Parse(
             //                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
             //                       System.Globalization.NumberStyles.HexNumber
             //                   )) / 1000D;
-            energy.Value = Utility.ExtractValueFromBytes(message, 11).Value;
-            if (Enum.IsDefined(typeof(ZWaveEnergyParameter), scale))
+            energy.Value = zvalue.Value;
+            if (Enum.IsDefined(typeof(ZWaveEnergyParameter), zvalue.Scale))
             {
-                energy.Parameter = (ZWaveEnergyParameter)scale;
+                energy.Parameter = (ZWaveEnergyParameter)zvalue.Scale;
             }
             switch (energy.Parameter)
             {
