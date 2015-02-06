@@ -61,8 +61,7 @@ namespace ZWaveLib.Devices.Values
         {
             SensorValue sensor = new SensorValue();
             //
-            int scale = 0;
-            double val = Utility.ExtractValueFromBytes(message, 11, out scale);
+            ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 11);
             //
             byte key = message[9];
             if (key == (byte)ZWaveSensorParameter.TEMPERATURE)
@@ -74,19 +73,19 @@ namespace ZWaveLib.Devices.Values
             else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
             {
                 sensor.Parameter = ZWaveSensorParameter.GENERAL_PURPOSE_VALUE;
-                sensor.Value = val;
+                sensor.Value = zvalue.Value;
                 sensor.EventType = ParameterType.GENERIC;
             }
             else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
             {
                 sensor.Parameter = ZWaveSensorParameter.LUMINANCE;
-                sensor.Value = val;
+                sensor.Value = zvalue.Value;
                 sensor.EventType = ParameterType.SENSOR_LUMINANCE;
             }
             else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
             {
                 sensor.Parameter = ZWaveSensorParameter.RELATIVE_HUMIDITY;
-                sensor.Value = val;
+                sensor.Value = zvalue.Value;
                 sensor.EventType = ParameterType.SENSOR_HUMIDITY;
             }
             else if (key == (byte)ZWaveSensorParameter.POWER)
@@ -104,7 +103,7 @@ namespace ZWaveLib.Devices.Values
             }
             else
             {
-                sensor.Value = val;
+                sensor.Value = zvalue.Value;
             }
             //
             return sensor;

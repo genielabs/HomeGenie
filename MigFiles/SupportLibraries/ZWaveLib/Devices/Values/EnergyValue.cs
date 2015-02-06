@@ -50,7 +50,7 @@ namespace ZWaveLib.Devices.Values
             //                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
             //                       System.Globalization.NumberStyles.HexNumber
             //                   )) / 1000D;
-            energy.Value = Utility.ExtractValueFromBytes(message, 11, out scale);
+            energy.Value = Utility.ExtractValueFromBytes(message, 11).Value;
             if (Enum.IsDefined(typeof(ZWaveEnergyParameter), scale))
             {
                 energy.Parameter = (ZWaveEnergyParameter)scale;

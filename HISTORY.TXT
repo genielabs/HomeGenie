@@ -1,6 +1,7 @@
 ﻿RELEASE HISTORY
 
-06/02/2015 1.00 beta rev 476-git1
+06/02/2015 1.00 beta rev 476-git2
+    - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
     - Trying to fix Thermostat.SetPointGet and WakeUp app
 
 05/02/2015 1.00 beta rev 476
