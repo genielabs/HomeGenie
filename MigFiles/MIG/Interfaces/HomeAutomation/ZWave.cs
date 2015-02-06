@@ -609,7 +609,8 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
+                    Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet(mode);
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
@@ -647,7 +648,8 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_GETALL)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
+                    // TODO: it should query all SetPointType supported by current node, not just Heating
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet(Thermostat.SetPointType.Heating);
                     Thread.Sleep(200);
                     ((Thermostat)node.DeviceHandler).Thermostat_FanStateGet();
                     Thread.Sleep(200);

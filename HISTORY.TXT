@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+06/02/2015 1.00 beta rev 476-git1
+    - Trying to fix Thermostat.SetPointGet and WakeUp app
+
 05/02/2015 1.00 beta rev 476
     - Added HTTP post data handling for dynamic web service handlers
     - Fixed bug in Net.SendMail also affecting Security Alarm System app (issue #88)

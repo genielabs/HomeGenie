@@ -191,11 +191,12 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             });
         }
             
-        public virtual void Thermostat_SetPointGet()
+        public virtual void Thermostat_SetPointGet(SetPointType ptype)
         {
             this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatSetPoint, 
-                (byte)Command.ThermostatSetPointGet
+                (byte)Command.ThermostatSetPointGet,
+                (byte)ptype
             });
         }
         

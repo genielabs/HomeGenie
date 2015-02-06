@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:03.990422Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:28.487655Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:22.493342Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:28.995143Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -442,7 +442,7 @@ return true; // execute "Code To Run"
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:22.99477Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:29.490588Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -521,7 +521,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:23.492904Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:29.983156Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1264,7 +1264,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:23.995446Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:30.489839Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1319,7 +1319,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:24.494033Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:30.989375Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1614,7 +1614,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:24.999407Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:31.494333Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1629,57 +1629,72 @@ return true;
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
-  	if (parameter.Name == "ZWaveNode.WakeUpNotify")
-    {     
-      	var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
-      	if (nodeinfo != null)
+  if (parameter.Name == "ZWaveNode.WakeUpNotify")
+  {     
+    var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
+    if (nodeinfo != null)
+    {
+      // nif contains all command classes supported by this module
+      string nif = " " + nodeinfo.Value + " ";
+      if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 ") || nif.Contains(" 43 "))
+      {
+        if (nif.Contains(" 60 ")) // MultiInstance
         {
-          	// nif contains all command classes supported by this module
-          	string nif = " " + nodeinfo.Value + " ";
-          	if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 "))
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
+          // query first 4 instances
+          for (int instance = 1; instance &lt; 4; instance ++)
+          {
+            if (nif.Contains(" 30 ")) // Sensor Binary
             {
-                if (nif.Contains(" 60 ")) // MultiInstance
-                {
-                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
-                    // query first 4 instances
-                    for (int instance = 1; instance &lt; 4; instance ++)
-                    {
-                        if (nif.Contains(" 30 ")) // Sensor Binary
-                        {
-                            module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
-                        }
-                        else if (nif.Contains(" 31 ")) // Sensor MultiLevel
-                        {
-                            module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
-                        }
-                        else if (nif.Contains(" 25 ")) // Switch Binary
-                        {
-                            module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
-                        }
-                        else if (nif.Contains(" 26 ")) // Switch MultiLevel
-                        {
-                            module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
-                        }
-                        //Pause(.5);
-                    }
-                }
-                //
-                // query battery level
-                if (nif.Contains(" 80 ")) // Battery
-                {
-                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
-                    module.Command("Battery.Get").Execute();
-                    //Pause(.5);
-                }
-                //
-                Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
-                module.Command("Basic.Get").Execute();
-                Pause(1);
+              module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
+              Pause(.2);
             }
+            else if (nif.Contains(" 31 ")) // Sensor MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 25 ")) // Switch Binary
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 26 ")) // Switch MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
+              Pause(.2);
+            }
+          }
         }
+        //
+        // query Thermostat set point
+        if (nif.Contains(" 43 ")) // Thermostat
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Thermostat SetPoint Get Heating");
+          module.Command("Thermostat.SetPointGet").Execute("Heating");
+          Pause(.2);
+        }
+        //
+        // query Battery level
+        if (nif.Contains(" 80 ")) // Battery
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
+          module.Command("Battery.Get").Execute();
+          Pause(.2);
+        }
+        //
+        // query Basic value
+        if (nif.Contains(" 20 ")) // Basic
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
+        }
+      }
     }
+  }
 
-  	return true; // continue processing event
+  return true; // continue processing event
 });
 
 Program.GoBackground();</ScriptSource>
@@ -1692,8 +1707,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Query on Wake Up</Name>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
-    <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:25.495641Z</TriggerTime>
+    <ActivationTime>2015-02-06T15:29:45.595846Z</ActivationTime>
+    <TriggerTime>2015-02-06T15:29:45.611494Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1763,7 +1778,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:25.995325Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:32.489699Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2037,7 +2052,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:26.496775Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:32.992295Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2403,7 +2418,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:27.500349Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:33.995275Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2505,7 +2520,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:28.008068Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:34.497689Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2659,7 +2674,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:28.498787Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:34.994024Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2923,7 +2938,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:29.003306Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:35.498732Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8884,7 +8899,7 @@ while (Program.IsEnabled)
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-31T13:58:36.107619Z</ActivationTime>
-    <TriggerTime>2015-02-04T12:12:30.009942Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:36.507247Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
