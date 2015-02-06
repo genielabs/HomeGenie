@@ -30,6 +30,7 @@ namespace ZWaveLib.Devices.Values
         public int Scale;
         public int Precision;
         public int Size;
+        public byte PrecisionScaleSize;
     }
 
     public class Utility
@@ -68,6 +69,7 @@ namespace ZWaveLib.Devices.Values
                 byte precision = (byte)((message[valueOffset-1] & precisionMask) >> precisionShift);
                 int scale = (int)((message[valueOffset-1] & scaleMask) >> scaleShift);
                 //
+                result.PrecisionScaleSize = (byte)((precision << precisionShift) | (scale << scaleShift) | size);
                 result.Size = size;
                 result.Precision = precision;
                 result.Scale = scale;
