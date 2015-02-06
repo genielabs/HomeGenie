@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+07/02/2015 1.00 beta rev 476-git5
+    - Some more ZWaveLib code cleanup
+    - Added new data-locale-ids to locale files
+
 06/02/2015 1.00 beta rev 476-git4
     - Trying to fix precision/scale/size in value sent by Thermostat.SetPointSet
     - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2

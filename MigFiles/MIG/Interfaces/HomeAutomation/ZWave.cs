@@ -109,7 +109,6 @@ namespace MIG.Interfaces.HomeAutomation
                 { 807, "Thermostat.FanStateGet" },
                 { 808, "Thermostat.GetAll" },
                 { 809, "Thermostat.OperatingStateGet" },
-                { 810, "Thermostat.OperatingStateReport" },
 
                 { 1000, "NodeInfo.Get" },
             };
@@ -163,7 +162,6 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command THERMOSTAT_FANSTATEGET = new Command(807);
             public static readonly Command THERMOSTAT_GETALL = new Command(808);
             public static readonly Command THERMOSTAT_OPERATINGSTATE_GET = new Command(809);
-            public static readonly Command THERMOSTAT_OPERATINGSTATE_REPORT = new Command(810);
 
             private readonly String name;
             private readonly int value;
@@ -664,11 +662,6 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((Thermostat)node.DeviceHandler).Thermostat_OperatingStateGet();
-                }
-                else if (command == Command.THERMOSTAT_OPERATINGSTATE_REPORT)
-                {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_OperatingStateReport();
                 }
             }
             catch

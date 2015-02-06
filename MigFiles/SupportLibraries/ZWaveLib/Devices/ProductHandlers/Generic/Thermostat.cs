@@ -124,7 +124,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         {
             bool handled = false;
             byte cmdClass = message[7];
-            byte cmdType = message[8];
             switch (cmdClass)
             {
             case (byte)CommandClass.ThermostatMode:  
@@ -156,11 +155,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
              */
             case (byte)CommandClass.ThermostatSetPoint:  
-                ZWaveValue zvalue = setPoint = Utility.ExtractTemperatureFromBytes(message);
+                ZWaveValue zvalue = setPoint = SensorValue.ExtractTemperatureFromBytes(message);
                 dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
                 // convert from Fahrenheit to Celsius if needed
-                ptype.Value = (zvalue.Scale == 1 ? Utility.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
+                ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
                 nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_SETPOINT, ptype);
                 handled = true;
                 break;
@@ -259,12 +258,5 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             });
         }
 
-        public virtual void Thermostat_OperatingStateReport()
-        {
-            this.nodeHost.SendRequest(new byte[] { 
-                (byte)CommandClass.ThermostatOperatingState, 
-                (byte)Command.BasicReport
-            });
-        }
     }
 }

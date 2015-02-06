@@ -34,7 +34,6 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
             return (productspecs.ManufacturerId == "001E" && productspecs.TypeId == "0002" && productspecs.ProductId == "0001");
         }
 
-
         public override bool HandleBasicReport(byte[] message)
         {
             if (message[8] == 0x01) // && message[9] != 0x00) // MOTION ON
@@ -58,8 +57,6 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
             //}
             return false;
         }
-
-
 
     }
 }

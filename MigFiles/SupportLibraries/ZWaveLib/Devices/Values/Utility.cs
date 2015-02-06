@@ -86,24 +86,6 @@ namespace ZWaveLib.Devices.Values
             return result;
         }
 
-        public static ZWaveValue ExtractTemperatureFromBytes(byte[] message)
-        {
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            ZWaveValue zvalue = ExtractValueFromBytes(message, 1);
-            // zvalue.Scale == 1 -> Fahrenheit
-            // zvalue.Scale == 0 -> Celsius 
-
-            return zvalue;
-        }
-        
-        public static double FahrenheitToCelsius(double temperature)
-        {
-            return ((5.0 / 9.0) * (temperature - 32.0));
-        }
-
     }
 }
 

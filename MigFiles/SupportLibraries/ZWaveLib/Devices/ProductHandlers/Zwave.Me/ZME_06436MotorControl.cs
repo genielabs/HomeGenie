@@ -4,33 +4,12 @@ using System.Text;
 
 namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
 {
-    public class ZME_06436MotorControl : IZWaveDeviceHandler
+    public class ZME_06436MotorControl : ProductHandlers.Generic.Switch
     {
-        ZWaveNode mynode = null;
 
-        public void SetNodeHost(ZWaveNode node)
+        public override bool CanHandleProduct(ManufacturerSpecific productspecs)
         {
-            this.mynode = node;
-        }
-
-        public bool CanHandleProduct(ManufacturerSpecific productspecs)
-        {
-            return (productspecs.ManufacturerId == "0073" && productspecs.TypeId == "03E8" && productspecs.ProductId == "0003");
-        }
-
-        public bool HandleRawMessageRequest(byte[] message)
-        {
-            return false;
-        }
-
-        public bool HandleBasicReport(byte[] message)
-        {
-            return false;
-        }
-
-        public bool HandleMultiInstanceReport(byte[] message)
-        {
-            return false;
+            return (productspecs.ManufacturerId == "0115" && productspecs.TypeId == "1000" && productspecs.ProductId == "0003");
         }
 
     }

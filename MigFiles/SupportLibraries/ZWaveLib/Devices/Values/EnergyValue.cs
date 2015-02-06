@@ -24,7 +24,7 @@ using System;
 
 namespace ZWaveLib.Devices.Values
 {
-    public enum ZWaveEnergyParameter : int
+    public enum ZWaveEnergyScaleType : int
     {
         kWh = 0x00,
         kVAh = 0x01,
@@ -39,7 +39,7 @@ namespace ZWaveLib.Devices.Values
     public class EnergyValue
     {
         public ParameterType EventType = ParameterType.GENERIC;
-        public ZWaveEnergyParameter Parameter = ZWaveEnergyParameter.Unknown;
+        public ZWaveEnergyScaleType Parameter = ZWaveEnergyScaleType.Unknown;
         public double Value = 0;
 
         public static EnergyValue Parse(byte[] message)
@@ -51,38 +51,38 @@ namespace ZWaveLib.Devices.Values
             //                       System.Globalization.NumberStyles.HexNumber
             //                   )) / 1000D;
             energy.Value = zvalue.Value;
-            if (Enum.IsDefined(typeof(ZWaveEnergyParameter), zvalue.Scale))
+            if (Enum.IsDefined(typeof(ZWaveEnergyScaleType), zvalue.Scale))
             {
-                energy.Parameter = (ZWaveEnergyParameter)zvalue.Scale;
+                energy.Parameter = (ZWaveEnergyScaleType)zvalue.Scale;
             }
             switch (energy.Parameter)
             {
             // Accumulated power consumption kW/h
-            case ZWaveEnergyParameter.kWh:
+            case ZWaveEnergyScaleType.kWh:
                 energy.EventType = ParameterType.METER_KW_HOUR;
                 break;
             // Accumulated power consumption kilo Volt Ampere / hours (kVA/h)
-            case ZWaveEnergyParameter.kVAh:
+            case ZWaveEnergyScaleType.kVAh:
                 energy.EventType = ParameterType.METER_KVA_HOUR;
                 break;
             // Instant power consumption Watt
-            case ZWaveEnergyParameter.Watt:
+            case ZWaveEnergyScaleType.Watt:
                 energy.EventType = ParameterType.METER_WATT;
                 break;
             // Pulses count
-            case ZWaveEnergyParameter.Pulses:
+            case ZWaveEnergyScaleType.Pulses:
                 energy.EventType = ParameterType.METER_PULSES;
                 break;
             // AC load Voltage
-            case ZWaveEnergyParameter.ACVolt:
+            case ZWaveEnergyScaleType.ACVolt:
                 energy.EventType = ParameterType.METER_AC_VOLT;
                 break;
             // AC load Current
-            case ZWaveEnergyParameter.ACCurrent:
+            case ZWaveEnergyScaleType.ACCurrent:
                 energy.EventType = ParameterType.METER_AC_CURRENT;
                 break;
             // Power Factor
-            case ZWaveEnergyParameter.PowerFactor:
+            case ZWaveEnergyScaleType.PowerFactor:
                 energy.EventType = ParameterType.METER_POWER;
                 break;
             default:

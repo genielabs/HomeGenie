@@ -656,5 +656,45 @@
     "systemsettings_zwavehardreset_hardresetcancel":
         "Cancel",
     "systemsettings_zwavehardreset_hardresetproceed":
-        "Proceed"
+        "Proceed",
+    "statistics_dataanalysis":
+        "Data analysis",
+    "statistics_counterexpense":
+        "Counter and expense",
+    "analyze_statistics_datefrom":
+        "From",
+    "analyze_statistics_dateto":
+        "To",
+    "analyze_statistics_costperunit":
+        "Cost per unit",
+    "analyze_statistics_overallcounter":
+        "Overall counter",
+    "analyze_statistics_totalexpense":
+        "Total expense",
+    "configure_program_oroperator":
+        "OR operator",
+    "configure_system_statistics_clear":
+        "Clear all statistics data",
+    "configure_system_statistics_databasemaxsize":
+        "Maximum database size is",
+    "configure_system_statistics_changedatabasemaxsize":
+        "Change",
+    "configure_system_statistics_databasemaxsizechange":
+        "Maximum size (MB)",
+    "configure_system_statistics_databasemaxsizechange_note":
+        "Note: after changing size, HomeGenie must be restarted to make changes effective.",
+    "configure_system_statistics_databasemaxsizechange_cancel":
+        "Cancel",
+    "configure_system_statistics_databasemaxsizechange_commit":
+        "Change",
+    "configure_popupfilter_title":
+        "Event popup filters",
+    "configure_popupfilter_optclose":
+        "Close",
+    "configure_system_blockedpopups":
+        "Blocked popups",
+    "configure_system_blockedpopups_edit":
+        "Edit",
+    "configure_system_updateinstall_warning":
+        "It is strongly recommended to make a backup of your configuration before proceeding with any update."
 }
