@@ -103,6 +103,19 @@ HG.System.WebCacheIsEnabled = function (callback) {
     });
 };
 
+// Should this be added to a new namespace like "HG.System.Statistics"? It's a setting, so thought it might not belong in homegenie.statstics.js... Opinions?
+HG.System.SetStatisticsDatabaseMaximumSize = function (mb, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Statistics.SetStatisticsDatabaseMaximumSize/' + mb + '/' + (new Date().getTime()),
+        type: "POST",
+        data: "{ dummy: 'dummy' }",
+        dataType: "text",
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
+
 
 HG.System.UpdateManager = HG.System.UpdateManager || {};
 HG.System.UpdateManager.UpdateCheck = function (callback) {

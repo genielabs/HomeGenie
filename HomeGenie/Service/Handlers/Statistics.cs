@@ -60,7 +60,10 @@ namespace HomeGenie.Service.Handlers
             case "Database.Reset":
                 homegenie.Statistics.DatabaseReset();
                 break;
-
+            case "Configuration.Get":
+                // Just one at the moment.
+                migCommand.Response = "[{ StatisticsUIRefreshSeconds : '" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUIRefreshSeconds + "' }]";
+                break;
             case "Parameter.List":
                 filterList = migCommand.GetOption(0).Split(':');
                 if (filterList.Length == 2)
