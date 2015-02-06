@@ -107,8 +107,7 @@ HG.System.WebCacheIsEnabled = function (callback) {
 HG.System.SetStatisticsDatabaseMaximumSize = function (mb, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Statistics.SetStatisticsDatabaseMaximumSize/' + mb + '/' + (new Date().getTime()),
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
