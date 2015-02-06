@@ -1,6 +1,7 @@
 ﻿RELEASE HISTORY
 
-06/02/2015 1.00 beta rev 476-git2
+06/02/2015 1.00 beta rev 476-git3
+    - Trying to fix precision/scale/size in value sent by Thermostat.SetPointSet
     - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
     - Trying to fix Thermostat.SetPointGet and WakeUp app
 

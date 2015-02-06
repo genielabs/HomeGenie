@@ -32,6 +32,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
     public class Thermostat : Sensor
     {
         private byte precisionScaleSize = 0;
+        private int precision = 0;
 
         public enum Mode
         {
@@ -159,6 +160,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 ZWaveValue zvalue = Utility.ExtractTemperatureFromBytes(message);
                 // store value precision used by this device
                 precisionScaleSize = zvalue.PrecisionScaleSize;
+                precision = zvalue.Precision;
                 dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
                 // convert from Fahrenheit to Celsius if needed
@@ -224,7 +226,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 (byte)Command.ThermostatSetPointSet, 
                 (byte)ptype,
                 precisionScaleSize, // it was 0x09 // <-- TODO: find out the proper way of setting precision/scale/size
-                (byte)temperature
+                (byte)(temperature * Math.Pow(10D, precision))
             });
         }
         
