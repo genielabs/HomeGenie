@@ -66,8 +66,10 @@ namespace ZWaveLib.Devices.Values
             byte key = message[9];
             if (key == (byte)ZWaveSensorParameter.TEMPERATURE)
             {
+                zvalue = Utility.ExtractTemperatureFromBytes(message);
                 sensor.Parameter = ZWaveSensorParameter.TEMPERATURE;
-                sensor.Value = Utility.ExtractTemperatureFromBytes(message);
+                // convert from Fahrenheit to Celsius if needed
+                sensor.Value = (zvalue.Scale == 1 ? Utility.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
                 sensor.EventType = ParameterType.SENSOR_TEMPERATURE;
             }
             else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)

@@ -35,9 +35,13 @@ namespace ZWaveLib.Devices.Values
     public class Utility
     {
 
-        public static double ExtractTemperatureFromBytes(byte[] message)
+        public static double FahrenheitToCelsius(double temperature)
         {
-            double temperature = 0;
+            return ((5.0 / 9.0) * (temperature - 32.0));
+        }
+
+        public static ZWaveValue ExtractTemperatureFromBytes(byte[] message)
+        {
             byte[] tmp = new byte[4];
             System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
             message = tmp;
@@ -46,10 +50,7 @@ namespace ZWaveLib.Devices.Values
             // zvalue.Scale == 1 -> Fahrenheit
             // zvalue.Scale == 0 -> Celsius 
 
-            // convert from Fahrenheit to Celsius
-            if (zvalue.Scale == 1) temperature = ((5.0 / 9.0) * (temperature - 32.0));
-
-            return temperature;
+            return zvalue;
         }
 
         // adapted from: 

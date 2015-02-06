@@ -141,17 +141,20 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     if (key == (byte)ZWaveSensorParameter.TEMPERATURE && message.Length > 16)
                     {
+                        double temperature = 0;
                         if (cmdType == (byte)Command.MultiInstaceV2Encapsulated && message.Length > 18)
                         {
-                            zvalue.Value = BitConverter.ToUInt16(new byte[2] { message[18], message[17] }, 0) / 100D;
+                            temperature = BitConverter.ToUInt16(new byte[2] { message[18], message[17] }, 0) / 100D;
                         }
                         else
                         {
-                            zvalue.Value = Utility.ExtractTemperatureFromBytes(message);
+                            zvalue = Utility.ExtractTemperatureFromBytes(message);
+                            // convert from Fahrenheit to Celsius if needed
+                            temperature = (zvalue.Scale == 1 ? Utility.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
                         }
                         //
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_TEMPERATURE, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, temperature);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_TEMPERATURE, temperature);
                         processed = true;
                     }
                     else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
