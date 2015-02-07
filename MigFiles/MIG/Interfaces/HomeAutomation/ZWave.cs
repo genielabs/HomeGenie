@@ -921,7 +921,9 @@ namespace MIG.Interfaces.HomeAutomation
                     // NOTE: See documentation for this helper method for detailed info. To summarize, these parameter types 
                     // could be embedded in a multi-instance encapsulated frame. This temporary fix will make sure we 
                     // include the instance when required. This workaround is only applied to METER at the moment, 
-                    // but probably needs to be applied ot others.
+                    // but probably needs to be applied to others.
+                    // The device implementing IZWaveDeviceHandler must send an instance number for ENCAPPED METERs 
+                    // for this new code below to be useful.
                     path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_KW_HOUR, upargs.ParameterId);
                 break;
             case ParameterType.METER_KVA_HOUR:
@@ -1139,7 +1141,7 @@ namespace MIG.Interfaces.HomeAutomation
         {
             if (upargParamId != 0)
             {
-                return path + "." + upargParamId;
+                return "MultiInstance." + path + "." + upargParamId;
             }
             else
             {
