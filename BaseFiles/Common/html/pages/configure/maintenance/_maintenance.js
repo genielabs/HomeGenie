@@ -95,11 +95,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
         //$('systemsettings_updateinstall_popup').on('popupbeforeposition', function (event) {
         //    
         //});
-        $('#configure_system_updatemanager_installbutton').bind('click', function () {
+        $('#configure_system_updatemanager_proceedbutton').bind('click', function () {
             $('#configure_system_updateinstall_button').addClass('ui-disabled');
             $('#configure_system_updatemanager_info').html('<strong>Downloading files...</strong>');
             $('#configure_system_updateinstall_log').empty();
-            $('#systemsettings_updateinstall_popup').popup('open');
+            HG.WebApp.Utility.SwitchPopup('#systemsettings_updatewarning_popup', '#systemsettings_updateinstall_popup', true)
             $('#configure_system_updateinstall_status').html('Downloading files...');
             $.mobile.loading('show', {
                 text: 'Please wait...',
@@ -263,6 +263,17 @@ HG.WebApp.Maintenance.InitializePage = function () {
             });
         });
 
+        $('#systemsettings_databasemaxsize_change').bind('click', function () {
+            var sizemb = $('#systemsettings_databasemaxsizechange_size').val();
+            $.mobile.loading('show');
+            HG.System.SetStatisticsDatabaseMaximumSize(sizemb, function (data) {
+                $.mobile.loading('hide');
+                setTimeout(function () {
+                    HG.WebApp.Maintenance.LoadStatisticsSettings();
+                }, 1000);
+            });
+        });
+
     });
 };
 
@@ -285,6 +296,7 @@ HG.WebApp.Maintenance.LoadSettings = function () {
         $.mobile.loading('hide');
     });
     //
+    HG.WebApp.Maintenance.LoadStatisticsSettings();
     HG.WebApp.Maintenance.LoadSecuritySettings();
     HG.WebApp.Maintenance.LoadUpdateCheckSettings();
     //
@@ -333,6 +345,15 @@ HG.WebApp.Maintenance.LoadSecuritySettings = function () {
             $('#configure_system_flip_httpcache').val(data).slider('refresh');
             $.mobile.loading('hide');
         });
+    });
+};
+
+HG.WebApp.Maintenance.LoadStatisticsSettings = function () {
+    $.mobile.loading('show');
+    HG.Configure.System.ServiceCall("Statistics.GetStatisticsDatabaseMaximumSize", function (data) {
+        $('#systemsettings_databasemaxsizechange_size').val(data);
+        $('#systemsettings_databasemaxsize_text').html(data);
+        $.mobile.loading('hide');
     });
 };
 

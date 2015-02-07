@@ -658,9 +658,8 @@ HG.WebApp.ProgramsList.RestartProgram = function (progaddr) {
     $('#control_groupslist').empty();
     //
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Restart/' + progaddr + '/',
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             $.mobile.loading('hide');
             HG.WebApp.ProgramsList.LoadPrograms(null);

@@ -167,8 +167,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 $ul.listview('refresh');
                 $.ajax({
                     url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Search/' + value + '/',
-                    data: "{ dummy: 'dummy' }",
-                    dataType: 'json'
+                    type: 'GET'
                 })
                 .then(function (response) {
                     response = eval(response);
@@ -238,7 +237,7 @@ HG.WebApp.SystemSettings.LircRemoteList = function () {
     $('#lirc_remotes').empty();
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.List/',
-        data: "{ dummy: 'dummy' }"
+        type: 'GET'
     })
     .then(function (response) {
         var remotes = eval(response);
@@ -259,7 +258,7 @@ HG.WebApp.SystemSettings.LircRemoteAdd = function (remote) {
     $.mobile.loading('show');
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Add/' + remote + '/',
-        data: "{ dummy: 'dummy' }"
+        type: 'GET'
     })
     .then(function (response) {
         $.mobile.loading('hide');
@@ -271,7 +270,7 @@ HG.WebApp.SystemSettings.LircRemoteRemove = function (remote) {
     $.mobile.loading('show');
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/Controllers.LircRemote/0/Remotes.Remove/' + remote + '/',
-        data: "{ dummy: 'dummy' }"
+        type: 'GET'
     })
     .then(function (response) {
         $.mobile.loading('hide');
@@ -460,8 +459,7 @@ HG.WebApp.SystemSettings.CheckConfigureStatus = function () {
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
     $.ajax({
         url: ifaceurl,
-        data: "{ dummy: 'dummy' }",
-        dataType: 'json',
+        type: 'GET',
         success: function (data) {
             var interfaces = eval(data);
             if (!interfaces || interfaces == 'undefined' || interfaces.length == 0 || interfaces[0].Domain == 'HomeGenie.UpdateChecker') {

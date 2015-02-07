@@ -51,7 +51,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Fibaro
             if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
                 SensorValue sensorval = SensorValue.Parse(message);
-                if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)
+                if (sensorval.Parameter == ZWaveSensorParameter.Luminance)
                 {
                     sensorval.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);
                     nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, sensorval.EventType, sensorval.Value);

@@ -35,7 +35,7 @@ HG.WebApp.Control.InitializePage = function () {
         //
         $.ajax({
             url: "pages/control/widgets/configuration.json",
-            data: "{ dummy: 'dummy' }",
+            type: 'GET',
             success: function (data) {
                 HG.WebApp.Control._WidgetConfiguration = eval(data);
             },
@@ -153,7 +153,7 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
     if (widgetpath != '' && !widgetcached) {
         $.ajax({
             url: "pages/control/widgets/" + widgetpath + ".js",
-            data: "{ dummy: 'dummy' }",
+            type: 'GET',
             success: function (data) {
                 var widget = null;
                 var widgetjson = null;
@@ -221,7 +221,7 @@ HG.WebApp.Control.RenderModule = function () {
                                 HG.WebApp.GroupModules.ShowModuleOptions(HG.WebApp.GroupModules.CurrentModule.Domain, HG.WebApp.GroupModules.CurrentModule.Address);
                             });
                         } catch (e) {
-                            console.log('ERROR in Widget RenderView: ' + e);
+                            console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
                     }

@@ -8,17 +8,13 @@ HG.Automation.Groups = HG.Automation.Groups || {};
 HG.Automation.Groups.LightsOff = function (group) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Groups.LightsOff/" + group + "/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text"
+        type: 'GET'
     });
 };
 HG.Automation.Groups.LightsOn = function (group) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Groups.LightsOn/" + group + "/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text"
+        type: 'GET'
     });
 };
 //
@@ -31,18 +27,15 @@ HG.Automation.Macro = HG.Automation.Macro || {};
 HG.Automation.Macro.Record = function () {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.Record/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text"
+        type: 'GET'
     });
 };
 //
 HG.Automation.Macro.Save = function (mode, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.Save/" + mode + "/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -52,27 +45,22 @@ HG.Automation.Macro.Save = function (mode, callback) {
 HG.Automation.Macro.Discard = function () {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.Discard/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text"
+        type: 'GET'
     });
 };
 //
 HG.Automation.Macro.SetDelay = function (type, args) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.SetDelay/" + type + "/" + args,
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text"
+        type: 'GET'
     });
 };
 
 HG.Automation.Macro.GetDelay = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + "/Automation/Macro.GetDelay/",
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var value = eval(data)[0];
             callback(value);
@@ -94,10 +82,10 @@ HG.Automation.Programs.List = function (callback) {
 };
 HG.Automation.Programs.AddProgram = function (group, program, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Add/' + group + '/' + (new Date().getTime()),
+        type: 'POST',
         data: program,
-        dataType: "text",
+        dataType: 'text',
         success: function (data) {
             var value = eval(data);
             if (value == 'undefined') {
@@ -117,9 +105,8 @@ HG.Automation.Programs.AddProgram = function (group, program, callback) {
 };
 HG.Automation.Programs.DeleteProgram = function (program, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Delete/' + program + '/' + (new Date().getTime()),
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             callback();
         },
@@ -131,9 +118,8 @@ HG.Automation.Programs.DeleteProgram = function (program, callback) {
 
 HG.Automation.Programs.Run = function (pid, options, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Run/' + pid + '/' + options,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             if (callback != null) callback(response);
         },
@@ -145,9 +131,8 @@ HG.Automation.Programs.Run = function (pid, options, callback) {
 
 HG.Automation.Programs.Toggle = function (pid, options, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Toggle/' + pid + '/' + options,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             if (callback != null) callback(response);
         },
@@ -159,9 +144,8 @@ HG.Automation.Programs.Toggle = function (pid, options, callback) {
 
 HG.Automation.Programs.ArduinoFileLoad = function (pid, filename, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileLoad/' + pid + '/' + filename,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var value = eval(data);
             if (value == 'undefined') {
@@ -182,9 +166,8 @@ HG.Automation.Programs.ArduinoFileLoad = function (pid, filename, callback) {
 
 HG.Automation.Programs.ArduinoFileAdd = function (pid, filename, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileAdd/' + pid + '/' + filename,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var value = eval(data);
             if (value == 'undefined') {
@@ -205,9 +188,8 @@ HG.Automation.Programs.ArduinoFileAdd = function (pid, filename, callback) {
 
 HG.Automation.Programs.ArduinoFileDelete = function (pid, filename, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileDelete/' + pid + '/' + filename,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var value = eval(data);
             if (value == 'undefined') {
@@ -228,8 +210,8 @@ HG.Automation.Programs.ArduinoFileDelete = function (pid, filename, callback) {
 
 HG.Automation.Programs.ArduinoFileSave = function (pid, filename, srctext, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileSave/' + pid + '/' + filename,
+        type: 'POST',
         data: srctext,
         success: function (data) {
             var value = eval(data);
@@ -251,9 +233,8 @@ HG.Automation.Programs.ArduinoFileSave = function (pid, filename, srctext, callb
 
 HG.Automation.Programs.ArduinoFileList = function (pid, callback) {
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Arduino.FileList/' + pid,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var files = eval(data);
             callback(files);
@@ -272,9 +253,8 @@ HG.Automation.Scheduling = HG.Automation.Scheduling || {};
 HG.Automation.Scheduling.Update = function (name, expression, pid, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Update/' + name + '/' + expression.replace(/\//g, '|') + '/' + pid,
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -283,9 +263,8 @@ HG.Automation.Scheduling.Update = function (name, expression, pid, callback) {
 HG.Automation.Scheduling.Delete = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Delete/' + name,
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -294,9 +273,8 @@ HG.Automation.Scheduling.Delete = function (name, callback) {
 HG.Automation.Scheduling.Enable = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Enable/' + name,
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -305,9 +283,8 @@ HG.Automation.Scheduling.Enable = function (name, callback) {
 HG.Automation.Scheduling.Disable = function (name, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.Disable/' + name,
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(data);
         }
@@ -316,9 +293,8 @@ HG.Automation.Scheduling.Disable = function (name, callback) {
 HG.Automation.Scheduling.List = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Scheduling.List/',
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             callback(eval(arguments[2].responseText));
         }

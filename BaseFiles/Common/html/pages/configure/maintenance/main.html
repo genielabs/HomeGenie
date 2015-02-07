@@ -22,7 +22,7 @@
                     </div>
                     <div class="ui-block-b" style="float:right;width:150px">
                         <a data-locale-id="configure_system_updatemanager_updatecheck" id="configure_system_updatemanager_updatebutton" class="ui-btn ui-corner-all">Update Check</a>
-                        <a data-locale-id="configure_system_updatemanager_installupdate" id="configure_system_updatemanager_installbutton" class="ui-btn ui-corner-all">Install Update</a>
+                        <a data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
                     </div>
                 </div>
             </li>
@@ -123,19 +123,6 @@
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <div>
-                            <label data-locale-id="configure_system_statistics">Statistics</label><br />
-                        </div>
-                    </div>
-                    <div class="ui-block-b" style="float:right;width:150px">
-                        <a class="ui-btn ui-corner-all" data-locale-id="configure_system_databasereset" href="javascript:HG.Statistics.Database.Reset()">Database Reset</a>
-                    </div>
-                </div>
-
-            </li>
-            <li>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <div>
                             <label data-locale-id="configure_system_modulescleanup">Modules Cleanup</label><br />
                         </div>
                     </div>
@@ -158,6 +145,52 @@
                 </div>
 
             </li>
+
+            <li data-locale-id="configure_system_statistics" data-role="list-divider">Statistics</li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_statistics_clear">Clear All Statistics Data</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <!-- TODO: Confirmation for this?-->
+                        <a href="javascript:HG.Statistics.Database.Reset()" class="ui-btn ui-corner-all" data-locale-id="configure_system_databasereset">Reset</a>
+                    </div>
+                </div>
+
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_statistics_databasemaxsize">Maximum Database Size is</span> <span id="systemsettings_databasemaxsize_text"></span> MB</label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#systemsettings_databasemaxsizechange_popup" data-locale-id="configure_system_statistics_changedatabasemaxsize" data-rel="popup" class="ui-btn ui-corner-all">Change</a>
+                    </div>
+                </div>
+
+            </li>
+            
+
+            <!-- Might be dangerous for average user without constraints? Hiding for now...
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_statistics_timeresolution">Record statistics every</span> <span id="systemsettings_statistics_timeresolutionseconds_text"></span> <span data-locale-id="configure_system_statistics_timeresolution_units">seconds</span></label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#systemsettings_databasemaxsizechange_popup" data-locale-id="configure_system_statistics_changetimeresolution" data-rel="popup" class="ui-btn ui-corner-all">Change Size</a>
+                    </div>
+                </div>
+
+            </li>
+            -->
+
+
             <li data-locale-id="configure_system_userinterface" data-role="list-divider">User Interface</li>
             <li>
                 <span data-locale-id="configure_system_theme">Theme</span>
@@ -181,6 +214,16 @@
                             <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
                             <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
                         </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_blockedpopups">Blocked popups</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <a data-locale-id="configure_system_blockedpopups_edit" href="#configure_popupsettings_edit" data-rel="popup" class="ui-btn ui-corner-all">Edit</a>
                     </div>
                 </div>
             </li>
@@ -279,7 +322,7 @@
 
 
 
-        <div id="maintenance_configuration_factoryresetpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b">
+        <div id="maintenance_configuration_factoryresetpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_factoryreset">Factory Reset?</h1>
             </div>
@@ -298,7 +341,7 @@
         </div>
 
 
-        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-overlay-theme="b">
+        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">
                 <h1 data-locale-id="maintenance_configuration_servicerestart">Restart Service?</h1>
             </div>
@@ -316,6 +359,69 @@
             </div>
         </div>
 
+        <div id="systemsettings_updatewarning_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_updateinstall_warning" class="ui-title">It is strongly recommended to make a backup of your configuration before proceeding with any update.</h3>
+                <p></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="configure_system_updatemanager_proceedbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_updatemanager_installupdate">Install Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="systemsettings_databasemaxsizechange_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_statistics_databasemaxsizechange">Maximum Size (MB)</h1>
+            </div>
+
+            <div class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_statistics_databasemaxsizechange_note" class="ui-title">Note: after changing size, HomeGenie must be restarted to make changes effective!</h3>
+                <p>
+                    <label for="systemsettings_databasemaxsizechange_size" />
+                    <input id="systemsettings_databasemaxsizechange_size" type="number" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_databasemaxsizechange_cancel" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_databasemaxsize_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_databasemaxsizechange_commit" data-rel="back" data-transition="flow">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--
+        <div id="systemsettings_statistics_timeresolutionseconds_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_statistics_timeresolutionchange">Statistics Record Interval</h1>
+            </div>
+
+            <div class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_statistics_timeresolutionchange_note" class="ui-title">Note: after changing interval, HomeGenie must be restarted to make changes effective!</h3>
+                <p>
+                    <label for="systemsettings_statistics_timeresolutionchange_seconds" />
+                    <input id="systemsettings_statistics_timeresolutionchange_seconds" type="number" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_cancel" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_statistics_timeresolution_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_commit" data-rel="back" data-transition="flow">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->    
 
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">

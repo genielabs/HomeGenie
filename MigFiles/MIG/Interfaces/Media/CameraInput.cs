@@ -145,6 +145,7 @@ namespace MIG.Interfaces.Media
 
         private IntPtr cameraSource = IntPtr.Zero;
         private CameraDevice videoInput = new CameraDevice();
+        private object readPictureLock = new object();
 
         #region public members
 
@@ -275,7 +276,7 @@ namespace MIG.Interfaces.Media
                 // TODO: there is actually only single camera support 
                 if (cameraSource != IntPtr.Zero)
                 {
-                    lock (this)
+                    lock (readPictureLock)
                     {
                         var pictureBuffer = CameraCaptureV4LInterop.GetFrame(cameraSource);
                         var data = new byte[pictureBuffer.Size];

@@ -31,6 +31,8 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using HomeGenie.Service.Constants;
+using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -510,12 +512,16 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ProgramHelper Notify(string title, string message)
         {
+            dynamic notification = new ExpandoObject();
+            notification.Title = title;
+            notification.Message = message;
+            string serializedMessage = JsonConvert.SerializeObject(notification);
             homegenie.LogBroadcastEvent(
                 Domains.HomeAutomation_HomeGenie_Automation,
                 myProgramId.ToString(),
                 "Automation Program",
-                title,
-                message
+                Properties.PROGRAM_NOTIFICATION,
+                serializedMessage
             );
             return this;
         }
@@ -789,10 +795,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(
-                    Properties.METER_WATTS,
-                    3600
-                ) : 0;
+                return homegenie.Statistics != null ? homegenie.Statistics.GetTotalCounter(Properties.METER_WATTS, 3600) : 0;
             }
         }
 

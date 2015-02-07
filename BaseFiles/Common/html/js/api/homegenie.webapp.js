@@ -36,7 +36,7 @@ HG.WebApp.InitializePage = function ()
     //
     // Application start - Init stuff
     //
-    dataStore = $.jStorage; //new window.Basil({ namespace: 'HomeGenie', storages: ['local', 'session', 'cookie', 'memory'] });
+    dataStore = $.jStorage;
     //
     var theme = dataStore.get('UI.Theme');
     if (theme == null || (theme < 'a' || theme > 'g')) {
@@ -101,6 +101,7 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == "page_analyze") 
         {
+            HG.WebApp.Statistics.SetTab(1);
             HG.WebApp.Statistics.SetAutoRefresh(true);
             window.setTimeout(function(){
                 HG.WebApp.Statistics.Refresh();
@@ -313,7 +314,7 @@ HG.WebApp.InitializePage = function ()
             this.ellipse(x, y, r - r / 5, r - r / 20).attr({ stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0 })
         );
     };
-
+    // Global Popups
     $( "#automation_group_module_edit" ).enhanceWithin().popup();
     $('#module_update_button').bind('click', function (event) {
         HG.WebApp.GroupModules.CurrentModule.Name = HG.WebApp.GroupModules.EditModule.Name;
@@ -338,7 +339,11 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.GroupsList.SaveGroups(null);
     });
     //
-    $( "#automationprograms_program_options" ).enhanceWithin().popup();
+    $('#automationprograms_program_options').enhanceWithin().popup();
+    $('#configure_popupsettings_edit').enhanceWithin().popup();
+    $('#configure_popupsettings_edit').on('popupbeforeposition', function(){
+        HG.WebApp.Events.PopupRefreshIgnore();
+    });
 
 };
 
@@ -418,7 +423,7 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
     $.ajax({
         url: ifaceurl,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var interfaces = HG.WebApp.Data.Interfaces = eval(data);
             var status = '';
@@ -654,7 +659,7 @@ HG.WebApp.Locales.GetDateEndianType = function()
 HG.WebApp.Locales.GetDefault = function(callback) {
     $.ajax({
         url: './locales/en.json',
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             HG.WebApp.Data._DefaultLocale = $.parseJSON( data );
             callback();
@@ -669,7 +674,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
     HG.WebApp.Locales.GetDefault(function(){
         $.ajax({
             url: langurl,
-            data: "{ dummy: 'dummy' }",
+            type: 'GET',
             success: function (data) {
                 HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
                 //
@@ -700,7 +705,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
     var langurl = 'pages/control/widgets/' + widgetpath + '/locales/' + userLang.toLowerCase().substring(0, 2) + '.json';
     $.ajax({
         url: langurl,
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (data) {
             var locale = $.parseJSON( data );
             $(container).find('[data-ui-field=widget]').data('Locale', locale);

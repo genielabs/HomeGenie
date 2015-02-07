@@ -36,7 +36,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
                     (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "001D");
         }
 
-
         public override bool HandleRawMessageRequest(byte[] message)
         {
             byte cmdLength = message[6];
@@ -51,7 +50,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             }
             return false;
         }
-
 
         public override bool HandleBasicReport(byte[] message)
         {
@@ -68,8 +66,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             }
             return handled;
         }
-
-
 
     }
 }

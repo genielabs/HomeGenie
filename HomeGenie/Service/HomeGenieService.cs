@@ -56,6 +56,7 @@ namespace HomeGenie.Service
     {
         #region Private Fields declaration
 
+        private const string HOMEGENIE_MASTERNODE = "0";
         private MIGService migService;
         private ProgramEngine masterControlProgram;
         private VirtualMeter virtualMeter;
@@ -71,6 +72,8 @@ namespace HomeGenie.Service
         private TsList<LogEntry> recentEventsLog;
         //
         private SystemConfiguration systemConfiguration;
+        //
+        private object interfaceControlLock = new object();
         //
         // public events
         public event Action<LogEntry> LogEventAction;
@@ -143,7 +146,6 @@ namespace HomeGenie.Service
                 );
                 if (migService.StartGateways())
                 {
-                    systemConfiguration.HomeGenie.ServicePort = port;
                     serviceStarted = true;
                 }
                 else
@@ -162,22 +164,23 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeAutomation_HomeGenie,
-                    "SystemInfo",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie service ready",
-                    "HTTP.PORT",
+                    Properties.SYSTEMINFO_HTTPPORT,
                     port.ToString()
                 );
-                systemConfiguration.HomeGenie.ServicePort = port;
                 InitializeSystem();
+                // Update system configuration with the HTTP port the service succeed to bind on
+                systemConfiguration.HomeGenie.ServicePort = port;
             }
             else
             {
                 LogBroadcastEvent(
                     Domains.HomeAutomation_HomeGenie,
-                    "SystemInfo",
+                    HOMEGENIE_MASTERNODE,
                     "Http port bind failed.",
-                    "HTTP.PORT",
-                    port.ToString()
+                    Properties.SYSTEMINFO_HTTPPORT,
+                    systemConfiguration.HomeGenie.ServicePort.ToString()
                 );
                 Program.Quit(false);
             }
@@ -187,9 +190,9 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "InstallProgress.Message",
+                    Properties.INSTALLPROGRESS_MESSAGE,
                     "= " + args.Status + ": " + args.ReleaseInfo.DownloadUrl
                 );
             };
@@ -197,9 +200,9 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "Update Check",
+                    Properties.INSTALLPROGRESS_UPDATE,
                     args.Status.ToString()
                 );
             };
@@ -207,9 +210,9 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "InstallProgress.Message",
+                    Properties.INSTALLPROGRESS_MESSAGE,
                     message
                 );
             };
@@ -228,7 +231,7 @@ namespace HomeGenie.Service
 
         public void Start()
         {
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STARTED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STARTED");
             //
             // Signal "SystemStarted" event to listeners
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
@@ -255,7 +258,7 @@ namespace HomeGenie.Service
 
         public void Stop()
         {
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPING");
             //
             // Signal "SystemStopping" event to listeners
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
@@ -279,19 +282,19 @@ namespace HomeGenie.Service
             }
             //
             // save system data before quitting
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "SAVING DATA");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
             //
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPED");
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPING");
             if (migService != null) migService.StopService();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPED");
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
             if (masterControlProgram != null) masterControlProgram.StopEngine();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
             //
             SystemLogger.Instance.Dispose();
         }
@@ -380,65 +383,69 @@ namespace HomeGenie.Service
 
         public void InterfaceControl(MIGInterfaceCommand cmd)
         {
-            var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
-            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
-            if (isRemoteModule)
+            lock (interfaceControlLock)
             {
-                // ...
-                try
+                var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
+                bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
+                if (isRemoteModule)
                 {
-                    string domain = cmd.Domain;
-                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
-                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
-                    Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                    if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
+                    // ...
+                    try
                     {
-                        netHelper.WithCredentials(
-                            systemConfiguration.HomeGenie.UserLogin,
-                            systemConfiguration.HomeGenie.UserPassword
+                        string domain = cmd.Domain;
+                        if (domain.StartsWith("HGIC:"))
+                            domain = domain.Substring(domain.IndexOf(".") + 1);
+                        string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
+                        Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
+                        if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
+                        {
+                            netHelper.WithCredentials(
+                                systemConfiguration.HomeGenie.UserLogin,
+                                systemConfiguration.HomeGenie.UserPassword
+                            );
+                        }
+                        netHelper.Call();
+                    }
+                    catch (Exception ex)
+                    {
+                        HomeGenieService.LogEvent(
+                            Domains.HomeAutomation_HomeGenie,
+                            "Interconnection:" + target.RoutingNode,
+                            ex.Message,
+                            "Exception.StackTrace",
+                            ex.StackTrace
                         );
                     }
-                    netHelper.Call();
+                    return;
                 }
-                catch (Exception ex)
+                //
+                object response = null;
+                MIGInterface migInterface = GetInterface(cmd.Domain);
+                if (migInterface != null)
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "Interconnection:" + target.RoutingNode,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    try
+                    {
+                        response = migInterface.InterfaceControl(cmd);
+                    }
+                    catch (Exception ex)
+                    {
+                        HomeGenieService.LogEvent(
+                            Domains.HomeAutomation_HomeGenie,
+                            "InterfaceControl",
+                            ex.Message,
+                            "Exception.StackTrace",
+                            ex.StackTrace
+                        );
+                    }
                 }
-                return;
-            }
-            //
-            object response = null;
-            MIGInterface migInterface = GetInterface(cmd.Domain);
-            if (migInterface != null)
-            {
-                try
+                //
+                if (response == null || response.Equals(""))
                 {
-                    response = migInterface.InterfaceControl(cmd);
+                    migService.WebServiceDynamicApiCall(cmd);
                 }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "InterfaceControl",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
+                //
+                migService_ServiceRequestPostProcess(null, cmd);
             }
-            //
-            if (response == null || response.Equals(""))
-            {
-                migService.WebServiceDynamicApiCall(cmd);
-            }
-            //
-            migService_ServiceRequestPostProcess(null, cmd);
         }
 
         //TODO: should these two moved to ProgramEngine?
@@ -581,7 +588,7 @@ namespace HomeGenie.Service
             }
             else
             {
-                if (propertyChangedAction.Domain == "MIGService.Interfaces")
+                if (propertyChangedAction.Domain == Domains.MigService_Interfaces)
                 {
                     modules_RefreshInterface(GetInterface(propertyChangedAction.SourceId));
                 }
@@ -597,6 +604,7 @@ namespace HomeGenie.Service
         // Check if command was Control.*, update the ModuleParameter. This should happen in a HWInt->HomeGenie pathway
         private void migService_ServiceRequestPostProcess(MIGClientRequest request, MIGInterfaceCommand command)
         {
+            // REMARK: No post data is available at this point since it has already beel consumed by ServiceRequestPreProcess
             switch (command.Domain)
             {
             case Domains.HomeAutomation_X10:
@@ -831,12 +839,13 @@ namespace HomeGenie.Service
                 //                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             //
+            string eventValue = (propertyChangedAction.Value.GetType() == typeof(String) ? propertyChangedAction.Value.ToString() : JsonConvert.SerializeObject(propertyChangedAction.Value));
             LogBroadcastEvent(
                 propertyChangedAction.Domain,
                 propertyChangedAction.SourceId,
                 propertyChangedAction.SourceType,
                 propertyChangedAction.Path,
-                JsonConvert.SerializeObject(propertyChangedAction.Value)
+                eventValue
             );
             //
             ///// ROUTE EVENT TO LISTENING AutomationPrograms
@@ -956,7 +965,7 @@ namespace HomeGenie.Service
                 Source = source,
                 Description = description,
                 Property = property,
-                Value = value.Replace("\"", "")
+                Value = value
             };
             try
             {

@@ -87,6 +87,7 @@ namespace ZWaveLib.Devices
         private byte[] lastMessage = null;
         private DateTime lastMessageTimestamp = DateTime.UtcNow;
         private ManualResetEvent nodeCapabilityAck = new ManualResetEvent(false);
+        private object nodeCapabilityLock = new object();
 
         #endregion Private fields
 
@@ -244,7 +245,7 @@ namespace ZWaveLib.Devices
 
         private void GetNodeCapabilities(byte nodeId)
         {
-            lock (this)
+            lock (nodeCapabilityLock)
             {
                 nodeCapabilityAck.Reset();
                 currentCommandTargetNode = nodeId;

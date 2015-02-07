@@ -44,6 +44,16 @@ namespace MIG.Interfaces.HomeAutomation
 
     public class ZWave : MIGInterface
     {
+        #region Private fields
+
+        private ZWavePort zwavePort;
+        private Controller controller;
+
+        private byte lastRemovedNode = 0;
+        private byte lastAddedNode = 0;
+
+        #endregion
+        
         #region Implemented MIG Commands
 
         // typesafe enum
@@ -99,7 +109,6 @@ namespace MIG.Interfaces.HomeAutomation
                 { 807, "Thermostat.FanStateGet" },
                 { 808, "Thermostat.GetAll" },
                 { 809, "Thermostat.OperatingStateGet" },
-                { 810, "Thermostat.OperatingStateReport" },
 
                 { 1000, "NodeInfo.Get" },
             };
@@ -143,7 +152,7 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROL_OFF = new Command(702);
             public static readonly Command CONTROL_LEVEL = new Command(705);
             public static readonly Command CONTROL_TOGGLE = new Command(706);
-         
+
             public static readonly Command THERMOSTAT_MODEGET = new Command(801);
             public static readonly Command THERMOSTAT_MODESET = new Command(802);
             public static readonly Command THERMOSTAT_SETPOINTGET = new Command(803);
@@ -153,7 +162,6 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command THERMOSTAT_FANSTATEGET = new Command(807);
             public static readonly Command THERMOSTAT_GETALL = new Command(808);
             public static readonly Command THERMOSTAT_OPERATINGSTATE_GET = new Command(809);
-            public static readonly Command THERMOSTAT_OPERATINGSTATE_REPORT = new Command(810);
 
             private readonly String name;
             private readonly int value;
@@ -194,8 +202,8 @@ namespace MIG.Interfaces.HomeAutomation
                 if (CommandsList.ContainsValue(str))
                 {
                     var cmd = from c in CommandsList
-                                             where c.Value == str
-                                             select c.Key;
+                        where c.Value == str
+                            select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -216,16 +224,6 @@ namespace MIG.Interfaces.HomeAutomation
         }
 
         #endregion
-
-        private ZWavePort zwavePort;
-        private Controller controller;
-
-        private byte lastRemovedNode = 0;
-        private byte lastAddedNode = 0;
-
-        public ZWave()
-        {
-        }
 
         #region MIG Interface members
 
@@ -614,13 +612,14 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
+                    Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet(mode);
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
-                    int temperature = int.Parse(request.GetOption(1));
+                    double temperature = double.Parse(request.GetOption(1).Replace(',', '.'), CultureInfo.InvariantCulture);
                     //
                     raisePropertyChanged = true;
                     parameterPath = "Thermostat.SetPoint." + request.GetOption(0);
@@ -652,7 +651,8 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_GETALL)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet();
+                    // TODO: it should query all SetPointType supported by current node, not just Heating
+                    ((Thermostat)node.DeviceHandler).Thermostat_SetPointGet(Thermostat.SetPointType.Heating);
                     Thread.Sleep(200);
                     ((Thermostat)node.DeviceHandler).Thermostat_FanStateGet();
                     Thread.Sleep(200);
@@ -667,11 +667,6 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((Thermostat)node.DeviceHandler).Thermostat_OperatingStateGet();
-                }
-                else if (command == Command.THERMOSTAT_OPERATINGSTATE_REPORT)
-                {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Thermostat)node.DeviceHandler).Thermostat_OperatingStateReport();
                 }
             }
             catch
@@ -699,7 +694,6 @@ namespace MIG.Interfaces.HomeAutomation
             //
             return returnValue;
         }
-
 
         public bool Connect()
         {
@@ -761,9 +755,15 @@ namespace MIG.Interfaces.HomeAutomation
             return true;
         }
 
-
         #endregion
 
+        #region Public members
+
+        public ZWave()
+        {
+        }
+        
+        // TODO: check if this is to be deprecated or relocated
         public void Dispose()
         {
 
@@ -790,6 +790,9 @@ namespace MIG.Interfaces.HomeAutomation
 
         }
 
+        #endregion
+
+        #region Private members
 
         private void LoadZwavePort()
         {
@@ -1151,6 +1154,7 @@ namespace MIG.Interfaces.HomeAutomation
             UpdateZWaveNodeDeviceHandler(args.NodeId);
         }
 
+        #endregion
 
     }
 

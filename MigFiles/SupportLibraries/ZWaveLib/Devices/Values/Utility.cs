@@ -24,45 +24,39 @@ using System;
 
 namespace ZWaveLib.Devices.Values
 {
+    public class ZWaveValue
+    {
+        public double Value;
+        public int Scale;
+        public int Precision;
+        public int Size;
+    }
+
     public class Utility
     {
-        
-        public static double ExtractTemperatureFromBytes(byte[] message)
+        private static byte sizeMask = 0x07, 
+            scaleMask = 0x18, scaleShift = 0x03, 
+            precisionMask = 0xe0, precisionShift = 0x05;
+
+        public static byte GetPrecisionScaleSize(int precision, int scale, int size)
         {
-            double temperature = 0;
-            int scale = 0;
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            temperature = ExtractValueFromBytes(message, 1, out scale);
-
-            // TODO: should use "scale" value returned from ExtractValueFromBytes
-            // 0x2A = Fahrenheit
-            // 0x22 = Celius
-            byte precisionScaleSize = message[0];
-
-            // convert from Fahrenheit to Celsius
-            if (precisionScaleSize != 0x22) temperature = ((5.0 / 9.0) * (temperature - 32.0));
-
-            return temperature;
+            return (byte)((precision << precisionShift) | (scale << scaleShift) | size);
         }
 
         // adapted from: 
         // https://github.com/dcuddeback/open-zwave/blob/master/cpp/src/command_classes/CommandClass.cpp#L289
-        public static double ExtractValueFromBytes(byte[] message, int valueOffset, out int scale)
+        public static ZWaveValue ExtractValueFromBytes(byte[] message, int valueOffset)
         {
-            double result = 0;
-            scale = 0;
+            ZWaveValue result = new ZWaveValue();
             try
             {
-                byte sizeMask = 0x07, 
-                scaleMask = 0x18, scaleShift = 0x03, 
-                precisionMask = 0xe0, precisionShift = 0x05;
-                //
                 byte size = (byte)(message[valueOffset-1] & sizeMask);
                 byte precision = (byte)((message[valueOffset-1] & precisionMask) >> precisionShift);
-                scale = (int)((message[valueOffset-1] & scaleMask) >> scaleShift);
+                int scale = (int)((message[valueOffset-1] & scaleMask) >> scaleShift);
+                //
+                result.Size = size;
+                result.Precision = precision;
+                result.Scale = scale;
                 //
                 int value = 0;
                 byte i;
@@ -85,7 +79,7 @@ namespace ZWaveLib.Devices.Values
                     }
                 }
                 //
-                result = ((double)value / (precision == 0 ? 1 : Math.Pow(10D, precision) ));
+                result.Value = ((double)value / (precision == 0 ? 1 : Math.Pow(10D, precision) ));
             } catch {
                 // TODO: report/handle exception
             }

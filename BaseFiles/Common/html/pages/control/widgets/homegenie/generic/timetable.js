@@ -161,16 +161,16 @@
       });
       this.CalendarPopup.find('[data-ui-field=btn_calendar_save]').click(function(el){
         $.mobile.loading('show', { text: 'Saving Calendar', textVisible: true });
-        HG.Control.Modules.ServiceCall(
-            'Calendar.Set',
-            _this.Module.Domain,
-            _this.Module.Address,
-            _this.CalendarData,
-            function (data) { 
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Calendar.Set',
+            type: 'POST',
+            data: _this.CalendarData,
+            dataType: 'text',
+            success: function (data) {
                 _this.CalendarPopup.popup('close');
                 $.mobile.loading('hide');
             }
-        );
+        });    
       });
       this.ControlPopup.find('[data-ui-field=select_action]').change(function() {
         var color = $(this).find('option:selected').attr('data-option-color');
@@ -185,16 +185,16 @@
         var request = _this.Groups[_this.CurrentGroup].Table + '.' + _this.CurrentTableId + '/' + slotFrom + '/' + slotTo + '/' + slotValue;
         request += '/' + slotRangeStart + '/' + slotRangeEnd;
         $.mobile.loading('show', { text: 'Saving table', textVisible: true });
-        HG.Control.Modules.ServiceCall(
-            'Timetable.Set',
-            _this.Module.Domain,
-            _this.Module.Address,
-            request,
-            function (data) { 
+        $.ajax({
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + _this.Module.Domain + '/' + _this.Module.Address + '/Timetable.Set',
+            type: 'POST',
+            data: request,
+            dataType: 'text',
+            success: function (data) {
                 _this.SetTable(_this.CurrentTableId);
                 _this.ControlPopup.popup('close');
             }
-        );
+        });
       });
       //
       // timebar initialization

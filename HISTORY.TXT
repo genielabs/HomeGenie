@@ -1,5 +1,39 @@
 ﻿RELEASE HISTORY
 
+07/02/2015 1.00 beta rev 476-git6
+    - Added missing Z-Wave command classes to _nodesetup.js
+    - Fixed Thermostat.SetPointSet to accept decimal temperature values istead of integers only
+    - Some more ZWaveLib code cleanup
+    - Added new data-locale-ids to locale files
+
+06/02/2015 1.00 beta rev 476-git4
+    - Trying to fix precision/scale/size in value sent by Thermostat.SetPointSet
+    - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
+    - Trying to fix Thermostat.SetPointGet and WakeUp app
+
+05/02/2015 1.00 beta rev 476
+    - Added HTTP post data handling for dynamic web service handlers
+    - Fixed bug in Net.SendMail also affecting Security Alarm System app (issue #88)
+    - Optimized DLNA/UPnP MIG interface driver
+    - Fixed web service call handling in jkUtils OpenWeatherMap and SolarAltitude apps
+    - Fixed bug in error reporting for Javascript automation programs
+    - Improved Statistics section with new UI and date range selection (issue #17)
+    - Added tooltips to graphs
+    - Minor improvements to popup notifications blocking functionality (issue #46)
+
+02/02/2015 1.00 beta rev 475
+    - Added event popups ignore list (issue #46)
+    - Fixed some bugs in js/api web service calls (introduced with r474 js/api refactoring)
+    - Improved Media Renderer widget
+    - Fixed some bugs in UPnP MIG interface (not disposing objects when disabled; not setting device type to MediaTransmitter for media browser nodes)
+    - Removed all System.Windows.Forms and System.Drawing references from UPnP library (hopefully making it more stable)
+
+31/01/2015 1.00 beta rev 474
+    - Fixed synchronization issue in controlling modules (InterfaceControl) that could have caused commands not being executed if performed too fastly
+    - Fixed bug in Timetable (not peforming actions on level changes)
+    - Fixed occasional Ajax network error occurring on IE
+    - Added zoom/panning to statistic graphs
+
 30/01/2015 1.00 beta rev 473
     - Added forecast info to Weather Underground widget
 

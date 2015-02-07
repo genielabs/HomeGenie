@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:41.920279Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:28.487655Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:42.421447Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:28.995143Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -432,18 +432,17 @@ return true; // execute "Code To Run"
   Pause(10);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
-    <IsRunning>false</IsRunning>
+    <IsRunning>true</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
     <Name>Weather Underground</Name>
-    <Description>Gather from http://www.wunderground.com/ service all data about sun rise/set. 
-It can be used for "Sunrise/Sunset" feature. 
-User must create an account at wunderground.com in order to obtain a service key.</Description>
+    <Description>Current weather, forecast and sunrise/sunset information from &lt;strong&gt;Weather Underground&lt;/strong&gt; service. 
+To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2015-02-06T15:22:29.490588Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -522,7 +521,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:43.420698Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:29.983156Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1265,7 +1264,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:43.92258Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:30.489839Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1320,7 +1319,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:44.423059Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:30.989375Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1615,7 +1614,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:44.927916Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:31.494333Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1630,57 +1629,72 @@ return true;
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
-  	if (parameter.Name == "ZWaveNode.WakeUpNotify")
-    {     
-      	var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
-      	if (nodeinfo != null)
+  if (parameter.Name == "ZWaveNode.WakeUpNotify")
+  {     
+    var nodeinfo = module.Parameter("ZWaveNode.NodeInfo");
+    if (nodeinfo != null)
+    {
+      // nif contains all command classes supported by this module
+      string nif = " " + nodeinfo.Value + " ";
+      if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 ") || nif.Contains(" 43 "))
+      {
+        if (nif.Contains(" 60 ")) // MultiInstance
         {
-          	// nif contains all command classes supported by this module
-          	string nif = " " + nodeinfo.Value + " ";
-          	if (nif.Contains(" 84 ") || nif.Contains(" 25 ") || nif.Contains(" 26 "))
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
+          // query first 4 instances
+          for (int instance = 1; instance &lt; 4; instance ++)
+          {
+            if (nif.Contains(" 30 ")) // Sensor Binary
             {
-                if (nif.Contains(" 60 ")) // MultiInstance
-                {
-                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " MultiInstance Get");
-                    // query first 4 instances
-                    for (int instance = 1; instance &lt; 4; instance ++)
-                    {
-                        if (nif.Contains(" 30 ")) // Sensor Binary
-                        {
-                            module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
-                        }
-                        else if (nif.Contains(" 31 ")) // Sensor MultiLevel
-                        {
-                            module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
-                        }
-                        else if (nif.Contains(" 25 ")) // Switch Binary
-                        {
-                            module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
-                        }
-                        else if (nif.Contains(" 26 ")) // Switch MultiLevel
-                        {
-                            module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
-                        }
-                        //Pause(.5);
-                    }
-                }
-                //
-                // query battery level
-                if (nif.Contains(" 80 ")) // Battery
-                {
-                    Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
-                    module.Command("Battery.Get").Execute();
-                    //Pause(.5);
-                }
-                //
-                Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
-                module.Command("Basic.Get").Execute();
-                Pause(1);
+              module.Command("MultiInstance.Get").Execute("Sensor.Binary/" + instance);
+              Pause(.2);
             }
+            else if (nif.Contains(" 31 ")) // Sensor MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Sensor.MultiLevel/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 25 ")) // Switch Binary
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.Binary/" + instance);
+              Pause(.2);
+            }
+            else if (nif.Contains(" 26 ")) // Switch MultiLevel
+            {
+              module.Command("MultiInstance.Get").Execute("Switch.MultiLevel/" + instance);
+              Pause(.2);
+            }
+          }
         }
+        //
+        // query Thermostat set point
+        if (nif.Contains(" 43 ")) // Thermostat
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Thermostat SetPoint Get Heating");
+          module.Command("Thermostat.SetPointGet").Execute("Heating");
+          Pause(.2);
+        }
+        //
+        // query Battery level
+        if (nif.Contains(" 80 ")) // Battery
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Battery Get");
+          module.Command("Battery.Get").Execute();
+          Pause(.2);
+        }
+        //
+        // query Basic value
+        if (nif.Contains(" 20 ")) // Basic
+        {
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
+        }
+      }
     }
+  }
 
-  	return true; // continue processing event
+  return true; // continue processing event
 });
 
 Program.GoBackground();</ScriptSource>
@@ -1693,8 +1707,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Query on Wake Up</Name>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
-    <ActivationTime>2014-12-11T15:27:59.391434Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:45.42345Z</TriggerTime>
+    <ActivationTime>2015-02-06T15:29:45.595846Z</ActivationTime>
+    <TriggerTime>2015-02-06T15:29:45.611494Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1764,7 +1778,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:45.92338Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:32.489699Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2038,7 +2052,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:46.425987Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:32.992295Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2404,7 +2418,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:47.428778Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:33.995275Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2506,7 +2520,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:47.929394Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:34.497689Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2660,7 +2674,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:48.428551Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:34.994024Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2924,7 +2938,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:48.932816Z</TriggerTime>
+    <TriggerTime>2015-02-06T15:22:35.498732Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3640,7 +3654,7 @@ Func&lt;bool&gt; _checkWeather = new Func&lt;bool&gt;(()=&gt;{
 // Web service calls handling
 //
 
-When.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", (args) =&gt; //"HomeGenie.SecuritySystem", ( args ) =&gt; 
+When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args) =&gt; //"HomeGenie.SecuritySystem", ( args ) =&gt; 
 {
     string[] reqs = ((string)args).Split('/');
     var res = "";
@@ -3648,18 +3662,12 @@ When.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", (args) =&gt; 
     try
     {
       string command = reqs[2];
-      string pid = reqs[1];
-      if (pid == Program.Module.Address)
+      switch(command)
       {
-
-        switch(command)
-        {
-          case "Control.Refresh":
-            //Program.Notify("jkutils: OpenWeatherMap","Update triggered.");
-          	_checkWeather();
-            break;
-        }
-
+        case "Control.Refresh":
+        //Program.Notify("jkutils: OpenWeatherMap","Update triggered.");
+        _checkWeather();
+        break;
       }
     } 
     catch (Exception ex) 
@@ -3678,18 +3686,18 @@ while (Program.IsEnabled)
   //Pause(10);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>503</Address>
     <Name>jkUtils - OpenWeatherData</Name>
     <Description>Gathers weather data from http://www.OpenWeatherMap.org/ [API Version 2.5] 
 No service key required to fetch data.</Description>
     <Group>Weather and Enviroment</Group>
-    <ActivationTime>2014-05-09T16:01:02.7887618Z</ActivationTime>
-    <TriggerTime>2014-05-09T16:01:02.8657664Z</TriggerTime>
+    <ActivationTime>2015-02-02T20:58:04.165272Z</ActivationTime>
+    <TriggerTime>2015-02-02T20:58:04.184886Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -4060,55 +4068,23 @@ SolarAltitude.main = function () {
   
 };
 
-while (hg.Program.IsEnabled)
-{
-  	SolarAltitude.main();
-  	// Update every 12 hours
-  	hg.Pause(12*60*60);
-
-}
-
-
 //
 // Web service calls handling
 //
-/* WebServiceCall currently not working 
-
-hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args) {
-{
-    //string[] reqs = ((string)args).Split('/');
+hg.When.WebServiceCallReceived(hg.Program.Module.Domain + "/" + hg.Program.Module.Address, function (args) {
   	var reqs = args.split('/');
-    var res = "";
-    hg.Program.Notify("SolarAltitude", "WebServiceCall.");
-    
-    try
+    var res = "ERROR";
+    var command = reqs[2];
+    switch(command)
     {
-      var command = reqs[2];
-      var pid = reqs[1];
-      if (pid == hg.Program.Module.Address)
-      {
-
-        switch(command)
-        {
-          case "Control.Refresh":
-            //Program.Notify("jkutils: SolarAltitude","Update triggered.");
-          	SolarAltitude.main();
-            break;
-        }
-
-      }
-
-    } catch (e) {
-    
-      var res = "{ 'ResponseValue' : 'ERROR: " + e.Message + " " + e.StackTrace + "' }";
-      
+      case "Control.Refresh":
+        res = "OK";
+        hg.Program.Notify("jkutils: SolarAltitude","Update triggered.");
+        SolarAltitude.main();
+        break;
     }
-    // unable to process request
     return res;
-
 });
-*/
-
 
 // For your convenience:
 //   If you should need a way to parse the saved times within you own scripts, you can use the following function.
@@ -4123,11 +4099,20 @@ hg.WebServiceCallReceived("HomeAutomation.HomeGenie.Automation", function (args)
 //    return d;
 //   }
    
+
+while (hg.Program.IsEnabled)
+{
+  	SolarAltitude.main();
+  	// Update every 12 hours
+  	hg.Pause(12*60*60);
+
+}
+
 </ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
-    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>501</Address>
     <Name>jkUtils - Solar Altitude</Name>
@@ -7841,9 +7826,10 @@ hg.SetConditionTrue();
     <ScriptSource>var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
 var temperature = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH0").Get().Parameter("Sensor.Temperature");
 var luminance = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH1").Get().Parameter("Sensor.Luminance");
-var energyLoad = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.KwLoad");
-var operatingLights = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingLights");
-var operatingSwitches = hg.Program.WithName("Energy Monitor").Parameter("EnergyMonitor.OperatingSwitches");
+var energyMonitor = hg.Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+var energyLoad = energyMonitor.Parameter("EnergyMonitor.WattLoad");
+var operatingLights = energyMonitor.Parameter("EnergyMonitor.OperatingLights");
+var operatingSwitches = energyMonitor.Parameter("EnergyMonitor.OperatingSwitches");
 var weather = hg.Program.WithName("Weather Underground");
 
 var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
@@ -7892,7 +7878,7 @@ while (hg.Program.IsEnabled)
   }
   if (hg.Settings.Parameter('EdenDisplay.MenuMode').Value != 'ON')
   {
-    // Energy monitor Kw Load
+    // Energy monitor Watt load
     oled.Command("Oled.GoTo").Execute("0/4");
     oled.Command("Oled.DrawText2").Execute("Energy Use/CENTER");
     oled.Command("Oled.GoTo").Execute("0/6");
@@ -8649,29 +8635,38 @@ var GetTableSliceAction = new Func&lt;string, DateTime, ExpandoObject&gt;((table
 });
 
 var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module, tableType, action) =&gt;{
+  bool performed = false;
   switch (tableType)  
   {
     case "OnOff":
-      if (action.Value == '1' &amp;&amp; action.Previous == '0' &amp;&amp; module.IsOff)
+      if (action.Value == '1' &amp;&amp; action.Previous == '0')
       {
+      	Program.Notify("Timetable", module.Instance.Name + " ON");
         module.On();
+        performed = true;
       }
-      else if (action.Value == '0' &amp;&amp; action.Previous == '1' &amp;&amp; module.IsOn)
+      else if (action.Value == '0' &amp;&amp; action.Previous == '1')
       {
+      	Program.Notify("Timetable", module.Instance.Name + " OFF");
         module.Off();
+        performed = true;
       }
       break;
 	case "Level":
       // Level values are '0' = Off, '1' = 10%, '2' = 20%, ..., '9' = 90%, 'A' = 100%
       var level = ((int)action.Value - 48);
       if (action.Value == 'A') level = 10;
-      if (action.Value != '0' &amp;&amp; action.Previous == '0' &amp;&amp; module.IsOff)
+      if (action.Value != '0' &amp;&amp; action.Previous != action.Value)
       {
+      	Program.Notify("Timetable", module.Instance.Name + " Level " + (level * 10) + "%");
         module.Level = level * 10;
+        performed = true;
       }
-      else if (action.Value == '0' &amp;&amp; action.Previous != '0' &amp;&amp; module.IsOn)
+      else if (action.Value == '0' &amp;&amp; action.Previous != action.Value)
       {
+      	Program.Notify("Timetable", module.Instance.Name + " OFF");
         module.Off();
+        performed = true;
       }
       break;
     case "Therm":
@@ -8680,36 +8675,54 @@ var PerformAction = new Func&lt;ModuleHelper, string, dynamic, bool&gt;((module,
       switch ((char)action.Value)
       {
         case '0':
+          Program.Notify("Timetable", module.Instance.Name + " OFF");
           command.Execute("Off");
+	      performed = true;
           break;
         case '1':
+          Program.Notify("Timetable", module.Instance.Name + " Heat");
           command.Execute("Heat");
+	      performed = true;
           break;
         case '2':
+          Program.Notify("Timetable", module.Instance.Name + " Cool");
           command.Execute("Cool");
+	      performed = true;
           break;
         case '3':
+          Program.Notify("Timetable", module.Instance.Name + " Auto");
           command.Execute("Auto");
+	      performed = true;
           break;
         case '4':
+          Program.Notify("Timetable", module.Instance.Name + " FanOnly");
           command.Execute("FanOnly");
+	      performed = true;
           break;
         case '5':
+          Program.Notify("Timetable", module.Instance.Name + " AutoChangeover");
           command.Execute("AutoChangeover");
+	      performed = true;
           break;
         case '6':
+          Program.Notify("Timetable", module.Instance.Name + " HeatEconomy");
           command.Execute("HeatEconomy");
+	      performed = true;
           break;
         case '7':
+          Program.Notify("Timetable", module.Instance.Name + " CoolEconomy");
           command.Execute("CoolEconomy");
+	      performed = true;
           break;
         case '8':
+          Program.Notify("Timetable", module.Instance.Name + " Away");
           command.Execute("Away");
+	      performed = true;
           break;
       }
       break;
   }
-  return true;
+  return performed;
 });
 
 When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address, (args)=&gt;{
@@ -8824,8 +8837,11 @@ while (Program.IsEnabled)
     if (tableIndex &gt; 0)
     {
       var timetable = GetTableSettings(tableType + "." + (tableIndex - 1)); // tables are stored as zero indexed
-      var action = GetTableSliceAction(timetable.Value, todayDate);
-      PerformAction(module, tableType, action);
+      dynamic action = GetTableSliceAction(timetable.Value, todayDate);
+      if (PerformAction(module, tableType, action))
+      {
+      	Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + tableIndex);
+      }
     }
 
     return false; // do not stop iterating, continue processing next module
@@ -8882,8 +8898,8 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-30T10:04:02.402834Z</ActivationTime>
-    <TriggerTime>2015-01-30T19:13:49.939974Z</TriggerTime>
+    <ActivationTime>2015-01-31T13:58:36.107619Z</ActivationTime>
+    <TriggerTime>2015-02-06T15:22:36.507247Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

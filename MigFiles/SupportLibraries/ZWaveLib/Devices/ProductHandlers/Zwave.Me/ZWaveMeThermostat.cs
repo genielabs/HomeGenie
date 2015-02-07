@@ -39,13 +39,13 @@ namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
         /*
          * Set temperature in Celcius.
          */
-        public override void Thermostat_SetPointSet(SetPointType ptype, int temperature)
+        public override void Thermostat_SetPointSet(SetPointType ptype, double temperature)
         {
             this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatSetPoint, 
                 (byte)Command.ThermostatSetPointSet, 
                 (byte)ptype,
-                0x01,
+                0x01, // <-- TODO: find out the proper way of setting precision/scale/size
                 (byte)temperature
             });
         } 

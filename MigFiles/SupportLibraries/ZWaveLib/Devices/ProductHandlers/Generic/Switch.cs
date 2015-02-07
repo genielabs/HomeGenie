@@ -27,7 +27,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 {
     public class Switch : Sensor
     {
-
         internal double levelValue = 0;
 
         public override bool HandleBasicReport(byte[] message)
@@ -43,20 +42,10 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 switch (cmdClass)
                 {
                 case (byte)CommandClass.SwitchBinary:
-                    nodeHost.RaiseUpdateParameterEvent(
-                        nodeHost,
-                        1,
-                        ParameterType.MULTIINSTANCE_SWITCH_BINARY,
-                        (double)levelValue
-                        );
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterType.MULTIINSTANCE_SWITCH_BINARY, (double)levelValue);
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
-                    nodeHost.RaiseUpdateParameterEvent(
-                        nodeHost,
-                        1,
-                        ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL,
-                        (double)levelValue
-                        );
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL, (double)levelValue);
                     break;
                 }
                 handled = true;
@@ -68,10 +57,10 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             return handled;
         }
 
-
         public override bool HandleMultiInstanceReport(byte[] message)
         {
-            if (message.Length < 12) return false; // we need at least 15 bytes long message for further processing
+            if (message.Length < 12)
+                return false; // we need at least 15 bytes long message for further processing
             //
             bool processed = false;
             //
@@ -86,21 +75,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 byte inst_count = message[10];
                 if (instanceCmdClass == (byte)CommandClass.SwitchBinary)
                 {
-                    nodeHost.RaiseUpdateParameterEvent(
-                        nodeHost,
-                        0,
-                        ParameterType.MULTIINSTANCE_SWITCH_BINARY_COUNT,
-                        inst_count
-                    );
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.MULTIINSTANCE_SWITCH_BINARY_COUNT, inst_count);
                 }
                 else
                 {
-                    nodeHost.RaiseUpdateParameterEvent(
-                        nodeHost,
-                        0,
-                        ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT,
-                        inst_count
-                    );
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT, inst_count);
                 }
                 processed = true;
             }
@@ -118,21 +97,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     if (cmd == (byte)CommandClass.SwitchBinary)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(
-                            nodeHost,
-                            instance,
-                            ParameterType.MULTIINSTANCE_SWITCH_BINARY,
-                            (double)value
-                        );
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.MULTIINSTANCE_SWITCH_BINARY, (double)value);
                     }
                     else
                     {
-                        nodeHost.RaiseUpdateParameterEvent(
-                            nodeHost,
-                            instance,
-                            ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL,
-                            (double)value
-                        );
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL, (double)value);
                     }
                     //_nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_BASIC, (double)value);
                     //
@@ -170,6 +139,5 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 nodeHost.Basic_Set((int)levelValue);
             }
         }
-
     }
 }
