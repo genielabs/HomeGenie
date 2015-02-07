@@ -614,7 +614,7 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
-                    int temperature = int.Parse(request.GetOption(1));
+                    double temperature = double.Parse(request.GetOption(1).Replace(',', '.'), CultureInfo.InvariantCulture);
                     //
                     raisePropertyChanged = true;
                     parameterPath = "Thermostat.SetPoint." + request.GetOption(0);

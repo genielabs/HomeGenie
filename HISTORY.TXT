@@ -1,6 +1,8 @@
 ﻿RELEASE HISTORY
 
-07/02/2015 1.00 beta rev 476-git5
+07/02/2015 1.00 beta rev 476-git6
+    - Added missing Z-Wave command classes to _nodesetup.js
+    - Fixed Thermostat.SetPointSet to accept decimal temperature values istead of integers only
     - Some more ZWaveLib code cleanup
     - Added new data-locale-ids to locale files
 
