@@ -11,7 +11,6 @@ HG.WebApp.Statistics._RefreshIntervalObject = null;
 HG.WebApp.Statistics._RefreshInterval = 2 * 60000; // stats refresh interval = 2 minutes
 //
 HG.WebApp.Statistics.InitializePage = function () {
-    HG.WebApp.Statistics.InitConfiguration();
     $('#page_analyze_source').on('change', function () {
         var selected = $(this).find('option:selected');
         var filter = selected.attr('data-context-domain') + ':' + selected.attr('data-context-address');
@@ -168,6 +167,7 @@ HG.WebApp.Statistics.InitConfiguration = function () {
         var sec = (setting.StatisticsUIRefreshSeconds * 1);
         HG.WebApp.Statistics._RefreshInterval = sec * 1000; //2 * 60000;
         HG.WebApp.Statistics.SetAutoRefresh(true);
+        HG.WebApp.Statistics.SetTab(1);
     });
 }
 

@@ -59,7 +59,7 @@ namespace ZWaveLib.Devices.Values
 
     public class SensorValue
     {
-        public ParameterType EventType = ParameterType.GENERIC;
+        public ParameterEvent EventType = ParameterEvent.Generic;
         public ZWaveSensorParameter Parameter = ZWaveSensorParameter.Unknown;
         public double Value = 0d;
 
@@ -76,25 +76,25 @@ namespace ZWaveLib.Devices.Values
                 sensor.Parameter = ZWaveSensorParameter.Temperature;
                 // convert from Fahrenheit to Celsius if needed
                 sensor.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                sensor.EventType = ParameterType.SENSOR_TEMPERATURE;
+                sensor.EventType = ParameterEvent.SensorTemperature;
             }
             else if (key == (byte)ZWaveSensorParameter.GeneralPurposeValue)
             {
                 sensor.Parameter = ZWaveSensorParameter.GeneralPurposeValue;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterType.GENERIC;
+                sensor.EventType = ParameterEvent.Generic;
             }
             else if (key == (byte)ZWaveSensorParameter.Luminance)
             {
                 sensor.Parameter = ZWaveSensorParameter.Luminance;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterType.SENSOR_LUMINANCE;
+                sensor.EventType = ParameterEvent.SensorLuminance;
             }
             else if (key == (byte)ZWaveSensorParameter.RelativeHumidity)
             {
                 sensor.Parameter = ZWaveSensorParameter.RelativeHumidity;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterType.SENSOR_HUMIDITY;
+                sensor.EventType = ParameterEvent.SensorHumidity;
             }
             else if (key == (byte)ZWaveSensorParameter.Power)
             {
@@ -107,7 +107,7 @@ namespace ZWaveLib.Devices.Values
                 EnergyValue energy = EnergyValue.Parse(message);
                 sensor.Parameter = ZWaveSensorParameter.Power;
                 sensor.Value = energy.Value;
-                sensor.EventType = ParameterType.METER_POWER;
+                sensor.EventType = ParameterEvent.MeterPower;
             }
             else
             {

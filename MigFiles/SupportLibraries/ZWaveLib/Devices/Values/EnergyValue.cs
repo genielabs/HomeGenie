@@ -38,7 +38,7 @@ namespace ZWaveLib.Devices.Values
 
     public class EnergyValue
     {
-        public ParameterType EventType = ParameterType.GENERIC;
+        public ParameterEvent EventType = ParameterEvent.Generic;
         public ZWaveEnergyScaleType Parameter = ZWaveEnergyScaleType.Unknown;
         public double Value = 0;
 
@@ -59,34 +59,34 @@ namespace ZWaveLib.Devices.Values
             {
             // Accumulated power consumption kW/h
             case ZWaveEnergyScaleType.kWh:
-                energy.EventType = ParameterType.METER_KW_HOUR;
+                energy.EventType = ParameterEvent.MeterKwHour;
                 break;
             // Accumulated power consumption kilo Volt Ampere / hours (kVA/h)
             case ZWaveEnergyScaleType.kVAh:
-                energy.EventType = ParameterType.METER_KVA_HOUR;
+                energy.EventType = ParameterEvent.MeterKvaHour;
                 break;
             // Instant power consumption Watt
             case ZWaveEnergyScaleType.Watt:
-                energy.EventType = ParameterType.METER_WATT;
+                energy.EventType = ParameterEvent.MeterWatt;
                 break;
             // Pulses count
             case ZWaveEnergyScaleType.Pulses:
-                energy.EventType = ParameterType.METER_PULSES;
+                energy.EventType = ParameterEvent.MeterPulses;
                 break;
             // AC load Voltage
             case ZWaveEnergyScaleType.ACVolt:
-                energy.EventType = ParameterType.METER_AC_VOLT;
+                energy.EventType = ParameterEvent.MeterAcVolt;
                 break;
             // AC load Current
             case ZWaveEnergyScaleType.ACCurrent:
-                energy.EventType = ParameterType.METER_AC_CURRENT;
+                energy.EventType = ParameterEvent.MeterAcCurrent;
                 break;
             // Power Factor
             case ZWaveEnergyScaleType.PowerFactor:
-                energy.EventType = ParameterType.METER_POWER;
+                energy.EventType = ParameterEvent.MeterPower;
                 break;
             default:
-                energy.EventType = ParameterType.METER_WATT;
+                energy.EventType = ParameterEvent.MeterWatt;
                 break;
             }
             return energy;

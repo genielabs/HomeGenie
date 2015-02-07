@@ -45,7 +45,7 @@ namespace MIG
             OriginalRequest = request;
             try
             {
-                var requests = request.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var requests = request.Trim('/').Split(new char[] { '/' }, StringSplitOptions.None);
                 if (requests.Length > 0)
                 {
                     Domain = requests[ 0 ];

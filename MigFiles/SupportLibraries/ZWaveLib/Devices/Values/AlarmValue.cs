@@ -37,7 +37,7 @@ namespace ZWaveLib.Devices.Values
 
     public class AlarmValue
     {
-        public ParameterType EventType = ParameterType.GENERIC;
+        public ParameterEvent EventType = ParameterEvent.Generic;
         public ZWaveAlarmParameter Parameter = ZWaveAlarmParameter.GENERIC;
         public byte Value = 0x00;
 
@@ -59,23 +59,23 @@ namespace ZWaveLib.Devices.Values
             switch (alarm.Parameter)
             {
                 case ZWaveAlarmParameter.CARBONDIOXIDE:
-                alarm.EventType = ParameterType.ALARM_CARBONDIOXIDE;
+                alarm.EventType = ParameterEvent.AlarmCarbonDioxide;
                 break;
                 case ZWaveAlarmParameter.CARBONMONOXIDE:
-                alarm.EventType = ParameterType.ALARM_CARBONMONOXIDE;
+                alarm.EventType = ParameterEvent.AlarmCarbonMonoxide;
                 break;
                 case ZWaveAlarmParameter.SMOKE:
-                alarm.EventType = ParameterType.ALARM_SMOKE;
+                alarm.EventType = ParameterEvent.AlarmSmoke;
                 break;
                 case ZWaveAlarmParameter.HEAT:
-                alarm.EventType = ParameterType.ALARM_HEAT;
+                alarm.EventType = ParameterEvent.AlarmHeat;
                 break;
                 case ZWaveAlarmParameter.FLOOD:
-                alarm.EventType = ParameterType.ALARM_FLOOD;
+                alarm.EventType = ParameterEvent.AlarmFlood;
                 break;
                 //case ZWaveSensorAlarmParameter.GENERIC:
                 default:
-                alarm.EventType = ParameterType.ALARM_GENERIC;
+                alarm.EventType = ParameterEvent.AlarmGeneric;
                 break;
             }
             //

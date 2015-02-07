@@ -133,8 +133,8 @@ namespace HomeGenie.Service.Handlers
                 //
                 migCommand.Response = "[";
                 //
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(1)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 var hoursAverages = new List<StatisticsEntry>[5];
                 hoursAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Min", dateStart, dateEnd);
                 hoursAverages[1] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "Max", dateStart, dateEnd);

@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace ZWaveLib.Devices.Values
 {
@@ -29,7 +30,7 @@ namespace ZWaveLib.Devices.Values
         public double Value;
         public int Scale;
         public int Precision;
-        public int Size;
+        public int Size = 1;
     }
 
     public class Utility
@@ -41,6 +42,19 @@ namespace ZWaveLib.Devices.Values
         public static byte GetPrecisionScaleSize(int precision, int scale, int size)
         {
             return (byte)((precision << precisionShift) | (scale << scaleShift) | size);
+        }
+
+        public static byte[] GetValueBytes(double v, int precision, int scale, int size)
+        {
+            List<byte> valueBytes = new List<byte>();
+            valueBytes.Add(Utility.GetPrecisionScaleSize(precision, scale, size));
+            int intValue = (int)(v * Math.Pow(10D, precision));
+            int shift = (size - 1) << 3;
+            for(int i = size; i > 0; --i, shift -= 8)
+            {
+                valueBytes.Add((byte)(intValue >> shift));
+            }
+            return valueBytes.ToArray();
         }
 
         // adapted from: 

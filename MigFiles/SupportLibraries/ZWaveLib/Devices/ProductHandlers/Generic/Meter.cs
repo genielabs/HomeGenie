@@ -35,7 +35,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
         public void SetNodeHost(ZWaveNode node)
         {
             nodeHost = node;
-            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.METER_WATT, 0);
+            nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.MeterWatt, 0);
         }
 
         public virtual bool CanHandleProduct(ManufacturerSpecific productspecs)

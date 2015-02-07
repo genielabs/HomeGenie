@@ -670,7 +670,9 @@ namespace MIG
             var handler = MIG.Interfaces.DynamicInterfaceAPI.Find(registeredApi);
             if (handler != null)
             {
-                var args = command.OriginalRequest.Substring(registeredApi.Length);
+                // explicit command API handlers registered in the form <domain>/<address>/<command>
+                // receives only the remaining part of the request after the <command>
+                var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
                 response = handler(args);
             }
             else
@@ -678,6 +680,8 @@ namespace MIG
                 handler = MIG.Interfaces.DynamicInterfaceAPI.FindMatching(command.OriginalRequest.Trim('/'));
                 if (handler != null)
                 {
+                    // other command API handlers
+                    // receives the full request string
                     response = handler(command.OriginalRequest.Trim('/'));
                 }
             }
