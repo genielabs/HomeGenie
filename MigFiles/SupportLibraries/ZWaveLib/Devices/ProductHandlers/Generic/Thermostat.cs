@@ -127,27 +127,27 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             switch (cmdClass)
             {
             case (byte)CommandClass.ThermostatMode:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_MODE, (Thermostat.Mode)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatMode, (Thermostat.Mode)message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.ThermostatOperatingState:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_OPERATING_STATE, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatOperatingState, message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.ThermostatFanMode:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_FAN_MODE, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatFanMode, message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.ThermostatFanState:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_FAN_STATE, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatFanState, message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.ThermostatHeating:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_HEATING, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatHeating, message[9]);
                 handled = true;
                 break;
             case (byte)CommandClass.ThermostatSetBack:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_SETBACK, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatSetBack, message[9]);
                 handled = true;
                 break;
             /*
@@ -160,7 +160,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 ptype.Type = (SetPointType)message[9];
                 // convert from Fahrenheit to Celsius if needed
                 ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.THERMOSTAT_SETPOINT, ptype);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatSetPoint, ptype);
                 handled = true;
                 break;
             }
@@ -216,13 +216,14 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
          */
         public virtual void Thermostat_SetPointSet(SetPointType ptype, double temperature)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            List<byte> message = new List<byte>();
+            message.AddRange(new byte[] { 
                 (byte)CommandClass.ThermostatSetPoint, 
                 (byte)Command.ThermostatSetPointSet, 
-                (byte)ptype,
-                Utility.GetPrecisionScaleSize(setPoint.Precision, setPoint.Scale, setPoint.Size), // it was 0x09 // <-- TODO: find out the proper way of setting precision/scale/size
-                (byte)(temperature * Math.Pow(10D, setPoint.Precision))
+                (byte)ptype
             });
+            message.AddRange(Utility.GetValueBytes(temperature, setPoint.Precision, setPoint.Scale, setPoint.Size));
+            this.nodeHost.SendRequest(message.ToArray());
         }
         
         public virtual void Thermostat_FanStateGet()

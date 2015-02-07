@@ -915,30 +915,30 @@ namespace MIG.Interfaces.HomeAutomation
             string path = "UnknwonParameter";
             object value = upargs.Value;
             //
-            switch (upargs.ParameterType)
+            switch (upargs.ParameterEvent)
             {
-            case ParameterType.METER_KW_HOUR:
+            case ParameterEvent.MeterKwHour:
                 path = ModuleParameters.MODPAR_METER_KW_HOUR;
                 break;
-            case ParameterType.METER_KVA_HOUR:
+            case ParameterEvent.MeterKvaHour:
                 path = ModuleParameters.MODPAR_METER_KVA_HOUR;
                 break;
-            case ParameterType.METER_WATT:
+            case ParameterEvent.MeterWatt:
                 path = ModuleParameters.MODPAR_METER_WATTS;
                 break;
-            case ParameterType.METER_PULSES:
+            case ParameterEvent.MeterPulses:
                 path = ModuleParameters.MODPAR_METER_PULSES;
                 break;
-            case ParameterType.METER_AC_VOLT:
+            case ParameterEvent.MeterAcVolt:
                 path = ModuleParameters.MODPAR_METER_AC_VOLT;
                 break;
-            case ParameterType.METER_AC_CURRENT:
+            case ParameterEvent.MeterAcCurrent:
                 path = ModuleParameters.MODPAR_METER_AC_CURRENT;
                 break;
-            case ParameterType.METER_POWER:
+            case ParameterEvent.MeterPower:
                 path = ModuleParameters.MODPAR_SENSOR_POWER;
                 break;
-            case ParameterType.BATTERY:
+            case ParameterEvent.Battery:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = upargs.NodeId.ToString(),
@@ -948,57 +948,57 @@ namespace MIG.Interfaces.HomeAutomation
                 });
                 path = ModuleParameters.MODPAR_STATUS_BATTERY;
                 break;
-            case ParameterType.NODE_INFO:
+            case ParameterEvent.NodeInfo:
                 path = "ZWaveNode.NodeInfo";
                 break;
-            case ParameterType.GENERIC:
+            case ParameterEvent.Generic:
                 path = ModuleParameters.MODPAR_SENSOR_GENERIC;
                 break;
-            case ParameterType.ALARM_GENERIC:
+            case ParameterEvent.AlarmGeneric:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
                 break;
-            case ParameterType.ALARM_DOORWINDOW:
+            case ParameterEvent.AlarmDoorWindow:
                 path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
                 break;
-            case ParameterType.ALARM_TAMPERED:
+            case ParameterEvent.AlarmTampered:
                 path = ModuleParameters.MODPAR_SENSOR_TAMPER;
                 break;
-            case ParameterType.SENSOR_TEMPERATURE:
+            case ParameterEvent.SensorTemperature:
                 path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
                 break;
-            case ParameterType.SENSOR_HUMIDITY:
+            case ParameterEvent.SensorHumidity:
                 path = ModuleParameters.MODPAR_SENSOR_HUMIDITY;
                 break;
-            case ParameterType.SENSOR_LUMINANCE:
+            case ParameterEvent.SensorLuminance:
                 path = ModuleParameters.MODPAR_SENSOR_LUMINANCE;
                 break;
-            case ParameterType.SENSOR_MOTION:
+            case ParameterEvent.SensorMotion:
                 path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
                 break;
-            case ParameterType.ALARM_SMOKE:
+            case ParameterEvent.AlarmSmoke:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_SMOKE;
                 break;
-            case ParameterType.ALARM_CARBONMONOXIDE:
+            case ParameterEvent.AlarmCarbonMonoxide:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONMONOXIDE;
                 break;
-            case ParameterType.ALARM_CARBONDIOXIDE:
+            case ParameterEvent.AlarmCarbonDioxide:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONDIOXIDE;
                 break;
-            case ParameterType.ALARM_HEAT:
+            case ParameterEvent.AlarmHeat:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_HEAT;
                 break;
-            case ParameterType.ALARM_FLOOD:
+            case ParameterEvent.AlarmFlood:
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
                 break;
-            case ParameterType.MANUFACTURER_SPECIFIC:
+            case ParameterEvent.ManufacturerSpecific:
                 ManufacturerSpecific mf = (ManufacturerSpecific)value;
                 path = "ZWaveNode.ManufacturerSpecific";
                 value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
                 break;
-            case ParameterType.CONFIGURATION:
+            case ParameterEvent.Configuration:
                 path = "ZWaveNode.Variables." + upargs.ParameterId;
                 break;
-            case ParameterType.ASSOCIATION:
+            case ParameterEvent.Association:
                 switch (upargs.ParameterId)
                 {
                 //                    case 0:
@@ -1017,37 +1017,37 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 }
                 break;
-            case ParameterType.MULTIINSTANCE_SWITCH_BINARY_COUNT:
+            case ParameterEvent.MultiinstanceSwitchBinaryCount:
                 path = "ZWaveNode.MultiInstance.SwitchBinary.Count";
                 break;
-            case ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT:
+            case ParameterEvent.MultiinstanceSwitchMultilevelCount:
                 path = "ZWaveNode.MultiInstance.SwitchMultiLevel.Count";
                 break;
-            case ParameterType.MULTIINSTANCE_SENSOR_BINARY_COUNT:
+            case ParameterEvent.MultiinstanceSensorBinaryCount:
                 path = "ZWaveNode.MultiInstance.SensorBinary.Count";
                 break;
-            case ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL_COUNT:
+            case ParameterEvent.MultiinstanceSensorMultilevelCount:
                 path = "ZWaveNode.MultiInstance.SensorMultiLevel.Count";
                 break;
-            case ParameterType.MULTIINSTANCE_SWITCH_BINARY:
+            case ParameterEvent.MultiinstanceSwitchBinary:
                 path = "ZWaveNode.MultiInstance.SwitchBinary." + upargs.ParameterId;
                 break;
-            case ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL:
+            case ParameterEvent.MultiinstanceSwitchMultilevel:
                 path = "ZWaveNode.MultiInstance.SwitchMultiLevel." + upargs.ParameterId;
                 break;
-            case ParameterType.MULTIINSTANCE_SENSOR_BINARY:
+            case ParameterEvent.MultiinstanceSensorBinary:
                 path = "ZWaveNode.MultiInstance.SensorBinary." + upargs.ParameterId;
                 break;
-            case ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL:
+            case ParameterEvent.MultiinstanceSensorMultilevel:
                 path = "ZWaveNode.MultiInstance.SensorMultiLevel." + upargs.ParameterId;
                 break;
-            case ParameterType.WAKEUP_INTERVAL:
+            case ParameterEvent.WakeUpInterval:
                 path = "ZWaveNode.WakeUpInterval";
                 break;
-            case ParameterType.WAKEUP_NOTIFY:
+            case ParameterEvent.WakeUpNotify:
                 path = "ZWaveNode.WakeUpNotify";
                 break;
-            case ParameterType.LEVEL:
+            case ParameterEvent.Level:
                     //
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
@@ -1070,29 +1070,29 @@ namespace MIG.Interfaces.HomeAutomation
                 value = normalizedval.ToString(CultureInfo.InvariantCulture);
 
                 break;
-            case ParameterType.THERMOSTAT_MODE:
+            case ParameterEvent.ThermostatMode:
                 path = "Thermostat.Mode";
                 value = ((Thermostat.Mode)value).ToString();
                 break;
-            case ParameterType.THERMOSTAT_OPERATING_STATE:
+            case ParameterEvent.ThermostatOperatingState:
                 path = "Thermostat.OperatingState";
                 value = ((Thermostat.OperatingState)value).ToString();
                 break;
-            case ParameterType.THERMOSTAT_FAN_MODE:
+            case ParameterEvent.ThermostatFanMode:
                 path = "Thermostat.FanMode";
                 value = ((Thermostat.FanMode)value).ToString();
                 break;
-            case ParameterType.THERMOSTAT_FAN_STATE:
+            case ParameterEvent.ThermostatFanState:
                 path = "Thermostat.FanState";
                 value = ((Thermostat.FanState)value).ToString();
                 break;
-            case ParameterType.THERMOSTAT_HEATING:
+            case ParameterEvent.ThermostatHeating:
                 path = "Thermostat.Heating";
                 break;
-            case ParameterType.THERMOSTAT_SETBACK:
+            case ParameterEvent.ThermostatSetBack:
                 path = "Thermostat.SetBack";
                 break;
-            case ParameterType.THERMOSTAT_SETPOINT:
+            case ParameterEvent.ThermostatSetPoint:
                 path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
                 value = ((dynamic)value).Value;
                 break;
@@ -1101,7 +1101,7 @@ namespace MIG.Interfaces.HomeAutomation
                 Console.WriteLine(
                     "UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}",
                     upargs.NodeId,
-                    upargs.ParameterType,
+                    upargs.ParameterEvent,
                     upargs.ParameterId,
                     value
                 );

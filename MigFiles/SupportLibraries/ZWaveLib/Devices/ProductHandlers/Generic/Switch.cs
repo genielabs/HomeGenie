@@ -38,14 +38,14 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.Basic || cmdClass == (byte)CommandClass.SwitchBinary || cmdClass == (byte)CommandClass.SwitchMultilevel)
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, levelValue);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.Level, levelValue);
                 switch (cmdClass)
                 {
                 case (byte)CommandClass.SwitchBinary:
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterType.MULTIINSTANCE_SWITCH_BINARY, (double)levelValue);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterEvent.MultiinstanceSwitchBinary, (double)levelValue);
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL, (double)levelValue);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 1, ParameterEvent.MultiinstanceSwitchMultilevel, (double)levelValue);
                     break;
                 }
                 handled = true;
@@ -75,11 +75,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 byte inst_count = message[10];
                 if (instanceCmdClass == (byte)CommandClass.SwitchBinary)
                 {
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.MULTIINSTANCE_SWITCH_BINARY_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.MultiinstanceSwitchBinaryCount, inst_count);
                 }
                 else
                 {
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL_COUNT, inst_count);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.MultiinstanceSwitchMultilevelCount, inst_count);
                 }
                 processed = true;
             }
@@ -97,11 +97,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     //
                     if (cmd == (byte)CommandClass.SwitchBinary)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.MULTIINSTANCE_SWITCH_BINARY, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterEvent.MultiinstanceSwitchBinary, (double)value);
                     }
                     else
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterType.MULTIINSTANCE_SWITCH_MULTILEVEL, (double)value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, ParameterEvent.MultiinstanceSwitchMultilevel, (double)value);
                     }
                     //_nodehost._raiseUpdateParameterEvent(_nodehost, instance, ParameterType.PARAMETER_BASIC, (double)value);
                     //

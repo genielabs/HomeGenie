@@ -31,35 +31,26 @@ using ZWaveLib.Devices.ProductHandlers.Generic;
 
 namespace ZWaveLib.Devices
 {
-
     public class UpdateNodeParameterEventArgs
     {
         public int NodeId { get; internal set; }
-
         public int ParameterId { get; internal set; }
-
-        public ParameterType ParameterType { get; internal set; }
-
+        public ParameterEvent ParameterEvent { get; internal set; }
         public object Value { get; internal set; }
     }
 
     public class ManufacturerSpecific
     {
         public string ManufacturerId { get; set; }
-
         public string TypeId { get; set; }
-
         public string ProductId { get; set; }
     }
-
 
     public class ManufacturerSpecificResponseEventArg
     {
         public int NodeId { get; internal set; }
-
         public ManufacturerSpecific ManufacturerSpecific;
     }
-
 
     public class ZWaveNode
     {
@@ -68,6 +59,7 @@ namespace ZWaveLib.Devices
 
         internal ZWavePort zwavePort;
         private Dictionary<byte, int> nodeConfigParamsLength = new Dictionary<byte, int>();
+        private List<byte[]> wakeUpResendQueue = new List<byte[]>();
 
         #endregion Private fields
 
@@ -80,6 +72,8 @@ namespace ZWaveLib.Devices
         public byte BasicClass { get; internal set; }
         public byte GenericClass { get; internal set; }
         public byte SpecificClass { get; internal set; }
+        public byte[] NodeInformationFrame { get; internal set; }
+
         public IZWaveDeviceHandler DeviceHandler = null;
 
         public delegate void UpdateNodeParameterEventHandler(object sender, UpdateNodeParameterEventArgs upargs);
@@ -196,7 +190,7 @@ namespace ZWaveLib.Devices
                         paramval = BitConverter.ToUInt32(bval, 0);
                         // convert it to uint
                         //
-                        RaiseUpdateParameterEvent(this, paramId, ParameterType.CONFIGURATION, paramval);
+                        RaiseUpdateParameterEvent(this, paramId, ParameterEvent.Configuration, paramval);
                         //
                         handled = true;
                     }
@@ -221,14 +215,9 @@ namespace ZWaveLib.Devices
                         assocNodes = assocNodes.TrimEnd(',');
                         //
                         //_raiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_ASSOC, groupid);
-                        RaiseUpdateParameterEvent(this, 1, ParameterType.ASSOCIATION, maxAssociations);
-                        RaiseUpdateParameterEvent(this, 2, ParameterType.ASSOCIATION, numAssociations);
-                        RaiseUpdateParameterEvent(
-                            this,
-                            3,
-                            ParameterType.ASSOCIATION,
-                            groupId + ":" + assocNodes
-                        );
+                        RaiseUpdateParameterEvent(this, 1, ParameterEvent.Association, maxAssociations);
+                        RaiseUpdateParameterEvent(this, 2, ParameterEvent.Association, numAssociations);
+                        RaiseUpdateParameterEvent(this, 3, ParameterEvent.Association, groupId + ":" + assocNodes);
                         //
                         handled = true;
                     }
@@ -243,14 +232,20 @@ namespace ZWaveLib.Devices
                         interval |= (((uint)receivedMessage[10]) << 8);
                         interval |= (uint)receivedMessage[11];
                         //
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.WAKEUP_INTERVAL, interval);
+                        RaiseUpdateParameterEvent(this, 0, ParameterEvent.WakeUpInterval, interval);
                         //
                         handled = true;
                     }
-                        // 0x01, 0x08, 0x00, 0x04, 0x00, 0x06, 0x02, 0x84, 0x07, 0x74
-                        else if (messageLength > 7 && commandType == (byte)Command.WakeUpNotification) // AWAKE NOTIFICATION 0x07
+                    else if (messageLength > 7 && commandType == (byte)Command.WakeUpNotification) // AWAKE NOTIFICATION 0x07
                     {
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.WAKEUP_NOTIFY, 1);
+                        // Resend queued messages while node was asleep
+                        for (int m = 0; m < wakeUpResendQueue.Count; m++)
+                        {
+                            SendMessage(wakeUpResendQueue[m]);
+                        }
+                        wakeUpResendQueue.Clear();
+                        //
+                        RaiseUpdateParameterEvent(this, 0, ParameterEvent.WakeUpNotify, 1);
                         //
                         handled = true;
                     }
@@ -261,7 +256,7 @@ namespace ZWaveLib.Devices
 
                     if (messageLength > 7 && /*command_length == (byte)Command.COMMAND_BASIC_REPORT && */ commandType == 0x03) // Battery Report
                     {
-                        RaiseUpdateParameterEvent(this, 0, ParameterType.BATTERY, receivedMessage[9]);
+                        RaiseUpdateParameterEvent(this, 0, ParameterEvent.Battery, receivedMessage[9]);
                         //
                         handled = true;
                     }
@@ -327,12 +322,35 @@ namespace ZWaveLib.Devices
                 if (receivedMessage[3] != 0x13)
                 {
                     bool log = true;
-                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific) log = false;
-                    if (log) Console.WriteLine("ZWaveLib UNHANDLED message: " + zwavePort.ByteArrayToString(receivedMessage));
+                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific)
+                        log = false;
+                    if (log)
+                        Console.WriteLine("ZWaveLib UNHANDLED message: " + zwavePort.ByteArrayToString(receivedMessage));
                 }
             }
 
             return false;
+        }
+
+        public void ResendOnWakeUp(byte[] msg)
+        {
+            int minCommandLength = 8;
+            if (msg.Length >= minCommandLength)
+            {
+                byte[] command = new byte[minCommandLength];
+                Array.Copy(msg, 0, command, 0, minCommandLength);
+                // discard any message having same header and command (first 8 bytes = header + command class + command)
+                for (int i = wakeUpResendQueue.Count - 1; i >= 0; i--)
+                {
+                    byte[] queuedCommand = new byte[minCommandLength];
+                    Array.Copy(wakeUpResendQueue[i], 0, queuedCommand, 0, minCommandLength);
+                    if (queuedCommand.SequenceEqual(command))
+                    {
+                        wakeUpResendQueue.RemoveAt(i);
+                    }
+                }
+                wakeUpResendQueue.Add(msg);
+            }
         }
 
         public void SendRequest(byte[] msg)
@@ -355,10 +373,7 @@ namespace ZWaveLib.Devices
             SendMessage(message);
         }
 
-
-        
         #region ZWave Command Class Basic
-
         /// <summary>
         /// Basic Set
         /// </summary>
@@ -382,7 +397,6 @@ namespace ZWaveLib.Devices
                 (byte)Command.BasicGet 
             });
         }
-
         #endregion
 
         #region ZWave Command Class Association
@@ -521,13 +535,13 @@ namespace ZWaveLib.Devices
             msg[3] = (byte)valueLength;
             switch (valueLength)
             {
-                case 1:
+            case 1:
                 Array.Copy(value32, 3, msg, 4, 1);
                 break;
-                case 2:
+            case 2:
                 Array.Copy(value32, 2, msg, 4, 2);
                 break;
-                case 4:
+            case 4:
                 Array.Copy(value32, 0, msg, 4, 4);
                 break;
             }
@@ -664,6 +678,7 @@ namespace ZWaveLib.Devices
                 scaleType
             });
         }
+
         public virtual void Meter_SupportedGet()
         {
             this.SendRequest(new byte[] { 
@@ -671,6 +686,7 @@ namespace ZWaveLib.Devices
                 (byte)Command.MeterSupportedGet
             });
         }
+
         public virtual void Meter_Reset()
         {
             this.SendRequest(new byte[] { 
@@ -680,7 +696,7 @@ namespace ZWaveLib.Devices
         }
 
         #endregion
-        
+
         #region ZWave Command Class Sensor Binary
 
         public virtual void SensorBinary_Get()
@@ -705,8 +721,6 @@ namespace ZWaveLib.Devices
 
         #endregion
 
-
-
         #endregion Public members
 
         #region Private members
@@ -717,24 +731,16 @@ namespace ZWaveLib.Devices
             return zwavePort.SendMessage(msg, disableCallback);
         }
 
-        internal void RaiseUpdateParameterEvent(
-            ZWaveNode node,
-            int pid,
-            ParameterType peventtype,
-            object value
-            )
+        internal void RaiseUpdateParameterEvent(ZWaveNode node, int pid, ParameterEvent peventtype, object value)
         {
             if (UpdateNodeParameter != null)
             {
-                UpdateNodeParameter(
-                    node,
-                    new UpdateNodeParameterEventArgs() {
+                UpdateNodeParameter(node, new UpdateNodeParameterEventArgs() {
                     NodeId = (int)node.NodeId,
                     ParameterId = pid,
-                    ParameterType = peventtype,
+                    ParameterEvent = peventtype,
                     Value = value
-                }
-                );
+                });
             }
         }
 
