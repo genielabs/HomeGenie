@@ -65,7 +65,7 @@
     <Compile Include="Devices\Values\SensorValue.cs" />
     <Compile Include="Devices\Values\AlarmValue.cs" />
     <Compile Include="Devices\Values\EnergyValue.cs" />
-    <Compile Include="Devices\ParameterType.cs" />
+    <Compile Include="Devices\ParameterEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
