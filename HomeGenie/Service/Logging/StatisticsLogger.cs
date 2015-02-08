@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@ using System.Timers;
 using System.Data.SQLite;
 using System.IO;
 using HomeGenie.Service.Constants;
+using System.Globalization;
 
 namespace HomeGenie.Service.Logging
 {
@@ -161,8 +162,7 @@ namespace HomeGenie.Service.Logging
             try
             {
                 var dbCommand = dbConnection.CreateCommand();
-                // TODO: protect against sqlinjection ?
-                string query = "select Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timeScaleSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where Parameter = @parameterName;";
+                string query = "select Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0)-((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timeScaleSeconds.ToString(CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where Parameter = @parameterName;";
                 dbCommand.Parameters.Add(new SQLiteParameter("@parameterName", parameterName));
                 dbCommand.CommandText = query;
                 var reader = dbCommand.ExecuteReader();
@@ -204,7 +204,7 @@ namespace HomeGenie.Service.Logging
                     dbCommand.Parameters.Add(new SQLiteParameter("@domain", domain));
                     dbCommand.Parameters.Add(new SQLiteParameter("@address", address));
                 }
-                string query = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(System.Globalization.CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand,startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
+                string query = "select TimeStart,TimeEnd,Domain,Address,Sum(AverageValue*( ((julianday(TimeEnd) - 2440587.5) * 86400.0) -((julianday(TimeStart) - 2440587.5) * 86400.0) )/" + timescaleseconds.ToString(CultureInfo.InvariantCulture) + ") as CounterValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart) order by TimeStart desc;";
                 dbCommand.Parameters.Add(new SQLiteParameter("@parameterName", parameterName));
                 dbCommand.CommandText = query;
                 var reader = dbCommand.ExecuteReader();
@@ -338,17 +338,6 @@ namespace HomeGenie.Service.Logging
                 string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + " as Value from ValuesHist where " + filter + " Parameter = @parameterName AND TimeStart >= @start " + groupBy + " order by TimeStart asc;";
                 dbCommand.Parameters.Add(new SQLiteParameter("@parameterName", parameterName));
                 dbCommand.CommandText = query;
-
-                /*
-                //if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
-                // aggregated averages by hour
-                string q = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + "Parameter = @parameterName and TimeStart >= @start group by TimeStart order by TimeStart asc;";
-                // detailed module stats
-                if (domain != "" && address != "")
-                {
-                    q = "select TimeStart,TimeEnd,Domain,Address,AverageValue as Value from ValuesHist where " + filter + "Parameter = '" + parameterName + "' and TimeStart >= '" + start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' order by TimeStart asc;";
-                }
-                dbCommand.CommandText = q;*/
 
                 var reader = dbCommand.ExecuteReader();
                 //
@@ -589,16 +578,16 @@ namespace HomeGenie.Service.Logging
                             var fileInfo = new FileInfo(dbName);
                             if (fileInfo.Length > dbSizeLimit) // 5Mb limit for stats - temporary limitations to get rid of in the future
                             {
-                                ResetStatisticsDatabase();
+                                //ResetStatisticsDatabase();
                                 // TODO: Test method below, then use that instead of rsetting whole database.
-                                //CleanOldValuesFromStatisticsDatabase();
+                                CleanOldValuesFromStatisticsDatabase();
                             }
                             //
                             try
                             {
                                 var dbCommand = dbConnection.CreateCommand();
                                 // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue"
-                                dbCommand.CommandText = "INSERT INTO ValuesHist VALUES ('" + DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap) + "','" + DateTimeToSQLite(end) + "','" + module.Domain + "','" + module.Address + "','" + parameter.Name + "'," + average.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")";
+                                dbCommand.CommandText = "INSERT INTO ValuesHist VALUES ('" + DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap) + "','" + DateTimeToSQLite(end) + "','" + module.Domain + "','" + module.Address + "','" + parameter.Name + "'," + average.ToString(CultureInfo.InvariantCulture) + ")";
                                 dbCommand.ExecuteNonQuery();
 
                             }

@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r476</Version>
+  <Version>1.00 beta r477</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Improved Statistics section with new UI and date range selection (issue #17)
-  - Added tooltips to graphs
-  - Added event popups ignore list (issue #46)
-  - Improved Media Server and Receiver widget
-  - Fixed bug in Net.SendMail also affecting Security Alarm System app (issue #88)
-  - Fixed web service call handling in jkUtils OpenWeatherMap and SolarAltitude apps
-  - Fixed bug in error reporting for Javascript automation programs
-  - Fixed some bugs in js/api web service calls (introduced with r474 js/api refactoring)
-  - Optimized DLNA/UPnP MIG interface and fixed some bugs (not disposing objects when disabled; not setting device type to MediaTransmitter for media browser nodes)
-  - Removed all System.Windows.Forms and System.Drawing references from UPnP library (hopefully making it more stable)</ReleaseNote>
-  <ReleaseDate>2015-02-05T10:53:28.0000Z</ReleaseDate>
+  <ReleaseNote>- Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
+    - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
+    - Added new option for configuring size of the statistics database (pull request #121)
+    - Fixed bug in MIGInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
+    - Fixed IP Camera widget preview not showing
+    - Added missing Z-Wave command classes to _nodesetup.js
+    - Updated locale language files
+    - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
+    - Added thermostats query to Z-Wave WakeUp app</ReleaseNote>
+  <ReleaseDate>2015-02-07T17:54:47.0000Z</ReleaseDate>
 </ReleaseInfo>

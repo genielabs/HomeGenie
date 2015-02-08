@@ -1,6 +1,6 @@
 ﻿RELEASE HISTORY
 
-07/02/2015 1.00 beta rev 476-git7
+07/02/2015 1.00 beta rev 476-git7 (sf.net r477)
     - Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
     - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
     - Fixed bug in HG.WebApp.Statistics.InitConfiguration that was being called prior that statistics page was open

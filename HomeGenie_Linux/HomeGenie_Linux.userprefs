@@ -10,7 +10,6 @@
     <BreakpointStore>
       <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Switch.cs" line="158" column="1" />
       <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/MigFiles/MIG/Interfaces/Protocols/UPnP.cs" line="844" column="1" />
-      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/HomeGenie/Service/HomeGenieService.cs" line="444" column="32" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

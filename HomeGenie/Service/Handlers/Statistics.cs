@@ -92,8 +92,8 @@ namespace HomeGenie.Service.Handlers
                 migCommand.Response += "[ ";
                 //
                 var hoursAverage = new List<StatisticsEntry>();
-                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(1)));
-                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
                 hoursAverage = homegenie.Statistics.GetHourlyCounter(domain, address, migCommand.GetOption(0), 3600, dateStart, dateEnd);
                 //
                 for (int h = 0; h < 24; h++)

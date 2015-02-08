@@ -290,7 +290,7 @@ HG.WebApp.Statistics.Refresh = function () {
     }
     else    
     {
-        HG.Statistics.ServiceCall('Global.CounterTotal', '', HG.WebApp.Statistics._CurrentParameter, function (total) {
+        HG.Statistics.ServiceCall('Global.CounterTotal', HG.WebApp.Statistics._CurrentParameter, '', function (total) {
             $('#page_analyze_totalunits').val((total * 1).toFixed(2));
             var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
             $('#page_analyze_totalcost').val(cost.toFixed(2));
