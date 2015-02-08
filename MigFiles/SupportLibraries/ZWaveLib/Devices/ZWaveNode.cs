@@ -143,7 +143,8 @@ namespace ZWaveLib.Devices
                 case (byte)CommandClass.ThermostatHeating:
                 case (byte)CommandClass.ThermostatOperatingState:
                 case (byte)CommandClass.ThermostatSetBack: 
-                case (byte)CommandClass.ThermostatSetPoint: 
+                case (byte)CommandClass.ThermostatSetPoint:
+                case (byte)CommandClass.Meter:
 
                     if (this.DeviceHandler != null)
                     {
@@ -153,7 +154,7 @@ namespace ZWaveLib.Devices
                     break;
                     
                 case (byte)CommandClass.MultiInstance:
-                case (byte)CommandClass.Meter:
+                //case (byte)CommandClass.Meter:
 
                     if (messageLength > 10)
                     {
