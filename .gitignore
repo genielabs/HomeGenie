@@ -1,1 +1,5 @@
 Thumbs.db
+*.cache
+*.suo
+**/obj
+**/bin
