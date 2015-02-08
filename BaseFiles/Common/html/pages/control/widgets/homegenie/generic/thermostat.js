@@ -33,7 +33,7 @@
 
             controlpopup.find('[data-ui-field=level_knob]').knob({
                 'release': function (v) {
-                    v = Math.round(v);
+                    v = Math.round(v * 10) / 10;
                     var setPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.' + _this.levelKnobBindValue);
                     if (setPoint != null) setPoint.Value = v;
                     HG.Control.Modules.ServiceCall('Thermostat.SetPointSet/' + _this.levelKnobBindValue, module.Domain, module.Address, v, function (data) { });
@@ -47,13 +47,15 @@
             if (displayUnit == 'Celsius') {
                 controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
                     min: 5,
-                    max: 35
+                    max: 35,
+                    step: 0.5
                 });
             }
             else {
                 controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
                     min: 40,
-                    max: 100
+                    max: 100,
+                    step: 1
                 });
             }
 
@@ -72,23 +74,28 @@
             // popup values on open
             controlpopup.on('popupbeforeposition', function (evt, ui) {
                 // reset buttons' state
-                controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
+                if (_this.levelKnobBindValue == 'Heating')
+                {
+                    _this.EditHeatSetPoint(controlpopup, module);
+                }
+                else
+                {
+                    _this.EditCoolSetPoint(controlpopup, module);
+                }
                 // set current buttons' state from module properties 
                 var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.Mode');
                 if (thermostatMode != null) {
                     if (thermostatMode.Value == 'Cool') {
+                        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                         controlpopup.find('[data-ui-field=mode_cool]').addClass('ui-btn-active');
-                        _this.EditCoolSetPoint(controlpopup, module);
                     }
                     else if (thermostatMode.Value == 'Heat') {
+                        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                         controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
-                        _this.EditHeatSetPoint(controlpopup, module);
                     }
-                }
-                else {
-                    controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
                 }
                 //
             });

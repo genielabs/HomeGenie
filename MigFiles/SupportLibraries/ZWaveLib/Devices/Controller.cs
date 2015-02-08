@@ -135,7 +135,7 @@ namespace ZWaveLib.Devices
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04, /* packet length */
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.ControllerSoftReset,
                 0xff, /* nodeid */
                 0x00
@@ -148,7 +148,7 @@ namespace ZWaveLib.Devices
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04, /* packet length */
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.ControllerSetDefault,
                 0xff, /* nodeid */
                 0x00
@@ -161,7 +161,7 @@ namespace ZWaveLib.Devices
             byte[] header = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05, /*packet len */
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.NodeAdd
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.AddNodeAny | 0x80, 0x00, 0x00 };
@@ -180,7 +180,7 @@ namespace ZWaveLib.Devices
             byte[] header = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.NodeAdd
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.AddNodeStop, 0x00, 0x00 };
@@ -198,7 +198,7 @@ namespace ZWaveLib.Devices
             byte[] header = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.NodeRemove
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.RemoveNodeAny | 0x80, 0x00, 0x00 };
@@ -215,7 +215,7 @@ namespace ZWaveLib.Devices
             byte[] header = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.NodeRemove
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.RemoveNodeStop, 0x00, 0x00 };
@@ -232,7 +232,7 @@ namespace ZWaveLib.Devices
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04,
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 (byte)Function.RequestNodeInfo,
                 nodeId,
                 0x00
@@ -253,7 +253,7 @@ namespace ZWaveLib.Devices
                 byte[] message = new byte[] {
                     (byte)MessageHeader.SOF, /* Start Of Frame */
                     0x04,
-                    (byte)MessageType.REQUEST, /* Type of message */
+                    (byte)MessageType.Request, /* Type of message */
                     (byte)Function.GetNodeProtocolInfo,
                     nodeId,
                     0x00
@@ -316,7 +316,7 @@ namespace ZWaveLib.Devices
                     //
                     switch (msgType)
                     {
-                    case MessageType.REQUEST:
+                    case MessageType.Request:
                         zwavePort.SendAck();
 
                         if (devices.Count == 0)
@@ -463,7 +463,7 @@ namespace ZWaveLib.Devices
 
                         break;
 
-                    case MessageType.RESPONSE:
+                    case MessageType.Response:
 
                         switch (cmdClass)
                         {

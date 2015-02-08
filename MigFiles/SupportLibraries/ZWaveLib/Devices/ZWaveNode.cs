@@ -353,24 +353,9 @@ namespace ZWaveLib.Devices
             }
         }
 
-        public void SendRequest(byte[] msg)
+        public void SendRequest(byte[] request)
         {
-            byte[] header = new byte[] {
-                (byte)MessageHeader.SOF, /* Start Of Frame */
-                (byte)(msg.Length + 7) /*packet len */,
-                (byte)MessageType.REQUEST, /* Type of message */
-                (byte)Function.SendData /* func send data */,
-                this.NodeId,
-                (byte)(msg.Length)
-            };
-            byte[] footer = new byte[] { 0x01 | 0x04, 0x00, 0x00 };
-            byte[] message = new byte[header.Length + msg.Length + footer.Length];// { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x31, 0x04, 0x01 | 0x04, 0x00, 0x00 };
-
-            System.Array.Copy(header, 0, message, 0, header.Length);
-            System.Array.Copy(msg, 0, message, header.Length, msg.Length);
-            System.Array.Copy(footer, 0, message, message.Length - footer.Length, footer.Length);
-
-            SendMessage(message);
+            SendMessage(ZWaveMessage.CreateRequest(this.NodeId, request));
         }
 
         #region ZWave Command Class Basic
@@ -566,7 +551,7 @@ namespace ZWaveLib.Devices
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x09 /*packet len */,
-                (byte)MessageType.REQUEST, /* Type of message */
+                (byte)MessageType.Request, /* Type of message */
                 0x13 /* func send data */,
                 this.NodeId,
                 0x02,
@@ -670,7 +655,7 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Meter
 
-        public virtual void Meter_Get(byte scaleType)
+        public void Meter_Get(byte scaleType)
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.Meter, 
@@ -679,7 +664,7 @@ namespace ZWaveLib.Devices
             });
         }
 
-        public virtual void Meter_SupportedGet()
+        public void Meter_SupportedGet()
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.Meter, 
@@ -687,7 +672,7 @@ namespace ZWaveLib.Devices
             });
         }
 
-        public virtual void Meter_Reset()
+        public void Meter_Reset()
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.Meter, 
@@ -699,7 +684,7 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Sensor Binary
 
-        public virtual void SensorBinary_Get()
+        public void SensorBinary_Get()
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.SensorBinary, 
@@ -711,7 +696,7 @@ namespace ZWaveLib.Devices
 
         #region ZWave Command Class Sensor Multilevel
 
-        public virtual void SensorMultiLevel_Get()
+        public void SensorMultiLevel_Get()
         {
             this.SendRequest(new byte[] { 
                 (byte)CommandClass.SensorMultilevel, 

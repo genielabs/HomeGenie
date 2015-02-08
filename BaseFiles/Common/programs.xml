@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:28.487655Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:53.170253Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:28.995143Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:53.676371Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -442,7 +442,7 @@ return true; // execute "Code To Run"
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:29.490588Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:54.177838Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -521,7 +521,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:29.983156Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:54.673897Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1264,7 +1264,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:30.489839Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:55.173017Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1319,7 +1319,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:30.989375Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:55.67611Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1614,7 +1614,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:31.494333Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:56.181614Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1707,8 +1707,8 @@ Program.GoBackground();</ScriptSource>
     <Name>Query on Wake Up</Name>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
-    <ActivationTime>2015-02-06T15:29:45.595846Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:29:45.611494Z</TriggerTime>
+    <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
+    <TriggerTime>2015-02-08T12:46:56.675697Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1778,7 +1778,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:32.489699Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:57.177192Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2052,7 +2052,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:32.992295Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:57.673739Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2418,7 +2418,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:33.995275Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:58.678144Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2520,7 +2520,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:34.497689Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:59.185197Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2674,7 +2674,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:34.994024Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:46:59.68038Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2938,7 +2938,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:35.498732Z</TriggerTime>
+    <TriggerTime>2015-02-08T12:47:00.18191Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -5982,31 +5982,33 @@ Each analog channel can be mapped to a virtual module with configurable field na
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-Program.Setup(()=&gt;{
-  	Program.AddControlWidget("homegenie/generic/thermostat");
-  	Program.AddInputField("TemperatureModule", "", "Module to read temperature from");
-  	Program.AddInputField("SwitchModule", "", "Module to switch on/off on set point");
-  	//Program.AddInputField("ScheduleCheck", "", "Scheduler expression constraint");
+    <ScriptCondition>Program.Setup(()=&gt;{
+  	Program.AddInputField("ThermostatsCount", "1", "Virtual thermostats modules to create");
+  	Program.AddFeatureTextInput("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from");
+  	Program.AddFeatureTextInput("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point");
 });
-
 return true;
 </ScriptCondition>
-    <ScriptSource>// CSharp Automation Program Plugin
-// Example for using Helper Classes:
-// Modules.WithName("Light 1").On();
-const int HOLDING_MODE_DIFF = 1;
+    <ScriptSource>const int HOLDING_MODE_DIFF = 1;
+const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
+const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule";
+const string PARAMETER_SWITCH_MODULE = "VirtualThermostat.SwitchModule";
+const string EVENT_DESCRIPTION = "Basic Thermostat";
 
-var temperature = Program.Parameter("Sensor.Temperature");
-var operatingState = Program.Parameter("Thermostat.OperatingState");
-var thermostatMode = Program.Parameter("Thermostat.Mode");
-var heatSetPoint = Program.Parameter("Thermostat.SetPoint.Heating");
+var thermostatsCount = (int)Program.InputField("ThermostatsCount").DecimalValue;
+if (thermostatsCount &lt;= 0) thermostatsCount = 1;
+Program.AddVirtualModules(MODULES_DOMAIN, "Thermostat", "homegenie/generic/thermostat", 1, thermostatsCount);
+var thermostatModules = Modules.InDomain(MODULES_DOMAIN).OfDeviceType("Thermostat");
 
-var holdingMode = false;
+var holdingMode = new bool[thermostatsCount];
 
-var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
+var ThermostatLogicRun = new Func&lt;ModuleHelper, bool&gt;((thermostat)=&gt;{
+
+  var temperature = thermostat.Parameter("Sensor.Temperature");
+  var operatingState = thermostat.Parameter("Thermostat.OperatingState");
+  var thermostatMode = thermostat.Parameter("Thermostat.Mode");
+  var heatSetPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
+  var index = int.Parse(thermostat.Instance.Address) - 1;
   string domainAddress = "";
   string domain = "";
   string address = "";
@@ -6014,7 +6016,7 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
   try
   {
     // Get a reference to the temperature module
-    domainAddress = Program.InputField("TemperatureModule").Value;
+    domainAddress = thermostat.Parameter(PARAMETER_TEMPERATURE_MODULE).Value;
     if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
     {
       domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
@@ -6023,8 +6025,8 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
     var temperatureModule = Modules.InDomain(domain).WithAddress(address).Get();
     if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || temperatureModule.Instance == null)
     {
-      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
-      Program.Notify("Generic Thermostat", "Please specify a valid temperature module.");
+      Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid temperature module.");
       return false;
     }
     // Update Thermostat module Temperature field
@@ -6032,7 +6034,7 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
 
     // get a reference to the switch/relay module
     domain = address = "";
-    domainAddress = Program.InputField("SwitchModule").Value;
+    domainAddress = thermostat.Parameter(PARAMETER_SWITCH_MODULE).Value;
     if (domainAddress != "" &amp;&amp; domainAddress.LastIndexOf(":") &gt; 0)
     {
       domain = domainAddress.Substring(0, domainAddress.LastIndexOf(":"));
@@ -6041,30 +6043,30 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
     var switchModule = Modules.InDomain(domain).WithAddress(address).Get();
     if (String.IsNullOrWhiteSpace(domain) || String.IsNullOrWhiteSpace(address) || switchModule.Instance == null)
     {
-      Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
-      Program.Notify("Generic Thermostat", "Please specify a valid switch module.");
+      Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+      Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "Please specify a valid switch module.");
       return false;
     }
 
     // Heat Mode logic
     if (thermostatMode.Value == "Heat")
     {
-      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue - (holdingMode ? HOLDING_MODE_DIFF : 0))
+      if (temperature.DecimalValue &lt; heatSetPoint.DecimalValue - (holdingMode[index] ? HOLDING_MODE_DIFF : 0))
       {
-        if (switchModule.IsOff) holdingMode = false;
+        if (switchModule.IsOff) holdingMode[index] = false;
         if (operatingState.Value != "Heating")
         {
-          Program.RaiseEvent("Thermostat.OperatingState", "Heating", "Eden Thermostat");
+          Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Heating", EVENT_DESCRIPTION);
         }
         // Heating
         switchModule.On();
       }
       else
       {
-        if (switchModule.IsOn) holdingMode = true;
+        if (switchModule.IsOn) holdingMode[index] = true;
         if (operatingState.Value != "PendingHeat")
         {
-          Program.RaiseEvent("Thermostat.OperatingState", "PendingHeat", "Eden Thermostat");
+          Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "PendingHeat", EVENT_DESCRIPTION);
         }
         // Waiting
         switchModule.Off();
@@ -6074,8 +6076,8 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
     {
       if (operatingState.Value != "Off" &amp;&amp; operatingState.Value != "Idle")
       {
-        Program.RaiseEvent("Thermostat.OperatingState", "Idle", "Eden Thermostat");
-        holdingMode = false;
+        Program.RaiseEvent(thermostat, "Thermostat.OperatingState", "Idle", EVENT_DESCRIPTION);
+        holdingMode[index] = false;
       }
       // Off
       switchModule.Off();
@@ -6083,51 +6085,76 @@ var ThermostatLogicRun = new Func&lt;bool&gt;(()=&gt;{
   } 
   catch (Exception e) 
   {
-    Program.Notify("Generic Thermostat", "ERROR: " + e.Message);
+    Program.Notify("Basic Thermostat " + thermostat.Instance.Address, "ERROR: " + e.Message);
   }
+
   return true;
 });
 
 When.ModuleParameterChanged((module, parameter)=&gt;{
-  	if (parameter.Is("Sensor.Temperature"))
-    {
-      var domainAddress = Program.InputField("TemperatureModule").Value;
+  if (parameter.Is("Sensor.Temperature"))
+  {
+    thermostatModules.Each((thermostat)=&gt;{
+      var domainAddress = thermostat.Parameter(PARAMETER_TEMPERATURE_MODULE).Value;
       if (domainAddress != "" &amp;&amp; domainAddress.IndexOf(":") &gt; 0)
       {
         var domain = domainAddress.Split(':')[0].ToLower();
         var address = domainAddress.Split(':')[1].ToLower();
         if (module.Instance.Domain.ToLower() == domain &amp;&amp; module.Instance.Address.ToLower() == address)
         {
-          Program.RaiseEvent("Sensor.Temperature", parameter.Value, "Eden Thermostat");
-          ThermostatLogicRun();
+          Program.RaiseEvent(thermostat, "Sensor.Temperature", parameter.Value, EVENT_DESCRIPTION);
+          ThermostatLogicRun(thermostat);
         }
       }
-    }
-  	return true;
-});
-
-// implement Web API calls as defined in the Thermostat widget
-When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.SetPointSet", (args)=&gt;{
-  if (args.ToString().Split('/')[0] == "Heating")
-  {
-    Program.RaiseEvent("Thermostat.SetPoint.Heating", args.ToString().Split('/')[1], "Eden Thermostat");
-    holdingMode = false;
-    ThermostatLogicRun();
+      return false;
+    });
   }
   return true;
 });
 
-When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address + "/Thermostat.ModeSet", (args)=&gt;{
-  Program.RaiseEvent("Thermostat.Mode", args.ToString().Split('/')[0], "Eden Thermostat");
-  holdingMode = false;
-  ThermostatLogicRun();
-  return true;
+// implement Web API calls as defined in the Thermostat widget
+When.WebServiceCallReceived(MODULES_DOMAIN, (args)=&gt;{
+  var res = "ERROR";
+  var cmdArgs = args.ToString().Split('/');
+  var address = cmdArgs[1];
+  var command = cmdArgs[2];
+  var option = cmdArgs[3];
+  var thermostat = Modules.InDomain(MODULES_DOMAIN).WithAddress(address).Get();
+  var index = int.Parse(thermostat.Instance.Address) - 1;
+  switch (command)
+  {
+    case "Thermostat.SetPointSet":
+      // Basic thermostat currently only supports Heating mode
+      if (option == "Heating")
+      {
+        var setPoint = cmdArgs[4];
+        Program.RaiseEvent(thermostat, "Thermostat.SetPoint.Heating", setPoint, EVENT_DESCRIPTION);
+        holdingMode[index] = false;
+        ThermostatLogicRun(thermostat);
+        res = "OK";
+      }
+    break;
+    case "Thermostat.ModeSet":
+      // Currently supported modes are Off or Heat
+      if (option == "Off" || option == "Heat")
+      {
+        Program.RaiseEvent(thermostat, "Thermostat.Mode", option, EVENT_DESCRIPTION);
+        holdingMode[index] = false;
+        ThermostatLogicRun(thermostat);
+        res = "OK";
+      }
+    break;
+  }
+  return "[{ \"ResponseValue\" : " + res + "}]";
 });
 
 while (Program.IsEnabled)
 {
-  ThermostatLogicRun();
-  Pause(30);
+  thermostatModules.Each((thermostat)=&gt;{
+    ThermostatLogicRun(thermostat);
+    return false;
+  });
+  Pause(120);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
@@ -6137,7 +6164,8 @@ while (Program.IsEnabled)
     <Address>78</Address>
     <Name>Basic Thermostat</Name>
     <Description>Use any temperature sensor and relay switch module to implement Thermostat device logic.
-Module must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5</Description>
+Temperature/Switch modules must be specified in the form &lt;i&gt;&amp;lt;domain&amp;gt:&amp;lt;address&amp;gt;&lt;/i&gt;, eg: HomeAutomation.ZWave:5 .
+Basic Thermostats can also be used with the Timetable scheduler widget.</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime xsi:nil="true" />
     <TriggerTime xsi:nil="true" />
@@ -7922,6 +7950,7 @@ function formatTime(date) {
 // Call 'hg.SetConditionTrue()' when you want
 // the 'Code To Run' to be executed.
 hg.Program.Setup(function(){
+  hg.Program.AddInputField("EdenDisplay.Thermostat", "", "Thermostat name");
   hg.Program.AddInputField("EdenDisplay.ButtonProgram.1", "", "Button #1 program");
   hg.Program.AddInputField("EdenDisplay.ButtonProgram.2", "", "Button #2 program");
   hg.Program.AddInputField("EdenDisplay.ButtonProgram.3", "", "Button #3 program");
@@ -7937,7 +7966,8 @@ hg.SetConditionTrue();
 var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
 
 // Get a reference to other programs of which data will be displayed on the OLED screen
-var thermostat = hg.Modules.WithName("Generic Thermostat").Get();
+var thermostatName = hg.Program.InputField("EdenDisplay.Thermostat").Value;
+var thermostat = hg.Modules.WithName(thermostatName).Get();
 var setPoint = thermostat.Parameter("Thermostat.SetPoint.Heating");
 var securitySystem = hg.Modules.WithName("Security Alarm System").Get();
 var securityArmed = securitySystem.Parameter("HomeGenie.SecurityArmed");
@@ -8203,7 +8233,7 @@ hg.When.ModuleParameterChange(function(module, parameter){
 
 hg.Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <IsRunning>false</IsRunning>
     <Features />
     <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
@@ -8624,6 +8654,51 @@ var GetTableSettings = new Func&lt;string, ModuleParameter&gt;((table)=&gt;{
   return setting;
 });
 
+var GetTableIndex = new Func&lt;ModuleHelper, DateTime, int&gt;((module, date) =&gt; {
+    var dayIndex = date.DayOfYear - 1;
+    // normalize if not leap year
+    if (!DateTime.IsLeapYear(date.Year) &amp;&amp; date.Month &gt; 2) dayIndex++;
+    var isWeekend = (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday);
+    // Get day type from Calendar (Weekday, Weekend, Holiday, Special)
+    // and select Timetable table to be used
+    var tableIndex = 0d; // 0 stand for not used, accepted values are 1 to 10
+    bool isHoliday = false, isWorkday = false, isSpecial = false;
+    var calendar = Settings.Parameter(calendarTableSettings);
+    var dayType = calendar.Value[dayIndex];
+    switch (dayType)
+    {
+      case '0':
+        if (!isWeekend) isWorkday = true;
+        break;
+      case '1':
+        isWorkday = true;
+        break;
+      case '2':
+        isHoliday = true;
+        break;
+      case '3':
+        isSpecial = true;
+        break;
+    }
+    if (isWorkday) 
+    {
+      tableIndex = module.Parameter("TimeTable.Workday").DecimalValue;
+    }
+    else if (isHoliday) 
+    {
+      tableIndex = module.Parameter("TimeTable.Holiday").DecimalValue;
+    }
+    else if (isSpecial) 
+    {
+      tableIndex = module.Parameter("TimeTable.Special").DecimalValue;
+    }
+    else if (isWeekend) 
+    {
+      tableIndex = module.Parameter("TimeTable.Weekend").DecimalValue;
+    }
+  	return (int)tableIndex;
+});
+
 var GetTableSliceAction = new Func&lt;string, DateTime, ExpandoObject&gt;((table, date)=&gt;{
   var sliceIndex = (int)Math.Floor((date - DateTime.Today).TotalMinutes / timeResolution);
   var previous = (sliceIndex == 0 ? (tableLength - 1) : sliceIndex - 1);
@@ -8790,54 +8865,20 @@ while (Program.IsEnabled)
 
     // calculate current day of year as interval from 0 to 365 (non-leap year normalized)
     var todayDate = DateTime.Now;
-    var dayIndex = todayDate.DayOfYear - 1;
-    // normalize if not leap year
-    if (!DateTime.IsLeapYear(todayDate.Year) &amp;&amp; todayDate.Month &gt; 2) dayIndex++;
-    var isWeekend = (todayDate.DayOfWeek == DayOfWeek.Saturday || todayDate.DayOfWeek == DayOfWeek.Sunday);
-
-    // Get day type from Calendar (Weekday, Weekend, Holiday, Special)
-    // and select Timetable table to be used
-    var tableIndex = 0d; // 0 stand for not used, accepted values are 1 to 10
-    bool isHoliday = false, isWorkday = false, isSpecial = false;
-    var calendar = Settings.Parameter(calendarTableSettings);
-    var dayType = calendar.Value[dayIndex];
-    switch (dayType)
-    {
-      case '0':
-        if (!isWeekend) isWorkday = true;
-        break;
-      case '1':
-        isWorkday = true;
-        break;
-      case '2':
-        isHoliday = true;
-        break;
-      case '3':
-        isSpecial = true;
-        break;
-    }
-    if (isWorkday) 
-    {
-      tableIndex = module.Parameter("TimeTable.Workday").DecimalValue;
-    }
-    else if (isHoliday) 
-    {
-      tableIndex = module.Parameter("TimeTable.Holiday").DecimalValue;
-    }
-    else if (isSpecial) 
-    {
-      tableIndex = module.Parameter("TimeTable.Special").DecimalValue;
-    }
-    else if (isWeekend) 
-    {
-      tableIndex = module.Parameter("TimeTable.Weekend").DecimalValue;
-    }
-
+	var tableIndex = GetTableIndex(module, todayDate);
     // Perform action on current module
     if (tableIndex &gt; 0)
     {
       var timetable = GetTableSettings(tableType + "." + (tableIndex - 1)); // tables are stored as zero indexed
       dynamic action = GetTableSliceAction(timetable.Value, todayDate);
+      // check for exception in crossing from different table types on midnight
+      var previousTableIndex = GetTableIndex(module, todayDate.AddMinutes(-timeResolution));
+      if (previousTableIndex != tableIndex) 
+      {
+        var previousTable = GetTableSettings(tableType + "." + (previousTableIndex - 1));
+        action.Previous = previousTable.Value[tableLength - 1];
+      }
+      // perform action
       if (PerformAction(module, tableType, action))
       {
       	Program.Notify("Timetable", "Performed action from table '" + tableType + "' #" + tableIndex);
@@ -8898,8 +8939,8 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <ActivationTime>2015-01-31T13:58:36.107619Z</ActivationTime>
-    <TriggerTime>2015-02-06T15:22:36.507247Z</TriggerTime>
+    <ActivationTime>2015-02-08T12:47:36.375853Z</ActivationTime>
+    <TriggerTime>2015-02-08T12:47:36.391496Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

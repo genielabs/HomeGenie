@@ -11,10 +11,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with HomeGenie. If not, see <http://www.gnu.org/licenses/>.
 */
+
 /*
 * Author: Generoso Martello <gene@homegenie.it>
 * Project Homepage: http://homegenie.it
 */
+
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -25,51 +27,32 @@ using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {
-    public enum MessageHeader : byte
-    {
-        SOF = 0x01,
-        ACK = 0x06,
-        NAK = 0x15,
-        CAN = 0x18
-    }
-
-    public enum MessageType : byte
-    {
-        REQUEST = 0x00,
-        RESPONSE = 0x01
-    }
-
-    public class ZWaveMessageReceivedEventArgs
-    {
-        public byte[] Message;
-
-        public ZWaveMessageReceivedEventArgs(byte[] msg)
-        {
-            Message = msg;
-        }
-    }
 
     public class ZWavePort
     {
+
+        #region Private fields
+
+        private string portName = "";
+        private SerialPortInput serialPort;
+
+        private byte callbackIdSeq = 1;
+        private object callbackLock = new object();
+        private object sendLock = new object();
+
+        private List<ZWaveMessage> pendingMessages = new List<ZWaveMessage>();
+
+        private bool isInitialized;
+        private Timer discoveryTimer;
+
+        #endregion Private fields
+        
         #region Public fields
 
         public delegate void ZWaveMessageReceivedEvent(object sender, ZWaveMessageReceivedEventArgs zwaveargs);
         public ZWaveMessageReceivedEvent ZWaveMessageReceived;
 
         #endregion Public fields
-
-        #region Private fields
-
-        private byte callbackIdSeq = 1;
-        private object callbackLock = new object();
-        private SerialPortInput serialPort;
-        private string portName = "";
-        private List<ZWaveMessage> pendingMessages = new List<ZWaveMessage>();
-        private bool isInitialized;
-        private Timer discoveryTimer;
-        private ManualResetEvent ackWait = new ManualResetEvent(true);
-
-        #endregion Private fields
 
         #region Lifecycle
 
@@ -104,7 +87,7 @@ namespace ZWaveLib
         {
             get { return serialPort.IsConnected; }
         }
-        
+
         public bool Connect()
         {
             return serialPort.Connect();
@@ -134,8 +117,7 @@ namespace ZWaveLib
         public byte SendMessage(ZWaveMessage message, bool disableCallback = false)
         {
             byte callbackId = 0x00;
-            //
-            lock (ackWait)
+            lock (sendLock)
             {
                 // Insert checksum
                 if (disableCallback)
@@ -178,13 +160,12 @@ namespace ZWaveLib
                     }
                     return false;
                 });
-                //
                 Thread.Sleep(100);
             }
             //
             return callbackId;
         }
-        
+
         public byte ResendLastMessage(byte callbackId)
         {
             var message = pendingMessages.Find(zm => zm.CallbackId == callbackId);
@@ -202,9 +183,10 @@ namespace ZWaveLib
                     return message.Message[4]; 
                 }
             }
-            return 0; // Return 0 When the Resend is OK
+            // Return 0 if resending was succesful
+            return 0;
         }
-        
+
         public void ResendLastMessage()
         {
             if (pendingMessages.Count > 0)
@@ -218,7 +200,7 @@ namespace ZWaveLib
                 }
             }
         }
-        
+
         public byte GetCallbackId()
         {
             lock (this.callbackLock)
@@ -266,9 +248,8 @@ namespace ZWaveLib
 
         private static bool VerifyChecksum(byte[] data)
         {
-            //byte[] data = { 0x01, 0x0F, 0x00, 0x04, 0x00, 0x32, 0x09, 0x60, 0x06, 0x03, 0x31, 0x05, 0x01, 0x2A, 0x02, 0xC0, 0x77, 0x18 };
-            //{ 0x01, 0x0E, 0x00, 0x04, 0x00, 0x30, 0x08, 0x32, 0x02, 0x21, 0x74, 0x00, 0x00, 0x18, 0x6F, 0xDF };
-            if (data.Length < 4) return true;
+            if (data.Length < 4)
+                return true;
             int offset = 1;
             byte returnValue = data[offset];
             for (int i = offset + 1; i < data.Length - 1; i++)
@@ -284,13 +265,9 @@ namespace ZWaveLib
         private void ReceiveMessage(byte[] message)
         {
             MessageHeader header = (MessageHeader)((int)message[0]);
-            //
             if (header == MessageHeader.ACK)
             {
-                ZWaveMessageReceived(
-                    this,
-                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.ACK })
-                );
+                ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.ACK }));
                 if (message.Length > 1)
                 {
                     byte[] msg = new byte[message.Length - 1];
@@ -318,12 +295,11 @@ namespace ZWaveLib
             //Console.WriteLine("=== > " + ByteArrayToString(message));
             //
             if (header == MessageHeader.SOF)
-            { // found SOF
-                //
+            {
                 byte[] cmdAck = new byte[] { 0x01, 0x04, 0x01, 0x13, 0x01, 0xE8 };
                 if (message.SequenceEqual(cmdAck))
                 {
-                    //_ackwait.Set();
+                    // TODO: ?!?
                 }
                 else if (VerifyChecksum(message))
                 {
@@ -336,13 +312,9 @@ namespace ZWaveLib
             }
             else if (header == MessageHeader.CAN)
             {
-                // RESEND
+                // Resend
                 ResendLastMessage();
-                //
-                ZWaveMessageReceived(
-                    this,
-                    new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.CAN })
-                );
+                ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.CAN }));
             }
             else
             {
@@ -368,5 +340,7 @@ namespace ZWaveLib
         }
 
         #endregion Private members
+
     }
+
 } 
