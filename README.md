@@ -3,6 +3,9 @@
 **Project info and documentation**:
 http://homegenie.it
 
+![ScreenShot](http://www.homegenie.it/images/shots/homegenie_eden_01.png)
+
+![ScreenShot](http://www.homegenie.it/images/shots/homegenie_01.png)
 
 ## Supported IDEs
 
