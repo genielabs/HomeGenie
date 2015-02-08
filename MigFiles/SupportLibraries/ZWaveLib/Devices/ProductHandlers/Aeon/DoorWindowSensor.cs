@@ -36,7 +36,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
                     (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0002" && productspecs.ProductId == "001D");
         }
 
-
         public override bool HandleRawMessageRequest(byte[] message)
         {
             byte cmdLength = message[6];
@@ -46,12 +45,11 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             if (message.Length > 10 && cmdLength == 0x04 && cmdClass == (byte)CommandClass.Alarm && cmdType == (byte)Command.AlarmReport && message[9] == 0x00)
             {
                 // tampered status
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_TAMPERED, message[10]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.AlarmTampered, message[10]);
                 return true;
             }
             return false;
         }
-
 
         public override bool HandleBasicReport(byte[] message)
         {
@@ -59,7 +57,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             if (message[8] == 0x01)
             {
                 // door / window status
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_DOORWINDOW, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.AlarmDoorWindow, message[9]);
                 handled = true;
             }
             else
@@ -68,8 +66,6 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             }
             return handled;
         }
-
-
 
     }
 }

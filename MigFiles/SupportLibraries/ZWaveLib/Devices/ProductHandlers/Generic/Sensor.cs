@@ -58,26 +58,26 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //
             if (cmdClass == (byte)CommandClass.Basic && (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet))
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.LEVEL, (double)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.Level, (double)message[9]);
                 handled = true;
             }
             else if (cmdClass == (byte)CommandClass.SceneActivation && cmdType == (byte)Command.SceneActivationSet)
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, (double)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.Generic, (double)message[9]);
                 handled = true;
             }
             else if (cmdClass == (byte)CommandClass.SensorBinary && cmdType == (byte)Command.SensorBinaryReport)
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.Generic, message[9]);
                 handled = true;
             }
             else if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
                 var sensor = SensorValue.Parse(message);
-                if (sensor.Parameter == ZWaveSensorParameter.UNKNOWN)
+                if (sensor.Parameter == ZWaveSensorParameter.Unknown)
                 {
                     byte key = message[9];
-                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.GENERIC, sensor.Value);
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.Generic, sensor.Value);
                     Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                 }
                 else
@@ -123,62 +123,59 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                 //SPI > 01 0F 00 04 00 32 09 60 06 03 31 05 01 2A 02 E4 53
                 if (true) // TODO: check against proper command classes SENSOR_BINARY, SENSOR_MULTILEVEL, ...
                 {
-                    var paramType = ParameterType.MULTIINSTANCE_SENSOR_BINARY;
+                    var paramType = ParameterEvent.MultiinstanceSensorBinary;
                     if (reportType == (byte)CommandClass.SensorMultilevel)
                     {
-                        paramType = ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL;
+                        paramType = ParameterEvent.MultiinstanceSensorMultilevel;
                     }
                     // we assume its a COMMAND_MULTIINSTANCE_REPORT
-                    int scale = 0;
                     byte key = message[12];
-                    double val = Utility.ExtractValueFromBytes(message, 14, out scale);
+                    ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 14);
 
                     // if it's a COMMAND_MULTIINSTANCEV2_ENCAP we shift key and val +1 byte
                     if (cmdType == (byte)Command.MultiInstaceV2Encapsulated)
                     {
                         key = message[13];
-                        val = Utility.ExtractValueFromBytes(message, 15, out scale);
+                        zvalue = Utility.ExtractValueFromBytes(message, 15);
                     }
                     //
-                    if (key == (byte)ZWaveSensorParameter.TEMPERATURE && message.Length > 16)
+                    if (key == (byte)ZWaveSensorParameter.Temperature && message.Length > 16)
                     {
+                        double temperature = 0;
                         if (cmdType == (byte)Command.MultiInstaceV2Encapsulated && message.Length > 18)
                         {
-                            val = BitConverter.ToUInt16(new byte[2] { message[18], message[17] }, 0) / 100D;
+                            temperature = BitConverter.ToUInt16(new byte[2] { message[18], message[17] }, 0) / 100D;
                         }
                         else
                         {
-                            val = Utility.ExtractTemperatureFromBytes(message);
+                            zvalue = SensorValue.ExtractTemperatureFromBytes(message);
+                            // convert from Fahrenheit to Celsius if needed
+                            temperature = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
                         }
                         //
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, val);
-                        nodeHost.RaiseUpdateParameterEvent(
-                            nodeHost,
-                            key,
-                            ParameterType.SENSOR_TEMPERATURE,
-                            val
-                        );
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, temperature);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterEvent.SensorTemperature, temperature);
                         processed = true;
                     }
-                    else if (key == (byte)ZWaveSensorParameter.GENERAL_PURPOSE_VALUE)
+                    else if (key == (byte)ZWaveSensorParameter.GeneralPurposeValue)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterEvent.Generic, zvalue.Value);
                         processed = true;
                     }
-                    else if (key == (byte)ZWaveSensorParameter.LUMINANCE)
+                    else if (key == (byte)ZWaveSensorParameter.Luminance)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_LUMINANCE, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterEvent.SensorLuminance, zvalue.Value);
                         processed = true;
                     }
-                    else if (key == (byte)ZWaveSensorParameter.RELATIVE_HUMIDITY)
+                    else if (key == (byte)ZWaveSensorParameter.RelativeHumidity)
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.SENSOR_HUMIDITY, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterEvent.SensorHumidity, zvalue.Value);
                         processed = true;
                     }
-                    else if (key == (byte)ZWaveSensorParameter.POWER)
+                    else if (key == (byte)ZWaveSensorParameter.Power)
                     {
                         // TODO: verify if it's possible to use EnergyValue class
                         double energy = 0;
@@ -197,7 +194,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                         nodeHost.RaiseUpdateParameterEvent(
                             nodeHost,
                             instance,
-                            ParameterType.MULTIINSTANCE_SENSOR_MULTILEVEL,
+                            ParameterEvent.MultiinstanceSensorMultilevel,
                             (double)energy
                         );
 
@@ -205,8 +202,8 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
                     }
                     else
                     {
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, (double)val);
-                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterType.GENERIC, val);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, paramType, zvalue.Value);
+                        nodeHost.RaiseUpdateParameterEvent(nodeHost, key, ParameterEvent.Generic, zvalue.Value);
                         Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                     }
                 }

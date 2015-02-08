@@ -62,13 +62,6 @@
         //-- Setup Timers for Status Icon
         this.SetupTimers();
 
-        //-- Display Module-Label If Set By User Config
-        if (HG.WebApp.Utility.GetModulePropertyByName(this.Module, 'ConfigureOptions.' + this.WidgetPrefix + 'Label').Value != '') {
-            var labelPlaceholder = this.Widget.find('[data-ui-label="' + this.WidgetPrefix + 'Label"]');
-            labelPlaceholder.html(HG.WebApp.Utility.GetModulePropertyByName(this.Module, 'ConfigureOptions.' + this.WidgetPrefix + 'Label').Value);
-            labelPlaceholder.removeAttr('data-locale-id');
-        }
-
 
 
         $(window).resize(function () {
@@ -176,6 +169,12 @@
         //-- Apply Custom Settings
         this.ApplySettings();
 
+        //-- Display Module-Label If Set By User Config
+        if (HG.WebApp.Utility.GetModulePropertyByName(this.Module, 'ConfigureOptions.' + this.WidgetPrefix + 'Label').Value != '') {
+            var labelPlaceholder = this.Widget.find('[data-ui-label="' + this.WidgetPrefix + 'Label"]');
+            labelPlaceholder.html(HG.WebApp.Utility.GetModulePropertyByName(this.Module, 'ConfigureOptions.' + this.WidgetPrefix + 'Label').Value);
+            labelPlaceholder.removeAttr('data-locale-id');
+        }
         this.UpdateStatusIcon();
 
     },
@@ -408,7 +407,7 @@
         this.Resize();
 
         //-- Refresh Module Display
-        //HG.Control.Modules.ServiceCall( 'Control.Refresh', this.Module.Domain, this.Module.Address, null, function (data) { } );
+        HG.Control.Modules.ServiceCall( 'Control.Refresh', this.Module.Domain, this.Module.Address, null, function (data) { } );
 
     },
 

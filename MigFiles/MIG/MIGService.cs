@@ -93,6 +93,25 @@ namespace MIG
 
     public class MIGService
     {
+
+        #region Private fields
+
+        private WebServiceGateway webGateway;
+        //private TcpSocketGateway tcpGateway;
+
+        //private int tcpGatewayPort = 4502;
+        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("UTF-8");
+
+        private WebServiceGatewayConfiguration webServiceConfig;
+        // TODO: move webFileCache to WebServiceGateway.cs
+        private List<WebFileCache> webFileCache = new List<WebFileCache>();
+
+        private MIGServiceConfiguration configuration;
+
+        #endregion
+
+        #region Public fields
+
         //public event Action<object> ServiceStarted;
         //public event Action<object> ServiceStopped;
 
@@ -106,17 +125,7 @@ namespace MIG
 
         public Dictionary<string, MIGInterface> Interfaces; // TODO: this should be read-only, so implement pvt member _interfaces
 
-        private WebServiceGateway webGateway;
-        //private TcpSocketGateway tcpGateway;
-
-        //private int tcpGatewayPort = 4502;
-        private Encoding defaultWebFileEncoding = Encoding.GetEncoding("UTF-8");
-
-        private WebServiceGatewayConfiguration webServiceConfig;
-		// TODO: move webFileCache to WebServiceGateway.cs
-        private List<WebFileCache> webFileCache = new List<WebFileCache>();
-
-        private MIGServiceConfiguration configuration;
+        #endregion
 
         #region Lifecycle
         public MIGService()
@@ -613,6 +622,11 @@ namespace MIG
                 //
                 if (responseObject == null || responseObject.Equals(String.Empty))
                 {
+                    var postData =  new StreamReader(context.Request.InputStream).ReadToEnd();
+                    if (!String.IsNullOrEmpty(postData))
+                    {
+                        command.OriginalRequest += "/" + postData;
+                    }
                     responseObject = WebServiceDynamicApiCall(command);
                 }
                 //
@@ -656,7 +670,9 @@ namespace MIG
             var handler = MIG.Interfaces.DynamicInterfaceAPI.Find(registeredApi);
             if (handler != null)
             {
-                var args = command.OriginalRequest.Substring(registeredApi.Length);
+                // explicit command API handlers registered in the form <domain>/<address>/<command>
+                // receives only the remaining part of the request after the <command>
+                var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
                 response = handler(args);
             }
             else
@@ -664,6 +680,8 @@ namespace MIG
                 handler = MIG.Interfaces.DynamicInterfaceAPI.FindMatching(command.OriginalRequest.Trim('/'));
                 if (handler != null)
                 {
+                    // other command API handlers
+                    // receives the full request string
                     response = handler(command.OriginalRequest.Trim('/'));
                 }
             }

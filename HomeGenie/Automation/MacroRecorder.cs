@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Automation
 {
@@ -114,7 +115,7 @@ namespace HomeGenie.Automation
                 if (delay > 0 && macroCommands.Count > 0)
                 {
                     // add a pause command to the macro
-                    macroCommands.Add(new MIGInterfaceCommand("HomeAutomation.HomeGenie/Automation/Program.Pause/" + delay.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+                    macroCommands.Add(new MIGInterfaceCommand(Domains.HomeAutomation_HomeGenie + "/Automation/Program.Pause/" + delay.ToString(System.Globalization.CultureInfo.InvariantCulture)));
                 }
                 macroCommands.Add(cmd);
             }

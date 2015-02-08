@@ -321,9 +321,8 @@ HG.WebApp.ProgramEdit.ProgramEnable = function (pid, isenabled) {
     $.mobile.loading('show', { text: action + ' program', textVisible: true, theme: 'a', html: '' });
     $('#control_groupslist').empty();
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.' + fn + '/' + pid + '/',
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             $.mobile.loading('hide');
         },
@@ -677,9 +676,8 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program) {
 HG.WebApp.ProgramEdit.BreakProgram = function (pid) {
     $.mobile.loading('show', { text: 'Stopping program', textVisible: true, theme: 'a', html: '' });
     $.ajax({
-        type: 'POST',
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Break/' + pid + '/',
-        data: "{ dummy: 'dummy' }",
+        type: 'GET',
         success: function (response) {
             HG.WebApp.ProgramEdit.RefreshProgramOptions();
             $.mobile.loading('hide');

@@ -87,6 +87,14 @@ namespace ZWaveLib
         //
         Meter = 0x32,
         //
+        ThermostatHeating = 0x38,
+        ThermostatMode = 0x40,
+        ThermostatOperatingState =  0x42,
+        ThermostatSetPoint = 0x43,
+        ThermostatFanMode = 0x44,
+        ThermostatFanState = 0x45,
+        ThermostatSetBack = 0x47,   
+        //
         MultiInstance = 0x60,
         Configuration = 0x70,
         Alarm = 0x71,
@@ -100,15 +108,7 @@ namespace ZWaveLib
         Version = 0x86,
         //
         SensorAlarm = 0x9C,
-        SilenceAlarm = 0x9D,
-        //
-        ThermostatFanMode = 0x44,  
-        ThermostatFanState = 0x45,     
-        ThermostatHeating = 0x38,
-        ThermostatMode = 0x40,
-        ThermostatOperatingState =  0x42,  
-        ThermostatSetBack = 0x47,   
-        ThermostatSetPoint = 0x43   
+        SilenceAlarm = 0x9D
     }
 
     public enum Command : byte

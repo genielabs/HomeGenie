@@ -35,7 +35,7 @@ MISSION
 Some of these goals have been already accomplished (see CURRENT FEATURES).
 
 Other expected features:
-- Support for other multimedia wireless standards (eg. Bluetooth, DLNA, AirPlay)
+- Support for other multimedia wireless standards (eg. Bluetooth, AirPlay)
 - Generic I/O Device Wireless Router and Framework (see MIG)
 
 
@@ -50,6 +50,9 @@ CURRENT FEATURES
 
 * Real and virtual energy metering with statistics
   energy consumption awareness for optimizing costs and usage
+
+* UPnP / DLNA control point
+  control media receiver, renderer and light/switch device types
 
 * Wizard Scripting
   no need to be a programmer, create scenarios with your fingers using the "live macro recording" feature
@@ -119,7 +122,7 @@ BUILT-IN X10 FEATURES
 =====================
 
 - PLC: All Light On, All Units Off, On, Off, Dim, Bright
-- RF: raw data receive
+- RF: raw data receive and decoding
 
 
 BUILT-IN Z-WAVE FEATURES
@@ -166,7 +169,6 @@ Lights
 Energy Management
 - Energy Monitor
 - Energy Saving Mode
-- Scheduled ON/OFF
 - Turn Off Delay
 
 Scenes
@@ -204,6 +206,22 @@ Z-Wave
 - Multi Instance/Channel Virtual Modules
 - Query on Wake Up
 
+Security
+- Ping Me at Home
+- Presence Simulator
+- Security Alarm System
+
+Interconnections
+- IR/RF remote control events forwarding
+- Meter.Watts events forwarding
+- Sensor.* events forwarding
+- Status.Level events forwarding
+- MQTT Network
+
+Scheduling
+- Timetable (for scheduling lights, shutters, thermostats, appliances)
+- Scheduled ON/OFF
+
 Raspberry Pi
 - DHT-11 Temperature/Humidity sensor
 - DHT-22 Temperature/Humidity sensor
@@ -216,17 +234,9 @@ Raspberry Pi
 - Olimex - Nokia 3310 LCD display
 - SmartIC - MCP23017 dual I/O expander
 
-Security
-- Ping Me at Home
-- Presence Simulator
-- Security Alarm System
+CubieTruck
+- GPIO Modules
 
-Interconnections
-- IR/RF remote control events forwarding
-- Meter.Watts events forwarding
-- Sensor.* events forwarding
-- Status.Level events forwarding
-- MQTT Network
 
 More program plugins available from contributors at Users' Forum board:
 http://www.homegenie.it/forum/index.php?board=3.0

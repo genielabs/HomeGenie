@@ -139,7 +139,7 @@
             temperature = Math.round(temperatureField.Value.replace(',', '.') * 100) / 100;
             if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
         }
-        widget.find('[data-ui-field=temperature_value]').html(temperature + '&deg;');
+        widget.find('[data-ui-field=temperature_value]').html(temperature.toFixed(1) + '&deg;');
 
         // display Fan State
         var fanState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.FanState");
@@ -170,7 +170,7 @@
             widget.find('[data-ui-field=heat_field]').show();
             var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
             if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=set_value]').html(temperature + '&deg;');
+            widget.find('[data-ui-field=set_value]').html(temperature.toFixed(1) + '&deg;');
         }
 
 
@@ -184,7 +184,7 @@
             widget.find('[data-ui-field=cool_field]').show();
             var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
             if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=set_value]').html(temperature + '&deg;');
+            widget.find('[data-ui-field=set_value]').html(temperature.toFixed(1) + '&deg;');
         }
         // enable/disable Cool Set Point feature (not every thermostat support it)
         if (coolTo == null) {

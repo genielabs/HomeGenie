@@ -4,7 +4,7 @@
     Version: '2013-03-31',
 
     GroupName: '',
-    IconImage: 'http://icons-ak.wxug.com/graphics/wu2/logo_130x80.png',
+    IconImage: 'pages/control/widgets/homegenie/generic/images/wu_logo.png',
     StatusText: '',
     Description: '',
 

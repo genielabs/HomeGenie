@@ -41,12 +41,20 @@
             //
             // initialization stuff here
             //
+            var _this = this;
             // when widget is clicked control popup is shown
             widget.find('[data-ui-field=camerapicturepreview]').on('click', function () {
                 if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
                     var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
                     popup.popup('open');
                     popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
+                }
+            });
+            widget.find('[data-ui-field=camerapicturepreview]').load(function () {
+                if (_this.Widget.is(':visible')) {
+                    setTimeout(function () {
+                        _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
+                    }, 2000);
                 }
             });
             //
@@ -56,6 +64,7 @@
             widget.find('[data-ui-field=settings]').on('click', function () {
                 HG.WebApp.Control.EditModule(module);
             });
+            //
         }
         //
         // read some context data
@@ -69,18 +78,7 @@
         //widget.find('[data-ui-field=status]').html(this.StatusText);
         //widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
         //
-        this.PollCamera(imageurl);
-    },
-
-
-    PollCamera: function (imageurl) {
-        var _this = this;
-        // poll media renderer status while widget is visible
-        if (_this.Widget.is(':visible')) {
-            _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
-            setTimeout(function () { _this.PollCamera(imageurl); }, 1000);
-        }
-
+        this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
     }
 
 }]

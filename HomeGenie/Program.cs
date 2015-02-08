@@ -33,6 +33,7 @@ using Raspberry;
 
 using Newtonsoft.Json;
 using System.Diagnostics;
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie
 {
@@ -194,7 +195,7 @@ namespace HomeGenie
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
             HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
-                Domain = "HomeAutomation.HomeGenie",
+                Domain = Domains.HomeAutomation_HomeGenie,
                 Source = "UnhandledExceptionTrapper",
                 Description = e.ExceptionObject.ToString(),
                 Property = "HomeGenie.UnhandledException",

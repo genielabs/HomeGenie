@@ -475,7 +475,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/")
+                        new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
                     );
                     DelayIteration();
                 }
@@ -493,7 +493,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                 );
                 DelayIteration();
             }
@@ -510,7 +510,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                 );
                 DelayIteration();
             }
@@ -532,14 +532,14 @@ namespace HomeGenie.Automation.Scripting
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                         );
                     }
                     else
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                         );
                     }
                 }

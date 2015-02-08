@@ -51,7 +51,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Aeon
             if (cmdClass == (byte)CommandClass.SensorMultilevel && cmdType == (byte)Command.SensorMultilevelReport)
             {
                 SensorValue sensorval = SensorValue.Parse(message);
-                if (sensorval.Parameter == ZWaveSensorParameter.LUMINANCE)
+                if (sensorval.Parameter == ZWaveSensorParameter.Luminance)
                 {
                     // thanks to Zed for reporting this: http://www.homegenie.it/forum/index.php?topic=29.msg140
                     sensorval.Value = BitConverter.ToUInt16(new byte[2] { message[12], message[11] }, 0);

@@ -147,9 +147,8 @@ HG.Configure.Interfaces = HG.Configure.Interfaces || {};
 HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.Configure/' + ifacefn + '/',
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var value = eval(data);
             if (typeof value == 'undefined') {
@@ -184,9 +183,7 @@ HG.Configure.Modules = HG.Configure.Modules || {};
 HG.Configure.Modules.List = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.List/' + (new Date().getTime()),
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "json",
+        type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -195,9 +192,8 @@ HG.Configure.Modules.List = function (callback) {
 HG.Configure.Modules.Get = function (domain, address, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Get/' + domain + "/" + address + "/" + (new Date().getTime()),
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -206,9 +202,7 @@ HG.Configure.Modules.Get = function (domain, address, callback) {
 HG.Configure.Modules.Delete = function (domain, address, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.Delete/' + domain + "/" + address + "/" + (new Date().getTime()),
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -217,9 +211,7 @@ HG.Configure.Modules.Delete = function (domain, address, callback) {
 HG.Configure.Modules.RoutingReset = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Modules.RoutingReset/' + (new Date().getTime()),
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -233,9 +225,8 @@ HG.Configure.System = HG.Configure.System || {};
 HG.Configure.System.ServiceCall = function (systemfn, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/' + systemfn + '/',
-        type: "POST",
-        data: "{ dummy: 'dummy' }",
-        dataType: "text",
+        type: 'GET',
+        dataType: 'text',
         success: function (data) {
             var value = eval(data);
             if (typeof value == 'undefined') {

@@ -34,7 +34,6 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
             return (productspecs.ManufacturerId == "001E" && productspecs.TypeId == "0002" && productspecs.ProductId == "0001");
         }
 
-
         public override bool HandleBasicReport(byte[] message)
         {
             if (message[8] == 0x01) // && message[9] != 0x00) // MOTION ON
@@ -44,12 +43,12 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
                 // message[9] == 0xFF (or > 0x00)             --> MOTION ON
                 // message[9] == 0x00                         --> MOTION OFF
                 //
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.SENSOR_MOTION, (double)message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.SensorMotion, (double)message[9]);
                 return true;
             }
             else if (message[8] == 0x03)
             {
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterType.ALARM_GENERIC, message[9]);
+                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.AlarmGeneric, message[9]);
                 return true;
             }
             //else if (message[8] == 0x01 && message[9] == 0x00) // MOTION OFF
@@ -58,8 +57,6 @@ namespace ZWaveLib.Devices.ProductHandlers.HomeSeer
             //}
             return false;
         }
-
-
 
     }
 }
