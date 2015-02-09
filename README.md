@@ -3,6 +3,10 @@
 **Project info and documentation**:
 http://homegenie.it
 
+![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_eden_01.jpg "HomeGenie Dashboard 1")
+
+
+![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_01.jpg "HomeGenie Dashboard 2")
 
 ## Supported IDEs
 

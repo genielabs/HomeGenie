@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+08/02/2015 1.00 beta rev 478
+    - Fixed bug in Timetable when crossing from one table type to another on midnight (eg. from Weekday to Weekend)
+    - Added user-definable thermostat parameter to Eden Oled Menu widget
+    - Improved Basic Thermostat app, now compatible with Timetable scheduler and using Virtual Modules
+    - Added 0.5 step value input to the thermostat widget dial knob (issue #93)
+
 07/02/2015 1.00 beta rev 476-git7 (sf.net r477)
     - Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
     - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
@@ -16,6 +22,7 @@
 06/02/2015 1.00 beta rev 476-git4
     - Trying to fix precision/scale/size in value sent by Thermostat.SetPointSet
     - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
+    - Added thermostats settings query to Z-Wave WakeUp app
     - Trying to fix Thermostat.SetPointGet and WakeUp app
 
 05/02/2015 1.00 beta rev 476

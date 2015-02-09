@@ -28,6 +28,31 @@ using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {
+
+    public enum MessageHeader : byte
+    {
+        SOF = 0x01,
+        ACK = 0x06,
+        NAK = 0x15,
+        CAN = 0x18
+    }
+
+    public enum MessageType : byte
+    {
+        Request = 0x00,
+        Response = 0x01
+    }
+
+    public class ZWaveMessageReceivedEventArgs
+    {
+        public byte[] Message;
+
+        public ZWaveMessageReceivedEventArgs(byte[] msg)
+        {
+            Message = msg;
+        }
+    }
+
     public class ZWaveMessage
     {
         public byte CallbackId;
@@ -35,5 +60,27 @@ namespace ZWaveLib
         public byte[] Message;
         public DateTime Timestamp = DateTime.UtcNow;
         public int ResendCount = 0;
+
+        public static byte[] CreateRequest(byte nodeId, byte[] request)
+        {
+            byte[] header = new byte[] {
+                (byte)MessageHeader.SOF, /* Start Of Frame */
+                (byte)(request.Length + 7) /*packet len */,
+                (byte)MessageType.Request, /* Type of message */
+                (byte)Function.SendData /* func send data */,
+                nodeId,
+                (byte)(request.Length)
+            };
+            byte[] footer = new byte[] { 0x01 | 0x04, 0x00, 0x00 };
+            byte[] message = new byte[header.Length + request.Length + footer.Length];// { 0x01 /* Start Of Frame */, 0x09 /*packet len */, 0x00 /* type req/res */, 0x13 /* func send data */, this.NodeId, 0x02, 0x31, 0x04, 0x01 | 0x04, 0x00, 0x00 };
+
+            System.Array.Copy(header, 0, message, 0, header.Length);
+            System.Array.Copy(request, 0, message, header.Length, request.Length);
+            System.Array.Copy(footer, 0, message, message.Length - footer.Length, footer.Length);
+
+            return message;
+        }
+
     }
+
 }
