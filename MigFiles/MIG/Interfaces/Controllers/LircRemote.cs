@@ -226,6 +226,11 @@ namespace MIG.Interfaces.Controllers
         }
 
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
+        
+        /// <summary>
+        /// get modules and module properties
+        /// </summary>
+        public List<InterfaceModule> Modules { get; set; }
 
         public List<InterfaceModule> GetModules()
         {

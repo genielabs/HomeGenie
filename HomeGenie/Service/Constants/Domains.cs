@@ -51,6 +51,8 @@ namespace HomeGenie.Service.Constants
             = "HomeAutomation.Insteon";
         public const string HomeAutomation_W800RF
             = "HomeAutomation.W800RF";
+        public const string HomeAutomation_ConnAir
+            = "HomeAutomation.ConnAir";
         //
         public const string Controllers_LircRemote
             = "Controllers.LircRemote";

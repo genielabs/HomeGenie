@@ -144,6 +144,11 @@ namespace MIG.Interfaces.HomeAutomation
 
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
+        /// <summary>
+        /// get modules and module properties
+        /// </summary>
+        public List<InterfaceModule> Modules { get; set; }
+
         public List<InterfaceModule> GetModules()
         {
             // TODO: make 'modules' data persistent in order to store status for various X10 operations (eg. like Control.Level)

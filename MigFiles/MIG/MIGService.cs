@@ -124,6 +124,7 @@ namespace MIG
         public event WebServiceRequestPostProcessEventHandler ServiceRequestPostProcess;
 
         public Dictionary<string, MIGInterface> Interfaces; // TODO: this should be read-only, so implement pvt member _interfaces
+        public Dictionary<string, MIG.InterfaceModule> Modules;
 
         #endregion
 
@@ -131,7 +132,8 @@ namespace MIG
         public MIGService()
         {
             Interfaces = new Dictionary<string, MIGInterface>();
-            //
+            Modules = new Dictionary<string, InterfaceModule>();
+
             //tcpGateway = new TcpSocketGateway();
             //tcpGateway.ProcessRequest += tcpGateway_ProcessRequest;
             //
@@ -192,7 +194,7 @@ namespace MIG
                 MIGInterface migInterface = null;
                 var type = Type.GetType("MIG.Interfaces." + domain);
                 migInterface = (MIGInterface)Activator.CreateInstance(type);
-                migInterface.Options = configuration.GetInterface(domain).Options;
+                migInterface.Options = configuration.GetInterface(domain).Options;                
                 Interfaces.Add(domain, migInterface);
                 migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
                 migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
@@ -205,9 +207,19 @@ namespace MIG
         public void EnableInterface(string domain)
         {
             if (Interfaces.ContainsKey(domain))
-            {
+            {             
+                //send module settings to MIGInterface
+                var modlist = new List<InterfaceModule> { };
+                foreach (var mod in Modules)
+                {
+                    if (mod.Value.Domain == domain)
+                    {
+                        modlist.Add(mod.Value);                        
+                    }
+                }                                
                 MIGInterface migInterface = Interfaces[domain];
                 migInterface.Options = configuration.GetInterface(domain).Options;
+                migInterface.Modules = modlist;
                 migInterface.Connect();
             }
         }
