@@ -118,6 +118,12 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             });
         });
         //
+        $("#configure_interfaces_flip_tellstick").on('slidestop', function (event) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Tellstick', 'IsEnabled.Set', $("#configure_interfaces_flip_tellstick").val(), '', function (data) {
+                $('#control_groupslist').empty(); // forces control menu rebuild
+            });
+        });
+        //
         $("#configure_interfaces_flip_w800rf32").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('w800rf32');
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Set', $("#configure_interfaces_flip_w800rf32").val(), '', function (data) {
@@ -189,12 +195,21 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
         //
         $('#page_configure_interfaces_camerachange').bind('click', function () {
+<<<<<<< HEAD
             var device = $('#page_configure_interfaces_cameraport').val();
             var resolution = $('#page_configure_interfaces_cameraresolution').val();
             var width = resolution.split('x')[0];
             var height = resolution.split('x')[1];
             var fps = $('#page_configure_interfaces_camerafps').val();
             HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Set', 'Configuration', encodeURIComponent(device + ',' + width + ',' + height + ',' + fps));
+=======
+            var device = encodeURIComponent($('#page_configure_interfaces_cameraport').val());
+            var resolution = encodeURIComponent($('#page_configure_interfaces_cameraresolution').val());
+            var fps = encodeURIComponent($('#page_configure_interfaces_camerafps').val());
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'VideoInput.Set', encodeURIComponent(device) + "/" + encodeURIComponent(resolution) + "/" + encodeURIComponent(fps), '', function (data) {
+
+            });
+>>>>>>> Added support for tellstick lib. See http://www.telldus.se/products/tellstick
         });
     });
 };
@@ -349,6 +364,15 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                     $('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
                 }
             });
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Get', 'VideoInput', '', function (data) {
+                data = data[0];
+                $('#page_configure_interfaces_cameraport').val(data.Device);
+                $('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
+                $('#page_configure_interfaces_cameraresolution').val(data.Width + 'x' + data.Height);
+                $('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
+                $('#page_configure_interfaces_camerafps').val(data.Fps);
+                $('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
+            });
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_zwave').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('zwave');
@@ -360,6 +384,9 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_x10').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('x10');
+            });
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Tellstick', 'IsEnabled.Get', '', '', function (data) {
+                $("#configure_interfaces_flip_tellstick").val(data.ResponseValue).slider('refresh');
             });
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_w800rf32').val(data.ResponseValue).slider('refresh');
