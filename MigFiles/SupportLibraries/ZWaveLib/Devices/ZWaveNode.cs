@@ -144,6 +144,7 @@ namespace ZWaveLib.Devices
                 case (byte)CommandClass.ThermostatOperatingState:
                 case (byte)CommandClass.ThermostatSetBack: 
                 case (byte)CommandClass.ThermostatSetPoint: 
+                case (byte)CommandClass.UserCode:
 
                     if (this.DeviceHandler != null)
                     {

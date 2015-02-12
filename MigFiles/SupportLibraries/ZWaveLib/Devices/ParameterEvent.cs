@@ -47,7 +47,8 @@ namespace ZWaveLib.Devices
         ThermostatMode,
         ThermostatOperatingState,
         ThermostatSetBack,
-        ThermostatSetPoint
+        ThermostatSetPoint,
+        UserCode
     }
 
 }

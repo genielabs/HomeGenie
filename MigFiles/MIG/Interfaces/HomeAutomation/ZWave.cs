@@ -110,6 +110,8 @@ namespace MIG.Interfaces.HomeAutomation
                 { 808, "Thermostat.GetAll" },
                 { 809, "Thermostat.OperatingStateGet" },
 
+                { 901, "UserCode.Set" },
+
                 { 1000, "NodeInfo.Get" },
             };
 
@@ -162,6 +164,8 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command THERMOSTAT_FANSTATEGET = new Command(807);
             public static readonly Command THERMOSTAT_GETALL = new Command(808);
             public static readonly Command THERMOSTAT_OPERATINGSTATE_GET = new Command(809);
+
+            public static readonly Command USERCODE_SET = new Command(901);
 
             private readonly String name;
             private readonly int value;
@@ -663,6 +667,14 @@ namespace MIG.Interfaces.HomeAutomation
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     ((Thermostat)node.DeviceHandler).Thermostat_OperatingStateGet();
                 }
+                else if(command==Command.USERCODE_SET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    byte userId = byte.Parse(request.GetOption(0));
+                    byte userIdStatus = byte.Parse(request.GetOption(1));
+                    byte[] tagCode = ZWaveLib.Devices.Values.Utility.HexStringToByteArray(request.GetOption(2));
+                    ((ZWaveLib.Devices.ProductHandlers.BeNext.TagReader)node.DeviceHandler).UserCode = new ZWaveLib.Devices.Values.UserCodeValue(userId, userIdStatus, tagCode);
+                }
             }
             catch
             {
@@ -1095,6 +1107,10 @@ namespace MIG.Interfaces.HomeAutomation
             case ParameterEvent.ThermostatSetPoint:
                 path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
                 value = ((dynamic)value).Value;
+                break;
+            case ParameterEvent.UserCode:
+                path = "UserCode.Report";
+                value = ((ZWaveLib.Devices.Values.UserCodeValue)value).tagCodeToHexString();
                 break;
 
             default:
