@@ -918,25 +918,29 @@ namespace MIG.Interfaces.HomeAutomation
             switch (upargs.ParameterEvent)
             {
             case ParameterEvent.MeterKwHour:
-                path = ModuleParameters.MODPAR_METER_KW_HOUR;
+                    // NOTE: See documentation for this helper method for detailed info. To summarize, these parameter types 
+                    // could be embedded in a multi-instance encapsulated frame. This temporary fix will make sure we 
+                    // include the instance when required. This workaround is only applied to METER at the moment, 
+                    // but probably needs to be applied ot others.
+                    path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_KW_HOUR, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterKvaHour:
-                path = ModuleParameters.MODPAR_METER_KVA_HOUR;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_KVA_HOUR, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterWatt:
-                path = ModuleParameters.MODPAR_METER_WATTS;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_WATTS, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterPulses:
-                path = ModuleParameters.MODPAR_METER_PULSES;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_PULSES, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterAcVolt:
-                path = ModuleParameters.MODPAR_METER_AC_VOLT;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_AC_VOLT, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterAcCurrent:
-                path = ModuleParameters.MODPAR_METER_AC_CURRENT;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_METER_AC_CURRENT, upargs.ParameterId);
                 break;
             case ParameterEvent.MeterPower:
-                path = ModuleParameters.MODPAR_SENSOR_POWER;
+                path = AppendMultiInstanceUpArgsHelper(ModuleParameters.MODPAR_SENSOR_POWER, upargs.ParameterId);
                 break;
             case ParameterEvent.Battery:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
@@ -1116,6 +1120,31 @@ namespace MIG.Interfaces.HomeAutomation
                 Path = path,
                 Value = value
             });
+        }
+
+        /// <summary>
+        /// :: Temporary Solution ::
+        /// Some command classes might be embedded inb a multi-instance ENCAP frame. If the paramId of the uparg is != 0 for applicable 
+        /// command classes, then the arg is an instance # and is added to the string. Some param types use uparg for other purposes, 
+        /// and those will NOT use this helper method.
+        /// 
+        /// :: Perm Solution ::
+        /// If we can add support for sending whether a value is part of a multi-instance ENCAP command response, that would be the best way 
+        /// to determine if arg should be appended.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="upargParamId"></param>
+        /// <returns></returns>
+        private static string AppendMultiInstanceUpArgsHelper(string path, int upargParamId)
+        {
+            if (upargParamId != 0)
+            {
+                return "MultiInstance." + path + "." + upargParamId;
+            }
+            else
+            {
+                return path;
+            }
         }
 
         private void RaisePropertyChanged(InterfacePropertyChangedAction ifaceaction)

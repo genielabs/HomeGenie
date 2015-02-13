@@ -39,7 +39,9 @@
   <ItemGroup>
     <Compile Include="Devices\Controller.cs" />
     <Compile Include="Devices\ProductHandlers\Aeon\DoorWindowSensor.cs" />
+    <Compile Include="Devices\ProductHandlers\Aeon\HomeEnergyMonitor.cs" />
     <Compile Include="Devices\ProductHandlers\Aeon\MultiSensor.cs" />
+    <Compile Include="Devices\ProductHandlers\Generic\CompositeDevice.cs" />
     <Compile Include="Devices\ProductHandlers\Generic\Dimmer.cs" />
     <Compile Include="Devices\IZWaveDeviceHandler.cs" />
     <Compile Include="Devices\ProductHandlers\Aeon\MicroSmartEnergyIlluminator.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Devices\ProductHandlers\HomeSeer\HSM100WirelessMultiSensor.cs" />
     <Compile Include="Devices\ProductHandlers\Generic\Switch.cs" />
     <Compile Include="Devices\ProductHandlers\Zwave.Me\ZME_06436MotorControl.cs" />
+    <Compile Include="Devices\Values\MeterValue.cs" />
     <Compile Include="Devices\ZWaveNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZWaveMessage.cs" />
@@ -78,8 +81,5 @@
       <Name>SerialPortLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Devices\ProductHandlers\Fibaro\" />
-    <Folder Include="Devices\Values\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
