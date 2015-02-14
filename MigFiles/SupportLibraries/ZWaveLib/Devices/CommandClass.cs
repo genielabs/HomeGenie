@@ -21,9 +21,25 @@
  */
 
 using System;
+using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {
+    public class ZWaveEvent
+    {
+        public ZWaveNode Node;
+        public ParameterEvent Event;
+        public object Value;
+        public int Instance;
+
+        public ZWaveEvent(ZWaveNode node, ParameterEvent eventType, object eventValue, int instance)
+        {
+            this.Node = node;
+            this.Event = eventType;
+            this.Value = eventValue;
+            this.Instance = instance;
+        }
+    }
 
     public enum Function: byte
     {
@@ -116,6 +132,18 @@ namespace ZWaveLib
         BasicSet = 0x01,
         BasicGet = 0x02,
         BasicReport = 0x03,
+        //
+        SwitchBinarySet = 0x01,
+        SwitchBinaryGet = 0x02,
+        SwitchBinaryReport = 0x03,
+        //
+        SwitchMultilevelSet = 0x01,
+        SwitchMultilevelGet = 0x02,
+        SwitchMultilevelReport = 0x03,
+        SwitchMultilevelStartLevelChange = 0x04,
+        SwitchMultilevelStopLevelChange = 0x05,
+        SwitchMultilevelSupportedGet = 0x06,
+        SwitchMultilevelSupportedReport = 0x07,
         //
         BatteryGet = 0x02,
         BatteryReport = 0x03,

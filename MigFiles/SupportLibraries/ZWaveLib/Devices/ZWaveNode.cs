@@ -108,6 +108,7 @@ namespace ZWaveLib.Devices
             //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
             //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
             //
+            ZWaveEvent messageEvent = null;
             bool handled = false;
             int messageLength = receivedMessage.Length;
             //
@@ -130,12 +131,18 @@ namespace ZWaveLib.Devices
                 {
 
                 case (byte)CommandClass.Basic:
+                    messageEvent = Handlers.Basic.GetEvent(this, receivedMessage);
+                    break;
+                case (byte)CommandClass.SwitchBinary:
+                    messageEvent = Handlers.SwitchBinary.GetEvent(this, receivedMessage);
+                    break;
+                case (byte)CommandClass.SwitchMultilevel:
+                    messageEvent = Handlers.SwitchMultilevel.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.Alarm:
                 case (byte)CommandClass.SensorBinary:
                 case (byte)CommandClass.SensorAlarm:
                 case (byte)CommandClass.SensorMultilevel:
-                case (byte)CommandClass.SwitchBinary:
-                case (byte)CommandClass.SwitchMultilevel:
                 case (byte)CommandClass.SceneActivation:
                 case (byte)CommandClass.ThermostatMode:
                 case (byte)CommandClass.ThermostatFanMode:
@@ -265,7 +272,7 @@ namespace ZWaveLib.Devices
 
                 case (byte)CommandClass.Hail:
 
-                    this.Basic_Get();
+                    Handlers.Basic.GetValue(this);
                     handled = true;
 
                     break;
@@ -317,6 +324,11 @@ namespace ZWaveLib.Devices
 
             }
             //
+            if (messageEvent != null)
+            {
+                this.RaiseUpdateParameterEvent(messageEvent.Instance, messageEvent.Event, messageEvent.Value);
+            }
+            //
             if (!handled && messageLength > 3)
             {
                 if (receivedMessage[3] != 0x13)
@@ -357,32 +369,6 @@ namespace ZWaveLib.Devices
         {
             SendMessage(ZWaveMessage.CreateRequest(this.NodeId, request));
         }
-
-        #region ZWave Command Class Basic
-        /// <summary>
-        /// Basic Set
-        /// </summary>
-        /// <param name="value"></param>
-        public void Basic_Set(int value)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicSet, 
-                byte.Parse(value.ToString())
-            });
-        }
-
-        /// <summary>
-        /// Basic Get
-        /// </summary>
-        public void Basic_Get()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet 
-            });
-        }
-        #endregion
 
         #region ZWave Command Class Association
 
@@ -714,6 +700,19 @@ namespace ZWaveLib.Devices
         {
             var msg = new ZWaveMessage() { Node = this, Message = message };
             return zwavePort.SendMessage(msg, disableCallback);
+        }
+        
+        internal void RaiseUpdateParameterEvent(int pid, ParameterEvent peventtype, object value)
+        {
+            if (UpdateNodeParameter != null)
+            {
+                UpdateNodeParameter(this, new UpdateNodeParameterEventArgs() {
+                    NodeId = (int)this.NodeId,
+                    ParameterId = pid,
+                    ParameterEvent = peventtype,
+                    Value = value
+                });
+            }
         }
 
         internal void RaiseUpdateParameterEvent(ZWaveNode node, int pid, ParameterEvent peventtype, object value)

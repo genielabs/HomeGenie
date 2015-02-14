@@ -63,6 +63,9 @@
     <Compile Include="Devices\Values\AlarmValue.cs" />
     <Compile Include="Devices\Values\EnergyValue.cs" />
     <Compile Include="Devices\ParameterEvent.cs" />
+    <Compile Include="Handlers\Basic.cs" />
+    <Compile Include="Handlers\SwitchBinary.cs" />
+    <Compile Include="Handlers\SwitchMultilevel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -81,5 +84,6 @@
   <ItemGroup>
     <Folder Include="Devices\ProductHandlers\Fibaro\" />
     <Folder Include="Devices\Values\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
 </Project>
