@@ -658,43 +658,43 @@
     "systemsettings_zwavehardreset_hardresetproceed":
         "Продолжить",
     "statistics_dataanalysis":
-        "Data analysis",
+        "Анализ данных",
     "statistics_counterexpense":
-        "Counter and expense",
+        "Счетчики и траты",
     "analyze_statistics_datefrom":
-        "From",
+        "с",
     "analyze_statistics_dateto":
-        "To",
+        "по",
     "analyze_statistics_costperunit":
-        "Cost per unit",
+        "Цена за единицу",
     "analyze_statistics_overallcounter":
-        "Overall counter",
+        "Общий счетчик",
     "analyze_statistics_totalexpense":
-        "Total expense",
+        "Общие затраты",
     "configure_program_oroperator":
-        "OR operator",
+        "оператор ИЛИ",
     "configure_system_statistics_clear":
-        "Clear all statistics data",
+        "Удалить все статистические данные",
     "configure_system_statistics_databasemaxsize":
-        "Maximum database size is",
+        "Максимальный размер базы данных",
     "configure_system_statistics_changedatabasemaxsize":
-        "Change",
+        "Изменить",
     "configure_system_statistics_databasemaxsizechange":
-        "Maximum size (MB)",
+        "Максимальный размер (MB)",
     "configure_system_statistics_databasemaxsizechange_note":
-        "Note: after changing size, HomeGenie must be restarted to make changes effective!",
+        "Внимание: после изменения размера необходимо перезапустить HomeGenie, чтобы изменения вступили в силу!",
     "configure_system_statistics_databasemaxsizechange_cancel":
-        "Cancel",
+        "Отмена",
     "configure_system_statistics_databasemaxsizechange_commit":
-        "Change",
+        "Изменить",
     "configure_popupfilter_title":
-        "Event popup filters",
+        "Фильтры уведомлений о событиях",
     "configure_popupfilter_optclose":
-        "Close",
+        "Закрыть",
     "configure_system_blockedpopups":
-        "Blocked popups",
+        "Заблокированные уведомления",
     "configure_system_blockedpopups_edit":
-        "Edit",
+        "Изменить",
     "configure_system_updateinstall_warning":
-        "It is strongly recommended to make a backup of your configuration before proceeding with any update."
+        "Настоятельно рекомендуется сделать бекап конфигурации перед любым обновлением."
 }
