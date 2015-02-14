@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+14/02/2015 1.00 beta rev 479    
+    - Fixed bug in Statistics class when parsing address of remote modules
+    - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue
+    - Fixed MIG CameraInput interface not reading configuration
+
 08/02/2015 1.00 beta rev 478
     - Fixed bug in Timetable when crossing from one table type to another on midnight (eg. from Weekday to Weekend)
     - Added user-definable thermostat parameter to Eden Oled Menu widget

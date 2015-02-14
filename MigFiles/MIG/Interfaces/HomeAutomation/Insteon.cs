@@ -449,7 +449,8 @@ namespace MIG.Interfaces.HomeAutomation
 
                 // Parse house/unit
                 string houseCode = nodeId.Substring(0, 1);
-                byte unitCode = byte.Parse(nodeId.Substring(1));
+                byte unitCode = 0x00;
+                if (nodeId.Length > 1) unitCode = byte.Parse(nodeId.Substring(1));
 
                 // Modules control
                 if (command == Command.PARAMETER_STATUS)

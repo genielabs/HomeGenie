@@ -389,7 +389,7 @@ namespace MIG.Interfaces.Protocols
                         string itemId = i.Attribute("id").Value;
                         string itemTitle = i.Descendants().Where(n => n.Name.LocalName == "title").First().Value;
                         string itemClass = i.Descendants().Where(n => n.Name.LocalName == "class").First().Value;
-                        jsonres += "{ \"Id\" : \"" + itemId + "\", \"Title\" : \"" + itemTitle + "\", \"Class\" : \"" + itemClass + "\" },\n";
+                        jsonres += "{ \"Id\" : \"" + itemId + "\", \"Title\" : \"" + itemTitle.Replace("\"", "\\\"") + "\", \"Class\" : \"" + itemClass + "\" },\n";
                     }
                     jsonres = jsonres.TrimEnd(',', '\n') + "]";
                     //
@@ -452,9 +452,9 @@ namespace MIG.Interfaces.Protocols
                 jsonres += "\"NrTracks\" : \"" + nrTracks.DataValue + "\", ";
                 jsonres += "\"MediaDuration\" : \"" + mediaDuration.DataValue + "\", ";
                 jsonres += "\"CurrentURI\" : \"" + currentUri.DataValue + "\", ";
-                jsonres += "\"CurrentURIMetaData\" : \"" + currentUriMetadata.DataValue + "\", ";
+                jsonres += "\"CurrentURIMetaData\" : \"" + currentUriMetadata.DataValue.ToString().Replace("\"", "\\\"") + "\", ";
                 jsonres += "\"NextURI\" : \"" + nextUri.DataValue + "\", ";
-                jsonres += "\"NextURIMetaData\" : \"" + nextUriMetadata.DataValue + "\", ";
+                jsonres += "\"NextURIMetaData\" : \"" + nextUriMetadata.DataValue.ToString().Replace("\"", "\\\"") + "\", ";
                 jsonres += "\"PlayMedium\" : \"" + playMedium.DataValue + "\", ";
                 jsonres += "\"RecordMedium\" : \"" + recordMedium.DataValue + "\", ";
                 jsonres += "\"WriteStatus\" : \"" + writeStatus.DataValue + "\"";
@@ -489,7 +489,7 @@ namespace MIG.Interfaces.Protocols
                 string jsonres = "[{";
                 jsonres += "\"Track\" : \"" + currentTrack.DataValue + "\",";
                 jsonres += "\"TrackDuration\" : \"" + trackDuration.DataValue + "\",";
-                jsonres += "\"TrackMetaData\" : \"" + trackMetadata.DataValue + "\",";
+                jsonres += "\"TrackMetaData\" : \"" + trackMetadata.DataValue.ToString().Replace("\"", "\\\"") + "\",";
                 jsonres += "\"TrackURI\" : \"" + trackUri.DataValue + "\",";
                 jsonres += "\"RelTime\" : \"" + relativeTime.DataValue + "\",";
                 jsonres += "\"AbsTime\" : \"" + absoluteTime.DataValue + "\",";

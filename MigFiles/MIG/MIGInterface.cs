@@ -38,12 +38,14 @@ namespace MIG
         public static void SetOption(this MIGInterface iface, string option, string value)
         {
             var opt = iface.GetOption(option);
-            if (opt != null)
+            if (opt == null)
             {
-                iface.Disconnect();
-                opt.Value = value;
-                iface.Connect();
+                opt = new MIGServiceConfiguration.Interface.Option() { Name =  option };
+                iface.Options.Add(opt);
             }
+            iface.Disconnect();
+            opt.Value = value;
+            iface.Connect();
         }
     }
 

@@ -42,7 +42,7 @@ namespace HomeGenie.Service.Handlers
         {
             string domain = "";
             string address = "";
-            string[] filterList;
+            int domainSeparator = 0;
             DateTime dateStart, dateEnd;
 
             switch (migCommand.Command)
@@ -65,11 +65,11 @@ namespace HomeGenie.Service.Handlers
                 migCommand.Response = "[{ StatisticsUIRefreshSeconds : '" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUIRefreshSeconds + "' }]";
                 break;
             case "Parameter.List":
-                filterList = migCommand.GetOption(0).Split(':');
-                if (filterList.Length == 2)
+                domainSeparator = migCommand.GetOption(0).LastIndexOf(":");
+                if (domainSeparator > 0)
                 {
-                    domain = filterList[0];
-                    address = filterList[1];
+                    domain = migCommand.GetOption(0).Substring(0, domainSeparator);
+                    address = migCommand.GetOption(0).Substring(domainSeparator + 1);
                 }
                 migCommand.Response = "[";
                 foreach (string statParameter in homegenie.Statistics.GetParametersList(domain, address))
@@ -81,11 +81,11 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "Parameter.Counter":
-                filterList = migCommand.GetOption(1).Split(':');
-                if (filterList.Length == 2)
+                domainSeparator = migCommand.GetOption(1).LastIndexOf(":");
+                if (domainSeparator > 0)
                 {
-                    domain = filterList[0];
-                    address = filterList[1];
+                    domain = migCommand.GetOption(1).Substring(0, domainSeparator);
+                    address = migCommand.GetOption(1).Substring(domainSeparator + 1);
                 }
                 //
                 migCommand.Response = "[";
@@ -124,11 +124,11 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "Parameter.StatsHour":
-                filterList = migCommand.GetOption(1).Split(':');
-                if (filterList.Length == 2)
+                domainSeparator = migCommand.GetOption(1).LastIndexOf(":");
+                if (domainSeparator > 0)
                 {
-                    domain = filterList[0];
-                    address = filterList[1];
+                    domain = migCommand.GetOption(1).Substring(0, domainSeparator);
+                    address = migCommand.GetOption(1).Substring(domainSeparator + 1);
                 }
                 //
                 migCommand.Response = "[";

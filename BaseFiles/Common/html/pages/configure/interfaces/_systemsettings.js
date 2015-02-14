@@ -189,12 +189,12 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         });
         //
         $('#page_configure_interfaces_camerachange').bind('click', function () {
-            var device = encodeURIComponent($('#page_configure_interfaces_cameraport').val());
-            var resolution = encodeURIComponent($('#page_configure_interfaces_cameraresolution').val());
-            var fps = encodeURIComponent($('#page_configure_interfaces_camerafps').val());
-            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'VideoInput.Set', encodeURIComponent(device) + "/" + encodeURIComponent(resolution) + "/" + encodeURIComponent(fps), '', function (data) {
-
-            });
+            var device = $('#page_configure_interfaces_cameraport').val();
+            var resolution = $('#page_configure_interfaces_cameraresolution').val();
+            var width = resolution.split('x')[0];
+            var height = resolution.split('x')[1];
+            var fps = $('#page_configure_interfaces_camerafps').val();
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Set', 'Configuration', encodeURIComponent(device + ',' + width + ',' + height + ',' + fps));
         });
     });
 };
@@ -337,14 +337,17 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
                 $('#page_configure_interfaces_w800rf32port').val(data.ResponseValue);
                 $('#page_configure_interfaces_w800rf32port').selectmenu('refresh', true);
             });
-            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Get', 'VideoInput', '', function (data) {
-                data = data[0];
-                $('#page_configure_interfaces_cameraport').val(data.Device);
-                $('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
-                $('#page_configure_interfaces_cameraresolution').val(data.Width + 'x' + data.Height);
-                $('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
-                $('#page_configure_interfaces_camerafps').val(data.Fps);
-                $('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
+            HG.Configure.MIG.InterfaceCommand('Media.CameraInput', 'Options.Get', 'Configuration', '', function (data) {
+                data = data.ResponseValue.split(',');
+                if (data.length > 3)
+                {
+                    $('#page_configure_interfaces_cameraport').val(data[0]);
+                    $('#page_configure_interfaces_cameraport').selectmenu('refresh', true);
+                    $('#page_configure_interfaces_cameraresolution').val(data[1] + 'x' + data[2]);
+                    $('#page_configure_interfaces_cameraresolution').selectmenu('refresh', true);
+                    $('#page_configure_interfaces_camerafps').val(data[3]);
+                    $('#page_configure_interfaces_camerafps').selectmenu('refresh', true);
+                }
             });
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.ZWave', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_zwave').val(data.ResponseValue).slider('refresh');
