@@ -66,7 +66,7 @@ namespace ZWaveLib.Devices.ProductHandlers.BeNext
             set
             {
                 userCodeValue = value;
-                nodeHost.SendRequest(userCodeValue.getMessage());
+                nodeHost.SendRequest(userCodeValue.GetMessage());
             }
         }
 

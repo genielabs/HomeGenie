@@ -668,7 +668,7 @@ namespace ZWaveLib.Devices
                 var typeList = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "ZWaveLib.Devices.ProductHandlers.");
                 for (int i = 0; i < typeList.Count; i++)
                 {
-                    //Console.WriteLine(typeList[i].FullName);
+                    //Console.WriteLine(typelist[i].FullName);
                     Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
                     try
                     {

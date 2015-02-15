@@ -63,7 +63,7 @@ namespace ZWaveLib.Devices.Values
             return userCode;
         }
 
-        public byte[] getMessage()
+        public byte[] GetMessage()
         {
             ArrayList tempMessage=new ArrayList();
             tempMessage.Add((byte)CommandClass.UserCode);
@@ -74,7 +74,7 @@ namespace ZWaveLib.Devices.Values
             return (byte[])tempMessage.ToArray(typeof(byte));
         }
 
-        public string tagCodeToHexString()
+        public string TagCodeToHexString()
         {
             return Utility.ByteArrayToHexString(tagCode);
         }
