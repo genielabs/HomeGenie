@@ -27,7 +27,7 @@ using ZWaveLib.Devices.ProductHandlers.Generic;
 
 namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
 {
-    public class ZWaveMeThermostat : Thermostat
+    public class ZWaveMeThermostat : ZWaveLib.Devices.ProductHandlersDeprecated.Generic.Thermostat
     {
         // Z-Wave.Me thermostat
         // 0115:0024:0001
@@ -39,7 +39,7 @@ namespace ZWaveLib.Devices.ProductHandlers.ZwaveME
         /*
          * Set temperature in Celcius.
          */
-        public override void Thermostat_SetPointSet(SetPointType ptype, double temperature)
+        public override void SetSetPoint(SetPointType ptype, double temperature)
         {
             this.nodeHost.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatSetPoint, 

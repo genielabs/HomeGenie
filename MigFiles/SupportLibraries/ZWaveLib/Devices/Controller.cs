@@ -710,6 +710,7 @@ namespace ZWaveLib.Devices
                     break;
                 }
             }
+            // TODO: Deprecate DeviceHandler!
             // If no specific devicehandler could be found, then set a generic handler
             if (node.DeviceHandler == null)
             {
@@ -726,9 +727,9 @@ namespace ZWaveLib.Devices
                 case (byte)ZWaveLib.GenericType.SwitchMultilevel: // eg. dimmer
                     deviceHandler = new ProductHandlers.Generic.Dimmer();
                     break;
-                case (byte)ZWaveLib.GenericType.Thermostat:
-                    deviceHandler = new ProductHandlers.Generic.Thermostat();
-                    break;
+//                case (byte)ZWaveLib.GenericType.Thermostat:
+//                    deviceHandler = new ProductHandlers.Generic.Thermostat();
+//                    break;
                 // Fallback to generic Sensor driver if type is not directly supported.
                 // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
                 default:

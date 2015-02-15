@@ -66,7 +66,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             {
                 levelValue = value;
                 if (levelValue > 0x63) levelValue = 0x63; // 0 to 99 for dimmer type 
-                Handlers.Basic.SetValue(nodeHost, (int)levelValue);
+                Handlers.Basic.Set(nodeHost, (int)levelValue);
             }
         }
 

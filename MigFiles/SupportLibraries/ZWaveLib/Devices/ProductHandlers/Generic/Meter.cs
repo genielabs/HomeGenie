@@ -26,7 +26,7 @@ using System.Linq;
 using System.Text;
 using ZWaveLib.Devices.Values;
 
-namespace ZWaveLib.Devices.ProductHandlers.Generic
+namespace ZWaveLib.Devices.ProductHandlersDerecated.Generic
 {
     public class Meter : IZWaveDeviceHandler
     {

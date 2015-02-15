@@ -74,6 +74,8 @@ namespace ZWaveLib.Devices
         public byte SpecificClass { get; internal set; }
         public byte[] NodeInformationFrame { get; internal set; }
 
+        public Dictionary<string, object> Data = new Dictionary<string, object>();
+        // TODO: Deprecate this field and related classes (the whole ProductHandlers folder)
         public IZWaveDeviceHandler DeviceHandler = null;
 
         public delegate void UpdateNodeParameterEventHandler(object sender, UpdateNodeParameterEventArgs upargs);
@@ -107,19 +109,18 @@ namespace ZWaveLib.Devices
         {
             //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
             //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
-            //
+
             ZWaveEvent messageEvent = null;
             bool handled = false;
             int messageLength = receivedMessage.Length;
-            //
+
+            /*
             if (this.DeviceHandler != null && this.DeviceHandler.HandleRawMessageRequest(receivedMessage))
             {
                 handled = true;
             }
-            //
-            // Only generic command classes are handled directly in this function
-            // other device specific commands are handled by corresponding DeviceHandler
-            //
+            */
+
             if (!handled && messageLength > 8)
             {
 
@@ -140,10 +141,20 @@ namespace ZWaveLib.Devices
                     messageEvent = Handlers.SwitchMultilevel.GetEvent(this, receivedMessage);
                     break;
                 case (byte)CommandClass.Alarm:
+                    messageEvent = Handlers.Alarm.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.SensorBinary:
+                    messageEvent = Handlers.SensorBinary.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.SensorAlarm:
+                    messageEvent = Handlers.SensorAlarm.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.SensorMultilevel:
+                    messageEvent = Handlers.SensorMultilevel.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.SceneActivation:
+                    messageEvent = Handlers.SceneActivation.GetEvent(this, receivedMessage);
+                    break;
                 case (byte)CommandClass.ThermostatMode:
                 case (byte)CommandClass.ThermostatFanMode:
                 case (byte)CommandClass.ThermostatFanState:
@@ -151,16 +162,21 @@ namespace ZWaveLib.Devices
                 case (byte)CommandClass.ThermostatOperatingState:
                 case (byte)CommandClass.ThermostatSetBack: 
                 case (byte)CommandClass.ThermostatSetPoint: 
-
-                    if (this.DeviceHandler != null)
-                    {
-                        handled = this.DeviceHandler.HandleBasicReport(receivedMessage);
-                    }
-
+                    messageEvent = Handlers.Thermostat.GetEvent(this, receivedMessage);
                     break;
-                    
-                case (byte)CommandClass.MultiInstance:
                 case (byte)CommandClass.Meter:
+                    messageEvent = Handlers.Meter.GetEvent(this, receivedMessage);
+                    break;
+                case (byte)CommandClass.Configuration:
+                    messageEvent = Handlers.Configuration.GetEvent(this, receivedMessage);
+                    break;
+                case (byte)CommandClass.Association:
+                    messageEvent = Handlers.Association.GetEvent(this, receivedMessage);
+                    break;
+
+
+
+                case (byte)CommandClass.MultiInstance:
 
                     if (messageLength > 10)
                     {
@@ -168,65 +184,6 @@ namespace ZWaveLib.Devices
                         {
                             handled = this.DeviceHandler.HandleMultiInstanceReport(receivedMessage);
                         }
-                    }
-
-                    break;
-
-                case (byte)CommandClass.Configuration:
-
-                    if (messageLength > 11 && commandType == (byte)Command.ConfigurationReport) // CONFIGURATION PARAMETER REPORT  0x06
-                    {
-                        byte paramId = receivedMessage[9];
-                        byte paramLength = receivedMessage[10];
-                        //
-                        if (!nodeConfigParamsLength.ContainsKey(paramId))
-                        {
-                            nodeConfigParamsLength.Add(paramId, paramLength);
-                        }
-                        else
-                        {
-                            // this shouldn't change on read... but you never know! =)
-                            nodeConfigParamsLength[paramId] = paramLength;
-                        }
-                        //
-                        byte[] bval = new byte[4];
-                        // extract bytes value
-                        Array.Copy(receivedMessage, 11, bval, 4 - (int)paramLength, (int)paramLength);
-                        uint paramval = bval[0];
-                        Array.Reverse(bval);
-                        paramval = BitConverter.ToUInt32(bval, 0);
-                        // convert it to uint
-                        //
-                        RaiseUpdateParameterEvent(this, paramId, ParameterEvent.Configuration, paramval);
-                        //
-                        handled = true;
-                    }
-
-                    break;
-
-                case (byte)CommandClass.Association:
-
-                    if (messageLength > 12 && commandType == (byte)Command.AssociationReport) // ASSOCIATION REPORT 0x03
-                    {
-                        byte groupId = receivedMessage[9];
-                        byte maxAssociations = receivedMessage[10];
-                        byte numAssociations = receivedMessage[11]; // it is always zero ?!?
-                        string assocNodes = "";
-                        if (receivedMessage.Length > 13)
-                        {
-                            for (int a = 12; a < receivedMessage.Length - 1; a++)
-                            {
-                                assocNodes += receivedMessage[a] + ",";
-                            }
-                        }
-                        assocNodes = assocNodes.TrimEnd(',');
-                        //
-                        //_raiseUpdateParameterEvent(this, 0, ParameterType.PARAMETER_ASSOC, groupid);
-                        RaiseUpdateParameterEvent(this, 1, ParameterEvent.Association, maxAssociations);
-                        RaiseUpdateParameterEvent(this, 2, ParameterEvent.Association, numAssociations);
-                        RaiseUpdateParameterEvent(this, 3, ParameterEvent.Association, groupId + ":" + assocNodes);
-                        //
-                        handled = true;
                     }
 
                     break;
@@ -272,7 +229,7 @@ namespace ZWaveLib.Devices
 
                 case (byte)CommandClass.Hail:
 
-                    Handlers.Basic.GetValue(this);
+                    Handlers.Basic.Get(this);
                     handled = true;
 
                     break;
@@ -329,6 +286,7 @@ namespace ZWaveLib.Devices
                 this.RaiseUpdateParameterEvent(messageEvent.Instance, messageEvent.Event, messageEvent.Value);
             }
             //
+            else
             if (!handled && messageLength > 3)
             {
                 if (receivedMessage[3] != 0x13)
@@ -370,64 +328,6 @@ namespace ZWaveLib.Devices
             SendMessage(ZWaveMessage.CreateRequest(this.NodeId, request));
         }
 
-        #region ZWave Command Class Association
-
-        /// <summary>
-        /// Association Set
-        /// </summary>
-        /// <param name="groupid"></param>
-        /// <param name="targetnodeid"></param>
-        public void Association_Set(byte groupid, byte targetnodeid)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Association, 
-                (byte)Command.AssociationSet, 
-                groupid, 
-                targetnodeid 
-            });
-        }
-
-        /// <summary>
-        /// Association Get
-        /// </summary>
-        /// <param name="groupid"></param>
-        public void Association_Get(byte groupid)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Association, 
-                (byte)Command.AssociationGet, 
-                groupid 
-            });
-        }
-
-        /// <summary>
-        /// Association Remove
-        /// </summary>
-        /// <param name="groupid"></param>
-        /// <param name="targetnodeid"></param>
-        public void Association_Remove(byte groupid, byte targetnodeid)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Association, 
-                (byte)Command.AssociationRemove, 
-                groupid, 
-                targetnodeid 
-            });
-        }
-
-        /// <summary>
-        /// Association Grouping Get
-        /// </summary>
-        public void Association_GroupingsGet()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Association,
-                (byte)Command.AssociationGet 
-            });
-        }
-
-        #endregion
-
         #region ZWave Command Class Battery
 
         public void Battery_Get()
@@ -459,72 +359,6 @@ namespace ZWaveLib.Devices
                 (byte)((interval >> 8) & 0xff),
                 (byte)((interval) & 0xff),
                 0x01
-            });
-        }
-
-        #endregion
-
-        #region ZWave Command Class Configuration
-
-        public void Configuration_ParameterSet(byte parameter, Int32 paramValue)
-        {
-            int valueLength = 1;
-            if (!nodeConfigParamsLength.ContainsKey(parameter))
-            {
-                Configuration_ParameterGet(parameter);
-                int retries = 0;
-                while (!nodeConfigParamsLength.ContainsKey(parameter) && retries++ <= 5)
-                {
-                    Thread.Sleep(1000);
-                }
-            }
-            if (nodeConfigParamsLength.ContainsKey(parameter))
-            {
-                valueLength = nodeConfigParamsLength[parameter];
-            }
-            //Console.WriteLine("GOT Parameter Length: " + valuelen);
-            //
-            //            byte[] value = new byte[valuelen]; // { (byte)intvalue };//BitConverter.GetBytes(Int32.Parse(intvalue));
-            byte[] value32 = BitConverter.GetBytes(paramValue);
-            Array.Reverse(value32);
-            //int curbyte = valuelen - 1;
-            //for (int x = 0; x < value32.Length && curbyte >= 0; x++)
-            //{
-            //    value[curbyte--] = value32[x];
-            //}
-            ////if (value32[0] != 0 && valuelen > 1)
-            ////{
-            ////    value[0] = value32[0];
-            ////}
-            ////
-            //Console.WriteLine("\n\n\nCOMPUTED VALUE: " + zp.ByteArrayToString(value32) + "\n->" + zp.ByteArrayToString(BitConverter.GetBytes(intvalue)) + "\n\n");
-            //
-            byte[] msg = new byte[4 + valueLength];
-            msg[0] = (byte)CommandClass.Configuration;
-            msg[1] = (byte)Command.ConfigurationSet;
-            msg[2] = parameter;
-            msg[3] = (byte)valueLength;
-            switch (valueLength)
-            {
-            case 1:
-                Array.Copy(value32, 3, msg, 4, 1);
-                break;
-            case 2:
-                Array.Copy(value32, 2, msg, 4, 2);
-                break;
-            case 4:
-                Array.Copy(value32, 0, msg, 4, 4);
-                break;
-            }
-            this.SendRequest(msg);
-        }
-
-        public void Configuration_ParameterGet(byte parameter)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Configuration, 
-                (byte)Command.ConfigurationGet,
-                parameter
             });
         }
 
@@ -634,59 +468,6 @@ namespace ZWaveLib.Devices
                 instance,
                 (byte)CommandClass.SensorMultilevel,
                 0x04 //
-            });
-        }
-
-        #endregion
-
-        #region ZWave Command Class Meter
-
-        public void Meter_Get(byte scaleType)
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterGet,
-                scaleType
-            });
-        }
-
-        public void Meter_SupportedGet()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterSupportedGet
-            });
-        }
-
-        public void Meter_Reset()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterReset
-            });
-        }
-
-        #endregion
-
-        #region ZWave Command Class Sensor Binary
-
-        public void SensorBinary_Get()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.SensorBinary, 
-                (byte)Command.SensorBinaryGet
-            });
-        }
-
-        #endregion
-
-        #region ZWave Command Class Sensor Multilevel
-
-        public void SensorMultiLevel_Get()
-        {
-            this.SendRequest(new byte[] { 
-                (byte)CommandClass.SensorMultilevel, 
-                (byte)Command.SensorMultilevelGet
             });
         }
 

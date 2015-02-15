@@ -66,6 +66,15 @@
     <Compile Include="Handlers\Basic.cs" />
     <Compile Include="Handlers\SwitchBinary.cs" />
     <Compile Include="Handlers\SwitchMultilevel.cs" />
+    <Compile Include="Handlers\Alarm.cs" />
+    <Compile Include="Handlers\SensorBinary.cs" />
+    <Compile Include="Handlers\SensorAlarm.cs" />
+    <Compile Include="Handlers\SensorMultilevel.cs" />
+    <Compile Include="Handlers\SceneActivation.cs" />
+    <Compile Include="Handlers\Thermostat.cs" />
+    <Compile Include="Handlers\Meter.cs" />
+    <Compile Include="Handlers\Configuration.cs" />
+    <Compile Include="Handlers\Association.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

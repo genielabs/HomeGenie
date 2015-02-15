@@ -22,42 +22,41 @@
 
 using System;
 using ZWaveLib.Devices;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Handlers
 {
-
-    public static class Basic
+    public static class SensorMultilevel
     {
 
         public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];
-            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
+            if (cmdType == (byte)Command.SensorMultilevelReport)
             {
-                int levelValue = (int)message[9];
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Level, (double)levelValue, 0);
+                var sensor = SensorValue.Parse(message);
+                if (sensor.Parameter == ZWaveSensorParameter.Unknown)
+                {
+                    byte key = message[9];
+                    nodeEvent = new ZWaveEvent(node, ParameterEvent.Generic, sensor.Value, 0);
+                    Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
+                }
+                else
+                {
+                    nodeEvent = new ZWaveEvent(node, sensor.EventType, sensor.Value, 0);
+                }
             }
             return nodeEvent;
         }
-
-        public static void Set(ZWaveNode node, int value)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicSet, 
-                byte.Parse(value.ToString())
-            });
-        }
-
+        
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet 
+                (byte)CommandClass.SensorMultilevel, 
+                (byte)Command.SensorMultilevelGet 
             });
         }
 
     }
 }
-

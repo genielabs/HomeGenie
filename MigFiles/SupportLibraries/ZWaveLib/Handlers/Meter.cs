@@ -22,42 +22,47 @@
 
 using System;
 using ZWaveLib.Devices;
+using ZWaveLib.Devices.Values;
 
 namespace ZWaveLib.Handlers
 {
-
-    public static class Basic
+    public static class Meter
     {
-
         public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];
-            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
+            if (cmdType == (byte)Command.MeterReport)
             {
-                int levelValue = (int)message[9];
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Level, (double)levelValue, 0);
+                EnergyValue energy = EnergyValue.Parse(message);
+                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
             }
             return nodeEvent;
         }
-
-        public static void Set(ZWaveNode node, int value)
+        public static void Get(ZWaveNode node, byte scaleType)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicSet, 
-                byte.Parse(value.ToString())
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterGet,
+                scaleType
             });
         }
 
-        public static void Get(ZWaveNode node)
+        public static void GetSupported(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet 
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterSupportedGet
             });
         }
 
+        public static void Reset(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterReset
+            });
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -16,23 +16,20 @@
 */
 
 /*
- *     Author: Mike Tanana
- *     Author: Generoso Martello <gene@homegenie.it> 12-11-2014
+ *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Dynamic;
+using ZWaveLib.Devices;
 using ZWaveLib.Devices.Values;
+using System.Dynamic;
+using System.Collections.Generic;
 
-namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
+namespace ZWaveLib.Handlers
 {
-    public class Thermostat : ZWaveLib.Devices.ProductHandlers.Generic.Sensor
+    public static class Thermostat
     {
-        private ZWaveValue setPoint = new ZWaveValue();
-
         public enum Mode
         {
             Off = 0x00,
@@ -70,7 +67,7 @@ namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
             State14 = 0x0E,
             State15 = 0x0F
         }
-        
+
         public enum FanMode
         {
             AutoLow = 0x00,
@@ -101,7 +98,7 @@ namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
             State14 = 0x0E,
             State15 = 0x0F
         }
-        
+
         public enum SetPointType
         {
             Unused = 0x00,
@@ -120,61 +117,53 @@ namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
             HeatingAway = 0x0D
         }
 
-        public override bool HandleBasicReport(byte[] message)
+        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
-            bool handled = false;
+            ZWaveEvent nodeEvent = null;
             byte cmdClass = message[7];
+            byte cmdType = message[8];
             switch (cmdClass)
             {
-            case (byte)CommandClass.ThermostatMode:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatMode, (Thermostat.Mode)message[9]);
-                handled = true;
+            case (byte)CommandClass.ThermostatMode:
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatMode, (Thermostat.Mode)message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatOperatingState:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatOperatingState, message[9]);
-                handled = true;
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatOperatingState, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatFanMode:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatFanMode, message[9]);
-                handled = true;
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatFanMode, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatFanState:  
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatFanState, message[9]);
-                handled = true;
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatFanState, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatHeating:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatHeating, message[9]);
-                handled = true;
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatHeating, message[9], 0);
                 break;
-            case (byte)CommandClass.ThermostatSetBack:   
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatSetBack, message[9]);
-                handled = true;
+            case (byte)CommandClass.ThermostatSetBack:
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatSetBack, message[9], 0);
                 break;
-            /*
-             * SPI > 01 0C 00 04 00 11 06 43 03 01 2A 02 6C E5
-                2014-06-24T22:01:19.8016380-06:00   HomeAutomation.ZWave    17  ZWave Node  Thermostat.SetPoint 1
-             */
-            case (byte)CommandClass.ThermostatSetPoint:  
-                ZWaveValue zvalue = setPoint = SensorValue.ExtractTemperatureFromBytes(message);
+            case (byte)CommandClass.ThermostatSetPoint:
+                ZWaveValue zvalue = SensorValue.ExtractTemperatureFromBytes(message);
+                var setPoint = GetSetPointData(node);
+                setPoint.Precision = zvalue.Precision;
+                setPoint.Scale = zvalue.Scale;
+                setPoint.Size = zvalue.Size;
+                setPoint.Value = zvalue.Value;
                 dynamic ptype = new ExpandoObject();
                 ptype.Type = (SetPointType)message[9];
                 // convert from Fahrenheit to Celsius if needed
                 ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, ParameterEvent.ThermostatSetPoint, ptype);
-                handled = true;
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatSetPoint, ptype, 0);
                 break;
             }
-
-            if (!handled)
-                handled = base.HandleBasicReport(message);
-
-            return handled;
+            return nodeEvent;
         }
 
+        
         //initial request for thermostat mode, since this doesn't change very often
-        public virtual void GetMode()
+        public static void GetMode(ZWaveNode node)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatMode, 
                 (byte)Command.BasicGet
             });
@@ -183,38 +172,25 @@ namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
         /*
          * This Sets the mode for the thermostat (cool, heat, off, auto)  Based on int commands
          */ 
-        public virtual void SetMode(Mode mode)
+        public static void SetMode(ZWaveNode node, Mode mode)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatMode, 
                 (byte)Command.BasicSet, 
                 (byte)mode
             });
         }
-            
-        public virtual void GetSetPoint(SetPointType ptype)
+
+        public static void GetSetPoint(ZWaveNode node, SetPointType ptype)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatSetPoint, 
                 (byte)Command.ThermostatSetPointGet,
                 (byte)ptype
             });
         }
-        
-        /*
-         * I had no idea how this was going to work
-         * found this:  http://www.agocontrol.com/forum/index.php?topic=175.10;wap2
-         * not sure what it will do with Celsius
-         * 
-         * Set Thermostat Setpoint (Node=6): 0x01, 0x0c, 0x00, 0x13, 0x06, 0x05, 0x43, 0x01, 0x02, 0x09, 0x10, 0x25, 0xc5, 0x5a
-         * 
-         *  0x43 - COMMAND_CLASS_THERMOSTAT_SETPOINT
-            0x01 - THERMOSTAT_SETPOINT_SET
-            0x02 - type (see SetPointType enum)
-            0x09 - 3 bit precision, 2 bit scale (0 = C,1=F), 3 bit size -> Fahrenheit, size == 1
-            0x10 - value to set == 16 degF
-         */
-        public virtual void SetSetPoint(SetPointType ptype, double temperature)
+
+        public static void SetSetPoint(ZWaveNode node, SetPointType ptype, double temperature)
         {
             List<byte> message = new List<byte>();
             message.AddRange(new byte[] { 
@@ -222,42 +198,52 @@ namespace ZWaveLib.Devices.ProductHandlersDeprecated.Generic
                 (byte)Command.ThermostatSetPointSet, 
                 (byte)ptype
             });
+            var setPoint = GetSetPointData(node);
             message.AddRange(Utility.GetValueBytes(temperature, setPoint.Precision, setPoint.Scale, setPoint.Size));
-            this.nodeHost.SendRequest(message.ToArray());
+            node.SendRequest(message.ToArray());
         }
-        
-        public virtual void GetFanState()
+
+        public static void GetFanState(ZWaveNode node)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatFanState, 
                 (byte)Command.BasicGet
             });
         }
 
-        public virtual void GetFanMode()
+        public static void GetFanMode(ZWaveNode node)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatFanMode, 
                 (byte)Command.BasicGet
             });
         }
 
-        public virtual void SetFanMode(FanMode mode)
+        public static void SetFanMode(ZWaveNode node, FanMode mode)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatFanMode, 
                 (byte)Command.BasicSet, 
                 (byte)mode
             });
         }
 
-        public virtual void GetOperatingState()
+        public static void GetOperatingState(ZWaveNode node)
         {
-            this.nodeHost.SendRequest(new byte[] { 
+            node.SendRequest(new byte[] { 
                 (byte)CommandClass.ThermostatOperatingState, 
                 (byte)Command.BasicGet
             });
         }
-
+        
+        private static ZWaveValue GetSetPointData(ZWaveNode node)
+        {
+            if (!node.Data.ContainsKey("SetPoint"))
+            {
+                node.Data.Add("SetPoint", new ZWaveValue());
+            }
+            return (ZWaveValue)node.Data["SetPoint"];
+        }
     }
 }
+

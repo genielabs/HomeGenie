@@ -136,7 +136,7 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             set
             {
                 levelValue = value;
-                Handlers.Basic.SetValue(nodeHost, (int)levelValue);
+                Handlers.Basic.Set(nodeHost, (int)levelValue);
             }
         }
     }
