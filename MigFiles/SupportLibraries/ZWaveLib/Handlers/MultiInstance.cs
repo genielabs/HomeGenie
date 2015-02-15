@@ -34,23 +34,25 @@ namespace ZWaveLib.Handlers
 
             byte cmdClass = message[7];
             byte cmdType = message[8];
-            byte instanceCmdClass = message[9];
+            byte instanceCmdClass = message[10];
 
             switch (cmdType)
             {
             case (byte)Command.MultiInstanceReport:
             case (byte)Command.MultiInstaceV2Encapsulated:
 
-                instanceCmdClass = message[11];
-                byte[] instanceMessage = new byte[message.Length];
+                byte[] instanceMessage;
 
                 // if it's a COMMAND_MULTIINSTANCEV2_ENCAP we shift key and val +1 byte
                 if (cmdType == (byte)Command.MultiInstaceV2Encapsulated)
                 {
+                    instanceCmdClass = message[11];
+                    instanceMessage = new byte[message.Length - 4];
                     System.Array.Copy(message, 4, instanceMessage, 0, message.Length - 4);
                 }
                 else
                 {
+                    instanceMessage = new byte[message.Length - 3];
                     System.Array.Copy(message, 3, instanceMessage, 0, message.Length - 3);
                 }
 
@@ -72,28 +74,28 @@ namespace ZWaveLib.Handlers
                     nodeEvent = SwitchBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        nodeEvent.Event = ParameterEvent.MultiinstanceSwitchBinary;
+                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSwitchBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
                     nodeEvent = SwitchMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        nodeEvent.Event = ParameterEvent.MultiinstanceSwitchMultilevel;
+                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSwitchMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorBinary:
                     nodeEvent = SensorBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        nodeEvent.Event = ParameterEvent.MultiinstanceSensorBinary;
+                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSensorBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorMultilevel:
                     nodeEvent = SensorMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        nodeEvent.Event = ParameterEvent.MultiinstanceSensorMultilevel;
+                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSensorMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.Meter:
