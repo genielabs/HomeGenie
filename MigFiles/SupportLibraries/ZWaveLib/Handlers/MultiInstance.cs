@@ -34,7 +34,7 @@ namespace ZWaveLib.Handlers
 
             byte cmdClass = message[7];
             byte cmdType = message[8];
-            byte instanceCmdClass = message[10];
+            byte instanceCmdClass = message[9];
 
             switch (cmdType)
             {
@@ -42,6 +42,7 @@ namespace ZWaveLib.Handlers
             case (byte)Command.MultiInstaceV2Encapsulated:
 
                 byte[] instanceMessage;
+                byte instanceNumber = message[9];
 
                 // if it's a COMMAND_MULTIINSTANCEV2_ENCAP we shift key and val +1 byte
                 if (cmdType == (byte)Command.MultiInstaceV2Encapsulated)
@@ -52,6 +53,7 @@ namespace ZWaveLib.Handlers
                 }
                 else
                 {
+                    instanceCmdClass = message[10];
                     instanceMessage = new byte[message.Length - 3];
                     System.Array.Copy(message, 3, instanceMessage, 0, message.Length - 3);
                 }
@@ -74,28 +76,28 @@ namespace ZWaveLib.Handlers
                     nodeEvent = SwitchBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSwitchBinary, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSwitchBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
                     nodeEvent = SwitchMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSwitchMultilevel, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSwitchMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorBinary:
                     nodeEvent = SensorBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSensorBinary, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSensorBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorMultilevel:
                     nodeEvent = SensorMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(nodeEvent.Instance, ParameterEvent.MultiinstanceSensorMultilevel, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSensorMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.Meter:
@@ -138,7 +140,7 @@ namespace ZWaveLib.Handlers
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.MultiInstance, 
-                (byte)Command.MultiInstanceCountGet, // 0x04 = GET, 0x05 = REPORT
+                (byte)Command.MultiInstanceCountGet,
                 commandClass
             });
         }
@@ -195,7 +197,6 @@ namespace ZWaveLib.Handlers
 
         public static void SensorBinaryGet(ZWaveNode node, byte instance)
         {
-            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.MultiInstance, 
                 0x06, // ??
@@ -207,7 +208,6 @@ namespace ZWaveLib.Handlers
 
         public static void SensorMultiLevelGet(ZWaveNode node, byte instance)
         {
-            // 0x01, 0x0C, 0x00, 0x13, node, 0x05, 0x60, 0x06,       0x01, 0x31, 0x04, 0x05, 0x03, 0x00
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.MultiInstance, 
                 0x06, // ??
