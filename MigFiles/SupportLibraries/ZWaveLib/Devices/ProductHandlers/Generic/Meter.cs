@@ -50,8 +50,20 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
 
         public virtual bool HandleBasicReport(byte[] message)
         {
-            return false;
+            bool processed = false;
+            //
+            byte commandClass = message[7];
+            byte commandType = message[8];
+            //
+            processed = TryHandleMessage(commandClass, commandType, message);
+            return processed;
         }
+
+        /*
+         * Important Note: When the command class at message[7] is METER and command at message[8] is METER_REPORT, it is NOT a multi-instance. It's a standard 
+         * report. All multi-instance types will be identified as such at message[7]. A multi-instance/ENCAP will store it's encapsulated commandclass in 
+         * message[11]. To avoid confusion, we should handle METER classes as standard reports.
+         * */
 
         public virtual bool HandleMultiInstanceReport(byte[] message)
         {
@@ -59,18 +71,127 @@ namespace ZWaveLib.Devices.ProductHandlers.Generic
             //                       ^^        |  |
             //                                 +--|------> 0x31 Command Class Meter
             //                                    +------> 0x02 Meter Report
-            bool processed = false;
+
             //
             byte commandClass = message[7];
             byte commandType = message[8];
             //
-            if (commandClass == (byte)CommandClass.Meter && commandType == (byte)Command.MeterReport)
+            if (commandClass == (byte)CommandClass.MultiInstance)
             {
-                // TODO: should check meter report type (Electric, Gas, Water) and value precision scale
-                // TODO: the code below parse always as Electric type
-                EnergyValue energy = EnergyValue.Parse(message);
-                nodeHost.RaiseUpdateParameterEvent(nodeHost, 0, energy.EventType, energy.Value);
-                processed = true;
+                // v1 ENCAP: Uses instance;
+                // v2 ENCAP: uses Start/End POint.
+
+                // NOTE: MultiChannel is the name for the v2 of MutilInstance per SPEC.
+                if (commandType == (byte)Command.MultiInstaceV2Encapsulated)
+                {
+                    //dataStart = 15;
+                    byte sourceEndPoint = message[9];
+                    byte destEndPoint = message[10];
+
+                    /* We now have the ENCAP part of the frame. Next step is to determine format of inner frame 
+                    * based on cmd being called.
+                    * */
+                    byte encappedCmdClass = message[11];
+                    byte encappedCmd = message[12];
+
+                    return TryHandleMultiInstanceMessage(encappedCmdClass, encappedCmd, message, sourceEndPoint);
+
+                }
+                else if (commandType == (byte)Command.MultiInstanceReport) //MultiInstanceCmd_Encap
+                {
+                    // Instance only used for MULTIINSTANCE (v1).
+                    byte instance = message[9];
+                    byte encappedCmdClass = message[10];
+                    byte encappedCmd = message[11];
+
+                    return TryHandleMultiInstanceMessage(encappedCmdClass, encappedCmd, message, instance);
+                }
+
+            }
+            else
+            {
+                // TODO: COMMAND was not a METER, so ERROR and/or not handled!
+            }
+
+            #region "Developer Reference"
+
+            /* For reference, here are the actual command classes from SPEC:
+             * 
+             * MultiInstance is used for v1.
+             * MultiChannel is used for v2 and is backward compatible with MultiInstance.
+             * 
+        MultiInstanceCmd_Get                = 0x04,
+        MultiInstanceCmd_Report             = 0x05,
+        MultiInstanceCmd_Encap              = 0x06,
+    
+        // Version 2
+        MultiChannelCmd_EndPointGet         = 0x07,
+        MultiChannelCmd_EndPointReport          = 0x08,
+        MultiChannelCmd_CapabilityGet           = 0x09,
+        MultiChannelCmd_CapabilityReport        = 0x0a,
+        MultiChannelCmd_EndPointFind            = 0x0b,
+        MultiChannelCmd_EndPointFindReport      = 0x0c,
+        MultiChannelCmd_Encap               = 0x0d,
+             * */
+
+
+
+            //
+            // QUESTION: What if MULTICHANNEL comm class is NOT encapped??? 
+            // ANSWER:   We only support: MULTI_INSTANCE_REPORT and ENCAPP. MULTI_INSTANCE_REPORT just lists all endpoints, so is useless here.
+            //
+            // MULTI_INSTANCE_REPORT:  The Multi Instance Report Command reports the number of instances of a given Command Class in a device.
+            // + SubCmdClass[7-0]
+            // + RESERVED[7] Instances[6-0]
+            /*
+                 Please be aware that the identifiers for the new Multi Channel command class is the same as the Multi
+Instance command class and the new Multi Channel Association command class identifier is the same
+as the Multi Instance Association command class. For this reason the two new command classes will
+start with version 2. In this way this new command class will be backward compatible with any existing
+products implementing the Multi Instance command class.
+There are two exceptions to the backward capability:
+1. The number of instances are changed from 255 in version 1 to 127 in version 2
+2. Multi Instance devices cannot control Multi Channels where the end points are not identical
+                 
+                 This structure means any controller that needs to control a device that either implements Multi Channel
+command class or Multi Channel Association command class MUST interview the device for the version
+before using these classes. If the Version Command Class is not supported or version 1 is reported the
+controller MUST use the Multi Instance and Multi Instance Association command classes. 
+                 
+                 * */
+            #endregion
+
+            return false;
+        }
+
+        public bool TryHandleMessage(byte cmdClass, byte cmd, byte[] message)
+        {
+            return TryHandleMultiInstanceMessage(cmdClass, cmd, message, 0);
+        }
+
+        public bool TryHandleMultiInstanceMessage(byte cmdClass, byte cmd, byte[] message, int instance)
+        {
+            bool processed = false;
+            if (cmdClass == (byte)CommandClass.Meter)
+            {
+                if (cmd == (byte)Command.MeterReport)
+                {
+                    MeterValue value = MeterValue.Parse(message);
+
+                    nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, value.EventType, value.Value);
+
+                    // TODO: Below needs arg to indicate it is a previous value, not current.
+                    //nodeHost.RaiseUpdateParameterEvent(nodeHost, instance, value.EventType, value.PreviousValue);
+                    processed = true;
+                }
+                else
+                {
+                    // TODO: REPORT Error: CommandClass METER only supports Command METER_REPORT.
+                }
+            }
+            else
+            {
+                // TODO: REPORT error: cmdClass not supported in MeterValue.
             }
             return processed;
         }
