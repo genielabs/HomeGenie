@@ -64,6 +64,8 @@
     <Compile Include="Values\AlarmValue.cs" />
     <Compile Include="Values\EnergyValue.cs" />
     <Compile Include="Values\SensorValue.cs" />
+    <Compile Include="Values\UserCodeValue.cs" />
+    <Compile Include="Handlers\UserCode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

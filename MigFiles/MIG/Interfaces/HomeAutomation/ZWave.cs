@@ -107,6 +107,8 @@ namespace MIG.Interfaces.HomeAutomation
                 { 808, "Thermostat.GetAll" },
                 { 809, "Thermostat.OperatingStateGet" },
 
+                { 901, "UserCode.Set" },
+
                 { 1000, "NodeInfo.Get" },
             };
 
@@ -159,6 +161,8 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command THERMOSTAT_FANSTATEGET = new Command(807);
             public static readonly Command THERMOSTAT_GETALL = new Command(808);
             public static readonly Command THERMOSTAT_OPERATINGSTATE_GET = new Command(809);
+
+            public static readonly Command USERCODE_SET = new Command(901);
 
             private readonly String name;
             private readonly int value;
@@ -542,7 +546,13 @@ namespace MIG.Interfaces.HomeAutomation
                     raisePropertyChanged = true;
                     raiseParameter = "1";
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Basic.Set(node, 0XFF);
+                    int level = 0xFF;
+                    if (node.GenericClass == (byte)GenericType.SwitchMultilevel)
+                    {
+                        level = 99;
+                    }
+                    Basic.Set(node, level);
+                    SetNodeLevel(node, level);
                 }
                 else if (command == Command.CONTROL_OFF)
                 {
@@ -550,34 +560,33 @@ namespace MIG.Interfaces.HomeAutomation
                     raiseParameter = "0";
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     Basic.Set(node, 0x00);
+                    SetNodeLevel(node, 0x00);
                 }
                 else if (command == Command.CONTROL_LEVEL)
                 {
                     raisePropertyChanged = true;
                     raiseParameter = Math.Round(double.Parse(request.GetOption(0)) / 100D, 2).ToString(CultureInfo.InvariantCulture);
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    var level = (Math.Round(double.Parse(request.GetOption(0)) / 100D * 99D, 2));
-                    Basic.Set(node, (int)level);
+                    var level = (int)(Math.Round(double.Parse(request.GetOption(0)) / 100D * 99D, 2));
+                    Basic.Set(node, level);
+                    SetNodeLevel(node, level);
                 }
                 else if (command == Command.CONTROL_TOGGLE)
                 {
                     raisePropertyChanged = true;
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    // TODO: should use GetData to store last known level?!?!
-                    /*
-                    if (((Switch)node.DeviceHandler).Level == 0)
+                    if (GetNodeLevel(node) == 0)
                     {
                         raiseParameter = "1";
-                        // Basic.Set 0xFF
-                        ((Switch)node.DeviceHandler).On();
+                        Basic.Set(node, 0xFF);
+                        SetNodeLevel(node, 0xFF);
                     }
                     else
                     {
                         raiseParameter = "0";
-                        // Basic.Set 0x00
-                        ((Switch)node.DeviceHandler).Off();
+                        Basic.Set(node, 0x00);
+                        SetNodeLevel(node, 0x00);
                     }
-                    */
                 }
                 else if (command == Command.THERMOSTAT_MODEGET)
                 {
@@ -634,7 +643,8 @@ namespace MIG.Interfaces.HomeAutomation
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     Thermostat.GetFanState(node);
                 }
-/*                else if (command == Command.THERMOSTAT_GETALL)
+                /*
+                else if (command == Command.THERMOSTAT_GETALL)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     // TODO: it should query all SetPointType supported by current node, not just Heating
@@ -648,11 +658,20 @@ namespace MIG.Interfaces.HomeAutomation
                     // TODO: find an alternative to the deprecated method below
                     //Thread.Sleep(200);
                     //node.RequestMultiLevelReport();
-                }*/
+                }
+                */
                 else if (command == Command.THERMOSTAT_OPERATINGSTATE_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     Thermostat.GetOperatingState(node);
+                }
+                else if(command==Command.USERCODE_SET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    byte userId = byte.Parse(request.GetOption(0));
+                    byte userIdStatus = byte.Parse(request.GetOption(1));
+                    byte[] tagCode = ZWaveLib.Utility.HexStringToByteArray(request.GetOption(2));
+                    UserCode.Set(node, new ZWaveLib.Values.UserCodeValue(userId, userIdStatus, tagCode));
                 }
             }
             catch
@@ -1087,7 +1106,10 @@ namespace MIG.Interfaces.HomeAutomation
                 path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
                 value = ((dynamic)value).Value;
                 break;
-
+            case ParameterEvent.UserCode:
+                path = "EntryControl.UserCode";
+                value = ((ZWaveLib.Values.UserCodeValue)value).TagCodeToHexString();
+                break;
             default:
                 Console.WriteLine(
                     "UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}",
@@ -1107,6 +1129,28 @@ namespace MIG.Interfaces.HomeAutomation
                 Path = path,
                 Value = value
             });
+        }
+
+        private void SetNodeLevel(ZWaveNode node, int level)
+        {
+            if (!node.Data.ContainsKey("Level"))
+            {
+                node.Data.Add("Level", level);
+            }
+            else
+            {
+                node.Data["Level"] = level;
+            }
+        }
+
+        private int GetNodeLevel(ZWaveNode node)
+        {
+            int level = 0;
+            if (node.Data.ContainsKey("Level"))
+            {
+                level = (int)node.Data["Level"];
+            }
+            return level;
         }
 
         private void RaisePropertyChanged(InterfacePropertyChangedAction ifaceaction)

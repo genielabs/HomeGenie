@@ -149,6 +149,10 @@ namespace ZWaveLib
                     messageEvent = Thermostat.GetEvent(this, receivedMessage);
                     break;
 
+                case (byte)CommandClass.UserCode:
+                    messageEvent = UserCode.GetEvent(this, receivedMessage);
+                    break;
+
                 case (byte)CommandClass.Association:
                     messageEvent = Association.GetEvent(this, receivedMessage);
                     break;
@@ -218,6 +222,19 @@ namespace ZWaveLib
             }
 
             return false;
+        }
+
+        public bool SupportCommandClass(CommandClass c)
+        {
+            bool isSupported = false;
+            for (int i = 0; i < NodeInformationFrame.Length; i++)
+            {
+                if (NodeInformationFrame[i] == (byte)c)
+                {
+                    isSupported = true;
+                }
+            }
+            return isSupported;
         }
 
         public void SendRequest(byte[] request)

@@ -123,7 +123,9 @@ namespace ZWaveLib
         Version = 0x86,
         //
         SensorAlarm = 0x9C,
-        SilenceAlarm = 0x9D
+        SilenceAlarm = 0x9D,
+        //
+        UserCode = 0x63
     }
 
     public enum Command : byte
@@ -199,7 +201,10 @@ namespace ZWaveLib
         ThermostatSetPointSupportedGet = 0x04,
         ThermostatSetPointSupportedReport = 0x05,
         //
-        SceneActivationSet = 0x01
+        SceneActivationSet = 0x01,
+        //
+        UserCodeReport = 0x03,
+        UserCodeSet = 0x01
     }
 
     public enum GenericType : byte
