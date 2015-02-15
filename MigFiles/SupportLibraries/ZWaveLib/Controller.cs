@@ -623,7 +623,7 @@ namespace ZWaveLib
 
         private ZWaveNode CreateDevice(byte nodeId, byte genericClass)
         {
-            string className = "ZWaveLib.Devices.";
+            string className = "ZWaveLib.";
             switch (genericClass)
             {
             case (byte)GenericType.StaticController:
