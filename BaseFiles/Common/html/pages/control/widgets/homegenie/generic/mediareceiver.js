@@ -108,10 +108,15 @@
                     else if (state == 'STOPPED') {
                         playbutton.show();
                         pausebutton.hide();
+                        _this.Widget.find('[data-ui-field=media_position]').html('');
                     }
                     else if (state == 'PLAYING') {
                         playbutton.hide();
                         pausebutton.show();
+                        servicecall('AvMedia.GetPositionInfo', module.Domain, module.Address, '', function (res) {
+                            var posinfo = eval(res)[0];
+                            _this.Widget.find('[data-ui-field=media_position]').html(posinfo.RelTime);
+                        });
                     }
                 }
                 _this.PendingRequests--;

@@ -1674,15 +1674,6 @@ namespace HomeGenie.Service
                 //
                 // configure MIG
                 //
-                if (systemConfiguration.MIGService.GetInterface("HomeAutomation.Insteon") == null)
-                {
-                    var options = new List<MIGServiceConfiguration.Interface.Option>();
-                    options.Add(new MIGServiceConfiguration.Interface.Option(){ Name = "Port", Value = "" });
-                    systemConfiguration.MIGService.Interfaces.Add(new MIGServiceConfiguration.Interface(){ 
-                        Domain = "HomeAutomation.Insteon",
-                        Options = options
-                    });
-                }
                 migService.Configuration = systemConfiguration.MIGService;
             }
             catch (Exception ex)

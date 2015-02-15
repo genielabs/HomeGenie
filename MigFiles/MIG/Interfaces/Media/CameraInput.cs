@@ -45,14 +45,12 @@ namespace MIG.Interfaces.Media
             {
                 {101, "Camera.GetPicture"},
                 {102, "Camera.GetLuminance"},
-                {201, "Camera.GetDevice"},
                 {202, "Camera.SetDevice"}
             };
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
             public static readonly Command CAMERA_GETPICTURE = new Command(101);
             public static readonly Command CAMERA_GETLUMINANCE = new Command(102);
-            public static readonly Command CAMERA_GETDEVICE = new Command(201);
             public static readonly Command CAMERA_SETDEVICE = new Command(202);
 
             private readonly String name;
@@ -135,7 +133,7 @@ namespace MIG.Interfaces.Media
             #endregion
         }
 
-        public class CameraDevice
+        public class CameraConfiguration
         {
             public string Device = "/dev/video0";
             public uint Width = 320;
@@ -144,23 +142,22 @@ namespace MIG.Interfaces.Media
         }
 
         private IntPtr cameraSource = IntPtr.Zero;
-        private CameraDevice videoInput = new CameraDevice();
+        private CameraConfiguration configuration = new CameraConfiguration();
         private object readPictureLock = new object();
 
         #region public members
 
-        public CameraDevice GetVideoInput()
+        public CameraConfiguration GetConfiguration()
         {
-            return videoInput;
+            return configuration;
         }
 
-        public void SetVideoInput(string device, uint width, uint height, uint fps)
+        public void SetConfiguration(string device, uint width, uint height, uint fps)
         {
-            videoInput.Device = device;
-            videoInput.Width = width;
-            videoInput.Height = height;
-            videoInput.Fps = fps;
-            Connect();
+            configuration.Device = device;
+            configuration.Width = width;
+            configuration.Height = height;
+            configuration.Fps = fps;
         }
 
         #endregion
@@ -199,13 +196,6 @@ namespace MIG.Interfaces.Media
             module.Address = "AV0";
             module.Description = "Video 4 Linux Video Input";
             module.ModuleType = MIG.ModuleTypes.Sensor;
-            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                Domain = this.Domain,
-                SourceId = module.Address,
-                SourceType = "Camera Input",
-                Path = "Widget.DisplayModule",
-                Value = "homegenie/generic/camerainput"
-            });
             modules.Add(module);
 
             return modules;
@@ -220,14 +210,22 @@ namespace MIG.Interfaces.Media
             {
                 Disconnect();
             }
-            /*SetVideoInput(
-                this.GetOption("Device"),
-                this.GetOption("Width"),
-                this.GetOption("Height"),
-                this.GetOption("Fps")
-            );*/
-            cameraSource = CameraCaptureV4LInterop.OpenCameraStream(videoInput.Device, videoInput.Width, videoInput.Height, videoInput.Fps);
+            if (this.GetOption("Configuration") != null && !string.IsNullOrEmpty(this.GetOption("Configuration").Value))
+            {
+                var config = this.GetOption("Configuration").Value.Split(',');
+                SetConfiguration(config[0], uint.Parse(config[1]), uint.Parse(config[2]), uint.Parse(config[3]));
+            }
+            cameraSource = CameraCaptureV4LInterop.OpenCameraStream(configuration.Device, configuration.Width, configuration.Height, configuration.Fps);
             if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+            //
+            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                Domain = this.Domain,
+                SourceId = "AV0",
+                SourceType = "Camera Input",
+                Path = "Widget.DisplayModule",
+                Value = "homegenie/generic/camerainput"
+            });
+            //
             return (cameraSource != IntPtr.Zero);
         }
         /// <summary>
@@ -284,14 +282,10 @@ namespace MIG.Interfaces.Media
             {
                 // TODO: ....
             }
-            else if (request.Command == Command.CAMERA_GETDEVICE)
-            {
-                //request.Response = JsonSerializeObject( cameraDevice );
-            }
             else if (request.Command == Command.CAMERA_SETDEVICE)
             {
-                SetVideoInput(request.GetOption(0).Replace("|", "/"), uint.Parse(request.GetOption(1)), uint.Parse(request.GetOption(2)), uint.Parse(request.GetOption(3)));
-                //request.Response = "OK"; // Utility.GetSimpleJson( ... )
+                this.GetOption("Configuration").Value = request.GetOption(0) + "," + request.GetOption(1) + "," + request.GetOption(2) + "," + request.GetOption(3);
+                Connect();
             }
             //
             return request.Response;
