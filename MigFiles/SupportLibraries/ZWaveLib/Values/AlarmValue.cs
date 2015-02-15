@@ -22,7 +22,7 @@
 
 using System;
 
-namespace ZWaveLib.Devices.Values
+namespace ZWaveLib.Values
 {
     public enum ZWaveAlarmType
     {

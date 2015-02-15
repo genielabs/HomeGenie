@@ -1,6 +1,6 @@
 using System;
 
-namespace ZWaveLib.Devices
+namespace ZWaveLib
 {
     
     public enum ParameterEvent

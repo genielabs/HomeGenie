@@ -21,11 +21,10 @@
  */
 
 using System;
-using ZWaveLib.Devices;
 
 namespace ZWaveLib.Handlers
 {
-    public class SwitchMultilevel
+    public static class SwitchMultilevel
     {
         public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {

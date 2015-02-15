@@ -21,20 +21,30 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-using ZWaveLib.Devices.ProductHandlers.Generic;
-
-namespace ZWaveLib.Devices.ProductHandlers.Aeon
+namespace ZWaveLib.Handlers
 {
-    public class MicroSmartEnergySwitch : Switch
+    public static class Battery
     {
-
-        public override bool CanHandleProduct(ManufacturerSpecific productspecs)
+        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
-            return (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0003" && productspecs.ProductId == "000C");
+            ZWaveEvent nodeEvent = null;
+            byte cmdType = message[8];
+            if (message.Length > 7 && cmdType == (byte)Command.BatteryReport) // Battery Report
+            {
+                int batteryLevel = message[9];
+                nodeEvent = new ZWaveEvent(node, ParameterEvent.Battery, batteryLevel, 0);
+            }
+            return nodeEvent;
         }
 
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Battery, 
+                (byte)Command.BatteryGet 
+            });
+        }
     }
 }
+

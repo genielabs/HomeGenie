@@ -21,7 +21,6 @@
  */
 
 using System;
-using ZWaveLib.Devices;
 
 namespace ZWaveLib
 {

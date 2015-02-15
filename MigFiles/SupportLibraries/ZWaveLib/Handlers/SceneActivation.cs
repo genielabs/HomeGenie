@@ -21,8 +21,7 @@
  */
 
 using System;
-using ZWaveLib.Devices;
-using ZWaveLib.Devices.Values;
+using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {

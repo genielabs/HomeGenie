@@ -1,34 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Association.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
       <File FileName="../HISTORY.TXT" Line="1" Column="1" />
-      <File FileName="../README.TXT" Line="1" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ZWaveNode.cs" Line="176" Column="21" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/CommandClass.cs" Line="203" Column="9" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Switch.cs" Line="139" Column="63" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Dimmer.cs" Line="1" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Sensor.cs" Line="108" Column="48" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Basic.cs" Line="40" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SwitchBinary.cs" Line="34" Column="106" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SwitchMultilevel.cs" Line="38" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Alarm.cs" Line="38" Column="17" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SensorBinary.cs" Line="38" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SensorAlarm.cs" Line="40" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Aeon/MultiSensor.cs" Line="51" Column="48" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Fibaro/MotionSensor.cs" Line="1" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SensorMultilevel.cs" Line="49" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/SceneActivation.cs" Line="39" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Thermostat.cs" Line="32" Column="72" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Thermostat.cs" Line="201" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Zwave.Me/ZWaveMeThermostat.cs" Line="30" Column="89" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Meter.cs" Line="29" Column="52" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Meter.cs" Line="39" Column="1" />
-      <File FileName="../MigFiles/MIG/Interfaces/HomeAutomation/ZWave.cs" Line="511" Column="124" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Devices/Controller.cs" Line="732" Column="3" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Configuration.cs" Line="60" Column="1" />
-      <File FileName="../HomeGenie/Program.cs" Line="139" Column="1" />
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Handlers/Association.cs" Line="87" Column="23" />
+      <File FileName="../README.TXT" Line="2" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

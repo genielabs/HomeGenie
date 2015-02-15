@@ -32,10 +32,6 @@ using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 
 using ZWaveLib;
-using ZWaveLib.Devices;
-
-//using System.Management;
-using ZWaveLib.Devices.ProductHandlers.Generic;
 
 using MIG.Interfaces.HomeAutomation.Commons;
 using ZWaveLib.Handlers;
@@ -402,16 +398,16 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SwitchBinary);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SwitchBinary);
                         break;
                     case "Switch.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SwitchMultilevel);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SwitchMultilevel);
                         break;
                     case "Sensor.Binary":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SensorBinary);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SensorBinary);
                         break;
                     case "Sensor.MultiLevel":
-                        node.MultiInstance_GetCount((byte)ZWaveLib.CommandClass.SensorMultilevel);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SensorMultilevel);
                         break;
                     }
                 }
@@ -423,16 +419,16 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        node.MultiInstance_SwitchBinaryGet(instance);
+                        MultiInstance.SwitchBinaryGet(node, instance);
                         break;
                     case "Switch.MultiLevel":
-                        node.MultiInstance_SwitchMultiLevelGet(instance);
+                        MultiInstance.SwitchMultiLevelGet(node, instance);
                         break;
                     case "Sensor.Binary":
-                        node.MultiInstance_SensorBinaryGet(instance);
+                        MultiInstance.SensorBinaryGet(node, instance);
                         break;
                     case "Sensor.MultiLevel":
-                        node.MultiInstance_SensorMultiLevelGet(instance);
+                        MultiInstance.SensorMultiLevelGet(node, instance);
                         break;
                     }
                 }
@@ -448,11 +444,11 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        node.MultiInstance_SwitchBinarySet(instance, value);
+                        MultiInstance.SwitchBinarySet(node, instance, value);
                             //raiseparam = (double.Parse(request.GetOption(2)) / 255).ToString();
                         break;
                     case "Switch.MultiLevel":
-                        node.MultiInstance_SwitchMultiLevelSet(instance, value);
+                        MultiInstance.SwitchMultiLevelSet(node, instance, value);
                             //raiseparam = (double.Parse(request.GetOption(2)) / 100).ToString(); // TODO: should it be 99 ?
                         break;
                     }
@@ -492,7 +488,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.BATTERY_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.Battery_Get();
+                    Battery.Get(node);
                 }
                 ////-----------------------
                 else if (command == Command.ASSOCIATION_SET)
@@ -514,7 +510,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.MANUFACTURERSPECIFIC_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.ManufacturerSpecific_Get();
+                    ManufacturerSpecific.Get(node);
                 }
                 ////------------------
                 else if (command == Command.CONFIG_PARAMETERSET)
@@ -533,46 +529,42 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.WAKEUP_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.WakeUp_Get();
+                    WakeUp.Get(node);
                 }
                 else if (command == Command.WAKEUP_SET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    node.WakeUp_Set(uint.Parse(request.GetOption(0)));
+                    WakeUp.Set(node, uint.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.CONTROL_ON)
                 {
                     raisePropertyChanged = true;
                     raiseParameter = "1";
-                    //
-                    // Basic.Set 0xFF
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Switch)node.DeviceHandler).On();
+                    Basic.Set(node, 0XFF);
                 }
                 else if (command == Command.CONTROL_OFF)
                 {
                     raisePropertyChanged = true;
                     raiseParameter = "0";
-                    //
-                    // Basic.Set 0x00
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Switch)node.DeviceHandler).Off();
+                    Basic.Set(node, 0x00);
                 }
                 else if (command == Command.CONTROL_LEVEL)
                 {
                     raisePropertyChanged = true;
-                    raiseParameter = (double.Parse(request.GetOption(0)) / 100).ToString();
-                    //
-                    // Basic.Set <level>
+                    raiseParameter = Math.Round(double.Parse(request.GetOption(0)) / 100D, 2).ToString(CultureInfo.InvariantCulture);
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    ((Dimmer)node.DeviceHandler).Level = int.Parse(request.GetOption(0));
+                    var level = (Math.Round(double.Parse(request.GetOption(0)) / 100D * 99D, 2));
+                    Basic.Set(node, (int)level);
                 }
                 else if (command == Command.CONTROL_TOGGLE)
                 {
                     raisePropertyChanged = true;
-                    //
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    // TODO: should use GetData to store last known level?!?!
+                    /*
                     if (((Switch)node.DeviceHandler).Level == 0)
                     {
                         raiseParameter = "1";
@@ -585,6 +577,7 @@ namespace MIG.Interfaces.HomeAutomation
                         // Basic.Set 0x00
                         ((Switch)node.DeviceHandler).Off();
                     }
+                    */
                 }
                 else if (command == Command.THERMOSTAT_MODEGET)
                 {
@@ -989,7 +982,7 @@ namespace MIG.Interfaces.HomeAutomation
                 path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
                 break;
             case ParameterEvent.ManufacturerSpecific:
-                ManufacturerSpecific mf = (ManufacturerSpecific)value;
+                ManufacturerSpecificInfo mf = (ManufacturerSpecificInfo)value;
                 path = "ZWaveNode.ManufacturerSpecific";
                 value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
                 break;
@@ -1130,6 +1123,7 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
 
+        /*
         private void UpdateZWaveNodeDeviceHandler(int nodeId)
         {
             var node = controller.Devices.Find(zn => zn.NodeId == nodeId);
@@ -1141,10 +1135,11 @@ namespace MIG.Interfaces.HomeAutomation
                 Value = node.DeviceHandler.GetType().FullName
             });
         }
-
+        */
+        // TODO: deprecate this... in the ZWaveLib.Controller class as well
         private void controller_ManufacturerSpecificResponse(object sender, ManufacturerSpecificResponseEventArg args)
         {
-            UpdateZWaveNodeDeviceHandler(args.NodeId);
+            //UpdateZWaveNodeDeviceHandler(args.NodeId);
         }
 
         #endregion

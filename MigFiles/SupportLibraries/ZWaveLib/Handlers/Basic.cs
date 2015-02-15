@@ -21,11 +21,9 @@
  */
 
 using System;
-using ZWaveLib.Devices;
 
 namespace ZWaveLib.Handlers
 {
-
     public static class Basic
     {
 

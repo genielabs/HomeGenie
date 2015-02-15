@@ -21,7 +21,6 @@
  */
 
 using System;
-using ZWaveLib.Devices;
 using System.Collections.Generic;
 using System.Threading;
 

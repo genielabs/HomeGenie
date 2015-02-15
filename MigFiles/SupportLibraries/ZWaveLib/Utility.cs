@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ZWaveLib.Devices.Values
+namespace ZWaveLib
 {
     public class ZWaveValue
     {
@@ -98,6 +98,16 @@ namespace ZWaveLib.Devices.Values
                 // TODO: report/handle exception
             }
             return result;
+        }
+        
+        public static String ByteArrayToString(byte[] message)
+        {
+            String returnValue = String.Empty;
+            foreach (byte b in message)
+            {
+                returnValue += b.ToString("X2") + " ";
+            }
+            return returnValue.Trim();
         }
 
     }
