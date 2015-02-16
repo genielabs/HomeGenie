@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+16/02/2015 1.00 beta rev 479-git1
+    - Fixed "Module exception data" issue #127
+    - Fixed missing Y axis in statistics graph (issue #123)
+    - ZWaveLib rework - phase 1 completed (also solve issue #118)
+
 14/02/2015 1.00 beta rev 479    
     - Fixed bug in Statistics class when parsing address of remote modules
     - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue

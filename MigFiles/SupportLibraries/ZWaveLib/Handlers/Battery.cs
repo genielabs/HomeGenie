@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -21,18 +21,30 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ZWaveLib.Devices.ProductHandlers.FortrezZ
+namespace ZWaveLib.Handlers
 {
-    public class SSA1StrobeSiren : ProductHandlers.Generic.Dimmer
+    public static class Battery
     {
-
-        public override bool CanHandleProduct(ManufacturerSpecific productspecs)
+        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
-            return (productspecs.ManufacturerId == "0084" && productspecs.TypeId == "0311" && productspecs.ProductId == "0109");
+            ZWaveEvent nodeEvent = null;
+            byte cmdType = message[8];
+            if (message.Length > 7 && cmdType == (byte)Command.BatteryReport) // Battery Report
+            {
+                int batteryLevel = message[9];
+                nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
+            }
+            return nodeEvent;
         }
 
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Battery, 
+                (byte)Command.BatteryGet 
+            });
+        }
     }
 }
+

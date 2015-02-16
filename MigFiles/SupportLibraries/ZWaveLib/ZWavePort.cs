@@ -23,7 +23,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Linq;
 using SerialPortLib;
-using ZWaveLib.Devices;
+using ZWaveLib.Values;
 
 namespace ZWaveLib
 {
@@ -213,16 +213,6 @@ namespace ZWaveLib
             }
         }
 
-        public String ByteArrayToString(byte[] message)
-        {
-            String returnValue = String.Empty;
-            foreach (byte b in message)
-            {
-                returnValue += b.ToString("X2") + " ";
-            }
-            return returnValue.Trim();
-        }
-
         #endregion Public members
 
         #region Private members
@@ -307,7 +297,7 @@ namespace ZWaveLib
                 }
                 else
                 {
-                    Console.WriteLine("\nZWaveLib: bad checksum message " + ByteArrayToString(message) + "\n");
+                    Console.WriteLine("\nZWaveLib: bad checksum message " + Utility.ByteArrayToString(message) + "\n");
                 }
             }
             else if (header == MessageHeader.CAN)
@@ -318,7 +308,7 @@ namespace ZWaveLib
             }
             else
             {
-                Console.WriteLine("ZWaveLib: unhandled message " + ByteArrayToString(message));
+                Console.WriteLine("ZWaveLib: unhandled message " + Utility.ByteArrayToString(message));
                 // ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
             }
             if (nextMessage != null)

@@ -1,4 +1,4 @@
-﻿/*
+/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -21,20 +21,25 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using ZWaveLib.Values;
 
-using ZWaveLib.Devices.ProductHandlers.Generic;
-
-namespace ZWaveLib.Devices.ProductHandlers.Aeon
+namespace ZWaveLib.Handlers
 {
-    public class MicroSmartEnergyIlluminator : Dimmer
+    public static class SceneActivation
     {
 
-        public override bool CanHandleProduct(ManufacturerSpecific productspecs)
+        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
-            return (productspecs.ManufacturerId == "0086" && productspecs.TypeId == "0003" && productspecs.ProductId == "000D");
+            ZWaveEvent nodeEvent = null;
+            byte cmdType = message[8];
+            if (cmdType == (byte)Command.SceneActivationSet)
+            {
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[9], 0);
+            }
+            return nodeEvent;
         }
 
     }
 }
+
+

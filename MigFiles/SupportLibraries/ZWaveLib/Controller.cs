@@ -28,8 +28,10 @@ using System.Threading;
 using System.Reflection;
 using System.Xml.Serialization;
 using System.IO;
+using ZWaveLib.Handlers;
+using ZWaveLib.Values;
 
-namespace ZWaveLib.Devices
+namespace ZWaveLib
 {
     public delegate void ControllerEventHandler(object source, ControllerEventArgs e);
     public class ControllerEventArgs : EventArgs
@@ -59,7 +61,6 @@ namespace ZWaveLib.Devices
     {
         public byte NodeId { get; set; }
         public byte[] NodeInformationFrame { get; set; }
-        public string DeviceHandler { get; set; }
     }
 
     public class Controller : ZWaveNode
@@ -126,7 +127,7 @@ namespace ZWaveLib.Devices
 
         public void Discovery()
         {
-            OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryStart)); // Send event
+            OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryStart));
             zwavePort.Discovery();
         }
 
@@ -340,7 +341,7 @@ namespace ZWaveLib.Devices
                                 byte[] nodeInfo = new byte[nodeInfoLength - 2];
                                 Array.Copy(args.Message, 8, nodeInfo, 0, nodeInfoLength - 2);
                                 newNode.NodeInformationFrame = nodeInfo;
-                                RaiseUpdateParameterEvent(newNode, 0, ParameterEvent.NodeInfo, zwavePort.ByteArrayToString(nodeInfo));
+                                RaiseUpdateParameterEvent(newNode, 0, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo));
                                 SaveNodesConfig();
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.AddNodeProtocolDone /* || nodeOperation == (byte)NodeFunctionStatus.AddNodeDone */)
@@ -351,10 +352,9 @@ namespace ZWaveLib.Devices
                                     Thread.Sleep(500);
                                     GetNodeCapabilities(args.Message[6]);
                                     var newNode = devices.Find(n => n.NodeId == args.Message[6]);
-                                    if (newNode != null)
-                                        newNode.ManufacturerSpecific_Get();
+                                    if (newNode != null) ManufacturerSpecific.Get(newNode);
                                 }
-                                OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd)); // Send event
+                                OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd));
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.AddNodeFailed)
                             {
@@ -377,7 +377,7 @@ namespace ZWaveLib.Devices
                                     //Console.WriteLine("\n\nREMOVING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
                                     RemoveDevice(args.Message[6]);
                                 }
-                                OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd)); // Send event
+                                OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd));
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.RemoveNodeFailed)
                             {
@@ -430,7 +430,7 @@ namespace ZWaveLib.Devices
                                         var sleepingNode = devices.Find(n => n.NodeId == nodeID);
                                         if (sleepingNode != null && sleepingNode.NodeInformationFrame != null && Array.IndexOf(sleepingNode.NodeInformationFrame, (byte)CommandClass.WakeUp) >= 0)
                                         {
-                                            sleepingNode.ResendOnWakeUp(unsentMessage.Message);
+                                            WakeUp.ResendOnWakeUp(sleepingNode, unsentMessage.Message);
                                         }
                                     }
                                 }
@@ -449,14 +449,14 @@ namespace ZWaveLib.Devices
                                 Array.Copy(args.Message, 7, nodeInfo, 0, nifLength - 2);
                                 znode.NodeInformationFrame = nodeInfo;
                                 //
-                                RaiseUpdateParameterEvent(znode, 0, ParameterEvent.NodeInfo, zwavePort.ByteArrayToString(nodeInfo));
-                                RaiseUpdateParameterEvent(znode, 0, ParameterEvent.WakeUpNotify, "1");
+                                RaiseUpdateParameterEvent(znode, 0, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo));
+                                RaiseUpdateParameterEvent(znode, 0, EventParameter.WakeUpNotify, "1");
                                 SaveNodesConfig();
                             }
                             break;
 
                         default:
-                            Console.WriteLine("\nUNHANDLED Z-Wave REQUEST\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                            Console.WriteLine("\nUNHANDLED Z-Wave REQUEST\n     " + Utility.ByteArrayToString(args.Message) + "\n");
                             break;
 
                         }
@@ -480,14 +480,14 @@ namespace ZWaveLib.Devices
                             // TODO: shall we do something here?
                             break;
                         default:
-                            Console.WriteLine("\nUNHANDLED Z-Wave RESPONSE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                            Console.WriteLine("\nUNHANDLED Z-Wave RESPONSE\n     " + Utility.ByteArrayToString(args.Message) + "\n");
                             break;
                         }
 
                         break;
 
                     default:
-                        Console.WriteLine("\nUNHANDLED Z-Wave message TYPE\n     " + zwavePort.ByteArrayToString(args.Message) + "\n");
+                        Console.WriteLine("\nUNHANDLED Z-Wave message TYPE\n     " + Utility.ByteArrayToString(args.Message) + "\n");
                         break;
                     }
 
@@ -536,8 +536,6 @@ namespace ZWaveLib.Devices
                     node.GenericClass = receivedMessage[8];
                     node.SpecificClass = receivedMessage[9];
                     //
-                    SetDeviceHandler(node);
-                    //
                     //if (node.NodeId != 1)
                     //{
                     //Console.WriteLine("Z-Wave Updating node " + node.NodeId + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
@@ -565,7 +563,7 @@ namespace ZWaveLib.Devices
                 }
                 else
                 {
-                    OnControllerEvent(new ControllerEventArgs(i, ControllerStatus.NodeUpdated)); // Send event
+                    OnControllerEvent(new ControllerEventArgs(i, ControllerStatus.NodeUpdated));
                 }
             }
             while (nodeList.Count > 0)
@@ -577,7 +575,7 @@ namespace ZWaveLib.Devices
                 }
                 else
                 {
-                    OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd)); // Send event
+                    OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd));
                     break;
                 }
             }
@@ -620,33 +618,28 @@ namespace ZWaveLib.Devices
                 node.ManufacturerSpecificResponse -= znode_ManufacturerSpecificResponse;
             }
             devices.RemoveAll(zn => zn.NodeId == nodeId);
-            OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeRemoved)); // Send event
+            OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeRemoved));
         }
 
         private ZWaveNode CreateDevice(byte nodeId, byte genericClass)
         {
-            string className = "ZWaveLib.Devices.";
+            ZWaveNode node;
             switch (genericClass)
             {
             case (byte)GenericType.StaticController:
                 // TODO: this is very untested...
-                className += "Controller";
+                node = (ZWaveNode)new Controller(zwavePort);
                 break;
             default: // generic node
-                className += "ZWaveNode";
+                node = new ZWaveNode(nodeId, zwavePort, genericClass);
                 break;
             }
-            var znode = (ZWaveNode)Activator.CreateInstance(Type.GetType(className), new object[] {
-                nodeId,
-                zwavePort,
-                genericClass
-            });
-            znode.UpdateNodeParameter += znode_UpdateNodeParameter;
-            znode.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
+            node.UpdateNodeParameter += znode_UpdateNodeParameter;
+            node.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
             //
-            OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeAdded)); // Send event
+            OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeAdded));
             //
-            return znode;
+            return node;
         }
 
         private List<Type> GetTypesInNamespace(Assembly assembly, string nameSpace)
@@ -659,103 +652,6 @@ namespace ZWaveLib.Devices
             }
             //return assembly.GetTypes().Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)).ToArray();
             return typeList;
-        }
-
-        private void CheckDeviceHandler(ZWaveNode node, ManufacturerSpecific manufacturerspecs)
-        {
-            //if (node.DeviceHandler == null)
-            {
-                var typeList = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "ZWaveLib.Devices.ProductHandlers.");
-                for (int i = 0; i < typeList.Count; i++)
-                {
-                    //Console.WriteLine(typelist[i].FullName);
-                    Type type = Assembly.GetExecutingAssembly().GetType(typeList[i].FullName); // full name - i.e. with namespace (perhaps concatenate)
-                    try
-                    {
-                        IZWaveDeviceHandler deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                        //
-                        if (deviceHandler.CanHandleProduct(manufacturerspecs))
-                        {
-                            node.DeviceHandler = deviceHandler;
-                            node.DeviceHandler.SetNodeHost(node);
-                            SaveNodesConfig();
-                            break;
-                        }
-                    }
-                    catch
-                    {
-                        // TODO: add error logging 
-                        //Console.WriteLine("ERROR!!!!!!! " + ex.Message + " : " + ex.StackTrace);
-                    }
-                }
-            }
-
-        }
-
-        public void SetDeviceHandler(ZWaveNode node)
-        {
-            // Search handler in nodesConfig first
-            for (int n = 0; n < nodesConfig.Count; n++)
-            {
-                var config = nodesConfig[n];
-                if (config.NodeId == node.NodeId && config.DeviceHandler != null && !config.DeviceHandler.Contains(".Generic."))
-                {
-                    // set last known NIF if not already set
-                    if (config.NodeInformationFrame != null && config.NodeInformationFrame.Length > 0 && (node.NodeInformationFrame == null || node.NodeInformationFrame.Length == 0))
-                    {
-                        node.NodeInformationFrame = config.NodeInformationFrame;
-                    }
-                    // set to last known handler
-                    SetDeviceHandlerFromName(node, config.DeviceHandler);
-                    break;
-                }
-            }
-            // If no specific devicehandler could be found, then set a generic handler
-            if (node.DeviceHandler == null)
-            {
-                IZWaveDeviceHandler deviceHandler = null;
-                switch (node.GenericClass)
-                {
-                case 0x00:
-                    // need to query node capabilities
-                    //GetNodeCapabilities(node.NodeId);
-                    break;
-                case (byte)ZWaveLib.GenericType.SwitchBinary:
-                    deviceHandler = new ProductHandlers.Generic.Switch();
-                    break;
-                case (byte)ZWaveLib.GenericType.SwitchMultilevel: // eg. dimmer
-                    deviceHandler = new ProductHandlers.Generic.Dimmer();
-                    break;
-                case (byte)ZWaveLib.GenericType.Thermostat:
-                    deviceHandler = new ProductHandlers.Generic.Thermostat();
-                    break;
-                // Fallback to generic Sensor driver if type is not directly supported.
-                // The Generic.Sensor handler is currently used as some kind of multi-purpose driver 
-                default:
-                    deviceHandler = new ProductHandlers.Generic.Sensor();
-                    break;
-                }
-                if (deviceHandler != null)
-                {
-                    node.DeviceHandler = deviceHandler;
-                    node.DeviceHandler.SetNodeHost(node);
-                }
-            }
-        }
-
-        public void SetDeviceHandlerFromName(ZWaveNode node, string fullName)
-        {
-            var type = Assembly.GetExecutingAssembly().GetType(fullName); // full name - i.e. with namespace (perhaps concatenate)
-            try
-            {
-                var deviceHandler = (IZWaveDeviceHandler)Activator.CreateInstance(type);
-                node.DeviceHandler = deviceHandler;
-                node.DeviceHandler.SetNodeHost(node);
-            }
-            catch
-            {
-                // TODO: add error logging 
-            }
         }
 
         private void LoadNodesConfig()
@@ -781,8 +677,7 @@ namespace ZWaveLib.Devices
             {
                 nodesConfig.Add(new ZWaveNodeConfig() {
                     NodeId = devices[n].NodeId,
-                    NodeInformationFrame = devices[n].NodeInformationFrame,
-                    DeviceHandler = devices[n].DeviceHandler.GetType().FullName
+                    NodeInformationFrame = devices[n].NodeInformationFrame
                 });
             }
             // TODO: save config to xml
@@ -804,10 +699,9 @@ namespace ZWaveLib.Devices
 
         #region Events Handling
 
+        // TODO: deprecate this
         private void znode_ManufacturerSpecificResponse(object sender, ManufacturerSpecificResponseEventArg mfargs)
         {
-            CheckDeviceHandler((ZWaveNode)sender, mfargs.ManufacturerSpecific);
-            RaiseUpdateParameterEvent((ZWaveNode)sender, 0, ParameterEvent.ManufacturerSpecific, mfargs.ManufacturerSpecific);
             // Route event to other listeners
             if (this.ManufacturerSpecificResponse != null)
             {

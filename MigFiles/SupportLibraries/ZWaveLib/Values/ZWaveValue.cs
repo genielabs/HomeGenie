@@ -23,22 +23,31 @@
 using System;
 using System.Collections.Generic;
 
-namespace ZWaveLib.Devices.Values
+namespace ZWaveLib.Values
 {
     public class ZWaveValue
     {
+        private static byte sizeMask = 0x07, 
+        scaleMask = 0x18, scaleShift = 0x03, 
+        precisionMask = 0xe0, precisionShift = 0x05;
+
         public double Value;
         public int Scale;
         public int Precision;
         public int Size = 1;
-    }
 
-    public class Utility
-    {
-        private static byte sizeMask = 0x07, 
-            scaleMask = 0x18, scaleShift = 0x03, 
-            precisionMask = 0xe0, precisionShift = 0x05;
+        public ZWaveValue()
+        {
+        }
 
+        public ZWaveValue(double v, int precision, int scale, int size)
+        {
+            this.Value = v;
+            this.Precision = precision;
+            this.Scale = scale;
+            this.Size = size;
+        }
+                
         public static byte GetPrecisionScaleSize(int precision, int scale, int size)
         {
             return (byte)((precision << precisionShift) | (scale << scaleShift) | size);
@@ -47,7 +56,7 @@ namespace ZWaveLib.Devices.Values
         public static byte[] GetValueBytes(double v, int precision, int scale, int size)
         {
             List<byte> valueBytes = new List<byte>();
-            valueBytes.Add(Utility.GetPrecisionScaleSize(precision, scale, size));
+            valueBytes.Add(GetPrecisionScaleSize(precision, scale, size));
             int intValue = (int)(v * Math.Pow(10D, precision));
             int shift = (size - 1) << 3;
             for(int i = size; i > 0; --i, shift -= 8)

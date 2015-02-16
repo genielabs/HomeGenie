@@ -37,32 +37,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Devices\Controller.cs" />
-    <Compile Include="Devices\ProductHandlers\Aeon\DoorWindowSensor.cs" />
-    <Compile Include="Devices\ProductHandlers\Aeon\MultiSensor.cs" />
-    <Compile Include="Devices\ProductHandlers\Generic\Dimmer.cs" />
-    <Compile Include="Devices\IZWaveDeviceHandler.cs" />
-    <Compile Include="Devices\ProductHandlers\Aeon\MicroSmartEnergyIlluminator.cs" />
-    <Compile Include="Devices\ProductHandlers\FortrezZ\SSA1StrobeSiren.cs" />
-    <Compile Include="Devices\ProductHandlers\Generic\Meter.cs" />
-    <Compile Include="Devices\ProductHandlers\Generic\Sensor.cs" />
-    <Compile Include="Devices\ProductHandlers\Generic\Thermostat.cs" />
-    <Compile Include="Devices\ProductHandlers\HomeSeer\HSM100WirelessMultiSensor.cs" />
-    <Compile Include="Devices\ProductHandlers\Generic\Switch.cs" />
-    <Compile Include="Devices\ProductHandlers\Zwave.Me\ZME_06436MotorControl.cs" />
-    <Compile Include="Devices\ZWaveNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZWaveMessage.cs" />
     <Compile Include="ZWavePort.cs" />
-    <Compile Include="Devices\CommandClass.cs" />
-    <Compile Include="Devices\ProductHandlers\Aeon\MicroSmartEnergySwitch.cs" />
-    <Compile Include="Devices\ProductHandlers\Fibaro\MotionSensor.cs" />
-    <Compile Include="Devices\ProductHandlers\Zwave.Me\ZWaveMeThermostat.cs" />
-    <Compile Include="Devices\Values\Utility.cs" />
-    <Compile Include="Devices\Values\SensorValue.cs" />
-    <Compile Include="Devices\Values\AlarmValue.cs" />
-    <Compile Include="Devices\Values\EnergyValue.cs" />
-    <Compile Include="Devices\ParameterEvent.cs" />
+    <Compile Include="Handlers\Basic.cs" />
+    <Compile Include="Handlers\SwitchBinary.cs" />
+    <Compile Include="Handlers\SwitchMultilevel.cs" />
+    <Compile Include="Handlers\Alarm.cs" />
+    <Compile Include="Handlers\SensorBinary.cs" />
+    <Compile Include="Handlers\SensorAlarm.cs" />
+    <Compile Include="Handlers\SensorMultilevel.cs" />
+    <Compile Include="Handlers\SceneActivation.cs" />
+    <Compile Include="Handlers\Thermostat.cs" />
+    <Compile Include="Handlers\Meter.cs" />
+    <Compile Include="Handlers\Configuration.cs" />
+    <Compile Include="Handlers\Association.cs" />
+    <Compile Include="Handlers\WakeUp.cs" />
+    <Compile Include="Handlers\Battery.cs" />
+    <Compile Include="Handlers\MultiInstance.cs" />
+    <Compile Include="Handlers\ManufacturerSpecific.cs" />
+    <Compile Include="ParameterEvent.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="ZWaveNode.cs" />
+    <Compile Include="Values\AlarmValue.cs" />
+    <Compile Include="Values\EnergyValue.cs" />
+    <Compile Include="Values\SensorValue.cs" />
+    <Compile Include="Values\UserCodeValue.cs" />
+    <Compile Include="Handlers\UserCode.cs" />
+    <Compile Include="Values\ZWaveValue.cs" />
+    <Compile Include="ZWaveEvent.cs" />
+    <Compile Include="Enums.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -79,7 +84,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Devices\ProductHandlers\Fibaro\" />
-    <Folder Include="Devices\Values\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
 </Project>
