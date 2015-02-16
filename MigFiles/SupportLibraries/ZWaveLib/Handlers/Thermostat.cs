@@ -142,7 +142,7 @@ namespace ZWaveLib.Handlers
                 nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetBack, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatSetPoint:
-                ZWaveValue zvalue = SensorValue.ExtractTemperatureFromBytes(message);
+                ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
                 var setPoint = GetSetPointData(node);
                 setPoint.Precision = zvalue.Precision;
                 setPoint.Scale = zvalue.Scale;

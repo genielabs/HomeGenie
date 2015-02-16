@@ -72,7 +72,6 @@ namespace ZWaveLib.Values
             byte key = message[9];
             if (key == (byte)ZWaveSensorParameter.Temperature)
             {
-                zvalue = ExtractTemperatureFromBytes(message);
                 sensor.Parameter = ZWaveSensorParameter.Temperature;
                 // convert from Fahrenheit to Celsius if needed
                 sensor.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
@@ -115,19 +114,6 @@ namespace ZWaveLib.Values
             }
             //
             return sensor;
-        }
-                
-        public static ZWaveValue ExtractTemperatureFromBytes(byte[] message)
-        {
-            byte[] tmp = new byte[4];
-            System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
-            message = tmp;
-
-            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 1);
-            // zvalue.Scale == 1 -> Fahrenheit
-            // zvalue.Scale == 0 -> Celsius 
-
-            return zvalue;
         }
 
         public static double FahrenheitToCelsius(double temperature)
