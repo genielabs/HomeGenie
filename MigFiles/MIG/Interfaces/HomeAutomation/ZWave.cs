@@ -925,28 +925,28 @@ namespace MIG.Interfaces.HomeAutomation
             string path = "UnknwonParameter";
             object value = upargs.Value;
             //
-            switch (upargs.ParameterEvent)
+            switch (upargs.ParameterName)
             {
             case EventParameter.MeterKwHour:
-                path = ModuleParameters.MODPAR_METER_KW_HOUR;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KW_HOUR, upargs.ParameterId);
                 break;
             case EventParameter.MeterKvaHour:
-                path = ModuleParameters.MODPAR_METER_KVA_HOUR;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KVA_HOUR, upargs.ParameterId);
                 break;
             case EventParameter.MeterWatt:
-                path = ModuleParameters.MODPAR_METER_WATTS;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_WATTS, upargs.ParameterId);
                 break;
             case EventParameter.MeterPulses:
-                path = ModuleParameters.MODPAR_METER_PULSES;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_PULSES, upargs.ParameterId);
                 break;
             case EventParameter.MeterAcVolt:
-                path = ModuleParameters.MODPAR_METER_AC_VOLT;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_VOLT, upargs.ParameterId);
                 break;
             case EventParameter.MeterAcCurrent:
-                path = ModuleParameters.MODPAR_METER_AC_CURRENT;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_CURRENT, upargs.ParameterId);
                 break;
             case EventParameter.MeterPower:
-                path = ModuleParameters.MODPAR_SENSOR_POWER;
+                path = GetIndexedParameterPath(ModuleParameters.MODPAR_SENSOR_POWER, upargs.ParameterId);
                 break;
             case EventParameter.Battery:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
@@ -1114,7 +1114,7 @@ namespace MIG.Interfaces.HomeAutomation
                 Console.WriteLine(
                     "UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}",
                     upargs.NodeId,
-                    upargs.ParameterEvent,
+                    upargs.ParameterName,
                     upargs.ParameterId,
                     value
                 );
@@ -1129,6 +1129,15 @@ namespace MIG.Interfaces.HomeAutomation
                 Path = path,
                 Value = value
             });
+        }
+
+        private string GetIndexedParameterPath(string basePath, int parameterId)
+        {
+            if (parameterId > 0)
+            {
+                basePath += "." + parameterId;
+            }
+            return basePath;
         }
 
         private void SetNodeLevel(ZWaveNode node, int level)

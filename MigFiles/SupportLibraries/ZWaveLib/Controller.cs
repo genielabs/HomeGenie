@@ -428,7 +428,7 @@ namespace ZWaveLib
                                     if (unsentMessage != null)
                                     {
                                         var sleepingNode = devices.Find(n => n.NodeId == nodeID);
-                                        if (sleepingNode != null && sleepingNode.NodeInformationFrame != null && Array.IndexOf(sleepingNode.NodeInformationFrame, (byte)CommandClass.WakeUp) >= 0)
+                                        if (sleepingNode != null && sleepingNode.SupportCommandClass(CommandClass.WakeUp))
                                         {
                                             WakeUp.ResendOnWakeUp(sleepingNode, unsentMessage.Message);
                                         }
@@ -711,7 +711,7 @@ namespace ZWaveLib
 
         private void znode_UpdateNodeParameter(object sender, UpdateNodeParameterEventArgs upargs)
         {
-            RaiseUpdateParameterEvent((ZWaveNode)sender, upargs.ParameterId, upargs.ParameterEvent, upargs.Value);
+            RaiseUpdateParameterEvent((ZWaveNode)sender, upargs.ParameterId, upargs.ParameterName, upargs.Value);
         }
 
         #endregion

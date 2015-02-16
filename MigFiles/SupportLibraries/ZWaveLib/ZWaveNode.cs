@@ -36,7 +36,7 @@ namespace ZWaveLib
     {
         public int NodeId { get; internal set; }
         public int ParameterId { get; internal set; }
-        public EventParameter ParameterEvent { get; internal set; }
+        public EventParameter ParameterName { get; internal set; }
         public object Value { get; internal set; }
     }
 
@@ -227,12 +227,9 @@ namespace ZWaveLib
         public bool SupportCommandClass(CommandClass c)
         {
             bool isSupported = false;
-            for (int i = 0; i < NodeInformationFrame.Length; i++)
+            if (this.NodeInformationFrame != null)
             {
-                if (NodeInformationFrame[i] == (byte)c)
-                {
-                    isSupported = true;
-                }
+                isSupported = (Array.IndexOf(this.NodeInformationFrame, (byte)c) >= 0);
             }
             return isSupported;
         }
@@ -259,7 +256,7 @@ namespace ZWaveLib
                 UpdateNodeParameter(this, new UpdateNodeParameterEventArgs() {
                     NodeId = (int)this.NodeId,
                     ParameterId = pid,
-                    ParameterEvent = peventtype,
+                    ParameterName = peventtype,
                     Value = value
                 });
             }
@@ -272,7 +269,7 @@ namespace ZWaveLib
                 UpdateNodeParameter(node, new UpdateNodeParameterEventArgs() {
                     NodeId = (int)node.NodeId,
                     ParameterId = pid,
-                    ParameterEvent = peventtype,
+                    ParameterName = peventtype,
                     Value = value
                 });
             }

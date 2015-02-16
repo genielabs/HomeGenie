@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+16/02/2015 1.00 beta rev 479-git2
+    - Added parameter path instance suffix to energy values (MIG ZWave interface)
+    
 16/02/2015 1.00 beta rev 479-git1
     - Fixed "Module exception data" issue #127
     - Fixed missing Y axis in statistics graph (issue #123)
