@@ -36,7 +36,7 @@ namespace ZWaveLib
     {
         public int NodeId { get; internal set; }
         public int ParameterId { get; internal set; }
-        public ParameterEvent ParameterEvent { get; internal set; }
+        public EventParameter ParameterEvent { get; internal set; }
         public object Value { get; internal set; }
     }
 
@@ -252,7 +252,7 @@ namespace ZWaveLib
             return zwavePort.SendMessage(msg, disableCallback);
         }
         
-        internal void RaiseUpdateParameterEvent(int pid, ParameterEvent peventtype, object value)
+        internal void RaiseUpdateParameterEvent(int pid, EventParameter peventtype, object value)
         {
             if (UpdateNodeParameter != null)
             {
@@ -265,7 +265,7 @@ namespace ZWaveLib
             }
         }
 
-        internal void RaiseUpdateParameterEvent(ZWaveNode node, int pid, ParameterEvent peventtype, object value)
+        internal void RaiseUpdateParameterEvent(ZWaveNode node, int pid, EventParameter peventtype, object value)
         {
             if (UpdateNodeParameter != null)
             {

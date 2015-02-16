@@ -124,22 +124,22 @@ namespace ZWaveLib.Handlers
             switch (cmdClass)
             {
             case (byte)CommandClass.ThermostatMode:
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatMode, (Thermostat.Mode)message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatMode, (Thermostat.Mode)message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatOperatingState:   
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatOperatingState, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatOperatingState, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatFanMode:  
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatFanMode, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanMode, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatFanState:  
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatFanState, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanState, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatHeating:   
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatHeating, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatHeating, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatSetBack:
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatSetBack, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetBack, message[9], 0);
                 break;
             case (byte)CommandClass.ThermostatSetPoint:
                 ZWaveValue zvalue = SensorValue.ExtractTemperatureFromBytes(message);
@@ -152,7 +152,7 @@ namespace ZWaveLib.Handlers
                 ptype.Type = (SetPointType)message[9];
                 // convert from Fahrenheit to Celsius if needed
                 ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ThermostatSetPoint, ptype, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetPoint, ptype, 0);
                 break;
             }
             return nodeEvent;
@@ -198,7 +198,7 @@ namespace ZWaveLib.Handlers
                 (byte)ptype
             });
             var setPoint = GetSetPointData(node);
-            message.AddRange(Utility.GetValueBytes(temperature, setPoint.Precision, setPoint.Scale, setPoint.Size));
+            message.AddRange(ZWaveValue.GetValueBytes(temperature, setPoint.Precision, setPoint.Scale, setPoint.Size));
             node.SendRequest(message.ToArray());
         }
 

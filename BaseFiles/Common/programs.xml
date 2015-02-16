@@ -8944,4 +8944,88 @@ while (Program.IsEnabled)
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>//Example program for the BeNext Tag reader
+//This program allows to save tag IDs and remove them
+//The event TagReader.Alarm is sent when a tag is recognized
+//Author: Alexandre Schnegg &lt;alexandre.schnegg@gmail.com&gt;
+
+Program.Setup( () =&gt; {
+    Program.AddInputField("LearningMode", "0", "LearningMode (1: enable, 0: disable)");
+    Program.AddInputField("Reset", "0", "Reset tag codes (1: enable, 0: disable), reset start after scanning a known tag");
+});
+
+// this program will be running in background
+return true;</ScriptCondition>
+    <ScriptSource>//Example program for the BeNext Tag reader
+//This program allows to save tag IDs and remove them
+//The event TagReader.Alarm is sent when a tag is recognized
+//Author: Alexandre Schnegg &lt;alexandre.schnegg@gmail.com&gt;
+
+var userId=1;
+
+When.ModuleParameterChanged((module, parameter)=&gt;
+{
+    //Tag reader report unknowm tag code
+    if(module.Is("Tag reader") &amp;&amp; parameter.Is("EntryControl.UserCode"))
+    {
+      //Learning mode
+      if(Program.InputField("LearningMode").Value == "1")
+      {
+        Program.Notify("Tag reader", "User ID: "+userId.ToString()+" saved, tag value: "+parameter.Value);
+        module.Command("UserCode.Set").Set(userId+"/1/"+parameter.Value); //1 : user id status,. should be 1 to save new user id
+        userId++;
+      }
+      else
+      {
+        Program.Notify("Tag reader", "Unknown tag value: "+parameter.Value);
+      }
+    }
+    //Reset mode
+    else if(Program.InputField("Reset").Value == "1" &amp;&amp; parameter.Is("Sensor.Alarm"))
+    {
+      for(var i=1;i&lt;=10;i++)
+      {
+        module.Command("UserCode.Set").Set(i+"/0/"+"00000000000000000000"); //0 : user id status,. should be 0 to remove user id, the third option doesn't matter
+      }
+      Program.Notify("Tag reader", "Reset done !");
+    }
+    //If tag is recognized
+    else if(module.Is("Tag reader") &amp;&amp; parameter.Is("Sensor.Alarm"))
+    {
+      if(parameter.Value!="255")
+      {
+        Program.RaiseEvent("TagReader.Alarm", "0", "Tag reader");
+        module.On(); //Notify the user with the tag reader's buzzer
+      }
+      else
+      {
+        Program.RaiseEvent("TagReader.Alarm", "1", "Tag reader");
+        module.On(); //Notify the user with the tag reader's buzzer
+      }
+    }
+    return true;
+});
+
+while (Program.IsEnabled)
+{
+  Pause(1);
+}</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>true</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>504</Address>
+    <Name>Tag Reader</Name>
+    <Description>Example program for the BeNext TagReader</Description>
+    <Group>Z-Wave</Group>
+    <ActivationTime>2015-02-12T12:46:58.3226704Z</ActivationTime>
+    <TriggerTime>2015-02-15T12:28:35.5600913Z</TriggerTime>
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>  
 </ArrayOfProgramBlock>

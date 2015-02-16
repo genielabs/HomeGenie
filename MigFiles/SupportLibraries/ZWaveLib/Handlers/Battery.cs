@@ -33,7 +33,7 @@ namespace ZWaveLib.Handlers
             if (message.Length > 7 && cmdType == (byte)Command.BatteryReport) // Battery Report
             {
                 int batteryLevel = message[9];
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Battery, batteryLevel, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
             }
             return nodeEvent;
         }

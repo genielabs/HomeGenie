@@ -21,25 +21,23 @@
  */
 
 using System;
-using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib
 {
-    public static class SceneActivation
+    public class ZWaveEvent
     {
+        public ZWaveNode Node;
+        public EventParameter Event;
+        public object Value;
+        public int Instance;
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent(ZWaveNode node, EventParameter eventType, object eventValue, int instance)
         {
-            ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (cmdType == (byte)Command.SceneActivationSet)
-            {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[9], 0);
-            }
-            return nodeEvent;
+            this.Node = node;
+            this.Event = eventType;
+            this.Value = eventValue;
+            this.Instance = instance;
         }
-
     }
 }
-
 

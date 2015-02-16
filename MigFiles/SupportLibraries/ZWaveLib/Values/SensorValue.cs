@@ -59,7 +59,7 @@ namespace ZWaveLib.Values
 
     public class SensorValue
     {
-        public ParameterEvent EventType = ParameterEvent.Generic;
+        public EventParameter EventType = EventParameter.Generic;
         public ZWaveSensorParameter Parameter = ZWaveSensorParameter.Unknown;
         public double Value = 0d;
 
@@ -67,7 +67,7 @@ namespace ZWaveLib.Values
         {
             SensorValue sensor = new SensorValue();
             //
-            ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 11);
+            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
             //
             byte key = message[9];
             if (key == (byte)ZWaveSensorParameter.Temperature)
@@ -76,25 +76,25 @@ namespace ZWaveLib.Values
                 sensor.Parameter = ZWaveSensorParameter.Temperature;
                 // convert from Fahrenheit to Celsius if needed
                 sensor.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                sensor.EventType = ParameterEvent.SensorTemperature;
+                sensor.EventType = EventParameter.SensorTemperature;
             }
             else if (key == (byte)ZWaveSensorParameter.GeneralPurposeValue)
             {
                 sensor.Parameter = ZWaveSensorParameter.GeneralPurposeValue;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterEvent.Generic;
+                sensor.EventType = EventParameter.Generic;
             }
             else if (key == (byte)ZWaveSensorParameter.Luminance)
             {
                 sensor.Parameter = ZWaveSensorParameter.Luminance;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterEvent.SensorLuminance;
+                sensor.EventType = EventParameter.SensorLuminance;
             }
             else if (key == (byte)ZWaveSensorParameter.RelativeHumidity)
             {
                 sensor.Parameter = ZWaveSensorParameter.RelativeHumidity;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = ParameterEvent.SensorHumidity;
+                sensor.EventType = EventParameter.SensorHumidity;
             }
             else if (key == (byte)ZWaveSensorParameter.Power)
             {
@@ -107,7 +107,7 @@ namespace ZWaveLib.Values
                 EnergyValue energy = EnergyValue.Parse(message);
                 sensor.Parameter = ZWaveSensorParameter.Power;
                 sensor.Value = energy.Value;
-                sensor.EventType = ParameterEvent.MeterPower;
+                sensor.EventType = EventParameter.MeterPower;
             }
             else
             {
@@ -123,7 +123,7 @@ namespace ZWaveLib.Values
             System.Array.Copy(message, message.Length - 4, tmp, 0, 4);
             message = tmp;
 
-            ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 1);
+            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 1);
             // zvalue.Scale == 1 -> Fahrenheit
             // zvalue.Scale == 0 -> Celsius 
 

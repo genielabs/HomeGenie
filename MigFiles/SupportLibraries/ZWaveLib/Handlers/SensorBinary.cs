@@ -33,7 +33,7 @@ namespace ZWaveLib.Handlers
             byte cmdType = message[8];
             if (cmdType == (byte)Command.SensorBinaryReport)
             {
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Generic, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[9], 0);
             }
             return nodeEvent;
         }

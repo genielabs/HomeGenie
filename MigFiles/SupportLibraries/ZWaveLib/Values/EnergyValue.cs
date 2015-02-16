@@ -38,13 +38,13 @@ namespace ZWaveLib.Values
 
     public class EnergyValue
     {
-        public ParameterEvent EventType = ParameterEvent.Generic;
+        public EventParameter EventType = EventParameter.Generic;
         public ZWaveEnergyScaleType Parameter = ZWaveEnergyScaleType.Unknown;
         public double Value = 0;
 
         public static EnergyValue Parse(byte[] message)
         {
-            ZWaveValue zvalue = Utility.ExtractValueFromBytes(message, 11);
+            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
             EnergyValue energy = new EnergyValue();
             //energy.Value = ((double)int.Parse(
             //                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
@@ -59,34 +59,34 @@ namespace ZWaveLib.Values
             {
             // Accumulated power consumption kW/h
             case ZWaveEnergyScaleType.kWh:
-                energy.EventType = ParameterEvent.MeterKwHour;
+                energy.EventType = EventParameter.MeterKwHour;
                 break;
             // Accumulated power consumption kilo Volt Ampere / hours (kVA/h)
             case ZWaveEnergyScaleType.kVAh:
-                energy.EventType = ParameterEvent.MeterKvaHour;
+                energy.EventType = EventParameter.MeterKvaHour;
                 break;
             // Instant power consumption Watt
             case ZWaveEnergyScaleType.Watt:
-                energy.EventType = ParameterEvent.MeterWatt;
+                energy.EventType = EventParameter.MeterWatt;
                 break;
             // Pulses count
             case ZWaveEnergyScaleType.Pulses:
-                energy.EventType = ParameterEvent.MeterPulses;
+                energy.EventType = EventParameter.MeterPulses;
                 break;
             // AC load Voltage
             case ZWaveEnergyScaleType.ACVolt:
-                energy.EventType = ParameterEvent.MeterAcVolt;
+                energy.EventType = EventParameter.MeterAcVolt;
                 break;
             // AC load Current
             case ZWaveEnergyScaleType.ACCurrent:
-                energy.EventType = ParameterEvent.MeterAcCurrent;
+                energy.EventType = EventParameter.MeterAcCurrent;
                 break;
             // Power Factor
             case ZWaveEnergyScaleType.PowerFactor:
-                energy.EventType = ParameterEvent.MeterPower;
+                energy.EventType = EventParameter.MeterPower;
                 break;
             default:
-                energy.EventType = ParameterEvent.MeterWatt;
+                energy.EventType = EventParameter.MeterWatt;
                 break;
             }
             return energy;

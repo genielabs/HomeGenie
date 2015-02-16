@@ -41,7 +41,6 @@ namespace ZWaveLib.Handlers
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];
 
-
             if (message.Length > 14)
             {
                 byte[] manufacturerId = new byte[2] { message[9], message[10] };
@@ -54,7 +53,7 @@ namespace ZWaveLib.Handlers
                     ManufacturerId = Utility.ByteArrayToString(manufacturerId).Replace(" ", "")
                 };
 
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.ManufacturerSpecific, manufacturerSpecs, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.ManufacturerSpecific, manufacturerSpecs, 0);
             }
 
             return nodeEvent;

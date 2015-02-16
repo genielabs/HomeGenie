@@ -55,7 +55,7 @@ namespace ZWaveLib.Handlers
                 Array.Reverse(bval);
                 // convert it to uint
                 paramval = BitConverter.ToUInt32(bval, 0);
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Configuration, paramval, paramId);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Configuration, paramval, paramId);
             }
             return nodeEvent;
         }

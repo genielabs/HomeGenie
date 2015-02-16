@@ -56,7 +56,6 @@
     <Compile Include="Handlers\Battery.cs" />
     <Compile Include="Handlers\MultiInstance.cs" />
     <Compile Include="Handlers\ManufacturerSpecific.cs" />
-    <Compile Include="CommandClass.cs" />
     <Compile Include="ParameterEvent.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Controller.cs" />
@@ -66,6 +65,9 @@
     <Compile Include="Values\SensorValue.cs" />
     <Compile Include="Values\UserCodeValue.cs" />
     <Compile Include="Handlers\UserCode.cs" />
+    <Compile Include="Values\ZWaveValue.cs" />
+    <Compile Include="ZWaveEvent.cs" />
+    <Compile Include="Enums.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

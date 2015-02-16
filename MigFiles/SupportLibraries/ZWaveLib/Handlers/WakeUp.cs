@@ -34,27 +34,27 @@ namespace ZWaveLib.Handlers
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];
-            if (message.Length > 11)
+            switch (cmdType)
             {
-                switch (cmdType)
+            case (byte)Command.WakeUpIntervalReport:
+                if (message.Length > 11)
                 {
-                case (byte)Command.WakeUpIntervalReport:
                     uint interval = ((uint)message[9]) << 16;
                     interval |= (((uint)message[10]) << 8);
                     interval |= (uint)message[11];
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.WakeUpInterval, interval, 0);
-                    break;
-                case (byte)Command.WakeUpNotification:
-                    // Resend queued messages while node was asleep
-                    var wakeUpResendQueue = GetResendQueueData(node);
-                    for (int m = 0; m < wakeUpResendQueue.Count; m++)
-                    {
-                        node.SendMessage(wakeUpResendQueue[m]);
-                    }
-                    wakeUpResendQueue.Clear();
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.WakeUpNotify, 1, 0);
-                    break;
+                    nodeEvent = new ZWaveEvent(node, EventParameter.WakeUpInterval, interval, 0);
                 }
+                break;
+            case (byte)Command.WakeUpNotification:
+                    // Resend queued messages while node was asleep
+                var wakeUpResendQueue = GetResendQueueData(node);
+                for (int m = 0; m < wakeUpResendQueue.Count; m++)
+                {
+                    node.SendMessage(wakeUpResendQueue[m]);
+                }
+                wakeUpResendQueue.Clear();
+                nodeEvent = new ZWaveEvent(node, EventParameter.WakeUpNotify, 1, 0);
+                break;
             }
             return nodeEvent;
         }
@@ -78,7 +78,7 @@ namespace ZWaveLib.Handlers
                 0x01
             });
         }
-        
+
         public static void ResendOnWakeUp(ZWaveNode node, byte[] msg)
         {
             int minCommandLength = 8;
@@ -100,7 +100,7 @@ namespace ZWaveLib.Handlers
                 wakeUpResendQueue.Add(msg);
             }
         }
-        
+
         private static List<byte[]> GetResendQueueData(ZWaveNode node)
         {
             if (!node.Data.ContainsKey("WakeUpResendQueue"))
@@ -109,7 +109,6 @@ namespace ZWaveLib.Handlers
             }
             return (List<byte[]>)node.Data["WakeUpResendQueue"];
         }
-
     }
 }
 

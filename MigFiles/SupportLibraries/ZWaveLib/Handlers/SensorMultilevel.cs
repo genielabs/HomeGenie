@@ -38,7 +38,7 @@ namespace ZWaveLib.Handlers
                 if (sensor.Parameter == ZWaveSensorParameter.Unknown)
                 {
                     byte key = message[9];
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.Generic, sensor.Value, 0);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.Generic, sensor.Value, 0);
                     Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                 }
                 else

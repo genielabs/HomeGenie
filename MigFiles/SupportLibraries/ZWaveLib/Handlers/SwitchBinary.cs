@@ -33,7 +33,7 @@ namespace ZWaveLib.Handlers
             if (cmdType == (byte)Command.SwitchBinaryReport || cmdType == (byte)Command.SwitchBinarySet) // some devices use this instead of report
             {
                 int levelValue = (int)message[9];
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Level, (double)levelValue, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
             }
             return nodeEvent;
         }

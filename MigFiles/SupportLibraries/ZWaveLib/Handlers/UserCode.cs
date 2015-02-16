@@ -40,7 +40,7 @@ namespace ZWaveLib.Handlers
                 userCode.TagCode = reportedUserCode.TagCode;
                 userCode.UserId = reportedUserCode.UserId;
                 userCode.UserIdStatus = reportedUserCode.UserIdStatus;
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.UserCode, reportedUserCode, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.UserCode, reportedUserCode, 0);
             }
             return nodeEvent;
         }

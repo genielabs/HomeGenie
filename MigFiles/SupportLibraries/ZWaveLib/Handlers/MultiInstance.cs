@@ -76,28 +76,28 @@ namespace ZWaveLib.Handlers
                     nodeEvent = SwitchBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSwitchBinary, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, EventParameter.MultiinstanceSwitchBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
                     nodeEvent = SwitchMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSwitchMultilevel, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, EventParameter.MultiinstanceSwitchMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorBinary:
                     nodeEvent = SensorBinary.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSensorBinary, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, EventParameter.MultiinstanceSensorBinary, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.SensorMultilevel:
                     nodeEvent = SensorMultilevel.GetEvent(node, instanceMessage);
                     if (nodeEvent != null)
                     {
-                        node.RaiseUpdateParameterEvent(instanceNumber, ParameterEvent.MultiinstanceSensorMultilevel, nodeEvent.Value);
+                        node.RaiseUpdateParameterEvent(instanceNumber, EventParameter.MultiinstanceSensorMultilevel, nodeEvent.Value);
                     }
                     break;
                 case (byte)CommandClass.Meter:
@@ -117,16 +117,16 @@ namespace ZWaveLib.Handlers
                 switch (instanceCmdClass)
                 {
                 case (byte)CommandClass.SwitchBinary:
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.MultiinstanceSwitchBinaryCount, instanceCount, 0);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSwitchBinaryCount, instanceCount, 0);
                     break;
                 case (byte)CommandClass.SwitchMultilevel:
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.MultiinstanceSwitchMultilevelCount, instanceCount, 0);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSwitchMultilevelCount, instanceCount, 0);
                     break;
                 case (byte)CommandClass.SensorBinary:
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.MultiinstanceSensorBinaryCount, instanceCount, 0);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSensorBinaryCount, instanceCount, 0);
                     break;
                 case (byte)CommandClass.SensorMultilevel:
-                    nodeEvent = new ZWaveEvent(node, ParameterEvent.MultiinstanceSensorMultilevelCount, instanceCount, 0);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSensorMultilevelCount, instanceCount, 0);
                     break;
                 }
                 break;

@@ -59,7 +59,7 @@ namespace ZWaveLib.Handlers
                     NodeList = assocNodes,
                     GroupId = groupId
                 };
-                nodeEvent = new ZWaveEvent(node, ParameterEvent.Association, associationRespose, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Association, associationRespose, 0);
             }
             return nodeEvent;
         }

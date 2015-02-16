@@ -24,22 +24,6 @@ using System;
 
 namespace ZWaveLib
 {
-    public class ZWaveEvent
-    {
-        public ZWaveNode Node;
-        public ParameterEvent Event;
-        public object Value;
-        public int Instance;
-
-        public ZWaveEvent(ZWaveNode node, ParameterEvent eventType, object eventValue, int instance)
-        {
-            this.Node = node;
-            this.Event = eventType;
-            this.Value = eventValue;
-            this.Instance = instance;
-        }
-    }
-
     public enum Function: byte
     {
         None = 0x00,
@@ -48,13 +32,14 @@ namespace ZWaveLib
         ControllerSoftReset = 0x08,
         SendData = 0x13,
         GetNodeProtocolInfo = 0x41,
-        ControllerSetDefault = 0x42, // hard reset
+        ControllerSetDefault = 0x42,
+        // hard reset
         NodeUpdateInfo = 0x49,
         NodeAdd = 0x4A,
         NodeRemove = 0x4B,
         RequestNodeInfo = 0x60
     }
-    
+
     public enum NodeFunctionOption : byte
     {
         AddNodeAny = 0x01,
@@ -87,6 +72,32 @@ namespace ZWaveLib
         RemoveNodeFailed = 0x07
     }
 
+    public enum GenericType : byte
+    {
+        None = 0x00,
+        GenericController = 0x01,
+        StaticController = 0x02,
+        AvControlPoint = 0x03,
+        Display = 0x06,
+        GarageDoor = 0x07,
+        Thermostat = 0x08,
+        WindowCovering = 0x09,
+        RepeaterSlave = 0x0F,
+        SwitchBinary = 0x10,
+        SwitchMultilevel = 0x11,
+        SwitchRemote = 0x12,
+        SwitchToggle = 0x13,
+        SensorBinary = 0x20,
+        SensorMultilevel = 0x21,
+        WaterControl = 0x22,
+        MeterPulse = 0x30,
+        Meter = 0x31,
+        EntryControl = 0x40,
+        SemiInteroperable = 0x50,
+        SensorAlarm = 0xA1,
+        NonInteroperable = 0xFF
+    }
+
     public enum CommandClass : byte
     {
         Basic = 0x20,
@@ -104,11 +115,11 @@ namespace ZWaveLib
         //
         ThermostatHeating = 0x38,
         ThermostatMode = 0x40,
-        ThermostatOperatingState =  0x42,
+        ThermostatOperatingState = 0x42,
         ThermostatSetPoint = 0x43,
         ThermostatFanMode = 0x44,
         ThermostatFanState = 0x45,
-        ThermostatSetBack = 0x47,   
+        ThermostatSetBack = 0x47,
         //
         MultiInstance = 0x60,
         Configuration = 0x70,
@@ -206,32 +217,5 @@ namespace ZWaveLib
         UserCodeReport = 0x03,
         UserCodeSet = 0x01
     }
-
-    public enum GenericType : byte
-    {
-        None = 0x00,
-        GenericController = 0x01,
-        StaticController = 0x02,
-        AvControlPoint = 0x03,
-        Display = 0x06,
-        GarageDoor = 0x07,
-        Thermostat = 0x08,
-        WindowCovering = 0x09,
-        RepeaterSlave = 0x0F,
-        SwitchBinary = 0x10,
-        SwitchMultilevel = 0x11,
-        SwitchRemote = 0x12,
-        SwitchToggle = 0x13,
-        SensorBinary = 0x20,
-        SensorMultilevel = 0x21,
-        WaterControl = 0x22,
-        MeterPulse = 0x30,
-        Meter = 0x31,
-        EntryControl = 0x40,
-        SemiInteroperable = 0x50,
-        SensorAlarm = 0xA1,
-        NonInteroperable = 0xFF
-    }
-
 }
 
