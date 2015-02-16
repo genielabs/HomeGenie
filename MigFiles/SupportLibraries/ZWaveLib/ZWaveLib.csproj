@@ -56,7 +56,6 @@
     <Compile Include="Handlers\Battery.cs" />
     <Compile Include="Handlers\MultiInstance.cs" />
     <Compile Include="Handlers\ManufacturerSpecific.cs" />
-    <Compile Include="ParameterEvent.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="ZWaveNode.cs" />
