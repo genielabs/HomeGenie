@@ -17,6 +17,7 @@
 
 /*
  *     Author: Alexandre Schnegg <alexandre.schnegg@gmail.com>
+ *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
 

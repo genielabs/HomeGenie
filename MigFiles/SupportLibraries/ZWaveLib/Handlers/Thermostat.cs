@@ -16,6 +16,7 @@
 */
 
 /*
+ *     Author: Mike Tanana
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
@@ -116,50 +117,56 @@ namespace ZWaveLib.Handlers
             HeatingAway = 0x0D
         }
 
+        // all Thermostat command classes use
+        //    0x01 for the "set" command (same as Command.BasicSet)
+        //    0x02 for the "get" command (same as Command.BasicGet)
+        //    0x03 value for the "report" command (that is the same as Command.BasicReport)
+
         public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdClass = message[7];
             byte cmdType = message[8];
-            switch (cmdClass)
+            if (cmdType == (byte)Command.BasicReport)
             {
-            case (byte)CommandClass.ThermostatMode:
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatMode, (Thermostat.Mode)message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatOperatingState:   
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatOperatingState, message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatFanMode:  
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanMode, message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatFanState:  
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanState, message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatHeating:   
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatHeating, message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatSetBack:
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetBack, message[9], 0);
-                break;
-            case (byte)CommandClass.ThermostatSetPoint:
-                ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
-                var setPoint = GetSetPointData(node);
-                setPoint.Precision = zvalue.Precision;
-                setPoint.Scale = zvalue.Scale;
-                setPoint.Size = zvalue.Size;
-                setPoint.Value = zvalue.Value;
-                dynamic ptype = new ExpandoObject();
-                ptype.Type = (SetPointType)message[9];
-                // convert from Fahrenheit to Celsius if needed
-                ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
-                nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetPoint, ptype, 0);
-                break;
+                switch (cmdClass)
+                {
+                case (byte)CommandClass.ThermostatMode:
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatMode, (Thermostat.Mode)message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatOperatingState:   
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatOperatingState, message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatFanMode:  
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanMode, message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatFanState:  
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatFanState, message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatHeating:   
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatHeating, message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatSetBack:
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetBack, message[9], 0);
+                    break;
+                case (byte)CommandClass.ThermostatSetPoint:
+                    ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
+                    var setPoint = GetSetPointData(node);
+                    setPoint.Precision = zvalue.Precision;
+                    setPoint.Scale = zvalue.Scale;
+                    setPoint.Size = zvalue.Size;
+                    setPoint.Value = zvalue.Value;
+                    dynamic ptype = new ExpandoObject();
+                    ptype.Type = (SetPointType)message[9];
+                    // convert from Fahrenheit to Celsius if needed
+                    ptype.Value = (zvalue.Scale == (int)ZWaveTemperatureScaleType.Fahrenheit ? SensorValue.FahrenheitToCelsius(zvalue.Value) : zvalue.Value);
+                    nodeEvent = new ZWaveEvent(node, EventParameter.ThermostatSetPoint, ptype, 0);
+                    break;
+                }
             }
             return nodeEvent;
         }
 
-        
-        //initial request for thermostat mode, since this doesn't change very often
         public static void GetMode(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
@@ -168,9 +175,6 @@ namespace ZWaveLib.Handlers
             });
         }       
 
-        /*
-         * This Sets the mode for the thermostat (cool, heat, off, auto)  Based on int commands
-         */ 
         public static void SetMode(ZWaveNode node, Mode mode)
         {
             node.SendRequest(new byte[] { 
