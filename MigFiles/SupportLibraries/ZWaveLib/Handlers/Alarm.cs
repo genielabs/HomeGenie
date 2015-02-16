@@ -32,7 +32,7 @@ namespace ZWaveLib.Handlers
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];
-            if (cmdType == (byte)Command.SensorAlarmReport)
+            if (cmdType == (byte)Command.AlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);
                 nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
