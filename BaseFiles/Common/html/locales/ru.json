@@ -38,7 +38,7 @@
     "configure_menu_automation": 
         "Автоматизация и Программы",
     "configure_menu_system": 
-        "Настройки",
+        "Настройки интерфейсов",
     "configure_menu_maintenance": 
         "Обслуживание и обновление",
     "configure_automation_heading": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Добавить группу",
     "configure_interfaces_heading": 
-        "Настройки",
+        "Настройки интерфейсов",
     "configure_interfaces_zwaveoptions": 
         "Опции интерфейса ZWave",
     "configure_interfaces_optdisable": 
