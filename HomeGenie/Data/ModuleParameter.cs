@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Globalization;
 
 using Newtonsoft.Json;
 using System.Xml.Serialization;
@@ -35,6 +36,8 @@ namespace HomeGenie.Data
     {
         [NonSerialized]
         private ValueStatistics statistics;
+        [NonSerialized]
+        private DateTime requestUpdateTimestamp = DateTime.UtcNow;
         private string parameterValue;
         //
         public ModuleParameter()
@@ -43,13 +46,10 @@ namespace HomeGenie.Data
             Name = "";
             Value = "";
             Description = "";
-            UpdateTime = DateTime.Now;
-            //
-            LastValue = "";
-            LastUpdateTime = DateTime.Now;
+            UpdateTime = DateTime.UtcNow;
         }
         //
-        [XmlIgnore]
+        [XmlIgnore, JsonIgnore]
         public ValueStatistics Statistics
         {
             get
@@ -68,58 +68,30 @@ namespace HomeGenie.Data
             }
             set
             {
-                //TODO: find a better solution for "Meter.Watts" case
-                //if (_value != value || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
+                UpdateTime = DateTime.UtcNow;
+                parameterValue = value;
+                //
+                // can we add this value for statistics?
+                double v;
+                if (!string.IsNullOrEmpty(value) && double.TryParse(value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v))
                 {
-                    if ((!string.IsNullOrEmpty(parameterValue) && parameterValue != value)) // || Name == Properties.METER_WATTS || Name.StartsWith("ZWaveNode."))
-                    {
-                        LastValue = parameterValue;
-                        LastUpdateTime = UpdateTime.ToUniversalTime();
-                    }
-                    UpdateTime = DateTime.UtcNow;
-                    parameterValue = value;
-                    //
-                    // can we add this value for statistics?
-                    double v;
-                    if (value != "" && StatisticsLogger.IsValidField(this.Name) && double.TryParse(value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v))
-                    {
-                        Statistics.AddValue(v, this.UpdateTime);
-                    }
+                    Statistics.AddValue(Name, v, this.UpdateTime);
                 }
             }
         }
         public string Description { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
+        [XmlIgnore]
         public bool NeedsUpdate { get; set; }
-        //
-        public double ValueIncrement
-        {
-            get
-            {
-                return (this.DecimalValue - this.LastDecimalValue);
-            }
-        }
-        //
-        public string LastValue { get; /* protected */ set; }
-        public DateTime LastUpdateTime { get; /* protected */ set; }
 
+        [XmlIgnore, JsonIgnore]
         public double DecimalValue
         {
             get
             {
 
                 double v = 0;
-                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out v)) v = 0;
-                return v;
-            }
-        }
-
-        public double LastDecimalValue
-        {
-            get
-            {
-                double v;
-                if (!double.TryParse(this.LastValue, out v)) v = 0;
+                if (this.Value != null && !double.TryParse(this.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out v)) v = 0;
                 return v;
             }
         }
@@ -128,6 +100,28 @@ namespace HomeGenie.Data
         {
             return (this.Name.ToLower() == name.ToLower());
         }
+
+        public void RequestUpdate()
+        {
+            requestUpdateTimestamp = DateTime.UtcNow;
+        }
+
+        public bool WaitUpdate(double timeoutSeconds)
+        {
+            var lastUpdate = UpdateTime;
+            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - requestUpdateTimestamp).TotalSeconds < timeoutSeconds);
+            return lastUpdate.Ticks != UpdateTime.Ticks;
+        }
+
+        [XmlIgnore, JsonIgnore]
+        public double IdleTime
+        {
+            get 
+            {
+                return (DateTime.UtcNow - UpdateTime).TotalSeconds;
+            }
+        }
+
     }
 
 }

@@ -1,0 +1,76 @@
+<!-- Home -->
+<div data-role="page" id="page_home">
+    {include pages/header.html}
+
+    <div class="ui-content">
+        <div align="center" style="position:absolute;width:100%;top:10px;left:0px;z-index:1000"><img src="images/genie.png" width="128" /></div>
+        <!--div style="position:absolute;top:30px;left:120px;">
+            <h4>Open Source<br />Home Automation<br />Server Project</h4>
+        </div-->
+        <ul data-role="listview" data-inset="true" style="margin-top:70px;">
+            <li data-locale-id="home_menu_title" data-role="list-divider">Home Menu</li>
+            <li><a data-locale-id="home_menu_control" id="homemenu_option_control" href="#page_control" data-transition="slide" _class_="ui-disabled">Control</a></li>
+            <li><a data-locale-id="home_menu_analyze" href="#page_analyze" data-transition="slide">Analyze</a></li>
+            <li><a data-locale-id="home_menu_configure" href="#page_configure" data-transition="slide">Configure</a></li>
+            <li class="ui-icon-info ui-btn-icon-right"><a data-locale-id="home_menu_about" href="#page_homegenie_about" data-rel="popup" data-transition="slidedown">About</a></li>
+        </ul>
+
+    </div>
+
+    <div data-role="popup" id="popup_system_not_configured">
+        <header data-role="header">
+            <h1>Oh-oh!</h1>
+        </header>
+        <div class="ui-content">
+            <p>System is not configured.<br /></p>
+            <a href="#page_configure_interfaces" data-transition="slide" title="Configure System" class="ui-btn">Configure System</a>
+        </div>
+    </div>
+
+    <div data-role="popup" id="page_homegenie_about" class="ui-corner-all hg-popup-a" data-close-btn="right" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div data-role="header" class="ui-corner-top">
+            <h1 data-locale-id="homegenie_about_title">About</h1>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+        
+            <h5 style="font-family:georgia">HomeGenie</h5>
+            <fieldset data-role="fieldcontain" style="border:solid 1px gray;margin:10px;padding:10px;font-family:monospace;font-size:9pt;">
+                <div class="ui-grid-a">
+                    <div data-locale-id="home_about_version" class="ui-block-a" style="width:27%">version&nbsp;&nbsp;</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;1.00 beta r479</div>
+                </div>
+                <div class="ui-grid-a">
+                    <div data-locale-id="home_about_codename" class="ui-block-a" style="width:27%">codename&nbsp;&nbsp;</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;AutomaThing</div>
+                </div>
+                <div class="ui-grid-a">
+                    <div data-locale-id="home_about_motto" class="ui-block-a" style="width:27%">motto&nbsp;&nbsp;</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;Things Different! =P</div>
+                </div>
+                <div class="ui-grid-a">
+                    <div data-locale-id="home_about_license" class="ui-block-a" style="width:27%">license&nbsp;&nbsp;</div>
+                    <div class="ui-block-b" style="width:73%">&nbsp;&nbsp;<a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank">CC BY-NC 3.0</a></div>
+                </div>
+            </fieldset>
+            <h5 data-locale-id="home_about_concept" style="font-family:georgia" align="center">Concept, design, ideas and coding<br /> by G-Labs</h5>
+
+            <br />
+            <a data-locale-id="home_about_site" target="_blank" href="http://homegenie.it/" class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left">HomePage and Support</a>
+            <a data-locale-id="home_about_site_docs" target="_blank" href="http://homegenie.it/docs/" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left">Documentation</a>
+        </div>
+    </div>
+
+
+    <div id="speechinput" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <table width="100%">
+            <tr>
+                <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                <td width="100px"><a data-locale-id="home_voicerecognition_voice" id="voicerecognition_button" class="ui-btn" href="javascript:recognition.start()">Voice</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+

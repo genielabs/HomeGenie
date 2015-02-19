@@ -1,0 +1,655 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "010f"
+      },
+      "productType": {
+        "@value": "0000"
+      },
+      "productId": {
+        "@value": "0000"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "52"
+      },
+      "appVersion": {
+        "@value": "25"
+      },
+      "appSubVersion": {
+        "@value": "25"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "11"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "RGBW Controller"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Triple click the B-button or any switch connected to I1-I4 inputs."
+        }
+      },
+      "productName": "FGRGBWM-441",
+      "brandName": "Fibaro",
+      "productLine": "Fibaro",
+      "productCode": "441",
+      "productVersion": "2x.2x"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0026"
+        },
+        {
+          "@id": "0060",
+          "@version": "3"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0032",
+          "@version": "2"
+        },
+        {
+          "@id": "0031",
+          "@version": "2"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0033"
+        },
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "5",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "V association group reports device status. Only one device may\r\nbe assigned to this group, main controller by default. It's not\r\nrecommended to modify this group's settings."
+            }
+          }
+        },
+        {
+          "@number": "4",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "IV association group assigned to I4 input - sends control frame to\r\nassociated devices each time the device state changes. (ON /\r\nOFF)"
+            }
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "III association group assigned to I3 input - sends control frame to\r\nassociated devices each time the device state changes. (ON /\r\nOFF)"
+            }
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "II association group assigned to I2 input - sends control frame to\r\nassociated devices each time the device state changes. (ON /\r\nOFF)"
+            }
+          }
+        },
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "I association group assigned to I1 input - sends control frame to\r\nassociated devices each time the device state changes. (ON /\r\nOFF)"
+            }
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "ALL ON / ALL OFF function activation"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Default setting: 255\r\n0 - ALL ON inactive, ALL OFF inactive\r\n1 - ALL ON inactive, ALL OFF active\r\n2 - ALL ON active, ALL OFF inactive\r\n255 - ALL ON active, ALL OFF active"
+            }
+          }
+        },
+        {
+          "@number": "6",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Associations command class choice"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - NORMAL (DIMMER) - BASIC SET/SWITCH_MULTILEVEL_-\r\nSTART/STOP\r\n1 - NORMAL (RGBW) - COLOR_CONTROL_SET/START/\r\nSTOP_STATE_CHANGE\r\n2 - NORMAL (RGBW) - COLOR_CONTROL_SET\r\n3 - BRIGHTNESS - BASIC SET/SWITCH_MULTILEVEL_START/\r\nSTOP\r\n4 - RAINBOW (RGBW) - COLOR_CONTROL_SET"
+            }
+          }
+        },
+        {
+          "@number": "8",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Outputs state change mode"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - MODE1 (related parameters: 9-step value, 10-time between\r\nsteps)\r\n1 - MODE2 (related parameters: 11-time to change value, relevant\r\nfor RGB/RGBW)\r\nMODE1\r\nExample: change saturation level from 0% to 99%\r\nParameter 9: Step = 5\r\nParameter 10: Time between steps: 10ms"
+            }
+          }
+        },
+        {
+          "@number": "9",
+          "@type": "range",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Step value (relevant for MODE1)"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings: 1 - 255"
+            }
+          }
+        },
+        {
+          "@number": "10",
+          "@type": "rangemapped",
+          "@size": "2",
+          "@default": "000a",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time between steps (relevant for MODE1)"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - immediate change of state\r\n1-60000 - (1-60000 ms)"
+            }
+          }
+        },
+        {
+          "@number": "11",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "43",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time for changing from start to end value"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - immediate change\r\n1-63 - 20-126- [ms] value*20ms\r\n65-127 - 1-63 [s] [value-64]*1s\r\n129-191 - 10-630[s] [value-128]*10s\r\n193-255 - 1-63[min] [value-192]*1min"
+            }
+          }
+        },
+        {
+          "@number": "12",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Maximum brightening level"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings: 2-255\r\nDefault setting: 255"
+            }
+          }
+        },
+        {
+          "@number": "13",
+          "@type": "range",
+          "@size": "1",
+          "@default": "02",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Minimum dim level"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Available settings: 2-255"
+            }
+          }
+        },
+        {
+          "@number": "14",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "1111",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Inputs / Outputs configuration - relevant for main controllers other than Home Center 2 only"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Controlled device: RGBW, toggle switch\r\ninputs (NORMAL MODE)\r\nEach 4bit refer to given IN/OUT (channel) settings\r\nIf RGB/RGBW mode is chosen, settings for all 4 channels are\r\nidentical. Settings marked with X are forbidden and cannot be sent\r\nto the module.\r\nInput type:\r\n- ANALOG - sensor with analog, 0-10V interface. Impossible to\r\ncontrol from main controllers interface.\r\n- MOMENTARY - momentary switch,\r\n- TOGGLE - toggle switch,\r\n- TOGGLE W/MEMORY - toggle switch (ON active for closing\r\nswitch terminals; OFF active for opening switch terminals)\r\nInput operating mode (controlled with switch keys):\r\n- NORMAL - each given switch key assigned to one output\r\nchannel,\r\n- BRIGHTNESS - all of the channels are controlled together,\r\n- RAINBOW - transition through all colours spectrum (operates on\r\n3 RGB channels only)"
+            }
+          }
+        },
+        {
+          "@number": "16",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Memorize device status at power cut. Device will be set to status memorized before power cut."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - device does not memorize its status at the power cut. Load is\r\ndisconnected.\r\n1 - device memorizes its status at the power cut. Load will be set\r\nto the status from before power cut (parameters, current outputs\r\nstatus, energy)"
+            }
+          }
+        },
+        {
+          "@number": "30",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm of any type (general alarm, flood alarm, smoke alarm: CO, CO2, temperature alarm)."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - INACTIVE - the device doesn't respond to alarm frames\r\n1 - ALARM ON - the device turns on once alarm is detected (all\r\nchannels set to 99%)\r\n2 - ALARM OFF - the device turns off once alarm is detected (all\r\nchannels set to 0%)\r\n3 - ALARM PROGRAM - alarm sequence turns on (program\r\nselected in parameter 38)"
+            }
+          }
+        },
+        {
+          "@number": "38",
+          "@type": "constant",
+          "@size": "2",
+          "@default": "000a",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm sequence program"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "1 - 10 (1-10 specifies alarm program number)"
+            }
+          }
+        },
+        {
+          "@number": "39",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0258",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Active PROGRAM alarm time"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "1-65534 (1s-65534s)"
+            }
+          }
+        },
+        {
+          "@number": "42",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Command class reporting Outputs status change"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - reporting as a result of inputs and controllers actions (SWITCH\r\nMULTILEVEL)\r\n1 - reporting as a result inputs actions (SWITCH MULTILEVEL)\r\n2 - reporting as a result of inputs actions (COLOR CONTROL)"
+            }
+          }
+        },
+        {
+          "@number": "43",
+          "@type": "range",
+          "@size": "1",
+          "@default": "05",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reporting 0-10v analog inputs change threshold."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter defines a value by which input voltage must change in\r\norder to be reported to the main controller. New value is calculated\r\nbased on last reported value:\r\nDefault setting: 5 (0,5V)\r\n1-100 - (0,1 - 10V)"
+            }
+          }
+        },
+        {
+          "@number": "44",
+          "@type": "rangemapped",
+          "@size": "2",
+          "@default": "001e",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Power load reporting frequency"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "(if last reported value differs\r\nfrom the current value). Reports will also be sent in case of polling.\r\n1 - 65534 (1s-65534s) - time between reports,\r\n0 - reports are not sent. Reports will only be sent in case of polling\r\nor at turning OFF the device."
+            }
+          }
+        },
+        {
+          "@number": "45",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "0a",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reporting changes in energy consumed by controlled devices."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "New, reported energy value is calculated based on last\r\nreported value.\r\n1 - 254 (0,01kWh - 2,54kWh)\r\n0 - changes in consumed energy will not be reported. Reports will\r\nbe sent only in case of polling."
+            }
+          }
+        },
+        {
+          "@number": "71",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Response to BRIGHTNESS set to 0%"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - illumination colour set to white (all channels controlled together)\r\n1 - last set colour is memorized"
+            }
+          }
+        },
+        {
+          "@number": "72",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Starting predefined program when device set to work in RGB/RGBW mode (parameter 14) - relevant for main controllers other than Home Center 2 only."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "1-10 animation program number"
+            }
+          }
+        },
+        {
+          "@number": "73",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Triple click action"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 - NODE INFO control frame is sent,\r\n1 - starting favourite program"
+            }
+          }
+        }
+      ]
+    },
+    "endpoints": {
+      "endpoint": [
+        {
+          "@number": "5",
+          "name": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "genericClass": {
+            "@value": "11"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": {
+            "@id": "0026"
+          }
+        },
+        {
+          "@number": "4",
+          "name": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "genericClass": {
+            "@value": "11"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": {
+            "@id": "0026"
+          }
+        },
+        {
+          "@number": "3",
+          "name": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "genericClass": {
+            "@value": "11"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": {
+            "@id": "0026"
+          }
+        },
+        {
+          "@number": "2",
+          "name": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "genericClass": {
+            "@value": "11"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": {
+            "@id": "0026"
+          }
+        },
+        {
+          "@number": "1",
+          "name": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en"
+            }
+          },
+          "genericClass": {
+            "@value": "11"
+          },
+          "specificClass": {
+            "@value": "01"
+          },
+          "commandClass": {
+            "@id": "0026"
+          }
+        }
+      ]
+    }
+  }
+}

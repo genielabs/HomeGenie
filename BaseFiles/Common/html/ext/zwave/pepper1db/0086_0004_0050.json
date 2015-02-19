@@ -1,0 +1,552 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0086"
+      },
+      "productType": {
+        "@value": "0004"
+      },
+      "productId": {
+        "@value": "0050"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "5c"
+      },
+      "appVersion": {
+        "@value": "01"
+      },
+      "appSubVersion": {
+        "@value": "17"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Ansteckbare Sirene"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Outlet Plugable Siren"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Drücke Taste"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Click Button"
+          }
+        ]
+      },
+      "productName": "DSD31",
+      "brandName": "AEOTEC",
+      "productVersion": "1.23"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0025",
+          "@secure": "true"
+        },
+        {
+          "@id": "002b",
+          "@secure": "true"
+        },
+        {
+          "@id": "002c",
+          "@secure": "true"
+        },
+        {
+          "@id": "0059",
+          "@secure": "true"
+        },
+        {
+          "@id": "005e",
+          "@version": "2"
+        },
+        {
+          "@id": "0070",
+          "@secure": "true"
+        },
+        {
+          "@id": "0072",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0073",
+          "@secure": "true"
+        },
+        {
+          "@id": "007a",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0085",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0086",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@secure": "true"
+        },
+        {
+          "@id": "005a",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0082",
+          "@controlled": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "5",
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de",
+              "#text": "Lifeline"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Lifeline"
+            }
+          ]
+        }
+      }
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "37",
+          "@type": "rangemapped",
+          "@size": "2",
+          "@default": "000d",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sirenensound und Lautstärke"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Sirensound and Volume"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Der Value1 (low byte) bestimmt den Sound der Sirene. Der Value2 (high byte) bestimmt dessen Lautstärke. Andere werte als die angegebenen werden ignoriert."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The Value1(low byte) is used to select the Siren sound. The Value2(high byte) is used to adjust the volume. Other values will be ignored."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "ändert den aktuellen Sound nicht."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "do not change the current sound."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "0001",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sirenensound 1 ist ausgewählt."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren sound 1 is selected."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0002",
+              "@to": "0002",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sirenensound 2 ist ausgewählt."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren sound 2 is selected."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0003",
+              "@to": "0003",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sirenensound 3 ist ausgewählt."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren sound 3 is selected."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0004",
+              "@to": "0004",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sirenensound 4 ist ausgewählt."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren sound 4 is selected."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0005",
+              "@to": "0005",
+              "@unit": "1",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Sirenensound 5 ist ausgewählt."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Siren sound 5 is selected."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "80",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Senden von Benachrichtigung"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Notifications"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sendet eine Benachrichtung an das assoziierte Gerät wenn der Zustand der Siren sich ändert.\r\n\r\n"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable to send notifications to associated devices when the state of Siren changed.\r\n"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "nichts"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "nothing"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "hail CC"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "hail CC"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "basis CC Report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "basis CC Report"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "200",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Partner ID"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Partner ID"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00",
+            "@to": "00",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "AEON Labs Standart Produkt"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "AEON Labs Standard Product"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "252",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktivieren/Deaktiveren \"Lock\" - Konfiguration"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable/Disable \"Lock\" - Configuration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "deaktivieren"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "disable"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "aktivieren"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "enable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "4",
+          "@default": "00000001",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Zurücksetzen auf Werkszustand"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Factoryreset"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Setzt das Gerät auf Werkszustand zurück und entfernt es aus dem Z-Wave Netzwerk"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Reset to factory default setting and removed from z-wave network."
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "00000000",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Setzt das Gerät auf Werkszustand zurück"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Resets the device to factory state"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/64e24a7e64a8543f9af1eeabc77aff136145e5bc.png"
+      }
+    }
+  }
+}

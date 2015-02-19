@@ -22,8 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
@@ -34,26 +32,49 @@ using System.IO;
 namespace HomeGenie.Automation
 {
 
-    public class CSharpAppFactory
+    public static class CSharpAppFactory
     {
 
-        //private HomeGenieService homegenie = null;
-
-        public CSharpAppFactory(HomeGenieService hg)
+        public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
-            //homegenie = hg;
-        }
+            string[] includes = new string[] {
+                "using Raspberry;",
+                "using Raspberry.Timers;",
+                "using Raspberry.IO;",
+                "using Raspberry.IO.Components.Controllers.Pca9685;",
+                "using Raspberry.IO.Components.Controllers.Tlc59711;",
+                "using Raspberry.IO.Components.Converters.Mcp3008;",
+                "using Raspberry.IO.Components.Converters.Mcp4822;",
+                "using Raspberry.IO.Components.Displays.Hd44780;",
+                "using Raspberry.IO.Components.Displays.Ssd1306;",
+                "using Raspberry.IO.Components.Expanders.Mcp23017;",
+                "using Raspberry.IO.Components.Expanders.Pcf8574;",
+                "using Raspberry.IO.Components.Leds.GroveBar;",
+                "using Raspberry.IO.Components.Leds.GroveRgb;",
+                "using Raspberry.IO.Components.Sensors;",
+                "using Raspberry.IO.Components.Sensors.Distance.HcSr04;",
+                "using Raspberry.IO.Components.Sensors.Pressure.Bmp085;",
+                "using Raspberry.IO.Components.Sensors.Temperature.Dht;",
+                "using Raspberry.IO.Components.Sensors.Temperature.Tmp36;",
+                "using Raspberry.IO.GeneralPurpose;",
+                "using Raspberry.IO.GeneralPurpose.Behaviors;",
+                "using Raspberry.IO.GeneralPurpose.Configuration;",
+                "using Raspberry.IO.InterIntegratedCircuit;",
+                "using Raspberry.IO.SerialPeripheralInterface;"
+            };
+            string source = @"    //# pragma warning disable 0168 // variable declared but not used.
+//# pragma warning disable 0219 // variable assigned but not used.
+//# pragma warning disable 0414 // private field assigned but not used.
 
-        public CompilerResults CompileScript(string condition, string statement, string outputDllFile)
-        {
-            string source = @"using System;
-using System.Collections.Generic;
+using System;
+using System.Text; using System.Globalization; using System.Linq; using System.Collections.Generic; using System.Dynamic; using Newtonsoft.Json; using Newtonsoft.Json.Linq;
 
 using HomeGenie;
 using HomeGenie.Service;
 using HomeGenie.Automation; using HomeGenie.Data;
-
-using Newtonsoft.Json.Linq; using Raspberry; using Raspberry.IO.GeneralPurpose; using Raspberry.IO.GeneralPurpose.Behaviors; using Raspberry.IO.Components.Controllers.Pca9685; using Raspberry.IO.Components.Converters.Mcp4822; using Raspberry.IO.Components.Displays.Hd44780; using Raspberry.IO.Components.Expanders.Mcp23017; using Raspberry.IO.Components.Sensors.HcSr04; using Raspberry.IO.InterIntegratedCircuit; using Raspberry.IO.Components.Converters.Mcp3008;
+";
+            source += String.Join(" ", includes);
+            source += @"
 namespace HomeGenie.Automation.Scripting
 {
     public class ScriptingInstance : ScriptingHost
@@ -107,8 +128,8 @@ namespace HomeGenie.Automation.Scripting
     }
 }
 ";
-            source = source.Replace("{statement}", statement);
-            source = source.Replace("{condition}", condition);
+            source = source.Replace("{statement}", scriptSource);
+            source = source.Replace("{condition}", conditionSource);
             //
             Dictionary<string, string> providerOptions = new Dictionary<string, string> {
                 //                    { "CompilerVersion", "v4.0" }
@@ -169,7 +190,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
             //
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");
-            compilerParams.ReferencedAssemblies.Add("TcpClientLib.dll");
+            compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
             //
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {

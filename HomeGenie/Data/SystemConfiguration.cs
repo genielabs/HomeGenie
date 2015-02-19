@@ -27,6 +27,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
+using MIG;
 using HomeGenie.Service;
 
 namespace HomeGenie.Data
@@ -70,6 +71,7 @@ namespace HomeGenie.Data
             return obj;
         }
 
+        /*
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
             MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
@@ -78,9 +80,15 @@ namespace HomeGenie.Data
 
         public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
         {
-            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return mi.Options.Find(o => o.Name == option);
+            return GetInterfaceOptions(domain).Find(o => o.Name == option);
         }
+
+        public List<MIGServiceConfiguration.Interface.Option> GetInterfaceOptions(string domain)
+        {
+            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
+            return mi.Options;
+        }
+        */
 
         public bool Update()
         {
@@ -93,10 +101,6 @@ namespace HomeGenie.Data
                     try
                     {
                         if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
-                        if (!String.IsNullOrEmpty(p.LastValue)) p.LastValue = StringCipher.Encrypt(
-                                p.LastValue,
-                                GetPassPhrase()
-                            );
                     }
                     catch
                     {
@@ -153,40 +157,59 @@ namespace HomeGenie.Data
         public string GUID { get; set; }
 
         public string EnableLogFile { get; set; }
-    }
 
-    [Serializable()]
-    public class MIGServiceConfiguration
-    {
-        public string EnableWebCache { get; set; }
-
-        public List<Interface> Interfaces = new List<Interface>();
+        public StatisticsConfiguration Statistics = new StatisticsConfiguration();
 
         [Serializable()]
-        public class Interface
+        public class StatisticsConfiguration
         {
 
             [XmlAttribute]
-            public string Domain { get; set; }
+            public int MaxDatabaseSizeMBytes { get; set; }
 
             [XmlAttribute]
-            public bool IsEnabled { get; set; }
+            public int StatisticsTimeResolutionSeconds { get; set; }
 
-            public List<Option> Options = new List<Option>();
+            [XmlAttribute]
+            public int StatisticsUIRefreshSeconds { get; set; }
 
-            [Serializable()]
-            public class Option
+            public StatisticsConfiguration()
             {
-                [XmlAttribute]
-                public string Name { get; set; }
 
-                [XmlAttribute]
-                public string Value { get; set; }
+                MaxDatabaseSizeMBytes = 10; // 10MB default.
+                StatisticsTimeResolutionSeconds = 5 * 60; // 5 minute default.
+                StatisticsUIRefreshSeconds = 2 * 60; // 2 minute default.
+            }
+
+            /// <summary>
+            /// Set constraints to protect the system. These are absolute constraints to protect the user experience (locked browser/server), but are not 
+            /// RECOMMENDED constraints. For example, StatisticsTimeResolutionSeconds less than 5*60 starts to make the graph 
+            /// look messy, but we still allow anything above 30 seconds in case advanced user wants it. Might want to keep 
+            /// recommended values reference later.
+            /// 
+            /// Should later throw error so UI can notify user?
+            /// </summary>
+            public void Validate()
+            {
+                // 
+                if (MaxDatabaseSizeMBytes < 1)
+                {
+                    MaxDatabaseSizeMBytes = 1;
+                }
+                // Current design would make < 30 seconds a poor setting. In full day view, if this is anything less than a few minutes, day detail line is smashed.
+                if (StatisticsTimeResolutionSeconds < 30)
+                {
+                    StatisticsTimeResolutionSeconds = 30;
+                }
+                if (StatisticsUIRefreshSeconds < 5)
+                {
+                    StatisticsUIRefreshSeconds = 5;
+                }
+
             }
 
         }
     }
-
 
 }
 

@@ -29,9 +29,15 @@ using HomeGenie.Service;
 using HomeGenie.Data;
 using MIG;
 using HomeGenie.Service.Constants;
+using System.Globalization;
 
 namespace HomeGenie.Automation.Scripting
 {
+    /// <summary>
+    /// Modules Manager Helper class.\n
+    /// Offers methods for filtering, selecting and operate on a group of modules.\n
+    /// Class instance accessor: **Modules**
+    /// </summary>
     public class ModulesManager
     {
         private string command = "Command.NotSelected";
@@ -54,6 +60,222 @@ namespace HomeGenie.Automation.Scripting
             homegenie = hg;
         }
 
+
+        #region Selection/Filtering
+
+        /// <summary>
+        /// Select modules belonging to specified domains.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="domains">A string containing comma seperated domain names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // turn off all z-wave lights
+        /// Modules
+        ///     .InDomain("HomeAutomation.ZWave")
+        ///     .OfDeviceType("Light,Dimmer")
+        ///     .Off();
+        /// </code>
+        /// </example>
+        public ModulesManager InDomain(string domains)
+        {
+            this.inDomain = domains;
+            return this;
+        }
+
+        /// <summary>
+        /// Select modules with specified address.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="addresses">A string containing comma seperated address values.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // turn on X10 units A2 and B5
+        /// Modules.WithAddress("A2,B5").On();
+        /// </code>
+        /// </example>
+        public ModulesManager WithAddress(string addresses)
+        {
+            this.withAddress = addresses;
+            return this;
+        }
+
+        /// <summary>
+        /// Select modules matching specified names.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="moduleNames">A string containing comma seperated module names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // turn off ceiling light
+        /// Modules.WithName("Ceiling Light").Off();
+        /// </code>
+        /// </example>
+        public ModulesManager WithName(string moduleNames)
+        {
+            this.withName = moduleNames;
+            return this;
+        }
+
+        /// <summary>
+        /// Select modules of specified device types.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="deviceTypes">A string containing comma seperated type names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // turn on all lights and appliances
+        /// Modules.OfDeviceType("Light,Dimmer,Switch").On();
+        /// </code>
+        /// </example>
+        public ModulesManager OfDeviceType(string deviceTypes)
+        {
+            this.ofDeviceType = deviceTypes;
+            return this;
+        }
+
+        /// <summary>
+        /// Select modules included in specified groups.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="groups">A string containing comma seperated group names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// Modules.InGroup("Living Room,Kitchen").Off();
+        /// </code>
+        /// </example>
+        public ModulesManager InGroup(string groups)
+        {
+            this.inGroup = groups;
+            return this;
+        }
+
+        /// <summary>
+        /// Select all modules having specified parameters.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="parameters">A string containing comma seperated parameter names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // select all modules with Sensor.Temperature parameter and get the average temperature value
+        /// var averagetemperature = Modules.WithParameter("Sensor.Temperature").Temperature;
+        /// Program.Notify("Average Temperature", averagetemperature);
+        /// </code>
+        /// </example>
+        public ModulesManager WithParameter(string parameters)
+        {
+            this.withParameter = parameters;
+            return this;
+        }
+
+        /// <summary>
+        /// Select all modules having specified features.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="feature">A string containing comma seperated feature names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Turn on all Security System sirens
+        /// Modules.WithFeature("HomeGenie.SecurityAlarm").On();
+        /// </code>
+        /// </example>
+        public ModulesManager WithFeature(string features)
+        {
+            this.withFeature = features;
+            return this;
+        }
+
+        /// <summary>
+        /// Select all modules NOT having specified features.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="feature">A string containing comma seperated feature names.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Turn off all modules not having the "EnergySavingMode" feature
+        /// Modules.WithoutFeature("EnergyManagement.EnergySavingMode").Off();
+        /// </code>
+        /// </example>
+        public ModulesManager WithoutFeature(string features)
+        {
+            this.withoutFeature = features;
+            return this;
+        }
+
+        #endregion
+
+
+        #region Collections/Enumeration
+
+        /// <summary>
+        /// Iterate through each module in the current selection and pass it to the specified <callback>.
+        /// To break the iteration, the callback must return *true*, otherwise *false*.
+        /// </summary>
+        /// <param name="callback">Callback function to call for each iteration.</param>
+        /// <returns>ModulesManager</returns>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// var total_watts_load = 0D;
+        /// Modules.WithParameter("Meter.Watts").Each( (module) => {
+        ///             total_watts_load += module.Parameter("Meter.Watts").DecimalValue;
+        ///             return false; // continue iterating
+        /// });
+        /// Program.Notify("Current power load", total_watts_load + " watts");
+        /// </code>
+        /// </example>
+        public ModulesManager Each(Func<ModuleHelper, bool> callback)
+        {
+            foreach (var module in SelectedModules)
+            {
+                if (callback(new ModuleHelper(homegenie, module))) break;
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Returns the module in the current selection.
+        /// If the current selection contains more than one element, the first element will be returned.
+        /// </summary>
+        /// <returns>ModuleHelper</returns>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// var strobeAlarm = Modules.WithName("Strobe Alarm").Get();        
+        /// </code>
+        /// </example>
+        public ModuleHelper Get()
+        {
+            return new ModuleHelper(homegenie, SelectedModules.Count > 0 ? SelectedModules.First() : null);
+        }
+
+        public ModuleHelper FromInstance(Module module)
+        {
+            return new ModuleHelper(homegenie, module);
+        }
+
+        /// <summary>
+        /// Return the list of selected modules.
+        /// </summary>
+        /// <returns>List&lt;Module&gt;</returns>
         public virtual List<Module> SelectedModules
         {
             get
@@ -142,6 +364,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Return the list of control groups.
+        /// </summary>
+        /// <returns>List&lt;string&gt;</returns>
         public List<string> Groups
         {
             get
@@ -155,105 +381,93 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        public ModulesManager Each(Func<ModuleHelper, bool> callback)
-        {
-            foreach (var module in SelectedModules)
-            {
-                if (callback(new ModuleHelper(homegenie, module))) break;
-            }
-            return this;
-        }
-
-        public ModuleHelper Get()
-        {
-            return new ModuleHelper(homegenie, SelectedModules.Count > 0 ? SelectedModules.First() : null);
-        }
-
-        public ModulesManager IterationDelay(double delaySeconds)
-        {
-            this.iterationDelay = delaySeconds;
-            return this;
-        }
-
-        public ModulesManager WithParameter(string parameter)
-        {
-            this.withParameter = parameter;
-            return this;
-        }
+        #endregion
 
 
-        public ModulesManager WithFeature(string feature)
-        {
-            this.withFeature = feature;
-            return this;
-        }
+        #region Commands
 
-        public ModulesManager WithoutFeature(string feature)
-        {
-            this.withoutFeature = feature;
-            return this;
-        }
-
-        public ModuleHelper FromInstance(Module module)
-        {
-            return new ModuleHelper(homegenie, module);
-        }
-
+        /// <summary>
+        /// Select an API command to be executed for selected modules. To perform the selected command, Execute or Set method must be invoked.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="command">API command to be performed.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // turn on all modues of "Light" type
+        /// Modules.OfDeviceType("Light").Command("Control.On").Execute();
+        /// // set all dimmers to 50%
+        /// Modules.OfDeviceType("Dimmer").Command("Control.Level").Set("50");
+        /// </code>
+        /// </example>
         public ModulesManager Command(string command)
         {
             this.command = command;
             return this;
         }
 
-        public ModulesManager InGroup(string group)
+        /// <summary>
+        /// Used before a command (*Set*, *Execute*, *On*, *Off*, *Toggle*, ...), it will put a pause after performing the command for each module in the current selection. 
+        /// </summary>
+        /// <returns>ModulesManager</returns>
+        /// <param name="delaySeconds">Delay seconds.</param>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Set the level of all dimmer type modules to 40%, 
+        /// // putting a 100ms delay between each command
+        /// Modules
+        ///     .OfDeviceType("Dimmer")
+        ///     .Command("Control.Level")
+        ///     .IterationDelay(0.1)
+        ///     .Set(40);
+        /// </code>
+        /// </example>
+        public ModulesManager IterationDelay(double delaySeconds)
         {
-            this.inGroup = group;
+            this.iterationDelay = delaySeconds;
             return this;
         }
 
-        public ModulesManager WithName(string modulename)
-        {
-            this.withName = modulename;
-            return this;
-        }
-
-        public ModulesManager InDomain(string domain)
-        {
-            this.inDomain = domain;
-            return this;
-        }
-
-        public ModulesManager WithAddress(string moduleaddr)
-        {
-            this.withAddress = moduleaddr;
-            return this;
-        }
-
-        public ModulesManager OfDeviceType(string devicetype)
-        {
-            this.ofDeviceType = devicetype;
-            return this;
-        }
-
+        /// <summary>
+        /// Execute currently selected command for all selected modules.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager Execute()
         {
             return Set();
         }
 
-        public ModulesManager Execute(string sparams)
+        /// <summary>
+        /// Execute currently selected command with specified options.
+        /// </summary>
+        /// <param name="options">A string containing options to be passed to the selected command.</param>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager Execute(string options)
         {
-            return Set(sparams);
+            return Set(options);
         }
 
+        /// <summary>
+        /// Alias for Execute()
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager Set()
         {
             this.commandValue = "0";
             return Set(this.commandValue);
         }
 
-        public ModulesManager Set(string valueToSet)
+        /// <summary>
+        /// Alias for Execute(options)
+        /// </summary>
+        /// <param name="options">A string containing options to be passed to the selected command.</param>
+        /// <returns>ModulesManager</returns>
+        public ModulesManager Set(string options)
         {
-            this.commandValue = valueToSet;
+            this.commandValue = options;
             // execute this command context
             if (command != "")
             {
@@ -261,7 +475,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/")
+                        new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
                     );
                     DelayIteration();
                 }
@@ -269,33 +483,44 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-        ////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Turn on all selected modules.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager On()
         {
             foreach (var module in SelectedModules)
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                 );
                 DelayIteration();
             }
             return this;
         }
 
+        /// <summary>
+        /// Turn off all selected modules.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager Off()
         {
             foreach (var module in SelectedModules)
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                 );
                 DelayIteration();
             }
             return this;
         }
 
+        /// <summary>
+        /// Toggle all selected modules.
+        /// </summary>
+        /// <returns>ModulesManager</returns>
         public ModulesManager Toggle()
         {
             foreach (var module in SelectedModules)
@@ -307,14 +532,14 @@ namespace HomeGenie.Automation.Scripting
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                         );
                     }
                     else
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                         );
                     }
                 }
@@ -323,8 +548,23 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        #endregion
+
+
         #region Properties
 
+        /// <summary>
+        /// Gets or sets "Status.Level" parameter of selected modules. If more than one module is selected, when reading this property the average level value is returned.
+        /// </summary>
+        /// <value>The level (percentage value 0-100).</value>
+        /// <remarks />
+        /// <example>
+        /// Example:
+        /// <code>
+        /// // Set the level of all modules with EnergySavingMode flag enabled to 40%
+        /// Modules.WithFeature("EnergyManagement.EnergySavingMode").Level = 40;
+        /// </code>
+        /// </example>
         public double Level
         {
             get
@@ -349,11 +589,14 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 this.command = Commands.Control.CONTROL_LEVEL;
-                this.Set(value.ToString());
+                this.Set(value.ToString(CultureInfo.InvariantCulture));
             }
         }
 
-
+        /// <summary>
+        /// Gets "on" status ("Status.Level" > 0).
+        /// </summary>
+        /// <value><c>true</c> if at least one module in the current selection is on; otherwise, <c>false</c>.</value>
         public bool IsOn
         {
             get
@@ -377,6 +620,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets "off" status ("Status.Level" == 0).
+        /// </summary>
+        /// <value><c>true</c> if at least one module in the current selection is off; otherwise, <c>false</c>.</value>
         public bool IsOff
         {
             get
@@ -385,6 +632,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets "alarm" status ("Sensor.Alarm" > 0).
+        /// </summary>
+        /// <value><c>true</c> if at least one module in the current is alarmed; otherwise, <c>false</c>.</value>
         public bool Alarmed
         {
             get
@@ -404,6 +655,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets "motion detection" status ("Sensor.MotionDetect" > 0).
+        /// </summary>
+        /// <value><c>true</c> if at least one module in the current detected motion; otherwise, <c>false</c>.</value>
         public bool MotionDetected
         {
             get
@@ -423,6 +678,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets temperature value ("Sensor.Temperature").
+        /// </summary>
+        /// <value>The temperature parameter of selected module (average value is returned when more than one module is selected).</value>
         public double Temperature
         {
             get
@@ -431,6 +690,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets luminance value ("Sensor.Luminance").
+        /// </summary>
+        /// <value>The luminance parameter of selected module (average value is returned when more than one module is selected).</value>
         public double Luminance
         {
             get
@@ -439,6 +702,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Gets humidity value ("Sensor.Humidity").
+        /// </summary>
+        /// <value>The humidity parameter of selected module (average value is returned when more than one module is selected).</value>
         public double Humidity
         {
             get
@@ -447,53 +714,8 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        // TODO: deprecate this
-        public string X10RfData
-        {
-            get
-            {
-                return RfRemoteData;
-            }
-        }
-
-        public string RfRemoteData
-        {
-            get
-            {
-                string rfData = "";
-                var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_X10 && m.Address == "RF"));
-                if (rfModule != null)
-                {
-                    var rawdataParameter = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData");
-                    if (rawdataParameter != null)
-                    {
-                        rfData = rawdataParameter.Value;
-                    }
-                }
-                return rfData;
-            }
-        }
-
-        // TODO: deprecate this
-        public string RfRemoteDataW800
-        {
-            get
-            {
-                string rfData = "";
-                var rfModule = homegenie.Modules.Find(m => (m.Domain == Domains.HomeAutomation_W800RF && m.Address == "RF"));
-                if (rfModule != null)
-                {
-                    var rawdataParameter = Service.Utility.ModuleParameterGet(rfModule, "Receiver.RawData");
-                    if (rawdataParameter != null)
-                    {
-                        rfData = rawdataParameter.Value;
-                    }
-                }
-                return rfData;
-            }
-        }
-
         #endregion
+
 
         public ModulesManager Reset()
         {
@@ -512,6 +734,20 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        internal static List<string> GetArgumentsList(string csArgumentList)
+        {
+            var returnValue = new List<string>();
+            if (csArgumentList.IndexOf('|') > 0)
+            {
+                returnValue = csArgumentList.Split('|').ToList<string>();
+            }
+            else
+            {
+                returnValue = csArgumentList.Split(',').ToList<string>();
+            }
+            return returnValue;
+        }
+
         private double GetAverageParameterValue(string parameter)
         {
             double averageValue = 0;
@@ -528,20 +764,6 @@ namespace HomeGenie.Automation.Scripting
             return averageValue;
         }
 
-        internal static List<string> GetArgumentsList(string csArgumentList)
-        {
-            var returnValue = new List<string>();
-            if (csArgumentList.IndexOf('|') > 0)
-            {
-                returnValue = csArgumentList.Split('|').ToList<string>();
-            }
-            else
-            {
-                returnValue = csArgumentList.Split(',').ToList<string>();
-            }
-            return returnValue;
-        }
-
         private void DelayIteration()
         {
             if (this.iterationDelay > 0)
@@ -555,7 +777,6 @@ namespace HomeGenie.Automation.Scripting
             migCommand.Domain = module.Domain;
             migCommand.NodeId = module.Address;
             homegenie.InterfaceControl(migCommand);
-            homegenie.WaitOnPending(module.Domain);
         }
     }
 }

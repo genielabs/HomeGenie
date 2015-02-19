@@ -32,6 +32,8 @@ using Newtonsoft.Json.Converters;
 
 using HomeGenie.Service;
 
+using MIG;
+
 namespace HomeGenie.Data
 {
     [Serializable()]
@@ -40,7 +42,7 @@ namespace HomeGenie.Data
         public string Name { get; set; }
         public string Description { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public DeviceTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
+        public ModuleTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
 
         // location in actual physical Control-topology
         public string Domain { get; set; } // only Domain is used. Interface should be used instead?
@@ -56,7 +58,7 @@ namespace HomeGenie.Data
             Name = "";
             Address = "";
             Description = "";
-            DeviceType = DeviceTypes.Generic;
+            DeviceType = MIG.ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
             RoutingNode = "";
         }
@@ -73,25 +75,6 @@ namespace HomeGenie.Data
             stream.Close();
 
             return obj;
-        }
-
-        public enum DeviceTypes
-        {
-            Generic = -1,
-            Program,
-            Switch,
-            Light,
-            Dimmer,
-            Sensor,
-            Temperature,
-            Siren,
-            Fan,
-            Thermostat,
-            Shutter,
-            DoorWindow,
-            MediaTransmitter,
-            MediaReceiver
-            //siren, alarm, motion sensor, door sensor, thermal sensor, etc.
         }
 
     }

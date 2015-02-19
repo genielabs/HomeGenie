@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06995CE8-149B-42FA-B345-FB11C4D6E180}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZWaveLib</RootNamespace>
+    <AssemblyName>ZWaveLib</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ReleaseVersion>1.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZWaveMessage.cs" />
+    <Compile Include="ZWavePort.cs" />
+    <Compile Include="Handlers\Basic.cs" />
+    <Compile Include="Handlers\SwitchBinary.cs" />
+    <Compile Include="Handlers\SwitchMultilevel.cs" />
+    <Compile Include="Handlers\Alarm.cs" />
+    <Compile Include="Handlers\SensorBinary.cs" />
+    <Compile Include="Handlers\SensorAlarm.cs" />
+    <Compile Include="Handlers\SensorMultilevel.cs" />
+    <Compile Include="Handlers\SceneActivation.cs" />
+    <Compile Include="Handlers\Thermostat.cs" />
+    <Compile Include="Handlers\Meter.cs" />
+    <Compile Include="Handlers\Configuration.cs" />
+    <Compile Include="Handlers\Association.cs" />
+    <Compile Include="Handlers\WakeUp.cs" />
+    <Compile Include="Handlers\Battery.cs" />
+    <Compile Include="Handlers\MultiInstance.cs" />
+    <Compile Include="Handlers\ManufacturerSpecific.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="ZWaveNode.cs" />
+    <Compile Include="Values\AlarmValue.cs" />
+    <Compile Include="Values\EnergyValue.cs" />
+    <Compile Include="Values\SensorValue.cs" />
+    <Compile Include="Values\UserCodeValue.cs" />
+    <Compile Include="Handlers\UserCode.cs" />
+    <Compile Include="Values\ZWaveValue.cs" />
+    <Compile Include="ZWaveEvent.cs" />
+    <Compile Include="Enums.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\SerialPortLib\SerialPortLib.csproj">
+      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
+      <Name>SerialPortLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+</Project>

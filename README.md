@@ -3,13 +3,57 @@
 **Project info and documentation**:
 http://homegenie.it
 
+![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_eden_01.jpg "HomeGenie Dashboard 1")
+
+
+![ScreenShot](https://github.com/genielabs/HomeGenie/raw/screenshots/screenshots/homegenie_01.jpg "HomeGenie Dashboard 2")
+
 ## Supported IDEs
 
-**MonoDevelop / Xamarin Studio**:
-HomeGenie_Linux/HomeGenie_Linux.sln
+- **MonoDevelop / Xamarin Studio**
+- **Microsoft Visual Studio**
 
-**Microsoft Visual Studio**:
-HomeGenie_Windows/HomeGenie_VS10.sln
+
+## Building, debugging and packaging HomeGenie
+
+**Linux**
+- Open the *HomeGenie_Linux/HomeGenie_Linux.sln* solution file
+- Prepare base files by building the *BaseFiles/Linux* project
+- Build/Debug the main *HomeGenie* project
+- To bundle a debian setup package, build the *Packger* project (even if this appear to be disabled, it will lauch a script in a terminal window)
+
+**Windows**
+- Open the *HomeGenie_Windows/HomeGenie_VS10.sln* solution file
+- Prepare base files by building the *BaseFiles/Windows* project
+- Build/Run/Debug the main *HomeGenie* project
+- To bundle a setup package, open and run the InnoSetup file located in the *HomeGenie_Windows/Packager* folder.
+
+**Mac**
+- Open the *HomeGenie_Mac/HomeGenie_Mac.sln* solution file
+- Build/Debug the main *HomeGenie* project
+- no setup packaging currently supported for Mac
+
+To debug mono remotely on RPi using Xamarin Studio on Mac follow these steps:
+
+1. In *startup_debug.sh* replace the IP on lines 13 and 16 from *10.0.1.10* to the actual IP address of your Raspberry Pi.
+2. Start HG from the console using *startup_debug.sh*
+
+    ```bash
+    $ cd /usr/local/bin/homegenie
+    $ ./startup_debug.sh
+    ```
+
+3. Start Xamarin Studio from Terminal with one environment variable defined:
+
+    ```bash
+    $ export MONODEVELOP_SDB_TEST=1
+    $ cd /Applications
+    $ open Xamarin\ Studio.app/
+    ```
+
+4. Open the project. To start debugging connect to mono debugger that runs on RPi using *Run* > *Run With* > *Custom Command Mono Soft Debugger* menu option. It will open a prompt window where you should enter the IP address of RPi in the *IP* field and 10000 in the *Port* field.
+5. Click *Connect* and debug will start.
+
 
 ## Precompiled packages and install instructions
 

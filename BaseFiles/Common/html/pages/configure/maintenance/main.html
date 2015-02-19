@@ -1,0 +1,452 @@
+<div data-role="page" id="page_configure_maintenance">
+    {include pages/header.html}
+
+    <div class="ui-content">
+
+        <img src="images/maintenance.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_maintenance_heading">Maintenance</h3></div>
+
+        <ul data-role="listview">
+            <li data-locale-id="configure_system_options" data-role="list-divider">System Options</li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_updatemanager">Update Manager</span> </label>
+                            <p id="configure_system_updatemanager_info" style="margin-top:5px"></p>
+                            <div id="configure_system_updatemanager_detailsscroll" style="background-color: black; border: 1px dashed gray; overflow-y: scroll; overflow-x: hidden; max-height: 60px;">
+                                <p id="configure_system_updatemanager_details">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a data-locale-id="configure_system_updatemanager_updatecheck" id="configure_system_updatemanager_updatebutton" class="ui-btn ui-corner-all">Update Check</a>
+                        <a data-locale-id="configure_system_updatemanager_installupdate" class="ui-btn ui-corner-all" href="#systemsettings_updatewarning_popup" data-rel="popup">Install Update</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_restart_service">Service Restart</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a id="maintenance_configuration_restartbutton" class="ui-btn ui-corner-all" data-locale-id="configure_system_restart" href="#maintenance_configuration_servicerestartpopup" data-rel="popup" data-transition="slidedown">Restart</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_loganddebug">Log file</label>
+                        <p data-locale-id="configure_system_logdownload">Download</p>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
+                            <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_logging" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li data-locale-id="configure_system_httpsettings" data-role="list-divider">HTTP Settings</li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label data-locale-id="configure_security_passwordprotectedaccess">Password protected access</label>
+                            <img id="securitysettings_password_image" src="images/protection-on.png" width="64" height="64" />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#securitysettings_password_popup" data-locale-id="configure_security_passwordprotectedaccess_set" data-rel="popup" class="ui-btn ui-corner-all">Set</a>
+                        <a href="#" id="securitysettings_password_clear" data-locale-id="configure_security_passwordprotectedaccess_clear" data-rel="popup" class="ui-btn ui-corner-all">Clear</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_serviceportis">Http service port is</span> <span id="systemsettings_httpport_text"></span></label>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a data-locale-id="configure_system_serviceportchange" href="#systemsettings_httpport_popup" data-rel="popup" class="ui-btn ui-corner-all">Change Port</a>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_httpcache">Http Service Cache</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_httpcache" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+
+            <li data-locale-id="configure_system_configanddata" data-role="list-divider">Configuration and Data</li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label data-locale-id="configure_maintenance_configuration">Configuration</label><br />
+                            <form id="restore_configuration_form" style="margin-top:38px" target="uploadframe" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationRestore" data-ajax="false">
+                                <input id="restore_configuration_uploadfile" type="file" title="Restore from backup file." name="file" />
+                            </form>
+                            <iframe id="restore_configuration_uploadframe" name="uploadframe" src="/dummy" style="display:none;width:0;height:0;border:0"></iframe>
+                            <br />
+                            <p data-locale-id="configure_maintenance_configuration_info"><b>Note:</b> before restoring a backup file you've to set the same system password used when creating it.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a id="maintenance_configuration_backupbutton" data-locale-id="configure_maintenance_configuration_backup" class="ui-btn ui-corner-all" target="restore_configuration_downloadframe" href="../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup">Backup</a>
+                        <a id="maintenance_configuration_restorebutton" data-locale-id="configure_maintenance_configuration_restore" href="#" class="ui-btn ui-corner-all">Restore</a>
+                        <a class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_configuration_factory_reset" href="#maintenance_configuration_factoryresetpopup" data-rel="popup" data-transition="slidedown">Factory Reset</a>
+                        <iframe id="restore_configuration_downloadframe" name="downloadframe" src="/dummy" style="display:none;width:0;height:0;border:0"></iframe>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label data-locale-id="configure_system_modulescleanup">Modules Cleanup</label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#systemsettings_modulesdelete" class="ui-btn ui-corner-all" data-locale-id="configure_system_modulesselect" data-rel="popup">Select Modules</a>
+                    </div>
+                </div>
+
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label data-locale-id="configure_system_remotemodules">Remote Modules Routing</label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="javascript:HG.Configure.Modules.RoutingReset()" class="ui-btn ui-corner-all" data-locale-id="configure_system_modsroutingreset">Reset</a>
+                    </div>
+                </div>
+
+            </li>
+
+            <li data-locale-id="configure_system_statistics" data-role="list-divider">Statistics</li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_statistics_clear">Clear All Statistics Data</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <!-- TODO: Confirmation for this?-->
+                        <a href="javascript:HG.Statistics.Database.Reset()" class="ui-btn ui-corner-all" data-locale-id="configure_system_databasereset">Reset</a>
+                    </div>
+                </div>
+
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_statistics_databasemaxsize">Maximum Database Size is</span> <span id="systemsettings_databasemaxsize_text"></span> MB</label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#systemsettings_databasemaxsizechange_popup" data-locale-id="configure_system_statistics_changedatabasemaxsize" data-rel="popup" class="ui-btn ui-corner-all">Change</a>
+                    </div>
+                </div>
+
+            </li>
+            
+
+            <!-- Might be dangerous for average user without constraints? Hiding for now...
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div>
+                            <label><span data-locale-id="configure_system_statistics_timeresolution">Record statistics every</span> <span id="systemsettings_statistics_timeresolutionseconds_text"></span> <span data-locale-id="configure_system_statistics_timeresolution_units">seconds</span></label><br />
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px">
+                        <a href="#systemsettings_databasemaxsizechange_popup" data-locale-id="configure_system_statistics_changetimeresolution" data-rel="popup" class="ui-btn ui-corner-all">Change Size</a>
+                    </div>
+                </div>
+
+            </li>
+            -->
+
+
+            <li data-locale-id="configure_system_userinterface" data-role="list-divider">User Interface</li>
+            <li>
+                <span data-locale-id="configure_system_theme">Theme</span>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('a')">A</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('b')">B</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('c')">C</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('d')">D</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('e')">E</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('f')">F</a>
+                    <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('g')">G</a>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_eventshistory">Events History</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_eventshistory" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_blockedpopups">Blocked popups</label><br />
+                    </div>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <a data-locale-id="configure_system_blockedpopups_edit" href="#configure_popupsettings_edit" data-rel="popup" class="ui-btn ui-corner-all">Edit</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+        <div id="systemsettings_updateinstall_popup" class="ui-corner-all" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+                <p id="configure_system_updateinstall_log" data-role="listview" style="font-family:monospace; font-size:8pt;"></p>
+            </div>
+            <div id="configure_system_updateinstall_status" style="border:1px dashed gray;margin:5px; padding:5px; height:50px; overflow:hidden"></div>
+            <div data-role="footer" data-tap-toggle="false" align="right">
+                <a id="configure_system_updateinstall_button" href="#" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-left ui-disabled" style="margin:8px">Install</a>
+            </div>
+        </div>
+
+
+        <div id="systemsettings_modulesdelete" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_deletemodule">Delete Module</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content" style="height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;">
+                <ul id="configure_interfaces_modules_list" data-role="listview"></ul>
+            </div>
+            <div data-role="footer" data-tap-toggle="false" style="height:54px">
+                <p align="center">Tap a module to delete it.</p>
+            </div>
+        </div>
+
+
+        <div id="systemsettings_backuprestores1" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="systemsettings_backuprestores1heading">Restore Configuration</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_backuprestores1note" class="ui-title">Select Automation Programs to restore:</h3>
+                <a data-locale-id="systemsettings_backuprestores1selectallnone" id="systemsettings_backuprestores1selectallbtn" class="ui-btn">Select all / none</a>
+                <fieldset id="systemsettings_backuprestores1plist" data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:10px;height:280px;max-height:280px;overflow-y:scroll;overflow-x:hidden;"></fieldset>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a id="systemsettings_backuprestores1cancelbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1cancel" data-rel="back" data-transition="flow">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_backuprestores1confirmbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="systemsettings_backuprestores1confirm">Restore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="systemsettings_httpport_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_serviceportheading">Http Service Port</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_serviceportchangenote" class="ui-title">Note: after changing port HomeGenie must be restarted to make changes effective!</h3>
+                <p>
+                    <label for="http_service_port"></label>
+                    <input id="http_service_port" type="number" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_serviceportcancel" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_httpport_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_serviceportchange" data-rel="back" data-transition="flow">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="securitysettings_password_popup" class="ui-corner-all hg-popup-b" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="securitysettings_password_setpassword">Set password</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <p data-locale-id="securitysettings_password_enterpassword">Enter password for 'admin' user</p>
+                <p>
+                    <label for="securitysettings_user_password"></label>
+                    <input id="securitysettings_user_password" type="password" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a class="ui-btn ui-corner-all" data-locale-id="securitysettings_password_changecancel" href="#" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="securitysettings_password_change" href="#" class="ui-btn ui-corner-all" data-locale-id="securitysettings_password_changecommit" data-rel="back" data-transition="flow">Set</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="maintenance_configuration_factoryresetpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="maintenance_configuration_factoryreset">Factory Reset?</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_maintenance_resetprompt" class="ui-title">Are you sure you want to reset system configuration to factory defaults?</h3>
+                <p data-locale-id="configure_maintenance_resetwarning"></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="maintenance_configuration_factoryresetbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetproceed" data-rel="back" data-transition="slideup">Proceed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="maintenance_configuration_servicerestartpopup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="maintenance_configuration_servicerestart">Restart Service?</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_maintenance_restartprompt" class="ui-title">Are you sure you want to restart service?</h3>
+                <p data-locale-id="configure_maintenance_restartwarning"></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="maintenance_configuration_restartproceedbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetproceed" data-rel="back" data-transition="slideup">Proceed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="systemsettings_updatewarning_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_updateinstall">Update Install</h1>
+            </div>
+            <div class="ui-content" class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_updateinstall_warning" class="ui-title">It is strongly recommended to make a backup of your configuration before proceeding with any update.</h3>
+                <p></p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_maintenance_resetcancel" data-rel="back" data-transition="slideup">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="configure_system_updatemanager_proceedbutton" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_updatemanager_installupdate">Install Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="systemsettings_databasemaxsizechange_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_statistics_databasemaxsizechange">Maximum Size (MB)</h1>
+            </div>
+
+            <div class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_statistics_databasemaxsizechange_note" class="ui-title">Note: after changing size, HomeGenie must be restarted to make changes effective!</h3>
+                <p>
+                    <label for="systemsettings_databasemaxsizechange_size" />
+                    <input id="systemsettings_databasemaxsizechange_size" type="number" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_databasemaxsizechange_cancel" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_databasemaxsize_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_databasemaxsizechange_commit" data-rel="back" data-transition="flow">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--
+        <div id="systemsettings_statistics_timeresolutionseconds_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+            <div data-role="header" class="ui-corner-top">
+                <h1 data-locale-id="configure_system_statistics_timeresolutionchange">Statistics Record Interval</h1>
+            </div>
+
+            <div class="ui-corner-bottom ui-content">
+                <h3 data-locale-id="configure_system_statistics_timeresolutionchange_note" class="ui-title">Note: after changing interval, HomeGenie must be restarted to make changes effective!</h3>
+                <p>
+                    <label for="systemsettings_statistics_timeresolutionchange_seconds" />
+                    <input id="systemsettings_statistics_timeresolutionchange_seconds" type="number" />
+                </p>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_cancel" data-rel="back">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a id="systemsettings_statistics_timeresolution_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_statistics_timeresolutionchange_commit" data-rel="back" data-transition="flow">Change</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->    
+
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#page_configure" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
+                        Back
+                    </a>
+                </li>
+                <li>
+                    <a href="#page_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#page_configure_interfaces" class="ui-btn ui-icon-gear ui-btn-icon-right" data-locale-id="configure_menu_system" data-transition="slide">
+                        Interfaces
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div>
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.Maintenance.InitializePage();
+</script>

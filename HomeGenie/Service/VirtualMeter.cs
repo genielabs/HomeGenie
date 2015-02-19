@@ -77,6 +77,7 @@ namespace HomeGenie.Service
                             {
                                 parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL; });
                                 double level = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                                double fuzzyness = (new Random().Next(0, 50) - 25) / 100D;
                                 //
                                 homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction()
                                 {
@@ -84,7 +85,7 @@ namespace HomeGenie.Service
                                     SourceId = module.Address,
                                     SourceType = module.Description,
                                     Path = ModuleParameters.MODPAR_METER_WATTS,
-                                    Value = level == 0 ? "0" : (watts * level).ToString(/* System.Globalization.CultureInfo.InvariantCulture */)
+                                    Value = level == 0 ? "0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
                                 });
                                 //
                                 Thread.Sleep(100);

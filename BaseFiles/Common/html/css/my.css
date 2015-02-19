@@ -1,0 +1,468 @@
+/* Fonts */
+
+body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oxygen', Thaoma, Arial, sans-serif !important;
+    font-weight: normal;
+}
+
+
+/* Code Mirror */
+
+.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 44px;
+    bottom: 10px;
+    left: 5px;
+    right: 5px;
+    border solid 1px red;
+    display: block;
+}
+
+.CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 11pt !important;
+    white-space: pre;
+    line-height: 12pt;
+}
+
+.CodeMirror-linenumber {
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+.CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+.CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+
+
+/* General purpose */
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.programline {
+    margin: 10px;
+}
+
+
+
+/* HomeGenie UI */
+
+#systemsettings_updateinstall_popup-popup,
+#systemsettings_zwavediscovery_popup-popup {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+}
+
+#automationprograms_program_options-popup {
+    min-width: 280px;
+    max-width: 90%;
+}
+
+.hg-event-popup {
+    position: fixed;
+    background-color: black;
+    color: white;
+    font-family: monospace !important;
+    font-size: 10pt;
+    border: solid 1px gray;
+    padding: 5px;
+    margin-top: 85px;
+    right: -300px;
+    width: 285px;
+    max-height: 120px;
+    opacity: 0.0;
+    z-index: 1973;
+}
+
+.hg-popup-a {
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.hg-popup-b {
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.hg-label {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    direction:rtl;
+}
+
+.hg-program-options-scroll {
+    border: solid 1px gray;
+    padding: 5px;
+    padding-top: 0;
+    height: 180px;
+    max-height: 180px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.hg-widget-a {
+    width: 260px;
+    margin: 15px;
+}
+
+.hg-widget-b {
+    min-width: 260px;
+    max-width: 540px;
+    margin: 15px;
+}
+
+.hg-widget-c {
+    width: auto;
+    margin: 15px;
+}
+
+.hg-widget-a div.ui-header, .hg-widget-b div.ui-header {
+    height: 40px;
+}
+
+.hg-widget-header {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 18pt;
+    margin: 0;
+    padding: 0;
+}
+
+.hg-widget-footer {
+    padding-left: 5px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+}
+
+.hg-widget-group-title {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.hg-widget-container {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+}
+
+.hg-widget-container .ui-slider
+{
+    width: 120px;
+}
+
+.hg-widget-icon {
+    margin-left: 20px;
+    height: 64px;
+}
+
+
+/* Indicators Icons */
+
+.hg-indicator-energy {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/energy-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-temperature {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/temperature-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-humidity {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/humidity-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-luminance {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/luminance-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-level {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/level-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-alarm {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/alarm-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-generic {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/generic-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-bulb {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/bulb-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-plug {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/plug-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-door {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/plug-door.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-wizard-capturebutton {
+    cursor: pointer;
+    position: absolute;
+    margin: 2px;
+    padding: 4px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    border: 1px solid green;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: darkgreen;
+}
+
+.hg-wizard-capturebutton .active {
+    border: 1px solid lime;
+    background-color: green;
+}
+
+.hg-wizard-grid {
+    background-color: white;
+    color: black;
+}
+
+.hg-wizard-grid:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.hg-wizard-grid div {
+    padding: 6px;
+    border-bottom: 1px solid lightgray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.hg-wizard-grid-linenumber {
+    width: 80px;
+    height: 26px;
+    padding-top: 7px;
+    float: left;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.hg-wizard-grid-linenumber:hover {
+    background-color: limegreen;
+    cursor: pointer;
+}
+
+#page_automation_editprogram label {
+    font-weight: bold;
+    font-size: 11pt;
+    font-variant: small-caps;
+}
+
+/* Inverted icons for theme A */
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-energy, div.ui-bar-inherit span.hg-indicator-energy {
+    background: url("../images/indicators/energy.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-temperature, div.ui-bar-inherit span.hg-indicator-temperature {
+    background: url("../images/indicators/temperature.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity, div.ui-bar-inherit span.hg-indicator-humidity {
+    background: url("../images/indicators/humidity.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-inherit span.hg-indicator-luminance {
+    background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm {
+    background: url("../images/indicators/alarm.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-generic, div.ui-bar-inherit span.hg-indicator-geniric {
+    background: url("../images/indicators/generic.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-level, div.ui-bar-inherit span.hg-indicator-level {
+    background: url("../images/indicators/level.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb, div.ui-bar-inherit span.hg-indicator-bulb {
+    background: url("../images/indicators/bulb.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug, div.ui-bar-inherit span.hg-indicator-plug {
+    background: url("../images/indicators/plug.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inherit span.hg-indicator-door {
+    background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
+}
+
+.ui-slider-track.ui-mini {
+    height: 12px;
+    top: 8px;
+    margin: 0px 15px 0px 68px;  /* add this line to file */
+}
+div.ui-slider-switch.ui-mini {
+    height: 29px;
+    top: 0;
+    margin: .5em 0; /* add this line */
+}
+
+
+.ui-li-has-thumb .ui-btn {
+    min-height: 18px !important;
+    max-height: 18px !important;
+    height: 18px !important;
+    padding-left: 50px !important;
+}
+
+.ui-autocomplete {
+    z-index: 100000000 !important;
+}
+
+.ui-widget {
+    background-image: none;
+    opacity: 0.9;
+}
+/*.ui-menu-item { color: red; text-shadow: black; }*/
+
+
+.freewall {
+    float: left;
+}
+
+.ui-datepicker {     
+    font-size: 14pt;
+    height: 300px;
+    width: auto;
+}
+.ui-datepicker-daywe {
+    background: rgb(100, 100, 100);
+    background: rgba(100, 100, 100, 0.4);
+}
+.ui-datepicker-day0 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.4);
+}
+.ui-datepicker-day1 {
+    background: rgb(100, 100, 255);
+    background: rgba(100, 100, 255, 0.4);
+}
+.ui-datepicker-day2 {
+    background: rgb(0, 255, 0);
+    background: rgba(0, 255, 0, 0.4);
+}
+.ui-datepicker-day3 {
+    background: rgb(255, 0, 0);
+    background: rgba(255, 0, 0, 0.4);
+}
+.ui-datepicker-calendar .ui-state-default, .ui-widget-content .ui-state-default { background: none; }
+.ui-datepicker-calendar .ui-state-highlight, .ui-widget-content .ui-state-highlight { color: yellow; text-decoration: underline }
+.ui-datepicker-year { display: none; }
+
+/**** media queries ****/
+
+/** Small Mobile **/
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    .hg-event-popup {
+        display: none;
+    }
+}
+
+
+/** Mobile **/
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+}
+
+/** Tablet **/
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+}
+
+/** Tablet (landscape) **/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+}

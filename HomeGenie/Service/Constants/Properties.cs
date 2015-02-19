@@ -32,8 +32,22 @@ namespace HomeGenie.Service.Constants
     public static class Properties
     {
         // internal HomeGenie parameters
+        public const string HOMEGENIE_STATUS
+            = "HomeGenie.Status";
+        public const string SYSTEMINFO_HTTPPORT
+            = "SystemInfo.HttpPort";
         public const string SCHEDULER_ERROR
             = "Scheduler.Error";
+        public const string PROGRAM_STATUS
+            = "Program.Status";
+        public const string RUNTIME_ERROR
+            = "Runtime.Error";
+        public const string PROGRAM_NOTIFICATION
+            = "Program.Notification";
+        public const string INSTALLPROGRESS_MESSAGE
+            = "InstallProgress.Message";
+        public const string INSTALLPROGRESS_UPDATE
+            = "InstallProgress.Update";
 
         // commonly used parameters
         public const string STATUS_LEVEL

@@ -23,9 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-
 using System.IO;
-
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using HomeGenie.Service;
@@ -35,6 +33,7 @@ using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace HomeGenie.Automation
 {
@@ -52,15 +51,10 @@ namespace HomeGenie.Automation
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
 
         private HomeGenie.Service.TsList<ProgramBlock> automationPrograms = new HomeGenie.Service.TsList<ProgramBlock>();
-
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
-        private CSharpAppFactory scriptingHost = null;
-
         private MacroRecorder macroRecorder = null;
-
         //private object lockObject = new object();
-
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
@@ -75,13 +69,7 @@ namespace HomeGenie.Automation
                 blockType = type;
             }
 
-            public override void ErrorReported(
-                ScriptSource source,
-                string message,
-                Microsoft.Scripting.SourceSpan span,
-                int errorCode,
-                Microsoft.Scripting.Severity severity
-            )
+            public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
             {
                 Errors.Add(new ProgramError() {
                     Line = span.Start.Line,
@@ -102,7 +90,6 @@ namespace HomeGenie.Automation
         public ProgramEngine(HomeGenieService hg)
         {
             homegenie = hg;
-            scriptingHost = new CSharpAppFactory(homegenie);
             macroRecorder = new MacroRecorder(this);
             scheduler = new SchedulerService(this);
             scheduler.Start();
@@ -144,14 +131,7 @@ namespace HomeGenie.Automation
                             };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(
-                                program,
-                                "Runtime.Error",
-                                "TC: " + result.Exception.Message.Replace(
-                                    '\n',
-                                    ' '
-                                )
-                            );
+                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                         }
                         else
                         {
@@ -164,7 +144,29 @@ namespace HomeGenie.Automation
                         isConditionSatisfied = (program.Conditions.Count > 0);
                         for (int c = 0; c < program.Conditions.Count; c++)
                         {
-                            bool res = VerifyProgramCondition(program.Conditions[c]);
+                            // check for OR logic operator
+                            if (program.Conditions[c].ComparisonOperator == ComparisonOperator.LogicOrJoint)
+                            {
+                                if (isConditionSatisfied)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    isConditionSatisfied = (c < program.Conditions.Count - 1);
+                                    continue;
+                                }
+                            }
+                            //
+                            bool res = false;
+                            try
+                            {
+                                res = VerifyProgramCondition(program.Conditions[c]);
+                            }
+                            catch
+                            {
+                                // TODO: report/handle exception
+                            }
                             isConditionSatisfied = (isConditionSatisfied && res);
                         }
                     }
@@ -202,7 +204,7 @@ namespace HomeGenie.Automation
                     };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, "Runtime.Error", "TC: " + ex.Message.Replace('\n', ' '));
+                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -247,13 +249,17 @@ namespace HomeGenie.Automation
             case "javascript":
                 errors = CompileJavascript(program);
                 break;
+            case "arduino":
+                errors = CompileArduino(program);
+                break;
             }
             return errors;
         }
 
         public void Run(ProgramBlock program, string options)
         {
-            if (program.IsRunning) return;
+            if (program.IsRunning)
+                return;
             //
             if (program.ProgramThread != null)
             {
@@ -262,7 +268,7 @@ namespace HomeGenie.Automation
             }
             //
             program.IsRunning = true;
-            RaiseProgramModuleEvent(program, "Program.Status", "Running");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Running");
             //
             if (program.Type.ToLower() != "wizard")
             {
@@ -275,7 +281,17 @@ namespace HomeGenie.Automation
                     program.TriggerTime = DateTime.UtcNow;
                     program.ProgramThread = new Thread(() =>
                     {
-                        var result = program.Run(options);
+                        MethodRunResult result = null;
+                        try
+                        {
+                            result = program.Run(options);
+                        }
+                        catch (Exception ex)
+                        {
+                            result = new MethodRunResult();
+                            result.Exception = ex;
+                        }
+                        //
                         if (result != null && result.Exception != null)
                         {
                             // runtime error occurred, script is being disabled
@@ -290,18 +306,11 @@ namespace HomeGenie.Automation
                             };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(
-                                program,
-                                "Runtime.Error",
-                                "CR: " + result.Exception.Message.Replace(
-                                    '\n',
-                                    ' '
-                                )
-                            );
+                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     });
                     //
                     try
@@ -312,7 +321,7 @@ namespace HomeGenie.Automation
                     {
                         program.Stop();
                         program.IsRunning = false;
-                        RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                     }
                 }
             }
@@ -338,7 +347,7 @@ namespace HomeGenie.Automation
                     {
                         program.IsRunning = false;
                     }
-                    RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+                    RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
                 });
                 //
                 program.ProgramThread.Start();
@@ -364,7 +373,8 @@ namespace HomeGenie.Automation
             int pid = USER_SPACE_PROGRAMS_START;
             foreach (ProgramBlock program in automationPrograms)
             {
-                if (pid <= program.Address) pid = program.Address + 1;
+                if (pid <= program.Address)
+                    pid = program.Address + 1;
             }
             return pid;
         }
@@ -375,8 +385,14 @@ namespace HomeGenie.Automation
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
             //
+            // in case of c# script preload assembly from generated .dll
+            if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
+            {
+                program.ScriptErrors = "Program update is required.";
+            }
+            //
             // Initialize state
-            RaiseProgramModuleEvent(program, "Program.Status", "Idle");
+            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
             if (program.IsEnabled)
             {
                 StartProgramEvaluator(program);
@@ -388,8 +404,25 @@ namespace HomeGenie.Automation
             program.IsEnabled = false;
             program.Stop();
             automationPrograms.Remove(program);
+            // delete program files
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
+            // remove csharp assembly
+            try
+            {
+                File.Delete(Path.Combine(file, program.Address + ".dll"));
+            }
+            catch
+            {
+            }
+            // remove arduino folder files 
+            try
+            {
+                Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true);
+            }
+            catch
+            {
+            }
         }
-
         // TODO: find a better solution to this...
         public void ExecuteWizardScript(ProgramBlock program)
         {
@@ -415,19 +448,13 @@ namespace HomeGenie.Automation
                             }
                             break;
                         case "Program.Pause":
-                            Thread.Sleep((int)(double.Parse(
-                                program.Commands[x].CommandArguments,
-                                System.Globalization.CultureInfo.InvariantCulture
-                            ) * 1000));
+                            Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
                             break;
                         case "Program.Repeat":
                                     // TODO: implement check for contiguous repeat statements
                             if (repeatCount <= 0)
                             {
-                                repeatCount = (int)(double.Parse(
-                                    program.Commands[x].CommandArguments,
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                ));
+                                repeatCount = (int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
                             }
                             if (--repeatCount == 0)
                             {
@@ -457,7 +484,7 @@ namespace HomeGenie.Automation
             }
         }
 
-        private void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
+        internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)
         {
             var programModule = homegenie.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
             if (programModule != null)
@@ -497,7 +524,7 @@ namespace HomeGenie.Automation
             //Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
             try
             {
-                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptCondition);
+                jp.Parse(program.ScriptCondition);
             }
             catch (Exception e)
             {
@@ -508,7 +535,7 @@ namespace HomeGenie.Automation
                     string message = error[1];
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        int line = int.Parse(error[0].Split(' ')[0]);
+                        int line = int.Parse(error[0].Split(' ')[1]);
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
@@ -520,7 +547,7 @@ namespace HomeGenie.Automation
             //
             try
             {
-                Jint.Parser.Ast.Program p = jp.Parse(program.ScriptSource);
+                jp.Parse(program.ScriptSource);
             }
             catch (Exception e)
             {
@@ -531,7 +558,7 @@ namespace HomeGenie.Automation
                     string message = error[1];
                     if (message != "hg is not defined") // TODO: find a better solution for this
                     {
-                        int line = int.Parse(error[0].Split(' ')[0]);
+                        int line = int.Parse(error[0].Split(' ')[1]);
                         errors.Add(new ProgramError() {
                             Line = line,
                             ErrorMessage = message,
@@ -560,11 +587,11 @@ namespace HomeGenie.Automation
             // it is a lil' trick for mono compatibility
             // since it was caching the assembly when using the same name
             string tmpfile = Guid.NewGuid().ToString() + ".dll";
-            var result = scriptingHost.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
             // delete old assembly
+            System.CodeDom.Compiler.CompilerResults result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
-
+                result = CSharpAppFactory.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
                 if (File.Exists(program.AssemblyFile))
                 {
                     // delete old assebly
@@ -583,7 +610,8 @@ namespace HomeGenie.Automation
                 result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "-1", ex.Message));
             }
 
-
+            int startCodeLine = 19;
+            int conditionCodeOffset = 7;
             //
             if (result.Errors.Count == 0)
             {
@@ -596,11 +624,11 @@ namespace HomeGenie.Automation
                 {
                     //if (!ce.IsWarning)
                     {
-                        int errorRow = (error.Line - 16);
+                        int errorRow = (error.Line - startCodeLine);
                         string blockType = "CR";
-                        if (errorRow >= sourceLines + 7)
+                        if (errorRow >= sourceLines + conditionCodeOffset)
                         {
-                            errorRow -= (sourceLines + 7);
+                            errorRow -= (sourceLines + conditionCodeOffset);
                             blockType = "TC";
                         }
                         errors.Add(new ProgramError() {
@@ -617,6 +645,39 @@ namespace HomeGenie.Automation
             return errors;
         }
 
+        private List<ProgramError> CompileArduino(ProgramBlock program)
+        {
+            List<ProgramError> errors = new List<ProgramError>();
+
+            // Generate, compile and upload Arduino Sketch
+            string sketchFileName = ArduinoAppFactory.GetSketchFile(program.Address.ToString());
+            if (!Directory.Exists(Path.GetDirectoryName(sketchFileName)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(sketchFileName));
+            }
+            string sketchMakefile = Path.Combine(Path.GetDirectoryName(sketchFileName), "Makefile");
+
+            try
+            {
+                // .ino source is stored in the ScriptSource property
+                File.WriteAllText(sketchFileName, program.ScriptSource);
+                // Makefile source is stored in the ScriptCondition property
+                File.WriteAllText(sketchMakefile, program.ScriptCondition);
+                errors = ArduinoAppFactory.CompileSketch(sketchFileName, sketchMakefile);
+            }
+            catch (Exception e)
+            { 
+                errors.Add(new ProgramError() {
+                    Line = 0,
+                    Column = 0,
+                    ErrorMessage = "General failure: is 'arduino-mk' package installed?\n\n" + e.Message,
+                    ErrorNumber = "500",
+                    CodeBlock = "CR"
+                });
+            }
+
+            return errors;
+        }
 
         private bool VerifyProgramCondition(ProgramCondition c)
         {
@@ -721,19 +782,10 @@ namespace HomeGenie.Automation
                 double dval = 0;
                 DateTime dtval = new DateTime();
                 //
-                if (double.TryParse(
-                        parameter.Value.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
-                        CultureInfo.InvariantCulture,
-                        out dval
-                    ))
+                if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
                 {
                     lvalue = dval;
-                    rvalue = double.Parse(
-                        comparisonValue.Replace(",", "."),
-                        NumberStyles.AllowDecimalPoint,
-                        CultureInfo.InvariantCulture
-                    );
+                    rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
                 }
                 else if (DateTime.TryParse(parameter.Value, out dtval))
                 {
@@ -763,7 +815,6 @@ namespace HomeGenie.Automation
             string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
             var interfaceCommand = new MIGInterfaceCommand(command);
             homegenie.InterfaceControl(interfaceCommand);
-            homegenie.WaitOnPending(programCommand.Domain);
         }
 
         private void StartProgramEvaluator(ProgramBlock program)
@@ -788,14 +839,14 @@ namespace HomeGenie.Automation
             {
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
-                RaiseProgramModuleEvent(program, "Program.Status", "Enabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Enabled");
                 // TODO: CRITICAL
                 // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
                 StartProgramEvaluator(program);
             }
             else
             {
-                RaiseProgramModuleEvent(program, "Program.Status", "Disabled");
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Disabled");
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
             }

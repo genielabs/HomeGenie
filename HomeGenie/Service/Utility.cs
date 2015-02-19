@@ -37,10 +37,10 @@ using System.Threading;
 using System.Runtime.InteropServices;
 
 using HomeGenie.Data;
+using HomeGenie.Service.Constants;
 
 using System.IO.Packaging;
 using System.Xml.Serialization;
-using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Service
 {
@@ -111,7 +111,9 @@ namespace HomeGenie.Service
     {
         public static string GetSimpleResponse(string value)
         {
-            return "[{ ResponseValue : '" + value + "' }]";
+            dynamic res = new ExpandoObject();
+            res.ResponseValue = value;
+            return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(res) + "]";
         }
     }
 
@@ -207,11 +209,11 @@ namespace HomeGenie.Service
 
         }
 
-        internal static void AddFileToZip(string zipFilename, string fileToAdd)
+        internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)
         {
             using (var zip = System.IO.Packaging.Package.Open(zipFilename, FileMode.OpenOrCreate))
             {
-                string destFilename = fileToAdd;
+                string destFilename = (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName);
                 var uri = PackUriHelper.CreatePartUri(new Uri(destFilename, UriKind.Relative));
                 if (zip.PartExists(uri))
                 {
@@ -350,10 +352,7 @@ namespace HomeGenie.Service
                     "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
                     "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
                     "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
-                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\",\n" +
-                    "           \"ValueIncrement\": \"" + parameter.ValueIncrement.ToString() + "\",\n" +
-                    "           \"LastValue\": \"" + JsonEncode(parameter.LastValue) + "\",\n" +
-                    "           \"LastUpdateTime\": \"" + parameter.LastUpdateTime.ToString("u") + "\"\n" +
+                    "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
                     "       },\n";
                 }
                 json = json.TrimEnd(',', '\n');

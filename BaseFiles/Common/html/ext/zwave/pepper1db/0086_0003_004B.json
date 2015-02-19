@@ -1,0 +1,1339 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0086"
+      },
+      "productType": {
+        "@value": "0003"
+      },
+      "productId": {
+        "@value": "004b"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "53"
+      },
+      "appVersion": {
+        "@value": "02"
+      },
+      "appSubVersion": {
+        "@value": "19"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Schalt-Zwischenstecker mit Messfunktion"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Metering Switch Plug In"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Einmaliges Drücken der Aktionstaste startet die Inklusion bzw. Exklusion"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "To start the inklusion or exklusion push the Action Button once."
+          }
+        ]
+      },
+      "productName": "SES3",
+      "brandName": "Smart Switch",
+      "productLine": "Smart Switch",
+      "productVersion": "2.25"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0056",
+          "@secure": "true"
+        },
+        {
+          "@id": "005e",
+          "@version": "2"
+        },
+        {
+          "@id": "0072",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0086",
+          "@version": "2",
+          "@secure": "true"
+        },
+        {
+          "@id": "0098",
+          "@secure": "true"
+        },
+        {
+          "@id": "0025",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0027",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "002b",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "002c",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0032",
+          "@version": "3",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0059",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "005a",
+          "@controlled": "true",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0070",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0073",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "007a",
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0085",
+          "@version": "2",
+          "@inNIF": "false",
+          "@secure": "true"
+        },
+        {
+          "@id": "0082",
+          "@controlled": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 1"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "2",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktiviert das Blinken des Geräten"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Blinking Behavior"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Dies ist ein Zwei-Byte Wert, in dem das Blinkverhalten des Gerätes definiert wird. Das niederwertige Byte definiert in Sekunden, wie lange das Blinken dauern soll. Das höherwertige Byte definiert in 0.1 s, wie lange die einzelne an/aus Sequenz dauern soll."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "This is a double byte value. The LSB defines the total time the device need to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+              }
+            ]
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "00ff",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Dies ist ein Zwei-Byte Wert.\r\nDas niederwertige Byte definiert in Sekunden, wie lange das Blinken dauern soll. Das höherwertige Byte definiert in 0.1 s, wie lange die einzelne an/aus Sequenz dauern soll."
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "This is a double byte value. The LSB defines the total time the device need to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "3",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Überspannungsschutz"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Current Overload Protection"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Die Spannung wird geschlossen wenn diese die Grenzwerte für mehr als 2 Minuten (US: 15,5A, andere: 16,2A) überschreitet."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Load will be closed when the Current overrun (US: 15.5A, other country: 16.2A) and the time more than 2 minutes (0=disabled, 1=enabled)."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Aktivier Überspannungsschutz"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Active Overload Protection"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert Überspannungsschutz"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Deactivate Overload Protection"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "20",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Ausgabe des Laststatus"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Output Load Status"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die Ausgabe der Statusmeldung zur anliegenden Last nach dem anschliesen."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Configure the output load status after re‐power on."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "letzter Status"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "last status"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "immer aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "always on"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "immer inaktive"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "always off"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "80",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Benachrichtigung bei Statusänderungen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Notification on Status Change"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die automatische Benachrichtigung eines assoziierten Gerätes bei Statusänderungen (0=nichts, 1=hail CC, 2=basic CC report)."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the automated status notification of an associated device when status changes (0=nothing, 1=hail CC, 2=basic CC report)."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "nichts"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "nothing"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "hail"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "hail"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "basic CC report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "basic CC report"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "81",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Einstellungen der roten LED"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Configure the state of red LED"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Die LED reagiert entsprechend dem Status (on/off) der anliegenden Last."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "The LED will follow the status (on/off) of its load."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Die LED reagiert entsprechend dem Status (on/off) der anliegenden Last, aber die Rote LED schaltet sich nach 5 Sekunden ab falls keine Änderung des Zustands eintritt (Schalten/Laständerung)."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "When the state of Switch’s load changed, The LED will follow the status (on/off) of its load, but the red LED will turn off after 5 seconds if there is no any switch action."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "90",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktiviert/Deaktivert Parameter 91/92"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enables/disables parameter 91/92"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Aktiviert Parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Enabled parameter 91/92"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert Parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled parameter 91/92"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "91",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0019",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Änderungsschwellwert für Leistungs-Report (Watt)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Minimum Change to send Report (Watt)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die minimale Änderung der Leistungsaufnahme des angeschlossenen Verbrauchers in Watt, die zu einem automatischen Senden von Leistungsdaten führt."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The value represents the minimum change in wattage for a Report to be sent ."
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "7d00",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Definiert die minimale Änderung der Leistungsaufnahme des angeschlossenen Verbrauchers in Watt"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "The value represents the minimum change in wattage."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "92",
+          "@type": "range",
+          "@size": "1",
+          "@default": "05",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Änderungsschwellwert für Leistungs-Report (%)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Minimum Change to send Report (%)"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die minimale Änderung der Leistungsaufnahme des angeschlossenen Verbrauchers in Prozent, die zu einem automatischen Senden von Leistungsdaten führt."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The value represents the minimum change in wattage Percent for a report to be sent.\r\n(Valid values 0‐100) "
+              }
+            ]
+          },
+          "value": {
+            "@from": "00",
+            "@to": "64",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Definiert die minimale Änderung der Leistungsaufnahme des angeschlossenen Verbrauchers in Prozent."
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "The value represents the minimum change in wattage Percent."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "100",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Setzt die Parameter 101/103 zurück"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Set 101‐103 to default"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "zurücksetzen"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "set to default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "nichts"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "nothing"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "101",
+          "@type": "rangemapped",
+          "@size": "4",
+          "@default": "00000008",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Benachrichtigungsart der Benachrichtigungsgruppe 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Report type send in Reporting Group 1"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 1 gesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the type of report sent for the Reporting Group 1."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Mutlisensor-Report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Multisensor Report"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Watt"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Watt"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "00000008",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als kWh"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for kWh"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "102",
+          "@type": "rangemapped",
+          "@size": "4",
+          "@default": "00000000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Benachrichtigungsart der Benachrichtigungsgruppe 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Report Type send in Reporting Group 2"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 2 gesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the type of report sent for the Reporting Group 2."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Mutlisensor-Report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Mutlisensor-Report"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Watt"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Watt"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "00000008",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als kWh"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for kWh"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "103",
+          "@type": "rangemapped",
+          "@size": "4",
+          "@default": "00000000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Benachrichtigungsart der Benachrichtigungsgruppe 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Report Type send in Reporting Group 3"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 3 gesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the type of report sent for the Reporting Group 3."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Mutlisensor-Report"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Mutlisensor-Report"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Watt"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Watt"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "00000008",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als kWh"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for kWh"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "110",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Setzt die Parameter 111/113 zurück"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Set 111‐113 to default"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zurücksetzen"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Set to default"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "nichts"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "nothing"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "111",
+          "@type": "range",
+          "@size": "4",
+          "@default": "000002d0",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sendeinterval für Benachrichtigungsgruppe 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Interval for Reporting Group 1"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert das Zeitinterval, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 1 ausgesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the time interval when the defined report of Reporting Group 1 is sent out."
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "0000ffff",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Interval"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "112",
+          "@type": "range",
+          "@size": "4",
+          "@default": "000002d0",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sendeinterval für Benachrichtigungsgruppe 2"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Interval for Reporting Group 2"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert das Zeitinterval, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 2 ausgesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the time interval when the defined report of Reporting Group 2 is sent out."
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "0000ffff",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Interval"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "113",
+          "@type": "range",
+          "@size": "4",
+          "@default": "0000ffff",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Sendeinterval für Benachrichtigungsgruppe 3"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Send Interval for Reporting Group 3"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Definiert das Zeitinterval, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 3 ausgesendet wird."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Defines the time interval when the defined report of Reporting Group 3 is sent out."
+              }
+            ]
+          },
+          "value": {
+            "@from": "00000000",
+            "@to": "00007d00",
+            "@unit": "s",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Interval"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "200",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Partner ID"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Partner ID"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Aeon Labs Standard "
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Aeon Labs Standard "
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "AT&T"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "AT&T"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "252",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Aktivieren/Deaktivieren der Konfigurationssperre"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable/disable Configuration Locked"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert Konfigurationssperre"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Deactivate configurationlock"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Aktiviert Konfigurationssperre"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Activate configurationlock"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
