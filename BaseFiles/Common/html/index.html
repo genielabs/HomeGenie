@@ -63,7 +63,16 @@
     <script src="js/codemirror-4.03/addon/search/search.js"></script>
     <script src="js/codemirror-4.03/addon/search/match-highlighter.js"></script>
     <script src="js/codemirror-4.03/addon/dialog/dialog.js"></script>
+    
+    <script src="js/codemirror-4.03/addon/hint/xml-hint.js"></script>
+    <script src="js/codemirror-4.03/addon/hint/html-hint.js"></script>
+    <script src="js/codemirror-4.03/mode/xml/xml.js"></script>
+    <script src="js/codemirror-4.03/mode/css/css.js"></script>
+    <script src="js/codemirror-4.03/mode/htmlmixed/htmlmixed.js"></script>
+    
     <!-- other js frameworks and utils -->
+    <script src="js/error-stack-parser.min.js"></script>
+    <script src="js/stackframe.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>
     <script src="js/flot/jquery.flot.js"></script>
     <script src="js/flot/jquery.flot.stack.js"></script>
@@ -187,6 +196,10 @@
     {include pages/configure/programengine/listprograms.html}
     {include pages/configure/programengine/editprogram.html}
     {include pages/configure/programengine/listgroups.html}
+
+    <!-- Configure / Widget Editor -->
+    {include pages/configure/widgeteditor/listwidgets.html}
+    {include pages/configure/widgeteditor/editwidget.html}
 
     <!-- Configure / Scheduler -->
     {include pages/configure/scheduler/main.html}

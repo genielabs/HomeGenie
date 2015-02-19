@@ -1,0 +1,62 @@
+<!-- Configure -->
+<div data-role="page" id="page_configure_widgetsgroups">
+
+    {include pages/header.html}
+
+    <div class="ui-content">
+
+        <img src="images/automation.png" style="position:absolute;top:65px;left:20px;" width="64" />
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_widgets_heading"><font style="color:gray">Widget</font><br />List</h3></div>
+
+        <ul data-ui-field="group-list" data-role="listview"></ul>
+
+    </div>
+
+    <div id="widgetgroup_add" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_widgetsgroup_newgroup">Add Group</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 class="ui-title" data-locale-id="configure_automationgroup_entergroupname">Group name</h3>
+            <input data-ui-field="newname-txt" type="text" />
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_widgetsgroup_newgroupcancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-ui-field="new-btn" href="#" data-locale-id="configure_widgetsgroup_add" class="ui-btn ui-shadow ui-corner-all" data-rel="back" data-transition="flow">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#page_configure" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
+                        Back
+                    </a>
+                </li>
+                <li>
+                    <a href="#page_home" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#widgetgroup_add" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_widgetgroup_bottombar_group_add" data-rel="popup" data-transition="pop">
+                        Add Group
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+
+    </div>
+
+</div>
+
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.WidgetsList.InitializePage();
+</script>

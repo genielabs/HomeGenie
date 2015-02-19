@@ -1,0 +1,115 @@
+<!-- ProgramEngine - Program Edit -->
+<div data-role="page" id="page_widgeteditor_editwidget">
+    {include pages/header.html}
+
+    <img src="images/program.png" style="position:absolute;top:48px;left:20px;" width="64" />
+    <div style="position:absolute;font-size:10pt;top:40px;left:100px"><h3 id="page_widgeteditor_widget_title"></h3></div>
+
+    <div class="ui-content" style="cursor:default;text-align:left;position:absolute;border-top:0px;padding:10px;bottom:30px;top:150px;left:0px;right:0px;margin:0;padding-top:0;overflow-x:hidden;overflow-y:auto">
+
+        <div data-role="navbar" style="max-width:500px">
+            <ul>
+                <li><a data-ui-field="tab1-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(1)" data-ajax="false" data-locale-id="configure_widget_html">HTML</a></li>
+                <li><a data-ui-field="tab2-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(2)" data-ajax="false" data-locale-id="configure_widget_jscript">Javascript</a></li>
+                <li><a data-ui-field="tab3-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(3)" data-ajax="false" data-locale-id="configure_widget_resources">Resources</a></li>
+            </ul>
+        </div>
+        <div class="ui-btn ui-btn-active ui-corner-all" style="text-align:left;position:absolute;margin:0;top:34px;bottom:10px;left:0;right:0;margin-right:30%" data-theme="d">
+
+            <div data-ui-field="tab1-div" style="padding-top:60px;padding-left:4px;padding-right:4px;">
+            
+                <!-- html toolbar -->
+                <div data-ui-field="toolbar1-div">
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:4px;position:absolute;margin:0" data-theme="e">
+                        <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Update Preview</a>
+                    </div>
+                </div>
+
+                <!-- html editor -->
+                <div>
+                    <textarea id="widgeteditor_code_html" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+                </div>
+
+            </div>
+
+            <div data-ui-field="tab2-div" style="display:none" data-theme="d">
+            
+                <!-- html toolbar -->
+                <div data-ui-field="toolbar1-div">
+                    <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:4px;position:absolute;margin:0" data-theme="e">
+                        <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Update Preview</a>
+                    </div>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;right:10px;position:absolute;margin:0" data-theme="f">
+                    <a data-ui-field="errors-btn" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>
+                </div>
+
+                <!-- html editor -->
+                <div>
+                    <textarea id="widgeteditor_code_javascript" onkeydown="if (event.which == 9) { pasteIntoInput(this, '\t'); return false; }" spellcheck="false"></textarea>
+                </div>
+                
+            </div>
+
+            <div data-ui-field="tab3-div" style="display:none" data-theme="d">
+            
+                <p>Here it will be placed editor for language locales, css and image files...</p>
+                
+            </div>
+            
+        </div>
+        
+        <div style="top:10px;left:4px;right:4px;position:absolute;padding:10px;margin:0;bottom:10px;margin-left:70%;overflow:hidden;overflow-y:auto">
+
+            <h2>Preview</h2>
+            <div>
+                <label>Widget bound module</label>
+                <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
+            </div>
+                                    
+            <div align="center">
+                <container><!-- this fake tag 'container' should prevent html errors to corrupt page structure -->
+                    <div data-ui-field="preview-div" style="margin-top:40px"></div>
+                </container>
+            </div>
+            
+        </div>
+
+
+    </div>
+
+    <div id="editwidget_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+            <li><a class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_program_options_save" href="#">Save</a>
+        </ul>
+    </div>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a data-ui-field="back-btn" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#" data-rel="back">
+                        Back
+                    </a>
+                </li>
+                <li>
+                    <a data-ui-field="home-btn" class="ui-btn ui-icon-home ui-btn-icon-left" data-locale-id="bottombar_button_home" data-transition="slide" data-direction="reverse" href="#page_home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#editwidget_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div>
+
+<!-- hg page init script -->
+<script type="text/javascript">
+    HG.WebApp.WidgetEditor.InitializePage();
+</script>

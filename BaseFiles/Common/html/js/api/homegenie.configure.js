@@ -218,6 +218,19 @@ HG.Configure.Modules.RoutingReset = function (callback) {
     });
 };
 //
+HG.Configure.Widgets = HG.Configure.Widgets || {};
+HG.Configure.Widgets.List = function(callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.List/',
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            var list = eval(data);
+            callback(list);
+        }
+    });
+};
+//
 // namespace : HG.Configure.System namespace
 // info      : -
 //	

@@ -293,6 +293,35 @@ HG.WebApp.InitializePage = function ()
     });
     $(editor3.getWrapperElement()).hide();
     //
+    editor4 = CodeMirror.fromTextArea(document.getElementById('widgeteditor_code_html'), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        extraKeys: {
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+            "Ctrl-Space": "autocomplete"
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-lint-markers-4", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        highlightSelectionMatches: { showToken: /\w/ },
+        mode: "text/html",
+        theme: 'ambiance'
+    });
+    editor5 = CodeMirror.fromTextArea(document.getElementById('widgeteditor_code_javascript'), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        extraKeys: {
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+            "Ctrl-Space": "autocomplete"
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-lint-markers-5", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        highlightSelectionMatches: { showToken: /\w/ },
+        mode: "text/javascript",
+        theme: 'ambiance'
+    });    
+    //
     // stacked message popups
     //
     $('#content').notify({
@@ -394,6 +423,12 @@ HG.WebApp.InitializePage = function ()
 // info      : -
 //
 {include pages/configure/programengine/_programedit.js}	
+//
+// namespace : HG.WebApp.WidgetEditor 
+// info      : -
+//
+{include pages/configure/widgeteditor/_widgetslist.js} 
+{include pages/configure/widgeteditor/_widgetedit.js} 
 //
 // namespace : HG.WebApp.Scheduler 
 // info      : -
@@ -777,7 +812,7 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId, defaultValu
     retval = HG.WebApp.Locales.FindLocaleString(widget.data("Locale"), stringId);
     return (retval == null && defaultValue ? defaultValue : retval);
 };
-HG.WebApp.Locales.GetLocaleString = function(stringid)
+HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue)
 {
     var retval = null;
     $.each(HG.WebApp.Data._CurrentLocale, function(key, value) {
@@ -801,7 +836,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid)
             console.log("LOCALIZATION ERROR " + stringid + ' == ' + retval + '!!!'); 
         }
     }
-    return retval;
+    return (retval == null && defaultValue ? defaultValue : retval);
 };
 HG.WebApp.Locales.GenerateTemplate = function()
 {

@@ -820,6 +820,26 @@ namespace HomeGenie.Service.Handlers
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                 break;
+
+            case "Widgets.List":
+                List<string> widgetsList = new List<string>();
+                var groups = Directory.GetDirectories("html/pages/control/widgets");
+                for (int d = 0; d < groups.Length; d++)
+                {
+                    var categories = Directory.GetDirectories(groups[d]);
+                    for (int c = 0; c < categories.Length; c++)
+                    {
+                        var widgets = Directory.GetFiles(categories[c], "*.js");
+                        var group = groups[d].Substring(groups[d].LastIndexOf('/') + 1);
+                        var category = categories[c].Substring(categories[c].LastIndexOf('/') + 1);
+                        for (int w = 0; w < widgets.Length; w++)
+                        {
+                            widgetsList.Add(group + "/" + category + "/" + Path.GetFileNameWithoutExtension(widgets[w]));
+                        }
+                    }
+                }
+                migCommand.Response = JsonConvert.SerializeObject(widgetsList);
+                break;
             }
 
         }
