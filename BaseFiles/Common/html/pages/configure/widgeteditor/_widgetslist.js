@@ -47,9 +47,11 @@ HG.WebApp.WidgetsList.RefreshList = function(items) {
 
 HG.WebApp.WidgetsList.GetWidgetIcon = function (widget, elid, callback) {
     HG.WebApp.Control.GetWidget(widget, function (widgetobject) {
+    console.log("WI: " + widget);
         if (widgetobject != null)
         {
             icon = widgetobject.Instance.IconImage;
+    console.log("OK: " + icon + ' cb ' + callback + ' IC ' + icon + ' ELID ' + elid);
             if (callback != null) callback(icon, elid);
         }
     });
