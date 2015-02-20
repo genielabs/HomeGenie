@@ -1293,7 +1293,7 @@ namespace HomeGenie.Service
             {
             }
             //
-            UnarchiveConfiguration(archiveName, AppDomain.CurrentDomain.BaseDirectory);
+            Utility.UncompressZip(archiveName, AppDomain.CurrentDomain.BaseDirectory);
             //
             LoadConfiguration();
             //
@@ -1800,34 +1800,6 @@ namespace HomeGenie.Service
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
-            }
-        }
-        
-        public void UnarchiveConfiguration(string archiveName, string destinationFolder)
-        {
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
-            {
-                foreach (var part in package.GetParts())
-                {
-                    string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1));
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
-
-                    if (File.Exists(target)) File.Delete(target);
-
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
-                    {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
-                    }
-                }
             }
         }
 

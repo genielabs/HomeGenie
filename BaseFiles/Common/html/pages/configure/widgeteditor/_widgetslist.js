@@ -1,32 +1,58 @@
 HG.WebApp.WidgetsList = HG.WebApp.WidgetsList || {};
-HG.WebApp.WidgetsList._CurrentWidget = '';
-HG.WebApp.WidgetsList.PageId = '#page_configure_widgetsgroups';
+HG.WebApp.WidgetsList.PageId = 'page_configure_widgetlist';
+HG.WebApp.WidgetsList._currentWidget = '';
 
 HG.WebApp.WidgetsList.InitializePage = function () {
-    var page = $(HG.WebApp.WidgetsList.PageId);
+    var page = $('#'+HG.WebApp.WidgetsList.PageId);
+    var importPopup = page.find('[data-ui-field=import-popup]');
+    var importButton = page.find('[data-ui-field=import-btn]');
+    var importForm = page.find('[data-ui-field=import-form]');
+    var uploadButton = page.find('[data-ui-field=upload-btn]');
+    var uploadFile = page.find('[data-ui-field=upload-file]');
+    var uploadFrame = page.find('[data-ui-field=upload-frame]');
+    
     page.on('pageinit', function (e) {
+        // initialize controls used in this page
+        importPopup.popup();
     });
     page.on('pagebeforeshow', function (e) {
-//        $('[data-role=popup]').on('popupbeforeposition', function (event) {
-//            if (this.id == 'automationgroup_add') {
-//                $('#automationgroup_new_name').val('');
-//            }
-//        });
-        //	
-//        $('#automationgroup_new_button').bind('click', function (event) {
-//            HG.WebApp.AutomationGroupsList.GroupsAdd($('#automationgroup_new_name').val());
-//        });
-        //	
-        $.mobile.loading('show');
-        HG.Configure.Widgets.List(function(items) {
-            HG.WebApp.WidgetsList.RefreshList(items);
-            $.mobile.loading('hide');
-        });
+        HG.WebApp.WidgetsList.LoadWidgets();
+    });
+    
+    importButton.bind('click', function () {
+        importPopup.popup('open');
+    });
+    uploadButton.bind('click', function () {
+        if (uploadFile.val() == "") {
+            alert('Select a file to import first');
+            uploadFile.parent().stop().animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250)
+                .animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250);
+        } else {
+            importButton.removeClass('ui-btn-active');
+            importPopup.popup('close');
+            $.mobile.loading('show', { text: 'Importing, please wait...', textVisible: true, html: '' });
+            importForm.submit();
+        }
+    });
+    uploadFrame.bind('load', function () {
+        uploadFile.val('');
+        $.mobile.loading('hide');
+        HG.WebApp.WidgetsList.LoadWidgets();
+    });            
+};
+
+HG.WebApp.WidgetsList.LoadWidgets = function() {
+    $.mobile.loading('show');
+    HG.Configure.Widgets.List(function(items) {
+        HG.WebApp.WidgetsList.RefreshList(items);
+        $.mobile.loading('hide');
     });
 };
 
 HG.WebApp.WidgetsList.RefreshList = function(items) {
-    var page = $(HG.WebApp.WidgetsList.PageId);
+    var page = $('#'+HG.WebApp.WidgetsList.PageId);
     var listMenu = page.find('[data-ui-field=group-list]');
     listMenu.empty();
     listMenu.append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_widgetlist', 'Widget List') + '</li>');
@@ -41,17 +67,15 @@ HG.WebApp.WidgetsList.RefreshList = function(items) {
         });
     }
     listMenu.find('li').on('click', function () {
-        HG.WebApp.WidgetsList._CurrentWidget = $(this).attr('data-item-name');
+        HG.WebApp.WidgetsList._currentWidget = $(this).attr('data-item-name');
     });
 };
 
 HG.WebApp.WidgetsList.GetWidgetIcon = function (widget, elid, callback) {
     HG.WebApp.Control.GetWidget(widget, function (widgetobject) {
-    console.log("WI: " + widget);
         if (widgetobject != null)
         {
             icon = widgetobject.Instance.IconImage;
-    console.log("OK: " + icon + ' cb ' + callback + ' IC ' + icon + ' ELID ' + elid);
             if (callback != null) callback(icon, elid);
         }
     });
@@ -62,4 +86,3 @@ HG.WebApp.WidgetsList.GroupsAdd = function (grpname) {
         HG.WebApp.AutomationGroupsList.LoadGroups();
     });
 };
-

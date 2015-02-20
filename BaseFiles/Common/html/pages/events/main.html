@@ -1,11 +1,11 @@
-<!-- Home -->
+<!-- Events -->
 <div data-role="page" id="page_events">
 
     {include pages/header.html}
 
     <div data-role="content">
 
-        <table id="page_events_table" style="font-size:9pt;font-family:monospace" data-role="table" __data-filter="true" data-mode="columntoggle" class="ui-shadow table-stripe ui-responsive" data-column-btn-text="Columns">
+        <table data-ui-field="events-tbl" style="font-size:9pt;font-family:monospace" data-role="table" __data-filter="true" data-mode="columntoggle" class="ui-shadow table-stripe ui-responsive" data-column-btn-text="Columns">
             <thead>
                 <tr class="ui-bar-a">
                     <th data-priority="2">Timestamp</th>
@@ -26,12 +26,12 @@
             <table align="center">
                 <tr>
                     <td><a class="ui-btn ui-corner-all ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="flip" data-direction="reverse" href="#" data-rel="back">Back</a></td>
-                    <td><input id="events_filter_property" type="text" placeholder="Property" data-clear-btn="true" /></td>
-                    <td><input id="events_filter_source" type="text" placeholder="Source" data-clear-btn="true" /></td>
-                    <td><input id="events_filter_domain" type="text" placeholder="Domain" data-clear-btn="true" /></td>
+                    <td><input data-ui-field="property-txt" type="text" placeholder="Property" data-clear-btn="true" /></td>
+                    <td><input data-ui-field="source-txt" type="text" placeholder="Source" data-clear-btn="true" /></td>
+                    <td><input data-ui-field="domain-txt" type="text" placeholder="Domain" data-clear-btn="true" /></td>
                 </tr>
             </table>
-        </div><!-- /navbar -->
+        </div>
 
     </div>
 

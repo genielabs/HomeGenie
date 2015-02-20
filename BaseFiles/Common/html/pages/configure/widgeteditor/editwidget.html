@@ -1,28 +1,34 @@
-<!-- ProgramEngine - Program Edit -->
+<!-- Widget Editor -->
 <div data-role="page" id="page_widgeteditor_editwidget">
     {include pages/header.html}
 
     <img src="images/program.png" style="position:absolute;top:48px;left:20px;" width="64" />
-    <div style="position:absolute;font-size:10pt;top:40px;left:100px"><h3 id="page_widgeteditor_widget_title"></h3></div>
+    <div style="position:absolute;font-size:10pt;top:34px;left:100px"><h2 data-ui-field="title-heading"></h2></div>
 
-    <div class="ui-content" style="cursor:default;text-align:left;position:absolute;border-top:0px;padding:10px;bottom:30px;top:150px;left:0px;right:0px;margin:0;padding-top:0;overflow-x:hidden;overflow-y:auto">
+    <div class="ui-content" style="cursor:default;text-align:left;position:absolute;border-top:0px;padding:10px;bottom:30px;top:120px;left:0px;right:0px;margin:0;padding-top:0;overflow-x:hidden;overflow-y:auto">
 
         <div data-role="navbar" style="max-width:500px">
             <ul>
                 <li><a data-ui-field="tab1-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(1)" data-ajax="false" data-locale-id="configure_widget_html">HTML</a></li>
                 <li><a data-ui-field="tab2-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(2)" data-ajax="false" data-locale-id="configure_widget_jscript">Javascript</a></li>
-                <li><a data-ui-field="tab3-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(3)" data-ajax="false" data-locale-id="configure_widget_resources">Resources</a></li>
+                <!--li><a data-ui-field="tab3-btn" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.WidgetEditor.SetTab(3)" data-ajax="false" data-locale-id="configure_widget_resources">Resources</a></li-->
             </ul>
         </div>
-        <div class="ui-btn ui-btn-active ui-corner-all" style="text-align:left;position:absolute;margin:0;top:34px;bottom:10px;left:0;right:0;margin-right:30%" data-theme="d">
+        <div class="ui-btn ui-btn-active ui-corner-all" style="text-align:left;position:absolute;margin:0;top:34px;bottom:10px;left:0;right:0;padding:5px;" data-theme="d">
 
-            <div data-ui-field="tab1-div" style="padding-top:60px;padding-left:4px;padding-right:4px;">
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Run / Preview</a>
+            </div>
+            <label style="padding-left:20px;padding-top:14px;float:left">bind to module</label>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left" data-theme="e">
+                <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
+            </div>
+
+
+            <div data-ui-field="tab1-div">
             
                 <!-- html toolbar -->
                 <div data-ui-field="toolbar1-div">
-                    <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:4px;position:absolute;margin:0" data-theme="e">
-                        <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Update Preview</a>
-                    </div>
                 </div>
 
                 <!-- html editor -->
@@ -32,13 +38,10 @@
 
             </div>
 
-            <div data-ui-field="tab2-div" style="display:none" data-theme="d">
+            <div data-ui-field="tab2-div" style="display:none">
             
                 <!-- html toolbar -->
                 <div data-ui-field="toolbar1-div">
-                    <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;left:4px;position:absolute;margin:0" data-theme="e">
-                        <a data-ui-field="preview-btn" class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_widgeteditor_previewupdate" href="#">Update Preview</a>
-                    </div>
                 </div>
                 <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="top:4px;right:10px;position:absolute;margin:0" data-theme="f">
                     <a data-ui-field="errors-btn" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-alert" href="#">Errors</a>
@@ -51,29 +54,27 @@
                 
             </div>
 
-            <div data-ui-field="tab3-div" style="display:none" data-theme="d">
+            <div data-ui-field="tab3-div" style="display:none">
             
-                <p>Here it will be placed editor for language locales, css and image files...</p>
+                <p>Here it will be placed editor for language locales and image files... (work in progress)</p>
+                
+            </div>
+            
+            
+            <div data-ui-field="preview-panel" class="ui-panel-wrapper ui-corner-bottom" style="height:245px;left:5px;right:5px;position:absolute;margin:0;bottom:5px;overflow:hidden;cursor:default">
+            
+                <div data-ui-field="split-bar" style="width:100%;height:5px;background:yellow;overflow:hidden;cursor:ns-resize">&nbsp;</div>
+                                        
+                <div align="center">
+                    <container><!-- this fake tag 'container' should prevent html errors to corrupt page structure -->
+                        <div data-ui-field="preview-div"></div>
+                    </container>
+                </div>
                 
             </div>
             
         </div>
         
-        <div style="top:10px;left:4px;right:4px;position:absolute;padding:10px;margin:0;bottom:10px;margin-left:70%;overflow:hidden;overflow-y:auto">
-
-            <h2>Preview</h2>
-            <div>
-                <label>Widget bound module</label>
-                <select data-role="selectmenu" data-ui-field="bindmodule-sel"></select>
-            </div>
-                                    
-            <div align="center">
-                <container><!-- this fake tag 'container' should prevent html errors to corrupt page structure -->
-                    <div data-ui-field="preview-div" style="margin-top:40px"></div>
-                </container>
-            </div>
-            
-        </div>
 
 
     </div>
@@ -82,7 +83,8 @@
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
         <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li><a class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_program_options_save" href="#">Save</a>
+            <li><a data-ui-field="export-btn" class="ui-btn ui-icon-bars ui-btn-icon-right" data-locale-id="configure_program_options_export" href="#">Export</a></li>
+            <li><a data-ui-field="save-btn" class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_program_options_save" href="#">Save</a>
         </ul>
     </div>
 

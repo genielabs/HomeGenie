@@ -12,12 +12,13 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     border: 1px solid #eee;
     height: auto;
     position: absolute;
-    top: 44px;
-    bottom: 10px;
+    top: 55px;
+    bottom: 30px;
     left: 5px;
     right: 5px;
     border solid 1px red;
     display: block;
+    cursor:default;
 }
 
 #page_widgeteditor_editwidget .CodeMirror-code span {
@@ -54,6 +55,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     right: 5px;
     border solid 1px red;
     display: block;
+    cursor:default;
 }
 
 #page_automation_editprogram .CodeMirror-code span {

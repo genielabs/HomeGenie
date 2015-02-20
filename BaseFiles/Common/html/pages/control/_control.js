@@ -3,7 +3,7 @@
 // info      : -
 //
 HG.WebApp.Control = HG.WebApp.Control || {};
-//
+HG.WebApp.Control.PageId = 'page_control';
 HG.WebApp.Control._RefreshTimeoutObject = null;
 HG.WebApp.Control._RefreshIntervalObject = null;
 HG.WebApp.Control._RefreshInterval = 10000;
@@ -11,11 +11,10 @@ HG.WebApp.Control._WidgetConfiguration = [];
 HG.WebApp.Control._Widgets = [];
 //
 HG.WebApp.Control.InitializePage = function () {
-    $('#page_control').on('pageinit', function (e) {
-
+    var page = $('#'+HG.WebApp.Control.PageId);
+    page.on('pageinit', function (e) {
         $('#toolbar_macrorecord').hide();
         $('#toolbar_control').show();
-        //
         $('#control_macrorecord_optionspopup').bind('popupafterclose', function () {
             if ($('#macrorecord_delay_none').prop('checked')) {
                 HG.Automation.Macro.SetDelay('None', '');
@@ -27,12 +26,10 @@ HG.WebApp.Control.InitializePage = function () {
                 HG.Automation.Macro.SetDelay('Fixed', $('#macrorecord_delay_seconds').val());
             }
         });
-        //
         $('#control_groupselect').change(function () {
             var gid = $('#control_groupselect').val();
             HG.WebApp.Control.ShowGroup(gid);
         });
-        //
         $.ajax({
             url: "pages/control/widgets/configuration.json",
             type: 'GET',
@@ -43,7 +40,24 @@ HG.WebApp.Control.InitializePage = function () {
                 alert('error loading widgets configuration');
             }
         });
-
+    });
+    page.on('pagebeforeshow', function (e) {
+        $.mobile.loading('show');
+        HG.Configure.Groups.List('Control', function () 
+        {
+            if ($('#control_groupslist').children().length == 0) 
+            {
+                HG.WebApp.Control.RenderGroups();
+            }
+            HG.WebApp.Control.UpdateModules();
+        });    
+        HG.Automation.Macro.GetDelay(function(data){
+            $('#macrorecord_delay_none').prop('checked', false).checkboxradio( 'refresh' );
+            $('#macrorecord_delay_mimic').prop('checked', false).checkboxradio( 'refresh' );
+            $('#macrorecord_delay_fixed').prop('checked', false).checkboxradio( 'refresh' );
+            $('#macrorecord_delay_' + data.DelayType.toLowerCase()).prop('checked', true).checkboxradio( 'refresh' );
+            $('#macrorecord_delay_seconds').val(data.DelayOptions);
+        });
     });
 };
 //
