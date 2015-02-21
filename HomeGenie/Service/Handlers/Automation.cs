@@ -166,7 +166,7 @@ namespace HomeGenie.Service.Handlers
                         string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import");
                         if (Directory.Exists(destFolder))
                             Directory.Delete(destFolder, true);
-                        homegenie.UnarchiveConfiguration(zipFileName, destFolder);
+                        Utility.UncompressZip(zipFileName, destFolder);
                         string bundleFolder = Path.Combine("programs", "arduino", newPid.ToString());
                         if (Directory.Exists(bundleFolder))
                             Directory.Delete(bundleFolder, true);

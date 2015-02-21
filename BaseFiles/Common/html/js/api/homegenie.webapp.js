@@ -55,51 +55,13 @@ HG.WebApp.InitializePage = function ()
     //
     //HG.WebApp.SystemSettings.CheckConfigureStatus();
     //
-    // page open - init stuff
-    //
-    //$(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
-    //});
-    //
-    //$('[data-role=page]').on('pageshow', function (event) 
-    //{
-    //});
-    //
-    // Page Events: Open - Initialize stuff
+    // Page Before Show: common initialization stuff
     //
     $('[data-role=page]').on('pagebeforeshow', function (event) 
     {
         setTheme(dataStore.get('UI.Theme'));
         //
-        if (this.id == "page_control") // && HG.WebApp.Control._RefreshIntervalObject == null) 
-        {
-            // init "Control" page
-            $.mobile.loading('show');
-            HG.Configure.Groups.List('Control', function () 
-            {
-                if ($('#control_groupslist').children().length == 0) 
-                {
-                    HG.WebApp.Control.RenderGroups();
-                }
-                HG.WebApp.Control.UpdateModules();
-            });    
-            //
-            HG.Automation.Macro.GetDelay(function(data){
-                $('#macrorecord_delay_none').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_mimic').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_fixed').prop('checked', false).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_' + data.DelayType.toLowerCase()).prop('checked', true).checkboxradio( 'refresh' );
-                $('#macrorecord_delay_seconds').val(data.DelayOptions);
-            });
-        }
-        else if (this.id == "page_home")
-        {
-            //HG.WebApp.SystemSettings.CheckConfigureStatus();
-        }
-        else if (this.id == 'page_events')
-        {
-            HG.WebApp.Events.Refresh();
-        }
-        else if (this.id == "page_analyze") 
+        if (this.id == "page_analyze") 
         {
             HG.WebApp.Statistics.InitConfiguration();
         }
@@ -144,17 +106,10 @@ HG.WebApp.InitializePage = function ()
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
-
             $('#automation_program_scriptcondition').next().css('display', '');
             $('#automation_program_scriptsource').next().css('display', '');
-            
             HG.WebApp.ProgramEdit.SetTab(1);
             HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-            //if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '' && HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors.trim() != '[]')
-            //{
-            //    HG.WebApp.ProgramEdit.ShowProgramErrors(HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors);
-            //}
-
             automationpage_ConditionsRefresh();                                                    
             automationpage_CommandsRefresh();                                                   
         }
@@ -394,6 +349,12 @@ HG.WebApp.InitializePage = function ()
 // info      : -
 //
 {include pages/configure/programengine/_programedit.js}	
+//
+// namespace : HG.WebApp.WidgetEditor 
+// info      : -
+//
+{include pages/configure/widgeteditor/_widgetslist.js} 
+{include pages/configure/widgeteditor/_widgetedit.js} 
 //
 // namespace : HG.WebApp.Scheduler 
 // info      : -
@@ -777,7 +738,7 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId, defaultValu
     retval = HG.WebApp.Locales.FindLocaleString(widget.data("Locale"), stringId);
     return (retval == null && defaultValue ? defaultValue : retval);
 };
-HG.WebApp.Locales.GetLocaleString = function(stringid)
+HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue)
 {
     var retval = null;
     $.each(HG.WebApp.Data._CurrentLocale, function(key, value) {
@@ -801,7 +762,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid)
             console.log("LOCALIZATION ERROR " + stringid + ' == ' + retval + '!!!'); 
         }
     }
-    return retval;
+    return (retval == null && defaultValue ? defaultValue : retval);
 };
 HG.WebApp.Locales.GenerateTemplate = function()
 {

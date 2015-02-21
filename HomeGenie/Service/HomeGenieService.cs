@@ -73,8 +73,6 @@ namespace HomeGenie.Service
         //
         private SystemConfiguration systemConfiguration;
         //
-        private object interfaceControlLock = new object();
-        //
         // public events
         public event Action<LogEntry> LogEventAction;
 
@@ -383,69 +381,66 @@ namespace HomeGenie.Service
 
         public void InterfaceControl(MIGInterfaceCommand cmd)
         {
-            lock (interfaceControlLock)
+            var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
+            if (isRemoteModule)
             {
-                var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
-                bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
-                if (isRemoteModule)
+                // ...
+                try
                 {
-                    // ...
-                    try
+                    string domain = cmd.Domain;
+                    if (domain.StartsWith("HGIC:"))
+                        domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
+                    Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
+                    if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
                     {
-                        string domain = cmd.Domain;
-                        if (domain.StartsWith("HGIC:"))
-                            domain = domain.Substring(domain.IndexOf(".") + 1);
-                        string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
-                        Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                        if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
-                        {
-                            netHelper.WithCredentials(
-                                systemConfiguration.HomeGenie.UserLogin,
-                                systemConfiguration.HomeGenie.UserPassword
-                            );
-                        }
-                        netHelper.Call();
-                    }
-                    catch (Exception ex)
-                    {
-                        HomeGenieService.LogEvent(
-                            Domains.HomeAutomation_HomeGenie,
-                            "Interconnection:" + target.RoutingNode,
-                            ex.Message,
-                            "Exception.StackTrace",
-                            ex.StackTrace
+                        netHelper.WithCredentials(
+                            systemConfiguration.HomeGenie.UserLogin,
+                            systemConfiguration.HomeGenie.UserPassword
                         );
                     }
-                    return;
+                    netHelper.Call();
                 }
-                //
-                object response = null;
-                MIGInterface migInterface = GetInterface(cmd.Domain);
-                if (migInterface != null)
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        response = migInterface.InterfaceControl(cmd);
-                    }
-                    catch (Exception ex)
-                    {
-                        HomeGenieService.LogEvent(
-                            Domains.HomeAutomation_HomeGenie,
-                            "InterfaceControl",
-                            ex.Message,
-                            "Exception.StackTrace",
-                            ex.StackTrace
-                        );
-                    }
+                    HomeGenieService.LogEvent(
+                        Domains.HomeAutomation_HomeGenie,
+                        "Interconnection:" + target.RoutingNode,
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
                 }
-                //
-                if (response == null || response.Equals(""))
-                {
-                    migService.WebServiceDynamicApiCall(cmd);
-                }
-                //
-                migService_ServiceRequestPostProcess(null, cmd);
+                return;
             }
+            //
+            object response = null;
+            MIGInterface migInterface = GetInterface(cmd.Domain);
+            if (migInterface != null)
+            {
+                try
+                {
+                    response = migInterface.InterfaceControl(cmd);
+                }
+                catch (Exception ex)
+                {
+                    HomeGenieService.LogEvent(
+                        Domains.HomeAutomation_HomeGenie,
+                        "InterfaceControl",
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
+                }
+            }
+            //
+            if (response == null || response.Equals(""))
+            {
+                migService.WebServiceDynamicApiCall(cmd);
+            }
+            //
+            migService_ServiceRequestPostProcess(null, cmd);
         }
 
         //TODO: should these two moved to ProgramEngine?
@@ -1293,7 +1288,7 @@ namespace HomeGenie.Service
             {
             }
             //
-            UnarchiveConfiguration(archiveName, AppDomain.CurrentDomain.BaseDirectory);
+            Utility.UncompressZip(archiveName, AppDomain.CurrentDomain.BaseDirectory);
             //
             LoadConfiguration();
             //
@@ -1800,34 +1795,6 @@ namespace HomeGenie.Service
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
-            }
-        }
-        
-        public void UnarchiveConfiguration(string archiveName, string destinationFolder)
-        {
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
-            {
-                foreach (var part in package.GetParts())
-                {
-                    string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1));
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
-
-                    if (File.Exists(target)) File.Delete(target);
-
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
-                    {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
-                    }
-                }
             }
         }
 

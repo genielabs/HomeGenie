@@ -109,123 +109,13 @@ function configurepage_GetModuleIcon(module, callback, elid) {
         else
         {
             // get reference to generic type widget 
-            HG.WebApp.Control.GetWidget(widget, function (widgetobject) {
-                if (widgetobject != null)
-                {
-                    //widgetobject.Instance.RenderView( null, module );
-                    icon = widgetobject.Instance.IconImage;
-                    if (callback != null) callback(icon, elid);
-                }
-            });
+            HG.WebApp.WidgetsList.GetWidgetIcon(widget, elid, callback);
             return icon;
         }
     }
     if (callback != null) callback(icon, elid);
     return icon;
 }
-
-
-function configurepage_GetModuleStatus(module) {
-    var type = (module.Type + '').toLowerCase();
-    var text = '';
-    //
-    var watts = null;
-    var level = null;
-    var temp = null;
-    var customdata = '';
-    //
-    var type = module.DeviceType + '';
-    type = type.toLowerCase();
-    //
-    if (module.Properties != null) {
-
-        for (p = 0; p < module.Properties.length; p++) {
-            if (module.Properties[p].Name == "Meter.Watts") {
-                watts = Math.round(module.Properties[p].Value.replace(',', '.')) / 1000;
-            }
-            else if (module.Properties[p].Name == "Status.Level") {
-                level = (module.Properties[p].Value.replace(',', '.')) * 100;
-            }
-            else if (module.Properties[p].Name == 'Status.Battery')
-            {
-                var blevel = 0;
-                blevel = parseFloat(module.Properties[p].Value);
-                if (blevel == 255) blevel = 0;
-                else if (blevel > 80 && blevel <= 100) blevel = 100;
-                else if (blevel > 60) blevel = 80; 
-                else if (blevel > 40) blevel = 60; 
-                else if (blevel > 20) blevel = 40; 
-                else if (blevel > 10) blevel = 20; 
-                else if (blevel > 0) blevel = 10; 
-                customdata += '<img alt="Battery Level" src="pages/control/widgets/homegenie/generic/images/battery_level_' + blevel + '.png" width="33" height="18" style="vertical-align: middle;" /> &nbsp; <font style="color:gray;">' + module.Properties[p].Value + '%</font> &nbsp;&nbsp;&nbsp;&nbsp; ';
-            }
-            else if (module.Properties[p].Name == 'Sensor.DoorWindow')
-            {
-                var doorw = (module.Properties[p].Value.replace(',', '.')) * 1;
-                text += (doorw > 0 ? '<span style="font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
-            }
-            else if (module.Properties[p].Name == 'Sensor.Tamper')
-            {
-                var tamper = (module.Properties[p].Value.replace(',', '.')) * 1;
-                if (tamper > 0)
-                {
-                    customdata += '<span style="color:red">TAMPERED</span>';
-                }
-            }
-            else if (module.Properties[p].Name == "Sensor.Temperature") {
-                temp = Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100;
-                customdata += '<img alt="Luminance Level" src="pages/control/widgets/homegenie/generic/images/temperature.png" width="18" height="18" style="vertical-align: middle;" /> &nbsp; <font style="color:gray;">' + temp + '</font> &nbsp;&nbsp;&nbsp;&nbsp; ';
-            }
-            else if (module.Properties[p].Name == 'Sensor.Luminance')
-            {
-                customdata += '<img alt="Luminance Level" src="pages/control/widgets/homegenie/generic/images/luminance.png" width="18" height="18" style="vertical-align: middle;" /> &nbsp; <font style="color:gray;">' + module.Properties[p].Value + '%</font> &nbsp;&nbsp;&nbsp;&nbsp; ';
-            }
-            else if (module.Properties[p].Name.indexOf('Sensor.') == 0 && module.Properties[p].Name != 'Sensor.MotionDetect') {
-                customdata += '<b>' + module.Properties[p].Name.replace('Sensor.', '') + '</b> &nbsp; <font style="color:gray;">' + Math.round(module.Properties[p].Value.replace(',', '.') * 100) / 100 + '</font> &nbsp;&nbsp;&nbsp;&nbsp; ';
-            }
-        }
-
-    }
-    //
-    if (watts != null && (type == 'light' || type == 'dimmer' || type == 'switch'))
-    {
-        text += '<span class="ui-li-count"><strong>kW</strong> ' + (watts.toFixed(3)) + '</span>';
-    }
-    //
-    if (level != null && (type == 'light' || type == 'dimmer' || type == 'switch'))
-    {
-        if (level >= 99 || level == 0)
-        {
-            text += '<span><strong>' + (level >= 99 ? 'ON' : 'OFF') + '</strong></span>';
-        }
-        else
-        {
-            text += '<span><strong>' + level.toFixed(0) + '%</strong></span>';
-        }
-    }
-    else if (level != null && type == 'shutter')
-    {
-        text += (level > 0 ? '<span style="font-weight:bold">OPENED</span>' : '<span style="font-weight:bold">CLOSED</span>');
-    }
-    //
-    //        if (temp != null)
-    //        {
-    //			text += '<span class="ui-li-count"><strong>&#8451;</strong> ' + temp.toFixed(1) + '</span>';
-    //        }
-    //
-    if (customdata != '')
-    {
-        text += '<span> ' + customdata + '</span>';
-    }
-    //
-    if (text != '')
-    {
-        text = '<div style="margin-top:3px;font-size:9pt;color:darkblue;">' + text + '</div>';
-    }
-    //
-    return text;
-}
-
 
 </script>	
 

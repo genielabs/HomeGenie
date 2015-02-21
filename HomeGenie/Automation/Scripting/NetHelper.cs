@@ -71,6 +71,11 @@ namespace HomeGenie.Automation.Scripting
 
         private MqttClient mqttClient = null;
 
+        // multithread safe lock objects
+        object smtpSyncLock = new object();
+        object httpSyncLock = new object();
+        object mqttSyncLock = new object();
+
         private HomeGenieService homegenie;
 
         public NetHelper(HomeGenieService hg)
@@ -166,6 +171,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="messageText">Message text.</param>
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
+            lock(smtpSyncLock)
             try
             {
                 this.mailFrom = from;
@@ -368,6 +374,7 @@ namespace HomeGenie.Automation.Scripting
         public string Call()
         {
             string returnvalue = "";
+            lock(httpSyncLock)
             try
             {
                 using (var webClient = new WebClient())
@@ -448,6 +455,7 @@ namespace HomeGenie.Automation.Scripting
         public byte[] GetBytes()
         {
             byte[] responseBytes = null;
+            lock(httpSyncLock)
             try
             {
                 using (var webClient = new WebClient())
@@ -557,7 +565,10 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text.</param>
         public NetHelper Publish(string topic, string message)
         {
-            mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            lock (mqttSyncLock)
+            {
+                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            }
             return this;
         }
 

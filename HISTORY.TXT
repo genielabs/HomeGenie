@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+21/02/2015 1.00 beta rev 479-git4 (r480 preview)
+    - Added new Widgets Editor with save, export, import, preview and debug functionalities
+    - Updated RaspberrySharp-IO library to possibly support new Raspberry Pi 2 model (issue #133)
+    - Some minor fixes to Z-Wave interface
+    - General improvements to integrated code editor
+    - Added some synchronization locks to NetHelper class to avoid unsafe thread operations
+    - Changed domain of CubieBoard GPIO app from "Raspberry" to "CubieBoard"
+
 16/02/2015 1.00 beta rev 479-git3
     - Deprecated ExtractTemperatureFromBytes, fixed issue #129
     - Added parameter path instance suffix to energy values (MIG ZWave interface)
