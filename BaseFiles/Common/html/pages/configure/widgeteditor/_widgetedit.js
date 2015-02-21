@@ -5,13 +5,7 @@ HG.WebApp.WidgetEditor._editorHtml = null;
 HG.WebApp.WidgetEditor._editorJscript = null;
 HG.WebApp.WidgetEditor._previewHeight = 245;
 HG.WebApp.WidgetEditor._splitDragStartY = 0;
-/*
-// http://stackoverflow.com/questions/1720320/how-to-dynamically-create-css-class-in-javascript-and-apply
-var style = document.createElement('style');
-style.type = 'text/css';
-style.innerHTML = '.cssClass { color: #F00; }';
-document.getElementsByTagName('head')[0].appendChild(style);
-*/
+
 HG.WebApp.WidgetEditor.InitializePage = function () {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
     var previewButton = page.find('[data-ui-field=preview-btn]');
@@ -92,7 +86,12 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         bindModuleSelect.append('<option value="">(select a module)</option>');
         for (var m = 0; m < HG.WebApp.Data.Modules.length; m++)
         {
-            bindModuleSelect.append('<option value="' + m + '">' + HG.WebApp.Data.Modules[m].Name + '</option>');
+            var name = HG.WebApp.Data.Modules[m].Name.trim();
+            if (name == '')
+            {
+                name = HG.WebApp.Data.Modules[m].Domain + ':' + HG.WebApp.Data.Modules[m].Address;
+            }
+            bindModuleSelect.append('<option value="' + m + '">' + name + '</option>');
         }
         bindModuleSelect.trigger('create');
         bindModuleSelect.val('');
@@ -156,7 +155,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     });
     
     window.onerror = function(msg, url, line, col, error) {
-        if (url.indexOf('#page_widgeteditor_editwidget') > 0)
+        if (url.indexOf('#'+HG.WebApp.WidgetEditor.PageId) > 0)
         {
             HG.WebApp.WidgetEditor.ShowError(error);
         }

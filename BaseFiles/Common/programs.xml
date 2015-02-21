@@ -8253,23 +8253,8 @@ A normal press will toggle scenarios/devices associated to the buttons.
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
-    <Conditions>
-      <ProgramCondition>
-        <Domain>HomeAutomation.ZWave</Domain>
-        <Target>37</Target>
-        <Property>Sensor.DoorWindow</Property>
-        <ComparisonOperator>Equals</ComparisonOperator>
-        <ComparisonValue>255</ComparisonValue>
-      </ProgramCondition>
-    </Conditions>
-    <Commands>
-      <ProgramCommand>
-        <Domain>HomeAutomation.ZWave</Domain>
-        <Target>4</Target>
-        <CommandString>Control.Off</CommandString>
-        <CommandArguments />
-      </ProgramCommand>
-    </Commands>
+    <Conditions />
+    <Commands />
     <ScriptCondition>// returning true will execute the "Code to Run"
 Program.Setup(()=&gt;{
   	// Connector CN8
@@ -8307,7 +8292,7 @@ Program.Setup(()=&gt;{
 });
 return true;
 </ScriptCondition>
-    <ScriptSource>var moduleDomain = "RaspberryPi.Gpio";
+    <ScriptSource>var moduleDomain = "CubieBoard.Gpio";
 
 var pinMapping = new List&lt;dynamic&gt;();
 // read GPIO configuration
