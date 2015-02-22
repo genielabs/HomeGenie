@@ -463,7 +463,16 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
 
         var indicators = '';
         if (group_temperature != null) {
-            indicators += '<td align="center"><span class="hg-indicator-temperature">' + (group_temperature * 1).toFixed(1) + '</span></td><td>&nbsp;</td>';
+            if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
+                // display as Fahrenheit
+                group_temperature = Math.round((group_temperature * 1.8 + 32) * 10) / 10;
+                displayvalue = (group_temperature * 1).toFixed(1) + '&#8457;';
+            } else {
+                // display as Celsius
+                group_temperature = Math.round(group_temperature * 10) / 10;
+                displayvalue = (group_temperature * 1).toFixed(1) + '&#8451;';
+            }
+            indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td><td>&nbsp;</td>';
         }
         if (group_humidity != null) {
             indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
