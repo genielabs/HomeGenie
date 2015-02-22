@@ -438,8 +438,8 @@ HG.WebApp.ProgramsList.LoadPrograms = function (callback) {
 };
 
 HG.WebApp.ProgramsList.RefreshPrograms = function () {
-    var automationtitle = HG.WebApp.Locales.GetLocaleString('configure_program_automationtitle');
-    $('#configure_automation_group_title').html('<font style="color:gray">' + (automationtitle != null ? automationtitle : 'Automation') + '</font><br />' + HG.WebApp.AutomationGroupsList._CurrentGroup);
+    var automationtitle = HG.WebApp.Locales.GetLocaleString('configure_program_automationtitle', 'Programs List');
+    $('#configure_automation_group_title').html('<font style="color:gray">' + automationtitle + '</font><br />' + HG.WebApp.AutomationGroupsList._CurrentGroup);
     $('#configure_programslist').empty();
     $('#configure_programslist').append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_programslist_listtitle') + '</li>');
     //

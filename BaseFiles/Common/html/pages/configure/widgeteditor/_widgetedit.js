@@ -213,6 +213,11 @@ HG.WebApp.WidgetEditor.ShowError = function(e) {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
     var errorsButton = page.find('[data-ui-field=errors-btn]');
     var stack = ErrorStackParser.parse(e);
+    if  (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+    {
+        // FireFox already gives lineNumber and columnNumber properties in error object
+        stack[0] = e;
+    }
     var message = e + '<br/> <a href="javascript:HG.WebApp.WidgetEditor.JumpToLine({ line: ' + (stack[0].lineNumber - 1) + ', ch: ' + (stack[0].columnNumber - 1) + ' })">Line <strong>' + stack[0].lineNumber + '</strong>, Column <strong>' + stack[0].columnNumber + '</strong></a>';
     var marker = document.createElement('div');
     HG.WebApp.WidgetEditor.SetTab(2);
