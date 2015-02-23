@@ -30,8 +30,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 
-//using Microsoft.Runtime;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -72,9 +70,9 @@ namespace HomeGenie.Automation.Scripting
         private MqttClient mqttClient = null;
 
         // multithread safe lock objects
-        object smtpSyncLock = new object();
-        object httpSyncLock = new object();
-        object mqttSyncLock = new object();
+        private object smtpSyncLock = new object();
+        private object httpSyncLock = new object();
+        private object mqttSyncLock = new object();
 
         private HomeGenieService homegenie;
 
@@ -509,7 +507,7 @@ namespace HomeGenie.Automation.Scripting
 
         #endregion
 
-
+        //TODO: deprecate MQTT client in NetHelper (use MqttClientHelper instead)
         #region MQTT client
 
         /// <summary>
@@ -519,9 +517,9 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="server">MQTT server address.</param>
         /// <param name="port">MQTT server port.</param>
         /// <param name="topic">MQTT topic.</param>
-        public NetHelper MqttService(string server, int port, string topic)
+        public NetHelper MqttService(string server, int port, string clientId)
         {
-            mqttClient = new MqttClient(server, port, topic);
+            mqttClient = new MqttClient(server, port, clientId);
             if (this.networkCredential != null)
             {
                 mqttClient.Connect(this.networkCredential.UserName, this.networkCredential.Password);
@@ -534,9 +532,9 @@ namespace HomeGenie.Automation.Scripting
         }
 
         //TODO: deprecate this (use this.networkCredential instead)
-        public NetHelper MqttService(string server, int port, string username, string password, string topic)
+        public NetHelper MqttService(string server, int port, string username, string password, string clientId)
         {
-            mqttClient = new MqttClient(server, port, topic);
+            mqttClient = new MqttClient(server, port, clientId);
             mqttClient.Connect(username, password);
             return this;
         }
@@ -589,9 +587,8 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-
         /// <summary>
-        /// Uses provided credentials when connecting to SMTP/HTTP/MQTT/HG service.
+        /// Use provided credentials when connecting.
         /// </summary>
         /// <returns>NetHelper.</returns>
         /// <param name="user">Username.</param>

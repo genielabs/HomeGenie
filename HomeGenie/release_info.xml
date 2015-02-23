@@ -3,7 +3,10 @@
   <Name>HomeGenie</Name>
   <Version>1.00 beta r480</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added new Widgets Editor with save, export, import, preview and debug functionalities
+  <ReleaseNote>   - Added KNX device modules app
+  - Added KnxClientHelper KNX client helper class
+  - Added new MqttClientHelper class (will deprecate Net.Mqtt)
+  - Added new Widgets Editor with save, export, import, preview and debug functionalities
   - Updated RaspberrySharp-IO library to possibly support new Raspberry Pi 2 model (issue #133)
   - Some minor fixes to Z-Wave interface
   - General improvements to integrated code editor
@@ -15,5 +18,5 @@
   - Fixed bug in Statistics class when parsing address of remote modules
   - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue
   - Fixed MIG CameraInput interface not reading configuration</ReleaseNote>
-  <ReleaseDate>2015-02-21T14:15:27.0000Z</ReleaseDate>
+  <ReleaseDate>2015-02-23T18:36:03.0000Z</ReleaseDate>
 </ReleaseInfo>

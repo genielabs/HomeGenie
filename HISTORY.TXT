@@ -1,6 +1,11 @@
 ﻿RELEASE HISTORY
 
-21/02/2015 1.00 beta rev 479-git4 (r480 preview)
+23/02/2015 1.00 beta rev 479-git5 (r480 preview-2)
+    - Added KNX device modules app
+    - Added KnxClientHelper KNX client helper class
+    - Added new MqttClientHelper class (will deprecate Net.Mqtt)
+
+21/02/2015 1.00 beta rev 479-git4 (r480 preview-1)
     - Added new Widgets Editor with save, export, import, preview and debug functionalities
     - Updated RaspberrySharp-IO library to possibly support new Raspberry Pi 2 model (issue #133)
     - Some minor fixes to Z-Wave interface
