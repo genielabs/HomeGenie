@@ -1,0 +1,472 @@
+<div id="automation_command_domain_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (1/4)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectcommandcontext" style="margin-top:-10px;font-weight:bold">Select command context</p>
+            <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+        </div>
+        <ul id="automation_commandtarget" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;">
+            <li data-context-value="HomeAutomation.HomeGenie"><a data-rel="popup" href="#automation_command_target_popup">HomeGenie</a></li>
+            <li data-context-value="Controllers.LircRemote"><a data-rel="popup" href="#automation_command_target_popup">LircRemote</a></li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" href="#" data-locale-id="configure_program_deletecancel" data-rel="back">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_command_target_popup" class="hg-popup-b" data-role="popup" data-position-to="window" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (2/4)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectcommandtarget" style="margin-top:-10px;font-weight:bold">Select command target</p>
+            <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+        </div>
+        <ul id="automation_command_target" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_domain_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_command_target_property" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (3/4)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_selectcommandtoperform" style="margin-top:-10px;font-weight:bold">Select command to perform</p>
+            <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+        </div>
+        <ul id="automation_command_property" data-role="listview" data-inset="false" style="height:180px;max-height:180px;overflow-y:scroll;overflow-x:hidden;"></ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_target_popup', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_command_custom" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (4/4)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_commandcustom" style="margin-top:-10px;font-weight:bold">Custom API command</p>
+            <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+        </div>
+        <ul data-role="listview" data-inset="false" style="height:180px;max-height:180px;">
+            <li>
+                <input type="text" name="value" id="command_custom_input" value="" placeholder="value" />
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_custom', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+            </div>
+            <div class="ui-block-b">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_custom', '#automation_command_args', true)" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-corner-all" data-locale-id="configure_program_wizardproceed" data-rel="popup">Proceed</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="automation_command_args" class="hg-popup-b" data-position-to="window" data-role="popup" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header">
+        <h1>Wizard (4/4)</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <div>
+            <p data-locale-id="configure_program_commandarguments" style="margin-top:-10px;font-weight:bold">Command arguments</p>
+            <p id="command_wizard_text" style="font-family:courier;font-size:9pt;margin:0px;height:70px;"></p>
+        </div>
+        <ul data-role="listview" data-inset="false" style="height:180px;max-height:180px;">
+            <li>
+                <input type="text" name="value" id="command_args_input" value="" placeholder="value" />
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer" data-tap-toggle="false">
+        <div class="ui-grid-a" align="center">
+            <div class="ui-block-a">
+                <a onclick="HG.WebApp.Utility.SwitchPopup('#automation_command_args', '#automation_command_target_property', true)" class="ui-btn ui-icon-back ui-btn-icon-left ui-corner-all" data-locale-id="configure_program_wizardback" data-rel="popup">Back</a>
+            </div>
+            <div class="ui-block-b">
+                <a id="command_completed" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all" href="#cancel" data-locale-id="configure_program_wizarddone">Finish</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="automation_capture_command_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+    <div data-role="header" class="ui-corner-top">
+        <h1 data-locale-id="configure_program_commandcapturetitle">Capturing Commands</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <h3 data-locale-id="configure_program_waitingnewcommand" class="ui-title">Waiting for new events...</h3>
+        <p data-locale-id="configure_program_waitingnewcommandadvice"></p>
+        <a data-locale-id="configure_program_capturestop" href="#" class="ui-btn ui-corner-all" data-rel="back">Stop</a>
+    </div>
+</div>
+<div data-role="popup" id="automation_command_delete" class="ui-corner-all hg-popup-a" data-transition="pop" data-overlay-theme="b">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    <div data-role="header" class="ui-corner-top">
+        <h1 data-locale-id="configure_program_wizard_editline_title">Edit line</h1>
+    </div>
+    <div class="ui-content ui-corner-bottom">
+        <p data-locale-id="configure_program_wizard_editcmdline_prompt">Move or delete line <span id="command_linenumber_label" style="font-weight:bold"></span></p>
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <label data-locale-id="configure_program_wizard_editline_number" for="command_linenumber_input">New line number</label>
+                <input id="command_linenumber_input" type="range" min="1" max="1" name="value" value="1" placeholder="line number" />
+            </li>
+        </ul>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a data-locale-id="configure_program_wizard_editline_delete" id="command_delete_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Delete</a>
+            </div>
+            <div class="ui-block-b">
+                <a data-locale-id="configure_program_wizard_editline_change" id="command_move_button" href="#" class="ui-btn ui-corner-all" data-rel="back" data-transition="flow">Move</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    //
+    var command_targetdomain = '';
+    var command_targetsubject = '';
+    var command_targetparameter = '';
+    var command_type = '';
+    var command_value = '';
+    var selected_command_index = -1;
+    //
+    $(document).ready(function (e) {
+
+        // automation pop wizard popups
+        $('#automation_command_domain_popup').on('popupbeforeposition', function (event) {
+            command_targetdomain = '';
+            command_targetsubject = '';
+            command_targetparameter = '';
+            command_type = '';
+            command_value = '';
+            //
+            $('#command_args_input').val('');
+            //
+            build_command();
+        });
+        $('#automation_command_target_popup').on('popupbeforeposition', function (event) {
+            $('#automation_command_target').listview().empty();
+            //
+            switch (command_targetdomain) {
+                case 'HomeAutomation.HomeGenie':
+                    $('#automation_command_target').append('<li data-context-value="Automation"><a>Automation</a></li>');
+                    break;
+                case 'Controllers.LircRemote':
+                    $('#automation_command_target').append('<li data-context-value="IR"><a>IR</a></li>');
+                    break;
+                default:
+                    //			case 'HomeAutomation.X10':
+                    //			case 'HomeAutomation.ZWave':
+                    $('#automation_command_target').append(automationpage_GetCommandModulesListViewItems(command_targetdomain, false));
+                    break;
+            }
+            $('#automation_command_target').listview('refresh');
+            build_command();
+        });
+        $('#automation_command_target_property').on('popupbeforeposition', function (event) {
+            $('#automation_command_property').listview().empty();
+            //
+            switch (command_targetdomain) {
+                case 'HomeAutomation.HomeGenie':
+                    $('#automation_command_property').append('<li data-context-value="Program.Pause"><a>Program.Pause</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Program.Repeat"><a>Program.Repeat</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Program.Run"><a>Program.Run</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Groups.LightsOn"><a>Groups.LightsOn</a></li>');
+                    $('#automation_command_property').append('<li data-context-value="Groups.LightsOff"><a>Groups.LightsOff</a></li>');
+                    //			    $('#automation_command_property').append('<li data-context-value="Security.ArmedStatus"><a>Security.ArmedStatus</a></li>');
+                    break;
+                case 'Controllers.LircRemote':
+                    $('#automation_command_property').append('<li data-context-value="Control.IrSend"><a>Send IR code</a></li>');
+                    break;
+                default:
+                    //			case 'HomeAutomation.X10':
+                    //			case 'HomeAutomation.ZWave':
+                    var module = HG.WebApp.Utility.GetModuleByDomainAddress(command_targetdomain, command_targetsubject);
+                    switch (module.DeviceType.toLowerCase()) {
+                        case 'sensor':
+                        case 'temperature':
+                        case 'doorwindow':
+                        case 'thermostat':
+                            break;
+                        case 'light':
+                        case 'switch':
+                            $('#automation_command_property').append('<li data-context-value="Control.On"><a>Control.On</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Off"><a>Control.Off</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Toggle"><a>Control.Toggle</a></li>');
+                            break;
+                            /*
+                                            case 'siren':
+                                            case 'dimmer':
+                                            case 'shutter':
+                                            case 'fan':*/
+                        default:
+                            $('#automation_command_property').append('<li data-context-value="Control.On"><a>Control.On</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Off"><a>Control.Off</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Level"><a>Control.Level</a></li>');
+                            $('#automation_command_property').append('<li data-context-value="Control.Toggle"><a>Control.Toggle</a></li>');
+                            break;
+                    }
+                    break;
+            }
+            $('#automation_command_property').append('<li data-context-value="custom"><a>Custom API command</a></li>');
+            $('#automation_command_property').listview('refresh');
+            build_command();
+        });
+        $('#automation_command_args').on('popupbeforeposition', function (event) {
+            $('#command_args_input').val(command_value);
+            build_command();
+        });
+        $('#automation_command_delete').on('popupbeforeposition', function (event) {
+            $('#command_linenumber_label').html('#' + (selected_command_index + 1));
+            $('#command_linenumber_input').val(selected_command_index + 1);
+            $('#command_linenumber_input').attr('max', HG.WebApp.ProgramEdit._CurrentProgram.Commands.length);
+            $('#command_linenumber_input').slider('refresh');
+        });
+
+        //$('#automation_program_instructions').on('click', ' > li', function () {
+        //    selected_command_index = $(this).index();
+        //});
+
+        $('#command_delete_button').bind('click', function (event) {
+            if (selected_command_index >= 0) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Commands.splice(selected_command_index, 1);
+                automationpage_CommandsRefresh();
+            }
+        });
+        $('#command_move_button').bind('click', function (event) {
+            if (selected_command_index >= 0 && newLine != selected_command_index) {
+                var newLine = $('#command_linenumber_input').val() - 1;
+                var commands = HG.WebApp.ProgramEdit._CurrentProgram.Commands;
+                var commandObj = commands[selected_command_index];
+                var direction = (selected_command_index > newLine ? -1 : +1);
+                for (var c = selected_command_index; c != newLine; c += direction) {
+                    commands[c] = commands[c + direction];
+                }
+                commands[newLine] = commandObj;
+                automationpage_CommandsRefresh();
+            }
+        });
+
+        $('#automation_commandtarget').on('click', 'li', function () {
+            command_targetdomain = $(this).attr('data-context-value');
+            HG.WebApp.Utility.SwitchPopup('#automation_command_domain_popup', '#automation_command_target_popup', true);
+        });
+
+        $('#automation_command_target_popup').on('click', 'li', function () {
+            command_targetsubject = $(this).attr('data-context-value');
+            HG.WebApp.Utility.SwitchPopup('#automation_command_target_popup', '#automation_command_target_property', true);
+        });
+
+        $('#automation_command_target_property').on('click', 'li', function () {
+            if ($(this).attr('data-context-value') == 'custom') {
+                $('#command_custom_input').val(command_targetparameter);
+                HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_custom', true);
+            }
+            else {
+                command_targetparameter = $(this).attr('data-context-value')
+                HG.WebApp.Utility.SwitchPopup('#automation_command_target_property', '#automation_command_args', true);
+            }
+            //
+            build_command();
+        });
+
+        $('#command_args_input').on('keyup', function () {
+            command_value = $('#command_args_input').val();
+            //
+            build_command();
+        });
+
+        $('#command_custom_input').on('keyup', function () {
+            var cmd = $('#command_custom_input').val();
+            if (cmd != '') command_targetparameter = cmd;
+            //
+            build_command();
+        });
+
+        $('#command_completed').on('click', function () {
+            command_value = $('#command_args_input').val();
+
+            commandobj = {
+                'Domain': command_targetdomain,
+                'Target': command_targetsubject,
+                'CommandString': command_targetparameter,
+                'CommandArguments': command_value
+            };
+
+            if (selected_command_index == -1) {
+                HG.WebApp.ProgramEdit._CurrentProgram.Commands.push(commandobj);
+            }
+            else {
+                HG.WebApp.ProgramEdit._CurrentProgram.Commands[selected_command_index] = commandobj;
+            }
+
+            automationpage_CommandsRefresh();
+        });
+
+    });
+
+
+
+    function automationpage_GetCommandModulesListViewItems(domain, showall) {
+        var htmlopt = '';
+        var mods = HG.WebApp.ProgramEdit.GetDomainControllableModules(domain, showall);
+        for (var m = 0; m < mods.length; m++) {
+            htmlopt += '<li data-context-domain="' + mods[m].Domain + '" data-context-value="' + mods[m].Address + '"><a>' + mods[m].Address + ' (' + (mods[m].Name == null || mods[m].Name == '' ? mods[m].DeviceType : mods[m].Name) + ')' + '</a></li>'
+        }
+        return htmlopt;
+    }
+
+
+
+    function build_command() {
+        var commandstring = '... ?';
+
+        if (command_targetdomain != '') {
+            commandstring = command_targetdomain;
+        }
+        if (command_targetsubject != '') {
+            commandstring += '.' + command_targetsubject;
+        }
+        if (command_targetparameter != '') {
+            commandstring += '<br />&bull; <b>' + command_targetparameter + '</b>';
+        }
+        if (command_value != '') {
+            commandstring += '<br />&bull; <b>' + command_value + '</b>';
+        }
+        $('body').find('[id=command_wizard_text]').each(function () { $(this).html(commandstring); });
+    }
+
+    function automationpage_WizardCommandAdd() {
+        selected_command_index = -1;
+        $('#automation_command_domain_popup').popup('open');
+    }
+
+    function automationpage_WizardCaptureFieldToggle(el, field) {
+        if (el.hasClass('active')) {
+            el.removeClass('active');
+        }
+        else {
+            el.addClass('active');
+            var bindElement = $('#' + el.attr('data-bind-field'));
+            bindElement.autocomplete({
+                minLength: 0,
+                delay: 500,
+                source: ['Modules (123)', 'Scheduler (12)', 'Other (45)', 'Test ..'],
+                select: function (event, ui) { },
+                close: function (event, ui) {
+                    bindElement.val('');
+                    bindElement.autocomplete({ source: ['[<<Back]', 'test1', 'test2'] }).autocomplete("search", ''); //keep autocomplete open by
+                    //searching the same input again
+                    bindElement.focus();
+                    return false;
+                }
+            }).focus(function () {
+                $(this).trigger('keydown.autocomplete');
+            });/*
+			bindElement.qtip({
+			        content: {
+			        	title: 'Capture enabled',
+			        	text: 'Getting value from next module event...',
+			        	button: 'Close'
+			    	},
+			        show: { event: false, ready: true, delay: 500 },
+			        events: {
+			            hide: function () {
+			                $(this).qtip('destroy');
+			            }
+			        },
+			        hide: { event: false, inactive: 3000 },
+			        style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+			        position: { my: 'top center', at: 'bottom center' }
+			    });*/
+            setTimeout(function () {
+                bindElement.focus();
+            }, 500);
+        }
+    }
+
+    function automationpage_CommandChangeLine(lineNumber) {
+        selected_command_index = lineNumber;
+        $('#automation_command_delete').popup('open');
+    }
+
+    function automationpage_CommandEditLine(lineNumber) {
+        selected_command_index = lineNumber;
+        var command = HG.WebApp.ProgramEdit._CurrentProgram.Commands[lineNumber];
+        command_targetdomain = command.Domain;
+        command_targetsubject = command.Target;
+        command_targetparameter = command.CommandString;
+        command_value = command.CommandArguments;
+        $('#automation_command_args').popup('open');
+        build_command();
+    }
+
+    function automationpage_CommandsRefresh() {
+        $('#automation_program_instructions').empty();
+        var html = '';
+        for (i = 0; i < HG.WebApp.ProgramEdit._CurrentProgram.Commands.length; i++) {
+            var command = HG.WebApp.ProgramEdit._CurrentProgram.Commands[i];
+            var module = HG.WebApp.Utility.GetModuleByDomainAddress(command.Domain, command.Target);
+            var args = "";
+            if (command.CommandArguments != 'undefined') {
+                args = command.CommandArguments;
+            }
+            var lineNumber = ('0000' + (i + 1).toString()).substr((i + 1).toString().length);
+            var displayName = (module != null ? module.Name : '');
+            html += '<div class="hg-wizard-grid-linenumber" onclick="automationpage_CommandChangeLine(' + i + ')">#' + lineNumber + '</div>';
+            html += '<div class="ui-grid-c hg-wizard-grid" onclick="automationpage_CommandEditLine(' + i + ')">';
+            html += '<div class="ui-block-a">&nbsp;' + command.Domain + ':' + command.Target + '</div>';
+            html += '<div class="ui-block-b">&nbsp;' + displayName + '</div>';
+            html += '<div class="ui-block-c">&nbsp;' + command.CommandString + '</div>';
+            html += '<div class="ui-block-d">&nbsp;' + args + '</div>';
+            /*
+            $('#automation_program_instructions').append('' +
+                '<li data-context-value="' + i + '"><a>' +
+                ' <span style="color:gray">' + command.Domain.split('.')[1] + '</span>' +
+                ' ' + command.Target + (module ? ' <span style="color:gray">' + module.DeviceType + '</span>' : ' <span style="color:gray">do</span>') +
+                ' <b>' + command.CommandString.split('.')[1].toUpperCase() + '</b>' +
+                ' ' +
+                '<b>' + args + '</b>' +
+                '</a><a data-rel="popup" data-position-to="window" class="ui-btn" data-transition="pop" href="#automation_command_delete">Delete</a></li>');
+            */
+            html += '</div>';
+        }
+        $('#automation_program_instructions').append(html);
+        $('#automation_program_instructions').trigger('create');
+    }
+
+</script>

@@ -25,6 +25,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <ReleaseVersion>1.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -144,24 +146,25 @@
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Raspberry.IO.Components">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.GeneralPurpose">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
-    </Reference>
-    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.Interop">
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="Raspberry.IO.SerialPeripheralInterface">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+    <Reference Include="Raspberry.IO.InterIntegratedCircuit">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
     </Reference>
+    <Reference Include="Raspberry.IO.GeneralPurpose">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.Components">
+      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
@@ -210,6 +213,8 @@
     <Compile Include="Data\SystemConfiguration.cs" />
     <Compile Include="Automation\Scripting\SettingsHelper.cs" />
     <Compile Include="Service\StringCipher.cs" />
+    <Compile Include="Automation\ArduinoAppFactory.cs" />
+    <Compile Include="Automation\Scripting\UdpClientHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">
@@ -266,37 +271,33 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MIG\MIG\MIG.csproj">
-      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
-      <Name>MIG</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\TcpClientLib\TcpClientLib.csproj">
-      <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
-      <Name>TcpClientLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\XTenLib\XTenLib.csproj">
-      <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
-      <Name>XTenLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\ZWaveLib\ZWaveLib.csproj">
-      <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
-      <Name>ZWaveLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\SerialPortLib\SerialPortLib.csproj">
-      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
-      <Name>SerialPortLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="HomeGenieUI\HomeGenieUI.csproj">
-      <Project>{E20F7347-033B-4378-A4F9-CCD70345B4A1}</Project>
-      <Name>HomeGenieUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MIG\Support Libraries\W800RF32\W800RF32.csproj">
-      <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
-      <Name>W800RF32</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseFiles\Common\Common.csproj">
       <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\MIG\MIG.csproj">
+      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
+      <Name>MIG</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\XTenLib\XTenLib.csproj">
+      <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
+      <Name>XTenLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\ZWaveLib\ZWaveLib.csproj">
+      <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
+      <Name>ZWaveLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\SerialPortLib\SerialPortLib.csproj">
+      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
+      <Name>SerialPortLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\W800RF32\W800RF32.csproj">
+      <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
+      <Name>W800RF32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj">
+      <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
+      <Name>NetClientLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

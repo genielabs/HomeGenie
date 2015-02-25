@@ -1,8 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r411</Version>
+  <Version>1.00 beta r480</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed IR send bug</ReleaseNote>
-  <ReleaseDate>2014-08-14T08:32:49.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added new Widgets Editor with save, export, import, preview and debug functionalities
+  - Updated RaspberrySharp-IO library to possibly support new Raspberry Pi 2 model (issue #133)
+  - Some minor fixes to Z-Wave interface
+  - General improvements to integrated code editor
+  - Added some synchronization locks to NetHelper class to avoid unsafe thread operations
+  - Changed domain of CubieBoard GPIO app from "Raspberry" to "CubieBoard"
+  - Fixed "Module exception data..." (issue #127)
+  - Fixed missing Y axis in statistics graph (issue #123)
+  - ZWaveLib rework - phase 1 completed (also solve issue #118)
+  - Fixed bug in Statistics class when parsing address of remote modules
+  - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue
+  - Fixed MIG CameraInput interface not reading configuration</ReleaseNote>
+  <ReleaseDate>2015-02-21T14:15:27.0000Z</ReleaseDate>
 </ReleaseInfo>

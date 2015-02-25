@@ -30,22 +30,25 @@ using System.Net;
 using System.Text;
 using System.Timers;
 using System.Xml.Serialization;
-using HomeGenie.Automation;
-using HomeGenie.Data;
-using MIG;
-using MIG.Interfaces.HomeAutomation.Commons;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using XTenLib;
-using ZWaveLib.Devices;
+
 using System.Diagnostics;
 using System.Net.Sockets;
-using OpenSource.UPnP;
+using System.Threading;
+
+using HomeGenie.Automation;
+using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using MIG.Interfaces.HomeAutomation;
 using HomeGenie.Service.Logging;
 using HomeGenie.Automation.Scheduler;
-using System.Threading;
+
+using MIG;
+using MIG.Interfaces.HomeAutomation.Commons;
+using MIG.Interfaces.HomeAutomation;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using OpenSource.UPnP;
 
 namespace HomeGenie.Service
 {
@@ -53,6 +56,7 @@ namespace HomeGenie.Service
     {
         #region Private Fields declaration
 
+        private const string HOMEGENIE_MASTERNODE = "0";
         private MIGService migService;
         private ProgramEngine masterControlProgram;
         private VirtualMeter virtualMeter;
@@ -69,9 +73,6 @@ namespace HomeGenie.Service
         //
         private SystemConfiguration systemConfiguration;
         //
-        // Reference to Z-Wave and X10 drivers (obtained from MIGService)
-        private ZWaveLib.Devices.Controller zwaveController;
-        private XTenLib.XTenManager x10Controller;
         // public events
         public event Action<LogEntry> LogEventAction;
 
@@ -99,6 +100,8 @@ namespace HomeGenie.Service
         public HomeGenieService()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
+            // TODO: all the following initialization stuff should go async
             //
             // initialize recent log list
             recentEventsLog = new TsList<LogEntry>();
@@ -126,10 +129,11 @@ namespace HomeGenie.Service
             wshStatistics = new Handlers.Statistics(this);
             wshLogging = new Handlers.Logging(this);
             //
-            // Try to start WebGateway, at  0 < (port - ServicePort) < 10
+            // Try to start WebGateway, if default HTTP port is busy, then it will try from 8080 to 8090
             bool serviceStarted = false;
+            int bindAttempts = 0;
             int port = systemConfiguration.HomeGenie.ServicePort;
-            while (!serviceStarted && port <= systemConfiguration.HomeGenie.ServicePort + 10)
+            while (!serviceStarted && bindAttempts <= 10)
             {
                 // TODO: this should be done like this _services.Gateways["WebService"].Configure(....)
                 migService.ConfigureWebGateway(
@@ -140,12 +144,13 @@ namespace HomeGenie.Service
                 );
                 if (migService.StartGateways())
                 {
-                    systemConfiguration.HomeGenie.ServicePort = port;
                     serviceStarted = true;
                 }
                 else
                 {
-                    port++;
+                    if (port < 8080) port = 8080;
+                    else port++;
+                    bindAttempts++;
                 }
             }
 
@@ -157,22 +162,23 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeAutomation_HomeGenie,
-                    "SystemInfo",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie service ready",
-                    "HTTP.PORT",
+                    Properties.SYSTEMINFO_HTTPPORT,
                     port.ToString()
                 );
-                systemConfiguration.HomeGenie.ServicePort = port;
                 InitializeSystem();
+                // Update system configuration with the HTTP port the service succeed to bind on
+                systemConfiguration.HomeGenie.ServicePort = port;
             }
             else
             {
                 LogBroadcastEvent(
                     Domains.HomeAutomation_HomeGenie,
-                    "SystemInfo",
+                    HOMEGENIE_MASTERNODE,
                     "Http port bind failed.",
-                    "HTTP.PORT",
-                    port.ToString()
+                    Properties.SYSTEMINFO_HTTPPORT,
+                    systemConfiguration.HomeGenie.ServicePort.ToString()
                 );
                 Program.Quit(false);
             }
@@ -182,9 +188,9 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "InstallProgress.Message",
+                    Properties.INSTALLPROGRESS_MESSAGE,
                     "= " + args.Status + ": " + args.ReleaseInfo.DownloadUrl
                 );
             };
@@ -192,9 +198,9 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "Update Check",
+                    Properties.INSTALLPROGRESS_UPDATE,
                     args.Status.ToString()
                 );
             };
@@ -202,48 +208,98 @@ namespace HomeGenie.Service
             {
                 LogBroadcastEvent(
                     Domains.HomeGenie_UpdateChecker,
-                    "0",
+                    HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
-                    "InstallProgress.Message",
+                    Properties.INSTALLPROGRESS_MESSAGE,
                     message
                 );
             };
-            // it will check every 24 hours
-            updateChecker.Start();
             //
             statisticsLogger = new StatisticsLogger(this);
             statisticsLogger.Start();
             //
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STARTED");
-            //
             // Setup local UPnP device
             SetupUpnp();
+            //
+            // it will check every 24 hours
+            updateChecker.Start();
+            //
+            Start();
         }
 
         public void Start()
         {
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STARTED");
+            //
+            // Signal "SystemStarted" event to listeners
+            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+            {
+                try
+                {
+                    var pb = masterControlProgram.Programs[p];
+                    if (pb.IsEnabled)
+                    {
+                        if (pb.SystemStarted != null)
+                        {
+                            if (!pb.SystemStarted())
+                            // stop routing this event to other listeners
+                            break;
+                        }
+                    }
+                }
+                catch 
+                {
+                    // TODO: log error
+                }
+            }
         }
 
         public void Stop()
         {
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPING");
+            //
+            // Signal "SystemStopping" event to listeners
+            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+            {
+                try
+                {
+                    var pb = masterControlProgram.Programs[p];
+                    if (pb.IsEnabled)
+                    {
+                        if (pb.SystemStopping != null && !pb.SystemStopping())
+                        {
+                            // stop routing this event to other listeners
+                            break;
+                        }
+                    }
+                }
+                catch 
+                {
+                    // TODO: log error
+                }
+            }
             //
             // save system data before quitting
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "SAVING DATA");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
             //
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "VirtualMeter STOPPED");
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPING");
             if (migService != null) migService.StopService();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "MIG Service STOPPED");
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPING");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
             if (masterControlProgram != null) masterControlProgram.StopEngine();
-            LogBroadcastEvent(Domains.HomeGenie_System, "0", "HomeGenie System", "HomeGenie", "ProgramEngine STOPPED");
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
             //
             SystemLogger.Instance.Dispose();
+        }
+
+        ~HomeGenieService()
+        {
+            Stop();
         }
 
         #endregion
@@ -326,15 +382,18 @@ namespace HomeGenie.Service
         public void InterfaceControl(MIGInterfaceCommand cmd)
         {
             var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
-            bool isRemoteModule = (target != null && target.RoutingNode.Trim() != "");
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
             if (isRemoteModule)
             {
                 // ...
                 try
                 {
-                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + cmd.Domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
+                    string domain = cmd.Domain;
+                    if (domain.StartsWith("HGIC:"))
+                        domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.NodeId + "/" + cmd.Command + "/" + cmd.OptionsString;
                     Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                    if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
+                    if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
                     {
                         netHelper.WithCredentials(
                             systemConfiguration.HomeGenie.UserLogin,
@@ -524,7 +583,7 @@ namespace HomeGenie.Service
             }
             else
             {
-                if (propertyChangedAction.Domain == "MIGService.Interfaces")
+                if (propertyChangedAction.Domain == Domains.MigService_Interfaces)
                 {
                     modules_RefreshInterface(GetInterface(propertyChangedAction.SourceId));
                 }
@@ -540,8 +599,11 @@ namespace HomeGenie.Service
         // Check if command was Control.*, update the ModuleParameter. This should happen in a HWInt->HomeGenie pathway
         private void migService_ServiceRequestPostProcess(MIGClientRequest request, MIGInterfaceCommand command)
         {
-            if (command.Domain == Domains.HomeAutomation_X10 || command.Domain == Domains.HomeAutomation_ZWave)
+            // REMARK: No post data is available at this point since it has already beel consumed by ServiceRequestPreProcess
+            switch (command.Domain)
             {
+            case Domains.HomeAutomation_X10:
+            case Domains.HomeAutomation_ZWave:
                 Module module = null;
                 try
                 {
@@ -551,6 +613,7 @@ namespace HomeGenie.Service
                 {
                 }
                 //
+                // TODO: this should be placed somewhere else (this is specific code for handling interface responses, none of HG business)
                 if (module != null)
                 {
                     // wait for ZWaveLib asynchronous response from node and raise the proper "parameter changed" event
@@ -578,10 +641,15 @@ namespace HomeGenie.Service
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module,
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(
-                                    ".",
-                                    ""
-                                ) + "." + command.GetOption(1)
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + command.GetOption(1)
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
+                        else if (command.Command == ZWave.Command.MULTIINSTANCE_GETCOUNT)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module, 
+                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + ".Count"
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
@@ -616,6 +684,13 @@ namespace HomeGenie.Service
                         }
                     }
                 }
+                break;
+            case Domains.MigService_Interfaces:
+                if (command.Command.EndsWith(".Set"))
+                {
+                    systemConfiguration.Update();
+                }
+                break;
             }
             //
             // Macro Recording
@@ -639,13 +714,15 @@ namespace HomeGenie.Service
             #region Interconnection (Remote Node Command Routing)
 
             Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.NodeId);
-            bool isremotemodule = (target != null && target.RoutingNode.Trim() != "");
-            if (isremotemodule)
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
+            if (isRemoteModule)
             {
                 // ...
                 try
                 {
-                    string serviceurl = "http://" + target.RoutingNode + "/api/" + migCommand.Domain + "/" + migCommand.NodeId + "/" + migCommand.Command + "/" + migCommand.OptionsString;
+                    string domain = migCommand.Domain;
+                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.NodeId + "/" + migCommand.Command + "/" + migCommand.OptionsString;
                     Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
                     if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
                     {
@@ -745,6 +822,7 @@ namespace HomeGenie.Service
                         Name = propertyChangedAction.Path,
                         Value = propertyChangedAction.Value.ToString()
                     });
+                    parameter = Utility.ModuleParameterGet(module, propertyChangedAction.Path);
                 }
                 else
                 {
@@ -756,12 +834,13 @@ namespace HomeGenie.Service
                 //                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             //
+            string eventValue = (propertyChangedAction.Value.GetType() == typeof(String) ? propertyChangedAction.Value.ToString() : JsonConvert.SerializeObject(propertyChangedAction.Value));
             LogBroadcastEvent(
                 propertyChangedAction.Domain,
                 propertyChangedAction.SourceId,
                 propertyChangedAction.SourceType,
                 propertyChangedAction.Path,
-                JsonConvert.SerializeObject(propertyChangedAction.Value)
+                eventValue
             );
             //
             ///// ROUTE EVENT TO LISTENING AutomationPrograms
@@ -881,7 +960,7 @@ namespace HomeGenie.Service
                 Source = source,
                 Description = description,
                 Property = property,
-                Value = value.Replace("\"", "")
+                Value = value
             };
             try
             {
@@ -990,14 +1069,14 @@ namespace HomeGenie.Service
                         foreach (var parameter in module.Properties)
                         {
                             // these two properties have to be kept in clear text
-                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE && parameter.Name != Properties.VIRTUALMODULE_PARENTID)
+                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE 
+                                && parameter.Name != Properties.VIRTUALMODULE_PARENTID
+                                && parameter.Name != Properties.PROGRAM_STATUS
+                                && parameter.Name != Properties.RUNTIME_ERROR
+                            )
                             {
                                 if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Encrypt(
                                         parameter.Value,
-                                        systemConfiguration.GetPassPhrase()
-                                    );
-                                if (!String.IsNullOrEmpty(parameter.LastValue)) parameter.LastValue = StringCipher.Encrypt(
-                                        parameter.LastValue,
                                         systemConfiguration.GetPassPhrase()
                                     );
                             }
@@ -1010,9 +1089,9 @@ namespace HomeGenie.Service
                     }
                     var settings = new System.Xml.XmlWriterSettings();
                     settings.Indent = true;
-                    var serializer = new System.Xml.Serialization.XmlSerializer(systemModules.GetType());
+                    var serializer = new System.Xml.Serialization.XmlSerializer(clonedModules.GetType());
                     var writer = System.Xml.XmlWriter.Create(filePath, settings);
-                    serializer.Serialize(writer, systemModules);
+                    serializer.Serialize(writer, clonedModules);
                     writer.Close();
                     success = true;
                 }
@@ -1134,30 +1213,26 @@ namespace HomeGenie.Service
                 foreach (var program in programs)
                 {
                     program.IsRunning = false;
-                    //program.IsEvaluatingConditionBlock = false;
-                    //program.ScriptErrors = "";
                     // backward compatibility with hg < 0.91
                     if (program.Address == 0)
                     {
                         // assign an id to program if unassigned
                         program.Address = masterControlProgram.GeneratePid();
                     }
-                    // in case of c# script preload assembly from generated .dll
-                    if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
-                    {
-                        program.ScriptErrors = "Program update is required.";
-                    }
-                    //else
-                    //{
-                    //    program.ScriptErrors = "";
-                    //}
                     masterControlProgram.ProgramAdd(program);
                 }
                 reader.Close();
             }
-            catch
+            catch (Exception ex)
             {
                 //TODO: log error
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "LoadConfiguration()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
             }
             //
             // load last saved scheduler items data into masterControlProgram.SchedulerService.Items list
@@ -1213,7 +1288,7 @@ namespace HomeGenie.Service
             {
             }
             //
-            UnarchiveConfiguration(archiveName, AppDomain.CurrentDomain.BaseDirectory);
+            Utility.UncompressZip(archiveName, AppDomain.CurrentDomain.BaseDirectory);
             //
             LoadConfiguration();
             //
@@ -1229,34 +1304,6 @@ namespace HomeGenie.Service
             UpdateModulesDatabase();
             SystemConfiguration.Update();
             ArchiveConfiguration("html/homegenie_backup_config.zip");
-        }
-
-        public void UnarchiveConfiguration(string archiveName, string destinationFolder)
-        {
-            // Unarchive (unzip)
-            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
-            {
-                foreach (var part in package.GetParts())
-                {
-                    string target = Path.Combine(destinationFolder, part.Uri.OriginalString.Substring(1));
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
-
-                    if (File.Exists(target)) File.Delete(target);
-
-                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
-                    {
-                        byte[] buffer = new byte[4096];
-                        int read;
-                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            destination.Write(buffer, 0, read);
-                        }
-                    }
-                }
-            }
         }
 
         #endregion Initialization and Data Storage
@@ -1275,229 +1322,209 @@ namespace HomeGenie.Service
 
         internal void modules_RefreshVirtualModules()
         {
-            lock (systemModules.LockObject) lock (virtualModules.LockObject) try
+            lock (systemModules.LockObject) 
+            lock (virtualModules.LockObject) 
+            try
+            {
+                //
+                // Virtual Modules
+                //
+                foreach (var virtualModule in virtualModules)
                 {
+                    ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
+                    if (program == null) continue;
                     //
-                    // Virtual Modules
+                    var virtualModuleWidget = Utility.ModuleParameterGet(
+                                                  virtualModule,
+                                                  Properties.WIDGET_DISPLAYMODULE
+                                              );
                     //
-                    foreach (var virtualModule in virtualModules)
+                    Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+
+                    if (!program.IsEnabled)
                     {
-                        ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
-                        if (program == null) continue;
-                        //
-                        var virtualModuleWidget = Utility.ModuleParameterGet(
-                                                      virtualModule,
-                                                      Properties.WIDGET_DISPLAYMODULE
-                                                  );
-                        //
-                        Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
-
-                        if (!program.IsEnabled)
+                        if (module != null && module.RoutingNode == "" && virtualModule.ParentId != module.Address)
                         {
-                            if (module != null && module.RoutingNode == "" && virtualModule.ParentId != module.Address)
+                            // copy instance module properties to virtualmodules before removing
+                            virtualModule.Name = module.Name;
+                            virtualModule.DeviceType = module.DeviceType;
+                            virtualModule.Properties.Clear();
+                            foreach (var p in module.Properties)
                             {
-                                // copy instance module properties to virtualmodules before removing
-                                virtualModule.Name = module.Name;
-                                virtualModule.DeviceType = module.DeviceType;
-                                virtualModule.Properties.Clear();
-                                foreach (var p in module.Properties)
-                                {
-                                    virtualModule.Properties.Add(p);
-                                }
-                                systemModules.Remove(module);
+                                virtualModule.Properties.Add(p);
                             }
-                            continue;
+                            systemModules.Remove(module);
                         }
+                        continue;
+                    }
 
-                        if (module == null)
+                    if (module == null)
+                    {
+                        // add new module
+                        module = new Module();
+                        systemModules.Add(module);
+                        // copy properties from virtualmodules
+                        foreach (var p in virtualModule.Properties)
                         {
-                            // add new module
-                            module = new Module();
-                            systemModules.Add(module);
-                            // copy properties from virtualmodules
-                            foreach (var p in virtualModule.Properties)
-                            {
-                                module.Properties.Add(p);
-                            }
-                        }
-
-                        // module inherits props from associated virtual module
-                        module.Domain = virtualModule.Domain;
-                        module.Address = virtualModule.Address;
-                        if (module.DeviceType == MIG.ModuleTypes.Generic)
-                        {
-                            module.DeviceType = virtualModule.DeviceType;
-                        }
-                        // associated module's name of an automation program cannot be changed
-                        if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
-                        {
-                            module.Name = virtualModule.Name;
-                        }
-                        module.Description = virtualModule.Description;
-                        //
-                        Utility.ModuleParameterSet(
-                            module,
-                            Properties.VIRTUALMODULE_PARENTID,
-                            virtualModule.ParentId
-                        );
-                        var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
-                        // if a widget is specified on virtual module then we force module to display using this
-                        if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
-                        {
-                            Utility.ModuleParameterSet(
-                                module,
-                                Properties.WIDGET_DISPLAYMODULE,
-                                virtualModuleWidget.Value
-                            );
+                            module.Properties.Add(p);
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "modules_RefreshVirtualModules()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
+
+                    // module inherits props from associated virtual module
+                    module.Domain = virtualModule.Domain;
+                    module.Address = virtualModule.Address;
+                    if (module.DeviceType == MIG.ModuleTypes.Generic)
+                    {
+                        module.DeviceType = virtualModule.DeviceType;
+                    }
+                    // associated module's name of an automation program cannot be changed
+                    if (module.Name == "" || (module.DeviceType == MIG.ModuleTypes.Program && virtualModule.Name != ""))
+                    {
+                        module.Name = virtualModule.Name;
+                    }
+                    module.Description = virtualModule.Description;
+                    //
+                    Utility.ModuleParameterSet(
+                        module,
+                        Properties.VIRTUALMODULE_PARENTID,
+                        virtualModule.ParentId
                     );
+                    var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
+                    // if a widget is specified on virtual module then we force module to display using this
+                    if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
+                    {
+                        Utility.ModuleParameterSet(
+                            module,
+                            Properties.WIDGET_DISPLAYMODULE,
+                            virtualModuleWidget.Value
+                        );
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_RefreshVirtualModules()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
         }
 
         internal void modules_RefreshPrograms()
         {
-            lock (systemModules.LockObject) try
+            lock (systemModules.LockObject) 
+            try
+            {
+                //
+                // ProgramEngine programs (modules)
+                //
+                if (masterControlProgram != null)
                 {
-                    //
-                    // ProgramEngine programs (modules)
-                    //
-                    if (masterControlProgram != null)
+                    lock (masterControlProgram.Programs.LockObject) 
+                    foreach (var program in masterControlProgram.Programs)
                     {
-                        foreach (var program in masterControlProgram.Programs)
+                        Module module = null;
+                        try
                         {
-                            Module module = null;
-                            try
+                            module = systemModules.Find(delegate(Module o)
                             {
-                                module = systemModules.Find(delegate(Module o)
-                                {
-                                    return o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString();
-                                });
-                            }
-                            catch
-                            {
-                            }
-                            //
-                            if (module != null && program.Type.ToLower() == "wizard" && !program.IsEnabled && module.RoutingNode == "")
-                            {
-                                systemModules.Remove(module);
-                                continue;
-                            }
-                            else if (/*program.Type.ToLower() != "wizard" &&*/ !program.IsEnabled)
-                            {
-                                continue;
-                            }
-                            //
-                            // add new module
-                            if (module == null)
-                            {
-                                module = new Module();
-                                module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
-                                if (program.Type.ToLower() == "wizard")
-                                {
-                                    Utility.ModuleParameterSet(
-                                        module,
-                                        Properties.WIDGET_DISPLAYMODULE,
-                                        "homegenie/generic/program"
-                                    );
-                                }
-                                systemModules.Add(module);
-                            }
-                            //
-                            module.Name = program.Name;
-                            module.Address = program.Address.ToString();
-                            module.DeviceType = MIG.ModuleTypes.Program;
-                            //module.Description = "Wizard Script";
+                                return o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString();
+                            });
                         }
+                        catch
+                        {
+                        }
+                        //
+                        if (module != null && program.Type.ToLower() == "wizard" && !program.IsEnabled && module.RoutingNode == "")
+                        {
+                            systemModules.Remove(module);
+                            continue;
+                        }
+                        else if (/*program.Type.ToLower() != "wizard" &&*/ !program.IsEnabled)
+                        {
+                            continue;
+                        }
+                        //
+                        // add new module
+                        if (module == null)
+                        {
+                            module = new Module();
+                            module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
+                            if (program.Type.ToLower() == "wizard")
+                            {
+                                Utility.ModuleParameterSet(
+                                    module,
+                                    Properties.WIDGET_DISPLAYMODULE,
+                                    "homegenie/generic/program"
+                                );
+                            }
+                            systemModules.Add(module);
+                        }
+                        //
+                        module.Name = program.Name;
+                        module.Address = program.Address.ToString();
+                        module.DeviceType = MIG.ModuleTypes.Program;
+                        //module.Description = "Wizard Script";
                     }
                 }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "modules_RefreshPrograms()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_RefreshPrograms()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
         }
 
         internal void modules_Sort()
         {
             lock (systemModules.LockObject) try
+            {
+                // sort modules properties by name
+                foreach (var module in systemModules)
                 {
-
-                    // sort modules properties by name
-                    foreach (var module in systemModules)
+                    module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
                     {
-                        module.Properties.Sort((ModuleParameter p1, ModuleParameter p2) =>
-                        {
-                            return p1.Name.CompareTo(p2.Name);
-                        });
-                    }
-                    //
-                    // sort modules
-                    //
-                    systemModules.Sort((Module m1, Module m2) =>
-                    {
-                        string l1 = "";
-                        int n1 = 0;
-                        if (m1.Domain.EndsWith(".X10"))
-                        {
-                            l1 = m1.Address.Substring(0, 1);
-                            int.TryParse(m1.Address.Substring(1), out n1);
-                        }
-                        else
-                        {
-                            int.TryParse(m1.Address, out n1);
-                        }
-                        string l2 = "";
-                        int n2 = 0;
-                        if (m2.Domain.EndsWith(".X10"))
-                        {
-                            l2 = m2.Address.Substring(0, 1);
-                            int.TryParse(m2.Address.Substring(1), out n2);
-                        }
-                        else
-                        {
-                            int.TryParse(m2.Address, out n2);
-                        }
-                        string d1 = m1.Domain;
-                        string d2 = m2.Domain;
-                        /*
-                        if (d1.StartsWith("EmbeddedSystems."))
-                        {
-                            d1 = "z|" + d1;
-                        }
-                        if (d2.StartsWith("EmbeddedSystems."))
-                        {
-                            d2 = "z|" + d2;
-                        }
-                        */
-                        return ((d1 + "|" + l1 + n1.ToString("00000")).CompareTo(d2 + "|" + l2 + n2.ToString("00000")));
+                        return p1.Name.CompareTo(p2.Name);
                     });
-
                 }
-                catch (Exception ex)
+                //
+                // sort modules
+                //
+                systemModules.Sort((Module m1, Module m2) =>
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "modules_Sort()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
+                    System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(@"([a-zA-Z]+)(\d+)");
+                    System.Text.RegularExpressions.Match result1 = re.Match(m1.Address);
+                    System.Text.RegularExpressions.Match result2 = re.Match(m2.Address);
+
+                    string alphaPart1 = result1.Groups[1].Value.PadRight(8, '0');
+                    string numberPart1 = (String.IsNullOrWhiteSpace(result1.Groups[2].Value) ? m1.Address.PadLeft(8, '0') : result1.Groups[2].Value.PadLeft(8, '0'));
+                    string alphaPart2 = result2.Groups[1].Value.PadRight(8, '0');
+                    string numberPart2 = (String.IsNullOrWhiteSpace(result2.Groups[2].Value) ? m2.Address.PadLeft(8, '0') : result2.Groups[2].Value.PadLeft(8, '0'));
+
+                    string d1 = m1.Domain + "|" + alphaPart1 + numberPart1;
+                    string d2 = m2.Domain + "|" + alphaPart2 + numberPart2;
+                    return d1.CompareTo(d2);
+                });
+
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    "modules_Sort()",
+                    ex.Message,
+                    "Exception.StackTrace",
+                    ex.StackTrace
+                );
+            }
         }
 
         internal void modules_RefreshAll()
@@ -1632,10 +1659,6 @@ namespace HomeGenie.Service
                                 parameter.Value,
                                 systemConfiguration.GetPassPhrase()
                             );
-                        if (!String.IsNullOrEmpty(parameter.LastValue)) parameter.LastValue = StringCipher.Decrypt(
-                                parameter.LastValue,
-                                systemConfiguration.GetPassPhrase()
-                            );
                     }
                     catch
                     {
@@ -1646,15 +1669,6 @@ namespace HomeGenie.Service
                 //
                 // configure MIG
                 //
-                if (systemConfiguration.MIGService.GetInterface("HomeAutomation.Insteon") == null)
-                {
-                    var options = new List<MIGServiceConfiguration.Interface.Option>();
-                    options.Add(new MIGServiceConfiguration.Interface.Option(){ Name = "Port", Value = "" });
-                    systemConfiguration.MIGService.Interfaces.Add(new MIGServiceConfiguration.Interface(){ 
-                        Domain = "HomeAutomation.Insteon",
-                        Options = options
-                    });
-                }
                 migService.Configuration = systemConfiguration.MIGService;
             }
             catch (Exception ex)
@@ -1686,10 +1700,6 @@ namespace HomeGenie.Service
                         {
                             if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
                                     parameter.Value,
-                                    systemConfiguration.GetPassPhrase()
-                                );
-                            if (!String.IsNullOrEmpty(parameter.LastValue)) parameter.LastValue = StringCipher.Decrypt(
-                                    parameter.LastValue,
                                     systemConfiguration.GetPassPhrase()
                                 );
                         }
@@ -1733,9 +1743,7 @@ namespace HomeGenie.Service
                     if (parameter != null)
                     {
                         parameter.Value = "0";
-                        //parameter.UpdateTime = DateTime.Now;
-                        //parameter.LastValue = "0";
-                        //parameter.LastUpdateTime = DateTime.Now;
+                        //parameter.UpdateTime = DateTime.UtcNow;
                     }
                 }
             }
@@ -1762,9 +1770,19 @@ namespace HomeGenie.Service
             }
             foreach (var program in masterControlProgram.Programs)
             {
-                if (File.Exists("programs/" + program.Address + ".dll"))
+                string relFile = Path.Combine("programs/", program.Address + ".dll");
+                if (File.Exists(relFile))
                 {
-                    Utility.AddFileToZip(archiveName, "programs/" + program.Address + ".dll");
+                    Utility.AddFileToZip(archiveName, relFile);
+                }
+                if (program.Type.ToLower() == "arduino")
+                {
+                    string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
+                    string[] filePaths = Directory.GetFiles(arduinoFolder);
+                    foreach (string f in filePaths)
+                    {
+                        Utility.AddFileToZip(archiveName, Path.Combine(arduinoFolder, Path.GetFileName(f)));
+                    }
                 }
             }
             //
@@ -1808,6 +1826,8 @@ namespace HomeGenie.Service
             {
                 systemConfiguration.HomeGenie.GUID = uniqueDeviceName = System.Guid.NewGuid().ToString();
                 systemConfiguration.Update();
+                // initialize database for first use
+                statisticsLogger.DatabaseReset();
             }
             //
             UPnPDevice localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");

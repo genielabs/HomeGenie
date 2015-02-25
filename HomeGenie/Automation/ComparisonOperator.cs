@@ -30,7 +30,8 @@ namespace HomeGenie.Automation
     {
         LessThan = -1,
         Equals = 0,
-        GreaterThan = 1
+        GreaterThan = 1,
+        LogicOrJoint = 100
     }
 
 }

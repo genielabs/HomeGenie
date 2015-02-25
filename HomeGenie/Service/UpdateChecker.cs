@@ -329,9 +329,12 @@ namespace HomeGenie.Service
                 {
                     bool doNotCopy = false;
 
-                    string destinationFolder = Path.GetDirectoryName(file).Replace(Path.Combine("_update", "files", "HomeGenie"), "");
-                    if (destinationFolder != "" && !Directory.Exists(destinationFolder)) Directory.CreateDirectory(destinationFolder);
-                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/');
+                    string destinationFolder = Path.GetDirectoryName(file).Replace(Path.Combine("_update", "files", "HomeGenie"), "").TrimStart('/').TrimStart('\\');
+                    if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file)).TrimStart(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()).ToArray()).TrimStart('/').TrimStart('\\');
 
                     // backup current file before replacing it
                     if (File.Exists(destinationFile))
@@ -398,7 +401,7 @@ namespace HomeGenie.Service
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");
-                            if (!Directory.Exists(Path.GetDirectoryName(destinationFile)))
+                            if (!String.IsNullOrWhiteSpace(Path.GetDirectoryName(destinationFile)) && !Directory.Exists(Path.GetDirectoryName(destinationFile)))
                             {
                                 try
                                 {
@@ -666,10 +669,27 @@ namespace HomeGenie.Service
                                 LogMessage("+ Adding Automation Program: " + program.Name + " (" + program.Address + ")");
                             }
 
-                            // Try copying the new compiled program binary dll
+                            // Try copying the new program files (binary dll or arduino sketch files)
                             try
                             {
-                                File.Copy(Path.Combine(UpdateBaseFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
+                                if (program.Type.ToLower() == "csharp")
+                                {
+                                    File.Copy(Path.Combine(UpdateBaseFolder, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
+                                }
+                                else if (program.Type.ToLower() == "arduino")
+                                {
+                                    // copy arduino project files...
+                                    // TODO: this is untested yet
+                                    string sourceFolder = Path.Combine(UpdateBaseFolder, "programs", "arduino", program.Address.ToString());
+                                    string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
+                                    if (Directory.Exists(arduinoFolder)) Directory.Delete(arduinoFolder, true);
+                                    Directory.CreateDirectory(arduinoFolder);
+                                    foreach (string newPath in Directory.GetFiles(sourceFolder))
+                                    {
+                                        File.Copy(newPath, newPath.Replace(sourceFolder, arduinoFolder), true);
+                                        LogMessage("* Updating Automation Program: " + program.Name + " (" + program.Address + ") - " + Path.GetFileName(newPath));
+                                    }
+                                }
                             }
                             catch { }
 

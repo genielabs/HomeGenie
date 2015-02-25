@@ -1,0 +1,198 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "5254"
+      },
+      "productType": {
+        "@value": "8001"
+      },
+      "productId": {
+        "@value": "8020"
+      },
+      "libType": {
+        "@value": "03"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "67"
+      },
+      "appVersion": {
+        "@value": "02"
+      },
+      "appSubVersion": {
+        "@value": "20"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "03"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "false"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Z-Wave Switch Module"
+        }
+      },
+      "wakeupNote": {
+        "lang": {
+          "@xml:lang": "en"
+        }
+      },
+      "inclusionNote": {
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Triple click the PROG button within 1 second."
+        }
+      },
+      "productName": "ZRM-80SA ",
+      "brandName": "Remotec",
+      "productLine": "Z-Wave Home Automation ",
+      "productCode": "BW8020SA",
+      "productVersion": "2.20"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0025"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "002b"
+        },
+        {
+          "@id": "002c"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "008e",
+          "@version": "2"
+        },
+        {
+          "@id": "005a"
+        },
+        {
+          "@id": "0060",
+          "@version": "3",
+          "@controlled": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "2",
+          "@maxNodes": "4",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "ZRM-80SA will send out related basic set command On (0xFF) or Off (0x00) to its\r\nassociation group automatically when ZRM-80SA received On (0xFF) or Off (0x00)\r\ncommand by local switch or wireless command respectively."
+            }
+          }
+        },
+        {
+          "@number": "1",
+          "@maxNodes": "1",
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Association group_1 is used to report status change such as AUTO report to gateway."
+            }
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Activate/Deactivate All On/All Off"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 (0x00) - All On is not active,\r\nAll Off is not active\r\n1 (0x01) - All On is not active,\r\nAll Off active\r\n2 (0x02) - All On active,\r\nAll Off is not active\r\n255 (0xFF) - All On active,\r\nAll Off active (default)"
+            }
+          }
+        },
+        {
+          "@number": "5",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Switch returns to the last position saved before power failure"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "0 (0x00) - Switch does not save the\r\nstate after power failure, it returns to\r\n\"off\" position\r\n1 (0x01) - Switch saves its state\r\nbefore power failure"
+            }
+          }
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/584600ad5a74c3e710aaf41f3edc3da366ac793a.jpg"
+      }
+    }
+  }
+}

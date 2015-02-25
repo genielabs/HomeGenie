@@ -29,7 +29,10 @@ using SerialPortLib;
 
 namespace HomeGenie.Automation.Scripting
 {
-
+    /// <summary>
+    /// Serial port helper.\n
+    /// Class instance accessor: **SerialPort**
+    /// </summary>
     public class SerialPortHelper
     {
         private SerialPortInput serialPort;
@@ -37,41 +40,37 @@ namespace HomeGenie.Automation.Scripting
         private Action<string> stringReceived;
         private Action<bool> statusChanged;
         private string portName = "";
+        private string[] textEndOfLine = new string[] { "\n" };
+        private string textBuffer = "";
 
         public SerialPortHelper()
         {
             serialPort = new SerialPortInput();
         }
 
+        /// <summary>
+        /// Selects the serial port with the specified name.
+        /// </summary>
+        /// <returns>SerialPortHelper.</returns>
+        /// <param name="port">Port name.</param>
         public SerialPortHelper WithName(string port)
         {
             portName = port;
             return this;
         }
 
-        public SerialPortHelper OnStringReceived(Action<string> receivedAction)
-        {
-            stringReceived = receivedAction;
-            return this;
-        }
-
-        public SerialPortHelper OnMessageReceived(Action<byte[]> receivedAction)
-        {
-            dataReceived = receivedAction;
-            return this;
-        }
-
-        public SerialPortHelper OnStatusChanged(Action<bool> statusChangeAction)
-        {
-            statusChanged = statusChangeAction;
-            return this;
-        }
-
+        /// <summary>
+        /// Connect the serial port (@115200bps).
+        /// </summary>
         public bool Connect()
         {
             return Connect(115200);
         }
 
+        /// <summary>
+        /// Connect the serial port at the specified speed.
+        /// </summary>
+        /// <param name="baudRate">Baud rate.</param>
         public bool Connect(int baudRate)
         {
             serialPort.MessageReceived += serialPort_MessageReceived;
@@ -81,6 +80,9 @@ namespace HomeGenie.Automation.Scripting
             return serialPort.Connect();
         }
 
+        /// <summary>
+        /// Disconnects the serial port.
+        /// </summary>
         public SerialPortHelper Disconnect()
         {
             serialPort.Disconnect();
@@ -89,6 +91,10 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        /// <summary>
+        /// Sends a string message.
+        /// </summary>
+        /// <param name="message">Message.</param>
         public void SendMessage(string message)
         {
             if (serialPort.IsConnected)
@@ -98,6 +104,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Sends a raw data message.
+        /// </summary>
+        /// <param name="message">Message.</param>
         public void SendMessage(byte[] message)
         {
             if (serialPort.IsConnected)
@@ -106,11 +116,54 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Sets the function to call when a new string message is received.
+        /// </summary>
+        /// <param name="receivedAction">Function or inline delegate.</param>
+        public SerialPortHelper OnStringReceived(Action<string> receivedAction)
+        {
+            stringReceived = receivedAction;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the function to call when a new raw message is received.
+        /// </summary>
+        /// <param name="receivedAction">Function or inline delegate.</param>
+        public SerialPortHelper OnMessageReceived(Action<byte[]> receivedAction)
+        {
+            dataReceived = receivedAction;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the function to call when the status of the serial connection changes.
+        /// </summary>
+        /// <param name="statusChangeAction">Function or inline delegate.</param>
+        public SerialPortHelper OnStatusChanged(Action<bool> statusChangeAction)
+        {
+            statusChanged = statusChangeAction;
+            return this;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the serial port is connected.
+        /// </summary>
+        /// <value><c>true</c> if connected; otherwise, <c>false</c>.</value>
         public bool IsConnected
         {
             get { return serialPort.IsConnected; }
         }
-
+        
+        /// <summary>
+        /// Gets or sets the end of line delimiter used in text messaging.
+        /// </summary>
+        /// <value>The end of line.</value>
+        public string EndOfLine
+        {
+            get { return textEndOfLine[0]; }
+            set { textEndOfLine = new string[] { value }; }
+        }
 
         private void serialPort_MessageReceived(byte[] message)
         {
@@ -120,16 +173,41 @@ namespace HomeGenie.Automation.Scripting
             }
             if (stringReceived != null)
             {
-                try
+                string textMessage = textBuffer + Encoding.UTF8.GetString(message);
+                if (String.IsNullOrEmpty(textEndOfLine[0]))
                 {
-                    stringReceived(Encoding.UTF8.GetString(message));
+                    // raw string receive
+                    try { stringReceived(textMessage); } catch { }
                 }
-                catch { }
+                else
+                {
+                    // text line based string receive
+                    textBuffer = "";
+                    if (textMessage.Contains(textEndOfLine[0]))
+                    {
+                        string[] lines = textMessage.Split(textEndOfLine, StringSplitOptions.RemoveEmptyEntries);
+                        for (int l = 0; l < lines.Length - (textMessage.EndsWith(textEndOfLine[0]) ? 0 : 1); l++)
+                        {
+                            try { stringReceived(lines[l]); } catch { }
+                        }
+                        if (!textMessage.EndsWith(textEndOfLine[0]))
+                        {
+                            textBuffer = lines[lines.Length - 1];
+                        }
+                    }
+                }
             }
         }
 
         private void serialPort_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
         {
+            // send last received text buffer before disconnecting
+            if (!statusargs.Connected && !String.IsNullOrEmpty(textBuffer))
+            {
+                try { stringReceived(textBuffer); } catch { }
+            }
+            // reset text receive buffer
+            textBuffer = "";
             if (statusChanged != null)
             {
                 statusChanged(statusargs.Connected);

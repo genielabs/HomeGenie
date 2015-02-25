@@ -1,0 +1,162 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0166"
+      },
+      "productType": {
+        "@value": "0100"
+      },
+      "productId": {
+        "@value": "0100"
+      },
+      "libType": {
+        "@value": "06"
+      },
+      "protoVersion": {
+        "@value": "03"
+      },
+      "protoSubVersion": {
+        "@value": "67"
+      },
+      "appVersion": {
+        "@value": "01"
+      },
+      "appSubVersion": {
+        "@value": "82"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "10"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "0",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Z-Wave Kabel Schalter"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Z-Wave cord switch"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "einfacher Klick auf Pairing Taste auf Geräteunterseite"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "click once on pairing button on bottom of the device"
+          }
+        ]
+      },
+      "productName": "Z-Wave cord switch",
+      "brandName": "Swiid®",
+      "productLine": "Z-Wave Lighting",
+      "productCode": "SW-ZCS-1",
+      "productVersion": "v1.01"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0025"
+        },
+        {
+          "@id": "0027"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0086"
+        },
+        {
+          "@id": "0020"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Die zweite Assoziationsgruppe wird bei jedem Drücken der An/Aus Taste ausgelöst. (wird verwendet für Meldeung einer Statusänderung)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The second association group works on every press (actually on release) on the On/Off button of your SwiidInter™ (this is the one which can be used to notify status changes)"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Die erste Assoziationsgruppe wird durch langes Drücken (über 0,5 Sekunden) der An/Aus Taste ausgelöst."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The first association group will respond to a long press (over 0.5 seconds) on the On/Off button of your SwiidInter™"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/809c5c831911e877ed07ee5c405c4fa9fc03d76c.png"
+      }
+    }
+  }
+}

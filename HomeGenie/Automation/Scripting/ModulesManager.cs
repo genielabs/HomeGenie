@@ -29,6 +29,7 @@ using HomeGenie.Service;
 using HomeGenie.Data;
 using MIG;
 using HomeGenie.Service.Constants;
+using System.Globalization;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -474,7 +475,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/" + command + "/" + commandValue + "/")
+                        new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
                     );
                     DelayIteration();
                 }
@@ -492,7 +493,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                 );
                 DelayIteration();
             }
@@ -509,7 +510,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                 );
                 DelayIteration();
             }
@@ -531,14 +532,14 @@ namespace HomeGenie.Automation.Scripting
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.On/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                         );
                     }
                     else
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand("/" + module.Domain + "/" + module.Address + "/Control.Off/")
+                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                         );
                     }
                 }
@@ -588,7 +589,7 @@ namespace HomeGenie.Automation.Scripting
             set
             {
                 this.command = Commands.Control.CONTROL_LEVEL;
-                this.Set(value.ToString());
+                this.Set(value.ToString(CultureInfo.InvariantCulture));
             }
         }
 

@@ -71,14 +71,22 @@ namespace HomeGenie.Automation.Scripting
 
         private MqttClient mqttClient = null;
 
+        // multithread safe lock objects
+        object smtpSyncLock = new object();
+        object httpSyncLock = new object();
+        object mqttSyncLock = new object();
+
         private HomeGenieService homegenie;
 
         public NetHelper(HomeGenieService hg)
         {
-            ServicePointManager.ServerCertificateValidationCallback = Validator;
             homegenie = hg;
+            // TODO: SSL connection certificate validation
+            // TODO: this is just an hack not meant to be used in production enviroment
+            ServicePointManager.ServerCertificateValidationCallback = Validator;
         }
 
+        // TODO: this is just an hack not meant to be used in production enviroment
         public static bool Validator(
             object sender,
             X509Certificate certificate,
@@ -163,6 +171,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="messageText">Message text.</param>
         public bool SendMessage(string from, string recipients, string subject, string messageText)
         {
+            lock(smtpSyncLock)
             try
             {
                 this.mailFrom = from;
@@ -226,7 +235,8 @@ namespace HomeGenie.Automation.Scripting
                             this.mailSsl = 1;
                         }
                     }
-                    if (this.networkCredential == null)
+                    var credentials = this.networkCredential;
+                    if (credentials == null)
                     {
                         var username = "";
                         // this is a System Parameter
@@ -238,7 +248,7 @@ namespace HomeGenie.Automation.Scripting
                         {
                             username = spSmtpUserName.Value;
                         }
-                        if (username != "")
+                        if (!String.IsNullOrWhiteSpace(username))
                         {
                             var password = "";
                             // this is a System Parameter
@@ -250,13 +260,14 @@ namespace HomeGenie.Automation.Scripting
                             {
                                 password = spSmtpPassword.Value;
                             }
-                            this.networkCredential = new NetworkCredential(username, password);
+                            credentials = new NetworkCredential(username, password);
                         }
                     }
                     //
                     using (var smtpClient = new SmtpClient(this.mailService))
                     {
-                        smtpClient.Credentials = this.networkCredential;
+                        smtpClient.Credentials = credentials;
+                        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                         if (this.mailPort > 0)
                         {
                             smtpClient.Port = this.mailPort;
@@ -363,6 +374,7 @@ namespace HomeGenie.Automation.Scripting
         public string Call()
         {
             string returnvalue = "";
+            lock(httpSyncLock)
             try
             {
                 using (var webClient = new WebClient())
@@ -443,6 +455,7 @@ namespace HomeGenie.Automation.Scripting
         public byte[] GetBytes()
         {
             byte[] responseBytes = null;
+            lock(httpSyncLock)
             try
             {
                 using (var webClient = new WebClient())
@@ -552,7 +565,10 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="message">Message text.</param>
         public NetHelper Publish(string topic, string message)
         {
-            mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            lock (mqttSyncLock)
+            {
+                mqttClient.PublishMessage<string, AsciiPayloadConverter>(topic, (MqttQos)1, message);
+            }
             return this;
         }
 
@@ -562,7 +578,7 @@ namespace HomeGenie.Automation.Scripting
         //TODO: add autodoc comment (HG Event forwarding)
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
-            string eventRouteUrl = "http://" + hgAddress + "/api/HomeAutomation.HomeGenie/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
+            string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
             // propagate event to remote hg endpoint
             this.WebService(eventRouteUrl)
                 .Put(JsonConvert.SerializeObject(

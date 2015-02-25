@@ -33,6 +33,7 @@ using Raspberry;
 
 using Newtonsoft.Json;
 using System.Diagnostics;
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie
 {
@@ -89,20 +90,6 @@ namespace HomeGenie
                 if (Raspberry.Board.Current.IsRaspberryPi)
                 {
                     ShellCommand("cp", " -f \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "v4l/raspbian_libCameraCaptureV4L.so") + "\" \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libCameraCaptureV4L.so") + "\"");
-                    if (!File.Exists("/root/.lircrc"))
-                    {
-                        var lircrc = "begin\n" +
-                                        "        prog = homegenie\n" +
-                                        "        button = KEY_1\n" +
-                                        "        repeat = 3\n" +
-                                        "        config = KEY_1\n" +
-                                        "end\n";
-                        try
-                        {
-                            File.WriteAllText("/root/.lircrc", lircrc);
-                        }
-                        catch { }
-                    }
                     //
                     //if (File.Exists("/usr/lib/libgdiplus.so") && !File.Exists("/usr/local/lib/libgdiplus.so"))
                     //{
@@ -127,6 +114,22 @@ namespace HomeGenie
                         ) + "\""
                     );
                 }
+                //
+                var lircrcFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".lircrc");
+                if (!File.Exists(lircrcFile))
+                {
+                    var lircrc = "begin\n" +
+                        "        prog = homegenie\n" +
+                        "        button = KEY_1\n" +
+                        "        repeat = 3\n" +
+                        "        config = KEY_1\n" +
+                        "end\n";
+                    try
+                    {
+                        File.WriteAllText(lircrcFile, lircrc);
+                    }
+                    catch { }
+                }
             }
             //
             Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
@@ -136,22 +139,18 @@ namespace HomeGenie
             _homegenie = new HomeGenieService();
             //
             do { System.Threading.Thread.Sleep(2000); } while (_isrunning);
-            //
-            System.Threading.Thread.Sleep(2000);
-            //
-            ShutDown();
         }
 
         internal static void Quit(bool restartService)
         {
             _restart = restartService;
-            _isrunning = false;
             ShutDown();
+            _isrunning = false;
         }
 
         private static void ShutDown()
         {
-            Console.Write("HomeGenie is now exiting...");
+            Console.Write("HomeGenie is now exiting...\n");
             //
             if (_homegenie != null)
             {
@@ -176,8 +175,7 @@ namespace HomeGenie
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             Console.WriteLine("\n\nProgram interrupted!\n");
-            ShutDown();
-            _isrunning = false;
+            Quit(false);
         }
 
         private static void ShellCommand(string command, string args)
@@ -197,7 +195,7 @@ namespace HomeGenie
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
             HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
-                Domain = "HomeAutomation.HomeGenie",
+                Domain = Domains.HomeAutomation_HomeGenie,
                 Source = "UnhandledExceptionTrapper",
                 Description = e.ExceptionObject.ToString(),
                 Property = "HomeGenie.UnhandledException",
