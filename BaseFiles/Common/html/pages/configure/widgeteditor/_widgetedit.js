@@ -158,7 +158,10 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     saveButton.bind('click', function(){
         $('#editwidget_actionmenu').popup('close');
         // save html and javascript
-        HG.WebApp.WidgetEditor.SaveWidget(function(){ });
+        HG.WebApp.WidgetEditor.SaveWidget(function(){
+            HG.WebApp.WidgetEditor._editorHtml.markClean();
+            HG.WebApp.WidgetEditor._editorJscript.markClean();
+        });
     });
     
     exportButton.bind('click', function(){
@@ -277,9 +280,9 @@ HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
 
 HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
     $.mobile.loading('show', { text: 'Saving HTML...', textVisible: true, theme: 'a', html: '' });
-    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) { 
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
         $.mobile.loading('show', { text: 'Saving Javascript...', textVisible: true, theme: 'a', html: '' });
-        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) { 
+        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
             $.mobile.loading('hide');
             if (callback) callback();
         });
