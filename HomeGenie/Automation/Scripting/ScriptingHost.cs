@@ -198,13 +198,13 @@ namespace HomeGenie.Automation.Scripting
 
         public void Reset()
         {
-            //programHelper.Reset();
             serialPortHelper.Reset();
             tcpClientHelper.Reset();
             udpClientHelper.Reset();
             netHelper.Reset();
             mqttClientHelper.Reset();
             knxClientHelper.Reset();
+            programHelper.Reset();
         }
 
     }

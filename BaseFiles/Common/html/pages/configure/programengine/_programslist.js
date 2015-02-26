@@ -1,16 +1,12 @@
 HG.WebApp.ProgramsList = HG.WebApp.ProgramsList || {};
+HG.WebApp.ProgramsList.PageId = 'page_automation_programs';
 
 HG.WebApp.ProgramsList.InitializePage = function () {
-    $('#page_automation_programs').on('pageinit', function (e) {
+    var page = $('#'+HG.WebApp.ProgramsList.PageId);
+    page.on('pageinit', function (e) {
         $('#automation_program_add').on('popupbeforeposition', function (event) {
             $('#program_new_name').val('');
         });
-        //
-        //$('#automationprograms_program_options').on('popupbeforeposition', function (event) {
-        //});
-        //$('#automationprograms_program_options').on('popupafteropen', function (event) {
-        //});
-        //
         // action menu butttons
         $('#btn_automationprograms_group_delete').bind('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#listprograms_actionmenu', '#automationprograms_group_delete');
@@ -25,21 +21,17 @@ HG.WebApp.ProgramsList.InitializePage = function () {
             $('#listprograms_actionmenu').popup('close');
             HG.WebApp.ProgramsList.LoadPrograms(null);
         });
-        //
         // other page/popups buttons
         $('#automationprograms_delete_button').bind('click', function (event) {
             HG.WebApp.ProgramsList.DeleteGroup(HG.WebApp.AutomationGroupsList._CurrentGroup);
         });
-        //	
         $('#program_new_button').bind('click', function (event) {
             HG.WebApp.ProgramsList.AddProgram($('#program_new_name').val());
         });
-        //
         $('#program_switchtypecancel_button').bind('click', function (event) {
             $('#automation_programtype').val(HG.WebApp.ProgramEdit._CurrentProgram.Type);
             $('#automation_programtype').selectmenu('refresh');
         });
-        //
         $('#program_switchtype_button').bind('click', function (event) {
             HG.WebApp.ProgramEdit._CurrentProgram.Type = $('#automation_programtype').select().val();
             HG.WebApp.ProgramsList.SetProgramType();
@@ -47,11 +39,9 @@ HG.WebApp.ProgramsList.InitializePage = function () {
         $('#automationprograms_program_edit').bind('click', function (event) {
             HG.WebApp.ProgramsList.EditProgram();
         });
-        //
         $('#automationprograms_program_delete_button').bind('click', function (event) {
             HG.WebApp.ProgramsList.DeleteProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);
         });
-        //
         $('#program_import_button').bind('click', function () {
             if ($('#program_import_uploadfile').val() == "") {
                 alert('Select a file to import first');
@@ -73,6 +63,9 @@ HG.WebApp.ProgramsList.InitializePage = function () {
             HG.WebApp.ProgramsList.LoadPrograms(null);
         });
 
+    });
+    page.on('pagebeforeshow', function (e) {
+        HG.WebApp.ProgramsList.LoadPrograms();
     });
 };
 
@@ -483,7 +476,7 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function () {
     if (!HG.WebApp.ProgramEdit._CurrentProgram.Domain || !HG.WebApp.ProgramEdit._CurrentProgram.Address) return;
     //
     // hide edit button if not called from automation section
-    if ($.mobile.activePage.attr("id") != 'page_automation_programs') {
+    if ($.mobile.activePage.attr("id") != HG.WebApp.ProgramsList.PageId) {
         $('#automationprograms_program_edit').hide();
         $('#automationprograms_program_btn_delete').hide();
         $('#automationprograms_program_btn_export').hide();
@@ -527,6 +520,8 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function () {
                 HG.WebApp.ProgramsList.SetOptionsTab(0);
             }
 
+            $('#automationprograms_program_details').scrollTop(0);
+            $('#automationprograms_program_parameters').scrollTop(0);
             $('#automationprograms_program_options').popup('open', { 'transition': 'slidedown' });
             $.mobile.loading('hide');
         });
@@ -700,7 +695,7 @@ HG.WebApp.ProgramsList.DeleteGroup = function (group) {
     HG.Configure.Groups.DeleteGroup('Automation', group, function () {
         $.mobile.loading('hide');
         setTimeout(function () {
-            $.mobile.changePage($('#page_configure_automationgroups'));
+            $.mobile.changePage($('#'+HG.WebApp.AutomationGroupsList.PageId));
         }, 200);
     });
 };

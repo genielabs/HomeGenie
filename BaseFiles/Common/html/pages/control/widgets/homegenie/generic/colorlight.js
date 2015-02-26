@@ -47,11 +47,6 @@
             //
             // ui events handlers
             //
-            // toggle button action
-            container.find('[data-ui-field=toggle]').on('click', function () {
-                HG.Control.Modules.ServiceCall("Control.Toggle", module.Domain, module.Address, null, function (data) { });
-            });
-            //
             widget.find('[data-ui-field=on]').on('click', function () {
                 HG.Control.Modules.ServiceCall("Control.On", module.Domain, module.Address, null, function (data) { });
             });

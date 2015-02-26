@@ -696,5 +696,47 @@
     "configure_system_blockedpopups_edit":
         "Edit",
     "configure_system_updateinstall_warning":
-        "It is strongly recommended to make a backup of your configuration before proceeding with any update."
+        "It is strongly recommended to make a backup of your configuration before proceeding with any update.",
+    "configure_automationgroup_widgeteditor":
+        "Widget Editor",
+    "configure_widgetlist_heading":
+        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+    "configure_widgetlist_importwidget":
+        "Import Widget",
+    "configure_widgetlist_import":
+        "Import",
+    "configure_widgetlist_add_popuptitle":
+        "New Widget",
+    "configure_widgetlist_add_widgetbrand":
+        "Brand",
+    "configure_widgetlist_add_widgetcategory":
+        "Category",
+    "configure_widgetlist_add_widgetname":
+        "Name",
+    "configure_widgetlist_newwidgetconfirm":
+        "Add",
+    "configure_widgetlist_action_import":
+        "Import",
+    "configure_widgetlist_action_addwidget":
+        "Add Widget",
+    "configure_widgeteditor_html":
+        "HTML",
+    "configure_widgeteditor_javascript":
+        "Javascript",
+    "configure_widgeteditor_previewupdate":
+        "Run / Preview",
+    "configure_widgeteditor_hasmodification":
+        "Widget was modified!",
+    "configure_widgeteditor_deletetitle":
+        "Delete Widget?",
+    "configure_widgeteditor_deleteprompt":
+        "Are you sure you want to delete this widget?",
+    "configure_widgetlist_list":
+        "Widget List",
+    "configure_widgeteditor_nobindmodule_title":
+        "Select a module",
+    "configure_widgeteditor_nobindmodule_text":
+        "No valid module for data binding has been found, please select one.",
+    "configure_widgeteditor_nobindmodule_close":
+        "Close"
 }

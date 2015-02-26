@@ -3,19 +3,30 @@ HG.WebApp.WidgetEditor.PageId = 'page_widgeteditor_editwidget';
 HG.WebApp.WidgetEditor._hasError = false;
 HG.WebApp.WidgetEditor._editorHtml = null;
 HG.WebApp.WidgetEditor._editorJscript = null;
+HG.WebApp.WidgetEditor._widgetInstance = null;
 HG.WebApp.WidgetEditor._previewHeight = 245;
 HG.WebApp.WidgetEditor._splitDragStartY = 0;
+HG.WebApp.WidgetEditor._savePromptCallback = null;
+
 
 HG.WebApp.WidgetEditor.InitializePage = function () {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
-    var previewButton = page.find('[data-ui-field=preview-btn]');
+    var runPreviewButton = page.find('[data-ui-field=preview-btn]');
     var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
     var errorsButton = page.find('[data-ui-field=errors-btn]');
     var saveButton = page.find('[data-ui-field=save-btn]');
     var exportButton = page.find('[data-ui-field=export-btn]');
+    var deleteButton = page.find('[data-ui-field=delete-btn]');
+    var deleteConfirmButton = page.find('[data-ui-field=deleteconfirm-btn]');
+    var deletePopup = page.find('[data-ui-field=delete-popup]');
     var previewPanel = page.find('[data-ui-field=preview-panel]');
     var splitBar = page.find('[data-ui-field=split-bar]');
-    
+    var backButton = page.find('[data-ui-field=back-btn]');
+    var homeButton = page.find('[data-ui-field=home-btn]');
+    var notSavedPopup = page.find('[data-ui-field=notsaved-popup]');
+    var saveConfirmButton = page.find('[data-ui-field=saveconfirm-btn]');
+    var saveCancelButton = page.find('[data-ui-field=savecancel-btn]');
+  
     page.on('pageinit', function (e) {
         HG.WebApp.WidgetEditor._editorHtml = CodeMirror.fromTextArea(document.getElementById('widgeteditor_code_html'), {
             lineNumbers: true,
@@ -46,6 +57,8 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             mode: "text/javascript",
             theme: 'ambiance'
         });    
+        deletePopup.popup();
+        notSavedPopup.popup();
     });
     page.on('pagebeforeshow', function (e) {
         page.find('[data-ui-field=title-heading]').html('<span style="font-size:10pt;font-weight:bold">Widget Editor</span><br/>' + HG.WebApp.WidgetsList._currentWidget);
@@ -84,47 +97,117 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
         bindModuleSelect.empty();
         bindModuleSelect.append('<option value="">(select a module)</option>');
+        var selected = '', selectedDomain = '';
         for (var m = 0; m < HG.WebApp.Data.Modules.length; m++)
         {
-            var name = HG.WebApp.Data.Modules[m].Name.trim();
+            var module = HG.WebApp.Data.Modules[m];
+            var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
+            if (widget != null) widget = widget.Value;
+            if (widget == HG.WebApp.WidgetsList._currentWidget)
+            {
+                selected = m;
+                // prefer modules to programs as default bind module
+                if (module.Domain != 'HomeAutomation.HomeGenie.Automation') break;
+            }
+        }
+        // if no valid bind module has been found then put in the list all module
+        // otherwise only those having a matching widget
+        for (var m = 0; m < HG.WebApp.Data.Modules.length; m++)
+        {
+            var module = HG.WebApp.Data.Modules[m];
+            var name = module.Name.trim();
             if (name == '')
             {
-                name = HG.WebApp.Data.Modules[m].Domain + ':' + HG.WebApp.Data.Modules[m].Address;
+                name = module.Domain + ':' + module.Address;
             }
-            bindModuleSelect.append('<option value="' + m + '">' + name + '</option>');
+            var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
+            if (widget != null) widget = widget.Value;
+            if (widget == HG.WebApp.WidgetsList._currentWidget || selected == '')
+            {
+                bindModuleSelect.append('<option value="' + m + '">' + name + '</option>');
+            }
         }
         bindModuleSelect.trigger('create');
-        bindModuleSelect.val('');
+        bindModuleSelect.val(selected);
         bindModuleSelect.selectmenu('refresh');
         HG.WebApp.WidgetEditor.SetTab(1);
+        if (selected != '' || selected == '0') {
+            setTimeout(function(){
+                HG.WebApp.WidgetEditor.Run();
+            }, 1000);
+        } else {
+            bindModuleSelect.qtip({
+                content: {
+                    title: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_nobindmodule_title', 'Select a module'),
+                    text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_nobindmodule_text', 'No valid bind-module has been found, please select one.'),
+                    button: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_nobindmodule_close', 'Close')
+                },
+                show: { event: false, ready: true, delay: 1000 },
+                events: {
+                    hide: function () {
+                        $(this).qtip('destroy');
+                    }
+                },
+                hide: { event: false, inactive: 3000 },
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                position: { my: 'bottom center', at: 'top center' }
+            });        
+        }
     });
         
     saveButton.bind('click', function(){
         $('#editwidget_actionmenu').popup('close');
         // save html and javascript
-        $.mobile.loading('show', { text: 'Saving HTML...', textVisible: true, theme: 'a', html: '' });
-        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) { 
-            $.mobile.loading('show', { text: 'Saving Javascript...', textVisible: true, theme: 'a', html: '' });
-            HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) { 
-                $.mobile.loading('hide');
-            });
-        });
+        HG.WebApp.WidgetEditor.SaveWidget(function(){ });
     });
     
     exportButton.bind('click', function(){
         $('#editwidget_actionmenu').popup('close');
         // export current widget
         //HG.Configure.Widgets.Export(HG.WebApp.WidgetsList._currentWidget)
-        $('#program_import_downloadframe').attr('src', location.protocol + '../HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
+        window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
     });
     
-    previewButton.bind('click', function(){
-        HG.WebApp.WidgetEditor._hasError = false;
-        HG.WebApp.WidgetEditor._editorJscript.clearGutter('CodeMirror-lint-markers-5');
-        HG.WebApp.WidgetEditor.Preview();
+    deleteButton.bind('click', function(){
+        HG.WebApp.Utility.SwitchPopup('#editwidget_actionmenu', deletePopup);
+    });
+    deleteConfirmButton.bind('click', function(){
+        $.mobile.loading('show', { text: 'Deleting Widget...', textVisible: true, theme: 'a', html: '' });
+        HG.Configure.Widgets.Delete(HG.WebApp.WidgetsList._currentWidget, function(res) { 
+            $.mobile.loading('hide');
+            $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId);
+        });
+        return false;
+    });
+    
+    backButton.bind('click', function(){
+        HG.WebApp.WidgetEditor.CheckIsClean(function () {
+            $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId, { transition: 'slide', reverse: true });
+        });
+        return false;
+    });
+    homeButton.bind('click', function(){
+        HG.WebApp.WidgetEditor.CheckIsClean(function () {
+            $.mobile.pageContainer.pagecontainer('change', '#page_home', { transition: 'slide', reverse: true });
+        });
+        return false;
+    });
+    saveCancelButton.bind('click', function(){
+        HG.WebApp.WidgetEditor._savePromptCallback();
+        return false;
+    });
+    saveConfirmButton.bind('click', function(){
+        HG.WebApp.WidgetEditor.SaveWidget(function () {
+            HG.WebApp.WidgetEditor._savePromptCallback();
+        });
+        return false;
+    });
+    
+    runPreviewButton.bind('click', function(){
+        HG.WebApp.WidgetEditor.Run();
     });
     bindModuleSelect.on('change', function(){
-        HG.WebApp.WidgetEditor.Preview();
+        HG.WebApp.WidgetEditor.RenderView();
     });
     errorsButton.hide();
     
@@ -179,6 +262,30 @@ HG.WebApp.WidgetEditor.SetTab = function(tabIndex) {
     HG.WebApp.WidgetEditor.RefreshCodeMirror();
 };
 
+HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
+    if (!HG.WebApp.WidgetEditor._editorHtml.isClean() || !HG.WebApp.WidgetEditor._editorJscript.isClean()) {
+        var page = $('#'+HG.WebApp.WidgetEditor.PageId);
+        HG.WebApp.WidgetEditor._savePromptCallback = function () {
+            callback();
+        }
+        page.find('[data-ui-field=notsaved-popup]').popup('open');
+    }
+    else {
+        callback();
+    }
+};
+
+HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
+    $.mobile.loading('show', { text: 'Saving HTML...', textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) { 
+        $.mobile.loading('show', { text: 'Saving Javascript...', textVisible: true, theme: 'a', html: '' });
+        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) { 
+            $.mobile.loading('hide');
+            if (callback) callback();
+        });
+    });
+};
+
 HG.WebApp.WidgetEditor.RefreshCodeMirror = function() {
     setTimeout(function () {
         HG.WebApp.WidgetEditor._editorHtml.refresh();
@@ -186,8 +293,7 @@ HG.WebApp.WidgetEditor.RefreshCodeMirror = function() {
     }, 500);                 
 };
 
-HG.WebApp.WidgetEditor.Preview = function() {
-    if (HG.WebApp.WidgetEditor._hasError) return;
+HG.WebApp.WidgetEditor.Render = function() {
     var page = $('#'+HG.WebApp.WidgetEditor.PageId);
     var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
     var errorsButton = page.find('[data-ui-field=errors-btn]');
@@ -197,16 +303,39 @@ HG.WebApp.WidgetEditor.Preview = function() {
     htmlCode += '</div>';
     page.find('[data-ui-field=preview-div]').html(htmlCode);
     page.find('[data-ui-field=preview-wrapper-div]').trigger('create');
-    var javascriptCode = HG.WebApp.WidgetEditor._editorJscript.getValue();
+}
+
+HG.WebApp.WidgetEditor.RenderView = function(eventData) {
+    if (HG.WebApp.WidgetEditor._hasError) return;
+    var page = $('#'+HG.WebApp.WidgetEditor.PageId);
+    var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
+    var module = HG.WebApp.Data.Modules[bindModuleSelect.val()];
+    if (eventData != null && (eventData.Domain != module.Domain || eventData.Source != module.Address)) return;
     try
     {
-        HG.WebApp.WidgetEditor._hasError = false;
-        var widgetInstance = eval(javascriptCode)[0];
-        widgetInstance.RenderView('#widget_preview_instance', HG.WebApp.Data.Modules[bindModuleSelect.val()]);
+        HG.WebApp.WidgetEditor._widgetInstance.RenderView('#widget_preview_instance', module);
     } catch (e) {
         HG.WebApp.WidgetEditor._hasError = true;
         HG.WebApp.WidgetEditor.ShowError(e);
     }
+};
+
+HG.WebApp.WidgetEditor.Run = function() {
+    HG.WebApp.WidgetEditor._hasError = false;
+    HG.WebApp.WidgetEditor._editorJscript.clearGutter('CodeMirror-lint-markers-5');
+    // render HTML
+    HG.WebApp.WidgetEditor.Render();
+    // create widget instance
+    var javascriptCode = HG.WebApp.WidgetEditor._editorJscript.getValue();
+    try
+    {
+        HG.WebApp.WidgetEditor._widgetInstance = eval(javascriptCode)[0];
+    } catch (e) {
+        HG.WebApp.WidgetEditor._hasError = true;
+        HG.WebApp.WidgetEditor.ShowError(e);
+    }
+    // execute widget RenderView method
+    HG.WebApp.WidgetEditor.RenderView();
 };
 
 HG.WebApp.WidgetEditor.ShowError = function(e) {

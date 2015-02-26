@@ -656,5 +656,87 @@
     "systemsettings_zwavehardreset_hardresetcancel":
         "Cancel",
     "systemsettings_zwavehardreset_hardresetproceed":
-        "Proceed"
+        "Proceed",
+    "statistics_dataanalysis":
+        "Data analysis",
+    "statistics_counterexpense":
+        "Counter and expense",
+    "analyze_statistics_datefrom":
+        "From",
+    "analyze_statistics_dateto":
+        "To",
+    "analyze_statistics_costperunit":
+        "Cost per unit",
+    "analyze_statistics_overallcounter":
+        "Overall counter",
+    "analyze_statistics_totalexpense":
+        "Total expense",
+    "configure_program_oroperator":
+        "OR operator",
+    "configure_system_statistics_clear":
+        "Clear all statistics data",
+    "configure_system_statistics_databasemaxsize":
+        "Maximum database size is",
+    "configure_system_statistics_changedatabasemaxsize":
+        "Change",
+    "configure_system_statistics_databasemaxsizechange":
+        "Maximum size (MB)",
+    "configure_system_statistics_databasemaxsizechange_note":
+        "Note: after changing size, HomeGenie must be restarted to make changes effective!",
+    "configure_system_statistics_databasemaxsizechange_cancel":
+        "Cancel",
+    "configure_system_statistics_databasemaxsizechange_commit":
+        "Change",
+    "configure_popupfilter_title":
+        "Event popup filters",
+    "configure_popupfilter_optclose":
+        "Close",
+    "configure_system_blockedpopups":
+        "Blocked popups",
+    "configure_system_blockedpopups_edit":
+        "Edit",
+    "configure_system_updateinstall_warning":
+        "It is strongly recommended to make a backup of your configuration before proceeding with any update.",
+    "configure_automationgroup_widgeteditor":
+        "Widget Editor",
+    "configure_widgetlist_heading":
+        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+    "configure_widgetlist_importwidget":
+        "Import Widget",
+    "configure_widgetlist_import":
+        "Import",
+    "configure_widgetlist_add_popuptitle":
+        "New Widget",
+    "configure_widgetlist_add_widgetbrand":
+        "Brand",
+    "configure_widgetlist_add_widgetcategory":
+        "Category",
+    "configure_widgetlist_add_widgetname":
+        "Name",
+    "configure_widgetlist_newwidgetconfirm":
+        "Add",
+    "configure_widgetlist_action_import":
+        "Import",
+    "configure_widgetlist_action_addwidget":
+        "Add Widget",
+    "configure_widgeteditor_html":
+        "HTML",
+    "configure_widgeteditor_javascript":
+        "Javascript",
+    "configure_widgeteditor_previewupdate":
+        "Run / Preview",
+    "configure_widgeteditor_hasmodification":
+        "Widget was modified!",
+    "configure_widgeteditor_deletetitle":
+        "Delete Widget?",
+    "configure_widgeteditor_deleteprompt":
+        "Are you sure you want to delete this widget?",
+    "configure_widgetlist_list":
+        "Widget List",
+    "configure_widgeteditor_nobindmodule_title":
+        "Select a module",
+    "configure_widgeteditor_nobindmodule_text":
+        "No valid module for data binding has been found, please select one.",
+    "configure_widgeteditor_nobindmodule_close":
+        "Close"
 }

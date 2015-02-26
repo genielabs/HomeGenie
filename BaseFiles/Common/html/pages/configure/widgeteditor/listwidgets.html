@@ -6,7 +6,7 @@
     <div class="ui-content">
 
         <img src="images/automation.png" style="position:absolute;top:65px;left:20px;" width="64" />
-        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_widgets_heading"><font style="color:gray">Widgets</font><br />List</h3></div>
+        <div style="position:relative;height:100px;font-size:10pt;margin-top:10px"><h3 style="position:absolute;bottom:30;left:90px;" data-locale-id="configure_widgetlist_heading"><font style="color:gray">Widgets</font><br />List</h3></div>
 
         <ul data-ui-field="group-list" data-role="listview"></ul>
 
@@ -27,13 +27,46 @@
             </fieldset>
         </div>
     </div> 
+    
 
+    <div data-ui-field="widgetadd-popup" class="ui-corner-all hg-popup-b" data-role="popup" data-overlay-theme="b" data-position-to="window">
+        <div class="ui-corner-top" data-role="header">
+            <h2 data-locale-id="configure_widgetlist_add_popuptitle">Add Widget</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <h3 class="ui-title" data-locale-id="configure_widgetlist_add_widgetbrand">Brand</h3>
+            <input data-ui-field="widgetbrand-txt" maxlength="20" type="text" />
+            <h3 class="ui-title" data-locale-id="configure_widgetlist_add_widgetcategory">Category</h3>
+            <input data-ui-field="widgetcategory-txt" maxlength="20" type="text" />
+            <h3 class="ui-title" data-locale-id="configure_widgetlist_add_widgetname">Name</h3>
+            <input data-ui-field="widgetname-txt" maxlength="20" type="text" />
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_newprogramcancel" data-rel="back">Cancel</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-ui-field="addconfirm-btn" href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" data-locale-id="configure_widgetlist_newwidgetconfirm" data-rel="back" data-transition="flow">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="widgetlist_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+            <li><a data-ui-field="import-btn" class="ui-btn ui-icon-bars ui-btn-icon-right" data-locale-id="configure_widgetlist_action_import">Import</a></li>
+            <li><a data-ui-field="addnew-btn" class="ui-btn ui-icon-check ui-btn-icon-right" data-locale-id="configure_widgetlist_action_addwidget">Add Widget</a>
+        </ul>
+    </div>
+    
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a href="#page_configure" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
+                    <a href="#page_configure_automationgroups" class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse">
                         Back
                     </a>
                 </li>
@@ -43,8 +76,8 @@
                     </a>
                 </li>
                 <li>
-                    <a data-ui-field="import-btn" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_widgetlist_import_widget">
-                        Import Widget
+                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#widgetlist_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
                     </a>
                 </li>
             </ul>
