@@ -785,8 +785,8 @@ namespace HomeGenie.Service.Handlers
                     for (int c = 0; c < categories.Length; c++)
                     {
                         var widgets = Directory.GetFiles(categories[c], "*.js");
-                        var group = groups[d].Substring(groups[d].LastIndexOf('/') + 1);
-                        var category = categories[c].Substring(categories[c].LastIndexOf('/') + 1);
+                        var group = groups[d].Replace(widgetBasePath, "").Substring(1);
+                        var category = categories[c].Replace(groups[d], "").Substring(1);
                         for (int w = 0; w < widgets.Length; w++)
                         {
                             widgetsList.Add(group + "/" + category + "/" + Path.GetFileNameWithoutExtension(widgets[w]));
@@ -934,11 +934,11 @@ namespace HomeGenie.Service.Handlers
                                 File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
                             }
                         }
-                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                     }
                     else
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
                     }
                 }
                 break;
