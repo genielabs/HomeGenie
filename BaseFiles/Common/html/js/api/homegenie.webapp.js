@@ -90,19 +90,9 @@ HG.WebApp.InitializePage = function ()
             HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.loading('show');
         }
-        else if (this.id == 'page_configure_automationgroups') 
-        {
-            HG.Automation.Programs.List(function () {
-                HG.WebApp.AutomationGroupsList.LoadGroups();
-            });
-        }
         else if (this.id == 'page_configure_schedulerservice')
         {
             HG.WebApp.Scheduler.LoadScheduling();
-        }
-        else if (this.id == 'page_automation_programs') 
-        {
-            HG.WebApp.ProgramsList.LoadPrograms();
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
@@ -198,7 +188,9 @@ HG.WebApp.InitializePage = function ()
         }
         //
         // add css google web fonts
-        $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+        setTimeout(function(){
+            $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+        }, 5000);
 
     }, 100);
     //

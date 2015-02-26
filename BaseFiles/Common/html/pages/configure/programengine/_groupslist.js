@@ -1,16 +1,27 @@
 HG.WebApp.AutomationGroupsList = HG.WebApp.AutomationGroupsList || {};
+HG.WebApp.AutomationGroupsList.PageId = 'page_configure_automationgroups';
 HG.WebApp.AutomationGroupsList._CurrentGroup = '';
 
 HG.WebApp.AutomationGroupsList.InitializePage = function () {
-    $('#page_configure_automationgroups').on('pageinit', function (e) {
+    var page = $('#'+HG.WebApp.AutomationGroupsList.PageId);
+    var addGroupButton = page.find('[data-ui-field=addgroup-btn]');
+    var widgetEditorButton = page.find('[data-ui-field=widgeteditor-btn]');
+    page.on('pageinit', function (e) {
         $('[data-role=popup]').on('popupbeforeposition', function (event) {
             if (this.id == 'automationgroup_add') {
                 $('#automationgroup_new_name').val('');
             }
         });
-        //	
+        //
+        addGroupButton.bind('click', function (event) {
+            HG.WebApp.Utility.SwitchPopup('#automationgroup_actionmenu', '#automationgroup_add');
+        });
         $('#automationgroup_new_button').bind('click', function (event) {
             HG.WebApp.AutomationGroupsList.GroupsAdd($('#automationgroup_new_name').val());
+        });
+        //
+        widgetEditorButton.bind('click', function (event) {
+            $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetsList.PageId, { transition: "slide" });
         });
         //	
         $.mobile.loading('show');
@@ -26,6 +37,11 @@ HG.WebApp.AutomationGroupsList.InitializePage = function () {
         //<!-- Refresh list to the end of sort for having a correct display -->
         $("#configure_automationgroupslist").bind("sortstop", function (event, ui) {
             HG.WebApp.AutomationGroupsList.SortGroups();
+        });
+    });
+    page.on('pagebeforeshow', function (e) {
+        HG.Automation.Programs.List(function () {
+            HG.WebApp.AutomationGroupsList.LoadGroups();
         });
     });
 };

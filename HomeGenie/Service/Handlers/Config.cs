@@ -795,7 +795,36 @@ namespace HomeGenie.Service.Handlers
                 }
                 migCommand.Response = JsonConvert.SerializeObject(widgetsList);
                 break;
-                
+
+            case "Widgets.Add":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    widgetParts[0] = new String(widgetParts[0].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[1] = new String(widgetParts[1].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[2] = new String(widgetParts[2].Where(Char.IsLetter).ToArray()).ToLower();
+                    if (!String.IsNullOrWhiteSpace(widgetParts[0]) && !String.IsNullOrWhiteSpace(widgetParts[1]) && !String.IsNullOrWhiteSpace(widgetParts[2]))
+                    {
+                        string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+                        // copy widget template into the new widget
+                        var htmlFile = Path.Combine(filePath, widgetParts[2] + ".html");
+                        var jsFile = Path.Combine(filePath, widgetParts[2] + ".js");
+                        if (!File.Exists(htmlFile) && !File.Exists(jsFile))
+                        {
+                            File.Copy(Path.Combine(widgetBasePath, "template.html"), htmlFile);
+                            File.Copy(Path.Combine(widgetBasePath, "template.js"), jsFile);
+                            response = "OK";
+                        }
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
             case "Widgets.Save":
                 {
                     string response = "ERROR";
@@ -830,6 +859,26 @@ namespace HomeGenie.Service.Handlers
                     case "png":
                     case "gif":
                         break;
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
+            case "Widgets.Delete":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1], widgetParts[2] + ".");
+                    if (File.Exists(filePath + "html"))
+                    {
+                        File.Delete(filePath + "html");
+                        response = "OK";
+                    }
+                    if (File.Exists(filePath + "js"))
+                    {
+                        File.Delete(filePath + "js");
+                        response = "OK";
                     }
                     migCommand.Response = JsonHelper.GetSimpleResponse(response);
                 }

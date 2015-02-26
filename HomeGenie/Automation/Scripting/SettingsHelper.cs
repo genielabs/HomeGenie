@@ -29,6 +29,11 @@ using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scripting
 {
+
+    /// <summary>
+    /// Settings helper.\n
+    /// Class instance accessor: **Settings**
+    /// </summary>
     public class SettingsHelper
     {
         private HomeGenieService homegenie;
@@ -38,6 +43,10 @@ namespace HomeGenie.Automation.Scripting
             homegenie = hg;
         }
 
+        /// <summary>
+        /// Gets the system settings parameter with the specified name.
+        /// </summary>
+        /// <param name="parameter">Parameter.</param>
         public ModuleParameter Parameter(string parameter)
         {
             var systemParameter = homegenie.Parameters.Find(delegate(ModuleParameter mp) { return mp.Name == parameter; });
