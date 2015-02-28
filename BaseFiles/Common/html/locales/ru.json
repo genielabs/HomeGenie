@@ -38,7 +38,7 @@
     "configure_menu_automation": 
         "Автоматизация и Программы",
     "configure_menu_system": 
-        "Настройки",
+        "Настройки интерфейсов",
     "configure_menu_maintenance": 
         "Обслуживание и обновление",
     "configure_automation_heading": 
@@ -104,7 +104,7 @@
     "configure_group_bottombar_addmodule": 
         "Добавить модуль",
     "configure_program_automationtitle": 
-        "",
+        "Programs List",
     "configure_program_newprogram": 
         "Новая программа",
     "configure_program_enterprogramname": 
@@ -224,7 +224,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Добавить группу",
     "configure_interfaces_heading": 
-        "Настройки",
+        "Настройки интерфейсов",
     "configure_interfaces_zwaveoptions": 
         "Опции интерфейса ZWave",
     "configure_interfaces_optdisable": 
@@ -658,43 +658,85 @@
     "systemsettings_zwavehardreset_hardresetproceed":
         "Продолжить",
     "statistics_dataanalysis":
-        "Data analysis",
+        "Анализ данных",
     "statistics_counterexpense":
-        "Counter and expense",
+        "Счетчики и траты",
     "analyze_statistics_datefrom":
-        "From",
+        "с",
     "analyze_statistics_dateto":
-        "To",
+        "по",
     "analyze_statistics_costperunit":
-        "Cost per unit",
+        "Цена за единицу",
     "analyze_statistics_overallcounter":
-        "Overall counter",
+        "Общий счетчик",
     "analyze_statistics_totalexpense":
-        "Total expense",
+        "Общие затраты",
     "configure_program_oroperator":
-        "OR operator",
+        "оператор ИЛИ",
     "configure_system_statistics_clear":
-        "Clear all statistics data",
+        "Удалить все статистические данные",
     "configure_system_statistics_databasemaxsize":
-        "Maximum database size is",
+        "Максимальный размер базы данных",
     "configure_system_statistics_changedatabasemaxsize":
-        "Change",
+        "Изменить",
     "configure_system_statistics_databasemaxsizechange":
-        "Maximum size (MB)",
+        "Максимальный размер (MB)",
     "configure_system_statistics_databasemaxsizechange_note":
-        "Note: after changing size, HomeGenie must be restarted to make changes effective!",
+        "Внимание: после изменения размера необходимо перезапустить HomeGenie, чтобы изменения вступили в силу!",
     "configure_system_statistics_databasemaxsizechange_cancel":
-        "Cancel",
+        "Отмена",
     "configure_system_statistics_databasemaxsizechange_commit":
-        "Change",
+        "Изменить",
     "configure_popupfilter_title":
-        "Event popup filters",
+        "Фильтры уведомлений о событиях",
     "configure_popupfilter_optclose":
-        "Close",
+        "Закрыть",
     "configure_system_blockedpopups":
-        "Blocked popups",
+        "Заблокированные уведомления",
     "configure_system_blockedpopups_edit":
-        "Edit",
+        "Изменить",
     "configure_system_updateinstall_warning":
-        "It is strongly recommended to make a backup of your configuration before proceeding with any update."
+        "Настоятельно рекомендуется сделать бекап конфигурации перед любым обновлением.",
+    "configure_automationgroup_widgeteditor":
+        "Widget Editor",
+    "configure_widgetlist_heading":
+        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+    "configure_widgetlist_importwidget":
+        "Import Widget",
+    "configure_widgetlist_import":
+        "Import",
+    "configure_widgetlist_add_popuptitle":
+        "New Widget",
+    "configure_widgetlist_add_widgetbrand":
+        "Brand",
+    "configure_widgetlist_add_widgetcategory":
+        "Category",
+    "configure_widgetlist_add_widgetname":
+        "Name",
+    "configure_widgetlist_newwidgetconfirm":
+        "Add",
+    "configure_widgetlist_action_import":
+        "Import",
+    "configure_widgetlist_action_addwidget":
+        "Add Widget",
+    "configure_widgeteditor_html":
+        "HTML",
+    "configure_widgeteditor_javascript":
+        "Javascript",
+    "configure_widgeteditor_previewupdate":
+        "Run / Preview",
+    "configure_widgeteditor_hasmodification":
+        "Widget was modified!",
+    "configure_widgeteditor_deletetitle":
+        "Delete Widget?",
+    "configure_widgeteditor_deleteprompt":
+        "Are you sure you want to delete this widget?",
+    "configure_widgetlist_list":
+        "Widget List",
+    "configure_widgeteditor_nobindmodule_title":
+        "Select a module",
+    "configure_widgeteditor_nobindmodule_text":
+        "No valid module for data binding has been found, please select one.",
+    "configure_widgeteditor_nobindmodule_close":
+        "Close"
 }

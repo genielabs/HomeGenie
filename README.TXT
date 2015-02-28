@@ -139,6 +139,7 @@ BUILT-IN Z-WAVE FEATURES
 - MultiInstance/Channel Get/Set/Report (SwitchBinary, SwitchMultiLevel, SensorBinary, SensorMultiLevel)
 - Metering Report
 - Thermostat Mode/OperatingState/SetPoint/FanMode/FanState/Heating/SetBack
+- UserCode
 
 BUILT-IN Z-WAVE MODULE TYPES
 ============================
@@ -202,6 +203,7 @@ X10
 
 Z-Wave
 - Fibaro RGBW
+- RFID Tag Reader
 - Level Poll
 - Multi Instance/Channel Virtual Modules
 - Query on Wake Up

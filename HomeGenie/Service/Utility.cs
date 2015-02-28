@@ -19,6 +19,7 @@
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
+
 #define LOGGING
 
 using System;
@@ -206,6 +207,40 @@ namespace HomeGenie.Service
                 break;
             }
 
+        }
+
+        internal static List<string> UncompressZip(string archiveName, string destinationFolder)
+        {
+            List<string> extractedFiles = new List<string>();
+            // Unarchive (unzip)
+            using (var package = Package.Open(archiveName, FileMode.Open, FileAccess.Read))
+            {
+                foreach (var part in package.GetParts())
+                {
+                    string filePath = part.Uri.OriginalString.Substring(1);
+                    string target = Path.Combine(destinationFolder, filePath);
+                    if (!Directory.Exists(Path.GetDirectoryName(target)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(target));
+                    }
+
+                    if (File.Exists(target)) File.Delete(target);
+
+                    using (var source = part.GetStream(FileMode.Open, FileAccess.Read)) using (var destination = File.OpenWrite(target))
+                    {
+                        byte[] buffer = new byte[4096];
+                        int read;
+                        while ((read = source.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            destination.Write(buffer, 0, read);
+                        }
+                    }
+
+                    extractedFiles.Add(filePath);
+                }
+            }
+
+            return extractedFiles;
         }
 
         internal static void AddFileToZip(string zipFilename, string fileToAdd, string storeAsName = null)

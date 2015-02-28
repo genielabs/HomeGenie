@@ -47,7 +47,7 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         $('#automation_program_delete_button').bind('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
             return true;
-        }); editor1
+        }); 
         //
         $('#configure_program_editorcompilecode').bind('click', function (event) {
             HG.WebApp.ProgramEdit.CompileProgram();
@@ -396,17 +396,12 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position) {
         HG.WebApp.ProgramEdit.SetTab(2);
 
     }
-    editor.focus();
-    editor.setCursor(0);
-    var lc = editor.addLineClass(position.line, null, "center-me");
     window.setTimeout(function () {
-        var line = $('#page_automation_editprogram .CodeMirror-lines .center-me');
-        if (typeof line.offset() != 'undefined') {
-            var h = line.parent();
-            $('.CodeMirror-scroll').scrollTop(0).scrollTop(line.offset().top - $('.CodeMirror-scroll').offset().top - Math.round($('.CodeMirror-scroll').height() / 2));
-            editor.removeLineClass(lc, null, "center-me");
-            editor.setCursor(position);
-        }
+        editor.setCursor(position);
+        var height = editor.getScrollInfo().clientHeight; 
+        var coords = editor.charCoords(position, "local"); 
+        editor.scrollTo(null, (coords.top + coords.bottom - height) / 2);
+        editor.focus();
     }, 500);
 };
 

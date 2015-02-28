@@ -209,7 +209,7 @@ Global
 		$19.scope = application/x-sharedlib
 		$0.StandardHeader = $20
 		$20.Text = @/*\n    This file is part of HomeGenie Project source code.\n\n    HomeGenie is free software: you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    HomeGenie is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  \n*/\n\n/*\n *     Author: Generoso Martello <gene@homegenie.it>\n *     Project Homepage: http://homegenie.it\n */\n\n
-		$20.IncludeInNewFiles = True
+		$20.IncludeInNewFiles = False
 		$0.NameConventionPolicy = $21
 		$21.Rules = $22
 		$22.NamingRule = $23

@@ -14,10 +14,12 @@
     You should have received a copy of the GNU General Public License
     along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
 */
+
 /*
  *     Author: Generoso Martello <gene@homegenie.it>
  *     Project Homepage: http://homegenie.it
  */
+
 using HomeGenie.Automation;
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
@@ -42,10 +44,12 @@ namespace HomeGenie.Service.Handlers
     public class Config
     {
         private HomeGenieService homegenie;
+        private string widgetBasePath;
 
         public Config(HomeGenieService hg)
         {
             homegenie = hg;
+            widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
         }
 
         public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
@@ -95,8 +99,10 @@ namespace HomeGenie.Service.Handlers
                         }
                         if (Raspberry.Board.Current.IsRaspberryPi)
                         {
-                            if (!portList.Contains("/dev/ttyAMA0")) portList.Add("/dev/ttyAMA0"); // RaZberry
-                            if (!portList.Contains("/dev/ttyACM0")) portList.Add("/dev/ttyACM0"); // ZME_UZB1
+                            if (!portList.Contains("/dev/ttyAMA0"))
+                                portList.Add("/dev/ttyAMA0"); // RaZberry
+                            if (!portList.Contains("/dev/ttyACM0"))
+                                portList.Add("/dev/ttyACM0"); // ZME_UZB1
                         }
                         migCommand.Response = JsonHelper.GetSimpleResponse(JsonConvert.SerializeObject(portList));
                     }
@@ -234,10 +240,7 @@ namespace HomeGenie.Service.Handlers
                             csvlog = sr.ReadToEnd();
                         }
                     }
-                    (request.Context as HttpListenerContext).Response.AddHeader(
-                        "Content-Disposition",
-                        "attachment;filename=homegenie_log_" + migCommand.GetOption(1) + ".csv"
-                    );
+                    (request.Context as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment;filename=homegenie_log_" + migCommand.GetOption(1) + ".csv");
                     migCommand.Response = csvlog;
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.Enable")
@@ -281,9 +284,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
                 {
                     // file uploaded by user
-                    string archivename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                      "tmp",
-                                                      "homegenie_restore_config.zip");
+                    string archivename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "homegenie_restore_config.zip");
                     if (!Directory.Exists("tmp"))
                     {
                         Directory.CreateDirectory("tmp");
@@ -308,13 +309,8 @@ namespace HomeGenie.Service.Handlers
                     {
                         var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
                         string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                        MIG.Gateways.WebServiceUtility.SaveFile(encoding,
-                                                                boundary,
-                                                                request.InputStream,
-                                                                archivename);
-                        homegenie.UnarchiveConfiguration(archivename,
-                                                         Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                          "tmp"));
+                        MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archivename);
+                        Utility.UncompressZip(archivename, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp"));
                         File.Delete(archivename);
                     }
                     catch
@@ -324,9 +320,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS1")
                 {
                     var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                               "tmp",
-                                                               "programs.xml"));
+                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs.xml"));
                     var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
                     reader.Close();
                     var newProgramList = new List<ProgramBlock>();
@@ -352,9 +346,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS2")
                 {
                     var serializer = new XmlSerializer(typeof(List<Group>));
-                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                           "tmp",
-                                                           "automationgroups.xml"));
+                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "automationgroups.xml"));
                     var automationGroups = (List<Group>)serializer.Deserialize(reader);
                     reader.Close();
                     //
@@ -369,30 +361,18 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateGroupsDatabase("Automation");
                     //
                     //File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "automationgroups.xml"), "./automationgroups.xml", true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "groups.xml"),
-                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"),
-                              true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "lircconfig.xml"),
-                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml"),
-                              true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"),
-                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"),
-                              true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "scheduler.xml"),
-                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"),
-                              true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"),
-                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"),
-                              true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "groups.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "lircconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "scheduler.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"), true);
                     //
                     homegenie.LoadConfiguration();
                     //
                     // Restore automation programs
                     string selectedPrograms = migCommand.GetOption(1);
                     serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                               "tmp",
-                                                               "programs.xml"));
+                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs.xml"));
                     var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
                     reader.Close();
                     foreach (var program in newProgramsData)
@@ -408,14 +388,7 @@ namespace HomeGenie.Service.Handlers
                                 var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
                                 try
                                 {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                           "tmp",
-                                                           "programs",
-                                                           program.Address + ".dll"),
-                                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                 "programs",
-                                                 newPid + ".dll"),
-                                              true);
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
                                 }
                                 catch
                                 {
@@ -428,14 +401,7 @@ namespace HomeGenie.Service.Handlers
                                 homegenie.ProgramEngine.ProgramRemove(currentProgram);
                                 try
                                 {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                           "tmp",
-                                                           "programs",
-                                                           program.Address + ".dll"),
-                                              Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                 "programs",
-                                                 program.Address + ".dll"),
-                                              true);
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
                                 }
                                 catch
                                 {
@@ -446,16 +412,10 @@ namespace HomeGenie.Service.Handlers
                             // TODO: this is untested yet...
                             if (program.Type.ToLower() == "arduino")
                             {
-                                string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                   "tmp",
-                                                                   "programs",
-                                                                   "arduino",
-                                                                   oldPid.ToString());
-                                string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                                    "programs",
-                                                                    "arduino",
-                                                                    program.Address.ToString());
-                                if (Directory.Exists(arduinoFolder)) Directory.Delete(arduinoFolder, true);
+                                string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", "arduino", oldPid.ToString());
+                                string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
+                                if (Directory.Exists(arduinoFolder))
+                                    Directory.Delete(arduinoFolder, true);
                                 Directory.CreateDirectory(arduinoFolder);
                                 foreach (string newPath in Directory.GetFiles(sourceFolder))
                                 {
@@ -542,9 +502,7 @@ namespace HomeGenie.Service.Handlers
                         //
                         try
                         {
-                            module.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes),
-                                                                            newModules[i]["DeviceType"].ToString(),
-                                                                            true);
+                            module.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), newModules[i]["DeviceType"].ToString(), true);
                         }
                         catch
                         {
@@ -566,8 +524,7 @@ namespace HomeGenie.Service.Handlers
                             {
                                 try
                                 {
-                                    propertyValue = double.Parse(propertyValue.Replace(",", "."),
-                                                                 System.Globalization.CultureInfo.InvariantCulture).ToString();
+                                    propertyValue = double.Parse(propertyValue.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture).ToString();
                                 }
                                 catch
                                 {
@@ -707,8 +664,7 @@ namespace HomeGenie.Service.Handlers
                 using (var reader = new StreamReader(request.InputStream))
                 {
                     var newGroupList = new List<Group>();
-                    string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' },
-                                                                         StringSplitOptions.RemoveEmptyEntries);
+                    string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < newPositionOrder.Length; i++)
                     {
                         newGroupList.Add(homegenie.GetGroups(migCommand.GetOption(0))[int.Parse(newPositionOrder[i])]);
@@ -745,8 +701,7 @@ namespace HomeGenie.Service.Handlers
                     if (sortGroup != null)
                     {
                         var newModulesReference = new List<ModuleReference>();
-                        string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' },
-                                                                             StringSplitOptions.RemoveEmptyEntries);
+                        string[] newPositionOrder = reader.ReadToEnd().Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                         for (int i = 0; i < newPositionOrder.Length; i++)
                         {
                             newModulesReference.Add(sortGroup.Modules[int.Parse(newPositionOrder[i])]);
@@ -820,8 +775,175 @@ namespace HomeGenie.Service.Handlers
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                 break;
-            }
 
+            case "Widgets.List":
+                List<string> widgetsList = new List<string>();
+                var groups = Directory.GetDirectories(widgetBasePath);
+                for (int d = 0; d < groups.Length; d++)
+                {
+                    var categories = Directory.GetDirectories(groups[d]);
+                    for (int c = 0; c < categories.Length; c++)
+                    {
+                        var widgets = Directory.GetFiles(categories[c], "*.js");
+                        var group = groups[d].Replace(widgetBasePath, "").Substring(1);
+                        var category = categories[c].Replace(groups[d], "").Substring(1);
+                        for (int w = 0; w < widgets.Length; w++)
+                        {
+                            widgetsList.Add(group + "/" + category + "/" + Path.GetFileNameWithoutExtension(widgets[w]));
+                        }
+                    }
+                }
+                migCommand.Response = JsonConvert.SerializeObject(widgetsList);
+                break;
+
+            case "Widgets.Add":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    widgetParts[0] = new String(widgetParts[0].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[1] = new String(widgetParts[1].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[2] = new String(widgetParts[2].Where(Char.IsLetter).ToArray()).ToLower();
+                    if (!String.IsNullOrWhiteSpace(widgetParts[0]) && !String.IsNullOrWhiteSpace(widgetParts[1]) && !String.IsNullOrWhiteSpace(widgetParts[2]))
+                    {
+                        string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+                        // copy widget template into the new widget
+                        var htmlFile = Path.Combine(filePath, widgetParts[2] + ".html");
+                        var jsFile = Path.Combine(filePath, widgetParts[2] + ".js");
+                        if (!File.Exists(htmlFile) && !File.Exists(jsFile))
+                        {
+                            File.Copy(Path.Combine(widgetBasePath, "template.html"), htmlFile);
+                            File.Copy(Path.Combine(widgetBasePath, "template.js"), jsFile);
+                            response = "OK";
+                        }
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
+            case "Widgets.Save":
+                {
+                    string response = "ERROR";
+                    string widgetData = new StreamReader(request.InputStream).ReadToEnd();
+                    string fileType = migCommand.GetOption(0);
+                    string widgetPath = migCommand.GetOption(1); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    switch (fileType)
+                    {
+                    // html/javascript source
+                    case "html":
+                    case "js":
+                        using (TextWriter widgetWriter = new StreamWriter(Path.Combine(filePath, widgetParts[2] + "." + fileType)))
+                        {
+                            widgetWriter.Write(widgetData);
+                        }
+                        response = "OK";
+                        break;
+                    // style sheet file
+                    case "css":
+                        break;
+                    // locale file
+                    case "json":
+                        break;
+                    // image file
+                    case "jpg":
+                    case "png":
+                    case "gif":
+                        break;
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
+            case "Widgets.Delete":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1], widgetParts[2] + ".");
+                    if (File.Exists(filePath + "html"))
+                    {
+                        File.Delete(filePath + "html");
+                        response = "OK";
+                    }
+                    if (File.Exists(filePath + "js"))
+                    {
+                        File.Delete(filePath + "js");
+                        response = "OK";
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
+            case "Widgets.Export":
+                {
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    string widgetBundle = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "export", widgetPath.Replace('/', '_') + ".zip");
+                    if (File.Exists(widgetBundle))
+                    {
+                        File.Delete(widgetBundle);
+                    }
+                    else if (!Directory.Exists(Path.GetDirectoryName(widgetBundle)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(widgetBundle));
+                    }
+                    string inputPath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                    string outputPath = Path.Combine(widgetParts[0], widgetParts[1]);
+                    string infoFilePath = Path.Combine(inputPath, "widget.info");
+                    File.WriteAllText(infoFilePath, "HomeGenie exported widget.");
+                    Utility.AddFileToZip(widgetBundle, infoFilePath, "widget.info");
+                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, widgetParts[2] + ".html"), Path.Combine(outputPath, widgetParts[2] + ".html"));
+                    Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, widgetParts[2] + ".js"), Path.Combine(outputPath, widgetParts[2] + ".js"));
+                    //
+                    byte[] bundleData = File.ReadAllBytes(widgetBundle);
+                    (request.Context as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment; filename=\"" + widgetPath.Replace('/', '_') + ".zip\"");
+                    (request.Context as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
+                }
+                break;
+                
+            case "Widgets.Import":
+                {
+                    var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
+                    string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
+                    string archiveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import_widget.zip");
+                    string importPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import");
+                    if (Directory.Exists(importPath))
+                        Directory.Delete(importPath, true);
+                    MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveFile);
+                    // TODO: should extract to temporary folder and look for widget.info data file before copying anything
+                    List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
+                    if (File.Exists(Path.Combine(importPath, "widget.info")))
+                    {
+                        foreach (string f in extractedFiles)
+                        {
+                            if (f.EndsWith(".html") || f.EndsWith(".js"))
+                            {
+                                string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
+                                if (!Directory.Exists(destFolder))
+                                    Directory.CreateDirectory(destFolder);
+                                File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
+                            }
+                        }
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                    }
+                    else
+                    {
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
+                    }
+                }
+                break;
+
+            }
         }
     }
 }

@@ -74,6 +74,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         });
         //
         $('#page_configure_groupmodules_propspopup').on('popupbeforeposition', function (event) {
+            $('#automation_group_module_params').scrollTop(0);
             HG.WebApp.GroupModules.LoadModuleParameters();
         });
         //
@@ -407,9 +408,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
                 address_label = "Program";
             }
             var iconid = 'module_icon_image_' + m;
-            var icon = configurepage_GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
-                $('#' + elid).attr('src', iconimage);
-            }, iconid);
+            var icon = 'pages/control/widgets/homegenie/generic/images/unknown.png';
             html += '<li data-icon="bars" data-module-index="' + m + '">';
             html += '<a>';
             html += '<table><tr><td rowspan="2" align="left"><img id="' + iconid + '" height="54" src="' + icon + '"></td>';
@@ -421,9 +420,15 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
         }
     }
     $('#page_configure_groupmodules_list').append(html);
-    //
     $('#page_configure_groupmodules_list').listview().listview('refresh');
-    //
+    // udate icons asynchronously
+    for (var m = 0; m < groupmodules.Modules.length; m++) {
+        var iconid = 'module_icon_image_' + m;
+        configurepage_GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
+            $('#' + elid).attr('src', iconimage);
+        }, iconid);
+    }
+    // set on click handler for list items
     $("#page_configure_groupmodules_list li").each(function (index) {
         var item = $(this);
         item.find("a:first").on("click", function () {

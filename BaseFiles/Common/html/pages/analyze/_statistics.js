@@ -262,7 +262,7 @@ HG.WebApp.Statistics.Refresh = function () {
                                 { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
                             ],
                             {
-                                yaxis: { show: false },
+                                yaxis: { show: true },
                                 xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
                                 legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
                                 lines: { show: showlines, lineWidth: 1.0 },
@@ -313,7 +313,7 @@ HG.WebApp.Statistics.Refresh = function () {
                             data: stats[0]
                         }],
                         {
-                            yaxis: { show: false },
+                            yaxis: { show: true },
                             xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
                             legend: { position: "nw", backgroundOpacity: 0.3 },
                             lines: { show: showlines, lineWidth: 1.5 },

@@ -1,1 +1,9 @@
 Thumbs.db
+HomeGenie/bin/
+MigFiles (copia)/
+MigFiles/MIG/bin/
+MigFiles/SupportLibraries/NetClientLib/bin/
+MigFiles/SupportLibraries/SerialPortLib/bin/
+MigFiles/SupportLibraries/W800RF32/bin/
+MigFiles/SupportLibraries/XTenLib/bin/
+MigFiles/SupportLibraries/ZWaveLib/bin/

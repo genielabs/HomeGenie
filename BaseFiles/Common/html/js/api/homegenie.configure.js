@@ -218,6 +218,83 @@ HG.Configure.Modules.RoutingReset = function (callback) {
     });
 };
 //
+HG.Configure.Widgets = HG.Configure.Widgets || {};
+HG.Configure.Widgets.List = function(callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.List/',
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            var list = eval(data);
+            callback(list);
+        }
+    });
+};
+HG.Configure.Widgets.Save = function(widgetPath, fileType, content, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Save/' + fileType + '/' + encodeURIComponent(widgetPath),
+        type: 'POST',
+        data: content,
+        processData: false,
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
+};
+HG.Configure.Widgets.Add = function(widgetPath, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Add/' + encodeURIComponent(widgetPath),
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
+};
+HG.Configure.Widgets.Delete = function(widgetPath, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Delete/' + encodeURIComponent(widgetPath),
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
+};
+HG.Configure.Widgets.Export = function(widgetPath) {
+    
+};
+//
 // namespace : HG.Configure.System namespace
 // info      : -
 //	

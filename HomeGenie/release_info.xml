@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r478</Version>
+  <Version>1.00 beta r480</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed bug in Timetable when crossing from one table type to another at midnight (eg. from Weekday to Weekend)
-  - Added user-definable thermostat parameter to Eden Oled Menu widget
-  - Improved Basic Thermostat app, now compatible with Timetable scheduler and using Virtual Modules
-  - Added 0.5 step value input to the thermostat widget dial knob (issue #93)
-  - Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
-  - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
-  - Added new option for configuring size of the statistics database (pull request #121)
-  - Fixed bug in MIGInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
-  - Fixed IP Camera widget preview not showing
-  - Added missing Z-Wave command classes to _nodesetup.js
-  - Updated locale language files
-  - Fixed temperature reading Fahrenheit/Celsius conversion bug in ZWaveLib when value precision == 2
-  - Added thermostats settings query to Z-Wave WakeUp app</ReleaseNote>
-  <ReleaseDate>2015-02-08T18:05:42.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added KNX device modules app
+  - Added KnxClientHelper KNX client helper class
+  - Added new MqttClientHelper class (will deprecate Net.Mqtt)
+  - Added new Widgets Editor with add, delete, save, export, import, preview and debug functionalities
+  - Updated RaspberrySharp-IO library with support new Raspberry Pi 2 model (issue #133)
+  - Some minor fixes to Z-Wave interface
+  - General improvements to integrated code editor
+  - Added some synchronization locks to NetHelper class to avoid unsafe thread operations
+  - Changed domain of CubieBoard GPIO app from "Raspberry" to "CubieBoard"
+  - Fixed "Module exception data..." (issue #127)
+  - Fixed missing Y axis in statistics graph (issue #123)
+  - ZWaveLib rework - phase 1 completed (also solve issue #118)
+  - Fixed bug in Statistics class when parsing address of remote modules
+  - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue
+  - Fixed MIG CameraInput interface not reading configuration</ReleaseNote>
+  <ReleaseDate>2015-02-26T15:32:28.0000Z</ReleaseDate>
 </ReleaseInfo>

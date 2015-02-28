@@ -23,9 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-
 using System.IO;
-
 using HomeGenie.Automation.Scripting;
 using HomeGenie.Data;
 using HomeGenie.Service;
@@ -53,14 +51,10 @@ namespace HomeGenie.Automation
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
 
         private HomeGenie.Service.TsList<ProgramBlock> automationPrograms = new HomeGenie.Service.TsList<ProgramBlock>();
-
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
-
         private MacroRecorder macroRecorder = null;
-
         //private object lockObject = new object();
-
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
         public static int USER_SPACE_PROGRAMS_START = 1000;
@@ -75,13 +69,7 @@ namespace HomeGenie.Automation
                 blockType = type;
             }
 
-            public override void ErrorReported(
-                ScriptSource source,
-                string message,
-                Microsoft.Scripting.SourceSpan span,
-                int errorCode,
-                Microsoft.Scripting.Severity severity
-            )
+            public override void ErrorReported(ScriptSource source, string message, Microsoft.Scripting.SourceSpan span, int errorCode, Microsoft.Scripting.Severity severity)
             {
                 Errors.Add(new ProgramError() {
                     Line = span.Start.Line,
@@ -143,14 +131,7 @@ namespace HomeGenie.Automation
                             };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(
-                                program,
-                                Properties.RUNTIME_ERROR,
-                                "TC: " + result.Exception.Message.Replace(
-                                    '\n',
-                                    ' '
-                                )
-                            );
+                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                         }
                         else
                         {
@@ -181,7 +162,9 @@ namespace HomeGenie.Automation
                             try
                             {
                                 res = VerifyProgramCondition(program.Conditions[c]);
-                            } catch {
+                            }
+                            catch
+                            {
                                 // TODO: report/handle exception
                             }
                             isConditionSatisfied = (isConditionSatisfied && res);
@@ -221,7 +204,7 @@ namespace HomeGenie.Automation
                     };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' '));
+                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -275,7 +258,8 @@ namespace HomeGenie.Automation
 
         public void Run(ProgramBlock program, string options)
         {
-            if (program.IsRunning) return;
+            if (program.IsRunning)
+                return;
             //
             if (program.ProgramThread != null)
             {
@@ -301,7 +285,9 @@ namespace HomeGenie.Automation
                         try
                         {
                             result = program.Run(options);
-                        } catch (Exception ex) {
+                        }
+                        catch (Exception ex)
+                        {
                             result = new MethodRunResult();
                             result.Exception = ex;
                         }
@@ -320,14 +306,7 @@ namespace HomeGenie.Automation
                             };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
-                            RaiseProgramModuleEvent(
-                                program,
-                                Properties.RUNTIME_ERROR,
-                                "CR: " + result.Exception.Message.Replace(
-                                    '\n',
-                                    ' '
-                                )
-                            );
+                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                         }
                         program.IsRunning = false;
                         program.ProgramThread = null;
@@ -394,7 +373,8 @@ namespace HomeGenie.Automation
             int pid = USER_SPACE_PROGRAMS_START;
             foreach (ProgramBlock program in automationPrograms)
             {
-                if (pid <= program.Address) pid = program.Address + 1;
+                if (pid <= program.Address)
+                    pid = program.Address + 1;
             }
             return pid;
         }
@@ -427,11 +407,22 @@ namespace HomeGenie.Automation
             // delete program files
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs");
             // remove csharp assembly
-            try { File.Delete(Path.Combine(file, program.Address + ".dll")); } catch { }
+            try
+            {
+                File.Delete(Path.Combine(file, program.Address + ".dll"));
+            }
+            catch
+            {
+            }
             // remove arduino folder files 
-            try { Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true); } catch { }
+            try
+            {
+                Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true);
+            }
+            catch
+            {
+            }
         }
-
         // TODO: find a better solution to this...
         public void ExecuteWizardScript(ProgramBlock program)
         {
@@ -457,19 +448,13 @@ namespace HomeGenie.Automation
                             }
                             break;
                         case "Program.Pause":
-                            Thread.Sleep((int)(double.Parse(
-                                program.Commands[x].CommandArguments,
-                                System.Globalization.CultureInfo.InvariantCulture
-                            ) * 1000));
+                            Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
                             break;
                         case "Program.Repeat":
                                     // TODO: implement check for contiguous repeat statements
                             if (repeatCount <= 0)
                             {
-                                repeatCount = (int)(double.Parse(
-                                    program.Commands[x].CommandArguments,
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                ));
+                                repeatCount = (int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
                             }
                             if (--repeatCount == 0)
                             {
@@ -797,19 +782,10 @@ namespace HomeGenie.Automation
                 double dval = 0;
                 DateTime dtval = new DateTime();
                 //
-                if (double.TryParse(
-                        parameter.Value.Replace(",", "."),
-                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
-                        CultureInfo.InvariantCulture,
-                        out dval
-                    ))
+                if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
                 {
                     lvalue = dval;
-                    rvalue = double.Parse(
-                        comparisonValue.Replace(",", "."),
-                        NumberStyles.Float | NumberStyles.AllowDecimalPoint,
-                        CultureInfo.InvariantCulture
-                    );
+                    rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
                 }
                 else if (DateTime.TryParse(parameter.Value, out dtval))
                 {

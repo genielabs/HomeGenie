@@ -1,23 +1,26 @@
 ﻿HG.WebApp.Events = HG.WebApp.Events || {};
+HG.WebApp.Events.PageId = 'page_events';
 HG.WebApp.Events._eventQueueCapacity = 200;
 HG.WebApp.Events._ledOffTimeout = null;
 HG.WebApp.Events._popupHideTimeout = null;
 
 HG.WebApp.Events.InitializePage = function () {
-
-    $('#events_filter_property').change(function () {
+    var page = $('#'+HG.WebApp.Events.PageId);
+    page.on('pagebeforeshow', function (e) {
         HG.WebApp.Events.Refresh();
     });
-    $('#events_filter_source').change(function () {
+    page.find('[data-ui-field=property-txt]').change(function () {
         HG.WebApp.Events.Refresh();
     });
-    $('#events_filter_domain').change(function () {
+    page.find('[data-ui-field=source-txt]').change(function () {
+        HG.WebApp.Events.Refresh();
+    });
+    page.find('[data-ui-field=domain-txt]').change(function () {
         HG.WebApp.Events.Refresh();
     });
     setTimeout(function () {
         HG.WebApp.Events.SetupListener();
     }, 2000);
-
 };
 
 HG.WebApp.Events.SetupListener = function () {
@@ -55,7 +58,7 @@ HG.WebApp.Events.SetupListener = function () {
             }, 500);
             //
             // refresh events list page if currently open
-            if ($.mobile.activePage.attr("id") == "page_events") {
+            if ($.mobile.activePage.attr("id") == HG.WebApp.Events.PageId) {
                 HG.WebApp.Events.Refresh();
             }
         }
@@ -63,14 +66,14 @@ HG.WebApp.Events.SetupListener = function () {
 }
 
 HG.WebApp.Events.Refresh = function () {
-
+    var page = $('#'+HG.WebApp.Events.PageId);
     var rows = '';
     for (var e = HG.WebApp.Data.Events.length - 1; e >= 0; e--) {
         var event = HG.WebApp.Data.Events[e];
         //
-        var filterProperty = $('#events_filter_property').val();
-        var filterSource = $('#events_filter_source').val();
-        var filterDomain = $('#events_filter_domain').val();
+        var filterProperty = page.find('[data-ui-field=property-txt]').val();
+        var filterSource = page.find('[data-ui-field=source-txt]').val();
+        var filterDomain = page.find('[data-ui-field=domain-txt]').val();
         if (filterDomain != '' && event.Domain.indexOf(filterDomain) < 0) continue;
         if (filterSource != '' && event.Source.indexOf(filterSource) < 0) continue;
         if (filterProperty != '' && event.Property.indexOf(filterProperty) < 0) continue;
@@ -85,8 +88,9 @@ HG.WebApp.Events.Refresh = function () {
         rows += '<td>' + event.Domain + '</td>';
         rows += '</tr>';
     }
-    $('#page_events_table tbody').html(rows);
-    $('#page_events_table').table().table("refresh");
+    var eventTable = page.find('[data-ui-field=events-tbl]');
+    eventTable.find('tbody').html(rows);
+    eventTable.table().table("refresh");
     //{"Timestamp":"2014-04-10T12:55:46.1195672Z","Domain":"HomeAutomation.PhilipsHue","Source":"2","Description":"","Property":"Meter.Watts","Value":"0","UnixTimestamp":1397134546119.5674} ;
 
 };
@@ -96,6 +100,9 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
     // refresh widget associated to the module that raised the event
     if (module != null) {
         HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
+        if ($.mobile.activePage.attr("id") == HG.WebApp.WidgetEditor.PageId) {
+            HG.WebApp.WidgetEditor.RenderView(eventLog);
+        }
         // when event is an automation program event, we update the whole module
         if (module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') {
             HG.Configure.Modules.Get(module.Domain, module.Address, function (data) {

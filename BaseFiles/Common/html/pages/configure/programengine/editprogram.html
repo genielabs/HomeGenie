@@ -147,7 +147,7 @@
     </div>
 
 
-    <div id="automation_program_notsaved" class="ui-corner-all" data-role="popup" data-transition="pop" data-position-to="window" data-dismissible="false" data-overlay-theme="b">
+    <div id="automation_program_notsaved" class="ui-corner-all hg-popup-b" data-role="popup" data-transition="pop" data-position-to="window" data-dismissible="false" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_hasmodification">Program was modified!</h1>
         </div>
@@ -156,16 +156,16 @@
             <p data-locale-id="configure_program_changeswillbelost"></p>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a id="program_notsaved_dontsave" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_dontsave" data-inline="true" data-rel="back">No</a>
+                    <a id="program_notsaved_dontsave" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_dontsave" data-inline="true" data-rel="back">No</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="program_notsaved_save" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
+                    <a id="program_notsaved_save" href="#" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_saveconfirm" data-inline="true" data-rel="back" data-transition="flow">Save</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="automation_program_delete" class="ui-corner-all" data-role="popup" data-transition="pop" data-overlay-theme="b">
+    <div id="automation_program_delete" class="ui-corner-all hg-popup-b" data-role="popup" data-transition="pop" data-overlay-theme="b">
         <div data-role="header" class="ui-corner-top">
             <h1 data-locale-id="configure_program_deletetitle">Delete Program?</h1>
         </div>
@@ -174,17 +174,17 @@
             <p data-locale-id="configure_program_deleteadvice">This action cannot be undone.</p>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deletecancel" data-inline="true" data-rel="back">Cancel</a>
+                    <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_program_deletecancel" data-inline="true" data-rel="back">Cancel</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="program_delete_button" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_program_deleteconfirm" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
+                    <a id="program_delete_button" href="#" class="ui-btn ui-corner-all ui-icon-check ui-btn-icon-left" data-locale-id="configure_program_deleteconfirm" data-inline="true" data-rel="back" data-transition="flow">Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div id="automation_program_fileadd" class="ui-corner-all hg-popup-a" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
+    <div id="automation_program_fileadd" class="ui-corner-all hg-popup-b" data-role="popup" data-transition="pop" data-position-to="window" data-overlay-theme="b">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_program_newfile">Add File</h2>
         </div>
@@ -259,60 +259,6 @@
             </ul>
         </div><!-- /navbar -->
     </div>
-</div>
-<!-- TODO: the following page is deprecated, should be deleted -->
-<div data-role="page" id="page_automation_editprogram_code">
-    {include pages/header.html}
-
-    <div class="ui-content" style="padding: 15px">
-        <img src="images/program.png" style="position:absolute;top:65px;left:20px;" width="64" />
-        <div style="position:relative;height:100px;font-size:10pt;margin-top:20px"><h3 id="page_automation_programcode_title" style="position:absolute;bottom:40px;left:90px;"></h3></div>
-    </div>
-
-    <div data-role="popup" id="program_error_message" style="min-width:300px;min-height:180px;" data-transition="slidedown">
-        <a href="javascript:$('#program_error_message').popup('close')" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <div data-role="header" class="ui-corner-top">
-            <h1 data-locale-id="configure_program_errorstitle">Errors</h1>
-        </div>
-        <div class="ui-content ui-corner-bottom">
-            <p id="program_error_message_text"></p>
-        </div>
-    </div>
-
-
-    <div id="editprograms_code_actionmenu" data-role="popup" data-overlay-theme="b">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
-        <ul data-role="listview" data-inset="false" style="min-width:210px;">
-            <li id="editprograms_actionmenu_run"><a class="ui-btn ui-btn-icon-right ui-icon-gear" data-locale-id="configure_program_options_run" href="javascript:HG.WebApp.ProgramEdit.CheckAndRunProgram(HG.WebApp.ProgramEdit._CurrentProgram);history.back();">Run</a></li>
-            <li id="editprograms_actionmenu_break"><a class="ui-btn ui-btn-icon-right ui-icon-minus" data-locale-id="configure_program_options_break" href="javascript:HG.WebApp.ProgramEdit.BreakProgram(HG.WebApp.ProgramEdit._CurrentProgram.Address);history.back();">Break</a></li>
-            <li id="editprograms_actionmenu_compile"><a class="ui-btn ui-btn-icon-right ui-icon-check" data-locale-id="configure_program_options_update" href="javascript:HG.WebApp.ProgramEdit.CompileProgram();history.back();">Update</a></li>
-        </ul>
-    </div>
-
-
-    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-        <div data-role="navbar">
-            <ul>
-                <li>
-                    <a class="ui-btn ui-icon-back ui-btn-icon-left" data-locale-id="bottombar_button_back" data-transition="slide" data-direction="reverse" href="#page_automation_editprogram">
-                        Back
-                    </a>
-                </li>
-                <li>
-                    <a id="editprograms_code_codeblockstoggle" class="ui-btn ui-icon-gear ui-btn-icon-left" data-locale-id="configure_program_bbar_programeditruncode">
-                        Edit Trigger Code
-                    </a>
-                </li>
-                <li>
-                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-locale-id="configure_program_bbaractions" href="#editprograms_code_actionmenu" data-rel="popup" data-transition="slideup">
-                        Actions
-                    </a>
-                </li>
-            </ul>
-        </div><!-- /navbar -->
-    </div>
-
 </div>
 
 <!-- hg page init script -->
