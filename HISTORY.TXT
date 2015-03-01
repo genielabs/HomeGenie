@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+01/03/2015 1.00 beta rev 482
+    - Updated RaspberrySharp-IO, now with support for PiFace Digital and MCP3002
+    - Improved Widget Editor reporting of javascript syntax errors to work with any web browser
+
 26/02/2015 1.00 beta rev 479-git6 (r480 preview-4)
     - Added new locale strings
     - Minor fixes and improvements to Widget Editor

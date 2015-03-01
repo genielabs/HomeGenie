@@ -1,22 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r480</Version>
+  <Version>1.00 beta r482</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added KNX device modules app
-  - Added KnxClientHelper KNX client helper class
-  - Added new MqttClientHelper class (will deprecate Net.Mqtt)
-  - Added new Widgets Editor with add, delete, save, export, import, preview and debug functionalities
-  - Updated RaspberrySharp-IO library with support new Raspberry Pi 2 model (issue #133)
-  - Some minor fixes to Z-Wave interface
-  - General improvements to integrated code editor
-  - Added some synchronization locks to NetHelper class to avoid unsafe thread operations
-  - Changed domain of CubieBoard GPIO app from "Raspberry" to "CubieBoard"
-  - Fixed "Module exception data..." (issue #127)
-  - Fixed missing Y axis in statistics graph (issue #123)
-  - ZWaveLib rework - phase 1 completed (also solve issue #118)
-  - Fixed bug in Statistics class when parsing address of remote modules
-  - Fixed MIG UPnP interface MediaMediaInfo/MediaPositionInfo double quotes escaping issue
-  - Fixed MIG CameraInput interface not reading configuration</ReleaseNote>
-  <ReleaseDate>2015-02-26T15:32:28.0000Z</ReleaseDate>
+  <ReleaseNote>   - Updated RaspberrySharp-IO, now with support for PiFace Digital and MCP3002
+  - Improved Widget Editor reporting of javascript syntax errors to work with any web browser</ReleaseNote>
+  <ReleaseDate>2015-03-01T14:49:02.0000Z</ReleaseDate>
 </ReleaseInfo>

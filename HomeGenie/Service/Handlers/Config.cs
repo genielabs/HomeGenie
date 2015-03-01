@@ -38,6 +38,7 @@ using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
 using MIG.Interfaces.Media;
+using Jint.Parser;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -943,6 +944,21 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Widgets.Parse":
+                {
+                    string widgetData = new StreamReader(request.InputStream).ReadToEnd();
+                    var parser = new JavaScriptParser();
+                    try
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        parser.Parse(widgetData);
+                    } 
+                    catch (Jint.Parser.ParserException e) 
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("ERROR (" + e.LineNumber + "," + e.Column + "): " + e.Description);
+                    }
+                }
+                break;
             }
         }
     }
