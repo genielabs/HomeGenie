@@ -1,0 +1,5 @@
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\W800RF32\bin\Debug\W800RF32.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\W800RF32\bin\Debug\W800RF32.pdb
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\W800RF32\obj\Debug\W800RF32.csprojResolveAssemblyReference.cache
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\W800RF32\obj\Debug\W800RF32.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\W800RF32\obj\Debug\W800RF32.pdb

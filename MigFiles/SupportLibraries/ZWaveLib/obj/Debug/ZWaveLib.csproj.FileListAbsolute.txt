@@ -1,0 +1,7 @@
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\bin\Debug\ZWaveLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\bin\Debug\ZWaveLib.pdb
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\bin\Debug\SerialPortLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\bin\Debug\SerialPortLib.pdb
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\obj\Debug\ZWaveLib.csprojResolveAssemblyReference.cache
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\obj\Debug\ZWaveLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\ZWaveLib\obj\Debug\ZWaveLib.pdb

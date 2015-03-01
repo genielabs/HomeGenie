@@ -1,0 +1,5 @@
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\SerialPortLib\bin\Debug\SerialPortLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\SerialPortLib\bin\Debug\SerialPortLib.pdb
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\SerialPortLib\obj\Debug\SerialPortLib.csprojResolveAssemblyReference.cache
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\SerialPortLib\obj\Debug\SerialPortLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\SerialPortLib\obj\Debug\SerialPortLib.pdb

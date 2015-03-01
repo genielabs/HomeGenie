@@ -1,0 +1,6 @@
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\bin\Debug\XTenLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\bin\Debug\XTenLib.pdb
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\bin\Debug\LibUsbDotNet.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\obj\Debug\XTenLib.csprojResolveAssemblyReference.cache
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\obj\Debug\XTenLib.dll
+C:\dd\Repos\HomeGenie\MigFiles\SupportLibraries\XTenLib\obj\Debug\XTenLib.pdb
