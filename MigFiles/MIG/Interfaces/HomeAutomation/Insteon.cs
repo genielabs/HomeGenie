@@ -30,10 +30,11 @@ using System.Threading;
 
 using SoapBox.FluentDwelling;
 using SoapBox.FluentDwelling.Devices;
+using System.Threading.Tasks;
 
 namespace MIG.Interfaces.HomeAutomation
 {
-    public class Insteon: MIGInterface
+    public partial class Insteon: MIGInterface
     {
 
         #region Implemented MIG Commands
@@ -122,12 +123,13 @@ namespace MIG.Interfaces.HomeAutomation
             }
         }
         #endregion
+
         private Plm insteonPlm;
-        private Thread readerTask;
 
         public Insteon()
         {
         }
+
         #region MIG Interface members
         public event Action<InterfaceModulesChangedAction> InterfaceModulesChangedAction;
         public event Action<InterfacePropertyChangedAction> InterfacePropertyChangedAction;
@@ -173,54 +175,64 @@ namespace MIG.Interfaces.HomeAutomation
                 //
                 // Insteon devices discovery
                 //
-                var database = insteonPlm.GetAllLinkDatabase();
-                foreach (var record in database.Records)
+                using (this.SuspendListening()) // If timeout happens during TryConnectToDevice, FluentDwelling will disconnect the COM port
                 {
-                    // Connect to each device to figure out what it is
-                    DeviceBase device;
-                    if (insteonPlm.Network.TryConnectToDevice(record.DeviceId, out device))
+                    var database = insteonPlm.GetAllLinkDatabase();
+                    foreach (var record in database.Records)
                     {
-                        // It responded. Get identification info
-                        string address = device.DeviceId.ToString();
-                        string category = device.DeviceCategoryCode.ToString();
-                        string subcategory = device.DeviceSubcategoryCode.ToString();
-
-                        ModuleTypes type = ModuleTypes.Generic;
-                        switch (device.GetType().Name)
+                        // Connect to each device to figure out what it is
+                        DeviceBase device;
+                        try
                         {
-                        case "LightingControl":
-                            type = ModuleTypes.Light;
-                            break;
-                        case "DimmableLightingControl":
-                            type = ModuleTypes.Dimmer;
-                            break;
-                        case "SwitchedLightingControl":
-                            type = ModuleTypes.Light;
-                            break;
-                        case "SensorsActuators":
-                            type = ModuleTypes.Switch;
-                            break;
-                        case "WindowCoveringControl":
-                            type = ModuleTypes.DoorWindow;
-                            break;
-                        case "PoolAndSpaControl":
-                            type = ModuleTypes.Thermostat;
-                            break;
-                        case "IrrigationControl":
-                            type = ModuleTypes.Switch;
-                            break;
-                        }
+                            if (insteonPlm.Network.TryConnectToDevice(record.DeviceId, out device))
+                            {
+                                // It responded. Get identification info
+                                string address = device.DeviceId.ToString();
+                                string category = device.DeviceCategoryCode.ToString();
+                                string subcategory = device.DeviceSubcategoryCode.ToString();
 
-                        modules.Add(new InterfaceModule() {
-                            Domain = this.Domain,
-                            Address = address,
-                            ModuleType = type,
-                            CustomData = category + "/" + subcategory
-                        });
-                    }
-                    else
-                    {
-                        // couldn't connect - device removed?
+                                ModuleTypes type = ModuleTypes.Generic;
+                                switch (device.GetType().Name)
+                                {
+                                    case "LightingControl":
+                                        type = ModuleTypes.Light;
+                                        break;
+                                    case "DimmableLightingControl":
+                                        type = ModuleTypes.Dimmer;
+                                        break;
+                                    case "SwitchedLightingControl":
+                                        type = ModuleTypes.Light;
+                                        break;
+                                    case "SensorsActuators":
+                                        type = ModuleTypes.Switch;
+                                        break;
+                                    case "WindowCoveringControl":
+                                        type = ModuleTypes.DoorWindow;
+                                        break;
+                                    case "PoolAndSpaControl":
+                                        type = ModuleTypes.Thermostat;
+                                        break;
+                                    case "IrrigationControl":
+                                        type = ModuleTypes.Switch;
+                                        break;
+                                }
+
+                                modules.Add(new InterfaceModule()
+                                {
+                                    Domain = this.Domain,
+                                    Address = address,
+                                    ModuleType = type,
+                                    CustomData = category + "/" + subcategory
+                                });
+                            }
+                            else
+                            {
+                                // couldn't connect - device removed?
+                            }
+                        }
+                        catch(TimeoutException)
+                        {
+                        }
                     }
                 }
             }
@@ -263,17 +275,9 @@ namespace MIG.Interfaces.HomeAutomation
                 Disconnect();
                 return false;
             }
-            //
-            readerTask = new Thread(() =>
-            {
-                while (insteonPlm != null)
-                {
-                    insteonPlm.Receive();
-                    System.Threading.Thread.Sleep(100); // wait 100 ms
-                }
-            });
-            readerTask.Start();
-            //
+
+            this.StartListening();
+
             if (InterfaceModulesChangedAction != null)
                 InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
             return true;
@@ -283,26 +287,18 @@ namespace MIG.Interfaces.HomeAutomation
         {
             if (insteonPlm != null)
             {
+                this.StopListening();
+
                 insteonPlm.OnError -= insteonPlm_HandleOnError;
                 try
                 {
                     insteonPlm.Dispose();
                 }
-                catch
+                catch(Exception ex)
                 {
+                    insteonPlm_HandleOnError(ex);
                 }
                 insteonPlm = null;
-            }
-            if (readerTask != null)
-            {
-                try
-                {
-                    readerTask.Abort();
-                }
-                catch
-                {
-                }
-                readerTask = null;
             }
         }
 
@@ -560,8 +556,9 @@ namespace MIG.Interfaces.HomeAutomation
                         Value = raiseParameter
                     });
                 }
-                catch
+                catch(Exception ex)
                 {
+                    insteonPlm_HandleOnError(ex);
                 }
             }
             //
@@ -572,8 +569,14 @@ namespace MIG.Interfaces.HomeAutomation
         #region Insteon Interface events
         private void insteonPlm_HandleOnError(object sender, EventArgs e)
         {
-            Console.WriteLine("\nPLM ERROR: " + insteonPlm.Exception.Message + "\n");
+            insteonPlm_HandleOnError(insteonPlm.Exception);
         }
+
+        private void insteonPlm_HandleOnError(Exception ex)
+        {
+            Console.WriteLine("\nPLM ERROR: " + ex.ToString() + "\n");
+        }
+
         #endregion
     }
 }

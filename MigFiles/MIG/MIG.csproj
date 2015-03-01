@@ -12,6 +12,8 @@
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ReleaseVersion>1.0</ReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -61,6 +65,7 @@
     <Compile Include="Gateways\TcpSocketGateway.cs" />
     <Compile Include="Gateways\WebServiceGateway.cs" />
     <Compile Include="Interfaces\EmbeddedSystems\Weeco4mGPIO.cs" />
+    <Compile Include="Interfaces\HomeAutomation\Insteon.ListeningSuspender.cs" />
     <Compile Include="Interfaces\HomeAutomation\X10.cs" />
     <Compile Include="Interfaces\HomeAutomation\ZWave.cs" />
     <Compile Include="Interfaces\Media\CameraInput.cs" />
