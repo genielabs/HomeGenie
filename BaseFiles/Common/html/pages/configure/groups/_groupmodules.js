@@ -74,6 +74,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
         });
         //
         $('#page_configure_groupmodules_propspopup').on('popupbeforeposition', function (event) {
+            $('#automation_group_module_params').scrollTop(0);
             HG.WebApp.GroupModules.LoadModuleParameters();
         });
         //

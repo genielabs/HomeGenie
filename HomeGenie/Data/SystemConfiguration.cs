@@ -176,7 +176,7 @@ namespace HomeGenie.Data
             public StatisticsConfiguration()
             {
 
-                MaxDatabaseSizeMBytes = 10; // 10MB default.
+                MaxDatabaseSizeMBytes = 5; // 5MB default.
                 StatisticsTimeResolutionSeconds = 5 * 60; // 5 minute default.
                 StatisticsUIRefreshSeconds = 2 * 60; // 2 minute default.
             }

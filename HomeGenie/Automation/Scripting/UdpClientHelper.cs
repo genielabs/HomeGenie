@@ -31,7 +31,7 @@ namespace HomeGenie.Automation.Scripting
 {
 
     /// <summary>
-    /// Udp client helper.\n
+    /// UDP client helper.\n
     /// Class instance accessor: **UdpClient**
     /// </summary>
     public class UdpClientHelper
@@ -155,6 +155,11 @@ namespace HomeGenie.Automation.Scripting
         {
             get { return textEndOfLine[0]; }
             set { textEndOfLine = new string[] { value }; }
+        }
+        
+        public void Reset()
+        {
+            Disconnect();
         }
 
         private void udpClient_MessageReceived(byte[] message)

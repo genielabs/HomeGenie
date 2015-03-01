@@ -31,7 +31,7 @@ namespace HomeGenie.Automation.Scripting
 {
 
     /// <summary>
-    /// Tcp client helper.
+    /// TCP client helper.
     /// Class instance accessor: **TcpClient**
     /// </summary>
     public class TcpClientHelper
@@ -154,6 +154,11 @@ namespace HomeGenie.Automation.Scripting
         {
             get { return textEndOfLine[0]; }
             set { textEndOfLine = new string[] { value }; }
+        }
+        
+        public void Reset()
+        {
+            Disconnect();
         }
 
         private void tcpClient_MessageReceived(byte[] message)

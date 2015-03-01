@@ -47,7 +47,7 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         $('#automation_program_delete_button').bind('click', function (event) {
             HG.WebApp.Utility.SwitchPopup('#editprograms_actionmenu', '#automation_program_delete');
             return true;
-        }); editor1
+        }); 
         //
         $('#configure_program_editorcompilecode').bind('click', function (event) {
             HG.WebApp.ProgramEdit.CompileProgram();

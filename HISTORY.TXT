@@ -1,6 +1,25 @@
 ﻿RELEASE HISTORY
 
-21/02/2015 1.00 beta rev 479-git4 (r480 preview)
+01/03/2015 1.00 beta rev 482
+    - Updated RaspberrySharp-IO, now with support for PiFace Digital and MCP3002
+    - Improved Widget Editor reporting of javascript syntax errors to work with any web browser
+
+26/02/2015 1.00 beta rev 479-git6 (r480 preview-4)
+    - Added new locale strings
+    - Minor fixes and improvements to Widget Editor
+    - Added check for changes before leaving Widget Editor page
+    - Added "Add Widget" functionality to Widget Editor
+    - Moved Widget Editor to the Automation section actions menu
+
+24/02/2015 1.00 beta rev 479-git6 (r480 preview-3)
+    - Fixed raspberrysharp-io I2C driver on Raspberry Pi 2 (thanks Wibo! =))
+
+23/02/2015 1.00 beta rev 479-git5 (r480 preview-2)
+    - Added KNX device modules app
+    - Added KnxClientHelper KNX client helper class
+    - Added new MqttClientHelper class (will deprecate Net.Mqtt)
+
+21/02/2015 1.00 beta rev 479-git4 (r480 preview-1)
     - Added new Widgets Editor with save, export, import, preview and debug functionalities
     - Updated RaspberrySharp-IO library to possibly support new Raspberry Pi 2 model (issue #133)
     - Some minor fixes to Z-Wave interface

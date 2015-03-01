@@ -38,6 +38,7 @@ using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
 using MIG.Interfaces.Media;
+using Jint.Parser;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -785,8 +786,8 @@ namespace HomeGenie.Service.Handlers
                     for (int c = 0; c < categories.Length; c++)
                     {
                         var widgets = Directory.GetFiles(categories[c], "*.js");
-                        var group = groups[d].Substring(groups[d].LastIndexOf('/') + 1);
-                        var category = categories[c].Substring(categories[c].LastIndexOf('/') + 1);
+                        var group = groups[d].Replace(widgetBasePath, "").Substring(1);
+                        var category = categories[c].Replace(groups[d], "").Substring(1);
                         for (int w = 0; w < widgets.Length; w++)
                         {
                             widgetsList.Add(group + "/" + category + "/" + Path.GetFileNameWithoutExtension(widgets[w]));
@@ -795,7 +796,36 @@ namespace HomeGenie.Service.Handlers
                 }
                 migCommand.Response = JsonConvert.SerializeObject(widgetsList);
                 break;
-                
+
+            case "Widgets.Add":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    widgetParts[0] = new String(widgetParts[0].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[1] = new String(widgetParts[1].Where(Char.IsLetter).ToArray()).ToLower();
+                    widgetParts[2] = new String(widgetParts[2].Where(Char.IsLetter).ToArray()).ToLower();
+                    if (!String.IsNullOrWhiteSpace(widgetParts[0]) && !String.IsNullOrWhiteSpace(widgetParts[1]) && !String.IsNullOrWhiteSpace(widgetParts[2]))
+                    {
+                        string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1]);
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+                        // copy widget template into the new widget
+                        var htmlFile = Path.Combine(filePath, widgetParts[2] + ".html");
+                        var jsFile = Path.Combine(filePath, widgetParts[2] + ".js");
+                        if (!File.Exists(htmlFile) && !File.Exists(jsFile))
+                        {
+                            File.Copy(Path.Combine(widgetBasePath, "template.html"), htmlFile);
+                            File.Copy(Path.Combine(widgetBasePath, "template.js"), jsFile);
+                            response = "OK";
+                        }
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
             case "Widgets.Save":
                 {
                     string response = "ERROR";
@@ -830,6 +860,26 @@ namespace HomeGenie.Service.Handlers
                     case "png":
                     case "gif":
                         break;
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(response);
+                }
+                break;
+
+            case "Widgets.Delete":
+                {
+                    string response = "ERROR";
+                    string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
+                    string[] widgetParts = widgetPath.Split('/');
+                    string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1], widgetParts[2] + ".");
+                    if (File.Exists(filePath + "html"))
+                    {
+                        File.Delete(filePath + "html");
+                        response = "OK";
+                    }
+                    if (File.Exists(filePath + "js"))
+                    {
+                        File.Delete(filePath + "js");
+                        response = "OK";
                     }
                     migCommand.Response = JsonHelper.GetSimpleResponse(response);
                 }
@@ -885,15 +935,30 @@ namespace HomeGenie.Service.Handlers
                                 File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
                             }
                         }
-                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                     }
                     else
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
+                        //migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
                     }
                 }
                 break;
 
+            case "Widgets.Parse":
+                {
+                    string widgetData = new StreamReader(request.InputStream).ReadToEnd();
+                    var parser = new JavaScriptParser();
+                    try
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        parser.Parse(widgetData);
+                    } 
+                    catch (Jint.Parser.ParserException e) 
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("ERROR (" + e.LineNumber + "," + e.Column + "): " + e.Description);
+                    }
+                }
+                break;
             }
         }
     }

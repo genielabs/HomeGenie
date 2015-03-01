@@ -10,18 +10,62 @@ HG.WebApp.WidgetsList.InitializePage = function () {
     var uploadButton = page.find('[data-ui-field=upload-btn]');
     var uploadFile = page.find('[data-ui-field=upload-file]');
     var uploadFrame = page.find('[data-ui-field=upload-frame]');
+    var addConfirmButton = page.find('[data-ui-field=addconfirm-btn]');
+    var addNewButton = page.find('[data-ui-field=addnew-btn]');
+    var addNewPopup = page.find('[data-ui-field=widgetadd-popup]');
+    var newBrandText = page.find('[data-ui-field=widgetbrand-txt]');
+    var newCategoryText = page.find('[data-ui-field=widgetcategory-txt]');
+    var newNameText = page.find('[data-ui-field=widgetname-txt]');
     
     page.on('pageinit', function (e) {
         // initialize controls used in this page
         importPopup.popup();
+        addNewPopup.popup();
     });
     page.on('pagebeforeshow', function (e) {
+        HG.Configure.Modules.List(function (data) {
+            try
+            {
+                HG.WebApp.Data.Modules = eval(data);                   
+            } catch (e) { }
+        });
         HG.WebApp.WidgetsList.LoadWidgets();
     });
     
-    importButton.bind('click', function () {
-        importPopup.popup('open');
+    addNewButton.bind('click', function () {
+        newBrandText.val('');
+        newCategoryText.val('');
+        newNameText.val('');
+        HG.WebApp.Utility.SwitchPopup('#widgetlist_actionmenu', addNewPopup);
     });
+    addConfirmButton.bind('click', function () {
+        var widgetpath = newBrandText.val()+'/'+newCategoryText.val()+'/'+newNameText.val();
+        HG.Configure.Widgets.Add(widgetpath, function(res){
+            // open newly added widget
+            if (res.ResponseValue == 'OK')
+            {
+                HG.WebApp.WidgetsList._currentWidget = widgetpath;
+                $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetEditor.PageId, { transition: 'slide' });
+            }
+            else
+            {
+                alert('Error adding widget');
+            }
+        });
+        return false;
+    });
+    importButton.bind('click', function () {
+        HG.WebApp.Utility.SwitchPopup('#widgetlist_actionmenu', importPopup);
+    });
+    newBrandText.bind('keyup blur',function(){ 
+        newBrandText.val(newBrandText.val().replace(/[^a-z,A-Z]/g,'').toLowerCase()); }
+    );
+    newCategoryText.bind('keyup blur',function(){ 
+        newCategoryText.val(newCategoryText.val().replace(/[^a-z,A-Z]/g,'').toLowerCase()); }
+    );
+    newNameText.bind('keyup blur',function(){ 
+        newNameText.val(newNameText.val().replace(/[^a-z,A-Z]/g,'').toLowerCase()); }
+    );
     uploadButton.bind('click', function () {
         if (uploadFile.val() == "") {
             alert('Select a file to import first');
@@ -55,7 +99,7 @@ HG.WebApp.WidgetsList.RefreshList = function(items) {
     var page = $('#'+HG.WebApp.WidgetsList.PageId);
     var listMenu = page.find('[data-ui-field=group-list]');
     listMenu.empty();
-    listMenu.append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_widgetlist', 'Widget List') + '</li>');
+    listMenu.append('<li data-icon="false" data-role="list-divider">' + HG.WebApp.Locales.GetLocaleString('configure_widgetlist_list', 'Widget List') + '</li>');
     for (var i = 0; i < items.length; i++) {
         listMenu.append('<li data-item-name="' + items[i] + '" data-item-index="' + i + '"><a href="#page_widgeteditor_editwidget" data-transition="slide"><img src="test" width="36" height="36" style="margin-left:7px;margin-top:2px" />' + items[i] + '</a></li>');
     }
