@@ -83,6 +83,8 @@
           <Option Name="HouseCodes" Value="A" />
         </Options>
       </Interface>
+      <Interface Domain="HomeAutomation.Tellstick" IsEnabled="false">
+      </Interface>
       <Interface Domain="HomeAutomation.W800RF" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />

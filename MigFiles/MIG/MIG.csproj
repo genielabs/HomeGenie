@@ -61,6 +61,7 @@
     <Compile Include="Gateways\TcpSocketGateway.cs" />
     <Compile Include="Gateways\WebServiceGateway.cs" />
     <Compile Include="Interfaces\EmbeddedSystems\Weeco4mGPIO.cs" />
+    <Compile Include="Interfaces\HomeAutomation\Tellstick.cs" />
     <Compile Include="Interfaces\HomeAutomation\X10.cs" />
     <Compile Include="Interfaces\HomeAutomation\ZWave.cs" />
     <Compile Include="Interfaces\Media\CameraInput.cs" />
@@ -88,6 +89,10 @@
   </Target>
   -->
   <ItemGroup>
+    <ProjectReference Include="..\SupportLibraries\TelldusLib\TelldusLib.csproj">
+      <Project>{72ab65ff-38ad-4755-8320-c6457c3b18fe}</Project>
+      <Name>TelldusLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupportLibraries\XTenLib\XTenLib.csproj">
       <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
       <Name>XTenLib</Name>
