@@ -326,24 +326,38 @@ HG.WebApp.WidgetEditor.RenderView = function(eventData) {
 HG.WebApp.WidgetEditor.Run = function() {
     HG.WebApp.WidgetEditor._hasError = false;
     HG.WebApp.WidgetEditor._editorJscript.clearGutter('CodeMirror-lint-markers-5');
-    // render HTML
-    HG.WebApp.WidgetEditor.Render();
     // create widget instance
     var javascriptCode = HG.WebApp.WidgetEditor._editorJscript.getValue();
-    try
-    {
-        HG.WebApp.WidgetEditor._widgetInstance = eval(javascriptCode)[0];
-    } catch (e) {
-        HG.WebApp.WidgetEditor._hasError = true;
-        HG.WebApp.WidgetEditor.ShowError(e);
-    }
-    // execute widget RenderView method
-    HG.WebApp.WidgetEditor.RenderView();
+    $.mobile.loading('show', { text: 'Checking Javascript code...', textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Parse(javascriptCode, function(msg) { 
+        $.mobile.loading('hide');
+        if (msg.ResponseValue != 'OK')
+        {
+            var message = msg.ResponseValue;
+            var position = message.substr(message.indexOf('(') + 1);
+            position = position.substr(0, position.indexOf(')')).split(',');
+            message = message.substr(message.indexOf(':') + 2);
+            message = message + '<br/> <a href="javascript:HG.WebApp.WidgetEditor.JumpToLine({ line: ' + (position[0] - 1) + ', ch: ' + (position[1] - 1) + ' })">Line <strong>' + position[0] + '</strong>, Column <strong>' + position[1] + '</strong></a>';
+            HG.WebApp.WidgetEditor.ShowErrorTip(message, position[0]);
+        }
+        else
+        {
+            try
+            {
+                HG.WebApp.WidgetEditor._widgetInstance = eval(javascriptCode)[0];
+                // render HTML
+                HG.WebApp.WidgetEditor.Render();
+                // execute widget RenderView method
+                HG.WebApp.WidgetEditor.RenderView();
+            } catch (e) {
+                HG.WebApp.WidgetEditor._hasError = true;
+                HG.WebApp.WidgetEditor.ShowError(e);
+            }
+        }
+    });
 };
 
 HG.WebApp.WidgetEditor.ShowError = function(e) {
-    var page = $('#'+HG.WebApp.WidgetEditor.PageId);
-    var errorsButton = page.find('[data-ui-field=errors-btn]');
     var stack = ErrorStackParser.parse(e);
     if  (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
     {
@@ -351,11 +365,19 @@ HG.WebApp.WidgetEditor.ShowError = function(e) {
         stack[0] = e;
     }
     var message = e + '<br/> <a href="javascript:HG.WebApp.WidgetEditor.JumpToLine({ line: ' + (stack[0].lineNumber - 1) + ', ch: ' + (stack[0].columnNumber - 1) + ' })">Line <strong>' + stack[0].lineNumber + '</strong>, Column <strong>' + stack[0].columnNumber + '</strong></a>';
+    HG.WebApp.WidgetEditor.ShowErrorTip(message, stack[0].lineNumber);
+    console.log(message);
+    console.log(stack);
+};
+
+HG.WebApp.WidgetEditor.ShowErrorTip = function(message, lineNumber) {
+    var page = $('#'+HG.WebApp.WidgetEditor.PageId);
+    var errorsButton = page.find('[data-ui-field=errors-btn]');
     var marker = document.createElement('div');
     HG.WebApp.WidgetEditor.SetTab(2);
     HG.WebApp.WidgetEditor._editorJscript.clearGutter('CodeMirror-lint-markers-5');
     marker.className = 'CodeMirror-lint-marker-error';
-    HG.WebApp.WidgetEditor._editorJscript.setGutterMarker(stack[0].lineNumber - 1, 'CodeMirror-lint-markers-5', marker);
+    HG.WebApp.WidgetEditor._editorJscript.setGutterMarker(lineNumber - 1, 'CodeMirror-lint-markers-5', marker);
     $(marker).qtip({
         content: { title: 'Error', text: message, button: 'Close' },
         show: { event: 'mouseover', solo: true },
@@ -370,9 +392,7 @@ HG.WebApp.WidgetEditor.ShowError = function(e) {
         style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
         position: { adjust: { screen: true }, my: 'top center', at: 'bottom center' }
     });
-    console.log(message);
-    console.log(stack);
-};
+}
 
 HG.WebApp.WidgetEditor.JumpToLine = function(position) {
     window.setTimeout(function () {
