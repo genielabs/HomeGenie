@@ -2299,6 +2299,9 @@
     <None Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\images\interfaces\tellstick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\pages\control\widgets\DaniMail\fibaro\rgbw.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4532,4 +4535,5 @@
     <Folder Include="html\js\codemirror-4.03\mode\htmlmixed\" />
     <Folder Include="html\js\codemirror-4.03\mode\xml\" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

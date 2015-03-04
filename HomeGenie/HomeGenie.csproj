@@ -105,6 +105,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Externals\sqlite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -120,10 +123,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>Externals\json\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>Externals\sqlite\System.Data.SQLite.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Common.Logging.Core">
       <HintPath>Externals\nmqtt\Common.Logging.Core.dll</HintPath>
@@ -283,6 +282,10 @@
     <ProjectReference Include="..\MigFiles\MIG\MIG.csproj">
       <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
       <Name>MIG</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MigFiles\SupportLibraries\TelldusLib\TelldusLib.csproj">
+      <Project>{72ab65ff-38ad-4755-8320-c6457c3b18fe}</Project>
+      <Name>TelldusLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\MigFiles\SupportLibraries\XTenLib\XTenLib.csproj">
       <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>

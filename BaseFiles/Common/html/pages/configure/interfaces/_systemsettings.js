@@ -118,6 +118,12 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             });
         });
         //
+        $("#configure_interfaces_flip_tellstick").on('slidestop', function (event) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Tellstick', 'IsEnabled.Set', $("#configure_interfaces_flip_tellstick").val(), '', function (data) {
+                $('#control_groupslist').empty(); // forces control menu rebuild
+            });
+        });
+        //
         $("#configure_interfaces_flip_w800rf32").on('slidestop', function (event) {
             HG.WebApp.SystemSettings.RefreshOptions('w800rf32');
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Set', $("#configure_interfaces_flip_w800rf32").val(), '', function (data) {
@@ -360,6 +366,9 @@ HG.WebApp.SystemSettings.LoadSettings = function () {
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_x10').val(data.ResponseValue).slider('refresh');
                 HG.WebApp.SystemSettings.RefreshOptions('x10');
+            });
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.Tellstick', 'IsEnabled.Get', '', '', function (data) {
+                $("#configure_interfaces_flip_tellstick").val(data.ResponseValue).slider('refresh');
             });
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'IsEnabled.Get', '', '', function (data) {
                 $('#configure_interfaces_flip_w800rf32').val(data.ResponseValue).slider('refresh');
