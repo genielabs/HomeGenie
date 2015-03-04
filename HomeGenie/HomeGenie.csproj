@@ -106,7 +106,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\Users\Johan\Source\Repos\HomeGenie\HomeGenie\Externals\sqlite\System.Data.SQLite.dll</HintPath>
+      <HintPath>Externals\sqlite\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
