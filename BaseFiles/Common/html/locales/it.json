@@ -104,7 +104,7 @@
     "configure_group_bottombar_addmodule": 
          "Agg. Modulo",
     "configure_program_automationtitle": 
-         "Automazione",
+         "Elenco Programmi",
     "configure_program_newprogram": 
          "Agg. Programma",
     "configure_program_enterprogramname": 
@@ -696,5 +696,47 @@
     "configure_system_blockedpopups_edit":
         "Modifica",
     "configure_system_updateinstall_warning":
-        "Prima di procedere con un aggiornamento è consigliabile effettuare una backup della configurazione."
+        "Prima di procedere con un aggiornamento è consigliabile effettuare una backup della configurazione.",
+    "configure_automationgroup_widgeteditor":
+        "Editor Widget",
+    "configure_widgetlist_heading":
+        "<font style=\"color:gray\">Widget</font><br />Elenco</h3>",
+    "configure_widgetlist_importwidget":
+        "Importa Widget",
+    "configure_widgetlist_import":
+        "Importa",
+    "configure_widgetlist_add_popuptitle":
+        "Nuovo Widget",
+    "configure_widgetlist_add_widgetbrand":
+        "Brand",
+    "configure_widgetlist_add_widgetcategory":
+        "Categoria",
+    "configure_widgetlist_add_widgetname":
+        "Nome",
+    "configure_widgetlist_newwidgetconfirm":
+        "Aggiungi",
+    "configure_widgetlist_action_import":
+        "Importa",
+    "configure_widgetlist_action_addwidget":
+        "Aggiungi Widget",
+    "configure_widgeteditor_html":
+        "HTML",
+    "configure_widgeteditor_javascript":
+        "Javascript",
+    "configure_widgeteditor_previewupdate":
+        "Esegui / Anteprima",
+    "configure_widgeteditor_hasmodification":
+        "Il widget è stato modificato!",
+    "configure_widgeteditor_deletetitle":
+        "Eliminare Widget?",
+    "configure_widgeteditor_deleteprompt":
+        "Sei sicuro di voler eliminare questo widget?",
+    "configure_widgetlist_list":
+        "Elenco Widget",
+    "configure_widgeteditor_nobindmodule_title":
+        "Seleziona un modulo",
+    "configure_widgeteditor_nobindmodule_text":
+        "Non è stato trovato un modulo valido per il data binding, selezionane uno dall'elenco.",
+    "configure_widgeteditor_nobindmodule_close":
+        "Chiudi"
 }

@@ -42,23 +42,6 @@
             //
             // ui events handlers
             //
-            // toggle button action
-            container.find('[data-ui-field=toggle]').on('click', function () {
-                var level = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-                if (level != null) {
-                    level = level.Value;
-                } else level = "0";
-                //
-                if (level != "0") {
-                    HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
-                    HG.WebApp.Utility.SetModulePropertyByName(module, "Status.Level", "0");
-                }
-                else {
-                    HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
-                    HG.WebApp.Utility.SetModulePropertyByName(module, "Status.Level", "1");
-                }
-            });
-            //
             controlpopup.find('[data-ui-field=on]').on('click', function () {
                 HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
             });

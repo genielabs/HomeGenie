@@ -101,7 +101,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
     if (module != null) {
         HG.WebApp.Control.UpdateModuleWidget(eventLog.Domain, eventLog.Source);
         if ($.mobile.activePage.attr("id") == HG.WebApp.WidgetEditor.PageId) {
-            HG.WebApp.WidgetEditor.Preview();
+            HG.WebApp.WidgetEditor.RenderView(eventLog);
         }
         // when event is an automation program event, we update the whole module
         if (module.Domain == 'HomeAutomation.HomeGenie.Automation' && eventLog.Property != 'Program.Status') {

@@ -251,8 +251,69 @@ HG.Configure.Widgets.Save = function(widgetPath, fileType, content, callback) {
         }
     });
 };
+HG.Configure.Widgets.Add = function(widgetPath, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Add/' + encodeURIComponent(widgetPath),
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
+};
+HG.Configure.Widgets.Delete = function(widgetPath, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Delete/' + encodeURIComponent(widgetPath),
+        type: 'GET',
+        dataType: 'text',
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
+};
 HG.Configure.Widgets.Export = function(widgetPath) {
     
+};
+HG.Configure.Widgets.Parse = function(content, callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.Parse/',
+        type: 'POST',
+        data: content,
+        processData: false,
+        success: function (data) {
+            if (callback) {
+                var res = data;
+                try {
+                    res = eval(data)[0];
+                } catch (e) { }
+                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
+                callback(res);
+            }
+        },
+        error: function (a, b, c) {
+            if (callback) callback({ 'ResponseValue' : 'ERROR' });
+        }
+    });
 };
 //
 // namespace : HG.Configure.System namespace

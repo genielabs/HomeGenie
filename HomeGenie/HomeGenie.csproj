@@ -165,6 +165,9 @@
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="KNXLib">
+      <HintPath>Externals\knx.net\KNXLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
@@ -215,6 +218,8 @@
     <Compile Include="Service\StringCipher.cs" />
     <Compile Include="Automation\ArduinoAppFactory.cs" />
     <Compile Include="Automation\Scripting\UdpClientHelper.cs" />
+    <Compile Include="Automation\Scripting\KnxClientHelper.cs" />
+    <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

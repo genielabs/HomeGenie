@@ -4,11 +4,10 @@
 //
 HG.WebApp.Control = HG.WebApp.Control || {};
 HG.WebApp.Control.PageId = 'page_control';
-HG.WebApp.Control._RefreshTimeoutObject = null;
-HG.WebApp.Control._RefreshIntervalObject = null;
-HG.WebApp.Control._RefreshInterval = 10000;
-HG.WebApp.Control._WidgetConfiguration = [];
-HG.WebApp.Control._Widgets = [];
+HG.WebApp.Control._widgetConfiguration = [];
+HG.WebApp.Control._widgetList = [];
+HG.WebApp.Control._renderModuleDelay = null;
+HG.WebApp.Control._renderModuleBusy = false;
 //
 HG.WebApp.Control.InitializePage = function () {
     var page = $('#'+HG.WebApp.Control.PageId);
@@ -34,7 +33,7 @@ HG.WebApp.Control.InitializePage = function () {
             url: "pages/control/widgets/configuration.json",
             type: 'GET',
             success: function (data) {
-                HG.WebApp.Control._WidgetConfiguration = eval(data);
+                HG.WebApp.Control._widgetConfiguration = eval(data);
             },
             error: function (data) {
                 alert('error loading widgets configuration');
@@ -157,10 +156,10 @@ HG.WebApp.Control.RenderGroups = function () {
 HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
 
     var widgetcached = false;
-    for (var o = 0; o < HG.WebApp.Control._Widgets.length; o++) {
-        if (HG.WebApp.Control._Widgets[o].Widget == widgetpath) {
+    for (var o = 0; o < HG.WebApp.Control._widgetList.length; o++) {
+        if (HG.WebApp.Control._widgetList[o].Widget == widgetpath) {
             widgetcached = true;
-            if (callback != null) callback(HG.WebApp.Control._Widgets[o]);
+            if (callback != null) callback(HG.WebApp.Control._widgetList[o]);
             break;
         }
     }
@@ -181,7 +180,7 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
                 $.get("pages/control/widgets/" + widgetpath + ".html", function (responsedata) {
 
                     var widgetobj = { Widget: widgetpath, Instance: widget, Json: widgetjson, Model: responsedata };
-                    HG.WebApp.Control._Widgets.push(widgetobj);
+                    HG.WebApp.Control._widgetList.push(widgetobj);
                     //
                     if (callback != null) callback(widgetobj);
                 });
@@ -255,7 +254,7 @@ HG.WebApp.Control.RenderModule = function () {
 
     }
     else {
-        rendermodulesbusy = false;
+        HG.WebApp.Control._renderModuleBusy = false;
         $.mobile.loading('hide');
         //
         $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
@@ -330,17 +329,15 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
     }
 };
 
-var rendermodulesdelay = null;
-var rendermodulesbusy = false;
 HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
-    if (widgetsloadqueue.length > 0 || rendermodulesbusy) {
-        if (rendermodulesdelay != null) clearTimeout(rendermodulesdelay);
-        rendermodulesdelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 100);
+    if (widgetsloadqueue.length > 0 || HG.WebApp.Control._renderModuleBusy) {
+        if (HG.WebApp.Control._renderModuleDelay != null) clearTimeout(HG.WebApp.Control._renderModuleDelay);
+        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 100);
         return;
     }
     //
-    rendermodulesbusy = true;
-    rendermodulesdelay = null;
+    HG.WebApp.Control._renderModuleBusy = true;
+    HG.WebApp.Control._renderModuleDelay = null;
     //
     var groupmodules = HG.Configure.Groups.GetGroupModules(HG.WebApp.Data.Groups[groupIndex].Name);
     var grp = $('#groupdiv_modules_' + groupmodules.Index);
@@ -369,8 +366,8 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         }
         // fallback to configuration.json widgets mapping
         if (!widgetfound) {
-            for (var wi = 0; wi < HG.WebApp.Control._WidgetConfiguration.length; wi++) {
-                var widgetobj = HG.WebApp.Control._WidgetConfiguration[wi];
+            for (var wi = 0; wi < HG.WebApp.Control._widgetConfiguration.length; wi++) {
+                var widgetobj = HG.WebApp.Control._widgetConfiguration[wi];
                 var modprop = HG.WebApp.Utility.GetModulePropertyByName(module, widgetobj.MatchProperty);
                 if (modprop != null && (widgetobj.MatchValue == "*" || modprop.Value == widgetobj.MatchValue)) {
                     module.Widget = widgetobj.Widget;
