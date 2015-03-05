@@ -601,7 +601,7 @@ HG.WebApp.Locales.GetDateEndianType = function()
     // M = Middle Endian -> MDY
     var endianType = 'L';
     var testDate = new Date(98326800000);
-    var localeDateParts = testDate.toLocaleDateString().split('/');
+    var localeDateParts = testDate.toLocaleDateString().replace(/[\u200E]/g, "").split('/');
     if (localeDateParts[0] == '2') endianType = 'M';
     return endianType;
 };
