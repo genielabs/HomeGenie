@@ -388,14 +388,16 @@ namespace HomeGenie.Automation.Scripting
             else
             {
                 virtualModule.Domain = domain;
-                virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
+                if (virtualModule.DeviceType == MIG.ModuleTypes.Generic) 
+                    virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                 Utility.ModuleParameterSet(virtualModule, Properties.WIDGET_DISPLAYMODULE, widget);
             }
             // update real module device type and widget
             Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
             if (module != null)
             {
-                module.DeviceType = virtualModule.DeviceType;
+                if (module.DeviceType == MIG.ModuleTypes.Generic) 
+                    module.DeviceType = virtualModule.DeviceType;
                 Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
             }
             //
@@ -479,14 +481,16 @@ namespace HomeGenie.Automation.Scripting
                 else
                 {
                     virtualModule.Domain = domain;
-                    virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
+                    if (virtualModule.DeviceType == MIG.ModuleTypes.Generic) 
+                        virtualModule.DeviceType = (MIG.ModuleTypes)Enum.Parse(typeof(MIG.ModuleTypes), type);
                     Utility.ModuleParameterSet(virtualModule, Properties.WIDGET_DISPLAYMODULE, widget);
                 }
                 // update real module device type and widget
                 Module module = homegenie.Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
                 if (module != null)
                 {
-                    module.DeviceType = virtualModule.DeviceType;
+                    if (module.DeviceType == MIG.ModuleTypes.Generic) 
+                        module.DeviceType = virtualModule.DeviceType;
                     Utility.ModuleParameterSet(module, Properties.WIDGET_DISPLAYMODULE, widget);
                 }
 
@@ -805,17 +809,14 @@ namespace HomeGenie.Automation.Scripting
             //this.parameter = "";
             //this.value = "";
             this.initialized = false;
-            //
-            AddControlWidget(""); // no control widget --> not visible
-            //
+            // no control widget --> not visible
+            AddControlWidget(""); 
             // remove all features 
-            //
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
                 program.Features.Clear();
             }
-            //
             return this;
         }
 

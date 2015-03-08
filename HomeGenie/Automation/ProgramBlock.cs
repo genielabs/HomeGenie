@@ -183,6 +183,11 @@ namespace HomeGenie.Automation
 
         private void SetupScriptingScope()
         {
+            if (hgScriptingHost != null)
+            {
+                this.Reset();
+                hgScriptingHost = null;
+            }
             hgScriptingHost = new ScriptingHost();
             hgScriptingHost.SetHost(homegenie, this.Address);
             if (scriptEngine.GetType() == typeof(ScriptEngine))
@@ -293,7 +298,7 @@ namespace HomeGenie.Automation
             else if (hgScriptingHost != null)
             {
                 hgScriptingHost.Reset();
-                hgScriptingHost = null;
+                //hgScriptingHost = null;
             }
         }
 
@@ -497,12 +502,12 @@ namespace HomeGenie.Automation
 
         internal void Stop()
         {
-            this.IsRunning = false;
             if (this.Stopping != null)
             {
                 try { Stopping(); } catch { }
             }
             this.Reset();
+            this.IsRunning = false;
             //
             if (ProgramThread != null)
             {

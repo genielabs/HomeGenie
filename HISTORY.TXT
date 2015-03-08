@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+08/03/2015 1.00 beta rev 483
+    - Updated Jint (javascript engine) to latest version
+    - Applied alternative solution for issue #138 / pull request #141
+    - Fixed device type retain for virtual modules
+    - Added X10 Firecracker Modules app
+    - Fixed missing resource releasing on stop for phyton/ruby/js programs
+    - Fixed W800RF32 port selection issue
+
 01/03/2015 1.00 beta rev 482
     - Updated RaspberrySharp-IO, now with support for PiFace Digital and MCP3002
     - Improved Widget Editor reporting of javascript syntax errors to work with any web browser
