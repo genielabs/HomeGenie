@@ -136,6 +136,8 @@ namespace ZWaveLib
         SensorAlarm = 0x9C,
         SilenceAlarm = 0x9D,
         //
+        Crc16Encap = 0x56,
+        //
         UserCode = 0x63
     }
 

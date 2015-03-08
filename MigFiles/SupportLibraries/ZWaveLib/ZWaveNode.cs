@@ -173,6 +173,10 @@ namespace ZWaveLib
                     messageEvent = MultiInstance.GetEvent(this, receivedMessage);
                     break;
 
+                case (byte)CommandClass.Crc16Encap:
+                    messageEvent = Crc16.GetEvent(this, receivedMessage);
+                    break;
+                
                 case (byte)CommandClass.ManufacturerSpecific:
                     messageEvent = ManufacturerSpecific.GetEvent(this, receivedMessage);
                     if (messageEvent != null)
@@ -198,11 +202,8 @@ namespace ZWaveLib
                             }
                         }
                     }
-
                     break;
-
                 }
-
             }
 
             if (messageEvent != null)
