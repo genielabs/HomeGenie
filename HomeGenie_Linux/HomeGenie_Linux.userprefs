@@ -7,11 +7,7 @@
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/MigFiles/SupportLibraries/ZWaveLib/Devices/ProductHandlers/Generic/Switch.cs" line="158" column="1" />
-      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/sfnet-geniegene/HomeGenie/MigFiles/MIG/Interfaces/Protocols/UPnP.cs" line="844" column="1" />
-      <Breakpoint file="/home/gene/Scrivania/G-Labs/Development/Repositories/github-genielabs/HomeGenie/HomeGenie/Automation/ProgramBlock.cs" line="188" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="../HomeGenie/Automation/Scripting/NetHelper.cs" line="432" offsetX="758" offsetY="3132" expression="returnValue" liveUpdate="False" />

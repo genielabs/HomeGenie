@@ -1,0 +1,38 @@
+{
+    "Commands" : [
+        {
+            "Command": "Control.On",
+            "Aliases": [ "w??cz", "ON" ]
+        },
+        {
+            "Command": "Control.Off",
+            "Aliases": [ "wy??cz", "OFF" ]
+        },
+        {
+            "Command": "Control.Level",
+            "Aliases": [ "poziom" ]
+        },
+        {
+            "Command": "Control.Toggle",
+            "Aliases": [ "prze??cz" ]
+        },
+        {
+            "Command": "Control.Run",
+            "Aliases": [ "start", "uruchom" ]
+        },
+        {
+            "Command": "Control.Break",
+            "Aliases": [ "stop", "przerwij" ]
+        }
+    ],
+    "Types" : [
+        {
+            "Type": "Light,Dimmer",
+            "Aliases": [ "wszystkie ?wiat?a", "?wiat?a", "ka?de ?wiat?o" ]
+        },
+        {
+            "Type": "Switch",
+            "Aliases": [ "wszystkie prze??czniki", "prze??czniki", "ka?dy prze??cznik" ]
+        }
+    ]
+}

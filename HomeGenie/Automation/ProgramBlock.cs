@@ -39,6 +39,7 @@ using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 using Jint;
 using IronRuby;
+using System.Diagnostics;
 
 namespace HomeGenie.Automation
 {
@@ -220,41 +221,20 @@ namespace HomeGenie.Automation
             {
                 ActivationTime = null;
                 TriggerTime = null;
-                try
-                {
-                    Stop();
-                }
-                catch (Exception)
-                {
+                try { Stop(); } catch {
                     // TODO: handle this...
                 }
-                //
                 if (programDomain != null)
                 {
                     // Unloading program app domain...
-                    try
-                    {
-                        AppDomain.Unload(programDomain);
-                    }
-                    catch
-                    {
-                    }
+                    try { AppDomain.Unload(programDomain); } catch { }
                     programDomain = null;
-                    //
-                    try
-                    {
-                        // Deleting assembly...
-                        File.Delete(this.AssemblyFile);
-                    }
-                    catch
-                    {
-                    }
+                    // Deleting assembly...
+                    // TODO: check if this line can be removed
+                    // TODO: should this check if value == null before deleting the assembly?
+                    try { File.Delete(this.AssemblyFile); } catch { }
                 }
-                //
-                IsRunning = false;
-                //
                 appAssembly = value;
-
             }
         }
 
@@ -275,7 +255,24 @@ namespace HomeGenie.Automation
             {
                 try
                 {
-                    appAssembly = Assembly.Load(File.ReadAllBytes(this.AssemblyFile));
+                    byte[] assemblyData = File.ReadAllBytes(this.AssemblyFile);
+                    byte[] debugData = null;
+                    if (File.Exists(this.AssemblyFile + ".mdb"))
+                    {
+                        debugData = File.ReadAllBytes(this.AssemblyFile + ".mdb");
+                    }
+                    else if (File.Exists(this.AssemblyFile + ".pdb"))
+                    {
+                        debugData = File.ReadAllBytes(this.AssemblyFile + ".pdb");
+                    }
+                    if (debugData != null)
+                    {
+                        appAssembly = Assembly.Load(assemblyData, debugData);
+                    }
+                    else
+                    {
+                        appAssembly = Assembly.Load(assemblyData);
+                    }
                     succeed = true;
                 }
                 catch (Exception e)
@@ -442,6 +439,46 @@ namespace HomeGenie.Automation
             return result;
         }
 
+        internal ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        {
+            ProgramError error = new ProgramError() {
+                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                Column = 0,
+                Line = 0,
+                ErrorNumber = "-1",
+                ErrorMessage = e.Message
+            };
+            switch (codeType.ToLower())
+            {
+            case "csharp":
+                var st = new StackTrace(e, true);
+                error.Line = st.GetFrame(0).GetFileLineNumber();
+                if (isTriggerBlock)
+                {
+                    int sourceLines = this.ScriptSource.Split('\n').Length;
+                    error.Line -=  (CSharpAppFactory.CONDITION_CODE_OFFSET + CSharpAppFactory.PROGRAM_CODE_OFFSET + sourceLines);
+                }
+                else
+                {
+                    error.Line -=  CSharpAppFactory.PROGRAM_CODE_OFFSET;
+                }
+                break;
+            case "python":
+            case "ruby":
+                string[] message = ((ScriptEngine)scriptEngine).GetService<ExceptionOperations>().FormatException(e).Split(',');
+                if (message.Length > 2)
+                {
+                    int line = 0;
+                    int.TryParse(message[1].Substring(5), out line);
+                    error.Line = line;
+                }
+                break;
+            case "javascript":
+                break;
+            }
+            return error;
+        }
+
         internal MethodRunResult EvaluateCondition()
         {
             MethodRunResult result = null;
@@ -553,6 +590,14 @@ namespace HomeGenie.Automation
 
     }
 
+    public class ProgramError
+    {
+        public int Line = 0;
+        public int Column = 0;
+        public string ErrorMessage;
+        public string ErrorNumber;
+        public string CodeBlock;
+    }
 
 }
 
