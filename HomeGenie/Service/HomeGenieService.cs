@@ -1373,7 +1373,7 @@ namespace HomeGenie.Service
                     // module inherits props from associated virtual module
                     module.Domain = virtualModule.Domain;
                     module.Address = virtualModule.Address;
-                    if (module.DeviceType == MIG.ModuleTypes.Generic)
+                    if (module.DeviceType == MIG.ModuleTypes.Generic && virtualModule.DeviceType != ModuleTypes.Generic)
                     {
                         module.DeviceType = virtualModule.DeviceType;
                     }
