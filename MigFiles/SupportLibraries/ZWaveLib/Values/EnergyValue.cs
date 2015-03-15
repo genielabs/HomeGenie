@@ -44,7 +44,7 @@ namespace ZWaveLib.Values
 
         public static EnergyValue Parse(byte[] message)
         {
-            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
+            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 4);
             EnergyValue energy = new EnergyValue();
             //energy.Value = ((double)int.Parse(
             //                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),

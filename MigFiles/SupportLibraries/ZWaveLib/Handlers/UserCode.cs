@@ -27,13 +27,17 @@ using System.Collections.Generic;
 
 namespace ZWaveLib.Handlers
 {
-    public static class UserCode
+    public class UserCode : ICommandClass
     {
+        public byte GetCommandClassId()
+        {
+            return 0x63;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.UserCodeReport)
             {
                 var reportedUserCode = UserCodeValue.Parse(message);

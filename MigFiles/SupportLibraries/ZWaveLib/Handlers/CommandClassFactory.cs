@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace ZWaveLib.Handlers
 {
     class CommandClassFactory
     {
+        static readonly object lck = new object();
+
         public static ICommandClass GetCommandClass(byte ccId)
         {
-            if(_commandClasses == null)
-                _commandClasses = CollectCommandClasses();
+            if (_commandClasses == null)
+            {
+                lock (lck)
+                {
+                    if (_commandClasses == null)
+                    {
+                        _commandClasses = CollectCommandClasses();
+                    }
+                }
+            }
 
             Type type;
             if (!_commandClasses.TryGetValue(ccId, out type)) 
@@ -26,14 +35,18 @@ namespace ZWaveLib.Handlers
         private static Dictionary<byte, Type> CollectCommandClasses()
         {
             var iCommandClassTypes = new Dictionary<byte, Type>();
-            var iType = typeof(ICommandClass);
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => iType.IsAssignableFrom(t));
+            var iType = typeof (ICommandClass);
+
+            var assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
+            var types = assemblyTypes.Where(t => iType.IsAssignableFrom(t)).ToList();
 
             foreach (var type in types)
             {
-                var cc = (ICommandClass)Activator.CreateInstance(type);
+                if (type == iType)
+                    continue; // we are not going to use interface itself
+                var cc = (ICommandClass) Activator.CreateInstance(type);
                 var id = cc.GetCommandClassId();
-                _commandClasses.Add(id, type);
+                iCommandClassTypes.Add(id, type);
             }
 
             return iCommandClassTypes;

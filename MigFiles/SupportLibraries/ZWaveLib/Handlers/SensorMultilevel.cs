@@ -25,10 +25,14 @@ using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {
-    public static class SensorMultilevel
+    public class SensorMultilevel : ICommandClass
     {
+        public byte GetCommandClassId()
+        {
+            return 0x31;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[8];

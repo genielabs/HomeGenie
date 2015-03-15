@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
-using ZWaveLib.Values;
 
-namespace ZWaveLib
+namespace ZWaveLib.Handlers
 {
-    public static class Crc16
+    public class Crc16 : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
         {
-            ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            return 0x56;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        {
+            byte cmdType = message[1];
 
             switch (cmdType) {
             case 0x01:
@@ -19,13 +22,14 @@ namespace ZWaveLib
             return null;
         }
 
-        private static ZWaveEvent GetCrc16EncapEvent(ZWaveNode node, byte[] message)
+        private ZWaveEvent GetCrc16EncapEvent(ZWaveNode node, byte[] message)
         {
             // calculate CRC
+            var messageToCheckLength = message.Length - 2;
             byte[] messageCrc = new byte[2];
-            Array.Copy(message, message.Length - 2 - 1, messageCrc, 0, 2);
-            byte[] toCheck = new byte[message.Length - 7 - 2 - 1];
-            Array.Copy(message, 7, toCheck, 0, message.Length - 7 - 2 - 1);
+            Array.Copy(message, messageToCheckLength, messageCrc, 0, 2);
+            byte[] toCheck = new byte[messageToCheckLength];
+            Array.Copy(message, 0, toCheck, 0, messageToCheckLength);
 
             short crcToCheck = CalculateCrcCcit(toCheck);
             byte[] x = Int16ToBytes(crcToCheck);
@@ -35,13 +39,13 @@ namespace ZWaveLib
                 return null;
             }
 
-            byte[] encapsulatedMessage = new byte[message.Length - 9 - 2 - 1];
-            Array.Copy(message, 9, encapsulatedMessage, 0, message.Length - 9 - 2 - 1);
+            byte[] encapsulatedMessage = new byte[message.Length - 2 - 2];
+            Array.Copy(message, 2, encapsulatedMessage, 0, message.Length - 2 - 2);
 
             return ProcessEncapsulatedMessage(node, encapsulatedMessage);
         }
 
-        private static ZWaveEvent ProcessEncapsulatedMessage(ZWaveNode node, byte[] encapMessage)
+        private ZWaveEvent ProcessEncapsulatedMessage(ZWaveNode node, byte[] encapMessage)
         {
             Console.WriteLine("\nZWaveLib: CRC16 encapsulated message: {0}", Utility.ByteArrayToString(encapMessage));
 
@@ -58,7 +62,7 @@ namespace ZWaveLib
             return nodeEvent;
         }
 
-        private static byte[] Int16ToBytes(Int16 value)
+        private byte[] Int16ToBytes(Int16 value)
         {
             var bytes = BitConverter.GetBytes(value);
             if(BitConverter.IsLittleEndian)
@@ -70,7 +74,7 @@ namespace ZWaveLib
             return bytes;
         }
             
-        private static short CalculateCrcCcit(byte[] args) {
+        private short CalculateCrcCcit(byte[] args) {
             int crc = 0x1D0F;
             int polynomial = 0x1021;
             foreach (byte b in args) {

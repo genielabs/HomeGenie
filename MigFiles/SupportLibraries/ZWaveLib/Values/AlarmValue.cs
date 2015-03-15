@@ -43,36 +43,36 @@ namespace ZWaveLib.Values
         public static AlarmValue Parse(byte[] message)
         {
             AlarmValue alarm = new AlarmValue();
-            alarm.Value = message[10];
+            alarm.Value = message[3];
             //
-            byte cmdClass = message[7];
-            if (cmdClass == (byte)CommandClass.SensorAlarm)
+            byte cmdClass = message[0];
+            if (cmdClass == (byte) CommandClass.SensorAlarm)
             {
-                alarm.Parameter = (ZWaveAlarmType)Enum.Parse(typeof(ZWaveAlarmType), message[10].ToString());
-                alarm.Value = message[11];
+                alarm.Parameter = (ZWaveAlarmType) Enum.Parse(typeof (ZWaveAlarmType), message[3].ToString());
+                alarm.Value = message[4];
             }
             //
             switch (alarm.Parameter)
             {
-            case ZWaveAlarmType.CarbonDioxide:
-                alarm.EventType = EventParameter.AlarmCarbonDioxide;
-                break;
-            case ZWaveAlarmType.CarbonMonoxide:
-                alarm.EventType = EventParameter.AlarmCarbonMonoxide;
-                break;
-            case ZWaveAlarmType.Smoke:
-                alarm.EventType = EventParameter.AlarmSmoke;
-                break;
-            case ZWaveAlarmType.Heat:
-                alarm.EventType = EventParameter.AlarmHeat;
-                break;
-            case ZWaveAlarmType.Flood:
-                alarm.EventType = EventParameter.AlarmFlood;
-                break;
-            //case ZWaveSensorAlarmParameter.GENERIC:
-            default:
-                alarm.EventType = EventParameter.AlarmGeneric;
-                break;
+                case ZWaveAlarmType.CarbonDioxide:
+                    alarm.EventType = EventParameter.AlarmCarbonDioxide;
+                    break;
+                case ZWaveAlarmType.CarbonMonoxide:
+                    alarm.EventType = EventParameter.AlarmCarbonMonoxide;
+                    break;
+                case ZWaveAlarmType.Smoke:
+                    alarm.EventType = EventParameter.AlarmSmoke;
+                    break;
+                case ZWaveAlarmType.Heat:
+                    alarm.EventType = EventParameter.AlarmHeat;
+                    break;
+                case ZWaveAlarmType.Flood:
+                    alarm.EventType = EventParameter.AlarmFlood;
+                    break;
+                //case ZWaveSensorAlarmParameter.GENERIC:
+                default:
+                    alarm.EventType = EventParameter.AlarmGeneric;
+                    break;
             }
             //
             return alarm;

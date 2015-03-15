@@ -21,27 +21,30 @@
  */
 
 using System;
-using ZWaveLib.Values;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ZWaveLib.Handlers
 {
-    public static class WakeUp
+    public class WakeUp : ICommandClass
     {
-        
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x84;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             switch (cmdType)
             {
             case (byte)Command.WakeUpIntervalReport:
-                if (message.Length > 11)
+                if (message.Length > 4)
                 {
-                    uint interval = ((uint)message[9]) << 16;
-                    interval |= (((uint)message[10]) << 8);
-                    interval |= (uint)message[11];
+                    uint interval = ((uint)message[2]) << 16;
+                    interval |= (((uint)message[3]) << 8);
+                    interval |= (uint)message[4];
                     nodeEvent = new ZWaveEvent(node, EventParameter.WakeUpInterval, interval, 0);
                 }
                 break;

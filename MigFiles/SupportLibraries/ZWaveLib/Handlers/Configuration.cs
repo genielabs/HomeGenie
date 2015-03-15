@@ -26,16 +26,21 @@ using System.Threading;
 
 namespace ZWaveLib.Handlers
 {
-    public static class Configuration
+    public class Configuration : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x70;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (message.Length > 11 && cmdType == (byte)Command.ConfigurationReport)
+            byte cmdType = message[1];
+            if (message.Length > 4 && cmdType == (byte)Command.ConfigurationReport)
             {
-                byte paramId = message[9];
-                byte paramLength = message[10];
+                byte paramId = message[2];
+                byte paramLength = message[3];
                 //
                 var nodeConfigParamsLength = GetConfigParamsData(node);
                 if (!nodeConfigParamsLength.ContainsKey(paramId))
@@ -50,7 +55,7 @@ namespace ZWaveLib.Handlers
                 //
                 byte[] bval = new byte[4];
                 // extract bytes value
-                Array.Copy(message, 11, bval, 4 - (int)paramLength, (int)paramLength);
+                Array.Copy(message, 4, bval, 4 - (int)paramLength, (int)paramLength);
                 uint paramval = bval[0];
                 Array.Reverse(bval);
                 // convert it to uint

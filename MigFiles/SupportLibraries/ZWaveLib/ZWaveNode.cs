@@ -105,109 +105,142 @@ namespace ZWaveLib
 
             if (messageLength > 8)
             {
-
-                //byte commandLength = receivedMessage[6];
+                byte commandLength = receivedMessage[6];
                 byte commandClass = receivedMessage[7];
+                var cc = CommandClassFactory.GetCommandClass(commandClass);
+                byte[] message = new byte[commandLength];
+                Array.Copy(receivedMessage, 7, message, 0, commandLength);
+                messageEvent = cc.GetEvent(this, message);
+
+                /*
                 switch (commandClass)
                 {
 
-                case (byte)CommandClass.Basic:
-                    messageEvent = Basic.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Alarm:
-                    messageEvent = Alarm.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorAlarm:
-                    messageEvent = SensorAlarm.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SceneActivation:
-                    messageEvent = SceneActivation.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SwitchBinary:
-                    messageEvent = SwitchBinary.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SwitchMultilevel:
-                    messageEvent = SwitchMultilevel.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorBinary:
-                    messageEvent = SensorBinary.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorMultilevel:
-                    messageEvent = SensorMultilevel.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Meter:
-                    messageEvent = Meter.GetEvent(this, receivedMessage);
-                    break;
+                    case (byte) CommandClass.Basic:
+                        messageEvent = Basic.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.Alarm:
+                        messageEvent = Alarm.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SensorAlarm:
+                        messageEvent = SensorAlarm.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SceneActivation:
+                        messageEvent = SceneActivation.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SwitchBinary:
+                        messageEvent = SwitchBinary.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SwitchMultilevel:
+                        messageEvent = SwitchMultilevel.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SensorBinary:
+                        messageEvent = SensorBinary.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.SensorMultilevel:
+                        messageEvent = SensorMultilevel.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.Meter:
+                        messageEvent = Meter.GetEvent(this, receivedMessage);
+                        break;
 
-                case (byte)CommandClass.ThermostatMode:
-                case (byte)CommandClass.ThermostatFanMode:
-                case (byte)CommandClass.ThermostatFanState:
-                case (byte)CommandClass.ThermostatHeating:
-                case (byte)CommandClass.ThermostatOperatingState:
-                case (byte)CommandClass.ThermostatSetBack: 
-                case (byte)CommandClass.ThermostatSetPoint: 
-                    messageEvent = Thermostat.GetEvent(this, receivedMessage);
-                    break;
+                    case (byte) CommandClass.ThermostatMode:
+                    case (byte) CommandClass.ThermostatFanMode:
+                    case (byte) CommandClass.ThermostatFanState:
+                    case (byte) CommandClass.ThermostatHeating:
+                    case (byte) CommandClass.ThermostatOperatingState:
+                    case (byte) CommandClass.ThermostatSetBack:
+                    case (byte) CommandClass.ThermostatSetPoint:
+                        messageEvent = Thermostat.GetEvent(this, receivedMessage);
+                        break;
 
-                case (byte)CommandClass.UserCode:
-                    messageEvent = UserCode.GetEvent(this, receivedMessage);
-                    break;
+                    case (byte) CommandClass.UserCode:
+                        messageEvent = UserCode.GetEvent(this, receivedMessage);
+                        break;
 
-                case (byte)CommandClass.Association:
-                    messageEvent = Association.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Configuration:
-                    messageEvent = Configuration.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.WakeUp:
-                    messageEvent = WakeUp.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Battery:
-                    messageEvent = Battery.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Hail:
-                    Basic.Get(this);
-                    break;
+                    case (byte) CommandClass.Association:
+                        messageEvent = Association.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.Configuration:
+                        messageEvent = Configuration.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.WakeUp:
+                        messageEvent = WakeUp.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.Battery:
+                        messageEvent = Battery.GetEvent(this, receivedMessage);
+                        break;
+                    case (byte) CommandClass.Hail:
+                        Basic.Get(this);
+                        break;
 
-                case (byte)CommandClass.MultiInstance:
-                    messageEvent = MultiInstance.GetEvent(this, receivedMessage);
-                    break;
+                    case (byte) CommandClass.MultiInstance:
+                        messageEvent = MultiInstance.GetEvent(this, receivedMessage);
+                        break;
 
-                case (byte)CommandClass.Crc16Encap:
-                    messageEvent = Crc16.GetEvent(this, receivedMessage);
-                    break;
-                
-                case (byte)CommandClass.ManufacturerSpecific:
-                    messageEvent = ManufacturerSpecific.GetEvent(this, receivedMessage);
-                    if (messageEvent != null)
-                    {
-                        var specs = (ManufacturerSpecificInfo)messageEvent.Value;
-                        this.ManufacturerId = specs.ManufacturerId;
-                        this.TypeId = specs.TypeId;
-                        this.ProductId = specs.ProductId;
-                        if (ManufacturerSpecificResponse != null)
+                    case (byte) CommandClass.Crc16Encap:
+                        messageEvent = Crc16.GetEvent(this, receivedMessage);
+                        break;
+
+                    case (byte) CommandClass.ManufacturerSpecific:
+                        messageEvent = ManufacturerSpecific.GetEvent(this, receivedMessage);
+                        if (messageEvent != null)
                         {
-                            try
+                            var specs = (ManufacturerSpecificInfo) messageEvent.Value;
+                            this.ManufacturerId = specs.ManufacturerId;
+                            this.TypeId = specs.TypeId;
+                            this.ProductId = specs.ProductId;
+                            if (ManufacturerSpecificResponse != null)
                             {
-                                ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg() {
-                                    NodeId = this.NodeId,
-                                    ManufacturerSpecific = specs
-                                });
-                            }
-                            catch (Exception ex)
-                            {
+                                try
+                                {
+                                    ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg()
+                                    {
+                                        NodeId = this.NodeId,
+                                        ManufacturerSpecific = specs
+                                    });
+                                }
+                                catch (Exception ex)
+                                {
 
-                                Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " + ex.Message + "\n" + ex.StackTrace);
+                                    Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
+                                                      ex.Message + "\n" + ex.StackTrace);
 
+                                }
                             }
                         }
-                    }
-                    break;
-                }
+                        break;
+                }*/
             }
 
             if (messageEvent != null)
             {
+                if (messageEvent.Event == EventParameter.ManufacturerSpecific)
+                {
+                    var specs = (ManufacturerSpecificInfo)messageEvent.Value;
+                    this.ManufacturerId = specs.ManufacturerId;
+                    this.TypeId = specs.TypeId;
+                    this.ProductId = specs.ProductId;
+                    if (ManufacturerSpecificResponse != null)
+                    {
+                        try
+                        {
+                            ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg()
+                            {
+                                NodeId = this.NodeId,
+                                ManufacturerSpecific = specs
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
+                                              ex.Message + "\n" + ex.StackTrace);
+
+                        }
+                    }
+                }
+
                 this.RaiseUpdateParameterEvent(messageEvent.Instance, messageEvent.Event, messageEvent.Value);
             }
             else if (messageLength > 3)

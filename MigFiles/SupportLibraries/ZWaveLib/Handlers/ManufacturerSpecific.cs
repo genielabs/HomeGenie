@@ -20,9 +20,6 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-using ZWaveLib.Values;
-
 namespace ZWaveLib.Handlers
 {
     
@@ -33,19 +30,23 @@ namespace ZWaveLib.Handlers
         public string ProductId { get; set; }
     }
 
-    public static class ManufacturerSpecific
+    public class ManufacturerSpecific : ICommandClass
     {
-        
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x72;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
 
-            if (message.Length > 14)
+            if (message.Length > 7)
             {
-                byte[] manufacturerId = new byte[2] { message[9], message[10] };
-                byte[] typeId = new byte[2] { message[11], message[12] };
-                byte[] productId = new byte[2] { message[13], message[14] };
+                byte[] manufacturerId = new byte[2] { message[2], message[3] };
+                byte[] typeId = new byte[2] { message[4], message[5] };
+                byte[] productId = new byte[2] { message[6], message[7] };
 
                 var manufacturerSpecs = new ManufacturerSpecificInfo() {
                     TypeId = Utility.ByteArrayToString(typeId).Replace(" ", ""),

@@ -598,7 +598,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_MODESET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Thermostat.Mode mode = (Thermostat.Mode)Enum.Parse(typeof(Thermostat.Mode), request.GetOption(0));
+                    Mode mode = (Mode)Enum.Parse(typeof(Mode), request.GetOption(0));
                     //
                     raiseEvent = true;
                     eventParameter = "Thermostat.Mode";
@@ -609,13 +609,13 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
+                    SetPointType mode = (SetPointType)Enum.Parse(typeof(SetPointType), request.GetOption(0));
                     Thermostat.GetSetPoint(node, mode);
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Thermostat.SetPointType mode = (Thermostat.SetPointType)Enum.Parse(typeof(Thermostat.SetPointType), request.GetOption(0));
+                    SetPointType mode = (SetPointType)Enum.Parse(typeof(SetPointType), request.GetOption(0));
                     double temperature = double.Parse(request.GetOption(1).Replace(',', '.'), CultureInfo.InvariantCulture);
                     //
                     raiseEvent = true;
@@ -632,7 +632,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_FANMODESET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Thermostat.FanMode mode = (Thermostat.FanMode)Enum.Parse(typeof(Thermostat.FanMode), request.GetOption(0));
+                    FanMode mode = (FanMode)Enum.Parse(typeof(FanMode), request.GetOption(0));
                     //
                     raiseEvent = true;
                     eventParameter = "Thermostat.FanMode";
@@ -648,7 +648,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_OPERATINGSTATE_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Thermostat.GetOperatingState(node);
+                    ThermostatOperatingState.GetOperatingState(node);
                 }
                 else if(command==Command.USERCODE_SET)
                 {
@@ -1067,19 +1067,19 @@ namespace MIG.Interfaces.HomeAutomation
                 break;
             case EventParameter.ThermostatMode:
                 path = "Thermostat.Mode";
-                value = ((Thermostat.Mode)value).ToString();
+                value = ((Mode)value).ToString();
                 break;
             case EventParameter.ThermostatOperatingState:
                 path = "Thermostat.OperatingState";
-                value = ((Thermostat.OperatingState)value).ToString();
+                value = ((OperatingState)value).ToString();
                 break;
             case EventParameter.ThermostatFanMode:
                 path = "Thermostat.FanMode";
-                value = ((Thermostat.FanMode)value).ToString();
+                value = ((FanMode)value).ToString();
                 break;
             case EventParameter.ThermostatFanState:
                 path = "Thermostat.FanState";
-                value = ((Thermostat.FanState)value).ToString();
+                value = ((FanState)value).ToString();
                 break;
             case EventParameter.ThermostatHeating:
                 path = "Thermostat.Heating";
@@ -1088,7 +1088,7 @@ namespace MIG.Interfaces.HomeAutomation
                 path = "Thermostat.SetBack";
                 break;
             case EventParameter.ThermostatSetPoint:
-                path = "Thermostat.SetPoint." + ((Thermostat.SetPointType)((dynamic)value).Type).ToString();
+                path = "Thermostat.SetPoint." + ((SetPointType)((dynamic)value).Type).ToString();
                 value = ((dynamic)value).Value;
                 break;
             case EventParameter.UserCode:
