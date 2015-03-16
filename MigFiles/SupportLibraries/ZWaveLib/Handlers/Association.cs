@@ -43,13 +43,13 @@ namespace ZWaveLib.Handlers
             byte cmdType = message[1];
             if (message.Length > 5 && cmdType == (byte)Command.AssociationReport)
             {
-                byte groupId = message[9];
+                byte groupId = message[2];
                 byte maxAssociations = message[3];
                 byte numAssociations = message[4]; // it is always zero ?!?
                 string assocNodes = "";
-                if (message.Length > 6)
+                if (message.Length > 4)
                 {
-                    for (int a = 5; a < message.Length - 1; a++)
+                    for (int a = 5; a < message.Length; a++)
                     {
                         assocNodes += message[a] + ",";
                     }
