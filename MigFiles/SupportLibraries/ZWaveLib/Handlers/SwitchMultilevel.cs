@@ -45,14 +45,19 @@ namespace ZWaveLib.Handlers
         
         public static void Set(ZWaveNode node, int value)
         {
-            // same as basic class
-            Basic.Set(node, value);
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.SwitchMultilevel, 
+                (byte)Command.SwitchMultilevelSet, 
+                byte.Parse(value.ToString())
+            });
         }
 
         public static void Get(ZWaveNode node)
         {
-            // same as basic class
-            Basic.Get(node);
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.SwitchMultilevel, 
+                (byte)Command.SwitchMultilevelGet 
+            });
         }
     }
 }

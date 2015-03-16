@@ -570,7 +570,10 @@ namespace MIG.Interfaces.HomeAutomation
                     // here we assume that the commonly used interval is [0-99] for most multilevel switches
                     if (level >= 100) level = 99;
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Basic.Set(node, (byte)level);
+                    if(node.SupportCommandClass(CommandClass.SwitchMultilevel))
+                        SwitchMultilevel.Set(node, (byte)level);
+                    else
+                        Basic.Set(node, (byte)level);
                     SetNodeLevel(node, (byte)level);
                 }
                 else if (command == Command.CONTROL_TOGGLE)
