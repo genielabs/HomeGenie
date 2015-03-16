@@ -177,7 +177,9 @@ namespace ZWaveLib.Handlers
                     instanceCmdClass);
                 return null;
             }
-            return cc.GetEvent(node, instanceMessage);
+            ZWaveEvent zevent = cc.GetEvent(node, instanceMessage);
+            zevent.Instance = instanceNumber;
+            return zevent;
         }
 
         private ZWaveEvent HandleMultiChannelEncapReport(ZWaveNode node, byte[] message)
@@ -189,6 +191,7 @@ namespace ZWaveLib.Handlers
                 return null;
             }
 
+            var instanceNumber = message[2];
             var instanceCmdClass = message[4];
             var instanceMessage = new byte[message.Length - 4]; //TODO
             Array.Copy(message, 4, instanceMessage, 0, message.Length - 4);
@@ -204,7 +207,9 @@ namespace ZWaveLib.Handlers
                     instanceCmdClass);
                 return null;
             }
-            return cc.GetEvent(node, instanceMessage);
+            ZWaveEvent zevent = cc.GetEvent(node, instanceMessage);
+            zevent.Instance = instanceNumber;
+            return zevent;
         }
 
         public static void GetCount(ZWaveNode node, byte commandClass)
