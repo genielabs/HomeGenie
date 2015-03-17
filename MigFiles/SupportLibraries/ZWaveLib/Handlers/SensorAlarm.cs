@@ -27,16 +27,16 @@ namespace ZWaveLib.Handlers
 {
     public class SensorAlarm : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x9C;
+            return CommandClassType.SensorAlarm;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SensorAlarmReport)
+            if (cmdType == (byte)CommandType.SensorAlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);
                 nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);

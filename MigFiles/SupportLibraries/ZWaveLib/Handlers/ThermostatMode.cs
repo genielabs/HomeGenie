@@ -18,16 +18,33 @@
         Away = 0x0D
     }
 
-    class ThermostatMode : ICommandClass
+    public class ThermostatMode : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x40;
+            return CommandClassType.ThermostatMode;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
            return  new ZWaveEvent(node, EventParameter.ThermostatMode, (Mode)message[2], 0);
+        }
+
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClassType.ThermostatMode, 
+                (byte)CommandType.BasicGet
+            });
+        }       
+
+        public static void Set(ZWaveNode node, Mode mode)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClassType.ThermostatMode, 
+                (byte)CommandType.BasicSet, 
+                (byte)mode
+            });
         }
     }
 }

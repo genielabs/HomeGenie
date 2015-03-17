@@ -116,7 +116,7 @@ namespace ZWaveLib
 
         public ZWaveNode GetDevice(byte nodeId)
         {
-            return devices.Find(zn => zn.NodeId == nodeId);
+            return devices.Find(zn => zn.Id == nodeId);
         }
 
         public List<ZWaveNode> Devices
@@ -136,7 +136,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04, /* packet length */
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.ControllerSoftReset,
+                (byte)FunctionType.ControllerSoftReset,
                 0xff, /* nodeid */
                 0x00
             };
@@ -149,7 +149,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04, /* packet length */
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.ControllerSetDefault,
+                (byte)FunctionType.ControllerSetDefault,
                 0xff, /* nodeid */
                 0x00
             };
@@ -162,7 +162,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05, /*packet len */
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.NodeAdd
+                (byte)FunctionType.NodeAdd
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.AddNodeAny | 0x80, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
@@ -181,7 +181,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.NodeAdd
+                (byte)FunctionType.NodeAdd
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.AddNodeStop, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
@@ -199,7 +199,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.NodeRemove
+                (byte)FunctionType.NodeRemove
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.RemoveNodeAny | 0x80, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
@@ -216,7 +216,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x05 /*packet len */,
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.NodeRemove
+                (byte)FunctionType.NodeRemove
             };
             byte[] footer = new byte[] { (byte)NodeFunctionOption.RemoveNodeStop, 0x00, 0x00 };
             byte[] message = new byte[header.Length + footer.Length];
@@ -233,7 +233,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x04,
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.RequestNodeInfo,
+                (byte)FunctionType.RequestNodeInfo,
                 nodeId,
                 0x00
             };
@@ -254,7 +254,7 @@ namespace ZWaveLib
                     (byte)MessageHeader.SOF, /* Start Of Frame */
                     0x04,
                     (byte)MessageType.Request, /* Type of message */
-                    (byte)Function.GetNodeProtocolInfo,
+                    (byte)FunctionType.GetNodeProtocolInfo,
                     nodeId,
                     0x00
                 };
@@ -310,7 +310,7 @@ namespace ZWaveLib
                     //
                     //int msgLength = (int)args.Message[1];
                     var msgType = (MessageType)args.Message[2];
-                    var cmdClass = (args.Message.Length > 3 ? (Function)args.Message[3] : 0);
+                    var fncType = (args.Message.Length > 3 ? (FunctionType)args.Message[3] : 0);
                     byte sourceNodeId = 0;
                     byte nodeOperation = 0;
                     //
@@ -322,12 +322,12 @@ namespace ZWaveLib
                         if (devices.Count == 0)
                             break;
 
-                        switch (cmdClass)
+                        switch (fncType)
                         {
-                        case Function.None:
+                        case FunctionType.None:
                             break;
 
-                        case Function.NodeAdd:
+                        case FunctionType.NodeAdd:
 
                             nodeOperation = args.Message[5];
                             if (nodeOperation == (byte)NodeFunctionStatus.AddNodeAddingSlave)
@@ -340,7 +340,7 @@ namespace ZWaveLib
                                 byte[] nodeInfo = new byte[nodeInfoLength - 2];
                                 Array.Copy(args.Message, 8, nodeInfo, 0, nodeInfoLength - 2);
                                 newNode.NodeInformationFrame = nodeInfo;
-                                RaiseUpdateParameterEvent(newNode, 0, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo));
+                                RaiseUpdateParameterEvent(new ZWaveEvent(newNode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
                                 SaveNodesConfig();
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.AddNodeProtocolDone /* || nodeOperation == (byte)NodeFunctionStatus.AddNodeDone */)
@@ -350,7 +350,7 @@ namespace ZWaveLib
                                     //Console.WriteLine("\n\nADDING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
                                     Thread.Sleep(500);
                                     GetNodeCapabilities(args.Message[6]);
-                                    var newNode = devices.Find(n => n.NodeId == args.Message[6]);
+                                    var newNode = devices.Find(n => n.Id == args.Message[6]);
                                     if (newNode != null) ManufacturerSpecific.Get(newNode);
                                 }
                                 OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd));
@@ -361,7 +361,7 @@ namespace ZWaveLib
                             }
                             break;
 
-                        case Function.NodeRemove:
+                        case FunctionType.NodeRemove:
 
                             nodeOperation = args.Message[5];
                             if (nodeOperation == (byte)NodeFunctionStatus.RemoveNodeRemovingSlave)
@@ -384,10 +384,10 @@ namespace ZWaveLib
                             }
                             break;
 
-                        case Function.ApplicationCommand:
+                        case FunctionType.ApplicationCommand:
 
                             sourceNodeId = args.Message[5];
-                            var node = devices.Find(n => n.NodeId == sourceNodeId);
+                            var node = devices.Find(n => n.Id == sourceNodeId);
                             if (node == null)
                             {
                                 CreateDevice(sourceNodeId, 0x00);
@@ -403,7 +403,7 @@ namespace ZWaveLib
                             }
                             break;
 
-                        case Function.SendData:
+                        case FunctionType.SendData:
 
                             byte commandId = args.Message[4];
                             if (commandId == 0x01) // SEND DATA OK
@@ -426,8 +426,8 @@ namespace ZWaveLib
                                     // Check if node supports WakeUp class, and add message to wake up message queue
                                     if (unsentMessage != null)
                                     {
-                                        var sleepingNode = devices.Find(n => n.NodeId == nodeID);
-                                        if (sleepingNode != null && sleepingNode.SupportCommandClass(CommandClass.WakeUp))
+                                        var sleepingNode = devices.Find(n => n.Id == nodeID);
+                                        if (sleepingNode != null && sleepingNode.SupportCommandClass(CommandClassType.WakeUp))
                                         {
                                             WakeUp.ResendOnWakeUp(sleepingNode, unsentMessage.Message);
                                         }
@@ -436,11 +436,11 @@ namespace ZWaveLib
                             }
                             break;
 
-                        case Function.NodeUpdateInfo:
+                        case FunctionType.NodeUpdateInfo:
 
                             sourceNodeId = args.Message[5];
                             int nifLength = (int)args.Message[6];
-                            var znode = devices.Find(n => n.NodeId == sourceNodeId);
+                            var znode = devices.Find(n => n.Id == sourceNodeId);
                             if (znode != null)
                             {
                                 byte[] nodeInfo = new byte[nifLength - 2];
@@ -448,8 +448,8 @@ namespace ZWaveLib
                                 Array.Copy(args.Message, 7, nodeInfo, 0, nifLength - 2);
                                 znode.NodeInformationFrame = nodeInfo;
                                 //
-                                RaiseUpdateParameterEvent(znode, 0, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo));
-                                RaiseUpdateParameterEvent(znode, 0, EventParameter.WakeUpNotify, "1");
+                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
+                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.WakeUpNotify, "1", 0));
                                 SaveNodesConfig();
                             }
                             break;
@@ -464,18 +464,18 @@ namespace ZWaveLib
 
                     case MessageType.Response:
 
-                        switch (cmdClass)
+                        switch (fncType)
                         {
-                        case Function.DiscoveryNodes:
+                        case FunctionType.DiscoveryNodes:
                             MessageResponseNodeBitMaskHandler(args.Message);
                             break;
-                        case Function.GetNodeProtocolInfo:
+                        case FunctionType.GetNodeProtocolInfo:
                             MessageResponseNodeCapabilityHandler(args.Message);
                             break;
-                        case Function.RequestNodeInfo:
+                        case FunctionType.RequestNodeInfo:
                             // TODO: shall we do something here?
                             break;
-                        case Function.SendData:
+                        case FunctionType.SendData:
                             // TODO: shall we do something here?
                             break;
                         default:
@@ -522,7 +522,7 @@ namespace ZWaveLib
             {
                 try
                 {
-                    var node = devices.Find(n => n.NodeId == currentCommandTargetNode);
+                    var node = devices.Find(n => n.Id == currentCommandTargetNode);
                     // TODO: node == null should not happen, deprecate this if block
                     if (node == null)
                     {
@@ -554,7 +554,7 @@ namespace ZWaveLib
             var nodeList = ExtractNodesFromBitMask(receivedMessage);
             foreach (byte i in nodeList)
             {
-                var node = devices.Find(n => n.NodeId == i);
+                var node = devices.Find(n => n.Id == i);
                 if (node == null)
                 {
                     //Console.WriteLine("Z-Wave Adding node " + i + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
@@ -570,7 +570,7 @@ namespace ZWaveLib
                 ZWaveNode nextNode = devices.Find(zn => zn.BasicClass == 0x00);
                 if (nextNode != null)
                 {
-                    GetNodeCapabilities(nextNode.NodeId);
+                    GetNodeCapabilities(nextNode.Id);
                 }
                 else
                 {
@@ -610,13 +610,13 @@ namespace ZWaveLib
 
         private void RemoveDevice(byte nodeId)
         {
-            var node = devices.Find(n => n.NodeId == nodeId);
+            var node = devices.Find(n => n.Id == nodeId);
             if (node != null)
             {
-                node.UpdateNodeParameter -= znode_UpdateNodeParameter;
+                node.ParameterChanged -= znode_ParameterChanged;
                 node.ManufacturerSpecificResponse -= znode_ManufacturerSpecificResponse;
             }
-            devices.RemoveAll(zn => zn.NodeId == nodeId);
+            devices.RemoveAll(zn => zn.Id == nodeId);
             OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeRemoved));
         }
 
@@ -633,7 +633,7 @@ namespace ZWaveLib
                     node = new ZWaveNode(nodeId, zwavePort, genericClass);
                     break;
             }
-            node.UpdateNodeParameter += znode_UpdateNodeParameter;
+            node.ParameterChanged += znode_ParameterChanged;
             node.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;
             //
             OnControllerEvent(new ControllerEventArgs(nodeId, ControllerStatus.NodeAdded));
@@ -675,7 +675,7 @@ namespace ZWaveLib
             for (int n = 0; n < devices.Count; n++)
             {
                 nodesConfig.Add(new ZWaveNodeConfig() {
-                    NodeId = devices[n].NodeId,
+                    NodeId = devices[n].Id,
                     NodeInformationFrame = devices[n].NodeInformationFrame
                 });
             }
@@ -708,9 +708,10 @@ namespace ZWaveLib
             }
         }
 
-        private void znode_UpdateNodeParameter(object sender, UpdateNodeParameterEventArgs upargs)
+        private void znode_ParameterChanged(object sender, ZWaveEvent eventData)
         {
-            RaiseUpdateParameterEvent((ZWaveNode)sender, upargs.ParameterId, upargs.ParameterName, upargs.Value);
+            // Route node event
+            RaiseUpdateParameterEvent(eventData);
         }
 
         #endregion

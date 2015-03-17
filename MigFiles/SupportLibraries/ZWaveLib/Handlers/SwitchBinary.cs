@@ -26,16 +26,16 @@ namespace ZWaveLib.Handlers
 {
     public class SwitchBinary : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x25;
+            return CommandClassType.SwitchBinary;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SwitchBinaryReport || cmdType == (byte)Command.SwitchBinarySet) // some devices use this instead of report
+            if (cmdType == (byte)CommandType.SwitchBinaryReport || cmdType == (byte)CommandType.SwitchBinarySet) // some devices use this instead of report
             {
                 int levelValue = (int)message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);

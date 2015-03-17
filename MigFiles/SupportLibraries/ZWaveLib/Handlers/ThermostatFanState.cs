@@ -20,16 +20,24 @@
         State15 = 0x0F
     }
 
-    class ThermostatFanState :ICommandClass
+    public class ThermostatFanState :ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x45;
+            return CommandClassType.ThermostatFanState;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             return new ZWaveEvent(node, EventParameter.ThermostatFanState, message[2], 0);
+        }
+        
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClassType.ThermostatFanState, 
+                (byte)CommandType.BasicGet
+            });
         }
     }
 }

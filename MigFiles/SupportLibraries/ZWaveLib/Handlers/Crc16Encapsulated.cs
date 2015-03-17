@@ -3,24 +3,26 @@ using System.Linq;
 
 namespace ZWaveLib.Handlers
 {
-    public class Crc16 : ICommandClass
+    public class Crc16Encapsulated : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x56;
+            return CommandClassType.Crc16Encapsulated;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
+            ZWaveEvent zevent = null;
             byte cmdType = message[1];
-
             switch (cmdType) {
             case 0x01:
-                return GetCrc16EncapEvent(node, message);
+                zevent = GetCrc16EncapEvent(node, message);
                 break;
             }
-            return null;
+            return zevent;
         }
+
+        #region Private Helpers
 
         private ZWaveEvent GetCrc16EncapEvent(ZWaveNode node, byte[] message)
         {
@@ -55,7 +57,7 @@ namespace ZWaveLib.Handlers
             byte cmdType = encapMessage[1];
 
             ZWaveEvent nodeEvent = null;
-            if (cmdClass == (byte)CommandClass.SensorBinary && cmdType == (byte)Command.SensorBinaryReport)
+            if (cmdClass == (byte)CommandClassType.SensorBinary && cmdType == (byte)CommandType.SensorBinaryReport)
             {
                 nodeEvent = new ZWaveEvent(node, EventParameter.Generic, encapMessage[2], 0);
             }
@@ -92,5 +94,8 @@ namespace ZWaveLib.Handlers
             crc &= 0xffff;
             return (short) crc;
         }
+
+        #endregion
+
     }
 }

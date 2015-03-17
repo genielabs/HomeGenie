@@ -66,7 +66,7 @@ namespace ZWaveLib
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 (byte)(request.Length + 7) /*packet len */,
                 (byte)MessageType.Request, /* Type of message */
-                (byte)Function.SendData /* func send data */,
+                (byte)FunctionType.SendData /* func send data */,
                 nodeId,
                 (byte)(request.Length)
             };

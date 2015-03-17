@@ -1,10 +1,10 @@
 ﻿namespace ZWaveLib.Handlers
 {
-    class ThermostatHeating : ICommandClass
+    public class ThermostatHeating : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x38;
+            return CommandClassType.ThermostatHeating;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)

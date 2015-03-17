@@ -27,16 +27,16 @@ namespace ZWaveLib.Handlers
 {
     public class SceneActivation : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x2B;
+            return CommandClassType.SceneActivation;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SceneActivationSet)
+            if (cmdType == (byte)CommandType.SceneActivationSet)
             {
                 nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[2], 0);
             }

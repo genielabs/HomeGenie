@@ -32,15 +32,14 @@ namespace ZWaveLib.Handlers
 
     public class ManufacturerSpecific : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x72;
+            return CommandClassType.ManufacturerSpecific;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[1];
 
             if (message.Length > 7)
             {
@@ -65,12 +64,12 @@ namespace ZWaveLib.Handlers
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x09 /*packet len */,
-                (byte)MessageType.Request, /* Type of message */
-                0x13 /* func send data */,
-                node.NodeId,
+                (byte)MessageType.Request,
+                (byte)FunctionType.SendData,
+                node.Id,
                 0x02,
-                (byte)CommandClass.ManufacturerSpecific,
-                (byte)Command.ManufacturerSpecificGet,
+                (byte)CommandClassType.ManufacturerSpecific,
+                (byte)CommandType.ManufacturerSpecificGet,
                 0x05 /* report ?!? */,
                 0x01 | 0x04,
                 0x00

@@ -26,16 +26,16 @@ namespace ZWaveLib.Handlers
 {
     public class Meter : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x32;
+            return CommandClassType.Meter;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.MeterReport)
+            if (cmdType == (byte)CommandType.MeterReport)
             {
                 EnergyValue energy = EnergyValue.Parse(message);
                 nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
@@ -45,8 +45,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node, byte scaleType)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterGet,
+                (byte)CommandClassType.Meter, 
+                (byte)CommandType.MeterGet,
                 scaleType
             });
         }
@@ -54,16 +54,16 @@ namespace ZWaveLib.Handlers
         public static void GetSupported(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterSupportedGet
+                (byte)CommandClassType.Meter, 
+                (byte)CommandType.MeterSupportedGet
             });
         }
 
         public static void Reset(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterReset
+                (byte)CommandClassType.Meter, 
+                (byte)CommandType.MeterReset
             });
         }
     }

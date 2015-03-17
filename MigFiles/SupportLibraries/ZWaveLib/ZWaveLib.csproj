@@ -57,7 +57,6 @@
     <Compile Include="Handlers\SensorAlarm.cs" />
     <Compile Include="Handlers\SensorMultilevel.cs" />
     <Compile Include="Handlers\SceneActivation.cs" />
-    <Compile Include="Handlers\Thermostat.cs" />
     <Compile Include="Handlers\Meter.cs" />
     <Compile Include="Handlers\Configuration.cs" />
     <Compile Include="Handlers\Association.cs" />
@@ -75,8 +74,11 @@
     <Compile Include="Handlers\UserCode.cs" />
     <Compile Include="Values\ZWaveValue.cs" />
     <Compile Include="ZWaveEvent.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="Handlers\Crc16.cs" />
+    <Compile Include="Handlers\Crc16Encapsulated.cs" />
+    <Compile Include="Enums\GenericType.cs" />
+    <Compile Include="Enums\CommandType.cs" />
+    <Compile Include="Enums\CommandClassType.cs" />
+    <Compile Include="Enums\FunctionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -93,4 +95,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
 </Project>

@@ -28,16 +28,16 @@ namespace ZWaveLib.Handlers
 {
     public class Configuration : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x70;
+            return CommandClassType.Configuration;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (message.Length > 4 && cmdType == (byte)Command.ConfigurationReport)
+            if (message.Length > 4 && cmdType == (byte)CommandType.ConfigurationReport)
             {
                 byte paramId = message[2];
                 byte paramLength = message[3];
@@ -56,11 +56,11 @@ namespace ZWaveLib.Handlers
                 byte[] bval = new byte[4];
                 // extract bytes value
                 Array.Copy(message, 4, bval, 4 - (int)paramLength, (int)paramLength);
-                uint paramval = bval[0];
+                uint paramValue = bval[0];
                 Array.Reverse(bval);
                 // convert it to uint
-                paramval = BitConverter.ToUInt32(bval, 0);
-                nodeEvent = new ZWaveEvent(node, EventParameter.Configuration, paramval, paramId);
+                paramValue = BitConverter.ToUInt32(bval, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Configuration, paramValue, paramId);
             }
             return nodeEvent;
         }
@@ -82,26 +82,13 @@ namespace ZWaveLib.Handlers
             {
                 valueLength = nodeConfigParamsLength[parameter];
             }
-            //Console.WriteLine("GOT Parameter Length: " + valuelen);
             //
-            //byte[] value = new byte[valuelen]; // { (byte)intvalue };//BitConverter.GetBytes(Int32.Parse(intvalue));
             byte[] value32 = BitConverter.GetBytes(paramValue);
             Array.Reverse(value32);
-            //int curbyte = valuelen - 1;
-            //for (int x = 0; x < value32.Length && curbyte >= 0; x++)
-            //{
-            //    value[curbyte--] = value32[x];
-            //}
-            ////if (value32[0] != 0 && valuelen > 1)
-            ////{
-            ////    value[0] = value32[0];
-            ////}
-            ////
-            //Console.WriteLine("\n\n\nCOMPUTED VALUE: " + zp.ByteArrayToString(value32) + "\n->" + zp.ByteArrayToString(BitConverter.GetBytes(intvalue)) + "\n\n");
             //
             byte[] msg = new byte[4 + valueLength];
-            msg[0] = (byte)CommandClass.Configuration;
-            msg[1] = (byte)Command.ConfigurationSet;
+            msg[0] = (byte)CommandClassType.Configuration;
+            msg[1] = (byte)CommandType.ConfigurationSet;
             msg[2] = parameter;
             msg[3] = (byte)valueLength;
             switch (valueLength)
@@ -122,8 +109,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node, byte parameter)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Configuration, 
-                (byte)Command.ConfigurationGet,
+                (byte)CommandClassType.Configuration, 
+                (byte)CommandType.ConfigurationGet,
                 parameter
             });
         }

@@ -1,5 +1,6 @@
 ﻿using System.Dynamic;
 using ZWaveLib.Values;
+using System.Collections.Generic;
 
 namespace ZWaveLib.Handlers
 {
@@ -21,11 +22,11 @@ namespace ZWaveLib.Handlers
         HeatingAway = 0x0D
     }
 
-    class ThermostatSetPoint : ICommandClass
+    public class ThermostatSetPoint : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x43;
+            return CommandClassType.ThermostatSetPoint;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -44,7 +45,29 @@ namespace ZWaveLib.Handlers
                 : zvalue.Value);
             return new ZWaveEvent(node, EventParameter.ThermostatSetPoint, ptype, 0);
         }
-        
+                
+        public static void Get(ZWaveNode node, SetPointType ptype)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClassType.ThermostatSetPoint, 
+                (byte)CommandType.ThermostatSetPointGet,
+                (byte)ptype
+            });
+        }
+
+        public static void Set(ZWaveNode node, SetPointType ptype, double temperature)
+        {
+            List<byte> message = new List<byte>();
+            message.AddRange(new byte[] { 
+                (byte)CommandClassType.ThermostatSetPoint, 
+                (byte)CommandType.ThermostatSetPointSet, 
+                (byte)ptype
+            });
+            var setPoint = ThermostatSetPoint.GetSetPointData(node);
+            message.AddRange(ZWaveValue.GetValueBytes(temperature, setPoint.Precision, setPoint.Scale, setPoint.Size));
+            node.SendRequest(message.ToArray());
+        }
+
         public static ZWaveValue GetSetPointData(ZWaveNode node)
         {
             if (!node.Data.ContainsKey("SetPoint"))
@@ -53,5 +76,6 @@ namespace ZWaveLib.Handlers
             }
             return (ZWaveValue)node.Data["SetPoint"];
         }
+
     }
 }

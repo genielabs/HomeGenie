@@ -26,16 +26,16 @@ namespace ZWaveLib.Handlers
 {
     public class SwitchMultilevel : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x26;
+            return CommandClassType.SwitchMultilevel;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SwitchMultilevelReport || cmdType == (byte)Command.SwitchMultilevelSet) // some devices use this instead of report
+            if (cmdType == (byte)CommandType.SwitchMultilevelReport || cmdType == (byte)CommandType.SwitchMultilevelSet) // some devices use this instead of report
             {
                 int levelValue = (int)message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
@@ -46,8 +46,8 @@ namespace ZWaveLib.Handlers
         public static void Set(ZWaveNode node, int value)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.SwitchMultilevel, 
-                (byte)Command.SwitchMultilevelSet, 
+                (byte)CommandClassType.SwitchMultilevel, 
+                (byte)CommandType.SwitchMultilevelSet, 
                 byte.Parse(value.ToString())
             });
         }
@@ -55,8 +55,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.SwitchMultilevel, 
-                (byte)Command.SwitchMultilevelGet 
+                (byte)CommandClassType.SwitchMultilevel, 
+                (byte)CommandType.SwitchMultilevelGet 
             });
         }
     }

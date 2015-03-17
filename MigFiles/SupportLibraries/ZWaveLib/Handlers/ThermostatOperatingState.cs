@@ -22,9 +22,9 @@
 
     public class ThermostatOperatingState : ICommandClass
     {
-        public byte GetCommandClassId()
+        public CommandClassType GetCommandClassId()
         {
-            return 0x42;
+            return CommandClassType.ThermostatOperatingState;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -35,8 +35,8 @@
         public static void GetOperatingState(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.ThermostatOperatingState, 
-                (byte)Command.BasicGet
+                (byte)CommandClassType.ThermostatOperatingState, 
+                (byte)CommandType.BasicGet
             });
         }
     }
