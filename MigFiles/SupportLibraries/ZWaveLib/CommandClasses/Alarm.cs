@@ -20,33 +20,29 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public static class SensorBinary
+    public class Alarm : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public CommandClass GetClassId()
+        {
+            return CommandClass.Alarm;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (cmdType == (byte)Command.SensorBinaryReport)
+            byte cmdType = message[1];
+            if (cmdType == (byte)Command.AlarmReport)
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[9], 0);
+                var alarm = AlarmValue.Parse(message);
+                nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
             }
             return nodeEvent;
         }
-        
-        public static void Get(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.SensorBinary, 
-                (byte)Command.SensorBinaryGet 
-            });
-        }
+    
     }
 }
-
-
 

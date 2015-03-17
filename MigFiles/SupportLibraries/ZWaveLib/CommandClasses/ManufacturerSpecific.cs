@@ -20,10 +20,7 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-using ZWaveLib.Values;
-
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     
     public class ManufacturerSpecificInfo
@@ -33,19 +30,22 @@ namespace ZWaveLib.Handlers
         public string ProductId { get; set; }
     }
 
-    public static class ManufacturerSpecific
+    public class ManufacturerSpecific : ICommandClass
     {
-        
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public CommandClass GetClassId()
+        {
+            return CommandClass.ManufacturerSpecific;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
 
-            if (message.Length > 14)
+            if (message.Length > 7)
             {
-                byte[] manufacturerId = new byte[2] { message[9], message[10] };
-                byte[] typeId = new byte[2] { message[11], message[12] };
-                byte[] productId = new byte[2] { message[13], message[14] };
+                byte[] manufacturerId = new byte[2] { message[2], message[3] };
+                byte[] typeId = new byte[2] { message[4], message[5] };
+                byte[] productId = new byte[2] { message[6], message[7] };
 
                 var manufacturerSpecs = new ManufacturerSpecificInfo() {
                     TypeId = Utility.ByteArrayToString(typeId).Replace(" ", ""),
@@ -64,9 +64,9 @@ namespace ZWaveLib.Handlers
             byte[] message = new byte[] {
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x09 /*packet len */,
-                (byte)MessageType.Request, /* Type of message */
-                0x13 /* func send data */,
-                node.NodeId,
+                (byte)MessageType.Request,
+                (byte)Function.SendData,
+                node.Id,
                 0x02,
                 (byte)CommandClass.ManufacturerSpecific,
                 (byte)Command.ManufacturerSpecificGet,

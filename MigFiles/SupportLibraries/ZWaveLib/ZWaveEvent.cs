@@ -75,14 +75,15 @@ namespace ZWaveLib
     public class ZWaveEvent
     {
         public ZWaveNode Node;
-        public EventParameter Event;
+        public EventParameter Parameter;
         public object Value;
         public int Instance;
+        public ZWaveEvent NestedEvent;
 
         public ZWaveEvent(ZWaveNode node, EventParameter eventType, object eventValue, int instance)
         {
             this.Node = node;
-            this.Event = eventType;
+            this.Parameter = eventType;
             this.Value = eventValue;
             this.Instance = instance;
         }

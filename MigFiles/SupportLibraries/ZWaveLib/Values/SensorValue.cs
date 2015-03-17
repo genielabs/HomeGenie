@@ -67,9 +67,9 @@ namespace ZWaveLib.Values
         {
             SensorValue sensor = new SensorValue();
             //
-            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 11);
+            ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 4);
             //
-            byte key = message[9];
+            byte key = message[2];
             if (key == (byte)ZWaveSensorParameter.Temperature)
             {
                 sensor.Parameter = ZWaveSensorParameter.Temperature;

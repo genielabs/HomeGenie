@@ -21,30 +21,29 @@
  */
 
 using System;
+using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public static class Battery
+    public class SceneActivation : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public CommandClass GetClassId()
+        {
+            return CommandClass.SceneActivation;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (message.Length > 7 && cmdType == (byte)Command.BatteryReport) // Battery Report
+            byte cmdType = message[1];
+            if (cmdType == (byte)Command.SceneActivationSet)
             {
-                int batteryLevel = message[9];
-                nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[2], 0);
             }
             return nodeEvent;
         }
 
-        public static void Get(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Battery, 
-                (byte)Command.BatteryGet 
-            });
-        }
     }
 }
+
 
