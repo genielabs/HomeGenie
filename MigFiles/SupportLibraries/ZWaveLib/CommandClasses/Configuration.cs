@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     public class Configuration : ICommandClass
     {

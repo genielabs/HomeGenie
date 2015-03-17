@@ -20,44 +20,30 @@
  *     Project Homepage: http://homegenie.it
  */
 
-namespace ZWaveLib.Handlers
+using System;
+using ZWaveLib.Values;
+
+namespace ZWaveLib.CommandClasses
 {
-    public class Basic : ICommandClass
+    public class SceneActivation : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.Basic;
+            return CommandClass.SceneActivation;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
+            if (cmdType == (byte)Command.SceneActivationSet)
             {
-                int levelValue = (int)message[2];
-                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[2], 0);
             }
             return nodeEvent;
         }
 
-        public static void Set(ZWaveNode node, int value)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicSet, 
-                byte.Parse(value.ToString())
-            });
-        }
-
-        public static void Get(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet 
-            });
-        }
-
     }
 }
+
 

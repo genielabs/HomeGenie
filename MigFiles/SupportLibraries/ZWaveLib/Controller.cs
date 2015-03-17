@@ -28,7 +28,7 @@ using System.Threading;
 using System.Reflection;
 using System.Xml.Serialization;
 using System.IO;
-using ZWaveLib.Handlers;
+using ZWaveLib.CommandClasses;
 using ZWaveLib.Values;
 
 namespace ZWaveLib

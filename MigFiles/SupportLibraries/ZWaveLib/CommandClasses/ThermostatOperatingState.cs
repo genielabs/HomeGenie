@@ -1,4 +1,4 @@
-﻿namespace ZWaveLib.Handlers
+﻿namespace ZWaveLib.CommandClasses
 {
     public enum OperatingState
     {

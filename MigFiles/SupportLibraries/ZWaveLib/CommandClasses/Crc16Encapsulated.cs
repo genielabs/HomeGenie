@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     public class Crc16Encapsulated : ICommandClass
     {
