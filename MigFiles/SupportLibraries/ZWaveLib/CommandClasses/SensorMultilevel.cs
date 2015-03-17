@@ -20,29 +20,46 @@
  *     Project Homepage: http://homegenie.it
  */
 
+using System;
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class Alarm : ICommandClass
+    public class SensorMultilevel : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.Alarm;
+            return CommandClass.SensorMultilevel;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.AlarmReport)
+            if (cmdType == (byte)Command.SensorMultilevelReport)
             {
-                var alarm = AlarmValue.Parse(message);
-                nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
+                var sensor = SensorValue.Parse(message);
+                if (sensor.Parameter == ZWaveSensorParameter.Unknown)
+                {
+                    byte key = message[2];
+                    nodeEvent = new ZWaveEvent(node, EventParameter.Generic, sensor.Value, 0);
+                    Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
+                }
+                else
+                {
+                    nodeEvent = new ZWaveEvent(node, sensor.EventType, sensor.Value, 0);
+                }
             }
             return nodeEvent;
         }
-    
+        
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.SensorMultilevel, 
+                (byte)Command.SensorMultilevelGet 
+            });
+        }
+
     }
 }
-

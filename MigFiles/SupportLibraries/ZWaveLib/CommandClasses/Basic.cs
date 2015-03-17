@@ -20,46 +20,44 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-using ZWaveLib.Values;
-
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class SensorMultilevel : ICommandClass
+    public class Basic : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.SensorMultilevel;
+            return CommandClass.Basic;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SensorMultilevelReport)
+            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
             {
-                var sensor = SensorValue.Parse(message);
-                if (sensor.Parameter == ZWaveSensorParameter.Unknown)
-                {
-                    byte key = message[2];
-                    nodeEvent = new ZWaveEvent(node, EventParameter.Generic, sensor.Value, 0);
-                    Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
-                }
-                else
-                {
-                    nodeEvent = new ZWaveEvent(node, sensor.EventType, sensor.Value, 0);
-                }
+                int levelValue = (int)message[2];
+                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
             }
             return nodeEvent;
         }
-        
+
+        public static void Set(ZWaveNode node, int value)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Basic, 
+                (byte)Command.BasicSet, 
+                byte.Parse(value.ToString())
+            });
+        }
+
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.SensorMultilevel, 
-                (byte)Command.SensorMultilevelGet 
+                (byte)CommandClass.Basic, 
+                (byte)Command.BasicGet 
             });
         }
 
     }
 }
+

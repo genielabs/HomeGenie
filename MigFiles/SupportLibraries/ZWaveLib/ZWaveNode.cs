@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
 using System.Linq;
-using ZWaveLib.Handlers;
+using ZWaveLib.CommandClasses;
 using ZWaveLib.Values;
 
 namespace ZWaveLib

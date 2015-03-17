@@ -23,7 +23,7 @@
 using System;
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     public class MultiInstance : ICommandClass
     {

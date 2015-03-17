@@ -2,7 +2,7 @@
 using ZWaveLib.Values;
 using System.Collections.Generic;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     public enum SetPointType
     {

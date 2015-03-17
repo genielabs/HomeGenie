@@ -22,50 +22,27 @@
 
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class Meter : ICommandClass
+    public class Alarm : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.Meter;
+            return CommandClass.Alarm;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.MeterReport)
+            if (cmdType == (byte)Command.AlarmReport)
             {
-                EnergyValue energy = EnergyValue.Parse(message);
-                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
+                var alarm = AlarmValue.Parse(message);
+                nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
             }
             return nodeEvent;
         }
-        public static void Get(ZWaveNode node, byte scaleType)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterGet,
-                scaleType
-            });
-        }
-
-        public static void GetSupported(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterSupportedGet
-            });
-        }
-
-        public static void Reset(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterReset
-            });
-        }
+    
     }
 }
 

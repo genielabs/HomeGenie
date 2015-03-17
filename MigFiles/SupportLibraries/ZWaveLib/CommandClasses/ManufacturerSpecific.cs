@@ -20,7 +20,7 @@
  *     Project Homepage: http://homegenie.it
  */
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     
     public class ManufacturerSpecificInfo

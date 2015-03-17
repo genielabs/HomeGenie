@@ -34,7 +34,7 @@ using LibUsbDotNet.Main;
 using ZWaveLib;
 
 using MIG.Interfaces.HomeAutomation.Commons;
-using ZWaveLib.Handlers;
+using ZWaveLib.CommandClasses;
 
 namespace MIG.Interfaces.HomeAutomation
 {

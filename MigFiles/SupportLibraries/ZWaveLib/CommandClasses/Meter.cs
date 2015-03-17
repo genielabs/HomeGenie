@@ -20,43 +20,50 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
+using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class SwitchMultilevel : ICommandClass
+    public class Meter : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.SwitchMultilevel;
+            return CommandClass.Meter;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SwitchMultilevelReport || cmdType == (byte)Command.SwitchMultilevelSet) // some devices use this instead of report
+            if (cmdType == (byte)Command.MeterReport)
             {
-                int levelValue = (int)message[2];
-                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
+                EnergyValue energy = EnergyValue.Parse(message);
+                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
             }
             return nodeEvent;
         }
-        
-        public static void Set(ZWaveNode node, int value)
+        public static void Get(ZWaveNode node, byte scaleType)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.SwitchMultilevel, 
-                (byte)Command.SwitchMultilevelSet, 
-                byte.Parse(value.ToString())
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterGet,
+                scaleType
             });
         }
 
-        public static void Get(ZWaveNode node)
+        public static void GetSupported(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.SwitchMultilevel, 
-                (byte)Command.SwitchMultilevelGet 
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterSupportedGet
+            });
+        }
+
+        public static void Reset(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Meter, 
+                (byte)Command.MeterReset
             });
         }
     }

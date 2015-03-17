@@ -20,39 +20,33 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class SwitchBinary : ICommandClass
+    public class Battery : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.SwitchBinary;
+            return CommandClass.Battery;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SwitchBinaryReport || cmdType == (byte)Command.SwitchBinarySet) // some devices use this instead of report
+            if (message.Length > 0 && cmdType == (byte)Command.BatteryReport) // Battery Report
             {
-                int levelValue = (int)message[2];
-                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
+                int batteryLevel = message[2];
+                nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
             }
             return nodeEvent;
-        }
-                
-        public static void Set(ZWaveNode node, int value)
-        {
-            // same as basic class
-            Basic.Set(node, value);
         }
 
         public static void Get(ZWaveNode node)
         {
-            // same as basic class
-            Basic.Get(node);
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Battery, 
+                (byte)Command.BatteryGet 
+            });
         }
     }
 }

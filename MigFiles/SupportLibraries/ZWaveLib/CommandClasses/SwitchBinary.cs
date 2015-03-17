@@ -21,37 +21,39 @@
  */
 
 using System;
-using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class SensorBinary : ICommandClass
+    public class SwitchBinary : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.SensorBinary;
+            return CommandClass.SwitchBinary;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SensorBinaryReport)
+            if (cmdType == (byte)Command.SwitchBinaryReport || cmdType == (byte)Command.SwitchBinarySet) // some devices use this instead of report
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[2], 0);
+                int levelValue = (int)message[2];
+                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
             }
             return nodeEvent;
         }
-        
+                
+        public static void Set(ZWaveNode node, int value)
+        {
+            // same as basic class
+            Basic.Set(node, value);
+        }
+
         public static void Get(ZWaveNode node)
         {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.SensorBinary, 
-                (byte)Command.SensorBinaryGet 
-            });
+            // same as basic class
+            Basic.Get(node);
         }
     }
 }
-
-
 

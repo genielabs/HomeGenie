@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
     public class Crc16Encapsulated : ICommandClass
     {
@@ -51,16 +51,16 @@ namespace ZWaveLib.Handlers
         {
             Console.WriteLine("\nZWaveLib: CRC16 encapsulated message: {0}", Utility.ByteArrayToString(encapMessage));
 
-            // TODO: properly handle encapsulated message
-
             byte cmdClass = encapMessage[0];
-            byte cmdType = encapMessage[1];
 
             ZWaveEvent nodeEvent = null;
-            if (cmdClass == (byte)CommandClass.SensorBinary && cmdType == (byte)Command.SensorBinaryReport)
+            var cc = CommandClassFactory.GetCommandClass(cmdClass);
+            if (cc == null)
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, encapMessage[2], 0);
+                Console.WriteLine("\nZWaveLib: Can't find CommandClass handler for command class {0}", cmdClass);
+                return null;
             }
+            nodeEvent = cc.GetEvent(node, encapMessage);
             return nodeEvent;
         }
 

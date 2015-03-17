@@ -23,27 +23,35 @@
 using System;
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public class SceneActivation : ICommandClass
+    public class SensorBinary : ICommandClass
     {
         public CommandClass GetClassId()
         {
-            return CommandClass.SceneActivation;
+            return CommandClass.SensorBinary;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.SceneActivationSet)
+            if (cmdType == (byte)Command.SensorBinaryReport)
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[2], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[2], 0);
             }
             return nodeEvent;
         }
-
+        
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.SensorBinary, 
+                (byte)Command.SensorBinaryGet 
+            });
+        }
     }
 }
+
 
 
