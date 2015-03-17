@@ -2,11 +2,11 @@
     "Commands" : [
         {
             "Command": "Control.On",
-            "Aliases": [ "w??cz", "ON" ]
+            "Aliases": [ "włącz", "ON" ]
         },
         {
             "Command": "Control.Off",
-            "Aliases": [ "wy??cz", "OFF" ]
+            "Aliases": [ "wyłącz", "OFF" ]
         },
         {
             "Command": "Control.Level",
@@ -14,7 +14,7 @@
         },
         {
             "Command": "Control.Toggle",
-            "Aliases": [ "prze??cz" ]
+            "Aliases": [ "przełącz" ]
         },
         {
             "Command": "Control.Run",
@@ -28,11 +28,11 @@
     "Types" : [
         {
             "Type": "Light,Dimmer",
-            "Aliases": [ "wszystkie ?wiat?a", "?wiat?a", "ka?de ?wiat?o" ]
+            "Aliases": [ "wszystkie światła", "światła", "każde światło" ]
         },
         {
             "Type": "Switch",
-            "Aliases": [ "wszystkie prze??czniki", "prze??czniki", "ka?dy prze??cznik" ]
+            "Aliases": [ "wszystkie przełączniki", "przełączniki", "każdy przełącznik" ]
         }
     ]
 }

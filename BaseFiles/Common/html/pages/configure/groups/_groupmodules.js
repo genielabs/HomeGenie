@@ -398,9 +398,6 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
             if (groupmodules.Modules[m].Domain == 'HomeAutomation.ZWave') {
                 address_label = "Node";
             }
-            else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.RaspiGPIO') {
-                address_label = "GPIO";
-            }
             else if (groupmodules.Modules[m].Domain == 'EmbeddedSystems.Weeco4mGPIO') {
                 address_label = "GPIO";
             }
