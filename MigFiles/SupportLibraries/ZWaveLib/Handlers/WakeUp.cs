@@ -28,9 +28,9 @@ namespace ZWaveLib.Handlers
 {
     public class WakeUp : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.WakeUp;
+            return CommandClass.WakeUp;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -39,7 +39,7 @@ namespace ZWaveLib.Handlers
             byte cmdType = message[1];
             switch (cmdType)
             {
-            case (byte)CommandType.WakeUpIntervalReport:
+            case (byte)Command.WakeUpIntervalReport:
                 if (message.Length > 4)
                 {
                     uint interval = ((uint)message[2]) << 16;
@@ -48,7 +48,7 @@ namespace ZWaveLib.Handlers
                     nodeEvent = new ZWaveEvent(node, EventParameter.WakeUpInterval, interval, 0);
                 }
                 break;
-            case (byte)CommandType.WakeUpNotification:
+            case (byte)Command.WakeUpNotification:
                     // Resend queued messages while node was asleep
                 var wakeUpResendQueue = GetResendQueueData(node);
                 for (int m = 0; m < wakeUpResendQueue.Count; m++)
@@ -65,16 +65,16 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.WakeUp, 
-                (byte)CommandType.WakeUpIntervalGet 
+                (byte)CommandClass.WakeUp, 
+                (byte)Command.WakeUpIntervalGet 
             });
         }
 
         public static void Set(ZWaveNode node, uint interval)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.WakeUp, 
-                (byte)CommandType.WakeUpIntervalSet,
+                (byte)CommandClass.WakeUp, 
+                (byte)Command.WakeUpIntervalSet,
                 (byte)((interval >> 16) & 0xff),
                 (byte)((interval >> 8) & 0xff),
                 (byte)((interval) & 0xff),

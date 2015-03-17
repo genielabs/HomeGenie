@@ -24,16 +24,16 @@ namespace ZWaveLib.Handlers
 {
     public class Battery : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.Battery;
+            return CommandClass.Battery;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (message.Length > 0 && cmdType == (byte)CommandType.BatteryReport) // Battery Report
+            if (message.Length > 0 && cmdType == (byte)Command.BatteryReport) // Battery Report
             {
                 int batteryLevel = message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
@@ -44,8 +44,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Battery, 
-                (byte)CommandType.BatteryGet 
+                (byte)CommandClass.Battery, 
+                (byte)Command.BatteryGet 
             });
         }
     }

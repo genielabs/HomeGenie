@@ -5,9 +5,9 @@ namespace ZWaveLib.Handlers
 {
     public class Crc16Encapsulated : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.Crc16Encapsulated;
+            return CommandClass.Crc16Encapsulated;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -57,7 +57,7 @@ namespace ZWaveLib.Handlers
             byte cmdType = encapMessage[1];
 
             ZWaveEvent nodeEvent = null;
-            if (cmdClass == (byte)CommandClassType.SensorBinary && cmdType == (byte)CommandType.SensorBinaryReport)
+            if (cmdClass == (byte)CommandClass.SensorBinary && cmdType == (byte)Command.SensorBinaryReport)
             {
                 nodeEvent = new ZWaveEvent(node, EventParameter.Generic, encapMessage[2], 0);
             }

@@ -3,7 +3,7 @@ using System;
 namespace ZWaveLib
 {
     
-    public enum CommandClassType : byte
+    public enum CommandClass : byte
     {
         Basic = 0x20,
         //

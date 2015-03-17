@@ -406,16 +406,16 @@ namespace MIG.Interfaces.HomeAutomation
                     switch (request.GetOption(0))
                     {
                     case "Switch.Binary":
-                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClassType.SwitchBinary);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SwitchBinary);
                         break;
                     case "Switch.MultiLevel":
-                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClassType.SwitchMultilevel);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SwitchMultilevel);
                         break;
                     case "Sensor.Binary":
-                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClassType.SensorBinary);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SensorBinary);
                         break;
                     case "Sensor.MultiLevel":
-                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClassType.SensorMultilevel);
+                        MultiInstance.GetCount(node, (byte)ZWaveLib.CommandClass.SensorMultilevel);
                         break;
                     }
                 }
@@ -570,7 +570,7 @@ namespace MIG.Interfaces.HomeAutomation
                     // here we assume that the commonly used interval is [0-99] for most multilevel switches
                     if (level >= 100) level = 99;
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    if(node.SupportCommandClass(CommandClassType.SwitchMultilevel))
+                    if(node.SupportCommandClass(CommandClass.SwitchMultilevel))
                         SwitchMultilevel.Set(node, (byte)level);
                     else
                         Basic.Set(node, (byte)level);

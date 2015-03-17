@@ -20,9 +20,9 @@
 
     public class ThermostatMode : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.ThermostatMode;
+            return CommandClass.ThermostatMode;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -33,16 +33,16 @@
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.ThermostatMode, 
-                (byte)CommandType.BasicGet
+                (byte)CommandClass.ThermostatMode, 
+                (byte)Command.BasicGet
             });
         }       
 
         public static void Set(ZWaveNode node, Mode mode)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.ThermostatMode, 
-                (byte)CommandType.BasicSet, 
+                (byte)CommandClass.ThermostatMode, 
+                (byte)Command.BasicSet, 
                 (byte)mode
             });
         }

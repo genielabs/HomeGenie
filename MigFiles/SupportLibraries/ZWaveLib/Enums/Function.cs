@@ -3,7 +3,7 @@ using System;
 namespace ZWaveLib
 {
 
-    public enum FunctionType: byte
+    public enum Function: byte
     {
         None = 0x00,
         DiscoveryNodes = 0x02,

@@ -27,16 +27,16 @@ namespace ZWaveLib.Handlers
 {
     public class SensorBinary : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.SensorBinary;
+            return CommandClass.SensorBinary;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)CommandType.SensorBinaryReport)
+            if (cmdType == (byte)Command.SensorBinaryReport)
             {
                 nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[2], 0);
             }
@@ -46,8 +46,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.SensorBinary, 
-                (byte)CommandType.SensorBinaryGet 
+                (byte)CommandClass.SensorBinary, 
+                (byte)Command.SensorBinaryGet 
             });
         }
     }

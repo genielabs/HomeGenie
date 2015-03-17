@@ -2,9 +2,9 @@
 {
     public class ThermostatHeating : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.ThermostatHeating;
+            return CommandClass.ThermostatHeating;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)

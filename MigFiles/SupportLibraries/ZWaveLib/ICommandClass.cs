@@ -6,7 +6,7 @@
         /// Returns Id of Command class
         /// </summary>
         /// <returns>command class Id</returns>
-        CommandClassType GetTypeId();
+        CommandClass GetClassId();
 
         /// <summary>Processes the message and returns corresponding ZWaveEvent</summary>
         /// <param name="node">the Node triggered the command</param>

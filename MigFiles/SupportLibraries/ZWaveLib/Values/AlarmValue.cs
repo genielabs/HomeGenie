@@ -46,7 +46,7 @@ namespace ZWaveLib.Values
             alarm.Value = message[3];
             //
             byte cmdClass = message[0];
-            if (cmdClass == (byte) CommandClassType.SensorAlarm)
+            if (cmdClass == (byte) CommandClass.SensorAlarm)
             {
                 alarm.Parameter = (ZWaveAlarmType) Enum.Parse(typeof (ZWaveAlarmType), message[3].ToString());
                 alarm.Value = message[4];

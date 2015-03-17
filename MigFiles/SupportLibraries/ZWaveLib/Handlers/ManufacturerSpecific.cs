@@ -32,9 +32,9 @@ namespace ZWaveLib.Handlers
 
     public class ManufacturerSpecific : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.ManufacturerSpecific;
+            return CommandClass.ManufacturerSpecific;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -65,11 +65,11 @@ namespace ZWaveLib.Handlers
                 (byte)MessageHeader.SOF, /* Start Of Frame */
                 0x09 /*packet len */,
                 (byte)MessageType.Request,
-                (byte)FunctionType.SendData,
+                (byte)Function.SendData,
                 node.Id,
                 0x02,
-                (byte)CommandClassType.ManufacturerSpecific,
-                (byte)CommandType.ManufacturerSpecificGet,
+                (byte)CommandClass.ManufacturerSpecific,
+                (byte)Command.ManufacturerSpecificGet,
                 0x05 /* report ?!? */,
                 0x01 | 0x04,
                 0x00

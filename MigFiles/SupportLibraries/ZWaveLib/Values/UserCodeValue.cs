@@ -52,7 +52,7 @@ namespace ZWaveLib.Values
             byte cmdType = message[8];
             UserCodeValue userCode = new UserCodeValue();
 
-            if (cmdClass == (byte)CommandClassType.UserCode && ((byte)CommandType.UserCodeSet == cmdType || (byte)CommandType.UserCodeReport == cmdType))
+            if (cmdClass == (byte)CommandClass.UserCode && ((byte)Command.UserCodeSet == cmdType || (byte)Command.UserCodeReport == cmdType))
             {
                 userCode.UserId = message[9];
                 userCode.UserIdStatus = message[10];

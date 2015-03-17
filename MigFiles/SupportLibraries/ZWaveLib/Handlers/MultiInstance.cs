@@ -27,9 +27,9 @@ namespace ZWaveLib.Handlers
 {
     public class MultiInstance : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.MultiInstance;
+            return CommandClass.MultiInstance;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -42,12 +42,12 @@ namespace ZWaveLib.Handlers
 
             switch (cmdType)
             {
-            case (byte)CommandType.MultiInstanceEncapsulated:
+            case (byte)Command.MultiInstanceEncapsulated:
                 nodeEvent = HandleMultiInstanceEncapReport(node, message);
                 break;
 
             //case (byte) Command.MultiInstanceReport:
-            case (byte) CommandType.MultiChannelEncapsulated:
+            case (byte) Command.MultiChannelEncapsulated:
                 nodeEvent = HandleMultiChannelEncapReport(node, message);
                 //if (nodeEvent != null)
                 //{
@@ -55,20 +55,20 @@ namespace ZWaveLib.Handlers
                 //}
                 break;
 
-            case (byte) CommandType.MultiInstanceCountReport:
+            case (byte) Command.MultiInstanceCountReport:
                 byte instanceCount = message[3];
                 switch (instanceCmdClass)
                 {
-                case (byte) CommandClassType.SwitchBinary:
+                case (byte) CommandClass.SwitchBinary:
                     nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSwitchBinaryCount, instanceCount, 0);
                     break;
-                case (byte) CommandClassType.SwitchMultilevel:
+                case (byte) CommandClass.SwitchMultilevel:
                     nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSwitchMultilevelCount, instanceCount, 0);
                     break;
-                case (byte) CommandClassType.SensorBinary:
+                case (byte) CommandClass.SensorBinary:
                     nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSensorBinaryCount, instanceCount, 0);
                     break;
-                case (byte) CommandClassType.SensorMultilevel:
+                case (byte) CommandClass.SensorMultilevel:
                     nodeEvent = new ZWaveEvent(node, EventParameter.MultiinstanceSensorMultilevelCount, instanceCount, 0);
                     break;
                 }
@@ -138,16 +138,16 @@ namespace ZWaveLib.Handlers
             ZWaveEvent nestedEvent = null;
             switch (commandClass)
             {
-            case (byte) CommandClassType.SwitchBinary:
+            case (byte) CommandClass.SwitchBinary:
                 nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchBinary, nodeEvent.Value, nodeEvent.Instance);
                 break;
-            case (byte) CommandClassType.SwitchMultilevel:
+            case (byte) CommandClass.SwitchMultilevel:
                 nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchMultilevel, nodeEvent.Value, nodeEvent.Instance);
                 break;
-            case (byte) CommandClassType.SensorBinary:
+            case (byte) CommandClass.SensorBinary:
                 nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorBinary, nodeEvent.Value, nodeEvent.Instance);
                 break;
-            case (byte) CommandClassType.SensorMultilevel:
+            case (byte) CommandClass.SensorMultilevel:
                 nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorMultilevel, nodeEvent.Value, nodeEvent.Instance);
                 break;
             }
@@ -157,8 +157,8 @@ namespace ZWaveLib.Handlers
         public static void GetCount(ZWaveNode node, byte commandClass)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
-                (byte) CommandType.MultiInstanceCountGet,
+                (byte) CommandClass.MultiInstance,
+                (byte) Command.MultiInstanceCountGet,
                 commandClass
             });
         }
@@ -166,24 +166,24 @@ namespace ZWaveLib.Handlers
         public static void SwitchBinaryGet(ZWaveNode node, byte instance)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x0d, // ?? (MultiInstaceV2Encapsulated ??)
                 0x00, // ??
                 instance,
-                (byte) CommandClassType.SwitchBinary,
-                (byte) CommandType.MultiInstanceGet
+                (byte) CommandClass.SwitchBinary,
+                (byte) Command.MultiInstanceGet
             });
         }
 
         public static void SwitchBinarySet(ZWaveNode node, byte instance, int value)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x0d, //  ?? (MultiInstaceV2Encapsulated ??)
                 0x00, // ??
                 instance,
-                (byte) CommandClassType.SwitchBinary,
-                (byte) CommandType.MultiInstanceSet,
+                (byte) CommandClass.SwitchBinary,
+                (byte) Command.MultiInstanceSet,
                 byte.Parse(value.ToString())
             });
         }
@@ -191,24 +191,24 @@ namespace ZWaveLib.Handlers
         public static void SwitchMultiLevelGet(ZWaveNode node, byte instance)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x0d, // ?? (MultiInstaceV2Encapsulated ??)
                 0x00, // ??
                 instance,
-                (byte) CommandClassType.SwitchMultilevel,
-                (byte) CommandType.MultiInstanceGet
+                (byte) CommandClass.SwitchMultilevel,
+                (byte) Command.MultiInstanceGet
             });
         }
 
         public static void SwitchMultiLevelSet(ZWaveNode node, byte instance, int value)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x0d, // ?? (MultiInstaceV2Encapsulated ??)
                 0x00, // ??
                 instance,
-                (byte) CommandClassType.SwitchMultilevel,
-                (byte) CommandType.MultiInstanceSet,
+                (byte) CommandClass.SwitchMultilevel,
+                (byte) Command.MultiInstanceSet,
                 byte.Parse(value.ToString())
             });
         }
@@ -216,10 +216,10 @@ namespace ZWaveLib.Handlers
         public static void SensorBinaryGet(ZWaveNode node, byte instance)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x06, // ??
                 instance,
-                (byte) CommandClassType.SensorBinary,
+                (byte) CommandClass.SensorBinary,
                 0x04 //
             });
         }
@@ -227,10 +227,10 @@ namespace ZWaveLib.Handlers
         public static void SensorMultiLevelGet(ZWaveNode node, byte instance)
         {
             node.SendRequest(new byte[] {
-                (byte) CommandClassType.MultiInstance,
+                (byte) CommandClass.MultiInstance,
                 0x06, // ??
                 instance,
-                (byte) CommandClassType.SensorMultilevel,
+                (byte) CommandClass.SensorMultilevel,
                 0x04 //
             });
         }

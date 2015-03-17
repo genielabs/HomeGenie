@@ -138,7 +138,7 @@ namespace ZWaveLib
                 if (receivedMessage[3] != 0x13)
                 {
                     bool log = true;
-                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClassType.ManufacturerSpecific)
+                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific)
                         log = false;
                     if (log)
                         Console.WriteLine("ZWaveLib UNHANDLED message: " + Utility.ByteArrayToString(receivedMessage));
@@ -148,7 +148,7 @@ namespace ZWaveLib
             return false;
         }
 
-        public bool SupportCommandClass(CommandClassType c)
+        public bool SupportCommandClass(CommandClass c)
         {
             bool isSupported = false;
             if (this.NodeInformationFrame != null)

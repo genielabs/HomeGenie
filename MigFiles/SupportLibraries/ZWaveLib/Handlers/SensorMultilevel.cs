@@ -27,16 +27,16 @@ namespace ZWaveLib.Handlers
 {
     public class SensorMultilevel : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.SensorMultilevel;
+            return CommandClass.SensorMultilevel;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)CommandType.SensorMultilevelReport)
+            if (cmdType == (byte)Command.SensorMultilevelReport)
             {
                 var sensor = SensorValue.Parse(message);
                 if (sensor.Parameter == ZWaveSensorParameter.Unknown)
@@ -56,8 +56,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.SensorMultilevel, 
-                (byte)CommandType.SensorMultilevelGet 
+                (byte)CommandClass.SensorMultilevel, 
+                (byte)Command.SensorMultilevelGet 
             });
         }
 

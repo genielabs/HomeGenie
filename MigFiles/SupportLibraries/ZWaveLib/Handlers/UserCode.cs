@@ -29,16 +29,16 @@ namespace ZWaveLib.Handlers
 {
     public class UserCode : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.UserCode;
+            return CommandClass.UserCode;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)CommandType.UserCodeReport)
+            if (cmdType == (byte)Command.UserCodeReport)
             {
                 var reportedUserCode = UserCodeValue.Parse(message);
                 var userCode = GetUserCodeData(node);
@@ -57,8 +57,8 @@ namespace ZWaveLib.Handlers
             userCode.UserId = newUserCode.UserId;
             userCode.UserIdStatus = newUserCode.UserIdStatus;
             List<byte> message = new List<byte>();
-            message.Add((byte)CommandClassType.UserCode);
-            message.Add((byte)CommandType.UserCodeSet);
+            message.Add((byte)CommandClass.UserCode);
+            message.Add((byte)Command.UserCodeSet);
             message.Add(userCode.UserId);
             message.Add(userCode.UserIdStatus);
             message.AddRange(userCode.TagCode);

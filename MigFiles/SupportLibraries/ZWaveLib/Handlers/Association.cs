@@ -32,16 +32,16 @@ namespace ZWaveLib.Handlers
             public string NodeList = "";
         }
 
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.Association;
+            return CommandClass.Association;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (message.Length > 5 && cmdType == (byte)CommandType.AssociationReport)
+            if (message.Length > 5 && cmdType == (byte)Command.AssociationReport)
             {
                 byte groupId = message[2];
                 byte associationMax = message[3];
@@ -70,8 +70,8 @@ namespace ZWaveLib.Handlers
         public static void Set(ZWaveNode node, byte groupid, byte targetNodeId)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Association, 
-                (byte)CommandType.AssociationSet, 
+                (byte)CommandClass.Association, 
+                (byte)Command.AssociationSet, 
                 groupid, 
                 targetNodeId 
             });
@@ -80,8 +80,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node, byte groupId)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Association, 
-                (byte)CommandType.AssociationGet, 
+                (byte)CommandClass.Association, 
+                (byte)Command.AssociationGet, 
                 groupId 
             });
         }
@@ -89,8 +89,8 @@ namespace ZWaveLib.Handlers
         public static void Remove(ZWaveNode node, byte groupId, byte targetNodeId)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Association, 
-                (byte)CommandType.AssociationRemove, 
+                (byte)CommandClass.Association, 
+                (byte)Command.AssociationRemove, 
                 groupId, 
                 targetNodeId 
             });

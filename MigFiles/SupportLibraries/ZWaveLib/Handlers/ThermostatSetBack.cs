@@ -2,9 +2,9 @@
 {
     public class ThermostatSetBack : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.ThermostatSetBack;
+            return CommandClass.ThermostatSetBack;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)

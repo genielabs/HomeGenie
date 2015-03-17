@@ -28,16 +28,16 @@ namespace ZWaveLib.Handlers
 {
     public class Configuration : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.Configuration;
+            return CommandClass.Configuration;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (message.Length > 4 && cmdType == (byte)CommandType.ConfigurationReport)
+            if (message.Length > 4 && cmdType == (byte)Command.ConfigurationReport)
             {
                 byte paramId = message[2];
                 byte paramLength = message[3];
@@ -87,8 +87,8 @@ namespace ZWaveLib.Handlers
             Array.Reverse(value32);
             //
             byte[] msg = new byte[4 + valueLength];
-            msg[0] = (byte)CommandClassType.Configuration;
-            msg[1] = (byte)CommandType.ConfigurationSet;
+            msg[0] = (byte)CommandClass.Configuration;
+            msg[1] = (byte)Command.ConfigurationSet;
             msg[2] = parameter;
             msg[3] = (byte)valueLength;
             switch (valueLength)
@@ -109,8 +109,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node, byte parameter)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Configuration, 
-                (byte)CommandType.ConfigurationGet,
+                (byte)CommandClass.Configuration, 
+                (byte)Command.ConfigurationGet,
                 parameter
             });
         }

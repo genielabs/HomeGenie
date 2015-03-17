@@ -24,9 +24,9 @@ namespace ZWaveLib.Handlers
 
     public class ThermostatSetPoint : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.ThermostatSetPoint;
+            return CommandClass.ThermostatSetPoint;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
@@ -49,8 +49,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node, SetPointType ptype)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.ThermostatSetPoint, 
-                (byte)CommandType.ThermostatSetPointGet,
+                (byte)CommandClass.ThermostatSetPoint, 
+                (byte)Command.ThermostatSetPointGet,
                 (byte)ptype
             });
         }
@@ -59,8 +59,8 @@ namespace ZWaveLib.Handlers
         {
             List<byte> message = new List<byte>();
             message.AddRange(new byte[] { 
-                (byte)CommandClassType.ThermostatSetPoint, 
-                (byte)CommandType.ThermostatSetPointSet, 
+                (byte)CommandClass.ThermostatSetPoint, 
+                (byte)Command.ThermostatSetPointSet, 
                 (byte)ptype
             });
             var setPoint = ThermostatSetPoint.GetSetPointData(node);

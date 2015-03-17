@@ -24,16 +24,16 @@ namespace ZWaveLib.Handlers
 {
     public class Basic : ICommandClass
     {
-        public CommandClassType GetTypeId()
+        public CommandClass GetClassId()
         {
-            return CommandClassType.Basic;
+            return CommandClass.Basic;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)CommandType.BasicReport || cmdType == (byte)CommandType.BasicSet)
+            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
             {
                 int levelValue = (int)message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
@@ -44,8 +44,8 @@ namespace ZWaveLib.Handlers
         public static void Set(ZWaveNode node, int value)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Basic, 
-                (byte)CommandType.BasicSet, 
+                (byte)CommandClass.Basic, 
+                (byte)Command.BasicSet, 
                 byte.Parse(value.ToString())
             });
         }
@@ -53,8 +53,8 @@ namespace ZWaveLib.Handlers
         public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClassType.Basic, 
-                (byte)CommandType.BasicGet 
+                (byte)CommandClass.Basic, 
+                (byte)Command.BasicGet 
             });
         }
 
