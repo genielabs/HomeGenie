@@ -24,7 +24,7 @@ namespace ZWaveLib.Handlers
 {
     public class Battery : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.Battery;
         }

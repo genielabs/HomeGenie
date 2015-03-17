@@ -41,7 +41,7 @@ namespace ZWaveLib.Handlers
                 if (type == typeof(ICommandClass))
                     continue; // we are not going to use interface itself
                 var cc = (ICommandClass)Activator.CreateInstance(type);
-                var id = (byte)cc.GetCommandClassId();
+                var id = (byte)cc.GetTypeId();
                 commandClassTypes.Add(id, type);
             }
 

@@ -28,7 +28,7 @@ namespace ZWaveLib.Handlers
 {
     public class Configuration : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.Configuration;
         }

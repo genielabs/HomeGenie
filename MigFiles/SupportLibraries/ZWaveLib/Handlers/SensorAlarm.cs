@@ -27,7 +27,7 @@ namespace ZWaveLib.Handlers
 {
     public class SensorAlarm : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.SensorAlarm;
         }

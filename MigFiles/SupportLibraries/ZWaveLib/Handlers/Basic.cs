@@ -24,7 +24,7 @@ namespace ZWaveLib.Handlers
 {
     public class Basic : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.Basic;
         }

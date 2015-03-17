@@ -27,7 +27,7 @@ namespace ZWaveLib.Handlers
 {
     public class SceneActivation : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.SceneActivation;
         }

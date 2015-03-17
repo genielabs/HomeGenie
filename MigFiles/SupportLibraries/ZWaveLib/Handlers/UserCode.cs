@@ -29,7 +29,7 @@ namespace ZWaveLib.Handlers
 {
     public class UserCode : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.UserCode;
         }

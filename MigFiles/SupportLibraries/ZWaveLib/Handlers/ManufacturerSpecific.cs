@@ -32,7 +32,7 @@ namespace ZWaveLib.Handlers
 
     public class ManufacturerSpecific : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ManufacturerSpecific;
         }

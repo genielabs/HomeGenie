@@ -13,7 +13,7 @@
 
     public class ThermostatFanMode : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ThermostatFanMode;
         }

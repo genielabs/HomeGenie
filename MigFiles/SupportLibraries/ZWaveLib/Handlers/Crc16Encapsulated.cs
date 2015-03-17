@@ -5,7 +5,7 @@ namespace ZWaveLib.Handlers
 {
     public class Crc16Encapsulated : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.Crc16Encapsulated;
         }

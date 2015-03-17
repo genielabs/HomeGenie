@@ -2,7 +2,7 @@
 {
     public class ThermostatSetBack : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ThermostatSetBack;
         }

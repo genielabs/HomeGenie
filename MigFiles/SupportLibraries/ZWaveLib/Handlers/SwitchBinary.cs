@@ -26,7 +26,7 @@ namespace ZWaveLib.Handlers
 {
     public class SwitchBinary : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.SwitchBinary;
         }

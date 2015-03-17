@@ -2,7 +2,7 @@
 {
     public class ThermostatHeating : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ThermostatHeating;
         }

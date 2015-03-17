@@ -27,7 +27,7 @@ namespace ZWaveLib.Handlers
 {
     public class MultiInstance : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.MultiInstance;
         }
@@ -135,23 +135,23 @@ namespace ZWaveLib.Handlers
 
         private ZWaveEvent GetNestedEvent(byte commandClass, ZWaveEvent nodeEvent)
         {
+            ZWaveEvent nestedEvent = null;
             switch (commandClass)
             {
             case (byte) CommandClassType.SwitchBinary:
-                return new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchBinary, nodeEvent.Value, nodeEvent.Instance);
-                        
+                nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchBinary, nodeEvent.Value, nodeEvent.Instance);
+                break;
             case (byte) CommandClassType.SwitchMultilevel:
-                return new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchMultilevel, nodeEvent.Value, nodeEvent.Instance);
-                       
+                nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSwitchMultilevel, nodeEvent.Value, nodeEvent.Instance);
+                break;
             case (byte) CommandClassType.SensorBinary:
-                return new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorBinary, nodeEvent.Value, nodeEvent.Instance);
-
+                nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorBinary, nodeEvent.Value, nodeEvent.Instance);
+                break;
             case (byte) CommandClassType.SensorMultilevel:
-                return new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorMultilevel, nodeEvent.Value, nodeEvent.Instance);
-
-            default:
-                return null;
+                nestedEvent = new ZWaveEvent(nodeEvent.Node, EventParameter.MultiinstanceSensorMultilevel, nodeEvent.Value, nodeEvent.Instance);
+                break;
             }
+            return nestedEvent;
         }
 
         public static void GetCount(ZWaveNode node, byte commandClass)

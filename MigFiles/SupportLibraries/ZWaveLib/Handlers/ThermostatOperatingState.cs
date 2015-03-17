@@ -22,7 +22,7 @@
 
     public class ThermostatOperatingState : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ThermostatOperatingState;
         }

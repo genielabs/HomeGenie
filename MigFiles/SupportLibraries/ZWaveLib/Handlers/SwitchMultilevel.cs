@@ -26,7 +26,7 @@ namespace ZWaveLib.Handlers
 {
     public class SwitchMultilevel : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.SwitchMultilevel;
         }

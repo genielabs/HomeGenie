@@ -32,7 +32,7 @@ namespace ZWaveLib.Handlers
             public string NodeList = "";
         }
 
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.Association;
         }

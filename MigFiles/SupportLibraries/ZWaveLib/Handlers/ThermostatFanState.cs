@@ -22,7 +22,7 @@
 
     public class ThermostatFanState :ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.ThermostatFanState;
         }

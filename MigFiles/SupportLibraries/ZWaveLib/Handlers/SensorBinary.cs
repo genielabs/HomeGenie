@@ -27,7 +27,7 @@ namespace ZWaveLib.Handlers
 {
     public class SensorBinary : ICommandClass
     {
-        public CommandClassType GetCommandClassId()
+        public CommandClassType GetTypeId()
         {
             return CommandClassType.SensorBinary;
         }
