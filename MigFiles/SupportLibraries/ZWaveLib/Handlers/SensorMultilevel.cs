@@ -35,13 +35,13 @@ namespace ZWaveLib.Handlers
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.SensorMultilevelReport)
             {
                 var sensor = SensorValue.Parse(message);
                 if (sensor.Parameter == ZWaveSensorParameter.Unknown)
                 {
-                    byte key = message[9];
+                    byte key = message[2];
                     nodeEvent = new ZWaveEvent(node, EventParameter.Generic, sensor.Value, 0);
                     Console.WriteLine("\nUNHANDLED SENSOR PARAMETER TYPE => " + key + "\n");
                 }

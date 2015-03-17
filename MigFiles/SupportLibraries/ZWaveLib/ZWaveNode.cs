@@ -233,15 +233,18 @@ namespace ZWaveLib
                         }
                         catch (Exception ex)
                         {
-
                             Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
                                               ex.Message + "\n" + ex.StackTrace);
-
                         }
                     }
                 }
 
                 this.RaiseUpdateParameterEvent(messageEvent.Instance, messageEvent.Event, messageEvent.Value);
+                if (messageEvent.NestedEvent != null)
+                {
+                    var nestedEvent = messageEvent.NestedEvent;
+                    this.RaiseUpdateParameterEvent(nestedEvent.Instance, nestedEvent.Event, nestedEvent.Value);
+                }
             }
             else if (messageLength > 3)
             {

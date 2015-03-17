@@ -172,6 +172,9 @@ namespace ZWaveLib
         SensorBinaryReport = 0x03,
         //
         SensorMultilevelGet = 0x04,
+        /// <summary>
+        /// 0x05
+        /// </summary>
         SensorMultilevelReport = 0x05,
         //
         SensorAlarmGet = 0x01,

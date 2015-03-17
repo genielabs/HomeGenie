@@ -78,6 +78,7 @@ namespace ZWaveLib
         public EventParameter Event;
         public object Value;
         public int Instance;
+        public ZWaveEvent NestedEvent;
 
         public ZWaveEvent(ZWaveNode node, EventParameter eventType, object eventValue, int instance)
         {
