@@ -73,7 +73,7 @@ namespace HomeGenie.Service.Logging
         private SQLiteConnection dbConnection;
 
         //private object dbLock = new object();
-        private readonly long dbSizeLimit = 5242880 * 2;
+        private readonly long dbSizeLimit = 5242880;
         //private static int STATISTICS_TIME_RESOLUTION_MINUTES = 5;
         private readonly int _statisticsTimeResolutionSeconds = 5 * 60;
 

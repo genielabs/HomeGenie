@@ -25,13 +25,17 @@ using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {
-    public static class SensorAlarm
+    public class SensorAlarm : ICommandClass
     {
+        public byte GetCommandClassId()
+        {
+            return 0x9C;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.SensorAlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);

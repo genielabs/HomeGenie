@@ -20,19 +20,22 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-
 namespace ZWaveLib.Handlers
 {
-    public static class Battery
+    public class Battery : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x80;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (message.Length > 7 && cmdType == (byte)Command.BatteryReport) // Battery Report
+            byte cmdType = message[1];
+            if (message.Length > 0 && cmdType == (byte)Command.BatteryReport) // Battery Report
             {
-                int batteryLevel = message[9];
+                int batteryLevel = message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
             }
             return nodeEvent;

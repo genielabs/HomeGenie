@@ -90,19 +90,9 @@ HG.WebApp.InitializePage = function ()
             HG.WebApp.GroupModules.LoadGroupModules();
             $.mobile.loading('show');
         }
-        else if (this.id == 'page_configure_automationgroups') 
-        {
-            HG.Automation.Programs.List(function () {
-                HG.WebApp.AutomationGroupsList.LoadGroups();
-            });
-        }
         else if (this.id == 'page_configure_schedulerservice')
         {
             HG.WebApp.Scheduler.LoadScheduling();
-        }
-        else if (this.id == 'page_automation_programs') 
-        {
-            HG.WebApp.ProgramsList.LoadPrograms();
         }
         else if (this.id == 'page_automation_editprogram') 
         {	            
@@ -198,7 +188,9 @@ HG.WebApp.InitializePage = function ()
         }
         //
         // add css google web fonts
-        $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+        setTimeout(function(){
+            $('head').append('<link href="http://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');
+        }, 5000);
 
     }, 100);
     //
@@ -609,7 +601,7 @@ HG.WebApp.Locales.GetDateEndianType = function()
     // M = Middle Endian -> MDY
     var endianType = 'L';
     var testDate = new Date(98326800000);
-    var localeDateParts = testDate.toLocaleDateString().split('/');
+    var localeDateParts = testDate.toLocaleDateString().replace(/[\u200E]/g, "").split('/');
     if (localeDateParts[0] == '2') endianType = 'M';
     return endianType;
 };

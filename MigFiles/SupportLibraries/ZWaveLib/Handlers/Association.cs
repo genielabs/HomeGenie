@@ -20,11 +20,9 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-
 namespace ZWaveLib.Handlers
 {
-    public static class Association
+    public class Association : ICommandClass
     {
         public class AssociationResponse
         {
@@ -34,19 +32,24 @@ namespace ZWaveLib.Handlers
             public string NodeList = "";
         }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x85;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (message.Length > 12 && cmdType == (byte)Command.AssociationReport)
+            byte cmdType = message[1];
+            if (message.Length > 5 && cmdType == (byte)Command.AssociationReport)
             {
-                byte groupId = message[9];
-                byte maxAssociations = message[10];
-                byte numAssociations = message[11]; // it is always zero ?!?
+                byte groupId = message[2];
+                byte maxAssociations = message[3];
+                byte numAssociations = message[4]; // it is always zero ?!?
                 string assocNodes = "";
-                if (message.Length > 13)
+                if (message.Length > 4)
                 {
-                    for (int a = 12; a < message.Length - 1; a++)
+                    for (int a = 5; a < message.Length; a++)
                     {
                         assocNodes += message[a] + ",";
                     }

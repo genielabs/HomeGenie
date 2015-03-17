@@ -37,14 +37,6 @@ using System.Diagnostics;
 
 namespace HomeGenie.Automation
 {
-    public class ProgramError
-    {
-        public int Line = 0;
-        public int Column = 0;
-        public string ErrorMessage;
-        public string ErrorNumber;
-        public string CodeBlock;
-    }
 
     public class ProgramEngine
     {
@@ -121,14 +113,7 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
-                                    CodeBlock = "TC",
-                                    Column = 0,
-                                    Line = 0,
-                                    ErrorNumber = "-1",
-                                    ErrorMessage = result.Exception.Message
-                                }
-                            };
+                            List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
@@ -194,14 +179,7 @@ namespace HomeGenie.Automation
                 catch (Exception ex)
                 {
                     // a runtime error occured
-                    List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
-                            CodeBlock = "TC",
-                            Column = 0,
-                            Line = 0,
-                            ErrorNumber = "-1",
-                            ErrorMessage = ex.Message
-                        }
-                    };
+                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
                     program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
                     RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
@@ -296,14 +274,7 @@ namespace HomeGenie.Automation
                         {
                             // runtime error occurred, script is being disabled
                             // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { new ProgramError() {
-                                    CodeBlock = "CR",
-                                    Column = 0,
-                                    Line = 0,
-                                    ErrorNumber = "-1",
-                                    ErrorMessage = result.Exception.Message
-                                }
-                            };
+                            List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, false) };
                             program.ScriptErrors = JsonConvert.SerializeObject(error);
                             program.IsEnabled = false;
                             RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
@@ -578,31 +549,33 @@ namespace HomeGenie.Automation
             // dispose assembly and interrupt current task
             program.AppAssembly = null;
             program.IsEnabled = false;
-
+            // clean up old assembly files
             if (!Directory.Exists(Path.GetDirectoryName(program.AssemblyFile)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(program.AssemblyFile));
             }
+            if (File.Exists(program.AssemblyFile))
+            {
+                File.Delete(program.AssemblyFile);
+            }
+            if (File.Exists(program.AssemblyFile + ".mdb"))
+            {
+                File.Delete(program.AssemblyFile + ".mdb");
+            }
+            if (File.Exists(program.AssemblyFile + ".pdb"))
+            {
+                File.Delete(program.AssemblyFile + ".pdb");
+            }
+
             // DO NOT CHANGE THE FOLLOWING LINES OF CODE
             // it is a lil' trick for mono compatibility
-            // since it was caching the assembly when using the same name
-            string tmpfile = Guid.NewGuid().ToString() + ".dll";
-            // delete old assembly
+            // since it will be caching the assembly when using the same name
+            // and use the old one instead of the new one
+            string tmpfile = Path.Combine("programs", Guid.NewGuid().ToString() + ".dll");
             System.CodeDom.Compiler.CompilerResults result = new System.CodeDom.Compiler.CompilerResults(null);
             try
             {
                 result = CSharpAppFactory.CompileScript(program.ScriptCondition, program.ScriptSource, tmpfile);
-                if (File.Exists(program.AssemblyFile))
-                {
-                    // delete old assebly
-                    File.Delete(program.AssemblyFile);
-                }
-                // move newly compiled assembly to programs folder
-                if (result.Errors.Count == 0)
-                {
-                    // submitting new assembly
-                    File.Move(tmpfile, program.AssemblyFile);
-                }
             }
             catch (Exception ex)
             {
@@ -610,12 +583,18 @@ namespace HomeGenie.Automation
                 result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "-1", ex.Message));
             }
 
-            int startCodeLine = 19;
-            int conditionCodeOffset = 7;
-            //
             if (result.Errors.Count == 0)
             {
                 program.AppAssembly = result.CompiledAssembly;
+                File.Move(tmpfile, program.AssemblyFile);
+                if (File.Exists(tmpfile + ".mdb"))
+                {
+                    File.Move(tmpfile + ".mdb", program.AssemblyFile + ".mdb");
+                }
+                if (File.Exists(tmpfile + ".pdb"))
+                {
+                    File.Move(tmpfile + ".pdb", program.AssemblyFile + ".pdb");
+                }
             }
             else
             {
@@ -624,11 +603,11 @@ namespace HomeGenie.Automation
                 {
                     //if (!ce.IsWarning)
                     {
-                        int errorRow = (error.Line - startCodeLine);
+                        int errorRow = (error.Line - CSharpAppFactory.PROGRAM_CODE_OFFSET);
                         string blockType = "CR";
-                        if (errorRow >= sourceLines + conditionCodeOffset)
+                        if (errorRow >= sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET)
                         {
-                            errorRow -= (sourceLines + conditionCodeOffset);
+                            errorRow -= (sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET);
                             blockType = "TC";
                         }
                         errors.Add(new ProgramError() {

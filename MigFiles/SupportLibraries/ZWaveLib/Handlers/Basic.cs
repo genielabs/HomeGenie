@@ -20,20 +20,22 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-
 namespace ZWaveLib.Handlers
 {
-    public static class Basic
+    public class Basic : ICommandClass
     {
+        public byte GetCommandClassId()
+        {
+            return 0x20;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
             {
-                int levelValue = (int)message[9];
+                int levelValue = (int)message[2];
                 nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
             }
             return nodeEvent;

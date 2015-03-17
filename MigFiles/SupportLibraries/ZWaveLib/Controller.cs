@@ -33,7 +33,6 @@ using ZWaveLib.Values;
 
 namespace ZWaveLib
 {
-    public delegate void ControllerEventHandler(object source, ControllerEventArgs e);
     public class ControllerEventArgs : EventArgs
     {
         public readonly byte NodeId;
@@ -626,13 +625,13 @@ namespace ZWaveLib
             ZWaveNode node;
             switch (genericClass)
             {
-            case (byte)GenericType.StaticController:
-                // TODO: this is very untested...
-                node = (ZWaveNode)new Controller(zwavePort);
-                break;
-            default: // generic node
-                node = new ZWaveNode(nodeId, zwavePort, genericClass);
-                break;
+                case (byte) GenericType.StaticController:
+                    // TODO: this is very untested...
+                    node = (ZWaveNode) new Controller(zwavePort);
+                    break;
+                default: // generic node
+                    node = new ZWaveNode(nodeId, zwavePort, genericClass);
+                    break;
             }
             node.UpdateNodeParameter += znode_UpdateNodeParameter;
             node.ManufacturerSpecificResponse += znode_ManufacturerSpecificResponse;

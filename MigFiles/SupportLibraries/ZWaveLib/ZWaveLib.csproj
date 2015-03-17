@@ -37,6 +37,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\CommandClassFactory.cs" />
+    <Compile Include="Handlers\ThermostatFanMode.cs" />
+    <Compile Include="Handlers\ThermostatFanState.cs" />
+    <Compile Include="Handlers\ThermostatHeating.cs" />
+    <Compile Include="Handlers\ThermostatMode.cs" />
+    <Compile Include="Handlers\ThermostatOperatingState.cs" />
+    <Compile Include="Handlers\ThermostatSetBack.cs" />
+    <Compile Include="Handlers\ThermostatSetPoint.cs" />
+    <Compile Include="ICommandClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZWaveMessage.cs" />
     <Compile Include="ZWavePort.cs" />
@@ -67,6 +76,7 @@
     <Compile Include="Values\ZWaveValue.cs" />
     <Compile Include="ZWaveEvent.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Handlers\Crc16.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -82,7 +92,5 @@
       <Name>SerialPortLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

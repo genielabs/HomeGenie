@@ -20,18 +20,21 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
 using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {
-    public static class Alarm
+    public class Alarm : ICommandClass
     {
+        public byte GetCommandClassId()
+        {
+            return 0x71;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.AlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);

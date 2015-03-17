@@ -118,7 +118,7 @@ namespace ZWaveLib
         ThermostatOperatingState = 0x42,
         ThermostatSetPoint = 0x43,
         ThermostatFanMode = 0x44,
-        ThermostatFanState = 0x45,
+        ThermostatFanState = 0x45, 
         ThermostatSetBack = 0x47,
         //
         MultiInstance = 0x60,
@@ -135,6 +135,8 @@ namespace ZWaveLib
         //
         SensorAlarm = 0x9C,
         SilenceAlarm = 0x9D,
+        //
+        Crc16Encap = 0x56,
         //
         UserCode = 0x63
     }
@@ -170,6 +172,9 @@ namespace ZWaveLib
         SensorBinaryReport = 0x03,
         //
         SensorMultilevelGet = 0x04,
+        /// <summary>
+        /// 0x05
+        /// </summary>
         SensorMultilevelReport = 0x05,
         //
         SensorAlarmGet = 0x01,
@@ -179,14 +184,33 @@ namespace ZWaveLib
         //
         AlarmGet = 0x04,
         AlarmReport = 0x05,
-        //
+
+        // MultiInstance commands
+        /// <summary>
+        /// 0x01
+        /// </summary>
         MultiInstanceSet = 0x01,
+        /// <summary>
+        /// 0x02
+        /// </summary>
         MultiInstanceGet = 0x02,
+        /// <summary>
+        /// 0x04
+        /// </summary>
         MultiInstanceCountGet = 0x04,
+        /// <summary>
+        /// 0x05
+        /// </summary>
         MultiInstanceCountReport = 0x05,
-        MultiInstanceReport = 0x06,
+        /// <summary>
+        /// 0x06
+        /// </summary>
+        MultiInstanceEncapsulated = 0x06,
         //
-        MultiInstaceV2Encapsulated = 0x0D,
+        /// <summary>
+        /// 0x0D
+        /// </summary>
+        MultiChannelEncapsulated = 0x0D,
         //
         AssociationSet = 0x01,
         AssociationGet = 0x02,

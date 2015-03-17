@@ -1,0 +1,742 @@
+{
+    "home_menu_title": 
+         "menu g?ówne",
+    "home_menu_control": 
+         "zarz?dzanie",
+    "home_menu_analyze": 
+         "analiza",
+    "home_menu_configure": 
+         "ustawienia",
+    "home_menu_about": 
+         "o oprogramowaniu",
+    "Homegenie_about_title": 
+         "informacje",
+    "control_groups_and_modules": 
+         "zarz?dzanie grupami <br /> i modu?ami",
+    "bottombar_button_home": 
+         "strona g?ówna",
+    "configure_program_bbaractions": 
+         "akcje",
+    "control_macrorecord_discard": 
+         "odrzu?",
+    "control_macrorecord_save": 
+         "zapisz",
+    "analyze_statistics": 
+         "analiza statystyk",
+    "analyze_total_watts_hourly": 
+         "ca?kowite zu?ycie energii elektrycznej na godzin? (w)",
+    "analyze_load_peak_last": 
+         "szczytowe zu?ycie energii w ci?gu ostatnich 4 godzin",
+    "configure_menu_title": 
+         "ustawienia",
+    "configure_menu_heading": 
+         "menu ustawie?",
+    "configure_groups_heading": 
+         "grupy <br /> i modu?y",
+    "configure_menu_groups_modules": 
+         "grupy i modu?y",
+    "configure_menu_automation": 
+         "automatyzacja i programy",
+    "configure_menu_system": 
+         "ustawienia interfejsów",
+    "configure_menu_maintenance": 
+         "ustawienia i aktualizacje",
+    "configure_automation_heading": 
+         "<font style='color:gray'>grupy</font><br>programów",
+    "configure_group_newgroup": 
+         "nowa grupa",
+    "configure_group_entergroupname": 
+         "wprowad? nazw? nowej grupy:",
+    "configure_group_newgroupcancel": 
+         "odrzu?",
+    "bottombar_button_back": 
+         "powrót",
+    "configure_group_bottombar_group_add": 
+         "dodaj grup?",
+    "configure_group_groupname": 
+         "nazwa grupy",
+    "configure_group_deletegroup": 
+         "usun?? grup??",
+    "configure_group_deleteprompt": 
+         "czy na pewno chcesz usun?? t? grup??",
+    "configure_group_deletewarning": 
+         "ta czynno?? nie mo?e by? cofni?ta.",
+    "configure_group_deletecancel": 
+         "odrzu?",
+    "configure_group_deleteconfirm": 
+         "usu?",
+    "configure_module_newmoduleadd": 
+         "dodaj nowy modu?",
+    "configure_module_newmodulecancel": 
+         "odrzu?",
+    "configure_module_newmoduleconfirm": 
+         "dodaj",
+    "configure_module_propname": 
+         "tytu?",
+    "configure_module_typelight": 
+         "?wiat?o",
+    "configure_module_typedimmer": 
+         "?ciemniacz",
+    "configure_module_typeswitch": 
+         "prze??cznik",
+    "configure_module_typesensor": 
+         "czujnik",
+    "configure_module_typetemperature": 
+         "czujnik temperatury",
+    "configure_module_typesiren": 
+         "syrena",
+    "configure_module_typefan": 
+         "wentylator",
+    "configure_module_typethermostat": 
+         "termostat",
+    "configure_module_typeshutter": 
+         "?aluzje",
+    "configure_module_typedoorwindow": 
+         "drzwi / okna",
+    "configure_module_options": 
+         "ustawienia",
+    "configure_module_optupdate": 
+         "aktualizuj modu?",
+    "configure_module_optremove": 
+         "usu? element",
+    "configure_group_bottombar_deletemodule": 
+         "usu? grup?",
+    "configure_group_bottombar_addmodule": 
+         "dodaj modu?",
+    "configure_program_automationtitle": 
+         "lista programów",
+    "configure_program_newprogram": 
+         "nowy program",
+    "configure_program_enterprogramname": 
+         "podaj nazw? nowego programu:",
+    "configure_program_newprogramcancel": 
+         "odrzu?",
+    "configure_program_newprogramconfirm": 
+         "ok",
+    "configure_program_deletetitle": 
+         "odinstaluj program?",
+    "configure_program_deleteprompt": 
+         "czy na pewno chcesz usun?? ten program?",
+    "configure_program_deleteadvice": 
+         "ta czynno?? nie mo?e by? cofni?ta.",
+    "configure_program_deletecancel": 
+         "odrzu?",
+    "configure_program_deleteconfirm": 
+         "usu?",
+    "configure_program_options": 
+         "ustawienia",
+    "configure_program_options_edit": 
+         "edytuj",
+    "configure_program_options_export": 
+         "eksport",
+    "configure_program_options_delete": 
+         "usu?",
+    "configure_program_programgroup": 
+         "grupa dla programu",
+    "configure_program_programname": 
+         "nazwa programu",
+    "configure_program_programdescription": 
+         "opis programu",
+    "configure_program_programtype": 
+         "typ programu",
+    "configure_program_trigger": 
+         "wyzwalacz programu",
+    "configure_program_conditionswitchestrue": 
+         "gdy warunek staje si? równy 'true'",
+    "configure_program_conditionswitchesfalse": 
+         "gdy warunek staje si? równy 'false'",
+    "configure_program_runonceconditiontrue": 
+         "wykonaj raz, gdy warunek staje si? 'true'",
+    "configure_program_conditionistrue": 
+         "gdy warunek zwraca warto?? 'true'",
+    "configure_program_conditionisfalse": 
+         "gdy warunek zwraca warto?? 'false'",
+    "configure_program_programconditions": 
+         "warunki programu",
+    "configure_program_conditionadd": 
+         "dodaj warunek",
+    "configure_program_selectconditioncontext": 
+         "wybierz condition context",
+    "configure_program_wizardback": 
+         "powrót",
+    "configure_program_selectoperator": 
+         "wybierz operator porównania",
+    "configure_program_operatorless": 
+         "mniej ni?",
+    "configure_program_operatorequal": 
+         "równo??",
+    "configure_program_operatorgreaterthan": 
+         "wi?cej ni?",
+    "configure_program_selectvalue": 
+         "wybierz warto?? porównania",
+    "configure_program_wizarddone": 
+         "gotowe",
+    "configure_program_deleteconditiontitle": 
+         "usun?? warunek?",
+    "configure_program_deleteconditionprompt": 
+         "czy na pewno chcesz usun?? t? wyra?enie warunkowe?",
+    "configure_program_deleteconditionadvice": 
+         "ta czynno?? nie mo?e by? cofni?ta.",
+    "configure_program_instructions": 
+         "polecenia programu",
+    "configure_program_instructionadd": 
+         "dodaj do instrukcji",
+    "configure_program_selectcommandcontext": 
+         "wybierz polecenie kontekstowe",
+    "configure_program_commandarguments": 
+         "argumenty polece?",
+    "configure_program_deleteinstructiontitle": 
+         "usu? instrukcje?",
+    "configure_program_deleteinstructionprompt": 
+         "czy na pewno chcesz usun?? t? instrukcj??",
+    "configure_program_csharpprogram": 
+         "program c#",
+    "configure_program_savingtitle": 
+         "zapisz program",
+    "configure_program_savingwait": 
+         "prosz? czeka? ...",
+    "configure_program_switchtypetitle": 
+         "zmieni? typ?",
+    "configure_program_switchtypeprompt": 
+         "czy na pewno chcesz zmieni? typ programu?",
+    "configure_program_switchtypeadvice": 
+         "aktualne dane zostan? usuni?te.",
+    "configure_program_switchtypecancel": 
+         "odrzu?",
+    "configure_program_switchtypeconfirm": 
+         "zmie?",
+    "configure_program_options_run": 
+         "uruchom",
+    "configure_program_options_break": 
+         "przerwij",
+    "configure_program_options_save": 
+         "zapisz",
+    "configure_program_errorstitle": 
+         "b??dy",
+    "configure_program_bbar_programeditruncode": 
+         "edycja kodu wyzwalania",
+    "configure_automationgroup_newgroup": 
+         "nowa grupa",
+    "configure_automationgroup_entergroupname": 
+         "wprowad? nazw? nowej grupy:",
+    "configure_automationgroup_newgroupcancel": 
+         "odrzu?",
+    "configure_automationgroup_bottombar_group_add": 
+         "dodaj grup?",
+    "configure_interfaces_heading": 
+         "ustawienia interfejsu",
+    "configure_interfaces_zwaveoptions": 
+         "opcje interfejsów ZWave",
+    "configure_interfaces_optdisable": 
+         "wy??czone",
+    "configure_interfaces_optenable": 
+         "w??czone",
+    "configure_interfaces_zwaveport": 
+         "port urz?dzenia",
+    "configure_interfaces_zwavecommontasks": 
+         "typowe zadania ZWave",
+    "configure_interfaces_zwaveaddnode": 
+         "dodaj w?ze?",
+    "configure_interfaces_zwaveremovenode": 
+         "usu? w?ze?",
+    "configure_interfaces_x10options": 
+         "opcje interfejsu X10",
+    "configure_interfaces_x10port": 
+         "port urz?dzenia",
+    "configure_interfaces_x10housecodes": 
+         "kody stosowane w domu",
+    "configure_interfaces_w800rf32": 
+         "opcje interfejsu W800RF32 RF Receiver",
+    "configure_interfaces_w800rf32port": 
+         "port urz?dzenia",
+    "configure_interfaces_lircremote": 
+         "pilot na podczerwie? lirc",
+    "configure_interfaces_lircremoteconfiguration": 
+         "konfiguracja podczerwieni lirc",
+    "configure_interfaces_lircremoteaddremote": 
+         "dodaj pilota zdalnego sterowania",
+    "configure_interfaces_camera": 
+         "kamera",
+    "configure_interfaces_cameradesc": 
+         "wspó?praca z dowolnym kompatybilnym urz?dzeniem video4linux na <b>/dev/video0</b> (tylko raspberry pi i x64 ubuntu).",
+    "configure_interfaces_cameraport": 
+         "port urz?dzenia",
+    "configure_interfaces_raspigpio": 
+         "raspberry pi gpio",
+    "configure_interfaces_airplay": 
+         "odbiornik airplay",
+    "configure_system_lircremotesadd": 
+         "dodaj pilota zdalnego sterowania",
+    "configure_system_zwaveaddnodeheading": 
+         "dodaj / usu? w?ze?",
+    "configure_system_zwaveaddnodepressbutton": 
+         "naci?nij przycisk na urz?dzeniu",
+    "configure_system_zwaveaddnodeoperationtimeout": 
+         "limit czasu operacji - 10 sekund.",
+    "configure_system_zwaveaddnodeclose": 
+         "zamknij",
+    "configure_maintenance_heading": 
+         "serwis",
+    "configure_system_theme": 
+         "motyw",
+    "configure_system_options": 
+         "opcje systemowe",
+    "configure_system_serviceportis": 
+         "port us?ugi http:",
+    "configure_system_serviceportchange": 
+         "zmie? port",
+    "configure_security_passwordprotectedaccess": 
+         "chro? has?em dost?pu",
+    "configure_system_configanddata": 
+         "ustawienia i dane",
+    "configure_maintenance_configuration": 
+         "ustawienia",
+    "configure_system_statistics": 
+         "statystyki",
+    "configure_system_databasereset": 
+         "resetuj baz? danych",
+    "systemsettings_backuprestores1heading": 
+         "przywró? konfiguracj?",
+    "configure_system_backuprestores1note": 
+         "wybierz programy automatyzacji, aby przywróci?",
+    "systemsettings_backuprestores1cancel": 
+         "odrzu?",
+    "systemsettings_backuprestores1confirm": 
+         "przywró?",
+    "configure_system_serviceportheading": 
+         "port us?ugi http",
+    "configure_system_serviceportchangenote": 
+         "uwaga: po zmianie portu, nale?y ponownie uruchomi? Homegenie, aby zastosowa? zmiany!",
+    "configure_system_serviceportcancel": 
+         "odrzu?",
+    "securitysettings_password_adminpassword": 
+         "<b>admin</b> has?o administratora",
+    "securitysettings_password_changecancel": 
+         "odrzu?",
+    "securitysettings_password_changecommit": 
+         "ustaw",
+    "maintenance_configuration_factoryreset": 
+         "reset do ustawie? fabrycznych?",
+    "configure_maintenance_resetprompt": 
+         "czy na pewno chcesz przywróci? konfiguracj? systemu do ustawie? fabrycznych?",
+    "configure_maintenance_resetwarning": 
+         "",
+    "configure_maintenance_resetproceed": 
+         "proceed",
+    "configure_maintenance_resetcancel": 
+         "odrzu?",
+    "home_voicerecognition_text_placeholder": 
+         "kliknij przycisk sterowania g?osowego albo wpisz zdanie ...",
+    "home_voicerecognition_voice": 
+         "g?os",
+    "configure_menu_scheduler": 
+         "harmonogram",
+    "configure_grouplist": 
+         "lista grup",
+    "configure_schedulerservice_title": 
+         "harmonogram<br /> zdarze?",
+    "configure_scheduler_events": 
+         "harmonogram wydarze?",
+    "configure_schedulerservice_bottombar_event_add": 
+         "dodaj wydarzenie",
+    "configure_schedulerservice_schedulerevent": 
+         "harmonogram zdarze?",
+    "configure_schedulerservice_itemname": 
+         "nazwa",
+    "configure_schedulerservice_itemcronexp": 
+         "wyra?enie cron",
+    "configure_schedulerservice_itemprogramid": 
+         "id programu lub nazwa (opcjonalne)",
+    "configure_schedulerservice_cancelitem": 
+         "odrzu?",
+    "configure_schedulerservice_deleteitem": 
+         "usu?",
+    "configure_schedulerservice_updateitem": 
+         "aktualizuj",
+    "configure_system_updatemanager": 
+         "mened?er aktualizacji",
+    "configure_system_updatemanager_updatecheck": 
+         "sprawd? aktualizacje",
+    "configure_system_updatemanager_installupdate": 
+         "zainstaluj aktualizacje",
+    "configure_system_restart_service": 
+         "uruchom ponownie us?ug?",
+    "configure_system_restart": 
+         "restart",
+    "configure_system_loganddebug": 
+         "plik dziennika",
+    "configure_system_logdownload": 
+         "pobierz",
+    "configure_system_logdownloadtoday": 
+         "dzisiaj",
+    "configure_system_logdownloadyesterday": 
+         "wczoraj",
+    "configure_system_httpsettings": 
+         "ustawienia http",
+    "configure_security_passwordprotectedaccess_set": 
+         "ustaw",
+    "configure_security_passwordprotectedaccess_clear": 
+         "reset",
+    "configure_system_httpcache": 
+         "cache us?ugi http",
+    "configure_maintenance_configuration_info": 
+         "<b>uwaga:</b> przed odtworzeniem pliku kopii zapasowej, musisz ustawi? to samo has?o w systemie, które zosta?o u?yte podczas tworzenia kopii zapasowej",
+    "configure_maintenance_configuration_backup": 
+         "kopia zapasowa",
+    "configure_maintenance_configuration_restore": 
+         "odtworzenie",
+    "configure_maintenance_configuration_factory_reset": 
+         "fabryczny reset",
+    "configure_system_modulescleanup": 
+         "czyszczenie modu?ów",
+    "configure_system_modulesselect": 
+         "wybierz modu?y",
+    "configure_system_remotemodules": 
+         "routing zdalnych modu?ów",
+    "configure_system_modsroutingreset": 
+         "reset",
+    "configure_system_userinterface": 
+         "interfejs u?ytkownika",
+    "configure_system_eventshistory": 
+         "historia zdarze?",
+    "home_about_version": 
+         "wersja",
+    "home_about_codename": 
+         "nazwa kodowa",
+    "home_about_motto": 
+         "motto",
+    "home_about_concept": 
+         "koncepcja, projekt, pomys? i kodowanie<br /> przez g-labs",
+    "home_about_license": 
+         "licencja",
+    "home_about_site": 
+         "strona i wsparcie",
+    "home_about_site_docs": 
+         "dokumentacja",
+    "actions_menu": 
+         "menu akcji",
+    "control_macrorecord_record_macro": 
+         "nagraj makro",
+    "control_macrorecord_recording": 
+         "nagrywanie ...",
+    "control_macrorecord_description": 
+         "wszystkie wydane polecenie jest teraz zapisywane w <strong>kreator skryptu</strong>.<br />kliknij przycisk <strong>zapisz</strong> kiedy sko?czysz.",
+    "control_macrorecord_close": 
+         "zamknij",
+    "control_macrorecord_options": 
+         "ustawienia",
+    "control_macrorecord_options_pause": 
+         "przerwa mi?dzy poleceniami",
+    "control_macrorecord_options_none": 
+         "none",
+    "control_macrorecord_options_mimic": 
+         "mimic",
+    "control_macrorecord_options_fixed": 
+         "sta?e",
+    "control_macrorecord_options_pauseduration": 
+         "czas trwania sta?ego wstrzymania",
+    "update_options_popup_loading": 
+         "?adowanie danych programu",
+    "control_widget_notconfigured_title": 
+         "widget nie skonfigurowany",
+    "control_widget_notconfigured_text": 
+         "kliknij ten przycisk, aby zmieni? konfiguracj?.",
+    "control_widget_notconfigured_button": 
+         "zamknij",
+    "configure_program_options_details": 
+         "szczegó?y",
+    "configure_program_options_restart": 
+         "restart",
+    "configure_program_details_implemfeatures": 
+         "zaimplementowane funkcje",
+    "configure_program_details_configoptions": 
+         "opcje konfiguracji",
+    "configure_program_details_moduleparams": 
+         "parametry modu?u",
+    "configure_group_actionmenu_deletegroup": 
+         "usu? grup?",
+    "configure_group_actionmenu_addseparatorlabel": 
+         "dodaj separator",
+    "configure_group_actionmenu_addmodule": 
+         "dodaj modu?",
+    "configure_separator_edit": 
+         "edytuj separator",
+    "configure_separator_label": 
+         "etykieta",
+    "configure_separator_placeholder": 
+         "wprowad? etykiet?",
+    "configure_module_optaddseparator": 
+         "aktualizuj",
+    "configure_module_parameters": 
+         "opcje",
+    "configure_module_parameters_delete": 
+         "usu?",
+    "configure_module_parameters_save": 
+         "zapisz",
+    "configure_module_parameters_linktitle": 
+         "parametry modu?u",
+    "configure_automationgroup_add": 
+         "dodaj",
+    "configure_programslist_listtitle": 
+         "lista programów",
+    "configure_programslist_tap_disable": 
+         "kliknij, aby WY??CZY? program",
+    "configure_programslist_tap_enable": 
+         "kliknij, aby W??CZY? program",
+    "configure_programslist_deletegroup": 
+         "usu? grup?",
+    "configure_programslist_importprogram": 
+         "importuj program",
+    "configure_programslist_addnewprogram": 
+         "dodaj nowy program",
+    "configure_programslist_refreshlist": 
+         "od?wie? list?",
+    "configure_programslist_import": 
+         "importuj",
+    "configure_program_summary": 
+         "podsumowanie",
+    "configure_program_programcode": 
+         "kod programu",
+    "configure_program_sketchcode": 
+         "szkic kodu",
+    "configure_program_triggercode": 
+         "kod wyzwalacza",
+    "configure_program_makefile": 
+         "makefile",
+    "configure-editprogram-addcommand": 
+         "dodaj komend?",
+    "configure-editprogram-addcondition": 
+         "dodaj warunek",
+    "configure-editprogram-capture": 
+         "przechwytywanie",
+    "configure-editprogram-help": 
+         "pomoc",
+    "configure_program_triggertype": 
+         "wyzwalanie",
+    "configure_editprogram_options_delete": 
+         "usu? program",
+    "configure_editprogram_saving_succeed": 
+         "zapis pomy?lny",
+    "configure_editprogram_saving": 
+         "aktualizacja danych programu",
+    "configure_editprogram_error_updating": 
+         "wyst?pi? b??d podczas aktualizacji programu!",
+    "configure_editprogram_compile": 
+         "kompilacja",
+    "systemsettings_selectport_title": 
+         "uwaga",
+    "systemsettings_selectport_placeholder": 
+         "(wybierz port ...)",
+    "systemsettings_selectport_text": 
+         "prosz? wybra? port dla tego urz?dzenia",
+    "systemsettings_selectport_button": 
+         "zamknij",
+    "systemsettings_x10housecodes_title": 
+         "uwaga",
+    "systemsettings_x10housecodes_text": 
+         "wybierz co najmniej jeden kod domu.",
+    "systemsettings_x10housecodes_button": 
+         "zamknij",
+    "configure_interfaces_insteon": 
+         "Insteon PLM (2413S/2413U)",
+    "configure_interfaces_insteonport": 
+         "port urz?dzenia",
+    "configure_interfaces_insteonx10housecodes": 
+         "kody stosowane w domu (tylko dla urz?dze? x10)",
+    "configure_group_newgroupconfirm": 
+         "ok",
+    "configure_module_optremoveseparator": 
+         "usu?",
+    "configure_program_selectcommandtarget": 
+         "okre?l cel dla komendy",
+    "configure_program_selectcommandtoperform": 
+         "wybierz komend? aby wykona?",
+    "configure_program_commandcustom": 
+         "polecenie api klienta",
+    "configure_program_wizardproceed": 
+         "wznów",
+    "configure_program_commandcapturetitle": 
+         "Capturing Commands",
+    "configure_program_waitingnewcommand": 
+         "czekam na nowe zdarzenia ...",
+    "configure_program_waitingnewcommandadvice": 
+         "",
+    "configure_program_capturestop": 
+         "stop",
+    "configure_program_wizard_editline_title": 
+         "edycja linii",
+    "configure_program_wizard_editcmdline_prompt": 
+         "przenie? lub usu? lini?  <span id=\"command_linenumber_label\" style=\"font-weight:bold\"></span>",
+    "configure_program_wizard_editconline_prompt": 
+         "przenie? lub usu? lini? <span id=\"condition_linenumber_label\" style=\"font-weight:bold\"></span>",
+    "configure_program_wizard_editline_number": 
+         "numer nowej linii",
+    "configure_program_wizard_editline_delete": 
+         "usu?",
+    "configure_program_wizard_editline_change": 
+         "przenie?",
+    "configure_program_selectconditionsubject": 
+         "Select condition subject",
+    "configure_program_selectconditionproperty": 
+         "Select comparison property",
+    "configure_program_conditioncapturetitle": 
+         "Capturing Conditions",
+    "configure_program_waitingnewcondition": 
+         "czekam na nowe zdarzenia ...",
+    "configure_program_waitingnewconditionadvice": 
+         "",
+    "configure_program_options_update": 
+         "aktualizacja",
+    "configure_interfaces_zwavediscovery": 
+         "wykrywanie",
+    "configure_interfaces_camerasettings": 
+         "urz?dzenie / rozdzielczo?? / fps",
+    "configure_interfaces_upnp": 
+         "Universal Plug &amp; Play",
+    "configure_interfaces_weeco4mgpio": 
+         "WEECOBOARD 4M GPIO",
+    "configure_system_zwavediscoverytitle": 
+         "ZWave Discovery",
+    "configure_system_updateinstall": 
+         "instalacja aktualizacji",
+    "configure_system_deletemodule": 
+         "wybierz modu?",
+    "systemsettings_backuprestores1selectallnone": 
+         "wybierz wszystko / brak",
+    "securitysettings_password_setpassword": 
+         "ustaw has?o",
+    "securitysettings_password_enterpassword": 
+         "podaj has?o dla u?ytkownika 'admin' ",
+    "maintenance_configuration_servicerestart": 
+         "uruchomi? ponownie us?ug??",
+    "configure_maintenance_restartprompt": 
+         "czy na pewno chcesz ponownie uruchomi? us?ug? ??",
+    "configure_maintenance_restartwarning": 
+         "",
+    "configure_module_typemediareceiver": 
+         "odbiornik",
+    "configure_module_typemediatransmitter": 
+         "nadajnik",
+    "configure_module_featuresoptions": 
+         "cechy / w?a?ciwo?ci",
+    "configure_editprogram_files": 
+         "pliki",
+    "configure_program_newfile": 
+         "dodaj plik",
+    "configure_program_filename": 
+         "nazwa pliku",
+    "configure_program_fileslist": 
+         "lista plików",
+    "configure_program_fileslist_exit": 
+         "wyj?cie",
+    "configure_program_fileslist_delete": 
+         "usu?",
+    "configure_program_fileslist_edit": 
+         "edytuj",
+    "configure_program_fileslist_add": 
+         "dodaj",
+    "configure_program_hasmodification": 
+         "program zosta? zmieniony!",
+    "configure_program_savechangesprompt": 
+         "czy chcesz zapisa? zmiany?",
+    "configure_program_changeswillbelost": 
+         "",
+    "configure_program_dontsave": 
+         "nie",
+    "configure_program_saveconfirm": 
+         "zapisz",
+    "configure_interfaces_zwavehardreset": 
+         "twardy reset",
+    "systemsettings_zwavehardreset_hardreset": 
+         "twardy reset sterownika?",
+    "systemsettings_zwavehardreset_hardresetprompt": 
+         "czy na pewno chcesz to zrobi? twardy reset kontrolera Z-Wave?",
+    "systemsettings_zwavehardreset_hardresetwarning": 
+         "wszystkie urz?dzenia zostan? usuni?te",
+    "systemsettings_zwavehardreset_hardresetcancel": 
+         "cancel",
+    "systemsettings_zwavehardreset_hardresetproceed": 
+         "resume",
+    "statistics_dataanalysis": 
+         "analiza danych",
+    "statistics_counterexpense": 
+         "liczniki i koszty",
+    "analyze_statistics_datefrom": 
+         "od",
+    "analyze_statistics_dateto": 
+         "do",
+    "analyze_statistics_costperunit": 
+         "cena jednostkowa",
+    "analyze_statistics_overallcounter": 
+         "ca?kowita liczba",
+    "analyze_statistics_totalexpense": 
+         "ca?kowite koszty",
+    "configure_program_oroperator": 
+         "operator LUB",
+    "configure_system_statistics_clear": 
+         "usu? wszystkie statystyki",
+    "configure_system_statistics_databasemaxsize": 
+         "maksymalny rozmiar bazy danych",
+    "configure_system_statistics_changedatabasemaxsize": 
+         "zmiana",
+    "configure_system_statistics_databasemaxsizechange": 
+         "rozmiar maksymalny (MB)",
+    "configure_system_statistics_databasemaxsizechange_note": 
+         "uwaga: po zmianie rozmiaru, nale?y ponownie uruchomi? Homegenie, aby zmiany odnios?y skutek!",
+    "configure_system_statistics_databasemaxsizechange_cancel": 
+         "anuluj",
+    "configure_system_statistics_databasemaxsizechange_commit": 
+         "zmiana",
+    "configure_popupfilter_title": 
+         "filtr wyskakuj?cych okienek",
+    "configure_popupfilter_optclose": 
+         "zamknij",
+    "configure_system_blockedpopups": 
+         "zablokowane wyskakuj?ce okienka",
+    "configure_system_blockedpopups_edit": 
+         "zmiana",
+    "configure_system_updateinstall_warning": 
+         "zaleca si? zrobienie kopii zapasowej konfiguracji przed ka?d? aktualizacj?.",
+    "configure_automationgroup_widgeteditor": 
+         "edytor wid?etów",
+    "configure_widgetlist_heading": 
+         "<font style=\"color:gray\">wid?ety</font><br />List</h3>",
+    "configure_widgetlist_importwidget": 
+         "importuj wid?ety",
+    "configure_widgetlist_import": 
+         "importuj",
+    "configure_widgetlist_add_popuptitle": 
+         "nowy wid?et",
+    "configure_widgetlist_add_widgetbrand": 
+         "brand",
+    "configure_widgetlist_add_widgetcategory": 
+         "kategoria",
+    "configure_widgetlist_add_widgetname": 
+         "nazwa",
+    "configure_widgetlist_newwidgetconfirm": 
+         "dodaj",
+    "configure_widgetlist_action_import": 
+         "importuj",
+    "configure_widgetlist_action_addwidget": 
+         "dodaj wid?et",
+    "configure_widgeteditor_html": 
+         "kopiuj",
+    "configure_widgeteditor_javascript": 
+         "javascript",
+    "configure_widgeteditor_previewupdate": 
+         "uruchom / podgl?d",
+    "configure_widgeteditor_hasmodification": 
+         "wid?et zosta? zmodyfikowany!",
+    "configure_widgeteditor_deletetitle": 
+         "usun?? wid?et?",
+    "configure_widgeteditor_deleteprompt": 
+         "czy na pewno chcesz usun?? ten widget?",
+    "configure_widgetlist_list": 
+         "lista wid?etów",
+    "configure_widgeteditor_nobindmodule_title": 
+         "wybierz modu?",
+    "configure_widgeteditor_nobindmodule_text": 
+         "No valid module for data binding has been found, please select one.",
+    "configure_widgeteditor_nobindmodule_close": 
+         "zamknij"
+}

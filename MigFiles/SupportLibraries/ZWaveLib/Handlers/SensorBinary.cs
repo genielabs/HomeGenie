@@ -25,15 +25,20 @@ using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {
-    public static class SensorBinary
+    public class SensorBinary : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x30;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.SensorBinaryReport)
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[9], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, message[2], 0);
             }
             return nodeEvent;
         }

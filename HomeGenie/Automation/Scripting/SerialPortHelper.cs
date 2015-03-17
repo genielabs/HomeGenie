@@ -164,6 +164,11 @@ namespace HomeGenie.Automation.Scripting
             get { return textEndOfLine[0]; }
             set { textEndOfLine = new string[] { value }; }
         }
+        
+        public void Reset()
+        {
+            Disconnect();
+        }
 
         private void serialPort_MessageReceived(byte[] message)
         {

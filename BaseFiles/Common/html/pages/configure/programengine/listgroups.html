@@ -13,7 +13,7 @@
 
     </div>
 
-    <div id="automationgroup_add" class="ui-corner-all hg-popup-a" data-role="popup" data-overlay-theme="b" data-position-to="window">
+    <div id="automationgroup_add" class="ui-corner-all hg-popup-b" data-role="popup" data-overlay-theme="b" data-position-to="window">
         <div class="ui-corner-top" data-role="header">
             <h2 data-locale-id="configure_automationgroup_newgroup">Add Group</h2>
         </div>
@@ -22,15 +22,26 @@
             <input id="automationgroup_new_name" type="text" />
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#" class="ui-btn ui-shadow ui-corner-all" data-locale-id="configure_automationgroup_newgroupcancel" data-rel="back">Cancel</a>
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_automationgroup_newgroupcancel" data-rel="back">Cancel</a>
                 </div>
                 <div class="ui-block-b">
-                    <a id="automationgroup_new_button" href="#" data-locale-id="configure_automationgroup_add" class="ui-btn ui-shadow ui-corner-all" data-rel="back" data-transition="flow">Add</a>
+                    <a id="automationgroup_new_button" href="#" data-locale-id="configure_automationgroup_add" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left" data-rel="back" data-transition="flow">Add</a>
                 </div>
             </div>
         </div>
     </div>
+    
 
+    <div id="automationgroup_actionmenu" data-role="popup" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <h5 data-locale-id="actions_menu" align="center">Actions Menu</h5>
+        <ul data-role="listview" data-inset="false" style="min-width:210px;">
+            <li><a data-ui-field="widgeteditor-btn" class="ui-btn ui-icon-edit ui-btn-icon-right" data-locale-id="configure_automationgroup_widgeteditor">Widget Editor</a></li>
+            <li><a data-ui-field="addgroup-btn" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_automationgroup_bottombar_group_add">Add Group</a>
+        </ul>
+    </div>
+    
+    
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
 
         <div data-role="navbar">
@@ -46,8 +57,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#automationgroup_add" class="ui-btn ui-icon-plus ui-btn-icon-right" data-locale-id="configure_automationgroup_bottombar_group_add" data-rel="popup" data-transition="pop">
-                        Add Group
+                    <a class="ui-btn ui-icon-arrow-u ui-btn-icon-right" href="#automationgroup_actionmenu" data-locale-id="configure_program_bbaractions" data-rel="popup" data-transition="slideup">
+                        Actions
                     </a>
                 </li>
             </ul>

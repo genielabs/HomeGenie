@@ -152,7 +152,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:53.170253Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:30.130844Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -279,7 +279,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:53.676371Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:30.638004Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -442,7 +442,7 @@ return true; // execute "Code To Run"
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:54.177838Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:31.138156Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -521,7 +521,7 @@ while (Program.IsEnabled)
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:54.673897Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:31.636872Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1264,7 +1264,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:55.173017Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:32.138408Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1319,7 +1319,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Brighten a light to 100% when switched on.</Description>
     <Group>X10</Group>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:55.67611Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:32.64037Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1614,7 +1614,7 @@ while (Program.IsEnabled)
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:56.181614Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:33.148337Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1708,7 +1708,7 @@ Program.GoBackground();</ScriptSource>
     <Description>Query sensors' data and battery level when a node wakes up.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:56.675697Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:33.639606Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1778,7 +1778,7 @@ Program.GoBackground();</ScriptSource>
     <Description>When device is turned on, automatically turn it off after a given delay.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:57.177192Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:34.142127Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2052,7 +2052,7 @@ return true;</ScriptCondition>
     <Description>Store e-mail account information for sending/receiving emails.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:57.673739Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:34.643113Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2418,7 +2418,7 @@ It sends toast and tile updates to Windows Phone client.
 Currently limited to one client channel.</Description>
     <Group>Messaging and Social</Group>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:58.678144Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:35.644756Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2520,7 +2520,7 @@ while (Program.IsEnabled)
 energy consumption.</Description>
     <Group>Energy Management</Group>
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:59.185197Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:36.153845Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2674,7 +2674,7 @@ Program.GoBackground();</ScriptSource>
 It requires that a manufacturer specific get has been issued on the node.</Description>
     <Group>Z-Wave</Group>
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:46:59.68038Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:36.642246Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2938,7 +2938,7 @@ while (Program.IsEnabled)
     <Description>Control device by motion detection and enviroment light. </Description>
     <Group>Lights</Group>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:47:00.18191Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:37.14256Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4154,142 +4154,141 @@ string password = Program.InputField("Password").Value.Trim();
 
 if (server == "")
 {
-	Program.Notify("MQTT", "Please configure server address");
-    Pause(5);
-    return;
+  Program.Notify("MQTT", "Please configure server address");
+  Pause(5);
+  return;
 }
 else
 {
-	Program.Notify("MQTT", "Connecting to " + server + "...");
-  	try
+  Program.Notify("MQTT", "Connecting to " + server + "...");
+  try
+  {
+    if (username != "")
     {
-      	if (username != "")
-        {
-          	Net.MqttService(server, port, username, password, clientid);
-        }
-      	else
-        {
-      		Net.MqttService(server, port, clientid);
-        }
-      	Program.Notify("MQTT", "Connected!");
-    } 
-  	catch (Exception e) 
-    {
-      	Program.Notify("MQTT", e.Message);
-      	Pause(5);
-      	return;
+      MqttClient.WithCredentials(username, password);
     }
+    MqttClient
+      .Service(server)
+      .Connect(port, clientid);
+    Program.Notify("MQTT", "Connected!");
+  } 
+  catch (Exception e) 
+  {
+    Program.Notify("MQTT", e.Message);
+    Pause(5);
+    return;
+  }
 }
 
 
 
-Net.Subscribe(topic, (mtopic, mpayload) =&gt; {
-  	var parts = mtopic.Split('/');
-  	var cid = parts[0];
-  	//
-  	//if (cid == clientid) return;
-  	//
-  	if (parts.Length == 4)
+MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
+  var parts = mtopic.Split('/');
+  var cid = parts[0];
+  //
+  //if (cid == clientid) return;
+  //
+  if (parts.Length == 4)
+  {
+    try
     {
-  		try
-        {
-            var domain = parts[1];
-            var address = parts[2];
-            var type = parts[3];
+      var domain = parts[1];
+      var address = parts[2];
+      var type = parts[3];
 
-            var module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
-          
-          	switch (type)
+      var module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+
+      switch (type)
+      {
+        case "command":
+        if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
+        {
+          var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
+          var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
+          if (targetmodule.Get().Instance != null)
+          {
+            string command = cmdobj.Command.ToString();
+            switch (command)
             {
-				case "command":
-                        if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
-                        {
-                            var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
-                            var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
-                            if (targetmodule.Get().Instance != null)
-                            {
-                                string command = cmdobj.Command.ToString();
-                                switch (command)
-                                {
-                                    case "Module.Describe":
-                                    var modinstance = targetmodule.Get().Instance;
-                                    Net.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Utility.Module2Json(modinstance, false));
-                                    break;
-                                    default:
-                                    targetmodule.Command(command).Execute();
-                                    break;
-                                }
-                            }
-                        }
-                      	break;
-                  case "description":
-                      	if (module.Instance != null)
-                      	{
-                          	var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
-                          	module.Instance.Name = modobj.Name;
-                          	module.Instance.Description = modobj.Description;
-                          	module.Instance.DeviceType = modobj.DeviceType;
-                          	var parentid = module.Parameter("VirtualModule.ParentId").Value;
-                          	module.Instance.Properties = modobj.Properties;
-                          	module.Parameter("VirtualModule.ParentId").Value = parentid;
-                          	module.Parameter("MQTT.SourceNode").Value = cid;
-                        	Program.Notify("MQTT", "Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
-                      	}
-                      	break;
-                  case "event":
-			            var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
-                      	if (module.Instance == null)
-                   	   {
-                    	    Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
-                     		module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
-                  	    }
-                      	else if (!module.HasParameter("MQTT.SourceNode"))
-                      	{
-                        	Net.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");      	
-                      	}
-                      	Program.RaiseEvent(module, property.Name, property.Value, "");
-                      	break;
-			}
-		} catch (Exception e) { Program.Notify("MQTT ERROR!", e.Message);  }
-	}
-	//Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload); 
+              case "Module.Describe":
+              var modinstance = targetmodule.Get().Instance;
+              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Utility.Module2Json(modinstance, false));
+              break;
+              default:
+              targetmodule.Command(command).Execute();
+              break;
+            }
+          }
+        }
+        break;
+        case "description":
+        if (module.Instance != null)
+        {
+          var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
+          module.Instance.Name = modobj.Name;
+          module.Instance.Description = modobj.Description;
+          module.Instance.DeviceType = modobj.DeviceType;
+          var parentid = module.Parameter("VirtualModule.ParentId").Value;
+          module.Instance.Properties = modobj.Properties;
+          module.Parameter("VirtualModule.ParentId").Value = parentid;
+          module.Parameter("MQTT.SourceNode").Value = cid;
+          Program.Notify("MQTT", "Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
+        }
+        break;
+        case "event":
+        var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
+        if (module.Instance == null)
+        {
+          Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
+          module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+        }
+        else if (!module.HasParameter("MQTT.SourceNode"))
+        {
+          MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");      	
+        }
+        Program.RaiseEvent(module, property.Name, property.Value, "");
+        break;
+      }
+    } catch (Exception e) { Program.Notify("MQTT ERROR!", e.Message);  }
+  }
+  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload); 
 });
 
 
 When.WebServiceCallReceived("MQTT:", ( args ) =&gt; 
 {
-    string[] reqs = ((string)args).Split('/');
-    string domain = reqs[0];
-  	string address = reqs[1];
-  	var commands = new List&lt;string&gt;(reqs);
-  	// remove domain and address to obtain the command parts only
-  	commands.RemoveAt(0); commands.RemoveAt(0);
-  	string command = String.Join("/", commands.ToArray());
-    try
-    {
-      	int mqttend = domain.IndexOf(".");
-      	int mqttdel = domain.IndexOf(":");
-      	var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
-      	domain = domain.Substring(mqttend + 1);
-      	Net.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");      	
-      	return "{ 'ResponseValue' : 'OK' }";    
-    } catch (Exception e) { 
-        Program.Notify("MQTT ERROR!", e.Message);
-    }
-    return "{ 'ResponseValue' : 'ERROR' }";
+  string[] reqs = ((string)args).Split('/');
+  string domain = reqs[0];
+  string address = reqs[1];
+  var commands = new List&lt;string&gt;(reqs);
+  // remove domain and address to obtain the command parts only
+  commands.RemoveAt(0); commands.RemoveAt(0);
+  string command = String.Join("/", commands.ToArray());
+  try
+  {
+    int mqttend = domain.IndexOf(".");
+    int mqttdel = domain.IndexOf(":");
+    var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
+    domain = domain.Substring(mqttend + 1);
+    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");      	
+    return "{ 'ResponseValue' : 'OK' }";    
+  } catch (Exception e) { 
+    Program.Notify("MQTT ERROR!", e.Message);
+  }
+  return "{ 'ResponseValue' : 'ERROR' }";
 });
 
 
 // We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
-    if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
-    {
-        try{
-            Net.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Newtonsoft.Json.JsonConvert.SerializeObject(property));
-        } catch  (Exception e){ Console.WriteLine("ERR:"+e.Message + "\n" + e.StackTrace); }
-    }
-  	// returning true, will route event to other listeners
-	return true;
+  if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
+  {
+    try{
+      MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Newtonsoft.Json.JsonConvert.SerializeObject(property));
+    } catch  (Exception e){ Console.WriteLine("ERR:"+e.Message + "\n" + e.StackTrace); }
+  }
+  // returning true, will route event to other listeners
+  return true;
 });
 //
 Program.GoBackground();</ScriptSource>
@@ -8925,7 +8924,7 @@ while (Program.IsEnabled)
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
     <ActivationTime>2015-02-08T12:47:36.375853Z</ActivationTime>
-    <TriggerTime>2015-02-08T12:47:36.391496Z</TriggerTime>
+    <TriggerTime>2015-02-23T18:31:38.164381Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -9012,5 +9011,459 @@ while (Program.IsEnabled)
     <TriggerTime>2015-02-15T12:28:35.5600913Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
-  </ProgramBlock>  
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>const string MODULES_DOMAIN = "HomeAutomation.KNX";
+Program.Setup(()=&gt;{
+
+  Program.AddInputField("KnxLocalIp", "", "Local endpoint IP address (optional)");
+  Program.AddInputField("KnxLocalPort","", "Local endpoint port (optional)");
+  Program.AddInputField("KnxRemoteIp", "", "Remote endpoint IP address (optional)");
+  Program.AddInputField("KnxRemotePort","", "Remote endpoint port (optional)");
+  //
+  // Create 5 virtual modules with the domain "HomeAutomation.KNX" and with address from 1 to 5
+  Program.AddVirtualModules(MODULES_DOMAIN, "Light", "", 1, 5);
+  Program.AddFeatureTextInput(MODULES_DOMAIN, "Dimmer,Light,Sensor", "KNX.Address", "KNX Address");
+
+});
+return true;
+</ScriptCondition>
+    <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.KNX";
+const string EVENT_DESCRIPTION = "KNX Module";
+var knxModules = Modules.InDomain(MODULES_DOMAIN);
+
+var localIp = Program.InputField("KnxLocalIp").Value;
+var localPort = (int)Program.InputField("KnxLocalPort").DecimalValue;
+var remoteIp = Program.InputField("KnxRemoteIp").Value;
+var remotePort = (int)Program.InputField("KnxRemotePort").DecimalValue;
+
+var knx = KnxClient;
+if (!String.IsNullOrWhiteSpace(localIp) &amp;&amp; !String.IsNullOrWhiteSpace(remoteIp))
+{
+  knx.EndPoint(localIp, localPort &gt; 0 ? localPort : 3671, remoteIp, remotePort &gt; 0 ? remotePort : 3671);
+}
+else if (!String.IsNullOrWhiteSpace(localIp))
+{
+  if (localPort &gt; 0)  
+  {
+    knx.EndPoint(localIp, localPort);
+  }
+  else
+  {
+    knx.EndPoint(localIp);
+  }
+}
+
+knx
+  .Connect()
+  .OnStatusReceived((address, status)=&gt;{ 
+    // TODO: should update virtual module parameters
+    Program.Notify("KNX Status", "Device " + address + " -&gt; " + status);
+  })
+  .OnEventReceived((address, status)=&gt;{ 
+    // TODO: should update virtual module parameters
+    Program.Notify("KNX Event", "Device " + address + " -&gt; " + status);
+  });  
+
+// - http://&lt;hg_address&gt;/api/HomeAutomation.KNX/...
+When.WebServiceCallReceived(MODULES_DOMAIN, ( args ) =&gt; 
+{
+  string[] reqs = ((string)args).Split('/');
+  try
+  {
+    string lightnumber = reqs[1];
+    string command = reqs[2];
+    //string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
+    //
+    var module = knxModules.WithAddress(lightnumber).Get();
+    var knxAddress = module.Parameter("KNX.Address");
+    if (knxAddress == null)
+    {
+      return "{ 'ResponseValue' : 'ERROR: module KNX address not configured.' }";
+    }
+    //
+    switch(command)
+    {
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        knx.Action(knxAddress.Value, true);
+        Program.RaiseEvent(module, "Status.Level", "1", EVENT_DESCRIPTION);
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
+        knx.Action(knxAddress.Value, false);
+        Program.RaiseEvent(module, "Status.Level", "0", EVENT_DESCRIPTION);
+        break;
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.KNX/&lt;light_number&gt;/Control.Toggle
+      case "Control.Toggle":
+        if (module.Parameter("Status.Level").DecimalValue == 0)
+        {
+          knx.Action(knxAddress.Value, true);
+          Program.RaiseEvent(module, "Status.Level", "1", EVENT_DESCRIPTION);
+        }
+        else
+        {
+          knx.Action(knxAddress.Value, false);
+          Program.RaiseEvent(module, "Status.Level", "0", EVENT_DESCRIPTION);
+        }
+        break;
+    }
+    return "{ 'ResponseValue' : 'OK' }";    
+  } catch (Exception e) { 
+    Program.Notify(MODULES_DOMAIN + " ERROR!", e.Message);
+  }
+  return "{ 'ResponseValue' : 'ERROR' }";
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>HomeAutomation.KNX</ForDomains>
+        <ForTypes>Dimmer,Light,Sensor</ForTypes>
+        <Property>KNX.Address</Property>
+        <Description>KNX Address</Description>
+      </ProgramFeature>
+    </Features>
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>27</Address>
+    <Name>KNX device modules</Name>
+    <Description>Adds 5 virtual modules. KNX address of each device can be configured from the module options popup.</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>#setup program stuff
+def setup():
+  hg.Program.AddInputField('SerialPort', '/dev/ttyUSB0', 'Serial port path (enter "pi", for using GPIO)')
+  hg.Program.AddInputField('VirtualModules', 'A,B', 'Create virtual modules (comma separated house codes)')
+  return
+hg.Program.Setup(setup)
+hg.SetConditionTrue()
+    </ScriptCondition>
+    <ScriptSource>"""
+X10 Firecracker CM17A Interface
+"""
+
+#-----------------------------------------------------------
+# Copyright (c) 2010-2013 Collin J. Delker
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met: 
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer. 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution. 
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.# 
+#-----------------------------------------------------------
+#
+# NOTES:
+#   This software requires the pySerial python module:
+#   http://pyserial.sourceforge.net/
+#
+#   Commands can be sent from the command line or from
+#   python scripts by calling send_command().
+#
+#   X10 Firecracker CM17A protocol specificaiton:
+#   ftp://ftp.x10.com/pub/manuals/cm17a_protocol.txt
+#
+#-----------------------------------------------------------
+import sys
+# this will tell HG where to look for libraries
+sys.path.append("/usr/lib/python2.7")
+sys.path.append("/usr/lib/python2.7/dist-packages")
+
+# Check for serial port or RPi-GPIO support
+serial_installed = False
+try:
+    import serial
+    serial_installed = True
+except:
+    pass
+
+try:
+    import RPi.GPIO as GPIO
+    serial_installed = True
+except:
+    pass
+
+import time
+#import sys
+
+if not serial_installed:
+    raise ValueError, 'No python serial module installed.'
+
+#----------------------------------------------------------
+# Constants
+#----------------------------------------------------------
+__version__ = '0.4'
+__domain__ = 'HomeAutomation.FireCracker'
+__event_description__ = 'X10 FireCracker'
+
+# Firecracker spec requires at least 0.5ms between bits
+DELAY_BIT = 0.001 # Seconds between bits
+DELAY_INIT = 0.5  # Powerup delay
+DELAY_FIN = 1     # Seconds to wait before disabling after transmit
+
+# House and unit code table
+HOUSE_LIST = [
+   0x6000, # a
+   0x7000, # b
+   0x4000, # c
+   0x5000, # d
+   0x8000, # e
+   0x9000, # f
+   0xA000, # g
+   0xB000, # h
+   0xE000, # i
+   0xF000, # j
+   0xC000, # k
+   0xD000, # l
+   0x0000, # m
+   0x1000, # n
+   0x2000, # o
+   0x3000  # p
+   ]
+
+UNIT_LIST = [
+  0x0000, # 1
+  0x0010, # 2
+  0x0008, # 3
+  0x0018, # 4
+  0x0040, # 5
+  0x0050, # 6
+  0x0048, # 7
+  0x0058, # 8
+  0x0400, # 9
+  0x0410, # 10
+  0x0408, # 11
+  0x0400, # 12
+  0x0440, # 13
+  0x0450, # 14
+  0x0448, # 15
+  0x0458  # 16
+  ]
+MAX_UNIT = 16
+    
+# Command Code Masks
+CMD_ON   = 0x0000
+CMD_OFF  = 0x0020
+CMD_BRT  = 0x0088
+CMD_DIM  = 0x0098
+
+# Data header and footer
+DATA_HDR = 0xD5AA
+DATA_FTR = 0xAD
+
+# Raspberry Pi GPIO pins. Change to whatever you want to use.
+DTR_PIN = 24
+RTS_PIN = 25
+
+#----------------------------------------------------------
+# Raspberry Pi GPIO class
+#----------------------------------------------------------
+class RPiGPIO():
+    """ Class to emulate serial port using Raspberry Pi GPIO. Only DTR and RTS pins are used. 
+        DTR = pin 4 of DB9 serial connector
+        RTS = pin 7 of DB9 serial connector
+        GND = pin 5 of DB9 serial connector.
+        Must use level-shifter to convert RPi's 3.3V output to 5V.
+    """
+    def __init__( self ):
+        GPIO.setmode( GPIO.BCM )
+        GPIO.setup( DTR_PIN, GPIO.OUT )
+        GPIO.setup( RTS_PIN, GPIO.OUT )
+
+    def setDTR( self, val ):
+        GPIO.output( DTR_PIN, val )
+    
+    def setRTS( self, val ):
+        GPIO.output( RTS_PIN, val )
+
+    def close( self ):
+        GPIO.cleanup()
+
+
+#----------------------------------------------------------
+# Functions
+#----------------------------------------------------------
+def set_standby(s):
+    """ Put Firecracker in standby """
+    s.setDTR(True)
+    s.setRTS(True)
+
+
+def set_off(s):
+    """ Turn firecracker 'off' """
+    s.setDTR(False)
+    s.setRTS(False)
+
+
+def send_data(s, data, bytes):
+    """ Send data to firecracker """
+    mask = 1 &lt;&lt; (bytes - 1)
+    
+    for i in range(bytes):
+        bit = data &amp; mask
+        if bit == mask:
+            s.setDTR(False)
+        elif bit == 0:
+            s.setRTS(False)
+
+        time.sleep(DELAY_BIT)
+        set_standby(s)
+        time.sleep(DELAY_BIT)      # Then stay in standby at least 0.5ms before next bit
+        data = data &lt;&lt; 1           # Move to next bit in sequence
+
+
+def build_command(house, unit, action):
+    """ Generate the command word """
+    cmd = 0x00000000    
+    house_int = ord(house.upper()) - ord('A')
+
+    # Add in the house code
+    if house_int &gt;= 0 and house_int &lt;= ord('P') - ord('A'):
+        cmd = cmd | HOUSE_LIST[ house_int ]
+    else:
+        print "Invalid house code ", house, house_int
+        return
+
+    # Add in the unit code. Ignore if bright or dim command,
+    # which just applies to last unit.
+    if unit &gt; 0 and unit &lt; MAX_UNIT:
+        if action.upper() != 'BRT' and action.upper() != 'DIM':
+            cmd = cmd | UNIT_LIST[ unit - 1 ]
+    else:
+        print "Invalid Unit Code", unit
+        return
+
+    # Add the action code
+    if action.upper() == 'ON':
+        cmd = cmd | CMD_ON
+    elif action.upper() == 'OFF':
+        cmd = cmd | CMD_OFF
+    elif action.upper() == 'BRT':
+        cmd = cmd | CMD_BRT
+    elif action.upper() == 'DIM':
+        cmd = cmd | CMD_DIM
+    else:
+        print "Invalid Action Code", action
+        return
+    
+    return cmd
+
+
+def send_command( portname, house, unit, action ):
+    """ Send Command to Firecracker
+
+    portname: Serial port to send to
+    house:    house code, character 'a' to 'p'
+    unit:     unit code, integer 1 to 16
+    action:   string 'ON', 'OFF', 'BRT' or 'DIM'
+    """
+
+    cmd = build_command( house, unit, action )
+    if cmd != None:
+        try:
+            if portname == 'pi':
+                s = RPiGPIO()
+            else:
+                s = serial.Serial(portname)
+        except serial.SerialException:
+            print 'ERROR opening serial port', portname
+            return False
+
+        set_standby(s)               # Initialize the firecracker
+        time.sleep( DELAY_INIT )     # Make sure it powers up
+        send_data( s, DATA_HDR, 16 ) # Send data header
+        send_data( s, cmd, 16 )      # Send data
+        send_data( s, DATA_FTR, 8 )  # Send footer
+        time.sleep( DELAY_FIN )      # Wait for firecracker to finish transmitting
+        set_off(s)                   # Shut off the firecracker
+        s.close()
+        return True
+
+      
+def web_service_handler( args ):
+  path = args.split('/')
+  house = path[1][0]
+  unit = int(path[1][1:])
+  command = path[2]
+  port = hg.Program.InputField('SerialPort').Value
+  module = hg.Modules.InDomain(__domain__).WithAddress(house+`unit`).Get()
+  if command == 'Control.On':
+    hg.Program.RaiseEvent(module, 'Status.Level', '1', __event_description__)
+    send_command( port, house, unit, 'ON' )
+  elif command == 'Control.Off':
+    hg.Program.RaiseEvent(module, 'Status.Level', '0', __event_description__)
+    send_command( port, house, unit, 'OFF' )
+  elif command == 'Control.Level':
+    option = float(path[3]) / 100
+    level = float((module.Level / 100) * 22)
+    dimbrt = int((option*22) - level)
+    option = (level + dimbrt) / 22;
+    hg.Program.RaiseEvent(module, 'Status.Level', `option`, __event_description__)
+    if dimbrt &gt; 0:
+        for l in range(1, dimbrt):
+            send_command( port, house, unit, 'BRT' )
+    elif dimbrt &lt; 0:
+        for l in range(1, abs(dimbrt)):
+            send_command( port, house, unit, 'DIM' )
+  return
+
+
+#
+# Program MAIN
+#
+# create virtual modules
+virtualModules = hg.Program.InputField('VirtualModules').Value.split(',')
+for h in virtualModules:
+  for unit in range(0, 16):
+    hg.Program.AddVirtualModule(__domain__, h+`1+unit`, 'Switch', '')
+# listen to web service calls
+hg.When.WebServiceCallReceived(__domain__, web_service_handler)
+# go background
+hg.Program.GoBackground()
+    </ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <IsRunning>false</IsRunning>
+    <Features />
+    <LastConditionEvaluationResult>false</LastConditionEvaluationResult>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>25</Address>
+    <Name>X10 Firecracker Modules</Name>
+    <Description>FireCracker driver with X10 virtual modules.
+python-serial module must be installed &lt;strong&gt;(sudo apt-get install python-serial)&lt;/strong&gt;</Description>
+    <Group>Devices and Things</Group>
+    <ActivationTime>2015-03-08T13:27:04.35216Z</ActivationTime>
+    <TriggerTime>2015-03-08T13:27:04.36428Z</TriggerTime>
+    <Type>Python</Type>
+    <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
 </ArrayOfProgramBlock>

@@ -20,17 +20,21 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
 using ZWaveLib.Values;
 
 namespace ZWaveLib.Handlers
 {
-    public static class Meter
+    public class Meter : ICommandClass
     {
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public byte GetCommandClassId()
+        {
+            return 0x32;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
+            byte cmdType = message[1];
             if (cmdType == (byte)Command.MeterReport)
             {
                 EnergyValue energy = EnergyValue.Parse(message);
