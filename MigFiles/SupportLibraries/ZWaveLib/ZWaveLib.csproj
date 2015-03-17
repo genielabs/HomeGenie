@@ -76,9 +76,9 @@
     <Compile Include="ZWaveEvent.cs" />
     <Compile Include="Handlers\Crc16Encapsulated.cs" />
     <Compile Include="Enums\GenericType.cs" />
-    <Compile Include="Enums\CommandType.cs" />
-    <Compile Include="Enums\CommandClassType.cs" />
-    <Compile Include="Enums\FunctionType.cs" />
+    <Compile Include="Enums\Command.cs" />
+    <Compile Include="Enums\CommandClass.cs" />
+    <Compile Include="Enums\Function.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
