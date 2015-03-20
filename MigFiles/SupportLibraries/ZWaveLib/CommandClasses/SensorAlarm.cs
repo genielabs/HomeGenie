@@ -23,23 +23,28 @@
 using System;
 using ZWaveLib.Values;
 
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public static class Alarm
+    public class SensorAlarm : ICommandClass
     {
+        public CommandClass GetClassId()
+        {
+            return CommandClass.SensorAlarm;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (cmdType == (byte)Command.AlarmReport)
+            byte cmdType = message[1];
+            if (cmdType == (byte)Command.SensorAlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);
                 nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
             }
             return nodeEvent;
         }
-    
+
     }
 }
+
 

@@ -261,10 +261,6 @@
          "wspó?praca z dowolnym kompatybilnym urz?dzeniem video4linux na <b>/dev/video0</b> (tylko raspberry pi i x64 ubuntu).",
     "configure_interfaces_cameraport": 
          "port urz?dzenia",
-    "configure_interfaces_raspigpio": 
-         "raspberry pi gpio",
-    "configure_interfaces_airplay": 
-         "odbiornik airplay",
     "configure_system_lircremotesadd": 
          "dodaj pilota zdalnego sterowania",
     "configure_system_zwaveaddnodeheading": 

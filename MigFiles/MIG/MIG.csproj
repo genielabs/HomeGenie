@@ -73,7 +73,6 @@
     <Compile Include="Utility\Networking.cs" />
     <Compile Include="Interfaces\HomeAutomation\ExampleDriver.cs" />
     <Compile Include="MIGInterface.cs" />
-    <Compile Include="Interfaces\EmbeddedSystems\RaspiGPIO.cs" />
     <Compile Include="Interfaces\HomeAutomation\W800RF.cs" />
     <Compile Include="Interfaces\HomeAutomation\ModuleParameters.cs" />
     <Compile Include="Interfaces\HomeAutomation\Insteon.cs" />

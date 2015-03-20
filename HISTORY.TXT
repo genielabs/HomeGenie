@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+20/03/2015 1.00 beta rev 483-git2
+    - Updated raspberrysharp-io library to latest release
+    - Fixed Program.Say bug with accented characters
+    - Added ZWaveLib Crc16Encapsulated decoding support + some more ZWaveLib rework (PR #146 #147 #148)
+
 10/03/2015 1.00 beta rev 483-git1
     - Added runtime errors debugging for C#, Ruby, Python programs
     - Added Polish locale files

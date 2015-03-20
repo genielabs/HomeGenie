@@ -20,26 +20,34 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-using ZWaveLib.Values;
-
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public static class SceneActivation
+    public class Battery : ICommandClass
     {
+        public CommandClass GetClassId()
+        {
+            return CommandClass.Battery;
+        }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (cmdType == (byte)Command.SceneActivationSet)
+            byte cmdType = message[1];
+            if (message.Length > 0 && cmdType == (byte)Command.BatteryReport) // Battery Report
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[9], 0);
+                int batteryLevel = message[2];
+                nodeEvent = new ZWaveEvent(node, EventParameter.Battery, batteryLevel, 0);
             }
             return nodeEvent;
         }
 
+        public static void Get(ZWaveNode node)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.Battery, 
+                (byte)Command.BatteryGet 
+            });
+        }
     }
 }
-
 

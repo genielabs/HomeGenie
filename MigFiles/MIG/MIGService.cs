@@ -185,22 +185,39 @@ namespace MIG
             return isPresent;
         }
 
-        public void AddInterface(string domain)
+        // TODO: allow third party interface loading from external assembly dll
+        //          eg. AddInterface(string domain, string assemblyFileName)
+        public MIGInterface AddInterface(string domain)
         {
+            MIGInterface migInterface = null;
             if (!Interfaces.ContainsKey(domain))
             {
-                MIGInterface migInterface = null;
-                var type = Type.GetType("MIG.Interfaces." + domain);
-                migInterface = (MIGInterface)Activator.CreateInstance(type);
-                migInterface.Options = configuration.GetInterface(domain).Options;
-                Interfaces.Add(domain, migInterface);
-                migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
-                migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
+                try
+                {
+                    var type = Type.GetType("MIG.Interfaces." + domain);
+                    migInterface = (MIGInterface)Activator.CreateInstance(type);
+                    migInterface.Options = configuration.GetInterface(domain).Options;
+                }
+                catch
+                {
+                    // TODO: add error logging
+                }
+                if (migInterface != null)
+                {
+                    Interfaces.Add(domain, migInterface);
+                    migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
+                    migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
+                }
             }
-            //TODO: implement eventually a RemoveInterface method containing code:
-            //          migInterface.ModulesChangedAction -= MigService_ModulesChanged;
-            //			mif.InterfacePropertyChangedAction -= MIGService_InterfacePropertyChangedAction;
+            else
+            {
+                migInterface = Interfaces[domain];
+            }
+            return migInterface;
         }
+        //TODO: implement eventually a RemoveInterface method containing code:
+        //          migInterface.ModulesChangedAction -= MigService_ModulesChanged;
+        //          mif.InterfacePropertyChangedAction -= MIGService_InterfacePropertyChangedAction;
 
         public void EnableInterface(string domain)
         {

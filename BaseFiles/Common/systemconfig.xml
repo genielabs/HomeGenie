@@ -97,9 +97,6 @@
       <Interface Domain="Protocols.UPnP" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="EmbeddedSystems.RaspiGPIO" IsEnabled="false">
-        <Options />
-      </Interface>
       <Interface Domain="EmbeddedSystems.Weeco4mGPIO" IsEnabled="false">
         <Options>
           <Option Name="InputPin" Value="7" />
