@@ -149,8 +149,9 @@ namespace HomeGenie.Service
             try
             {
                 var client = new WebClient();
+                client.Encoding = UTF8Encoding.UTF8;
                 client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?tl=" + locale + "&q=" + sentence);
+                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence));
                 client.Dispose();
 
                 var outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
