@@ -168,6 +168,9 @@
     <Reference Include="KNXLib">
       <HintPath>Externals\knx.net\KNXLib.dll</HintPath>
     </Reference>
+    <Reference Include="UnitsNet">
+      <HintPath>Externals\raspberry-sharp\UnitsNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />

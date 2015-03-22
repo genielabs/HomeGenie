@@ -261,10 +261,6 @@
          "Funziona con dispositivi Video4Linux compatibili (solo per x64 Ubuntu e Raspberry Pi).",
     "configure_interfaces_cameraport": 
          "Porta Dispositivo",
-    "configure_interfaces_raspigpio": 
-         "Raspberry Pi GPIO",
-    "configure_interfaces_airplay": 
-         "Airplay Receiver",
     "configure_system_lircremotesadd": 
          "Aggiungi Telecomando",
     "configure_system_zwaveaddnodeheading": 

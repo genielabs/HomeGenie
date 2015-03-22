@@ -35,6 +35,9 @@ namespace HomeGenie.Automation
     public static class CSharpAppFactory
     {
 
+        public const int CONDITION_CODE_OFFSET = 7;
+        public const int PROGRAM_CODE_OFFSET = 19;
+
         public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
             string[] includes = new string[] {
@@ -64,9 +67,9 @@ namespace HomeGenie.Automation
                 "using Raspberry.IO.InterIntegratedCircuit;",
                 "using Raspberry.IO.SerialPeripheralInterface;"
             };
-            string source = @"    //# pragma warning disable 0168 // variable declared but not used.
-//# pragma warning disable 0219 // variable assigned but not used.
-//# pragma warning disable 0414 // private field assigned but not used.
+            string source = @"# pragma warning disable 0168 // variable declared but not used.
+# pragma warning disable 0219 // variable assigned but not used.
+# pragma warning disable 0414 // private field assigned but not used.
 
 using System;
 using System.Text; using System.Globalization; using System.Linq; using System.Collections.Generic; using System.Dynamic; using Newtonsoft.Json; using Newtonsoft.Json.Linq;
@@ -115,7 +118,6 @@ namespace HomeGenie.Automation.Scripting
         {
             Exception ex = null;
             bool retval = false;
-            //
             try
             {
                     retval = EvaluateConditionBlock();
@@ -138,9 +140,9 @@ namespace HomeGenie.Automation.Scripting
             };
             CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
             CompilerParameters compilerParams = new CompilerParameters {
-                GenerateInMemory = true,
+                GenerateInMemory = false,
                 GenerateExecutable = false,
-                IncludeDebugInformation = false,
+                IncludeDebugInformation = true,
                 TreatWarningsAsErrors = false,
                 OutputAssembly = outputDllFile
             };

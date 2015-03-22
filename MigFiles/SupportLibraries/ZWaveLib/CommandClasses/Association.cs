@@ -20,11 +20,9 @@
  *     Project Homepage: http://homegenie.it
  */
 
-using System;
-
-namespace ZWaveLib.Handlers
+namespace ZWaveLib.CommandClasses
 {
-    public static class Association
+    public class Association : ICommandClass
     {
         public class AssociationResponse
         {
@@ -34,62 +32,67 @@ namespace ZWaveLib.Handlers
             public string NodeList = "";
         }
 
-        public static ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
+        public CommandClass GetClassId()
+        {
+            return CommandClass.Association;
+        }
+
+        public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
-            byte cmdType = message[8];
-            if (message.Length > 12 && cmdType == (byte)Command.AssociationReport)
+            byte cmdType = message[1];
+            if (message.Length > 5 && cmdType == (byte)Command.AssociationReport)
             {
-                byte groupId = message[9];
-                byte maxAssociations = message[10];
-                byte numAssociations = message[11]; // it is always zero ?!?
-                string assocNodes = "";
-                if (message.Length > 13)
+                byte groupId = message[2];
+                byte associationMax = message[3];
+                byte associationCount = message[4]; // it is always zero ?!?
+                string associationNodes = "";
+                if (message.Length > 4)
                 {
-                    for (int a = 12; a < message.Length - 1; a++)
+                    for (int a = 5; a < message.Length; a++)
                     {
-                        assocNodes += message[a] + ",";
+                        associationNodes += message[a] + ",";
                     }
                 }
-                assocNodes = assocNodes.TrimEnd(',');
+                associationNodes = associationNodes.TrimEnd(',');
                 //
-                var associationRespose = new AssociationResponse() {
-                    Max = maxAssociations,
-                    Count = numAssociations,
-                    NodeList = assocNodes,
+                var associationResponse = new AssociationResponse() {
+                    Max = associationMax,
+                    Count = associationCount,
+                    NodeList = associationNodes,
                     GroupId = groupId
                 };
-                nodeEvent = new ZWaveEvent(node, EventParameter.Association, associationRespose, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.Association, associationResponse, 0);
             }
             return nodeEvent;
         }
 
-        public static void Set(ZWaveNode node, byte groupid, byte targetnodeid)
+        public static void Set(ZWaveNode node, byte groupid, byte targetNodeId)
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.Association, 
                 (byte)Command.AssociationSet, 
                 groupid, 
-                targetnodeid 
+                targetNodeId 
             });
         }
 
-        public static void Get(ZWaveNode node, byte groupid)
+        public static void Get(ZWaveNode node, byte groupId)
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.Association, 
                 (byte)Command.AssociationGet, 
-                groupid 
+                groupId 
             });
         }
 
-        public static void Remove(ZWaveNode node, byte groupid, byte targetnodeid)
+        public static void Remove(ZWaveNode node, byte groupId, byte targetNodeId)
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.Association, 
                 (byte)Command.AssociationRemove, 
-                groupid, 
-                targetnodeid 
+                groupId, 
+                targetNodeId 
             });
         }
 

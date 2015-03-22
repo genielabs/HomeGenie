@@ -261,10 +261,6 @@
         "Works with any Video4Linux compatible device on <b>/dev/video0</b> (x64 Ubuntu and Raspberry Pi only).",
     "configure_interfaces_cameraport": 
         "Device Port",
-    "configure_interfaces_raspigpio": 
-        "Raspberry Pi GPIO",
-    "configure_interfaces_airplay": 
-        "Airplay Empfaenger",
     "configure_system_lircremotesadd": 
         "Remote hinzufuegen",
     "configure_system_zwaveaddnodeheading": 
