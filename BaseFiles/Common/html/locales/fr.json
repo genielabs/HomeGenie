@@ -261,10 +261,6 @@
         "Travaille avec n'importe quelle caméra compatible avec Video4Linux sur <b>/dev/video0</b> (x64 Ubuntu et Raspberry Pi seulement).",
     "configure_interfaces_cameraport": 
         "Port de la caméra",
-    "configure_interfaces_raspigpio": 
-        "GPIO Raspberry Pi",
-    "configure_interfaces_airplay": 
-        "Airplay Receiver",
     "configure_system_lircremotesadd": 
         "Ajouter une télécommande",
     "configure_system_zwaveaddnodeheading": 

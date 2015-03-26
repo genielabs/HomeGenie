@@ -295,6 +295,7 @@ namespace MIG.Interfaces.HomeAutomation
             }
             if (readerTask != null)
             {
+                readerTask.Join(5000);
                 try
                 {
                     readerTask.Abort();

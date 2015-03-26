@@ -29,6 +29,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
             HG.Configure.MIG.InterfaceCommand('HomeAutomation.X10', 'Options.Set', 'Port', encodeURIComponent($(this).val()));
         });
         //
+        $('#page_configure_interfaces_w800rf32port').change(function (event) {
+            HG.Configure.MIG.InterfaceCommand('HomeAutomation.W800RF', 'Options.Set', 'Port', encodeURIComponent($(this).val()));
+        });
+        //
         $('#page_configure_interfaces_x10housecodes input[type=checkbox]').change(function (event) {
             var hc = '';
             //

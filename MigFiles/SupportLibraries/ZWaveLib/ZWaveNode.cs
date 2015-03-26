@@ -27,18 +27,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
 using System.Linq;
-using ZWaveLib.Handlers;
+using ZWaveLib.CommandClasses;
 using ZWaveLib.Values;
 
 namespace ZWaveLib
 {
-    public class UpdateNodeParameterEventArgs
-    {
-        public int NodeId { get; internal set; }
-        public int ParameterId { get; internal set; }
-        public EventParameter ParameterName { get; internal set; }
-        public object Value { get; internal set; }
-    }
 
     public class ManufacturerSpecificResponseEventArg
     {
@@ -57,7 +50,7 @@ namespace ZWaveLib
 
         #region Public fields
 
-        public byte NodeId { get; protected set; }
+        public byte Id { get; protected set; }
         public string ManufacturerId { get; protected set; }
         public string TypeId { get; protected set; }
         public string ProductId { get; protected set; }
@@ -68,8 +61,8 @@ namespace ZWaveLib
 
         public Dictionary<string, object> Data = new Dictionary<string, object>();
 
-        public delegate void UpdateNodeParameterEventHandler(object sender, UpdateNodeParameterEventArgs upargs);
-        public event UpdateNodeParameterEventHandler UpdateNodeParameter;
+        public delegate void ParameterChangedEventHandler(object sender, ZWaveEvent eventData);
+        public event ParameterChangedEventHandler ParameterChanged;
 
         public delegate void ManufacturerSpecificResponseEventHandler(object sender, ManufacturerSpecificResponseEventArg mfargs);
         public virtual event ManufacturerSpecificResponseEventHandler ManufacturerSpecificResponse;
@@ -80,13 +73,13 @@ namespace ZWaveLib
 
         public ZWaveNode(byte nodeId, ZWavePort zport)
         {
-            this.NodeId = nodeId;
+            this.Id = nodeId;
             this.zwavePort = zport;
         }
 
         public ZWaveNode(byte nodeId, ZWavePort zp, byte genericType)
         {
-            this.NodeId = nodeId;
+            this.Id = nodeId;
             this.zwavePort = zp;
             this.GenericClass = genericType;
         }
@@ -105,109 +98,40 @@ namespace ZWaveLib
 
             if (messageLength > 8)
             {
-
-                //byte commandLength = receivedMessage[6];
+                byte commandLength = receivedMessage[6];
                 byte commandClass = receivedMessage[7];
-                switch (commandClass)
-                {
-
-                case (byte)CommandClass.Basic:
-                    messageEvent = Basic.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Alarm:
-                    messageEvent = Alarm.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorAlarm:
-                    messageEvent = SensorAlarm.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SceneActivation:
-                    messageEvent = SceneActivation.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SwitchBinary:
-                    messageEvent = SwitchBinary.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SwitchMultilevel:
-                    messageEvent = SwitchMultilevel.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorBinary:
-                    messageEvent = SensorBinary.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.SensorMultilevel:
-                    messageEvent = SensorMultilevel.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Meter:
-                    messageEvent = Meter.GetEvent(this, receivedMessage);
-                    break;
-
-                case (byte)CommandClass.ThermostatMode:
-                case (byte)CommandClass.ThermostatFanMode:
-                case (byte)CommandClass.ThermostatFanState:
-                case (byte)CommandClass.ThermostatHeating:
-                case (byte)CommandClass.ThermostatOperatingState:
-                case (byte)CommandClass.ThermostatSetBack: 
-                case (byte)CommandClass.ThermostatSetPoint: 
-                    messageEvent = Thermostat.GetEvent(this, receivedMessage);
-                    break;
-
-                case (byte)CommandClass.UserCode:
-                    messageEvent = UserCode.GetEvent(this, receivedMessage);
-                    break;
-
-                case (byte)CommandClass.Association:
-                    messageEvent = Association.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Configuration:
-                    messageEvent = Configuration.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.WakeUp:
-                    messageEvent = WakeUp.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Battery:
-                    messageEvent = Battery.GetEvent(this, receivedMessage);
-                    break;
-                case (byte)CommandClass.Hail:
-                    Basic.Get(this);
-                    break;
-
-                case (byte)CommandClass.MultiInstance:
-                    messageEvent = MultiInstance.GetEvent(this, receivedMessage);
-                    break;
-
-                case (byte)CommandClass.ManufacturerSpecific:
-                    messageEvent = ManufacturerSpecific.GetEvent(this, receivedMessage);
-                    if (messageEvent != null)
-                    {
-                        var specs = (ManufacturerSpecificInfo)messageEvent.Value;
-                        this.ManufacturerId = specs.ManufacturerId;
-                        this.TypeId = specs.TypeId;
-                        this.ProductId = specs.ProductId;
-                        if (ManufacturerSpecificResponse != null)
-                        {
-                            try
-                            {
-                                ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg() {
-                                    NodeId = this.NodeId,
-                                    ManufacturerSpecific = specs
-                                });
-                            }
-                            catch (Exception ex)
-                            {
-
-                                Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " + ex.Message + "\n" + ex.StackTrace);
-
-                            }
-                        }
-                    }
-
-                    break;
-
-                }
-
+                var cc = CommandClassFactory.GetCommandClass(commandClass);
+                byte[] message = new byte[commandLength];
+                Array.Copy(receivedMessage, 7, message, 0, commandLength);
+                messageEvent = cc.GetEvent(this, message);
             }
 
             if (messageEvent != null)
             {
-                this.RaiseUpdateParameterEvent(messageEvent.Instance, messageEvent.Event, messageEvent.Value);
+                if (messageEvent.Parameter == EventParameter.ManufacturerSpecific)
+                {
+                    var specs = (ManufacturerSpecificInfo)messageEvent.Value;
+                    this.ManufacturerId = specs.ManufacturerId;
+                    this.TypeId = specs.TypeId;
+                    this.ProductId = specs.ProductId;
+                    if (ManufacturerSpecificResponse != null)
+                    {
+                        try
+                        {
+                            ManufacturerSpecificResponse(this, new ManufacturerSpecificResponseEventArg()
+                            {
+                                NodeId = this.Id,
+                                ManufacturerSpecific = specs
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
+                                              ex.Message + "\n" + ex.StackTrace);
+                        }
+                    }
+                }
+                this.RaiseUpdateParameterEvent(messageEvent);
             }
             else if (messageLength > 3)
             {
@@ -236,7 +160,7 @@ namespace ZWaveLib
 
         public void SendRequest(byte[] request)
         {
-            SendMessage(ZWaveMessage.CreateRequest(this.NodeId, request));
+            SendMessage(ZWaveMessage.CreateRequest(this.Id, request));
         }
 
         #endregion Public members
@@ -249,29 +173,11 @@ namespace ZWaveLib
             return zwavePort.SendMessage(msg, disableCallback);
         }
         
-        internal void RaiseUpdateParameterEvent(int pid, EventParameter peventtype, object value)
+        internal void RaiseUpdateParameterEvent(ZWaveEvent zevent) //int pid, EventParameter peventtype, object value)
         {
-            if (UpdateNodeParameter != null)
+            if (ParameterChanged != null)
             {
-                UpdateNodeParameter(this, new UpdateNodeParameterEventArgs() {
-                    NodeId = (int)this.NodeId,
-                    ParameterId = pid,
-                    ParameterName = peventtype,
-                    Value = value
-                });
-            }
-        }
-
-        internal void RaiseUpdateParameterEvent(ZWaveNode node, int pid, EventParameter peventtype, object value)
-        {
-            if (UpdateNodeParameter != null)
-            {
-                UpdateNodeParameter(node, new UpdateNodeParameterEventArgs() {
-                    NodeId = (int)node.NodeId,
-                    ParameterId = pid,
-                    ParameterName = peventtype,
-                    Value = value
-                });
+                ParameterChanged(this, zevent);
             }
         }
 

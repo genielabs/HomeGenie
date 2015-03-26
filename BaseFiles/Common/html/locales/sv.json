@@ -261,10 +261,6 @@
         "Fungerar med alla Video4Linux kompatibla enheter på <b> / dev/video0 </ b> (Endast x64 Ubuntu och Raspberry Pi).",
     "configure_interfaces_cameraport": 
         "Enhets Port",
-    "configure_interfaces_raspigpio": 
-        "Raspberry Pi GPIO",
-    "configure_interfaces_airplay": 
-        "Airplay Mottagare",
     "configure_system_lircremotesadd": 
         "Lägg Till Fjärrkontroll",
     "configure_system_zwaveaddnodeheading": 
