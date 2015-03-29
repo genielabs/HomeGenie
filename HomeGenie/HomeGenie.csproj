@@ -223,6 +223,7 @@
     <Compile Include="Automation\Scripting\UdpClientHelper.cs" />
     <Compile Include="Automation\Scripting\KnxClientHelper.cs" />
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
+    <Compile Include="Automation\WizardEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

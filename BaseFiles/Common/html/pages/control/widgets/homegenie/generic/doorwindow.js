@@ -106,9 +106,12 @@
                     var displayvalue = value;
                     //
                     var updatetime = module.Properties[p].UpdateTime;
-                    updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-                    var d = new Date(updatetime);
-                    updatetime = HG.WebApp.Utility.GetElapsedTimeText(d);
+                    if (typeof(updatetime) != 'undefined')
+                    {
+                        updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+                        var d = new Date(updatetime);
+                        updatetime = HG.WebApp.Utility.GetElapsedTimeText(d);
+                    }
                     //
                     var imagesrc = '';
                     //

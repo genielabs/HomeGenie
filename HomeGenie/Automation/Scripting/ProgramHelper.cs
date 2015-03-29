@@ -362,7 +362,7 @@ namespace HomeGenie.Automation.Scripting
             VirtualModule virtualModule = null;
             try
             {
-                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address);
+                virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
             }
             catch
             {
@@ -417,7 +417,7 @@ namespace HomeGenie.Automation.Scripting
             VirtualModule oldModule = null;
             try
             {
-                oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == address);
+                oldModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == address);
             }
             catch
             {
@@ -455,7 +455,7 @@ namespace HomeGenie.Automation.Scripting
                 VirtualModule virtualModule = null;
                 try
                 {
-                    virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Address == x.ToString());
+                    virtualModule = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == domain && rm.Address == x.ToString());
                 }
                 catch
                 {
@@ -688,6 +688,39 @@ namespace HomeGenie.Automation.Scripting
             {
                 homegenie.ProgramEngine.Run(program, options);
             }
+        }
+        
+        /// <summary>
+        /// Wait until the given program is not running.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="programId">Program address or name.</param>
+        public ProgramHelper WaitFor(string programId)
+        {
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+            if (program != null && program.Address != myProgramId)
+            {
+                while (!program.IsRunning)
+                    Thread.Sleep(1000);
+                Thread.Sleep(1000);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Returns a reference to the ProgramHelper of a program.
+        /// </summary>
+        /// <returns>ProgramHelper.</returns>
+        /// <param name="programAddress">Program address (id).</param>
+        public ProgramHelper WithAddress(int programAddress)
+        {
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == programAddress);
+            ProgramHelper programHelper = null;
+            if (program != null)
+            {
+                programHelper = new ProgramHelper(homegenie, program.Address);
+            }
+            return programHelper;
         }
 
         /// <summary>

@@ -27,9 +27,12 @@
                     var displayvalue = value;
                     //
                     var updatetime = module.Properties[p].UpdateTime;
-                    updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-                    var d = new Date(updatetime);
-                    updatetime = HG.WebApp.Utility.GetElapsedTimeText(d);
+                    if (typeof(updatetime) != 'undefined')
+                    {
+                        updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+                        var d = new Date(updatetime);
+                        updatetime = HG.WebApp.Utility.GetElapsedTimeText(d);
+                    }
                     //
                     statusmarkup += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;font-size:11pt;font-weight:bold;text-align:bottom;line-height:28px;overflow:hidden;text-overflow:ellipsis;">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;text-align:bottom;line-height:28px;font-size:18pt">' + displayvalue + '</div></div>';
                 }

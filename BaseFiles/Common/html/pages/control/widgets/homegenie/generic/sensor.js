@@ -43,10 +43,13 @@
                     var displayvalue = value;
                     //
                     var updatetime = module.Properties[p].UpdateTime;
-                    updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
-                    var d = new Date(updatetime);
-                    if (lastupdatetime < d) {
-                        lastupdatetime = d;
+                    if (typeof(updatetime) != 'undefined')
+                    {
+                        updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
+                        var d = new Date(updatetime);
+                        if (lastupdatetime < d) {
+                            lastupdatetime = d;
+                        }
                     }
                     //
                     var imagesrc = '';
