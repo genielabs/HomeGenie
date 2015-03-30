@@ -49,15 +49,13 @@ namespace HomeGenie.Service.Handlers
                 //TODO: implemet security and trust mechanism 
                 var stream = new StreamReader(request.InputStream).ReadToEnd();
                 var moduleEvent = JsonConvert.DeserializeObject<ModuleEvent>(
-                                      stream,
-                                      new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
-                                  );
-                //
+                    stream,
+                    new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
+                );
                 // prefix remote event domain with HGIC:<remote_node_address>.<domain>
                 moduleEvent.Module.Domain = "HGIC:" + request.RequestOrigin.Replace(".", "_") + "." + moduleEvent.Module.Domain;
                 //
-                var module = homegenie.Modules.Find(delegate(Module o)
-                {
+                var module = homegenie.Modules.Find(delegate(Module o) {
                     return o.Domain == moduleEvent.Module.Domain && o.Address == moduleEvent.Module.Address;
                 });
                 if (module == null)
@@ -65,13 +63,10 @@ namespace HomeGenie.Service.Handlers
                     module = moduleEvent.Module;
                     homegenie.Modules.Add(module);
                 }
-                else
-                {
-                    Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
-                }
-                    // "<ip>:<port>" remote endpoint port is passed as the first argument from the remote point itself
+                Utility.ModuleParameterSet(module, moduleEvent.Parameter.Name, moduleEvent.Parameter.Value);
+                // "<ip>:<port>" remote endpoint port is passed as the first argument from the remote point itself
                 module.RoutingNode = request.RequestOrigin + (migCommand.GetOption(0) != "" ? ":" + migCommand.GetOption(0) : "");
-                    //
+                //
                 homegenie.LogBroadcastEvent(
                     moduleEvent.Module.Domain,
                     moduleEvent.Module.Address,

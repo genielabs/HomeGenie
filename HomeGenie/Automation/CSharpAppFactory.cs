@@ -41,6 +41,8 @@ namespace HomeGenie.Automation
         public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
             string[] includes = new string[] {
+                "using System.Net;",
+                "using System.Threading;",
                 "using Raspberry;",
                 "using Raspberry.Timers;",
                 "using Raspberry.IO;",
@@ -51,6 +53,7 @@ namespace HomeGenie.Automation
                 "using Raspberry.IO.Components.Converters.Mcp4822;",
                 "using Raspberry.IO.Components.Displays.Hd44780;",
                 "using Raspberry.IO.Components.Displays.Ssd1306;",
+                "using Raspberry.IO.Components.Displays.Ssd1306.Fonts;",
                 "using Raspberry.IO.Components.Expanders.Mcp23017;",
                 "using Raspberry.IO.Components.Expanders.Pcf8574;",
                 "using Raspberry.IO.Components.Leds.GroveBar;",
@@ -204,6 +207,7 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
                 compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
+                compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
             //
             compilerParams.ReferencedAssemblies.Add("System.Reactive.Core.dll");

@@ -432,7 +432,28 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Execute currently selected command for all selected modules.
+        /// Execute current command on first selected module and return the response value.
+        /// </summary>
+        /// <param name="options">Options.</param>
+        public object GetValue(string options = "")
+        {
+            this.commandValue = options;
+            object response = null;
+            // execute this command context
+            var selectedModules = SelectedModules;
+            if (command != "" && selectedModules.Count > 0)
+            {
+                var module = selectedModules[0];
+                response = InterfaceControl(
+                    module,
+                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
+                );
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// Execute current command for all selected modules.
         /// </summary>
         /// <returns>ModulesManager</returns>
         public ModulesManager Execute()
@@ -441,7 +462,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Execute currently selected command with specified options.
+        /// Execute current command with specified options.
         /// </summary>
         /// <param name="options">A string containing options to be passed to the selected command.</param>
         /// <returns>ModulesManager</returns>
@@ -772,11 +793,11 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        private void InterfaceControl(Module module, MIGInterfaceCommand migCommand)
+        private object InterfaceControl(Module module, MIGInterfaceCommand migCommand)
         {
             migCommand.Domain = module.Domain;
             migCommand.NodeId = module.Address;
-            homegenie.InterfaceControl(migCommand);
+            return homegenie.InterfaceControl(migCommand);
         }
     }
 }

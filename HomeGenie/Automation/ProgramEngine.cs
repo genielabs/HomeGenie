@@ -42,7 +42,7 @@ namespace HomeGenie.Automation
     {
         public delegate void ConditionEvaluationCallback(ProgramBlock p, bool conditionsatisfied);
 
-        private HomeGenie.Service.TsList<ProgramBlock> automationPrograms = new HomeGenie.Service.TsList<ProgramBlock>();
+        private TsList<ProgramBlock> automationPrograms = new TsList<ProgramBlock>();
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
         private MacroRecorder macroRecorder = null;
@@ -102,58 +102,25 @@ namespace HomeGenie.Automation
                     continue;
                 }
                 //
+                program.RoutedEventAck.WaitOne(1000);
+                //
                 try
                 {
                     isConditionSatisfied = false;
                     //
-                    if (program.Type.ToLower() != "wizard")
+                    var result = program.EvaluateCondition();
+                    if (result != null && result.Exception != null)
                     {
-                        var result = program.EvaluateCondition();
-                        if (result != null && result.Exception != null)
-                        {
-                            // runtime error occurred, script is being disabled
-                            // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
-                            program.ScriptErrors = JsonConvert.SerializeObject(error);
-                            program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
-                        }
-                        else
-                        {
-                            isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
-                        }
+                        // runtime error occurred, script is being disabled
+                        // so user can notice and fix it
+                        List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
+                        program.ScriptErrors = JsonConvert.SerializeObject(error);
+                        program.IsEnabled = false;
+                        RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                     }
                     else
                     {
-                        // it is a Wizard Script
-                        isConditionSatisfied = (program.Conditions.Count > 0);
-                        for (int c = 0; c < program.Conditions.Count; c++)
-                        {
-                            // check for OR logic operator
-                            if (program.Conditions[c].ComparisonOperator == ComparisonOperator.LogicOrJoint)
-                            {
-                                if (isConditionSatisfied)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    isConditionSatisfied = (c < program.Conditions.Count - 1);
-                                    continue;
-                                }
-                            }
-                            //
-                            bool res = false;
-                            try
-                            {
-                                res = VerifyProgramCondition(program.Conditions[c]);
-                            }
-                            catch
-                            {
-                                // TODO: report/handle exception
-                            }
-                            isConditionSatisfied = (isConditionSatisfied && res);
-                        }
+                        isConditionSatisfied = (result != null ? (bool)result.ReturnValue : false);
                     }
                     //
                     bool lastResult = program.LastConditionEvaluationResult;
@@ -187,7 +154,7 @@ namespace HomeGenie.Automation
                 //
                 callback(program, isConditionSatisfied);
                 //
-                Thread.Sleep(500);
+                program.RoutedEventAck.Reset();
             }
         }
 
@@ -248,83 +215,51 @@ namespace HomeGenie.Automation
             program.IsRunning = true;
             RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Running");
             //
-            if (program.Type.ToLower() != "wizard")
+            program.TriggerTime = DateTime.UtcNow;
+            program.ProgramThread = new Thread(() =>
             {
-                if (program.Type.ToLower() == "csharp" && program.AppAssembly == null)
+                MethodRunResult result = null;
+                try
                 {
-                    program.IsRunning = false;
+                    result = program.Run(options);
                 }
-                else
+                catch (Exception ex)
                 {
-                    program.TriggerTime = DateTime.UtcNow;
-                    program.ProgramThread = new Thread(() =>
-                    {
-                        MethodRunResult result = null;
-                        try
-                        {
-                            result = program.Run(options);
-                        }
-                        catch (Exception ex)
-                        {
-                            result = new MethodRunResult();
-                            result.Exception = ex;
-                        }
-                        //
-                        if (result != null && result.Exception != null)
-                        {
-                            // runtime error occurred, script is being disabled
-                            // so user can notice and fix it
-                            List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, false) };
-                            program.ScriptErrors = JsonConvert.SerializeObject(error);
-                            program.IsEnabled = false;
-                            RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
-                        }
-                        program.IsRunning = false;
-                        program.ProgramThread = null;
-                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
-                    });
-                    //
-                    try
-                    {
-                        program.ProgramThread.Start();
-                    }
-                    catch
-                    {
-                        program.Stop();
-                        program.IsRunning = false;
-                        RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
-                    }
+                    result = new MethodRunResult();
+                    result.Exception = ex;
                 }
-            }
-            else
-            {
-                program.TriggerTime = DateTime.UtcNow;
-                if (program.ConditionType == ConditionType.Once)
+                //
+                if (result != null && result.Exception != null)
                 {
+                    // runtime error occurred, script is being disabled
+                    // so user can notice and fix it
+                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, false) };
+                    program.ScriptErrors = JsonConvert.SerializeObject(error);
                     program.IsEnabled = false;
+                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                 }
-                //
-                program.ProgramThread = new Thread(() =>
-                {
-                    try
-                    {
-                        ExecuteWizardScript(program);
-                    }
-                    catch (ThreadAbortException)
-                    {
-                        program.IsRunning = false;
-                    }
-                    finally
-                    {
-                        program.IsRunning = false;
-                    }
-                    RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
-                });
-                //
-                program.ProgramThread.Start();
+                program.IsRunning = false;
+                program.ProgramThread = null;
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
+            });
+            //
+            if (program.ConditionType == ConditionType.Once)
+            {
+                program.IsEnabled = false;
             }
             //
-            Thread.Sleep(100);
+            try
+            {
+                program.ProgramThread.Start();
+            }
+            catch
+            {
+                program.Stop();
+                program.IsRunning = false;
+                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
+            }
+            //
+            //Thread.Sleep(100);
         }
 
         public void StopEngine()
@@ -392,66 +327,6 @@ namespace HomeGenie.Automation
             }
             catch
             {
-            }
-        }
-        // TODO: find a better solution to this...
-        public void ExecuteWizardScript(ProgramBlock program)
-        {
-            int repeatStartLine = 0;
-            int repeatCount = 0;
-            for (int x = 0; x < program.Commands.Count; x++)
-            {
-                if (program.Commands[x].Domain == Domains.HomeAutomation_HomeGenie)
-                {
-                    switch (program.Commands[x].Target)
-                    {
-                    case "Automation":
-                            //
-                        string cs = program.Commands[x].CommandString;
-                        switch (cs)
-                        {
-                        case "Program.Run":
-                            string programId = program.Commands[x].CommandArguments;
-                            var programToRun = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
-                            if (programToRun != null && programToRun.Address != program.Address && !programToRun.IsRunning)
-                            {
-                                Run(programToRun, "");
-                            }
-                            break;
-                        case "Program.Pause":
-                            Thread.Sleep((int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture) * 1000));
-                            break;
-                        case "Program.Repeat":
-                                    // TODO: implement check for contiguous repeat statements
-                            if (repeatCount <= 0)
-                            {
-                                repeatCount = (int)(double.Parse(program.Commands[x].CommandArguments, System.Globalization.CultureInfo.InvariantCulture));
-                            }
-                            if (--repeatCount == 0)
-                            {
-                                repeatStartLine = x + 1;
-                            }
-                            else
-                            {
-                                x = repeatStartLine - 1;
-                            }
-                            break;
-                        default:
-                            var programCommand = program.Commands[x];
-                            string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
-                            homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
-                            break;
-                        }
-                            //
-                        break;
-                    }
-                }
-                else
-                {
-                    ExecuteProgramCommand(program.Commands[x]);
-                }
-                //
-                Thread.Sleep(10);
             }
         }
 
@@ -658,144 +533,6 @@ namespace HomeGenie.Automation
             return errors;
         }
 
-        private bool VerifyProgramCondition(ProgramCondition c)
-        {
-            bool returnValue = false;
-            string comparisonValue = c.ComparisonValue;
-            //
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
-            {
-                return homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
-            }
-            //
-            // if the comparison value starts with ":", then the value is read from another module property
-            // eg: ":HomeAutomation.X10/B3/Level"
-            if (comparisonValue.StartsWith(":"))
-            {
-                string[] propertyPath = comparisonValue.Substring(1).Split('/');
-                comparisonValue = "";
-                if (propertyPath.Length >= 3)
-                {
-                    string domain = propertyPath[0];
-                    string address = propertyPath[1];
-                    string propertyName = propertyPath[2];
-                    var targetModule = homegenie.Modules.Find(m => m.Domain == domain && m.Address == address);
-                    if (targetModule == null)
-                    {
-                        // abbreviated path, eg: ":X10/B3/Level"
-                        targetModule = homegenie.Modules.Find(m => m.Domain.EndsWith("." + domain) && m.Address == address);
-                    }
-                    //
-                    if (targetModule != null)
-                    {
-                        var mprop = Utility.ModuleParameterGet(targetModule, propertyName);
-                        if (mprop != null)
-                        {
-                            comparisonValue = mprop.Value;
-                        }
-                    }
-                }
-            }
-            //
-            // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
-            //
-            ModuleParameter parameter = null;
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation")
-            {
-                parameter = new ModuleParameter();
-                parameter.Name = c.Property;
-                switch (parameter.Name)
-                {
-                case "Programs.DateDay":
-                case "Scheduler.DateDay":
-                    parameter.Value = DateTime.Now.Day.ToString();
-                    break;
-                case "Programs.DateMonth":
-                case "Scheduler.DateMonth":
-                    parameter.Value = DateTime.Now.Month.ToString();
-                    break;
-                case "Programs.DateDayOfWeek":
-                case "Scheduler.DateDayOfWeek":
-                    parameter.Value = ((int)DateTime.Now.DayOfWeek).ToString();
-                    break;
-                case "Programs.DateYear":
-                case "Scheduler.DateYear":
-                    parameter.Value = DateTime.Now.Year.ToString();
-                    break;
-                case "Programs.DateHour":
-                case "Scheduler.DateHour":
-                    parameter.Value = DateTime.Now.Hour.ToString();
-                    break;
-                case "Programs.DateMinute":
-                case "Scheduler.DateMinute":
-                    parameter.Value = DateTime.Now.Minute.ToString();
-                    break;
-                case "Programs.Date":
-                case "Scheduler.Date":
-                    parameter.Value = DateTime.Now.ToString("YY-MM-dd");
-                    break;
-                case "Programs.Time":
-                case "Scheduler.Time":
-                    parameter.Value = DateTime.Now.ToString("HH:mm:ss");
-                    break;
-                case "Programs.DateTime":
-                case "Scheduler.DateTime":
-                    parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
-                    break;
-                }
-            }
-            else
-            {
-                Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
-                parameter = module.Properties.Find(delegate(ModuleParameter mp)
-                {
-                    return mp.Name == c.Property;
-                });
-            }
-            //
-            if (parameter != null)
-            {
-                IComparable lvalue = parameter.Value;
-                IComparable rvalue = comparisonValue;
-                //
-                double dval = 0;
-                DateTime dtval = new DateTime();
-                //
-                if (double.TryParse(parameter.Value.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dval))
-                {
-                    lvalue = dval;
-                    rvalue = double.Parse(comparisonValue.Replace(",", "."), NumberStyles.Float | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
-                }
-                else if (DateTime.TryParse(parameter.Value, out dtval))
-                {
-                    lvalue = dtval;
-                    rvalue = DateTime.Parse(comparisonValue);
-                }
-                //
-                int comparisonresult = lvalue.CompareTo(rvalue);
-                if (c.ComparisonOperator == ComparisonOperator.LessThan && comparisonresult < 0)
-                {
-                    returnValue = true;
-                }
-                else if (c.ComparisonOperator == ComparisonOperator.Equals && comparisonresult == 0)
-                {
-                    returnValue = true;
-                }
-                else if (c.ComparisonOperator == ComparisonOperator.GreaterThan && comparisonresult > 0)
-                {
-                    returnValue = true;
-                }
-            }
-            return returnValue;
-        }
-
-        private void ExecuteProgramCommand(ProgramCommand programCommand)
-        {
-            string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
-            var interfaceCommand = new MIGInterfaceCommand(command);
-            homegenie.InterfaceControl(interfaceCommand);
-        }
-
         private void StartProgramEvaluator(ProgramBlock program)
         {
             EvaluateProgramConditionArgs evalArgs = new EvaluateProgramConditionArgs() {
@@ -816,6 +553,7 @@ namespace HomeGenie.Automation
             ProgramBlock program = (ProgramBlock)sender;
             if (isEnabled)
             {
+                program.ScriptErrors = "";
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
                 RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Enabled");

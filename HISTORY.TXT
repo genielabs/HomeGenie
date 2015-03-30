@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+29/03/2015 1.00 beta rev 484
+    - Improved trigger condition reaction time in all type of programs/scripts (now real time, event based)
+    - Added Program.WithAddress (get reference to a program) and Program.WaitFor (wait for a program to run) to Program helper class
+    - Added Program.Say (voice output) and Program.Play (play wav sound) to Wizard Script HomeGenie/Automation commands
+    - Some fixes to Virtual Modules lifecycle
+    - Added MCP3008 Numeric Keypad automation program (connect a 3x4 numeric keypad using just one analog channel)
+    - Updated SSD1306 Oled, DHT-11 and DHT-22 programs
+    - Improved MCP3008 program with Web API
+    - Added GetValue method to ModulesManager: execute a module command and gets the return value as result (can be used for interprocess communication)
+    - Added database index as suggested by issue #150
+
 20/03/2015 1.00 beta rev 483-git2
     - Updated raspberrysharp-io library to latest release
     - Fixed Program.Say bug with accented characters

@@ -669,6 +669,64 @@
     <RoutingNode />
   </Module>
   <Module>
+    <Name>DHT-22 Sensor</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>63</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.UpdateInterval</Name>
+        <Value>aLfrhpFxSdGkIMZWZFvWjQ==</Value>
+        <Description>Update Interval (seconds)</Description>
+        <UpdateTime>2015-01-03T14:02:11.09857Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
+        <Description />
+        <UpdateTime>2015-01-03T14:02:11.098747Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Runtime.Error</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.440737Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Humidity</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.421757Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.Temperature</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.421762Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Sensor.TemperatureF</Name>
+        <Value />
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.421766Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>63</Value>
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.422903Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value>homegenie/generic/sensor</Value>
+        <Description />
+        <UpdateTime>2014-11-13T16:35:38.412532Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <RoutingNode />
+  </Module>
+  <Module>
     <Name>Earth Tools</Name>
     <Description />
     <DeviceType>Program</DeviceType>
