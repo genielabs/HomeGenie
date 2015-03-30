@@ -77,6 +77,7 @@
                 controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_auto]').removeClass('ui-btn-active');
                 if (_this.levelKnobBindValue == 'Heating')
                 {
                     _this.EditHeatSetPoint(controlpopup, module);
@@ -86,6 +87,7 @@
                     _this.EditCoolSetPoint(controlpopup, module);
                 }
                 // set current buttons' state from module properties 
+                // thermostat mode
                 var thermostatMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.Mode');
                 if (thermostatMode != null) {
                     if (thermostatMode.Value == 'Cool') {
@@ -96,8 +98,24 @@
                         controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                         controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
                     }
+                    else if (thermostatMode.Value == 'Auto') {
+                        controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
+                        controlpopup.find('[data-ui-field=mode_auto]').addClass('ui-btn-active');
+                    }
                 }
-                //
+                // fan mode
+                var fanMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.FanMode');
+                if (fanMode != null) {
+                    if (fanMode.Value == 'On' || fanMode.Value == 'OnLow' || fanMode.Value == 'OnHigh') {
+                        controlpopup.find('[data-ui-field=fanmode_on]').addClass('ui-btn-active');
+                    }
+                    else if (fanMode.Value == 'Auto' || fanMode.Value == 'AutoLow' || fanMode.Value == 'AutoHigh') {
+                        controlpopup.find('[data-ui-field=fanmode_auto]').addClass('ui-btn-active');
+                    }
+                    else if (fanMode.Value == 'Circulate') {
+                        controlpopup.find('[data-ui-field=fanmode_circulate]').addClass('ui-btn-active');
+                    }
+                }
             });
             // set point buttons events
             controlpopup.find('[data-ui-field=cool_setpoint]').on('click', function () {
@@ -111,12 +129,14 @@
                 controlpopup.find('[data-ui-field=mode_off]').addClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_auto]').removeClass('ui-btn-active');
                 HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Off", function (data) { });
             });
             controlpopup.find('[data-ui-field=mode_cool]').on('click', function () {
                 controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-bHG.WebApp.GroupModules.CurrentModule.Domaintn-active');
                 controlpopup.find('[data-ui-field=mode_cool]').addClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_auto]').removeClass('ui-btn-active');
                 _this.EditCoolSetPoint(controlpopup, module);
                 HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Cool", function (data) { });
             });
@@ -124,8 +144,35 @@
                 controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-btn-active');
                 controlpopup.find('[data-ui-field=mode_heat]').addClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_auto]').removeClass('ui-btn-active');
                 _this.EditHeatSetPoint(controlpopup, module);
                 HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Heat", function (data) { });
+            });
+            controlpopup.find('[data-ui-field=mode_auto]').on('click', function () {
+                controlpopup.find('[data-ui-field=mode_off]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_cool]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_heat]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=mode_auto]').addClass('ui-btn-active');
+                HG.Control.Modules.ServiceCall("Thermostat.ModeSet", module.Domain, module.Address, "Auto", function (data) { });
+            });
+            // thermostate fan button events
+            controlpopup.find('[data-ui-field=fanmode_on]').on('click', function () {
+                controlpopup.find('[data-ui-field=fanmode_on]').addClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_auto]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_circulate]').removeClass('ui-btn-active');
+                HG.Control.Modules.ServiceCall("Thermostat.FanModeSet", module.Domain, module.Address, "OnLow", function (data) { });
+            });
+            controlpopup.find('[data-ui-field=fanmode_auto]').on('click', function () {
+                controlpopup.find('[data-ui-field=fanmode_on]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_auto]').addClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_circulate]').removeClass('ui-btn-active');
+                HG.Control.Modules.ServiceCall("Thermostat.FanModeSet", module.Domain, module.Address, "AutoLow", function (data) { });
+            });
+            controlpopup.find('[data-ui-field=fanmode_circulate]').on('click', function () {
+                controlpopup.find('[data-ui-field=fanmode_on]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_auto]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_circulate]').addClass('ui-btn-active');
+                HG.Control.Modules.ServiceCall("Thermostat.FanModeSet", module.Domain, module.Address, "Circulate", function (data) { });
             });
 
         }
@@ -176,8 +223,7 @@
         else {
             widget.find('[data-ui-field=heat_field]').show();
             var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=set_value]').html(temperature.toFixed(1) + '&deg;');
+            widget.find('[data-ui-field=heatset_value]').html(temperature.toFixed(1) + '&deg;');
         }
 
 
@@ -190,8 +236,7 @@
         else {
             widget.find('[data-ui-field=cool_field]').show();
             var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
-            widget.find('[data-ui-field=set_value]').html(temperature.toFixed(1) + '&deg;');
+            widget.find('[data-ui-field=coolset_value]').html(temperature.toFixed(1) + '&deg;');
         }
         // enable/disable Cool Set Point feature (not every thermostat support it)
         if (coolTo == null) {
@@ -207,7 +252,9 @@
         // display status line (operating state + mode)
         var displayState = '---';
         var operatingState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.OperatingState");
+        var operatingFanMode = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.FanMode");
         if (operatingState != null) displayState = operatingState.Value;
+        if (operatingFanMode != null) displayState = operatingFanMode.Value;
         widget.find('[data-ui-field=operating_value]').html(displayState);
         //
         var displayMode = '---';

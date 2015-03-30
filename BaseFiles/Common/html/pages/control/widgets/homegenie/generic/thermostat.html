@@ -12,7 +12,7 @@
     <!-- HEAT -->
     <div data-ui-field="heat_field" style="margin-bottom:8px;" align="center">
         <img src="pages/control/widgets/homegenie/generic/images/therm_heat.png" style="width:32px;height:32px;vertical-align:middle">
-        heat to <b data-ui-field="set_value">21.0</b>
+        heat to <b data-ui-field="heatset_value">21.0</b>
     </div>
     <!-- COOL -->
     <div data-ui-field="cool_field" style="margin-bottom:8px" align="center">
@@ -79,11 +79,18 @@
                 <a data-ui-field="cool_setpoint" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
                 <a data-ui-field="heat_setpoint" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
             </div>
-            <span data-locale-id="therm_setmode">Mode</span>
+            <span data-locale-id="therm_fanmode">Fan Mode</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <a data-ui-field="fanmode_on" data-locale-id="fan_on" data-role="button" href="">On</a>
+                <a data-ui-field="fanmode_auto" data-locale-id="fan_auto" data-role="button" href="">Auto</a>
+                <a data-ui-field="fanmode_circulate" data-locale-id="fan_circulate" data-role="button" href="">Circulate</a>
+            </div>
+            <span data-locale-id="therm_setmode">Operating Mode</span>
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <a data-ui-field="mode_off" data-locale-id="therm_off" data-role="button" href="">Off</a>
                 <a data-ui-field="mode_cool" data-locale-id="therm_cool" data-role="button" href="">Cool</a>
                 <a data-ui-field="mode_heat" data-locale-id="therm_heat" data-role="button" href="">Heat</a>
+                <a data-ui-field="mode_auto" data-locale-id="therm_auto" data-role="button" href="">Auto</a>
             </div>
         </div>
         <!-- END - MODULE TYPE SPECIFIC DIVS -->
