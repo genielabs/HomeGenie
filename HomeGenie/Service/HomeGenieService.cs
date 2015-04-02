@@ -379,13 +379,13 @@ namespace HomeGenie.Service
             else return null;
         }
 
-        public void InterfaceControl(MIGInterfaceCommand cmd)
+        public object InterfaceControl(MIGInterfaceCommand cmd)
         {
+            object response = null;
             var target = systemModules.Find(m => m.Domain == cmd.Domain && m.Address == cmd.NodeId);
             bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
             if (isRemoteModule)
             {
-                // ...
                 try
                 {
                     string domain = cmd.Domain;
@@ -395,52 +395,38 @@ namespace HomeGenie.Service
                     Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
                     if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
                     {
-                        netHelper.WithCredentials(
-                            systemConfiguration.HomeGenie.UserLogin,
-                            systemConfiguration.HomeGenie.UserPassword
-                        );
+                        netHelper.WithCredentials(systemConfiguration.HomeGenie.UserLogin, systemConfiguration.HomeGenie.UserPassword);
                     }
-                    netHelper.Call();
+                    response = netHelper.GetData();
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "Interconnection:" + target.RoutingNode,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Interconnection:" + target.RoutingNode, ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
-                return;
             }
-            //
-            object response = null;
-            MIGInterface migInterface = GetInterface(cmd.Domain);
-            if (migInterface != null)
+            else
             {
-                try
+                MIGInterface migInterface = GetInterface(cmd.Domain);
+                if (migInterface != null)
                 {
-                    response = migInterface.InterfaceControl(cmd);
+                    try
+                    {
+                        response = migInterface.InterfaceControl(cmd);
+                    }
+                    catch (Exception ex)
+                    {
+                        HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "InterfaceControl", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    }
                 }
-                catch (Exception ex)
+                //
+                if (response == null || response.Equals(""))
                 {
-                    HomeGenieService.LogEvent(
-                        Domains.HomeAutomation_HomeGenie,
-                        "InterfaceControl",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    response = migService.WebServiceDynamicApiCall(cmd);
                 }
+                // let HG post process the local command
+                migService_ServiceRequestPostProcess(null, cmd);
             }
-            //
-            if (response == null || response.Equals(""))
-            {
-                migService.WebServiceDynamicApiCall(cmd);
-            }
-            //
-            migService_ServiceRequestPostProcess(null, cmd);
+            return response;
         }
 
         //TODO: should these two moved to ProgramEngine?
@@ -863,8 +849,10 @@ namespace HomeGenie.Service
                 RoutedEvent moduleEvent = (RoutedEvent)eventData;
                 foreach (var program in masterControlProgram.Programs)
                 {
+                    if (!program.IsEnabled) continue;
                     if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                     {
+                        program.RoutedEventAck.Set();
                         try
                         {
                             if (program.ModuleIsChangingHandler != null)
@@ -898,6 +886,7 @@ namespace HomeGenie.Service
                 {
                     foreach (ProgramBlock program in masterControlProgram.Programs)
                     {
+                        if (!program.IsEnabled) continue;
                         if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                         {
                             try
@@ -1339,7 +1328,15 @@ namespace HomeGenie.Service
                                                   Properties.WIDGET_DISPLAYMODULE
                                               );
                     //
-                    Module module = Modules.Find(o => o.Domain == virtualModule.Domain && o.Address == virtualModule.Address);
+                    Module module = Modules.Find(o => {
+                        bool found = false;
+                        if (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address)
+                        {
+                            var prop = Utility.ModuleParameterGet(o, "VirtualModule.ParentId");
+                            if (prop != null && prop.Value == virtualModule.ParentId) found = true;
+                        }
+                        return found;
+                    });
 
                     if (!program.IsEnabled)
                     {

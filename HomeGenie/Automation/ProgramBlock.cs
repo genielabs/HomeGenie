@@ -50,10 +50,10 @@ namespace HomeGenie.Automation
         private HomeGenieService homegenie = null;
         private bool isProgramEnabled = false;
         private string codeType = "";
+        internal ManualResetEvent RoutedEventAck = new ManualResetEvent(false);
 
         // event delegates
         public delegate void EnabledStateChangedEventHandler(object sender, bool isEnabled);
-
         public event EnabledStateChangedEventHandler EnabledStateChanged;
 
         // c# program fields
@@ -98,17 +98,17 @@ namespace HomeGenie.Automation
         public string ScriptErrors;
 
         // common public members
-        public bool IsRunning;
-        public List<ProgramFeature> Features = new List<ProgramFeature>();
-
-        [NonSerialized]
-        public bool LastConditionEvaluationResult;
-
         public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
         public int Address = 0;
         public string Name;
         public string Description;
         public string Group;
+        public List<ProgramFeature> Features = new List<ProgramFeature>();
+
+        [XmlIgnore]
+        public bool IsRunning;
+        [XmlIgnore]
+        public bool LastConditionEvaluationResult;
 
         public string Type
         {
@@ -128,6 +128,9 @@ namespace HomeGenie.Automation
                     break;
                 case "javascript":
                     try { scriptEngine = new Jint.Engine(); } catch { }
+                    break;
+                case "wizard":
+                    scriptEngine = new WizardEngine(homegenie);
                     break;
                 }
                 if (homegenie != null && scriptEngine != null)
@@ -194,15 +197,20 @@ namespace HomeGenie.Automation
             if (scriptEngine.GetType() == typeof(ScriptEngine))
             {
                 // IronPyton and IronRuby engines
-                ScriptEngine currentEngine = (scriptEngine as ScriptEngine);
-                dynamic scope = scriptScope = currentEngine.CreateScope();
+                var ironEngine = (scriptEngine as ScriptEngine);
+                dynamic scope = scriptScope = ironEngine.CreateScope();
                 scope.hg = hgScriptingHost;
             }
             else if (scriptEngine.GetType() == typeof(Jint.Engine))
             {
                 // Jint Javascript engine
-                Jint.Engine javascriptEngine = (scriptEngine as Jint.Engine);
+                var javascriptEngine = (scriptEngine as Jint.Engine);
                 javascriptEngine.SetValue("hg", hgScriptingHost);
+            }
+            else if (scriptEngine.GetType() == typeof(WizardEngine))
+            {
+                var wizardEngine = (scriptEngine as WizardEngine);
+                wizardEngine.SetScriptingHost(hgScriptingHost);
             }
         }
 
@@ -395,6 +403,18 @@ namespace HomeGenie.Automation
                     result = (MethodRunResult)methodRun.Invoke(assembly, new object[1] { options });
                 }
                 break;
+            case "wizard":
+                WizardEngine wizardEngine = (scriptEngine as WizardEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    wizardEngine.ExecuteScript(this.Commands);
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
+                }
+                break;
             case "arduino":
                 result = new MethodRunResult();
                 homegenie.LogBroadcastEvent(
@@ -530,6 +550,18 @@ namespace HomeGenie.Automation
                 if (appAssembly != null && CheckAppInstance())
                 {
                     result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
+                }
+                break;
+            case "wizard":
+                WizardEngine wizardEngine = (scriptEngine as WizardEngine);
+                result = new MethodRunResult();
+                try
+                {
+                    result.ReturnValue = wizardEngine.EvaluateTrigger(this.Conditions);
+                }
+                catch (Exception e)
+                {
+                    result.Exception = e;
                 }
                 break;
             }

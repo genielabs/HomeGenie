@@ -32,6 +32,8 @@ using MIG.Utility;
 
 using Ude;
 using Ude.Core;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MIG
 {
@@ -647,10 +649,16 @@ namespace MIG
                     responseObject = WebServiceDynamicApiCall(command);
                 }
                 //
-                if (responseObject != null && responseObject.GetType().Equals(typeof(string)))
+                if (responseObject != null && responseObject.GetType().Equals(typeof(byte[])) == false)
                 {
-                    command.Response = (string)responseObject;
-                    //
+                    if (responseObject.GetType() == typeof(String))
+                    {
+                        command.Response = responseObject.ToString();
+                    }
+                    else
+                    {
+                        command.Response = JsonConvert.SerializeObject(responseObject);
+                    }
                     // simple automatic json response type detection
                     if (command.Response.StartsWith("[") && command.Response.EndsWith("]") || (command.Response.StartsWith("{") && command.Response.EndsWith("}")))
                     {
@@ -660,7 +668,7 @@ namespace MIG
                 }
                 else
                 {
-                    WebServiceUtility.WriteBytesToContext(context, (Byte[])responseObject);
+                    WebServiceUtility.WriteBytesToContext(context, (byte[])responseObject);
                     wroteBytes = true;
                 }
             }
