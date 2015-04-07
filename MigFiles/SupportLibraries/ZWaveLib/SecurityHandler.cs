@@ -13,10 +13,9 @@ namespace ZWaveLib
         private Stopwatch c_nonceTimer = new Stopwatch();
         private AES_work enc;
 
-        internal byte[] NetworkKey;
-        //internal byte[] lNetworkKey = new byte[] { 0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78, 0x87, 0x96, 0xA5, 0xB4, 0xC3, 0xD2, 0xE1, 0xF0 };
-        internal byte[] lNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
-        //        internal byte[] lNetworkKey = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        //internal byte[] PrivateNetworkKey = new byte[] { 0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78, 0x87, 0x96, 0xA5, 0xB4, 0xC3, 0xD2, 0xE1, 0xF0 };
+        internal byte[] PrivateNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
+
         byte[] c_currentNonce = new byte[] { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA };
         internal byte[] d_currentNonce = null;
 
@@ -49,7 +48,7 @@ namespace ZWaveLib
                 schemeRequestSent = true;
                 node.SendRequest(new byte[]{
                     (byte)CommandClass.Security,
-                    (byte)SecurityCommand.COMMAND_SCHEME_GET,
+                    (byte)SecurityCommand.SchemeGet,
                     0
                 });
             }
@@ -60,34 +59,32 @@ namespace ZWaveLib
             byte[] message = new byte[10];
 
             message[0] = (byte)CommandClass.Security;
-            message[1] = (byte)SecurityCommand.COMMAND_NONCE_REPORT;
+            message[1] = (byte)SecurityCommand.NonceReport;
 
             Array.Copy(c_currentNonce, 0, message, 2, 8);
 
             node.SendRequest(message);
-            //nodeHost.ZWaveMessage(message, true, true);
-            //            c_nonceTimer.Restart();
+
             c_nonceTimer.Reset();
         }
 
         private void SetupNetworkKey(ZWaveNode node)
         {
-            byte[] iNetworkKey = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+            byte[] initialNetworkKey = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
             byte[] EncryptPassword = new byte[] { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA };
             byte[] AuthPassword = new byte[] { 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55 };
 
-            //            byte[] NetworkKey;
-
-
+            byte[] NetworkKey;
+            
             if (adding_node && !networkKeySet)
             {
-                NetworkKey = iNetworkKey;
+                NetworkKey = initialNetworkKey;
                 Utility.logMessage("In SetupNetworkKey  - in node inclusion mode.");
             }
             else
             {
-                NetworkKey = lNetworkKey;
+                NetworkKey = PrivateNetworkKey;
             }
 
             encryptKey = enc.ECB_EncryptMessage(NetworkKey, EncryptPassword);
@@ -96,16 +93,14 @@ namespace ZWaveLib
             // Utility.logMessage("In SetupNetworkKey  - Network key - " + Utility.ByteArrayToString(NetworkKey));
             // Utility.logMessage("In SetupNetworkKey  - Encrypt key - " + Utility.ByteArrayToString(encryptKey));
             // Utility.logMessage("In SetupNetworkKey  - Authent key - " + Utility.ByteArrayToString(authKey));
-
-            //            NetworkKey = lNetworkKey;
-
+           
         }
 
         public void sendSupportedGet(ZWaveNode node)
         {
             var message = ZWaveMessage.CreateRequest(node.Id, new byte[] { 
 			    (byte)CommandClass.Security,
-			    (byte)SecurityCommand.COMMAND_SUPPORTED_GET
+			    (byte)SecurityCommand.SupportedGet
             });
 
             encryptAndSend(node, message);
@@ -114,11 +109,11 @@ namespace ZWaveLib
 
         public void ProcessNonceReport(ZWaveNode node, byte[] message, int start) {
             d_nonceTimer.Restart();
-            //                    Logger.Log(LogLevel.REPORT, "In sendRequestNonce - d_nonceTimer restart - " + d_nonceTimer.ElapsedMilliseconds + " - SecurityHandler");
 
             ProcessNonceReport(message, start);
             EncryptMessage(node, message);
             waitingForNonce = false;
+
             // if we still have items in the queue request a new nonce
             if (secure_payload.Count > 0)
             {
@@ -198,15 +193,16 @@ namespace ZWaveLib
         private bool sendRequestNonce(ZWaveNode node)
         {
             Utility.logMessage("In sendRequestNonce - SecurityHandler");
-            //            if ((waitingForNonce || d_nonceTimer.ElapsedMilliseconds < 10000) && d_currentNonce != null)
+
             if (waitingForNonce)
                 return false;
+
             Utility.logMessage("In sendRequestNonce - not waiting for Nonce - SecurityHandler");
             waitingForNonce = true;
 
             node.SendRequest(new byte[]{
                 (byte)CommandClass.Security,
-                (byte)SecurityCommand.COMMAND_NONCE_GET
+                (byte)SecurityCommand.NonceGet
             });
 
             return true;
@@ -242,28 +238,13 @@ namespace ZWaveLib
             if (payload != null)
             {
                 int len = payload.length + 20;
-                /*                node.ZWaveMessage(new byte[] { 
-                                    node.NodeId,
-                                    (byte)len,
-                                    (byte)CommandClass.COMMAND_CLASS_SECURITY,
-                                    (byte)SecurityCommand.COMMAND_MESSAGE_ENCAP,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA,
-                                    (byte)0xAA
-                                });
-                 */
+
                 byte[] t_message = new byte[len];
 
                 int i = 0;
-                //                t_message[i] = node.NodeId;
-                //                i++; t_message[i] = (byte)len;
+                
                 t_message[i] = (byte)CommandClass.Security;
-                i++; t_message[i] = (byte)SecurityCommand.COMMAND_MESSAGE_ENCAP;
+                i++; t_message[i] = (byte)SecurityCommand.MessageEncap;
 
                 byte[] initializationVector = new byte[16];
                 for (int a = 0; a < 8; a++)
@@ -272,9 +253,6 @@ namespace ZWaveLib
                     i++;
                     t_message[i] = initializationVector[a];
                 }
-
-                //                d_currentNonce = new byte[] { 0x88, 0x80, 0x64, 0xe5, 0xf6, 0xa2, 0xd2, 0xd9 };
-                //                payload.message = new byte[] {0x62, 0x02};
 
                 Array.Copy(d_currentNonce, 0, initializationVector, 8, 8);
 
@@ -310,31 +288,6 @@ namespace ZWaveLib
 //                Utility.logMessage("IV " + Utility.ByteArrayToString(initializationVector));
 //                Utility.logMessage("encryptedPayload " + Utility.ByteArrayToString(encryptedPayload));
 
-                if (1 == 0)
-                {
-
-                    //Nobody Messes with the IV
-                    for (int a = 0; a < 8; a++)
-                    {
-                        initializationVector[a] = (byte)0xAA;
-                    }
-
-                    //                    for (int a = 0; a < 8; a++)
-                    //                    {
-                    //                        initializationVector[8 + a] = message[msg + a];
-                    //                    }
-
-                    Array.Copy(d_currentNonce, 0, initializationVector, 8, 8);
-
-                    byte[] tmpoutput = new byte[16];
-
-                    tmpoutput = enc.OFB_EncryptMessage(encryptKey, initializationVector, encryptedPayload);
-                    Utility.logMessage("Encrypted Packet: " + Utility.ByteArrayToString(encryptedPayload));
-                    Utility.logMessage("IV " + Utility.ByteArrayToString(initializationVector));
-                    Utility.logMessage("EncryptKey " + Utility.ByteArrayToString(encryptKey));
-                    Utility.logMessage("Decrypted " + Utility.ByteArrayToString(tmpoutput));
-                }
-
                 for (int a = 0; a < payload.length + 1; ++a)
                 {
                     i++;
@@ -343,20 +296,6 @@ namespace ZWaveLib
 
                 i++; t_message[i] = d_currentNonce[0];
 
-                /*
-                 * Nobody Messes with the IV
-                for (int a = 0; a < 8; a++)
-                {
-                    initializationVector[a] = (byte)0xAA;
-                }
-
-                for (int a = 0; a < 8; a++)
-                {
-                    initializationVector[8 + a] = message[msg + a];
-                }
-                */
-
-                //byte[] mac = new byte[8];
                 //GenerateAuthentication
                 int start = 1;
                 byte[] mac = GenerateAuthentication(t_message, start, t_message.Length + 2 - start - 1, 0x01, node.Id, initializationVector, enc);
@@ -365,9 +304,6 @@ namespace ZWaveLib
                     i++;
                     t_message[i] = mac[a];
                 }
-
-//                Utility.logMessage("Auth " + Utility.ByteArrayToString(mac));
-//                Utility.logMessage("Outgoing " + Utility.ByteArrayToString(t_message));
 
                 node.SendRequest(t_message);
                 Utility.logMessage("In EncryptMessage - message sent");
@@ -399,12 +335,10 @@ namespace ZWaveLib
             if (enc == null)
                 init(node);
 
-            //            byte[] message = new byte[] {0x01, 0x2c, 0x00, 0x04, 0x00, 0x0f, 0x26, 0x98, 0x81, 0x66, 0xba, 0xca, 0x63, 0xed, 0xff, 0x84, 0xf8, 0xff, 0x31, 0xbc, 0x1f, 0xd4, 0x2f, 0x39, 0x67, 0x30, 0x32, 0x0b, 0x2b, 0x6d, 0xfb, 0xe7, 0x18, 0x81, 0xf5, 0x68, 0xaa, 0xd3, 0xff, 0xe7, 0xaa, 0xdd, 0xeb, 0xec, 0x97, 0xe5};
             Utility.logMessage("In DecryptMessage - SecurityHandler");
             if (c_nonceTimer.ElapsedMilliseconds > 10000)
             {
                 Utility.logMessage("Received the nonce  too late'" + c_nonceTimer.ElapsedMilliseconds + "' > 10000");
-                //sendRequestNonce();
                 return false;
             }
 
@@ -412,19 +346,13 @@ namespace ZWaveLib
             //            Utility.logMessage("Message to be decrypted: " + Utility.ByteArrayToString(message));
 
             byte[] iv = getVIFromPacket_inbound(message, start + 1);
-            //            byte[] decryptpacket = new byte[32];
-            //            Array.Clear(decryptpacket, 0, 32);
-            //            int length = message[6];
+
             int _length = message.Length;
             int encryptedpackagesize = _length - 11 - 8; //19 + 11 + 8
             byte[] encryptedpacket = new byte[encryptedpackagesize];
 
 
             Array.Copy(message, 8 + start + 1, encryptedpacket, 0, encryptedpackagesize);
-            /*for (int i = encryptedpackagesize; i < 32; i++) {
-                encryptedpacket[i] = 0;
-            }
-            */
 
             byte[] decryptedpacket = enc.OFB_EncryptMessage(encryptKey, iv, encryptedpacket);
 //            Utility.logMessage("Message          " + Utility.ByteArrayToString(message));
@@ -436,7 +364,6 @@ namespace ZWaveLib
 
             byte[] e_mac = new byte[8];
             Array.Copy(message, start + 8 + encryptedpackagesize + 2, e_mac, 0, 8);
-            //            if (!Array.Equals(mac, e_mac)) {
             if (!Enumerable.SequenceEqual(mac, e_mac))
             {
                 Utility.logMessage("Computed mac " + Utility.ByteArrayToString(mac) + " does not match the provider mac " + Utility.ByteArrayToString(e_mac) + ". Dropping.");
@@ -452,9 +379,6 @@ namespace ZWaveLib
 
                 Utility.logMessage("Processing Internally: " + Utility.ByteArrayToString(msg));
 
-//                HandleBasicMessage(msg, msg[1]);
-                //HandleBasicReport(msg);
-                //                Utility.logMessage("---------------------------HandleBasicReport-------------------------------");
             }
             else
             {
@@ -490,8 +414,7 @@ namespace ZWaveLib
             // data should stat at 4
             byte[] buffer = new byte[256];
             byte[] tmpauth = new byte[16];
-            int ib = 0,
-                it = 0;
+            int ib = 0;
             buffer[ib] = data[start + 0];
             ib++; buffer[ib] = sendingNode;
             ib++; buffer[ib] = receivingNode;
@@ -502,7 +425,6 @@ namespace ZWaveLib
             Array.Copy(buffer, buff, length - 19 + 4);
 //            Utility.logMessage("Raw Auth (minus IV)" + Utility.ByteArrayToString(buff));
 
-            // tmpauth = enc.ECB_EncryptMessage(encryptKey, iv);
             tmpauth = enc.ECB_EncryptMessage(authKey, iv);
 
             byte[] encpck = new byte[16];
@@ -539,6 +461,7 @@ namespace ZWaveLib
 
             byte[] auth = new byte[8];
             Array.Copy(tmpauth, auth, 8);
+
 //            Utility.logMessage("Computed Auth " + Utility.ByteArrayToString(auth));
 
             return auth;

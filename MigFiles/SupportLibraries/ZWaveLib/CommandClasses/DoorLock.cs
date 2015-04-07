@@ -62,21 +62,8 @@ namespace ZWaveLib.CommandClasses
                 var messageEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, resp, 0);
                 node.RaiseUpdateParameterEvent(messageEvent);
 
-            }else if (cmdType == (byte) Command.DoorLock_Configuration_Report) {
-                node.SendRequest(new byte[] { 
-                        0x63, 
-                        0x04
-                });
-
             }
 
-            /*
-            if (cmdType == (byte)Command.BasicReport || cmdType == (byte)Command.BasicSet)
-            {
-                int levelValue = (int)message[2];
-                nodeEvent = new ZWaveEvent(node, EventParameter.Level, (double)levelValue, 0);
-            }
-            */
             return nodeEvent;
         }
 
@@ -85,12 +72,10 @@ namespace ZWaveLib.CommandClasses
 
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
-                (byte)0x01, //DoorLockCmd_Set
+                (byte)Command.DoorLock_Set,
                 byte.Parse(value.ToString())
             });
             
-//            messageEvent = new ZWaveEvent(node, EventParameter.Level, System.Convert.ToDouble(value), 0);
-//            node.RaiseUpdateParameterEvent(messageEvent);
         }
 
         public static void Get(ZWaveNode node)
@@ -98,11 +83,8 @@ namespace ZWaveLib.CommandClasses
 
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
-                (byte)0x02, //DoorLockCmd_Get
+                (byte)Command.DoorLock_Get
             });
-
-//            var messageEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, "---", 0);
-//            node.RaiseUpdateParameterEvent(messageEvent);
 
         }
 
