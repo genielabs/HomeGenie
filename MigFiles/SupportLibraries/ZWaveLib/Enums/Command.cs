@@ -101,7 +101,14 @@ namespace ZWaveLib
         SceneActivationSet = 0x01,
         //
         UserCodeReport = 0x03,
-        UserCodeSet = 0x01
+        UserCodeSet = 0x01,
+        //
+        DoorLock_Set = 0x01,
+        DoorLock_Get = 0x02,
+        DoorLock_Report = 0x03,
+        DoorLock_Configuration_Set = 0x04,
+        DoorLock_Configuration_Get = 0x05,
+        DoorLock_Configuration_Report = 0x06
     }
 
 }

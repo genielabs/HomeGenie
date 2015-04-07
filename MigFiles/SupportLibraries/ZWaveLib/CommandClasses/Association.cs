@@ -41,7 +41,9 @@ namespace ZWaveLib.CommandClasses
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (message.Length > 5 && cmdType == (byte)Command.AssociationReport)
+            
+	    // we want to get in to that we can handle NO Associations
+            if (message.Length > 4 && cmdType == (byte)Command.AssociationReport)
             {
                 byte groupId = message[2];
                 byte associationMax = message[3];
@@ -55,6 +57,13 @@ namespace ZWaveLib.CommandClasses
                     }
                 }
                 associationNodes = associationNodes.TrimEnd(',');
+
+		// We don't want to send empty response since it will be handled as "timeout"
+		// so setting it to "None"
+                if (associationNodes.Length == 0) {
+                    associationNodes = "None";
+                }
+
                 //
                 var associationResponse = new AssociationResponse() {
                     Max = associationMax,
