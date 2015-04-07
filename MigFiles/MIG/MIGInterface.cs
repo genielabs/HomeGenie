@@ -149,7 +149,8 @@ namespace MIG
         Shutter,
         DoorWindow,
         MediaTransmitter,
-        MediaReceiver
+        MediaReceiver,
+        DoorLock
         //siren, alarm, motion sensor, door sensor, thermal sensor, etc.
     }
 }

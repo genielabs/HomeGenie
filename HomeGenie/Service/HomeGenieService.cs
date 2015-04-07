@@ -668,6 +668,22 @@ namespace HomeGenie.Service
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
+                        else if (command.Command == ZWave.Command.DOORLOCK_SET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.ZWAVENODE_DOORLOCK_STATUS
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
+                        else if (command.Command == ZWave.Command.DOORLOCK_GET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.ZWAVENODE_DOORLOCK_STATUS
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
                     }
                 }
                 break;

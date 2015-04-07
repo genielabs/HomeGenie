@@ -64,6 +64,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     $('#opt-zwave-meter-box').hide();
     //
     $('#opt-zwave-battery-box').hide();
+    $('#opt-zwave-door-lock').hide();
     //
     $('#opt-zwave-nodeinformation-overview').html('');
     //
@@ -99,6 +100,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
         classdesc['84'] = 'Wake Up';
         classdesc['85'] = 'Association';
         classdesc['86'] = 'Version';
+        classdesc['98'] = 'Door Lock';
         classdesc['9C'] = 'Sensor Alarm';
         classdesc['9D'] = 'Silence Alarm';
         //
@@ -145,6 +147,9 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
                     break;
                 case 'Meter':
                     $('#opt-zwave-meter-box').show();
+                    break;
+                case 'Door Lock':
+                    $('#opt-zwave-door-lock').show();
                     break;
             }
         }
@@ -412,6 +417,18 @@ HG.WebApp.GroupModules.ZWave_BatteryGet = function () {
     });
 };
 
+HG.WebApp.GroupModules.ZWave_DoorLockGet = function () {
+    $('#opt-zwave-doorlock-label').html('Door Lock Status = ? (querying node...)');
+    zwave_DoorLockGet($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-doorlock-label').html('Door Lock Status = ? (operation timeout!)');
+        }
+        else {
+            $('#opt-zwave-doorlock-label').html('Door Lock Status = ' + res );
+        }
+    });
+};
+
 HG.WebApp.GroupModules.ZWave_WakeUpGet = function () {
     $('#opt-zwave-wakeup-label').html('Wake Up Interval = ? (querying node...)');
     zwave_WakeUpGet($('#configurepage_OptionZWave_id').val(), function (res) {
@@ -551,6 +568,14 @@ function zwave_BasicSet(nodeid, value) {
 
 function zwave_BatteryGet(nodeid, callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Battery.Get/' + (new Date().getTime()), function (data) {
+        if (typeof callback != 'undefined' && callback != null) {
+            callback(eval(arguments[2].responseText)[0].ResponseValue);
+        }
+    });
+}
+
+function zwave_DoorLockGet(nodeid, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/DoorLock.Get/' + (new Date().getTime()), function (data) {
         if (typeof callback != 'undefined' && callback != null) {
             callback(eval(arguments[2].responseText)[0].ResponseValue);
         }

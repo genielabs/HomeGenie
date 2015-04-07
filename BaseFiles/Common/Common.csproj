@@ -2323,6 +2323,12 @@
     <None Include="html\pages\control\widgets\homegenie\generic\doorwindow.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="html\pages\control\widgets\homegenie\generic\doorlock.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\pages\control\widgets\homegenie\generic\doorlock.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\pages\control\widgets\homegenie\generic\doorwindow.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4538,13 +4544,5 @@
     <Compile Include="dummy.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="html\pages\control\widgets\homegenie\generic\locales\" />
-    <Folder Include="html\js\i18n\" />
-    <Folder Include="html\pages\configure\widgeteditor\" />
-    <Folder Include="html\js\codemirror-4.03\mode\css\" />
-    <Folder Include="html\js\codemirror-4.03\mode\htmlembedded\" />
-    <Folder Include="html\js\codemirror-4.03\mode\htmlmixed\" />
-    <Folder Include="html\js\codemirror-4.03\mode\xml\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

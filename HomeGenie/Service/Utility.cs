@@ -151,7 +151,23 @@ namespace HomeGenie.Service
         {
             string value = "";
             // TODO make it as a function _waitModuleParameterChange(mod, parname, timeout)
-            ModuleParameter parameter = Service.Utility.ModuleParameterGet(module, parameterName);
+            ModuleParameter parameter = null;
+            var start = DateTime.UtcNow.Ticks;
+            var now = start;
+            int maxSecWait = 15;
+            while (parameter == null && TimeSpan.FromTicks(now - start).TotalSeconds <= maxSecWait)
+            {
+				// wait for maxSecWait seconds if the parameterName doesn't exit yet - it migt not have been initialized yet
+				// classes that use encryption are require many messages to be exchanged
+                now = DateTime.UtcNow.Ticks;
+                parameter = Service.Utility.ModuleParameterGet(module, parameterName);
+                if (parameter == null)
+                {
+                    Console.WriteLine("Thread - " + System.Threading.Thread.CurrentThread.ManagedThreadId + " Waiting .5s for " + parameterName + ". Waited " + TimeSpan.FromTicks(now - start).TotalSeconds);
+                    Thread.Sleep(500);
+                }
+            }
+
             if (parameter != null)
             {
                 var updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
@@ -162,7 +178,10 @@ namespace HomeGenie.Service
                 int maxWait = 50; //(50 * 100ms ticks = 5000 ms)
                 int tickFrequency = 100;
                 //
-                while ((TimeSpan.FromTicks(parameter.UpdateTime.Ticks - updated).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
+				// I don't think that it will ever get into the while loop because the "updated" was just reset
+				// what's the change the "parameter.UpdateTime.Ticks" was updated after "updated" was reset
+				// we'll accept 1 second old values as still current values
+                while ((TimeSpan.FromTicks(updated - parameter.UpdateTime.Ticks).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
                 {
                     Thread.Sleep(tickFrequency);
                 }

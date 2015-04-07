@@ -57,6 +57,11 @@ namespace ZWaveLib
             return bytes;
         }
 
+		// usefull to be used in debugging
+        public static void logMessage(string message) {
+//            Console.WriteLine("----  " + System.Threading.Thread.CurrentThread.ManagedThreadId + " -- " + message);
+        }
+
     }
 }
 

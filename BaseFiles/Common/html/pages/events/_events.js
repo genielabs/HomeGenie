@@ -263,13 +263,20 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     if (group != null) group = group.Name;
                     var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                     var propname = eventLog.Property.substring(eventLog.Property.indexOf('.') + 1);
-                    var value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
-                    // TODO: should level be reported as is??
-                    if (propname == 'Level') {
-                        value = value * 100;
-                        if (value > 98) value = 100;
-                    }
-                    value += '%';
+                    
+                    if(propname == "DoorLock"){
+                        propname = "Status";
+                        value = eventLog.Value;
+                    }else{
+                        var value = (parseFloat(eventLog.Value.replace(',', '.')).toFixed(2));
+                        // TODO: should level be reported as is??                                        
+                        if (propname == 'Level') {
+                            value = value * 100;
+                            if (value > 98) value = 100;
+                        }
+                        value += '%';
+                    }       
+
                     //
                     if (module.Name != '') name = module.Name;
                     if (group == null) group = '';
