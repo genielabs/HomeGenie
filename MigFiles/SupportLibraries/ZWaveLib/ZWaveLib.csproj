@@ -101,6 +101,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="Enums\" />		
+    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>

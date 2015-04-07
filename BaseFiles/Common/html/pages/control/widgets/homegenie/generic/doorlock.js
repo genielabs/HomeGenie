@@ -26,15 +26,17 @@
         //
         this.GroupName = container.attr('data-context-group');
 
-        var lockstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.DoorLock"); //HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityArmed");
-	if(lockstatus != null){
+        var lockstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.DoorLock");
+
+        if (lockstatus != null) {
             var l_updateTime = lockstatus.UpdateTime;
             if (typeof l_updateTime != 'undefined') {
                 l_updateTime = l_updateTime.replace(' ', 'T'); // fix for IE and FF
                 var d = new Date(l_updateTime);
-                this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+                this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d);
             }
-	}
+	    }
+
         if (lockstatus != null && lockstatus.Value.indexOf("Locked") == 0) {
             widget.find('[data-ui-field=lockunlock]').val("locked").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';

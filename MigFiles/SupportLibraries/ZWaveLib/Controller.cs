@@ -460,9 +460,10 @@ namespace ZWaveLib
                                 //Console.WriteLine(ByteArrayToString(args.Message));
                                 Array.Copy(args.Message, 7, nodeInfo, 0, nifLength);
                                 znode.NodeInformationFrame = nodeInfo;
-                                var triggerEvents = znode.HandleNodeUpdate(args.Message);
+                                var delayTriggeringEvents = znode.HandleNodeUpdate(args.Message);
                                 //
-                                if (!triggerEvents) { 
+                                if (!delayTriggeringEvents)
+                                { 
 	                                // we don't trigger the envents if this device supports encrypted communication
 	                                // the same triggers will be triggered once the supported secured CommandClasses
 	                                // are collected - maybe create a function to share the events ?

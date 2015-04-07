@@ -45,7 +45,7 @@ namespace ZWaveLib.Values
             AlarmValue alarm = new AlarmValue();
             alarm.Value = message[3];
 
-			//Version 2 sends the value in argument 7
+            //Version 2 sends the value in argument 7
             if (message.Length >= 7) { 
                 alarm.Value = message[7];
             }
