@@ -1,7 +1,7 @@
 ﻿[{
-    Name: "Security Alarm System",
-    Author: "Generoso Martello",
-    Version: "2013-08-21",
+    Name: "Door Lock",
+    Author: "snagytx",
+    Version: "2015-04-07",
 
     GroupName: '',
     IconImage : 'pages/control/widgets/homegenie/generic/images/door_closed.png',
@@ -25,10 +25,6 @@
         // read some context data
         //
         this.GroupName = container.attr('data-context-group');
-        //
-        // get module watts prop
-        //
-
 
         var lockstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.DoorLock"); //HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityArmed");
 	if(lockstatus != null){
@@ -47,30 +43,6 @@
             widget.find('[data-ui-field=lockunlock]').val("unlocked").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_open.png';
         }
-        
-/*
-        var alarmstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityTriggered");
-        if (alarmstatus != null && alarmstatus.Value == "1") {
-            this.StatusText = "ALARM!";
-        }
-        else {
-            this.StatusText = "OK";
-        }
-
-        var armedlevel = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
-        var armedstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityArmed");
-        if (armedlevel != null && armedlevel.Value == "1") {
-            if (armedstatus != null && armedstatus.Value == "1") {
-                this.Description = "ARMED";
-            }
-            else {
-                this.Description = "ARMING...";
-            }
-        }
-        else {
-            this.Description = "DISARMED";
-        }
-*/
         
         //
         // render widget
