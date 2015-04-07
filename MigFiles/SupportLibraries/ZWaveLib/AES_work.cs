@@ -13,7 +13,7 @@ namespace ZWaveLib.Devices
 
         internal byte[] zeroIV = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-    public byte[] generateKey1(byte[] nc, byte[] plaintext) {
+        public byte[] generateKey1(byte[] nc, byte[] plaintext) {
             byte[] tmp = new byte[zeroIV.Length];
 
             Array.Copy(EncryptMessage(nc, zeroIV, plaintext, CipherMode.CBC), tmp, 16);
