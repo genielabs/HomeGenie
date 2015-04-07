@@ -29,6 +29,7 @@ namespace ZWaveLib
         Crc16Encapsulated = 0x56,
         //
         MultiInstance = 0x60,
+        DoorLock = 0x62,
         UserCode = 0x63,
         Configuration = 0x70,
         Alarm = 0x71,
@@ -40,6 +41,8 @@ namespace ZWaveLib
         WakeUp = 0x84,
         Association = 0x85,
         Version = 0x86,
+        //
+        Security = 0x98,
         //
         SensorAlarm = 0x9C,
         SilenceAlarm = 0x9D

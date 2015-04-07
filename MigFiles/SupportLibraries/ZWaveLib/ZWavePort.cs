@@ -123,6 +123,7 @@ namespace ZWaveLib
                 if (disableCallback)
                 {
                     message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
+                    Utility.logMessage("    Sent1   : " + Utility.ByteArrayToString(message.Message));
                     serialPort.SendMessage(message.Message);
                 }
                 else
@@ -137,6 +138,7 @@ namespace ZWaveLib
                     message.Message[message.Message.Length - 1] = GenerateChecksum(message.Message);
                     pendingMessages.Add(message);
                     //
+                    Utility.logMessage("    Sent1   : " + Utility.ByteArrayToString(message.Message));
                     serialPort.SendMessage(message.Message);
                     //
                     // wait for any previous message callback response
@@ -266,6 +268,7 @@ namespace ZWaveLib
                 }
                 return;
             }
+            Utility.logMessage("    Received: " + Utility.ByteArrayToString(message));
             //
             int msgLength = 0;
             byte[] nextMessage = null;

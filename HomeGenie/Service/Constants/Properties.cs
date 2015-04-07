@@ -80,5 +80,7 @@ namespace HomeGenie.Service.Constants
             = "ZWaveNode.ManufacturerSpecific";
         public const string ZWAVENODE_DEVICEHANDLER
             = "ZWaveNode.DeviceHandler";
+        public const string ZWAVENODE_DOORLOCK_STATUS
+            = "Status.DoorLock";
     }
 }

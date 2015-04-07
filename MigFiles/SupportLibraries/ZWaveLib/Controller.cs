@@ -59,7 +59,11 @@ namespace ZWaveLib
     public class ZWaveNodeConfig
     {
         public byte NodeId { get; set; }
+		// we keep the list of CommandClasses that are supported by the node
+		// both clear or encrypted communication
         public byte[] NodeInformationFrame { get; set; }
+		// we keep the list of CommandClasses that need encryption for this node
+        public byte[] SecuredNodeInformationFrame { get; set; }
     }
 
     public class Controller : ZWaveNode
@@ -337,9 +341,17 @@ namespace ZWaveLib
                                 var newNode = CreateDevice(nodeOperationIdCheck, 0x00);
                                 // Extract node information frame
                                 int nodeInfoLength = (int)args.Message[7];
-                                byte[] nodeInfo = new byte[nodeInfoLength - 2];
-                                Array.Copy(args.Message, 8, nodeInfo, 0, nodeInfoLength - 2);
+                                // we don't need to exclude the last 2 CommandClasses
+                                byte[] nodeInfo = new byte[nodeInfoLength];
+                                Array.Copy(args.Message, 8, nodeInfo, 0, nodeInfoLength);
                                 newNode.NodeInformationFrame = nodeInfo;
+
+                                newNode.BasicClass = args.Message[8];
+                                newNode.GenericClass = args.Message[9];
+                                newNode.SpecificClass = args.Message[10];
+                                devices.Add(newNode);
+                                newNode.HandleSecureCommandClasses(nodeInfo);
+
                                 RaiseUpdateParameterEvent(new ZWaveEvent(newNode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
                                 SaveNodesConfig();
                             }
@@ -390,12 +402,12 @@ namespace ZWaveLib
                             var node = devices.Find(n => n.Id == sourceNodeId);
                             if (node == null)
                             {
-                                CreateDevice(sourceNodeId, 0x00);
+                                node = CreateDevice(sourceNodeId, 0x00);
                                 GetNodeCapabilities(sourceNodeId);
                             }
                             try
                             {
-                                node.MessageRequestHandler(args.Message);
+                                node.MessageRequestHandler(this, args.Message);
                             }
                             catch (Exception ex)
                             {
@@ -443,13 +455,21 @@ namespace ZWaveLib
                             var znode = devices.Find(n => n.Id == sourceNodeId);
                             if (znode != null)
                             {
-                                byte[] nodeInfo = new byte[nifLength - 2];
+                                // we don't need to exclude the last 2 CommandClasses
+                                byte[] nodeInfo = new byte[nifLength];
                                 //Console.WriteLine(ByteArrayToString(args.Message));
-                                Array.Copy(args.Message, 7, nodeInfo, 0, nifLength - 2);
+                                Array.Copy(args.Message, 7, nodeInfo, 0, nifLength);
                                 znode.NodeInformationFrame = nodeInfo;
+                                var triggerEvents = znode.HandleNodeUpdate(args.Message);
                                 //
-                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
-                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.WakeUpNotify, "1", 0));
+                                if (!triggerEvents) { 
+	                                // we don't trigger the envents if this device supports encrypted communication
+	                                // the same triggers will be triggered once the supported secured CommandClasses
+	                                // are collected - maybe create a function to share the events ?
+	                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
+    	                            RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.WakeUpNotify, "1", 0));
+                                }
+
                                 SaveNodesConfig();
                             }
                             break;
@@ -661,6 +681,15 @@ namespace ZWaveLib
                 var serializer = new XmlSerializer(nodesConfig.GetType());
                 var reader = new StreamReader(configPath);
                 nodesConfig = (List<ZWaveNodeConfig>)serializer.Deserialize(reader);
+                foreach (ZWaveNodeConfig node in nodesConfig) {
+                    var newNode = CreateDevice(node.NodeId, 0x00);
+                    newNode.NodeInformationFrame = node.NodeInformationFrame;
+                    newNode.SecuredNodeInformationFrame = node.SecuredNodeInformationFrame;
+                    devices.Add(newNode);
+
+                    newNode.BuildSupportedList(node.NodeInformationFrame, false);
+                    newNode.BuildSupportedList(node.SecuredNodeInformationFrame, true);
+                }
                 reader.Close();
             }
             catch
@@ -669,14 +698,15 @@ namespace ZWaveLib
             }
         }
 
-        private void SaveNodesConfig()
+        public void SaveNodesConfig()
         {
             nodesConfig.Clear();
             for (int n = 0; n < devices.Count; n++)
             {
                 nodesConfig.Add(new ZWaveNodeConfig() {
                     NodeId = devices[n].Id,
-                    NodeInformationFrame = devices[n].NodeInformationFrame
+                    NodeInformationFrame = devices[n].NodeInformationFrame,
+                    SecuredNodeInformationFrame = devices[n].SecuredNodeInformationFrame
                 });
             }
             // TODO: save config to xml

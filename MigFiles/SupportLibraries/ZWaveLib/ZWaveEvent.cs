@@ -69,7 +69,8 @@ namespace ZWaveLib
         ThermostatOperatingState,
         ThermostatSetBack,
         ThermostatSetPoint,
-        UserCode
+        UserCode,
+        DoorLockStatus
     }
 
     public class ZWaveEvent

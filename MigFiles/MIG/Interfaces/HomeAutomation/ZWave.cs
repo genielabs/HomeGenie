@@ -111,6 +111,9 @@ namespace MIG.Interfaces.HomeAutomation
                 { 901, "UserCode.Set" },
 
                 { 1000, "NodeInfo.Get" },
+
+                { 10001, "DoorLock.Set" },
+                { 10002, "DoorLock.Get" },
             };
 
             // <context>.<command> enum   -   eg. Control.On where <context> :== "Control" and <command> :== "On"
@@ -164,6 +167,9 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command THERMOSTAT_OPERATINGSTATE_GET = new Command(809);
 
             public static readonly Command USERCODE_SET = new Command(901);
+
+            public static readonly Command DOORLOCK_SET = new Command(10001);
+            public static readonly Command DOORLOCK_GET = new Command(10002);
 
             private readonly String name;
             private readonly int value;
@@ -304,6 +310,12 @@ namespace MIG.Interfaces.HomeAutomation
                             module.Description = "ZWave Meter";
                             module.ModuleType = ModuleTypes.Sensor;
                             break;
+
+                        case (byte)GenericType.EntryControl:
+                            module.Description = "ZWave Door Lock";
+                            module.ModuleType = ModuleTypes.DoorLock;
+                            break;
+
                         }
                     }
                     modules.Add(module);
@@ -660,6 +672,21 @@ namespace MIG.Interfaces.HomeAutomation
                     byte userIdStatus = byte.Parse(request.GetOption(1));
                     byte[] tagCode = ZWaveLib.Utility.HexStringToByteArray(request.GetOption(2));
                     UserCode.Set(node, new ZWaveLib.Values.UserCodeValue(userId, userIdStatus, tagCode));
+                }
+                else if (command == Command.DOORLOCK_SET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+
+                    var level = int.Parse(request.GetOption(0));
+                    DoorLock.Set(node, level);
+
+                }
+
+                else if (command == Command.DOORLOCK_GET)
+                {
+                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    DoorLock.Get(node);
+
                 }
             }
             catch
@@ -1095,6 +1122,9 @@ namespace MIG.Interfaces.HomeAutomation
                 case EventParameter.ThermostatSetPoint:
                     path = "Thermostat.SetPoint." + ((SetPointType)((dynamic)value).Type).ToString();
                     value = ((dynamic)value).Value;
+                    break;
+                case EventParameter.DoorLockStatus:
+                    path = "Status.DoorLock";
                     break;
                 case EventParameter.UserCode:
                     path = "EntryControl.UserCode";
