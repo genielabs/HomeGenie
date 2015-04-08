@@ -270,6 +270,228 @@ namespace ZWaveLib
                 } while (!nodeCapabilityAck.WaitOne(300) && retries++ < 3);
             }
         }
+                
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+        
+        public class SupportedCommandClasses : IEquatable<SupportedCommandClasses>
+        {
+            public byte cclass { get; set; }
+            public bool secure { get; set; }
+            public bool afterMark { get; set; }
+            private string name;
+            public bool supported = false;
+            public int instance = 1;
+            public override string ToString()
+            {
+                if (Enum.IsDefined(typeof(CommandClass), (byte)cclass))
+                {
+                    name = ((CommandClass)(byte)cclass).ToString();
+                    supported = true;
+                }
+
+                return " Class: ( " + (secure ? "Secured  " : "Unsecured") + " )" + " - " + (supported ? name : Utility.ByteArrayToString(new byte[] { (byte)cclass })) + (afterMark ? " - After Mark" : "") + (!supported ? " - UNSUPPORTED" : "");
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null)
+                    return false;
+                SupportedCommandClasses objAsCC = obj as SupportedCommandClasses;
+                if (objAsCC == null)
+                    return false;
+                else
+                    return Equals(objAsCC);
+            }
+
+            public override int GetHashCode()
+            {
+                return cclass;
+            }
+
+            public bool Equals(SupportedCommandClasses obj)
+            {
+                if (obj == null)
+                    return false;
+                return (this.cclass.Equals(obj.cclass));
+            }
+        }
+
+        //this is designed to be called during NodeAdd ONLY 
+        public bool HandleSecureCommandClasses(ZWaveNode node, byte[] nodeInfo)
+        {
+            bool foundSecure = false;
+            foreach (byte b in nodeInfo)
+            {
+                // if we are security then we need to initalize
+                if (b == (byte) CommandClass.Security) {
+                    adding_node = true;
+                    GetSecurityCcScheme(node);
+                    foundSecure = true;
+                }
+            }
+            return foundSecure;
+        }
+
+
+        
+
+        public void GetSecurityCcScheme(ZWaveNode node){
+
+            if (adding_node)
+            {
+                schemeRequestSent = true;
+                node.SendRequest(new byte[]{
+                    (byte)CommandClass.Security,
+                    (byte)SecurityCommand.SchemeGet,
+                    0
+                });
+            }
+        }
+
+
+
+        public bool HandleNodeUpdate(ZWaveNode node, byte[] msg)
+        {
+            bool foundSecure = false;
+
+            Console.WriteLine("  Optional command classes for node " + this.Id + ":");
+            int start = 7;
+
+            byte[] arr = new byte[msg[6]];
+            Array.Copy(msg, start, arr, 0, msg[6]);
+
+            foundSecure = BuildSupportedList(arr, false);
+
+            // we are checking for security
+            if(foundSecure)
+            {
+                security.sendSupportedGet(node);
+            }
+
+            return foundSecure;
+        }
+
+        public bool SetSecuredClasses(byte[] msg)
+        {
+
+            Console.WriteLine("  Secured command classes for node " + this.Id + ":");
+
+            int start = 3;
+
+            byte[] arr = new byte[msg.Length - start];
+            Array.Copy(msg, start, arr, 0, msg.Length - start);
+
+            BuildSupportedList(arr, true);
+
+
+            SaveNodesConfig();
+
+            RaiseUpdateParameterEvent(new ZWaveEvent(this, EventParameter.NodeInfo, Utility.ByteArrayToString(this.NodeInformationFrame), 0));
+            RaiseUpdateParameterEvent(new ZWaveEvent(this, EventParameter.WakeUpNotify, "1", 0));
+
+            return true;
+        }
+
+        public bool BuildSupportedList(byte[] nodesInfo, bool secured) {
+
+            bool afterMark = false;
+            bool foundSecure = false;
+
+            if (nodesInfo == null)
+                return false;
+
+            foreach(byte nodeInfo in nodesInfo){
+
+                if (nodeInfo == (byte)0xEF)
+                {
+                    // COMMAND_CLASS_MARK.
+                    // Marks the end of the list of supported command classes.  The remaining classes
+                    // are those that can be controlled by the device.  These classes are created
+                    // without values.  Messages received cause notification events instead.
+                    afterMark = true;
+                    continue;
+                }
+
+                var cc = CommandClassFactory.GetCommandClass((byte)nodeInfo);
+
+                if (cc == null)
+                {
+                    Console.WriteLine(nodeInfo.ToString("X2") + " - We don't NOT supporte this CommandClass");
+                }
+                else
+                {
+
+                    SupportedCommandClasses scc = supportedClasses.Find(x => x.cclass == (byte)nodeInfo);
+
+                    if (scc == null)
+                    {
+                        scc = new SupportedCommandClasses { cclass = (byte)nodeInfo, secure = secured, afterMark = afterMark };
+                        supportedClasses.Add(scc);
+                        Console.WriteLine("Added " + scc);
+                    }
+                    else
+                    {
+                        scc.secure = true;
+                        Console.WriteLine("Updated " + scc);
+                    }
+                }
+
+                if (nodeInfo == (byte)CommandClass.Security)
+                {
+                    foundSecure = true;
+                }
+
+                this.NodeInformationFrame = addElementToArray(this.NodeInformationFrame, nodeInfo);
+
+                if (secured) {
+                    this.SecuredNodeInformationFrame = addElementToArray(this.SecuredNodeInformationFrame, nodeInfo);
+                }
+            }
+
+            return foundSecure;    
+
+        }
+
+        private byte[] addElementToArray(byte[] nodesInfo, byte nodeInfo) {
+            int pos = -1;
+
+            if (nodesInfo != null)
+                pos = Array.IndexOf(nodesInfo, nodeInfo);
+
+            if (pos == -1)
+            {
+                if (nodesInfo != null)
+                {
+                    Array.Resize(ref nodesInfo, nodesInfo.Length + 1);
+                }
+                else
+                {
+                    nodesInfo = new byte[1];
+                }
+                nodesInfo[nodesInfo.Length - 1] = nodeInfo;
+            }
+
+            return nodesInfo;
+        }
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
         private void ZwaveMessageReceived(object sender, ZWaveMessageReceivedEventArgs args)
         {
@@ -350,7 +572,7 @@ namespace ZWaveLib
                                 newNode.GenericClass = args.Message[9];
                                 newNode.SpecificClass = args.Message[10];
                                 devices.Add(newNode);
-                                newNode.HandleSecureCommandClasses(nodeInfo);
+                                HandleSecureCommandClasses(newNode, nodeInfo);
 
                                 RaiseUpdateParameterEvent(new ZWaveEvent(newNode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
                                 SaveNodesConfig();
@@ -407,7 +629,7 @@ namespace ZWaveLib
                             }
                             try
                             {
-                                node.MessageRequestHandler(this, args.Message);
+                                node.MessageRequestHandler(args.Message);
                             }
                             catch (Exception ex)
                             {
@@ -460,7 +682,7 @@ namespace ZWaveLib
                                 //Console.WriteLine(ByteArrayToString(args.Message));
                                 Array.Copy(args.Message, 7, nodeInfo, 0, nifLength);
                                 znode.NodeInformationFrame = nodeInfo;
-                                var delayTriggeringEvents = znode.HandleNodeUpdate(args.Message);
+                                var delayTriggeringEvents = HandleNodeUpdate(znode, args.Message);
                                 //
                                 if (!delayTriggeringEvents)
                                 { 
@@ -687,9 +909,6 @@ namespace ZWaveLib
                     newNode.NodeInformationFrame = node.NodeInformationFrame;
                     newNode.SecuredNodeInformationFrame = node.SecuredNodeInformationFrame;
                     devices.Add(newNode);
-
-                    newNode.BuildSupportedList(node.NodeInformationFrame, false);
-                    newNode.BuildSupportedList(node.SecuredNodeInformationFrame, true);
                 }
                 reader.Close();
             }

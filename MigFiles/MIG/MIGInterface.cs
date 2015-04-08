@@ -148,9 +148,9 @@ namespace MIG
         Thermostat,
         Shutter,
         DoorWindow,
+        DoorLock,
         MediaTransmitter,
-        MediaReceiver,
-        DoorLock
+        MediaReceiver
         //siren, alarm, motion sensor, door sensor, thermal sensor, etc.
     }
 }

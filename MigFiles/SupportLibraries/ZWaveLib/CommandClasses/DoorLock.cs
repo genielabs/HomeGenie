@@ -1,4 +1,26 @@
-﻿namespace ZWaveLib.CommandClasses
+﻿/*
+    This file is part of HomeGenie Project source code.
+
+    HomeGenie is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HomeGenie is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HomeGenie.  If not, see <http://www.gnu.org/licenses/>.  
+*/
+
+/*
+ *     Author: https://github.com/snagytx
+ *     Project Homepage: http://homegenie.it
+ */
+
+namespace ZWaveLib.CommandClasses
 {
     public class DoorLock : ICommandClass
     {
@@ -11,66 +33,56 @@
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-
-            if (cmdType == (byte)Command.DoorLock_Report) {
+            if (cmdType == (byte)Command.DoorLock_Report)
+            {
                 int lockState;
-
                 if (message[2] == 0xFF)
+                {
                     lockState = 6;
+                }
                 else
+                {
                     lockState = System.Convert.ToInt32(message[2].ToString("X2"));
+                }
 
-                if (lockState > 6) {
+                if (lockState > 6)
+                {
                     lockState = 7;
                 }
 
                 string resp;
-
-                if (lockState == 0) {
+                if (lockState == 0)
+                {
                     resp = "Unlocked";
                 }
                 else if (lockState == 6)
                 {
                     resp = "Locked";
                 }
-                else {
+                else
+                {
                     resp = "Unknown";
                 }
-
                 var messageEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, resp, 0);
                 node.RaiseUpdateParameterEvent(messageEvent);
-
             }
-
             return nodeEvent;
         }
 
         public static void Set(ZWaveNode node, int value)
         {
-
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
                 (byte)Command.DoorLock_Set,
                 byte.Parse(value.ToString())
             });
-            
         }
 
         public static void Get(ZWaveNode node)
         {
-
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
                 (byte)Command.DoorLock_Get
-            });
-
-        }
-
-        public static void Unlock(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Basic, 
-                (byte)Command.BasicGet 
             });
         }
     }

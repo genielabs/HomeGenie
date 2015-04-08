@@ -1124,7 +1124,7 @@ namespace MIG.Interfaces.HomeAutomation
                     value = ((dynamic)value).Value;
                     break;
                 case EventParameter.DoorLockStatus:
-                    path = "Status.DoorLock";
+                    path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
                     break;
                 case EventParameter.UserCode:
                     path = "EntryControl.UserCode";

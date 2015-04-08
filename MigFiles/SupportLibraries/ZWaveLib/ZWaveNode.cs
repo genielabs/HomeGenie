@@ -35,49 +35,6 @@ using ZWaveLib.Values;
 namespace ZWaveLib
 {
 
-    public class SupportedCommandClasses : IEquatable<SupportedCommandClasses>
-    {
-        public byte cclass { get; set; }
-        public bool secure { get; set; }
-        public bool afterMark { get; set; }
-        private string name;
-        public bool supported = false;
-        public int instance = 1;
-        public override string ToString()
-        {
-            if (Enum.IsDefined(typeof(CommandClass), (byte)cclass))
-            {
-                name = ((CommandClass)(byte)cclass).ToString();
-                supported = true;
-            }
-
-            return " Class: ( " + (secure ? "Secured  " : "Unsecured") + " )" + " - " + (supported ? name : Utility.ByteArrayToString(new byte[] { (byte)cclass })) + (afterMark ? " - After Mark" : "") + (!supported ? " - UNSUPPORTED" : "");
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            SupportedCommandClasses objAsCC = obj as SupportedCommandClasses;
-            if (objAsCC == null)
-                return false;
-            else
-                return Equals(objAsCC);
-        }
-
-        public override int GetHashCode()
-        {
-            return cclass;
-        }
-
-        public bool Equals(SupportedCommandClasses obj)
-        {
-            if (obj == null)
-                return false;
-            return (this.cclass.Equals(obj.cclass));
-        }
-    }
-
     public class ManufacturerSpecificResponseEventArg
     {
         public int NodeId { get; internal set; }
@@ -93,18 +50,13 @@ namespace ZWaveLib
 
     public class ZWaveNode
     {
-        List<SupportedCommandClasses> supportedClasses = new List<SupportedCommandClasses>();
-
         #region Private fields
 
         internal ZWavePort zwavePort;
-        internal Controller pController;
 
         #endregion Private fields
 
         #region Public fields
-
-        public SecurityHandler security = new SecurityHandler();
 
         public byte Id { get; protected set; }
         public string ManufacturerId { get; protected set; }
@@ -145,31 +97,10 @@ namespace ZWaveLib
 
         #region Public members
 
-        //this is designed to be called during NodeAdd ONLY 
-        public bool HandleSecureCommandClasses(byte[] nodeInfo)
-        {
-            bool foundSecure = false;
-            foreach (byte b in nodeInfo)
-            {
-                // if we are security then we need to initalize
-                if (b == (byte) CommandClass.Security) {
-                    security.adding_node = true;
-                    var cc = CommandClassFactory.GetCommandClass(b);
-                    cc.GetEvent(this, null);
-                    foundSecure = true;
-                }
-            }
-
-            return foundSecure;
-        }
-
-        public virtual bool MessageRequestHandler(Controller ctrl, byte[] receivedMessage)
+        public virtual bool MessageRequestHandler(byte[] receivedMessage)
         {
             //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
             //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
-
-			// saving a reference to the controller
-            pController = ctrl;
 
             ZWaveEvent messageEvent = null;
             int messageLength = receivedMessage.Length;
@@ -209,36 +140,6 @@ namespace ZWaveLib
                         }
                     }
                 }
-                else if (messageEvent.Node.GenericClass == (byte)GenericType.EntryControl)
-                { 
-                    // this is an event for DoorLock and needs special handling
-                    if (messageEvent.Parameter == EventParameter.AlarmGeneric)
-                    {
-                        int value = System.Convert.ToInt16(messageEvent.Value);
-                        messageEvent.Parameter = EventParameter.DoorLockStatus;
-                        if (value == 1)
-                        {
-                            messageEvent.Value = "Locked";
-                        }
-                        else if (value == 2)
-                        {
-                            messageEvent.Value = "Unlocked";
-                        }
-                        else if (value == 5)
-                        {
-                            messageEvent.Value = "Locked from outside";
-                        }
-                        else if (value == 6)
-                        {
-                            messageEvent.Value = "Unlocked by user " + System.Convert.ToInt32(receivedMessage[16].ToString("X2"), 16);
-                        }
-                        else if (value == 16)
-                        {
-                            messageEvent.Value = "Unatuthorized unlock attempted";
-                        }
-
-                    }
-                }
 
                 this.RaiseUpdateParameterEvent(messageEvent);
             }
@@ -258,130 +159,6 @@ namespace ZWaveLib
             return false;
         }
 
-        public bool HandleNodeUpdate(byte[] msg)
-        {
-            bool foundSecure = false;
-
-            Console.WriteLine("  Optional command classes for node " + this.Id + ":");
-            int start = 7;
-
-            byte[] arr = new byte[msg[6]];
-            Array.Copy(msg, start, arr, 0, msg[6]);
-
-            foundSecure = BuildSupportedList(arr, false);
-
-            // we are checking for security
-            if(foundSecure)
-            {
-                security.sendSupportedGet(this);
-            }
-
-            return foundSecure;
-        }
-
-        public bool SetSecuredClasses(byte[] msg)
-        {
-
-            Console.WriteLine("  Secured command classes for node " + this.Id + ":");
-
-            int start = 3;
-
-            byte[] arr = new byte[msg.Length - start];
-            Array.Copy(msg, start, arr, 0, msg.Length - start);
-
-            BuildSupportedList(arr, true);
-
-
-            pController.SaveNodesConfig();
-
-            RaiseUpdateParameterEvent(new ZWaveEvent(this, EventParameter.NodeInfo, Utility.ByteArrayToString(this.NodeInformationFrame), 0));
-            RaiseUpdateParameterEvent(new ZWaveEvent(this, EventParameter.WakeUpNotify, "1", 0));
-
-            return true;
-        }
-
-        public bool BuildSupportedList(byte[] nodesInfo, bool secured) {
-
-            bool afterMark = false;
-            bool foundSecure = false;
-
-            if (nodesInfo == null)
-                return false;
-
-            foreach(byte nodeInfo in nodesInfo){
-
-                if (nodeInfo == (byte)0xEF)
-                {
-                    // COMMAND_CLASS_MARK.
-                    // Marks the end of the list of supported command classes.  The remaining classes
-                    // are those that can be controlled by the device.  These classes are created
-                    // without values.  Messages received cause notification events instead.
-                    afterMark = true;
-                    continue;
-                }
-
-                var cc = CommandClassFactory.GetCommandClass((byte)nodeInfo);
-
-                if (cc == null)
-                {
-                    Console.WriteLine(nodeInfo.ToString("X2") + " - We don't NOT supporte this CommandClass");
-                }
-                else
-                {
-
-                    SupportedCommandClasses scc = supportedClasses.Find(x => x.cclass == (byte)nodeInfo);
-
-                    if (scc == null)
-                    {
-                        scc = new SupportedCommandClasses { cclass = (byte)nodeInfo, secure = secured, afterMark = afterMark };
-                        supportedClasses.Add(scc);
-                        Console.WriteLine("Added " + scc);
-                    }
-                    else
-                    {
-                        scc.secure = true;
-                        Console.WriteLine("Updated " + scc);
-                    }
-                }
-
-                if (nodeInfo == (byte)CommandClass.Security)
-                {
-                    foundSecure = true;
-                }
-
-                this.NodeInformationFrame = addElementToArray(this.NodeInformationFrame, nodeInfo);
-
-                if (secured) {
-                    this.SecuredNodeInformationFrame = addElementToArray(this.SecuredNodeInformationFrame, nodeInfo);
-                }
-            }
-
-            return foundSecure;    
-    
-        }
-
-        private byte[] addElementToArray(byte[] nodesInfo, byte nodeInfo) {
-            int pos = -1;
-
-            if (nodesInfo != null)
-                pos = Array.IndexOf(nodesInfo, nodeInfo);
-
-            if (pos == -1)
-            {
-                if (nodesInfo != null)
-                {
-                    Array.Resize(ref nodesInfo, nodesInfo.Length + 1);
-                }
-                else
-                {
-                    nodesInfo = new byte[1];
-                }
-                nodesInfo[nodesInfo.Length - 1] = nodeInfo;
-            }
-
-            return nodesInfo;
-        }
-
         public bool SupportCommandClass(CommandClass c)
         {
             bool isSupported = false;
@@ -392,21 +169,28 @@ namespace ZWaveLib
             return isSupported;
         }
 
+        public bool IsSecuredCommandClass(CommandClass c)
+        {
+            bool isSecured = false;
+            if (this.NodeInformationFrame != null)
+            {
+                isSecured = (Array.IndexOf(this.SecuredNodeInformationFrame, (byte)c) >= 0);
+            }
+            return isSecured;
+        }
+
         public void SendRequest(byte[] request)
         {
-            // lookup request[0] in supportedClasses to see if we need to encrypt the message or NOT
-            // we don't encrypt the message if it's sent by the Security Class
-            byte cmd = request[0];
-            SupportedCommandClasses scc = supportedClasses.Find(x => x.cclass == cmd);
-            byte[] msg = ZWaveMessage.CreateRequest(this.Id, request);
-
-            if (scc != null && scc.secure && cmd != (byte)CommandClass.Security)
+            byte cmdClass = request[0];
+            byte[] message = ZWaveMessage.CreateRequest(this.Id, request);
+            // when cmdClass belongs to SecuredNodeInformationFrame we need to encrypt the message
+            if (cmdClass != (byte)CommandClass.Security && IsSecuredCommandClass((CommandClass)cmdClass))
             {
-                security.encryptAndSend(this, msg);
+                Security.SendEncryptedRequest(this, message);
             }
             else
             {
-                SendMessage(msg);
+                SendMessage(message);
             }
         }
 

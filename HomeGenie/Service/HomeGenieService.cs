@@ -672,7 +672,7 @@ namespace HomeGenie.Service
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module,
-                                Properties.ZWAVENODE_DOORLOCK_STATUS
+                                Properties.STATUS_DOORLOCK
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
@@ -680,7 +680,7 @@ namespace HomeGenie.Service
                         {
                             command.Response = Utility.WaitModuleParameterChange(
                                 module,
-                                Properties.ZWAVENODE_DOORLOCK_STATUS
+                                Properties.STATUS_DOORLOCK
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
