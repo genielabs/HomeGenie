@@ -33,7 +33,7 @@ namespace ZWaveLib.CommandClasses
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.DoorLock_Report)
+            if (cmdType == (byte)Command.DoorLockReport)
             {
                 int lockState;
                 if (message[2] == 0xFF)
@@ -73,7 +73,7 @@ namespace ZWaveLib.CommandClasses
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
-                (byte)Command.DoorLock_Set,
+                (byte)Command.DoorLockSet,
                 byte.Parse(value.ToString())
             });
         }
@@ -82,7 +82,7 @@ namespace ZWaveLib.CommandClasses
         {
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
-                (byte)Command.DoorLock_Get
+                (byte)Command.DoorLockGet
             });
         }
     }

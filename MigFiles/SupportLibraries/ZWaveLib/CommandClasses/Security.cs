@@ -9,8 +9,17 @@ using System.Diagnostics;
 
 namespace ZWaveLib.CommandClasses
 {
+    public class SecurityData
+    {
+        public bool SchemeAgreed = false;
+        // other fields can be added here
+    }
+
     public class Security : ICommandClass
     {
+        //internal byte[] PrivateNetworkKey = new byte[] { 0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78, 0x87, 0x96, 0xA5, 0xB4, 0xC3, 0xD2, 0xE1, 0xF0 };
+        internal static byte[] PrivateNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
+
         public CommandClass GetClassId()
         {
             return CommandClass.Security;
@@ -20,17 +29,73 @@ namespace ZWaveLib.CommandClasses
         {
             byte cmdType = message[1];
 
+            // each message received from the node, should have an entry in EventParameter enum
+            ZWaveEvent nodeEvent = null;
+
+            // handled is not used anymore, please use nodeEvent instead
             bool handled = false;
+
             int start = 1;
 
-            // each message received from the node, should have an entry in EventParameter enum
-            ZWaveEvent nodeEvent = new ZWaveEvent(node, EventParameter.Security, null, 0);
 
 
 
 
             switch (cmdType)
             {
+            case (byte)SecurityCommand.SupportedReport:
+                Utility.logMessage("Received COMMAND_SUPPORTED_REPORT for node: " + node.Id);
+                /* this is a list of CommandClasses that should be Encrypted.
+                 * and it might contain new command classes that were not present in the NodeInfoFrame
+                 * so we have to run through, mark existing Command Classes as SetSecured (so SendMsg in the Driver
+                 * class will route the unecrypted messages to our SendMsg) and for New Command
+                 * Classes, create them, and of course, also do a SetSecured on them.
+                 *
+                 * This means we must do a SecurityCmd_SupportedGet request ASAP so we dont have
+                 * Command Classes created after the Discovery Phase is completed!
+                 */
+                byte[] securedClasses = new byte[message.Length - 3];
+                Array.Copy(message, start, securedClasses, 0, message.Length - 3);
+                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityNodeInformationFrame, securedClasses, 0);
+                break;
+
+            case (byte)SecurityCommand.SchemeReport:
+                Utility.logMessage("Received COMMAND_SCHEME_REPORT for node: " + node.Id + ", " + (start + 1));
+                int schemes = message[start + 1];
+
+                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityScheme, schemes, 0);
+
+                var nodeSecurityData = GetSecurityData(node);
+                if (nodeSecurityData.SchemeAgreed)
+                {
+                    handled = true;
+                    break;
+                }
+
+                if (schemes == (byte)SecurityScheme.SchemeZero)
+                {
+                    SetNetworkKey(node);
+                    nodeSecurityData.SchemeAgreed = true;
+                }
+                else
+                {
+                    Utility.logMessage("   No common security scheme.  The device will continue as an unsecured node.");
+                }
+                break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             case (byte)SecurityCommand.NonceGet:
                 Utility.logMessage("Received COMMAND_NONCE_GET for node: " + node.Id);
 
@@ -92,56 +157,12 @@ namespace ZWaveLib.CommandClasses
 
                 handled = true;
                 break;
-            case (byte)SecurityCommand.SupportedReport:
-                Utility.logMessage("Received COMMAND_SUPPORTED_REPORT for node: " + node.Id);
-                /* this is a list of CommandClasses that should be Encrypted.
-                     * and it might contain new command classes that were not present in the NodeInfoFrame
-                     * so we have to run through, mark existing Command Classes as SetSecured (so SendMsg in the Driver
-                     * class will route the unecrypted messages to our SendMsg) and for New Command
-                     * Classes, create them, and of course, also do a SetSecured on them.
-                     *
-                     * This means we must do a SecurityCmd_SupportedGet request ASAP so we dont have
-                     * Command Classes created after the Discovery Phase is completed!
-                     */
-
-                node.SetSecuredClasses(message);
-
-                handled = true;
-                break;
             case (byte)SecurityCommand.SchemeInherit:
                 Utility.logMessage("Received COMMAND_SCHEME_INHERIT for node: " + node.Id);
                 /* only used in a Controller Replication Type enviroment. */
 
                 break;
-            case (byte)SecurityCommand.SchemeReport:
-                Utility.logMessage("Received COMMAND_SCHEME_REPORT for node: " + node.Id + ", " + (start + 1));
-                int schemes = message[start + 1];
-                if (GetSchemeAgreedData(node))
-                {
-                    handled = true;
-                    break;
-                }
 
-                if (schemes == (byte)SecurityScheme.SchemeZero)
-                {
-
-                    byte[] t_msg = new byte[18];
-                    t_msg[0] = (byte)CommandClass.Security;
-                    t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
-
-                    Array.Copy(PrivateNetworkKey, 0, t_msg, 2, 16);
-                    byte[] f_msg = ZWaveMessage.CreateRequest(node.Id, t_msg);
-                    SendEncryptedRequest(node, f_msg);
-
-                    SetSchemeAgreedData(node, true);
-                }
-                else
-                {
-                    Utility.logMessage("   No common security scheme.  The device will continue as an unsecured node.");
-                }
-
-                handled = true;
-                break;
             default:
                 Utility.logMessage("Unknown security Command " + (byte)cmdType + " - message " + message);
                 break;
@@ -160,23 +181,51 @@ namespace ZWaveLib.CommandClasses
             return nodeEvent;
         }
 
-        
-        public static bool GetSchemeAgreedData(ZWaveNode node)
+        public static void GetSupported(ZWaveNode node)
         {
-            if (!node.Data.ContainsKey("SchemeAgreed"))
-            {
-                node.Data.Add("SchemeAgreed", false);
-            }
-            return (bool)node.Data["SchemeAgreed"];
+            var message = ZWaveMessage.CreateRequest(node.Id, new byte[] { 
+                (byte)CommandClass.Security,
+                (byte)SecurityCommand.SupportedGet
+            });
+            SendEncryptedRequest(node, message);
         }
 
-        public static void SetSchemeAgreedData(ZWaveNode node, bool agreed)
+        public static void GetScheme(ZWaveNode node)
         {
-            if (!node.Data.ContainsKey("SchemeAgreed"))
-            {
-                node.Data.Add("SchemeAgreed", agreed);
-            }
+            node.SendRequest(new byte[]{
+                (byte)CommandClass.Security,
+                (byte)SecurityCommand.SchemeGet,
+                0
+            });
         }
+
+        public static void SetNetworkKey(ZWaveNode node)
+        {
+            byte[] t_msg = new byte[18];
+            t_msg[0] = (byte)CommandClass.Security;
+            t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
+            Array.Copy(PrivateNetworkKey, 0, t_msg, 2, 16);
+            byte[] f_msg = ZWaveMessage.CreateRequest(node.Id, t_msg);
+            SendEncryptedRequest(node, f_msg);
+        }
+
+
+
+
+
+
+
+
+        public static SecurityData GetSecurityData(ZWaveNode node)
+        {
+            if (!node.Data.ContainsKey("SecurityData"))
+            {
+                node.Data.Add("SecurityData", new SecurityData());
+            }
+            return (SecurityData)node.Data["SecurityData"];
+        }
+
+
 
 
 
@@ -184,8 +233,6 @@ namespace ZWaveLib.CommandClasses
         private Stopwatch c_nonceTimer = new Stopwatch();
         private AesWork enc;
 
-        //internal byte[] PrivateNetworkKey = new byte[] { 0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78, 0x87, 0x96, 0xA5, 0xB4, 0xC3, 0xD2, 0xE1, 0xF0 };
-        internal byte[] PrivateNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
         /* */
         private static byte[] c_currentNonce = new byte[] { 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA };
         internal byte[] d_currentNonce = null;
@@ -247,17 +294,6 @@ namespace ZWaveLib.CommandClasses
             // Utility.logMessage("In SetupNetworkKey  - Network key - " + Utility.ByteArrayToString(NetworkKey));
             // Utility.logMessage("In SetupNetworkKey  - Encrypt key - " + Utility.ByteArrayToString(encryptKey));
             // Utility.logMessage("In SetupNetworkKey  - Authent key - " + Utility.ByteArrayToString(authKey));
-
-        }
-
-        public void sendSupportedGet(ZWaveNode node)
-        {
-            var message = ZWaveMessage.CreateRequest(node.Id, new byte[] { 
-                (byte)CommandClass.Security,
-                (byte)SecurityCommand.SupportedGet
-            });
-
-            SendEncryptedRequest(node, message);
 
         }
 

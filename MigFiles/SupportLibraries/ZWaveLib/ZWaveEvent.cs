@@ -70,7 +70,8 @@ namespace ZWaveLib
         ThermostatSetBack,
         ThermostatSetPoint,
         UserCode,
-        Security,
+        SecurityNodeInformationFrame,
+        SecurityScheme,
         DoorLockStatus
     }
 
