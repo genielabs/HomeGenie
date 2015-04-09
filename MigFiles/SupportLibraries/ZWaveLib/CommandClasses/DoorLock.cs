@@ -63,8 +63,7 @@ namespace ZWaveLib.CommandClasses
                 {
                     resp = "Unknown";
                 }
-                var messageEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, resp, 0);
-                node.RaiseUpdateParameterEvent(messageEvent);
+                nodeEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, resp, 0);
             }
             return nodeEvent;
         }

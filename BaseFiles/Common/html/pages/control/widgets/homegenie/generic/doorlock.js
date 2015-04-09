@@ -25,6 +25,7 @@
         // read some context data
         //
         this.GroupName = container.attr('data-context-group');
+        debugger;
 
         var lockstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.DoorLock");
 
@@ -45,6 +46,8 @@
             widget.find('[data-ui-field=lockunlock]').val("unlocked").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_open.png';
         }
+
+        this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
         
         //
         // render widget

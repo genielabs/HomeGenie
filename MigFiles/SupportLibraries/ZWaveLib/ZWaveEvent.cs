@@ -72,6 +72,10 @@ namespace ZWaveLib
         UserCode,
         SecurityNodeInformationFrame,
         SecurityScheme,
+        SecurityDecriptedMessage,
+        SecurityNonceGet,
+        SecurityNonceReport,
+        SecurityNetworkKeyVerify,
         DoorLockStatus
     }
 

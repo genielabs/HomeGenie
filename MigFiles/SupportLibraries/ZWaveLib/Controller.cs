@@ -353,11 +353,15 @@ namespace ZWaveLib
 
                                 if (newNode.SupportCommandClass(CommandClass.Security))
                                 {
+                                    var nodeSecurityData = Security.GetSecurityData(newNode);
+                                    nodeSecurityData.addingNode = true;
+
                                     Security.GetScheme(newNode);
                                 }
-
-                                RaiseUpdateParameterEvent(new ZWaveEvent(newNode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
-                                SaveNodesConfig();
+                                else
+                                {
+                                    gotNodeUpdateInformation(newNode);
+                                }
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.AddNodeProtocolDone /* || nodeOperation == (byte)NodeFunctionStatus.AddNodeDone */)
                             {
@@ -469,9 +473,10 @@ namespace ZWaveLib
                                     // ask the node what security command classes are supported
                                     Security.GetSupported(znode);
                                 }
-                                RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.NodeInfo, Utility.ByteArrayToString(nodeInfo), 0));
-	                            RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.WakeUpNotify, "1", 0));
-                                SaveNodesConfig();
+                                else
+                                {
+                                    gotNodeUpdateInformation(znode);
+                                }                                
                             }
                             break;
 
@@ -521,6 +526,14 @@ namespace ZWaveLib
                 Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
 
             }
+        }
+
+        private void gotNodeUpdateInformation(ZWaveNode znode)
+        {
+            // once we get the security command classes we'll issue the same events and call SaveNodesConfig();
+            RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.NodeInfo, Utility.ByteArrayToString(znode.NodeInformationFrame), 0));
+            RaiseUpdateParameterEvent(new ZWaveEvent(znode, EventParameter.WakeUpNotify, "1", 0));
+            SaveNodesConfig();
         }
 
         private void MessageResponseNodeBitMaskHandler(byte[] receivedMessage)
@@ -738,8 +751,55 @@ namespace ZWaveLib
 
         private void znode_ParameterChanged(object sender, ZWaveEvent eventData)
         {
+            if (sender is ZWaveNode) {
+                ZWaveNode node = (ZWaveNode) sender;
+                if (eventData.Parameter == EventParameter.SecurityDecriptedMessage && eventData.Value is byte[])
+                {
+                    node.MessageRequestHandler((byte[])eventData.Value);
+                }
+
+                if (eventData.Parameter == EventParameter.SecurityNodeInformationFrame && eventData.Value is byte[]) {
+
+                    node.SecuredNodeInformationFrame = (byte[])eventData.Value;
+
+                    // we take them one a a time to make sure we keep the list with unique elements
+                    foreach (byte nodeInfo in node.SecuredNodeInformationFrame)
+                    {
+                        // if we found the COMMAND_CLASS_MARK we get out of the for loop
+                        if (nodeInfo == (byte)0xEF)
+                            break;
+                        node.NodeInformationFrame = addElementToArray(node.NodeInformationFrame, nodeInfo);
+                    }
+
+                    // we just send other events and save the node data
+                    gotNodeUpdateInformation(node);
+                }
+            }
             // Route node event
             RaiseUpdateParameterEvent(eventData);
+        }
+
+        internal byte[] addElementToArray(byte[] nodesInfo, byte nodeInfo)
+        {
+            int pos = -1;
+
+            if (nodesInfo != null)
+                pos = Array.IndexOf(nodesInfo, nodeInfo);
+
+            if (pos == -1)
+            {
+                if (nodesInfo != null)
+                {
+                    Array.Resize(ref nodesInfo, nodesInfo.Length + 1);
+                }
+                else
+                {
+                    nodesInfo = new byte[1];
+                }
+                nodesInfo[nodesInfo.Length - 1] = nodeInfo;
+            }
+
+            return nodesInfo;
         }
 
         #endregion
