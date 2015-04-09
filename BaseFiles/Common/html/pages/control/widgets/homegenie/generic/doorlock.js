@@ -25,7 +25,6 @@
         // read some context data
         //
         this.GroupName = container.attr('data-context-group');
-        debugger;
 
         var lockstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.DoorLock");
 
