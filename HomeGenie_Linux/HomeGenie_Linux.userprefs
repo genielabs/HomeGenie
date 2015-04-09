@@ -1,9 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/Security.cs">
     <Files>
       <File FileName="../HISTORY.TXT" Line="1" Column="1" />
       <File FileName="../README.TXT" Line="1" Column="1" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/Security.cs" Line="52" Column="55" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Controller.cs" Line="274" Column="37" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/ZWaveNode.cs" Line="113" Column="58" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/UserCode.cs" Line="1" Column="1" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/Meter.cs" Line="40" Column="25" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Enums/Command.cs" Line="111" Column="36" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Enums/CommandClass.cs" Line="1" Column="1" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Enums/Function.cs" Line="1" Column="1" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Enums/GenericType.cs" Line="1" Column="1" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Enums/SecurityCommand.cs" Line="27" Column="21" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/WakeUp.cs" Line="48" Column="61" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/ZWaveEvent.cs" Line="74" Column="23" />
+      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/CommandClasses/ThermostatSetPoint.cs" Line="71" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -9,16 +9,16 @@ namespace ZWaveLib.Devices
 {
     public class AesWork
     {
-        internal byte[] zeroIV = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        private static byte[] zeroIV = new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
-        public byte[] GenerateKey1(byte[] nc, byte[] plainText)
+        public static byte[] GenerateKey1(byte[] nc, byte[] plainText)
         {
             byte[] tmp = new byte[zeroIV.Length];
             Array.Copy(EncryptMessage(nc, zeroIV, plainText, CipherMode.CBC), tmp, 16);
             return tmp;
         }
 
-        public byte[] EncryptOfbMessage(byte[] nc, byte[] iv, byte[] plaintext)
+        public static  byte[] EncryptOfbMessage(byte[] nc, byte[] iv, byte[] plaintext)
         {
             byte[] processed = new byte[plaintext.Length];
             int len = (plaintext.Length % 16) * 16;
@@ -31,14 +31,14 @@ namespace ZWaveLib.Devices
             return processed;
         }
 
-        public byte[] EncryptEcbMessage(byte[] nc, byte[] plaintext)
+        public static byte[] EncryptEcbMessage(byte[] nc, byte[] plaintext)
         {
             byte[] tmp = new byte[zeroIV.Length];
             Array.Copy(EncryptMessage(nc, zeroIV, plaintext, CipherMode.ECB), tmp, 16);
             return tmp;
         }
 
-        private byte[] EncryptMessage(byte[] nc, byte[] iv, byte[] plaintext, CipherMode cm)
+        private static byte[] EncryptMessage(byte[] nc, byte[] iv, byte[] plaintext, CipherMode cm)
         {
             if (nc == null)
             {

@@ -354,7 +354,7 @@ namespace ZWaveLib
                                 if (newNode.SupportCommandClass(CommandClass.Security))
                                 {
                                     var nodeSecurityData = Security.GetSecurityData(newNode);
-                                    nodeSecurityData.addingNode = true;
+                                    nodeSecurityData.IsAddingNode = true;
 
                                     Security.GetScheme(newNode);
                                 }
