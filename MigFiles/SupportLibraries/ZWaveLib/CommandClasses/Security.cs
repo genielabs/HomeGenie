@@ -9,6 +9,14 @@ using System.Diagnostics;
 
 namespace ZWaveLib.CommandClasses
 {
+    
+    public class SecutiryPayload
+    {
+        public byte[] message;
+        public int length;
+        public int part;
+    }
+
     public class SecurityData
     {
         private byte[] encryptionKey = null;
@@ -97,13 +105,11 @@ namespace ZWaveLib.CommandClasses
                 Utility.logMessage("Received COMMAND_SCHEME_REPORT for node: " + node.Id + ", " + (startOffset + 1));
                 int schemes = message[startOffset + 1];
                 SecurityData nodeSecurityData = GetSecurityData(node);
-                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityScheme, schemes, 0);
                 if (nodeSecurityData.SchemeAgreed)
                 {
                     break;
                 }
-
-                if (schemes == (byte)SecurityScheme.SchemeZero)
+                else if (schemes == (byte)SecurityScheme.SchemeZero)
                 {
                     SetNetworkKey(node);
                     nodeSecurityData.SchemeAgreed = true;
@@ -113,31 +119,29 @@ namespace ZWaveLib.CommandClasses
                     Utility.logMessage("   No common security scheme.  The device will continue as an unsecured node.");
                 }
                 break;
+
             case (byte)SecurityCommand.NonceGet:
                 Utility.logMessage("Received COMMAND_NONCE_GET for node: " + node.Id);
 
                 /* the Device wants to send us a Encrypted Packet, and thus requesting for our latest NONCE */
                 SendNonceReport(node);
-
-                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityNonceGet, 0, 0);
-
                 break;
+
             case (byte)SecurityCommand.MessageEncap:
                 Utility.logMessage("Received COMMAND_MESSAGE_ENCAP for node: " + node.Id);
 
                 /* We recieved a Encrypted single packet from the Device. Decrypt it. */
                 decryptedMessage = DecryptMessage(node, message, startOffset);
                 nodeEvent = new ZWaveEvent(node, EventParameter.SecurityDecriptedMessage, decryptedMessage, 0);
-
                 break;
+
             case (byte)SecurityCommand.NonceReport:
                 Utility.logMessage("Received COMMAND_NONCE_REPORT for node: " + node.Id);
 
                 /* we recieved a NONCE from a device, so assume that there is something in a queue to send out */
                 ProcessNonceReport(node, message, startOffset);
-                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityNonceReport, 0, 0);
-
                 break;
+
             case (byte)SecurityCommand.MessageEncapNonceGet:
                 Utility.logMessage("Received COMMAND_MESSAGE_ENCAP_NONCE_GET for node: " + node.Id);
 
@@ -145,23 +149,18 @@ namespace ZWaveLib.CommandClasses
                      * new NONCE to it, hence there must be multiple packets.*/
                 decryptedMessage = DecryptMessage(node, message, startOffset);
                 nodeEvent = new ZWaveEvent(node, EventParameter.SecurityDecriptedMessage, decryptedMessage, 0);
-                // since we create two events we need to trigger one before we return - unless we want to drop the second one
-                // and make this one as the primary one
-                node.RaiseUpdateParameterEvent(nodeEvent);
-
                 /* Regardless of the success/failure of Decrypting, send a new NONCE */
                 SendNonceReport(node);
-                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityNonceReport, 0, 0);
-
                 break;
+
             case (byte)SecurityCommand.NetworkKeySet:
                 Utility.logMessage("Received COMMAND_NETWORK_KEY_SET for node: " + node.Id + ", " + (startOffset + 1));
 
                 /* we shouldn't get a NetworkKeySet from a node if we are the controller
                      * as we send it out to the Devices
                     */
-
                 break;
+
             case (byte)SecurityCommand.NetworkKeyVerify:
                 Utility.logMessage("Received COMMAND_NETWORK_KEY_VERIFY for node: " + node.Id + ", " + (startOffset + 1));
 
@@ -169,21 +168,14 @@ namespace ZWaveLib.CommandClasses
                      * if we can decrypt this packet, then we are assured that our NetworkKeySet is successfull
                      * and thus should set the Flag referenced in SecurityCmd_SchemeReport
                     */
-                byte[] msg = ZWaveMessage.CreateRequest(node.Id, new byte[] { 
-                    (byte)CommandClass.Security,
-                    (byte)SecurityCommand.SupportedGet
-                });
-
-                SendEncryptedRequest(node, msg);
-
-                nodeEvent = new ZWaveEvent(node, EventParameter.SecurityNetworkKeyVerify, 0, 0);
-
+                GetSupported(node);
                 break;
+
             case (byte)SecurityCommand.SchemeInherit:
                 Utility.logMessage("Received COMMAND_SCHEME_INHERIT for node: " + node.Id);
                 /* only used in a Controller Replication Type enviroment. */
-
                 break;
+
             }
 
             return nodeEvent;
@@ -197,7 +189,7 @@ namespace ZWaveLib.CommandClasses
                 (byte)CommandClass.Security,
                 (byte)SecurityCommand.SupportedGet
             });
-            SendEncryptedRequest(node, message);
+            SendMessage(node, message);
         }
 
         public static void GetScheme(ZWaveNode node)
@@ -208,21 +200,20 @@ namespace ZWaveLib.CommandClasses
                 0
             });
         }
-                
-        // use with care
-        public static bool SendEncryptedRequest(ZWaveNode node, byte[] message)
+
+        private static void SetNetworkKey(ZWaveNode node)
         {
-            Utility.logMessage("In encryptAndSend - SecurityHandler - " + Utility.ByteArrayToString(message));
-            SendMessage(node, message);
-            return true;
+            byte[] t_msg = new byte[18];
+            t_msg[0] = (byte)CommandClass.Security;
+            t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
+            Array.Copy(Security.PrivateNetworkKey, 0, t_msg, 2, 16);
+            byte[] f_msg = ZWaveMessage.CreateRequest(node.Id, t_msg);
+            SendMessage(node, f_msg);
         }
 
-        #endregion
-
-        #region Private helper methods
-
-        private static void SendMessage(ZWaveNode node, byte[] message)
+        public static void SendMessage(ZWaveNode node, byte[] message)
         {
+            int length = message[5];
 
             Utility.logMessage("In sendMsg - SecurityHandler");
 
@@ -230,13 +221,10 @@ namespace ZWaveLib.CommandClasses
             {
                 Utility.logMessage("Message too short");
             }
-
             if (message[3] != 0x13)
             {
                 Utility.logMessage("Invalid Message type");
             }
-
-            int length = message[5];
 
             if (length > 28)
             {
@@ -267,6 +255,19 @@ namespace ZWaveLib.CommandClasses
                 QueuePayload(node, t_payload);
             }
         }
+
+        public static SecurityData GetSecurityData(ZWaveNode node)
+        {
+            if (!node.Data.ContainsKey("SecurityData"))
+            {
+                node.Data.Add("SecurityData", new SecurityData());
+            }
+            return (SecurityData)node.Data["SecurityData"];
+        }
+
+        #endregion
+
+        #region Private helper methods
 
         private static void QueuePayload(ZWaveNode node, SecutiryPayload payload)
         {
@@ -303,25 +304,6 @@ namespace ZWaveLib.CommandClasses
 
             return true;
         }
-        
-        public static SecurityData GetSecurityData(ZWaveNode node)
-        {
-            if (!node.Data.ContainsKey("SecurityData"))
-            {
-                node.Data.Add("SecurityData", new SecurityData());
-            }
-            return (SecurityData)node.Data["SecurityData"];
-        }
-
-        private static void SetNetworkKey(ZWaveNode node)
-        {
-            byte[] t_msg = new byte[18];
-            t_msg[0] = (byte)CommandClass.Security;
-            t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
-            Array.Copy(Security.PrivateNetworkKey, 0, t_msg, 2, 16);
-            byte[] f_msg = ZWaveMessage.CreateRequest(node.Id, t_msg);
-            SendEncryptedRequest(node, f_msg);
-        }
 
         private static void SendNonceReport(ZWaveNode node)
         {
@@ -336,7 +318,6 @@ namespace ZWaveLib.CommandClasses
 
             GetSecurityData(node).ControllerNonceTimer.Reset();
         }
-
 
         private static void ProcessNonceReport(ZWaveNode node, byte[] message, int start)
         {

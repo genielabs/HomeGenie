@@ -40,13 +40,6 @@ namespace ZWaveLib
         public int NodeId { get; internal set; }
         public ManufacturerSpecificInfo ManufacturerSpecific;
     }
-    
-    public class SecutiryPayload
-    {
-        public byte[] message;
-        public int length;
-        public int part;
-    }
 
     public class ZWaveNode
     {
@@ -193,7 +186,7 @@ namespace ZWaveLib
             // when cmdClass belongs to SecuredNodeInformationFrame we need to encrypt the message
             if (cmdClass != (byte)CommandClass.Security && IsSecuredCommandClass((CommandClass)cmdClass))
             {
-                Security.SendEncryptedRequest(this, message);
+                Security.SendMessage(this, message);
             }
             else
             {

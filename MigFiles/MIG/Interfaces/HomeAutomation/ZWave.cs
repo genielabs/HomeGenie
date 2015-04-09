@@ -676,17 +676,13 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.DOORLOCK_SET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-
                     var level = int.Parse(request.GetOption(0));
                     DoorLock.Set(node, level);
-
                 }
-
                 else if (command == Command.DOORLOCK_GET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
                     DoorLock.Get(node);
-
                 }
             }
             catch

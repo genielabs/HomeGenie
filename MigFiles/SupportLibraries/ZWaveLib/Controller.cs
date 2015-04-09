@@ -751,15 +751,16 @@ namespace ZWaveLib
 
         private void znode_ParameterChanged(object sender, ZWaveEvent eventData)
         {
-            if (sender is ZWaveNode) {
+            if (sender is ZWaveNode) 
+            {
                 ZWaveNode node = (ZWaveNode) sender;
                 if (eventData.Parameter == EventParameter.SecurityDecriptedMessage && eventData.Value is byte[])
                 {
                     node.MessageRequestHandler((byte[])eventData.Value);
+                    return;
                 }
-
-                if (eventData.Parameter == EventParameter.SecurityNodeInformationFrame && eventData.Value is byte[]) {
-
+                else if (eventData.Parameter == EventParameter.SecurityNodeInformationFrame && eventData.Value is byte[]) 
+                {
                     node.SecuredNodeInformationFrame = (byte[])eventData.Value;
 
                     // we take them one a a time to make sure we keep the list with unique elements
@@ -768,7 +769,7 @@ namespace ZWaveLib
                         // if we found the COMMAND_CLASS_MARK we get out of the for loop
                         if (nodeInfo == (byte)0xEF)
                             break;
-                        node.NodeInformationFrame = addElementToArray(node.NodeInformationFrame, nodeInfo);
+                        node.NodeInformationFrame = Utility.AppendByteToArray(node.NodeInformationFrame, nodeInfo);
                     }
 
                     // we just send other events and save the node data
@@ -777,29 +778,6 @@ namespace ZWaveLib
             }
             // Route node event
             RaiseUpdateParameterEvent(eventData);
-        }
-
-        internal byte[] addElementToArray(byte[] nodesInfo, byte nodeInfo)
-        {
-            int pos = -1;
-
-            if (nodesInfo != null)
-                pos = Array.IndexOf(nodesInfo, nodeInfo);
-
-            if (pos == -1)
-            {
-                if (nodesInfo != null)
-                {
-                    Array.Resize(ref nodesInfo, nodesInfo.Length + 1);
-                }
-                else
-                {
-                    nodesInfo = new byte[1];
-                }
-                nodesInfo[nodesInfo.Length - 1] = nodeInfo;
-            }
-
-            return nodesInfo;
         }
 
         #endregion

@@ -71,11 +71,7 @@ namespace ZWaveLib
         ThermostatSetPoint,
         UserCode,
         SecurityNodeInformationFrame,
-        SecurityScheme,
         SecurityDecriptedMessage,
-        SecurityNonceGet,
-        SecurityNonceReport,
-        SecurityNetworkKeyVerify,
         DoorLockStatus
     }
 

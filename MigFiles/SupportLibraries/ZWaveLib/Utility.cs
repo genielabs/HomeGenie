@@ -57,6 +57,25 @@ namespace ZWaveLib
             return bytes;
         }
 
+        public static byte[] AppendByteToArray(byte[] byteArray, byte data)
+        {
+            int pos = -1;
+            if (byteArray != null) pos = Array.IndexOf(byteArray, data);
+            if (pos == -1)
+            {
+                if (byteArray != null)
+                {
+                    Array.Resize(ref byteArray, byteArray.Length + 1);
+                }
+                else
+                {
+                    byteArray = new byte[1];
+                }
+                byteArray[byteArray.Length - 1] = data;
+            }
+            return byteArray;
+        }
+
 		// usefull to be used in debugging
         public static void logMessage(string message) {
 //            Console.WriteLine("----  " + System.Threading.Thread.CurrentThread.ManagedThreadId + " -- " + message);
