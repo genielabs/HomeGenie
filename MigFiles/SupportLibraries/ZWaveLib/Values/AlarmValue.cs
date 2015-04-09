@@ -39,6 +39,7 @@ namespace ZWaveLib.Values
         public EventParameter EventType = EventParameter.Generic;
         public ZWaveAlarmType Parameter = ZWaveAlarmType.Generic;
         public byte Value = 0x00;
+        public String Text = "";
 
         public static AlarmValue Parse(byte[] message)
         {

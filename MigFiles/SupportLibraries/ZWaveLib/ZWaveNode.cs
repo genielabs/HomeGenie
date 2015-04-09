@@ -112,7 +112,14 @@ namespace ZWaveLib
                 var cc = CommandClassFactory.GetCommandClass(commandClass);
                 byte[] message = new byte[commandLength];
                 Array.Copy(receivedMessage, 7, message, 0, commandLength);
-                messageEvent = cc.GetEvent(this, message);
+                try
+                {
+                    messageEvent = cc.GetEvent(this, message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("   commandClass:" + commandClass.ToString("X2") + " not implemented: " + Utility.ByteArrayToString(message));
+                }
             }
 
             if (messageEvent != null)
