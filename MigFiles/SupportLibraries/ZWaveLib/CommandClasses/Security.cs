@@ -45,8 +45,10 @@ namespace ZWaveLib.CommandClasses
     {
         private byte[] encryptionKey = null;
         private byte[] controllerCurrentNonce = null;
+        private byte[] privateNetworkKey = null;
         //private byte[] privateNetworkKey = new byte[] { 0x0F, 0x1E, 0x2D, 0x3C, 0x4B, 0x5A, 0x69, 0x78, 0x87, 0x96, 0xA5, 0xB4, 0xC3, 0xD2, 0xE1, 0xF0 };
-        private byte[] privateNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
+        //private byte[] privateNetworkKey = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10 };
+        private ZWaveNode parentNode = null;
     
         public byte[] DeviceCurrentNonce = null;
 
@@ -58,37 +60,35 @@ namespace ZWaveLib.CommandClasses
         public bool IsAddingNode = false;
         public bool IsNetworkKeySet = false;
 
-        public byte[] PrivateNetworkKey
+        public SecurityData(ZWaveNode node){
+            parentNode = node;
+        }
+     
+        public void SetPrivateNetworkKey(byte[] key){
+            privateNetworkKey = key;
+        }
+
+        public byte[] GetPrivateNetworkKey(){
+            return privateNetworkKey;
+        }
+
+        public byte[] GeneratePrivateNetworkKey()
         {
-            get {
-                return privateNetworkKey;            
-            }
+            privateNetworkKey = new byte[16];
+            Random rnd = new Random();
+            rnd.NextBytes(privateNetworkKey);
 
-            //TO DO:
-            //1 - Getter - dinamically generate the privateNetworkKey if one doesn't exist
-            //2 - Setter - save node.DevicePrivateNetworkKey to privateNetworkKey if one existed and was restored from the configuration file.
+            // notify the controller that the privateNetworkKey was generated so that it can save it
+            ZWaveEvent keyGenEvent = new ZWaveEvent(parentNode, EventParameter.SecurityGeneratedKey, 0, 0);
+            parentNode.RaiseUpdateParameterEvent(keyGenEvent);
 
-            /*
-            get { 
-                if(privateNetworkKey == null){
-                    privateNetworkKey = new byte[16];
-                    Random rnd = new Random();
-                    rnd.NextBytes(privateNetworkKey);
-                }
-
-                return privateNetworkKey;
-            }
-
-            set {
-                privateNetworkKey = value;
-            }
-             */ 
+            return privateNetworkKey;
         }
 
         public byte[] ControllerCurrentNonce{
             get {
                 byte[] localControllerCurrentNonce = new byte[8];
-                                
+
                 if (controllerCurrentNonce == null)
                 {
                     // we needs to generate one and save it for the next call;
@@ -97,10 +97,14 @@ namespace ZWaveLib.CommandClasses
                     controllerCurrentNonce = localControllerCurrentNonce;
                 }
                 else
-                { 
+                {
                     // we are copying the controllerCurrentNonce and setting it to null so that
                     // next time we'll regenerate it
-                    Array.Copy(controllerCurrentNonce, localControllerCurrentNonce,8);
+                    Array.Copy(controllerCurrentNonce, localControllerCurrentNonce, 8);
+
+                    // we blank out the controllerCurrentNonce so that next time a new one is generated
+                    // this would give us the most secure communication, if we see issues we just comment out
+                    // the next line generate it ONLY once per lifecycle/device
                     controllerCurrentNonce = null;
                 }
                 Utility.logMessage("ControllerCurrentNonce: " + Utility.ByteArrayToString(localControllerCurrentNonce));
@@ -130,7 +134,9 @@ namespace ZWaveLib.CommandClasses
                 }
                 else
                 {
-                    networkKey = PrivateNetworkKey;
+                    if (privateNetworkKey == null)
+                        GeneratePrivateNetworkKey();
+                    networkKey = privateNetworkKey;
                 }
 
                 encryptionKey = AesWork.EncryptEcbMessage(networkKey, encryptPassword);
@@ -292,7 +298,11 @@ namespace ZWaveLib.CommandClasses
             byte[] t_msg = new byte[18];
             t_msg[0] = (byte)CommandClass.Security;
             t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
-            Array.Copy(GetSecurityData(node).PrivateNetworkKey, 0, t_msg, 2, 16);
+            var privateNetworkKey = GetSecurityData(node).GetPrivateNetworkKey();
+            if (privateNetworkKey == null) {
+                privateNetworkKey = GetSecurityData(node).GeneratePrivateNetworkKey();
+            }
+            Array.Copy(privateNetworkKey, 0, t_msg, 2, 16);
             byte[] f_msg = ZWaveMessage.CreateRequest(node.Id, t_msg);
             SendMessage(node, f_msg);
         }
@@ -346,7 +356,7 @@ namespace ZWaveLib.CommandClasses
         {
             if (!node.Data.ContainsKey("SecurityData"))
             {
-                node.Data.Add("SecurityData", new SecurityData());
+                node.Data.Add("SecurityData", new SecurityData(node));
             }
             return (SecurityData)node.Data["SecurityData"];
         }

@@ -72,6 +72,7 @@ namespace ZWaveLib
         UserCode,
         SecurityNodeInformationFrame,
         SecurityDecriptedMessage,
+        SecurityGeneratedKey,
         DoorLockStatus
     }
 

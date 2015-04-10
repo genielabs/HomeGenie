@@ -281,10 +281,16 @@ namespace ZWaveLib
             {
                 var elapsed = (DateTime.UtcNow - lastMessageTimestamp);
                 if (elapsed.TotalSeconds <= 2 && lastMessage.SequenceEqual(args.Message))
+                {
+                    Utility.logMessage(" lastMessage: " + Utility.ByteArrayToString(lastMessage));
+                    Utility.logMessage("args.Message: " + Utility.ByteArrayToString(args.Message));
                     repeated = true;
+                }
             }
             lastMessageTimestamp = DateTime.UtcNow;
             lastMessage = new byte[args.Message.Length];
+            Utility.logMessage(" lastMessage2: " + Utility.ByteArrayToString(lastMessage));
+            Utility.logMessage("args.Message2: " + Utility.ByteArrayToString(args.Message));
             Buffer.BlockCopy(args.Message, 0, lastMessage, 0, args.Message.Length * sizeof(byte));
             if (repeated)
             {
@@ -701,7 +707,7 @@ namespace ZWaveLib
                     var newNode = CreateDevice(node.NodeId, 0x00);
                     newNode.NodeInformationFrame = node.NodeInformationFrame;
                     newNode.SecuredNodeInformationFrame = node.SecuredNodeInformationFrame;
-                    newNode.DevicePrivateNetworkKey = node.DevicePrivateNetworkKey;
+                    Security.GetSecurityData(newNode).SetPrivateNetworkKey(node.DevicePrivateNetworkKey);
                     devices.Add(newNode);
                 }
                 reader.Close();
@@ -717,12 +723,18 @@ namespace ZWaveLib
             nodesConfig.Clear();
             for (int n = 0; n < devices.Count; n++)
             {
-                nodesConfig.Add(new ZWaveNodeConfig() {
-                    NodeId = devices[n].Id,
-                    NodeInformationFrame = devices[n].NodeInformationFrame,
-                    SecuredNodeInformationFrame = devices[n].SecuredNodeInformationFrame,
-                    DevicePrivateNetworkKey = devices[n].DevicePrivateNetworkKey
-                });
+                // save only the nodes that are still in the network - not sure how is the best way to handle this
+                // we just want to save the vlid nodes, not all the nodes that ever existed and were not cleanly removed
+                if (devices[n].SpecificClass > 0)
+                {
+                    nodesConfig.Add(new ZWaveNodeConfig()
+                    {
+                        NodeId = devices[n].Id,
+                        NodeInformationFrame = devices[n].NodeInformationFrame,
+                        SecuredNodeInformationFrame = devices[n].SecuredNodeInformationFrame,
+                        DevicePrivateNetworkKey = Security.GetSecurityData(devices[n]).GetPrivateNetworkKey()
+                    });
+                }
             }
             // TODO: save config to xml
             string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "zwavenodes.xml");
@@ -763,7 +775,12 @@ namespace ZWaveLib
                     node.MessageRequestHandler((byte[])eventData.Value);
                     return;
                 }
-                else if (eventData.Parameter == EventParameter.SecurityNodeInformationFrame && eventData.Value is byte[]) 
+                else if (eventData.Parameter == EventParameter.SecurityGeneratedKey && eventData.Value is int)
+                {
+                    SaveNodesConfig();
+                    return;
+                }
+                else if (eventData.Parameter == EventParameter.SecurityNodeInformationFrame) 
                 {
                     node.SecuredNodeInformationFrame = (byte[])eventData.Value;
 
