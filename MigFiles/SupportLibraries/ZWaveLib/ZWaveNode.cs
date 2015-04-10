@@ -60,6 +60,7 @@ namespace ZWaveLib
         public byte SpecificClass { get; internal set; }
         public byte[] NodeInformationFrame { get; internal set; }
         public byte[] SecuredNodeInformationFrame { get; internal set; }
+        public byte[] DevicePrivateNetworkKey { get; internal set; }
 
         public Dictionary<string, object> Data = new Dictionary<string, object>();
 

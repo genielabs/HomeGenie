@@ -1127,22 +1127,7 @@ namespace MIG.Interfaces.HomeAutomation
                     value = ((ZWaveLib.Values.UserCodeValue)value).TagCodeToHexString();
                     break;
                 case EventParameter.SecurityNodeInformationFrame:
-                    path = "Security.NodeInformationFrame";
-                    break;
-                case EventParameter.SecurityDecriptedMessage:
-                    path = "Security.DecriptedMessage";
-                    break;
-                case EventParameter.SecurityScheme:
-                    path = "Security.Scheme";
-                    break;
-                case EventParameter.SecurityNonceGet:
-                    path = "Security.NonceGet";
-                    break;
-                case EventParameter.SecurityNonceReport:
-                    path = "Security.NonceReport";
-                    break;
-                case EventParameter.SecurityNetworkKeyVerify:
-                    path = "Security.NetworkKeyVerify";
+                    path = "ZWaveNode.SecuredNodeInfo";
                     break;
                 default:
                     Console.WriteLine("UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}", eventData.Node.Id, eventData.Parameter, eventData.Instance, value);

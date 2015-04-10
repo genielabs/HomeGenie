@@ -64,6 +64,8 @@ namespace ZWaveLib
         public byte[] NodeInformationFrame { get; set; }
 		// we keep the list of CommandClasses that need encryption for this node
         public byte[] SecuredNodeInformationFrame { get; set; }
+        // we kep the decices Private Network Key
+        public byte[] DevicePrivateNetworkKey { get; set; }
     }
 
     public class Controller : ZWaveNode
@@ -699,6 +701,7 @@ namespace ZWaveLib
                     var newNode = CreateDevice(node.NodeId, 0x00);
                     newNode.NodeInformationFrame = node.NodeInformationFrame;
                     newNode.SecuredNodeInformationFrame = node.SecuredNodeInformationFrame;
+                    newNode.DevicePrivateNetworkKey = node.DevicePrivateNetworkKey;
                     devices.Add(newNode);
                 }
                 reader.Close();
@@ -717,7 +720,8 @@ namespace ZWaveLib
                 nodesConfig.Add(new ZWaveNodeConfig() {
                     NodeId = devices[n].Id,
                     NodeInformationFrame = devices[n].NodeInformationFrame,
-                    SecuredNodeInformationFrame = devices[n].SecuredNodeInformationFrame
+                    SecuredNodeInformationFrame = devices[n].SecuredNodeInformationFrame,
+                    DevicePrivateNetworkKey = devices[n].DevicePrivateNetworkKey
                 });
             }
             // TODO: save config to xml
