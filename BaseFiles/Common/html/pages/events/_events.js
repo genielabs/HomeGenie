@@ -205,8 +205,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-                if (eventLog.Domain == 'HomeAutomation.ZWave')
-                    $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'].DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing

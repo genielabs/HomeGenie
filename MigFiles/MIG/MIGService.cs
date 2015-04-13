@@ -168,35 +168,21 @@ namespace MIG
                 //
                 foreach (MIGServiceConfiguration.Interface iface in configuration.Interfaces)
                 {
-                    AddInterface(iface.Domain);
+                    AddInterface(iface.Domain, iface.AssemblyName);
                 }
             }
         }
 
-        public bool IsInterfacePresent(string domain)
-        {
-            bool isPresent = false;
-            MIGInterface migInterface = null;
-            try
-            {
-                var type = Type.GetType("MIG.Interfaces." + domain);
-                migInterface = (MIGInterface)Activator.CreateInstance(type);
-                isPresent = migInterface.IsDevicePresent();
-            }
-            catch { }
-            return isPresent;
-        }
-
         // TODO: allow third party interface loading from external assembly dll
-        //          eg. AddInterface(string domain, string assemblyFileName)
-        public MIGInterface AddInterface(string domain)
+        //          eg. AddInterface(string domain, string assemblyName)
+        public MIGInterface AddInterface(string domain, string assemblyName)
         {
             MIGInterface migInterface = null;
             if (!Interfaces.ContainsKey(domain))
             {
                 try
                 {
-                    var type = Type.GetType("MIG.Interfaces." + domain);
+                    var type = Type.GetType("MIG.Interfaces." + domain + (String.IsNullOrWhiteSpace(assemblyName) ? "" : ", " + assemblyName));
                     migInterface = (MIGInterface)Activator.CreateInstance(type);
                     migInterface.Options = configuration.GetInterface(domain).Options;
                 }

@@ -79,7 +79,18 @@ namespace HomeGenie.Service.Handlers
                 {
                     migCommand.Response = migCommand.Response.Substring(0, migCommand.Response.Length - 1) + " ]";
                 }
-                    //
+                break;
+
+            case "Interfaces.ListConfig":
+                migCommand.Response = "[ ";
+                foreach (var kv in homegenie.Interfaces)
+                {
+                    var migInterface = kv.Value;
+                    var ifaceConfig = homegenie.SystemConfiguration.MIGService.GetInterface(migInterface.Domain);
+                    if (ifaceConfig == null) continue;
+                    migCommand.Response += JsonConvert.SerializeObject(ifaceConfig)+",";
+                }
+                migCommand.Response = migCommand.Response.Substring(0, migCommand.Response.Length - 1) + " ]";
                 break;
 
             //TODO: should this be moved somewhere to MIG?

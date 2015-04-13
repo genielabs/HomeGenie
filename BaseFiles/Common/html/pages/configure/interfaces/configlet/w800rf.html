@@ -1,0 +1,144 @@
+<div data-configlet-id="HomeAutomation.W800RF">
+
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <span data-locale-id="configure_interfaces_w800rf32port">Device Port</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <select data-ui-field="serialport" data-mini="true"></select>
+            </div>
+        </div>
+        <div class="ui-block-b" align="right">
+            <select data-ui-field="isenabled" data-role="slider">
+                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+            </select>
+        </div>
+    </div>
+    
+</div>
+
+<script type="text/javascript" language="javascript">
+HG.WebApp.SystemSettings.Interfaces['HomeAutomation.W800RF'] = {
+
+    Id: 'HomeAutomation.W800RF',
+    Initialize: function(){
+        var _this = this;
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        var portSelect = configlet.find('[data-ui-field=serialport]');
+        var enabledFlip = configlet.find('[data-ui-field=isenabled]');
+        // get enabled status
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Get', '', '', function (data) {
+            enabledFlip.val(data.ResponseValue).slider('refresh');
+        });
+        // bind to enabled flip changes
+        enabledFlip.on('slidestop', function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Set', enabledFlip.val(), '', function (data) {
+                if (enabledFlip.val() == '1') {
+                    if (portSelect.val() == '')
+                        HG.WebApp.SystemSettings.ShowPortTip(portSelect);
+                    if (_this.GetHouseCodeSelection() == '')
+                        _this.ShowHouseCodeTip();
+                }
+            });
+        });
+        // populate port list
+        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (data) {
+            var ports = eval(decodeURIComponent(data));
+            portSelect.empty().append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder') + '</option>');
+            for (var p = 0; p < ports.length; p++) {
+                portSelect.append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
+            }
+            portSelect.selectmenu('refresh', true);
+            HG.Configure.MIG.InterfaceCommand(this.Id, 'Options.Get', 'Port', '', function (data) {
+                portSelect.val(data.ResponseValue);
+                portSelect.selectmenu('refresh', true);
+            });
+        });
+        // set current configured port
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (data) {
+            portSelect.val(data.ResponseValue);
+            portSelect.selectmenu('refresh', true);
+        });
+        // bind to port select change event
+        portSelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Port', encodeURIComponent($(this).val()));
+        });
+    },
+    
+    Localize: function() {
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        var userLang = HG.WebApp.Locales.GetUserLanguage();
+        // English is the default locale
+        var defaultLocale = {
+            "title": 
+                 "W800RF32 RF Receiver Interface Options",
+            "configure_interfaces_w800rf32port": 
+                 "Device Port"
+        };
+        var locale = defaultLocale;
+        // other locale definitions follows
+        switch(userLang)
+        {
+        // German
+        case 'de': locale = {
+            "title": 
+                "W800RF32 RF Empfaenger Schnittstelle Optionen",
+            "configure_interfaces_w800rf32port": 
+                "Geraet Port"
+            };
+            break;
+        // Spanish
+        case 'es': locale = {
+            "title": 
+                "W800RF32 RF Receiver Interface Options",
+            "configure_interfaces_w800rf32port": 
+                "Device Port"
+            };
+            break;
+        // French
+        case 'fr': locale = {
+            "title": 
+                "Options de réception du contrôleur W800RF32 RF",
+            "configure_interfaces_w800rf32port": 
+                "Port du Contrôleur"
+            };
+            break;
+        // Italian
+        case 'it': locale = {
+            "title": 
+                 "W800RF32 RF Receiver Opzioni Interfaccia ",
+            "configure_interfaces_w800rf32port": 
+                 "Porta Dispositivo"
+            };
+            break;
+        // Dutch
+        case 'nl': locale = {
+            "title": 
+                "W800RF32 RF Receiver Interface Options",
+            "configure_interfaces_w800rf32port": 
+                "Device Port"
+            };
+            break;
+        // Russian
+        case 'ru': locale = {
+            "title": 
+                "Опции интерфейса W800RF32 RF Receiver",
+            "configure_interfaces_w800rf32port": 
+                "Порт устройства"
+            };
+            break;
+        // Swedish
+        case 'sv': locale = {
+            "title": 
+                "W800RF32 RF Receiver Gränssnitt Inställningar",
+            "configure_interfaces_w800rf32port": 
+                "Enhets Port"
+            };
+            break;
+        }
+        HG.WebApp.Locales.LocalizeElement(this.Configlet, locale);
+        this.Locale = locale;
+    }
+        
+};
+</script>
