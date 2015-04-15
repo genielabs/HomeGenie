@@ -101,11 +101,11 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
                 }
             }
             portSelect.selectmenu('refresh', true);
-        });
-        // set current configured port
-        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (data) {
-            portSelect.val(data.ResponseValue);
-            portSelect.selectmenu('refresh', true);
+            // set current configured port
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (port) {
+                portSelect.val(port.ResponseValue);
+                portSelect.selectmenu('refresh', true);
+            });
         });
         // bind to port select change event
         portSelect.change(function (event) {

@@ -317,11 +317,7 @@ namespace HomeGenie.Service
             bool success = true;
 
             string oldFilesPath = Path.Combine("_update", "oldfiles");
-            if (Directory.Exists(oldFilesPath))
-            {
-                Directory.Delete(oldFilesPath, true);
-            }
-            Directory.CreateDirectory(oldFilesPath);
+            Utility.FolderCleanUp(oldFilesPath);
             if (Directory.Exists(Path.Combine("_update", "files", "HomeGenie")))
             {
                 LogMessage("= Copying new files...");
@@ -682,8 +678,7 @@ namespace HomeGenie.Service
                                     // TODO: this is untested yet
                                     string sourceFolder = Path.Combine(UpdateBaseFolder, "programs", "arduino", program.Address.ToString());
                                     string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
-                                    if (Directory.Exists(arduinoFolder)) Directory.Delete(arduinoFolder, true);
-                                    Directory.CreateDirectory(arduinoFolder);
+                                    Utility.FolderCleanUp(arduinoFolder);
                                     foreach (string newPath in Directory.GetFiles(sourceFolder))
                                     {
                                         File.Copy(newPath, newPath.Replace(sourceFolder, arduinoFolder), true);

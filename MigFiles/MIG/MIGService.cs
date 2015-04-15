@@ -203,27 +203,41 @@ namespace MIG
             }
             return migInterface;
         }
-        //TODO: implement eventually a RemoveInterface method containing code:
-        //          migInterface.ModulesChangedAction -= MigService_ModulesChanged;
-        //          mif.InterfacePropertyChangedAction -= MIGService_InterfacePropertyChangedAction;
 
-        public void EnableInterface(string domain)
+        public void RemoveInterface(string domain)
         {
-            if (Interfaces.ContainsKey(domain))
+            var migInterface = DisableInterface(domain);
+            if (migInterface != null)
             {
-                MIGInterface migInterface = Interfaces[domain];
-                migInterface.Options = configuration.GetInterface(domain).Options;
-                migInterface.Connect();
+                migInterface.InterfaceModulesChangedAction -= MigService_InterfaceModulesChanged;
+                migInterface.InterfacePropertyChangedAction -= MigService_InterfacePropertyChanged;
+                Interfaces.Remove(domain);
             }
         }
 
-        public void DisableInterface(string domain)
+        public MIGInterface EnableInterface(string domain)
         {
+            MIGInterface migInterface = null;
             if (Interfaces.ContainsKey(domain))
             {
-                MIGInterface migInterface = Interfaces[domain];
+                migInterface = Interfaces[domain];
+                migInterface.Options = configuration.GetInterface(domain).Options;
+                migInterface.IsEnabled = true;
+                migInterface.Connect();
+            }
+            return migInterface;
+        }
+
+        public MIGInterface DisableInterface(string domain)
+        {
+            MIGInterface migInterface = null;
+            if (Interfaces.ContainsKey(domain))
+            {
+                migInterface = Interfaces[domain];
+                migInterface.IsEnabled = false;
                 migInterface.Disconnect();
             }
+            return migInterface;
         }
 
         // try to bind httpport, launch WebGateway threads, and listen to Interfaces' changes

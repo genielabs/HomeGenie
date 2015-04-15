@@ -776,7 +776,7 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
         }
     });
 };
-HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringId, defaultValue) {
+HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValue) {
     var retval = null;
     if(typeof(widget.data("Locale")) == "undefined")
         return (defaultValue ? defaultValue : null);

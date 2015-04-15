@@ -128,6 +128,68 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Interface.Import":
+                // file uploaded by user
+                string ifaceFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "mig_interface_import.zip");
+                string outputFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "mig");
+                Utility.FolderCleanUp(outputFolder);
+                try
+                {
+                    var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
+                    string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
+                    MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, ifaceFileName);
+                    if (!Directory.Exists(outputFolder))
+                    {
+                        Directory.CreateDirectory(outputFolder);
+                    }
+                    Utility.UncompressZip(ifaceFileName, outputFolder);
+                    File.Delete(ifaceFileName);
+                } catch { }
+                // import the uploaded interface
+                string configFile = Path.Combine(outputFolder, "configuration.xml");
+                XmlSerializer ifaceSerializer = new XmlSerializer(typeof(MIGServiceConfiguration.Interface));
+                StreamReader ifaceReader = new StreamReader(configFile);
+                MIGServiceConfiguration.Interface iface = (MIGServiceConfiguration.Interface)ifaceSerializer.Deserialize(ifaceReader);
+                ifaceReader.Close();
+                File.Delete(configFile);
+                //
+                homegenie.MigService.RemoveInterface(iface.Domain);
+                //
+                string configletName = iface.Domain.Substring(iface.Domain.LastIndexOf(".") + 1).ToLower();
+                string configletPath = Path.Combine("html", "pages", "configure", "interfaces", "configlet", configletName + ".html");
+                if (File.Exists(configletPath))
+                {
+                    File.Delete(configletPath);
+                }
+                File.Move(Path.Combine(outputFolder, "configlet.html"), configletPath);
+                //
+                string logoPath = Path.Combine("html", "images", "interfaces", configletName + ".png");
+                if (File.Exists(logoPath))
+                {
+                    File.Delete(logoPath);
+                }
+                File.Move(Path.Combine(outputFolder, "logo.png"), logoPath);
+                // copy other interface files to mig folder (dll and dependencies)
+                string migFolder = "mig";
+                Utility.FolderCleanUp(migFolder);
+                DirectoryInfo dir = new DirectoryInfo(outputFolder);
+                foreach(var f in dir.GetFiles())
+                {
+                    string destFile = Path.Combine(migFolder, Path.GetFileName(f.FullName));
+                    if (File.Exists(destFile))
+                    {
+                        File.Move(destFile, Path.Combine(destFile, ".old"));
+                        File.Delete(Path.Combine(destFile, ".old"));
+                    }
+                    File.Move(f.FullName, destFile);
+                }
+                //
+                homegenie.SystemConfiguration.MIGService.Interfaces.RemoveAll(i => i.Domain == iface.Domain);
+                homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                homegenie.SystemConfiguration.Update();
+                homegenie.MigService.AddInterface(iface.Domain, iface.AssemblyName);
+                break;
+
             case "System.Configure":
                 if (migCommand.GetOption(0) == "Service.Restart")
                 {
@@ -216,10 +278,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.SystemConfiguration.HomeGenie.ServicePort = int.Parse(migCommand.GetOption(1));
                         homegenie.SystemConfiguration.Update();
-                    }
-                    catch
-                    {
-                    }
+                    } catch { }
                 }
                 else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
                 {
@@ -231,10 +290,7 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = int.Parse(migCommand.GetOption(1));
                         homegenie.SystemConfiguration.Update();
-                    }
-                    catch
-                    {
-                    }
+                    } catch { }
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
@@ -296,43 +352,21 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
                 {
                     // file uploaded by user
-                    string archivename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "homegenie_restore_config.zip");
-                    if (!Directory.Exists("tmp"))
-                    {
-                        Directory.CreateDirectory("tmp");
-                    }
-                    try
-                    {
-                        var downloadedMessageInfo = new DirectoryInfo("tmp");
-                        foreach (var file in downloadedMessageInfo.GetFiles())
-                        {
-                            file.Delete();
-                        }
-                        foreach (DirectoryInfo directory in downloadedMessageInfo.GetDirectories())
-                        {
-                            directory.Delete(true);
-                        }
-                    }
-                    catch
-                    {
-                    }
-                    //
+                    string archivename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "homegenie_restore_config.zip");
+                    Utility.FolderCleanUp(Utility.GetTmpFolder());
                     try
                     {
                         var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
                         string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
                         MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archivename);
-                        Utility.UncompressZip(archivename, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp"));
+                        Utility.UncompressZip(archivename, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder()));
                         File.Delete(archivename);
-                    }
-                    catch
-                    {
-                    }
+                    } catch { }
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS1")
                 {
                     var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs.xml"));
+                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs.xml"));
                     var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
                     reader.Close();
                     var newProgramList = new List<ProgramBlock>();
@@ -358,7 +392,7 @@ namespace HomeGenie.Service.Handlers
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS2")
                 {
                     var serializer = new XmlSerializer(typeof(List<Group>));
-                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "automationgroups.xml"));
+                    var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "automationgroups.xml"));
                     var automationGroups = (List<Group>)serializer.Deserialize(reader);
                     reader.Close();
                     //
@@ -373,18 +407,18 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateGroupsDatabase("Automation");
                     //
                     //File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "automationgroups.xml"), "./automationgroups.xml", true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "groups.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"), true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "lircconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml"), true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "modules.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"), true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "scheduler.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"), true);
-                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "systemconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "groups.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "lircconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lircconfig.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "modules.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "scheduler.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"), true);
+                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "systemconfig.xml"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"), true);
                     //
                     homegenie.LoadConfiguration();
                     //
                     // Restore automation programs
                     string selectedPrograms = migCommand.GetOption(1);
                     serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs.xml"));
+                    reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs.xml"));
                     var newProgramsData = (List<ProgramBlock>)serializer.Deserialize(reader);
                     reader.Close();
                     foreach (var program in newProgramsData)
@@ -400,11 +434,8 @@ namespace HomeGenie.Service.Handlers
                                 var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
                                 try
                                 {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
-                                }
-                                catch
-                                {
-                                }
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
+                                } catch { }
                                 program.Address = newPid;
                                 homegenie.ProgramEngine.ProgramAdd(program);
                             }
@@ -413,18 +444,15 @@ namespace HomeGenie.Service.Handlers
                                 homegenie.ProgramEngine.ProgramRemove(currentProgram);
                                 try
                                 {
-                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                                }
-                                catch
-                                {
-                                }
+                                    File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
+                                } catch { }
                                 homegenie.ProgramEngine.ProgramAdd(program);
                             }
                             // Restore Arduino program folder ...
                             // TODO: this is untested yet...
                             if (program.Type.ToLower() == "arduino")
                             {
-                                string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "programs", "arduino", oldPid.ToString());
+                                string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs", "arduino", oldPid.ToString());
                                 string arduinoFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", "arduino", program.Address.ToString());
                                 if (Directory.Exists(arduinoFolder))
                                     Directory.Delete(arduinoFolder, true);
@@ -705,10 +733,7 @@ namespace HomeGenie.Service.Handlers
                     try
                     {
                         sortGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == groupName);
-                    }
-                    catch
-                    {
-                    }
+                    } catch { }
                     //
                     if (sortGroup != null)
                     {
@@ -746,10 +771,7 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     deletedGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == deletedGroupName);
-                }
-                catch
-                {
-                }
+                } catch { }
                 //
                 if (deletedGroup != null)
                 {
@@ -780,10 +802,7 @@ namespace HomeGenie.Service.Handlers
                         var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
                         group.Modules.Clear();
                         group.Modules = newGroups[i].Modules;
-                    }
-                    catch
-                    {
-                    }
+                    } catch { }
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                 break;
@@ -900,7 +919,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
                     string[] widgetParts = widgetPath.Split('/');
-                    string widgetBundle = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "export", widgetPath.Replace('/', '_') + ".zip");
+                    string widgetBundle = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "export", widgetPath.Replace('/', '_') + ".zip");
                     if (File.Exists(widgetBundle))
                     {
                         File.Delete(widgetBundle);
@@ -927,8 +946,8 @@ namespace HomeGenie.Service.Handlers
                 {
                     var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
                     string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                    string archiveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import_widget.zip");
-                    string importPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import");
+                    string archiveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import_widget.zip");
+                    string importPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import");
                     if (Directory.Exists(importPath))
                         Directory.Delete(importPath, true);
                     MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveFile);

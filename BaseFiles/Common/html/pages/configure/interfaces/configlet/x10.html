@@ -74,8 +74,9 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.X10'] = {
                 portSelect.append('<option value="' + ports[p] + '">CM11 - ' + ports[p] + '</option>');
             }
             portSelect.selectmenu('refresh', true);
-            HG.Configure.MIG.InterfaceCommand(this.Id, 'Options.Get', 'Port', '', function (data) {
-                portSelect.val(data.ResponseValue);
+            // set current configured port
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (port) {
+                portSelect.val(port.ResponseValue);
                 portSelect.selectmenu('refresh', true);
             });
         });
@@ -91,11 +92,6 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.X10'] = {
                 }
             });
             housecodeButtons.find('input[type=checkbox]').checkboxradio('refresh');
-        });
-        // set current configured port
-        HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (data) {
-            portSelect.val(data.ResponseValue);
-            portSelect.selectmenu('refresh', true);
         });
         // bind to port select change event
         portSelect.change(function (event) {

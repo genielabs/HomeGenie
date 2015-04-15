@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+15/04/2015 1.00 beta rev 484-git1
+    - Fixed MQTT app: it was missing reconnection when disconnected from MQTT server
+    - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)
+    - Added importable MIG interface driver plugins
+    - Added "configlets" files for implementing custom interface drivers UI
+
 29/03/2015 1.00 beta rev 484
     - Improved trigger condition reaction time in all type of programs/scripts (now real time, event based)
     - Added Program.WithAddress (get reference to a program) and Program.WaitFor (wait for a program to run) to Program helper class
