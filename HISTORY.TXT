@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+16/04/2015 1.00 beta rev 484-git2
+    - Added pause to ModuleParameter.WaitUpdate loop
+    - Some minor fixes to the UI
+    - Fixed bug in modules cleanup (not deleting modules sometime)
+
 15/04/2015 1.00 beta rev 484-git1
     - Fixed MQTT app: it was missing reconnection when disconnected from MQTT server
     - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)

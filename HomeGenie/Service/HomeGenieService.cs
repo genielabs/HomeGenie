@@ -1354,6 +1354,10 @@ namespace HomeGenie.Service
                         }
                         continue;
                     }
+                    else if (virtualModule.ParentId == virtualModule.Address)
+                    {
+                        continue;
+                    }
 
                     if (module == null)
                     {

@@ -35,10 +35,12 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         }
     });
     uploadFrame.bind('load', function () {
-        uploadFile.val('');
         $.mobile.loading('hide');
         // import completed...
-        HG.WebApp.SystemSettings.ListInterfaces();        
+        if (uploadFile.val() != '') {
+            uploadFile.val('');
+            HG.WebApp.SystemSettings.ListInterfaces();        
+        }        
     });
 };
 

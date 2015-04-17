@@ -59,12 +59,7 @@ namespace HomeGenie.Service
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
-
         private object syncLock = new object();
-
-        public TsList()
-        {
-        }
 
         public object LockObject
         {
@@ -73,14 +68,12 @@ namespace HomeGenie.Service
 
         new public void Clear()
         {
-
             lock (syncLock)
                 base.Clear();
         }
 
         new public void Add(T value)
         {
-
             lock (syncLock)
                 base.Add(value);
         }
