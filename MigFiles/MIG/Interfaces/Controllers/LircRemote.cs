@@ -225,6 +225,8 @@ namespace MIG.Interfaces.Controllers
             }
         }
 
+        public bool IsEnabled { get; set; }
+
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 
         public List<InterfaceModule> GetModules()

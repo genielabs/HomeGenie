@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:57.300757Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:34.073254Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:57.80337Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:34.579577Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -432,7 +432,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:58.302574Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:35.06896Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -509,7 +509,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:58.798035Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:35.57029Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1149,7 +1149,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:59.297856Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:36.069849Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1202,7 +1202,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:59.798157Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:36.569432Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1493,7 +1493,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:00.306693Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:37.075004Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1585,7 +1585,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:00.799468Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:37.571386Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1653,7 +1653,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:01.303159Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:38.074609Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1921,7 +1921,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:01.8039Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:38.572481Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2277,7 +2277,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:02.804169Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:39.575487Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2377,7 +2377,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:03.31627Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:40.08298Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2529,7 +2529,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:03.805835Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:40.577168Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2787,7 +2787,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:04.310798Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:41.081337Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3991,6 +3991,8 @@ string clientid = Program.InputField("ClientId").Value.Trim();
 string username = Program.InputField("Username").Value.Trim();
 string password = Program.InputField("Password").Value.Trim();
 
+var MqttIsConnected = false;
+
 if (server == "")
 {
   Program.Notify("MQTT", "Please configure server address");
@@ -4010,16 +4012,15 @@ else
       .Service(server)
       .Connect(port, clientid);
     Program.Notify("MQTT", "Connected!");
-  } 
-  catch (Exception e) 
+    MqttIsConnected = true;
+  }
+  catch (Exception e)
   {
     Program.Notify("MQTT", e.Message);
     Pause(5);
     return;
   }
 }
-
-
 
 MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
   var parts = mtopic.Split('/');
@@ -4083,19 +4084,20 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
         }
         else if (!module.HasParameter("MQTT.SourceNode"))
         {
-          MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");      	
+          MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");         
         }
         Program.RaiseEvent(module, property.Name, property.Value, "");
         break;
       }
-    } catch (Exception e) { Program.Notify("MQTT ERROR!", e.Message);  }
+    } catch (Exception e) {
+      Program.Notify("MQTT ERROR!", e.Message);
+      MqttIsConnected = false;
+    }
   }
-  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload); 
+  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload);
 });
 
-
-When.WebServiceCallReceived("MQTT:", ( args ) =&gt; 
-{
+When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
   string[] reqs = ((string)args).Split('/');
   string domain = reqs[0];
   string address = reqs[1];
@@ -4109,28 +4111,31 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt;
     int mqttdel = domain.IndexOf(":");
     var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
     domain = domain.Substring(mqttend + 1);
-    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");      	
-    return "{ 'ResponseValue' : 'OK' }";    
-  } catch (Exception e) { 
+    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");         
+    return "{ 'ResponseValue' : 'OK' }";   
+  } catch (Exception e) {
     Program.Notify("MQTT ERROR!", e.Message);
+    MqttIsConnected = false;
   }
   return "{ 'ResponseValue' : 'ERROR' }";
 });
 
-
-// We want to do further processing whenever a module changes 
+// We want to do further processing whenever a module changes
 When.ModuleParameterChanged( (module, property) =&gt; {
   if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
       MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Newtonsoft.Json.JsonConvert.SerializeObject(property));
-    } catch  (Exception e){ Console.WriteLine("ERR:"+e.Message + "\n" + e.StackTrace); }
+    } catch  (Exception e){
+      Program.Notify("MQTT ERROR!", e.Message);
+      MqttIsConnected = false;
+    }
   }
   // returning true, will route event to other listeners
   return true;
 });
-//
-Program.GoBackground();</ScriptSource>
+
+while (Program.IsRunning &amp;&amp; MqttIsConnected) Pause(1);</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
@@ -8134,7 +8139,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-02-08T12:47:36.375853Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:05.325621Z</TriggerTime>
+    <TriggerTime>2015-04-15T16:53:42.097818Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

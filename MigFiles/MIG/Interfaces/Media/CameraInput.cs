@@ -183,7 +183,8 @@ namespace MIG.Interfaces.Media
                 return domain;
             }
         }
-
+        
+        public bool IsEnabled { get; set; }
 
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
 

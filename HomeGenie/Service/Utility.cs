@@ -59,12 +59,7 @@ namespace HomeGenie.Service
     [Serializable()]
     public class TsList<T> : System.Collections.Generic.List<T>
     {
-
         private object syncLock = new object();
-
-        public TsList()
-        {
-        }
 
         public object LockObject
         {
@@ -73,14 +68,12 @@ namespace HomeGenie.Service
 
         new public void Clear()
         {
-
             lock (syncLock)
                 base.Clear();
         }
 
         new public void Add(T value)
         {
-
             lock (syncLock)
                 base.Add(value);
         }
@@ -248,7 +241,36 @@ namespace HomeGenie.Service
             }
             return fieldValue;
         }
+
+        public static string GetTmpFolder()
+        {
+            string tempFolder = "tmp";
+            if (!Directory.Exists(tempFolder))
+            {
+                Directory.CreateDirectory(tempFolder);
+            }
+            return tempFolder;
+        }
+
+        public static void FolderCleanUp(string path)
+        {
+            try
+            {
+                // clean up directory
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+                Directory.CreateDirectory(path);
+            }
+            catch
+            {
+                // TODO: report exception
+            }
+        }
+
         #region Private helper methods
+
         [DllImport("winmm.dll", SetLastError = true)]
         static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
         // buffer size for AddFileToZip
@@ -426,7 +448,9 @@ namespace HomeGenie.Service
             asyncTask.Start();
             return asyncTask;
         }
+
         #endregion
+
     }
 
     public class DynamicXmlParser : DynamicObject
