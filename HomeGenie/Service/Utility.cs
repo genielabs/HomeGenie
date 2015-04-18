@@ -390,8 +390,7 @@ namespace HomeGenie.Service
                             destination.Write(buffer, 0, read);
                         }
                     }
-
-                    extractedFiles.Add(filePath);
+                    try { extractedFiles.Add(filePath); } catch { }
                 }
             }
 
