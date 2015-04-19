@@ -388,11 +388,15 @@ namespace ZWaveLib
 
                             sourceNodeId = args.Message[5];
                             var node = devices.Find(n => n.Id == sourceNodeId);
+                            /* TODO: Further investigate on this...
+                             * This piece of code was causing the creation of non-existent random nodes,
+                             * 
                             if (node == null)
                             {
                                 CreateDevice(sourceNodeId, 0x00);
                                 GetNodeCapabilities(sourceNodeId);
                             }
+                            */
                             try
                             {
                                 node.MessageRequestHandler(args.Message);

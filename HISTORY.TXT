@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+19/04/2015 1.00 beta rev 484-git3
+    - Added redirection of standard output/error to HG log file
+    - Fixed bug in ZWaveLib that was causing the creation of non-existent nodes
+
 16/04/2015 1.00 beta rev 484-git2
     - Added pause to ModuleParameter.WaitUpdate loop
     - Some minor fixes to the UI

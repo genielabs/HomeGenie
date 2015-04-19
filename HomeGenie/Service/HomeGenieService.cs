@@ -988,8 +988,6 @@ namespace HomeGenie.Service
         {
             if (SystemLogger.Instance.IsLogEnabled)
             {
-                //Console.ResetColor ();
-                Console.WriteLine(logentry);
                 try
                 {
                     SystemLogger.Instance.WriteToLog(logentry);

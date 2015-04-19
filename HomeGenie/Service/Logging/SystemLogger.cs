@@ -45,6 +45,7 @@ namespace HomeGenie.Service.Logging
         private static int queueSize = 50;
         private static FileStream logStream;
         private static StreamWriter logWriter;
+        private static StreamWriter standardOutput;
         private static DateTime lastFlushed = DateTime.Now;
 
         /// <summary>
@@ -52,6 +53,8 @@ namespace HomeGenie.Service.Logging
         /// </summary>
         public SystemLogger()
         {
+            standardOutput = new StreamWriter(Console.OpenStandardOutput());
+            standardOutput.AutoFlush = true;
         }
 
         /// <summary>
@@ -77,6 +80,7 @@ namespace HomeGenie.Service.Logging
         /// <param name="message">The message to write to the log</param>
         public void WriteToLog(LogEntry logEntry)
         {
+            standardOutput.WriteLine(logEntry);
             // Lock the queue while writing to prevent contention for the log file
             logQueue.Enqueue(logEntry);
             // If we have reached the Queue Size then flush the Queue
