@@ -25,7 +25,7 @@ using System.Collections.Generic;
 
 namespace MIG
 {
-    static class Extensions
+    public static class Extensions
     {
         public static MIGServiceConfiguration.Interface.Option GetOption(this MIGInterface iface, string option)
         {
@@ -43,9 +43,15 @@ namespace MIG
                 opt = new MIGServiceConfiguration.Interface.Option() { Name =  option };
                 iface.Options.Add(opt);
             }
-            iface.Disconnect();
+            if (iface.IsEnabled)
+            {
+                try { iface.Disconnect(); } catch { }
+            }
             opt.Value = value;
-            iface.Connect();
+            if (iface.IsEnabled)
+            {
+                try { iface.Connect(); } catch { }
+            }
         }
     }
 
@@ -56,6 +62,8 @@ namespace MIG
         /// that should be usually automatically calculated from namespace
         /// </summary>
         string Domain { get; }
+
+        bool IsEnabled { get; set; }
 
         List<InterfaceModule> GetModules();
 

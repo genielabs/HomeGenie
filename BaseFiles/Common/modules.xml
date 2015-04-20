@@ -1019,7 +1019,7 @@
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ClientId</Name>
-        <Value>yREVeI8dF4mBMgVLkVnT3A==</Value>
+        <Value />
         <Description>0. Enter unique ID for this client</Description>
         <UpdateTime>2015-01-03T14:02:11.102843Z</UpdateTime>
       </ModuleParameter>

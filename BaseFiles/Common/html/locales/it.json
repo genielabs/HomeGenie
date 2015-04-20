@@ -225,52 +225,10 @@
          "Aggiungi Gruppo",
     "configure_interfaces_heading": 
          "Impostazioni",
-    "configure_interfaces_zwaveoptions": 
-         "Interfaccia Z-Wave",
     "configure_interfaces_optdisable": 
          "Disattiva",
     "configure_interfaces_optenable": 
          "Attiva",
-    "configure_interfaces_zwaveport": 
-         "Porta Dispositivo",
-    "configure_interfaces_zwavecommontasks": 
-         "Attivita' Z-Wave Comuni",
-    "configure_interfaces_zwaveaddnode": 
-         "Aggiungi Nodo",
-    "configure_interfaces_zwaveremovenode": 
-         "Rimuovi Nodo",
-    "configure_interfaces_x10options": 
-         "Interfaccia X10",
-    "configure_interfaces_x10port": 
-         "Porta Dispositivo",
-    "configure_interfaces_x10housecodes": 
-         "House Code utilizzati",
-    "configure_interfaces_w800rf32": 
-         "W800RF32 RF Receiver Opzioni Interfaccia ",
-    "configure_interfaces_w800rf32port": 
-         "Porta Dispositivo",
-    "configure_interfaces_lircremote": 
-         "Lirc Telecomandi Infrarosso",
-    "configure_interfaces_lircremoteconfiguration": 
-         "Lirc Configurazione",
-    "configure_interfaces_lircremoteaddremote": 
-         "Aggiungi Telecomando",
-    "configure_interfaces_camera": 
-         "Telecamera",
-    "configure_interfaces_cameradesc": 
-         "Funziona con dispositivi Video4Linux compatibili (solo per x64 Ubuntu e Raspberry Pi).",
-    "configure_interfaces_cameraport": 
-         "Porta Dispositivo",
-    "configure_system_lircremotesadd": 
-         "Aggiungi Telecomando",
-    "configure_system_zwaveaddnodeheading": 
-         "Agg./Rim. Nodo",
-    "configure_system_zwaveaddnodepressbutton": 
-         "Premi il pulsante sul dispositivo:",
-    "configure_system_zwaveaddnodeoperationtimeout": 
-         "questa operazione scadrà entro 10 secondi.",
-    "configure_system_zwaveaddnodeclose": 
-         "Chiudi",
     "configure_maintenance_heading": 
          "Manutenzione",
     "configure_system_theme": 
@@ -527,18 +485,6 @@
         "Per favore seleziona la porta usata da questo dispositivo",
     "systemsettings_selectport_button":
         "Chiudi",
-    "systemsettings_x10housecodes_title":
-        "Avviso",
-    "systemsettings_x10housecodes_text":
-        "Per favore seleziona almeno un house code.",
-    "systemsettings_x10housecodes_button":
-        "Chiudi",
-    "configure_interfaces_insteon": 
-         "Insteon PLM (2413S/2413U)",
-    "configure_interfaces_insteonport": 
-         "Porta Dispositivo",
-    "configure_interfaces_insteonx10housecodes": 
-         "House Code in uso (solo per dispositivi X10)",
     "configure_group_newgroupconfirm": 
         "Ok",
     "configure_module_optremoveseparator": 
@@ -583,16 +529,6 @@
         "",
     "configure_program_options_update": 
         "Aggiorna",
-    "configure_interfaces_zwavediscovery": 
-        "Ricerca",
-    "configure_interfaces_camerasettings": 
-        "Dispositivo / Risoluzione / FPS",
-    "configure_interfaces_upnp": 
-        "Universal Plug &amp; Play",
-    "configure_interfaces_weeco4mgpio": 
-        "WEECOBOARD 4M GPIO",
-    "configure_system_zwavediscoverytitle": 
-        "Ricerca ZWave",
     "configure_system_updateinstall": 
         "Installazione Aggiornamento",
     "configure_system_deletemodule": 
@@ -641,18 +577,6 @@
         "No",
     "configure_program_saveconfirm":
         "Salva",
-    "configure_interfaces_zwavehardreset":
-        "Hard Reset",
-    "systemsettings_zwavehardreset_hardreset":
-        "Reimpostare il Controller?",
-    "systemsettings_zwavehardreset_hardresetprompt":
-        "Sei sicuro di voler reimpostare il controller Z-Wave?",
-    "systemsettings_zwavehardreset_hardresetwarning":
-        "Tutti i nodi verranno rimossi!",
-    "systemsettings_zwavehardreset_hardresetcancel":
-        "Annulla",
-    "systemsettings_zwavehardreset_hardresetproceed":
-        "Procedi",
     "statistics_dataanalysis":
         "Analisi dati",
     "statistics_counterexpense":

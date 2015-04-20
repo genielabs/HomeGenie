@@ -376,7 +376,7 @@ namespace SerialPortLib
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
             }
-            Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
+            //Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
             Console.WriteLine(prefix + " " + message);
             Console.ForegroundColor = ConsoleColor.White;
         }

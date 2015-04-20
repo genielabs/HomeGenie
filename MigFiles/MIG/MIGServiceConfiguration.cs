@@ -40,6 +40,10 @@ namespace MIG
                 public string Value { get; set; }
             }
 
+            [XmlAttribute]
+            public string AssemblyName { get; set; }
+
+            // TODO: add SupportedPlatform field (Windows, Unix, All)
         }
     }
 

@@ -1,0 +1,281 @@
+<div data-configlet-id="HomeAutomation.Insteon">
+
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <span data-locale-id="configure_interfaces_insteonport">Device Port</span>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <select data-ui-field="serialport" data-mini="true"></select>
+            </div>
+        </div>
+        <div class="ui-block-b" align="right">
+            <select data-ui-field="isenabled" data-role="slider">
+                <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+            </select>
+        </div>
+    </div>
+        
+    <div>
+        <span data-locale-id="configure_interfaces_insteonx10housecodes">House Codes in use (for X10 devices only)</span>
+        <br clear="all" />
+        <div data-ui-field="x10housecodes" data-role="controlgroup" data-type="horizontal" data-mini="true" style="display:inline-block">
+            <label>A<input type="checkbox" value="A" /></label>
+            <label>B<input type="checkbox" value="B" /></label>
+            <label>C<input type="checkbox" value="C" /></label>
+            <label>D<input type="checkbox" value="D" /></label>
+            <label>E<input type="checkbox" value="E" /></label>
+            <label>F<input type="checkbox" value="F" /></label>
+            <label>G<input type="checkbox" value="G" /></label>
+            <label>H<input type="checkbox" value="H" /></label>
+            <label>I<input type="checkbox" value="I" /></label>
+            <label>J<input type="checkbox" value="J" /></label>
+            <label>K<input type="checkbox" value="K" /></label>
+            <label>L<input type="checkbox" value="L" /></label>
+            <label>M<input type="checkbox" value="M" /></label>
+            <label>N<input type="checkbox" value="N" /></label>
+            <label>O<input type="checkbox" value="O" /></label>
+            <label>P<input type="checkbox" value="P" /></label>
+        </div>
+    </div>    
+
+</div>
+        
+<script type="text/javascript" language="javascript">
+HG.WebApp.SystemSettings.Interfaces['HomeAutomation.Insteon'] = {
+
+    Id: 'HomeAutomation.Insteon',
+    Initialize: function(){
+        var _this = this;
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        var portSelect = configlet.find('[data-ui-field=serialport]');
+        var enabledFlip = configlet.find('[data-ui-field=isenabled]');
+        var housecodeButtons = configlet.find('[data-ui-field=x10housecodes]');
+        // get enabled status
+        HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Get', '', '', function (data) {
+            enabledFlip.val(data.ResponseValue).slider('refresh');
+        });
+        // bind to enabled flip changes
+        enabledFlip.on('slidestop', function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Set', enabledFlip.val(), '', function (data) {
+                if (enabledFlip.val() == '1') {
+                    if (portSelect.val() == '')
+                        HG.WebApp.SystemSettings.ShowPortTip(portSelect);
+                    if (_this.GetHouseCodeSelection() == '')
+                        _this.ShowHouseCodeTip();
+                }
+            });
+        });
+        // populate port list
+        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (data) {
+            var ports = eval(decodeURIComponent(data));
+            portSelect.empty().append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder') + '</option>');
+            for (var p = 0; p < ports.length; p++) {
+                portSelect.append('<option value="' + ports[p] + '">' + ports[p] + '</option>');
+            }
+            portSelect.selectmenu('refresh', true);
+            // set current configured port
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Get', 'Port', '', function (port) {
+                portSelect.val(port.ResponseValue);
+                portSelect.selectmenu('refresh', true);
+            });
+        });
+        // populate selected house codes
+        HG.Configure.MIG.InterfaceCommand(this.Id, 'Options.Get', 'HouseCodes', '', function (data) {
+            data = ',' + data.ResponseValue + ',';
+            housecodeButtons.find('input[type=checkbox]').each(function () {
+                if (data.indexOf(',' + $(this).val() + ',') >= 0) {
+                    $(this).prop('checked', true);
+                }
+                else {
+                    $(this).prop('checked', false);
+                }
+            });
+            housecodeButtons.find('input[type=checkbox]').checkboxradio('refresh');
+        });
+        // bind to port select change event
+        portSelect.change(function (event) {
+            HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'Port', encodeURIComponent($(this).val()));
+        });
+        // bind to house code change event
+        housecodeButtons.find('input[type=checkbox]').change(function (event) {
+            var hc = _this.GetHouseCodeSelection();
+            if (hc != '') {
+                hc = hc.substr(0, hc.length - 1);
+                HG.Configure.MIG.InterfaceCommand(_this.Id, 'Options.Set', 'HouseCodes', encodeURIComponent(hc));
+            } else {
+                _this.ShowHouseCodeTip();
+            }
+        });        
+    },
+    
+    GetHouseCodeSelection: function() {
+        var hc = '';
+        var housecodeButtons = this.Configlet.find('[data-ui-field=x10housecodes]');
+        housecodeButtons.find('input[type=checkbox]').each(function () {
+            if ($(this).prop('checked'))
+                hc += $(this).val() + ',';
+        });
+        return hc;
+    },
+    
+    ShowHouseCodeTip: function () {
+        var housecodeButtons = this.Configlet.find('[data-ui-field=x10housecodes]');
+        housecodeButtons.qtip({
+            content: {
+                title: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_title', false, this.Locale),
+                text: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_text', false, this.Locale),
+                button: HG.WebApp.Locales.GetLocaleString('systemsettings_x10housecodes_button', false, this.Locale)
+            },
+            show: { event: false, ready: true, delay: 500 },
+            events: {
+                hide: function () {
+                    $(this).qtip('destroy');
+                }
+            },
+            hide: { event: false, inactive: 3000 },
+            style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+            position: { my: 'left center', at: 'right center' }
+        });
+    },
+    
+    Localize: function() {
+        var configlet = this.Configlet = $('#'+HG.WebApp.SystemSettings.PageId).find('[data-configlet-id="'+this.Id+'"]');
+        var userLang = HG.WebApp.Locales.GetUserLanguage();
+        // English is the default locale
+        var defaultLocale = {
+            "title": 
+                 "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                 "Device Port",
+            "configure_interfaces_insteonx10housecodes": 
+                 "House Codes in use (for X10 devices only)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+        };
+        var locale = defaultLocale;
+        // other locale definitions follows
+        switch(userLang)
+        {
+        // German
+        case 'de': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Device Port",
+            "configure_interfaces_insteonx10housecodes": 
+                "House Codes in use (for X10 devices only)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // Spanish
+        case 'es': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Device Port",
+            "configure_interfaces_insteonx10housecodes": 
+                "House Codes in use (for X10 devices only)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // French
+        case 'fr': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Port du contrôleur",
+            "configure_interfaces_insteonx10housecodes": 
+                "Codes utilisés (pour les interfaces X10 seulement)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // Italian
+        case 'it': locale = {
+            "title": 
+                 "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                 "Porta Dispositivo",
+            "configure_interfaces_insteonx10housecodes": 
+                 "House Code in uso (solo per dispositivi X10)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // Dutch
+        case 'nl': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Device Port",
+            "configure_interfaces_insteonx10housecodes": 
+                "House Codes in use (for X10 devices only)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // Russian
+        case 'ru': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Порт устройства",
+            "configure_interfaces_insteonx10housecodes": 
+                "Используемые коды дома (только для устройств X10)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        // Swedish
+        case 'sv': locale = {
+            "title": 
+                "Insteon PLM (2413S/2413U)",
+            "configure_interfaces_insteonport": 
+                "Device Port",
+            "configure_interfaces_insteonx10housecodes": 
+                "House Codes in use (for X10 devices only)",
+            "systemsettings_x10housecodes_title":
+                "Notice",
+            "systemsettings_x10housecodes_text":
+                "Please select at least one house code.",
+            "systemsettings_x10housecodes_button":
+                "Close"
+            };
+            break;
+        }
+        HG.WebApp.Locales.LocalizeElement(this.Configlet, locale);
+        this.Locale = locale;
+    }
+    
+};
+</script>

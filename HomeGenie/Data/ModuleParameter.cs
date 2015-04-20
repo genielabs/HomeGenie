@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using HomeGenie.Service;
 using HomeGenie.Service.Logging;
+using System.Threading;
 
 namespace HomeGenie.Data
 {
@@ -109,7 +110,8 @@ namespace HomeGenie.Data
         public bool WaitUpdate(double timeoutSeconds)
         {
             var lastUpdate = UpdateTime;
-            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - requestUpdateTimestamp).TotalSeconds < timeoutSeconds);
+            while (lastUpdate.Ticks == UpdateTime.Ticks && (DateTime.UtcNow - requestUpdateTimestamp).TotalSeconds < timeoutSeconds)
+                Thread.Sleep(250);
             return lastUpdate.Ticks != UpdateTime.Ticks;
         }
 

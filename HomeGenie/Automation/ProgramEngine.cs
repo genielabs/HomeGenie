@@ -324,10 +324,7 @@ namespace HomeGenie.Automation
             try
             {
                 Directory.Delete(Path.Combine(file, "arduino", program.Address.ToString()), true);
-            }
-            catch
-            {
-            }
+            } catch { }
         }
 
         internal void RaiseProgramModuleEvent(ProgramBlock program, string property, string value)

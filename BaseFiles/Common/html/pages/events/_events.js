@@ -28,16 +28,17 @@ HG.WebApp.Events.SetupListener = function () {
     es.onmessage = function (e) {
         var event = eval('[' + e.data + ']')[0];
         //
-        // update event source (the module that is raising this event)
-        var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
-        if (module != null) {
-            var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, event.Property);
-            HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
-            HG.WebApp.Control.RefreshGroupIndicators();
+        if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
+            // update event source (the module that is raising this event)
+            var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
+            if (module != null) {
+                var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, event.Property);
+                HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
+                HG.WebApp.Control.RefreshGroupIndicators();
+            }
+            // send message to UI for updating UI elements related to this event (widgets, popup and such)
+            HG.WebApp.Events.SendEventToUi(module, event);
         }
-        // send message to UI for updating UI elements related to this event (widgets, popup and such)
-        HG.WebApp.Events.SendEventToUi(module, event);
-        //
         //
         if (dataStore.get('UI.EventsHistory')) {
             // add message to local events queue
@@ -205,8 +206,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-                if (eventLog.Domain == 'HomeAutomation.ZWave')
-                    $('#configure_system_zwavediscovery_log').prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'].DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing

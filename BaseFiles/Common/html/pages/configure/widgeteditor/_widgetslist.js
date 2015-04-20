@@ -81,9 +81,11 @@ HG.WebApp.WidgetsList.InitializePage = function () {
         }
     });
     uploadFrame.bind('load', function () {
-        uploadFile.val('');
         $.mobile.loading('hide');
-        HG.WebApp.WidgetsList.LoadWidgets();
+        if (uploadFile.val() != '') {
+            uploadFile.val('');
+            HG.WebApp.WidgetsList.LoadWidgets();
+        }
     });            
 };
 

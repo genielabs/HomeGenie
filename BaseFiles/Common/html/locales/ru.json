@@ -225,52 +225,10 @@
         "Добавить группу",
     "configure_interfaces_heading": 
         "Настройки интерфейсов",
-    "configure_interfaces_zwaveoptions": 
-        "Опции интерфейса ZWave",
     "configure_interfaces_optdisable": 
         "Выкл.",
     "configure_interfaces_optenable": 
         "Вкл.",
-    "configure_interfaces_zwaveport": 
-        "Порт устройства",
-    "configure_interfaces_zwavecommontasks": 
-        "Основные задачи ZWave",
-    "configure_interfaces_zwaveaddnode": 
-        "Добавить узел",
-    "configure_interfaces_zwaveremovenode": 
-        "Удалить узел",
-    "configure_interfaces_x10options": 
-        "Опции интерфейса X10",
-    "configure_interfaces_x10port": 
-        "Порт устройства",
-    "configure_interfaces_x10housecodes": 
-        "Используемые коды дома",
-    "configure_interfaces_w800rf32": 
-        "Опции интерфейса W800RF32 RF Receiver",
-    "configure_interfaces_w800rf32port": 
-        "Порт устройства",
-    "configure_interfaces_lircremote": 
-        "Инфракрасные пульты Lirc",
-    "configure_interfaces_lircremoteconfiguration": 
-        "Конфигурация Lirc",
-    "configure_interfaces_lircremoteaddremote": 
-        "Добавить пульт ДУ",
-    "configure_interfaces_camera": 
-        "Камера",
-    "configure_interfaces_cameradesc": 
-        "Работает с любыми Video4Linux совместимыми устройствами на <b>/dev/video0</b> (только x64 Ubuntu и Raspberry Pi).",
-    "configure_interfaces_cameraport": 
-        "Порт устройства",
-    "configure_system_lircremotesadd": 
-        "Добавить пульт ДУ",
-    "configure_system_zwaveaddnodeheading": 
-        "Добавить/Удалить узел",
-    "configure_system_zwaveaddnodepressbutton": 
-        "Нажмите кнопку на устройстве:",
-    "configure_system_zwaveaddnodeoperationtimeout": 
-        "таймаут операции - 10 секунд.",
-    "configure_system_zwaveaddnodeclose": 
-        "Закрыть",
     "configure_maintenance_heading": 
         "Обслуживание",
     "configure_system_theme": 
@@ -527,18 +485,6 @@
         "Пожалуйста, выберите порт для этого устройства",
     "systemsettings_selectport_button": 
         "Закрыть",
-    "systemsettings_x10housecodes_title": 
-        "Внимание",
-    "systemsettings_x10housecodes_text": 
-        "Пожалуйста, выберите как минимум один код дома.",
-    "systemsettings_x10housecodes_button": 
-        "Закрыть",
-    "configure_interfaces_insteon": 
-        "Insteon PLM (2413S/2413U)",
-    "configure_interfaces_insteonport": 
-        "Порт устройства",
-    "configure_interfaces_insteonx10housecodes": 
-        "Используемые коды дома (только для устройств X10)",
     "configure_group_newgroupconfirm": 
         "Ok",
     "configure_module_optremoveseparator": 
@@ -583,16 +529,6 @@
         "",
     "configure_program_options_update": 
         "Обновить",
-    "configure_interfaces_zwavediscovery": 
-        "Обнаружение",
-    "configure_interfaces_camerasettings": 
-        "Устройство / Разрешение / FPS",
-    "configure_interfaces_upnp": 
-        "Universal Plug &amp; Play",
-    "configure_interfaces_weeco4mgpio": 
-        "WEECOBOARD 4M GPIO",
-    "configure_system_zwavediscoverytitle": 
-        "Обнаружение устройств ZWave",
     "configure_system_updateinstall": 
         "Установка обновления",
     "configure_system_deletemodule": 
@@ -641,18 +577,6 @@
         "Нет",
     "configure_program_saveconfirm":
         "Сохранить",
-    "configure_interfaces_zwavehardreset":
-        "Аппаратный сброс",
-    "systemsettings_zwavehardreset_hardreset":
-        "Аппатный сброс контроллера?",
-    "systemsettings_zwavehardreset_hardresetprompt":
-        "Вы уверены, что хотите сделать аппаратный сброс Z-Wave контроллера?",
-    "systemsettings_zwavehardreset_hardresetwarning":
-        "Все устройства будут удалены из сети!",
-    "systemsettings_zwavehardreset_hardresetcancel":
-        "Отмена",
-    "systemsettings_zwavehardreset_hardresetproceed":
-        "Продолжить",
     "statistics_dataanalysis":
         "Анализ данных",
     "statistics_counterexpense":

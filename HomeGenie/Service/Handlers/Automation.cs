@@ -163,7 +163,7 @@ namespace HomeGenie.Service.Handlers
                         if (File.Exists(zipFileName))
                             File.Delete(zipFileName);
                         File.Move(archiveName, zipFileName);
-                        string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp", "import");
+                        string destFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import");
                         if (Directory.Exists(destFolder))
                             Directory.Delete(destFolder, true);
                         Utility.UncompressZip(zipFileName, destFolder);
@@ -216,7 +216,7 @@ namespace HomeGenie.Service.Handlers
                     if (currentProgram.Type.ToLower() == "arduino")
                     {
                         string arduinoBundle = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                           "tmp",
+                                                            Utility.GetTmpFolder(),
                                                            "export",
                                                             filename + ".zip");
                         if (File.Exists(arduinoBundle))

@@ -45,6 +45,7 @@ namespace HomeGenie.Service.Logging
         private static int queueSize = 50;
         private static FileStream logStream;
         private static StreamWriter logWriter;
+        private static StreamWriter standardOutput;
         private static DateTime lastFlushed = DateTime.Now;
 
         /// <summary>
@@ -52,6 +53,8 @@ namespace HomeGenie.Service.Logging
         /// </summary>
         public SystemLogger()
         {
+            standardOutput = new StreamWriter(Console.OpenStandardOutput());
+            standardOutput.AutoFlush = true;
         }
 
         /// <summary>
@@ -77,6 +80,7 @@ namespace HomeGenie.Service.Logging
         /// <param name="message">The message to write to the log</param>
         public void WriteToLog(LogEntry logEntry)
         {
+            standardOutput.WriteLine(logEntry);
             // Lock the queue while writing to prevent contention for the log file
             logQueue.Enqueue(logEntry);
             // If we have reached the Queue Size then flush the Queue
@@ -190,5 +194,58 @@ namespace HomeGenie.Service.Logging
             instance = null;
         }
     }
+    
+    public class ConsoleRedirect : TextWriter
+    {
+        private string lineBuffer = "";
 
+        public Action<string> ProcessOutput;
+
+        public override void Write(string message)
+        {
+            string newLine = new string(CoreNewLine);
+            if (message.IndexOf(newLine) >= 0)
+            {
+                string[] parts = message.Split(CoreNewLine);
+                if (message.StartsWith(newLine))
+                    this.WriteLine(this.lineBuffer);
+                else
+                    parts[0] = this.lineBuffer + parts[0];
+                this.lineBuffer = "";
+                if (parts.Length > 1 && !parts[parts.Length - 1].EndsWith(newLine))
+                {
+                    this.lineBuffer += parts[parts.Length - 1];
+                    parts[parts.Length - 1] = "";
+                }
+                foreach (var s in parts)
+                {
+                    if (!String.IsNullOrWhiteSpace(s))
+                        this.WriteLine(s);
+                }
+                message = "";
+            }
+            this.lineBuffer += message;
+        }
+        public override void WriteLine(string message)
+        {
+            if (ProcessOutput != null && !string.IsNullOrWhiteSpace(message))
+            {
+                // log entire line into the "Domain" column
+                //SystemLogger.Instance.WriteToLog(new HomeGenie.Data.LogEntry() {
+                //    Domain = "# " + this.lineBuffer + message
+                //});
+                ProcessOutput(this.lineBuffer + message);
+            }
+            this.lineBuffer = "";
+        }
+
+        public override System.Text.Encoding Encoding
+        {
+            get
+            {
+                return UTF8Encoding.UTF8;
+            }
+        }
+
+    }
 }
