@@ -103,8 +103,8 @@ namespace HomeGenie.Service
 
             // TODO: all the following initialization stuff should go async
             //
-            // initialize recent log list
-            recentEventsLog = new TsList<LogEntry>();
+            // initialize logging
+            SetupLogging();
 
             #region MIG Service initialization and startup
 
@@ -935,6 +935,18 @@ namespace HomeGenie.Service
 
         #region Logging
 
+        private void SetupLogging()
+        {
+            recentEventsLog = new TsList<LogEntry>();
+            Console.OutputEncoding = Encoding.UTF8;
+            var outputRedirect = new ConsoleRedirect();
+            outputRedirect.ProcessOutput = (outputLine) => {
+                LogBroadcastEvent(Domains.HomeGenie_System, "Console", "StdOut/StdErr redirect", "Console.Output", outputLine);
+            };
+            Console.SetOut(outputRedirect);
+            Console.SetError(outputRedirect);
+        }
+
         internal void LogBroadcastEvent(
             string domain,
             string source,
@@ -1327,8 +1339,8 @@ namespace HomeGenie.Service
                                               );
                     //
                     Module module = Modules.Find(o => {
-                        bool found = false;
-                        if (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address)
+                        bool found = (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address); // main program module
+                        if (!found && o.Domain == virtualModule.Domain && o.Address == virtualModule.Address)
                         {
                             var prop = Utility.ModuleParameterGet(o, "VirtualModule.ParentId");
                             if (prop != null && prop.Value == virtualModule.ParentId) found = true;
@@ -1352,10 +1364,10 @@ namespace HomeGenie.Service
                         }
                         continue;
                     }
-                    else if (virtualModule.ParentId == virtualModule.Address)
-                    {
-                        continue;
-                    }
+                    //else if (virtualModule.ParentId == virtualModule.Address)
+                    //{
+                    //    continue;
+                    //}
 
                     if (module == null)
                     {
@@ -1383,11 +1395,14 @@ namespace HomeGenie.Service
                     }
                     module.Description = virtualModule.Description;
                     //
-                    Utility.ModuleParameterSet(
-                        module,
-                        Properties.VIRTUALMODULE_PARENTID,
-                        virtualModule.ParentId
-                    );
+                    if (virtualModule.ParentId != virtualModule.Address)
+                    {
+                        Utility.ModuleParameterSet(
+                            module,
+                            Properties.VIRTUALMODULE_PARENTID,
+                            virtualModule.ParentId
+                        );
+                    }
                     var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
                     // if a widget is specified on virtual module then we force module to display using this
                     if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))

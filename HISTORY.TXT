@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+20/04/2015 1.00 beta rev 484-git4
+    - Improved MQTT client app
+    - Improved unhandled exceptions trapping/recovery
+    - Fixed bug in app module creation
+    - Added "Console.Output" to the event log page
+
 19/04/2015 1.00 beta rev 484-git3
     - Added redirection of standard output/error to HG log file
     - Fixed bug in ZWaveLib that was causing the creation of non-existent nodes

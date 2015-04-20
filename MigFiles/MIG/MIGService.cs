@@ -186,9 +186,10 @@ namespace MIG
                     migInterface = (MIGInterface)Activator.CreateInstance(type);
                     migInterface.Options = configuration.GetInterface(domain).Options;
                 }
-                catch
+                catch (Exception e)
                 {
                     // TODO: add error logging
+                    Console.WriteLine("MIG ERROR: could not load interface '" + domain + "': " + e.Message);
                 }
                 if (migInterface != null)
                 {

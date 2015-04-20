@@ -48,11 +48,6 @@ namespace HomeGenie
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 
-            Console.OutputEncoding = Encoding.UTF8;
-            var outputRedirect = new ConsoleRedirect();
-            Console.SetOut(outputRedirect);
-            Console.SetError(outputRedirect);
-
             /* Change current culture
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = culture;
@@ -198,68 +193,34 @@ namespace HomeGenie
             catch { }
         }
 
-        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
-            HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) 
+        {
+            var logEntry = new HomeGenie.Data.LogEntry() {
                 Domain = Domains.HomeAutomation_HomeGenie,
-                Source = "UnhandledExceptionTrapper",
-                Description = e.ExceptionObject.ToString(),
-                Property = "HomeGenie.UnhandledException",
+                Source = "Trapper",
+                Description = "Unhandled Exception",
+                Property = "Error.Exception",
                 Value = e.ExceptionObject.ToString()
-            });
-        }
-
-    }
-
-    public class ConsoleRedirect : TextWriter
-    {
-        private string lineBuffer = "";
-
-        public override void Write(string message)
-        {
-            string newLine = new string(CoreNewLine);
-            if (message.IndexOf(newLine) >= 0)
+            };
+            try
             {
-                string[] parts = message.Split(CoreNewLine);
-                if (message.StartsWith(newLine))
-                    this.WriteLine(this.lineBuffer);
-                else
-                    parts[0] = this.lineBuffer + parts[0];
-                this.lineBuffer = "";
-                if (parts.Length > 1 && !parts[parts.Length - 1].EndsWith(newLine))
-                {
-                    this.lineBuffer += parts[parts.Length - 1];
-                    parts[parts.Length - 1] = "";
-                }
-                foreach (var s in parts)
-                {
-                    if (!String.IsNullOrWhiteSpace(s))
-                        this.WriteLine(s);
-                }
-                message = "";
+                // try broadcast first
+                _homegenie.LogBroadcastEvent(
+                    logEntry.Domain,
+                    logEntry.Source,
+                    logEntry.Description,
+                    logEntry.Property,
+                    logEntry.Value
+                );
             }
-            this.lineBuffer += message;
-        }
-        public override void WriteLine(string message)
-        {
-            if (SystemLogger.Instance.IsLogEnabled && !string.IsNullOrWhiteSpace(message))
+            catch 
             {
-                // log entire line into the "Domain" column
-                SystemLogger.Instance.WriteToLog(new HomeGenie.Data.LogEntry() {
-                    Domain = "# " + this.lineBuffer + message
-                });
-            }
-            this.lineBuffer = "";
-        }
-
-        public override System.Text.Encoding Encoding
-        {
-            get
-            {
-                throw new NotImplementedException();
+                HomeGenieService.LogEvent(logEntry);
             }
         }
 
     }
+
 }
 
 
