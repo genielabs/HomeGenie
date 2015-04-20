@@ -1809,6 +1809,10 @@ namespace HomeGenie.Service
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
             }
+            if (File.Exists("zwavenodes.xml"))
+            {
+                Utility.AddFileToZip(archiveName, "zwavenodes.xml");
+            }
         }
 
         private void SetupUpnp()
