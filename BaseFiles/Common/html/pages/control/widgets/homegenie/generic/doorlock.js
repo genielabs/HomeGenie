@@ -20,6 +20,10 @@
             widget.find('[data-ui-field=lockunlock]').on('change', function () {
                 HG.Control.Modules.ServiceCall('DoorLock.Set', module.Domain, module.Address, ($(this).val() == 'unlocked' ? '0' : '255'), function (data) { });
             });
+            // settings button
+            widget.find('[data-ui-field=settings]').on('click', function () {
+                HG.WebApp.Control.EditModule(module);
+            });
         }
         //
         // read some context data
@@ -40,10 +44,12 @@
         if (lockstatus != null && lockstatus.Value.indexOf("Locked") == 0) {
             widget.find('[data-ui-field=lockunlock]').val("locked").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
+            this.StatusText = "Locked";
         }
         else {
             widget.find('[data-ui-field=lockunlock]').val("unlocked").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_open.png';
+            this.StatusText = "Unocked";
         }
 
         this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;

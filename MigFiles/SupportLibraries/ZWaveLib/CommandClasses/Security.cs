@@ -85,31 +85,37 @@ namespace ZWaveLib.CommandClasses
             return privateNetworkKey;
         }
 
-        public byte[] ControllerCurrentNonce{
-            get {
-                byte[] localControllerCurrentNonce = new byte[8];
+        public void GenerateControllerCurrentNonce(){
+            byte[] localControllerCurrentNonce = new byte[8];
 
-                if (controllerCurrentNonce == null)
-                {
-                    // we needs to generate one and save it for the next call;
-                    Random rnd = new Random();
-                    rnd.NextBytes(localControllerCurrentNonce);
-                    controllerCurrentNonce = localControllerCurrentNonce;
-                }
-                else
-                {
-                    // we are copying the controllerCurrentNonce and setting it to null so that
-                    // next time we'll regenerate it
-                    Array.Copy(controllerCurrentNonce, localControllerCurrentNonce, 8);
-
-                    // we blank out the controllerCurrentNonce so that next time a new one is generated
-                    // this would give us the most secure communication, if we see issues we just comment out
-                    // the next line generate it ONLY once per lifecycle/device
-                    controllerCurrentNonce = null;
-                }
-                Utility.logMessage("ControllerCurrentNonce: " + Utility.ByteArrayToString(localControllerCurrentNonce));
-                return localControllerCurrentNonce;
+            if (controllerCurrentNonce == null)
+            {
+                controllerCurrentNonce = new byte[8];
+                // we needs to generate one and save it for the next call;
+                Random rnd = new Random();
+                rnd.NextBytes(controllerCurrentNonce);
             }
+
+            Utility.logMessage("ControllerCurrentNonce: " + Utility.ByteArrayToString(localControllerCurrentNonce));
+            //return localControllerCurrentNonce;
+        }
+
+        public byte[] GetControllerCurrentNonce(bool clearNonce = false)
+        {
+            byte[] localControllerCurrentNonce = new byte[8];
+
+            Array.Copy(controllerCurrentNonce, localControllerCurrentNonce, 8);
+
+            if (clearNonce)
+            {
+                // Ideally we should get in here ONLY when decrypting a message from the device.
+                // This would cause the controllerCurrentNonce to be re-generated which would
+                // give us the most secure communication, if we see issues we just don't pass
+                // the clearNonce argument
+                controllerCurrentNonce = null;
+            }
+
+            return localControllerCurrentNonce;
         }
 
         public byte[] EncryptionKey 
@@ -408,7 +414,9 @@ namespace ZWaveLib.CommandClasses
             message[0] = (byte)CommandClass.Security;
             message[1] = (byte)SecurityCommand.NonceReport;
 
-            Array.Copy(GetSecurityData(node).ControllerCurrentNonce, 0, message, 2, 8);
+            GetSecurityData(node).GenerateControllerCurrentNonce();
+
+            Array.Copy(GetSecurityData(node).GetControllerCurrentNonce(), 0, message, 2, 8);
 
             node.SendRequest(message);
 
@@ -563,7 +571,7 @@ namespace ZWaveLib.CommandClasses
             // Get IV from inbound packet
             byte[] iv = new byte[16];
             Array.Copy(message, start+1, iv, 0, 8);
-            Array.Copy(nodeSecurityData.ControllerCurrentNonce, 0, iv, 8, 8);
+            Array.Copy(nodeSecurityData.GetControllerCurrentNonce(true), 0, iv, 8, 8);
 
             int _length = message.Length;
             int encryptedpackagesize = _length - 11 - 8; //19 + 11 + 8

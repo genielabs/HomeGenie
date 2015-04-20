@@ -1805,10 +1805,13 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "programs.xml");
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
-            Utility.AddFileToZip(archiveName, "zwavenodes.xml");
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
+            }
+            if (File.Exists("zwavenodes.xml"))
+            {
+                Utility.AddFileToZip(archiveName, "zwavenodes.xml");
             }
         }
 
