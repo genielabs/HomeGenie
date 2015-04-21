@@ -257,6 +257,7 @@ namespace ZWaveLib
             MessageHeader header = (MessageHeader)((int)message[0]);
             if (header == MessageHeader.ACK)
             {
+                this.SendAck();
                 ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.ACK }));
                 if (message.Length > 1)
                 {
