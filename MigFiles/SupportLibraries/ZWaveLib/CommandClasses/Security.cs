@@ -96,7 +96,7 @@ namespace ZWaveLib.CommandClasses
                 rnd.NextBytes(controllerCurrentNonce);
             }
 
-            Utility.logMessage("ControllerCurrentNonce: " + Utility.ByteArrayToString(localControllerCurrentNonce));
+            Utility.DebugLog(DebugMessageType.Information, "ControllerCurrentNonce: " + Utility.ByteArrayToString(localControllerCurrentNonce));
             //return localControllerCurrentNonce;
         }
 
@@ -136,7 +136,7 @@ namespace ZWaveLib.CommandClasses
                 if (IsAddingNode && !IsNetworkKeySet)
                 {
                     networkKey = initialNetworkKey;
-                    Utility.logMessage("In SetupNetworkKey  - in node inclusion mode.");
+                    Utility.DebugLog(DebugMessageType.Information, "In SetupNetworkKey  - in node inclusion mode.");
                 }
                 else
                 {
@@ -148,9 +148,9 @@ namespace ZWaveLib.CommandClasses
                 encryptionKey = AesWork.EncryptEcbMessage(networkKey, encryptPassword);
                 AuthorizationKey = AesWork.EncryptEcbMessage(networkKey, authPassword);
 
-                Utility.logMessage("      networkKey: " + Utility.ByteArrayToString(networkKey));
-                Utility.logMessage("   encryptionKey: " + Utility.ByteArrayToString(encryptionKey));
-                Utility.logMessage("AuthorizationKey: " + Utility.ByteArrayToString(AuthorizationKey));
+                Utility.DebugLog(DebugMessageType.Information, "      networkKey: " + Utility.ByteArrayToString(networkKey));
+                Utility.DebugLog(DebugMessageType.Information, "   encryptionKey: " + Utility.ByteArrayToString(encryptionKey));
+                Utility.DebugLog(DebugMessageType.Information, "AuthorizationKey: " + Utility.ByteArrayToString(AuthorizationKey));
 
                 return encryptionKey;
             }
@@ -182,7 +182,7 @@ namespace ZWaveLib.CommandClasses
             switch (cmdType)
             {
             case (byte)SecurityCommand.SupportedReport:
-                Utility.logMessage("Received COMMAND_SUPPORTED_REPORT for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_SUPPORTED_REPORT for node: " + node.Id);
                 /* this is a list of CommandClasses that should be Encrypted.
                  * and it might contain new command classes that were not present in the NodeInfoFrame
                  * so we have to run through, mark existing Command Classes as SetSecured (so SendMsg in the Driver
@@ -198,7 +198,7 @@ namespace ZWaveLib.CommandClasses
                 break;
 
             case (byte)SecurityCommand.SchemeReport:
-                Utility.logMessage("Received COMMAND_SCHEME_REPORT for node: " + node.Id + ", " + (startOffset + 1));
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_SCHEME_REPORT for node: " + node.Id + ", " + (startOffset + 1));
                 int schemes = message[startOffset + 1];
                 SecurityData nodeSecurityData = GetSecurityData(node);
                 if (nodeSecurityData.SchemeAgreed)
@@ -212,19 +212,19 @@ namespace ZWaveLib.CommandClasses
                 }
                 else
                 {
-                    Utility.logMessage("   No common security scheme.  The device will continue as an unsecured node.");
+                    Utility.DebugLog(DebugMessageType.Information, "   No common security scheme.  The device will continue as an unsecured node.");
                 }
                 break;
 
             case (byte)SecurityCommand.NonceGet:
-                Utility.logMessage("Received COMMAND_NONCE_GET for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_NONCE_GET for node: " + node.Id);
 
                 /* the Device wants to send us a Encrypted Packet, and thus requesting for our latest NONCE */
                 SendNonceReport(node);
                 break;
 
             case (byte)SecurityCommand.MessageEncap:
-                Utility.logMessage("Received COMMAND_MESSAGE_ENCAP for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_MESSAGE_ENCAP for node: " + node.Id);
 
                 /* We recieved a Encrypted single packet from the Device. Decrypt it. */
                 decryptedMessage = DecryptMessage(node, message, startOffset);
@@ -233,14 +233,14 @@ namespace ZWaveLib.CommandClasses
                 break;
 
             case (byte)SecurityCommand.NonceReport:
-                Utility.logMessage("Received COMMAND_NONCE_REPORT for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_NONCE_REPORT for node: " + node.Id);
 
                 /* we recieved a NONCE from a device, so assume that there is something in a queue to send out */
                 ProcessNonceReport(node, message, startOffset);
                 break;
 
             case (byte)SecurityCommand.MessageEncapNonceGet:
-                Utility.logMessage("Received COMMAND_MESSAGE_ENCAP_NONCE_GET for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_MESSAGE_ENCAP_NONCE_GET for node: " + node.Id);
 
                 /* we recieved a encrypted packet from the device, and the device is also asking us to send a
                      * new NONCE to it, hence there must be multiple packets.*/
@@ -252,7 +252,7 @@ namespace ZWaveLib.CommandClasses
                 break;
 
             case (byte)SecurityCommand.NetworkKeySet:
-                Utility.logMessage("Received COMMAND_NETWORK_KEY_SET for node: " + node.Id + ", " + (startOffset + 1));
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_NETWORK_KEY_SET for node: " + node.Id + ", " + (startOffset + 1));
 
                 /* we shouldn't get a NetworkKeySet from a node if we are the controller
                      * as we send it out to the Devices
@@ -260,7 +260,7 @@ namespace ZWaveLib.CommandClasses
                 break;
 
             case (byte)SecurityCommand.NetworkKeyVerify:
-                Utility.logMessage("Received COMMAND_NETWORK_KEY_VERIFY for node: " + node.Id + ", " + (startOffset + 1));
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_NETWORK_KEY_VERIFY for node: " + node.Id + ", " + (startOffset + 1));
 
                 /*
                      * if we can decrypt this packet, then we are assured that our NetworkKeySet is successfull
@@ -270,7 +270,7 @@ namespace ZWaveLib.CommandClasses
                 break;
 
             case (byte)SecurityCommand.SchemeInherit:
-                Utility.logMessage("Received COMMAND_SCHEME_INHERIT for node: " + node.Id);
+                Utility.DebugLog(DebugMessageType.Information, "Received COMMAND_SCHEME_INHERIT for node: " + node.Id);
                 /* only used in a Controller Replication Type enviroment. */
                 break;
 
@@ -317,15 +317,15 @@ namespace ZWaveLib.CommandClasses
         {
             int length = message[5];
 
-            Utility.logMessage("In sendMsg - SecurityHandler");
+            Utility.DebugLog(DebugMessageType.Information, "In sendMsg - SecurityHandler");
 
             if (message.Length < 7)
             {
-                Utility.logMessage("Message too short");
+                Utility.DebugLog(DebugMessageType.Information, "Message too short");
             }
             if (message[3] != 0x13)
             {
-                Utility.logMessage("Invalid Message type");
+                Utility.DebugLog(DebugMessageType.Information, "Invalid Message type");
             }
 
             if (length > 28)
@@ -391,12 +391,12 @@ namespace ZWaveLib.CommandClasses
         {
             var nodeSecurityData = GetSecurityData(node);
 
-            Utility.logMessage("In sendRequestNonce - SecurityHandler");
+            Utility.DebugLog(DebugMessageType.Information, "In sendRequestNonce - SecurityHandler");
 
             if (nodeSecurityData.IsWaitingForNonce)
                 return false;
 
-            Utility.logMessage("In sendRequestNonce - not waiting for Nonce - SecurityHandler");
+            Utility.DebugLog(DebugMessageType.Information, "In sendRequestNonce - not waiting for Nonce - SecurityHandler");
             nodeSecurityData.IsWaitingForNonce = true;
 
             node.SendRequest(new byte[] {
@@ -449,7 +449,7 @@ namespace ZWaveLib.CommandClasses
         {
             SecurityData nodeSecurityData = GetSecurityData(node);
 
-            Utility.logMessage("In EncryptMessage - secure_payload [" + nodeSecurityData.SecurePayload.Count + "]  - " + nodeSecurityData.DeviceNonceTimer.ElapsedMilliseconds);
+            Utility.DebugLog(DebugMessageType.Information, "In EncryptMessage - secure_payload [" + nodeSecurityData.SecurePayload.Count + "]  - " + nodeSecurityData.DeviceNonceTimer.ElapsedMilliseconds);
 
             // if we get true we need to wait for the new Nonce
             // if we get false we need to proceed
@@ -516,11 +516,11 @@ namespace ZWaveLib.CommandClasses
 
                 encryptedPayload = AesWork.EncryptOfbMessage(nodeSecurityData.EncryptionKey, initializationVector, plaintextmsg);
 
-                Utility.logMessage("authKey " + Utility.ByteArrayToString(nodeSecurityData.AuthorizationKey));
-                Utility.logMessage("EncryptKey " + Utility.ByteArrayToString(nodeSecurityData.EncryptionKey));
-                Utility.logMessage("Input Packet: " + Utility.ByteArrayToString(plaintextmsg));
-                Utility.logMessage("IV " + Utility.ByteArrayToString(initializationVector));
-                Utility.logMessage("encryptedPayload " + Utility.ByteArrayToString(encryptedPayload));
+                Utility.DebugLog(DebugMessageType.Information, "authKey " + Utility.ByteArrayToString(nodeSecurityData.AuthorizationKey));
+                Utility.DebugLog(DebugMessageType.Information, "EncryptKey " + Utility.ByteArrayToString(nodeSecurityData.EncryptionKey));
+                Utility.DebugLog(DebugMessageType.Information, "Input Packet: " + Utility.ByteArrayToString(plaintextmsg));
+                Utility.DebugLog(DebugMessageType.Information, "IV " + Utility.ByteArrayToString(initializationVector));
+                Utility.DebugLog(DebugMessageType.Information, "encryptedPayload " + Utility.ByteArrayToString(encryptedPayload));
 
                 for (int a = 0; a < payload.length + 1; ++a)
                 {
@@ -541,7 +541,7 @@ namespace ZWaveLib.CommandClasses
                 }
 
                 node.SendRequest(t_message);
-                Utility.logMessage("In EncryptMessage - message sent");
+                Utility.DebugLog(DebugMessageType.Information, "In EncryptMessage - message sent");
 
                 if ((nodeSecurityData.IsNetworkKeySet == false) && payload.message[0] == (byte)CommandClass.Security && payload.message[1] == (byte)SecurityCommand.NetworkKeySet)
                 {
@@ -559,14 +559,14 @@ namespace ZWaveLib.CommandClasses
         {
             SecurityData nodeSecurityData = GetSecurityData(node);
 
-            Utility.logMessage("In DecryptMessage - SecurityHandler");
+            Utility.DebugLog(DebugMessageType.Information, "In DecryptMessage - SecurityHandler");
             if (nodeSecurityData.ControllerNonceTimer.ElapsedMilliseconds > 10000)
             {
-                Utility.logMessage("Received the nonce  too late'" + nodeSecurityData.ControllerNonceTimer.ElapsedMilliseconds + "' > 10000");
+                Utility.DebugLog(DebugMessageType.Information, "Received the nonce  too late'" + nodeSecurityData.ControllerNonceTimer.ElapsedMilliseconds + "' > 10000");
                 return null;
             }
 
-            //            Utility.logMessage("Message to be decrypted: " + Utility.ByteArrayToString(message));
+            //            Utility.DebugLog(DebugMessageType.Information, "Message to be decrypted: " + Utility.ByteArrayToString(message));
 
             // Get IV from inbound packet
             byte[] iv = new byte[16];
@@ -581,10 +581,10 @@ namespace ZWaveLib.CommandClasses
             Array.Copy(message, 8 + start + 1, encryptedpacket, 0, encryptedpackagesize);
 
             byte[] decryptedpacket = AesWork.EncryptOfbMessage(nodeSecurityData.EncryptionKey, iv, encryptedpacket);
-            Utility.logMessage("Message          " + Utility.ByteArrayToString(message));
-            Utility.logMessage("IV               " + Utility.ByteArrayToString(iv));
-            //Utility.logMessage("Encrypted Packet " + Utility.ByteArrayToString(encryptedpacket));
-            Utility.logMessage("Decrypted Packet " + Utility.ByteArrayToString(decryptedpacket));
+            Utility.DebugLog(DebugMessageType.Information, "Message          " + Utility.ByteArrayToString(message));
+            Utility.DebugLog(DebugMessageType.Information, "IV               " + Utility.ByteArrayToString(iv));
+            //Utility.DebugLog(DebugMessageType.Information, "Encrypted Packet " + Utility.ByteArrayToString(encryptedpacket));
+            Utility.DebugLog(DebugMessageType.Information, "Decrypted Packet " + Utility.ByteArrayToString(decryptedpacket));
 
             byte[] mac = GenerateAuthentication(nodeSecurityData.AuthorizationKey, message, start, _length, node.Id, 0x01, iv);
 
@@ -592,7 +592,7 @@ namespace ZWaveLib.CommandClasses
             Array.Copy(message, start + 8 + encryptedpackagesize + 2, e_mac, 0, 8);
             if (!Enumerable.SequenceEqual(mac, e_mac))
             {
-                Utility.logMessage("Computed mac " + Utility.ByteArrayToString(mac) + " does not match the provider mac " + Utility.ByteArrayToString(e_mac) + ". Dropping.");
+                Utility.DebugLog(DebugMessageType.Information, "Computed mac " + Utility.ByteArrayToString(mac) + " does not match the provider mac " + Utility.ByteArrayToString(e_mac) + ". Dropping.");
                 if (nodeSecurityData.SecurePayload.Count > 1)
                     RequestNonce(node);
                 return null;
@@ -603,7 +603,7 @@ namespace ZWaveLib.CommandClasses
                 byte[] msg = new byte[decryptedpacket.Length - 1];
                 Array.Copy(decryptedpacket, 1, msg, 0, msg.Length);
 
-                Utility.logMessage("Processing Internally: " + Utility.ByteArrayToString(msg));
+                Utility.DebugLog(DebugMessageType.Information, "Processing Internally: " + Utility.ByteArrayToString(msg));
 
             }
             else
@@ -615,12 +615,12 @@ namespace ZWaveLib.CommandClasses
 
                 msg[6] = (byte)(msg.Length - 7);
 
-                Utility.logMessage("Forwarding: " + Utility.ByteArrayToString(msg));
+                Utility.DebugLog(DebugMessageType.Information, "Forwarding: " + Utility.ByteArrayToString(msg));
 
                 /* send to the Command Class for Proecssing */
-                Utility.logMessage("Received External Command Class: " + Utility.ByteArrayToString(new byte[] { decryptedpacket[1] }));
+                Utility.DebugLog(DebugMessageType.Information, "Received External Command Class: " + Utility.ByteArrayToString(new byte[] { decryptedpacket[1] }));
 //                node.MessageRequestHandler(node.pController, msg);
-            Utility.logMessage("In DecryptMessage - Finished");
+            Utility.DebugLog(DebugMessageType.Information, "In DecryptMessage - Finished");
 
             return msg;
         }
@@ -642,7 +642,7 @@ namespace ZWaveLib.CommandClasses
 
             byte[] buff = new byte[length - 19 + 4];
             Array.Copy(buffer, buff, length - 19 + 4);
-            //            Utility.logMessage("Raw Auth (minus IV)" + Utility.ByteArrayToString(buff));
+            //            Utility.DebugLog(DebugMessageType.Information, "Raw Auth (minus IV)" + Utility.ByteArrayToString(buff));
 
             tmpauth = AesWork.EncryptEcbMessage(authorizationKey, iv);
 
@@ -681,7 +681,7 @@ namespace ZWaveLib.CommandClasses
             byte[] auth = new byte[8];
             Array.Copy(tmpauth, auth, 8);
 
-            //            Utility.logMessage("Computed Auth " + Utility.ByteArrayToString(auth));
+            //            Utility.DebugLog(DebugMessageType.Information, "Computed Auth " + Utility.ByteArrayToString(auth));
 
             return auth;
         }

@@ -26,6 +26,13 @@ using System.Collections.Generic;
 namespace ZWaveLib
 {
 
+    public enum DebugMessageType
+    {
+        Information,
+        Warning,
+        Error
+    }
+
     public class Utility
     {
         
@@ -76,9 +83,20 @@ namespace ZWaveLib
             return byteArray;
         }
 
-		// usefull to be used in debugging
-        public static void logMessage(string message) {
-//            Console.WriteLine("----  " + System.Threading.Thread.CurrentThread.ManagedThreadId + " -- " + message);
+        public static void DebugLog(DebugMessageType dtype, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            if (dtype == DebugMessageType.Warning)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (dtype == DebugMessageType.Error)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            }
+            //Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }

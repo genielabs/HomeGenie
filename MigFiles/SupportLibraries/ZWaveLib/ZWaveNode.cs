@@ -92,9 +92,6 @@ namespace ZWaveLib
 
         public virtual bool MessageRequestHandler(byte[] receivedMessage)
         {
-            //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
-            //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
-
             ZWaveEvent messageEvent = null;
             int messageLength = receivedMessage.Length;
 
@@ -111,7 +108,7 @@ namespace ZWaveLib
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("   commandClass:" + commandClass.ToString("X2") + " not implemented: " + Utility.ByteArrayToString(message));
+                    Utility.DebugLog(DebugMessageType.Error, "Error in Command Class " + commandClass.ToString("X2") + " GetEvent: " + ex.Message + "\n" + ex.StackTrace);
                 }
             }
 
@@ -135,8 +132,7 @@ namespace ZWaveLib
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
-                                              ex.Message + "\n" + ex.StackTrace);
+                            Utility.DebugLog(DebugMessageType.Error, "Exception occurred during ManufacturerSpecificResponse callback: " + ex.Message + "\n" + ex.StackTrace);
                         }
                     }
                 }
@@ -152,7 +148,9 @@ namespace ZWaveLib
                     if (messageLength > 7 && /* cmd_class */ (receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific || receivedMessage[7] == (byte) CommandClass.Security))
                         log = false;
                     if (log)
-                        Console.WriteLine("ZWaveLib UNHANDLED message: " + Utility.ByteArrayToString(receivedMessage));
+                    {
+                        Utility.DebugLog(DebugMessageType.Error, "Unhandled message: " + Utility.ByteArrayToString(receivedMessage));
+                    }
                 }
             }
 

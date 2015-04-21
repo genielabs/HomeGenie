@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿/*
 This file is part of HomeGenie Project source code.
 HomeGenie is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -113,6 +113,12 @@ namespace ZWaveLib
             byte[] MSG_ACKNOWLEDGE = new byte[] { (byte)MessageHeader.ACK };
             serialPort.SendMessage(MSG_ACKNOWLEDGE);
         }
+        
+        public void SendNack()
+        {
+            byte[] MSG_NOACKNOWLEDGE = new byte[] { (byte)MessageHeader.NAK };
+            serialPort.SendMessage(MSG_NOACKNOWLEDGE);
+        }
 
         public byte SendMessage(ZWaveMessage message, bool disableCallback = false)
         {
@@ -219,7 +225,7 @@ namespace ZWaveLib
 
         private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            Console.WriteLine("ZWaveLib ERROR: " + e.EventType.ToString() + " => " + e.ToString());
+            Utility.DebugLog(DebugMessageType.Error, e.EventType.ToString() + " => " + e.ToString());
         }
 
         private static byte GenerateChecksum(byte[] data)
@@ -238,18 +244,12 @@ namespace ZWaveLib
 
         private static bool VerifyChecksum(byte[] data)
         {
-            if (data.Length < 4)
-                return true;
-            int offset = 1;
-            byte returnValue = data[offset];
-            for (int i = offset + 1; i < data.Length - 1; i++)
+            uint checksum = 0xff;
+            for( int i = 1; i < (data.Length - 1); ++i)
             {
-                // Xor bytes
-                returnValue ^= data[i];
-            }
-            // Not result
-            returnValue = (byte)(~returnValue);
-            return (returnValue == data[data.Length - 1]);
+                checksum ^= data[i];
+            }        
+            return (checksum == data[data.Length - 1]);
         }
 
         private void ReceiveMessage(byte[] message)
@@ -293,11 +293,13 @@ namespace ZWaveLib
                 }
                 else if (VerifyChecksum(message))
                 {
+                    this.SendAck();
                     ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(message));
                 }
                 else
                 {
-                    Console.WriteLine("\nZWaveLib: bad checksum message " + Utility.ByteArrayToString(message) + "\n");
+                    this.SendNack();
+                    Utility.DebugLog(DebugMessageType.Warning, "Bad checksum message " + Utility.ByteArrayToString(message));
                 }
             }
             else if (header == MessageHeader.CAN)
@@ -308,7 +310,7 @@ namespace ZWaveLib
             }
             else
             {
-                Console.WriteLine("ZWaveLib: unhandled message " + Utility.ByteArrayToString(message));
+                Utility.DebugLog(DebugMessageType.Warning, "Unhandled message " + Utility.ByteArrayToString(message));
                 // ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)ZWaveMessageHeader.NAK }));
             }
             if (nextMessage != null)

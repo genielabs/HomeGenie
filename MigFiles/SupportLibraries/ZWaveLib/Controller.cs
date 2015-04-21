@@ -110,7 +110,7 @@ namespace ZWaveLib
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("ZWaveLib: ERROR in _zwavemessagereceived(...) " + ex.Message + "\n" + ex.StackTrace);
+                    Utility.DebugLog(DebugMessageType.Error, "Exception occurred in _zwavemessagereceived(...) " + ex.Message + "\n" + ex.StackTrace);
                 }
             });
             LoadNodesConfig();
@@ -282,20 +282,19 @@ namespace ZWaveLib
                 var elapsed = (DateTime.UtcNow - lastMessageTimestamp);
                 if (elapsed.TotalSeconds <= 2 && lastMessage.SequenceEqual(args.Message))
                 {
-                    Utility.logMessage(" lastMessage: " + Utility.ByteArrayToString(lastMessage));
-                    Utility.logMessage("args.Message: " + Utility.ByteArrayToString(args.Message));
+                    //Utility.DebugLog(DebugMessageType.Information, " lastMessage: " + Utility.ByteArrayToString(lastMessage));
+                    //Utility.DebugLog(DebugMessageType.Information, "args.Message: " + Utility.ByteArrayToString(args.Message));
                     repeated = true;
                 }
             }
             lastMessageTimestamp = DateTime.UtcNow;
             lastMessage = new byte[args.Message.Length];
-            Utility.logMessage(" lastMessage2: " + Utility.ByteArrayToString(lastMessage));
-            Utility.logMessage("args.Message2: " + Utility.ByteArrayToString(args.Message));
+            //Utility.DebugLog(DebugMessageType.Information, " lastMessage2: " + Utility.ByteArrayToString(lastMessage));
+            //Utility.DebugLog(DebugMessageType.Information, "args.Message2: " + Utility.ByteArrayToString(args.Message));
             Buffer.BlockCopy(args.Message, 0, lastMessage, 0, args.Message.Length * sizeof(byte));
             if (repeated)
             {
-                zwavePort.SendAck();
-                Console.WriteLine("ZWaveLib: repeated message discarded.");
+                Utility.DebugLog(DebugMessageType.Warning, "Repeated message discarded.");
                 return;
             }
             //
@@ -306,14 +305,12 @@ namespace ZWaveLib
                 switch (zwaveHeader)
                 {
                 case MessageHeader.CAN:
-                    zwavePort.SendAck();
                     // RESEND
-                    //Console.WriteLine("ZWaveLib: received CAN, resending last message");
+                    //Utility.DebugLog(DebugMessageType.Warning, "Received CAN, resending last message");
                     //zp.ResendLastMessage();
                     break;
 
                 case MessageHeader.ACK:
-                    zwavePort.SendAck();
                     break;
 
                 case MessageHeader.SOF: // start of zwave frame
@@ -329,7 +326,6 @@ namespace ZWaveLib
                     switch (msgType)
                     {
                     case MessageType.Request:
-                        zwavePort.SendAck();
 
                         if (devices.Count == 0)
                             break;
@@ -344,7 +340,6 @@ namespace ZWaveLib
                             nodeOperation = args.Message[5];
                             if (nodeOperation == (byte)NodeFunctionStatus.AddNodeAddingSlave)
                             {
-                                //Console.WriteLine("\n\nADDING NODE SLAVE {0}\n     ->   ", zp.ByteArrayToString(args.Message));
                                 nodeOperationIdCheck = args.Message[6];
                                 var newNode = CreateDevice(nodeOperationIdCheck, 0x00);
                                 // Extract node information frame
@@ -375,7 +370,6 @@ namespace ZWaveLib
                             {
                                 if (nodeOperationIdCheck == args.Message[6])
                                 {
-                                    //Console.WriteLine("\n\nADDING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
                                     Thread.Sleep(500);
                                     GetNodeCapabilities(args.Message[6]);
                                     var newNode = devices.Find(n => n.Id == args.Message[6]);
@@ -385,7 +379,7 @@ namespace ZWaveLib
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.AddNodeFailed)
                             {
-                                //Console.WriteLine("\n\nADDING NODE FAIL {0}\n\n", args.Message[6]);
+                                Utility.DebugLog(DebugMessageType.Warning, "ADDING NODE FAILED (" + args.Message[6] + ")");
                             }
                             break;
 
@@ -394,21 +388,19 @@ namespace ZWaveLib
                             nodeOperation = args.Message[5];
                             if (nodeOperation == (byte)NodeFunctionStatus.RemoveNodeRemovingSlave)
                             {
-                                //Console.WriteLine("\n\nREMOVING NODE SLAVE {0}\n\n", args.Message[6]);
                                 nodeOperationIdCheck = args.Message[6];
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.RemoveNodeDone)
                             {
                                 if (nodeOperationIdCheck == args.Message[6])
                                 {
-                                    //Console.WriteLine("\n\nREMOVING NODE DONE {0} {1}\n\n", args.Message[6], callbackid);
                                     RemoveDevice(args.Message[6]);
                                 }
                                 OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryEnd));
                             }
                             else if (nodeOperation == (byte)NodeFunctionStatus.RemoveNodeFailed)
                             {
-                                //Console.WriteLine("\n\nREMOVING NODE FAIL {0}\n\n", args.Message[6]);
+                                Utility.DebugLog(DebugMessageType.Warning, "REMOVING NODE FAILED (" + args.Message[6] + ")");
                             }
                             break;
 
@@ -416,22 +408,20 @@ namespace ZWaveLib
 
                             sourceNodeId = args.Message[5];
                             var node = devices.Find(n => n.Id == sourceNodeId);
-                            /* TODO: Further investigate on this...
-                             * This piece of code was causing the creation of non-existent random nodes,
-                             * 
-                            if (node == null)
+                            if (node != null)
                             {
-                                node = CreateDevice(sourceNodeId, 0x00);
-                                GetNodeCapabilities(sourceNodeId);
+                                try
+                                {
+                                    node.MessageRequestHandler(args.Message);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Utility.DebugLog(DebugMessageType.Error, "Exception occurred in node.MessageRequestHandler: " + ex.Message + "\n" + ex.StackTrace);
+                                }
                             }
-                            */
-                            try
+                            else
                             {
-                                node.MessageRequestHandler(args.Message);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("# " + ex.Message + "\n" + ex.StackTrace);
+                                Utility.DebugLog(DebugMessageType.Error, "Unknown node id " + sourceNodeId);
                             }
                             break;
 
@@ -477,7 +467,6 @@ namespace ZWaveLib
                             {
                                 // we don't need to exclude the last 2 CommandClasses
                                 byte[] nodeInfo = new byte[nifLength];
-                                //Console.WriteLine(ByteArrayToString(args.Message));
                                 Array.Copy(args.Message, 7, nodeInfo, 0, nifLength);
                                 znode.NodeInformationFrame = nodeInfo;
                                 if (znode.SupportCommandClass(CommandClass.Security))
@@ -493,7 +482,7 @@ namespace ZWaveLib
                             break;
 
                         default:
-                            Console.WriteLine("\nUNHANDLED Z-Wave REQUEST\n     " + Utility.ByteArrayToString(args.Message) + "\n");
+                            Utility.DebugLog(DebugMessageType.Warning, "Unhandled REQUEST " + Utility.ByteArrayToString(args.Message));
                             break;
 
                         }
@@ -517,14 +506,14 @@ namespace ZWaveLib
                             // TODO: shall we do something here?
                             break;
                         default:
-                            Console.WriteLine("\nUNHANDLED Z-Wave RESPONSE\n     " + Utility.ByteArrayToString(args.Message) + "\n");
+                            Utility.DebugLog(DebugMessageType.Warning, "Unhandled RESPONSE " + Utility.ByteArrayToString(args.Message));
                             break;
                         }
 
                         break;
 
                     default:
-                        Console.WriteLine("\nUNHANDLED Z-Wave message TYPE\n     " + Utility.ByteArrayToString(args.Message) + "\n");
+                        Utility.DebugLog(DebugMessageType.Warning, "Unhandled MESSAGE TYPE " + Utility.ByteArrayToString(args.Message));
                         break;
                     }
 
@@ -535,7 +524,7 @@ namespace ZWaveLib
             catch (Exception ex)
             {
 
-                Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                Utility.DebugLog(DebugMessageType.Error, "Exception occurred :" + ex.Message + "\n" + ex.StackTrace);
 
             }
         }
@@ -569,27 +558,19 @@ namespace ZWaveLib
                 try
                 {
                     var node = devices.Find(n => n.Id == currentCommandTargetNode);
-                    // TODO: node == null should not happen, deprecate this if block
+                    // TODO: node == null should not happen, deprecate this "if" block
                     if (node == null)
                     {
-                        //Console.WriteLine("Z-Wave Adding node " + currentCommandTargetNode + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
                         node = CreateDevice(currentCommandTargetNode, receivedMessage[8]);
                         devices.Add(node);
                     }
-                    //
                     node.BasicClass = receivedMessage[7];
                     node.GenericClass = receivedMessage[8];
                     node.SpecificClass = receivedMessage[9];
-                    //
-                    //if (node.NodeId != 1)
-                    //{
-                    //Console.WriteLine("Z-Wave Updating node " + node.NodeId + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
-                    //}
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Z-Wave ERROR adding node : " + e.Message + "\n" + e.StackTrace);
-                    //System.Diagnostics.Debugger.Break();
+                    Utility.DebugLog(DebugMessageType.Error, "Exception occurred while adding node: " + e.Message + "\n" + e.StackTrace);
                 }
                 nodeCapabilityAck.Set();
             }
@@ -603,7 +584,6 @@ namespace ZWaveLib
                 var node = devices.Find(n => n.Id == i);
                 if (node == null)
                 {
-                    //Console.WriteLine("Z-Wave Adding node " + i + " Class[ Basic=" + receivedMessage[7].ToString("X2") + " Generic=" + ((GenericType)receivedMessage[8]).ToString() + " Specific=" + receivedMessage[9].ToString("X2") + " ]");
                     devices.Add(CreateDevice(i, 0x00));
                 }
                 else
@@ -639,7 +619,6 @@ namespace ZWaveLib
                     {
                         if ((receivedMessage[i] & ((byte)Math.Pow(2, j))) == ((byte)Math.Pow(2, j)))
                         {
-                            //Console.WriteLine(this.GetType().Name.ToString() + " Node id: " + k + " discovered");
                             nodeList.Add(k);
                         }
                     }

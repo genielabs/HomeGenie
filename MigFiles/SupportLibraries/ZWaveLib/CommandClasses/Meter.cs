@@ -37,8 +37,15 @@ namespace ZWaveLib.CommandClasses
             byte cmdType = message[1];
             if (cmdType == (byte)Command.MeterReport)
             {
-                EnergyValue energy = EnergyValue.Parse(message);
-                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
+                if (message[4] == 0x00)
+                {
+                    EnergyValue energy = EnergyValue.Parse(message);
+                    nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
+                }
+                else
+                {
+                    Utility.DebugLog(DebugMessageType.Warning, "Unexpected data for Command Class Meter, ignoring message!");
+                }
             }
             return nodeEvent;
         }
