@@ -37,14 +37,11 @@ namespace ZWaveLib.CommandClasses
             byte cmdType = message[1];
             if (cmdType == (byte)Command.MeterReport)
             {
-                if (message[4] == 0x00)
+                EnergyValue energy = EnergyValue.Parse(message);
+                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
+                if (energy.Value > 2000)
                 {
-                    EnergyValue energy = EnergyValue.Parse(message);
-                    nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
-                }
-                else
-                {
-                    Utility.DebugLog(DebugMessageType.Warning, "Unexpected data for Command Class Meter, ignoring message!");
+                    Utility.DebugLog(DebugMessageType.Warning, "Suspect high value parsed (wrongly?) from Meter Report: " + energy.Value + " " + energy.EventType + ".");
                 }
             }
             return nodeEvent;

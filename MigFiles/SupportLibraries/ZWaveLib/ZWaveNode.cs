@@ -170,7 +170,7 @@ namespace ZWaveLib
         public bool IsSecuredCommandClass(CommandClass c)
         {
             bool isSecured = false;
-            if (this.NodeInformationFrame != null)
+            if (this.SecuredNodeInformationFrame != null)
             {
                 isSecured = (Array.IndexOf(this.SecuredNodeInformationFrame, (byte)c) >= 0);
             }

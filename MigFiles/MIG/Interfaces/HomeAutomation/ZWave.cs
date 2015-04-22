@@ -687,9 +687,10 @@ namespace MIG.Interfaces.HomeAutomation
                     DoorLock.Get(node);
                 }
             }
-            catch
+            catch (Exception e)
             {
                 if (eventValue != "") raiseEvent = true;
+                Console.WriteLine("ZWave Interface Exception: " + e.Message + "\n" + e.StackTrace);
             }
             //
             if (raiseEvent && InterfacePropertyChangedAction != null)
