@@ -34,6 +34,7 @@ using Raspberry;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using HomeGenie.Service.Constants;
+using HomeGenie.Service.Logging;
 
 namespace HomeGenie
 {
@@ -47,7 +48,6 @@ namespace HomeGenie
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
 
-            Console.OutputEncoding = Encoding.UTF8;
             /* Change current culture
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = culture;
@@ -193,17 +193,34 @@ namespace HomeGenie
             catch { }
         }
 
-        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) {
-            HomeGenieService.LogEvent(new HomeGenie.Data.LogEntry() {
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e) 
+        {
+            var logEntry = new HomeGenie.Data.LogEntry() {
                 Domain = Domains.HomeAutomation_HomeGenie,
-                Source = "UnhandledExceptionTrapper",
-                Description = e.ExceptionObject.ToString(),
-                Property = "HomeGenie.UnhandledException",
+                Source = "Trapper",
+                Description = "Unhandled Exception",
+                Property = "Error.Exception",
                 Value = e.ExceptionObject.ToString()
-            });
+            };
+            try
+            {
+                // try broadcast first
+                _homegenie.LogBroadcastEvent(
+                    logEntry.Domain,
+                    logEntry.Source,
+                    logEntry.Description,
+                    logEntry.Property,
+                    logEntry.Value
+                );
+            }
+            catch 
+            {
+                HomeGenieService.LogEvent(logEntry);
+            }
         }
 
     }
+
 }
 
 
