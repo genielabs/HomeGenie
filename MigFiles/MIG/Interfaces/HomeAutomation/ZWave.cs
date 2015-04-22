@@ -615,7 +615,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_MODESET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    Mode mode = (Mode)Enum.Parse(typeof(Mode), request.GetOption(0));
+                    ThermostatMode.Value mode = (ThermostatMode.Value)Enum.Parse(typeof(ThermostatMode.Value), request.GetOption(0));
                     //
                     raiseEvent = true;
                     eventParameter = "Thermostat.Mode";
@@ -626,13 +626,13 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    SetPointType mode = (SetPointType)Enum.Parse(typeof(SetPointType), request.GetOption(0));
+                    ThermostatSetPoint.Value mode = (ThermostatSetPoint.Value)Enum.Parse(typeof(ThermostatSetPoint.Value), request.GetOption(0));
                     ThermostatSetPoint.Get(node, mode);
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    SetPointType mode = (SetPointType)Enum.Parse(typeof(SetPointType), request.GetOption(0));
+                    ThermostatSetPoint.Value mode = (ThermostatSetPoint.Value)Enum.Parse(typeof(ThermostatSetPoint.Value), request.GetOption(0));
                     double temperature = double.Parse(request.GetOption(1).Replace(',', '.'), CultureInfo.InvariantCulture);
                     //
                     raiseEvent = true;
@@ -649,7 +649,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.THERMOSTAT_FANMODESET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    FanMode mode = (FanMode)Enum.Parse(typeof(FanMode), request.GetOption(0));
+                    ThermostatFanMode.Value mode = (ThermostatFanMode.Value)Enum.Parse(typeof(ThermostatFanMode.Value), request.GetOption(0));
                     //
                     raiseEvent = true;
                     eventParameter = "Thermostat.FanMode";
@@ -678,8 +678,8 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.DOORLOCK_SET)
                 {
                     var node = controller.GetDevice((byte)int.Parse(nodeId));
-                    var level = int.Parse(request.GetOption(0));
-                    DoorLock.Set(node, level);
+                    DoorLock.Value mode = (DoorLock.Value)Enum.Parse(typeof(DoorLock.Value), request.GetOption(0));
+                    DoorLock.Set(node, mode);
                 }
                 else if (command == Command.DOORLOCK_GET)
                 {
@@ -977,17 +977,8 @@ namespace MIG.Interfaces.HomeAutomation
                 case EventParameter.NodeInfo:
                     path = "ZWaveNode.NodeInfo";
                     break;
-                case EventParameter.Generic:
+                case EventParameter.SensorGeneric:
                     path = ModuleParameters.MODPAR_SENSOR_GENERIC;
-                    break;
-                case EventParameter.AlarmGeneric:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
-                    break;
-                case EventParameter.AlarmDoorWindow:
-                    path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
-                    break;
-                case EventParameter.AlarmTampered:
-                    path = ModuleParameters.MODPAR_SENSOR_TAMPER;
                     break;
                 case EventParameter.SensorTemperature:
                     path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
@@ -1000,6 +991,24 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case EventParameter.SensorMotion:
                     path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
+                    break;
+                case EventParameter.AlarmGeneric:
+                    path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
+                    // Translate generic alarm into specific Door Lock event values if node is an entry control type device
+                    if ((sender as ZWaveNode).GenericClass == (byte)GenericType.EntryControl)
+                    {
+                        // value == 1   Locked
+                        // value == 2   Unlocked
+                        // value == 5   Locked from outside
+                        // value == 6   Unlocked by user with id message[16]
+                        // value == 16  Unatuthorized unlock attempted
+                    }
+                    break;
+                case EventParameter.AlarmDoorWindow:
+                    path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
+                    break;
+                case EventParameter.AlarmTampered:
+                    path = ModuleParameters.MODPAR_SENSOR_TAMPER;
                     break;
                 case EventParameter.AlarmSmoke:
                     path = ModuleParameters.MODPAR_SENSOR_ALARM_SMOKE;
@@ -1015,6 +1024,10 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case EventParameter.AlarmFlood:
                     path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
+                    break;
+                case EventParameter.DoorLockStatus:
+                    path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
+                    value = ((DoorLock.Value)value).ToString();
                     break;
                 case EventParameter.ManufacturerSpecific:
                     ManufacturerSpecificInfo mf = (ManufacturerSpecificInfo)value;
@@ -1098,19 +1111,19 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case EventParameter.ThermostatMode:
                     path = "Thermostat.Mode";
-                    value = ((Mode)value).ToString();
+                    value = ((ThermostatMode.Value)value).ToString();
                     break;
                 case EventParameter.ThermostatOperatingState:
                     path = "Thermostat.OperatingState";
-                    value = ((OperatingState)value).ToString();
+                    value = ((ThermostatOperatingState.Value)value).ToString();
                     break;
                 case EventParameter.ThermostatFanMode:
                     path = "Thermostat.FanMode";
-                    value = ((FanMode)value).ToString();
+                    value = ((ThermostatFanMode.Value)value).ToString();
                     break;
                 case EventParameter.ThermostatFanState:
                     path = "Thermostat.FanState";
-                    value = ((FanState)value).ToString();
+                    value = ((ThermostatFanState.Value)value).ToString();
                     break;
                 case EventParameter.ThermostatHeating:
                     path = "Thermostat.Heating";
@@ -1119,11 +1132,9 @@ namespace MIG.Interfaces.HomeAutomation
                     path = "Thermostat.SetBack";
                     break;
                 case EventParameter.ThermostatSetPoint:
-                    path = "Thermostat.SetPoint." + ((SetPointType)((dynamic)value).Type).ToString();
+                    // value stores a dynamic object with Type and Value fields: value = { Type = ..., Value = ... }
+                    path = "Thermostat.SetPoint." + ((ThermostatSetPoint.Value)((dynamic)value).Type).ToString();
                     value = ((dynamic)value).Value;
-                    break;
-                case EventParameter.DoorLockStatus:
-                    path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
                     break;
                 case EventParameter.UserCode:
                     path = "EntryControl.UserCode";

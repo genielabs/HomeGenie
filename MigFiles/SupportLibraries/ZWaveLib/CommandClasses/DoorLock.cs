@@ -19,11 +19,32 @@
  *     Author: https://github.com/snagytx
  *     Project Homepage: http://homegenie.it
  */
+using ZWaveLib.Values;
 
 namespace ZWaveLib.CommandClasses
 {
     public class DoorLock : ICommandClass
     {
+        public enum Value
+        {
+            Unsecured = 0x00,
+            UnsecuredTimeout = 0x01,
+            InsideUnsecured = 0x10,
+            InsideUnsecuredTimeout = 0x11,
+            OutsideUnsecured = 0x20,
+            OutsideUnsecuredTimeout = 0x21,
+            Secured = 0xFF
+        };
+
+        public enum Status
+        {
+            Locked = 0x01,
+            Unlocked = 0x02,
+            LockedFromOutside = 0x05,
+            UnlockedByUser = 0x06, // with id message[16]
+            UnatuthorizedUnlock = 0x0F
+        };
+
         public CommandClass GetClassId()
         {
             return CommandClass.DoorLock;
@@ -35,46 +56,9 @@ namespace ZWaveLib.CommandClasses
             byte cmdType = message[1];
             if (cmdType == (byte)Command.DoorLockReport)
             {
-                int lockState;
-                if (message[2] == 0xFF)
-                {
-                    lockState = 6;
-                }
-                else
-                {
-                    lockState = System.Convert.ToInt32(message[2].ToString("X2"));
-                }
-
-                if (lockState > 6)
-                {
-                    lockState = 7;
-                }
-
-                string resp;
-                if (lockState == 0)
-                {
-                    resp = "Unlocked";
-                }
-                else if (lockState == 6)
-                {
-                    resp = "Locked";
-                }
-                else
-                {
-                    resp = "Unknown";
-                }
-                nodeEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, resp, 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, message[2], 0);
             }
             return nodeEvent;
-        }
-
-        public static void Set(ZWaveNode node, int value)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.DoorLock, 
-                (byte)Command.DoorLockSet,
-                byte.Parse(value.ToString())
-            });
         }
 
         public static void Get(ZWaveNode node)
@@ -82,6 +66,15 @@ namespace ZWaveLib.CommandClasses
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
                 (byte)Command.DoorLockGet
+            });
+        }
+        
+        public static void Set(ZWaveNode node, Value value)
+        {
+            node.SendRequest(new byte[] { 
+                (byte)CommandClass.DoorLock, 
+                (byte)Command.DoorLockSet,
+                (byte)value
             });
         }
     }

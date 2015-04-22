@@ -38,37 +38,7 @@ namespace ZWaveLib.CommandClasses
             if (cmdType == (byte)Command.AlarmReport)
             {
                 var alarm = AlarmValue.Parse(message);
-                // Translate generic alarm into specific Door Lock event values if node is an entry control type device
-                if (node.GenericClass == (byte)GenericType.EntryControl && alarm.EventType == EventParameter.AlarmGeneric)
-                {
-                    int value = System.Convert.ToInt16(alarm.Value);
-                    alarm.EventType = EventParameter.DoorLockStatus;
-                    if (value == 1)
-                    {
-                        alarm.Text = "Locked";
-                    }
-                    else if (value == 2)
-                    {
-                        alarm.Text = "Unlocked";
-                    }
-                    else if (value == 5)
-                    {
-                        alarm.Text = "Locked from outside";
-                    }
-                    else if (value == 6)
-                    {
-                        alarm.Text = "Unlocked by user " + System.Convert.ToInt32(message[16].ToString("X2"), 16);
-                    }
-                    else if (value == 16)
-                    {
-                        alarm.Text = "Unatuthorized unlock attempted";
-                    }
-                }
-
-                if (alarm.Text.Length > 0)
-                    nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Text, 0);
-                else
-                    nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
+                nodeEvent = new ZWaveEvent(node, alarm.EventType, alarm.Value, 0);
             }
             return nodeEvent;
         }

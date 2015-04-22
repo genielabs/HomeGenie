@@ -38,7 +38,7 @@ namespace ZWaveLib.Values
 
     public class EnergyValue
     {
-        public EventParameter EventType = EventParameter.Generic;
+        public EventParameter EventType = EventParameter.SensorGeneric;
         public ZWaveEnergyScaleType Parameter = ZWaveEnergyScaleType.Unknown;
         public double Value = 0;
 

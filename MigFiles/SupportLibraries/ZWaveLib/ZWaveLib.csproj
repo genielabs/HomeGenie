@@ -61,7 +61,6 @@
     <Compile Include="CommandClasses\ThermostatFanMode.cs" />
     <Compile Include="CommandClasses\ThermostatFanState.cs" />
     <Compile Include="CommandClasses\ThermostatHeating.cs" />
-    <Compile Include="CommandClasses\ThermostatMode.cs" />
     <Compile Include="CommandClasses\ThermostatOperatingState.cs" />
     <Compile Include="CommandClasses\ThermostatSetBack.cs" />
     <Compile Include="CommandClasses\ThermostatSetPoint.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="CommandClasses\UserCode.cs" />
     <Compile Include="CommandClasses\Crc16Encapsulated.cs" />
     <Compile Include="AesWork.cs" />
+    <Compile Include="CommandClasses\ThermostatMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -36,10 +36,9 @@ namespace ZWaveLib.Values
 
     public class AlarmValue
     {
-        public EventParameter EventType = EventParameter.Generic;
+        public EventParameter EventType = EventParameter.AlarmGeneric;
         public ZWaveAlarmType Parameter = ZWaveAlarmType.Generic;
         public byte Value = 0x00;
-        public String Text = "";
 
         public static AlarmValue Parse(byte[] message)
         {
@@ -75,10 +74,6 @@ namespace ZWaveLib.Values
                     break;
                 case ZWaveAlarmType.Flood:
                     alarm.EventType = EventParameter.AlarmFlood;
-                    break;
-                //case ZWaveSensorAlarmParameter.GENERIC:
-                default:
-                    alarm.EventType = EventParameter.AlarmGeneric;
                     break;
             }
             //

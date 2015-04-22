@@ -13,10 +13,11 @@
         </div>
         <div class="ui-block-b" style="padding-top:8px;">
             <select data-ui-field="lockunlock" data-role="slider">
-                <option value="unlocked">
+                <!-- for other possible values see ZWaveLib/CommandClasses/DoorLock.cs -->
+                <option value="Unsecured">
                     Unlocked
                 </option>
-                <option value="locked">
+                <option value="Secured">
                     Locked
                 </option>
             </select>

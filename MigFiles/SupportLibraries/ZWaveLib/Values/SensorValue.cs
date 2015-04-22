@@ -59,7 +59,7 @@ namespace ZWaveLib.Values
 
     public class SensorValue
     {
-        public EventParameter EventType = EventParameter.Generic;
+        public EventParameter EventType = EventParameter.SensorGeneric;
         public ZWaveSensorParameter Parameter = ZWaveSensorParameter.Unknown;
         public double Value = 0d;
 
@@ -81,7 +81,7 @@ namespace ZWaveLib.Values
             {
                 sensor.Parameter = ZWaveSensorParameter.GeneralPurposeValue;
                 sensor.Value = zvalue.Value;
-                sensor.EventType = EventParameter.Generic;
+                sensor.EventType = EventParameter.SensorGeneric;
             }
             else if (key == (byte)ZWaveSensorParameter.Luminance)
             {
