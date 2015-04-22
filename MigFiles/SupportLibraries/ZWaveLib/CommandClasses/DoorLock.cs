@@ -36,12 +36,12 @@ namespace ZWaveLib.CommandClasses
             Secured = 0xFF
         };
 
-        public enum Status
+        public enum Alarm
         {
             Locked = 0x01,
             Unlocked = 0x02,
             LockedFromOutside = 0x05,
-            UnlockedByUser = 0x06, // with id message[16]
+            UnlockedByUser = 0x06, // with id message[16] <--- TODO: find a way to route this info
             UnatuthorizedUnlock = 0x0F
         };
 

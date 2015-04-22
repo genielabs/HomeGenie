@@ -997,11 +997,7 @@ namespace MIG.Interfaces.HomeAutomation
                     // Translate generic alarm into specific Door Lock event values if node is an entry control type device
                     if ((sender as ZWaveNode).GenericClass == (byte)GenericType.EntryControl)
                     {
-                        // value == 1   Locked
-                        // value == 2   Unlocked
-                        // value == 5   Locked from outside
-                        // value == 6   Unlocked by user with id message[16]
-                        // value == 16  Unatuthorized unlock attempted
+                        value = ((DoorLock.Alarm)value).ToString();
                     }
                     break;
                 case EventParameter.AlarmDoorWindow:
