@@ -31,6 +31,8 @@ namespace MIG.Interfaces.HomeAutomation.Commons
             "VirtualMeter.Watts";
         public static string MODPAR_STATUS_LEVEL =
             "Status.Level";
+        public static string MODPAR_STATUS_DOORLOCK =
+            "Status.DoorLock";
         public static string MODPAR_STATUS_BATTERY =
             "Status.Battery";
         public static string MODPAR_METER_KW_HOUR =

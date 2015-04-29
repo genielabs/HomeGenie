@@ -549,6 +549,8 @@
         "Media Receiver",
     "configure_module_typemediatransmitter": 
         "Media Transmitter",
+    "configure_module_doorlock": 
+        "Door Lock",
     "configure_module_featuresoptions": 
         "Features/Options",
     "configure_editprogram_files":

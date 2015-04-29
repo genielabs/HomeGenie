@@ -1,4 +1,4 @@
-/*
+﻿/*
     This file is part of HomeGenie Project source code.
 
     HomeGenie is free software: you can redistribute it and/or modify
@@ -16,60 +16,66 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
+ *     Author: https://github.com/snagytx
  *     Project Homepage: http://homegenie.it
  */
-
 using ZWaveLib.Values;
 
 namespace ZWaveLib.CommandClasses
 {
-    public class Meter : ICommandClass
+    public class DoorLock : ICommandClass
     {
+        public enum Value
+        {
+            Unsecured = 0x00,
+            UnsecuredTimeout = 0x01,
+            InsideUnsecured = 0x10,
+            InsideUnsecuredTimeout = 0x11,
+            OutsideUnsecured = 0x20,
+            OutsideUnsecuredTimeout = 0x21,
+            Secured = 0xFF
+        };
+
+        public enum Alarm
+        {
+            Locked = 0x01,
+            Unlocked = 0x02,
+            LockedFromOutside = 0x05,
+            UnlockedByUser = 0x06, // with id message[16] <--- TODO: find a way to route this info
+            UnatuthorizedUnlock = 0x0F
+        };
+
         public CommandClass GetClassId()
         {
-            return CommandClass.Meter;
+            return CommandClass.DoorLock;
         }
 
         public ZWaveEvent GetEvent(ZWaveNode node, byte[] message)
         {
             ZWaveEvent nodeEvent = null;
             byte cmdType = message[1];
-            if (cmdType == (byte)Command.MeterReport)
+            if (cmdType == (byte)Command.DoorLockReport)
             {
-                EnergyValue energy = EnergyValue.Parse(message);
-                nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
-                if (energy.Value > 2000)
-                {
-                    Utility.DebugLog(DebugMessageType.Warning, "Suspect high value parsed (wrongly?) from Meter Report: " + energy.Value + " " + energy.EventType + ".");
-                }
+                nodeEvent = new ZWaveEvent(node, EventParameter.DoorLockStatus, message[2], 0);
             }
             return nodeEvent;
         }
-        public static void Get(ZWaveNode node, byte scaleType)
+
+        public static void Get(ZWaveNode node)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterGet,
-                scaleType
+                (byte)CommandClass.DoorLock, 
+                (byte)Command.DoorLockGet
             });
         }
-
-        public static void GetSupported(ZWaveNode node)
+        
+        public static void Set(ZWaveNode node, Value value)
         {
             node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterSupportedGet
-            });
-        }
-
-        public static void Reset(ZWaveNode node)
-        {
-            node.SendRequest(new byte[] { 
-                (byte)CommandClass.Meter, 
-                (byte)Command.MeterReset
+                (byte)CommandClass.DoorLock, 
+                (byte)Command.DoorLockSet,
+                (byte)value
             });
         }
     }
 }
-

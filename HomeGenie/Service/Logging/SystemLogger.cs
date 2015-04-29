@@ -23,12 +23,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Diagnostics;
+using System.Threading;
+using System.Reflection;
 using System.Text;
 
 using HomeGenie.Data;
-using System.Reflection;
-using System.Diagnostics;
 
 namespace HomeGenie.Service.Logging
 {
@@ -81,13 +81,18 @@ namespace HomeGenie.Service.Logging
         public void WriteToLog(LogEntry logEntry)
         {
             standardOutput.WriteLine(logEntry);
-            // Lock the queue while writing to prevent contention for the log file
-            logQueue.Enqueue(logEntry);
-            // If we have reached the Queue Size then flush the Queue
-            if (logQueue.Count >= queueSize || DoPeriodicFlush())
-            {
-                FlushLog();
-            }
+            ThreadPool.QueueUserWorkItem(new WaitCallback((state)=>{
+                lock (logQueue)
+                {
+                    // Lock the queue while writing to prevent contention for the log file
+                    logQueue.Enqueue(logEntry);
+                    // If we have reached the Queue Size then flush the Queue
+                    if (logQueue.Count >= queueSize || DoPeriodicFlush())
+                    {
+                        FlushLog();
+                    }
+                }
+            }));
         }
 
         private bool DoPeriodicFlush()

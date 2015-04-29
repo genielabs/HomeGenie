@@ -27,6 +27,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
 using System.Linq;
+using System.Diagnostics;
+
 using ZWaveLib.CommandClasses;
 using ZWaveLib.Values;
 
@@ -41,7 +43,6 @@ namespace ZWaveLib
 
     public class ZWaveNode
     {
-        
         #region Private fields
 
         internal ZWavePort zwavePort;
@@ -58,6 +59,7 @@ namespace ZWaveLib
         public byte GenericClass { get; internal set; }
         public byte SpecificClass { get; internal set; }
         public byte[] NodeInformationFrame { get; internal set; }
+        public byte[] SecuredNodeInformationFrame { get; internal set; }
 
         public Dictionary<string, object> Data = new Dictionary<string, object>();
 
@@ -90,9 +92,6 @@ namespace ZWaveLib
 
         public virtual bool MessageRequestHandler(byte[] receivedMessage)
         {
-            //Console.WriteLine("\n   _z_ [" + this.NodeId + "]  " + (this.DeviceHandler != null ? this.DeviceHandler.ToString() : "!" + this.GenericClass.ToString()));
-            //Console.WriteLine("   >>> " + zp.ByteArrayToString(receivedMessage) + "\n");
-
             ZWaveEvent messageEvent = null;
             int messageLength = receivedMessage.Length;
 
@@ -103,7 +102,14 @@ namespace ZWaveLib
                 var cc = CommandClassFactory.GetCommandClass(commandClass);
                 byte[] message = new byte[commandLength];
                 Array.Copy(receivedMessage, 7, message, 0, commandLength);
-                messageEvent = cc.GetEvent(this, message);
+                try
+                {
+                    messageEvent = cc.GetEvent(this, message);
+                }
+                catch (Exception ex)
+                {
+                    Utility.DebugLog(DebugMessageType.Error, "Error in Command Class " + commandClass.ToString("X2") + " GetEvent: " + ex.Message + "\n" + ex.StackTrace);
+                }
             }
 
             if (messageEvent != null)
@@ -126,11 +132,11 @@ namespace ZWaveLib
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("ZWaveLib: Error during ManufacturerSpecificResponse callback, " +
-                                              ex.Message + "\n" + ex.StackTrace);
+                            Utility.DebugLog(DebugMessageType.Error, "Exception occurred during ManufacturerSpecificResponse callback: " + ex.Message + "\n" + ex.StackTrace);
                         }
                     }
                 }
+
                 this.RaiseUpdateParameterEvent(messageEvent);
             }
             else if (messageLength > 3)
@@ -138,10 +144,13 @@ namespace ZWaveLib
                 if (receivedMessage[3] != 0x13)
                 {
                     bool log = true;
-                    if (messageLength > 7 && /* cmd_class */ receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific)
+                    // do not log an error message for ManufacturerSpecific and Security CommandClass
+                    if (messageLength > 7 && /* cmd_class */ (receivedMessage[7] == (byte)CommandClass.ManufacturerSpecific || receivedMessage[7] == (byte) CommandClass.Security))
                         log = false;
                     if (log)
-                        Console.WriteLine("ZWaveLib UNHANDLED message: " + Utility.ByteArrayToString(receivedMessage));
+                    {
+                        Utility.DebugLog(DebugMessageType.Error, "Unhandled message: " + Utility.ByteArrayToString(receivedMessage));
+                    }
                 }
             }
 
@@ -158,9 +167,29 @@ namespace ZWaveLib
             return isSupported;
         }
 
+        public bool IsSecuredCommandClass(CommandClass c)
+        {
+            bool isSecured = false;
+            if (this.SecuredNodeInformationFrame != null)
+            {
+                isSecured = (Array.IndexOf(this.SecuredNodeInformationFrame, (byte)c) >= 0);
+            }
+            return isSecured;
+        }
+
         public void SendRequest(byte[] request)
         {
-            SendMessage(ZWaveMessage.CreateRequest(this.Id, request));
+            byte cmdClass = request[0];
+            byte[] message = ZWaveMessage.CreateRequest(this.Id, request);
+            // when cmdClass belongs to SecuredNodeInformationFrame we need to encrypt the message
+            if (cmdClass != (byte)CommandClass.Security && IsSecuredCommandClass((CommandClass)cmdClass))
+            {
+                Security.SendMessage(this, message);
+            }
+            else
+            {
+                SendMessage(message);
+            }
         }
 
         #endregion Public members

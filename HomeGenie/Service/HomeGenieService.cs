@@ -668,6 +668,22 @@ namespace HomeGenie.Service
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
+                        else if (command.Command == ZWave.Command.DOORLOCK_SET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.STATUS_DOORLOCK
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
+                        else if (command.Command == ZWave.Command.DOORLOCK_GET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.STATUS_DOORLOCK
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
                     }
                 }
                 break;
@@ -1809,6 +1825,10 @@ namespace HomeGenie.Service
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
+            }
+            if (File.Exists("zwavenodes.xml"))
+            {
+                Utility.AddFileToZip(archiveName, "zwavenodes.xml");
             }
         }
 
