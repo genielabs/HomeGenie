@@ -287,6 +287,72 @@ namespace HomeGenie.Service
                 // TODO: report exception
             }
         }
+        
+        private static string picoPath = "/usr/bin/pico2wave";
+        public static void Say(string sentence, string locale, bool async = false)
+        {
+            // if Pico TTS is not installed, then use Google Voice API
+            // Note: Pico is only supported in Linux
+            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf(locale.ToLower()) > 0)
+            {
+                if (async)
+                {
+                    var t = new Thread(() => {
+                        PicoSay(sentence, locale);
+                    });
+                    t.Start();
+                }
+                else
+                {
+                    PicoSay(sentence, locale);
+                }
+            }
+            else
+            {
+                if (async)
+                {
+                    var t = new Thread(() => {
+                        GoogleVoiceSay(sentence, locale);
+                    });
+                    t.Start();
+                }
+                else
+                {
+                    GoogleVoiceSay(sentence, locale);
+                }
+            }
+        }
+        
+        public static void Play(string wavFile)
+        {
+
+            var os = Environment.OSVersion;
+            var platform = os.Platform;
+            //
+            switch (platform)
+            {
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
+                PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
+                break;
+                case PlatformID.Unix:
+                case PlatformID.MacOSX:
+                default:
+                //var player = new System.Media.SoundPlayer();
+                //player.SoundLocation = wavFile;
+                //player.Play();
+                Process.Start(new ProcessStartInfo("aplay", "\"" + wavFile + "\"") {
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    UseShellExecute = false
+                }).WaitForExit();
+                break;
+            }
+
+        }
 
         #region Private helper methods
 
@@ -297,45 +363,13 @@ namespace HomeGenie.Service
         // delegate used by RunAsyncTask
         public delegate void AsyncFunction();
 
-        internal static void Say(string sentence, string locale, bool async = false)
-        {
-            if (async)
-            {
-                var t = new Thread(() =>
-                {
-                    Say(sentence, locale);
-                });
-                t.Start();
-            }
-            else
-            {
-                Say(sentence, locale);
-            }
-        }
-
-        internal static void Say(string sentence, string locale)
+        internal static void PicoSay(string sentence, string locale)
         {
             try
             {
-                var client = new WebClient();
-                client.Encoding = UTF8Encoding.UTF8;
-                client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence));
-                client.Dispose();
+                var wavFile = Path.Combine(GetTmpFolder(), "_synthesis_tmp.wav");
 
-                var outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-                if (!Directory.Exists(outputDirectory))
-                    Directory.CreateDirectory(outputDirectory);
-                var file = Path.Combine(outputDirectory, "_synthesis_tmp.mp3");
-
-                if (File.Exists(file))
-                    File.Delete(file);
-                var stream = File.OpenWrite(file);
-                stream.Write(audioData, 0, audioData.Length);
-                stream.Close();
-
-                var wavFile = file.Replace(".mp3", ".wav");
-                Process.Start(new ProcessStartInfo("lame", "--decode \"" + file + "\" \"" + wavFile + "\"") {
+                Process.Start(new ProcessStartInfo(picoPath, " -w " + wavFile + " -l " + locale + " \"" + sentence + "\"") {
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
@@ -350,35 +384,38 @@ namespace HomeGenie.Service
             }
         }
 
-        internal static void Play(string wavFile)
+        internal static void GoogleVoiceSay(string sentence, string locale)
         {
-
-            var os = Environment.OSVersion;
-            var platform = os.Platform;
-            //
-            switch (platform)
+            try
             {
-            case PlatformID.Win32NT:
-            case PlatformID.Win32S:
-            case PlatformID.Win32Windows:
-            case PlatformID.WinCE:
-                PlaySound(wavFile, UIntPtr.Zero, (uint)(0x00020000 | 0x00000000));
-                break;
-            case PlatformID.Unix:
-            case PlatformID.MacOSX:
-            default:
-                //var player = new System.Media.SoundPlayer();
-                //player.SoundLocation = wavFile;
-                //player.Play();
-                Process.Start(new ProcessStartInfo("aplay", "\"" + wavFile + "\"") {
+                var client = new WebClient();
+                client.Encoding = UTF8Encoding.UTF8;
+                client.Headers.Add("Referer", "http://translate.google.com");
+                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence));
+                client.Dispose();
+
+                var mp3File = Path.Combine(GetTmpFolder(), "_synthesis_tmp.mp3");
+
+                if (File.Exists(mp3File))
+                    File.Delete(mp3File);
+                var stream = File.OpenWrite(mp3File);
+                stream.Write(audioData, 0, audioData.Length);
+                stream.Close();
+
+                var wavFile = mp3File.Replace(".mp3", ".wav");
+                Process.Start(new ProcessStartInfo("lame", "--decode \"" + mp3File + "\" \"" + wavFile + "\"") {
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
                     UseShellExecute = false
                 }).WaitForExit();
-                break;
-            }
 
+                Play(wavFile);
+            }
+            catch (Exception)
+            {
+                // TODO: add error logging 
+            }
         }
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)

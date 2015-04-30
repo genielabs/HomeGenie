@@ -1240,11 +1240,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Achtung: Dieser Wert darf nur bei genauer Kenntnis des Dimmerverhaltens \r\n\tgeändert werden. Eine Fehlkonfiguration kann zur Zerstörung des Dimmers und/oder der angeschlossenen Last führen. Bei dimmbaren Energiesparlampen oder LED-Leuchten mti Bypass kann ein Wert von 1 verwendet werden. Für normale\r\n\tLeichten wird der Standardwert empfohlen."
+                "#text": "Achtung: Dieser Wert darf nur bei genauer Kenntnis des Dimmerverhaltens \r\ngeändert werden. Eine Fehlkonfiguration kann zur Zerstörung des Dimmers und/oder der angeschlossenen Last führen. Bei dimmbaren Energiesparlampen oder LED-Leuchten mit Bypass kann ein Wert von 10 verwendet werden. Für normale Leuchten wird der Standardwert empfohlen."
               },
               {
                 "@xml:lang": "en",
-                "#text": "\tNB: Do not touch these settings if you are not sure what they mean! For dimmable LEDs and CFL with bypass use value 1. For other bulbs use default value."
+                "#text": "\tNB: Do not touch these settings if you are not sure what they mean! For dimmable LEDs and CFL with bypass use value 10. For other bulbs use default value."
               },
               {
                 "@xml:lang": "ru",

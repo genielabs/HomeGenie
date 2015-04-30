@@ -55,7 +55,7 @@ namespace HomeGenie.Service.Handlers
 
         public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
         {
-
+            string response = "";
             switch (migCommand.Command)
             {
             case "Interfaces.List":
@@ -129,65 +129,114 @@ namespace HomeGenie.Service.Handlers
                 break;
 
             case "Interface.Import":
-                // file uploaded by user
+                string downloadUrl = migCommand.GetOption(0);
+                response = "";
                 string ifaceFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "mig_interface_import.zip");
                 string outputFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "mig");
                 Utility.FolderCleanUp(outputFolder);
+
                 try
                 {
-                    var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
-                    string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                    MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, ifaceFileName);
+                    if (String.IsNullOrWhiteSpace(downloadUrl))
+                    {
+                        // file uploaded by user
+                        var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
+                        string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
+                        MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, ifaceFileName);
+                    }
+                    else
+                    {
+                        // download file from url
+                        var client = new WebClient();
+                        client.DownloadFile(downloadUrl, ifaceFileName);
+                        client.Dispose();
+                    }
+                }
+                catch
+                { 
+                    // TODO: report exception
+                }
+
+                try
+                {
                     if (!Directory.Exists(outputFolder))
                     {
                         Directory.CreateDirectory(outputFolder);
                     }
                     Utility.UncompressZip(ifaceFileName, outputFolder);
                     File.Delete(ifaceFileName);
-                } catch { }
-                // import the uploaded interface
-                string configFile = Path.Combine(outputFolder, "configuration.xml");
-                XmlSerializer ifaceSerializer = new XmlSerializer(typeof(MIGServiceConfiguration.Interface));
-                StreamReader ifaceReader = new StreamReader(configFile);
-                MIGServiceConfiguration.Interface iface = (MIGServiceConfiguration.Interface)ifaceSerializer.Deserialize(ifaceReader);
-                ifaceReader.Close();
-                File.Delete(configFile);
-                //
-                homegenie.MigService.RemoveInterface(iface.Domain);
-                //
-                string configletName = iface.Domain.Substring(iface.Domain.LastIndexOf(".") + 1).ToLower();
-                string configletPath = Path.Combine("html", "pages", "configure", "interfaces", "configlet", configletName + ".html");
-                if (File.Exists(configletPath))
-                {
-                    File.Delete(configletPath);
-                }
-                File.Move(Path.Combine(outputFolder, "configlet.html"), configletPath);
-                //
-                string logoPath = Path.Combine("html", "images", "interfaces", configletName + ".png");
-                if (File.Exists(logoPath))
-                {
-                    File.Delete(logoPath);
-                }
-                File.Move(Path.Combine(outputFolder, "logo.png"), logoPath);
-                // copy other interface files to mig folder (dll and dependencies)
-                string migFolder = "mig";
-                Utility.FolderCleanUp(migFolder);
-                DirectoryInfo dir = new DirectoryInfo(outputFolder);
-                foreach(var f in dir.GetFiles())
-                {
-                    string destFile = Path.Combine(migFolder, Path.GetFileName(f.FullName));
-                    if (File.Exists(destFile))
+
+                    var migInt = GetInterfaceConfig(Path.Combine(outputFolder, "configuration.xml"));
+                    if (migInt != null)
                     {
-                        File.Move(destFile, Path.Combine(destFile, ".old"));
-                        File.Delete(Path.Combine(destFile, ".old"));
+                        response = migInt.Domain + " (" + migInt.AssemblyName + ")\n\n";
+                        // Check for README notes and append them to the response
+                        var readmeFile = Path.Combine(outputFolder, "README.TXT");
+                        if (File.Exists(readmeFile))
+                        {
+                            response += File.ReadAllText(readmeFile);
+                        }
+                        migCommand.Response = JsonHelper.GetSimpleResponse(response);
                     }
-                    File.Move(f.FullName, destFile);
+                    else
+                    {
+                        migCommand.Response = JsonHelper.GetSimpleResponse("NOT A VALID ADD-ON PACKAGE");
+                    }
+                } catch { }
+                break;
+
+            case "Interface.Install":
+
+                // install the interface package
+                string outFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "mig");
+                string configFile = Path.Combine(outFolder, "configuration.xml");
+                var iface = GetInterfaceConfig(configFile);
+                if (iface != null)
+                {
+                    File.Delete(configFile);
+                    //
+                    homegenie.MigService.RemoveInterface(iface.Domain);
+                    //
+                    string configletName = iface.Domain.Substring(iface.Domain.LastIndexOf(".") + 1).ToLower();
+                    string configletPath = Path.Combine("html", "pages", "configure", "interfaces", "configlet", configletName + ".html");
+                    if (File.Exists(configletPath))
+                    {
+                        File.Delete(configletPath);
+                    }
+                    File.Move(Path.Combine(outFolder, "configlet.html"), configletPath);
+                    //
+                    string logoPath = Path.Combine("html", "images", "interfaces", configletName + ".png");
+                    if (File.Exists(logoPath))
+                    {
+                        File.Delete(logoPath);
+                    }
+                    File.Move(Path.Combine(outFolder, "logo.png"), logoPath);
+                    // copy other interface files to mig folder (dll and dependencies)
+                    string migFolder = "mig";
+                    Utility.FolderCleanUp(migFolder);
+                    DirectoryInfo dir = new DirectoryInfo(outFolder);
+                    foreach (var f in dir.GetFiles())
+                    {
+                        string destFile = Path.Combine(migFolder, Path.GetFileName(f.FullName));
+                        if (File.Exists(destFile))
+                        {
+                            File.Move(destFile, Path.Combine(destFile, ".old"));
+                            File.Delete(Path.Combine(destFile, ".old"));
+                        }
+                        File.Move(f.FullName, destFile);
+                    }
+                    //
+                    homegenie.SystemConfiguration.MIGService.Interfaces.RemoveAll(i => i.Domain == iface.Domain);
+                    homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                    homegenie.SystemConfiguration.Update();
+                    homegenie.MigService.AddInterface(iface.Domain, iface.AssemblyName);
+
+                    migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                 }
-                //
-                homegenie.SystemConfiguration.MIGService.Interfaces.RemoveAll(i => i.Domain == iface.Domain);
-                homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
-                homegenie.SystemConfiguration.Update();
-                homegenie.MigService.AddInterface(iface.Domain, iface.AssemblyName);
+                else
+                {
+                    migCommand.Response = JsonHelper.GetSimpleResponse("NOT A VALID ADD-ON PACKAGE");
+                }
                 break;
 
             case "System.Configure":
@@ -829,7 +878,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Widgets.Add":
                 {
-                    string response = "ERROR";
+                    response = "ERROR";
                     string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
                     string[] widgetParts = widgetPath.Split('/');
                     widgetParts[0] = new String(widgetParts[0].Where(Char.IsLetter).ToArray()).ToLower();
@@ -858,7 +907,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Widgets.Save":
                 {
-                    string response = "ERROR";
+                    response = "ERROR";
                     string widgetData = new StreamReader(request.InputStream).ReadToEnd();
                     string fileType = migCommand.GetOption(0);
                     string widgetPath = migCommand.GetOption(1); // eg. homegenie/generic/dimmer
@@ -897,7 +946,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Widgets.Delete":
                 {
-                    string response = "ERROR";
+                    response = "ERROR";
                     string widgetPath = migCommand.GetOption(0); // eg. homegenie/generic/dimmer
                     string[] widgetParts = widgetPath.Split('/');
                     string filePath = Path.Combine(widgetBasePath, widgetParts[0], widgetParts[1], widgetParts[2] + ".");
@@ -951,25 +1000,13 @@ namespace HomeGenie.Service.Handlers
                     if (Directory.Exists(importPath))
                         Directory.Delete(importPath, true);
                     MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveFile);
-                    // TODO: should extract to temporary folder and look for widget.info data file before copying anything
-                    List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
-                    if (File.Exists(Path.Combine(importPath, "widget.info")))
+                    if (WidgetImport(archiveFile, importPath))
                     {
-                        foreach (string f in extractedFiles)
-                        {
-                            if (f.EndsWith(".html") || f.EndsWith(".js"))
-                            {
-                                string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
-                                if (!Directory.Exists(destFolder))
-                                    Directory.CreateDirectory(destFolder);
-                                File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
-                            }
-                        }
-                        //migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                     }
                     else
                     {
-                        //migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
+                        migCommand.Response = JsonHelper.GetSimpleResponse("ERROR");
                     }
                 }
                 break;
@@ -990,6 +1027,39 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
             }
+        }
+
+        private MIGServiceConfiguration.Interface GetInterfaceConfig(string configFile)
+        {
+            MIGServiceConfiguration.Interface iface = null;
+            using (StreamReader ifaceReader = new StreamReader(configFile))
+            {
+                XmlSerializer ifaceSerializer = new XmlSerializer(typeof(MIGServiceConfiguration.Interface));
+                iface = (MIGServiceConfiguration.Interface)ifaceSerializer.Deserialize(ifaceReader);
+                ifaceReader.Close();
+            }
+            return iface;
+        }
+
+        private bool WidgetImport(string archiveFile, string importPath)
+        {
+            bool success = false;
+            List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
+            if (File.Exists(Path.Combine(importPath, "widget.info")))
+            {
+                foreach (string f in extractedFiles)
+                {
+                    if (f.EndsWith(".html") || f.EndsWith(".js"))
+                    {
+                        string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
+                        if (!Directory.Exists(destFolder))
+                            Directory.CreateDirectory(destFolder);
+                        File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
+                    }
+                }
+                success = true;
+            }
+            return success;
         }
     }
 }

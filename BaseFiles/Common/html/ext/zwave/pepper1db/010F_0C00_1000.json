@@ -378,7 +378,7 @@
           "@number": "5",
           "@type": "rangemapped",
           "@size": "1",
-          "@default": "7f",
+          "@default": "ff",
           "name": {
             "lang": [
               {
@@ -405,33 +405,33 @@
           },
           "value": [
             {
-              "@from": "81",
-              "@to": "81",
+              "@from": "00",
+              "@to": "00",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "0 (-127) - ALARM SENSOR (RAUCH) Kommando\r\n"
+                    "#text": "ALARM SENSOR (RAUCH) Kommando\r\n"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "0 (-127) - ALARM SENSOR (SMOKE) command frame"
+                    "#text": "ALARM SENSOR (SMOKE) command frame"
                   }
                 ]
               }
             },
             {
-              "@from": "7f",
-              "@to": "7f",
+              "@from": "ff",
+              "@to": "ff",
               "description": {
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "255 (127) - BASIC SET Kommando"
+                    "#text": "BASIC SET Kommando"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "255 (127) - BASIC_SET command frame"
+                    "#text": "BASIC_SET command frame"
                   }
                 ]
               }

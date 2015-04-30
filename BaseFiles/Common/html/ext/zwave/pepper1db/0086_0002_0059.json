@@ -437,106 +437,19 @@
           "value": {
             "@from": "00000000",
             "@to": "0000ffff",
+            "@unit": "sec",
             "description": {
               "lang": [
                 {
-                  "@xml:lang": "de"
+                  "@xml:lang": "de",
+                  "#text": "Definieren Sie das Zeitintervall um den Batteriestatus zu überprüfen."
                 },
                 {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "Define the time interval to check the battery status."
                 }
               ]
             }
-          }
-        },
-        {
-          "@number": "121",
-          "@type": "constant",
-          "@size": "4",
-          "@default": "00000100",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Flag Werte für aktivierten Magnet-Schalter"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Flag values for triggered magnet switch"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Flag Werte, definieren die Art der Reports bei ausgelöstem Magnet-Schalter"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Flag values for which reports to send when the magnet\r\n"
-              }
-            ]
-          }
-        },
-        {
-          "@number": "252",
-          "@type": "constant",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "andere Konfigurationen erlauben"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "permit other configurations"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "erlauben von anderen Konfigurationen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Lock or Unlock other configuration set function"
-              }
-            ]
-          }
-        },
-        {
-          "@number": "255",
-          "@type": "constant",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zurücksetzen auf Werkseinstellungen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Reset to default"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zurücksetzen aller Werte auf Werkseinstellungen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Reset to the default configuration"
-              }
-            ]
           }
         }
       ]

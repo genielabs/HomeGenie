@@ -36,7 +36,7 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "0f"
+        "@value": "20"
       },
       "specificClass": {
         "@value": "01"
@@ -45,79 +45,331 @@
         "@value": "true"
       },
       "listening": {
-        "@value": "true"
+        "@value": "false"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Reichweiten-Verlängerer für Netzbetrieb (Steckdose)"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Range Extender for plugging into a power outlet"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Water Sensor"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Einmaliges drücken der Z-Wave Taste"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Press the Z-Wave button onc"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en"
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Einmaliges drücken der Z-Wave Taste"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Press the Z-Wave button once"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Press the Z-Wave button on your water sensor. If it has been succesfully added to your Z-Wave network, its LED will illuminate for 10 minutes. "
+        }
       },
-      "productName": "EXTENDER",
-      "brandName": "Aeon Labs",
-      "productCode": "AEO_EXTENDER"
+      "productName": "Water Sensor",
+      "brandName": "Aeotec",
+      "productLine": "Z-Wave Product Line",
+      "productCode": "DSB45-ZWUS",
+      "productVersion": "1.05",
+      "batteryType": "AAA",
+      "batteryCount": "2"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0020"
+          "@id": "0071",
+          "@version": "2"
         },
         {
           "@id": "0085"
         },
         {
-          "@id": "0086"
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0080"
+        },
+        {
+          "@id": "0030"
         },
         {
           "@id": "0070"
         },
         {
-          "@id": "0072"
+          "@id": "0072",
+          "@version": "2"
         },
         {
-          "@id": "0073"
+          "@id": "0086"
+        },
+        {
+          "@id": "0084",
+          "@version": "2"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": {
+        "@number": "1",
+        "@maxNodes": "5",
+        "description": {
+          "lang": {
+            "@xml:lang": "en"
+          }
+        }
+      }
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "sensor binary report"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Toggle the sensor binary report value when the Magnet switch\r\nis opened /closed."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Open: 00, Close: FF"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Open: FF, Close: 00"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "2",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Wake up"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Enable wake up 10 minutes when the power is switched on."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Enable"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "3",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Basic set value"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Toggle the basic set value when the Magnet switch is opened\r\n/closed."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Close->Open: 00, Open->Close: FF"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Close->Open: FF, Open->Close: 00"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "121",
+          "@type": "bitset",
+          "@size": "4",
+          "@default": "00000000",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reports that will be sent"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Determines which report will be sent when the water level\r\nfluctuates.\r\nDefault value = 0x00000100"
+            }
+          },
+          "value": [
+            {
+              "@from": "00000000",
+              "@to": "00000000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Battery: The Battery flag signals that whether the Water Sensor sends (1) or not sends (0) the battery Report when\r\nthe probe touches the water."
+                }
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000003",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Sensor\r\nBinary: The Sensor Binary flag signals that whether the Water Sensor sends (1) or not sends (0) the Sensor Binary\r\nReport when the probe touches the water."
+                }
+              }
+            },
+            {
+              "@from": "00000005",
+              "@to": "00000007",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "00000008",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Basic\r\nSet: The Basic set flag signals that whether the Water Sensor sends (1) or not sends (0) the Basic Set Command\r\nwhen the probe touches the water."
+                }
+              }
+            },
+            {
+              "@from": "00000009",
+              "@to": "0000000b",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "0000000c",
+              "@to": "0000000c",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Alarm: The Alarm flag signals that whether the Water Sensor sends (1) or not sends (0) the Alarm Command when\r\nthe probe touches the water."
+                }
+              }
+            },
+            {
+              "@from": "0000000d",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reset"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Reset configuration settings to factory defaults."
+            }
+          }
         }
       ]
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/ed0df776a4e8fc910cedb375221c52b990e68dea.png"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/26fd16d91e47be0c9cc29ca646b735a561c7792f.png"
       }
     }
   }

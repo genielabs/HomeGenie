@@ -7,6 +7,8 @@ HG.WebApp.SystemSettings.InitializePage = function () {
     var importPopup = page.find('[data-ui-field=import-popup]');
     var importButton = page.find('[data-ui-field=interface_import]');
     var importForm = page.find('[data-ui-field=import-form]');
+    var downloadButton = page.find('[data-ui-field=download-btn]');
+    var downloadUrl = page.find('[data-ui-field=download-url]');
     var uploadButton = page.find('[data-ui-field=upload-btn]');
     var uploadFile = page.find('[data-ui-field=upload-file]');
     var uploadFrame = page.find('[data-ui-field=upload-frame]');
@@ -17,30 +19,62 @@ HG.WebApp.SystemSettings.InitializePage = function () {
     page.on('pagebeforeshow', function (e) {
         HG.WebApp.SystemSettings.ListInterfaces();
     });
+    importPopup.on('popupafteropen', function(event) {
+        importButton.removeClass('ui-btn-active');
+    });
     importButton.on('click', function() {
         importPopup.popup('open');
     });
-    uploadButton.bind('click', function () {
-        if (uploadFile.val() == "") {
+    downloadButton.on('click', function() {
+        if (downloadUrl.val() == '') {
+            alert('Insert add-on package URL');
+            downloadUrl.parent().stop().animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250)
+                .animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250);
+        } else {
+            importPopup.popup('close');
+            $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
+            $.get('../HomeAutomation.HomeGenie/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
+                $.mobile.loading('hide');
+                downloadUrl.val('');
+                var response = eval(arguments[2].responseText)[0];
+                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            });
+        }
+    });
+    uploadButton.on('click', function () {
+        if (uploadFile.val() == '') {
             alert('Select a file to import first');
             uploadFile.parent().stop().animate({ borderColor: "#FF5050" }, 250)
                 .animate({ borderColor: "#FFFFFF" }, 250)
                 .animate({ borderColor: "#FF5050" }, 250)
                 .animate({ borderColor: "#FFFFFF" }, 250);
         } else {
-            importButton.removeClass('ui-btn-active');
             importPopup.popup('close');
-            $.mobile.loading('show', { text: 'Importing, please wait...', textVisible: true, html: '' });
+            $.mobile.loading('show', { text: 'Uploading, please wait...', textVisible: true, html: '' });
             importForm.submit();
         }
     });
     uploadFrame.bind('load', function () {
         $.mobile.loading('hide');
         // import completed...
-        if (uploadFile.val() != '') {
-            uploadFile.val('');
-            HG.WebApp.SystemSettings.ListInterfaces();        
-        }        
+        uploadFile.val('');
+        var response = uploadFrame[0].contentWindow.document.body;
+        response = eval(response.textContent || response.innerText)[0];
+        HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+    });
+};
+
+HG.WebApp.SystemSettings.AddonInstall = function(text) {
+    HG.WebApp.Utility.ConfirmPopup('Install add-on?', '<pre>'+text+'</pre>', function(confirm){
+        if (confirm) {
+            $.mobile.loading('show', { text: 'Installing, please wait...', textVisible: true, html: '' });
+            $.get('../HomeAutomation.HomeGenie/Config/Interface.Install', function(data){
+                HG.WebApp.SystemSettings.ListInterfaces();        
+                $.mobile.loading('hide');
+            });
+        }
     });
 };
 

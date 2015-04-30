@@ -36,7 +36,7 @@ namespace ZWaveLib
         private string portName = "";
         private SerialPortInput serialPort;
 
-        private byte callbackIdSeq = 1;
+        private byte callbackIdSeq = 2;
         private object callbackLock = new object();
         private object sendLock = new object();
 
@@ -213,7 +213,7 @@ namespace ZWaveLib
             {
                 if (++this.callbackIdSeq > 0xFF)
                 {
-                    this.callbackIdSeq = 1;
+                    this.callbackIdSeq = 2;
                 }
                 return this.callbackIdSeq;
             }

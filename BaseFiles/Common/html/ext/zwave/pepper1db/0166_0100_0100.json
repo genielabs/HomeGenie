@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "67"
+        "@value": "43"
       },
       "appVersion": {
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "82"
+        "@value": "52"
       },
       "basicClass": {
         "@value": "04"
@@ -58,11 +58,11 @@
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "Z-Wave Kabel Schalter"
+            "#text": "Ein Z-Wave gesteuertes Kabel-Schalter welcher entweder normal genutzt oder via Funkkommando geschalten werden kann."
           },
           {
             "@xml:lang": "en",
-            "#text": "Z-Wave cord switch"
+            "#text": "A Z-wave cord switch which is small enough to be compared to a regular cord switch. It can be used both manually\r\nlike any ordinary cord switch and remotely by Z -Wave ."
           }
         ]
       },
@@ -80,22 +80,25 @@
         "lang": [
           {
             "@xml:lang": "de",
-            "#text": "einfacher Klick auf Pairing Taste auf Geräteunterseite"
+            "#text": "Ein kurzer Druck auf den Knopf auf der Rückseite startet den Inklusions bzw. Exklusionsmodus"
           },
           {
             "@xml:lang": "en",
-            "#text": "click once on pairing button on bottom of the device"
+            "#text": "Short click on the Button on the Backside starts the Inclusion/Exclusion-Mode"
           }
         ]
       },
-      "productName": "Z-Wave cord switch",
-      "brandName": "Swiid®",
-      "productLine": "Z-Wave Lighting",
-      "productCode": "SW-ZCS-1",
-      "productVersion": "v1.01"
+      "productName": "Cord Switch",
+      "brandName": "Swiid",
+      "productCode": "ZCS1",
+      "productVersion": "1.82"
     },
     "commandClasses": {
       "commandClass": [
+        {
+          "@id": "0020",
+          "@inNIF": "false"
+        },
         {
           "@id": "0025"
         },
@@ -103,38 +106,19 @@
           "@id": "0027"
         },
         {
+          "@id": "0072"
+        },
+        {
           "@id": "0085",
           "@version": "2"
         },
         {
-          "@id": "0072"
-        },
-        {
           "@id": "0086"
-        },
-        {
-          "@id": "0020"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
-        {
-          "@number": "2",
-          "@maxNodes": "5",
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Die zweite Assoziationsgruppe wird bei jedem Drücken der An/Aus Taste ausgelöst. (wird verwendet für Meldeung einer Statusänderung)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "The second association group works on every press (actually on release) on the On/Off button of your SwiidInter™ (this is the one which can be used to notify status changes)"
-              }
-            ]
-          }
-        },
         {
           "@number": "1",
           "@maxNodes": "5",
@@ -142,20 +126,113 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Die erste Assoziationsgruppe wird durch langes Drücken (über 0,5 Sekunden) der An/Aus Taste ausgelöst."
+                "#text": "Gruppe 1\r\nReagiert auf langes Drücken des Schalters."
               },
               {
                 "@xml:lang": "en",
-                "#text": "The first association group will respond to a long press (over 0.5 seconds) on the On/Off button of your SwiidInter™"
+                "#text": "Group 1\r\nResponds to a long press."
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Gruppe 1\r\nReagiert auf jeden einzelnen Druck."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 2\r\nResponds on every single-click."
               }
             ]
           }
         }
       ]
     },
-    "resourceLinks": {
-      "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/809c5c831911e877ed07ee5c405c4fa9fc03d76c.png"
+    "configParams": {
+      "configParam": {
+        "@number": "1",
+        "@type": "constant",
+        "@size": "1",
+        "@default": "00",
+        "name": {
+          "lang": [
+            {
+              "@xml:lang": "de",
+              "#text": "Schaltmodus"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Switchmodus"
+            }
+          ]
+        },
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de",
+              "#text": "Bestimmt die Verwendung des Schalters\r\nDer Wert 255 bestimmt damti den \"normal\"-Modus (an und aus)."
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "Select the Switch-mode\r\nThe Value 255 is the normal-mode(switch on and off)"
+            }
+          ]
+        },
+        "value": [
+          {
+            "@from": "00",
+            "@to": "00",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Deaktiviert"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Disabled"
+                }
+              ]
+            }
+          },
+          {
+            "@from": "01",
+            "@to": "01",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Schaltet an"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Switch off only"
+                }
+              ]
+            }
+          },
+          {
+            "@from": "02",
+            "@to": "02",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Schaltet aus"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Switch off only"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   }

@@ -44,7 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZWaveMessage.cs" />
     <Compile Include="ZWavePort.cs" />
-    <Compile Include="Utility.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="ZWaveNode.cs" />
     <Compile Include="Values\AlarmValue.cs" />
@@ -81,8 +80,9 @@
     <Compile Include="CommandClasses\ManufacturerSpecific.cs" />
     <Compile Include="CommandClasses\UserCode.cs" />
     <Compile Include="CommandClasses\Crc16Encapsulated.cs" />
-    <Compile Include="AesWork.cs" />
     <Compile Include="CommandClasses\ThermostatMode.cs" />
+    <Compile Include="Utility\AesWork.cs" />
+    <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -101,5 +101,6 @@
   <ItemGroup />
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
 </Project>

@@ -39,10 +39,6 @@ namespace ZWaveLib.CommandClasses
             {
                 EnergyValue energy = EnergyValue.Parse(message);
                 nodeEvent = new ZWaveEvent(node, energy.EventType, energy.Value, 0);
-                if (energy.Value > 2000)
-                {
-                    Utility.DebugLog(DebugMessageType.Warning, "Suspect high value parsed (wrongly?) from Meter Report: " + energy.Value + " " + energy.EventType + ".");
-                }
             }
             return nodeEvent;
         }

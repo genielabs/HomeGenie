@@ -144,9 +144,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 – 24 kW\r\n0 configuration means corresponding reporting is disabled."
+              "#text": "Define delta configuration for power report."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "5dc0",
+              "@unit": "W",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define delta parameter for reporting the instantaneous power."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
@@ -162,9 +185,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 -65535 kWh\r\n0 configuration means corresponding reporting is disabled."
+              "#text": "Define delta configuration for energy report."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "8000",
+              "@to": "7fff",
+              "@unit": "Wh",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define delta energy.\r\n\r\nControllers may only allow configuring signed values. In order to set values in the range of 32768…65535, the value sent in the application should be equal to desired value minus 65536.\r\nFor example, to set Delta Energy to 36000 Wh, you must set a value as 36000−65536=−29536."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "3",
@@ -180,7 +226,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1- 18.204 Hrs.\r\nDefault power report at every 10 sec"
+              "#text": "Defines time interval for power report. Default value is 10sec."
+            }
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "471c",
+            "@unit": "sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define time interval for power report."
+              }
             }
           }
         },
@@ -198,7 +255,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0-18.204 Hrs.\r\nDefault Energy report at every Hr"
+              "#text": "Defines time interval for energy report. Default value is 1h."
+            }
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "471c",
+            "@unit": "sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define time interval for energy report."
+              }
             }
           }
         }
