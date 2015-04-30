@@ -658,5 +658,15 @@
     "configure_widgeteditor_nobindmodule_text":
         "Non è stato trovato un modulo valido per il data binding, selezionane uno dall'elenco.",
     "configure_widgeteditor_nobindmodule_close":
-        "Chiudi"
+        "Chiudi",
+    "configure_widgeteditor_bindtomodule":
+        "bind to module",
+    "configure_widgeteditor_selectmodule_placeholder":
+        "(select a module)",
+    "configure_widgeteditor_title":
+        "Widget editor",
+    "configure_widgeteditor_savinghtml":
+        "Saving HTML...",
+    "configure_widgeteditor_savingjavascript":
+        "Saving Javascript..."
 }

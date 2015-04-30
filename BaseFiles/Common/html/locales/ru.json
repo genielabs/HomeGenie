@@ -618,45 +618,55 @@
     "configure_system_updateinstall_warning":
         "Настоятельно рекомендуется сделать бекап конфигурации перед любым обновлением.",
     "configure_automationgroup_widgeteditor":
-        "Widget Editor",
+        "Редактор виджетов",
     "configure_widgetlist_heading":
-        "<font style=\"color:gray\">Widgets</font><br />List</h3>",
+        "<font style=\"color:gray\">Виджеты</font><br />List</h3>",
     "configure_widgetlist_importwidget":
-        "Import Widget",
+        "Импортировать виджет",
     "configure_widgetlist_import":
-        "Import",
+        "Импортировать",
     "configure_widgetlist_add_popuptitle":
-        "New Widget",
+        "Новый виджет",
     "configure_widgetlist_add_widgetbrand":
-        "Brand",
+        "Бренд",
     "configure_widgetlist_add_widgetcategory":
-        "Category",
+        "Категория",
     "configure_widgetlist_add_widgetname":
-        "Name",
+        "Название",
     "configure_widgetlist_newwidgetconfirm":
-        "Add",
+        "Добавить",
     "configure_widgetlist_action_import":
-        "Import",
+        "Импортировать",
     "configure_widgetlist_action_addwidget":
-        "Add Widget",
+        "Добавить виджет",
     "configure_widgeteditor_html":
         "HTML",
     "configure_widgeteditor_javascript":
         "Javascript",
     "configure_widgeteditor_previewupdate":
-        "Run / Preview",
+        "Запуск / Предпросмотр",
     "configure_widgeteditor_hasmodification":
-        "Widget was modified!",
+        "Виджет был изменен!",
     "configure_widgeteditor_deletetitle":
-        "Delete Widget?",
+        "Удалить виджет?",
     "configure_widgeteditor_deleteprompt":
-        "Are you sure you want to delete this widget?",
+        "Вы уверены, что хотите удалить этот виджет?",
     "configure_widgetlist_list":
-        "Widget List",
+        "Список виджетов",
     "configure_widgeteditor_nobindmodule_title":
-        "Select a module",
+        "Выберите модуль",
     "configure_widgeteditor_nobindmodule_text":
-        "No valid module for data binding has been found, please select one.",
+        "Не нашлось ни одного подходящего модуля для связывания данных. Пожалуйста, выберите модуль.",
     "configure_widgeteditor_nobindmodule_close":
-        "Close"
+        "Закрыть",
+    "configure_widgeteditor_bindtomodule":
+        "связать с модулем",
+    "configure_widgeteditor_selectmodule_placeholder":
+        "(выберите модуль)",
+    "configure_widgeteditor_title":
+        "Редактор виджетов",
+    "configure_widgeteditor_savinghtml":
+        "Сохраняем HTML...",
+    "configure_widgeteditor_savingjavascript":
+        "Сохраняем Javascript..."
 }
