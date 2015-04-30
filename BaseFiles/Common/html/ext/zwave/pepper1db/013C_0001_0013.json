@@ -182,15 +182,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Slected Relay"
+              "#text": "Relay selection"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1：Relay1\r\n2：Relay2\r\n3：Relay1 &\r\nRelay2"
+              "#text": "Select relay"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects relay 1."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects relay 2."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects both relays."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
@@ -200,15 +232,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Edge or Pulse mode or Edge-Tog gle mode"
+              "#text": "Mode selection"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1：Edge mode\r\n2：Pulse mode\r\n3：Edge-Toggle\r\nmode"
+              "#text": "Select mode"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects edge mode."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects pulse mode."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Selects edge-toggle mode."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "3",
@@ -218,15 +282,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Restore switch state mode"
+              "#text": "Switch state mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Last switch\r\nstate\r\n2 : Switch on"
+              "#text": "Restore switch\r\nstate mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 : Switch off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1 : Last switch\r\nstate"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2 : Switch on"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "4",
@@ -242,9 +338,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Disable auto off\r\nfunction\r\n1-0x7FFF : 1s ~\r\n32767s"
+              "#text": "Sets auto off timer."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 : Disable auto off\r\nfunction"
+                }
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "7fff",
+              "@unit": "sec.",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Sets time interval for auto off."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "5",
@@ -260,9 +379,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch off\r\n1 : Ignore\r\n2 : Switch toggle\r\n3 : Switch on"
+              "#text": "Select RF off command mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 : Switch off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1 : Ignore"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2 : Switch toggle"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "3 : Switch on"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "6",
@@ -277,10 +438,31 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en",
-              "#text": "1 : Endpoint3 exist\r\n2 : No Endpoint3"
+              "@xml:lang": "en"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2 : No Endpoint3"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1 : Endpoint3 exist"
+                }
+              }
+            }
+          ]
         }
       ]
     },

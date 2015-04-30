@@ -156,6 +156,7 @@ namespace MIG
         Thermostat,
         Shutter,
         DoorWindow,
+        DoorLock,
         MediaTransmitter,
         MediaReceiver
         //siren, alarm, motion sensor, door sensor, thermal sensor, etc.

@@ -562,12 +562,9 @@ namespace HomeGenie.Service.Logging
             {
                 foreach (var parameter in module.Properties)
                 {
-                    // enntry counter
                     if (parameter.Statistics.Values.Count > 0)
                     {
-
                         var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestap.Ticks));
-                        //
                         if (values.Count > 0)
                         {
                             double average = (values.Sum(d => d.Value) / values.Count);
@@ -612,12 +609,10 @@ namespace HomeGenie.Service.Logging
                             parameter.Statistics.Values.Clear();
 
                         }
-
                     }
                 }
             }
         }
-
 
     }
 }

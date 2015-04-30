@@ -36,7 +36,7 @@ namespace ZWaveLib.Values
 
     public class AlarmValue
     {
-        public EventParameter EventType = EventParameter.Generic;
+        public EventParameter EventType = EventParameter.AlarmGeneric;
         public ZWaveAlarmType Parameter = ZWaveAlarmType.Generic;
         public byte Value = 0x00;
 
@@ -44,6 +44,12 @@ namespace ZWaveLib.Values
         {
             AlarmValue alarm = new AlarmValue();
             alarm.Value = message[3];
+
+            //Version 2 sends the value in argument 7
+            if (message.Length >= 7) { 
+                alarm.Value = message[7];
+            }
+
             //
             byte cmdClass = message[0];
             if (cmdClass == (byte) CommandClass.SensorAlarm)
@@ -68,10 +74,6 @@ namespace ZWaveLib.Values
                     break;
                 case ZWaveAlarmType.Flood:
                     alarm.EventType = EventParameter.AlarmFlood;
-                    break;
-                //case ZWaveSensorAlarmParameter.GENERIC:
-                default:
-                    alarm.EventType = EventParameter.AlarmGeneric;
                     break;
             }
             //

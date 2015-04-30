@@ -139,9 +139,6 @@
           "@version": "2",
           "@secure": "true",
           "@nonSecure": "false"
-        },
-        {
-          "@id": "0020"
         }
       ]
     },
@@ -161,9 +158,9 @@
       "configParam": [
         {
           "@number": "7",
-          "@type": "constant",
+          "@type": "bitset",
           "@size": "1",
-          "@default": "10",
+          "@default": "04",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -173,9 +170,91 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Customer function switch, using bit\r\ncontrol.\r\nBit0: Reserve.\r\nBit1: Reserve.\r\nBit2: Reserve.\r\nBit3: Reserve.\r\nBit4: Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report.\r\nBit5: Reserve.\r\nBit6: Reserve.\r\nBit7: Reserve."
+              "#text": "Customer function switch, using bit\r\ncontrol.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report."
+                }
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "10",
@@ -190,9 +269,32 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Defines the interval time for auto reporting the\r\nbattery level."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define time interval for auto report."
+                }
+              }
+            }
+          ]
         }
       ]
     },

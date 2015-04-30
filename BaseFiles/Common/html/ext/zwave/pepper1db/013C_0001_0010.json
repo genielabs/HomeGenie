@@ -174,9 +174,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1：Edge mode\r\n2：Pulse mode\r\n3：Edge-Toggle mode"
+              "#text": "Select Edge or\r\nPulse\r\nmode or\r\nEdge-Tog\r\ngle mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1：Edge mode"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2：Pulse mode"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "3：Edge-Toggle\r\nmode"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
@@ -186,15 +218,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Restore switch state mode"
+              "#text": "Switch state mode"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 : Switch Off\r\n1 : Last Switch State\r\n2 : Switch On"
+              "#text": "Select switch state mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 : Switch Off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1 : Last Switch\r\nState"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2 : Switch On"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "3",
@@ -210,9 +274,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0：Disable\r\nmanual On/Off\r\n1：Enable\r\nmanual On/Off"
+              "#text": "Enable/disable Manual On/Off mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0：Disable\r\nmanual On/Off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1：Enable\r\nmanual On/Off"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "4",
@@ -228,9 +314,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1：Show switch state\r\n2：Show night mode\r\n3 : One flash mode"
+              "#text": "Select LED indication mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1：Show switch\r\nstate"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2：Show night\r\nmode"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "3 : One flash\r\nmode"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "5",
@@ -246,9 +364,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0：Disable auto off function\r\n1-0x7FFF：1 ~ 32767seconds"
+              "#text": "Set Auto off timer."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0：Disable auto\r\noff function"
+                }
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "7fff",
+              "@unit": "sec",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Select time interval for auto off function."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "6",
@@ -264,9 +405,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0：Switch off\r\n1：Ignore\r\n2：Switch toggle\r\n3：Switch on"
+              "#text": "Select RF Off command mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0：Switch off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1：Ignore"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2：Switch toggle"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "3：Switch on"
+                }
+              }
+            }
+          ]
         }
       ]
     },

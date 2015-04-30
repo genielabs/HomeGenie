@@ -1,0 +1,515 @@
+{
+  "?xml": {
+    "@version": "1.0",
+    "@encoding": "utf-8"
+  },
+  "ZWaveDevice": {
+    "@xmlns": "http://www.pepper1.net/zwavedb/xml-schemata/z-wave",
+    "@schemaVersion": "2",
+    "descriptorVersion": "1",
+    "deviceData": {
+      "manufacturerId": {
+        "@value": "0115"
+      },
+      "productType": {
+        "@value": "0100"
+      },
+      "productId": {
+        "@value": "0201"
+      },
+      "libType": {
+        "@value": "06"
+      },
+      "protoVersion": {
+        "@value": "04"
+      },
+      "protoSubVersion": {
+        "@value": "05"
+      },
+      "appVersion": {
+        "@value": "00"
+      },
+      "appSubVersion": {
+        "@value": "30"
+      },
+      "basicClass": {
+        "@value": "04"
+      },
+      "genericClass": {
+        "@value": "a1"
+      },
+      "optional": {
+        "@value": "true"
+      },
+      "listening": {
+        "@value": "true"
+      },
+      "routing": {
+        "@value": "true"
+      },
+      "beamSensor": "1000",
+      "rfFrequency": "EU"
+    },
+    "deviceDescription": {
+      "description": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Z-Wave steuerbarer EN14604 kompatibler Rauchwarnmelder mit Sirene"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Z-Wave enabled EN14604 compatible Smoke detector with Siren function, optionally mains powered"
+          }
+        ]
+      },
+      "wakeupNote": {
+        "lang": [
+          {
+            "@xml:lang": "de"
+          },
+          {
+            "@xml:lang": "en"
+          }
+        ]
+      },
+      "inclusionNote": {
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Taste am Funkmodule einmal drücken"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Hit button on Wireless Module"
+          }
+        ]
+      },
+      "productName": "Smoke Detector + Siren",
+      "brandName": "Z-Wave ",
+      "productLine": "Z-Wave",
+      "productCode": "004001",
+      "productVersion": "0.48",
+      "batteryType": "9 V Block",
+      "batteryCount": "1"
+    },
+    "commandClasses": {
+      "commandClass": [
+        {
+          "@id": "0020",
+          "@controlled": "true"
+        },
+        {
+          "@id": "0025"
+        },
+        {
+          "@id": "0030",
+          "@version": "2"
+        },
+        {
+          "@id": "0059"
+        },
+        {
+          "@id": "005a"
+        },
+        {
+          "@id": "005e",
+          "@version": "2"
+        },
+        {
+          "@id": "0070"
+        },
+        {
+          "@id": "0071",
+          "@version": "4"
+        },
+        {
+          "@id": "0072"
+        },
+        {
+          "@id": "0073"
+        },
+        {
+          "@id": "0080"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0086",
+          "@version": "2"
+        },
+        {
+          "@id": "0098",
+          "@controlled": "true"
+        }
+      ]
+    },
+    "assocGroups": {
+      "assocGroup": [
+        {
+          "@number": "1",
+          "@maxNodes": "4",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Lifeline"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Lifeline"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "2",
+          "@maxNodes": "4",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Alarm -Meldungen"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Alarm Reports"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "4",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Schaltkommando bei Alarm"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Switching Command when Alarm"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "1",
+          "@type": "range",
+          "@size": "1",
+          "@default": "0a",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Siren-Alarm Interval"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Siren Alarm Sequence Interval"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Die steuerbare Sirene erzeugt einen anderen Ton als der Rauchmelder. Dessen Intervalzeit wird mit diesem Parameter eingestellt."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly on and partly off. This parameter defines the total length of the interval in seconds. "
+              }
+            ]
+          },
+          "value": {
+            "@from": "03",
+            "@to": "81",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "Sekunden"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "seconds"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "2",
+          "@type": "range",
+          "@size": "1",
+          "@default": "08",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Siren-Alarm-Länge"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": " Siren Alarm Tone Length "
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Die steuerbare Sirene erzeugt einen anderen Ton als der Rauchmelder.Die Länge des Tones wird mit diesem Parameter eingestellt"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "The additional siren is creating a different acoustic signal differentiate from the smoke alarm. This sound is partly on and partly off. This parameter defines the total length of the sound versus silence within this interval."
+              }
+            ]
+          },
+          "value": {
+            "@from": "01",
+            "@to": "63",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de",
+                  "#text": "sec"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "sec"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "3",
+          "@type": "range",
+          "@size": "1",
+          "@default": "63",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Wert des Einschaltkommandos"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Value of On-Command"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00",
+            "@to": "63",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "4",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Wert des Ausschaltkommandos"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Value of Off-Command"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": {
+            "@from": "00",
+            "@to": "63",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "5",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Status der automatischen Funkvermaschung für Rauchalarm"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Status of automated meshing of  Smoke Alarms"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Der Rauchwarnmelder sendet Rauchalarme automatisch an alle anderen Rauchwarnmelder gleichen Typs im Z-Wave Netz. Dies entspricht den Anforderungen an Funkrauchmelder"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "This smoke detector can automatically inform other smoke detectors of same type about smoke alarms. They will then also turn on the siren. This function is a requirement of wireless networked smoke detectors"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "active"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "6",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Status der automatischen Funkvermaschung für Batteriealarm"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Status of automated meshing of  Battery  Alarms"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Der Rauchwarnmelder sendet Batteriealarme automatisch an alle anderen Rauchwarnmelder gleichen Typs im Z-Wave Netz. Dies entspricht den Anforderungen an Funkrauchmelder"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "This smoke detector can automatically inform other smoke detectors of same type about battery alarms. They will then also turn on the siren. This function is a requirement of wireless networked smoke detectors"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "inaktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "inactive"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "aktiv"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "active"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/ebc4781e1ec02495ded68d9849dd03447cc4083e.jpg"
+      }
+    }
+  }
+}

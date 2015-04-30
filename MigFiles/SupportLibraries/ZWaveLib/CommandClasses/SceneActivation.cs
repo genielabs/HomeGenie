@@ -38,7 +38,7 @@ namespace ZWaveLib.CommandClasses
             byte cmdType = message[1];
             if (cmdType == (byte)Command.SceneActivationSet)
             {
-                nodeEvent = new ZWaveEvent(node, EventParameter.Generic, (double)message[2], 0);
+                nodeEvent = new ZWaveEvent(node, EventParameter.SensorGeneric, (double)message[2], 0);
             }
             return nodeEvent;
         }

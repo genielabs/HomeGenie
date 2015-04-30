@@ -35,6 +35,12 @@
       "basicClass": {
         "@value": "04"
       },
+      "genericClass": {
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
       "optional": {
         "@value": "true"
       },

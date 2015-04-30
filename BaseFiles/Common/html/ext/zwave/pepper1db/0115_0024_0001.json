@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "2a"
+        "@value": "43"
       },
       "appVersion": {
         "@value": "01"
       },
       "appSubVersion": {
-        "@value": "02"
+        "@value": "03"
       },
       "basicClass": {
         "@value": "04"
@@ -50,8 +50,7 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0",
-      "rfFrequency": "Russia"
+      "beamSensor": "0"
     },
     "deviceDescription": {
       "description": {
@@ -88,38 +87,35 @@
           }
         ]
       },
-      "productName": "Floor thermostat 1.2",
+      "productName": "Floor thermostat 1.3",
       "brandName": "Z-Wave.Me",
       "productLine": "Devilink modification",
       "productCode": "FT",
-      "productVersion": "1.2"
+      "productVersion": "1.3"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0040",
-          "@version": "2"
+          "@id": "0020"
         },
         {
-          "@id": "0020"
+          "@id": "0031",
+          "@version": "4"
+        },
+        {
+          "@id": "0032",
+          "@version": "4"
+        },
+        {
+          "@id": "0040",
+          "@version": "2"
         },
         {
           "@id": "0043",
           "@version": "2"
         },
         {
-          "@id": "0085",
-          "@version": "2"
-        },
-        {
-          "@id": "0086"
-        },
-        {
           "@id": "0070"
-        },
-        {
-          "@id": "0031",
-          "@version": "4"
         },
         {
           "@id": "0072"
@@ -129,6 +125,13 @@
         },
         {
           "@id": "0077"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
+        },
+        {
+          "@id": "0086"
         }
       ]
     },
@@ -317,7 +320,7 @@
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Режим Basic"
+                "#text": "Реакция термостата на команду Basic Set"
               }
             ]
           },
@@ -489,7 +492,7 @@
           "@number": "5",
           "@type": "range",
           "@size": "1",
-          "@default": "1e",
+          "@default": "0a",
           "name": {
             "lang": [
               {
@@ -554,7 +557,7 @@
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Характерное время нажатия"
+                "#text": "Характерное время нажатия кнопки"
               }
             ]
           },
@@ -597,7 +600,7 @@
           "@number": "6",
           "@type": "range",
           "@size": "1",
-          "@default": "1b",
+          "@default": "1e",
           "name": {
             "lang": [
               {
@@ -614,11 +617,11 @@
             "lang": [
               {
                 "@xml:lang": "en",
-                "#text": "In all modes the thermostat will switch off heating until temperature drops below this limit.\n\nFor wooden and laminate floor maximal allowed temperature is 27 degree.\nFor tile and concrete floor maximal allowed temperature value is 45 degree."
+                "#text": "In all modes the thermostat will switch off heating until temperature drops below this limit. For wooden and laminate floor maximal allowed temperature is 27 degree. For tile and concrete floor maximal allowed temperature value is 45 degree."
               },
               {
                 "@xml:lang": "ru",
-                "#text": "Во всех режимах работы термостат отключает обогрев до снижения температуры ниже данного предела.\n\nДля деревянного пола и ламината максимальная допустимая температура - 27 градусов Цельсия.\nДля кафельного и бетонного пола максимальная допустимая температура - 45 градусов Цельсия."
+                "#text": "Во всех режимах работы термостат отключает обогрев до снижения температуры ниже данного предела. Для деревянного пола и ламината максимальная допустимая температура - 27 градусов Цельсия. Для кафельного и бетонного пола максимальная допустимая температура - 45 градусов Цельсия."
               }
             ]
           },
@@ -639,6 +642,86 @@
               ]
             }
           }
+        },
+        {
+          "@number": "7",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0000",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Energieverbrauch von Last 1"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Energy consumption"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Энергопотребление"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "definiert die Nennleistung der angeschlossenen Last 1. Dies wird zur Berechnung der verbrauchten elektrischen Arbeit genutzt."
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Specify the consumption of the load in watts, for the calculation of power consumption. Max load 3300 W."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Укажите потребление нагрузки в ваттах, для подсчета энергопотребления. Максимальная нагрузка 3300 Ватт."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Deaktiviert"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disabled"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отключено"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "0ce4",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Watts"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Watts"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Ватт"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     },

@@ -52,6 +52,8 @@ namespace HomeGenie.Service.Constants
         // commonly used parameters
         public const string STATUS_LEVEL
             = "Status.Level";
+        public const string STATUS_DOORLOCK
+            = "Status.DoorLock";
         public const string METER_WATTS
             = "Meter.Watts";
         public const string METER_ANY

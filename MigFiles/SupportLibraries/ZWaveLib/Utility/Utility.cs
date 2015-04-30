@@ -26,6 +26,13 @@ using System.Collections.Generic;
 namespace ZWaveLib
 {
 
+    public enum DebugMessageType
+    {
+        Information,
+        Warning,
+        Error
+    }
+
     public class Utility
     {
         
@@ -55,6 +62,41 @@ namespace ZWaveLib
             for (int i = 0; i < NumberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
+        }
+
+        public static byte[] AppendByteToArray(byte[] byteArray, byte data)
+        {
+            int pos = -1;
+            if (byteArray != null) pos = Array.IndexOf(byteArray, data);
+            if (pos == -1)
+            {
+                if (byteArray != null)
+                {
+                    Array.Resize(ref byteArray, byteArray.Length + 1);
+                }
+                else
+                {
+                    byteArray = new byte[1];
+                }
+                byteArray[byteArray.Length - 1] = data;
+            }
+            return byteArray;
+        }
+
+        public static void DebugLog(DebugMessageType dtype, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            if (dtype == DebugMessageType.Warning)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (dtype == DebugMessageType.Error)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+            }
+            //Console.Write("[" + DateTime.Now.ToString("HH:mm:ss.ffffff") + "] ");
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }

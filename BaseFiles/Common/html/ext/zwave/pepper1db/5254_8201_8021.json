@@ -111,6 +111,9 @@
         },
         {
           "@id": "0086"
+        },
+        {
+          "@id": "0025"
         }
       ]
     },
@@ -144,19 +147,61 @@
           "@number": "1",
           "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Activate/Deactivate All On/All Off"
+              "#text": "All On/All Of"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 (0x00) - All On is not active,\r\nAll Off is not active\r\n1 (0x01) - All On is not active,\r\nAll Off active\r\n2 (0x02) - All On active,\r\nAll Off is not active\r\n255 (0xFF) - All On active,\r\nAll Off active"
+              "#text": "Choose if All On/All Off mode should be activated or deactivated."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On is not active,\r\nAll Off is not active"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On is not active,\r\nAll Off active"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On active,\r\nAll Off is not active"
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On active,\r\nAll Off active"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "5",
@@ -166,15 +211,37 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Switch returns to the last position saved before power failure"
+              "#text": "Switch state after power failure"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 (0x00) - Switch does not save\r\nthe state after power failure, it\r\nreturns to \"off\" position\r\n1 (0x01) - Switch saves its state\r\nbefore power failure"
+              "#text": "Switch returns to the last position\r\nsaved before power failure."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch does not save\r\nthe state after power failure, it\r\nreturns to \"off\" position."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch saves its state\r\nbefore power failure."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "13",
@@ -184,31 +251,64 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Double click option (set to max. brightness)"
+              "#text": "Double click option"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 (0x00) - Double click function\r\ndisabled\r\n1 (0x01) - Double click function\r\nenabled"
+              "#text": "Enable or disable double click function for maximum brightness level."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Double click function\r\ndisabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Double click function\r\nenabled."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "17",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "03",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Time of moving the Dimmer from 0% to max. dimming values."
+              "#text": "Dimming time frame"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Dimmer Mode:\r\nFrom 0 to 5 seconds\r\nStep size = 1 second"
+              "#text": "Sets the time of moving the Dimmer from 0%\r\nto max. dimming values. (The ZDM-80 will implement the\r\ndimming duration if received this\r\nparameter value from\r\ncontroller/gateway. Otherwise, the\r\nZDM-80 will implement the local\r\nparameter value)"
+            }
+          },
+          "value": {
+            "@from": "00",
+            "@to": "05",
+            "@unit": "sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define time frame."
+              }
             }
           }
         },
@@ -226,7 +326,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "2 (0x02) to 99 (0x63) %"
+              "#text": "Define the upper dimming level. Higher percentages lead to higher brightness level."
+            }
+          },
+          "value": {
+            "@from": "02",
+            "@to": "63",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define dimming level."
+              }
             }
           }
         },
@@ -244,7 +355,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 (0x01) to 98 (0x62) %"
+              "#text": "Define the lower dimming level. Lower percentages lead to lower brightness level."
+            }
+          },
+          "value": {
+            "@from": "01",
+            "@to": "62",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define dimming level."
+              }
             }
           }
         }
