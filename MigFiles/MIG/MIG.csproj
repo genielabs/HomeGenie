@@ -55,7 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateways\WebServiceGatewayConfiguration.cs" />
+    <Compile Include="Gateways\WebServiceGatewayRequest.cs" />
     <Compile Include="Gateways\WebServiceUtility.cs" />
+    <Compile Include="Gateways\HttpListenerCallbackState.cs" />
     <Compile Include="Interfaces\Controllers\LircRemote.cs" />
     <Compile Include="Interfaces\DynamicInterfaceAPI.cs" />
     <Compile Include="Gateways\TcpSocketGateway.cs" />

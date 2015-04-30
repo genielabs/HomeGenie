@@ -120,6 +120,7 @@ namespace HomeGenie.Service
             systemConfiguration = new SystemConfiguration();
             systemConfiguration.HomeGenie.ServicePort = 8080;
             systemConfiguration.OnUpdate += systemConfiguration_OnUpdate;
+			// TODO: Should this be called BEFORE the above two lines?  This overwrites the settings above.
             LoadSystemConfig();
             //
             // setup web service handlers
@@ -133,6 +134,11 @@ namespace HomeGenie.Service
             bool serviceStarted = false;
             int bindAttempts = 0;
             int port = systemConfiguration.HomeGenie.ServicePort;
+			string hostHeader = systemConfiguration.HomeGenie.Location;
+			if (string.IsNullOrWhiteSpace(hostHeader))
+			{
+				hostHeader = "+"; //Defaulting for existing installations
+			}
             while (!serviceStarted && bindAttempts <= 10)
             {
                 // TODO: this should be done like this _services.Gateways["WebService"].Configure(....)
@@ -140,6 +146,7 @@ namespace HomeGenie.Service
                     port,
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html"),
                     "/hg/html",
+					hostHeader,
                     systemConfiguration.HomeGenie.UserPassword
                 );
                 if (migService.StartGateways())
@@ -1825,14 +1832,17 @@ namespace HomeGenie.Service
                     break;
                 }
             }
-            //
-            string presentationUrl = "http://" + localIP + ":" + systemConfiguration.HomeGenie.ServicePort;
-            //string friendlyName = "HomeGenie: " + Environment.MachineName;
+
+			string address = localIP;
+			if (systemConfiguration.HomeGenie.Location.Length > 1)
+			{
+				address = systemConfiguration.HomeGenie.Location;
+			}
+            string presentationUrl = "http://" + address + ":" + systemConfiguration.HomeGenie.ServicePort;
             string manufacturer = "G-Labs";
             string manufacturerUrl = "http://generoso.info/";
             string modelName = "HomeGenie";
             string modelDescription = "HomeGenie Home Automation Server";
-            //string modelURL = "http://homegenie.it/";
             string modelNumber = "HG-1";
             string standardDeviceType = "HomeAutomationServer";
             string uniqueDeviceName = systemConfiguration.HomeGenie.GUID;

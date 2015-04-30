@@ -280,6 +280,19 @@ namespace HomeGenie.Service.Handlers
                         homegenie.SystemConfiguration.Update();
                     } catch { }
                 }
+				else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
+				{
+					migCommand.Response = JsonHelper.GetSimpleResponse(homegenie.SystemConfiguration.HomeGenie.Location.ToString());
+				}
+				else if (migCommand.GetOption(0) == "HttpService.SetHostHeader")
+				{
+					try
+					{
+						homegenie.SystemConfiguration.HomeGenie.Location = migCommand.GetOption(1);
+						homegenie.SystemConfiguration.Update();
+					}
+					catch { }
+				}
                 else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
                 {
                     migCommand.Response = JsonHelper.GetSimpleResponse(homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes.ToString());

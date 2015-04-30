@@ -58,7 +58,7 @@
       </ModuleParameter>
     </Settings>
     <SystemName>HAL</SystemName>
-    <Location />
+		<Location>+</Location>
     <ServicePort>80</ServicePort>
     <UserPassword />
     <GUID></GUID>

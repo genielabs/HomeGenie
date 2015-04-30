@@ -7,3 +7,15 @@ MigFiles/SupportLibraries/SerialPortLib/bin/
 MigFiles/SupportLibraries/W800RF32/bin/
 MigFiles/SupportLibraries/XTenLib/bin/
 MigFiles/SupportLibraries/ZWaveLib/bin/
+/BaseFiles/Common/obj/Debug
+/BaseFiles/Windows/obj/Debug
+/HomeGenie/obj/Debug
+/HomeGenie_Windows/*.suo
+/HomeGenie_Windows/HomeGenieService/obj/Debug
+/HomeGenie_Windows/HomeGenieManager/obj/Debug
+/MigFiles/MIG/obj/Debug
+/MigFiles/SupportLibraries/NetClientLib/obj/Debug
+/MigFiles/SupportLibraries/SerialPortLib/obj/Debug
+/MigFiles/SupportLibraries/W800RF32/obj/Debug
+/MigFiles/SupportLibraries/XTenLib/obj/Debug
+/MigFiles/SupportLibraries/ZWaveLib/obj/Debug

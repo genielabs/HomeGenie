@@ -82,6 +82,19 @@
                     </div>
                 </div>
             </li>
+			<li>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<div>
+							<label><span data-locale-id="configure_system_hostheaderis">Http host header is</span> <span id="systemsettings_hostheader_text"></span></label>
+							<br />
+						</div>
+					</div>
+					<div class="ui-block-b" style="float:right;width:150px">
+						<a data-locale-id="configure_system_hostheaderchange" href="#systemsettings_httphostheader_popup" data-rel="popup" class="ui-btn ui-corner-all">Change Host Header</a>
+					</div>
+				</div>
+			</li>
 
             <li>
                 <div class="ui-grid-a">
@@ -298,6 +311,27 @@
                 </div>
             </div>
         </div>
+
+		<div id="systemsettings_httphostheader_popup" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
+			<div data-role="header" class="ui-corner-top">
+				<h1 data-locale-id="configure_system_hostheaderheading">Http Host Header</h1>
+			</div>
+			<div class="ui-content" class="ui-corner-bottom ui-content">
+				<h3 data-locale-id="configure_system_hostheaderchangenote" class="ui-title">Note: after changing the Host Header HomeGenie must be restarted to make changes effective! Use &quot;+&quot; for default.</h3>
+				<p>
+					<label for="http_host_header"></label>
+					<input id="http_host_header" type="text" />
+				</p>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_hostheadercancel" data-rel="back">Cancel</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="systemsettings_httphostheader_change" href="#" class="ui-btn ui-corner-all" data-locale-id="configure_system_hostheaderchange" data-rel="back" data-transition="flow">Change</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <div id="securitysettings_password_popup" class="ui-corner-all hg-popup-b" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
             <div data-role="header" class="ui-corner-top">

@@ -13,6 +13,15 @@ HG.System.SetHttpPort = function (port, callback) {
         }
     });
 };
+HG.System.SetHostHeader = function (hostHeader, callback) {
+	$.ajax({
+		url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetHostHeader/' + hostHeader + '/' + (new Date().getTime()),
+		type: 'GET',
+		success: function (data) {
+			if (callback != null) callback(data);
+		}
+	});
+};
 HG.System.SetPassword = function (pass, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.SetPassword/' + pass + '/' + (new Date().getTime()),

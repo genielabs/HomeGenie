@@ -32,52 +32,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MIG.Gateways
 {
-    class WebServiceGatewayConfiguration
-    {
-        public string HomePath;
-        public string BaseUrl;
-        public int Port;
-        public string Password;
-        public bool CacheEnable;
-    }
-
-    class WebServiceGatewayRequest
-    {
-        public HttpListenerContext Context;
-        public string UrlRequest;
-
-        public WebServiceGatewayRequest(HttpListenerContext context, string request)
-        {
-            this.Context = context;
-            this.UrlRequest = request;
-        }
-    }
-
-    public class HttpListenerCallbackState
-    {
-        private readonly HttpListener listener;
-        private readonly AutoResetEvent listenForNextRequest;
-
-        public HttpListenerCallbackState(HttpListener listener)
-        {
-            if (listener == null) throw new ArgumentNullException("listener");
-            this.listener = listener;
-            listenForNextRequest = new AutoResetEvent(false);
-        }
-
-        public HttpListener Listener { get { return listener; } }
-
-        public AutoResetEvent ListenForNextRequest { get { return listenForNextRequest; } }
-    }
-
     public class WebServiceGateway : MIGGateway, IDisposable
     {
         public event Action<object> ProcessRequest;
-        //
         private ManualResetEvent stopEvent = new ManualResetEvent(false);
-        //
         private string servicePassword;
         private string baseUrl;
+		private string hostHeader;
         private string[] bindingPrefixes;
 
         public WebServiceGateway()
@@ -89,7 +50,7 @@ namespace MIG.Gateways
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
             baseUrl = config.BaseUrl;
             bindingPrefixes = new string[1] { 
-                String.Format(@"http://+:{0}/", config.Port)
+                String.Format(@"http://{0}:{1}/", config.HostHeader, config.Port)
             };
             SetPasswordHash(config.Password);
         }
@@ -122,10 +83,9 @@ namespace MIG.Gateways
             try
             {
                 var context = state as HttpListenerContext;
-                //
                 request = context.Request;
                 response = context.Response;
-                //
+                
                 if (request.IsSecureConnection)
                 {
                     var clientCertificate = context.Request.GetClientCertificate();
@@ -140,30 +100,19 @@ namespace MIG.Gateways
                         return;
                     }
                 }
-                //
-                // TODO: why AddHeader is issued two times???
                 context.Response.AddHeader("Server", "MIG WebService Gateway");
-                //context.Response.Headers.Remove(HttpResponseHeader.Server);
-                context.Response.AddHeader("Server", "MIG WebService Gateway");
-                //context.Response.Headers.Set(HttpResponseHeader.Server, "MIG WebService Gateway");
-                //
                 response.KeepAlive = false;
-                //
+
                 bool isAuthenticated = (request.Headers[ "Authorization" ] != null);
-                //
-                if (servicePassword == "" || isAuthenticated) //request.IsAuthenticated)
+                if (servicePassword == "" || isAuthenticated)
                 {
                     bool verified = false;
-                    //
                     string authUser = "";
                     string authPass = "";
-                    //
+
                     //NOTE: context.User.Identity and request.IsAuthenticated
                     //aren't working under MONO with this code =/
                     //so we proceed by manually parsing Authorization header
-                    //
-                    //HttpListenerBasicIdentity identity = null;
-                    //
                     if (isAuthenticated)
                     {
                         //identity = (HttpListenerBasicIdentity)context.User.Identity;
@@ -181,12 +130,12 @@ namespace MIG.Gateways
                     {
                         verified = true;
                     }
-                    //
+                    
                     if (verified)
                     {
                         string url = request.RawUrl.TrimStart('/');
                         if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
-                        //
+
                         // url aliasing check
                         if (url == "" || url.TrimEnd('/') == baseUrl.TrimEnd('/'))
                         {
@@ -212,21 +161,18 @@ namespace MIG.Gateways
                                     Console.Error.WriteLine(eh);
                                 }
                             }
-
                         }
                     }
                     else
                     {
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         response.AddHeader("WWW-Authenticate", "Basic");
-                        //context.Response.Headers.Set(HttpResponseHeader.WwwAuthenticate, "Basic");
                     }
                 }
                 else
                 {
                     response.StatusCode = (int)HttpStatusCode.Unauthorized;
                     response.AddHeader("WWW-Authenticate", "Basic");
-                    //context.Response.Headers.Set(HttpResponseHeader.WwwAuthenticate, "Basic");
                 }
             }
             catch (Exception ex)
@@ -234,14 +180,15 @@ namespace MIG.Gateways
                 // TODO: add error logging 
                 Console.WriteLine("WEBGATEWAY ERROR: " + ex.Message + "\n" + ex.StackTrace);
             }
-            //
-            try
+
+			try
             {
                 response.OutputStream.Close();
                 response.Close();
             }
             catch
             {
+				// TODO: add error logging
             }
             try
             {
@@ -249,6 +196,7 @@ namespace MIG.Gateways
             }
             catch
             {
+				
             }
         }
 
@@ -298,15 +246,13 @@ namespace MIG.Gateways
             {
                 Console.WriteLine("WebServiceGateway: " + ex.Message + "\n" + ex.StackTrace);
             }
-            //finally
-            //{
-            //    callbackState.ListenForNextRequest.Set();
-            //}
-            if (context == null) return;
+
+			if (context == null)
+			{
+				return;
+			}
+
             Worker(context);
         }
-
-
     }
-
 }

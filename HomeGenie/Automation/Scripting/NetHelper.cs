@@ -574,6 +574,7 @@ namespace HomeGenie.Automation.Scripting
 
 
         //TODO: add autodoc comment (HG Event forwarding)
+		//TODO: is this function used?
         public NetHelper SignalModuleEvent(string hgAddress, ModuleHelper module, ModuleParameter parameter)
         {
             string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();

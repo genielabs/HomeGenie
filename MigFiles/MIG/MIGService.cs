@@ -144,6 +144,7 @@ namespace MIG
                 Port = 80,
                 HomePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html"),
                 BaseUrl = "hg/html",
+				HostHeader = "+",
                 Password = ""
             };
         }
@@ -298,7 +299,6 @@ namespace MIG
                 migInterface.Disconnect();
             }
             webGateway.Stop();
-            //tcpGateway.Stop();
         }
         #endregion
 
@@ -351,11 +351,12 @@ namespace MIG
 
         #region WebGateway
 
-        public void ConfigureWebGateway(int port, string homePath, string baseUrl, string adminPasswordHash)
+        public void ConfigureWebGateway(int port, string homePath, string baseUrl, string hostHeader, string adminPasswordHash)
         {
             webServiceConfig.Port = port;
             webServiceConfig.HomePath = homePath;
             webServiceConfig.BaseUrl = baseUrl.TrimStart('/');
+			webServiceConfig.HostHeader = hostHeader;
             webServiceConfig.Password = adminPasswordHash;
         }
 
