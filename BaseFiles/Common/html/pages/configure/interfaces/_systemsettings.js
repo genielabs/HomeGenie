@@ -61,12 +61,16 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         // import completed...
         uploadFile.val('');
         var response = uploadFrame[0].contentWindow.document.body;
-        response = eval(response.textContent || response.innerText)[0];
-        HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+        if (typeof response != 'undefined' && response != '' && (response.textContent || response.innerText)) {
+            response = eval(response.textContent || response.innerText)[0];
+            HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+        }
     });
 };
 
 HG.WebApp.SystemSettings.AddonInstall = function(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    text = text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
     HG.WebApp.Utility.ConfirmPopup('Install add-on?', '<pre>'+text+'</pre>', function(confirm){
         if (confirm) {
             $.mobile.loading('show', { text: 'Installing, please wait...', textVisible: true, html: '' });
