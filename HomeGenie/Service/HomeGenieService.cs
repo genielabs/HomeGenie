@@ -1349,16 +1349,15 @@ namespace HomeGenie.Service
                     ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
                     if (program == null) continue;
                     //
-                    var virtualModuleWidget = Utility.ModuleParameterGet(
-                                                  virtualModule,
-                                                  Properties.WIDGET_DISPLAYMODULE
-                                              );
+                    var virtualModuleWidget = Utility.ModuleParameterGet(virtualModule, Properties.WIDGET_DISPLAYMODULE);
                     //
                     Module module = Modules.Find(o => {
-                        bool found = (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address); // main program module
-                        if (!found && o.Domain == virtualModule.Domain && o.Address == virtualModule.Address)
+                        // main program module...
+                        bool found = (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address && o.Address == virtualModule.ParentId);
+                        // ...or virtual module
+                        if (!found && o.Domain == virtualModule.Domain && o.Address == virtualModule.Address && o.Address != virtualModule.ParentId)
                         {
-                            var prop = Utility.ModuleParameterGet(o, "VirtualModule.ParentId");
+                            var prop = Utility.ModuleParameterGet(o, Properties.VIRTUALMODULE_PARENTID);
                             if (prop != null && prop.Value == virtualModule.ParentId) found = true;
                         }
                         return found;
@@ -1591,7 +1590,7 @@ namespace HomeGenie.Service
                     var deleted = systemModules.FindAll(m => m.Domain == iface.Domain && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
                     foreach (var mod in deleted)
                     {
-                        var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                        var virtualParam = Utility.ModuleParameterGet(mod, Properties.VIRTUALMODULE_PARENTID);
                         if (virtualParam == null || virtualParam.DecimalValue == 0)
                         {
                             Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
@@ -1637,7 +1636,7 @@ namespace HomeGenie.Service
                 var deleted = systemModules.FindAll(m => m.Domain == iface.Domain);
                 foreach (var mod in deleted)
                 {
-                    var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                    var virtualParam = Utility.ModuleParameterGet(mod, Properties.VIRTUALMODULE_PARENTID);
                     if (virtualParam == null || virtualParam.DecimalValue == 0)
                     {
                         Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
