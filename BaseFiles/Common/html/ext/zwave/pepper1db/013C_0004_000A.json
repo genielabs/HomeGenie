@@ -155,7 +155,7 @@
       "configParam": [
         {
           "@number": "7",
-          "@type": "constant",
+          "@type": "bitset",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -167,9 +167,91 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Customer function switch, using bit\r\ncontrol.\r\nBit0: Reserve.\r\nBit1: Reserve.\r\nBit2: Reserve.\r\nBit3: Reserve.\r\nBit4: Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report.\r\nBit5: Reserve.\r\nBit6: Reserve.\r\nBit7: Reserve."
+              "#text": "Customer function switch, using bit\r\ncontrol.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report."
+                }
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "29",
@@ -185,9 +267,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Disable the alarm function.\r\n1: Disable Alarm, 0: Enable Alarm.\r\nCaution: After the power up, this\r\nconfiguration always be 0."
+              "#text": "Disable the alarm function.\r\n\r\nCaution: After the power up, this\r\nconfiguration always be 0."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0: Enable Alarm"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1: Disable Alarm"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "31",
@@ -203,9 +307,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Play alarm sound duration, 1 tick is 30\r\nseconds. Default is 3 minutes, maximum is 63.5 minutes\r\n0: means never auto stop."
+              "#text": "Play alarm sound duration, 1 tick is 30\r\nseconds. Default is 3 minutes, maximum is 63.5 minutes.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 = never auto stop"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set duration of alarm sound."
+                }
+              }
+            }
+          ]
         }
       ]
     },

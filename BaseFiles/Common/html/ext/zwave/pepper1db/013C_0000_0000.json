@@ -212,7 +212,7 @@
         },
         {
           "@number": "5",
-          "@type": "constant",
+          "@type": "bitset",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -224,31 +224,207 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Bit0: Disable the Flood function.\r\nBit1: Reserve.\r\nBit2: Reserve.\r\nBit3: Setting the temperature scale.\r\n0: Fahrenheit, 1:Celsius\r\nBit4: Reserve.\r\nBit5: Disable the temperature report\r\nafter event triggered. (1:Disable,\r\n0:Enable)\r\nBit6: Reserve.\r\nBit7: Reserve."
+              "#text": "Operation mode. Using bit to control."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable the Flood function."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Setting the temperature scale.\r\n0: Fahrenheit, 1:Celsius"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable the temperature report\r\nafter event triggered. (1:Disable,\r\n0:Enable)"
+                }
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "6",
-          "@type": "constant",
+          "@type": "bitset",
           "@size": "1",
           "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Mult- Sensor Function Switch"
+              "#text": "Multsensor Function Switch"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Bit0: Reserve.\r\nBit1: Reserve.\r\nBit2: Reserve.\r\nBit3: Reserve.\r\nBit4: Reserve.\r\nBit5: Reserve.\r\nBit6: Disable the humidity report after\r\nevent triggered. (1:Disable, 0:Enable)\r\nBit7: Reserve."
+              "#text": "Multisensor function switch. Using bit\r\nto control."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable the humidity report after\r\nevent triggered. (1:Disable, 0:Enable)"
+                }
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "7",
-          "@type": "constant",
+          "@type": "bitset",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -260,9 +436,95 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Bit0: Reserve.\r\nBit1: Reserve.\r\nBit2: Reserve.\r\nBit3: Disable send out BASIC OFF\r\nafter the flood event cleared.\r\n(1:Disable, 0:Enable)\r\nBit4: Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report.\r\nBit5: Disable Multi CC in auto report.\r\n(1:Disable, 0:Enable)\r\nBit6: Disable to report battery state\r\nwhen the device triggered. (1:Disable,\r\n0:Enable)\r\nBit7: Reserve."
+              "#text": "Customer function switch, using bit\r\ncontrol."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable send out BASIC OFF\r\nafter the flood event cleared.\r\n(1:Disable, 0:Enable)"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Notification Type,\r\n0: Using Notification Report.\r\n1: Using Sensor Binary Report."
+                }
+              }
+            },
+            {
+              "@from": "05",
+              "@to": "05",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable Multi CC in auto report.\r\n(1:Disable, 0:Enable)"
+                }
+              }
+            },
+            {
+              "@from": "06",
+              "@to": "06",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable to report battery state\r\nwhen the device triggered. (1:Disable,\r\n0:Enable)"
+                }
+              }
+            },
+            {
+              "@from": "07",
+              "@to": "07",
+              "@reserved": "true",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reserve."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "10",
@@ -278,9 +540,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 127\r\nThe interval time for auto report the\r\nbattery level.\r\n0 means turn off auto report.\r\nThe default value is 12. The tick time\r\ncan setting by the configuration No.20."
+              "#text": "Sets the time interval to send an auto report of the battery level.\r\nThe tick time\r\nis set by the configuration No.20."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Auto report is turned off."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines time interval for auto report."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "13",
@@ -296,9 +580,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 127\r\nThe interval time for auto report the\r\ntemperature.\r\n0 means turn off auto report.\r\nThe default value is 12. The tick time\r\ncan setting by the configuration No.20."
+              "#text": "Sets the time interval to send an auto report of the temperature. The tick time\r\nis set by the configuration No.20."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Auto report is turned off."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines interval time for auto report."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "14",
@@ -314,9 +620,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 127\r\nThe interval time for auto report the\r\nhumidity.\r\n0 means turn off auto report.\r\nThe default value is 12. The tick time\r\ncan setting by the configuration No.20."
+              "#text": "Sets the time interval to send an auto report of the humidity. The tick time\r\nis set by the configuration No.20."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Auto report is turned off."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines time interval for auto report."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "15",
@@ -332,9 +660,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 127\r\nThe interval time for auto report the\r\nflood state.\r\n0 means turn off auto report.\r\nThe default value is 12. The tick time\r\ncan setting by the configuration No.20."
+              "#text": "Sets the time interval to send an auto report of the flood state. The tick time\r\nis set by the configuration No.20.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Auto report is turned off."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines interval time for auto report."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "20",
@@ -350,9 +700,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 0xFF\r\nThe interval time for auto report each\r\ntick. Setting this configuration will\r\neffect configuration No.10, No.13,\r\nNo.14 and No.15.\r\nCaution: Setting to 0 means turn off all auto report function."
+              "#text": "Sets the time interval for an auto report of each tick.\r\nSetting this configuration will\r\neffect configuration No.10, No.13,\r\nNo.14 and No.15.\r\nCaution: Setting to 0 means turn off\r\nall auto report function."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All auto report function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines interval time for an auto report each\r\ntick."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "21",
@@ -368,9 +740,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 0x7F\r\nThe temperature differential to report.\r\n0 means turn off this function.\r\nThe unit is Fahrenheit.\r\nEnable this function the device will\r\ndetect every 10 seconds.\r\nAnd when the temperature is over 140\r\ndegree Fahrenheit, it will continue report."
+              "#text": "The temperature differential that is reported.\r\nThe unit is Fahrenheit.\r\nEnable this function the device will\r\ndetect every 10 seconds.\r\nIf the temperature is over 140\r\ndegree Fahrenheit, it will continue report."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "7f",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines temperature differential that will be reported."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "23",
@@ -386,11 +780,38 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 ~ 60\r\nThe humidity differential to report.\r\n0 means turn off this function.\r\nThe unit is percentage.\r\nEnable this function the device will detect every 10 seconds."
+              "#text": "\r\nThe humidity differential that is reported.\r\n\r\nThe unit is percentage.\r\nEnable this function the device will detect every 10 seconds."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "3c",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Defines humidity differential that will be reported."
+                }
+              }
+            }
+          ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/b67b00ccb0cf6ee3b4587e83e3a730872b7ed2a6.png"
+      }
     }
   }
 }

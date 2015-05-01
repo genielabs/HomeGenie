@@ -132,6 +132,11 @@
           }
         }
       }
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/3b553f7e0472e075bea93f84bdeba2b77440283e.png"
+      }
     }
   }
 }

@@ -52,21 +52,40 @@
     },
     "deviceDescription": {
       "description": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Door or Window Detection"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Tür- und Fenster Detektion"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Door or Window Detection"
+          }
+        ]
       },
       "wakeupNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Für Wakeup Funktion hintere Abdeckung öffnen. Die rote LED wird für 10 Sekunden anhaltend leuchten. Anschließend sendet der ZD2102 ein \"Wake up\" Signal. Sollte der ZD2102 den Befehl \"Keine Wake-Up Informationen\" erhalten haben, geht die LED sofort bzw. nach 10 Sekunden aus. Das Gerät wird nach der \"Wake-Up\" Benachrichtigung  mit seiner Funktion fortfahren."
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "It will be triggering after opening the rear cover, also the red LED will keep on lasting 10 seconds and ZD2102 will send \"Wake UP Notification\" after 10 seconds. If ZD2102 received \"Wake Up No More Information\" command then the red LED will go off or it will wait 10 seconds then go off. It will proceed all the commands after sending the \"Wake Up Notification\"."
+          }
+        ]
       },
       "inclusionNote": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "Press the program switch for sending the NIF."
-        }
+        "lang": [
+          {
+            "@xml:lang": "de",
+            "#text": "Drücken Sie den Programmierschalter zum Senden des NIF"
+          },
+          {
+            "@xml:lang": "en",
+            "#text": "Press the program switch for sending the NIF."
+          }
+        ]
       },
       "productName": "Door Sensor ",
       "brandName": "Vision",
@@ -132,12 +151,79 @@
         "@number": "1",
         "@maxNodes": "5",
         "description": {
-          "lang": {
-            "@xml:lang": "en",
-            "#text": "All triggering reports & low voltage report will be sent to the associated nodes."
-          }
+          "lang": [
+            {
+              "@xml:lang": "de"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "All triggering reports & low voltage report will be sent to the associated nodes."
+            }
+          ]
         }
       }
+    },
+    "configParams": {
+      "configParam": [
+        {
+          "@number": "0",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Status"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "deaktiviert (Voreinstellung)"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "disable (Default)"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "1",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Status "
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "aktiviert"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "enable"
+              }
+            ]
+          }
+        }
+      ]
     },
     "resourceLinks": {
       "deviceImage": {

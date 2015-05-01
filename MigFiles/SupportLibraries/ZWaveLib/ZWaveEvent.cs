@@ -28,7 +28,6 @@ namespace ZWaveLib
     {
         Level,
         ManufacturerSpecific,
-        Generic,
         MeterKwHour,
         MeterKvaHour,
         MeterWatt,
@@ -36,12 +35,13 @@ namespace ZWaveLib
         MeterAcVolt,
         MeterAcCurrent,
         MeterPower,
+        SensorGeneric,
         SensorTemperature,
         SensorHumidity,
         SensorLuminance,
         SensorMotion,
-        AlarmDoorWindow,
         AlarmGeneric,
+        AlarmDoorWindow,
         AlarmSmoke,
         AlarmCarbonMonoxide,
         AlarmCarbonDioxide,
@@ -69,7 +69,11 @@ namespace ZWaveLib
         ThermostatOperatingState,
         ThermostatSetBack,
         ThermostatSetPoint,
-        UserCode
+        UserCode,
+        SecurityNodeInformationFrame,
+        SecurityDecriptedMessage,
+        SecurityGeneratedKey,
+        DoorLockStatus
     }
 
     public class ZWaveEvent

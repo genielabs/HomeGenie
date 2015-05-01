@@ -225,52 +225,10 @@
         "Ajouter un Groupe",
     "configure_interfaces_heading": 
         "Paramètres",
-    "configure_interfaces_zwaveoptions": 
-        "Contrôleur ZWave",
     "configure_interfaces_optdisable": 
         "Disable",
     "configure_interfaces_optenable": 
         "Enable",
-    "configure_interfaces_zwaveport": 
-        "Port du Contrôleur",
-    "configure_interfaces_zwavecommontasks": 
-        "Action ZWave",
-    "configure_interfaces_zwaveaddnode": 
-        "Ajouter un module",
-    "configure_interfaces_zwaveremovenode": 
-        "Supprimer un module",
-    "configure_interfaces_x10options": 
-        "Contrôleur X10",
-    "configure_interfaces_x10port": 
-        "Port du Contrôleur",
-    "configure_interfaces_x10housecodes": 
-        "Codes utilisés dans la maison",
-    "configure_interfaces_w800rf32": 
-        "Options de réception du contrôleur W800RF32 RF",
-    "configure_interfaces_w800rf32port": 
-        "Port du Contrôleur",
-    "configure_interfaces_lircremote": 
-        "Télécommande infrarouge LIRC",
-    "configure_interfaces_lircremoteconfiguration": 
-        "Configuration LIRC",
-    "configure_interfaces_lircremoteaddremote": 
-        "Ajouter une télécommande",
-    "configure_interfaces_camera": 
-        "Caméra",
-    "configure_interfaces_cameradesc": 
-        "Travaille avec n'importe quelle caméra compatible avec Video4Linux sur <b>/dev/video0</b> (x64 Ubuntu et Raspberry Pi seulement).",
-    "configure_interfaces_cameraport": 
-        "Port de la caméra",
-    "configure_system_lircremotesadd": 
-        "Ajouter une télécommande",
-    "configure_system_zwaveaddnodeheading": 
-        "Ajout/suppression d'un module",
-    "configure_system_zwaveaddnodepressbutton": 
-        "Appuyer sur le bouton du module :",
-    "configure_system_zwaveaddnodeoperationtimeout": 
-        "Vous avez 10 secondes...",
-    "configure_system_zwaveaddnodeclose": 
-        "Fermer",
     "configure_maintenance_heading": 
         "Maintenance",
     "configure_system_theme": 
@@ -527,18 +485,6 @@
         "Sélectionnez le port utilisé par cette interface",
     "systemsettings_selectport_button": 
         "Fermer",
-    "systemsettings_x10housecodes_title": 
-        "Note",
-    "systemsettings_x10housecodes_text": 
-        "Sélectionnez au moins un code.",
-    "systemsettings_x10housecodes_button": 
-        "Fermer",
-    "configure_interfaces_insteon": 
-        "Insteon PLM (2413S/2413U)",
-    "configure_interfaces_insteonport": 
-        "Port du contrôleur",
-    "configure_interfaces_insteonx10housecodes": 
-        "Codes utilisés (pour les interfaces X10 seulement)",
     "configure_group_newgroupconfirm": 
         "Ajouter",
     "configure_module_optremoveseparator": 
@@ -583,16 +529,6 @@
         "",
     "configure_program_options_update": 
         "Mise à jour",
-    "configure_interfaces_zwavediscovery": 
-        "Découvrir",
-    "configure_interfaces_camerasettings": 
-        "Caméra / Résolution / FPS",
-    "configure_interfaces_upnp": 
-        "Plug &amp; Play universel",
-    "configure_interfaces_weeco4mgpio": 
-        "WEECOBOARD 4M GPIO",
-    "configure_system_zwavediscoverytitle": 
-        "Découverte ZWave",
     "configure_system_updateinstall": 
         "Installer la mise à jour",
     "configure_system_deletemodule": 
@@ -641,18 +577,6 @@
         "Non",
     "configure_program_saveconfirm":
         "Sauvegarder",
-    "configure_interfaces_zwavehardreset":
-        "Réinitialisation",
-    "systemsettings_zwavehardreset_hardreset":
-        "Réinitialiser le Contrôleur ?",
-    "systemsettings_zwavehardreset_hardresetprompt":
-        "Etes-vous sûr de vouloir réintialiser le Contrôleur Z-Wave ?",
-    "systemsettings_zwavehardreset_hardresetwarning":
-        "Tous les noeuds seront supprimés !",
-    "systemsettings_zwavehardreset_hardresetcancel":
-        "Annuler",
-    "systemsettings_zwavehardreset_hardresetproceed":
-        "Exécuter",
     "statistics_dataanalysis":
         "Data analysis",
     "statistics_counterexpense":
@@ -734,5 +658,15 @@
     "configure_widgeteditor_nobindmodule_text":
         "No valid module for data binding has been found, please select one.",
     "configure_widgeteditor_nobindmodule_close":
-        "Close"
+        "Close",
+    "configure_widgeteditor_bindtomodule":
+        "bind to module",
+    "configure_widgeteditor_selectmodule_placeholder":
+        "(select a module)",
+    "configure_widgeteditor_title":
+        "Widget editor",
+    "configure_widgeteditor_savinghtml":
+        "Saving HTML...",
+    "configure_widgeteditor_savingjavascript":
+        "Saving Javascript..."
 }

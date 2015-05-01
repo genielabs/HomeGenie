@@ -41,15 +41,13 @@
       "routing": {
         "@value": "false"
       },
-      "rfFrequency": "Japan (922-926 MHz)",
-      "certId": "15324",
-      "certNumber": "ZC08-13060007"
+      "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "USB Dongle ZU1401JP"
+          "#text": "VISION’s Z-wave USB dongle as a portable and delicate mini gateway. The user may plug it into a host computer for operating the Z-wave devices. The affordable price is an attractive point for the public. "
         }
       },
       "wakeupNote": {
@@ -63,14 +61,13 @@
         }
       },
       "productName": "USB Dongle",
-      "brandName": "Vision",
-      "productLine": "Home Security",
-      "productCode": "01",
-      "productVersion": "01"
+      "brandName": "Vision ",
+      "productLine": "Vision ",
+      "productCode": "ZU1401US-5"
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/aa477c8e8f4d6d7c923cc45932559a3e85af600c.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/87b9f3b09b41df657281a069a57861035b5c99e3.jpg"
       }
     }
   }

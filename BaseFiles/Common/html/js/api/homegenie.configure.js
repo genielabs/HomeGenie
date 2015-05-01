@@ -163,6 +163,15 @@ HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
         }
     });
 };
+HG.Configure.Interfaces.ListConfig = function (callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.ListConfig/' + (new Date().getTime()),
+        type: 'GET',
+        success: function (data) {
+            if (typeof callback != 'undefined' && callback != null) callback(data);
+        }
+    });
+};
 
 HG.Configure.MIG = HG.Configure.MIG || {};
 HG.Configure.MIG.InterfaceCommand = function (domain, command, option1, option2, callback) {

@@ -61,8 +61,8 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         notSavedPopup.popup();
     });
     page.on('pagebeforeshow', function (e) {
-        page.find('[data-ui-field=title-heading]').html('<span style="font-size:10pt;font-weight:bold">Widget Editor</span><br/>' + HG.WebApp.WidgetsList._currentWidget);
-        
+        page.find('[data-ui-field=title-heading]').html('<span style="font-size:10pt;font-weight:bold">' + HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_title', false, this.Locale) + '</span><br/>' + HG.WebApp.WidgetsList._currentWidget);
+
         // standard editor/preview size
         page.find('.CodeMirror').css('bottom', (HG.WebApp.WidgetEditor._previewHeight + 5)+'px');
         previewPanel.height(HG.WebApp.WidgetEditor._previewHeight);
@@ -96,7 +96,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         // populate "bind module" select menu
         var bindModuleSelect = page.find('[data-ui-field=bindmodule-sel]');
         bindModuleSelect.empty();
-        bindModuleSelect.append('<option value="">(select a module)</option>');
+        bindModuleSelect.append('<option value="">' + HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_selectmodule_placeholder', false, this.Locale) + '</option>');
         var selected = '', selectedDomain = '';
         for (var m = 0; m < HG.WebApp.Data.Modules.length; m++)
         {
@@ -279,9 +279,9 @@ HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
 };
 
 HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
-    $.mobile.loading('show', { text: 'Saving HTML...', textVisible: true, theme: 'a', html: '' });
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savinghtml', false, this.Locale), textVisible: true, theme: 'a', html: '' });
     HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
-        $.mobile.loading('show', { text: 'Saving Javascript...', textVisible: true, theme: 'a', html: '' });
+        $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savingjavascript', false, this.Locale), textVisible: true, theme: 'a', html: '' });
         HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
             $.mobile.loading('hide');
             if (callback) callback();

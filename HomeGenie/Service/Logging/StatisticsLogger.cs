@@ -562,12 +562,9 @@ namespace HomeGenie.Service.Logging
             {
                 foreach (var parameter in module.Properties)
                 {
-                    // enntry counter
                     if (parameter.Statistics.Values.Count > 0)
                     {
-
                         var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestap.Ticks));
-                        //
                         if (values.Count > 0)
                         {
                             double average = (values.Sum(d => d.Value) / values.Count);
@@ -586,10 +583,16 @@ namespace HomeGenie.Service.Logging
                             try
                             {
                                 var dbCommand = dbConnection.CreateCommand();
-                                // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue"
-                                dbCommand.CommandText = "INSERT INTO ValuesHist VALUES ('" + DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap) + "','" + DateTimeToSQLite(end) + "','" + module.Domain + "','" + module.Address + "','" + parameter.Name + "'," + average.ToString(CultureInfo.InvariantCulture) + ")";
+                                // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue", "CustomData"
+                                dbCommand.Parameters.Add(new SQLiteParameter("@timestart", DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap)));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@timeend", DateTimeToSQLite(end)));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@domain", module.Domain));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@address", module.Address));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@parameter", parameter.Name));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@avgvalue", average.ToString(CultureInfo.InvariantCulture)));
+                                dbCommand.Parameters.Add(new SQLiteParameter("@data", module.Name));
+                                dbCommand.CommandText = "INSERT INTO ValuesHist VALUES (@timestart, @timeend, @domain, @address, @parameter, @avgvalue, @data)";
                                 dbCommand.ExecuteNonQuery();
-
                             }
                             catch (Exception ex)
                             {
@@ -606,12 +609,10 @@ namespace HomeGenie.Service.Logging
                             parameter.Statistics.Values.Clear();
 
                         }
-
                     }
                 }
             }
         }
-
 
     }
 }

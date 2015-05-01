@@ -43,6 +43,7 @@
     <Compile Include="Drivers\CM11.cs" />
     <Compile Include="Drivers\XTenInterface.cs" />
     <Compile Include="XTenManager.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -103,8 +103,8 @@ namespace HomeGenie.Service
 
             // TODO: all the following initialization stuff should go async
             //
-            // initialize recent log list
-            recentEventsLog = new TsList<LogEntry>();
+            // initialize logging
+            SetupLogging();
 
             #region MIG Service initialization and startup
 
@@ -668,6 +668,22 @@ namespace HomeGenie.Service
                             );
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
+                        else if (command.Command == ZWave.Command.DOORLOCK_SET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.STATUS_DOORLOCK
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
+                        else if (command.Command == ZWave.Command.DOORLOCK_GET)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(
+                                module,
+                                Properties.STATUS_DOORLOCK
+                            );
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
                     }
                 }
                 break;
@@ -935,6 +951,18 @@ namespace HomeGenie.Service
 
         #region Logging
 
+        private void SetupLogging()
+        {
+            recentEventsLog = new TsList<LogEntry>();
+            Console.OutputEncoding = Encoding.UTF8;
+            var outputRedirect = new ConsoleRedirect();
+            outputRedirect.ProcessOutput = (outputLine) => {
+                LogBroadcastEvent(Domains.HomeGenie_System, "Console", "StdOut/StdErr redirect", "Console.Output", outputLine);
+            };
+            Console.SetOut(outputRedirect);
+            Console.SetError(outputRedirect);
+        }
+
         internal void LogBroadcastEvent(
             string domain,
             string source,
@@ -988,8 +1016,6 @@ namespace HomeGenie.Service
         {
             if (SystemLogger.Instance.IsLogEnabled)
             {
-                //Console.ResetColor ();
-                Console.WriteLine(logentry);
                 try
                 {
                     SystemLogger.Instance.WriteToLog(logentry);
@@ -1323,16 +1349,15 @@ namespace HomeGenie.Service
                     ProgramBlock program = masterControlProgram.Programs.Find(p => p.Address.ToString() == virtualModule.ParentId);
                     if (program == null) continue;
                     //
-                    var virtualModuleWidget = Utility.ModuleParameterGet(
-                                                  virtualModule,
-                                                  Properties.WIDGET_DISPLAYMODULE
-                                              );
+                    var virtualModuleWidget = Utility.ModuleParameterGet(virtualModule, Properties.WIDGET_DISPLAYMODULE);
                     //
                     Module module = Modules.Find(o => {
-                        bool found = false;
-                        if (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address)
+                        // main program module...
+                        bool found = (o.Domain == virtualModule.Domain && o.Address == virtualModule.Address && o.Address == virtualModule.ParentId);
+                        // ...or virtual module
+                        if (!found && o.Domain == virtualModule.Domain && o.Address == virtualModule.Address && o.Address != virtualModule.ParentId)
                         {
-                            var prop = Utility.ModuleParameterGet(o, "VirtualModule.ParentId");
+                            var prop = Utility.ModuleParameterGet(o, Properties.VIRTUALMODULE_PARENTID);
                             if (prop != null && prop.Value == virtualModule.ParentId) found = true;
                         }
                         return found;
@@ -1354,6 +1379,10 @@ namespace HomeGenie.Service
                         }
                         continue;
                     }
+                    //else if (virtualModule.ParentId == virtualModule.Address)
+                    //{
+                    //    continue;
+                    //}
 
                     if (module == null)
                     {
@@ -1381,11 +1410,14 @@ namespace HomeGenie.Service
                     }
                     module.Description = virtualModule.Description;
                     //
-                    Utility.ModuleParameterSet(
-                        module,
-                        Properties.VIRTUALMODULE_PARENTID,
-                        virtualModule.ParentId
-                    );
+                    if (virtualModule.ParentId != virtualModule.Address)
+                    {
+                        Utility.ModuleParameterSet(
+                            module,
+                            Properties.VIRTUALMODULE_PARENTID,
+                            virtualModule.ParentId
+                        );
+                    }
                     var moduleWidget = Utility.ModuleParameterGet(module, Properties.WIDGET_DISPLAYMODULE);
                     // if a widget is specified on virtual module then we force module to display using this
                     if ((virtualModuleWidget != null && (virtualModuleWidget.Value != "" || moduleWidget == null)) && (moduleWidget == null || (moduleWidget.Value != virtualModuleWidget.Value)))
@@ -1558,7 +1590,7 @@ namespace HomeGenie.Service
                     var deleted = systemModules.FindAll(m => m.Domain == iface.Domain && (interfaceModules.Find(m1 => m1.Address == m.Address && m1.Domain == m.Domain) == null));
                     foreach (var mod in deleted)
                     {
-                        var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                        var virtualParam = Utility.ModuleParameterGet(mod, Properties.VIRTUALMODULE_PARENTID);
                         if (virtualParam == null || virtualParam.DecimalValue == 0)
                         {
                             Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
@@ -1604,7 +1636,7 @@ namespace HomeGenie.Service
                 var deleted = systemModules.FindAll(m => m.Domain == iface.Domain);
                 foreach (var mod in deleted)
                 {
-                    var virtualParam = Utility.ModuleParameterGet(mod, "VirtualModule.ParentId");
+                    var virtualParam = Utility.ModuleParameterGet(mod, Properties.VIRTUALMODULE_PARENTID);
                     if (virtualParam == null || virtualParam.DecimalValue == 0)
                     {
                         Module garbaged = modulesGarbage.Find(m => m.Domain == mod.Domain && m.Address == mod.Address);
@@ -1792,6 +1824,10 @@ namespace HomeGenie.Service
             if (File.Exists("lircconfig.xml"))
             {
                 Utility.AddFileToZip(archiveName, "lircconfig.xml");
+            }
+            if (File.Exists("zwavenodes.xml"))
+            {
+                Utility.AddFileToZip(archiveName, "zwavenodes.xml");
             }
         }
 

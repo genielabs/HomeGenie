@@ -243,6 +243,21 @@
     </div>
     
 <!-- BEGIN Global Popups -->
+
+        
+    <!-- Confirm Popup -->
+    <div id="actionconfirm_popup" class="ui-corner-all hg-popup-b" data-role="popup" data-title="Are you sure?" data-overlay-theme="b" data-position-to="window" data-transition="pop">
+        <div data-role="header" class="ui-corner-top">
+            <h3>Perform the selected action?</h3>
+        </div>    
+        <div class="ui-content ui-corner-bottom">
+            <p style="padding-left:20px;padding-right:20px;max-height:240px;overflow:hidden;overflow-y:auto;">This operation cannot be undone.</p>
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a data-locale-id="popup_confirm_action_cancel" id="actionconfirm_cancel_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete" data-rel="back">Cancel</a></div>
+                <div class="ui-block-b" align="right"><a data-locale-id="popup_confirm_action_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
+            </div>
+        </div>
+    </div>        
     
     <!-- Event Popup Settings -->
     <div id="configure_popupsettings_edit" class="ui-corner-all hg-popup-b" data-role="popup" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
@@ -308,6 +323,7 @@
                             <option data-locale-id="configure_module_typedoorwindow" value="DoorWindow">Door/Window</option>
                             <option data-locale-id="configure_module_typemediareceiver" value="MediaReceiver">Media Receiver</option>
                             <option data-locale-id="configure_module_typemediatransmitter" value="MediaTransmitter">Media Transmitter</option>
+                            <option data-locale-id="configure_module_doorlock" value="DoorLock">Door Lock</option>
                         </select>
                     </td>
                     <td valign="bottom" style="padding-left:5px">

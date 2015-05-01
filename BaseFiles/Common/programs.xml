@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:57.300757Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:52:59.723436Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:57.80337Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:00.230212Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -432,7 +432,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:58.302574Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:00.727854Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -509,7 +509,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:58.798035Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:01.223808Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1042,15 +1042,15 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[{"Line":-19,"Column":0,"ErrorMessage":"The requested feature is not implemented.","ErrorNumber":"-1","CodeBlock":"CR"}]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>74</Address>
     <Name>Meter.Watts events forwarding</Name>
     <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
-    <ActivationTime>2014-04-11T18:48:56.637857Z</ActivationTime>
-    <TriggerTime>2014-04-11T18:48:56.641858Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1149,7 +1149,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:59.297856Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:01.726894Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1202,7 +1202,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:52:59.798157Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:02.229895Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1493,7 +1493,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:00.306693Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:02.736134Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1585,7 +1585,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:00.799468Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:03.225028Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1653,7 +1653,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:01.303159Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:03.730914Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1921,7 +1921,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:01.8039Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:04.231411Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2277,7 +2277,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:02.804169Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:05.231859Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2377,7 +2377,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:03.31627Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:05.741437Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2529,7 +2529,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:03.805835Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:06.233667Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2787,7 +2787,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:04.310798Z</TriggerTime>
+    <TriggerTime>2015-04-20T11:53:06.738822Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3967,20 +3967,25 @@ while (hg.Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-
-// ...
-Program.Setup(()=&gt;
-{              
-  	Program.AddInputField("ClientId", "hg-01", "0. Enter unique ID for this client");
-	Program.AddInputField("ServerAddress", "", "1. MQTT server address");
-  	Program.AddInputField("ServerPort", "1883", "2. MQTT server port");
-  	Program.AddInputField("ServerTopic", "#", "3. Topic");
-  	Program.AddInputField("Username", "", "4. Username (optional)");
-  	Program.AddInputField("Password", "", "5. Password (optional)");
-	Program.AddFeature("", "MQTT.SensorPublish", "Publish module on MQTT network");
+    <ScriptCondition>Program.Setup(()=&gt; {
+  IPHostEntry host;
+  string localIP = "1";
+  host = Dns.GetHostEntry(Dns.GetHostName());
+  foreach (IPAddress ip in host.AddressList)
+  {
+    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+    {
+      localIP = ip.ToString();
+      localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
+    }
+  }
+  Program.AddInputField("ClientId", "hg-" + localIP, "0. Enter unique ID for this client");
+  Program.AddInputField("ServerAddress", "", "1. MQTT server address");
+  Program.AddInputField("ServerPort", "1883", "2. MQTT server port");
+  Program.AddInputField("ServerTopic", "#", "3. Topic");
+  Program.AddInputField("Username", "", "4. Username (optional)");
+  Program.AddInputField("Password", "", "5. Password (optional)");
+  Program.AddFeature("", "MQTT.SensorPublish", "Publish module on MQTT network");
 });
 //
 return true; // execute "Code To Run"</ScriptCondition>
@@ -3990,6 +3995,8 @@ string topic = Program.InputField("ServerTopic").Value.Trim();
 string clientid = Program.InputField("ClientId").Value.Trim();
 string username = Program.InputField("Username").Value.Trim();
 string password = Program.InputField("Password").Value.Trim();
+
+var MqttIsConnected = false;
 
 if (server == "")
 {
@@ -4010,8 +4017,9 @@ else
       .Service(server)
       .Connect(port, clientid);
     Program.Notify("MQTT", "Connected!");
-  } 
-  catch (Exception e) 
+    MqttIsConnected = true;
+  }
+  catch (Exception e)
   {
     Program.Notify("MQTT", e.Message);
     Pause(5);
@@ -4019,13 +4027,9 @@ else
   }
 }
 
-
-
 MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
   var parts = mtopic.Split('/');
   var cid = parts[0];
-  //
-  //if (cid == clientid) return;
   //
   if (parts.Length == 4)
   {
@@ -4040,62 +4044,66 @@ MqttClient.Subscribe(topic, (mtopic, mpayload) =&gt; {
       switch (type)
       {
         case "command":
-        if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
-        {
-          var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
-          var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
-          if (targetmodule.Get().Instance != null)
+          if (domain == "MQTT.Listeners" &amp;&amp; address == clientid)
           {
-            string command = cmdobj.Command.ToString();
-            switch (command)
+            var cmdobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;dynamic&gt;(mpayload);
+            var targetmodule = Modules.InDomain(cmdobj.Domain.ToString()).WithAddress(cmdobj.Address.ToString());
+            if (targetmodule.Get().Instance != null)
             {
-              case "Module.Describe":
-              var modinstance = targetmodule.Get().Instance;
-              MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Utility.Module2Json(modinstance, false));
-              break;
-              default:
-              targetmodule.Command(command).Execute();
-              break;
+              string command = cmdobj.Command.ToString();
+              switch (command)
+              {
+                case "Module.Describe":
+                var modinstance = targetmodule.Get().Instance;
+                MqttClient.Publish(clientid + "/" + modinstance.Domain + "/" + modinstance.Address + "/description", Utility.Module2Json(modinstance, false));
+                break;
+                default:
+                targetmodule.Command(command).Execute();
+                break;
+              }
             }
           }
-        }
-        break;
+          break;
         case "description":
-        if (module.Instance != null)
-        {
-          var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
-          module.Instance.Name = modobj.Name;
-          module.Instance.Description = modobj.Description;
-          module.Instance.DeviceType = modobj.DeviceType;
-          var parentid = module.Parameter("VirtualModule.ParentId").Value;
-          module.Instance.Properties = modobj.Properties;
-          module.Parameter("VirtualModule.ParentId").Value = parentid;
-          module.Parameter("MQTT.SourceNode").Value = cid;
-          Program.Notify("MQTT", "Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
-        }
-        break;
+          if (cid != clientid &amp;&amp; module.Instance != null)
+          {
+            var modobj = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Module&gt;(mpayload);
+            module.Instance.Name = modobj.Name;
+            module.Instance.Description = modobj.Description;
+            module.Instance.DeviceType = modobj.DeviceType;
+            var parentid = module.Parameter("VirtualModule.ParentId").Value;
+            module.Instance.Properties = modobj.Properties;
+            module.Parameter("VirtualModule.ParentId").Value = parentid;
+            module.Parameter("MQTT.SourceNode").Value = cid;
+            Program.Notify("MQTT", "Created remote module " + module.Instance.Domain + " " + module.Instance.Address);
+          }
+          break;
         case "event":
-        var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
-        if (module.Instance == null)
-        {
-          Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
-          module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
-        }
-        else if (!module.HasParameter("MQTT.SourceNode"))
-        {
-          MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");      	
-        }
-        Program.RaiseEvent(module, property.Name, property.Value, "");
-        break;
+          if (cid != clientid)
+          {
+            var property = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;ModuleParameter&gt;(mpayload);
+            if (module.Instance == null)
+            {
+              Program.AddVirtualModule("MQTT:" + cid + "." + domain, address, "Sensor", "");
+              module = Modules.InDomain("MQTT:" + cid + "." + domain).WithAddress(address).Get();
+            }
+            else if (!module.HasParameter("MQTT.SourceNode"))
+            {
+              MqttClient.Publish(clientid + "/MQTT.Listeners/" + cid + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : 'Module.Describe' }");         
+            }
+            Program.RaiseEvent(module, property.Name, property.Value, "");
+          }
+       	  break;
       }
-    } catch (Exception e) { Program.Notify("MQTT ERROR!", e.Message);  }
+    } catch (Exception e) {
+      Program.Notify("MQTT ERROR!", e.Message);
+      MqttIsConnected = false;
+    }
   }
-  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload); 
+  //Console.WriteLine("MQTT {0} : {1}", mtopic, mpayload);
 });
 
-
-When.WebServiceCallReceived("MQTT:", ( args ) =&gt; 
-{
+When.WebServiceCallReceived("MQTT:", ( args ) =&gt; {
   string[] reqs = ((string)args).Split('/');
   string domain = reqs[0];
   string address = reqs[1];
@@ -4109,29 +4117,32 @@ When.WebServiceCallReceived("MQTT:", ( args ) =&gt;
     int mqttdel = domain.IndexOf(":");
     var mqttdest  = domain.Substring(mqttdel + 1, mqttend - mqttdel - 1);
     domain = domain.Substring(mqttend + 1);
-    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");      	
-    return "{ 'ResponseValue' : 'OK' }";    
-  } catch (Exception e) { 
+    MqttClient.Publish(clientid + "/MQTT.Listeners/" + mqttdest + "/command", "{ 'Domain': " + "'" + domain + "', 'Address' : '" + address + "', 'Command' : '" + command + "' }");         
+    return "{ 'ResponseValue' : 'OK' }";   
+  } catch (Exception e) {
     Program.Notify("MQTT ERROR!", e.Message);
+    MqttIsConnected = false;
   }
   return "{ 'ResponseValue' : 'ERROR' }";
 });
 
-
-// We want to do further processing whenever a module changes 
+// We want to do further processing whenever a module changes
 When.ModuleParameterChanged( (module, property) =&gt; {
   if (module.HasFeature("MQTT.SensorPublish") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.") || property.Name.StartsWith("Meter.")) &amp;&amp; !module.Instance.Domain.StartsWith("MQTT:"))
   {
     try{
       MqttClient.Publish(clientid + "/" + module.Instance.Domain + "/" + module.Instance.Address + "/event", Newtonsoft.Json.JsonConvert.SerializeObject(property));
-    } catch  (Exception e){ Console.WriteLine("ERR:"+e.Message + "\n" + e.StackTrace); }
+    } catch  (Exception e){
+      Program.Notify("MQTT ERROR!", e.Message);
+      MqttIsConnected = false;
+    }
   }
   // returning true, will route event to other listeners
   return true;
 });
-//
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+
+while (Program.IsRunning &amp;&amp; MqttIsConnected) Pause(1);</ScriptSource>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>77</Address>
     <Name>MQTT Network</Name>
@@ -4142,8 +4153,8 @@ Other HomeGenie servers will automatically discover the published module once an
 Supports full control/scripting of remote modules, just like a standard local module.</Description>
     <Group>Interconnections</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2015-04-20T12:10:20.154091Z</ActivationTime>
+    <TriggerTime>2015-04-20T12:10:20.19321Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -8090,7 +8101,7 @@ while (Program.IsEnabled)
   Pause(pause);
 }
 </ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>36</Address>
     <Name>Timetable</Name>
@@ -8133,8 +8144,8 @@ while (Program.IsEnabled)
         <Description>Enable Timetable scheduling</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2015-02-08T12:47:36.375853Z</ActivationTime>
-    <TriggerTime>2015-03-29T15:53:05.325621Z</TriggerTime>
+    <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
+    <TriggerTime>2015-04-20T11:59:03.935323Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
