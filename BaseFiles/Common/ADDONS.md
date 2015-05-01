@@ -8,7 +8,7 @@
 
 **MIG-TelldusTellstick**
 <br /> Driver for TellStick. Tested on TellStick Duo.
-<br /> URL: https://github.com/swaner/HomeGenieTelldusInterface/blob/master/Tellstick_0_9.zip
+<br /> URL: https://github.com/swaner/HomeGenieTelldusInterface/raw/master/Tellstick_0_9.zip
 
 
 **MIG-WeecoBoard**
