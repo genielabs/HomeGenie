@@ -163,7 +163,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0x01-0x7FFF\r\n5*720s=3600s=1 hour"
+              "#text": "Set report period.\r\n5*720s=3600s=1 hour\r\n"
+            }
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "7fff",
+            "@unit": "x5 sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set time interval of watt meter report period."
+              }
             }
           }
         },
@@ -181,7 +192,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0x01-0x7FFF\r\n6*10min= 1 hour"
+              "#text": "Set report period.\r\n6*10min= 1 hour"
+            }
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "7fff",
+            "@unit": "x10 min",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set time interval of KWH meter report period."
+              }
             }
           }
         },
@@ -199,7 +221,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "10-500\r\n500*0.01A=5A"
+              "#text": "Define treshold."
+            }
+          },
+          "value": {
+            "@from": "000a",
+            "@to": "01f4",
+            "@unit": "x0.01A",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set value of treshold warning."
+              }
             }
           }
         },
@@ -217,7 +250,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1-10000"
+              "#text": "Define treshold."
+            }
+          },
+          "value": {
+            "@from": "0001",
+            "@to": "2710",
+            "@unit": "x1KWh",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set value of treshold warning."
+              }
             }
           }
         },
@@ -235,9 +279,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1-2\r\n1: One Push button\r\n2:Two Push button"
+              "#text": "Choose external switch type.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1: One Push button"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2:Two Push button"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "6",
@@ -253,9 +319,31 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1-2\r\n1:Report destination level in 5s\r\n2:Report 10 percent level while running"
+              "#text": "Select level report mode."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1:Report destination\r\nlevel in 5s"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "2:Report 10 percent\r\nlevel while\r\nrunning"
+                }
+              }
+            }
+          ]
         }
       ]
     },

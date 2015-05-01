@@ -185,15 +185,37 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Enables\\Disables the shutter's control trough the external Switch"
+              "#text": "Shutter control"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 – SWITCH DISABLED\r\n1 – SWITCH ENABLED"
+              "#text": "Enables\\Disables the shutter's control trough the external Switch"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch is disabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch is enabled."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
@@ -209,7 +231,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "From: 50 (50%) to 100 (100% - FULL ON)"
+              "#text": "Define level. 100% = FULL ON"
+            }
+          },
+          "value": {
+            "@from": "32",
+            "@to": "64",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "From: 50 (50%) to 100 (100% - FULL ON)"
+              }
             }
           }
         },
@@ -227,7 +260,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "From: 0 (OFF) to 49 (49%)"
+              "#text": "Define level. 0% = OFF"
+            }
+          },
+          "value": {
+            "@from": "00",
+            "@to": "31",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "From: 0 (OFF) to 49 (49%)"
+              }
             }
           }
         },
@@ -245,9 +289,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – LIKE THE STATUS: Actions on the button ON -  Basic Set ON_LEVEL;  Actions on the button OFF -  Basic Set OFF_LEVEL\r\n2 – IGNORE IF ON: Actions on the button ON - No action; Actions on the button OFF -  Basic Set OFF_LEVEL \r\n3 – IGNORE IF OFF: Actions on the button ON -  No action; Actions on the button OFF -  Basic Set OFF_LEVEL\r\n4 – IGNORE: Actions on the button ON -  No action"
+              "#text": "Defines the actions to be carried out on the associated devices in terms of Basic Set.\r\n1 – LIKE THE STATUS \r\n2 – IGNORE IF ON\r\n3 – IGNORE IF OFF \r\n4 – IGNORE"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = Basic Set ON_LEVEL\r\nActions on the button OFF = Basic Set OFF_LEVEL\r\n"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON, Actions on the button OFF = No action"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "6",
@@ -263,9 +349,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – LIKE THE STATUS: Actions on the button ON -  Basic Set ON_LEVEL;  Actions on the button OFF -  Basic Set OFF_LEVEL\r\n2 – IGNORE IF ON: Actions on the button ON - No action; Actions on the button OFF -  Basic Set OFF_LEVEL \r\n3 – IGNORE IF OFF: Actions on the button ON -  No action; Actions on the button OFF -  Basic Set OFF_LEVEL\r\n4 – IGNORE: Actions on the button ON -  No action"
+              "#text": "Defines the actions to be carried out on the associated devices in terms of Basic Set.\r\n1 – LIKE THE STATUS \r\n2 – IGNORE IF ON\r\n3 – IGNORE IF OFF \r\n4 – IGNORE"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = Basic Set ON_LEVEL\r\nActions on the button OFF = Basic Set OFF_LEVEL\r\n"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON, Actions on the button OFF = No action"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "7",
@@ -281,9 +409,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – LIKE THE STATUS: Actions on the button ON -  Basic Set ON_LEVEL;  Actions on the button OFF -  Basic Set OFF_LEVEL\r\n2 – IGNORE IF ON: Actions on the button ON - No action; Actions on the button OFF -  Basic Set OFF_LEVEL \r\n3 – IGNORE IF OFF: Actions on the button ON -  No action; Actions on the button OFF -  Basic Set OFF_LEVEL\r\n4 – IGNORE: Actions on the button ON -  No action"
+              "#text": "Defines the actions to be carried out on the associated devices in terms of Basic Set.\r\n1 – LIKE THE STATUS \r\n2 – IGNORE IF ON\r\n3 – IGNORE IF OFF \r\n4 – IGNORE"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = Basic Set ON_LEVEL\r\nActions on the button OFF = Basic Set OFF_LEVEL\r\n"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON, Actions on the button OFF = No action"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "8",
@@ -299,9 +469,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – LIKE THE STATUS: Actions on the button ON -  Basic Set ON_LEVEL;  Actions on the button OFF -  Basic Set OFF_LEVEL\r\n2 – IGNORE IF ON: Actions on the button ON - No action; Actions on the button OFF -  Basic Set OFF_LEVEL \r\n3 – IGNORE IF OFF: Actions on the button ON -  No action; Actions on the button OFF -  Basic Set OFF_LEVEL\r\n4 – IGNORE: Actions on the button ON -  No action"
+              "#text": "Defines the actions to be carried out on the associated devices in terms of Basic Set.\r\n1 – LIKE THE STATUS \r\n2 – IGNORE IF ON\r\n3 – IGNORE IF OFF \r\n4 – IGNORE"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = Basic Set ON_LEVEL\r\nActions on the button OFF = Basic Set OFF_LEVEL\r\n"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON = No action\r\nActions on the button OFF = Basic Set OFF_LEVEL"
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Actions on the button ON, Actions on the button OFF = No action"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "20",
@@ -317,15 +529,57 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – AS RECEIVED (Default value): ON - ON; OFF - OFF\r\n 2 – IGNORE IF ON: ON - Maintains the initial status; OFF - OFF \r\n3 – IGNORE IF OFF: ON - ON; OFF - Maintains the initial status \r\n4 – IGNORE: Maintains the initial status and, if the programmed switch-off timer is active, it is restarted. "
+              "#text": "The device final status reached by the device when it receives a Basic Set command from the Z-Wave network.\r\n1 – AS RECEIVED\r\n2 – IGNORE IF ON\r\n3 – IGNORE IF OFF\r\n4 – IGNORE"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "IF Command received = ON, THEN  Final Status = ON.\r\nIF Command received = OFF, THEN  Final Status = OFF."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "IF Command received = ON, THEN initial status is maintained.\r\nIF Command received = OFF, THEN  Final Status = OFF."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "IF Command received = ON, THEN  Final Status = ON.\r\nIF Command received = OFF, THEN  initial status is maintained."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "IF Command received = ON or OFF, THEN  initial status is maintained, or if the programmed switch-off timer is active, it is restarted."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "30",
           "@type": "range",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -335,9 +589,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nThe following values can be used to configure parameters 30, 31, 32, 33, 34, 35, 36 and 37.\r\nFrom: 1 (OFF) - to 99 (ON) for diming purpose - 0 and 255(0xFF) for switching ON\\OFF.\r\nDefault value 255(0xFF) – ON"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 1-click association group.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "31",
@@ -353,15 +639,47 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 0 – OFF"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 1-click association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "32",
           "@type": "range",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -371,9 +689,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 255(0xFF) – ON"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 2-click association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "33",
@@ -389,15 +739,47 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 0 – OFF"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 2-click association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "34",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -407,9 +789,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 255(0xFF) – ON"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 3-click association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "35",
@@ -425,15 +839,47 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 0 – OFF"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to 2-click association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_Level parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "36",
           "@type": "range",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
@@ -443,9 +889,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 255(0xFF) – ON"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to Hold association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ON_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "37",
@@ -461,9 +939,41 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Default value 0 – OFF"
+              "#text": "Defines the values associated to the ON_LEVEL and OFF_LEVEL parameters used in the Basic Set. commands.\r\nValues apply to Hold association group."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched OFF."
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "OFF_LEVEL parameter is switched ON."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define value for dimming purpose."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "50",
@@ -473,15 +983,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Smoke Alarm, CO, CO2 Action (1 byte) - Defines how the device reacts when it receives one of the following types of alarms: smoke, CO and CO2."
+              "#text": "Smoke Alarm, CO, CO2 Action "
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – ON: The device status switches to ON \r\n2 – OFF: The device status switches to OFF \r\n4 – IGNORE: The alarm will be ignored"
+              "#text": "Defines how the device reacts when it receives one of the following types of alarms: smoke, CO and CO2."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to ON."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to OFF."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The alarm will be ignored."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "51",
@@ -491,15 +1033,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Heat Alarm (1 byte) - Defines how the device reacts when it receives a Heat Alarm"
+              "#text": "Heat Alarm "
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – ON: The device status switches to ON \r\n2 – OFF: The device status switches to OFF \r\n4 – IGNORE: The alarm will be ignored"
+              "#text": "Defines how the device reacts when it receives a Heat Alarm."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to ON."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to OFF."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The alarm will be ignored."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "52",
@@ -509,15 +1083,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Water Alarm (1 byte) - Defines how the device reacts when it receives a Water Alarm"
+              "#text": "Water Alarm"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – ON: The device status switches to ON \r\n2 – OFF: The device status switches to OFF \r\n4 – IGNORE: The alarm will be ignored"
+              "#text": "Defines how the device reacts when it receives a Water Alarm."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to ON."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to OFF."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The alarm will be ignored."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "53",
@@ -527,15 +1133,47 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Home Security (1 byte) - Defines how the device reacts when it receives a Home Security Alarm."
+              "#text": "Home Security"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "1 – ON: The device status switches to ON \r\n2 – OFF: The device status switches to OFF \r\n4 – IGNORE: The alarm will be ignored"
+              "#text": "Defines how the device reacts when it receives a Home Security Alarm."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to ON."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The device status switches to OFF."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The alarm will be ignored."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "60",
@@ -545,13 +1183,24 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Calibration (1 byte) - Starts the system's calibration by setting the parameter's value as final level"
+              "#text": "Calibration"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "From: 0 (0%) to 100 (100%)\r\nDuring the calibration phase the parameter’s value is set to 1 and it is restored to the default value at the end of the procedure."
+              "#text": "Starts the system's calibration by setting the parameter's value as final level. During the calibration phase the parameter’s value is set to 1 and it is restored to the default value at the end of the procedure."
+            }
+          },
+          "value": {
+            "@from": "00",
+            "@to": "64",
+            "@unit": "%",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set parameter value."
+              }
             }
           }
         },
@@ -559,19 +1208,61 @@
           "@number": "61",
           "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "04",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Configuration Reset (1 byte) - Defines what are the parameters to be restored to default values."
+              "#text": "Configuration Reset "
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 – FACTORY RESET: The original manufacturer configuration is restored within the device.\r\n1 – ASSOCIATIONS RESET: All and only the associations are reset \r\n2 – CONFIGURATIONS RESET: The associations are maintained while all other configuration parameters are reset to the manufacturer's original settings, except for this specific configuration.\r\n4 – IGNORE (Default value): No action is carried out"
+              "#text": "Defines what are the parameters to be restored to default values."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "FACTORY RESET: the original manufacturer configuration is restored within the device."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ASSOCIATIONS RESET.\r\nall and only the associations are reset"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "CONFIGURATIONS RESET: the associations are maintained while all other configuration parameters are reset to the manufacturer's original settings, except for this specific configuration."
+                }
+              }
+            },
+            {
+              "@from": "04",
+              "@to": "04",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "IGNORE: \r\nno action is carried out."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "62",
@@ -587,7 +1278,18 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Represents to maximum time allowed to complete a run (from completely open to completely closed). After that time the relay contacts are opened.\r\nFrom: 0 to 127 Seconds –\r\nDefault value: 60 Seconds"
+              "#text": "Represents to maximum time allowed to complete a run (from completely open to completely closed). After that time the relay contacts are opened.\r\n"
+            }
+          },
+          "value": {
+            "@from": "00",
+            "@to": "7f",
+            "@unit": "sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define time value."
+              }
             }
           }
         },
@@ -605,12 +1307,34 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Inverts the outputs controlling the motor. Once the inversion is enabled, the receipt of an opening/closure command will make the motor move in the opposite direction compared to what happens when the parameter is set on 0.\r\nWARNING: The inversion of commands starts the calibration procedure requiring the system to completely run twice, from being completely open to completely closed.\r\n0 – DISABLED\r\n1 – ENABLED"
+              "#text": "Inverts the outputs controlling the motor. Once the inversion is enabled, the receipt of an opening/closure command will make the motor move in the opposite direction compared to what happens when the parameter is set on 0.\r\nWARNING: The inversion of commands starts the calibration procedure requiring the system to completely run twice, from being completely open to completely closed.\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Inversion disabled."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Inversion enabled."
+                }
+              }
+            }
+          ]
         },
         {
-          "@number": "64",
+          "@number": "65",
           "@type": "constant",
           "@size": "1",
           "@default": "00",
@@ -623,9 +1347,51 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "efines the sequence of clicks on the external switch to be associated with the Learning Mode status.\r\n0 – DISABLED\r\n1 – 1 CLICK\r\n2 – 2 CLICK\r\n3 – 3 CLICK\r\nINFO: When Learning mode is associated to a click event any configuration related to the associated devices is ignored. The configuration is valid for a single event. After which the default value will be restored (0 – DISABLED)."
+              "#text": "efines the sequence of clicks on the external switch to be associated with the Learning Mode status.\r\nINFO: When Learning mode is associated to a click event any configuration related to the associated devices is ignored. The configuration is valid for a single event. After which the default value will be restored (0 – DISABLED)."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Action of the Learning mode cannot be enabled through the external switch."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Learning mode activated by 1 click on the external switch."
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Learning mode activated by 2 clicks on the external switch."
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Learning mode activated by 3 clicks on the external switch."
+                }
+              }
+            }
+          ]
         }
       ]
     },

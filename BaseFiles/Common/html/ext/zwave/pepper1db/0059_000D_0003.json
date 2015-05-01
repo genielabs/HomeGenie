@@ -156,9 +156,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Adjust temperature "
+              "#text": "Adjust delta temperature "
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable delta temperature"
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "7f",
+              "@unit": "°C",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Configure delta temperature in 0.1 °C steps."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "2",
@@ -173,9 +196,33 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Select temperature reporting intervals "
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "80",
+              "@to": "7f",
+              "@unit": "mins",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set reporting intervals in 1 min steps."
+                }
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable temperature reporting intervals."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "3",
@@ -191,9 +238,32 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Adjust humidity"
+              "#text": "Adjust delta humidity"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "80",
+              "@to": "7f",
+              "@unit": "%Rh",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set delta humidity in 0.1 %Rh steps."
+                }
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable delta humidity"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "4",
@@ -208,9 +278,33 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Select humidity reporting intervals"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "80",
+              "@to": "7f",
+              "@unit": "mins",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set delta humidity intervals in 1 min steps."
+                }
+              }
+            },
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Disable delta humidity intervals."
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -225,7 +319,8 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Temperature report external digital sensor 04"
             }
           },
           "genericClass": {
@@ -264,7 +359,8 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Temperature report external digital sensor 03"
             }
           },
           "genericClass": {
@@ -303,7 +399,8 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Temperature report external digital sensor 02."
             }
           },
           "genericClass": {
@@ -342,7 +439,8 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Temperature report external digital sensor 01 or thermistor."
             }
           },
           "genericClass": {
@@ -381,7 +479,8 @@
           },
           "description": {
             "lang": {
-              "@xml:lang": "en"
+              "@xml:lang": "en",
+              "#text": "Measured Temperature report.\r\nMeasure Humidity report.\r\nLow battery Alarm report"
             }
           },
           "genericClass": {

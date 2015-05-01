@@ -155,19 +155,61 @@
           "@number": "1",
           "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "80",
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Activate/Deactivate All On/All Off"
+              "#text": "All On/All Off"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 (0x00) - All On is not active,\r\nAll Off is not active\r\n1 (0x01) - All On is not active,\r\nAll Off active\r\n2 (0x02) - All On active,\r\nAll Off is not active\r\n255 (0xFF) - All On active,\r\nAll Off active (default)"
+              "#text": "Choose if All On/All Off mode should be activated or deactivated."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On is not active,\r\nAll Off is not active"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On is not active,\r\nAll Off active"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On active,\r\nAll Off is not active"
+                }
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "80",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "All On active,\r\nAll Off active"
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "5",
@@ -177,15 +219,37 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Switch returns to the last position saved before power failure"
+              "#text": "Switch state after power failure"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "0 (0x00) - Switch does not save the\r\nstate after power failure, it returns to\r\n\"off\" position\r\n1 (0x01) - Switch saves its state\r\nbefore power failure"
+              "#text": "Switch returns to the last position saved before power failure."
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch does not save the\r\nstate after power failure, it returns to\r\n\"off\" position."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Switch saves its state\r\nbefore power failure."
+                }
+              }
+            }
+          ]
         }
       ]
     },

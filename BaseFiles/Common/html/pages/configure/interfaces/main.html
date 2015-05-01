@@ -13,16 +13,23 @@
     <div data-ui-field="import-popup" class="ui-corner-all hg-popup-a" data-transition="pop" data-overlay-theme="b">
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right" data-rel="back">Close</a>
         <div class="ui-corner-top" data-role="header">
-            <h2 data-locale-id="configure_interfaces_importdriver">Import Interface Driver</h2>
+            <h2 data-locale-id="configure_interfaces_importdriver">Install Add-ons</h2>
         </div>
         <div class="ui-content ui-corner-bottom">
+            <h4>Download add-on package from URL</h4>
+            <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
+                <input data-ui-field="download-url" type="text" title="Add-on driver from URL" name="url" placeholder="(enter url)" />
+                <a data-ui-field="download-btn" data-locale-id="configure_interfaces_download" class="ui-btn ui-shadow ui-corner-all">Download &amp; install</a>
+            </fieldset>
+            <h4>Upload add-on package</h4>
             <fieldset data-role="controlgroup" data-type="vertical" style="border:solid 1px gray;padding:5px;padding-top:0">
                 <form data-ui-field="import-form" target="interface_import_uploadframe" enctype="multipart/form-data" method="post" action="../HomeAutomation.HomeGenie/Config/Interface.Import/" data-ajax="false">
-                    <input data-ui-field="upload-file" type="file" title="Import MIG interface driver archive" name="file" />
+                    <input data-ui-field="upload-file" type="file" title="Add-on driver from file" name="file" />
                 </form>
-                <a data-ui-field="upload-btn" data-locale-id="configure_interfaces_import" class="ui-btn ui-shadow ui-corner-all">Import</a>
+                <a data-ui-field="upload-btn" data-locale-id="configure_interfaces_upload" class="ui-btn ui-shadow ui-corner-all">Upload &amp; install</a>
                 <iframe data-ui-field="upload-frame" name="interface_import_uploadframe" src="/dummy/" style="display:none;width:0;height:0;border:0"></iframe>
             </fieldset>
+            <p align="center"><a href="https://github.com/genielabs/HomeGenie/blob/master/BaseFiles/Common/ADDONS.md" data-locale-id="configure_interfaces_addonslist" style="max-width:160px" class="ui-btn ui-btn-a ui-btn-icon-left ui-icon-bars ui-mini ui-corner-all" target="_blank">Add-ons list</a></p>
         </div>
     </div> 
         
@@ -40,8 +47,8 @@
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="configure_interfaces_importdriver" data-ui-field="interface_import" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-transition="slide">
-                        Import Interface Driver
+                    <a data-locale-id="configure_interfaces_installaddons" data-ui-field="interface_import" class="ui-btn ui-icon-arrow-u ui-btn-icon-right" data-transition="slide">
+                        Install Add-ons
                     </a>
                 </li>
             </ul>

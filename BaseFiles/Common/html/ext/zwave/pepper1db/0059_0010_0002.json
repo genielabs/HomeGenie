@@ -164,7 +164,7 @@
       "configParam": [
         {
           "@number": "1",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -175,7 +175,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Enable Fail Save timer"
+                "#text": "Fail Save timer"
               }
             ]
           },
@@ -210,7 +210,7 @@
         },
         {
           "@number": "2",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -221,7 +221,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Temperatur Scale"
+                "#text": "Temperature Scale"
               }
             ]
           },
@@ -233,27 +233,44 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Set the Temperatur Celsius or Fahrenheit"
+                "#text": "Set the Temperatur scale to Celsius or Fahrenheit."
               }
             ]
           },
-          "value": {
-            "@from": "00",
-            "@to": "7f",
-            "@unit": "C",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Temperaturskala"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "Temperaturescale"
-                }
-              ]
+          "value": [
+            {
+              "@from": "00",
+              "@to": "7f",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Temperaturskala = Celsius"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Temperaturescale = Celsius"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "80",
+              "@to": "ff",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Temperaturskala = Fahrenheit"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Temperaturescale = Fahrenheit"
+                  }
+                ]
+              }
             }
-          }
+          ]
         },
         {
           "@number": "3",
@@ -276,30 +293,66 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert den Interval in dem Berichte über die Temperatur gesendet werden."
+                "#text": "Definiert das Intervall in dem Berichte über die Temperatur gesendet werden."
               },
               {
                 "@xml:lang": "en",
-                "#text": "Set the interval in which the Temperaturereport is send"
+                "#text": "Define the time interval for the temperature report that is sent."
               }
             ]
           },
-          "value": {
-            "@from": "0000",
-            "@to": "7fff",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "Bericht-interval in sec."
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "Reportinginterval in sec."
-                }
-              ]
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "7fff",
+              "@unit": "sec",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bericht-interval in sec."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reportinginterval in sec."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "8000",
+              "@to": "ffff",
+              "@unit": "sec",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Bericht-interval in sec."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reportinginterval in sec.\r\nDefine time interval for temperature report. Values 128 to 255 are defined as -128 to -1."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Funktion ist ausgeschalten."
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Function is disabled."
+                  }
+                ]
+              }
             }
-          }
+          ]
         },
         {
           "@number": "4",
@@ -322,11 +375,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert die delte-konfiguration der Temperaturberichte in Grad Celsius oder Fahrenheit"
+                "#text": "Definiert die delta-konfiguration der Temperaturberichte in Grad Celsius oder Fahrenheit"
               },
               {
                 "@xml:lang": "en",
-                "#text": "Set the delta-configuration of the temperaturereport in Celsius or Fahrenheit"
+                "#text": "Set the delta-configuration of the temperature report in Celsius or Fahrenheit, e.g. 50°F = 0.1x500."
               }
             ]
           },
@@ -343,7 +396,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Delte-configuration of the temperaturereport"
+                    "#text": "Set the delta-configuration of the temperature report in °C."
                   }
                 ]
               }
@@ -360,7 +413,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Delte-configuration of the temperaturereport"
+                    "#text": "Set the delta-configuration of the temperature report in °F."
                   }
                 ]
               }
@@ -392,7 +445,7 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "Set the Cutoff in Celsius or Fahrenheit"
+                "#text": "Set the Cutoff in Celsius or Fahrenheit, e.g. 200°F = 0.01x2000"
               }
             ]
           },
@@ -400,7 +453,7 @@
             {
               "@from": "0001",
               "@to": "03e8",
-              "@unit": "C",
+              "@unit": "°C",
               "description": {
                 "lang": [
                   {
@@ -417,7 +470,7 @@
             {
               "@from": "0140",
               "@to": "0848",
-              "@unit": "F",
+              "@unit": "°F",
               "description": {
                 "lang": [
                   {

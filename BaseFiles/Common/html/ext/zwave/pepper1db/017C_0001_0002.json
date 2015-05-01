@@ -127,7 +127,6 @@
           "value": {
             "@from": "02",
             "@to": "32",
-            "@unit": "°C",
             "description": {
               "lang": {
                 "@xml:lang": "en",
@@ -138,9 +137,9 @@
         },
         {
           "@number": "2",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
-          "@default": "0a",
+          "@default": "00",
           "name": {
             "lang": {
               "@xml:lang": "en",

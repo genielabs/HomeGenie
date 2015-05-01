@@ -21,13 +21,13 @@
         "@value": "00"
       },
       "protoVersion": {
-        "@value": "00"
+        "@value": "02"
       },
       "protoSubVersion": {
         "@value": "00"
       },
       "appVersion": {
-        "@value": "00"
+        "@value": "02"
       },
       "appSubVersion": {
         "@value": "00"
@@ -44,23 +44,45 @@
     },
     "deviceDescription": {
       "description": {
-        "lang": {
-          "@xml:lang": "en",
-          "#text": "USB Stick"
-        }
+        "lang": [
+          {
+            "@xml:lang": "en",
+            "#text": "Z-Wave Controller"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Z-Wave Контроллер"
+          }
+        ]
       },
       "wakeupNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "en"
+          },
+          {
+            "@xml:lang": "ru"
+          }
+        ]
       },
       "inclusionNote": {
-        "lang": {
-          "@xml:lang": "en"
-        }
+        "lang": [
+          {
+            "@xml:lang": "en"
+          },
+          {
+            "@xml:lang": "ru"
+          }
+        ]
       },
-      "productName": "Z-Wave.Me",
-      "brandName": "Z-Wave.Me"
+      "productName": "RaZberry",
+      "brandName": "Z-Wave.Me",
+      "productVersion": "2.0"
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/c7e92321850949bf16c882da4ae9bf46612ef1ed.png"
+      }
     }
   }
 }

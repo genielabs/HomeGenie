@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+30/04/2015 1.00 beta rev 484-git5
+    - Updated Pepper1 Z-Wave database
+    - MIG Interface driver add-ons can also be installed by entering the add-on package URL
+    - Program.Say will now use Pico TTS if installed in the system, otherwise Google Speech API
+
 20/04/2015 1.00 beta rev 484-git4
     - Improved MQTT client app
     - Improved unhandled exceptions trapping/recovery

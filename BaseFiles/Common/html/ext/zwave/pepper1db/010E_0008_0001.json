@@ -51,7 +51,7 @@
         "@value": "false"
       },
       "beamSensor": "1000",
-      "rfFrequency": "US"
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
@@ -73,8 +73,7 @@
       },
       "productName": "Danalock100",
       "brandName": "Danalock.com",
-      "productLine": "Danalock",
-      "productCode": "DanalockBTZU100Square",
+      "productCode": "DanalockBTZE100Square",
       "batteryType": "ER34615M",
       "batteryCount": "1"
     },
@@ -84,22 +83,22 @@
           "@id": "005e"
         },
         {
-          "@id": "0022"
+          "@id": "0072"
         },
         {
-          "@id": "0080"
+          "@id": "0098"
         },
         {
           "@id": "005a"
         },
         {
-          "@id": "0072"
+          "@id": "0080"
         },
         {
           "@id": "0073"
         },
         {
-          "@id": "0098"
+          "@id": "0022"
         },
         {
           "@id": "0062",
@@ -176,7 +175,7 @@
         "description": {
           "lang": {
             "@xml:lang": "en",
-            "#text": "Lifeline: all unsolicited reports are sent to the node in Lifeline."
+            "#text": "Lifeline"
           }
         }
       }
@@ -197,7 +196,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Adjusts direction of the motor."
+              "#text": "Choose motor direction."
             }
           },
           "value": [
@@ -217,7 +216,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "1 = The motor goes counterclockwise when\r\nlatched"
+                  "#text": "1 = The motor goes counterclockwise when latched"
                 }
               }
             }
@@ -237,7 +236,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Adjusts speed"
+              "#text": "Choose speed of motor."
             }
           },
           "value": [
@@ -287,7 +286,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "5 =\r\nFastest"
+                  "#text": "5 = Fastest"
                 }
               }
             }
@@ -307,7 +306,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Selects mode of stepper motor "
+              "#text": "Define mode of Stepper motor."
             }
           },
           "value": [
@@ -317,7 +316,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "0 = Stepper motor mode wave drive(power\r\nsaving)"
+                  "#text": "0 = Stepper motor mode wave drive(power saving)"
                 }
               }
             },
@@ -327,7 +326,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "1 = Stepper motor mode full\r\ndrive(Normal)"
+                  "#text": "1 = Stepper motor mode full drive(Normal)"
                 }
               }
             },
@@ -357,7 +356,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Factor 10 turn degrees"
+              "#text": "Set turn degrees."
             }
           },
           "value": {
@@ -366,14 +365,14 @@
             "description": {
               "lang": {
                 "@xml:lang": "en",
-                "#text": "1 = 10 degrees, 9 = 90\r\ndegrees etc."
+                "#text": "\nFactor 10 turn degrees ( 1 = 10 degrees, 9 = 90 degrees etc.)\n"
               }
             }
           }
         },
         {
           "@number": "5",
-          "@type": "constant",
+          "@type": "range",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -385,18 +384,17 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "How many seconds from the lock has been\r\nunlatched to it automatically should close\r\nagain."
+              "#text": "Set time interval when lock should automatically close again.\r\n"
             }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
-              "@unit": "sec",
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "If 0 then it is disabled."
+                  "#text": "Function is disabled."
                 }
               }
             },
@@ -407,7 +405,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "Sets time interval till the lock should close automatically."
+                  "#text": "\nSet time interval until the lock should automatically close again after unlatching.\n"
                 }
               }
             }
@@ -427,7 +425,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Disable or enable the beep sound from latch or\r\nunlatch operations."
+              "#text": "Disable or enable beep sound from latch or unlatch operations.\r\n"
             }
           },
           "value": [
@@ -467,7 +465,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Set the type of battery that powers the device.\r\nThis affects the returned battery state."
+              "#text": "Set the type of battery that powers the device. This affects the returned battery state. Default values: 0=3.6V 1=3V\r\n"
             }
           },
           "value": [
@@ -477,7 +475,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "0 = 3,6\r\nVolt battery"
+                  "#text": "0 = 3,6 Volt battery"
                 }
               }
             },
@@ -487,7 +485,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "1 = 3.0 Volt battery"
+                  "#text": "1 = 3.0 Volt"
                 }
               }
             },
@@ -497,7 +495,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "2 = Mains\r\npower, changing from and to mains power\r\nrequires the Danalock to be excluded and\r\nincluded"
+                  "#text": "\n2 = Mains power, changing from and to mains power requires the Danalock to be excluded and included.\n"
                 }
               }
             }
@@ -517,7 +515,7 @@
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "When the battery level is equal to or under this\r\nvalue, the device will notify user with a beep\r\nsound after latch or unlatch."
+              "#text": "When the battery level is equal to or under this value, the device will notify user with a beep sound after latch or unlatch.\r\n"
             }
           },
           "value": {
@@ -526,7 +524,7 @@
             "description": {
               "lang": {
                 "@xml:lang": "en",
-                "#text": "Sets the battery level that is reported."
+                "#text": "Set battery level to notify user."
               }
             }
           }
@@ -539,13 +537,13 @@
           "name": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Turn&Go"
+              "#text": "Turn and Go"
             }
           },
           "description": {
             "lang": {
               "@xml:lang": "en",
-              "#text": "Used if\r\nthe lock is using a optional rotation sensor.\r\nLatch&Go on will turn automatically when\r\nmanual turn is detected."
+              "#text": "Used if the lock is using a optional rotation sensor. Latch and Go on will turn automatically when manual turn is detected.\r\n"
             }
           },
           "value": [
@@ -555,7 +553,7 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "0 = Turn&Go off"
+                  "#text": "0 = Turn and Go"
                 }
               }
             },
@@ -565,7 +563,138 @@
               "description": {
                 "lang": {
                   "@xml:lang": "en",
-                  "#text": "1 = Turn&Go on"
+                  "#text": "1 = Turn and Go on"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "10",
+          "@type": "range",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Brake and GoBack"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "When used the lock will brake for x amount of seconds and then turn 75 degrees back. Made for special doors without door lever.(Only when unlatching).\r\n"
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 = Disabled"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "0f",
+              "@unit": "sec",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "\nSet time interval for lock to brake and then turning back.\n"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "11",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Async"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Used if the lock is using an optional rotation sensor. When async is enabled the lock will auto calibrate if already unlatched and asked to Unlatch again (used for special door locks where the key turn is asynced from the inside nob.)\r\n"
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "0 = Async off"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "1 = Async on"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "12",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Door lock operation report type"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Set Door lock operation report type."
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "\n0 = Simple supported by all controllers that support door locks.\n"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "\n1 = Advanced, more specific reports through notification Command Class.\n"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "\n2 = No Door lock operation reports are sent unsolicited.\n"
                 }
               }
             }
@@ -575,7 +704,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/65c6c481049554c1d0da7b7f9712bafcbef793f3.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/e01ee8930964469b272f85f6eae5f7fd8cd73c81.jpg"
       }
     }
   }
