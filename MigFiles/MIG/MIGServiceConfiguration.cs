@@ -24,6 +24,8 @@ namespace MIG
 
             [XmlAttribute]
             public string Domain { get; set; }
+            
+            public string Description { get; set; }
 
             [XmlAttribute]
             public bool IsEnabled { get; set; }

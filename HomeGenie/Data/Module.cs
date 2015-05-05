@@ -42,14 +42,17 @@ namespace HomeGenie.Data
         public string Name { get; set; }
         public string Description { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ModuleTypes DeviceType { get; set; } //will indicate actual device (lamp, fan, dimmer light, etc.)
+        public ModuleTypes DeviceType { get; set; }
 
         // location in actual physical Control-topology
-        public string Domain { get; set; } // only Domain is used. Interface should be used instead?
+        public string Domain { get; set; }
         //public string Interface { get; set; }
         public string Address { get; set; }
         //
         public TsList<ModuleParameter> Properties { get; set; }
+        //
+        [JsonIgnore]
+        public TsList<Store> Stores { get; set; }
         //
         public string RoutingNode { get; set; } // "<ip>:<port>" || ""
         //
@@ -60,6 +63,7 @@ namespace HomeGenie.Data
             Description = "";
             DeviceType = MIG.ModuleTypes.Generic;
             Properties = new TsList<ModuleParameter>();
+            Stores = new TsList<Store>();
             RoutingNode = "";
         }
 

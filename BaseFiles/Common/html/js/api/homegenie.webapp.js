@@ -25,6 +25,7 @@ HG.WebApp.Data._CurrentLocale = {};
 var editor1 = null;
 var editor2 = null;
 var editor3 = null;
+var editor4 = null;
 //
 // Speech Recognition objects
 var recognition = null;
@@ -87,15 +88,6 @@ HG.WebApp.InitializePage = function ()
         else if (this.id == 'page_configure_schedulerservice')
         {
             HG.WebApp.Scheduler.LoadScheduling();
-        }
-        else if (this.id == 'page_automation_editprogram') 
-        {	            
-            $('#automation_program_scriptcondition').next().css('display', '');
-            $('#automation_program_scriptsource').next().css('display', '');
-            HG.WebApp.ProgramEdit.SetTab(1);
-            HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-            automationpage_ConditionsRefresh();                                                    
-            automationpage_CommandsRefresh();                                                   
         }
     });
     //
@@ -233,6 +225,21 @@ HG.WebApp.InitializePage = function ()
         theme: 'ambiance'
     });
     $(editor3.getWrapperElement()).hide();
+    //
+    editor4 = CodeMirror.fromTextArea(document.getElementById('fullscreen_edit_text'), {
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true,
+        extraKeys: {
+            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+            "Ctrl-Space": "autocomplete"
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-lint-markers-4", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        highlightSelectionMatches: { showToken: /\w/ },
+        mode: { name: "javascript", globalVars: true },
+        theme: 'ambiance'
+    });    
     //
     // stacked message popups
     //
@@ -404,6 +411,60 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
 // info      : global utility functions
 //
 HG.WebApp.Utility = HG.WebApp.Utility || {};
+HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callback) {
+    var editor = $('#fullscreen_edit_box');
+    editor.find('[data-ui-field=title]').html(title);
+    editor.find('[data-ui-field=subtitle]').html(subtitle);
+    var nameLabel = editor.find('[data-ui-field=namelabel]').html(name);
+    var nameInputDiv = editor.find('[data-ui-field=nameinput]');
+    var nameInputText = nameInputDiv.find('input').val(name);
+    var confirmButton = editor.find('[data-ui-field=confirm]');
+    var cancelButton = editor.find('[data-ui-field=cancel]');
+    if (name == null || name == '') {
+        nameLabel.hide();
+        nameInputDiv.show();
+    } else {
+        nameLabel.show();
+        nameInputDiv.hide();
+    }
+    cancelButton.on('click', function() {
+        var response = { 'name': nameInputText.val(), 'text': editor4.getValue(), 'isCanceled': true };
+        cancelButton.off('click');
+        confirmButton.off('click');
+        $('#fullscreen_edit_box').hide(150);
+        callback(response);
+    });
+    confirmButton.on('click', function() {
+        var response = { 'name': nameInputText.val(), 'text': editor4.getValue(), 'isCanceled': false };
+        if (nameInputText.val() == '') {
+            nameInputText.qtip({
+                content: {
+                    text: HG.WebApp.Locales.GetLocaleString('fullscreen_editor_entervalidname', 'Enter a valid name.')
+                },
+                show: { event: false, ready: true, delay: 200 },
+                hide: { event: false, inactive: 2000 },
+                style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
+                position: { my: 'bottom center', at: 'top center' }
+            })
+            .parent().stop().animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250)
+                .animate({ borderColor: "#FF5050" }, 250)
+                .animate({ borderColor: "#FFFFFF" }, 250);
+        } else {
+            cancelButton.off('click');
+            confirmButton.off('click');
+            $('#fullscreen_edit_box').hide(150);
+            callback(response);
+        }
+    });
+    editor4.setValue(content);
+    setTimeout(function(){
+        editor4.refresh();
+        editor4.focus();
+        editor4.setCursor({ line: 0, ch: 0 });
+    }, 500);
+    $('#fullscreen_edit_box').show(150);
+};
 HG.WebApp.Utility.ConfirmPopup = function(title, description, callback) {
     var confirmPopup = $('#actionconfirm_popup'); 
     confirmPopup.buttonProceed = $('#actionconfirm_confirm_button');

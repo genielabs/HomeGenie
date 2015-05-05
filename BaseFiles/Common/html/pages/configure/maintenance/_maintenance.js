@@ -239,9 +239,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
         });
         //
         $('#systemsettings_modulesdelete').on('popupbeforeposition', function (event) {
-
             HG.WebApp.Maintenance.RefreshModulesList();
-
         });
         $('#configure_interfaces_modules_list').on('click', 'li', function () {
             $.mobile.loading('show');
@@ -274,6 +272,20 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 setTimeout(function () {
                     HG.WebApp.Maintenance.LoadStatisticsSettings();
                 }, 1000);
+            });
+        });
+
+        $('#maintenance_configuration_routingresetbutton').on('click', function() {
+            var message = HG.WebApp.Locales.GetLocaleString('systemsettings_resetroutingdata_warning', 'This operation cannot be undone.');
+            HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_resetroutingdata_title', 'Reset routing data?'), message, function(confirmed){
+                if (confirmed) HG.Configure.Modules.RoutingReset();
+            });
+        });
+
+        $('#maintenance_configuration_databaseresetbutton').on('click', function() {
+            var message = HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_warning', 'This operation cannot be undone.');
+            HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_resetdatabase_title', 'Reset stats database?'), message, function(confirmed){
+                if (confirmed) HG.Statistics.Database.Reset();
             });
         });
 
