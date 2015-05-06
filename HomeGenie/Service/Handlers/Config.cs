@@ -39,6 +39,7 @@ using System.Threading;
 using System.Xml.Serialization;
 using MIG.Interfaces.Media;
 using Jint.Parser;
+using HomeGenie.Automation.Scripting;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -169,7 +170,7 @@ namespace HomeGenie.Service.Handlers
                     var migInt = GetInterfaceConfig(Path.Combine(outputFolder, "configuration.xml"));
                     if (migInt != null)
                     {
-                        response = migInt.Domain + " (" + migInt.AssemblyName + ")\n\n";
+                        response = String.Format("{0} ({1})\n{2}\n", migInt.Domain, migInt.AssemblyName, migInt.Description);
                         // Check for README notes and append them to the response
                         var readmeFile = Path.Combine(outputFolder, "README.TXT");
                         if (File.Exists(readmeFile))
@@ -700,6 +701,78 @@ namespace HomeGenie.Service.Handlers
                 migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                 //
                 homegenie.UpdateModulesDatabase();
+                break;
+
+            case "Stores.List":
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        //module.Stores
+                        migCommand.Response = "[";
+                        for (int s = 0; s < module.Stores.Count; s++)
+                        {
+                            migCommand.Response += "{ \"Name\": \"" + Utility.XmlEncode(module.Stores[s].Name) + "\", \"Description\": \"" + Utility.XmlEncode(module.Stores[s].Description) + "\" },";
+                        }
+                        migCommand.Response = migCommand.Response.TrimEnd(',') + "]";
+                    }
+
+                }
+                break;
+
+            case "Stores.Delete":
+                break;
+
+            case "Stores.ItemList":
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        migCommand.Response = "[";
+                        var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
+                        for (int p = 0; p < store.List.Count; p++)
+                        {
+                            migCommand.Response += "{ \"Name\": \"" + Utility.XmlEncode(store.List[p].Name) + "\", \"Description\": \"" + Utility.XmlEncode(store.List[p].Description) + "\" },";
+                        }
+                        migCommand.Response = migCommand.Response.TrimEnd(',') + "]";
+                    }
+                }
+                break;
+
+            case "Stores.ItemDelete":
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        var name = migCommand.GetOption(3);
+                        var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
+                        store.List.RemoveAll(i => i.Name == name);
+                    }
+                }
+                break;
+
+            case "Stores.ItemGet":
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
+                        migCommand.Response += JsonConvert.SerializeObject(store.Get(migCommand.GetOption(3)));
+                    }
+                }
+                break;
+
+            case "Stores.ItemSet":
+                {
+                    // value is the POST body
+                    string itemData = new StreamReader(request.InputStream).ReadToEnd();
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (module != null)
+                    {
+                        var store = new StoreHelper(module.Stores, migCommand.GetOption(2));
+                        store.Get(migCommand.GetOption(3)).Value = itemData;
+                    }
+                }
                 break;
 
             case "Groups.ModulesList":

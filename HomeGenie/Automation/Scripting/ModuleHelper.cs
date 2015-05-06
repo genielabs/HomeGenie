@@ -167,22 +167,31 @@ namespace HomeGenie.Automation.Scripting
         public ModuleParameter Parameter(string parameter)
         {
             ModuleParameter value = null;
-            if (SelectedModules.Count > 0)
+            if (this.module != null)
             {
                 try
                 {
-                    value = Service.Utility.ModuleParameterGet(module, parameter);
+                    value = Service.Utility.ModuleParameterGet(this.module, parameter);
                 }
                 catch { }
                 // create parameter if does not exists
                 if (value == null)
                 {
-                    value = Service.Utility.ModuleParameterSet(module, parameter, "");
+                    value = Service.Utility.ModuleParameterSet(this.module, parameter, "");
                 }
             }
             return value;
         }
-
+                
+        public StoreHelper Store(string storeName)
+        {
+            StoreHelper storage = null;
+            if (this.module != null)
+            {
+                storage = new StoreHelper(this.module.Stores, storeName);
+            }
+            return storage;
+        }
 
     }
 }

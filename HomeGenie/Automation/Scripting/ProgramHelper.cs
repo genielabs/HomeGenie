@@ -547,6 +547,11 @@ namespace HomeGenie.Automation.Scripting
         {
             Utility.Say(sentence, locale, goAsync);
         }
+        // this redundant method definition is for Jint compatibility
+        public void Say(string sentence, string locale)
+        {
+            Utility.Say(sentence, locale, false);
+        }
 
         /// <summary>
         /// Playbacks a wave file.
@@ -554,21 +559,25 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="waveUrl">URL of the audio wave file to play.</param>
         public void Play(string waveUrl)
         {
-            var webClient = new WebClient();
-            byte[] audiodata = webClient.DownloadData(waveUrl);
-            webClient.Dispose();
+            try
+            {
+                var webClient = new WebClient();
+                byte[] audiodata = webClient.DownloadData(waveUrl);
+                webClient.Dispose();
 
-            string outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-            if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
-            string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
-            if (File.Exists(file)) File.Delete(file);
+                string outputDirectory = Utility.GetTmpFolder();
+                if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+                string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
+                if (File.Exists(file)) File.Delete(file);
 
-            var stream = File.OpenWrite(file);
-            stream.Write(audiodata, 0, audiodata.Length);
-            stream.Close();
+                var stream = File.OpenWrite(file);
+                stream.Write(audiodata, 0, audiodata.Length);
+                stream.Close();
 
-            Utility.Play(file);
-
+                Utility.Play(file);
+            } catch {
+                // TODO: report exception
+            }
         }
 
         /// <summary>
@@ -760,9 +769,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleParameter Parameter(string parameterName)
         {
-            //
             if (programModule == null) RelocateProgramModule();
-            //
             ModuleParameter parameter = null;
             try
             {
@@ -770,6 +777,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch
             {
+                // TODO: report exception
             }
             // create parameter if does not exists
             if (parameter == null)
@@ -779,6 +787,16 @@ namespace HomeGenie.Automation.Scripting
             return parameter;
         }
 
+        public StoreHelper Store(string storeName)
+        {
+            StoreHelper storage = null;
+            if (programModule == null) RelocateProgramModule();
+            if (this.programModule != null)
+            {
+                storage = new StoreHelper(this.programModule.Stores, storeName);
+            }
+            return storage;
+        }
 
         /// <summary>
         /// Gets a value indicating whether the program is running.

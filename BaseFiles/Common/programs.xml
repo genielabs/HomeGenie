@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:52:59.723436Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:47.827168Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:00.230212Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:48.340614Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -281,147 +281,163 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Commands />
     <ScriptCondition>//    
 // this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt;
-{
-	// list the program as custom weather widget
-	Program.AddControlWidget( "weather/wunderground/conditions" );
-    // set input fields parameters
-    // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-    Program.AddInputField("Location", "autoip", "City name");
-    Program.AddInputField("Language", "EN", "Language");
-    Program.AddInputField("ApiKey", "?", "Weather Underground Key");
-    Program.AddInputField("UpdateInterval", "30", "Update interval (minutes)");
-  
-    // 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
-    Program.AddInputField("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE");
-    
-    // initialize widget program parameters
-    Program.Parameter("Astronomy.Sunset").Value = "";
-    Program.Parameter("Astronomy.Sunrise").Value = "";
-    Program.Parameter("Conditions.City").Value = "";
-    Program.Parameter("Conditions.TemperatureC").Value = "";
-    Program.Parameter("Conditions.TemperatureF").Value = "";
-    Program.Parameter("Conditions.DisplayLocation").Value = "";
-    Program.Parameter("Conditions.IconUrl").Value = "";
-    Program.Parameter("Conditions.Description").Value = "";    
+Program.Setup(()=&gt;{
+  // list the program as custom weather widget
+  Program.AddControlWidget( "weather/wunderground/conditions" );
+  // set input fields parameters
+  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+  Program.AddInputField("Location", "autoip", "City name");
+  Program.AddInputField("Language", "EN", "Language");
+  Program.AddInputField("ApiKey", "?", "Weather Underground Key");
+  Program.AddInputField("UpdateInterval", "30", "Update interval (minutes)");
+
+  // 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
+  Program.AddInputField("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE");
+
+  // initialize widget program parameters
+  Program.Parameter("Astronomy.Sunset").Value = "";
+  Program.Parameter("Astronomy.Sunrise").Value = "";
+  Program.Parameter("Conditions.City").Value = "";
+  Program.Parameter("Conditions.TemperatureC").Value = "";
+  Program.Parameter("Conditions.TemperatureF").Value = "";
+  Program.Parameter("Conditions.DisplayLocation").Value = "";
+  Program.Parameter("Conditions.IconUrl").Value = "";
+  Program.Parameter("Conditions.Description").Value = "";    
 });
 //
 return true; // execute "Code To Run"
 </ScriptCondition>
-    <ScriptSource>while (Program.IsEnabled)
+    <ScriptSource>var sunsetEvent = "Sunset";
+var sunriseEvent = "Sunrise";
+
+while (Program.IsEnabled)
 {
   string location = Program.InputField("Location").Value;
   string language = Program.InputField("Language").Value;
   string apikey = Program.InputField("ApiKey").Value;
- 
+
   // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature. by lancebooth
   string display_celsius = Program.InputField("InputDisplayCelsius").Value;
 
   //
   if (!apikey.Contains("?"))
   {
-      try
+    try
+    {
+
+      string webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/astronomy/lang:" + language + "/q/" + location + ".json";
+      var astronomydata = Net.WebService(webserviceurl).GetData();
+
+      int sunrise_hour = int.Parse(astronomydata.moon_phase.sunrise.hour.ToString());
+      int sunrise_minute = int.Parse(astronomydata.moon_phase.sunrise.minute.ToString());
+      int sunset_hour = int.Parse(astronomydata.moon_phase.sunset.hour.ToString());
+      int sunset_minute = int.Parse(astronomydata.moon_phase.sunset.minute.ToString());
+
+      Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
+      Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
+
+      // Update Scheduler entries
+      Scheduler
+        .WithName(sunsetEvent)
+        .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
+      Scheduler
+        .WithName(sunriseEvent)
+        .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
+
+      webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
+      var weatherdata = Net.WebService(webserviceurl).GetData();
+
+      string city = weatherdata.location.city;
+      string country = weatherdata.location.country;
+      string country_iso3166 = weatherdata.location.country_iso3166; // eg. IT,US,NL,UK,AU,CH,DE...
+      string temperaturec = weatherdata.current_observation.temp_c;
+      string temperaturef = weatherdata.current_observation.temp_f;
+      string display_location = weatherdata.current_observation.display_location.full;
+      string weather_text = weatherdata.current_observation.weather;
+      string icon = weatherdata.current_observation.icon;
+      string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e");
+      string wind_dir = weatherdata.current_observation.wind_dir;
+      string wind_kph = weatherdata.current_observation.wind_kph;
+      string pressure_mb = weatherdata.current_observation.pressure_mb;
+      string feelslike_c = weatherdata.current_observation.feelslike_c;
+      string feelslike_f = weatherdata.current_observation.feelslike_f;
+      string UV = weatherdata.current_observation.UV;
+      string precip_1hr_metric = weatherdata.current_observation.precip_1hr_metric;
+
+      // 2014-01-22 - Added to allow the widget to display the date/time.
+      string last_updated = weatherdata.current_observation.observation_time; //DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
+
+      Program.RaiseEvent("Conditions.City", city, "");
+      Program.RaiseEvent("Conditions.Country", country, "");
+      Program.RaiseEvent("Conditions.CountryCode", country_iso3166, "");
+      Program.RaiseEvent("Conditions.TemperatureC", temperaturec, "");
+      Program.RaiseEvent("Conditions.TemperatureF", temperaturef, "");
+      Program.RaiseEvent("Conditions.DisplayLocation", display_location, "");
+      Program.RaiseEvent("Conditions.Description", weather_text, "");
+      Program.RaiseEvent("Conditions.IconUrl", icon_url, "");
+      Program.RaiseEvent("Conditions.Status", icon, ""); // eg. cloudy, sunny, etc..
+      Program.RaiseEvent("Conditions.WindDirection", wind_dir, "");
+      Program.RaiseEvent("Conditions.WindKph", wind_kph, "");
+      Program.RaiseEvent("Conditions.PressureMb", pressure_mb, "");
+      Program.RaiseEvent("Conditions.FeelsLikeC", feelslike_c, "");
+      Program.RaiseEvent("Conditions.FeelsLikeF", feelslike_f, "");
+      Program.RaiseEvent("Conditions.UV", UV, "");
+      Program.RaiseEvent("Conditions.PrecipitationHourMetric", precip_1hr_metric, "");
+
+      // 2014-01-22 - Added to allow the widget to display the date/time.
+      Program.RaiseEvent("Conditions.LastUpdated", last_updated, "");
+
+      // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
+      Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
+
+      // 2015-01-30 - Added forecast of next 3 days
+      webserviceurl = "http://api.wunderground.com/api/" + apikey + "/forecast/lang:" + language + "/q/" + location + ".json";
+      var forecastData = Net.WebService(webserviceurl).GetData().forecast.simpleforecast.forecastday;
+      // Collect forecast data
+      for (int d = 1; d &lt;= 3; d++)
       {
-        
-        string webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/astronomy/lang:" + language + "/q/" + location + ".json";
-        var astronomydata = Net.WebService(webserviceurl).GetData();
-        
-        int sunrise_hour = int.Parse(astronomydata.moon_phase.sunrise.hour.ToString());
-        int sunrise_minute = int.Parse(astronomydata.moon_phase.sunrise.minute.ToString());
-        int sunset_hour = int.Parse(astronomydata.moon_phase.sunset.hour.ToString());
-        int sunset_minute = int.Parse(astronomydata.moon_phase.sunset.minute.ToString());
-        
-        Program.Parameter("Astronomy.Sunset").Value = sunset_hour.ToString("D2") + ":" + sunset_minute.ToString("D2");
-        Program.Parameter("Astronomy.Sunrise").Value = sunrise_hour.ToString("D2") + ":" + sunrise_minute.ToString("D2");
-        
-        // Update Scheduler entries
-        Scheduler
-          .WithName("Sunset")
-          .SetSchedule(String.Format("{0} {1} * * *", sunset_minute, sunset_hour));
-        Scheduler
-          .WithName("Sunrise")
-          .SetSchedule(String.Format("{0} {1} * * *", sunrise_minute, sunrise_hour));
-        
-        webserviceurl = "http://api.wunderground.com/api/" + apikey + "/geolookup/conditions/lang:" + language + "/q/" + location + ".json";
-        var weatherdata = Net.WebService(webserviceurl).GetData();
-        
-        string city = weatherdata.location.city;
-        string country = weatherdata.location.country;
-        string country_iso3166 = weatherdata.location.country_iso3166; // eg. IT,US,NL,UK,AU,CH,DE...
-        string temperaturec = weatherdata.current_observation.temp_c;
-        string temperaturef = weatherdata.current_observation.temp_f;
-        string display_location = weatherdata.current_observation.display_location.full;
-        string weather_text = weatherdata.current_observation.weather;
-        string icon = weatherdata.current_observation.icon;
-        string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e");
-        string wind_dir = weatherdata.current_observation.wind_dir;
-        string wind_kph = weatherdata.current_observation.wind_kph;
-        string pressure_mb = weatherdata.current_observation.pressure_mb;
-        string feelslike_c = weatherdata.current_observation.feelslike_c;
-        string feelslike_f = weatherdata.current_observation.feelslike_f;
-        string UV = weatherdata.current_observation.UV;
-        string precip_1hr_metric = weatherdata.current_observation.precip_1hr_metric;
-
-        // 2014-01-22 - Added to allow the widget to display the date/time.
-        string last_updated = weatherdata.current_observation.observation_time; //DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
-        
-        Program.RaiseEvent("Conditions.City", city, "");
-        Program.RaiseEvent("Conditions.Country", country, "");
-        Program.RaiseEvent("Conditions.CountryCode", country_iso3166, "");
-        Program.RaiseEvent("Conditions.TemperatureC", temperaturec, "");
-        Program.RaiseEvent("Conditions.TemperatureF", temperaturef, "");
-        Program.RaiseEvent("Conditions.DisplayLocation", display_location, "");
-        Program.RaiseEvent("Conditions.Description", weather_text, "");
-        Program.RaiseEvent("Conditions.IconUrl", icon_url, "");
-        Program.RaiseEvent("Conditions.Status", icon, ""); // eg. cloudy, sunny, etc..
-        Program.RaiseEvent("Conditions.WindDirection", wind_dir, "");
-        Program.RaiseEvent("Conditions.WindKph", wind_kph, "");
-        Program.RaiseEvent("Conditions.PressureMb", pressure_mb, "");
-        Program.RaiseEvent("Conditions.FeelsLikeC", feelslike_c, "");
-        Program.RaiseEvent("Conditions.FeelsLikeF", feelslike_f, "");
-        Program.RaiseEvent("Conditions.UV", UV, "");
-        Program.RaiseEvent("Conditions.PrecipitationHourMetric", precip_1hr_metric, "");
-        
-        // 2014-01-22 - Added to allow the widget to display the date/time.
-        Program.RaiseEvent("Conditions.LastUpdated", last_updated, "");
-
-	    // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
-        Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
-        
-        // 2015-01-30 - Added forecast of next 3 days
-        webserviceurl = "http://api.wunderground.com/api/" + apikey + "/forecast/lang:" + language + "/q/" + location + ".json";
-        var forecastData = Net.WebService(webserviceurl).GetData().forecast.simpleforecast.forecastday;
-        // Collect forecast data
-        for (int d = 1; d &lt;= 3; d++)
-        {
-          Program.RaiseEvent("Conditions.Forecast." + d + ".Description", forecastData[d].conditions.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".Year", forecastData[d].date.year.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".Month", forecastData[d].date.monthname.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".Day", forecastData[d].date.day.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".Weekday", forecastData[d].date.weekday.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e"), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.Low", forecastData[d].low.celsius.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.Low", forecastData[d].low.fahrenheit.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.High", forecastData[d].high.celsius.ToString(), "");
-          Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.High", forecastData[d].high.fahrenheit.ToString(), "");
-        }
-        
-        Program.Notify("Weather Underground", "Updated.");
-
-      } 
-      catch (Exception e) 
-      {
-        
-        Program.Notify("Weather Underground ERROR!", "Unable to get data from service. " + e.Message);
-        //Program.Parameter("Conditions.City").Value = "ERROR: " + e.Message;
-        Console.WriteLine( e.Message );
-        Pause(10);
-        
+        Program.RaiseEvent("Conditions.Forecast." + d + ".Description", forecastData[d].conditions.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".Year", forecastData[d].date.year.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".Month", forecastData[d].date.monthname.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".Day", forecastData[d].date.day.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".Weekday", forecastData[d].date.weekday.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e"), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.Low", forecastData[d].low.celsius.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.Low", forecastData[d].low.fahrenheit.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.High", forecastData[d].high.celsius.ToString(), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.High", forecastData[d].high.fahrenheit.ToString(), "");
       }
+
+      Program.Notify("Weather Underground", "Updated.");
+
+    } 
+    catch (Exception e) 
+    {
+
+      Program.Notify("Weather Underground ERROR!", "Unable to get data from service. " + e.Message);
+      //Program.Parameter("Conditions.City").Value = "ERROR: " + e.Message;
+      Console.WriteLine( e.Message );
+      Pause(10);
+
+    }
   }
   //
-  Pause(Program.InputField("UpdateInterval").DecimalValue * 60); // pause 1 hour before next check
-  Pause(10);
+  var delayMins = Program.InputField("UpdateInterval").DecimalValue * 60;
+  if (delayMins &lt; 1) delayMins = 1;
+  var pauseEnd = DateTime.Now.AddMinutes(delayMins);
+  var sunEventParameter = Program.Parameter("Sun.Event");
+  do
+  {
+    if (Scheduler.IsScheduling("@Sunrise") &amp;&amp; sunEventParameter.Value != sunriseEvent)
+    {
+      Program.RaiseEvent(sunEventParameter.Name, sunriseEvent, sunriseEvent + " event");
+    }
+    else if (Scheduler.IsScheduling("@Sunset") &amp;&amp; sunEventParameter.Value != sunsetEvent)
+    {
+      Program.RaiseEvent(sunEventParameter.Name, sunsetEvent, sunsetEvent + " event");
+    }
+    Pause(1);
+  } while (Program.IsEnabled &amp;&amp; DateTime.Now.Ticks &lt;= pauseEnd.Ticks);
 }</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -431,8 +447,8 @@ return true; // execute "Code To Run"
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <Features />
-    <ActivationTime>2015-01-30T19:14:40.143994Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:00.727854Z</TriggerTime>
+    <ActivationTime>2015-05-02T16:02:58.993952Z</ActivationTime>
+    <TriggerTime>2015-05-05T19:58:48.84248Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -509,7 +525,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:01.223808Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:49.335316Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1042,15 +1058,15 @@ When.ModuleParameterChanged( (module, property) =&gt; {
 });
 //
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[{"Line":-19,"Column":0,"ErrorMessage":"The requested feature is not implemented.","ErrorNumber":"-1","CodeBlock":"CR"}]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>74</Address>
     <Name>Meter.Watts events forwarding</Name>
     <Description>Forwards received Meter.Watts report to another HomeGenie box.</Description>
     <Group>Interconnections</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime>2015-05-05T20:03:01.69568Z</ActivationTime>
+    <TriggerTime>2015-05-05T20:03:02.109614Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1149,7 +1165,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:01.726894Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:49.83736Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1202,7 +1218,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:02.229895Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:50.337594Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1214,9 +1230,9 @@ Program.GoBackground();</ScriptSource>
 Program.Setup(()=&gt;{
 
   	Program.AddVirtualModules("Media.IpCamera", "Sensor", "homegenie/generic/camerainput", 1, 10);
-    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)");
-    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)");
-    Program.AddFeatureTextInput("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)");
+    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text");
+    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text");
+    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password");
 
 });
 
@@ -1269,15 +1285,15 @@ When.WebServiceCallReceived("Media.IpCamera/", ( args ) =&gt;
 
 Program.GoBackground();
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>88</Address>
     <Name>Generic IP Camera</Name>
     <Description>Generic IP Camera driver.</Description>
     <Group>Devices and Things</Group>
     <Features />
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-02T14:04:04.6857473Z</TriggerTime>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -1493,7 +1509,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:02.736134Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:50.847189Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1585,7 +1601,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:03.225028Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:51.3399Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1595,7 +1611,7 @@ Program.GoBackground();</ScriptSource>
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
-    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "slider:0:3600:1");
 
 });
 
@@ -1637,7 +1653,7 @@ return true;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>112</Address>
     <Name>Turn Off Delay</Name>
@@ -1645,15 +1661,15 @@ Program.GoBackground();</ScriptSource>
     <Group>Energy Management</Group>
     <Features>
       <ProgramFeature>
-        <FieldType>text</FieldType>
+        <FieldType>slider:0:3600:1</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.TurnOffDelay</Property>
         <Description>Automatic turn off delay (seconds)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:03.730914Z</TriggerTime>
+    <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
+    <TriggerTime>2015-05-05T19:58:51.841945Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1921,7 +1937,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:04.231411Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:52.340648Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2277,7 +2293,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:05.231859Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:53.344887Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2377,7 +2393,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:05.741437Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:53.855587Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2529,7 +2545,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:06.233667Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:54.345137Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2640,10 +2656,10 @@ Program.GoBackground();</ScriptSource>
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
 
-    Program.AddFeature("Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");
-    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor (enter name)");
-    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor (enter name)");
-    Program.AddFeatureTextInput("Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor", "module.text:any:sensor:status.level,sensor.motiondetect");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor", "module.text:any:any:sensor.luminance");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:0:3600:30");
 
 });
 
@@ -2658,6 +2674,19 @@ var LUM_TRIGGER_VALUE = 10;
 //
 var smart_devices = Modules.WithFeature(SMART_LIGHT_ENABLE);
 //
+var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
+  var v = new dynamic();
+  v.Domain = "0";
+  v.Address = "0";
+  if (domainAddress.IndexOf(":") &gt; 0)
+  {
+    var parts = domainAddress.Split(':');
+    v.Domain = parts[0];
+    v.Address = parts[1];
+  }
+  return v;
+});
+
 When.ModuleParameterIsChanging((module, parameter) =&gt; {
     
   	if (module.IsOfDeviceType("Sensor"))
@@ -2669,14 +2698,18 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
             {
                 smart_devices.Each((mod)=&gt;
                 {
-                    if (mod.Parameter(MOT_SENSOR_NAME).Value == module.Instance.Name)
+                  
+                  	var da = GetDomainAddress(mod.Parameter(MOT_SENSOR_NAME).Value);
+Console.WriteLine(da.Domain);
+                    if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == module.Instance.Address)
                     {
 						mod.Parameter(LAST_EVENT).Value = DateTime.UtcNow.Ticks.ToString();
   						if (mod.Level == 0)
                         {
                             Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
                           	//
-                            var lumsensor = Modules.WithName(mod.Parameter(LUM_SENSOR_NAME).Value).Get();
+                          	da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
+                            var lumsensor = Modules.InDomain(da.Domain).WithAddres(da.Address).Get();
                             if (lumsensor.Instance != null)
                             {
                                 var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
@@ -2705,7 +2738,8 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
       		var luminosity = module.Parameter("Sensor.Luminance").DecimalValue;
             smart_devices.Each((mod)=&gt;
             {
-            	if (mod.Parameter(LUM_SENSOR_NAME).Value == module.Instance.Name &amp;&amp; mod.Level &gt; 0)
+                var da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
+            	if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == mod.Instance.Address &amp;&amp; mod.Level &gt; 0)
 				{
                     if (luminosity &gt;= LUM_TRIGGER_VALUE)
                     {
@@ -2750,7 +2784,7 @@ while (Program.IsEnabled)
   	Pause(2);
 }
 </ScriptSource>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
     <Name>Smart Lights</Name>
@@ -2765,29 +2799,29 @@ while (Program.IsEnabled)
         <Description>Enable Smart Light Control</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>text</FieldType>
+        <FieldType>module.text:any:sensor:status.level,sensor.motiondetect</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.SmartLights.OnMotionDetect</Property>
-        <Description>Controlled by motion sensor (enter name)</Description>
+        <Description>Controlled by motion sensor</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>text</FieldType>
+        <FieldType>module.text:any:any:sensor.luminance</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.SmartLights.CheckLuminosity</Property>
-        <Description>Controlled by luminance sensor (enter name)</Description>
+        <Description>Controlled by luminance sensor</Description>
       </ProgramFeature>
       <ProgramFeature>
-        <FieldType>text</FieldType>
+        <FieldType>slider:0:3600:30</FieldType>
         <ForDomains />
         <ForTypes>Switch,Light,Dimmer</ForTypes>
         <Property>HomeGenie.SmartLights.SwitchOffTimeout</Property>
         <Description>Turn off after inactivity timeout (seconds)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2014-03-31T23:25:16.9481442Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:53:06.738822Z</TriggerTime>
+    <ActivationTime>2015-05-05T18:48:41.183439Z</ActivationTime>
+    <TriggerTime>2015-05-05T19:58:54.850368Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -3146,91 +3180,173 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Setup( () =&gt; {
-  
-    Program.AddInputField("ModemIp", "", "1. Modem IP address");
-    //Program.AddInputField("ModemUsername", "", "2. Modem username");
-    Program.AddInputField("ModemPassword", "", "2. Modem password");
-    Program.AddInputField("SmsRecipient", "", "4. Recipient phone number");
-  
-	Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "AlcatelY800Z.NotifyEvents", "Send SMS on module event");
+  Program.AddInputField("ModemIp", "", "1. Modem IP address");
+  //Program.AddInputField("ModemUsername", "", "2. Modem username");
+  Program.AddInputField("ModemPassword", "", "2. Modem password");
+  Program.AddInputField("SmsRecipient", "", "4. Recipient phone number");
+  Program.AddFeature("Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "AlcatelY800Z.NotifyEvents", "Send SMS on module event");
+  Program.AddVirtualModule("Network.AlcatelY800Z", "CM", "Switch", "homegenie/generic/switch");
 });
 // this program will be running in background
 return true;
 </ScriptCondition>
-    <ScriptSource>var modemAddress = Program.InputField("ModemIp").Value;
+    <ScriptSource>const string NOTIFICATION_TITLE = "Alcatel Y800Z";
+var modemAddress = Program.InputField("ModemIp").Value;
 var modemUsername = "admin"; //Program.InputField("ModemUsername").Value;
 var modemPassword = Program.InputField("ModemPassword").Value;
 var smsRecipient = Program.InputField("SmsRecipient").Value;
 
+var doLogin = new Func&lt;dynamic&gt;(()=&gt;{
+  return Net
+    .WebService("http://" + modemAddress + "/goform/setLogin")
+    .Post("username=" + modemUsername + "&amp;password=" + modemPassword)
+    .GetData();
+});
+
+var doConnect = new Func&lt;dynamic&gt;(()=&gt;{
+  return Net
+    .WebService("http://" + modemAddress + "/goform/setWanConnect")
+    .Post("profile_id=16")
+    .GetData();
+});
+
+var doDisconnect = new Func&lt;dynamic&gt;(()=&gt;{
+  return Net
+    .WebService("http://" + modemAddress + "/goform/setWanDisconnect")
+    .Post("")
+    .GetData();
+});
+
+var getStatus = new Func&lt;dynamic&gt;(()=&gt;{
+  return Net
+    .WebService("http://" + modemAddress + "/goform/getWanInfo")
+    .Post("d=1")
+    .GetData();
+});
+
+var sendSms = new Func&lt;string, string, dynamic&gt;((recipient, message)=&gt;{
+  return Net
+    .WebService("http://" + modemAddress + "/goform/sendSMS")
+    .Post("sms_number=" + recipient + "&amp;sms_content=" + message + "&amp;action_type=new")
+    .GetData();
+});
+
 Func&lt;string,bool&gt; SmsSend = new Func&lt;string,bool&gt;((message)=&gt;{
-  	var success = false;
-  	var loginData = Net
-  		.WebService("http://" + modemAddress + "/goform/setLogin")
-		.Post("username=" + modemUsername + "&amp;password=" + modemPassword)
-		.GetData();
-	if (loginData.error == "0")
-  	{	
-  		var smsSend = Net
-			.WebService("http://" + modemAddress + "/goform/sendSMS")
-			.Post("sms_number=" + smsRecipient + "&amp;sms_content=" + message + "&amp;action_type=new")
-			.GetData();
-      	if (smsSend.error == "0")
-        {
-          	success = true;
-          	Program.Notify("Alcatel Y800Z Notify", "SMS succesfully delivered.");
-        }
-      	else
-        {
-          	Program.Notify("Alcatel Y800Z Error!", "Could not send SMS (Err:" + smsSend.error + ").");
-        }
-    }
-  	else
+  var success = false;
+  var loginData = doLogin();
+  if (loginData.error == "0")
+  {	
+    var smsSend = sendSms(smsRecipient, message);
+    if (smsSend.error == "0")
     {
-    	Program.Notify("Alcatel Y800Z Error!", "Wrong Modem IP or credentials.");
+      success = true;
+      Program.Notify(NOTIFICATION_TITLE, "SMS succesfully delivered.");
     }
-	return success;
+    else
+    {
+      Program.Notify(NOTIFICATION_TITLE, "ERROR: Could not send SMS (Err:" + smsSend.error + ").");
+    }
+  }
+  else
+  {
+    Program.Notify(NOTIFICATION_TITLE, "ERROR: Wrong Modem IP or credentials.");
+  }
+  return success;
 });
 
 
 // We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
-  	if (Program.InputField("SmsRecipient").Value != "")
+  if (Program.InputField("SmsRecipient").Value != "")
+  {
+    // Security Alarm System Notification
+    if (module.Instance.Name == "Security Alarm System" &amp;&amp; property.Name == "HomeGenie.SecurityTriggered" &amp;&amp; property.Value == "1")
     {
-        // Security Alarm System Notification
-        if (module.Instance.Name == "Security Alarm System" &amp;&amp; property.Name == "HomeGenie.SecurityTriggered" &amp;&amp; property.Value == "1")
-        {
-            var source = Program.WithName("Security Alarm System").Parameter("HomeGenie.SecurityTriggerSource").Value;
-            SmsSend("WARNING! Alarm was just triggered: " + source);
-        }
-        else if (module.HasFeature("AlcatelY800Z.NotifyEvents") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
-        {
-            var message = module.Instance.Name + " " + property.Name + "=" + property.Value + " (" + module.Instance.Domain + "." + module.Instance.Address + ")";
-            SmsSend(message);
-        }      
+      var source = Program.WithName("Security Alarm System").Parameter("HomeGenie.SecurityTriggerSource").Value;
+      SmsSend("WARNING! Alarm was just triggered: " + source);
     }
-  	// returning true, will route event to other listeners
-    return true; 
-  
+    else if (module.HasFeature("AlcatelY800Z.NotifyEvents") &amp;&amp; (property.Name.StartsWith("Sensor.") || property.Name.StartsWith("Status.")))
+    {
+      var message = module.Instance.Name + " " + property.Name + "=" + property.Value + " (" + module.Instance.Domain + "." + module.Instance.Address + ")";
+      SmsSend(message);
+    }      
+  }
+  // returning true, will route event to other listeners
+  return true; 
+
+});
+
+When.WebServiceCallReceived("Network.AlcatelY800Z", (query)=&gt;{
+  var args = ((string)query).Split('/');
+  var domain = args[0]; // Network.AlcatelY800Z
+  var module = args[1];
+  var command = args[2];
+  object response = null;
+  if (module == "CM") // Connection Manager
+  {
+    Program.Notify("Internet", "...");
+    var login = doLogin();
+    Program.Notify("Internet", "res:" + login);
+    switch(command)
+    {
+      case "Control.Connect":
+      case "Control.On":
+      	if (login.error == "0")
+        {
+          var res = doConnect(); Pause(2);
+          response = res;
+          try {
+              if (res.error == "0") Program.Say("Connected to Internet.", "en-US");
+          } catch { }
+        }
+      	else
+        {
+          response = "{ error: 'login_error' }";
+          Program.Notify(NOTIFICATION_TITLE, "ERROR: Wrong Modem IP or credentials.");
+        }
+      	break;
+      case "Control.Disconnect":
+      case "Control.Off":
+      	if (login.error == "0")
+        {
+          var info = getStatus();
+          try {
+              if (info.wan_state == "2") Program.Say("Internet disconnected.", "en-US");
+          } catch { }
+          response = doDisconnect();
+        }
+      	else
+        {
+          response = "{ error: 'login_error' }";
+          Program.Notify(NOTIFICATION_TITLE, "ERROR: Wrong Modem IP or credentials.");
+        }
+        break;
+      case "Status.Info":
+      	if (login.error == "0")
+        {
+          response = getStatus();
+        }
+      	else
+        {
+          response = "{ error: 'login_error' }";
+          Program.Notify(NOTIFICATION_TITLE, "ERROR: Wrong Modem IP or credentials.");
+        }
+        break;
+    }
+  }
+  return response;
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>201</Address>
     <Name>Alcatel One Touch Y800Z SMS Notify</Name>
     <Description>Send SMS notifies when a device status changes and/or when the Security Alarm System is triggered.</Description>
     <Group>Messaging and Social</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains />
-        <ForTypes>Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow</ForTypes>
-        <Property>AlcatelY800Z.NotifyEvents</Property>
-        <Description>Send SMS on module event</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime xsi:nil="true" />
+    <Features />
+    <ActivationTime>2015-05-02T15:37:52.976223Z</ActivationTime>
+    <TriggerTime>2015-05-02T15:37:52.995895Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
@@ -5810,8 +5926,8 @@ Each analog channel can be mapped to a virtual module with configurable field na
     <Commands />
     <ScriptCondition>Program.Setup(()=&gt;{
   	Program.AddInputField("ThermostatsCount", "1", "Virtual thermostats modules to create");
-  	Program.AddFeatureTextInput("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from");
-  	Program.AddFeatureTextInput("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point");
+  	Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature");
+  	Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any");
 });
 return true;
 </ScriptCondition>
@@ -8145,7 +8261,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-04-20T11:59:03.935323Z</TriggerTime>
+    <TriggerTime>2015-05-05T19:58:55.862774Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8685,9 +8801,13 @@ python-serial module must be installed &lt;strong&gt;(sudo apt-get install pytho
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Wait for MCP3008 program to start first
-Program.AddInputField("KeypadChannel", "CH2", "MCP3008 channel where the keypad is connected to");
+    <ScriptCondition>Program.Setup(()=&gt;{
+  Program.AddInputField("KeypadChannel", "CH2", "MCP3008 channel where the keypad is connected to");
+});
+// Wait for MCP3008 program to start first
 Program.WaitFor("38");
+// Starting in 5 seconds
+Pause(5);
 return true;
 </ScriptCondition>
     <ScriptSource>const string MCP3008_DOMAIN = "Components.MCP3008";
@@ -8786,7 +8906,7 @@ while(Program.IsEnabled)
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>41</Address>
     <Name>MCP3008 - Keypad Input</Name>
-    <Description>3x4 numeric keypad module connected to a MCP3008 analog channel</Description>
+    <Description>3x4 numeric keypad module connected to one MCP3008 analog channel</Description>
     <Group>Raspberry Pi</Group>
     <Features />
     <ActivationTime xsi:nil="true" />

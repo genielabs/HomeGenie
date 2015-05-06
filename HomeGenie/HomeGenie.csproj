@@ -224,6 +224,8 @@
     <Compile Include="Automation\Scripting\KnxClientHelper.cs" />
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
     <Compile Include="Automation\WizardEngine.cs" />
+    <Compile Include="Data\Store.cs" />
+    <Compile Include="Automation\Scripting\StorageHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

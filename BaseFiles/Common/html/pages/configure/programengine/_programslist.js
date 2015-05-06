@@ -247,7 +247,10 @@ HG.WebApp.ProgramsList.RefreshProgramOptions = function () {
             var inputType = 'text';
             var desc = (arr[p].Description && arr[p].Description != 'undefined' && arr[p].Description != '' ? arr[p].Description : arr[p].Name);
             if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
-            var opt = '<div><p style="font-weight:bold">' + desc + '</p><input type="' + inputType + '" value="' + arr[p].Value + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" /></div>';
+            var opt = $('<div><p style="font-weight:bold">' + desc + '</p></div>');
+            var optInput = $('<input type="' + inputType + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" />');
+            optInput.val(arr[p].Value);
+            opt.append(optInput);
             fieldparams.append(opt);
 
         }
