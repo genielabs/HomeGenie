@@ -214,7 +214,7 @@ namespace HomeGenie.Automation.Scripting
             compilerParams.ReferencedAssemblies.Add("System.Reactive.Interfaces.dll");
             compilerParams.ReferencedAssemblies.Add("System.Reactive.Linq.dll");
             compilerParams.ReferencedAssemblies.Add("System.Reactive.PlatformServices.dll");
-            compilerParams.ReferencedAssemblies.Add("Nmqtt.dll");
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "Nmqtt.dll"));
             //
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
