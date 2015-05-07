@@ -289,6 +289,15 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.Events.PopupRefreshIgnore();
     });
     $('#actionconfirm_popup').enhanceWithin().popup();
+    //
+    
+    // Cron Event Wizard popup
+    HG.Ui.GenerateWidget('core/popup.cronwizard', { parent: $(document).find('body') }, function(handler){
+        var element = handler.element;
+        element.enhanceWithin().popup();
+        HG.Ui.Popup.CronWizard = handler;
+    });
+    
 };
 
 
@@ -655,9 +664,8 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
         {
             setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
         }
-        $(popup_id1).off('popupafterclose', switchfn);
     };
-    $(popup_id1).on('popupafterclose', switchfn);
+    $(popup_id1).one('popupafterclose', switchfn);
     $(popup_id1).popup('close');
 };
 //

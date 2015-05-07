@@ -2,13 +2,18 @@
 
 /*
 // HomeGenie AJAX/WebService API
-// Copyright: (c) 2010-2014 GenieLabs
+// Copyright: (c) 2010-2015 GenieLabs
 // Author   : Generoso Martello
 // E-Mail   : gene@homegenie.it
 */ 
 
 
 var HG = HG || {};
+//
+// namespace : HG.Ui
+// info      : HomeGenie User Interface widgets
+//
+{include js/api/homegenie.ui.js}
 //
 // namespace : HG.Automation
 // info      : -
@@ -57,6 +62,8 @@ var HG = HG || {};
 
 
 <script type="text/javascript">
+
+//////////////////////////////////////////////////////
 // TODO: deprecate all js code below, or move it to appropriate place in hg api
 
 // Persist-Js data store 
@@ -81,41 +88,6 @@ function setTheme(theme) {
 
 
 //////////////////////////////////////////////////////
-
-    
-function configurepage_GetModuleIcon(module, callback, elid) {
-    var icon = 'pages/control/widgets/homegenie/generic/images/unknown.png';
-    if (module != null && module.DeviceType && module.DeviceType != '' && module.DeviceType != 'undefined')
-    {
-        var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
-        var widget = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayModule');
-        if (widget != null && widget.Value != '')
-        {
-            widget = widget.Value;
-        }
-        else
-        {
-            widget = 'homegenie/generic/' + module.DeviceType.toLowerCase();
-        }
-        //
-        if (widgeticon != null && widgeticon.Value != '')
-        {
-            icon = widgeticon.Value;
-        }
-        else if (module.WidgetInstance && module.WidgetInstance != null && module.WidgetInstance != 'undefined')
-        {
-            icon = module.WidgetInstance.IconImage;
-        }
-        else
-        {
-            // get reference to generic type widget 
-            HG.WebApp.WidgetsList.GetWidgetIcon(widget, elid, callback);
-            return icon;
-        }
-    }
-    if (callback != null) callback(icon, elid);
-    return icon;
-}
 
 </script>	
 

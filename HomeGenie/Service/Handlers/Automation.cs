@@ -33,6 +33,7 @@ using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
 using Microsoft.Scripting;
+using CronExpressionDescriptor;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -130,6 +131,11 @@ namespace HomeGenie.Service.Handlers
                         return s1.Name.CompareTo(s2.Name);
                     });
                     migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Items);
+                    break;
+                case "Scheduling.Describe":
+                    var cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0));
+                    cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
+                    migCommand.Response = JsonHelper.GetSimpleResponse(cronDescription);
                     break;
                 }
             }

@@ -1,21 +1,21 @@
 [{
-    init: function(program, module, options) {
-        this.program = program;
-        this.module = module;
+    init: function(options) {
+        this.program = this.context.program;
+        this.module = this.context.module;
         this.matchDomain = ((typeof options[0] == 'undefined' || options[0].toLowerCase() == 'any') ? '' : options[0].toLowerCase());
         this.matchType = ((typeof options[1] == 'undefined' || options[1].toLowerCase() == 'any') ? '' : options[1].toLowerCase());
         this.matchField = ((typeof options[2] == 'undefined' || options[2].toLowerCase() == 'any') ? '' : options[2].toLowerCase());
     },
-    bind: function(element, context) {
-        this.uiElement = element;
-        this.context = context;
+    bind: function() {
+        var element = this.element;
+        var context = this.context;
         var html = element.html();
-        html = html.replace(/{id}/g, context.Index);
-        html = html.replace(/{description}/g, context.Description);
+        html = html.replace(/{id}/g, context.parameter.Index);
+        html = html.replace(/{description}/g, context.parameter.Description);
         element.html(html);
         var _this = this;
         var textInput = element.find('[data-ui-field=textinput]');
-        textInput.data('module-address', context.Value);
+        textInput.data('module-address', context.parameter.Value);
         textInput.on('change', function(evt){
             if (typeof _this.onChange == 'function') {
                 _this.onChange($(this).val());
@@ -74,7 +74,7 @@
         return matching;
     },
     checkInput: function() {
-        var textInput = this.uiElement.find('[data-ui-field=textinput]');
+        var textInput = this.element.find('[data-ui-field=textinput]');
         var address = textInput.data('module-address');
         var verified = false;
         if (textInput.val() == '' && (typeof address == 'undefined' || address == '')) {
