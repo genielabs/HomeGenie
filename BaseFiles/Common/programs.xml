@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:47.827168Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:55.902086Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:48.340614Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:56.402932Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -422,7 +422,7 @@ while (Program.IsEnabled)
     }
   }
   //
-  var delayMins = Program.InputField("UpdateInterval").DecimalValue * 60;
+  var delayMins = Program.InputField("UpdateInterval").DecimalValue;
   if (delayMins &lt; 1) delayMins = 1;
   var pauseEnd = DateTime.Now.AddMinutes(delayMins);
   var sunEventParameter = Program.Parameter("Sun.Event");
@@ -447,8 +447,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <Features />
-    <ActivationTime>2015-05-02T16:02:58.993952Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:48.84248Z</TriggerTime>
+    <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
+    <TriggerTime>2015-05-07T22:14:38.438408Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -460,8 +460,8 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
 Program.Setup(()=&gt;
 {
 	Program.AddFeature("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleControl", "Control device on a given schedule");
-	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOn", "Turn On (enter scheduler expression)");
-	Program.AddFeatureTextInput("Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off (enter scheduler expression)");
+	Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOn", "Turn On", "cron.text");
+	Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off", "cron.text");
 });
 //
 return true; // execute the "Program Code"
@@ -501,31 +501,9 @@ while (Program.IsEnabled)
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleControl</Property>
-        <Description>Control device on a given schedule</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleOn</Property>
-        <Description>Turn On (enter scheduler expression)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains />
-        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
-        <Property>HomeGenie.ScheduleOff</Property>
-        <Description>Turn Off (enter scheduler expression)</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime>2015-01-19T20:06:23.934159Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:49.335316Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1165,7 +1143,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:49.83736Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:57.900617Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1218,7 +1196,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:50.337594Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:58.402108Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1509,7 +1487,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:50.847189Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:58.904953Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1601,7 +1579,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:51.3399Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:59.400705Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1669,7 +1647,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:51.841945Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:13:59.903851Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1937,7 +1915,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:52.340648Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:00.40614Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2293,7 +2271,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:53.344887Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:01.40933Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2393,7 +2371,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:53.855587Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:01.920461Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2545,7 +2523,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:54.345137Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:02.410171Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2821,7 +2799,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T18:48:41.183439Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:54.850368Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:02.914748Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8261,7 +8239,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-05-05T19:58:55.862774Z</TriggerTime>
+    <TriggerTime>2015-05-07T22:14:03.932226Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
