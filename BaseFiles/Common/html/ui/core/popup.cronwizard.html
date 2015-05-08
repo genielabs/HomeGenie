@@ -1,16 +1,16 @@
 <div class="ui-corner-all" style="width:720px" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="pop">
     
     <div class="ui-corner-top" data-role="header">
-        <h2>Cron event Wizard</h2>
+        <h2 data-locale-id="cronwizard_title">Cron event Wizard</h2>
     </div>
 
     <div data-role="navbar">
         <ul>
-            <li><a data-index="1">Minute</a></li>
-            <li><a data-index="2">Hour</a></li>
-            <li><a data-index="3">Day of month</a></li>
-            <li><a data-index="4">Month</a></li>
-            <li><a data-index="5">Day of week</a></li>
+            <li><a data-index="1" data-locale-id="cronwizard_tab_minute">Minute</a></li>
+            <li><a data-index="2" data-locale-id="cronwizard_tab_hour">Hour</a></li>
+            <li><a data-index="3" data-locale-id="cronwizard_tab_dayofmonth">Day of month</a></li>
+            <li><a data-index="4" data-locale-id="cronwizard_tab_month">Month</a></li>
+            <li><a data-index="5" data-locale-id="cronwizard_tab_dayofweek">Day of week</a></li>
         </ul>
     </div>
     
@@ -18,9 +18,9 @@
 
         <div align="center">
             <select data-ui-field="minute-type-select" data-inline="true">
-                <option value="1">every minute</option>
-                <option value="2">every n minute</option>
-                <option value="3">each selected minute</option>
+                <option value="1" data-locale-id="cronwizard_minuteselect_everyminute">every minute</option>
+                <option value="2" data-locale-id="cronwizard_minuteselect_everysomeminute">every n minute</option>
+                <option value="3" data-locale-id="cronwizard_minuteselect_eachselected">each selected minute</option>
             </select>
         </div>
     
@@ -43,9 +43,9 @@
         
         <div align="center">
             <select data-ui-field="hour-type-select" data-inline="true">
-                <option value="1">every hour</option>
-                <option value="2">every n hour</option>
-                <option value="3">each selected hour</option>
+                <option value="1" data-locale-id="cronwizard_hourselect_everyhour">every hour</option>
+                <option value="2" data-locale-id="cronwizard_hourselect_everysomehour">every n hour</option>
+                <option value="3" data-locale-id="cronwizard_hourselect_eachselected">each selected hour</option>
             </select>
         </div>
         
@@ -68,8 +68,8 @@
         
         <div align="center">
             <select data-ui-field="dayom-type-select" data-inline="true">
-                <option value="1">every day</option>
-                <option value="2">each selected day</option>
+                <option value="1" data-locale-id="cronwizard_dayselect_everyday">every day</option>
+                <option value="2" data-locale-id="cronwizard_dayselect_eachselected">each selected day</option>
             </select>
         </div>
         
@@ -86,8 +86,8 @@
         
         <div align="center">
             <select data-ui-field="month-type-select" data-inline="true">
-                <option value="1">every month</option>
-                <option value="2">each selected month</option>
+                <option value="1" data-locale-id="cronwizard_monthselect_everymonth">every month</option>
+                <option value="2" data-locale-id="cronwizard_monthselect_eachselected">each selected month</option>
             </select>
         </div>
         
@@ -97,18 +97,18 @@
     
         <div data-ui-field="month-tab2" align="center">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <input type="checkbox" id="month-n-01" value="1" /><label for="month-n-01">Jan</label>
-                <input type="checkbox" id="month-n-02" value="2" /><label for="month-n-02">Feb</label>
-                <input type="checkbox" id="month-n-03" value="3" /><label for="month-n-03">Mar</label>
-                <input type="checkbox" id="month-n-04" value="4" /><label for="month-n-04">Apr</label>
-                <input type="checkbox" id="month-n-05" value="5" /><label for="month-n-05">May</label>
-                <input type="checkbox" id="month-n-06" value="6" /><label for="month-n-06">Jun</label>
-                <input type="checkbox" id="month-n-07" value="7" /><label for="month-n-07">Jul</label>
-                <input type="checkbox" id="month-n-08" value="8" /><label for="month-n-08">Aug</label>
-                <input type="checkbox" id="month-n-09" value="9" /><label for="month-n-09">Sep</label>
-                <input type="checkbox" id="month-n-10" value="10" /><label for="month-n-10">Oct</label>
-                <input type="checkbox" id="month-n-11" value="11" /><label for="month-n-11">Nov</label>
-                <input type="checkbox" id="month-n-12" value="12" /><label for="month-n-12">Dec</label>
+                <input type="checkbox" id="month-n-01" value="1" /><label data-locale-id="common_month_jan" for="month-n-01">Jan</label>
+                <input type="checkbox" id="month-n-02" value="2" /><label data-locale-id="common_month_feb" for="month-n-02">Feb</label>
+                <input type="checkbox" id="month-n-03" value="3" /><label data-locale-id="common_month_mar" for="month-n-03">Mar</label>
+                <input type="checkbox" id="month-n-04" value="4" /><label data-locale-id="common_month_apr" for="month-n-04">Apr</label>
+                <input type="checkbox" id="month-n-05" value="5" /><label data-locale-id="common_month_may" for="month-n-05">May</label>
+                <input type="checkbox" id="month-n-06" value="6" /><label data-locale-id="common_month_jun" for="month-n-06">Jun</label>
+                <input type="checkbox" id="month-n-07" value="7" /><label data-locale-id="common_month_jul" for="month-n-07">Jul</label>
+                <input type="checkbox" id="month-n-08" value="8" /><label data-locale-id="common_month_aug" for="month-n-08">Aug</label>
+                <input type="checkbox" id="month-n-09" value="9" /><label data-locale-id="common_month_sep" for="month-n-09">Sep</label>
+                <input type="checkbox" id="month-n-10" value="10" /><label data-locale-id="common_month_oct" for="month-n-10">Oct</label>
+                <input type="checkbox" id="month-n-11" value="11" /><label data-locale-id="common_month_nov" for="month-n-11">Nov</label>
+                <input type="checkbox" id="month-n-12" value="12" /><label data-locale-id="common_month_dec" for="month-n-12">Dec</label>
             </fieldset>
         </div>
         
@@ -118,8 +118,8 @@
         
         <div align="center">
             <select data-ui-field="dayow-type-select" data-inline="true">
-                <option value="1">every day of week</option>
-                <option value="2">each selected day of week</option>
+                <option value="1" data-locale-id="cronwizard_dayowselect_everydayow">every day of week</option>
+                <option value="2" data-locale-id="cronwizard_dayowselect_eachselected">each selected day of week</option>
             </select>
         </div>
         
@@ -129,23 +129,26 @@
     
         <div data-ui-field="dayow-tab2" align="center">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <input type="checkbox" id="dayow-n-00" value="0" /><label for="dayow-n-00">Sun</label>
-                <input type="checkbox" id="dayow-n-01" value="1" /><label for="dayow-n-01">Mon</label>
-                <input type="checkbox" id="dayow-n-02" value="2" /><label for="dayow-n-02">Tue</label>
-                <input type="checkbox" id="dayow-n-03" value="3" /><label for="dayow-n-03">Wed</label>
-                <input type="checkbox" id="dayow-n-04" value="4" /><label for="dayow-n-04">Thu</label>
-                <input type="checkbox" id="dayow-n-05" value="5" /><label for="dayow-n-05">Fri</label>
-                <input type="checkbox" id="dayow-n-06" value="6" /><label for="dayow-n-06">Sat</label>
+                <input type="checkbox" id="dayow-n-00" value="0" /><label data-locale-id="common_dayofweek_sun" for="dayow-n-00">Sun</label>
+                <input type="checkbox" id="dayow-n-01" value="1" /><label data-locale-id="common_dayofweek_mon" for="dayow-n-01">Mon</label>
+                <input type="checkbox" id="dayow-n-02" value="2" /><label data-locale-id="common_dayofweek_tue" for="dayow-n-02">Tue</label>
+                <input type="checkbox" id="dayow-n-03" value="3" /><label data-locale-id="common_dayofweek_wed" for="dayow-n-03">Wed</label>
+                <input type="checkbox" id="dayow-n-04" value="4" /><label data-locale-id="common_dayofweek_thu" for="dayow-n-04">Thu</label>
+                <input type="checkbox" id="dayow-n-05" value="5" /><label data-locale-id="common_dayofweek_fri" for="dayow-n-05">Fri</label>
+                <input type="checkbox" id="dayow-n-06" value="6" /><label data-locale-id="common_dayofweek_sat" for="dayow-n-06">Sat</label>
             </fieldset>
         </div>
         
     </div>
     <br clear="all" />
     <p align="center" style="margin:20px;with:100%;height:20px;overflow:hidden;font-family:monospace;white-space: pre;" data-ui-field="cron-expr"></p>
-    <p data-ui-field="cron-desc" align="left" style="margin:20px;with:100%;height:60px;overflow:hidden;overflow-y:auto;">...</p>
+    <p align="left" style="margin:20px;with:100%;height:60px;overflow:hidden;overflow-y:auto;">
+        <strong data-locale-id="cronwizard_event_willoccur"></strong>:
+        <em data-ui-field="cron-desc"></em>
+    </p>
     <div class="ui-grid-c ui-footer ui-bar-inherit" align="right">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-delete">Cancel</a>
-        <a data-ui-field="confirm-button" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-check">Ok</a>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-delete" data-locale-id="common_command_cancel">Cancel</a>
+        <a data-ui-field="confirm-button" data-rel="back" class="ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-check" data-locale-id="common_command_ok">Ok</a>
     </div>
 
     <style>

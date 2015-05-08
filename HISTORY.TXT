@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+08/05/2015 1.00 beta rev 484-git7 (487 preview)
+    - Added missing locale translation entries to locale files
+    - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
+
 05/05/2015 1.00 beta rev 484-git6
     - Added confirm popup for "database reset" and "remote routing reset"
     - Updated automation programs to use new Program.AddFeature widgets

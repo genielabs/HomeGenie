@@ -225,7 +225,7 @@
             res = eval(res)[0];
             var displayExpr = cronexpr.replace(/ /g, '&nbsp;&nbsp;&nbsp;&nbsp;');
             _this.element.find('[data-ui-field=cron-expr]').html(displayExpr);
-            _this.element.find('[data-ui-field=cron-desc]').html('<strong>This event will occur:</strong> <em>'+res.ResponseValue+'</em>');
+            _this.element.find('[data-ui-field=cron-desc]').html(res.ResponseValue);
         });
         return cronexpr;
     }
