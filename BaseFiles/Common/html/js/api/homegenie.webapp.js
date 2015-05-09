@@ -118,7 +118,9 @@ HG.WebApp.InitializePage = function ()
     setTimeout(function() {
 
         var userLang = HG.WebApp.Locales.GetUserLanguage();
-        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
+        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
+            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json');
+        });
         // enable/disable speech input
         if (!('webkitSpeechRecognition' in window)) {
             //no speech support
@@ -699,7 +701,7 @@ HG.WebApp.Locales.GetDefault = function(callback) {
         }
     });     
 };
-HG.WebApp.Locales.Localize = function(container, langurl)
+HG.WebApp.Locales.Localize = function(container, langurl, callback)
 {
     // get data via ajax 
     // store it in 		HG.WebApp.Data._CurrentLocale
@@ -709,7 +711,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
             url: langurl,
             type: 'GET',
             success: function (data) {
-                HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
+                HG.WebApp.Data._CurrentLocale = $.extend(HG.WebApp.Data._CurrentLocale, $.parseJSON( data ));
                 //
                 $(container).find('[data-locale-id]').each(function(index){
                     var stringid = $(this).attr('data-locale-id');
@@ -727,6 +729,10 @@ HG.WebApp.Locales.Localize = function(container, langurl)
                         }
                     }
                 });
+                if (typeof callback == 'function') callback(true);
+            },
+            fail: function() {
+                if (typeof callback == 'function') callback(false);
             }
         });
     });		

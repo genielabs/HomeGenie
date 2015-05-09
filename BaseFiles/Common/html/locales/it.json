@@ -721,6 +721,10 @@
         "ogni giorno della settimana",        
     "cronwizard_dayowselect_eachselected":
         "nei giorni della settimana selezionati",        
+"##":
+"## COMMON LOCALES",
+"##":
+"##",
     "common_month_jan":
         "Gen",        
     "common_month_feb":
@@ -764,5 +768,9 @@
     "common_command_ok":
         "Ok",
     "common_command_proceed":
-        "Procedi"
+        "Procedi",
+    "common_command_save":
+        "Salva",
+    "common_status_notset":
+        "Non impostato"
 }

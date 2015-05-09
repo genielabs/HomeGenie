@@ -522,7 +522,7 @@ HG.WebApp.GroupModules.ModuleEdit = function (callback) {
 
 HG.WebApp.GroupModules.ShowFeatures = function (programid) {
     $('#module_programs_features').empty();
-    $('#module_programs_featuredesc').html(HG.WebApp.Data.Programs[programid].Description);
+    $('#module_programs_featuredesc').html(HG.WebApp.Locales.GetLocaleString('Program.'+HG.WebApp.Data.Programs[programid].Address+'.Description', HG.WebApp.Data.Programs[programid].Description));
     for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
         var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
         if (mp.ProgramIndex == programid) {
@@ -535,7 +535,7 @@ HG.WebApp.GroupModules.ShowFeatures = function (programid) {
             };
             var featureField = HG.Ui.GenerateWidget('widgets/'+mp.FieldType, context, function(handler){
                 handler.onChange = function(val){
-                    HG.WebApp.GroupModules.FeatureUpdate(handler.context.module, handler.context.parameter.Name, val);
+                    HG.WebApp.GroupModules.FeatureUpdate(handler.context, val);
                 };
                 $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
             });
@@ -571,9 +571,10 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
                     prop.Description = features[f].Description;
                     //
                     if (cprogram < 0) {
+                        var address = HG.WebApp.Data.Programs[p].Address;
                         var pname = HG.WebApp.Data.Programs[p].Name;
-                        if (pname == '') pname = HG.WebApp.Data.Programs[p].Address;
-                        featureset += '<option value="' + p + '">' + pname + '</option>';
+                        if (pname == '') pname = address;
+                        featureset += '<option value="' + p + '">' + HG.WebApp.Locales.GetLocaleString('Program.'+address+'.Title', pname) + '</option>';
                         cprogram = p;
                         if (selected < 0) selected = p;
                     }
@@ -594,9 +595,16 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
     $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
 };
 
-HG.WebApp.GroupModules.FeatureUpdate = function (module, property, value) {
+HG.WebApp.GroupModules.FeatureUpdate = function (context, value) {
+    var program = context.program;
+    var module = context.module;
+    var property = context.parameter.Name;
     var mp = HG.WebApp.Utility.GetModulePropertyByName(module, property);
     HG.WebApp.Utility.SetModulePropertyByName(module, property, value);
+    // postback value change to the automation program
+    HG.Automation.Programs.PostBack('ui/feature', program, module, property, value, function(res){
+        // TODO: think about how the response could be used (eg. field value validation and such)
+    });
     //property.Changed = true;
 };
 

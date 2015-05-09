@@ -2,9 +2,10 @@
     bind: function() {
         var element = this.element;
         var context = this.context;
+        var description = HG.WebApp.Locales.GetLocaleString(context.parameter.Name, context.parameter.Description);
         var html = element.html();
         html = html.replace(/{id}/g, context.parameter.Index);
-        html = html.replace(/{description}/g, context.parameter.Description);
+        html = html.replace(/{description}/g, description);
         element.html(html);
         var _this = this;
         var textDescription = element.find('[data-ui-field=description]');
@@ -30,17 +31,26 @@
             $('#automation_group_module_edit').popup('close');
         });
         textInput.on('blur', function(evt){
-            textDescription.val(textInput.val());
-            $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
-                res = eval(res)[0];
-                if (typeof res != 'undefined' && res.ResponseValue != '') {
-                    textDescription.val(res.ResponseValue);
-                }
-            });
+            if (textInput.val() == '') {
+                textDescription.val(HG.WebApp.Locales.GetLocaleString('common_status_notset', 'Not set'));
+                textDescription.css('color', 'gray');
+            } else {
+                textDescription.val(textInput.val());
+                textDescription.css('color', '');
+                $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
+                    res = eval(res)[0];
+                    if (typeof res != 'undefined' && res.ResponseValue != '') {
+                        textDescription.val(res.ResponseValue);
+                    }
+                });
+            }
             setTimeout(function(){
                 textInput.parent().hide();
                 textDescription.parent().show();
             }, 200);
+        });
+        textDescription.on('focus', function(evt){
+            $(this).trigger('click');
         });
         textDescription.on('click', function(evt){
             textDescription.parent().hide();

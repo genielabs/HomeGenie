@@ -445,7 +445,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
         if (pgroup == null || pgroup == 'undefined') pgroup = '';
         if (pgroup != HG.WebApp.AutomationGroupsList._CurrentGroup) continue;
         //
-        var pname = progrm.Name;
+        var pname = HG.WebApp.Locales.GetLocaleString('Program.'+progrm.Address+'.Title', progrm.Name);
         var item = '<li data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '">';
         item += '<a href="#" class="programitem" data-program-domain="' + progrm.Domain + '"  data-program-address="' + progrm.Address + '" data-program-index="' + i + '">';
         //
@@ -456,9 +456,11 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
             triggertime = triggerts.format('L LT');
         }
         //
+        var descr = (progrm.Description != null ? progrm.Description : '');
+        descr = HG.WebApp.Locales.GetLocaleString('Program.'+progrm.Address+'.Description', descr);
         item += '	<p class="ui-li-aside ui-li-desc">' + progrm.Type + ' &nbsp;&nbsp;&nbsp;<strong>PID:</strong> ' + progrm.Address + '<br><font style="opacity:0.5">' + triggertime + '</font></p>';
         item += '	<h3 class="ui-li-heading"><img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ' + pname + '</h3>';
-        item += '	<p class="ui-li-desc">' + (progrm.Description != null ? progrm.Description : '') + ' &nbsp;</p>';
+        item += '	<p class="ui-li-desc">' + descr + ' &nbsp;</p>';
         item += '</a>';
         item += '<a href="javascript:HG.WebApp.ProgramsList.ToggleProgramIsEnabled(\'' + progrm.Address + '\')">' + (progrm.IsEnabled ? HG.WebApp.Locales.GetLocaleString('configure_programslist_tap_disable') : HG.WebApp.Locales.GetLocaleString('configure_programslist_tap_enable')) + '</a>';
         //

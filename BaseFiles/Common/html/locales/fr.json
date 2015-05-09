@@ -764,5 +764,9 @@
     "common_command_ok":
         "Ok",
     "common_command_proceed":
-        "Proceed"
+        "Proceed",
+    "common_command_save":
+        "Save",
+    "common_status_notset":
+        "Not set"
 }

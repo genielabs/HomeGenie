@@ -14,9 +14,10 @@
     bind: function() {
         var element = this.element;
         var context = this.context;
+        var description = HG.WebApp.Locales.GetLocaleString(context.parameter.Name, context.parameter.Description);
         var html = element.html();
         html = html.replace(/{id}/g, context.parameter.Index);
-        html = html.replace(/{description}/g, context.parameter.Description);
+        html = html.replace(/{description}/g, description);
         element.html(html);
         var editButton = element.find('[data-ui-field=editbutton]');
         var _this = this;

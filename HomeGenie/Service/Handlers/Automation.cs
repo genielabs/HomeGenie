@@ -133,8 +133,11 @@ namespace HomeGenie.Service.Handlers
                     migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Items);
                     break;
                 case "Scheduling.Describe":
-                    var cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0));
-                    cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
+                    var cronDescription = "";
+                    try { 
+                        cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0)); 
+                        cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
+                    } catch { }
                     migCommand.Response = JsonHelper.GetSimpleResponse(cronDescription);
                     break;
                 }
