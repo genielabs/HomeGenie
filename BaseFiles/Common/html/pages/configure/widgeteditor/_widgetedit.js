@@ -33,6 +33,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidgetHtml(); },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -48,6 +49,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidgetJavascript(); },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -279,13 +281,24 @@ HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
 };
 
 HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
-    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savinghtml', false, this.Locale), textVisible: true, theme: 'a', html: '' });
-    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
-        $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savingjavascript', false, this.Locale), textVisible: true, theme: 'a', html: '' });
-        HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
-            $.mobile.loading('hide');
+    HG.WebApp.WidgetEditor.SaveWidgetHtml(function() {
+        HG.WebApp.WidgetEditor.SaveWidgetJavascript(function() {
             if (callback) callback();
         });
+    });
+};
+HG.WebApp.WidgetEditor.SaveWidgetHtml = function(callback) {
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savinghtml', false, this.Locale), textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'html', HG.WebApp.WidgetEditor._editorHtml.getValue(), function(res) {
+        $.mobile.loading('hide');
+        if (callback) callback();
+    });
+};
+HG.WebApp.WidgetEditor.SaveWidgetJavascript = function(callback) {
+    $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_widgeteditor_savingjavascript', false, this.Locale), textVisible: true, theme: 'a', html: '' });
+    HG.Configure.Widgets.Save(HG.WebApp.WidgetsList._currentWidget, 'js', HG.WebApp.WidgetEditor._editorJscript.getValue(), function(res) {
+        $.mobile.loading('hide');
+        if (callback) callback();
     });
 };
 

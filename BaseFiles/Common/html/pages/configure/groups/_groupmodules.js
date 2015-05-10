@@ -522,7 +522,8 @@ HG.WebApp.GroupModules.ModuleEdit = function (callback) {
 
 HG.WebApp.GroupModules.ShowFeatures = function (programid) {
     $('#module_programs_features').empty();
-    $('#module_programs_featuredesc').html(HG.WebApp.Locales.GetLocaleString('Program.'+HG.WebApp.Data.Programs[programid].Address+'.Description', HG.WebApp.Data.Programs[programid].Description));
+    var desc = HG.WebApp.Locales.GetProgramLocaleString(HG.WebApp.Data.Programs[programid].Address, 'Description', HG.WebApp.Data.Programs[programid].Description);
+    $('#module_programs_featuredesc').html(desc);
     for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
         var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
         if (mp.ProgramIndex == programid) {
@@ -574,7 +575,8 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
                         var address = HG.WebApp.Data.Programs[p].Address;
                         var pname = HG.WebApp.Data.Programs[p].Name;
                         if (pname == '') pname = address;
-                        featureset += '<option value="' + p + '">' + HG.WebApp.Locales.GetLocaleString('Program.'+address+'.Title', pname) + '</option>';
+                        pname = HG.WebApp.Locales.GetProgramLocaleString(address, 'Title', pname);
+                        featureset += '<option value="' + p + '">' + pname + '</option>';
                         cprogram = p;
                         if (selected < 0) selected = p;
                     }

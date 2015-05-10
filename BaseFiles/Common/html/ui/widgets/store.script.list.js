@@ -13,7 +13,7 @@
     bind: function() {
         var element = this.element;
         var context = this.context;
-        var description = HG.WebApp.Locales.GetLocaleString(context.parameter.Name, context.parameter.Description);
+        var description = HG.WebApp.Locales.GetProgramLocaleString(context.program.Address, context.parameter.Name, context.parameter.Description);
         var html = element.html();
         html = html.replace(/{id}/g, context.parameter.Index);
         html = html.replace(/{description}/g, description);

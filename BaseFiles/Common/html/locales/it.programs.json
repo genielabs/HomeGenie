@@ -1,43 +1,82 @@
-{
+{ "Programs": {
 
-"Program.82.Title":
-"Modalità risparmio energetico",
-"Program.82.Description":"Se abilitato, assicura che il livello dei variatori non superi la percentuale configurata.",
+"6": {
+    "Title": 
+        "Accendi tutte le luci",
+    "Description":
+        "Accende tutte le luci del gruppo selezionato."
+},
 
+"7": {
+    "Title": 
+        "Spegni tutte le luci",
+    "Description": 
+        "Spegne tutte le luci del gruppo selezionato."
+},
+
+"82": {
+    "Title":
+        "Modalità risparmio energetico",
+    "Description":
+        "Se abilitato, assicura che il livello dei variatori non superi la percentuale configurata.",
+    "ConfigureOptions.MaxLevel":
+        "Livello massimo luci",
     "EnergyManagement.EnergySavingMode":
-        "Abilita modalità risparmio energetico",
+        "Abilita modalità risparmio energetico"
+},
 
-"Program.16.Title":
-"Memoria livello",
-"Program.16.Description":"Memorizza e ripristina livello.",
-
+"16": {
+    "Title":
+        "Memoria livello",
+    "Description":
+        "Memorizza e ripristina livello.",
     "HomeGenie.LevelMemory":
         "Ripristina l'ultimo livello all'accensione",
     "HomeGenie.LevelMemory.SimulateOnly":
-        "Simula soltanto",
+        "Simula soltanto"
+},
 
-"Program.35.Title":
-"On/Off pianificato",
-"Program.35.Description":"Accensione/spegnimento del dispositivo utilizzando lo scheduler di HG.",
-
+"35": {
+    "Title":
+        "On/Off pianificato",
+    "Description":
+        "Accensione/spegnimento del dispositivo utilizzando lo scheduler.",
     "HomeGenie.ScheduleControl":
         "Abilita accensione/spegnimento automatico",
     "HomeGenie.ScheduleOn":
         "Accendi",
     "HomeGenie.ScheduleOff":
-        "Spegni",
+        "Spegni"
+},
 
-"Program.90.Title":
-"Sistema di allarme",
-"Program.90.Description":"Sistema di allarme base",
-
+"90": {
+    "Title":
+        "Sistema di allarme",
+    "Description":
+        "Sistema di allarme base",
     "HomeGenie.SecurityAlarm":
         "Usa come allarme/strobo",
+    "HomeGenie.SecuritySensor":
+        "Usa come sensore di sicurezza",
+    "ConfigureOptions.Email.Recipients":
+        "Elenco separato da virgola di destinatari e-mail per le notifiche di allarme",
+    "ConfigureOptions.System.ArmDelay":
+        "Ritardo inserimento allarme (seconds)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Tempo massimo sirene/strobo (secondi, 0=infinito)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Programma da eseguire quando l'allarme viene inserito",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Programma da eseguire quando l'allarme viene disinserito",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Programma da eseguire quando scatta l'allarme"        
+},
 
-"Program.145.Title":
-"Smart Lights",
-"Program.145.Description":"Controlla il dispositivo con sensori di movimento e luce.",
-
+"145": {
+    "Title":
+        "Smart Lights",
+    "Description":
+        "Controlla il dispositivo con sensori di movimento e luce.",
     "HomeGenie.SmartLights.Enable":
         "Abilita controllo 'Smart Lights'",
     "HomeGenie.SmartLights.OnMotionDetect":
@@ -45,19 +84,23 @@
     "HomeGenie.SmartLights.CheckLuminosity":
         "Controlla con sensore luce",
     "HomeGenie.SmartLights.SwitchOffTimeout":
-        "Spegni dopo un periodo di inattività (secondi)",
+        "Spegni dopo un periodo di inattività (secondi)"
+},
 
-"Program.8.Title":
-"Scenario alba",
-"Program.8.Description":"Scenario di esempio per le luci Philips Hue.",
-
+"8": {
+    "Title":
+        "Scenario alba",
+    "Description":
+        "Scenario di esempio per le luci Philips Hue.",
     "Scenarios.SunriseColors":
-        "Collega a scenario Sunrise Colors",
+        "Collega a scenario Sunrise Colors"
+},
 
-"Program.36.Title":
-"Tabella oraria",
-"Program.36.Description":"Pianificazione termostati, luci, elettrodomestici e avvolgibili.",
-
+"36": {
+    "Title":
+        "Tabella oraria",
+    "Description":
+        "Pianificazione termostati, luci, elettrodomestici e avvolgibili.",
     "TimeTable.Weekend":
         "Fine settimana",
     "TimeTable.Workday":
@@ -67,20 +110,25 @@
     "TimeTable.Special":
         "Giorni speciali",
     "TimeTable.Enable":
-        "Abilita tabella oraria",
+        "Abilita tabella oraria"
+},
 
-"Program.112.Title":
-"Spegnimento automatico",
-"Program.112.Description":"Spegnimento automatico del dispositivo dopo un certo tempo.",
-
+"112": {
+    "Title":
+        "Spegnimento automatico",
+    "Description":
+        "Spegnimento automatico del dispositivo dopo un certo tempo.",
     "HomeGenie.TurnOffDelay":
-        "Ritardo spegimento automatico (secondi)",
+        "Ritardo spegimento automatico (secondi)"
+},
 
-"Program.200.Title":
-"Servizio di notifiche push per Windows Phone",
-"Program.200.Description":"Invia aggiornamenti 'toast' e 'tile' al client  Windows Phone.",
-
+"200": {
+    "Title":
+        "Servizio di notifiche push per Windows Phone",
+    "Description":
+        "Invia aggiornamenti 'toast' e 'tile' al client  Windows Phone.",
     "MobileNotification.SendChanges":
         "Notifiche push su client Windows Phone"
-
 }
+
+}}

@@ -189,6 +189,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -203,6 +204,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -217,6 +219,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -857,6 +860,14 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValu
         return (defaultValue ? defaultValue : null);
     retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data("Locale"));
     return (retval == null && defaultValue ? defaultValue : retval);
+};
+HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {
+    var response = defaultValue;
+    var plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
+    if (typeof plocale != 'undefined') {
+        response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+    }
+    return response;
 };
 HG.WebApp.Locales.GenerateTemplate = function()
 {

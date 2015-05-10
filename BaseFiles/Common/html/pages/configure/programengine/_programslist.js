@@ -115,7 +115,7 @@ HG.WebApp.ProgramsList.RefreshProgramDetails = function () {
         var features = cp.Features;
         for (var f = 0; f < features.length; f++) {
             params += '<li><p style="font-size:12pt;margin:0;padding:0"><strong>' + features[f].Property + '</strong> : ';
-            params += '' + features[f].Description + '</br>'
+            params += '' + HG.WebApp.Locales.GetProgramLocaleString(cp.Address, features[f].Property, features[f].Description) + '</br>'
             var fordomains = features[f].ForDomains; if (fordomains == '') fordomains = 'Any';
             var fortypes = features[f].ForTypes; if (fortypes == '') fortypes = 'Any';
             params += '<span style="font-size:8pt;font;">Applies to: &nbsp;&nbsp;&nbsp; <strong>Domain</strong> &#9658; <em>' + fordomains + '</em> &nbsp;&nbsp;&nbsp; <strong>Type</strong> &#9658; <em>' + fortypes + '</em></span></p></li>';
@@ -211,12 +211,10 @@ HG.WebApp.ProgramsList.RefreshProgramOptions = function () {
     //
     var cp = HG.WebApp.Utility.GetProgramByAddress(HG.WebApp.ProgramEdit._CurrentProgram.Address);
     if (cp != null) {
-        $('#automationprograms_program_title').html(cp.Name);
-        if (cp.Description != 'undefined' && cp.Description != null) {
-            $('#automationprograms_program_description').html(cp.Description.replace(/\n/g, '<br />'));
-        } else {
-            $('#automationprograms_program_description').html('');
-        }
+        $('#automationprograms_program_title').html(HG.WebApp.Locales.GetProgramLocaleString(cp.Address, 'Title', cp.Name));
+        var desc = (cp.Description != 'undefined' && cp.Description != null ? cp.Description : '');
+        desc = HG.WebApp.Locales.GetProgramLocaleString(cp.Address, 'Description', desc);
+        $('#automationprograms_program_description').html(desc.replace(/\n/g, '<br />'));
     }
     //
     var module = HG.WebApp.Utility.GetModuleByDomainAddress(HG.WebApp.ProgramEdit._CurrentProgram.Domain, HG.WebApp.ProgramEdit._CurrentProgram.Address);
@@ -228,7 +226,7 @@ HG.WebApp.ProgramsList.RefreshProgramOptions = function () {
                 arr.push(module.Properties[p]);
             }
         }
-
+        // sort config options alphabetically
         arr.sort(function (a, b) {
             var i = 0;
             a = a.Description;
@@ -247,7 +245,7 @@ HG.WebApp.ProgramsList.RefreshProgramOptions = function () {
             var inputType = 'text';
             var desc = (arr[p].Description && arr[p].Description != 'undefined' && arr[p].Description != '' ? arr[p].Description : arr[p].Name);
             if (desc.toLowerCase().indexOf('password') >= 0) inputType = 'password';
-            var opt = $('<div><p style="font-weight:bold">' + desc + '</p></div>');
+            var opt = $('<div><p style="font-weight:bold">' + HG.WebApp.Locales.GetProgramLocaleString(cp.Address, arr[p].Name, desc) + '</p></div>');
             var optInput = $('<input type="' + inputType + '" data-parameter-name="' + arr[p].Name + '" onchange="HG.WebApp.ProgramsList.UpdateProgramParameter($(this))" />');
             optInput.val(arr[p].Value);
             opt.append(optInput);
@@ -343,8 +341,8 @@ HG.WebApp.ProgramsList.SetProgramType = function () {
         editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# hg.Modules.WithName(\'Light 1\').On()\n');
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
-        editor1.setValue('// Put your trigger code logic here.\n// Call \'hg.SetConditionTrue()\' when you want\n// the \'Code To Run\' to be executed.\nhg.SetConditionFalse();\n');
-        editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.Modules.WithName(\'Light 1\').On();\n');
+        editor1.setValue('// Put your trigger code logic here.\n// Call \'hg.setConditionTrue()\' when you want\n// the \'Code To Run\' to be executed.\nhg.setConditionFalse();\n');
+        editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.modules.withName(\'Light 1\').on();\n');
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
         editor1.setValue('// Put your trigger code logic here.\n// To execute the Code To Run,\n// use a \'return true\' or \'return false\' otherwise.\nreturn false;\n');
@@ -445,7 +443,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
         if (pgroup == null || pgroup == 'undefined') pgroup = '';
         if (pgroup != HG.WebApp.AutomationGroupsList._CurrentGroup) continue;
         //
-        var pname = HG.WebApp.Locales.GetLocaleString('Program.'+progrm.Address+'.Title', progrm.Name);
+        var pname = HG.WebApp.Locales.GetProgramLocaleString(progrm.Address, 'Title', progrm.Name);
         var item = '<li data-icon="' + (progrm.IsEnabled ? 'check' : 'alert') + '">';
         item += '<a href="#" class="programitem" data-program-domain="' + progrm.Domain + '"  data-program-address="' + progrm.Address + '" data-program-index="' + i + '">';
         //
@@ -457,7 +455,7 @@ HG.WebApp.ProgramsList.RefreshPrograms = function () {
         }
         //
         var descr = (progrm.Description != null ? progrm.Description : '');
-        descr = HG.WebApp.Locales.GetLocaleString('Program.'+progrm.Address+'.Description', descr);
+        descr = HG.WebApp.Locales.GetProgramLocaleString(progrm.Address, 'Description', descr);
         item += '	<p class="ui-li-aside ui-li-desc">' + progrm.Type + ' &nbsp;&nbsp;&nbsp;<strong>PID:</strong> ' + progrm.Address + '<br><font style="opacity:0.5">' + triggertime + '</font></p>';
         item += '	<h3 class="ui-li-heading"><img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ' + pname + '</h3>';
         item += '	<p class="ui-li-desc">' + descr + ' &nbsp;</p>';

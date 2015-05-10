@@ -1,43 +1,82 @@
-{
+{ "Programs": {
 
-"Program.82.Title":
-"Energy Saving Mode",
-"Program.82.Description":"When enabled, ensures that dimmer level is kept below the configured percentage value.",
+"6": {
+    "Title": 
+        "All lights on",
+    "Description":
+        "Turn on all lights in the selected group."
+},
 
+"7": {
+    "Title": 
+        "All lights off",
+    "Description": 
+        "Turn off all lights in the selected group."
+},
+
+"82": {
+    "Title":
+        "Energy Saving Mode",
+    "Description":
+        "When enabled, ensures that dimmer level is kept below the configured percentage value.",
+    "ConfigureOptions.MaxLevel":
+        "Max light level",
     "EnergyManagement.EnergySavingMode":
-        "Enable energy saving mode",
+        "Enable energy saving mode"
+},
 
-"Program.16.Title":
-"Level Memory",
-"Program.16.Description":"Store and recall last dimmer level.",
-
+"16": {
+    "Title":
+        "Level Memory",
+    "Description":
+        "Store and recall last dimmer level.",
     "HomeGenie.LevelMemory":
         "Recall last light level when switched on",
     "HomeGenie.LevelMemory.SimulateOnly":
-        "Simulate only",
+        "Simulate only"
+},
 
-"Program.35.Title":
-"Scheduled On/Off",
-"Program.35.Description":"Turn on/off a device using HG scheduler.",
-
+"35": {
+    "Title":
+        "Scheduled On/Off",
+    "Description":
+        "Turn on/off a device using the scheduler.",
     "HomeGenie.ScheduleControl":
         "Enable scheduled on/off",
     "HomeGenie.ScheduleOn":
         "Turn on",
     "HomeGenie.ScheduleOff":
-        "Turn off",
+        "Turn off"
+},
 
-"Program.90.Title":
-"Security Alarm System",
-"Program.90.Description":"Basic Security Alarm System",
-
+"90": {
+    "Title":
+        "Security Alarm System",
+    "Description":
+        "Basic security alarm system",
     "HomeGenie.SecurityAlarm":
         "Use as alarm/strobe",
+    "HomeGenie.SecuritySensor":
+        "Use as security sensor",
+    "ConfigureOptions.Email.Recipients":
+        "Comma separated list of recipients e-mails for alarm notifications",
+    "ConfigureOptions.System.ArmDelay":
+        "Arm delay (seconds)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Sirens max Time (seconds, 0=infinite)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Program to run when armed",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Program to run when disarmed",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Program to run when triggered"
+},
 
-"Program.145.Title":
-"Smart Lights",
-"Program.145.Description":"Control device by motion detection and enviroment light.",
-
+"145": {
+    "Title":
+        "Smart Lights",
+    "Description":
+        "Control device by motion detection and enviroment light.",
     "HomeGenie.SmartLights.Enable":
         "Enable 'Smart Lights' control",
     "HomeGenie.SmartLights.OnMotionDetect":
@@ -45,19 +84,23 @@
     "HomeGenie.SmartLights.CheckLuminosity":
         "Controlled by light sensor",
     "HomeGenie.SmartLights.SwitchOffTimeout":
-        "Turn off after inactivity timeout (seconds)",
+        "Turn off after inactivity timeout (seconds)"
+},
 
-"Program.8.Title":
-"Sunrise Colors Scenario",
-"Program.8.Description":"Example scenario for Philips Hue lights.",
-
+"8": {
+    "Title":
+        "Sunrise Colors Scenario",
+    "Description":
+        "Example scenario for Philips Hue lights.",
     "Scenarios.SunriseColors":
-        "Link to Sunrise Colors scenario",
+        "Link to Sunrise Colors scenario"
+},
 
-"Program.36.Title":
-"Timetable",
-"Program.36.Description":"Schedule thermostats, lights and shutters.",
-
+"36": {
+    "Title":
+        "Timetable",
+    "Description":
+        "Schedule thermostats, lights and shutters.",
     "TimeTable.Weekend":
         "Week-end",
     "TimeTable.Workday":
@@ -67,20 +110,25 @@
     "TimeTable.Special":
         "Special days",
     "TimeTable.Enable":
-        "Enable timetable",
+        "Enable timetable"
+},
 
-"Program.112.Title":
-"Automatic turn off",
-"Program.112.Description":"When device is turned on, automatically turn it off after a given delay.",
-
+"112": {
+    "Title":
+        "Automatic turn off",
+    "Description":
+        "When device is turned on, automatically turn it off after a given delay.",
     "HomeGenie.TurnOffDelay":
-        "Automatic turn off delay (seconds)",
+        "Automatic turn off delay (seconds)"
+},
 
-"Program.200.Title":
-"Windows Phone Push Notification Service",
-"Program.200.Description":"Sends toast and tile updates to Windows Phone client.",
-
+"200": {
+    "Title":
+        "Windows Phone Push Notification Service",
+    "Description":
+        "Sends toast and tile updates to Windows Phone client.",
     "MobileNotification.SendChanges":
         "Push notifications to Windows Phone Client"
-
 }
+
+}}
