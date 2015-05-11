@@ -518,6 +518,17 @@ HG.WebApp.Utility.GetElapsedTimeText = function (timestamp)
     }
     return ret;
 };
+HG.WebApp.Utility.ParseModuleDomainAddress = function (domainAddress) 
+{
+    var result = null;
+    if (domainAddress.indexOf(':') > 0) {
+        result = { 
+            Domain: domainAddress.substring(0, domainAddress.lastIndexOf(':')),
+            Address: domainAddress.substring(domainAddress.lastIndexOf(':') + 1)
+        };
+    }
+    return result;
+},
 HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address) 
 {
     var module = null;

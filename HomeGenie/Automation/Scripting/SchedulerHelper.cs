@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// Scheduler helper.\n
     /// Class instance accessor: **Scheduler**
     /// </summary>
+    [Serializable]
     public class SchedulerHelper
     {
 

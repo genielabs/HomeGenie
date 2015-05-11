@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// Settings helper.\n
     /// Class instance accessor: **Settings**
     /// </summary>
+    [Serializable]
     public class SettingsHelper
     {
         private HomeGenieService homegenie;

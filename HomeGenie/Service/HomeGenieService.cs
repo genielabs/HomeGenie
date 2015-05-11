@@ -52,6 +52,7 @@ using OpenSource.UPnP;
 
 namespace HomeGenie.Service
 {
+    [Serializable]
     public class HomeGenieService
     {
         #region Private Fields declaration
@@ -859,8 +860,8 @@ namespace HomeGenie.Service
 
         public void RouteParameterChangedEvent(object eventData)
         {
-            try
-            {
+            //try
+            //{
                 bool proceed = true;
                 RoutedEvent moduleEvent = (RoutedEvent)eventData;
                 foreach (var program in masterControlProgram.Programs)
@@ -869,8 +870,8 @@ namespace HomeGenie.Service
                     if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                     {
                         program.RoutedEventAck.Set();
-                        try
-                        {
+                        //try
+                        //{
                             if (program.ModuleIsChangingHandler != null)
                             {
                                 if (!program.ModuleIsChangingHandler(
@@ -885,17 +886,17 @@ namespace HomeGenie.Service
                                     break;
                                 }
                             }
-                        }
-                        catch (System.Exception ex)
-                        {
-                            HomeGenieService.LogEvent(
-                                program.Domain,
-                                program.Address.ToString(),
-                                ex.Message,
-                                "Exception.StackTrace",
-                                ex.StackTrace
-                            );
-                        }
+                        //}
+                        //catch (System.Exception ex)
+                        //{
+                        //    HomeGenieService.LogEvent(
+                        //        program.Domain,
+                        //        program.Address.ToString(),
+                        //        ex.Message,
+                        //        "Exception.StackTrace",
+                        //        ex.StackTrace
+                        //    );
+                        //}
                     }
                 }
                 if (proceed)
@@ -934,17 +935,17 @@ namespace HomeGenie.Service
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                HomeGenieService.LogEvent(
-                    Domains.HomeAutomation_HomeGenie,
-                    "RouteParameterChangedEvent()",
-                    e.Message,
-                    "Exception.StackTrace",
-                    e.StackTrace
-                ); 
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    HomeGenieService.LogEvent(
+            //        Domains.HomeAutomation_HomeGenie,
+            //        "RouteParameterChangedEvent()",
+            //        e.Message,
+            //        "Exception.StackTrace",
+            //        e.StackTrace
+            //    ); 
+            //}
         }
 
         #endregion

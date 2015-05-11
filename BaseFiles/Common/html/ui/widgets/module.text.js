@@ -81,8 +81,8 @@
         if (textInput.val() == '' && (typeof address == 'undefined' || address == '')) {
             verified = true;
         } else if (typeof address != 'undefined' && address.indexOf(':') > 0) {
-            var ref = address.split(':');
-            var mod = HG.WebApp.Utility.GetModuleByDomainAddress(ref[0], ref[1]);
+            var da = HG.WebApp.Utility.ParseModuleDomainAddress(address);
+            var mod = HG.WebApp.Utility.GetModuleByDomainAddress(da.Domain, da.Address);
             if (mod != null && (textInput.val() == '' || (textInput.val().toLowerCase() == mod.Name.toLowerCase()) || (textInput.val().toLowerCase() == address.toLowerCase()))) {
                 textInput.val(mod.Name!=''?mod.Name:mod.Domain+':'+mod.Address);
                 verified = true;

@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// UDP client helper.\n
     /// Class instance accessor: **UdpClient**
     /// </summary>
+    [Serializable]
     public class UdpClientHelper
     {
         private UDPClient udpClient;

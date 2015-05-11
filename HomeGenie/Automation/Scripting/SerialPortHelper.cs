@@ -33,6 +33,7 @@ namespace HomeGenie.Automation.Scripting
     /// Serial port helper.\n
     /// Class instance accessor: **SerialPort**
     /// </summary>
+    [Serializable]
     public class SerialPortHelper
     {
         private SerialPortInput serialPort;

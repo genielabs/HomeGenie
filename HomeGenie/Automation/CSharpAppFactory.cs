@@ -85,6 +85,7 @@ using HomeGenie.Automation; using HomeGenie.Data;
             source += @"
 namespace HomeGenie.Automation.Scripting
 {
+    [Serializable]
     public class ScriptingInstance : ScriptingHost
     {
         private void RunCode(string PROGRAM_OPTIONS_STRING)

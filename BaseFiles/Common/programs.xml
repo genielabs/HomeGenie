@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:55.902086Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:29.906371Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:56.402932Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:30.412969Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -448,7 +448,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:38.438408Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:30.92796Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -501,9 +501,31 @@ while (Program.IsEnabled)
     <Name>Scheduled ON/OFF</Name>
     <Description>Turn on/off a device using HG scheduler.</Description>
     <Group>Scheduling</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
+        <Property>HomeGenie.ScheduleControl</Property>
+        <Description>Control device on a given schedule</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>cron.text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
+        <Property>HomeGenie.ScheduleOn</Property>
+        <Description>Turn On</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>cron.text</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Switch,Shutter</ForTypes>
+        <Property>HomeGenie.ScheduleOff</Property>
+        <Description>Turn Off</Description>
+      </ProgramFeature>
+    </Features>
     <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2015-05-11T13:19:31.421202Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1143,7 +1165,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:57.900617Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:31.92194Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1196,7 +1218,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:58.402108Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:32.422855Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1487,7 +1509,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:58.904953Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:32.930429Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1579,7 +1601,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:59.400705Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:33.424355Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1647,7 +1669,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:13:59.903851Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:33.926977Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1915,7 +1937,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:00.40614Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:34.421976Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2271,7 +2293,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:01.40933Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:35.428511Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2371,7 +2393,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:01.920461Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:35.938912Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2523,7 +2545,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:02.410171Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:36.429129Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2653,14 +2675,13 @@ var LUM_TRIGGER_VALUE = 10;
 var smart_devices = Modules.WithFeature(SMART_LIGHT_ENABLE);
 //
 var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
-  var v = new dynamic();
+  dynamic v = new ExpandoObject();
   v.Domain = "0";
   v.Address = "0";
   if (domainAddress.IndexOf(":") &gt; 0)
   {
-    var parts = domainAddress.Split(':');
-    v.Domain = parts[0];
-    v.Address = parts[1];
+    v.Domain = domainAddress.Substring(0, domainAddress.LastIndexOf(':'));
+    v.Address = domainAddress.Substring(domainAddress.LastIndexOf(':') + 1);
   }
   return v;
 });
@@ -2676,9 +2697,7 @@ When.ModuleParameterIsChanging((module, parameter) =&gt; {
             {
                 smart_devices.Each((mod)=&gt;
                 {
-                  
                   	var da = GetDomainAddress(mod.Parameter(MOT_SENSOR_NAME).Value);
-Console.WriteLine(da.Domain);
                     if (da.Domain == module.Instance.Domain &amp;&amp; da.Address == module.Instance.Address)
                     {
 						mod.Parameter(LAST_EVENT).Value = DateTime.UtcNow.Ticks.ToString();
@@ -2687,7 +2706,7 @@ Console.WriteLine(da.Domain);
                             Program.Notify("Smart Lights", module.Instance.Name + "&lt;br&gt;switched ON " + mod.Instance.Address + " " + mod.Instance.Name);
                           	//
                           	da = GetDomainAddress(mod.Parameter(LUM_SENSOR_NAME).Value);
-                            var lumsensor = Modules.InDomain(da.Domain).WithAddres(da.Address).Get();
+                            var lumsensor = Modules.InDomain(da.Domain).WithAddress(da.Address).Get();
                             if (lumsensor.Instance != null)
                             {
                                 var luminosity = lumsensor.Parameter("Sensor.Luminance").DecimalValue;
@@ -2798,8 +2817,8 @@ while (Program.IsEnabled)
         <Description>Turn off after inactivity timeout (seconds)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2015-05-05T18:48:41.183439Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:02.914748Z</TriggerTime>
+    <ActivationTime>2015-05-11T13:22:11.155754Z</ActivationTime>
+    <TriggerTime>2015-05-11T13:22:11.16748Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8239,7 +8258,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-05-07T22:14:03.932226Z</TriggerTime>
+    <TriggerTime>2015-05-11T13:19:37.95078Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

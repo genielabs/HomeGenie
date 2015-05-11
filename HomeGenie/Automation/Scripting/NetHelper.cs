@@ -48,6 +48,7 @@ namespace HomeGenie.Automation.Scripting
     /// Net Helper class.\n
     /// Class instance accessor: **Net**
     /// </summary>
+    [Serializable]
     public class NetHelper
     {
 

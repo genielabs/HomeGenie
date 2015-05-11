@@ -4,6 +4,7 @@ using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scripting
 {
+    [Serializable]
     public class StoreHelper
     {
         private TsList<Store> storeList;

@@ -1,0 +1,134 @@
+{ "Programs": {
+
+"6": {
+    "Title": 
+        "Alle Lichter an",
+    "Description":
+        "Schalte alle Lichter an in der ausgewählten Gruppe."
+},
+
+"7": {
+    "Title": 
+        "Alle Lichter aus",
+    "Description": 
+        "Schalte alle Lichter aus in der ausgewählten Gruppe."
+},
+
+"82": {
+    "Title":
+        "Energiesparmodus",
+    "Description":
+        "Wenn sie aktiviert ist, stellt sicher, dass Dimmerniveau wird unter den konfigurierten Prozentwert gehalten.",
+    "ConfigureOptions.MaxLevel":
+        "Max Lichtniveau",
+    "EnergyManagement.EnergySavingMode":
+        "Aktiviere den Energiesparmodus"
+},
+
+"16": {
+    "Title":
+        "Stufe-Speicher",
+    "Description":
+        "Speichern und Abrufen letzten Dimmerniveau.",
+    "HomeGenie.LevelMemory":
+        "Daran erinnern letzten Lichtpegel beim Einschalten",
+    "HomeGenie.LevelMemory.SimulateOnly":
+        "Nur simulieren"
+},
+
+"35": {
+    "Title":
+        "Geplante Ein/Aus",
+    "Description":
+        "Ein/Ausschalten eines Geräts mit dem Zeitplaner.",
+    "HomeGenie.ScheduleControl":
+        "Einschalten Planer Ein/Aus",
+    "HomeGenie.ScheduleOn":
+        "Einschalten",
+    "HomeGenie.ScheduleOff":
+        "Ausschalten"
+},
+
+"90": {
+    "Title":
+        "Sicherheits-Alarmsystem",
+    "Description":
+        "Grund Sicherheits-Alarmsystem",
+    "HomeGenie.SecurityAlarm":
+        "Verwenden als Alarm/Blitz / ",
+    "HomeGenie.SecuritySensor":
+        "Verwenden als Sicherheitssensor",
+    "ConfigureOptions.Email.Recipients":
+        "Komma getrennte Liste der Empfänger von E-Mails für Alarmbenachrichtigungen",
+    "ConfigureOptions.System.ArmDelay":
+        "Arm Verzögerung (Sekunden)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Sirens max Zeit (Sekunden, 0 = unendlich)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Programm läuft bei aktiviertem Alarm",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Programm läuft bei deaktiviertem Alarm",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Programm läuft bei Auslöser"
+},
+
+"145": {
+    "Title":
+        "intelligente Beleuchtung",
+    "Description":
+        "Geräte Steuern durch Bewegungserkennung und Umgebung Licht.",
+    "HomeGenie.SmartLights.Enable":
+        "Einschalten 'intelligente Beleuchtung' steuerung",
+    "HomeGenie.SmartLights.OnMotionDetect":
+        "Durch Bewegungssensor gesteuert",
+    "HomeGenie.SmartLights.CheckLuminosity":
+        "Durch Lichtsensor gesteuert",
+    "HomeGenie.SmartLights.SwitchOffTimeout":
+        "Auschalten nach dem Inaktivitätszeitlimit (in Sekunden)"
+},
+
+"8": {
+    "Title":
+        "Sonnenaufgang Farben Szenario",
+    "Description":
+        "Beispielszenario für Philips Hue Lichter.",
+    "Scenarios.SunriseColors":
+        "Verknüpfung zum Sonnenaufgang Farben Szenario"
+},
+
+"36": {
+    "Title":
+        "Zeitplan",
+    "Description":
+        "Zeitplan Thermostate, Lampen und Fensterläden.",
+    "TimeTable.Weekend":
+        "Wochenende",
+    "TimeTable.Workday":
+        "Arbeitstage",
+    "TimeTable.Holiday":
+        "Ferien",
+    "TimeTable.Special":
+        "Sondertage",
+    "TimeTable.Enable":
+        "aktivieren Zeitplan"
+},
+
+"112": {
+    "Title":
+        "Automatische Abschaltung",
+    "Description":
+        "Wenn das Gerät eingeschaltet wird, automatisch deaktivieren nach einer bestimmten Verzögerung.",
+    "HomeGenie.TurnOffDelay":
+        "Automatische Abschaltung Verzögerung (Sekunden)"
+},
+
+"200": {
+    "Title":
+        "Windows Phone Push-Benachrichtigungsdienst",
+    "Description":
+        "Sendet toast und tile updates zu Windows Phone client.",
+    "MobileNotification.SendChanges":
+        "Push-Benachrichtigungen auf Windows Phone-Client"
+}
+
+}}

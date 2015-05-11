@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// Module Helper class.\n
     /// This class is a module instance wrapper and it is used as return value of ModulesManager.Get() method.
     /// </summary>
+    [Serializable]
     public class ModuleHelper : ModulesManager
     {
         private HomeGenie.Data.Module module = null;

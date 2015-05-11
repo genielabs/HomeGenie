@@ -40,6 +40,7 @@ namespace HomeGenie.Automation.Scripting
     /// Program Helper class.\n
     /// Class instance accessor: **Program**
     /// </summary>
+    [Serializable]
     public class ProgramHelper
     {
         private HomeGenieService homegenie;
