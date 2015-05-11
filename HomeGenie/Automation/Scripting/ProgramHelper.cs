@@ -309,12 +309,6 @@ namespace HomeGenie.Automation.Scripting
             return feature;
         }
 
-
-
-
-
-
-        //TODO: deprecate this?
         public ProgramHelper AddFeature(
             string forDomains,
             string forModuleTypes,
@@ -324,12 +318,12 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature(forDomains, forModuleTypes, propertyName, description, "checkbox");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, <type>)' instead")]
         public ProgramHelper AddFeature(string forModuleTypes, string propertyName, string description) // default type = checkbox
         {
             return AddFeature("", forModuleTypes, propertyName, description, "checkbox");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
         public ProgramHelper AddFeatureTextInput(
             string forDomain,
             string forModuleTypes,
@@ -339,15 +333,11 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature(forDomain, forModuleTypes, propertyName, description, "text");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(\"\", <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
         public ProgramHelper AddFeatureTextInput(string forModuleTypes, string propertyName, string description)
         {
             return AddFeature("", forModuleTypes, propertyName, description, "text");
         }
-
-
-
-
 
         /// <summary>
         /// Adds a new virtual module to the system.
@@ -500,8 +490,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-
-
         /// <summary>
         /// Display UI notification message from current program.
         /// </summary>
@@ -543,21 +531,35 @@ namespace HomeGenie.Automation.Scripting
         /// Program.Say("The garage door has been opened", "en-US");
         /// </code>
         /// </example>
-        public void Say(string sentence, string locale, bool goAsync = false)
+        public ProgramHelper Say(string sentence, string locale = null, bool goAsync = false)
         {
-            Utility.Say(sentence, locale, goAsync);
+            if (String.IsNullOrWhiteSpace(locale))
+            {
+                locale = Thread.CurrentThread.CurrentCulture.Name;
+            }
+            try
+            {
+                Utility.Say(sentence, locale, goAsync);
+            } catch (Exception e) {
+                Console.WriteLine("Program.Say ERROR: {0}", e.Message);
+            }
+            return this;
         }
-        // this redundant method definition is for Jint compatibility
-        public void Say(string sentence, string locale)
+        // these redundant method definitions are for Jint compatibility
+        public ProgramHelper Say(string sentence)
         {
-            Utility.Say(sentence, locale, false);
+            return Say(sentence, null, false);
+        }
+        public ProgramHelper Say(string sentence, string locale)
+        {
+            return Say(sentence, locale, false);
         }
 
         /// <summary>
         /// Playbacks a wave file.
         /// </summary>
         /// <param name="waveUrl">URL of the audio wave file to play.</param>
-        public void Play(string waveUrl)
+        public ProgramHelper Play(string waveUrl)
         {
             try
             {
@@ -575,9 +577,10 @@ namespace HomeGenie.Automation.Scripting
                 stream.Close();
 
                 Utility.Play(file);
-            } catch {
-                // TODO: report exception
+            } catch (Exception e) {
+                Console.WriteLine("Program.Play ERROR: {0}", e.Message);
             }
+            return this;
         }
 
         /// <summary>

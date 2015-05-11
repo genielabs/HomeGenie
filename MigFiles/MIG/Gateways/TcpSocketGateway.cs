@@ -31,7 +31,7 @@ namespace MIG.Gateways
 {
     class TcpSocketGatewayConfiguration
     {
-        public int Port;
+        public int Port = 0;
     }
 
     class TcpSocketGatewayRequest

@@ -668,5 +668,105 @@
     "configure_widgeteditor_savinghtml":
         "Сохраняем HTML...",
     "configure_widgeteditor_savingjavascript":
-        "Сохраняем Javascript..."
+        "Сохраняем Javascript...",
+    "configure_interfaces_importdriver":
+        "Install Add-ons",        
+    "configure_interfaces_download":
+        "Download & install",        
+    "configure_interfaces_upload":
+        "Upload & install",        
+    "configure_interfaces_addonslist":
+        "Add-ons list",        
+    "configure_interfaces_installaddons":
+        "Install Add-ons",
+    "configure_interfaces_downloadfromurl":
+        "Download add-on package from URL",
+    "configure_interfaces_uploadpackage":
+        "Upload add-on package from file",
+    "cronwizard_title":
+        "Cron event Wizard",      
+    "cronwizard_tab_minute":
+        "Minute",        
+    "cronwizard_tab_hour":
+        "Hour",        
+    "cronwizard_tab_dayofmonth":
+        "Day of month",        
+    "cronwizard_tab_month":
+        "Month",        
+    "cronwizard_tab_dayofweek":
+        "Day of week",      
+    "cronwizard_event_willoccur":
+        "This event will occur",
+    "cronwizard_minuteselect_everyminute":
+        "every minute",        
+    "cronwizard_minuteselect_everysomeminute":
+        "every &lt;n&gt; minute",        
+    "cronwizard_minuteselect_eachselected":
+        "each selected minute",        
+    "cronwizard_hourselect_everyhour":
+        "every hour",        
+    "cronwizard_hourselect_everysomehour":
+        "every &lt;n&gt; hour",        
+    "cronwizard_hourselect_eachselected":
+        "each selected hour",        
+    "cronwizard_dayselect_everyday":
+        "every day",        
+    "cronwizard_dayselect_eachselected":
+        "each selected day",        
+    "cronwizard_monthselect_everymonth":
+        "every month",        
+    "cronwizard_monthselect_eachselected":
+        "each selected month",        
+    "cronwizard_dayowselect_everydayow":
+        "every day of week",        
+    "cronwizard_dayowselect_eachselected":
+        "each selected day of week",        
+    "common_month_jan":
+        "Jan",        
+    "common_month_feb":
+        "Feb",        
+    "common_month_mar":
+        "Mar",        
+    "common_month_apr":
+        "Apr",        
+    "common_month_may":
+        "May",        
+    "common_month_jun":
+        "Jun",        
+    "common_month_jul":
+        "Jul",        
+    "common_month_aug":
+        "Aug",        
+    "common_month_sep":
+        "Sep",        
+    "common_month_oct":
+        "Oct",        
+    "common_month_nov":
+        "Nov",        
+    "common_month_dec":
+        "Dec",        
+    "common_dayofweek_sun":
+        "Sun",        
+    "common_dayofweek_mon":
+        "Mon",        
+    "common_dayofweek_tue":
+        "Tue",        
+    "common_dayofweek_wed":
+        "Wed",        
+    "common_dayofweek_thu":
+        "Thu",        
+    "common_dayofweek_fri":
+        "Fri",        
+    "common_dayofweek_sat":
+        "Sat",        
+    "common_command_cancel":
+        "Cancel",        
+    "common_command_ok":
+        "Ok",
+    "common_command_proceed":
+        "Proceed",
+    "common_command_save":
+        "Save",
+    "common_status_notset":
+        "Not set"  
 }

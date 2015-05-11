@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r486</Version>
+  <Version>1.00 beta r487</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added confirm popup for "database reset" and "remote routing reset"
+  <ReleaseNote>   - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
+  - Added confirm popup for "database reset" and "remote routing reset"
   - Updated automation programs to use new Program.AddFeature widgets
   - Added UI widgets for fields created with Program.AddFeature (last method parameter is the type: "text", "slider", "password", "checkbox", "module.text", "store.script", "store.list")
   - Added simple store to Module helper too
-  - Added simple key/value persistent store to Program helper class: Program.Store("<store_name>")[.Get("<item_key>") | .Remove("<item_key>") | .List]
+  - Added simple key/value persistent store to Program helper class: Program.Store("store_name")[.Get("item_key") | .Remove("item_key") | .List]
   - Fixed encoding bug in input text of module features and program config options (not handling properly double quotes and other characters)
   - Added "Description" field to MIGServiceConfiguration.Interface
   - Added Sunrise/Sunset event raising to Weather Underground app
@@ -27,5 +28,5 @@
   - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)
   - Added importable MIG interface driver plugins (add-ons)
   - Added "configlets" files for implementing custom interface drivers UI</ReleaseNote>
-  <ReleaseDate>2015-05-05T20:34:22.0000Z</ReleaseDate>
+  <ReleaseDate>2015-05-08T12:10:52.0000Z</ReleaseDate>
 </ReleaseInfo>

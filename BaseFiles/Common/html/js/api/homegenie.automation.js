@@ -245,6 +245,16 @@ HG.Automation.Programs.ArduinoFileList = function (pid, callback) {
     });
 };
 
+HG.Automation.Programs.PostBack = function(postbackId, program, module, property, value, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + program.Domain + '/' + program.Address + '/' + postbackId + '/' + module.Domain + '/' + module.Address + '/' + property + '/' + encodeURIComponent(value) + '/' + (new Date().getTime()), function (data) {
+        if (callback != null && typeof callback != 'undefined') {
+            callback(data);
+        }
+    }).fail(function () {
+        if (typeof (callback) != 'undefined') callback(null);
+    });
+};
+
 //
 // namespace : HG.Automation.Scheduling namespace
 // info      : -

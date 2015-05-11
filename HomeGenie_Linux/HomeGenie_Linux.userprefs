@@ -9,8 +9,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="../HomeGenie/Automation/Scripting/NetHelper.cs" line="432" offsetX="758" offsetY="3132" expression="returnValue" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="Generoso Martello" Email="gene@homegenie.it" Copyright="G-Labs" Company="G-Labs" Trademark="" />
 </Properties>

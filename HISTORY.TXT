@@ -1,5 +1,16 @@
 ﻿RELEASE HISTORY
 
+10/05/2015 1.00 beta rev 484-git9
+    - Added localization of programs configuration options
+
+09/05/2015 1.00 beta rev 484-git8
+    - Added localization of module features and programs title/description
+    - Added postback call to automation programs when a module option/feature is changed from the UI
+
+08/05/2015 1.00 beta rev 484-git7 (487 preview)
+    - Added missing locale translation entries to locale files
+    - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
+
 05/05/2015 1.00 beta rev 484-git6
     - Added confirm popup for "database reset" and "remote routing reset"
     - Updated automation programs to use new Program.AddFeature widgets

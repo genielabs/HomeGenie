@@ -118,7 +118,9 @@ HG.WebApp.InitializePage = function ()
     setTimeout(function() {
 
         var userLang = HG.WebApp.Locales.GetUserLanguage();
-        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json');
+        HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
+            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json');
+        });
         // enable/disable speech input
         if (!('webkitSpeechRecognition' in window)) {
             //no speech support
@@ -187,6 +189,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -201,6 +204,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -215,6 +219,7 @@ HG.WebApp.InitializePage = function ()
         matchBrackets: true,
         autoCloseBrackets: true,
         extraKeys: {
+            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
             "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
             "Ctrl-Space": "autocomplete"
         },
@@ -289,6 +294,15 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.Events.PopupRefreshIgnore();
     });
     $('#actionconfirm_popup').enhanceWithin().popup();
+    //
+    
+    // Cron Event Wizard popup
+    HG.Ui.GenerateWidget('core/popup.cronwizard', { parent: $(document).find('body') }, function(handler){
+        var element = handler.element;
+        element.enhanceWithin().popup();
+        HG.Ui.Popup.CronWizard = handler;
+    });
+    
 };
 
 
@@ -655,9 +669,8 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
         {
             setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
         }
-        $(popup_id1).off('popupafterclose', switchfn);
     };
-    $(popup_id1).on('popupafterclose', switchfn);
+    $(popup_id1).one('popupafterclose', switchfn);
     $(popup_id1).popup('close');
 };
 //
@@ -691,7 +704,7 @@ HG.WebApp.Locales.GetDefault = function(callback) {
         }
     });     
 };
-HG.WebApp.Locales.Localize = function(container, langurl)
+HG.WebApp.Locales.Localize = function(container, langurl, callback)
 {
     // get data via ajax 
     // store it in 		HG.WebApp.Data._CurrentLocale
@@ -701,7 +714,7 @@ HG.WebApp.Locales.Localize = function(container, langurl)
             url: langurl,
             type: 'GET',
             success: function (data) {
-                HG.WebApp.Data._CurrentLocale = $.parseJSON( data );
+                HG.WebApp.Data._CurrentLocale = $.extend(HG.WebApp.Data._CurrentLocale, $.parseJSON( data ));
                 //
                 $(container).find('[data-locale-id]').each(function(index){
                     var stringid = $(this).attr('data-locale-id');
@@ -719,6 +732,10 @@ HG.WebApp.Locales.Localize = function(container, langurl)
                         }
                     }
                 });
+                if (typeof callback == 'function') callback(true);
+            },
+            fail: function() {
+                if (typeof callback == 'function') callback(false);
             }
         });
     });		
@@ -843,6 +860,14 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValu
         return (defaultValue ? defaultValue : null);
     retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data("Locale"));
     return (retval == null && defaultValue ? defaultValue : retval);
+};
+HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {
+    var response = defaultValue;
+    var plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
+    if (typeof plocale != 'undefined') {
+        response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+    }
+    return response;
 };
 HG.WebApp.Locales.GenerateTemplate = function()
 {

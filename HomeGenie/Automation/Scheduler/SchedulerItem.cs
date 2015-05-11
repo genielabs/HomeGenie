@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CronExpressionDescriptor;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -32,6 +33,19 @@ namespace HomeGenie.Automation.Scheduler
     {
         public string Name { get; set; }
         public string CronExpression { get; set; }
+        public string Description 
+        {
+            get 
+            { 
+                string d = "";
+                try
+                {
+                    d = ExpressionDescriptor.GetDescription(this.CronExpression); 
+                }
+                catch { }
+                return d;
+            } 
+        }
         public string ProgramId { get; set; }
         public bool IsEnabled { get; set; }
         public string LastOccurrence { get; set; }
