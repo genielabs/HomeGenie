@@ -71,16 +71,16 @@ namespace ZWaveLib.CommandClasses
         
         public static void Set(ZWaveNode node, Value value)
         {
-            byte bValue;
+            byte lockValue;
             if (value == DoorLock.Value.Secured)
-                bValue = 255;
+                lockValue = 255;
             else
-                bValue = 0;
+                lockValue = 0;
 
             node.SendRequest(new byte[] { 
                 (byte)CommandClass.DoorLock, 
                 (byte)Command.DoorLockSet,
-                (byte)value
+                (byte)lockValue
             });
         }
     }
