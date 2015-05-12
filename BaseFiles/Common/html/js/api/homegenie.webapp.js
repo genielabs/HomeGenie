@@ -712,8 +712,15 @@ HG.WebApp.Locales.GetDefault = function(callback) {
         success: function (data) {
             HG.WebApp.Data._DefaultLocale = $.parseJSON( data );
             callback();
+            $.ajax({
+                url: './locales/en.programs.json',
+                type: 'GET',
+                success: function (pdata) {
+                    HG.WebApp.Data._DefaultLocale = $.extend(HG.WebApp.Data._DefaultLocale, $.parseJSON( pdata ));
+                }
+            });     
         }
-    });     
+    });  
 };
 HG.WebApp.Locales.Localize = function(container, langurl, callback)
 {
@@ -874,22 +881,18 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValu
 };
 HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {
     var response = defaultValue;
-    if(typeof (HG.WebApp.Data._CurrentLocale.Programs) === 'undefined') {
-        if(typeof (HG.WebApp.Data._DefaultLocale.Programs) === 'undefined') {
-            return response;
-        } else {
-            var plocale = eval('HG.WebApp.Data._DefaultLocale.Programs['+programAddress+']');
-            if (typeof plocale != 'undefined') {
-                response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
-            }
-        }
-    } else {
-        var plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
-        if (typeof plocale != 'undefined') {
-            response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
-        }
+    var plocale;
+    var hasLocale = eval('(HG.WebApp.Data._CurrentLocale.Programs && HG.WebApp.Data._CurrentLocale.Programs['+programAddress+'])');
+    if (hasLocale)
+        plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
+    else {
+        hasLocale = eval('(HG.WebApp.Data._DefaultLocale.Programs && HG.WebApp.Data._DefaultLocale.Programs['+programAddress+'])');
+        if (hasLocale)
+            plocale = eval('HG.WebApp.Data._DefaultLocale.Programs['+programAddress+']');
     }
-
+    if (typeof plocale != 'undefined') {
+        response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+    }
     return response;
 };
 HG.WebApp.Locales.GenerateTemplate = function()
