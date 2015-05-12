@@ -51,7 +51,7 @@
             }
         }
 
-        if (triggeredEvent != null && (triggeredEvent.Name == "DoorLock.Status" && triggeredEvent.Value == 'Secured') || (triggeredEvent.Name == "Sensor.Alarm" && (triggeredEvent.Value == 1 || triggeredEvent.Value == 5))) { // 0xFF
+        if (triggeredEvent != null && (triggeredEvent.Name == "Status.DoorLock" && triggeredEvent.Value == 'Secured') || (triggeredEvent.Name == "Sensor.Alarm" && (triggeredEvent.Value == 1 || triggeredEvent.Value == 5))) { // 0xFF
             widget.find('[data-ui-field=lockunlock]').val("Secured").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
             this.StatusText = "Locked";
