@@ -874,10 +874,22 @@ HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValu
 };
 HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {
     var response = defaultValue;
-    var plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
-    if (typeof plocale != 'undefined') {
-        response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+    if(typeof (HG.WebApp.Data._CurrentLocale.Programs) === 'undefined') {
+        if(typeof (HG.WebApp.Data._DefaultLocale.Programs) === 'undefined') {
+            return response;
+        } else {
+            var plocale = eval('HG.WebApp.Data._DefaultLocale.Programs['+programAddress+']');
+            if (typeof plocale != 'undefined') {
+                response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+            }
+        }
+    } else {
+        var plocale = eval('HG.WebApp.Data._CurrentLocale.Programs['+programAddress+']');
+        if (typeof plocale != 'undefined') {
+            response = HG.WebApp.Locales.GetLocaleString(stringId, defaultValue, plocale);
+        }
     }
+
     return response;
 };
 HG.WebApp.Locales.GenerateTemplate = function()
