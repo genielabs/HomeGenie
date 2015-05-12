@@ -138,7 +138,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             else {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
-                var iconImage = configurepage_GetModuleIcon(module, null);
+                var iconImage = HG.Ui.GetModuleIcon(module, null);
                 popupdata = {
                     icon: iconImage,
                     title: eventLog.Property + '<br/>' + eventLog.Value,
@@ -149,9 +149,9 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             break;
 
         case 'HomeAutomation.HomeGenie.Automation':
-            var iconImage = configurepage_GetModuleIcon(module, null);
+            var iconImage = HG.Ui.GetModuleIcon(module, null);
             if (eventLog.Property == 'Runtime.Error') {
-                if (eventLog.Value != '') {
+                if (module != null && eventLog.Value != '') {
                     popupdata = {
                         icon: iconImage,
                         title: '<span style="color:yellow;font-size:9pt;">Program ' + module.Address + '</span><br><b>' + eventLog.Value + '</b>',
@@ -162,7 +162,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         HG.WebApp.ProgramEdit.RefreshProgramOptions();
                     }
                 }
-                else if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                else if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     //var cp = HG.WebApp.Utility.GetProgramByAddress(module.Address);
                     //if (cp != null) cp.ScriptErrors = '';
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
@@ -170,7 +170,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                 }
             }
             else if (eventLog.Property == 'Program.Status') {
-                if (HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
+                if (module != null && HG.WebApp.ProgramEdit._CurrentProgram.Address == module.Address) {
                     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
                 }
             }
@@ -214,7 +214,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
         default:
             if (module != null && eventLog.Property != 'Meter.Watts') {
 
-                var iconImage = configurepage_GetModuleIcon(module, null);
+                var iconImage = HG.Ui.GetModuleIcon(module, null);
                 if ((module.Address == 'RF' || module.Address == 'IR') && eventLog.Value != '') {
                     iconImage = 'images/remote.png';
                     popupdata = {

@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// TCP client helper.
     /// Class instance accessor: **TcpClient**
     /// </summary>
+    [Serializable]
     public class TcpClientHelper
     {
         private TcpClient tcpClient;

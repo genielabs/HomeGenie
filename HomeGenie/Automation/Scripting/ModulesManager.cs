@@ -38,6 +38,7 @@ namespace HomeGenie.Automation.Scripting
     /// Offers methods for filtering, selecting and operate on a group of modules.\n
     /// Class instance accessor: **Modules**
     /// </summary>
+    [Serializable]
     public class ModulesManager
     {
         private string command = "Command.NotSelected";

@@ -40,6 +40,7 @@ namespace HomeGenie.Automation.Scripting
     /// Program Helper class.\n
     /// Class instance accessor: **Program**
     /// </summary>
+    [Serializable]
     public class ProgramHelper
     {
         private HomeGenieService homegenie;
@@ -309,12 +310,6 @@ namespace HomeGenie.Automation.Scripting
             return feature;
         }
 
-
-
-
-
-
-        //TODO: deprecate this?
         public ProgramHelper AddFeature(
             string forDomains,
             string forModuleTypes,
@@ -324,12 +319,12 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature(forDomains, forModuleTypes, propertyName, description, "checkbox");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, <type>)' instead")]
         public ProgramHelper AddFeature(string forModuleTypes, string propertyName, string description) // default type = checkbox
         {
             return AddFeature("", forModuleTypes, propertyName, description, "checkbox");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
         public ProgramHelper AddFeatureTextInput(
             string forDomain,
             string forModuleTypes,
@@ -339,15 +334,11 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature(forDomain, forModuleTypes, propertyName, description, "text");
         }
-        //TODO: deprecate this?
+        [Obsolete("use 'AddFeature(\"\", <forTypes>, <forPropertyName>, <description>, \"text\")' instead")]
         public ProgramHelper AddFeatureTextInput(string forModuleTypes, string propertyName, string description)
         {
             return AddFeature("", forModuleTypes, propertyName, description, "text");
         }
-
-
-
-
 
         /// <summary>
         /// Adds a new virtual module to the system.
@@ -500,8 +491,6 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
-
-
         /// <summary>
         /// Display UI notification message from current program.
         /// </summary>
@@ -543,32 +532,56 @@ namespace HomeGenie.Automation.Scripting
         /// Program.Say("The garage door has been opened", "en-US");
         /// </code>
         /// </example>
-        public void Say(string sentence, string locale, bool goAsync = false)
+        public ProgramHelper Say(string sentence, string locale = null, bool goAsync = false)
         {
-            Utility.Say(sentence, locale, goAsync);
+            if (String.IsNullOrWhiteSpace(locale))
+            {
+                locale = Thread.CurrentThread.CurrentCulture.Name;
+            }
+            try
+            {
+                Utility.Say(sentence, locale, goAsync);
+            } catch (Exception e) {
+                Console.WriteLine("Program.Say ERROR: {0}", e.Message);
+            }
+            return this;
+        }
+        // these redundant method definitions are for Jint compatibility
+        public ProgramHelper Say(string sentence)
+        {
+            return Say(sentence, null, false);
+        }
+        public ProgramHelper Say(string sentence, string locale)
+        {
+            return Say(sentence, locale, false);
         }
 
         /// <summary>
         /// Playbacks a wave file.
         /// </summary>
         /// <param name="waveUrl">URL of the audio wave file to play.</param>
-        public void Play(string waveUrl)
+        public ProgramHelper Play(string waveUrl)
         {
-            var webClient = new WebClient();
-            byte[] audiodata = webClient.DownloadData(waveUrl);
-            webClient.Dispose();
+            try
+            {
+                var webClient = new WebClient();
+                byte[] audiodata = webClient.DownloadData(waveUrl);
+                webClient.Dispose();
 
-            string outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_tmp");
-            if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
-            string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
-            if (File.Exists(file)) File.Delete(file);
+                string outputDirectory = Utility.GetTmpFolder();
+                if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+                string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
+                if (File.Exists(file)) File.Delete(file);
 
-            var stream = File.OpenWrite(file);
-            stream.Write(audiodata, 0, audiodata.Length);
-            stream.Close();
+                var stream = File.OpenWrite(file);
+                stream.Write(audiodata, 0, audiodata.Length);
+                stream.Close();
 
-            Utility.Play(file);
-
+                Utility.Play(file);
+            } catch (Exception e) {
+                Console.WriteLine("Program.Play ERROR: {0}", e.Message);
+            }
+            return this;
         }
 
         /// <summary>
@@ -760,9 +773,7 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleParameter Parameter(string parameterName)
         {
-            //
             if (programModule == null) RelocateProgramModule();
-            //
             ModuleParameter parameter = null;
             try
             {
@@ -770,6 +781,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch
             {
+                // TODO: report exception
             }
             // create parameter if does not exists
             if (parameter == null)
@@ -779,6 +791,16 @@ namespace HomeGenie.Automation.Scripting
             return parameter;
         }
 
+        public StoreHelper Store(string storeName)
+        {
+            StoreHelper storage = null;
+            if (programModule == null) RelocateProgramModule();
+            if (this.programModule != null)
+            {
+                storage = new StoreHelper(this.programModule.Stores, storeName);
+            }
+            return storage;
+        }
 
         /// <summary>
         /// Gets a value indicating whether the program is running.

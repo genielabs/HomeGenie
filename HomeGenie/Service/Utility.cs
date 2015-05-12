@@ -119,22 +119,30 @@ namespace HomeGenie.Service
 
         public static ModuleParameter ModuleParameterGet(Module module, string propertyName)
         {
-            return module.Properties.Find(delegate(ModuleParameter parameter)
-            {
+            if (module == null)
+                return null;
+            return ModuleParameterGet(module.Properties, propertyName);
+        }
+        public static ModuleParameter ModuleParameterGet(TsList<ModuleParameter>  parameters, string propertyName)
+        {
+            return parameters.Find(delegate(ModuleParameter parameter){
                 return parameter.Name == propertyName;
             });
         }
-
         public static ModuleParameter ModuleParameterSet(Module module, string propertyName, string propertyValue)
         {
             if (module == null)
                 return null;
-            //
-            var parameter = module.Properties.Find(mpar => mpar.Name == propertyName);
+            return ModuleParameterSet(module.Properties, propertyName, propertyValue);
+        }
+
+        public static ModuleParameter ModuleParameterSet(TsList<ModuleParameter> parameters, string propertyName, string propertyValue)
+        {
+            var parameter = parameters.Find(mpar => mpar.Name == propertyName);
             if (parameter == null)
             {
                 parameter = new ModuleParameter() { Name = propertyName, Value = propertyValue };
-                module.Properties.Add(parameter);
+                parameters.Add(parameter);
             }
             parameter.Value = propertyValue;
             return parameter;
@@ -235,8 +243,8 @@ namespace HomeGenie.Service
             }
             else
             {
-                fieldValue = fieldValue.Replace("&", "&amp;");
-                fieldValue = fieldValue.Replace("\"", "&quot;");
+                //fieldValue = fieldValue.Replace("&", "&amp;");
+                fieldValue = fieldValue.Replace("\"", "\\\"");
                 fieldValue = fieldValue.Replace("\n", "\\n");
                 //fieldValue = fieldValue.Replace("\'", "\\'");
                 fieldValue = fieldValue.Replace("\r", "\\r");

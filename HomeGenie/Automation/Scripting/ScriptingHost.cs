@@ -50,6 +50,7 @@ namespace HomeGenie.Automation.Scripting
         public object ReturnValue = null;
     }
 
+    [Serializable]
     public class ScriptingHost
     {
 

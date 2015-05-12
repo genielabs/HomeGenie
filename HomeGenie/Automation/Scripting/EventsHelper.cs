@@ -34,6 +34,7 @@ namespace HomeGenie.Automation.Scripting
     /// Events Helper class.\n
     /// Class instance accessor: **When**
     /// </summary>
+    [Serializable]
     public class EventsHelper
     {
         HomeGenieService homegenie = null;

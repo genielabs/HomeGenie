@@ -486,7 +486,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROL_BRIGHT)
                 {
                     // TODO: raise parameter change event
-                    int amount = int.Parse(option);
+                    //int amount = int.Parse(option);
                     // TODO: how to specify bright amount parameter???
                     x10plm
                         .House(houseCode)
@@ -496,7 +496,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROL_DIM)
                 {
                     // TODO: raise parameter change event
-                    int amount = int.Parse(option);
+                    //int amount = int.Parse(option);
                     // TODO: how to specify dim amount parameter???
                     x10plm
                         .House(houseCode)

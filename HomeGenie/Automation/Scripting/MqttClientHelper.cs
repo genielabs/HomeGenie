@@ -38,6 +38,7 @@ namespace HomeGenie.Automation.Scripting
     /// MQTT client helper.
     /// Class instance accessor: **MqttClient**
     /// </summary>
+    [Serializable]
     public class MqttClientHelper
     {
         private MqttClient mqttClient = null;

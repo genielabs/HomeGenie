@@ -29,6 +29,7 @@ using System.Threading;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using System.Globalization;
 
 namespace MIG.Gateways
 {
@@ -125,6 +126,16 @@ namespace MIG.Gateways
                 //
                 request = context.Request;
                 response = context.Response;
+                //
+                if (request.UserLanguages != null && request.UserLanguages.Length > 0)
+                {
+                    try 
+                    {
+                        CultureInfo culture = CultureInfo.CreateSpecificCulture(request.UserLanguages[0].ToLowerInvariant().Trim());
+                        System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+                    } catch { }
+                }
                 //
                 if (request.IsSecureConnection)
                 {

@@ -35,6 +35,7 @@ namespace HomeGenie.Automation.Scripting
     /// KNX client helper.
     /// Class instance accessor: **KnxClient**
     /// </summary>
+    [Serializable]
     public class KnxClientHelper
     {
         public class KnxEndPoint

@@ -59,7 +59,7 @@
         //
         // render widget
         //
-        widget.find('[data-ui-field=name]').html(module.Name.substring(module.Name.lastIndexOf('|') + 1));
+        widget.find('[data-ui-field=name]').html(HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name.substring(module.Name.lastIndexOf('|') + 1)));
         widget.css('background-image', 'url(images/common/led_' + statuscolor + '.png)');
     }
 }]

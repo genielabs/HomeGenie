@@ -1,0 +1,151 @@
+{ "Programs": {
+
+"34": {
+    "Title":
+        "Weather Underground",
+    "Description": 
+        "Current weather, forecast and other infos like sunrise/sunset, wind, precipitations. Based on <strong>Weather Underground</strong> service. \nTo activate this widget specify a valid user <strong>Key</strong> that can be obtained creating an account from <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+    "ConfigureOptions.Location":
+        "City name",
+    "ConfigureOptions.InputDisplayCelsius":
+        "Display Temperature in degrees Celsius (TRUE=YES FALSE=NO)",
+    "ConfigureOptions.Language":
+        "Language (eg. EN, IT, FR, DE, ...)",
+    "ConfigureOptions.UpdateInterval":
+        "Update interval (minutes)",
+    "ConfigureOptions.ApiKey":
+        "Weather Underground service Key"
+},
+
+"6": {
+    "Title": 
+        "Tout allumer",
+    "Description":
+        "Allume toutes les lumières du groupe sélectionné."
+},
+
+"7": {
+    "Title": 
+        "Tout éteindre",
+    "Description": 
+        "Eteint toutes les lumières du groupe sélectionné."
+},
+
+"82": {
+    "Title":
+        "Mode économie d'énergie",
+    "Description":
+        "Lorsqu'il est activé, assure que le niveau de variation est maintenue en dessous de la valeur de pourcentage configuré.",
+    "ConfigureOptions.MaxLevel":
+        "Niveau de lumière maximum",
+    "EnergyManagement.EnergySavingMode":
+        "Activer le mode d'économie d'énergie"
+},
+
+"16": {
+    "Title":
+        "Mémorisation niveau variateur",
+    "Description":
+        "Mémorise et rappelle le dernier niveau du variateur",
+    "HomeGenie.LevelMemory":
+        "Rappelle le dernier niveau du variateur à l'allumage",
+    "HomeGenie.LevelMemory.SimulateOnly":
+        "Simulation uniquement"
+},
+
+"35": {
+    "Title":
+        "Programmation Marche/Arrêt",
+    "Description":
+        "Allumer/éteindre un module en utilisant l'automate.",
+    "HomeGenie.ScheduleControl":
+        "Active l'automate Marche/Arrêt",
+    "HomeGenie.ScheduleOn":
+        "Allumer",
+    "HomeGenie.ScheduleOff":
+        "Eteindre"
+},
+
+"90": {
+    "Title":
+        "Système d'alarme et de sécurité",
+    "Description":
+        "Système d'alarme de sécurité basique",
+    "HomeGenie.SecurityAlarm":
+        "Utiliser comme alarme et flash",
+    "HomeGenie.SecuritySensor":
+        "Utilisation en tant que capteur de sécurité",
+    "ConfigureOptions.Email.Recipients":
+        "Liste des destinataires des e-mails pour les notifications d'alarme  (séparés par des virgules)",
+    "ConfigureOptions.System.ArmDelay":
+        "Delai d'armement (secondes)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Durée de la sirène (seconds, 0=infini)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Programme à exécuter à l'armement",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Programme à exécuter au désarmement",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Programme à exécuter en cas de déclenchement"
+},
+
+"145": {
+    "Title":
+        "Eclairage automatique",
+    "Description":
+        "Dispositif de contrôle par détection de mouvement et niveau de luminosité.",
+    "HomeGenie.SmartLights.Enable":
+        "Activer l'éclairage automatique",
+    "HomeGenie.SmartLights.OnMotionDetect":
+        "Contrôlé par capteur de mouvement",
+    "HomeGenie.SmartLights.CheckLuminosity":
+        "Contrôlé par capteur de luminosité",
+    "HomeGenie.SmartLights.SwitchOffTimeout":
+        "Éteindre après un délai d'inactivité (secondes)"
+},
+
+"8": {
+    "Title":
+        "Scénario Couleurs levée de soleil",
+    "Description":
+        "Example de scénario pour lampes Philips Hue.",
+    "Scenarios.SunriseColors":
+        "Activer Scénario Couleurs levée de soleil"
+},
+
+"36": {
+    "Title":
+        "Table horaire",
+    "Description":
+        "Planning des thermostats, lumières et volets roulants",
+    "TimeTable.Weekend":
+        "Week-end",
+    "TimeTable.Workday":
+        "Ouvré",
+    "TimeTable.Holiday":
+        "Vacances",
+    "TimeTable.Special":
+        "Spécial",
+    "TimeTable.Enable":
+        "Activer les Tables hotraires"
+},
+
+"112": {
+    "Title":
+        "Arrêt automatique",
+    "Description":
+        "Lorsqu'un appareil est allumé, l'arrêter automatiquement après un délai donné.",
+    "HomeGenie.TurnOffDelay":
+        "Delai d'arrêt automatique (secondes)"
+},
+
+"200": {
+    "Title":
+        "Service de notification Windows Phone Push",
+    "Description":
+        "Envoie de notifications au client Windows Phone.",
+    "MobileNotification.SendChanges":
+        "Envoyer les notifications au client Windows Phone"
+}
+
+}}

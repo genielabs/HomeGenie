@@ -251,10 +251,10 @@
             <h3>Perform the selected action?</h3>
         </div>    
         <div class="ui-content ui-corner-bottom">
-            <p>This operation cannot be undone.</p>
+            <p style="padding-left:20px;padding-right:20px;max-height:240px;overflow:hidden;overflow-y:auto;">This operation cannot be undone.</p>
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a data-locale-id="popup_confirm_action_cancel" id="actionconfirm_cancel_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete" data-rel="back">Cancel</a></div>
-                <div class="ui-block-b" align="right"><a data-locale-id="popup_confirm_action_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
+                <div class="ui-block-a"><a data-locale-id="common_command_cancel" id="actionconfirm_cancel_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete" data-rel="back">Cancel</a></div>
+                <div class="ui-block-b" align="right"><a data-locale-id="common_command_proceed" id="actionconfirm_confirm_button" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" data-rel="back">Proceed</a></div>
             </div>
         </div>
     </div>        
@@ -437,6 +437,24 @@
     </div>
 
 <!-- END Global Popups -->
+
+    <div id="fullscreen_edit_box" class="ui-corner-all ui-shadow" style="display:none;position:absolute;padding:20px;z-index:10000;background:white;color:black;top:50px;left:20px;right:20px;bottom:50px">
+        <h3 data-ui-field="title" style="margin:5px;margin-top:0px">Fullscreen Editor</h3>
+        <h4 data-ui-field="subtitle" style="margin:5px">...</h4>
+        <div class="ui-shadow" style="position:absolute;top:100px;left:30px;right:30px;bottom:100px;"><textarea id="fullscreen_edit_text" style="width:100%;height:100%;border:0;margin:0"></textarea></div>
+        
+        <div style="position:absolute;left:40px;bottom:20px">
+            <h4 data-ui-field="namelabel"></h4>
+            <div data-ui-field="nameinput" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset" style="position:relative;display:none;border-color:#fff">
+                <input type="text" data-role="none" placeholder="enter item name" />
+            </div>
+        </div>
+
+        <a data-ui-field="cancel" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:140px;bottom:20px">Cancel</a>
+        
+        <a data-ui-field="confirm" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:40px;bottom:20px">Ok</a>
+    </div>
+    
 
 </body>
 </html>

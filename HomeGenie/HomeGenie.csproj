@@ -71,6 +71,7 @@
   <ItemGroup>
     <Reference Include="ExpressionEvaluation">
       <HintPath>Externals\ExpressionEvaluation\ExpressionEvaluation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="IronPython">
       <HintPath>Externals\Scripting\IronPython.dll</HintPath>
@@ -102,6 +103,7 @@
     </Reference>
     <Reference Include="NCrontab">
       <HintPath>Externals\NCrontab\NCrontab.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -112,6 +114,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UPnP">
       <HintPath>Externals\upnp\UPnP.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Raspberry.System">
@@ -133,18 +136,23 @@
     </Reference>
     <Reference Include="Nmqtt">
       <HintPath>Externals\nmqtt\Nmqtt.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Core">
       <HintPath>Externals\nmqtt\System.Reactive.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
       <HintPath>Externals\nmqtt\System.Reactive.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Linq">
       <HintPath>Externals\nmqtt\System.Reactive.Linq.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Raspberry.IO.SerialPeripheralInterface">
       <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
@@ -167,9 +175,14 @@
     <Reference Include="System.Core" />
     <Reference Include="KNXLib">
       <HintPath>Externals\knx.net\KNXLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnitsNet">
       <HintPath>Externals\raspberry-sharp\UnitsNet.dll</HintPath>
+    </Reference>
+    <Reference Include="CronExpressionDescriptor">
+      <HintPath>Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +237,8 @@
     <Compile Include="Automation\Scripting\KnxClientHelper.cs" />
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
     <Compile Include="Automation\WizardEngine.cs" />
+    <Compile Include="Data\Store.cs" />
+    <Compile Include="Automation\Scripting\StoreHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

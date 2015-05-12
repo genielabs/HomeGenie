@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r484</Version>
+  <Version>1.00 beta r487</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Improved trigger condition reaction time in all type of programs/scripts (now real time, event based)
-  - Added Program.WithAddress (get reference to a program) and Program.WaitFor (wait for a program to run) to Program helper class
-  - Added Program.Say (voice output) and Program.Play (play wav sound) to Wizard Script HomeGenie/Automation commands
-  - Some fixes to Virtual Modules lifecycle
-  - Added MCP3008 Numeric Keypad automation program (connect a 3x4 numeric keypad using just one analog channel)
-  - Updated SSD1306 Oled, DHT-11 and DHT-22 programs
-  - Improved MCP3008 program with Web API
-  - Added GetValue method to ModulesManager: execute a module command and gets the return value as result (can be used for interprocess communication)
-  - Added database index as suggested by issue #150
-  - Updated raspberrysharp-io library to latest release
-  - Fixed Program.Say bug with accented characters
-  - Added ZWaveLib Crc16Encapsulated decoding support + some more ZWaveLib rework (PR #146 #147 #148)
-  - Added runtime errors debugging for C#, Ruby, Python programs
-  - Added Polish locale files
-  - Updated Jint (javascript engine) to latest version
-  - Applied alternative solution for issue #138 / pull request #141
-  - Fixed device type retain for virtual modules
-  - Added X10 Firecracker Modules app
-  - Fixed missing resource releasing on stop for phyton/ruby/js programs
-  - Fixed W800RF32 port selection issue</ReleaseNote>
-  <ReleaseDate>2015-03-29T16:11:53.0000Z</ReleaseDate>
+  <ReleaseNote>   - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
+  - Added confirm popup for "database reset" and "remote routing reset"
+  - Updated automation programs to use new Program.AddFeature widgets
+  - Added UI widgets for fields created with Program.AddFeature (last method parameter is the type: "text", "slider", "password", "checkbox", "module.text", "store.script", "store.list")
+  - Added simple store to Module helper too
+  - Added simple key/value persistent store to Program helper class: Program.Store("store_name")[.Get("item_key") | .Remove("item_key") | .List]
+  - Fixed encoding bug in input text of module features and program config options (not handling properly double quotes and other characters)
+  - Added "Description" field to MIGServiceConfiguration.Interface
+  - Added Sunrise/Sunset event raising to Weather Underground app
+  - Updated Jint: javascript engine now accepting "camelCase" convention for invoking Helper Classes
+  - Updated Pepper1 Z-Wave database
+  - Program.Say will now use Pico TTS if installed in the system, otherwise Google Speech API
+  - Improved unhandled exceptions trapping/recovery
+  - Fixed bug in app module creation
+  - Added "Console.Output" to the event log page
+  - Added redirection of standard output/error to HG log file
+  - Added preliminary code for Z-Wave Security command class support
+  - Fixed bug in ZWaveLib that was causing the creation of non-existent nodes
+  - Added pause to ModuleParameter.WaitUpdate loop
+  - Some minor fixes to the UI
+  - Fixed bug in modules cleanup (not deleting modules sometime)
+  - Fixed MQTT client app: it was missing reconnection when disconnected from MQTT server
+  - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)
+  - Added importable MIG interface driver plugins (add-ons)
+  - Added "configlets" files for implementing custom interface drivers UI</ReleaseNote>
+  <ReleaseDate>2015-05-08T12:10:52.0000Z</ReleaseDate>
 </ReleaseInfo>

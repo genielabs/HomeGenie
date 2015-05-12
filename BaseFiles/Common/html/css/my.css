@@ -8,6 +8,42 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
 
 /* Code Mirror */
 
+#fullscreen_edit_box .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    border solid 1px red;
+    display: block;
+    cursor:default;
+}
+
+#fullscreen_edit_box .CodeMirror-code span {
+    font-family: Courier New, Courier, monospace !important;
+    font-size: 12pt !important;
+    white-space: pre;
+    line-height: 16pt;
+}
+
+#fullscreen_edit_box .CodeMirror-linenumber {
+    padding-top:3px;
+    font-size: 9pt;
+    font-family: Courier New, Courier, monospace !important;
+}
+
+#fullscreen_edit_box .CodeMirror-scroll {
+    overflow-x: auto;
+}
+
+#fullscreen_edit_box .CodeMirror-focused .cm-matchhighlight {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: middle;
+    background-repeat: repeat-x;
+}
+
 #page_widgeteditor_editwidget .CodeMirror {
     border: 1px solid #eee;
     height: auto;
@@ -96,6 +132,13 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     margin: 10px;
 }
 
+input[type=number] {
+    width: 70px;
+}
+
+.ui-slider-track {
+    margin-left: 100px;
+}
 
 
 /* HomeGenie UI */

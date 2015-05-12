@@ -1,4 +1,5 @@
 HG.WebApp.ProgramEdit = HG.WebApp.ProgramEdit || {};
+HG.WebApp.ProgramEdit.PageId = 'page_automation_editprogram';
 HG.WebApp.ProgramEdit._CurrentProgram = Array();
 HG.WebApp.ProgramEdit._CurrentProgram.Name = 'New Program';
 HG.WebApp.ProgramEdit._CurrentProgram.Conditions = Array();
@@ -11,7 +12,16 @@ HG.WebApp.ProgramEdit._SavePromptCallback = null;
 HG.WebApp.ProgramEdit._CurrentTab = 1;
 
 HG.WebApp.ProgramEdit.InitializePage = function () {
-    $('#page_automation_editprogram').on('pageinit', function (e) {
+    var page = $('#'+HG.WebApp.ProgramEdit.PageId);
+    page.on('pagebeforeshow', function (event) {
+        $('#automation_program_scriptcondition').next().css('display', '');
+        $('#automation_program_scriptsource').next().css('display', '');
+        HG.WebApp.ProgramEdit.SetTab(1);
+        HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
+        automationpage_ConditionsRefresh();
+        automationpage_CommandsRefresh();
+    });
+    page.on('pageinit', function (e) {
         if (HOST_SYSTEM.substring(0, 3) == 'Win') {
             $('#automation_programtype_option_arduino').hide();
         }
@@ -206,8 +216,7 @@ HG.WebApp.ProgramEdit.CheckIsClean = function (callback) {
             callback();
         }
         $('#automation_program_notsaved').popup('open');
-    }
-    else {
+    } else {
         callback();
     }
 };
@@ -269,12 +278,10 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () {
         var errors = HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors;
         if (typeof errors != 'undefined' && errors.trim() != '' && errors.trim() != '[]') {
             HG.WebApp.ProgramEdit.ShowProgramErrors(errors);
-        }
-        else {
+        } else {
             HG.WebApp.ProgramEdit.HideProgramErrors();
         }
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.HideProgramErrors();
     }
     // update title
@@ -299,14 +306,12 @@ HG.WebApp.ProgramEdit.RefreshProgramOptions = function () {
             if (cp != null) {
                 if (cp.IsRunning) {
                     $('[id=editprograms_actionmenu_break]').each(function () { $(this).show(); });
-                }
-                else {
+                } else {
                     $('[id=editprograms_actionmenu_run]').each(function () { $(this).show(); });
                 }
                 if (cp.ScriptErrors.trim() != '' && cp.ScriptErrors.trim() != '[]') {
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = cp.ScriptErrors;
-                }
-                else {
+                } else {
                     HG.WebApp.ProgramEdit._CurrentProgram.ScriptErrors = '';
                 }
                 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
@@ -353,8 +358,7 @@ HG.WebApp.ProgramEdit.UpdateProgram = function (programblock, compile, callback)
             if (response.trim() != '' && response.trim() != '[]') {
                 $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_error_updating'), textVisible: true });
                 HG.WebApp.ProgramEdit.ShowProgramErrors(response);
-            }
-            else {
+            } else {
                 $.mobile.loading('show', { text: HG.WebApp.Locales.GetLocaleString('configure_editprogram_saving_succeed'), textVisible: true });
                 HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
             }
@@ -390,11 +394,9 @@ HG.WebApp.ProgramEdit.JumpToLine = function (blockType, position) {
     var editor = (blockType == 'TC' ? editor1 : editor2);
     if (blockType == 'TC') {
         HG.WebApp.ProgramEdit.SetTab(3);
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.SketchFileOpen('main');
         HG.WebApp.ProgramEdit.SetTab(2);
-
     }
     window.setTimeout(function () {
         editor.setCursor(position);
@@ -496,13 +498,11 @@ HG.WebApp.ProgramEdit.ShowProgramErrors = function (message) {
                 style: { classes: 'qtip-red qtip-shadow qtip-rounded qtip-bootstrap' },
                 position: { adjust: { screen: true }, my: 'top center', at: 'bottom center' }
             });
-        }
-        else {
+        } else {
             $('#program_error_button').hide();
             $('#program_error_button2').hide();
         }
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit._CurrentErrors = [];
     }
 
@@ -583,8 +583,7 @@ HG.WebApp.ProgramEdit.CompileProgram = function () {
         HG.WebApp.ProgramEdit.SketchFileSave(function () {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
         });
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.UpdateProgram(programblock, true);
     }
 };
@@ -598,8 +597,7 @@ HG.WebApp.ProgramEdit.SaveProgram = function (callback) {
         HG.WebApp.ProgramEdit.SketchFileSave(function () {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
         });
-    }
-    else {
+    } else {
         HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
     }
 };
@@ -661,8 +659,7 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program) {
                         }
                     }			
                 });
-            }
-            else*/
+            } else*/
     {
         HG.WebApp.ProgramEdit.RunProgram(program.Address, null);
     }
@@ -745,8 +742,7 @@ HG.WebApp.ProgramEdit.SketchFileOpen = function (filename) {
             editor2.markClean();
             editor2.refresh();
             $.mobile.loading('hide');
-        }
-        else {
+        } else {
             // all other sketch files are stored in editor3
             $(editor2.getWrapperElement()).hide();
             $(editor3.getWrapperElement()).show();

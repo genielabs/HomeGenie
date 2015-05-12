@@ -85,6 +85,7 @@ using HomeGenie.Automation; using HomeGenie.Data;
             source += @"
 namespace HomeGenie.Automation.Scripting
 {
+    [Serializable]
     public class ScriptingInstance : ScriptingHost
     {
         private void RunCode(string PROGRAM_OPTIONS_STRING)
@@ -210,11 +211,11 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
             //
-            compilerParams.ReferencedAssemblies.Add("System.Reactive.Core.dll");
-            compilerParams.ReferencedAssemblies.Add("System.Reactive.Interfaces.dll");
-            compilerParams.ReferencedAssemblies.Add("System.Reactive.Linq.dll");
-            compilerParams.ReferencedAssemblies.Add("System.Reactive.PlatformServices.dll");
-            compilerParams.ReferencedAssemblies.Add("Nmqtt.dll");
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "System.Reactive.Core.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "System.Reactive.Interfaces.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "System.Reactive.Linq.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "System.Reactive.PlatformServices.dll"));
+            compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "Nmqtt.dll"));
             //
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);

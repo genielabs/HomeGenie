@@ -163,7 +163,7 @@ HG.WebApp.GroupModules.ModulePropertyDelete = function (name) {
         }
 
     }
-}
+};
 
 HG.WebApp.GroupModules.ModulePropertyAdd = function (module, name, value) {
     var doesexists = false;
@@ -179,10 +179,7 @@ HG.WebApp.GroupModules.ModulePropertyAdd = function (module, name, value) {
         module.Properties.push({ Name: name, Value: value, NeedsUpdate: 'true' });
     }
     return doesexists;
-}
-
-
-
+};
 
 HG.WebApp.GroupModules.UpdateModule = function (module, callback) {
     $.mobile.loading('show', { text: 'Saving module settings', textVisible: true, theme: 'a', html: '' });
@@ -216,7 +213,7 @@ HG.WebApp.GroupModules.UpdateCurrentModuleParameter = function () {
     //    $('#automation_group_module_params').children().last().find('input[type=text]').first().focus();
     //    HG.WebApp.GroupModules.LoadModuleParameters();
     //}
-}
+};
 
 HG.WebApp.GroupModules.LoadModuleParameters = function () {
     $('#automation_group_module_params').empty();
@@ -251,7 +248,7 @@ HG.WebApp.GroupModules.LoadModuleParameters = function () {
         setTimeout("$('#automation_group_module_propdelete').addClass('ui-disabled')", 250);
         //        setTimeout("$('#automation_group_module_propsave').addClass('ui-disabled')", 250);
     });
-}
+};
 
 HG.WebApp.GroupModules.GetModulesListViewItems = function (groupname) {
     var groupmodules = HG.Configure.Groups.GetGroupModules(groupname);
@@ -309,7 +306,7 @@ HG.WebApp.GroupModules.AddGroupModule = function (group, domain, address, callba
 
 HG.WebApp.GroupModules.UpdateWMWatts = function (module, wmwatts) {
     HG.WebApp.GroupModules.EditModule.WMWatts = wmwatts;
-}
+};
 
 HG.WebApp.GroupModules.UpdateModuleType = function (type) {
     var mtype = type.toLowerCase();
@@ -341,7 +338,7 @@ HG.WebApp.GroupModules.UpdateModuleType = function (type) {
         HG.WebApp.Utility.SetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon', '');
         var iconprop = HG.WebApp.Utility.GetModulePropertyByName(HG.WebApp.GroupModules.EditModule, 'Widget.DisplayIcon');
         iconprop.NeedsUpdate = 'true';
-        configurepage_GetModuleIcon(HG.WebApp.GroupModules.EditModule, function (icon) {
+        HG.Ui.GetModuleIcon(HG.WebApp.GroupModules.EditModule, function (icon) {
             $('#module_icon').attr('src', icon);
         });
     }
@@ -421,7 +418,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     // udate icons asynchronously
     for (var m = 0; m < groupmodules.Modules.length; m++) {
         var iconid = 'module_icon_image_' + m;
-        configurepage_GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
+        HG.Ui.GetModuleIcon(groupmodules.Modules[m], function (iconimage, elid) {
             $('#' + elid).attr('src', iconimage);
         }, iconid);
     }
@@ -512,7 +509,7 @@ HG.WebApp.GroupModules.ModuleEdit = function (callback) {
     $('#module_type').selectmenu('refresh', true);
     //
     $('#configure_module_iconslist').hide();
-    configurepage_GetModuleIcon(HG.WebApp.GroupModules.CurrentModule, function (icon) {
+    HG.Ui.GetModuleIcon(HG.WebApp.GroupModules.CurrentModule, function (icon) {
         $('#module_icon').attr('src', icon);
     });
     $('#module_vmwatts').val(HG.WebApp.GroupModules.EditModule.WMWatts > 0 ? HG.WebApp.GroupModules.EditModule.WMWatts : '0');
@@ -521,42 +518,31 @@ HG.WebApp.GroupModules.ModuleEdit = function (callback) {
     //
     $('#automation_group_module_edit').popup('open', { transition: 'pop', positionTo: 'window' });
 
-}
+};
 
 HG.WebApp.GroupModules.ShowFeatures = function (programid) {
     $('#module_programs_features').empty();
-    $('#module_programs_featuredesc').html(HG.WebApp.Data.Programs[programid].Description);
+    var desc = HG.WebApp.Locales.GetProgramLocaleString(HG.WebApp.Data.Programs[programid].Address, 'Description', HG.WebApp.Data.Programs[programid].Description);
+    $('#module_programs_featuredesc').html(desc);
     for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
         var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
         if (mp.ProgramIndex == programid) {
-            var featurecb = '';
-            if (mp.FieldType == 'text') {
-                var inputType = 'text';
-                if (mp.Description.toLowerCase().indexOf('password') >= 0) inputType = 'password';
-                featurecb = '<label for="feature-' + p + '">' + mp.Description + '</label>';
-                featurecb += '<div style="position:relative;"><div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input name="option-' + p + '" id="feature-' + p + '" style="width:98%;" data-role="none" onchange="HG.WebApp.GroupModules.FeatureUpdate(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\', this.value)" type="' + inputType + '" value="' + mp.Value + '" data-mini="true" /></div>';
-                //featurecb+= '<div data-bind-field="feature-' + p + '" class="hg-wizard-capturebutton" href="#" onclick="automationpage_WizardCaptureFieldToggle($(this), \'Property\')">&lt;&lt;</div></div>';
-                $('#module_programs_features').append(featurecb);
-            }
+            mp.Index = p;
+            var context = {
+                parent: $('#module_programs_features'),
+                program: HG.WebApp.Data.Programs[programid],
+                module: HG.WebApp.GroupModules.EditModule,
+                parameter: mp
+            };
+            var featureField = HG.Ui.GenerateWidget('widgets/'+mp.FieldType, context, function(handler){
+                handler.onChange = function(val){
+                    HG.WebApp.GroupModules.FeatureUpdate(handler.context, val);
+                };
+                $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
+            });
         }
     }
-    for (var p = 0; p < HG.WebApp.GroupModules.EditModule.Properties.length; p++) {
-        var mp = HG.WebApp.GroupModules.EditModule.Properties[p];
-        if (mp.ProgramIndex == programid) {
-            if (mp.FieldType == 'checkbox') {
-                var checked = '';
-                var featurecb = '';
-                if (mp != null && mp.Value == 'On') {
-                    checked = ' checked';
-                }
-                featurecb = '<input' + checked + ' onclick="HG.WebApp.GroupModules.FeatureToggle(HG.WebApp.GroupModules.EditModule, \'' + mp.Name + '\')" type="checkbox" name="option-' + p + '" id="checkbox-' + p + '" data-iconpos="right" data-mini="true" /><label for="checkbox-' + p + '">' + mp.Description + '</label>';
-                $('#module_programs_features').append(featurecb);
-            }
-        }
-    }
-    $('#module_programs_features').trigger('create');
-    $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
-}
+};
 
 HG.WebApp.GroupModules.UpdateFeatures = function () {
     HG.WebApp.GroupModules.EditModule.Properties = Array(); // used to store "features" values
@@ -586,8 +572,10 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
                     prop.Description = features[f].Description;
                     //
                     if (cprogram < 0) {
+                        var address = HG.WebApp.Data.Programs[p].Address;
                         var pname = HG.WebApp.Data.Programs[p].Name;
-                        if (pname == '') pname = HG.WebApp.Data.Programs[p].Address;
+                        if (pname == '') pname = address;
+                        pname = HG.WebApp.Locales.GetProgramLocaleString(address, 'Title', pname);
                         featureset += '<option value="' + p + '">' + pname + '</option>';
                         cprogram = p;
                         if (selected < 0) selected = p;
@@ -609,20 +597,16 @@ HG.WebApp.GroupModules.UpdateFeatures = function () {
     $('#automation_group_module_edit').popup("reposition", { positionTo: 'window' });
 };
 
-HG.WebApp.GroupModules.FeatureUpdate = function (module, property, value) {
+HG.WebApp.GroupModules.FeatureUpdate = function (context, value) {
+    var program = context.program;
+    var module = context.module;
+    var property = context.parameter.Name;
     var mp = HG.WebApp.Utility.GetModulePropertyByName(module, property);
     HG.WebApp.Utility.SetModulePropertyByName(module, property, value);
-    //property.Changed = true;
-}
-
-HG.WebApp.GroupModules.FeatureToggle = function (module, property) {
-    var mp = HG.WebApp.Utility.GetModulePropertyByName(module, property);
-    if (mp != null && mp.Value != "") {
-        HG.WebApp.Utility.SetModulePropertyByName(module, property, "");
-    }
-    else {
-        HG.WebApp.Utility.SetModulePropertyByName(module, property, "On");
-    }
+    // postback value change to the automation program
+    HG.Automation.Programs.PostBack('ui/feature', program, module, property, value, function(res){
+        // TODO: think about how the response could be used (eg. field value validation and such)
+    });
     //property.Changed = true;
 };
 

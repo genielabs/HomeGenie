@@ -63,13 +63,14 @@ namespace HomeGenie.Automation.Scheduler
             for (int i = 0; i < events.Count; i++)
             {
                 var eventItem = events[i];
+                // update next occurrence value
+                eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
                 // TODO: execute items only once instead of repeating for the whole minute
                 string currentoccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
                 if (eventItem.IsEnabled && eventItem.LastOccurrence != currentoccurrence && IsScheduling(eventItem.CronExpression))
                 {
-                    // update last/next occurrence values
+                    // update last occurrence value
                     eventItem.LastOccurrence = currentoccurrence;
-                    eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
                     // execute associated task if any
                     if (!String.IsNullOrEmpty(eventItem.ProgramId))
                     {
