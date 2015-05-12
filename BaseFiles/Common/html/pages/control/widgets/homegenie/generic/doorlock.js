@@ -40,15 +40,14 @@
                 this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d);
             }
 	    }
-
-        if (lockstatus != null && lockstatus.Value == '255') { // 0xFF
-            widget.find('[data-ui-field=lockunlock]').val("locked").slider('refresh');
+        if (lockstatus != null && lockstatus.Value == 'Secured') { // 0xFF
+            widget.find('[data-ui-field=lockunlock]').val("Secured").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_closed.png';
             this.StatusText = "Locked";
         } else {
-            widget.find('[data-ui-field=lockunlock]').val("unlocked").slider('refresh');
+            widget.find('[data-ui-field=lockunlock]').val("Unsecured").slider('refresh');
             this.IconImage = 'pages/control/widgets/homegenie/generic/images/door_open.png';
-            this.StatusText = "Unocked";
+            this.StatusText = "Unlocked";
         }
 
         this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
