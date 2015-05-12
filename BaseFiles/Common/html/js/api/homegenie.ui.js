@@ -21,7 +21,6 @@ HG.Ui.GenerateWidget = function(fieldType, context, callback) {
     }
     // pick it from cache if exists
     var cached = false;
-    if (false)
     $.each(HG.Ui._widgetCache, function(k,v){
         if (v.widget == fieldType) {
             var element = $(v.html);
