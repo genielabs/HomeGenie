@@ -995,9 +995,13 @@ namespace MIG.Interfaces.HomeAutomation
                 case EventParameter.AlarmGeneric:
                     path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
                     // Translate generic alarm into specific Door Lock event values if node is an entry control type device
-                    if ((sender as ZWaveNode).GenericClass == (byte)GenericType.EntryControl)
+                    //at this level the sender is the controller so get the node from eventData
+                    if (eventData.Node.GenericClass == (byte)GenericType.EntryControl)
                     {
-                        value = ((DoorLock.Alarm)value).ToString();
+                        // do not convert to string since Alarms accept ONLY numbers a string would be outputed as NaN
+                        // for now let it as is.
+
+//                        value = ((DoorLock.Alarm)(byte)value).ToString();
                     }
                     break;
                 case EventParameter.AlarmDoorWindow:
@@ -1023,7 +1027,7 @@ namespace MIG.Interfaces.HomeAutomation
                     break;
                 case EventParameter.DoorLockStatus:
                     path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
-                    value = ((DoorLock.Value)value).ToString();
+                    value = ((DoorLock.Value)(byte)value).ToString();
                     break;
                 case EventParameter.ManufacturerSpecific:
                     ManufacturerSpecificInfo mf = (ManufacturerSpecificInfo)value;
