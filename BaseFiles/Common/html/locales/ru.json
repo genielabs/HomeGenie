@@ -670,103 +670,103 @@
     "configure_widgeteditor_savingjavascript":
         "Сохраняем Javascript...",
     "configure_interfaces_importdriver":
-        "Install Add-ons",        
+        "Установить расширения",        
     "configure_interfaces_download":
-        "Download & install",        
+        "Скачать и установить",        
     "configure_interfaces_upload":
-        "Upload & install",        
+        "Загрузить и установить",        
     "configure_interfaces_addonslist":
-        "Add-ons list",        
+        "Список расширений",        
     "configure_interfaces_installaddons":
-        "Install Add-ons",
+        "Установить расширения",
     "configure_interfaces_downloadfromurl":
-        "Download add-on package from URL",
+        "Скачать пакет расширения с URL",
     "configure_interfaces_uploadpackage":
-        "Upload add-on package from file",
+        "Загрузить пакет расширения из файла",
     "cronwizard_title":
-        "Cron event Wizard",      
+        "Мастер событий Cron",      
     "cronwizard_tab_minute":
-        "Minute",        
+        "Минута",        
     "cronwizard_tab_hour":
-        "Hour",        
+        "Час",        
     "cronwizard_tab_dayofmonth":
-        "Day of month",        
+        "День месяца",        
     "cronwizard_tab_month":
-        "Month",        
+        "Месяц",        
     "cronwizard_tab_dayofweek":
-        "Day of week",      
+        "День недели",      
     "cronwizard_event_willoccur":
-        "This event will occur",
+        "Это событие будет происходить",
     "cronwizard_minuteselect_everyminute":
-        "every minute",        
+        "каждую минуту",        
     "cronwizard_minuteselect_everysomeminute":
-        "every &lt;n&gt; minute",        
+        "каждые &lt;n&gt; минут",        
     "cronwizard_minuteselect_eachselected":
-        "each selected minute",        
+        "каждую выбранную минуту",        
     "cronwizard_hourselect_everyhour":
-        "every hour",        
+        "каждый час",        
     "cronwizard_hourselect_everysomehour":
-        "every &lt;n&gt; hour",        
+        "каждые &lt;n&gt; часов",        
     "cronwizard_hourselect_eachselected":
-        "each selected hour",        
+        "каждый выбранный час",        
     "cronwizard_dayselect_everyday":
-        "every day",        
+        "каждый день",        
     "cronwizard_dayselect_eachselected":
-        "each selected day",        
+        "каждый выбранный день",        
     "cronwizard_monthselect_everymonth":
-        "every month",        
+        "каждый месяц",        
     "cronwizard_monthselect_eachselected":
-        "each selected month",        
+        "каждый выбранный месяц",        
     "cronwizard_dayowselect_everydayow":
-        "every day of week",        
+        "каждый день недели",        
     "cronwizard_dayowselect_eachselected":
-        "each selected day of week",        
+        "каждый выбранный день недели",        
     "common_month_jan":
-        "Jan",        
+        "Янв",        
     "common_month_feb":
-        "Feb",        
+        "Фев",        
     "common_month_mar":
-        "Mar",        
+        "Мар",        
     "common_month_apr":
-        "Apr",        
+        "Апр",        
     "common_month_may":
-        "May",        
+        "Май",        
     "common_month_jun":
-        "Jun",        
+        "Июн",        
     "common_month_jul":
-        "Jul",        
+        "Июл",        
     "common_month_aug":
-        "Aug",        
+        "Авг",        
     "common_month_sep":
-        "Sep",        
+        "Сен",        
     "common_month_oct":
-        "Oct",        
+        "Окт",        
     "common_month_nov":
-        "Nov",        
+        "Ноя",        
     "common_month_dec":
-        "Dec",        
+        "Дек",        
     "common_dayofweek_sun":
-        "Sun",        
+        "Вс",        
     "common_dayofweek_mon":
-        "Mon",        
+        "Пн",        
     "common_dayofweek_tue":
-        "Tue",        
+        "Вт",        
     "common_dayofweek_wed":
-        "Wed",        
+        "Ср",        
     "common_dayofweek_thu":
-        "Thu",        
+        "Чт",        
     "common_dayofweek_fri":
-        "Fri",        
+        "Пт",        
     "common_dayofweek_sat":
-        "Sat",        
+        "Сб",        
     "common_command_cancel":
-        "Cancel",        
+        "Отмена",        
     "common_command_ok":
         "Ok",
     "common_command_proceed":
-        "Proceed",
+        "Продолжить",
     "common_command_save":
-        "Save",
+        "Сохранить",
     "common_status_notset":
-        "Not set"  
+        "Не установлено"  
 }
