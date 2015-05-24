@@ -48,13 +48,19 @@ namespace ZWaveLib.Values
 
         public static UserCodeValue Parse(byte[] message)
         {
+            byte cmdClass = message[7];
+            byte cmdType = message[8];
             UserCodeValue userCode = new UserCodeValue();
-            userCode.UserId = message[2];
-            userCode.UserIdStatus = message[3];
-            userCode.TagCode = new byte[10];
-            for (int i = 0; i < 10; i++)
+
+            if (cmdClass == (byte)CommandClass.UserCode && ((byte)Command.UserCodeSet == cmdType || (byte)Command.UserCodeReport == cmdType))
             {
-                userCode.TagCode[i] = message[4 + i];
+                userCode.UserId = message[9];
+                userCode.UserIdStatus = message[10];
+                userCode.TagCode = new byte[10];
+                for (int i = 0; i < 10; i++)
+                {
+                    userCode.TagCode[i] = message[11 + i];
+                }
             }
             return userCode;
         }
