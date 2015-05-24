@@ -575,9 +575,9 @@ namespace HomeGenie.Service.Logging
                             var fileInfo = new FileInfo(dbName);
                             if (fileInfo.Length > dbSizeLimit) // 5Mb limit for stats - temporary limitations to get rid of in the future
                             {
-                                //ResetStatisticsDatabase();
+                                ResetStatisticsDatabase();
                                 // TODO: Test method below, then use that instead of rsetting whole database.
-                                CleanOldValuesFromStatisticsDatabase();
+                                //CleanOldValuesFromStatisticsDatabase();
                             }
                             //
                             try
