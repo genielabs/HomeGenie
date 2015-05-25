@@ -1,6 +1,6 @@
 ﻿RELEASE HISTORY
 
-10/05/2015 1.00 beta rev 484-git9
+10/05/2015 1.00 beta rev 484-git9 (r488 preview)
     - Added localization of programs configuration options
 
 09/05/2015 1.00 beta rev 484-git8
