@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:29.906371Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:52.101709Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -271,7 +271,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:30.412969Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:52.603419Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -448,7 +448,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:30.92796Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:53.105128Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -525,7 +525,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:31.421202Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:53.595807Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1123,8 +1123,8 @@ Program.GoBackground();</ScriptSource>
 // ...
 Program.Setup(()=&gt;
 {              
-	Program.AddInputField("MaxLevel", "40", "Keep level below the following value");
-	Program.AddFeature("Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light");
+	Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light", "checkbox");
+	Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Keep level below this value (%)", "slider:20:80:1");
 });
 //
 return true; // execute "Code To Run"
@@ -1135,7 +1135,12 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   	if (module.HasFeature("EnergyManagement.EnergySavingMode") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
 	{
         var level = module.Parameter("Status.Level");
-        var newlevel = Program.InputField("MaxLevel").DecimalValue;
+        var newlevel = module.Parameter("EnergyManagement.EnergySavingLevel").DecimalValue;
+      	if (newlevel &lt;= 0)
+        {
+          module.Parameter("EnergyManagement.EnergySavingLevel").Value = "40";
+          newlevel = 40;
+        }
         //
         if (level.DecimalValue &gt; (newlevel / 100D)) 
         {
@@ -1155,17 +1160,9 @@ Program.GoBackground();</ScriptSource>
     <Name>Energy Saving Mode</Name>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
-        <Property>EnergyManagement.EnergySavingMode</Property>
-        <Description>Energy Saving Mode enabled light</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime>2014-05-31T21:12:54.2326119Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:31.92194Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-05-25T12:49:48.080482Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1218,7 +1215,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:32.422855Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:54.596857Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1509,7 +1506,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:32.930429Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:55.110132Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1601,7 +1598,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:33.424355Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:55.59783Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1669,7 +1666,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:33.926977Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:56.100154Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1937,7 +1934,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:34.421976Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:56.602592Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2293,7 +2290,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:35.428511Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:57.603836Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2393,7 +2390,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:35.938912Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:58.117982Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2545,7 +2542,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:36.429129Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:58.603908Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2818,7 +2815,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-11T13:22:11.155754Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:22:11.16748Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:44:59.108575Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8258,7 +8255,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-05-11T13:19:37.95078Z</TriggerTime>
+    <TriggerTime>2015-05-25T12:45:00.129118Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8813,6 +8810,20 @@ return true;
 Program.AddVirtualModule(MCP3008_DOMAIN, "Keypad", "Sensor", "");
 var keypadModule = Modules.InDomain(MCP3008_DOMAIN).WithAddress("Keypad").Get();
 
+var keySample = new Dictionary&lt;string, double&gt;();
+keySample.Add("1", 10);
+keySample.Add("2", 422);
+keySample.Add("3", 651);
+keySample.Add("4", 127);
+keySample.Add("5", 477);
+keySample.Add("6", 682);
+keySample.Add("7", 240);
+keySample.Add("8", 533);
+keySample.Add("9", 714);
+keySample.Add("*", 331);
+keySample.Add("0", 582);
+keySample.Add("#", 742);
+
 // Get a reference to MCP3008 channel where the keypad is connected
 var analogChannel = Program.InputField("KeypadChannel").Value;
 var keypadChannel = Modules.InDomain(MCP3008_DOMAIN).WithAddress(analogChannel).Command("ChannelValue.Get");
@@ -8831,57 +8842,20 @@ while(Program.IsEnabled)
       pc++;
     }
     keyLevel /= pc; 
-    keyLevel = Math.Round(keyLevel / 10, 0);
+    
     // translate value into the corresponding key
     var keyPressed = "";
-    if (keyLevel &gt; 0 &amp;&amp; keyLevel &lt; 8)
+    var tolerance = 20d; 
+    foreach (var kv in keySample.Keys)
     {
-      keyPressed = "1";
-    }
-    else if (keyLevel &gt;= 13 &amp;&amp; keyLevel &lt;= 14)
-    {
-      keyPressed = "4";
-    }
-    else if (keyLevel &gt;= 24 &amp;&amp; keyLevel &lt;= 25)
-    {
-      keyPressed = "7";
-    }
-    else if (keyLevel &gt;= 33 &amp;&amp; keyLevel &lt;= 34)
-    {
-      keyPressed = "*";
-    }
-    else if (keyLevel &gt;= 42 &amp;&amp; keyLevel &lt;= 43)
-    {
-      keyPressed = "2";
-    }
-    else if (keyLevel &gt;= 48 &amp;&amp; keyLevel &lt;= 49)
-    {
-      keyPressed = "5";
-    }
-    else if (keyLevel &gt;= 54 &amp;&amp; keyLevel &lt;= 55)
-    {
-      keyPressed = "8";
-    }
-    else if (keyLevel &gt;= 58 &amp;&amp; keyLevel &lt;= 59)
-    {
-      keyPressed = "0";
-    }
-    else if (keyLevel &gt;= 65 &amp;&amp; keyLevel &lt;= 66)
-    {
-      keyPressed = "3";
-    }
-    else if (keyLevel &gt;= 68 &amp;&amp; keyLevel &lt;= 69)
-    {
-      keyPressed = "6";
-    }
-    else if (keyLevel &gt;= 71 &amp;&amp; keyLevel &lt;= 72)
-    {
-      keyPressed = "9";
-    }
-    else if (keyLevel &gt;= 75 &amp;&amp; keyLevel &lt;= 76)
-    {
-      keyPressed = "#";
-    }
+      	var t = Math.Abs(keyLevel - keySample[kv]);
+      	if (t &lt; tolerance)
+        {
+          keyPressed = kv;
+          tolerance = t;
+        }
+	}
+    
     if (keyPressed != "")
     {
       Program.RaiseEvent(keypadModule, "NumericPad.Key", keyPressed, "MCP3008 Keypad");

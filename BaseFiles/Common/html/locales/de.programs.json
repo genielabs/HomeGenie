@@ -36,8 +36,8 @@
         "Energiesparmodus",
     "Description":
         "Wenn sie aktiviert ist, stellt sicher, dass Dimmerniveau wird unter den konfigurierten Prozentwert gehalten.",
-    "ConfigureOptions.MaxLevel":
-        "Max Lichtniveau",
+    "EnergyManagement.EnergySavingLevel":
+        "Max Lichtniveau (%)",
     "EnergyManagement.EnergySavingMode":
         "Aktiviere den Energiesparmodus"
 },

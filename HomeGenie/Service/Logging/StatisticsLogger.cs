@@ -83,19 +83,28 @@ namespace HomeGenie.Service.Logging
             dbSizeLimit = hg.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes * 1024 * 1024;
             _statisticsTimeResolutionSeconds = hg.SystemConfiguration.HomeGenie.Statistics.StatisticsTimeResolutionSeconds;
 
-            logInterval = new Timer(TimeSpan.FromSeconds(_statisticsTimeResolutionSeconds).TotalMilliseconds);
-            logInterval.Elapsed += logInterval_Elapsed;
         }
 
         public void Start()
         {
-            logInterval.Start();
             OpenStatisticsDatabase();
+            if (logInterval == null)
+            {
+                logInterval = new Timer(TimeSpan.FromSeconds(_statisticsTimeResolutionSeconds).TotalMilliseconds);
+                logInterval.Elapsed += logInterval_Elapsed;
+            }
+            logInterval.Start();
         }
 
         public void Stop()
         {
-            logInterval.Stop();
+            if (logInterval != null)
+            {
+                logInterval.Elapsed -= logInterval_Elapsed;
+                logInterval.Stop();
+                logInterval.Dispose();
+                logInterval = null;
+            }
             CloseStatisticsDatabase();
         }
 
@@ -448,6 +457,7 @@ namespace HomeGenie.Service.Logging
         {
             bool success = false;
             //lock (dbLock)
+            if (dbConnection == null)
             {
                 try
                 {
@@ -466,6 +476,7 @@ namespace HomeGenie.Service.Logging
         private void ResetStatisticsDatabase()
         {
             //lock (dbLock)
+            if (dbConnection != null)
             {
                 var dbCommand = dbConnection.CreateCommand();
                 dbCommand.CommandText = "DELETE FROM ValuesHist";
@@ -521,8 +532,11 @@ namespace HomeGenie.Service.Logging
         private void CloseStatisticsDatabase()
         {
             //lock (dbLock)
+            if (dbConnection != null)
             {
                 dbConnection.Close();
+                dbConnection.Dispose();
+                dbConnection = null;
             }
         }
 
@@ -558,30 +572,35 @@ namespace HomeGenie.Service.Logging
         {
             var end = DateTime.UtcNow;
             var modules = (TsList<Module>)homegenie.Modules; //.Clone();
-            foreach (var module in modules)
+            for (int m = 0; m < modules.Count; m++)
             {
-                foreach (var parameter in module.Properties)
+                var module = modules[m];
+                for (int p = 0; p < module.Properties.Count; p++)
                 {
+                    var parameter = module.Properties[p];
                     if (parameter.Statistics.Values.Count > 0)
                     {
                         var values = parameter.Statistics.Values.FindAll(sv => (sv.Timestamp.Ticks <= end.Ticks && sv.Timestamp.Ticks > parameter.Statistics.LastProcessedTimestap.Ticks));
                         if (values.Count > 0)
                         {
                             double average = (values.Sum(d => d.Value) / values.Count);
+                            // reset statistics history
+                            parameter.Statistics.LastProcessedTimestap = end;
+                            parameter.Statistics.Values.Clear();
                             //
-                            //TODO: check db file age/size for archiving old data
-                            //
-                            string dbName = GetStatisticsDatabaseName();
-                            var fileInfo = new FileInfo(dbName);
-                            if (fileInfo.Length > dbSizeLimit) // 5Mb limit for stats - temporary limitations to get rid of in the future
-                            {
-                                ResetStatisticsDatabase();
-                                // TODO: Test method below, then use that instead of rsetting whole database.
-                                //CleanOldValuesFromStatisticsDatabase();
-                            }
+                            //TODO: improve db file age/size check for archiving old data
                             //
                             try
                             {
+                                string dbName = GetStatisticsDatabaseName();
+                                var fileInfo = new FileInfo(dbName);
+                                if (fileInfo.Length > dbSizeLimit)
+                                {
+                                    ResetStatisticsDatabase();
+                                    // TODO: Test method below, then use that instead of rsetting whole database.
+                                    //CleanOldValuesFromStatisticsDatabase();
+                                }
+                                //
                                 var dbCommand = dbConnection.CreateCommand();
                                 // "TimeStart","TimeEnd","Domain","Address","Parameter","AverageValue", "CustomData"
                                 dbCommand.Parameters.Add(new SQLiteParameter("@timestart", DateTimeToSQLite(parameter.Statistics.LastProcessedTimestap)));
@@ -604,9 +623,6 @@ namespace HomeGenie.Service.Logging
                                     ex.StackTrace
                                 );
                             }
-                            //
-                            parameter.Statistics.LastProcessedTimestap = end;
-                            parameter.Statistics.Values.Clear();
 
                         }
                     }

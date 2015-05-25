@@ -36,8 +36,8 @@
         "Energy Saving Mode",
     "Description":
         "When enabled, ensures that dimmer level is kept below the configured percentage value.",
-    "ConfigureOptions.MaxLevel":
-        "Max light level",
+    "EnergyManagement.EnergySavingLevel":
+        "Max light level (%)",
     "EnergyManagement.EnergySavingMode":
         "Enable energy saving mode"
 },

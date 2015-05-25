@@ -36,8 +36,8 @@
         "Mode économie d'énergie",
     "Description":
         "Lorsqu'il est activé, assure que le niveau de variation est maintenue en dessous de la valeur de pourcentage configuré.",
-    "ConfigureOptions.MaxLevel":
-        "Niveau de lumière maximum",
+    "EnergyManagement.EnergySavingLevel":
+        "Niveau de lumière maximum (%)",
     "EnergyManagement.EnergySavingMode":
         "Activer le mode d'économie d'énergie"
 },

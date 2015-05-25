@@ -285,6 +285,10 @@ namespace HomeGenie.Service
             UpdateModulesDatabase();
             systemConfiguration.Update();
             //
+            // Stop HG helper services
+            updateChecker.Stop();
+            statisticsLogger.Stop();
+            //
             LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
             LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
@@ -294,6 +298,8 @@ namespace HomeGenie.Service
             LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
             if (masterControlProgram != null) masterControlProgram.StopEngine();
             LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
+            //
+            LogBroadcastEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPED");
             //
             SystemLogger.Instance.Dispose();
         }

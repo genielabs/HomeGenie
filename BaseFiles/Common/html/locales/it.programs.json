@@ -36,8 +36,8 @@
         "Modalità risparmio energetico",
     "Description":
         "Se abilitato, assicura che il livello dei variatori non superi la percentuale configurata.",
-    "ConfigureOptions.MaxLevel":
-        "Livello massimo luci",
+    "EnergyManagement.EnergySavingLevel":
+        "Livello massimo (%)",
     "EnergyManagement.EnergySavingMode":
         "Abilita modalità risparmio energetico"
 },

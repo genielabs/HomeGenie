@@ -1156,12 +1156,6 @@
     <Address>82</Address>
     <Properties>
       <ModuleParameter>
-        <Name>ConfigureOptions.MaxLevel</Name>
-        <Value>eQmibguU4RfcrcKLwpuf7w==</Value>
-        <Description>Keep level below the following value</Description>
-        <UpdateTime>2015-01-03T14:02:11.104489Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>NGAg5Bttn96/TAPvzSiLvQ==</Value>
         <Description />
