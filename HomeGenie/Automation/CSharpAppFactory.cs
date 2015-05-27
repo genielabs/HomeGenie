@@ -36,7 +36,7 @@ namespace HomeGenie.Automation
     {
 
         public const int CONDITION_CODE_OFFSET = 7;
-        public const int PROGRAM_CODE_OFFSET = 19;
+        public const int PROGRAM_CODE_OFFSET = 20;
 
         public static CompilerResults CompileScript(string conditionSource, string scriptSource, string outputDllFile)
         {
