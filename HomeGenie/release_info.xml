@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r488</Version>
+  <Version>1.00 beta r489</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added localization of programs configuration options
+  <ReleaseNote>   - Fixed CSharp app compile bug (Windows)
+  - Added localization of programs configuration options
   - Added localization of module features and programs title/description
   - Added postback call to automation programs when a module option/feature is changed from the UI
   - Added Cron event wizard and cron event input widget available as AddFeature "cron.text" field type
@@ -31,5 +32,5 @@
   - Deprecated Weeco 4M board interface driver as built-in (now available as importable interface driver)
   - Added importable MIG interface driver plugins (add-ons)
   - Added "configlets" files for implementing custom interface drivers UI</ReleaseNote>
-  <ReleaseDate>2015-05-25T13:55:49.0000Z</ReleaseDate>
+  <ReleaseDate>2015-05-27T12:58:22.0000Z</ReleaseDate>
 </ReleaseInfo>

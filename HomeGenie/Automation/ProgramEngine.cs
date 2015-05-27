@@ -16,9 +16,9 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Collections.Generic;
@@ -146,10 +146,13 @@ namespace HomeGenie.Automation
                 catch (Exception ex)
                 {
                     // a runtime error occured
-                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
-                    program.ScriptErrors = JsonConvert.SerializeObject(error);
-                    program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
+                    if (!ex.GetType().Equals(typeof(System.Reflection.TargetException)))
+                    {
+                        List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
+                        program.ScriptErrors = JsonConvert.SerializeObject(error);
+                        program.IsEnabled = false;
+                        RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
+                    }
                 }
                 //
                 callback(program, isConditionSatisfied);
@@ -229,7 +232,7 @@ namespace HomeGenie.Automation
                     result.Exception = ex;
                 }
                 //
-                if (result != null && result.Exception != null)
+                if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
                 {
                     // runtime error occurred, script is being disabled
                     // so user can notice and fix it
@@ -418,26 +421,15 @@ namespace HomeGenie.Automation
         {
             List<ProgramError> errors = new List<ProgramError>();
 
-            // dispose assembly and interrupt current task
-            program.AppAssembly = null;
-            program.IsEnabled = false;
-            // clean up old assembly files
+            // check for output directory
             if (!Directory.Exists(Path.GetDirectoryName(program.AssemblyFile)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(program.AssemblyFile));
             }
-            if (File.Exists(program.AssemblyFile))
-            {
-                File.Delete(program.AssemblyFile);
-            }
-            if (File.Exists(program.AssemblyFile + ".mdb"))
-            {
-                File.Delete(program.AssemblyFile + ".mdb");
-            }
-            if (File.Exists(program.AssemblyFile + ".pdb"))
-            {
-                File.Delete(program.AssemblyFile + ".pdb");
-            }
+
+            // dispose assembly and interrupt current task (if any)
+            program.AppAssembly = null;
+            program.IsEnabled = false;
 
             // DO NOT CHANGE THE FOLLOWING LINES OF CODE
             // it is a lil' trick for mono compatibility
@@ -455,25 +447,12 @@ namespace HomeGenie.Automation
                 result.Errors.Add(new System.CodeDom.Compiler.CompilerError(program.Name, 0, 0, "-1", ex.Message));
             }
 
-            if (result.Errors.Count == 0)
-            {
-                program.AppAssembly = result.CompiledAssembly;
-                File.Move(tmpfile, program.AssemblyFile);
-                if (File.Exists(tmpfile + ".mdb"))
-                {
-                    File.Move(tmpfile + ".mdb", program.AssemblyFile + ".mdb");
-                }
-                if (File.Exists(tmpfile + ".pdb"))
-                {
-                    File.Move(tmpfile + ".pdb", program.AssemblyFile + ".pdb");
-                }
-            }
-            else
+            if (result.Errors.Count > 0)
             {
                 int sourceLines = program.ScriptSource.Split('\n').Length;
                 foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
                 {
-                    //if (!ce.IsWarning)
+                    if (!error.IsWarning)
                     {
                         int errorRow = (error.Line - CSharpAppFactory.PROGRAM_CODE_OFFSET);
                         string blockType = "CR";
@@ -491,6 +470,10 @@ namespace HomeGenie.Automation
                         });
                     }
                 }
+            }
+            if (errors.Count == 0)
+            {
+                program.AppAssembly = result.CompiledAssembly;
             }
 
             return errors;

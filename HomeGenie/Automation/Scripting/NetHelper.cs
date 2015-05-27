@@ -41,6 +41,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using HomeGenie.Service.Constants;
 using Nmqtt;
+using NetClientLib;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -80,12 +81,14 @@ namespace HomeGenie.Automation.Scripting
         public NetHelper(HomeGenieService hg)
         {
             homegenie = hg;
-            // TODO: SSL connection certificate validation
-            // TODO: this is just an hack not meant to be used in production enviroment
-            ServicePointManager.ServerCertificateValidationCallback = Validator;
+            // TODO: SSL connection certificate validation:
+            // TODO: this is just an hack to fix certificate issues on mono < 4.0,
+            // TODO: not meant to be used in production enviroment
+            //ServicePointManager.ServerCertificateValidationCallback = Validator;
         }
 
         // TODO: this is just an hack not meant to be used in production enviroment
+        /*
         public static bool Validator(
             object sender,
             X509Certificate certificate,
@@ -95,7 +98,7 @@ namespace HomeGenie.Automation.Scripting
         {
             return true;
         }
-
+        */
 
         #region SMTP client
 
@@ -297,6 +300,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         // TODO: deprecate this (Program.RunAsyncTask can already do the trick)
+        [Obsolete("use 'Program.RunAsyncTask' instead")]
         public void SendMessageAsync(string from, string recipients, string subject, string messageText)
         {
             var t = new Thread(() =>
@@ -304,6 +308,23 @@ namespace HomeGenie.Automation.Scripting
                 this.SendMessage(from, recipients, subject, messageText);
             });
             t.Start();
+        }
+
+        #endregion
+
+
+        #region IMAP client
+
+        /// <summary>
+        /// IMAP mail client helper.
+        /// </summary>
+        /// <returns>The IMAP client.</returns>
+        /// <param name="host">Host.</param>
+        /// <param name="port">Port.</param>
+        /// <param name="useSsl">If set to <c>true</c> use ssl.</param>
+        public ImapClient ImapClient(string host, int port, bool useSsl)
+        {
+            return new ImapClient(host, port, useSsl);
         }
 
         #endregion
@@ -411,6 +432,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         // TODO: deprecate this (Program.RunAsyncTask can do the trick)
+        [Obsolete("use 'Program.RunAsyncTask' instead")]
         public void CallAsync()
         {
             var t = new Thread(() =>
@@ -518,6 +540,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="server">MQTT server address.</param>
         /// <param name="port">MQTT server port.</param>
         /// <param name="topic">MQTT topic.</param>
+        [Obsolete("use 'MqttClientHelper' class instead")]
         public NetHelper MqttService(string server, int port, string clientId)
         {
             mqttClient = new MqttClient(server, port, clientId);
@@ -533,6 +556,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         //TODO: deprecate this (use this.networkCredential instead)
+        [Obsolete("use 'MqttClientHelper' class instead")]
         public NetHelper MqttService(string server, int port, string username, string password, string clientId)
         {
             mqttClient = new MqttClient(server, port, clientId);
@@ -545,6 +569,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="topic">Topic name.</param>
         /// <param name="callback">Callback for receiving the subscribed topic messages.</param>
+        [Obsolete("use 'MqttClientHelper' class instead")]
         public NetHelper Subscribe(string topic, Action<string,string> callback)
         {
             mqttClient.ListenTo<String, AsciiPayloadConverter>(topic, (MqttQos)1)
@@ -562,6 +587,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <param name="topic">Topic name.</param>
         /// <param name="message">Message text.</param>
+        [Obsolete("use 'MqttClientHelper' class instead")]
         public NetHelper Publish(string topic, string message)
         {
             lock (mqttSyncLock)
@@ -579,12 +605,12 @@ namespace HomeGenie.Automation.Scripting
         {
             string eventRouteUrl = "http://" + hgAddress + "/api/" + Domains.HomeAutomation_HomeGenie + "/Interconnection/Events.Push/" + homegenie.GetHttpServicePort();
             // propagate event to remote hg endpoint
-            this.WebService(eventRouteUrl)
-                .Put(JsonConvert.SerializeObject(
-                    new ModuleEvent(module.SelectedModules[0], parameter),
-                    new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }
-                ))
-                .CallAsync();
+            Utility.RunAsyncTask(() =>
+            {
+                this.WebService(eventRouteUrl)
+                .Put(JsonConvert.SerializeObject(new ModuleEvent(module.SelectedModules[0], parameter), new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }))
+                .Call();
+            });
             return this;
         }
 

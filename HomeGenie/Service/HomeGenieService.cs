@@ -813,11 +813,7 @@ namespace HomeGenie.Service
 
         #region Module/Interface Events handling and propagation
 
-        public void SignalModulePropertyChange(
-            object sender,
-            Module module,
-            InterfacePropertyChangedAction propertyChangedAction
-        )
+        public void SignalModulePropertyChange(object sender, Module module, InterfacePropertyChangedAction propertyChangedAction)
         {
 
             // update module parameter value
@@ -838,9 +834,9 @@ namespace HomeGenie.Service
                     parameter.Value = propertyChangedAction.Value.ToString();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                //                HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                //HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
             }
             //
             string eventValue = (propertyChangedAction.Value.GetType() == typeof(String) ? propertyChangedAction.Value.ToString() : JsonConvert.SerializeObject(propertyChangedAction.Value));
@@ -866,21 +862,44 @@ namespace HomeGenie.Service
 
         public void RouteParameterChangedEvent(object eventData)
         {
-            //try
-            //{
-                bool proceed = true;
-                RoutedEvent moduleEvent = (RoutedEvent)eventData;
-                foreach (var program in masterControlProgram.Programs)
+            bool proceed = true;
+            RoutedEvent moduleEvent = (RoutedEvent)eventData;
+            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+            {
+                var program = masterControlProgram.Programs[p];
+                if (!program.IsEnabled) continue;
+                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                 {
+                    program.RoutedEventAck.Set();
+                    if (program.ModuleIsChangingHandler != null)
+                    {
+                        if (!program.ModuleIsChangingHandler(
+                                new Automation.Scripting.ModuleHelper(
+                                    this,
+                                    moduleEvent.Module
+                                ),
+                                moduleEvent.Parameter
+                            ))
+                        {
+                            proceed = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (proceed)
+            {
+                for (int p = 0; p < masterControlProgram.Programs.Count; p++)
+                {
+                    var program = masterControlProgram.Programs[p];
                     if (!program.IsEnabled) continue;
                     if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
                     {
-                        program.RoutedEventAck.Set();
-                        //try
-                        //{
-                            if (program.ModuleIsChangingHandler != null)
+                        try
+                        {
+                            if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                             {
-                                if (!program.ModuleIsChangingHandler(
+                                if (!program.ModuleChangedHandler(
                                         new Automation.Scripting.ModuleHelper(
                                             this,
                                             moduleEvent.Module
@@ -888,70 +907,23 @@ namespace HomeGenie.Service
                                         moduleEvent.Parameter
                                     ))
                                 {
-                                    proceed = false;
                                     break;
                                 }
                             }
-                        //}
-                        //catch (System.Exception ex)
-                        //{
-                        //    HomeGenieService.LogEvent(
-                        //        program.Domain,
-                        //        program.Address.ToString(),
-                        //        ex.Message,
-                        //        "Exception.StackTrace",
-                        //        ex.StackTrace
-                        //    );
-                        //}
-                    }
-                }
-                if (proceed)
-                {
-                    foreach (ProgramBlock program in masterControlProgram.Programs)
-                    {
-                        if (!program.IsEnabled) continue;
-                        if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                        }
+                        catch (System.Exception ex)
                         {
-                            try
-                            {
-                                if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
-                                {
-                                    if (!program.ModuleChangedHandler(
-                                            new Automation.Scripting.ModuleHelper(
-                                                this,
-                                                moduleEvent.Module
-                                            ),
-                                            moduleEvent.Parameter
-                                        ))
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            catch (System.Exception ex)
-                            {
-                                HomeGenieService.LogEvent(
-                                    program.Domain,
-                                    program.Address.ToString(),
-                                    ex.Message,
-                                    "Exception.StackTrace",
-                                    ex.StackTrace
-                                );
-                            }
+                            HomeGenieService.LogEvent(
+                                program.Domain,
+                                program.Address.ToString(),
+                                ex.Message,
+                                "Exception.StackTrace",
+                                ex.StackTrace
+                            );
                         }
                     }
                 }
-            //}
-            //catch (Exception e)
-            //{
-            //    HomeGenieService.LogEvent(
-            //        Domains.HomeAutomation_HomeGenie,
-            //        "RouteParameterChangedEvent()",
-            //        e.Message,
-            //        "Exception.StackTrace",
-            //        e.StackTrace
-            //    ); 
-            //}
+            }
         }
 
         #endregion

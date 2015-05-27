@@ -16,9 +16,9 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Threading;
@@ -237,10 +237,62 @@ namespace HomeGenie.Automation
                     // Unloading program app domain...
                     try { AppDomain.Unload(programDomain); } catch { }
                     programDomain = null;
-                    // Deleting assembly...
-                    // TODO: check if this line can be removed
-                    // TODO: should this check if value == null before deleting the assembly?
-                    try { File.Delete(this.AssemblyFile); } catch { }
+                }
+                // clean up old assembly files
+                try
+                {
+                    if (File.Exists(this.AssemblyFile))
+                    {
+                        File.Delete(this.AssemblyFile);
+                    }
+                    if (File.Exists(this.AssemblyFile + ".mdb"))
+                    {
+                        File.Delete(this.AssemblyFile + ".mdb");
+                    }
+                    if (File.Exists(this.AssemblyFile.Replace(".dll", ".mdb")))
+                    {
+                        File.Delete(this.AssemblyFile.Replace(".dll", ".mdb"));
+                    }
+                    if (File.Exists(this.AssemblyFile + ".pdb"))
+                    {
+                        File.Delete(this.AssemblyFile + ".pdb");
+                    }
+                    if (File.Exists(this.AssemblyFile.Replace(".dll", ".pdb")))
+                    {
+                        File.Delete(this.AssemblyFile.Replace(".dll", ".pdb"));
+                    }
+                }
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
+                }
+                // move/copy new assembly files
+                // rename temp file to production file
+                if (value != null)
+                try
+                {
+                    string tmpfile = new Uri(value.CodeBase).LocalPath;
+                    File.Move(tmpfile, this.AssemblyFile);
+                    if (File.Exists(tmpfile + ".mdb"))
+                    {
+                        File.Move(tmpfile + ".mdb", this.AssemblyFile + ".mdb");
+                    }
+                    if (File.Exists(tmpfile.Replace(".dll", ".mdb")))
+                    {
+                        File.Move(tmpfile.Replace(".dll", ".mdb"), this.AssemblyFile.Replace(".dll", ".mdb"));
+                    }
+                    if (File.Exists(tmpfile + ".pdb"))
+                    {
+                        File.Move(tmpfile + ".pdb", this.AssemblyFile + ".pdb");
+                    }
+                    if (File.Exists(tmpfile.Replace(".dll", ".pdb")))
+                    {
+                        File.Move(tmpfile.Replace(".dll", ".pdb"), this.AssemblyFile.Replace(".dll", ".pdb"));
+                    }
+                }
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
                 }
                 appAssembly = value;
             }
@@ -273,6 +325,7 @@ namespace HomeGenie.Automation
                     {
                         debugData = File.ReadAllBytes(this.AssemblyFile + ".pdb");
                     }
+                    AppDomain.CurrentDomain.SetShadowCopyFiles();
                     if (debugData != null)
                     {
                         appAssembly = Assembly.Load(assemblyData, debugData);
@@ -386,7 +439,7 @@ namespace HomeGenie.Automation
             case "javascript":
                 string jsScript = this.ScriptSource;
                 Jint.Engine engine = (scriptEngine as Jint.Engine);
-                    //engine.Options.AllowClr(false);
+                //engine.Options.AllowClr(false);
                 result = new MethodRunResult();
                 try
                 {
@@ -423,7 +476,7 @@ namespace HomeGenie.Automation
                     "Arduino Sketch Upload",
                     "Arduino.UploadOutput",
                     "Upload started"
-                    );
+                );
                 string[] outputResult = ArduinoAppFactory.UploadSketch(Path.Combine(
                     AppDomain.CurrentDomain.BaseDirectory,
                     "programs",
@@ -452,7 +505,7 @@ namespace HomeGenie.Automation
                     "Arduino Sketch",
                     "Arduino.UploadOutput",
                     "Upload finished"
-                    );
+                );
                 break;
             }
             //
@@ -612,8 +665,8 @@ namespace HomeGenie.Automation
             case "ruby":
                 (scriptEngine as ScriptEngine).Runtime.Shutdown();
                 break;
-            //case "javascript":
-            //case "csharp":
+                //case "javascript":
+                //case "csharp":
             }
         }
 
