@@ -41,7 +41,7 @@
             controlpopup.find('[data-ui-field=level_knob]').knob({
                 'release': function (v) {
                     v = Math.round(v);
-                    HG.Control.Modules.ServiceCall("Control.Level", module.Domain, module.Address, v, function (data) { });
+                   HG.Control.Modules.ServiceCall("Control.Level", module.Domain, module.Address, v, function (data) { });
                 },
                 'change': function (v) {
                     v = Math.round(v);
@@ -71,6 +71,26 @@
             widget.find('[data-ui-field=settings]').on('click', function () {
                 HG.WebApp.Control.EditModule(module);
             });
+            //
+            // Calibrationp button action
+            controlpopup.find('[data-ui-field=calibration_button]').on('click', function () {
+                var parameter = '';
+                var shutterCalibration = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.Calibration");
+                if((shutterCalibration == null) || (shutterCalibration.value == ''))
+                {
+                   var manufaturerSpecific = HG.WebApp.Utility.GetModulePropertyByName(module, "ZWaveNode.ManufacturerSpecific");
+                   var specificText = manufaturerSpecific.Value ;
+                   if( specificText == '010F:0301:1001' ) // Fibaro FGRM-222 AC/DC
+                      parameter = '29';
+                   if( specificText == '0159:0003:0002' ) // Qubino ZMNHCA? AC
+                      parameter = '78';
+                   HG.WebApp.Utility.SetModulePropertyByName(module,"ZWaveNode.Calibration",parameter);
+                }
+                else
+                	parameter = shutterCalibration.Value;
+                if( parameter != '' )
+                	HG.Control.Modules.ServiceCall("Config.ParameterSet", module.Domain, module.Address, parameter+"/1", function (data) { });
+            });
         }
         //
         // read some context data
@@ -92,13 +112,16 @@
             }
             //
             if ((invertcontrols && level != 1) || level > 0) {
-                leveltext = 'OPEN';
+            	if( level == 100 )
+	                leveltext = 'Ouvert';
+	            else
+	                leveltext = level+"%";
                 this.StatusText = '<span style="vertical-align:middle">' + leveltext + '</span> ';
                 this.StatusText += '<img width="15" height="15" src="images/common/led_green.png" style="vertical-align:middle" />';
                 this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_open.png';
             }
             else {
-                leveltext = 'CLOSED';
+                leveltext = 'Fermé';
                 this.StatusText = '<span style="vertical-align:middle">' + leveltext + '</span> ';
                 this.StatusText += '<img width="15" height="15" src="images/common/led_black.png" style="vertical-align:middle" />';
                 this.IconImage = 'pages/control/widgets/homegenie/generic/images/shutters_closed.png';

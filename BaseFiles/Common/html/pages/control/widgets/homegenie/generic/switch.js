@@ -88,6 +88,9 @@
             });
             //
             // settings button
+            widget.find('[data-ui-field=settings_alone]').on('click', function () {
+                HG.WebApp.Control.EditModule(module);
+            });
             widget.find('[data-ui-field=settings]').on('click', function () {
                 HG.WebApp.Control.EditModule(module);
             });
@@ -143,10 +146,12 @@
             if (level2 != null) {
                 level2 = this.GetLevel(level2);
             } else level2 = '';
+            widget.find('[data-ui-field=settings_alone]').hide();
+            widget.find('[data-ui-field=settings]').show();
+            widget.find('[data-ui-field=options]').show();
         }
         else {
             controlpopup.find('[data-ui-field=zwave-multi-options]').hide();
-            widget.find('[data-ui-field=options]').hide();
         }
         this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp; ' + level + ' ' + level1 + ' ' + level2 + '</span> ' + this.StatusText;
         //

@@ -57,13 +57,13 @@
     "Title":
         "Programmation Marche/Arrêt",
     "Description":
-        "Allumer/éteindre un module en utilisant l'automate.",
+        "Allumer/éteindre Ouvrir/Fermer un module en utilisant l'automate.",
     "HomeGenie.ScheduleControl":
         "Active l'automate Marche/Arrêt",
     "HomeGenie.ScheduleOn":
-        "Allumer",
+        "Allumer/Ouvrir",
     "HomeGenie.ScheduleOff":
-        "Eteindre"
+        "Eteindre/Fermer"
 },
 
 "90": {
