@@ -38,7 +38,7 @@
     "configure_menu_automation": 
         "Automatisation et Programmes",
     "configure_menu_system": 
-        "Paramètres",
+        "Interfaces",
     "configure_menu_maintenance": 
         "Maintenance et mise à jour",
     "configure_automation_heading": 
@@ -80,7 +80,7 @@
     "configure_module_typeswitch": 
         "Prise de Courant",
     "configure_module_typesensor": 
-        "Détecteur de Mouvement",
+        "Capteur - Détecteur",
     "configure_module_typetemperature": 
         "Météo (°C) (% H) (Lux)",
     "configure_module_typesiren": 
@@ -96,9 +96,9 @@
     "configure_module_options": 
         "Setup",
     "configure_module_optupdate": 
-        "Mise à jour module",
+        "Mise à jour Module",
     "configure_module_optremove": 
-        "Supprimer du groupe",
+        "Supprimer du Groupe",
     "configure_group_bottombar_deletemodule": 
         "Supprimer le Groupe",
     "configure_group_bottombar_addmodule": 
@@ -108,15 +108,15 @@
     "configure_program_newprogram": 
         "Nouveau scénario",
     "configure_program_enterprogramname": 
-        "Nom du nouveau scénario:",
+        "Nom du nouveau scénario :",
     "configure_program_newprogramcancel": 
         "Annuler",
     "configure_program_newprogramconfirm": 
         "Ok",
     "configure_program_deletetitle": 
-        "Supprimer le scénario?",
+        "Supprimer le scénario ?",
     "configure_program_deleteprompt": 
-        "Etes-vous sûr de vouloir effacer ce scénario?",
+        "Etes-vous sûr de vouloir effacer ce scénario ?",
     "configure_program_deleteadvice": 
         "Cette action est irréversible.",
     "configure_program_deletecancel": 
@@ -132,7 +132,7 @@
     "configure_program_options_delete": 
         "Supprimer",
     "configure_program_programgroup": 
-        "Groupe de Programme",
+        "Groupe de Programmes",
     "configure_program_programname": 
         "Nom du Programme",
     "configure_program_programdescription": 
@@ -186,9 +186,9 @@
     "configure_program_commandarguments": 
         "Paramètres de la commande",
     "configure_program_deleteinstructiontitle": 
-        "Supprimer la commande?",
+        "Supprimer la commande ?",
     "configure_program_deleteinstructionprompt": 
-        "Etes-vous sur de vouloir effacer cette commande?",
+        "Etes-vous sur de vouloir effacer cette commande ?",
     "configure_program_csharpprogram": 
         "Programme C#",
     "configure_program_savingtitle": 
@@ -284,17 +284,17 @@
     "home_voicerecognition_voice": 
         "Reconnaissance vocale",
     "configure_menu_scheduler": 
-        "Programmateur",
+        "Expressions préprogrammées",
     "configure_grouplist": 
         "Liste des Groupes",
     "configure_schedulerservice_title": 
-        "Liste des<br /><font style=\"color:gray\">Evénements</font></h3>",
+        "Liste des<br /><font style=\"color:gray\">Expressions préprogrammées</font></h3>",
     "configure_scheduler_events": 
-        "Evénements préprogrammés",
+        "Expressions préprogrammées",
     "configure_schedulerservice_bottombar_event_add": 
-        "Ajouter un Evénement",
+        "Ajouter une Expression",
     "configure_schedulerservice_schedulerevent": 
-        "Evénements du planificateur",
+        "Expresssion",
     "configure_schedulerservice_itemname": 
         "Nom",
     "configure_schedulerservice_itemcronexp": 
@@ -346,7 +346,7 @@
     "configure_system_modulesselect": 
         "Sélectionner",
     "configure_system_remotemodules": 
-        "Routine des modules déportés",
+        "Routine des Modules déportés",
     "configure_system_modsroutingreset": 
         "Redémarrer",
     "configure_system_userinterface": 
@@ -400,7 +400,7 @@
     "configure_program_options_details": 
         "Détails",
     "configure_program_options_restart": 
-        "Redémarrage",
+        "Redémarrer",
     "configure_program_details_implemfeatures": 
         "Fonctions disponibles",
     "configure_program_details_configoptions": 
@@ -428,7 +428,7 @@
     "configure_module_parameters_save": 
         "Sauvegarder",
     "configure_module_parameters_linktitle": 
-        "Paramètres du module",
+        "Paramètres du Module",
     "configure_automationgroup_add": 
         "Ajouter",
     "configure_programslist_listtitle": 
@@ -532,7 +532,7 @@
     "configure_system_updateinstall": 
         "Installer la mise à jour",
     "configure_system_deletemodule": 
-        "Supprimer un module",
+        "Supprimer un Module",
     "systemsettings_backuprestores1selectallnone": 
         "Sélectionner Tout / Rien",
     "securitysettings_password_setpassword": 
@@ -654,15 +654,15 @@
     "configure_widgetlist_list":
         "Liste des Widgets",
     "configure_widgeteditor_nobindmodule_title":
-        "Sélectionner un module",
+        "Sélectionner un Module",
     "configure_widgeteditor_nobindmodule_text":
-        "Aucun module valide n'a été trouvée, sélectionnez en un.",
+        "Aucun Module valide n'a été trouvée, sélectionnez en un.",
     "configure_widgeteditor_nobindmodule_close":
         "Fermer",
     "configure_widgeteditor_bindtomodule":
-        "Lié au module",
+        "Lié au Module",
     "configure_widgeteditor_selectmodule_placeholder":
-        "(selectionner un module)",
+        "(selectionner un Module)",
     "configure_widgeteditor_title":
         "Editeur de Widget",
     "configure_widgeteditor_savinghtml":
@@ -670,19 +670,19 @@
     "configure_widgeteditor_savingjavascript":
         "Sauvegarde Javascript...",
     "configure_interfaces_importdriver":
-        "Installation Add-ons",        
+        "Installation de nouveaux Interfaces",        
     "configure_interfaces_download":
         "Télécharger et installer",        
     "configure_interfaces_upload":
         "Téléchargez et installez",        
     "configure_interfaces_addonslist":
-        "Liste des Add-ons",        
+        "Liste des Interfaces",        
     "configure_interfaces_installaddons":
-        "Installer des Add-ons",
+        "Installer de nouveaux Interfaces",
     "configure_interfaces_downloadfromurl":
-        "Télécharger le moduke Add-on depuis l'URL",
+        "Télécharger le nouvel Interface depuis l'URL",
     "configure_interfaces_uploadpackage":
-        "Installer le module Add-on depuis le fichier",
+        "Installer le nouvel Interface depuis le fichier",
     "cronwizard_title":
         "Assistant événement CRon",      
     "cronwizard_tab_minute":
@@ -720,7 +720,11 @@
     "cronwizard_dayowselect_everydayow":
         "Chaque jour de la semaine",        
     "cronwizard_dayowselect_eachselected":
-        "Jours de semaine sélectionnés",        
+        "Jours de semaine sélectionnés",
+"##":
+"## COMMON LOCALES",
+"##":
+"##",
     "common_month_jan":
         "Jan",        
     "common_month_feb":
