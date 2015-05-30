@@ -32,8 +32,8 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a data-locale-id="bottombar_button_none" class="ui-btn ui-icon-none ui-btn-icon-none" data-transition="none" data-direction="reverse" href="javascript:$(this).blur();void(0);">
-                    &nbsp;
+                    <a id="control_bottombar_voice_button" data-locale-id="control_bottombar_voicecontrol" class="ui-btn ui-icon-carat-u ui-btn-icon-left" data-transition="none" data-direction="reverse" href="javascript:$(this).blur();void(0);">
+                        Voice Control
                     </a>
                 </li>
                 <li>
@@ -48,6 +48,16 @@
                 </li>
             </ul>
         </div><!-- /navbar -->
+
+        <div id="speechinput" class="ui-bar-inherit" style="display:none;position:absolute;bottom:0;margin-bottom:34px;left:0;right:0;padding-left:5px;padding-right:5px">
+            <table width="100%">
+                <tr>
+                    <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                    <td width="1%"><a id="voicerecognition_button" data-locale-id="home_voicerecognition_voice" class="ui-btn ui-btn-icon-left ui-icon-audio" href="javascript:recognition.start()">Voice</a></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
     <div id="toolbar_macrorecord" data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div data-role="navbar">
@@ -78,7 +88,7 @@
                 <ul data-role="listview" id="control_groupsmenu" style="margin:0;max-height:180px;overflow:auto;" class="trapScroll"></ul>
             </div>
             <div onclick="HG.WebApp.Control.ToggleMenu()" class="ui-header ui-bar-inherit ui-shadow" style="display:inline-block;width:100%;">
-                <div style="float:left"><p class="ui-icon-carat-d ui-btn-icon-left" style="margin:5px;margin-left:0"><strong id="control_groupmenutitle">&nbsp;</strong></p></div>
+                <div style="float:left;"><p class="ui-icon-carat-d ui-btn-icon-left" style="margin:5px;padding-left:28px;"><strong id="control_groupmenutitle">&nbsp;</strong></p></div>
                 <table align="right" style="float:right;margin-right:10px;vertical-align:middle"><tr id="control_groupindicators"></tr></table>
             </div>
         </div>

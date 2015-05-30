@@ -439,6 +439,7 @@
 
 <!-- END Global Popups -->
 
+<!--- TODO: Move the full screen editor to a better place ( ui/widgets/store.script.htm ? ) -->
     <div id="fullscreen_edit_box" class="ui-corner-all ui-shadow" style="display:none;position:absolute;padding:20px;z-index:10000;background:white;color:black;top:50px;left:20px;right:20px;bottom:50px">
         <h3 data-ui-field="title" style="margin:5px;margin-top:0px">Fullscreen Editor</h3>
         <h4 data-ui-field="subtitle" style="margin:5px">...</h4>
@@ -462,11 +463,11 @@
         <ul data-role="listview" data-inset="false" class="ui-mini ui-corner-all">
             <li><a class="ui-btn ui-btn-icon-left ui-icon-home" data-locale-id="home_menu_home" href="#page_control" data-transition="none">Home</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-cloud" data-locale-id="home_menu_statistics" href="#page_analyze" data-transition="none">Statistics</a></li>
-            <li data-locale-id="configure_menu_automation" data-role="list-divider">Automation</li>
+            <li data-locale-id="home_menu_automation" data-role="list-divider">Automation</li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-bars" data-locale-id="home_menu_programs" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-edit" data-locale-id="home_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widget Editor</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-clock" data-locale-id="home_menu_scheduler" href="#page_configure_schedulerservice" data-transition="none">Scheduler</a></li>
-            <li data-locale-id="configure_menu_system_" data-role="list-divider">System</li>
+            <li data-locale-id="home_menu_system" data-role="list-divider">System</li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-gear" data-locale-id="home_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="home_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
             <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
@@ -476,13 +477,22 @@
             <li><a class="ui-btn ui-icon-comment ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php" data-transition="slide">Keep HomeGenie Up!</a></li>
         </ul>
+        <br clear="all" />
+        <div align="center" style="font-size:9pt;position:absolute;left:0;right:0;bottom:0;height:30px">
+            HomeGenie &copy; 2011-2015 
+            <a href="https://github.com/genielabs/HomeGenie" target="_blank">G-Labs</a>
+        </div>
     </div><!-- /panel -->
 
 <!--- END Side Menu Panel -->
 
-    <div id="homegenie_overlay" style="position:absolute;top:45px;left:0;right:0;bottom:0;background-color:white;opacity:0.2;">
+<!--- BEGIN HomeGenie Overlay -->
+
+    <div id="homegenie_overlay" style="position:absolute;top:45px;left:0;right:0;bottom:0;background-color:white;opacity:0.2;z-index:1000">
         <div style="width:100%;height:100%;background:url(images/genie.png) no-repeat center center;"></div>
     </div>
+
+<!--- END HomeGenie Overlay -->
 
 </body>
 </html>

@@ -24,19 +24,7 @@
         <Domain>HomeGenie.UI.Separator</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>2</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>3</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>4</Address>
-        <Domain>Favourites.Link</Domain>
-      </ModuleReference>
-      <ModuleReference>
-        <Address>1</Address>
         <Domain>Favourites.Link</Domain>
       </ModuleReference>
     </Modules>

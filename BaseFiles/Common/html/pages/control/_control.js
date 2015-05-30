@@ -58,6 +58,18 @@ HG.WebApp.Control.InitializePage = function () {
             $('#macrorecord_delay_seconds').val(data.DelayOptions);
         });
     });
+    $('#control_bottombar_voice_button').on('click', function() {
+        if ($('#speechinput').css('display') == 'none') {
+            $(this).removeClass('ui-icon-carat-u');
+            $(this).addClass('ui-icon-carat-d');
+            $('#speechinput').show(50);
+            $('#speechinput').find('input').focus();
+        } else {
+            $(this).removeClass('ui-icon-carat-d');
+            $(this).addClass('ui-icon-carat-u');
+            $('#speechinput').hide(50);
+        }
+    });
 };
 //
 HG.WebApp.Control.ToggleMenu = function () {
@@ -308,7 +320,7 @@ HG.WebApp.Control.UpdateActionsMenu = function () {
                 var module = groupmodules.Modules[m];
                 if (module.Widget == 'homegenie/generic/program') {
                     // add item to actions menu
-                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + module.Name + '</a></li>');
+                    $('#control_custom_actionmenu').append('<li><a class="ui-btn ui-icon-bars ui-btn-icon-right" onclick="HG.Automation.Programs.Toggle(\'' + module.Address + '\', \'' + HG.WebApp.Data._CurrentGroup + '\')">' + HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', module.Name) + '</a></li>');
                 }
             }
         }
