@@ -120,6 +120,7 @@ HG.WebApp.InitializePage = function ()
         var userLang = HG.WebApp.Locales.GetUserLanguage();
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
             HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json');
+            $('#homegenie_overlay').fadeOut(200);
         });
         // enable/disable speech input
         if (!('webkitSpeechRecognition' in window)) {
@@ -296,7 +297,14 @@ HG.WebApp.InitializePage = function ()
     $('#actionconfirm_popup').enhanceWithin().popup();
     //
     // Side Panel
-    $('body>[data-role="panel"]' ).panel().children().first().trigger('create');
+    $('body>[data-role="panel"]' ).panel()
+        .on('panelbeforeopen', function() {
+            $('#homegenie_overlay').fadeIn(100);
+            })
+        .on('panelbeforeclose', function() {
+            $('#homegenie_overlay').fadeOut(100);
+            })
+        .children().first().trigger('create');
     $('body>[data-role="panel"]' ).on('click', function() {
         $(this).panel('close');
     });

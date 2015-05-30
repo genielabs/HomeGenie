@@ -61,7 +61,7 @@ HG.WebApp.Control.InitializePage = function () {
 };
 //
 HG.WebApp.Control.ToggleMenu = function () {
-    $('#control_groupsmenu').slideToggle(400, function(){
+    $('#control_groupsmenu').slideToggle(100, function(){
         $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
         $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-d');
         if ($('#control_groupsmenu').css('display') != 'none') {
