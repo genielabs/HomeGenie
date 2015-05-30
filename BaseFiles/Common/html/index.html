@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
@@ -454,7 +455,25 @@
         
         <a data-ui-field="confirm" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:40px;bottom:20px">Ok</a>
     </div>
-    
+
+    <div id="side_panel" data-role="panel" class="ui-page ui-overlay-shadow ui-corner-all" style="padding:0;margin:0;margin-top:45px" data-position-fixed="true" data-position="left" data-display="overlay">
+        <ul data-role="listview" data-inset="false" class="ui-mini ui-corner-all">
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-home" data-locale-id="bottombar_button_home" href="#page_control" data-transition="none">Home</a></li>
+            <li data-locale-id="configure_menu_automation" data-role="list-divider">Automation</li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-bars" data-locale-id="configure_menu_programs" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-edit" data-locale-id="configure_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widget Editor</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-clock" data-locale-id="configure_menu_scheduler" href="#page_configure_schedulerservice" data-transition="none">Scheduler</a></li>
+            <li data-locale-id="configure_menu_system_" data-role="list-divider">System</li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-gear" data-locale-id="configure_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="configure_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
+            <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
+            <li><a class="ui-btn ui-icon-carat-r ui-btn-icon-left" data-locale-id="home_menu_about_version" href="javascript:HG.System.UpdateManager.UpdateCheck()">Version 1.0 beta (r491)</a></li>
+            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
+            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://www.homegenie.it/docs/automation_getstarted.php">Automation Programming</a></li>
+            <li><a class="ui-btn ui-icon-comment ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php" data-transition="slide">Keep HomeGenie Up!</a></li>
+        </ul>
+    </div><!-- /panel -->
 
 </body>
 </html>

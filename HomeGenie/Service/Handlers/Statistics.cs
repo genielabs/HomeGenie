@@ -238,7 +238,8 @@ namespace HomeGenie.Service.Handlers
 
         private DateTime JavascriptToDate(long timestamp)
         {
-            return new DateTime((timestamp * 10000) + 621355968000000000);
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            return (baseDate.AddMilliseconds(timestamp));
         }
 
         private double DateToJavascript(DateTime date)

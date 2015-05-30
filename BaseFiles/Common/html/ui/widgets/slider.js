@@ -24,7 +24,7 @@
             slider.attr('min', _this.min);
             slider.attr('max', _this.max);
             slider.attr('step', _this.step);
-            slider.slider('refresh');        
+            slider.slider().slider('refresh');        
             slider.on('change', function(evt){
                 if (typeof _this.onChange == 'function') {
                     _this.onChange($(this).val());

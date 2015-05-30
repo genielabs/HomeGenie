@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+30/05/2015 1.00 beta rev 491
+    - Restyled UI navigation. Added side menu (opens by clicking the upper left HomeGenie button)
+    - Improved Switch and Shutter widgets (PR #172 #173)
+    - Fixed Statistics Engine bug with parsing/passing wrong timerange values
+
 27/05/2015 1.00 beta rev 489
     - Fixed CSharp app compile bug (Windows)
 

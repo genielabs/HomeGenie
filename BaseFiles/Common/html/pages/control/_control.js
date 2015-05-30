@@ -61,7 +61,15 @@ HG.WebApp.Control.InitializePage = function () {
 };
 //
 HG.WebApp.Control.ToggleMenu = function () {
-    $('#control_groupsmenu').slideToggle(400);
+    $('#control_groupsmenu').slideToggle(400, function(){
+        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
+        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-d');
+        if ($('#control_groupsmenu').css('display') != 'none') {
+            $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-u');
+        } else {
+            $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-d');
+        }
+    });
 };
 //
 HG.WebApp.Control.ShowGroup = function (gid) {

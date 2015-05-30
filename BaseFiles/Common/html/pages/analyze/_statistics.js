@@ -234,12 +234,12 @@ HG.WebApp.Statistics.Refresh = function () {
     {
         HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
             var trange = eval(res)[0];
-            var start = new Date(trange.StartTime * 1);
-            var end = new Date(trange.EndTime * 1);
+            var start = new Date(parseFloat(trange.StartTime));
+            var end = new Date(parseFloat(trange.EndTime));
             var today = new Date();
-            var minDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-            $('#page_analyze_datefrom').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() });
-            $('#page_analyze_dateto').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() });
+            var minDays = Math.ceil((today - start) / (1000 * 60 * 60 * 24));
+            $('#page_analyze_datefrom').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() }).datebox('refresh');
+            $('#page_analyze_dateto').datebox('option', { 'minDays': minDays, 'maxDays': 0, 'useLang': HG.WebApp.Locales.GetUserLanguage() }).datebox('refresh');
             if ($('#page_analyze_datefrom').val() == '') {
                 $('#page_analyze_datefrom').datebox('setTheDate', today);
                 $('#page_analyze_datefrom').trigger('datebox', {'method':'doset'})
@@ -248,8 +248,12 @@ HG.WebApp.Statistics.Refresh = function () {
                 $('#page_analyze_dateto').datebox('setTheDate', today);
                 $('#page_analyze_dateto').trigger('datebox', {'method':'doset'})
             }
+            var dfrom = new Date($('#page_analyze_datefrom').datebox('getTheDate').getTime());
+            var dto = new Date($('#page_analyze_dateto').datebox('getTheDate').getTime());
+            dfrom.setHours(0, 0, 0, 0);
+            dto.setHours(23, 59, 59, 0);
             $.ajax({
-                url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + $('#page_analyze_datefrom').datebox('getTheDate').getTime() + '/' + $('#page_analyze_dateto').datebox('getTheDate').getTime(),
+                url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
                 type: 'GET',
                 success: function (data) {
                     var stats = eval(data);
@@ -295,8 +299,12 @@ HG.WebApp.Statistics.Refresh = function () {
             var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
             $('#page_analyze_totalcost').val(cost.toFixed(2));
         });
+        var dfrom = new Date($('#page_analyze_datefrom').datebox('getTheDate').getTime());
+        var dto = new Date($('#page_analyze_dateto').datebox('getTheDate').getTime());
+        dfrom.setHours(0, 0, 0, 0);
+        dto.setHours(23, 59, 59, 0);
         $.ajax({
-            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.Counter/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + $('#page_analyze_datefrom').datebox('getTheDate').getTime() + '/' + $('#page_analyze_dateto').datebox('getTheDate').getTime(),
+            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.Counter/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
             type: 'GET',
             success: function (data) {
                 var stats = eval(data);

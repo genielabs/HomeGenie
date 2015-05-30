@@ -295,7 +295,11 @@ HG.WebApp.InitializePage = function ()
     });
     $('#actionconfirm_popup').enhanceWithin().popup();
     //
-    
+    // Side Panel
+    $('body>[data-role="panel"]' ).panel().children().first().trigger('create');
+    $('body>[data-role="panel"]' ).on('click', function() {
+        $(this).panel('close');
+    });
     // Cron Event Wizard popup
     HG.Ui.GenerateWidget('core/popup.cronwizard', { parent: $(document).find('body') }, function(handler){
         var element = handler.element;

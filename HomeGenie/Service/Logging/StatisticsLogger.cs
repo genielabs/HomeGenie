@@ -542,16 +542,16 @@ namespace HomeGenie.Service.Logging
 
         private string GetDateRangeFilter(DateTime start, DateTime end)
         {
-            var d1 = DateTime.Parse(start.ToString("yyyy-MM-dd") + " 00:00:00.000000");
-            var d2 = DateTime.Parse(end.ToString("yyyy-MM-dd") + " 23:59:59.999999");
+            var d1 = DateTime.Parse(start.ToLocalTime().ToString("yyyy-MM-dd") + " 00:00:00.000000");
+            var d2 = DateTime.Parse(end.ToLocalTime().ToString("yyyy-MM-dd") + " 23:59:59.999999");
             var filter = "(TimeStart >= '" + d1.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "' AND TimeStart <= '" + d2.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff") + "')";
             return filter;
         }
 
         private string GetParameterizedDateRangeFilter(ref SQLiteCommand dbCommand, DateTime start, DateTime end)
         {
-            var d1 = DateTime.Parse(start.ToString("yyyy-MM-dd") + " 00:00:00.000000");
-            var d2 = DateTime.Parse(end.ToString("yyyy-MM-dd") + " 23:59:59.999999");
+            var d1 = DateTime.Parse(start.ToLocalTime().ToString("yyyy-MM-dd") + " 00:00:00.000000");
+            var d2 = DateTime.Parse(end.ToLocalTime().ToString("yyyy-MM-dd") + " 23:59:59.999999");
             dbCommand.Parameters.Add(new SQLiteParameter("@timeStartMin", d1.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff")));
             dbCommand.Parameters.Add(new SQLiteParameter("@timeStartMax", d2.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.ffffff")));
             return "(TimeStart >= @timeStartMin  AND TimeStart <= @timeStartMax)";
@@ -584,9 +584,6 @@ namespace HomeGenie.Service.Logging
                         if (values.Count > 0)
                         {
                             double average = (values.Sum(d => d.Value) / values.Count);
-                            // reset statistics history
-                            parameter.Statistics.LastProcessedTimestap = end;
-                            parameter.Statistics.Values.Clear();
                             //
                             //TODO: improve db file age/size check for archiving old data
                             //
@@ -622,8 +619,15 @@ namespace HomeGenie.Service.Logging
                                     "Exception.StackTrace",
                                     ex.StackTrace
                                 );
+                                // try close/reopen (perhaps some locking issue)
+                                CloseStatisticsDatabase();
+                                OpenStatisticsDatabase();
                             }
-
+                            //
+                            // reset statistics history sample
+                            //
+                            parameter.Statistics.LastProcessedTimestap = end;
+                            parameter.Statistics.Values.Clear();
                         }
                     }
                 }
