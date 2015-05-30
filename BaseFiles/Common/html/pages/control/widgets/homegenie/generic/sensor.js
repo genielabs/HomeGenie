@@ -23,14 +23,32 @@
                 HG.WebApp.Control.EditModule(module);
             });
         }
+
+        widget.find('[data-ui-field=sensoronoff]').on('click', function () {
+           var prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
+           if(prop.Value == '255')
+           {
+           	  HG.WebApp.Utility.SetModulePropertyByName(module, "Sensor.Alarm", "0");
+              prop = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Alarm");
+	          prop.NeedsUpdate = 'true';
+              HG.WebApp.GroupModules.UpdateModule(module, function () {
+                  HG.WebApp.GroupModules.ModuleUpdatedCallback();
+              });
+           	  var sensorstatus = widget.find('[data-ui-field=sensoronoff]').html();
+              sensorstatus = sensorstatus.replace('<span class="hg-indicator-alarm" style="padding-left:0;width:20px;">&nbsp;</span>','') ;
+              widget.find('[data-ui-field=sensoronoff]').html(sensorstatus);
+           }
+        });
+
         widget.find('[data-ui-field=name]').html(module.Name);
         //
+        var sensoricon = '';
         var sensorimgdata = '';
         var sensortxtdata = '';
         var infotext = '';
         var lastupdatetime = 0;
-        if (module.Properties != null) {
-            for (p = 0; p < module.Properties.length; p++) {
+        if(module.Properties != null) {
+           for (p = 0; p < module.Properties.length; p++) {
                 if (module.Properties[p].Name.indexOf('Sensor.') == 0 || module.Properties[p].Name == 'Meter.Watts' || module.Properties[p].Name == 'Status.Level' || module.Properties[p].Name == 'Status.Battery') {
                     var value = Math.round(module.Properties[p].Value.replace(',', '.') * 10) / 10;
                     if (isNaN(value)) value = module.Properties[p].Value;
@@ -83,7 +101,7 @@
                     }
                     else if (module.Properties[p].Name == 'Sensor.Luminance') {
                         imagesrc = 'hg-indicator-luminance';
-                        displayvalue = value + '%';
+                        displayvalue = value + '&nbsp;lx';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Humidity') {
                         imagesrc = 'hg-indicator-humidity';
@@ -93,23 +111,65 @@
                         imagesrc = 'hg-indicator-energy';
                     }
                     else if (module.Properties[p].Name == 'Sensor.DoorWindow') {
-                        imagesrc = 'hg-indicator-door';
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-door';
+                       	displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Alarm') {
-                        imagesrc = 'hg-indicator-alarm';
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-alarm';
+                       	displayvalue = '';
+                    }
+                    else if (module.Properties[p].Name == 'Sensor.Smoke') {
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-smoke';
+                       	displayvalue = '';
+                    }
+                    else if (module.Properties[p].Name == 'Sensor.Flood') {
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-flood';
+                       	displayvalue = '';
+                    }
+                    else if (module.Properties[p].Name == 'Sensor.Heat') {
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-heat';
+                       	displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Sensor.Generic') {
-                        imagesrc = 'hg-indicator-generic';
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-generic';
+                       	displayvalue = '';
                     }
                     else if (module.Properties[p].Name == 'Status.Level') {
-                        imagesrc = 'hg-indicator-level';
+                    	if( value != '0' )
+                           imagesrc = 'hg-indicator-level';
+                        else
+                       	   displayvalue = '';
                     }
                     if (imagesrc != '') {
                         displayname = '<span class="' + imagesrc + '" style="padding-left:0;width:20px;">&nbsp;</span>';
-                        sensorimgdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;text-align:bottom;line-height:28px">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;font-size:18pt">' + displayvalue + '</div></div>';
+                    	if( displayvalue != '' )
+                    	{
+				          var template = container.find('[data-ui-field=iconvaluetemplate]').html();		
+	 			          template = template.replace('%icon%', displayname);
+				          template = template.replace('%value%', displayvalue);
+				          sensorimgdata += template;
+					    }
+	                    else
+                    	{
+				          var template = container.find('[data-ui-field=icontemplate]').html();
+				          template = template.replace('%icon%', displayname);
+				          sensoricon += template;
+					    }
                     }
                     else {
-                        sensortxtdata += '<div style="margin-left:10px;height:28px;float:left"><div align="right" style="padding-right:4px;width:60px;float:left;font-size:11pt;font-weight:bold;text-align:bottom;line-height:28px;overflow:hidden;text-overflow:ellipsis;">' + displayname + '</div><div align="left" style="padding-left:4px;float:left;text-align:bottom;line-height:28px;font-size:18pt">' + displayvalue + '</div></div>';
+                    	if( displayvalue != '' )
+                    	{
+				          var template = container.find('[data-ui-field=valuetemplate]').html();
+				          template = template.replace('%label%', displayname);
+				          template = template.replace('%value%', displayvalue);
+				          sensortxtdata += template;
+					    }
                     }
                 }
             }
@@ -120,17 +180,18 @@
             this.IconImage = widgeticon.Value;
         }
         //
-        widget.find('[data-ui-field=description]').html((module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address);
+        widget.find('[data-ui-field=description]').html((module.Domain.substring(module.Domain.lastIndexOf('.') + 1))+' '+module.Address);
         //
+        if (sensoricon != '') sensoricon = sensoricon + '<br clear="all" />';
         if (sensorimgdata != '') sensorimgdata = sensorimgdata + '<br clear="all" />';
         if (sensortxtdata != '') sensortxtdata = sensortxtdata + '<br clear="all" />';
-        widget.find('[data-ui-field=status]').html(infotext);
-        widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
-        widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
         if (lastupdatetime > 0) {
             this.UpdateTime = HG.WebApp.Utility.FormatDate(lastupdatetime) + ' ' + HG.WebApp.Utility.FormatDateTime(lastupdatetime);
-            widget.find('[data-ui-field=updatetime]').html(this.UpdateTime);
-        }
-    }
+        widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle;font-size:13px">' + this.UpdateTime + '</span>&nbsp;&nbsp;' + infotext);
+        widget.find('[data-ui-field=sensoronoff]').html(sensoricon);
+        widget.find('[data-ui-field=sensorstatus]').html(sensorimgdata + sensortxtdata);
+        widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
+      }
+   }
 
 }]

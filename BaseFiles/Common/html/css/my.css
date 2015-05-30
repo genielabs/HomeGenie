@@ -300,6 +300,36 @@ input[type=number] {
     font-weight: bold;
 }
 
+.hg-indicator-smoke {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/smoke-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-flood {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/flood-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hg-indicator-heat {
+    display: inline-block;
+    line-height: 30px;
+    padding-left: 25px;
+    background: url("../images/indicators/heat-black.png") no-repeat scroll 0 6px transparent;
+    vertical-align: middle;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
 .hg-indicator-level {
     display: inline-block;
     line-height: 30px;
@@ -354,7 +384,7 @@ input[type=number] {
     display: inline-block;
     line-height: 30px;
     padding-left: 25px;
-    background: url("../images/indicators/plug-door.png") no-repeat scroll 0 6px transparent;
+    background: url("../images/indicators/door-black.png") no-repeat scroll 0 6px transparent;
     vertical-align: middle;
     font-size: 14pt;
     font-weight: bold;
@@ -437,6 +467,18 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity, div.ui-bar-i
 
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-inherit span.hg-indicator-luminance {
     background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-smoke, div.ui-bar-inherit span.hg-indicator-smoke {
+    background: url("../images/indicators/smoke.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flood, div.ui-bar-inherit span.hg-indicator-flood {
+    background: url("../images/indicators/flood.png") no-repeat scroll 0 6px transparent;
+}
+
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-heat, div.ui-bar-inherit span.hg-indicator-heat {
+    background: url("../images/indicators/heat.png") no-repeat scroll 0 6px transparent;
 }
 
 div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm {
