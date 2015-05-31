@@ -3,6 +3,9 @@
 HG.WebApp.Maintenance = HG.WebApp.Maintenance || {};
 
 HG.WebApp.Maintenance.InitializePage = function () {
+    $('#page_configure_maintenance').on('pagebeforeshow', function (e) {
+        $('#restore_configuration_uploadfile').val('')
+    });
     $('#page_configure_maintenance').on('pageinit', function (e) {
 
         $('#systemsettings_httpport_change').bind('click', function () {
@@ -209,7 +212,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
         });
         $('#restore_configuration_uploadframe').bind('load', function(evt) {
-            if ($('#restore_configuration_uploadframe').attr('src').indexOf('/dummy') >= 0 || $('#restore_configuration_uploadframe').attr('src') == '') 
+            if ($('#restore_configuration_uploadfile').val() == "")
                 return;
             HG.Configure.System.ServiceCall("System.ConfigurationRestoreS1", function (data) {
                 $.mobile.loading('hide');

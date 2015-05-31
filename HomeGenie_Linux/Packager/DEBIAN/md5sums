@@ -1,9 +1,9 @@
 0960c1e2ef1697bb1019f97a5f87222f  usr/local/bin/homegenie/Raspberry.IO.dll
-143b1a715e779dda5d462447a8cc960a  usr/local/bin/homegenie/W800RF32.dll.mdb
+2e84e2deb17a7f7cf9ef794c6b597299  usr/local/bin/homegenie/W800RF32.dll.mdb
 878c8411c3de1822fe678579481e5c75  usr/local/bin/homegenie/Raspberry.System.dll
 a2cfe6b2fa0fe02e41ed5aa6a592376e  usr/local/bin/homegenie/UnitsNet.dll
 cc27215f3e44078c573b0018b7f6d4c5  usr/local/bin/homegenie/homegenie_stats.db
-3b4f1f14e385d719b6c993fd94e5d35a  usr/local/bin/homegenie/MIG.dll
+d2949eb4721f34ab65cc91dd60fc8de6  usr/local/bin/homegenie/MIG.dll
 2eba6229dc187425fb8a42b116bbff49  usr/local/bin/homegenie/startup_debug.sh
 fd387d7e07d27394fb2fa2d323ff8c5c  usr/local/bin/homegenie/CREDITS.TXT
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
@@ -912,7 +912,7 @@ bf43ee979d2c469d71ecd8d98b34f37d  usr/local/bin/homegenie/html/pages/configure/i
 604e0d8e4a680d5b77c44b3bdcacefb6  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/x10.html
 b1efdb22d49964d3cad972a793b41950  usr/local/bin/homegenie/html/pages/configure/interfaces/configlet/upnp.html
 15cb79bc139110589ac00a7b4484c6c0  usr/local/bin/homegenie/html/pages/configure/maintenance/main.html
-fbb167bc8f9f0f953eae5e24912cfbc5  usr/local/bin/homegenie/html/pages/configure/maintenance/_maintenance.js
+6b90eacc121721bbb41fb3be8b9787aa  usr/local/bin/homegenie/html/pages/configure/maintenance/_maintenance.js
 a4f76db729ceb55212499a17cc9127cf  usr/local/bin/homegenie/html/pages/configure/main.html
 7e8387a316a135ade4c136fc6dea1c74  usr/local/bin/homegenie/html/pages/configure/groups/_groupslist.js
 894b5ffb1fb9eee25d0789b88021c46b  usr/local/bin/homegenie/html/pages/configure/groups/_groupmodules.js
@@ -1652,10 +1652,10 @@ f90064a17adea8a4f632b34229b34ab2  usr/local/bin/homegenie/NetClientLib.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml
 77cf161626c3d2e4fccecb10e6844fd3  usr/local/bin/homegenie/groups.xml
 61b0c6d8eb2c756355d52df2ef6170c6  usr/local/bin/homegenie/Microsoft.Scripting.dll
-c77f50c889013f9427feea04bf4ca3be  usr/local/bin/homegenie/MIG.dll.mdb
+eb9fd157b6447fe9841bb11d6f7a7305  usr/local/bin/homegenie/MIG.dll.mdb
 75f34b98f423f48a1b819cf4485ff03e  usr/local/bin/homegenie/homegenie_factory_config.zip
 a10fc9aa97ec8123eb53d6cce5205aad  usr/local/bin/homegenie/SoapBox.FluentDwelling.dll
-3520dc84188d45fb0bb9972379829a35  usr/local/bin/homegenie/W800RF32.dll
+206404ef0afebf07d1ba7f5b176e0607  usr/local/bin/homegenie/W800RF32.dll
 43eec548526f3bb1562e3624829fc35a  usr/local/bin/homegenie/LibUsbDotNet.dll
 c028fc32931063555397cab75db9ea8e  usr/local/bin/homegenie/ZWaveLib.dll
 3d0d7d82375a1801ab49eef9efa79cfe  usr/local/bin/homegenie/lircremotes.xml
