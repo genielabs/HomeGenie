@@ -12,7 +12,7 @@
     "control_groups_and_modules": 
         "Contrôle des<br>Groupes et Modules",
     "bottombar_button_home": 
-        "Page d'accueil",
+        "Accueil",
     "configure_program_bbaractions": 
         "Actions",
     "control_macrorecord_discard": 
@@ -222,7 +222,7 @@
     "configure_automationgroup_bottombar_group_add": 
         "Ajouter un Groupe",
     "configure_interfaces_heading": 
-        "Paramètres",
+        "Interfaces",
     "configure_interfaces_optdisable": 
         "Disable",
     "configure_interfaces_optenable": 
@@ -772,27 +772,27 @@
     "common_status_notset":
         "Non défini",
     "common_voice_control":
-        "Voice Control",
+        "Commande vocale",
 "##":
 "## SIDE MENU LOCALES",
 "##":
 "##",
     "home_menu_home":
-        "Home",
+        "Accueil",
     "home_menu_statistics":
-        "Statistics",
+        "Statistiques",
     "home_menu_automation":
-        "Automation",
+        "Programmation",
     "home_menu_programeditor":
-        "Program Editor",
+        "Programmes",
     "home_menu_widgeteditor":
-        "Widget Editor",
+        "Widgets",
     "home_menu_scheduler":
-        "Scheduler",
+        "Expressions",
     "home_menu_system":
-        "System",
+        "Système",
     "home_menu_settings":
-        "Settings",
+        "Interfaces",
     "home_menu_maintenance":
         "Maintenance",
     "home_menu_about": 
@@ -800,11 +800,11 @@
     "home_menu_about_version":
         "Version",
     "home_menu_about_userguide":
-        "Users Guide",
+        "Guide Utilisateurs",
     "home_menu_about_programming":
-        "Programming Guide",
+        "Guide de programmation",
     "home_menu_about_forum":
-        "Users Forum",
+        "Forum utilisateurs",
     "home_menu_about_support":
-        "Keep HomeGenie Up!"
+        "Garder HomeGenie au Top !"
 }

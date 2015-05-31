@@ -278,47 +278,6 @@
         {
           "@number": "2",
           "@type": "range",
-          "@size": "4",
-          "@default": "00005460",
-          "name": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "WAKE UP INTERVAL"
-            }
-          },
-          "description": {
-            "lang": {
-              "@xml:lang": "en",
-              "#text": "Wake up interval is specified in seconds. At each wake up Smoke Sensor\r\ncommunicates with the main controller, updates parameters settings and the\r\nsoftware if necessary. The Smoke Sensor will wake up at defined time interval and\r\nwill ALWAYS try to communicate with the main controller. After each failed\r\ncommunication attempt, the sensor will retry to establish connection with the main\r\ncontroller after 60 seconds. After 3 failed attempts, the lack of the Z-Wave range\r\nalarm will be triggered. Longer time interval means less frequent communication\r\nand thus a longer battery life. The Z-Wave range alarm will be cancelled\r\nautomatically, after first successful connection. Change of wake up interval value\r\ndoes not affect alarms or trouble signals operation."
-            }
-          },
-          "value": [
-            {
-              "@from": "00000000",
-              "@to": "00000000",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Setting to 0 disables sending Wake Up Notification frame. Wake\r\nup may be still performed manually by a single B-button click or by\r\nsending Node Info frame (triple click the B-button)."
-                }
-              }
-            },
-            {
-              "@from": "00001068",
-              "@to": "0000ffff",
-              "@unit": "sec",
-              "description": {
-                "lang": {
-                  "@xml:lang": "en",
-                  "#text": "Define the time interval for wake up notification."
-                }
-              }
-            }
-          ]
-        },
-        {
-          "@number": "3",
-          "@type": "range",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -345,7 +304,7 @@
           }
         },
         {
-          "@number": "4",
+          "@number": "3",
           "@type": "range",
           "@size": "1",
           "@default": "00",
@@ -373,7 +332,7 @@
           }
         },
         {
-          "@number": "5",
+          "@number": "4",
           "@type": "range",
           "@size": "1",
           "@default": "00",
