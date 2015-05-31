@@ -119,8 +119,9 @@ HG.WebApp.InitializePage = function ()
 
         var userLang = HG.WebApp.Locales.GetUserLanguage();
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
-            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json');
-            $('#homegenie_overlay').fadeOut(200);
+            HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
+                $('#homegenie_overlay').fadeOut(200);
+            });
         });
         HG.VoiceControl.Initialize();
         //

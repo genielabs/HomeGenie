@@ -7,8 +7,6 @@
          "Analizza",
     "home_menu_configure": 
          "Configura",
-    "home_menu_about": 
-         "Informazioni",
     "homegenie_about_title": 
          "Informazioni",
     "control_groups_and_modules": 
@@ -226,9 +224,9 @@
     "configure_interfaces_heading": 
          "Impostazioni",
     "configure_interfaces_optdisable": 
-         "Disattiva",
+         "Disattivo",
     "configure_interfaces_optenable": 
-         "Attiva",
+         "Attivo",
     "configure_maintenance_heading": 
          "Manutenzione",
     "configure_system_theme": 
@@ -772,5 +770,41 @@
     "common_command_save":
         "Salva",
     "common_status_notset":
-        "Non impostato"
+        "Non impostato",
+    "common_voice_control":
+        "Controllo vocale",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_statistics":
+        "Statistiche",
+    "home_menu_automation":
+        "Automazione",
+    "home_menu_programeditor":
+        "Editor Programmi",
+    "home_menu_widgeteditor":
+        "Editor Widget",
+    "home_menu_scheduler":
+        "Pianificazione",
+    "home_menu_system":
+        "Sistema",
+    "home_menu_settings":
+        "Impostazioni",
+    "home_menu_maintenance":
+        "Manutenzione",
+    "home_menu_about": 
+         "Informazioni",
+    "home_menu_about_version":
+        "Versione",
+    "home_menu_about_userguide":
+        "Guida utente",
+    "home_menu_about_programming":
+        "Guida alla programmazione",
+    "home_menu_about_forum":
+        "Forum utenti",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
 }

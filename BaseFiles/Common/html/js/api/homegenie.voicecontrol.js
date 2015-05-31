@@ -5,19 +5,27 @@ HG.VoiceControl.LingoData = [];
 HG.VoiceControl.Initialize = function() {
     var userLang = HG.WebApp.Locales.GetUserLanguage();
     // enable/disable speech input
+        // lookup for a localized version, if any
+    HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
+        if (!success)
+        {
+            // fallback to english lingo file
+            HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ 
+                HG.VoiceControl.Setup();
+            });
+        } else {
+            HG.VoiceControl.Setup();
+        }
+    });
+};
+
+HG.VoiceControl.Setup = function () {
     if (!('webkitSpeechRecognition' in window)) {
         //no speech support
-        $('#speechinput').hide();
-        $('#control_bottombar_voice_button').addClass('ui-disabled');
+        //$('#speechinput').hide();
+        //$('#control_bottombar_voice_button').addClass('ui-disabled');
+        $('#voicerecognition_button').addClass('ui-disabled');
     } else {
-        // lookup for a localized version, if any
-        HG.VoiceControl.Localize('./locales/' + userLang.toLowerCase().substring(0, 2) + '.lingo.json', function(success) {
-            if (!success)
-            {
-                // fallback to english lingo file
-                HG.VoiceControl.Localize('./locales/en.lingo.json', function(res){ });
-            }
-        });
         recognition = new webkitSpeechRecognition();
         recognition.continuous = false;
         recognition.interimResults = false;

@@ -7,8 +7,6 @@
         "Auswertung",
     "home_menu_configure": 
         "Konfiguration",
-    "home_menu_about": 
-        "Über uns",
     "homegenie_about_title": 
         "Über uns",
     "control_groups_and_modules": 
@@ -720,7 +718,11 @@
     "cronwizard_dayowselect_everydayow":
         "jeden Tag der Woche",        
     "cronwizard_dayowselect_eachselected":
-        "jeweils ausgewählt Tag in der Woche",        
+        "jeweils ausgewählt Tag in der Woche",
+"##":
+"## COMMON LOCALES",
+"##":
+"##",
     "common_month_jan":
         "Jan",        
     "common_month_feb":
@@ -768,5 +770,41 @@
     "common_command_save":
         "Speichern",
     "common_status_notset":
-        "Nicht gesetzt"  
+        "Nicht gesetzt",
+    "common_voice_control":
+        "Voice Control",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_statistics":
+        "Statistics",
+    "home_menu_automation":
+        "Automation",
+    "home_menu_programeditor":
+        "Program Editor",
+    "home_menu_widgeteditor":
+        "Widget Editor",
+    "home_menu_scheduler":
+        "Scheduler",
+    "home_menu_system":
+        "System",
+    "home_menu_settings":
+        "Settings",
+    "home_menu_maintenance":
+        "Maintenance",
+    "home_menu_about": 
+        "Über uns",
+    "home_menu_about_version":
+        "Version",
+    "home_menu_about_userguide":
+        "Users Guide",
+    "home_menu_about_programming":
+        "Programming Guide",
+    "home_menu_about_forum":
+        "Users Forum",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
 }

@@ -32,7 +32,7 @@
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a id="control_bottombar_voice_button" data-locale-id="control_bottombar_voicecontrol" class="ui-btn ui-icon-carat-u ui-btn-icon-left" data-transition="none" data-direction="reverse" href="javascript:$(this).blur();void(0);">
+                    <a id="control_bottombar_voice_button" data-locale-id="common_voice_control" class="ui-btn ui-icon-carat-u ui-btn-icon-left" data-transition="none" data-direction="reverse" href="javascript:$(this).blur();void(0);">
                         Voice Control
                     </a>
                 </li>
@@ -52,7 +52,7 @@
         <div id="speechinput" class="ui-bar-inherit" style="display:none;position:absolute;bottom:0;margin-bottom:34px;left:0;right:0;padding-left:5px;padding-right:5px">
             <table width="100%">
                 <tr>
-                    <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." onchange="HG.VoiceControl.InterpretInput(this.value)" /></td>
+                    <td><input id="voicerecognition_text" data-locale-id="home_voicerecognition_text_placeholder" placeholder="Click the button for voice control or type a sentence..." /></td>
                     <td width="1%"><a id="voicerecognition_button" data-locale-id="home_voicerecognition_voice" class="ui-btn ui-btn-icon-left ui-icon-audio" href="javascript:recognition.start()">Voice</a></td>
                 </tr>
             </table>

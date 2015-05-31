@@ -7,8 +7,6 @@
         "Analyzeren",
     "home_menu_configure": 
         "Configureren",
-    "home_menu_about": 
-        "Over",
     "homegenie_about_title": 
         "About",
     "control_groups_and_modules": 
@@ -768,5 +766,41 @@
     "common_command_save":
         "Save",
     "common_status_notset":
-        "Not set"  
+        "Not set",
+    "common_voice_control":
+        "Voice Control",
+"##":
+"## SIDE MENU LOCALES",
+"##":
+"##",
+    "home_menu_home":
+        "Home",
+    "home_menu_statistics":
+        "Statistics",
+    "home_menu_automation":
+        "Automation",
+    "home_menu_programeditor":
+        "Program Editor",
+    "home_menu_widgeteditor":
+        "Widget Editor",
+    "home_menu_scheduler":
+        "Scheduler",
+    "home_menu_system":
+        "System",
+    "home_menu_settings":
+        "Settings",
+    "home_menu_maintenance":
+        "Maintenance",
+    "home_menu_about": 
+        "Over",
+    "home_menu_about_version":
+        "Version",
+    "home_menu_about_userguide":
+        "Users Guide",
+    "home_menu_about_programming":
+        "Programming Guide",
+    "home_menu_about_forum":
+        "Users Forum",
+    "home_menu_about_support":
+        "Keep HomeGenie Up!"
 }

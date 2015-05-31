@@ -533,6 +533,9 @@ div.ui-slider-switch.ui-mini {
     opacity: 0.9;
 }
 /*.ui-menu-item { color: red; text-shadow: black; }*/
+.ui-slider {
+    min-width:120px;
+}
 
 
 .freewall {

@@ -90,8 +90,8 @@ HG.WebApp.SystemSettings.ListInterfaces = function() {
         $.each(ifaceList, function(k,v){
             var domain = v.Domain;
             var name = domain.substring(domain.lastIndexOf('.')+1);
-            var item = $('<div data-role="collapsible" data-inset="true" />');
-            var itemHeader = $('<h3><span data-ui-field="title">'+name+'</span><img src="images/interfaces/'+name.toLowerCase()+'.png" style="position:absolute;right:8px;top:12px"></h3>');
+            var item = $('<div data-role="collapsible" data-inset="true" class="ui-mini" />');
+            var itemHeader = $('<h3><span data-ui-field="title">'+name+'</span><img src="images/interfaces/'+name.toLowerCase()+'.png" style="position:absolute;right:8px;top:6px"></h3>');
             item.append(itemHeader);
             var configlet = $('<p />');
             item.append(configlet);

@@ -68,6 +68,14 @@ HG.WebApp.Control.InitializePage = function () {
             $(this).removeClass('ui-icon-carat-d');
             $(this).addClass('ui-icon-carat-u');
             $('#speechinput').hide(50);
+            $('#speechinput').find('input').blur();
+        }
+    });
+    $('#voicerecognition_text').on('change', function() {
+        HG.VoiceControl.InterpretInput($(this).val());
+    }).on('keyup', function(event) {
+        if(event.keyCode == 13) {
+            HG.VoiceControl.InterpretInput($(this).val());
         }
     });
 };
