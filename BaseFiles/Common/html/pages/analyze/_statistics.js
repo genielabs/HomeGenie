@@ -46,6 +46,7 @@ HG.WebApp.Statistics.InitializePage = function () {
     $('#page_analyze_costperunit').on('change', function () {
         var cost = $('#page_analyze_costperunit').val() * $('#page_analyze_totalunits').val();
         $('#page_analyze_totalcost').val(cost.toFixed(2));
+        dataStore.set('UI.Statistics.CostPerUnit', $('#page_analyze_costperunit').val());
     });
     //
     $('#analyze_stats_options').on('popupbeforeposition', function (event) {
@@ -162,6 +163,9 @@ HG.WebApp.Statistics.SetAutoRefresh = function (autorefresh) {
 };
 
 HG.WebApp.Statistics.InitConfiguration = function () {
+    // cost per unit default value
+    $('#page_analyze_costperunit').val(dataStore.get('UI.Statistics.CostPerUnit')?dataStore.get('UI.Statistics.CostPerUnit'):0.00022);
+    // read stats settings
     HG.Statistics.ServiceCall('Configuration.Get', '', '', function (configs) {
         var setting = eval(configs)[0];
         var sec = (setting.StatisticsUIRefreshSeconds * 1);

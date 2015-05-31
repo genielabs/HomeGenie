@@ -3,8 +3,9 @@
   <Name>HomeGenie</Name>
   <Version>1.00 beta r491</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Restyled UI navigation. Added side menu (opens by clicking the upper left HomeGenie button)
-  - Improved Switch and Shutter widgets (PR #172 #173)
-  - Fixed Statistics Engine bug with parsing/passing wrong timerange values</ReleaseNote>
-  <ReleaseDate>2015-05-30T10:19:39.0000Z</ReleaseDate>
+  <ReleaseNote>   - Fixed issue #134 (cost per unit not saved)
+  - Restyled UI navigation. Added side menu (opens by clicking the upper left HomeGenie button)
+  - Improved Sensor, Switch and Shutter widgets (PR #172 #173 #174)
+  - Fixed Statistics Engine bug with parsing/passing wrong timerange values (resulting in totally wrong graphics)</ReleaseNote>
+  <ReleaseDate>2015-05-31T12:31:09.0000Z</ReleaseDate>
 </ReleaseInfo>
