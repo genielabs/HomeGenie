@@ -40,5 +40,24 @@
     "timetable_calendar_special" : "Special",
     
     "timetable_popup_close" : "Close",
-    "timetable_popup_save" : "Save"
+    "timetable_popup_save" : "Save",
+
+    "control_module_off" : "Off",
+    "control_module_on" : "On",
+    "control_module_close" : "Close",
+    "control_module_open" : "Open",
+    "control_module_calibrate" : "Calibrate",
+
+    "therm_setpoint" : "Set Point",
+    "therm_cool" : "Cool",
+    "therm_heat" : "Heat",
+
+    "therm_fanmode" : "Fan Mode",
+    "fan_on" : "On",
+    "fan-auto" : "Auto",
+    "fan_circulate" : "Circulate",
+
+    "therm_setmode" : "Operating Mode",
+    "therm_off" : "Off",
+    "therm_auto" : "Auto"
 }

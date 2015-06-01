@@ -46,5 +46,18 @@
 	"control_module_on" : "On",
 	"control_module_close" : "Fermé",
 	"control_module_open" : "Ouvert",
-	"control_module_calibrate" : "Etalonnage"
+	"control_module_calibrate" : "Etalonnage",
+
+    "therm_setpoint" : "Consigne",
+    "therm_cool" : "Froid",
+    "therm_heat" : "Chaud",
+
+    "therm_fanmode" : "Ventilation",
+    "fan_on" : "Arrêt",
+    "fan-auto" : "Auto",
+    "fan_circulate" : "Recyclage",
+
+    "therm_setmode" : "Climatisation",
+    "therm_off" : "Arrêt",
+    "therm_auto" : "Auto"
 }
