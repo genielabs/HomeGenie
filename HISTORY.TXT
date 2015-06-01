@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+01/06/2015 1.00 beta rev 491-p1
+    - Fix to minor issues of the new UI
+
 31/05/2015 1.00 beta rev 491-git1
     - Fixed issue #134 (cost per unit not saved)
     - Improved Sensor widget (PR #174)

@@ -720,7 +720,8 @@ HG.WebApp.Locales.Localize = function(container, langurl, callback)
                 });
                 if (typeof callback == 'function') callback(true);
             },
-            fail: function() {
+            error: function(xhr, status, error) {
+                console.log('LOCALIZATION ERROR: '+xhr.status+':'+xhr.statusText);
                 if (typeof callback == 'function') callback(false);
             }
         });

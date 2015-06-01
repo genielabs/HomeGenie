@@ -18,6 +18,10 @@ HG.Statistics.ServiceCall = function (fn, opt1, opt2, callback) {
                 value = value[0].ResponseValue;
             }
             callback(value);
+        },
+        error: function(xhr, status, error) {
+            console.log('HG.Statistics.ServiceCall ERROR: '+xhr.status+':'+xhr.statusText);
+            callback();
         }
     });
 };
