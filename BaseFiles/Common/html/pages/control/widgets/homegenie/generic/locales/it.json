@@ -40,24 +40,24 @@
     "timetable_calendar_special" : "Speciale",
     
     "timetable_popup_close" : "Chiudi",
-    "timetable_popup_save" : "Salve",
+    "timetable_popup_save" : "Salva",
         
     "control_module_off" : "Off",
     "control_module_on" : "On",
-    "control_module_close" : "Close",
-    "control_module_open" : "Open",
-    "control_module_calibrate" : "Calibrate",
+    "control_module_close" : "Chiudi",
+    "control_module_open" : "Apri",
+    "control_module_calibrate" : "Calibra",
 
     "therm_setpoint" : "Set Point",
-    "therm_cool" : "Cool",
-    "therm_heat" : "Heat",
+    "therm_cool" : "Fresco",
+    "therm_heat" : "Caldo",
 
-    "therm_fanmode" : "Fan Mode",
+    "therm_fanmode" : "Ventilatore",
     "fan_on" : "On",
     "fan-auto" : "Auto",
-    "fan_circulate" : "Circulate",
+    "fan_circulate" : "Fai circolare",
 
-    "therm_setmode" : "Operating Mode",
+    "therm_setmode" : "Modalità",
     "therm_off" : "Off",
     "therm_auto" : "Auto"
 }

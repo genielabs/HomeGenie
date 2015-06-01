@@ -80,70 +80,59 @@ HG.VoiceControl.Localize = function (langurl, callback) {
 
 HG.VoiceControl.InterpretInput = function (sentence) {
     HG.VoiceControl.CurrentInput = sentence;
-    //
-    var continueparsing = true;
-    while (continueparsing) {
-        continueparsing = false;
-
-        var command = HG.VoiceControl.SearchCommandMatch(false);
-        var nextcommand = HG.VoiceControl.SearchCommandMatch(true);
-        //
-        var type = HG.VoiceControl.SearchTypeMatch(false);
-        //
-        var group = HG.VoiceControl.SearchGroupMatch(nextcommand.StartIndex);
-        if (group != -1) {
-            group = HG.WebApp.Data.Groups[group].Name;
-        }
-        else {
-            group = '';
-        }
-        //
-        if (command != '' && type != '') {
-
-            var types = type.split(',');
-            var groupmodules = {};
-            if (group != '') {
-                groupmodules = HG.Configure.Groups.GetGroupModules(group).Modules;
-            }
-            else {
-                groupmodules = HG.WebApp.Data.Modules;
-            }
-            //
-            for (m = 0; m < groupmodules.length; m++) {
-                var module = groupmodules[m];
-                for (t = 0; t < types.length; t++) {
-
-                    if (typeof module.DeviceType != 'undefined' && types[t].toLowerCase() == module.DeviceType.toLowerCase()) {
-                        HG.Control.Modules.ServiceCall(command, module.Domain, module.Address, '');
-                        continueparsing = true;
-                        //
-                        var date = new Date();
-                        var curDate = null;
-                        do { curDate = new Date(); }
-                        while (curDate - date < 300);
-                    }
-
-                }
-            }
-
-        }
-        else {
-            var module = HG.VoiceControl.SearchSubjectMatch(group, nextcommand.StartIndex);
-            //
-            if (command != '') {
-                //alert(module.Address + ' ' + module.Domain);
-                HG.Control.Modules.ServiceCall(command, module.Domain, module.Address, '');
-                continueparsing = true;
-            }
-            //alert(group + ' ' + command + ' ' + module.Name);
-        }
-        //
-        var date = new Date();
-        var curDate = null;
-        do { curDate = new Date(); }
-        while (curDate - date < 300);
-    }
+    HG.VoiceControl.ParseNext();
 };
+
+HG.VoiceControl.ParseNext = function() {
+
+    var command = HG.VoiceControl.SearchCommandMatch(false);
+    var nextcommand = HG.VoiceControl.SearchCommandMatch(true);
+    //
+    var type = HG.VoiceControl.SearchTypeMatch(false);
+    //
+    var group = HG.VoiceControl.SearchGroupMatch(nextcommand.StartIndex);
+    if (group != -1) {
+        group = HG.WebApp.Data.Groups[group].Name;
+    }
+    else {
+        group = '';
+    }
+    //
+    if (command != '' && type != '') {
+
+        var types = type.split(',');
+        var groupmodules = {};
+        if (group != '') {
+            groupmodules = HG.Configure.Groups.GetGroupModules(group).Modules;
+        }
+        else {
+            groupmodules = HG.WebApp.Data.Modules;
+        }
+        //
+        for (m = 0; m < groupmodules.length; m++) {
+            var module = groupmodules[m];
+            for (t = 0; t < types.length; t++) {
+
+                if (typeof module.DeviceType != 'undefined' && types[t].toLowerCase() == module.DeviceType.toLowerCase()) {
+                    HG.Control.Modules.ServiceCall(command, module.Domain, module.Address, '');
+                    setTimeout(HG.VoiceControl.ParseNext, 50);
+                }
+
+            }
+        }
+
+    }
+    else {
+        var module = HG.VoiceControl.SearchSubjectMatch(group, nextcommand.StartIndex);
+        //
+        if (command != '') {
+            //console.log(module.Address + ' ' + module.Domain);
+            HG.Control.Modules.ServiceCall(command, module.Domain, module.Address, '');
+            setTimeout(HG.VoiceControl.ParseNext, 50);
+        }
+        //console.log(group + ' ' + command + ' ' + module.Name);
+    }
+}
 
 HG.VoiceControl.SearchTypeMatch = function (keepsentence) {
     var type = '';
