@@ -76,7 +76,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
                 modulescount++;
             }
         }
-        $('#configure_automationgroupslist').append('<li' + itemVisibility + ' data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs" data-transition="slide">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        $('#configure_automationgroupslist').append('<li' + itemVisibility + ' data-group-name="' + groupName + '" data-group-index="' + i + '"><a href="#page_automation_programs">' + groupName + '</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
     }
     //
     // programs with no group are shown in "Ungrouped" special group
@@ -87,7 +87,7 @@ HG.WebApp.AutomationGroupsList.GetGroupsListViewItems = function () {
         }
     }
     if (modulescount > 0) {
-        $('#configure_automationgroupslist').append('<li data-group-name=""><a href="#page_automation_programs" data-transition="slide">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
+        $('#configure_automationgroupslist').append('<li data-group-name=""><a href="#page_automation_programs">Ungrouped</a><span class="ui-li-count">' + (modulescount) + '</span></li>');
     }
     //
     $('#configure_automationgroupslist').listview();

@@ -253,14 +253,30 @@ HG.WebApp.InitializePage = function ()
     $('#actionconfirm_popup').enhanceWithin().popup();
     //
     // Side Panel
-    $('body>[data-role="panel"]' ).panel()
+    var menuPanel = $('body>[data-role="panel"]');
+    menuPanel.panel()
         .on('panelbeforeopen', function() {
             $('#homegenie_overlay').fadeIn(100);
-            })
+        })
         .on('panelbeforeclose', function() {
-            $('#homegenie_overlay').fadeOut(100);
-            })
+            var itemClicked = menuPanel.data('itemClicked');
+            if (itemClicked) {
+                $('#homegenie_overlay').fadeOut(1000);
+                console.log(itemClicked);
+                if (itemClicked.attr('data-page')) {
+                    setTimeout(function(){
+                        $.mobile.pageContainer.pagecontainer('change', itemClicked.attr('data-page'), { transition: 'none' });
+                    }, 300);
+                }
+                menuPanel.data('itemClicked', null);
+            } else {
+                $('#homegenie_overlay').fadeOut(100);
+            }
+        })
         .children().first().trigger('create');
+    menuPanel.find('a').on('click', function() {
+        menuPanel.data('itemClicked', $(this));
+    });
     $('body>[data-role="panel"]' ).on('click', function() {
         $(this).panel('close');
     });
@@ -381,12 +397,12 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
             //
             if (isupdateavailable)
             {
-                status += '<a href="#page_configure_maintenance" data-transition="slide" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
+                status += '<a href="#page_configure_maintenance" alt="Update available."><img title="Update available." src="images/update.png" height="28" width="28" style="margin-left:6px" vspace="2" hspace="0" /></a>';
             }
             //
             $('#interfaces_status').html(status);
         }
-    });		
+    });
 };
 //
 // namespace : HG.WebApp.Utility namespace
