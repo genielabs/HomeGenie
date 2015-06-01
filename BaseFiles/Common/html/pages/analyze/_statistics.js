@@ -292,6 +292,10 @@ HG.WebApp.Statistics.Refresh = function () {
                             });
                     } catch (e) { }
                     $.mobile.loading('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+                    $.mobile.loading('hide');
                 }
             });
         });
@@ -348,6 +352,10 @@ HG.WebApp.Statistics.Refresh = function () {
                         });
                 } catch (e) { }
                 //
+                $.mobile.loading('hide');
+            },
+            error: function(xhr, status, error) {
+                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
                 $.mobile.loading('hide');
             }
         });
