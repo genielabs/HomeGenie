@@ -62,12 +62,12 @@ HG.WebApp.Control.InitializePage = function () {
         if ($('#speechinput').css('display') == 'none') {
             $(this).removeClass('ui-icon-carat-u');
             $(this).addClass('ui-icon-carat-d');
-            $('#speechinput').show(50);
+            $('#speechinput').show(150);
             $('#speechinput').find('input').focus();
         } else {
             $(this).removeClass('ui-icon-carat-d');
             $(this).addClass('ui-icon-carat-u');
-            $('#speechinput').hide(50);
+            $('#speechinput').hide(150);
             $('#speechinput').find('input').blur();
         }
     });
@@ -81,7 +81,7 @@ HG.WebApp.Control.InitializePage = function () {
 };
 //
 HG.WebApp.Control.ToggleMenu = function () {
-    $('#control_groupsmenu').slideToggle(100, function(){
+    $('#control_groupsmenu').slideToggle(150, function(){
         $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
         $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-d');
         if ($('#control_groupsmenu').css('display') != 'none') {
@@ -97,10 +97,12 @@ HG.WebApp.Control.ShowGroup = function (gid) {
     HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
     HG.WebApp.Control.RefreshGroupIndicators();
-    $('#control_groupsmenu').slideUp(400, function () {
+    $('#control_groupsmenu').slideUp(150, function(){
         $('#control_groupcontent').children('div').hide();
         $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
         HG.WebApp.Control.RenderGroupModules(gid);
+        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
+        $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-d');
     });
 };
 //
