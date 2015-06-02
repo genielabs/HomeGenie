@@ -13,7 +13,13 @@ HG.WebApp.ProgramEdit._CurrentTab = 1;
 
 HG.WebApp.ProgramEdit.InitializePage = function () {
     var page = $('#'+HG.WebApp.ProgramEdit.PageId);
-    page.on('pagebeforeshow', function (event) {
+    page.on('pagehide', function (e) {
+        $('[data-ui-field=homegenie_menu_button]').removeClass('ui-disabled');
+    });
+    page.on('pageshow', function (e) {
+        $('[data-ui-field=homegenie_menu_button]').addClass('ui-disabled');
+    });
+    page.on('pagebeforeshow', function (e) {
         $('#automation_program_scriptcondition').next().css('display', '');
         $('#automation_program_scriptsource').next().css('display', '');
         HG.WebApp.ProgramEdit.SetTab(1);
@@ -33,13 +39,13 @@ HG.WebApp.ProgramEdit.InitializePage = function () {
         //
         $('#editprograms_backbutton').on('click', function () {
             HG.WebApp.ProgramEdit.CheckIsClean(function () {
-                $.mobile.changePage('#page_automation_programs', { transition: 'slide', reverse: true });
+                $.mobile.pageContainer.pagecontainer('change', '#page_automation_programs');
             });
             return false;
         });
         $('#editprograms_homebutton').on('click', function () {
             HG.WebApp.ProgramEdit.CheckIsClean(function () {
-                $.mobile.changePage('#page_home', { transition: 'slide', reverse: true });
+                $.mobile.pageContainer.pagecontainer('change', '#page_control');
             });
             return false;
         });
