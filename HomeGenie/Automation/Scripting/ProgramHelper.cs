@@ -81,11 +81,13 @@ namespace HomeGenie.Automation.Scripting
         ///      Program.AddInputField(
         ///          "MaxLevel",
         ///          "40", 
-        ///          "Keep level below the following value");
+        ///          "Keep level below the following value",
+        ///          "slider:10:80");
         ///      Program.AddFeature(
         ///          "Dimmer",
         ///          "EnergyManagement.EnergySavingMode", 
-        ///          "Energy Saving Mode enabled light");
+        ///          "Energy Saving Mode enabled light",
+        ///          "checkbox");
         ///  });
         /// </code>
         /// </example>
@@ -149,7 +151,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         /// <returns>ProgramHelper.</returns>
         /// <param name="widget">The widget path.</param>
-        public ProgramHelper AddControlWidget(string widget)
+        public ProgramHelper UseWidget(string widget)
         {
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
             var module = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
@@ -178,7 +180,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Adds a configuration input field for the program. The input field will be displayed in the program options dialog as a text input box.
+        /// Adds a configuration option for the program. The option field will be displayed in the program options dialog using the UI widget specified by the "type" field.
         /// </summary>
         /// <returns>
         /// ProgramHelper
@@ -192,41 +194,46 @@ namespace HomeGenie.Automation.Scripting
         /// <param name='description'>
         /// Description for this input field
         /// </param>
-        public ProgramHelper AddInputField(string field, string defaultValue, string description)
+        /// <param name='type'>
+        /// The type of this option (eg. "text", "password", "cron.text", ...). Each type can have different initialization options
+        /// that are specified as ":" separated items. See html/ui/widgets folder for a list of possible types/options.
+        /// </param>
+        public ProgramHelper AddOption(string field, string defaultValue, string description, string type)
         {
             var parameter = this.Parameter("ConfigureOptions." + field);
             if (parameter.Value == "") parameter.Value = defaultValue;
             parameter.Description = description;
+            parameter.FieldType = type;
             return this;
         }
 
         /// <summary>
-        /// Gets the value of a program input field.
+        /// Gets the value of a program option field.
         /// </summary>
         /// <returns>
-        /// The input field.
+        /// The option field.
         /// </returns>
         /// <param name='field'>
-        /// Name of the input field to get.
+        /// Name of the option field to get.
         /// </param>
         /// <remarks />
         /// <example>
         /// Example:
         /// <code>
         /// // ....
-        /// var delay = Program.InputField("OffDelay").DecimalValue;
+        /// var delay = Program.Option("OffDelay").DecimalValue;
         /// Pause( delay ); 
         /// Modules.WithFeature("Timer.TurnOffDelay").Off();
         /// </code>
         /// </example>
-        public ModuleParameter InputField(string field)
+        public ModuleParameter Option(string field)
         {
             return this.Parameter("ConfigureOptions." + field);
         }
 
-
         /// <summary>
-        /// Adds a "feature" field of type "checkbox" or "text" to the matching domain/type modules. This field will be showing in the module options popup and it will be bound to the given module parameter.
+        /// Adds a "feature" field to modules matching the specified domain/type.
+        /// Feature fields are used by automation programs to create own handled module parameters.
         /// This command should only appear inside a Program.Setup delegate.
         /// </summary>
         /// <returns>
@@ -239,10 +246,14 @@ namespace HomeGenie.Automation.Scripting
         /// A string with comma separated list of types of modules that will showing this input field.
         /// </param>
         /// <param name='parameterName'>
-        /// Name of the module parameter associated to this input field.
+        /// Name of the module parameter bound to this feature field.
         /// </param>
         /// <param name='description'>
         /// Description for this input field.
+        /// </param>
+        /// <param name='type'>
+        /// The type of this feature field (eg. "text", "password", "cron.text", ...). Each type can have different initialization options
+        /// that are specified as ":" separated items. See html/ui/widgets folder for a list of possible types/options.
         /// </param>
         public ProgramHelper AddFeature(
             string forDomains,
@@ -284,7 +295,7 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Return the ProgramFeature object associated to the specified module parameter.
+        /// Return the feature field associated to the specified module parameter.
         /// </summary>
         /// <param name="propertyName">Parameter name.</param>
         public ProgramFeature Feature(string parameterName)
@@ -310,6 +321,29 @@ namespace HomeGenie.Automation.Scripting
             return feature;
         }
 
+        #region DEPRECATED
+
+        [Obsolete("use 'Program.UseWidget(<widget>)' instead")]
+        public ProgramHelper AddControlWidget(string widget)
+        {
+            this.UseWidget(widget);
+            return this;
+        }
+
+        [Obsolete("use 'Program.AddOption(<field>, <defaultValue>, <description>, <type>)' instead")]
+        public ProgramHelper AddInputField(string field, string defaultValue, string description)
+        {
+            this.AddOption(field, defaultValue, description, "text");
+            return this;
+        }
+
+        [Obsolete("use 'Program.Option' instead")]
+        public ModuleParameter InputField(string field)
+        {
+            return this.Parameter("ConfigureOptions." + field);
+        }
+
+        [Obsolete("use 'AddFeature(<forDomains>, <forTypes>, <forPropertyName>, <description>, \"checkbox\")' instead")]
         public ProgramHelper AddFeature(
             string forDomains,
             string forModuleTypes,
@@ -339,6 +373,8 @@ namespace HomeGenie.Automation.Scripting
         {
             return AddFeature("", forModuleTypes, propertyName, description, "text");
         }
+
+        #endregion DEPRECATED
 
         /// <summary>
         /// Adds a new virtual module to the system.
@@ -620,21 +656,21 @@ namespace HomeGenie.Automation.Scripting
         /// Raise a module parameter event and set the parameter with the specified value. 
         /// </summary>
         /// <returns>ProgramHelper.</returns>
-        /// <param name="module">Module object.</param>
+        /// <param name="module">The module source of this event.</param>
         /// <param name="parameter">Parameter name.</param>
         /// <param name="value">The new parameter value to set.</param>
         /// <param name="description">Event description.</param>
-        public ProgramHelper RaiseEvent(ModuleHelper module, string parameter, string value, string description)
+        public ProgramHelper RaiseEvent(ModuleHelper sourceModule, string parameter, string value, string description)
         {
             try
             {
                 var actionEvent = new MIG.InterfacePropertyChangedAction();
-                actionEvent.Domain = module.Instance.Domain;
+                actionEvent.Domain = sourceModule.Instance.Domain;
                 actionEvent.Path = parameter;
                 actionEvent.Value = value;
-                actionEvent.SourceId = module.Instance.Address;
+                actionEvent.SourceId = sourceModule.Instance.Address;
                 actionEvent.SourceType = "Virtual Module";
-                homegenie.SignalModulePropertyChange(this, module.Instance, actionEvent);
+                homegenie.SignalModulePropertyChange(this, sourceModule.Instance, actionEvent);
             }
             catch (Exception ex)
             {

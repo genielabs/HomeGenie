@@ -259,24 +259,9 @@ HG.WebApp.InitializePage = function ()
             $('#homegenie_overlay').fadeIn(100);
         })
         .on('panelbeforeclose', function() {
-            var itemClicked = menuPanel.data('itemClicked');
-            if (itemClicked) {
-                $('#homegenie_overlay').fadeOut(1000);
-                console.log(itemClicked);
-                if (itemClicked.attr('data-page')) {
-                    setTimeout(function(){
-                        $.mobile.pageContainer.pagecontainer('change', itemClicked.attr('data-page'), { transition: 'none' });
-                    }, 300);
-                }
-                menuPanel.data('itemClicked', null);
-            } else {
-                $('#homegenie_overlay').fadeOut(100);
-            }
+            $('#homegenie_overlay').fadeOut(100);
         })
         .children().first().trigger('create');
-    menuPanel.find('a').on('click', function() {
-        menuPanel.data('itemClicked', $(this));
-    });
     $('body>[data-role="panel"]' ).on('click', function() {
         $(this).panel('close');
     });
