@@ -222,6 +222,8 @@ namespace HomeGenie.Service
                         "           \"Name\": \"" + JsonEncode(parameter.Name) + "\",\n" +
                         "           \"Description\": \"" + JsonEncode(parameter.Description) + "\",\n" +
                         "           \"Value\": \"" + JsonEncode(parameter.Value) + "\",\n" +
+                        (String.IsNullOrWhiteSpace(parameter.FieldType)
+                            ? "" : "           \"FieldType\": \"" + JsonEncode(parameter.FieldType) + "\",\n") +
                         "           \"UpdateTime\": \"" + parameter.UpdateTime.ToString("u") + "\"\n" +
                         "       },\n";
                 }

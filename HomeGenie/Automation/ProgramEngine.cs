@@ -452,15 +452,15 @@ namespace HomeGenie.Automation
                 int sourceLines = program.ScriptSource.Split('\n').Length;
                 foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
                 {
+                    int errorRow = (error.Line - CSharpAppFactory.PROGRAM_CODE_OFFSET);
+                    string blockType = "CR";
+                    if (errorRow >= sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET)
+                    {
+                        errorRow -= (sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET);
+                        blockType = "TC";
+                    }
                     if (!error.IsWarning)
                     {
-                        int errorRow = (error.Line - CSharpAppFactory.PROGRAM_CODE_OFFSET);
-                        string blockType = "CR";
-                        if (errorRow >= sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET)
-                        {
-                            errorRow -= (sourceLines + CSharpAppFactory.CONDITION_CODE_OFFSET);
-                            blockType = "TC";
-                        }
                         errors.Add(new ProgramError() {
                             Line = errorRow,
                             Column = error.Column,
@@ -468,6 +468,11 @@ namespace HomeGenie.Automation
                             ErrorNumber = error.ErrorNumber,
                             CodeBlock = blockType
                         });
+                    }
+                    else
+                    {
+                        var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column, error.ErrorText);
+                        RaiseProgramModuleEvent(program, Properties.COMPILER_WARNING, warning);
                     }
                 }
             }

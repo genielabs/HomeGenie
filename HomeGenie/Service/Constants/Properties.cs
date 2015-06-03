@@ -42,6 +42,8 @@ namespace HomeGenie.Service.Constants
             = "Program.Status";
         public const string RUNTIME_ERROR
             = "Runtime.Error";
+        public const string COMPILER_WARNING
+            = "Compiler.Warning";
         public const string PROGRAM_NOTIFICATION
             = "Program.Notification";
         public const string INSTALLPROGRESS_MESSAGE

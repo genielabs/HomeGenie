@@ -47,6 +47,7 @@ namespace HomeGenie.Data
             Name = "";
             Value = "";
             Description = "";
+            FieldType = "";
             UpdateTime = DateTime.UtcNow;
         }
         //
@@ -81,6 +82,7 @@ namespace HomeGenie.Data
             }
         }
         public string Description { get; set; }
+        public string FieldType { get; set; }
         public DateTime UpdateTime { get; /* protected */ set; }
         [XmlIgnore]
         public bool NeedsUpdate { get; set; }
