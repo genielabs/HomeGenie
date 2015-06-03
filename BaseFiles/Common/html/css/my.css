@@ -542,6 +542,17 @@ div.ui-slider-switch.ui-mini {
     float: left;
 }
 
+/* Custom Icons */
+
+.ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-black.png");
+    background-position: 3px 3px;
+}
+div.ui-page-theme-a .ui-icon-microphone:after {
+    background-image: url("../images/icons/micro-white.png");
+    background-position: 3px 3px;
+}
+
 .ui-datepicker {     
     font-size: 14pt;
     height: 300px;

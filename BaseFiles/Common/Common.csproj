@@ -4879,6 +4879,12 @@
     <None Include="html\images\indicators\heat-black.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\images\icons\micro-black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\images\icons\micro-white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -4897,5 +4903,6 @@
     <Folder Include="html\ui\widgets\" />
     <Folder Include="html\ui\core\" />
     <Folder Include="lib\" />
+    <Folder Include="html\images\icons\" />
   </ItemGroup>
 </Project>
