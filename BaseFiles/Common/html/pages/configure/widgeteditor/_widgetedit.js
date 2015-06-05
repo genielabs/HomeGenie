@@ -28,10 +28,10 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
     var saveCancelButton = page.find('[data-ui-field=savecancel-btn]');
   
     page.on('pagehide', function (e) {
-        $('[data-ui-field=homegenie_menu_button]').removeClass('ui-disabled');
+        $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
     });
     page.on('pageshow', function (e) {
-        $('[data-ui-field=homegenie_menu_button]').addClass('ui-disabled');
+        $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
     });
     page.on('pageinit', function (e) {
         HG.WebApp.WidgetEditor._editorHtml = CodeMirror.fromTextArea(document.getElementById('widgeteditor_code_html'), {

@@ -37,8 +37,8 @@
                     </a>
                 </li>
                 <li>
-                    <a data-locale-id="home_menu_configure" class="ui-btn ui-icon-grid ui-btn-icon-left" href="#page_configure_groups">
-                        Configure
+                    <a class="ui-btn ui-icon-none ui-btn-icon-none" href="javascript:$(this).blur();void(0);">
+                    &nbsp;
                     </a>
                 </li>
                 <li>
@@ -83,12 +83,11 @@
     {include pages/header.html}
 
     <div class="ui-content" style="margin:0;padding:0">
-        <div style="position:fixed;z-index:1000;width:100%;cursor:pointer">
+        <div style="position:fixed;z-index:1000;width:100%;">
             <div class="ui-bar-b" style="opacity:0.9;">
-                <ul data-role="listview" id="control_groupsmenu" style="margin:0;max-height:180px;overflow:auto;" class="trapScroll"></ul>
             </div>
-            <div onclick="HG.WebApp.Control.ToggleMenu()" class="ui-header ui-bar-inherit ui-shadow" style="display:inline-block;width:100%;">
-                <div style="float:left;"><p class="ui-icon-carat-d ui-btn-icon-left" style="margin:5px;padding-left:28px;"><strong id="control_groupmenutitle">&nbsp;</strong></p></div>
+            <div class="ui-header ui-bar-inherit ui-shadow" style="display:inline-block;width:100%;">
+                <div style="float:left;"><p style="margin:1px;padding-left:8px;font-size:16pt;"><strong id="control_groupmenutitle">&nbsp;</strong></p></div>
                 <table align="right" style="float:right;margin-right:10px;vertical-align:middle"><tr id="control_groupindicators"></tr></table>
             </div>
         </div>

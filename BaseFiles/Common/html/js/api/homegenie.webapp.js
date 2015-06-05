@@ -49,7 +49,9 @@ HG.WebApp.InitializePage = function ()
         cache: false
     });
     //
-    HG.Configure.LoadData();
+    HG.Configure.LoadData(function(){
+        HG.WebApp.Control.RenderMenu();
+    });
     //
     HG.WebApp.Home.UpdateHeaderStatus();
     window.setInterval('HG.WebApp.Home.UpdateHeaderStatus();', 10000);
@@ -255,11 +257,11 @@ HG.WebApp.InitializePage = function ()
     // Side Panel
     var menuPanel = $('body>[data-role="panel"]');
     menuPanel.panel()
-        .on('panelbeforeopen', function() {
-            $('#homegenie_overlay').fadeIn(100);
+        .on('panelopen', function() {
+            $('#homegenie_overlay').fadeIn(150);
         })
         .on('panelbeforeclose', function() {
-            $('#homegenie_overlay').fadeOut(100);
+            $('#homegenie_overlay').fadeOut(150);
         })
         .children().first().trigger('create');
     $('body>[data-role="panel"]' ).on('click', function() {

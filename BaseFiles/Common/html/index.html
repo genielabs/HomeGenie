@@ -89,8 +89,9 @@
     <script src="js/colorwheel.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jqm-datebox.min.css">
     <script src="js/jqm-datebox.core.js"></script>
-    <script src="js/jqm-datebox.lang.utf8.min.js"></script>    
-    <!-- App Custom Javascript --><!-- TODO: check wheter this can be deprecated -->
+    <script src="js/jqm-datebox.lang.utf8.min.js"></script>
+
+    <!-- custom javascript --><!-- TODO: check wheter this can be deprecated -->
     <script src="js/my.js"></script>
     
     <!-- local css definitions and overrides -->
@@ -457,12 +458,11 @@
         <a data-ui-field="confirm" href="#" class="ui-btn ui-btn-a ui-corner-all" style="position:absolute;right:40px;bottom:20px">Ok</a>
     </div>
 
-<!--- BEGIN Side Menu Panel -->
+<!--- BEGIN Side Menu Panels -->
 
     <div id="side_panel" data-role="panel" class="ui-page ui-overlay-shadow ui-corner-all" style="padding:0;margin:0;margin-top:45px" data-position-fixed="true" data-position="left" data-display="overlay">
         <ul data-role="listview" data-inset="false" class="ui-mini ui-corner-all">
-            <li><a class="ui-btn ui-btn-icon-left ui-icon-home" data-locale-id="home_menu_home" href="#page_control" data-transition="none">Home</a></li>
-            <li><a class="ui-btn ui-btn-icon-left ui-icon-cloud" data-locale-id="home_menu_statistics" href="#page_analyze" data-transition="none">Statistics</a></li>
+            <li><a data-locale-id="home_menu_groupsedit" class="ui-btn ui-icon-edit ui-btn-icon-left" href="#page_configure_groups" data-transition="none">Edit groups</a></li>
             <li data-locale-id="home_menu_automation" data-role="list-divider">Automation</li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-bars" data-locale-id="home_menu_programeditor" href="#page_configure_automationgroups" data-transition="none">Programs</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-edit" data-locale-id="home_menu_widgeteditor" href="#page_configure_widgetlist" data-transition="none">Widgets</a></li>
@@ -484,7 +484,15 @@
         </div>
     </div><!-- /panel -->
 
-<!--- END Side Menu Panel -->
+    <div id="groups_panel" data-role="panel" class="ui-page ui-overlay-shadow ui-corner-all" style="padding:0;margin:0;margin-top:45px" data-position-fixed="true" data-position="left" data-display="overlay">
+        <ul data-role="listview" id="control_groupsmenu" data-inset="false" class="ui-mini ui-corner-all">
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-home" data-locale-id="home_menu_home" href="#page_control" data-transition="none">Home</a></li>
+            <li><a class="ui-btn ui-btn-icon-left ui-icon-cloud" data-locale-id="home_menu_statistics" href="#page_analyze" data-transition="none">Statistics</a></li>
+            <li data-locale-id="configure_grouplist" data-role="list-divider">Group List</li>
+        </ul>
+    </div>
+
+<!--- END Side Menu Panels -->
 
 <!--- BEGIN HomeGenie Overlay -->
 
