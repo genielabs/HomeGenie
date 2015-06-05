@@ -80,30 +80,14 @@ HG.WebApp.Control.InitializePage = function () {
     });
 };
 //
-HG.WebApp.Control.ToggleMenu = function () {
-    $('#control_groupsmenu').slideToggle(150, function(){
-        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
-        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-d');
-        if ($('#control_groupsmenu').css('display') != 'none') {
-            $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-u');
-        } else {
-            $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-d');
-        }
-    });
-};
-//
 HG.WebApp.Control.ShowGroup = function (gid) {
     $.mobile.loading('show');
     HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
     HG.WebApp.Control.RefreshGroupIndicators();
-    $('#control_groupsmenu').slideUp(150, function(){
-        $('#control_groupcontent').children('div').hide();
-        $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
-        HG.WebApp.Control.RenderGroupModules(gid);
-        $('#control_groupsmenu').parent().next().find('p').removeClass('ui-icon-carat-u');
-        $('#control_groupsmenu').parent().next().find('p').addClass('ui-icon-carat-d');
-    });
+    $('#control_groupcontent').children('div').hide();
+    $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
+    HG.WebApp.Control.RenderGroupModules(gid);
 };
 //
 HG.WebApp.Control.UpdateModules = function () {
@@ -169,18 +153,31 @@ HG.WebApp.Control.RecordMacroDiscard = function () {
     $('#toolbar_macrorecord').hide('slidedown');
 }
 //
+HG.WebApp.Control.RenderMenu = function () {
+    $('#groups_panel').panel().trigger('create');
+    $('#control_groupsmenu').find("li:gt(2)").remove();
+    for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+        var indicators = '<div style="display:block;margin-left:20px;"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
+        var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
+        item.on('click', function(){
+            var idx = $(this).attr('data-context-idx');
+            HG.WebApp.Control.ShowGroup(idx);
+            $.mobile.pageContainer.pagecontainer('change', '#page_control', { transition: 'none' });
+        });
+        $('#control_groupsmenu').append(item);
+    }
+    $('#control_groupsmenu').listview('refresh');
+};
+//
 HG.WebApp.Control.RenderGroups = function () {
     $('#control_groupcontent').empty();
-    $('#control_groupsmenu').empty();
-    //
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         if (i == 0) {
             HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[i].Name;
         }
-        $('#control_groupsmenu').append('<li onclick="HG.WebApp.Control.ShowGroup(' + i + ')">' + HG.WebApp.Data.Groups[i].Name + '<table align="right" style="position:absolute;right:10px;top:8px;vertical-align:middle"><tr id="control_groupindicators_' + i + '"></tr></table></li>');
-        var el = $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
+        $('#control_groupcontent').append('<div id="groupdiv_modules_' + i + '" />');
     }
-    $('#control_groupsmenu').listview('refresh');
+    HG.WebApp.Control.RenderMenu();
 };
 //
 HG.WebApp.Control.GetWidget = function (widgetpath, callback) {

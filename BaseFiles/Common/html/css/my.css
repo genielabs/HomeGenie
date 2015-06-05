@@ -453,55 +453,55 @@ input[type=number] {
 
 /* Inverted icons for theme A */
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-energy, div.ui-bar-inherit span.hg-indicator-energy {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-energy, div.ui-bar-inherit span.hg-indicator-energy, #control_groupsmenu span.hg-indicator-energy {
     background: url("../images/indicators/energy.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-temperature, div.ui-bar-inherit span.hg-indicator-temperature {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-temperature, div.ui-bar-inherit span.hg-indicator-temperature, #control_groupsmenu span.hg-indicator-temperature {
     background: url("../images/indicators/temperature.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity, div.ui-bar-inherit span.hg-indicator-humidity {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-humidity, div.ui-bar-inherit span.hg-indicator-humidity, #control_groupsmenu span.hg-indicator-humidity {
     background: url("../images/indicators/humidity.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-inherit span.hg-indicator-luminance {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-luminance, div.ui-bar-inherit span.hg-indicator-luminance, #control_groupsmenu span.hg-indicator-luminance {
     background: url("../images/indicators/luminance.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-smoke, div.ui-bar-inherit span.hg-indicator-smoke {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-smoke, div.ui-bar-inherit span.hg-indicator-smoke, #control_groupsmenu span.hg-indicator-smoke {
     background: url("../images/indicators/smoke.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flood, div.ui-bar-inherit span.hg-indicator-flood {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-flood, div.ui-bar-inherit span.hg-indicator-flood, #control_groupsmenu span.hg-indicator-flood {
     background: url("../images/indicators/flood.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-heat, div.ui-bar-inherit span.hg-indicator-heat {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-heat, div.ui-bar-inherit span.hg-indicator-heat, #control_groupsmenu span.hg-indicator-heat {
     background: url("../images/indicators/heat.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-alarm, div.ui-bar-inherit span.hg-indicator-alarm, #control_groupsmenu span.hg-indicator-alarm {
     background: url("../images/indicators/alarm.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-generic, div.ui-bar-inherit span.hg-indicator-geniric {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-generic, div.ui-bar-inherit span.hg-indicator-geniric, #control_groupsmenu span.hg-indicator-geniric {
     background: url("../images/indicators/generic.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-level, div.ui-bar-inherit span.hg-indicator-level {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-level, div.ui-bar-inherit span.hg-indicator-level, #control_groupsmenu span.hg-indicator-level {
     background: url("../images/indicators/level.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb, div.ui-bar-inherit span.hg-indicator-bulb {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-bulb, div.ui-bar-inherit span.hg-indicator-bulb, #control_groupsmenu span.hg-indicator-bulb {
     background: url("../images/indicators/bulb.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug, div.ui-bar-inherit span.hg-indicator-plug {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-plug, div.ui-bar-inherit span.hg-indicator-plug, #control_groupsmenu span.hg-indicator-plug {
     background: url("../images/indicators/plug.png") no-repeat scroll 0 6px transparent;
 }
 
-div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inherit span.hg-indicator-door {
+div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inherit span.hg-indicator-door, #control_groupsmenu span.hg-indicator-door {
     background: url("../images/indicators/door.png") no-repeat scroll 0 6px transparent;
 }
 

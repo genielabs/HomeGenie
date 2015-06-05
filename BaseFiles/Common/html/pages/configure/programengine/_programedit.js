@@ -14,10 +14,10 @@ HG.WebApp.ProgramEdit._CurrentTab = 1;
 HG.WebApp.ProgramEdit.InitializePage = function () {
     var page = $('#'+HG.WebApp.ProgramEdit.PageId);
     page.on('pagehide', function (e) {
-        $('[data-ui-field=homegenie_menu_button]').removeClass('ui-disabled');
+        $('[data-ui-field=homegenie_panel_button]').removeClass('ui-disabled');
     });
     page.on('pageshow', function (e) {
-        $('[data-ui-field=homegenie_menu_button]').addClass('ui-disabled');
+        $('[data-ui-field=homegenie_panel_button]').addClass('ui-disabled');
     });
     page.on('pagebeforeshow', function (e) {
         $('#automation_program_scriptcondition').next().css('display', '');
