@@ -202,6 +202,7 @@ input[type=number] {
     margin: 15px;
     min-height: 160px;
     padding-bottom:20px;
+    position:relative;
 }
 
 .hg-widget-a2 {
@@ -209,6 +210,7 @@ input[type=number] {
     margin: 15px;
     min-height: 160px;
     padding-bottom:20px;
+    position:relative;
 }
 
 .hg-widget-b {
@@ -216,12 +218,14 @@ input[type=number] {
     max-width: 540px;
     margin: 15px;
     min-height: 180px;
+    position:relative;
 }
 
 .hg-widget-c {
     width: auto;
     margin: 15px;
     min-height: 180px;
+    position:relative;
 }
 
 .hg-widget-a div[data-ui-field=description] {
@@ -236,7 +240,6 @@ input[type=number] {
     bottom:0;
     right:0;left:0;
     height:20px;
-    margin:15px;
 }
 
 .hg-widget-a div.ui-header, .hg-widget-b div.ui-header {
