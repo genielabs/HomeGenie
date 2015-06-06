@@ -200,17 +200,43 @@ input[type=number] {
 .hg-widget-a {
     width: 260px;
     margin: 15px;
+    min-height: 160px;
+    padding-bottom:20px;
+}
+
+.hg-widget-a2 {
+    width: 520px;
+    margin: 15px;
+    min-height: 160px;
+    padding-bottom:20px;
 }
 
 .hg-widget-b {
     min-width: 260px;
     max-width: 540px;
     margin: 15px;
+    min-height: 180px;
 }
 
 .hg-widget-c {
     width: auto;
     margin: 15px;
+    min-height: 180px;
+}
+
+.hg-widget-a div[data-ui-field=description] {
+    font-size:9pt !important;
+}
+.hg-widget-a div[data-ui-field=name] {
+    font-weight:bold !important;
+    font-size:12pt !important;
+}
+.hg-widget-a div.ui-footer, .hg-widget-a2 div.ui-footer, .hg-widget-b div.ui-footer, .hg-widget-c div.ui-footer {
+    position:absolute;
+    bottom:0;
+    right:0;left:0;
+    height:20px;
+    margin:15px;
 }
 
 .hg-widget-a div.ui-header, .hg-widget-b div.ui-header {

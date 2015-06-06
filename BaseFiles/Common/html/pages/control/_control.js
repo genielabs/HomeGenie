@@ -486,6 +486,15 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
         //		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
         var indicators = '';
+        if (grouploadkw > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_switches > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_lights > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
+        }
         if (group_temperature != null) {
             if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
                 // display as Fahrenheit
@@ -498,20 +507,11 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
             }
             indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td><td>&nbsp;</td>';
         }
-        if (group_humidity != null) {
-            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
         if (group_luminance != null) {
             indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
         }
-        if (operating_lights > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
-        }
-        if (operating_switches > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
-        }
-        if (grouploadkw > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        if (group_humidity != null) {
+            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
         }
 
         $('#control_groupindicators_' + i).html(indicators);
