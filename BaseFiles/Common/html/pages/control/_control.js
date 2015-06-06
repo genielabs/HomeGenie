@@ -157,7 +157,7 @@ HG.WebApp.Control.RenderMenu = function () {
     $('#groups_panel').panel().trigger('create');
     $('#control_groupsmenu').find("li:gt(1)").remove();
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        var indicators = '<div class="ui-body-b" style="display:block;margin-left:5px;border:0;border-left:20px solid #393939;"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
+        var indicators = '<div class="ui-body-b" style="display:block;margin-left:5px;border:0;border-left:20px solid #393939;overflow:hidden"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
         var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
         item.on('click', function(){
             var idx = $(this).attr('data-context-idx');
@@ -486,6 +486,15 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
         //		'<td align="center"><img src="images/indicators/door.png" style="vertical-align:middle" /> <span style="font-size:12pt;color:whitesmoke">1</span></td>'+
 
         var indicators = '';
+        if (grouploadkw > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_switches > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
+        }
+        if (operating_lights > 0) {
+            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
+        }
         if (group_temperature != null) {
             if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
                 // display as Fahrenheit
@@ -498,20 +507,11 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
             }
             indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td><td>&nbsp;</td>';
         }
-        if (group_humidity != null) {
-            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
-        }
         if (group_luminance != null) {
             indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
         }
-        if (operating_lights > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
-        }
-        if (operating_switches > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
-        }
-        if (grouploadkw > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+        if (group_humidity != null) {
+            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
         }
 
         $('#control_groupindicators_' + i).html(indicators);
