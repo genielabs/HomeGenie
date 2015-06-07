@@ -157,7 +157,7 @@ HG.WebApp.Control.RenderMenu = function () {
     $('#groups_panel').panel().trigger('create');
     $('#control_groupsmenu').find("li:gt(1)").remove();
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        var indicators = '<div class="ui-body-b" style="display:block;margin-left:5px;border:0;border-left:20px solid #393939;overflow:hidden"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
+        var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:5px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
         var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
         item.on('click', function(){
             var idx = $(this).attr('data-context-idx');
@@ -487,13 +487,13 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
 
         var indicators = '';
         if (grouploadkw > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-energy">' + (grouploadkw * 1000).toFixed(1) + '</span></td>';
         }
         if (operating_switches > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-plug">' + operating_switches + '</span></td>';
         }
         if (operating_lights > 0) {
-            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td>';
         }
         if (group_temperature != null) {
             if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
@@ -505,13 +505,13 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
                 group_temperature = Math.round(group_temperature * 10) / 10;
                 displayvalue = (group_temperature * 1).toFixed(1) + '&#8451;';
             }
-            indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td>';
         }
         if (group_luminance != null) {
-            indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-luminance">' + (group_luminance * 1).toFixed(0) + '</span></td>';
         }
         if (group_humidity != null) {
-            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td><td>&nbsp;</td>';
+            indicators += '<td align="center"><span class="hg-indicator-humidity">' + (group_humidity * 1).toFixed(0) + '</span></td>';
         }
 
         $('#control_groupindicators_' + i).html(indicators);
