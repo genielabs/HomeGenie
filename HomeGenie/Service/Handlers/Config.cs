@@ -47,11 +47,13 @@ namespace HomeGenie.Service.Handlers
     {
         private HomeGenieService homegenie;
         private string widgetBasePath;
+        private string groupWallpapersPath;
 
         public Config(HomeGenieService hg)
         {
             homegenie = hg;
             widgetBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "pages", "control", "widgets");
+            groupWallpapersPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "images", "wallpapers");
         }
 
         public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
@@ -141,9 +143,7 @@ namespace HomeGenie.Service.Handlers
                     if (String.IsNullOrWhiteSpace(downloadUrl))
                     {
                         // file uploaded by user
-                        var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
-                        string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                        MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, ifaceFileName);
+                        MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, ifaceFileName);
                     }
                     else
                     {
@@ -406,9 +406,7 @@ namespace HomeGenie.Service.Handlers
                     Utility.FolderCleanUp(Utility.GetTmpFolder());
                     try
                     {
-                        var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
-                        string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                        MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archivename);
+                        MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, archivename);
                         Utility.UncompressZip(archivename, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder()));
                         File.Delete(archivename);
                     } catch { }
@@ -929,6 +927,52 @@ namespace HomeGenie.Service.Handlers
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                 break;
 
+            case "Groups.WallpaperList":
+                List<string> wallpaperList = new List<string>();
+                var images = Directory.GetFiles(groupWallpapersPath);
+                for (int i = 0; i < images.Length; i++)
+                {
+                    wallpaperList.Add(Path.GetFileName(images[i]));
+                }
+                migCommand.Response = JsonConvert.SerializeObject(wallpaperList);
+
+                break;
+
+            case "Groups.WallpaperAdd":
+                {
+                    string wallpaperFile = "";
+                    try
+                    {
+                        wallpaperFile = MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, groupWallpapersPath);
+                    } catch { }
+                    migCommand.Response = JsonHelper.GetSimpleResponse(Path.GetFileName(wallpaperFile));
+                }
+                break;
+
+            case "Groups.WallpaperSet":
+                {
+                    string wpGroupName = migCommand.GetOption(0);
+                    var wpGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(g => g.Name == wpGroupName);
+                    if (wpGroup != null)
+                    {
+                        wpGroup.Wallpaper = migCommand.GetOption(1);
+                        homegenie.UpdateGroupsDatabase("Control");
+                    }
+                }
+                break;
+
+            case "Groups.WallpaperDelete":
+                {
+                    string wallpaperFile = migCommand.GetOption(0);
+                    wallpaperFile = Path.Combine(groupWallpapersPath, Path.GetFileName(wallpaperFile));
+                    if (File.Exists(wallpaperFile))
+                    {
+                        File.Delete(wallpaperFile);
+                    }
+                    migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                }
+                break;
+
             case "Widgets.List":
                 List<string> widgetsList = new List<string>();
                 var groups = Directory.GetDirectories(widgetBasePath);
@@ -1066,13 +1110,11 @@ namespace HomeGenie.Service.Handlers
                 
             case "Widgets.Import":
                 {
-                    var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
-                    string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
                     string archiveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import_widget.zip");
                     string importPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "import");
                     if (Directory.Exists(importPath))
                         Directory.Delete(importPath, true);
-                    MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveFile);
+                    MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, archiveFile);
                     if (WidgetImport(archiveFile, importPath))
                     {
                         migCommand.Response = JsonHelper.GetSimpleResponse("OK");

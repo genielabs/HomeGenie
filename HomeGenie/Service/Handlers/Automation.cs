@@ -156,9 +156,7 @@ namespace HomeGenie.Service.Handlers
                     if (File.Exists(archiveName))
                         File.Delete(archiveName);
                     //
-                    var encoding = (request.Context as HttpListenerContext).Request.ContentEncoding;
-                    string boundary = MIG.Gateways.WebServiceUtility.GetBoundary((request.Context as HttpListenerContext).Request.ContentType);
-                    MIG.Gateways.WebServiceUtility.SaveFile(encoding, boundary, request.InputStream, archiveName);
+                    MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, archiveName);
                     //
                     int newPid = homegenie.ProgramEngine.GeneratePid();
                     var reader = new StreamReader(archiveName);

@@ -51,8 +51,14 @@
         "Tillbaka",
     "configure_group_bottombar_group_add": 
         "Lägg Till Grupp",
+    "configure_group_group": 
+        "Grupp",
     "configure_group_groupname": 
-        "Grupp Namn",
+        "Namn",
+    "configure_group_groupwallpaper":
+        "Wallpaper",
+    "configure_group_modulelist":
+        "Module List",
     "configure_group_deletegroup": 
         "Ta Bort Grupp?",
     "configure_group_deleteprompt": 
@@ -769,6 +775,10 @@
         "Not set",
     "common_voice_control":
         "Voice Control",
+    "common_command_delete":
+        "Delete",
+    "common_command_upload":
+        "Upload",
 "##":
 "## SIDE MENU LOCALES",
 "##":

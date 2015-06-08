@@ -75,17 +75,12 @@ HG.WebApp.InitializePage = function ()
             HG.Configure.Modules.List(function (data) {
                 try
                 {
-                    HG.WebApp.Data.Modules = eval(data);                   
+                    HG.WebApp.Data.Modules = eval(data);
                 } catch (e) { }
                 HG.Automation.Programs.List(function () {
                     HG.WebApp.GroupsList.LoadGroups();
                 });
             });
-        }
-        else if (this.id == 'page_configure_groupmodules') 
-        {
-            HG.WebApp.GroupModules.LoadGroupModules();
-            $.mobile.loading('show');
         }
         else if (this.id == 'page_configure_schedulerservice')
         {

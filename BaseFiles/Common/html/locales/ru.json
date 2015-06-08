@@ -51,8 +51,14 @@
         "Назад",
     "configure_group_bottombar_group_add": 
         "Добавить группу",
+    "configure_group_group": 
+        "Группы",
     "configure_group_groupname": 
-        "Название группы",
+        "Название",
+    "configure_group_groupwallpaper":
+        "Wallpaper",
+    "configure_group_modulelist":
+        "Module List",
     "configure_group_deletegroup": 
         "Удалить группу?",
     "configure_group_deleteprompt": 
@@ -769,6 +775,10 @@
         "Не установлено",
     "common_voice_control":
         "Voice Control",
+    "common_command_delete":
+        "Delete",
+    "common_command_upload":
+        "Upload",
 "##":
 "## SIDE MENU LOCALES",
 "##":

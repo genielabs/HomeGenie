@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r491-p2</Version>
+  <Version>1.00 beta r492</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added quick access side panel for control groups
+  <ReleaseNote>   - Added customizable wallpapers to control groups
   - Other minor improvements to the new UI</ReleaseNote>
-  <ReleaseDate>2015-06-06T17:17:23.0000Z</ReleaseDate>
+  <ReleaseDate>2015-06-08T21:52:22.0000Z</ReleaseDate>
 </ReleaseInfo>

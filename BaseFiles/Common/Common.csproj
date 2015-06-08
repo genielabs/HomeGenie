@@ -4885,6 +4885,15 @@
     <None Include="html\images\icons\micro-white.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\js\jquery.fileupload.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\images\wallpapers\wallpaper_001.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\images\wallpapers\wallpaper_002.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -4904,5 +4913,6 @@
     <Folder Include="html\ui\core\" />
     <Folder Include="lib\" />
     <Folder Include="html\images\icons\" />
+    <Folder Include="html\images\wallpapers\" />
   </ItemGroup>
 </Project>

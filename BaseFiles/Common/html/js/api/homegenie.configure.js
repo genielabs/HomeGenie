@@ -112,31 +112,52 @@ HG.Configure.Groups.DeleteGroup = function (context, group, callback) {
 
 HG.Configure.Groups.GetGroupModules = function (groupname) {
     var groupmodules = { 'Index': 0, 'Name': groupname, 'Modules': Array() };
-    //
-    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        if (HG.WebApp.Data.Groups[i].Name == groupname) {
-            groupmodules.Index = i;
-            for (var c = 0; c < HG.WebApp.Data.Groups[i].Modules.length; c++) {
-                var found = false;
-                //
-                for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
-                    if (HG.WebApp.Data.Modules[m].Domain == HG.WebApp.Data.Groups[i].Modules[c].Domain && HG.WebApp.Data.Modules[m].Address == HG.WebApp.Data.Groups[i].Modules[c].Address) {
-                        groupmodules.Modules.push(HG.WebApp.Data.Modules[m]);
-                        found = true;
-                        break;
-                    }
-                }
-                //
-                if (!found) {
-                    // orphan module/program, it is not present in the modules list nor programs one
-                    groupmodules.Modules.push(HG.WebApp.Data.Groups[i].Modules[c]);
-                }
+    var group = HG.Configure.Groups.GetGroupByName(groupname);
+    groupmodules.Index = group.Index;
+    for (var c = 0; c < group.Modules.length; c++) {
+        var found = false;
+        //
+        for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
+            if (HG.WebApp.Data.Modules[m].Domain == group.Modules[c].Domain && HG.WebApp.Data.Modules[m].Address == group.Modules[c].Address) {
+                groupmodules.Modules.push(HG.WebApp.Data.Modules[m]);
+                found = true;
+                break;
             }
+        }
+        //
+        if (!found) {
+            // orphan module/program, it is not present in the modules list nor programs one
+            groupmodules.Modules.push(group.Modules[c]);
+        }
+    }
+    return groupmodules;
+};
+HG.Configure.Groups.GetGroupByName = function(name) {
+    var group = null;
+    for (var i = 0; i < HG.WebApp.Data.Groups.length; i++) {
+        if (HG.WebApp.Data.Groups[i].Name == name) {
+            group = HG.WebApp.Data.Groups[i];
+            group.Index = i;
             break;
         }
     }
-    //
-    return groupmodules;
+    return group;
+};
+HG.Configure.Groups.WallpaperList = function (callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.WallpaperList/' + (new Date().getTime()), function (data) {
+        HG.WebApp.Data.Wallpapers = eval(arguments[2].responseText);
+        callback(HG.WebApp.Data.Wallpapers);
+    });
+};
+HG.Configure.Groups.WallpaperSet = function (group, wallpaper, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.WallpaperSet/' + encodeURIComponent(group) + '/' + encodeURIComponent(wallpaper) + '/' + (new Date().getTime()), function (data) {
+        callback();
+    });    
+};
+HG.Configure.Groups.WallpaperDelete = function (wallpaper, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.WallpaperDelete/' + encodeURIComponent(wallpaper) + '/' + (new Date().getTime()), function (data) {
+        callback();
+    });    
 };
 
 //
