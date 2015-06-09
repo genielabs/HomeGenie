@@ -340,9 +340,9 @@
     "configure_maintenance_configuration_info": 
         "<b>Note :</b> avant de restaurer un fichier de sauvegarde, vérifiez que vous avez défini le même mot de passe système utilisé lors de sa création.",
     "configure_maintenance_configuration_backup": 
-        "Sauvegarde",
+        "Sauvegarder",
     "configure_maintenance_configuration_restore": 
-        "Restauration",
+        "Restaurer",
     "configure_maintenance_configuration_factory_reset": 
         "Config. Usine",
     "configure_system_modulescleanup": 
