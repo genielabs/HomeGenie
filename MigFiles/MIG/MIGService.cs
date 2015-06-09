@@ -496,37 +496,37 @@ namespace MIG
                 else
                 {
                     bool isText = false;
-                    if (requestedUrl.EndsWith(".js")) // || requestedurl.EndsWith(".json"))
+                    if (requestedUrl.ToLower().EndsWith(".js")) // || requestedurl.EndsWith(".json"))
                     {
                         context.Response.ContentType = "text/javascript";
                         isText = true;
                     }
-                    else if (requestedUrl.EndsWith(".css"))
+                    else if (requestedUrl.ToLower().EndsWith(".css"))
                     {
                         context.Response.ContentType = "text/css";
                         isText = true;
                     }
-                    else if (requestedUrl.EndsWith(".zip"))
+                    else if (requestedUrl.ToLower().EndsWith(".zip"))
                     {
                         context.Response.ContentType = "application/zip";
                     }
-                    else if (requestedUrl.EndsWith(".png"))
+                    else if (requestedUrl.ToLower().EndsWith(".png"))
                     {
                         context.Response.ContentType = "image/png";
                     }
-                    else if (requestedUrl.EndsWith(".jpg"))
+                    else if (requestedUrl.ToLower().EndsWith(".jpg"))
                     {
                         context.Response.ContentType = "image/jpeg";
                     }
-                    else if (requestedUrl.EndsWith(".gif"))
+                    else if (requestedUrl.ToLower().EndsWith(".gif"))
                     {
                         context.Response.ContentType = "image/gif";
                     }
-                    else if (requestedUrl.EndsWith(".mp3"))
+                    else if (requestedUrl.ToLower().EndsWith(".mp3"))
                     {
                         context.Response.ContentType = "audio/mp3";
                     }
-                    else if (requestedUrl.EndsWith(".appcache"))
+                    else if (requestedUrl.ToLower().EndsWith(".appcache"))
                     {
                         context.Response.ContentType = "text/cache-manifest";
                     }

@@ -4,7 +4,7 @@ HG.WebApp.GroupModules.CurrentGroup = '(none)';
 HG.WebApp.GroupModules.CurrentModule = null;
 HG.WebApp.GroupModules.CurrentModuleProperty = null;
 HG.WebApp.GroupModules.EditModule = Array();
-HG.WebApp.GroupModules.SeparatorItemDomain = "HomeGenie.UI.Separator";
+HG.WebApp.GroupModules.SeparatorItemDomain = 'HomeGenie.UI.Separator';
 
 HG.WebApp.GroupModules.InitializePage = function () {
     var page = $('#'+HG.WebApp.GroupModules.PageId);
@@ -113,7 +113,10 @@ HG.WebApp.GroupModules.InitializePage = function () {
         });
 
         $('#groupmodules_groupwall').on('change', function(){
-            $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+$(this).val()+')');
+            if ($(this).val()=='')
+                $('#configure_group_wallpaper').css('background-image', '');
+            else
+                $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+$(this).val()+')');
             HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, $(this).val(), function() { });
         });
 
@@ -144,8 +147,6 @@ HG.WebApp.GroupModules.InitializePage = function () {
             },
             done: function (e, data) {
                 var wp = data.result[0].ResponseValue;
-                console.log(data.result);
-                console.log(wp);
                 $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
                 HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
                     var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
@@ -452,7 +453,7 @@ HG.WebApp.GroupModules.LoadGroupModules = function () {
     for (var m = 0; m < groupmodules.Modules.length; m++) {
         var domain_label = groupmodules.Modules[m].Domain.substring(groupmodules.Modules[m].Domain.lastIndexOf('.') + 1);
 
-        if (groupmodules.Modules[m].Domain == 'HomeGenie.UI.Separator') {
+        if (groupmodules.Modules[m].Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
             html += '<li class="ui-header" data-icon="false" data-module-index="' + m + '">';
             html += '<a>' + groupmodules.Modules[m].Address + '</a>';
             html += '</li>';
@@ -529,6 +530,8 @@ HG.WebApp.GroupModules.EditCurrentModule = function (item) {
         }
         $('#module_remove_button').show();
         if (HG.WebApp.GroupModules.CurrentModule.Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
+            HG.WebApp.GroupModules.EditModule.Address = HG.WebApp.GroupModules.CurrentModule.Address;
+            HG.WebApp.GroupModules.EditModule.Domain = HG.WebApp.GroupModules.CurrentModule.Domain;
             $('#automation_group_separator_edit').popup('open', { transition: 'pop', positionTo: 'window' });
         }
         else {

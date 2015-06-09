@@ -66,17 +66,19 @@
                 HG.WebApp.Control.EditModule(module);
             });
             //
+            var _this = this;
             this.ColorWheel = Raphael.colorwheel(controlpopup.find('[data-ui-field=colors]'), 200, 80);
             this.ColorWheel.ondrag(null, function (rgbcolor) {
-                var color = Raphael.color(rgbcolor);
+                var color = Raphael.rgb2hsb(rgbcolor);
                 //
                 iconp1.clear(); iconp1.ball(22, 22, 22, color);
                 iconp2.clear(); iconp2.ball(22, 22, 22, color);
                 //
                 var hue = color.h;
                 var sat = color.s;
-                var bri = color.v;
+                var bri = color.b;
                 var hsbcolor = hue + "," + sat + "," + bri;
+                _this.ColorWheel.color(rgbcolor);
                 //
                 HG.Control.Modules.ServiceCall("Control.ColorHsb", module.Domain, module.Address, hsbcolor, function (data) { });
             });
@@ -129,10 +131,10 @@
         //
         var hsbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
         if (hsbcolor != null && this.ColorWheel != null) {
-            hsbcolor = 'hsb(' + hsbcolor.Value + ')';
-            var color = Raphael.color(hsbcolor);
-            if (level == 'OFF') color.v = 0.05;
-            this.ColorWheel.color(hsbcolor);
+            var hexcolor = eval('Raphael.hsb('+hsbcolor.Value+')');
+            var color = Raphael.rgb2hsb(hexcolor);
+            this.ColorWheel.color_hsb(color);
+            if (level == 'OFF') color.b = 0.05;
             this.WidgetImage.clear(); this.WidgetImage.ball(22, 22, 22, color);
             this.ControlImage.clear(); this.ControlImage.ball(22, 22, 22, color);
         }
