@@ -380,7 +380,7 @@ HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
         var widgetfound = false;
 
         // look for UI Group Label (fake module with domain HomeGenie.UI.GroupLabel
-        if (module.Domain == 'HomeGenie.UI.Separator') {
+        if (module.Domain == HG.WebApp.GroupModules.SeparatorItemDomain) {
             module.Widget = 'homegenie/generic/grouplabel';
             widgetfound = true;
         }
