@@ -5,6 +5,7 @@
   <Description>Latest public release.</Description>
   <ReleaseNote>   - Added customizable wallpapers to control groups
   - Fixed group separator add/remove bug
+  - Fixed colorlight widget rgb/hsb color conversion bug
   - Other minor improvements to the new UI</ReleaseNote>
   <ReleaseDate>2015-06-09T13:10:11.0000Z</ReleaseDate>
 </ReleaseInfo>
