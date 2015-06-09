@@ -1,5 +1,8 @@
 ﻿RELEASE HISTORY
 
+08/06/2015 1.00 beta rev 492
+    - Added customizable wallpapers to control groups
+
 01/06/2015 1.00 beta rev 491-p1
     - Fix to minor issues of the new UI
 

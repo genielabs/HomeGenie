@@ -1,4 +1,5 @@
 ﻿HG.WebApp.GroupModules = HG.WebApp.GroupModules || {};
+HG.WebApp.GroupModules.PageId = 'page_configure_groupmodules';
 HG.WebApp.GroupModules.CurrentGroup = '(none)';
 HG.WebApp.GroupModules.CurrentModule = null;
 HG.WebApp.GroupModules.CurrentModuleProperty = null;
@@ -6,7 +7,8 @@ HG.WebApp.GroupModules.EditModule = Array();
 HG.WebApp.GroupModules.SeparatorItemDomain = "HomeGenie.UI.Separator";
 
 HG.WebApp.GroupModules.InitializePage = function () {
-    $('#page_configure_groupmodules').on('pageinit', function (e) {
+    var page = $('#'+HG.WebApp.GroupModules.PageId);
+    page.on('pageinit', function (e) {
 
         $('#module_add_button').bind('click', function (event) {
             var selectedopt = $('#automation_group_moduleadd').find(":selected");
@@ -109,6 +111,71 @@ HG.WebApp.GroupModules.InitializePage = function () {
         $("#page_configure_groupmodules_list").bind("sortstop", function (event, ui) {
             HG.WebApp.GroupModules.SortModules();
         });
+
+        $('#groupmodules_groupwall').on('change', function(){
+            $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+$(this).val()+')');
+            HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, $(this).val(), function() { });
+        });
+
+        $('#groupmodules_group_deletebtn').on('click', function(){
+            $.mobile.loading('show');
+            HG.Configure.Groups.WallpaperDelete($('#groupmodules_groupwall').val(), function(){
+                var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
+                group.Wallpaper = '';
+                HG.WebApp.GroupModules.RefreshWallpaper();
+                $.mobile.loading('hide');
+            });
+        });
+        $('#groupmodules_group_uploadbtn').on('click', function(){
+            $('#groupmodules_group_uploadfile').click();
+        });
+        $('#groupmodules_group_uploadfile').fileupload({
+            url: '/api/HomeAutomation.HomeGenie/Config/Groups.WallpaperAdd',
+            dropZone: $('[data-upload-dropzone=wallpaper]'),
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $.mobile.loading('show', { text: 'Saving background... '+progress+'%', textVisible: true, theme: 'a', html: '' });
+            },
+            start: function(e) {
+                $.mobile.loading('show', { text: 'Saving background...', textVisible: true, theme: 'a', html: '' });
+            },
+            fail: function (e, data) {
+                $.mobile.loading('hide');
+            },
+            done: function (e, data) {
+                var wp = data.result[0].ResponseValue;
+                console.log(data.result);
+                console.log(wp);
+                $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
+                HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
+                    var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
+                    group.Wallpaper = wp;
+                    HG.WebApp.GroupModules.RefreshWallpaper();
+                    $.mobile.loading('hide');
+                });
+            }
+        });
+
+    });
+    page.on('pagebeforeshow', function(){
+        HG.WebApp.GroupModules.LoadGroupModules();
+        $.mobile.loading('show');
+        HG.WebApp.GroupModules.RefreshWallpaper();
+    });
+};
+
+HG.WebApp.GroupModules.RefreshWallpaper = function() {
+    var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
+    $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+group.Wallpaper+')');
+    $('#configure_group_wallpaper').css('background-size', '164px 92px');
+    $('#groupmodules_groupwall').find('option:gt(0)').remove();
+    HG.Configure.Groups.WallpaperList(function(list){
+        $.each(list, function(k, v){
+            var selected = (group.Wallpaper == v ? ' selected' : '');
+            $('#groupmodules_groupwall').append('<option value="'+v+'"'+selected+'>'+v+'</option>');
+        });
+        $('#groupmodules_groupwall').selectmenu('refresh');
+        $.mobile.loading('hide');
     });
 };
 

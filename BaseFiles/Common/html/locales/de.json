@@ -51,8 +51,14 @@
         "Zurück",
     "configure_group_bottombar_group_add": 
         "Gruppe Hinzufügen",
+    "configure_group_group": 
+        "Gruppen",
     "configure_group_groupname": 
-        "Gruppen Namen",
+        "Namen",
+    "configure_group_groupwallpaper":
+        "Wallpaper",
+    "configure_group_modulelist":
+        "Module List",
     "configure_group_deletegroup": 
         "Gruppe Löschen?",
     "configure_group_deleteprompt": 
@@ -773,6 +779,10 @@
         "Nicht gesetzt",
     "common_voice_control":
         "Voice Control",
+    "common_command_delete":
+        "Delete",
+    "common_command_upload":
+        "Upload",
 "##":
 "## SIDE MENU LOCALES",
 "##":

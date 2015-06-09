@@ -84,6 +84,8 @@ HG.WebApp.Control.ShowGroup = function (gid) {
     $.mobile.loading('show');
     HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
+    // set current group wallpaper
+    $('#page_control').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
     HG.WebApp.Control.RefreshGroupIndicators();
     $('#control_groupcontent').children('div').hide();
     $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
@@ -359,7 +361,7 @@ HG.WebApp.Control.UpdateModuleWidget = function (domain, address) {
 HG.WebApp.Control.RenderGroupModules = function (groupIndex) {
     if (widgetsloadqueue.length > 0 || HG.WebApp.Control._renderModuleBusy) {
         if (HG.WebApp.Control._renderModuleDelay != null) clearTimeout(HG.WebApp.Control._renderModuleDelay);
-        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 100);
+        HG.WebApp.Control._renderModuleDelay = setTimeout('HG.WebApp.Control.RenderGroupModules(' + groupIndex + ');', 10);
         return;
     }
     //

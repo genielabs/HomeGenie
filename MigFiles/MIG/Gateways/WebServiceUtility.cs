@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MIG.Gateways
 {
@@ -63,155 +64,192 @@ namespace MIG.Gateways
             return /*"--" + */ contentType.Split(';')[1].Split('=')[1];
         }
 
-        public static void SaveFile(Encoding encoding, String boundary, Stream input, string outputFile)
+        // from: 
+        // http://stackoverflow.com/questions/1080442/how-to-convert-an-stream-into-a-byte-in-c
+        public static byte[] ReadToEnd(System.IO.Stream stream)
         {
-            Byte[] boundaryBytes = new byte[] { }; if (boundary != null) boundaryBytes = encoding.GetBytes(boundary);
-            Int32 boundaryLen = boundaryBytes.Length;
+            long originalPosition = 0;
 
-            using (MemoryStream output = new MemoryStream())
+            if(stream.CanSeek)
             {
-                Byte[] buffer = new Byte[1024];
-                Int32 len = input.Read(buffer, 0, 1024);
-                Int32 startPos = -1;
+                originalPosition = stream.Position;
+                stream.Position = 0;
+            }
 
-                //// Find start boundary
-                while (true)
+            try
+            {
+                byte[] readBuffer = new byte[4096];
+
+                int totalBytesRead = 0;
+                int bytesRead;
+
+                while ((bytesRead = stream.Read(readBuffer, totalBytesRead, readBuffer.Length - totalBytesRead)) > 0)
                 {
-                    if (len == 0 && boundary != null)
-                    {
-                        throw new Exception("Start Boundary Not Found");
-                    }
+                    totalBytesRead += bytesRead;
 
-                    startPos = IndexOf(buffer, len, boundaryBytes);
-                    if (startPos >= 0)
+                    if (totalBytesRead == readBuffer.Length)
                     {
-                        break;
-                    }
-                    else
-                    {
-                        Array.Copy(buffer, len - boundaryLen, buffer, 0, boundaryLen);
-                        len = input.Read(buffer, boundaryLen, 1024 - boundaryLen);
-                    }
-                }
-
-                // Skip four lines (Boundary, Content-Disposition, Content-Type, and a blank)
-                for (Int32 i = 0; i < 4; i++)
-                {
-                    while (true)
-                    {
-                        if (len == 0)
+                        int nextByte = stream.ReadByte();
+                        if (nextByte != -1)
                         {
-                            throw new Exception("Preamble not Found.");
-                        }
-
-                        startPos = Array.IndexOf(buffer, encoding.GetBytes("\n")[0], startPos);
-                        if (startPos >= 0)
-                        {
-                            startPos++;
-                            break;
-                        }
-                        else
-                        {
-                            len = input.Read(buffer, 0, 1024);
+                            byte[] temp = new byte[readBuffer.Length * 2];
+                            Buffer.BlockCopy(readBuffer, 0, temp, 0, readBuffer.Length);
+                            Buffer.SetByte(temp, totalBytesRead, (byte)nextByte);
+                            readBuffer = temp;
+                            totalBytesRead++;
                         }
                     }
                 }
 
-                Array.Copy(buffer, startPos, buffer, 0, len - startPos);
-                len = len - startPos;
-
-                while (true)
+                byte[] buffer = readBuffer;
+                if (readBuffer.Length != totalBytesRead)
                 {
-                    Int32 endPos = IndexOf(buffer, len, boundaryBytes);
-                    if (endPos > 0)
-                    {
-                        output.Write(buffer, 0, endPos);
-                        break;
-                    }
-                    else if (len <= boundaryLen)
-                    {
-                        throw new Exception("End Boundary Not Found");
-                    }
-                    else
-                    {
-                        output.Write(buffer, 0, len - boundaryLen);
-                        Array.Copy(buffer, len - boundaryLen, buffer, 0, boundaryLen);
-                        len = input.Read(buffer, boundaryLen, 1024 - boundaryLen) + boundaryLen;
-                    }
+                    buffer = new byte[totalBytesRead];
+                    Buffer.BlockCopy(readBuffer, 0, buffer, 0, totalBytesRead);
                 }
-                output.Seek(0, SeekOrigin.Begin);
-                long ps = FindPosition(output, encoding.GetBytes("\n--"));
-                //startPos = Array.IndexOf(output.ToArray(), enc.GetBytes("\n---"), 0);
-                if (ps > 0)
+                return buffer;
+            }
+            finally
+            {
+                if(stream.CanSeek)
                 {
-                    byte[] b = output.ToArray();
-                    FileStream fs = new FileStream(outputFile, FileMode.Create);
-                    fs.Write(b, 0, (int)ps - 1);
-                    fs.Close();
-                    //Array.Resize(
+                    stream.Position = originalPosition; 
                 }
             }
         }
 
-
-        public static long FindPosition(Stream stream, byte[] byteSequence)
+        public static string SaveFile(Stream input, string outputPath)
         {
-            if (byteSequence.Length > stream.Length)
-                return -1;
-
-            byte[] buffer = new byte[byteSequence.Length];
-
-            using (BufferedStream bufStream = new BufferedStream(stream, byteSequence.Length))
+            var parser = new MultipartParser(ReadToEnd(input));
+            if (parser.Success)
             {
-                while ((bufStream.Read(buffer, 0, byteSequence.Length)) == byteSequence.Length)
+                var fileName = parser.Filename;
+                if (!String.IsNullOrWhiteSpace(outputPath) && Directory.Exists(outputPath))
                 {
-                    if (byteSequence.SequenceEqual(buffer))
-                        return bufStream.Position - byteSequence.Length;
+                    Array.ForEach(Path.GetInvalidFileNameChars(), c => fileName = fileName.Replace(c.ToString(), String.Empty));
+                    outputPath = Path.Combine(outputPath, fileName);
+                }
+                File.WriteAllBytes(outputPath, parser.FileContents);
+            }
+            return outputPath;
+        }
+
+    }
+
+    public class MultipartParser
+    {
+        public MultipartParser(byte[] data)
+        {   
+            this.Parse(data, Encoding.UTF8);
+        }
+
+        public MultipartParser(byte[] data, Encoding encoding)
+        {
+            this.Parse(data, encoding);
+        }
+
+        private void Parse(byte[] data, Encoding encoding)
+        {
+            this.Success = false;
+
+            // Copy to a string for header parsing
+            string content = encoding.GetString(data);
+
+            // The first line should contain the delimiter
+            int delimiterEndIndex = content.IndexOf("\r\n");
+
+            if (delimiterEndIndex > -1)
+            {
+                string delimiter = content.Substring(0, content.IndexOf("\r\n"));
+
+                // Look for Content-Type
+                Regex re = new Regex(@"(?<=Content\-Type:)(.*?)(?=\r\n\r\n)");
+                Match contentTypeMatch = re.Match(content);
+
+                // Look for filename
+                re = new Regex(@"(?<=filename\=\"")(.*?)(?=\"")");
+                Match filenameMatch = re.Match(content);
+
+                // Did we find the required values?
+                if (contentTypeMatch.Success && filenameMatch.Success)
+                {
+                    // Set properties
+                    this.ContentType = contentTypeMatch.Value.Trim();
+                    this.Filename = filenameMatch.Value.Trim();
+
+                    // Get the start & end indexes of the file contents
+                    int startIndex = contentTypeMatch.Index + contentTypeMatch.Length + "\r\n\r\n".Length;
+
+                    byte[] delimiterBytes = encoding.GetBytes("\r\n" + delimiter);
+                    int endIndex = IndexOf(data, delimiterBytes, startIndex);
+
+                    int contentLength = endIndex - startIndex;
+
+                    // Extract the file contents from the byte array
+                    byte[] fileData = new byte[contentLength];
+
+                    Buffer.BlockCopy(data, startIndex, fileData, 0, contentLength);
+
+                    this.FileContents = fileData;
+                    this.Success = true;
+                }
+            }
+        }
+
+        private int IndexOf(byte[] searchWithin, byte[] serachFor, int startIndex)
+        {
+            int index = 0;
+            int startPos = Array.IndexOf(searchWithin, serachFor[0], startIndex);
+
+            if (startPos != -1)
+            {
+                while ((startPos + index) < searchWithin.Length)
+                {
+                    if (searchWithin[startPos + index] == serachFor[index])
+                    {
+                        index++;
+                        if (index == serachFor.Length)
+                        {
+                            return startPos;
+                        }
+                    }
                     else
-                        bufStream.Position -= byteSequence.Length - PadLeftSequence(buffer, byteSequence);
+                    {
+                        startPos = Array.IndexOf<byte>(searchWithin, serachFor[0], startPos + index);
+                        if (startPos == -1)
+                        {
+                            return -1;
+                        }
+                        index = 0;
+                    }
                 }
             }
 
             return -1;
         }
 
-        private static int PadLeftSequence(byte[] bytes, byte[] seqBytes)
+        public bool Success
         {
-            int i = 1;
-            while (i < bytes.Length)
-            {
-                int n = bytes.Length - i;
-                byte[] aux1 = new byte[n];
-                byte[] aux2 = new byte[n];
-                Array.Copy(bytes, i, aux1, 0, n);
-                Array.Copy(seqBytes, aux2, n);
-                if (aux1.SequenceEqual(aux2))
-                    return i;
-                i++;
-            }
-            return i;
+            get;
+            private set;
         }
 
-
-        private static Int32 IndexOf(Byte[] buffer, Int32 len, Byte[] boundaryBytes)
+        public string ContentType
         {
-            for (Int32 i = 0; i <= len - boundaryBytes.Length; i++)
-            {
-                Boolean match = true;
-                for (Int32 j = 0; j < boundaryBytes.Length && match; j++)
-                {
-                    match = buffer[i + j] == boundaryBytes[j];
-                }
-
-                if (match)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
+            get;
+            private set;
         }
 
+        public string Filename
+        {
+            get;
+            private set;
+        }
 
+        public byte[] FileContents
+        {
+            get;
+            private set;
+        }
     }
 }

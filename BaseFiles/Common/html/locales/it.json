@@ -51,8 +51,14 @@
          "Indietro",
     "configure_group_bottombar_group_add": 
          "Agg. Gruppo",
+    "configure_group_group": 
+         "Gruppo",
     "configure_group_groupname": 
-         "Nome Gruppo",
+         "Nome",
+    "configure_group_groupwallpaper":
+        "Sfondo",
+    "configure_group_modulelist":
+        "Elenco Moduli",
     "configure_group_deletegroup": 
          "Rimuovere Gruppo?",
     "configure_group_deleteprompt": 
@@ -773,6 +779,10 @@
         "Non impostato",
     "common_voice_control":
         "Controllo vocale",
+    "common_command_delete":
+        "Elimina",
+    "common_command_upload":
+        "Carica",
 "##":
 "## SIDE MENU LOCALES",
 "##":
