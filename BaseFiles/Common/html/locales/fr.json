@@ -56,9 +56,9 @@
     "configure_group_groupname": 
         "Nom",
     "configure_group_groupwallpaper":
-        "Wallpaper",
+        "Fond d'écran",
     "configure_group_modulelist":
-        "Module List",
+        "Liste des Modules",
     "configure_group_deletegroup": 
         "Supprimer le Groupe ?",
     "configure_group_deleteprompt": 
@@ -780,9 +780,9 @@
     "common_voice_control":
         "Commande vocale",
     "common_command_delete":
-        "Delete",
+        "Supprimer",
     "common_command_upload":
-        "Upload",
+        "Télécharger",
 "##":
 "## SIDE MENU LOCALES",
 "##":
