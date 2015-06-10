@@ -259,16 +259,35 @@ HG.WebApp.InitializePage = function ()
             $('#homegenie_overlay').fadeOut(150);
         })
         .children().first().trigger('create');
-    $('body>[data-role="panel"]' ).on('click', function() {
+    menuPanel.on('click', function() {
         $(this).panel('close');
     });
+    // A swipe gesture open up the Side Panel
+    $( document ).on('swipeleft swiperight', 'div[data-role=page]', function( e ) {
+        if ($('.ui-page-active .ui-popup-active').length == 0)
+        if (!$(e.target).is('span'))
+        if (!$(e.target).is('pre'))
+        if (!$(e.target).is('p'))
+        if (!$(e.target).is(':input'))
+        if ($(e.target).attr('id') != 'page_automation_editprogram')
+        if ($('#page_automation_editprogram').children().find($(e.target)).length == 0)
+        if ($(e.target).attr('id') != 'page_widgeteditor_editwidget')
+        if ($('#page_widgeteditor_editwidget').children().find($(e.target)).length == 0)
+        if ($.mobile.activePage.jqmData('panel') !== 'open') {
+            if (e.type === 'swipeleft') {
+                $(menuPanel.get(0)).panel('open');
+            } else if (e.type === 'swiperight') {
+                $(menuPanel.get(1)).panel('open');
+            }
+        }
+    });
+
     // Cron Event Wizard popup
     HG.Ui.GenerateWidget('core/popup.cronwizard', { parent: $(document).find('body') }, function(handler){
         var element = handler.element;
         element.enhanceWithin().popup();
         HG.Ui.Popup.CronWizard = handler;
     });
-    
 };
 
 

@@ -572,6 +572,14 @@ div.ui-slider-switch.ui-mini {
     min-width:120px;
 }
 
+div[data-role=page]:not(input) {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .freewall {
     float: left;
