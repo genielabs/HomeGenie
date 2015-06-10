@@ -56,9 +56,9 @@
     "configure_group_groupname": 
         "Nom",
     "configure_group_groupwallpaper":
-        "Wallpaper",
+        "Fond d'écran",
     "configure_group_modulelist":
-        "Module List",
+        "Liste des Modules",
     "configure_group_deletegroup": 
         "Supprimer le Groupe ?",
     "configure_group_deleteprompt": 
@@ -340,9 +340,9 @@
     "configure_maintenance_configuration_info": 
         "<b>Note :</b> avant de restaurer un fichier de sauvegarde, vérifiez que vous avez défini le même mot de passe système utilisé lors de sa création.",
     "configure_maintenance_configuration_backup": 
-        "Sauvegarde",
+        "Sauvegarder",
     "configure_maintenance_configuration_restore": 
-        "Restauration",
+        "Restaurer",
     "configure_maintenance_configuration_factory_reset": 
         "Config. Usine",
     "configure_system_modulescleanup": 
@@ -780,11 +780,11 @@
     "common_voice_control":
         "Commande vocale",
     "common_command_delete":
-        "Delete",
+        "Supprimer",
     "common_command_upload":
-        "Upload",
+        "Télécharger",
     "common_select_none":
-        "None",
+        "Aucun",
 "##":
 "## SIDE MENU LOCALES",
 "##":
