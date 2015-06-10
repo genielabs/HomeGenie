@@ -132,36 +132,38 @@ HG.WebApp.GroupModules.InitializePage = function () {
         $('#groupmodules_group_uploadbtn').on('click', function(){
             $('#groupmodules_group_uploadfile').click();
         });
-        $('#groupmodules_group_uploadfile').fileupload({
-            url: '/api/HomeAutomation.HomeGenie/Config/Groups.WallpaperAdd',
-            dropZone: $('[data-upload-dropzone=wallpaper]'),
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $.mobile.loading('show', { text: 'Saving background... '+progress+'%', textVisible: true, theme: 'a', html: '' });
-            },
-            start: function(e) {
-                $.mobile.loading('show', { text: 'Saving background...', textVisible: true, theme: 'a', html: '' });
-            },
-            fail: function (e, data) {
-                $.mobile.loading('hide');
-            },
-            done: function (e, data) {
-                var wp = data.result[0].ResponseValue;
-                $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
-                HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
-                    var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
-                    group.Wallpaper = wp;
-                    HG.WebApp.GroupModules.RefreshWallpaper();
-                    $.mobile.loading('hide');
-                });
-            }
-        });
-
     });
     page.on('pagebeforeshow', function(){
         HG.WebApp.GroupModules.LoadGroupModules();
         $.mobile.loading('show');
         HG.WebApp.GroupModules.RefreshWallpaper();
+    });
+    $('#groupmodules_group_uploadfile').fileupload({
+        url: '/api/HomeAutomation.HomeGenie/Config/Groups.WallpaperAdd',
+        dropZone: $('[data-upload-dropzone=wallpaper]'),
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $.mobile.loading('show', { text: 'Saving background... '+progress+'%', textVisible: true, theme: 'a', html: '' });
+        },
+        start: function(e) {
+            $.mobile.loading('show', { text: 'Saving background...', textVisible: true, theme: 'a', html: '' });
+        },
+        fail: function (e, data) {
+            $.mobile.loading('hide');
+        },
+        done: function (e, data) {
+            var wp = data.result[0].ResponseValue;
+            $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
+            HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
+                var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
+                group.Wallpaper = wp;
+                if ($.mobile.activePage.attr('id') == 'page_control')
+                    $('#page_control').css('background-image', 'url(images/wallpapers/'+wp+')');
+                else
+                    HG.WebApp.GroupModules.RefreshWallpaper();
+                $.mobile.loading('hide');
+            });
+        }
     });
 };
 

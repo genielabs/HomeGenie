@@ -85,10 +85,10 @@ namespace HomeGenie.Service
                                     SourceId = module.Address,
                                     SourceType = module.Description,
                                     Path = ModuleParameters.MODPAR_METER_WATTS,
-                                    Value = level == 0 ? "0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
+                                    Value = level == 0 ? "0.0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
                                 });
                                 //
-                                Thread.Sleep(100);
+                                Thread.Sleep(10);
                             }
                         }
                         catch { }

@@ -82,7 +82,7 @@ HG.WebApp.Control.InitializePage = function () {
 //
 HG.WebApp.Control.ShowGroup = function (gid) {
     $.mobile.loading('show');
-    HG.WebApp.Data._CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
+    HG.WebApp.Data._CurrentGroup = HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
     // set current group wallpaper
     $('#page_control').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');

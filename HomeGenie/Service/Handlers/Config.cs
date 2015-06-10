@@ -667,6 +667,18 @@ namespace HomeGenie.Service.Handlers
                         }
                         else if (newParameter.NeedsUpdate)
                         {
+                            // reset current reporting Watts if VMWatts field is set to 0
+                            if (newParameter.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
+                            {
+                                homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction()
+                                {
+                                    Domain = currentModule.Domain,
+                                    SourceId = currentModule.Address,
+                                    SourceType = currentModule.Description,
+                                    Path = ModuleParameters.MODPAR_METER_WATTS,
+                                    Value = "0.0"
+                                });
+                            }
                             currentParameter.Value = newParameter.Value;
                         }
                     }

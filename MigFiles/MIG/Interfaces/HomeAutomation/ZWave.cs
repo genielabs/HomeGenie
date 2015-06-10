@@ -345,10 +345,13 @@ namespace MIG.Interfaces.HomeAutomation
             string nodeId = request.NodeId;
             Command command = (Command)request.Command;
             ////----------------------
-            /// 
+            ///
+            int n = 0;
+            if (int.TryParse(nodeId, out n))
             lock(syncLock)
             try
             {
+                byte nodeNumber = (byte)n;
                 if (command == Command.CONTROLLER_DISCOVERY)
                 {
                     controller.Discovery();
@@ -404,18 +407,18 @@ namespace MIG.Interfaces.HomeAutomation
                     var level = int.Parse(request.GetOption(0));
                     eventValue = level.ToString(CultureInfo.InvariantCulture);
                     //
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Basic.Set(node, (byte)level);
                 }
                 else if (command == Command.BASIC_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Basic.Get(node);
                 }
                 ////-----------------------
                 else if (command == Command.MULTIINSTANCE_GETCOUNT)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     //
                     switch (request.GetOption(0))
                     {
@@ -435,7 +438,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.MULTIINSTANCE_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     byte instance = (byte)int.Parse(request.GetOption(1)); // parameter index
                     //
                     switch (request.GetOption(0))
@@ -456,7 +459,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.MULTIINSTANCE_SET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     byte instance = (byte)int.Parse(request.GetOption(1)); // parameter index
                     int value = int.Parse(request.GetOption(2));
                     //
@@ -477,85 +480,85 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.SENSORBINARY_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     SensorBinary.Get(node);
                 }
                 else if (command == Command.SENSORMULTILEVEL_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     SensorMultilevel.Get(node);
                 }
                 else if (command == Command.METER_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     // see ZWaveLib Sensor.cs for EnergyMeterScale options
                     int scaleType = 0; int.TryParse(request.GetOption(0), out scaleType);
                     Meter.Get(node, (byte)(scaleType << 0x03));
                 }
                 else if (command == Command.METER_SUPPORTEDGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Meter.GetSupported(node);
                 }
                 else if (command == Command.METER_RESET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Meter.Reset(node);
                 }
                 else if (command == Command.NODEINFO_GET)
                 {
-                    controller.GetNodeInformationFrame((byte)int.Parse(nodeId));
+                    controller.GetNodeInformationFrame(nodeNumber);
                 }
                 ////-----------------------
                 else if (command == Command.BATTERY_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Battery.Get(node);
                 }
                 ////-----------------------
                 else if (command == Command.ASSOCIATION_SET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Association.Set(node, (byte)int.Parse(request.GetOption(0)), (byte)int.Parse(request.GetOption(1)));
                 }
                 else if (command == Command.ASSOCIATION_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Association.Get(node, (byte)int.Parse(request.GetOption(0))); // groupid
                 }
                 else if (command == Command.ASSOCIATION_REMOVE)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Association.Remove(node, (byte)int.Parse(request.GetOption(0)), (byte)int.Parse(request.GetOption(1))); // groupid
                 }
                 ////-----------------------
                 else if (command == Command.MANUFACTURERSPECIFIC_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ManufacturerSpecific.Get(node);
                 }
                 ////------------------
                 else if (command == Command.CONFIG_PARAMETERSET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     //byte[] value = new byte[] { (byte)int.Parse(option1) };//BitConverter.GetBytes(Int16.Parse(option1));
                     //Array.Reverse(value);
                     Configuration.Set(node, (byte)int.Parse(request.GetOption(0)), int.Parse(request.GetOption(1)));
                 }
                 else if (command == Command.CONFIG_PARAMETERGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Configuration.Get(node, (byte)int.Parse(request.GetOption(0)));
                 }
                 ////------------------
                 else if (command == Command.WAKEUP_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     WakeUp.Get(node);
                 }
                 else if (command == Command.WAKEUP_SET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     WakeUp.Set(node, uint.Parse(request.GetOption(0)));
                 }
                 ////------------------
@@ -563,7 +566,7 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     raiseEvent = true;
                     eventValue = "1";
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Basic.Set(node, 0xFF);
                     SetNodeLevel(node, 0xFF);
                 }
@@ -571,7 +574,7 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     raiseEvent = true;
                     eventValue = "0";
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     Basic.Set(node, 0x00);
                     SetNodeLevel(node, 0x00);
                 }
@@ -583,7 +586,7 @@ namespace MIG.Interfaces.HomeAutomation
                     // the max value should be obtained from node parameters specifications,
                     // here we assume that the commonly used interval is [0-99] for most multilevel switches
                     if (level >= 100) level = 99;
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     if(node.SupportCommandClass(CommandClass.SwitchMultilevel))
                         SwitchMultilevel.Set(node, (byte)level);
                     else
@@ -593,7 +596,7 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROL_TOGGLE)
                 {
                     raiseEvent = true;
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     if (GetNodeLevel(node) == 0)
                     {
                         eventValue = "1";
@@ -609,12 +612,12 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.THERMOSTAT_MODEGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatMode.Get(node);
                 }
                 else if (command == Command.THERMOSTAT_MODESET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatMode.Value mode = (ThermostatMode.Value)Enum.Parse(typeof(ThermostatMode.Value), request.GetOption(0));
                     //
                     raiseEvent = true;
@@ -625,13 +628,13 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatSetPoint.Value mode = (ThermostatSetPoint.Value)Enum.Parse(typeof(ThermostatSetPoint.Value), request.GetOption(0));
                     ThermostatSetPoint.Get(node, mode);
                 }
                 else if (command == Command.THERMOSTAT_SETPOINTSET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatSetPoint.Value mode = (ThermostatSetPoint.Value)Enum.Parse(typeof(ThermostatSetPoint.Value), request.GetOption(0));
                     double temperature = double.Parse(request.GetOption(1).Replace(',', '.'), CultureInfo.InvariantCulture);
                     //
@@ -643,12 +646,12 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.THERMOSTAT_FANMODEGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatFanMode.Get(node);
                 }
                 else if (command == Command.THERMOSTAT_FANMODESET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatFanMode.Value mode = (ThermostatFanMode.Value)Enum.Parse(typeof(ThermostatFanMode.Value), request.GetOption(0));
                     //
                     raiseEvent = true;
@@ -659,17 +662,17 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.THERMOSTAT_FANSTATEGET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatFanState.Get(node);
                 }
                 else if (command == Command.THERMOSTAT_OPERATINGSTATE_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     ThermostatOperatingState.GetOperatingState(node);
                 }
                 else if(command==Command.USERCODE_SET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     byte userId = byte.Parse(request.GetOption(0));
                     byte userIdStatus = byte.Parse(request.GetOption(1));
                     byte[] tagCode = ZWaveLib.Utility.HexStringToByteArray(request.GetOption(2));
@@ -677,13 +680,13 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.DOORLOCK_SET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     DoorLock.Value mode = (DoorLock.Value)Enum.Parse(typeof(DoorLock.Value), request.GetOption(0));
                     DoorLock.Set(node, mode);
                 }
                 else if (command == Command.DOORLOCK_GET)
                 {
-                    var node = controller.GetDevice((byte)int.Parse(nodeId));
+                    var node = controller.GetDevice(nodeNumber);
                     DoorLock.Get(node);
                 }
             }

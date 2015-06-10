@@ -158,7 +158,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                         text: 'Runtime<br />Error',
                         timestamp: date
                     };
-                    if ($.mobile.activePage.attr("id") == "page_automation_editprogram") {
+                    if ($.mobile.activePage.attr("id") == 'page_automation_editprogram') {
                         HG.WebApp.ProgramEdit.RefreshProgramOptions();
                     }
                 }
