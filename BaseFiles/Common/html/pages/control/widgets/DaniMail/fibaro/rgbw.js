@@ -1,7 +1,7 @@
-﻿[{
+[{
     Name: "Fibaro RGBW",
     Author: "DaniMail",
-    Version: "01  2014-02-05",
+    Version: "02  2015-06-10",
 
     GroupName: '',
     IconImage: 'pages/control/widgets/homegenie/generic/images/light_off.png',
@@ -33,11 +33,22 @@
             //
             // initialization stuff here
             //
-            // when widget is clicked control popup is shown
-            widget.on('click', function () {
+            // settings button
+            widget.find('[data-ui-field=settings]').on('click', function () {
+                HG.WebApp.Control.EditModule(module);
+            });
+            //
+            // options button shows popup window
+            widget.find('[data-ui-field=options]').on('click', function () {
                 if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
                     $(cuid).find('[data-ui-field=widget]').data('ControlPopUp').popup('open');
                 }
+            });
+            widget.find('[data-ui-field=on]').on('click', function () {
+                HG.Control.Modules.ServiceCall("Control.On", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
+            });
+            widget.find('[data-ui-field=off]').on('click', function () {
+                HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
             });
             //
             // ui events handlers
@@ -47,11 +58,6 @@
             });
             controlpopup.find('[data-ui-field=off]').on('click', function () {
                 HG.Control.Modules.ServiceCall("Control.Off", "HomeAutomation.FibaroRGBW", module.Address, null, function (data) { });
-            });
-            //
-            // settings button
-            widget.find('[data-ui-field=settings]').on('click', function () {
-                HG.WebApp.Control.EditModule(module);
             });
             //
             controlpopup.find('[data-ui-field=prg1]').on('click', function () {
@@ -85,17 +91,19 @@
                 HG.Control.Modules.ServiceCall("Control.ProgramRGB", "HomeAutomation.FibaroRGBW", module.Address, "10", function (data) { });
             });
             //
+            var _this = this;
             this.ColorWheel = Raphael.colorwheel(controlpopup.find('[data-ui-field=colors]'), 200, 80);
             this.ColorWheel.ondrag(null, function (rgbcolor) {
                 var color = Raphael.color(rgbcolor);
                 //
-                iconp1.clear(); iconp1.ball(20, 20, 20, color);
-                iconp2.clear(); iconp2.ball(20, 20, 20, color);
+                iconp1.clear(); iconp1.ball(22, 22, 22, color);
+                iconp2.clear(); iconp2.ball(22, 22, 22, color);
                 //
-                var red = color.r;
-                var green = color.g;
-                var blue = color.b;
+                var red = Math.round(color.r);
+                var green = Math.round(color.g);
+                var blue = Math.round(color.b);
                 var srgbcolor = red + "," + green + "," + blue;
+                _this.ColorWheel.color(rgbcolor);
                 //
                 HG.Control.Modules.ServiceCall("Control.ColorHsb", "HomeAutomation.FibaroRGBW", module.Address, srgbcolor, function (data) { });
             });
@@ -123,34 +131,37 @@
             if (typeof updatetime != 'undefined') {
                 updatetime = updatetime.replace(' ', 'T'); // fix for IE and FF
                 var d = new Date(updatetime);
-                this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + '<br>' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
+                this.UpdateTime = HG.WebApp.Utility.FormatDate(d) + ' ' + HG.WebApp.Utility.FormatDateTime(d); //HG.WebApp.Utility.GetElapsedTimeText(d);
             }
             //
             level = level.Value.replace(',', '.') * 100;
             if (level >= 99 || level == 0) {
                 if (level >= 99) {
                     level = 'ON';
+                    this.StatusText = '<img width="16" height="16" src="images/common/led_green.png" style="vertical-align:middle" />';
                 }
                 else {
                     level = 'OFF';
+                    this.StatusText = '<img width="16" height="16" src="images/common/led_black.png" style="vertical-align:middle" />';
                 }
             }
             else {
                 level = level.toFixed(0) + '%';
+                this.StatusText = '<img width="16" height="16" src="images/common/led_green.png" style="vertical-align:middle" />';
             }
 
         } else level = '';
         //
-        this.StatusText = level + watts;
+        this.StatusText = '<span style="vertical-align:middle">' + watts + '&nbsp;&nbsp;&nbsp;' + level + '</span>&nbsp;' + this.StatusText;
         //
         var srgbcolor = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.ColorHsb");
         if (srgbcolor != null && this.ColorWheel != null) {
-            srgbcolor = 'rgb(' + srgbcolor.Value + ')';
-            var color = Raphael.color(srgbcolor);
-            if (level == 'OFF') color.v = 0.05;
-            this.ColorWheel.color(srgbcolor);
-            this.WidgetImage.clear(); this.WidgetImage.ball(20, 20, 20, color);
-            this.ControlImage.clear(); this.ControlImage.ball(20, 20, 20, color);
+            var rgbcolor = 'rgb('+srgbcolor.Value+')';
+            var color = Raphael.rgb2hsb(rgbcolor);
+            if (level == 'OFF') color.b = 0.05;
+            this.ColorWheel.color(rgbcolor);
+            this.WidgetImage.clear(); this.WidgetImage.ball(22, 22, 22, color);
+            this.ControlImage.clear(); this.ControlImage.ball(22, 22, 22, color);
         }
         //
         this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' <strong>' + module.Address + '</strong>';
@@ -166,7 +177,7 @@
         //
         controlpopup.find('[data-ui-field=group]').html(this.GroupName);
         controlpopup.find('[data-ui-field=name]').html(module.Name);
-        controlpopup.find('[data-ui-field=status]').html(this.StatusText);
+        controlpopup.find('[data-ui-field=status]').html(level + '<br />' + watts);
     }
 
 }]
