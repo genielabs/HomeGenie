@@ -206,7 +206,9 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-                HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'].DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
+                var zwaveInterface = HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'];
+                if (zwaveInterface && zwaveInterface.DiscoveryLog)
+                    zwaveInterface.DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing
