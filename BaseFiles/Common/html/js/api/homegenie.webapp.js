@@ -21,12 +21,6 @@ HG.WebApp.Data._CurrentGroupIndex = 0;
 HG.WebApp.Data._DefaultLocale = {};
 HG.WebApp.Data._CurrentLocale = {};
 //
-// Code Mirror editor instances (TODO: refactor these global vars to a better name)
-var editor1 = null;
-var editor2 = null;
-var editor3 = null;
-var editor4 = null;
-//
 // Speech Recognition objects
 var recognition = null;
 var final_transcript = '';
@@ -135,70 +129,6 @@ HG.WebApp.InitializePage = function ()
         }, 5000);
 
     }, 100);
-    //
-    // Code Mirror and other UI widgets
-    //
-    editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-1", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    editor3 = CodeMirror.fromTextArea(document.getElementById('automation_program_sketchfile'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-3", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { globalVars: true },
-        theme: 'ambiance'
-    });
-    $(editor3.getWrapperElement()).hide();
-    //
-    editor4 = CodeMirror.fromTextArea(document.getElementById('fullscreen_edit_text'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        extraKeys: {
-            "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
-            "Ctrl-Space": "autocomplete"
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-lint-markers-4", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        highlightSelectionMatches: { showToken: /\w/ },
-        mode: { name: "javascript", globalVars: true },
-        theme: 'ambiance'
-    });    
     //
     // stacked message popups
     //
@@ -410,7 +340,25 @@ HG.WebApp.Home.UpdateInterfacesStatus = function()
 // info      : global utility functions
 //
 HG.WebApp.Utility = HG.WebApp.Utility || {};
+// code mirror full screen editor popup
+HG.WebApp.Utility._cmFsEditor = null;
 HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callback) {
+    if (HG.WebApp.Utility._cmFsEditor == null) {
+        HG.WebApp.Utility._cmFsEditor = CodeMirror.fromTextArea(document.getElementById('fullscreen_edit_text'), {
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete"
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers-4", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            highlightSelectionMatches: { showToken: /\w/ },
+            mode: { name: "javascript", globalVars: true },
+            theme: 'ambiance'
+        });    
+    }
     var editor = $('#fullscreen_edit_box');
     editor.find('[data-ui-field=title]').html(title);
     editor.find('[data-ui-field=subtitle]').html(subtitle);
@@ -427,14 +375,14 @@ HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callbac
         nameInputDiv.hide();
     }
     cancelButton.on('click', function() {
-        var response = { 'name': nameInputText.val(), 'text': editor4.getValue(), 'isCanceled': true };
+        var response = { 'name': nameInputText.val(), 'text': HG.WebApp.Utility._cmFsEditor.getValue(), 'isCanceled': true };
         cancelButton.off('click');
         confirmButton.off('click');
         $('#fullscreen_edit_box').hide(150);
         callback(response);
     });
     confirmButton.on('click', function() {
-        var response = { 'name': nameInputText.val(), 'text': editor4.getValue(), 'isCanceled': false };
+        var response = { 'name': nameInputText.val(), 'text': HG.WebApp.Utility._cmFsEditor.getValue(), 'isCanceled': false };
         if (nameInputText.val() == '') {
             nameInputText.qtip({
                 content: {
@@ -456,11 +404,11 @@ HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callbac
             callback(response);
         }
     });
-    editor4.setValue(content);
+    HG.WebApp.Utility._cmFsEditor.setValue(content);
     setTimeout(function(){
-        editor4.refresh();
-        editor4.focus();
-        editor4.setCursor({ line: 0, ch: 0 });
+        HG.WebApp.Utility._cmFsEditor.refresh();
+        HG.WebApp.Utility._cmFsEditor.focus();
+        HG.WebApp.Utility._cmFsEditor.setCursor({ line: 0, ch: 0 });
     }, 500);
     $('#fullscreen_edit_box').show(150);
 };

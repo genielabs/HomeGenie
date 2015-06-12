@@ -185,7 +185,7 @@ end;
 
 [Files]
 Source: "C:\Program Files\ISTool\isxdl.dll"; Flags: dontcopy
-Source: "..\..\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
+Source: ".\Drivers\USB_ActiveHome_Interface\*"; DestDir: "{app}\Drivers\LibUsb_MarmitekCM15Pro"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "..\..\HomeGenie\bin\Debug\HomeGenie.exe"; DestDir: "{app}"; Flags: ignoreversion replacesameversion
 Source: "..\..\HomeGenie\bin\Debug\README.TXT"; DestDir: "{app}"; Flags: ignoreversion replacesameversion

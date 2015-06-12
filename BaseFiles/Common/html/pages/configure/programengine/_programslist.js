@@ -569,7 +569,58 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog) {
     return statusColor;
 };
 
+var editor1 = null;
+var editor2 = null;
+var editor3 = null;
 HG.WebApp.ProgramsList.EditProgram = function () {
+    if (editor1 == null) {
+        editor1 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptcondition'), {
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete"
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers-1", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            highlightSelectionMatches: { showToken: /\w/ },
+            mode: { globalVars: true },
+            theme: 'ambiance'
+        });
+        editor2 = CodeMirror.fromTextArea(document.getElementById('automation_program_scriptsource'), {
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete"
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers-2", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            highlightSelectionMatches: { showToken: /\w/ },
+            mode: { globalVars: true },
+            theme: 'ambiance'
+        });
+        editor3 = CodeMirror.fromTextArea(document.getElementById('automation_program_sketchfile'), {
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            extraKeys: {
+                "Ctrl-S": function (cm) { HG.WebApp.ProgramEdit.SaveProgram(); },
+                "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
+                "Ctrl-Space": "autocomplete"
+            },
+            foldGutter: true,
+            gutters: ["CodeMirror-lint-markers-3", "CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            highlightSelectionMatches: { showToken: /\w/ },
+            mode: { globalVars: true },
+            theme: 'ambiance'
+        });
+        $(editor3.getWrapperElement()).hide();
+    }
     $('#automation_programgroup').empty();
     $('#automation_programgroup').append('<option value="">(select program group)</option>');
     for (var i = 0; i < HG.WebApp.Data.AutomationGroups.length; i++) {

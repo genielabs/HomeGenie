@@ -279,8 +279,6 @@ namespace HomeGenie.Automation.Scripting
                             smtpClient.EnableSsl = (this.mailSsl == 1);
                         }
                         smtpClient.Send(message);
-                        smtpClient.Dispose();
-                        //
                         attachments.Clear();
                     }
                     catch (Exception ex)
@@ -293,6 +291,10 @@ namespace HomeGenie.Automation.Scripting
                             ex.StackTrace
                         );
                         return false;
+                    }
+                    finally 
+                    {
+                        smtpClient.Dispose();
                     }
                 }
             }
@@ -427,6 +429,10 @@ namespace HomeGenie.Automation.Scripting
                         ex.StackTrace
                     );
                 }
+                finally 
+                {
+                    webClient.Dispose();
+                }
             }
             return returnvalue;
         }
@@ -488,8 +494,19 @@ namespace HomeGenie.Automation.Scripting
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
                     responseBytes = webClient.DownloadData(this.webServiceUrl);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    HomeGenieService.LogEvent(
+                        Domains.HomeAutomation_HomeGenie_Automation,
+                        this.GetType().Name,
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
+                }
+                finally 
+                {
+                    webClient.Dispose();
                 }
             }
             return responseBytes;
@@ -631,19 +648,11 @@ namespace HomeGenie.Automation.Scripting
             this.webServiceUrl = "";
             this.mailService = "localhost";
             this.networkCredential = null;
-            //this.mailTo = "";
             this.mailBody = "";
             this.mailSubject = "";
-            //
             if (this.mqttClient != null)
             {
-                try
-                {
-                    this.mqttClient.Dispose();
-                }
-                catch
-                {
-                }
+                try { this.mqttClient.Dispose(); } catch { }
             }
         }
 
@@ -652,6 +661,7 @@ namespace HomeGenie.Automation.Scripting
             protected override WebRequest GetWebRequest(Uri uri)
             {
                 WebRequest w = base.GetWebRequest(uri);
+                // WebClient default timeout set to 30 seconds
                 w.Timeout = 30 * 1000;
                 return w;
             }

@@ -2211,9 +2211,6 @@
     <None Include="html\pages\header.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="html\pages\home.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\pages\analyze\_statistics.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2224,9 +2221,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\apps\netplay\slideshow.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="html\pages\configure\main.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\pages\configure\groups\_groupmodules.js">
@@ -4740,106 +4734,6 @@
     <None Include="html\js\api\homegenie.ui.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll">
-      <Link>lib\CronExpressionDescriptor.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll.mdb">
-      <Link>lib\CronExpressionDescriptor.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
-      <Link>lib\de\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\es\CronExpressionDescriptor.resources.dll">
-      <Link>lib\es\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\fr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\fr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\it\CronExpressionDescriptor.resources.dll">
-      <Link>lib\it\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\nl\CronExpressionDescriptor.resources.dll">
-      <Link>lib\nl\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\no\CronExpressionDescriptor.resources.dll">
-      <Link>lib\no\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\ru\CronExpressionDescriptor.resources.dll">
-      <Link>lib\ru\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\tr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\tr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\uk\CronExpressionDescriptor.resources.dll">
-      <Link>lib\uk\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\CronExpressionDescriptor\zh-CHS\CronExpressionDescriptor.resources.dll">
-      <Link>lib\zh-CHS\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\knx.net\KNXLib.dll">
-      <Link>lib\KNXLib.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\knx.net\KNXLib.dll.mdb">
-      <Link>lib\KNXLib.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\NCrontab\NCrontab.dll">
-      <Link>lib\NCrontab.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\NCrontab\NCrontab.pdb">
-      <Link>lib\NCrontab.pdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\ExpressionEvaluation\ExpressionEvaluation.dll">
-      <Link>lib\ExpressionEvaluation.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\Nmqtt.dll">
-      <Link>lib\Nmqtt.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\Nmqtt.dll.mdb">
-      <Link>lib\Nmqtt.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\System.Reactive.Core.dll">
-      <Link>lib\System.Reactive.Core.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\System.Reactive.Interfaces.dll">
-      <Link>lib\System.Reactive.Interfaces.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\System.Reactive.Linq.dll">
-      <Link>lib\System.Reactive.Linq.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\nmqtt\System.Reactive.PlatformServices.dll">
-      <Link>lib\System.Reactive.PlatformServices.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\upnp\UPnP.dll">
-      <Link>lib\UPnP.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\HomeGenie\Externals\upnp\UPnP.dll.mdb">
-      <Link>lib\UPnP.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="html\ui\widgets\cron.text.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4899,6 +4793,81 @@
     </None>
     <None Include="html\images\wallpapers\wallpaper_004.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll">
+      <Link>lib\CronExpressionDescriptor.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll.mdb">
+      <Link>lib\CronExpressionDescriptor.dll.mdb</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
+      <Link>lib\de\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\es\CronExpressionDescriptor.resources.dll">
+      <Link>lib\es\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\fr\CronExpressionDescriptor.resources.dll">
+      <Link>lib\fr\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\it\CronExpressionDescriptor.resources.dll">
+      <Link>lib\it\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\nl\CronExpressionDescriptor.resources.dll">
+      <Link>lib\nl\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\no\CronExpressionDescriptor.resources.dll">
+      <Link>lib\no\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\ru\CronExpressionDescriptor.resources.dll">
+      <Link>lib\ru\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\tr\CronExpressionDescriptor.resources.dll">
+      <Link>lib\tr\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\uk\CronExpressionDescriptor.resources.dll">
+      <Link>lib\uk\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\zh-CHS\CronExpressionDescriptor.resources.dll">
+      <Link>lib\zh-CHS\CronExpressionDescriptor.resources.dll</Link>
+    </None>
+    <None Include="..\..\Externals\ExpressionEvaluation\ExpressionEvaluation.dll">
+      <Link>lib\ExpressionEvaluation.dll</Link>
+    </None>
+    <None Include="..\..\Externals\knx.net\KNXLib.dll">
+      <Link>lib\KNXLib.dll</Link>
+    </None>
+    <None Include="..\..\Externals\knx.net\KNXLib.dll.mdb">
+      <Link>lib\KNXLib.dll.mdb</Link>
+    </None>
+    <None Include="..\..\Externals\NCrontab\NCrontab.dll">
+      <Link>lib\NCrontab.dll</Link>
+    </None>
+    <None Include="..\..\Externals\NCrontab\NCrontab.pdb">
+      <Link>lib\NCrontab.pdb</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\Nmqtt.dll">
+      <Link>lib\Nmqtt.dll</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\Nmqtt.dll.mdb">
+      <Link>lib\Nmqtt.dll.mdb</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\System.Reactive.Core.dll">
+      <Link>lib\System.Reactive.Core.dll</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\System.Reactive.Interfaces.dll">
+      <Link>lib\System.Reactive.Interfaces.dll</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\System.Reactive.Linq.dll">
+      <Link>lib\System.Reactive.Linq.dll</Link>
+    </None>
+    <None Include="..\..\Externals\nmqtt\System.Reactive.PlatformServices.dll">
+      <Link>lib\System.Reactive.PlatformServices.dll</Link>
+    </None>
+    <None Include="..\..\Externals\upnp\UPnP.dll">
+      <Link>lib\UPnP.dll</Link>
+    </None>
+    <None Include="..\..\Externals\upnp\UPnP.dll.mdb">
+      <Link>lib\UPnP.dll.mdb</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

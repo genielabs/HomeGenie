@@ -37,12 +37,6 @@
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\HomeGenie\Externals\json\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="UPnP">
-      <HintPath>..\..\HomeGenie\Externals\upnp\UPnP.dll</HintPath>
-    </Reference>
     <Reference Include="Ude">
       <HintPath>Externals\ude-0.1\Ude.dll</HintPath>
     </Reference>
@@ -51,6 +45,12 @@
     </Reference>
     <Reference Include="LibUsbDotNet">
       <HintPath>..\SupportLibraries\XTenLib\LibUsbDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Externals\json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="UPnP">
+      <HintPath>..\..\Externals\upnp\UPnP.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

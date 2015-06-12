@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+12/06/2015 v1.00-beta.492-p1
+    - Removed deprecated html pages
+    - Fixed possible memory leak both in Net Helper HTTP and SMTP clients
+    - Fixed "DiscoveryLog" javascript error
+
 08/06/2015 1.00 beta rev 492
     - Added customizable wallpapers to control groups
     - Fixed group separator add/remove bug

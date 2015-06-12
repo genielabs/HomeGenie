@@ -69,39 +69,39 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExpressionEvaluation">
-      <HintPath>Externals\ExpressionEvaluation\ExpressionEvaluation.dll</HintPath>
+      <HintPath>..\Externals\ExpressionEvaluation\ExpressionEvaluation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IronPython">
-      <HintPath>Externals\Scripting\IronPython.dll</HintPath>
+      <HintPath>..\Externals\Scripting\IronPython.dll</HintPath>
     </Reference>
     <Reference Include="IronPython.Modules">
-      <HintPath>Externals\Scripting\IronPython.Modules.dll</HintPath>
+      <HintPath>..\Externals\Scripting\IronPython.Modules.dll</HintPath>
     </Reference>
     <Reference Include="IronRuby">
-      <HintPath>Externals\Scripting\IronRuby.dll</HintPath>
+      <HintPath>..\Externals\Scripting\IronRuby.dll</HintPath>
     </Reference>
     <Reference Include="IronRuby.Libraries">
-      <HintPath>Externals\Scripting\IronRuby.Libraries.dll</HintPath>
+      <HintPath>..\Externals\Scripting\IronRuby.Libraries.dll</HintPath>
     </Reference>
     <Reference Include="IronRuby.Libraries.Yaml">
-      <HintPath>Externals\Scripting\IronRuby.Libraries.Yaml.dll</HintPath>
+      <HintPath>..\Externals\Scripting\IronRuby.Libraries.Yaml.dll</HintPath>
     </Reference>
     <Reference Include="Jint">
-      <HintPath>Externals\Scripting\Jint.dll</HintPath>
+      <HintPath>..\Externals\Scripting\Jint.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic">
-      <HintPath>Externals\Scripting\Microsoft.Dynamic.dll</HintPath>
+      <HintPath>..\Externals\Scripting\Microsoft.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Scripting">
-      <HintPath>Externals\Scripting\Microsoft.Scripting.dll</HintPath>
+      <HintPath>..\Externals\Scripting\Microsoft.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Scripting.Metadata">
-      <HintPath>Externals\Scripting\Microsoft.Scripting.Metadata.dll</HintPath>
+      <HintPath>..\Externals\Scripting\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="NCrontab">
-      <HintPath>Externals\NCrontab\NCrontab.dll</HintPath>
+      <HintPath>..\Externals\NCrontab\NCrontab.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,75 +112,75 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UPnP">
-      <HintPath>Externals\upnp\UPnP.dll</HintPath>
+      <HintPath>..\Externals\upnp\UPnP.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Raspberry.System">
-      <HintPath>Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Externals\json\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Externals\json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite">
-      <HintPath>Externals\sqlite\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\Externals\sqlite\System.Data.SQLite.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Common.Logging.Core">
-      <HintPath>Externals\nmqtt\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging">
-      <HintPath>Externals\nmqtt\Common.Logging.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Nmqtt">
-      <HintPath>Externals\nmqtt\Nmqtt.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\Nmqtt.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Core">
-      <HintPath>Externals\nmqtt\System.Reactive.Core.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\System.Reactive.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
-      <HintPath>Externals\nmqtt\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\System.Reactive.Interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.Linq">
-      <HintPath>Externals\nmqtt\System.Reactive.Linq.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\System.Reactive.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
+      <HintPath>..\Externals\nmqtt\System.Reactive.PlatformServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Raspberry.IO.SerialPeripheralInterface">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.SerialPeripheralInterface.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.Interop">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.Interop.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.InterIntegratedCircuit">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.InterIntegratedCircuit.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.GeneralPurpose">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.GeneralPurpose.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.dll</HintPath>
     </Reference>
     <Reference Include="Raspberry.IO.Components">
-      <HintPath>Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\Raspberry.IO.Components.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="KNXLib">
-      <HintPath>Externals\knx.net\KNXLib.dll</HintPath>
+      <HintPath>..\Externals\knx.net\KNXLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnitsNet">
-      <HintPath>Externals\raspberry-sharp\UnitsNet.dll</HintPath>
+      <HintPath>..\Externals\raspberry-sharp\UnitsNet.dll</HintPath>
     </Reference>
     <Reference Include="CronExpressionDescriptor">
-      <HintPath>Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
+      <HintPath>..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
