@@ -98,5 +98,6 @@
         <Options />
       </Interface>
     </Interfaces>
+    <EnableWebCache>true</EnableWebCache>
   </MIGService>
 </SystemConfiguration>

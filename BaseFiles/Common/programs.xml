@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:52.101709Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:31.474614Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -159,8 +159,8 @@ Program.GoBackground();</ScriptSource>
 
 Program.Setup(()=&gt;{
 
-  	Program.AddInputField("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address");
-  	Program.AddInputField("BridgeUsername","newdeveloper", "Philips Hue Bridge API username");
+  	Program.AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text");
+  	Program.AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text");
   	//
   	// Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
   	// "Dimmer" is the type and "GenericColorLight" is the widget to be used to display the virtual module
@@ -173,89 +173,90 @@ return true;
 </ScriptCondition>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
-  	if (Program.InputField("BridgeAddress").Value == "" || Program.InputField("BridgeAddress").Value.EndsWith("?"))
-    {
-      	return false;
-    }
-	string webserviceurl = "http://" + 
-  			Program.InputField("BridgeAddress").Value + "/api/" + 
-  			Program.InputField("BridgeUsername").Value + "/lights/" + lightnum + "/state";
-	Net.WebService(webserviceurl).Put( jsonargs ).Call();
-  	return true;
+  if (Program.Option("BridgeAddress").Value == "" || Program.Option("BridgeAddress").Value.EndsWith("?"))
+  {
+    return false;
+  }
+  string webserviceurl = "http://" + 
+    Program.Option("BridgeAddress").Value + "/api/" + 
+    Program.Option("BridgeUsername").Value + "/lights/" + lightnum + "/state";
+  Net.WebService(webserviceurl).Put( jsonargs ).Call();
+  return true;
 };
 
 var hueModules = Modules.InDomain("HomeAutomation.PhilipsHue");
 // - http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/...
-When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; 
-{
-    string[] reqs = ((string)args).Split('/');
-    //string domain = reqs[0];
-    try
+When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
+  string[] reqs = ((string)args).Split('/');
+  //string domain = reqs[0];
+  try
+  {
+    string lightnumber = reqs[1];
+    string command = reqs[2];
+    string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
+    //
+    var module = hueModules.WithAddress(lightnumber).Get();
+    //
+    switch(command)
     {
-      string lightnumber = reqs[1];
-      string command = reqs[2];
-      string parameter = ""; if (reqs.Length &gt; 3) parameter = Uri.UnescapeDataString(reqs[3]);
-      //
-      var module = hueModules.WithAddress(lightnumber).Get();
-      //
-      switch(command)
-      {
-		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
-        case "Control.On":
-	        bridgeapicall(lightnumber, "{ \"on\" : true }");
-        	Program.RaiseEvent(module, "Status.Level", "1", "Hue Light");
-        	break;
-		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.On
+      case "Control.On":
+        bridgeapicall(lightnumber, "{ \"on\" : true }");
+        string[] hsb1 = module.Parameter("Status.ColorHsb").Value.Split(',');
+        Program.RaiseEvent(module, "Status.Level", hsb1[2], "Hue Light");
+        break;
+        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
         case "Control.Off":
-    	    bridgeapicall(lightnumber, "{ \"on\" : false }");
-        	Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
-        	break;
-        case "Control.Toggle":
-        	if (module.Parameter("Status.Level").DecimalValue == 0)
-            {
-              	bridgeapicall(lightnumber, "{ \"on\" : true }");
-              	Program.RaiseEvent(module, "Status.Level", "1", "Hue Light");
-            }
-        	else
-            {
-              	bridgeapicall(lightnumber, "{ \"on\" : false }");
-	        	Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
-            }
-        	break;
-        case "Control.Level":
-        	if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
-    	    bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
-            Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture), "Hue Light");
-        	break;
-		// eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+        bridgeapicall(lightnumber, "{ \"on\" : false }");
+        Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+        break;
+      case "Control.Toggle":
+        if (module.Parameter("Status.Level").DecimalValue == 0)
+        {
+          bridgeapicall(lightnumber, "{ \"on\" : true }");
+          string[] hsb2 = module.Parameter("Status.ColorHsb").Value.Split(',');
+          Program.RaiseEvent(module, "Status.Level", hsb2[2], "Hue Light");
+        }
+        else
+        {
+          bridgeapicall(lightnumber, "{ \"on\" : false }");
+          Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
+        }
+        break;
+      case "Control.Level":
+        if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
+        bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+        Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture), "Hue Light");
+        break;
+        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
         case "Control.ColorHsb":
-        	string[] values = parameter.Split(',');
-        	double transition = 5;
-        	if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
-    	    bridgeapicall(lightnumber, "{ \"on\" : true" + 
-                        ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) + 
-                        ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
-                        ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
-						", \"transitiontime\" : " + transition.ToString() +  "}");
-            Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
-            Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
-        	break; 
-        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
-        case "Control.Alert":
-         	// eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
-          	string alertType = "select";
-          	if (parameter == "Long") {alertType = "lselect";}
-          	bridgeapicall(lightnumber, "{\"alert\" : \"" + alertType + "\"}");
-          	break; 
-      }
-      //
-      return "{ 'ResponseValue' : 'OK' }";    
-    } catch (Exception e) { 
-      
-    	Program.Notify("Philips Hue ERROR!", e.Message);
-                       
+        string[] values = parameter.Split(',');
+        double transition = 5;
+        if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
+        bridgeapicall(lightnumber, "{ \"on\" : true" + 
+                      ", \"hue\" : " + (int)(double.Parse(values[0], CultureInfo.InvariantCulture) * 65536) + 
+                      ", \"sat\" : " + (int)(double.Parse(values[1], CultureInfo.InvariantCulture) * 255) + 
+                      ", \"bri\" : " + (int)(double.Parse(values[2], CultureInfo.InvariantCulture) * 255) + 
+                      ", \"transitiontime\" : " + transition.ToString() +  "}");
+        Program.RaiseEvent(module, "Status.Level", (double.Parse(values[2], CultureInfo.InvariantCulture)).ToString(), "Hue Light");
+        Program.RaiseEvent(module, "Status.ColorHsb", parameter, "Hue Light");
+        break; 
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Alert/Long
+      case "Control.Alert":
+        // eg. Modules.WithName("Light 1").Command("Control.Alert").Set(""); for a short alert Set("Long"); for a 30 second alert
+        string alertType = "select";
+        if (parameter == "Long") {alertType = "lselect";}
+        bridgeapicall(lightnumber, "{\"alert\" : \"" + alertType + "\"}");
+        break; 
     }
-    return "{ 'ResponseValue' : 'ERROR' }";
+    //
+    return "{ 'ResponseValue' : 'OK' }";    
+  } catch (Exception e) { 
+
+    Program.Notify("Philips Hue ERROR!", e.Message);
+
+  }
+  return "{ 'ResponseValue' : 'ERROR' }";
 });
 
 Program.GoBackground();
@@ -270,8 +271,8 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <Features />
-    <ActivationTime>2015-01-29T12:53:43.059487Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:52.603419Z</TriggerTime>
+    <ActivationTime>2015-06-13T16:41:59.495313Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -448,7 +449,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:53.105128Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:32.477541Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -525,7 +526,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:53.595807Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:32.970237Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1160,9 +1161,24 @@ Program.GoBackground();</ScriptSource>
     <Name>Energy Saving Mode</Name>
     <Description>When enabled, ensures that dimmer level is kept below a given percentage value.</Description>
     <Group>Energy Management</Group>
-    <Features />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>EnergyManagement.EnergySavingMode</Property>
+        <Description>Energy Saving Mode enabled light</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:20:80:1</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>EnergyManagement.EnergySavingLevel</Property>
+        <Description>Keep level below this value (%)</Description>
+      </ProgramFeature>
+    </Features>
     <ActivationTime>2015-05-25T12:49:48.080482Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2015-06-13T16:39:33.473434Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1215,7 +1231,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:54.596857Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:33.971295Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1506,7 +1522,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:55.110132Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:34.482217Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1598,7 +1614,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:55.59783Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:34.972072Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1666,7 +1682,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:56.100154Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:35.474358Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1934,7 +1950,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:56.602592Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:35.976628Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2290,7 +2306,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:57.603836Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:36.984383Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2390,7 +2406,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:58.117982Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:37.49039Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2542,7 +2558,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:58.603908Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:37.979451Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2815,7 +2831,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-11T13:22:11.155754Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:44:59.108575Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:38.483462Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8255,7 +8271,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-05-25T12:45:00.129118Z</TriggerTime>
+    <TriggerTime>2015-06-13T16:39:39.498562Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

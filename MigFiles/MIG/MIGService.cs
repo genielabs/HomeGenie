@@ -540,7 +540,6 @@ namespace MIG
                     context.Response.AddHeader("Last-Modified", file.LastWriteTimeUtc.ToString("r"));
                     context.Response.Headers.Set(HttpResponseHeader.LastModified, file.LastWriteTimeUtc.ToString("r"));
                     // PRE PROCESS text output
-                    //TODO: add callback for handling caching (eg. function that returns true or false with requestdfile as input and that will return false for widget path)
                     if (isText)
                     {
                         try
@@ -558,7 +557,7 @@ namespace MIG
                             {
                                 tagFound = false;
                                 int ts = body.IndexOf("{include ");
-                                if (ts > 0)
+                                if (ts >= 0)
                                 {
                                     int te = body.IndexOf("}", ts);
                                     if (te > ts)
