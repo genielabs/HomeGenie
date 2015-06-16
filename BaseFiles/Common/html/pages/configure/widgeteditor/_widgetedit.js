@@ -39,7 +39,10 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
-                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidgetHtml(); },
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidget(function(){
+                    HG.WebApp.WidgetEditor._editorHtml.markClean();
+                    HG.WebApp.WidgetEditor._editorJscript.markClean();
+                }); },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -55,7 +58,11 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
             matchBrackets: true,
             autoCloseBrackets: true,
             extraKeys: {
-                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidgetJavascript(); },
+                "Ctrl-S": function (cm) { HG.WebApp.WidgetEditor.SaveWidget(function(){
+                        HG.WebApp.WidgetEditor._editorHtml.markClean();
+                        HG.WebApp.WidgetEditor._editorJscript.markClean();
+                    }); 
+                },
                 "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); },
                 "Ctrl-Space": "autocomplete"
             },
@@ -288,6 +295,7 @@ HG.WebApp.WidgetEditor.CheckIsClean = function(callback) {
 HG.WebApp.WidgetEditor.SaveWidget = function(callback) {
     HG.WebApp.WidgetEditor.SaveWidgetHtml(function() {
         HG.WebApp.WidgetEditor.SaveWidgetJavascript(function() {
+            HG.WebApp.WidgetEditor.Run();
             if (callback) callback();
         });
     });

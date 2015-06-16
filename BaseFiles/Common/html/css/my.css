@@ -5,7 +5,7 @@ body, a, label, input, option, textarea, span, div, p, h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
 
-#page_control {
+div[data-ui-field="wallpaper"] {
     background: url() center;
     background-size: 100% 100%;
     background-repeat: no-repeat;

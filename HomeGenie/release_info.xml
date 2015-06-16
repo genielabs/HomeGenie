@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.00 beta r492</Version>
+  <Version>1.00 beta r493</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added customizable wallpapers to control groups
-  - Fixed group separator add/remove bug
-  - Fixed colorlight widget rgb/hsb color conversion bug
-  - Other minor improvements to the new UI</ReleaseNote>
-  <ReleaseDate>2015-06-10T18:33:54.0000Z</ReleaseDate>
+  <ReleaseNote>   - Widgets restyling (homegenie/generic): dimmer,light,switch,siren,colorlight
+  - Fixed Philips Hue bridge app level bug
+  - Fixed possible memory leak both in Net Helper HTTP and SMTP clients
+  - Fixed "DiscoveryLog" javascript error
+  - Some lil UI fixing</ReleaseNote>
+  <ReleaseDate>2015-06-15T18:11:52.0000Z</ReleaseDate>
 </ReleaseInfo>

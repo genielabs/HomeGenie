@@ -79,7 +79,7 @@
     //
     // hide dimmer level if device type is switch
     //
-    if (module.DeviceType == "Switch") {
+    if (module.DeviceType == 'Switch' || module.DeviceType == 'Light') {
       widget.find('[data-ui-field=level-div]').hide();
     } else {
       widget.find('[data-ui-field=level-div]').show();
@@ -92,7 +92,7 @@
       this.IconImage = widgeticon.Value;
     } else if (module.DeviceType == "Siren") {
       this.IconImage = 'pages/control/widgets/homegenie/generic/images/siren.png';
-    } else if (module.DeviceType == "Switch") {
+    } else if (module.DeviceType == 'Switch') {
       if (level > 0) {
         this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_on.png';
       } else {

@@ -1,6 +1,11 @@
-﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="21.12.2014 14:17:40">
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="16/06/2015 14:24:07" StartupItem="../HomeGenie/HomeGenie.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
+    <Files>
+      <File FileName="../HISTORY.TXT" Line="1" Column="1" />
+      <File FileName="../README.TXT" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

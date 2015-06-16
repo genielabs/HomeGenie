@@ -1,90 +1,91 @@
-﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-c" style="min-height:175px;">
-    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-        <div style="font-weight:bold">Weather Underground</div>
-        <div data-ui-field="last_updated_value">Waiting for data...</div>
-        <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Configuration</a>
+﻿<div data-ui-field="widget" class="ui-overlay-shadow ui-body-inherit ui-corner-all hg-widget-c" style="position:relative;min-height:175px;z-index:10;background:none">
+  <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.75;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
+  <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border:0">
+    <div style="font-weight:bold">Weather Underground</div>
+    <div data-ui-field="last_updated_value">Waiting for data...</div>
+    <a data-ui-field="settings" data-role="button" data-icon="edit" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Configuration</a>
+  </div>
+  <div align="center" style="clear:both">
+
+    <div align="left" style="display: inline-block;">
+      <table><tr>
+        <td width="46">
+          <img data-ui-field="icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_partlysunny.gif" style="margin-top:3px;margin-left:10px;margin-right:5px" />
+        </td>
+        <td>
+          <div data-ui-field="name" style="font-size:11pt;">Not updated!</div>
+          <div data-ui-field="description" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:200px;font-size:14pt;">Partly sunny</div>
+        </td>
+        </tr></table>
     </div>
-    <div align="center" style="clear:both">
-    
-        <div align="left" style="display: inline-block;">
-            <table><tr>
-            <td width="46">
-                <img data-ui-field="icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_partlysunny.gif" style="margin-top:3px;margin-left:10px;margin-right:5px" />
-            </td>
-            <td>
-                <div data-ui-field="name" style="font-size:11pt;">Not updated!</div>
-                <div data-ui-field="description" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:200px;font-size:14pt;">Partly sunny</div>
-            </td>
-            </tr></table>
-        </div>
-        <div align="center" style="display: inline-block;vertical-align:top;margin-bottom:6px;">
-            &#9728;&uarr; <span data-ui-field="sunrise_value">05:55</span>
-            &#9728;&darr; <span data-ui-field="sunset_value">18:20</span>
-            <br />
-            <span class="hg-indicator-temperature" style="padding-left:0;width:20px;vertical-align:top">&nbsp;</span>
-            <span data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;font-size:22pt">22.5</span>
-        </div>
-        
+    <div align="center" style="display: inline-block;vertical-align:top;margin-bottom:6px;">
+      &#9728;&uarr; <span data-ui-field="sunrise_value">05:55</span>
+      &#9728;&darr; <span data-ui-field="sunset_value">18:20</span>
+      <br />
+      <span class="hg-indicator-temperature" style="padding-left:0;width:20px;vertical-align:top">&nbsp;</span>
+      <span data-ui-field="temperature_value" style="line-height:28px;text-align:bottom;font-size:22pt">22.5</span>
     </div>
-    <div style="font-size:10pt;margin-left:10px;margin-top:-4px;clear:both" align="center">
-        
-        <div style="display: inline-block;" align="left">
-            <table>
-            <tr>
-                <td colspan="2" data-ui-field="forecast_1_date">Sat, 31 January</td>
-            </tr>
-            <tr>
-                <td align="left" width="46">
-                    <img data-ui-field="forecast_1_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_flurries.gif" />
-                </td>
-                <td align="left" valign="top">
-                    <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
-                        &#x25BC; <span data-ui-field="forecast_1_tmin">-5.2℃</span><br>
-                        &#x25B2; <span data-ui-field="forecast_1_tmax">4.1℃</span><br>
-                        <span data-ui-field="forecast_1_desc">Snow flurries</span>
-                    </div>
-                </td>
-            </tr>
-            </table>
-        </div>
-        <div style="display: inline-block;" align="left">
-            <table>
-            <tr>
-                <td colspan="2" data-ui-field="forecast_2_date">Sun, 1 February</td>
-            </tr>
-            <tr>
-                <td align="left" width="46">
-                    <img data-ui-field="forecast_2_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_sunny.gif" />
-                </td>
-                <td align="left" valign="top">
-                    <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
-                        &#x25BC; <span data-ui-field="forecast_2_tmin">6.0℃</span><br>
-                        &#x25B2; <span data-ui-field="forecast_2_tmax">10.5℃</span><br>
-                        <span data-ui-field="forecast_2_desc">Sunny</span>
-                    </div>
-                </td>
-            </tr>
-            </table>
-        </div>
-        <div style="display: inline-block;" align="left">
-            <table>
-            <tr>
-                <td colspan="2" data-ui-field="forecast_3_date">Mon, 2 February</td>
-            </tr>
-            <tr>
-                <td align="left" width="46">
-                    <img data-ui-field="forecast_3_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_tstorms.gif" />
-                </td>
-                <td align="left" valign="top">
-                    <div style="font-size:8pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:80px">
-                        &#x25BC; <span data-ui-field="forecast_3_tmin">3.7℃</span><br>
-                        &#x25B2; <span data-ui-field="forecast_3_tmax">9.2℃</span><br>
-                        <span data-ui-field="forecast_3_desc">Thunderstorms</span>
-                    </div>
-                </td>
-            </tr>
-            </table>
-        </div>
-        
+
+  </div>
+  <div style="font-size:10pt;margin-left:10px;margin-top:-4px;clear:both" align="center">
+
+    <div style="display: inline-block;" align="left">
+      <table>
+        <tr>
+          <td colspan="2" data-ui-field="forecast_1_date">Sat, 31 January</td>
+        </tr>
+        <tr>
+          <td align="left" width="46">
+            <img data-ui-field="forecast_1_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_flurries.gif" />
+          </td>
+          <td align="left" valign="top">
+            <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
+              &#x25BC; <span data-ui-field="forecast_1_tmin">-5.2℃</span><br>
+              &#x25B2; <span data-ui-field="forecast_1_tmax">4.1℃</span><br>
+              <span data-ui-field="forecast_1_desc">Snow flurries</span>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
+    <div style="display: inline-block;" align="left">
+      <table>
+        <tr>
+          <td colspan="2" data-ui-field="forecast_2_date">Sun, 1 February</td>
+        </tr>
+        <tr>
+          <td align="left" width="46">
+            <img data-ui-field="forecast_2_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_sunny.gif" />
+          </td>
+          <td align="left" valign="top">
+            <div style="font-size:8pt;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:80px">
+              &#x25BC; <span data-ui-field="forecast_2_tmin">6.0℃</span><br>
+              &#x25B2; <span data-ui-field="forecast_2_tmax">10.5℃</span><br>
+              <span data-ui-field="forecast_2_desc">Sunny</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div style="display: inline-block;" align="left">
+      <table>
+        <tr>
+          <td colspan="2" data-ui-field="forecast_3_date">Mon, 2 February</td>
+        </tr>
+        <tr>
+          <td align="left" width="46">
+            <img data-ui-field="forecast_3_icon" class="ui-corner-all ui-overlay-shadow" src="pages/control/widgets/homegenie/generic/images/wu_tstorms.gif" />
+          </td>
+          <td align="left" valign="top">
+            <div style="font-size:8pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:80px">
+              &#x25BC; <span data-ui-field="forecast_3_tmin">3.7℃</span><br>
+              &#x25B2; <span data-ui-field="forecast_3_tmax">9.2℃</span><br>
+              <span data-ui-field="forecast_3_desc">Thunderstorms</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
 </div>

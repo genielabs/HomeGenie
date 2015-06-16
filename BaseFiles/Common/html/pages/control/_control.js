@@ -40,6 +40,9 @@ HG.WebApp.Control.InitializePage = function () {
             }
         });
     });
+    page.on('pagehide', function (e) {
+        $('div[data-ui-field="wallpaper"]').hide();
+    });
     page.on('pagebeforeshow', function (e) {
         $.mobile.loading('show');
         HG.Configure.Groups.List('Control', function () 
@@ -85,7 +88,8 @@ HG.WebApp.Control.ShowGroup = function (gid) {
     HG.WebApp.Data._CurrentGroup = HG.WebApp.GroupModules.CurrentGroup = HG.WebApp.Data.Groups[gid].Name;
     HG.WebApp.Data._CurrentGroupIndex = gid;
     // set current group wallpaper
-    $('#page_control').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
+    $('div[data-ui-field="wallpaper"]').show();
+    $('div[data-ui-field="wallpaper"]').css('background-image', 'url(images/wallpapers/'+HG.WebApp.Data.Groups[gid].Wallpaper+')');
     HG.WebApp.Control.RefreshGroupIndicators();
     $('#control_groupcontent').children('div').hide();
     $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).show();
@@ -159,7 +163,7 @@ HG.WebApp.Control.RenderMenu = function () {
     $('#groups_panel').panel().trigger('create');
     $('#control_groupsmenu').find("li:gt(1)").remove();
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
-        var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:5px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
+        var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
         var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');
         item.on('click', function(){
             var idx = $(this).attr('data-context-idx');

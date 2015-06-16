@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:31.474614Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:19.454401Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -205,8 +205,8 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         string[] hsb1 = module.Parameter("Status.ColorHsb").Value.Split(',');
         Program.RaiseEvent(module, "Status.Level", hsb1[2], "Hue Light");
         break;
-        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
-        case "Control.Off":
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.Off
+      case "Control.Off":
         bridgeapicall(lightnumber, "{ \"on\" : false }");
         Program.RaiseEvent(module, "Status.Level", "0", "Hue Light");
         break;
@@ -226,10 +226,13 @@ When.WebServiceCallReceived("HomeAutomation.PhilipsHue", ( args ) =&gt; {
       case "Control.Level":
         if (module.IsOff) bridgeapicall(lightnumber, "{ \"on\" : true }");
         bridgeapicall(lightnumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
-        Program.RaiseEvent(module, "Status.Level", (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture), "Hue Light");
+	    string[] hsb3 = module.Parameter("Status.ColorHsb").Value.Split(',');
+      	var bl = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
+      	module.Parameter("Status.ColorHsb").Value = hsb3[0]+','+hsb3[1]+','+bl;
+        Program.RaiseEvent(module, "Status.Level", bl, "Hue Light");
         break;
-        // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
-        case "Control.ColorHsb":
+      // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;
+      case "Control.ColorHsb":
         string[] values = parameter.Split(',');
         double transition = 5;
         if (values.Length &gt; 3) transition = ((int)(double.Parse(values[3]) * 10)); 
@@ -271,7 +274,7 @@ In order for this to work, you must register "homegenie" username
 For instructions see: http://developers.meethue.com/gettingstarted.html .</Description>
     <Group>Devices and Things</Group>
     <Features />
-    <ActivationTime>2015-06-13T16:41:59.495313Z</ActivationTime>
+    <ActivationTime>2015-06-14T11:31:47.709525Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -449,7 +452,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:32.477541Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:20.498656Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -526,7 +529,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:32.970237Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:20.9825Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1178,7 +1181,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-25T12:49:48.080482Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:33.473434Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:21.480664Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1231,7 +1234,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:33.971295Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:21.980522Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1522,7 +1525,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:34.482217Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:22.491344Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1614,7 +1617,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:34.972072Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:22.981646Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1682,7 +1685,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:35.474358Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:23.484512Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1950,7 +1953,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:35.976628Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:23.98397Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2306,7 +2309,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:36.984383Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:24.987886Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2406,7 +2409,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:37.49039Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:25.497224Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2558,7 +2561,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:37.979451Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:25.986713Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2831,7 +2834,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-11T13:22:11.155754Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:38.483462Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:26.492679Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8271,7 +8274,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-06-13T16:39:39.498562Z</TriggerTime>
+    <TriggerTime>2015-06-14T11:30:27.509109Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

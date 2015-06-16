@@ -75,14 +75,13 @@
       this.ColorWheel = Raphael.colorwheel(controlpopup.find('[data-ui-field=colors]'), 200, 80);
       this.ColorWheel.ondrag(null, function (rgbcolor) {
         var color = Raphael.rgb2hsb(rgbcolor);
-        //
-        _this.ControlImage.clear();_this.ControlImage.ball(12, 12, 12, color);
-        //
         var hue = color.h;
         var sat = color.s;
         var bri = color.b;
         var hsbcolor = hue + "," + sat + "," + bri;
         _this.ColorWheel.color(rgbcolor);
+        color.b = 1;
+        _this.ControlImage.clear();_this.ControlImage.ball(12, 12, 12, color);
         //
         HG.Control.Modules.ServiceCall("Control.ColorHsb", module.Domain, module.Address, hsbcolor, function (data) { });
       });
@@ -130,7 +129,7 @@
       var hexcolor = eval('Raphael.hsb('+hsbcolor.Value+')');
       var color = Raphael.rgb2hsb(hexcolor);
       this.ColorWheel.color_hsb(color);
-      color.b = level/100;
+      if (level == 0) color.b = 0; else color.b = 1;
       this.ControlImage.clear(); this.ControlImage.ball(12, 12, 12, color);
     }
     //

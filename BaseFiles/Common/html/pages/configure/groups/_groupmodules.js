@@ -158,7 +158,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
                 var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);
                 group.Wallpaper = wp;
                 if ($.mobile.activePage.attr('id') == 'page_control')
-                    $('#page_control').css('background-image', 'url(images/wallpapers/'+wp+')');
+                    $('div[data-ui-field="wallpaper"]').css('background-image', 'url(images/wallpapers/'+wp+')');
                 else
                     HG.WebApp.GroupModules.RefreshWallpaper();
                 $.mobile.loading('hide');

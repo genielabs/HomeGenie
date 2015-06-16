@@ -604,7 +604,7 @@ HG.WebApp.ProgramEdit.SaveProgram = function (callback) {
             HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
         });
     } else {
-        HG.WebApp.ProgramEdit.UpdateProgram(programblock, false, callback);
+        HG.WebApp.ProgramEdit.UpdateProgram(programblock, true, callback);
     }
 };
 HG.WebApp.ProgramEdit.SetProgramData = function () {
