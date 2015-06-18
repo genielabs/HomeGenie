@@ -4900,6 +4900,15 @@
     <None Include="html\images\wallpapers\wallpaper_006.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\en.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\fr.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="html\pages\control\widgets\DaniMail\fibaro\locales\it.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -4920,5 +4929,6 @@
     <Folder Include="lib\" />
     <Folder Include="html\images\icons\" />
     <Folder Include="html\images\wallpapers\" />
+    <Folder Include="html\pages\control\widgets\DaniMail\fibaro\locales\" />
   </ItemGroup>
 </Project>
