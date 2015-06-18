@@ -1,7 +1,7 @@
 [{
   Name: "Fibaro RGBW",
   Author: "DaniMail",
-  Version: "02  2015-06-10",
+  Version: "03  2015-06-18",
 
   GroupName: '',
   IconImage: 'pages/control/widgets/homegenie/generic/images/icons/colorbulbs.png',
