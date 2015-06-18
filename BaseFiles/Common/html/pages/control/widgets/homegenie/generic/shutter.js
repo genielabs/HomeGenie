@@ -2,10 +2,10 @@
   
   Name: "Generic Dimmer",
   Author: "Generoso Martello",
-  Version: "2015-06-13",
+  Version: "2015-06-18",
 
   GroupName: '',
-  IconImage: 'pages/control/widgets/homegenie/generic/images/shutters_close.png',
+  IconImage: 'pages/control/widgets/homegenie/generic/images/shutters_open.png',
   StatusText: '',
   Description: '',
   UpdateTime: '',
