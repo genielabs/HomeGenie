@@ -60,9 +60,9 @@ namespace ZWaveLib.Values
             // Accumulated power consumption kW/h
             case ZWaveEnergyScaleType.kWh:
                 if((message[2] & 0x80) == 0x80)
-				   energy.EventType = EventParameter.MeterAcVolt;
-				else
-				   energy.EventType = EventParameter.MeterKwHour;
+                   energy.EventType = EventParameter.MeterAcVolt;
+                else
+                   energy.EventType = EventParameter.MeterKwHour;
                 break;
             // Accumulated power consumption kilo Volt Ampere / hours (kVA/h)
             case ZWaveEnergyScaleType.kVAh:

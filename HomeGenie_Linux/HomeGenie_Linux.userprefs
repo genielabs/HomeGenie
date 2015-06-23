@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="../HomeGenie/HomeGenie.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../MigFiles/SupportLibraries/ZWaveLib/Values/EnergyValue.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../HISTORY.TXT">
     <Files>
-      <File FileName="../MigFiles/SupportLibraries/ZWaveLib/Values/EnergyValue.cs" Line="62" Column="47" />
+      <File FileName="../HISTORY.TXT" Line="1" Column="1" />
+      <File FileName="../README.TXT" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
