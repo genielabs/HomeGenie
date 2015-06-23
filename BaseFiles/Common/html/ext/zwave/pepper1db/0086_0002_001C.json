@@ -121,22 +121,22 @@
       ]
     },
     "assocGroups": {
-      "assocGroup": {
-        "@number": "1",
-        "@maxNodes": "5",
-        "description": {
-          "lang": [
-            {
-              "@xml:lang": "de",
-              "#text": "Empfänger aller Reports"
-            },
-            {
-              "@xml:lang": "en",
-              "#text": "Receiver of all Reports"
-            }
-          ]
-        }
-      }
+      "assocGroup": [{
+          "@number": "1",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de",
+                "#text": "Empfänger aller Reports"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Receiver of all Reports"
+              }
+            ]
+          }
+       }]
     },
     "configParams": {
       "configParam": [
@@ -739,11 +739,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Batterie-Report"
+                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery Report"
+                    "#text": "Meter Report for kWh for the whole device"
                   }
                 ]
               }
@@ -752,16 +752,16 @@
               "@from": "00000002",
               "@to": "00000002",
               "description": {
-                "lang": [
+                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Multisensor-Report für das Gesamtgerät"
+                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "MultiSensor Report for the whole device"
+                    "#text": "Meter Report for Watt for the whole device"
                   }
-                ]
+               ]
               }
             },
             {
@@ -771,11 +771,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
+                    "#text": "Zähler-Report als Volt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for the whole device"
+                    "#text": "Meter Report for Volt for the whole device"
                   }
                 ]
               }
@@ -787,11 +787,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
+                    "#text": "Zähler-Report als Amp für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for kWh for the whole device"
+                    "#text": "Meter Report for Amp for the whole device"
                   }
                 ]
               }
@@ -888,6 +888,102 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00010000",
+              "@to": "00010000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00020000",
+              "@to": "00020000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00040000",
+              "@to": "00040000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00080000",
+              "@to": "00080000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00100000",
+              "@to": "00100000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00200000",
+              "@to": "00200000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 3"
                   }
                 ]
               }
@@ -931,11 +1027,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Batterie-Report"
+                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery Report"
+                    "#text": "Meter Report for kWh for the whole device"
                   }
                 ]
               }
@@ -944,16 +1040,16 @@
               "@from": "00000002",
               "@to": "00000002",
               "description": {
-                "lang": [
+                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Multisensor-Report für das Gesamtgerät"
+                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "MultiSensor Report for the whole device"
+                    "#text": "Meter Report for Watt for the whole device"
                   }
-                ]
+               ]
               }
             },
             {
@@ -963,11 +1059,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
+                    "#text": "Zähler-Report als Volt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for the whole device"
+                    "#text": "Meter Report for Volt for the whole device"
                   }
                 ]
               }
@@ -979,11 +1075,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
+                    "#text": "Zähler-Report als Amp für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for kWh for the whole device"
+                    "#text": "Meter Report for Amp for the whole device"
                   }
                 ]
               }
@@ -1080,6 +1176,102 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00010000",
+              "@to": "00010000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00020000",
+              "@to": "00020000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00040000",
+              "@to": "00040000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00080000",
+              "@to": "00080000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00100000",
+              "@to": "00100000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00200000",
+              "@to": "00200000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 3"
                   }
                 ]
               }
@@ -1123,11 +1315,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Batterie-Report"
+                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery Report"
+                    "#text": "Meter Report for kWh for the whole device"
                   }
                 ]
               }
@@ -1136,16 +1328,16 @@
               "@from": "00000002",
               "@to": "00000002",
               "description": {
-                "lang": [
+                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Multisensor-Report für das Gesamtgerät"
+                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "MultiSensor Report for the whole device"
+                    "#text": "Meter Report for Watt for the whole device"
                   }
-                ]
+               ]
               }
             },
             {
@@ -1155,11 +1347,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als Watt für das Gesamtgerät"
+                    "#text": "Zähler-Report als Volt für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for the whole device"
+                    "#text": "Meter Report for Volt for the whole device"
                   }
                 ]
               }
@@ -1171,11 +1363,11 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Zähler-Report als kWh für das Gesamtgerät"
+                    "#text": "Zähler-Report als Amp für das Gesamtgerät"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for kWh for the whole device"
+                    "#text": "Meter Report for Amp for the whole device"
                   }
                 ]
               }
@@ -1272,6 +1464,102 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00010000",
+              "@to": "00010000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00020000",
+              "@to": "00020000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00040000",
+              "@to": "00040000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Volt für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Volt for clamp 3"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00080000",
+              "@to": "00080000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 1"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 1"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00100000",
+              "@to": "00100000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 2"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 2"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00200000",
+              "@to": "00200000",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de",
+                    "#text": "Zähler-Report als Amp für Klemme 3"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Meter Report for Amp for clamp 3"
                   }
                 ]
               }

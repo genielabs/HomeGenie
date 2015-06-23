@@ -42,11 +42,11 @@
     "timetable_popup_close" : "Fermer",
     "timetable_popup_save" : "Valider",
 
-	"control_module_off" : "Off",
-	"control_module_on" : "On",
-	"control_module_close" : "Fermé",
-	"control_module_open" : "Ouvert",
-	"control_module_calibrate" : "Etalonnage",
+    "control_module_off" : "Off",
+    "control_module_on" : "On",
+    "control_module_close" : "Fermé",
+    "control_module_open" : "Ouvert",
+    "control_module_calibrate" : "Etalonnage",
 
     "therm_setpoint" : "Consigne",
     "therm_cool" : "Froid",
