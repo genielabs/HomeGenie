@@ -34,8 +34,8 @@ namespace HomeGenie.Service.Constants
         // internal HomeGenie parameters
         public const string HOMEGENIE_STATUS
             = "HomeGenie.Status";
-        public const string SYSTEMINFO_HTTPPORT
-            = "SystemInfo.HttpPort";
+        public const string SYSTEMINFO_HTTPADDRESS
+            = "SystemInfo.HttpAddress";
         public const string SCHEDULER_ERROR
             = "Scheduler.Error";
         public const string PROGRAM_STATUS

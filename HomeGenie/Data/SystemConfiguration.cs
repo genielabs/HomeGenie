@@ -51,6 +51,7 @@ namespace HomeGenie.Data
             //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
+            HomeGenie.ServiceHost = "+";
             HomeGenie.ServicePort = 80;
             HomeGenie.UserLogin = "admin";
             HomeGenie.UserPassword = ""; // password auth disabled by default
@@ -100,7 +101,8 @@ namespace HomeGenie.Data
                 {
                     try
                     {
-                        if (!String.IsNullOrEmpty(p.Value)) p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
+                        if (!String.IsNullOrEmpty(p.Value))
+                            p.Value = StringCipher.Encrypt(p.Value, GetPassPhrase());
                     }
                     catch
                     {
@@ -142,23 +144,25 @@ namespace HomeGenie.Data
     [Serializable()]
     public class HomeGenieConfiguration
     {
+        public string GUID { get; set; }
         public string SystemName { get; set; }
-
         public string Location { get; set; }
 
+        public string ServiceHost { get; set; }
         public int ServicePort { get; set; }
-
         public string UserLogin { get; set; }
-
         public string UserPassword { get; set; }
 
         public List<ModuleParameter> Settings = new List<ModuleParameter>();
-
-        public string GUID { get; set; }
+        public StatisticsConfiguration Statistics = new StatisticsConfiguration();
 
         public string EnableLogFile { get; set; }
 
-        public StatisticsConfiguration Statistics = new StatisticsConfiguration();
+        public HomeGenieConfiguration()
+        {
+            ServiceHost = "+";
+            ServicePort = 80;
+        }
 
         [Serializable()]
         public class StatisticsConfiguration

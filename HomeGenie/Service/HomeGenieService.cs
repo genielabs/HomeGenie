@@ -119,6 +119,7 @@ namespace HomeGenie.Service
             //
             // load system configuration
             systemConfiguration = new SystemConfiguration();
+            systemConfiguration.HomeGenie.ServiceHost = "+";
             systemConfiguration.HomeGenie.ServicePort = 8080;
             systemConfiguration.OnUpdate += systemConfiguration_OnUpdate;
             LoadSystemConfig();
@@ -133,11 +134,13 @@ namespace HomeGenie.Service
             // Try to start WebGateway, if default HTTP port is busy, then it will try from 8080 to 8090
             bool serviceStarted = false;
             int bindAttempts = 0;
+            string address = systemConfiguration.HomeGenie.ServiceHost;
             int port = systemConfiguration.HomeGenie.ServicePort;
             while (!serviceStarted && bindAttempts <= 10)
             {
                 // TODO: this should be done like this _services.Gateways["WebService"].Configure(....)
                 migService.ConfigureWebGateway(
+                    address,
                     port,
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html"),
                     "/hg/html",
@@ -165,8 +168,8 @@ namespace HomeGenie.Service
                     Domains.HomeAutomation_HomeGenie,
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie service ready",
-                    Properties.SYSTEMINFO_HTTPPORT,
-                    port.ToString()
+                    Properties.SYSTEMINFO_HTTPADDRESS,
+                    systemConfiguration.HomeGenie.ServiceHost + ":" + port
                 );
                 InitializeSystem();
                 // Update system configuration with the HTTP port the service succeed to bind on
@@ -177,9 +180,9 @@ namespace HomeGenie.Service
                 LogBroadcastEvent(
                     Domains.HomeAutomation_HomeGenie,
                     HOMEGENIE_MASTERNODE,
-                    "Http port bind failed.",
-                    Properties.SYSTEMINFO_HTTPPORT,
-                    systemConfiguration.HomeGenie.ServicePort.ToString()
+                    "HTTP binding failed.",
+                    Properties.SYSTEMINFO_HTTPADDRESS,
+                    systemConfiguration.HomeGenie.ServiceHost + ":" + systemConfiguration.HomeGenie.ServicePort
                 );
                 Program.Quit(false);
             }
@@ -1823,8 +1826,13 @@ namespace HomeGenie.Service
                     break;
                 }
             }
+            string address = localIP;
+            if (systemConfiguration.HomeGenie.ServiceHost.Length > 1)
+            {
+                address = systemConfiguration.HomeGenie.ServiceHost;
+            }
             //
-            string presentationUrl = "http://" + localIP + ":" + systemConfiguration.HomeGenie.ServicePort;
+            string presentationUrl = "http://" + address + ":" + systemConfiguration.HomeGenie.ServicePort;
             //string friendlyName = "HomeGenie: " + Environment.MachineName;
             string manufacturer = "G-Labs";
             string manufacturerUrl = "http://generoso.info/";

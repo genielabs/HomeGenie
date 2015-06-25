@@ -8904,4 +8904,95 @@ while(Program.IsEnabled)
     <Type>CSharp</Type>
     <IsEnabled>false</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+    <ConditionType>OnTrue</ConditionType>
+    <Conditions />
+    <Commands />
+    <ScriptCondition>Program.Setup(()=&gt;{
+
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox");
+    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData");
+    Program.AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "text");
+    Program.AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "text");
+    Program.AddOption("DimmerInterval", "5", "4. Dimmer Interval", "text");
+
+});
+
+return true;
+</ScriptCondition>
+    <ScriptSource>// 
+// Code adapted from: http://www.homegenie.it/forum/index.php?topic=950.0
+//
+// Allows adding conditional IR code for Lights, Switches and Dimmers.
+// Also let you dim last light using Up/Down button which you can define in configuration
+// Skip Command IR code is designed for disabling the next command and it is useful in case you just want to change the dimmer value.
+// 
+
+var dimmerInterval = Program.Option("DimmerInterval");
+var dimmerUp = Program.Option("DimmerUpCode");
+var dimmerDown = Program.Option("DimmerDownCode");
+var irControlModules = Modules.WithFeature("HomeGenie.IRControler.Enable");
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if(parameter.Name == "Receiver.RawData" )
+  {
+    var irData = parameter;
+    var lastButton = module.Parameter("IrController.LastButton");
+    if (irData.Value != "") 
+    {
+      if (lastButton.Value != "" &amp;&amp; (irData.Value == dimmerUp.Value || irData.Value == dimmerDown.Value)) 
+      {
+        irControlModules.Each((m) =&gt; {
+          if (m.Parameter("HomeGenie.IRControler.IRCode").Value == lastButton.Value) 
+          {
+            var level = m.Level;
+            if (irData.Value == dimmerUp.Value &amp;&amp; level &lt; 100) 
+            {
+              level += dimmerInterval.DecimalValue;
+              m.Level = (level &gt; 100 ? 100 : level);
+              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dimmer value: " + level);
+            }
+            else if (irData.Value == dimmerDown.Value &amp;&amp; level &gt; dimmerInterval.DecimalValue) 
+            {
+              level -= dimmerInterval.DecimalValue;
+              m.Level = (level &lt; dimmerInterval.DecimalValue ? dimmerInterval.DecimalValue : level);
+              Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;Dimmer value: " + level);
+            }
+          }
+          return false; // do not break, continue iterating...
+        });
+      }
+      else
+      {
+        irControlModules.Each((m) =&gt; {
+          if (m.Parameter("HomeGenie.IRControler.IRCode").Value == irData.Value) 
+          {
+            lastButton.Value = irData.Value;
+            m.Toggle();
+            Program.Notify("IR Remote Controller", m.Instance.Name + "&lt;br&gt;toggled.");
+          }
+          return false; // do not break, continue iterating...
+        });
+      }
+    }
+  }
+  return true;
+});
+
+Program.GoBackground();</ScriptSource>
+    <ScriptErrors>[]</ScriptErrors>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Name>IR Remote Controller</Name>
+    <Description>Control module using an IR remote.
+When you press the assigned remote button, it will toggle the module on/off.
+Also it lets you dim last addressed module using Up/Down button which can be defined through program's configuration options.
+"Skip Command IR code" option is designed for disabling the next command and it's useful when you just want to change the dimmer value.</Description>
+    <Group>Lights</Group>
+    <Features />
+    <ActivationTime>2015-06-25T09:44:53.268403Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
 </ArrayOfProgramBlock>

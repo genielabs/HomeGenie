@@ -2660,4 +2660,50 @@
     </Properties>
     <RoutingNode />
   </Module>
+  <Module>
+    <Name>IR Remote Controller</Name>
+    <Description />
+    <DeviceType>Program</DeviceType>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>505</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerDownCode</Name>
+        <Value>rOoqqCUH8b8OMN93i0h4IfQTsgLVedpR3wqp4y6PZQ8=</Value>
+        <Description>2. Dimmer Down (enter IR button code)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.625881Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerInterval</Name>
+        <Value>Ri1VdDW6uIVO4CPS82EASw==</Value>
+        <Description>4. Dimmer Interval</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.626059Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>ConfigureOptions.DimmerUpCode</Name>
+        <Value>rOoqqCUH8b8OMN93i0h4IQGQsBoLRvuWI49cvC2r7KA=</Value>
+        <Description>1. Dimmer Up (enter IR button code)</Description>
+        <FieldType>text</FieldType>
+        <UpdateTime>2015-06-24T17:39:45.626239Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Program.Status</Name>
+        <Value>Running</Value>
+        <Description />
+        <FieldType />
+        <UpdateTime>2015-06-24T17:37:52.093969Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <UpdateTime>2015-06-24T17:22:15.463412Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+    <RoutingNode />
+  </Module>
 </ArrayOfModule>

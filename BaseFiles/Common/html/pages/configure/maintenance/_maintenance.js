@@ -15,7 +15,15 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $.mobile.loading('hide');
             });
         });
-        //
+
+        $('#systemsettings_httphostheader_change').bind('click', function () {
+           var host = $('#http_host_header').val();
+           $.mobile.loading('show');
+           HG.System.SetHostHeader(host, function (data) {
+               $.mobile.loading('hide');
+           });
+        });
+
         $("#configure_system_flip_httpcache").on('slidestop', function (event) {
             $.mobile.loading('show');
             if ($("#configure_system_flip_httpcache").val() == '1') {
@@ -314,6 +322,11 @@ HG.WebApp.Maintenance.LoadSettings = function () {
         $('#http_service_port').val(data);
         $('#systemsettings_httpport_text').html(data);
         $.mobile.loading('hide');
+    });
+    HG.Configure.System.ServiceCall("HttpService.GetHostHeader", function (data) {
+       $('#http_host_header').val(data);
+       $('#systemsettings_hostheader_text').html(data);
+       $.mobile.loading('hide');
     });
     //
     HG.WebApp.Maintenance.LoadStatisticsSettings();

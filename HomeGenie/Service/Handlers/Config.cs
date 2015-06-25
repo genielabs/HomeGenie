@@ -90,8 +90,9 @@ namespace HomeGenie.Service.Handlers
                 {
                     var migInterface = kv.Value;
                     var ifaceConfig = homegenie.SystemConfiguration.MIGService.GetInterface(migInterface.Domain);
-                    if (ifaceConfig == null) continue;
-                    migCommand.Response += JsonConvert.SerializeObject(ifaceConfig)+",";
+                    if (ifaceConfig == null)
+                        continue;
+                    migCommand.Response += JsonConvert.SerializeObject(ifaceConfig) + ",";
                 }
                 migCommand.Response = migCommand.Response.Substring(0, migCommand.Response.Length - 1) + " ]";
                 break;
@@ -183,7 +184,10 @@ namespace HomeGenie.Service.Handlers
                     {
                         migCommand.Response = JsonHelper.GetSimpleResponse("NOT A VALID ADD-ON PACKAGE");
                     }
-                } catch { }
+                }
+                catch
+                {
+                }
                 break;
 
             case "Interface.Install":
@@ -328,7 +332,25 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.SystemConfiguration.HomeGenie.ServicePort = int.Parse(migCommand.GetOption(1));
                         homegenie.SystemConfiguration.Update();
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
+                }
+                else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
+                {
+                    migCommand.Response = JsonHelper.GetSimpleResponse(homegenie.SystemConfiguration.HomeGenie.ServiceHost.ToString());
+                }
+                else if (migCommand.GetOption(0) == "HttpService.SetHostHeader")
+                {
+                    try
+                    {
+                        homegenie.SystemConfiguration.HomeGenie.ServiceHost = migCommand.GetOption(1);
+                        homegenie.SystemConfiguration.Update();
+                    }
+                    catch
+                    {
+                    }
                 }
                 else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
                 {
@@ -340,7 +362,10 @@ namespace HomeGenie.Service.Handlers
                     {
                         homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = int.Parse(migCommand.GetOption(1));
                         homegenie.SystemConfiguration.Update();
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {
@@ -409,7 +434,10 @@ namespace HomeGenie.Service.Handlers
                         MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, archivename);
                         Utility.UncompressZip(archivename, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder()));
                         File.Delete(archivename);
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestoreS1")
                 {
@@ -483,7 +511,10 @@ namespace HomeGenie.Service.Handlers
                                 try
                                 {
                                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
-                                } catch { }
+                                }
+                                catch
+                                {
+                                }
                                 program.Address = newPid;
                                 homegenie.ProgramEngine.ProgramAdd(program);
                             }
@@ -493,7 +524,10 @@ namespace HomeGenie.Service.Handlers
                                 try
                                 {
                                     File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder(), "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
-                                } catch { }
+                                }
+                                catch
+                                {
+                                }
                                 homegenie.ProgramEngine.ProgramAdd(program);
                             }
                             // Restore Arduino program folder ...
@@ -670,8 +704,7 @@ namespace HomeGenie.Service.Handlers
                             // reset current reporting Watts if VMWatts field is set to 0
                             if (newParameter.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
                             {
-                                homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction()
-                                {
+                                homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction() {
                                     Domain = currentModule.Domain,
                                     SourceId = currentModule.Address,
                                     SourceType = currentModule.Description,
@@ -865,7 +898,10 @@ namespace HomeGenie.Service.Handlers
                     try
                     {
                         sortGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == groupName);
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
                     //
                     if (sortGroup != null)
                     {
@@ -903,7 +939,10 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     deletedGroup = homegenie.GetGroups(migCommand.GetOption(0)).Find(zn => zn.Name == deletedGroupName);
-                } catch { }
+                }
+                catch
+                {
+                }
                 //
                 if (deletedGroup != null)
                 {
@@ -934,7 +973,10 @@ namespace HomeGenie.Service.Handlers
                         var group = homegenie.Groups.Find(z => z.Name == newGroups[i].Name);
                         group.Modules.Clear();
                         group.Modules = newGroups[i].Modules;
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
                 }
                 homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                 break;
@@ -956,7 +998,10 @@ namespace HomeGenie.Service.Handlers
                     try
                     {
                         wallpaperFile = MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, groupWallpapersPath);
-                    } catch { }
+                    }
+                    catch
+                    {
+                    }
                     migCommand.Response = JsonHelper.GetSimpleResponse(Path.GetFileName(wallpaperFile));
                 }
                 break;
@@ -1146,8 +1191,8 @@ namespace HomeGenie.Service.Handlers
                     {
                         migCommand.Response = JsonHelper.GetSimpleResponse("OK");
                         parser.Parse(widgetData);
-                    } 
-                    catch (Jint.Parser.ParserException e) 
+                    }
+                    catch (Jint.Parser.ParserException e)
                     {
                         migCommand.Response = JsonHelper.GetSimpleResponse("ERROR (" + e.LineNumber + "," + e.Column + "): " + e.Description);
                     }

@@ -61,7 +61,6 @@ namespace NetClientLib
                     _reader = new StreamReader(stream);    
                     _writer = new StreamWriter(stream);    
                 }    
-
                 string greeting = _reader.ReadLine();    
             }
             catch (Exception e)
@@ -191,4 +190,3 @@ namespace NetClientLib
     }
 
 }
-

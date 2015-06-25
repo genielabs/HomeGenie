@@ -46,10 +46,6 @@ namespace ZWaveLib.Values
         {
             ZWaveValue zvalue = ZWaveValue.ExtractValueFromBytes(message, 4);
             EnergyValue energy = new EnergyValue();
-            //energy.Value = ((double)int.Parse(
-            //                       message[12].ToString("X2") + message[13].ToString("X2") + message[14].ToString("X2"),
-            //                       System.Globalization.NumberStyles.HexNumber
-            //                   )) / 1000D;
             energy.Value = zvalue.Value;
             if (Enum.IsDefined(typeof(ZWaveEnergyScaleType), zvalue.Scale))
             {
@@ -59,6 +55,10 @@ namespace ZWaveLib.Values
             {
             // Accumulated power consumption kW/h
             case ZWaveEnergyScaleType.kWh:
+                //energy.EventType = EventParameter.MeterKwHour;
+                // TODO: The following is fix for for AeonLabs HEM G2
+                // TODO: https://github.com/genielabs/HomeGenie/pull/186
+                // TODO: possibly move this fix to ZWaveValue.ExtractValueFromBytes method
                 if((message[2] & 0x80) == 0x80)
                    energy.EventType = EventParameter.MeterAcVolt;
                 else

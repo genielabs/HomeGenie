@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+25/06/2015 v1.00-beta.493-p1
+    - Fix for AeonLabs HEM G2 (PR #186)
+    - Added Host Header configuration (adapted from pull request #163)
+    - Added "IR Remote Controller" automation program plugin (contributed by amin)
+    - Added feature field of type "capture" (init as "capture:<parameter_to_capture>")
+
 15/06/2015 v1.00-beta.493
     - Updated HomeGenie Mac solution files to compile/run latest HG
     - Fix Philips Hue bridge app level bug

@@ -3,6 +3,7 @@ HG.WebApp.Events.PageId = 'page_events';
 HG.WebApp.Events._eventQueueCapacity = 200;
 HG.WebApp.Events._ledOffTimeout = null;
 HG.WebApp.Events._popupHideTimeout = null;
+HG.WebApp.Events._listeners = [];
 
 HG.WebApp.Events.InitializePage = function () {
     var page = $('#'+HG.WebApp.Events.PageId);
@@ -19,11 +20,26 @@ HG.WebApp.Events.InitializePage = function () {
         HG.WebApp.Events.Refresh();
     });
     setTimeout(function () {
-        HG.WebApp.Events.SetupListener();
+        HG.WebApp.Events.Setup();
     }, 2000);
 };
 
-HG.WebApp.Events.SetupListener = function () {
+HG.WebApp.Events.AddListener = function (listener) {
+    // listener object must implement listener.parameterEventCallback functionn
+    listener._eventListenerId = (HG.WebApp.Events._listeners.length + 1);
+    HG.WebApp.Events._listeners.push(listener);
+}
+
+HG.WebApp.Events.RemoveListener = function (listener) {
+    for (var l = 0; l < HG.WebApp.Events._listeners.length; l++) {
+        if (HG.WebApp.Events._listeners[l]._eventListenerId == listener._eventListenerId) {
+            HG.WebApp.Events._listeners.splice(l, 1);
+            break;
+        }
+    }
+}
+
+HG.WebApp.Events.Setup = function () {
     var es = new EventSource('/api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream/');
     es.onmessage = function (e) {
         var event = eval('[' + e.data + ']')[0];
@@ -62,6 +78,10 @@ HG.WebApp.Events.SetupListener = function () {
             if ($.mobile.activePage.attr("id") == HG.WebApp.Events.PageId) {
                 HG.WebApp.Events.Refresh();
             }
+        }
+
+        for (var l = 0; l < HG.WebApp.Events._listeners.length; l++) {
+            HG.WebApp.Events._listeners[l].parameterEventCallback(module, event);
         }
     }
 }

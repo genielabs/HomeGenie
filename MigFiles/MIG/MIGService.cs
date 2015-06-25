@@ -351,8 +351,9 @@ namespace MIG
 
         #region WebGateway
 
-        public void ConfigureWebGateway(int port, string homePath, string baseUrl, string adminPasswordHash)
+        public void ConfigureWebGateway(string address, int port, string homePath, string baseUrl, string adminPasswordHash)
         {
+            webServiceConfig.Host = address;
             webServiceConfig.Port = port;
             webServiceConfig.HomePath = homePath;
             webServiceConfig.BaseUrl = baseUrl.TrimStart('/');

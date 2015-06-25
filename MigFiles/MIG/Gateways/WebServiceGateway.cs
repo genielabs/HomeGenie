@@ -37,6 +37,7 @@ namespace MIG.Gateways
     {
         public string HomePath;
         public string BaseUrl;
+        public string Host;
         public int Port;
         public string Password;
         public bool CacheEnable;
@@ -90,7 +91,7 @@ namespace MIG.Gateways
             WebServiceGatewayConfiguration config = (WebServiceGatewayConfiguration)gwConfiguration;
             baseUrl = config.BaseUrl;
             bindingPrefixes = new string[1] { 
-                String.Format(@"http://+:{0}/", config.Port)
+                String.Format(@"http://{0}:{1}/", config.Host, config.Port)
             };
             SetPasswordHash(config.Password);
         }

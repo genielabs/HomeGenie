@@ -901,7 +901,7 @@ namespace HomeGenie.Automation.Scripting
             //this.value = "";
             this.initialized = false;
             // no control widget --> not visible
-            AddControlWidget(""); 
+            this.UseWidget(""); 
             // remove all features 
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)

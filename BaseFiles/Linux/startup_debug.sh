@@ -1,4 +1,5 @@
 #!/bin/sh
+cd "`dirname \"$0\"`"
 if [ -f /usr/bin/mono ]
 then
 	MONO=/usr/bin/mono
