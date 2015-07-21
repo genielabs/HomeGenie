@@ -416,7 +416,11 @@ namespace HomeGenie.Service.Logging
                     dbCommand.Parameters.Add(new SQLiteParameter("@domain", domain));
                     dbCommand.Parameters.Add(new SQLiteParameter("@address", address));
                 }
-                string query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                string query = "";
+                if( aggregator != "" )
+                    query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                else
+                    query = "select TimeStart,TimeEnd,Domain,Address,AverageValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " order by TimeStart asc;";
                 dbCommand.Parameters.Add(new SQLiteParameter("@parameterName", parameterName));
 
                 //if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";

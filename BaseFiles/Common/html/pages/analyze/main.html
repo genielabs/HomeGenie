@@ -8,7 +8,7 @@
     
     <div data-role="navbar" style="position:absolute;top:115px;width:500px;margin-left:20px">
         <ul>
-            <li><a id="statistics_tab1_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(1)" data-ajax="false" data-locale-id="statistics_dataanalysis">Data analysis</a></li>
+            <li><a id="statistics_tab1_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(1)" data-ajax="false" data-locale-id="statistics_dataanalysis">Data analysis Hour</a></li>
             <li><a id="statistics_tab2_button" style="border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom:0px;" href="#" onclick="HG.WebApp.Statistics.SetTab(2)" data-ajax="false" data-locale-id="statistics_counterexpense">Counter and expense</a></li>
         </ul>
     </div>
@@ -45,7 +45,7 @@
         <div id="statistics_tab2" style="margin:0px;display:none">
             <div class="ui-grid-a">
                 <div class="ui-block-a" style="padding:5px;width:20%">
-                    <div id="page_analyze_title" style="font-weight:bold">Global, Watts</div>
+                    <div id="page_analyze_title2" style="font-weight:bold">Global, Watts</div>
                     <div id="page_analyze_cost_counter" style="font-size:22pt">Counter</div>
                 </div>
                 <div class="ui-block-b" style="width:80%" align="right">
@@ -78,10 +78,7 @@
                 <div id="statslast" style="height:200px;background-color:white;"></div>
             </div>
         </div>-->
-
-
     </div>
-
 
     <div id="analyze_stats_options" class="ui-corner-all hg-popup-a" data-role="popup" data-position-to="window" data-transition="pop" data-overlay-theme="b">
 
@@ -102,6 +99,11 @@
 
                 <select id="page_analyze_param">
                     <option value="Meter.Watts">Watts</option>
+                </select>
+
+                <select id="page_analyze_type">
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
                 </select>
 
                 <select id="page_analyze_graphtype">
