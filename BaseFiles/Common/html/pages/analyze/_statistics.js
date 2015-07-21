@@ -34,10 +34,10 @@ HG.WebApp.Statistics.InitializePage = function () {
         HG.WebApp.Statistics._CurrentType = $('#page_analyze_type').val();
         //
         if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.') {
-            $('#statistics_tab3_button').show();
+            $('#statistics_tab2_button').show();
         }
         else {
-            $('#statistics_tab3_button').hide();
+            $('#statistics_tab2_button').hide();
         }
         //
         HG.WebApp.Statistics.SetTab(1);
