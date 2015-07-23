@@ -9,7 +9,9 @@ HG.WebApp.Statistics._CurrentParameter = 'Meter.Watts';
 HG.WebApp.Statistics._CurrentGraphType = 'bars';
 HG.WebApp.Statistics._CurrentType = 'hours';
 HG.WebApp.Statistics._RefreshIntervalObject = null;
-HG.WebApp.Statistics._RefreshInterval = 2 * 60000; // stats refresh interval = 2 minutes
+HG.WebApp.Statistics._RefreshInterval = 5 * 60000; // stats refresh interval = 2 minutes
+HG.WebApp.Statistics._SelItemObject = false;
+HG.WebApp.Statistics._ItemObject = '';
 //
 HG.WebApp.Statistics.InitializePage = function () {
     $('#page_analyze_source').on('change', function () {
@@ -34,10 +36,10 @@ HG.WebApp.Statistics.InitializePage = function () {
         HG.WebApp.Statistics._CurrentType = $('#page_analyze_type').val();
         //
         if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.') {
-            $('#statistics_tab2_button').show();
+            $('#statistics_tab3_button').show();
         }
         else {
-            $('#statistics_tab2_button').hide();
+            $('#statistics_tab3_button').hide();
         }
         //
         HG.WebApp.Statistics.SetTab(1);
@@ -101,9 +103,21 @@ HG.WebApp.Statistics.InitializePage = function () {
 
             api.set('content.text',
             item.series.label + " at " + new Date(item.datapoint[0] + offset).toLocaleTimeString() + " = " + item.datapoint[1].toFixed(2));
-
-            api.elements.tooltip.stop(1, 1);
-            api.show(item);
+            if( HG.WebApp.Statistics._CurrentType == 'days' )
+            {
+                if( HG.WebApp.Statistics._SelItemObject == false )
+                {
+            	    $("#page_delete_stat").html("Delete Value : "+item.datapoint[1]);
+                    HG.WebApp.Statistics._ItemObject = item.datapoint[0]+'/'+item.datapoint[1];
+	                api.elements.tooltip.stop(1, 1);
+	                api.show(item);
+	            }
+            }
+            else
+            {
+                api.elements.tooltip.stop(1, 1);
+                api.show(item);
+            }
         }
     });
     $("#statscounter").qtip({
@@ -143,6 +157,43 @@ HG.WebApp.Statistics.InitializePage = function () {
 
             api.elements.tooltip.stop(1, 1);
             api.show(item);
+        }
+    });
+    $("#page_delete_stat").on('click', function () {
+        if( HG.WebApp.Statistics._SelItemObject == true )
+        {
+	        $.ajax({
+	            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatDelete/' + HG.WebApp.Statistics._ItemObject,
+	            type: 'GET',
+	            success: function (data) {
+	                var stats = eval(data);
+//	                $("#page_analyze_title").html(data) ;
+	                $.mobile.loading('hide');
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+	                $.mobile.loading('hide');
+	            }
+	        });
+            HG.WebApp.Statistics._ItemObject = '';
+        }
+        HG.WebApp.Statistics._SelItemObject = false;
+       	$("#page_delete_stat").hide();
+    });
+    $("#statshour").on('click', function () {
+        if( HG.WebApp.Statistics._SelItemObject == false )
+        {
+            if( HG.WebApp.Statistics._ItemObject != '' )
+            {
+                HG.WebApp.Statistics._SelItemObject = true;
+         	    $("#page_delete_stat").show();
+         	}
+        }
+        else
+        {
+            HG.WebApp.Statistics._ItemObject = '';
+            HG.WebApp.Statistics._SelItemObject = false;
+     	    $("#page_delete_stat").hide();
         }
     });
 };
@@ -241,6 +292,8 @@ HG.WebApp.Statistics.Refresh = function () {
     var showtype = (HG.WebApp.Statistics._CurrentType == 'hours' ? true : false);
     if (HG.WebApp.Statistics._CurrentTab == 1)
     {
+        if( HG.WebApp.Statistics._SelItemObject == false )
+   	       $("#page_delete_stat").hide();
         HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
             var trange = eval(res)[0];
             var start = new Date(parseFloat(trange.StartTime));

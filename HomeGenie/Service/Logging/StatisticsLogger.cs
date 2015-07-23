@@ -444,9 +444,9 @@ namespace HomeGenie.Service.Logging
                     {
                         var value = reader.GetValue(4);
                         if (value != DBNull.Value && value != null) double.TryParse(
-                                reader.GetString(4),
-                                out entry.Value
-                            );
+                            reader.GetString(4),
+                            out entry.Value
+                        );
                     }
                     //
                     values.Add(entry);
@@ -455,6 +455,27 @@ namespace HomeGenie.Service.Logging
                 reader.Close();
             }
             return values;
+        }
+
+        public string DeleteStat(
+          DateTime startDate,
+            string value
+        )
+        {
+            var valueText = "";
+            float fValue = float.Parse(value,System.Globalization.CultureInfo.InvariantCulture);
+            var valueSplit = fValue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+            if (valueSplit != value)
+            {
+                valueSplit = valueSplit.Substring(0,valueSplit.Length-1);
+                valueText = "BETWEEN '" + valueSplit + "0' AND '" + valueSplit + "99'";
+            }
+            else
+                valueText = "= '" + value + "'";
+            var dbCommand = dbConnection.CreateCommand();
+            dbCommand.CommandText = "DELETE FROM ValuesHist WHERE (TimeStart BETWEEN '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+"' AND '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+".999999') AND (AverageValue "+valueText+")";
+            dbCommand.ExecuteNonQuery();
+            return dbCommand.CommandText;
         }
 
         private bool OpenStatisticsDatabase()
