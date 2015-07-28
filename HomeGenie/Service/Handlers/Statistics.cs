@@ -232,8 +232,39 @@ namespace HomeGenie.Service.Handlers
                 //
                 migCommand.Response += "]";
                 break;
+            case "Parameter.StatsDay":
+                domainSeparator = migCommand.GetOption(1).LastIndexOf(":");
+                if (domainSeparator > 0)
+                {
+                    domain = migCommand.GetOption(1).Substring(0, domainSeparator);
+                    address = migCommand.GetOption(1).Substring(domainSeparator + 1);
+                }
+                //
+                migCommand.Response = "[";
+                //
+                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                var daysAverages = new List<StatisticsEntry>[1];
+                daysAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "", dateStart, dateEnd);
+                migCommand.Response += "[ ";
+                foreach (var entry in daysAverages[0])
+                {
+                    migCommand.Response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                }
+                migCommand.Response = migCommand.Response.TrimEnd(',');
+                migCommand.Response += " ]";
+                //
+                migCommand.Response += "]";
+                break;
+            case "Parameter.StatDelete":
+                migCommand.Response = "[";
+                var dateText = migCommand.GetOption(0).Replace('.',',');
+                dateStart = JavascriptToDateUtc(double.Parse(dateText));
+                var responseDelete = homegenie.Statistics.DeleteStat(dateStart,migCommand.GetOption(1));
+                migCommand.Response += "[Response," + responseDelete + "]";
+                migCommand.Response += "]";
+                break;
             }
-
         }
 
         private DateTime JavascriptToDate(long timestamp)
@@ -242,10 +273,20 @@ namespace HomeGenie.Service.Handlers
             return (baseDate.AddMilliseconds(timestamp));
         }
 
-        private double DateToJavascript(DateTime date)
+        private DateTime JavascriptToDateUtc(double timestamp)
         {
-            return ((date.Ticks - 621355968000000000) / 10000D);
+            var baseDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
+            return (baseDate.AddMilliseconds(timestamp).ToUniversalTime());
         }
 
+        private double DateToJavascript(DateTime date)
+        {
+            return ((date.Ticks - 621355968000000000L) / 10000D);
+        }
+
+        private double DateToJavascriptLocal(DateTime date)
+        {
+            return ((date.ToLocalTime().Ticks - 621355968000000000L) / 10000D);
+        }
     }
 }

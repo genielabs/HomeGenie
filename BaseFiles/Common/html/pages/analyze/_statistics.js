@@ -7,8 +7,11 @@ HG.WebApp.Statistics._CurrentTab = 1;
 HG.WebApp.Statistics._CurrentModule = '';
 HG.WebApp.Statistics._CurrentParameter = 'Meter.Watts';
 HG.WebApp.Statistics._CurrentGraphType = 'bars';
+HG.WebApp.Statistics._CurrentType = 'hours';
 HG.WebApp.Statistics._RefreshIntervalObject = null;
-HG.WebApp.Statistics._RefreshInterval = 2 * 60000; // stats refresh interval = 2 minutes
+HG.WebApp.Statistics._RefreshInterval = 5 * 60000; // stats refresh interval = 2 minutes
+HG.WebApp.Statistics._SelItemObject = false;
+HG.WebApp.Statistics._ItemObject = '';
 //
 HG.WebApp.Statistics.InitializePage = function () {
     $('#page_analyze_source').on('change', function () {
@@ -30,16 +33,19 @@ HG.WebApp.Statistics.InitializePage = function () {
         if (HG.WebApp.Statistics._CurrentModule == ':') HG.WebApp.Statistics._CurrentModule = '';
         HG.WebApp.Statistics._CurrentParameter = $('#page_analyze_param').val();
         HG.WebApp.Statistics._CurrentGraphType = $('#page_analyze_graphtype').val();
+        HG.WebApp.Statistics._CurrentType = $('#page_analyze_type').val();
         //
         if (HG.WebApp.Statistics._CurrentParameter.substring(0, 6) == 'Meter.' || HG.WebApp.Statistics._CurrentParameter.substring(0, 13) == 'PowerMonitor.') {
-            $('#statistics_tab2_button').show();
+            $('#statistics_tab3_button').show();
         }
         else {
-            $('#statistics_tab2_button').hide();
+            $('#statistics_tab3_button').hide();
         }
-        HG.WebApp.Statistics.SetTab(1);
         //
-        $('#page_analyze_title').html($('#page_analyze_source').find('option:selected').text() + ', ' + $('#page_analyze_param').find('option:selected').text());
+        HG.WebApp.Statistics.SetTab(1);
+
+        $('#page_analyze_title').html($('#page_analyze_source').find('option:selected').text() + ' - ' + $('#page_analyze_param').find('option:selected').text());
+        $('#page_analyze_title2').html($('#page_analyze_title').val());
         $('#analyze_stats_options').popup('close');
     });
     //
@@ -53,7 +59,7 @@ HG.WebApp.Statistics.InitializePage = function () {
         HG.WebApp.Statistics.RefreshModules();
         HG.WebApp.Statistics.RefreshParameters();
     });
-    // datebox field events
+    // datebox Hour field events
     $('#page_analyze_datefrom').val('');
     $('#page_analyze_datefrom').on('change', function(){
         HG.WebApp.Statistics.Refresh();
@@ -97,9 +103,21 @@ HG.WebApp.Statistics.InitializePage = function () {
 
             api.set('content.text',
             item.series.label + " at " + new Date(item.datapoint[0] + offset).toLocaleTimeString() + " = " + item.datapoint[1].toFixed(2));
-
-            api.elements.tooltip.stop(1, 1);
-            api.show(item);
+            if( HG.WebApp.Statistics._CurrentType == 'days' )
+            {
+                if( HG.WebApp.Statistics._SelItemObject == false )
+                {
+            	    $("#page_delete_stat").html("Delete Value : "+item.datapoint[1]);
+                    HG.WebApp.Statistics._ItemObject = item.datapoint[0]+'/'+item.datapoint[1];
+	                api.elements.tooltip.stop(1, 1);
+	                api.show(item);
+	            }
+            }
+            else
+            {
+                api.elements.tooltip.stop(1, 1);
+                api.show(item);
+            }
         }
     });
     $("#statscounter").qtip({
@@ -139,6 +157,43 @@ HG.WebApp.Statistics.InitializePage = function () {
 
             api.elements.tooltip.stop(1, 1);
             api.show(item);
+        }
+    });
+    $("#page_delete_stat").on('click', function () {
+        if( HG.WebApp.Statistics._SelItemObject == true )
+        {
+	        $.ajax({
+	            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatDelete/' + HG.WebApp.Statistics._ItemObject,
+	            type: 'GET',
+	            success: function (data) {
+	                var stats = eval(data);
+//	                $("#page_analyze_title").html(data) ;
+	                $.mobile.loading('hide');
+	            },
+	            error: function(xhr, status, error) {
+	                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+	                $.mobile.loading('hide');
+	            }
+	        });
+            HG.WebApp.Statistics._ItemObject = '';
+        }
+        HG.WebApp.Statistics._SelItemObject = false;
+       	$("#page_delete_stat").hide();
+    });
+    $("#statshour").on('click', function () {
+        if( HG.WebApp.Statistics._SelItemObject == false )
+        {
+            if( HG.WebApp.Statistics._ItemObject != '' )
+            {
+                HG.WebApp.Statistics._SelItemObject = true;
+         	    $("#page_delete_stat").show();
+         	}
+        }
+        else
+        {
+            HG.WebApp.Statistics._ItemObject = '';
+            HG.WebApp.Statistics._SelItemObject = false;
+     	    $("#page_delete_stat").hide();
         }
     });
 };
@@ -234,8 +289,11 @@ HG.WebApp.Statistics.Refresh = function () {
     var showsplines = (HG.WebApp.Statistics._CurrentGraphType == 'splines' ? true : false);
     var showlines = (HG.WebApp.Statistics._CurrentGraphType == 'lines' ? true : false);
     var showbars = (HG.WebApp.Statistics._CurrentGraphType == 'bars' ? true : false);
+    var showtype = (HG.WebApp.Statistics._CurrentType == 'hours' ? true : false);
     if (HG.WebApp.Statistics._CurrentTab == 1)
     {
+        if( HG.WebApp.Statistics._SelItemObject == false )
+   	       $("#page_delete_stat").hide();
         HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
             var trange = eval(res)[0];
             var start = new Date(parseFloat(trange.StartTime));
@@ -256,48 +314,92 @@ HG.WebApp.Statistics.Refresh = function () {
             var dto = new Date($('#page_analyze_dateto').datebox('getTheDate').getTime());
             dfrom.setHours(0, 0, 0, 0);
             dto.setHours(23, 59, 59, 0);
-            $.ajax({
-                url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
-                type: 'GET',
-                success: function (data) {
-                    var stats = eval(data);
-                    try {
-                        $.plot($("#statshour"), [
-                                { label: 'Max', data: stats[1], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-                                { label: 'Avg', data: stats[2], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-                                { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-                                { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
-                                { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
-                            ],
-                            {
-                                yaxis: { show: true },
-                                xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
-                                legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
-                                lines: { show: showlines, lineWidth: 1.0 },
-                                series: {
-                                    splines: { show: showsplines }
-                                },
-                                grid: {
-                                    backgroundColor: { colors: ["#fff", "#ddd"] },
-                                    hoverable: true
-                                },
-                                colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
-                                points: { show: true },
-                                zoom: {
-                                    interactive: true
-                                },
-                                pan: {
-                                    interactive: true
-                                }  
-                            });
-                    } catch (e) { }
-                    $.mobile.loading('hide');
-                },
-                error: function(xhr, status, error) {
-                    console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
-                    $.mobile.loading('hide');
-                }
-            });
+            if( showtype == true )
+            {
+		        $.ajax({
+		            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+		            type: 'GET',
+		            success: function (data) {
+		                var stats = eval(data);
+		                try {
+		                    $.plot($("#statshour"), [
+		                            { label: 'Max', data: stats[1], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+		                            { label: 'Avg', data: stats[2], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+		                            { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+		                            { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
+		                            { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
+		                        ],
+		                        {
+		                            yaxis: { show: true },
+		                            xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+		                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+		                            lines: { show: showlines, lineWidth: 1.0 },
+		                            series: {
+		                                splines: { show: showsplines }
+		                            },
+		                            grid: {
+		                                backgroundColor: { colors: ["#fff", "#ddd"] },
+		                                hoverable: true
+		                            },
+		                            colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
+		                            points: { show: true },
+		                            zoom: {
+		                                interactive: true
+		                            },
+		                            pan: {
+		                                interactive: true
+		                            }  
+		                        });
+		                } catch (e) { }
+		                $.mobile.loading('hide');
+		            },
+		            error: function(xhr, status, error) {
+		                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+		                $.mobile.loading('hide');
+		            }
+		        });
+            }
+            else
+            {
+		        $.ajax({
+		            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDay/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+		            type: 'GET',
+		            success: function (data) {
+		                var stats = eval(data);
+		                try {
+		                    $.plot($("#statshour"), [
+		                            { label: $('#page_analyze_title').text(), data: stats[0], lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
+		                        ],
+		                        {
+		                            yaxis: { show: true },
+		                            xaxis: { mode: "time", timeformat: "%d/%m", minTickSize: [1, "day"], tickSize: [1, "day"] },
+		                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+		                            lines: { show: showlines, lineWidth: 1.0 },
+		                            series: {
+		                                splines: { show: showsplines }
+		                            },
+		                            grid: {
+		                                backgroundColor: { colors: ["#fff", "#ddd"] },
+		                                hoverable: true
+		                            },
+		                            colors: ["rgba(200, 30, 0, 1.0)"],
+		                            points: { show: true },
+		                            zoom: {
+		                                interactive: true
+		                            },
+		                            pan: {
+		                                interactive: true
+		                            }  
+		                        });
+		                } catch (e) { }
+		                $.mobile.loading('hide');
+		            },
+		            error: function(xhr, status, error) {
+		                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+		                $.mobile.loading('hide');
+		            }
+		        });
+            }
         });
     }
     else    
