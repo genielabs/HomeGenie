@@ -605,8 +605,6 @@
         "Wechseln",
     "configure_system_statistics_databasemaxsizechange":
         "maximale Größe (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Hinweis: Nach dem Ändern der Größe, muss Homegenie neu gestartet werden, damit die Änderungen wirksam wird!",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Abbrechen",
     "configure_system_statistics_databasemaxsizechange_commit":

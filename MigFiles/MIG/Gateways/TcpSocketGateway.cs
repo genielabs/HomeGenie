@@ -50,7 +50,7 @@ namespace MIG.Gateways
     {
         public event Action<object> ProcessRequest;
 
-        private TCPServerChannel server;
+        private TcpServerChannel server;
         private int servicePort = 4502;
 
         public TcpSocketGateway()
@@ -61,7 +61,7 @@ namespace MIG.Gateways
 
         public void Start()
         {
-            server = NetworkConnectivity.CreateTCPServerChannel("server");
+            server = NetworkConnectivity.CreateTcpServerChannel("server");
             server.ChannelClientConnected += server_ChannelClientConnected;
             server.ChannelClientDisconnected += server_ChannelClientDisconnected;
             //_server.ChannelConnected += 

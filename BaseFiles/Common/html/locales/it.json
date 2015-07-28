@@ -605,8 +605,6 @@
         "Cambia",
     "configure_system_statistics_databasemaxsizechange":
         "Dimensione massima (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Nota: dopo aver cambiato dimensione, HomeGenie deve essere riavviato per rendere le modifiche effettive.",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Annulla",
     "configure_system_statistics_databasemaxsizechange_commit":

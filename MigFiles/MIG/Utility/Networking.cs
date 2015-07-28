@@ -1,4 +1,7 @@
-﻿
+﻿using System.Collections;
+using System.Linq;
+
+
 namespace MIG.Utility
 {
     //
@@ -61,6 +64,16 @@ namespace MIG.Utility
         protected abstract void Stop();
 
         protected Socket m_mainSocket = null;
+
+        public string Name { get { return m_ChannelName; } }
+
+        public bool IsListening
+        {
+            get
+            {
+                return (m_mainSocket != null && m_mainSocket.IsBound);
+            }
+        }
 
         /// <summary>
         /// This function is used to disconnect channel socket.
@@ -193,17 +206,17 @@ namespace MIG.Utility
 
     /// <summary>
     /// Represents the method that will handle the 
-    /// ChannelClientConnected/ChannelClientDisconnected of a TCPServerChannel
+    /// ChannelClientConnected/ChannelClientDisconnected of a TcpServerChannel
     /// </summary>
     public delegate void ServerConnectionEventHandler(object sender, ServerConnectionEventArgs args);
     /// <summary>
     /// Represents the method that will handle the 
-    /// DataReceived/DataSent of a TCPServerChannel
+    /// DataReceived/DataSent of a TcpServerChannel
     /// </summary>
     public delegate void ServerDataEventHandler(object sender, ServerDataEventArgs args);
     /// <summary>
     /// Represents the method that will handle the 
-    /// DataReceived/DataSent of a TCPClientChannel and UDPChannel
+    /// DataReceived/DataSent of a TcpClientChannel and UdpChannel
     /// </summary>
     public delegate void DataEventHandler(object sender, DataEventArgs args);
 
@@ -234,9 +247,9 @@ namespace MIG.Utility
         /// This function is used for creation of UDP channel.
         /// </summary>
         /// <returns>UDP Channel created by Network Connectivity</returns>
-        public static UDPChannel CreateUDPChannel(string channelName)
+        public static UdpChannel CreateUdpChannel(string channelName)
         {
-            UDPChannel uc = new UDPChannel(channelName);
+            UdpChannel uc = new UdpChannel(channelName);
             m_Channels.Add(uc);
 
             return uc;
@@ -246,9 +259,9 @@ namespace MIG.Utility
         /// This function is used for creation of TCP server channel.
         /// </summary>
         /// <returns>TCP Server Channel created by Network Connectivity</returns>
-        public static TCPServerChannel CreateTCPServerChannel(string channelName)
+        public static TcpServerChannel CreateTcpServerChannel(string channelName)
         {
-            TCPServerChannel ch = new TCPServerChannel(channelName);
+            TcpServerChannel ch = new TcpServerChannel(channelName);
             m_Channels.Add(ch);
             return ch;
         }
@@ -257,9 +270,9 @@ namespace MIG.Utility
         /// This function is used for creation of TCP client channel.
         /// </summary>
         /// <returns>TCP Client Channel created by Network Connectivity</returns>
-        public static TCPClientChannel CreateTCPClientChannel(string channelName)
+        public static TcpClientChannel CreateTcpClientChannel(string channelName)
         {
-            TCPClientChannel ch = new TCPClientChannel(channelName);
+            TcpClientChannel ch = new TcpClientChannel(channelName);
             m_Channels.Add(ch);
 
             return ch;
@@ -411,11 +424,11 @@ namespace MIG.Utility
     /// <summary>
     /// Provides an implementation for a UDP channel.
     /// </summary>
-    public class UDPChannel : NetworkChannel
+    public class UdpChannel : NetworkChannel
     {
         #region Constructor
 
-        internal UDPChannel(string _ChannelName) : base(_ChannelName)
+        internal UdpChannel(string _ChannelName) : base(_ChannelName)
         {
         }
 
@@ -593,26 +606,34 @@ namespace MIG.Utility
 
         override protected void dataReceivedCallback(IAsyncResult asyn)
         {
-            try
+            SocketPacket socketData = (SocketPacket)asyn.AsyncState;
+            int res = socketData.m_currentSocket.EndReceive(asyn);
+            if (res <= 0)
             {
-                lock (this)
+                Stop();
+            }
+            else
+            {
+                try
                 {
-                    if (m_mainSocket != null)
+                    lock (this)
                     {
-                        SocketPacket socketData = (SocketPacket)asyn.AsyncState;
-                        int res = socketData.m_currentSocket.EndReceive(asyn);
-                        if (DataReceived != null) DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                        if (m_mainSocket != null)
+                        {
+                            if (DataReceived != null)
+                                DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                        }
                     }
                 }
-            }
-            catch (SocketException sex)
-            {
-                FireExceptionOccured(sex);
-            }
-            catch (Exception ex)
-            {
-                //LOG: General Exception
-                FireExceptionOccured(ex);
+                catch (SocketException sex)
+                {
+                    FireExceptionOccured(sex);
+                }
+                catch (Exception ex)
+                {
+                    //LOG: General Exception
+                    FireExceptionOccured(ex);
+                }
             }
         }
 
@@ -620,7 +641,7 @@ namespace MIG.Utility
 
 
         /// <summary>
-        /// Returns a string representation of an UDPChannel object
+        /// Returns a string representation of an UdpChannel object
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -634,15 +655,15 @@ namespace MIG.Utility
     /// <summary>
     /// Provides an implementation for a server TCP channel.
     /// </summary>
-    public class TCPServerChannel : NetworkChannel
+    public class TcpServerChannel : NetworkChannel
     {
         #region Configurations
 
-        static int Backlog = 100;
+        private static int backLog = 100;
 
         #endregion
 
-        internal TCPServerChannel(string _ChannelName) : base(_ChannelName)
+        internal TcpServerChannel(string _ChannelName) : base(_ChannelName)
         {
         }
 
@@ -669,7 +690,16 @@ namespace MIG.Utility
 
         #endregion
 
-        System.Collections.Hashtable m_workerSocketList = new System.Collections.Hashtable();
+        private Hashtable m_workerSocketList = new Hashtable();
+
+        #region Global active socket list
+
+        public Hashtable SocketList
+        {
+            get { return m_workerSocketList; }
+        }
+
+        #endregion
 
         #region Connection
 
@@ -706,10 +736,11 @@ namespace MIG.Utility
                             ProtocolType.Tcp);
                         IPEndPoint ipLocal = new IPEndPoint(IPAddress.Any, port);//TBD: We can also choose IP to listen.
                         m_mainSocket.Bind(ipLocal);
-                        m_mainSocket.Listen(Backlog);
+                        m_mainSocket.Listen(backLog);
                         m_mainSocket.BeginAccept(new AsyncCallback(acceptCallback), null);
                     }
                 }
+                this.BoundPort = port;
             }
             catch (SocketException sex)
             {
@@ -721,6 +752,8 @@ namespace MIG.Utility
                 FireExceptionOccured(ex);
             }
         }
+
+        public int BoundPort { get; internal set; }
 
         private void acceptCallback(IAsyncResult asyn)
         {
@@ -816,6 +849,18 @@ namespace MIG.Utility
             {
                 m_mainSocket.Close();
                 FireChannelDisconnected();
+            }
+        }
+
+        #endregion
+
+        #region Clients
+
+        public List<Socket> Clients
+        {
+            get
+            {
+                return m_workerSocketList.Values.OfType<Socket>().ToList();
             }
         }
 
@@ -949,50 +994,58 @@ namespace MIG.Utility
         override protected void dataReceivedCallback(IAsyncResult asyn)
         {
             SocketPacket socketData = (SocketPacket)asyn.AsyncState;
-            try
+            int res = socketData.m_currentSocket.EndReceive(asyn);
+            if (res <= 0)
             {
-                lock (this)
-                {
-                    int res = socketData.m_currentSocket.EndReceive(asyn);
-                    if (DataReceived != null) DataReceived(this, new ServerDataEventArgs(socketData.dataBuffer, res,
-                            socketData.m_currentSocket.GetHashCode()));
-                }
+                DisconnectClient(socketData.m_currentSocket.GetHashCode());
             }
-            catch (ObjectDisposedException ode)
+            else
             {
-                //Console.WriteLine(ode.ObjectName);
-                //Console.WriteLine(ode.Message);
-                FireExceptionOccured(ode);
-            }
-            catch (SocketException sex)
-            {
-                if (sex.ErrorCode == 10054) // Error code for Connection reset by peer
+                try
                 {
-                    m_workerSocketList.Remove(socketData.m_currentSocket);
-                    if (ChannelClientDisconnected != null) ChannelClientDisconnected(
-                            this,
-                            new ServerConnectionEventArgs(socketData.m_currentSocket.GetHashCode())
-                        );
+                    lock (this)
+                    {
+                        if (DataReceived != null)
+                            DataReceived(this, new ServerDataEventArgs(socketData.dataBuffer, res, socketData.m_currentSocket.GetHashCode()));
+                    }
                 }
-                else
+                catch (ObjectDisposedException ode)
                 {
-                    //LOG: Socket Exception
-                    //Console.WriteLine(sex.Message);
-                    //Console.WriteLine(sex.StackTrace);
-                    FireExceptionOccured(sex);
+                    //Console.WriteLine(ode.ObjectName);
+                    //Console.WriteLine(ode.Message);
+                    FireExceptionOccured(ode);
                 }
-            }
-            catch (Exception e)
-            {
-                //LOG: General Exception
-                FireExceptionOccured(e);
+                catch (SocketException sex)
+                {
+                    if (sex.ErrorCode == 10054) // Error code for Connection reset by peer
+                    {
+                        m_workerSocketList.Remove(socketData.m_currentSocket);
+                        if (ChannelClientDisconnected != null)
+                            ChannelClientDisconnected(
+                                this,
+                                new ServerConnectionEventArgs(socketData.m_currentSocket.GetHashCode())
+                            );
+                    }
+                    else
+                    {
+                        //LOG: Socket Exception
+                        //Console.WriteLine(sex.Message);
+                        //Console.WriteLine(sex.StackTrace);
+                        FireExceptionOccured(sex);
+                    }
+                }
+                catch (Exception e)
+                {
+                    //LOG: General Exception
+                    FireExceptionOccured(e);
+                }
             }
         }
 
         #endregion
 
         /// <summary>
-        /// Returns a string representation of an TCPServerChannel object
+        /// Returns a string representation of an TcpServerChannel object
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -1008,9 +1061,9 @@ namespace MIG.Utility
     /// <summary>
     /// Provides an implementation for a client TCP channel.
     /// </summary>
-    public class TCPClientChannel : NetworkChannel
+    public class TcpClientChannel : NetworkChannel
     {
-        internal TCPClientChannel(string _ChannelName) : base(_ChannelName)
+        internal TcpClientChannel(string _ChannelName) : base(_ChannelName)
         {
         }
 
@@ -1207,33 +1260,43 @@ namespace MIG.Utility
 
         override protected void dataReceivedCallback(IAsyncResult asyn)
         {
-            try
+            SocketPacket socketData = (SocketPacket)asyn.AsyncState;
+            int res = socketData.m_currentSocket.EndReceive(asyn);
+            if (res <= 0)
             {
-                lock (this)
+                Stop();
+            }
+            else
+            {
+                try
                 {
-                    SocketPacket socketData = (SocketPacket)asyn.AsyncState;
-                    int res = socketData.m_currentSocket.EndReceive(asyn);
-                    if (DataReceived != null) DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                    lock (this)
+                    {
+                        if (DataReceived != null)
+                            DataReceived(this, new DataEventArgs(socketData.dataBuffer, res));
+                    }
                 }
-            }
-            catch (ObjectDisposedException ode)
-            {
-                //Console.WriteLine(ode.ObjectName);
-                //Console.WriteLine(ode.Message);
-                FireExceptionOccured(ode);
-            }
-            catch (SocketException sex)
-            {
-                //LOG: Socket Exception
-                //Console.WriteLine(sex.Message);
-                //Console.WriteLine(sex.StackTrace);
-                if (!m_mainSocket.Connected) FireChannelDisconnected();
-                else FireExceptionOccured(sex);
-            }
-            catch (Exception e)
-            {
-                //LOG: General Exception
-                FireExceptionOccured(e);
+                catch (ObjectDisposedException ode)
+                {
+                    //Console.WriteLine(ode.ObjectName);
+                    //Console.WriteLine(ode.Message);
+                    FireExceptionOccured(ode);
+                }
+                catch (SocketException sex)
+                {
+                    //LOG: Socket Exception
+                    //Console.WriteLine(sex.Message);
+                    //Console.WriteLine(sex.StackTrace);
+                    if (!m_mainSocket.Connected)
+                        FireChannelDisconnected();
+                    else
+                        FireExceptionOccured(sex);
+                }
+                catch (Exception e)
+                {
+                    //LOG: General Exception
+                    FireExceptionOccured(e);
+                }
             }
         }
 
@@ -1241,7 +1304,7 @@ namespace MIG.Utility
 
 
         /// <summary>
-        /// Returns a string representation of an TCPClientChannel object
+        /// Returns a string representation of an TcpClientChannel object
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -1316,7 +1379,7 @@ namespace MIG.Utility
         /// <returns>Retrieved object or null if queue is empty</returns>
         /// <remarks>This method uses fast and efficient method of data retrieval from queue, 
         /// optimized for the cases when queue is not empty most of the time. 
-        /// Calling thread enters wait state only if queue is empty.</remarks>		
+        /// Calling thread enters wait state only if queue is empty.</remarks>      
         public object Dequeue(int p_Timeout)
         {
             //Note: thread starvation is possible
@@ -1365,7 +1428,7 @@ namespace MIG.Utility
         /// <returns>Retrieved object or null if queue is empty</returns>
         /// <remarks>This method uses fast and efficient method of data retrieval from queue, 
         /// optimized for the cases when queue is not empty most of the time. 
-        /// Calling thread enters wait state only if queue is empty.</remarks>	
+        /// Calling thread enters wait state only if queue is empty.</remarks>  
         public object Dequeue(TimeSpan p_Timeout)
         {
             return Dequeue((int)p_Timeout.TotalMilliseconds);
@@ -1374,11 +1437,11 @@ namespace MIG.Utility
         /// <summary>
         /// Returns (and removes) object from the head of the queue.
         /// Waits indefinitely if queue is empty.
-        /// </summary>	
+        /// </summary>  
         /// <returns>Retrieved object</returns>
         /// <remarks>This method uses fast and efficient method of data retrieval from queue, 
         /// optimized for the cases when queue is not empty most of the time. 
-        /// Calling thread enters wait state only if queue is empty.</remarks>	
+        /// Calling thread enters wait state only if queue is empty.</remarks>  
         public object Dequeue()
         {
             return Dequeue(Timeout.Infinite);
@@ -1476,6 +1539,5 @@ namespace MIG.Utility
         #endregion
 
     }
-
 
 }

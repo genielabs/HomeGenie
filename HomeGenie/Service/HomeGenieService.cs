@@ -1847,7 +1847,7 @@ namespace HomeGenie.Service
                 systemConfiguration.HomeGenie.GUID = uniqueDeviceName = System.Guid.NewGuid().ToString();
                 systemConfiguration.Update();
                 // initialize database for first use
-                statisticsLogger.DatabaseReset();
+                statisticsLogger.ResetDatabase();
             }
             //
             UPnPDevice localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");

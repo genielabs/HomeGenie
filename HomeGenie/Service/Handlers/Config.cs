@@ -360,8 +360,10 @@ namespace HomeGenie.Service.Handlers
                 {
                     try
                     {
-                        homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = int.Parse(migCommand.GetOption(1));
+                        int sizeLimit = int.Parse(migCommand.GetOption(1));
+                        homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes = sizeLimit;
                         homegenie.SystemConfiguration.Update();
+                        homegenie.Statistics.SizeLimit = sizeLimit * 1024 * 1024;
                     }
                     catch
                     {

@@ -605,8 +605,6 @@
         "Modifier",
     "configure_system_statistics_databasemaxsizechange":
         "Taille mawimum (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Note : Après avoir changer de taille, HomeGenie doit être redémarré pour valider.",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Annuler",
     "configure_system_statistics_databasemaxsizechange_commit":

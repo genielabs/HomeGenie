@@ -605,8 +605,6 @@
         "Изменить",
     "configure_system_statistics_databasemaxsizechange":
         "Максимальный размер (MB)",
-    "configure_system_statistics_databasemaxsizechange_note":
-        "Внимание: после изменения размера необходимо перезапустить HomeGenie, чтобы изменения вступили в силу!",
     "configure_system_statistics_databasemaxsizechange_cancel":
         "Отмена",
     "configure_system_statistics_databasemaxsizechange_commit":

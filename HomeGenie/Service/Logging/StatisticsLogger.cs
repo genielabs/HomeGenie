@@ -71,9 +71,9 @@ namespace HomeGenie.Service.Logging
         private Timer logInterval;
         private HomeGenieService homegenie;
         private SQLiteConnection dbConnection;
+        private long dbSizeLimit = 2097152;
 
         //private object dbLock = new object();
-        private readonly long dbSizeLimit = 5242880;
         //private static int STATISTICS_TIME_RESOLUTION_MINUTES = 5;
         private readonly int _statisticsTimeResolutionSeconds = 5 * 60;
 
@@ -85,6 +85,9 @@ namespace HomeGenie.Service.Logging
 
         }
 
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
         public void Start()
         {
             OpenStatisticsDatabase();
@@ -96,6 +99,9 @@ namespace HomeGenie.Service.Logging
             logInterval.Start();
         }
 
+        /// <summary>
+        /// Stop this instance.
+        /// </summary>
         public void Stop()
         {
             if (logInterval != null)
@@ -108,11 +114,30 @@ namespace HomeGenie.Service.Logging
             CloseStatisticsDatabase();
         }
 
-        public void DatabaseReset()
+        /// <summary>
+        /// Gets or sets the size limit.
+        /// </summary>
+        /// <value>The size limit.</value>
+        public long SizeLimit
+        {
+            get { return dbSizeLimit; }
+            set { dbSizeLimit = value; }
+        }
+
+        /// <summary>
+        /// Resets the database.
+        /// </summary>
+        public void ResetDatabase()
         {
             ResetStatisticsDatabase();
         }
 
+        /// <summary>
+        /// Gets the parameters list.
+        /// </summary>
+        /// <returns>The parameters list.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
         public List<string> GetParametersList(string domain, string address)
         {
             var parameterList = new List<string>();
@@ -137,6 +162,10 @@ namespace HomeGenie.Service.Logging
             return parameterList;
         }
 
+        /// <summary>
+        /// Gets the date range.
+        /// </summary>
+        /// <returns>The date range.</returns>
         public StatisticsEntry GetDateRange()
         {
             var start = DateTime.UtcNow;
@@ -165,6 +194,12 @@ namespace HomeGenie.Service.Logging
             return new StatisticsEntry() { TimeStart = start, TimeEnd = end };
         }
 
+        /// <summary>
+        /// Gets the total counter.
+        /// </summary>
+        /// <returns>The total counter.</returns>
+        /// <param name="parameterName">Parameter name.</param>
+        /// <param name="timeScaleSeconds">Time scale seconds.</param>
         public double GetTotalCounter(string parameterName, double timeScaleSeconds)
         {
             double value = 0;
@@ -194,6 +229,16 @@ namespace HomeGenie.Service.Logging
             return value;
         }
 
+        /// <summary>
+        /// Gets the hourly counter.
+        /// </summary>
+        /// <returns>The hourly counter.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
+        /// <param name="parameterName">Parameter name.</param>
+        /// <param name="timescaleseconds">Timescaleseconds.</param>
+        /// <param name="startDate">Start date.</param>
+        /// <param name="endDate">End date.</param>
         public List<StatisticsEntry> GetHourlyCounter(
             string domain,
             string address,
@@ -311,6 +356,14 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
+        /// <summary>
+        /// Gets the today detail.
+        /// </summary>
+        /// <returns>The today detail.</returns>
+        /// <param name="domain">Domain.</param>
+        /// <param name="address">Address.</param>
+        /// <param name="parameterName">Parameter name.</param>
+        /// <param name="aggregator">Aggregator.</param>
         public List<StatisticsEntry> GetTodayDetail(
             string domain,
             string address,
@@ -457,6 +510,12 @@ namespace HomeGenie.Service.Logging
             return values;
         }
 
+        /// <summary>
+        /// Deletes the stat.
+        /// </summary>
+        /// <returns>The stat.</returns>
+        /// <param name="startDate">Start date.</param>
+        /// <param name="value">Value.</param>
         public string DeleteStat(
           DateTime startDate,
             string value
@@ -478,6 +537,10 @@ namespace HomeGenie.Service.Logging
             return dbCommand.CommandText;
         }
 
+        /// <summary>
+        /// Opens the statistics database.
+        /// </summary>
+        /// <returns><c>true</c>, if statistics database was opened, <c>false</c> otherwise.</returns>
         private bool OpenStatisticsDatabase()
         {
             bool success = false;
@@ -498,6 +561,9 @@ namespace HomeGenie.Service.Logging
             return success;
         }
 
+        /// <summary>
+        /// Resets the statistics database.
+        /// </summary>
         private void ResetStatisticsDatabase()
         {
             //lock (dbLock)
@@ -510,6 +576,7 @@ namespace HomeGenie.Service.Logging
                 dbCommand.ExecuteNonQuery();
             }
         }
+
         /// <summary>
         /// Removes older values to keep DB size within configured size limit. Currently just cuts out last half of dates.
         /// </summary>
@@ -554,6 +621,10 @@ namespace HomeGenie.Service.Logging
                 }
             }
         }
+
+        /// <summary>
+        /// Closes the statistics database.
+        /// </summary>
         private void CloseStatisticsDatabase()
         {
             //lock (dbLock)
@@ -565,6 +636,12 @@ namespace HomeGenie.Service.Logging
             }
         }
 
+        /// <summary>
+        /// Gets the date range filter.
+        /// </summary>
+        /// <returns>The date range filter.</returns>
+        /// <param name="start">Start.</param>
+        /// <param name="end">End.</param>
         private string GetDateRangeFilter(DateTime start, DateTime end)
         {
             var d1 = DateTime.Parse(start.ToLocalTime().ToString("yyyy-MM-dd") + " 00:00:00.000000");
@@ -573,6 +650,13 @@ namespace HomeGenie.Service.Logging
             return filter;
         }
 
+        /// <summary>
+        /// Gets the parameterized date range filter.
+        /// </summary>
+        /// <returns>The parameterized date range filter.</returns>
+        /// <param name="dbCommand">Db command.</param>
+        /// <param name="start">Start.</param>
+        /// <param name="end">End.</param>
         private string GetParameterizedDateRangeFilter(ref SQLiteCommand dbCommand, DateTime start, DateTime end)
         {
             var d1 = DateTime.Parse(start.ToLocalTime().ToString("yyyy-MM-dd") + " 00:00:00.000000");
@@ -582,6 +666,10 @@ namespace HomeGenie.Service.Logging
             return "(TimeStart >= @timeStartMin  AND TimeStart <= @timeStartMax)";
         }
 
+        /// <summary>
+        /// Gets the name of the statistics database.
+        /// </summary>
+        /// <returns>The statistics database name.</returns>
         private string GetStatisticsDatabaseName()
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "homegenie_stats.db");
@@ -591,7 +679,6 @@ namespace HomeGenie.Service.Logging
         {
             return datetime.ToString("yyyy-MM-dd HH:mm:ss.ffffff");
         }
-
 
         private void logInterval_Elapsed(object sender, ElapsedEventArgs eventArgs)
         {
