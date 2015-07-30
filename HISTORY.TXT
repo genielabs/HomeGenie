@@ -1,5 +1,9 @@
 ﻿RELEASE HISTORY
 
+30/07/2015 v1.00-beta.493-p2
+    - Changed behaviour of When.ModuleParameterIsChanging: event values can now be changed/adjusted before they are commited into the system
+    - Added "Days" parameter for viewing statistics graph along several days (PR #189)
+
 25/06/2015 v1.00-beta.493-p1
     - Fix for AeonLabs HEM G2 (PR #186)
     - Added Host Header configuration (adapted from pull request #163)
