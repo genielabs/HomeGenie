@@ -1577,6 +1577,14 @@ return true;
             }
           }
         }
+        else if (nif.Contains(" 27 ")) // Any switch
+        {
+          if (nif.Contains(" 26 "))
+            Pause(3); // Pause 3 second to ensure dimmers get to final value
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "<br>" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
+        }
         //
         // query Thermostat set point
         if (nif.Contains(" 43 ")) // Thermostat
