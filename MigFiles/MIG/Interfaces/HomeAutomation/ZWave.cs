@@ -211,9 +211,7 @@ namespace MIG.Interfaces.HomeAutomation
             {
                 if (CommandsList.ContainsValue(str))
                 {
-                    var cmd = from c in CommandsList
-                                             where c.Value == str
-                                             select c.Key;
+                    var cmd = from c in CommandsList where c.Value == str select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -1014,14 +1012,13 @@ namespace MIG.Interfaces.HomeAutomation
                         break;
                     case EventParameter.AlarmGeneric:
                         path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
-                    // Translate generic alarm into specific Door Lock event values if node is an entry control type device
-                    //at this level the sender is the controller so get the node from eventData
+                        // Translate generic alarm into specific Door Lock event values if node is an entry control type device
+                        //at this level the sender is the controller so get the node from eventData
                         if (eventData.Node.GenericClass == (byte)GenericType.EntryControl)
                         {
                             // do not convert to string since Alarms accept ONLY numbers a string would be outputed as NaN
                             // for now let it as is.
-
-//                        value = ((DoorLock.Alarm)(byte)value).ToString();
+//                            value = ((DoorLock.Alarm)(byte)value).ToString();
                         }
                         break;
                     case EventParameter.AlarmDoorWindow:

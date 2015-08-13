@@ -43,7 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZWaveMessage.cs" />
     <Compile Include="ZWavePort.cs" />
-    <Compile Include="Controller.cs" />
     <Compile Include="ZWaveNode.cs" />
     <Compile Include="Values\AlarmValue.cs" />
     <Compile Include="Values\EnergyValue.cs" />
@@ -82,6 +81,7 @@
     <Compile Include="CommandClasses\ThermostatMode.cs" />
     <Compile Include="Utility\AesWork.cs" />
     <Compile Include="Utility\Utility.cs" />
+    <Compile Include="Controller.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
