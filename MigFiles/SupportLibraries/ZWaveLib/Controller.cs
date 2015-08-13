@@ -68,6 +68,12 @@ namespace ZWaveLib
         public byte[] DevicePrivateNetworkKey { get; set; }
     }
 
+    public class ZWave_cb_to_node
+    {
+        public byte NodeId { get; set; }
+        public byte CallBackId { get; set; }
+    }
+
     public class Controller : ZWaveNode
     {
         #region Public fields
@@ -89,6 +95,7 @@ namespace ZWaveLib
 
         private List<ZWaveNode> devices = new List<ZWaveNode>();
         private List<ZWaveNodeConfig> nodesConfig = new List<ZWaveNodeConfig>();
+        private List<ZWave_cb_to_node> cb_to_node = new List<ZWave_cb_to_node>();
         private byte nodeOperationIdCheck = 0;
         private byte currentCommandTargetNode = 0;
         private byte[] lastMessage = null;
@@ -134,6 +141,103 @@ namespace ZWaveLib
         {
             OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryStart));
             zwavePort.Discovery();
+        }
+
+        private void AddNodeToList(byte nodeId, byte CallBackId) {
+            if (CallBackId != null)
+            {
+                Boolean addIt = true;
+                ZWave_cb_to_node element = cb_to_node.Find(item => item.NodeId == nodeId);
+                if (element != null)
+                {
+                    if (element.CallBackId != CallBackId)
+                    {
+                        // the node is already there but it's expecting a different call back  so adding the new CallBackId
+                        element.CallBackId = CallBackId;
+                        addIt = false;
+                    }
+                }
+
+                if (addIt)
+                {
+                    Utility.DebugLog(DebugMessageType.Information, "AddNodeToList - NodeId - " + nodeId.ToString("X2") + " CallbackId -" + CallBackId.ToString("X2"));
+                    cb_to_node.Add(new ZWave_cb_to_node()
+                    {
+                        NodeId = nodeId,
+                        CallBackId = CallBackId
+                    });
+                }
+            }
+        }
+
+        public void NodeNeighborUpdate(byte nodeId)
+        {
+//            OnControllerEvent(new ControllerEventArgs(0x00, ControllerStatus.DiscoveryStart));
+            //zwavePort.NodeNeighborUpdate(nodeId);
+            var node = devices.Find(n => n.Id == nodeId);
+            byte[] msg = new byte[] {
+                (byte)MessageHeader.SOF,
+                0x06, /* packet length */
+                (byte)MessageType.Request, /* Type of message */
+                (byte)Function.NodeNeighborUpdateOptions,
+                nodeId,
+                0x25,
+                0x00,
+                0x00};
+            byte cb = node.SendMessage(msg);
+            Utility.DebugLog(DebugMessageType.Information, "++++++++ AddNodeToList - CallbackId -" + cb.ToString("X2"));
+            AddNodeToList(nodeId, cb);
+
+            Thread.Sleep(10000);
+
+            // we force the NodeNeighborUpdate
+            msg = new byte[] {
+                    (byte)MessageHeader.SOF,
+                    0x05, /* packet length */
+                    (byte)MessageType.Request, /* Type of message */
+                    (byte)Function.NodeNeighborUpdate,
+                    nodeId,
+                    0x00,
+                    0x00    
+                };
+
+            cb = node.SendMessage(msg);
+
+
+        }
+
+        public void NodeNeighbors(byte CallBackId)
+        {
+//            var unsentMessage = zwavePort.PendingMessages.Find(zm => zm.CallbackId == commandId);
+//            byte nodeID = zwavePort.ResendLastMessage(commandId);
+
+            ZWave_cb_to_node element = cb_to_node.Find(item => item.CallBackId == CallBackId);
+            if (element != null)
+            {
+                var node = devices.Find(n => n.Id == element.NodeId);
+                byte[] msg = new byte[] {
+                    (byte)MessageHeader.SOF,
+                    0x07, /* packet length */
+                    (byte)MessageType.Request, /* Type of message */
+                    (byte)Function.GetRoutingInfo,
+                    element.NodeId,
+                    0x00,
+                    0x00,
+                    0x03,
+                    0x00    
+                };
+                byte cb = node.SendMessage(msg, true);
+
+                Utility.DebugLog(DebugMessageType.Information, "---------------- NodeNeighbors - Removed NodeId - " + element.NodeId.ToString("X2") + " CallbackId -" + element.CallBackId.ToString("X2"));
+                // done with the work now remove the element
+                cb_to_node.Remove(element);
+                
+//                AddNodeToList(nodeId, cb);
+            }
+            else
+            {
+                Utility.DebugLog(DebugMessageType.Information, "???????????????????? NodeNeighbors - Unable to find callback - " + CallBackId.ToString("X2"));
+            }
         }
 
         public void SoftReset()
@@ -480,7 +584,37 @@ namespace ZWaveLib
                                 }                                
                             }
                             break;
+                        case Function.NodeNeighborUpdateOptions:
+                        case Function.NodeNeighborUpdate:
 
+                            string message = args.Message[3] == (byte)Function.NodeNeighborUpdateOptions ? "Options " : "";
+
+                            switch (args.Message[5])
+                            {
+                                case (byte) NeighborUpdateOptions.NeighborUpdateStared:
+                                    Utility.DebugLog(DebugMessageType.Warning, "Node Neighbor Update " + message + "STARTED: " + Utility.ByteArrayToString(args.Message));
+                                    // the update started
+                                    break;
+                                case (byte) NeighborUpdateOptions.NeighborUpdateDone:
+                                    Utility.DebugLog(DebugMessageType.Warning, "Node Neighbor Update " + message + "DONE: " + Utility.ByteArrayToString(args.Message));
+                                    // We now request the neighbour information from the
+                                    // controller and store it in our node object.
+                                    // needs to be implemented
+//                                    var unsentMessage = zwavePort.PendingMessages.Find(zm => zm.CallbackId == args.Message[4]);
+//                                    byte nodeID = zwavePort.ResendLastMessage(args.Message[4]);
+                                    if (message.Length > 0)
+                                        NodeNeighbors(args.Message[4]);
+
+                                    break;
+                                case (byte) NeighborUpdateOptions.NeighborUpdateFailed:
+                                    Utility.DebugLog(DebugMessageType.Warning, "Node Neighbor Update " + message + "FAILED: " + Utility.ByteArrayToString(args.Message));
+                                    // the update failed
+                                    break;
+                                default:
+                                    Utility.DebugLog(DebugMessageType.Warning, "Unhandled Node Neighbor Update "  + message + "REQUEST " + Utility.ByteArrayToString(args.Message));
+                                    break;
+                            }
+                            break;
                         default:
                             Utility.DebugLog(DebugMessageType.Warning, "Unhandled REQUEST " + Utility.ByteArrayToString(args.Message));
                             break;
@@ -504,6 +638,26 @@ namespace ZWaveLib
                             break;
                         case Function.SendData:
                             // TODO: shall we do something here?
+                            break;
+                        case Function.GetRoutingInfo:
+                            bool found = false;
+                            for (int by = 0; by < 29; by++)
+                            {
+                                for (int bi = 0; bi < 8; bi++)
+                                {
+                                    int result = args.Message[4 + by] & (0x01 << bi);
+//                                    Utility.DebugLog(DebugMessageType.Warning, "GetRoutingInfo " + result);
+                                    if (result > 0)
+                                    {
+                                        Utility.DebugLog(DebugMessageType.Warning, "Reported Node: " + result.ToString());
+                                        found = true;
+                                    }
+                                }
+                            }
+                            if (!found)
+                            {
+                                Utility.DebugLog(DebugMessageType.Warning, "No nodes reported.");
+                            }
                             break;
                         default:
                             Utility.DebugLog(DebugMessageType.Warning, "Unhandled RESPONSE " + Utility.ByteArrayToString(args.Message));
