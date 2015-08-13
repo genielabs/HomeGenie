@@ -522,17 +522,12 @@ namespace HomeGenie.Service.Logging
         )
         {
             var valueText = "";
-            float fValue = float.Parse(value,System.Globalization.CultureInfo.InvariantCulture);
+            double fValue = double.Parse(value,System.Globalization.CultureInfo.InvariantCulture);
             var valueSplit = fValue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
-            if (valueSplit != value)
-            {
-                valueSplit = valueSplit.Substring(0,valueSplit.Length-1);
-                valueText = "BETWEEN '" + valueSplit + "0' AND '" + valueSplit + "99'";
-            }
-            else
-                valueText = "= '" + value + "'";
+            if (valueSplit == value)
+                valueText = " AND (AverageValue = '" + value + "')";
             var dbCommand = dbConnection.CreateCommand();
-            dbCommand.CommandText = "DELETE FROM ValuesHist WHERE (TimeStart BETWEEN '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+"' AND '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+".999999') AND (AverageValue "+valueText+")";
+            dbCommand.CommandText = "DELETE FROM ValuesHist WHERE (TimeStart BETWEEN '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+"' AND '"+startDate.ToString("yyyy-MM-dd HH:mm:ss")+".999999')"+valueText;
             dbCommand.ExecuteNonQuery();
             return dbCommand.CommandText;
         }
