@@ -1581,7 +1581,7 @@ return true;
         {
           if (nif.Contains(" 26 "))
             Pause(3); // Pause 3 second to ensure dimmers get to final value
-          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "<br>" + module.Instance.Address + " Basic Get");
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " Basic Get");
           module.Command("Basic.Get").Execute();
           Pause(.2);
         }

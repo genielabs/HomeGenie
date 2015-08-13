@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+13/08/2015 v1.00-beta.493-p3
+    - Added support for serial ports types ttyAMAx and ttyACMx (RaZberry / ZME_UZB1) - PR #194
+    - Some minor improvements to "Weather Underground" and "Query on Wake Up" programs - PR #190 PR #193
+    - Improved statistics delete functionality - PR #200
+
 30/07/2015 v1.00-beta.493-p2
     - Changed behaviour of When.ModuleParameterIsChanging: event values can now be changed/adjusted before they are commited into the system
     - Added "Days" parameter for viewing statistics graph along several days (PR #189)

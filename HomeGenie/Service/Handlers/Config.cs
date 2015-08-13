@@ -108,17 +108,13 @@ namespace HomeGenie.Service.Handlers
                         var portList = new List<string>();
                         for (int p = serialPorts.Length - 1; p >= 0; p--)
                         {
-                            if (serialPorts[p].Contains("/ttyS") || serialPorts[p].Contains("/ttyUSB"))
+                            if (serialPorts[p].Contains("/ttyS") 
+                                || serialPorts[p].Contains("/ttyUSB") 
+                                || serialPorts[p].Contains("/ttyAMA")   // RaZberry
+                                || serialPorts[p].Contains("/ttyACM"))  // ZME_UZB1
                             {
                                 portList.Add(serialPorts[p]);
                             }
-                        }
-                        if (Raspberry.Board.Current.IsRaspberryPi)
-                        {
-                            if (!portList.Contains("/dev/ttyAMA0"))
-                                portList.Add("/dev/ttyAMA0"); // RaZberry
-                            if (!portList.Contains("/dev/ttyACM0"))
-                                portList.Add("/dev/ttyACM0"); // ZME_UZB1
                         }
                         migCommand.Response = JsonHelper.GetSimpleResponse(JsonConvert.SerializeObject(portList));
                     }

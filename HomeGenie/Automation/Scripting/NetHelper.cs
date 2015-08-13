@@ -625,8 +625,8 @@ namespace HomeGenie.Automation.Scripting
             Utility.RunAsyncTask(() =>
             {
                 this.WebService(eventRouteUrl)
-                .Put(JsonConvert.SerializeObject(new ModuleEvent(module.SelectedModules[0], parameter), new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }))
-                .Call();
+                    .Put(JsonConvert.SerializeObject(new ModuleEvent(module.Instance, parameter), new JsonSerializerSettings(){ Culture = System.Globalization.CultureInfo.InvariantCulture }))
+                    .Call();
             });
             return this;
         }
