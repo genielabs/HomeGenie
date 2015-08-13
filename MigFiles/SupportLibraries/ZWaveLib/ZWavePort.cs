@@ -146,13 +146,13 @@ namespace ZWaveLib
                     serialPort.SendMessage(message.Message);
                     //
                     // wait for any previous message callback response
-//                    int maxWait = 50; // 5 seconds max wait
-//                    while (pendingMessages.Contains(message) && maxWait > 0)
-//                    {
-//                        Thread.Sleep(100);
-//                        maxWait--;
-//                    }
-//                    pendingMessages.Remove(message);
+                    int maxWait = 50; // 5 seconds max wait
+                    while (pendingMessages.Contains(message) && maxWait > 0)
+                    {
+                        Thread.Sleep(100);
+                        maxWait--;
+                    }
+                    pendingMessages.Remove(message);
                 }
                 //
                 // remove timed out messages (requeued messages after failure)
@@ -252,30 +252,6 @@ namespace ZWaveLib
             return (checksum == data[data.Length - 1]);
         }
 
-        private bool MultipleMessages(byte[] data)
-        {
-            if (data.Length > 1)
-            {
-                int messageLength = data[1] + 2;
-                if (data.Length > messageLength) { 
-                    byte[] message = new byte[messageLength];
-                    Array.Copy(data, message, messageLength);
-                    byte[] msg = new byte[data.Length - messageLength];
-                    Array.Copy(data, messageLength, msg, 0, data.Length - messageLength);
-
-                    Utility.DebugLog(DebugMessageType.Warning, "Splited " + Utility.ByteArrayToString(data) + " in:" +
-                        " [" + Utility.ByteArrayToString(message) + "]" + 
-                        " [" + Utility.ByteArrayToString(msg) + "]");
-
-                    ReceiveMessage(message);
-                    ReceiveMessage(msg);
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
         private void ReceiveMessage(byte[] message)
         {
             MessageHeader header = (MessageHeader)((int)message[0]);
@@ -317,11 +293,6 @@ namespace ZWaveLib
                     // TODO: ?!?
                 }
                 else if (VerifyChecksum(message))
-                {
-                    this.SendAck();
-                    ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(message));
-                }
-                else if (MultipleMessages(message))
                 {
                     this.SendAck();
                     ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(message));

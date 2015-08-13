@@ -29,7 +29,7 @@ namespace ZWaveLib
         GetRoutingInfo = 0x80
     }
 
-    public enum NeighborUpdateOptions : byte
+    public enum NeighborUpdateOption : byte
     {
         //Neighbor Update
         NeighborUpdateStared = 0x21,
