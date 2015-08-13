@@ -39,7 +39,8 @@ namespace ZWaveLib
     public enum MessageType : byte
     {
         Request = 0x00,
-        Response = 0x01
+        Response = 0x01,
+        None = 0xFF
     }
 
     public class ZWaveMessageReceivedEventArgs

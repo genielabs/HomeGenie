@@ -73,7 +73,8 @@ namespace ZWaveLib
         SecurityNodeInformationFrame,
         SecurityDecriptedMessage,
         SecurityGeneratedKey,
-        DoorLockStatus
+        DoorLockStatus,
+        RoutingInfo
     }
 
     public class ZWaveEvent

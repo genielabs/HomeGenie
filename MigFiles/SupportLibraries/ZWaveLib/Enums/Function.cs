@@ -7,31 +7,29 @@ namespace ZWaveLib
     {
         None = 0x00,
         DiscoveryNodes = 0x02,
-        ApplicationCommand = 0x04,
+        ApplicationCommandHandler = 0x04,
         ControllerSoftReset = 0x08,
         SendData = 0x13,
 
         GetNodeProtocolInfo = 0x41,
         ControllerSetDefault = 0x42,
 
-        NodeNeighborUpdate = 0x48,
+        RequestNodeNeighborUpdate = 0x48,
 
-        // hard reset
-        NodeUpdateInfo = 0x49,
+        ApplicationUpdate = 0x49,
         NodeAdd = 0x4A,
         NodeRemove = 0x4B,
 
-        //Neighbor Update Options
-        NodeNeighborUpdateOptions = 0x5a,
+        RequestNodeNeighborUpdateOptions = 0x5a,
 
         RequestNodeInfo = 0x60,
 
         GetRoutingInfo = 0x80
     }
 
-    public enum NeighborUpdateOption : byte
+    public enum NeighborUpdateStatus : byte
     {
-        //Neighbor Update
+        None = 0x00,
         NeighborUpdateStared = 0x21,
         NeighborUpdateDone = 0x22,
         NeighborUpdateFailed = 0x23,
@@ -54,6 +52,8 @@ namespace ZWaveLib
 
     public enum NodeFunctionStatus : byte
     {
+        None = 0x00,
+        //
         AddNodeLearnReady = 0x01,
         AddNodeNodeFound = 0x02,
         AddNodeAddingSlave = 0x03,

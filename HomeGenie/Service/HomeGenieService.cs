@@ -670,6 +670,11 @@ namespace HomeGenie.Service
                             command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_NODEINFO);
                             command.Response = JsonHelper.GetSimpleResponse(command.Response);
                         }
+                        else if (command.Command == ZWave.Command.CONTROLLER_NODENEIGHBORUPDATE)
+                        {
+                            command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_ROUTINGINFO);
+                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
+                        }
                         else if (command.Command == ZWave.Command.MANUFACTURERSPECIFIC_GET)
                         {
                             command.Response = Utility.WaitModuleParameterChange(

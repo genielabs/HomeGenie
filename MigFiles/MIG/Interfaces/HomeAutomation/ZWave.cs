@@ -370,7 +370,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.CONTROLLER_NODENEIGHBORUPDATE)
                 {
-                    controller.NeighborsUpdateOptions(nodeNumber);
+                    controller.RequestNeighborUpdateOptions(nodeNumber);
                 }
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
@@ -804,7 +804,7 @@ namespace MIG.Interfaces.HomeAutomation
             //_unloadZWavePort();
             try
             {
-                controller.ControllerEvent -= DiscoveryEvent;
+                controller.ControllerEvent -= controller_ControllerEvent;
                 controller.ParameterChanged -= controller_ParameterChanged;
                 controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
             }
@@ -836,7 +836,7 @@ namespace MIG.Interfaces.HomeAutomation
                 //
                 controller = new Controller(zwavePort);
                 //
-                controller.ControllerEvent += DiscoveryEvent;
+                controller.ControllerEvent += controller_ControllerEvent;
                 controller.ParameterChanged += controller_ParameterChanged;
                 controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
@@ -882,7 +882,7 @@ namespace MIG.Interfaces.HomeAutomation
         */
 
         // fired either at startup time and after a new z-wave node has been added to the controller
-        private void DiscoveryEvent(object sender, ControllerEventArgs e)
+        private void controller_ControllerEvent(object sender, ControllerEventArgs e)
         {
             switch (e.Status)
             {
@@ -949,6 +949,15 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Node " + e.NodeId + " response timeout!"
                 });
                 break;
+            default:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = e.Status.ToString()
+                });
+                break;
             }
         }
 
@@ -994,6 +1003,9 @@ namespace MIG.Interfaces.HomeAutomation
                         break;
                     case EventParameter.NodeInfo:
                         path = "ZWaveNode.NodeInfo";
+                        break;
+                    case EventParameter.RoutingInfo:
+                        path = "ZWaveNode.RoutingInfo";
                         break;
                     case EventParameter.SensorGeneric:
                         path = ModuleParameters.MODPAR_SENSOR_GENERIC;
