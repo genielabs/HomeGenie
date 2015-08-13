@@ -359,7 +359,7 @@ while (Program.IsEnabled)
       string display_location = weatherdata.current_observation.display_location.full;
       string weather_text = weatherdata.current_observation.weather;
       string icon = weatherdata.current_observation.icon;
-      string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e");
+      string icon_url = weatherdata.current_observation.icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground");
       string wind_dir = weatherdata.current_observation.wind_dir;
       string wind_kph = weatherdata.current_observation.wind_kph;
       string pressure_mb = weatherdata.current_observation.pressure_mb;
@@ -405,7 +405,7 @@ while (Program.IsEnabled)
         Program.RaiseEvent("Conditions.Forecast." + d + ".Month", forecastData[d].date.monthname.ToString(), "");
         Program.RaiseEvent("Conditions.Forecast." + d + ".Day", forecastData[d].date.day.ToString(), "");
         Program.RaiseEvent("Conditions.Forecast." + d + ".Weekday", forecastData[d].date.weekday.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e"), "");
+        Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground"), "");
         Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.Low", forecastData[d].low.celsius.ToString(), "");
         Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.Low", forecastData[d].low.fahrenheit.ToString(), "");
         Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.High", forecastData[d].high.celsius.ToString(), "");
@@ -1576,6 +1576,14 @@ return true;
               Pause(.2);
             }
           }
+        }
+        else if (nif.Contains(" 27 ")) // Any switch
+        {
+          if (nif.Contains(" 26 "))
+            Pause(3); // Pause 3 second to ensure dimmers get to final value
+          Program.Notify("Z-Wave Node WakeUp", module.Instance.Name + "<br>" + module.Instance.Address + " Basic Get");
+          module.Command("Basic.Get").Execute();
+          Pause(.2);
         }
         //
         // query Thermostat set point
