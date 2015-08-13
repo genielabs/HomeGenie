@@ -397,6 +397,18 @@ HG.WebApp.GroupModules.ZWave_ConfigVariableGet = function () {
     });
 };
 
+HG.WebApp.GroupModules.ZWave_NodeNeighborUpdate = function () {
+    $('#opt-zwave-heal-label').html('Healing in progress ...');
+    zwave_NodeNeighborUpdate($('#configurepage_OptionZWave_id').val(), function (res) {
+        if (res == '') {
+            $('#opt-zwave-heal-label').html('Healing operation timeout!');
+        }
+        else {
+            $('#opt-zwave-heal-label').html('Healing res = ' + res);
+        }
+    });
+};
+
 HG.WebApp.GroupModules.ZWave_BasicGet = function () {
     $('#opt-zwave-basic-label').html('Basic Value = ? (querying node...)');
     zwave_BasicGet($('#configurepage_OptionZWave_id').val(), function (res) {
@@ -557,6 +569,14 @@ function zwave_AssociationSet(nodeid, groupid, targetid) {
 }
 function zwave_AssociationRemove(nodeid, groupid, targetid) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Association.Remove/' + groupid + '/' + targetid + '/' + (new Date().getTime()), function (data) { });
+}
+
+function zwave_NodeNeighborUpdate(nodeid, callback) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/HomeAutomation.ZWave/' + nodeid + '/Controller.NodeNeighborUpdate/' + (new Date().getTime()), function (data) {
+        if (typeof callback != 'undefined' && callback != null) {
+            callback(eval(arguments[2].responseText)[0].ResponseValue);
+        }
+    });
 }
 
 function zwave_BasicGet(nodeid, callback) {

@@ -103,6 +103,13 @@ namespace ZWaveLib.CommandClasses
         public byte[] GetControllerCurrentNonce(bool clearNonce = false)
         {
             byte[] localControllerCurrentNonce = new byte[8];
+			
+			// safety check - don't try to copy if the source array is null
+            if (controllerCurrentNonce == null)
+            {
+                Utility.DebugLog(DebugMessageType.Error, "Controller Current Nonce is NULL");
+                return controllerCurrentNonce;
+            }
 
             Array.Copy(controllerCurrentNonce, localControllerCurrentNonce, 8);
 
@@ -112,7 +119,9 @@ namespace ZWaveLib.CommandClasses
                 // This would cause the controllerCurrentNonce to be re-generated which would
                 // give us the most secure communication, if we see issues we just don't pass
                 // the clearNonce argument
-                controllerCurrentNonce = null;
+
+				// since for now we don't regenerate it let's not set it to null
+                //controllerCurrentNonce = null;
             }
 
             return localControllerCurrentNonce;
@@ -571,7 +580,17 @@ namespace ZWaveLib.CommandClasses
             // Get IV from inbound packet
             byte[] iv = new byte[16];
             Array.Copy(message, start+1, iv, 0, 8);
-            Array.Copy(nodeSecurityData.GetControllerCurrentNonce(true), 0, iv, 8, 8);
+            byte[] currentNonce = nodeSecurityData.GetControllerCurrentNonce(true);
+
+            if (currentNonce == null)
+            {
+                Utility.DebugLog(DebugMessageType.Information, "currentNonce null");
+                return null;
+            }
+
+            Utility.DebugLog(DebugMessageType.Information, "currentNonce NOT null");
+
+            Array.Copy(currentNonce, 0, iv, 8, 8);
 
             int _length = message.Length;
             int encryptedpackagesize = _length - 11 - 8; //19 + 11 + 8

@@ -64,6 +64,8 @@ namespace MIG.Interfaces.HomeAutomation
                 { 113, "Controller.NodeRemove" },
                 { 131, "Controller.SoftReset" },
                 { 132, "Controller.HardReset" },
+                { 133, "Controller.NodeNeighborUpdate" },
+
 
                 { 201, "Basic.Get" },
                 { 202, "Basic.Set" },
@@ -122,6 +124,7 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROLLER_NODEREMOVE = new Command(113);
             public static readonly Command CONTROLLER_SOFTRESET = new Command(131);
             public static readonly Command CONTROLLER_HARDRESET = new Command(132);
+            public static readonly Command CONTROLLER_NODENEIGHBORUPDATE = new Command(133);
 
             public static readonly Command BASIC_GET = new Command(201);
             public static readonly Command BASIC_SET = new Command(202);
@@ -365,6 +368,9 @@ namespace MIG.Interfaces.HomeAutomation
                     controller.HardReset();
                     Thread.Sleep(500);
                     controller.Discovery();
+                }else if(command == Command.CONTROLLER_NODENEIGHBORUPDATE)
+                {
+                    controller.NodeNeighborUpdate(nodeNumber);
                 }
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
