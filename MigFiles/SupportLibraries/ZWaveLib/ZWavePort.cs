@@ -36,7 +36,8 @@ namespace ZWaveLib
         private string portName = "";
         private SerialPortInput serialPort;
 
-        private byte callbackIdSeq = 2;
+        private const byte ZWAVE_CALLBACK_START_ID = 0x02; // 0x01 is reserved
+        private byte callbackIdSeq = ZWAVE_CALLBACK_START_ID;
         private object callbackLock = new object();
         private object sendLock = new object();
 
@@ -136,7 +137,7 @@ namespace ZWaveLib
                     if (message.ResendCount == 0)
                     {
                         // Insert the callback id into the message
-                        callbackId = GetCallbackId();
+                        callbackId = GenerateCallbackId();
                         message.Message[message.Message.Length - 2] = callbackId;
                         message.CallbackId = callbackId;
                     }
@@ -172,28 +173,27 @@ namespace ZWaveLib
             return callbackId;
         }
 
-        public byte ResendLastMessage(byte callbackId)
+        public ZWaveMessage ResendPendingMessage(byte callbackId)
         {
             var message = pendingMessages.Find(zm => zm.CallbackId == callbackId);
             if (message != null)
             {
                 pendingMessages.Remove(message);
-                if (message.ResendCount < 3)
+                if (message.ResendCount < ZWaveMessage.ResendMaxAttempts)
                 {
                     message.ResendCount++;
                     SendMessage(message);
                 }
-                else
-                {
-                    // In case of timeout (max retries exceeded) return NodeID 
-                    return message.Message[4]; 
-                }
             }
-            // Return 0 if resending was succesful
-            return 0;
+            return message;
         }
 
-        public void ResendLastMessage()
+        public ZWaveMessage GetPendingMessage(byte callbackId)
+        {
+            return PendingMessages.Find(zm => zm.CallbackId == callbackId);
+        }
+
+        public void ResendPendingMessage()
         {
             if (pendingMessages.Count > 0)
             {
@@ -207,13 +207,13 @@ namespace ZWaveLib
             }
         }
 
-        public byte GetCallbackId()
+        public byte GenerateCallbackId()
         {
             lock (this.callbackLock)
             {
                 if (++this.callbackIdSeq > 0xFF)
                 {
-                    this.callbackIdSeq = 2;
+                    this.callbackIdSeq = ZWAVE_CALLBACK_START_ID;
                 }
                 return this.callbackIdSeq;
             }
@@ -223,33 +223,14 @@ namespace ZWaveLib
 
         #region Private members
 
-        private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        internal void NodeRequestAck(byte callbackId)
         {
-            Utility.DebugLog(DebugMessageType.Error, e.EventType.ToString() + " => " + e.ToString());
+            PendingMessages.RemoveAll(zm => zm.CallbackId == callbackId);
         }
 
-        private static byte GenerateChecksum(byte[] data)
+        internal ZWaveMessage NodeRequestNack(byte callbackId)
         {
-            int offset = 1;
-            byte returnValue = data[offset];
-            for (int i = offset + 1; i < data.Length - 1; i++)
-            {
-                // Xor bytes
-                returnValue ^= data[i];
-            }
-            // Not result
-            returnValue = (byte)(~returnValue);
-            return returnValue;
-        }
-
-        private static bool VerifyChecksum(byte[] data)
-        {
-            uint checksum = 0xff;
-            for( int i = 1; i < (data.Length - 1); ++i)
-            {
-                checksum ^= data[i];
-            }        
-            return (checksum == data[data.Length - 1]);
+            return ResendPendingMessage(callbackId);
         }
 
         private void ReceiveMessage(byte[] message)
@@ -306,7 +287,7 @@ namespace ZWaveLib
             else if (header == MessageHeader.CAN)
             {
                 // Resend
-                ResendLastMessage();
+                ResendPendingMessage();
                 ZWaveMessageReceived(this, new ZWaveMessageReceivedEventArgs(new byte[] { (byte)MessageHeader.CAN }));
             }
             else
@@ -318,6 +299,35 @@ namespace ZWaveLib
             {
                 ReceiveMessage(nextMessage);
             }
+        }
+
+        private static byte GenerateChecksum(byte[] data)
+        {
+            int offset = 1;
+            byte returnValue = data[offset];
+            for (int i = offset + 1; i < data.Length - 1; i++)
+            {
+                // Xor bytes
+                returnValue ^= data[i];
+            }
+            // Not result
+            returnValue = (byte)(~returnValue);
+            return returnValue;
+        }
+
+        private static bool VerifyChecksum(byte[] data)
+        {
+            uint checksum = 0xff;
+            for( int i = 1; i < (data.Length - 1); ++i)
+            {
+                checksum ^= data[i];
+            }        
+            return (checksum == data[data.Length - 1]);
+        }
+
+        private void HanldeErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            Utility.DebugLog(DebugMessageType.Error, e.EventType.ToString() + " => " + e.ToString());
         }
 
         private void serialport_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)

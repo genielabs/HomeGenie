@@ -54,6 +54,7 @@ namespace ZWaveLib
 
     public class ZWaveMessage
     {
+        public const int ResendMaxAttempts = 3;
         public byte CallbackId;
         public ZWaveNode Node;
         public byte[] Message;
