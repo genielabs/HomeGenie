@@ -273,7 +273,7 @@ namespace ZWaveLib
             if (message.Length > 1)
             {
                 msgLength = (int)message[1];
-                if (message.Length > msgLength + 3)
+                if (message.Length > msgLength + 2)
                 {
                     nextMessage = new byte[message.Length - msgLength - 2];
                     Array.Copy(message, msgLength + 2, nextMessage, 0, nextMessage.Length);
