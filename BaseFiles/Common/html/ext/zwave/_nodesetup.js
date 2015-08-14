@@ -36,6 +36,7 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
     */
     //
     $('#opt-zwave-configvar-label').html('Variable Value = ?');
+    $('#opt-zwave-heal-label').html('Routing Info = ?');
     $('#opt-zwave-basic-label').html('Basic Value = ?');
     $('#opt-zwave-wakeup-label').html('Wake Up Interval = ?');
     $('#opt-zwave-association-label').html('Nodes Id in this group = ?');

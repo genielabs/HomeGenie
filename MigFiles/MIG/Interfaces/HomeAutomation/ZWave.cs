@@ -370,7 +370,7 @@ namespace MIG.Interfaces.HomeAutomation
                 }
                 else if (command == Command.CONTROLLER_NODENEIGHBORUPDATE)
                 {
-                    controller.RequestNeighborUpdateOptions(nodeNumber);
+                    controller.RequestNeighborsUpdateOptions(nodeNumber);
                 }
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
