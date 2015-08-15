@@ -79,6 +79,7 @@
     <Compile Include="CommandClasses\UserCode.cs" />
     <Compile Include="CommandClasses\Crc16Encapsulated.cs" />
     <Compile Include="CommandClasses\ThermostatMode.cs" />
+    <Compile Include="CommandClasses\MultiCmd.cs" />
     <Compile Include="Utility\AesWork.cs" />
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="Controller.cs" />
