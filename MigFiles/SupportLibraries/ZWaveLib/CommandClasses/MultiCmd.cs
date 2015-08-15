@@ -16,7 +16,7 @@
 */
 
 /*
-*     Author: https://github.com/snagytx
+*     Author: https://github.com/mdave
 *     Project Homepage: http://homegenie.it
 */
 using System;
