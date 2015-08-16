@@ -42,6 +42,8 @@ namespace ZWaveLib
         Association = 0x85,
         Version = 0x86,
         //
+        MultiCmd = 0x8F,
+        //
         Security = 0x98,
         //
         SensorAlarm = 0x9C,
