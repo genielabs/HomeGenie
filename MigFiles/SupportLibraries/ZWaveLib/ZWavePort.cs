@@ -60,9 +60,8 @@ namespace ZWaveLib
         public ZWavePort()
         {
             serialPort = new SerialPortInput();
-            serialPort.Debug = true;
-            serialPort.MessageReceived += ReceiveMessage;
-            serialPort.ConnectedStateChanged += new SerialPortInput.ConnectedStateChangedEvent(serialport_ConnectedStateChanged);
+            serialPort.MessageReceived += SerialPort_MessageReceived;
+            serialPort.ConnectionStatusChanged += SerialPort_ConnectionStatusChanged;
             // TODO: discovery should be moved to Controller.cs
             discoveryTimer = new Timer((object state) =>
             {
@@ -330,9 +329,14 @@ namespace ZWaveLib
             Utility.DebugLog(DebugMessageType.Error, e.EventType.ToString() + " => " + e.ToString());
         }
 
-        private void serialport_ConnectedStateChanged(object sender, ConnectedStateChangedEventArgs statusargs)
+        private void SerialPort_MessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            if (statusargs.Connected && !isInitialized)
+            ReceiveMessage(args.Data);
+        }
+
+        private void SerialPort_ConnectionStatusChanged(object sender, ConnectionStatusChangedEventArgs args)
+        {
+            if (args.Connected && !isInitialized)
             {
                 discoveryTimer.Change(5000, Timeout.Infinite);
             }

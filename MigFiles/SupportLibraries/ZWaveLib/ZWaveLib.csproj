@@ -34,6 +34,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="SerialPortLib">
+      <HintPath>..\..\..\Externals\g-labs\SerialPortLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandClasses\DoorLock.cs" />
@@ -92,12 +95,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ProjectReference Include="..\SerialPortLib\SerialPortLib.csproj">
-      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
-      <Name>SerialPortLib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Folder Include="Enums\" />
