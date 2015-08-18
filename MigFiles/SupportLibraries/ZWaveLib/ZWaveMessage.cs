@@ -39,7 +39,8 @@ namespace ZWaveLib
     public enum MessageType : byte
     {
         Request = 0x00,
-        Response = 0x01
+        Response = 0x01,
+        None = 0xFF
     }
 
     public class ZWaveMessageReceivedEventArgs
@@ -54,6 +55,7 @@ namespace ZWaveLib
 
     public class ZWaveMessage
     {
+        public const int ResendMaxAttempts = 3;
         public byte CallbackId;
         public ZWaveNode Node;
         public byte[] Message;

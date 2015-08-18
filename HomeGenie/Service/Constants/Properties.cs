@@ -80,6 +80,8 @@ namespace HomeGenie.Service.Constants
             = "ZWaveNode.Variables";
         public const string ZWAVENODE_NODEINFO
             = "ZWaveNode.NodeInfo";
+        public const string ZWAVENODE_ROUTINGINFO
+        = "ZWaveNode.RoutingInfo";
         public const string ZWAVENODE_MANUFACTURERSPECIFIC
             = "ZWaveNode.ManufacturerSpecific";
         public const string ZWAVENODE_DEVICEHANDLER

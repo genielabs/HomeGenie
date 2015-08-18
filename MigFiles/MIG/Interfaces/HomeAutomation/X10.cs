@@ -136,17 +136,15 @@ namespace MIG.Interfaces.HomeAutomation
         #endregion
 
         private XTenManager x10lib;
-
         private Timer rfPulseTimer;
-        private string rfLastStringData = "";
 
         List<MIGServiceConfiguration.Interface.Option> options;
 
         public X10()
         {
             x10lib = new XTenManager();
-            x10lib.PropertyChanged += HandlePropertyChanged;
-            x10lib.RfDataReceived += new Action<RfDataReceivedAction>(x10lib_RfDataReceived);
+            x10lib.ModuleChanged += X10lib_ModuleChanged;
+            x10lib.RfDataReceived += X10lib_RfDataReceived;
         }
 
         #region MIG Interface members
@@ -193,7 +191,7 @@ namespace MIG.Interfaces.HomeAutomation
                 module.ModuleType = ModuleTypes.Sensor;
                 modules.Add(module);
 
-                foreach (var kv in x10lib.ModulesStatus)
+                foreach (var kv in x10lib.Modules)
                 {
 
                     module = new InterfaceModule();
@@ -281,18 +279,19 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_LEVEL_ADJUST)
             {
                 int dimvalue = int.Parse(option);
-                x10lib.ModulesStatus[ nodeId ].Level = ((double)dimvalue/100D);
+                //x10lib.Modules[nodeId].Level = ((double)dimvalue/100D);
                 InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
                     Domain = this.Domain,
                     SourceId = nodeId,
                     SourceType = "X10 Module",
                     Path = "Status.Level",
-                    Value = x10lib.ModulesStatus[ nodeId ].Level
+                    Value = x10lib.Modules[nodeId].Level
                 });
+                throw(new NotImplementedException("X10 CONTROL_LEVEL_ADJUST Not Implemented"));
             }
             else if (command == Command.CONTROL_LEVEL)
             {
-                int dimvalue = int.Parse(option) - (int)(x10lib.ModulesStatus[ nodeId ].Level * 100.0);
+                int dimvalue = int.Parse(option) - (int)(x10lib.Modules[nodeId].Level * 100.0);
                 if (dimvalue > 0)
                 {
                     x10lib.Bright(houseCode, unitCode, dimvalue);
@@ -305,7 +304,7 @@ namespace MIG.Interfaces.HomeAutomation
             else if (command == Command.CONTROL_TOGGLE)
             {
                 string huc = XTenLib.Utility.HouseUnitCodeFromEnum(houseCode, unitCode);
-                if (x10lib.ModulesStatus[ huc ].Level == 0)
+                if (x10lib.Modules[huc].Level == 0)
                 {
                     x10lib.UnitOn(houseCode, unitCode);
                 }
@@ -328,57 +327,50 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-        private void x10lib_RfDataReceived(RfDataReceivedAction eventData)
+        private void X10lib_RfDataReceived(object sender, RfDataReceivedEventArgs args)
         {
             if (InterfacePropertyChangedAction != null)
             {
-                string data = XTenLib.Utility.ByteArrayToString(eventData.RawData);
-                // flood protection =) - discard dupes
-                if (rfLastStringData != data)
+                try
                 {
-                    rfLastStringData = data;
-                    try
-                    {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                            Domain = this.Domain,
-                            SourceId = "RF",
-                            SourceType = "X10 RF Receiver",
-                            Path = "Receiver.RawData",
-                            Value = rfLastStringData
-                        });
-                    }
-                    catch
-                    {
-                        // TODO: add error logging 
-                    }
-                    //
-                    if (rfPulseTimer == null)
-                    {
-                        rfPulseTimer = new Timer(delegate(object target)
-                        {
-                            try
-                            {
-                                rfLastStringData = "";
-                                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                                    Domain = this.Domain,
-                                    SourceId = "RF",
-                                    SourceType = "X10 RF Receiver",
-                                    Path = "Receiver.RawData",
-                                    Value = ""
-                                });
-                            }
-                            catch
-                            {
-                                // TODO: add error logging 
-                            }
-                        });
-                    }
-                    rfPulseTimer.Change(1000, Timeout.Infinite);
+                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = "RF",
+                        SourceType = "X10 RF Receiver",
+                        Path = "Receiver.RawData",
+                        Value = BitConverter.ToString(args.Data).Replace("-", " ")
+                    });
                 }
+                catch
+                {
+                    // TODO: add error logging 
+                }
+                //
+                if (rfPulseTimer == null)
+                {
+                    rfPulseTimer = new Timer(delegate(object target)
+                    {
+                        try
+                        {
+                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
+                                Domain = this.Domain,
+                                SourceId = "RF",
+                                SourceType = "X10 RF Receiver",
+                                Path = "Receiver.RawData",
+                                Value = ""
+                            });
+                        }
+                        catch
+                        {
+                            // TODO: add error logging 
+                        }
+                    });
+                }
+                rfPulseTimer.Change(1000, Timeout.Infinite);
             }
         }
 
-        private void HandlePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void X10lib_ModuleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Level")
             {

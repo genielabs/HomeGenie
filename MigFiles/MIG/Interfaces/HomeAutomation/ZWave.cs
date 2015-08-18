@@ -51,7 +51,7 @@ namespace MIG.Interfaces.HomeAutomation
         private byte lastAddedNode = 0;
 
         #endregion
-        
+
         #region Implemented MIG Commands
 
         // typesafe enum
@@ -64,6 +64,7 @@ namespace MIG.Interfaces.HomeAutomation
                 { 113, "Controller.NodeRemove" },
                 { 131, "Controller.SoftReset" },
                 { 132, "Controller.HardReset" },
+                { 133, "Controller.NodeNeighborUpdate" },
 
                 { 201, "Basic.Get" },
                 { 202, "Basic.Set" },
@@ -122,6 +123,7 @@ namespace MIG.Interfaces.HomeAutomation
             public static readonly Command CONTROLLER_NODEREMOVE = new Command(113);
             public static readonly Command CONTROLLER_SOFTRESET = new Command(131);
             public static readonly Command CONTROLLER_HARDRESET = new Command(132);
+            public static readonly Command CONTROLLER_NODENEIGHBORUPDATE = new Command(133);
 
             public static readonly Command BASIC_GET = new Command(201);
             public static readonly Command BASIC_SET = new Command(202);
@@ -209,9 +211,7 @@ namespace MIG.Interfaces.HomeAutomation
             {
                 if (CommandsList.ContainsValue(str))
                 {
-                    var cmd = from c in CommandsList
-                        where c.Value == str
-                            select c.Key;
+                    var cmd = from c in CommandsList where c.Value == str select c.Key;
                     return new Command(cmd.First());
                 }
                 else
@@ -247,7 +247,7 @@ namespace MIG.Interfaces.HomeAutomation
                 return domain;
             }
         }
-        
+
         public bool IsEnabled { get; set; }
 
         public List<MIGServiceConfiguration.Interface.Option> Options { get; set; }
@@ -257,7 +257,7 @@ namespace MIG.Interfaces.HomeAutomation
             List<InterfaceModule> modules = new List<InterfaceModule>();
             if (controller != null)
             {
-                for(int d = 0; d < controller.Devices.Count; d++)
+                for (int d = 0; d < controller.Devices.Count; d++)
                 {
                     var node = controller.Devices[d];
                     if (node.Id == 0x01) // main zwave controller
@@ -330,8 +330,10 @@ namespace MIG.Interfaces.HomeAutomation
         {
             get
             {
-                if (zwavePort != null) return zwavePort.IsConnected;
-                else return false;
+                if (zwavePort != null)
+                    return zwavePort.IsConnected;
+                else
+                    return false;
             }
         }
 
@@ -366,10 +368,15 @@ namespace MIG.Interfaces.HomeAutomation
                     Thread.Sleep(500);
                     controller.Discovery();
                 }
+                else if (command == Command.CONTROLLER_NODENEIGHBORUPDATE)
+                {
+                    controller.RequestNeighborsUpdateOptions(nodeNumber);
+                }
                 else if (command == Command.CONTROLLER_NODEADD)
                 {
                     lastAddedNode = 0;
-                    /*byte addedId = */ controller.BeginNodeAdd();
+                    /*byte addedId = */
+                    controller.BeginNodeAdd();
                     for (int i = 0; i < 20; i++)
                     {
                         if (lastAddedNode > 0)
@@ -385,7 +392,8 @@ namespace MIG.Interfaces.HomeAutomation
                 else if (command == Command.CONTROLLER_NODEREMOVE)
                 {
                     lastRemovedNode = 0;
-                    /*byte remcid = */ controller.BeginNodeRemove();
+                    /*byte remcid = */
+                    controller.BeginNodeRemove();
                     for (int i = 0; i < 20; i++)
                     {
                         if (lastRemovedNode > 0)
@@ -492,7 +500,8 @@ namespace MIG.Interfaces.HomeAutomation
                 {
                     var node = controller.GetDevice(nodeNumber);
                     // see ZWaveLib Sensor.cs for EnergyMeterScale options
-                    int scaleType = 0; int.TryParse(request.GetOption(0), out scaleType);
+                    int scaleType = 0;
+                    int.TryParse(request.GetOption(0), out scaleType);
                     Meter.Get(node, (byte)(scaleType << 0x03));
                 }
                 else if (command == Command.METER_SUPPORTEDGET)
@@ -585,9 +594,10 @@ namespace MIG.Interfaces.HomeAutomation
                     eventValue = Math.Round(level / 100D, 2).ToString(CultureInfo.InvariantCulture);
                     // the max value should be obtained from node parameters specifications,
                     // here we assume that the commonly used interval is [0-99] for most multilevel switches
-                    if (level >= 100) level = 99;
+                    if (level >= 100)
+                        level = 99;
                     var node = controller.GetDevice(nodeNumber);
-                    if(node.SupportCommandClass(CommandClass.SwitchMultilevel))
+                    if (node.SupportCommandClass(CommandClass.SwitchMultilevel))
                         SwitchMultilevel.Set(node, (byte)level);
                     else
                         Basic.Set(node, (byte)level);
@@ -670,7 +680,7 @@ namespace MIG.Interfaces.HomeAutomation
                     var node = controller.GetDevice(nodeNumber);
                     ThermostatOperatingState.GetOperatingState(node);
                 }
-                else if(command==Command.USERCODE_SET)
+                else if (command == Command.USERCODE_SET)
                 {
                     var node = controller.GetDevice(nodeNumber);
                     byte userId = byte.Parse(request.GetOption(0));
@@ -692,7 +702,8 @@ namespace MIG.Interfaces.HomeAutomation
             }
             catch (Exception e)
             {
-                if (eventValue != "") raiseEvent = true;
+                if (eventValue != "")
+                    raiseEvent = true;
                 Console.WriteLine("ZWave Interface Exception: " + e.Message + "\n" + e.StackTrace);
             }
             //
@@ -730,7 +741,8 @@ namespace MIG.Interfaces.HomeAutomation
             catch
             {
             }
-            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
+            if (InterfaceModulesChangedAction != null)
+                InterfaceModulesChangedAction(new InterfaceModulesChangedAction() { Domain = this.Domain });
             //
             return success;
         }
@@ -792,7 +804,7 @@ namespace MIG.Interfaces.HomeAutomation
             //_unloadZWavePort();
             try
             {
-                controller.ControllerEvent -= DiscoveryEvent;
+                controller.ControllerEvent -= controller_ControllerEvent;
                 controller.ParameterChanged -= controller_ParameterChanged;
                 controller.ManufacturerSpecificResponse -= controller_ManufacturerSpecificResponse;
             }
@@ -824,7 +836,7 @@ namespace MIG.Interfaces.HomeAutomation
                 //
                 controller = new Controller(zwavePort);
                 //
-                controller.ControllerEvent += DiscoveryEvent;
+                controller.ControllerEvent += controller_ControllerEvent;
                 controller.ParameterChanged += controller_ParameterChanged;
                 controller.ManufacturerSpecificResponse += controller_ManufacturerSpecificResponse;
             }
@@ -870,7 +882,7 @@ namespace MIG.Interfaces.HomeAutomation
         */
 
         // fired either at startup time and after a new z-wave node has been added to the controller
-        private void DiscoveryEvent(object sender, ControllerEventArgs e)
+        private void controller_ControllerEvent(object sender, ControllerEventArgs e)
         {
             switch (e.Status)
             {
@@ -891,7 +903,8 @@ namespace MIG.Interfaces.HomeAutomation
                     Path = "Controller.Status",
                     Value = "Discovery Complete"
                 });
-                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                if (InterfaceModulesChangedAction != null)
+                    InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
             case ControllerStatus.NodeAdded:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
@@ -902,7 +915,8 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Added node " + e.NodeId
                 });
                 lastAddedNode = e.NodeId;
-                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                if (InterfaceModulesChangedAction != null)
+                    InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
             case ControllerStatus.NodeUpdated:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
@@ -923,7 +937,8 @@ namespace MIG.Interfaces.HomeAutomation
                     Path = "Controller.Status",
                     Value = "Removed node " + e.NodeId
                 });
-                if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+                if (InterfaceModulesChangedAction != null)
+                    InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
                 break;
             case ControllerStatus.NodeError:
                 RaisePropertyChanged(new InterfacePropertyChangedAction() {
@@ -934,233 +949,244 @@ namespace MIG.Interfaces.HomeAutomation
                     Value = "Node " + e.NodeId + " response timeout!"
                 });
                 break;
+            default:
+                RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                    Domain = this.Domain,
+                    SourceId = "1",
+                    SourceType = "Z-Wave Controller",
+                    Path = "Controller.Status",
+                    Value = e.Status.ToString()
+                });
+                break;
             }
         }
 
         private void controller_ParameterChanged(object sender, ZWaveEvent eventData)
         {
             lock (syncLock)
-            while (eventData != null)
-            {
-                string path = "UnknwonParameter";
-                object value = eventData.Value;
-                switch (eventData.Parameter)
+                while (eventData != null)
                 {
-                case EventParameter.MeterKwHour:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KW_HOUR, eventData.Instance);
-                    break;
-                case EventParameter.MeterKvaHour:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KVA_HOUR, eventData.Instance);
-                    break;
-                case EventParameter.MeterWatt:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_WATTS, eventData.Instance);
-                    break;
-                case EventParameter.MeterPulses:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_PULSES, eventData.Instance);
-                    break;
-                case EventParameter.MeterAcVolt:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_VOLT, eventData.Instance);
-                    break;
-                case EventParameter.MeterAcCurrent:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_CURRENT, eventData.Instance);
-                    break;
-                case EventParameter.MeterPower:
-                    path = GetIndexedParameterPath(ModuleParameters.MODPAR_SENSOR_POWER, eventData.Instance);
-                    break;
-                case EventParameter.Battery:
-                    RaisePropertyChanged(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = eventData.Node.Id.ToString(),
-                        SourceType = "ZWave Node",
-                        Path = "ZWaveNode.Battery",
-                        Value = value
-                    });
-                    path = ModuleParameters.MODPAR_STATUS_BATTERY;
-                    break;
-                case EventParameter.NodeInfo:
-                    path = "ZWaveNode.NodeInfo";
-                    break;
-                case EventParameter.SensorGeneric:
-                    path = ModuleParameters.MODPAR_SENSOR_GENERIC;
-                    break;
-                case EventParameter.SensorTemperature:
-                    path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
-                    break;
-                case EventParameter.SensorHumidity:
-                    path = ModuleParameters.MODPAR_SENSOR_HUMIDITY;
-                    break;
-                case EventParameter.SensorLuminance:
-                    path = ModuleParameters.MODPAR_SENSOR_LUMINANCE;
-                    break;
-                case EventParameter.SensorMotion:
-                    path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
-                    break;
-                case EventParameter.AlarmGeneric:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
-                    // Translate generic alarm into specific Door Lock event values if node is an entry control type device
-                    //at this level the sender is the controller so get the node from eventData
-                    if (eventData.Node.GenericClass == (byte)GenericType.EntryControl)
+                    string path = "UnknwonParameter";
+                    object value = eventData.Value;
+                    switch (eventData.Parameter)
                     {
-                        // do not convert to string since Alarms accept ONLY numbers a string would be outputed as NaN
-                        // for now let it as is.
-
-//                        value = ((DoorLock.Alarm)(byte)value).ToString();
-                    }
-                    break;
-                case EventParameter.AlarmDoorWindow:
-                    path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
-                    break;
-                case EventParameter.AlarmTampered:
-                    path = ModuleParameters.MODPAR_SENSOR_TAMPER;
-                    break;
-                case EventParameter.AlarmSmoke:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_SMOKE;
-                    break;
-                case EventParameter.AlarmCarbonMonoxide:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONMONOXIDE;
-                    break;
-                case EventParameter.AlarmCarbonDioxide:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONDIOXIDE;
-                    break;
-                case EventParameter.AlarmHeat:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_HEAT;
-                    break;
-                case EventParameter.AlarmFlood:
-                    path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
-                    break;
-                case EventParameter.DoorLockStatus:
-                    path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
-                    value = ((DoorLock.Value)(byte)value).ToString();
-                    break;
-                case EventParameter.ManufacturerSpecific:
-                    ManufacturerSpecificInfo mf = (ManufacturerSpecificInfo)value;
-                    path = "ZWaveNode.ManufacturerSpecific";
-                    value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
-                    break;
-                case EventParameter.Configuration:
-                    path = "ZWaveNode.Variables." + eventData.Instance;
-                    break;
-                case EventParameter.Association:
-                    var associationResponse = (Association.AssociationResponse)value;
-                    RaisePropertyChanged(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = eventData.Node.Id.ToString(),
-                        SourceType = "ZWave Node",
-                        Path = "ZWaveNode.Associations.Max",
-                        Value = associationResponse.Max
-                    });
-                    RaisePropertyChanged(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = eventData.Node.Id.ToString(),
-                        SourceType = "ZWave Node",
-                        Path = "ZWaveNode.Associations.Count",
-                        Value = associationResponse.Count
-                    });
-                    path = "ZWaveNode.Associations." + associationResponse.GroupId; // TODO: implement generic group/node association instead of fixed one
-                    value = associationResponse.NodeList;
-                    break;
-                case EventParameter.MultiinstanceSwitchBinaryCount:
-                    path = "ZWaveNode.MultiInstance.SwitchBinary.Count";
-                    break;
-                case EventParameter.MultiinstanceSwitchMultilevelCount:
-                    path = "ZWaveNode.MultiInstance.SwitchMultiLevel.Count";
-                    break;
-                case EventParameter.MultiinstanceSensorBinaryCount:
-                    path = "ZWaveNode.MultiInstance.SensorBinary.Count";
-                    break;
-                case EventParameter.MultiinstanceSensorMultilevelCount:
-                    path = "ZWaveNode.MultiInstance.SensorMultiLevel.Count";
-                    break;
-                case EventParameter.MultiinstanceSwitchBinary:
-                    path = "ZWaveNode.MultiInstance.SwitchBinary." + eventData.Instance;
-                    break;
-                case EventParameter.MultiinstanceSwitchMultilevel:
-                    path = "ZWaveNode.MultiInstance.SwitchMultiLevel." + eventData.Instance;
-                    break;
-                case EventParameter.MultiinstanceSensorBinary:
-                    path = "ZWaveNode.MultiInstance.SensorBinary." + eventData.Instance;
-                    break;
-                case EventParameter.MultiinstanceSensorMultilevel:
-                    path = "ZWaveNode.MultiInstance.SensorMultiLevel." + eventData.Instance;
-                    break;
-                case EventParameter.WakeUpInterval:
-                    path = "ZWaveNode.WakeUpInterval";
-                    break;
-                case EventParameter.WakeUpNotify:
-                    path = "ZWaveNode.WakeUpNotify";
-                    break;
-                case EventParameter.Level:
-                    RaisePropertyChanged(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = eventData.Node.Id.ToString(),
-                        SourceType = "ZWave Node",
-                        Path = "ZWaveNode.Basic",
-                        Value = value
-                    });
-                    double normalizedval = (Math.Round((double)value / 100D, 2));
+                    case EventParameter.MeterKwHour:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KW_HOUR, eventData.Instance);
+                        break;
+                    case EventParameter.MeterKvaHour:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_KVA_HOUR, eventData.Instance);
+                        break;
+                    case EventParameter.MeterWatt:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_WATTS, eventData.Instance);
+                        break;
+                    case EventParameter.MeterPulses:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_PULSES, eventData.Instance);
+                        break;
+                    case EventParameter.MeterAcVolt:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_VOLT, eventData.Instance);
+                        break;
+                    case EventParameter.MeterAcCurrent:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_METER_AC_CURRENT, eventData.Instance);
+                        break;
+                    case EventParameter.MeterPower:
+                        path = GetIndexedParameterPath(ModuleParameters.MODPAR_SENSOR_POWER, eventData.Instance);
+                        break;
+                    case EventParameter.Battery:
+                        RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = eventData.Node.Id.ToString(),
+                            SourceType = "ZWave Node",
+                            Path = "ZWaveNode.Battery",
+                            Value = value
+                        });
+                        path = ModuleParameters.MODPAR_STATUS_BATTERY;
+                        break;
+                    case EventParameter.NodeInfo:
+                        path = "ZWaveNode.NodeInfo";
+                        break;
+                    case EventParameter.RoutingInfo:
+                        path = "ZWaveNode.RoutingInfo";
+                        break;
+                    case EventParameter.SensorGeneric:
+                        path = ModuleParameters.MODPAR_SENSOR_GENERIC;
+                        break;
+                    case EventParameter.SensorTemperature:
+                        path = ModuleParameters.MODPAR_SENSOR_TEMPERATURE;
+                        break;
+                    case EventParameter.SensorHumidity:
+                        path = ModuleParameters.MODPAR_SENSOR_HUMIDITY;
+                        break;
+                    case EventParameter.SensorLuminance:
+                        path = ModuleParameters.MODPAR_SENSOR_LUMINANCE;
+                        break;
+                    case EventParameter.SensorMotion:
+                        path = ModuleParameters.MODPAR_SENSOR_MOTIONDETECT;
+                        break;
+                    case EventParameter.AlarmGeneric:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_GENERIC;
+                        // Translate generic alarm into specific Door Lock event values if node is an entry control type device
+                        //at this level the sender is the controller so get the node from eventData
+                        if (eventData.Node.GenericClass == (byte)GenericType.EntryControl)
+                        {
+                            // do not convert to string since Alarms accept ONLY numbers a string would be outputed as NaN
+                            // for now let it as is.
+//                            value = ((DoorLock.Alarm)(byte)value).ToString();
+                        }
+                        break;
+                    case EventParameter.AlarmDoorWindow:
+                        path = ModuleParameters.MODPAR_SENSOR_DOORWINDOW;
+                        break;
+                    case EventParameter.AlarmTampered:
+                        path = ModuleParameters.MODPAR_SENSOR_TAMPER;
+                        break;
+                    case EventParameter.AlarmSmoke:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_SMOKE;
+                        break;
+                    case EventParameter.AlarmCarbonMonoxide:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONMONOXIDE;
+                        break;
+                    case EventParameter.AlarmCarbonDioxide:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_CARBONDIOXIDE;
+                        break;
+                    case EventParameter.AlarmHeat:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_HEAT;
+                        break;
+                    case EventParameter.AlarmFlood:
+                        path = ModuleParameters.MODPAR_SENSOR_ALARM_FLOOD;
+                        break;
+                    case EventParameter.DoorLockStatus:
+                        path = ModuleParameters.MODPAR_STATUS_DOORLOCK;
+                        value = ((DoorLock.Value)(byte)value).ToString();
+                        break;
+                    case EventParameter.ManufacturerSpecific:
+                        ManufacturerSpecificInfo mf = (ManufacturerSpecificInfo)value;
+                        path = "ZWaveNode.ManufacturerSpecific";
+                        value = mf.ManufacturerId + ":" + mf.TypeId + ":" + mf.ProductId;
+                        break;
+                    case EventParameter.Configuration:
+                        path = "ZWaveNode.Variables." + eventData.Instance;
+                        break;
+                    case EventParameter.Association:
+                        var associationResponse = (Association.AssociationResponse)value;
+                        RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = eventData.Node.Id.ToString(),
+                            SourceType = "ZWave Node",
+                            Path = "ZWaveNode.Associations.Max",
+                            Value = associationResponse.Max
+                        });
+                        RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = eventData.Node.Id.ToString(),
+                            SourceType = "ZWave Node",
+                            Path = "ZWaveNode.Associations.Count",
+                            Value = associationResponse.Count
+                        });
+                        path = "ZWaveNode.Associations." + associationResponse.GroupId; // TODO: implement generic group/node association instead of fixed one
+                        value = associationResponse.NodeList;
+                        break;
+                    case EventParameter.MultiinstanceSwitchBinaryCount:
+                        path = "ZWaveNode.MultiInstance.SwitchBinary.Count";
+                        break;
+                    case EventParameter.MultiinstanceSwitchMultilevelCount:
+                        path = "ZWaveNode.MultiInstance.SwitchMultiLevel.Count";
+                        break;
+                    case EventParameter.MultiinstanceSensorBinaryCount:
+                        path = "ZWaveNode.MultiInstance.SensorBinary.Count";
+                        break;
+                    case EventParameter.MultiinstanceSensorMultilevelCount:
+                        path = "ZWaveNode.MultiInstance.SensorMultiLevel.Count";
+                        break;
+                    case EventParameter.MultiinstanceSwitchBinary:
+                        path = "ZWaveNode.MultiInstance.SwitchBinary." + eventData.Instance;
+                        break;
+                    case EventParameter.MultiinstanceSwitchMultilevel:
+                        path = "ZWaveNode.MultiInstance.SwitchMultiLevel." + eventData.Instance;
+                        break;
+                    case EventParameter.MultiinstanceSensorBinary:
+                        path = "ZWaveNode.MultiInstance.SensorBinary." + eventData.Instance;
+                        break;
+                    case EventParameter.MultiinstanceSensorMultilevel:
+                        path = "ZWaveNode.MultiInstance.SensorMultiLevel." + eventData.Instance;
+                        break;
+                    case EventParameter.WakeUpInterval:
+                        path = "ZWaveNode.WakeUpInterval";
+                        break;
+                    case EventParameter.WakeUpNotify:
+                        path = "ZWaveNode.WakeUpNotify";
+                        break;
+                    case EventParameter.Level:
+                        RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                            Domain = this.Domain,
+                            SourceId = eventData.Node.Id.ToString(),
+                            SourceType = "ZWave Node",
+                            Path = "ZWaveNode.Basic",
+                            Value = value
+                        });
+                        double normalizedval = (Math.Round((double)value / 100D, 2));
                     // binary switches have [0/255], while multilevel switches [0-99],
                     // normalize Status.Level to [0.0 <-> 1.0]
-                    if (normalizedval >= 0.99)
-                        normalizedval = 1.0;
-                    if (eventData.Instance == 0)
-                    {
-                        path = ModuleParameters.MODPAR_STATUS_LEVEL;
-                    }
-                    else
-                    {
-                        path = ModuleParameters.MODPAR_STATUS_LEVEL + "." + eventData.Instance;
-                    }
-                    value = normalizedval.ToString(CultureInfo.InvariantCulture);
-                    break;
-                case EventParameter.ThermostatMode:
-                    path = "Thermostat.Mode";
-                    value = ((ThermostatMode.Value)value).ToString();
-                    break;
-                case EventParameter.ThermostatOperatingState:
-                    path = "Thermostat.OperatingState";
-                    value = ((ThermostatOperatingState.Value)value).ToString();
-                    break;
-                case EventParameter.ThermostatFanMode:
-                    path = "Thermostat.FanMode";
-                    value = ((ThermostatFanMode.Value)value).ToString();
-                    break;
-                case EventParameter.ThermostatFanState:
-                    path = "Thermostat.FanState";
-                    value = ((ThermostatFanState.Value)value).ToString();
-                    break;
-                case EventParameter.ThermostatHeating:
-                    path = "Thermostat.Heating";
-                    break;
-                case EventParameter.ThermostatSetBack:
-                    path = "Thermostat.SetBack";
-                    break;
-                case EventParameter.ThermostatSetPoint:
+                        if (normalizedval >= 0.99)
+                            normalizedval = 1.0;
+                        if (eventData.Instance == 0)
+                        {
+                            path = ModuleParameters.MODPAR_STATUS_LEVEL;
+                        }
+                        else
+                        {
+                            path = ModuleParameters.MODPAR_STATUS_LEVEL + "." + eventData.Instance;
+                        }
+                        value = normalizedval.ToString(CultureInfo.InvariantCulture);
+                        break;
+                    case EventParameter.ThermostatMode:
+                        path = "Thermostat.Mode";
+                        value = ((ThermostatMode.Value)value).ToString();
+                        break;
+                    case EventParameter.ThermostatOperatingState:
+                        path = "Thermostat.OperatingState";
+                        value = ((ThermostatOperatingState.Value)value).ToString();
+                        break;
+                    case EventParameter.ThermostatFanMode:
+                        path = "Thermostat.FanMode";
+                        value = ((ThermostatFanMode.Value)value).ToString();
+                        break;
+                    case EventParameter.ThermostatFanState:
+                        path = "Thermostat.FanState";
+                        value = ((ThermostatFanState.Value)value).ToString();
+                        break;
+                    case EventParameter.ThermostatHeating:
+                        path = "Thermostat.Heating";
+                        break;
+                    case EventParameter.ThermostatSetBack:
+                        path = "Thermostat.SetBack";
+                        break;
+                    case EventParameter.ThermostatSetPoint:
                     // value stores a dynamic object with Type and Value fields: value = { Type = ..., Value = ... }
-                    path = "Thermostat.SetPoint." + ((ThermostatSetPoint.Value)((dynamic)value).Type).ToString();
-                    value = ((dynamic)value).Value;
-                    break;
-                case EventParameter.UserCode:
-                    path = "EntryControl.UserCode";
-                    value = ((ZWaveLib.Values.UserCodeValue)value).TagCodeToHexString();
-                    break;
-                case EventParameter.SecurityNodeInformationFrame:
-                    path = "ZWaveNode.SecuredNodeInfo";
-                    break;
-                default:
-                    Console.WriteLine("UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}", eventData.Node.Id, eventData.Parameter, eventData.Instance, value);
-                    break;
+                        path = "Thermostat.SetPoint." + ((ThermostatSetPoint.Value)((dynamic)value).Type).ToString();
+                        value = ((dynamic)value).Value;
+                        break;
+                    case EventParameter.UserCode:
+                        path = "EntryControl.UserCode";
+                        value = ((ZWaveLib.Values.UserCodeValue)value).TagCodeToHexString();
+                        break;
+                    case EventParameter.SecurityNodeInformationFrame:
+                        path = "ZWaveNode.SecuredNodeInfo";
+                        break;
+                    default:
+                        Console.WriteLine("UNHANDLED PARAMETER CHANGE FROM NODE {0} ====> Param Type: {1} Param Id:{2} Value:{3}", eventData.Node.Id, eventData.Parameter, eventData.Instance, value);
+                        break;
+                    }
+
+                    RaisePropertyChanged(new InterfacePropertyChangedAction() {
+                        Domain = this.Domain,
+                        SourceId = eventData.Node.Id.ToString(),
+                        SourceType = "ZWave Node",
+                        Path = path,
+                        Value = value
+                    });
+
+                    eventData = eventData.NestedEvent;
                 }
-
-                RaisePropertyChanged(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = eventData.Node.Id.ToString(),
-                    SourceType = "ZWave Node",
-                    Path = path,
-                    Value = value
-                });
-
-                eventData = eventData.NestedEvent;
-            }
         }
 
         private string GetIndexedParameterPath(string basePath, int parameterId)

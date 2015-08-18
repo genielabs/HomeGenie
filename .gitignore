@@ -6,6 +6,11 @@
 [Bb]in/
 [Oo]bj/
 
-HomeGenie_Windows/HomeGenie_VS10.v12.suo
+*.userprefs
+*.suo
 Thumbs.db
+
+# Nuget packages
+packages/*
+!packages/repositories.config
 

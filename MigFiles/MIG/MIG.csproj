@@ -43,14 +43,26 @@
     <Reference Include="SoapBox.FluentDwelling">
       <HintPath>Externals\FluentDwelling\SoapBox.FluentDwelling.dll</HintPath>
     </Reference>
-    <Reference Include="LibUsbDotNet">
-      <HintPath>..\SupportLibraries\XTenLib\LibUsbDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Externals\json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UPnP">
       <HintPath>..\..\Externals\upnp\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUsbDotNet">
+      <HintPath>..\..\Externals\g-labs\LibUsbDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="XTenLib">
+      <HintPath>..\..\Externals\g-labs\XTenLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\Externals\g-labs\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="W800Rf32Lib">
+      <HintPath>..\..\Externals\g-labs\W800Rf32Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="SerialPortLib">
+      <HintPath>..\..\Externals\g-labs\SerialPortLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,21 +97,9 @@
   </Target>
   -->
   <ItemGroup>
-    <ProjectReference Include="..\SupportLibraries\XTenLib\XTenLib.csproj">
-      <Project>{92933BA1-609C-4DE0-B29E-FDA37C7DC0EF}</Project>
-      <Name>XTenLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SupportLibraries\ZWaveLib\ZWaveLib.csproj">
       <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
       <Name>ZWaveLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SupportLibraries\W800RF32\W800RF32.csproj">
-      <Project>{D98143B1-85B3-4F7F-AFCB-39D2B5DC6C6D}</Project>
-      <Name>W800RF32</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SupportLibraries\SerialPortLib\SerialPortLib.csproj">
-      <Project>{8118C0B9-3B16-47AA-8B24-E5B15F429F78}</Project>
-      <Name>SerialPortLib</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

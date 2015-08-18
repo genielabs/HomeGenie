@@ -60,15 +60,18 @@ namespace ZWaveLib.CommandClasses
         public bool IsAddingNode = false;
         public bool IsNetworkKeySet = false;
 
-        public SecurityData(ZWaveNode node){
+        public SecurityData(ZWaveNode node)
+        {
             parentNode = node;
         }
-     
-        public void SetPrivateNetworkKey(byte[] key){
+
+        public void SetPrivateNetworkKey(byte[] key)
+        {
             privateNetworkKey = key;
         }
 
-        public byte[] GetPrivateNetworkKey(){
+        public byte[] GetPrivateNetworkKey()
+        {
             return privateNetworkKey;
         }
 
@@ -85,7 +88,8 @@ namespace ZWaveLib.CommandClasses
             return privateNetworkKey;
         }
 
-        public void GenerateControllerCurrentNonce(){
+        public void GenerateControllerCurrentNonce()
+        {
             byte[] localControllerCurrentNonce = new byte[8];
 
             if (controllerCurrentNonce == null)
@@ -104,6 +108,13 @@ namespace ZWaveLib.CommandClasses
         {
             byte[] localControllerCurrentNonce = new byte[8];
 
+            // safety check - don't try to copy if the source array is null
+            if (controllerCurrentNonce == null)
+            {
+                Utility.DebugLog(DebugMessageType.Error, "Controller Current Nonce is NULL");
+                return controllerCurrentNonce;
+            }
+
             Array.Copy(controllerCurrentNonce, localControllerCurrentNonce, 8);
 
             if (clearNonce)
@@ -112,15 +123,17 @@ namespace ZWaveLib.CommandClasses
                 // This would cause the controllerCurrentNonce to be re-generated which would
                 // give us the most secure communication, if we see issues we just don't pass
                 // the clearNonce argument
-                controllerCurrentNonce = null;
+
+                // since for now we don't regenerate it let's not set it to null
+                //controllerCurrentNonce = null;
             }
 
             return localControllerCurrentNonce;
         }
 
-        public byte[] EncryptionKey 
+        public byte[] EncryptionKey
         {
-            get 
+            get
             {
                 // the EncryptionKey needs to be generated in two cases:
                 // 1 - encryptionKey is null
@@ -155,6 +168,7 @@ namespace ZWaveLib.CommandClasses
                 return encryptionKey;
             }
         }
+
         public byte[] AuthorizationKey = null;
 
         public List<SecutiryPayload> SecurePayload = new List<SecutiryPayload>();
@@ -292,7 +306,7 @@ namespace ZWaveLib.CommandClasses
 
         public static void GetScheme(ZWaveNode node)
         {
-            node.SendRequest(new byte[]{
+            node.SendRequest(new byte[] {
                 (byte)CommandClass.Security,
                 (byte)SecurityCommand.SchemeGet,
                 0
@@ -305,7 +319,8 @@ namespace ZWaveLib.CommandClasses
             t_msg[0] = (byte)CommandClass.Security;
             t_msg[1] = (byte)SecurityCommand.NetworkKeySet;
             var privateNetworkKey = GetSecurityData(node).GetPrivateNetworkKey();
-            if (privateNetworkKey == null) {
+            if (privateNetworkKey == null)
+            {
                 privateNetworkKey = GetSecurityData(node).GeneratePrivateNetworkKey();
             }
             Array.Copy(privateNetworkKey, 0, t_msg, 2, 16);
@@ -570,8 +585,18 @@ namespace ZWaveLib.CommandClasses
 
             // Get IV from inbound packet
             byte[] iv = new byte[16];
-            Array.Copy(message, start+1, iv, 0, 8);
-            Array.Copy(nodeSecurityData.GetControllerCurrentNonce(true), 0, iv, 8, 8);
+            Array.Copy(message, start + 1, iv, 0, 8);
+            byte[] currentNonce = nodeSecurityData.GetControllerCurrentNonce(true);
+
+            if (currentNonce == null)
+            {
+                Utility.DebugLog(DebugMessageType.Information, "currentNonce null");
+                return null;
+            }
+
+            Utility.DebugLog(DebugMessageType.Information, "currentNonce NOT null");
+
+            Array.Copy(currentNonce, 0, iv, 8, 8);
 
             int _length = message.Length;
             int encryptedpackagesize = _length - 11 - 8; //19 + 11 + 8
@@ -609,16 +634,16 @@ namespace ZWaveLib.CommandClasses
             else
             {
                 */
-                byte[] msg = new byte[decryptedpacket.Length - 2 + 8];
-                Array.Clear(msg, 0, 7);
-                Array.Copy(decryptedpacket, 1, msg, 7, msg.Length - 7);
+            byte[] msg = new byte[decryptedpacket.Length - 2 + 8];
+            Array.Clear(msg, 0, 7);
+            Array.Copy(decryptedpacket, 1, msg, 7, msg.Length - 7);
 
-                msg[6] = (byte)(msg.Length - 7);
+            msg[6] = (byte)(msg.Length - 7);
 
-                Utility.DebugLog(DebugMessageType.Information, "Forwarding: " + Utility.ByteArrayToString(msg));
+            Utility.DebugLog(DebugMessageType.Information, "Forwarding: " + Utility.ByteArrayToString(msg));
 
-                /* send to the Command Class for Proecssing */
-                Utility.DebugLog(DebugMessageType.Information, "Received External Command Class: " + Utility.ByteArrayToString(new byte[] { decryptedpacket[1] }));
+            /* send to the Command Class for Proecssing */
+            Utility.DebugLog(DebugMessageType.Information, "Received External Command Class: " + Utility.ByteArrayToString(new byte[] { decryptedpacket[1] }));
 //                node.MessageRequestHandler(node.pController, msg);
             Utility.DebugLog(DebugMessageType.Information, "In DecryptMessage - Finished");
 

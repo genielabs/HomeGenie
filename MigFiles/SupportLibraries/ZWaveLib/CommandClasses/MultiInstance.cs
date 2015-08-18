@@ -36,7 +36,7 @@ namespace ZWaveLib.CommandClasses
         {
             ZWaveEvent nodeEvent = null;
 
-            byte cmdClass = message[0];
+            //byte cmdClass = message[0];
             byte cmdType = message[1];
             byte instanceCmdClass = message[2];
 

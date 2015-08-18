@@ -90,7 +90,7 @@ namespace ZWaveLib
 
         #region Public members
 
-        public virtual bool MessageRequestHandler(byte[] receivedMessage)
+        public virtual bool ApplicationCommandHandler(byte[] receivedMessage)
         {
             ZWaveEvent messageEvent = null;
             int messageLength = receivedMessage.Length;
