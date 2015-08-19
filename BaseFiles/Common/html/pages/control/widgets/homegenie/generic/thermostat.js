@@ -9,11 +9,24 @@
     Description: '',
 
     levelKnobBindValue: 'Heating',
+  	units:'Celsius',
+  
+    convertAndFormatTemp: function(celsiusraw){
+      	var temp=celsiusraw;
+      	if(temp==null)temp = 0;
+      	if(this.units=='Fahrenheit'){
+          
+             temp = (temp * 1.8) + 32;
+        }
+      
+       temp= Math.round(temp * 100) / 100;
+      return temp;
+    },
 
     RenderView: function (cuid, module) {
         var displayUnit = 'Celsius';
         if (HG.WebApp.Locales.GetDateEndianType() == 'M') displayUnit = 'Fahrenheit';
-
+		this.units=displayUnit;
         var container = $(cuid);
         var widget = container.find('[data-ui-field=widget]');
         var controlpopup = widget.data('ControlPopUp');
@@ -190,8 +203,7 @@
         var temperatureField = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
         var temperature = 0;
         if (temperatureField != null) {
-            temperature = Math.round(temperatureField.Value.replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
+           temperature = this.convertAndFormatTemp(temperatureField.Value.replace(',', '.'));
         }
         widget.find('[data-ui-field=temperature_value]').html(temperature.toFixed(1) + '&deg;');
 
@@ -222,7 +234,8 @@
         }
         else {
             widget.find('[data-ui-field=heat_field]').show();
-            var temperature = Math.round(heatTo.Value.replace(',', '.') * 100) / 100;
+            
+           var temperature = this.convertAndFormatTemp(heatTo.Value.replace(',', '.'));
             widget.find('[data-ui-field=heatset_value]').html(temperature.toFixed(1) + '&deg;');
         }
 
@@ -235,7 +248,8 @@
         }
         else {
             widget.find('[data-ui-field=cool_field]').show();
-            var temperature = Math.round(coolTo.Value.replace(',', '.') * 100) / 100;
+      
+           var temperature = this.convertAndFormatTemp(coolTo.Value.replace(',', '.'));
             widget.find('[data-ui-field=coolset_value]').html(temperature.toFixed(1) + '&deg;');
         }
         // enable/disable Cool Set Point feature (not every thermostat support it)
@@ -270,9 +284,11 @@
         controlpopup.find('[data-ui-field=cool_setpoint]').addClass('ui-btn-active');
         // show current cool setpoint
         var coolSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Cooling');
+      	
         if (coolSetPoint != null) {
-            levelKnob.val(coolSetPoint.Value).trigger('change');
-            controlpopup.find('[data-ui-field=status]').html(coolSetPoint.Value + '&deg;');
+          var temp =this.convertAndFormatTemp(coolSetPoint.Value);
+            levelKnob.val(temp).trigger('change');
+            controlpopup.find('[data-ui-field=status]').html(temp + '&deg;');
         }
         this.levelKnobBindValue = 'Cooling';
     },
@@ -283,9 +299,11 @@
         controlpopup.find('[data-ui-field=heat_setpoint]').addClass('ui-btn-active');
         // show current heat setpoint
         var heatSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Heating');
+      	
         if (heatSetPoint != null) {
-            levelKnob.val(heatSetPoint.Value).trigger('change');
-            controlpopup.find('[data-ui-field=status]').html(heatSetPoint.Value + '&deg;');
+          var temp =this.convertAndFormatTemp(heatSetPoint.Value);
+            levelKnob.val(temp).trigger('change');
+            controlpopup.find('[data-ui-field=status]').html(temp + '&deg;');
         }
         this.levelKnobBindValue = 'Heating';
     }
