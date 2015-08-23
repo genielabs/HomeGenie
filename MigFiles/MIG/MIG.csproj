@@ -64,6 +64,9 @@
     <Reference Include="SerialPortLib">
       <HintPath>..\..\Externals\g-labs\SerialPortLib.dll</HintPath>
     </Reference>
+    <Reference Include="ZWaveLib">
+      <HintPath>..\..\Externals\g-labs\ZWaveLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gateways\WebServiceUtility.cs" />
@@ -96,10 +99,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ProjectReference Include="..\SupportLibraries\ZWaveLib\ZWaveLib.csproj">
-      <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
-      <Name>ZWaveLib</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

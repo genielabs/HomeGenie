@@ -400,6 +400,7 @@ HG.WebApp.GroupModules.ZWave_ConfigVariableGet = function () {
 
 HG.WebApp.GroupModules.ZWave_NodeNeighborUpdate = function () {
     $('#opt-zwave-heal-label').html('Requesting Neighbor Update ...');
+    $.mobile.loading('show');
     zwave_NodeNeighborUpdate($('#configurepage_OptionZWave_id').val(), function (res) {
         if (res == '') {
             $('#opt-zwave-heal-label').html('Healing operation timeout!');
@@ -407,6 +408,7 @@ HG.WebApp.GroupModules.ZWave_NodeNeighborUpdate = function () {
         else {
             $('#opt-zwave-heal-label').html('Routing Info = ' + res);
         }
+        $.mobile.loading('hide');
     });
 };
 

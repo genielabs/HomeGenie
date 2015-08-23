@@ -8,7 +8,7 @@
             <summary>
             Serial port I/O
             </summary></member>
-        <member name="T:SerialPortLib.SerialPortInput.ConnectionStatusChangedEvent">
+        <member name="T:SerialPortLib.SerialPortInput.ConnectionStatusChangedEventHandler">
             <summary>
             Connected state changed event.
             </summary></member>
@@ -16,7 +16,7 @@
             <summary>
             Occurs when connected state changed.
             </summary></member>
-        <member name="T:SerialPortLib.SerialPortInput.MessageReceivedEvent">
+        <member name="T:SerialPortLib.SerialPortInput.MessageReceivedEventHandler">
             <summary>
             Message received event.
             </summary></member>

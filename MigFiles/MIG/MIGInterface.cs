@@ -43,6 +43,9 @@ namespace MIG
                 opt = new MIGServiceConfiguration.Interface.Option() { Name =  option };
                 iface.Options.Add(opt);
             }
+            // TODO: instead of calling Disconnect/Connect here, rather 
+            // TODO: add an OnOptionUpdate method to MIGInterface,
+            // TODO: so to let the class do its bussiness logic
             if (iface.IsEnabled)
             {
                 try { iface.Disconnect(); } catch { }

@@ -184,7 +184,6 @@ namespace MIG
                 {
                     var type = Type.GetType("MIG.Interfaces." + domain + (String.IsNullOrWhiteSpace(assemblyName) ? "" : ", " + assemblyName));
                     migInterface = (MIGInterface)Activator.CreateInstance(type);
-                    migInterface.Options = configuration.GetInterface(domain).Options;
                 }
                 catch (Exception e)
                 {
@@ -194,6 +193,7 @@ namespace MIG
                 if (migInterface != null)
                 {
                     Interfaces.Add(domain, migInterface);
+                    migInterface.Options = configuration.GetInterface(domain).Options;
                     migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
                     migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
                 }
@@ -222,7 +222,6 @@ namespace MIG
             if (Interfaces.ContainsKey(domain))
             {
                 migInterface = Interfaces[domain];
-                migInterface.Options = configuration.GetInterface(domain).Options;
                 migInterface.IsEnabled = true;
                 migInterface.Connect();
             }
