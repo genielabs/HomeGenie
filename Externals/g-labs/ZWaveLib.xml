@@ -207,6 +207,12 @@
             Gets the status.
             </summary>
             <value>The status.</value></member>
+        <member name="M:ZWaveLib.ZWaveController.QueueMessage(ZWaveLib.ZWaveMessage)">
+            <summary>
+            Queues the message.
+            </summary>
+            <returns>The message.</returns>
+            <param name="message">Message.</param></member>
         <member name="M:ZWaveLib.ZWaveController.SendMessage(ZWaveLib.ZWaveMessage)">
             <summary>
             Sends the message.
@@ -221,9 +227,13 @@
             <summary>
             HardReset the controller.
             </summary></member>
+        <member name="M:ZWaveLib.ZWaveController.Initialize">
+            <summary>
+            Initialize the controller (get the node list).
+            </summary></member>
         <member name="M:ZWaveLib.ZWaveController.Discovery">
             <summary>
-            Discovery nodes.
+            Query capabilities, Supported Classes and Manufacturer Specific of each node.
             </summary></member>
         <member name="M:ZWaveLib.ZWaveController.GetNodeInformationFrame(System.Byte)">
             <summary>
@@ -250,36 +260,43 @@
             <summary>
             Begins the node add.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <returns>The node add.</returns></member>
         <member name="M:ZWaveLib.ZWaveController.StopNodeAdd">
             <summary>
             Stops the node add.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <returns>The node add.</returns></member>
         <member name="M:ZWaveLib.ZWaveController.BeginNodeRemove">
             <summary>
             Begins the node remove.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <returns>The node remove.</returns></member>
         <member name="M:ZWaveLib.ZWaveController.StopNodeRemove">
             <summary>
             Stops the node remove.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <returns>The node remove.</returns></member>
         <member name="M:ZWaveLib.ZWaveController.RequestNeighborsUpdateOptions(System.Byte)">
             <summary>
             Requests the neighbors options update.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <param name="nodeId">Node identifier.</param></member>
         <member name="M:ZWaveLib.ZWaveController.RequestNeighborsUpdate(System.Byte)">
             <summary>
             Requests the neighbors update.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <param name="nodeId">Node identifier.</param></member>
         <member name="M:ZWaveLib.ZWaveController.GetNeighborsRoutingInfo(System.Byte)">
             <summary>
             Gets the neighbors routing info.
             </summary>
+            <returns>A reference to the ZWaveMessage of this request.</returns>
             <param name="nodeId">Node identifier.</param></member>
         <member name="M:ZWaveLib.ZWaveController.SetQueryStage(ZWaveLib.QueryStage)">
             <summary>
