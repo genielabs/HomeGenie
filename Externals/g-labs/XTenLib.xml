@@ -91,7 +91,7 @@
             <summary>
             X10 Home Automation library for .NET / Mono. It supports CM11 (serial) and CM15 (USB) hardware.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.ConnectionStatusChangedEvent">
+        <member name="T:XTenLib.XTenManager.ConnectionStatusChangedEventHandler">
             <summary>
             Connected state changed event.
             </summary></member>
@@ -103,7 +103,7 @@
             <summary>
             Occurs when an X10 module changed.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.PlcAddressReceivedEvent">
+        <member name="T:XTenLib.XTenManager.PlcAddressReceivedEventHandler">
             <summary>
             Plc address received event.
             </summary></member>
@@ -111,7 +111,7 @@
             <summary>
             Occurs when plc address received.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.PlcFunctionReceivedEvent">
+        <member name="T:XTenLib.XTenManager.PlcFunctionReceivedEventHandler">
             <summary>
             Plc function received event.
             </summary></member>
@@ -119,7 +119,7 @@
             <summary>
             Occurs when plc command received.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.RfDataReceivedEvent">
+        <member name="T:XTenLib.XTenManager.RfDataReceivedEventHandler">
             <summary>
             RF data received event.
             </summary></member>
@@ -127,7 +127,7 @@
             <summary>
             Occurs when RF data is received.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.X10CommandReceivedEvent">
+        <member name="T:XTenLib.XTenManager.X10CommandReceivedEventHandler">
             <summary>
             X10 command received event.
             </summary></member>
@@ -135,7 +135,7 @@
             <summary>
             Occurs when x10 command received.
             </summary></member>
-        <member name="T:XTenLib.XTenManager.X10SecurityReceivedEvent">
+        <member name="T:XTenLib.XTenManager.X10SecurityReceivedEventHandler">
             <summary>
             X10 security data received event.
             </summary></member>

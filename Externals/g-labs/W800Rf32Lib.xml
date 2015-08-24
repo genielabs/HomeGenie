@@ -8,7 +8,7 @@
             <summary>
             W800RF32 receiver class.
             </summary></member>
-        <member name="T:W800Rf32Lib.RfReceiver.ConnectionStatusChangedEvent">
+        <member name="T:W800Rf32Lib.RfReceiver.ConnectionStatusChangedEventHandler">
             <summary>
             Connected state changed event.
             </summary></member>
@@ -16,7 +16,7 @@
             <summary>
             Occurs when connected state changed.
             </summary></member>
-        <member name="T:W800Rf32Lib.RfReceiver.RawDataReceivedEvent">
+        <member name="T:W800Rf32Lib.RfReceiver.RawDataReceivedEventHandler">
             <summary>
             Raw data received event.
             </summary></member>
@@ -24,7 +24,7 @@
             <summary>
             Occurs when raw data is received.
             </summary></member>
-        <member name="T:W800Rf32Lib.RfReceiver.X10CommandReceivedEvent">
+        <member name="T:W800Rf32Lib.RfReceiver.X10CommandReceivedEventHandler">
             <summary>
             X10 command received event.
             </summary></member>
@@ -32,7 +32,7 @@
             <summary>
             Occurs when x10 command received.
             </summary></member>
-        <member name="T:W800Rf32Lib.RfReceiver.X10SecurityReceivedEvent">
+        <member name="T:W800Rf32Lib.RfReceiver.X10SecurityReceivedEventHandler">
             <summary>
             X10 security data received event.
             </summary></member>

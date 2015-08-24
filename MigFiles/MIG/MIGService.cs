@@ -184,7 +184,6 @@ namespace MIG
                 {
                     var type = Type.GetType("MIG.Interfaces." + domain + (String.IsNullOrWhiteSpace(assemblyName) ? "" : ", " + assemblyName));
                     migInterface = (MIGInterface)Activator.CreateInstance(type);
-                    migInterface.Options = configuration.GetInterface(domain).Options;
                 }
                 catch (Exception e)
                 {
@@ -194,6 +193,7 @@ namespace MIG
                 if (migInterface != null)
                 {
                     Interfaces.Add(domain, migInterface);
+                    migInterface.Options = configuration.GetInterface(domain).Options;
                     migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
                     migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
                 }
@@ -222,7 +222,6 @@ namespace MIG
             if (Interfaces.ContainsKey(domain))
             {
                 migInterface = Interfaces[domain];
-                migInterface.Options = configuration.GetInterface(domain).Options;
                 migInterface.IsEnabled = true;
                 migInterface.Connect();
             }
@@ -549,10 +548,7 @@ namespace MIG
                             context.Response.ContentEncoding = cachedItem.Encoding;
                             context.Response.ContentType += "; charset=" + cachedItem.Encoding.BodyName;
                             string body = cachedItem.Content;
-                            //
-                            // expand preprocessor tags
-                            body = body.Replace("{hostos}", Environment.OSVersion.Platform.ToString());
-                            //
+                            // replace prepocessor directives with values
                             bool tagFound;
                             do
                             {
@@ -577,7 +573,8 @@ namespace MIG
                                                 Encoding fileEncoding = DetectWebFileEncoding(fileName);
                                                 if (fileEncoding == null)
                                                     fileEncoding = defaultWebFileEncoding;
-                                                body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
+                                                var incFile = System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
+                                                body = ls + incFile;
                                             }
                                         }
                                         catch
@@ -594,6 +591,10 @@ namespace MIG
                                     }
                                 }
                             } while (tagFound); // pre processor tag found
+                            // {hostos}
+                            body = body.Replace("{hostos}", Environment.OSVersion.Platform.ToString());
+                            // {filebase}
+                            body = body.Replace("{filebase}", Path.GetFileNameWithoutExtension(requestedFile));
                             //
                             if (webServiceConfig.CacheEnable)
                             {

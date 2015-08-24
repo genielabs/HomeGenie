@@ -305,10 +305,6 @@
       <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
       <Name>MIG</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MigFiles\SupportLibraries\ZWaveLib\ZWaveLib.csproj">
-      <Project>{06995CE8-149B-42FA-B345-FB11C4D6E180}</Project>
-      <Name>ZWaveLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj">
       <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
       <Name>NetClientLib</Name>

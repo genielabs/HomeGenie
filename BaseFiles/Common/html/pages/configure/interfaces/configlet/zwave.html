@@ -78,26 +78,16 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         var hardResetButton = configlet.find('[data-ui-field=hardreset_btn]');
         // get enabled status
         HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Get', '', '', function (data) {
-            if (data.ResponseValue == '1') {
-                portSelect.removeClass('ui-disabled');
-            } else {
-                portSelect.addClass('ui-disabled');
-            }
             enabledFlip.val(data.ResponseValue).slider('refresh');
-            portSelect.selectmenu('refresh', true);
         });
         // bind to enabled flip changes
         enabledFlip.on('slidestop', function (event) {
             HG.Configure.MIG.InterfaceCommand(_this.Id, 'IsEnabled.Set', enabledFlip.val(), '', function (data) {
                 if (enabledFlip.val() == '1') {
-                    portSelect.removeClass('ui-disabled');
                     if (portSelect.val() == '') {
                         HG.WebApp.SystemSettings.ShowPortTip(portSelect);
                     }
-                } else {
-                    portSelect.addClass('ui-disabled');
                 }
-                portSelect.selectmenu('refresh', true);
             });
         });
         // populate serial port list
