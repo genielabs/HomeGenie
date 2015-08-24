@@ -548,10 +548,7 @@ namespace MIG
                             context.Response.ContentEncoding = cachedItem.Encoding;
                             context.Response.ContentType += "; charset=" + cachedItem.Encoding.BodyName;
                             string body = cachedItem.Content;
-                            //
-                            // expand preprocessor tags
-                            body = body.Replace("{hostos}", Environment.OSVersion.Platform.ToString());
-                            //
+                            // replace prepocessor directives with values
                             bool tagFound;
                             do
                             {
@@ -576,7 +573,8 @@ namespace MIG
                                                 Encoding fileEncoding = DetectWebFileEncoding(fileName);
                                                 if (fileEncoding == null)
                                                     fileEncoding = defaultWebFileEncoding;
-                                                body = ls + System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
+                                                var incFile = System.IO.File.ReadAllText(fileName, fileEncoding) + rs;
+                                                body = ls + incFile;
                                             }
                                         }
                                         catch
@@ -593,6 +591,10 @@ namespace MIG
                                     }
                                 }
                             } while (tagFound); // pre processor tag found
+                            // {hostos}
+                            body = body.Replace("{hostos}", Environment.OSVersion.Platform.ToString());
+                            // {filebase}
+                            body = body.Replace("{filebase}", Path.GetFileNameWithoutExtension(requestedFile));
                             //
                             if (webServiceConfig.CacheEnable)
                             {

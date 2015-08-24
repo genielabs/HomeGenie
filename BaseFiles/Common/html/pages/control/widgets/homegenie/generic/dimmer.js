@@ -5,7 +5,7 @@
   Version: "2015-06-13",
 
   GroupName: '',
-  IconImage: 'pages/control/widgets/homegenie/generic/images/light_off.png',
+  IconImage: 'pages/control/widgets/homegenie/generic/images/{filebase}_off.png',
   StatusText: '',
   Description: '',
   UpdateTime: '',
@@ -90,18 +90,12 @@
     var widgeticon = HG.WebApp.Utility.GetModulePropertyByName(module, 'Widget.DisplayIcon');
     if (widgeticon != null && widgeticon.Value != '') {
       this.IconImage = widgeticon.Value;
-    } else if (module.DeviceType == "Siren") {
-      this.IconImage = 'pages/control/widgets/homegenie/generic/images/siren.png';
-    } else if (module.DeviceType == 'Switch') {
-      if (level > 0) {
-        this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_on.png';
-      } else {
-        this.IconImage = 'pages/control/widgets/homegenie/generic/images/socket_off.png';
-      }
-    } else if (level > 0) {
-      this.IconImage = 'pages/control/widgets/homegenie/generic/images/light_on.png';
     } else {
-      this.IconImage = 'pages/control/widgets/homegenie/generic/images/light_off.png';
+      if (level > 0) {
+        this.IconImage = 'pages/control/widgets/homegenie/generic/images/'+module.DeviceType.toLowerCase()+'_on.png';
+      } else {
+        this.IconImage = 'pages/control/widgets/homegenie/generic/images/'+module.DeviceType.toLowerCase()+'_off.png';
+      }
     }
     this.Description = (module.Domain.substring(module.Domain.lastIndexOf('.') + 1)) + ' ' + module.Address;
     //
