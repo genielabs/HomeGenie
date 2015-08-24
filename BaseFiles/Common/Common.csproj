@@ -4670,6 +4670,9 @@
     <None Include="html\ext\zwave\pepper1db\010F_0100_100A.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="html\ext\zwave\pepper1db\0097_6131_4501.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ADDONS.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

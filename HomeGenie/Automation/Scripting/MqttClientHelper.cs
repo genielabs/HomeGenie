@@ -129,6 +129,20 @@ namespace HomeGenie.Automation.Scripting
             }
             return this;
         }
+        
+        /// <summary>
+        /// Publish a message to the specified topic.
+        /// </summary>
+        /// <param name="topic">Topic name.</param>
+        /// <param name="message">Message text as byte array.</param>
+        public MqttClientHelper Publish(string topic, byte[] message)
+        {
+        	lock (mqttSyncLock)
+        	{
+        		mqttClient.PublishMessage(topic, message);
+        	}
+        	return this;
+        }
 
         /// <summary>
         /// Use provided credentials when connecting.
