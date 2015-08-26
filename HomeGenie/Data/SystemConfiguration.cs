@@ -96,7 +96,7 @@ namespace HomeGenie.Data
             bool success = false;
             try
             {
-                SystemConfiguration syscopy = (SystemConfiguration)this.Clone();
+                var syscopy = (SystemConfiguration)this.Clone();
                 foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
                 {
                     try

@@ -14,8 +14,8 @@ namespace MIG
 
         public MIGServiceConfiguration.Interface GetInterface(string domain)
         {
-            MIGServiceConfiguration.Interface res = this.Interfaces.Find(i => i.Domain == domain);
-            return res;
+            var iface = this.Interfaces.Find(i => i.Domain == domain);
+            return iface;
         }
 
         [Serializable()]

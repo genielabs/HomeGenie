@@ -193,7 +193,6 @@ namespace MIG
                 if (migInterface != null)
                 {
                     Interfaces.Add(domain, migInterface);
-                    migInterface.Options = configuration.GetInterface(domain).Options;
                     migInterface.InterfaceModulesChangedAction += MigService_InterfaceModulesChanged;
                     migInterface.InterfacePropertyChangedAction += MigService_InterfacePropertyChanged;
                 }
@@ -202,6 +201,7 @@ namespace MIG
             {
                 migInterface = Interfaces[domain];
             }
+            migInterface.Options = configuration.GetInterface(domain).Options;
             return migInterface;
         }
 

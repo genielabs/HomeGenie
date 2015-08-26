@@ -25,6 +25,7 @@ using System.Threading;
 
 using W800Rf32Lib;
 using System.Collections.Generic;
+using MIG.Interfaces.HomeAutomation.Commons;
 
 namespace MIG.Interfaces.HomeAutomation
 {
@@ -108,11 +109,10 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-        private void W800Rf32_RfSecurityReceived (object sender, RfSecurityReceivedEventArgs args)
+        private void W800Rf32_RfSecurityReceived(object sender, RfSecurityReceivedEventArgs args)
         {
-            //args.Event == X10RfSecurityEvent.
-            string address = "S-" + args.Address.ToString("X2");
-            var moduleType = ModuleTypes.Generic;
+            string address = "S-" + args.Address.ToString("X6");
+            var moduleType = ModuleTypes.Sensor;
             if (args.Event.ToString().StartsWith("DoorSensor1_"))
             {
                 address += "01";
@@ -150,25 +150,25 @@ namespace MIG.Interfaces.HomeAutomation
             {
             case X10RfSecurityEvent.DoorSensor1_Alert:
             case X10RfSecurityEvent.DoorSensor2_Alert:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Level", 1);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 1);
                 break;
             case X10RfSecurityEvent.DoorSensor1_Normal:
             case X10RfSecurityEvent.DoorSensor2_Normal:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Level", 0);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 0);
                 break;
             case X10RfSecurityEvent.DoorSensor1_BatteryLow:
             case X10RfSecurityEvent.DoorSensor2_BatteryLow:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Battery", 10);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_BATTERY, 10);
                 break;
             case X10RfSecurityEvent.DoorSensor1_BatteryOk:
             case X10RfSecurityEvent.DoorSensor2_BatteryOk:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Battery", 100);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_BATTERY, 100);
                 break;
             case X10RfSecurityEvent.Motion_Alert:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Level", 1);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 1);
                 break;
             case X10RfSecurityEvent.Motion_Normal:
-                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Level", 0);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 0);
                 break;
             case X10RfSecurityEvent.Remote_Arm:
             case X10RfSecurityEvent.Remote_Disarm:
@@ -228,7 +228,7 @@ namespace MIG.Interfaces.HomeAutomation
             case X10RfFunction.AllLightsOff:
                 break;
             }
-            RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Status.Level", module.CustomData);
+            RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, module.CustomData);
         }
 
         private void W800Rf32_RfDataReceived(object sender, RfDataReceivedEventArgs args)

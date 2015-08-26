@@ -54,8 +54,6 @@ namespace HomeGenie.Service.Constants
         // commonly used parameters
         public const string STATUS_LEVEL
             = "Status.Level";
-        public const string STATUS_DOORLOCK
-            = "Status.DoorLock";
         public const string METER_WATTS
             = "Meter.Watts";
         public const string METER_ANY
@@ -64,27 +62,5 @@ namespace HomeGenie.Service.Constants
             = "Widget.DisplayModule";
         public const string VIRTUALMODULE_PARENTID
             = "VirtualModule.ParentId";
-
-        // z-wave specific parameters
-        public const string ZWAVENODE_BASIC
-            = "ZWaveNode.Basic";
-        public const string ZWAVENODE_WAKEUPINTERVAL
-            = "ZWaveNode.WakeUpInterval";
-        public const string ZWAVENODE_BATTERY
-            = "ZWaveNode.Battery";
-        public const string ZWAVENODE_MULTIINSTANCE
-            = "ZWaveNode.MultiInstance";
-        public const string ZWAVENODE_ASSOCIATIONS
-            = "ZWaveNode.Associations";
-        public const string ZWAVENODE_CONFIGVARIABLES
-            = "ZWaveNode.Variables";
-        public const string ZWAVENODE_NODEINFO
-            = "ZWaveNode.NodeInfo";
-        public const string ZWAVENODE_ROUTINGINFO
-        = "ZWaveNode.RoutingInfo";
-        public const string ZWAVENODE_MANUFACTURERSPECIFIC
-            = "ZWaveNode.ManufacturerSpecific";
-        public const string ZWAVENODE_DEVICEHANDLER
-            = "ZWaveNode.DeviceHandler";
     }
 }

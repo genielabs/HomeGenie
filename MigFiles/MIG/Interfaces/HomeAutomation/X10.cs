@@ -78,7 +78,7 @@ namespace MIG.Interfaces.HomeAutomation
 
             private Command(int value)
             {
-                this.name = CommandsList[ value ];
+                this.name = CommandsList[value];
                 this.value = value;
             }
 
@@ -137,6 +137,7 @@ namespace MIG.Interfaces.HomeAutomation
 
         private XTenManager x10lib;
         private Timer rfPulseTimer;
+        private List<InterfaceModule> securityModules;
 
         List<MIGServiceConfiguration.Interface.Option> options;
 
@@ -145,6 +146,8 @@ namespace MIG.Interfaces.HomeAutomation
             x10lib = new XTenManager();
             x10lib.ModuleChanged += X10lib_ModuleChanged;
             x10lib.RfDataReceived += X10lib_RfDataReceived;
+            x10lib.RfSecurityReceived += X10lib_RfSecurityReceived;
+            securityModules = new List<InterfaceModule>();
         }
 
         #region MIG Interface members
@@ -161,16 +164,17 @@ namespace MIG.Interfaces.HomeAutomation
                 return domain;
             }
         }
-        
+
         public bool IsEnabled { get; set; }
 
-        public List<MIGServiceConfiguration.Interface.Option> Options { 
+        public List<MIGServiceConfiguration.Interface.Option> Options
+        { 
             get
             {
                 return options;
             }
-            set 
-            { 
+            set
+            {
                 options = value;
                 x10lib.PortName = this.GetOption("Port").Value.Replace("|", "/");
                 x10lib.HouseCode = this.GetOption("HouseCodes").Value;
@@ -183,25 +187,32 @@ namespace MIG.Interfaces.HomeAutomation
             if (x10lib != null)
             {
 
-                // CM-15 RF receiver
-                // TODO: this shouldn't be created for CM-11
                 InterfaceModule module = new InterfaceModule();
-                module.Domain = this.Domain;
-                module.Address = "RF";
-                module.ModuleType = ModuleTypes.Sensor;
-                modules.Add(module);
 
+                // CM-15 RF receiver
+                if (this.GetOption("Port").Value.Equals("USB"))
+                {
+                    module.Domain = this.Domain;
+                    module.Address = "RF";
+                    module.ModuleType = ModuleTypes.Sensor;
+                    modules.Add(module);
+                }
+
+                // Standard X10 modules
                 foreach (var kv in x10lib.Modules)
                 {
 
                     module = new InterfaceModule();
                     module.Domain = this.Domain;
                     module.Address = kv.Value.Code;
-                    module.ModuleType = ModuleTypes.Generic;
+                    module.ModuleType = ModuleTypes.Switch;
                     module.Description = "X10 Module";
                     modules.Add(module);
 
                 }
+
+                // CM-15 RF Security modules
+                modules.AddRange(securityModules);
 
             }
             return modules;
@@ -211,7 +222,8 @@ namespace MIG.Interfaces.HomeAutomation
         {
             x10lib.PortName = this.GetOption("Port").Value.Replace("|", "/");
             x10lib.HouseCode = this.GetOption("HouseCodes").Value;
-            if (InterfaceModulesChangedAction != null) InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+            if (InterfaceModulesChangedAction != null)
+                InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
             return x10lib.Connect();
         }
 
@@ -280,13 +292,7 @@ namespace MIG.Interfaces.HomeAutomation
             {
                 int dimvalue = int.Parse(option);
                 //x10lib.Modules[nodeId].Level = ((double)dimvalue/100D);
-                InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                    Domain = this.Domain,
-                    SourceId = nodeId,
-                    SourceType = "X10 Module",
-                    Path = "Status.Level",
-                    Value = x10lib.Modules[nodeId].Level
-                });
+                RaisePropertyChanged(this.Domain, nodeId, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, x10lib.Modules[nodeId].Level);
                 throw(new NotImplementedException("X10 CONTROL_LEVEL_ADJUST Not Implemented"));
             }
             else if (command == Command.CONTROL_LEVEL)
@@ -327,70 +333,112 @@ namespace MIG.Interfaces.HomeAutomation
 
         #endregion
 
-        private void X10lib_RfDataReceived(object sender, RfDataReceivedEventArgs args)
+        private void RaisePropertyChanged(string domain, string address, string source, string property, object val)
         {
             if (InterfacePropertyChangedAction != null)
             {
-                try
-                {
-                    InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                        Domain = this.Domain,
-                        SourceId = "RF",
-                        SourceType = "X10 RF Receiver",
-                        Path = "Receiver.RawData",
-                        Value = BitConverter.ToString(args.Data).Replace("-", " ")
-                    });
-                }
-                catch
-                {
-                    // TODO: add error logging 
-                }
-                //
-                if (rfPulseTimer == null)
-                {
-                    rfPulseTimer = new Timer(delegate(object target)
-                    {
-                        try
-                        {
-                            InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                                Domain = this.Domain,
-                                SourceId = "RF",
-                                SourceType = "X10 RF Receiver",
-                                Path = "Receiver.RawData",
-                                Value = ""
-                            });
-                        }
-                        catch
-                        {
-                            // TODO: add error logging 
-                        }
-                    });
-                }
-                rfPulseTimer.Change(1000, Timeout.Infinite);
+                var evt = new InterfacePropertyChangedAction() {
+                    Domain = domain,
+                    SourceId = address,
+                    SourceType = source,
+                    Path = property,
+                    Value = val
+                };
+                InterfacePropertyChangedAction(evt);
             }
+        }
+
+        private void X10lib_RfSecurityReceived(object sender, RfSecurityReceivedEventArgs args)
+        {
+            string address = "S-" + args.Address.ToString("X6");
+            var moduleType = ModuleTypes.Sensor;
+            if (args.Event.ToString().StartsWith("DoorSensor1_"))
+            {
+                address += "01";
+                moduleType = ModuleTypes.DoorWindow;
+            }
+            else if (args.Event.ToString().StartsWith("DoorSensor2_"))
+            {
+                address += "02";
+                moduleType = ModuleTypes.DoorWindow;
+            }
+            else if (args.Event.ToString().StartsWith("Motion_"))
+            {
+                moduleType = ModuleTypes.Sensor;
+            }
+            else if (args.Event.ToString().StartsWith("Remote_"))
+            {
+                address = "S-REMOTE";
+                moduleType = ModuleTypes.Sensor;
+            }
+            var module = securityModules.Find(m => m.Address == address);
+            if (module == null)
+            {
+                module = new InterfaceModule();
+                module.Domain = this.Domain;
+                module.Address = address;
+                module.Description = "X10 Security";
+                module.ModuleType = moduleType;
+                module.CustomData = 0.0D;
+                securityModules.Add(module);
+                RaisePropertyChanged(this.Domain, "RF", "X10 RF Receiver", "Receiver.Status", "Added security module " + address);
+                if (InterfaceModulesChangedAction != null)
+                    InterfaceModulesChangedAction(new InterfaceModulesChangedAction(){ Domain = this.Domain });
+            }
+            switch (args.Event)
+            {
+            case X10RfSecurityEvent.DoorSensor1_Alert:
+            case X10RfSecurityEvent.DoorSensor2_Alert:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 1);
+                break;
+            case X10RfSecurityEvent.DoorSensor1_Normal:
+            case X10RfSecurityEvent.DoorSensor2_Normal:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 0);
+                break;
+            case X10RfSecurityEvent.DoorSensor1_BatteryLow:
+            case X10RfSecurityEvent.DoorSensor2_BatteryLow:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_BATTERY, 10);
+                break;
+            case X10RfSecurityEvent.DoorSensor1_BatteryOk:
+            case X10RfSecurityEvent.DoorSensor2_BatteryOk:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_BATTERY, 100);
+                break;
+            case X10RfSecurityEvent.Motion_Alert:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 1);
+                break;
+            case X10RfSecurityEvent.Motion_Normal:
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", ModuleParameters.MODPAR_STATUS_LEVEL, 0);
+                break;
+            case X10RfSecurityEvent.Remote_Arm:
+            case X10RfSecurityEvent.Remote_Disarm:
+            case X10RfSecurityEvent.Remote_Panic:
+            case X10RfSecurityEvent.Remote_LightOn:
+            case X10RfSecurityEvent.Remote_LightOff:
+                var evt = args.Event.ToString();
+                evt = evt.Substring(evt.IndexOf('_') + 1);
+                RaisePropertyChanged(module.Domain, module.Address, "X10 Module", "Sensor.Key", evt);
+                break;
+            }
+        }
+
+        private void X10lib_RfDataReceived(object sender, RfDataReceivedEventArgs args)
+        {
+            var code = BitConverter.ToString(args.Data).Replace("-", " ");
+            RaisePropertyChanged(this.Domain, "RF", "X10 RF Receiver", "Receiver.RawData", code);
+            if (rfPulseTimer == null)
+            {
+                rfPulseTimer = new Timer(delegate(object target)
+                {
+                    RaisePropertyChanged(this.Domain, "RF", "X10 RF Receiver", "Receiver.RawData", "");
+                });
+            }
+            rfPulseTimer.Change(1000, Timeout.Infinite);
         }
 
         private void X10lib_ModuleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Level")
-            {
-                if (InterfacePropertyChangedAction != null)
-                {
-                    try
-                    {
-                        InterfacePropertyChangedAction(new InterfacePropertyChangedAction() {
-                            Domain = this.Domain,
-                            SourceId = (sender as X10Module).Code,
-                            SourceType = (sender as X10Module).Description,
-                            Path = ModuleParameters.MODPAR_STATUS_LEVEL,
-                            Value = (sender as X10Module).Level.ToString()
-                        });
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
+                RaisePropertyChanged(this.Domain, (sender as X10Module).Code, (sender as X10Module).Description, ModuleParameters.MODPAR_STATUS_LEVEL, (sender as X10Module).Level.ToString());
         }
 
     }
