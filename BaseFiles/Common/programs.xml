@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
@@ -146,7 +146,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:26:05.710605Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:19.454401Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:07.667229Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -275,7 +275,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime>2015-06-14T11:31:47.709525Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <TriggerTime>2015-08-26T12:30:08.176981Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -452,7 +452,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime>2015-05-07T22:14:38.385621Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:20.498656Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:08.677079Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -529,7 +529,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-07T22:14:58.663161Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:20.9825Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:09.169288Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1181,7 +1181,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-25T12:49:48.080482Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:21.480664Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:09.671097Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1234,7 +1234,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2014-05-31T21:12:24.5191554Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:21.980522Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:10.173701Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1525,7 +1525,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-28T15:47:15.484138Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:22.491344Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:10.680876Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1625,7 +1625,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:22.981646Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:11.174921Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1693,159 +1693,9 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-05T16:56:36.110704Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:23.484512Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:11.675578Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
-    <ConditionType>OnTrue</ConditionType>
-    <Conditions />
-    <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-Program.Setup(()=&gt;{
-	Program.AddVirtualModules("HomeAutomation.X10.SC9000", "Sensor", "homegenie/generic/sensor", 1, 16);
-    Modules.InDomain("HomeAutomation.X10.SC9000").Each((m)=&gt;{
-      m.Parameter("X10Security.Address").Value = "";
-      return false;
-    });
-});
-
-return true;
-</ScriptCondition>
-    <ScriptSource>// X10 RF Security protocol specifications from
-// https://sourceforge.net/apps/mediawiki/mochad/index.php?title=X10_RF_Security_Extended_Address
-
-var RF_SECURITY = "5D 29";
-
-var security_events = new Dictionary&lt;string, string&gt;() {
-    { "0C", "Motion_alert_MS10A" },
-    { "8C", "Motion_normal_MS10A" },
-    { "0D", "Motion_alert_low_MS10A" },     /* MS10 does not emit this */
-    { "8D", "Motion_normal_low_MS10A" },    /* MS10 does not emit this */
-    { "4C", "Motion_normal_min_tamper_MS90" },    /* MS10 does not emit this */
-    { "04", "Contact_alert_min_DS10A" },
-    { "84", "Contact_normal_min_DS10A" },
-    { "44", "Contact_alert_min_tamper_DS12A" },
-    { "C4", "Contact_normal_min_tamper_DS12A" },
-    { "00", "Contact_alert_max_DS10A" },
-    { "80", "Contact_normal_max_DS10A" },
-    { "40", "Contact_alert_max_tamper_DS12A" },
-    { "C0", "Contact_normal_max_tamper_DS12A" },
-    { "01", "Contact_alert_min_low_DS10A" },    /* _low = low battery */
-    { "81", "Contact_normal_min_low_DS10A" },
-    { "05", "Contact_alert_max_low_DS10A" },
-    { "85", "Contact_normal_max_low_DS10A" },
-    { "06", "Arm_KR10A" },
-    { "86", "Disarm_KR10A" },
-    { "46", "Lights_On_KR10A" },
-    { "C6", "Lights_Off_KR10A" },
-    { "26", "Panic_KR10A" },
-    { "03", "Panic_KR15A" }                   /* Big red button */
-};
-
-var sc9000Modules = Modules.InDomain("HomeAutomation.X10.SC9000");
-// We want to do further processing whenever a module prop changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
-	
-  	if (property.Name == "Receiver.RawData" &amp;&amp; property.Value.StartsWith(RF_SECURITY))
-    {
-      	/*
-       	// 5D 29 B9 B6 04 FB B5 00
-      	*        |  |  |  |  |  |
-        *        |  |  |  |  |  check (0x80 || 0x00)
-        *        |  |  |  |  addr2
-        *        |  |  |  XOR with prev byte=0xff
-        *        |  |  function/key
-        *        |  XOR with prev byte==0x0f
-        *        addr1
-        */
-      	var address1 = property.Value.Substring(6, 2);
-      	//var address2 = property.Value.Substring(18, 2);
-      	//var address3 = property.Value.Substring(21, 2);
-      	//
-      	var address  = address1; // + ":" + address2; // + ":" + address3;
-      	var function = property.Value.Substring(12, 2);
-      	//
-      	var fnvalue = "";
-      	if (security_events.ContainsKey(function))
-        {
-          	fnvalue = security_events[function];
-        }
-      
-      	var binaddress = Convert
-                          .ToString(int.Parse(address, System.Globalization.NumberStyles.HexNumber), 2)
-                          .PadLeft(8, '0')
-                          .Substring(4, 3)
-          				  .ToCharArray();
-      	Array.Reverse(binaddress);
-      	var straddress = new string(binaddress);
-//Program.Notify("X10 RF debug", "a=" + straddress.ToString() + " fn=" + function + "\n" + fnvalue);      
-      
-      	address = Convert.ToInt32(straddress, 2).ToString();
-		module = sc9000Modules.WithAddress(address).Get();
-
-      	if (fnvalue.StartsWith("Motion_alert"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
-          	Program.RaiseEvent(module, "Sensor.MotionDetect", "1", "X10 Motion Sensor");
-        }
-      	else if (fnvalue.StartsWith("Motion_normal_min_tamper"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
-          	Program.RaiseEvent(module, "Sensor.Tamper", "1", "X10 Motion Sensor");
-        }
-      	else if (fnvalue.StartsWith("Motion_normal"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/sensor";
-          	Program.RaiseEvent(module, "Sensor.MotionDetect", "0", "X10 Motion Sensor");
-          	Program.RaiseEvent(module, "Sensor.Tamper", "0", "X10 Motion Sensor");
-        }
-      	else if (fnvalue.StartsWith("Contact_alert"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
-          	Program.RaiseEvent(module, "Sensor.DoorWindow", "1", "X10 DoorWindow Sensor");
-        }
-      	else if (fnvalue.StartsWith("Contact_normal_min_tamper"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
-          	Program.RaiseEvent(module, "Sensor.Tamper", "1", "X10 DoorWindow Sensor");
-        }
-      	else if (fnvalue.StartsWith("Contact_normal"))
-        {
-          	module.Parameter("Widget.DisplayModule").Value = "homegenie/generic/doorwindow";
-          	Program.RaiseEvent(module, "Sensor.DoorWindow", "0", "X10 DoorWindow Sensor");
-          	Program.RaiseEvent(module, "Sensor.Tamper", "0", "X10 DoorWindow Sensor");
-        }
-      
-//Program.Notify("Security Module", module.Instance.Address + " " + fnvalue);
-      
-      	switch (property.Value.Substring(0, 5))
-        {
-          	case ".,,,":
-      		break;
-      		case "kikk":
-      		break;
-    	}
-    }
-  
-    return true;
-  
-});
-
-Program.GoBackground();</ScriptSource>
-    <ScriptErrors />
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>122</Address>
-    <Name>SC9000 RF Vitual Modules</Name>
-    <Description>SC9000 Security Console driver</Description>
-    <Group>X10</Group>
-    <Features />
-    <ActivationTime>2014-03-31T23:25:16.9471521Z</ActivationTime>
-    <TriggerTime>2014-04-02T14:04:08.6876241Z</TriggerTime>
-    <Type>CSharp</Type>
-    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
@@ -1961,7 +1811,7 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime>2015-01-01T15:39:58.861219Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:23.98397Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:12.175761Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2317,7 +2167,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-01-03T14:27:09.400073Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:24.987886Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:13.177928Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2417,7 +2267,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime>2015-01-25T15:12:49.922723Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:25.497224Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:13.688969Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2569,7 +2419,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime>2014-12-11T15:39:24.006301Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:25.986713Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:14.178126Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2842,7 +2692,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-05-11T13:22:11.155754Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:26.492679Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:14.688331Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8282,7 +8132,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime>2015-04-20T11:59:03.91712Z</ActivationTime>
-    <TriggerTime>2015-06-14T11:30:27.509109Z</TriggerTime>
+    <TriggerTime>2015-08-26T12:30:15.700098Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8988,7 +8838,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors>Program update is required.</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
     <Name>IR Remote Controller</Name>

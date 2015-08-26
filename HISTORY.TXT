@@ -1,5 +1,13 @@
 ﻿RELEASE HISTORY
 
+26/08/2015 v1.00-beta.493-p4
+    - Fixed HG configuration saving issue (not storing interface options)
+    - ZWaveLib: added caching and persistence of nodes data to zwavenodes.xml file
+    - ZWaveLib Discovery: added querying of nodes capbilities, NIF, Manufacturer Specs, Version during discovery process
+    - Deprecated SC9000 security alarm program
+    - X10 CM-15, W800RF32: added RF security codes decoding and automatic modules creation from X10-RF
+    - Updated MIG to use latest automation libs (ZWaveLib, XTenLib, W800RfLib) and features
+
 13/08/2015 v1.00-beta.493-p3
     - ZWave: added Heal Node / Routing Info functionality
     - Added support for serial ports types ttyAMAx and ttyACMx (RaZberry / ZME_UZB1) - PR #194

@@ -549,22 +549,11 @@ namespace HomeGenie.Service
         {
             modules_RefreshInterface(GetInterface(args.Domain));
         }
-        // called by interfaces, when a device changes
+
         internal void migService_InterfacePropertyChanged(InterfacePropertyChangedAction propertyChangedAction)
         {
             // look for module associated to this event
-            Module module = null;
-            try
-            {
-                module = Modules.Find(delegate(Module o)
-                {
-                    return o.Domain == propertyChangedAction.Domain && o.Address == propertyChangedAction.SourceId;
-                });
-            }
-            catch
-            {
-            }
-            //
+            Module module = Modules.Find(o => o.Domain == propertyChangedAction.Domain && o.Address == propertyChangedAction.SourceId);
             if (module != null && propertyChangedAction.Path != "")
             {
                 // clear RoutingNode property since the event was locally generated
@@ -573,9 +562,7 @@ namespace HomeGenie.Service
                 //    module.RoutingNode = "";
                 //}
                 // we found associated module in HomeGenie.Modules
-
                 SignalModulePropertyChange(migService, module, propertyChangedAction);
-
             }
             else
             {
@@ -592,122 +579,12 @@ namespace HomeGenie.Service
                 );
             }
         }
-        // Check if command was Control.*, update the ModuleParameter. This should happen in a HWInt->HomeGenie pathway
+
         private void migService_ServiceRequestPostProcess(MIGClientRequest request, MIGInterfaceCommand command)
         {
-            // REMARK: No post data is available at this point since it has already beel consumed by ServiceRequestPreProcess
-            switch (command.Domain)
+            if (command.Domain ==  Domains.MigService_Interfaces && command.Command.EndsWith(".Set"))
             {
-            case Domains.HomeAutomation_X10:
-            case Domains.HomeAutomation_ZWave:
-                Module module = null;
-                try
-                {
-                    module = Modules.Find(o => o.Domain == command.Domain && o.Address == command.NodeId);
-                }
-                catch
-                {
-                }
-                //
-                // TODO: this should be placed somewhere else (this is specific code for handling interface responses, none of HG business)
-                if (module != null)
-                {
-                    // wait for ZWaveLib asynchronous response from node and raise the proper "parameter changed" event
-                    if (command.Domain == Domains.HomeAutomation_ZWave)  //  && (context != null && !context.Request.IsLocal)
-                    {
-                        if (command.Command == ZWave.Command.BASIC_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_BASIC);
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.WAKEUP_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.ZWAVENODE_WAKEUPINTERVAL
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.BATTERY_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_BATTERY);
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.MULTIINSTANCE_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + command.GetOption(1)
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.MULTIINSTANCE_GETCOUNT)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module, 
-                                Properties.ZWAVENODE_MULTIINSTANCE + "." + command.GetOption(0).Replace(".", "") + "." + ".Count"
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.ASSOCIATION_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.ZWAVENODE_ASSOCIATIONS + "." + command.GetOption(0)
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.CONFIG_PARAMETERGET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.ZWAVENODE_CONFIGVARIABLES + "." + command.GetOption(0)
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.NODEINFO_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_NODEINFO);
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.CONTROLLER_NODENEIGHBORUPDATE)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(module, Properties.ZWAVENODE_ROUTINGINFO);
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.MANUFACTURERSPECIFIC_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.ZWAVENODE_MANUFACTURERSPECIFIC
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.DOORLOCK_SET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.STATUS_DOORLOCK
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                        else if (command.Command == ZWave.Command.DOORLOCK_GET)
-                        {
-                            command.Response = Utility.WaitModuleParameterChange(
-                                module,
-                                Properties.STATUS_DOORLOCK
-                            );
-                            command.Response = JsonHelper.GetSimpleResponse(command.Response);
-                        }
-                    }
-                }
-                break;
-            case Domains.MigService_Interfaces:
-                if (command.Command.EndsWith(".Set"))
-                {
-                    systemConfiguration.Update();
-                }
-                break;
+                systemConfiguration.Update();
             }
             //
             // Macro Recording
@@ -717,7 +594,7 @@ namespace HomeGenie.Service
                 masterControlProgram.MacroRecorder.AddCommand(command);
             }
         }
-        // execute the requested command (from web service)
+
         private void migService_ServiceRequestPreProcess(MIGClientRequest request, MIGInterfaceCommand migCommand)
         {
             LogBroadcastEvent(
