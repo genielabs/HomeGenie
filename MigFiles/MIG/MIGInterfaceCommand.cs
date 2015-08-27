@@ -81,12 +81,12 @@ namespace MIG
         {
             get
             {
-                var options = "";
+                var optiontext = "";
                 for (var o = 0; o < options.Length; o++)
                 {
-                    options += options[ o ] + "/";
+                    optiontext += options[ o ] + "/";
                 }
-                return options;
+                return optiontext;
             }
         }
 
