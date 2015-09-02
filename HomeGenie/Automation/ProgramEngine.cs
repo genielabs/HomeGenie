@@ -335,14 +335,10 @@ namespace HomeGenie.Automation
             var programModule = homegenie.Modules.Find(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == program.Address.ToString());
             if (programModule != null)
             {
-                var actionEvent = new MIG.InterfacePropertyChangedAction();
-                actionEvent.Domain = programModule.Domain;
-                actionEvent.Path = property;
-                actionEvent.Value = value;
-                actionEvent.SourceId = programModule.Address;
-                actionEvent.SourceType = "Automation Program";
                 Utility.ModuleParameterSet(programModule, property, value);
-                homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
+                homegenie.RaiseEvent(programModule.Domain, programModule.Address, "Automation Program", property, value);
+                //homegenie.MigService.RaiseEvent(actionEvent);
+                //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
         }
 

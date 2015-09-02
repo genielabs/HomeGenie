@@ -601,12 +601,12 @@ namespace HomeGenie.Service
                 var config = (SystemConfiguration)serializer.Deserialize(reader);
                 //
                 bool configChanged = false;
-                foreach (var iface in config.MIGService.Interfaces)
+                foreach (var iface in config.MigService.Interfaces)
                 {
-                    if (homegenie.SystemConfiguration.MIGService.GetInterface(iface.Domain) == null)
+                    if (homegenie.SystemConfiguration.MigService.GetInterface(iface.Domain) == null)
                     {
                         LogMessage("+ Adding MIG Interface: " + iface.Domain);
-                        homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                        homegenie.SystemConfiguration.MigService.Interfaces.Add(iface);
                         if (!configChanged) configChanged = true;
                     }
                 }

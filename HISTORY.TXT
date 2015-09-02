@@ -180,7 +180,7 @@
     - Should fix bug in ZWaveLib Thermostat.SetPointSet (encoding of setpoint value)
     - Added ZWave message queuing for nodes supporting Wake Up command class (battery powered devices - issue #77)
     - Fixed bug in HG.WebApp.Statistics.InitConfiguration that was being called prior that statistics page was open
-    - Fixed bug in MIGInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
+    - Fixed bug in MigInterfaceCommand options parsing, that was affecting Statistics/Parameter.StatsHour when a module domain/address filter was passed
     - Fixed IP Camera widget preview not showing
 
 07/02/2015 1.00 beta rev 476-git6

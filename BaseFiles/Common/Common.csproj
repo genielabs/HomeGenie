@@ -4924,6 +4924,48 @@
     <None Include="html\pages\control\widgets\homegenie\generic\images\switch_off.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\MIG.Controllers.dll">
+      <Link>lib\MIG.Controllers.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\MIG.HomeAutomation.dll">
+      <Link>lib\MIG.HomeAutomation.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\MIG.Media.dll">
+      <Link>lib\MIG.Media.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\MIG.Protocols.dll">
+      <Link>lib\MIG.Protocols.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\SoapBox.FluentDwelling.dll">
+      <Link>lib\SoapBox.FluentDwelling.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\LibUsbDotNet.dll">
+      <Link>lib\LibUsbDotNet.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\SerialPortLib.dll">
+      <Link>lib\SerialPortLib.dll</Link>
+    </None>
+    <None Include="..\..\Externals\g-labs\W800Rf32Lib.dll">
+      <Link>lib\W800Rf32Lib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\XTenLib.dll">
+      <Link>lib\XTenLib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\g-labs\ZWaveLib.dll">
+      <Link>lib\ZWaveLib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />

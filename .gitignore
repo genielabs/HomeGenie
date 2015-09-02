@@ -8,6 +8,7 @@
 
 *.userprefs
 *.suo
+*.pidb
 Thumbs.db
 
 # Nuget packages

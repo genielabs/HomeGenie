@@ -606,7 +606,7 @@ namespace HomeGenie.Service.Logging
                     dbCommand.CommandText = "VACUUM";
                     dbCommand.ExecuteNonQuery();
 
-                    HomeGenieService.LogEvent(
+                    HomeGenieService.LogDebug(
                                        Domains.HomeAutomation_HomeGenie,
                                        "Service.StatisticsLogger",
                                        "Cleaned old values from database.",
@@ -719,7 +719,7 @@ namespace HomeGenie.Service.Logging
                             }
                             catch (Exception ex)
                             {
-                                HomeGenieService.LogEvent(
+                                HomeGenieService.LogError(
                                     Domains.HomeAutomation_HomeGenie,
                                     "Service.StatisticsLogger",
                                     ex.Message,

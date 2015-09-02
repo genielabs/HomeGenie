@@ -447,7 +447,7 @@ namespace HomeGenie.Automation.Scripting
                 var module = selectedModules[0];
                 response = InterfaceControl(
                     module,
-                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
                 );
             }
             return response;
@@ -497,7 +497,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     InterfaceControl(
                         module,
-                        new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
+                        new MigInterfaceCommand(module.Domain + "/" + module.Address + "/" + command + "/" + commandValue)
                     );
                     DelayIteration();
                 }
@@ -515,7 +515,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                 );
                 DelayIteration();
             }
@@ -532,7 +532,7 @@ namespace HomeGenie.Automation.Scripting
             {
                 InterfaceControl(
                     module,
-                    new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
+                    new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                 );
                 DelayIteration();
             }
@@ -554,14 +554,14 @@ namespace HomeGenie.Automation.Scripting
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
+                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.On")
                         );
                     }
                     else
                     {
                         InterfaceControl(
                             module,
-                            new MIGInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
+                            new MigInterfaceCommand(module.Domain + "/" + module.Address + "/Control.Off")
                         );
                     }
                 }
@@ -794,10 +794,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
-        private object InterfaceControl(Module module, MIGInterfaceCommand migCommand)
+        private object InterfaceControl(Module module, MigInterfaceCommand migCommand)
         {
             migCommand.Domain = module.Domain;
-            migCommand.NodeId = module.Address;
+            migCommand.Address = module.Address;
             return homegenie.InterfaceControl(migCommand);
         }
     }

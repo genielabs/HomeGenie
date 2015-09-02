@@ -222,7 +222,7 @@ namespace HomeGenie.Automation.Scheduler
             } 
             catch (Exception ex)
             {
-                masterControlProgram.HomeGenie.LogBroadcastEvent(
+                masterControlProgram.HomeGenie.RaiseEvent(
                     Domains.HomeAutomation_HomeGenie_Scheduler, 
                     cronExpression, 
                     "Scheduler Expression", 

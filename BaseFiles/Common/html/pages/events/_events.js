@@ -40,15 +40,15 @@ HG.WebApp.Events.RemoveListener = function (listener) {
 }
 
 HG.WebApp.Events.Setup = function () {
-    var es = new EventSource('/api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream/');
+    var es = new EventSource('/events');
     es.onmessage = function (e) {
         var event = eval('[' + e.data + ']')[0];
+        event.Value = event.Value.toString();
         //
         if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
             // update event source (the module that is raising this event)
             var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
             if (module != null) {
-                var curprop = HG.WebApp.Utility.GetModulePropertyByName(module, event.Property);
                 HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                 HG.WebApp.Control.RefreshGroupIndicators();
             }

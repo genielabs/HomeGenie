@@ -283,7 +283,7 @@ namespace HomeGenie.Automation.Scripting
                     }
                     catch (Exception ex)
                     {
-                        HomeGenieService.LogEvent(
+                        HomeGenieService.LogError(
                             Domains.HomeAutomation_HomeGenie_Automation,
                             this.GetType().Name,
                             ex.Message,
@@ -421,7 +421,7 @@ namespace HomeGenie.Automation.Scripting
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(
+                    HomeGenieService.LogError(
                         Domains.HomeAutomation_HomeGenie_Automation,
                         this.GetType().Name,
                         ex.Message,
@@ -496,7 +496,7 @@ namespace HomeGenie.Automation.Scripting
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(
+                    HomeGenieService.LogError(
                         Domains.HomeAutomation_HomeGenie_Automation,
                         this.GetType().Name,
                         ex.Message,

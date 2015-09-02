@@ -99,7 +99,7 @@ namespace HomeGenie.Service
 
     public static class JsonHelper
     {
-        public static string GetSimpleResponse(string value)
+        public static string ___delete_GetSimpleResponse(string value)
         {
             dynamic res = new ExpandoObject();
             res.ResponseValue = value;
@@ -507,7 +507,7 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             });
             asyncTask.Start();

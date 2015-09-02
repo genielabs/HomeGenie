@@ -62,8 +62,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         uploadFile.val('');
         var response = uploadFrame[0].contentWindow.document.body;
         if (typeof response != 'undefined' && response != '' && (response.textContent || response.innerText)) {
-            response = eval(response.textContent || response.innerText)[0];
-            HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            try {
+                response = eval(response.textContent || response.innerText)[0];
+                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            } catch (e) { }
         }
     });
 };

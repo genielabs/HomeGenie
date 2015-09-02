@@ -25,10 +25,10 @@ using System.Collections.Generic;
 using System.Threading;
 
 using MIG;
-using MIG.Interfaces.HomeAutomation.Commons;
 
 using HomeGenie;
 using HomeGenie.Data;
+using HomeGenie.Service.Constants;
 
 namespace HomeGenie.Service
 {
@@ -63,7 +63,7 @@ namespace HomeGenie.Service
                 {
                     var module = homegenie.Modules[m];
                     ModuleParameter parameter = null;
-                    parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_VIRTUALMETER_WATTS; });
+                    parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == Properties.VIRTUALMETER_WATTS; });
                     if (parameter == null)
                     {
                         continue;
@@ -75,18 +75,17 @@ namespace HomeGenie.Service
                             double watts = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
                             if (watts > 0)
                             {
-                                parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == ModuleParameters.MODPAR_STATUS_LEVEL; });
+                                parameter = module.Properties.Find(delegate(ModuleParameter mp) { return mp.Name == Properties.STATUS_LEVEL; });
                                 double level = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
                                 double fuzzyness = (new Random().Next(0, 50) - 25) / 100D;
                                 //
-                                homegenie.migService_InterfacePropertyChanged(new InterfacePropertyChangedAction()
-                                {
-                                    Domain = module.Domain,
-                                    SourceId = module.Address,
-                                    SourceType = module.Description,
-                                    Path = ModuleParameters.MODPAR_METER_WATTS,
-                                    Value = level == 0 ? "0.0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                });
+                                homegenie.migService_InterfacePropertyChanged(homegenie, new InterfacePropertyChangedEventArgs(
+                                    module.Domain,
+                                    module.Address,
+                                    module.Description,
+                                    Properties.METER_WATTS,
+                                    level == 0 ? "0.0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
+                                ));
                                 //
                                 Thread.Sleep(10);
                             }

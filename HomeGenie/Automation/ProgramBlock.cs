@@ -88,27 +88,27 @@ namespace HomeGenie.Automation
         // subj: Domain, TargetNode, Property (eg. Domains.HomeAutomation_ZWave, "4", Globals.MODPAR_METER_WATTS ) , Date, Time
         // cond: Equals, GreaterThan, LessThan
         //  val: <value>
-        public ConditionType ConditionType;
-        public List<ProgramCondition> Conditions;
-        public List<ProgramCommand> Commands;
+        public ConditionType ConditionType { get; set; }
+        public List<ProgramCondition> Conditions { get; set; }
+        public List<ProgramCommand> Commands { get; set; }
 
         // c# program public members
-        public string ScriptCondition;
-        public string ScriptSource;
-        public string ScriptErrors;
+        public string ScriptCondition { get; set; }
+        public string ScriptSource { get; set; }
+        public string ScriptErrors { get; set; }
 
         // common public members
-        public string Domain = Domains.HomeAutomation_HomeGenie_Automation;
-        public int Address = 0;
-        public string Name;
-        public string Description;
-        public string Group;
-        public List<ProgramFeature> Features = new List<ProgramFeature>();
+        public string Domain  { get; set; }
+        public int Address  { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Group { get; set; }
+        public List<ProgramFeature> Features  { get; set; }
 
         [XmlIgnore]
-        public bool IsRunning;
+        public bool IsRunning { get; set; }
         [XmlIgnore]
-        public bool LastConditionEvaluationResult;
+        public bool LastConditionEvaluationResult { get; set; }
 
         public string Type
         {
@@ -140,12 +140,16 @@ namespace HomeGenie.Automation
             }
         }
 
-        public DateTime? ActivationTime;
-        public DateTime? TriggerTime;
+        public DateTime? ActivationTime { get; set; }
+        public DateTime? TriggerTime { get; set; }
 
         public ProgramBlock()
         {
             // init stuff
+            Domain = Domains.HomeAutomation_HomeGenie_Automation;
+            Address = 0;
+            Features = new List<ProgramFeature>();
+
             Type = "";
             ScriptCondition = "";
             ScriptSource = "";
@@ -388,7 +392,7 @@ namespace HomeGenie.Automation
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(
+                    HomeGenieService.LogError(
                         Domains.HomeAutomation_HomeGenie_Automation,
                         this.Address.ToString(),
                         ex.Message,
@@ -470,7 +474,7 @@ namespace HomeGenie.Automation
                 break;
             case "arduino":
                 result = new MethodRunResult();
-                homegenie.LogBroadcastEvent(
+                homegenie.RaiseEvent(
                     Domains.HomeAutomation_HomeGenie_Automation,
                     this.Address.ToString(),
                     "Arduino Sketch Upload",
@@ -488,7 +492,7 @@ namespace HomeGenie.Automation
                 {
                     if (!String.IsNullOrWhiteSpace(outputResult[x]))
                     {
-                        homegenie.LogBroadcastEvent(
+                        homegenie.RaiseEvent(
                             Domains.HomeAutomation_HomeGenie_Automation,
                             this.Address.ToString(),
                             "Arduino Sketch",
@@ -499,7 +503,7 @@ namespace HomeGenie.Automation
                     }
                 }
                 //
-                homegenie.LogBroadcastEvent(
+                homegenie.RaiseEvent(
                     Domains.HomeAutomation_HomeGenie_Automation,
                     this.Address.ToString(),
                     "Arduino Sketch",

@@ -59,45 +59,56 @@
     </Settings>
     <SystemName>HAL</SystemName>
     <Location />
-    <ServicePort>80</ServicePort>
+    <ServicePort>8088</ServicePort>
     <UserPassword />
     <GUID></GUID>
     <EnableLogFile>true</EnableLogFile>
   </HomeGenie>
-  <MIGService>
+  <MigService>
+    <Gateways>
+        <Gateway Name="WebServiceGateway" IsEnabled="true">
+            <Options>
+                <Option Name="BaseUrl" Value="/hg/html" />
+                <Option Name="HomePath" Value="html" />
+                <Option Name="Host" Value="*" />
+                <Option Name="Port" Value="8080" />
+                <Option Name="EnableFileCaching" Value="False" />
+            </Options>
+        </Gateway>
+    </Gateways>
     <Interfaces>
-      <Interface Domain="HomeAutomation.ZWave" IsEnabled="false">
+      <Interface Domain="HomeAutomation.ZWave" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.Insteon" IsEnabled="false">
+      <Interface Domain="HomeAutomation.Insteon" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.X10" IsEnabled="false">
+      <Interface Domain="HomeAutomation.X10" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
           <Option Name="HouseCodes" Value="A" />
         </Options>
       </Interface>
-      <Interface Domain="HomeAutomation.W800RF" IsEnabled="false">
+      <Interface Domain="HomeAutomation.W800RF" AssemblyName="MIG.HomeAutomation.dll" IsEnabled="false">
         <Options>
           <Option Name="Port" Value="" />
         </Options>
       </Interface>
-      <Interface Domain="Controllers.LircRemote" IsEnabled="false">
+      <Interface Domain="Controllers.LircRemote" AssemblyName="MIG.Controllers.dll" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="Media.CameraInput" IsEnabled="false">
+      <Interface Domain="Media.CameraInput" AssemblyName="MIG.Media.dll" IsEnabled="false">
         <Options />
       </Interface>
-      <Interface Domain="Protocols.UPnP" IsEnabled="false">
+      <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="false">
         <Options />
       </Interface>
     </Interfaces>
     <EnableWebCache>false</EnableWebCache>
-  </MIGService>
+  </MigService>
 </SystemConfiguration>

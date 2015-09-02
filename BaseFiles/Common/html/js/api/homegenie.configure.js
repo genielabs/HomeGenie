@@ -166,21 +166,12 @@ HG.Configure.Groups.WallpaperDelete = function (wallpaper, callback) {
 //
 HG.Configure.Interfaces = HG.Configure.Interfaces || {};
 HG.Configure.Interfaces.ServiceCall = function (ifacefn, callback) {
+    console.log('HG.Configure.Interfaces.ServiceCall(' + ifacefn + ')');
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.Configure/' + ifacefn + '/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
-            var value = eval(data);
-            if (typeof value == 'undefined') {
-                value = data;
-            }
-            else if (typeof value[0] != 'undefined' && typeof value[0].ResponseValue != 'undefined') {
-                try {
-                    value = value[0].ResponseValue;
-                } catch (e) { value = data; }
-            }
-            callback(value);
+            callback(data);
         }
     });
 };
@@ -196,13 +187,10 @@ HG.Configure.Interfaces.ListConfig = function (callback) {
 
 HG.Configure.MIG = HG.Configure.MIG || {};
 HG.Configure.MIG.InterfaceCommand = function (domain, command, option1, option2, callback) {
+    console.log('HG.Configure.MIG.InterfaceCommand ' + command);
     $.get('/' + HG.WebApp.Data.ServiceKey + '/MIGService.Interfaces/' + domain + '/' + command + '/' + option1 + '/' + option2 + '/' + (new Date().getTime()), function (data) {
-        var res = '';
-        try {
-            res = eval(data)[0];
-            if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
-        } catch (e) { }
-        if (callback) callback(res);
+        console.log(data);
+        if (callback) callback(data);
     });
 };
 //

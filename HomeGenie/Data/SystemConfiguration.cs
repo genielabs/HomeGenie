@@ -29,6 +29,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 using MIG;
 using HomeGenie.Service;
+using MIG.Config;
 
 namespace HomeGenie.Data
 {
@@ -39,7 +40,7 @@ namespace HomeGenie.Data
 
         public HomeGenieConfiguration HomeGenie { get; set; }
 
-        public MIGServiceConfiguration MIGService { get; set; }
+        public MigServiceConfiguration MigService { get; set; }
 
         public SystemConfiguration()
         {
@@ -47,7 +48,7 @@ namespace HomeGenie.Data
             PlatformID platform = os.Platform;
             //
             HomeGenie = new HomeGenieConfiguration();
-            MIGService = new MIGServiceConfiguration();
+            MigService = new MigServiceConfiguration();
             //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
