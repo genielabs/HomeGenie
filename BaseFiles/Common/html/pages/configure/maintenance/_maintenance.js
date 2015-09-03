@@ -12,6 +12,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             var port = $('#http_service_port').val();
             $.mobile.loading('show');
             HG.System.SetHttpPort(port, function (data) {
+                $('#systemsettings_httpport_text').html(port);
                 $.mobile.loading('hide');
             });
         });
@@ -20,6 +21,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
            var host = $('#http_host_header').val();
            $.mobile.loading('show');
            HG.System.SetHostHeader(host, function (data) {
+               $('#systemsettings_hostheader_text').html(host);
                $.mobile.loading('hide');
            });
         });
@@ -146,7 +148,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             HG.System.SetPassword(pass, function (data) {
                 $.mobile.loading('hide');
                 setTimeout(function () {
-                    HG.WebApp.Maintenance.LoadSecuritySettings();
+                    HG.WebApp.Maintenance.LoadHttpSettings();
                 }, 1000);
             });
         });
@@ -154,7 +156,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show');
             HG.System.ClearPassword(function (data) {
                 $.mobile.loading('hide');
-                HG.WebApp.Maintenance.LoadSecuritySettings();
+                HG.WebApp.Maintenance.LoadHttpSettings();
             });
         });
         //
@@ -318,20 +320,13 @@ HG.WebApp.Maintenance.RestoreProgramToggle = function (el) {
 HG.WebApp.Maintenance.LoadSettings = function () {
     $.mobile.loading('show');
     //
-    HG.Configure.System.ServiceCall("HttpService.GetPort", function (data) {
-        $('#http_service_port').val(data);
-        $('#systemsettings_httpport_text').html(data);
-        $.mobile.loading('hide');
-    });
-    HG.Configure.System.ServiceCall("HttpService.GetHostHeader", function (data) {
-       $('#http_host_header').val(data);
-       $('#systemsettings_hostheader_text').html(data);
-       $.mobile.loading('hide');
-    });
-    //
-    HG.WebApp.Maintenance.LoadStatisticsSettings();
-    HG.WebApp.Maintenance.LoadSecuritySettings();
     HG.WebApp.Maintenance.LoadUpdateCheckSettings();
+    //HG.System.LoggingIsEnabled(function (data) {
+    //    $('#configure_system_flip_logging').val(data).slider('refresh');
+    //    $.mobile.loading('hide');
+    //});
+    HG.WebApp.Maintenance.LoadHttpSettings();
+    HG.WebApp.Maintenance.LoadStatisticsSettings();
     //
     $('#configure_system_flip_eventshistory').val(dataStore.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
 };
@@ -363,20 +358,26 @@ HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
     });
 };
 
-HG.WebApp.Maintenance.LoadSecuritySettings = function () {
+HG.WebApp.Maintenance.LoadHttpSettings = function () {
     $.mobile.loading('show');
     HG.System.HasPassword(function (data) {
-        var sfx = (data == '1' ? 'on' : 'off');
+        var sfx = (data.ResponseValue == '1' ? 'on' : 'off');
         $('#securitysettings_password_image').attr('src', 'images/protection-' + sfx + '.png');
         //
-        HG.System.LoggingIsEnabled(function (data) {
-            $('#configure_system_flip_logging').val(data).slider('refresh');
+        HG.System.WebCacheIsEnabled(function (data) {
+            $('#configure_system_flip_httpcache').val(data == 'true' ? '1' : '0').slider('refresh');
             $.mobile.loading('hide');
         });
         //
-        HG.System.WebCacheIsEnabled(function (data) {
-            $('#configure_system_flip_httpcache').val(data).slider('refresh');
+        HG.Configure.System.ServiceCall("HttpService.GetPort", function (data) {
+            $('#http_service_port').val(data);
+            $('#systemsettings_httpport_text').html(data);
             $.mobile.loading('hide');
+        });
+        HG.Configure.System.ServiceCall("HttpService.GetHostHeader", function (data) {
+           $('#http_host_header').val(data);
+           $('#systemsettings_hostheader_text').html(data);
+           $.mobile.loading('hide');
         });
     });
 };

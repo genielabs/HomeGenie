@@ -53,32 +53,8 @@ namespace HomeGenie.Data
             //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
-            // TODO: deprecate all of the following fields
-            HomeGenie.ServiceHost = "+";
-            HomeGenie.ServicePort = 80;
-            HomeGenie.UserLogin = "admin";
-            HomeGenie.UserPassword = ""; // password auth disabled by default
             HomeGenie.EnableLogFile = "false";
         }
-
-        /*
-        public MIGServiceConfiguration.Interface GetInterface(string domain)
-        {
-            MIGServiceConfiguration.Interface res = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return res;
-        }
-
-        public MIGServiceConfiguration.Interface.Option GetInterfaceOption(string domain, string option)
-        {
-            return GetInterfaceOptions(domain).Find(o => o.Name == option);
-        }
-
-        public List<MIGServiceConfiguration.Interface.Option> GetInterfaceOptions(string domain)
-        {
-            MIGServiceConfiguration.Interface mi = MIGService.Interfaces.Find(i => i.Domain == domain);
-            return mi.Options;
-        }
-        */
 
         public bool Update()
         {

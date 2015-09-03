@@ -300,55 +300,6 @@ namespace HomeGenie.Service.Handlers
                     }
                     request.ResponseData = new ResponseText(resultMessage);
                 }
-                else if (migCommand.GetOption(0) == "HttpService.SetWebCacheEnabled")
-                {
-                    if (migCommand.GetOption(1) == "1")
-                    {
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                        homegenie.MigService.IsWebCacheEnabled = true;
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                        homegenie.SystemConfiguration.MIGService.EnableWebCache = "true";
-                    }
-                    else
-                    {
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                        homegenie.MigService.IsWebCacheEnabled = false;
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                        homegenie.SystemConfiguration.MIGService.EnableWebCache = "false";
-                    }
-                    homegenie.SystemConfiguration.Update();
-                    request.ResponseData = new ResponseText("OK");
-                }
-                else if (migCommand.GetOption(0) == "HttpService.GetWebCacheEnabled")
-                {
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                    request.ResponseData = new ResponseText(homegenie.MigService.IsWebCacheEnabled ? "1" : "0");
-                }
-                else if (migCommand.GetOption(0) == "HttpService.GetPort")
-                {
-                    request.ResponseData = new ResponseText(homegenie.SystemConfiguration.HomeGenie.ServicePort.ToString());
-                }
-                else if (migCommand.GetOption(0) == "HttpService.SetPort")
-                {
-                    try
-                    {
-                        homegenie.SystemConfiguration.HomeGenie.ServicePort = int.Parse(migCommand.GetOption(1));
-                        homegenie.SystemConfiguration.Update();
-                    }
-                    catch
-                    {
-                    }
-                }
-                else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
-                {
-                    request.ResponseData = new ResponseText(homegenie.SystemConfiguration.HomeGenie.ServiceHost.ToString());
-                }
-                else if (migCommand.GetOption(0) == "HttpService.SetHostHeader")
-                {
-                    try
-                    {
-                        homegenie.SystemConfiguration.HomeGenie.ServiceHost = migCommand.GetOption(1);
-                        homegenie.SystemConfiguration.Update();
-                    }
-                    catch
-                    {
-                    }
-                }
                 else if (migCommand.GetOption(0) == "Statistics.GetStatisticsDatabaseMaximumSize")
                 {
                     request.ResponseData = new ResponseText(homegenie.SystemConfiguration.HomeGenie.Statistics.MaxDatabaseSizeMBytes.ToString());
@@ -385,6 +336,7 @@ namespace HomeGenie.Service.Handlers
                     (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment;filename=homegenie_log_" + migCommand.GetOption(1) + ".csv");
                     request.ResponseData = csvlog;
                 }
+                // TODO: !IMPORTANT! DISABLED FOR NEW MIG                        
                 /*
                 else if (migCommand.GetOption(0) == "SystemLogging.Enable")
                 {
@@ -407,23 +359,61 @@ namespace HomeGenie.Service.Handlers
                 {
                     // password only for now, with fixed user login 'admin'
                     string pass = migCommand.GetOption(1) == "" ? "" : MIG.Utility.Encryption.SHA1.GenerateHashString(migCommand.GetOption(1));
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                    homegenie.MigService.SetWebServicePassword(pass);
-                    homegenie.SystemConfiguration.HomeGenie.UserPassword = pass;
+                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", pass);
                     // regenerate encrypted files
                     homegenie.SystemConfiguration.Update();
                     homegenie.UpdateModulesDatabase();
                 }
                 else if (migCommand.GetOption(0) == "Security.ClearPassword")
                 {
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                    homegenie.MigService.SetWebServicePassword("");
-                    homegenie.SystemConfiguration.HomeGenie.UserPassword = "";
+                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Password", "");
                     // regenerate encrypted files
                     homegenie.SystemConfiguration.Update();
                     homegenie.UpdateModulesDatabase();
                 }
                 else if (migCommand.GetOption(0) == "Security.HasPassword")
                 {
-                    request.ResponseData = new ResponseText((homegenie.SystemConfiguration.HomeGenie.UserPassword != "" ? "1" : "0"));
+                    var webGateway = homegenie.MigService.GetGateway("WebServiceGateway");
+                    var password = webGateway.GetOption("Password");
+                    request.ResponseData = new ResponseText((password == null || String.IsNullOrEmpty(password.Value) ? "0" : "1"));
+                }
+                else if (migCommand.GetOption(0) == "HttpService.SetWebCacheEnabled")
+                {
+                    if (migCommand.GetOption(1) == "1")
+                    {
+                        homegenie.MigService.GetGateway("WebServiceGateway").SetOption("EnableFileCaching", "true");
+                    }
+                    else
+                    {
+                        homegenie.MigService.GetGateway("WebServiceGateway").SetOption("EnableFileCaching", "false");
+                    }
+                    homegenie.SystemConfiguration.Update();
+                    request.ResponseData = new ResponseText("OK");
+                }
+                else if (migCommand.GetOption(0) == "HttpService.GetWebCacheEnabled")
+                {
+                    var fileCaching = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("EnableFileCaching");
+                    request.ResponseData = new ResponseText(fileCaching != null ? fileCaching.Value : "false");  
+                }
+                else if (migCommand.GetOption(0) == "HttpService.GetPort")
+                {
+                    var port = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("Port");
+                    request.ResponseData = new ResponseText(port != null ? port.Value : "8080");
+                }
+                else if (migCommand.GetOption(0) == "HttpService.SetPort")
+                {
+                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Port", migCommand.GetOption(1));
+                    homegenie.SystemConfiguration.Update();
+                }
+                else if (migCommand.GetOption(0) == "HttpService.GetHostHeader")
+                {
+                    var host = homegenie.MigService.GetGateway("WebServiceGateway").GetOption("Host");
+                    request.ResponseData = new ResponseText(host != null ? host.Value : "*");
+                }
+                else if (migCommand.GetOption(0) == "HttpService.SetHostHeader")
+                {
+                    homegenie.MigService.GetGateway("WebServiceGateway").SetOption("Host", migCommand.GetOption(1));
+                    homegenie.SystemConfiguration.Update();
                 }
                 else if (migCommand.GetOption(0) == "System.ConfigurationRestore")
                 {

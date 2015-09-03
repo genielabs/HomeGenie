@@ -34,21 +34,25 @@
                     <a id="maintenance_configuration_restartbutton" class="ui-btn ui-corner-all" data-locale-id="configure_system_restart" href="#maintenance_configuration_servicerestartpopup" data-rel="popup" data-transition="slidedown">Restart</a>
                 </div>
             </div>
-            <hr style="border:1px dotted black" />
-            <div class="ui-grid-a">
-                <div class="ui-block-a">
-                    <label data-locale-id="configure_system_loganddebug">Log file</label>
-                    <p data-locale-id="configure_system_logdownload">Download</p>
-                    <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
-                        <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
+
+            <!--- logging options disabled in HG v1.1 due to new logger -->
+            <div style="display:none">
+                <hr style="border:1px dotted black" />
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label data-locale-id="configure_system_loganddebug">Log file</label>
+                        <p data-locale-id="configure_system_logdownload">Download</p>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a id="btn_configuresystem_downloadtday" class="ui-btn" data-locale-id="configure_system_logdownloadtoday">Today</a>
+                            <a id="btn_configuresystem_downloadyday" class="ui-btn" data-locale-id="configure_system_logdownloadyesterday">Yesterday</a>
+                        </div>
                     </div>
-                </div>
-                <div class="ui-block-b" style="float:right;width:150px" align="right">
-                    <select id="configure_system_flip_logging" data-role="slider">
-                        <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
-                        <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
-                    </select>
+                    <div class="ui-block-b" style="float:right;width:150px" align="right">
+                        <select id="configure_system_flip_logging" data-role="slider">
+                            <option value="0" data-locale-id="configure_interfaces_optdisable">Disable</option>
+                            <option value="1" data-locale-id="configure_interfaces_optenable">Enable</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -63,7 +67,7 @@
                 <div class="ui-block-a">
                     <div>
                         <label data-locale-id="configure_security_passwordprotectedaccess">Password protected access</label>
-                        <img id="securitysettings_password_image" src="images/protection-on.png" width="64" height="64" />
+                        <img id="securitysettings_password_image" src="images/protection-on.png" width="48" height="48" />
                     </div>
                 </div>
                 <div class="ui-block-b" style="float:right;width:150px">

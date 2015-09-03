@@ -44,10 +44,9 @@ HG.System.HasPassword = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/' + (new Date().getTime()),
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
-            var haspass = eval(data)[0];
-            if (callback != null) callback(haspass.ResponseValue);
+            //var haspass = eval(data)[0];
+            if (callback != null) callback(data.ResponseValue);
         }
     });
 };
@@ -104,10 +103,9 @@ HG.System.WebCacheIsEnabled = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.GetWebCacheEnabled/' + (new Date().getTime()),
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
-            var haslog = eval(data)[0];
-            if (callback != null) callback(haslog.ResponseValue);
+            if (callback != null)
+                callback(data.ResponseValue);
         }
     });
 };
