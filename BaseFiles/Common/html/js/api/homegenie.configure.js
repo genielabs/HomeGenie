@@ -23,17 +23,17 @@ HG.Configure.LoadData = function (callback) {
 HG.Configure.Groups = HG.Configure.Groups || {};
 HG.Configure.Groups.ModulesList = function (groupname, callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.ModulesList/' + groupname + '/' + (new Date().getTime()), function (data) {
-        callback(eval(arguments[2].responseText));
+        callback(data);
     });
 };
 
 HG.Configure.Groups.List = function (context, callback) {
     $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Groups.List/' + context + '/' + (new Date().getTime()), function (data) {
         if (context == 'Automation') {
-            HG.WebApp.Data.AutomationGroups = eval(arguments[2].responseText);
+            HG.WebApp.Data.AutomationGroups = data;
         }
         else {
-            HG.WebApp.Data.Groups = eval(arguments[2].responseText);
+            HG.WebApp.Data.Groups = data;
         }
         callback();
     });
@@ -284,10 +284,8 @@ HG.Configure.Widgets.List = function(callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Widgets.List/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
-            var list = eval(data);
-            callback(list);
+            callback(data);
         }
     });
 };
@@ -299,12 +297,9 @@ HG.Configure.Widgets.Save = function(widgetPath, fileType, content, callback) {
         processData: false,
         success: function (data) {
             if (callback) {
-                var res = data;
-                try {
-                    res = eval(data)[0];
-                } catch (e) { }
-                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
-                callback(res);
+                if (typeof data.ResponseValue != 'undefined')
+                    data.ResponseValue = decodeURIComponent(data.ResponseValue);
+                callback(data);
             }
         },
         error: function (a, b, c) {
@@ -319,12 +314,9 @@ HG.Configure.Widgets.Add = function(widgetPath, callback) {
         dataType: 'text',
         success: function (data) {
             if (callback) {
-                var res = data;
-                try {
-                    res = eval(data)[0];
-                } catch (e) { }
-                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
-                callback(res);
+                if (typeof data.ResponseValue != 'undefined')
+                    data.ResponseValue = decodeURIComponent(data.ResponseValue);
+                callback(data);
             }
         },
         error: function (a, b, c) {
@@ -339,12 +331,9 @@ HG.Configure.Widgets.Delete = function(widgetPath, callback) {
         dataType: 'text',
         success: function (data) {
             if (callback) {
-                var res = data;
-                try {
-                    res = eval(data)[0];
-                } catch (e) { }
-                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
-                callback(res);
+                if (typeof data.ResponseValue != 'undefined')
+                    data.ResponseValue = decodeURIComponent(data.ResponseValue);
+                callback(data);
             }
         },
         error: function (a, b, c) {
@@ -363,12 +352,9 @@ HG.Configure.Widgets.Parse = function(content, callback) {
         processData: false,
         success: function (data) {
             if (callback) {
-                var res = data;
-                try {
-                    res = eval(data)[0];
-                } catch (e) { }
-                if (res.ResponseValue) res.ResponseValue = decodeURIComponent(res.ResponseValue);
-                callback(res);
+                if (typeof data.ResponseValue != 'undefined')
+                    data.ResponseValue = decodeURIComponent(data.ResponseValue);
+                callback(data);
             }
         },
         error: function (a, b, c) {

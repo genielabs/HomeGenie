@@ -57,7 +57,7 @@ namespace HomeGenie.Service.Handlers
 
             case "Global.TimeRange":
                 var totalRange = homegenie.Statistics.GetDateRange();
-                request.ResponseData = "[{ StartTime : '" + DateToJavascript(totalRange.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "', EndTime : '" + DateToJavascript(totalRange.TimeEnd).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "' }]";
+                request.ResponseData = "{ \"StartTime\" : \"" + DateToJavascript(totalRange.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\", \"EndTime\" : \"" + DateToJavascript(totalRange.TimeEnd).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\" }";
                 break;
 
             case "Database.Reset":
@@ -65,7 +65,7 @@ namespace HomeGenie.Service.Handlers
                 break;
             case "Configuration.Get":
                 // Just one at the moment.
-                request.ResponseData = "[{ StatisticsUIRefreshSeconds : '" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUIRefreshSeconds + "' }]";
+                request.ResponseData = "{ \"StatisticsUIRefreshSeconds\" : \"" + homegenie.SystemConfiguration.HomeGenie.Statistics.StatisticsUIRefreshSeconds + "\" }";
                 break;
             case "Parameter.List":
                 domainSeparator = migCommand.GetOption(0).LastIndexOf(":");

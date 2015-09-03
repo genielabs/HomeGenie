@@ -95,16 +95,6 @@ namespace HomeGenie.Service
         }
     }
 
-    public static class JsonHelper
-    {
-        public static string ___delete_GetSimpleResponse(string value)
-        {
-            dynamic res = new ExpandoObject();
-            res.ResponseValue = value;
-            return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(res) + "]";
-        }
-    }
-
     public static class Utility
     {
 

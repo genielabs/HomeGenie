@@ -91,7 +91,7 @@ namespace HomeGenie.Service.Handlers
                     }
                     break;
                 case "Macro.GetDelay":
-                    request.ResponseData = "[{ DelayType : '" + homegenie.ProgramEngine.MacroRecorder.DelayType + "', DelayOptions : '" + homegenie.ProgramEngine.MacroRecorder.DelaySeconds + "' }]";
+                    request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelaySeconds + "\" }";
                     break;
                 }
             }

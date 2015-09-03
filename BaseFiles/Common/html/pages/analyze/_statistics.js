@@ -221,8 +221,7 @@ HG.WebApp.Statistics.InitConfiguration = function () {
     // cost per unit default value
     $('#page_analyze_costperunit').val(dataStore.get('UI.Statistics.CostPerUnit')?dataStore.get('UI.Statistics.CostPerUnit'):0.00022);
     // read stats settings
-    HG.Statistics.ServiceCall('Configuration.Get', '', '', function (configs) {
-        var setting = eval(configs)[0];
+    HG.Statistics.ServiceCall('Configuration.Get', '', '', function (setting) {
         var sec = (setting.StatisticsUIRefreshSeconds * 1);
         HG.WebApp.Statistics._RefreshInterval = sec * 1000; //2 * 60000;
         HG.WebApp.Statistics.SetAutoRefresh(true);
@@ -294,8 +293,7 @@ HG.WebApp.Statistics.Refresh = function () {
     {
         if( HG.WebApp.Statistics._SelItemObject == false )
    	       $("#page_delete_stat").hide();
-        HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (res) {
-            var trange = eval(res)[0];
+        HG.Statistics.ServiceCall('Global.TimeRange', '', '', function (trange) {
             var start = new Date(parseFloat(trange.StartTime));
             var end = new Date(parseFloat(trange.EndTime));
             var today = new Date();

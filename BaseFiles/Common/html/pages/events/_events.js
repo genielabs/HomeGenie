@@ -42,7 +42,7 @@ HG.WebApp.Events.RemoveListener = function (listener) {
 HG.WebApp.Events.Setup = function () {
     var es = new EventSource('/events');
     es.onmessage = function (e) {
-        var event = eval('[' + e.data + ']')[0];
+        var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);
         event.Value = event.Value.toString();
         //
         if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {

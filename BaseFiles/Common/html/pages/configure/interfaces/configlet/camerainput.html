@@ -86,7 +86,8 @@ HG.WebApp.SystemSettings.Interfaces['Media.CameraInput'] = {
     LoadConfiguration: function() {
         var _this = this;
         HG.Configure.MIG.InterfaceCommand(this.Id, 'Options.Get', 'Configuration', '', function (data) {
-            data = data.ResponseValue.split(',');
+            if (typeof data.ResponseValue != 'undefined' && data.ResponseValue.indexOf(',') > 0)
+                data = data.ResponseValue.split(',');
             if (data.length > 3) {
                 _this.CameraPort.val(data[0]);
                 _this.CameraPort.selectmenu('refresh', true);
