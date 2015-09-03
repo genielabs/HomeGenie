@@ -268,7 +268,7 @@ namespace HomeGenie.Automation
                 }
                 catch (Exception ee)
                 {
-                    Console.WriteLine(ee.Message);
+                    HomeGenieService.LogError(ee);
                 }
                 // move/copy new assembly files
                 // rename temp file to production file
@@ -296,7 +296,7 @@ namespace HomeGenie.Automation
                 }
                 catch (Exception ee)
                 {
-                    Console.WriteLine(ee.Message);
+                    HomeGenieService.LogError(ee);
                 }
                 appAssembly = value;
             }
@@ -659,7 +659,7 @@ namespace HomeGenie.Automation
             //
             foreach (string apiCall in registeredApiCalls)
             {
-                homegenie.UnRegisterDynamicApi(apiCall);
+                homegenie.ProgramEngine.UnRegisterDynamicApi(apiCall);
             }
             registeredApiCalls.Clear();
             //

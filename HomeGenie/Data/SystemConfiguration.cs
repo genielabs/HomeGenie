@@ -28,13 +28,14 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using MIG;
-using HomeGenie.Service;
 using MIG.Config;
+
+using HomeGenie.Service;
 
 namespace HomeGenie.Data
 {
     [Serializable()]
-    public class SystemConfiguration : ICloneable
+    public class SystemConfiguration
     {
         public event Action<bool> OnUpdate;
 
@@ -52,25 +53,12 @@ namespace HomeGenie.Data
             //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
+            // TODO: deprecate all of the following fields
             HomeGenie.ServiceHost = "+";
             HomeGenie.ServicePort = 80;
             HomeGenie.UserLogin = "admin";
             HomeGenie.UserPassword = ""; // password auth disabled by default
             HomeGenie.EnableLogFile = "false";
-        }
-
-        public object Clone()
-        {
-            var stream = new MemoryStream();
-            var formatter = new BinaryFormatter();
-
-            formatter.Serialize(stream, this);
-
-            stream.Position = 0;
-            object obj = formatter.Deserialize(stream);
-            stream.Close();
-
-            return obj;
         }
 
         /*
@@ -97,7 +85,7 @@ namespace HomeGenie.Data
             bool success = false;
             try
             {
-                var syscopy = (SystemConfiguration)this.Clone();
+                var syscopy = this.DeepClone();
                 foreach (ModuleParameter p in syscopy.HomeGenie.Settings)
                 {
                     try
@@ -124,8 +112,9 @@ namespace HomeGenie.Data
                 wri.Close();
                 success = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MIG.MigService.Log.Error(e);
             }
             //
             if (OnUpdate != null)

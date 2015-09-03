@@ -393,7 +393,6 @@ namespace HomeGenie.Service
 
                     if (!doNotCopy)
                     {
-                        Console.WriteLine("+ " + destinationFile);
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");

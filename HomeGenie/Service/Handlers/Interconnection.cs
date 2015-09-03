@@ -31,6 +31,8 @@ using System.Text;
 using System.Threading;
 using System.Net;
 
+using HomeGenie.Automation;
+
 namespace HomeGenie.Service.Handlers
 {
     public class Interconnection
@@ -79,12 +81,12 @@ namespace HomeGenie.Service.Handlers
                     moduleEvent.Parameter.Name,
                     moduleEvent.Parameter.Value
                 );
-                HomeGenieService.RoutedEvent eventData = new HomeGenieService.RoutedEvent() {
+                var eventData = new ProgramEngine.RoutedEvent() {
                     Sender = requestOrigin,
                     Module = module,
                     Parameter = moduleEvent.Parameter
                 };
-                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.RouteParameterChangedEvent), eventData);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.ProgramEngine.RoutePropertyChangedEvent), eventData);
                 break;
             }
         }

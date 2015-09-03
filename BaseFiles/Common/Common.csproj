@@ -39,12 +39,6 @@
     <None Include="homegenie_factory_config.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="lircconfig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lircremotes.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="modules.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -4786,103 +4780,63 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll">
-      <Link>lib\CronExpressionDescriptor.dll</Link>
+      <Link>lib\shared\CronExpressionDescriptor.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll.mdb">
-      <Link>lib\CronExpressionDescriptor.dll.mdb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
-      <Link>lib\de\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\es\CronExpressionDescriptor.resources.dll">
-      <Link>lib\es\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\fr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\fr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\it\CronExpressionDescriptor.resources.dll">
-      <Link>lib\it\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\nl\CronExpressionDescriptor.resources.dll">
-      <Link>lib\nl\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\no\CronExpressionDescriptor.resources.dll">
-      <Link>lib\no\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\ru\CronExpressionDescriptor.resources.dll">
-      <Link>lib\ru\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\tr\CronExpressionDescriptor.resources.dll">
-      <Link>lib\tr\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\uk\CronExpressionDescriptor.resources.dll">
-      <Link>lib\uk\CronExpressionDescriptor.resources.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\Externals\CronExpressionDescriptor\zh-CHS\CronExpressionDescriptor.resources.dll">
-      <Link>lib\zh-CHS\CronExpressionDescriptor.resources.dll</Link>
+      <Link>lib\shared\CronExpressionDescriptor.dll.mdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\ExpressionEvaluation\ExpressionEvaluation.dll">
-      <Link>lib\ExpressionEvaluation.dll</Link>
+      <Link>lib\shared\ExpressionEvaluation.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\knx.net\KNXLib.dll">
-      <Link>lib\KNXLib.dll</Link>
+      <Link>lib\shared\KNXLib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\knx.net\KNXLib.dll.mdb">
-      <Link>lib\KNXLib.dll.mdb</Link>
+      <Link>lib\shared\KNXLib.dll.mdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\NCrontab\NCrontab.dll">
-      <Link>lib\NCrontab.dll</Link>
+      <Link>lib\shared\NCrontab.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\NCrontab\NCrontab.pdb">
-      <Link>lib\NCrontab.pdb</Link>
+      <Link>lib\shared\NCrontab.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\Nmqtt.dll">
-      <Link>lib\Nmqtt.dll</Link>
+      <Link>lib\shared\Nmqtt.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\Nmqtt.dll.mdb">
-      <Link>lib\Nmqtt.dll.mdb</Link>
+      <Link>lib\shared\Nmqtt.dll.mdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\System.Reactive.Core.dll">
-      <Link>lib\System.Reactive.Core.dll</Link>
+      <Link>lib\shared\System.Reactive.Core.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\System.Reactive.Interfaces.dll">
-      <Link>lib\System.Reactive.Interfaces.dll</Link>
+      <Link>lib\shared\System.Reactive.Interfaces.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\System.Reactive.Linq.dll">
-      <Link>lib\System.Reactive.Linq.dll</Link>
+      <Link>lib\shared\System.Reactive.Linq.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\nmqtt\System.Reactive.PlatformServices.dll">
-      <Link>lib\System.Reactive.PlatformServices.dll</Link>
+      <Link>lib\shared\System.Reactive.PlatformServices.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\upnp\UPnP.dll">
-      <Link>lib\UPnP.dll</Link>
+      <Link>lib\shared\UPnP.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\upnp\UPnP.dll.mdb">
-      <Link>lib\UPnP.dll.mdb</Link>
+      <Link>lib\shared\UPnP.dll.mdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="html\images\wallpapers\wallpaper_005.jpg">
@@ -4928,42 +4882,83 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\MIG.Controllers.dll">
-      <Link>lib\MIG.Controllers.dll</Link>
+      <Link>lib\mig\MIG.Controllers.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\MIG.HomeAutomation.dll">
-      <Link>lib\MIG.HomeAutomation.dll</Link>
+      <Link>lib\mig\MIG.HomeAutomation.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\MIG.Media.dll">
-      <Link>lib\MIG.Media.dll</Link>
+      <Link>lib\mig\MIG.Media.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\MIG.Protocols.dll">
-      <Link>lib\MIG.Protocols.dll</Link>
+      <Link>lib\mig\MIG.Protocols.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\SoapBox.FluentDwelling.dll">
-      <Link>lib\SoapBox.FluentDwelling.dll</Link>
+      <Link>lib\shared\SoapBox.FluentDwelling.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\LibUsbDotNet.dll">
-      <Link>lib\LibUsbDotNet.dll</Link>
+      <Link>lib\mig\LibUsbDotNet.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\SerialPortLib.dll">
-      <Link>lib\SerialPortLib.dll</Link>
+      <Link>lib\shared\SerialPortLib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\W800Rf32Lib.dll">
-      <Link>lib\W800Rf32Lib.dll</Link>
+      <Link>lib\mig\W800Rf32Lib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\XTenLib.dll">
-      <Link>lib\XTenLib.dll</Link>
+      <Link>lib\mig\XTenLib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\..\Externals\g-labs\ZWaveLib.dll">
-      <Link>lib\ZWaveLib.dll</Link>
+      <Link>lib\mig\ZWaveLib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\de\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\de\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\es\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\es\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\fr\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\fr\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\it\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\it\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\nl\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\nl\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\no\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\no\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\ru\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\ru\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\tr\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\tr\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\uk\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\uk\CronExpressionDescriptor.resources.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Externals\CronExpressionDescriptor\zh-CHS\CronExpressionDescriptor.resources.dll">
+      <Link>lib\shared\zh-CHS\CronExpressionDescriptor.resources.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -4987,5 +4982,18 @@
     <Folder Include="html\images\icons\" />
     <Folder Include="html\images\wallpapers\" />
     <Folder Include="html\pages\control\widgets\DaniMail\fibaro\locales\" />
+    <Folder Include="lib\ape\" />
+    <Folder Include="lib\mig\" />
+    <Folder Include="lib\shared\" />
+    <Folder Include="lib\shared\de\" />
+    <Folder Include="lib\shared\es\" />
+    <Folder Include="lib\shared\fr\" />
+    <Folder Include="lib\shared\it\" />
+    <Folder Include="lib\shared\nl\" />
+    <Folder Include="lib\shared\no\" />
+    <Folder Include="lib\shared\ru\" />
+    <Folder Include="lib\shared\tr\" />
+    <Folder Include="lib\shared\uk\" />
+    <Folder Include="lib\shared\zh-CHS\" />
   </ItemGroup>
 </Project>

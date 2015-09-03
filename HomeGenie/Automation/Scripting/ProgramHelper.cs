@@ -577,8 +577,10 @@ namespace HomeGenie.Automation.Scripting
             try
             {
                 Utility.Say(sentence, locale, goAsync);
-            } catch (Exception e) {
-                Console.WriteLine("Program.Say ERROR: {0}", e.Message);
+            }
+            catch (Exception e) 
+            {
+                HomeGenieService.LogError(e);
             }
             return this;
         }
@@ -614,8 +616,10 @@ namespace HomeGenie.Automation.Scripting
                 stream.Close();
 
                 Utility.Play(file);
-            } catch (Exception e) {
-                Console.WriteLine("Program.Play ERROR: {0}", e.Message);
+            }
+            catch (Exception e) 
+            {
+                HomeGenieService.LogError(e);
             }
             return this;
         }

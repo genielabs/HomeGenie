@@ -42,8 +42,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.W800RF'] = {
             });
         });
         // populate port list
-        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (data) {
-            var ports = eval(decodeURIComponent(data));
+        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
             portSelect.empty().append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder') + '</option>');
             for (var p = 0; p < ports.length; p++) {
                 portSelect.append('<option value="' + ports[p] + '">' + ports[p] + '</option>');

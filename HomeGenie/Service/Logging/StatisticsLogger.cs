@@ -678,7 +678,7 @@ namespace HomeGenie.Service.Logging
         private void logInterval_Elapsed(object sender, ElapsedEventArgs eventArgs)
         {
             var end = DateTime.UtcNow;
-            var modules = (TsList<Module>)homegenie.Modules; //.Clone();
+            var modules = (TsList<Module>)homegenie.Modules; //.DeepClone();
             for (int m = 0; m < modules.Count; m++)
             {
                 var module = modules[m];

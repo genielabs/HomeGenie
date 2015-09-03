@@ -78,7 +78,8 @@ HG.WebApp.SystemSettings.Interfaces['Controllers.LircRemote'] = {
                     url: '/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/0/Remotes.Search/' + value + '/',
                     type: 'GET',
                     success: function (response) {
-                        response = eval(response);
+                        //console.log(response);
+                        //response = eval(response);
                         $.each(response, function (i, val) {
                             html += '<li data-context-value="' + val.Manufacturer + '/' + val.Model + '" data-icon="plus"><a href="#">' + val.Manufacturer + ' ' + val.Model + '</a></li>';
                         });

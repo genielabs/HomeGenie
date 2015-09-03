@@ -307,7 +307,7 @@
       <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj">
+    <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj">
       <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
       <Name>NetClientLib</Name>
     </ProjectReference>

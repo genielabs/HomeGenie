@@ -46,6 +46,14 @@ namespace HomeGenie.Automation
         private HomeGenieService homegenie = null;
         private SchedulerService scheduler = null;
         private MacroRecorder macroRecorder = null;
+
+        public class RoutedEvent
+        {
+            public object Sender;
+            public Module Module;
+            public ModuleParameter Parameter;
+        }
+
         //private object lockObject = new object();
         private bool isEngineRunning = true;
         private bool isEngineEnabled = false;
@@ -341,6 +349,151 @@ namespace HomeGenie.Automation
                 //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
         }
+
+        #region Event Propagation
+
+
+        #region Module/Interface Events handling and propagation
+
+        public void SignalPropertyChange(object sender, Module module, MigEvent eventData)
+        {
+            // ROUTE THE EVENT TO AUTOMATION PROGRAMS, BEFORE COMMITTING THE CHANGE
+            var tempParam = new ModuleParameter() {
+                Name = eventData.Property,
+                Value = eventData.Value.ToString()
+            };
+            var routedEvent = new RoutedEvent() {
+                Sender = sender,
+                Module = module,
+                Parameter = tempParam
+            };
+
+            // Route event to Programs->ModuleIsChangingHandler
+            RoutePropertyBeforeChangeEvent(routedEvent);
+
+            // If the value has been manipulated by an automation program
+            // so the event has to be updated as well
+            if (tempParam.Value != eventData.Value.ToString())
+            {
+                MigService.Log.Debug("Parameter value manipulated by automation program (Name={0}, OldValue={1}, NewValue={2})", tempParam.Name, eventData.Value.ToString(), tempParam.Value);
+                // Update the event value to the new value
+                eventData.Value = tempParam.Value;
+            }
+
+            // Route event to Programs->ModuleIsChangingHandler
+            ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
+        }
+
+        public void RoutePropertyBeforeChangeEvent(object eventData)
+        {
+            var moduleEvent = (RoutedEvent)eventData;
+            for (int p = 0; p < Programs.Count; p++)
+            {
+                var program = Programs[p];
+                if (!program.IsEnabled) continue;
+                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                {
+                    program.RoutedEventAck.Set();
+                    if (program.ModuleIsChangingHandler != null)
+                    {
+                        if (!program.ModuleIsChangingHandler(
+                            new Automation.Scripting.ModuleHelper(
+                                homegenie,
+                                moduleEvent.Module
+                            ),
+                            moduleEvent.Parameter
+                        ))
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void RoutePropertyChangedEvent(object eventData)
+        {
+            var moduleEvent = (RoutedEvent)eventData;
+            for (int p = 0; p < Programs.Count; p++)
+            {
+                var program = Programs[p];
+                if (!program.IsEnabled) continue;
+                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                {
+                    try
+                    {
+                        if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
+                        {
+                            if (!program.ModuleChangedHandler(
+                                new Automation.Scripting.ModuleHelper(
+                                    homegenie,
+                                    moduleEvent.Module
+                                ),
+                                moduleEvent.Parameter
+                            ))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        HomeGenieService.LogError(
+                            program.Domain,
+                            program.Address.ToString(),
+                            ex.Message,
+                            "Exception.StackTrace",
+                            ex.StackTrace
+                        );
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Automation Programs Dynamic API 
+
+        //TODO: should the following 3 methods moved to ProgramEngine?
+        public void RegisterDynamicApi(string apiCall, Func<object, object> handler)
+        {
+            ProgramDynamiApi.Register(apiCall, handler);
+        }
+
+        public void UnRegisterDynamicApi(string apiCall)
+        {
+            ProgramDynamiApi.UnRegister(apiCall);
+        }
+
+        public object TryDynamicApi(MigInterfaceCommand command)
+        {
+            object response = "";
+            // Dynamic Interface API 
+            var registeredApi = command.Domain + "/" + command.Address + "/" + command.Command;
+            var handler = ProgramDynamiApi.Find(registeredApi);
+            if (handler != null)
+            {
+                // explicit command API handlers registered in the form <domain>/<address>/<command>
+                // receives only the remaining part of the request after the <command>
+                var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
+                response = handler(args);
+            }
+            else
+            {
+                handler = ProgramDynamiApi.FindMatching(command.OriginalRequest.Trim('/'));
+                if (handler != null)
+                {
+                    // other command API handlers
+                    // receives the full request string
+                    response = handler(command.OriginalRequest.Trim('/'));
+                }
+            }
+            return response;
+        }
+
+        #endregion
+
+        #endregion
 
         private List<ProgramError> CompileIronScript(ProgramBlock program)
         {

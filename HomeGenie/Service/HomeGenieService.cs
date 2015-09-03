@@ -73,13 +73,6 @@ namespace HomeGenie.Service
         // public events
         //public event Action<LogEntry> LogEventAction;
 
-        public class RoutedEvent
-        {
-            public object Sender;
-            public Module Module;
-            public ModuleParameter Parameter;
-        }
-
         #endregion
 
         #region Web Service Handlers declaration
@@ -102,8 +95,6 @@ namespace HomeGenie.Service
             InitializeSystem();
             LoadConfiguration();
 
-            #endregion MIG Service initialization and startup
-
             if (migService.StartService())
             {
                 RaiseEvent(
@@ -125,6 +116,8 @@ namespace HomeGenie.Service
                 );
                 Program.Quit(false);
             }
+
+            #endregion
 
             updateChecker = new UpdateChecker(this);
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
@@ -157,24 +150,23 @@ namespace HomeGenie.Service
                     message
                 );
             };
-            //
+
             statisticsLogger = new StatisticsLogger(this);
             statisticsLogger.Start();
-            //
+
             // Setup local UPnP device
             SetupUpnp();
-            //
+
             // it will check every 24 hours
             updateChecker.Start();
-            //
+
             Start();
         }
 
         public void Start()
         {
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STARTED");
-            //
-            // Signal "SystemStarted" event to listeners
+            // Signal "SystemStarted" event to automation programs
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
             {
                 try
@@ -190,9 +182,9 @@ namespace HomeGenie.Service
                         }
                     }
                 }
-                catch 
+                catch (Exception e)
                 {
-                    // TODO: log error
+                    LogError(e);
                 }
             }
         }
@@ -200,8 +192,7 @@ namespace HomeGenie.Service
         public void Stop()
         {
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPING");
-            //
-            // Signal "SystemStopping" event to listeners
+            // Signal "SystemStopping" event to automation programs
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
             {
                 try
@@ -216,21 +207,21 @@ namespace HomeGenie.Service
                         }
                     }
                 }
-                catch 
+                catch (Exception e)
                 {
-                    // TODO: log error
+                    LogError(e);
                 }
             }
-            //
-            // save system data before quitting
+
+            // Save system data before quitting
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
-            //
+
             // Stop HG helper services
             updateChecker.Stop();
             statisticsLogger.Stop();
-            //
+
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
@@ -240,10 +231,7 @@ namespace HomeGenie.Service
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
             if (masterControlProgram != null) masterControlProgram.StopEngine();
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
-            //
             RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPED");
-            //
-            //SystemLogger.Instance.Dispose();
         }
 
         ~HomeGenieService()
@@ -338,7 +326,7 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Interconnection:" + target.RoutingNode, ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    LogError(Domains.HomeAutomation_HomeGenie, "Interconnection:" + target.RoutingNode, ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             }
             else
@@ -352,61 +340,24 @@ namespace HomeGenie.Service
                     }
                     catch (Exception ex)
                     {
-                        HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "InterfaceControl", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                        LogError(Domains.HomeAutomation_HomeGenie, "InterfaceControl", ex.Message, "Exception.StackTrace", ex.StackTrace);
                     }
                 }
                 //
+                // If the command was not already handled, let automation programs process it
                 if (response == null || String.IsNullOrWhiteSpace(response.ToString()))
                 {
-                    TryDynamicApi(cmd);
+                    response = masterControlProgram.TryDynamicApi(cmd);
                 }
-                // let HG post process the local command
-                //
                 //
                 // Macro Recording
                 //
                 // TODO: find a better solution for this.... 
                 // TODO: it was: migService_ServiceRequestPostProcess(this, new ProcessRequestEventArgs(cmd));
+                // TODO: !IMPORTANT!
                 if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && cmd != null && cmd.Command != null && (cmd.Command.StartsWith("Control.") || (cmd.Command.StartsWith("AvMedia.") && cmd.Command != "AvMedia.Browse" && cmd.Command != "AvMedia.GetUri")))
                 {
                     masterControlProgram.MacroRecorder.AddCommand(cmd);
-                }
-            }
-            return response;
-        }
-
-        //TODO: should these two moved to ProgramEngine?
-        public void RegisterDynamicApi(string apiCall, Func<object, object> handler)
-        {
-            ProgramDynamiApi.Register(apiCall, handler);
-        }
-
-        public void UnRegisterDynamicApi(string apiCall)
-        {
-            ProgramDynamiApi.UnRegister(apiCall);
-        }
-
-        public object TryDynamicApi(MigInterfaceCommand command)
-        {
-            object response = "";
-            // Dynamic Interface API 
-            var registeredApi = command.Domain + "/" + command.Address + "/" + command.Command;
-            var handler = ProgramDynamiApi.Find(registeredApi);
-            if (handler != null)
-            {
-                // explicit command API handlers registered in the form <domain>/<address>/<command>
-                // receives only the remaining part of the request after the <command>
-                var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
-                response = handler(args);
-            }
-            else
-            {
-                handler = ProgramDynamiApi.FindMatching(command.OriginalRequest.Trim('/'));
-                if (handler != null)
-                {
-                    // other command API handlers
-                    // receives the full request string
-                    response = handler(command.OriginalRequest.Trim('/'));
                 }
             }
             return response;
@@ -444,7 +395,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "GetJsonSerializedModules()",
                     ex.Message,
@@ -490,8 +441,9 @@ namespace HomeGenie.Service
                             InterfaceControl(icmd);
                             Service.Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL).Value = levelValue;
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            LogError(e);
                         }
                     }
                 }
@@ -505,311 +457,7 @@ namespace HomeGenie.Service
 
         #endregion
 
-        #region MIG Service events handling
-
-        private void migService_InterfaceModulesChanged(object sender, InterfaceModulesChangedEventArgs args)
-        {
-            modules_RefreshInterface(migService.GetInterface(args.Domain));
-        }
-
-        internal void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
-        {
-            
-            // look for module associated to this event
-            Module module = Modules.Find(o => o.Domain == args.EventData.Domain && o.Address == args.EventData.Source);
-            if (module != null && args.EventData.Property != "")
-            {
-                // clear RoutingNode property since the event was locally generated
-                //if (module.RoutingNode != "")
-                //{
-                //    module.RoutingNode = "";
-                //}
-                // we found associated module in HomeGenie.Modules
-                SignalModulePropertyChange(migService, module, args.EventData);
-            }
-            else
-            {
-                if (args.EventData.Domain == Domains.MigService_Interfaces)
-                {
-                    modules_RefreshInterface(migService.GetInterface(args.EventData.Source));
-                }
-                /*
-                LogBroadcastEvent(
-                    args.EventData.Domain,
-                    args.EventData.Source,
-                    args.EventData.Description,
-                    args.EventData.Property,
-                    args.EventData.Value != null ? args.EventData.Value.ToString() : ""
-                );
-                */
-            }
-        }
-
-        private void migService_ServiceRequestPostProcess(object sender, ProcessRequestEventArgs args)
-        {
-            if (args.Request.Context.Source != ContextSource.WebServiceGateway)
-                return;
-
-            var command = args.Request.Command;
-            if (command.Domain ==  Domains.MigService_Interfaces && command.Command.EndsWith(".Set"))
-            {
-                systemConfiguration.Update();
-            }
-            args.Request.ResponseData = TryDynamicApi(command);
-            //
-            // Macro Recording
-            //
-            if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && command != null && command.Command != null && (command.Command.StartsWith("Control.") || (command.Command.StartsWith("AvMedia.") && command.Command != "AvMedia.Browse" && command.Command != "AvMedia.GetUri")))
-            {
-                masterControlProgram.MacroRecorder.AddCommand(command);
-            }
-        }
-
-        private void migService_ServiceRequestPreProcess(object sender, ProcessRequestEventArgs args)
-        {
-            if (args.Request.Context.Source != ContextSource.WebServiceGateway)
-                return;
-
-            var migCommand = args.Request.Command;
-            var context = args.Request.Context.Data as HttpListenerContext;
-
-            string url = context.Request.RawUrl.TrimStart('/');
-            if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
-
-            var evtDomain = args.Request.Context.Source.ToString();
-            var evtSource = context.Request.RemoteEndPoint.Address.ToString();
-            var evtDescription = url;
-            var evtProperty = "HTTP";
-            var evtValue = context.Request.HttpMethod;
-
-            RaiseEvent(evtDomain, evtSource, evtDescription, evtProperty, evtValue);
-
-            #region Interconnection (Remote Node Command Routing)
-
-            Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.Address);
-            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
-            if (isRemoteModule)
-            {
-                // ...
-                try
-                {
-                    string domain = migCommand.Domain;
-                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
-                    string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.Address + "/" + migCommand.Command + "/" + migCommand.OptionsString;
-                    Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
-                    if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
-                    {
-                        neth.WithCredentials(
-                            systemConfiguration.HomeGenie.UserLogin,
-                            systemConfiguration.HomeGenie.UserPassword
-                        );
-                    }
-                    neth.Call();
-                }
-                catch (Exception ex)
-                {
-                    HomeGenieService.LogError(
-                        Domains.HomeAutomation_HomeGenie,
-                        "Interconnection:" + target.RoutingNode,
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
-                }
-                return;
-            }
-
-            #endregion
-
-            // HomeGenie Web Service domain API
-            if (migCommand.Domain == Domains.HomeAutomation_HomeGenie)
-            {
-                // domain == HomeAutomation.HomeGenie
-                switch (migCommand.Address)
-                {
-
-                case "Config":
-
-                    wshConfig.ProcessRequest(args.Request);
-                    break;
-
-                case "Automation":
-
-                    wshAutomation.ProcessRequest(args.Request);
-                    break;
-
-                case "Interconnection":
-
-                    wshInterconnection.ProcessRequest(args.Request);
-                    break;
-
-                case "Statistics":
-
-                    wshStatistics.ProcessRequest(args.Request);
-                    break;
-                }
-            }
-            else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
-            {
-                int n;
-                bool nodeIdIsNumeric = int.TryParse(migCommand.Address, out n);
-                if (nodeIdIsNumeric)
-                {
-                    switch (migCommand.Command)
-                    {
-                    case "Control.Run":
-                        wshAutomation.ProgramRun(migCommand.Address, migCommand.GetOption(0));
-                        break;
-                    case "Control.Break":
-                        wshAutomation.ProgramBreak(migCommand.Address);
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        #endregion
-
-        #region Module/Interface Events handling and propagation
-
-        public void SignalModulePropertyChange(object sender, Module module, MigEvent eventData)
-        {
-            // ROUTE THE EVENT TO AUTOMATION PROGRAMS, BEFORE COMMITTING THE CHANGE
-            if (masterControlProgram != null)
-            {
-                ModuleParameter tempParam = new ModuleParameter() {
-                    Name = eventData.Property,
-                    Value = eventData.Value.ToString()
-                };
-                RoutedEvent routedEvent = new RoutedEvent() {
-                    Sender = sender,
-                    Module = module,
-                    Parameter = tempParam
-                };
-                RouteParameterBeforeChangeEvent(routedEvent);
-                // If the value has been manipulated by an automation program
-                // so the event has to be updated as well
-                //if (tempParam.Value != eventData.Value.ToString())
-                //{
-                //    //HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "ModuleParameterIsChanging(...)", "Parameter value manipulated by automation program", tempParam.Name, args.EventData.Value.ToString() + " => " + tempParam.Value);
-                    // TODO: verify if the following line was really of any use
-                //    //args.EventData.Value = tempParam.Value;
-                //}
-            }
-
-            ModuleParameter parameter = null;
-            try
-            {
-                // Lookup for the existing module parameter
-                parameter = Utility.ModuleParameterGet(module, eventData.Property);
-                if (parameter == null)
-                {
-                    module.Properties.Add(new ModuleParameter() {
-                        Name = eventData.Property,
-                        Value = eventData.Value.ToString()
-                    });
-                    parameter = Utility.ModuleParameterGet(module, eventData.Property);
-                }
-                else
-                {
-                    parameter.Value = eventData.Value.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                //HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "SignalModulePropertyChange(...)", ex.Message, "Exception.StackTrace", ex.StackTrace);
-            }
-            /*
-            string eventValue = (args.EventData.Value.GetType() == typeof(String) ? args.EventData.Value.ToString() : JsonConvert.SerializeObject(args.EventData.Value));
-            LogBroadcastEvent(
-                args.EventData.Domain,
-                args.EventData.Source,
-                args.EventData.Description,
-                args.EventData.Property,
-                eventValue
-            );
-            */
-            // ROUTE EVENT TO LISTENING AutomationPrograms
-            if (masterControlProgram != null)
-            {
-                RoutedEvent routedEvent = new RoutedEvent() {
-                    Sender = sender,
-                    Module = module,
-                    Parameter = parameter
-                };
-                //RouteParameterChangedEvent(eventData);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(RouteParameterChangedEvent), routedEvent);
-            }
-        }
-
-        public void RouteParameterBeforeChangeEvent(object eventData)
-        {
-            RoutedEvent moduleEvent = (RoutedEvent)eventData;
-            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
-            {
-                var program = masterControlProgram.Programs[p];
-                if (!program.IsEnabled) continue;
-                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
-                {
-                    program.RoutedEventAck.Set();
-                    if (program.ModuleIsChangingHandler != null)
-                    {
-                        if (!program.ModuleIsChangingHandler(
-                            new Automation.Scripting.ModuleHelper(
-                                this,
-                                moduleEvent.Module
-                            ),
-                            moduleEvent.Parameter
-                        ))
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public void RouteParameterChangedEvent(object eventData)
-        {
-            RoutedEvent moduleEvent = (RoutedEvent)eventData;
-            for (int p = 0; p < masterControlProgram.Programs.Count; p++)
-            {
-                var program = masterControlProgram.Programs[p];
-                if (!program.IsEnabled) continue;
-                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
-                {
-                    try
-                    {
-                        if (program.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
-                        {
-                            if (!program.ModuleChangedHandler(
-                                    new Automation.Scripting.ModuleHelper(
-                                        this,
-                                        moduleEvent.Module
-                                    ),
-                                    moduleEvent.Parameter
-                                ))
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        HomeGenieService.LogError(
-                            program.Domain,
-                            program.Address.ToString(),
-                            ex.Message,
-                            "Exception.StackTrace",
-                            ex.StackTrace
-                        );
-                    }
-                }
-            }
-        }
-
-        #endregion
+        #region MIG Events Propagation / Logging
 
         internal void RaiseEvent(MigEvent evt)
         {
@@ -855,6 +503,193 @@ namespace HomeGenie.Service
             MigService.Log.Error(err);
         }
 
+        #endregion
+
+        #region MIG Service events handling
+
+        private void migService_InterfaceModulesChanged(object sender, InterfaceModulesChangedEventArgs args)
+        {
+            modules_RefreshInterface(migService.GetInterface(args.Domain));
+        }
+
+        internal void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
+        {
+            
+            // look for module associated to this event
+            Module module = Modules.Find(o => o.Domain == args.EventData.Domain && o.Address == args.EventData.Source);
+            if (module != null && args.EventData.Property != "")
+            {
+                // clear RoutingNode property since the event was locally generated
+                //if (module.RoutingNode != "")
+                //{
+                //    module.RoutingNode = "";
+                //}
+                // we found associated module in HomeGenie.Modules
+
+                // Update/Add the module parameter as needed
+                ModuleParameter parameter = null;
+                try
+                {
+                    // Lookup for the existing module parameter
+                    parameter = Utility.ModuleParameterGet(module, args.EventData.Property);
+                    if (parameter == null)
+                    {
+                        parameter = new ModuleParameter() {
+                            Name = args.EventData.Property,
+                            Value = args.EventData.Value.ToString()
+                        };
+                        module.Properties.Add(parameter);
+                        //parameter = Utility.ModuleParameterGet(module, args.EventData.Property);
+                    }
+                    else
+                    {
+                        parameter.Value = args.EventData.Value.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError(ex);
+                }
+
+                masterControlProgram.SignalPropertyChange(migService, module, args.EventData);
+            }
+            else
+            {
+                if (args.EventData.Domain == Domains.MigService_Interfaces)
+                {
+                    modules_RefreshInterface(migService.GetInterface(args.EventData.Source));
+                }
+                /*
+                LogBroadcastEvent(
+                    args.EventData.Domain,
+                    args.EventData.Source,
+                    args.EventData.Description,
+                    args.EventData.Property,
+                    args.EventData.Value != null ? args.EventData.Value.ToString() : ""
+                );
+                */
+            }
+        }
+
+        private void migService_ServiceRequestPreProcess(object sender, ProcessRequestEventArgs args)
+        {
+            // Currently we only support requests coming from WebServiceGateway
+            // TODO: in the future, add support for any MigGateway channel (eg. WebSocketGateway as well)
+            if (args.Request.Context.Source != ContextSource.WebServiceGateway)
+                return;
+
+            var migCommand = args.Request.Command;
+            var context = args.Request.Context.Data as HttpListenerContext;
+
+            string url = context.Request.RawUrl.TrimStart('/');
+            if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
+
+            #region Interconnection (Remote Node Command Routing)
+
+            Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.Address);
+            bool isRemoteModule = (target != null && !String.IsNullOrWhiteSpace(target.RoutingNode));
+            if (isRemoteModule)
+            {
+                try
+                {
+                    string domain = migCommand.Domain;
+                    if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
+                    string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.Address + "/" + migCommand.Command + "/" + migCommand.OptionsString;
+                    Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
+                    if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
+                    {
+                        neth.WithCredentials(
+                            systemConfiguration.HomeGenie.UserLogin,
+                            systemConfiguration.HomeGenie.UserPassword
+                        );
+                    }
+                    neth.Call();
+                }
+                catch (Exception ex)
+                {
+                    LogError(
+                        Domains.HomeAutomation_HomeGenie,
+                        "Interconnection:" + target.RoutingNode,
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
+                }
+                return;
+            }
+
+            #endregion
+
+            // HomeGenie Web Service domain API
+            if (migCommand.Domain == Domains.HomeAutomation_HomeGenie)
+            {
+                // domain == HomeAutomation.HomeGenie
+                switch (migCommand.Address)
+                {
+
+                case "Config":
+                    wshConfig.ProcessRequest(args.Request);
+                    break;
+
+                case "Automation":
+                    wshAutomation.ProcessRequest(args.Request);
+                    break;
+
+                case "Interconnection":
+                    wshInterconnection.ProcessRequest(args.Request);
+                    break;
+
+                case "Statistics":
+                    wshStatistics.ProcessRequest(args.Request);
+                    break;
+
+                }
+            }
+            else if (migCommand.Domain == Domains.HomeAutomation_HomeGenie_Automation)
+            {
+                int n;
+                bool nodeIdIsNumeric = int.TryParse(migCommand.Address, out n);
+                if (nodeIdIsNumeric)
+                {
+                    switch (migCommand.Command)
+                    {
+
+                    case "Control.Run":
+                        wshAutomation.ProgramRun(migCommand.Address, migCommand.GetOption(0));
+                        break;
+
+                    case "Control.Break":
+                        wshAutomation.ProgramBreak(migCommand.Address);
+                        break;
+
+                    }
+                }
+            }
+
+        }
+
+        private void migService_ServiceRequestPostProcess(object sender, ProcessRequestEventArgs args)
+        {
+            var command = args.Request.Command;
+            if (command.Domain ==  Domains.MigService_Interfaces && command.Command.EndsWith(".Set"))
+            {
+                systemConfiguration.Update();
+            }
+
+            // Let automation programs process the request; we append eventual POST data (RequestText) to the MigInterfaceCommand
+            if (!String.IsNullOrWhiteSpace(args.Request.RequestText))
+                command = new MigInterfaceCommand(command.OriginalRequest + "/" + args.Request.RequestText);
+            args.Request.ResponseData = masterControlProgram.TryDynamicApi(command);
+
+            // Macro Recording
+            if (masterControlProgram != null && masterControlProgram.MacroRecorder.IsRecordingEnabled && command != null && command.Command != null && (command.Command.StartsWith("Control.") || (command.Command.StartsWith("AvMedia.") && command.Command != "AvMedia.Browse" && command.Command != "AvMedia.GetUri")))
+            {
+                masterControlProgram.MacroRecorder.AddCommand(command);
+            }
+        }
+
+        #endregion
+
         #region Initialization and Data Persistence
 
         public bool UpdateGroupsDatabase(string namePrefix)
@@ -898,28 +733,25 @@ namespace HomeGenie.Service
         public bool UpdateModulesDatabase()
         {
             bool success = false;
-            //
             modules_RefreshAll();
-            //
-            lock (systemModules.LockObject) try
+            lock (systemModules.LockObject)
+            {
+                try
                 {
                     // Due to encrypted values, we must clone modules before encrypting and saving
-                    var clonedModules = (List<Module>)systemModules.Clone();
+                    var clonedModules = systemModules.DeepClone();
                     foreach (var module in clonedModules)
                     {
                         foreach (var parameter in module.Properties)
                         {
                             // these two properties have to be kept in clear text
-                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE 
+                            if (parameter.Name != Properties.WIDGET_DISPLAYMODULE
                                 && parameter.Name != Properties.VIRTUALMODULE_PARENTID
                                 && parameter.Name != Properties.PROGRAM_STATUS
-                                && parameter.Name != Properties.RUNTIME_ERROR
-                            )
+                                && parameter.Name != Properties.RUNTIME_ERROR)
                             {
-                                if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Encrypt(
-                                        parameter.Value,
-                                        systemConfiguration.GetPassPhrase()
-                                    );
+                                if (!String.IsNullOrEmpty(parameter.Value))
+                                    parameter.Value = StringCipher.Encrypt(parameter.Value, systemConfiguration.GetPassPhrase());
                             }
                         }
                     }
@@ -938,15 +770,9 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogError(
-                        Domains.HomeAutomation_HomeGenie,
-                        "UpdateModulesDatabase()",
-                        ex.Message,
-                        "Exception.StackTrace",
-                        ex.StackTrace
-                    );
+                    LogError(Domains.HomeAutomation_HomeGenie, "UpdateModulesDatabase()", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
-            //
+            }
             return success;
         }
 
@@ -1066,8 +892,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                //TODO: log error
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "LoadConfiguration()",
                     ex.Message,
@@ -1246,7 +1071,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "modules_RefreshVirtualModules()",
                     ex.Message,
@@ -1316,7 +1141,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "modules_RefreshPrograms()",
                     ex.Message,
@@ -1360,7 +1185,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "modules_Sort()",
                     ex.Message,
@@ -1498,19 +1323,11 @@ namespace HomeGenie.Service
                 var serializer = new XmlSerializer(typeof(SystemConfiguration));
                 var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"));
                 systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
-                /*
-                if (!String.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) && systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"))
-                {
-                    SystemLogger.Instance.OpenLog();
-                }
-                else
-                {
-                    SystemLogger.Instance.CloseLog();
-                }
-                */
+
                 // set the system password
 // TODO: !IMPORTANT! DISABLED FOR NEW MIG                migService.SetWebServicePassword(systemConfiguration.HomeGenie.UserPassword);
-                //
+
+                // decrypt config data
                 foreach (var parameter in systemConfiguration.HomeGenie.Settings)
                 {
                     try
@@ -1526,14 +1343,13 @@ namespace HomeGenie.Service
                 }
                 //
                 reader.Close();
-                //
+
                 // configure MIG
-                //
                 migService.Configuration = systemConfiguration.MigService;
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "LoadSystemConfig()",
                     ex.Message,
@@ -1578,7 +1394,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "LoadModules()",
                     ex.Message,
@@ -1610,7 +1426,7 @@ namespace HomeGenie.Service
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
+                LogError(
                     Domains.HomeAutomation_HomeGenie,
                     "LoadModules()",
                     ex.Message,
