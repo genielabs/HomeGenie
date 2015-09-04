@@ -871,7 +871,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for clamp 2"
+                    "#text": "Meter Report for kWh for clamp 2"
                   }
                 ]
               }
@@ -1159,7 +1159,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for clamp 2"
+                    "#text": "Meter Report for kWh for clamp 2"
                   }
                 ]
               }
@@ -1447,7 +1447,7 @@
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Meter Report for Watt for clamp 2"
+                    "#text": "Meter Report for kWh for clamp 2"
                   }
                 ]
               }
