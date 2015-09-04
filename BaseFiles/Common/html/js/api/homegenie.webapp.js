@@ -39,9 +39,9 @@ HG.WebApp.InitializePage = function ()
     }
     //
     $.mobile.ajaxFormsEnabled = false;
-    $.ajaxSetup({
-        cache: false
-    });
+    //$.ajaxSetup({
+    //    cache: false
+    //});
     //
     HG.Configure.LoadData(function(){
         HG.WebApp.Control.RenderMenu();

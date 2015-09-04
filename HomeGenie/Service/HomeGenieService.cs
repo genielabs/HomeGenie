@@ -584,6 +584,14 @@ namespace HomeGenie.Service
             string url = context.Request.RawUrl.TrimStart('/');
             if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
 
+            // Event stream url redirect for old-client compatibility
+            if (url.StartsWith("api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream"))
+            {
+                context.Response.Redirect("/events");
+                args.Request.Handled = true;
+                return;
+            }
+
             #region Interconnection (Remote Node Command Routing)
 
             Module target = systemModules.Find(m => m.Domain == migCommand.Domain && m.Address == migCommand.Address);

@@ -7,7 +7,7 @@
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
   // set the widget "program"
-  Program.AddControlWidget("homegenie/generic/program");
+  Program.UseWidget("homegenie/generic/program");
 });
 return false;</ScriptCondition>
     <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
@@ -20,7 +20,7 @@ return false;</ScriptCondition>
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
-  .IterationDelay(0.35)
+  //.IterationDelay(0.35)
   .On();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -41,7 +41,7 @@ Modules
     <ScriptCondition>Program.Setup(()=&gt;
 {                  
   // set the widget "program"
-  Program.AddControlWidget("homegenie/generic/program");
+  Program.UseWidget("homegenie/generic/program");
 });
 
 return false;</ScriptCondition>
@@ -56,7 +56,7 @@ return false;</ScriptCondition>
 Modules
   .InGroup( PROGRAM_OPTIONS_STRING )
   .OfDeviceType("Light,Dimmer")
-  .IterationDelay(0.35)
+  //.IterationDelay(0.35)
   .Off();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>

@@ -77,7 +77,7 @@ namespace HomeGenie.Service.Handlers
                 response = "[";
                 foreach (string statParameter in homegenie.Statistics.GetParametersList(domain, address))
                 {
-                    response += "	'" + statParameter + "',\n";
+                    response += "	\"" + statParameter + "\",\n";
                 }
                 response = response.TrimEnd(',', '\n');
                 response += "\n]";

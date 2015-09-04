@@ -27,7 +27,7 @@
             //
             var groupname = this.GroupName;
             widget.on('click', function () {
-                HG.Automation.Programs.Toggle(module.Address, groupname, null);
+                HG.Automation.Programs.Toggle(module.Address, groupname);
             });
         }
         //

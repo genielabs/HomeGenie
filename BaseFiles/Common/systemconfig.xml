@@ -59,8 +59,6 @@
     </Settings>
     <SystemName>HAL</SystemName>
     <Location />
-    <ServicePort>8088</ServicePort>
-    <UserPassword />
     <GUID></GUID>
     <EnableLogFile>true</EnableLogFile>
   </HomeGenie>
