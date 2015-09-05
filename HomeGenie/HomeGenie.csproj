@@ -188,6 +188,9 @@
     <Reference Include="NLog">
       <HintPath>..\Externals\g-labs\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="MIG">
+      <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
