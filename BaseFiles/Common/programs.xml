@@ -8838,7 +8838,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 });
 
 Program.GoBackground();</ScriptSource>
-    <ScriptErrors>Program update is required.</ScriptErrors>
+    <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>505</Address>
     <Name>IR Remote Controller</Name>
