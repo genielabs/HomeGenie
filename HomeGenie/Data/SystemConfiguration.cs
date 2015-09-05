@@ -16,9 +16,9 @@
 */
 
 /*
- *     Author: Generoso Martello <gene@homegenie.it>
- *     Project Homepage: http://homegenie.it
- */
+*     Author: Generoso Martello <gene@homegenie.it>
+*     Project Homepage: http://homegenie.it
+*/
 
 using System;
 using System.Collections.Generic;
@@ -37,6 +37,9 @@ namespace HomeGenie.Data
     [Serializable()]
     public class SystemConfiguration
     {
+        private string passphrase = "";
+
+        // TODO: change this to use standard event delegates model
         public event Action<bool> OnUpdate;
 
         public HomeGenieConfiguration HomeGenie { get; set; }
@@ -45,15 +48,11 @@ namespace HomeGenie.Data
 
         public SystemConfiguration()
         {
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID platform = os.Platform;
-            //
             HomeGenie = new HomeGenieConfiguration();
-            MigService = new MigServiceConfiguration();
-            //
             HomeGenie.SystemName = "HAL";
             HomeGenie.Location = "";
             HomeGenie.EnableLogFile = "false";
+            MigService = new MigServiceConfiguration();
         }
 
         public bool Update()
@@ -73,8 +72,6 @@ namespace HomeGenie.Data
                     {
                     }
                 }
-
-
                 string fname = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml");
                 if (File.Exists(fname))
                 {
@@ -101,9 +98,14 @@ namespace HomeGenie.Data
             return success;
         }
 
+        public void SetPassPhrase(string pass)
+        {
+            passphrase = pass;
+        }
+
         public string GetPassPhrase()
         {
-            return (this.HomeGenie.UserPassword + "homegenie");
+            return passphrase;
         }
     }
 
@@ -114,11 +116,6 @@ namespace HomeGenie.Data
         public string SystemName { get; set; }
         public string Location { get; set; }
 
-        public string ServiceHost { get; set; }
-        public int ServicePort { get; set; }
-        public string UserLogin { get; set; }
-        public string UserPassword { get; set; }
-
         public List<ModuleParameter> Settings = new List<ModuleParameter>();
         public StatisticsConfiguration Statistics = new StatisticsConfiguration();
 
@@ -126,8 +123,6 @@ namespace HomeGenie.Data
 
         public HomeGenieConfiguration()
         {
-            ServiceHost = "+";
-            ServicePort = 80;
         }
 
         [Serializable()]
@@ -182,4 +177,3 @@ namespace HomeGenie.Data
     }
 
 }
-

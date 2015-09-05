@@ -53,7 +53,7 @@ HG.WebApp.ProgramsList.InitializePage = function () {
             else {
                 $('#automation_program_import').popup('close');
                 $.mobile.loading('show', { text: 'Importing, please wait...', textVisible: true, html: '' });
-                $('#program_import_form').attr('action', '../HomeAutomation.HomeGenie/Automation/Programs.Import/' + HG.WebApp.AutomationGroupsList._CurrentGroup);
+                $('#program_import_form').attr('action', '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Import/' + HG.WebApp.AutomationGroupsList._CurrentGroup);
                 $('#program_import_form').submit();
             }
         });
@@ -697,7 +697,7 @@ HG.WebApp.ProgramsList.EditProgram = function () {
 
 
 HG.WebApp.ProgramsList.ExportProgram = function (progaddr) {
-    $('#program_import_downloadframe').attr('src', location.protocol + '../HomeAutomation.HomeGenie/Automation/Programs.Export/' + progaddr + '/');
+    $('#program_import_downloadframe').attr('src', location.protocol + '../../api/HomeAutomation.HomeGenie/Automation/Programs.Export/' + progaddr + '/');
 };
 
 HG.WebApp.ProgramsList.RestartProgram = function (progaddr) {

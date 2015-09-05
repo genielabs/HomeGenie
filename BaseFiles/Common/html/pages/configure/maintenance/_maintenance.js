@@ -219,7 +219,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             }
         });
         $('#maintenance_configuration_backupbutton').bind('click', function() {
-            window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
+            window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/System.Configure/System.ConfigurationBackup');
         });
         $('#restore_configuration_uploadframe').bind('load', function(evt) {
             if ($('#restore_configuration_uploadfile').val() == "")

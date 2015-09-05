@@ -294,7 +294,6 @@ namespace HomeGenie.Service.Handlers
                         else
                         {
                             homegenie.LoadConfiguration();
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                            homegenie.MigService.ClearWebCache();
                             homegenie.UpdateChecker.Check();
                         }
                     }

@@ -42,6 +42,7 @@ using HomeGenie.Service.Logging;
 using HomeGenie.Automation.Scheduler;
 
 using MIG;
+using MIG.Gateways;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -57,6 +58,7 @@ namespace HomeGenie.Service
 
         private const string HOMEGENIE_MASTERNODE = "0";
         private MigService migService;
+        private WebServiceGateway webGateway;
         private ProgramEngine masterControlProgram;
         private VirtualMeter virtualMeter;
         private UpdateChecker updateChecker;
@@ -95,6 +97,23 @@ namespace HomeGenie.Service
             InitializeSystem();
             LoadConfiguration();
 
+            webGateway = (WebServiceGateway)migService.GetGateway("WebServiceGateway");
+            if (webGateway != null)
+            {
+                (webGateway as WebServiceGateway).CacheControlIgnoreAdd(@"^.*\/pages\/control\/widgets\/.*\.(js|html|json)$");
+            }
+            else
+            {
+                RaiseEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    HOMEGENIE_MASTERNODE,
+                    "Configuration entry not found",
+                    "Gateways",
+                    "WebServiceGateway"
+                );
+                Program.Quit(false);
+            }
+
             if (migService.StartService())
             {
                 RaiseEvent(
@@ -102,7 +121,7 @@ namespace HomeGenie.Service
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie service ready",
                     Properties.SYSTEMINFO_HTTPADDRESS,
-                    "TODO: ..."
+                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
                 );
             }
             else
@@ -112,7 +131,7 @@ namespace HomeGenie.Service
                     HOMEGENIE_MASTERNODE,
                     "HTTP binding failed.",
                     Properties.SYSTEMINFO_HTTPADDRESS,
-                    systemConfiguration.HomeGenie.ServiceHost + ":" + systemConfiguration.HomeGenie.ServicePort
+                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
                 );
                 Program.Quit(false);
             }
@@ -299,9 +318,9 @@ namespace HomeGenie.Service
             get { return statisticsLogger; }
         }
         // Public utility methods
-        public int GetHttpServicePort()
+        public string GetHttpServicePort()
         {
-            return systemConfiguration.HomeGenie.ServicePort;
+            return webGateway.GetOption("Port").Value;
         }
 
         public object InterfaceControl(MigInterfaceCommand cmd)
@@ -318,9 +337,11 @@ namespace HomeGenie.Service
                         domain = domain.Substring(domain.IndexOf(".") + 1);
                     string serviceUrl = "http://" + target.RoutingNode + "/api/" + domain + "/" + cmd.Address + "/" + cmd.Command + "/" + cmd.OptionsString;
                     Automation.Scripting.NetHelper netHelper = new Automation.Scripting.NetHelper(this).WebService(serviceUrl);
-                    if (!String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserLogin) && !String.IsNullOrWhiteSpace(systemConfiguration.HomeGenie.UserPassword))
+                    string username = webGateway.GetOption("Username").Value;
+                    string password = webGateway.GetOption("Password").Value;
+                    if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password))
                     {
-                        netHelper.WithCredentials(systemConfiguration.HomeGenie.UserLogin, systemConfiguration.HomeGenie.UserPassword);
+                        netHelper.WithCredentials(username, password);
                     }
                     response = netHelper.GetData();
                 }
@@ -604,11 +625,13 @@ namespace HomeGenie.Service
                     if (domain.StartsWith("HGIC:")) domain = domain.Substring(domain.IndexOf(".") + 1);
                     string serviceurl = "http://" + target.RoutingNode + "/api/" + domain + "/" + migCommand.Address + "/" + migCommand.Command + "/" + migCommand.OptionsString;
                     Automation.Scripting.NetHelper neth = new Automation.Scripting.NetHelper(this).WebService(serviceurl);
-                    if (systemConfiguration.HomeGenie.UserLogin != "" && systemConfiguration.HomeGenie.UserPassword != "")
+                    string username = webGateway.GetOption("Username").Value;
+                    string password = webGateway.GetOption("Password").Value;
+                    if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password))
                     {
                         neth.WithCredentials(
-                            systemConfiguration.HomeGenie.UserLogin,
-                            systemConfiguration.HomeGenie.UserPassword
+                            username,
+                            password
                         );
                     }
                     neth.Call();
@@ -759,7 +782,7 @@ namespace HomeGenie.Service
                                 && parameter.Name != Properties.RUNTIME_ERROR)
                             {
                                 if (!String.IsNullOrEmpty(parameter.Value))
-                                    parameter.Value = StringCipher.Encrypt(parameter.Value, systemConfiguration.GetPassPhrase());
+                                    parameter.Value = StringCipher.Encrypt(parameter.Value, GetPassPhrase());
                             }
                         }
                     }
@@ -1321,6 +1344,21 @@ namespace HomeGenie.Service
             virtualMeter = new VirtualMeter(this);
         }
 
+        private string GetPassPhrase()
+        {
+            // Get username/password from web serivce and use as encryption key
+            var webGw = migService.GetGateway("WebServiceGateway");
+            if (webGw != null)
+            {
+                var username = webGw.GetOption("Username").Value;
+                var password = webGw.GetOption("Password").Value;
+                //return String.Format("{0}{1}homegenie", username, password);
+                return String.Format("{0}homegenie", password);
+            }
+            else
+                return "";
+        }
+
         private void LoadSystemConfig()
         {
             if (systemConfiguration != null)
@@ -1331,10 +1369,10 @@ namespace HomeGenie.Service
                 var serializer = new XmlSerializer(typeof(SystemConfiguration));
                 var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"));
                 systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
-
-                // set the system password
-// TODO: !IMPORTANT! DISABLED FOR NEW MIG                migService.SetWebServicePassword(systemConfiguration.HomeGenie.UserPassword);
-
+                // configure MIG
+                migService.Configuration = systemConfiguration.MigService;
+                // Set the password for decrypting settings values and later module parameters
+                systemConfiguration.SetPassPhrase(GetPassPhrase());
                 // decrypt config data
                 foreach (var parameter in systemConfiguration.HomeGenie.Settings)
                 {
@@ -1342,7 +1380,7 @@ namespace HomeGenie.Service
                     {
                         if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
                                 parameter.Value,
-                                systemConfiguration.GetPassPhrase()
+                                GetPassPhrase()
                             );
                     }
                     catch
@@ -1351,9 +1389,6 @@ namespace HomeGenie.Service
                 }
                 //
                 reader.Close();
-
-                // configure MIG
-                migService.Configuration = systemConfiguration.MigService;
             }
             catch (Exception ex)
             {
@@ -1385,7 +1420,7 @@ namespace HomeGenie.Service
                         {
                             if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
                                     parameter.Value,
-                                    systemConfiguration.GetPassPhrase()
+                                    GetPassPhrase()
                                 );
                         }
                         catch
@@ -1501,12 +1536,14 @@ namespace HomeGenie.Service
                 }
             }
             string address = localIP;
-            if (systemConfiguration.HomeGenie.ServiceHost.Length > 1)
+            string bindhost = webGateway.GetOption("Host").Value;
+            string bindport = webGateway.GetOption("Port").Value;
+            if (bindhost.Length > 1)
             {
-                address = systemConfiguration.HomeGenie.ServiceHost;
+                address = bindhost;
             }
             //
-            string presentationUrl = "http://" + address + ":" + systemConfiguration.HomeGenie.ServicePort;
+            string presentationUrl = "http://" + address + ":" + bindport;
             //string friendlyName = "HomeGenie: " + Environment.MachineName;
             string manufacturer = "G-Labs";
             string manufacturerUrl = "http://generoso.info/";

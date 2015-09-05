@@ -70,6 +70,7 @@
                 <Option Name="HomePath" Value="html" />
                 <Option Name="Host" Value="*" />
                 <Option Name="Port" Value="8080" />
+                <Option Name="Username" Value="admin" />
                 <Option Name="Password" Value="" />
                 <Option Name="EnableFileCaching" Value="false" />
             </Options>

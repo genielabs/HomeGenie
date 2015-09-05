@@ -188,9 +188,6 @@
     <Reference Include="NLog">
       <HintPath>..\Externals\g-labs\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="MIG">
-      <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
@@ -307,6 +304,10 @@
     <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj">
       <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
       <Name>NetClientLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\mig-service-dotnet\MIG\MIG.csproj">
+      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
+      <Name>MIG</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
