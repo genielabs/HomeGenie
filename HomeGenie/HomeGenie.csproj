@@ -305,10 +305,6 @@
       <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
       <Name>NetClientLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\mig-service-dotnet\MIG\MIG.csproj">
-      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
-      <Name>MIG</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="release_info.xml">
