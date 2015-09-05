@@ -38,7 +38,6 @@
                 textDescription.val(textInput.val());
                 textDescription.css('color', '');
                 $.get('/api/HomeAutomation.HomeGenie/Automation/Scheduling.Describe/'+encodeURIComponent(textInput.val()), function(res){
-                    res = eval(res)[0];
                     if (typeof res != 'undefined' && res.ResponseValue != '') {
                         textDescription.val(res.ResponseValue);
                     }
