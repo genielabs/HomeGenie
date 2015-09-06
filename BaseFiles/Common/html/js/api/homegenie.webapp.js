@@ -299,7 +299,7 @@ HG.WebApp.Home.UpdateHeaderStatus = function()
 //
 HG.WebApp.Home.UpdateInterfacesStatus = function() 
 {
-    var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/' + (new Date().getTime());
+    var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/';
     $.ajax({
         url: ifaceurl,
         type: 'GET',

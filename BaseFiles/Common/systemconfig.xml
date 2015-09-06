@@ -69,9 +69,11 @@
                 <Option Name="BaseUrl" Value="/hg/html" />
                 <Option Name="HomePath" Value="html" />
                 <Option Name="Host" Value="*" />
-                <Option Name="Port" Value="8080" />
+                <Option Name="Port" Value="80" />
                 <Option Name="Username" Value="admin" />
                 <Option Name="Password" Value="" />
+                <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
+                <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
                 <Option Name="EnableFileCaching" Value="false" />
             </Options>
         </Gateway>
@@ -109,6 +111,5 @@
         <Options />
       </Interface>
     </Interfaces>
-    <EnableWebCache>false</EnableWebCache>
   </MigService>
 </SystemConfiguration>

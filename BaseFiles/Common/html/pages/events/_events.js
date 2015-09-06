@@ -56,6 +56,10 @@ HG.WebApp.Events.Setup = function () {
             HG.WebApp.Events.SendEventToUi(module, event);
         }
         //
+        if (event.Domain == 'MIGService.Interfaces') {
+            HG.WebApp.Home.UpdateInterfacesStatus();
+        }
+        //
         if (dataStore.get('UI.EventsHistory')) {
             // add message to local events queue
             HG.WebApp.Data.Events.push(event);

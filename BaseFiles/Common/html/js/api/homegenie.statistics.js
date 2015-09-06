@@ -41,7 +41,7 @@ HG.Statistics.Global.GetWattsCounter = function (callback) {
 //	
 HG.Statistics.Database = HG.Statistics.Database || {};
 HG.Statistics.Database.Reset = function () {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Database.Reset/' + (new Date().getTime()), function (data) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Database.Reset/', function (data) {
     });
 };
 

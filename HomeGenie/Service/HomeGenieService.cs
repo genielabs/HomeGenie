@@ -92,51 +92,8 @@ namespace HomeGenie.Service
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
-            #region Service initialization and startup
-
             InitializeSystem();
-            LoadConfiguration();
-
-            webGateway = (WebServiceGateway)migService.GetGateway("WebServiceGateway");
-            if (webGateway != null)
-            {
-                (webGateway as WebServiceGateway).CacheControlIgnoreAdd(@"^.*\/pages\/control\/widgets\/.*\.(js|html|json)$");
-            }
-            else
-            {
-                RaiseEvent(
-                    Domains.HomeAutomation_HomeGenie,
-                    HOMEGENIE_MASTERNODE,
-                    "Configuration entry not found",
-                    "Gateways",
-                    "WebServiceGateway"
-                );
-                Program.Quit(false);
-            }
-
-            if (migService.StartService())
-            {
-                RaiseEvent(
-                    Domains.HomeAutomation_HomeGenie,
-                    HOMEGENIE_MASTERNODE,
-                    "HomeGenie service ready",
-                    Properties.SYSTEMINFO_HTTPADDRESS,
-                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
-                );
-            }
-            else
-            {
-                RaiseEvent(
-                    Domains.HomeAutomation_HomeGenie,
-                    HOMEGENIE_MASTERNODE,
-                    "HTTP binding failed.",
-                    Properties.SYSTEMINFO_HTTPADDRESS,
-                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
-                );
-                Program.Quit(false);
-            }
-
-            #endregion
+            Reload();
 
             updateChecker = new UpdateChecker(this);
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
@@ -857,6 +814,64 @@ namespace HomeGenie.Service
             return success;
         }
 
+        public void Reload()
+        {
+            migService.StopService();
+
+            LoadConfiguration();
+
+            webGateway = (WebServiceGateway)migService.GetGateway("WebServiceGateway");
+            if (webGateway == null)
+            {
+                RaiseEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    HOMEGENIE_MASTERNODE,
+                    "Configuration entry not found",
+                    "Gateways",
+                    "WebServiceGateway"
+                );
+                Program.Quit(false);
+            }
+            int webPort = int.Parse(webGateway.GetOption("Port").Value);
+
+            bool started = migService.StartService();
+            while (!started)
+            {
+                RaiseEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    HOMEGENIE_MASTERNODE,
+                    "HTTP binding failed.",
+                    Properties.SYSTEMINFO_HTTPADDRESS,
+                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
+                );
+                // Try auto-binding to another port >= 8080 (up to 8090)
+                if (webPort < 8080)
+                    webPort = 8080;
+                else
+                    webPort++;
+                if (webPort <= 8090)
+                {
+                    webGateway.SetOption("Port", webPort.ToString());
+                    started = webGateway.Start();
+                }
+            }
+
+            if (started)
+            {
+                RaiseEvent(
+                    Domains.HomeAutomation_HomeGenie,
+                    HOMEGENIE_MASTERNODE,
+                    "HomeGenie service ready",
+                    Properties.SYSTEMINFO_HTTPADDRESS,
+                    webGateway.GetOption("Host").Value + ":" + webGateway.GetOption("Port").Value
+                );
+            }
+            else
+            {
+                Program.Quit(false);
+            }
+        }
+
         public void LoadConfiguration()
         {
             LoadSystemConfig();
@@ -869,9 +884,8 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
-                var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml"));
-                controlGroups = (List<Group>)serializer.Deserialize(reader);
-                reader.Close();
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "groups.xml")))
+                    controlGroups = (List<Group>)serializer.Deserialize(reader);
             }
             catch
             {
@@ -882,12 +896,8 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
-                var reader = new StreamReader(Path.Combine(
-                                 AppDomain.CurrentDomain.BaseDirectory,
-                                 "automationgroups.xml"
-                             ));
-                automationGroups = (List<Group>)serializer.Deserialize(reader);
-                reader.Close();
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "automationgroups.xml")))
+                    automationGroups = (List<Group>)serializer.Deserialize(reader);
             }
             catch
             {
@@ -906,20 +916,21 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml"));
-                var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
-                foreach (var program in programs)
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs.xml")))
                 {
-                    program.IsRunning = false;
-                    // backward compatibility with hg < 0.91
-                    if (program.Address == 0)
+                    var programs = (List<ProgramBlock>)serializer.Deserialize(reader);
+                    foreach (var program in programs)
                     {
-                        // assign an id to program if unassigned
-                        program.Address = masterControlProgram.GeneratePid();
+                        program.IsRunning = false;
+                        // backward compatibility with hg < 0.91
+                        if (program.Address == 0)
+                        {
+                            // assign an id to program if unassigned
+                            program.Address = masterControlProgram.GeneratePid();
+                        }
+                        masterControlProgram.ProgramAdd(program);
                     }
-                    masterControlProgram.ProgramAdd(program);
                 }
-                reader.Close();
             }
             catch (Exception ex)
             {
@@ -937,10 +948,11 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<SchedulerItem>));
-                var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml"));
-                var schedulerItems = (List<SchedulerItem>)serializer.Deserialize(reader);
-                masterControlProgram.SchedulerService.Items.AddRange(schedulerItems);
-                reader.Close();
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml")))
+                {
+                    var schedulerItems = (List<SchedulerItem>)serializer.Deserialize(reader);
+                    masterControlProgram.SchedulerService.Items.AddRange(schedulerItems);
+                }
             }
             catch
             {
@@ -975,7 +987,7 @@ namespace HomeGenie.Service
             //
             Utility.UncompressZip(archiveName, AppDomain.CurrentDomain.BaseDirectory);
             //
-            LoadConfiguration();
+            Reload();
             //
             // regenerate encrypted files
             UpdateModulesDatabase();
@@ -1344,7 +1356,7 @@ namespace HomeGenie.Service
             virtualMeter = new VirtualMeter(this);
         }
 
-        private string GetPassPhrase()
+        internal string GetPassPhrase()
         {
             // Get username/password from web serivce and use as encryption key
             var webGw = migService.GetGateway("WebServiceGateway");
@@ -1367,28 +1379,28 @@ namespace HomeGenie.Service
             {
                 // load config
                 var serializer = new XmlSerializer(typeof(SystemConfiguration));
-                var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml"));
-                systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
-                // configure MIG
-                migService.Configuration = systemConfiguration.MigService;
-                // Set the password for decrypting settings values and later module parameters
-                systemConfiguration.SetPassPhrase(GetPassPhrase());
-                // decrypt config data
-                foreach (var parameter in systemConfiguration.HomeGenie.Settings)
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml")))
                 {
-                    try
+                    systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
+                    // configure MIG
+                    migService.Configuration = systemConfiguration.MigService;
+                    // Set the password for decrypting settings values and later module parameters
+                    systemConfiguration.SetPassPhrase(GetPassPhrase());
+                    // decrypt config data
+                    foreach (var parameter in systemConfiguration.HomeGenie.Settings)
                     {
-                        if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
-                                parameter.Value,
-                                GetPassPhrase()
-                            );
-                    }
-                    catch
-                    {
+                        try
+                        {
+                            if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
+                                    parameter.Value,
+                                    GetPassPhrase()
+                                );
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
-                //
-                reader.Close();
             }
             catch (Exception ex)
             {
@@ -1409,31 +1421,29 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(HomeGenie.Service.TsList<Module>));
-                var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml"));
-                HomeGenie.Service.TsList<Module> modules = (HomeGenie.Service.TsList<Module>)serializer.Deserialize(reader);
-                //
-                foreach (var module in modules)
+                using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules.xml")))
                 {
-                    foreach (var parameter in module.Properties)
+                    var modules = (HomeGenie.Service.TsList<Module>)serializer.Deserialize(reader);
+                    foreach (var module in modules)
                     {
-                        try
+                        foreach (var parameter in module.Properties)
                         {
-                            if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
-                                    parameter.Value,
-                                    GetPassPhrase()
-                                );
-                        }
-                        catch
-                        {
+                            try
+                            {
+                                if (!String.IsNullOrEmpty(parameter.Value)) parameter.Value = StringCipher.Decrypt(
+                                        parameter.Value,
+                                        GetPassPhrase()
+                                    );
+                            }
+                            catch
+                            {
+                            }
                         }
                     }
+                    modulesGarbage.Clear();
+                    systemModules.Clear();
+                    systemModules = modules;
                 }
-                //
-                reader.Close();
-                //
-                modulesGarbage.Clear();
-                systemModules.Clear();
-                systemModules = modules;
             }
             catch (Exception ex)
             {
@@ -1447,9 +1457,7 @@ namespace HomeGenie.Service
             }
             try
             {
-                //
-                // reset Parameter.Watts, /*Status Level,*/ Sensor.Generic values
-                //
+                // Reset Parameter.Watts, /*Status Level,*/ Sensor.Generic values
                 for (int m = 0; m < systemModules.Count; m++)
                 {
                     // cleanup stuff for unwanted  xsi:nil="true" empty params
@@ -1463,7 +1471,6 @@ namespace HomeGenie.Service
                     if (parameter != null)
                     {
                         parameter.Value = "0";
-                        //parameter.UpdateTime = DateTime.UtcNow;
                     }
                 }
             }
@@ -1477,8 +1484,7 @@ namespace HomeGenie.Service
                     ex.StackTrace
                 );
             }
-            //
-            // force re-generation of Modules list
+            // Force re-generation of Modules list
             modules_RefreshAll();
         }
 
@@ -1488,6 +1494,7 @@ namespace HomeGenie.Service
             {
                 File.Delete(archiveName);
             }
+            // Add automation programs
             foreach (var program in masterControlProgram.Programs)
             {
                 string relFile = Path.Combine("programs/", program.Address + ".dll");
@@ -1505,20 +1512,21 @@ namespace HomeGenie.Service
                     }
                 }
             }
-            //
+            // Add system config files
             Utility.AddFileToZip(archiveName, "systemconfig.xml");
             Utility.AddFileToZip(archiveName, "automationgroups.xml");
             Utility.AddFileToZip(archiveName, "modules.xml");
             Utility.AddFileToZip(archiveName, "programs.xml");
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
-            if (File.Exists("lircconfig.xml"))
+            // Add MIG Interfaces config files (lib/mig/*.xml)
+            string migLibFolder = Path.Combine("lib", "mig");
+            if (Directory.Exists(migLibFolder))
             {
-                Utility.AddFileToZip(archiveName, "lircconfig.xml");
-            }
-            if (File.Exists("zwavenodes.xml"))
-            {
-                Utility.AddFileToZip(archiveName, "zwavenodes.xml");
+                foreach (string f in Directory.GetFiles(migLibFolder, "*.xml"))
+                {
+                    Utility.AddFileToZip(archiveName, f);
+                }
             }
         }
 
@@ -1561,7 +1569,7 @@ namespace HomeGenie.Service
                 statisticsLogger.ResetDatabase();
             }
             //
-            UPnPDevice localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");
+            var localDevice = UPnPDevice.CreateRootDevice(900, 1, "web\\");
             //hgdevice.Icon = null;
             if (presentationUrl != "")
             {

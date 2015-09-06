@@ -42,7 +42,7 @@ HG.WebApp.WidgetsList.InitializePage = function () {
         var widgetpath = newBrandText.val()+'/'+newCategoryText.val()+'/'+newNameText.val();
         HG.Configure.Widgets.Add(widgetpath, function(res){
             // open newly added widget
-            if (res.ResponseValue == 'OK')
+            if (res.Status == 'Ok')
             {
                 HG.WebApp.WidgetsList._currentWidget = widgetpath;
                 $.mobile.pageContainer.pagecontainer('change', '#'+HG.WebApp.WidgetEditor.PageId);

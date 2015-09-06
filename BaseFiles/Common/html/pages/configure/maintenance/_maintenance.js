@@ -88,9 +88,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                     // TODO: ....
                     if (r[0].ResponseValue == 'OK') {
                         $('#configure_system_updateinstall_status').html('Update install complete.');
-                        setTimeout(function () {
-                            document.location.href = '/';
-                        }, 3000);
+                        setTimeout(function() { window.location.replace("/"); }, 3000);
                     }
                     else if (r[0].ResponseValue == 'RESTART') {
                         $('#configure_system_updateinstall_status').html('Installing files... (HomeGenie service stopped)');
@@ -202,7 +200,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
             HG.Configure.System.ServiceCall("System.ConfigurationReset", function (data) {
                 alert('Factory Reset Completed!');
                 $.mobile.loading('hide');
-                window.location.replace("/");
+                setTimeout(function() { window.location.replace("/"); }, 3000);
             });
         });
         $('#systemsettings_backuprestores1selectallbtn').bind('click', function () {
@@ -248,7 +246,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     $.mobile.loading('hide');
-                    window.location.replace("/");
+                    setTimeout(function() { window.location.replace("/"); }, 3000);
                 });
             });
         });

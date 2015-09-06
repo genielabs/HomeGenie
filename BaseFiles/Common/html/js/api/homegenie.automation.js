@@ -77,14 +77,14 @@ HG.Automation.Macro.GetDelay = function (callback) {
 //
 HG.Automation.Programs = HG.Automation.Programs || {};
 HG.Automation.Programs.List = function (callback) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.List/' + (new Date().getTime()), function (data) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.List/', function (data) {
         HG.WebApp.Data.Programs = eval(arguments[2].responseText);
         callback();
     });
 };
 HG.Automation.Programs.AddProgram = function (group, program, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Add/' + group + '/' + (new Date().getTime()),
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Add/' + group + '/',
         type: 'POST',
         data: program,
         success: function (data) {
@@ -99,7 +99,7 @@ HG.Automation.Programs.AddProgram = function (group, program, callback) {
 };
 HG.Automation.Programs.DeleteProgram = function (program, callback) {
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Delete/' + program + '/' + (new Date().getTime()),
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Delete/' + program + '/',
         type: 'GET',
         success: function (response) {
             callback();
@@ -212,7 +212,7 @@ HG.Automation.Programs.ArduinoFileList = function (pid, callback) {
 };
 
 HG.Automation.Programs.PostBack = function(postbackId, program, module, property, value, callback) {
-    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + program.Domain + '/' + program.Address + '/' + postbackId + '/' + module.Domain + '/' + module.Address + '/' + property + '/' + encodeURIComponent(value) + '/' + (new Date().getTime()), function (data) {
+    $.get('/' + HG.WebApp.Data.ServiceKey + '/' + program.Domain + '/' + program.Address + '/' + postbackId + '/' + module.Domain + '/' + module.Address + '/' + property + '/' + encodeURIComponent(value) + '/', function (data) {
         if (typeof callback != 'undefined') {
             callback(data);
         }

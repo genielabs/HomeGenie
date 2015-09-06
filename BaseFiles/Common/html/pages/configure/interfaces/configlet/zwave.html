@@ -139,7 +139,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
     ZWaveDiscovery: function() {
         this.DiscoveryLog.empty();
         this.DiscoveryPopup.popup('open');
-        $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/' + (new Date().getTime()), function (data) { });
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/', function (data) { });
     },
     
     ZWaveNodeAdd: function() {
@@ -191,7 +191,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         var warningString = HG.WebApp.Locales.GetLocaleString('hard_reset_warning', false, this.Locale);
         messageString += '<div style="font-weight:bolder">' + warningString + '</div>';
         HG.WebApp.Utility.ConfirmPopup(titleString, messageString, function(proceed) {
-            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/' + (new Date().getTime()), function (data) { });
+            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/', function (data) { });
         });
     },
     
