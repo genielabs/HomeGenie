@@ -243,6 +243,10 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "System.GetVersion":
+                request.ResponseData = homegenie.UpdateChecker.GetCurrentRelease();
+                break;
+
             case "System.Configure":
                 if (migCommand.GetOption(0) == "Service.Restart")
                 {

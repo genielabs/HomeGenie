@@ -4,6 +4,15 @@
 //
 HG.System = HG.System || {};
 //
+HG.System.GetVersion = function (callback) {
+    $.ajax({
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.GetVersion/',
+        type: 'GET',
+        success: function (data) {
+            if (callback != null) callback(data);
+        }
+    });
+};
 HG.System.SetHttpPort = function (port, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/HttpService.SetPort/' + port + '/',
@@ -72,10 +81,8 @@ HG.System.LoggingIsEnabled = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/SystemLogging.IsEnabled/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
-            var haslog = eval(data)[0];
-            if (callback != null) callback(haslog.ResponseValue);
+            if (callback != null) callback(data.ResponseValue);
         }
     });
 };
@@ -115,7 +122,6 @@ HG.System.SetStatisticsDatabaseMaximumSize = function (mb, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Statistics.SetStatisticsDatabaseMaximumSize/' + mb + '/',
         type: 'GET',
-        dataType: "text",
         success: function (data) {
             if (callback != null) callback(data);
         }
@@ -128,7 +134,6 @@ HG.System.UpdateManager.UpdateCheck = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.Check/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }
@@ -139,7 +144,6 @@ HG.System.UpdateManager.GetUpdateList = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.UpdatesList/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }
@@ -150,7 +154,6 @@ HG.System.UpdateManager.DownloadUpdate = function (callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/UpdateManager.DownloadUpdate/',
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (callback != null) callback(data);
         }

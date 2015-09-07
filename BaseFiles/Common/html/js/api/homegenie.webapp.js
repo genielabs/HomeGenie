@@ -108,6 +108,7 @@ HG.WebApp.InitializePage = function ()
     //
     setTimeout(function() {
 
+        // localize UI
         var userLang = HG.WebApp.Locales.GetUserLanguage();
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
             HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
@@ -115,14 +116,19 @@ HG.WebApp.InitializePage = function ()
             });
         });
         HG.VoiceControl.Initialize();
-        //
-        // Apply UI settings
+
+        // apply UI settings
         setTheme(dataStore.get('UI.Theme'));
         if (dataStore.get('UI.EventsHistory'))
         {
             $('#btn_eventshistory_led').show();
         }
-        //
+
+        // get HG release info
+        HG.System.GetVersion(function(res){
+            $('#systemversion').html(res.Version);
+        });
+
         // add css google web fonts
         setTimeout(function(){
             $('head').append('<link href="https://fonts.googleapis.com/css?family=Oxygen:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">');

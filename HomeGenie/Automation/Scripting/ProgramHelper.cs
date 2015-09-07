@@ -33,6 +33,7 @@ using System.IO;
 using HomeGenie.Service.Constants;
 using System.Dynamic;
 using Newtonsoft.Json;
+using MIG;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -144,6 +145,15 @@ namespace HomeGenie.Automation.Scripting
                 //TODO: report error
                 throw (new Exception(e.StackTrace));
             }
+        }
+
+        /// <summary>
+        /// Gets the logger object.
+        /// </summary>
+        /// <value>The logger object.</value>
+        public NLog.Logger Log
+        {
+            get { return MigService.Log; }
         }
 
         /// <summary>

@@ -40,11 +40,11 @@ namespace HomeGenie.Service
     [Serializable]
     public class ReleaseInfo
     {
-        public string Name;
-        public string Version;
-        public string Description;
-        public string ReleaseNote;
-        public DateTime ReleaseDate;
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public string Description { get; set; }
+        public string ReleaseNote { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string DownloadUrl;
         public bool RequireRestart;
         public bool UpdateBreak;

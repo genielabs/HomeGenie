@@ -199,7 +199,6 @@ HG.Configure.Stores.ItemGet = function (domain, address, store, item, callback) 
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemGet/' + domain + "/" + address + "/" + store + "/" + item + "/",
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -209,7 +208,6 @@ HG.Configure.Stores.ItemSet = function (domain, address, store, item, value, cal
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemSet/' + domain + "/" + address + "/" + store + "/" + item + "/",
         type: 'POST',
-        dataType: 'text',
         data: value,
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
@@ -220,7 +218,6 @@ HG.Configure.Stores.ItemDelete = function (domain, address, store, item, callbac
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemDelete/' + domain + "/" + address + "/" + store + "/" + item + "/",
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
@@ -230,7 +227,6 @@ HG.Configure.Stores.ItemList = function (domain, address, store, callback) {
     $.ajax({
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Stores.ItemList/' + domain + "/" + address + "/" + store + "/",
         type: 'GET',
-        dataType: 'text',
         success: function (data) {
             if (typeof callback != 'undefined' && callback != null) callback(data);
         }
