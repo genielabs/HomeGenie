@@ -543,7 +543,7 @@ div.ui-page-theme-a div.ui-body-inherit span.hg-indicator-door, div.ui-bar-inher
 .ui-slider-track.ui-mini {
     height: 12px;
     top: 8px;
-    margin: 0px 15px 0px 68px;  /* add this line to file */
+    margin: 0px 15px 0px 85px;  /* add this line to file */
 }
 div.ui-slider-switch.ui-mini {
     height: 29px;

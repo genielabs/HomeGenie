@@ -1226,6 +1226,7 @@ namespace HomeGenie.Service.Handlers
                     webGateway.Options.Add(new Option("Password", oldConfig.HomeGenie.UserPassword));
                     webGateway.Options.Add(new Option("HttpCacheIgnore.1", "^.*\\/pages\\/control\\/widgets\\/.*\\.(js|html)$"));
                     webGateway.Options.Add(new Option("HttpCacheIgnore.2", "^.*\\/html\\/index.html"));
+                    webGateway.Options.Add(new Option("UrlAlias.1", "api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events"));
                     // TODO: EnableFileCaching value should be read from oldConfig.MIGService.EnableWebCache
                     webGateway.Options.Add(new Option("EnableFileCaching", "false"));
                     newConfig.MigService.Gateways.Add(webGateway);

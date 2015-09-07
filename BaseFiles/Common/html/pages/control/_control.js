@@ -161,7 +161,7 @@ HG.WebApp.Control.RecordMacroDiscard = function () {
 //
 HG.WebApp.Control.RenderMenu = function () {
     $('#groups_panel').panel().trigger('create');
-    $('#control_groupsmenu').find("li:gt(1)").remove();
+    $('#control_groupsmenu').find("li:gt(0)").remove();
     for (i = 0; i < HG.WebApp.Data.Groups.length; i++) {
         var indicators = '<div class="ui-body-inherit ui-body-a" style="display:block;margin-left:0px;border:0;overflow:hidden;cursor:pointer"><table><tr id="control_groupindicators_' + i + '"></tr></table></div>';
         var item = $('<li data-context-idx="' + i + '" style="height:auto"><a class="ui-btn ui-btn-icon-left ui-icon-carat-r" href"#">' + HG.WebApp.Data.Groups[i].Name + '</a>'+indicators+'</li>');

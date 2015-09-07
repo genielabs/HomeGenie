@@ -74,6 +74,7 @@
                 <Option Name="Password" Value="" />
                 <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
                 <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
+                <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
                 <Option Name="EnableFileCaching" Value="false" />
             </Options>
         </Gateway>

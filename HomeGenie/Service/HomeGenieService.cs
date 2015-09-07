@@ -557,18 +557,6 @@ namespace HomeGenie.Service
                 return;
 
             var migCommand = args.Request.Command;
-            var context = args.Request.Context.Data as HttpListenerContext;
-
-            string url = context.Request.RawUrl.TrimStart('/');
-            if (url.IndexOf("?") > 0) url = url.Substring(0, url.IndexOf("?"));
-
-            // Event stream url redirect for old-client compatibility
-            if (url.StartsWith("api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream"))
-            {
-                context.Response.Redirect("/events");
-                args.Request.Handled = true;
-                return;
-            }
 
             #region Interconnection (Remote Node Command Routing)
 
@@ -998,6 +986,8 @@ namespace HomeGenie.Service
         {
             // regenerate encrypted files
             UpdateProgramsDatabase();
+            UpdateGroupsDatabase("Automation");
+            UpdateGroupsDatabase("Control");
             UpdateModulesDatabase();
             SystemConfiguration.Update();
             ArchiveConfiguration("html/homegenie_backup_config.zip");
@@ -1356,7 +1346,7 @@ namespace HomeGenie.Service
             virtualMeter = new VirtualMeter(this);
         }
 
-        internal string GetPassPhrase()
+        private string GetPassPhrase()
         {
             // Get username/password from web serivce and use as encryption key
             var webGw = migService.GetGateway("WebServiceGateway");
