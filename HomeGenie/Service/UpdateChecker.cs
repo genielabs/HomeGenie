@@ -40,11 +40,11 @@ namespace HomeGenie.Service
     [Serializable]
     public class ReleaseInfo
     {
-        public string Name;
-        public string Version;
-        public string Description;
-        public string ReleaseNote;
-        public DateTime ReleaseDate;
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public string Description { get; set; }
+        public string ReleaseNote { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public string DownloadUrl;
         public bool RequireRestart;
         public bool UpdateBreak;
@@ -393,7 +393,6 @@ namespace HomeGenie.Service
 
                     if (!doNotCopy)
                     {
-                        Console.WriteLine("+ " + destinationFile);
                         try
                         {
                             LogMessage("+ Copying file '" + destinationFile + "'");
@@ -601,12 +600,12 @@ namespace HomeGenie.Service
                 var config = (SystemConfiguration)serializer.Deserialize(reader);
                 //
                 bool configChanged = false;
-                foreach (var iface in config.MIGService.Interfaces)
+                foreach (var iface in config.MigService.Interfaces)
                 {
-                    if (homegenie.SystemConfiguration.MIGService.GetInterface(iface.Domain) == null)
+                    if (homegenie.SystemConfiguration.MigService.GetInterface(iface.Domain) == null)
                     {
                         LogMessage("+ Adding MIG Interface: " + iface.Domain);
-                        homegenie.SystemConfiguration.MIGService.Interfaces.Add(iface);
+                        homegenie.SystemConfiguration.MigService.Interfaces.Add(iface);
                         if (!configChanged) configChanged = true;
                     }
                 }

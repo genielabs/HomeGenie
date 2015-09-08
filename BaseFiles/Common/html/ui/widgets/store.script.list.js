@@ -42,7 +42,7 @@
             $.mobile.loading('show');
             HG.Configure.Stores.ItemGet(_this.sourceDomain, _this.sourceAddress, _this.storeName, itemSelect.val(), function(res){
                 $.mobile.loading('hide');
-                var value = eval('['+res+']')[0].Value;
+                var value = res.Value;
                 var title = '<small style="color:#efefef">'+_this.module.Name+' '+_this.module.Domain.split('.').pop()+':'+_this.module.Address+'</small><br/>'+_this.program.Name;
                 var subtitle = context.parameter.Description+' &nbsp;&nbsp; <small style="color:#efefef">'+context.parameter.Name+'</small>';
                 HG.WebApp.Utility.EditorPopup(itemSelect.val(), title, subtitle, value, function(res) {
@@ -85,8 +85,7 @@
         var _this = this;
         var itemSelect = this.element.find('[data-ui-field=items]');
         itemSelect.find('option:gt(0)').remove();
-        HG.Configure.Stores.ItemList(this.sourceDomain, this.sourceAddress, this.storeName, function(res){
-            var list = eval(res);
+        HG.Configure.Stores.ItemList(this.sourceDomain, this.sourceAddress, this.storeName, function(list){
             $.each(list, function(k,v){
                 itemSelect.append('<option>'+v.Name+'</option>');
             });

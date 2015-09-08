@@ -46,8 +46,9 @@ namespace HomeGenie.Service.Handlers
             homegenie = hg;
         }
 
-        public void ProcessRequest(MIGClientRequest request, MIGInterfaceCommand migCommand)
+        public void ProcessRequest(MigClientRequest request)
         {
+            var migCommand = request.Command;
             string streamContent = "";
             ProgramBlock currentProgram;
             ProgramBlock newProgram;
@@ -63,7 +64,7 @@ namespace HomeGenie.Service.Handlers
                     break;
                 case "Macro.Save":
                     newProgram = homegenie.ProgramEngine.MacroRecorder.SaveMacro(migCommand.GetOption(1));
-                    migCommand.Response = newProgram.Address.ToString();
+                    request.ResponseData = newProgram.Address.ToString();
                     break;
                 case "Macro.Discard":
                     homegenie.ProgramEngine.MacroRecorder.RecordingDisable();
@@ -90,7 +91,7 @@ namespace HomeGenie.Service.Handlers
                     }
                     break;
                 case "Macro.GetDelay":
-                    migCommand.Response = "[{ DelayType : '" + homegenie.ProgramEngine.MacroRecorder.DelayType + "', DelayOptions : '" + homegenie.ProgramEngine.MacroRecorder.DelaySeconds + "' }]";
+                    request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelaySeconds + "\" }";
                     break;
                 }
             }
@@ -123,14 +124,14 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Get":
-                    migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Get(migCommand.GetOption(0)));
+                    request.ResponseData = homegenie.ProgramEngine.SchedulerService.Get(migCommand.GetOption(0));
                     break;
                 case "Scheduling.List":
                     homegenie.ProgramEngine.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
                     {
                         return s1.Name.CompareTo(s2.Name);
                     });
-                    migCommand.Response = JsonConvert.SerializeObject(homegenie.ProgramEngine.SchedulerService.Items);
+                    request.ResponseData = homegenie.ProgramEngine.SchedulerService.Items;
                     break;
                 case "Scheduling.Describe":
                     var cronDescription = "";
@@ -138,7 +139,7 @@ namespace HomeGenie.Service.Handlers
                         cronDescription = ExpressionDescriptor.GetDescription(migCommand.GetOption(0)); 
                         cronDescription = Char.ToLowerInvariant(cronDescription[0]) + cronDescription.Substring(1);
                     } catch { }
-                    migCommand.Response = JsonHelper.GetSimpleResponse(cronDescription);
+                    request.ResponseData = new ResponseText(cronDescription);
                     break;
                 }
             }
@@ -146,7 +147,7 @@ namespace HomeGenie.Service.Handlers
             {
                 if (migCommand.Command != "Programs.Import")
                 {
-                    streamContent = new StreamReader(request.InputStream).ReadToEnd();
+                    streamContent = request.RequestText;
                 }
                 //
                 switch (migCommand.Command)
@@ -156,7 +157,7 @@ namespace HomeGenie.Service.Handlers
                     if (File.Exists(archiveName))
                         File.Delete(archiveName);
                     //
-                    MIG.Gateways.WebServiceUtility.SaveFile(request.InputStream, archiveName);
+                    MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
                     //
                     int newPid = homegenie.ProgramEngine.GeneratePid();
                     var reader = new StreamReader(archiveName);
@@ -205,7 +206,7 @@ namespace HomeGenie.Service.Handlers
                     //
                     homegenie.UpdateProgramsDatabase();
                     //migCommand.response = JsonHelper.GetSimpleResponse(programblock.Address);
-                    migCommand.Response = newProgram.Address.ToString();
+                    request.ResponseData = newProgram.Address.ToString();
                     break;
 
                 case "Programs.Export":
@@ -257,19 +258,19 @@ namespace HomeGenie.Service.Handlers
                         }
                         //
                         byte[] bundleData = File.ReadAllBytes(arduinoBundle);
-                        (request.Context as HttpListenerContext).Response.AddHeader(
+                        (request.Context.Data as HttpListenerContext).Response.AddHeader(
                             "Content-Disposition",
                             "attachment; filename=\"" + filename + ".zip\""
                             );
-                        (request.Context as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
+                        (request.Context.Data as HttpListenerContext).Response.OutputStream.Write(bundleData, 0, bundleData.Length);
                     }
                     else
                     {
-                        (request.Context as HttpListenerContext).Response.AddHeader(
+                        (request.Context.Data as HttpListenerContext).Response.AddHeader(
                             "Content-Disposition",
                             "attachment; filename=\"" + filename + ".hgx\""
                         );
-                        migCommand.Response = builder.ToString();
+                        request.ResponseData = builder.ToString();
                     }
                     break;
 
@@ -281,7 +282,7 @@ namespace HomeGenie.Service.Handlers
                         string c2 = p2.Name + " " + p2.Address;
                         return c1.CompareTo(c2);
                     });
-                    migCommand.Response = JsonConvert.SerializeObject(programList);
+                    request.ResponseData = programList;
                     break;
 
                 case "Programs.Add":
@@ -293,7 +294,7 @@ namespace HomeGenie.Service.Handlers
                     newProgram.Address = homegenie.ProgramEngine.GeneratePid();
                     homegenie.ProgramEngine.ProgramAdd(newProgram);
                     homegenie.UpdateProgramsDatabase();
-                    migCommand.Response = JsonHelper.GetSimpleResponse(newProgram.Address.ToString());
+                    request.ResponseData = new ResponseText(newProgram.Address.ToString());
                     break;
 
                 case "Programs.Delete":
@@ -351,7 +352,7 @@ namespace HomeGenie.Service.Handlers
                         //
                         currentProgram.IsEnabled = newProgram.IsEnabled;
                         currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
-                        migCommand.Response = currentProgram.ScriptErrors;
+                        request.ResponseData = currentProgram.ScriptErrors;
                     }
                         //
                     homegenie.UpdateProgramsDatabase();
@@ -370,7 +371,7 @@ namespace HomeGenie.Service.Handlers
                         sketchFile = ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0));
                     }
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(sketchFile));
-                    migCommand.Response = JsonHelper.GetSimpleResponse(File.ReadAllText(sketchFile));
+                    request.ResponseData = new ResponseText(File.ReadAllText(sketchFile));
                     break;
                     
                 case "Programs.Arduino.FileSave":
@@ -386,11 +387,11 @@ namespace HomeGenie.Service.Handlers
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
                     if (File.Exists(sketchFile))
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("EXISTS");
+                        request.ResponseData = new ResponseText("EXISTS");
                     }
                     else if (!ArduinoAppFactory.IsValidProjectFile(sketchFile))
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("INVALID_NAME");
+                        request.ResponseData = new ResponseText("INVALID_NAME");
                     }
                     else
                     {
@@ -398,7 +399,7 @@ namespace HomeGenie.Service.Handlers
                         sw.Close();
                         sw.Dispose();
                         sw = null;
-                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        request.ResponseData = new ResponseText("OK");
                     }
                     break;
                     
@@ -407,12 +408,12 @@ namespace HomeGenie.Service.Handlers
                     sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
                     if (!File.Exists(sketchFile))
                     {
-                        migCommand.Response = JsonHelper.GetSimpleResponse("NOT_FOUND");
+                        request.ResponseData = new ResponseText("NOT_FOUND");
                     }
                     else
                     {
                         File.Delete(sketchFile);
-                        migCommand.Response = JsonHelper.GetSimpleResponse("OK");
+                        request.ResponseData = new ResponseText("OK");
                     }
                     break;
 
@@ -426,7 +427,7 @@ namespace HomeGenie.Service.Handlers
                             files.Add(Path.GetFileName(f));
                         }
                     }
-                    migCommand.Response = JsonConvert.SerializeObject(files);
+                    request.ResponseData = files;
                     break;
 
                 case "Programs.Run":

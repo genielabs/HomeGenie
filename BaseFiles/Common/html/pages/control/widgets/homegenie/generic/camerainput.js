@@ -34,7 +34,7 @@
                 if (popupisopen) {
                     setTimeout(function () {
                         var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-                        popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
+                        popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?');
                     }, 100);
                 }
             });
@@ -47,13 +47,13 @@
                 if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
                     var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
                     popup.popup('open');
-                    popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
+                    popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?');
                 }
             });
             widget.find('[data-ui-field=camerapicturepreview]').load(function () {
                 if (_this.Widget.is(':visible')) {
                     setTimeout(function () {
-                        _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
+                        _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?');
                     }, 2000);
                 }
             });
@@ -78,7 +78,7 @@
         //widget.find('[data-ui-field=status]').html(this.StatusText);
         //widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
         //
-        this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
+        this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?');
     }
 
 }]

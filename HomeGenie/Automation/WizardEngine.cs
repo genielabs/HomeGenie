@@ -141,7 +141,7 @@ namespace HomeGenie.Automation
                         default:
                             var programCommand = commands[x];
                             string wrequest = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + programCommand.CommandArguments;
-                            homegenie.ExecuteAutomationRequest(new MIGInterfaceCommand(wrequest));
+                            homegenie.ExecuteAutomationRequest(new MigInterfaceCommand(wrequest));
                             break;
                         }
                         //
@@ -291,7 +291,7 @@ namespace HomeGenie.Automation
         private void ExecuteCommand(ProgramCommand programCommand)
         {
             string command = programCommand.Domain + "/" + programCommand.Target + "/" + programCommand.CommandString + "/" + System.Uri.EscapeDataString(programCommand.CommandArguments);
-            var interfaceCommand = new MIGInterfaceCommand(command);
+            var interfaceCommand = new MigInterfaceCommand(command);
             homegenie.InterfaceControl(interfaceCommand);
         }
     }

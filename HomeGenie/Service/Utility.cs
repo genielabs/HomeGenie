@@ -36,23 +36,21 @@ using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 using System.IO.Packaging;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace HomeGenie.Service
 {
-    static class Extensions
+    public static class Extensions
     {
-        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        public static T DeepClone<T>(this T a)
         {
-            IList<T> list = null;
-            if (listToClone.GetType() == typeof(TsList<T>))
+            using (MemoryStream stream = new MemoryStream())
             {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
+                DataContractSerializer dcs = new DataContractSerializer(typeof(T));
+                dcs.WriteObject(stream, a);
+                stream.Position = 0;
+                return (T)dcs.ReadObject(stream);
             }
-            else
-            {
-                list = listToClone.Select(item => (T)item.Clone()).ToList();
-            }
-            return list;
         }
     }
 
@@ -97,16 +95,6 @@ namespace HomeGenie.Service
         }
     }
 
-    public static class JsonHelper
-    {
-        public static string GetSimpleResponse(string value)
-        {
-            dynamic res = new ExpandoObject();
-            res.ResponseValue = value;
-            return "[" + Newtonsoft.Json.JsonConvert.SerializeObject(res) + "]";
-        }
-    }
-
     public static class Utility
     {
 
@@ -146,53 +134,6 @@ namespace HomeGenie.Service
             }
             parameter.Value = propertyValue;
             return parameter;
-        }
-        
-        public static string WaitModuleParameterChange(Module module, string parameterName)
-        {
-            string value = "";
-            // TODO make it as a function _waitModuleParameterChange(mod, parname, timeout)
-            ModuleParameter parameter = null;
-            var start = DateTime.UtcNow.Ticks;
-            var now = start;
-            int maxSecWait = 10; // 10 seconds max wait
-            while (parameter == null && TimeSpan.FromTicks(now - start).TotalSeconds <= maxSecWait)
-            {
-                // wait for maxSecWait seconds if the parameterName doesn't exit yet - it migt not have been initialized yet
-                // classes that use encryption are require many messages to be exchanged
-                now = DateTime.UtcNow.Ticks;
-                parameter = Service.Utility.ModuleParameterGet(module, parameterName);
-                if (parameter == null)
-                {
-                    //Console.WriteLine("Thread - " + System.Threading.Thread.CurrentThread.ManagedThreadId + " Waiting .5s for " + parameterName + ". Waited " + TimeSpan.FromTicks(now - start).TotalSeconds);
-                    Thread.Sleep(500);
-                }
-            }
-
-            if (parameter != null)
-            {
-                var updated = DateTime.UtcNow.Ticks; //p.UpdateTime.Ticks - (TimeSpan.TicksPerSecond * 1); 
-                //
-                Thread.Sleep(500);
-                //
-                int timeout = 0;
-                int maxWait = 50; //(50 * 100ms ticks = 5000 ms)
-                int tickFrequency = 100;
-                //
-                // I don't think that it will ever get into the while loop because the "updated" was just reset
-                // what's the change the "parameter.UpdateTime.Ticks" was updated after "updated" was reset
-                // we'll accept 1 second old values as still current values
-                while ((TimeSpan.FromTicks(updated - parameter.UpdateTime.Ticks).TotalSeconds > 1 /*&& (DateTime.UtcNow.Ticks - p.UpdateTime.Ticks > 5 * TimeSpan.TicksPerSecond)*/) && timeout++ < maxWait)
-                {
-                    Thread.Sleep(tickFrequency);
-                }
-                //
-                if (timeout < maxWait)
-                {
-                    value = parameter.Value;
-                }
-            }
-            return value;
         }
 
         public static DateTime JavaTimeStampToDateTime(double javaTimestamp)
@@ -507,7 +448,7 @@ namespace HomeGenie.Service
                 }
                 catch (Exception ex)
                 {
-                    HomeGenieService.LogEvent(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
+                    HomeGenieService.LogError(Domains.HomeAutomation_HomeGenie, "Service.Utility.RunAsyncTask", ex.Message, "Exception.StackTrace", ex.StackTrace);
                 }
             });
             asyncTask.Start();

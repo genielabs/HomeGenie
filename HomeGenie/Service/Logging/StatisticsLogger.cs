@@ -606,7 +606,7 @@ namespace HomeGenie.Service.Logging
                     dbCommand.CommandText = "VACUUM";
                     dbCommand.ExecuteNonQuery();
 
-                    HomeGenieService.LogEvent(
+                    HomeGenieService.LogDebug(
                                        Domains.HomeAutomation_HomeGenie,
                                        "Service.StatisticsLogger",
                                        "Cleaned old values from database.",
@@ -678,7 +678,7 @@ namespace HomeGenie.Service.Logging
         private void logInterval_Elapsed(object sender, ElapsedEventArgs eventArgs)
         {
             var end = DateTime.UtcNow;
-            var modules = (TsList<Module>)homegenie.Modules; //.Clone();
+            var modules = (TsList<Module>)homegenie.Modules; //.DeepClone();
             for (int m = 0; m < modules.Count; m++)
             {
                 var module = modules[m];
@@ -719,7 +719,7 @@ namespace HomeGenie.Service.Logging
                             }
                             catch (Exception ex)
                             {
-                                HomeGenieService.LogEvent(
+                                HomeGenieService.LogError(
                                     Domains.HomeAutomation_HomeGenie,
                                     "Service.StatisticsLogger",
                                     ex.Message,

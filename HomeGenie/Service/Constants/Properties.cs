@@ -56,6 +56,8 @@ namespace HomeGenie.Service.Constants
             = "Status.Level";
         public const string METER_WATTS
             = "Meter.Watts";
+        public const string VIRTUALMETER_WATTS
+            = "VirtualMeter.Watts";
         public const string METER_ANY
             = "Meter.";
         public const string WIDGET_DISPLAYMODULE

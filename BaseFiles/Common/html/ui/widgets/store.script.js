@@ -27,7 +27,7 @@
             $.mobile.loading('show');
             HG.Configure.Stores.ItemGet(_this.sourceDomain, _this.sourceAddress, _this.storeName, _this.bindItem, function(res){
                 $.mobile.loading('hide');
-                var value = eval('['+res+']')[0].Value;
+                var value = res.Value;
                 var title = '<small style="color:#efefef">'+_this.module.Name+' '+_this.module.Domain.split('.').pop()+':'+_this.module.Address+'</small><br/>'+_this.program.Name;
                 var subtitle = context.parameter.Description+' &nbsp;&nbsp; <small style="color:#efefef">'+context.parameter.Name+'</small>';
                 HG.WebApp.Utility.EditorPopup(_this.bindItem, title, subtitle, value, function(res) {

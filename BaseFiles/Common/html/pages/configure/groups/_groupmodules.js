@@ -152,7 +152,7 @@ HG.WebApp.GroupModules.InitializePage = function () {
             $.mobile.loading('hide');
         },
         done: function (e, data) {
-            var wp = data.result[0].ResponseValue;
+            var wp = data.result.ResponseValue;
             $('#configure_group_wallpaper').css('background-image', 'url(images/wallpapers/'+wp+')');
             HG.Configure.Groups.WallpaperSet(HG.WebApp.GroupModules.CurrentGroup, wp, function() { 
                 var group = HG.Configure.Groups.GetGroupByName(HG.WebApp.GroupModules.CurrentGroup);

@@ -111,10 +111,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UPnP">
-      <HintPath>..\Externals\upnp\UPnP.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Raspberry.System">
       <HintPath>..\Externals\raspberry-sharp\Raspberry.System.dll</HintPath>
@@ -186,6 +182,15 @@
     <Reference Include="SerialPortLib">
       <HintPath>..\Externals\g-labs\SerialPortLib.dll</HintPath>
     </Reference>
+    <Reference Include="UPnP">
+      <HintPath>..\Externals\upnp\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\Externals\g-labs\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="MIG">
+      <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Automation\MacroRecorder.cs" />
@@ -202,7 +207,6 @@
     <Compile Include="Automation\Scripting\EventsHelper.cs" />
     <Compile Include="Automation\Scripting\TcpClientHelper.cs" />
     <Compile Include="Automation\Scripting\SerialPortHelper.cs" />
-    <Compile Include="Data\LogEntry.cs" />
     <Compile Include="Data\ModuleEvent.cs" />
     <Compile Include="Data\ValueStatistics.cs" />
     <Compile Include="Data\VirtualModule.cs" />
@@ -214,9 +218,7 @@
     <Compile Include="Service\Handlers\Automation.cs" />
     <Compile Include="Service\Handlers\Config.cs" />
     <Compile Include="Service\Handlers\Interconnection.cs" />
-    <Compile Include="Service\Handlers\Logging.cs" />
     <Compile Include="Service\Handlers\Statistics.cs" />
-    <Compile Include="Service\Logging\SystemLogger.cs" />
     <Compile Include="Service\Logging\StatisticsLogger.cs" />
     <Compile Include="Service\UpdateChecker.cs" />
     <Compile Include="Service\Utility.cs" />
@@ -241,6 +243,8 @@
     <Compile Include="Automation\WizardEngine.cs" />
     <Compile Include="Data\Store.cs" />
     <Compile Include="Automation\Scripting\StoreHelper.cs" />
+    <Compile Include="Automation\ProgramDynamiApi.cs" />
+    <Compile Include="Data\SystemConfiguration_1_0.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">
@@ -301,11 +305,7 @@
       <Project>{0A27EF44-EC80-4FDB-8764-B153C169905D}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MigFiles\MIG\MIG.csproj">
-      <Project>{005357C9-7F8E-458E-AFFA-BF84F7D6A6AE}</Project>
-      <Name>MIG</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MigFiles\SupportLibraries\NetClientLib\NetClientLib.csproj">
+    <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj">
       <Project>{318D2523-3C8B-4273-B1EA-DE339868403C}</Project>
       <Name>NetClientLib</Name>
     </ProjectReference>

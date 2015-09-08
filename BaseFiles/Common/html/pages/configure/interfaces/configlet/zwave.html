@@ -91,8 +91,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             });
         });
         // populate serial port list
-        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (data) {
-            var ports = eval(decodeURIComponent(data));
+        HG.Configure.Interfaces.ServiceCall('Hardware.SerialPorts', function (ports) {
             portSelect.empty();
             portSelect.append('<option value="">' + HG.WebApp.Locales.GetLocaleString('systemsettings_selectport_placeholder', false, this.Locale) + '</option>');
             if (ports.length == 0) {
@@ -135,12 +134,28 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
             _this.NodeOperationPopup.find('[data-ui-field=nodeid]').html('<span style="color:green">waiting</span>');
             _this.NodeOperationPopup.find('[data-ui-field=message]').html(messageString);
         });
+        // listen to hg events
+        HG.WebApp.Events.AddListener(this);
+    },
+
+    // this must be defined when listening to HG events
+    parameterEventCallback: function(module, event) {
+        if (event.Domain == this.Id) {
+            if (event.Source == '1') {
+                if (event.Value == 'Discovery Started' && $.mobile.activePage.attr("id") == HG.WebApp.SystemSettings.PageId) {
+                    this.DiscoveryLog.empty();
+                    this.DiscoveryPopup.popup('open');
+                }
+                this.DiscoveryLog.prepend('<strong>' + event.Value + '</strong><br/>');
+            } else if (event.Property.indexOf('ZWaveNode.') == 0) {
+                this.DiscoveryLog.prepend('Node ' + event.Source + ' <strong>' + event.Property.substring(10) + '</strong> ' + event.Value + '<br/>');
+            }
+        }
     },
     
     ZWaveDiscovery: function() {
-        this.DiscoveryLog.empty();
         this.DiscoveryPopup.popup('open');
-        $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/' + (new Date().getTime()), function (data) { });
+        $.get('/' + HG.WebApp.Data.ServiceKey + '/'+this.Id+'/1/Controller.Discovery/', function (data) { });
     },
     
     ZWaveNodeAdd: function() {
@@ -192,7 +207,7 @@ HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'] = {
         var warningString = HG.WebApp.Locales.GetLocaleString('hard_reset_warning', false, this.Locale);
         messageString += '<div style="font-weight:bolder">' + warningString + '</div>';
         HG.WebApp.Utility.ConfirmPopup(titleString, messageString, function(proceed) {
-            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/' + (new Date().getTime()), function (data) { });
+            if (proceed) $.get('/' + HG.WebApp.Data.ServiceKey + '/'+_this.Id+'/1/Controller.HardReset/', function (data) { });
         });
     },
     

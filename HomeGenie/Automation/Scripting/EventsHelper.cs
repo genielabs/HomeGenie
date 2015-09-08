@@ -201,7 +201,7 @@ namespace HomeGenie.Automation.Scripting
         {
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             program.registeredApiCalls.Add(apiCall);
-            homegenie.RegisterDynamicApi(apiCall, handler);
+            homegenie.ProgramEngine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 
@@ -209,7 +209,7 @@ namespace HomeGenie.Automation.Scripting
         {
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             program.registeredApiCalls.Add(apiCall);
-            homegenie.RegisterDynamicApi(apiCall, handler);
+            homegenie.ProgramEngine.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 

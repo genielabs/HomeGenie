@@ -33,6 +33,7 @@ using System.IO;
 using HomeGenie.Service.Constants;
 using System.Dynamic;
 using Newtonsoft.Json;
+using MIG;
 
 namespace HomeGenie.Automation.Scripting
 {
@@ -112,7 +113,7 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     //
-                    HomeGenieService.LogEvent(
+                    homegenie.RaiseEvent(
                         myProgramDomain,
                         myProgramId.ToString(),
                         "Automation Program",
@@ -144,6 +145,15 @@ namespace HomeGenie.Automation.Scripting
                 //TODO: report error
                 throw (new Exception(e.StackTrace));
             }
+        }
+
+        /// <summary>
+        /// Gets the logger object.
+        /// </summary>
+        /// <value>The logger object.</value>
+        public NLog.Logger Log
+        {
+            get { return MigService.Log; }
         }
 
         /// <summary>
@@ -272,7 +282,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(
+                HomeGenieService.LogError(
                     myProgramDomain,
                     myProgramId.ToString(),
                     ex.Message,
@@ -309,7 +319,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(
+                HomeGenieService.LogError(
                     myProgramDomain,
                     myProgramId.ToString(),
                     ex.Message,
@@ -545,7 +555,7 @@ namespace HomeGenie.Automation.Scripting
             notification.Title = title;
             notification.Message = message;
             string serializedMessage = JsonConvert.SerializeObject(notification);
-            homegenie.LogBroadcastEvent(
+            homegenie.RaiseEvent(
                 Domains.HomeAutomation_HomeGenie_Automation,
                 myProgramId.ToString(),
                 "Automation Program",
@@ -577,8 +587,10 @@ namespace HomeGenie.Automation.Scripting
             try
             {
                 Utility.Say(sentence, locale, goAsync);
-            } catch (Exception e) {
-                Console.WriteLine("Program.Say ERROR: {0}", e.Message);
+            }
+            catch (Exception e) 
+            {
+                HomeGenieService.LogError(e);
             }
             return this;
         }
@@ -614,8 +626,10 @@ namespace HomeGenie.Automation.Scripting
                 stream.Close();
 
                 Utility.Play(file);
-            } catch (Exception e) {
-                Console.WriteLine("Program.Play ERROR: {0}", e.Message);
+            }
+            catch (Exception e) 
+            {
+                HomeGenieService.LogError(e);
             }
             return this;
         }
@@ -631,17 +645,19 @@ namespace HomeGenie.Automation.Scripting
         {
             try
             {
-                var actionEvent = new MIG.InterfacePropertyChangedAction();
-                actionEvent.Domain = programModule.Domain;
-                actionEvent.Path = parameter;
-                actionEvent.Value = value;
-                actionEvent.SourceId = programModule.Address;
-                actionEvent.SourceType = "Automation Program";
-                homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
+                var actionEvent = homegenie.MigService.GetEvent(
+                    programModule.Domain,
+                    programModule.Address,
+                    "Automation Program",
+                    parameter,
+                    value
+                );
+                homegenie.MigService.RaiseEvent(actionEvent);
+                //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(
+                HomeGenieService.LogError(
                     programModule.Domain,
                     programModule.Address,
                     ex.Message,
@@ -664,17 +680,19 @@ namespace HomeGenie.Automation.Scripting
         {
             try
             {
-                var actionEvent = new MIG.InterfacePropertyChangedAction();
-                actionEvent.Domain = sourceModule.Instance.Domain;
-                actionEvent.Path = parameter;
-                actionEvent.Value = value;
-                actionEvent.SourceId = sourceModule.Instance.Address;
-                actionEvent.SourceType = "Virtual Module";
-                homegenie.SignalModulePropertyChange(this, sourceModule.Instance, actionEvent);
+                var actionEvent = homegenie.MigService.GetEvent(
+                    sourceModule.Instance.Domain,
+                    sourceModule.Instance.Address,
+                    "Virtual Module",
+                    parameter,
+                    value
+                );
+                homegenie.MigService.RaiseEvent(actionEvent);
+                //homegenie.SignalModulePropertyChange(this, sourceModule.Instance, actionEvent);
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(
+                HomeGenieService.LogError(
                     programModule.Domain,
                     programModule.Address,
                     ex.Message,
@@ -923,7 +941,7 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogEvent(
+                HomeGenieService.LogError(
                     myProgramDomain,
                     myProgramId.ToString(),
                     ex.Message,

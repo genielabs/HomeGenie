@@ -35,7 +35,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         } else {
             importPopup.popup('close');
             $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
-            $.get('../HomeAutomation.HomeGenie/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
+            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/HomeAutomation.HomeGenie/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
                 $.mobile.loading('hide');
                 downloadUrl.val('');
                 var response = eval(arguments[2].responseText)[0];
@@ -62,8 +62,10 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         uploadFile.val('');
         var response = uploadFrame[0].contentWindow.document.body;
         if (typeof response != 'undefined' && response != '' && (response.textContent || response.innerText)) {
-            response = eval(response.textContent || response.innerText)[0];
-            HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            try {
+                response = eval(response.textContent || response.innerText)[0];
+                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+            } catch (e) { }
         }
     });
 };
@@ -74,7 +76,7 @@ HG.WebApp.SystemSettings.AddonInstall = function(text) {
     HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_addonsinstall_title', 'Install add-on?'), '<pre>'+text+'</pre>', function(confirm){
         if (confirm) {
             $.mobile.loading('show', { text: 'Installing, please wait...', textVisible: true, html: '' });
-            $.get('../HomeAutomation.HomeGenie/Config/Interface.Install', function(data){
+            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/HomeAutomation.HomeGenie/Config/Interface.Install', function(data){
                 HG.WebApp.SystemSettings.ListInterfaces();        
                 $.mobile.loading('hide');
             });

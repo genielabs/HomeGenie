@@ -182,7 +182,7 @@ HG.WebApp.WidgetEditor.InitializePage = function () {
         $('#editwidget_actionmenu').popup('close');
         // export current widget
         //HG.Configure.Widgets.Export(HG.WebApp.WidgetsList._currentWidget)
-        window.open(location.protocol + '../HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
+        window.open(location.protocol + '../../api/HomeAutomation.HomeGenie/Config/Widgets.Export/' + encodeURIComponent(HG.WebApp.WidgetsList._currentWidget) + '/');
     });
     
     deleteButton.bind('click', function(){
