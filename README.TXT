@@ -36,7 +36,7 @@ Some of these goals have been already accomplished (see CURRENT FEATURES).
 
 Other expected features:
 - Support for other multimedia wireless standards (eg. Bluetooth, AirPlay)
-- Generic I/O Device Wireless Router and Framework (see MIG)
+- Generic I/O Device Router and Framework (see MIG project https://github.com/genielabs/mig-service-dotnet)
 
 
 CURRENT FEATURES
@@ -86,7 +86,7 @@ CURRENT FEATURES
 
 * Speech recognition / Voice Control (using Web Speech API)
 
-* Speech synthesys (cloud based)
+* Speech synthesys
 
 * Programmable InfraRed transceiver
   use a common IR remote to control your automation system
@@ -140,6 +140,7 @@ BUILT-IN Z-WAVE FEATURES
 - Metering Report
 - Thermostat Mode/OperatingState/SetPoint/FanMode/FanState/Heating/SetBack
 - UserCode
+- DoorLock
 
 BUILT-IN Z-WAVE MODULE TYPES
 ============================
@@ -164,6 +165,7 @@ AUTOMATION PROGRAM PLUGINS (APPs)
 =================================
 
 Lights
+- IR/RF Remote Control
 - Level Memory
 - Smart Ligths
 
@@ -235,6 +237,7 @@ Raspberry Pi
 - MCP3008 - Analog Input Modules
 - Olimex - Nokia 3310 LCD display
 - SmartIC - MCP23017 dual I/O expander
+- SSD1306 - OLED display (128x64)
 
 CubieTruck
 - GPIO Modules

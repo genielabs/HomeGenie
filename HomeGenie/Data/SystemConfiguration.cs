@@ -80,9 +80,10 @@ namespace HomeGenie.Data
                 System.Xml.XmlWriterSettings ws = new System.Xml.XmlWriterSettings();
                 ws.Indent = true;
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(syscopy.GetType());
-                System.Xml.XmlWriter wri = System.Xml.XmlWriter.Create(fname, ws);
-                x.Serialize(wri, syscopy);
-                wri.Close();
+                using (var wri = System.Xml.XmlWriter.Create(fname, ws))
+                {
+                    x.Serialize(wri, syscopy);
+                }
                 success = true;
             }
             catch (Exception e)

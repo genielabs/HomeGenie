@@ -1,5 +1,11 @@
 ﻿RELEASE HISTORY
 
+08/09/2015 v1.1-beta.494
+    - Integrated new MIG library https://github.com/genielabs/mig-service-dotnet
+    - General speed and performance improvements
+    - Now logging through NLog library
+    - Updated all automation programs to use latest API
+
 26/08/2015 v1.00-beta.493-p4
     - Fixed HG configuration saving issue (not storing interface options)
     - ZWaveLib: added caching and persistence of nodes data to zwavenodes.xml file

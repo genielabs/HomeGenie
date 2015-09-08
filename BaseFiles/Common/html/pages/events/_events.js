@@ -45,9 +45,10 @@ HG.WebApp.Events.Setup = function () {
         var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);
         event.Value = event.Value.toString();
         //
+        var module = null;
         if ((event.Domain == 'HomeGenie.System' && event.Property == 'Console.Output') == false) {
             // update event source (the module that is raising this event)
-            var module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
+            module = HG.WebApp.Utility.GetModuleByDomainAddress(event.Domain, event.Source);
             if (module != null) {
                 HG.WebApp.Utility.SetModulePropertyByName(module, event.Property, event.Value, event.Timestamp);
                 HG.WebApp.Control.RefreshGroupIndicators();
@@ -230,9 +231,6 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     text: '',
                     timestamp: date
                 };
-                var zwaveInterface = HG.WebApp.SystemSettings.Interfaces['HomeAutomation.ZWave'];
-                if (zwaveInterface && zwaveInterface.DiscoveryLog)
-                    zwaveInterface.DiscoveryLog.prepend('*&nbsp;' + eventLog.Value + '<br/>');
                 break;
             }
             // continue to default processing
@@ -324,28 +322,6 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     }
                 }
             }
-            /*
-            // TODO: DEPREACATE THIS?
-            else {
-                if (eventLog.Domain == 'Protocols.AirPlay' && eventLog.Property == 'PlayControl.DisplayImage') {
-                    var logdate = new Date(eventLog.UnixTimestamp);
-                    var date = HG.WebApp.Utility.FormatDateTime(logdate);
-
-                    s += '<table width="100%"><tr><td width="48" rowspan="2">';
-                    s += '<a _href="#dialog_netplay_show_popup" -data-rel="popup"><img src="images/playcontrol.png" width="48" height="48"></a>';
-                    s += '</td><td valign="top" align="left">';
-                    s += '<span style="color:gray;font-size:8pt;">AirPlay Service</span><br><b>Remote image display reuqest</b>';
-                    s += '</td><td align="right" style="color:lime;font-size:12pt">    </td></tr>';
-                    s += '<tr><td colspan="2" align="right"><span style="color:gray;font-size:8pt;">' + date + '</span>';
-                    s += '</td></tr></table>';
-
-                    var displayid = eventLog.Value;
-                    var cts = eventLog.UnixTimestamp;
-
-                    HG.WebApp.Apps.NetPlay.SlideShow.DisplayImage(displayid, cts);
-
-                }
-            }*/
             break;
     }
     //
