@@ -48,6 +48,7 @@ namespace HomeGenie.Automation.Scripting
         private Module programModule;
         private int myProgramId = -1;
         private string myProgramDomain = Domains.HomeAutomation_HomeGenie_Automation;
+        private object setupLock = new object();
 
         //private string parameter = "";
         //private string value = "";
@@ -79,7 +80,7 @@ namespace HomeGenie.Automation.Scripting
         /// <code>
         ///  Program.Setup(()=>
         ///  {              
-        ///      Program.AddInputField(
+        ///      Program.AddOption(
         ///          "MaxLevel",
         ///          "40", 
         ///          "Keep level below the following value",
@@ -89,18 +90,16 @@ namespace HomeGenie.Automation.Scripting
         ///          "EnergyManagement.EnergySavingMode", 
         ///          "Energy Saving Mode enabled light",
         ///          "checkbox");
-        ///  });
+        ///  }, 0);
         /// </code>
         /// </example>
         public void Setup(Action functionBlock)
         {
-            try
+            lock(setupLock)
             {
                 if (!this.initialized)
                 {
-                    //
                     if (programModule == null) RelocateProgramModule();
-                    //
                     // mark config options to determine unused ones
                     if (programModule != null)
                     {
@@ -112,7 +111,7 @@ namespace HomeGenie.Automation.Scripting
                             }
                         }
                     }
-                    //
+
                     homegenie.RaiseEvent(
                         myProgramDomain,
                         myProgramId.ToString(),
@@ -121,7 +120,7 @@ namespace HomeGenie.Automation.Scripting
                         "Setup"
                     );
                     functionBlock();
-                    //
+
                     // remove deprecated config options
                     if (programModule != null)
                     {
@@ -135,15 +134,31 @@ namespace HomeGenie.Automation.Scripting
                         }
                     }
                     this.initialized = true;
-                    //
+
                     homegenie.modules_RefreshPrograms();
                     homegenie.modules_RefreshVirtualModules();
+
+                    homegenie.RaiseEvent(
+                        myProgramDomain,
+                        myProgramId.ToString(),
+                        "Automation Program",
+                        Properties.PROGRAM_STATUS,
+                        "Idle"
+                    );
                 }
             }
-            catch (Exception e)
+        }
+
+        /// <summary>
+        /// Sets the autostart priority (0 = autostart disabled).
+        /// </summary>
+        /// <param name="priority">Priority.</param>
+        public void SetAutostart(bool autostart)
+        {
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            if (program != null)
             {
-                //TODO: report error
-                throw (new Exception(e.StackTrace));
+                program.Autostart = autostart;
             }
         }
 
@@ -924,6 +939,7 @@ namespace HomeGenie.Automation.Scripting
             var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
+                program.Autostart = false;
                 program.Features.Clear();
             }
             return this;

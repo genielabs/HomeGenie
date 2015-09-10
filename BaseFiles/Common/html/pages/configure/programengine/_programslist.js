@@ -333,19 +333,19 @@ HG.WebApp.ProgramsList.SetProgramType = function () {
         ].join('\n'));
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
-        editor1.setValue('"""\nPut your trigger code logic here.\nCall \'hg.SetConditionTrue()\' when you want\nthe \'Code To Run\' to be executed.\n"""\nhg.SetConditionFalse()\n');
+        editor1.setValue('');
         editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nhg.Modules.WithName(\'Light 1\').On()\n"""\n')
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
-        editor1.setValue('# Put your trigger code logic here.\n# Call \'hg.SetConditionTrue()\' when you want\n# the \'Code To Run\' to be executed.\nhg.SetConditionFalse()\n');
+        editor1.setValue('');
         editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# hg.Modules.WithName(\'Light 1\').On()\n');
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
-        editor1.setValue('// Put your trigger code logic here.\n// Call \'hg.setConditionTrue()\' when you want\n// the \'Code To Run\' to be executed.\nhg.setConditionFalse();\n');
+        editor1.setValue('');
         editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.modules.withName(\'Light 1\').on();\n');
     }
     else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
-        editor1.setValue('// Put your trigger code logic here.\n// To execute the Code To Run,\n// use a \'return true\' or \'return false\' otherwise.\nreturn false;\n');
+        editor1.setValue('');
         editor2.setValue('// CSharp Automation Program Plugin\n// Example for using Helper Classes:\n// Modules.WithName("Light 1").On();\n');
     }
     HG.WebApp.ProgramsList.RefreshProgramType();
@@ -375,14 +375,28 @@ HG.WebApp.ProgramsList.RefreshProgramType = function () {
     //
     // switch specific language editors/labels/tools
     if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard') {
-        $('#automation_conditiontype').val('OnTrue');
-        $('#automation_conditiontype').selectmenu().selectmenu('refresh');
+        // TODO: This is transitional hack to deprecate "Trigger Code" for non-wizard type programs
+        // BEGIN
+        /*if (typeof(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition) == 'undefined' || HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition.trim() == '') {
+            $(editor1.getWrapperElement()).hide();
+            $('#program_edit_tab3_button').hide();
+            $('#automation_conditiontype_wrapper').hide();
+        } else {
+            $(editor1.getWrapperElement()).show();
+            $('#program_edit_tab3_button').show();
+            $('#automation_conditiontype_wrapper').show();
+        }*/
+        //$('#automation_conditiontype').val('OnTrue');
+        //$('#automation_conditiontype').selectmenu().selectmenu('refresh');
+        $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_setupcode', 'Setup Code'));
+        $('#automation_conditiontype_wrapper').hide();
+        // END
         // set example code text for the current programming language
         if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'arduino') {
+            $(editor1.getWrapperElement()).show();
             $(editor2.getWrapperElement()).show();
             $(editor3.getWrapperElement()).hide();
             $('#configure_program_editorsketch').show();
-            $('#automation_conditiontype_wrapper').hide();
             $('#program_edit_tab2_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_sketchcode'));
             $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_makefile'));
             editor3.setOption('mode', 'text/x-csrc');
@@ -408,6 +422,9 @@ HG.WebApp.ProgramsList.RefreshProgramType = function () {
         }
     } else {
         // wizard type
+        //$(editor1.getWrapperElement()).show();
+        //$('#program_edit_tab3_button').show();
+        $('#automation_conditiontype_wrapper').show();
         $('#automation_conditiontype').val('OnSwitchTrue');
         $('#automation_conditiontype').selectmenu().selectmenu('refresh');
     }
@@ -553,16 +570,14 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog) {
         if (propObj != null) statusProperty = propObj.Value;
     }
     //
-    if (prog.IsEnabled && statusProperty == 'Running') {
+    if (statusProperty == 'Running') {
         statusColor = 'green';
-    }
-    else if (prog.IsEnabled) { //statusProperty == 'Idle' || statusProperty == 'Enabled' || statusProperty == 'Setup'
+    } else if (prog.IsEnabled) { //statusProperty == 'Idle' || statusProperty == 'Enabled' || statusProperty == 'Setup'
         if (hasErrors)
             statusColor = 'red';
         else
             statusColor = 'yellow';
-    }
-    else if (hasErrors) {
+    } else if (hasErrors) {
         statusColor = 'brown';
     }
     //
@@ -646,12 +661,12 @@ HG.WebApp.ProgramsList.EditProgram = function () {
             $('#automation_programgroup').val(HG.WebApp.ProgramEdit._CurrentProgram.Group);
             $('#automation_programgroup').selectmenu().selectmenu('refresh');
             //
+            HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = HG.WebApp.Data.Programs[i].ScriptCondition;
+            HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = HG.WebApp.Data.Programs[i].ScriptSource;
+            //
             $('#automation_programtype').val(HG.WebApp.ProgramEdit._CurrentProgram.Type);
             $('#automation_programtype').selectmenu().selectmenu('refresh');
             HG.WebApp.ProgramsList.RefreshProgramType();
-            //
-            HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = HG.WebApp.Data.Programs[i].ScriptCondition;
-            HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = HG.WebApp.Data.Programs[i].ScriptSource;
             //
             editor1.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition);
             editor2.setValue(HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource);

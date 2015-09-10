@@ -69,7 +69,7 @@ namespace NetClientLib
             }    
         }
 
-        public void Authenicate(string user, string pass)
+        public void Authenticate(string user, string pass)
         {    
             this.SendCommand(string.Format("LOGIN {0} {1}", user, pass));    
             string response = this.GetResponse();    

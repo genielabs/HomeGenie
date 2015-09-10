@@ -4,12 +4,9 @@
     <ConditionType>OnSwitchTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
-{                  
-  // set the widget "program"
-  Program.UseWidget("homegenie/generic/program");
-});
-return false;</ScriptCondition>
+    <ScriptCondition>Program.UseWidget("homegenie/generic/program");
+Program.SetAutostart(false);
+</ScriptCondition>
     <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
 // ^^^^^^^
 // the line above is a special line that tells homegenie
@@ -30,21 +27,17 @@ Modules
     <Group>Scenes</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2014-04-09T19:54:02.5364667Z</ActivationTime>
-    <TriggerTime>2014-07-25T22:01:45.648302Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.429812Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;
-{                  
-  // set the widget "program"
-  Program.UseWidget("homegenie/generic/program");
-});
-
-return false;</ScriptCondition>
+    <ScriptCondition>Program.UseWidget("homegenie/generic/program");
+Program.SetAutostart(false);
+</ScriptCondition>
     <ScriptSource>//OPTIONS_STRING_PROMPT=Enter Group Name:
 // ^^^^^^^
 // the line above is a special line that tells homegenie
@@ -66,7 +59,7 @@ Modules
     <Group>Scenes</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:06:10.027855Z</ActivationTime>
+    <ActivationTime>2015-09-10T10:01:58.430331Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -74,12 +67,9 @@ Modules
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  Program.AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox");
-  Program.AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox");
-});
-// this program will be running in background
-return true;
+    <ScriptCondition>Program.AddFeature("", "Dimmer", "HomeGenie.LevelMemory", "Recall last light level when switched on", "checkbox");
+Program.AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -146,30 +136,21 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:08:09.670926Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:08:09.731909Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.431378Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:00.069515Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-Program.Setup(()=&gt;{
-
-  	Program.AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text");
-  	Program.AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text");
-  	//
-  	// Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
-  	// "Dimmer" is the type and "GenericColorLight" is the widget to be used to display the virtual module
-  	// See directory "html/pages/control/widgets/" for widget list
-  	Program.AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5);
-  
-});
-
-return true;
+    <ScriptCondition>Program.AddOption("BridgeAddress", "192.168.0.?", "Philips Hue Bridge IP Address", "text");
+Program.AddOption("BridgeUsername","newdeveloper", "Philips Hue Bridge API username", "text");
+// Create 5 virtual modules with the domain "HomeAutomation.PhilipsHue" and with address from 1 to 5
+// "Dimmer" is the type and "GenericColorLight" is the widget to be used to display the virtual module
+// See directory "html/pages/control/widgets/" for widget list
+Program.AddVirtualModules("HomeAutomation.PhilipsHue", "Dimmer", "homegenie/generic/colorlight", 1, 5);
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>Func&lt;string, string, bool&gt; bridgeapicall = (string lightnum, string jsonargs) =&gt; 
 {
@@ -275,41 +256,37 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-06-14T11:31:47.709525Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:01:31.845434Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.432259Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:00.577564Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>//    
-// this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt;{
-  // list the program as custom weather widget
-  Program.UseWidget( "weather/wunderground/conditions" );
-  // set input fields parameters
-  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  Program.AddOption("Location", "autoip", "City name", "text");
-  Program.AddOption("Language", "EN", "Language", "text");
-  Program.AddOption("ApiKey", "?", "Weather Underground Key", "text");
-  Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "text");
+    <ScriptCondition>// list the program as custom weather widget
+Program.UseWidget( "weather/wunderground/conditions" );
+// set input fields parameters
+// &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+Program.AddOption("Location", "autoip", "City name", "text");
+Program.AddOption("Language", "EN", "Language", "text");
+Program.AddOption("ApiKey", "?", "Weather Underground Key", "text");
+Program.AddOption("UpdateInterval", "30", "Update interval (minutes)", "text");
 
-  // 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
-  Program.AddOption("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE", "text");
+// 2014-01-22 - Added to allow the user to dynamically select how to display the temperature. by lancebooth 
+Program.AddOption("InputDisplayCelsius", "TRUE", "Display Temperature in degrees Celsius - TRUE or FALSE", "text");
 
-  // initialize widget program parameters
-  Program.Parameter("Astronomy.Sunset").Value = "";
-  Program.Parameter("Astronomy.Sunrise").Value = "";
-  Program.Parameter("Conditions.City").Value = "";
-  Program.Parameter("Conditions.TemperatureC").Value = "";
-  Program.Parameter("Conditions.TemperatureF").Value = "";
-  Program.Parameter("Conditions.DisplayLocation").Value = "";
-  Program.Parameter("Conditions.IconUrl").Value = "";
-  Program.Parameter("Conditions.Description").Value = "";    
-});
-//
-return true; // execute "Code To Run"
+// initialize widget program parameters
+Program.Parameter("Astronomy.Sunset").Value = "";
+Program.Parameter("Astronomy.Sunrise").Value = "";
+Program.Parameter("Conditions.City").Value = "";
+Program.Parameter("Conditions.TemperatureC").Value = "";
+Program.Parameter("Conditions.TemperatureF").Value = "";
+Program.Parameter("Conditions.DisplayLocation").Value = "";
+Program.Parameter("Conditions.IconUrl").Value = "";
+Program.Parameter("Conditions.Description").Value = "";    
+
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var sunsetEvent = "Sunset";
 var sunriseEvent = "Sunrise";
@@ -452,23 +429,18 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:18:27.849901Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:18:27.902832Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.433472Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:01.07787Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt;
-{
-	Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleControl", "Control device on a given schedule", "checkbox");
-	Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOn", "Turn On", "cron.text");
-	Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off", "cron.text");
-});
-//
-return true; // execute the "Program Code"
+    <ScriptCondition>Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleControl", "Control device on a given schedule", "checkbox");
+Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOn", "Turn On", "cron.text");
+Program.AddFeature("", "Light,Dimmer,Switch,Shutter", "HomeGenie.ScheduleOff", "Turn Off", "cron.text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var controlModules = Modules.WithFeature("HomeGenie.ScheduleControl");
 
@@ -529,28 +501,25 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:52:25.207474Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:52:25.241952Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.434093Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:01.571394Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when the program is enabled
-Program.Setup(()=&gt;
-{
-  // set the widget that will display this program data (the distance).
-  // the builtin 'homegenie/generic/sensor' widget, 
-  // will display all parameters starting with Sensor.*
-  Program.UseWidget("homegenie/generic/sensor");
-  
-  // initialize program parameters
-  Program.Parameter("Sensor.Distance").Value = "";
-  Program.Parameter("Sensor.StatusMessage").Value = "";
+    <ScriptCondition>// set the widget that will display this program data (the distance).
+// the builtin 'homegenie/generic/sensor' widget, 
+// will display all parameters starting with Sensor.*
+Program.UseWidget("homegenie/generic/sensor");
 
-}); // end program setup
-return true; // execute the 'Code to Run'</ScriptCondition>
+// initialize program parameters
+Program.Parameter("Sensor.Distance").Value = "";
+Program.Parameter("Sensor.StatusMessage").Value = "";
+
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// example code adapted from https://github.com/raspberry-sharp/
 //
 var driver = GpioConnectionSettings.DefaultDriver;
@@ -611,11 +580,9 @@ When.WebServiceCallReceived("Components.HCSR04/0/Sensor.Distance", ( args ) =&gt
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt; {              
-  Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
-  Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
-});
-return true; // execute "Code To Run"
+    <ScriptCondition>Program.AddOption("PollInterval", "15", "Poll Interval (seconds)", "text");
+Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Shutter", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
@@ -647,15 +614,10 @@ return true; // execute "Code To Run"
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(() =&gt; {
-
-  // set the widget that will display this program data (temperature, humidity).
-  Program.UseWidget("homegenie/generic/sensor");
-  Program.AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
-
-}); // end program setup
-
-return true;
+    <ScriptCondition>// set the widget that will display this program data (temperature, humidity).
+Program.UseWidget("homegenie/generic/sensor");
+Program.AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var measurePin = ConnectorPin.P1Pin16; // GPIO#23
 var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
@@ -728,8 +690,7 @@ See example video at http://homegenie.it/docs/diy/eden.php .</Description>
         <CommandArguments />
       </ProgramCommand>
     </Commands>
-    <ScriptCondition>// returning true will execute the "Code to Run"
-return true;
+    <ScriptCondition>Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var moduleDomain = "Components.MCP23017";
 
@@ -895,38 +856,33 @@ For wirings see http://www.skpang.co.uk/blog/archives/454 .</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt; {
+    <ScriptCondition>// list the program as custom weather widget
+Program.UseWidget( "weather/earthtools/sundata" );
 
-  // list the program as custom weather widget
-  Program.UseWidget( "weather/earthtools/sundata" );
+// set input fields parameters
+// &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
+Program.AddOption("Latitude", "42.50", "Location latitude", "text");
+Program.AddOption("Longitude", "12.50", "Location longitude", "text");
 
-  // set input fields parameters
-  // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  Program.AddOption("Latitude", "42.50", "Location latitude", "text");
-  Program.AddOption("Longitude", "12.50", "Location longitude", "text");
+// initialize widget program parameters
+// initialize widget program parameters
+Program.Parameter("Astronomy.Sunset").Value = "";
+Program.Parameter("Astronomy.Sunrise").Value = "";
+// We also initialize the following parameters, even if unused,
+// so we can use weather/wunderground/conditions for displaying data.
+// A more generic widget should be written
 
-  // initialize widget program parameters
-  // initialize widget program parameters
-  Program.Parameter("Astronomy.Sunset").Value = "";
-  Program.Parameter("Astronomy.Sunrise").Value = "";
-  // We also initialize the following parameters, even if unused,
-  // so we can use weather/wunderground/conditions for displaying data.
-  // A more generic widget should be written
+Program.Parameter("EarthTool.Morning.Sunrise").Value = "";
+Program.Parameter("EarthTool.Morning.Twilight.Civil").Value = "";
+Program.Parameter("EarthTool.Morning.Twilight.Nautical").Value = "";
+Program.Parameter("EarthTool.Morning.Twilight.Astronomical").Value = "";
 
-  Program.Parameter("EarthTool.Morning.Sunrise").Value = "";
-  Program.Parameter("EarthTool.Morning.Twilight.Civil").Value = "";
-  Program.Parameter("EarthTool.Morning.Twilight.Nautical").Value = "";
-  Program.Parameter("EarthTool.Morning.Twilight.Astronomical").Value = "";
+Program.Parameter("EarthTool.Evening.Sunset").Value = "";
+Program.Parameter("EarthTool.Evening.Twilight.Civil").Value = "";
+Program.Parameter("EarthTool.Evening.Twilight.Nautical").Value = "";
+Program.Parameter("EarthTool.Evening.Twilight.Astronomical").Value = "";
 
-  Program.Parameter("EarthTool.Evening.Sunset").Value = "";
-  Program.Parameter("EarthTool.Evening.Twilight.Civil").Value = "";
-  Program.Parameter("EarthTool.Evening.Twilight.Nautical").Value = "";
-  Program.Parameter("EarthTool.Evening.Twilight.Astronomical").Value = "";
-
-});
-
-return true;
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
@@ -981,15 +937,11 @@ It can be used for "Sunrise/Sunset" feature.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
-  Program.AddOption("CellUsername", "", "2. Username", "text");
-  Program.AddOption("CellPassword", "", "3. Password", "text");
-
-});
-
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
+Program.AddOption("CellUsername", "", "2. Username", "text");
+Program.AddOption("CellPassword", "", "3. Password", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -1023,15 +975,11 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
-  Program.AddOption("CellUsername", "", "2. Username", "text");
-  Program.AddOption("CellPassword", "", "3. Password", "text");
-
-});
-
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
+Program.AddOption("CellUsername", "", "2. Username", "text");
+Program.AddOption("CellPassword", "", "3. Password", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -1065,15 +1013,11 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
-  Program.AddOption("CellUsername", "", "2. Username", "text");
-  Program.AddOption("CellPassword", "", "3. Password", "text");
-
-});
-
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
+Program.AddOption("CellUsername", "", "2. Username", "text");
+Program.AddOption("CellPassword", "", "3. Password", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -1107,17 +1051,9 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this is a background app
-// so we just put initialization code here and a return true
-// to activate the background task loop
-
-// ...
-Program.Setup(()=&gt; {              
-  Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light", "checkbox");
-  Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Keep level below this value (%)", "slider:20:80:1");
-});
-//
-return true; // execute "Code To Run"
+    <ScriptCondition>Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingMode", "Energy Saving Mode enabled light", "checkbox");
+Program.AddFeature("", "Dimmer", "EnergyManagement.EnergySavingLevel", "Keep level below this value (%)", "slider:20:80:1");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -1166,19 +1102,16 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:09:20.731941Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:09:20.793154Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.439242Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:02.072375Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on", "checkbox");
-});
-// this program will be running in background
-return true;
+    <ScriptCondition>Program.AddFeature("HomeAutomation.X10", "Dimmer", "X10.LevelFix", "Set level to 100% when switched on", "checkbox");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterIsChanging( (module, property) =&gt; {
@@ -1216,24 +1149,19 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T22:08:48.169796Z</ActivationTime>
-    <TriggerTime>2015-09-07T22:08:48.227819Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.439747Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:02.572514Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  	Program.AddVirtualModules("Media.IpCamera", "Sensor", "homegenie/generic/camerainput", 1, 10);
-    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text");
-    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text");
-    Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password");
-
-});
-
-return true;
+    <ScriptCondition>Program.AddVirtualModules("Media.IpCamera", "Sensor", "homegenie/generic/camerainput", 1, 10);
+Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text");
+Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Username", "Username (optional)", "text");
+Program.AddFeature("Media.IpCamera", "Sensor", "IpCamera.Password", "Password (optional)", "password");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
 for (int cam = 1; cam &lt; 10; cam++)
@@ -1297,25 +1225,22 @@ Program.GoBackground();
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
+    <ScriptCondition>Program.UseWidget("homegenie/generic/securitysystem");
 
-  Program.UseWidget("homegenie/generic/securitysystem");
+Program.AddFeature("", "Sensor,DoorWindow", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox");
+Program.AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox");
 
-  Program.AddFeature("", "Sensor,DoorWindow", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox");
-  Program.AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox");
+Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "text");
+Program.AddOption("System.SirenMaxTime", "30", "2. Sirens Max Time (seconds, 0=infinite)", "text");
 
-  Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "text");
-  Program.AddOption("System.SirenMaxTime", "30", "2. Sirens Max Time (seconds, 0=infinite)", "text");
+Program.AddOption("Email.Recipients", "", "3. Comma separated list of recipients e-mails for alarm notifications", "text");
 
-  Program.AddOption("Email.Recipients", "", "3. Comma separated list of recipients e-mails for alarm notifications", "text");
+Program.AddOption("Trigger.ArmedProgram", "", "4. Program to run when armed", "text");
+Program.AddOption("Trigger.DisarmedProgram", "", "5. Program to run when disarmed", "text");
+Program.AddOption("Trigger.TriggeredProgram", "", "6. Program to run when triggered", "text");
 
-  Program.AddOption("Trigger.ArmedProgram", "", "4. Program to run when armed", "text");
-  Program.AddOption("Trigger.DisarmedProgram", "", "5. Program to run when disarmed", "text");
-  Program.AddOption("Trigger.TriggeredProgram", "", "6. Program to run when triggered", "text");
-
-});
-// this program will be running in background
-return true;</ScriptCondition>
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>//
 // init program parameters
 //
@@ -1498,18 +1423,15 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:46:23.131481Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:46:23.187199Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.441244Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:03.082831Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-return true;
+    <ScriptCondition>Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterChanged((module, parameter) =&gt; {
 
@@ -1598,21 +1520,16 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-02-08T11:32:03.392558Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:01:34.843259Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.441882Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:03.575379Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-    Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "slider:0:3600:1");
-
-});
-
-return true;
+    <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.TurnOffDelay", "Automatic turn off delay (seconds)", "slider:0:3600:1");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterIsChanging((module, parameter) =&gt; {
     // check if the module has just been turned on
@@ -1666,19 +1583,15 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:06:01.160266Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:06:01.220781Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.442462Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:04.077858Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnSwitchTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-return false;
-</ScriptCondition>
+    <ScriptCondition />
     <ScriptSource>var portname = "/dev/ttyUSB0";
 
 Action&lt;string&gt; 
@@ -1743,18 +1656,14 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-
-  Program.AddOption("Email.Sender", "", "1. E-Mail address", "text");
-  Program.AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text");
-  Program.AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text");
-  Program.AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "text");
-  Program.AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text");
-  Program.AddOption("Email.SmtpUseSsl", "FALSE", "6. SMTP Mail Server use SSL (TRUE or FALSE)", "text");
-
-});
-
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddOption("Email.Sender", "", "1. E-Mail address", "text");
+Program.AddOption("Email.SmtpServer", "", "2. SMTP Mail Server address", "text");
+Program.AddOption("Email.SmtpUserName", "", "3. SMTP username (optional)", "text");
+Program.AddOption("Email.SmtpPassword", "", "4. SMTP password (optional)", "text");
+Program.AddOption("Email.SmtpPort", "25", "5. SMTP Mail Server port", "text");
+Program.AddOption("Email.SmtpUseSsl", "FALSE", "6. SMTP Mail Server use SSL (TRUE or FALSE)", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
 
@@ -1783,19 +1692,16 @@ return true;</ScriptCondition>
     <Group>Messaging and Social</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:21:38.854737Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:21:38.888966Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.443363Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:04.578309Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  Program.AddFeature("", "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "PushingBox.DeviceId", "PushingBox Notifications DeviceID", "text");
-});
-// this program will be running in background
-return true;
+    <ScriptCondition>Program.AddFeature("", "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "PushingBox.DeviceId", "PushingBox Notifications DeviceID", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var serviceurl = "http://api.pushingbox.com/pushingbox";
 
@@ -1910,19 +1816,14 @@ The program to run can  be a pre-recorded Wizard Script (http://generoso.info/ho
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
+    <ScriptCondition>Program.AddOption("PingMe.Address1", "", "IP address to ping #1", "text");
+Program.AddOption("PingMe.Address2", "", "IP address to ping #2", "text");
+Program.AddOption("PingMe.Address3", "", "IP address to ping #3", "text");
 
-//  Program.AddOption("Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Security Alarm", "text");
+Program.Parameter("PingMe.AtHome").Value = "1";
 
-  Program.AddOption("PingMe.Address1", "", "IP address to ping #1", "text");
-  Program.AddOption("PingMe.Address2", "", "IP address to ping #2", "text");
-  Program.AddOption("PingMe.Address3", "", "IP address to ping #3", "text");
-
-  Program.Parameter("PingMe.AtHome").Value = "1";
-
-});
-
-return true;</ScriptCondition>
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
   Pause(10);
@@ -1977,12 +1878,10 @@ trigger actions when you get home.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-	Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
-    Program.AddFeature("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link", "text");
-});
-
-return false;</ScriptCondition>
+    <ScriptCondition>Program.AddVirtualModules("Favourites.Link", "Generic", "homegenie/generic/link", 1, 5);
+Program.AddFeature("Favourites.Link", "Generic", "FavouritesLink.Url", "Favourites link", "text");
+Program.SetAutostart(false);
+</ScriptCondition>
     <ScriptSource />
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -2002,7 +1901,7 @@ shown as hyperlink buttons in the control page.</Description>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:25:30.885396Z</ActivationTime>
+    <ActivationTime>2015-09-10T10:01:58.44499Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2010,15 +1909,12 @@ shown as hyperlink buttons in the control page.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( ()=&gt; {
-  Program.AddFeature("",
-                     "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
-                     "MobileNotification.SendChanges", 
-                     "Push notifications to Windows Phone client",
-                     "text");
-});
-// this program will be running in background
-return true;
+    <ScriptCondition>Program.AddFeature("",
+                   "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", 
+                   "MobileNotification.SendChanges", 
+                   "Push notifications to Windows Phone client",
+                   "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>string notificationurl = "";
 var monitor = Program.WithName("Energy Monitor");
@@ -2135,18 +2031,16 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:24:23.169331Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:24:23.203335Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.445782Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:05.580349Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-  Program.AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor");
-});
-return true;
+    <ScriptCondition>Program.AddVirtualModule("HomeAutomation.EnergyMonitor", "1", "Sensor", "homegenie/generic/energymonitor");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var energyMonitor = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
 var kwCounter = energyMonitor.Parameter("EnergyMonitor.KwCounter");
@@ -2235,18 +2129,15 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:08:59.619877Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:08:59.672432Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.446454Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:06.094037Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-return true;
+    <ScriptCondition>Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var checkVirtualModules = new Func&lt;ModuleHelper, bool&gt;((module)=&gt;{
   var defaultType = "Switch";
@@ -2387,22 +2278,19 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T22:13:32.7954Z</ActivationTime>
-    <TriggerTime>2015-09-07T22:13:32.833269Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.447286Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:06.584533Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
-  Program.AddOption("CellUsername", "", "2. Username", "text");
-  Program.AddOption("CellPassword", "", "3. Password", "text");
-
-});
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddOption("CellAddress", "192.168.0.?", "1. Remote HG server address", "text");
+Program.AddOption("CellUsername", "", "2. Username", "text");
+Program.AddOption("CellPassword", "", "3. Password", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// We want to do further processing whenever a module changes 
 When.ModuleParameterChanged( (module, property) =&gt; {
   var celladdress  = Program.Option("CellAddress").Value;
@@ -2435,16 +2323,10 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// A "return true;" statement at any point of this code block, will cause the program to run.
-// For manually activated program, just leave a "return false" statement here.
-
-Program.Setup(()=&gt;{
-  Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "text");
-  Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "text");
-  Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
-});
-
-return true;
+    <ScriptCondition>Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOn", "Raw RF string for ON event", "text");
+Program.AddFeature("HomeAutomation.X10.RF", "Sensor", "X10RFString.LevelOff", "Raw RF string for OFF event", "text");
+Program.AddVirtualModules("HomeAutomation.X10.RF", "Sensor", "homegenie/generic/sensor", 1, 16);
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var x10rfModules = Modules.InDomain("HomeAutomation.X10.RF");
 // We want to do further processing whenever a module prop changes 
@@ -2487,16 +2369,11 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox");
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor", "module.text:any:sensor:status.level,sensor.motiondetect");
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor", "module.text:any:any:sensor.luminance");
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:0:3600:30");
-
-});
-
-return true;
+    <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.Enable", "Enable Smart Light Control", "checkbox");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.OnMotionDetect", "Controlled by motion sensor", "module.text:any:sensor:status.level,sensor.motiondetect");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.CheckLuminosity", "Controlled by luminance sensor", "module.text:any:any:sensor.luminance");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.SmartLights.SwitchOffTimeout", "Turn off after inactivity timeout (seconds)", "slider:0:3600:30");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var SMART_LIGHT_ENABLE = "HomeGenie.SmartLights.Enable";
 var MOT_SENSOR_NAME = "HomeGenie.SmartLights.OnMotionDetect";
@@ -2648,8 +2525,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:08:44.20597Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:08:44.241162Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.449065Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:07.08842Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -2708,28 +2585,21 @@ Parameter 72 :
 Actually I don't have any specs on how to set User program.
 I think it's actually possible only with "Fibaro Home Center 2".
 */
-
-Program.Setup(()=&gt;{
-
-  Modules.InDomain("HomeAutomation.ZWave").WithParameter("ZWaveNode.ManufacturerSpecific").Each((m)=&gt; {
-    if( m.Parameter("ZWaveNode.ManufacturerSpecific").Value == "010F:0900:1000" )
+Modules.InDomain("HomeAutomation.ZWave").WithParameter("ZWaveNode.ManufacturerSpecific").Each((m)=&gt; {
+  if( m.Parameter("ZWaveNode.ManufacturerSpecific").Value == "010F:0900:1000" )
+  {
+    Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","DaniMail/fibaro/rgbw");
+    // Added temporary until Switch.MultiLevel.GetCount works properly 
+    for (int i = 1; i &lt;= 5 ; i++)
     {
-      Program.AddVirtualModule("HomeAutomation.FibaroRGBW", m.Instance.Address, "Dimmer","DaniMail/fibaro/rgbw");
-      // Added temporary until Switch.MultiLevel.GetCount works properly 
-      for (int i = 1; i &lt;= 5 ; i++)
-      {
-        string address = m.Instance.Address + "." + i.ToString();
-        Program.AddVirtualModule(m.Instance.Domain, address, "Dimmer", "homegenie/generic/dimmer");
-      }
-      // End of Added
+      string address = m.Instance.Address + "." + i.ToString();
+      Program.AddVirtualModule(m.Instance.Domain, address, "Dimmer", "homegenie/generic/dimmer");
     }
-    return false ;
-  });
-  
+    // End of Added
+  }
+  return false ;
 });
-
-return true;
-</ScriptCondition>
+Program.SetAutostart(true);</ScriptCondition>
     <ScriptSource>//	Program.Option("ZWaveModule").Value  
 // - http://&lt;hg_address&gt;/api/HomeAutomation.FibaroRGBW/...
 // - Version : 1.0
@@ -2844,18 +2714,15 @@ Program.GoBackground();
         <CommandArguments />
       </ProgramCommand>
     </Commands>
-    <ScriptCondition>// returning true will execute the "Code to Run"
-Program.Setup(()=&gt;{
-  	Program.AddOption("GPIO4",  "OUT", "GPIO04 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO17", "OFF", "GPIO17 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO18", "OFF", "GPIO18 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO21", "OUT", "GPIO21 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO22", "OUT", "GPIO22 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO23", "OUT", "GPIO23 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO24", "OUT", "GPIO24 (IN, OUT or OFF)", "text");
-  	Program.AddOption("GPIO25", "OUT", "GPIO25 (IN, OUT or OFF)", "text");
-});
-return true;
+    <ScriptCondition>Program.AddOption("GPIO4",  "OUT", "GPIO04 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO17", "OFF", "GPIO17 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO18", "OFF", "GPIO18 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO21", "OUT", "GPIO21 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO22", "OUT", "GPIO22 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO23", "OUT", "GPIO23 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO24", "OUT", "GPIO24 (IN, OUT or OFF)", "text");
+Program.AddOption("GPIO25", "OUT", "GPIO25 (IN, OUT or OFF)", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var moduleDomain = "RaspberryPi.Gpio";
 
@@ -3004,16 +2871,13 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  Program.AddOption("ModemIp", "", "1. Modem IP address", "text");
-  //Program.AddOption("ModemUsername", "", "2. Modem username", "text");
-  Program.AddOption("ModemPassword", "", "2. Modem password", "text");
-  Program.AddOption("SmsRecipient", "", "4. Recipient phone number", "text");
-  Program.AddFeature("", "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "AlcatelY800Z.NotifyEvents", "Send SMS on module event", "checkbox");
-  Program.AddVirtualModule("Network.AlcatelY800Z", "CM", "Switch", "homegenie/generic/switch");
-});
-// this program will be running in background
-return true;
+    <ScriptCondition>Program.AddOption("ModemIp", "", "1. Modem IP address", "text");
+//Program.AddOption("ModemUsername", "", "2. Modem username", "text");
+Program.AddOption("ModemPassword", "", "2. Modem password", "text");
+Program.AddOption("SmsRecipient", "", "4. Recipient phone number", "text");
+Program.AddFeature("", "Switch,Dimmer,Light,Siren,Sensor,Program,DoorWindow", "AlcatelY800Z.NotifyEvents", "Send SMS on module event", "checkbox");
+Program.AddVirtualModule("Network.AlcatelY800Z", "CM", "Switch", "homegenie/generic/switch");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>const string NOTIFICATION_TITLE = "Alcatel Y800Z";
 var modemAddress = Program.Option("ModemIp").Value;
@@ -3179,69 +3043,67 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  // list the program as custom weather widget
-  Program.UseWidget("jkUtils/OpenWeatherMap/OpenWeatherMap");
+    <ScriptCondition>// list the program as custom weather widget
+Program.UseWidget("jkUtils/OpenWeatherMap/OpenWeatherMap");
 
-  // set input fields parameters
-  Program.AddOption("Location", "Berlin", "City name", "text");
-  Program.AddOption("Language", "de", "Language. See http://OpenWeatherMap.org/API for available langugae codes.", "text");
-  Program.AddOption("UpdateInterval", "60", "Update interval in minutes. Default is 60 minutes.", "text");
-  Program.AddOption("Custom Display Units", "TRUE", "Display System of Units (TRUE = use metric system, FALSE = use imperial system)", "text");
-  Program.AddOption("Custom Color", "213", "HUE Color Value", "text");
-  Program.AddOption("Custom Zoom", "100%", "Custom Zoom", "text");
+// set input fields parameters
+Program.AddOption("Location", "Berlin", "City name", "text");
+Program.AddOption("Language", "de", "Language. See http://OpenWeatherMap.org/API for available langugae codes.", "text");
+Program.AddOption("UpdateInterval", "60", "Update interval in minutes. Default is 60 minutes.", "text");
+Program.AddOption("Custom Display Units", "TRUE", "Display System of Units (TRUE = use metric system, FALSE = use imperial system)", "text");
+Program.AddOption("Custom Color", "213", "HUE Color Value", "text");
+Program.AddOption("Custom Zoom", "100%", "Custom Zoom", "text");
 
-  // setup program parameters
-  Program.Parameter("jkUtils.OpenWeatherMap.Cod").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Name").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Id").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Dt").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Clouds.All").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H1").Value = "";    // Rain in mm within the last 1 hour
-  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H3").Value = "";    // .. the last 3 hours
-  Program.Parameter("jkUtils.OpenWeatherMap.Rain.H24").Value = "";   // .. the last 24 hours
-  Program.Parameter("jkUtils.OpenWeatherMap.Rain.Today").Value = ""; // .. since midnight
-  
-  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H1").Value = "";  // Snowfall in mm. same as rain.
-  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H3").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Snow.H24").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Snow.Today").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Speed").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Deg").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Wind.Gust").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp.Previous").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.Humidity").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure.Previous").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureSea").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureGround").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMax").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMin").Value = "";
-    
-  //Program.Parameter("jkUtils.OpenWeatherMap.Base").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Id").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Main").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Weather.Icon").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Message").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Country").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunrise").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunset").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lon").Value = "";
-  Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lat").Value = "";
-         
-  Program.Parameter("jkUtils.OpenWeatherMap.LastUpdated").Value = "";
-});
+// setup program parameters
+Program.Parameter("jkUtils.OpenWeatherMap.Cod").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Name").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Id").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Dt").Value = "";
 
-return true;
+Program.Parameter("jkUtils.OpenWeatherMap.Clouds.All").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Rain.H1").Value = "";    // Rain in mm within the last 1 hour
+Program.Parameter("jkUtils.OpenWeatherMap.Rain.H3").Value = "";    // .. the last 3 hours
+Program.Parameter("jkUtils.OpenWeatherMap.Rain.H24").Value = "";   // .. the last 24 hours
+Program.Parameter("jkUtils.OpenWeatherMap.Rain.Today").Value = ""; // .. since midnight
+
+Program.Parameter("jkUtils.OpenWeatherMap.Snow.H1").Value = "";  // Snowfall in mm. same as rain.
+Program.Parameter("jkUtils.OpenWeatherMap.Snow.H3").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Snow.H24").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Snow.Today").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Wind.Speed").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Wind.Deg").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Wind.Gust").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.Temp.Previous").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.Humidity").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.Pressure.Previous").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureSea").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.PressureGround").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMax").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Main.TempMin").Value = "";
+
+//Program.Parameter("jkUtils.OpenWeatherMap.Base").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Weather.Id").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Weather.Main").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Weather.Description").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Weather.Icon").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Sys.Message").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Sys.Country").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunrise").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Sys.Sunset").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lon").Value = "";
+Program.Parameter("jkUtils.OpenWeatherMap.Coord.Lat").Value = "";
+
+Program.Parameter("jkUtils.OpenWeatherMap.LastUpdated").Value = "";
+
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// jkUtils - OpenWeatherMap Ver 2.0 2014-05-08
 // this version uses the 2.5 API from OpenWeatherMap.org
@@ -3484,18 +3346,14 @@ No service key required to fetch data.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Call 'hg.SetConditionTrue()' when you want
-// the 'Code To Run' to be executed.
-hg.SetConditionTrue();
-hg.Program.Setup(function(){
-  hg.Program.UseWidget("jkUtils/SolarAltitude/SolarAltitude");
-  hg.Program.AddOption("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude", "text");
-  hg.Program.AddOption("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude", "text");    
-  hg.Program.AddOption("jkUtils.SolarAltitude.Label", "", "Custom Label", "text");
-  hg.Program.AddOption("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom", "text");
-  hg.Program.AddOption("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)", "text");
-  hg.Program.AddOption("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)", "text");
-});
+    <ScriptCondition>hg.Program.UseWidget("jkUtils/SolarAltitude/SolarAltitude");
+hg.Program.AddOption("jkUtils.SolarAltitude.Latitude", "", "Location: Latitude", "text");
+hg.Program.AddOption("jkUtils.SolarAltitude.Longitude", "", "Location: Longitude", "text");    
+hg.Program.AddOption("jkUtils.SolarAltitude.Label", "", "Custom Label", "text");
+hg.Program.AddOption("jkUtils.SolarAltitude.Zoom", "100%", "Custom Zoom", "text");
+hg.Program.AddOption("jkUtils.SolarAltitude.Color", "46", "Custom Color (HUE Value)", "text");
+hg.Program.AddOption("jkUtils.SolarAltitude.Timeformat", "FALSE", "Custom Timeformat (TRUE = use AM/PM Format, FALSE = use 24h Format)", "text");
+hg.Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>
 // jkUtils - Solar Altitude Ver 2.0 2014-05-07
@@ -3905,27 +3763,26 @@ while (hg.Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt; {
-  IPHostEntry host;
-  string localIP = "1";
-  host = Dns.GetHostEntry(Dns.GetHostName());
-  foreach (IPAddress ip in host.AddressList)
+    <ScriptCondition>IPHostEntry host;
+string localIP = "1";
+host = Dns.GetHostEntry(Dns.GetHostName());
+foreach (IPAddress ip in host.AddressList)
+{
+  if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
   {
-    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-    {
-      localIP = ip.ToString();
-      localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
-    }
+    localIP = ip.ToString();
+    localIP = localIP.Substring(localIP.LastIndexOf(".") + 1);
   }
-  Program.AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text");
-  Program.AddOption("ServerAddress", "", "1. MQTT server address", "text");
-  Program.AddOption("ServerPort", "1883", "2. MQTT server port", "text");
-  Program.AddOption("ServerTopic", "#", "3. Topic", "text");
-  Program.AddOption("Username", "", "4. Username (optional)", "text");
-  Program.AddOption("Password", "", "5. Password (optional)", "text");
-  Program.AddFeature("", "", "MQTT.SensorPublish", "Publish module on MQTT network", "checkbox");
-});
-return true; // execute "Code To Run"</ScriptCondition>
+}
+Program.AddOption("ClientId", "hg-" + localIP, "0. Enter unique ID for this client", "text");
+Program.AddOption("ServerAddress", "", "1. MQTT server address", "text");
+Program.AddOption("ServerPort", "1883", "2. MQTT server port", "text");
+Program.AddOption("ServerTopic", "#", "3. Topic", "text");
+Program.AddOption("Username", "", "4. Username (optional)", "text");
+Program.AddOption("Password", "", "5. Password (optional)", "text");
+Program.AddFeature("", "", "MQTT.SensorPublish", "Publish module on MQTT network", "checkbox");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>string server = Program.Option("ServerAddress").Value.Trim();
 int port = 1883; int.TryParse(Program.Option("ServerPort").Value, out port);
 string topic = Program.Option("ServerTopic").Value.Trim();
@@ -4099,21 +3956,14 @@ Supports full control/scripting of remote modules, just like a standard local mo
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-
-Program.Setup(()=&gt;{
-  Program.AddFeature(
-    "HomeAutomation.PhilipsHue",
-    "Dimmer",
-    "Scenarios.SunriseColors",
-    "Link to Sunrise Colors Scenario",
-    "checkbox");
-  Program.UseWidget("homegenie/generic/program");
-});
-
-return false;
+    <ScriptCondition>Program.AddFeature(
+  "HomeAutomation.PhilipsHue",
+  "Dimmer",
+  "Scenarios.SunriseColors",
+  "Link to Sunrise Colors Scenario",
+  "checkbox");
+Program.UseWidget("homegenie/generic/program");
+Program.SetAutostart(false);
 </ScriptCondition>
     <ScriptSource>// CSharp Automation Program Plugin
 
@@ -4149,7 +3999,7 @@ Pause(10);</ScriptSource>
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:07:29.479647Z</ActivationTime>
+    <ActivationTime>2015-09-10T10:01:58.475648Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -4157,11 +4007,7 @@ Pause(10);</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-return false;
-</ScriptCondition>
+    <ScriptCondition />
     <ScriptSource>var pinDta = ConnectorPin.P1Pin07.ToProcessor();
 var pinClk = ConnectorPin.P1Pin13.ToProcessor();
 
@@ -4285,7 +4131,8 @@ http://www.seeedstudio.com/wiki/Grove_-_LED_Bar</Description>
     <Conditions />
     <Commands />
     <ScriptCondition>Program.Parameter("Spi.Locked").Value = "0";
-return true;</ScriptCondition>
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>#pragma warning disable 0168
 #pragma warning disable 0219
 #pragma warning disable 0414
@@ -5445,14 +5292,8 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-
-Program.Setup(()=&gt;{
-  Program.AddOption("LedsNumber", "1", "Number of chained RGB leds", "text");
-});
-return true;
+    <ScriptCondition>Program.AddOption("LedsNumber", "1", "Number of chained RGB leds", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var rgbModules = Modules.InDomain("HomeAutomation.GroveRGB");
 
@@ -5562,31 +5403,25 @@ http://www.seeedstudio.com/wiki/Grove_-_Chainable_RGB_LED</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when program become active
-Program.Setup(()=&gt;
-{
-  
-  // Add analog channels modules
-  Program.AddVirtualModule("Components.MCP3008", "CH0", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH1", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH2", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH3", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH4", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH5", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH6", "Sensor", "homegenie/generic/sensor");
-  Program.AddVirtualModule("Components.MCP3008", "CH7", "Sensor", "homegenie/generic/sensor");
+    <ScriptCondition>// Add analog channels modules
+Program.AddVirtualModule("Components.MCP3008", "CH0", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH1", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH2", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH3", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH4", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH5", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH6", "Sensor", "homegenie/generic/sensor");
+Program.AddVirtualModule("Components.MCP3008", "CH7", "Sensor", "homegenie/generic/sensor");
 
-  Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterName", "Parameter name to store computed value", "text");
-  Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterFactor", "Multiply read raw value by", "text");
-  Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterAdjust", "Adjust computed value by", "text");
-  Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.StabilizeValue", "Soft stabilize value (yes/no)", "text");
-  
-  // add program configuration parameters
-  Program.AddOption("PollFrequency", "10", "Pause between updates (seconds)", "text");
+Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterName", "Parameter name to store computed value", "text");
+Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterFactor", "Multiply read raw value by", "text");
+Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.ParameterAdjust", "Adjust computed value by", "text");
+Program.AddFeature("Components.MCP3008", "Sensor", "AnalogInput.StabilizeValue", "Soft stabilize value (yes/no)", "text");
 
-}); // end program setup
+// add program configuration parameters
+Program.AddOption("PollFrequency", "10", "Pause between updates (seconds)", "text");
 
-return true;
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>const string MCP3008_DOMAIN = "Components.MCP3008";
 const decimal voltage = 3.3m;
@@ -5745,12 +5580,10 @@ Each analog channel can be mapped to a virtual module with configurable field na
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-  Program.AddInputField("ThermostatsCount", "1", "Virtual thermostats modules to create");
-  Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature");
-  Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any");
-});
-return true;
+    <ScriptCondition>Program.AddOption("ThermostatsCount", "1", "Virtual thermostats modules to create", "text");
+Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.TemperatureModule", "Module to read temperature from", "module.text:any:any:sensor.temperature");
+Program.AddFeature("HomeAutomation.BasicThermostat", "Thermostat", "VirtualThermostat.SwitchModule", "Module to switch on/off on set point", "module.text:any:switch,light,dimmer,thermostat,shutter:any");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>const int HOLDING_MODE_DIFF = 1;
 const string MODULES_DOMAIN = "HomeAutomation.BasicThermostat";
@@ -5758,7 +5591,7 @@ const string PARAMETER_TEMPERATURE_MODULE = "VirtualThermostat.TemperatureModule
 const string PARAMETER_SWITCH_MODULE = "VirtualThermostat.SwitchModule";
 const string EVENT_DESCRIPTION = "Basic Thermostat";
 
-var thermostatsCount = (int)Program.InputField("ThermostatsCount").DecimalValue;
+var thermostatsCount = (int)Program.Option("ThermostatsCount").DecimalValue;
 if (thermostatsCount &lt;= 0) thermostatsCount = 1;
 Program.AddVirtualModules(MODULES_DOMAIN, "Thermostat", "homegenie/generic/thermostat", 1, thermostatsCount);
 var thermostatModules = Modules.InDomain(MODULES_DOMAIN).OfDeviceType("Thermostat");
@@ -5937,17 +5770,10 @@ Basic Thermostats can also be used with the Timetable scheduler widget.</Descrip
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-
-Program.Setup(()=&gt;{
-  Program.AddOption("ModulesCount", "3", "Connected sensors number", "text");
-  Program.AddOption("UpdateInterval", "60", "Update interval", "text");
-  Program.AddFeature("HomeAutomation.OneWire", "Sensor", "OneWire.DeviceId", "Device ID", "text");
-});
-
-return true;
+    <ScriptCondition>Program.AddOption("ModulesCount", "3", "Connected sensors number", "text");
+Program.AddOption("UpdateInterval", "60", "Update interval", "text");
+Program.AddFeature("HomeAutomation.OneWire", "Sensor", "OneWire.DeviceId", "Device ID", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// CSharp Automation Program Plugin
 // 1-Wire Sensor Modules
@@ -6045,14 +5871,10 @@ To find out your connected devices ID, issue from a terminal the command:
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(() =&gt; {
-
-  // set the widget that will display this program data (temperature,humidity).
-  Program.UseWidget("homegenie/generic/sensor");
-  Program.AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
-
-}); // end program setup
-return true;
+    <ScriptCondition>// set the widget that will display this program data (temperature,humidity).
+Program.UseWidget("homegenie/generic/sensor");
+Program.AddOption("UpdateInterval", "600", "Update Interval (seconds)", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var measurePin = ConnectorPin.P1Pin7; // GPIO#4
 var driver = GpioConnectionSettings.GetBestDriver(GpioConnectionDriverCapabilities.CanChangePinDirectionRapidly);
@@ -6125,8 +5947,7 @@ Edit program code line #1 to change the data pin GPIO.
         <CommandArguments />
       </ProgramCommand>
     </Commands>
-    <ScriptCondition>// returning true will execute the "Code to Run"
-return true;
+    <ScriptCondition>Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var moduleDomain = "Components.MCP23017";
 
@@ -6411,11 +6232,9 @@ Based on HomeGenie MCP23017 example app.</Description>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{              
-  Program.AddOption("PollInterval", "120", "Poll Interval (seconds)", "text");
-  //Program.AddFeature("HomeAutomation.ZWave", "Thermostat", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
-});
-return true; // execute "Code To Run"
+    <ScriptCondition>Program.AddOption("PollInterval", "120", "Poll Interval (seconds)", "text");
+//Program.AddFeature("HomeAutomation.ZWave", "Thermostat", "HomeGenie.ZWaveLevelPoll", "Poll module level", "checkbox");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
@@ -6452,25 +6271,18 @@ return true; // execute "Code To Run"
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
+    <ScriptCondition>Program.UseWidget("homegenie/generic/colorlight");
 
+Program.AddVirtualModules("HomeAutomation.MiLightRGBW", "Light", "homegenie/generic/colorlight", 0, 4);
+//Program.AddVirtualModules("HomeAutomation.MiLightWhite", "Light", "homegenie/generic/light", 0, 4);
 
-Program.Setup(()=&gt;{
-    Program.UseWidget("homegenie/generic/colorlight");
+Program.AddOption("HomeGenieMiLightAddress", "192.168.0.?", "MiLight IP Address", "text");
+Program.AddOption("HomeGenieMiLightPort","8899", "MiLight UDP Port", "text");
 
-  	Program.AddVirtualModules("HomeAutomation.MiLightRGBW", "Light", "homegenie/generic/colorlight", 0, 4);
-  	//Program.AddVirtualModules("HomeAutomation.MiLightWhite", "Light", "homegenie/generic/light", 0, 4);
+Program.AddFeature("HomeAutomation.MiLightRGBW", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on", "checkbox");
+//Program.AddFeature("HomeAutomation.MiLightWhite", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on", "checkbox");
 
-  	Program.AddOption("HomeGenieMiLightAddress", "192.168.0.?", "MiLight IP Address", "text");
-  	Program.AddOption("HomeGenieMiLightPort","8899", "MiLight UDP Port", "text");
-  
-	Program.AddFeature("HomeAutomation.MiLightRGBW", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on", "checkbox");
-	//Program.AddFeature("HomeAutomation.MiLightWhite", "Dimmer,Light", "MiLight.LevelFix", "Set level to 100% when switched on", "checkbox");
-});
-
-return true;
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>#pragma warning disable 0168
   #pragma warning disable 0219
@@ -6809,13 +6621,9 @@ while (Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// this Setup delegate will be executed once, when the program is enabled
-Program.Setup(()=&gt;
-{
-	Program.AddVirtualModule("Components.Ssd1306", "0", "Sensor", "");
-}); // end program setup
-//return true; // execute the 'Code to Run'
-return true;</ScriptCondition>
+    <ScriptCondition>Program.AddVirtualModule("Components.Ssd1306", "0", "Sensor", "");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>#pragma warning disable 0168
 #pragma warning disable 0219
 #pragma warning disable 0414
@@ -7001,10 +6809,7 @@ Program.GoBackground();</ScriptSource>
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// Call 'hg.SetConditionTrue()' when you want
-// the 'Code To Run' to be executed.
-hg.SetConditionTrue();
+    <ScriptCondition>hg.Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
 var temperature = hg.Modules.InDomain("Components.MCP3008").WithAddress("CH0").Get().Parameter("Sensor.Temperature");
@@ -7099,21 +6904,16 @@ function formatTime(date) {
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// Call 'hg.SetConditionTrue()' when you want
-// the 'Code To Run' to be executed.
-hg.Program.Setup(function(){
-  hg.Program.AddOption("EdenDisplay.Thermostat", "", "Thermostat name", "text");
-  hg.Program.AddOption("EdenDisplay.ButtonProgram.1", "", "Button #1 program", "text");
-  hg.Program.AddOption("EdenDisplay.ButtonProgram.2", "", "Button #2 program", "text");
-  hg.Program.AddOption("EdenDisplay.ButtonProgram.3", "", "Button #3 program", "text");
-  hg.Program.AddOption("EdenDisplay.ButtonProgram.4", "", "Button #4 program", "text");
-  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.1", "Toggle by button #1", "checkbox");
-  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.2", "Toggle by button #2", "checkbox");
-  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.3", "Toggle by button #3", "checkbox");
-  hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.4", "Toggle by button #4", "checkbox");
-});
-hg.SetConditionTrue();
+    <ScriptCondition>hg.Program.AddOption("EdenDisplay.Thermostat", "", "Thermostat name", "text");
+hg.Program.AddOption("EdenDisplay.ButtonProgram.1", "", "Button #1 program", "text");
+hg.Program.AddOption("EdenDisplay.ButtonProgram.2", "", "Button #2 program", "text");
+hg.Program.AddOption("EdenDisplay.ButtonProgram.3", "", "Button #3 program", "text");
+hg.Program.AddOption("EdenDisplay.ButtonProgram.4", "", "Button #4 program", "text");
+hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.1", "Toggle by button #1", "checkbox");
+hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.2", "Toggle by button #2", "checkbox");
+hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.3", "Toggle by button #3", "checkbox");
+hg.Program.AddFeature("", "Dimmer,Light,Switch,Shutter", "EdenDisplay.ToggleButton.4", "Toggle by button #4", "checkbox");
+hg.Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// Get a reference to the OLED object
 var oled = hg.Modules.InDomain("Components.Ssd1306").WithAddress("0");
@@ -7406,42 +7206,40 @@ A normal press will toggle scenarios/devices associated to the buttons.
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// returning true will execute the "Code to Run"
-Program.Setup(()=&gt;{
-  // Connector CN8
-  Program.AddOption("Gpio.PC19", "OFF", "#03 PC19", "text");
-  Program.AddOption("Gpio.PC21", "OFF", "#04 PC21", "text");
-  Program.AddOption("Gpio.PC20", "OFF", "#05 PC20", "text");
-  Program.AddOption("Gpio.PC22", "OFF", "#06 PC22", "text");
-  Program.AddOption("Gpio.PB14", "OFF", "#07 PB14", "text");
-  Program.AddOption("Gpio.PB16", "OFF", "#08 PB16", "text");
-  Program.AddOption("Gpio.PB15", "OFF", "#09 PB15", "text");
-  Program.AddOption("Gpio.PB17", "OFF", "#10 PB17", "text");
-  Program.AddOption("Gpio.PI20", "OFF", "#11 PI20", "text");
-  Program.AddOption("Gpio.PI14", "OFF", "#12 PI14", "text");
-  Program.AddOption("Gpio.PI21", "OFF", "#13 PI21", "text");
-  Program.AddOption("Gpio.PI15", "OFF", "#14 PI15", "text");
-  Program.AddOption("Gpio.PI03", "OFF", "#15 PI03", "text");
-  Program.AddOption("Gpio.PB03", "OFF", "#16 PB03", "text");
-  Program.AddOption("Gpio.PB02", "OFF", "#17 PB02", "text");
-  Program.AddOption("Gpio.PB04", "OFF", "#18 PB04", "text");
-  Program.AddOption("Gpio.PB18", "OFF", "#19 PB18", "text");
-  Program.AddOption("Gpio.PB19", "OFF", "#20 PB19", "text");
-  // Connector CN9
-  Program.AddOption("Gpio.PG00", "OFF", "#21 PG00", "text");
-  Program.AddOption("Gpio.PG03", "OFF", "#22 PG03", "text");
-  Program.AddOption("Gpio.PG02", "OFF", "#23 PG02", "text");
-  Program.AddOption("Gpio.PG01", "OFF", "#24 PG01", "text");
-  Program.AddOption("Gpio.PG04", "OFF", "#25 PG04", "text");
-  Program.AddOption("Gpio.PG05", "OFF", "#26 PG05", "text");
-  Program.AddOption("Gpio.PG06", "OFF", "#27 PG06", "text");
-  Program.AddOption("Gpio.PG07", "OFF", "#28 PG07", "text");
-  Program.AddOption("Gpio.PG08", "OFF", "#29 PG08", "text");
-  Program.AddOption("Gpio.PG09", "OFF", "#30 PG09", "text");
-  Program.AddOption("Gpio.PG10", "OFF", "#31 PG10", "text");
-  Program.AddOption("Gpio.PG11", "OFF", "#32 PG11", "text");
-});
-return true;
+    <ScriptCondition>// Connector CN8
+Program.AddOption("Gpio.PC19", "OFF", "#03 PC19", "text");
+Program.AddOption("Gpio.PC21", "OFF", "#04 PC21", "text");
+Program.AddOption("Gpio.PC20", "OFF", "#05 PC20", "text");
+Program.AddOption("Gpio.PC22", "OFF", "#06 PC22", "text");
+Program.AddOption("Gpio.PB14", "OFF", "#07 PB14", "text");
+Program.AddOption("Gpio.PB16", "OFF", "#08 PB16", "text");
+Program.AddOption("Gpio.PB15", "OFF", "#09 PB15", "text");
+Program.AddOption("Gpio.PB17", "OFF", "#10 PB17", "text");
+Program.AddOption("Gpio.PI20", "OFF", "#11 PI20", "text");
+Program.AddOption("Gpio.PI14", "OFF", "#12 PI14", "text");
+Program.AddOption("Gpio.PI21", "OFF", "#13 PI21", "text");
+Program.AddOption("Gpio.PI15", "OFF", "#14 PI15", "text");
+Program.AddOption("Gpio.PI03", "OFF", "#15 PI03", "text");
+Program.AddOption("Gpio.PB03", "OFF", "#16 PB03", "text");
+Program.AddOption("Gpio.PB02", "OFF", "#17 PB02", "text");
+Program.AddOption("Gpio.PB04", "OFF", "#18 PB04", "text");
+Program.AddOption("Gpio.PB18", "OFF", "#19 PB18", "text");
+Program.AddOption("Gpio.PB19", "OFF", "#20 PB19", "text");
+// Connector CN9
+Program.AddOption("Gpio.PG00", "OFF", "#21 PG00", "text");
+Program.AddOption("Gpio.PG03", "OFF", "#22 PG03", "text");
+Program.AddOption("Gpio.PG02", "OFF", "#23 PG02", "text");
+Program.AddOption("Gpio.PG01", "OFF", "#24 PG01", "text");
+Program.AddOption("Gpio.PG04", "OFF", "#25 PG04", "text");
+Program.AddOption("Gpio.PG05", "OFF", "#26 PG05", "text");
+Program.AddOption("Gpio.PG06", "OFF", "#27 PG06", "text");
+Program.AddOption("Gpio.PG07", "OFF", "#28 PG07", "text");
+Program.AddOption("Gpio.PG08", "OFF", "#29 PG08", "text");
+Program.AddOption("Gpio.PG09", "OFF", "#30 PG09", "text");
+Program.AddOption("Gpio.PG10", "OFF", "#31 PG10", "text");
+Program.AddOption("Gpio.PG11", "OFF", "#32 PG11", "text");
+
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var moduleDomain = "CubieBoard.Gpio";
 
@@ -7636,11 +7434,9 @@ GPIOs configured as OUT are mapped to a Switch module that can be controlled wit
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{              
-  Program.AddOption("PollInterval", "45", "Poll Interval (seconds)", "text");
-  Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt", "checkbox");
-});
-return true; // execute "Code To Run"
+    <ScriptCondition>Program.AddOption("PollInterval", "45", "Poll Interval (seconds)", "text");
+Program.AddFeature("HomeAutomation.ZWave", "Light,Dimmer,Switch,Sensor", "HomeGenie.ZWaveMeterPoll", "Poll meter Watt", "checkbox");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>while (Program.IsEnabled)
 {
@@ -7680,10 +7476,7 @@ return true; // execute "Code To Run"
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>// Put your trigger code logic here.
-// To execute the Code To Run,
-// use a 'return true' or 'return false' otherwise.
-return true;
+    <ScriptCondition>Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>var address = 0x38;
 
@@ -7746,20 +7539,19 @@ using (var display = new Hd44780LcdConnection(settings, configuration.Pins))
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup( () =&gt; {
-  Program.UseWidget("homegenie/generic/timetable");
-  Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Weekend", "Timetable to use for weekend", "text");
-  Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Workday", "Timetable to use for workday", "text");
-  Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Holiday", "Timetable to use for holiday", "text");
-  Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Special", "Timetable to use for special day", "text");
-  Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable Timetable scheduling", "checkbox");
-  // Initialize Calendar if not already defined
-  var calendarSettings = Settings.Parameter("Timetable.Calendar.Year");
-  while (calendarSettings.Value.Length &lt; 366) calendarSettings.Value += '0';
-  if (calendarSettings.Value[0] == '0')
-    calendarSettings.Value = "2" + calendarSettings.Value.Substring(1); // first of the year marked as holiday (2)
-});
-return true;</ScriptCondition>
+    <ScriptCondition>Program.UseWidget("homegenie/generic/timetable");
+Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Weekend", "Timetable to use for weekend", "text");
+Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Workday", "Timetable to use for workday", "text");
+Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Holiday", "Timetable to use for holiday", "text");
+Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Special", "Timetable to use for special day", "text");
+Program.AddFeature("", "Light,Switch,Shutter,Dimmer,Thermostat", "TimeTable.Enable", "Enable Timetable scheduling", "checkbox");
+// Initialize Calendar if not already defined
+var calendarSettings = Settings.Parameter("Timetable.Calendar.Year");
+while (calendarSettings.Value.Length &lt; 366) calendarSettings.Value += '0';
+if (calendarSettings.Value[0] == '0')
+  calendarSettings.Value = "2" + calendarSettings.Value.Substring(1); // first of the year marked as holiday (2)
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>// HomeGenie Timetable Widget
 // based on "Table Horaire"" widget idea by Daniel Maillard
 
@@ -8061,8 +7853,8 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:53:44.33341Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:53:44.405376Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.49544Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:08.102993Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -8073,14 +7865,10 @@ while (Program.IsEnabled)
 //This program allows to save tag IDs and remove them
 //The event TagReader.Alarm is sent when a tag is recognized
 //Author: Alexandre Schnegg &lt;alexandre.schnegg@gmail.com&gt;
-
-Program.Setup( () =&gt; {
-  Program.AddOption("LearningMode", "0", "LearningMode (1: enable, 0: disable)", "text");
-  Program.AddOption("Reset", "0", "Reset tag codes (1: enable, 0: disable), reset start after scanning a known tag", "text");
-});
-
-// this program will be running in background
-return true;</ScriptCondition>
+Program.AddOption("LearningMode", "0", "LearningMode (1: enable, 0: disable)", "text");
+Program.AddOption("Reset", "0", "Reset tag codes (1: enable, 0: disable), reset start after scanning a known tag", "text");
+Program.SetAutostart(true);
+</ScriptCondition>
     <ScriptSource>//Example program for the BeNext Tag reader
 //This program allows to save tag IDs and remove them
 //The event TagReader.Alarm is sent when a tag is recognized
@@ -8151,19 +7939,17 @@ while (Program.IsEnabled)
     <Conditions />
     <Commands />
     <ScriptCondition>const string MODULES_DOMAIN = "HomeAutomation.KNX";
-Program.Setup(()=&gt;{
 
-  Program.AddOption("KnxLocalIp", "", "Local endpoint IP address (optional)", "text");
-  Program.AddOption("KnxLocalPort","", "Local endpoint port (optional)", "text");
-  Program.AddOption("KnxRemoteIp", "", "Remote endpoint IP address (optional)", "text");
-  Program.AddOption("KnxRemotePort","", "Remote endpoint port (optional)", "text");
+Program.AddOption("KnxLocalIp", "", "Local endpoint IP address (optional)", "text");
+Program.AddOption("KnxLocalPort","", "Local endpoint port (optional)", "text");
+Program.AddOption("KnxRemoteIp", "", "Remote endpoint IP address (optional)", "text");
+Program.AddOption("KnxRemotePort","", "Remote endpoint port (optional)", "text");
 
-  // Create 5 virtual modules with the domain "HomeAutomation.KNX" and with address from 1 to 5
-  Program.AddVirtualModules(MODULES_DOMAIN, "Light", "", 1, 5);
-  Program.AddFeature(MODULES_DOMAIN, "Dimmer,Light,Sensor", "KNX.Address", "KNX Address", "text");
+// Create 5 virtual modules with the domain "HomeAutomation.KNX" and with address from 1 to 5
+Program.AddVirtualModules(MODULES_DOMAIN, "Light", "", 1, 5);
+Program.AddFeature(MODULES_DOMAIN, "Dimmer,Light,Sensor", "KNX.Address", "KNX Address", "text");
 
-});
-return true;
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>const string MODULES_DOMAIN = "HomeAutomation.KNX";
 const string EVENT_DESCRIPTION = "KNX Module";
@@ -8277,13 +8063,9 @@ Program.GoBackground();
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>#setup program stuff
-def setup():
-  hg.Program.AddOption('SerialPort', '/dev/ttyUSB0', 'Serial port path (enter "pi", for using GPIO)', 'text')
-  hg.Program.AddOption('VirtualModules', 'A,B', 'Create virtual modules (comma separated house codes)', 'text')
-  return
-hg.Program.Setup(setup)
-hg.SetConditionTrue()
+    <ScriptCondition>hg.Program.AddOption('SerialPort', '/dev/ttyUSB0', 'Serial port path (enter "pi", for using GPIO)', 'text')
+hg.Program.AddOption('VirtualModules', 'A,B', 'Create virtual modules (comma separated house codes)', 'text')
+hg.Program.SetAutostart(True)
     </ScriptCondition>
     <ScriptSource>"""
 X10 Firecracker CM17A Interface
@@ -8599,14 +8381,12 @@ python-serial module must be installed &lt;strong&gt;(sudo apt-get install pytho
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-  Program.AddOption("KeypadChannel", "CH2", "MCP3008 channel where the keypad is connected to", "text");
-});
+    <ScriptCondition>Program.AddOption("KeypadChannel", "CH2", "MCP3008 channel where the keypad is connected to", "text");
 // Wait for MCP3008 program to start first
 Program.WaitFor("38");
 // Starting in 5 seconds
 Pause(5);
-return true;
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>const string MCP3008_DOMAIN = "Components.MCP3008";
 
@@ -8693,17 +8473,12 @@ while(Program.IsEnabled)
     <ConditionType>OnTrue</ConditionType>
     <Conditions />
     <Commands />
-    <ScriptCondition>Program.Setup(()=&gt;{
-
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox");
-  Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData");
-  Program.AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "text");
-  Program.AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "text");
-  Program.AddOption("DimmerInterval", "5", "4. Dimmer Interval", "text");
-
-});
-
-return true;
+    <ScriptCondition>Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.Enable", "Enable control by IR remote", "checkbox");
+Program.AddFeature("", "Switch,Light,Dimmer", "HomeGenie.IRControler.IRCode", "Toggle module with IR button (enter code)", "capture:Receiver.RawData");
+Program.AddOption("DimmerUpCode", "Microsoft_Xbox360/UpArrow", "1. Dimmer Up (enter IR button code)", "text");
+Program.AddOption("DimmerDownCode", "Microsoft_Xbox360/DownArrow", "2. Dimmer Down (enter IR button code)", "text");
+Program.AddOption("DimmerInterval", "5", "4. Dimmer Interval", "text");
+Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>// 
 // Code adapted from: http://www.homegenie.it/forum/index.php?topic=950.0
@@ -8791,8 +8566,8 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <Type>CSharp</Type>
-    <ActivationTime>2015-09-07T21:07:50.73207Z</ActivationTime>
-    <TriggerTime>2015-09-07T21:07:50.765446Z</TriggerTime>
+    <ActivationTime>2015-09-10T10:01:58.606331Z</ActivationTime>
+    <TriggerTime>2015-09-10T10:02:08.593327Z</TriggerTime>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
 </ArrayOfProgramBlock>

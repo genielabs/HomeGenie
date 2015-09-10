@@ -55,7 +55,7 @@ namespace HomeGenie.Automation.Scripting
     {
 
         private HomeGenieService homegenie = null;
-        internal bool executeCodeToRun = false;
+        internal bool executeProgramCode = false;
         //
         private NetHelper netHelper;
         private ProgramHelper programHelper;
@@ -187,14 +187,16 @@ namespace HomeGenie.Automation.Scripting
             Pause(seconds);
         }
 
+        [Obsolete("Use Program.SetAutostart(bool) instead")]
         public void SetConditionTrue()
         {
-            executeCodeToRun = true;
+            executeProgramCode = true;
         }
 
+        [Obsolete("Use Program.SetAutostart(bool) instead")]
         public void SetConditionFalse()
         {
-            executeCodeToRun = false;
+            executeProgramCode = false;
         }
 
         public void Reset()
