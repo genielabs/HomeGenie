@@ -20,7 +20,6 @@
  *     Project Homepage: http://homegenie.it
  */
 
-#define LOGGING
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,25 +31,32 @@ using System.Net;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.IO.Packaging;
+
+using Newtonsoft.Json;
+
 using HomeGenie.Data;
 using HomeGenie.Service.Constants;
-using System.IO.Packaging;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 
 namespace HomeGenie.Service
 {
+    
     public static class Extensions
     {
-        public static T DeepClone<T>(this T a)
+        /// <summary>
+        /// Perform a deep Copy of the object.
+        /// </summary>
+        /// <typeparam name="T">The type of object being copied.</typeparam>
+        /// <param name="source">The object instance to copy.</param>
+        /// <returns>The copied object.</returns>
+        public static T DeepClone<T>(this T source)
         {
-            using (MemoryStream stream = new MemoryStream())
+            // Don't serialize a null object, simply return the default for that object
+            if (Object.ReferenceEquals(source, null))
             {
-                DataContractSerializer dcs = new DataContractSerializer(typeof(T));
-                dcs.WriteObject(stream, a);
-                stream.Position = 0;
-                return (T)dcs.ReadObject(stream);
+                return default(T);
             }
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source));
         }
     }
 

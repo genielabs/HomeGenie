@@ -309,6 +309,8 @@ HG.WebApp.ProgramEdit.GetProgramStatusColor = function (prog) {
     //
     if (statusProperty == 'Running') {
         statusColor = 'green';
+    } else if (statusProperty == 'Background') {
+        statusColor = 'blue';
     } else if (prog.IsEnabled) {
         if (hasErrors)
             statusColor = 'red';
