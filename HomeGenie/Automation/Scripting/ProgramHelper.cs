@@ -719,13 +719,22 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// This command is usually put at the end of the "Code to Run". It is the equivalent of an infinite noop loop.
+        /// This command is usually put at the end of the "Program Code". It is the equivalent of an infinite noop loop.
         /// </summary>
         public void GoBackground()
         {
+            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+            program.IsEnabled = true;
+            homegenie.RaiseEvent(
+                myProgramDomain,
+                myProgramId.ToString(),
+                "Automation Program",
+                Properties.PROGRAM_STATUS,
+                "Background"
+            );
             while (this.IsEnabled)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
         }
 

@@ -49,8 +49,7 @@ HG.WebApp.ProgramsList.InitializePage = function () {
                     .animate({ borderColor: "#FFFFFF" }, 250)
                     .animate({ borderColor: "#FF5050" }, 250)
                     .animate({ borderColor: "#FFFFFF" }, 250);
-            }
-            else {
+            } else {
                 $('#automation_program_import').popup('close');
                 $.mobile.loading('show', { text: 'Importing, please wait...', textVisible: true, html: '' });
                 $('#program_import_form').attr('action', '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Automation/Programs.Import/' + HG.WebApp.AutomationGroupsList._CurrentGroup);
@@ -84,8 +83,7 @@ HG.WebApp.ProgramsList.SetOptionsTab = function (tabid) {
         HG.WebApp.ProgramsList.RefreshProgramOptions();
         $('#automationprograms_program_details').hide();
         $('#automationprograms_program_parameters').show();
-    }
-    else {
+    } else {
         HG.WebApp.ProgramsList.RefreshProgramDetails();
         $('#automationprograms_program_parameters').hide();
         $('#automationprograms_program_details').show();
@@ -331,20 +329,16 @@ HG.WebApp.ProgramsList.SetProgramType = function () {
             '    delay(1000);',
             '}\n'
         ].join('\n'));
-    }
-    else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
+    } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
         editor1.setValue('');
         editor2.setValue('"""\nPython Automation Script\nExample for using Helper Classes:\nhg.Modules.WithName(\'Light 1\').On()\n"""\n')
-    }
-    else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
+    } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
         editor1.setValue('');
         editor2.setValue('# Ruby Automation Script\n# Example for using Helper Classes:\n# hg.Modules.WithName(\'Light 1\').On()\n');
-    }
-    else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
+    } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
         editor1.setValue('');
         editor2.setValue('// Javascript Automation Script\n// Example for using Helper Classes:\n// hg.modules.withName(\'Light 1\').on();\n');
-    }
-    else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
+    } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
         editor1.setValue('');
         editor2.setValue('// CSharp Automation Program Plugin\n// Example for using Helper Classes:\n// Modules.WithName("Light 1").On();\n');
     }
@@ -353,45 +347,24 @@ HG.WebApp.ProgramsList.SetProgramType = function () {
 
 HG.WebApp.ProgramsList.RefreshProgramType = function () {
     HG.WebApp.ProgramEdit._CurrentProgram.Type = $('#automation_programtype').select().val();
-    //
     if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard') {
         $('[data-block-id=configure_program_editfortypewizard]').css('display', 'none');
         $('[data-block-id=configure_program_editfortypecsharp]').css('display', '');
-    }
-    else {
+    } else {
         $('[data-block-id=configure_program_editfortypewizard]').css('display', '');
         $('[data-block-id=configure_program_editfortypecsharp]').css('display', 'none');
     }
-
     // set standard editors and labels/options
-    $('#automation_conditiontype_wrapper').show();
+    $('#program_edit_tab2_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_programcode'));
     // hide arduino editor
     $(editor2.getWrapperElement()).show();
     $(editor3.getWrapperElement()).hide();
     $('#configure_program_editorsketch').hide();
-    //
-    $('#program_edit_tab2_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_programcode'));
-    $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_triggercode'));
-    //
     // switch specific language editors/labels/tools
     if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard') {
-        // TODO: This is transitional hack to deprecate "Trigger Code" for non-wizard type programs
-        // BEGIN
-        /*if (typeof(HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition) == 'undefined' || HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition.trim() == '') {
-            $(editor1.getWrapperElement()).hide();
-            $('#program_edit_tab3_button').hide();
-            $('#automation_conditiontype_wrapper').hide();
-        } else {
-            $(editor1.getWrapperElement()).show();
-            $('#program_edit_tab3_button').show();
-            $('#automation_conditiontype_wrapper').show();
-        }*/
-        //$('#automation_conditiontype').val('OnTrue');
-        //$('#automation_conditiontype').selectmenu().selectmenu('refresh');
         $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_setupcode', 'Setup Code'));
+        $('#automation_conditiontype').val('OnTrue'); // <--- this field is now only valid for wizard type programs
         $('#automation_conditiontype_wrapper').hide();
-        // END
-        // set example code text for the current programming language
         if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'arduino') {
             $(editor1.getWrapperElement()).show();
             $(editor2.getWrapperElement()).show();
@@ -403,36 +376,29 @@ HG.WebApp.ProgramsList.RefreshProgramType = function () {
             editor2.setOption('mode', 'text/x-csrc');
             editor1.setOption('mode', 'text/x-python');
             HG.WebApp.ProgramEdit.SketchFileOpen('main');
-        }
-        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
+        } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'python') {
             editor2.setOption('mode', 'text/x-python');
             editor1.setOption('mode', 'text/x-python');
-        }
-        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
+        } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'ruby') {
             editor2.setOption('mode', 'text/x-ruby');
             editor1.setOption('mode', 'text/x-ruby');
-        }
-        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
+        } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'javascript') {
             editor2.setOption('mode', 'text/javascript');
             editor1.setOption('mode', 'text/javascript');
-        }
-        else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
+        } else if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'csharp') {
             editor2.setOption('mode', 'text/x-csharp');
             editor1.setOption('mode', 'text/x-csharp');
         }
     } else {
         // wizard type
-        //$(editor1.getWrapperElement()).show();
-        //$('#program_edit_tab3_button').show();
+        $('#automation_conditiontype_wrapper').show();
+        $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_triggercode'));
         $('#automation_conditiontype_wrapper').show();
         $('#automation_conditiontype').val('OnSwitchTrue');
         $('#automation_conditiontype').selectmenu().selectmenu('refresh');
     }
-
     HG.WebApp.ProgramEdit.RefreshProgramEditorTitle();
-
     HG.WebApp.ProgramEdit.RefreshCodeMirror();
-
 };
 
 HG.WebApp.ProgramsList.ChangeProgramType = function (type) {
@@ -521,21 +487,18 @@ HG.WebApp.ProgramsList.UpdateOptionsPopup = function () {
             if ($('#automationprograms_program_details').text().trim() == '') {
                 $('#automationprograms_program_options_tab1').css('visibility', 'hidden');
                 hasdetails = false;
-            }
-            else {
+            } else {
                 $('#automationprograms_program_options_tab1').css('visibility', '');
             }
             if ($('#automationprograms_program_parameters').text().trim() == '') {
                 $('#automationprograms_program_options_tab0').css('visibility', 'hidden');
                 if (hasdetails) {
                     HG.WebApp.ProgramsList.SetOptionsTab(1);
-                }
-                else {
+                } else {
                     $('#automationprograms_program_parameters').hide();
                     $('#automationprograms_program_details').hide();
                 }
-            }
-            else {
+            } else {
                 $('#automationprograms_program_options_tab0').css('visibility', '');
                 HG.WebApp.ProgramsList.SetOptionsTab(0);
             }
@@ -572,7 +535,9 @@ HG.WebApp.ProgramsList.GetProgramStatusColor = function (prog) {
     //
     if (statusProperty == 'Running') {
         statusColor = 'green';
-    } else if (prog.IsEnabled) { //statusProperty == 'Idle' || statusProperty == 'Enabled' || statusProperty == 'Setup'
+    } else if (statusProperty == 'Background') {
+        statusColor = 'blue';
+    } else if (prog.IsEnabled) {
         if (hasErrors)
             statusColor = 'red';
         else

@@ -176,7 +176,14 @@ namespace HomeGenie.Automation
                 {
                     isProgramEnabled = value;
                     LastConditionEvaluationResult = false;
-                    if (isProgramEnabled) ActivationTime = DateTime.UtcNow;
+                    if (isProgramEnabled)
+                    {
+                        ActivationTime = DateTime.UtcNow;
+                        if (homegenie != null && scriptEngine != null)
+                        {
+                            SetupScriptingScope();
+                        }
+                    }
                     if (EnabledStateChanged != null) EnabledStateChanged(this, value);
                 }
             }
