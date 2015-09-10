@@ -136,6 +136,10 @@ namespace HomeGenie.Automation.Scripting
     }
 }
 ";
+            if (!conditionSource.Contains("Program.Setup"))
+            {
+                conditionSource = "Program.Setup(()=>{" + conditionSource + "}); return false;";
+            }
             source = source.Replace("{statement}", scriptSource);
             source = source.Replace("{condition}", conditionSource);
             //

@@ -106,6 +106,8 @@ namespace HomeGenie.Automation
         public List<ProgramFeature> Features  { get; set; }
 
         [XmlIgnore]
+        public bool Autostart { get; set; }
+        [XmlIgnore]
         public bool IsRunning { get; set; }
         [XmlIgnore]
         public bool LastConditionEvaluationResult { get; set; }
@@ -161,7 +163,7 @@ namespace HomeGenie.Automation
             Conditions = new List<ProgramCondition>();
             ConditionType = ConditionType.None;
             //
-            isProgramEnabled = true;
+            isProgramEnabled = false;
             IsRunning = false;
         }
 
@@ -173,6 +175,7 @@ namespace HomeGenie.Automation
                 if (isProgramEnabled != value)
                 {
                     isProgramEnabled = value;
+                    LastConditionEvaluationResult = false;
                     if (isProgramEnabled) ActivationTime = DateTime.UtcNow;
                     if (EnabledStateChanged != null) EnabledStateChanged(this, value);
                 }
@@ -567,8 +570,18 @@ namespace HomeGenie.Automation
                 result = new MethodRunResult();
                 try
                 {
-                    pythonEngine.Execute(pythonScript, scriptScope);
-                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
+                    var sh = (scriptScope as dynamic).hg as ScriptingHost;
+                    if (!pythonScript.ToLower().Contains("hg.program.setup"))
+                    {
+                        sh.Program.Setup(()=>{
+                            pythonEngine.Execute(pythonScript, scriptScope);
+                        });
+                    }
+                    else
+                    {
+                        pythonEngine.Execute(pythonScript, scriptScope);
+                    }
+                    result.ReturnValue = sh.executeProgramCode || this.Autostart;
                 }
                 catch (Exception e)
                 {
@@ -581,8 +594,18 @@ namespace HomeGenie.Automation
                 result = new MethodRunResult();
                 try
                 {
-                    rubyEngine.Execute(rubyScript, scriptScope);
-                    result.ReturnValue = (scriptScope as dynamic).hg.executeCodeToRun;
+                    var sh = (scriptScope as dynamic).hg as ScriptingHost;
+                    if (!rubyScript.ToLower().Contains("hg.program.setup"))
+                    {
+                        sh.Program.Setup(()=>{
+                            rubyEngine.Execute(rubyScript, scriptScope);
+                        });
+                    }
+                    else
+                    {
+                        rubyEngine.Execute(rubyScript, scriptScope);
+                    }
+                    result.ReturnValue = sh.executeProgramCode || this.Autostart;
                 }
                 catch (Exception e)
                 {
@@ -595,8 +618,18 @@ namespace HomeGenie.Automation
                 result = new MethodRunResult();
                 try
                 {
-                    engine.Execute(jsScript);
-                    result.ReturnValue = (engine.GetValue("hg").ToObject() as ScriptingHost).executeCodeToRun;
+                    var sh = (engine.GetValue("hg").ToObject() as ScriptingHost);
+                    if (!jsScript.ToLower().Contains("hg.program.setup"))
+                    {
+                        sh.Program.Setup(()=>{
+                            engine.Execute(jsScript);
+                        });
+                    }
+                    else
+                    {
+                        engine.Execute(jsScript);
+                    }
+                    result.ReturnValue = sh.executeProgramCode || this.Autostart;
                 }
                 catch (Exception e)
                 {
@@ -607,6 +640,7 @@ namespace HomeGenie.Automation
                 if (appAssembly != null && CheckAppInstance())
                 {
                     result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
+                    result.ReturnValue = (bool)result.ReturnValue || this.Autostart;
                 }
                 break;
             case "wizard":
@@ -614,7 +648,7 @@ namespace HomeGenie.Automation
                 result = new MethodRunResult();
                 try
                 {
-                    result.ReturnValue = wizardEngine.EvaluateTrigger(this.Conditions);
+                    result.ReturnValue = wizardEngine.EvaluateCondition(this.Conditions);
                 }
                 catch (Exception e)
                 {

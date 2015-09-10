@@ -1509,6 +1509,7 @@ namespace HomeGenie.Service
             Utility.AddFileToZip(archiveName, "programs.xml");
             Utility.AddFileToZip(archiveName, "scheduler.xml");
             Utility.AddFileToZip(archiveName, "groups.xml");
+            Utility.AddFileToZip(archiveName, "release_info.xml");
             // Add MIG Interfaces config files (lib/mig/*.xml)
             string migLibFolder = Path.Combine("lib", "mig");
             if (Directory.Exists(migLibFolder))

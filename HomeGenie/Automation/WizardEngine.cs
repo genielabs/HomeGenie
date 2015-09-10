@@ -47,7 +47,7 @@ namespace HomeGenie.Automation
             this.scriptingHost = scriptingHost;
         }
 
-        public bool EvaluateTrigger(List<ProgramCondition> conditions)
+        public bool EvaluateCondition(List<ProgramCondition> conditions)
         {
             bool isConditionSatisfied = (conditions.Count > 0);
             for (int c = 0; c < conditions.Count; c++)

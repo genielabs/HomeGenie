@@ -291,9 +291,34 @@ HG.WebApp.ProgramEdit.RefreshProgramEditorTitle = function () {
         HG.WebApp.ProgramEdit.HideProgramErrors();
     }
     // update title
-    var status = HG.WebApp.ProgramsList.GetProgramStatusColor(HG.WebApp.ProgramEdit._CurrentProgram);
+    var status = HG.WebApp.ProgramEdit.GetProgramStatusColor(HG.WebApp.ProgramEdit._CurrentProgram);
     var statusImage = '<img src="images/common/led_' + status + '.png" style="width:24px;height:24px;vertical-align:middle;margin-bottom:5px;margin-right:5px;" /> ';
     $('#page_automation_program_title').html('<span style="font-size:9pt;font-weight:bold">PROGRAM EDITOR (' + editMode + ')</span><br />' + statusImage + HG.WebApp.ProgramEdit._CurrentProgram.Address + ' ' + HG.WebApp.ProgramEdit._CurrentProgram.Name);
+};
+
+HG.WebApp.ProgramEdit.GetProgramStatusColor = function (prog) {
+    var statusColor = 'black';
+    var statusProperty = '';
+    var hasErrors = (typeof (prog.Type) != 'undefined' && prog.Type.toLowerCase() != 'wizard' && typeof (prog.ScriptErrors) != 'undefined' && prog.ScriptErrors.trim() != '' && prog.ScriptErrors.trim() != '[]');
+    //
+    var module = HG.WebApp.Utility.GetModuleByDomainAddress('HomeAutomation.HomeGenie.Automation', prog.Address);
+    if (module != null) {
+        var propObj = HG.WebApp.Utility.GetModulePropertyByName(module, 'Program.Status');
+        if (propObj != null) statusProperty = propObj.Value;
+    }
+    //
+    if (statusProperty == 'Running') {
+        statusColor = 'green';
+    } else if (prog.IsEnabled) {
+        if (hasErrors)
+            statusColor = 'red';
+        else
+            statusColor = 'yellow';
+    } else if (hasErrors) {
+        statusColor = 'brown';
+    }
+    //
+    return statusColor;
 };
 
 HG.WebApp.ProgramEdit.RefreshProgramOptions = function () {
@@ -636,37 +661,11 @@ HG.WebApp.ProgramEdit.CheckAndRunProgram = function (program) {
     HG.WebApp.ProgramEdit._CurrentProgram.ScriptCondition = editor1.getValue(); //$('#automation_program_scriptcondition').val();
     HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource = editor2.getValue(); //$('#automation_program_scriptsource').val();
     HG.WebApp.ProgramEdit._CurrentProgram.ConditionType = $('#automation_conditiontype').val();
-    //
-    // check if program is using the special var PROGRAM_OPTIONS_STRING
-    // this var is used to pass a string argument to the program
-    /*		if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.indexOf('PROGRAM_OPTIONS_STRING') > 0)
-            {
-                var prompt = 'Enter program options:';
-                if (HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.substring(0, 24) == '//OPTIONS_STRING_PROMPT=')
-                {
-                    prompt = HG.WebApp.ProgramEdit._CurrentProgram.ScriptSource.substring(24);
-                    prompt = prompt.substring(0, prompt.indexOf('\n'));			
-                }
-                $('#simplestringdialog').simpledialog({
-                    'mode': 'string',
-                    'prompt': prompt,
-                    'cleanOnClose': false,
-                    'buttons': {
-                        'OK': {
-                            click: function () {
-                                HG.WebApp.ProgramEdit.RunProgram( program.Address, $('#simplestringdialog').attr('data-string') );
-                            }
-                        },
-                        'Cancel': {
-                            click: function () {
-                                //console.log(this);
-                            },
-                            icon: "delete",
-                        }
-                    }			
-                });
-            } else*/
-    {
+    if (!HG.WebApp.ProgramEdit.IsClean()) {
+        HG.WebApp.ProgramEdit.SaveProgram(function(){
+            HG.WebApp.ProgramEdit.RunProgram(program.Address, null);
+        });
+    } else {
         HG.WebApp.ProgramEdit.RunProgram(program.Address, null);
     }
 };

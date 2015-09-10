@@ -506,8 +506,8 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
-                if (!program.IsEnabled)
-                    program.IsEnabled = true;
+                //if (!program.IsEnabled)
+                //    program.IsEnabled = true;
                 try
                 {
                     homegenie.ProgramEngine.Run(program, options);

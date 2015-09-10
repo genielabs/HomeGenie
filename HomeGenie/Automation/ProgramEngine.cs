@@ -301,13 +301,11 @@ namespace HomeGenie.Automation
             program.SetHost(homegenie);
             automationPrograms.Add(program);
             program.EnabledStateChanged += program_EnabledStateChanged;
-            //
             // in case of c# script preload assembly from generated .dll
             if (program.Type.ToLower() == "csharp" && !program.AssemblyLoad())
             {
                 program.ScriptErrors = "Program update is required.";
             }
-            //
             // Initialize state
             RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
             if (program.IsEnabled)
