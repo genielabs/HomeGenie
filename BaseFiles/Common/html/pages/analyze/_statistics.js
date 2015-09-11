@@ -4,6 +4,7 @@
 //
 HG.WebApp.Statistics = HG.WebApp.Statistics || {};
 HG.WebApp.Statistics._CurrentTab = 1;
+HG.WebApp.Statistics._InitDateFromTo = 4;
 HG.WebApp.Statistics._CurrentModule = '';
 HG.WebApp.Statistics._CurrentParameter = 'Meter.Watts';
 HG.WebApp.Statistics._CurrentGraphType = 'bars';
@@ -62,11 +63,17 @@ HG.WebApp.Statistics.InitializePage = function () {
     // datebox Hour field events
     $('#page_analyze_datefrom').val('');
     $('#page_analyze_datefrom').on('change', function(){
-        HG.WebApp.Statistics.Refresh();
+        if(HG.WebApp.Statistics._InitDateFromTo == 0)
+          HG.WebApp.Statistics.Refresh();
+        else
+          HG.WebApp.Statistics._InitDateFromTo -= 1;
     });
     $('#page_analyze_dateto').val('');
     $('#page_analyze_dateto').on('change', function(){
-        HG.WebApp.Statistics.Refresh();
+        if(HG.WebApp.Statistics._InitDateFromTo == 0)
+          HG.WebApp.Statistics.Refresh();
+        else
+          HG.WebApp.Statistics._InitDateFromTo -= 1;
     });
     // tooltips
     $("#statshour").qtip({
