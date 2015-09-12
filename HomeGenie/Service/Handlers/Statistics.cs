@@ -263,6 +263,59 @@ namespace HomeGenie.Service.Handlers
                 response += "]";
                 request.ResponseData = response;
                 break;
+            case "Parameter.StatsMultiple":
+                response = "[";
+                //
+                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                var daysMultiples = new List<StatisticsEntry>[1];
+                daysMultiples[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "All", dateStart, dateEnd);
+                response += "[ ";
+                var moduleName = "";
+                foreach (var entry in daysMultiples[0])
+                {
+                    if (entry.CustomData == "")
+                        entry.CustomData = entry.Domain + ":" + entry.Address;
+                    if(moduleName != entry.CustomData)
+                    {
+                        if(moduleName != "")
+                        {
+                            response = response.TrimEnd(',');
+                            response += " ],[ ";
+                        }
+                        response += "[\""+entry.CustomData + "\"] ],[ ";
+                        moduleName = entry.CustomData;
+                    }
+                    response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                }
+                response = response.TrimEnd(',');
+                response += " ]";
+                /*response += "[ ";
+                var moduleName = "";
+                foreach (var entry in daysMultiples[0])
+                {
+                    if (entry.CustomData == "")
+                        entry.CustomData = entry.Domain + ":" + entry.Address;
+                    if(moduleName != entry.CustomData)
+                    {
+                        if(moduleName != "")
+                        {
+                            response = response.TrimEnd(',');
+                            response += " ] ],[ ";
+                        }
+                        response += "[ \""+entry.CustomData + "\" ],[ ";
+                        moduleName = entry.CustomData;
+                    }
+                    response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                }
+                response = response.TrimEnd(',');
+                response += " ]";
+                if(moduleName != "")
+                    response += " ]";*/
+                //
+                response += "]";
+                request.ResponseData = response;
+                break;
             case "Parameter.StatDelete":
                 response = "[";
                 var dateText = migCommand.GetOption(0).Replace('.',',');
