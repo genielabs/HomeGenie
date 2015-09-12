@@ -55,10 +55,6 @@ namespace HomeGenie.Data
             statValues.Add(new StatValue(0, LastProcessedTimestap));
             lastEvent = lastOn = lastOff = new StatValue(0, LastProcessedTimestap);
             historyValues.Add(lastEvent);
-            while (historyValues.Count > historyLimit)
-            {
-                historyValues.RemoveAt(historyValues.Count - 1);
-            }
         }
 
         public void AddValue(string fieldName, double value, DateTime timestamp)
@@ -68,7 +64,6 @@ namespace HomeGenie.Data
                 // add value for StatisticsLogger use
                 statValues.Add(new StatValue(value, timestamp));
             }
-            //
             // "value" is the occurring event in this very moment, 
             // so "Current" is holding previous value right now
             if (Current.Value != value)
@@ -87,6 +82,11 @@ namespace HomeGenie.Data
             }
             // insert current value into history and so update "Current" to "value"
             historyValues.Insert(0, new StatValue(value, timestamp));
+            // keeep size within historyLimit
+            while (historyValues.Count > historyLimit)
+            {
+                historyValues.RemoveAt(historyValues.Count - 1);
+            }
         }
 
         public int HistoryLimit

@@ -46,9 +46,9 @@ namespace HomeGenie.Automation
         private MacroDelayType delayType = MacroDelayType.Fixed;
         //private DateTime startTimestamp = DateTime.Now;
 
-        private ProgramEngine masterControlProgram;
+        private ProgramManager masterControlProgram;
 
-        public MacroRecorder(ProgramEngine mcp)
+        public MacroRecorder(ProgramManager mcp)
         {
             masterControlProgram = mcp;
         }

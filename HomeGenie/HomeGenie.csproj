@@ -203,7 +203,6 @@
     <Compile Include="Automation\Scripting\NetHelper.cs" />
     <Compile Include="Automation\Scripting\ProgramHelper.cs" />
     <Compile Include="Automation\Scripting\SchedulerHelper.cs" />
-    <Compile Include="Automation\CSharpAppFactory.cs" />
     <Compile Include="Automation\Scripting\EventsHelper.cs" />
     <Compile Include="Automation\Scripting\TcpClientHelper.cs" />
     <Compile Include="Automation\Scripting\SerialPortHelper.cs" />
@@ -228,7 +227,6 @@
     <Compile Include="Data\ModuleParameter.cs" />
     <Compile Include="Service\HomeGenieService.cs" />
     <Compile Include="Automation\ComparisonOperator.cs" />
-    <Compile Include="Automation\ProgramEngine.cs" />
     <Compile Include="Automation\ProgramBlock.cs" />
     <Compile Include="Automation\ProgramCommand.cs" />
     <Compile Include="Automation\ProgramCondition.cs" />
@@ -236,15 +234,24 @@
     <Compile Include="Data\SystemConfiguration.cs" />
     <Compile Include="Automation\Scripting\SettingsHelper.cs" />
     <Compile Include="Service\StringCipher.cs" />
-    <Compile Include="Automation\ArduinoAppFactory.cs" />
     <Compile Include="Automation\Scripting\UdpClientHelper.cs" />
     <Compile Include="Automation\Scripting\KnxClientHelper.cs" />
     <Compile Include="Automation\Scripting\MqttClientHelper.cs" />
-    <Compile Include="Automation\WizardEngine.cs" />
     <Compile Include="Data\Store.cs" />
     <Compile Include="Automation\Scripting\StoreHelper.cs" />
     <Compile Include="Automation\ProgramDynamiApi.cs" />
     <Compile Include="Data\SystemConfiguration_1_0.cs" />
+    <Compile Include="Automation\Engines\CSharpEngine.cs" />
+    <Compile Include="Automation\Engines\WizardEngine.cs" />
+    <Compile Include="Automation\ProgramManager.cs" />
+    <Compile Include="Automation\Engines\IProgramEngine.cs" />
+    <Compile Include="Automation\Engines\PythonEngine.cs" />
+    <Compile Include="Automation\Engines\RubyEngine.cs" />
+    <Compile Include="Automation\Engines\JavascriptEngine.cs" />
+    <Compile Include="Automation\Engines\ArduinoEngine.cs" />
+    <Compile Include="Automation\Engines\CSharpAppFactory.cs" />
+    <Compile Include="Automation\Engines\ArduinoAppFactory.cs" />
+    <Compile Include="Automation\Engines\ProgramEngineBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">
@@ -331,4 +338,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Automation\Engines\" />
+  </ItemGroup>
 </Project>

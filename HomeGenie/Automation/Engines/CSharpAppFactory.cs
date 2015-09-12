@@ -29,7 +29,7 @@ using System.CodeDom.Compiler;
 using HomeGenie.Service;
 using System.IO;
 
-namespace HomeGenie.Automation
+namespace HomeGenie.Automation.Engines
 {
 
     public static class CSharpAppFactory

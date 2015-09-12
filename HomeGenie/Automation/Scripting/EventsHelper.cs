@@ -64,8 +64,8 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper SystemStarted(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.SystemStarted = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.SystemStarted = handler;
             return this;
         }
         
@@ -87,8 +87,8 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper SystemStopping(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.SystemStopping = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.SystemStopping = handler;
             return this;
         }
         
@@ -110,8 +110,8 @@ namespace HomeGenie.Automation.Scripting
         /// </code></example>
         public EventsHelper ProgramStopping(Func<bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.Stopping = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.Stopping = handler;
             return this;
         }
 
@@ -137,8 +137,8 @@ namespace HomeGenie.Automation.Scripting
         /// <seealso cref="ModuleParameterIsChanging"/>
         public EventsHelper ModuleParameterChanged(Func<ModuleHelper, ModuleParameter, bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.ModuleChangedHandler = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.ModuleChangedHandler = handler;
             return this;
         }
 
@@ -166,8 +166,8 @@ namespace HomeGenie.Automation.Scripting
         /// <seealso cref="ModuleParameterChanged"/>
         public EventsHelper ModuleParameterIsChanging(Func<ModuleHelper, ModuleParameter, bool> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.ModuleIsChangingHandler = handler;
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.ModuleIsChangingHandler = handler;
             return this;
 
         }
@@ -199,17 +199,17 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, object> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.registeredApiCalls.Add(apiCall);
-            homegenie.ProgramEngine.RegisterDynamicApi(apiCall, handler);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.registeredApiCalls.Add(apiCall);
+            homegenie.ProgramManager.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 
         public EventsHelper WebServiceCallReceived(string apiCall, Func<object, string> handler)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
-            program.registeredApiCalls.Add(apiCall);
-            homegenie.ProgramEngine.RegisterDynamicApi(apiCall, handler);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            program.Engine.registeredApiCalls.Add(apiCall);
+            homegenie.ProgramManager.RegisterDynamicApi(apiCall, handler);
             return this;
         }
 

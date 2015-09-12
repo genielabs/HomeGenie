@@ -81,12 +81,12 @@ namespace HomeGenie.Service.Handlers
                     moduleEvent.Parameter.Name,
                     moduleEvent.Parameter.Value
                 );
-                var eventData = new ProgramEngine.RoutedEvent() {
+                var eventData = new ProgramManager.RoutedEvent() {
                     Sender = requestOrigin,
                     Module = module,
                     Parameter = moduleEvent.Parameter
                 };
-                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.ProgramEngine.RoutePropertyChangedEvent), eventData);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(homegenie.ProgramManager.RoutePropertyChangedEvent), eventData);
                 break;
             }
         }

@@ -563,10 +563,10 @@ namespace HomeGenie.Service
                 bool configChanged = false;
                 foreach (var item in schedulerItems)
                 {
-                    if (homegenie.ProgramEngine.SchedulerService.Get(item.Name) == null)
+                    if (homegenie.ProgramManager.SchedulerService.Get(item.Name) == null)
                     {
                         LogMessage("+ Adding Scheduler Item: " + item.Name);
-                        homegenie.ProgramEngine.SchedulerService.AddOrUpdate(item.Name, item.CronExpression);
+                        homegenie.ProgramManager.SchedulerService.AddOrUpdate(item.Name, item.CronExpression);
                         if (!configChanged) configChanged = true;
                     }
                 }
@@ -643,9 +643,9 @@ namespace HomeGenie.Service
                     {
 
                         // Only system programs are to be updated
-                        if (program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        if (program.Address < ProgramManager.USER_SPACE_PROGRAMS_START)
                         {
-                            ProgramBlock oldProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                            ProgramBlock oldProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                             if (oldProgram != null)
                             {
 
@@ -656,7 +656,7 @@ namespace HomeGenie.Service
                                 // Preserve IsEnabled status if program already exist
                                 program.IsEnabled = oldProgram.IsEnabled;
                                 LogMessage("* Updating Automation Program: " + program.Name + " (" + program.Address + ")");
-                                homegenie.ProgramEngine.ProgramRemove(oldProgram);
+                                homegenie.ProgramManager.ProgramRemove(oldProgram);
 
                             }
                             else
@@ -688,7 +688,7 @@ namespace HomeGenie.Service
                             catch { }
 
                             // Add the new program to the ProgramEngine
-                            homegenie.ProgramEngine.ProgramAdd(program);
+                            homegenie.ProgramManager.ProgramAdd(program);
 
                             if (!configChanged) configChanged = true;
                         }

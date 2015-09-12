@@ -446,7 +446,7 @@ namespace HomeGenie.Service.Handlers
                     var newProgramList = new List<ProgramBlock>();
                     foreach (ProgramBlock program in newProgramsData)
                     {
-                        if (program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        if (program.Address >= ProgramManager.USER_SPACE_PROGRAMS_START)
                         {
                             ProgramBlock p = new ProgramBlock();
                             p.Address = program.Address;
@@ -502,15 +502,15 @@ namespace HomeGenie.Service.Handlers
                     reader.Close();
                     foreach (var program in newProgramsData)
                     {
-                        var currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == program.Address);
+                        var currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                         program.IsRunning = false;
                         // Only restore user space programs
-                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        if (selectedPrograms.Contains("," + program.Address.ToString() + ",") && program.Address >= ProgramManager.USER_SPACE_PROGRAMS_START)
                         {
                             int oldPid = program.Address;
                             if (currentProgram == null)
                             {
-                                var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramEngine.GeneratePid() : program.Address);
+                                var newPid = ((currentProgram != null && currentProgram.Address == program.Address) ? homegenie.ProgramManager.GeneratePid() : program.Address);
                                 try
                                 {
                                     File.Copy(Path.Combine(tempFolderPath, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", newPid + ".dll"), true);
@@ -519,11 +519,11 @@ namespace HomeGenie.Service.Handlers
                                 {
                                 }
                                 program.Address = newPid;
-                                homegenie.ProgramEngine.ProgramAdd(program);
+                                homegenie.ProgramManager.ProgramAdd(program);
                             }
                             else if (currentProgram != null)
                             {
-                                homegenie.ProgramEngine.ProgramRemove(currentProgram);
+                                homegenie.ProgramManager.ProgramRemove(currentProgram);
                                 try
                                 {
                                     File.Copy(Path.Combine(tempFolderPath, "programs", program.Address + ".dll"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "programs", program.Address + ".dll"), true);
@@ -531,7 +531,7 @@ namespace HomeGenie.Service.Handlers
                                 catch
                                 {
                                 }
-                                homegenie.ProgramEngine.ProgramAdd(program);
+                                homegenie.ProgramManager.ProgramAdd(program);
                             }
                             // Restore Arduino program folder ...
                             // TODO: this is untested yet...
@@ -548,7 +548,7 @@ namespace HomeGenie.Service.Handlers
                                 }
                             }
                         }
-                        else if (currentProgram != null && program.Address < ProgramEngine.USER_SPACE_PROGRAMS_START)
+                        else if (currentProgram != null && program.Address < ProgramManager.USER_SPACE_PROGRAMS_START)
                         {
                             // Only restore Enabled/Disabled status of system programs
                             currentProgram.IsEnabled = program.IsEnabled;
@@ -942,7 +942,7 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateGroupsDatabase(migCommand.GetOption(0));//write groups
                     if (migCommand.GetOption(0).ToLower() == "automation")
                     {
-                        var groupPrograms = homegenie.ProgramEngine.Programs.FindAll(p => p.Group.ToLower() == deletedGroup.Name.ToLower());
+                        var groupPrograms = homegenie.ProgramManager.Programs.FindAll(p => p.Group.ToLower() == deletedGroup.Name.ToLower());
                         if (groupPrograms != null)
                         {
                             // delete group association from programs

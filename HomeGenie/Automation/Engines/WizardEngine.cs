@@ -30,24 +30,92 @@ using System.Globalization;
 using System.Collections.Generic;
 using HomeGenie.Automation.Scripting;
 
-namespace HomeGenie.Automation
+namespace HomeGenie.Automation.Engines
 {
-    public class WizardEngine
+    public class WizardEngine : ProgramEngineBase, IProgramEngine
     {
-        private HomeGenieService homegenie;
-        private ScriptingHost scriptingHost;
+        private ScriptingHost hgScriptingHost;
 
-        public WizardEngine(HomeGenieService homegenie)
+        public WizardEngine(ProgramBlock pb) : base(pb)
         {
-            this.homegenie = homegenie;
         }
 
-        public void SetScriptingHost(ScriptingHost scriptingHost)
+        public void Unload()
         {
-            this.scriptingHost = scriptingHost;
+            Reset();
+            hgScriptingHost = null;
         }
 
-        public bool EvaluateCondition(List<ProgramCondition> conditions)
+        public bool Load()
+        {
+            if (homegenie == null)
+                return false;
+
+            if (hgScriptingHost != null)
+            {
+                this.Reset();
+                hgScriptingHost = null;
+            }
+            hgScriptingHost = new ScriptingHost();
+            hgScriptingHost.SetHost(homegenie, programBlock.Address);
+
+            return true;
+        }
+
+        public MethodRunResult EvaluateCondition()
+        {
+            MethodRunResult result = null;
+            result = new MethodRunResult();
+            try
+            {
+                result.ReturnValue = EvaluateCondition(programBlock.Conditions);
+            }
+            catch (Exception e)
+            {
+                result.Exception = e;
+            }
+            return result;
+        }
+
+        public MethodRunResult Run(string options)
+        {
+            var result = new MethodRunResult();
+            try
+            {
+                ExecuteScript(programBlock.Commands);
+            }
+            catch (Exception e)
+            {
+                result.Exception = e;
+            }
+            return result;
+        }
+
+        public void Reset()
+        {
+            if (hgScriptingHost != null)
+                hgScriptingHost.Reset();
+        }
+
+        public ProgramError GetFormattedError(Exception e, bool isTriggerBlock)
+        {
+            ProgramError error = new ProgramError() {
+                CodeBlock = isTriggerBlock ? "TC" : "CR",
+                Column = 0,
+                Line = 0,
+                ErrorNumber = "-1",
+                ErrorMessage = e.Message
+            };
+
+            return error;
+        }
+
+        public List<ProgramError> Compile()
+        {
+            return new List<ProgramError>();
+        }
+
+        private bool EvaluateCondition(List<ProgramCondition> conditions)
         {
             bool isConditionSatisfied = (conditions.Count > 0);
             for (int c = 0; c < conditions.Count; c++)
@@ -80,7 +148,7 @@ namespace HomeGenie.Automation
             return isConditionSatisfied;
         }
 
-        public void ExecuteScript(List<ProgramCommand> commands)
+        private void ExecuteScript(List<ProgramCommand> commands)
         {
             int repeatStartLine = 0;
             int repeatCount = 0;
@@ -115,17 +183,17 @@ namespace HomeGenie.Automation
                             break;
                         case "Program.Run":
                             string programId = commands[x].CommandArguments;
-                            var programToRun = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+                            var programToRun = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
                             if (programToRun != null /*&& programToRun.Address != program.Address*/ && !programToRun.IsRunning)
                             {
-                                homegenie.ProgramEngine.Run(programToRun, "");
+                                homegenie.ProgramManager.Run(programToRun, "");
                             }
                             break;
                         case "Program.WaitFor":
-                            scriptingHost.Program.WaitFor(commands[x].CommandArguments);
+                            hgScriptingHost.Program.WaitFor(commands[x].CommandArguments);
                             break;
                         case "Program.Play":
-                            scriptingHost.Program.Play(commands[x].CommandArguments);
+                            hgScriptingHost.Program.Play(commands[x].CommandArguments);
                             break;
                         case "Program.Say":
                             var language = "en-US";
@@ -136,7 +204,7 @@ namespace HomeGenie.Automation
                                 language = sentence.Substring(lidx + 1);
                                 sentence = sentence.Substring(0, lidx);
                             }
-                            scriptingHost.Program.Say(sentence, language);
+                            hgScriptingHost.Program.Say(sentence, language);
                             break;
                         default:
                             var programCommand = commands[x];
@@ -164,7 +232,7 @@ namespace HomeGenie.Automation
             //
             if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation" && (c.Property == "Scheduler.TimeEvent" || c.Property == "Scheduler.CronEvent"))
             {
-                return homegenie.ProgramEngine.SchedulerService.IsScheduling(c.ComparisonValue);
+                return homegenie.ProgramManager.SchedulerService.IsScheduling(c.ComparisonValue);
             }
             //
             // if the comparison value starts with ":", then the value is read from another module property
