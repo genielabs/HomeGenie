@@ -40,6 +40,7 @@ namespace HomeGenie.Service.Logging
         public DateTime TimeEnd;
         public string Domain;
         public string Address;
+        public string CustomData;
         public double Value;
     }
 
@@ -470,10 +471,15 @@ namespace HomeGenie.Service.Logging
                     dbCommand.Parameters.Add(new SQLiteParameter("@address", address));
                 }
                 string query = "";
-                if( aggregator != "" )
-                    query = "select TimeStart,TimeEnd,Domain,Address," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                if (aggregator != "")
+                {
+                    if(aggregator == "All")
+                        query = "select TimeStart,TimeEnd,Domain,Address,CustomData,AverageValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " order by CustomData, Domain, Address, TimeStart asc;";
+                    else
+                        query = "select TimeStart,TimeEnd,Domain,Address,CustomData," + aggregator + "(AverageValue) as Value from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " group by Domain, Address, strftime('%H', TimeStart)  order by TimeStart asc;";
+                }
                 else
-                    query = "select TimeStart,TimeEnd,Domain,Address,AverageValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " order by TimeStart asc;";
+                    query = "select TimeStart,TimeEnd,Domain,Address,CustomData,AverageValue from ValuesHist where " + filter + " Parameter = @parameterName AND " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " order by TimeStart asc;";
                 dbCommand.Parameters.Add(new SQLiteParameter("@parameterName", parameterName));
 
                 //if (domain != "" && address != "") filter = "Domain ='" + domain + "' and Address = '" + address + "' and ";
@@ -488,16 +494,17 @@ namespace HomeGenie.Service.Logging
                     entry.TimeEnd = DateTime.Parse(reader.GetString(1));
                     entry.Domain = reader.GetString(2);
                     entry.Address = reader.GetString(3);
+                    entry.CustomData = reader.GetString(4);
                     entry.Value = 0;
                     try
                     {
-                        entry.Value = (double)reader.GetFloat(4);
+                        entry.Value = (double)reader.GetFloat(5);
                     }
                     catch
                     {
-                        var value = reader.GetValue(4);
+                        var value = reader.GetValue(5);
                         if (value != DBNull.Value && value != null) double.TryParse(
-                            reader.GetString(4),
+                            reader.GetString(5),
                             out entry.Value
                         );
                     }
