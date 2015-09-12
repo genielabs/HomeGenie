@@ -155,7 +155,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="priority">Priority.</param>
         public void SetAutostart(bool autostart)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
                 program.Autostart = autostart;
@@ -178,7 +178,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="widget">The widget path.</param>
         public ProgramHelper UseWidget(string widget)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
             var module = homegenie.VirtualModules.Find(rm => rm.ParentId == myProgramId.ToString() && rm.Domain == myProgramDomain && rm.Address == myProgramId.ToString());
             //
             if (module == null)
@@ -288,7 +288,7 @@ namespace HomeGenie.Automation.Scripting
             string type
         )
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             ProgramFeature feature = null;
             //
             try
@@ -325,7 +325,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="propertyName">Parameter name.</param>
         public ProgramFeature Feature(string parameterName)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             ProgramFeature feature = null;
             //
             try
@@ -723,7 +723,7 @@ namespace HomeGenie.Automation.Scripting
         /// </summary>
         public void GoBackground()
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
             program.IsEnabled = true;
             homegenie.RaiseEvent(
                 myProgramDomain,
@@ -774,10 +774,10 @@ namespace HomeGenie.Automation.Scripting
         /// </param>
         public void Run(string programId, string options)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
             if (program != null && program.Address != myProgramId && !program.IsRunning)
             {
-                homegenie.ProgramEngine.Run(program, options);
+                homegenie.ProgramManager.Run(program, options);
             }
         }
         
@@ -788,7 +788,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="programId">Program address or name.</param>
         public ProgramHelper WaitFor(string programId)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == programId || p.Name == programId);
             if (program != null && program.Address != myProgramId)
             {
                 while (!program.IsRunning)
@@ -805,7 +805,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="programAddress">Program address (id).</param>
         public ProgramHelper WithAddress(int programAddress)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == programAddress);
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address == programAddress);
             ProgramHelper programHelper = null;
             if (program != null)
             {
@@ -821,7 +821,7 @@ namespace HomeGenie.Automation.Scripting
         /// <param name="programName">Program name.</param>
         public ProgramHelper WithName(string programName)
         {
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Name.ToLower() == programName.ToLower());
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Name.ToLower() == programName.ToLower());
             ProgramHelper programHelper = null;
             if (program != null)
             {
@@ -890,7 +890,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+                var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
                 return program.IsRunning;
             }
         }
@@ -905,7 +905,7 @@ namespace HomeGenie.Automation.Scripting
         {
             get
             {
-                var program = homegenie.ProgramEngine.Programs.Find(p => p.Address == myProgramId);
+                var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
                 return program.IsEnabled;
             }
         }
@@ -945,7 +945,7 @@ namespace HomeGenie.Automation.Scripting
             // no control widget --> not visible
             this.UseWidget(""); 
             // remove all features 
-            var program = homegenie.ProgramEngine.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
                 program.Autostart = false;

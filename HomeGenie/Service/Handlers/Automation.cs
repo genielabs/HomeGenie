@@ -34,6 +34,7 @@ using HomeGenie.Automation.Scheduler;
 using Microsoft.Scripting.Hosting;
 using Microsoft.Scripting;
 using CronExpressionDescriptor;
+using HomeGenie.Automation.Engines;
 
 namespace HomeGenie.Service.Handlers
 {
@@ -60,24 +61,24 @@ namespace HomeGenie.Service.Handlers
                 switch (migCommand.Command)
                 {
                 case "Macro.Record":
-                    homegenie.ProgramEngine.MacroRecorder.RecordingEnable();
+                    homegenie.ProgramManager.MacroRecorder.RecordingEnable();
                     break;
                 case "Macro.Save":
-                    newProgram = homegenie.ProgramEngine.MacroRecorder.SaveMacro(migCommand.GetOption(1));
+                    newProgram = homegenie.ProgramManager.MacroRecorder.SaveMacro(migCommand.GetOption(1));
                     request.ResponseData = newProgram.Address.ToString();
                     break;
                 case "Macro.Discard":
-                    homegenie.ProgramEngine.MacroRecorder.RecordingDisable();
+                    homegenie.ProgramManager.MacroRecorder.RecordingDisable();
                     break;
                 case "Macro.SetDelay":
                     switch (migCommand.GetOption(0).ToLower())
                     {
                     case "none":
-                        homegenie.ProgramEngine.MacroRecorder.DelayType = MacroDelayType.None;
+                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.None;
                         break;
 
                     case "mimic":
-                        homegenie.ProgramEngine.MacroRecorder.DelayType = MacroDelayType.Mimic;
+                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.Mimic;
                         break;
 
                     case "fixed":
@@ -85,13 +86,13 @@ namespace HomeGenie.Service.Handlers
                             migCommand.GetOption(1),
                             System.Globalization.CultureInfo.InvariantCulture
                         );
-                        homegenie.ProgramEngine.MacroRecorder.DelayType = MacroDelayType.Fixed;
-                        homegenie.ProgramEngine.MacroRecorder.DelaySeconds = secs;
+                        homegenie.ProgramManager.MacroRecorder.DelayType = MacroDelayType.Fixed;
+                        homegenie.ProgramManager.MacroRecorder.DelaySeconds = secs;
                         break;
                     }
                     break;
                 case "Macro.GetDelay":
-                    request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramEngine.MacroRecorder.DelaySeconds + "\" }";
+                    request.ResponseData = "{ \"DelayType\" : \"" + homegenie.ProgramManager.MacroRecorder.DelayType + "\", \"DelayOptions\" : \"" + homegenie.ProgramManager.MacroRecorder.DelaySeconds + "\" }";
                     break;
                 }
             }
@@ -101,7 +102,7 @@ namespace HomeGenie.Service.Handlers
                 {
                 case "Scheduling.Add":
                 case "Scheduling.Update":
-                    var item = homegenie.ProgramEngine.SchedulerService.AddOrUpdate(
+                    var item = homegenie.ProgramManager.SchedulerService.AddOrUpdate(
                         migCommand.GetOption(0),
                         migCommand.GetOption(1).Replace(
                             "|",
@@ -112,26 +113,26 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Delete":
-                    homegenie.ProgramEngine.SchedulerService.Remove(migCommand.GetOption(0));
+                    homegenie.ProgramManager.SchedulerService.Remove(migCommand.GetOption(0));
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Enable":
-                    homegenie.ProgramEngine.SchedulerService.Enable(migCommand.GetOption(0));
+                    homegenie.ProgramManager.SchedulerService.Enable(migCommand.GetOption(0));
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Disable":
-                    homegenie.ProgramEngine.SchedulerService.Disable(migCommand.GetOption(0));
+                    homegenie.ProgramManager.SchedulerService.Disable(migCommand.GetOption(0));
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Get":
-                    request.ResponseData = homegenie.ProgramEngine.SchedulerService.Get(migCommand.GetOption(0));
+                    request.ResponseData = homegenie.ProgramManager.SchedulerService.Get(migCommand.GetOption(0));
                     break;
                 case "Scheduling.List":
-                    homegenie.ProgramEngine.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
+                    homegenie.ProgramManager.SchedulerService.Items.Sort((SchedulerItem s1, SchedulerItem s2) =>
                     {
                         return s1.Name.CompareTo(s2.Name);
                     });
-                    request.ResponseData = homegenie.ProgramEngine.SchedulerService.Items;
+                    request.ResponseData = homegenie.ProgramManager.SchedulerService.Items;
                     break;
                 case "Scheduling.Describe":
                     var cronDescription = "";
@@ -159,7 +160,7 @@ namespace HomeGenie.Service.Handlers
                     //
                     MIG.Gateways.WebServiceUtility.SaveFile(request.RequestData, archiveName);
                     //
-                    int newPid = homegenie.ProgramEngine.GeneratePid();
+                    int newPid = homegenie.ProgramManager.GeneratePid();
                     var reader = new StreamReader(archiveName);
                     char[] signature = new char[2];
                     reader.Read(signature, 0, 2);
@@ -193,15 +194,15 @@ namespace HomeGenie.Service.Handlers
                     //
                     newProgram.Address = newPid;
                     newProgram.Group = migCommand.GetOption(0);
-                    homegenie.ProgramEngine.ProgramAdd(newProgram);
+                    homegenie.ProgramManager.ProgramAdd(newProgram);
                     //
                     newProgram.IsEnabled = false;
                     newProgram.ScriptErrors = "";
-                    newProgram.AppAssembly = null;
+                    newProgram.Engine.SetHost(homegenie);
                     //
                     if (newProgram.Type.ToLower() != "arduino")
                     {
-                        homegenie.ProgramEngine.CompileScript(newProgram);
+                        homegenie.ProgramManager.CompileScript(newProgram);
                     }
                     //
                     homegenie.UpdateProgramsDatabase();
@@ -210,7 +211,7 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Export":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     string filename = currentProgram.Address + "-" + currentProgram.Name.Replace(" ", "_");
                     //
                     var writerSettings = new System.Xml.XmlWriterSettings();
@@ -275,7 +276,7 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.List":
-                    var programList = new List<ProgramBlock>(homegenie.ProgramEngine.Programs);
+                    var programList = new List<ProgramBlock>(homegenie.ProgramManager.Programs);
                     programList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
                     {
                         string c1 = p1.Name + " " + p1.Address;
@@ -291,19 +292,18 @@ namespace HomeGenie.Service.Handlers
                         Name = streamContent,
                         Type = "Wizard"
                     };
-                    newProgram.Address = homegenie.ProgramEngine.GeneratePid();
-                    homegenie.ProgramEngine.ProgramAdd(newProgram);
+                    newProgram.Address = homegenie.ProgramManager.GeneratePid();
+                    homegenie.ProgramManager.ProgramAdd(newProgram);
                     homegenie.UpdateProgramsDatabase();
                     request.ResponseData = new ResponseText(newProgram.Address.ToString());
                     break;
 
                 case "Programs.Delete":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
                         //TODO: remove groups associations as well
-                        currentProgram.IsEnabled = false;
-                        homegenie.ProgramEngine.ProgramRemove(currentProgram);
+                        homegenie.ProgramManager.ProgramRemove(currentProgram);
                         homegenie.UpdateProgramsDatabase();
                         // remove associated module entry
                         homegenie.Modules.RemoveAll(m => m.Domain == Domains.HomeAutomation_HomeGenie_Automation && m.Address == currentProgram.Address.ToString());
@@ -314,18 +314,18 @@ namespace HomeGenie.Service.Handlers
                 case "Programs.Compile":
                 case "Programs.Update":
                     newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == newProgram.Address);
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == newProgram.Address);
                         //
                     if (currentProgram == null)
                     {
-                        newProgram.Address = homegenie.ProgramEngine.GeneratePid();
-                        homegenie.ProgramEngine.ProgramAdd(newProgram);
+                        newProgram.Address = homegenie.ProgramManager.GeneratePid();
+                        homegenie.ProgramManager.ProgramAdd(newProgram);
                     }
                     else
                     {
                         if (currentProgram.Type.ToLower() != newProgram.Type.ToLower())
                         {
-                            currentProgram.AppAssembly = null; // dispose assembly and interrupt current task
+                            currentProgram.Engine.SetHost(homegenie); // dispose assembly and interrupt current task
                         }
                         currentProgram.Type = newProgram.Type;
                         currentProgram.Group = newProgram.Group;
@@ -345,12 +345,12 @@ namespace HomeGenie.Service.Handlers
                     {
                         // reset previous error status
                         currentProgram.IsEnabled = false;
-                        currentProgram.Stop();
+                        currentProgram.Engine.Stop();
                         currentProgram.ScriptErrors = "";
                         //
-                        List<ProgramError> errors = homegenie.ProgramEngine.CompileScript(currentProgram);
+                        List<ProgramError> errors = homegenie.ProgramManager.CompileScript(currentProgram);
                         //
-                        currentProgram.IsEnabled = newProgram.IsEnabled;
+                        currentProgram.IsEnabled = newProgram.IsEnabled && errors.Count == 0;
                         currentProgram.ScriptErrors = JsonConvert.SerializeObject(errors);
                         request.ResponseData = currentProgram.ScriptErrors;
                     }
@@ -431,12 +431,12 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Run":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
                         // clear any runtime errors before running
                         currentProgram.ScriptErrors = "";
-                        homegenie.ProgramEngine.RaiseProgramModuleEvent(
+                        homegenie.ProgramManager.RaiseProgramModuleEvent(
                             currentProgram,
                             Properties.RUNTIME_ERROR,
                             ""
@@ -454,13 +454,13 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Restart":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
                         currentProgram.IsEnabled = false;
                         try
                         {
-                            currentProgram.Stop();
+                            currentProgram.Engine.Stop();
                         }
                         catch
                         {
@@ -471,7 +471,7 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Enable":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
                         currentProgram.IsEnabled = true;
@@ -480,13 +480,13 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Disable":
-                    currentProgram = homegenie.ProgramEngine.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                    currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
                     if (currentProgram != null)
                     {
                         currentProgram.IsEnabled = false;
                         try
                         {
-                            currentProgram.Stop();
+                            currentProgram.Engine.Stop();
                         }
                         catch
                         {
@@ -503,14 +503,14 @@ namespace HomeGenie.Service.Handlers
         {
             int pid = 0;
             int.TryParse(address, out pid);
-            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
                 //if (!program.IsEnabled)
                 //    program.IsEnabled = true;
                 try
                 {
-                    homegenie.ProgramEngine.Run(program, options);
+                    homegenie.ProgramManager.Run(program, options);
                 }
                 catch
                 {
@@ -524,7 +524,7 @@ namespace HomeGenie.Service.Handlers
         {
             int pid = 0;
             int.TryParse(address, out pid);
-            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
                 if (program.IsRunning)
@@ -538,7 +538,7 @@ namespace HomeGenie.Service.Handlers
                         program.IsEnabled = true;
                     try
                     {
-                        homegenie.ProgramEngine.Run(program, options);
+                        homegenie.ProgramManager.Run(program, options);
                     }
                     catch
                     {
@@ -553,11 +553,11 @@ namespace HomeGenie.Service.Handlers
         {
             int pid = 0;
             int.TryParse(address, out pid);
-            ProgramBlock program = homegenie.ProgramEngine.Programs.Find(p => p.Address == pid);
+            ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
                 program.IsEnabled = false;
-                program.Stop();
+                program.Engine.Stop();
                 homegenie.UpdateProgramsDatabase();
             }
             return program;

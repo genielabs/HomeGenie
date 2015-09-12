@@ -1533,32 +1533,23 @@ Program.SetAutostart(true);
 </ScriptCondition>
     <ScriptSource>When.ModuleParameterIsChanging((module, parameter) =&gt; {
     // check if the module has just been turned on
-	if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
+    if (module.HasFeature("HomeGenie.TurnOffDelay") &amp;&amp; module.Parameter("HomeGenie.TurnOffDelay").DecimalValue &gt; 0)
     {
-      	if (parameter.Name == "Status.Level")
+        if (parameter.Name == "Status.Level")
         {
             var level = module.Parameter("Status.Level");
-            var lastlevel = module.Parameter("Status.LastLevel");
             var turnonticks = level.UpdateTime.Ticks;
             //
-          	lock(this)
-            if (level.DecimalValue != lastlevel.DecimalValue)
+            lock(this)
+            if (level.Statistics.Last.Value == 0 &amp;&amp; level.DecimalValue &gt; 0)
             {
-                bool justswitchedon = (lastlevel.DecimalValue == 0 &amp;&amp; level.DecimalValue &gt; 0);
-                if (justswitchedon)
-                {
-                    var pausedelay = module.Parameter("HomeGenie.TurnOffDelay").DecimalValue;
-                    var targetmodule = module;
-                    Program.RunAsyncTask(()=&gt;{
-                        Pause(pausedelay);
-                      	// ensures that no manual action has been taken on the module in the meantime
-                      	if (turnonticks == level.UpdateTime.Ticks)
-                        {
-                        	Program.Notify("Turn Off Delay", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " switched off.");
-                        	targetmodule.Off();
-                        }
-                    });
-                }
+                var pausedelay = module.Parameter("HomeGenie.TurnOffDelay").DecimalValue;
+                var targetmodule = module;
+                Program.RunAsyncTask(()=&gt;{
+                  Pause(pausedelay);
+                  Program.Notify("Turn Off Delay", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " switched off.");
+                  targetmodule.Off();
+                });
             }
         }
       

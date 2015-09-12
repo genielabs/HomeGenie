@@ -37,9 +37,9 @@ namespace HomeGenie.Automation.Scheduler
     {
         private List<SchedulerItem> events = new List<SchedulerItem>();
         private Timer serviceChecker;
-        private ProgramEngine masterControlProgram;
+        private ProgramManager masterControlProgram;
 
-        public SchedulerService(ProgramEngine programEngine)
+        public SchedulerService(ProgramManager programEngine)
         {
             masterControlProgram = programEngine;
         }

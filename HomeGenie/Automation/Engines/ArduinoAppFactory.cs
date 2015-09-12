@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace HomeGenie.Automation
+namespace HomeGenie.Automation.Engines
 {
     public static class ArduinoAppFactory
     {

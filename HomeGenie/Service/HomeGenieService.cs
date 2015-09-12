@@ -59,7 +59,7 @@ namespace HomeGenie.Service
         private const string HOMEGENIE_MASTERNODE = "0";
         private MigService migService;
         private WebServiceGateway webGateway;
-        private ProgramEngine masterControlProgram;
+        private ProgramManager masterControlProgram;
         private VirtualMeter virtualMeter;
         private UpdateChecker updateChecker;
         private StatisticsLogger statisticsLogger;
@@ -150,9 +150,9 @@ namespace HomeGenie.Service
                     var pb = masterControlProgram.Programs[p];
                     if (pb.IsEnabled)
                     {
-                        if (pb.SystemStarted != null)
+                        if (pb.Engine.SystemStarted != null)
                         {
-                            if (!pb.SystemStarted())
+                            if (!pb.Engine.SystemStarted())
                             // stop routing this event to other listeners
                             break;
                         }
@@ -176,7 +176,7 @@ namespace HomeGenie.Service
                     var pb = masterControlProgram.Programs[p];
                     if (pb.IsEnabled)
                     {
-                        if (pb.SystemStopping != null && !pb.SystemStopping())
+                        if (pb.Engine.SystemStopping != null && !pb.Engine.SystemStopping())
                         {
                             // stop routing this event to other listeners
                             break;
@@ -260,7 +260,7 @@ namespace HomeGenie.Service
             get { return migService; }
         }
         // Reference to ProgramEngine
-        public ProgramEngine ProgramEngine
+        public ProgramManager ProgramManager
         {
             get { return masterControlProgram; }
         }
@@ -900,7 +900,7 @@ namespace HomeGenie.Service
                 masterControlProgram.StopEngine();
                 masterControlProgram = null;
             }
-            masterControlProgram = new ProgramEngine(this);
+            masterControlProgram = new ProgramManager(this);
             try
             {
                 var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
@@ -965,7 +965,7 @@ namespace HomeGenie.Service
                 // delete old programs assemblies
                 foreach (var program in masterControlProgram.Programs)
                 {
-                    program.AppAssembly = null;
+                    program.Engine.SetHost(this);
                 }
                 masterControlProgram = null;
             }
