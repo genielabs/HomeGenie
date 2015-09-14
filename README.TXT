@@ -12,6 +12,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 HOMEPAGE, DOCUMENTATION AND FORUM
 =================================
 
+http://genielabs.github.io/HomeGenie
 http://www.homegenie.it
 http://www.homegenie.it/docs
 http://www.homegenie.it/forum
