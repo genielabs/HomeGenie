@@ -441,6 +441,7 @@ namespace HomeGenie.Service.Handlers
                             Properties.RUNTIME_ERROR,
                             ""
                         );
+                        currentProgram.IsEnabled = true;
                         ProgramRun(migCommand.GetOption(0), migCommand.GetOption(1));
                     }
                     break;
@@ -506,16 +507,28 @@ namespace HomeGenie.Service.Handlers
             ProgramBlock program = homegenie.ProgramManager.Programs.Find(p => p.Address == pid);
             if (program != null)
             {
-                //if (!program.IsEnabled)
-                //    program.IsEnabled = true;
-                try
+                if (program.IsEnabled)
                 {
-                    homegenie.ProgramManager.Run(program, options);
+                    try
+                    {
+                        homegenie.ProgramManager.Run(program, options);
+                    }
+                    catch (Exception e)
+                    {
+                        HomeGenieService.LogError(e);
+                    }
                 }
-                catch
+                else
                 {
+                    homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
+                        Domains.HomeAutomation_HomeGenie_Automation,
+                        program.Address.ToString(),
+                        "Program Error",
+                        Properties.RUNTIME_ERROR,
+                        "Program is disabled, cannot run."
+                    );
                 }
-                ;
             }
             return program;
         }

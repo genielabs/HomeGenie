@@ -250,7 +250,7 @@ namespace HomeGenie.Service
         {
             // if Pico TTS is not installed, then use Google Voice API
             // Note: Pico is only supported in Linux
-            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf(locale.ToLower()) > 0)
+            if (File.Exists(picoPath) && "#en-us#en-gb#de-de#es-es#fr-fr#it-it#".IndexOf("#"+locale.ToLower()+"#") >= 0)
             {
                 if (async)
                 {
@@ -325,6 +325,8 @@ namespace HomeGenie.Service
             try
             {
                 var wavFile = Path.Combine(GetTmpFolder(), "_synthesis_tmp.wav");
+                if (File.Exists(wavFile))
+                    File.Delete(wavFile);
 
                 Process.Start(new ProcessStartInfo(picoPath, " -w " + wavFile + " -l " + locale + " \"" + sentence + "\"") {
                     CreateNoWindow = true,
@@ -333,11 +335,12 @@ namespace HomeGenie.Service
                     UseShellExecute = false
                 }).WaitForExit();
 
-                Play(wavFile);
+                if (File.Exists(wavFile))
+                    Play(wavFile);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // TODO: add error logging 
+                HomeGenieService.LogError(e);
             }
         }
 
@@ -348,13 +351,13 @@ namespace HomeGenie.Service
                 var client = new WebClient();
                 client.Encoding = UTF8Encoding.UTF8;
                 client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence));
+                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence) + "&client=homegenie&ts=" + DateTime.UtcNow.Ticks);
                 client.Dispose();
 
                 var mp3File = Path.Combine(GetTmpFolder(), "_synthesis_tmp.mp3");
-
                 if (File.Exists(mp3File))
                     File.Delete(mp3File);
+                
                 var stream = File.OpenWrite(mp3File);
                 stream.Write(audioData, 0, audioData.Length);
                 stream.Close();
@@ -367,11 +370,12 @@ namespace HomeGenie.Service
                     UseShellExecute = false
                 }).WaitForExit();
 
-                Play(wavFile);
+                if (File.Exists(mp3File))
+                    Play(wavFile);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // TODO: add error logging 
+                HomeGenieService.LogError(e);
             }
         }
 

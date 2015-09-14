@@ -1,5 +1,5 @@
 Package: homegenie
-Version: 1.00-rxyz
+Version: 1.1-rxyz
 Section: web
 Priority: optional
 Architecture: all
@@ -14,6 +14,4 @@ Homepage: http://www.homegenie.it
 Conflicts: 
 Replaces: 
 Provides: 
-Description: 
-             Open Source Home Automation Server in a "Internet Of Things" world.
-             Supports UPnP, X10, Z-Wave, Philips Hue and more...
+Description: HomeGenie - open source, programmable, home automation server for smart connected devices and applications.

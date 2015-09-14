@@ -152,6 +152,15 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        public void Run()
+        {
+            var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
+            if (program != null)
+            {
+                program.WillRun = true;
+            }
+        }
+
         /// <summary>
         /// Run the program as soon as the "Startup Code" exits. This command is meant to be used in the "Startup Code".
         /// </summary>

@@ -11,7 +11,7 @@ read hg_target_folder
 if [ -d "${hg_target_folder}" ]
 then
 
-	hg_target_folder="${hg_target_folder}/homegenie-beta_1.00.${hg_revision_number}_all"
+	hg_target_folder="${hg_target_folder}/homegenie-beta_1.1.${hg_revision_number}_all"
 
 	mkdir -p "$hg_target_folder/usr/local/bin/homegenie"
 
