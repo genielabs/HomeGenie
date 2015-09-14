@@ -1,11 +1,11 @@
+## Documentation
+
+https://genielabs.github.io/HomeGenie
+
 ## Supported IDEs
 
 - **MonoDevelop / Xamarin Studio**
 - **Microsoft Visual Studio**
-
-## Documentation
-
-https://genielabs.github.io/HomeGenie
 
 ## Building, debugging and packaging HomeGenie
 
