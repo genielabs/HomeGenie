@@ -4257,7 +4257,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background: #fafafa url(/images/header-bg.jpg) 0 0 repeat;
+  background: #fafafa url(/HomeGenie/images/header-bg.jpg) 0 0 repeat;
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
