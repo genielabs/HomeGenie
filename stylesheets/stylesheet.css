@@ -6,6 +6,8 @@
  *    user zoom.
  */
 
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
 html {
   font-family: sans-serif; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -219,6 +221,7 @@ hr {
  */
 
 pre {
+  white-space: pre-wrap;
   overflow: auto;
 }
 
@@ -459,18 +462,19 @@ header h1 {
   width: 540px;
   margin-top: 0;
   margin-bottom: 0.2em;
-  font-size: 72px;
+  font-size: 64px;
   font-weight: normal;
   line-height: 1;
   color: #fff;
   letter-spacing: -1px;
+  font-family: Lobster
 }
 
 header h2 {
-  width: 540px;
+  width: 660px;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: normal;
   line-height: 1.3;
   color: #9ddcff;
@@ -545,8 +549,12 @@ aside a.button {
   background: transparent url(../images/download-button.png) 0 0 no-repeat;
 }
 
+.highlight {
+  margin-bottom: 15px;
+}
+
 code, pre {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   font-size: 13px;
   color: #222;
@@ -559,7 +567,7 @@ code {
 }
 
 pre {
-  padding: 20px;
+  padding: 10px;
   overflow: auto;
   text-shadow: none;
   background: #fff;

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">Core API</h1>
+                    <h2><strong>HomeAutomation.HomeGenie</strong> <small>Domain</small></h2>
+                    <h3><strong>Statistics</strong> <small>Module</small>  </h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="core_api_logging.html" title="Go to Logging module API" class="btn btn-default">&larr; <strong>Logging</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_interfaces.html" title="Go to MIG API" class="btn btn-default"><strong>MIG API</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                     <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>HomeAutomation.HomeGenie/Statistics</h4>
+                        <p>
+                            This module implements commands related to HomeGenie statistics engine. 
+                        </p>
+                    </div>  
+
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">Global.CounterTotal</h4>
+	                    <p>
+	                    	Get the total counter value for the parameter specified by <mark>&lt;parameter_id&gt;</mark>.<br />
+	                    	Only parameters using a unit rate of 1 second can be used with this function. For example the <mark>Meter.Watts</mark> parameter (that stores Watt samples at discrete-time intervals),
+	                    	will give a valid result of total Watt-hours counter. 
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Statistics/<strong>Global.CounterTotal</strong>/&lt;parameter_id&gt;</code></pre>
+						<div class="bs-example">
+							<code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Statistics/<strong>Global.CounterTotal</strong>/Meter.Watts</code>
+						</div>
+						<div class="highlight">
+							<p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+							<pre><code>[{ "ResponseValue" : "16149.229" }]</code></pre>
+					  	</div>
+				  	</section>
+				  	       
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">Global.TimeRange</h4>
+                        <p>
+                            Get the start and end date, expressed as UNIX timestamps, of the statistics database.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Statistics/<strong>Global.TimeRange</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Statistics/<strong>Global.TimeRange</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{
+    StartTime : '1423354875609.340', 
+    EndTime : '1423735858381.750' 
+}]</code></pre>
+                        </div>
+                    </section>
+                           
+                    <section id="3">
+                        <h4 class="sub-header text-primary margintop">Parameter.List</h4>
+                        <p>
+                            Get the list of different parameters stored in the statistics database.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.List</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.List</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[
+    'Conditions.PressureMb',
+    'Conditions.TemperatureC',
+    'Conditions.TemperatureF',
+    'Conditions.UV',
+    'Conditions.WindKph',
+    'Meter.Watts',
+    'Sensor.Luminance',
+    'Sensor.Temperature'
+]</code></pre>
+                        </div>
+                    </section>
+                           
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">Parameter.Counter</h4>
+                        <p>
+                            Get the <mark>&lt;parameter_id&gt;</mark> hour by hour counter of the module specified by <mark>&lt;module_domain&gt;:&lt;module_address&gt;</mark>. 
+                            Days interval must be passed with <mark>&lt;start_date&gt;</mark> and <mark>&lt;end_date&gt;</mark> as UNIX timestamps.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.Counter</strong>/&lt;parameter_id&gt;/&lt;module_domain&gt;:&lt;module_address&gt;/&lt;start_date&gt;/&lt;end_date&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.Counter</strong>/Meter.Watts/HomeAutomation.ZWave:13/1423609200000/1423609200000</code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[[ 
+    [1423699200000.000,43.181], // h 00
+    [1423702800000.000,21.248], // h 01
+    [1423706400000.000,40.360], // h 02
+    [1423710000000.000,50.729], // h 03
+    [1423713600000.000,21.439], // h 04
+    [1423717200000.000,21.488], // h 05
+    [1423720800000.000,21.403], // h 06
+    [1423724400000.000,21.139], // h 07
+    [1423728000000.000,21.202], // h 08
+    [1423731600000.000,21.247], // h 08
+    [1423735200000.000,21.028], // h 10
+    [1423738800000.000,79.945], // h 11
+    [1423742400000.000,82.712], // h 12
+    [1423746000000.000,88.977], // h 13
+    [1423749600000.000,86.001], // h 14
+    [1423753200000.000,60.348], // h 15
+    [1423756800000.000,88.318], // h 16
+    [1423760400000.000,89.479], // h 17
+    [1423764000000.000,81.934], // h 18
+    [1423767600000.000,57.276], // h 19
+    [1423771200000.000,86.447], // h 20
+    [1423774800000.000,49.171], // h 21
+    [1423778400000.000,24.966], // h 22
+    [1423782000000.000,22.068]  // h 23
+]]</code></pre>
+                        </div>
+                    </section>
+                           
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Parameter.StatsHour</h4>
+                        <p>
+                            Get the <mark>&lt;parameter_id&gt;</mark> hour by hour value statistics of the module specified by <mark>&lt;module_domain&gt;:&lt;module_address&gt;</mark>. 
+                            Days interval must be passed with <mark>&lt;start_date&gt;</mark> and <mark>&lt;end_date&gt;</mark> as UNIX timestamps.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.StatsHour</strong>/&lt;parameter_id&gt;/&lt;module_domain&gt;:&lt;module_address&gt;/&lt;start_date&gt;/&lt;end_date&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Statistics/<strong>Parameter.StatsHour</strong>/Sensor.Temperature/HomeAutomation.ZWave:23/1423609200000/1423609200000</code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[
+    // MIN
+    [ [1423699200000.000,17.000],[1423702800000.000,16.111],[1423706400000.000,15.500],[1423710000000.000,15.222],[1423713600000.000,15.000],[1423717200000.000,14.722],[1423720800000.000,14.500],[1423724400000.000,14.222],[1423728000000.000,14.111],[1423731600000.000,14.000],[1423735200000.000,14.500],[1423738800000.000,14.611],[1423742400000.000,14.500],[1423746000000.000,15.000],[1423749600000.000,15.000],[1423753200000.000,14.833],[1423756800000.000,14.611],[1423760400000.000,14.333],[1423764000000.000,14.333],[1423767600000.000,15.000],[1423771200000.000,15.500],[1423774800000.000,16.222],[1423778400000.000,15.833],[1423782000000.000,15.333] ],
+    // MAX
+    [ [1423699200000.000,17.222],[1423702800000.000,17.222],[1423706400000.000,16.611],[1423710000000.000,16.000],[1423713600000.000,15.611],[1423717200000.000,15.333],[1423720800000.000,15.111],[1423724400000.000,15.000],[1423728000000.000,16.722],[1423731600000.000,16.611],[1423735200000.000,16.611],[1423738800000.000,16.500],[1423742400000.000,16.833],[1423746000000.000,16.722],[1423749600000.000,17.222],[1423753200000.000,17.111],[1423756800000.000,16.611],[1423760400000.000,16.833],[1423764000000.000,17.333],[1423767600000.000,18.111],[1423771200000.000,18.111],[1423774800000.000,17.611],[1423778400000.000,17.500],[1423782000000.000,17.111] ],
+    // AVG
+    [ [1423699200000.000,17.148],[1423702800000.000,16.769],[1423706400000.000,15.968],[1423710000000.000,15.579],[1423713600000.000,15.278],[1423717200000.000,15.056],[1423720800000.000,14.810],[1423724400000.000,14.578],[1423728000000.000,15.302],[1423731600000.000,15.361],[1423735200000.000,15.593],[1423738800000.000,15.367],[1423742400000.000,15.817],[1423746000000.000,15.898],[1423749600000.000,16.542],[1423753200000.000,15.903],[1423756800000.000,15.706],[1423760400000.000,15.800],[1423764000000.000,15.889],[1423767600000.000,16.509],[1423771200000.000,16.935],[1423774800000.000,17.167],[1423778400000.000,16.762],[1423782000000.000,16.322] ],
+    // TODAY AVG
+    [ [1423699200000.000,17.111],[1423702800000.000,16.750],[1423706400000.000,16.537],[1423710000000.000,16.333],[1423713600000.000,16.222],[1423717200000.000,16.083],[1423720800000.000,15.944],[1423724400000.000,15.833],[1423728000000.000,15.722],[1423731600000.000,15.611],[1423735200000.000,15.486],[1423738800000.000,15.333],[1423742400000.000,15.333],[1423746000000.000,15.426],[1423749600000.000,16.444],[1423753200000.000,0.000],[1423756800000.000,0.000],[1423760400000.000,0.000],[1423764000000.000,0.000],[1423767600000.000,0.000],[1423771200000.000,0.000],[1423774800000.000,0.000],[1423778400000.000,0.000],[1423782000000.000,0.000] ],
+    // TODAY DETAIL
+    [ [1423699345777.330,17.222],[1423700245777.540,17.000],[1423702945837.450,16.833],[1423703845853.990,16.833],[1423705045778.530,16.722],[1423706245778.750,16.611],[1423707445778.970,16.611],[1423708345779.080,16.500],[1423709545779.320,16.500],[1423710745779.570,16.333],[1423711645779.730,16.333],[1423712845779.990,16.333],[1423714045780.250,16.222],[1423714945780.400,16.222],[1423716145780.670,16.222],[1423717345780.890,16.111],[1423718246235.220,16.111],[1423719445781.370,16.111],[1423720646104.760,16.000],[1423721845965.340,16.000],[1423722745781.830,16.000],[1423723945782.090,15.833],[1423725145782.330,15.833],[1423726045782.520,15.833],[1423727245782.860,15.833],[1423728445783.110,15.722],[1423729645783.360,15.722],[1423730845783.630,15.722],[1423732045783.970,15.611],[1423733245784.160,15.611],[1423734445784.380,15.611],[1423735345784.480,15.611],[1423736545784.740,15.500],[1423737745784.930,15.500],[1423738645785.100,15.333],[1423739845785.350,15.333],[1423741945785.780,15.333],[1423743145786.000,15.333],[1423744345786.210,15.333],[1423746445786.570,15.333],[1423747646144.460,15.333],[1423748846095.080,15.611],[1423749745787.280,16.000],[1423750945787.530,16.500],[1423752145787.880,16.833] ]
+]</code></pre>
+                        </div>
+                    </section>
+                                        
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="core_api_logging.html" title="Go to Logging module API" class="btn btn-default">&larr; <strong>Logging</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_interfaces.html" title="Go to MIG API" class="btn btn-default"><strong>MIG API</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                                         
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

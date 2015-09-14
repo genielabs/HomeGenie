@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">MIG API</h1>
+                    <h2><strong>Media.CameraInput</strong> <small>Domain</small></h2>
+                    <h3><strong></strong> <small></small></h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_zwave.html" title="Go to HomeAutomation.ZWave API" class="btn btn-default">&larr; <strong>HomeAutomation.ZWave</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_upnp.html" title="Go to Protocols.UPnP API" class="btn btn-default"><strong>Protocols.UPnP</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                    <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>Media.CameraInput</h4>
+                        <p>
+                            Camera interface for any Video4Linux compatible device. 
+                        </p>
+                    </div>  
+                                                                             
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">Camera.GetPicture</h4>
+	                    <p>
+	                    	Get a JPEG frame from the camera device.<br />
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/Media.CameraInput/1/<strong>Camera.GetPicture</strong></code></pre>
+						<div class="bs-example">
+							<code class="marginbottom"><strong>GET</strong> /api/Media.CameraInput/1/<strong>Camera.GetPicture</strong></code>
+						</div>
+						<div class="highlight">
+							<p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+							<p>The current frame encoded as JPEG image.</p>
+					  	</div>
+				  	</section>
+
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">Camera.SetDevice</h4>
+                        <p>
+                            Set device, video resolution and fps of the camera input.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Media.CameraInput/1/<strong>Camera.SetDevice</strong>/&lt;device_path&gt;/&lt;width&gt;/&lt;height&gt;/&lt;fps&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Media.CameraInput/1/<strong>Camera.SetDevice</strong>/%252Fdev%252Fvideo0/640x480/5</code>
+                        </div>
+                    </section>
+                         
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_zwave.html" title="Go to HomeAutomation.ZWave API" class="btn btn-default">&larr; <strong>HomeAutomation.ZWave</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_upnp.html" title="Go to Protocols.UPnP API" class="btn btn-default"><strong>Protocols.UPnP</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">MIG API</h1>
+                    <h2><strong>Protocols.UPnP</strong> <small>Domain</small></h2>
+                    <h3><strong></strong> <small></small></h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_camerainput.html" title="Go to Media.CameraInput API" class="btn btn-default">&larr; <strong>Media.CameraInput</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="app_api_introduction.html" title="Go to Custom APP API" class="btn btn-default"><strong>Custom APP API</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                    <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>Protocols.UPnP</h4>
+                        <p>
+                            Controller interface for any UPnP/DLNA enabled device. 
+                        </p>
+                    </div>  
+
+                    <section id="1">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Browse</h4>
+                        <p>
+                            Get the list of files contained in the folder specified by <mark>&lt;item_id&gt;</mark> from the UPnP media server with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p>
+                            To get the list of files in the root folder, set <mark>&lt;item_id&gt;</mark> to <mark>0</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Browse</strong>/&lt;item_id&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Browse</strong>/15</code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[
+    { "Id" : "12", "Title" : "Downloads", "Class" : "object.container" },
+    { "Id" : "16", "Title" : "Va Bene, Va Bene Così.mp4", "Class" : "object.item.videoItem" },
+    { "Id" : "22", "Title" : "Sade - King Of Sorrow.mp4", "Class" : "object.item.videoItem" },
+    { "Id" : "25", "Title" : "Sade - Soldier of Love.mp4", "Class" : "object.item.videoItem" }
+]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetUri</h4>
+                        <p>
+                            Get the URI path of the file specified by <mark>&lt;item_id&gt;</mark> from the UPnP media server with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetUri</strong>/&lt;item_id&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.GetUri</strong>/25</code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>http://10.12.2.73:49152/content/media/object_id/25/res_id/0/ext/file.mp4</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="3">
+                        <h4 class="sub-header text-primary margintop">AvMedia.SetUri</h4>
+                        <p>
+                            Set to <mark>&lt;uri&gt;</mark> the URI path of the file to play on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.SetUri</strong>/&lt;uri&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a41b404-4c4a-715f-b7b2-49fa112ea8ba/<strong>AvMedia.SetUri</strong>/http%3A%2F%2F10....</code>
+                        </div>
+                    </section>
+                    
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetTransportInfo</h4>
+                        <p>
+                            Get transport status of the currently playing file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetTransportInfo</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a41b404-4c4a-715f-b7b2-49fa112ea8ba/<strong>AvMedia.GetTransportInfo</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{
+    "CurrentTransportState" : "PLAYING",
+    "CurrentTransportStatus" : "OK", 
+    "CurrentSpeed" : "1" 
+}]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetMediaInfo</h4>
+                        <p>
+                            Get media information of the currently playing file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetMediaInfo</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a41b404-4c4a-715f-b7b2-49fa112ea8ba/<strong>AvMedia.GetMediaInfo</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{
+    "NrTracks" : "1",
+    "MediaDuration" : "0:04:40",
+    "CurrentURI" : "http://10.12.2.73:49152/content/media/object_id/21/res_id/0/ext/file.mp4",
+    "CurrentURIMetaData" : "&lt;DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"&gt;
+            &lt;item&gt;
+                &lt;dc:title&gt;video - file.mp4&lt;/dc:title&gt;
+                &lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;
+                &lt;res protocolInfo=\"http-get:*:video/mp4:\" size=\"18728966\"&gt;http://10.12.2.73:49152/content/media/object_id/21/res_id/0/ext/file.mp4&lt;/res&gt;
+                &lt;/item&gt;
+        &lt;/DIDL-Lite&gt;",
+    "NextURI" : "",
+    "NextURIMetaData" : "",
+    "PlayMedium" : "NETWORK,NONE",
+    "RecordMedium" : "NOT_IMPLEMENTED",
+    "WriteStatus" : "NOT_IMPLEMENTED" 
+}]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="6">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetPositionInfo</h4>
+                        <p>
+                            Get position information of the currently playing file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetPositionInfo</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a41b404-4c4a-715f-b7b2-49fa112ea8ba/<strong>AvMedia.GetPositionInfo</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{
+    "Track" : "1",
+    "TrackDuration" : "0:04:40",
+    "TrackMetaData" : "&lt;DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\"&gt;
+            &lt;item&gt;
+                &lt;dc:title&gt;video - file.mp4&lt;/dc:title&gt;
+                &lt;upnp:class&gt;object.item.videoItem&lt;/upnp:class&gt;
+                &lt;res protocolInfo=\"http-get:*:video/mp4:\" size=\"18728966\"&gt;http://10.12.2.73:49152/content/media/object_id/21/res_id/0/ext/file.mp4&lt;/res&gt;
+                &lt;/item&gt;
+        &lt;/DIDL-Lite&gt;",
+    "TrackURI" : "http://10.12.2.73:49152/content/media/object_id/21/res_id/0/ext/file.mp4",
+    "RelTime" : "0:00:39",
+    "AbsTime" : "0:00:39",
+    "RelCount" : "299113793",
+    "AbsCount" : "299113793" 
+}]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="7">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Play</h4>
+                        <p>
+                            Play the current file (previously set with <em>AvMedia.SetUri</em>) on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Play</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Play</strong></code>
+                        </div>
+                    </section>
+                    
+                    <section id="8">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Pause</h4>
+                        <p>
+                            Pause the currently playing file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Pause</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Pause</strong></code>
+                        </div>
+                    </section>
+                    
+                    <section id="9">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Stop</h4>
+                        <p>
+                            Stop the currently playing file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Stop</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Stop</strong></code>
+                        </div>
+                    </section>                   
+                    
+                    <section id="10">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Previous</h4>
+                        <p>
+                            Go to previous track/file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Previous</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Previous</strong></code>
+                        </div>
+                    </section>                   
+                    
+                    <section id="11">
+                        <h4 class="sub-header text-primary margintop">AvMedia.Next</h4>
+                        <p>
+                            Go to next track/file on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.Next</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.Next</strong></code>
+                        </div>
+                    </section>                   
+                    
+                    <section id="13">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetMute</h4>
+                        <p>
+                            Get volume mute status on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetMute</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.GetMute</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>False</code></pre>
+                        </div>
+                    </section>                   
+                    
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">AvMedia.SetMute</h4>
+                        <p>
+                            Set volume mute status to <mark>&lt;mute&gt;</mark> (0 or 1) on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.SetMute</strong>/&lt;mute&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.SetMute</strong>/1</code>
+                        </div>
+                    </section>                   
+                    
+                    <section id="15">
+                        <h4 class="sub-header text-primary margintop">AvMedia.GetVolume</h4>
+                        <p>
+                            Get volume level on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.GetVolume</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.GetVolume</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>8</code></pre>
+                        </div>
+                    </section>                   
+                    
+                    <section id="16">
+                        <h4 class="sub-header text-primary margintop">AvMedia.SetVolume</h4>
+                        <p>
+                            Set volume level to <mark>&lt;level&gt;</mark> on the UPnP media player with GUID <mark>&lt;module_address&gt;</mark>.                            
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>AvMedia.SetVolume</strong>/&lt;level&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>AvMedia.SetVolume</strong>/12</code>
+                        </div>
+                    </section>                   
+                                                     
+                    <section id="17">
+                        <h4 class="sub-header text-primary margintop">Control.On</h4>
+                        <p>
+                            Turn on the UPnP light/switch with GUID <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>Control.On</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>Control.On</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="18">
+                        <h4 class="sub-header text-primary margintop">Control.Off</h4>
+                        <p>
+                            Turn off the UPnP light/switch with GUID <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>Control.Off</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>Control.Off</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="19">
+                        <h4 class="sub-header text-primary margintop">Control.Level</h4>
+                        <p>
+                            Set the level of the UPnP dimmer light with GUID <mark>&lt;module_address&gt;</mark> to <mark>&lt;level&gt;</mark>% (0-100).<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/Protocols.UPnP/&lt;module_address&gt;/<strong>Control.Level</strong>/&lt;level&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/Protocols.UPnP/7a93b404-4c4a-495f-b7b2-93fa382e68ba/<strong>Control.Level</strong>/65</code>
+                        </div>
+                    </section>
+
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_camerainput.html" title="Go to Media.CameraInput API" class="btn btn-default">&larr; <strong>Media.CameraInput</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="app_api_introduction.html" title="Go to Custom APP API" class="btn btn-default"><strong>Custom APP API</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

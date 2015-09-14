@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div id="include_header"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">Core API</h1>
+                    <h2><strong>HomeAutomation.HomeGenie</strong> <small>Domain</small></h2>
+                    <h3><strong>Automation</strong> <small>Module</small>  </h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="overview.html" title="Go to API overview" class="btn btn-default">&larr; <strong>Overview</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="core_api_config.html" title="Go to Config module API" class="btn btn-default"><strong>Config</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                     <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>HomeAutomation.HomeGenie/Automation</h4>
+                        <p>
+                            This module implements <em>Automation Program Plugins</em> related commands. 
+                        </p>
+                    </div>  
+                    
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">Macro.Record</h4>
+	                    <p>
+	                    	Start capturing all commands received by HomeGenie into a new <mark>Wizard Script</mark> program that can be then saved and played back. <br />
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Record</strong></code></pre>
+						<div class="bs-example">
+							<code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Record</strong></code>
+						</div>
+				  	</section>
+					                                           
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">Macro.GetDelay</h4>
+                        <p>
+                            Get current recording delay settings. Returned delay type can be either <mark>None</mark>, <mark>Mimic</mark> or <mark>Fixed</mark>.
+                            See <a href="#3">Macro.SetDelay</a> for an explanation of these value types.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Macro.GetDelay</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Macro.GetDelay</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{ 
+    DelayType : 'Fixed', 
+    DelayOptions : '1' 
+}]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section id="3">                      
+                        <h4 class="sub-header text-primary margintop">Macro.SetDelay</h4>
+                        <p>
+                            Change current recording delay settings. This will affect the pause that HomeGenie will put between each captured command in the recorded program.
+                            <br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Macro.SetDelay</strong>/&lt;delay_type&gt;[/&lt;delay_seconds&gt;]</code></pre>
+                        <p>
+                            The <mark>&lt;delay_type&gt;</mark> can be one of the following:
+                            <dl>
+                                <dt>None</dt>
+                                <dd>No delay between commands</dd>
+                                <dt>Mimic</dt>
+                                <dd>Same delay as the live recording.</dd>
+                                <dt>Fixed</dt>
+                                <dd>Use a fixed delay, specified as seconds</dd>
+                            </dl>
+                            The parameter <mark>&lt;delay_seconds&gt;</mark> is only used for <mark>Fixed</mark> delay type.
+                        </p>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Macro.SetDelay</strong>/Fixed/1.25</code>
+                        </div>
+                    </section>
+                    
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">Macro.Save</h4>
+                        <p>
+                            Stop capturing commands and save the new <mark>Wizard Script</mark> program with the specified <mark>&lt;program_name&gt;</mark> name.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Save</strong>/&lt;program_name&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Save</strong>/Garage+Door+Open+Scenario</code>
+                        </div>
+                    </section>
+                    
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Macro.Discard</h4>
+                        <p>
+                            Stop capturing commands and discard the recording session.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Discard</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Macro.Discard</strong></code>
+                        </div>
+                    </section>
+                    
+                    <section id="6">
+                        <h4 class="sub-header text-primary margintop">Programs.Run</h4>
+                        <p>
+                            Run the program with the specified <mark>&lt;program_address&gt;</mark> address.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Run</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Run</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="7">
+                        <h4 class="sub-header text-primary margintop">Programs.Break</h4>
+                        <p>
+                            Stop the program with the specified <mark>&lt;program_address&gt;</mark> address.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Break</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Break</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="8">
+                        <h4 class="sub-header text-primary margintop">Programs.Toggle</h4>
+                        <p>
+                            Run the program with the specified <mark>&lt;program_address&gt;</mark> address if it is currently stopped, or stop it if it's running.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Toggle</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Toggle</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="9">
+                        <h4 class="sub-header text-primary margintop">Programs.Restart</h4>
+                        <p>
+                            Stop and then restart the program with the specified <mark>&lt;program_address&gt;</mark> address.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Restart</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Restart</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="10">
+                        <h4 class="sub-header text-primary margintop">Programs.Enable</h4>
+                        <p>
+                            Enable then program with the specified <mark>&lt;program_address&gt;</mark> address.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Enable</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Enable</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="11">
+                        <h4 class="sub-header text-primary margintop">Programs.Disable</h4>
+                        <p>
+                            Disable then program with the specified <mark>&lt;program_address&gt;</mark> address.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Disable</strong>/&lt;program_address&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.Disable</strong>/1000</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Program.Status</span></p>
+                    </section>
+                    
+                    <section id="12">
+                        <h4 class="sub-header text-primary margintop">Programs.List</h4>
+                        <p>
+                            Get the list of all automation programs along with properties and source code.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Automation/<strong>Programs.List</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Automation/<strong>Programs.List</strong></code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[{ 
+    ... 
+},{
+    "ConditionType":1,
+    "Conditions":[{
+        "Domain":"HomeAutomation.PhilipsHue",
+        "Target":"2",
+        "Property":"Status.Level",
+        "ComparisonOperator":1,"ComparisonValue":"0"
+    }],
+    "Commands":[{
+            "Domain":"HomeAutomation.PhilipsHue",
+            "Target":"1",
+            "CommandString":"Control.Toggle",
+            "CommandArguments":""
+        },{
+            "Domain":"HomeAutomation.HomeGenie",
+            "Target":"Automation",
+            "CommandString":"Program.Pause",
+            "CommandArguments":"0.5"
+        },{
+            "Domain":"HomeAutomation.HomeGenie",
+            "Target":"Automation",
+            "CommandString":"Program.Repeat",
+            "CommandArguments":"100"
+        }],
+    "ScriptCondition":" // trigger code for C#, Javascript, Python, Ruby program types",
+    "ScriptSource":" // program code for C#, Javascript, Python, Ruby program types",
+    "ScriptErrors":"",
+    "IsRunning":false,
+    "Features":[], // implemented program feature list
+    "Domain":"HomeAutomation.HomeGenie.Automation",
+    "Address":1000,
+    "Name":"Light 1 blink",
+    "Description":"Make Light 1 blink when Light 2 is turned on.",
+    "Group":"Lights",
+    "ActivationTime":"2014-04-11T18:48:56.637857Z", // UTC Timestamp
+    "TriggerTime":"2014-04-11T18:48:56.641858Z", // UTC Timestamp
+    "Type":"Wizard",
+    "IsEnabled":true
+},{ 
+    ... 
+}]</code></pre>
+                        </div>
+                    </section>
+                    
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="overview.html" title="Go to API overview" class="btn btn-default">&larr; <strong>Overview</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="core_api_config.html" title="Go to Config module API" class="btn btn-default"><strong>Config</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                                                      
+                    <div id="filler">&nbsp;</div>
+
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

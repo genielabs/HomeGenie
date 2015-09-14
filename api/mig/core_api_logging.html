@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">Core API</h1>
+                    <h2><strong>HomeAutomation.HomeGenie</strong> <small>Domain</small></h2>
+                    <h3><strong>Logging</strong> <small>Module</small>  </h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="core_api_config.html" title="Go to Config module API" class="btn btn-default">&larr; <strong>Config</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="core_api_statistics.html" title="Go to Statistics module API" class="btn btn-default"><strong>Statistics</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                     <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>HomeAutomation.HomeGenie/Logging</h4>
+                        <p>
+                            This module implements commands related to events occurring in HomeGenie. 
+                        </p>
+                    </div>  
+
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">RealTime.EventStream</h4>
+	                    <p>
+	                    	Receives the real time event stream from HomeGenie. See <mark>W3C <a href="http://dev.w3.org/html5/eventsource/" target="_blank">Server-Sent Events</a></mark> for furter informations.<br />
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Logging/<strong>RealTime.EventStream</strong>?lastEventId=&lt;event_id&gt;</code></pre>
+						<div class="bs-example">
+							<code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Logging/<strong>RealTime.EventStream</strong></code>
+						</div>
+						<div class="highlight">
+							<p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+							<pre><code>id: 1423676637695.2151
+data:&nbsp;{"Timestamp":"2015-02-11T17:43:57.695215Z","Domain":"HomeAutomation.PhilipsHue","Source":"1","Description":"Virtual&nbsp;Module","Property":"Status.Level","Value":"1","UnixTimestamp":1423676637695.2151}
+
+id: 1423676638583.4839
+data:&nbsp;{"Timestamp":"2015-02-11T17:43:58.583484Z","Domain":"HomeAutomation.ZWave","Source":"48","Description":"ZWave Node","Property":"Meter.Watts","Value":"55.351","UnixTimestamp":1423676638583.4839}
+
+id: 1423676639109.613
+data:&nbsp;{"Timestamp":"2015-02-11T17:43:59.109613Z","Domain":"HomeAutomation.PhilipsHue","Source":"2","Description":"Virtual&nbsp;Module","Property":"Status.Level","Value":"1","UnixTimestamp":1423676639109.613}
+
+id: 1423676641028.0979
+data:&nbsp;{"Timestamp":"2015-02-11T17:44:01.028098Z","Domain":"HomeAutomation.ZWave","Source":"44","Description":"ZWave Node","Property":"Meter.Watts","Value":"0.905","UnixTimestamp":1423676641028.0979}
+
+id: 1423676641610.3191
+data:&nbsp;{"Timestamp":"2015-02-11T17:44:01.610319Z","Domain":"HomeAutomation.PhilipsHue","Source":"2","Description":"Virtual&nbsp;Module","Property":"Status.Level","Value":"0.553571428571429","UnixTimestamp":1423676641610.3191}
+
+id: 1423676641614.81
+data:&nbsp;{"Timestamp":"2015-02-11T17:44:01.61481Z","Domain":"HomeAutomation.PhilipsHue","Source":"2","Description":"Virtual&nbsp;Module","Property":"Status.ColorHsb","Value":"0.9915032679738545,0.8751902587519025,0.5535714285714286","UnixTimestamp":1423676641614.81}</code></pre>
+					  	</div>
+				  	</section>
+				  	         
+                    <section id="2">
+                        
+                        <h4 class="sub-header text-primary margintop">Recent.From</h4>
+                        <p>
+                            Receive last events log starting from the specified <mark>&lt;unix_timestamp&gt;</mark> timestamp.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Logging/<strong>Recent.From</strong>/&lt;unix_timestamp&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Logging/<strong>Recent.From</strong>/1423677298564.359</code>
+                        </div>
+                        <div class="highlight">
+                            <p class="text-uppercase text-muted"><small><strong>Response</strong></small></p>
+                            <pre><code>[
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:02.777408Z","Domain":"HomeAutomation.ZWave","Source":"23","Description":"ZWave&nbsp;Node","Property":"Meter.Watts","Value":"28.482","UnixTimestamp":1423677302777.408},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:03.242287Z","Domain":"HomeAutomation.ZWave","Source":"42","Description":"ZWave&nbsp;Node","Property":"Meter.Watts","Value":"0","UnixTimestamp":1423677303242.2871},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:13.901089Z","Domain":"HomeAutomation.EnergyMonitor","Source":"1","Description":"Virtual&nbsp;Module","Property":"EnergyMonitor.KwLoad","Value":"0.197","UnixTimestamp":1423677313901.0891},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:13.906452Z","Domain":"HomeAutomation.EnergyMonitor","Source":"1","Description":"Virtual&nbsp;Module","Property":"EnergyMonitor.WattLoad","Value":"196.579","UnixTimestamp":1423677313906.4519},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:13.907439Z","Domain":"HomeAutomation.EnergyMonitor","Source":"1","Description":"Virtual&nbsp;Module","Property":"EnergyMonitor.OperatingDevices","Value":"6","UnixTimestamp":1423677313907.439},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:13.908288Z","Domain":"HomeAutomation.EnergyMonitor","Source":"1","Description":"Virtual&nbsp;Module","Property":"EnergyMonitor.OperatingLights","Value":"3","UnixTimestamp":1423677313908.2881},
+&nbsp;&nbsp;&nbsp;&nbsp;{"Timestamp":"2015-02-11T17:55:13.909187Z","Domain":"HomeAutomation.EnergyMonitor","Source":"1","Description":"Virtual&nbsp;Module","Property":"EnergyMonitor.OperatingSwitches","Value":"3","UnixTimestamp":1423677313909.187}
+]</code></pre>
+                        </div>
+                    </section>
+                             
+                    <section id="3">
+                        
+                        <h4 class="sub-header text-primary margintop">Recent.Last</h4>
+                        <p>
+                            Receive last events log occurred during the last <mark>&lt;mseconds&gt;</mark> milliseconds.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.HomeGenie/Logging/<strong>Recent.Last</strong>/&lt;mseconds&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.HomeGenie/Logging/<strong>Recent.From</strong>/10000</code>
+                        </div>
+                        <div class="highlight">
+                            <p>The response is a JSON array of events, like the one shown in the <a href="#2">Recent.From</a> example.</p>
+                        </div>
+                    </section>
+				  	         
+                    
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="core_api_config.html" title="Go to Config module API" class="btn btn-default">&larr; <strong>Config</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="core_api_statistics.html" title="Go to Statistics module API" class="btn btn-default"><strong>Statistics</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                     
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div id="include_header"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">Web API - Overview</h1>
+                    <p>
+                    	HomeGenie <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">RESTful</a> web services are based on a dual model. One is the commonly used synchronous request/response model, where the client calls a web service command and get a response
+                    	from the server right after. The other one is an <strong>asynchronous model</strong> where the client calls a web service command that will cause an event to be fired and that will be observable
+                    	through the real-time <a href="core_api_logging.html#1">HomeGenie Event Stream</a>.
+                    	So the client in order to acknowledge that the issued command led to the expected action, it has to listen to the event stream.
+                    </p>
+                    
+                     <div class="bs-callout bs-callout-info">
+                        <h4>HomeGenie Web UI</h4>
+                        <p>
+                            A good client example using the asynchronous model is the HomeGenie web UI itself, where most UI components (as widgets) use the <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC</a> approach
+                            implemented through the event stream.
+                        </p>
+                    </div>  
+                    
+                    <h2 class="sub-header">Common API syntax</h2>
+                    <p>
+                        The following is the commonly used syntax in an HomeGenie web service call:
+                    </p>
+                    <pre class="bg-info"><code>/api/<strong>&lt;webservice_domain&gt;</strong>/<strong>&lt;module_address&gt;</strong>[/&lt;module_section&gt;]/<strong>&lt;command&gt;</strong>[/&lt;option_1&gt;/.../&lt;option_n&gt;]</code></pre>
+                    <p></p>
+                    <p>
+                        Where <strong>&lt;webservice_domain&gt;</strong> is used to address a specific api domain, <strong>&lt;module_address&gt;</strong> the target module of the API <strong>&lt;command&gt;</strong> 
+                        and <strong>&lt;option_1&gt;...&lt;option_n&gt;</strong> are optional parameters that the <strong>&lt;command&gt;</strong> may require.
+                    </p>
+					<div class="bs-example">
+						<p>To get the list of interfaces enabled in HomeGenie, we will invoke the <mark>Interfaces.List</mark> command of the 
+							<mark>Config</mark> module in <a>HomeGenie Core API</a> which domain is <mark>HomeAutomation.HomeGenie</mark>.</p>
+				  	</div>                    
+					<div class="highlight">
+						<pre><code>/api/<strong>HomeAutomation.HomeGenie</strong>/<strong>Config</strong>/<strong>Interfaces.List</strong></code></pre>
+					</div>
+
+                    <p>
+                        In the above example we also see that a <em>&lt;command&gt;</em> is commonly formed by two words separted by a dot. The first word <em>"Interfaces"</em> is the 
+                        command <strong>domain</strong> and the second word <em>"List"</em> is the <strong>command</strong> itself. 
+                    </p>
+										
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="core_api_automation.html" title="Go to Core API" class="btn btn-default"><strong>Core API</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <div id="filler">&nbsp;</div>
+  					  
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                                   
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

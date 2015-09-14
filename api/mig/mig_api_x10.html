@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">MIG API</h1>
+                    <h2><strong>HomeAutomation.X10</strong> <small>Domain</small></h2>
+                    <h3><strong></strong> <small></small></h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_w800rf.html" title="Go to HomeAutomation.W800RF API" class="btn btn-default">&larr; <strong>HomeAutomation.W800RF</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_zwave.html" title="Go to HomeAutomation.ZWave API" class="btn btn-default"><strong>HomeAutomation.ZWave</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                    <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>HomeAutomation.X10</h4>
+                        <p>
+                            CM15 / CM11 interface for X10 home automation. 
+                        </p>
+                    </div>  
+                                                                           
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">Control.On</h4>
+	                    <p>
+	                    	Turn on the module with address <mark>&lt;module_address&gt;</mark>.<br />
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.On</strong></code></pre>
+						<div class="bs-example">
+							<code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A8/<strong>Control.On</strong></code>
+						</div>
+				  	</section>
+                                                     
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">Control.Off</h4>
+                        <p>
+                            Turn off the module with address <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.Off</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A6/<strong>Control.Off</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="3">
+                        <h4 class="sub-header text-primary margintop">Control.Bright</h4>
+                        <p>
+                            Bright one step the module with address <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.Bright</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A6/<strong>Control.Bright</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">Control.Dim</h4>
+                        <p>
+                            Dim one step the module with address <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.Dim</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A8/<strong>Control.Dim</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Control.Level</h4>
+                        <p>
+                            Set the level of the module with address <mark>&lt;module_address&gt;</mark> to <mark>&lt;level&gt;</mark>% (0-100).<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.Level</strong>/&lt;level&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A4/<strong>Control.Level/35</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="6">
+                        <h4 class="sub-header text-primary margintop">Control.Toggle</h4>
+                        <p>
+                            Toggle on/off the module with address <mark>&lt;module_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;module_address&gt;/<strong>Control.Toggle</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/A4/<strong>Control.Toggle</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="7">
+                        <h4 class="sub-header text-primary margintop">Control.AllLightsOn</h4>
+                        <p>
+                            Turn on all lights with the house code <mark>&lt;house_code&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;house_code&gt;/<strong>Control.AllLightsOn</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/B/<strong>Control.AllLightsOn</strong></code>
+                        </div>
+                    </section>
+                                                     
+                    <section id="8">
+                        <h4 class="sub-header text-primary margintop">Control.AllLightsOff</h4>
+                        <p>
+                            Turn off all lights with the house code <mark>&lt;house_code&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.X10/&lt;house_code&gt;/<strong>Control.AllLightsOff</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.X10/B/<strong>Control.AllLightsOff</strong></code>
+                        </div>
+                    </section>
+                         
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_w800rf.html" title="Go to HomeAutomation.W800RF API" class="btn btn-default">&larr; <strong>HomeAutomation.W800RF</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_zwave.html" title="Go to HomeAutomation.ZWave API" class="btn btn-default"><strong>HomeAutomation.ZWave</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>

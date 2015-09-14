@@ -1,0 +1,9 @@
+name: HomeGenie
+baseurl: '/'
+markdown: redcarpet
+markdown_ext:  markdown,mkdown,mkdn,mkd,md,html
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+collections:
+  docs:
+    output: true

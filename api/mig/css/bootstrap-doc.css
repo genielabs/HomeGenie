@@ -1,0 +1,274 @@
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 800;
+    src: local("Open Sans Extrabold"), local("OpenSans-Extrabold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/EInbV5DfGHOiMmvb1Xr-hp1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans"), local("OpenSans"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/K88pR3goAWT7BTt32Z01mz8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+
+body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    background: #F9F9F9;
+    font-family: 'Open Sans', 'Lucida Grande' , Verdana, Arial, Helvetica, sans-serif;
+}
+
+blockquote{
+    border-color: #3a87ad;
+}
+blockquote p{
+    font-size: 16px;
+}
+.doc-content-box{
+    position:relative;
+    min-height: 130px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #F9F9F9;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+}
+.doc-content-box > ul > li{
+    list-style-type: none;
+}
+.doc-index{
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+.doc-index .label{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.doc-index-block{
+    padding: 10px 5px;
+}
+.doc-index-block:after{
+    content: '';
+    height: 0;
+    display: block;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #ffffff;
+}
+.index-item{
+    margin-bottom: 20px;
+}
+.index-header,
+.index-header > a,
+.class-name{
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace !important;
+}
+.index-desc,
+.class-desc{
+    margin-left: 20px;
+    font-size: 13px;
+}
+.class-scope{
+    margin: auto 10px;
+    font-size: 13px;
+}
+h1.heading{
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    background: transparent url(../img/shadow.png) no-repeat;
+    background-position: bottom;
+    padding-bottom: 20px;
+    background-size:100%;
+}
+.detail-box{
+    background: transparent url(../img/shadow.png) no-repeat;
+    background-position: bottom;
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-size:100%;
+}
+.shadow-right{
+    position: absolute;
+    content: "";
+    right: 0; 
+    bottom:0;
+    width:150px; 
+    height: 100px;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 20px 30px 25px rgba(0, 0, 0, 0.50);
+    -webkit-box-shadow: 20px 30px 25px rgba(0, 0, 0, 0.50);
+    box-shadow: 20px 30px 25px rgba(0, 0, 0, 0.50);
+    -moz-transform:skew(10deg,10deg) translate(-45px,-15px);
+    -webkit-transform:skew(10deg,10deg) translate(-45px,-15px);
+    transform:skew(10deg,10deg) translate(-45px,-15px);
+}
+
+
+.tree-header{
+    padding: 4px;
+    font-weight: normal;
+}
+.tree-header:after{
+    content: '';
+    height: 0;
+    display: block;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #ffffff;
+}
+
+.tree-box{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.tree ul {
+    padding-top: 20px; position: relative;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+.tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+.tree li::before, .tree li::after{
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 1px solid #ccc;
+    width: 50%; height: 20px;
+}
+.tree li::after{
+    right: auto; left: 50%;
+    border-left: 1px solid #ccc;
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+    display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+    border: 0 none;
+}
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+    border-right: 1px solid #ccc;
+    border-radius: 0 5px 0 0;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+    border-radius: 5px 0 0 0;
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 1px solid #ccc;
+    width: 0; height: 20px;
+}
+.tree li a{
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #666;
+    font-family: arial, verdana, tahoma;
+    font-size: 11px;
+    display: inline-block;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+    background: #42A7C5; color: #FFFFFF; border: 1px solid #94a0b4;
+}
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+    border-color:  #94a0b4;
+}
+
+
+.footer{
+    margin: 20px 10px;
+    padding: 10px 10px 0;
+}
+.footer:before{
+    content: '';
+    height: 0;
+    display: block;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #ffffff;
+    margin-bottom: 10px;
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    body{
+        padding-top: 0;
+    }
+    div.tree{
+        zoom: 80%;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    body{
+        padding-top: 0;
+    }
+    div.tree{
+        zoom: 65%;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    div.tree{
+        zoom: 30%;
+    }
+}
+
+dt { margin-top: 30px; }

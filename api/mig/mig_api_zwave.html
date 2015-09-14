@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>HomeGenie Documentation</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/docs.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/dashboard.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+    </head>
+    <body>
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div id="include_header"></div>
+		</div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-9" role="main">
+                    <h1 class="page-header">MIG API</h1>
+                    <h2><strong>HomeAutomation.ZWave</strong> <small>Domain</small></h2>
+                    <h3><strong></strong> <small></small></h3>
+                    
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_x10.html" title="Go to HomeAutomation.X10 API" class="btn btn-default">&larr; <strong>HomeAutomation.X10</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_camerainput.html" title="Go to Media.CameraInput API" class="btn btn-default"><strong>Media.CameraInput</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <br clear="all" />
+                    <div class="bs-callout bs-callout-info margintopextra">
+                        <h4>HomeAutomation.ZWave</h4>
+                        <p>
+                            Z-Wave USB/Serial interface for home automation. 
+                        </p>
+                    </div>  
+                                  
+                    <section id="1">
+	                    <h4 class="sub-header text-primary margintop">Controller.Discovery</h4>
+	                    <p>
+	                    	Query the node list from controller.<br />
+						</p>
+	                	<p class="text-info">Syntax</p>
+		                <pre class="bg-info"><code>/api/HomeAutomation.ZWave/1/<strong>Controller.Discovery</strong></code></pre>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Controller.Status</span></p>
+				  	</section>
+                                                     
+                    <section id="1">
+                        <h4 class="sub-header text-primary margintop">Controller.NodeAdd</h4>
+                        <p>
+                            Put the controller in node adding mode.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/1/<strong>Controller.NodeAdd</strong></code></pre>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Controller.Status</span></p>
+                    </section>
+                                                     
+                    <section id="1">
+                        <h4 class="sub-header text-primary margintop">Controller.NodeRemove</h4>
+                        <p>
+                            Put the controller in node removal mode.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/1/<strong>Controller.NodeRemove</strong></code></pre>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Controller.Status</span></p>
+                    </section>
+                                                     
+                    <section id="1">
+                        <h4 class="sub-header text-primary margintop">Controller.SoftReset</h4>
+                        <p>
+                            Soft reset the controller.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/1/<strong>Controller.SoftReset</strong></code></pre>
+                    </section>
+                    
+                    <section id="1">
+                        <h4 class="sub-header text-primary margintop">Controller.HardReset</h4>
+                        <p>
+                            Hard reset the controller removing all node associations.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/1/<strong>Controller.HardReset</strong></code></pre>
+                    </section>
+                                                                            
+                    <section id="2">
+                        <h4 class="sub-header text-primary margintop">NodeInfo.Get</h4>
+                        <p>
+                            Query the <em>Node Information Frame</em> (supported command classes) from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>NodeInfo.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/10/<strong>NodeInfo.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.NodeInfo</span></p>
+                    </section>
+                    
+                    <section id="3">
+                        <h4 class="sub-header text-primary margintop">ManufacturerSpecific.Get</h4>
+                        <p>
+                            Query the <em>Manufacturer Specific</em> from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>ManufacturerSpecific.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/12/<strong>ManufacturerSpecific.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.ManufacturerSpecific</span></p>
+                    </section>
+                                                                                                      
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">Basic.Get</h4>
+                        <p>
+                            Perform a <em>Basic Get</em> command on the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Basic.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/12/<strong>Basic.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.Basic</span>, <span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                                            
+                    <section id="4">
+                        <h4 class="sub-header text-primary margintop">Basic.Set</h4>
+                        <p>
+                            Perform a <em>Basic Set</em> command with the specified <mark>&lt;value&gt;</mark> value on the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Basic.Set</strong>/&lt;value&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/10/<strong>Basic.Set</strong>/30</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                     
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Control.On</h4>
+                        <p>
+                            Turn on the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Control.On</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/16/<strong>Control.On</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                     
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Control.Off</h4>
+                        <p>
+                            Turn off the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Control.Off</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/18/<strong>Control.Off</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                     
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Control.Level</h4>
+                        <p>
+                            Set the level of the node with address <mark>&lt;node_address&gt;</mark> to <mark>&lt;level&gt;</mark>% (0-100).<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Control.Level</strong>/&lt;level&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/14/<strong>Control.Level/35</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                     
+                    <section id="5">
+                        <h4 class="sub-header text-primary margintop">Control.Toggle</h4>
+                        <p>
+                            Toggle on/off the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Control.Toggle</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/14/<strong>Control.Toggle</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">Status.Level</span></p>
+                    </section>
+                                                     
+                    <section id="6">
+                        <h4 class="sub-header text-primary margintop">Association.Get</h4>
+                        <p>
+                            Query the associations present in the group <mark>&lt;group_id&gt;</mark> from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Association.Get</strong>/&lt;group_id&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/8/<strong>Association.Get</strong>/1</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.Associations.&lt;group_id&gt;</span></p>
+                    </section>
+                                                     
+                    <section id="6">
+                        <h4 class="sub-header text-primary margintop">Association.Set</h4>
+                        <p>
+                            Add node <mark>&lt;assoc_node&gt;</mark> to the associations present in the group <mark>&lt;group_id&gt;</mark> for the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Association.Set</strong>/&lt;group_id&gt;/&lt;assoc_node&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/8/<strong>Association.Set</strong>/1/1</code>
+                        </div>
+                    </section>
+                           
+                    <section id="7">
+                        <h4 class="sub-header text-primary margintop">Config.ParameterGet</h4>
+                        <p>
+                            Query the <em>Configuration</em> parameter with id <mark>&lt;parameter_id&gt;</mark> from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Config.ParameterGet</strong>/&lt;parameter_id&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/8/<strong>Config.ParameterGet</strong>/101</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.Variables.&lt;parameter_id&gt;</span></p>
+                    </section>
+                                                     
+                    <section id="7">
+                        <h4 class="sub-header text-primary margintop">Config.ParameterSet</h4>
+                        <p>
+                            Set to <mark>&lt;value&gt;</mark> the <em>Configuration</em> parameter with id <mark>&lt;parameter_id&gt;</mark> of the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Config.ParameterSet</strong>/&lt;parameter_id&gt;/&lt;value&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/8/<strong>Config.ParameterSet</strong>/101/1</code>
+                        </div>
+                    </section>
+
+                    <section id="8">
+                        <h4 class="sub-header text-primary margintop">Battery.Get</h4>
+                        <p>
+                            Query the <em>Battery</em> level from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Battery.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/31/<strong>Battery.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.Battery</span>, <span class="bg-success">Status.Battery</span></p>
+                    </section>
+                           
+                    <section id="9">
+                        <h4 class="sub-header text-primary margintop">WakeUp.Get</h4>
+                        <p>
+                            Query the <em>Wake Up</em> interval from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>WakeUp.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/8/<strong>WakeUp.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p><span class="bg-success">ZWaveNode.WakeUpInterval</span></p>
+                    </section>
+                                                     
+                    <section id="9">
+                        <h4 class="sub-header text-primary margintop">WakeUp.Set</h4>
+                        <p>
+                            Set to <mark>&lt;interval&gt;</mark> the <em>Wake Up</em> interval of the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>WakeUp.Set</strong>/&lt;interval&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/23/<strong>WakeUp.Set</strong>/360</code>
+                        </div>
+                    </section>
+                           
+                    <section id="10">
+                        <h4 class="sub-header text-primary margintop">MultiInstance.Get</h4>
+                        <p>
+                            Query the <em>Multi-Instance</em> parameter of type <mark>&lt;type&gt;</mark> and with id <mark>&lt;parameter_id&gt;</mark> from the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;type&gt;</mark> can be: <mark>Switch.Binary</mark>, <mark>Switch.MultiLevel</mark>, <mark>Sensor.Binary</mark>, <mark>Sensor.MultiLevel</mark>. 
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>MultiInstance.Get</strong>/&lt;type&gt;/&lt;parameter_id&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/13/<strong>MultiInstance.Get</strong>/Switch.MultiLevel/1</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">ZWaveNode.MultiInstance.SwitchBinary.&lt;parameter_id&gt;</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SwitchMultiLevel.&lt;parameter_id&gt;</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SensorBinary.&lt;parameter_id&gt;</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SensorMultiLevel.&lt;parameter_id&gt;</span>
+                        </p>
+                    </section>
+                                                     
+                    <section id="10">
+                        <h4 class="sub-header text-primary margintop">MultiInstance.Set</h4>
+                        <p>
+                            Set to <mark>&lt;value&gt;</mark> the <em>Multi-Instance</em> parameter of type <mark>&lt;type&gt;</mark> and with id <mark>&lt;parameter_id&gt;</mark> from the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;type&gt;</mark> can be: <mark>Switch.Binary</mark>, <mark>Switch.MultiLevel</mark>. 
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>MultiInstance.Set</strong>/&lt;type&gt;/&lt;parameter_id&gt;/&lt;value&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/13/<strong>MultiInstance.Set</strong>/Switch.MultiLevel/2/60</code>
+                        </div>
+                    </section>
+                    
+                    <section id="10">
+                        <h4 class="sub-header text-primary margintop">MultiInstance.GetCount</h4>
+                        <p>
+                            Query the <em>Multi-Instance</em> parameters count of type <mark>&lt;type&gt;</mark> from the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p>
+                            The option <mark>&lt;type&gt;</mark> can be: <mark>Switch.Binary</mark>, <mark>Switch.MultiLevel</mark>, <mark>Sensor.Binary</mark>, <mark>Sensor.MultiLevel</mark>. 
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>MultiInstance.GetCount</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/15/<strong>MultiInstance.GetCount</strong>/Sensor.MultiLevel</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">ZWaveNode.MultiInstance.SwitchBinary.Count</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SwitchMultiLevel.Count</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SensorBinary.Count</span>,
+                            <span class="bg-success">ZWaveNode.MultiInstance.SensorMultiLevel.Count</span>
+                        </p>
+                    </section>
+                    
+                    <section id="11">
+                        <h4 class="sub-header text-primary margintop">SensorBinary.Get</h4>
+                        <p>
+                            Perform a <em>Sensor Binary Get</em> command on the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>SensorBinary.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/11/<strong>SensorBinary.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Sensor.Generic</span>,
+                            <span class="bg-success">Sensor.Alarm</span>,
+                            <span class="bg-success">Sensor.MotionDetect</span>,
+                            <span class="bg-success">Sensor.Tamper</span>,
+                            <span class="bg-success">Sensor.DoorWindow</span>,
+                            <span class="bg-success">Sensor.CarbonMonoxide</span>,
+                            <span class="bg-success">Sensor.CarbonDioxide</span>,
+                            <span class="bg-success">Sensor.Smoke</span>,
+                            <span class="bg-success">Sensor.Heat</span>,
+                            <span class="bg-success">Sensor.Flood</span>
+                        </p>
+                    </section>
+                    
+                    <section id="12">
+                        <h4 class="sub-header text-primary margintop">SensorMultiLevel.Get</h4>
+                        <p>
+                            Perform a <em>Sensor Multilevel Get</em> command on the node with address <mark>&lt;node_address&gt;</mark>.<br />
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>SensorMultiLevel.Get</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/28/<strong>SensorMultiLevel.Get</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Sensor.Generic</span>,
+                            <span class="bg-success">Sensor.Alarm</span>,
+                            <span class="bg-success">Sensor.Temperature</span>,
+                            <span class="bg-success">Sensor.Luminance</span>,
+                            <span class="bg-success">Sensor.Humidity</span>
+                            <span class="bg-success">Sensor.Power</span>
+                        </p>
+                    </section>
+                    
+                    <section id="13">
+                        <h4 class="sub-header text-primary margintop">Meter.Get</h4>
+                        <p>
+                            Perform a <em>Meter Get</em> command of type <mark>&lt;scale_type&gt;</mark> on the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;scale_type&gt;</mark> can be: 
+                                <mark>0</mark> (kWh),
+                                <mark>1</mark> (kVAh), 
+                                <mark>2</mark> (Watt), 
+                                <mark>3</mark> (Pulses), 
+                                <mark>4</mark> (AC Volt),
+                                <mark>5</mark> (AC Current), 
+                                <mark>6</mark> (Power Factor).
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Meter.Get</strong>/&lt;scale_type&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/19/<strong>Meter.Get</strong>/2</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Meter.KilowattHour</span>,
+                            <span class="bg-success">Meter.KilovoltAmpereHour</span>,
+                            <span class="bg-success">Meter.Watts</span>,
+                            <span class="bg-success">Meter.Pulses</span>,
+                            <span class="bg-success">Meter.AcVoltage</span>
+                            <span class="bg-success">Meter.AcCurrent</span>
+                        </p>
+                    </section>
+                    
+                    <section id="13">
+                        <h4 class="sub-header text-primary margintop">Meter.Reset</h4>
+                        <p>
+                            Perform a <em>Meter Reset</em> command on the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Meter.Reset</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/19/<strong>Meter.Reset</strong></code>
+                        </div>
+                    </section>
+                    
+                    <section id="13">
+                        <h4 class="sub-header text-primary margintop">Meter.SupportedGet</h4>
+                        <p>
+                            Query supported metering scale types from the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Meter.SupportedGet</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/19/<strong>Meter.SupportedGet</strong></code>
+                        </div>
+                    </section>
+                              
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.ModeGet</h4>
+                        <p>
+                            Query the thermostat mode from the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.ModeGet</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.ModeGet</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Thermostat.Mode</span>
+                        </p>
+                    </section>
+                              
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.ModeSet</h4>
+                        <p>
+                            Change the mode to <mark>&lt;mode&gt;</mark> for the thermostat node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;mode&gt;</mark> can be: 
+                                <mark>Off</mark>,
+                                <mark>Heat</mark>, 
+                                <mark>Cool</mark>, 
+                                <mark>Auto</mark>, 
+                                <mark>AuxHeat</mark>, 
+                                <mark>Resume</mark>, 
+                                <mark>FanOnly</mark>, 
+                                <mark>Furnace</mark>, 
+                                <mark>DryAir</mark>, 
+                                <mark>MoistAir</mark>, 
+                                <mark>AutoChangeover</mark>, 
+                                <mark>HeatEconomy</mark>, 
+                                <mark>CoolEconomy</mark>, 
+                                <mark>Away</mark> 
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.ModeSet</strong>/&lt;mode&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.ModeSet</strong>/Heat</code>
+                        </div>
+                    </section>
+                              
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.SetPointGet</h4>
+                        <p>
+                            Query the thermostat set point for the <mark>&lt;mode&gt;</mark> mode from the node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;mode&gt;</mark> can be: 
+                                <mark>Heating</mark>, 
+                                <mark>Cooling</mark>, 
+                                <mark>Furnace</mark>, 
+                                <mark>DryAir</mark>, 
+                                <mark>MoistAir</mark>, 
+                                <mark>AutoChangeover</mark>, 
+                                <mark>HeatingEconomy</mark>, 
+                                <mark>CoolingEconomy</mark>, 
+                                <mark>HeatingAway</mark>
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.SetPointGet</strong>/&lt;mode&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.SetPointGet</strong>/Heating</code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Thermostat.SetPoint.&lt;mode&gt;</span>
+                        </p>
+                    </section>
+                              
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.SetPointSet</h4>
+                        <p>
+                            Change the set point of the thermostat node with address <mark>&lt;node_address&gt;</mark>, to <mark>&lt;value&gt;</mark> for the <mark>&lt;mode&gt;</mark> mode.
+                        </p>
+                        <p>
+                            The option <mark>&lt;mode&gt;</mark> can be: 
+                                <mark>Heating</mark>, 
+                                <mark>Cooling</mark>, 
+                                <mark>Furnace</mark>, 
+                                <mark>DryAir</mark>, 
+                                <mark>MoistAir</mark>, 
+                                <mark>AutoChangeover</mark>, 
+                                <mark>HeatingEconomy</mark>, 
+                                <mark>CoolingEconomy</mark>, 
+                                <mark>HeatingAway</mark>
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.SetPointSet</strong>/&lt;mode&gt;/&lt;value&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.SetPointSet</strong>/Heating/19.5</code>
+                        </div>
+                    </section>
+                                                         
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.FanModeGet</h4>
+                        <p>
+                            Query the fan mode from the thermostat node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.FanModeGet</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.FanModeGet</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Thermostat.FanMode</span>
+                        </p>
+                    </section>
+                              
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.FanModeSet</h4>
+                        <p>
+                            Set the fan mode to <mark>&lt;mode&gt;</mark> for the thermostat node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p>
+                            The option <mark>&lt;mode&gt;</mark> can be: 
+                                <mark>AutoLow</mark>,
+                                <mark>OnLow</mark>, 
+                                <mark>AutoHigh</mark>, 
+                                <mark>OnHigh</mark>, 
+                                <mark>Circulate</mark>
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.FanModeSet</strong>/&lt;mode&gt;</code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.FanModeSet</strong>/Circulate</code>
+                        </div>
+                    </section>
+                                                         
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.FanStateGet</h4>
+                        <p>
+                            Query the currently operating state of the fan from the thermostat node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.FanStateGet</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.FanModeGet</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Thermostat.FanState</span>
+                        </p>
+                    </section>
+                    
+                    <section id="14">
+                        <h4 class="sub-header text-primary margintop">Thermostat.OperatingStateGet</h4>
+                        <p>
+                            Query the current operating state from the thermostat node with address <mark>&lt;node_address&gt;</mark>.
+                        </p>
+                        <p class="text-info">Syntax</p>
+                        <pre class="bg-info"><code>/api/HomeAutomation.ZWave/&lt;node_address&gt;/<strong>Thermostat.OperatingStateGet</strong></code></pre>
+                        <div class="bs-example">
+                            <code class="marginbottom"><strong>GET</strong> /api/HomeAutomation.ZWave/26/<strong>Thermostat.OperatingStateGet</strong></code>
+                        </div>
+                        <p class="text-info">Response Events</p>
+                        <p>
+                            <span class="bg-success">Thermostat.OperatingState</span>
+                        </p>
+                    </section>
+                   
+                    <p>&nbsp;</p>
+                    <nav>
+                        <div align="right" class="col-xs-6">
+                            <a href="mig_api_x10.html" title="Go to HomeAutomation.X10 API" class="btn btn-default">&larr; <strong>HomeAutomation.X10</strong></a>
+                        </div>
+                        <div align="left" class="col-xs-6">
+                            <a href="mig_api_camerainput.html" title="Go to Media.CameraInput API" class="btn btn-default"><strong>Media.CameraInput</strong> &rarr;</a>
+                        </div>
+                    </nav>
+                    
+                    <div id="filler">&nbsp;</div>
+                    				  						
+                </div>
+                
+                <div id="sidemenu" class="col-md-3" role="complementary">
+                    <div id="include_sidemenu"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Common API Documentation includes -->
+        <script src="js/common_includes.js"></script>
+    </body>
+</html>
