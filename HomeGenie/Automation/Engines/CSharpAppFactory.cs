@@ -95,16 +95,18 @@ namespace HomeGenie.Automation.Scripting
 {statement}
 //////////////////////////////////////////////////////////////////
         }
-
+        #pragma warning disable 0162
         private bool EvaluateConditionBlock()
         {
 //////////////////////////////////////////////////////////////////
 // NOTE: user code start line is ??? *** please add new code after this method, do not alter start line! ***
 {condition}
 //////////////////////////////////////////////////////////////////
+            return false;
         }
+        #pragma warning restore 0162
 
-        public MethodRunResult Run(string PROGRAM_OPTIONS_STRING)
+        private MethodRunResult Run(string PROGRAM_OPTIONS_STRING)
         {
             Exception ex = null;
             try
@@ -118,7 +120,7 @@ namespace HomeGenie.Automation.Scripting
             return new MethodRunResult(){ Exception = ex, ReturnValue = null };
         }
 
-        public MethodRunResult EvaluateCondition()
+        private MethodRunResult EvaluateCondition()
         {
             Exception ex = null;
             bool retval = false;
@@ -133,16 +135,14 @@ namespace HomeGenie.Automation.Scripting
             return new MethodRunResult(){ Exception = ex, ReturnValue = retval };
         }
 
+        public ScriptingHost hg { get { return (ScriptingHost)this; } }
     }
 }
 ";
-            if (!conditionSource.Contains("Program.Setup"))
-            {
-                conditionSource = "Program.Setup(()=>{" + conditionSource + "}); return false;";
-            }
+            
             source = source.Replace("{statement}", scriptSource);
             source = source.Replace("{condition}", conditionSource);
-            //
+
             Dictionary<string, string> providerOptions = new Dictionary<string, string> {
                 //                    { "CompilerVersion", "v4.0" }
             };
@@ -154,8 +154,9 @@ namespace HomeGenie.Automation.Scripting
                 TreatWarningsAsErrors = false,
                 OutputAssembly = outputDllFile
             };
-            //
+
             // Mono runtime 2/3 compatibility fix 
+            // TODO: this may not be required anymore
             bool relocateSystemAsm = false;
             Type type = Type.GetType("Mono.Runtime");
             if (type != null)
@@ -196,14 +197,14 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("System.Core.dll");
                 compilerParams.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
             }
-            //
+
             compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
             compilerParams.ReferencedAssemblies.Add("MIG.dll");
             compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
-            //
+
             compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");
             compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
-            //
+
             //if (Raspberry.Board.Current.IsRaspberryPi)
             {
                 compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
@@ -214,13 +215,13 @@ namespace HomeGenie.Automation.Scripting
                 compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
                 compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
             }
-            //
+
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Core.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Interfaces.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.Linq.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "System.Reactive.PlatformServices.dll"));
             compilerParams.ReferencedAssemblies.Add(Path.Combine("lib", "shared", "Nmqtt.dll"));
-            //
+
             // compile and generate script assembly
             return provider.CompileAssemblyFromSource(compilerParams, source);
         }

@@ -178,7 +178,7 @@ namespace HomeGenie.Automation.Engines
             if (appAssembly != null && CheckAppInstance())
             {
                 result = (MethodRunResult)methodEvaluateCondition.Invoke(assembly, null);
-                result.ReturnValue = (bool)result.ReturnValue || programBlock.Autostart;
+                result.ReturnValue = (bool)result.ReturnValue || programBlock.WillRun;
             }
             return result;
         }
@@ -286,17 +286,19 @@ namespace HomeGenie.Automation.Engines
                 {
                     // Creating app domain
                     programDomain = AppDomain.CurrentDomain;
-                    //
+
                     assemblyType = appAssembly.GetType("HomeGenie.Automation.Scripting.ScriptingInstance");
                     assembly = Activator.CreateInstance(assemblyType);
-                    //
+
                     MethodInfo miSetHost = assemblyType.GetMethod("SetHost");
                     miSetHost.Invoke(assembly, new object[2] { homegenie, programBlock.Address });
-                    //
-                    methodRun = assemblyType.GetMethod("Run");
-                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition");
+
+                    methodRun = assemblyType.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+                    // TODO: v1.1 !!!IMPORTANT!!! the method EvaluateCondition will be renamed to EvaluateStartupCode,
+                    // TODO: v1.1 !!!IMPORTANT!!! so if EvaluateCondition is not found look for EvaluateStartupCode method instead
+                    methodEvaluateCondition = assemblyType.GetMethod("EvaluateCondition", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                     methodReset = assemblyType.GetMethod("Reset");
-                    //
+
                     success = true;
                 }
                 catch (Exception ex)

@@ -187,13 +187,13 @@ namespace HomeGenie.Automation.Scripting
             Pause(seconds);
         }
 
-        [Obsolete("Use Program.SetAutostart(bool) instead")]
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionTrue()
         {
             executeProgramCode = true;
         }
 
-        [Obsolete("Use Program.SetAutostart(bool) instead")]
+        [Obsolete("Use Program.Run(bool) instead")]
         public void SetConditionFalse()
         {
             executeProgramCode = false;

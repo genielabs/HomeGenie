@@ -33,6 +33,7 @@ namespace HomeGenie.Automation.Engines
             var result = new MethodRunResult();
             result = new MethodRunResult();
             homegenie.RaiseEvent(
+                Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
                 programBlock.Address.ToString(),
                 "Arduino Sketch Upload",
@@ -51,6 +52,7 @@ namespace HomeGenie.Automation.Engines
                 if (!String.IsNullOrWhiteSpace(outputResult[x]))
                 {
                     homegenie.RaiseEvent(
+                        Domains.HomeGenie_System,
                         Domains.HomeAutomation_HomeGenie_Automation,
                         programBlock.Address.ToString(),
                         "Arduino Sketch",
@@ -62,6 +64,7 @@ namespace HomeGenie.Automation.Engines
             }
             //
             homegenie.RaiseEvent(
+                Domains.HomeGenie_System,
                 Domains.HomeAutomation_HomeGenie_Automation,
                 programBlock.Address.ToString(),
                 "Arduino Sketch",

@@ -41,6 +41,23 @@ HG.WebApp.Events.RemoveListener = function (listener) {
 
 HG.WebApp.Events.Setup = function () {
     var es = new EventSource('/events');
+    es.onopen = function(e) {
+        HG.WebApp.Events.ShowEventPopup({
+                        icon: 'images/genie.png',
+                        title: 'HomeGenie<br/>Event Stream<br/>CONNECTED!',
+                        text: '',
+                        timestamp: ''
+                    });
+    };
+    es.onerror = function(e) {
+        HG.WebApp.Events.ShowEventPopup({
+                        icon: 'images/genie.png',
+                        title: 'HomeGenie<br/>EventStream<br/>DISCONNECTED!',
+                        text: '',
+                        timestamp: ''
+                    });
+        //setTimeout(HG.WebApp.Events.Setup, 5000);
+    };
     es.onmessage = function (e) {
         var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);
         event.Value = event.Value.toString();

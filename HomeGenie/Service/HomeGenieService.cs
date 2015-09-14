@@ -99,6 +99,7 @@ namespace HomeGenie.Service
             updateChecker.ArchiveDownloadUpdate += (object sender, ArchiveDownloadEventArgs args) =>
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeGenie_UpdateChecker,
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
@@ -109,6 +110,7 @@ namespace HomeGenie.Service
             updateChecker.UpdateProgress += (object sender, UpdateProgressEventArgs args) =>
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeGenie_UpdateChecker,
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
@@ -119,6 +121,7 @@ namespace HomeGenie.Service
             updateChecker.InstallProgressMessage += (object sender, string message) =>
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeGenie_UpdateChecker,
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie Update Checker",
@@ -141,7 +144,7 @@ namespace HomeGenie.Service
 
         public void Start()
         {
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STARTED");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STARTED");
             // Signal "SystemStarted" event to automation programs
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
             {
@@ -167,7 +170,7 @@ namespace HomeGenie.Service
 
         public void Stop()
         {
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPING");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPING");
             // Signal "SystemStopping" event to automation programs
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)
             {
@@ -190,7 +193,7 @@ namespace HomeGenie.Service
             }
 
             // Save system data before quitting
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "SAVING DATA");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "SAVING DATA");
             UpdateModulesDatabase();
             systemConfiguration.Update();
 
@@ -198,16 +201,16 @@ namespace HomeGenie.Service
             updateChecker.Stop();
             statisticsLogger.Stop();
 
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPING");
             if (virtualMeter != null) virtualMeter.Stop();
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPING");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "VirtualMeter STOPPED");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPING");
             if (migService != null) migService.StopService();
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPED");
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "MIG Service STOPPED");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPING");
             if (masterControlProgram != null) masterControlProgram.StopEngine();
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
-            RaiseEvent(Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPED");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
+            RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPED");
         }
 
         ~HomeGenieService()
@@ -437,12 +440,13 @@ namespace HomeGenie.Service
 
         #region MIG Events Propagation / Logging
 
-        internal void RaiseEvent(MigEvent evt)
+        internal void RaiseEvent(object sender, MigEvent evt)
         {
-            migService.RaiseEvent(evt);
+            migService.RaiseEvent(sender, evt);
         }
 
         internal void RaiseEvent(
+            object sender,
             string domain,
             string source,
             string description,
@@ -451,7 +455,7 @@ namespace HomeGenie.Service
         )
         {
             var evt = migService.GetEvent(domain, source, description, property, value);
-            migService.RaiseEvent(evt);
+            migService.RaiseEvent(sender, evt);
         }
 
         internal static void LogDebug(
@@ -490,7 +494,7 @@ namespace HomeGenie.Service
             modules_RefreshInterface(migService.GetInterface(args.Domain));
         }
 
-        internal void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
+        private void migService_InterfacePropertyChanged(object sender, InterfacePropertyChangedEventArgs args)
         {
             
             // look for module associated to this event
@@ -529,7 +533,7 @@ namespace HomeGenie.Service
                     LogError(ex);
                 }
 
-                masterControlProgram.SignalPropertyChange(migService, module, args.EventData);
+                masterControlProgram.SignalPropertyChange(sender, module, args.EventData);
             }
             else
             {
@@ -812,6 +816,7 @@ namespace HomeGenie.Service
             if (webGateway == null)
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeAutomation_HomeGenie,
                     HOMEGENIE_MASTERNODE,
                     "Configuration entry not found",
@@ -826,6 +831,7 @@ namespace HomeGenie.Service
             while (!started)
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeAutomation_HomeGenie,
                     HOMEGENIE_MASTERNODE,
                     "HTTP binding failed.",
@@ -847,6 +853,7 @@ namespace HomeGenie.Service
             if (started)
             {
                 RaiseEvent(
+                    Domains.HomeGenie_System,
                     Domains.HomeAutomation_HomeGenie,
                     HOMEGENIE_MASTERNODE,
                     "HomeGenie service ready",

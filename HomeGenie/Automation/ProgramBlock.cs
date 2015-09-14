@@ -77,7 +77,7 @@ namespace HomeGenie.Automation
         public List<ProgramFeature> Features  { get; set; }
 
         [XmlIgnore]
-        public bool Autostart { get; set; }
+        public bool WillRun { get; set; }
         [XmlIgnore]
         public bool IsRunning { get; set; }
         [XmlIgnore]
@@ -207,6 +207,7 @@ namespace HomeGenie.Automation
             return error;
         }
 
+        // TODO: v1.1 !!!IMPORTANT!!! rename to EvaluateStartupCode
         internal MethodRunResult EvaluateCondition()
         {
             return csScriptEngine.EvaluateCondition();

@@ -46,17 +46,8 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 var sh = (scriptEngine.GetValue("hg").ToObject() as ScriptingHost);
-                if (!jsScript.ToLower().Contains("hg.program.setup"))
-                {
-                    sh.Program.Setup(()=>{
-                        scriptEngine.Execute(jsScript);
-                    });
-                }
-                else
-                {
-                    scriptEngine.Execute(jsScript);
-                }
-                result.ReturnValue = sh.executeProgramCode || programBlock.Autostart;
+                scriptEngine.Execute(jsScript);
+                result.ReturnValue = sh.executeProgramCode || programBlock.WillRun;
             }
             catch (Exception e)
             {
