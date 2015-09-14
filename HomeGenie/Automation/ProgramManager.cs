@@ -345,13 +345,6 @@ namespace HomeGenie.Automation
 
         public void SignalPropertyChange(object sender, Module module, MigEvent eventData)
         {
-            // ROUTE THE EVENT TO AUTOMATION PROGRAMS, BEFORE COMMITTING THE CHANGE
-            //var tempParam = new ModuleParameter() {
-            //    Name = eventData.Property,
-            //    Value = eventData.Value.ToString()
-            //};
-
-
             ModuleParameter parameter = null;
             try
             {
@@ -382,25 +375,18 @@ namespace HomeGenie.Automation
             };
 
             // Route event to Programs->ModuleIsChangingHandler
-            RoutePropertyBeforeChangeEvent(routedEvent);
-
-            // If the value has been manipulated by an automation program
-            // so the event has to be updated as well
-            if (parameter.Value != eventData.Value.ToString())
+            if (RoutePropertyBeforeChangeEvent(routedEvent))
             {
-                // If manipulated, the event is not propagated anymore.
-                // RaiseEvent can be called to route the new event value.
-                MigService.Log.Debug("Warning: parameter value manipulated by automation program and will not be routed (Name={0}, OldValue={1}, NewValue={2})", parameter.Name, eventData.Value.ToString(), parameter.Value);
-                return;
+                // Route event to Programs->ModuleChangedHandler
+                ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
             }
-
-            // Route event to Programs->ModuleIsChangingHandler
-            ThreadPool.QueueUserWorkItem(new WaitCallback(RoutePropertyChangedEvent), routedEvent);
         }
 
-        public void RoutePropertyBeforeChangeEvent(object eventData)
+        public bool RoutePropertyBeforeChangeEvent(object eventData)
         {
             var moduleEvent = (RoutedEvent)eventData;
+            var moduleHelper = new Automation.Scripting.ModuleHelper(homegenie, moduleEvent.Module);
+            string originalValue = moduleEvent.Parameter.Value;
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
@@ -410,25 +396,30 @@ namespace HomeGenie.Automation
                     program.Engine.RoutedEventAck.Set();
                     if (program.Engine.ModuleIsChangingHandler != null)
                     {
-                        if (!program.Engine.ModuleIsChangingHandler(
-                            new Automation.Scripting.ModuleHelper(
-                                homegenie,
-                                moduleEvent.Module
-                            ),
-                            moduleEvent.Parameter
-                        ))
+                        bool handled = !program.Engine.ModuleIsChangingHandler(moduleHelper, moduleEvent.Parameter);
+                        if (handled)
                         {
                             // stop routing event if "false" is returned
-                            break;
+                            MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
+                            return false;
+                        }
+                        else  if (moduleEvent.Parameter.Value != originalValue)
+                        {
+                            // If manipulated, the event is not routed anymore.
+                            MigService.Log.Debug("Event propagation halted - parameter manipulated by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
+                            return false;
                         }
                     }
                 }
             }
+            return true;
         }
 
         public void RoutePropertyChangedEvent(object eventData)
         {
             var moduleEvent = (RoutedEvent)eventData;
+            var moduleHelper = new Automation.Scripting.ModuleHelper(homegenie, moduleEvent.Module);
+            string originalValue = moduleEvent.Parameter.Value;
             for (int p = 0; p < Programs.Count; p++)
             {
                 var program = Programs[p];
@@ -439,14 +430,17 @@ namespace HomeGenie.Automation
                     {
                         if (program.Engine.ModuleChangedHandler != null && moduleEvent.Parameter != null) // && proceed)
                         {
-                            if (!program.Engine.ModuleChangedHandler(
-                                new Automation.Scripting.ModuleHelper(
-                                    homegenie,
-                                    moduleEvent.Module
-                                ),
-                                moduleEvent.Parameter
-                            ))
+                            bool handled = !program.Engine.ModuleChangedHandler(moduleHelper, moduleEvent.Parameter);
+                            if (handled)
                             {
+                                // stop routing event if "false" is returned
+                                MigService.Log.Debug("Event propagation halted by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
+                                break;
+                            }
+                            else if (moduleEvent.Parameter.Value != originalValue)
+                            {
+                                // If manipulated, the event is not routed anymore.
+                                MigService.Log.Debug("Event propagation halted - parameter manipulated by automation program '{0}' ({1}) (Name={2}, OldValue={3}, NewValue={4})", program.Name, program.Address, moduleEvent.Parameter.Name, originalValue, moduleEvent.Parameter.Value);
                                 break;
                             }
                         }

@@ -117,6 +117,7 @@ namespace HomeGenie.Automation.Scripting
 
         /// <summary>
         /// Call the specified <handler> function when a parameter of a module changed.
+        /// If either the <handler> returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -143,7 +144,8 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Call the specified <handler> function when a parameter of a module is changing.
+        /// Call the specified <handler> function when a parameter of a module is changing. 
+        /// If either the <handler> returns false or changes the event value, the propagation will stop.
         /// </summary>
         /// <returns>EventsHelper</returns>
         /// <param name="handler">The handler function to call.</param>
@@ -169,7 +171,6 @@ namespace HomeGenie.Automation.Scripting
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             program.Engine.ModuleIsChangingHandler = handler;
             return this;
-
         }
 
         /// <summary>
