@@ -78,17 +78,8 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 var sh = (scriptScope as dynamic).hg as ScriptingHost;
-                if (!rubyScript.ToLower().Contains("hg.program.setup"))
-                {
-                    sh.Program.Setup(()=>{
-                        scriptEngine.Execute(rubyScript, scriptScope);
-                    });
-                }
-                else
-                {
-                    scriptEngine.Execute(rubyScript, scriptScope);
-                }
-                result.ReturnValue = sh.executeProgramCode || programBlock.Autostart;
+                scriptEngine.Execute(rubyScript, scriptScope);
+                result.ReturnValue = sh.executeProgramCode || programBlock.WillRun;
             }
             catch (Exception e)
             {

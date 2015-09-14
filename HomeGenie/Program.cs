@@ -119,8 +119,8 @@ namespace HomeGenie
             );
             try
             {
-                // try broadcast first
-                _homegenie.RaiseEvent(logEntry);
+                // try broadcast first (we don't want homegenie object to be passed, so use the domain string)
+                _homegenie.RaiseEvent(Domains.HomeGenie_System, logEntry);
             }
             catch 
             {

@@ -4,17 +4,26 @@ using HomeGenie.Data;
 
 namespace HomeGenie.Automation.Scripting
 {
+    /// <summary>
+    /// Store helper class.\n
+    /// Class instance accessor: **Program.Store(<store_name>)**
+    /// </summary>
     [Serializable]
     public class StoreHelper
     {
         private TsList<Store> storeList;
         private string storeName;
+
         public StoreHelper(TsList<Store> storageList, string storeName)
         {
             this.storeList = storageList;
             this.storeName = storeName;
         }
 
+        /// <summary>
+        /// Get the specified parameterName from the Store.
+        /// </summary>
+        /// <param name="parameterName">Parameter name.</param>
         public ModuleParameter Get(string parameterName)
         {
             var store = GetStore(storeName);
@@ -28,6 +37,10 @@ namespace HomeGenie.Automation.Scripting
             return value;
         }
 
+        /// <summary>
+        /// Gets the list of parameters defined in the Store.
+        /// </summary>
+        /// <value>The list.</value>
         public TsList<ModuleParameter> List
         {
             get 
@@ -37,6 +50,10 @@ namespace HomeGenie.Automation.Scripting
             }
         }
 
+        /// <summary>
+        /// Remove the specified parameterName from the Store.
+        /// </summary>
+        /// <param name="parameterName">Parameter name.</param>
         public StoreHelper Remove(string parameterName)
         {
             var store = GetStore(storeName);
@@ -44,6 +61,9 @@ namespace HomeGenie.Automation.Scripting
             return this;
         }
 
+        /// <summary>
+        /// Remove all parameters from this store.
+        /// </summary>
         public void Reset()
         {
             storeList.RemoveAll(s => s.Name == storeName);

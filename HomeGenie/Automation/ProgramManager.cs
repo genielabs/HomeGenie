@@ -96,6 +96,7 @@ namespace HomeGenie.Automation
             scheduler.Start();
         }
 
+        // TODO: v1.1 !!!IMPORTANT!!! possibly move this inside ProgramEngineBase.cs class and rename to EvaluateStartupCode
         public void EvaluateProgramCondition(object evalArguments)
         {
             ProgramBlock program = (evalArguments as EvaluateProgramConditionArgs).Program;
@@ -105,17 +106,25 @@ namespace HomeGenie.Automation
             //
             while (isEngineRunning && program.IsEnabled)
             {
+                // the startup code is not evaluated while the program is running
                 if (program.IsRunning || !isEngineEnabled)
                 {
                     Thread.Sleep(1000);
                     continue;
                 }
-                //
+                // wait 1 second or a new event
                 program.Engine.RoutedEventAck.WaitOne(1000);
-                //
+                // check if the program is still allowed to run
+                if (program.IsRunning || !program.IsEnabled)
+                {
+                    program.Engine.RoutedEventAck.Reset();
+                    continue;
+                }
+                // evaluate and get result from the code
                 try
                 {
                     isConditionSatisfied = false;
+                    program.WillRun = false;
                     //
                     var result = program.EvaluateCondition();
                     if (result != null && result.Exception != null)
@@ -323,7 +332,7 @@ namespace HomeGenie.Automation
             if (programModule != null)
             {
                 Utility.ModuleParameterSet(programModule, property, value);
-                homegenie.RaiseEvent(programModule.Domain, programModule.Address, "Automation Program", property, value);
+                homegenie.RaiseEvent(program.Address, programModule.Domain, programModule.Address, "Automation Program", property, value);
                 //homegenie.MigService.RaiseEvent(actionEvent);
                 //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
@@ -337,14 +346,39 @@ namespace HomeGenie.Automation
         public void SignalPropertyChange(object sender, Module module, MigEvent eventData)
         {
             // ROUTE THE EVENT TO AUTOMATION PROGRAMS, BEFORE COMMITTING THE CHANGE
-            var tempParam = new ModuleParameter() {
-                Name = eventData.Property,
-                Value = eventData.Value.ToString()
-            };
+            //var tempParam = new ModuleParameter() {
+            //    Name = eventData.Property,
+            //    Value = eventData.Value.ToString()
+            //};
+
+
+            ModuleParameter parameter = null;
+            try
+            {
+                // Lookup for the existing module parameter
+                parameter = Utility.ModuleParameterGet(module, eventData.Property);
+                if (parameter == null)
+                {
+                    parameter = new ModuleParameter() {
+                        Name = eventData.Property,
+                        Value = eventData.Value.ToString()
+                    };
+                    module.Properties.Add(parameter);
+                }
+                else
+                {
+                    parameter.Value = eventData.Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                HomeGenieService.LogError(ex);
+            }
+
             var routedEvent = new RoutedEvent() {
                 Sender = sender,
                 Module = module,
-                Parameter = tempParam
+                Parameter = parameter
             };
 
             // Route event to Programs->ModuleIsChangingHandler
@@ -352,11 +386,12 @@ namespace HomeGenie.Automation
 
             // If the value has been manipulated by an automation program
             // so the event has to be updated as well
-            if (tempParam.Value != eventData.Value.ToString())
+            if (parameter.Value != eventData.Value.ToString())
             {
-                MigService.Log.Debug("Parameter value manipulated by automation program (Name={0}, OldValue={1}, NewValue={2})", tempParam.Name, eventData.Value.ToString(), tempParam.Value);
-                // Update the event value to the new value
-                eventData.Value = tempParam.Value;
+                // If manipulated, the event is not propagated anymore.
+                // RaiseEvent can be called to route the new event value.
+                MigService.Log.Debug("Warning: parameter value manipulated by automation program and will not be routed (Name={0}, OldValue={1}, NewValue={2})", parameter.Name, eventData.Value.ToString(), parameter.Value);
+                return;
             }
 
             // Route event to Programs->ModuleIsChangingHandler
@@ -370,7 +405,7 @@ namespace HomeGenie.Automation
             {
                 var program = Programs[p];
                 if (!program.IsEnabled) continue;
-                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program)))
+                if ((moduleEvent.Sender == null || !moduleEvent.Sender.Equals(program.Address)))
                 {
                     program.Engine.RoutedEventAck.Set();
                     if (program.Engine.ModuleIsChangingHandler != null)
@@ -383,6 +418,7 @@ namespace HomeGenie.Automation
                             moduleEvent.Parameter
                         ))
                         {
+                            // stop routing event if "false" is returned
                             break;
                         }
                     }

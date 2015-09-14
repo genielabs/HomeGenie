@@ -55,7 +55,8 @@
         //
         this.GroupName = container.attr('data-context-group');
         this.Description = module.Description;
-        this.DeviceInfo = HG.WebApp.Utility.GetModulePropertyByName(module, "UPnP.ModelDescription").Value;
+        var info = HG.WebApp.Utility.GetModulePropertyByName(module, "UPnP.ModelDescription");
+        this.DeviceInfo = (info != null) ? info.Value : "";
         //
         // render control popup
         //

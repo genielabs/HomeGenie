@@ -705,13 +705,14 @@ namespace HomeGenie.Service.Handlers
                             // reset current reporting Watts if VMWatts field is set to 0
                             if (newParameter.Name == Properties.VIRTUALMETER_WATTS && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
                             {
-                                homegenie.migService_InterfacePropertyChanged(homegenie, new InterfacePropertyChangedEventArgs(
+                                homegenie.RaiseEvent(
+                                    Domains.HomeGenie_System,
                                     currentModule.Domain,
                                     currentModule.Address,
                                     currentModule.Description,
                                     Properties.METER_WATTS,
                                     "0.0"
-                                ));
+                                );
                             }
                             currentParameter.Value = newParameter.Value;
                         }

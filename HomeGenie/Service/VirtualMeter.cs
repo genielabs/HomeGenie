@@ -79,13 +79,14 @@ namespace HomeGenie.Service
                                 double level = double.Parse(parameter.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
                                 double fuzzyness = (new Random().Next(0, 50) - 25) / 100D;
                                 //
-                                homegenie.migService_InterfacePropertyChanged(homegenie, new InterfacePropertyChangedEventArgs(
+                                homegenie.RaiseEvent(
+                                    Domains.HomeGenie_System, 
                                     module.Domain,
                                     module.Address,
                                     module.Description,
                                     Properties.METER_WATTS,
                                     level == 0 ? "0.0" : ((watts * level) + fuzzyness).ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                ));
+                                );
                                 //
                                 Thread.Sleep(10);
                             }

@@ -10,19 +10,17 @@ namespace HomeGenie.Automation.Engines
         protected ProgramBlock programBlock;
         protected HomeGenieService homegenie;
 
-
-        // System events handlers
-        internal Func<bool> SystemStarted;
-        internal Func<bool> SystemStopping;
-        internal Func<bool> Stopping;
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler;
-        internal Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler;
-        internal List<string> registeredApiCalls = new List<string>();
-
         // Main program thread
         internal Thread ProgramThread;
 
-        internal ManualResetEvent RoutedEventAck = new ManualResetEvent(false);
+        // System events handlers
+        public Func<bool> SystemStarted;
+        public Func<bool> SystemStopping;
+        public Func<bool> Stopping;
+        public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleChangedHandler;
+        public Func<HomeGenie.Automation.Scripting.ModuleHelper, HomeGenie.Data.ModuleParameter, bool> ModuleIsChangingHandler;
+        public List<string> RegisteredApi = new List<string>();
+        public ManualResetEvent RoutedEventAck = new ManualResetEvent(false);
 
         public ProgramEngineBase(ProgramBlock pb)
         {
@@ -57,11 +55,11 @@ namespace HomeGenie.Automation.Engines
             SystemStopping = null;
             Stopping = null;
             //
-            foreach (string apiCall in registeredApiCalls)
+            foreach (string apiCall in RegisteredApi)
             {
                 homegenie.ProgramManager.UnRegisterDynamicApi(apiCall);
             }
-            registeredApiCalls.Clear();
+            RegisteredApi.Clear();
             //
             (this as IProgramEngine).Unload();
 

@@ -198,9 +198,11 @@ HG.WebApp.Maintenance.InitializePage = function () {
             $.mobile.loading('show', { text: 'Resetting to factory defaults, please wait...', textVisible: true, theme: 'a', html: '' });
             // FACTORY RESET....
             HG.Configure.System.ServiceCall("System.ConfigurationReset", function (data) {
-                alert('Factory Reset Completed!');
-                $.mobile.loading('hide');
-                setTimeout(function() { window.location.replace("/"); }, 3000);
+                setTimeout(function() {
+                    $.mobile.loading('hide');
+                    alert('Factory Reset Completed!');
+                    window.location.replace("/");
+                }, 20000);
             });
         });
         $('#systemsettings_backuprestores1selectallbtn').bind('click', function () {
@@ -245,8 +247,10 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $('#systemsettings_backuprestores1confirmbutton').addClass('ui-disabled');
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
-                    $.mobile.loading('hide');
-                    setTimeout(function() { window.location.replace("/"); }, 3000);
+                    setTimeout(function() {
+                        window.location.replace("/"); 
+                        $.mobile.loading('hide');
+                    }, 20000);
                 });
             });
         });

@@ -768,7 +768,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../HomeGenie/Automation/Scripting
+INPUT                  = ../HomeGenie/Automation/Scripting ../HomeGenie/Data/Module.cs ../HomeGenie/Data/ModuleParameter.cs ../HomeGenie/Data/ValueStatistics.cs
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

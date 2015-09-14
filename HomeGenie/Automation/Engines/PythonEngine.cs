@@ -53,17 +53,8 @@ namespace HomeGenie.Automation.Engines
             try
             {
                 var sh = (scriptScope as dynamic).hg as ScriptingHost;
-                if (!pythonScript.ToLower().Contains("hg.program.setup"))
-                {
-                    sh.Program.Setup(()=>{
-                        scriptEngine.Execute(pythonScript, scriptScope);
-                    });
-                }
-                else
-                {
-                    scriptEngine.Execute(pythonScript, scriptScope);
-                }
-                result.ReturnValue = sh.executeProgramCode || programBlock.Autostart;
+                scriptEngine.Execute(pythonScript, scriptScope);
+                result.ReturnValue = sh.executeProgramCode || programBlock.WillRun;
             }
             catch (Exception e)
             {

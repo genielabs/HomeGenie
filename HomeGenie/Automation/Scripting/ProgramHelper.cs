@@ -71,7 +71,8 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Execute a setup function once the program is enabled. It is meant to be used in the "Trigger Code Block" to configure program configuration fields, parameters and features.
+        /// Execute a setup function when the program is enabled. It is meant to be used in the "Startup Code" to execute only once
+        /// the instructions contained in the passed function. It is mainly used for setting program configuration fields, parameters and features.
         /// </summary>
         /// <param name="functionBlock">Function name or inline delegate.</param>
         /// <remarks />
@@ -113,6 +114,7 @@ namespace HomeGenie.Automation.Scripting
                     }
 
                     homegenie.RaiseEvent(
+                        myProgramId,
                         myProgramDomain,
                         myProgramId.ToString(),
                         "Automation Program",
@@ -139,6 +141,7 @@ namespace HomeGenie.Automation.Scripting
                     homegenie.modules_RefreshVirtualModules();
 
                     homegenie.RaiseEvent(
+                        myProgramId,
                         myProgramDomain,
                         myProgramId.ToString(),
                         "Automation Program",
@@ -150,15 +153,15 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
-        /// Sets the autostart priority (0 = autostart disabled).
+        /// Run the program as soon as the "Startup Code" exits. This command is meant to be used in the "Startup Code".
         /// </summary>
-        /// <param name="priority">Priority.</param>
-        public void SetAutostart(bool autostart)
+        /// <param name="willRun">If set to <c>true</c> will run.</param>
+        public void Run(bool willRun = true)
         {
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
-                program.Autostart = autostart;
+                program.WillRun = willRun;
             }
         }
 
@@ -571,6 +574,7 @@ namespace HomeGenie.Automation.Scripting
             notification.Message = message;
             string serializedMessage = JsonConvert.SerializeObject(notification);
             homegenie.RaiseEvent(
+                myProgramId,
                 Domains.HomeAutomation_HomeGenie_Automation,
                 myProgramId.ToString(),
                 "Automation Program",
@@ -667,7 +671,7 @@ namespace HomeGenie.Automation.Scripting
                     parameter,
                     value
                 );
-                homegenie.MigService.RaiseEvent(actionEvent);
+                homegenie.RaiseEvent(myProgramId, actionEvent);
                 //homegenie.SignalModulePropertyChange(this, programModule, actionEvent);
             }
             catch (Exception ex)
@@ -702,8 +706,7 @@ namespace HomeGenie.Automation.Scripting
                     parameter,
                     value
                 );
-                homegenie.MigService.RaiseEvent(actionEvent);
-                //homegenie.SignalModulePropertyChange(this, sourceModule.Instance, actionEvent);
+                homegenie.RaiseEvent(myProgramId, actionEvent);
             }
             catch (Exception ex)
             {
@@ -726,6 +729,7 @@ namespace HomeGenie.Automation.Scripting
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address == myProgramId);
             program.IsEnabled = true;
             homegenie.RaiseEvent(
+                myProgramId,
                 myProgramDomain,
                 myProgramId.ToString(),
                 "Automation Program",
@@ -869,6 +873,10 @@ namespace HomeGenie.Automation.Scripting
             return parameter;
         }
 
+        /// <summary>
+        /// Gets or creates a persistent data Store for this program.
+        /// </summary>
+        /// <param name="storeName">Store name.</param>
         public StoreHelper Store(string storeName)
         {
             StoreHelper storage = null;
@@ -948,7 +956,7 @@ namespace HomeGenie.Automation.Scripting
             var program = homegenie.ProgramManager.Programs.Find(p => p.Address.ToString() == myProgramId.ToString());
             if (program != null)
             {
-                program.Autostart = false;
+                program.WillRun = false;
                 program.Features.Clear();
             }
             return this;

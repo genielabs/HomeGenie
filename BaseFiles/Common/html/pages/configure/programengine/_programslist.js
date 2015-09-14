@@ -362,7 +362,7 @@ HG.WebApp.ProgramsList.RefreshProgramType = function () {
     $('#configure_program_editorsketch').hide();
     // switch specific language editors/labels/tools
     if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() != 'wizard') {
-        $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_setupcode', 'Setup Code'));
+        $('#program_edit_tab3_button').html(HG.WebApp.Locales.GetLocaleString('configure_program_startupcode', 'Startup Code'));
         $('#automation_conditiontype').val('OnTrue'); // <--- this field is now only valid for wizard type programs
         $('#automation_conditiontype_wrapper').hide();
         if (HG.WebApp.ProgramEdit._CurrentProgram.Type.toLowerCase() == 'arduino') {
