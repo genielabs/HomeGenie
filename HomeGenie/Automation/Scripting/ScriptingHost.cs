@@ -32,12 +32,8 @@ using HomeGenie.Service;
  * \section docs HomeGenie Documentation
  * \subsection doc_1 User Guide
  * <a href="http://www.homegenie.it/docs/quickstart.php">http://www.homegenie.it/docs/quickstart.php</a>
- * \subsection doc_3 Web Service API
- * <a href="http://www.homegenie.it/docs/api/overview.html">http://www.homegenie.it/docs/api/overview.html</a>
- * \subsection doc_2 Automation Programming
- * <a href="http://www.homegenie.it/docs/automation_introduction.php">http://www.homegenie.it/docs/automation_introduction.php</a>
- * \subsection doc_4 Helper Classes Reference
- * <a href="annotated.html">Class List</a>
+ * \subsection doc_2 Automation Programming and API
+ * <a href="http://genielabs.github.io/HomeGenie">http://genielabs.github.io/HomeGenie</a>
  * 
  */
 
