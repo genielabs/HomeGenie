@@ -421,11 +421,11 @@ HG.WebApp.Statistics.Refresh = function () {
 		                        }
 				                try {
 				                    $.plot($("#statshour"), [
-				                            { label: $('#page_analyze_title').text(), data: stats[0], lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
+				                        { label: $('#page_analyze_title').text(), data: stats[0], lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
 				                        ],
 				                        {
 				                            yaxis: { show: true },
-	                            			xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
+	                                        xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
 				                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
 				                            lines: { show: showlines, lineWidth: 1.0 },
 				                            series: {
@@ -484,22 +484,17 @@ HG.WebApp.Statistics.Refresh = function () {
 	                        });
 	                        $.plot($("#statshour"),graph_data,
 	                        {
-								yaxes: [{ position: "left", color: "green"},
-				                        { position: "right", color: "blue"}
-								       ],	                            
-								yaxis: { show: true },
-	                            xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
-	                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+                                yaxes: [{ position: "left", color: "green"},
+                                        { position: "right", color: "blue"}
+                                       ],	                            
+                                yaxis: { show: true },
+                                xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
+	                            legend: { position: "nw", noColumns: 0, backgroundOpacity: 0.3 },
 	                            grid: {
 				                    backgroundColor: { colors: ["#fff", "#ddd"] },
 				                    hoverable: true,
 				                },
-								legend: {
-								    noColumns: 0,
-								    position: "nw"
-								},
-
-				                points: { show: true },
+                                points: { show: true },
 				                zoom: {
 	                                interactive: true
 	                            },
@@ -547,11 +542,11 @@ HG.WebApp.Statistics.Refresh = function () {
                             xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
                             legend: { backgroundOpacity: 0.3 },
                             grid: {
-			                    backgroundColor: { colors: ["#fff", "#ddd"] },
-			                    hoverable: true
-			                },
-			                points: { show: true },
-			                zoom: {
+                                backgroundColor: { colors: ["#fff", "#ddd"] },
+                                hoverable: true
+                            },
+                            points: { show: true },
+                            zoom: {
                                 interactive: true
                             },
                             pan: {
