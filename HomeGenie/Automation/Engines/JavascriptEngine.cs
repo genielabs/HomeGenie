@@ -3,6 +3,7 @@ using HomeGenie.Automation.Scripting;
 
 using Jint;
 using System.Collections.Generic;
+using Jint.Parser;
 
 namespace HomeGenie.Automation.Engines
 {
@@ -96,8 +97,8 @@ namespace HomeGenie.Automation.Engines
         {
             List<ProgramError> errors = new List<ProgramError>();
 
-            Jint.Parser.JavaScriptParser jp = new Jint.Parser.JavaScriptParser(false);
-            //Jint.Parser.ParserOptions po = new Jint.Parser.ParserOptions();
+            JavaScriptParser jp = new JavaScriptParser(false);
+            //ParserOptions po = new ParserOptions();
             try
             {
                 jp.Parse(programBlock.ScriptCondition);

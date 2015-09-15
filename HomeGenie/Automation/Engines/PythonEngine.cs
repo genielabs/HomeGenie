@@ -94,7 +94,7 @@ namespace HomeGenie.Automation.Engines
                 ErrorNumber = "-1",
                 ErrorMessage = e.Message
             };
-            string[] message = ((ScriptEngine)scriptEngine).GetService<ExceptionOperations>().FormatException(e).Split(',');
+            string[] message = scriptEngine.GetService<ExceptionOperations>().FormatException(e).Split(',');
             if (message.Length > 2)
             {
                 int line = 0;
@@ -108,6 +108,7 @@ namespace HomeGenie.Automation.Engines
         {
             List<ProgramError> errors = new List<ProgramError>();
 
+            var engine = Python.CreateEngine();
             var source = scriptEngine.CreateScriptSourceFromString(programBlock.ScriptCondition);
             var errorListener = new ScriptEngineErrors("TC");
             source.Compile(errorListener);
@@ -116,6 +117,8 @@ namespace HomeGenie.Automation.Engines
             source = scriptEngine.CreateScriptSourceFromString(programBlock.ScriptSource);
             source.Compile(errorListener);
             errors.AddRange(errorListener.Errors);
+            engine.Runtime.Shutdown();
+            engine = null;
 
             return errors;
         }

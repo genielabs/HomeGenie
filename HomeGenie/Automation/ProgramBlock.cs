@@ -93,7 +93,7 @@ namespace HomeGenie.Automation
             Address = 0;
             Features = new List<ProgramFeature>();
 
-            Type = "";
+            Type = "Wizard";
             ScriptCondition = "";
             ScriptSource = "";
             ScriptErrors = "";

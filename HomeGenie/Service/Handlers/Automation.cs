@@ -323,14 +323,13 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        if (currentProgram.Type.ToLower() != newProgram.Type.ToLower())
-                        {
-                            currentProgram.Engine.SetHost(homegenie); // dispose assembly and interrupt current task
-                        }
+                        bool typeChanged = (currentProgram.Type.ToLower() != newProgram.Type.ToLower());
                         currentProgram.Type = newProgram.Type;
                         currentProgram.Group = newProgram.Group;
                         currentProgram.Name = newProgram.Name;
                         currentProgram.Description = newProgram.Description;
+                        if (typeChanged)
+                            currentProgram.Engine.SetHost(homegenie);
                         currentProgram.IsEnabled = newProgram.IsEnabled;
                         currentProgram.ScriptCondition = newProgram.ScriptCondition;
                         currentProgram.ScriptSource = newProgram.ScriptSource;
