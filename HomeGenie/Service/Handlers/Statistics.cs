@@ -263,7 +263,7 @@ namespace HomeGenie.Service.Handlers
                 response += "]";
                 request.ResponseData = response;
                 break;
-            case "Parameter.StatsMultiple":
+            case "Parameter.StatsDetail":
                 response = "[";
                 //
                 dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
@@ -274,45 +274,66 @@ namespace HomeGenie.Service.Handlers
                 var moduleName = "";
                 foreach (var entry in daysMultiples[0])
                 {
-                    if (entry.CustomData == "")
-                        entry.CustomData = entry.Domain + ":" + entry.Address;
-                    if(moduleName != entry.CustomData)
+                    if (entry.Divers == "")
+                        entry.Divers = entry.Domain + ":" + entry.Address;
+                    if(moduleName != entry.Divers)
                     {
                         if(moduleName != "")
                         {
                             response = response.TrimEnd(',');
                             response += " ],[ ";
                         }
-                        response += "[\""+entry.CustomData + "\"] ],[ ";
-                        moduleName = entry.CustomData;
+                        response += "[\""+entry.Divers + "\"] ],[ ";
+                        moduleName = entry.Divers;
                     }
                     response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
                 response = response.TrimEnd(',');
                 response += " ]";
-                /*response += "[ ";
-                var moduleName = "";
+                response += "]";
+                request.ResponseData = response;
+                break;
+            case "Parameter.StatsDouble":
+                string parameter1 = "";
+                string parameter2 = "";
+                int paramSeparator = 0;
+                paramSeparator = migCommand.GetOption(0).LastIndexOf(":");
+                if (paramSeparator > 0)
+                {
+                    parameter1 = migCommand.GetOption(0).Substring(0, paramSeparator);
+                    parameter2 = migCommand.GetOption(0).Substring(paramSeparator + 1);
+                }
+                domainSeparator = migCommand.GetOption(1).LastIndexOf(":");
+                if (domainSeparator > 0)
+                {
+                    domain = migCommand.GetOption(1).Substring(0, domainSeparator);
+                    address = migCommand.GetOption(1).Substring(domainSeparator + 1);
+                }
+                //
+                response = "[";
+                //
+                dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
+                dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
+                daysMultiples = new List<StatisticsEntry>[1];
+                daysMultiples[0] = homegenie.Statistics.GetStatsDouble(domain, address, parameter1, parameter2, dateStart, dateEnd);
+                response += "[ ";
+                var paramName = "";
                 foreach (var entry in daysMultiples[0])
                 {
-                    if (entry.CustomData == "")
-                        entry.CustomData = entry.Domain + ":" + entry.Address;
-                    if(moduleName != entry.CustomData)
+                    if("Sensor."+paramName != entry.Divers)
                     {
-                        if(moduleName != "")
+                        if(paramName != "")
                         {
                             response = response.TrimEnd(',');
-                            response += " ] ],[ ";
+                            response += " ],[ ";
                         }
-                        response += "[ \""+entry.CustomData + "\" ],[ ";
-                        moduleName = entry.CustomData;
+                        paramName = entry.Divers.Substring(entry.Divers.LastIndexOf(".") + 1);
+                        response += "[\""+ paramName + "\"] ],[ ";
                     }
                     response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
                 response = response.TrimEnd(',');
                 response += " ]";
-                if(moduleName != "")
-                    response += " ]";*/
-                //
                 response += "]";
                 request.ResponseData = response;
                 break;

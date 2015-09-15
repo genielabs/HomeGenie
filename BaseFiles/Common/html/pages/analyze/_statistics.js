@@ -237,6 +237,8 @@ HG.WebApp.Statistics.InitConfiguration = function () {
 }
 
 HG.WebApp.Statistics.RefreshParameters = function (filter) {
+    var statdouble = '';
+    var statdblname = '';
     var cval = $('#page_analyze_param').val();
     if (cval == '') cval = 'Meter.Watts'; // default param
     $('#page_analyze_param').empty();
@@ -245,6 +247,28 @@ HG.WebApp.Statistics.RefreshParameters = function (filter) {
             var displayname = stats[p];
             if (displayname.indexOf('.') > 0) displayname = displayname.substring(displayname.indexOf('.') + 1);
             $('#page_analyze_param').append('<option value="' + stats[p] + '"' + (stats[p] == cval ? ' selected' : '') + '>' + displayname + '</option>');
+            if((displayname == 'Temperature') || (displayname == 'Humidity'))
+            {
+               if(statdouble == '')
+               {
+                   statdouble = stats[p] ;
+                   statdblname = displayname ;
+               }
+               else
+               {
+                   if(displayname == 'Temperature')
+                   {
+                      statdouble = stats[p]+':'+statdouble ;
+                      statdblname = displayname+' - '+statdblname ;
+                   }
+                   else
+                   {
+                      statdouble = statdouble+':'+stats[p] ;
+                      statdblname = statdblname+' - '+displayname ;
+                   }
+                   $('#page_analyze_param').append('<option value="' + statdouble + '"' + (statdouble == cval ? ' selected' : '') + '>' + statdblname + '</option>');
+               }
+            }
         }
         $('#page_analyze_param').selectmenu('refresh');
     });
@@ -259,7 +283,7 @@ HG.WebApp.Statistics.RefreshModules = function () {
     $('#page_analyze_source').empty();
     $('#page_analyze_source').append('<option data-context-domain="" data-context-address="" value="">Global</option>');
     var allSelected = (sdomain == "All");
-    $('#page_analyze_source').append('<option data-context-domain="All" data-context-address="" value=""'+(allSelected?' selected':'')+'>Multiple</option>');
+    $('#page_analyze_source').append('<option data-context-domain="All" data-context-address="" value=""'+(allSelected?' selected':'')+'>Detail</option>');
 
     //
     var datasources = '';
@@ -271,7 +295,8 @@ HG.WebApp.Statistics.RefreshModules = function () {
             var mod = groupmodules[c];
             if (typeof mod.Properties != 'undefined')
                 for (var p = 0; p < mod.Properties.length; p++) {
-                    if (mod.Properties[p].Name == $('#page_analyze_param').val()) {
+//                  if (mod.Properties[p].Name == $('#page_analyze_param').val()) {
+                    if (($('#page_analyze_param').val().indexOf(mod.Properties[p].Name)) != -1) {
                         var name = mod.Domain + ':' + mod.Address;
                         if (mod.Name != '') name = mod.Name;
                         //
@@ -318,90 +343,170 @@ HG.WebApp.Statistics.Refresh = function () {
                 $('#page_analyze_dateto').datebox('setTheDate', today);
                 $('#page_analyze_dateto').trigger('datebox', {'method':'doset'})
             }
+            var tformat = '';
+            var tickSize = '';
+            var oneDay = false;
             var dfrom = new Date($('#page_analyze_datefrom').datebox('getTheDate').getTime());
             var dto = new Date($('#page_analyze_dateto').datebox('getTheDate').getTime());
             dfrom.setHours(0, 0, 0, 0);
+            dto.setHours(0, 0, 0, 0);
+            if(dfrom.getTime() == dto.getTime())
+               oneDay = true;
             dto.setHours(23, 59, 59, 0);
             if(HG.WebApp.Statistics._CurrentModule !="All:")
             {
-	            if(showtype == true)
-	            {
+                if(HG.WebApp.Statistics._CurrentParameter.indexOf(":") == -1)
+                {
+		            if(showtype == true)
+		            {
+				        $.ajax({
+				            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+				            type: 'GET',
+				            success: function (data) {
+				                var stats = eval(data);
+				                try {
+				                    $.plot($("#statshour"), [
+				                            { label: 'Max', data: stats[1], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+				                            { label: 'Avg', data: stats[2], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+				                            { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
+				                            { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
+				                            { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
+				                        ],
+				                        {
+				                            yaxis: { show: true },
+				                            xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+				                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+				                            lines: { show: showlines, lineWidth: 1.0 },
+				                            series: {
+				                                splines: { show: showsplines }
+				                            },
+				                            grid: {
+				                                backgroundColor: { colors: ["#fff", "#ddd"] },
+				                                hoverable: true
+				                            },
+				                            colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
+				                            points: { show: true },
+				                            zoom: {
+				                                interactive: true
+				                            },
+				                            pan: {
+				                                interactive: true
+				                            }  
+				                        });
+				                } catch (e) { }
+				                $.mobile.loading('hide');
+				            },
+				            error: function(xhr, status, error) {
+				                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+				                $.mobile.loading('hide');
+				            }
+				        });
+		            }
+		            else
+		            {
+				        $.ajax({
+				            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDay/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+				            type: 'GET',
+				            success: function (data) {
+				                var stats = eval(data);
+		                        if(oneDay == true)
+		                        {
+		                           tformat = '%H';
+		                           tickSize = 'hour';
+		                        }
+		                        else
+		                        {
+		                           tformat = '%d/%m';
+		                           tickSize = 'day';
+		                        }
+				                try {
+				                    $.plot($("#statshour"), [
+				                            { label: $('#page_analyze_title').text(), data: stats[0], lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
+				                        ],
+				                        {
+				                            yaxis: { show: true },
+	                            			xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
+				                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+				                            lines: { show: showlines, lineWidth: 1.0 },
+				                            series: {
+				                                splines: { show: showsplines }
+				                            },
+				                            grid: {
+				                                backgroundColor: { colors: ["#fff", "#ddd"] },
+				                                hoverable: true
+				                            },
+				                            colors: ["rgba(200, 30, 0, 1.0)"],
+				                            points: { show: true },
+				                            zoom: {
+				                                interactive: true
+				                            },
+				                            pan: {
+				                                interactive: true
+				                            }  
+				                        });
+				                } catch (e) { }
+				                $.mobile.loading('hide');
+				            },
+				            error: function(xhr, status, error) {
+				                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
+				                $.mobile.loading('hide');
+				            }
+				        });
+				    }
+			    }
+			    else
+			    {
 			        $.ajax({
-			            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsHour/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+			            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDouble/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
 			            type: 'GET',
 			            success: function (data) {
-			                var stats = eval(data);
-			                try {
-			                    $.plot($("#statshour"), [
-			                            { label: 'Max', data: stats[1], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-			                            { label: 'Avg', data: stats[2], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-			                            { label: 'Min', data: stats[0], bars: { show: showbars, barWidth: (30 * 60 * 1000), align: 'center', steps: true } },
-			                            { label: 'Today Avg', data: stats[3], bars: { show: showbars, barWidth: (10 * 60 * 1000), align: 'center', steps: false } },
-			                            { label: 'Today Detail', data: stats[4], lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
-			                        ],
-			                        {
-			                            yaxis: { show: true },
-			                            xaxis: { mode: "time", timeformat: "%H:00", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
-			                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
-			                            lines: { show: showlines, lineWidth: 1.0 },
-			                            series: {
-			                                splines: { show: showsplines }
-			                            },
-			                            grid: {
-			                                backgroundColor: { colors: ["#fff", "#ddd"] },
-			                                hoverable: true
-			                            },
-			                            colors: ["rgba(200, 255, 0, 0.5)", "rgba(120, 160, 0, 0.5)", "rgba(40, 70, 0, 0.5)", "rgba(110, 80, 255, 0.5)", "rgba(200, 30, 0, 1.0)"], //"rgba(0, 30, 180, 1.0)"
-			                            points: { show: true },
-			                            zoom: {
-			                                interactive: true
-			                            },
-			                            pan: {
-			                                interactive: true
-			                            }  
-			                        });
-			                } catch (e) { }
-			                $.mobile.loading('hide');
-			            },
-			            error: function(xhr, status, error) {
-			                console.log('STATISTICS ERROR: '+xhr.status+':'+xhr.statusText);
-			                $.mobile.loading('hide');
-			            }
-			        });
-	            }
-	            else
-	            {
-			        $.ajax({
-			            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDay/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
-			            type: 'GET',
-			            success: function (data) {
-			                var stats = eval(data);
-			                try {
-			                    $.plot($("#statshour"), [
-			                            { label: $('#page_analyze_title').text(), data: stats[0], lines: { show: true, lineWidth: 1.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } }
-			                        ],
-			                        {
-			                            yaxis: { show: true },
-			                            xaxis: { mode: "time", timeformat: "%d/%m", minTickSize: [1, "day"], tickSize: [1, "day"] },
-			                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
-			                            lines: { show: showlines, lineWidth: 1.0 },
-			                            series: {
-			                                splines: { show: showsplines }
-			                            },
-			                            grid: {
-			                                backgroundColor: { colors: ["#fff", "#ddd"] },
-			                                hoverable: true
-			                            },
-			                            colors: ["rgba(200, 30, 0, 1.0)"],
-			                            points: { show: true },
-			                            zoom: {
-			                                interactive: true
-			                            },
-			                            pan: {
-			                                interactive: true
-			                            }  
-			                        });
-			                } catch (e) { }
+			                var name = '';
+	                        var graph_data = [];
+	 		                var stats = eval(data);
+	                        if(oneDay == true)
+	                        {
+	                           tformat = '%H';
+	                           tickSize = 'hour';
+	                        }
+	                        else
+	                        {
+	                           tformat = '%d/%m';
+	                           tickSize = 'day';
+	                        }
+	                        $.each(stats, function(index,val){
+	                            if(index == 1)
+	                               graph_data.push({ label: name, color: "green", data: val, yaxis: 1, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } });
+	                            else
+	                            if(index == 3)
+	                               graph_data.push({ label: name, color: "blue", data: val, yaxis: 2, lines: { show: true, lineWidth: 2.0 }, bars: { show: false }, splines: { show: false }, points: { show: false } });
+	                            else
+	                               name = val ;
+	                        });
+	                        $.plot($("#statshour"),graph_data,
+	                        {
+								yaxes: [{ position: "left", color: "green"},
+				                        { position: "right", color: "blue"}
+								       ],	                            
+								yaxis: { show: true },
+	                            xaxis: {mode: "time", timeformat: tformat, minTickSize: [1, tickSize], tickSize: [1, tickSize]},
+	                            legend: { position: "nw", noColumns: 5, backgroundOpacity: 0.3 },
+	                            grid: {
+				                    backgroundColor: { colors: ["#fff", "#ddd"] },
+				                    hoverable: true,
+				                },
+								legend: {
+								    noColumns: 0,
+								    position: "nw"
+								},
+
+				                points: { show: true },
+				                zoom: {
+	                                interactive: true
+	                            },
+	                            pan: {
+	                                interactive: true
+	                            }  
+	                        });
 			                $.mobile.loading('hide');
 			            },
 			            error: function(xhr, status, error) {
@@ -414,23 +519,21 @@ HG.WebApp.Statistics.Refresh = function () {
 			else
 			{
 		        $.ajax({
-		            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsMultiple/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+		            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDetail/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
 		            type: 'GET',
 		            success: function (data) {
 		                var name = '';
-		                var tformat = "";
-		                var tickSize = "";
                         var graph_data = [];
  		                var stats = eval(data);
-                        if(showtype == true)
+                        if(oneDay == true)
                         {
-                           tformat = "%H:00";
-                           tickSize = "hour";
+                           tformat = '%H';
+                           tickSize = 'hour';
                         }
                         else
                         {
-                           tformat = "%d/%m";
-                           tickSize = "day";
+                           tformat = '%d/%m';
+                           tickSize = 'day';
                         }
                         $.each(stats, function(index,val){
                             if( index %2 )
@@ -495,7 +598,7 @@ HG.WebApp.Statistics.Refresh = function () {
                         }],
                         {
                             yaxis: { show: true },
-                            xaxis: { mode: "time", timeformat: "%H:00", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
+                            xaxis: { mode: "time", timeformat: "%H", minTickSize: [1, "hour"], tickSize: [1, "hour"] },
                             legend: { position: "nw", backgroundOpacity: 0.3 },
                             lines: { show: showlines, lineWidth: 1.5 },
                             series: {

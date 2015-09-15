@@ -40,7 +40,7 @@ namespace HomeGenie.Service.Logging
         public DateTime TimeEnd;
         public string Domain;
         public string Address;
-        public string CustomData;
+        public string Divers;
         public double Value;
     }
 
@@ -494,7 +494,75 @@ namespace HomeGenie.Service.Logging
                     entry.TimeEnd = DateTime.Parse(reader.GetString(1));
                     entry.Domain = reader.GetString(2);
                     entry.Address = reader.GetString(3);
-                    entry.CustomData = reader.GetString(4);
+                    entry.Divers = reader.GetString(4);
+                    entry.Value = 0;
+                    try
+                    {
+                        entry.Value = (double)reader.GetFloat(5);
+                    }
+                    catch
+                    {
+                        var value = reader.GetValue(5);
+                        if (value != DBNull.Value && value != null) double.TryParse(
+                            reader.GetString(5),
+                            out entry.Value
+                        );
+                    }
+                    //
+                    values.Add(entry);
+                }
+                //
+                reader.Close();
+            }
+            return values;
+        }
+
+        /// <summary>
+        /// This is for the double stats (Temperature, Humidity)
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <param name="address"></param>
+        /// <param name="parameterName1"></param>
+        /// <param name="parameterName2"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public List<StatisticsEntry> GetStatsDouble(
+            string domain,
+            string address,
+            string parameterName1,
+            string parameterName2,
+            DateTime startDate, DateTime endDate
+        )
+        {
+            var values = new List<StatisticsEntry>();
+            //lock (dbLock)
+            {
+                var dbCommand = dbConnection.CreateCommand();
+                string filter = "";
+               
+                if (!string.IsNullOrEmpty(domain) && !string.IsNullOrEmpty(address))
+                {
+                    filter = "(Domain=@domain AND Address=@address) and ";
+                    dbCommand.Parameters.Add(new SQLiteParameter("@domain", domain));
+                    dbCommand.Parameters.Add(new SQLiteParameter("@address", address));
+                }
+                string query = "";
+                query = "select TimeStart,TimeEnd,Domain,Address,Parameter,AverageValue from ValuesHist where " + filter + "(Parameter = @parameterName1 OR Parameter = @parameterName2) and " + GetParameterizedDateRangeFilter(ref dbCommand, startDate, endDate) + " order by Parameter desc, TimeStart asc;";
+                dbCommand.Parameters.Add(new SQLiteParameter("@parameterName1", parameterName1));
+                dbCommand.Parameters.Add(new SQLiteParameter("@parameterName2", parameterName2));
+
+                dbCommand.CommandText = query;
+                var reader = dbCommand.ExecuteReader();
+                //
+                while (reader.Read())
+                {
+                    var entry = new StatisticsEntry();
+                    entry.TimeStart = DateTime.Parse(reader.GetString(0));
+                    entry.TimeEnd = DateTime.Parse(reader.GetString(1));
+                    entry.Domain = reader.GetString(2);
+                    entry.Address = reader.GetString(3);
+                    entry.Divers = reader.GetString(4);
                     entry.Value = 0;
                     try
                     {
