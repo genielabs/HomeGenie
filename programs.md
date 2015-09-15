@@ -368,6 +368,7 @@ hg.when.webServiceCallReceived('MyProgram.Domain', function(args) {
     // handle the request here....
     return { ResponseValue : 'Ok' };
 });
+hg.program.goBackground();
 ```
 
 #### Python
