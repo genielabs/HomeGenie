@@ -16,12 +16,12 @@ They can be coded using one of the following programming languages:
 - Python
 - Ruby
 
-all languages can use the same set of [Helper Classes](/api/ape/annotated.html) to access *HG* resources or external services
+all languages can use the same set of [Helper Classes](api/ape/annotated.html) to access *HG* resources or external services
 in the same way.
 
 ### Example - Turning off lights in a given group
 
-The following example is using the [ModulesManager](/api/ape/a00006.html) helper class to turn off all lights in the *Porch* group:
+The following example is using the [ModulesManager](api/ape/a00006.html) helper class to turn off all lights in the *Porch* group:
 
 ```javascript
 // C#
@@ -49,9 +49,9 @@ so all of them are very similar, just using own language specific syntax. A few 
 - **hg.** prefix can be omitted when using C#, but must be used for all other languages
 - **camelCase** coding practice can be adopted for *Javascript* programs
 
-Some [Helper Classes](/api/ape/annotated.html) functions may require a callback function as argument. It might be useful to
+Some [Helper Classes](api/ape/annotated.html) functions may require a callback function as argument. It might be useful to
 show how callback functions can be passed in the various language flavours.<br/>
-The following example is using [SystemStarted](/api/ape/a00001.html#afcf0d379d8dd2da00c2adf1c3c9996f3) helper function that
+The following example is using [SystemStarted](api/ape/a00001.html#afcf0d379d8dd2da00c2adf1c3c9996f3) helper function that
 requires a callback as argument.
 
 ### Example - Using delegates in different language flavours
@@ -96,7 +96,7 @@ Further documentation about specific syntax of each language can be found on the
 An automation program is splitted into two piece of code. The *Program Code*, which is the main program code,
 and the *Startup Code* (also called *Trigger Code* in previous HG release).
 *Startup Code* is a piece of code that can be used to set various program options and also to tell *HG* when to run the
-program by using the [Program.Run](/api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) instruction in it.
+program by using the [Program.Run](api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) instruction in it.
 When the program is idle (not running), the *Startup Code* is evaluated every second or as soon as any event is raised
 in the system.
 
@@ -110,20 +110,20 @@ if (Scheduler.IsScheduling("0 7 * * *"))
 
  Other instructions commonly used in the *Startup Code* are:
 
-- [Program.Setup](/api/ape/a00009.html#aba65b477efba06ac22a4f908881bbece)
-- [Program.UseWidget](/api/ape/a00009.html#ab4c0baea094fcf0f29c57cf1f157c68b)
-- [Program.AddOption](/api/ape/a00009.html#a77342214dc230ce4eab47ffc4c10bd7f)
-- [Program.AddFeature](/api/ape/a00009.html#a59e041d4aa2ea5fcd00d4a8b5efacc6b)
+- [Program.Setup](api/ape/a00009.html#aba65b477efba06ac22a4f908881bbece)
+- [Program.UseWidget](api/ape/a00009.html#ab4c0baea094fcf0f29c57cf1f157c68b)
+- [Program.AddOption](api/ape/a00009.html#a77342214dc230ce4eab47ffc4c10bd7f)
+- [Program.AddFeature](api/ape/a00009.html#a59e041d4aa2ea5fcd00d4a8b5efacc6b)
 
 The use of these command is described later in this page.
 
-**Note:** when [Program.Run](/api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) is called in the *Startup Code*,
+**Note:** when [Program.Run](api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) is called in the *Startup Code*,
 the program's code will run only after that *Startup Code* reaches it's end. So it's a good practice not to put any
 long-time consuming operation or infinite loop in the *Startup Code*.
 <br/>
 *Startup Code* and *Program Code* are not running in the same scope. Data between them that can be shared by using
-[Modules parameters](/api/ape/a00004.html#a016f9d7512c4407acbfc2d7c72d02a17) and other structures such as
-[Program Store](/api/ape/a00009.html#a111c3e247c9a22cf44e032bfb568f876) and [System Settings](/api/ape/a00012.html).
+[Modules parameters](api/ape/a00004.html#a016f9d7512c4407acbfc2d7c72d02a17) and other structures such as
+[Program Store](api/ape/a00009.html#a111c3e247c9a22cf44e032bfb568f876) and [System Settings](api/ape/a00012.html).
 
 ## Virtual Modules, Program Module and Widgets
 
@@ -154,9 +154,9 @@ Program.UseWidget("homegenie/generic/program");
 
 A program can also create and handle futher modules by using the following functions:
 
-- [Program.AddVirtualModules](/api/ape/a00009.html#a6ce0c82ab9edb50be6689919cf29c1ca)
-- [Program.AddVirtualModule](/api/ape/a00009.html#ad74a2a82101dd80e17244fd03eaf181f)
-- [Program.RemoveVirtualModule](/api/ape/a00009.html#ac1c5f107619fed38f6cb9d9224fd3506)
+- [Program.AddVirtualModules](api/ape/a00009.html#a6ce0c82ab9edb50be6689919cf29c1ca)
+- [Program.AddVirtualModule](api/ape/a00009.html#ad74a2a82101dd80e17244fd03eaf181f)
+- [Program.RemoveVirtualModule](api/ape/a00009.html#ac1c5f107619fed38f6cb9d9224fd3506)
 
 ## Program Options
 
@@ -182,8 +182,8 @@ Program.AddOption(
 var location = Program.Option("Location").Value;
 ```
 
-The [Program.AddOption](/api/ape/a00009.html#a77342214dc230ce4eab47ffc4c10bd7f) instruction is meant to be used inside
-the [Program.Setup](/api/ape/a00009.html#aba65b477efba06ac22a4f908881bbece) delegate.
+The [Program.AddOption](api/ape/a00009.html#a77342214dc230ce4eab47ffc4c10bd7f) instruction is meant to be used inside
+the [Program.Setup](api/ape/a00009.html#aba65b477efba06ac22a4f908881bbece) delegate.
 
 ## Program Features
 
@@ -206,7 +206,7 @@ Program.AddFeature(
 Program.Run();
 ```
 
-The last parameter of the [Program.AddFeature](/api/ape/a00009.html#a59e041d4aa2ea5fcd00d4a8b5efacc6b) function will select the type of control that will be displayed in 
+The last parameter of the [Program.AddFeature](api/ape/a00009.html#a59e041d4aa2ea5fcd00d4a8b5efacc6b) function will select the type of control that will be displayed in 
 the UI module options dialog. The following are the currently implemented UI field types:
 
 - ```text```
@@ -229,8 +229,8 @@ the UI module options dialog. The following are the currently implemented UI fie
 ## Reacting to module events
 
 Each time a module parameter is updated a new event is raised in the system. By using either the
-[ModuleParameterIsChanging](/api/ape/a00001.html#a2345d703592c2fe90284b13ce7ac2650) or the
-[ModuleParameterChanged](/api/ape/a00001.html#a7e82383574aeff32db8d09d4eb916718)
+[ModuleParameterIsChanging](api/ape/a00001.html#a2345d703592c2fe90284b13ce7ac2650) or the
+[ModuleParameterChanged](api/ape/a00001.html#a7e82383574aeff32db8d09d4eb916718)
 function, a program can listen to the system event stream and react in consequence of a module event.
 The difference between *ModuleParameterIsChanging* and *ModuleParameterChanged*, is that the first one is called before the
 latter one. In most situations *ModuleParameterChanged* will be used.
@@ -281,34 +281,88 @@ hg.program.goBackground();
 ```
 #### Python
 ```python
-def module_updating_fn(mod,par):
+def module_updated_fn(mod,par):
     # put code here using "mod" and "par" objects
     return True
-hg.When.ModuleParameterChanged(module_updating_fn)
+hg.When.ModuleParameterChanged(module_updated_fn)
 hg.Program.GoBackground()
 ```
 #### Ruby
 ```ruby
-module_updating_fn = lambda { |mod,par|
+module_updated_fn = lambda { |mod,par|
     # put code here using "mod" and "par" objects
     return true
 }
-hg.When.ModuleParameterChanged(module_updating_fn)
+hg.When.ModuleParameterChanged(module_updated_fn)
 hg.Program.GoBackground()
 ```
 
-To programmatically raise a module event from a program, [Program.RaiseEvent](/api/ape/a00009.html#af51db91ed13809da94337aac3c1053b7)
-function can be called.
+Automation programs can also raise events, so the system (and other programs as well) will acknowledge when a module has been updated.
+The function [Program.RaiseEvent](api/ape/a00009.html#af51db91ed13809da94337aac3c1053b7) is meant for that.
 
 ## Reacting to commands
 
-When the user click a button or any other control on a module widget, an [API](api/mig/overview.html) command request is sent to *HG*. 
+When the user click a button or any other control of a module widget, an [API](api/mig/overview.html) command request is
+sent to *HG*. A standard HTTP API request, follow the syntax:<br/>
+```api/<module_domain>/<module_address>/<command>[/<option_1>/../<option_n>]```<br/>
+For example when clicking **On** and **Off** buttons on the widget of a **Z-Wave** switch with node id **5**, the following
+HTTP requests are made:
 
-```// TODO: ...```
+```
+/api/HomeAutomation.ZWave/5/Control.On
+/api/HomeAutomation.ZWave/5/Control.Off
+```
+So if an automation program creates a [virtual module](api/ape/a00009.html#ad74a2a82101dd80e17244fd03eaf181f) of switch type in the domain *MyProgram.Domain*
+
+```csharp
+Program.AddVirtualModule(
+    "MyProgram.Domain",          // <-- domain name
+    "1",                         // <-- module address
+    "Switch",                    // <-- module type
+    "homegenie/generic/switch"); // <-- widget used to display this module
+```
+
+it will be able to handle commands addressed to this module by listening to API calls going to the *MyProgram.Domain* domain.
+The [When.WebServiceCallReceived](api/ape/a00001.html#a58515455945c35783cde47d21f844663) helper function is used for this purpose:
+
+```csharp
+When.WebServiceCallReceived("MyProgram.Domain", (args) => {
+    // All API requests going to the "MyProgram.Domain" 
+    // will hit this piece of code.
+    // e.g. for the "On" command, <args> will contain the string
+    // "MyProgram.Domain/1/Control.On", so...
+    string[] req = ((string)args).Split('/');
+    string domain = req[0], address = req[1], command = req[2];
+    // be optimistic
+    var response = "{ \"ResponseValue\" : \"Ok\" }";
+    // get a reference to the addressed module
+    var module = Modules.InDomain(domain).WithAddress(address).Get();
+    // process the command
+    switch (command)
+    {
+        case "Control.On":
+            // set the status of the module to on
+            Program.RaiseEvent(module, "Status.Level", "1", "Switched on");
+            break;
+        case "Control.Off":
+            // set the status of the module to off
+            Program.RaiseEvent(module, "Status.Level", "0", "Switched off");
+            break;
+        default:
+            response = "{ \"ResponseValue\" : \"Error\" }";
+            Program.Notify("MyProgram", "Unrecognized command received");
+            break;
+    }
+    return response;
+});
+Program.GoBackground();
+```
+
+```// TODO: to be continued...```
 
 ## Common operations on modules
 
-See the [ModulesManager](/api/ape/a00006.html) helper class documentation to find out all available functions and properties.
+See the [ModulesManager](api/ape/a00006.html) helper class documentation to find out all available functions and properties.
 
 ### Example - Selecting modules
 
