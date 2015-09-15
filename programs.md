@@ -325,7 +325,9 @@ Program.AddVirtualModule(
 it will be able to handle commands addressed to this module by listening to API calls going to the *MyProgram.Domain* domain.
 The [When.WebServiceCallReceived](api/ape/a00001.html#a58515455945c35783cde47d21f844663) helper function is used for this purpose:
 
+#### CSharp
 ```csharp
+// handle requests of type http://<hg_address>/api/MyProgram.Domain/...
 When.WebServiceCallReceived("MyProgram.Domain", (args) => {
     // All API requests going to the "MyProgram.Domain" 
     // will hit this piece of code.
@@ -364,6 +366,7 @@ update the displayed data accordingly.
 
 #### Javascript
 ```javascript
+// handle requests of type http://<hg_address>/api/MyProgram.Domain/...
 hg.when.webServiceCallReceived('MyProgram.Domain', function(args) {
     // handle the request here....
     return { ResponseValue : 'Ok' };
@@ -373,6 +376,7 @@ hg.program.goBackground();
 
 #### Python
 ```python
+# handle requests of type http://<hg_address>/api/MyProgram.Domain/...
 def handle_request_fn(args):
     # handle the request here....
     return "Ok"
@@ -382,6 +386,7 @@ hg.Program.GoBackground()
 
 #### Ruby
 ```ruby
+# handle requests of type http://<hg_address>/api/MyProgram.Domain/...
 handle_request_fn = lambda { |args|
     # handle the request here....
     return "Ok"
