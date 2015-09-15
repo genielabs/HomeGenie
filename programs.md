@@ -358,7 +358,36 @@ When.WebServiceCallReceived("MyProgram.Domain", (args) => {
 Program.GoBackground();
 ```
 
-```// TODO: to be continued...```
+So when the user will click the *On* and *Off* buttons of the virtual module widget, the code above will raise an event 
+that will update the module *Status.Level* property with *1* or *0*. This event will be also received by the widget that will so
+update the displayed data accordingly.
+
+#### Javascript
+```javascript
+hg.when.webServiceCallReceived('MyProgram.Domain', function(args) {
+    // handle the request here....
+    return { ResponseValue : 'Ok' };
+});
+```
+
+#### Python
+```python
+def handle_request_fn(args):
+    # handle the request here....
+    return "Ok"
+hg.When.WebServiceCallReceived("MyProgram.Domain", handle_request_fn)
+hg.Program.GoBackground()
+```
+
+#### Ruby
+```ruby
+handle_request_fn = lambda { |args|
+    # handle the request here....
+    return "Ok"
+}
+hg.When.WebServiceCallReceived("MyProgram.Domain", handle_request_fn)
+hg.Program.GoBackground()
+```
 
 ## Common operations on modules
 
