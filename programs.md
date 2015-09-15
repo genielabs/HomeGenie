@@ -77,10 +77,11 @@ def started_handler():
 hg.When.SystemStarted(started_handler)
 
 // Ruby
-hg.When.SystemStarted(System::Action.new {
-    hg.Program.Say("HomeGenie is now ready!")
-    return true
-})
+started_fn = lambda {
+  hg.Program.Say("HomeGenie is now ready!")
+  return true
+}
+hg.When.SystemStarted(started_fn)
 ```
 
 Further documentation about specific syntax of each language can be found on the following pages (or just googlin'):
@@ -234,7 +235,9 @@ function, a program can listen to the system event stream and react in consequen
 
 ### Example - Apply turn off timeout when a module is switched on
 
+#### CSharp
 ```csharp
+// this function will be called each time a module parameter is updated
 When.ModuleParameterIsChanging((module, parameter) => {
   // check if the module raising the event has the Turn Off Delay set
   if (module.HasFeature("HomeGenie.TurnOffDelay") &&
@@ -265,6 +268,31 @@ When.ModuleParameterIsChanging((module, parameter) => {
 });
 // the program will be running in the background waiting for events
 Program.GoBackground();
+```
+#### Javascript
+```javascript
+hg.when.moduleParameterIsChanging(function(module, parameter) {
+    // put code here using "module" and "parameter" objects
+    return true;
+});
+hg.program.goBackground();
+```
+#### Python
+```python
+def module_updating_fn(mod,par):
+    # put code here using "mod" and "par" objects
+    return True
+hg.When.ModuleParameterIsChanging(module_updating_fn)
+hg.Program.GoBackground()
+```
+#### Ruby
+```ruby
+module_updating_fn = lambda { |mod,par|
+    # put code here using "mod" and "par" objects
+    return true
+}
+hg.When.ModuleParameterIsChanging(module_updating_fn)
+hg.Program.GoBackground()
 ```
 
 To programmatically raise a module event from a program, [Program.RaiseEvent](/api/ape/a00009.html#af51db91ed13809da94337aac3c1053b7)

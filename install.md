@@ -5,10 +5,13 @@ layout: main
 
 # Install instructions
 
+---
 
 ## Windows
 
 Download _setup_ file and run it. Once installed, you can access HomeGenie by right clicking on its tray icon..
+
+---
 
 ## Ubuntu, Raspbian and others Debian derivatives
 
@@ -28,6 +31,19 @@ Once installed, you can access HomeGenie opening the following URL in your web b
 
 **Note** *HomeGenie requires mono runtime version 3.2 or later.*
 
+### Optional packages
+
+```bash
+# SSL client support
+sudo apt-get install ca-certificates-mono
+# Embedded speech synthesys engine
+sudo apt-get install libttspico-utils
+# Arduino™ programming from *HG* program editor
+sudo apt-get install arduino-mk, empty-expect
+```
+
+---
+
 ## Mac OS X and other UNIX systems
 
 HomeGenie can also be installed on other systems (eg. Mac OS X and other UNIX based systems) by following the procedure described below. 
@@ -46,15 +62,17 @@ sudo apt-get install mono-runtime libmono-corlib2.0-cil libmono-system-web4.0-ci
 In order to activate some features, optional dependencies may be required to install.
 
 ```bash
-# Audio playback and speech synthesys
+# Audio playback utilities
 sudo apt-get install alsa-utils lame
-# SSL support
+# Embedded speech syntesys engine
+sudo apt-get install libttspico-utils
+# SSL client support
 sudo apt-get install ca-certificates-mono
 # LIRC Infrared inteface
 sudo apt-get install lirc libv4l-0
 # X10 CM15 Home Automation interface
 sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev
-# Arduino development
+# Arduino™ programming from *HG* program editor
 sudo apt-get install arduino-mk empty-expect
 ```
 
