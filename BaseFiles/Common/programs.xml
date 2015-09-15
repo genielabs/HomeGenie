@@ -72,8 +72,7 @@ Modules
 Program.AddFeature("", "Dimmer", "HomeGenie.LevelMemory.SimulateOnly", "Simulate only", "checkbox");
 Program.Run();
 </ScriptCondition>
-    <ScriptSource>// We want to do further processing whenever a module changes 
-When.ModuleParameterChanged( (module, property) =&gt; {
+    <ScriptSource>When.ModuleParameterChanged( (module, property) =&gt; {
   // stores the Status.MemoryLevel value for recalling last light dimmer level
   // when switched on
   if (module.HasFeature("HomeGenie.LevelMemory") &amp;&amp; module.IsOfDeviceType("Dimmer") &amp;&amp; property.Name == "Status.Level")
@@ -90,15 +89,15 @@ When.ModuleParameterChanged( (module, property) =&gt; {
         if (level.DecimalValue != memory.DecimalValue &amp;&amp; memory.DecimalValue &gt; 0)
         {
           var newlevel = (int)(memory.DecimalValue * 100);
-          Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
           if (module.HasFeature("HomeGenie.LevelMemory.SimulateOnly"))
           {
-            module.Command("Control.Level.Adjust").Set(newlevel.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            Program.RaiseEvent(module, "Status.Level", memory.Value, "Memory Level");
           }
           else
           {
             module.Level = newlevel; 
           }
+          Program.Notify("Level Memory", module.Instance.Name + "&lt;br&gt;" + module.Instance.Address + " set to " + newlevel + "%");
           // returning false, prevent from routing event to other listeners                  
           return false;
         }
@@ -112,7 +111,6 @@ When.ModuleParameterChanged( (module, property) =&gt; {
   // returning true, will route event to other listeners
   return true; 
 });
-
 Program.GoBackground();</ScriptSource>
     <ScriptErrors>[]</ScriptErrors>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -120,24 +118,9 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
-        <Property>HomeGenie.LevelMemory</Property>
-        <Description>Recall last light level when switched on</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Dimmer</ForTypes>
-        <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
-        <Description>Simulate only</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:48.770096Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-09-15T07:38:50.209948Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -257,7 +240,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:49.291944Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:10.526933Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -430,7 +413,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:49.781058Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:11.027242Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -502,7 +485,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:50.27894Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:11.526307Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1103,7 +1086,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:50.77195Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:12.022618Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1150,7 +1133,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:51.273885Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:12.530343Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1424,7 +1407,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:51.783521Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:13.032577Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1521,7 +1504,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:52.275249Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:13.524546Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1575,8 +1558,8 @@ Program.GoBackground();</ScriptSource>
         <Description>Automatic turn off delay (seconds)</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2015-09-14T08:50:58.230689Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2015-09-15T07:38:14.025123Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1685,7 +1668,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:53.288283Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:14.538464Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2023,7 +2006,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:54.289747Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:15.540891Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2121,7 +2104,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:54.792122Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:16.057001Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2270,7 +2253,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:55.291733Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:16.541482Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2517,7 +2500,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:55.798102Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:17.041572Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7811,7 +7794,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:56.803598Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:18.053073Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -8524,7 +8507,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-14T08:48:57.291321Z</TriggerTime>
+    <TriggerTime>2015-09-15T07:38:18.540701Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

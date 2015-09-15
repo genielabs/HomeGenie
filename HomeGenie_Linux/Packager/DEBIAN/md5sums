@@ -109,7 +109,7 @@ f85bd266c0d92a420ea12d5835156db8  usr/local/bin/homegenie/programs/7.dll
 3fe281853346eb3a9ea008d37def1cd2  usr/local/bin/homegenie/programs/35.dll
 2ac6b7a230154313232d1a8be051ce33  usr/local/bin/homegenie/programs/6.dll
 f44705a2e7251541db32e4761cf6bae6  usr/local/bin/homegenie/programs/41.dll
-55a99b504b3f1b0caa63b4931f493181  usr/local/bin/homegenie/programs/16.dll
+8efb9babdfbfb500e59f0cc1c10d372c  usr/local/bin/homegenie/programs/16.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
 25e0bee9adfcd454f971c9b2ba6b6233  usr/local/bin/homegenie/HomeGenie.exe.mdb
 09840f0bf937dcb3a448f1fb811595f1  usr/local/bin/homegenie/NetClientLib.dll.mdb
@@ -128,7 +128,7 @@ b367f1a0f7ba435a0c92f591f4ae0070  usr/local/bin/homegenie/Raspberry.IO.Component
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
 dc2cba46f40f751f6e9e3fc72419de8f  usr/local/bin/homegenie/HISTORY.TXT
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
-6cfc95f2f2324513d021cc7c72d45f82  usr/local/bin/homegenie/programs.xml
+e9d01dfc0c4218df9a2381967246c934  usr/local/bin/homegenie/programs.xml
 31f6a40a74ca338743c99a13fbb093c2  usr/local/bin/homegenie/modules.xml
 a19a8070a77444aafa96d3fbe033c42e  usr/local/bin/homegenie/IronRuby.Libraries.dll
 75bc82884f5bd1ab9c0a53ca0522e255  usr/local/bin/homegenie/Raspberry.IO.Interop.dll
@@ -1670,7 +1670,7 @@ e83a7949cb9a034b84156035d512c30c  usr/local/bin/homegenie/NetClientLib.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml
 efc412d6344dca9073af5c2472728643  usr/local/bin/homegenie/groups.xml
 61b0c6d8eb2c756355d52df2ef6170c6  usr/local/bin/homegenie/Microsoft.Scripting.dll
-4e810e6b43aec44de82b1bd7bda3745c  usr/local/bin/homegenie/homegenie_factory_config.zip
+1440170b7749bbf78dafdf8c2faec0b2  usr/local/bin/homegenie/homegenie_factory_config.zip
 acbb8de3a6a8f53d69957e2607097992  usr/local/bin/homegenie/DEVELOPERS.TXT
 ae7bbf0f4b96d2a0effd97d69befb47e  usr/local/bin/homegenie/CommonMark.dll
 93675a8ef36065d0c64fe1bf4fb79902  usr/local/bin/homegenie/IronRuby.Libraries.Yaml.dll
