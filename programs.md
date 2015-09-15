@@ -232,13 +232,15 @@ Each time a module parameter is updated a new event is raised in the system. By 
 [ModuleParameterIsChanging](/api/ape/a00001.html#a2345d703592c2fe90284b13ce7ac2650) or the
 [ModuleParameterChanged](/api/ape/a00001.html#a7e82383574aeff32db8d09d4eb916718)
 function, a program can listen to the system event stream and react in consequence of a module event.
+The difference between *ModuleParameterIsChanging* and *ModuleParameterChanged*, is that the first one is called before the
+latter one. In most situations *ModuleParameterChanged* will be used.
 
 ### Example - Apply turn off timeout when a module is switched on
 
 #### CSharp
 ```csharp
 // this function will be called each time a module parameter is updated
-When.ModuleParameterIsChanging((module, parameter) => {
+When.ModuleParameterChanged((module, parameter) => {
   // check if the module raising the event has the Turn Off Delay set
   if (module.HasFeature("HomeGenie.TurnOffDelay") &&
       module.Parameter("HomeGenie.TurnOffDelay").DecimalValue > 0)
@@ -271,7 +273,7 @@ Program.GoBackground();
 ```
 #### Javascript
 ```javascript
-hg.when.moduleParameterIsChanging(function(module, parameter) {
+hg.when.moduleParameterChanged(function(module, parameter) {
     // put code here using "module" and "parameter" objects
     return true;
 });
@@ -282,7 +284,7 @@ hg.program.goBackground();
 def module_updating_fn(mod,par):
     # put code here using "mod" and "par" objects
     return True
-hg.When.ModuleParameterIsChanging(module_updating_fn)
+hg.When.ModuleParameterChanged(module_updating_fn)
 hg.Program.GoBackground()
 ```
 #### Ruby
@@ -291,7 +293,7 @@ module_updating_fn = lambda { |mod,par|
     # put code here using "mod" and "par" objects
     return true
 }
-hg.When.ModuleParameterIsChanging(module_updating_fn)
+hg.When.ModuleParameterChanged(module_updating_fn)
 hg.Program.GoBackground()
 ```
 
@@ -300,7 +302,7 @@ function can be called.
 
 ## Reacting to commands
 
-
+When the user click a button or any other control on a module widget, an [API](api/mig/overview.html) command request is sent to *HG*. 
 
 ```// TODO: ...```
 

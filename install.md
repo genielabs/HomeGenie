@@ -9,7 +9,8 @@ layout: main
 
 ## Windows
 
-Download _setup_ file and run it. Once installed, you can access HomeGenie by right clicking on its tray icon..
+Download *HomeGenie Windows Installer* and run it. Once installation process is completed, *HomeGenie* UI will be opened.
+The UI can be also opened by right clicking on the tray icon..
 
 ---
 
@@ -25,11 +26,9 @@ sudo gdebi homegenie-beta_1.1.r494_all.deb
 ```
 
 HomeGenie will be installed in the _/usr/local/bin/homegenie_ foder.
-Once installed, you can access HomeGenie opening the following URL in your web browser:
+Once installed, *HomeGenie* UI can be opened by entering the following URL in your web browser:
 ```http://<linux_box_address>/```
 (where ```<linux_box_address>``` is the name or ip of the host where homegenie is installed).
-
-**Note** *HomeGenie requires mono runtime version 3.2 or later.*
 
 ### Optional packages
 
@@ -41,6 +40,8 @@ sudo apt-get install libttspico-utils
 # Arduino™ programming from *HG* program editor
 sudo apt-get install arduino-mk, empty-expect
 ```
+
+**Note** *HomeGenie requires mono runtime version 3.2 or later.*
 
 ---
 
