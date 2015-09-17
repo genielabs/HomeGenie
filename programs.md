@@ -12,9 +12,9 @@ new devices and services into *HG* and extending system functionalities.<br/>
 
 ## Program Editor
 
-Program Editor can be accessed from the *Automation* section of the **Configure** menu. There, programs are conveniently
-organized into groups. New automation programs can be created by choosing a group and then selecting the *Add program*
-option from the *Action* menu located in the down-right corner.
+Program Editor can be accessed from the *Automation* section of the **Configure** menu. There, automation programs are
+conveniently organized into groups. New automation programs can be created by choosing a group and then selecting the
+*Add program* option from the *Action* menu located in the down-right corner.
 An automation program can be coded using one of the following programming languages:
 
 - C#
@@ -123,7 +123,7 @@ if (Scheduler.IsScheduling("0 7 * * *"))
 
 The use of these command is described later in this page.
 
-**Note:** when [Program.Run](api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) is called in the *Startup Code*,
+**NOTE:** when [Program.Run](api/ape/a00009.html#a34a937a2bc052615d27137c3663d10c6) is called in the *Startup Code*,
 the program's code will run only after that *Startup Code* reaches it's end. So it's a good practice not to put any
 long-time consuming operation or infinite loop in the *Startup Code*.
 <br/>
@@ -307,6 +307,7 @@ hg.Program.GoBackground()
 Automation programs can also raise events, so the system (and other programs as well) will acknowledge when a module has been updated.
 The function [Program.RaiseEvent](api/ape/a00009.html#af51db91ed13809da94337aac3c1053b7) is meant for that.
 
+<a name="commands"></a>
 ## Reacting to commands
 
 When the user click a button or any other control of a module widget, an [API](api/mig/overview.html) command request is

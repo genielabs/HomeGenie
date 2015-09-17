@@ -1,3 +1,5 @@
+---
+---
 /*!
  * Bootstrap v3.3.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
@@ -4257,7 +4259,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background: #fafafa url(/HomeGenie/images/header-bg.jpg) 0 0 repeat;
+  background: #fafafa url({{ site.baseurl }}/images/header-bg.jpg) 0 0 repeat;
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {

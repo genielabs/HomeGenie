@@ -1,5 +1,5 @@
 name: HomeGenie
-baseurl: '/'
+baseurl: '/HomeGenie'
 markdown: redcarpet
 markdown_ext:  markdown,mkdown,mkdn,mkd,md,html
 redcarpet:
