@@ -113,7 +113,7 @@ namespace HomeGenie.Data
         /// Gets the update time.
         /// </summary>
         /// <value>The update time.</value>
-        public DateTime UpdateTime { get; internal set; }
+        public DateTime UpdateTime { get; set; }
 
         [XmlIgnore]
         public bool NeedsUpdate { get; set; }

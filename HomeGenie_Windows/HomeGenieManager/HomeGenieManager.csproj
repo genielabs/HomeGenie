@@ -83,9 +83,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UPnP, Version=1.0.5087.3074, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UPnP, Version=1.0.5728.14268, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\HomeGenie\Externals\upnp\UPnP.dll</HintPath>
+      <HintPath>..\..\Externals\upnp\UPnP.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />

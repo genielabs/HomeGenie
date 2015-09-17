@@ -82,7 +82,7 @@ namespace HomeGenie.Data
         [JsonIgnore]
         public TsList<Store> Stores { get; set; }
 
-        public string RoutingNode { get; internal set; } // "<ip>:<port>" || ""
+        public string RoutingNode { get; set; } // "<ip>:<port>" || ""
 
         public Module()
         {
