@@ -9,7 +9,13 @@ layout: post
 
 *Automation Programs* can be used either for simple tasks like creating scenarios, or more complex tasks like integrating
 new devices and services into *HG* and extending system functionalities.<br/> 
-They can be coded using one of the following programming languages:
+
+## Program Editor
+
+Program Editor can be accessed from the *Automation* section of the **Configure** menu. There, programs are conveniently
+organized into groups. New automation programs can be created by choosing a group and then selecting the *Add program*
+option from the *Action* menu located in the down-right corner.
+An automation program can be coded using one of the following programming languages:
 
 - C#
 - Javascript
@@ -125,6 +131,7 @@ long-time consuming operation or infinite loop in the *Startup Code*.
 [Modules parameters](api/ape/a00004.html#a016f9d7512c4407acbfc2d7c72d02a17) and other structures such as
 [Program Store](api/ape/a00009.html#a111c3e247c9a22cf44e032bfb568f876) and [System Settings](api/ape/a00012.html).
 
+<a name="modules"></a>
 ## Virtual Modules, Program Module and Widgets
 
 Virtual Modules (or just modules) are used in *HG* as an abstraction for devices or services. So, each of them, represent
@@ -303,8 +310,8 @@ The function [Program.RaiseEvent](api/ape/a00009.html#af51db91ed13809da94337aac3
 ## Reacting to commands
 
 When the user click a button or any other control of a module widget, an [API](api/mig/overview.html) command request is
-sent to *HG*. A standard HTTP API request, follow the syntax:<br/>
-```api/<module_domain>/<module_address>/<command>[/<option_1>/../<option_n>]```<br/>
+sent to *HG*. A standard HTTP API request, follows the syntax:<br/>
+```/api/<module_domain>/<module_address>/<command>[/<option_1>/../<option_n>]```<br/>
 For example when clicking **On** and **Off** buttons on the widget of a **Z-Wave** switch with node id **5**, the following
 HTTP requests are made:
 
