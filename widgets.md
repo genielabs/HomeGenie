@@ -9,24 +9,33 @@ layout: post
 
 Widgets are reusable and composite user interface components used to display data and information of a [module](programs.html#modules)
 and that may also contain UI controls (such as buttons, sliders, ...) for interacting with them. 
-Widgets use [MVC](https://it.wikipedia.org/wiki/Model-View-Controller) design pattern, where the *View* is the HTML code
+Widgets use [MVC](https://it.wikipedia.org/wiki/Model-View-Controller) design pattern, where the *View* is the HTML text
 used for displaying the widget in the *UI*, the *Model* is small javascript code that access data of the bound module and
-renders them to the view, and the *Controller* is the automation program that receives commands from the View (upon user
-interaction) or other agents and implement the business logic of the module.
+renders them to the view, and the *Controller* is the automation program that [receives commands](programs.html#commands)
+from the View (upon user interaction) or other agents and implement the business logic of the module.
 
 ## Widget Editor
 
-So, while the [Program Editor](programs.html#commands) can be used to implement the *Controller* part in the [MVC](https://it.wikipedia.org/wiki/Model-View-Controller),
-the Widget Editor is used to implement the *View* and the *Model* part.
+So, while the *Program Editor* can be used to implement the *Controller* part in the [MVC](https://it.wikipedia.org/wiki/Model-View-Controller),
+the *Widget Editor* is used to implement the *View* and the *Model* part.
 Widget Editor can be accessed from the *Automation* section of the **Configure** menu. New widget can be created selecting
 the *Add widget* option from the *Action* menu located in the down-right corner.
-So as described above a widget is formed by two parts of code. The first, which represents the *View*, is HTML code.
-The second, which represents the *Model*, is Javascript code.
+So a widget is formed by two parts: the first, which represents the *View*, is HTML text; the second, which represents
+the *Model*, is Javascript code.
 
-## The View - HTML code
+The *Widget Editor* has a preview panel, just below the HTML editor, that will show a preview of the currently
+inserted HTML text. In order for it to work, a **bound module** has to be selected from the *"bind to module"* selector.
+The preview can then be updated by hitting ```CTRL+S``` keys or by clicking the *Preview* button.
 
-The widget's *View* is wrapped into an HTML container element (commonly a **div**) that must define the property
-```data-ui-field="widget"```.
+## The View - HTML
+
+When designing a widget's *View* a couple of guide-lines have to be considered:
+
+- do not use the ```id``` attribute for referencing HTML elements; use a ```data-ui-field``` attribute instead
+- prefer using **CSS** classes provided with *HG*, which are [jQuery Mobile CSS classes](https://api.jquerymobile.com/classes/) and the ones defined by
+[*HG* CSS](https://github.com/genielabs/HomeGenie/blob/master/BaseFiles/Common/html/css/my.css#L206)
+- since *HG UI* is based on [jQuery Mobile](http://jquerymobile.com/), prefer using this framework instead of plain HTML;
+other frameworks/plugins can also be used next to [jQuery Mobile](http://jquerymobile.com/), these are listed later on this chapter
 
 ### Example - Basic Widget container
 ```html
@@ -34,22 +43,58 @@ The widget's *View* is wrapped into an HTML container element (commonly a **div*
 <div data-ui-field="widget" 
      class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-a">
      <!-- widget content begin -->
-    <h1>Simple blank widget</h1>
-    <p>Put the HTML widget body here</p>
+    <h1>Simple widget with a button</h1>
+    <input data-ui-field="test-btn" type="button" class="ui-btn" />
+    <br/>
+    Module Name: <span data-ui-field="name">...</span>
      <!-- widget content end -->
 </div>
 ```
 
-**NOTE:** since *HG* UI is based on [jQuery Mobile](http://jquerymobile.com/), the *HTML* code of a widget can refer to
-[jQuery Mobile CSS classes](https://api.jquerymobile.com/classes/) and the ones defined by
-[*HG* CSS](https://github.com/genielabs/HomeGenie/blob/master/BaseFiles/Common/html/css/my.css#L206).
-When designing a widget is preferable to use these CSS classes, in order to mantain a coherent style in the *UI*.
+## The Model - Javascript
 
-```TODO: to be continued... ```
+The javascript code takes care of updating the data displayed in the widget and also of sending proper commands when
+the user click buttons and other controls (if any).
+This is implemented as a json object that is formatted as shown in the example below.
 
-## The Model - Javascript code
+### Example - Minimal javascript code for a widget
 
-```TODO: to be continued... ```
+```javascript
+[{
+  // use this field to assign a default image to the widget
+  IconImage: 'pages/control/widgets/homegenie/generic/images/icons/robot.png',
+
+  // this field is used for initializing the widget once loaded
+  Initialized: false,
+
+  // this method is called each time the module bound to this widget is updated
+  // put here the code for displaying module's data
+  RenderView: function (cuid, module) {
+    var container = $(cuid);
+    var widget = container.find('[data-ui-field=widget]');
+    var button = widget.find('[data-ui-field=test-btn]');
+    var name = widget.find('[data-ui-field=name]');
+    if (!this.Initialized) {
+        this.Initialized = true;
+        // register widget's event handlers
+        button.on('click', ButtonClicked);
+    }
+    name.html(module.Name);
+  },
+
+  ButtonClicked: function() {
+    // handler for the button click event here
+    // this will make an API request in most cases
+    $.get('/api/'+module.Domain+'/'+module.Address+'/Control.On', function(){
+        // request completed.
+    });
+  }
+}]
+```
+
+As shown in the *ButtonClicked* handler, in most cases, when the user click a control, an API request is made. The
+end-point of the request will be usually an automation program that is [listening](programs.html#commands) to API calls
+for that module domain.
 
 ## Frameworks and Plugins
 
