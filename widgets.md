@@ -1,5 +1,5 @@
 ---
-title: Editor
+title: Widgets
 category: ape
 layout: post
 ---
