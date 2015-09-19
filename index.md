@@ -1,5 +1,5 @@
 ---
-title: This is my title
+title: HomeGenie Dev Docs
 layout: main
 ---
 
@@ -33,4 +33,5 @@ of **.NET** framework and **C#** language.
 
 ## Software Diagram
 
-#### TODO: place diagram image here
+<br />
+<img src="https://raw.githubusercontent.com/genielabs/HomeGenie/master/HomeGenie_Diagram.png" />
