@@ -1333,23 +1333,20 @@ namespace HomeGenie.Service
 
         private void InitializeSystem()
         {
-            // initialize logging
-            //SetupLogging();
-
-            // setup web service handlers
+            // Setup web service handlers
             wshConfig = new Handlers.Config(this);
             wshAutomation = new Handlers.Automation(this);
             wshInterconnection = new Handlers.Interconnection(this);
             wshStatistics = new Handlers.Statistics(this);
 
-            // initialize MigService, gateways and interfaces
+            // Initialize MigService, gateways and interfaces
             migService = new MIG.MigService();
             migService.InterfaceModulesChanged += migService_InterfaceModulesChanged;
             migService.InterfacePropertyChanged += migService_InterfacePropertyChanged;
             migService.GatewayRequestPreProcess += migService_ServiceRequestPreProcess;
             migService.GatewayRequestPostProcess += migService_ServiceRequestPostProcess;
 
-            // setup other objects used in HG
+            // Setup other objects used in HG
             virtualMeter = new VirtualMeter(this);
         }
 

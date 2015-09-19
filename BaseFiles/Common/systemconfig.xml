@@ -75,6 +75,9 @@
                 <Option Name="HttpCacheIgnore.1" Value="^.*\/pages\/control\/widgets\/.*\.(js|html)$" />
                 <Option Name="HttpCacheIgnore.2" Value="^.*\/html\/index.html" />
                 <Option Name="UrlAlias.1" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
+                <Option Name="UrlAlias.2" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png" />
+                <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png" />
+                <Option Name="UrlAlias.4" Value="hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png" />
                 <Option Name="EnableFileCaching" Value="false" />
             </Options>
         </Gateway>

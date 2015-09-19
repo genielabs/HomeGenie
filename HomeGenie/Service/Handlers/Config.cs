@@ -1232,6 +1232,9 @@ namespace HomeGenie.Service.Handlers
                     webGateway.Options.Add(new Option("HttpCacheIgnore.1", "^.*\\/pages\\/control\\/widgets\\/.*\\.(js|html)$"));
                     webGateway.Options.Add(new Option("HttpCacheIgnore.2", "^.*\\/html\\/index.html"));
                     webGateway.Options.Add(new Option("UrlAlias.1", "api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events"));
+                    webGateway.Options.Add(new Option("UrlAlias.2", "hg/html/pages/control/widgets/homegenie/generic/images/socket_on.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_on.png"));
+                    webGateway.Options.Add(new Option("UrlAlias.3", "hg/html/pages/control/widgets/homegenie/generic/images/socket_off.png:hg/html/pages/control/widgets/homegenie/generic/images/switch_off.png"));
+                    webGateway.Options.Add(new Option("UrlAlias.4", "hg/html/pages/control/widgets/homegenie/generic/images/siren.png:hg/html/pages/control/widgets/homegenie/generic/images/siren_on.png"));
                     // TODO: EnableFileCaching value should be read from oldConfig.MIGService.EnableWebCache
                     webGateway.Options.Add(new Option("EnableFileCaching", "false"));
                     newConfig.MigService.Gateways.Add(webGateway);
