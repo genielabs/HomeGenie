@@ -85,16 +85,78 @@ This is implemented as a json object that is formatted as shown in the example b
   ButtonClicked: function() {
     // handler for the button click event here
     // this will make an API request in most cases
-    $.get('/api/'+module.Domain+'/'+module.Address+'/Control.On', function(){
-        // request completed.
+    // using jQuery
+    $.get('/api/'+module.Domain+'/'+module.Address+'/Control.On', function(res){
+        // request completed....
+    });
+    // or alternatively use HG Javascript API
+    // (see the table below for more HG Javascript API examples)
+    var ctrl = HG.Control.Modules;
+    ctrl.ApiCall(module.Domain, module.Address, 'Control.On', '', function(res){
+        // request completed...
     });
   }
 }]
 ```
 
-As shown in the *ButtonClicked* handler, in most cases, when the user click a control, an API request is made. The
+The only mandatory fields in the Javascript code are *IconImage* and *RenderView*. 
+
+**IconImage** is the image used to identify the widget in the *UI*. See
+[List of HG UI icons](https://github.com/genielabs/HomeGenie/tree/master/BaseFiles/Common/html/pages/control/widgets/homegenie/generic/images).<br />
+
+**RenderView** if a function that *HG UI* will call everytime the module is updated, passing to it the **id** of the widget 
+container (*cuid*) and a reference to the bound module object (*module*).<br/>
+The module object has the following fields: ```Domain```, ```Address```, ```Name```, ```Description```, ```Properties```.
+
+As shown in the *ButtonClicked* handler, in most cases, when the user click a widget control, an API request is made. The
 end-point of the request will be usually an automation program that is [listening](programs.html#commands) to API calls
 for that module domain.
+
+### HG Javascript API - Common functions
+```javascript
+// use the "Utility" namespace
+var utils = HG.WebApp.Utility;
+
+// get a reference to a module by a given <domain> and <address>
+var mod = utils.GetModuleByDomainAddress(domain, address);
+
+// get a module parameter by name
+var level = utils.GetModulePropertyByName(mod, 'Status.Level');
+console.log('Module name = ' + mod.Name + ' Status.Level = ' + mod.Value);
+
+// show a confirmation request popup
+utils.ConfirmPopup('Delete item', 'Are you sure?', function(confirmed) {
+    if (confirmed) {
+        // the action was confirmed...
+    } else {
+        // action canceled
+    }
+});
+
+// format a date 
+var today = utils.FormatDate(new Date());
+// format a date with time
+var todayTime = utils.FormatDateTime(new Date());
+
+// use the "Control" namespace
+var control = HG.Control.Modules;
+
+// call HG API function
+control.ApiCall(domain, address, command, options, function(response){
+    // handle response here...
+});
+
+// use the "Programs" namespace
+var progs = HG.Automation.Programs;
+
+// Run a program
+progs.Run(programId, options, fuction(response){
+    // handle response here...
+});
+```
+
+See [HG Javascript API on github](https://github.com/genielabs/HomeGenie/tree/master/BaseFiles/Common/html/js/api) for a complete
+list of available namespaces and commands.
 
 ## Frameworks and Plugins
 
