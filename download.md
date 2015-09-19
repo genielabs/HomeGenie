@@ -5,11 +5,11 @@ layout: main
 
 # Download
 
-### HomeGenie Server Pre-release
+### HomeGenie Server v1.1
 
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/luxicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r494_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie 1.1 beta rev. 494</strong> </a>
+    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r495_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r495-pre</strong> </a>
     <br>
     Linux .deb Package
     <br>
@@ -17,28 +17,7 @@ layout: main
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:25px">
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r494.tgz/download"> <strong style="text-decoration: underline;">HomeGenie 1.1 beta rev. 494</strong> </a>
-    <br>
-    Platform agnostic .tgz archive
-    <br>
-    Other Mono .NET systems
-</p>
-
-<br clear="all"/>
-
-### HomeGenie Server
-
-<p style="float:left;text-wrap:no-wrap;margin-left:15px">
-    <img src="images/logos/luxicon.png" alt="" style="margin-right:10px" width="82" align="left">
-    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.00.r491_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie 1.00 beta rev. 491</strong> </a>
-    <br>
-    Linux .deb Package
-    <br>
-    Ubuntu / Debian derivatives
-</p>
-<p style="float:left;text-wrap:no-wrap;margin-left:15px">
-    <img src="images/logos/macicon.png" alt="" style="margin-right:10px" width="82" align="left">
-    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_00_beta_r491.tgz/download"> <strong style="text-decoration: underline;">HomeGenie 1.00 beta rev. 491</strong> </a>
+    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r495.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r495-pre</strong> </a>
     <br>
     Platform agnostic .tgz archive
     <br>
@@ -46,7 +25,36 @@ layout: main
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
-    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_00_beta_r491.exe/download"> <strong style="text-decoration: underline;">HomeGenie 1.00 beta rev. 491</strong> </a>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r495.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r495-pre</strong> </a>
+    <br>
+    Windows Setup Installer
+    <br>
+    XP / Vista / Win7 / Win8
+</p>
+
+<br clear="all"/>
+
+### HomeGenie Server v1.0
+
+<p style="float:left;text-wrap:no-wrap;margin-left:15px">
+    <img src="images/logos/luxicon.png" alt="" style="margin-right:10px" width="82" align="left">
+    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.00.r491_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.0 beta r491</strong> </a>
+    <br>
+    Linux .deb Package
+    <br>
+    Ubuntu / Debian derivatives
+</p>
+<p style="float:left;text-wrap:no-wrap;margin-left:50px">
+    <img src="images/logos/macicon.png" alt="" style="margin-right:10px" width="82" align="left">
+    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_00_beta_r491.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.0 beta r491</strong> </a>
+    <br>
+    Platform agnostic .tgz archive
+    <br>
+    Other Mono .NET systems
+</p>
+<p style="float:left;text-wrap:no-wrap;margin-left:15px">
+    <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
+    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_00_beta_r491.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.0 beta r491</strong> </a>
     <br>
     Windows Setup Installer
     <br>
