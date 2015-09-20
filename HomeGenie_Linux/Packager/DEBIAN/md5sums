@@ -3,7 +3,7 @@
 513c0ab6c041976fe0bfc13a0c3f1690  usr/local/bin/homegenie/websocket-sharp.dll
 a2cfe6b2fa0fe02e41ed5aa6a592376e  usr/local/bin/homegenie/UnitsNet.dll
 cc27215f3e44078c573b0018b7f6d4c5  usr/local/bin/homegenie/homegenie_stats.db
-e21a7afb56b0bc6f5b04bcd0d59195cb  usr/local/bin/homegenie/MIG.dll
+c4ec073c875db22d639dfec575798552  usr/local/bin/homegenie/MIG.dll
 d4769a1838a1c0026d57ec64f6c55cd6  usr/local/bin/homegenie/startup_debug.sh
 fd387d7e07d27394fb2fa2d323ff8c5c  usr/local/bin/homegenie/CREDITS.TXT
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
@@ -907,7 +907,7 @@ dc00ffd52a33bdf27dc2d459dc2d7943  usr/local/bin/homegenie/html/pages/control/wid
 36d2dd4e56d3a1533e488f14017be978  usr/local/bin/homegenie/html/pages/control/widgets/DaniMail/fibaro/rgbw.html
 c4590b9781c12b91be0e9e3722444061  usr/local/bin/homegenie/html/pages/control/_control.js
 d427dfc02f1f6277e41bd22f0462b618  usr/local/bin/homegenie/html/pages/events/main.html
-e61dd16e2516f649819beb4551d4d844  usr/local/bin/homegenie/html/pages/events/_events.js
+0e13f0799f9a9817eb8cc1e1c4aca3fa  usr/local/bin/homegenie/html/pages/events/_events.js
 a76e3bca4fbe34d3dbc2a130c5e3f17f  usr/local/bin/homegenie/html/pages/apps/netplay/_slideshow.js
 110a74cdaba4da7a8dbd471e4e90cc8b  usr/local/bin/homegenie/html/pages/apps/netplay/slideshow.html
 59c62b496ded33ba38f2b2354f792ac3  usr/local/bin/homegenie/html/pages/header.html
