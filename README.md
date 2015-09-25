@@ -1,4 +1,8 @@
-## Documentation
+## Presentation Site and User's Guide
+
+http://www.homegenie.it
+
+## Developer Docs
 
 https://genielabs.github.io/HomeGenie
 

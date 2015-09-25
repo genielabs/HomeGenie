@@ -1,4 +1,4 @@
-##Add-ons for HomeGenie / MIG 
+##Add-ons for MIG / HomeGenie v1.0 (prior to r494)
 
 
 **MIG-MqttBroker**

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r494</Version>
+  <Version>1.1 beta r496</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>   - Integrated new MIG library https://github.com/genielabs/mig-service-dotnet
   - General speed and performance improvements
@@ -23,5 +23,5 @@
   - Added Host Header configuration (adapted from pull request #163)
   - Added "IR Remote Controller" automation program plugin (contributed by amin)
   - Added feature field of type "capture" (init as "capture:[parameter_to_capture]")</ReleaseNote>
-  <ReleaseDate>2015-09-08T10:12:22.0000Z</ReleaseDate>
+  <ReleaseDate>2015-09-20T12:06:17.0000Z</ReleaseDate>
 </ReleaseInfo>

@@ -56,7 +56,8 @@ HG.WebApp.Events.Setup = function () {
                         text: '',
                         timestamp: ''
                     });
-        //setTimeout(HG.WebApp.Events.Setup, 5000);
+        es.close();
+        setTimeout(HG.WebApp.Events.Setup, 1);
     };
     es.onmessage = function (e) {
         var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);

@@ -594,6 +594,17 @@ namespace HomeGenie.Automation.Scripting
         }
 
         /// <summary>
+        /// Display UI notification message from current program.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="message">Formatted message.</param>
+        /// <param name="paramList">Format parameter list.</param>
+        public ProgramHelper Notify(string title, string message, params object[] paramList)
+        {
+            return this.Notify(title, String.Format(message, paramList));
+        }
+
+        /// <summary>
         /// Playbacks a synthesized voice message from speaker.
         /// </summary>
         /// <param name="sentence">Message to output.</param>
