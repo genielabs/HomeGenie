@@ -9,7 +9,7 @@ layout: main
 
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/luxicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r496_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r496-pre</strong> </a>
+    <a title="HomeGenie for Debian Linux" href="https://sourceforge.net/projects/homegenie/files/homegenie-beta_1.1.r497_all.deb/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r497-pre</strong> </a>
     <br>
     Linux .deb Package
     <br>
@@ -17,7 +17,7 @@ layout: main
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:25px">
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
-    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r496.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r496-pre</strong> </a>
+    <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r497.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r497-pre</strong> </a>
     <br>
     Platform agnostic .tgz archive
     <br>
@@ -25,7 +25,7 @@ layout: main
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
-    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r496.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r496-pre</strong> </a>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://sourceforge.net/projects/homegenie/files/HomeGenie_1_1_beta_r497.exe/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r497-pre</strong> </a>
     <br>
     Windows Setup Installer
     <br>
