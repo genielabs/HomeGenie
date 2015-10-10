@@ -50,6 +50,19 @@ namespace HomeGenie.Data
             /// <value>The timestamp.</value>
             public readonly DateTime Timestamp;
 
+            /// <summary>
+            /// Gets the unix timestamp.
+            /// </summary>
+            /// <value>The unix timestamp.</value>
+            public double UnixTimestamp
+            {
+                get
+                {
+                    var uts = (Timestamp - new DateTime(1970, 1, 1, 0, 0, 0));
+                    return uts.TotalMilliseconds;
+                }
+            }
+
             public StatValue(double value, DateTime timestamp)
             {
                 Value = value;
@@ -59,7 +72,8 @@ namespace HomeGenie.Data
 
         private List<StatValue> statValues;
         private TsList<StatValue> historyValues;
-        private int historyLimit = 10;
+        // historyLimit is expressed in minutes
+        private int historyLimit = 60 * 24;
         private StatValue lastEvent, lastOn, lastOff;
 
         public ValueStatistics()
@@ -152,10 +166,10 @@ namespace HomeGenie.Data
             }
             // insert current value into history and so update "Current" to "value"
             historyValues.Insert(0, new StatValue(value, timestamp));
-            // keeep size within historyLimit
-            while (historyValues.Count > historyLimit)
+            // keeep size within historyLimit (minutes)
+            while ((DateTime.UtcNow - historyValues[historyValues.Count - 1].Timestamp).TotalMinutes > historyLimit)
             {
-                historyValues.RemoveAt(historyValues.Count - 1);
+                historyValues.RemoveAll(sv => (DateTime.UtcNow - sv.Timestamp).TotalMinutes > historyLimit);
             }
         }
 

@@ -3,7 +3,7 @@
 513c0ab6c041976fe0bfc13a0c3f1690  usr/local/bin/homegenie/websocket-sharp.dll
 a2cfe6b2fa0fe02e41ed5aa6a592376e  usr/local/bin/homegenie/UnitsNet.dll
 cc27215f3e44078c573b0018b7f6d4c5  usr/local/bin/homegenie/homegenie_stats.db
-c4ec073c875db22d639dfec575798552  usr/local/bin/homegenie/MIG.dll
+fe650ec2629adedff34285e376029561  usr/local/bin/homegenie/MIG.dll
 d4769a1838a1c0026d57ec64f6c55cd6  usr/local/bin/homegenie/startup_debug.sh
 fd387d7e07d27394fb2fa2d323ff8c5c  usr/local/bin/homegenie/CREDITS.TXT
 ed3022822cd3dc3348bb51dc054f1574  usr/local/bin/homegenie/IronPython.dll
@@ -110,7 +110,7 @@ f85bd266c0d92a420ea12d5835156db8  usr/local/bin/homegenie/programs/7.dll
 f44705a2e7251541db32e4761cf6bae6  usr/local/bin/homegenie/programs/41.dll
 8efb9babdfbfb500e59f0cc1c10d372c  usr/local/bin/homegenie/programs/16.dll
 6e911e0a393f7d7d6f2de035fa4f883b  usr/local/bin/homegenie/Microsoft.Scripting.Metadata.dll
-960dbebe4fffdb9e7b261db8ec5fff86  usr/local/bin/homegenie/HomeGenie.exe.mdb
+f67e68b67bfbbe386ed8689c36878cee  usr/local/bin/homegenie/HomeGenie.exe.mdb
 09840f0bf937dcb3a448f1fb811595f1  usr/local/bin/homegenie/NetClientLib.dll.mdb
 198a54b1a3bba2d5300270ea6f1b9cb5  usr/local/bin/homegenie/Common.Logging.dll
 037a39c0e60471e2ad6a155519aabaf8  usr/local/bin/homegenie/Common.dll.mdb
@@ -125,7 +125,7 @@ b367f1a0f7ba435a0c92f591f4ae0070  usr/local/bin/homegenie/Raspberry.IO.Component
 027d050500b7bb55a5ff9ae25aff0168  usr/local/bin/homegenie/Linux.dll
 702ba55b7993d65eee480c723c150a1d  usr/local/bin/homegenie/Raspberry.IO.InterIntegratedCircuit.dll
 2074c256e8b7a372e28490a436a8e04d  usr/local/bin/homegenie/NLog.dll
-121cec072887a24f75ef62fb0c5095f3  usr/local/bin/homegenie/HISTORY.TXT
+aa44e89ab7434db90f1ca314ff6e57f8  usr/local/bin/homegenie/HISTORY.TXT
 3435a8ca2eb89ec7fc13a463590121c0  usr/local/bin/homegenie/README.TXT
 506504aff1234e17dadc846589373478  usr/local/bin/homegenie/programs.xml
 31f6a40a74ca338743c99a13fbb093c2  usr/local/bin/homegenie/modules.xml
@@ -1660,10 +1660,10 @@ fae388069ed7e156c7a7ac1667c4923d  usr/local/bin/homegenie/html/ui/widgets/text.h
 b8459e32556b6e692fae8f9ff81817c9  usr/local/bin/homegenie/html/ui/core/popup.cronwizard.html
 40acf64097f759ba725a1afb6f7075b8  usr/local/bin/homegenie/html/ui/core/popup.cronwizard.js
 8c62c286d03fd664a54dafcffaeb5fe3  usr/local/bin/homegenie/Raspberry.IO.SerialPeripheralInterface.dll
-327688aae53e9b9317418d537311d78c  usr/local/bin/homegenie/ADDONS.md
+25621c4774b51e016607f68a90e291f9  usr/local/bin/homegenie/ADDONS.md
 88de12a88105d717cf4765238f1eebc8  usr/local/bin/homegenie/startup.sh
-e2a5c80a71daaca4d5f23cba74ab4201  usr/local/bin/homegenie/HomeGenie.exe
-d005b8a75f6c20f494e88d7471a7a24d  usr/local/bin/homegenie/release_info.xml
+078e93ffb7c7922b8cd4e533e70ab3a6  usr/local/bin/homegenie/HomeGenie.exe
+7aeec49f6d40db2792e321660ba53d18  usr/local/bin/homegenie/release_info.xml
 e83a7949cb9a034b84156035d512c30c  usr/local/bin/homegenie/NetClientLib.dll
 5405413fff79b8d9c747aa900f60f082  usr/local/bin/homegenie/sqlite3.dll
 272aa48b0bfd90305c6c27b4f4538566  usr/local/bin/homegenie/scheduler.xml

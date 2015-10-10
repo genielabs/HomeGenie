@@ -345,28 +345,7 @@ namespace HomeGenie.Automation
 
         public void SignalPropertyChange(object sender, Module module, MigEvent eventData)
         {
-            ModuleParameter parameter = null;
-            try
-            {
-                // Lookup for the existing module parameter
-                parameter = Utility.ModuleParameterGet(module, eventData.Property);
-                if (parameter == null)
-                {
-                    parameter = new ModuleParameter() {
-                        Name = eventData.Property,
-                        Value = eventData.Value.ToString()
-                    };
-                    module.Properties.Add(parameter);
-                }
-                else
-                {
-                    parameter.Value = eventData.Value.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                HomeGenieService.LogError(ex);
-            }
+            ModuleParameter parameter = Utility.ModuleParameterGet(module, eventData.Property);
 
             var routedEvent = new RoutedEvent() {
                 Sender = sender,
