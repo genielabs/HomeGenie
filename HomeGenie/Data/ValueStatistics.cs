@@ -152,6 +152,7 @@ namespace HomeGenie.Data
             // so "Current" is holding previous value right now
             if (Current.Value != value)
             {
+                lastEvent = new StatValue(Current.Value, Current.Timestamp);
                 if (value == 0 && lastEvent.Value > 0)
                 {
                     lastOn = lastEvent;
@@ -162,7 +163,6 @@ namespace HomeGenie.Data
                     lastOff = lastEvent;
                     lastOn = new StatValue(value, timestamp);
                 }
-                lastEvent = new StatValue(Current.Value, Current.Timestamp);
             }
             // insert current value into history and so update "Current" to "value"
             historyValues.Insert(0, new StatValue(value, timestamp));
