@@ -456,13 +456,13 @@ HG.WebApp.Statistics.Refresh = function () {
 			    }
 			    else
 			    {
-			        $.ajax({
-			            url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDouble/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
-			            type: 'GET',
-			            success: function (data) {
-			                var name = '';
-	                        var graph_data = [];
-	 		                var stats = eval(data);
+                    $.ajax({
+                        url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Statistics/Parameter.StatsDouble/' + HG.WebApp.Statistics._CurrentParameter + '/' + HG.WebApp.Statistics._CurrentModule + '/' + dfrom.getTime() + '/' + dto.getTime(),
+                        type: 'GET',
+                        success: function (data) {
+                            var name = '';
+                            var graph_data = [];
+                            var stats = eval(data);
 	                        if(oneDay == true)
 	                        {
 	                           tformat = '%H';

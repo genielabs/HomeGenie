@@ -54,12 +54,10 @@ namespace HomeGenie.Service.Handlers
                 var counter = homegenie.Statistics.GetTotalCounter(migCommand.GetOption(0), 3600);
                 request.ResponseData = new ResponseText(counter.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture));
                 break;
-
             case "Global.TimeRange":
                 var totalRange = homegenie.Statistics.GetDateRange();
                 request.ResponseData = "{ \"StartTime\" : \"" + DateToJavascript(totalRange.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\", \"EndTime\" : \"" + DateToJavascript(totalRange.TimeEnd).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "\" }";
                 break;
-
             case "Database.Reset":
                 homegenie.Statistics.ResetDatabase();
                 break;
@@ -250,10 +248,17 @@ namespace HomeGenie.Service.Handlers
                 //
                 dateStart = JavascriptToDate(long.Parse(migCommand.GetOption(2)));
                 dateEnd = JavascriptToDate(long.Parse(migCommand.GetOption(3)));
-                var daysAverages = new List<StatisticsEntry>[1];
+                var daysAverages = new List<StatisticsEntry>[2];
                 daysAverages[0] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "", dateStart, dateEnd);
+                daysAverages[1] = homegenie.Statistics.GetHourlyStats(domain, address, migCommand.GetOption(0), "MaxDay", dateStart, dateEnd);
                 response += "[ ";
                 foreach (var entry in daysAverages[0])
+                {
+                    response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
+                }
+                response = response.TrimEnd(',');
+                response += " ],[ ";
+                foreach (var entry in daysAverages[1])
                 {
                     response += "[" + DateToJavascriptLocal(entry.TimeStart).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "," + entry.Value.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture) + "],";
                 }
