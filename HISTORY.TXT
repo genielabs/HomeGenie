@@ -1,5 +1,12 @@
 ﻿RELEASE HISTORY
 
+10/10/2015 v1.1-beta.497
+    - Enhanced parameter statistics now holding up to 1 day of history (HistoryLimit is now expressed in minutes)
+    - Fixed duplicated event raising causing also issues with History/Statistics (#228)
+    - Added new API command /api/HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/<domain>/<address>/<parameter>
+    - Added new API command /api/HomeAutomation.HomeGenie/Config/Modules.ParameterGet/<domain>/<address>/<parameter> (should close issue #206)
+    - Optimized SSE
+
 20/09/2015 v1.1-beta.496
     - Integrated new MIG library https://github.com/genielabs/mig-service-dotnet
     - General speed and performance improvements

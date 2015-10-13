@@ -586,6 +586,38 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Modules.ParameterGet":
+                try
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    var parameter = Utility.ModuleParameterGet(module, migCommand.GetOption(2));
+                    if (parameter != null)
+                        request.ResponseData = JsonConvert.SerializeObject(parameter, Formatting.Indented);
+                    else
+                        request.ResponseData = new ResponseText("ERROR: Unknown parameter '" + migCommand.GetOption(2) + "'");
+                }
+                catch (Exception ex)
+                {
+                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                }
+                break;
+
+            case "Modules.StatisticsGet":
+                try
+                {
+                    var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    var parameter = Utility.ModuleParameterGet(module, migCommand.GetOption(2));
+                    if (parameter != null)
+                        request.ResponseData = JsonConvert.SerializeObject(parameter.Statistics, Formatting.Indented);
+                    else
+                        request.ResponseData = new ResponseText("ERROR: Unknown parameter '" + migCommand.GetOption(2) + "'");
+                }
+                catch (Exception ex)
+                {
+                    request.ResponseData = new ResponseText("ERROR: \n" + ex.Message + "\n\n" + ex.StackTrace);
+                }
+                break;
+
             case "Modules.List":
                 try
                 {
