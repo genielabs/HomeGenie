@@ -34,13 +34,15 @@ HG.WebApp.SystemSettings.InitializePage = function () {
                 .animate({ borderColor: "#FFFFFF" }, 250);
         } else {
             importPopup.popup('close');
-            $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
-            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/HomeAutomation.HomeGenie/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
-                $.mobile.loading('hide');
-                downloadUrl.val('');
-                var response = eval(arguments[2].responseText)[0];
-                HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
-            });
+            setTimeout(function() {
+                $.mobile.loading('show', { text: 'Downloading, please wait...', textVisible: true, html: '' });
+                $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interface.Import/'+encodeURIComponent(downloadUrl.val()), function(data){
+                    $.mobile.loading('hide');
+                    downloadUrl.val('');
+                    var response = $.parseJSON(arguments[2].responseText);
+                    HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
+                });
+            }, 1000);
         }
     });
     uploadButton.on('click', function () {
@@ -63,7 +65,7 @@ HG.WebApp.SystemSettings.InitializePage = function () {
         var response = uploadFrame[0].contentWindow.document.body;
         if (typeof response != 'undefined' && response != '' && (response.textContent || response.innerText)) {
             try {
-                response = eval(response.textContent || response.innerText)[0];
+                response = $.parseJSON(response.textContent || response.innerText);
                 HG.WebApp.SystemSettings.AddonInstall(response.ResponseValue);
             } catch (e) { }
         }
@@ -76,7 +78,7 @@ HG.WebApp.SystemSettings.AddonInstall = function(text) {
     HG.WebApp.Utility.ConfirmPopup(HG.WebApp.Locales.GetLocaleString('systemsettings_addonsinstall_title', 'Install add-on?'), '<pre>'+text+'</pre>', function(confirm){
         if (confirm) {
             $.mobile.loading('show', { text: 'Installing, please wait...', textVisible: true, html: '' });
-            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/HomeAutomation.HomeGenie/Config/Interface.Install', function(data){
+            $.get('/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interface.Install', function(data){
                 HG.WebApp.SystemSettings.ListInterfaces();        
                 $.mobile.loading('hide');
             });
