@@ -407,7 +407,8 @@ namespace HomeGenie.Automation.Scripting
                         webClient.Credentials = networkCredential;
                     }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                    webClient.Headers.Add(customHeaders);
+                    if (customHeaders.Count > 0)
+                        webClient.Headers.Add(customHeaders);
                     if (this.method == "")
                     {
                         returnvalue = webClient.DownloadString(this.webServiceUrl);
@@ -492,6 +493,8 @@ namespace HomeGenie.Automation.Scripting
                         webClient.Credentials = networkCredential;
                     }
                     webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                    if (customHeaders.Count > 0)
+                        webClient.Headers.Add(customHeaders);
                     responseBytes = webClient.DownloadData(this.webServiceUrl);
                 }
                 catch (Exception ex)
