@@ -534,4 +534,58 @@ namespace HomeGenie.Service
             }
         }
     }
+
+    public class ConsoleRedirect : TextWriter
+    {
+        private string lineBuffer = "";
+
+        public Action<string> ProcessOutput;
+
+        public override void Write(string message)
+        {
+            string newLine = new string(CoreNewLine);
+            if (message.IndexOf(newLine) >= 0)
+            {
+                string[] parts = message.Split(CoreNewLine);
+                if (message.StartsWith(newLine))
+                    this.WriteLine(this.lineBuffer);
+                else
+                    parts[0] = this.lineBuffer + parts[0];
+                this.lineBuffer = "";
+                if (parts.Length > 1 && !parts[parts.Length - 1].EndsWith(newLine))
+                {
+                    this.lineBuffer += parts[parts.Length - 1];
+                    parts[parts.Length - 1] = "";
+                }
+                foreach (var s in parts)
+                {
+                    if (!String.IsNullOrWhiteSpace(s))
+                        this.WriteLine(s);
+                }
+                message = "";
+            }
+            this.lineBuffer += message;
+        }
+        public override void WriteLine(string message)
+        {
+            if (ProcessOutput != null && !string.IsNullOrWhiteSpace(message))
+            {
+                // log entire line into the "Domain" column
+                //SystemLogger.Instance.WriteToLog(new HomeGenie.Data.LogEntry() {
+                //    Domain = "# " + this.lineBuffer + message
+                //});
+                ProcessOutput(this.lineBuffer + message);
+            }
+            this.lineBuffer = "";
+        }
+
+        public override System.Text.Encoding Encoding
+        {
+            get
+            {
+                return UTF8Encoding.UTF8;
+            }
+        }
+
+    }
 }

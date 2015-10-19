@@ -118,9 +118,24 @@ Program.GoBackground();</ScriptSource>
     <Name>Level Memory</Name>
     <Description>Store and recall last dimmer level when device is switched on.</Description>
     <Group>Lights</Group>
-    <Features />
-    <ActivationTime>2015-09-15T07:38:50.209948Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory</Property>
+        <Description>Recall last light level when switched on</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Dimmer</ForTypes>
+        <Property>HomeGenie.LevelMemory.SimulateOnly</Property>
+        <Description>Simulate only</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2015-10-18T13:42:07.528425Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -240,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:10.526933Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:08.044405Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -413,7 +428,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:11.027242Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:08.543847Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -485,7 +500,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:11.526307Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:09.032305Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1086,7 +1101,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:12.022618Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:09.534439Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1133,7 +1148,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:12.530343Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:10.038109Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1211,7 +1226,8 @@ Program.GoBackground();
     <Commands />
     <ScriptCondition>Program.UseWidget("homegenie/generic/securitysystem");
 
-Program.AddFeature("", "Sensor,DoorWindow", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox");
+Program.AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecuritySensor", "Use as Security Sensor", "checkbox");
+Program.AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecurityTriggerHome", "Also trigger when armed Home", "checkbox");
 Program.AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox");
 
 Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "text");
@@ -1228,11 +1244,36 @@ Program.Run();
     <ScriptSource>//
 // init program parameters
 //
-Program.RaiseEvent("HomeGenie.SecurityArmed", "0", "Security System");
+var STATUS_DISARMED = "Disarmed";
+var STATUS_ARMED_AWAY = "Away";
+var STATUS_ARMED_HOME = "Home";
+
+Program.RaiseEvent("HomeGenie.SecurityArmed", STATUS_DISARMED, "Security System");
 Program.Parameter("HomeGenie.SecurityTriggered").Value = "0";
 Program.Parameter("Status.Level").Value = "0";
 
-Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
+// Events History
+var history = new List&lt;dynamic&gt;();
+var historyLimit = 24; // hours
+var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, param)=&gt;{
+  dynamic evt = new ExpandoObject();
+  evt.Domain = mod.Domain;
+  evt.Address = mod.Address;
+  evt.Name = mod.Name;
+  evt.Parameter = param.Name;
+  evt.Value = param.Value;
+  evt.Timestamp = param.UpdateTime;
+  // remove any previous event of the same type (the history only keep the last occurrence of a same event)
+  history.RemoveAll(e =&gt; e.Domain == evt.Domain &amp;&amp; e.Address == evt.Address &amp;&amp; e.Parameter == evt.Parameter &amp;&amp; e.Value == evt.Value);    
+  history.Add(evt);
+  // keeep size within historyLimit (minutes)
+  while ((DateTime.UtcNow - history[history.Count - 1].Timestamp).TotalHours &gt; historyLimit)
+  {
+    history.RemoveAll(sv =&gt; (DateTime.UtcNow - sv.Timestamp).TotalHours &gt; historyLimit);
+  }  
+});
+
+var _armdisarm = new Action&lt;bool&gt;((armHome)=&gt;{
   Program.RunAsyncTask(()=&gt; {
     if (Program.Parameter("Status.Level").Value == "0")
     {
@@ -1244,7 +1285,12 @@ Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
       // arming
       Pause( Program.Option("System.ArmDelay").DecimalValue );
     }
-    Program.RaiseEvent("HomeGenie.SecurityArmed", Program.Parameter("Status.Level").Value, "Security System");
+    var status = "";
+    if (Program.Parameter("Status.Level").Value == "0")
+      status = STATUS_DISARMED;
+    else
+      status = (armHome ? STATUS_ARMED_HOME : STATUS_ARMED_AWAY);
+    Program.RaiseEvent("HomeGenie.SecurityArmed", status, "Security System");
     // run armed/disarmed program
     if (Program.Parameter("Status.Level").Value != "0")
     {
@@ -1263,41 +1309,50 @@ Func&lt;bool&gt; _armdisarm = new Func&lt;bool&gt;(()=&gt;{
       }
     }
   });
-  return true;
 });
 
 // module events handling
 When.ModuleParameterChanged((module, parameter)=&gt; {
-  if (Program.Parameter("HomeGenie.SecurityArmed").Value == "1")
+  bool moduleAlarmed = false;
+  if (module.HasFeature("HomeGenie.SecuritySensor") 
+      &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
+      &amp;&amp; (   parameter.Name == "Status.Level"
+          || parameter.Name == "Status.DoorLock"
+          || parameter.Name == "Sensor.Generic"
+          || parameter.Name == "Sensor.Alarm" 
+          || parameter.Name == "Sensor.Tamper" 
+          || parameter.Name == "Sensor.MotionDetect" 
+          || parameter.Name == "Sensor.DoorWindow"
+          || parameter.Name == "Sensor.Flood" 
+          || parameter.Name == "Sensor.Smoke" 
+          || parameter.Name == "Sensor.Heat" 
+          || parameter.Name == "Sensor.CarbonMonoxide" 
+          || parameter.Name == "Sensor.CarbonDioxide" )) 
   {
-    if (module.HasFeature("HomeGenie.SecuritySensor") 
-        &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value != "1"
-        &amp;&amp; (   parameter.Name == "Status.Level"
-            || parameter.Name == "Sensor.Generic"
-            || parameter.Name == "Sensor.Tamper" 
-            || parameter.Name == "Sensor.MotionDetect" 
-            || parameter.Name == "Sensor.DoorWindow"
-            || parameter.Name == "Sensor.Flood" 
-            || parameter.Name == "Sensor.Smoke" 
-            || parameter.Name == "Sensor.Heat" 
-            || parameter.Name == "Sensor.CarbonMonoxide" 
-            || parameter.Name == "Sensor.CarbonDioxide" ) 
-        &amp;&amp; parameter.DecimalValue &gt; 0)
+    AddHistoryEvent(module.Instance, parameter);
+    if (parameter.DecimalValue &gt; 0 &amp;&amp; Program.Parameter("HomeGenie.SecurityArmed").Value != STATUS_DISARMED) 
     {
-      Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
-      Program.Parameter("HomeGenie.SecurityTriggerSource").Value = 
-        module.Instance.Name + " " + parameter.Name + " (" +
-        module.Instance.Domain + "." +
-        module.Instance.Address + ")";
-
-      var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
-      if (triggeredProgram != "")
-      {
-        Program.Run(triggeredProgram);
-      }
-
-      return false;
+      if (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_AWAY ||
+          (Program.Parameter("HomeGenie.SecurityArmed").Value == STATUS_ARMED_HOME &amp;&amp; module.HasFeature("HomeGenie.SecurityTriggerHome")))
+        moduleAlarmed = true;      
     }
+  }
+
+  if (moduleAlarmed)
+  {
+    Program.RaiseEvent("HomeGenie.SecurityTriggered", "1", "Security System");
+    Program.Parameter("HomeGenie.SecurityTriggerSource").Value = 
+      module.Instance.Name + " " + parameter.Name + " (" +
+      module.Instance.Domain + "." +
+      module.Instance.Address + ")";
+
+    var triggeredProgram = Program.Option("Trigger.TriggeredProgram").Value;
+    if (triggeredProgram != "")
+    {
+      Program.Run(triggeredProgram);
+    }
+
+    return false;
   }
   return true;
 });
@@ -1317,15 +1372,25 @@ When.WebServiceCallReceived(Program.Module.Domain + "/" + Program.Module.Address
       switch(command)
       {
         case "Control.On":
-        Program.RaiseEvent("Status.Level", "1", "Security System");
-        _armdisarm();
-        res = "{ 'ResponseValue' : 'ARMED' }";
-        break;
+        case "Control.ArmAway":
+        	Program.RaiseEvent("Status.Level", "1", "Security System");
+        	_armdisarm(false);
+        	res = "{ 'ResponseValue' : 'ARMING AWAY' }";
+        	break;
+        case "Control.ArmHome":
+        	Program.RaiseEvent("Status.Level", "1", "Security System");
+        	_armdisarm(true);
+        	res = "{ 'ResponseValue' : 'ARMING HOME' }";
+        	break;
         case "Control.Off":
-        Program.RaiseEvent("Status.Level", "0", "Security System");
-        _armdisarm();
-        res = "{ 'ResponseValue' : 'DISARMED' }";
-        break;
+        case "Control.Disarm":
+        	Program.RaiseEvent("Status.Level", "0", "Security System");
+        	_armdisarm(false);
+        	res = "{ 'ResponseValue' : 'DISARMED' }";
+        	break;
+        case "Events.List":
+        	res = JsonConvert.SerializeObject(history);
+        	break;
       }
 
     }
@@ -1390,24 +1455,9 @@ while (Program.IsEnabled)
     <Name>Security Alarm System</Name>
     <Description>Basic Security Alarm System</Description>
     <Group>Security</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Sensor,DoorWindow</ForTypes>
-        <Property>HomeGenie.SecuritySensor</Property>
-        <Description>Use as Security Sensor</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>checkbox</FieldType>
-        <ForDomains />
-        <ForTypes>Siren,Light,Dimmer,Switch</ForTypes>
-        <Property>HomeGenie.SecurityAlarm</Property>
-        <Description>Use as Security Alarm</Description>
-      </ProgramFeature>
-    </Features>
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:13.032577Z</TriggerTime>
+    <Features />
+    <ActivationTime>2015-10-18T13:43:04.766778Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1504,7 +1554,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:13.524546Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:11.040473Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1559,7 +1609,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:14.025123Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:11.540637Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1668,7 +1718,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:14.538464Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:12.046929Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2006,7 +2056,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:15.540891Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:13.050422Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2104,7 +2154,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:16.057001Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:13.569895Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2253,7 +2303,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:16.541482Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:14.053228Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2500,7 +2550,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:17.041572Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:14.559698Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6632,7 +6682,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:18.053073Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:15.585936Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7345,7 +7395,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-09-15T07:38:18.540701Z</TriggerTime>
+    <TriggerTime>2015-10-18T13:42:16.060074Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

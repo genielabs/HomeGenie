@@ -252,6 +252,7 @@
     <Compile Include="Automation\Engines\CSharpAppFactory.cs" />
     <Compile Include="Automation\Engines\ArduinoAppFactory.cs" />
     <Compile Include="Automation\Engines\ProgramEngineBase.cs" />
+    <Compile Include="Service\Logging\SystemLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

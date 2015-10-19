@@ -555,9 +555,15 @@ namespace HomeGenie.Service.Logging
                     dbConnection.Open();
                     success = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // TODO: add error logging
+                    HomeGenieService.LogError(
+                        Domains.HomeAutomation_HomeGenie, 
+                        "Service.StatisticsLogger", 
+                        "Database Error", 
+                        "Exception.StackTrace", 
+                        String.Format("{0}: {1}", ex.Message, ex.StackTrace)
+                    );
                 }
             }
             return success;
@@ -727,11 +733,11 @@ namespace HomeGenie.Service.Logging
                             catch (Exception ex)
                             {
                                 HomeGenieService.LogError(
-                                    Domains.HomeAutomation_HomeGenie,
-                                    "Service.StatisticsLogger",
-                                    ex.Message,
-                                    "Exception.StackTrace",
-                                    ex.StackTrace
+                                    Domains.HomeAutomation_HomeGenie, 
+                                    "Service.StatisticsLogger", 
+                                    "Database Error", 
+                                    "Exception.StackTrace", 
+                                    String.Format("{0}: {1}", ex.Message, ex.StackTrace)
                                 );
                                 // try close/reopen (perhaps some locking issue)
                                 CloseStatisticsDatabase();

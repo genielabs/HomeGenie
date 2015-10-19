@@ -91,6 +91,7 @@ namespace HomeGenie.Service
         public HomeGenieService()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            EnableOutputRedirect();
 
             InitializeSystem();
             Reload();
@@ -211,6 +212,8 @@ namespace HomeGenie.Service
             if (masterControlProgram != null) masterControlProgram.StopEngine();
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "ProgramEngine STOPPED");
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, HOMEGENIE_MASTERNODE, "HomeGenie System", Properties.HOMEGENIE_STATUS, "STOPPED");
+
+            SystemLogger.Instance.Dispose();
         }
 
         ~HomeGenieService()
@@ -483,6 +486,18 @@ namespace HomeGenie.Service
         internal static void LogError(object err)
         {
             MigService.Log.Error(err);
+        }
+
+        private void EnableOutputRedirect()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            var outputRedirect = new ConsoleRedirect();
+            outputRedirect.ProcessOutput = (outputLine) => {
+                if (SystemLogger.Instance.IsLogEnabled)
+                    SystemLogger.Instance.WriteToLog(outputLine);
+            };
+            Console.SetOut(outputRedirect);
+            Console.SetError(outputRedirect);
         }
 
         #endregion
@@ -1376,6 +1391,15 @@ namespace HomeGenie.Service
                 using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "systemconfig.xml")))
                 {
                     systemConfiguration = (SystemConfiguration)serializer.Deserialize(reader);
+                    // setup logging
+                    if (!String.IsNullOrEmpty(systemConfiguration.HomeGenie.EnableLogFile) && systemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true"))
+                    {
+                        SystemLogger.Instance.OpenLog();
+                    }
+                    else
+                    {
+                        SystemLogger.Instance.CloseLog();
+                    }
                     // configure MIG
                     migService.Configuration = systemConfiguration.MigService;
                     // Set the password for decrypting settings values and later module parameters
