@@ -148,9 +148,11 @@ namespace HomeGenie.Service.Handlers
                     else
                     {
                         // download file from url
-                        var client = new WebClient();
-                        client.DownloadFile(downloadUrl, ifaceFileName);
-                        client.Dispose();
+                        using (var client = new WebClient())
+                        {
+                            client.DownloadFile(downloadUrl, ifaceFileName);
+                            client.Dispose();
+                        }
                     }
                 }
                 catch

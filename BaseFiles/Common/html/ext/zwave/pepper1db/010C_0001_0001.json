@@ -206,6 +206,11 @@
           "@inNIF": "false"
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/851726575228300d85b88b4b2d395a319ce2d188.png"
+      }
     }
   }
 }

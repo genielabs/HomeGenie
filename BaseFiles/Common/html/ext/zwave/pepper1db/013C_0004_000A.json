@@ -38,6 +38,9 @@
       "genericClass": {
         "@value": "10"
       },
+      "specificClass": {
+        "@value": "05"
+      },
       "optional": {
         "@value": "true"
       },

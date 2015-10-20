@@ -35,6 +35,9 @@
       "basicClass": {
         "@value": "04"
       },
+      "genericClass": {
+        "@value": "07"
+      },
       "specificClass": {
         "@value": "01"
       },
@@ -187,11 +190,12 @@
         "description": {
           "lang": [
             {
-              "@xml:lang": "de"
+              "@xml:lang": "de",
+              "#text": "Automatische Berichte"
             },
             {
               "@xml:lang": "en",
-              "#text": "Group 1"
+              "#text": "Automatic Reports"
             }
           ]
         }
@@ -297,7 +301,7 @@
         },
         {
           "@number": "2",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
@@ -408,9 +412,9 @@
         },
         {
           "@number": "4",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "01",
           "name": {
             "lang": [
               {
@@ -473,7 +477,7 @@
           "@number": "101",
           "@type": "bitset",
           "@size": "4",
-          "@default": "00000000",
+          "@default": "000000e1",
           "name": {
             "lang": [
               {
@@ -505,12 +509,71 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Batteriestatus"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery report"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000003",
+              "@to": "00000003",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -521,12 +584,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Temperatur"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Temperature"
+                    "#text": "Temperatur\r\ne"
                   }
                 ]
               }
@@ -537,12 +599,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Beleuchtung"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Luminosity"
+                    "#text": "Humidity"
                   }
                 ]
               }
@@ -553,12 +614,26 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Feuchtigkeit"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Humidity"
+                    "#text": "Luminan\r\nce"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -601,12 +676,71 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Batteriestatus"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery report"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000003",
+              "@to": "00000003",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -617,8 +751,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Temperatur"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -633,12 +766,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Beleuchtung"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Luminosity"
+                    "#text": "Humidity"
                   }
                 ]
               }
@@ -649,12 +781,26 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Feuchtigkeit"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Humidity"
+                    "#text": "Luminance"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -697,12 +843,71 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Batteriestatus"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Battery report"
+                    "#text": "Battery"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000002",
+              "@to": "00000002",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000003",
+              "@to": "00000003",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000004",
+              "@to": "00000004",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -713,8 +918,7 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Temperatur"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
@@ -729,12 +933,11 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Beleuchtung"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Luminosity"
+                    "#text": "Humidity"
                   }
                 ]
               }
@@ -745,12 +948,26 @@
               "description": {
                 "lang": [
                   {
-                    "@xml:lang": "de",
-                    "#text": "Feuchtigkeit"
+                    "@xml:lang": "de"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Humidity"
+                    "#text": "Luminance"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "00000008",
+              "@to": "0000001f",
+              "@reserved": "true",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en"
                   }
                 ]
               }
@@ -761,7 +978,7 @@
           "@number": "111",
           "@type": "range",
           "@size": "4",
-          "@default": "00000000",
+          "@default": "00000708",
           "name": {
             "lang": [
               {
@@ -796,7 +1013,8 @@
                   "@xml:lang": "de"
                 },
                 {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
                 }
               ]
             }
@@ -806,7 +1024,7 @@
           "@number": "112",
           "@type": "range",
           "@size": "4",
-          "@default": "00000000",
+          "@default": "00000708",
           "name": {
             "lang": [
               {
@@ -841,7 +1059,8 @@
                   "@xml:lang": "de"
                 },
                 {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
                 }
               ]
             }
@@ -851,7 +1070,7 @@
           "@number": "113",
           "@type": "constant",
           "@size": "4",
-          "@default": "00000000",
+          "@default": "00000708",
           "name": {
             "lang": [
               {
@@ -886,13 +1105,478 @@
                   "@xml:lang": "de"
                 },
                 {
-                  "@xml:lang": "en"
+                  "@xml:lang": "en",
+                  "#text": "Define an interval time."
                 }
               ]
             }
           }
+        },
+        {
+          "@number": "5",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "01",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Motion Detection"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Which command would be sent when the motion\r\nsensor triggered."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Basic Set CC."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Send Sensor Binary Report CC."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "40",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Reports for Parameters 41-44"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable/disable the selective reporting only when\r\nmeasurements reach a certain threshold or percentage\r\nset in 41‐44 below.  This is used to reduce network\r\ntraffic. "
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "disable"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "enable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "41",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0001",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Temperature Automatic Report"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold change in temperature to induce an automatic report.\r\nNote:\r\n1. When the unit is Celsius, threshold=Value.\r\n2. When the unit is Fahrenheit, threshold=Value*1.8\r\nThe accuracy is 0.1."
+              }
+            ]
+          }
+        },
+        {
+          "@number": "42",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0005",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Humidity Automatic Report"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold change in humidity to induce an automatic report.\r\nThe accuracy is 0.1."
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "0064",
+            "@unit": "% RH",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the humidity reports."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "43",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0064",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Luminance Automatic Report"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold change in luminance to induce an automatic report."
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "006f",
+            "@unit": "lux",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the luminance reports."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "44",
+          "@type": "range",
+          "@size": "2",
+          "@default": "0005",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Battery Automatic Report"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Threshold change in battery level to induce an automatic report."
+              }
+            ]
+          },
+          "value": {
+            "@from": "0000",
+            "@to": "0064",
+            "@unit": "%",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "Define a treshold for the battery level reports."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@number": "46",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Low Temperature Alarm Report"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "1.Enable/disable to send the alarm report of low\r\ntemperature(<‐15℃)\r\n2. Value=1, enable (The MultiSensor will report the\r\nMulti Level Temperature CC with the value=0xFFFF to\r\ncontroller if the current temperature is less than ‐\r\n15℃).\r\nNote: The battery activity will be reduced at low\r\ntemperatures (‐15 degrees Celsius and below), which\r\nwill lead to the product may not work normally. It is\r\nrecommended to use USB power at low temperatures."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable to send the alarm report of low temperature"
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Enable to send the alarm report of low temperature"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "252",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Lock Configuration"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Enable/disable all configuration parameters to be locked."
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Disable all configuration parameters to be locked."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Enable all configuration parameters to be locked."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "@number": "255",
+          "@type": "constant",
+          "@size": "4",
+          "@default": "00000001",
+          "name": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Reset to default factory setting"
+              }
+            ]
+          },
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en"
+              }
+            ]
+          },
+          "value": [
+            {
+              "@from": "00000001",
+              "@to": "00000001",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Resets all configuration parameters to default setting."
+                  }
+                ]
+              }
+            },
+            {
+              "@from": "55555555",
+              "@to": "55555555",
+              "description": {
+                "lang": [
+                  {
+                    "@xml:lang": "de"
+                  },
+                  {
+                    "@xml:lang": "en",
+                    "#text": "Reset the product to default factory setting and be excluded from the Z-wave network."
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/7f83f4cc0274605658f9bf72b4aa327282a70f2d.jpg"
+      }
     }
   }
 }

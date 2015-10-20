@@ -63,6 +63,10 @@
           {
             "@xml:lang": "en",
             "#text": "Metering Switch Plug In"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Модуль в розетку с измерением энергопотребления"
           }
         ]
       },
@@ -73,6 +77,9 @@
           },
           {
             "@xml:lang": "en"
+          },
+          {
+            "@xml:lang": "ru"
           }
         ]
       },
@@ -84,12 +91,16 @@
           },
           {
             "@xml:lang": "en",
-            "#text": "To start the inklusion or exklusion push the Action Button once."
+            "#text": "Click on Button"
+          },
+          {
+            "@xml:lang": "ru",
+            "#text": "Одинарное нажатие на кнопку"
           }
         ]
       },
       "productName": "SES3",
-      "brandName": "Smart Switch",
+      "brandName": "Aeon Labs",
       "productLine": "Smart Switch",
       "productVersion": "2.25"
     },
@@ -195,6 +206,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Group 1"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять отчёты при изменение состояния нагрузки. Группа 1"
               }
             ]
           }
@@ -210,6 +225,29 @@
               {
                 "@xml:lang": "en",
                 "#text": "Group 2"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять отчёты при изменение состояния нагрузки. Группа 2"
+              }
+            ]
+          }
+        },
+        {
+          "@number": "3",
+          "@maxNodes": "5",
+          "description": {
+            "lang": [
+              {
+                "@xml:lang": "de"
+              },
+              {
+                "@xml:lang": "en",
+                "#text": "Group 3"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отправлять отчёты при изменение состояния нагрузки. Группа 3"
               }
             ]
           }
@@ -232,6 +270,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Blinking Behavior"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время мигания"
               }
             ]
           },
@@ -243,7 +285,11 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "This is a double byte value. The LSB defines the total time the device need to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+                "#text": "This is a double byte value. The LSB defines the total time the device needs to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Время, которое светодиод будет мигать."
               }
             ]
           },
@@ -258,7 +304,11 @@
                 },
                 {
                   "@xml:lang": "en",
-                  "#text": "This is a double byte value. The LSB defines the total time the device need to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+                  "#text": "This is a double byte value. The LSB defines the total time the device needs to blink. The value if set in seconds. The MSB defines the on/off interval of the blinking. The unit is 0.1 s.  "
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "0.1 секунда"
                 }
               ]
             }
@@ -278,6 +328,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Current Overload Protection"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Защита от перегрузки"
               }
             ]
           },
@@ -285,11 +339,15 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Die Spannung wird geschlossen wenn diese die Grenzwerte für mehr als 2 Minuten (US: 15,5A, andere: 16,2A) überschreitet."
+                "#text": "Die Spannung wird geschlossen, wenn diese die Grenzwerte für mehr als 2 Minuten (US: 15,5A, andere: 16,2A) überschreitet."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Load will be closed when the Current overrun (US: 15.5A, other country: 16.2A) and the time more than 2 minutes (0=disabled, 1=enabled)."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Если ток будет больше 16.2 А в течении 2-х минут, то модуль выключится."
               }
             ]
           },
@@ -301,11 +359,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Aktivier Überspannungsschutz"
+                    "#text": "Aktiver Überspannungsschutz"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Active Overload Protection"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Защита от перегрузки включена"
                   }
                 ]
               }
@@ -322,6 +384,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Deactivate Overload Protection"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Защита от перегрузки выключена"
                   }
                 ]
               }
@@ -342,6 +408,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Output Load Status"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Восстанавливать состояние после отключения питания"
               }
             ]
           },
@@ -349,11 +419,15 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert die Ausgabe der Statusmeldung zur anliegenden Last nach dem anschliesen."
+                "#text": "Definiert die Ausgabe der Statusmeldung zur anliegenden Last nach dem Anschliesen."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Configure the output load status after re‐power on."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Определяет восстанавливать ли состояние модуля (включено/выключено) на то, которое было до отключения питания модуля."
               }
             ]
           },
@@ -370,6 +444,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "last status"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Восстанавливать состояние"
                   }
                 ]
               }
@@ -386,6 +464,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "always on"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Всегда включено"
                   }
                 ]
               }
@@ -397,11 +479,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "immer inaktive"
+                    "#text": "immer inaktiv"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "always off"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Всегда выключено"
                   }
                 ]
               }
@@ -422,6 +508,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Notification on Status Change"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о включении/выключении"
               }
             ]
           },
@@ -434,6 +524,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Defines the automated status notification of an associated device when status changes (0=nothing, 1=hail CC, 2=basic CC report)."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Каким классом команд отправлять отчет о включении/выключении"
               }
             ]
           },
@@ -450,6 +544,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "nothing"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Не отправлять отчет"
                   }
                 ]
               }
@@ -466,6 +564,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "hail"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Hail (Сказать контроллеру Привет!)"
                   }
                 ]
               }
@@ -482,6 +584,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "basic CC report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Basic Report"
                   }
                 ]
               }
@@ -502,6 +608,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Configure the state of red LED"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Настройка светодиода"
               }
             ]
           },
@@ -512,6 +622,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -528,6 +641,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "The LED will follow the status (on/off) of its load."
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Светодиод горит соответственно состоянию нагрузки (включено/выключено) "
                   }
                 ]
               }
@@ -539,11 +656,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Die LED reagiert entsprechend dem Status (on/off) der anliegenden Last, aber die Rote LED schaltet sich nach 5 Sekunden ab falls keine Änderung des Zustands eintritt (Schalten/Laständerung)."
+                    "#text": "Die LED reagiert entsprechend dem Status (on/off) der anliegenden Last, aber die rote LED schaltet sich nach 5 Sekunden ab, falls keine Änderung des Zustands eintritt (Schalten/Laständerung)."
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "When the state of Switch’s load changed, The LED will follow the status (on/off) of its load, but the red LED will turn off after 5 seconds if there is no any switch action."
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Светодиод горит соответственно состоянию нагрузки (включено/выключено), но красный светодиод выключится через 5 секунд, если не будет других переключений."
                   }
                 ]
               }
@@ -559,11 +680,15 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Aktiviert/Deaktivert Parameter 91/92"
+                "#text": "Aktiviert/Deaktiviert Parameter 91/92"
               },
               {
                 "@xml:lang": "en",
                 "#text": "Enables/disables parameter 91/92"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Управление параметрами 91/92"
               }
             ]
           },
@@ -574,6 +699,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -590,6 +718,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Enabled parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Параметры 91/92 включены"
                   }
                 ]
               }
@@ -606,6 +738,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Disabled parameter 91/92"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Параметры 91/92 выключены"
                   }
                 ]
               }
@@ -626,6 +762,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Minimum Change to send Report (Watt)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о изменении энергопотребления"
               }
             ]
           },
@@ -637,7 +777,11 @@
               },
               {
                 "@xml:lang": "en",
-                "#text": "The value represents the minimum change in wattage for a Report to be sent ."
+                "#text": "The value represents the minimum change in wattage for a report to be sent ."
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Минимальное значение на которое должно измениться энергопотребление, чтобы отправился отчет"
               }
             ]
           },
@@ -653,6 +797,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "The value represents the minimum change in wattage."
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "Ватт"
                 }
               ]
             }
@@ -672,6 +820,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Minimum Change to send Report (%)"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет о изменении энергопотребления (%)"
               }
             ]
           },
@@ -684,6 +836,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "The value represents the minimum change in wattage Percent for a report to be sent.\r\n(Valid values 0‐100) "
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Минимальное значение на которое должно измениться энергопотребление в процентах, чтобы отправился отчет"
               }
             ]
           },
@@ -699,6 +855,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "The value represents the minimum change in wattage Percent."
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "%"
                 }
               ]
             }
@@ -718,6 +878,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Set 101‐103 to default"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Установить параметры 101-103 по умолчанию"
               }
             ]
           },
@@ -728,6 +892,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -744,6 +911,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "set to default"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Установить по умолчанию"
                   }
                 ]
               }
@@ -760,6 +931,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "nothing"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Оставить как есть"
                   }
                 ]
               }
@@ -780,6 +955,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Report type send in Reporting Group 1"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет отправлять в группу 1"
               }
             ]
           },
@@ -787,11 +966,14 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 1 gesendet wird."
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in der Benachrichtigungsgruppe 1 gesendet wird."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Defines the type of report sent for the Reporting Group 1."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -803,11 +985,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Mutlisensor-Report"
+                    "#text": "Multisensor-Report"
                   },
                   {
                     "@xml:lang": "en",
                     "#text": "Multisensor Report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет мультисенсора"
                   }
                 ]
               }
@@ -824,6 +1010,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for Watt"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в Ваттах"
                   }
                 ]
               }
@@ -840,6 +1030,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в КВтЧ"
                   }
                 ]
               }
@@ -860,6 +1054,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Report Type send in Reporting Group 2"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет отправлять в группу 2"
               }
             ]
           },
@@ -867,11 +1065,14 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 2 gesendet wird."
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in der Benachrichtigungsgruppe 2 gesendet wird."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Defines the type of report sent for the Reporting Group 2."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -883,11 +1084,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Mutlisensor-Report"
+                    "#text": "Multisensor-Report"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Mutlisensor-Report"
+                    "#text": "Multisensor-Report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет мультисенсора"
                   }
                 ]
               }
@@ -904,6 +1109,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for Watt"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в Ваттах"
                   }
                 ]
               }
@@ -920,6 +1129,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в КВтЧ"
                   }
                 ]
               }
@@ -940,6 +1153,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Report Type send in Reporting Group 3"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Отчет отправлять в группу 3"
               }
             ]
           },
@@ -947,11 +1164,14 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in dier Benachrichtigungsgruppe 3 gesendet wird."
+                "#text": "Definiert die Benachrichtigungsart (Typ des Reports), der in der Benachrichtigungsgruppe 3 gesendet wird."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Defines the type of report sent for the Reporting Group 3."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -963,11 +1183,15 @@
                 "lang": [
                   {
                     "@xml:lang": "de",
-                    "#text": "Mutlisensor-Report"
+                    "#text": "Multisensor-Report"
                   },
                   {
                     "@xml:lang": "en",
-                    "#text": "Mutlisensor-Report"
+                    "#text": "Multisensor-Report"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет мультисенсора"
                   }
                 ]
               }
@@ -984,6 +1208,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for Watt"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в Ваттах"
                   }
                 ]
               }
@@ -1000,6 +1228,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Meter Report for kWh"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Отчет о энергопотреблении в КВтЧ"
                   }
                 ]
               }
@@ -1020,6 +1252,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Set 111‐113 to default"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Установить параметры 111-113 по умолчанию"
               }
             ]
           },
@@ -1030,6 +1266,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1046,6 +1285,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Set to default"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Установить по умолчанию"
                   }
                 ]
               }
@@ -1062,6 +1305,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "nothing"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Оставить как есть"
                   }
                 ]
               }
@@ -1077,11 +1324,15 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Sendeinterval für Benachrichtigungsgruppe 1"
+                "#text": "Sendeintervall für Benachrichtigungsgruppe 1"
               },
               {
                 "@xml:lang": "en",
                 "#text": "Send Interval for Reporting Group 1"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Интервал отправки отчета в группу 1"
               }
             ]
           },
@@ -1089,11 +1340,14 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert das Zeitinterval, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 1 ausgesendet wird."
+                "#text": "Definiert das Zeitintervall, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 1 ausgesendet wird."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Defines the time interval when the defined report of Reporting Group 1 is sent out."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1110,6 +1364,10 @@
                 {
                   "@xml:lang": "en",
                   "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "секунды"
                 }
               ]
             }
@@ -1129,6 +1387,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Send Interval for Reporting Group 2"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Интервал отправки отчета в группу 2"
               }
             ]
           },
@@ -1141,6 +1403,9 @@
               {
                 "@xml:lang": "en",
                 "#text": "Defines the time interval when the defined report of Reporting Group 2 is sent out."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1152,11 +1417,15 @@
               "lang": [
                 {
                   "@xml:lang": "de",
-                  "#text": "Interval"
+                  "#text": "Intervall"
                 },
                 {
                   "@xml:lang": "en",
                   "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "секунды"
                 }
               ]
             }
@@ -1171,11 +1440,15 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Sendeinterval für Benachrichtigungsgruppe 3"
+                "#text": "Sendeintervall für Benachrichtigungsgruppe 3"
               },
               {
                 "@xml:lang": "en",
                 "#text": "Send Interval for Reporting Group 3"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Интервал отправки отчета в группу 3"
               }
             ]
           },
@@ -1183,11 +1456,14 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Definiert das Zeitinterval, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 3 ausgesendet wird."
+                "#text": "Definiert das Zeitintervall, in dem die definierte Benachrichtigung der Benachrichtigungsgruppe 3 ausgesendet wird."
               },
               {
                 "@xml:lang": "en",
                 "#text": "Defines the time interval when the defined report of Reporting Group 3 is sent out."
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1199,11 +1475,15 @@
               "lang": [
                 {
                   "@xml:lang": "de",
-                  "#text": "Interval"
+                  "#text": "Intervall"
                 },
                 {
                   "@xml:lang": "en",
                   "#text": "Interval"
+                },
+                {
+                  "@xml:lang": "ru",
+                  "#text": "секунды"
                 }
               ]
             }
@@ -1223,6 +1503,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Partner ID"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Partner ID"
               }
             ]
           },
@@ -1233,6 +1517,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1249,6 +1536,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Aeon Labs Standard "
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Aeon Labs Standard "
                   }
                 ]
               }
@@ -1264,6 +1555,10 @@
                   },
                   {
                     "@xml:lang": "en",
+                    "#text": "AT&T"
+                  },
+                  {
+                    "@xml:lang": "ru",
                     "#text": "AT&T"
                   }
                 ]
@@ -1285,6 +1580,10 @@
               {
                 "@xml:lang": "en",
                 "#text": "Enable/disable Configuration Locked"
+              },
+              {
+                "@xml:lang": "ru",
+                "#text": "Блокировка настроек"
               }
             ]
           },
@@ -1295,6 +1594,9 @@
               },
               {
                 "@xml:lang": "en"
+              },
+              {
+                "@xml:lang": "ru"
               }
             ]
           },
@@ -1311,6 +1613,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Deactivate configurationlock"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Настройка параметров заблокирована"
                   }
                 ]
               }
@@ -1327,6 +1633,10 @@
                   {
                     "@xml:lang": "en",
                     "#text": "Activate configurationlock"
+                  },
+                  {
+                    "@xml:lang": "ru",
+                    "#text": "Настройка параметров разблокирована"
                   }
                 ]
               }
@@ -1334,6 +1644,11 @@
           ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/7c111690b51e052cb1e018d5101fcfc6fad5509d.jpg"
+      }
     }
   }
 }

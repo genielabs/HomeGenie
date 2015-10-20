@@ -169,11 +169,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Für Gruppe 1, das gerät sendet Berichte mit dem ON/OFF-Status von R1 und R2  und Berichte über den Stromverbrauch in Watt und KWh zum Controller."
+                "#text": "Status-Updates für Relais 1 und 2  sowie Meldungen über Stromverbrauch und Stromzählerstand"
               },
               {
                 "@xml:lang": "en",
-                "#text": "For group 1, the Switch will report (1) ON/OFF status of Relay1 and Relay2 (2)\r\nInstant Power Consumption (Watt) of Relay1 and Relay2 (3) Accumulated\r\nPower Consumption (KWh) of Relay1 and Relay2 to Z-Wave Controller."
+                "#text": "Status-Update für Relais 1 and 2 and all Metering reports"
               }
             ]
           }
@@ -185,11 +185,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Für Gruppe 1, das gerät sendet Berichte mit dem ON/OFF-Status von R1 und Berichte über den Stromverbrauch in Watt und KWh zum Controller."
+                "#text": "Status-Updates für Relais 1 sowie Meldungen über Stromverbrauch und Stromzählerstand"
               },
               {
                 "@xml:lang": "en",
-                "#text": "For group 2, the Switch will report (1) ON/OFF status of Relay1 (2) Instant\r\nPower Consumption (Watt) of Relay1 (3) Accumulated Power Consumption\r\n(KWh) of Relay1 to Z-Wave Controller."
+                "#text": "Status-Update für Relais 1 and Metering reports"
               }
             ]
           }
@@ -201,11 +201,11 @@
             "lang": [
               {
                 "@xml:lang": "de",
-                "#text": "Für Gruppe 1, das gerät sendet Berichte mit dem ON/OFF-Status von R2  und Berichte über den Stromverbrauch in Watt und KWh zum Controller."
+                "#text": "Status-Updates für Relais 2  sowie Meldungen über Stromverbrauch und Stromzählerstand"
               },
               {
                 "@xml:lang": "en",
-                "#text": "For group 3, the Switch will report (1) ON/OFF status of Relay2 (2) Instant\r\nPower Consumption (Watt) of Relay2 (3) Accumulated Power Consumption\r\n(KWh) of Relay2 to Z-Wave Controller."
+                "#text": "Status-Update für Relais 2 and Metering reports"
               }
             ]
           }

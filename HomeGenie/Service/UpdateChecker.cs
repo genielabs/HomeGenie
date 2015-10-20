@@ -165,28 +165,40 @@ namespace HomeGenie.Service
 
         public List<ReleaseInfo> GetRemoteUpdates()
         {
-            var client = new WebClient();
-            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-            try
+            using (var client = new WebClient())
             {
-                string releaseXml = client.DownloadString(endpointUrl);
-                var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
-                using (TextReader reader = new StringReader(releaseXml))
+                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                try
                 {
-                    remoteUpdates.Clear();
-                    var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
-                    updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b) { return a.ReleaseDate.CompareTo(b.ReleaseDate); });
-                    foreach (var releaseInfo in updates)
+                    string releaseXml = client.DownloadString(endpointUrl);
+                    var serializer = new XmlSerializer(typeof(List<ReleaseInfo>));
+                    using (TextReader reader = new StringReader(releaseXml))
                     {
-                        if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
+                        remoteUpdates.Clear();
+                        var updates = (List<ReleaseInfo>)serializer.Deserialize(reader);
+                        updates.Sort(delegate(ReleaseInfo a, ReleaseInfo b)
                         {
-                            remoteUpdates.Add(releaseInfo);
-                            if (releaseInfo.UpdateBreak) break;
+                            return a.ReleaseDate.CompareTo(b.ReleaseDate);
+                        });
+                        foreach (var releaseInfo in updates)
+                        {
+                            if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
+                            {
+                                remoteUpdates.Add(releaseInfo);
+                                if (releaseInfo.UpdateBreak)
+                                    break;
+                            }
                         }
                     }
                 }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    client.Dispose();
+                }
             }
-            catch (Exception) { }
             return remoteUpdates;
         }
 
@@ -248,19 +260,25 @@ namespace HomeGenie.Service
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(archiveName));
             }
-            var client = new WebClient();
-            client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-            try
+            using (var client = new WebClient())
             {
-                client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
+                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                try
+                {
+                    client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
+                }
+                catch (Exception)
+                {
+                    if (ArchiveDownloadUpdate != null)
+                        ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
+                    return null;
+                    //                throw;
+                }
+                finally
+                {
+                    client.Dispose();
+                }
             }
-            catch (Exception)
-            {
-                if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
-                return null;
-                //                throw;
-            }
-
             // Unarchive (unzip)
             if (ArchiveDownloadUpdate != null) ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
 

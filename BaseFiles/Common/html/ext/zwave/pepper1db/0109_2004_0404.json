@@ -35,6 +35,12 @@
       "basicClass": {
         "@value": "04"
       },
+      "genericClass": {
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
+      },
       "optional": {
         "@value": "true"
       },
@@ -128,6 +134,11 @@
             "@xml:lang": "en"
           }
         }
+      }
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/0c51aba62c4f8fc010059e0ced350b01a462f097.png"
       }
     }
   }

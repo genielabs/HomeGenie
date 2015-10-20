@@ -664,6 +664,11 @@ namespace HomeGenie.Automation.Scripting
             protected override WebRequest GetWebRequest(Uri uri)
             {
                 WebRequest w = base.GetWebRequest(uri);
+                // Disable Keep-Alive
+                if (w is HttpWebRequest)
+                {
+                    (w as HttpWebRequest).KeepAlive = false;
+                }
                 // WebClient default timeout set to 30 seconds
                 w.Timeout = 30 * 1000;
                 return w;

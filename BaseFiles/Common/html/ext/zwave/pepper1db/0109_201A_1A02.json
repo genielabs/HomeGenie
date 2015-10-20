@@ -158,6 +158,17 @@
               "@xml:lang": "en",
               "#text": "60-266 seconds\r\nReport kWh/kVAh"
             }
+          },
+          "value": {
+            "@from": "3c",
+            "@to": "ff",
+            "@unit": "sec",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Define the auto report timing."
+              }
+            }
           }
         },
         {
@@ -175,6 +186,17 @@
             "lang": {
               "@xml:lang": "en",
               "#text": "5-3600 Watt\r\nReport V A W"
+            }
+          },
+          "value": {
+            "@from": "0005",
+            "@to": "0e10",
+            "@unit": "W",
+            "description": {
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set the maximum variation in wattage, if  a report should be sent."
+              }
             }
           }
         }

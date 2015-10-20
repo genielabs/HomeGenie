@@ -233,8 +233,12 @@ HG.Ext.ZWave.NodeSetup.Refresh = function (module) {
                 productName: znodeDesc.productName,
                 brandName: znodeDesc.brandName,
                 productLine: znodeDesc.productLine,
-                associationGroups: Pepper1Db_getArray(devinfo.ZWaveDevice.assocGroups.assocGroup, 'assocGroup'),
-                configParams: Pepper1Db_getArray(devinfo.ZWaveDevice.configParams.configParam, 'configParam'),
+                associationGroups: (typeof devinfo.ZWaveDevice.assocGroups != 'undefined' 
+                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.assocGroups.assocGroup, 'assocGroup') 
+                                        : []),
+                configParams: (typeof devinfo.ZWaveDevice.configParams != 'undefined' 
+                                        ? Pepper1Db_getArray(devinfo.ZWaveDevice.configParams.configParam, 'configParam') 
+                                        : []),
                 imageUrl: ''
             }
 

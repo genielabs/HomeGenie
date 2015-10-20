@@ -29,32 +29,22 @@
       "appSubVersion": {
         "@value": "00"
       },
-      "basicClass": {
-        "@value": "02"
-      },
-      "genericClass": {
-        "@value": "02"
-      },
-      "specificClass": {
-        "@value": "00"
-      },
       "optional": {
-        "@value": "true"
+        "@value": "false"
       },
       "listening": {
-        "@value": "true"
+        "@value": "false"
       },
       "routing": {
         "@value": "false"
       },
-      "beamSensor": "0",
       "rfFrequency": "US"
     },
     "deviceDescription": {
       "description": {
         "lang": {
           "@xml:lang": "en",
-          "#text": "Central Controller"
+          "#text": "USB Z-Wave & ZigBee Stick"
         }
       },
       "wakeupNote": {
@@ -67,159 +57,14 @@
           "@xml:lang": "en"
         }
       },
-      "productName": "Connected Life Gateway",
-      "brandName": "CISCO",
-      "productLine": "CLG",
-      "productCode": "8202",
-      "productVersion": "R2.00"
-    },
-    "commandClasses": {
-      "commandClass": [
-        {
-          "@id": "0071",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "009c",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0085",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0020",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0080",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0030",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0025",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0046",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0081",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0070",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0062",
-          "@controlled": "true"
-        },
-        {
-          "@id": "004c",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0082",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0072",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0032",
-          "@version": "3",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0060",
-          "@version": "3",
-          "@controlled": "true"
-        },
-        {
-          "@id": "008e",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0031",
-          "@version": "5",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0026",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0000",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0073",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0075",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0098",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0044",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0045",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0040",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0042",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0047",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0043",
-          "@version": "2",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0063",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0086",
-          "@controlled": "true"
-        },
-        {
-          "@id": "0084",
-          "@version": "2",
-          "@controlled": "true"
-        }
-      ]
+      "productName": "HubZ",
+      "brandName": "Nortek Security & Control",
+      "productLine": "Home Security & Control",
+      "productCode": "HUSBZB-1"
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/f180c6c45171b075aa15e3f020315f6d4b5b1ed0.jpg"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/dd4bef608771cdc7b773511402dc1e583a357cd3.jpg"
       }
     }
   }

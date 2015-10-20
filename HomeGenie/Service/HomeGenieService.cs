@@ -1613,17 +1613,22 @@ namespace HomeGenie.Service
         // this is used to generate Lirc supported remotes from http://lirc.sourceforge.net/remotes/
         private List<string> GetLircItems(string url)
         {
-            var webclient = new WebClient();
-            string response = webclient.DownloadString(url);
+            string[] lines = new string[0];
+            using (var webclient = new WebClient())
+            {
+                string response = webclient.DownloadString(url);
 
-            string pattern = @"<(.|\n)*?>";
-            response = response.Replace("</a>", " ");
-            response = System.Text.RegularExpressions.Regex.Replace(response, pattern, string.Empty);
+                string pattern = @"<(.|\n)*?>";
+                response = response.Replace("</a>", " ");
+                response = System.Text.RegularExpressions.Regex.Replace(response, pattern, string.Empty);
 
-            response = response.Replace("&amp;", "&");
-            response = response.Replace("&nbsp;", " ");
+                response = response.Replace("&amp;", "&");
+                response = response.Replace("&nbsp;", " ");
 
-            string[] lines = response.Split('\n');
+                lines = response.Split('\n');
+
+                webclient.Dispose();
+            }
 
             bool readItems = false;
             var manufacturers = new List<string>();

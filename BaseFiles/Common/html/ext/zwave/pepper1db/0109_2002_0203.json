@@ -50,7 +50,8 @@
       "routing": {
         "@value": "true"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "Russia"
     },
     "deviceDescription": {
       "description": {

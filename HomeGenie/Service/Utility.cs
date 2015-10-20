@@ -348,19 +348,22 @@ namespace HomeGenie.Service
         {
             try
             {
-                var client = new WebClient();
-                client.Encoding = UTF8Encoding.UTF8;
-                client.Headers.Add("Referer", "http://translate.google.com");
-                var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence) + "&client=homegenie&ts=" + DateTime.UtcNow.Ticks);
-                client.Dispose();
-
                 var mp3File = Path.Combine(GetTmpFolder(), "_synthesis_tmp.mp3");
-                if (File.Exists(mp3File))
-                    File.Delete(mp3File);
-                
-                var stream = File.OpenWrite(mp3File);
-                stream.Write(audioData, 0, audioData.Length);
-                stream.Close();
+                using (var client = new WebClient())
+                {
+                    client.Encoding = UTF8Encoding.UTF8;
+                    client.Headers.Add("Referer", "http://translate.google.com");
+                    var audioData = client.DownloadData("http://translate.google.com/translate_tts?ie=UTF-8&tl=" + Uri.EscapeDataString(locale) + "&q=" + Uri.EscapeDataString(sentence) + "&client=homegenie&ts=" + DateTime.UtcNow.Ticks);
+
+                    if (File.Exists(mp3File))
+                        File.Delete(mp3File);
+                    
+                    var stream = File.OpenWrite(mp3File);
+                    stream.Write(audioData, 0, audioData.Length);
+                    stream.Close();
+
+                    client.Dispose();
+                }
 
                 var wavFile = mp3File.Replace(".mp3", ".wav");
                 Process.Start(new ProcessStartInfo("lame", "--decode \"" + mp3File + "\" \"" + wavFile + "\"") {

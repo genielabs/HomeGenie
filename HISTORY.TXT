@@ -1,6 +1,8 @@
 ﻿RELEASE HISTORY
 
-19/10/2015 v1.1-beta.498
+20/10/2015 v1.1-beta.498
+    - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface
+    - Updated Pepper1 ZWave database
     - Fixed HG/Web hang problem after certain number of connections not properly closed by remote clients (Too many open files)
     - Added arm Home/Away modes to Security Alarm System app
     - Reintroduced logging to file (SystemLogger)

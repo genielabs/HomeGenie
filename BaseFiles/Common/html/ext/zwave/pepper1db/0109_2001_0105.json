@@ -36,7 +36,10 @@
         "@value": "04"
       },
       "genericClass": {
-        "@value": "a1"
+        "@value": "07"
+      },
+      "specificClass": {
+        "@value": "01"
       },
       "optional": {
         "@value": "true"
@@ -164,66 +167,66 @@
       }
     },
     "configParams": {
-      "configParam": [
-        {
-          "@number": "0",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Status"
-              },
-              {
-                "@xml:lang": "en"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "deaktiviert (Voreinstellung)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "disable (Default)"
-              }
-            ]
-          }
+      "configParam": {
+        "@number": "1",
+        "@type": "constant",
+        "@size": "1",
+        "@default": "00",
+        "name": {
+          "lang": [
+            {
+              "@xml:lang": "de"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "External Switch"
+            }
+          ]
         },
-        {
-          "@number": "1",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "01",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Status "
-              },
-              {
-                "@xml:lang": "en"
-              }
-            ]
+        "description": {
+          "lang": [
+            {
+              "@xml:lang": "de"
+            },
+            {
+              "@xml:lang": "en",
+              "#text": "The parameter defines if an external switch is disabled/enabled."
+            }
+          ]
+        },
+        "value": [
+          {
+            "@from": "00",
+            "@to": "00",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "External Switch is disabled."
+                }
+              ]
+            }
           },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "aktiviert"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "enable"
-              }
-            ]
+          {
+            "@from": "ff",
+            "@to": "ff",
+            "description": {
+              "lang": [
+                {
+                  "@xml:lang": "de"
+                },
+                {
+                  "@xml:lang": "en",
+                  "#text": "External Switch is enabled."
+                }
+              ]
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "resourceLinks": {
       "deviceImage": {

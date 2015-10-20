@@ -651,18 +651,21 @@ namespace HomeGenie.Automation.Scripting
         {
             try
             {
-                var webClient = new WebClient();
-                byte[] audiodata = webClient.DownloadData(waveUrl);
-                webClient.Dispose();
-
                 string outputDirectory = Utility.GetTmpFolder();
-                if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
                 string file = Path.Combine(outputDirectory, "_wave_tmp." + Path.GetExtension(waveUrl));
-                if (File.Exists(file)) File.Delete(file);
+                using (var webClient = new WebClient())
+                {
+                    byte[] audiodata = webClient.DownloadData(waveUrl);
 
-                var stream = File.OpenWrite(file);
-                stream.Write(audiodata, 0, audiodata.Length);
-                stream.Close();
+                    if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+                    if (File.Exists(file)) File.Delete(file);
+
+                    var stream = File.OpenWrite(file);
+                    stream.Write(audiodata, 0, audiodata.Length);
+                    stream.Close();
+
+                    webClient.Dispose();
+                }
 
                 Utility.Play(file);
             }

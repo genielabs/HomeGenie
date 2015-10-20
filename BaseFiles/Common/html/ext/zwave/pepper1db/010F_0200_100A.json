@@ -62,7 +62,7 @@
           },
           {
             "@xml:lang": "en",
-            "#text": "Single Relay Switch FGS-222"
+            "#text": "Double Relay Switch FGS-222"
           }
         ]
       },
@@ -91,7 +91,7 @@
       "productName": "FGS222",
       "brandName": "Fibaro",
       "productLine": "Fibaro",
-      "productVersion": "2.1"
+      "productVersion": "1.0.1"
     },
     "commandClasses": {
       "commandClass": [
@@ -1577,6 +1577,11 @@
           ]
         }
       ]
+    },
+    "resourceLinks": {
+      "deviceImage": {
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/dd0ba2904aac6ce2d55a476a434549ebdf58b72d.jpg"
+      }
     }
   }
 }

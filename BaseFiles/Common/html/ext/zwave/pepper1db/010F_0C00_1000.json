@@ -24,13 +24,13 @@
         "@value": "03"
       },
       "protoSubVersion": {
-        "@value": "34"
+        "@value": "67"
       },
       "appVersion": {
         "@value": "02"
       },
       "appSubVersion": {
-        "@value": "01"
+        "@value": "05"
       },
       "basicClass": {
         "@value": "04"
@@ -39,7 +39,7 @@
         "@value": "a1"
       },
       "specificClass": {
-        "@value": "02"
+        "@value": "00"
       },
       "optional": {
         "@value": "true"
@@ -48,149 +48,114 @@
         "@value": "false"
       },
       "routing": {
-        "@value": "true"
+        "@value": "false"
       },
-      "beamSensor": "0"
+      "beamSensor": "0",
+      "rfFrequency": "EU"
     },
     "deviceDescription": {
       "description": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Rauchmelder mit Temperatursensor"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Smoke Sensor with Temperature Sensor"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Smoke Sensor"
+        }
       },
       "wakeupNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Dreifach Taste am Gerät drücken"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Tripple Press B-button on device"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Triple click B-button."
+        }
       },
       "inclusionNote": {
-        "lang": [
-          {
-            "@xml:lang": "de",
-            "#text": "Dreifach Taste am Gerät drücken"
-          },
-          {
-            "@xml:lang": "en",
-            "#text": "Tripple Press button on device"
-          }
-        ]
+        "lang": {
+          "@xml:lang": "en",
+          "#text": "Press the B-button once."
+        }
       },
-      "productName": "Smoke Sensor FGSS-001",
-      "brandName": "Fibargroup",
-      "productCode": "FGSS-001"
+      "productName": "FGSS-001",
+      "brandName": "Fibaro",
+      "productLine": "Fibaro",
+      "productCode": "001",
+      "productVersion": "2x.2x",
+      "batteryType": "CR123A",
+      "batteryCount": "1"
     },
     "commandClasses": {
       "commandClass": [
         {
-          "@id": "0080"
+          "@id": "009c"
         },
         {
-          "@id": "0020",
-          "@inNIF": "false"
-        },
-        {
-          "@id": "0084"
-        },
-        {
-          "@id": "0085",
-          "@version": "2"
+          "@id": "0031"
         },
         {
           "@id": "0086",
           "@version": "2"
         },
         {
-          "@id": "0031"
+          "@id": "0072"
         },
         {
-          "@id": "008b"
+          "@id": "0070"
+        },
+        {
+          "@id": "0085",
+          "@version": "2"
         },
         {
           "@id": "008e",
           "@version": "2"
         },
         {
-          "@id": "0070"
+          "@id": "008b",
+          "@controlled": "true"
         },
         {
-          "@id": "0091"
+          "@id": "0056",
+          "@controlled": "true"
         },
         {
-          "@id": "0072"
+          "@id": "0084"
         },
         {
-          "@id": "0073"
+          "@id": "0080"
         },
         {
-          "@id": "007a"
-        },
-        {
-          "@id": "009c"
+          "@id": "0020",
+          "@controlled": "true"
         }
       ]
     },
     "assocGroups": {
       "assocGroup": [
         {
-          "@number": "1",
+          "@number": "3",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "zugeordnet zu Geräte Status - sendet BASIC SET (standard) oder ALARM CONTROLE FRAME an assoziierte Geräte, wenn Feuer erkannt wird."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "assigned to the device status - sending the BASIC SET\r\n(default) or ALARM control frame to the associated devices having detected fire."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "3-rd Association Group reports the device status and allows for assigning a\r\nsingle device only (the main controller by default - the device reports its status to\r\nthe main controller). It’s not recommended to modify this association group."
+            }
           }
         },
         {
           "@number": "2",
           "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "zugeordnet zu Manipulationsschutzschalter und Fehlfunktionsalarm. Alarm Frame wird an assoziierte Geräte gesendet, wenn Manipulation oder Fehlfunktion festgestellt werden."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "assigned to a TMP button and the malfunction alarm.\r\nAlarm frame will be sent to the associated devices once tampering or malfunction\r\nare detected."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "2-nd Association Group is assigned to the TMP button and the malfunction alarm.\r\nAlarm frame will be sent to the associated devices once tampering or malfunction\r\nare detected."
+            }
           }
         },
         {
-          "@number": "3",
-          "@maxNodes": "1",
+          "@number": "1",
+          "@maxNodes": "5",
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "meldet Geräte Status. Nur ein Gerät kann assoziiert werden (standardmäßig der Primärcontroller)."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "reports the device status and allows for assigning single\r\ndevice only (the main controller by default - the device reports its status to the main\r\ncontroller)."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "1-st Association Group is assigned to the device status - Sending the BASIC SET\r\n(default) or ALARM control frame to the associated devices having detected fire"
+            }
           }
         }
       ]
@@ -199,337 +164,235 @@
       "configParam": [
         {
           "@number": "1",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0000",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Rauchmeldung Abstellungs-Verzögerung"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Smoke alarm cancellation delay"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Smoke alarm cancellation delay"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitperiode, in der der Rauchalarm weiter gemeldet wird, nachdem Rauch verschwunden ist"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "time period, during which the Smoke Sensor will keep indicating the smoke alarm after smoke will have disappeared"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The time between when the smoke disappears and the Fibaro Smoke Sensor\r\nstops sending the alarm signal.\r\nAvailable settings: 0 – 17280, 65535 (5s multiplier) [5s-24h]\r\n0 - no delay, immediate cancellation\r\n65535 - alarm cancellation inactive - Smoke Sensor will keep indicating smoke\r\nalarm after the smoke will have disappeared. The smoke alarm can be only ceased\r\nmanually, by entering 2nd menu level"
+            }
           },
           "value": [
             {
               "@from": "0000",
               "@to": "0000",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "keine Verzögerung, sofortige Beendigung des Alarms\r\n"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "no delay, immediate cancellation\r\n"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "no delay, immediate cancellation"
+                }
               }
             },
             {
               "@from": "0001",
               "@to": "4380",
-              "@unit": "5s",
+              "@unit": "x5sec",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Verzögerung"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "delay"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define the time delay."
+                }
               }
             },
             {
-              "@from": "8000",
-              "@to": "8000",
+              "@from": "fffe",
+              "@to": "fffe",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Alarm Beeindigung ausgeschaltet - Alarm wird nach verschwinden des Rauches weiter gemeldet. Alarm kann nur manuell durch öffnen des 2. Menüs beendet werden"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "alarm cancellation inactive - Smoke Sensor will keep indicating smoke alarm after the smoke will have disappeared. The smoke alarm can be only ceased manually, by entering 2nd menu level"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "alarm cancellation inactive"
+                }
               }
             }
           ]
         },
         {
           "@number": "2",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "03",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "LED Anzeige und akustischer Alarm An/Aus für jeden Alarm Typ"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "LED indicator and acoustic alarm turned ON / OFF at any alarm type"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "LED indicator and acoustic alarm turned ON / OFF at any alarm type."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "aktiviert/deaktiviert LED Anzeige und akustischen Alarm für jeden Alarm Typ. Kein Einfluss auf Z-Wave Alarmmeldung."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "activates/deactivates the LED indicator and acoustic alarm for any alarm type. Doesn’t affect the Z-Wave alarm."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Allows for deactivating the LED indicator and the acoustic alarm, in case of\r\ndetecting an alarm of any type. This doesn’t affect the communication with the\r\nZ-Wave network controller, i.e. the sensor will keep sending alarms, reports and all\r\ninformation to the associated devices. Modifying this parameter settings helps\r\nextending the battery life.\r\n"
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "akustischer und visueler Alarm inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "acoustic and visual alarms inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "acoustic and visual alarms inactive"
+                }
               }
             },
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "akustischer Alarm inaktiv, visueller Alarm aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "acoustic alarm inactive, visual alarm active"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "acoustic alarm inactive, visual alarm active"
+                }
               }
             },
             {
               "@from": "02",
               "@to": "02",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "akustischer Alarm aktiv, visueller Alarm inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "acoustic alarm active, visual alarm inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "acoustic alarm active, visual alarm inactive"
+                }
               }
             },
             {
               "@from": "03",
               "@to": "03",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "akustischer und visueler Alarm aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "acoustic and visual alarms active"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "acoustic and visual alarms active"
+                }
               }
             }
           ]
         },
         {
           "@number": "5",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "ff",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Typ des Alarm Frame, der an 1. Assoziationsgruppe gesendet wird (Rauch Alarm)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Type of alarm frame sent to 1-st Association Group devices (smoke alarm)"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Type of alarm frame sent to 1-st Association Group devices (smoke alarm)."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "bestimmen der Kommando Klasse für 1. Assoziationsgruppe"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "choose a command class used in 1-st Association Group"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Allows for choosing a command class used in 1-st Association Group.\r\nAvailable settings: 0, 255\r\n"
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "ALARM SENSOR (RAUCH) Kommando\r\n"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "ALARM SENSOR (SMOKE) command frame"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ALARM SENSOR (SMOKE) command frame"
+                }
               }
             },
             {
               "@from": "ff",
               "@to": "ff",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "BASIC SET Kommando"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "BASIC_SET command frame"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "BASIC_SET command frame"
+                }
               }
             }
           ]
         },
         {
           "@number": "7",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "1",
-          "@default": "7f",
+          "@default": "ff",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Dimmer Niveau für Geräte der 1. Assoziationsgruppe"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Forced dimming level sent to 1-st association group devices"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Forced level of dimming / opening dimmers, roller blinds etc. devices at sending turn on / open / change level commands to 1-st Association Group’s devices."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Erzwungenes Dimmer Niveau für Dimmer, Jalousien beim Anschalten/ Umschalten der Geräte der 1. Assoziationsgruppe"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Forced level of dimming / opening dimmers, roller blinds etc. devices at\r\nsending turn on / open / change level commands to 1-st Association Group’s\r\ndevices."
-              }
-            ]
-          },
-          "value": {
-            "@from": "01",
-            "@to": "63",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "99 bedeutet Gerät wird auf letztes gespeichertes Level geschaltet"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "99 means turning on the device with the last remembered status"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The value of 255 allows for turning on a device. In case of Dimmer, the value of 255\r\nmeans turning on the device with the last memorized state. E.g. Dimmer set to\r\n30% and then turned off, and next turned on using the 255 command, will turn on\r\nwith the last remembered status, i.e. 30%.\r\nIn case of alarm frames, alarm priority is defined.\r\nAvailable settings: (1 - 99) or 255\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "01",
+              "@to": "63",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set the forced level of dimming/opening devices."
+                }
+              }
+            },
+            {
+              "@from": "ff",
+              "@to": "ff",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Device is turned on."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "10",
-          "@type": "range",
+          "@type": "rangemapped",
           "@size": "2",
           "@default": "0000",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperaturreport Intervall"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature report interval"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature report interval"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitintervall zwischen Aussenden der Temperaturreports"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time interval between consecutive temperature reports"
-              }
-            ]
-          },
-          "value": {
-            "@from": "0000",
-            "@to": "4380",
-            "@unit": "5s [5s-24h]",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0 (Reports inaktiv)"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0 (Reports inactive)"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time interval between consecutive temperature reports.\r\nThe parameter is relevant for the battery powering mode only. Longer time interval\r\nmeans less frequent communication and thus a longer battery life.\r\nReport is sent when new temperatue value is different from the one previously\r\nreported. Temperature reports can be also sent as a result of polling.\r\nAvailable settings: 1 – 17280, 0 (multiply by 5 seconds) [5s-24h]\r\n"
             }
-          }
+          },
+          "value": [
+            {
+              "@from": "0000",
+              "@to": "0000",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Reports are inactive."
+                }
+              }
+            },
+            {
+              "@from": "0001",
+              "@to": "4380",
+              "@unit": "x5sec",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define the temperature report interval."
+                }
+              }
+            }
+          ]
         },
         {
           "@number": "12",
@@ -537,139 +400,36 @@
           "@size": "1",
           "@default": "14",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperaturreport Hysterese"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature report hysteresis"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperaturänderung, durch die ein Temperaturreport ausgelöst wird"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "temperature change, resulting in a temperature report"
-              }
-            ]
-          },
-          "value": {
-            "@from": "00",
-            "@to": "64",
-            "@unit": "0,1°C",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0 - temperaturänderungsabhängige Meldung inaktiv"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0 - temperature change reporting inactive"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature report hysteresis."
             }
-          }
-        },
-        {
-          "@number": "13",
-          "@type": "rangemapped",
-          "@size": "1",
-          "@default": "00",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Alarm Broadcast"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Alarm broadcast"
-              }
-            ]
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "bestimmt die Broadcast Alrm Einstellungen (Alarm an alle Geräte in direkter Reichweite)"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "defines the broadcast alarm setting (alarm to all devices in direct range)"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The temperature report will only be sent if there is a difference in temperature value\r\nfrom the previous value reported, defined in this parameter (hysteresis).\r\nTemperature reports can be also sent as a result of polling.\r\nAvailable settings: 0 – 100 (in 0,1°C steps)\r\nDefault setting: 20 (2°C)"
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Broadcast inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "broadcast inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "The temperature change reporting function is inactive."
+                }
               }
             },
             {
               "@from": "01",
-              "@to": "01",
+              "@to": "64",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rauchalarm Broadcast (1.Assozitionsgruppe) aktiv;\r\nManipulationsalarm Broadcast (2. Assoziationsgruppe) inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "smoke alarm broadcast (1-st Association Group) active; tamper alarm broadcast (2-nd Association Group) inactive"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "02",
-              "@to": "02",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rauchalarm Broadcast (1.Assozitionsgruppe) inaktiv;\r\nManipulationsalarm Broadcast (2. Assoziationsgruppe) aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "smoke alarm broadcast (1-st Association Group) inactive; tamper alarm broadcast (2-nd Association Group) active"
-                  }
-                ]
-              }
-            },
-            {
-              "@from": "03",
-              "@to": "03",
-              "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "Rauchalarm Broadcast (1.Assozitionsgruppe) aktiv;\r\nManipulationsalarm Broadcast (2. Assoziationsgruppe) aktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "smoke alarm broadcast active (1-st association group); tamper alarm broadcast (2-nd association group) active"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Define delta T for a temperature report."
+                }
               }
             }
           ]
@@ -680,42 +440,26 @@
           "@size": "2",
           "@default": "0000",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Tempraturmessungs-Ausgleich"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature measurement compensation"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature measurement compensation"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperaturwert, der addiert oder subtrahiert vom aktuell gemessenen Wert wird"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "temperature value to be added to or deducted from the current measured temperature "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Parameter stores a temperature value to be added to or deducted from the current\r\ntemperature measured by internal temperature sensor in order to compensate the\r\ndifference between air temperature and temperature measured at the ceiling level.\r\nAvailable settings: -1000 -/+ 1000 (in 0,1°C steps)"
+            }
           },
           "value": {
             "@from": "fc18",
             "@to": "03e8",
-            "@unit": "0,1°C",
+            "@unit": "x0.1 °C",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de"
-                },
-                {
-                  "@xml:lang": "en"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set a temperature compensation value."
+              }
             }
           }
         },
@@ -725,91 +469,67 @@
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Z-wave Reichweitentest Intervall"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Z-Wave range test interval"
-              }
-            ]
-          },
-          "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitperiode zwischen dem Ausführen der Z-Wave Reichweitentests"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time period between the consecutive Z-Wave network range tests"
-              }
-            ]
-          },
-          "value": {
-            "@from": "00",
-            "@to": "11",
-            "@unit": "10min[10min-24h]",
-            "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "0 - Z-Wave Reichweitentest inaktiv"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "0 – Z-Wave network range test inactive"
-                }
-              ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Z-Wave range test interval."
             }
-          }
-        },
-        {
-          "@number": "81",
-          "@type": "range",
-          "@size": "1",
-          "@default": "36",
-          "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperatur-Alarm-Grenze"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature alarm threshold"
-              }
-            ]
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperaturwert, oberhalb dessen ein Tempertur-Alarm ausgesendet wird"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature value, above which the temperature alarm is sent"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time period between the consecutive Z-Wave network range tests.\r\nIn battery powering mode, Z-Wave network range test is carried out at the wake up\r\ninterval. The value of 0 turns off the Z-Wave range test, regardless of the powering\r\nmode chosen.\r\nAvailable settings: 0 – 144 (10min multiplier) [10min-24h]\r\nDefault setting: 1 (10min)"
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "0 – Temperatur Alarm inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "0 – temperature alarm inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Z-Wave network range test is inactive."
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "90",
+              "@unit": "x10min",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set the time interval for Z-Wave network range tests."
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "81",
+          "@type": "rangemapped",
+          "@size": "1",
+          "@default": "36",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature alarm threshold."
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature value, measured by the built-in temperature sensor, above which the\r\ntemperature alarm is sent.\r\n\r\n"
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Function is disabled."
+                }
               }
             },
             {
@@ -817,174 +537,110 @@
               "@to": "64",
               "@unit": "°C",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de"
-                  },
-                  {
-                    "@xml:lang": "en"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "Set the temperature value."
+                }
               }
             }
           ]
         },
         {
           "@number": "82",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "02",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Rauchmelder Empfindlichkeit"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Smoke Sensor sensitivity"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Fibaro Smoke Sensor sensitivity"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "3 Empfindlichkeitsstufen für den Rauchmelder. Stufe 1 hat die höchste Empfindlichkeit."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "There are 3 levels of sensitivity to smoke presence. Level 1 means the highest sensitivity."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "There are 3 levels of sensitivity to smoke presence. Level 1 means the highest\r\nsensitivity.\r\n"
+            }
           },
           "value": [
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "hohe Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "HIGH Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "HIGH Sensitivity"
+                }
               }
             },
             {
               "@from": "02",
               "@to": "02",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "mittlere Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "MEDIUM Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "MEDIUM Sensitivity"
+                }
               }
             },
             {
               "@from": "03",
               "@to": "03",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "niedrige Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "LOW Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "LOW Sensitivity"
+                }
               }
             }
           ]
         },
         {
           "@number": "83",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
-          "@default": "00",
+          "@default": "02",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Black Box Empfindlichkeit"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Black Box sensitivity level"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Black Box sensitivity level."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Parameter legt fest bei welchem temperatur- und Rauchniveau die Black Box beginnt die Daten aufzuzeichnen"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Parameter specifies temperature and smoke level after which the Black Box starts recording them "
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "This parameter allows for specifying the moment in which the Black Box starts\r\nrecording data. After the specified smoke and temperature values will be\r\nexceeded, the Fibaro Smoke Sensor’s Black Box will record them.\r\n"
+            }
           },
           "value": [
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "hohe Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "HIGH Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "HIGH Sensitivity"
+                }
               }
             },
             {
               "@from": "02",
               "@to": "02",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "mittlere Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "MEDIUM Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "MEDIUM Sensitivity"
+                }
               }
             },
             {
               "@from": "03",
               "@to": "03",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "niedrige Empfindlichkeit"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "LOW Sensitivity"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "LOW Sensitivity"
+                }
               }
             }
           ]
@@ -995,42 +651,25 @@
           "@size": "1",
           "@default": "0a",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Fehlfunktionsalarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Malfunction alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Malfunction alarm"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitintervall, über das der Fehlfunktionsalarm, wenn festgestellt, wiederholt wird mit optischem und akustischem Signal."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time interval in which malfuntion alarm, if detected, is repeated using visual and\r\nacoustic alarms."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time interval in which malfuntion alarm, if detected, is repeated using visual and\r\nacoustic alarms.\r\nAvailable settings: 1 - 255 (100 ms multiplier) [100ms-25,5s]\r\n"
+            }
           },
           "value": {
-            "@from": "82",
-            "@to": "7f",
-            "@unit": "100ms[100ms-25,5s]",
+            "@from": "01",
+            "@to": "ff",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de"
-                },
-                {
-                  "@xml:lang": "en"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set the time interval."
+              }
             }
           }
         },
@@ -1040,44 +679,25 @@
           "@size": "1",
           "@default": "05",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperatur Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Temperature alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Temperature alarm"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitintervall, über das der Temperatur Alarm, wenn festgestellt, wiederholt wird mit optischem und akustischem Signal."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time interval in which temperature alarm, if detected, is repeated using visual and\r\nacoustic alarms."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time interval in which temperature alarm, if detected, is repeated using visual and\r\nacoustic alarms.\r\nAvailable settings: 1 - 255 (100 ms multiplier) [100ms-25,5s]\r\n"
+            }
           },
           "value": {
-            "@from": "82",
-            "@to": "7f",
-            "@unit": "100ms[100ms-25,5s]",
+            "@from": "01",
+            "@to": "ff",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "5 bedeutet 500ms"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "5 means 500ms"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set the time interval."
+              }
             }
           }
         },
@@ -1087,44 +707,25 @@
           "@size": "2",
           "@default": "0168",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Reichweiten Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Lack of the Z-Wave range alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Lack of the Z-Wave range alarm"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitintervall, über das der Reichweiten Alarm, wenn festgestellt, wiederholt wird mit optischem und akustischem Signal."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time interval in which lack of the Z-Wave network alarm, if detected, is repeated\r\nusing visual and acoustic alarms."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time interval in which lack of the Z-Wave network alarm, if detected, is repeated\r\nusing visual and acoustic alarms.\r\nAvailable settings: 1 - 17280 (5s multiplier) [5s-24h]\r\nDefault setting: 360 (30min)"
+            }
           },
           "value": {
             "@from": "0001",
             "@to": "4380",
-            "@unit": "5s [5s-24h]",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "360 bedeutet 30min"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "360 means 30min"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set the time interval."
+              }
             }
           }
         },
@@ -1134,187 +735,173 @@
           "@size": "2",
           "@default": "0168",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Niedriger Batteriestatus Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Low battery alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Low battery alarm"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Zeitintervall, über das der Niedriger Batteriestatus Alarm, wenn festgestellt, wiederholt wird mit optischem und akustischem Signal."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Time interval in which low battery alarm, if detected, is repeated using visual and\r\nacoustic alarms."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Time interval in which low battery alarm, if detected, is repeated using visual and\r\nacoustic alarms.\r\nAvailable settings: 1 - 17280 (5s multiplier) [5s-24h]\r\nDefault setting: 360 (30min)"
+            }
           },
           "value": {
             "@from": "0001",
             "@to": "4380",
-            "@unit": "5s [5s-24h]",
             "description": {
-              "lang": [
-                {
-                  "@xml:lang": "de",
-                  "#text": "360 bedeutet 30min"
-                },
-                {
-                  "@xml:lang": "en",
-                  "#text": "360 means 30min"
-                }
-              ]
+              "lang": {
+                "@xml:lang": "en",
+                "#text": "Set the time interval."
+              }
             }
           }
         },
         {
           "@number": "88",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "00",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Temperatur Messungsausgleich für Report"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "temperature measurement compensation for report"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Consider temperature measurement compensation (parameter 73) when sending temperature report."
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Festlegung zur Berücksichtigung des Temperaturausgleichs (Parameter 73) bei Senden des Temperatur Reports."
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Consider temperature measurement compensation (parameter 73) when\r\nsending temperature report."
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en"
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "0 - Temperaturausgleich ignorieren"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "0 - ignore temperature compensation"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "ignore temperature compensation"
+                }
               }
             },
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "1 - Temperaturausgleich einberechnen"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "1 - include temperature compensation"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "include temperature compensation"
+                }
               }
             }
           ]
         },
         {
           "@number": "89",
-          "@type": "rangemapped",
+          "@type": "constant",
           "@size": "1",
           "@default": "01",
           "name": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "Manipulationsalarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "Tamper alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Tamper alarm"
+            }
           },
           "description": {
-            "lang": [
-              {
-                "@xml:lang": "de",
-                "#text": "aktiviert/deaktiviert Manipulationsschutz Alarm"
-              },
-              {
-                "@xml:lang": "en",
-                "#text": "activates/inactivates temper switch alarm"
-              }
-            ]
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "The parameter defines the state of the tamper alarm."
+            }
           },
           "value": [
             {
               "@from": "00",
               "@to": "00",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "0 - Manipulationsschutz Alarm inaktiv"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "0 – tamper alarm inactive"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "tamper alarm inactive"
+                }
               }
             },
             {
               "@from": "01",
               "@to": "01",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "1 - Manipulationsschutz Alarm aktiv, mit Möglichkeit zum Deaktivieren"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "1 – tamper alarm active, with cancellation option available"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "tamper alarm active, with cancellation option available"
+                }
               }
             },
             {
               "@from": "02",
               "@to": "02",
               "description": {
-                "lang": [
-                  {
-                    "@xml:lang": "de",
-                    "#text": "2 - Manipulationsschutz Alarm aktiv, ohne Möglichkeit zum Deaktivieren"
-                  },
-                  {
-                    "@xml:lang": "en",
-                    "#text": "2 – tamper alarm active, without cancellation option"
-                  }
-                ]
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "tamper alarm active, without cancellation option"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@number": "13",
+          "@type": "constant",
+          "@size": "1",
+          "@default": "00",
+          "name": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "Alarm broadcast"
+            }
+          },
+          "description": {
+            "lang": {
+              "@xml:lang": "en",
+              "#text": "A value other than 0 means that alarms are being sent in broadcast mode, i.e. to\r\nall devices within a Fibaro Smoke Sensor’s range.\r\n"
+            }
+          },
+          "value": [
+            {
+              "@from": "00",
+              "@to": "00",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "broadcast inactive"
+                }
+              }
+            },
+            {
+              "@from": "01",
+              "@to": "01",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "smoke alarm broadcast (1-st Association Group) active; tamper alarm\r\nbroadcast (2-nd Association Group) inactive"
+                }
+              }
+            },
+            {
+              "@from": "02",
+              "@to": "02",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "smoke alarm broadcast (1-st Association Group) inactive; tamper alarm\r\nbroadcast (2-nd Association Group) active"
+                }
+              }
+            },
+            {
+              "@from": "03",
+              "@to": "03",
+              "description": {
+                "lang": {
+                  "@xml:lang": "en",
+                  "#text": "smoke alarm broadcast active (1-st association group); tamper alarm\r\nbroadcast (2-nd association group) active"
+                }
               }
             }
           ]
@@ -1323,7 +910,7 @@
     },
     "resourceLinks": {
       "deviceImage": {
-        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/e51e24992129c995046a00a181729922efc729eb.png"
+        "@url": "http://www.pepper1.net/zwavedb/uploads/resources/158e966170dc40718918ef4a73c28a4e3dc0246c.png"
       }
     }
   }
