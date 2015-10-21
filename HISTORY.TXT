@@ -1,6 +1,7 @@
 ﻿RELEASE HISTORY
 
 20/10/2015 v1.1-beta.498
+    - Fixed MIG-Protocols-UPnP interface not releasing allocated SSDP resources
     - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface
     - Updated Pepper1 ZWave database
     - Fixed HG/Web hang problem after certain number of connections not properly closed by remote clients (Too many open files)

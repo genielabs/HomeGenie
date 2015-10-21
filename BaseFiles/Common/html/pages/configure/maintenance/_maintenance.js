@@ -323,10 +323,10 @@ HG.WebApp.Maintenance.LoadSettings = function () {
     $.mobile.loading('show');
     //
     HG.WebApp.Maintenance.LoadUpdateCheckSettings();
-    //HG.System.LoggingIsEnabled(function (data) {
-    //    $('#configure_system_flip_logging').val(data).slider('refresh');
-    //    $.mobile.loading('hide');
-    //});
+    HG.System.LoggingIsEnabled(function (data) {
+        $('#configure_system_flip_logging').val(data).slider('refresh');
+        $.mobile.loading('hide');
+    });
     HG.WebApp.Maintenance.LoadHttpSettings();
     HG.WebApp.Maintenance.LoadStatisticsSettings();
     //

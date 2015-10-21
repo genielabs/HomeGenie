@@ -3,7 +3,8 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r498</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface
+  <ReleaseNote>   - Fixed MIG-Protocols-UPnP interface not releasing allocated SSDP resources
+  - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface
   - Updated Pepper1 ZWave database
   - Fixed HG/Web hang problem after certain number of connections not properly closed by remote clients (Too many open files)
   - Added arm Home/Away modes to Security Alarm System app

@@ -343,8 +343,6 @@ namespace HomeGenie.Service.Handlers
                     (request.Context.Data as HttpListenerContext).Response.AddHeader("Content-Disposition", "attachment;filename=homegenie_log_" + migCommand.GetOption(1) + ".csv");
                     request.ResponseData = csvlog;
                 }
-                // TODO: !IMPORTANT! DISABLED FOR NEW MIG                        
-                /*
                 else if (migCommand.GetOption(0) == "SystemLogging.Enable")
                 {
                     SystemLogger.Instance.OpenLog();
@@ -361,7 +359,6 @@ namespace HomeGenie.Service.Handlers
                 {
                     request.ResponseData = new ResponseText((homegenie.SystemConfiguration.HomeGenie.EnableLogFile.ToLower().Equals("true") ? "1" : "0"));
                 }
-                */
                 else if (migCommand.GetOption(0) == "Security.SetPassword")
                 {
                     // password only for now, with fixed user login 'admin'
