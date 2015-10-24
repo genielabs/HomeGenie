@@ -14,6 +14,10 @@ used for displaying the widget in the *UI*, the *Model* is small javascript code
 renders them to the view, and the *Controller* is the automation program that [receives commands](programs.html#commands)
 from the View (upon user interaction) or other agents and implement the business logic of the module.
 
+<div align="center">
+    <img src="https://lh3.googleusercontent.com/xk4VUQpkCMiGHkomxHRZPpy5cdfKBZReAtQDtpSxDGYCP5KTefdSSnc0gsb974OukbEoFwfJi_M6Lr7BFuMJV-Eh6dPc5OMJ5yZJPTe-QX0aEk_lBpiMqiL3dMIXlSLs7qUqYfnyNGceQWH4LhqhQypg0Gdnd1vZAKFBSBsJsca9dcxn_276z4RZXBRDXtf6hfCOBPB4jJnKFUPylC9oR2Jpz4T_VHPZk6LYWQv9nxhkLFGFjmQ6N7_rvuFpY7WO8EfFsWwTFblwH0qC8KkSQs0dByqZEABV1G00zCDH0S74r8qBwWRZ4YKMWtGfUSO3bn8BEFcZI80zi2KBQtJ1bZwoU2Xm2IKxpo7FRRLsF8GljHIMadG_aUrl--Zy_9zkPvbcQwK1iHIULlOmEUqe5VVYvxAqNp0sxNphKp_LvTuRmcTNFBWmhI6iKdzr3XN5xikgjQ1vyxbfnsI-Mr52XGbijRPgo0HjjKx7P1e-eaOtVboTUQRZCsB6M03N5Kqryrq9MgWft123-APpmf0VAeKEEz3onQq_LSxKQJq3qlU=w1172-h783-no" width="640" />
+</div>
+
 ## Widget Editor
 
 So, while the *Program Editor* can be used to implement the *Controller* part in the [MVC](https://it.wikipedia.org/wiki/Model-View-Controller),
