@@ -33,6 +33,7 @@ to be used for Administration and testing purposes as it will give full access t
 - [HomeGenie for Android on github](https://github.com/genielabs/HomeGenie-Android)
 - [HomeGenie for Windows Phone on github](https://github.com/genielabs/HomeGenie-WindowsPhone)
 
+<a name="HomeGeniePlus"></a>
 ## HomeGenie Plus for Android
 
 Specifically designed to be a Control Panel the end-user, it is a feature rich mobile client for HomeGenie.
@@ -75,4 +76,17 @@ the administrator can setup the configuration in order to limit the access from 
 ### HomeGenie Plus availability - Beta Testers
 
 HomeGenie Plus is currently available to beta testers and can be installed directly from the Google Play Store.
-For best experience is highly recommended to be used with HomeGenie Server 1.1 r498 (and up).
+For best experience is highly recommended to use [HomeGenie Server 1.1 r498](download.html) (and up).
+
+Click the link below to install **HomeGenie Plus for Android**:
+
+[HomeGenie Plus for Android](https://play.google.com/apps/testing/com.glabs.homegenieplus)
+
+Feel free to submit any issue or feature request using the following link:
+
+[HomeGenie Plus issue reporting and features request](https://github.com/genielabs/HomeGenie/issues/new?labels=homegenie-plus-android)
+
+
+
+
+
