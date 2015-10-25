@@ -2,7 +2,12 @@
     "timetable_group_shutters" : "Variateurs et Volets roulants",
     "timetable_group_thermostats" : "Thermostats",
     "timetable_group_lights" : "Eclairage et interrupteurs",
-    
+    "timetable_title" : "Timetable",
+    "timetable_calendar" : "Calendar",
+    "timetable_program" : "Program",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Day Light Saving time (summer)",
+
     "timetable_edit_table" : "Table horaire",
     "timetable_popup_set" : "Valider",
     "timetable_popup_cancel" : "Annuler",

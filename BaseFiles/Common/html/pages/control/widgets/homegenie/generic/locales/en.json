@@ -2,6 +2,11 @@
     "timetable_group_shutters" : "Shutters and dimmers",
     "timetable_group_thermostats" : "Thermostats",
     "timetable_group_lights" : "Lights and switches",
+    "timetable_title" : "Timetable",
+    "timetable_calendar" : "Calendar",
+    "timetable_program" : "Program",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Day Light Saving time (summer)",
     
     "timetable_edit_table" : "Edit Timetable",
     "timetable_popup_set" : "Set",

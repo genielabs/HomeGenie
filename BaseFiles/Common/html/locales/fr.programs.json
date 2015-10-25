@@ -127,7 +127,13 @@
     "TimeTable.Special":
         "Spécial",
     "TimeTable.Enable":
-        "Activer les Tables hotraires"
+        "Activer les Tables hotraires",
+    "TimeTable.CheckDST":
+        "Enable Day Light Saving check",
+    "TimeTable.UI.NoProgram":
+        "no program",
+    "TimeTable.UI.ProgramNr":
+        "program #"
 },
 
 "112": {

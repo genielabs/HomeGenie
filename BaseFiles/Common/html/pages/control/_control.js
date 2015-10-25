@@ -220,6 +220,7 @@ HG.WebApp.Control.GetWidget = function (widgetpath, callback) {
             },
             error: function (data) {
 
+                console.log(data);
                 if (callback != null) callback(null);
 
             }

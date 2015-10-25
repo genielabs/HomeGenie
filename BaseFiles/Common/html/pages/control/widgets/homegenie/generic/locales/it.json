@@ -2,6 +2,11 @@
     "timetable_group_shutters" : "Avvolgibili e variatori",
     "timetable_group_thermostats" : "Termostati",
     "timetable_group_lights" : "Luci e prese",
+    "timetable_title" : "Tabella Oraria",
+    "timetable_calendar" : "Calendario",
+    "timetable_program" : "Programma",
+    "timetable_standard" : "Standard",
+    "timetable_daylightsaving" : "Ora legale (estate)",
     
     "timetable_edit_table" : "Tabella oraria",
     "timetable_popup_set" : "Imposta",

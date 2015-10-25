@@ -814,9 +814,9 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
 };
 HG.WebApp.Locales.GetWidgetLocaleString = function(widget, stringid, defaultValue) {
     var retval = null;
-    if(typeof(widget.data("Locale")) == "undefined")
+    if(widget == null || typeof(widget) == 'undefined' || typeof(widget.data('Locale')) == 'undefined')
         return (defaultValue ? defaultValue : null);
-    retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data("Locale"));
+    retval = HG.WebApp.Locales.GetLocaleString(stringid, false, widget.data('Locale'));
     return (retval == null && defaultValue ? defaultValue : retval);
 };
 HG.WebApp.Locales.GetProgramLocaleString = function(programAddress, stringId, defaultValue) {

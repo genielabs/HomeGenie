@@ -39,8 +39,7 @@
                     HG.Control.Modules.ServiceCall('Thermostat.SetPointSet/' + _this.levelKnobBindValue, module.Domain, module.Address, v, function (data) { });
                 },
                 'change': function (v) {
-                    v = Math.round(v);
-                    controlpopup.find('[data-ui-field=status]').html(v + '&deg;');
+                    //controlpopup.find('[data-ui-field=status]').html(controlpopup.find('[data-ui-field=level_knob]').val() + '&deg;');
                 }
             });
 
@@ -104,6 +103,9 @@
                     }
                 }
                 // fan mode
+                controlpopup.find('[data-ui-field=fanmode_on]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_auto]').removeClass('ui-btn-active');
+                controlpopup.find('[data-ui-field=fanmode_circulate]').removeClass('ui-btn-active');
                 var fanMode = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.FanMode');
                 if (fanMode != null) {
                     if (fanMode.Value == 'On' || fanMode.Value == 'OnLow' || fanMode.Value == 'OnHigh') {
@@ -204,7 +206,10 @@
             widget.find('[data-ui-field=fan_field]').show();
             var displayFan = '---';
             switch (fanState.Value) {
-                case 1:
+                case '1':
+                case '2':
+                case 'Running':
+                case 'RunningHigh':
                     displayFan = 'On';
                     break;
                 default:
@@ -272,7 +277,7 @@
         var coolSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Cooling');
         if (coolSetPoint != null) {
             levelKnob.val(coolSetPoint.Value).trigger('change');
-            controlpopup.find('[data-ui-field=status]').html(coolSetPoint.Value + '&deg;');
+            //controlpopup.find('[data-ui-field=status]').html(coolSetPoint.Value + '&deg;');
         }
         this.levelKnobBindValue = 'Cooling';
     },
@@ -285,7 +290,7 @@
         var heatSetPoint = HG.WebApp.Utility.GetModulePropertyByName(module, 'Thermostat.SetPoint.Heating');
         if (heatSetPoint != null) {
             levelKnob.val(heatSetPoint.Value).trigger('change');
-            controlpopup.find('[data-ui-field=status]').html(heatSetPoint.Value + '&deg;');
+            //controlpopup.find('[data-ui-field=status]').html(heatSetPoint.Value + '&deg;');
         }
         this.levelKnobBindValue = 'Heating';
     }

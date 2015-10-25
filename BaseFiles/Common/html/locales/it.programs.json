@@ -127,7 +127,13 @@
     "TimeTable.Special":
         "Giorni speciali",
     "TimeTable.Enable":
-        "Abilita tabella oraria"
+        "Abilita tabella oraria",
+    "TimeTable.CheckDST":
+        "Abilita controllo ora legale",
+    "TimeTable.UI.NoProgram":
+        "nessun programma",
+    "TimeTable.UI.ProgramNr":
+        "programma #"
 },
 
 "112": {

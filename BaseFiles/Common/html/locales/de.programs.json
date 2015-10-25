@@ -127,7 +127,13 @@
     "TimeTable.Special":
         "Sondertage",
     "TimeTable.Enable":
-        "aktivieren Zeitplan"
+        "aktivieren Zeitplan",
+    "TimeTable.CheckDST":
+        "Enable Day Light Saving check",
+    "TimeTable.UI.NoProgram":
+        "no program",
+    "TimeTable.UI.ProgramNr":
+        "program #"
 },
 
 "112": {
