@@ -22,7 +22,7 @@
   TimebarResolution: 5,
   
   CalendarData: '',
-  CurrentTableId: 0,
+  CurrentProgram: 0,
   Groups: [ 
     { 
         'Table': 'Level', 
@@ -121,12 +121,25 @@
       //
       // ui events handlers
       //
+      // table select tab buttons
+      this.Widget.find('[data-ui-field=btn-page-shutters]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-0]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
+      this.Widget.find('[data-ui-field=btn-page-thermostats]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-1]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
+      this.Widget.find('[data-ui-field=btn-page-lights]').click(function(el){
+        _this.Widget.find('[data-ui-field^=table-group-]').hide();
+        _this.Widget.find('[data-ui-field=table-group-2]').show();
+        _this.SetTableId(_this.CurrentProgram);
+      });
       // popup values on open
       this.ControlPopup.on('popupbeforeposition', function(evt, ui){
-        var description = _this.Widget.find('[data-role=navbar]').eq(0).find('[class*=ui-btn-active]').html();
-        $(this).find('[data-ui-field=timetable_edit_group]').html(description);
-        var title = HG.WebApp.Locales.GetWidgetLocaleString(_this.Widget, 'timetable_edit_table', 'Edit Timetable');
-        _this.ControlPopup.find('[data-ui-field=timetable_edit_slot]').html(title + ' #' + (_this.TimebarElement.table + 1));
+        // TODO: resize width to best fit content
       });
       this.CalendarPopup.on('popupbeforeposition', function(evt, ui){
         $.mobile.loading('show', { text: 'Loading Calendar', textVisible: true });
@@ -143,6 +156,7 @@
       });
       this.Widget.find('[data-ui-field=btn-table-select]').click(function(el){
         var id = parseInt($(this).html() - 1);
+        _this.CurrentProgram = id;
         _this.Widget.find('[data-ui-field=btn-table-select]').removeClass('ui-btn-active');
         _this.Widget.find('[data-ui-field=btn-table-select]').eq(id).addClass('ui-btn-active');
         _this.SetTableId(id);
@@ -211,7 +225,7 @@
       this.timebar_onoff_d = this.Widget.find('[data-ui-field=timebar_onoff_d]');
       this.timebar_onoff_d.paper = Raphael(this.timebar_onoff_d.get(0), this.TimebarWidth, this.TimebarHeight);
       this.timebar_onoff_d.group = 2;
-      this.SetTableId(0);
+      this.SetTableId(this.CurrentProgram);
     }
     //
     if (lastupdatetime > 0)
@@ -248,6 +262,7 @@
 
   SetTable: function(el, id) {
     el.table = id;
+    el.paper.clear();
     var _this = this;
     var table = '';
     $.mobile.loading('show', { text: 'Loading table', textVisible: true });
@@ -264,6 +279,23 @@
   },
   
   SetTableGroup: function(id) {
+    // change popup title and description
+    var description = '';
+    switch(id) {
+    case 0:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_shutters', 'Shutters and Dimmers');
+        break;
+    case 1:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_thermostats', 'Thermostats');
+        break;
+    case 2:
+        description = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_group_lights', 'Lights and Switches');
+        break;
+    }
+    this.ControlPopup.find('[data-ui-field=timetable_edit_group]').html(description);
+    var title = HG.WebApp.Locales.GetWidgetLocaleString(this.Widget, 'timetable_program', 'Program');
+    this.ControlPopup.find('[data-ui-field=timetable_edit_slot]').html(title + ' #' + (this.CurrentProgram + 1));
+    // Select menu options
     var actions = this.ControlPopup.find('[data-ui-field=select_action]');
     actions.empty();
     for (var i = 0; i < this.Groups[id].Actions.length; i++)
@@ -336,12 +368,8 @@
   DrawTimetable: function(el, drawHeader, timetable) {
     var _this = this;
     var paper = el.paper;
-    console.log(el);
-    console.log(el.paper);
-    console.log(timetable);
     paper.clear();
     paper.rect(0, 0, this.TimebarWidth, this.TimebarHeight, 0).attr({fill: "#000", stroke: "none"});
-    console.log('paper cleared');
     var tableLength = 24 * 60 / this.TimebarResolution;
     var sliceFactor = (60 / this.TimebarResolution);
     while (timetable.length < tableLength) timetable += ' ';
@@ -353,7 +381,6 @@
       nb++;
       if ((i == (tableLength - 1)) || (timetable[i + 1] != timetable[i])) 
       {
-    console.log('paper drawing rect '+i);
         var rect = paper.rect(x, y + startY, (nb * stepSize) - 1, _this.TimebarHeight - (startY+1)).attr({ 'fill': '90-#455-' + _this.GetTableAction(el.group, timetable[i]).color, 'stroke': '#fff', 'stroke-width': '0.0' })
         .mouseover(function(e){
           this.attr({ 'stroke': '#5f5', 'stroke-width': '2', 'stroke-opacity' : 0.7 });
@@ -384,7 +411,7 @@
       }
       if (drawHeader && i % sliceFactor == 0)
       {
-        paper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 7, (i / sliceFactor).toString()).attr({ fill: '#fff' });
+        paper.text(((i / sliceFactor) * (sliceFactor * stepSize)) + 10, 8, (i / sliceFactor).toString()).attr({ fill: '#fff' });
         paper.rect(((i / sliceFactor) * (sliceFactor * stepSize)) + (stepSize * sliceFactor), 0, 2, 16, 0).attr({ fill: '#99f' });
       }
     }    

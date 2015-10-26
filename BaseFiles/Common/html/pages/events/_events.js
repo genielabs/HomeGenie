@@ -57,7 +57,7 @@ HG.WebApp.Events.Setup = function () {
                         timestamp: ''
                     });
         es.close();
-        setTimeout(HG.WebApp.Events.Setup, 1);
+        setTimeout(HG.WebApp.Events.Setup, 1000);
     };
     es.onmessage = function (e) {
         var event = JSON && JSON.parse(e.data) || $.parseJSON(e.data);
@@ -226,7 +226,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
                     timestamp: date
                 };
             }
-            else {
+            else if (eventLog.Property != 'Program.UiRefresh') {
                 //var name = module.Domain.substring(module.Domain.indexOf('.') + 1) + ' ' + module.Address;
                 //if (module.Name != '') name = module.Name;
                 popupdata = {

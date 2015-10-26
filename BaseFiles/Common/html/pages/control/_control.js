@@ -237,15 +237,13 @@ var widgetsloadtimer = null;
 HG.WebApp.Control.RenderModule = function () {
     clearTimeout(widgetsloadtimer);
     if (widgetsloadqueue.length > 0) {
-        //
         // extract and render element 
         var rendermodule = widgetsloadqueue.splice(0, 1)[0];
         var widget = $('#' + rendermodule.ElementId).data('homegenie.widget');
         if (widget != null && widget != 'undefined') {
             widget.RenderView('#' + rendermodule.ElementId, rendermodule.Module);
             widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
-        }
-        else {
+        } else {
             var html = '<div class="freewall"><div id="' + rendermodule.ElementId + '" class="hg-widget-container" data-context-group="' + rendermodule.GroupName + '" data-context-value="' + HG.WebApp.Utility.GetModuleIndexByDomainAddress(rendermodule.Module.Domain, rendermodule.Module.Address) + '">';
             HG.WebApp.Control.GetWidget(rendermodule.Module.Widget, function (w) {
                 if (w != null) {
@@ -254,7 +252,6 @@ HG.WebApp.Control.RenderModule = function () {
                     rendermodule.GroupElement.append(html);
                     rendermodule.GroupElement.trigger('create');
                     //rendermodule.GroupElement.listview('refresh');
-                    //
                     if (w.Json != null) {
                         try {
                             var myinstance = eval(w.Json)[0];
@@ -271,32 +268,24 @@ HG.WebApp.Control.RenderModule = function () {
                             console.log('[' + rendermodule.Module.Widget + '] widget error: "' + e + '", Line ' + e.lineNumber + ', Column ' + e.columnNumber);
                             //alert(rendermodule.Module.Widget + " Widget RenderView Error:\n" + e);
                         }
-                    }
-                    else {
+                    } else {
                         alert(rendermodule.Module.Widget + " Widget Instance Error:\n" + e);
                     }
-
-                }
-                else {
+                } else {
                     //alert(rendermodule.Module.Widget + " Widget Error.");
                     // setTimeout('HG.WebApp.Control.RenderModule()', 10);
                 }
-
                 widgetsloadtimer = setTimeout('HG.WebApp.Control.RenderModule()', 10);
             });
         }
-
-    }
-    else {
+    } else {
         HG.WebApp.Control._renderModuleBusy = false;
-        $.mobile.loading('hide');
-        //
         $('#groupdiv_modules_' + HG.WebApp.Data._CurrentGroupIndex).isotope({
             itemSelector: '.freewall',
             layoutMode: 'fitRows'
         }).isotope();
-        //
         HG.WebApp.Control.UpdateActionsMenu();
+        $.mobile.loading('hide');
     }
 
 };
