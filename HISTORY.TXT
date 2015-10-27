@@ -1,5 +1,7 @@
 ﻿RELEASE HISTORY
 
+27/10/2015 v1.1-beta.499
+    - Added temperature unit and date format preference in the maintenance/ui settings page
     - Fixed TcpClient helper class that not releasing resources on disconnect/reconnect
     - Added "Siren start delay" option to Security Alarm program
     - Brand new style and features for dashboard widgets

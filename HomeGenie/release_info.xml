@@ -3,6 +3,10 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r499</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote></ReleaseNote>
+  <ReleaseNote>   - Added temperature unit and date format preference in the maintenance/ui settings page
+  - Fixed TcpClient helper class that not releasing resources on disconnect/reconnect
+  - Added "Siren start delay" option to Security Alarm program
+  - Brand new style and features for dashboard widgets
+  - Added timetable program picker (module options dialog)</ReleaseNote>
   <ReleaseDate>2015-10-26T12:42:21.0000Z</ReleaseDate>
 </ReleaseInfo>

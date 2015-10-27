@@ -589,9 +589,9 @@ HG.WebApp.Utility.FormatTemperature = function (temp) {
 
 HG.WebApp.Utility.FormatDate = function (date)
 {
-    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dateFormat = dataStore.get('UI.DateFormat');
     var dt = null;
-    if (endianType == 'M')
+    if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
         dt = $.datepicker.formatDate('D, mm/dd/yy', date);
     else
         dt = $.datepicker.formatDate('D, dd/mm/yy', date);
@@ -600,12 +600,12 @@ HG.WebApp.Utility.FormatDate = function (date)
 
 HG.WebApp.Utility.FormatDateTime = function (date, showms)
 {
-    var endianType = HG.WebApp.Locales.GetDateEndianType();
+    var dateFormat = dataStore.get('UI.DateFormat');
     var dt = null;
     var h = date.getHours();
     var mm = date.getMinutes().toString(); if (mm.length == 1) mm = '0' + mm;
     var ss = date.getSeconds().toString(); if (ss.length == 1) ss = '0' + ss;
-    if (endianType == 'M')
+    if (dateFormat != 'DMY24' && (dateFormat == 'MDY12' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
     {
         var ampm = (h >= 12 ? 'PM' : 'AM');
         h = h % 12; h = (h ? h : 12);

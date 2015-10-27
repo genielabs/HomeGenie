@@ -68,6 +68,9 @@ HG.WebApp.Maintenance.InitializePage = function () {
         $("input[name='tempunit-choice']").on('change', function() {
             dataStore.set('UI.TemperatureUnit', $(this).val());
         });
+        $("input[name='dateformat-choice']").on('change', function() {
+            dataStore.set('UI.DateFormat', $(this).val());
+        });
         //
         $('#configure_system_updatemanager_updatebutton').bind('click', function () {
             $('#configure_system_updatemanager_info').html('<strong>Checking for updates...</strong>');
@@ -344,6 +347,15 @@ HG.WebApp.Maintenance.LoadSettings = function () {
     else
         $('#tempunit-fahrenheit').prop('checked', true);
     $("input[name='tempunit-choice']").checkboxradio('refresh');
+    //
+    var dateFormat = dataStore.get('UI.DateFormat');
+    $('#dateformat-dmy').prop("checked", false);
+    $('#dateformat-mdy').prop('checked', false);
+    if (dateFormat != 'MDY12')
+        $('#dateformat-dmy').prop('checked', true);
+    else
+        $('#dateformat-mdy').prop('checked', true);
+    $("input[name='dateformat-choice']").checkboxradio('refresh');
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
