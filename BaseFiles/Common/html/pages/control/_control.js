@@ -492,15 +492,7 @@ HG.WebApp.Control.RefreshGroupIndicators = function () {
             indicators += '<td align="center"><span class="hg-indicator-bulb">' + operating_lights + '</span></td>';
         }
         if (group_temperature != null) {
-            if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
-                // display as Fahrenheit
-                group_temperature = Math.round((group_temperature * 1.8 + 32) * 10) / 10;
-                displayvalue = (group_temperature * 1).toFixed(1) + '&#8457;';
-            } else {
-                // display as Celsius
-                group_temperature = Math.round(group_temperature * 10) / 10;
-                displayvalue = (group_temperature * 1).toFixed(1) + '&#8451;';
-            }
+            displayvalue = HG.WebApp.Utility.FormatTemperature(group_temperature);
             indicators += '<td align="center"><span class="hg-indicator-temperature">' + displayvalue + '</span></td>';
         }
         if (group_luminance != null) {

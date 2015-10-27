@@ -49,7 +49,7 @@
           api.cache.point = item.dataIndex;
 
           api.set('content.text',
-                  item.series.label + " at " + new Date(item.datapoint[0] + offset).toLocaleTimeString() + " = " + item.datapoint[1].toFixed(2));
+                  item.series.label + " at " + new Date(item.datapoint[0] + offset).toLocaleTimeString() + " = " + item.datapoint[1].toFixed(4));
 
           api.elements.tooltip.stop(1, 1);
           api.show(item);
@@ -94,8 +94,11 @@
         if (counterData.History.length > 0)
           yMin = counterData.History[counterData.History.length-1].Value;
         
-        for (var x = 0; x < counterData.History.length; x+=Math.ceil(counterData.History.length/48))
+        for (var x = 0; x < counterData.History.length; x+=Math.ceil(counterData.History.length/48)) {
           dataSerie.push([counterData.History[x].UnixTimestamp, counterData.History[x].Value]);
+          if (yMin > counterData.History[x].Value)
+            yMin = counterData.History[x].Value;
+        }
 
         try {
           $.plot(_this.Widget.find('[data-ui-field=energystats]'), [
@@ -123,11 +126,11 @@
             colors: ["rgba(200, 255, 0, 1.0)"],
             points: { show: false },
             zoom: {
-              interactive: true
+              interactive: false
             },
             pan: {
-              interactive: true
-            }                            
+              interactive: false
+            }
           });
         } catch (e) { }
 

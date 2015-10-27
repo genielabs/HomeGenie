@@ -65,6 +65,10 @@ HG.WebApp.Maintenance.InitializePage = function () {
             }
         });
         //
+        $("input[name='tempunit-choice']").on('change', function() {
+            dataStore.set('UI.TemperatureUnit', $(this).val());
+        });
+        //
         $('#configure_system_updatemanager_updatebutton').bind('click', function () {
             $('#configure_system_updatemanager_info').html('<strong>Checking for updates...</strong>');
             $.mobile.loading('show');
@@ -104,7 +108,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
         });
         //
         //$('systemsettings_updateinstall_popup').on('popupbeforeposition', function (event) {
-        //    
+        //
         //});
         $('#configure_system_updatemanager_proceedbutton').bind('click', function () {
             $('#configure_system_updateinstall_button').addClass('ui-disabled');
@@ -248,7 +252,7 @@ HG.WebApp.Maintenance.InitializePage = function () {
                 $.mobile.loading('show', { text: 'Please be patient, this may take some time...', textVisible: true, theme: 'a', html: '' });
                 HG.Configure.System.ServiceCall("System.ConfigurationRestoreS2/" + HG.WebApp.Maintenance.RestoreProgramList, function (data) {
                     setTimeout(function() {
-                        window.location.replace("/"); 
+                        window.location.replace("/");
                         $.mobile.loading('hide');
                     }, 20000);
                 });
@@ -331,6 +335,15 @@ HG.WebApp.Maintenance.LoadSettings = function () {
     HG.WebApp.Maintenance.LoadStatisticsSettings();
     //
     $('#configure_system_flip_eventshistory').val(dataStore.get('UI.EventsHistory') ? "1" : "0").slider('refresh');
+    //
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    $('#tempunit-celsius').prop("checked", false);
+    $('#tempunit-fahrenheit').prop('checked', false);
+    if (temperatureUnit != 'F')
+        $('#tempunit-celsius').prop('checked', true);
+    else
+        $('#tempunit-fahrenheit').prop('checked', true);
+    $("input[name='tempunit-choice']").checkboxradio('refresh');
 };
 
 HG.WebApp.Maintenance.LoadUpdateCheckSettings = function () {
@@ -406,10 +419,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
             cdomain = mod.Domain;
         }
         $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
-			.append($('<a/>',
-				{
-				    'text': mod.Address + ' ' + mod.Name
-				})));
+            .append($('<a/>',
+                {
+                    'text': mod.Address + ' ' + mod.Name
+                })));
     }
     cdomain = '';
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -422,10 +435,10 @@ HG.WebApp.Maintenance.RefreshModulesList = function () {
             cdomain = mod.Domain;
         }
         $('#configure_interfaces_modules_list').append($('<li/>', { 'data-icon': 'minus', 'data-context-domain': mod.Domain, 'data-context-address': mod.Address })
-			.append($('<a/>',
-				{
-				    'text': mod.Address + ' ' + mod.Name
-				})));
+            .append($('<a/>',
+                {
+                    'text': mod.Address + ' ' + mod.Name
+                })));
     }
     $('#configure_interfaces_modules_list').listview('refresh');
 };

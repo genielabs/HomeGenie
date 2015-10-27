@@ -209,7 +209,22 @@
         <div data-role="collapsible" data-inset="true" class="ui-mini">
 
             <h3><span data-locale-id="configure_system_userinterface">User Interface</span></h3>
-            <span data-locale-id="configure_system_theme">Theme</span>
+            <label data-locale-id="configure_system_temperature">Temperature Unit</label>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <input type="radio" name="tempunit-choice" id="tempunit-celsius" value="C" checked="checked" />
+                <label for="tempunit-celsius">Celsius</label>
+                <input type="radio" name="tempunit-choice" id="tempunit-fahrenheit" value="F" />
+                <label for="tempunit-fahrenheit">Fahrenheit</label>
+            </div>
+            <label data-locale-id="configure_system_dateformat">Date format</label>
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <input type="radio" name="dateformat-choice" id="dateformat-dmy" value="celsius" checked="checked" />
+                <label for="dateformat-dmy">Day/Month/Year 24hr</label>
+                <input type="radio" name="dateformat-choice" id="dateformat-mdy" value="fahrenheit" />
+                <label for="dateformat-mdy">Month/Day/Year 12hr am/pm</label>
+            </div>
+            <hr style="border:1px dotted black" />
+            <label data-locale-id="configure_system_theme">Theme</label>
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('a')">A</a>
                 <a class="ui-btn" href="javascript:HG.WebApp.Maintenance.SetTheme('b')">B</a>

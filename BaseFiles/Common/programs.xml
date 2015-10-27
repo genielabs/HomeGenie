@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:32.541431Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:14.196899Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:33.058279Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:14.707263Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -428,7 +428,7 @@ To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; th
     <Group>Weather and Enviroment</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:33.558242Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:15.207337Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -500,7 +500,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:34.045465Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:15.69976Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1101,7 +1101,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:34.548059Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:16.200414Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1148,7 +1148,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:35.044269Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:16.702441Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1231,13 +1231,14 @@ Program.AddFeature("", "Sensor,DoorWindow,DoorLock", "HomeGenie.SecurityTriggerH
 Program.AddFeature("", "Siren,Light,Dimmer,Switch", "HomeGenie.SecurityAlarm", "Use as Security Alarm", "checkbox");
 
 Program.AddOption("System.ArmDelay", "10", "1. Arm Delay (seconds)", "text");
-Program.AddOption("System.SirenMaxTime", "30", "2. Sirens Max Time (seconds, 0=infinite)", "text");
+Program.AddOption("System.SirenStartTime", "0", "2. Sirens Start Delay (seconds)", "text");
+Program.AddOption("System.SirenMaxTime", "30", "3. Sirens Max Time (seconds, 0=infinite)", "text");
 
-Program.AddOption("Email.Recipients", "", "3. Comma separated list of recipients e-mails for alarm notifications", "text");
+Program.AddOption("Email.Recipients", "", "4. Comma separated list of recipients e-mails for alarm notifications", "text");
 
-Program.AddOption("Trigger.ArmedProgram", "", "4. Program to run when armed", "text");
-Program.AddOption("Trigger.DisarmedProgram", "", "5. Program to run when disarmed", "text");
-Program.AddOption("Trigger.TriggeredProgram", "", "6. Program to run when triggered", "text");
+Program.AddOption("Trigger.ArmedProgram", "", "5. Program to run when armed", "text");
+Program.AddOption("Trigger.DisarmedProgram", "", "6. Program to run when disarmed", "text");
+Program.AddOption("Trigger.TriggeredProgram", "", "7. Program to run when triggered", "text");
 
 Program.Run();
 </ScriptCondition>
@@ -1413,9 +1414,8 @@ while (Program.IsEnabled)
 {
   if (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
   {
-    sirenModules.On();
-
-    var alarmstart = DateTime.Now;
+    var watchTimer = new System.Diagnostics.Stopwatch();
+    watchTimer.Start();
 
     // send email
     var subject = "HomeGenie Security System Alarmed";
@@ -1428,25 +1428,41 @@ while (Program.IsEnabled)
       });
     }
 
-    var sirenstopped = false;
-    while (Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
-    {
-      // flashing SecurityAlarm lights 
-      alarmModules.Toggle();
-      Pause(1);
-      alarmModules.Toggle();
-      Pause(1);
-      // turn off sirens if max time was set and elapsed
-      var elapsed = new TimeSpan(DateTime.Now.Ticks - alarmstart.Ticks);
-      if (!sirenstopped &amp;&amp; Program.Option("System.SirenMaxTime").DecimalValue &gt; 0 &amp;&amp; elapsed.TotalSeconds &gt; Program.Option("System.SirenMaxTime").DecimalValue)
+    // Flashing lights thread starts asynchronously
+    Program.RunAsyncTask(()=&gt;{
+      while (Program.IsEnabled &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
       {
-        sirenModules.Off();
-        sirenstopped = true;
+        // flashing SecurityAlarm lights 
+        alarmModules.Toggle();
+        Pause(1);
+        alarmModules.Toggle();
+        Pause(1);
       }
+      alarmModules.Off();
+    });
+    
+    // Sirens loop
+    int sirenStatus = 0;
+    while (Program.IsEnabled &amp;&amp; Program.Parameter("HomeGenie.SecurityTriggered").Value == "1")
+    {
+      if (sirenStatus == 0 &amp;&amp; watchTimer.Elapsed.TotalSeconds &gt;= Program.InputField("System.SirenStartTime").DecimalValue)
+      {
+        watchTimer.Stop();
+        sirenModules.On();
+        watchTimer = new System.Diagnostics.Stopwatch();
+        watchTimer.Start();
+        sirenStatus = 1;
+      }
+      else if (sirenStatus == 1 &amp;&amp; Program.InputField("System.SirenMaxTime").DecimalValue &gt; 0 &amp;&amp; watchTimer.Elapsed.TotalSeconds &gt;= Program.InputField("System.SirenMaxTime").DecimalValue)
+      {
+        // turn off sirens if max time was set and elapsed
+        sirenModules.Off();
+        sirenStatus = 2;
+      }            
     }
-    //Pause(1);
-    alarmModules.Off();
     sirenModules.Off();
+    watchTimer.Stop();    
+    
   }
   Pause(1);
 }
@@ -1480,7 +1496,7 @@ while (Program.IsEnabled)
         <Description>Use as Security Alarm</Description>
       </ProgramFeature>
     </Features>
-    <ActivationTime>2015-10-26T19:05:02.705281Z</ActivationTime>
+    <ActivationTime>2015-10-27T15:36:53.647975Z</ActivationTime>
     <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
@@ -1578,7 +1594,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:36.053406Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:17.703952Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1633,7 +1649,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:36.54482Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:18.204103Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1742,7 +1758,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:37.058289Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:18.707984Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2080,7 +2096,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:38.062355Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:19.709662Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2178,7 +2194,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:38.580365Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:20.221002Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2327,7 +2343,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:39.065536Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:20.71037Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2574,7 +2590,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:39.560713Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:21.213967Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6720,7 +6736,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:40.590778Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:22.227037Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7433,7 +7449,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-26T19:02:41.072646Z</TriggerTime>
+    <TriggerTime>2015-10-27T15:35:22.715098Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

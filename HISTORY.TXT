@@ -1,5 +1,10 @@
 ﻿RELEASE HISTORY
 
+    - Fixed TcpClient helper class that not releasing resources on disconnect/reconnect
+    - Added "Siren start delay" option to Security Alarm program
+    - Brand new style and features for dashboard widgets
+    - Added timetable program picker (module options dialog)
+
 20/10/2015 v1.1-beta.498
     - Fixed MIG-Protocols-UPnP interface not releasing allocated SSDP resources
     - Added to ZWaveLib message resend on node wake-up; fixed i/o synchronization issues in MIG ZWave interface

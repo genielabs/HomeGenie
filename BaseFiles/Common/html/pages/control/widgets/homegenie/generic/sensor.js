@@ -89,15 +89,7 @@
                     else if (module.Properties[p].Name == 'Sensor.Temperature') {
                         imagesrc = 'hg-indicator-temperature';
                         var temp = module.Properties[p].Value.replace(',', '.');
-                        if (HG.WebApp.Locales.GetDateEndianType() == 'M') {
-                            // display as Fahrenheit
-                            temp = Math.round((temp * 1.8 + 32) * 10) / 10;
-                            displayvalue = temp + '&#8457;';
-                        } else {
-                            // display as Celsius
-                            temp = Math.round(temp * 10) / 10;
-                            displayvalue = temp + '&#8451;';
-                        }
+                        displayvalue = HG.WebApp.Utility.FormatTemperature(temp);
                     }
                     else if (module.Properties[p].Name == 'Sensor.Luminance') {
                         imagesrc = 'hg-indicator-luminance';

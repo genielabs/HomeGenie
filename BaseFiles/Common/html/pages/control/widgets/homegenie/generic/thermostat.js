@@ -11,8 +11,6 @@
     levelKnobBindValue: 'Heating',
 
     RenderView: function (cuid, module) {
-        var displayUnit = 'Celsius';
-        if (HG.WebApp.Locales.GetDateEndianType() == 'M') displayUnit = 'Fahrenheit';
 
         var container = $(cuid);
         var widget = container.find('[data-ui-field=widget]');
@@ -43,7 +41,7 @@
                 }
             });
 
-            if (displayUnit == 'Celsius') {
+            if (HG.WebApp.Locales.GetTemperatureUnit() == 'Celsius') {
                 controlpopup.find('[data-ui-field=level_knob]').trigger('configure', {
                     min: 5,
                     max: 35,
@@ -192,10 +190,11 @@
         var temperatureField = HG.WebApp.Utility.GetModulePropertyByName(module, "Sensor.Temperature");
         var temperature = 0;
         if (temperatureField != null) {
-            temperature = Math.round(temperatureField.Value.replace(',', '.') * 100) / 100;
-            if (displayUnit == 'Fahrenheit') temperature = (temperature * 1.8) + 32;
+            temperature = temperatureField.Value.replace(',', '.');
+            widget.find('[data-ui-field=temperature_value]').html(HG.WebApp.Utility.FormatTemperature(temperature));
+        } else {
+            widget.find('[data-ui-field=temperature_value]').html('');
         }
-        widget.find('[data-ui-field=temperature_value]').html(temperature.toFixed(1) + '&deg;');
 
         // display Fan State
         var fanState = HG.WebApp.Utility.GetModulePropertyByName(module, "Thermostat.FanState");

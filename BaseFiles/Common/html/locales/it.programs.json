@@ -79,6 +79,8 @@
         "Elenco separato da virgola di destinatari e-mail per le notifiche di allarme",
     "ConfigureOptions.System.ArmDelay":
         "Ritardo inserimento allarme (seconds)",
+    "ConfigureOptions.System.SirenStartTime":
+        "Ritardo sirene/strobo (secondi)",
     "ConfigureOptions.System.SirenMaxTime":
         "Tempo massimo sirene/strobo (secondi, 0=infinito)",
     "ConfigureOptions.Trigger.ArmedProgram":

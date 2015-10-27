@@ -412,12 +412,6 @@
         <UpdateTime>2015-01-03T14:02:11.096254Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>ConfigureOptions.InputDisplayCelsius</Name>
-        <Value>ixkAM/uq24w4FhL1vR+sFg==</Value>
-        <Description>Display Temperature in degrees Celsius - TRUE or FALSE</Description>
-        <UpdateTime>2015-01-03T14:02:11.096432Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>ConfigureOptions.Language</Name>
         <Value>Cn6VRtmascV3JQiOUKb3YQ==</Value>
         <Description>Language</Description>

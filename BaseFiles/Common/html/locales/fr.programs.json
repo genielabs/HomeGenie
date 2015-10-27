@@ -79,6 +79,8 @@
         "Liste des destinataires des e-mails pour les notifications d'alarme  (séparés par des virgules)",
     "ConfigureOptions.System.ArmDelay":
         "Delai d'armement (secondes)",
+    "ConfigureOptions.System.SirenStartTime":
+        "Sirens Start Delay (seconds)",
     "ConfigureOptions.System.SirenMaxTime":
         "Durée de la sirène (seconds, 0=infini)",
     "ConfigureOptions.Trigger.ArmedProgram":

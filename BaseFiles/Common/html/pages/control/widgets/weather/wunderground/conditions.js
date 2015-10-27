@@ -70,8 +70,8 @@
       var last_updated = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.LastUpdated').Value;
       widget.find('[data-ui-field=last_updated_value]').html(last_updated);
       //
-      var display_celsius = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.DisplayCelsius').Value;
-      if (display_celsius == 'TRUE') {
+      var display_celsius = (HG.WebApp.Locales.GetTemperatureUnit() == 'Celsius');
+      if (display_celsius) {
         var temperaturec = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.TemperatureC').Value;
         widget.find('[data-ui-field=temperature_value]').html(temperaturec + '&#8451;');
       } else {
@@ -86,7 +86,7 @@
         widget.find('[data-ui-field=forecast_' + f + '_icon]').attr('src', this.GetIconUrl(fIconUrl));
         var fDescription = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.Description').Value;
         widget.find('[data-ui-field=forecast_' + f + '_desc]').html(fDescription);
-        if (display_celsius == 'TRUE') {
+        if (display_celsius) {
           var temperatureMinC = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureC.Low').Value;
           var temperatureMaxC = HG.WebApp.Utility.GetModulePropertyByName(module, 'Conditions.Forecast.' + f + '.TemperatureC.High').Value;
           widget.find('[data-ui-field=forecast_' + f + '_tmin]').html(temperatureMinC + '&#8451;');

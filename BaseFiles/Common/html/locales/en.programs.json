@@ -79,6 +79,8 @@
         "Comma separated list of recipients e-mails for alarm notifications",
     "ConfigureOptions.System.ArmDelay":
         "Arm delay (seconds)",
+    "ConfigureOptions.System.SirenStartTime":
+        "Sirens Start Delay (seconds)",
     "ConfigureOptions.System.SirenMaxTime":
         "Sirens max Time (seconds, 0=infinite)",
     "ConfigureOptions.Trigger.ArmedProgram":

@@ -4,8 +4,8 @@ HG.WebApp.Data = HG.WebApp.Data || {};
 //
 HG.WebApp.Data.Interfaces = Array();
 HG.WebApp.Data.Events = Array();
-HG.WebApp.Data.Modules = Array(); 
-HG.WebApp.Data.Groups = Array();  
+HG.WebApp.Data.Modules = Array();
+HG.WebApp.Data.Groups = Array();
 HG.WebApp.Data.AutomationGroups = Array();
 HG.WebApp.Data.Programs = Array();
 HG.WebApp.Data.ServiceKey = 'api';
@@ -52,11 +52,11 @@ HG.WebApp.InitializePage = function ()
     //
     // Page Before Show: common initialization stuff
     //
-    $('[data-role=page]').on('pagebeforeshow', function (event) 
+    $('[data-role=page]').on('pagebeforeshow', function (event)
     {
         setTheme(dataStore.get('UI.Theme'));
         //
-        if (this.id == "page_analyze") 
+        if (this.id == "page_analyze")
         {
             HG.WebApp.Statistics.InitConfiguration();
         }
@@ -64,7 +64,7 @@ HG.WebApp.InitializePage = function ()
         {
             HG.WebApp.Maintenance.LoadSettings();
         }
-        else if (this.id == 'page_configure_groups') 
+        else if (this.id == 'page_configure_groups')
         {
             HG.Configure.Modules.List(function (data) {
                 try
@@ -85,7 +85,7 @@ HG.WebApp.InitializePage = function ()
     // Page events - Close - Cleanup stuff
     //
     $('[data-role=page]').on('pagehide', function (event) {
-        if (this.id == "page_analyze") 
+        if (this.id == "page_analyze")
         {
             HG.WebApp.Statistics.SetAutoRefresh( false );
         }
@@ -228,71 +228,71 @@ HG.WebApp.InitializePage = function ()
 
 
 //
-// namespace : HG.WebApp.Events 
+// namespace : HG.WebApp.Events
 // info      : -
 //
-{include pages/events/_events.js}	
+{include pages/events/_events.js}
 //
-// namespace : HG.WebApp.Control 
+// namespace : HG.WebApp.Control
 // info      : -
 //
-{include pages/control/_control.js}		
+{include pages/control/_control.js}
 //
-// namespace : HG.WebApp.Statistics 
+// namespace : HG.WebApp.Statistics
 // info      : -
 //
-{include pages/analyze/_statistics.js}		
+{include pages/analyze/_statistics.js}
 //
-// namespace : HG.WebApp.GroupsList 
+// namespace : HG.WebApp.GroupsList
 // info      : Configure/Groups ui logic (Groups List)
 //
-{include pages/configure/groups/_groupslist.js}		
+{include pages/configure/groups/_groupslist.js}
 //
-// namespace : HG.WebApp.GroupModules 
+// namespace : HG.WebApp.GroupModules
 // info      : Configure/Groups ui logic (Group Modules)
 //
-{include pages/configure/groups/_groupmodules.js}	
+{include pages/configure/groups/_groupmodules.js}
 //
-// namespace : HG.WebApp.SystemSettings 
+// namespace : HG.WebApp.SystemSettings
 // info      : -
 //
-{include pages/configure/interfaces/_systemsettings.js}	
+{include pages/configure/interfaces/_systemsettings.js}
 //
-// namespace : HG.WebApp.Maintenance 
+// namespace : HG.WebApp.Maintenance
 // info      : -
 //
-{include pages/configure/maintenance/_maintenance.js}	
+{include pages/configure/maintenance/_maintenance.js}
 //
-// namespace : HG.WebApp.AutomationGroups 
+// namespace : HG.WebApp.AutomationGroups
 // info      : -
 //
-{include pages/configure/programengine/_groupslist.js}	
+{include pages/configure/programengine/_groupslist.js}
 //
-// namespace : HG.WebApp.ProgramsList 
+// namespace : HG.WebApp.ProgramsList
 // info      : -
 //
-{include pages/configure/programengine/_programslist.js}	
+{include pages/configure/programengine/_programslist.js}
 //
-// namespace : HG.WebApp.ProgramEdit 
+// namespace : HG.WebApp.ProgramEdit
 // info      : -
 //
-{include pages/configure/programengine/_programedit.js}	
+{include pages/configure/programengine/_programedit.js}
 //
-// namespace : HG.WebApp.WidgetEditor 
+// namespace : HG.WebApp.WidgetEditor
 // info      : -
 //
-{include pages/configure/widgeteditor/_widgetslist.js} 
-{include pages/configure/widgeteditor/_widgetedit.js} 
+{include pages/configure/widgeteditor/_widgetslist.js}
+{include pages/configure/widgeteditor/_widgetedit.js}
 //
-// namespace : HG.WebApp.Scheduler 
+// namespace : HG.WebApp.Scheduler
 // info      : -
 //
-{include pages/configure/scheduler/_scheduler.js}	
+{include pages/configure/scheduler/_scheduler.js}
 //
-// namespace : HG.WebApp.Apps.NetPlEditCurrentModuleay.SlideShow 
+// namespace : HG.WebApp.Apps.NetPlEditCurrentModuleay.SlideShow
 // info      : -
 //
-{include pages/apps/netplay/_slideshow.js}	
+{include pages/apps/netplay/_slideshow.js}
 //
 // namespace : HG.WebApp.Home namespace
 // info      : -
@@ -303,7 +303,7 @@ HG.WebApp.Home.UpdateHeaderStatus = function()
     HG.WebApp.Home.UpdateInterfacesStatus();
 };
 //
-HG.WebApp.Home.UpdateInterfacesStatus = function() 
+HG.WebApp.Home.UpdateInterfacesStatus = function()
 {
     var ifaceurl = '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/Interfaces.List/';
     $.ajax({
@@ -363,7 +363,7 @@ HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callbac
             highlightSelectionMatches: { showToken: /\w/ },
             mode: { name: "javascript", globalVars: true },
             theme: 'ambiance'
-        });    
+        });
     }
     var editor = $('#fullscreen_edit_box');
     editor.find('[data-ui-field=title]').html(title);
@@ -419,7 +419,7 @@ HG.WebApp.Utility.EditorPopup = function(name, title, subtitle, content, callbac
     $('#fullscreen_edit_box').show(150);
 };
 HG.WebApp.Utility.ConfirmPopup = function(title, description, callback) {
-    var confirmPopup = $('#actionconfirm_popup'); 
+    var confirmPopup = $('#actionconfirm_popup');
     confirmPopup.buttonProceed = $('#actionconfirm_confirm_button');
     confirmPopup.buttonCancel = $('#actionconfirm_cancel_button');
     confirmPopup.find('h3').html(title);
@@ -457,18 +457,18 @@ HG.WebApp.Utility.GetElapsedTimeText = function (timestamp)
     }
     return ret;
 };
-HG.WebApp.Utility.ParseModuleDomainAddress = function (domainAddress) 
+HG.WebApp.Utility.ParseModuleDomainAddress = function (domainAddress)
 {
     var result = null;
     if (domainAddress.indexOf(':') > 0) {
-        result = { 
+        result = {
             Domain: domainAddress.substring(0, domainAddress.lastIndexOf(':')),
             Address: domainAddress.substring(domainAddress.lastIndexOf(':') + 1)
         };
     }
     return result;
 },
-HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address) 
+HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address)
 {
     var module = null;
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -479,7 +479,7 @@ HG.WebApp.Utility.GetModuleByDomainAddress = function (domain, address)
     }
     return module;
 };
-HG.WebApp.Utility.GetModuleIndexByDomainAddress = function (domain, address) 
+HG.WebApp.Utility.GetModuleIndexByDomainAddress = function (domain, address)
 {
     var moduleidx = -1;
     for (var m = 0; m < HG.WebApp.Data.Modules.length; m++) {
@@ -522,7 +522,7 @@ HG.WebApp.Utility.SetModulePropertyByName = function (module, prop, value, times
         }
     }
 };
-	
+
 HG.WebApp.Utility.GetProgramByAddress = function (paddr)
 {
     var cp = null;
@@ -534,7 +534,7 @@ HG.WebApp.Utility.GetProgramByAddress = function (paddr)
         }
     }
     return cp;
-};	
+};
 
 HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
 {
@@ -553,23 +553,38 @@ HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
             command = 'Control.On';
             arg = '';
         }
-        commandobj = { 
-            'Domain' : module.Domain, 
-            'Target' : module.Address, 
-            'CommandString' : command, 
-            'CommandArguments' : arg 
+        commandobj = {
+            'Domain' : module.Domain,
+            'Target' : module.Address,
+            'CommandString' : command,
+            'CommandArguments' : arg
         };
     }
     else if (module.Domain == 'Controllers.LircRemote' && module.Address == 'IR')
     {
-        commandobj = { 
-            'Domain' : module.Domain, 
-            'Target' : module.Address, 
-            'CommandString' : 'Control.IrSend', 
-            'CommandArguments' : event.Value 
+        commandobj = {
+            'Domain' : module.Domain,
+            'Target' : module.Address,
+            'CommandString' : 'Control.IrSend',
+            'CommandArguments' : event.Value
         };
     }
     return commandobj;
+};
+
+HG.WebApp.Utility.FormatTemperature = function (temp) {
+    var displayvalue = '';
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
+        // display as Fahrenheit
+        temp = Math.round((temp * 1.8 + 32) * 10) / 10;
+        displayvalue = (temp * 1).toFixed(1) + '&#8457;';
+    } else {
+        // display as Celsius
+        temp = Math.round(temp * 10) / 10;
+        displayvalue = (temp * 1).toFixed(1) + '&#8451;';
+    }
+    return displayvalue;
 };
 
 HG.WebApp.Utility.FormatDate = function (date)
@@ -580,7 +595,7 @@ HG.WebApp.Utility.FormatDate = function (date)
         dt = $.datepicker.formatDate('D, mm/dd/yy', date);
     else
         dt = $.datepicker.formatDate('D, dd/mm/yy', date);
-    return dt; 
+    return dt;
 };
 
 HG.WebApp.Utility.FormatDateTime = function (date, showms)
@@ -600,9 +615,9 @@ HG.WebApp.Utility.FormatDateTime = function (date, showms)
     {
         dt = h + ':' + mm + ':' + ss + (showms ? '.' + date.getMilliseconds() : '');
     }
-    return dt; 
+    return dt;
 };
-	
+
 HG.WebApp.Utility.JScrollToElement = function (element, delay) {
     $('html, body').animate({
         scrollTop: $(element).offset().top
@@ -615,7 +630,7 @@ HG.WebApp.Utility.SwitchPopup = function(popup_id1, popup_id2, notransition) {
         {
             setTimeout(function () { $(popup_id2).popup('open'); }, 10);
         }
-        else	
+        else
         {
             setTimeout(function () { $(popup_id2).popup('open', { transition: 'pop' }); }, 100);
         }
@@ -644,6 +659,14 @@ HG.WebApp.Locales.GetDateEndianType = function()
     if (localeDateParts[0] == '2') endianType = 'M';
     return endianType;
 };
+HG.WebApp.Locales.GetTemperatureUnit = function()
+{
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M'))
+        return 'Fahrenheit';
+    else
+        return 'Celsius';
+};
 HG.WebApp.Locales.GetDefault = function(callback) {
     $.ajax({
         url: './locales/en.json',
@@ -657,13 +680,13 @@ HG.WebApp.Locales.GetDefault = function(callback) {
                 success: function (pdata) {
                     HG.WebApp.Data._DefaultLocale = $.extend(HG.WebApp.Data._DefaultLocale, $.parseJSON( pdata ));
                 }
-            });     
+            });
         }
-    });  
+    });
 };
 HG.WebApp.Locales.Localize = function(container, langurl, callback)
 {
-    // get data via ajax 
+    // get data via ajax
     // store it in 		HG.WebApp.Data._CurrentLocale
     // and replace locales strings in the current page
     HG.WebApp.Locales.GetDefault(function(){
@@ -696,7 +719,7 @@ HG.WebApp.Locales.Localize = function(container, langurl, callback)
                 if (typeof callback == 'function') callback(false);
             }
         });
-    });		
+    });
 };
 HG.WebApp.Locales.LocalizeElement = function(elementId, locale) {
     $(elementId).find('[data-locale-id]').each(function(index){
@@ -715,7 +738,7 @@ HG.WebApp.Locales.LocalizeElement = function(elementId, locale) {
             }
         }
     });
-    
+
 };
 HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue, locale)
 {
@@ -748,7 +771,7 @@ HG.WebApp.Locales.GetLocaleString = function(stringid, defaultValue, locale)
         }
     });
     if (retval == null)
-        console.log('LOCALIZATION ERROR "' + stringid + '" NOT FOUND!!!'); 
+        console.log('LOCALIZATION ERROR "' + stringid + '" NOT FOUND!!!');
     return (retval == null && defaultValue ? defaultValue : retval);
 };
 HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
@@ -783,8 +806,8 @@ HG.WebApp.Locales.LocalizeWidget = function(widgetpath, elementid) {
             $(container).find('[data-localizable]').each(function(index){
                 var stringid = $(this).text();
                 var text = HG.WebApp.Locales.GetLocaleString(stringid, false, locale);
-                if (text != null) {                    
-                    $(this).text(text);                    
+                if (text != null) {
+                    $(this).text(text);
                 }
             });
             // try to localize widget's popups if they were already processed by jQuery popup() function
@@ -848,4 +871,4 @@ HG.WebApp.Locales.GenerateTemplate = function()
     });
     console.log( localestring );
 };
-	
+

@@ -114,18 +114,21 @@ namespace NetClientLib
         public void Disconnect()
         {
             if (ConnectedStateChanged != null && client != null) ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(false));
-            // 
-            // Release the socket.
+
+            // Release all allocated resources
             if (client != null)
             {
                 try { client.Shutdown(SocketShutdown.Both); } catch { }
                 try { client.Disconnect(false); } catch { }
                 try { client.Close(); } catch { }
+                try { client.Dispose(); } catch { }
                 client = null;
             }
-            //
-            try { receiverTask.Abort(); }
-            catch { }
+
+            if (!receiverTask.Join(2000))
+            {
+                try { receiverTask.Abort(); } catch { }
+            }
             receiverTask = null;
         }
 
@@ -180,7 +183,6 @@ namespace NetClientLib
             catch (Exception e)
             {
                 Disconnect();
-                //
                 Console.WriteLine(e.ToString());
             }
         }
