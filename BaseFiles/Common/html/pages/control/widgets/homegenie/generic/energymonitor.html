@@ -1,18 +1,33 @@
-<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:440px;min-height:175px">
-    <div class="ui-header ui-bar-inherit" style="padding-left:5px;padding-right:5px;font-weight:normal;">
-        <div style="font-weight:bold">Energy Monitor</div>
-        <div data-ui-field="kwcounter">
-            ...
-        </div>
-        
-        <div style="position:absolute;right:60px;top:3px;font-size:18pt">
-            <span class="hg-indicator-energy" style="padding-left:0;width:20px;">&nbsp;</span> <span data-ui-field="wattload" style="font-weight:bold;font-size:12pt;"></span>
-            <span class="hg-indicator-bulb" style="padding-left:0;width:20px;">&nbsp;</span> <span data-ui-field="lightcount" style="font-weight:bold;font-size:12pt;">2</span>
-            <span class="hg-indicator-plug" style="padding-left:0;width:20px;">&nbsp;</span> <span data-ui-field="switchcount" style="font-weight:bold;font-size:12pt;">2</span>
-        </div>
-        <a href="#page_analyze" data-role="button" data-icon="eye" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Statistics</a>
+<style>
+  .flot-tick-label, .tickLabel {
+    font-size: 8pt;
+  }
+</style>
+<div data-ui-field="widget" class="ui-overlay-shadow ui-corner-all ui-body-inherit hg-widget-b" style="width:440px;height:290px;position:relative;z-index:10;background:none">
+  <div class="ui-body-inherit ui-corner-all" style="position:absolute;opacity:0.8;z-index:-1;left:0;top:0;right:0;bottom:0"></div>
+  <div class="ui-header" style="padding-left:5px;padding-right:5px;font-weight:normal;border-top:0">
+    <div style="font-size:16pt;font-weight:bold;padding:6px;float:left">Energy Monitor</div>
+    <a href="#page_analyze" data-role="button" data-icon="eye" data-iconshadow="false" data-iconpos="notext" class="ui-btn-right">Statistics</a>
+  </div>
+
+  <div class="ui-grid-b" align="center" style="font-size:18pt;line-height:20px;margin-top:4px">
+    <div class="ui-block-a">
+      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Actual load</div>
+      <span class="hg-indicator-energy" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="wattload">0.00</span>
     </div>
-    <div style="margin:5px;">
-        <div data-ui-field="energystats" style="height:125px;background-color:white;width:100%;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;"></div>
+    <div class="ui-block-b">
+      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Lights</div>
+      <span class="hg-indicator-bulb" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="lightcount">2</span>
     </div>
+    <div class="ui-block-c">
+      <div style="margin-left:6px;font-size:8pt;text-transform:uppercase">Appliances</div>
+      <span class="hg-indicator-plug" style="padding-left:0;padding-top:5px;width:20px;">&nbsp;</span> <span data-ui-field="switchcount">2</span>
+    </div>
+  </div>
+
+  <div data-ui-field="kwcounter" align="center" style="font-size:20pt"></div>
+
+  <div style="position:absolute;bottom:0;height:140px;right:0;left:0;margin:5px;">
+    <div data-ui-field="energystats" style="height:140px;background-color:transparent;width:100%;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px;"></div>
+  </div>
 </div>

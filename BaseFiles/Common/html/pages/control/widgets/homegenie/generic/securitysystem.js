@@ -12,7 +12,7 @@
   RenderView: function (cuid, module) {
     var container = $(cuid);
     var widget = this.Widget = container.find('[data-ui-field=widget]');
-    //
+
     if (!this.Initialized) {
       this.Initialized = true;
       widget.find('[data-ui-field=btn_armhome]').on('click', function () {
@@ -31,14 +31,8 @@
         HG.WebApp.ProgramsList.UpdateOptionsPopup();
       });
     }
-    //
-    // read some context data
-    //
-    this.GroupName = container.attr('data-context-group');
-    //
-    // get module watts prop
-    //
 
+    this.GroupName = container.attr('data-context-group');
 
     var armedstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level"); //HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityArmed");
     if (armedstatus != null && armedstatus.Value == "1") {
