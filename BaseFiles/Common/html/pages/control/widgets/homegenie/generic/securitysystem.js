@@ -5,7 +5,6 @@
 
   GroupName: '',
   IconImage: 'pages/control/widgets/homegenie/generic/images/securitysystem.png',
-  StatusText: '',
   Description: '',
   UpdateTime: '',
   Widget: null,
@@ -51,14 +50,7 @@
       widget.find('[data-ui-field=disarm_group]').hide();
     }
 
-    var alarmstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityTriggered");
-    if (alarmstatus != null && alarmstatus.Value == "1") {
-      this.StatusText = "ALARM!";
-    }
-    else {
-      this.StatusText = "OK";
-    }
-
+    var blink = false;
     var armedlevel = HG.WebApp.Utility.GetModulePropertyByName(module, "Status.Level");
     var armedstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityArmed");
     var statuscolor = 'rgba(100, 255, 100, 0.35)';
@@ -73,21 +65,30 @@
       else {
         this.Description = "Arming...";
         statuscolor = 'rgba(255, 255, 50, 0.45)';
+        blink = true;
       }
     }
     else {
       this.Description = "Disarmed";
       statuscolor = 'rgba(50, 255, 50, 0.45)';
     }
-    //
+
+    var alarmstatus = HG.WebApp.Utility.GetModulePropertyByName(module, "HomeGenie.SecurityTriggered");
+    if (alarmstatus != null && alarmstatus.Value == "1") {
+      this.Description = '! ALARM !';
+      blink = true;
+    }
+
     // render widget
-    //
     var title = HG.WebApp.Locales.GetProgramLocaleString(module.Address, 'Title', 'Alarm System');
     widget.find('[data-ui-field=name]').html(title);
     widget.find('[data-ui-field=icon]').attr('src', this.IconImage);
-    widget.find('[data-ui-field=status]').html('<span style="vertical-align:middle">' + this.StatusText + '</span>');
     widget.find('[data-ui-field=description]').html(this.Description);
     widget.find('[data-ui-field=status-container]').css('background', statuscolor);
+    if (blink)
+        widget.find('[data-ui-field=status-container]').addClass('blinking_alarm');
+    else
+        widget.find('[data-ui-field=status-container]').removeClass('blinking_alarm');
 
     var _this = this;
     $.ajax({

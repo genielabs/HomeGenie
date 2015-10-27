@@ -6,7 +6,7 @@
     "timetable_calendar" : "Calendar",
     "timetable_program" : "Program",
     "timetable_standard" : "Standard",
-    "timetable_daylightsaving" : "Day Light Saving time (summer)",
+    "timetable_daylightsaving" : "Day Light Saving time",
     
     "timetable_edit_table" : "Edit Timetable",
     "timetable_popup_set" : "Set",

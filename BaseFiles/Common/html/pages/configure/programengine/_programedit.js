@@ -585,9 +585,9 @@ HG.WebApp.ProgramEdit.ShowExternalErrors = function () {
 
 HG.WebApp.ProgramEdit.HideProgramErrors = function () {
     HG.WebApp.ProgramEdit._CurrentErrors = [];
-    editor1.clearGutter('CodeMirror-lint-markers-1');
-    editor2.clearGutter('CodeMirror-lint-markers-2');
-    editor3.clearGutter('CodeMirror-lint-markers-3');
+    if (editor1 != null) editor1.clearGutter('CodeMirror-lint-markers-1');
+    if (editor2 != null) editor2.clearGutter('CodeMirror-lint-markers-2');
+    if (editor3 != null) editor3.clearGutter('CodeMirror-lint-markers-3');
     //$('#program_error_message_text').html('');
     $('#program_error_button').hide();
     $('#program_error_button2').hide();
