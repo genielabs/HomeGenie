@@ -21,7 +21,7 @@ This is mainly intended for administration purposes to configure and access all 
 ## Open Source client for Android and Windows Phone
 
 The open source client for Android and Windows Phone is meant to be a quick shortcut for accessing your HomeGenie server. This is still intended
-to be used for Administration and testing purposes as it will give full access to HomeGenie.
+to be used for administration and testing purposes as it will give full access to HomeGenie server.
 
 ### Mobile Apps
 
@@ -42,12 +42,13 @@ Specifically designed to be a Control Panel for the end-user, **HomeGenie Plus**
 
 - Adaptive layout. Automatically arrange widgets to best fit either on phone and tablet.
 - Configurable Groups: allow choosing what modules and groups will be available to the mobile device. When HomeGenie server has password protection enabled, only
-the administrator can setup the configuration in order to limit the access from the mobile device.
+the administrator can setup the configuration on the client in order to limit the access from the device.
 - Configurable temperature unit
 - "Keep screen on" option to prevent the screen from locking or blanking. Useful for wall-mounted panel installations.
 - Parameter statistics and activity log. View statistics and logs of various parameter of each module.
-- Local module settings. Each device can have its own settings for some modules. For example color presets for "Color Light" widgets can customized for each device.
+- Local module settings. Each device can have its own settings for some modules. For example, color presets for "Color Light" widgets can be customized for each device.
 - Minified view. Some widgets as for lights and applicances can be minified to just appear as a button (see screenshots below). 
+- Configurable sound notifications when a module parameter is changed (i.e. each time a module is switched on, a sound will be played)
 - Voice Control
 
 
@@ -88,6 +89,6 @@ Feel free to submit any issue or feature request using the following link:
 [HomeGenie Plus discussion thread on HG forum](www.homegenie.it/forum/index.php?topic=1142)
 
 
-
+<br /><br /><br /><br />
 
 
