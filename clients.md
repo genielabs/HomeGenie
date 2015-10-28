@@ -85,8 +85,8 @@ Click the link below to install **HomeGenie Plus for Android**:
 
 Feel free to submit any issue or feature request using the following link:
 
-[HomeGenie Plus issue reporting and features request](https://github.com/genielabs/homegenie-plus-android)
-[HomeGenie Plus discussion thread on HG forum](www.homegenie.it/forum/index.php?topic=1142)
+- [HomeGenie Plus issue reporting and features request](https://github.com/genielabs/homegenie-plus-android)
+- [HomeGenie Plus discussion thread on HG forum](www.homegenie.it/forum/index.php?topic=1142)
 
 
 <br /><br /><br /><br />
