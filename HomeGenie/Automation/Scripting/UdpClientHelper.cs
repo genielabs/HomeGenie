@@ -37,7 +37,7 @@ namespace HomeGenie.Automation.Scripting
     [Serializable]
     public class UdpClientHelper
     {
-        private UDPClient udpClient;
+        private UdpClient udpClient;
         private Action<byte[]> dataReceived;
         private Action<string> stringReceived;
         private Action<bool> statusChanged;
@@ -46,7 +46,7 @@ namespace HomeGenie.Automation.Scripting
 
         public UdpClientHelper()
         {
-            udpClient = new UDPClient();
+            udpClient = new UdpClient();
         }
 
         /// <summary>

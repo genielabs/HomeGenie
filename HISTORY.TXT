@@ -1,8 +1,9 @@
 ﻿RELEASE HISTORY
 
-27/10/2015 v1.1-beta.499
+28/10/2015 v1.1-beta.499
+    - Fixed bug in Program Manager not releasing resources when disabling/stopping C-Sharp programs
     - Added temperature unit and date format preference in the maintenance/ui settings page
-    - Fixed TcpClient helper class that not releasing resources on disconnect/reconnect
+    - Fixed TcpClient helper class that was not releasing resources on disconnect/reconnect
     - Added "Siren start delay" option to Security Alarm program
     - Brand new style and features for dashboard widgets
     - Added timetable program picker (module options dialog)

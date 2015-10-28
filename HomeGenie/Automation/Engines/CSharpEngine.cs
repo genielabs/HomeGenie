@@ -49,6 +49,7 @@ namespace HomeGenie.Automation.Engines
 
         public void Unload()
         {
+            Reset();
             programBlock.ActivationTime = null;
             programBlock.TriggerTime = null;
             if (programDomain != null)

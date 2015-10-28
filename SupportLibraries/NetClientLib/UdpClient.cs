@@ -30,13 +30,13 @@ using System.Collections.Generic;
 namespace NetClientLib
 {
 
-    public class UDPClient
+    public class UdpClient
     {
         // State object for receiving data from remote device.
         private class StateObject
         {
             // UDP Client
-            public UdpClient workSocket = null;
+            public System.Net.Sockets.UdpClient workSocket = null;
             // Size of receive buffer.
             public const int BufferSize = 256;
             // Receive buffer.
@@ -61,8 +61,8 @@ namespace NetClientLib
         // The response from the remote device.
         private byte[] rawResponse = null;
         // create 2 UDP clients, one used for send and the other for receive
-        private UdpClient clientSend = null;
-        private UdpClient clientReceive = null;
+        private System.Net.Sockets.UdpClient clientSend = null;
+        private System.Net.Sockets.UdpClient clientReceive = null;
         private IPEndPoint localEP = null;
 
         private Thread receiverTask;
@@ -78,7 +78,7 @@ namespace NetClientLib
                 localEP = new IPEndPoint(IPAddress.Any, localPort);
 
                 // Create a UDP Client.
-                clientReceive = new UdpClient(localEP);
+                clientReceive = new System.Net.Sockets.UdpClient(localEP);
 
                 if (ConnectedStateChanged != null) ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(true));
 
@@ -114,7 +114,7 @@ namespace NetClientLib
             try
             {
                 // Create a UDPClient
-                clientSend = new UdpClient(remoteServer, remotePort);
+                clientSend = new System.Net.Sockets.UdpClient(remoteServer, remotePort);
 
                 if (ConnectedStateChanged != null) ConnectedStateChanged(this, new ConnectedStateChangedEventArgs(true));
 
@@ -207,7 +207,7 @@ namespace NetClientLib
             Disconnect();
         }
 
-        private bool Receive(UdpClient client)
+        private bool Receive(System.Net.Sockets.UdpClient client)
         {
             bool success = true;
             try
@@ -234,7 +234,7 @@ namespace NetClientLib
                 // Retrieve the state object and the client socket 
                 // from the asynchronous state object.
                 StateObject state = (StateObject)ar.AsyncState;
-                UdpClient client = state.workSocket;
+                System.Net.Sockets.UdpClient client = state.workSocket;
 
                 // Read data from the remote device.
                 byte[] bytesRead = client.EndReceive(ar, ref localEP);
@@ -313,7 +313,7 @@ namespace NetClientLib
             try
             {
                 // Retrieve the socket from the state object.
-                UdpClient client = (UdpClient)ar.AsyncState;
+                System.Net.Sockets.UdpClient client = (System.Net.Sockets.UdpClient)ar.AsyncState;
 
                 // Complete sending the data to the remote device.
                 int bytesSent = client.EndSend(ar);
