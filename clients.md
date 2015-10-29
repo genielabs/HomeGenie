@@ -77,7 +77,7 @@ the administrator can setup the configuration on the client in order to limit th
 ### HomeGenie Plus availability - Beta Testers
 
 HomeGenie Plus is currently available to beta testers and can be installed directly from the Google Play Store.
-For best experience is highly recommended to use [HomeGenie Server 1.1 r498](download.html) (and up).
+For best experience is highly recommended to use [HomeGenie Server 1.1 r499](download.html) (and up).
 
 Click the link below to install **HomeGenie Plus for Android**:
 
