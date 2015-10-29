@@ -54,8 +54,7 @@ HG.System.HasPassword = function (callback) {
         url: '/' + HG.WebApp.Data.ServiceKey + '/' + HG.WebApp.Data.ServiceDomain + '/Config/System.Configure/Security.HasPassword/',
         type: 'GET',
         success: function (data) {
-            //var haspass = eval(data)[0];
-            if (callback != null) callback(data.ResponseValue);
+            if (callback != null) callback(data);
         }
     });
 };

@@ -134,7 +134,7 @@ namespace HomeGenie.Automation
                         List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, true) };
                         program.ScriptErrors = JsonConvert.SerializeObject(error);
                         program.IsEnabled = false;
-                        RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                        RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace HomeGenie.Automation
                         List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(ex, true) };
                         program.ScriptErrors = JsonConvert.SerializeObject(error);
                         program.IsEnabled = false;
-                        RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
+                        RaiseProgramModuleEvent(program, Properties.RuntimeError, "TC: " + ex.Message.Replace('\n', ' ').Replace('\r', ' '));
                     }
                 }
                 //
@@ -218,35 +218,45 @@ namespace HomeGenie.Automation
             }
 
             program.IsRunning = true;
-            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Running");
+            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Running");
 
             program.TriggerTime = DateTime.UtcNow;
 
             program.Engine.ProgramThread = new Thread(() =>
             {
-                MethodRunResult result = null;
                 try
                 {
-                    result = program.Run(options);
+                    MethodRunResult result = null;
+                    try
+                    {
+                        result = program.Run(options);
+                    }
+                    catch (Exception ex)
+                    {
+                        result = new MethodRunResult();
+                        result.Exception = ex;
+                    }
+                    if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
+                    {
+                        // runtime error occurred, script is being disabled
+                        // so user can notice and fix it
+                        List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, false) };
+                        program.ScriptErrors = JsonConvert.SerializeObject(error);
+                        program.IsEnabled = false;
+                        RaiseProgramModuleEvent(program, Properties.RuntimeError, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                    }
+                    RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
                 }
-                catch (Exception ex)
+                catch (ThreadAbortException e)
                 {
-                    result = new MethodRunResult();
-                    result.Exception = ex;
+                    // nothing to be done here
+                    RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Interrupted");
                 }
-                //
-                if (result != null && result.Exception != null && !result.Exception.GetType().Equals(typeof(System.Reflection.TargetException)))
+                finally
                 {
-                    // runtime error occurred, script is being disabled
-                    // so user can notice and fix it
-                    List<ProgramError> error = new List<ProgramError>() { program.GetFormattedError(result.Exception, false) };
-                    program.ScriptErrors = JsonConvert.SerializeObject(error);
-                    program.IsEnabled = false;
-                    RaiseProgramModuleEvent(program, Properties.RUNTIME_ERROR, "CR: " + result.Exception.Message.Replace('\n', ' ').Replace('\r', ' '));
+                    program.IsRunning = false;
+                    program.Engine.ProgramThread = null;
                 }
-                program.IsRunning = false;
-                program.Engine.ProgramThread = null;
-                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
             });
             //
             if (program.ConditionType == ConditionType.Once)
@@ -262,7 +272,7 @@ namespace HomeGenie.Automation
             {
                 program.Engine.Stop();
                 program.IsRunning = false;
-                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
+                RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
             }
             //
             //Thread.Sleep(100);
@@ -297,7 +307,7 @@ namespace HomeGenie.Automation
             program.EnabledStateChanged += program_EnabledStateChanged;
             program.Engine.SetHost(homegenie);
             // Initialize state
-            RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Idle");
+            RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Idle");
             if (program.IsEnabled)
             {
                 StartProgramEvaluator(program);
@@ -506,14 +516,14 @@ namespace HomeGenie.Automation
                 program.ScriptErrors = "";
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
-                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Enabled");
+                RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Enabled");
                 // TODO: CRITICAL
                 // TODO: we should ensure to dispose previous Evaluator Thread before starting the new one
                 StartProgramEvaluator(program);
             }
             else
             {
-                RaiseProgramModuleEvent(program, Properties.PROGRAM_STATUS, "Disabled");
+                RaiseProgramModuleEvent(program, Properties.ProgramStatus, "Disabled");
                 homegenie.modules_RefreshPrograms();
                 homegenie.modules_RefreshVirtualModules();
             }

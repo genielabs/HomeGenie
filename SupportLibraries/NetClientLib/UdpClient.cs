@@ -195,7 +195,7 @@ namespace NetClientLib
                     if (Debug)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("UDP > " + ByteArrayToString(msg));
+                        Console.WriteLine("UDP > " + BitConverter.ToString(msg));
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
@@ -272,7 +272,7 @@ namespace NetClientLib
                 if (Debug)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("UDP < " + ByteArrayToString(byteData));
+                    Console.WriteLine("UDP < " + BitConverter.ToString(byteData));
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -298,7 +298,7 @@ namespace NetClientLib
                 if (Debug)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("TCO[" + client.RemoteEndPoint.ToString() + "] < " + ByteArrayToString(byteData));
+                    Console.WriteLine("TCO[" + client.RemoteEndPoint.ToString() + "] < " + BitConverter.ToString(byteData));
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -329,16 +329,6 @@ namespace NetClientLib
             {
                 Console.WriteLine(e.ToString());
             }
-        }
-
-        private string ByteArrayToString(byte[] message)
-        {
-            string returnValue = String.Empty;
-            foreach (byte b in message)
-            {
-                returnValue += b.ToString("X2") + " ";
-            }
-            return returnValue.Trim();
         }
 
         public bool IsConnected

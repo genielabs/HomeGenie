@@ -155,7 +155,7 @@ namespace HomeGenie.Automation.Engines
                     else
                     {
                         var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, error.Column, error.ErrorText);
-                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.COMPILER_WARNING, warning);
+                        homegenie.ProgramManager.RaiseProgramModuleEvent(programBlock, Properties.CompilerWarning, warning);
                     }
                 }
             }

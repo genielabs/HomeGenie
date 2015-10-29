@@ -437,7 +437,7 @@ namespace HomeGenie.Service.Handlers
                         currentProgram.ScriptErrors = "";
                         homegenie.ProgramManager.RaiseProgramModuleEvent(
                             currentProgram,
-                            Properties.RUNTIME_ERROR,
+                            Properties.RuntimeError,
                             ""
                         );
                         currentProgram.IsEnabled = true;
@@ -524,7 +524,7 @@ namespace HomeGenie.Service.Handlers
                         Domains.HomeAutomation_HomeGenie_Automation,
                         program.Address.ToString(),
                         "Program Error",
-                        Properties.RUNTIME_ERROR,
+                        Properties.RuntimeError,
                         "Program is disabled, cannot run."
                     );
                 }

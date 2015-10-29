@@ -179,9 +179,6 @@
       <HintPath>..\Externals\CronExpressionDescriptor\CronExpressionDescriptor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SerialPortLib">
-      <HintPath>..\Externals\g-labs\SerialPortLib.dll</HintPath>
-    </Reference>
     <Reference Include="UPnP">
       <HintPath>..\Externals\upnp\UPnP.dll</HintPath>
     </Reference>
@@ -190,6 +187,9 @@
     </Reference>
     <Reference Include="MIG">
       <HintPath>..\Externals\g-labs\MIG.dll</HintPath>
+    </Reference>
+    <Reference Include="SerialPortLib">
+      <HintPath>..\Externals\g-labs\SerialPortLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +253,7 @@
     <Compile Include="Automation\Engines\ArduinoAppFactory.cs" />
     <Compile Include="Automation\Engines\ProgramEngineBase.cs" />
     <Compile Include="Service\Logging\SystemLogger.cs" />
+    <Compile Include="Service\Constants\SourceModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CREDITS.TXT">

@@ -264,10 +264,11 @@ namespace HomeGenie.Automation.Engines
                 }
             }
             //
-            // the following Programs.* parameters are deprecated, just left for compatibility with HG < r340
+            // the following "Programs.*" parameters are deprecated, just left for compatibility with HG < r340
+            // Also the target "Automation" is deprecated and left for compatibility with HG < 499
             //
             ModuleParameter parameter = null;
-            if (c.Domain == Domains.HomeAutomation_HomeGenie && c.Target == "Automation")
+            if (c.Domain == Domains.HomeAutomation_HomeGenie && (c.Target == SourceModule.Scheduler || c.Target == "Automation"))
             {
                 parameter = new ModuleParameter();
                 parameter.Name = c.Property;
@@ -309,17 +310,20 @@ namespace HomeGenie.Automation.Engines
                 case "Scheduler.DateTime":
                     parameter.Value = DateTime.Now.ToString("YY-MM-dd HH:mm:ss");
                     break;
+                //default:
+                //    Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                //    if (module != null)
+                //        parameter = module.Properties.Find(mp => mp.Name == c.Property);
+                //    break;
                 }
             }
             else
             {
-                HomeGenie.Data.Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
-                parameter = module.Properties.Find(delegate(ModuleParameter mp)
-                {
-                    return mp.Name == c.Property;
-                });
+                Module module = homegenie.Modules.Find(m => m.Address == c.Target && m.Domain == c.Domain);
+                if (module != null)
+                    parameter = module.Properties.Find(mp => mp.Name == c.Property);
             }
-            //
+
             if (parameter != null)
             {
                 IComparable lvalue = parameter.Value;

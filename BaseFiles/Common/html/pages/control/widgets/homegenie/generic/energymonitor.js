@@ -109,7 +109,7 @@
                 show: true, min: yMin 
             },
             xaxis: { mode: "time", timeformat: "%h%p", minTickSize: [2, "hour"], tickSize: [2, "hour"] },
-            legend: { position: "nw", noColumns: 6, backgroundColor: 'black' },
+            legend: { position: "nw", noColumns: 6, backgroundColor: 'rgba(0,0,0,0.4)' },
             lines: { 
               show: showlines, lineWidth: 1.0,
               fill: true,

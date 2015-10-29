@@ -182,7 +182,7 @@ namespace HomeGenieManager
             }
             else
             {
-                System.Diagnostics.Process.Start("http://localhost/");
+                System.Diagnostics.Process.Start("http://127.0.0.1/");
             }
         }
 

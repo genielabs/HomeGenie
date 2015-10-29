@@ -130,7 +130,7 @@ namespace NetClientLib
                         if (Debug)
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine("[TcpClient] > " + ByteArrayToString(readBuffer));
+                            Console.WriteLine("[TcpClient] > " + BitConverter.ToString(readBuffer));
                             Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
@@ -158,7 +158,7 @@ namespace NetClientLib
                     if (Debug)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("[TcpClient] < " + ByteArrayToString(byteData));
+                        Console.WriteLine("[TcpClient] < " + BitConverter.ToString(byteData));
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
@@ -177,16 +177,6 @@ namespace NetClientLib
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
             return SendRaw(byteData);
-        }
-
-        private string ByteArrayToString(byte[] message)
-        {
-            string returnValue = String.Empty;
-            foreach (byte b in message)
-            {
-                returnValue += b.ToString("X2") + " ";
-            }
-            return returnValue.Trim();
         }
 
         public bool IsConnected

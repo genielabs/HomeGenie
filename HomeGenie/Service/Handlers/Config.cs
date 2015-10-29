@@ -674,7 +674,7 @@ namespace HomeGenie.Service.Handlers
                                 return mp.Name == propertyName;
                             });
                             //
-                            if (propertyName == Properties.VIRTUALMETER_WATTS)
+                            if (propertyName == Properties.VirtualMeterWatts)
                             {
                                 try
                                 {
@@ -734,14 +734,14 @@ namespace HomeGenie.Service.Handlers
                         else if (newParameter.NeedsUpdate)
                         {
                             // reset current reporting Watts if VMWatts field is set to 0
-                            if (newParameter.Name == Properties.VIRTUALMETER_WATTS && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
+                            if (newParameter.Name == Properties.VirtualMeterWatts && newParameter.DecimalValue == 0 && currentParameter.DecimalValue != 0)
                             {
                                 homegenie.RaiseEvent(
                                     Domains.HomeGenie_System,
                                     currentModule.Domain,
                                     currentModule.Address,
                                     currentModule.Description,
-                                    Properties.METER_WATTS,
+                                    Properties.MeterWatts,
                                     "0.0"
                                 );
                             }

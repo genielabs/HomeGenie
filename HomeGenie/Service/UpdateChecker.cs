@@ -98,7 +98,7 @@ namespace HomeGenie.Service
         public delegate void InstallProgressMessageEvent(object sender, string message);
         public InstallProgressMessageEvent InstallProgressMessage;
 
-        private string endpointUrl = "http://www.homegenie.it/release_updates.php";
+        private string endpointUrl = "http://www.homegenie.it/release_updates_v1_1.php";
         private ReleaseInfo currentRelease;
         private List<ReleaseInfo> remoteUpdates;
         private Timer checkInterval;

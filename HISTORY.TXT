@@ -1,7 +1,8 @@
 ﻿RELEASE HISTORY
 
 28/10/2015 v1.1-beta.499
-    - Fixed bug in Program Manager not releasing resources when disabling/stopping C-Sharp programs
+    - Fixed SerialPortLib threading issues
+    - Added ZWaveLib node error status report- Fixed bug in Program Manager not releasing resources when disabling/stopping C-Sharp programs
     - Added temperature unit and date format preference in the maintenance/ui settings page
     - Fixed TcpClient helper class that was not releasing resources on disconnect/reconnect
     - Added "Siren start delay" option to Security Alarm program

@@ -130,6 +130,8 @@
         "Giorni speciali",
     "TimeTable.Enable":
         "Abilita tabella oraria",
+    "TimeTable.Repeat":
+        "Ripeti il comando per l'intera durata",
     "TimeTable.CheckDST":
         "Abilita controllo ora legale",
     "TimeTable.UI.NoProgram":

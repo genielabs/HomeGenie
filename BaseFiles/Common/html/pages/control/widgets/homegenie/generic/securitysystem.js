@@ -8,12 +8,14 @@
   Description: '',
   UpdateTime: '',
   Widget: null,
+  Module: null,
+  RefreshTimeout: null,
 
   RenderView: function (cuid, module) {
     var container = $(cuid);
     var widget = this.Widget = container.find('[data-ui-field=widget]');
-
     if (!this.Initialized) {
+      this.Module = module;
       this.Initialized = true;
       widget.find('[data-ui-field=btn_armhome]').on('click', function () {
         HG.Control.Modules.ServiceCall('Control.ArmHome', module.Domain, module.Address, '', function (data) { });
@@ -83,17 +85,19 @@
         widget.find('[data-ui-field=status-container]').addClass('blinking_alarm');
     else
         widget.find('[data-ui-field=status-container]').removeClass('blinking_alarm');
+    this.loadLogData();
+  },
 
+  loadLogData: function() {
     var _this = this;
     $.ajax({
-        url: '/' + HG.WebApp.Data.ServiceKey + '/' + module.Domain + '/' + module.Address + '/Events.List',
+        url: '/' + HG.WebApp.Data.ServiceKey + '/' + this.Module.Domain + '/' + this.Module.Address + '/Events.List',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
             _this.refreshLog(data);
         }
     });
-
   },
 
   refreshLog: function(logData) {
@@ -111,6 +115,13 @@
         log = '<div align="center" style="line-height: 148px">No recent activity</div>';
     }
     this.Widget.find('[data-ui-field=activity-log]').html(log);
+    // auto refresh every 60 seconds
+    var _this = this;
+    if ($.mobile.activePage.attr('id') == 'page_control') {
+        if (this.RefreshTimeout != null)
+            clearTimeout(this.RefreshTimeout);
+        this.RefreshTimeout = setTimeout(function() { _this.loadLogData(); }, 60000);
+    }
   }
 
 }]

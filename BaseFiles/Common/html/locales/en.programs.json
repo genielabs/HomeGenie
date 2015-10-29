@@ -130,6 +130,8 @@
         "Special days",
     "TimeTable.Enable":
         "Enable timetable",
+    "TimeTable.Repeat":
+        "Repeat command for the whole duration",
     "TimeTable.CheckDST":
         "Enable Day Light Savings check",
     "TimeTable.UI.NoProgram":

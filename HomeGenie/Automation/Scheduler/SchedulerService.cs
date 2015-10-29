@@ -30,6 +30,7 @@ using System.Threading;
 using HomeGenie.Service.Constants;
 using Newtonsoft.Json;
 using ExpressionEvaluation;
+using HomeGenie.Service;
 
 namespace HomeGenie.Automation.Scheduler
 {
@@ -65,12 +66,21 @@ namespace HomeGenie.Automation.Scheduler
                 var eventItem = events[i];
                 // update next occurrence value
                 eventItem.NextOccurrence = GetNextEventOccurrence(eventItem.CronExpression);
-                // TODO: execute items only once instead of repeating for the whole minute
-                string currentoccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentoccurrence && IsScheduling(eventItem.CronExpression))
+                // execute items only once instead of repeating for the whole minute
+                string currentOccurrence = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                if (eventItem.IsEnabled && eventItem.LastOccurrence != currentOccurrence && IsScheduling(eventItem.CronExpression))
                 {
+                    /*
+                    masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                        this,
+                        Domains.HomeAutomation_HomeGenie, 
+                        SourceModule.Scheduler,
+                        "Scheduler Event Triggered",
+                        Properties.SchedulerTriggeredEvent, 
+                        eventItem.Name);
+                    */
                     // update last occurrence value
-                    eventItem.LastOccurrence = currentoccurrence;
+                    eventItem.LastOccurrence = currentOccurrence;
                     // execute associated task if any
                     if (!String.IsNullOrEmpty(eventItem.ProgramId))
                     {
@@ -78,6 +88,16 @@ namespace HomeGenie.Automation.Scheduler
                         if (program != null)
                         {
                             masterControlProgram.Run(program, "");
+                        }
+                        else
+                        {
+                            masterControlProgram.HomeGenie.MigService.RaiseEvent(
+                                this,
+                                Domains.HomeAutomation_HomeGenie, 
+                                SourceModule.Scheduler,
+                                "Scheduler Event '"+eventItem.Name+"'",
+                                Properties.SchedulerError, 
+                                "No such program: '"+eventItem.ProgramId+"'");
                         }
                     }
                 }
@@ -224,10 +244,10 @@ namespace HomeGenie.Automation.Scheduler
             {
                 masterControlProgram.HomeGenie.MigService.RaiseEvent(
                     this,
-                    Domains.HomeAutomation_HomeGenie_Scheduler, 
-                    cronExpression, 
-                    "Scheduler Expression", 
-                    Properties.SCHEDULER_ERROR, 
+                    Domains.HomeAutomation_HomeGenie,  // before v1.1 it was: Domains.HomeAutomation_HomeGenie_Automation, 
+                    SourceModule.Scheduler, // before v1.1 it was: cronExpression, 
+                    cronExpression, // before v1.1 it was: "Scheduler Expression", 
+                    Properties.SchedulerError, 
                     JsonConvert.SerializeObject(ex.Message));
             }
             return success;

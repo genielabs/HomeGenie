@@ -547,7 +547,7 @@ namespace HomeGenie.Automation.Scripting
         {
             foreach (var module in SelectedModules)
             {
-                var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
                 if (levelParameter != null)
                 {
                     if (levelParameter.Value == "0")
@@ -596,7 +596,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     foreach (var module in SelectedModules)
                     {
-                        var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                        var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
                         if (levelParameter != null)
                         {
                             double level = levelParameter.DecimalValue;
@@ -610,7 +610,7 @@ namespace HomeGenie.Automation.Scripting
             }
             set
             {
-                this.command = Commands.Control.CONTROL_LEVEL;
+                this.command = Commands.Control.ControlLevel;
                 this.Set(value.ToString(CultureInfo.InvariantCulture));
             }
         }
@@ -628,7 +628,7 @@ namespace HomeGenie.Automation.Scripting
                 {
                     foreach (var module in SelectedModules)
                     {
-                        var levelParameter = Utility.ModuleParameterGet(module, Properties.STATUS_LEVEL);
+                        var levelParameter = Utility.ModuleParameterGet(module, Properties.StatusLevel);
                         if (levelParameter != null)
                         {
                             double dvalue = levelParameter.DecimalValue;
