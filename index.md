@@ -13,6 +13,10 @@ This is the scenario where HomeGenie is growing up,
 and its mission is to try to find a reasonable way of converging all these new on going technologies into one single
 piece of software.
 
+<div align="center">
+    <img src="https://lh3.googleusercontent.com/ru8XZWIabHBZuZA_-N6fjTKztQJ1HQKWUWj3l_47AcI8dvHXYDmEetr5XRKflVpUrsiPT_1pNg1qKjfU4N5AvrpAld_-nkxK-kSqapSuzjbP0j1KE4r6lg3BU3TSVI9kfOgLfccCFtTG5TAoNoXS6nMxe-gXyNlomyXAXw0Wy4uFVNmz9XBXwZPFlE1GguH-FkjrqxYFkZGAvLV4XbZCQTZ-XhdopYAvkSVq-lNco1yUBBHNakJ8jVUwfwJ2eDwZ1m2ZvxkJoPPJbHky61mYgAeIIbcMc90FR0wMxfiJ8J-Ct-qjycwwTZYxUaBj3Yswiu92w_q_QG-6_PmMjd33HbwnFNQpln6PqPXVpwX-rPMET4pCQ9m8t7KxWiZYaJpr4in0ojjXQ3qQwCgm0SfAJEZvRtU8EHVFdSaZVYQ3PXhlp2R-gKRpDpbVSphm8e2l1FIoTHa414GWWVUv4YgfbTN57Bn1il6-1iF_4FwGIRQPcmOlfStVgcLdQp6-pMMzLwlB-v1NosCH54D-v7LPqU25s9wpjuzj5lOLDY9itdw=w929-h774-no" width="560" />
+</div>
+
 ## Integrated Editor for Automation Programs and UI Widgets
 
 In order to achieve this mission, the key factor for a such kind of software is to offer an integrated enviroment and
