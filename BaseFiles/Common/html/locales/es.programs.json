@@ -1,0 +1,161 @@
+{ "Programs": {
+
+"34": {
+    "Title":
+        "Servicio meteorológico 'Weather Underground'",
+    "Description": 
+        "El estado del tiempo actualizado, pronósticos y otras informaciones como los tiempos de amanecer/ocaso, viento, precipitaciones. Basado en el servicio <strong>'Weather Underground'</strong>. \nPara activar esta aplicación específica usa una <strong>clave (key)</strong> de usuario que se puede obtener creando una cuenta en <u>http://www.wunderground.com/weather/api/d/login.html</u>",
+    "ConfigureOptions.Location":
+        "Nombre de ciudad",
+    "ConfigureOptions.InputDisplayCelsius":
+        "Visualizar la temperatura en grados Celsius (TRUE=YES FALSE=NO)",
+    "ConfigureOptions.Language":
+        "Idioma (p.e. EN, ES (para español), IT, FR, DE, ...)",
+    "ConfigureOptions.UpdateInterval":
+        "Intervalo de actualización (en minutos)",
+    "ConfigureOptions.ApiKey":
+        "Clave (Key) del servicio 'Weather Underground'"
+},
+
+"6": {
+    "Title": 
+        "Encendido de todas las luces",
+    "Description":
+        "Encender todas las luces del grupo seleccionado."
+},
+
+"7": {
+    "Title": 
+        "Apagado de todas las luces",
+    "Description": 
+        "Apagar todas las luces del grupo seleccionado."
+},
+
+"82": {
+    "Title":
+        "Modo de ahorro de energía",
+    "Description":
+        "Cuando se activa, se asegura que el nivel de regulación de luz es mantenido por debajo del porcentaje configurado.",
+    "EnergyManagement.EnergySavingLevel":
+        "Nivel de luminosidad máximo (%)",
+    "EnergyManagement.EnergySavingMode":
+        "Activar el modo de ahorro de energía"
+},
+
+"16": {
+    "Title":
+        "Memoria de nivel de luminosidad",
+    "Description":
+        "Almacena y reestablece el último nivel regulado de luminosidad.",
+    "HomeGenie.LevelMemory":
+        "En el encendido se reestablece el último nivel de luminosidad",
+    "HomeGenie.LevelMemory.SimulateOnly":
+        "Sólo simular"
+},
+
+"35": {
+    "Title":
+        "Programación de On/Off",
+    "Description":
+        "Pone on/off a un dispositivo usando el programador.",
+    "HomeGenie.ScheduleControl":
+        "Activar la programación de on/off",
+    "HomeGenie.ScheduleOn":
+        "Encender",
+    "HomeGenie.ScheduleOff":
+        "Apagar"
+},
+
+"90": {
+    "Title":
+        "Sistema de alarma de seguridad",
+    "Description":
+        "Sistema de alarma de seguridad básico",
+    "HomeGenie.SecurityAlarm":
+        "Usar como alarma/luz de emergencia",
+    "HomeGenie.SecuritySensor":
+        "Usar comos ensor de seguridad",
+    "ConfigureOptions.Email.Recipients":
+        "Lista, separada por comas, de e-mails para las notificaciones de alarma",
+    "ConfigureOptions.System.ArmDelay":
+        "Retraso en el armado (segundos)",
+    "ConfigureOptions.System.SirenStartTime":
+        "Retardo en el disparo de las sirenas(segundos)",
+    "ConfigureOptions.System.SirenMaxTime":
+        "Timepo máximo de sonido de sirenas (seconds, 0=infinito)",
+    "ConfigureOptions.Trigger.ArmedProgram":
+        "Programa a ejecutar cuando se arme",
+    "ConfigureOptions.Trigger.DisarmedProgram":
+        "Programa a ejecutar cuando se desarme",
+    "ConfigureOptions.Trigger.TriggeredProgram":
+        "Programa a ejecutar cuando se dispare"
+},
+
+"145": {
+    "Title":
+        "Iluminación inteligente",
+    "Description":
+        "Controla el dispositivo a través de la detección de movimiento y la luz ambiental.",
+    "HomeGenie.SmartLights.Enable":
+        "Activa el control de 'Iluminación Inteligente'",
+    "HomeGenie.SmartLights.OnMotionDetect":
+        "Controlado por detector de movimiento",
+    "HomeGenie.SmartLights.CheckLuminosity":
+        "Controlado por sensor d eluz",
+    "HomeGenie.SmartLights.SwitchOffTimeout":
+        "Apagar después de un tiempo de inactividad (segundos)"
+},
+
+"8": {
+    "Title":
+        "Escena de colores vívidos",
+    "Description":
+        "Emula una escena de luces Philips Hue.",
+    "Scenarios.SunriseColors":
+        "Enlaza a escena de colores vívidos"
+},
+
+"36": {
+    "Title":
+        "Programador horario",
+    "Description":
+        "Programa termostatos, luces y persianas.",
+    "TimeTable.Weekend":
+        "Fin de semana",
+    "TimeTable.Workday":
+        "Días laborables (lun-vie)",
+    "TimeTable.Holiday":
+        "Vacaciones",
+    "TimeTable.Special":
+        "Días especiales",
+    "TimeTable.Enable":
+        "Activar el programador horario",
+    "TimeTable.Repeat":
+        "Repetir comando para la duración entera",
+    "TimeTable.CheckDST":
+        "Activar la comprobación de horario de verano",
+    "TimeTable.UI.NoProgram":
+        "no programa",
+    "TimeTable.UI.ProgramNr":
+        "programa #"
+},
+
+"112": {
+    "Title":
+        "Apagado automático",
+    "Description":
+        "Cuando se active un dispositivo, automáticamente se desactiva después de un tiempo.",
+    "HomeGenie.TurnOffDelay":
+        "Tiempo de apagado automático (en segundos)"
+},
+
+"200": {
+    "Title":
+        "Servicio de notificaciones Windows Phone",
+    "Description":
+        "Envía notificaciones 'toast and tile' a Windows Phone.",
+    "MobileNotification.SendChanges":
+        "Envía notificaciones al cliente de Windows Phone"
+}
+
+}}

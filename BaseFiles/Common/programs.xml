@@ -135,7 +135,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:02.519372Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:29.859822Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -255,7 +255,7 @@ For instructions see: http://developers.meethue.com/gettingstarted.html .</Descr
     <Group>Devices and Things</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:03.02809Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:30.383584Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -347,25 +347,25 @@ while (Program.IsEnabled)
       // 2014-01-22 - Added to allow the widget to display the date/time.
       string last_updated = weatherdata.current_observation.observation_time; //DateTime.Now.ToString("g"); //, new System.Globalization.CultureInfo("en-US")
 
-      Program.RaiseEvent("Conditions.City", city, "");
-      Program.RaiseEvent("Conditions.Country", country, "");
-      Program.RaiseEvent("Conditions.CountryCode", country_iso3166, "");
-      Program.RaiseEvent("Conditions.TemperatureC", temperaturec, "");
-      Program.RaiseEvent("Conditions.TemperatureF", temperaturef, "");
-      Program.RaiseEvent("Conditions.DisplayLocation", display_location, "");
-      Program.RaiseEvent("Conditions.Description", weather_text, "");
-      Program.RaiseEvent("Conditions.IconUrl", icon_url, "");
-      Program.RaiseEvent("Conditions.Status", icon, ""); // eg. cloudy, sunny, etc..
-      Program.RaiseEvent("Conditions.WindDirection", wind_dir, "");
-      Program.RaiseEvent("Conditions.WindKph", wind_kph, "");
-      Program.RaiseEvent("Conditions.PressureMb", pressure_mb, "");
-      Program.RaiseEvent("Conditions.FeelsLikeC", feelslike_c, "");
-      Program.RaiseEvent("Conditions.FeelsLikeF", feelslike_f, "");
-      Program.RaiseEvent("Conditions.UV", UV, "");
-      Program.RaiseEvent("Conditions.PrecipitationHourMetric", precip_1hr_metric, "");
+      Program.Parameter("Conditions.City").Value = city;
+      Program.Parameter("Conditions.Country").Value = country;
+      Program.Parameter("Conditions.CountryCode").Value = country_iso3166;
+      Program.Parameter("Conditions.TemperatureC").Value = temperaturec;
+      Program.Parameter("Conditions.TemperatureF").Value = temperaturef;
+      Program.Parameter("Conditions.DisplayLocation").Value = display_location;
+      Program.Parameter("Conditions.Description").Value = weather_text;
+      Program.Parameter("Conditions.IconUrl").Value = icon_url;
+      Program.Parameter("Conditions.Status").Value = icon; // eg. cloudy, sunny, etc..
+      Program.Parameter("Conditions.WindDirection").Value = wind_dir;
+      Program.Parameter("Conditions.WindKph").Value = wind_kph;
+      Program.Parameter("Conditions.PressureMb").Value = pressure_mb;
+      Program.Parameter("Conditions.FeelsLikeC").Value = feelslike_c;
+      Program.Parameter("Conditions.FeelsLikeF").Value = feelslike_f;
+      Program.Parameter("Conditions.UV").Value = UV;
+      Program.Parameter("Conditions.PrecipitationHourMetric").Value = precip_1hr_metric;
 
       // 2014-01-22 - Added to allow the widget to display the date/time.
-      Program.RaiseEvent("Conditions.LastUpdated", last_updated, "");
+      Program.Parameter("Conditions.LastUpdated").Value = last_updated;
 
       // 2014-01-22 - Added to allow user to dyanmically select how to display the temperature.
       Program.Parameter("Conditions.DisplayCelsius").Value = display_celsius;
@@ -376,19 +376,20 @@ while (Program.IsEnabled)
       // Collect forecast data
       for (int d = 1; d &lt;= 3; d++)
       {
-        Program.RaiseEvent("Conditions.Forecast." + d + ".Description", forecastData[d].conditions.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".Year", forecastData[d].date.year.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".Month", forecastData[d].date.monthname.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".Day", forecastData[d].date.day.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".Weekday", forecastData[d].date.weekday.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".IconUrl", forecastData[d].icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground"), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.Low", forecastData[d].low.celsius.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.Low", forecastData[d].low.fahrenheit.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureC.High", forecastData[d].high.celsius.ToString(), "");
-        Program.RaiseEvent("Conditions.Forecast." + d + ".TemperatureF.High", forecastData[d].high.fahrenheit.ToString(), "");
+        Program.Parameter("Conditions.Forecast." + d + ".Description").Value = forecastData[d].conditions.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".Year").Value = forecastData[d].date.year.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".Month").Value = forecastData[d].date.monthname.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".Day").Value = forecastData[d].date.day.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".Weekday").Value = forecastData[d].date.weekday.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".IconUrl").Value = forecastData[d].icon_url.ToString().Replace("c/k", "c/e").Replace("http://icons.wxug", "https://api.wunderground");
+        Program.Parameter("Conditions.Forecast." + d + ".TemperatureC.Low").Value = forecastData[d].low.celsius.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".TemperatureF.Low").Value = forecastData[d].low.fahrenheit.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".TemperatureC.High").Value = forecastData[d].high.celsius.ToString();
+        Program.Parameter("Conditions.Forecast." + d + ".TemperatureF.High").Value = forecastData[d].high.fahrenheit.ToString();
       }
 
-      Program.Notify("Weather Underground", "Updated.");
+      Program.RaiseEvent("Program.UiRefresh", "Data Updated", "");
+      //Program.Notify("Weather Underground", "Updated.");
 
     } 
     catch (Exception e) 
@@ -427,8 +428,8 @@ while (Program.IsEnabled)
 To activate this widget specify a valid user &lt;strong&gt;Key&lt;/strong&gt; that can be obtained creating an account from &lt;u&gt;http://www.wunderground.com/weather/api/d/login.html&lt;/u&gt;</Description>
     <Group>Weather and Enviroment</Group>
     <Features />
-    <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:03.526983Z</TriggerTime>
+    <ActivationTime>2015-11-01T20:34:04.175301Z</ActivationTime>
+    <TriggerTime xsi:nil="true" />
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -500,7 +501,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:04.020912Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:31.362043Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1101,7 +1102,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:04.522309Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:31.862301Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1148,7 +1149,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:05.024893Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:32.364398Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1497,7 +1498,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:05.531766Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:32.871462Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1594,7 +1595,7 @@ Program.GoBackground();</ScriptSource>
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:06.027752Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:33.366118Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1649,7 +1650,7 @@ Program.GoBackground();</ScriptSource>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:06.526943Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:33.865962Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -1758,7 +1759,7 @@ Program.Run();
     <Group>Messaging and Social</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:07.030983Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:34.369428Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2096,7 +2097,7 @@ Currently limited to one client channel.</Description>
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:08.034102Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:35.371366Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2194,7 +2195,7 @@ energy consumption.</Description>
     <Group>Energy Management</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:08.543977Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:35.88248Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2343,7 +2344,7 @@ It requires that a manufacturer specific get has been issued on the node.</Descr
     <Group>Z-Wave</Group>
     <Features />
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:09.034219Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:36.373069Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -2590,7 +2591,7 @@ while (Program.IsEnabled)
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:09.53711Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:36.876029Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -6696,9 +6697,59 @@ while (Program.IsEnabled)
     <Name>Timetable</Name>
     <Description>Widget for scheduling thermostats, lights and shutters.</Description>
     <Group>Scheduling</Group>
-    <Features />
-    <ActivationTime>2015-10-29T18:07:10.674638Z</ActivationTime>
-    <TriggerTime xsi:nil="true" />
+    <Features>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Weekend</Property>
+        <Description>Timetable to use for weekend</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Workday</Property>
+        <Description>Timetable to use for workday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Holiday</Property>
+        <Description>Timetable to use for holiday</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>timetable</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Special</Property>
+        <Description>Timetable to use for special day</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Enable</Property>
+        <Description>Enable Timetable scheduling</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.Repeat</Property>
+        <Description>Repeat command for the whole duration</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Switch,Shutter,Dimmer,Thermostat</ForTypes>
+        <Property>TimeTable.CheckDST</Property>
+        <Description>Enable Day Light Saving check</Description>
+      </ProgramFeature>
+    </Features>
+    <ActivationTime xsi:nil="true" />
+    <TriggerTime>2015-11-01T20:32:37.888167Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
@@ -7411,7 +7462,7 @@ Also it lets you dim last addressed module using Up/Down button which can be def
       </ProgramFeature>
     </Features>
     <ActivationTime xsi:nil="true" />
-    <TriggerTime>2015-10-29T18:03:11.046464Z</TriggerTime>
+    <TriggerTime>2015-11-01T20:32:38.383342Z</TriggerTime>
     <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
