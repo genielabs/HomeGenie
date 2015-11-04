@@ -1,7 +1,10 @@
 ﻿RELEASE HISTORY
 
-01/11/2015 v1.1-beta.500
-    - Fixed 'continuous Event Stream disconnection' bug when running on mono ARM-hf (eg. Raspberry Pi)
+04/11/2015 v1.1-beta.500
+    - Improved media server widget with thumbnails and multiple bitrates and formats support
+    - Added UPnP interface command AvMedia.GetItem
+    - Improved camera widget
+    - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
     - Updated Spanish locales
     - Disabled periodic Weather Underground program notifications in the UI
     - Reverted XTenLib to the using of Thread instead of Task

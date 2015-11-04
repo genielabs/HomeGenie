@@ -3,9 +3,11 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r450</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Fixed 'continuous Event Stream disconnection' bug when running on mono ARM-hf (eg. Raspberry Pi)
+  <ReleaseNote>   - Added UPnP interface command AvMedia.GetItem
+  - Improved camera widget
+  - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
   - Updated Spanish locales
   - Disabled periodic Weather Underground program notifications in the UI
   - Reverted XTenLib to the using of Thread instead of Task</ReleaseNote>
-  <ReleaseDate>2015-11-01T20:52:24.0000Z</ReleaseDate>
+  <ReleaseDate>2015-11-04T17:43:02.0000Z</ReleaseDate>
 </ReleaseInfo>
