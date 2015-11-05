@@ -1,8 +1,10 @@
 ﻿RELEASE HISTORY
 
-04/11/2015 v1.1-beta.500
-    - Improved media server widget with thumbnails and multiple bitrates and formats support
-    - Added UPnP interface command AvMedia.GetItem
+05/11/2015 v1.1-beta.500
+    - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
+    - Disabled limit of max one opened http connection per program in NetHelper
+    - Improved media server widget with thumbnails and support for multiple bitrates and formats
+    - Added UPnP interface command "AvMedia.GetItem"
     - Improved camera widget
     - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
     - Updated Spanish locales

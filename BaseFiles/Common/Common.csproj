@@ -4899,10 +4899,6 @@
       <Link>lib\mig\LibUsbDotNet.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Externals\g-labs\SerialPortLib.dll">
-      <Link>lib\shared\SerialPortLib.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\..\Externals\g-labs\W800Rf32Lib.dll">
       <Link>lib\mig\W800Rf32Lib.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

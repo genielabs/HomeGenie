@@ -330,11 +330,23 @@ HG.WebApp.GroupModules.GetModulesListViewItems = function (groupname) {
             var haselement = $.grep(groupmodules.Modules, function (value) {
                 return (value.Domain == module.Domain && value.Address == module.Address);
             });
+            // module it's not present in current group
             if (haselement.length == 0) {
                 var propwidget = HG.WebApp.Utility.GetModulePropertyByName(module, "Widget.DisplayModule");
                 var vmparentid = HG.WebApp.Utility.GetModulePropertyByName(module, "VirtualModule.ParentId");
-                // check if no explicit witdget is specified and it's not a virtual module
-                if ((propwidget != null && propwidget.Value != null && propwidget.Value == "") && (vmparentid != null && vmparentid.Value == module.Address)) continue;
+                var widget = (propwidget != null && propwidget.Value != null) ? propwidget.Value : '';
+                var vid = (vmparentid != null && vmparentid.Value != null) ? vmparentid.Value : '';
+                // check if no explicit witdget is specified and it's not a virtual module or program
+                if (module.Domain == 'HomeAutomation.HomeGenie.Automation') {
+                    var pid = (vid != '' && vid != module.Address) ? vid : module.Address;
+                    var cp = HG.WebApp.Utility.GetProgramByAddress(pid);
+                    if (cp != null) {
+                        if (!cp.IsEnabled)
+                            continue;
+                        else if (cp.Type.toLowerCase() != 'wizard' && widget == '')
+                            continue;
+                    }
+                }
                 //
                 if (cursect != module.Domain) {
                     cursect = module.Domain;

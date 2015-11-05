@@ -73,7 +73,7 @@ namespace HomeGenie.Automation.Scripting
 
         // multithread safe lock objects
         private object smtpSyncLock = new object();
-        private object httpSyncLock = new object();
+        //private object httpSyncLock = new object();
         private object mqttSyncLock = new object();
 
         private HomeGenieService homegenie;
@@ -396,7 +396,7 @@ namespace HomeGenie.Automation.Scripting
         public string Call()
         {
             string returnvalue = "";
-            lock(httpSyncLock)
+            //lock(httpSyncLock)
             using (var webClient = new WebClient())
             {
                 try
@@ -483,7 +483,7 @@ namespace HomeGenie.Automation.Scripting
         public byte[] GetBytes()
         {
             byte[] responseBytes = null;
-            lock(httpSyncLock)
+            //lock(httpSyncLock)
             using (var webClient = new WebClient())
             {
                 try
@@ -664,13 +664,13 @@ namespace HomeGenie.Automation.Scripting
             protected override WebRequest GetWebRequest(Uri uri)
             {
                 WebRequest w = base.GetWebRequest(uri);
-                // Disable Keep-Alive
-                if (w is HttpWebRequest)
-                {
-                    (w as HttpWebRequest).KeepAlive = false;
-                }
-                // WebClient default timeout set to 30 seconds
-                w.Timeout = 30 * 1000;
+                // Disable Keep-Alive (this lead to poor performance, so let's keep it disabled by default)
+                //if (w is HttpWebRequest)
+                //{
+                //    (w as HttpWebRequest).KeepAlive = false;
+                //}
+                // WebClient default timeout set to 10 seconds
+                w.Timeout = 10 * 1000;
                 return w;
             }
         }

@@ -3,11 +3,14 @@
   <Name>HomeGenie</Name>
   <Version>1.1 beta r450</Version>
   <Description>Latest public release.</Description>
-  <ReleaseNote>   - Added UPnP interface command AvMedia.GetItem
+  <ReleaseNote>   - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
+  - Disabled limit of max one opened http connection per program in NetHelper
+  - Improved media server widget with thumbnails and support for multiple bitrates and formats
+  - Added UPnP interface command "AvMedia.GetItem"
   - Improved camera widget
   - Fixed 'continuous Event Stream disconnection' bug when running on old mono ARM-hf (eg. Raspberry Pi)
   - Updated Spanish locales
   - Disabled periodic Weather Underground program notifications in the UI
   - Reverted XTenLib to the using of Thread instead of Task</ReleaseNote>
-  <ReleaseDate>2015-11-04T17:43:02.0000Z</ReleaseDate>
+  <ReleaseDate>2015-11-05T16:58:52.0000Z</ReleaseDate>
 </ReleaseInfo>

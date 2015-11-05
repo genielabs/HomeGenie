@@ -1140,9 +1140,7 @@ namespace HomeGenie.Service
             lock (systemModules.LockObject) 
             try
             {
-                //
-                // ProgramEngine programs (modules)
-                //
+                // Refresh ProgramEngine program modules
                 if (masterControlProgram != null)
                 {
                     lock (masterControlProgram.Programs.LockObject) 
@@ -1151,16 +1149,19 @@ namespace HomeGenie.Service
                         Module module = systemModules.Find(o => o.Domain == Domains.HomeAutomation_HomeGenie_Automation && o.Address == program.Address.ToString());
                         if (module != null && program.Type.ToLower() == "wizard" && !program.IsEnabled && module.RoutingNode == "")
                         {
+                            // we don't remove non-wizard programs to keep configuration options
+                            // TODO: ?? should use modulesGarbage in order to allow correct removing/restoring of all program types ??
+                            // TODO: ?? (but it will loose config options when hg is restarted because modulesGarbage it's not saved) ??
                             systemModules.Remove(module);
                             continue;
                         }
-                        else if (/*program.Type.ToLower() != "wizard" &&*/ !program.IsEnabled)
+                        else if (module == null && !program.IsEnabled)
                         {
                             continue;
                         }
-                        // add new module
-                        if (module == null)
+                        else if (module == null)
                         {
+                            // add module for the program
                             module = new Module();
                             module.Domain = Domains.HomeAutomation_HomeGenie_Automation;
                             if (program.Type.ToLower() == "wizard")
@@ -1173,7 +1174,6 @@ namespace HomeGenie.Service
                             }
                             systemModules.Add(module);
                         }
-                        //
                         module.Name = program.Name;
                         module.Address = program.Address.ToString();
                         module.DeviceType = MIG.ModuleTypes.Program;

@@ -34,17 +34,25 @@
         requestPopupOpen = false;
         var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
         popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
-        $.mobile.loading('hide');
       });
-      controlpopup.on('popupafterclose', function () { popupisopen = false; });
+      controlpopup.on('popupafterclose', function () { popupisopen = false; $.mobile.loading('hide'); });
       controlpopup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime())).load(function () {
         var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
         if (requestPopupOpen) {
           popup.popup('open');
         } else if (popupisopen) {
+          $.mobile.loading('hide');
           setTimeout(function () {
             popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
           }, 100);
+        }
+      }).error(function () {
+        var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
+        if (popupisopen) {
+          $.mobile.loading('show', { text: 'Error connecting to camera', textVisible: true });
+          setTimeout(function () {
+            popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
+          }, 2000);
         }
       });
       //
@@ -54,12 +62,18 @@
       widget.find('[data-ui-field=camerapicturepreview]').on('click', function () {
         if ($(cuid).find('[data-ui-field=widget]').data('ControlPopUp')) {
           var popup = $(cuid).find('[data-ui-field=widget]').data('ControlPopUp');
-          $.mobile.loading('show');
+          $.mobile.loading('show', { text: 'Connecting to camera', textVisible: true });
           requestPopupOpen = true;
           popup.find('[data-ui-field=camerapicture]').attr('src', imageurl + '?' + (new Date().getTime()));
         }
       });
       widget.find('[data-ui-field=camerapicturepreview]').load(function () {
+        if (_this.Widget.is(':visible')) {
+          setTimeout(function () {
+            _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
+          }, 2000);
+        }
+      }).error(function () {
         if (_this.Widget.is(':visible')) {
           setTimeout(function () {
             _this.Widget.find('[data-ui-field=camerapicturepreview]').attr('src', imageurl + '?' + (new Date().getTime()));
