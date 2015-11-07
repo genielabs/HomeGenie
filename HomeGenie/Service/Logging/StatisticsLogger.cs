@@ -48,7 +48,6 @@ namespace HomeGenie.Service.Logging
     public class StatisticsLogger
     {
         public static List<string> StatisticsFields = new List<string>() {
-            "Conditions.",
             "Sensor.",
             "Meter.",
             "PowerMonitor.",

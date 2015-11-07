@@ -113,6 +113,11 @@ HG.WebApp.InitializePage = function ()
         HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.json', function(success){
             HG.WebApp.Locales.Localize(document, './locales/' + userLang.toLowerCase().substring(0, 2) + '.programs.json', function(success){
                 $('#homegenie_overlay').fadeOut(200);
+                // Show about popup
+                if (!dataStore.get('UI.AboutPopupShown')) {
+                    dataStore.set('UI.AboutPopupShown', true);
+                    setTimeout(HG.WebApp.Home.About, 3000);
+                }
             });
         });
         HG.VoiceControl.Initialize();
@@ -224,7 +229,14 @@ HG.WebApp.InitializePage = function ()
         element.enhanceWithin().popup();
         HG.Ui.Popup.CronWizard = handler;
     });
+
+    $('#homegenie_about').enhanceWithin().popup();
+    $('#about_popup_updatebutton').on('click', function(){
+        HG.System.UpdateManager.UpdateCheck();
+        $('#homegenie_about').popup('close');
+    });
 };
+
 
 
 //
@@ -298,6 +310,11 @@ HG.WebApp.InitializePage = function ()
 // info      : -
 //
 HG.WebApp.Home = HG.WebApp.Home || {};
+HG.WebApp.Home.About = function()
+{
+    $('#homegenie_about').popup('open');
+};
+//
 HG.WebApp.Home.UpdateHeaderStatus = function()
 {
     HG.WebApp.Home.UpdateInterfacesStatus();
@@ -572,6 +589,17 @@ HG.WebApp.Utility.GetCommandFromEvent = function (module, event)
     return commandobj;
 };
 
+HG.WebApp.Utility.GetLocaleTemperature = function (temp) {
+    var temperatureUnit = dataStore.get('UI.TemperatureUnit');
+    if (temperatureUnit != 'C' && (temperatureUnit == 'F' || HG.WebApp.Locales.GetDateEndianType() == 'M')) {
+        // display as Fahrenheit
+        temp = Math.round((temp * 1.8 + 32) * 10) / 10;
+    } else {
+        // display as Celsius
+        temp = Math.round(temp * 10) / 10;
+    }
+    return (temp * 1).toFixed(2);
+};
 HG.WebApp.Utility.FormatTemperature = function (temp) {
     var displayvalue = '';
     var temperatureUnit = dataStore.get('UI.TemperatureUnit');

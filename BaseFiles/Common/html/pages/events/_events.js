@@ -181,7 +181,7 @@ HG.WebApp.Events.SendEventToUi = function (module, eventLog) {
             }
             else {
                 $('#configure_system_updateinstall_log').prepend('*&nbsp;<strong>' + eventLog.Property + '</strong><br/>&nbsp;&nbsp;' + eventLog.Value + '<br/>');
-                var iconImage = HG.Ui.GetModuleIcon(module, null);
+                var iconImage = 'images/genie.png';
                 popupdata = {
                     icon: iconImage,
                     title: eventLog.Property + '<br/>' + eventLog.Value,

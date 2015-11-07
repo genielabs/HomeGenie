@@ -467,9 +467,9 @@
             <li><a class="ui-btn ui-btn-icon-left ui-icon-gear" data-locale-id="home_menu_settings" href="#page_configure_interfaces" data-transition="none">Settings</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-check" data-locale-id="home_menu_maintenance" href="#page_configure_maintenance" data-transition="none">Maintenance</a></li>
             <li data-locale-id="home_menu_about" data-role="list-divider">About</li>
-            <li><a class="ui-btn ui-icon-carat-r ui-btn-icon-left" href="javascript:HG.System.UpdateManager.UpdateCheck()"><span data-locale-id="home_menu_about_version">Version</span> <span id="systemversion" style="font-weight:bold">?</span></a></li>
-            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
-            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie">Programming Guide</a></li>
+            <li><a class="ui-btn ui-icon-info ui-btn-icon-left" href="#homegenie_about" data-rel="popup">About HomeGenie</a></li>
+            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_userguide" target="_blank" href="http://www.homegenie.it/docs/quickstart.php">Users Guide</a></li>
+            <li><a class="ui-btn ui-icon-bars ui-btn-icon-left" data-locale-id="home_menu_about_programming" target="_blank" href="http://genielabs.github.io/HomeGenie">Programming Guide</a></li>
             <li><a class="ui-btn ui-icon-comment ui-btn-icon-left" data-locale-id="home_menu_about_forum" target="_blank" href="http://www.homegenie.it/forum">Users Forum</a></li>
             <li><a class="ui-btn ui-btn-icon-left ui-icon-heart" data-locale-id="home_menu_about_support" target="_blank" href="http://www.homegenie.it/keepuphg.php">Keep HomeGenie Up!</a></li>
         </ul>
@@ -495,6 +495,34 @@
     </div>
 
 <!--- END HomeGenie Overlay -->
+
+<!--- HomeGenie about popup -->
+    <div id="homegenie_about" class="ui-corner-all hg-popup-a" data-role="popup" data-dismissible="false" data-theme="a" data-overlay-theme="b" data-position-to="window" data-transition="slidedown">
+        <div data-role="header" class="ui-corner-top">
+            <h2 data-locale-id="home_menu_about">About</h2>
+        </div>
+        <div class="ui-content ui-corner-bottom">
+            <p align="center">HomeGenie <span data-locale-id="home_menu_about_version">Version</span> <span id="systemversion" style="font-weight:bold">?</span></p>
+            <hr />
+            <p style="font-weight:bold">What's hot</p>
+            <p>
+            Don't miss the new client for Android!
+            </p>
+            <div data-role="controlgroup" data-theme="d" data-mini="true">
+                <a class="ui-btn ui-btn-b ui-corner-all ui-icon-action ui-btn-icon-left" href="http://genielabs.github.io/HomeGenie/clients.html#HomeGeniePlus" target="_blank">HomeGenie Plus</a>
+            </div>
+        </div>
+        <div class="ui-grid-a ui-footer ui-bar-inherit">
+            <div class="ui-block-a" style="width:20%">
+                <a class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left" data-locale-id="configure_popupfilter_optclose" data-rel="back">Close</a>
+            </div>
+            <div class="ui-block-b" style="width:80%" align="right">
+                <a class="ui-btn ui-corner-all ui-icon-recycle ui-btn-icon-right" id="about_popup_updatebutton" data-locale-id="configure_system_updatemanager_updatecheck" data-mini="true" href="#">Update Check</a>
+            </div>
+        </div>
+
+    </div>
+
 
 </body>
 </html>

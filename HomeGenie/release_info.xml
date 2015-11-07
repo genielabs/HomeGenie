@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ReleaseInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>HomeGenie</Name>
-  <Version>1.1 beta r450</Version>
+  <Version>1.1 beta r500</Version>
   <Description>Latest public release.</Description>
   <ReleaseNote>   - Fixed ZWave interface sensor timeout bug and sensor Status.Level "0.01" bug
   - Disabled limit of max one opened http connection per program in NetHelper
