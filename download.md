@@ -15,7 +15,7 @@ layout: main
     <br>
     Ubuntu / Debian derivatives
     <br>
-    <a title="HomeGenie for Debian Linux" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie-beta_1.1.r500_all.deb"> <strong style="text-decoration: underline;margin-left:92px">Alternative Download Link</strong> </a>
+    <a title="HomeGenie for Debian Linux" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie-beta_1.1.r500_all.deb"> <strong style="text-decoration: underline">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:25px">
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
@@ -25,7 +25,7 @@ layout: main
     <br>
     Other Mono .NET systems
     <br>
-    <a title="Download HomeGenie platform agnostic archive" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie_1_1_beta_r500.tgz"> <strong style="text-decoration: underline;margin-left:92px;">Alternative Download Link</strong> </a>
+    <a title="Download HomeGenie platform agnostic archive" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie_1_1_beta_r500.tgz"> <strong style="text-decoration: underline">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
@@ -35,7 +35,7 @@ layout: main
     <br>
     XP / Vista / Win7 / Win8
     <br>
-    <a target="_top" title="Download HomeGenie for Windows" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/HomeGenie_1_1_beta_r500.exe"> <strong style="text-decoration: underline;margin-left:92px;">Alternative Download Link</strong> </a>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/HomeGenie_1_1_beta_r500.exe"> <strong style="text-decoration: underline">Alternative Download Link</strong> </a>
 </p>
 
 <br clear="all"/>
