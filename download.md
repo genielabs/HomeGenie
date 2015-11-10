@@ -14,14 +14,18 @@ layout: main
     Linux .deb Package
     <br>
     Ubuntu / Debian derivatives
+    <br>
+    <a title="HomeGenie for Debian Linux" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie-beta_1.1.r500_all.deb"> <strong style="text-decoration: underline;margin-left:92px">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:25px">
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" align="left" width="82" align="left">
     <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_1_beta_r500.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.1 beta r500</strong> </a>
     <br>
-    Platform agnostic .tgz archive
+    Platform agnostic archive
     <br>
     Other Mono .NET systems
+    <br>
+    <a title="Download HomeGenie platform agnostic archive" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/homegenie_1_1_beta_r500.tgz"> <strong style="text-decoration: underline;margin-left:92px;">Alternative Download Link</strong> </a>
 </p>
 <p style="float:left;text-wrap:no-wrap;margin-left:15px">
     <img src="images/logos/winicon.png" alt="" style="margin-right:10px" width="82" align="left">
@@ -30,6 +34,8 @@ layout: main
     Windows Setup Installer
     <br>
     XP / Vista / Win7 / Win8
+    <br>
+    <a target="_top" title="Download HomeGenie for Windows" href="https://github.com/genielabs/HomeGenie/releases/download/v1.1-beta.500/HomeGenie_1_1_beta_r500.exe"> <strong style="text-decoration: underline;margin-left:92px;">Alternative Download Link</strong> </a>
 </p>
 
 <br clear="all"/>
@@ -48,7 +54,7 @@ layout: main
     <img src="images/logos/macicon.png" alt="" style="margin-right:10px" width="82" align="left">
     <a title="Download HomeGenie platform agnostic archive" href="https://sourceforge.net/projects/homegenie/files/homegenie_1_00_beta_r491.tgz/download"> <strong style="text-decoration: underline;">HomeGenie v1.0 beta r491</strong> </a>
     <br>
-    Platform agnostic .tgz archive
+    Platform agnostic archive
     <br>
     Other Mono .NET systems
 </p>
